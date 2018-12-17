@@ -1,35 +1,35 @@
-package com.neqabty.presentation.ui.syndicates
+package com.neqabty.presentation.ui.trips
 
 import android.arch.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.GetAllSyndicates
+import com.neqabty.domain.usecases.GetAllTrips
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
-import com.neqabty.presentation.entities.SyndicateUI
-import com.neqabty.presentation.mappers.SyndicateEntityUIMapper
+import com.neqabty.presentation.entities.TripUI
+import com.neqabty.presentation.mappers.TripsEntityUIMapper
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
 @OpenForTesting
-class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetAllSyndicates) : BaseViewModel() {
+class TripsViewModel @Inject constructor(private val getAllTrips: GetAllTrips) : BaseViewModel() {
 
-    private val syndicateEntityUIMapper = SyndicateEntityUIMapper()
+    private val tripsEntityUIMapper = TripsEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
-    var viewState: MutableLiveData<SyndicatesViewState> = MutableLiveData()
+    var viewState: MutableLiveData<TripsViewState> = MutableLiveData()
 
     init {
-        viewState.value = SyndicatesViewState()
+        viewState.value = TripsViewState()
     }
 
-    fun getSyndicates() {
-        addDisposable(getAllSyndicates.observable()
+    fun getTrips() {
+        addDisposable(getAllTrips.observable()
                 .flatMap {
                     it.let {
-                        syndicateEntityUIMapper.observable(it)
+                        tripsEntityUIMapper.observable(it)
                     } ?: run {
                         throw Throwable("Something went wrong :(")
                     }
                 }.subscribe(
-                        { onSyndicatesReceived(it) },
+                        { onTripsReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
                             errorState.value = it
@@ -39,10 +39,11 @@ class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetA
     }
 
 
-    private fun onSyndicatesReceived(syndicates: List<SyndicateUI>) {
+    private fun onTripsReceived(trips: List<TripUI>) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
-                syndicates = syndicates)
+                trips = trips)
         viewState.value = newViewState
     }
 }
+

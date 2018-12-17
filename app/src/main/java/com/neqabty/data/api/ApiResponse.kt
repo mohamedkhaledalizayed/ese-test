@@ -2,7 +2,7 @@ package com.neqabty.data.api
 
 import com.google.gson.annotations.SerializedName
 
-abstract class ApiResponse<T> {
+class ApiResponse<T> {
     @SerializedName("status")
     var status: String = ""
 

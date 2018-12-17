@@ -1,7 +1,7 @@
-package com.neqabty.presentation.ui.syndicates
+package com.neqabty.presentation.ui.about
 
 import android.arch.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.GetAllSyndicates
+import com.neqabty.domain.usecases.GetSyndicate
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.SyndicateUI
@@ -10,26 +10,26 @@ import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
 @OpenForTesting
-class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetAllSyndicates) : BaseViewModel() {
+class AboutViewModel @Inject constructor(private val getSyndicate: GetSyndicate) : BaseViewModel() {
 
     private val syndicateEntityUIMapper = SyndicateEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
-    var viewState: MutableLiveData<SyndicatesViewState> = MutableLiveData()
+    var viewState: MutableLiveData<AboutViewState> = MutableLiveData()
 
     init {
-        viewState.value = SyndicatesViewState()
+        viewState.value = AboutViewState()
     }
 
-    fun getSyndicates() {
-        addDisposable(getAllSyndicates.observable()
-                .flatMap {
+    fun getSyndicate(id : String) {
+        addDisposable(getSyndicate.getSyndicateById(id)
+                .map {
                     it.let {
-                        syndicateEntityUIMapper.observable(it)
+                        syndicateEntityUIMapper.mapFrom(it)
                     } ?: run {
                         throw Throwable("Something went wrong :(")
                     }
                 }.subscribe(
-                        { onSyndicatesReceived(it) },
+                        { onSyndicateReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
                             errorState.value = it
@@ -39,10 +39,10 @@ class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetA
     }
 
 
-    private fun onSyndicatesReceived(syndicates: List<SyndicateUI>) {
+    private fun onSyndicateReceived(syndicate: SyndicateUI) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
-                syndicates = syndicates)
+                syndicate = syndicate)
         viewState.value = newViewState
     }
 }

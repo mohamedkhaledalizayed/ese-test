@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.syndicates
+package com.neqabty.presentation.ui.news
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
-import com.neqabty.databinding.SyndicatesFragmentBinding
+import com.neqabty.databinding.NewsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
@@ -22,16 +22,16 @@ import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
 @OpenForTesting
-class SyndicatesFragment : BaseFragment(), Injectable {
+class NewsFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    var binding by autoCleared<SyndicatesFragmentBinding>()
-    private var adapter by autoCleared<SyndicatesAdapter>()
+    var binding by autoCleared<NewsFragmentBinding>()
+    private var adapter by autoCleared<NewsAdapter>()
 
-    lateinit var syndicatesViewModel: SyndicatesViewModel
+    lateinit var newsViewModel: NewsViewModel
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -43,7 +43,7 @@ class SyndicatesFragment : BaseFragment(), Injectable {
         setupToolbar(true)
         binding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.syndicates_fragment,
+                R.layout.news_fragment,
                 container,
                 false,
                 dataBindingComponent
@@ -54,35 +54,35 @@ class SyndicatesFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        syndicatesViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(SyndicatesViewModel::class.java)
+        newsViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(NewsViewModel::class.java)
 
         initializeViews()
 
 
-        val adapter = SyndicatesAdapter(dataBindingComponent, appExecutors) { syndicate ->
-//            navController().navigate(
-////                    SyndicatesFragmentDirections.showImage(history.path!!)
+        val adapter = NewsAdapter(dataBindingComponent, appExecutors) { newsItem ->
+            //            navController().navigate(
+////                    NewsFragmentDirections.showImage(history.path!!)
 //            )
         }
         this.adapter = adapter
-        binding.rvSyndicates.adapter = adapter
+        binding.rvNews.adapter = adapter
 
-        syndicatesViewModel.viewState.observe(this, Observer {
+        newsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        syndicatesViewModel.errorState.observe(this, Observer { throwable ->
+        newsViewModel.errorState.observe(this, Observer { throwable ->
             throwable?.let {
                 Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
             }
         })
 
-        syndicatesViewModel.getSyndicates()
+        newsViewModel.getNews()
     }
 
-    private fun handleViewState(state: SyndicatesViewState) {
+    private fun handleViewState(state: NewsViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        state.syndicates?.let {
+        state.news?.let {
             adapter.submitList(it)
         }
     }

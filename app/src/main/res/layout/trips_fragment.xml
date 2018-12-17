@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvSyndicates"
+            android:id="@+id/rvTrips"
             app:layoutManager="android.support.v7.widget.GridLayoutManager"
             app:spanCount="3"
             android:layout_width="0dp"

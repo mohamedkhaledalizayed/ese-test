@@ -20,6 +20,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "com.neqabty.presentation.util.GithubTestRunner"
+        multiDexEnabled true
+
     }
     buildTypes {
         debug {
