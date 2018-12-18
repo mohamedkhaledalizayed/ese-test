@@ -25,5 +25,7 @@ data class TripData(
         @field:SerializedName("governorate_id")
         var governId: String?,
         @field:SerializedName("trip_desc")
-        var desc: String?
+        var desc: String?,
+        @field:SerializedName("trip_price")
+        var price: String?
 ): Response()

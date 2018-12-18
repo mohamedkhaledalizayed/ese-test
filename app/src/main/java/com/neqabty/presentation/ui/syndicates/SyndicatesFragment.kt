@@ -3,6 +3,7 @@ package com.neqabty.presentation.ui.syndicates
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.neqabty.databinding.SyndicatesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesFragment
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
@@ -61,9 +63,7 @@ class SyndicatesFragment : BaseFragment(), Injectable {
 
 
         val adapter = SyndicatesAdapter(dataBindingComponent, appExecutors) { syndicate ->
-//            navController().navigate(
-////                    SyndicatesFragmentDirections.showImage(history.path!!)
-//            )
+            pickSubSyndicate(syndicate.id)
         }
         this.adapter = adapter
         binding.rvSyndicates.adapter = adapter
@@ -90,10 +90,25 @@ class SyndicatesFragment : BaseFragment(), Injectable {
     fun initializeViews() {
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == 255 && resultCode == 200){
+            navController().navigate(
+                    SyndicatesFragmentDirections.openHome()
+            )
+        }
+    }
 
 //region
 
-
+fun pickSubSyndicate(id:Int){
+    val fragmentManager = this@SyndicatesFragment.fragmentManager
+    val subSyndicatesFragment = SubSyndicatesFragment()
+    val bundle = Bundle()
+    bundle.putInt("id" , id)
+    subSyndicatesFragment.arguments = bundle
+    subSyndicatesFragment.setTargetFragment(this, 255)
+    subSyndicatesFragment.show(fragmentManager, "name")
+}
 // endregion
 
     fun navController() = findNavController()

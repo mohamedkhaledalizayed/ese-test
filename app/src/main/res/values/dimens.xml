@@ -10,8 +10,9 @@
     <dimen name="small_margin">8dp</dimen>
 
 
-    <dimen name="text_size_medium">15sp</dimen>
     <dimen name="text_size_small">10sp</dimen>
+    <dimen name="text_size_medium">15sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
 
     <dimen name="margin_horizontal_small">5dp</dimen>
     <dimen name="margin_horizontal_large">30dp</dimen>
@@ -20,4 +21,5 @@
     <dimen name="margin_vertical_normal">15dp</dimen>
     <dimen name="margin_vertical_large">20dp</dimen>
 
+    <dimen name="elevation_level_one">8dp</dimen>
 </resources>

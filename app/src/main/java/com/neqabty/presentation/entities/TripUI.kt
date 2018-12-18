@@ -10,5 +10,6 @@ data class TripUI(
         var mainSyndicateId: String?,
         var subSyndicateId: String?,
         var governId: String?,
-        var desc: String?
+        var desc: String?,
+        var price: String?
 )

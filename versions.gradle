@@ -30,6 +30,8 @@ versions.work = "1.0.0-alpha08"
 versions.facebook = '[4,5)'
 versions.firebase_core = "16.0.3"
 versions.firebase_messaging = "17.3.0"
+versions.firebase_jobdispatcher = "0.8.5"
+versions.gms = "4.0.1"
 versions.indicator = "0.2.0"
 
 def deps = [:]
@@ -147,11 +149,15 @@ deps.facebook = "com.facebook.android:facebook-android-sdk:$versions.facebook"
 def firebase = [:]
 firebase.core = "com.google.firebase:firebase-core:$versions.firebase_core"
 firebase.messaging = "com.google.firebase:firebase-messaging:$versions.firebase_messaging"
+firebase.jobdispatcher = "com.firebase:firebase-jobdispatcher:$versions.firebase_jobdispatcher"
 deps.firebase = firebase
 
 def viewpager = [:]
 viewpager.indicator = "com.romandanylyk:pageindicatorview:$versions.indicator"
 deps.viewpager = viewpager
+
+def gms = "com.google.gms:google-services:$versions.gms"
+deps.gms = gms
 
 ext.deps = deps
 

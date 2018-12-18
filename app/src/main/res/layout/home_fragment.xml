@@ -12,14 +12,14 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/ivHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_share"
+            android:src="@mipmap/header_bg"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,77 +27,18 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_share"
+            android:src="@mipmap/logo_sym"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivHeader"
-            android:paddingStart="@dimen/margin_horizontal_extra_large"
-            android:paddingEnd="@dimen/margin_horizontal_extra_large">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-                <EditText
-                    android:id="@+id/edMobile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/phone_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
-                    android:fontFamily="@font/droidkufi_regular"
-                    android:hint="@string/phoneNumber"
-                    android:inputType="phone"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <EditText
-                    android:id="@+id/edPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/password_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
-                    android:fontFamily="@font/droidkufi_regular"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <Button
-                    android:id="@+id/bLogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/btn"
-                    android:fontFamily="@font/droidkufi_regular"
-                    android:padding="@dimen/margin_horizontal_small"
-                    android:text="@string/login"
-                    android:gravity="center"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <TextView
-                    android:id="@+id/tvSignup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/droidkufi_regular"
-                    android:text="@string/register"
-                    android:textSize="@dimen/text_size_medium" />
-
-
-                <!--<com.facebook.login.widget.LoginButton-->
-                    <!--android:id="@+id/bFBLogin"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-
-            </LinearLayout>
-        </ScrollView>
+        <!--<fragment-->
+            <!--android:id="@+id/contentFragment"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/ivHeader"></fragment>-->
 
         <ProgressBar
             android:id="@+id/progressbar"

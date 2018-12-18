@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.home
+package com.neqabty.presentation.ui.subsyndicates
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -6,32 +6,34 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
-import com.neqabty.databinding.HomeFragmentBinding
+import com.neqabty.databinding.SubsyndicatesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
-import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
 @OpenForTesting
-class HomeFragment : BaseFragment(), Injectable {
+class SubSyndicatesFragment : DialogFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    var binding by autoCleared<HomeFragmentBinding>()
+    var binding by autoCleared<SubsyndicatesFragmentBinding>()
+    private var adapter by autoCleared<SubSyndicatesAdapter>()
 
-    lateinit var homeViewModel: HomeViewModel
+    lateinit var subSyndicatesViewModel: SubSyndicatesViewModel
+
+    var mainSyndicateId: Int = 0
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -40,11 +42,9 @@ class HomeFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setupToolbar(true)
-        (getActivity() as AppCompatActivity).getSupportActionBar()?.setDisplayHomeAsUpEnabled(false)
         binding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.home_fragment,
+                R.layout.subsyndicates_fragment,
                 container,
                 false,
                 dataBindingComponent
@@ -55,32 +55,44 @@ class HomeFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        homeViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(HomeViewModel::class.java)
+        subSyndicatesViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(SubSyndicatesViewModel::class.java)
+
+        val bundle = this.arguments
+        bundle?.let { mainSyndicateId = it.getInt("id", -1) }
 
         initializeViews()
 
-        homeViewModel.viewState.observe(this, Observer {
+
+        val adapter = SubSyndicatesAdapter(dataBindingComponent, appExecutors) { subSyndicate ->
+            PreferencesHelper(requireContext()).mainSyndicate = mainSyndicateId.toString()
+            PreferencesHelper(requireContext()).subSyndicate = subSyndicate.id.toString()
+            targetFragment?.onActivityResult(targetRequestCode, 200,null)
+            this@SubSyndicatesFragment.dismiss()
+        }
+        this.adapter = adapter
+        binding.rvSubSyndicates.adapter = adapter
+
+        subSyndicatesViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        homeViewModel.errorState.observe(this, Observer { throwable ->
+        subSyndicatesViewModel.errorState.observe(this, Observer { throwable ->
             throwable?.let {
                 Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
             }
         })
 
-        homeViewModel.getNews()
+        subSyndicatesViewModel.getSubSyndicates(mainSyndicateId.toString())
     }
 
-    private fun handleViewState(state: HomeViewState) {
+    private fun handleViewState(state: SubSyndicatesViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-//        state.syndicate?.let {
-//            binding.syndicate = it
-//        }
+        state.subSyndicates?.let {
+            adapter.submitList(it)
+        }
     }
 
     fun initializeViews() {
-//        fragmentManager?.beginTransaction()!!.replace(R.id.contentFragment, NewsFragment()).addToBackStack(null).commit()
     }
 
 
@@ -88,6 +100,4 @@ class HomeFragment : BaseFragment(), Injectable {
 
 
 // endregion
-
-    fun navController() = findNavController()
 }
