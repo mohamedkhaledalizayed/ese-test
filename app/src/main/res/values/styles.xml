@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:windowContentTransitions">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -14,5 +14,13 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
-
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:fontFamily">@font/droidkufi_regular</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+    <style name="NavigationView" >
+        <item name="android:fontFamily">@font/droidkufi_regular</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
 </resources>

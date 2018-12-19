@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
+import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
 
 @OpenForTesting
@@ -40,8 +42,8 @@ class HomeFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setupToolbar(true)
-        (getActivity() as AppCompatActivity).getSupportActionBar()?.setDisplayHomeAsUpEnabled(false)
+//        setupToolbar(true)
+//        (getActivity() as AppCompatActivity).getSupportActionBar()?.setDisplayHomeAsUpEnabled(false)
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.home_fragment,
@@ -49,6 +51,7 @@ class HomeFragment : BaseFragment(), Injectable {
                 false,
                 dataBindingComponent
         )
+        initializeViews()
 
         return binding.root
     }
@@ -58,7 +61,6 @@ class HomeFragment : BaseFragment(), Injectable {
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(HomeViewModel::class.java)
 
-        initializeViews()
 
         homeViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
@@ -69,7 +71,7 @@ class HomeFragment : BaseFragment(), Injectable {
             }
         })
 
-        homeViewModel.getNews()
+//        homeViewModel.getNews()
     }
 
     private fun handleViewState(state: HomeViewState) {
@@ -80,6 +82,11 @@ class HomeFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
+        (getActivity() as AppCompatActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        (getActivity() as AppCompatActivity).getSupportActionBar()?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.mipmap.menu_ic)
+        }
 //        fragmentManager?.beginTransaction()!!.replace(R.id.contentFragment, NewsFragment()).addToBackStack(null).commit()
     }
 

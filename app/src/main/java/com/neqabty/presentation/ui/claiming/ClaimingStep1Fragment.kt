@@ -47,7 +47,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(claimingViewModel::class.java)
+                .get(ClaimingViewModel::class.java)
 
 //        initializeObservers()
         initializeViews()

@@ -36,7 +36,7 @@ class SignupFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setupToolbar(true)
+//        setupToolbar(true)
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.signup_fragment,

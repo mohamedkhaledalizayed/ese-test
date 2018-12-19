@@ -4,29 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="news"
             type="com.neqabty.presentation.entities.NewsUI" />
     </data>
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_horizontal_small"
-            android:adjustViewBounds="false"
-            android:cropToPadding="false"
-            android:scaleType="centerCrop"
-            app:imageUrl="@{news.img}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clLogo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/llTitle"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_horizontal_small"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:scaleType="centerInside"
+                app:imageUrl="@{news.img}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/llTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@id/clLogo"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/droidkufi_regular"
+                android:maxLines="2"
+                android:text="@{news.title}"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/droidkufi_regular"
+                android:maxLines="2"
+                android:text="@{news.desc}"
+                android:textSize="@dimen/text_size_small" />
+
+        </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

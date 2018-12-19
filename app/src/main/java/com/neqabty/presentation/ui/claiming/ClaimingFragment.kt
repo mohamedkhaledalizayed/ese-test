@@ -34,7 +34,7 @@ class ClaimingFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setupToolbar(true)
+//        setupToolbar(true)
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.claiming_fragment,
@@ -49,7 +49,7 @@ class ClaimingFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(claimingViewModel::class.java)
+                .get(ClaimingViewModel::class.java)
 
 //        initializeObservers()
         initializeViews()
@@ -62,10 +62,10 @@ class ClaimingFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
         val adapter = CustomPagerAdapter(requireFragmentManager())
-        adapter.addFragment(ClaimingStep1Fragment())
-        adapter.addFragment(ClaimingStep2Fragment())
-        adapter.addFragment(ClaimingStep3Fragment())
-        adapter.addFragment(ClaimingStep4Fragment())
+        adapter.addFragment(com.neqabty.presentation.ui.claiming.ClaimingStep1Fragment())
+        adapter.addFragment(com.neqabty.presentation.ui.claiming.ClaimingStep2Fragment())
+        adapter.addFragment(com.neqabty.presentation.ui.claiming.ClaimingStep3Fragment())
+        adapter.addFragment(com.neqabty.presentation.ui.claiming.ClaimingStep4Fragment())
         binding.viewpager.adapter = adapter
         binding.viewpager.setSwipePagingEnabled(true)//TODO
         binding.indicator.setViewPager(binding.viewpager)

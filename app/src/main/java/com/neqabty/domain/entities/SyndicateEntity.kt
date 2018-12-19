@@ -16,5 +16,6 @@ data class SyndicateEntity(
         var createdAt: String?,
         var updatedAt: String?,
         var fax: String?,
-        var mobile: String?
+        var mobile: String?,
+        var subSyndicates: List<SyndicateEntity>?
 )

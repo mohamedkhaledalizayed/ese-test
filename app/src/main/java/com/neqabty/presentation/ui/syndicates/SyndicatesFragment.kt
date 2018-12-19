@@ -18,7 +18,9 @@ import com.neqabty.databinding.SyndicatesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesFragment
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
@@ -42,7 +44,7 @@ class SyndicatesFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setupToolbar(true)
+//        setupToolbar(true)
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.syndicates_fragment,
@@ -62,8 +64,15 @@ class SyndicatesFragment : BaseFragment(), Injectable {
         initializeViews()
 
 
-        val adapter = SyndicatesAdapter(dataBindingComponent, appExecutors) { syndicate ->
-            pickSubSyndicate(syndicate.id)
+        val adapter = com.neqabty.presentation.ui.syndicates.SyndicatesAdapter(dataBindingComponent, appExecutors) { syndicate ->
+            if (syndicate.subSyndicates?.size == 0) {
+                PreferencesHelper(requireContext()).mainSyndicate = syndicate.id.toString()
+                PreferencesHelper(requireContext()).subSyndicate = "0"
+                navController().navigate(
+                        SyndicatesFragmentDirections.openHome()
+                )
+            } else
+                pickSubSyndicate(syndicate)
         }
         this.adapter = adapter
         binding.rvSyndicates.adapter = adapter
@@ -100,11 +109,11 @@ class SyndicatesFragment : BaseFragment(), Injectable {
 
 //region
 
-fun pickSubSyndicate(id:Int){
+fun pickSubSyndicate(syndicate :SyndicateUI){
     val fragmentManager = this@SyndicatesFragment.fragmentManager
     val subSyndicatesFragment = SubSyndicatesFragment()
     val bundle = Bundle()
-    bundle.putInt("id" , id)
+    bundle.putParcelable("syndicate" , syndicate)
     subSyndicatesFragment.arguments = bundle
     subSyndicatesFragment.setTargetFragment(this, 255)
     subSyndicatesFragment.show(fragmentManager, "name")

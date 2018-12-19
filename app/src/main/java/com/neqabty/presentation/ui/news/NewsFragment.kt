@@ -17,6 +17,7 @@ import com.neqabty.databinding.NewsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
@@ -40,7 +41,7 @@ class NewsFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setupToolbar(true)
+//        setupToolbar(true)
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.news_fragment,
@@ -61,9 +62,9 @@ class NewsFragment : BaseFragment(), Injectable {
 
 
         val adapter = NewsAdapter(dataBindingComponent, appExecutors) { newsItem ->
-            //            navController().navigate(
-////                    NewsFragmentDirections.showImage(history.path!!)
-//            )
+                        navController().navigate(
+                    NewsFragmentDirections.newsDetails(newsItem)
+            )
         }
         this.adapter = adapter
         binding.rvNews.adapter = adapter
@@ -77,7 +78,7 @@ class NewsFragment : BaseFragment(), Injectable {
             }
         })
 
-        newsViewModel.getNews()
+        newsViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate)
     }
 
     private fun handleViewState(state: NewsViewState) {

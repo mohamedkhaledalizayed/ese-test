@@ -14,55 +14,62 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/price_bg"
-            android:fontFamily="@font/droidkufi_regular"
-            android:text="@{trip.price}"
-            android:textSize="@dimen/text_size_large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clLogo"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/droidkufi_regular"
-            android:text="@{trip.title}"
-            android:textSize="@dimen/text_size_medium"
-            app:layout_constraintBottom_toTopOf="@id/tvDesc"
-            app:layout_constraintEnd_toStartOf="@id/ivLogo"
-            app:layout_constraintStart_toEndOf="@id/tvPrice"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/droidkufi_regular"
-            android:text="@{trip.desc}"
-            android:textSize="@dimen/text_size_medium"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/ivLogo"
-            app:layout_constraintStart_toEndOf="@id/tvPrice" />
+            app:layout_constraintEnd_toStartOf="@id/llTitle"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/ivLogo"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_horizontal_small"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:scaleType="centerInside"
+                app:imageUrl="@{trip.img}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/llTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_horizontal_small"
-            android:adjustViewBounds="false"
-            android:cropToPadding="false"
-            android:scaleType="centerCrop"
-            app:imageUrl="@{trip.img}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvTitle"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@id/clLogo"
+            app:layout_constraintTop_toTopOf="parent">
 
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/droidkufi_regular"
+                android:maxLines="2"
+                android:text="@{trip.title}"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/droidkufi_regular"
+                android:maxLines="2"
+                android:text="@{trip.desc}"
+                android:textSize="@dimen/text_size_small" />
+
+        </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -10,12 +10,12 @@ import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.SubsyndicatesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
@@ -33,7 +33,7 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
 
     lateinit var subSyndicatesViewModel: SubSyndicatesViewModel
 
-    var mainSyndicateId: Int = 0
+    lateinit var syndicate: SyndicateUI
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -59,15 +59,15 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
                 .get(SubSyndicatesViewModel::class.java)
 
         val bundle = this.arguments
-        bundle?.let { mainSyndicateId = it.getInt("id", -1) }
+        bundle?.let { syndicate = it.getParcelable("syndicate") }
 
         initializeViews()
 
 
-        val adapter = SubSyndicatesAdapter(dataBindingComponent, appExecutors) { subSyndicate ->
-            PreferencesHelper(requireContext()).mainSyndicate = mainSyndicateId.toString()
+        val adapter = com.neqabty.presentation.ui.subsyndicates.SubSyndicatesAdapter(dataBindingComponent, appExecutors) { subSyndicate ->
+            PreferencesHelper(requireContext()).mainSyndicate = syndicate.id.toString()
             PreferencesHelper(requireContext()).subSyndicate = subSyndicate.id.toString()
-            targetFragment?.onActivityResult(targetRequestCode, 200,null)
+            targetFragment?.onActivityResult(targetRequestCode, 200, null)
             this@SubSyndicatesFragment.dismiss()
         }
         this.adapter = adapter
@@ -76,17 +76,18 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
         subSyndicatesViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        subSyndicatesViewModel.errorState.observe(this, Observer { throwable ->
-            throwable?.let {
-                Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
-            }
-        })
-
-        subSyndicatesViewModel.getSubSyndicates(mainSyndicateId.toString())
+//        subSyndicatesViewModel.errorState.observe(this, Observer { throwable ->
+//            throwable?.let {
+//                Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
+//            }
+//        })
+//
+//        subSyndicatesViewModel.getSubSyndicates(syndicate.id.toString())
+        subSyndicatesViewModel.viewState.value?.subSyndicates = syndicate.subSyndicates
     }
 
     private fun handleViewState(state: SubSyndicatesViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+//        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.subSyndicates?.let {
             adapter.submitList(it)
         }

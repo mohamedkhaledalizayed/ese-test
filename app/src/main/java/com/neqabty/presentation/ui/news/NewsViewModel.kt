@@ -20,8 +20,8 @@ class NewsViewModel @Inject constructor(private val getAllNews: GetAllNews) : Ba
         viewState.value = NewsViewState()
     }
 
-    fun getNews() {
-        addDisposable(getAllNews.observable()
+    fun getNews(id:String) {
+        addDisposable(getAllNews.getAllNews(id)
                 .flatMap {
                     it.let {
                         newsEntityUIMapper.observable(it)

@@ -17,6 +17,7 @@ import com.neqabty.databinding.AboutFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
@@ -39,7 +40,7 @@ class AboutFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setupToolbar(true)
+//        setupToolbar(true)
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.about_fragment,
@@ -67,7 +68,7 @@ class AboutFragment : BaseFragment(), Injectable {
             }
         })
 
-        aboutViewModel.getSyndicate("4")
+        aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate)
     }
 
     private fun handleViewState(state: AboutViewState) {

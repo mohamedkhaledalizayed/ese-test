@@ -37,5 +37,7 @@ data class SyndicateData(
         @field:SerializedName("syndicate_fax")
         var fax: String?,
         @field:SerializedName("syndicate_mobile")
-        var mobile: String?
+        var mobile: String?,
+        @field:SerializedName("sub_sundicates")
+        var subSyndicates: List<SyndicateData>?
 ): Response()

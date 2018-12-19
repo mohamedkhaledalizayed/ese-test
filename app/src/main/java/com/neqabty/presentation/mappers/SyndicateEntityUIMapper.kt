@@ -26,7 +26,8 @@ class SyndicateEntityUIMapper @Inject constructor() : Mapper<SyndicateEntity, Sy
                 mobile = from.mobile,
                 parentId = from.parentId,
                 phone = from.phone,
-                updatedBy = from.updatedBy
+                updatedBy = from.updatedBy,
+                subSyndicates = from.subSyndicates?.map { syndicateEntity ->  SyndicateEntityUIMapper().mapFrom(syndicateEntity) }
         )
     }
 }
