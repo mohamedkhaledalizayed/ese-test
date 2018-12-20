@@ -5,5 +5,4 @@
     android:layout_height="wrap_content"
     android:textColor="@android:color/black"
     android:padding="@dimen/margin_horizontal_normal"
-    android:fontFamily="@font/droidkufi_regular"
     android:textSize="@dimen/text_size_medium"/>

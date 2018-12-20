@@ -18,7 +18,7 @@
             android:id="@+id/ivHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/topbar_bg"
+            android:src="@mipmap/header_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@mipmap/phone_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-                    android:fontFamily="@font/droidkufi_regular"
+
                     android:hint="@string/phoneNumber"
                     android:inputType="phone"
                     android:textSize="@dimen/text_size_medium" />
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@mipmap/password_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-                    android:fontFamily="@font/droidkufi_regular"
+
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:textSize="@dimen/text_size_medium" />
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/btn"
-                    android:fontFamily="@font/droidkufi_regular"
+
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/login"
                     android:gravity="center"
@@ -85,7 +85,7 @@
                     android:id="@+id/tvSignup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/droidkufi_regular"
+
                     android:text="@string/register"
                     android:textSize="@dimen/text_size_medium" />
 

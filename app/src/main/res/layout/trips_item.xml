@@ -54,7 +54,7 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/droidkufi_regular"
+
                 android:maxLines="2"
                 android:text="@{trip.title}"
                 android:textColor="@color/colorPrimary"
@@ -64,7 +64,7 @@
                 android:id="@+id/tvDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/droidkufi_regular"
+
                 android:maxLines="2"
                 android:text="@{trip.desc}"
                 android:textSize="@dimen/text_size_small" />

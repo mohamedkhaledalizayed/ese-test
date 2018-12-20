@@ -10,58 +10,72 @@
             type="com.neqabty.presentation.entities.NewsUI" />
     </data>
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:padding="@dimen/margin_horizontal_normal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/ivLogo"
+            android:id="@+id/ivHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_horizontal_small"
-            android:adjustViewBounds="false"
-            android:cropToPadding="false"
-            android:scaleType="centerInside"
-            app:imageUrl="@{newsItem.img}" />
+            android:scaleType="fitXY"
+            android:src="@mipmap/header_bg" />
 
-        <ScrollView
-            android:id="@+id/svContent"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/clLogo"
-            android:scrollbars="none"
-            app:layout_constraintTop_toTopOf="parent">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_horizontal_normal">
 
-            <LinearLayout
+
+            <ImageView
+                android:id="@+id/ivLogo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_margin="@dimen/margin_horizontal_small"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:scaleType="centerInside"
+                app:imageUrl="@{newsItem.img}" />
 
-                <TextView
-                    android:id="@+id/tvTitle"
+            <ScrollView
+                android:id="@+id/svContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/clLogo"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/droidkufi_regular"
-                    android:text="@{newsItem.title}"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvDesc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/droidkufi_regular"
-                    android:text="@{newsItem.desc}"
-                    android:textSize="@dimen/text_size_medium" />
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-            </LinearLayout>
+                        android:text="@{newsItem.title}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_large" />
 
-        </ScrollView>
+                    <TextView
+                        android:id="@+id/tvDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
+                        android:text="@{newsItem.desc}"
+                        android:textSize="@dimen/text_size_medium" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
     </LinearLayout>
 </layout>

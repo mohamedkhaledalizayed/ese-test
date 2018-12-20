@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@mipmap/username_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-                    android:fontFamily="@font/droidkufi_regular"
+
                     android:hint="@string/syndicateNumber"
                     android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-                    android:fontFamily="@font/droidkufi_regular"
+
                     android:text="@string/doctor"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_medium" />
@@ -54,7 +54,7 @@
                     android:id="@+id/spArea"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/droidkufi_regular"
+
                     android:hint="@string/area"
                     android:textDirection="rtl"
                     style="@style/Base.Widget.AppCompat.Spinner.Underlined"
@@ -85,9 +85,9 @@
                     android:layout_height="wrap_content"
                     android:background="@mipmap/btn"
                     android:gravity="center"
-                    android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/next"
                     android:textColor="@android:color/white"
+                    android:elevation="@dimen/elevation_level_one"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
         </ScrollView>
