@@ -8,7 +8,6 @@ import com.neqabty.presentation.entities.NewsUI
 import com.neqabty.presentation.mappers.NewsEntityUIMapper
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
-
 @OpenForTesting
 class NewsViewModel @Inject constructor(private val getAllNews: GetAllNews) : BaseViewModel() {
 

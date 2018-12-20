@@ -30,96 +30,60 @@
 
 
                 <EditText
-                    android:id="@+id/edName"
+                    android:id="@+id/edNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@mipmap/username_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
                     android:fontFamily="@font/droidkufi_regular"
-                    android:hint="@string/fullName"
-                    android:inputType="text"
+                    android:hint="@string/syndicateNumber"
+                    android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
 
-                <EditText
-                    android:id="@+id/edMobile"
+                <TextView
+                    android:id="@+id/tvDoctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/phone_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
+                    android:gravity="start"
                     android:fontFamily="@font/droidkufi_regular"
-                    android:hint="@string/phoneNumber"
-                    android:inputType="phone"
+                    android:text="@string/doctor"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_medium" />
 
-                <EditText
-                    android:id="@+id/edEmail"
+                <Spinner
+                    android:id="@+id/spArea"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/email_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
                     android:fontFamily="@font/droidkufi_regular"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
+                    android:hint="@string/area"
+                    android:textDirection="rtl"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:textSize="@dimen/text_size_medium" />
 
-                <EditText
-                    android:id="@+id/edPassword"
+                <Spinner
+                    android:id="@+id/spSpecialization"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/password_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
-                    android:fontFamily="@font/droidkufi_regular"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
+                    android:hint="@string/speciality"
+                    android:textDirection="rtl"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:textSize="@dimen/text_size_medium" />
 
-                <EditText
-                    android:id="@+id/edPasswordConfirmation"
+                <Spinner
+                    android:id="@+id/spDoctorName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/password_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
-                    android:fontFamily="@font/droidkufi_regular"
-                    android:hint="@string/confirmPassword"
-                    android:inputType="textPassword"
+                    android:hint="@string/doctorName"
+                    android:textDirection="rtl"
+                    android:clickable="false"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:textSize="@dimen/text_size_medium" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/edAge"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:drawableStart="@mipmap/age_ic"
-                        android:drawablePadding="@dimen/margin_horizontal_small"
-                        android:fontFamily="@font/droidkufi_regular"
-                        android:hint="@string/age"
-                        android:inputType="date"
-                        android:textSize="@dimen/text_size_medium" />
-
-                    <Spinner
-                        android:id="@+id/spGender"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:fontFamily="@font/droidkufi_regular"
-                        android:hint="@string/gender"
-                        android:textDirection="rtl"
-                        android:padding="0dp"
-                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                        android:textSize="@dimen/text_size_medium" />
-                </LinearLayout>
 
                 <Button
                     android:id="@+id/bNext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/btn"
-                    android:fontFamily="@font/droidkufi_regular"
                     android:gravity="center"
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/next"
@@ -127,5 +91,16 @@
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
         </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>

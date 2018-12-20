@@ -50,14 +50,7 @@ class ClaimingFragment : BaseFragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
         claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(ClaimingViewModel::class.java)
-
-//        initializeObservers()
         initializeViews()
-    }
-    private fun handleViewState(state: ClaimingViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        state.request?.let {
-        }
     }
 
     fun initializeViews() {
@@ -69,6 +62,15 @@ class ClaimingFragment : BaseFragment(), Injectable {
         binding.viewpager.adapter = adapter
         binding.viewpager.setSwipePagingEnabled(true)//TODO
         binding.indicator.setViewPager(binding.viewpager)
+
+
+//        binding.viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+//            override fun onPageScrollStateChanged(state: Int) {}
+//            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+//            override fun onPageSelected(position: Int) {
+//                binding.tvTitle.setText(Model.values()[position].titleResId)
+//            }
+//        })
     }
 
 

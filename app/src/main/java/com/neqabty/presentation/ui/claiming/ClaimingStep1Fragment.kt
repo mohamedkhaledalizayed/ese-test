@@ -1,5 +1,6 @@
 package com.neqabty.presentation.ui.claiming
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingComponent
@@ -8,12 +9,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.neqabty.R
 import com.neqabty.databinding.Claiming1FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.AreaUI
+import com.neqabty.presentation.entities.DoctorUI
+import com.neqabty.presentation.entities.SpecializationUI
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
@@ -29,6 +35,12 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 
     lateinit var claimingViewModel: ClaimingViewModel
 
+    var doctorsResultList: List<DoctorUI>? = mutableListOf()
+    var areasResultList: List<AreaUI>? = mutableListOf()
+    var specializationsResultList: List<SpecializationUI>? = mutableListOf()
+    var specializationID: String = "1"
+    var areaID: String = "1"
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -40,7 +52,6 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                 false,
                 dataBindingComponent
         )
-
         return binding.root
     }
 
@@ -49,36 +60,81 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(ClaimingViewModel::class.java)
 
-//        initializeObservers()
+        claimingViewModel.viewState.observe(this, Observer {
+            if (it != null) handleViewState(it)
+        })
+        claimingViewModel.errorState.observe(this, Observer { throwable ->
+            throwable?.let {
+                Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
+            }
+        })
         initializeViews()
-//        loginViewModel.login("01119850766","123@pass" , "c4baf341d52e53c01dd0ff4e2f930ab24886f22c5ef1b15e715534832c0e9528")
-
-//        signupViewModel.signup("m@m.m", "Mona", "Mohamed", "01119850766", "1", "1", "1", "123@pass")
-
+        claimingViewModel.getAllContent()
     }
-//    private fun handleViewState(state: SignupViewState) {
-//        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-//        state.weather?.let {
-//        }
-//    }
+
+    private fun handleViewState(state: ClaimingViewState) {
+        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        state.doctors?.let {
+            doctorsResultList = it
+        }
+        state.areas?.let {
+            areasResultList = it
+        }
+        state.specializations?.let {
+            specializationsResultList = it
+        }
+        if (state.doctors != null && state.specializations != null && state.areas != null)
+            initializeSpinners()
+    }
 
     fun initializeViews() {
-        val genders = mutableListOf<String>("النوع","ذكر", "أنثى")
-        binding.spGender.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, genders)
-
-//        mySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//            }
-//
-//            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-//                Toast.makeText(this@MainActivity, myStrings[p2], LENGTH_LONG).show()
-//            }
-//
-//        }
     }
 
-//region
+    fun initializeSpinners() {
+        renderAreas()
+        renderSpecializations()
+    }
 
+    //region
+    fun renderDoctors() {
+        var filteredDoctorsList: List<DoctorUI>? = mutableListOf()
+
+        filteredDoctorsList = doctorsResultList?.filter {
+            it.degreeCode.equals(specializationID) && it.areaCode.equals(areaID)
+        }
+
+        binding.spDoctorName.adapter = ArrayAdapter<DoctorUI>(requireContext(), R.layout.spinner_item, filteredDoctorsList)
+        binding.spDoctorName.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+//                val item = parent.getItemAtPosition(position) as DoctorUI
+//                        Toast.makeText(requireContext(), item.phoneNumber, LENGTH_LONG).show()
+
+            }
+        }
+    }
+
+    fun renderAreas() {
+        binding.spArea.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, areasResultList)
+        binding.spArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                areaID = (parent.getItemAtPosition(position) as AreaUI).code!!
+                renderDoctors()
+            }
+        }
+    }
+
+    fun renderSpecializations() {
+        binding.spSpecialization.adapter = ArrayAdapter<SpecializationUI>(requireContext(), R.layout.spinner_item, specializationsResultList)
+        binding.spSpecialization.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                specializationID = (parent.getItemAtPosition(position) as SpecializationUI).code!!
+                renderDoctors()
+            }
+        }
+    }
 
 // endregion
 
