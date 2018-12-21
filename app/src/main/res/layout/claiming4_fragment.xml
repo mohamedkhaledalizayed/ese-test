@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="loading"
-            type="boolean" /></data>
+            type="boolean" />
+    </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +16,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingStart="@dimen/margin_horizontal_large"
             android:paddingEnd="@dimen/margin_horizontal_large"
             android:scrollbars="none"
@@ -24,105 +26,49 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical">
 
-
-                <EditText
-                    android:id="@+id/edName"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/username_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:src="@mipmap/confimation_logo" />
 
-                    android:hint="@string/fullName"
-                    android:inputType="text"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:src="@mipmap/success" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/congratulations"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_medium" />
 
-                <EditText
-                    android:id="@+id/edMobile"
-                    android:layout_width="match_parent"
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/phone_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
 
-                    android:hint="@string/phoneNumber"
-                    android:inputType="phone"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:text="@string/loginHint"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_small" />
 
-                <EditText
-                    android:id="@+id/edEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/email_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
-
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <EditText
-                    android:id="@+id/edPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/password_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
-
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <EditText
-                    android:id="@+id/edPasswordConfirmation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/password_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
-
-                    android:hint="@string/confirmPassword"
-                    android:inputType="textPassword"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/edAge"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:drawableStart="@mipmap/age_ic"
-                        android:drawablePadding="@dimen/margin_horizontal_small"
-
-                        android:hint="@string/age"
-                        android:inputType="date"
-                        android:textSize="@dimen/text_size_medium" />
-
-                    <Spinner
-                        android:id="@+id/spGender"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-
-                        android:hint="@string/gender"
-                        android:textDirection="rtl"
-                        android:padding="0dp"
-                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                        android:textSize="@dimen/text_size_medium" />
-                </LinearLayout>
 
                 <Button
-                    android:id="@+id/bNext"
+                    android:id="@+id/bLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/btn"
 
                     android:gravity="center"
                     android:padding="@dimen/margin_horizontal_small"
-                    android:text="@string/next"
+                    android:text="@string/login"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>

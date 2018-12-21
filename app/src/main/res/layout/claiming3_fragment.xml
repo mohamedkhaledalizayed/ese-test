@@ -44,8 +44,6 @@
                     android:id="@+id/edNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/username_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
                     android:enabled="false"
                     android:hint="@string/syndicateNumber"
                     android:inputType="number"
@@ -66,8 +64,6 @@
                     android:id="@+id/edDoctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/username_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
                     android:enabled="false"
                     android:hint="@string/syndicateNumber"
                     android:inputType="number"
@@ -88,21 +84,29 @@
                     android:id="@+id/edProvider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/username_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
                     android:enabled="false"
                     android:hint="@string/syndicateNumber"
                     android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
 
                 <Button
-                    android:id="@+id/bNext"
+                    android:id="@+id/bAddPhoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/btn"
                     android:elevation="@dimen/elevation_level_one"
                     android:gravity="center"
-                    android:text="@string/next"
+                    android:text="@string/addPhoto"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_medium" />
+                <Button
+                    android:id="@+id/bSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/btn"
+                    android:elevation="@dimen/elevation_level_one"
+                    android:gravity="center"
+                    android:text="@string/send"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>

@@ -61,7 +61,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         binding.edDoctor.setText(ClaimingData.doctorName)
         binding.edProvider.setText(ClaimingData.providerName)
 
-        binding.bNext.setOnClickListener({
+        binding.bSend.setOnClickListener({
             pager.setCurrentItem(3,true)
         })
 

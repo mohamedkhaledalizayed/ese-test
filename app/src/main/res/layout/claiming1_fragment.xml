@@ -33,8 +33,6 @@
                     android:id="@+id/edNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/username_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
                     android:hint="@string/syndicateNumber"
                     android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
@@ -44,8 +42,6 @@
                     android:id="@+id/edCardNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/username_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
                     android:hint="@string/cardNumber"
                     android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
