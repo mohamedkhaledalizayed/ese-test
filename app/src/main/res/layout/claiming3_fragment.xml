@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="loading"
-            type="boolean" /></data>
+            type="boolean" />
+    </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -28,104 +30,93 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/tvNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/syndicateNumber"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/edName"
+                    android:id="@+id/edNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@mipmap/username_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-
-                    android:hint="@string/fullName"
-                    android:inputType="text"
+                    android:enabled="false"
+                    android:hint="@string/syndicateNumber"
+                    android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tvDoctor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/doctor"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold" />
+
 
                 <EditText
-                    android:id="@+id/edMobile"
+                    android:id="@+id/edDoctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/phone_ic"
+                    android:drawableStart="@mipmap/username_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-
-                    android:hint="@string/phoneNumber"
-                    android:inputType="phone"
+                    android:enabled="false"
+                    android:hint="@string/syndicateNumber"
+                    android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tvProvider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/serviceProvider"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold" />
+
 
                 <EditText
-                    android:id="@+id/edEmail"
+                    android:id="@+id/edProvider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/email_ic"
+                    android:drawableStart="@mipmap/username_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
+                    android:enabled="false"
+                    android:hint="@string/syndicateNumber"
+                    android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
-
-                <EditText
-                    android:id="@+id/edPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/password_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
-
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <EditText
-                    android:id="@+id/edPasswordConfirmation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/password_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
-
-                    android:hint="@string/confirmPassword"
-                    android:inputType="textPassword"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/edAge"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-                        android:drawableStart="@mipmap/age_ic"
-                        android:drawablePadding="@dimen/margin_horizontal_small"
-
-                        android:hint="@string/age"
-                        android:inputType="date"
-                        android:textSize="@dimen/text_size_medium" />
-
-                    <Spinner
-                        android:id="@+id/spGender"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight=".5"
-
-                        android:hint="@string/gender"
-                        android:textDirection="rtl"
-                        android:padding="0dp"
-                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                        android:textSize="@dimen/text_size_medium" />
-                </LinearLayout>
 
                 <Button
                     android:id="@+id/bNext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/btn"
-
+                    android:elevation="@dimen/elevation_level_one"
                     android:gravity="center"
-                    android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/next"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
         </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -20,10 +20,10 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.DegreeUI
-import com.neqabty.presentation.entities.DoctorUI
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
+import kotlinx.android.synthetic.main.claiming2_fragment.*
 import javax.inject.Inject
 
 @OpenForTesting
@@ -83,6 +83,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         binding.edDoctor.setText(ClaimingData.doctorName)
 
         binding.bNext.setOnClickListener({
+            ClaimingData.providerName = (spProvider.selectedItem as ProviderUI).toString()
             pager.setCurrentItem(2,true)
         })
 

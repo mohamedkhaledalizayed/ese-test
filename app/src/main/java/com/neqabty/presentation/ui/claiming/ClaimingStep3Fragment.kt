@@ -5,10 +5,10 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import com.neqabty.R
 import com.neqabty.databinding.Claiming3FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -29,6 +29,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
 
     lateinit var claimingViewModel: ClaimingViewModel
 
+    lateinit var pager: ViewPager
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -40,41 +41,30 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
                 false,
                 dataBindingComponent
         )
-
+        pager = container as ViewPager
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser)
+            initializeViews()
+    }
+
+    fun initializeViews() {
         claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(ClaimingViewModel::class.java)
 
-//        initializeObservers()
-        initializeViews()
-//        loginViewModel.login("03339850766","323@pass" , "c4baf343d52e53c03dd0ff4e2f930ab24886f22c5ef3b35e735534832c0e9528")
 
-//        signupViewModel.signup("m@m.m", "Mona", "Mohamed", "03339850766", "3", "3", "3", "323@pass")
+        binding.edNumber.setText(ClaimingData.number)
+        binding.edDoctor.setText(ClaimingData.doctorName)
+        binding.edProvider.setText(ClaimingData.providerName)
 
-    }
-//    private fun handleViewState(state: SignupViewState) {
-//        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-//        state.weather?.let {
-//        }
-//    }
+        binding.bNext.setOnClickListener({
+            pager.setCurrentItem(3,true)
+        })
 
-    fun initializeViews() {
-        val genders = mutableListOf<String>("النوع","ذكر", "أنثى")
-        binding.spGender.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, genders)
-
-//        mySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//            }
-//
-//            override fun onItemSelected(p0: AdapterView<*>?, p3: View?, p2: Int, p3: Long) {
-//                Toast.makeText(this@MainActivity, myStrings[p2], LENGTH_LONG).show()
-//            }
-//
-//        }
     }
 
 //region
