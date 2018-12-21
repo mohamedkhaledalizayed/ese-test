@@ -10,7 +10,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -35,8 +35,18 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@mipmap/username_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-
                     android:hint="@string/syndicateNumber"
+                    android:inputType="number"
+                    android:textSize="@dimen/text_size_medium" />
+
+
+                <EditText
+                    android:id="@+id/edCardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@mipmap/username_ic"
+                    android:drawablePadding="@dimen/margin_horizontal_small"
+                    android:hint="@string/cardNumber"
                     android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
 
@@ -45,8 +55,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
-
                     android:text="@string/doctor"
+                    android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_medium" />
 
@@ -54,7 +64,6 @@
                     android:id="@+id/spArea"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:hint="@string/area"
                     android:textDirection="rtl"
                     style="@style/Base.Widget.AppCompat.Spinner.Underlined"
@@ -65,6 +74,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/speciality"
+                    android:textDirection="rtl"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Spinner
+                    android:id="@+id/spDegree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/degree"
                     android:textDirection="rtl"
                     style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:textSize="@dimen/text_size_medium" />
