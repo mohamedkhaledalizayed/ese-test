@@ -16,6 +16,7 @@ import com.neqabty.databinding.MobileFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
@@ -66,10 +67,11 @@ class MobileFragment : BaseFragment(), Injectable {
     fun initializeViews() {
         binding.bSend.setOnClickListener{
             //TODO validate mobile
+            if(!PreferencesHelper(requireContext()).isUserRegistered())//TODO register
 //            PreferencesHelper(requireContext()).mobile = binding.edMobile.text.toString()
-            navController().navigate(
-                    MobileFragmentDirections.openClaiming()
-            )
+//            navController().navigate(
+//                    MobileFragmentDirections.openClaiming()
+//            )
         }
     }
 
