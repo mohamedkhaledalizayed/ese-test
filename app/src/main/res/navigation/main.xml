@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.neqabty.presentation.ui.login.LoginFragment"
+        android:label=""
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/signup"
+            app:destination="@id/signupFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.neqabty.presentation.ui.signup.SignupFragment"
+        android:label="@string/signup_title"
+        tools:layout="@layout/signup_fragment" />
+
+    <fragment
+        android:id="@+id/syndicatesFragment"
+        android:name="com.neqabty.presentation.ui.syndicates.SyndicatesFragment"
+        android:label="@string/syndicates_title"
+        tools:layout="@layout/syndicates_fragment">
+        <action
+            android:id="@+id/openHome"
+            app:clearTask="true"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mobileFragment"
+        android:name="com.neqabty.presentation.ui.mobile.MobileFragment"
+        android:label="@string/mobile_title"
+        tools:layout="@layout/mobile_fragment">
+        <action
+            android:id="@+id/openClaiming"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"
+            app:destination="@id/claimingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/claimingFragment"
+        android:name="com.neqabty.presentation.ui.claiming.ClaimingFragment"
+        android:label="@string/medicalRequest"
+        tools:layout="@layout/claiming_fragment" />
+
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.neqabty.presentation.ui.news.NewsFragment"
+        android:label="@string/news_title"
+        tools:layout="@layout/news_fragment">
+        <action
+            android:id="@+id/newsDetails"
+            app:destination="@id/newsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="com.neqabty.presentation.ui.newsDetails.NewsDetailsFragment"
+        android:label="@string/news_title"
+        tools:layout="@layout/news_details_fragment">
+        <argument
+            android:name="newsItem"
+            app:argType="com.neqabty.presentation.entities.NewsUI" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripsFragment"
+        android:name="com.neqabty.presentation.ui.trips.TripsFragment"
+        android:label="@string/trips_title"
+        tools:layout="@layout/trips_fragment">
+        <action
+            android:id="@+id/tripDetails"
+            app:destination="@id/tripDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripDetailsFragment"
+        android:name="com.neqabty.presentation.ui.tripDetails.TripDetailsFragment"
+        android:label="@string/trips_title"
+        tools:layout="@layout/trip_details_fragment">
+        <argument
+            android:name="tripItem"
+            app:argType="com.neqabty.presentation.entities.TripUI" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.neqabty.presentation.ui.home.HomeFragment"
+        android:label="@string/home_title"
+        tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.neqabty.presentation.ui.about.AboutFragment"
+        android:label="@string/about_title"
+        tools:layout="@layout/about_fragment" />
+</navigation>
