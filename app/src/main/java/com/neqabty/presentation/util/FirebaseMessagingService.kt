@@ -14,9 +14,15 @@ import com.firebase.jobdispatcher.GooglePlayDriver
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.neqabty.MainActivity
+import com.neqabty.domain.usecases.GetUserRegistered
+import javax.inject.Inject
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
+    @Inject
+    lateinit var getUserRegistered: GetUserRegistered
+    @Inject
+    lateinit var context: Context
 
     /**
      * Called when message is received.
@@ -108,7 +114,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
      * @param token The new token.
      */
     private fun sendRegistrationToServer(token: String?) {
-        // TODO: Implement this method to send token to your app server. lw fe mobile hb3to l 3mr wlw mfesh ha7oto fel prefs
+        getUserRegistered.getUserRegistered(PreferencesHelper(context).mobile, PreferencesHelper(context).mainSyndicate, PreferencesHelper(context).subSyndicate, token
+                ?: "")
+                .subscribe(
+                        {
+                            PreferencesHelper(context).token = token
+
+                            PreferencesHelper(context).isRegistered = true
+                        },
+                        { sendRegistrationToServer(token) })
     }
 
     /**

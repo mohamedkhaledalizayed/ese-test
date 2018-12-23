@@ -1,15 +1,16 @@
 package com.neqabty.presentation.ui.mobile
 
 import android.arch.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.GetAllDoctors
+import com.neqabty.domain.usecases.GetUserRegistered
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.DoctorEntityUIMapper
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
 @OpenForTesting
-class MobileViewModel @Inject constructor(val getAllDoctors: GetAllDoctors) : BaseViewModel() {
+class MobileViewModel @Inject constructor(val getUserRegistered: GetUserRegistered) : BaseViewModel() {
 
     private val doctorEntityUIMapper = DoctorEntityUIMapper()
 
@@ -20,27 +21,15 @@ class MobileViewModel @Inject constructor(val getAllDoctors: GetAllDoctors) : Ba
         viewState.value = MobileViewState()
     }
 
-    fun getAllContent2(type:String) {
-
-//        val doctorsDisposable = getAllDoctors.observable()
-//                .flatMap {
-//                    it.let {
-//                        doctorEntityUIMapper.observable(it)
-//                    } ?: run {
-//                        throw Throwable("Something went wrong :(")
-//                    }
-//                }.subscribe(
-//                        {
-//                            viewState.value = viewState.value?.copy(doctors = it)
-//                            onContent1Received()
-//                        },
-//                        { errorState.value = it }
-//                )
-//
-//        addDisposable(doctorsDisposable)
+    fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token: String, prefs: PreferencesHelper) {
+        addDisposable(getUserRegistered.getUserRegistered(mobile, mainSyndicateId, subSyndicateId, token)
+                .subscribe(
+                        {
+                            prefs.token = token
+                            prefs.mobile = mobile
+                            prefs.isRegistered = true
+                        },
+                        { registerUser(mobile, mainSyndicateId, subSyndicateId, token, prefs) }
+                ))
     }
-//    private fun onContent2Received() {
-//        if (viewState.value?.providers != null && viewState.value?.areas != null)
-//            viewState.value = viewState.value?.copy(isLoading = false)
-//    }
 }

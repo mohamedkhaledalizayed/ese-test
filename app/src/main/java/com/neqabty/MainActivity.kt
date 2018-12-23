@@ -133,10 +133,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     navController.navigate(R.id.tripsFragment)
                 }
                 R.id.claiming_fragment -> {
-                    if (PreferencesHelper(this).mobile.isBlank())
-                        navController.navigate(R.id.mobileFragment)
-                    else
+                    if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.claimingFragment)
+                    else
+                        navController.navigate(R.id.mobileFragment)
                 }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
@@ -172,10 +172,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     if (!task.isSuccessful)
                         return@OnCompleteListener
                     val token = task.result?.token
-                    PreferencesHelper(this).token = token
-                    if (PreferencesHelper(this).mobile.isNotBlank()) {//TODO register
-                        mainViewModel.registerUser(PreferencesHelper(this).mobile,PreferencesHelper(this).mainSyndicate,PreferencesHelper(this).subSyndicate,PreferencesHelper(this).token,PreferencesHelper(this))
-                    }
+
+                    if (token.equals(PreferencesHelper(this).token) && PreferencesHelper(this).mobile.isNotBlank()) {//TODO register
+                        mainViewModel.registerUser(PreferencesHelper(this).mobile, PreferencesHelper(this).mainSyndicate, PreferencesHelper(this).subSyndicate, PreferencesHelper(this).token, PreferencesHelper(this))
+                    } else
+                        PreferencesHelper(this).token = token
 
                     Log.d("Toooken", token)
                 })

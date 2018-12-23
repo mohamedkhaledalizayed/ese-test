@@ -14,7 +14,7 @@ interface NeqabtyDataStore {
     fun getAllDegrees(): Observable<List<DegreeEntity>>
     fun getAllSpecializations(): Observable<List<SpecializationEntity>>
     fun getAllProviders(type : String): Observable<List<ProviderEntity>>
-    fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token : String):Observable<Unit>
+    fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token : String):Observable<String>
 
     fun login(mobile: String, password: String, token: String): Observable<UserEntity>
     fun signup(email: String, fName: String, lName: String, mobile: String, govId: String, mainSyndicateId: String, subSyndicateId: String, password: String): Observable<UserEntity>

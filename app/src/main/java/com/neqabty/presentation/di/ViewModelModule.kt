@@ -2,6 +2,7 @@ package com.neqabty.presentation.di
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.neqabty.MainViewModel
 import com.neqabty.presentation.ui.about.AboutViewModel
 import com.neqabty.presentation.ui.claiming.ClaimingViewModel
 import com.neqabty.presentation.ui.home.HomeViewModel
@@ -29,6 +30,12 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SignupViewModel::class)
     abstract fun bindSignupViewModel(signupViewModel: SignupViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
 
 
     @Binds

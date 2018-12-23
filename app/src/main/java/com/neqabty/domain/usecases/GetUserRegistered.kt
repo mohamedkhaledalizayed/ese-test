@@ -5,8 +5,8 @@ import com.neqabty.domain.common.Transformer
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetUserRegistered @Inject constructor(transformer: Transformer<Unit>,
-                                            private val neqabtyRepository: NeqabtyRepository) : UseCase<Unit>(transformer) {
+class GetUserRegistered @Inject constructor(transformer: Transformer<String>,
+                                            private val neqabtyRepository: NeqabtyRepository) : UseCase<String>(transformer) {
 
     companion object {
         private const val PARAM_MOBILE = "param:mobile"
@@ -15,7 +15,7 @@ class GetUserRegistered @Inject constructor(transformer: Transformer<Unit>,
         private const val PARAM_TOKEN = "param:token"
     }
 
-    fun getUserRegistered(mobile: String, mainSyndicateId: String, subSyndicateId: String, token : String): Observable<Unit> {
+    fun getUserRegistered(mobile: String, mainSyndicateId: String, subSyndicateId: String, token : String): Observable<String> {
         val data = HashMap<String, String>()
         data[PARAM_MOBILE] = mobile
         data[PARAM_MAIN_SYNDICATE] = mainSyndicateId
@@ -23,7 +23,7 @@ class GetUserRegistered @Inject constructor(transformer: Transformer<Unit>,
         data[PARAM_TOKEN] = token
         return observable(data)
     }
-    override fun createObservable(data: Map<String, Any>?): Observable<Unit> {
+    override fun createObservable(data: Map<String, Any>?): Observable<String> {
         val mobile = data?.get(GetUserRegistered.PARAM_MOBILE) as String
         val mainSyndicateId = data?.get(GetUserRegistered.PARAM_MAIN_SYNDICATE) as String
         val subSyndicateId = data?.get(GetUserRegistered.PARAM_SUB_SYNDICATE) as String

@@ -11,7 +11,7 @@ import javax.inject.Singleton
 @OpenForTesting
 class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: CachedNeqabtyDataStore,
                                                 private val remoteDataStore: RemoteNeqabtyDataStore) : NeqabtyRepository {
-    override fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token: String): Observable<Unit> {
+    override fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token: String): Observable<String> {
         return remoteDataStore.registerUser(mobile,mainSyndicateId,subSyndicateId,token)
     }
 

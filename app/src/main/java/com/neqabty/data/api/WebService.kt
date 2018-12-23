@@ -43,7 +43,7 @@ interface WebService {
     fun getAllProviders(@Body providerRequest: ProviderRequest): Observable<List<ProviderData>>
 
     @POST("api/v2/users/signup")
-    fun registerUser(@Body registerRequest: RegisterRequest): Observable<ApiResponse<Unit>>
+    fun registerUser(@Body registerRequest: RegisterRequest): Observable<ApiResponse<String>>
 
     @POST("api/Auth/Login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>

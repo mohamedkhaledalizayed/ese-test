@@ -18,11 +18,15 @@ class MainViewModel @Inject constructor(val getUserRegistered: GetUserRegistered
         viewState.value = true
     }
 
-    fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token : String , prefs:PreferencesHelper) {
-        addDisposable(getUserRegistered.getUserRegistered(mobile,mainSyndicateId,subSyndicateId,token)
+    fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token: String, prefs: PreferencesHelper) {
+        addDisposable(getUserRegistered.getUserRegistered(mobile, mainSyndicateId, subSyndicateId, token)
                 .subscribe(
-                        { prefs.isRegistered = true },
-                        { registerUser(mobile,mainSyndicateId,subSyndicateId,token,prefs) }
+                        {
+                            prefs.token = token
+
+                            prefs.isRegistered = true
+                        },
+                        { registerUser(mobile, mainSyndicateId, subSyndicateId, token, prefs) }
                 ))
     }
 }

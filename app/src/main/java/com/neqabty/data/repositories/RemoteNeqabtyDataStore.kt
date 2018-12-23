@@ -16,7 +16,7 @@ import javax.inject.Singleton
 @OpenForTesting
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
 
-    override fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token: String): Observable<Unit> {
+    override fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token: String): Observable<String> {
         return api.registerUser(RegisterRequest(mobile, mainSyndicateId, subSyndicateId, token)).map { result ->
             result.data
         }

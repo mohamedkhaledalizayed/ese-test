@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.neqabty.R
 import com.neqabty.databinding.MobileFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -67,15 +69,35 @@ class MobileFragment : BaseFragment(), Injectable {
     fun initializeViews() {
         binding.bSend.setOnClickListener{
             //TODO validate mobile
-            if(!PreferencesHelper(requireContext()).isUserRegistered())//TODO register
-//            PreferencesHelper(requireContext()).mobile = binding.edMobile.text.toString()
+            if(PreferencesHelper(requireContext()).token.isNotBlank())
+                mobileViewModel.registerUser(binding.edMobile.text.toString() , PreferencesHelper(requireContext()).mainSyndicate , PreferencesHelper(requireContext()).subSyndicate , PreferencesHelper(requireContext()).token , PreferencesHelper(requireContext()))
+            else{
+                FirebaseInstanceId.getInstance().instanceId
+                        .addOnCompleteListener(OnCompleteListener { task ->
+                            if (!task.isSuccessful)
+                                return@OnCompleteListener
+                            val token = task.result?.token
+                            mobileViewModel.registerUser(binding.edMobile.toString() , PreferencesHelper(requireContext()).mainSyndicate , PreferencesHelper(requireContext()).subSyndicate , token?:"" , PreferencesHelper(requireContext()))
+                        })
+            }
+
+// PreferencesHelper(requireContext()).mobile = binding.edMobile.text.toString()
 //            navController().navigate(
 //                    MobileFragmentDirections.openClaiming()
 //            )
         }
     }
 
-
+//fun getToken():String{
+//
+//    FirebaseInstanceId.getInstance().instanceId
+//            .addOnCompleteListener(OnCompleteListener { task ->
+//                if (!task.isSuccessful)
+//                    return@OnCompleteListener
+//                task.result?.token ?: ""
+//            })
+//
+//}
     private fun handleViewState(state: MobileViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 //        state.doctors?.let {
