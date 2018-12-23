@@ -37,8 +37,8 @@
         android:id="@+id/help_fragment"
         android:icon="@mipmap/help_ic"
         android:title="@string/help_title" />
-    <item
-        android:id="@+id/logout_fragment"
-        android:icon="@mipmap/logout_ic"
-        android:title="@string/logout_title" />
+    <!--<item-->
+        <!--android:id="@+id/logout_fragment"-->
+        <!--android:icon="@mipmap/logout_ic"-->
+        <!--android:title="@string/logout_title" />-->
 </menu>
