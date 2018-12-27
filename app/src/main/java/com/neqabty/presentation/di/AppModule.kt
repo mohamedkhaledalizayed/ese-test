@@ -98,79 +98,85 @@ class AppModule {
     @Singleton
     @Provides
     fun provideLoginUser(neqabtyRepository: NeqabtyRepository): LoginUser {
-        return com.neqabty.domain.usecases.LoginUser(ASyncTransformer(), neqabtyRepository)
+        return LoginUser(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideSignupUser(neqabtyRepository: NeqabtyRepository): SignupUser {
-        return com.neqabty.domain.usecases.SignupUser(ASyncTransformer(), neqabtyRepository)
+        return SignupUser(ASyncTransformer(), neqabtyRepository)
     }
 
 
     @Singleton
     @Provides
     fun provideGetUserRegistered(neqabtyRepository: NeqabtyRepository): GetUserRegistered {
-        return com.neqabty.domain.usecases.GetUserRegistered(ASyncTransformer(), neqabtyRepository)
+        return GetUserRegistered(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideGetAllSyndicates(neqabtyRepository: NeqabtyRepository): GetAllSyndicates {
-        return com.neqabty.domain.usecases.GetAllSyndicates(ASyncTransformer(), neqabtyRepository)
+        return GetAllSyndicates(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideGetAllNews(neqabtyRepository: NeqabtyRepository): GetAllNews {
-        return com.neqabty.domain.usecases.GetAllNews(ASyncTransformer(), neqabtyRepository)
+        return GetAllNews(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideGetAllTrips(neqabtyRepository: NeqabtyRepository): GetAllTrips {
-        return com.neqabty.domain.usecases.GetAllTrips(ASyncTransformer(), neqabtyRepository)
+        return GetAllTrips(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideGetSyndicate(neqabtyRepository: NeqabtyRepository): GetSyndicate {
-        return com.neqabty.domain.usecases.GetSyndicate(ASyncTransformer(), neqabtyRepository)
+        return GetSyndicate(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideGetSubSyndicates(neqabtyRepository: NeqabtyRepository): GetSubSyndicates {
-        return com.neqabty.domain.usecases.GetSubSyndicates(ASyncTransformer(), neqabtyRepository)
+        return GetSubSyndicates(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideGetAllAreas(neqabtyRepository: NeqabtyRepository): GetAllAreas {
-        return com.neqabty.domain.usecases.GetAllAreas(ASyncTransformer(), neqabtyRepository)
+        return GetAllAreas(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideGetAllDoctors(neqabtyRepository: NeqabtyRepository): GetAllDoctors {
-        return com.neqabty.domain.usecases.GetAllDoctors(ASyncTransformer(), neqabtyRepository)
+        return GetAllDoctors(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideGetAllSpecializations(neqabtyRepository: NeqabtyRepository): GetAllSpecializations {
-        return com.neqabty.domain.usecases.GetAllSpecializations(ASyncTransformer(), neqabtyRepository)
+        return GetAllSpecializations(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideGetAllDegrees(neqabtyRepository: NeqabtyRepository): GetAllDegrees {
-        return com.neqabty.domain.usecases.GetAllDegrees(ASyncTransformer(), neqabtyRepository)
+        return GetAllDegrees(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideGetAllProviders(neqabtyRepository: NeqabtyRepository): GetAllProviders {
-        return com.neqabty.domain.usecases.GetAllProviders(ASyncTransformer(), neqabtyRepository)
+        return GetAllProviders(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetAllProvidersTypes(neqabtyRepository: NeqabtyRepository): GetAllProvidersTypes {
+        return GetAllProvidersTypes(ASyncTransformer(), neqabtyRepository)
     }
 }

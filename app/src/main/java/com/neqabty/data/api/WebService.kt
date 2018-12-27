@@ -24,7 +24,7 @@ interface WebService {
     @POST("api/v2/news/main_syndicate")
     fun getAllNews(@Body newsRequest: NewsRequest): Observable<ApiResponse<List<NewsData>>>
 
-    @GET("api/Trips/All")
+    @GET("api/Trips/All/{key}")
     fun getAllTrips(): Observable<ApiResponse<List<TripData>>>
 
     @GET("api/v2/medical/areas")
@@ -39,11 +39,14 @@ interface WebService {
     @GET("api/v2/medical/degrees")
     fun getAllDegrees(): Observable<ApiResponse<List<DegreeData>>>
 
-    @POST("api/v2/medical/analytical_laboratories")
-    fun getAllProviders(@Body providerRequest: ProviderRequest): Observable<List<ProviderData>>
+    @GET("api/v2/medical/providerTypes")
+    fun getAllProviderTypes(): Observable<ApiResponse<List<ProviderTypeData>>>
+
+    @POST("api/v2/medical/service_provider")
+    fun getAllProvidersById(@Body providerRequest: ProviderRequest): Observable<ApiResponse<List<ProviderData>>>
 
     @POST("api/v2/users/signup")
-    fun registerUser(@Body registerRequest: RegisterRequest): Observable<ApiResponse<String>>
+    fun registerUser(@Body registerRequest: RegisterRequest): Observable<ApiResponse<Unit>>
 
     @POST("api/Auth/Login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>

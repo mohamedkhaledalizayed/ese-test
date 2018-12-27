@@ -15,10 +15,17 @@ import javax.inject.Singleton
 @Singleton
 @OpenForTesting
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
+    private val providerTypeDataEntityMapper = ProviderTypeDataEntityMapper()
 
-    override fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token: String): Observable<String> {
+    override fun getAllProviderTypes(): Observable<List<ProviderTypeEntitiy>> {
+        return api.getAllProviderTypes().map { types ->
+            types.data?.map { providerTypeDataEntityMapper.mapFrom(it) }
+        }
+    }
+
+    override fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String): Observable<Unit> {
         return api.registerUser(RegisterRequest(mobile, mainSyndicateId, subSyndicateId, token)).map { result ->
-            result.data
+            result.data?: Unit
         }
     }
 
@@ -26,8 +33,8 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val providerDataEntityMapper = ProviderDataEntityMapper()
 
     override fun getAllProviders(type: String): Observable<List<ProviderEntity>> {
-        return api.getAllProviders(ProviderRequest(type)).map { providers ->
-            providers.map { providerDataEntityMapper.mapFrom(it) }
+        return api.getAllProvidersById(ProviderRequest(type)).map { providers ->
+            providers.data?.map { providerDataEntityMapper.mapFrom(it) }
         }
     }
 

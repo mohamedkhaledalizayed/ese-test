@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Neqabty</string>
+    <string name="app_name">Test</string>
     <string name="capture">Capture Photo</string>
     <string name="history">Show History</string>
     <string name="turn_on_gps">Please turn on your GPS</string>

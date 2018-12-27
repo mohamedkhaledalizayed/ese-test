@@ -173,7 +173,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                         return@OnCompleteListener
                     val token = task.result?.token
 
-                    if (token.equals(PreferencesHelper(this).token) && PreferencesHelper(this).mobile.isNotBlank()) {//TODO register
+                    if ( PreferencesHelper(this).mobile.isNotBlank() && !token.equals(PreferencesHelper(this).token)) {//TODO register
                         mainViewModel.registerUser(PreferencesHelper(this).mobile, PreferencesHelper(this).mainSyndicate, PreferencesHelper(this).subSyndicate, PreferencesHelper(this).token, PreferencesHelper(this))
                     } else
                         PreferencesHelper(this).token = token

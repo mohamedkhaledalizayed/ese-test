@@ -68,7 +68,7 @@ class AboutFragment : BaseFragment(), Injectable {
             }
         })
 
-        aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate)
+        aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate.toString())
     }
 
     private fun handleViewState(state: AboutViewState) {

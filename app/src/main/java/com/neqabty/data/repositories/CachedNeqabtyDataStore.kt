@@ -11,7 +11,11 @@ import javax.inject.Singleton
 @Singleton
 @OpenForTesting
 class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: NeqabtyCache): NeqabtyDataStore {
-    override fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token: String): Observable<String> {
+    override fun getAllProviderTypes(): Observable<List<ProviderTypeEntitiy>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String): Observable<Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

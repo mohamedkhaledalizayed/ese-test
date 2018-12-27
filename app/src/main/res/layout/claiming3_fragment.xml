@@ -89,6 +89,16 @@
                     android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
 
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvPhotos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:listitem="@layout/photo_item" />
+
                 <Button
                     android:id="@+id/bAddPhoto"
                     android:layout_width="wrap_content"

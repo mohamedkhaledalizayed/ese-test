@@ -78,7 +78,7 @@ class NewsFragment : BaseFragment(), Injectable {
             }
         })
 
-        newsViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate)
+        newsViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
     }
 
     private fun handleViewState(state: NewsViewState) {

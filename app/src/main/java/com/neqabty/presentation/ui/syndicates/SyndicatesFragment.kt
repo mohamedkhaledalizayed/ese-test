@@ -66,8 +66,8 @@ class SyndicatesFragment : BaseFragment(), Injectable {
 
         val adapter = com.neqabty.presentation.ui.syndicates.SyndicatesAdapter(dataBindingComponent, appExecutors) { syndicate ->
             if (syndicate.subSyndicates?.size == 0) {
-                PreferencesHelper(requireContext()).mainSyndicate = syndicate.id.toString()
-                PreferencesHelper(requireContext()).subSyndicate = "0"
+                PreferencesHelper(requireContext()).mainSyndicate = syndicate.id
+                PreferencesHelper(requireContext()).subSyndicate = 0
                 navController().navigate(
                         SyndicatesFragmentDirections.openHome()
                 )

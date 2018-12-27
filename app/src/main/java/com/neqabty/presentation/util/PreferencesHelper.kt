@@ -15,11 +15,11 @@ class PreferencesHelper(context: Context) {
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    var mainSyndicate = preferences.getString(MAIN_SYNDICATE, "")
-        set(value) = preferences.edit().putString(MAIN_SYNDICATE, value).apply()
+    var mainSyndicate = preferences.getInt(MAIN_SYNDICATE, 0)
+        set(value) = preferences.edit().putInt(MAIN_SYNDICATE, value).apply()
 
-    var subSyndicate = preferences.getString(SUB_SYNDICATE, "")
-        set(value) = preferences.edit().putString(SUB_SYNDICATE, value).apply()
+    var subSyndicate = preferences.getInt(SUB_SYNDICATE, 0)
+        set(value) = preferences.edit().putInt(SUB_SYNDICATE, value).apply()
 
 
     var mobile = preferences.getString(MOBILE, "")
@@ -33,7 +33,7 @@ class PreferencesHelper(context: Context) {
 
 
     fun isSyndicateChosen():Boolean{
-        return mainSyndicate.isNotBlank()
+        return mainSyndicate != 0
     }
 
     fun isUserRegistered():Boolean{

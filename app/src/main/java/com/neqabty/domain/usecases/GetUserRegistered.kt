@@ -5,8 +5,8 @@ import com.neqabty.domain.common.Transformer
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetUserRegistered @Inject constructor(transformer: Transformer<String>,
-                                            private val neqabtyRepository: NeqabtyRepository) : UseCase<String>(transformer) {
+class GetUserRegistered @Inject constructor(transformer: Transformer<Unit>,
+                                            private val neqabtyRepository: NeqabtyRepository) : UseCase<Unit>(transformer) {
 
     companion object {
         private const val PARAM_MOBILE = "param:mobile"
@@ -15,18 +15,18 @@ class GetUserRegistered @Inject constructor(transformer: Transformer<String>,
         private const val PARAM_TOKEN = "param:token"
     }
 
-    fun getUserRegistered(mobile: String, mainSyndicateId: String, subSyndicateId: String, token : String): Observable<String> {
-        val data = HashMap<String, String>()
+    fun getUserRegistered(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token : String): Observable<Unit> {
+        val data = HashMap<String, Any>()
         data[PARAM_MOBILE] = mobile
         data[PARAM_MAIN_SYNDICATE] = mainSyndicateId
         data[PARAM_SUB_SYNDICATE] = subSyndicateId
         data[PARAM_TOKEN] = token
         return observable(data)
     }
-    override fun createObservable(data: Map<String, Any>?): Observable<String> {
+    override fun createObservable(data: Map<String, Any>?): Observable<Unit> {
         val mobile = data?.get(GetUserRegistered.PARAM_MOBILE) as String
-        val mainSyndicateId = data?.get(GetUserRegistered.PARAM_MAIN_SYNDICATE) as String
-        val subSyndicateId = data?.get(GetUserRegistered.PARAM_SUB_SYNDICATE) as String
+        val mainSyndicateId = data?.get(GetUserRegistered.PARAM_MAIN_SYNDICATE) as Int
+        val subSyndicateId = data?.get(GetUserRegistered.PARAM_SUB_SYNDICATE) as Int
         val token = data?.get(GetUserRegistered.PARAM_TOKEN) as String
         return neqabtyRepository.registerUser(mobile , mainSyndicateId,subSyndicateId,token)
     }

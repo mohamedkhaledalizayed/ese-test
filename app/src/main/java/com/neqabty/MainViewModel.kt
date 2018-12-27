@@ -18,7 +18,7 @@ class MainViewModel @Inject constructor(val getUserRegistered: GetUserRegistered
         viewState.value = true
     }
 
-    fun registerUser(mobile: String, mainSyndicateId: String, subSyndicateId: String, token: String, prefs: PreferencesHelper) {
+    fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, prefs: PreferencesHelper) {
         addDisposable(getUserRegistered.getUserRegistered(mobile, mainSyndicateId, subSyndicateId, token)
                 .subscribe(
                         {

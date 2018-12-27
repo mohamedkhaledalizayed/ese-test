@@ -19,7 +19,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.AreaUI
-import com.neqabty.presentation.entities.DegreeUI
+import com.neqabty.presentation.entities.ProviderTypeUI
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
@@ -37,12 +37,11 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
 
     lateinit var claimingViewModel: ClaimingViewModel
     var areasResultList: List<AreaUI>? = mutableListOf()
-    var providersTypesResultList: List<DegreeUI>? = mutableListOf()
+    var providersTypesResultList: List<ProviderTypeUI>? = mutableListOf()
     var providersResultList: List<ProviderUI>? = mutableListOf()
 
     var providerTypeID: String = "1"
     var areaID: String = "1"
-
 
     lateinit var pager: ViewPager
     override fun onCreateView(
@@ -82,10 +81,10 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         binding.edNumber.setText(ClaimingData.number)
         binding.edDoctor.setText(ClaimingData.doctorName)
 
-        binding.bNext.setOnClickListener({
+        binding.bNext.setOnClickListener {
             ClaimingData.providerName = (spProvider.selectedItem as ProviderUI).toString()
-            pager.setCurrentItem(2,true)
-        })
+            pager.setCurrentItem(2, true)
+        }
 
         claimingViewModel.getAllContent2("1")
     }
@@ -96,18 +95,27 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         state.areas?.let {
             areasResultList = it
         }
+        state.providerTypes?.let {
+            providersTypesResultList = it
+        }
         state.providers?.let {
             providersResultList = it
         }
-        if (state.providers != null && state.areas != null)
+        if (state.providers != null && state.areas != null && state.providerTypes != null) {
             initializeSpinners()
+            state.areas = null
+            state.providers = null
+        }else if(state.providers != null){
+            renderProviders()
+        }
     }
 
 //region
 
     fun initializeSpinners() {
         renderAreas()
-//        renderProvidersTypes()
+        renderProvidersTypes()
+
         renderProviders()
     }
 
@@ -116,8 +124,24 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         binding.spArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                if (areaID.equals((parent.getItemAtPosition(position) as AreaUI).id.toString()!!))
+                    return
                 areaID = (parent.getItemAtPosition(position) as AreaUI).id.toString()!!
                 renderProviders()
+            }
+        }
+    }
+
+    fun renderProvidersTypes() {
+        binding.spProviderType.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, providersTypesResultList)
+        binding.spProviderType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                if (providerTypeID.equals((parent.getItemAtPosition(position) as ProviderTypeUI).id.toString()!!))
+                    return
+
+                providerTypeID = (parent.getItemAtPosition(position) as ProviderTypeUI).id.toString()!!
+                getProvidersByType()
             }
         }
     }
@@ -137,7 +161,9 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         }
     }
 
-
+    fun getProvidersByType() {
+        claimingViewModel.getProvidersByType(providerTypeID)
+    }
 // endregion
 
 }

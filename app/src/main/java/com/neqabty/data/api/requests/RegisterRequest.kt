@@ -8,10 +8,10 @@ data class RegisterRequest(
     var mobile: String = "",
 
     @SerializedName("main_syndicate")
-    var mainSyndicate: String = "",
+    var mainSyndicate: Int = 0,
 
     @SerializedName("sub_syndicate")
-    var subSyndicate: String = "",
+    var subSyndicate: Int = 0,
 
     @SerializedName("mobile_token")
     var token: String = ""

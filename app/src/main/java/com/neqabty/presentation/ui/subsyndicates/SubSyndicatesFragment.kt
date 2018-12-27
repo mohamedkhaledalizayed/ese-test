@@ -65,8 +65,8 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
 
 
         val adapter = com.neqabty.presentation.ui.subsyndicates.SubSyndicatesAdapter(dataBindingComponent, appExecutors) { subSyndicate ->
-            PreferencesHelper(requireContext()).mainSyndicate = syndicate.id.toString()
-            PreferencesHelper(requireContext()).subSyndicate = subSyndicate.id.toString()
+            PreferencesHelper(requireContext()).mainSyndicate = syndicate.id
+            PreferencesHelper(requireContext()).subSyndicate = subSyndicate.id
             targetFragment?.onActivityResult(targetRequestCode, 200, null)
             this@SubSyndicatesFragment.dismiss()
         }

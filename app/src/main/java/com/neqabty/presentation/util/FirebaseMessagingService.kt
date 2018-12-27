@@ -14,16 +14,9 @@ import com.firebase.jobdispatcher.GooglePlayDriver
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.neqabty.MainActivity
-import com.neqabty.domain.usecases.GetUserRegistered
-import javax.inject.Inject
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
-    @Inject
-    lateinit var getUserRegistered: GetUserRegistered
-    @Inject
-    lateinit var context: Context
-
     /**
      * Called when message is received.
      *
@@ -49,22 +42,26 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         remoteMessage?.data?.isNotEmpty()?.let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
 
-            if (/* Check if data needs to be processed by long running job */ true) {
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-                scheduleJob()
-            } else {
-                // Handle message within 10 seconds
-                handleNow()
-            }
+//            if (/* Check if data needs to be processed by long running job */ true) {
+//                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
+//                scheduleJob()
+//            } else {
+//                // Handle message within 10 seconds
+//                handleNow()
+//            }
+            sendNotification(remoteMessage)
+
         }
 
         // Check if message contains a notification payload.
         remoteMessage?.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
+//            sendNotification(remoteMessage)
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
+//        sendNotification(remoteMessage)
     }
     // [END receive_message]
 
@@ -114,15 +111,19 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
      * @param token The new token.
      */
     private fun sendRegistrationToServer(token: String?) {
-        getUserRegistered.getUserRegistered(PreferencesHelper(context).mobile, PreferencesHelper(context).mainSyndicate, PreferencesHelper(context).subSyndicate, token
-                ?: "")
-                .subscribe(
-                        {
-                            PreferencesHelper(context).token = token
+//        getUserRegistered.getUserRegistered(PreferencesHelper(context).mobile, PreferencesHelper(context).mainSyndicate, PreferencesHelper(context).subSyndicate, token
+//                ?: "")
+//                .subscribe(
+//                        {
+//                            PreferencesHelper(context).token = token
+//
+//                            PreferencesHelper(context).isRegistered = true
+//                        },
+//                        { sendRegistrationToServer(token) })
 
-                            PreferencesHelper(context).isRegistered = true
-                        },
-                        { sendRegistrationToServer(token) })
+        PreferencesHelper(applicationContext).token = token
+
+        PreferencesHelper(applicationContext).isRegistered = false
     }
 
     /**
@@ -130,7 +131,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
      *
      * @param messageBody FCM message body received.
      */
-    private fun sendNotification(messageBody: String) {
+    private fun sendNotification(remoteMessage: RemoteMessage?) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
@@ -140,8 +141,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(com.neqabty.R.drawable.logo)
-                .setContentTitle(getString(com.neqabty.R.string.home_title))
-                .setContentText(messageBody)
+                .setContentTitle(remoteMessage!!.data["title"])
+                .setContentText(remoteMessage!!.data["msg"])
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent)

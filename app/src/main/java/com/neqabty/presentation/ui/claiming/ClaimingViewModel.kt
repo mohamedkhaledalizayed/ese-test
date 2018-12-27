@@ -9,19 +9,21 @@ import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
 @OpenForTesting
-class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, val getAllAreas: GetAllAreas, val getAllSpecializations: GetAllSpecializations, val getAllDegrees: GetAllDegrees, val getAllProviders: GetAllProviders) : BaseViewModel() {
+class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, val getAllAreas: GetAllAreas, val getAllSpecializations: GetAllSpecializations, val getAllDegrees: GetAllDegrees, val getAllProviders: GetAllProviders, val getAllProvidersTypes: GetAllProvidersTypes) : BaseViewModel() {
 
     private val degreeEntityUIMapper = DegreeEntityUIMapper()
     private val specializationEntityUIMapper = SpecializationEntityUIMapper()
     private val areaEntityUIMapper = AreaEntityUIMapper()
     private val doctorEntityUIMapper = DoctorEntityUIMapper()
+    private val providerTypeEntityUIMapper = ProviderTypeEntityUIMapper()
     private val providerEntityUIMapper = ProviderEntityUIMapper()
+
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<ClaimingViewState> = MutableLiveData()
 
     init {
-        viewState.value = ClaimingViewState()
+        viewState.value = ClaimingViewState(isLoading = true)
     }
 
     fun getAllContent1() {
@@ -57,7 +59,7 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                 )
 
 
-        val degreesdDisposable = getAllDegrees.observable()
+        val degreesDisposable = getAllDegrees.observable()
                 .flatMap {
                     it.let {
                         degreeEntityUIMapper.observable(it)
@@ -91,11 +93,11 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
 
         addDisposable(doctorsDisposable)
         addDisposable(areasDisposable)
-        addDisposable(degreesdDisposable)
+        addDisposable(degreesDisposable)
         addDisposable(specializationsDisposable)
     }
 
-    fun getAllContent2(type:String) {
+    fun getAllContent2(type: String) {
         val areasDisposable = getAllAreas.observable()
                 .flatMap {
                     it.let {
@@ -111,6 +113,28 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                         { errorState.value = it }
                 )
 
+        val providersTypesDisposable = getAllProvidersTypes.observable()
+                .flatMap {
+                    it.let {
+                        providerTypeEntityUIMapper.observable(it)
+                    } ?: run {
+                        throw Throwable("Something went wrong :(")
+                    }
+                }.subscribe(
+                        {
+                            viewState.value = viewState.value?.copy(providerTypes = it)
+                            onContent2Received()
+                        },
+                        { errorState.value = it }
+                )
+
+        addDisposable(areasDisposable)
+        addDisposable(providersTypesDisposable)
+        getProvidersByType(type)
+    }
+
+    fun getProvidersByType(type: String) {
+        viewState.value = viewState.value?.copy(isLoading = true)
         val providersDisposable = getAllProviders.getAllProviders(type)
                 .flatMap {
                     it.let {
@@ -120,14 +144,11 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                     }
                 }.subscribe(
                         {
-                            viewState.value = viewState.value?.copy(providers = it)
+                            viewState.value = viewState.value?.copy(isLoading = false,providers = it)
                             onContent2Received()
                         },
                         { errorState.value = it }
                 )
-
-
-        addDisposable(areasDisposable)
         addDisposable(providersDisposable)
     }
 
@@ -137,7 +158,7 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
     }
 
     private fun onContent2Received() {
-        if (viewState.value?.providers != null && viewState.value?.areas != null)
+        if (viewState.value?.providers != null && viewState.value?.areas != null && viewState.value?.providerTypes != null)
             viewState.value = viewState.value?.copy(isLoading = false)
     }
 }
