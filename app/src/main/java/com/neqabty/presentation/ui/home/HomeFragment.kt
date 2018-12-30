@@ -42,8 +42,6 @@ class HomeFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-//        setupToolbar(true)
-//        (getActivity() as AppCompatActivity).getSupportActionBar()?.setDisplayHomeAsUpEnabled(false)
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.home_fragment,
@@ -51,8 +49,6 @@ class HomeFragment : BaseFragment(), Injectable {
                 false,
                 dataBindingComponent
         )
-        initializeViews()
-
         return binding.root
     }
 
@@ -74,16 +70,18 @@ class HomeFragment : BaseFragment(), Injectable {
 //        homeViewModel.getNews()
     }
 
+    override fun onResume() {
+        super.onResume()
+        initializeViews()
+    }
+
     private fun handleViewState(state: HomeViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-//        state.syndicate?.let {
-//            binding.syndicate = it
-//        }
     }
 
     fun initializeViews() {
-        (getActivity() as AppCompatActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-        (getActivity() as AppCompatActivity).getSupportActionBar()?.apply {
+        (activity as AppCompatActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        (activity as AppCompatActivity).supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.mipmap.menu_ic)
         }

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.Claiming4FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -52,12 +53,16 @@ class ClaimingStep4Fragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-//        binding.bLogin.setOnClickListener{findNavController().navigateUp()}
+        binding.bContinue.setOnClickListener {
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
     }
 
 //region
 
 
-// endregion
+    // endregion
+    fun navController() = findNavController()
 
 }

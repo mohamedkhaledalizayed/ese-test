@@ -19,11 +19,11 @@ class PhotosAdapter(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<PhotoUI>() {
             override fun areItemsTheSame(oldItem: PhotoUI, newItem: PhotoUI): Boolean {
-                return oldItem.path == newItem.path
+                return oldItem.name == newItem.name
             }
 
             override fun areContentsTheSame(oldItem: PhotoUI, newItem: PhotoUI): Boolean {
-                return oldItem.path == newItem.path
+                return oldItem.name == newItem.name
             }
         }
 ) {

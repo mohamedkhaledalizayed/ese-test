@@ -179,4 +179,10 @@ class AppModule {
     fun provideGetAllProvidersTypes(neqabtyRepository: NeqabtyRepository): GetAllProvidersTypes {
         return GetAllProvidersTypes(ASyncTransformer(), neqabtyRepository)
     }
+
+    @Singleton
+    @Provides
+    fun provideSendMedicalRequest(neqabtyRepository: NeqabtyRepository): SendMedicalRequest {
+        return SendMedicalRequest(ASyncTransformer(), neqabtyRepository)
+    }
 }

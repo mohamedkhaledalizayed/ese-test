@@ -10,17 +10,15 @@
             type="boolean" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/clHeader"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/ivHeader"
@@ -63,9 +61,6 @@
         <com.neqabty.presentation.ui.common.SwipeLockableViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clHeader" />
-    </android.support.constraint.ConstraintLayout>
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </layout>

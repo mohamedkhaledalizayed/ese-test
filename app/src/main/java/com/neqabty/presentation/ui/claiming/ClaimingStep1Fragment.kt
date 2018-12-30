@@ -98,11 +98,15 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        binding.bNext.setOnClickListener({
+        binding.bNext.setOnClickListener{
             ClaimingData.number = binding.edNumber.text.toString()
             ClaimingData.doctorName = (spDoctorName.selectedItem as DoctorUI).toString()
+            ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
+            ClaimingData.doctorId = (spDoctorName.selectedItem as DoctorUI).id
+            ClaimingData.professionId = (spSpecialization.selectedItem as SpecializationUI).id
+            ClaimingData.degreeId = (spDegree.selectedItem as DegreeUI).id
             pager.setCurrentItem(1,true)
-        })
+        }
     }
 
     fun initializeSpinners() {

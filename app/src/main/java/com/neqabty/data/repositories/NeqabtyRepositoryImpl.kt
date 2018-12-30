@@ -4,6 +4,7 @@ import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.entities.*
 import com.neqabty.testing.OpenForTesting
 import io.reactivex.Observable
+import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -11,6 +12,10 @@ import javax.inject.Singleton
 @OpenForTesting
 class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: CachedNeqabtyDataStore,
                                                 private val remoteDataStore: RemoteNeqabtyDataStore) : NeqabtyRepository {
+    override fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
+        return remoteDataStore.sendMedicalRequest(mainSyndicateId,subSyndicateId,userNumber,email,phone,profession,degree,area,doctor,docsNumber,doc1, doc2, doc3, doc4, doc5)
+    }
+
     override fun getAllProviderTypes(): Observable<List<ProviderTypeEntitiy>> {
         return remoteDataStore.getAllProviderTypes()
     }

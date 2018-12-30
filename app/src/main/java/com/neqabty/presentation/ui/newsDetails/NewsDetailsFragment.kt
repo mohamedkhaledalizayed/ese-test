@@ -28,7 +28,7 @@ class NewsDetailsFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-//        setupToolbar(true)
+//        setupToolbar(navController())
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.news_details_fragment,

@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.claiming
 
 import android.Manifest
 import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -9,12 +10,14 @@ import android.content.pm.PackageManager
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
+import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +28,11 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import java.io.*
+import java.util.*
 import javax.inject.Inject
 
 @OpenForTesting
@@ -79,13 +84,13 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(ClaimingViewModel::class.java)
 
-
         binding.edNumber.setText(ClaimingData.number)
         binding.edDoctor.setText(ClaimingData.doctorName)
         binding.edProvider.setText(ClaimingData.providerName)
 
         binding.bSend.setOnClickListener {
-            pager.setCurrentItem(3, true)
+            val prefs = PreferencesHelper(requireContext())
+            claimingViewModel.sendMedicalRequest(prefs.mainSyndicate,prefs.subSyndicate,ClaimingData.number,"email",prefs.mobile,ClaimingData.professionId,ClaimingData.degreeId,ClaimingData.areaId,ClaimingData.doctorId,photosList.size,getPhoto(0),getPhoto(1),getPhoto(2),getPhoto(3),getPhoto(4))
         }
 
         binding.bAddPhoto.setOnClickListener {
@@ -93,13 +98,26 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
                 addPhoto()
         }
 
-
         val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
+            photosList.remove(photo)
+            adapter.notifyDataSetChanged()
         }
         this.adapter = adapter
         binding.rvPhotos.adapter = adapter
+
+
+        claimingViewModel.viewState.observe(this, Observer {
+            if (it != null) handleViewState(it)
+        })
+
+        binding.progressbar.visibility = View.INVISIBLE
     }
 
+    private fun handleViewState(state: ClaimingViewState) {
+        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        if (!state.isLoading)
+            pager.setCurrentItem(3, true)
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -119,18 +137,10 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
     }
 //region
 
-    fun addPhoto() {
-        showPictureDialog()
-//        val intent = Intent()
-//        intent.type = "image/*"
-//        intent.action = Intent.ACTION_GET_CONTENT
-//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 0)
-    }
-
-    private fun showPictureDialog() {
+    private fun addPhoto() {
         val pictureDialog = AlertDialog.Builder(requireContext())
-        pictureDialog.setTitle("Select Action")
-        val pictureDialogItems = arrayOf("Select photo from gallery", "Capture photo from camera")
+        pictureDialog.setTitle(getString(R.string.select))
+        val pictureDialogItems = arrayOf(getString(R.string.gallery),getString(R.string.camera))
         pictureDialog.setItems(pictureDialogItems
         ) { dialog, which ->
             when (which) {
@@ -145,14 +155,13 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT//
-        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE)
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.select_file)), SELECT_FILE)
     }
 
     private fun cameraIntent() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(intent, REQUEST_CAMERA)
     }
-
 
     fun grantCameraPermission() {
         if (ActivityCompat.checkSelfPermission(this.context!!, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -168,8 +177,10 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         if (data != null) {
             try {
                 val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data.data)
-                photosList.add(PhotoUI(data.data.toString(), data.data.toString()))
+                val photoUI = saveImage(bitmap)
+                photosList.add(photoUI)
                 adapter.submitList(photosList)
+                adapter.notifyDataSetChanged()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -196,10 +207,47 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             e.printStackTrace()
         }
 
-        photosList.add(PhotoUI(destination.absolutePath, name))
+        photosList.add(PhotoUI(Environment.getExternalStorageDirectory().toString(), name))
         adapter.submitList(photosList)
+        adapter.notifyDataSetChanged()
     }
 
+    fun saveImage(myBitmap: Bitmap):PhotoUI {
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        val path : String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
+        val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
+        val directory = File(path)
+        Log.d("fee",directory.toString())
+        if (!directory.exists())
+            directory.mkdirs()
+
+        try
+        {
+            val f = File(directory, name)
+            f.createNewFile()
+            val fo = FileOutputStream(f)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
+            fo.close()
+            Log.d("TAG", "File Saved::--->" + f.absolutePath)
+
+            return PhotoUI(path , name)
+        }
+        catch (e1: IOException) {
+            e1.printStackTrace()
+        }
+
+        return PhotoUI(path , name)
+    }
+
+    fun getPhoto(index :Int):File?{
+        if(photosList.size > index) {
+            var photoUI: PhotoUI? = photosList.get(index)
+            photoUI?.let { return File(photoUI.path, photoUI.name) } ?: null
+        }
+        return null
+    }
 // endregion
 
 }

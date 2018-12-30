@@ -41,7 +41,7 @@ class NewsFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-//        setupToolbar(true)
+        setupToolbar(navController())
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.news_fragment,
@@ -62,7 +62,7 @@ class NewsFragment : BaseFragment(), Injectable {
 
 
         val adapter = NewsAdapter(dataBindingComponent, appExecutors) { newsItem ->
-                        navController().navigate(
+            navController().navigate(
                     NewsFragmentDirections.newsDetails(newsItem)
             )
         }

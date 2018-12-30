@@ -10,7 +10,6 @@ import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBar
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -23,7 +22,6 @@ import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
-import com.neqabty.domain.usecases.GetUserRegistered
 import com.neqabty.presentation.util.PreferencesHelper
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -37,9 +35,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
-    @Inject
-    lateinit var getUserRegistered: GetUserRegistered
-
     lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,16 +46,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 .get(MainViewModel::class.java)
 
         setContentView(R.layout.main_activity)
-        setupViews()
+        setSupportActionBar(toolbar)
         verifyAvailableNetwork()
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
-    override fun onSupportNavigateUp(): Boolean {
-        findNavController(this, R.id.container).navigateUp()
-        return super.onSupportNavigateUp()
-    }
+//    override fun onSupportNavigateUp(): Boolean {
+//        findNavController(this, R.id.container).navigateUp()
+//        return super.onSupportNavigateUp()
+//    }
 
     private fun verifyAvailableNetwork() {
         val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -75,27 +70,17 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     private fun showConnectionAlert() {
         val builder = AlertDialog.Builder(this@MainActivity)
-        builder.setTitle(getString(R.string.no_connection_title))
+        builder.setTitle(getString(R.string.alert_title))
         builder.setMessage(getString(R.string.no_connection_msg))
         builder.setCancelable(false)
         builder.setPositiveButton(getString(R.string.no_connection_retry)) { dialog, which ->
             verifyAvailableNetwork()
         }
-
         builder.setNegativeButton(getString(R.string.no_connection_cancel)) { dialog, which ->
             finishAffinity()
         }
         val dialog: AlertDialog = builder.create()
         dialog.show()
-    }
-
-    private fun setupViews() {
-        setSupportActionBar(toolbar)
-        val actionbar: ActionBar? = supportActionBar
-        actionbar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(R.mipmap.menu_ic)
-        }
     }
 
     private fun startActivities() {
@@ -122,9 +107,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         nav_view.setNavigationItemSelectedListener {
             drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             when (it.itemId) {
-                R.id.homeFragment -> {
-                    drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                    navController.navigate(R.id.homeFragment)
+                R.id.home_fragment -> {
+                    drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 }
                 R.id.news_fragment -> {
                     navController.navigate(R.id.newsFragment)
@@ -146,10 +130,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.aboutapp_fragment -> {
                 }
                 R.id.help_fragment -> {
-                }
-//                R.id.logout_fragment -> {
-//                }
-
+                }//TODO
             }
             drawer_layout.closeDrawer(GravityCompat.START)
             true

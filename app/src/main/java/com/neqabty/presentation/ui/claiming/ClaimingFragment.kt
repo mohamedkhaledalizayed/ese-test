@@ -34,7 +34,7 @@ class ClaimingFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-//        setupToolbar(true)
+        setupToolbar(navController())
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.claiming_fragment,
@@ -60,7 +60,7 @@ class ClaimingFragment : BaseFragment(), Injectable {
         adapter.addFragment(ClaimingStep3Fragment())
         adapter.addFragment(ClaimingStep4Fragment())
         binding.viewpager.adapter = adapter
-        binding.viewpager.setSwipePagingEnabled(true)//TODO
+        binding.viewpager.setSwipePagingEnabled(false)
         binding.indicator.setViewPager(binding.viewpager)
 
 

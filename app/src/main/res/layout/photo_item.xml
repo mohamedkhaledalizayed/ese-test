@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="photo"
             type="com.neqabty.presentation.entities.PhotoUI" />
@@ -13,23 +12,25 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_bg"
         android:layout_margin="@dimen/margin_horizontal_small"
-        android:background="@drawable/rounded_bg">
+        android:padding="@dimen/margin_horizontal_normal"
+        android:elevation="@dimen/elevation_level_one">
 
         <ImageView
             android:id="@+id/ivClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_horizontal_small"
-            android:adjustViewBounds="false"
-            android:cropToPadding="false"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
             android:scaleType="centerInside"
             android:src="@drawable/icon_close"
+            android:layout_marginStart="@dimen/margin_horizontal_normal"
             android:tint="@color/colorAccent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvName"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
@@ -38,12 +39,13 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="@{photo.name}"
-            app:layout_constraintStart_toEndOf="@id/ivClose"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/text_size_medium"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:textColor="@color/colorAccent"
-            android:textSize="@dimen/text_size_medium" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/margin_horizontal_normal"
+            app:layout_constraintStart_toEndOf="@id/ivClose"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

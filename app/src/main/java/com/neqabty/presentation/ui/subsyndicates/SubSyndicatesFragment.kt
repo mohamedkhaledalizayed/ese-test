@@ -7,6 +7,7 @@ import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,9 @@ import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
+import kotlinx.android.synthetic.main.subsyndicates_fragment.*
 import javax.inject.Inject
+
 
 @OpenForTesting
 class SubSyndicatesFragment : DialogFragment(), Injectable {
@@ -72,6 +75,8 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
         }
         this.adapter = adapter
         binding.rvSubSyndicates.adapter = adapter
+        var mDividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        rvSubSyndicates.addItemDecoration(mDividerItemDecoration)
 
         subSyndicatesViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

@@ -5,12 +5,17 @@ import com.neqabty.domain.NeqabtyDataStore
 import com.neqabty.domain.entities.*
 import com.neqabty.testing.OpenForTesting
 import io.reactivex.Observable
+import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 @OpenForTesting
 class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: NeqabtyCache): NeqabtyDataStore {
+    override fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getAllProviderTypes(): Observable<List<ProviderTypeEntitiy>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

@@ -6,10 +6,11 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.*
 import com.neqabty.testing.OpenForTesting
+import java.io.File
 import javax.inject.Inject
 
 @OpenForTesting
-class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, val getAllAreas: GetAllAreas, val getAllSpecializations: GetAllSpecializations, val getAllDegrees: GetAllDegrees, val getAllProviders: GetAllProviders, val getAllProvidersTypes: GetAllProvidersTypes) : BaseViewModel() {
+class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, val getAllAreas: GetAllAreas, val getAllSpecializations: GetAllSpecializations, val getAllDegrees: GetAllDegrees, val getAllProviders: GetAllProviders, val getAllProvidersTypes: GetAllProvidersTypes, val sendMedicalRequest: SendMedicalRequest) : BaseViewModel() {
 
     private val degreeEntityUIMapper = DegreeEntityUIMapper()
     private val specializationEntityUIMapper = SpecializationEntityUIMapper()
@@ -151,6 +152,19 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                 )
         addDisposable(providersDisposable)
     }
+
+
+
+    fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, docsNumber: Int, doc1:File?, doc2:File?, doc3:File?, doc4:File?, doc5:File?) {
+        viewState.value = viewState.value?.copy(isLoading = true)
+        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId,subSyndicateId,userNumber,email,phone, profession, degree, area, doctor, docsNumber,doc1, doc2, doc3, doc4, doc5)
+                .subscribe(
+                        { viewState.value = viewState.value?.copy(isLoading = false) },
+                        { sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, docsNumber,doc1, doc2, doc3, doc4, doc5) }
+                )
+        )
+    }
+
 
     private fun onContent1Received() {
         if (viewState.value?.doctors != null && viewState.value?.areas != null && viewState.value?.specializations != null && viewState.value?.degrees != null)

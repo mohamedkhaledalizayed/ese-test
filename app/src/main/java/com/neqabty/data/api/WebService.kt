@@ -3,9 +3,8 @@ package com.neqabty.data.api
 import com.neqabty.data.api.requests.*
 import com.neqabty.data.entities.*
 import io.reactivex.Observable
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 /**
  * REST API access points
@@ -47,6 +46,10 @@ interface WebService {
 
     @POST("api/v2/users/signup")
     fun registerUser(@Body registerRequest: RegisterRequest): Observable<ApiResponse<Unit>>
+
+    @Multipart
+    @POST("api/v2/medical/request")
+    fun sendMedicalRequest(@Part("json_request") medicalRequest: MedicalRequest,@Part doc1: MultipartBody.Part?,@Part doc2: MultipartBody.Part?,@Part doc3: MultipartBody.Part?,@Part doc4: MultipartBody.Part?,@Part doc5: MultipartBody.Part?): Observable<ApiResponse<Unit>>
 
     @POST("api/Auth/Login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>

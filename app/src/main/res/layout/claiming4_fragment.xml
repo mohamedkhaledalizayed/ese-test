@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:text="@string/congratulations"
+                    android:text="@string/request_sent"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_medium" />
 
@@ -55,20 +55,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:text="@string/loginHint"
+                    android:text="@string/request_status"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_small" />
 
 
                 <Button
-                    android:id="@+id/bLogin"
+                    android:id="@+id/bContinue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/btn"
 
                     android:gravity="center"
                     android:padding="@dimen/margin_horizontal_small"
-                    android:text="@string/login"
+                    android:text="@string/continue_btn"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>

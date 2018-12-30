@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,7 @@ class MobileFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        setupToolbar(navController())
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.mobile_fragment,
@@ -46,7 +48,6 @@ class MobileFragment : BaseFragment(), Injectable {
                 false,
                 dataBindingComponent
         )
-
         return binding.root
     }
 
@@ -68,37 +69,24 @@ class MobileFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
         binding.bSend.setOnClickListener {
-            //TODO validate mobile
-            if (PreferencesHelper(requireContext()).token.isNotBlank())
-                mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
-            else {
-                FirebaseInstanceId.getInstance().instanceId
-                        .addOnCompleteListener(OnCompleteListener { task ->
-                            if (!task.isSuccessful)
-                                return@OnCompleteListener
-                            val token = task.result?.token
-                            mobileViewModel.registerUser(binding.edMobile.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, token
-                                    ?: "", PreferencesHelper(requireContext()))
-                        })
-            }
+            if (isMobileValid(binding.edMobile.text.toString())) {
 
-// PreferencesHelper(requireContext()).mobile = binding.edMobile.text.toString()
-//            navController().navigate(
-//                    MobileFragmentDirections.openClaiming()
-//            )
+                if (PreferencesHelper(requireContext()).token.isNotBlank())
+                    mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
+                else {
+                    FirebaseInstanceId.getInstance().instanceId
+                            .addOnCompleteListener(OnCompleteListener { task ->
+                                if (!task.isSuccessful)
+                                    return@OnCompleteListener
+                                val token = task.result?.token
+                                mobileViewModel.registerUser(binding.edMobile.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, token
+                                        ?: "", PreferencesHelper(requireContext()))
+                            })
+                }
+            }
         }
     }
 
-    //fun getToken():String{
-//
-//    FirebaseInstanceId.getInstance().instanceId
-//            .addOnCompleteListener(OnCompleteListener { task ->
-//                if (!task.isSuccessful)
-//                    return@OnCompleteListener
-//                task.result?.token ?: ""
-//            })
-//
-//}
     private fun handleViewState(state: MobileViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful)
@@ -108,7 +96,26 @@ class MobileFragment : BaseFragment(), Injectable {
     }
 //region
 
+    private fun isMobileValid(mobile: String): Boolean {
+        if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
+            return true
+        else {
+            showInvalidMobileAlert()
+            return false
+        }
+    }
 
+    private fun showInvalidMobileAlert() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(getString(R.string.invalid_mobile))
+        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
 // endregion
 
     fun navController() = findNavController()
