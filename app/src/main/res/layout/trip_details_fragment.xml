@@ -36,7 +36,7 @@
                 android:layout_margin="@dimen/margin_horizontal_small"
                 android:adjustViewBounds="false"
                 android:cropToPadding="false"
-                android:scaleType="centerInside"
+                android:scaleType="fitCenter"
                 app:imageUrl="@{tripItem.img}" />
 
             <ScrollView

@@ -2,9 +2,9 @@ package com.neqabty.presentation.ui.common
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 
-class CustomPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
+class CustomPagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
     val fragments = ArrayList<Fragment>()
     override fun getItem(position: Int): Fragment = fragments.get(position)
 

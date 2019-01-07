@@ -17,6 +17,7 @@ import com.neqabty.databinding.TripsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
@@ -40,7 +41,6 @@ class TripsFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setupToolbar(navController())
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.trips_fragment,
@@ -76,7 +76,7 @@ class TripsFragment : BaseFragment(), Injectable {
             }
         })
 
-        tripsViewModel.getTrips()
+        tripsViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())
     }
 
     private fun handleViewState(state: TripsViewState) {

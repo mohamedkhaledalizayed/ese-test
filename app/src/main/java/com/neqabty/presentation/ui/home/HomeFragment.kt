@@ -19,19 +19,23 @@ import com.neqabty.databinding.HomeFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.ui.news.NewsAdapter
+import com.neqabty.presentation.util.OnBackPressedListener
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
 
 @OpenForTesting
-class HomeFragment : BaseFragment(), Injectable {
+class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<HomeFragmentBinding>()
+    private var adapter by autoCleared<NewsAdapter>()
 
     lateinit var homeViewModel: HomeViewModel
 
@@ -58,6 +62,14 @@ class HomeFragment : BaseFragment(), Injectable {
                 .get(HomeViewModel::class.java)
 
 
+        val adapter = NewsAdapter(dataBindingComponent, appExecutors) { newsItem ->
+            navController().navigate(
+                    HomeFragmentDirections.newsDetails(newsItem)
+            )
+        }
+        this.adapter = adapter
+        binding.rvNews.adapter = adapter
+
         homeViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
@@ -67,7 +79,8 @@ class HomeFragment : BaseFragment(), Injectable {
             }
         })
 
-//        homeViewModel.getNews()
+        homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
+
     }
 
     override fun onResume() {
@@ -77,17 +90,32 @@ class HomeFragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: HomeViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        state.news?.let {
+            adapter.submitList(it)
+        }
     }
 
     fun initializeViews() {
         (activity as AppCompatActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-        (activity as AppCompatActivity).supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(R.mipmap.menu_ic)
-        }
+        (activity as AppCompatActivity).supportActionBar?.apply { setHomeAsUpIndicator(R.mipmap.menu_ic) }
+
+//        NavigationUI.setupWithNavController((activity as AppCompatActivity).nav_view!!, navController())
 //        fragmentManager?.beginTransaction()!!.replace(R.id.contentFragment, NewsFragment()).addToBackStack(null).commit()
+
+        binding.llClaiming.setOnClickListener{
+            navController().navigate(R.id.claimingFragment)
+        }
+        binding.llNews.setOnClickListener{
+            navController().navigate(R.id.newsFragment)
+        }
+        binding.llTrips.setOnClickListener{
+            navController().navigate(R.id.tripsFragment)
+        }
     }
 
+
+    override fun onBackPressed() {
+    }
 
 //region
 

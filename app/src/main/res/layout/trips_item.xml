@@ -12,49 +12,47 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_horizontal_small"
+        android:background="@drawable/bg"
+        android:elevation="@dimen/elevation_level_one"
+        android:paddingStart="@dimen/margin_horizontal_normal"
+        android:paddingTop="@dimen/margin_horizontal_normal"
+        android:paddingBottom="@dimen/margin_horizontal_normal">
 
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/clLogo"
+        <ImageView
+            android:id="@+id/ivLogo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_horizontal_small"
+            android:adjustViewBounds="false"
+            android:cropToPadding="true"
+            android:scaleType="centerInside"
+            app:imageUrl="@{trip.img}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/llTitle"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/ivLogo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_horizontal_small"
-                android:adjustViewBounds="false"
-                android:cropToPadding="false"
-                android:scaleType="centerInside"
-                app:imageUrl="@{trip.img}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </android.support.constraint.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/llTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="3"
-            app:layout_constraintStart_toEndOf="@id/clLogo"
+            app:layout_constraintEnd_toStartOf="@id/tvPrice"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toEndOf="@id/ivLogo"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="0.6"
                 android:maxLines="2"
                 android:text="@{trip.title}"
                 android:textColor="@color/colorPrimary"
@@ -64,12 +62,31 @@
                 android:id="@+id/tvDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="0.8"
                 android:maxLines="2"
                 android:text="@{trip.desc}"
                 android:textSize="@dimen/text_size_small" />
 
         </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/price_bg"
+            android:gravity="center_horizontal|bottom"
+            android:maxLines="1"
+            android:text="@{trip.price}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/llTitle" />
+
 
     </android.support.constraint.ConstraintLayout>
 </layout>

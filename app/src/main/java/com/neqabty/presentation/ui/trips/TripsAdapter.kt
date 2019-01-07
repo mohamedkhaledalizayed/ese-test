@@ -42,6 +42,8 @@ class TripsAdapter(
                 callback?.invoke(it)
             }
         }
+//        val layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, DisplayMetrics.width /4)
+//        binding.clLogo.layoutParams = layoutParams
         return binding
     }
 

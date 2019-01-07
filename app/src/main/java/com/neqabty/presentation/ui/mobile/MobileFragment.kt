@@ -40,7 +40,6 @@ class MobileFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setupToolbar(navController())
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.mobile_fragment,

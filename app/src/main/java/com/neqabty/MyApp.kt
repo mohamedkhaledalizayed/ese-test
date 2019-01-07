@@ -5,7 +5,6 @@ import android.app.Application
 import android.content.Context
 import android.view.WindowManager
 import com.neqabty.presentation.di.AppInjector
-import com.neqabty.presentation.util.Config
 import com.neqabty.presentation.util.DisplayMetrics
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -23,7 +22,6 @@ class MyApp : Application(), HasActivityInjector {
             Timber.plant(Timber.DebugTree())
         }
         AppInjector.init(this)
-        Config.setLocale(Config.LANGUAGE, this)
         DisplayMetrics.setMetrics(getSystemService(Context.WINDOW_SERVICE) as WindowManager)
     }
 

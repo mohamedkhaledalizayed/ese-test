@@ -44,7 +44,7 @@ class SyndicatesFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setupToolbar(null,true,false)
+        setupToolbar(false)
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.syndicates_fragment,

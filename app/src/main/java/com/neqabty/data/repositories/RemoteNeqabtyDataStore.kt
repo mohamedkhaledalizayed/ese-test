@@ -2,9 +2,7 @@ package com.neqabty.data.repositories
 
 import android.util.Log
 import com.neqabty.data.api.WebService
-import com.neqabty.data.api.requests.MedicalRequest
-import com.neqabty.data.api.requests.ProviderRequest
-import com.neqabty.data.api.requests.RegisterRequest
+import com.neqabty.data.api.requests.*
 import com.neqabty.data.mappers.*
 import com.neqabty.domain.NeqabtyDataStore
 import com.neqabty.domain.entities.*
@@ -116,7 +114,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     }
 
     override fun geSyndicateById(id: String): Observable<SyndicateEntity> {
-        return api.getSyndicateById(com.neqabty.data.api.requests.SyndicateRequest(id)).flatMap { syndicate ->
+        return api.getSyndicateById(SyndicateRequest(id)).flatMap { syndicate ->
             Observable.just(syndicateDataEntityMapper.mapFrom(syndicate.data!!))
         }
     }
@@ -124,15 +122,15 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val newsDataEntityMapper = com.neqabty.data.mappers.NewsDataEntityMapper()
 
     override fun getNews(id: String): Observable<List<NewsEntity>> {
-        return api.getAllNews(com.neqabty.data.api.requests.NewsRequest(id)).map { news ->
+        return api.getAllNews(NewsRequest(id)).map { news ->
             news.data?.map { newsDataEntityMapper.mapFrom(it) }
         }
     }
 
     private val tripsDataEntityMapper = com.neqabty.data.mappers.TripsDataEntityMapper()
 
-    override fun getTrips(): Observable<List<TripEntity>> {
-        return api.getAllTrips().map { trips ->
+    override fun getTrips(id : String): Observable<List<TripEntity>> {
+        return api.getAllTrips(TripsRequest(id)).map { trips ->
             trips.data?.map { tripsDataEntityMapper.mapFrom(it) }
         }
     }
@@ -148,7 +146,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val userDataMapper = com.neqabty.data.mappers.UserDataEntityMapper()
 
     override fun signup(email: String, fName: String, lName: String, mobile: String, govId: String, mainSyndicateId: String, subSyndicateId: String, password: String): Observable<UserEntity> {
-        return api.signup(com.neqabty.data.api.requests.SignupRequest(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)).flatMap { userDataResponse ->
+        return api.signup(SignupRequest(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)).flatMap { userDataResponse ->
             Log.e("TAG", userDataResponse.toString())
             Observable.just(userDataMapper.mapFrom(userDataResponse.data!!))
         }
@@ -156,7 +154,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     override fun login(mobile: String, password: String, token: String): Observable<UserEntity> {
 //        return api.login(ApiResponse<LoginRequest>().createRequest(LoginRequest(mobile,password , token))).flatMap { userData ->
-        return api.login(com.neqabty.data.api.requests.LoginRequest(mobile, password, token)).flatMap { userDataResponse ->
+        return api.login(LoginRequest(mobile, password, token)).flatMap { userDataResponse ->
             Log.e("TAG", userDataResponse.toString())
             Observable.just(userDataMapper.mapFrom(userDataResponse.data!!))
         }

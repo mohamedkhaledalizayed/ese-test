@@ -9,7 +9,7 @@ interface NeqabtyDataStore {
     fun geSyndicateById(id : String): Observable<SyndicateEntity>
     fun geSubSyndicatesById(id : String): Observable<List<SyndicateEntity>>
     fun getNews(id :String): Observable<List<NewsEntity>>
-    fun getTrips(): Observable<List<TripEntity>>
+    fun getTrips(id : String): Observable<List<TripEntity>>
     fun getAllDoctors(): Observable<List<DoctorEntity>>
     fun getAllAreas(): Observable<List<AreaEntity>>
     fun getAllDegrees(): Observable<List<DegreeEntity>>

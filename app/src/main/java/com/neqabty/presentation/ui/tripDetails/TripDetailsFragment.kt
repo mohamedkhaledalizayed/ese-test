@@ -28,7 +28,6 @@ class TripDetailsFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-//        setupToolbar(navController())
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.trip_details_fragment,
@@ -43,7 +42,7 @@ class TripDetailsFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val params = TripDetailsFragmentArgs.fromBundle(arguments)
+        val params = TripDetailsFragmentArgs.fromBundle(arguments!!)
         tripItem = params.tripItem
 
         initializeViews()

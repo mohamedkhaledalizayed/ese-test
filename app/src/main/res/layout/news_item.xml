@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="news"
             type="com.neqabty.presentation.entities.NewsUI" />
@@ -12,7 +11,11 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_horizontal_small"
+        android:padding="@dimen/margin_horizontal_normal"
+        android:background="@drawable/bg"
+        android:elevation="@dimen/elevation_level_one">
 
 
         <android.support.constraint.ConstraintLayout
@@ -21,7 +24,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/llTitle"
-            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintHorizontal_weight="1.25"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -32,7 +35,7 @@
                 android:layout_margin="@dimen/margin_horizontal_small"
                 android:adjustViewBounds="false"
                 android:cropToPadding="false"
-                android:scaleType="centerInside"
+                android:scaleType="fitCenter"
                 app:imageUrl="@{news.img}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,9 +47,10 @@
             android:id="@+id/llTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_horizontal_small"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_weight="2.75"
             app:layout_constraintStart_toEndOf="@id/clLogo"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -54,7 +58,8 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="0.6"
                 android:maxLines="2"
                 android:text="@{news.title}"
                 android:textColor="@color/colorPrimary"
@@ -64,7 +69,8 @@
                 android:id="@+id/tvDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="0.8"
                 android:maxLines="2"
                 android:text="@{news.desc}"
                 android:textSize="@dimen/text_size_small" />

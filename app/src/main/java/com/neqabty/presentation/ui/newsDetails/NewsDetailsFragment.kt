@@ -28,7 +28,6 @@ class NewsDetailsFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-//        setupToolbar(navController())
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.news_details_fragment,
@@ -43,7 +42,7 @@ class NewsDetailsFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val params = NewsDetailsFragmentArgs.fromBundle(arguments)
+        val params = NewsDetailsFragmentArgs.fromBundle(arguments!!)
         newsItem = params.newsItem
 
         initializeViews()

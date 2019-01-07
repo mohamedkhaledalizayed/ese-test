@@ -20,8 +20,9 @@ class TripsViewModel @Inject constructor(private val getAllTrips: GetAllTrips) :
         viewState.value = TripsViewState()
     }
 
-    fun getTrips() {
-        addDisposable(getAllTrips.observable()
+    fun getTrips(id :String) {
+
+        addDisposable(getAllTrips.getAllTrips(id)
                 .flatMap {
                     it.let {
                         tripsEntityUIMapper.observable(it)

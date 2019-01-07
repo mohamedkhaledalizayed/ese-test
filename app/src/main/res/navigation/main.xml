@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.neqabty.presentation.ui.login.LoginFragment"
-        android:label=""
+        android:label="@string/login"
         tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/signup"
@@ -27,7 +27,6 @@
         tools:layout="@layout/syndicates_fragment">
         <action
             android:id="@+id/openHome"
-            app:clearTask="true"
             app:destination="@id/homeFragment" />
     </fragment>
 
@@ -88,7 +87,11 @@
         android:id="@+id/homeFragment"
         android:name="com.neqabty.presentation.ui.home.HomeFragment"
         android:label="@string/home_title"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/newsDetails"
+            app:destination="@id/newsDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.neqabty.presentation.ui.about.AboutFragment"

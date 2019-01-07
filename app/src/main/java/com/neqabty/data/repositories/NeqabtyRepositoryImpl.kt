@@ -70,9 +70,9 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
         return cachedDataStore.saveNews(news)
     }
 
-    override fun getTrips(): Observable<List<TripEntity>> {
+    override fun getTrips(id: String): Observable<List<TripEntity>> {
 
-        return remoteDataStore.getTrips()
+        return remoteDataStore.getTrips(id)
     }
 
 

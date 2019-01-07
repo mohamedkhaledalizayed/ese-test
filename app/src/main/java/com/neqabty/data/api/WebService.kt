@@ -23,8 +23,8 @@ interface WebService {
     @POST("api/v2/news/main_syndicate")
     fun getAllNews(@Body newsRequest: NewsRequest): Observable<ApiResponse<List<NewsData>>>
 
-    @GET("api/Trips/All/{key}")
-    fun getAllTrips(): Observable<ApiResponse<List<TripData>>>
+    @POST("api/v2/trips")
+    fun getAllTrips(@Body tripsRequest: TripsRequest): Observable<ApiResponse<List<TripData>>>
 
     @GET("api/v2/medical/areas")
     fun getAllAreas(): Observable<ApiResponse<List<AreaData>>>

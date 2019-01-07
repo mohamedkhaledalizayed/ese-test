@@ -8,7 +8,7 @@ import com.neqabty.data.api.Response
 data class TripData(
         @field:SerializedName("trip_ID")
         var id: Int = 0,
-        @field:SerializedName("trip_img")
+        @field:SerializedName("trip_image")
         var img: String?,
         @field:SerializedName("trip_title")
         var title: String?,
@@ -26,6 +26,6 @@ data class TripData(
         var governId: String?,
         @field:SerializedName("trip_desc")
         var desc: String?,
-        @field:SerializedName("trip_price")
+        @field:SerializedName("hotel_one_person")
         var price: String?
 ): Response()

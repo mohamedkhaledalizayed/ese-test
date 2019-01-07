@@ -28,6 +28,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
+import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
@@ -36,7 +37,11 @@ import java.util.*
 import javax.inject.Inject
 
 @OpenForTesting
-class ClaimingStep3Fragment : BaseFragment(), Injectable {
+class ClaimingStep3Fragment : BaseFragment(), Injectable,OnBackPressedListener {
+    override fun onBackPressed() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 

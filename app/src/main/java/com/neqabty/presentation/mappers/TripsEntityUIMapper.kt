@@ -21,7 +21,7 @@ class TripsEntityUIMapper @Inject constructor() : Mapper<TripEntity, TripUI>() {
                 img = from.img,
                 title = from.title,
                 typeId = from.typeId,
-                price = from.price
+                price = from.price + " ج"
         )
     }
 }

@@ -34,7 +34,6 @@ class ClaimingFragment : BaseFragment(), Injectable {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        setupToolbar(navController())
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.claiming_fragment,
@@ -63,14 +62,6 @@ class ClaimingFragment : BaseFragment(), Injectable {
         binding.viewpager.setSwipePagingEnabled(false)
         binding.indicator.setViewPager(binding.viewpager)
 
-
-//        binding.viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-//            override fun onPageScrollStateChanged(state: Int) {}
-//            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-//            override fun onPageSelected(position: Int) {
-//                binding.tvTitle.setText(Model.values()[position].titleResId)
-//            }
-//        })
     }
 
 

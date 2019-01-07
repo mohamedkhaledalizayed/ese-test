@@ -10,22 +10,25 @@ import android.support.annotation.RequiresApi
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.WindowManager
-import androidx.navigation.Navigation.findNavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
+import com.neqabty.presentation.util.Config
+import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.PreferencesHelper
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.main_activity.*
+import java.util.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
@@ -41,21 +44,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             customiseStatusbar()
+        setContentView(R.layout.main_activity)
 
         mainViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MainViewModel::class.java)
 
-        setContentView(R.layout.main_activity)
         setSupportActionBar(toolbar)
         verifyAvailableNetwork()
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
-
-//    override fun onSupportNavigateUp(): Boolean {
-//        findNavController(this, R.id.container).navigateUp()
-//        return super.onSupportNavigateUp()
-//    }
 
     private fun verifyAvailableNetwork() {
         val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -87,23 +85,22 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         val inflater = navHostFragment.navController.navInflater
         val graph = inflater.inflate(R.navigation.main)
-        val navController = findNavController(this, R.id.container)
-        graph.setDefaultArguments(intent.extras)
+        val navController = Navigation.findNavController(this, R.id.container)
+//        graph.desetDefaultArguments(intent.extras)//TODO
 
-        if (PreferencesHelper(this).isSyndicateChosen())
+        if (PreferencesHelper(this).isSyndicateChosen())//TODO
             graph.startDestination = R.id.homeFragment
         else
             graph.startDestination = R.id.syndicatesFragment
 
         navHostFragment.navController.graph = graph
-
+        supportFragmentManager.beginTransaction().setPrimaryNavigationFragment(navHostFragment).commit()
+        NavigationUI.setupActionBarWithNavController(this, navController, drawer_layout)
+        nav_view.setupWithNavController(navController)
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.syndicatesFragment), drawer_layout)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
         //////////////////////////////////
-//TODO replace
-        setupDrawerToggle()
-        NavigationUI.setupWithNavController(nav_view, navController)
-
         drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        //////////////////////////////////
         nav_view.setNavigationItemSelectedListener {
             drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             when (it.itemId) {
@@ -116,7 +113,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.trips_fragment -> {
                     navController.navigate(R.id.tripsFragment)
                 }
-                R.id.claiming_fragment -> {
+                R.id.claiming_fragment -> {//TODO
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.claimingFragment)
                     else
@@ -136,14 +133,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             true
         }
 
-        setupActionBarWithNavController(this, navController)
-        supportFragmentManager.beginTransaction().setPrimaryNavigationFragment(navHostFragment).commit()
-    }
-
-    private fun setupDrawerToggle() {
-        val mDrawerToggle = object : ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.home_title, R.string.home_title) {}
-        drawer_layout.addDrawerListener(mDrawerToggle)
-        mDrawerToggle.syncState()
     }
 
     private fun getToken() {//TODO
@@ -154,7 +143,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                         return@OnCompleteListener
                     val token = task.result?.token
 
-                    if ( PreferencesHelper(this).mobile.isNotBlank() && !token.equals(PreferencesHelper(this).token)) {//TODO register
+                    if (PreferencesHelper(this).mobile.isNotBlank() && !token.equals(PreferencesHelper(this).token)) {//TODO register
                         mainViewModel.registerUser(PreferencesHelper(this).mobile, PreferencesHelper(this).mainSyndicate, PreferencesHelper(this).subSyndicate, PreferencesHelper(this).token, PreferencesHelper(this))
                     } else
                         PreferencesHelper(this).token = token
@@ -164,12 +153,31 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     //region//
+
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.container), drawer_layout)
+    }
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0];
+            if (currentFragment is OnBackPressedListener)
+                finishAffinity()
+            super.onBackPressed()
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun customiseStatusbar() {
-//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-//        window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.setBackgroundDrawableResource(R.mipmap.full_bg)
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        val context = Config.ContextWrapper.wrap(newBase, Locale(Config.LANGUAGE.toLowerCase()))
+        super.attachBaseContext(context)
     }
     //endregion//
 }
