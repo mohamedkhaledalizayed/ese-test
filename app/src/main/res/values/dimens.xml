@@ -25,4 +25,5 @@
     <dimen name="margin_vertical_large">20dp</dimen>
 
     <dimen name="elevation_level_one">5dp</dimen>
+    <dimen name="round_radius">5dp</dimen>
 </resources>

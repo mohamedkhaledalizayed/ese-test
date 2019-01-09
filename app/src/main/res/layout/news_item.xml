@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="news"
             type="com.neqabty.presentation.entities.NewsUI" />
@@ -13,9 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_horizontal_small"
-        android:padding="@dimen/margin_horizontal_normal"
         android:background="@drawable/bg"
-        android:elevation="@dimen/elevation_level_one">
+        android:elevation="@dimen/elevation_level_one"
+        android:padding="@dimen/margin_horizontal_normal">
 
 
         <android.support.constraint.ConstraintLayout
@@ -28,19 +29,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/ivLogo"
-                android:layout_width="0dp"
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_horizontal_small"
-                android:adjustViewBounds="false"
-                android:cropToPadding="false"
-                android:scaleType="fitCenter"
-                app:imageUrl="@{news.img}"
+                android:elevation="@dimen/elevation_level_one"
+                android:shape="ring"
+                app:cardCornerRadius="@dimen/round_radius"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="false"
+                    android:scaleType="fitCenter"
+                    app:imageUrl="@{news.img}" />
+            </android.support.v7.widget.CardView>
         </android.support.constraint.ConstraintLayout>
 
         <LinearLayout

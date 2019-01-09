@@ -28,7 +28,6 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
-import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
@@ -37,11 +36,7 @@ import java.util.*
 import javax.inject.Inject
 
 @OpenForTesting
-class ClaimingStep3Fragment : BaseFragment(), Injectable,OnBackPressedListener {
-    override fun onBackPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
+class ClaimingStep3Fragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -94,8 +89,11 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable,OnBackPressedListener {
         binding.edProvider.setText(ClaimingData.providerName)
 
         binding.bSend.setOnClickListener {
-            val prefs = PreferencesHelper(requireContext())
-            claimingViewModel.sendMedicalRequest(prefs.mainSyndicate,prefs.subSyndicate,ClaimingData.number,"email",prefs.mobile,ClaimingData.professionId,ClaimingData.degreeId,ClaimingData.areaId,ClaimingData.doctorId,photosList.size,getPhoto(0),getPhoto(1),getPhoto(2),getPhoto(3),getPhoto(4))
+            if (photosList.size > 0) {
+                val prefs = PreferencesHelper(requireContext())
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, ClaimingData.number, "email", prefs.mobile, ClaimingData.professionId, ClaimingData.degreeId, ClaimingData.areaId, ClaimingData.doctorId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+            } else
+                showPickPhotoAlert()
         }
 
         binding.bAddPhoto.setOnClickListener {
@@ -145,7 +143,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable,OnBackPressedListener {
     private fun addPhoto() {
         val pictureDialog = AlertDialog.Builder(requireContext())
         pictureDialog.setTitle(getString(R.string.select))
-        val pictureDialogItems = arrayOf(getString(R.string.gallery),getString(R.string.camera))
+        val pictureDialogItems = arrayOf(getString(R.string.gallery), getString(R.string.camera))
         pictureDialog.setItems(pictureDialogItems
         ) { dialog, which ->
             when (which) {
@@ -217,18 +215,17 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable,OnBackPressedListener {
         adapter.notifyDataSetChanged()
     }
 
-    fun saveImage(myBitmap: Bitmap):PhotoUI {
+    fun saveImage(myBitmap: Bitmap): PhotoUI {
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
-        val path : String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
+        val path: String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
         val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
         val directory = File(path)
-        Log.d("fee",directory.toString())
+        Log.d("fee", directory.toString())
         if (!directory.exists())
             directory.mkdirs()
 
-        try
-        {
+        try {
             val f = File(directory, name)
             f.createNewFile()
             val fo = FileOutputStream(f)
@@ -237,21 +234,33 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable,OnBackPressedListener {
             fo.close()
             Log.d("TAG", "File Saved::--->" + f.absolutePath)
 
-            return PhotoUI(path , name)
-        }
-        catch (e1: IOException) {
+            return PhotoUI(path, name)
+        } catch (e1: IOException) {
             e1.printStackTrace()
         }
 
-        return PhotoUI(path , name)
+        return PhotoUI(path, name)
     }
 
-    fun getPhoto(index :Int):File?{
-        if(photosList.size > index) {
+    fun getPhoto(index: Int): File? {
+        if (photosList.size > index) {
             var photoUI: PhotoUI? = photosList.get(index)
             photoUI?.let { return File(photoUI.path, photoUI.name) } ?: null
         }
         return null
+    }
+
+
+    private fun showPickPhotoAlert() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(getString(R.string.pick_photo))
+        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 // endregion
 

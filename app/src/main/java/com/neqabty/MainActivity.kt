@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         val inflater = navHostFragment.navController.navInflater
         val graph = inflater.inflate(R.navigation.main)
         val navController = Navigation.findNavController(this, R.id.container)
-//        graph.desetDefaultArguments(intent.extras)//TODO
+//        graph.desetDefaultArguments(intent.extras)
 
         if (PreferencesHelper(this).isSyndicateChosen())//TODO
             graph.startDestination = R.id.homeFragment

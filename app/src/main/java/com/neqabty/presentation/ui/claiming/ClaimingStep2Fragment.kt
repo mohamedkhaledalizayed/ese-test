@@ -7,6 +7,7 @@ import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,18 +22,13 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.ProviderTypeUI
 import com.neqabty.presentation.entities.ProviderUI
-import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import kotlinx.android.synthetic.main.claiming2_fragment.*
 import javax.inject.Inject
 
 @OpenForTesting
-class ClaimingStep2Fragment : BaseFragment(), Injectable,OnBackPressedListener {
-    override fun onBackPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
+class ClaimingStep2Fragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -87,16 +83,19 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable,OnBackPressedListener {
         binding.edDoctor.setText(ClaimingData.doctorName)
 
         binding.bNext.setOnClickListener {
-            ClaimingData.providerName = (spProvider.selectedItem as ProviderUI).toString()
-            pager.setCurrentItem(2, true)
-        }
+            if (isDataValid(spProvider.selectedItem)) {
 
+                ClaimingData.providerName = (spProvider.selectedItem as ProviderUI).toString()
+                pager.setCurrentItem(2, true)
+            }
+        }
         claimingViewModel.getAllContent2("1")
     }
 
 
     private fun handleViewState(state: ClaimingViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
         state.areas?.let {
             areasResultList = it
         }
@@ -110,7 +109,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable,OnBackPressedListener {
             initializeSpinners()
             state.areas = null
             state.providers = null
-        }else if(state.providers != null){
+        } else if (state.providers != null) {
             renderProviders()
         }
     }
@@ -168,6 +167,28 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable,OnBackPressedListener {
 
     fun getProvidersByType() {
         claimingViewModel.getProvidersByType(providerTypeID)
+    }
+
+    private fun isDataValid(doctor: Any?): Boolean {
+        return if (doctor != null)
+            true
+        else {
+            showInvalidDataAlert()
+            false
+        }
+    }
+
+
+    private fun showInvalidDataAlert() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(getString(R.string.invalid_data))
+        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 // endregion
 

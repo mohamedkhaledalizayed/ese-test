@@ -7,6 +7,7 @@ import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,18 +23,13 @@ import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.DegreeUI
 import com.neqabty.presentation.entities.DoctorUI
 import com.neqabty.presentation.entities.SpecializationUI
-import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import kotlinx.android.synthetic.main.claiming1_fragment.*
 import javax.inject.Inject
 
 @OpenForTesting
-class ClaimingStep1Fragment : BaseFragment(), Injectable ,OnBackPressedListener{
-    override fun onBackPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
+class ClaimingStep1Fragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -86,6 +82,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable ,OnBackPressedListener{
 
     private fun handleViewState(state: ClaimingViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
         state.doctors?.let {
             doctorsResultList = it
         }
@@ -103,14 +100,16 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable ,OnBackPressedListener{
     }
 
     fun initializeViews() {
-        binding.bNext.setOnClickListener{
-            ClaimingData.number = binding.edNumber.text.toString()
-            ClaimingData.doctorName = (spDoctorName.selectedItem as DoctorUI).toString()
-            ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
-            ClaimingData.doctorId = (spDoctorName.selectedItem as DoctorUI).id
-            ClaimingData.professionId = (spSpecialization.selectedItem as SpecializationUI).id
-            ClaimingData.degreeId = (spDegree.selectedItem as DegreeUI).id
-            pager.setCurrentItem(1,true)
+        binding.bNext.setOnClickListener {
+            if (isDataValid(binding.edNumber.text.toString() , binding.edCardNumber.text.toString(), spDoctorName.selectedItem)) {
+                ClaimingData.number = binding.edNumber.text.toString()
+                ClaimingData.doctorName = (spDoctorName.selectedItem as DoctorUI).toString()
+                ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
+                ClaimingData.doctorId = (spDoctorName.selectedItem as DoctorUI).id
+                ClaimingData.professionId = (spSpecialization.selectedItem as SpecializationUI).id
+                ClaimingData.degreeId = (spDegree.selectedItem as DegreeUI).id
+                pager.setCurrentItem(1, true)
+            }
         }
     }
 
@@ -173,6 +172,28 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable ,OnBackPressedListener{
         }
     }
 
+    private fun isDataValid(memberNumber: String, cardNumber: String, doctor: Any?): Boolean {
+        if (memberNumber.trim().isNotEmpty() && cardNumber.trim().isNotEmpty()
+                && doctor != null)
+            return true
+        else {
+            showInvalidDataAlert()
+            return false
+        }
+    }
+
+
+    private fun showInvalidDataAlert() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(getString(R.string.invalid_data))
+        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
 // endregion
 
 }

@@ -53,7 +53,7 @@ class ClaimingFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        val adapter = CustomPagerAdapter(requireFragmentManager())
+        val adapter = CustomPagerAdapter(childFragmentManager)
         adapter.addFragment(ClaimingStep1Fragment())
         adapter.addFragment(ClaimingStep2Fragment())
         adapter.addFragment(ClaimingStep3Fragment())

@@ -56,6 +56,14 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.mipmap.menu_ic)
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)
@@ -97,13 +105,11 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener {
 
     fun initializeViews() {
         (activity as AppCompatActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-        (activity as AppCompatActivity).supportActionBar?.apply { setHomeAsUpIndicator(R.mipmap.menu_ic) }
-
-//        NavigationUI.setupWithNavController((activity as AppCompatActivity).nav_view!!, navController())
-//        fragmentManager?.beginTransaction()!!.replace(R.id.contentFragment, NewsFragment()).addToBackStack(null).commit()
-
         binding.llClaiming.setOnClickListener{
-            navController().navigate(R.id.claimingFragment)
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(R.id.claimingFragment)
+            else
+                navController().navigate(R.id.mobileFragment)
         }
         binding.llNews.setOnClickListener{
             navController().navigate(R.id.newsFragment)

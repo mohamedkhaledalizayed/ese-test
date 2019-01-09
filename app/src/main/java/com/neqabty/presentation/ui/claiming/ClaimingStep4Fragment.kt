@@ -14,17 +14,12 @@ import com.neqabty.databinding.Claiming4FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
 @OpenForTesting
-class ClaimingStep4Fragment : BaseFragment(), Injectable,OnBackPressedListener {
-    override fun onBackPressed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
+class ClaimingStep4Fragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 

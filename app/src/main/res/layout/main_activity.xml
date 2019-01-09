@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:fitsSystemWindows="true"
+                app:navigationIcon="@mipmap/menu_ic"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="@style/ToolbarTheme" />
 
