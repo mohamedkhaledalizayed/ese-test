@@ -33,6 +33,7 @@
     <string name="aboutApp">عن التطبيق</string>
     <string name="loading">جارى التحميل</string>
     <string name="error">خطأ</string>
+    <string name="error_msg">نأسف لحدوث خطأ بالإتصال</string>
     <string name="sharee">مشاركة</string>
     <string name="news">الأخبار</string>
     <string name="trips">الرحلات</string>
@@ -78,7 +79,8 @@
     <string name="doctorName">اسم الطبيب</string>
     <string name="serviceProviderType">نوع مقدم الخدمة</string>
     <string name="serviceProvider">مقدم الخدمة الطبية</string>
-    <string name="serviceProviderDetails">بيانات مقدم الخدمة الطبية</string>
+    <string name="serviceProviderDetails">بيانات مقدم الخدمة</string>
+    <string name="attachPhotoDetails">بيانات المطالبة الطبية</string>
     <string name="addPhoto">إضافة صورة المطالبة الطبية</string>
     <string name="send">إرسال</string>
     <string name="select">اكمل بإستخدام..</string>
@@ -98,6 +100,7 @@
     <string name="aboutapp_title">عن التطبيق</string>
     <string name="help_title">مساعدة</string>
     <string name="logout_title">خروج</string>
+    <string name="notifications_title">الأشعارات</string>
 
     <string name="alert_title">تنبيه</string>
     <string name="no_connection_msg">من فضلك تحقق من إتصالك بالإنترنت</string>

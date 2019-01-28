@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -20,6 +19,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.news.NewsAdapter
+import com.neqabty.presentation.util.HasOptionsMenu
 import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
 
 @OpenForTesting
-class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener {
+class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasOptionsMenu {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -81,10 +81,13 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener {
         homeViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        homeViewModel.errorState.observe(this, Observer { throwable ->
-            throwable?.let {
-                Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
-            }
+        homeViewModel.errorState.observe(this, Observer { _ ->
+            showConnectionAlert(requireContext(),retryCallback =  {
+                binding.progressbar.visibility = View.VISIBLE
+                homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
+            }, cancelCallback = {
+                navController().navigateUp()
+            })
         })
 
         homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
@@ -123,6 +126,8 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener {
     override fun onBackPressed() {
     }
 
+    override fun showOptionsMenu() {
+    }
 //region
 
 

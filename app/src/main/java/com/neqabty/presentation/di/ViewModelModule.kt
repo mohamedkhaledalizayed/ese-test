@@ -9,6 +9,7 @@ import com.neqabty.presentation.ui.home.HomeViewModel
 import com.neqabty.presentation.ui.login.LoginViewModel
 import com.neqabty.presentation.ui.mobile.MobileViewModel
 import com.neqabty.presentation.ui.news.NewsViewModel
+import com.neqabty.presentation.ui.notifications.NotificationsViewModel
 import com.neqabty.presentation.ui.signup.SignupViewModel
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesViewModel
 import com.neqabty.presentation.ui.syndicates.SyndicatesViewModel
@@ -78,6 +79,12 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(TripsViewModel::class)
     abstract fun bindTripsViewModel(tripsViewModel: TripsViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NotificationsViewModel::class)
+    abstract fun bindNotificationsViewModel(notificationsViewModel: NotificationsViewModel): ViewModel
 
 
     @Binds

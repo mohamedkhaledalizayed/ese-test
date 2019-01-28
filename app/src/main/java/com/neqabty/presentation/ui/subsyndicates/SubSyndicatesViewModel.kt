@@ -21,7 +21,9 @@ class SubSyndicatesViewModel @Inject constructor(private val getSubSyndicates: G
     }
 
     fun getSubSyndicates(id : String) {
-        addDisposable(getSubSyndicates.getSubSyndicateById(id)
+        viewState.value?.subSyndicates?.let {
+            onSubsyndicatesReceived(it)
+        } ?: addDisposable(getSubSyndicates.getSubSyndicateById(id)
                 .flatMap {
                     it.let {
                         syndicateEntityUIMapper.observable(it)

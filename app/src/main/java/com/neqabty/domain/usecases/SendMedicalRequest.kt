@@ -19,6 +19,8 @@ class SendMedicalRequest @Inject constructor(transformer: Transformer<Unit>,
         private const val PARAM_DEGREE = "param:degree"
         private const val PARAM_AREA = "param:area"
         private const val PARAM_DOCTOR = "param:doctor"
+        private const val PARAM_PROVIDER_TYPE = "param:providerType"
+        private const val PARAM_PROVIDER = "param:provider"
         private const val PARAM_DOCS_COUNT = "param:docsNumber"
         private const val PARAM_DOC1 = "param:doc1"
         private const val PARAM_DOC2 = "param:doc2"
@@ -27,7 +29,7 @@ class SendMedicalRequest @Inject constructor(transformer: Transformer<Unit>,
         private const val PARAM_DOC5 = "param:doc5"
     }
 
-    fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree : Int, area: Int, doctor: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?) :Observable<Unit> {
+    fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, providerType: Int, provider: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
         val data = HashMap<String, Any>()
         data[PARAM_MAIN_SYNDICATE] = mainSyndicateId
         data[PARAM_SUB_SYNDICATE] = subSyndicateId
@@ -38,14 +40,17 @@ class SendMedicalRequest @Inject constructor(transformer: Transformer<Unit>,
         data[PARAM_DEGREE] = degree
         data[PARAM_AREA] = area
         data[PARAM_DOCTOR] = doctor
+        data[PARAM_PROVIDER_TYPE] = providerType
+        data[PARAM_PROVIDER] = provider
         data[PARAM_DOCS_COUNT] = docsNumber
-        doc1?.let { data[PARAM_DOC1] = it}
-        doc2?.let { data[PARAM_DOC2] = it}
-        doc3?.let { data[PARAM_DOC3] = it}
-        doc4?.let { data[PARAM_DOC4] = it}
-        doc5?.let { data[PARAM_DOC5] = it}
+        doc1?.let { data[PARAM_DOC1] = it }
+        doc2?.let { data[PARAM_DOC2] = it }
+        doc3?.let { data[PARAM_DOC3] = it }
+        doc4?.let { data[PARAM_DOC4] = it }
+        doc5?.let { data[PARAM_DOC5] = it }
         return observable(data)
     }
+
     override fun createObservable(data: Map<String, Any>?): Observable<Unit> {
         val mainSyndicateId = data?.get(SendMedicalRequest.PARAM_MAIN_SYNDICATE) as Int
         val subSyndicateId = data?.get(SendMedicalRequest.PARAM_SUB_SYNDICATE) as Int
@@ -57,12 +62,14 @@ class SendMedicalRequest @Inject constructor(transformer: Transformer<Unit>,
         val area = data?.get(SendMedicalRequest.PARAM_AREA) as Int
         val doctor = data?.get(SendMedicalRequest.PARAM_DOCTOR) as Int
         val docsNumber = data?.get(SendMedicalRequest.PARAM_DOCS_COUNT) as Int
+        val providerType = data?.get(SendMedicalRequest.PARAM_PROVIDER_TYPE) as Int
+        val provider = data?.get(SendMedicalRequest.PARAM_PROVIDER) as Int
         val doc1 = data?.get(SendMedicalRequest.PARAM_DOC1) as File?
         val doc2 = data?.get(SendMedicalRequest.PARAM_DOC2) as File?
         val doc3 = data?.get(SendMedicalRequest.PARAM_DOC3) as File?
         val doc4 = data?.get(SendMedicalRequest.PARAM_DOC4) as File?
         val doc5 = data?.get(SendMedicalRequest.PARAM_DOC5) as File?
-        return neqabtyRepository.sendMedicalRequest(mainSyndicateId,subSyndicateId,userNumber,email,phone,profession,degree,area,doctor,docsNumber, doc1, doc2, doc3, doc4, doc5)
+        return neqabtyRepository.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 
 }

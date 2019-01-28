@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,6 +62,14 @@ class ClaimingFragment : BaseFragment(), Injectable {
         binding.viewpager.adapter = adapter
         binding.viewpager.setSwipePagingEnabled(false)
         binding.indicator.setViewPager(binding.viewpager)
+
+        binding.viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageSelected(position: Int) {
+                binding.tvTitle.setText(PagerModel.values()[position].titleResId)
+            }
+        })
 
     }
 

@@ -19,7 +19,17 @@ import javax.inject.Singleton
 @Singleton
 @OpenForTesting
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
-    override fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
+
+
+    private val notificationDataEntityMapper = NotificationDataEntityMapper()
+
+    override fun getNotifications(userNumber: String, subSyndicateId: String): Observable<List<NotificationEntity>> {
+        return api.getNotifications(NotificationRequest(userNumber, subSyndicateId)).map { notifications ->
+            notifications.map { notificationDataEntityMapper.mapFrom(it) }
+        }
+    }
+
+    override fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, providerType: Int, provider: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
         var file1: MultipartBody.Part? = null
         var file2: MultipartBody.Part? = null
         var file3: MultipartBody.Part? = null
@@ -47,7 +57,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
         }
 
-        return api.sendMedicalRequest(MedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, docsNumber), file1, file2, file3, file4, file5).map { result ->
+        return api.sendMedicalRequest(MedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, docsNumber), file1, file2, file3, file4, file5).map { result ->
             result.data ?: Unit
         }
     }
@@ -129,7 +139,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     private val tripsDataEntityMapper = com.neqabty.data.mappers.TripsDataEntityMapper()
 
-    override fun getTrips(id : String): Observable<List<TripEntity>> {
+    override fun getTrips(id: String): Observable<List<TripEntity>> {
         return api.getAllTrips(TripsRequest(id)).map { trips ->
             trips.data?.map { tripsDataEntityMapper.mapFrom(it) }
         }

@@ -21,6 +21,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.Claiming3FragmentBinding
@@ -91,7 +92,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         binding.bSend.setOnClickListener {
             if (photosList.size > 0) {
                 val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, ClaimingData.number, "email", prefs.mobile, ClaimingData.professionId, ClaimingData.degreeId, ClaimingData.areaId, ClaimingData.doctorId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, ClaimingData.number, "email", prefs.mobile, ClaimingData.professionId, ClaimingData.degreeId, ClaimingData.areaId, ClaimingData.doctorId,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             } else
                 showPickPhotoAlert()
         }
@@ -113,6 +114,16 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
 
+        claimingViewModel.errorState.observe(this, Observer { _ ->
+            showConnectionAlert(requireContext(),retryCallback =  {
+                binding.progressbar.visibility = View.VISIBLE
+                val prefs = PreferencesHelper(requireContext())
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, ClaimingData.number, "email", prefs.mobile, ClaimingData.professionId, ClaimingData.degreeId, ClaimingData.areaId, ClaimingData.doctorId,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+            }, cancelCallback = {
+                navController().popBackStack()
+                navController().navigate(R.id.homeFragment)
+            })
+        })
         binding.progressbar.visibility = View.INVISIBLE
     }
 
@@ -263,5 +274,6 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         dialog.show()
     }
 // endregion
+fun navController() = findNavController()
 
 }

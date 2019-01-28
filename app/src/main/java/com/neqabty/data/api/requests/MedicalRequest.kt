@@ -22,6 +22,10 @@ data class MedicalRequest(
         var areaId: Int = 0,
         @SerializedName("doctor_id")
         var doctorId: Int = 0,
+        @SerializedName("provider_type_id")
+        var providerTypeId: Int = 0,
+        @SerializedName("provider_id")
+        var providerId: Int = 0,
         @SerializedName("docs_num")
         var docsNumber: Int = 0
 ) : Request()

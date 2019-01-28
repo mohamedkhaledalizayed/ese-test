@@ -21,13 +21,12 @@ class TripsViewModel @Inject constructor(private val getAllTrips: GetAllTrips) :
     }
 
     fun getTrips(id :String) {
-
-        addDisposable(getAllTrips.getAllTrips(id)
+        viewState.value?.trips?.let {
+            onTripsReceived(it)
+        } ?: addDisposable(getAllTrips.getAllTrips(id)
                 .flatMap {
                     it.let {
                         tripsEntityUIMapper.observable(it)
-                    } ?: run {
-                        throw Throwable("Something went wrong :(")
                     }
                 }.subscribe(
                         { onTripsReceived(it) },

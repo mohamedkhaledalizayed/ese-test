@@ -12,8 +12,12 @@ import javax.inject.Singleton
 @OpenForTesting
 class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: CachedNeqabtyDataStore,
                                                 private val remoteDataStore: RemoteNeqabtyDataStore) : NeqabtyRepository {
-    override fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
-        return remoteDataStore.sendMedicalRequest(mainSyndicateId,subSyndicateId,userNumber,email,phone,profession,degree,area,doctor,docsNumber,doc1, doc2, doc3, doc4, doc5)
+    override fun getNotifications(userNumber: String, subSyndicateId: String): Observable<List<NotificationEntity>> {
+        return remoteDataStore.getNotifications(userNumber ,subSyndicateId)
+    }
+
+    override fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, providerType: Int, provider: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
+        return remoteDataStore.sendMedicalRequest(mainSyndicateId,subSyndicateId,userNumber,email,phone,profession,degree,area,doctor,providerType,provider,docsNumber,doc1, doc2, doc3, doc4, doc5)
     }
 
     override fun getAllProviderTypes(): Observable<List<ProviderTypeEntitiy>> {

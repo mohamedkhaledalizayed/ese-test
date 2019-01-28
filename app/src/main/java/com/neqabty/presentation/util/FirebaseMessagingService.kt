@@ -60,6 +60,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun sendNotification(remoteMessage: RemoteMessage?) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//        intent.data = //TODO put data
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT)
 
@@ -67,7 +68,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(com.neqabty.R.drawable.logo)
-                .setContentTitle(remoteMessage!!.notification?.title)
+//                .setContentTitle(remoteMessage!!.data?.get("title"))
+                .setContentTitle(remoteMessage!!.notification?.title)//                .setContentTitle(remoteMessage!!.data?.get("title"))
                 .setContentText(remoteMessage!!.notification?.body)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

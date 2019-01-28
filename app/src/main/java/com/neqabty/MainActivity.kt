@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -13,6 +14,9 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.WindowManager
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -23,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
 import com.neqabty.presentation.util.Config
+import com.neqabty.presentation.util.HasOptionsMenu
 import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.PreferencesHelper
 import dagger.android.DispatchingAndroidInjector
@@ -49,8 +54,13 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         mainViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MainViewModel::class.java)
 
+//        val action: String? = intent?.action
+        val data: Uri? = intent?.data
+
         setSupportActionBar(toolbar)
-        verifyAvailableNetwork()
+//        verifyAvailableNetwork()//TODO
+        getToken()
+        startActivities()
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
@@ -178,6 +188,25 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     override fun attachBaseContext(newBase: Context) {
         val context = Config.ContextWrapper.wrap(newBase, Locale(Config.LANGUAGE.toLowerCase()))
         super.attachBaseContext(context)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var inflater : MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+
+        val item = menu?.findItem(R.id.notifications_fragment)
+
+        var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0];
+        item?.isVisible = currentFragment is HasOptionsMenu
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.notifications_fragment -> { Navigation.findNavController(this, R.id.container).navigate(R.id.notificationsFragment) }
+        }
+        return super.onOptionsItemSelected(item)
     }
     //endregion//
 }

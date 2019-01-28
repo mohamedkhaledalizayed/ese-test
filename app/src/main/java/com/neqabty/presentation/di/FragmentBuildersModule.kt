@@ -7,6 +7,8 @@ import com.neqabty.presentation.ui.login.LoginFragment
 import com.neqabty.presentation.ui.mobile.MobileFragment
 import com.neqabty.presentation.ui.news.NewsFragment
 import com.neqabty.presentation.ui.newsDetails.NewsDetailsFragment
+import com.neqabty.presentation.ui.notificationDetails.NotificationDetailsFragment
+import com.neqabty.presentation.ui.notifications.NotificationsFragment
 import com.neqabty.presentation.ui.signup.SignupFragment
 import com.neqabty.presentation.ui.signup.SignupStep1Fragment
 import com.neqabty.presentation.ui.signup.SignupStep2Fragment
@@ -74,6 +76,12 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeNewsDetailsFragment(): NewsDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeNotificationsFragment(): NotificationsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeNotificationsDetailsFragment(): NotificationDetailsFragment
 
     @ContributesAndroidInjector
     abstract fun contributeHomeFragment(): HomeFragment

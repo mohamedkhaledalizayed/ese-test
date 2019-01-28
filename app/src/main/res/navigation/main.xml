@@ -37,9 +37,9 @@
         tools:layout="@layout/mobile_fragment">
         <action
             android:id="@+id/openClaiming"
+            app:destination="@id/claimingFragment"
             app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false"
-            app:destination="@id/claimingFragment" />
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/claimingFragment"
@@ -47,6 +47,24 @@
         android:label="@string/medicalRequest"
         tools:layout="@layout/claiming_fragment" />
 
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.neqabty.presentation.ui.notifications.NotificationsFragment"
+        android:label="@string/notifications_title"
+        tools:layout="@layout/notifications_fragment">
+        <action
+            android:id="@+id/notificationDetails"
+            app:destination="@id/notificationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationDetailsFragment"
+        android:name="com.neqabty.presentation.ui.notificationDetails.NotificationDetailsFragment"
+        android:label="@string/notifications_title"
+        tools:layout="@layout/notification_details_fragment">
+        <argument
+            android:name="notificationItem"
+            app:argType="com.neqabty.presentation.entities.NotificationUI" />
+    </fragment>
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.neqabty.presentation.ui.news.NewsFragment"
@@ -87,7 +105,7 @@
         android:id="@+id/homeFragment"
         android:name="com.neqabty.presentation.ui.home.HomeFragment"
         android:label="@string/home_title"
-        tools:layout="@layout/home_fragment" >
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/newsDetails"
             app:destination="@id/newsDetailsFragment" />

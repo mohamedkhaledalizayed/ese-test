@@ -13,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.Claiming2FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -73,10 +73,14 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         claimingViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        claimingViewModel.errorState.observe(this, Observer { throwable ->
-            throwable?.let {
-                Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
-            }
+        claimingViewModel.errorState.observe(this, Observer { _ ->
+            showConnectionAlert(requireContext(),retryCallback =  {
+                binding.progressbar.visibility = View.VISIBLE
+                claimingViewModel.getAllContent2("1")
+            }, cancelCallback = {
+                navController().popBackStack()
+                navController().navigate(R.id.homeFragment)
+            })
         })
 
         binding.edNumber.setText(ClaimingData.number)
@@ -84,7 +88,8 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
 
         binding.bNext.setOnClickListener {
             if (isDataValid(spProvider.selectedItem)) {
-
+                ClaimingData.providerTypeId = (spProviderType.selectedItem as ProviderTypeUI).id
+                ClaimingData.areaId = (spProvider.selectedItem as ProviderUI).id
                 ClaimingData.providerName = (spProvider.selectedItem as ProviderUI).toString()
                 pager.setCurrentItem(2, true)
             }
@@ -191,5 +196,6 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         dialog.show()
     }
 // endregion
+fun navController() = findNavController()
 
 }

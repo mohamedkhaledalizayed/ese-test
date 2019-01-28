@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -64,12 +63,14 @@ class AboutFragment : BaseFragment(), Injectable {
         aboutViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        aboutViewModel.errorState.observe(this, Observer { throwable ->
-            throwable?.let {
-                Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
-            }
+        aboutViewModel.errorState.observe(this, Observer { _ ->
+            showConnectionAlert(requireContext(),retryCallback =  {
+                binding.progressbar.visibility = View.VISIBLE
+                aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate.toString())
+            }, cancelCallback = {
+                navController().navigateUp()
+            })
         })
-
         aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate.toString())
     }
 

@@ -39,7 +39,6 @@ class AppModule {
 
         val client: OkHttpClient = OkHttpClient.Builder().apply {
             this.addInterceptor(interceptor)
-//            this.followRedirects(true)
         }.build()
 
         return Retrofit.Builder()
@@ -178,6 +177,12 @@ class AppModule {
     @Provides
     fun provideGetAllProvidersTypes(neqabtyRepository: NeqabtyRepository): GetAllProvidersTypes {
         return GetAllProvidersTypes(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetNotifications(neqabtyRepository: NeqabtyRepository): GetNotifications {
+        return GetNotifications(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

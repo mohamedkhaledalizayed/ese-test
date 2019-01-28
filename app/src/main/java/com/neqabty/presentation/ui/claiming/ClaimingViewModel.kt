@@ -32,8 +32,6 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                 .flatMap {
                     it.let {
                         doctorEntityUIMapper.observable(it)
-                    } ?: run {
-                        throw Throwable("Something went wrong :(")
                     }
                 }.subscribe(
                         {
@@ -48,8 +46,6 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                 .flatMap {
                     it.let {
                         areaEntityUIMapper.observable(it)
-                    } ?: run {
-                        throw Throwable("Something went wrong :(")
                     }
                 }.subscribe(
                         {
@@ -64,8 +60,6 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                 .flatMap {
                     it.let {
                         degreeEntityUIMapper.observable(it)
-                    } ?: run {
-                        throw Throwable("Something went wrong :(")
                     }
                 }.subscribe(
                         {
@@ -80,8 +74,6 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                 .flatMap {
                     it.let {
                         specializationEntityUIMapper.observable(it)
-                    } ?: run {
-                        throw Throwable("Something went wrong :(")
                     }
                 }.subscribe(
                         {
@@ -91,11 +83,21 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                         { errorState.value = it }
                 )
 
+        viewState.value?.doctors?.let {
+            onContent1Received()
+        } ?: addDisposable(doctorsDisposable)
 
-        addDisposable(doctorsDisposable)
-        addDisposable(areasDisposable)
-        addDisposable(degreesDisposable)
-        addDisposable(specializationsDisposable)
+        viewState.value?.areas?.let {
+            onContent1Received()
+        } ?: addDisposable(areasDisposable)
+
+        viewState.value?.degrees?.let {
+            onContent1Received()
+        } ?: addDisposable(degreesDisposable)
+
+        viewState.value?.specializations?.let {
+            onContent1Received()
+        } ?: addDisposable(specializationsDisposable)
     }
 
     fun getAllContent2(type: String) {
@@ -129,8 +131,14 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                         { errorState.value = it }
                 )
 
-        addDisposable(areasDisposable)
-        addDisposable(providersTypesDisposable)
+        viewState.value?.areas?.let {
+            onContent2Received()
+        } ?: addDisposable(areasDisposable)
+
+        viewState.value?.providerTypes?.let {
+            onContent2Received()
+        } ?: addDisposable(providersTypesDisposable)
+
         getProvidersByType(type)
     }
 
@@ -145,22 +153,23 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                     }
                 }.subscribe(
                         {
-                            viewState.value = viewState.value?.copy(isLoading = false,providers = it)
+                            viewState.value = viewState.value?.copy(isLoading = false, providers = it)
                             onContent2Received()
                         },
                         { errorState.value = it }
                 )
-        addDisposable(providersDisposable)
+        viewState.value?.providers?.let {
+            onContent2Received()
+        } ?: addDisposable(providersDisposable)
     }
 
 
-
-    fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, docsNumber: Int, doc1:File?, doc2:File?, doc3:File?, doc4:File?, doc5:File?) {
+    fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, providerType: Int, provider: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId,subSyndicateId,userNumber,email,phone, profession, degree, area, doctor, docsNumber,doc1, doc2, doc3, doc4, doc5)
+        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, docsNumber, doc1, doc2, doc3, doc4, doc5)
                 .subscribe(
                         { viewState.value = viewState.value?.copy(isLoading = false) },
-                        { sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, docsNumber,doc1, doc2, doc3, doc4, doc5) }
+                        { errorState.value = it }
                 )
         )
     }

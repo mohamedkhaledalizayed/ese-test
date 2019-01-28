@@ -20,6 +20,9 @@ interface WebService {
     @POST("api/v2/Syndicates/Sub/All/byMain")
     fun getSubSyndicatesById(@Body subSyndicateRequest: SubSyndicateRequest): Observable<ApiResponse<List<SyndicateData>>>
 
+    @POST("api/v2/medical/request/code")
+    fun getNotifications(@Body notificationRequest: NotificationRequest): Observable<List<NotificationData>>
+
     @POST("api/v2/news/main_syndicate")
     fun getAllNews(@Body newsRequest: NewsRequest): Observable<ApiResponse<List<NewsData>>>
 

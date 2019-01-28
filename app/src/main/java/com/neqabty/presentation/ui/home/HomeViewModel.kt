@@ -21,7 +21,9 @@ class HomeViewModel @Inject constructor(private val getAllNews: GetAllNews) : Ba
     }
 
     fun getNews(id:String) {
-        addDisposable(getAllNews.getAllNews(id)
+        viewState.value?.news?.let {
+            onNewsReceived(it)
+        } ?: addDisposable(getAllNews.getAllNews(id)
                 .flatMap {
                     it.let {
                         newsEntityUIMapper.observable(it)

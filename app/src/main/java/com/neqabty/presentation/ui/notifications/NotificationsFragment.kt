@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.trips
+package com.neqabty.presentation.ui.notifications
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
-import com.neqabty.databinding.TripsFragmentBinding
+import com.neqabty.databinding.NotificationsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
@@ -21,17 +21,18 @@ import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
+
 @OpenForTesting
-class TripsFragment : BaseFragment(), Injectable {
+class NotificationsFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    var binding by autoCleared<TripsFragmentBinding>()
-    private var adapter by autoCleared<TripsAdapter>()
+    var binding by autoCleared<NotificationsFragmentBinding>()
+    private var adapter by autoCleared<NotificationsAdapter>()
 
-    lateinit var tripsViewModel: TripsViewModel
+    lateinit var notificationsViewModel: NotificationsViewModel
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -42,7 +43,7 @@ class TripsFragment : BaseFragment(), Injectable {
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.trips_fragment,
+                R.layout.notifications_fragment,
                 container,
                 false,
                 dataBindingComponent
@@ -53,37 +54,35 @@ class TripsFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        tripsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(TripsViewModel::class.java)
+        notificationsViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(NotificationsViewModel::class.java)
 
         initializeViews()
-
-
-        val adapter = com.neqabty.presentation.ui.trips.TripsAdapter(dataBindingComponent, appExecutors) { trip ->
+        val adapter = NotificationsAdapter(dataBindingComponent, appExecutors) { notificationItem ->
             navController().navigate(
-                    TripsFragmentDirections.tripDetails(trip))
+                    NotificationsFragmentDirections.notificationDetails(notificationItem)
+            )
         }
         this.adapter = adapter
-        binding.rvTrips.adapter = adapter
+        binding.rvNotifications.adapter = adapter
 
-        tripsViewModel.viewState.observe(this, Observer {
+        notificationsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        tripsViewModel.errorState.observe(this, Observer { _ ->
+        notificationsViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                tripsViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())
+                notificationsViewModel.getNotifications("254851", PreferencesHelper(requireContext()).subSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
-
-        tripsViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())
+        notificationsViewModel.getNotifications("254851", PreferencesHelper(requireContext()).subSyndicate.toString())
     }
 
-    private fun handleViewState(state: TripsViewState) {
+    private fun handleViewState(state: NotificationsViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        state.trips?.let {
+        state.notifications?.let {
             adapter.submitList(it)
         }
     }
@@ -92,9 +91,7 @@ class TripsFragment : BaseFragment(), Injectable {
     }
 
 
-//region
-
-
+    //region
 // endregion
 
     fun navController() = findNavController()

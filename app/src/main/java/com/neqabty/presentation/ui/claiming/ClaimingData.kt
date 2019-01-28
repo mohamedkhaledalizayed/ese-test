@@ -5,6 +5,8 @@ class ClaimingData{
         var number : String = ""
         var doctorName : String = ""
         var providerName : String = ""
+        var providerId : Int = 0
+        var providerTypeId : Int = 0
         var doctorId : Int = 0
         var professionId : Int = 0
         var degreeId : Int = 0

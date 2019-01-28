@@ -10,7 +10,6 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -58,10 +57,13 @@ class MobileFragment : BaseFragment(), Injectable {
         mobileViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        mobileViewModel.errorState.observe(this, Observer { throwable ->
-            throwable?.let {
-                Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
-            }
+        mobileViewModel.errorState.observe(this, Observer { _ ->
+            showConnectionAlert(requireContext(),retryCallback =  {
+                binding.progressbar.visibility = View.VISIBLE
+                mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
+            }, cancelCallback = {
+                navController().navigateUp()
+            })
         })
         initializeViews()
     }

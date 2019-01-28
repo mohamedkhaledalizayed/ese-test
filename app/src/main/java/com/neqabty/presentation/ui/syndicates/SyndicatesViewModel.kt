@@ -8,7 +8,6 @@ import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.mappers.SyndicateEntityUIMapper
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
-import com.neqabty.presentation.ui.syndicates.SyndicatesViewState
 
 @OpenForTesting
 class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetAllSyndicates) : BaseViewModel() {
@@ -22,12 +21,12 @@ class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetA
     }
 
     fun getSyndicates() {
-        addDisposable(getAllSyndicates.observable()
+        viewState.value?.syndicates?.let {
+            onSyndicatesReceived(it)
+        } ?: addDisposable(getAllSyndicates.observable()
                 .flatMap {
                     it.let {
                         syndicateEntityUIMapper.observable(it)
-                    } ?: run {
-                        throw Throwable("Something went wrong :(")
                     }
                 }.subscribe(
                         { onSyndicatesReceived(it) },

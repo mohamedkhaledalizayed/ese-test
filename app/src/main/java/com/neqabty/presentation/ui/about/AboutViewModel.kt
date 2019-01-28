@@ -21,12 +21,12 @@ class AboutViewModel @Inject constructor(private val getSyndicate: GetSyndicate)
     }
 
     fun getSyndicate(id : String) {
-        addDisposable(getSyndicate.getSyndicateById(id)
+        viewState.value?.syndicate?.let {
+            onSyndicateReceived(it)
+        } ?: addDisposable(getSyndicate.getSyndicateById(id)
                 .map {
                     it.let {
                         syndicateEntityUIMapper.mapFrom(it)
-                    } ?: run {
-                        throw Throwable("Something went wrong :(")
                     }
                 }.subscribe(
                         { onSyndicateReceived(it) },
@@ -36,6 +36,25 @@ class AboutViewModel @Inject constructor(private val getSyndicate: GetSyndicate)
                         }
                 )
         )
+
+//        if(viewState.value?.syndicate != null)
+//            onSyndicateReceived(viewState.value?.syndicate as SyndicateUI)
+//        else
+//            addDisposable(getSyndicate.getSyndicateById(id)
+//                .map {
+//                    it.let {
+//                        syndicateEntityUIMapper.mapFrom(it)
+//                    } ?: run {
+//                        throw Throwable("Something went wrong :(")
+//                    }
+//                }.subscribe(
+//                        { onSyndicateReceived(it) },
+//                        {
+//                            viewState.value = viewState.value?.copy(isLoading = false)
+//                            errorState.value = it
+//                        }
+//                )
+//        )
     }
 
 

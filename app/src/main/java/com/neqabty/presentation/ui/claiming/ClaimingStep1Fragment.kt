@@ -13,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.Claiming1FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -71,10 +71,14 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         claimingViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        claimingViewModel.errorState.observe(this, Observer { throwable ->
-            throwable?.let {
-                Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
-            }
+        claimingViewModel.errorState.observe(this, Observer { _ ->
+            showConnectionAlert(requireContext(),retryCallback =  {
+                binding.progressbar.visibility = View.VISIBLE
+                claimingViewModel.getAllContent1()
+            }, cancelCallback = {
+                navController().popBackStack()
+                navController().navigate(R.id.homeFragment)
+            })
         })
         initializeViews()
         claimingViewModel.getAllContent1()
@@ -195,5 +199,6 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         dialog.show()
     }
 // endregion
+fun navController() = findNavController()
 
 }
