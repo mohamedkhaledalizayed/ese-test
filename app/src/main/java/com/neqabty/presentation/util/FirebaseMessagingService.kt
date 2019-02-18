@@ -19,19 +19,6 @@ import com.neqabty.R
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-//        remoteMessage?.data?.isNotEmpty()?.let {
-////            if (/* Check if data needs to be processed by long running job */ true) {
-////                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-////                scheduleJob()
-////            } else {
-////                // Handle message within 10 seconds
-////                handleNow()
-////            }
-//        }
-//
-//        remoteMessage?.notification?.let {
-////            sendNotification(remoteMessage)
-//        }
         sendNotification(remoteMessage)
     }
 
@@ -60,16 +47,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun sendNotification(remoteMessage: RemoteMessage?) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//        intent.data = //TODO put data
+        intent.putExtra("request_id", remoteMessage!!.data?.get("request_id"))
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT)
-
         val channelId = getString(com.neqabty.R.string.app_name)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(com.neqabty.R.drawable.logo)
-//                .setContentTitle(remoteMessage!!.data?.get("title"))
-                .setContentTitle(remoteMessage!!.notification?.title)//                .setContentTitle(remoteMessage!!.data?.get("title"))
+                .setContentTitle(remoteMessage!!.notification?.title)
                 .setContentText(remoteMessage!!.notification?.body)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

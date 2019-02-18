@@ -20,12 +20,34 @@ import javax.inject.Singleton
 @OpenForTesting
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
 
+    private val medicalProviderDataEntityMapper = MedicalProviderDataEntityMapper()
+
+    override fun getMedicalProviders(categoryId: String): Observable<List<MedicalProviderEntity>> {
+        return api.getMedicalProviders(categoryId.toInt()).map { medicalProviders ->
+            medicalProviders.data?.map { medicalProviderDataEntityMapper.mapFrom(it) }
+        }
+    }
+
+    private val memberDataEntityMapper = MemberDataEntityMapper()
+
+    override fun validateUser(userNumber: String): Observable<MemberEntity> {
+        return api.validateUser(ValidationRequest(userNumber.toInt())).flatMap { user ->
+            Observable.just(memberDataEntityMapper.mapFrom(user))
+        }
+    }
+
 
     private val notificationDataEntityMapper = NotificationDataEntityMapper()
 
     override fun getNotifications(userNumber: String, subSyndicateId: String): Observable<List<NotificationEntity>> {
         return api.getNotifications(NotificationRequest(userNumber, subSyndicateId)).map { notifications ->
             notifications.map { notificationDataEntityMapper.mapFrom(it) }
+        }
+    }
+
+    override fun getNotificationDetails(id: String): Observable<NotificationEntity> {
+        return api.getNotificationDetails(NotificationDetailsRequest(id)).flatMap { notification ->
+            Observable.just(notificationDataEntityMapper.mapFrom(notification))
         }
     }
 
@@ -70,8 +92,8 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
         }
     }
 
-    override fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String): Observable<Unit> {
-        return api.registerUser(RegisterRequest(mobile, mainSyndicateId, subSyndicateId, token)).map { result ->
+    override fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, userNumber: String): Observable<Unit> {
+        return api.registerUser(RegisterRequest(mobile, mainSyndicateId, subSyndicateId, token,userNumber)).map { result ->
             result.data ?: Unit
         }
     }

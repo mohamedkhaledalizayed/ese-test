@@ -12,6 +12,18 @@ import javax.inject.Singleton
 @Singleton
 @OpenForTesting
 class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: NeqabtyCache): NeqabtyDataStore {
+    override fun getMedicalProviders(categoryId: String): Observable<List<MedicalProviderEntity>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun validateUser(userNumber: String): Observable<MemberEntity> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getNotificationDetails(id: String): Observable<NotificationEntity> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getNotifications(userNumber: String, subSyndicateId: String): Observable<List<NotificationEntity>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -24,7 +36,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String): Observable<Unit> {
+    override fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, userNumber: String): Observable<Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

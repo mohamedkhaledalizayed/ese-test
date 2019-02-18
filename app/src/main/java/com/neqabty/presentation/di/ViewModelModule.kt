@@ -7,8 +7,10 @@ import com.neqabty.presentation.ui.about.AboutViewModel
 import com.neqabty.presentation.ui.claiming.ClaimingViewModel
 import com.neqabty.presentation.ui.home.HomeViewModel
 import com.neqabty.presentation.ui.login.LoginViewModel
+import com.neqabty.presentation.ui.medicalProviders.MedicalProvidersViewModel
 import com.neqabty.presentation.ui.mobile.MobileViewModel
 import com.neqabty.presentation.ui.news.NewsViewModel
+import com.neqabty.presentation.ui.notificationDetails.NotificationDetailsViewModel
 import com.neqabty.presentation.ui.notifications.NotificationsViewModel
 import com.neqabty.presentation.ui.signup.SignupViewModel
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesViewModel
@@ -85,6 +87,18 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(NotificationsViewModel::class)
     abstract fun bindNotificationsViewModel(notificationsViewModel: NotificationsViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NotificationDetailsViewModel::class)
+    abstract fun bindNotificationDetailsViewModel(notificationDetailsViewModel: NotificationDetailsViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MedicalProvidersViewModel::class)
+    abstract fun bindMedicalProvidersViewModel(medicalProvidersViewModel: MedicalProvidersViewModel): ViewModel
 
 
     @Binds

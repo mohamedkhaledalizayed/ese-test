@@ -14,9 +14,15 @@ import javax.inject.Inject
 @OpenForTesting
 class FragmentBindingAdapters @Inject constructor(val fragment: Fragment) {
     @BindingAdapter("imageUrl")
-    fun bindImage(imageView: ImageView, url: String?) {
+    fun bindImageURL(imageView: ImageView, url: String?) {
         url?.let {
             Glide.with(fragment).load(Uri.parse(url)).into(imageView)
+        }
+    }
+    @BindingAdapter("srcImage")
+    fun bindImageSrc(imageView: ImageView, src: Int?) {
+        src?.let {
+            Glide.with(fragment).load(src).into(imageView)
         }
     }
 }

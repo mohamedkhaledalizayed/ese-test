@@ -26,6 +26,7 @@ import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import kotlinx.android.synthetic.main.claiming2_fragment.*
 import javax.inject.Inject
+import com.neqabty.presentation.util.PreferencesHelper
 
 @OpenForTesting
 class ClaimingStep2Fragment : BaseFragment(), Injectable {
@@ -42,6 +43,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
     var providersResultList: List<ProviderUI>? = mutableListOf()
 
     var providerTypeID: String = "1"
+    var providerID: String = "1"
     var areaID: String = "1"
 
     lateinit var pager: ViewPager
@@ -83,13 +85,13 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
             })
         })
 
-        binding.edNumber.setText(ClaimingData.number)
+        binding.edNumber.setText(PreferencesHelper(requireContext()).user)
         binding.edDoctor.setText(ClaimingData.doctorName)
 
         binding.bNext.setOnClickListener {
             if (isDataValid(spProvider.selectedItem)) {
                 ClaimingData.providerTypeId = (spProviderType.selectedItem as ProviderTypeUI).id
-                ClaimingData.areaId = (spProvider.selectedItem as ProviderUI).id
+                ClaimingData.providerId = (spProvider.selectedItem as ProviderUI).id
                 ClaimingData.providerName = (spProvider.selectedItem as ProviderUI).toString()
                 pager.setCurrentItem(2, true)
             }

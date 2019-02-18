@@ -16,6 +16,9 @@
         android:id="@+id/claiming_fragment"
         android:title="@string/claiming_title" />
     <item
+        android:id="@+id/medical_fragment"
+        android:title="@string/medical_title" />
+    <item
         android:id="@+id/about_fragment"
         android:title="@string/about_title" />
 

@@ -56,8 +56,16 @@
     <string name="continue_btn">متابعة</string>
     <string name="loginHint">يمكنك الآن الدخول على التطبيق و الاستمتاع بخدمات نقابتك</string>
 
+    <string name="doctors">الأطباء</string>
+    <string name="hospitals">المستشفيات</string>
+    <string name="scan_centers">مراكز الأشعة</string>
+    <string name="pharmacies">الصيدليات</string>
+    <string name="medical_services">خدمات طبية</string>
+    <string name="laboratories">معامل التحاليل</string>
+
     <string name="mobile_title">تسجيل دخول</string>
     <string name="enter_mobile">ادخل رقم الموبايل الخاص بك</string>
+    <string name="enter_member_number">ادخل رقم العضوية</string>
     <string name="medicalRequest">تقديم مطالبة طبية</string>
     <string name="syndicateNumber">رقم العضوية</string>
     <string name="cardNumber">رقم البطاقة الطبية</string>
@@ -94,6 +102,7 @@
     <string name="news_title">الأخبار</string>
     <string name="trips_title">الرحلات</string>
     <string name="claiming_title">المطالبات طبية</string>
+    <string name="medical_title">الدليل الطبي</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">اتصل بنا</string>
@@ -114,4 +123,10 @@
     <string name="address_title">العنوان: </string>
     <string name="phone_title">التليفون: </string>
     <string name="email_title">البريد الالكترونى: </string>
+
+    <string name="date_title">تاريخ الطلب: </string>
+    <string name="doctor_title">الطبيب: </string>
+    <string name="provider_title">مقدم الخدمة: </string>
+    <string name="status_title">حالة الطلب: </string>
+    <string name="approval_title">رقم الموافقة: </string>
 </resources>

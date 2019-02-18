@@ -9,12 +9,20 @@ data class NotificationUI(
         var userNumber: String?,
         var professionID: String?,
         var status: String?,
+        var createdAt: String?,
+        var approvalNumber: String?,
+        var approvalImage: String?,
         var doctor: String?,
+        var provider: String?,
         var comment: String?,
         var doc1: String?
 ):Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -30,7 +38,11 @@ data class NotificationUI(
         parcel.writeString(userNumber)
         parcel.writeString(professionID)
         parcel.writeString(status)
+        parcel.writeString(createdAt)
+        parcel.writeString(approvalNumber)
+        parcel.writeString(approvalImage)
         parcel.writeString(doctor)
+        parcel.writeString(provider)
         parcel.writeString(comment)
         parcel.writeString(doc1)
     }

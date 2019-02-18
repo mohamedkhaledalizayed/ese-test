@@ -3,6 +3,7 @@ package com.neqabty.presentation.ui.mobile
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -60,7 +62,7 @@ class MobileFragment : BaseFragment(), Injectable {
         mobileViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(),retryCallback =  {
                 binding.progressbar.visibility = View.VISIBLE
-                mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
+                mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().navigateUp()
             })
@@ -70,10 +72,10 @@ class MobileFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
         binding.bSend.setOnClickListener {
-            if (isMobileValid(binding.edMobile.text.toString())) {
-
+            if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString())) {
+                PreferencesHelper(requireContext()).user = binding.edMemberNumber.text.toString()
                 if (PreferencesHelper(requireContext()).token.isNotBlank())
-                    mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
+                    mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), PreferencesHelper(requireContext()).user)
                 else {
                     FirebaseInstanceId.getInstance().instanceId
                             .addOnCompleteListener(OnCompleteListener { task ->
@@ -81,7 +83,7 @@ class MobileFragment : BaseFragment(), Injectable {
                                     return@OnCompleteListener
                                 val token = task.result?.token
                                 mobileViewModel.registerUser(binding.edMobile.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, token
-                                        ?: "", PreferencesHelper(requireContext()))
+                                        ?: "", PreferencesHelper(requireContext()), PreferencesHelper(requireContext()).user)
                             })
                 }
             }
@@ -90,32 +92,41 @@ class MobileFragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: MobileViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        if (state.isSuccessful)
+        if (state.isSuccessful) {
+            hideKeyboard()
             navController().navigate(
                     MobileFragmentDirections.openClaiming()
             )
+        }
     }
 //region
-
-    private fun isMobileValid(mobile: String): Boolean {
-        if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
-            return true
+    private fun isDataValid(mobile : String, number: String): Boolean {
+        return if(number.isBlank()){
+            showAlert(getString(R.string.invalid_data))
+            false
+        }else if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
+            true
         else {
-            showInvalidMobileAlert()
-            return false
+            showAlert(getString(R.string.invalid_mobile))
+            false
         }
     }
 
-    private fun showInvalidMobileAlert() {
+    private fun showAlert(msg : String) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.alert_title))
-        builder.setMessage(getString(R.string.invalid_mobile))
+        builder.setMessage(msg)
         builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
             dialog.dismiss()
         }
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+
+    fun hideKeyboard() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.edMobile.windowToken, 0)
     }
 // endregion
 

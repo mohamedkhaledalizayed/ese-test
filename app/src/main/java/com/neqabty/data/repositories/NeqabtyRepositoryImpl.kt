@@ -12,6 +12,18 @@ import javax.inject.Singleton
 @OpenForTesting
 class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: CachedNeqabtyDataStore,
                                                 private val remoteDataStore: RemoteNeqabtyDataStore) : NeqabtyRepository {
+    override fun getMedicalProviders(categoryId: String): Observable<List<MedicalProviderEntity>> {
+        return remoteDataStore.getMedicalProviders(categoryId)
+    }
+
+    override fun validateUser(userNumber: String): Observable<MemberEntity> {
+        return remoteDataStore.validateUser(userNumber)
+    }
+
+    override fun getNotificationDetails(id: String): Observable<NotificationEntity> {
+        return remoteDataStore.getNotificationDetails(id)
+    }
+
     override fun getNotifications(userNumber: String, subSyndicateId: String): Observable<List<NotificationEntity>> {
         return remoteDataStore.getNotifications(userNumber ,subSyndicateId)
     }
@@ -24,8 +36,8 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
         return remoteDataStore.getAllProviderTypes()
     }
 
-    override fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String): Observable<Unit> {
-        return remoteDataStore.registerUser(mobile,mainSyndicateId,subSyndicateId,token)
+    override fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, userNumber:String): Observable<Unit> {
+        return remoteDataStore.registerUser(mobile,mainSyndicateId,subSyndicateId,token,userNumber)
     }
 
     override fun getAllProviders(type:String): Observable<List<ProviderEntity>> {

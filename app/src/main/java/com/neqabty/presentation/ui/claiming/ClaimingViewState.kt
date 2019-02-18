@@ -9,5 +9,6 @@ data class ClaimingViewState(
         var degrees : List<DegreeUI>? = null,
         var specializations : List<SpecializationUI>? = null,
         var providerTypes : List<ProviderTypeUI>? = null,
-        var providers : List<ProviderUI>? = null
+        var providers : List<ProviderUI>? = null,
+        var member : MemberUI? = null
 )

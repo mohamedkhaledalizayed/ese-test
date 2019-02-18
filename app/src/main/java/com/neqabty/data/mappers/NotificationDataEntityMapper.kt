@@ -17,7 +17,11 @@ class NotificationDataEntityMapper @Inject constructor() : Mapper<NotificationDa
                 doc1 = from.doc1,
                 professionID = from.professionID,
                 status = from.status,
+                createdAt = from.createdAt,
+                approvalNumber = from.approvalNumber,
+                approvalImage = from.approvalImage,
                 doctor = from.doctor,
+                provider = from.provider,
                 userNumber = from.userNumber
         )
     }

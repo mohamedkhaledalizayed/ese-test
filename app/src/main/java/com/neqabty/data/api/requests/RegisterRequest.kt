@@ -14,5 +14,8 @@ data class RegisterRequest(
     var subSyndicate: Int = 0,
 
     @SerializedName("mobile_token")
-    var token: String = ""
+    var token: String = "",
+
+    @SerializedName("syndicate_user_number")
+    var userNumber: String = ""
 ) : Request()

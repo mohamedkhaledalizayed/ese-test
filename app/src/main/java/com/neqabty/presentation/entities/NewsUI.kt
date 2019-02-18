@@ -40,13 +40,14 @@ data class NewsUI(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<SyndicateUI> {
-        override fun createFromParcel(parcel: Parcel): SyndicateUI {
-            return com.neqabty.presentation.entities.SyndicateUI(parcel)
+    companion object CREATOR : Parcelable.Creator<NewsUI> {
+        override fun createFromParcel(parcel: Parcel): NewsUI {
+            return NewsUI(parcel)
         }
 
-        override fun newArray(size: Int): Array<SyndicateUI?> {
+        override fun newArray(size: Int): Array<NewsUI?> {
             return arrayOfNulls(size)
         }
     }
+
 }

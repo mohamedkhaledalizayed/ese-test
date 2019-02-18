@@ -23,6 +23,9 @@ interface WebService {
     @POST("api/v2/medical/request/code")
     fun getNotifications(@Body notificationRequest: NotificationRequest): Observable<List<NotificationData>>
 
+    @POST("api/v2/medical/request_details")
+    fun getNotificationDetails(@Body notificationDetailsRequest: NotificationDetailsRequest): Observable<NotificationData>
+
     @POST("api/v2/news/main_syndicate")
     fun getAllNews(@Body newsRequest: NewsRequest): Observable<ApiResponse<List<NewsData>>>
 
@@ -53,6 +56,12 @@ interface WebService {
     @Multipart
     @POST("api/v2/medical/request")
     fun sendMedicalRequest(@Part("json_request") medicalRequest: MedicalRequest,@Part doc1: MultipartBody.Part?,@Part doc2: MultipartBody.Part?,@Part doc3: MultipartBody.Part?,@Part doc4: MultipartBody.Part?,@Part doc5: MultipartBody.Part?): Observable<ApiResponse<Unit>>
+
+    @POST("http://18.220.91.142:8081/neqabty/inquiry")
+    fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
+
+    @POST("api/v2/medical/hospitals")
+    fun getMedicalProviders(@Body categoryId : Int): Observable<ApiResponse<List<MedicalProviderData>>>
 
     @POST("api/Auth/Login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>

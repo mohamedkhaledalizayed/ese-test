@@ -4,13 +4,14 @@ import android.arch.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
+import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.mappers.*
 import com.neqabty.testing.OpenForTesting
 import java.io.File
 import javax.inject.Inject
 
 @OpenForTesting
-class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, val getAllAreas: GetAllAreas, val getAllSpecializations: GetAllSpecializations, val getAllDegrees: GetAllDegrees, val getAllProviders: GetAllProviders, val getAllProvidersTypes: GetAllProvidersTypes, val sendMedicalRequest: SendMedicalRequest) : BaseViewModel() {
+class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, val getAllAreas: GetAllAreas, val getAllSpecializations: GetAllSpecializations, val getAllDegrees: GetAllDegrees, val getAllProviders: GetAllProviders, val getAllProvidersTypes: GetAllProvidersTypes, val sendMedicalRequest: SendMedicalRequest, private val validateUser: ValidateUser) : BaseViewModel() {
 
     private val degreeEntityUIMapper = DegreeEntityUIMapper()
     private val specializationEntityUIMapper = SpecializationEntityUIMapper()
@@ -18,6 +19,7 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
     private val doctorEntityUIMapper = DoctorEntityUIMapper()
     private val providerTypeEntityUIMapper = ProviderTypeEntityUIMapper()
     private val providerEntityUIMapper = ProviderEntityUIMapper()
+    private val memberEntityUIMapper = MemberEntityUIMapper()
 
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
@@ -175,6 +177,30 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
     }
 
 
+    fun validateUser(number : String) {
+        viewState.value = viewState.value?.copy(isLoading = true)
+        addDisposable(validateUser.validateUser(number)
+                .map {
+                    it.let {
+                        memberEntityUIMapper.mapFrom(it)
+                    }
+                }.subscribe(
+                        { onValidationReceived(it) },
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false)
+                            errorState.value = it
+                        }
+                )
+        )
+    }
+
+
+    private fun onValidationReceived(member: MemberUI) {
+        val newViewState = viewState.value?.copy(
+                isLoading = false,
+                member = member)
+        viewState.value = newViewState
+    }
     private fun onContent1Received() {
         if (viewState.value?.doctors != null && viewState.value?.areas != null && viewState.value?.specializations != null && viewState.value?.degrees != null)
             viewState.value = viewState.value?.copy(isLoading = false)

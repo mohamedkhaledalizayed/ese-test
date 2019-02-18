@@ -94,7 +94,8 @@ class SyndicatesFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: SyndicatesViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.syndicates?.let {
-            adapter.submitList(it)
+            val temp = listOf(it[0])
+            adapter.submitList(temp)
         }
     }
 

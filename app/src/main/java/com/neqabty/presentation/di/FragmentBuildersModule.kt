@@ -4,6 +4,9 @@ import com.neqabty.presentation.ui.about.AboutFragment
 import com.neqabty.presentation.ui.claiming.*
 import com.neqabty.presentation.ui.home.HomeFragment
 import com.neqabty.presentation.ui.login.LoginFragment
+import com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragment
+import com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsFragment
+import com.neqabty.presentation.ui.medicalProviders.MedicalProvidersFragment
 import com.neqabty.presentation.ui.mobile.MobileFragment
 import com.neqabty.presentation.ui.news.NewsFragment
 import com.neqabty.presentation.ui.newsDetails.NewsDetailsFragment
@@ -82,6 +85,15 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeNotificationsDetailsFragment(): NotificationDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMedicalCategoriesFragment(): MedicalCategoriesFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMedicalProvidersFragment(): MedicalProvidersFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMedicalProviderDetailsFragment(): MedicalProviderDetailsFragment
 
     @ContributesAndroidInjector
     abstract fun contributeHomeFragment(): HomeFragment

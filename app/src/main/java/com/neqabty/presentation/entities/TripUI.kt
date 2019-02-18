@@ -38,13 +38,14 @@ data class TripUI(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<SyndicateUI> {
-        override fun createFromParcel(parcel: Parcel): SyndicateUI {
-            return com.neqabty.presentation.entities.SyndicateUI(parcel)
+    companion object CREATOR : Parcelable.Creator<TripUI> {
+        override fun createFromParcel(parcel: Parcel): TripUI {
+            return TripUI(parcel)
         }
 
-        override fun newArray(size: Int): Array<SyndicateUI?> {
+        override fun newArray(size: Int): Array<TripUI?> {
             return arrayOfNulls(size)
         }
     }
+
 }

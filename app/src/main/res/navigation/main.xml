@@ -111,6 +111,36 @@
             app:destination="@id/newsDetailsFragment" />
     </fragment>
     <fragment
+        android:id="@+id/medicalCategoriesFragment"
+        android:name="com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragment"
+        android:label="@string/medicalDirectory"
+        tools:layout="@layout/medical_categories_fragment">
+        <action
+            android:id="@+id/openCategory"
+            app:destination="@id/medicalProvidersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicalProvidersFragment"
+        android:name="com.neqabty.presentation.ui.medicalProviders.MedicalProvidersFragment"
+        android:label="@string/medicalDirectory"
+        tools:layout="@layout/medical_providers_fragment">
+        <action
+            android:id="@+id/openProviderDetails"
+            app:destination="@id/medicalProviderDetailsFragment" />
+        <argument
+            android:name="category"
+            app:argType="com.neqabty.presentation.ui.medicalCategories.MedicalCategoryUI" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicalProviderDetailsFragment"
+        android:name="com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsFragment"
+        android:label="@string/medicalDirectory"
+        tools:layout="@layout/medical_provider_details_fragment">
+        <argument
+            android:name="medicalProviderItem"
+            app:argType="com.neqabty.presentation.entities.MedicalProviderUI" />
+    </fragment>
+    <fragment
         android:id="@+id/aboutFragment"
         android:name="com.neqabty.presentation.ui.about.AboutFragment"
         android:label="@string/about_title"

@@ -187,7 +187,25 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetNotificationDetails(neqabtyRepository: NeqabtyRepository): GetNotificationDetails {
+        return GetNotificationDetails(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideSendMedicalRequest(neqabtyRepository: NeqabtyRepository): SendMedicalRequest {
         return SendMedicalRequest(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideValidateUser(neqabtyRepository: NeqabtyRepository): ValidateUser {
+        return ValidateUser(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetMedicalProviders(neqabtyRepository: NeqabtyRepository): GetMedicalProviders {
+        return GetMedicalProviders(ASyncTransformer(), neqabtyRepository)
     }
 }

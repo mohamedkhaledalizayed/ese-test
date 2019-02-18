@@ -8,6 +8,7 @@ class PreferencesHelper(context: Context) {
         const val DEVELOP_MODE = false
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val SUB_SYNDICATE = "data.source.prefs.SUB_SYNDICATE"
+        private const val USER = "data.source.prefs.USER"
         private const val MOBILE = "data.source.prefs.MOBILE"
         private const val TOKEN = "data.source.prefs.TOKEN"
         private const val IS_REGISTERED = "data.source.prefs.IS_REGISTERED"
@@ -21,7 +22,6 @@ class PreferencesHelper(context: Context) {
     var subSyndicate = preferences.getInt(SUB_SYNDICATE, 0)
         set(value) = preferences.edit().putInt(SUB_SYNDICATE, value).apply()
 
-
     var mobile = preferences.getString(MOBILE, "")
         set(value) = preferences.edit().putString(MOBILE, value).apply()
 
@@ -30,6 +30,9 @@ class PreferencesHelper(context: Context) {
 
     var isRegistered = preferences.getBoolean(IS_REGISTERED, false)
         set(value) = preferences.edit().putBoolean(IS_REGISTERED, value).apply()
+
+    var user = preferences.getString(USER, "")
+        set(value) = preferences.edit().putString(USER, value).apply()
 
 
     fun isSyndicateChosen():Boolean{

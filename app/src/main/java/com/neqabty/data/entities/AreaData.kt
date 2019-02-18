@@ -9,7 +9,7 @@ data class AreaData(
         @field:SerializedName("area_id")
         var id: Int = 0,
         @field:SerializedName("area_code")
-        var code: String?,
+        var code: Int?,
         @field:SerializedName("area_name")
         var name: String?
 ): Response()

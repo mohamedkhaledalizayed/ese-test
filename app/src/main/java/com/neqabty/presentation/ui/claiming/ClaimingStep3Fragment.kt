@@ -85,14 +85,14 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(ClaimingViewModel::class.java)
 
-        binding.edNumber.setText(ClaimingData.number)
+        binding.edNumber.setText(PreferencesHelper(requireContext()).user)
         binding.edDoctor.setText(ClaimingData.doctorName)
         binding.edProvider.setText(ClaimingData.providerName)
 
         binding.bSend.setOnClickListener {
             if (photosList.size > 0) {
                 val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, ClaimingData.number, "email", prefs.mobile, ClaimingData.professionId, ClaimingData.degreeId, ClaimingData.areaId, ClaimingData.doctorId,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, ClaimingData.professionId, ClaimingData.degreeId, ClaimingData.areaId, ClaimingData.doctorId,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             } else
                 showPickPhotoAlert()
         }
@@ -118,7 +118,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             showConnectionAlert(requireContext(),retryCallback =  {
                 binding.progressbar.visibility = View.VISIBLE
                 val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, ClaimingData.number, "email", prefs.mobile, ClaimingData.professionId, ClaimingData.degreeId, ClaimingData.areaId, ClaimingData.doctorId,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, ClaimingData.professionId, ClaimingData.degreeId, ClaimingData.areaId, ClaimingData.doctorId,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
@@ -273,7 +273,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
-// endregion
-fun navController() = findNavController()
+    // endregion
+    fun navController() = findNavController()
 
 }

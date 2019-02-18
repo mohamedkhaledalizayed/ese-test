@@ -3,8 +3,8 @@ package com.neqabty
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -54,13 +54,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         mainViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MainViewModel::class.java)
 
-//        val action: String? = intent?.action
-        val data: Uri? = intent?.data
-
         setSupportActionBar(toolbar)
 //        verifyAvailableNetwork()//TODO
         getToken()
         startActivities()
+
+        val data: String? = intent?.extras?.getString("request_id")
+        if(data?.isNotEmpty()!!){
+            val navController = Navigation.findNavController(this, R.id.container)
+            navController.navigate(R.id.notificationDetails, intent?.extras)
+        }
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
@@ -129,6 +132,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     else
                         navController.navigate(R.id.mobileFragment)
                 }
+                R.id.medical_fragment -> {
+//                    navController.navigate(R.id.medicalCategoriesFragment)
+                }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
                 }
@@ -154,12 +160,17 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     val token = task.result?.token
 
                     if (PreferencesHelper(this).mobile.isNotBlank() && !token.equals(PreferencesHelper(this).token)) {//TODO register
-                        mainViewModel.registerUser(PreferencesHelper(this).mobile, PreferencesHelper(this).mainSyndicate, PreferencesHelper(this).subSyndicate, PreferencesHelper(this).token, PreferencesHelper(this))
+                        mainViewModel.registerUser(PreferencesHelper(this).mobile, PreferencesHelper(this).mainSyndicate, PreferencesHelper(this).subSyndicate, PreferencesHelper(this).token, PreferencesHelper(this), PreferencesHelper(this).user)
                     } else
                         PreferencesHelper(this).token = token
 
                     Log.d("Toooken", token)
                 })
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
     }
 
     //region//
