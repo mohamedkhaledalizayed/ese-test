@@ -23,7 +23,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val medicalProviderDataEntityMapper = MedicalProviderDataEntityMapper()
 
     override fun getMedicalProviders(categoryId: String): Observable<List<MedicalProviderEntity>> {
-        return api.getMedicalProviders(categoryId.toInt()).map { medicalProviders ->
+        return api.getMedicalProviders(ProviderRequest(categoryId)).map { medicalProviders ->
             medicalProviders.data?.map { medicalProviderDataEntityMapper.mapFrom(it) }
         }
     }
@@ -164,6 +164,11 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     override fun getTrips(id: String): Observable<List<TripEntity>> {
         return api.getAllTrips(TripsRequest(id)).map { trips ->
             trips.data?.map { tripsDataEntityMapper.mapFrom(it) }
+        }
+    }
+    override fun getTripDetails(id: String): Observable<TripEntity> {
+        return api.getTripDetails(TripDetailsRequest(id)).flatMap { tripDetails ->
+            Observable.just(tripsDataEntityMapper.mapFrom(tripDetails.data!!))
         }
     }
 

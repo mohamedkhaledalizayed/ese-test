@@ -94,6 +94,7 @@ class MobileFragment : BaseFragment(), Injectable {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful) {
             hideKeyboard()
+            activity?.invalidateOptionsMenu()
             navController().navigate(
                     MobileFragmentDirections.openClaiming()
             )

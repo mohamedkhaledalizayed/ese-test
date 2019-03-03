@@ -15,7 +15,7 @@ import com.neqabty.databinding.SignupFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.ui.common.CustomPagerAdapter
+import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
@@ -64,7 +64,7 @@ class SignupFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        val adapter = CustomPagerAdapter(requireFragmentManager())
+        val adapter = CustomFragmentPagerAdapter(requireFragmentManager())
         adapter.addFragment(SignupStep1Fragment())
         adapter.addFragment(SignupStep2Fragment())
         adapter.addFragment(SignupStep3Fragment())

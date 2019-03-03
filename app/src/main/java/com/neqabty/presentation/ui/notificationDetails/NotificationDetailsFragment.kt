@@ -30,7 +30,7 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
 
     var binding by autoCleared<NotificationDetailsFragmentBinding>()
 
-    lateinit var notificationItem : NotificationUI
+    lateinit var notificationId : String
     lateinit var notificationDetailsViewModel: NotificationDetailsViewModel
 
     override fun onCreateView(
@@ -52,7 +52,7 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
 
         val params = NotificationDetailsFragmentArgs.fromBundle(arguments!!)
-        notificationItem = params.notificationItem
+        notificationId = params.notificationId
 
 
         notificationDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
@@ -64,12 +64,12 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
         notificationDetailsViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(),retryCallback =  {
                 binding.progressbar.visibility = View.VISIBLE
-                notificationDetailsViewModel.getNotificationDetails(notificationItem.id.toString())
+                notificationDetailsViewModel.getNotificationDetails(notificationId)
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
-        notificationDetailsViewModel.getNotificationDetails(notificationItem.id.toString())
+        notificationDetailsViewModel.getNotificationDetails(notificationId)
     }
 
     fun initializeViews(notificationItem :NotificationUI) {

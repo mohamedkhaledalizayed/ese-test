@@ -133,6 +133,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetTripDetails(neqabtyRepository: NeqabtyRepository): GetTripDetails {
+        return GetTripDetails(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetSyndicate(neqabtyRepository: NeqabtyRepository): GetSyndicate {
         return GetSyndicate(ASyncTransformer(), neqabtyRepository)
     }

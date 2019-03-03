@@ -14,10 +14,12 @@ data class MedicalProviderUI(
         var createdBy: String?,
         var updatedBy: String?,
         var createdAt: String?,
-        var updatedAt: String?
+        var updatedAt: String?,
+        var serviceProviderId: String?
 ): Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),

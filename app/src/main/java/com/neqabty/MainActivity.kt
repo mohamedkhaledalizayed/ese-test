@@ -1,13 +1,14 @@
 package com.neqabty
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
@@ -58,12 +59,15 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 //        verifyAvailableNetwork()//TODO
         getToken()
         startActivities()
-
-        val data: String? = intent?.extras?.getString("request_id")
-        if(data?.isNotEmpty()!!){
-            val navController = Navigation.findNavController(this, R.id.container)
-            navController.navigate(R.id.notificationDetails, intent?.extras)
+        val notificationId: String? = intent?.extras?.getString("notificationId")
+        notificationId?.let {
+            val args = Bundle()
+            args.putString("notificationId", it)
+            Navigation.findNavController(this, R.id.container).navigate(R.id.notificationDetailsFragment, args)
         }
+        mainViewModel.viewState.observe(this, Observer {
+            invalidateOptionsMenu()
+        })
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
@@ -133,7 +137,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                         navController.navigate(R.id.mobileFragment)
                 }
                 R.id.medical_fragment -> {
-//                    navController.navigate(R.id.medicalCategoriesFragment)
+                    navController.navigate(R.id.medicalCategoriesFragment)
                 }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
@@ -143,6 +147,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.aboutapp_fragment -> {
                 }
                 R.id.help_fragment -> {
+                }
+                R.id.logout_fragment -> {
+                    PreferencesHelper(this).isRegistered = false
+                    invalidateOptionsMenu()
                 }//TODO
             }
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -166,11 +174,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
                     Log.d("Toooken", token)
                 })
-    }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-
     }
 
     //region//
@@ -202,20 +205,26 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        var inflater : MenuInflater = menuInflater
+        var inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
 
         val item = menu?.findItem(R.id.notifications_fragment)
 
         var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0];
-        item?.isVisible = currentFragment is HasOptionsMenu
+        item?.isVisible = currentFragment is HasOptionsMenu && PreferencesHelper(this).isRegistered
+
+        var navigationView: NavigationView = nav_view
+        var navMenu = navigationView.menu;
+        navMenu.findItem(R.id.logout_fragment)?.isVisible = PreferencesHelper(this).isRegistered
 
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId){
-            R.id.notifications_fragment -> { Navigation.findNavController(this, R.id.container).navigate(R.id.notificationsFragment) }
+        when (item?.itemId) {
+            R.id.notifications_fragment -> {
+                Navigation.findNavController(this, R.id.container).navigate(R.id.notificationsFragment)
+            }
         }
         return super.onOptionsItemSelected(item)
     }

@@ -27,5 +27,7 @@ data class MedicalProviderData(
         @field:SerializedName("created_at")
         var createdAt: String?,
         @field:SerializedName("updated_at")
-        var updatedAt: String?
+        var updatedAt: String?,
+        @field:SerializedName("service_provider_id")
+        var serviceProviderId: String?
 ): Response()

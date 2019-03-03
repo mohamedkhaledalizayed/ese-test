@@ -10,6 +10,7 @@ interface NeqabtyRepository {
     fun geSubSyndicatesById(id: String): Observable<List<SyndicateEntity>>
     fun getNews(id: String): Observable<List<NewsEntity>>
     fun getTrips(id: String): Observable<List<TripEntity>>
+    fun getTripDetails(id: String): Observable<TripEntity>
     fun getAllDoctors(): Observable<List<DoctorEntity>>
     fun getAllAreas(): Observable<List<AreaEntity>>
     fun getAllDegrees(): Observable<List<DegreeEntity>>

@@ -27,5 +27,24 @@ data class TripData(
         @field:SerializedName("trip_desc")
         var desc: String?,
         @field:SerializedName("hotel_one_person")
-        var price: String?
-): Response()
+        var price: String?,
+        @field:SerializedName("images")
+        var imgs: List<TripImage>? = null
+): Response(){
+        data class TripImage(
+                @field:SerializedName("trip_image_id")
+                var imageId: Int = 0,
+                @field:SerializedName("image_file")
+                var file: String?,
+                @field:SerializedName("trip_id")
+                var tripId: Int?,
+                @field:SerializedName("created_by")
+                var createdBy: String?,
+                @field:SerializedName("updated_by")
+                var updatedBy: String?,
+                @field:SerializedName("created_at")
+                var createdAt: String?,
+                @field:SerializedName("updated_at")
+                var updatedAt: String?
+        )
+}

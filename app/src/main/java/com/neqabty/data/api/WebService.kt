@@ -32,6 +32,9 @@ interface WebService {
     @POST("api/v2/trips")
     fun getAllTrips(@Body tripsRequest: TripsRequest): Observable<ApiResponse<List<TripData>>>
 
+    @POST("api/v2/trips")
+    fun getTripDetails(@Body tripDetailsRequest: TripDetailsRequest): Observable<ApiResponse<TripData>>
+
     @GET("api/v2/medical/areas")
     fun getAllAreas(): Observable<ApiResponse<List<AreaData>>>
 
@@ -60,8 +63,8 @@ interface WebService {
     @POST("http://18.220.91.142:8081/neqabty/inquiry")
     fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
-    @POST("api/v2/medical/hospitals")
-    fun getMedicalProviders(@Body categoryId : Int): Observable<ApiResponse<List<MedicalProviderData>>>
+    @POST("api/v2/medical/service_provider")
+    fun getMedicalProviders(@Body providerRequest: ProviderRequest): Observable<ApiResponse<List<MedicalProviderData>>>
 
     @POST("api/Auth/Login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>

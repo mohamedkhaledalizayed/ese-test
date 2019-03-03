@@ -12,6 +12,10 @@ import javax.inject.Singleton
 @OpenForTesting
 class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: CachedNeqabtyDataStore,
                                                 private val remoteDataStore: RemoteNeqabtyDataStore) : NeqabtyRepository {
+    override fun getTripDetails(id: String): Observable<TripEntity> {
+        return remoteDataStore.getTripDetails(id)
+    }
+
     override fun getMedicalProviders(categoryId: String): Observable<List<MedicalProviderEntity>> {
         return remoteDataStore.getMedicalProviders(categoryId)
     }

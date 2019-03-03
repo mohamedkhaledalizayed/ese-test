@@ -11,5 +11,16 @@ data class TripEntity(
         var subSyndicateId: String?,
         var governId: String?,
         var desc: String?,
-        var price: String?
-)
+        var price: String?,
+        var imgs: List<TripImage>? = null
+){
+    data class TripImage(
+            var imageId: Int = 0,
+            var file: String?,
+            var tripId: Int?,
+            var createdBy: String?,
+            var updatedBy: String?,
+            var createdAt: String?,
+            var updatedAt: String?
+    )
+}

@@ -7,7 +7,9 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
+import android.os.Bundle
 import android.support.v4.app.NotificationCompat
+import android.support.v4.app.TaskStackBuilder
 import com.firebase.jobdispatcher.FirebaseJobDispatcher
 import com.firebase.jobdispatcher.GooglePlayDriver
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -17,7 +19,6 @@ import com.neqabty.R
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
-
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         sendNotification(remoteMessage)
     }
@@ -47,15 +48,29 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun sendNotification(remoteMessage: RemoteMessage?) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.putExtra("request_id", remoteMessage!!.data?.get("request_id"))
-        val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT)
+        intent.putExtra("notificationId", remoteMessage?.data?.get("request_id"))
+
+        var args = Bundle()
+        args.putString("notificationId", remoteMessage!!.data?.get("request_id"))
+
+//        val pendingIntent = NavDeepLinkBuilder(applicationContext)
+//                .setGraph(R.navigation.main)
+//                .setDestination(R.id.notificationDetailsFragment)
+//                .setArguments(args)
+//                .createPendingIntent()
+
+        val pendingIntent = TaskStackBuilder.create(applicationContext)
+                .addNextIntent(intent)
+                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+
+
         val channelId = getString(com.neqabty.R.string.app_name)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(com.neqabty.R.drawable.logo)
-                .setContentTitle(remoteMessage!!.notification?.title)
-                .setContentText(remoteMessage!!.notification?.body)
+                .setContentTitle(remoteMessage?.data?.get("title"))
+                .setContentText(remoteMessage?.data?.get("body"))
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent)

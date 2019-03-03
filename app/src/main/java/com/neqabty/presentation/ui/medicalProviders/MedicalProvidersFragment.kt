@@ -16,7 +16,6 @@ import com.neqabty.databinding.MedicalProvidersFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.ui.medicalCategories.MedicalCategoryUI
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
@@ -35,7 +34,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    lateinit var category : MedicalCategoryUI
+    var categoryId : Int = 0
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -57,7 +56,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
                 .get(MedicalProvidersViewModel::class.java)
 
         val params = MedicalProvidersFragmentArgs.fromBundle(arguments!!)
-        category = params.category
+        categoryId = params.categoryId
         initializeViews()
 
 
@@ -75,13 +74,13 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         medicalProvidersViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                medicalProvidersViewModel.getMedicalProviders(category.id.toString())
+                medicalProvidersViewModel.getMedicalProviders(categoryId.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
 
-        medicalProvidersViewModel.getMedicalProviders(category.id.toString())
+        medicalProvidersViewModel.getMedicalProviders(categoryId.toString())
     }
 
 

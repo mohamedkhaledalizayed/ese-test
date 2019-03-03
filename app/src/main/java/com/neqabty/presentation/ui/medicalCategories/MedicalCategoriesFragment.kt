@@ -50,16 +50,16 @@ class MedicalCategoriesFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
         var categoriesList = mutableListOf<MedicalCategoryUI>()
-        categoriesList.add(0 , MedicalCategoryUI(0,getString(R.string.hospitals),R.mipmap.hosp_ic))
-        categoriesList.add(MedicalCategoryUI(1,getString(R.string.doctors),R.mipmap.dr_ic))
-        categoriesList.add(2 , MedicalCategoryUI(0,getString(R.string.pharmacies),R.mipmap.pharma_ic))
-        categoriesList.add(3 , MedicalCategoryUI(0,getString(R.string.scan_centers),R.mipmap.scan_ic))
-        categoriesList.add(4 , MedicalCategoryUI(0,getString(R.string.laboratories),R.mipmap.lab_ic))
-        categoriesList.add(5 , MedicalCategoryUI(0,getString(R.string.medical_services),R.mipmap.med_serv_ic))
+        categoriesList.add(MedicalCategoryUI(1,getString(R.string.hospitals),R.mipmap.hosp_ic))
+        categoriesList.add(MedicalCategoryUI(0,getString(R.string.doctors),R.mipmap.dr_ic))
+        categoriesList.add(MedicalCategoryUI(0,getString(R.string.pharmacies),R.mipmap.pharma_ic))
+        categoriesList.add(MedicalCategoryUI(3,getString(R.string.scan_centers),R.mipmap.scan_ic))
+        categoriesList.add(MedicalCategoryUI(2,getString(R.string.laboratories),R.mipmap.lab_ic))
+        categoriesList.add(MedicalCategoryUI(0,getString(R.string.medical_services),R.mipmap.med_serv_ic))
 
         adapter = MedicalCategoriesAdapter(dataBindingComponent, appExecutors) { category ->
                 navController().navigate(
-                        MedicalCategoriesFragmentDirections.openCategory(category)
+                        MedicalCategoriesFragmentDirections.openCategory(category.id)
                 )
         }
         adapter.submitList(categoriesList)

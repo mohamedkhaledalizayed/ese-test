@@ -121,7 +121,7 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasOption
             navController().navigate(R.id.tripsFragment)
         }
         binding.llMedical.setOnClickListener{
-//            navController().navigate(R.id.medicalCategoriesFragment)
+            navController().navigate(R.id.medicalCategoriesFragment)
         }
     }
 

@@ -15,7 +15,7 @@ class MainViewModel @Inject constructor(val getUserRegistered: GetUserRegistered
     var viewState: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
-        viewState.value = true
+        viewState.value = false
     }
 
     fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, prefs: PreferencesHelper, userNumber: String) {
@@ -23,8 +23,8 @@ class MainViewModel @Inject constructor(val getUserRegistered: GetUserRegistered
                 .subscribe(
                         {
                             prefs.token = token
-
                             prefs.isRegistered = true
+                            viewState.value = true
                         },
                         { registerUser(mobile, mainSyndicateId, subSyndicateId, token, prefs,userNumber) }
                 ))

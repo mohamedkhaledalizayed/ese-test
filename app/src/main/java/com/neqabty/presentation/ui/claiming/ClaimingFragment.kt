@@ -15,7 +15,7 @@ import com.neqabty.databinding.ClaimingFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.ui.common.CustomPagerAdapter
+import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
@@ -54,7 +54,7 @@ class ClaimingFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        val adapter = CustomPagerAdapter(childFragmentManager)
+        val adapter = CustomFragmentPagerAdapter(childFragmentManager)
         adapter.addFragment(ClaimingStep1Fragment())
         adapter.addFragment(ClaimingStep2Fragment())
         adapter.addFragment(ClaimingStep3Fragment())

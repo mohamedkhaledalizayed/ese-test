@@ -21,7 +21,8 @@ class MedicalProviderEntityUIMapper @Inject constructor() : Mapper<MedicalProvid
                 updatedAt = from.updatedAt,
                 areaId = from.areaId,
                 emails = from.emails,
-                phones = from.phones
+                phones = from.phones,
+                serviceProviderId = from.serviceProviderId
         )
     }
 }

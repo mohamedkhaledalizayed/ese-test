@@ -6,4 +6,11 @@
         android:icon="@mipmap/notification_ic"
         android:title="@string/notifications_title"
         app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/logout_fragment"-->
+        <!--android:icon="@mipmap/logout_ic"-->
+        <!--android:title="@string/logout_title"-->
+        <!--android:iconTint="@color/white"-->
+        <!--android:visible="false"-->
+        <!--app:showAsAction="always" />-->
 </menu>

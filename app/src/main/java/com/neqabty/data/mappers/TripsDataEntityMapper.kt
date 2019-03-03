@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class TripsDataEntityMapper @Inject constructor() : Mapper<TripData, TripEntity>() {
 
     override fun mapFrom(from: TripData): TripEntity {
-        return TripEntity(
+        val tripEntity = TripEntity(
                 id = from.id,
                 governId = from.governId,
                 subSyndicateId = from.subSyndicateId,
@@ -23,5 +23,13 @@ class TripsDataEntityMapper @Inject constructor() : Mapper<TripData, TripEntity>
                 typeId = from.typeId,
                 price = from.price
         )
+
+        from.imgs?.let {
+            val imgs: List<TripEntity.TripImage> = it.map { imageItem ->
+                return@map TripEntity.TripImage(imageItem.imageId, imageItem.file, imageItem.tripId, imageItem.createdBy, imageItem.updatedBy, imageItem.createdAt, imageItem.updatedAt)
+            }
+            tripEntity.imgs = imgs
+        }
+        return tripEntity
     }
 }

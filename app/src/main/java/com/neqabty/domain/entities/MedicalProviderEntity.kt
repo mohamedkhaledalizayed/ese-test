@@ -11,5 +11,6 @@ data class MedicalProviderEntity(
         var createdBy: String?,
         var updatedBy: String?,
         var createdAt: String?,
-        var updatedAt: String?
+        var updatedAt: String?,
+        var serviceProviderId: String?
 )

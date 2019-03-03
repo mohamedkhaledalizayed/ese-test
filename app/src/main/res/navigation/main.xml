@@ -62,8 +62,8 @@
         android:label="@string/notifications_title"
         tools:layout="@layout/notification_details_fragment">
         <argument
-            android:name="notificationItem"
-            app:argType="com.neqabty.presentation.entities.NotificationUI" />
+            android:name="notificationId"
+            app:argType="java.lang.String" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -128,8 +128,8 @@
             android:id="@+id/openProviderDetails"
             app:destination="@id/medicalProviderDetailsFragment" />
         <argument
-            android:name="category"
-            app:argType="com.neqabty.presentation.ui.medicalCategories.MedicalCategoryUI" />
+            android:name="categoryId"
+            app:argType="java.lang.Integer" />
     </fragment>
     <fragment
         android:id="@+id/medicalProviderDetailsFragment"

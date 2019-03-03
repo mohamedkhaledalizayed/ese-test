@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.constraint.ConstraintLayout
-        android:orientation="vertical"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/ivHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/header_bg"
             android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@mipmap/header_bg" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvCategories"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
-            app:spanCount="2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivHeader"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:spanCount="2"
             tools:listitem="@layout/medical_category_item" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </layout>
