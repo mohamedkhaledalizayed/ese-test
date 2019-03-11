@@ -166,7 +166,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 areaID = (parent.getItemAtPosition(position) as AreaUI).id.toString()!!
-//                renderDoctors()
+                renderDoctors()
             }
         }
     }
@@ -177,7 +177,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 degreeID = (parent.getItemAtPosition(position) as DegreeUI).id.toString()
-//                renderDoctors()
+                renderDoctors()
             }
         }
     }
@@ -188,7 +188,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 specializationID = (parent.getItemAtPosition(position) as SpecializationUI).id.toString()
-//                renderDoctors()
+                renderDoctors()
             }
         }
     }
