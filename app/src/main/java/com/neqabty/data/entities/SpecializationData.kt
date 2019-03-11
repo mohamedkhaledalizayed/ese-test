@@ -8,8 +8,6 @@ import com.neqabty.data.api.Response
 data class SpecializationData(
         @field:SerializedName("profession_id")
         var id: Int = 0,
-        @field:SerializedName("code")
-        var code: String?,
         @field:SerializedName("profession")
         var profession: String?
 ): Response()

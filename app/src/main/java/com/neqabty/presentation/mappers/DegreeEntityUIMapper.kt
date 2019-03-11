@@ -12,7 +12,6 @@ class DegreeEntityUIMapper @Inject constructor() : Mapper<DegreeEntity, DegreeUI
     override fun mapFrom(from: DegreeEntity): DegreeUI {
         return DegreeUI(
                 id = from.id,
-                code = from.code,
                 profession = from.profession
         )
     }

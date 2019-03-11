@@ -12,7 +12,6 @@ class SpecializationEntityUIMapper @Inject constructor() : Mapper<Specialization
     override fun mapFrom(from: SpecializationEntity): SpecializationUI {
         return SpecializationUI(
                 id = from.id,
-                code = from.code,
                 profession = from.profession
         )
     }

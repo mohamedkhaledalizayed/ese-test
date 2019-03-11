@@ -12,8 +12,7 @@ class AreaEntityUIMapper @Inject constructor() : Mapper<AreaEntity, AreaUI>() {
     override fun mapFrom(from: AreaEntity): AreaUI {
         return AreaUI(
                 id = from.id,
-                name = from.name,
-                code = from.code
+                name = from.name
         )
     }
 }

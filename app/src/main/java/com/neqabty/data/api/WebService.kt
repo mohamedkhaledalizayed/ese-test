@@ -63,8 +63,8 @@ interface WebService {
     @POST("http://18.220.91.142:8081/neqabty/inquiry")
     fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
-    @POST("api/v2/medical/service_provider")
-    fun getMedicalProviders(@Body providerRequest: ProviderRequest): Observable<ApiResponse<List<MedicalProviderData>>>
+    @POST("api/v3/medical/providers")
+    fun getMedicalProviders(@Body providerRequest: MedicalProviderRequest): Observable<ApiResponse<List<MedicalProviderData>>>
 
     @POST("api/Auth/Login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>

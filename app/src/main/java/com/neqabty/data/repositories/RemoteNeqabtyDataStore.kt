@@ -23,7 +23,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val medicalProviderDataEntityMapper = MedicalProviderDataEntityMapper()
 
     override fun getMedicalProviders(categoryId: String): Observable<List<MedicalProviderEntity>> {
-        return api.getMedicalProviders(ProviderRequest(categoryId)).map { medicalProviders ->
+        return api.getMedicalProviders(MedicalProviderRequest(categoryId)).map { medicalProviders ->
             medicalProviders.data?.map { medicalProviderDataEntityMapper.mapFrom(it) }
         }
     }

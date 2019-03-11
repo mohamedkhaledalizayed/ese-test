@@ -12,7 +12,6 @@ class DegreeDataEntityMapper @Inject constructor() : Mapper<DegreeData, DegreeEn
     override fun mapFrom(from: DegreeData): DegreeEntity {
         return DegreeEntity(
                 id = from.id,
-                code = from.code,
                 profession = from.profession
         )
     }

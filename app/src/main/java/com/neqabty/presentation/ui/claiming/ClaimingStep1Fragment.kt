@@ -45,7 +45,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
     var degreesResultList: List<DegreeUI>? = mutableListOf()
     var specializationsResultList: List<SpecializationUI>? = mutableListOf()
     var specializationID: String = "1"
-    var degreeID: String = "6"
+    var degreeID: String = "1"
     var areaID: String = "1"
     private var isValid = false
 
@@ -126,7 +126,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 //                PreferencesHelper(requireContext()).user = binding.edNumber.text.toString()
 //                ClaimingData.number = binding.edNumber.text.toString()
                 ClaimingData.doctorName = (spDoctorName.selectedItem as DoctorUI).toString()
-                ClaimingData.areaId = (spArea.selectedItem as AreaUI).code!!
+                ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
                 ClaimingData.doctorId = (spDoctorName.selectedItem as DoctorUI).id
                 ClaimingData.professionId = (spSpecialization.selectedItem as SpecializationUI).id
                 ClaimingData.degreeId = (spDegree.selectedItem as DegreeUI).id
@@ -173,11 +173,10 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 
     fun renderDegrees() {
         binding.spDegree.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, degreesResultList)
-        binding.spDegree.setSelection(5)
         binding.spDegree.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                degreeID = (parent.getItemAtPosition(position) as DegreeUI).code!!
+                degreeID = (parent.getItemAtPosition(position) as DegreeUI).id.toString()
                 renderDoctors()
             }
         }
@@ -188,7 +187,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         binding.spSpecialization.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                specializationID = (parent.getItemAtPosition(position) as SpecializationUI).code!!
+                specializationID = (parent.getItemAtPosition(position) as SpecializationUI).id.toString()
                 renderDoctors()
             }
         }
