@@ -11,12 +11,9 @@ import java.io.File
 import javax.inject.Inject
 
 @OpenForTesting
-class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, val getAllAreas: GetAllAreas, val getAllSpecializations: GetAllSpecializations, val getAllDegrees: GetAllDegrees, val getAllProviders: GetAllProviders, val getAllProvidersTypes: GetAllProvidersTypes, val sendMedicalRequest: SendMedicalRequest, private val validateUser: ValidateUser) : BaseViewModel() {
-
-    private val degreeEntityUIMapper = DegreeEntityUIMapper()
-    private val specializationEntityUIMapper = SpecializationEntityUIMapper()
+class ClaimingViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, val getAllAreas: GetAllAreas, val getProvidersByType: GetProvidersByType, val getAllProvidersTypes: GetAllProvidersTypes, val sendMedicalRequest: SendMedicalRequest, private val validateUser: ValidateUser) : BaseViewModel() {
     private val areaEntityUIMapper = AreaEntityUIMapper()
-    private val doctorEntityUIMapper = DoctorEntityUIMapper()
+    private val governEntityUIMapper = GovernEntityUIMapper()
     private val providerTypeEntityUIMapper = ProviderTypeEntityUIMapper()
     private val providerEntityUIMapper = ProviderEntityUIMapper()
     private val memberEntityUIMapper = MemberEntityUIMapper()
@@ -30,14 +27,15 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
     }
 
     fun getAllContent1() {
-        val doctorsDisposable = getAllDoctors.observable()
+        viewState.value = viewState.value?.copy(isLoading = true)
+        val governsDisposable = getAllGoverns.observable()
                 .flatMap {
                     it.let {
-                        doctorEntityUIMapper.observable(it)
+                        governEntityUIMapper.observable(it)
                     }
                 }.subscribe(
                         {
-                            viewState.value = viewState.value?.copy(doctors = it)
+                            viewState.value = viewState.value?.copy(governs = it)
                             onContent1Received()
                         },
                         { errorState.value = it }
@@ -56,69 +54,19 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                         },
                         { errorState.value = it }
                 )
-
-
-        val degreesDisposable = getAllDegrees.observable()
-                .flatMap {
-                    it.let {
-                        degreeEntityUIMapper.observable(it)
-                    }
-                }.subscribe(
-                        {
-                            viewState.value = viewState.value?.copy(degrees = it)
-                            onContent1Received()
-                        },
-                        { errorState.value = it }
-                )
-
-
-        val specializationsDisposable = getAllSpecializations.observable()
-                .flatMap {
-                    it.let {
-                        specializationEntityUIMapper.observable(it)
-                    }
-                }.subscribe(
-                        {
-                            viewState.value = viewState.value?.copy(specializations = it)
-                            onContent1Received()
-                        },
-                        { errorState.value = it }
-                )
-
-        viewState.value?.doctors?.let {
-            onContent1Received()
-        } ?: addDisposable(doctorsDisposable)
 
         viewState.value?.areas?.let {
             onContent1Received()
         } ?: addDisposable(areasDisposable)
 
-        viewState.value?.degrees?.let {
+        viewState.value?.governs?.let {
             onContent1Received()
-        } ?: addDisposable(degreesDisposable)
+        } ?: addDisposable(governsDisposable)
 
-        viewState.value?.specializations?.let {
-            onContent1Received()
-        } ?: addDisposable(specializationsDisposable)
     }
 
-    fun getAllContent2(type: String) {
-        val areasDisposable = getAllAreas.observable()
-                .flatMap {
-                    it.let {
-                        areaEntityUIMapper.observable(it)
-                    } ?: run {
-                        throw Throwable("Something went wrong :(")
-                    }
-                }.subscribe(
-                        {
-                            viewState.value = viewState.value?.copy(areas = it)
-                            onContent2Received()
-                        },
-                        { errorState.value = it }
-                )
-
-        val providersTypesDisposable = getAllProvidersTypes.observable()
+    fun getProviderTypes(govId: String, areaId: String) {
+        val providersTypesDisposable = getAllProvidersTypes.getProviderTypes("claiming")
                 .flatMap {
                     it.let {
                         providerTypeEntityUIMapper.observable(it)
@@ -128,25 +76,19 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                 }.subscribe(
                         {
                             viewState.value = viewState.value?.copy(providerTypes = it)
-                            onContent2Received()
+                            onProviderTypesReceived()
                         },
                         { errorState.value = it }
                 )
 
-        viewState.value?.areas?.let {
-            onContent2Received()
-        } ?: addDisposable(areasDisposable)
-
         viewState.value?.providerTypes?.let {
-            onContent2Received()
+            onProviderTypesReceived()
         } ?: addDisposable(providersTypesDisposable)
-
-        getProvidersByType(type)
     }
 
-    fun getProvidersByType(type: String) {
+    fun getProvidersByType(typeId: String, govId: String, areaId: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        val providersDisposable = getAllProviders.getAllProviders(type)
+        val providersDisposable = getProvidersByType.getProvidersByType(typeId, govId, areaId)
                 .flatMap {
                     it.let {
                         providerEntityUIMapper.observable(it)
@@ -156,13 +98,13 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                 }.subscribe(
                         {
                             viewState.value = viewState.value?.copy(isLoading = false, providers = it)
-                            onContent2Received()
+                            onProvidersReceived()
                         },
                         { errorState.value = it }
                 )
-        viewState.value?.providers?.let {
-            onContent2Received()
-        } ?: addDisposable(providersDisposable)
+//        viewState.value?.providers?.let {
+//            onProvidersReceived()
+//        } ?: addDisposable(providersDisposable)
     }
 
 
@@ -177,7 +119,7 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
     }
 
 
-    fun validateUser(number : String) {
+    fun validateUser(number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
         addDisposable(validateUser.validateUser(number)
                 .map {
@@ -201,13 +143,18 @@ class ClaimingViewModel @Inject constructor(val getAllDoctors: GetAllDoctors, va
                 member = member)
         viewState.value = newViewState
     }
+
     private fun onContent1Received() {
-        if (viewState.value?.doctors != null && viewState.value?.areas != null && viewState.value?.specializations != null && viewState.value?.degrees != null)
+        if (viewState.value?.governs != null && viewState.value?.areas != null)
             viewState.value = viewState.value?.copy(isLoading = false)
     }
 
-    private fun onContent2Received() {
-        if (viewState.value?.providers != null && viewState.value?.areas != null && viewState.value?.providerTypes != null)
+    private fun onProviderTypesReceived() {
+        if (viewState.value?.providerTypes != null)
+            viewState.value = viewState.value?.copy(isLoading = false)
+    }
+    private fun onProvidersReceived() {
+        if (viewState.value?.providers != null)
             viewState.value = viewState.value?.copy(isLoading = false)
     }
 }

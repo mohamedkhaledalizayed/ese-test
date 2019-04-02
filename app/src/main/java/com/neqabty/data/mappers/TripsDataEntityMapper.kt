@@ -21,15 +21,16 @@ class TripsDataEntityMapper @Inject constructor() : Mapper<TripData, TripEntity>
                 img = from.img,
                 title = from.title,
                 typeId = from.typeId,
-                price = from.price
+                price = from.price,
+                imgs = from.imgs
         )
 
-        from.imgs?.let {
-            val imgs: List<TripEntity.TripImage> = it.map { imageItem ->
-                return@map TripEntity.TripImage(imageItem.imageId, imageItem.file, imageItem.tripId, imageItem.createdBy, imageItem.updatedBy, imageItem.createdAt, imageItem.updatedAt)
-            }
-            tripEntity.imgs = imgs
-        }
+//        from.imgs?.let {
+//            val imgs: List<TripEntity.TripImage> = it.map { imageItem ->
+//                return@map TripEntity.TripImage(imageItem.imageId, imageItem.file, imageItem.tripId, imageItem.createdBy, imageItem.updatedBy, imageItem.createdAt, imageItem.updatedAt)
+//            }
+//            tripEntity.imgs = imgs
+//        }
         return tripEntity
     }
 }

@@ -12,7 +12,7 @@ data class TripEntity(
         var governId: String?,
         var desc: String?,
         var price: String?,
-        var imgs: List<TripImage>? = null
+        var imgs: List<String>? = null
 ){
     data class TripImage(
             var imageId: Int = 0,

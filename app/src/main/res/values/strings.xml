@@ -15,7 +15,7 @@
     <string name="register"><u>لا يوجد حساب  تسجيل</u></string>
     <string name="skip">دخول كزائر</string>
     <string name="fullName">الاسم بالكامل</string>
-    <string name="email">البريد الالكترونى</string>
+    <string name="email">البريد الالكتروني</string>
     <string name="confirmPassword">تأكيد كلمة السر</string>
     <string name="age">تاريخ الميلاد</string>
     <string name="gender">النوع</string>
@@ -31,7 +31,7 @@
     <string name="callus">اتصل بنا</string>
     <string name="help">مساعدة</string>
     <string name="aboutApp">عن التطبيق</string>
-    <string name="loading">جارى التحميل</string>
+    <string name="loading">جاري التحميل</string>
     <string name="error">خطأ</string>
     <string name="error_msg">نأسف لحدوث خطأ بالإتصال</string>
     <string name="sharee">مشاركة</string>
@@ -42,7 +42,7 @@
     <string name="viewPhoto">عرض الصورة</string>
     <string name="format">yyyy/MM/dd</string>
     <string name="mandatoryField">هذا الحقل مطلوب</string>
-    <string name="loginError">خطأ فى اسم المستخدم أو كلمة المرور</string>
+    <string name="loginError">خطأ في اسم المستخدم أو كلمة المرور</string>
     <string name="passwordMatchError">يجب أن تتطابق كلمة المرور و تأكيد كلمة المرور</string>
     <string name="selectSubSyndicate">اختر النقابة الفرعية</string>
     <string name="confirmation_sent">تم ارسال الرقم التأكيدي لرقم الجوال الخاص بك</string>
@@ -61,6 +61,8 @@
     <string name="scan_centers">مراكز الأشعة</string>
     <string name="pharmacies">الصيدليات</string>
     <string name="medical_services">خدمات طبية</string>
+    <string name="optics">بصريات</string>
+    <string name="artificial_limbs">اجهزة تعويضية</string>
     <string name="laboratories">معامل التحاليل</string>
 
     <string name="mobile_title">تسجيل دخول</string>
@@ -72,16 +74,18 @@
     <string name="selectDoctor">اختر الدكتور المعالج</string>
     <string name="addRequestImage">اضافة مطالبة طبية</string>
     <string name="submit">ارسال</string>
-    <string name="medicalDirectory">الدليل الطبى</string>
+    <string name="medicalDirectory">الدليل الطبي</string>
     <string name="search">بحث</string>
     <string name="services">الخدمات</string>
     <string name="favorites">المفضلة</string>
     <string name="governorate">المحافظة</string>
     <string name="area">المنطقة</string>
+    <string name="choose_area">برجاء اختيار مكان مقدم الخدمة</string>
     <string name="service">الخدمات</string>
     <string name="degree">الدرجة العلمية</string>
     <string name="speciality">التخصص</string>
     <string name="all">الكل</string>
+    <string name="areaDetails">اختيار المنطقة</string>
     <string name="doctorDetails">بيانات الطبيب المعالج</string>
     <string name="doctor">الطبيب المعالج</string>
     <string name="doctorName">اسم الطبيب</string>
@@ -101,7 +105,7 @@
     <string name="home_title">الرئيسية</string>
     <string name="news_title">الأخبار</string>
     <string name="trips_title">الرحلات</string>
-    <string name="claiming_title">المطالبات طبية</string>
+    <string name="claiming_title">مطالبات طبية</string>
     <string name="medical_title">الدليل الطبي</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
@@ -122,7 +126,7 @@
 
     <string name="address_title">العنوان: </string>
     <string name="phone_title">التليفون: </string>
-    <string name="email_title">البريد الالكترونى: </string>
+    <string name="email_title">البريد الالكتروني: </string>
 
     <string name="date_title">تاريخ الطلب: </string>
     <string name="doctor_title">الطبيب: </string>

@@ -20,14 +20,6 @@ import javax.inject.Singleton
 @OpenForTesting
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
 
-    private val medicalProviderDataEntityMapper = MedicalProviderDataEntityMapper()
-
-    override fun getMedicalProviders(categoryId: String): Observable<List<MedicalProviderEntity>> {
-        return api.getMedicalProviders(MedicalProviderRequest(categoryId)).map { medicalProviders ->
-            medicalProviders.data?.map { medicalProviderDataEntityMapper.mapFrom(it) }
-        }
-    }
-
     private val memberDataEntityMapper = MemberDataEntityMapper()
 
     override fun validateUser(userNumber: String): Observable<MemberEntity> {
@@ -86,8 +78,8 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     private val providerTypeDataEntityMapper = ProviderTypeDataEntityMapper()
 
-    override fun getAllProviderTypes(): Observable<List<ProviderTypeEntitiy>> {
-        return api.getAllProviderTypes().map { types ->
+    override fun getAllProviderTypes(type :String): Observable<List<ProviderTypeEntitiy>> {
+        return api.getAllProviderTypes(ProviderTypeRequest(type)).map { types ->
             types.data?.map { providerTypeDataEntityMapper.mapFrom(it) }
         }
     }
@@ -103,6 +95,12 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     override fun getAllProviders(type: String): Observable<List<ProviderEntity>> {
         return api.getAllProvidersById(ProviderRequest(type)).map { providers ->
+            providers.data?.map { providerDataEntityMapper.mapFrom(it) }
+        }
+    }
+
+    override fun getProvidersByType(providerTypeId: String, govId: String, areaId: String,professionID:String?,degreeID:String?): Observable<List<ProviderEntity>> {
+        return api.getProvidersById(ProviderRequest(providerTypeId,govId,areaId,professionID,degreeID)).map { providers ->
             providers.data?.map { providerDataEntityMapper.mapFrom(it) }
         }
     }
@@ -128,6 +126,13 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     override fun getAllAreas(): Observable<List<AreaEntity>> {
         return api.getAllAreas().map { areas ->
             areas.data?.map { areaDataEntityMapper.mapFrom(it) }
+        }
+    }
+    private val governDataEntityMapper = GovernDataEntityMapper()
+
+    override fun getAllGoverns(): Observable<List<GovernEntity>> {
+        return api.getAllGoverns().map { governs ->
+            governs.map { governDataEntityMapper.mapFrom(it) }
         }
     }
 

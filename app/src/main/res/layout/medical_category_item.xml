@@ -10,32 +10,39 @@
             type="com.neqabty.presentation.ui.medicalCategories.MedicalCategoryUI" />
     </data>
 
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageView"
-            srcImage="@{category.image}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            app:layout_constraintEnd_toEndOf="parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_bg"
+            android:layout_margin="@dimen/margin_horizontal_normal"
+            android:elevation="@dimen/elevation_level_one"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvName"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                srcImage="@{category.image}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toTopOf="@id/tvName" />
 
 
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{category.name}"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView" />
-
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_vertical_normal"
+                android:text="@{category.name}"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_medium" />
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 </layout>

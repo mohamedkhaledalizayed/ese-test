@@ -1,9 +1,6 @@
 package com.neqabty.domain
 
-import com.neqabty.domain.entities.NewsEntity
-import com.neqabty.domain.entities.SyndicateEntity
-import com.neqabty.domain.entities.TripEntity
-import com.neqabty.domain.entities.UserEntity
+import com.neqabty.domain.entities.*
 import io.reactivex.Observable
 
 interface NeqabtyCache {
@@ -24,6 +21,11 @@ interface NeqabtyCache {
 
     fun saveUser(userEntity: UserEntity) : Observable<UserEntity>
     fun getUser() : Observable<UserEntity>
+
+    fun getFavorites(): Observable<List<ProviderEntity>>
+    fun addFavorite(providerEntity: ProviderEntity): Observable<ProviderEntity>
+    fun removeFavorite(providerEntity: ProviderEntity): Observable<ProviderEntity>
+    fun checkFavorite(providerEntity: ProviderEntity): Observable<Boolean>
 
     fun isEmpty(): Observable<Boolean>
     fun clear()

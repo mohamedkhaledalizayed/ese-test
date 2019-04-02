@@ -19,14 +19,13 @@ import com.neqabty.databinding.Claiming2FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.ProviderTypeUI
 import com.neqabty.presentation.entities.ProviderUI
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import kotlinx.android.synthetic.main.claiming2_fragment.*
 import javax.inject.Inject
-import com.neqabty.presentation.util.PreferencesHelper
 
 @OpenForTesting
 class ClaimingStep2Fragment : BaseFragment(), Injectable {
@@ -38,13 +37,11 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
     var binding by autoCleared<Claiming2FragmentBinding>()
 
     lateinit var claimingViewModel: ClaimingViewModel
-    var areasResultList: List<AreaUI>? = mutableListOf()
     var providersTypesResultList: List<ProviderTypeUI>? = mutableListOf()
-    var providersResultList: List<ProviderUI>? = mutableListOf()
+    var providersResultList: List<ProviderUI>? = null
 
-    var providerTypeID: String = "1"
-    var providerID: String = "1"
-    var areaID: String = "1"
+    var providerTypeID: Int = 0
+    var providerID: Int = 0
 
     lateinit var pager: ViewPager
     override fun onCreateView(
@@ -78,7 +75,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         claimingViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(),retryCallback =  {
                 binding.progressbar.visibility = View.VISIBLE
-                claimingViewModel.getAllContent2("1")
+                claimingViewModel.getProviderTypes(ClaimingData.governId.toString(),ClaimingData.areaId.toString())
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
@@ -86,7 +83,6 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         })
 
         binding.edNumber.setText(PreferencesHelper(requireContext()).user)
-        binding.edDoctor.setText(ClaimingData.doctorName)
 
         binding.bNext.setOnClickListener {
             if (isDataValid(spProvider.selectedItem)) {
@@ -96,51 +92,32 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
                 pager.setCurrentItem(2, true)
             }
         }
-        claimingViewModel.getAllContent2("1")
+        claimingViewModel.getProviderTypes(ClaimingData.governId.toString(),ClaimingData.areaId.toString())
     }
 
 
     private fun handleViewState(state: ClaimingViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
-        state.areas?.let {
-            areasResultList = it
-        }
+
         state.providerTypes?.let {
             providersTypesResultList = it
         }
         state.providers?.let {
             providersResultList = it
         }
-        if (state.providers != null && state.areas != null && state.providerTypes != null) {
+        if (state.providerTypes != null && providersResultList == null && !state.isLoading)
             initializeSpinners()
-            state.areas = null
-            state.providers = null
-        } else if (state.providers != null) {
+        else if(!state.isLoading){
             renderProviders()
+            binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
         }
     }
+
 
 //region
 
     fun initializeSpinners() {
-        renderAreas()
         renderProvidersTypes()
-
-        renderProviders()
-    }
-
-    fun renderAreas() {
-        binding.spArea.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, areasResultList)
-        binding.spArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                if (areaID.equals((parent.getItemAtPosition(position) as AreaUI).id.toString()!!))
-                    return
-                areaID = (parent.getItemAtPosition(position) as AreaUI).id.toString()!!
-                renderProviders()
-            }
-        }
     }
 
     fun renderProvidersTypes() {
@@ -148,23 +125,18 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         binding.spProviderType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                if (providerTypeID.equals((parent.getItemAtPosition(position) as ProviderTypeUI).id.toString()!!))
-                    return
+//                if (providerTypeID.equals((parent.getItemAtPosition(position) as ProviderTypeUI).id.toString()!!))
+//                    return
 
-                providerTypeID = (parent.getItemAtPosition(position) as ProviderTypeUI).id.toString()!!
-                getProvidersByType()
+                providerTypeID = (parent.getItemAtPosition(position) as ProviderTypeUI).id
+                getProviders(providerTypeID)
             }
         }
+        binding.spProviderType.setSelection(0)
     }
 
     fun renderProviders() {
-        var filteredProvidersList: List<ProviderUI>? = mutableListOf()
-
-        filteredProvidersList = providersResultList?.filter {
-            it.areaId.equals(areaID)
-        }
-
-        binding.spProvider.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, filteredProvidersList)
+        binding.spProvider.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, providersResultList)
         binding.spProvider.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -172,8 +144,8 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         }
     }
 
-    fun getProvidersByType() {
-        claimingViewModel.getProvidersByType(providerTypeID)
+    fun getProviders(providerTypeID : Int) {
+        claimingViewModel.getProvidersByType(providerTypeID.toString(),ClaimingData.governId.toString(),ClaimingData.areaId.toString())
     }
 
     private fun isDataValid(doctor: Any?): Boolean {

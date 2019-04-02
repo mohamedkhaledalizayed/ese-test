@@ -50,35 +50,6 @@
                     android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
 
-                <TextView
-                    android:id="@+id/tvDoctor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="@string/doctor"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold" />
-
-
-                <EditText
-                    android:id="@+id/edDoctor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="@string/syndicateNumber"
-                    android:inputType="number"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <Spinner
-                    android:id="@+id/spArea"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/area"
-                    android:textDirection="rtl"
-                    android:textSize="@dimen/text_size_medium" />
-
                 <Spinner
                     android:id="@+id/spProviderType"
                     style="@style/Base.Widget.AppCompat.Spinner.Underlined"

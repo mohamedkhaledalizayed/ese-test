@@ -58,7 +58,7 @@ class ClaimingFragment : BaseFragment(), Injectable {
         adapter.addFragment(ClaimingStep1Fragment())
         adapter.addFragment(ClaimingStep2Fragment())
         adapter.addFragment(ClaimingStep3Fragment())
-        adapter.addFragment(ClaimingStep4Fragment())
+//        adapter.addFragment(ClaimingStep4Fragment())
         binding.viewpager.adapter = adapter
         binding.viewpager.setSwipePagingEnabled(false)
         binding.indicator.setViewPager(binding.viewpager)

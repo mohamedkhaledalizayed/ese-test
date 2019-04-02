@@ -19,7 +19,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.news.NewsAdapter
-import com.neqabty.presentation.util.HasOptionsMenu
+import com.neqabty.presentation.util.HasHomeOptionsMenu
 import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
 
 @OpenForTesting
-class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasOptionsMenu {
+class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasHomeOptionsMenu {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -121,7 +121,7 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasOption
             navController().navigate(R.id.tripsFragment)
         }
         binding.llMedical.setOnClickListener{
-            navController().navigate(R.id.medicalCategoriesFragment)
+            navController().navigate(R.id.chooseAreaFragment)
         }
     }
 

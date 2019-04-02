@@ -1,10 +1,13 @@
 package com.neqabty.presentation.di
 
 import com.neqabty.presentation.ui.about.AboutFragment
+import com.neqabty.presentation.ui.chooseArea.ChooseAreaFragment
 import com.neqabty.presentation.ui.claiming.*
+import com.neqabty.presentation.ui.favorites.FavoritesFragment
 import com.neqabty.presentation.ui.home.HomeFragment
 import com.neqabty.presentation.ui.login.LoginFragment
 import com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragment
+import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsFragment
 import com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsFragment
 import com.neqabty.presentation.ui.medicalProviders.MedicalProvidersFragment
 import com.neqabty.presentation.ui.mobile.MobileFragment
@@ -12,6 +15,7 @@ import com.neqabty.presentation.ui.news.NewsFragment
 import com.neqabty.presentation.ui.newsDetails.NewsDetailsFragment
 import com.neqabty.presentation.ui.notificationDetails.NotificationDetailsFragment
 import com.neqabty.presentation.ui.notifications.NotificationsFragment
+import com.neqabty.presentation.ui.search.SearchFragment
 import com.neqabty.presentation.ui.signup.SignupFragment
 import com.neqabty.presentation.ui.signup.SignupStep1Fragment
 import com.neqabty.presentation.ui.signup.SignupStep2Fragment
@@ -87,6 +91,15 @@ abstract class FragmentBuildersModule {
     abstract fun contributeNotificationsDetailsFragment(): NotificationDetailsFragment
 
     @ContributesAndroidInjector
+    abstract fun contributeChooseAreaFragment(): ChooseAreaFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeSearchFragment(): SearchFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMedicalProfessionsFragment(): MedicalProfessionsFragment
+
+    @ContributesAndroidInjector
     abstract fun contributeMedicalCategoriesFragment(): MedicalCategoriesFragment
 
     @ContributesAndroidInjector
@@ -94,6 +107,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMedicalProviderDetailsFragment(): MedicalProviderDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeFavoritesFragment(): FavoritesFragment
 
     @ContributesAndroidInjector
     abstract fun contributeHomeFragment(): HomeFragment

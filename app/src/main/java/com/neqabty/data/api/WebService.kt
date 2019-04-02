@@ -38,6 +38,9 @@ interface WebService {
     @GET("api/v2/medical/areas")
     fun getAllAreas(): Observable<ApiResponse<List<AreaData>>>
 
+    @GET("api/Governorates")
+    fun getAllGoverns(): Observable<List<GovernData>>
+
     @GET("api/v2/medical/doctors")
     fun getAllDoctors(): Observable<ApiResponse<List<DoctorData>>>
 
@@ -47,11 +50,14 @@ interface WebService {
     @GET("api/v2/medical/degrees")
     fun getAllDegrees(): Observable<ApiResponse<List<DegreeData>>>
 
-    @GET("api/v2/medical/providerTypes")
-    fun getAllProviderTypes(): Observable<ApiResponse<List<ProviderTypeData>>>
+    @POST("api/v3/medical/providerTypes")
+    fun getAllProviderTypes(@Body providerTypeRequest: ProviderTypeRequest): Observable<ApiResponse<List<ProviderTypeData>>>
 
     @POST("api/v2/medical/service_provider")
     fun getAllProvidersById(@Body providerRequest: ProviderRequest): Observable<ApiResponse<List<ProviderData>>>
+
+    @POST("api/v3/medical/providers")
+    fun getProvidersById(@Body providerRequest: ProviderRequest): Observable<ApiResponse<List<ProviderData>>>
 
     @POST("api/v2/users/signup")
     fun registerUser(@Body registerRequest: RegisterRequest): Observable<ApiResponse<Unit>>
@@ -62,9 +68,6 @@ interface WebService {
 
     @POST("http://18.220.91.142:8081/neqabty/inquiry")
     fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
-
-    @POST("api/v3/medical/providers")
-    fun getMedicalProviders(@Body providerRequest: MedicalProviderRequest): Observable<ApiResponse<List<MedicalProviderData>>>
 
     @POST("api/Auth/Login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>

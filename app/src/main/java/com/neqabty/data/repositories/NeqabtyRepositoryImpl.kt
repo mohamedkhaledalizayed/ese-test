@@ -16,10 +16,6 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
         return remoteDataStore.getTripDetails(id)
     }
 
-    override fun getMedicalProviders(categoryId: String): Observable<List<MedicalProviderEntity>> {
-        return remoteDataStore.getMedicalProviders(categoryId)
-    }
-
     override fun validateUser(userNumber: String): Observable<MemberEntity> {
         return remoteDataStore.validateUser(userNumber)
     }
@@ -36,8 +32,8 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
         return remoteDataStore.sendMedicalRequest(mainSyndicateId,subSyndicateId,userNumber,email,phone,profession,degree,area,doctor,providerType,provider,docsNumber,doc1, doc2, doc3, doc4, doc5)
     }
 
-    override fun getAllProviderTypes(): Observable<List<ProviderTypeEntitiy>> {
-        return remoteDataStore.getAllProviderTypes()
+    override fun getAllProviderTypes(type :String): Observable<List<ProviderTypeEntitiy>> {
+        return remoteDataStore.getAllProviderTypes(type)
     }
 
     override fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, userNumber:String): Observable<Unit> {
@@ -46,6 +42,10 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
 
     override fun getAllProviders(type:String): Observable<List<ProviderEntity>> {
         return remoteDataStore.getAllProviders(type)
+    }
+
+    override fun getProvidersByType(providerTypeId: String, govId: String, areaId: String,professionID:String?,degreeID:String?): Observable<List<ProviderEntity>> {
+        return remoteDataStore.getProvidersByType(providerTypeId, govId, areaId,professionID, degreeID)
     }
 
     override fun getAllDoctors(): Observable<List<DoctorEntity>> {
@@ -58,6 +58,10 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
 
     override fun getAllAreas(): Observable<List<AreaEntity>> {
         return remoteDataStore.getAllAreas()
+    }
+
+    override fun getAllGoverns(): Observable<List<GovernEntity>> {
+        return remoteDataStore.getAllGoverns()
     }
 
     override fun getAllSpecializations(): Observable<List<SpecializationEntity>> {
@@ -136,6 +140,18 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
 
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {
         return cachedDataStore.saveUser(userEntity)
+    }
+
+    fun addFavorite(providerEntity: ProviderEntity): Observable<ProviderEntity> {
+        return cachedDataStore.addFavorite(providerEntity)
+    }
+
+    fun removeFavorite(providerEntity: ProviderEntity): Observable<ProviderEntity> {
+        return cachedDataStore.removeFavorite(providerEntity)
+    }
+
+    fun getFavorites(): Observable<List<ProviderEntity>> {
+        return cachedDataStore.getFavorites()
     }
 
 }

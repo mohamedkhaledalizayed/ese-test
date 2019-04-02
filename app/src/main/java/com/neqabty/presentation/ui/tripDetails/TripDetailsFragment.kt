@@ -81,11 +81,11 @@ class TripDetailsFragment : BaseFragment(), Injectable {
 
     fun initializeViews(tripItem: TripUI) {
         tripItem.imgs?.let {
-            var imgs = mutableListOf<String>()
-            for (i in 0..it.size) {
-                imgs[i] = it[i].file!!
-            }
-            val adapter = CustomImagePagerAdapter(requireContext(), imgs)
+//            var imgs = mutableListOf<String>()
+//            for (i in 0 until it.size) {
+//                imgs.add(it[i].file!!)
+//            }
+            val adapter = CustomImagePagerAdapter(requireContext(), it)
             binding.viewpager.adapter = adapter
             binding.viewpager.setSwipePagingEnabled(true)
             binding.viewpager.visibility = View.VISIBLE
@@ -93,7 +93,7 @@ class TripDetailsFragment : BaseFragment(), Injectable {
             binding.indicator.visibility = View.VISIBLE
         }
 
-        binding.tvPrice.visibility = View.VISIBLE
+        binding.svContent.visibility = View.VISIBLE
         binding.tripItem = tripItem
     }
 

@@ -2,29 +2,27 @@ package com.neqabty.presentation.ui.medicalProviders
 
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
-import android.support.constraint.ConstraintLayout
 import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.MedicalProviderItemBinding
-import com.neqabty.presentation.entities.MedicalProviderUI
-import com.neqabty.presentation.util.DisplayMetrics
+import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class MedicalProvidersAdapter(
         private val dataBindingComponent: DataBindingComponent,
         appExecutors: AppExecutors,
-        private val callback: ((MedicalProviderUI) -> Unit)?
-) : DataBoundListAdapter<MedicalProviderUI, MedicalProviderItemBinding>(
+        private val callback: ((ProviderUI) -> Unit)?
+) : DataBoundListAdapter<ProviderUI, MedicalProviderItemBinding>(
         appExecutors = appExecutors,
-        diffCallback = object : DiffUtil.ItemCallback<MedicalProviderUI>() {
-            override fun areItemsTheSame(oldItem: MedicalProviderUI, newItem: MedicalProviderUI): Boolean {
+        diffCallback = object : DiffUtil.ItemCallback<ProviderUI>() {
+            override fun areItemsTheSame(oldItem: ProviderUI, newItem: ProviderUI): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: MedicalProviderUI, newItem: MedicalProviderUI): Boolean {
+            override fun areContentsTheSame(oldItem: ProviderUI, newItem: ProviderUI): Boolean {
                 return oldItem.name == newItem.name
             }
         }
@@ -44,13 +42,10 @@ class MedicalProvidersAdapter(
                 callback?.invoke(it)
             }
         }
-
-        val layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width /2,DisplayMetrics.width /2)
-        binding.root.layoutParams = layoutParams
         return binding
     }
 
-    override fun bind(binding: MedicalProviderItemBinding, item: MedicalProviderUI) {
+    override fun bind(binding: MedicalProviderItemBinding, item: ProviderUI) {
         binding.provider = item
     }
 }

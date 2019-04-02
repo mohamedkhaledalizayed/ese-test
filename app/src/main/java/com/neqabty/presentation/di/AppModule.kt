@@ -6,6 +6,10 @@ import android.content.Context
 import com.neqabty.MyApp
 import com.neqabty.data.api.WebService
 import com.neqabty.data.db.NeqabtyDb
+import com.neqabty.data.db.ProviderDao
+import com.neqabty.data.db.RoomHistoryCache
+import com.neqabty.data.mappers.ProviderDataEntityMapper
+import com.neqabty.data.mappers.ProviderEntityDataMapper
 import com.neqabty.data.repositories.CachedNeqabtyDataStore
 import com.neqabty.data.repositories.MemoryNeqabtyCache
 import com.neqabty.data.repositories.NeqabtyRepositoryImpl
@@ -64,12 +68,12 @@ class AppModule {
                 .build()
     }
 
-//    @Singleton
-//    @Provides
-//    fun provideWeatherDao(db: NeqabtyDb): WeatherDao {
-//        return db.weatherDao()
-//    }
-//
+    @Singleton
+    @Provides
+    fun provideProviderDao(db: NeqabtyDb): ProviderDao {
+        return db.providerDao()
+    }
+
 //    @Singleton
 //    @Provides
 //    fun provideHistoryDao(db: NeqabtyDb): HistoryDao {
@@ -92,6 +96,13 @@ class AppModule {
     @Named(DI.inMemoryCache)
     fun provideInMemoryWeatherCache(): NeqabtyCache {
         return MemoryNeqabtyCache()
+    }
+
+    @Singleton
+    @Provides
+    @Named(DI.roomCache)
+    fun provideRoomCache(db: NeqabtyDb): NeqabtyCache {
+        return RoomHistoryCache(db, ProviderDataEntityMapper(), ProviderEntityDataMapper())
     }
 
     @Singleton
@@ -157,6 +168,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetAllGoverns(neqabtyRepository: NeqabtyRepository): GetAllGoverns {
+        return GetAllGoverns(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetAllDoctors(neqabtyRepository: NeqabtyRepository): GetAllDoctors {
         return GetAllDoctors(ASyncTransformer(), neqabtyRepository)
     }
@@ -177,6 +194,12 @@ class AppModule {
     @Provides
     fun provideGetAllProviders(neqabtyRepository: NeqabtyRepository): GetAllProviders {
         return GetAllProviders(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetProvidersByType(neqabtyRepository: NeqabtyRepository): GetProvidersByType {
+        return GetProvidersByType(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
@@ -211,7 +234,25 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideGetMedicalProviders(neqabtyRepository: NeqabtyRepository): GetMedicalProviders {
-        return GetMedicalProviders(ASyncTransformer(), neqabtyRepository)
+    fun provideAddFavorite(@Named(DI.roomCache) neqabtyCache: NeqabtyCache): AddFavorite {
+        return AddFavorite(ASyncTransformer(), neqabtyCache)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetFavorites(@Named(DI.roomCache) neqabtyCache: NeqabtyCache): GetFavorites {
+        return GetFavorites(ASyncTransformer(), neqabtyCache)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCheckFavorite(@Named(DI.roomCache) neqabtyCache: NeqabtyCache): CheckFavorite {
+        return CheckFavorite(ASyncTransformer(), neqabtyCache)
+    }
+
+    @Singleton
+    @Provides
+    fun provideRemoveFavorite(@Named(DI.roomCache) neqabtyCache: NeqabtyCache): RemoveFavorite {
+        return RemoveFavorite(ASyncTransformer(), neqabtyCache)
     }
 }

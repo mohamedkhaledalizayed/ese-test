@@ -8,6 +8,22 @@ import com.neqabty.domain.usecases.GetAllSpecializations
 import io.reactivex.Observable
 
 class TestNeqabtyCache : NeqabtyCache {
+    override fun checkFavorite(providerEntity: ProviderEntity): Observable<Boolean> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getFavorites(): Observable<List<ProviderEntity>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun addFavorite(providerEntity: ProviderEntity): Observable<ProviderEntity> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun removeFavorite(providerEntity: ProviderEntity): Observable<ProviderEntity> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getSubSyndicates(): Observable<List<SyndicateEntity>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

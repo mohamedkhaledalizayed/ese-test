@@ -29,14 +29,14 @@ data class TripData(
         @field:SerializedName("hotel_one_person")
         var price: String?,
         @field:SerializedName("images")
-        var imgs: List<TripImage>? = null
+        var imgs: List<String>? = null
 ): Response(){
         data class TripImage(
-                @field:SerializedName("trip_image_id")
+                @field:SerializedName("id")
                 var imageId: Int = 0,
-                @field:SerializedName("image_file")
+                @field:SerializedName("image")
                 var file: String?,
-                @field:SerializedName("trip_id")
+                @field:SerializedName("place_id")
                 var tripId: Int?,
                 @field:SerializedName("created_by")
                 var createdBy: String?,

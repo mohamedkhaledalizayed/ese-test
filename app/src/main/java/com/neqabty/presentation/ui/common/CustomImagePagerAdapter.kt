@@ -27,4 +27,8 @@ class CustomImagePagerAdapter(val context: Context, val imgs: List<String>) : Pa
         container.addView(view)
         return view
     }
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container.removeView(`object` as View?)
+    }
 }

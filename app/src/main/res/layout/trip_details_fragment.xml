@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="tripItem"
             type="com.neqabty.presentation.entities.TripUI" />
@@ -16,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,93 +31,100 @@
                 android:scaleType="fitXY"
                 android:src="@mipmap/header_bg" />
 
-
-            <com.neqabty.presentation.ui.common.SwipeLockableViewPager
-                android:id="@+id/viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone" />
-
-            <com.rd.PageIndicatorView
-                android:id="@+id/indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/margin_horizontal_small"
-                android:visibility="gone"
-                app:piv_radius="4dp"
-                app:piv_rtl_mode="on"
-                app:piv_selectedColor="@color/colorPrimary"
-                app:piv_unselectedColor="@color/colorAccent" />
-
             <ScrollView
                 android:id="@+id/svContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none">
+                android:scrollbars="none"
+                android:visibility="gone">
 
-                <android.support.constraint.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_horizontal_small"
-                    android:elevation="@dimen/elevation_level_one"
-                    android:paddingStart="@dimen/margin_horizontal_normal"
-                    android:paddingTop="@dimen/margin_horizontal_normal"
-                    android:paddingBottom="@dimen/margin_horizontal_normal">
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/llTitle"
-                        android:layout_width="0dp"
+                    <com.neqabty.presentation.ui.common.SwipeLockableViewPager
+                        android:id="@+id/viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_margin="@dimen/margin_horizontal_normal"
+                        android:visibility="gone" />
+
+                    <com.rd.PageIndicatorView
+                        android:id="@+id/indicator"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toStartOf="@id/tvPrice"
-                        app:layout_constraintHorizontal_weight=".8"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:layout_gravity="center_horizontal"
+                        android:padding="@dimen/margin_horizontal_small"
+                        android:visibility="gone"
+                        app:piv_radius="4dp"
+                        app:piv_selectedColor="@color/colorPrimary"
+                        app:piv_unselectedColor="@color/colorAccent" />
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_horizontal_small"
+                        android:elevation="@dimen/elevation_level_one"
+                        android:paddingStart="@dimen/margin_horizontal_normal"
+                        android:paddingTop="@dimen/margin_horizontal_normal"
+                        android:paddingBottom="@dimen/margin_horizontal_normal">
+
+                        <LinearLayout
+                            android:id="@+id/llTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toStartOf="@id/tvPrice"
+                            app:layout_constraintHorizontal_weight=".8"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/tvTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:lineSpacingMultiplier="0.6"
+                                android:maxLines="2"
+                                android:text="@{tripItem.title}"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/text_size_large" />
+
+                            <TextView
+                                android:id="@+id/tvDesc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:lineSpacingMultiplier="0.8"
+                                android:maxLines="2"
+                                android:text="@{tripItem.desc}"
+                                android:textSize="@dimen/text_size_medium" />
+
+                        </LinearLayout>
+
 
                         <TextView
-                            android:id="@+id/tvTitle"
-                            android:layout_width="match_parent"
+                            android:id="@+id/tvPrice"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:lineSpacingMultiplier="0.6"
-                            android:maxLines="2"
-                            android:text="@{tripItem.title}"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/text_size_large" />
-
-                        <TextView
-                            android:id="@+id/tvDesc"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:lineSpacingMultiplier="0.8"
-                            android:maxLines="2"
-                            android:text="@{tripItem.desc}"
-                            android:textSize="@dimen/text_size_medium" />
-
-                    </LinearLayout>
+                            android:background="@mipmap/price_bg"
+                            android:gravity="center_horizontal|bottom"
+                            android:maxLines="1"
+                            android:text="@{tripItem.price}"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_large"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_weight=".2"
+                            app:layout_constraintStart_toEndOf="@id/llTitle" />
 
 
-                    <TextView
-                        android:id="@+id/tvPrice"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/price_bg"
-                        android:gravity="center_horizontal|bottom"
-                        android:maxLines="1"
-                        android:text="@{tripItem.price}"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_large"
-                        android:textStyle="bold"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_weight=".2"
-                        app:layout_constraintStart_toEndOf="@id/llTitle" />
-
-
-                </android.support.constraint.ConstraintLayout>
+                    </android.support.constraint.ConstraintLayout>
+                </LinearLayout>
             </ScrollView>
+
         </LinearLayout>
 
         <ProgressBar

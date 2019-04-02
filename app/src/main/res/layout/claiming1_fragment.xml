@@ -48,14 +48,13 @@
                     android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
 
-                <TextView
-                    android:id="@+id/tvDoctor"
+                <Spinner
+                    android:id="@+id/spGovern"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="@string/doctor"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
+                    android:hint="@string/governorate"
+                    android:textDirection="rtl"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:textSize="@dimen/text_size_medium" />
 
                 <Spinner
@@ -64,34 +63,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/area"
                     android:textDirection="rtl"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <Spinner
-                    android:id="@+id/spSpecialization"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/speciality"
-                    android:textDirection="rtl"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <Spinner
-                    android:id="@+id/spDegree"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/degree"
-                    android:textDirection="rtl"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <Spinner
-                    android:id="@+id/spDoctorName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/doctorName"
-                    android:textDirection="rtl"
-                    android:clickable="false"
                     style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:textSize="@dimen/text_size_medium" />
 

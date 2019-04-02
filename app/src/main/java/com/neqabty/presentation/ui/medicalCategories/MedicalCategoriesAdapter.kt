@@ -44,7 +44,7 @@ class MedicalCategoriesAdapter(
             }
         }
 
-        val layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width /2,DisplayMetrics.width /2)
+        val layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width *45/100,DisplayMetrics.width *40/100)
         binding.root.layoutParams = layoutParams
         return binding
     }

@@ -6,11 +6,14 @@
         android:icon="@mipmap/notification_ic"
         android:title="@string/notifications_title"
         app:showAsAction="always" />
-    <!--<item-->
-        <!--android:id="@+id/logout_fragment"-->
-        <!--android:icon="@mipmap/logout_ic"-->
-        <!--android:title="@string/logout_title"-->
-        <!--android:iconTint="@color/white"-->
-        <!--android:visible="false"-->
-        <!--app:showAsAction="always" />-->
+    <item
+        android:id="@+id/search_fragment"
+        android:icon="@mipmap/search"
+        android:title="@string/search"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/favorites_fragment"
+        android:icon="@mipmap/add_fav"
+        android:title="@string/favorites"
+        app:showAsAction="always" />
 </menu>

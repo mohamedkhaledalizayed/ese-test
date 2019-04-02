@@ -12,11 +12,15 @@ import javax.inject.Singleton
 @Singleton
 @OpenForTesting
 class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: NeqabtyCache): NeqabtyDataStore {
-    override fun getTripDetails(id: String): Observable<TripEntity> {
+    override fun getProvidersByType(providerTypeId: String, govId: String, areaId: String, professionID: String?, degreeID: String?): Observable<List<ProviderEntity>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getMedicalProviders(categoryId: String): Observable<List<MedicalProviderEntity>> {
+    override fun getAllGoverns(): Observable<List<GovernEntity>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getTripDetails(id: String): Observable<TripEntity> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -36,7 +40,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getAllProviderTypes(): Observable<List<ProviderTypeEntitiy>> {
+    override fun getAllProviderTypes(type :String): Observable<List<ProviderTypeEntitiy>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -115,6 +119,18 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
 
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {
         return neqabtyCache.saveUser(userEntity)
+    }
+
+    fun addFavorite(providerEntity: ProviderEntity): Observable<ProviderEntity> {
+        return neqabtyCache.addFavorite(providerEntity)
+    }
+
+    fun removeFavorite(providerEntity: ProviderEntity): Observable<ProviderEntity> {
+        return neqabtyCache.removeFavorite(providerEntity)
+    }
+
+    fun getFavorites(): Observable<List<ProviderEntity>> {
+        return neqabtyCache.getFavorites()
     }
 
 

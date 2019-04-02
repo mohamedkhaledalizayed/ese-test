@@ -21,6 +21,10 @@ open class BaseFragment : Fragment() {
         }
     }
 
+    fun setToolbarTitle(title: String) {
+        (activity as AppCompatActivity).supportActionBar?.title = title
+    }
+
 
     fun showConnectionAlert(context: Context, retryCallback: (() -> Unit), cancelCallback: (() -> Unit)) {
         builder = AlertDialog.Builder(context)
@@ -34,10 +38,10 @@ open class BaseFragment : Fragment() {
             cancelCallback.invoke()
         }
 
-        if(dialog == null)
+        if (dialog == null)
             dialog = builder?.create()
 
-        if(!dialog?.isShowing!!)
+        if (!dialog?.isShowing!!)
             dialog?.show()
     }
 

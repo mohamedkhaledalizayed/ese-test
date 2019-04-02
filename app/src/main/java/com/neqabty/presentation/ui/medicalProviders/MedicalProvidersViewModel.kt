@@ -1,17 +1,17 @@
 package com.neqabty.presentation.ui.medicalProviders
 
 import android.arch.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.GetMedicalProviders
+import com.neqabty.domain.usecases.GetProvidersByType
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
-import com.neqabty.presentation.entities.MedicalProviderUI
-import com.neqabty.presentation.mappers.MedicalProviderEntityUIMapper
+import com.neqabty.presentation.entities.ProviderUI
+import com.neqabty.presentation.mappers.ProviderEntityUIMapper
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 @OpenForTesting
-class MedicalProvidersViewModel @Inject constructor(private val getMedicalProviders: GetMedicalProviders) : BaseViewModel() {
+class MedicalProvidersViewModel @Inject constructor(private  val getProvidersByType: GetProvidersByType) : BaseViewModel() {
 
-    private val medicalProviderEntityUIMapper = MedicalProviderEntityUIMapper()
+    private val providerEntityUIMapper = ProviderEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<MedicalProvidersViewState> = MutableLiveData()
 
@@ -19,13 +19,13 @@ class MedicalProvidersViewModel @Inject constructor(private val getMedicalProvid
         viewState.value = MedicalProvidersViewState()
     }
 
-    fun getMedicalProviders(id:String) {
+    fun getMedicalProviders(id:String,govID:String,areaID:String,professionID:String?,degreeID:String?) {
         viewState.value?.providers?.let {
             onProvidersReceived(it)
-        } ?: addDisposable(getMedicalProviders.getMedicalProviders(id)
+        } ?: addDisposable(getProvidersByType.getProvidersByType(id,govID,areaID,professionID, degreeID)
                 .flatMap {
                     it.let {
-                        medicalProviderEntityUIMapper.observable(it)
+                        providerEntityUIMapper.observable(it)
                     }
                 }.subscribe(
                         { onProvidersReceived(it) },
@@ -38,7 +38,7 @@ class MedicalProvidersViewModel @Inject constructor(private val getMedicalProvid
     }
 
 
-    private fun onProvidersReceived(providers: List<MedicalProviderUI>) {
+    private fun onProvidersReceived(providers: List<ProviderUI>) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
                 providers = providers)

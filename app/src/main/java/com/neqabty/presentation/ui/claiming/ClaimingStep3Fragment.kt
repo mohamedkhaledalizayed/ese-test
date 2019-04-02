@@ -86,13 +86,12 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
                 .get(ClaimingViewModel::class.java)
 
         binding.edNumber.setText(PreferencesHelper(requireContext()).user)
-        binding.edDoctor.setText(ClaimingData.doctorName)
         binding.edProvider.setText(ClaimingData.providerName)
 
         binding.bSend.setOnClickListener {
             if (photosList.size > 0) {
                 val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, ClaimingData.professionId, ClaimingData.degreeId, ClaimingData.areaId, ClaimingData.doctorId,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0,0, ClaimingData.areaId, 0,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             } else
                 showPickPhotoAlert()
         }
@@ -118,7 +117,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             showConnectionAlert(requireContext(),retryCallback =  {
                 binding.progressbar.visibility = View.VISIBLE
                 val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, ClaimingData.professionId, ClaimingData.degreeId, ClaimingData.areaId, ClaimingData.doctorId,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0,0, ClaimingData.areaId, 0,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
@@ -130,7 +129,8 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
     private fun handleViewState(state: ClaimingViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading)
-            pager.setCurrentItem(3, true)
+            showSuccessAlert()
+//            pager.setCurrentItem(3, true)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -204,7 +204,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
     private fun onCaptureImageResult(data: Intent) {
         var thumbnail: Bitmap = data.getExtras().get("data") as Bitmap
         var bytes: ByteArrayOutputStream = ByteArrayOutputStream()
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
 
         var name = System.currentTimeMillis().toString() + ".jpg"
         var destination: File = File(Environment.getExternalStorageDirectory(), name)
@@ -228,7 +228,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
 
     fun saveImage(myBitmap: Bitmap): PhotoUI {
         val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
         val path: String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
         val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
         val directory = File(path)
@@ -272,6 +272,19 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+
+    fun showSuccessAlert() {
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.congrats))
+        builder?.setMessage(getString(R.string.request_sent))
+        builder?.setCancelable(false)
+        builder?.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
+         var dialog = builder?.create()
+         dialog?.show()
     }
     // endregion
     fun navController() = findNavController()

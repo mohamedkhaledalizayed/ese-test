@@ -12,7 +12,8 @@ class AreaDataEntityMapper @Inject constructor() : Mapper<AreaData, AreaEntity>(
     override fun mapFrom(from: AreaData): AreaEntity {
         return AreaEntity(
                 id = from.id,
-                name = from.name
+                name = from.name,
+                govId = from.govId
         )
     }
 }

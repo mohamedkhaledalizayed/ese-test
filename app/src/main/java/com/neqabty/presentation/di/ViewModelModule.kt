@@ -4,14 +4,19 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.neqabty.MainViewModel
 import com.neqabty.presentation.ui.about.AboutViewModel
+import com.neqabty.presentation.ui.chooseArea.ChooseAreaViewModel
 import com.neqabty.presentation.ui.claiming.ClaimingViewModel
+import com.neqabty.presentation.ui.favorites.FavoritesViewModel
 import com.neqabty.presentation.ui.home.HomeViewModel
 import com.neqabty.presentation.ui.login.LoginViewModel
+import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsViewModel
+import com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsViewModel
 import com.neqabty.presentation.ui.medicalProviders.MedicalProvidersViewModel
 import com.neqabty.presentation.ui.mobile.MobileViewModel
 import com.neqabty.presentation.ui.news.NewsViewModel
 import com.neqabty.presentation.ui.notificationDetails.NotificationDetailsViewModel
 import com.neqabty.presentation.ui.notifications.NotificationsViewModel
+import com.neqabty.presentation.ui.search.SearchViewModel
 import com.neqabty.presentation.ui.signup.SignupViewModel
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesViewModel
 import com.neqabty.presentation.ui.syndicates.SyndicatesViewModel
@@ -106,6 +111,36 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MedicalProvidersViewModel::class)
     abstract fun bindMedicalProvidersViewModel(medicalProvidersViewModel: MedicalProvidersViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChooseAreaViewModel::class)
+    abstract fun bindChooseAreaViewModel(chooseAreaViewModel: ChooseAreaViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchViewModel::class)
+    abstract fun bindSearchViewModel(searchViewModel: SearchViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MedicalProfessionsViewModel::class)
+    abstract fun bindMedicalProfessionsViewModel(medicalProfessionsViewModel: MedicalProfessionsViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FavoritesViewModel::class)
+    abstract fun bindFavoritesViewModel(favoritesViewModel: FavoritesViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MedicalProviderDetailsViewModel::class)
+    abstract fun bindMedicalProviderDetailsViewModel(medicalProviderDetailsViewModel: MedicalProviderDetailsViewModel): ViewModel
 
 
     @Binds

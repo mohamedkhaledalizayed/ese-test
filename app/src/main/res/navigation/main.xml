@@ -116,8 +116,38 @@
         android:label="@string/medicalDirectory"
         tools:layout="@layout/medical_categories_fragment">
         <action
-            android:id="@+id/openCategory"
+            android:id="@+id/openProviders"
             app:destination="@id/medicalProvidersFragment" />
+        <action
+            android:id="@+id/openProfessions"
+            app:destination="@id/medicalProfessionsFragment" />
+        <argument
+            android:name="governID"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="areaID"
+            app:argType="java.lang.Integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicalProfessionsFragment"
+        android:name="com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsFragment"
+        android:label="@string/doctors"
+        tools:layout="@layout/medical_professions_fragment">
+        <action
+            android:id="@+id/openProviders"
+            app:destination="@id/medicalProvidersFragment" />
+        <argument
+            android:name="title"
+            app:argType="java.lang.String" />
+        <argument
+            android:name="categoryId"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="governID"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="areaID"
+            app:argType="java.lang.Integer" />
     </fragment>
     <fragment
         android:id="@+id/medicalProvidersFragment"
@@ -128,8 +158,23 @@
             android:id="@+id/openProviderDetails"
             app:destination="@id/medicalProviderDetailsFragment" />
         <argument
+            android:name="title"
+            app:argType="java.lang.String" />
+        <argument
             android:name="categoryId"
             app:argType="java.lang.Integer" />
+        <argument
+            android:name="governID"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="areaID"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="professionID"
+            app:argType="java.lang.String" />
+        <argument
+            android:name="degreeID"
+            app:argType="java.lang.String" />
     </fragment>
     <fragment
         android:id="@+id/medicalProviderDetailsFragment"
@@ -138,7 +183,34 @@
         tools:layout="@layout/medical_provider_details_fragment">
         <argument
             android:name="medicalProviderItem"
-            app:argType="com.neqabty.presentation.entities.MedicalProviderUI" />
+            app:argType="com.neqabty.presentation.entities.ProviderUI" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseAreaFragment"
+        android:name="com.neqabty.presentation.ui.chooseArea.ChooseAreaFragment"
+        android:label="@string/areaDetails"
+        tools:layout="@layout/choose_area_fragment">
+        <action
+            android:id="@+id/openMedical"
+            app:destination="@id/medicalCategoriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.neqabty.presentation.ui.search.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/search_fragment">
+        <action
+            android:id="@+id/openProviders"
+            app:destination="@id/medicalProvidersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.neqabty.presentation.ui.favorites.FavoritesFragment"
+        android:label="@string/favorites"
+        tools:layout="@layout/medical_favorites_fragment">
+        <action
+            android:id="@+id/providerDetails"
+            app:destination="@id/medicalProviderDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"

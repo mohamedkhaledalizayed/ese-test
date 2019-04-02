@@ -3,6 +3,7 @@ package com.neqabty.presentation.ui.claiming
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
@@ -20,9 +22,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.AreaUI
-import com.neqabty.presentation.entities.DegreeUI
-import com.neqabty.presentation.entities.DoctorUI
-import com.neqabty.presentation.entities.SpecializationUI
+import com.neqabty.presentation.entities.GovernUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
@@ -40,13 +40,10 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 
     lateinit var claimingViewModel: ClaimingViewModel
 
-    var doctorsResultList: List<DoctorUI>? = mutableListOf()
+    var governsResultList: List<GovernUI>? = mutableListOf()
     var areasResultList: List<AreaUI>? = mutableListOf()
-    var degreesResultList: List<DegreeUI>? = mutableListOf()
-    var specializationsResultList: List<SpecializationUI>? = mutableListOf()
-    var specializationID: String = "1"
-    var degreeID: String = "1"
-    var areaID: String = "1"
+    var governID: Int = 0
+    var areaID: Int = 0
     private var isValid = false
 
     lateinit var pager: ViewPager
@@ -97,21 +94,15 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             showMemberValidationAlert(state.member?.message!!)
             state.member?.message = null
         }
-        if (!state.isLoading && isValid) {
+        if (state.governs != null && state.areas != null && isValid) {
             binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
-            state.doctors?.let {
-                doctorsResultList = it
+            state.governs?.let {
+                governsResultList = it
             }
             state.areas?.let {
                 areasResultList = it
             }
-            state.degrees?.let {
-                degreesResultList = it
-            }
-            state.specializations?.let {
-                specializationsResultList = it
-            }
-            if (state.doctors != null && state.specializations != null && state.areas != null && state.degrees != null)
+            if (state.governs != null && state.areas != null)
                 initializeSpinners()
         }
     }
@@ -122,84 +113,54 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             binding.edNumber.isEnabled = false
         }
         binding.bNext.setOnClickListener {
-            if (isDataValid(binding.edNumber.text.toString() , binding.edCardNumber.text.toString(), spDoctorName.selectedItem)) {
-//                PreferencesHelper(requireContext()).user = binding.edNumber.text.toString()
-//                ClaimingData.number = binding.edNumber.text.toString()
-                ClaimingData.doctorName = (spDoctorName.selectedItem as DoctorUI).toString()
+            if (isDataValid(binding.edNumber.text.toString() , binding.edCardNumber.text.toString(), spArea.selectedItem, spGovern.selectedItem)) {
                 ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
-                ClaimingData.doctorId = (spDoctorName.selectedItem as DoctorUI).id
-                ClaimingData.professionId = (spSpecialization.selectedItem as SpecializationUI).id
-                ClaimingData.degreeId = (spDegree.selectedItem as DegreeUI).id
+                ClaimingData.governId = (spGovern.selectedItem as GovernUI).id
                 pager.setCurrentItem(1, true)
             }
         }
     }
 
     fun initializeSpinners() {
-        renderAreas()
-        renderSpecializations()
-        renderDegrees()
+        renderGoverns()
     }
 
     //region
-    fun renderDoctors() {
-        var filteredDoctorsList: List<DoctorUI>? = mutableListOf()
-
-        filteredDoctorsList = doctorsResultList?.filter {
-            it.profissionCode.equals(specializationID) && it.areaCode.equals(areaID) && it.degreeCode.equals(degreeID)
-        }
-
-        binding.spDoctorName.adapter = ArrayAdapter<DoctorUI>(requireContext(), R.layout.spinner_item, filteredDoctorsList)
-        binding.spDoctorName.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+    fun renderGoverns() {
+        binding.spGovern.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, governsResultList)
+        binding.spGovern.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-//                val item = parent.getItemAtPosition(position) as DoctorUI
-//                        Toast.makeText(requireContext(), item.phoneNumber, LENGTH_LONG).show()
-
+                governID = (parent.getItemAtPosition(position) as GovernUI).id
+                renderAreas()
             }
         }
+        binding.spGovern.setSelection(0)
     }
 
     fun renderAreas() {
-        binding.spArea.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, areasResultList)
+        var filteredAreasList: List<AreaUI>? = mutableListOf()
+
+        filteredAreasList = areasResultList?.filter {
+            it.govId == governID
+        }
+
+        binding.spArea.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, filteredAreasList)
         binding.spArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                areaID = (parent.getItemAtPosition(position) as AreaUI).id.toString()!!
-                renderDoctors()
+                areaID = (parent.getItemAtPosition(position) as AreaUI).id
             }
         }
     }
 
-    fun renderDegrees() {
-        binding.spDegree.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, degreesResultList)
-        binding.spDegree.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                degreeID = (parent.getItemAtPosition(position) as DegreeUI).id.toString()
-                renderDoctors()
-            }
-        }
-    }
-
-    fun renderSpecializations() {
-        binding.spSpecialization.adapter = ArrayAdapter<SpecializationUI>(requireContext(), R.layout.spinner_item, specializationsResultList)
-        binding.spSpecialization.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                specializationID = (parent.getItemAtPosition(position) as SpecializationUI).id.toString()
-                renderDoctors()
-            }
-        }
-    }
-
-    private fun isDataValid(memberNumber: String, cardNumber: String, doctor: Any?): Boolean {
-        if (memberNumber.trim().isNotEmpty() && cardNumber.trim().isNotEmpty()
-                && doctor != null)
-            return true
+    private fun isDataValid(memberNumber: String, cardNumber: String, area: Any?, govern: Any?): Boolean {
+        return if (memberNumber.trim().isNotEmpty() && cardNumber.trim().isNotEmpty()
+                && area != null&& govern != null)
+            true
         else {
             showInvalidDataAlert()
-            return false
+            false
         }
     }
 
@@ -231,7 +192,16 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
+//TODO
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard()
+    }
 
+    fun hideKeyboard() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.edCardNumber.windowToken, 0)
+    }
     // endregion
 fun navController() = findNavController()
 

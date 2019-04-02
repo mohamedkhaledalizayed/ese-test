@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loading"
+            type="boolean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@mipmap/header_bg" />
+
+        <ScrollView
+            android:id="@+id/svContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_horizontal_normal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvGovern"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/governorate"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Spinner
+                    android:id="@+id/spGovern"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/governorate"
+                    android:textDirection="rtl"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tvArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/area"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Spinner
+                    android:id="@+id/spArea"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/area"
+                    android:textDirection="rtl"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tvProviderType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/serviceProviderType"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Spinner
+                    android:id="@+id/spProviderType"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/serviceProviderType"
+                    android:textDirection="rtl"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <LinearLayout
+                    android:id="@+id/llDoctors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvSpecialization"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/speciality"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <Spinner
+                        android:id="@+id/spSpecialization"
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/speciality"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <TextView
+                        android:id="@+id/tvDegree"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/degree"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <Spinner
+                        android:id="@+id/spDegree"
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/degree"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/text_size_medium" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/bNext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/btn"
+                    android:elevation="@dimen/elevation_level_one"
+                    android:gravity="center"
+                    android:text="@string/next"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+        </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </LinearLayout>
+</layout>

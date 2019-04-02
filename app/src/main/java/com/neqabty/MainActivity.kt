@@ -27,10 +27,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
-import com.neqabty.presentation.util.Config
-import com.neqabty.presentation.util.HasOptionsMenu
-import com.neqabty.presentation.util.OnBackPressedListener
-import com.neqabty.presentation.util.PreferencesHelper
+import com.neqabty.presentation.util.*
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.main_activity.*
@@ -137,7 +134,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                         navController.navigate(R.id.mobileFragment)
                 }
                 R.id.medical_fragment -> {
-                    navController.navigate(R.id.medicalCategoriesFragment)
+                    navController.navigate(R.id.chooseAreaFragment)
                 }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
@@ -208,13 +205,19 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         var inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
 
-        val item = menu?.findItem(R.id.notifications_fragment)
+        val notificationsItem = menu?.findItem(R.id.notifications_fragment)
+        val favoritesItem = menu?.findItem(R.id.favorites_fragment)
+        val searchItem = menu?.findItem(R.id.search_fragment)
+//        val changeAreaItem = menu?.findItem(R.id.change_area_fragment)
 
         var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0];
-        item?.isVisible = currentFragment is HasOptionsMenu && PreferencesHelper(this).isRegistered
+        notificationsItem?.isVisible = currentFragment is HasHomeOptionsMenu && PreferencesHelper(this).isRegistered
+        favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu
+        searchItem?.isVisible = currentFragment is HasMedicalOptionsMenu
+//        changeAreaItem?.isVisible = currentFragment is HasMedicalOptionsMenu
 
         var navigationView: NavigationView = nav_view
-        var navMenu = navigationView.menu;
+        var navMenu = navigationView.menu
         navMenu.findItem(R.id.logout_fragment)?.isVisible = PreferencesHelper(this).isRegistered
 
         return super.onCreateOptionsMenu(menu)
@@ -224,6 +227,12 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         when (item?.itemId) {
             R.id.notifications_fragment -> {
                 Navigation.findNavController(this, R.id.container).navigate(R.id.notificationsFragment)
+            }
+            R.id.search_fragment -> {
+                Navigation.findNavController(this, R.id.container).navigate(R.id.searchFragment)
+            }
+            R.id.favorites_fragment -> {
+                Navigation.findNavController(this, R.id.container).navigate(R.id.favoritesFragment)
             }
         }
         return super.onOptionsItemSelected(item)

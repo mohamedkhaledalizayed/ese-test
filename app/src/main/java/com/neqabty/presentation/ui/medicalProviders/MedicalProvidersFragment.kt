@@ -34,7 +34,13 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
+    var areaID: Int = 0
+    var governID: Int = 0
+    var degreeID: String? = ""
+    var professionID: String? = ""
+
     var categoryId : Int = 0
+    var title : String = ""
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -56,9 +62,13 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
                 .get(MedicalProvidersViewModel::class.java)
 
         val params = MedicalProvidersFragmentArgs.fromBundle(arguments!!)
+        title = params.title
         categoryId = params.categoryId
-        initializeViews()
-
+        areaID = params.areaID
+        governID = params.governID
+        professionID = params.professionID
+        degreeID = params.degreeID
+        if(title.isNotBlank()) {setToolbarTitle(title)}
 
         val adapter = MedicalProvidersAdapter(dataBindingComponent, appExecutors) { provider ->
             navController().navigate(
@@ -74,13 +84,13 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         medicalProvidersViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                medicalProvidersViewModel.getMedicalProviders(categoryId.toString())
+                medicalProvidersViewModel.getMedicalProviders(categoryId.toString(),governID.toString(),areaID.toString(),professionID,degreeID)
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
 
-        medicalProvidersViewModel.getMedicalProviders(categoryId.toString())
+        medicalProvidersViewModel.getMedicalProviders(categoryId.toString(),governID.toString(),areaID.toString(),professionID,degreeID)
     }
 
 

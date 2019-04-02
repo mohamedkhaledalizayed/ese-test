@@ -15,7 +15,7 @@ data class TripUI(
         var governId: String?,
         var desc: String?,
         var price: String?,
-        var imgs: List<TripImage>? = null
+        var imgs: List<String>? = null
 ): Parcelable {
 
     data class TripImage(

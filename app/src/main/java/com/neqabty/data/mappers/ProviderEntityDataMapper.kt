@@ -1,16 +1,16 @@
-package com.neqabty.presentation.mappers
+package com.neqabty.data.mappers
 
+import com.neqabty.data.entities.ProviderData
 import com.neqabty.domain.common.Mapper
-import com.neqabty.domain.entities.MedicalProviderEntity
-import com.neqabty.presentation.entities.MedicalProviderUI
+import com.neqabty.domain.entities.ProviderEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MedicalProviderEntityUIMapper @Inject constructor() : Mapper<MedicalProviderEntity, MedicalProviderUI>() {
+class ProviderEntityDataMapper @Inject constructor() : Mapper<ProviderEntity, ProviderData>() {
 
-    override fun mapFrom(from: MedicalProviderEntity): MedicalProviderUI {
-        return MedicalProviderUI(
+    override fun mapFrom(from: ProviderEntity): ProviderData {
+        return ProviderData(
                 id = from.id,
                 address = from.address,
                 name = from.name,
@@ -21,8 +21,7 @@ class MedicalProviderEntityUIMapper @Inject constructor() : Mapper<MedicalProvid
                 updatedAt = from.updatedAt,
                 areaId = from.areaId,
                 emails = from.emails,
-                phones = from.phones,
-                serviceProviderId = from.serviceProviderId
+                phones = from.phones
         )
     }
 }
