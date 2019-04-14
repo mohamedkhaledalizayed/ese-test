@@ -53,8 +53,8 @@ interface WebService {
     @POST("api/v3/medical/providerTypes")
     fun getAllProviderTypes(@Body providerTypeRequest: ProviderTypeRequest): Observable<ApiResponse<List<ProviderTypeData>>>
 
-    @POST("api/v2/medical/service_provider")
-    fun getAllProvidersById(@Body providerRequest: ProviderRequest): Observable<ApiResponse<List<ProviderData>>>
+    @POST("api/v3/medical/providerDetails")
+    fun getProviderDetails(@Body providerDetailsRequest: ProviderDetailsRequest): Observable<ApiResponse<ProviderData>>
 
     @POST("api/v3/medical/providers")
     fun getProvidersById(@Body providerRequest: ProviderRequest): Observable<ApiResponse<List<ProviderData>>>
@@ -64,9 +64,9 @@ interface WebService {
 
     @Multipart
     @POST("api/v2/medical/request")
-    fun sendMedicalRequest(@Part("json_request") medicalRequest: MedicalRequest,@Part doc1: MultipartBody.Part?,@Part doc2: MultipartBody.Part?,@Part doc3: MultipartBody.Part?,@Part doc4: MultipartBody.Part?,@Part doc5: MultipartBody.Part?): Observable<ApiResponse<Unit>>
+    fun sendMedicalRequest(@Part("json_request") medicalRequest: MedicalRequest, @Part doc1: MultipartBody.Part?, @Part doc2: MultipartBody.Part?, @Part doc3: MultipartBody.Part?, @Part doc4: MultipartBody.Part?, @Part doc5: MultipartBody.Part?): Observable<ApiResponse<Unit>>
 
-    @POST("http://18.220.91.142:8081/neqabty/inquiry")
+    @POST("http://18.188.152.62:3000/neqabty/inquiry")
     fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
     @POST("api/Auth/Login")
@@ -74,5 +74,5 @@ interface WebService {
 
     @POST("api/Auth/SignUp")
     fun signup(@Body signupRequest: SignupRequest): Observable<ApiResponse<UserData>>
-
 }
+

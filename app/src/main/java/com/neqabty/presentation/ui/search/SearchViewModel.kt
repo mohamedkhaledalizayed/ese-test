@@ -18,6 +18,11 @@ class SearchViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, val 
     private val specializationEntityUIMapper = SpecializationEntityUIMapper()
 
 
+    var govIndex = 0;
+    var areaIndex = 0;
+    var providerTypeIndex = 0;
+    var professionIndex = 0;
+    var degreeIndex = 0;
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<SearchViewState> = MutableLiveData()
 

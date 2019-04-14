@@ -107,6 +107,7 @@
     <string name="trips_title">الرحلات</string>
     <string name="claiming_title">مطالبات طبية</string>
     <string name="medical_title">الدليل الطبي</string>
+    <string name="inquiry_title">سداد مستحقات</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">اتصل بنا</string>
@@ -127,6 +128,11 @@
     <string name="address_title">العنوان: </string>
     <string name="phone_title">التليفون: </string>
     <string name="email_title">البريد الالكتروني: </string>
+
+    <string name="name_title">الإسم: </string>
+    <string name="expiration_date_title">التاريخ: </string>
+    <string name="amount_title">القيمة: </string>
+    <string name="pay">الدفع</string>
 
     <string name="date_title">تاريخ الطلب: </string>
     <string name="doctor_title">الطبيب: </string>

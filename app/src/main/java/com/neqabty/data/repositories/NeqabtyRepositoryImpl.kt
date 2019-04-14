@@ -40,8 +40,8 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
         return remoteDataStore.registerUser(mobile,mainSyndicateId,subSyndicateId,token,userNumber)
     }
 
-    override fun getAllProviders(type:String): Observable<List<ProviderEntity>> {
-        return remoteDataStore.getAllProviders(type)
+    override fun getProviderDetails(id:String, type: String): Observable<ProviderEntity> {
+        return remoteDataStore.getProviderDetails(id,type)
     }
 
     override fun getProvidersByType(providerTypeId: String, govId: String, areaId: String,professionID:String?,degreeID:String?): Observable<List<ProviderEntity>> {

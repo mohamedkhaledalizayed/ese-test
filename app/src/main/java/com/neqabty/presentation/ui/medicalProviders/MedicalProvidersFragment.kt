@@ -71,6 +71,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         if(title.isNotBlank()) {setToolbarTitle(title)}
 
         val adapter = MedicalProvidersAdapter(dataBindingComponent, appExecutors) { provider ->
+            provider.type = categoryId.toString()
             navController().navigate(
                     MedicalProvidersFragmentDirections.openProviderDetails(provider)
             )

@@ -23,9 +23,7 @@ class FavoritesViewModel @Inject constructor(private val getFavorites: GetFavori
     }
 
     fun getFavorites() {
-        viewState.value?.favorites?.let {
-            onFavoritesReceived(it)
-        } ?: addDisposable(getFavorites.observable()
+        addDisposable(getFavorites.observable()
                 .flatMap {
                     it.let {
                         providerEntityUIMapper.observable(it)

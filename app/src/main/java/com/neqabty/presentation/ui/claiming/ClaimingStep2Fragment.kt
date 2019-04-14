@@ -3,6 +3,7 @@ package com.neqabty.presentation.ui.claiming
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
@@ -66,6 +68,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
+        hideKeyboard()
         claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(ClaimingViewModel::class.java)
 
@@ -168,6 +171,11 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+
+    fun hideKeyboard() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.edNumber.windowToken, 0)
     }
 // endregion
 fun navController() = findNavController()

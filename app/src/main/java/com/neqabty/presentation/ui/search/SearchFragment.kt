@@ -114,7 +114,6 @@ class SearchFragment : BaseFragment(), Injectable {
             state.degrees?.let {
                 degreesResultList = it
             }
-            if (state.governs != null && state.areas != null && state.providerTypes != null && state.degrees != null && state.professions != null)
                 initializeSpinners()
         }
     }
@@ -130,11 +129,12 @@ class SearchFragment : BaseFragment(), Injectable {
         binding.spGovern.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                searchViewModel.govIndex = position
                 governID = (parent.getItemAtPosition(position) as GovernUI).id
                 renderAreas()
             }
         }
-        binding.spGovern.setSelection(0)
+        binding.spGovern.setSelection(searchViewModel.govIndex)
     }
 
     fun renderAreas() {
@@ -148,10 +148,11 @@ class SearchFragment : BaseFragment(), Injectable {
         binding.spArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                searchViewModel.areaIndex = position
                 areaID = (parent.getItemAtPosition(position) as AreaUI).id
             }
         }
-        binding.spArea.setSelection(0)
+        binding.spArea.setSelection(searchViewModel.areaIndex)
     }
 
     fun renderProvidersTypes() {
@@ -161,7 +162,7 @@ class SearchFragment : BaseFragment(), Injectable {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
 //                if (providerTypeID.equals((parent.getItemAtPosition(position) as ProviderTypeUI).id.toString()!!))
 //                    return
-
+                searchViewModel.providerTypeIndex = position
                 providerTypeID = (parent.getItemAtPosition(position) as ProviderTypeUI).id
                 if(providerTypeID == 2){
                     binding.llDoctors.visibility = View.VISIBLE
@@ -172,7 +173,7 @@ class SearchFragment : BaseFragment(), Injectable {
                 }
             }
         }
-        binding.spProviderType.setSelection(0)
+        binding.spProviderType.setSelection(searchViewModel.providerTypeIndex)
     }
 
     fun renderDegrees() {
@@ -180,9 +181,11 @@ class SearchFragment : BaseFragment(), Injectable {
         binding.spDegree.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                searchViewModel.degreeIndex = position
                 degreeID = (parent.getItemAtPosition(position) as DegreeUI).id
             }
         }
+        binding.spDegree.setSelection(searchViewModel.degreeIndex)
     }
 
     fun renderSpecializations() {
@@ -190,9 +193,11 @@ class SearchFragment : BaseFragment(), Injectable {
         binding.spSpecialization.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                searchViewModel.professionIndex = position
                 specializationID = (parent.getItemAtPosition(position) as SpecializationUI).id
             }
         }
+        binding.spSpecialization.setSelection(searchViewModel.professionIndex)
     }
 
 // endregion

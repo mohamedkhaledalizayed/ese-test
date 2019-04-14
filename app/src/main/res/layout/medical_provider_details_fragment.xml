@@ -21,18 +21,54 @@
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:src="@mipmap/header_bg"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/ibAddFav"
+        <LinearLayout
+            android:id="@+id/llHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/add_fav"
-            android:background="@android:color/transparent"
+            android:background="@drawable/rounded_bg"
+            android:elevation="@dimen/elevation_level_one"
+            android:padding="@dimen/margin_horizontal_normal"
+            android:layout_margin="@dimen/margin_horizontal_normal"
+            android:visibility="gone"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivHeader" />
+            app:layout_constraintTop_toBottomOf="@id/ivHeader">
 
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{providerItem.name}"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_large" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{providerItem.address}"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{providerItem.phones}"
+                android:textSize="@dimen/text_size_medium" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>

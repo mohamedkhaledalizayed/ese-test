@@ -20,13 +20,10 @@
 
         <TextView
             android:id="@+id/tvName"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_horizontal_normal"
-            android:gravity="end"
+            android:gravity="start"
             android:maxLines="1"
-            android:paddingStart="@dimen/margin_horizontal_small"
-            android:paddingEnd="@dimen/margin_horizontal_small"
             android:text="@{provider.name}"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_medium"
@@ -39,19 +36,15 @@
             android:id="@+id/ivClose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_horizontal_normal"
             android:adjustViewBounds="true"
             android:cropToPadding="true"
-            android:paddingStart="@dimen/margin_horizontal_small"
-            android:paddingEnd="@dimen/margin_horizontal_small"
             android:scaleType="centerInside"
             android:src="@drawable/ic_close"
             android:tint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvName"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvName"
             app:layout_constraintTop_toTopOf="parent" />
-
 
 
     </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,7 @@
 package com.neqabty.domain.entities
 
+import com.google.gson.annotations.SerializedName
+
 data class ProviderEntity(
         var id: Int = 0,
         var name: String?,
@@ -11,5 +13,6 @@ data class ProviderEntity(
         var createdBy: String?,
         var updatedBy: String?,
         var createdAt: String?,
-        var updatedAt: String?
+        var updatedAt: String?,
+        var type: String?
 )

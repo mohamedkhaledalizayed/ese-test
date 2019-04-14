@@ -213,6 +213,24 @@
             app:destination="@id/medicalProviderDetailsFragment" />
     </fragment>
     <fragment
+        android:id="@+id/inquiryFragment"
+        android:name="com.neqabty.presentation.ui.inquiry.InquiryFragment"
+        android:label="@string/inquiry_title"
+        tools:layout="@layout/inquiry_fragment">
+        <action
+            android:id="@+id/inquiryDetails"
+            app:destination="@id/inquiryDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inquiryDetailsFragment"
+        android:name="com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsFragment"
+        android:label="@string/inquiry_title"
+        tools:layout="@layout/inquiry_details_fragment">
+        <argument
+            android:name="memberItem"
+            app:argType="com.neqabty.presentation.entities.MemberUI" />
+    </fragment>
+    <fragment
         android:id="@+id/aboutFragment"
         android:name="com.neqabty.presentation.ui.about.AboutFragment"
         android:label="@string/about_title"

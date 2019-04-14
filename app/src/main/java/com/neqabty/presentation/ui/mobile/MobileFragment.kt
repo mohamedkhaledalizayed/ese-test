@@ -60,7 +60,7 @@ class MobileFragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
         mobileViewModel.errorState.observe(this, Observer { _ ->
-            showConnectionAlert(requireContext(),retryCallback =  {
+            showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
                 mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
@@ -71,6 +71,9 @@ class MobileFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
+        if(!PreferencesHelper(requireContext()).user.equals("null"))
+            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
+
         binding.bSend.setOnClickListener {
             if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString())) {
                 PreferencesHelper(requireContext()).user = binding.edMemberNumber.text.toString()
@@ -100,12 +103,13 @@ class MobileFragment : BaseFragment(), Injectable {
             )
         }
     }
-//region
-    private fun isDataValid(mobile : String, number: String): Boolean {
-        return if(number.isBlank()){
+
+    //region
+    private fun isDataValid(mobile: String, number: String): Boolean {
+        return if (number.isBlank()) {
             showAlert(getString(R.string.invalid_data))
             false
-        }else if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
+        } else if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
             true
         else {
             showAlert(getString(R.string.invalid_mobile))
@@ -113,7 +117,7 @@ class MobileFragment : BaseFragment(), Injectable {
         }
     }
 
-    private fun showAlert(msg : String) {
+    private fun showAlert(msg: String) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.alert_title))
         builder.setMessage(msg)

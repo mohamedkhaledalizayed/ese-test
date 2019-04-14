@@ -136,6 +136,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.medical_fragment -> {
                     navController.navigate(R.id.chooseAreaFragment)
                 }
+                R.id.inquiry_fragment -> {
+                    navController.navigate(R.id.inquiryFragment)
+                }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
                 }
@@ -212,9 +215,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0];
         notificationsItem?.isVisible = currentFragment is HasHomeOptionsMenu && PreferencesHelper(this).isRegistered
-        favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu
+        favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu || currentFragment is HasFavoriteOptionsMenu
         searchItem?.isVisible = currentFragment is HasMedicalOptionsMenu
-//        changeAreaItem?.isVisible = currentFragment is HasMedicalOptionsMenu
+
+        if(currentFragment is HasFavoriteOptionsMenu)
+            favoritesItem?.setIcon(currentFragment.renderFav())
 
         var navigationView: NavigationView = nav_view
         var navMenu = navigationView.menu
@@ -224,6 +229,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0];
         when (item?.itemId) {
             R.id.notifications_fragment -> {
                 Navigation.findNavController(this, R.id.container).navigate(R.id.notificationsFragment)
@@ -232,7 +238,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 Navigation.findNavController(this, R.id.container).navigate(R.id.searchFragment)
             }
             R.id.favorites_fragment -> {
-                Navigation.findNavController(this, R.id.container).navigate(R.id.favoritesFragment)
+                if(currentFragment is HasMedicalOptionsMenu)
+                    Navigation.findNavController(this, R.id.container).navigate(R.id.favoritesFragment)
+                else if(currentFragment is HasFavoriteOptionsMenu)
+                    currentFragment.toggleFav()
             }
         }
         return super.onOptionsItemSelected(item)

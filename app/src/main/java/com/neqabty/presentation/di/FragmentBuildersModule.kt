@@ -5,6 +5,8 @@ import com.neqabty.presentation.ui.chooseArea.ChooseAreaFragment
 import com.neqabty.presentation.ui.claiming.*
 import com.neqabty.presentation.ui.favorites.FavoritesFragment
 import com.neqabty.presentation.ui.home.HomeFragment
+import com.neqabty.presentation.ui.inquiry.InquiryFragment
+import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsFragment
 import com.neqabty.presentation.ui.login.LoginFragment
 import com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragment
 import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsFragment
@@ -107,6 +109,12 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMedicalProviderDetailsFragment(): MedicalProviderDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeInquiryFragment(): InquiryFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeInquiryDetailsFragment(): InquiryDetailsFragment
 
     @ContributesAndroidInjector
     abstract fun contributeFavoritesFragment(): FavoritesFragment

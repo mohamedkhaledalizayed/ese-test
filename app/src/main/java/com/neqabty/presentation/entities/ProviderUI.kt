@@ -14,24 +14,28 @@ data class ProviderUI(
         var createdBy: String?,
         var updatedBy: String?,
         var createdAt: String?,
-        var updatedAt: String?
-): Parcelable {
+        var updatedAt: String?,
+        var type: String?
+) : Parcelable {
     constructor(parcel: Parcel) : this(
-    parcel.readInt(),
-    parcel.readString(),
-    parcel.readString(),
-    parcel.readString(),
-    parcel.readString(),
-    parcel.readString(),
-    parcel.readString(),
-    parcel.readString(),
-    parcel.readString(),
-    parcel.readString(),
-    parcel.readString()) {
+            parcel.readInt(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString()) {
     }
+
     override fun toString(): String {
         return name ?: ""
     }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(name)
@@ -44,6 +48,7 @@ data class ProviderUI(
         parcel.writeString(updatedBy)
         parcel.writeString(createdAt)
         parcel.writeString(updatedAt)
+        parcel.writeString(type)
     }
 
     override fun describeContents(): Int {

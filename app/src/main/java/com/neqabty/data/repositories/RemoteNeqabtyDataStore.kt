@@ -93,9 +93,9 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     private val providerDataEntityMapper = ProviderDataEntityMapper()
 
-    override fun getAllProviders(type: String): Observable<List<ProviderEntity>> {
-        return api.getAllProvidersById(ProviderRequest(type)).map { providers ->
-            providers.data?.map { providerDataEntityMapper.mapFrom(it) }
+    override fun getProviderDetails(id: String, type: String): Observable<ProviderEntity> {
+        return api.getProviderDetails(ProviderDetailsRequest(id,type)).flatMap { provider ->
+            Observable.just(providerDataEntityMapper.mapFrom(provider.data!!))
         }
     }
 

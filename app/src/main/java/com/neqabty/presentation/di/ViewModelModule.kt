@@ -8,6 +8,7 @@ import com.neqabty.presentation.ui.chooseArea.ChooseAreaViewModel
 import com.neqabty.presentation.ui.claiming.ClaimingViewModel
 import com.neqabty.presentation.ui.favorites.FavoritesViewModel
 import com.neqabty.presentation.ui.home.HomeViewModel
+import com.neqabty.presentation.ui.inquiry.InquiryViewModel
 import com.neqabty.presentation.ui.login.LoginViewModel
 import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsViewModel
 import com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsViewModel
@@ -141,6 +142,12 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MedicalProviderDetailsViewModel::class)
     abstract fun bindMedicalProviderDetailsViewModel(medicalProviderDetailsViewModel: MedicalProviderDetailsViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InquiryViewModel::class)
+    abstract fun bindInquiryViewModel(inquiryViewModel: InquiryViewModel): ViewModel
 
 
     @Binds

@@ -16,7 +16,7 @@ interface NeqabtyRepository {
     fun getAllGoverns(): Observable<List<GovernEntity>>
     fun getAllDegrees(): Observable<List<DegreeEntity>>
     fun getAllSpecializations(): Observable<List<SpecializationEntity>>
-    fun getAllProviders(type: String): Observable<List<ProviderEntity>>
+    fun getProviderDetails(id: String, type: String): Observable<ProviderEntity>
     fun getProvidersByType(providerTypeId: String,govId: String,areaId: String,professionID:String?,degreeID:String?): Observable<List<ProviderEntity>>
     fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>>
     fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, userNumber: String): Observable<Unit>

@@ -17,12 +17,13 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ProviderUI
+import com.neqabty.presentation.util.HasFavoriteOptionsMenu
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
 @OpenForTesting
-class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
+class MedicalProviderDetailsFragment : BaseFragment(), Injectable, HasFavoriteOptionsMenu {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -35,6 +36,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
+    lateinit var state: MedicalProviderDetailsViewState
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -61,26 +63,41 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
 
+        medicalProviderDetailsViewModel.errorState.observe(this, Observer { _ ->
+            showConnectionAlert(requireContext(), retryCallback = {
+                binding.progressbar.visibility = View.VISIBLE
+                medicalProviderDetailsViewModel.isFavorite(providerItem)
+                medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.type!!)
+            }, cancelCallback = {
+                navController().navigateUp()
+            })
+        })
         medicalProviderDetailsViewModel.isFavorite(providerItem)
-        initializeViews()
+        medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.type!!)
     }
 
     private fun handleViewState(state: MedicalProviderDetailsViewState) {
-        binding.ibAddFav.setOnClickListener {
-            if (state.isFavorite)
-                medicalProviderDetailsViewModel.removeFavorite(providerItem)
-            else
-                medicalProviderDetailsViewModel.addFavorite(providerItem)
+        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        binding.llHolder.visibility = if (state.isLoading) View.GONE else View.VISIBLE
+        this.state = state
+        state.providerDetails?.let {
+            binding.providerItem = it
         }
-        binding.ibAddFav.setImageResource(if(state.isFavorite) R.mipmap.added_fav else R.mipmap.add_fav)
+        activity?.invalidateOptionsMenu()
+
     }
 
-    fun initializeViews() {
-        binding.providerItem = providerItem
+    //region
+    override fun toggleFav() {
+        if (state.isFavorite)
+            medicalProviderDetailsViewModel.removeFavorite(providerItem)
+        else
+            medicalProviderDetailsViewModel.addFavorite(providerItem)
     }
 
-//region
-
+    override fun renderFav():Int {
+         return if (state.isFavorite) R.mipmap.added_fav else R.mipmap.add_fav
+    }
 // endregion
 
     fun navController() = findNavController()

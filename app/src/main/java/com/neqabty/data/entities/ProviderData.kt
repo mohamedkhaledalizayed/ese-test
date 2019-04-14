@@ -14,9 +14,9 @@ data class ProviderData(
         var governId: String?,
         @field:SerializedName("area_id")
         var areaId: String?,
-        @field:SerializedName("addresss")
+        @field:SerializedName("address")
         var address: String?,
-        @field:SerializedName("phones")
+        @field:SerializedName("phone")
         var phones: String?,
         @field:SerializedName("emails")
         var emails: String?,
@@ -27,5 +27,7 @@ data class ProviderData(
         @field:SerializedName("created_at")
         var createdAt: String?,
         @field:SerializedName("updated_at")
-        var updatedAt: String?
+        var updatedAt: String?,
+        @field:SerializedName("provider_type_id")
+        var type: String?
 ): Response()

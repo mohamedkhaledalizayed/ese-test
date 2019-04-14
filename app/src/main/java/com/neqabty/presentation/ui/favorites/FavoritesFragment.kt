@@ -54,11 +54,6 @@ class FavoritesFragment : BaseFragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
         initializeViews()
     }
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser)
-            initializeViews()
-    }
 
     private fun handleViewState(state: FavoritesViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE

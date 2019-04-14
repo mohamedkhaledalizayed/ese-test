@@ -39,6 +39,7 @@ class AppModule {
     fun provideRetrofit(): Retrofit {
         val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY
+
         }
 
         val client: OkHttpClient = OkHttpClient.Builder().apply {
@@ -46,11 +47,11 @@ class AppModule {
         }.build()
 
         return Retrofit.Builder()
-                .baseUrl("http://lvai0dfr-site.htempurl.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//LiveDataCallAdapterFactory()
-                .client(client)
-                .build()
+            .baseUrl("http://eea.neqabty.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//LiveDataCallAdapterFactory()
+            .client(client)
+            .build()
     }
 
     @Singleton
@@ -63,9 +64,9 @@ class AppModule {
     @Provides
     fun provideDb(app: Application): NeqabtyDb {
         return Room
-                .databaseBuilder(app, NeqabtyDb::class.java, "weather.db")
-                .fallbackToDestructiveMigration().allowMainThreadQueries()
-                .build()
+            .databaseBuilder(app, NeqabtyDb::class.java, "Neqabty.db")
+            .fallbackToDestructiveMigration().allowMainThreadQueries()
+            .build()
     }
 
     @Singleton
@@ -83,8 +84,10 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideWeatherRepository(api: WebService,
-                                 @Named(DI.inMemoryCache) cache: NeqabtyCache): NeqabtyRepository {
+    fun provideWeatherRepository(
+        api: WebService,
+        @Named(DI.inMemoryCache) cache: NeqabtyCache
+    ): NeqabtyRepository {
 
         val cachedWeatherDataStore = CachedNeqabtyDataStore(cache)
         val remoteWeatherDataStore = RemoteNeqabtyDataStore(api)
@@ -192,8 +195,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideGetAllProviders(neqabtyRepository: NeqabtyRepository): GetAllProviders {
-        return GetAllProviders(ASyncTransformer(), neqabtyRepository)
+    fun provideGetAllProviders(neqabtyRepository: NeqabtyRepository): GetProviderDetails {
+        return GetProviderDetails(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

@@ -49,7 +49,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
     }
 
 
-    override fun getAllProviders(type:String): Observable<List<ProviderEntity>> {
+    override fun getProviderDetails(id :String,type:String): Observable<ProviderEntity> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
