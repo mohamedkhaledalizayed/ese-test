@@ -20,7 +20,7 @@ class NotificationDetailsViewModel @Inject constructor(private val getNotificati
         viewState.value = NotificationDetailsViewState()
     }
 
-    fun getNotificationDetails(id : String) {
+    fun getNotificationDetails(id: String) {
         viewState.value?.notification?.let {
             onNotificationDetailsReceived(it)
         } ?: addDisposable(getNotificationDetails.getNotificationDetails(id)
@@ -37,7 +37,6 @@ class NotificationDetailsViewModel @Inject constructor(private val getNotificati
                 )
         )
     }
-
 
     private fun onNotificationDetailsReceived(notification: NotificationUI) {
         val newViewState = viewState.value?.copy(

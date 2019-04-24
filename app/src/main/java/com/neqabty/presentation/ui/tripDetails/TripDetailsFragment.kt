@@ -34,8 +34,9 @@ class TripDetailsFragment : BaseFragment(), Injectable {
     lateinit var tripDetailsViewModel: TripDetailsViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -53,7 +54,6 @@ class TripDetailsFragment : BaseFragment(), Injectable {
 
         val params = TripDetailsFragmentArgs.fromBundle(arguments!!)
         tripId = params.tripItem.id
-
 
         tripDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(TripDetailsViewModel::class.java)
@@ -98,7 +98,6 @@ class TripDetailsFragment : BaseFragment(), Injectable {
     }
 
 //region
-
 
 // endregion
 

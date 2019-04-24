@@ -60,8 +60,9 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
 
     private var photosList: MutableList<PhotoUI> = mutableListOf<PhotoUI>()
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -73,7 +74,6 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         pager = container as ViewPager
         return binding.root
     }
-
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
@@ -91,7 +91,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         binding.bSend.setOnClickListener {
             if (photosList.size > 0) {
                 val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0,0, ClaimingData.areaId, 0,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             } else
                 showPickPhotoAlert()
         }
@@ -108,16 +108,15 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         this.adapter = adapter
         binding.rvPhotos.adapter = adapter
 
-
         claimingViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
 
         claimingViewModel.errorState.observe(this, Observer { _ ->
-            showConnectionAlert(requireContext(),retryCallback =  {
+            showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
                 val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0,0, ClaimingData.areaId, 0,ClaimingData.providerTypeId , ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
@@ -143,7 +142,6 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         }
     }
 
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == REQUEST_CAMERA) {
             grantCameraPermission()
@@ -168,7 +166,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
     private fun galleryIntent() {
         val intent = Intent()
         intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT//
+        intent.action = Intent.ACTION_GET_CONTENT //
         startActivityForResult(Intent.createChooser(intent, getString(R.string.select_file)), SELECT_FILE)
     }
 
@@ -261,7 +259,6 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         return null
     }
 
-
     private fun showPickPhotoAlert() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.alert_title))
@@ -288,5 +285,4 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
     }
     // endregion
     fun navController() = findNavController()
-
 }

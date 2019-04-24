@@ -20,7 +20,7 @@ class AboutViewModel @Inject constructor(private val getSyndicate: GetSyndicate)
         viewState.value = AboutViewState()
     }
 
-    fun getSyndicate(id : String) {
+    fun getSyndicate(id: String) {
         viewState.value?.syndicate?.let {
             onSyndicateReceived(it)
         } ?: addDisposable(getSyndicate.getSyndicateById(id)
@@ -56,7 +56,6 @@ class AboutViewModel @Inject constructor(private val getSyndicate: GetSyndicate)
 //                )
 //        )
     }
-
 
     private fun onSyndicateReceived(syndicate: SyndicateUI) {
         val newViewState = viewState.value?.copy(

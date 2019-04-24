@@ -21,18 +21,25 @@ class MobileViewModel @Inject constructor(val getUserRegistered: GetUserRegister
         viewState.value = MobileViewState()
     }
 
-    fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, prefs: PreferencesHelper, userNumber: String) {
+    fun registerUser(
+        mobile: String,
+        mainSyndicateId: Int,
+        subSyndicateId: Int,
+        token: String,
+        prefs: PreferencesHelper,
+        userNumber: String
+    ) {
         viewState.value = viewState.value?.copy(isLoading = true)
 
-        addDisposable(getUserRegistered.getUserRegistered(mobile, mainSyndicateId, subSyndicateId, token,userNumber)
+        addDisposable(getUserRegistered.getUserRegistered(mobile, mainSyndicateId, subSyndicateId, token, userNumber)
                 .subscribe(
                         {
                             prefs.token = token
                             prefs.mobile = mobile
                             prefs.isRegistered = true
-                            viewState.value = viewState.value?.copy(isLoading = false,isSuccessful = true)
+                            viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = true)
                         },
-                        { registerUser(mobile, mainSyndicateId, subSyndicateId, token, prefs,userNumber) }
+                        { registerUser(mobile, mainSyndicateId, subSyndicateId, token, prefs, userNumber) }
                 ))
     }
 }

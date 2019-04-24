@@ -37,8 +37,9 @@ class NewsFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -57,7 +58,6 @@ class NewsFragment : BaseFragment(), Injectable {
                 .get(NewsViewModel::class.java)
 
         initializeViews()
-
 
         val adapter = NewsAdapter(dataBindingComponent, appExecutors) { newsItem ->
             navController().navigate(
@@ -92,9 +92,7 @@ class NewsFragment : BaseFragment(), Injectable {
     fun initializeViews() {
     }
 
-
 //region
-
 
 // endregion
 

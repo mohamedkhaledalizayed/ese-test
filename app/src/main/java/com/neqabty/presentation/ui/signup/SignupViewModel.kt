@@ -22,7 +22,16 @@ class SignupViewModel @Inject constructor(private val signupUser: SignupUser) : 
         viewState.value = SignupViewState(isLoading = false)
     }
 
-    fun signup(email: String, fName: String, lName: String, mobile: String, govId: String, mainSyndicateId: String, subSyndicateId: String, password: String) {
+    fun signup(
+        email: String,
+        fName: String,
+        lName: String,
+        mobile: String,
+        govId: String,
+        mainSyndicateId: String,
+        subSyndicateId: String,
+        password: String
+    ) {
         addDisposable(signupUser.signup(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)
                 .map {
                     it.let {
@@ -37,7 +46,6 @@ class SignupViewModel @Inject constructor(private val signupUser: SignupUser) : 
                 )
         )
     }
-
 
     private fun onUserReceived(user: UserUI) {
 

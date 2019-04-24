@@ -20,7 +20,7 @@ class TripDetailsViewModel @Inject constructor(private val getTripDetails: GetTr
         viewState.value = TripDetailsViewState()
     }
 
-    fun getTripDetails(id : String) {
+    fun getTripDetails(id: String) {
         viewState.value?.trip?.let {
             onTripDetailsReceived(it)
         } ?: addDisposable(getTripDetails.getTripDetails(id)
@@ -37,7 +37,6 @@ class TripDetailsViewModel @Inject constructor(private val getTripDetails: GetTr
                 )
         )
     }
-
 
     private fun onTripDetailsReceived(trip: TripUI) {
         val newViewState = viewState.value?.copy(

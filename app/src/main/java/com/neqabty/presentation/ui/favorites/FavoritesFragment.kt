@@ -36,8 +36,9 @@ class FavoritesFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -67,11 +68,11 @@ class FavoritesFragment : BaseFragment(), Injectable {
         favoritesViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(FavoritesViewModel::class.java)
 
-        val adapter = FavoritesAdapter(dataBindingComponent, appExecutors,callback = { favoriteItem ->
+        val adapter = FavoritesAdapter(dataBindingComponent, appExecutors, callback = { favoriteItem ->
             navController().navigate(
                     FavoritesFragmentDirections.providerDetails(favoriteItem)
             )
-        },removeCallback = {favoriteItem ->
+        }, removeCallback = { favoriteItem ->
             favoritesViewModel.removeFavorite(favoriteItem)
         })
         this.adapter = adapter
@@ -92,9 +93,7 @@ class FavoritesFragment : BaseFragment(), Injectable {
         favoritesViewModel.getFavorites()
     }
 
-
 //region
-
 
 // endregion
 

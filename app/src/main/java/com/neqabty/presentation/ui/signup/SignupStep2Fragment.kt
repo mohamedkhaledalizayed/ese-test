@@ -29,8 +29,9 @@ class SignupStep2Fragment : BaseFragment(), Injectable {
     lateinit var signupViewModel: SignupViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -52,13 +53,9 @@ class SignupStep2Fragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-
     }
-
 
 //region
 
-
 // endregion
-
 }

@@ -34,13 +34,11 @@ class PreferencesHelper(context: Context) {
     var user = preferences.getString(USER, "")
         set(value) = preferences.edit().putString(USER, value).apply()
 
-
-    fun isSyndicateChosen():Boolean{
+    fun isSyndicateChosen(): Boolean {
         return mainSyndicate != 0
     }
 
 //    fun isUserRegistered():Boolean{
 //        return isRegistered
 //    }
-
 }

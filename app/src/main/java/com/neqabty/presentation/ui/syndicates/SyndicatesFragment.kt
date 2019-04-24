@@ -40,8 +40,9 @@ class SyndicatesFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         setupToolbar(false)
         binding = DataBindingUtil.inflate(
@@ -62,7 +63,6 @@ class SyndicatesFragment : BaseFragment(), Injectable {
 
         initializeViews()
 
-
         val adapter = com.neqabty.presentation.ui.syndicates.SyndicatesAdapter(dataBindingComponent, appExecutors) { syndicate ->
             if (syndicate.subSyndicates?.size == 0) {
                 PreferencesHelper(requireContext()).mainSyndicate = syndicate.id
@@ -80,7 +80,7 @@ class SyndicatesFragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
         syndicatesViewModel.errorState.observe(this, Observer { _ ->
-            showConnectionAlert(requireContext(),retryCallback =  {
+            showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
                 syndicatesViewModel.getSyndicates()
             }, cancelCallback = {
@@ -103,7 +103,7 @@ class SyndicatesFragment : BaseFragment(), Injectable {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(requestCode == 255 && resultCode == 200){
+        if (requestCode == 255 && resultCode == 200) {
             navController().navigate(
                     SyndicatesFragmentDirections.openHome()
             )
@@ -112,11 +112,11 @@ class SyndicatesFragment : BaseFragment(), Injectable {
 
 //region
 
-fun pickSubSyndicate(syndicate :SyndicateUI){
+fun pickSubSyndicate(syndicate: SyndicateUI) {
     val fragmentManager = this@SyndicatesFragment.fragmentManager
     val subSyndicatesFragment = SubSyndicatesFragment()
     val bundle = Bundle()
-    bundle.putParcelable("syndicate" , syndicate)
+    bundle.putParcelable("syndicate", syndicate)
     subSyndicatesFragment.arguments = bundle
     subSyndicatesFragment.setTargetFragment(this, 255)
     subSyndicatesFragment.show(fragmentManager, "name")

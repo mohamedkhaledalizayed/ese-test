@@ -4,19 +4,19 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class NotificationUI(
-        var id: Int = 0,
-        var subSyndicateId: String?,
-        var userNumber: String?,
-        var professionID: String?,
-        var status: String?,
-        var createdAt: String?,
-        var approvalNumber: String?,
-        var approvalImage: String?,
-        var doctor: String?,
-        var provider: String?,
-        var comment: String?,
-        var doc1: String?
-):Parcelable {
+    var id: Int = 0,
+    var subSyndicateId: String?,
+    var userNumber: String?,
+    var professionID: String?,
+    var status: String?,
+    var createdAt: String?,
+    var approvalNumber: String?,
+    var approvalImage: String?,
+    var doctor: String?,
+    var provider: String?,
+    var comment: String?,
+    var doc1: String?
+) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),
@@ -60,5 +60,4 @@ data class NotificationUI(
             return arrayOfNulls(size)
         }
     }
-
 }

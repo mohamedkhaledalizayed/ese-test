@@ -15,7 +15,6 @@ class ChooseAreaViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, 
     private val areaEntityUIMapper = AreaEntityUIMapper()
     private val governEntityUIMapper = GovernEntityUIMapper()
 
-
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<ChooseAreaViewState> = MutableLiveData()
 
@@ -38,7 +37,6 @@ class ChooseAreaViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, 
                         { errorState.value = it }
                 )
 
-
         val areasDisposable = getAllAreas.observable()
                 .flatMap {
                     it.let {
@@ -59,7 +57,6 @@ class ChooseAreaViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, 
         viewState.value?.governs?.let {
             onContent1Received()
         } ?: addDisposable(governsDisposable)
-
     }
 
     private fun onContent1Received() {

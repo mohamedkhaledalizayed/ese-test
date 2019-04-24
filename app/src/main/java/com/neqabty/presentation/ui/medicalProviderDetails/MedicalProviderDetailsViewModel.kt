@@ -13,7 +13,12 @@ import com.neqabty.presentation.mappers.ProviderUIEntityMapper
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 @OpenForTesting
-class MedicalProviderDetailsViewModel @Inject constructor(private val addFavorite: AddFavorite,private val removeFavorite: RemoveFavorite,private val checkFavorite: CheckFavorite,private val getProviderDetails: GetProviderDetails) : BaseViewModel() {
+class MedicalProviderDetailsViewModel @Inject constructor(
+    private val addFavorite: AddFavorite,
+    private val removeFavorite: RemoveFavorite,
+    private val checkFavorite: CheckFavorite,
+    private val getProviderDetails: GetProviderDetails
+) : BaseViewModel() {
 
     private val providerEntityUIMapper = ProviderEntityUIMapper()
     private val providerUIEntityMapper = ProviderUIEntityMapper()
@@ -24,8 +29,8 @@ class MedicalProviderDetailsViewModel @Inject constructor(private val addFavorit
         viewState.value = MedicalProviderDetailsViewState()
     }
 
-    fun getProviderDetails(id :String,type :String) {
-        addDisposable(getProviderDetails.getProviderDetails(id,type)
+    fun getProviderDetails(id: String, type: String) {
+        addDisposable(getProviderDetails.getProviderDetails(id, type)
                 .flatMap {
                     it.let {
                         providerEntityUIMapper.observable(it)
@@ -72,8 +77,6 @@ class MedicalProviderDetailsViewModel @Inject constructor(private val addFavorit
         )
     }
 
-
-
     fun isFavorite(providerUI: ProviderUI) {
         addDisposable(checkFavorite.CheckFavorite(providerUIEntityMapper.mapFrom(providerUI))
                 .subscribe(
@@ -85,7 +88,6 @@ class MedicalProviderDetailsViewModel @Inject constructor(private val addFavorit
                 )
         )
     }
-
 
     private fun onProviderDetailsReceived(provider: ProviderUI) {
         val newViewState = viewState.value?.copy(

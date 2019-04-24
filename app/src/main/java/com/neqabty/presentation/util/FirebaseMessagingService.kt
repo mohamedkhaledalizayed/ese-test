@@ -17,7 +17,6 @@ import com.google.firebase.messaging.RemoteMessage
 import com.neqabty.MainActivity
 import com.neqabty.R
 
-
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         sendNotification(remoteMessage)
@@ -44,7 +43,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         PreferencesHelper(applicationContext).isRegistered = false
     }
 
-
     private fun sendNotification(remoteMessage: RemoteMessage?) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -62,7 +60,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val pendingIntent = TaskStackBuilder.create(applicationContext)
                 .addNextIntent(intent)
                 .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
-
 
         val channelId = getString(com.neqabty.R.string.app_name)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)

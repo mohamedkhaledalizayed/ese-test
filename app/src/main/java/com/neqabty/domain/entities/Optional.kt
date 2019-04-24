@@ -16,5 +16,4 @@ class Optional<out T>(val value: T? = null) {
     fun hasValue(): Boolean {
         return value != null
     }
-
 }

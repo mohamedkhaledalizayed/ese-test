@@ -64,7 +64,14 @@ interface WebService {
 
     @Multipart
     @POST("api/v2/medical/request")
-    fun sendMedicalRequest(@Part("json_request") medicalRequest: MedicalRequest, @Part doc1: MultipartBody.Part?, @Part doc2: MultipartBody.Part?, @Part doc3: MultipartBody.Part?, @Part doc4: MultipartBody.Part?, @Part doc5: MultipartBody.Part?): Observable<ApiResponse<Unit>>
+    fun sendMedicalRequest(
+        @Part("json_request") medicalRequest: MedicalRequest,
+        @Part doc1: MultipartBody.Part?,
+        @Part doc2: MultipartBody.Part?,
+        @Part doc3: MultipartBody.Part?,
+        @Part doc4: MultipartBody.Part?,
+        @Part doc5: MultipartBody.Part?
+    ): Observable<ApiResponse<Unit>>
 
     @POST("http://18.188.152.62:3000/neqabty/inquiry")
     fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
@@ -75,4 +82,3 @@ interface WebService {
     @POST("api/Auth/SignUp")
     fun signup(@Body signupRequest: SignupRequest): Observable<ApiResponse<UserData>>
 }
-

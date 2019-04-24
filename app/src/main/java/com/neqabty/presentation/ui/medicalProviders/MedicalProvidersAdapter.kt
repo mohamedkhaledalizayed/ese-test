@@ -12,9 +12,9 @@ import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class MedicalProvidersAdapter(
-        private val dataBindingComponent: DataBindingComponent,
-        appExecutors: AppExecutors,
-        private val callback: ((ProviderUI) -> Unit)?
+    private val dataBindingComponent: DataBindingComponent,
+    appExecutors: AppExecutors,
+    private val callback: ((ProviderUI) -> Unit)?
 ) : DataBoundListAdapter<ProviderUI, MedicalProviderItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<ProviderUI>() {

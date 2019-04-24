@@ -32,8 +32,9 @@ class ClaimingFragment : BaseFragment(), Injectable {
     lateinit var claimingViewModel: ClaimingViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -70,12 +71,9 @@ class ClaimingFragment : BaseFragment(), Injectable {
                 binding.tvTitle.setText(PagerModel.values()[position].titleResId)
             }
         })
-
     }
 
-
 //region
-
 
 // endregion
 

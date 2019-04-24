@@ -20,7 +20,7 @@ class TripsViewModel @Inject constructor(private val getAllTrips: GetAllTrips) :
         viewState.value = TripsViewState()
     }
 
-    fun getTrips(id :String) {
+    fun getTrips(id: String) {
         viewState.value?.trips?.let {
             onTripsReceived(it)
         } ?: addDisposable(getAllTrips.getAllTrips(id)
@@ -38,7 +38,6 @@ class TripsViewModel @Inject constructor(private val getAllTrips: GetAllTrips) :
         )
     }
 
-
     private fun onTripsReceived(trips: List<TripUI>) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
@@ -46,4 +45,3 @@ class TripsViewModel @Inject constructor(private val getAllTrips: GetAllTrips) :
         viewState.value = newViewState
     }
 }
-

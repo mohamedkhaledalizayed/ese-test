@@ -6,8 +6,10 @@ import com.neqabty.domain.entities.UserEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class LoginUser @Inject constructor(transformer: Transformer<UserEntity>,
-                                    private val neqabtyRepository: NeqabtyRepository) : UseCase<UserEntity>(transformer) {
+class LoginUser @Inject constructor(
+    transformer: Transformer<UserEntity>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<UserEntity>(transformer) {
 
     companion object {
         private const val PARAM_MOBILE = "param:mobile"
@@ -29,5 +31,4 @@ class LoginUser @Inject constructor(transformer: Transformer<UserEntity>,
         val token = data?.get(PARAM_TOKEN) as String
         return neqabtyRepository.login(mobile, password, token)
     }
-
 }

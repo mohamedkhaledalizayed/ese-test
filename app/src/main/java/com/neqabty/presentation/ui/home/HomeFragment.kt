@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
 
 @OpenForTesting
-class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasHomeOptionsMenu {
+class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeOptionsMenu {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -43,8 +43,9 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasHomeOp
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -69,7 +70,6 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasHomeOp
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(HomeViewModel::class.java)
 
-
         val adapter = NewsAdapter(dataBindingComponent, appExecutors) { newsItem ->
             navController().navigate(
                     HomeFragmentDirections.newsDetails(newsItem)
@@ -82,7 +82,7 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasHomeOp
             if (it != null) handleViewState(it)
         })
         homeViewModel.errorState.observe(this, Observer { _ ->
-            showConnectionAlert(requireContext(),retryCallback =  {
+            showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
                 homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
@@ -91,7 +91,6 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasHomeOp
         })
 
         homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
-
     }
 
     override fun onResume() {
@@ -108,23 +107,22 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasHomeOp
 
     fun initializeViews() {
         (activity as AppCompatActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-        binding.llClaiming.setOnClickListener{
+        binding.llClaiming.setOnClickListener {
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(R.id.claimingFragment)
             else
                 navController().navigate(R.id.mobileFragment)
         }
-        binding.llNews.setOnClickListener{
+        binding.llNews.setOnClickListener {
             navController().navigate(R.id.newsFragment)
         }
-        binding.llTrips.setOnClickListener{
+        binding.llTrips.setOnClickListener {
             navController().navigate(R.id.tripsFragment)
         }
-        binding.llMedical.setOnClickListener{
+        binding.llMedical.setOnClickListener {
             navController().navigate(R.id.chooseAreaFragment)
         }
     }
-
 
     override fun onBackPressed() {
     }
@@ -132,7 +130,6 @@ class HomeFragment : BaseFragment(), Injectable,OnBackPressedListener, HasHomeOp
     override fun showOptionsMenu() {
     }
 //region
-
 
 // endregion
 

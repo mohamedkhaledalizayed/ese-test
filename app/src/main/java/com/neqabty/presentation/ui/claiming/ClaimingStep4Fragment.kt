@@ -30,8 +30,9 @@ class ClaimingStep4Fragment : BaseFragment(), Injectable {
     lateinit var claimingViewModel: ClaimingViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -61,8 +62,6 @@ class ClaimingStep4Fragment : BaseFragment(), Injectable {
 
 //region
 
-
     // endregion
     fun navController() = findNavController()
-
 }

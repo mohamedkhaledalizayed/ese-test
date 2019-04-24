@@ -10,7 +10,8 @@ import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
 @OpenForTesting
-class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetAllSyndicates) : BaseViewModel() {
+class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetAllSyndicates) :
+    BaseViewModel() {
 
     private val syndicateEntityUIMapper = SyndicateEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
@@ -24,25 +25,25 @@ class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetA
         viewState.value?.syndicates?.let {
             onSyndicatesReceived(it)
         } ?: addDisposable(getAllSyndicates.observable()
-                .flatMap {
-                    it.let {
-                        syndicateEntityUIMapper.observable(it)
-                    }
-                }.subscribe(
-                        { onSyndicatesReceived(it) },
-                        {
-                            viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
-                        }
-                )
+            .flatMap {
+                it.let {
+                    syndicateEntityUIMapper.observable(it)
+                }
+            }.subscribe(
+                { onSyndicatesReceived(it) },
+                {
+                    viewState.value = viewState.value?.copy(isLoading = false)
+                    errorState.value = it
+                }
+            )
         )
     }
 
-
     private fun onSyndicatesReceived(syndicates: List<SyndicateUI>) {
         val newViewState = viewState.value?.copy(
-                isLoading = false,
-                syndicates = syndicates)
+            isLoading = false,
+            syndicates = syndicates
+        )
         viewState.value = newViewState
     }
 }

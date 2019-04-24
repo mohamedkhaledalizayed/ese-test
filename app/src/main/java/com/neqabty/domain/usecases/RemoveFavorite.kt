@@ -6,8 +6,10 @@ import com.neqabty.domain.entities.ProviderEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class RemoveFavorite @Inject constructor(transformer: Transformer<ProviderEntity>,
-                                         private val neqabtyCache: NeqabtyCache) : UseCase<ProviderEntity>(transformer) {
+class RemoveFavorite @Inject constructor(
+    transformer: Transformer<ProviderEntity>,
+    private val neqabtyCache: NeqabtyCache
+) : UseCase<ProviderEntity>(transformer) {
 
     companion object {
         private const val PARAM_ENTITY = "param:entity"
@@ -23,5 +25,4 @@ class RemoveFavorite @Inject constructor(transformer: Transformer<ProviderEntity
         val providerEntity = data?.get(RemoveFavorite.PARAM_ENTITY) as ProviderEntity
         return neqabtyCache.removeFavorite(providerEntity)
     }
-
 }

@@ -10,7 +10,6 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.neqabty.R
 
-
 class CustomImagePagerAdapter(val context: Context, val imgs: List<String>) : PagerAdapter() {
     override fun isViewFromObject(p0: View, p1: Any): Boolean {
         return p1 == p0

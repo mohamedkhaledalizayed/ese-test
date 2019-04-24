@@ -47,8 +47,9 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
 
     lateinit var pager: ViewPager
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -76,9 +77,9 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
         claimingViewModel.errorState.observe(this, Observer { _ ->
-            showConnectionAlert(requireContext(),retryCallback =  {
+            showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                claimingViewModel.getProviderTypes(ClaimingData.governId.toString(),ClaimingData.areaId.toString())
+                claimingViewModel.getProviderTypes(ClaimingData.governId.toString(), ClaimingData.areaId.toString())
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
@@ -95,9 +96,8 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
                 pager.setCurrentItem(2, true)
             }
         }
-        claimingViewModel.getProviderTypes(ClaimingData.governId.toString(),ClaimingData.areaId.toString())
+        claimingViewModel.getProviderTypes(ClaimingData.governId.toString(), ClaimingData.areaId.toString())
     }
-
 
     private fun handleViewState(state: ClaimingViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
@@ -110,12 +110,11 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         }
         if (state.providerTypes != null && providersResultList == null && !state.isLoading)
             initializeSpinners()
-        else if(!state.isLoading){
+        else if (!state.isLoading) {
             renderProviders()
             binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
         }
     }
-
 
 //region
 
@@ -147,8 +146,8 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         }
     }
 
-    fun getProviders(providerTypeID : Int) {
-        claimingViewModel.getProvidersByType(providerTypeID.toString(),ClaimingData.governId.toString(),ClaimingData.areaId.toString())
+    fun getProviders(providerTypeID: Int) {
+        claimingViewModel.getProvidersByType(providerTypeID.toString(), ClaimingData.governId.toString(), ClaimingData.areaId.toString())
     }
 
     private fun isDataValid(doctor: Any?): Boolean {
@@ -159,7 +158,6 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
             false
         }
     }
-
 
     private fun showInvalidDataAlert() {
         val builder = AlertDialog.Builder(requireContext())
@@ -179,5 +177,4 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
     }
 // endregion
 fun navController() = findNavController()
-
 }

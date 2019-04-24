@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         val navController = Navigation.findNavController(this, R.id.container)
 //        graph.desetDefaultArguments(intent.extras)
 
-        if (PreferencesHelper(this).isSyndicateChosen())//TODO
+        if (PreferencesHelper(this).isSyndicateChosen()) // TODO
             graph.startDestination = R.id.homeFragment
         else
             graph.startDestination = R.id.syndicatesFragment
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         nav_view.setupWithNavController(navController)
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.syndicatesFragment), drawer_layout)
         toolbar.setupWithNavController(navController, appBarConfiguration)
-        //////////////////////////////////
+        // ////////////////////////////////
         drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         nav_view.setNavigationItemSelectedListener {
             drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.trips_fragment -> {
                     navController.navigate(R.id.tripsFragment)
                 }
-                R.id.claiming_fragment -> {//TODO
+                R.id.claiming_fragment -> { // TODO
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.claimingFragment)
                     else
@@ -151,15 +151,14 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.logout_fragment -> {
                     PreferencesHelper(this).isRegistered = false
                     invalidateOptionsMenu()
-                }//TODO
+                } // TODO
             }
             drawer_layout.closeDrawer(GravityCompat.START)
             true
         }
-
     }
 
-    private fun getToken() {//TODO
+    private fun getToken() { // TODO
         FirebaseApp.initializeApp(this)
         FirebaseInstanceId.getInstance().instanceId
                 .addOnCompleteListener(OnCompleteListener { task ->
@@ -167,7 +166,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                         return@OnCompleteListener
                     val token = task.result?.token
 
-                    if (PreferencesHelper(this).mobile.isNotBlank() && !token.equals(PreferencesHelper(this).token)) {//TODO register
+                    if (PreferencesHelper(this).mobile.isNotBlank() && !token.equals(PreferencesHelper(this).token)) { // TODO register
                         mainViewModel.registerUser(PreferencesHelper(this).mobile, PreferencesHelper(this).mainSyndicate, PreferencesHelper(this).subSyndicate, PreferencesHelper(this).token, PreferencesHelper(this), PreferencesHelper(this).user)
                     } else
                         PreferencesHelper(this).token = token
@@ -186,7 +185,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0];
+            var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
             if (currentFragment is OnBackPressedListener)
                 finishAffinity()
             super.onBackPressed()
@@ -213,12 +212,12 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         val searchItem = menu?.findItem(R.id.search_fragment)
 //        val changeAreaItem = menu?.findItem(R.id.change_area_fragment)
 
-        var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0];
+        var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
         notificationsItem?.isVisible = currentFragment is HasHomeOptionsMenu && PreferencesHelper(this).isRegistered
         favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu || currentFragment is HasFavoriteOptionsMenu
         searchItem?.isVisible = currentFragment is HasMedicalOptionsMenu
 
-        if(currentFragment is HasFavoriteOptionsMenu)
+        if (currentFragment is HasFavoriteOptionsMenu)
             favoritesItem?.setIcon(currentFragment.renderFav())
 
         var navigationView: NavigationView = nav_view
@@ -229,7 +228,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0];
+        var currentFragment = (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
         when (item?.itemId) {
             R.id.notifications_fragment -> {
                 Navigation.findNavController(this, R.id.container).navigate(R.id.notificationsFragment)
@@ -238,9 +237,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 Navigation.findNavController(this, R.id.container).navigate(R.id.searchFragment)
             }
             R.id.favorites_fragment -> {
-                if(currentFragment is HasMedicalOptionsMenu)
+                if (currentFragment is HasMedicalOptionsMenu)
                     Navigation.findNavController(this, R.id.container).navigate(R.id.favoritesFragment)
-                else if(currentFragment is HasFavoriteOptionsMenu)
+                else if (currentFragment is HasFavoriteOptionsMenu)
                     currentFragment.toggleFav()
             }
         }

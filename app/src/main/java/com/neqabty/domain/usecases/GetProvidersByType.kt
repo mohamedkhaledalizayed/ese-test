@@ -6,9 +6,10 @@ import com.neqabty.domain.entities.ProviderEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetProvidersByType @Inject constructor(transformer: Transformer<List<ProviderEntity>>,
-                                             private val neqabtyRepository: NeqabtyRepository) : UseCase<List<ProviderEntity>>(transformer) {
-
+class GetProvidersByType @Inject constructor(
+    transformer: Transformer<List<ProviderEntity>>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<List<ProviderEntity>>(transformer) {
 
     companion object {
         private const val PARAM_PROVIDER_TYPE_ID = "param:providerTypeId"
@@ -18,7 +19,13 @@ class GetProvidersByType @Inject constructor(transformer: Transformer<List<Provi
         private const val PARAM_DEGREE_ID = "param:degreeId"
     }
 
-    fun getProvidersByType(providerTypeId: String, govId: String, areaId: String,professionID:String? = "",degreeID:String? = ""): Observable<List<ProviderEntity>> {
+    fun getProvidersByType(
+        providerTypeId: String,
+        govId: String,
+        areaId: String,
+        professionID: String? = "",
+        degreeID: String? = ""
+    ): Observable<List<ProviderEntity>> {
         val data = HashMap<String, String>()
         data[PARAM_PROVIDER_TYPE_ID] = providerTypeId
         data[PARAM_GOV_ID] = govId
@@ -34,7 +41,6 @@ class GetProvidersByType @Inject constructor(transformer: Transformer<List<Provi
         val areaId = data?.get(GetProvidersByType.PARAM_AREA_ID) as String
         val professionID = data?.get(GetProvidersByType.PARAM_PROFESSION_ID) as String
         val degreeID = data?.get(GetProvidersByType.PARAM_DEGREE_ID) as String
-        return neqabtyRepository.getProvidersByType(providerTypeId,govId,areaId,professionID,degreeID)
+        return neqabtyRepository.getProvidersByType(providerTypeId, govId, areaId, professionID, degreeID)
     }
-
 }

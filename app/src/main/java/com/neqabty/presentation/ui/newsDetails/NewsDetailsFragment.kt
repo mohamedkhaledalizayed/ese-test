@@ -22,11 +22,12 @@ class NewsDetailsFragment : BaseFragment(), Injectable {
 
     var binding by autoCleared<NewsDetailsFragmentBinding>()
 
-    lateinit var newsItem : NewsUI
+    lateinit var newsItem: NewsUI
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -46,16 +47,13 @@ class NewsDetailsFragment : BaseFragment(), Injectable {
         newsItem = params.newsItem
 
         initializeViews()
-
     }
 
     fun initializeViews() {
         binding.newsItem = newsItem
     }
 
-
 //region
-
 
 // endregion
 

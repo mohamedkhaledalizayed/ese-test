@@ -6,11 +6,12 @@ import com.neqabty.domain.entities.SyndicateEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetAllSyndicates @Inject constructor(transformer: Transformer<List<SyndicateEntity>>,
-                                           private val neqabtyRepository: NeqabtyRepository) : UseCase<List<SyndicateEntity>>(transformer) {
+class GetAllSyndicates @Inject constructor(
+    transformer: Transformer<List<SyndicateEntity>>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<List<SyndicateEntity>>(transformer) {
 
     override fun createObservable(data: Map<String, Any>?): Observable<List<SyndicateEntity>> {
         return neqabtyRepository.getSyndicates()
     }
-
 }

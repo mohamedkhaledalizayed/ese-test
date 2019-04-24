@@ -23,7 +23,6 @@ import com.neqabty.testing.OpenForTesting
 import kotlinx.android.synthetic.main.subsyndicates_fragment.*
 import javax.inject.Inject
 
-
 @OpenForTesting
 class SubSyndicatesFragment : DialogFragment(), Injectable {
     @Inject
@@ -42,8 +41,9 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -65,7 +65,6 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
         bundle?.let { syndicate = it.getParcelable("syndicate") }
 
         initializeViews()
-
 
         val adapter = com.neqabty.presentation.ui.subsyndicates.SubSyndicatesAdapter(dataBindingComponent, appExecutors) { subSyndicate ->
             PreferencesHelper(requireContext()).mainSyndicate = syndicate.id
@@ -101,9 +100,7 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
     fun initializeViews() {
     }
 
-
 //region
-
 
 // endregion
 }

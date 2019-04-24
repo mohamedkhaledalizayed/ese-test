@@ -6,9 +6,10 @@ import com.neqabty.domain.entities.SyndicateEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetSubSyndicates @Inject constructor(transformer: Transformer<List<SyndicateEntity>>,
-                                           private val neqabtyRepository: NeqabtyRepository) : UseCase<List<SyndicateEntity>>(transformer) {
-
+class GetSubSyndicates @Inject constructor(
+    transformer: Transformer<List<SyndicateEntity>>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<List<SyndicateEntity>>(transformer) {
 
     companion object {
         private const val PARAM_ID = "param:id"
@@ -24,5 +25,4 @@ class GetSubSyndicates @Inject constructor(transformer: Transformer<List<Syndica
         val id = data?.get(GetSubSyndicates.PARAM_ID) as String
         return neqabtyRepository.geSubSyndicatesById(id)
     }
-
 }

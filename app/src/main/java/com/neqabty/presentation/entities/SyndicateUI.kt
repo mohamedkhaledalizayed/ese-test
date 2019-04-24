@@ -4,24 +4,24 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class SyndicateUI(
-        var id: Int = 0,
-        var descAr: String?,
-        var descEn: String?,
-        var parentId: String?,
-        var level: String?,
-        var address: String?,
-        var phone: String?,
-        var email: String?,
-        var governId: String?,
-        var logo: String?,
-        var createdBy: String?,
-        var updatedBy: String?,
-        var createdAt: String?,
-        var updatedAt: String?,
-        var fax: String?,
-        var mobile: String?,
-        var subSyndicates: List<SyndicateUI>?
-):Parcelable {
+    var id: Int = 0,
+    var descAr: String?,
+    var descEn: String?,
+    var parentId: String?,
+    var level: String?,
+    var address: String?,
+    var phone: String?,
+    var email: String?,
+    var governId: String?,
+    var logo: String?,
+    var createdBy: String?,
+    var updatedBy: String?,
+    var createdAt: String?,
+    var updatedAt: String?,
+    var fax: String?,
+    var mobile: String?,
+    var subSyndicates: List<SyndicateUI>?
+) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),

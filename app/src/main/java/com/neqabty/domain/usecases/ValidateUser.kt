@@ -6,9 +6,10 @@ import com.neqabty.domain.entities.MemberEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class ValidateUser @Inject constructor(transformer: Transformer<MemberEntity>,
-                                       private val neqabtyRepository: NeqabtyRepository) : UseCase<MemberEntity>(transformer) {
-
+class ValidateUser @Inject constructor(
+    transformer: Transformer<MemberEntity>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<MemberEntity>(transformer) {
 
     companion object {
         private const val PARAM_USER_NUMBER = "param:userNumber"
@@ -24,5 +25,4 @@ class ValidateUser @Inject constructor(transformer: Transformer<MemberEntity>,
         val userNumber = data?.get(ValidateUser.PARAM_USER_NUMBER) as String
         return neqabtyRepository.validateUser(userNumber)
     }
-
 }

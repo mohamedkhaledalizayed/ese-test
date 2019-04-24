@@ -5,8 +5,10 @@ import com.neqabty.domain.common.Transformer
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetUserRegistered @Inject constructor(transformer: Transformer<Unit>,
-                                            private val neqabtyRepository: NeqabtyRepository) : UseCase<Unit>(transformer) {
+class GetUserRegistered @Inject constructor(
+    transformer: Transformer<Unit>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<Unit>(transformer) {
 
     companion object {
         private const val PARAM_MOBILE = "param:mobile"
@@ -32,7 +34,6 @@ class GetUserRegistered @Inject constructor(transformer: Transformer<Unit>,
         val subSyndicateId = data?.get(GetUserRegistered.PARAM_SUB_SYNDICATE) as Int
         val token = data?.get(GetUserRegistered.PARAM_TOKEN) as String
         val userNumber = data?.get(GetUserRegistered.PARAM_USER_NUMBER) as String
-        return neqabtyRepository.registerUser(mobile, mainSyndicateId, subSyndicateId, token,userNumber)
+        return neqabtyRepository.registerUser(mobile, mainSyndicateId, subSyndicateId, token, userNumber)
     }
-
 }

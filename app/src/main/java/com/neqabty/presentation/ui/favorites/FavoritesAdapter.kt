@@ -12,10 +12,10 @@ import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class FavoritesAdapter(
-        private val dataBindingComponent: DataBindingComponent,
-        appExecutors: AppExecutors,
-        private val callback: ((ProviderUI) -> Unit)?,
-        private val removeCallback: ((ProviderUI) -> Unit)?
+    private val dataBindingComponent: DataBindingComponent,
+    appExecutors: AppExecutors,
+    private val callback: ((ProviderUI) -> Unit)?,
+    private val removeCallback: ((ProviderUI) -> Unit)?
 ) : DataBoundListAdapter<ProviderUI, MedicalFavoriteItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<ProviderUI>() {
@@ -43,7 +43,7 @@ class FavoritesAdapter(
                 callback?.invoke(it)
             }
         }
-        binding.ivClose.setOnClickListener{
+        binding.ivClose.setOnClickListener {
             binding.provider?.let {
                 removeCallback?.invoke(it)
             }

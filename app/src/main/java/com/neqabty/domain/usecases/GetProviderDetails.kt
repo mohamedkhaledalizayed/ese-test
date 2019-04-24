@@ -6,15 +6,17 @@ import com.neqabty.domain.entities.ProviderEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetProviderDetails @Inject constructor(transformer: Transformer<ProviderEntity>,
-                                             private val neqabtyRepository: NeqabtyRepository) : UseCase<ProviderEntity>(transformer) {
+class GetProviderDetails @Inject constructor(
+    transformer: Transformer<ProviderEntity>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<ProviderEntity>(transformer) {
 
     companion object {
         private const val PARAM_ID = "param:id"
         private const val PARAM_TYPE = "param:type"
     }
 
-    fun getProviderDetails(id: String,type :String): Observable<ProviderEntity> {
+    fun getProviderDetails(id: String, type: String): Observable<ProviderEntity> {
         val data = HashMap<String, String>()
         data[PARAM_ID] = id
         data[PARAM_TYPE] = type
@@ -24,7 +26,6 @@ class GetProviderDetails @Inject constructor(transformer: Transformer<ProviderEn
     override fun createObservable(data: Map<String, Any>?): Observable<ProviderEntity> {
         val id = data?.get(GetProviderDetails.PARAM_ID) as String
         val type = data?.get(GetProviderDetails.PARAM_TYPE) as String
-        return neqabtyRepository.getProviderDetails(id,type)
+        return neqabtyRepository.getProviderDetails(id, type)
     }
-
 }

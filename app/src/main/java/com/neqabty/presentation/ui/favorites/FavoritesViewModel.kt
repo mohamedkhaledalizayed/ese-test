@@ -11,7 +11,10 @@ import com.neqabty.presentation.mappers.ProviderUIEntityMapper
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 @OpenForTesting
-class FavoritesViewModel @Inject constructor(private val getFavorites: GetFavorites,private val removeFavorite: RemoveFavorite) : BaseViewModel() {
+class FavoritesViewModel @Inject constructor(
+    private val getFavorites: GetFavorites,
+    private val removeFavorite: RemoveFavorite
+) : BaseViewModel() {
 
     private val providerEntityUIMapper = ProviderEntityUIMapper()
     private val providerUIEntityMapper = ProviderUIEntityMapper()
@@ -37,7 +40,6 @@ class FavoritesViewModel @Inject constructor(private val getFavorites: GetFavori
                 )
         )
     }
-
 
     fun removeFavorite(providerUI: ProviderUI) {
         addDisposable(removeFavorite.removeFavorite(providerUIEntityMapper.mapFrom(providerUI))

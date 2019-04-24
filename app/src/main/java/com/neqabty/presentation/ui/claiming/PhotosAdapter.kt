@@ -12,9 +12,9 @@ import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class PhotosAdapter(
-        private val dataBindingComponent: DataBindingComponent,
-        appExecutors: AppExecutors,
-        private val callback: ((PhotoUI) -> Unit)?
+    private val dataBindingComponent: DataBindingComponent,
+    appExecutors: AppExecutors,
+    private val callback: ((PhotoUI) -> Unit)?
 ) : DataBoundListAdapter<PhotoUI, PhotoItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<PhotoUI>() {

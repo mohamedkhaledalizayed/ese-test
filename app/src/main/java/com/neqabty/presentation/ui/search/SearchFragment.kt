@@ -36,7 +36,6 @@ class SearchFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-
     var governsResultList: List<GovernUI>? = mutableListOf()
     var areasResultList: List<AreaUI>? = mutableListOf()
     var providersTypesResultList: List<ProviderTypeUI>? = mutableListOf()
@@ -50,8 +49,9 @@ class SearchFragment : BaseFragment(), Injectable {
     var degreeID: Int = 0
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -73,7 +73,7 @@ class SearchFragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
         searchViewModel.errorState.observe(this, Observer { _ ->
-            showConnectionAlert(requireContext(),retryCallback =  {
+            showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
                 searchViewModel.getAllContent()
             }, cancelCallback = {
@@ -83,17 +83,15 @@ class SearchFragment : BaseFragment(), Injectable {
         })
         searchViewModel.getAllContent()
         initializeViews()
-
     }
 
     private fun initializeViews() {
         binding.bNext.setOnClickListener {
             navController().navigate(
-                    SearchFragmentDirections.openProviders("",providerTypeID , governID ,areaID,specializationID.toString(),if(degreeID == 0) "" else degreeID.toString())
+                    SearchFragmentDirections.openProviders("", providerTypeID, governID, areaID, specializationID.toString(), if (degreeID == 0) "" else degreeID.toString())
             )
         }
     }
-
 
     private fun handleViewState(state: SearchViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
@@ -164,11 +162,11 @@ class SearchFragment : BaseFragment(), Injectable {
 //                    return
                 searchViewModel.providerTypeIndex = position
                 providerTypeID = (parent.getItemAtPosition(position) as ProviderTypeUI).id
-                if(providerTypeID == 2){
+                if (providerTypeID == 2) {
                     binding.llDoctors.visibility = View.VISIBLE
                     renderDegrees()
                     renderSpecializations()
-                }else{
+                } else {
                     binding.llDoctors.visibility = View.GONE
                 }
             }

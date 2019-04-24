@@ -12,9 +12,9 @@ import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class SubSyndicatesAdapter(
-        private val dataBindingComponent: DataBindingComponent,
-        appExecutors: AppExecutors,
-        private val callback: ((SyndicateUI) -> Unit)?
+    private val dataBindingComponent: DataBindingComponent,
+    appExecutors: AppExecutors,
+    private val callback: ((SyndicateUI) -> Unit)?
 ) : DataBoundListAdapter<SyndicateUI, SubsyndicateItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<SyndicateUI>() {

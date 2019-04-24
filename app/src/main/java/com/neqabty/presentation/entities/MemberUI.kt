@@ -4,17 +4,17 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class MemberUI(
-        var engineerID: Int = 0,
-        var engineerName: String?,
-        var expirationDate: String?,
-        var paymentType: String?,
-        var billDate: String?,
-        var code: Int?,
-        var interfaceLanguage: String?,
-        var lastPaymentDate: String?,
-        var message: String?,
-        var amount: String?
-):Parcelable{
+    var engineerID: Int = 0,
+    var engineerName: String?,
+    var expirationDate: String?,
+    var paymentType: String?,
+    var billDate: String?,
+    var code: Int?,
+    var interfaceLanguage: String?,
+    var lastPaymentDate: String?,
+    var message: String?,
+    var amount: String?
+) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),
@@ -53,5 +53,4 @@ data class MemberUI(
             return arrayOfNulls(size)
         }
     }
-
 }

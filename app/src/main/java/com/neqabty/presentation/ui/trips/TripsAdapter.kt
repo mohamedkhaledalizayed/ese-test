@@ -12,9 +12,9 @@ import com.neqabty.presentation.entities.TripUI
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class TripsAdapter(
-        private val dataBindingComponent: DataBindingComponent,
-        appExecutors: AppExecutors,
-        private val callback: ((TripUI) -> Unit)?
+    private val dataBindingComponent: DataBindingComponent,
+    appExecutors: AppExecutors,
+    private val callback: ((TripUI) -> Unit)?
 ) : DataBoundListAdapter<TripUI, TripsItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<TripUI>() {

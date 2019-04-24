@@ -6,8 +6,10 @@ import io.reactivex.Observable
 import java.io.File
 import javax.inject.Inject
 
-class SendMedicalRequest @Inject constructor(transformer: Transformer<Unit>,
-                                             private val neqabtyRepository: NeqabtyRepository) : UseCase<Unit>(transformer) {
+class SendMedicalRequest @Inject constructor(
+    transformer: Transformer<Unit>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<Unit>(transformer) {
 
     companion object {
         private const val PARAM_MAIN_SYNDICATE = "param:mainSyndicate"
@@ -29,7 +31,25 @@ class SendMedicalRequest @Inject constructor(transformer: Transformer<Unit>,
         private const val PARAM_DOC5 = "param:doc5"
     }
 
-    fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, providerType: Int, provider: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
+    fun sendMedicalRequest(
+        mainSyndicateId: Int,
+        subSyndicateId: Int,
+        userNumber: String,
+        email: String,
+        phone: String,
+        profession: Int,
+        degree: Int,
+        area: Int,
+        doctor: Int,
+        providerType: Int,
+        provider: Int,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
+    ): Observable<Unit> {
         val data = HashMap<String, Any>()
         data[PARAM_MAIN_SYNDICATE] = mainSyndicateId
         data[PARAM_SUB_SYNDICATE] = subSyndicateId
@@ -71,5 +91,4 @@ class SendMedicalRequest @Inject constructor(transformer: Transformer<Unit>,
         val doc5 = data?.get(SendMedicalRequest.PARAM_DOC5) as File?
         return neqabtyRepository.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
-
 }

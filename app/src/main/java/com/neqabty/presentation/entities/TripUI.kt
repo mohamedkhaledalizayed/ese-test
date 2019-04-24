@@ -4,28 +4,28 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class TripUI(
-        var id: Int = 0,
-        var img: String?,
-        var title: String?,
-        var typeId: String?,
-        var dateFrom: String?,
-        var dateTo: String?,
-        var mainSyndicateId: String?,
-        var subSyndicateId: String?,
-        var governId: String?,
-        var desc: String?,
-        var price: String?,
-        var imgs: List<String>? = null
-): Parcelable {
+    var id: Int = 0,
+    var img: String?,
+    var title: String?,
+    var typeId: String?,
+    var dateFrom: String?,
+    var dateTo: String?,
+    var mainSyndicateId: String?,
+    var subSyndicateId: String?,
+    var governId: String?,
+    var desc: String?,
+    var price: String?,
+    var imgs: List<String>? = null
+) : Parcelable {
 
     data class TripImage(
-            var imageId: Int = 0,
-            var file: String?,
-            var tripId: Int?,
-            var createdBy: String?,
-            var updatedBy: String?,
-            var createdAt: String?,
-            var updatedAt: String?
+        var imageId: Int = 0,
+        var file: String?,
+        var tripId: Int?,
+        var createdBy: String?,
+        var updatedBy: String?,
+        var createdAt: String?,
+        var updatedAt: String?
     )
 
     constructor(parcel: Parcel) : this(
@@ -59,5 +59,4 @@ data class TripUI(
             return arrayOfNulls(size)
         }
     }
-
 }

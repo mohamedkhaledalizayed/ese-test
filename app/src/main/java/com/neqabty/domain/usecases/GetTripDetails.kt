@@ -6,9 +6,10 @@ import com.neqabty.domain.entities.TripEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetTripDetails @Inject constructor(transformer: Transformer<TripEntity>,
-                                         private val neqabtyRepository: NeqabtyRepository) : UseCase<TripEntity>(transformer) {
-
+class GetTripDetails @Inject constructor(
+    transformer: Transformer<TripEntity>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<TripEntity>(transformer) {
 
     companion object {
         private const val PARAM_TRIP_ID = "param:tripId"
@@ -24,5 +25,4 @@ class GetTripDetails @Inject constructor(transformer: Transformer<TripEntity>,
         val id = data?.get(GetTripDetails.PARAM_TRIP_ID) as String
         return neqabtyRepository.getTripDetails(id)
     }
-
 }

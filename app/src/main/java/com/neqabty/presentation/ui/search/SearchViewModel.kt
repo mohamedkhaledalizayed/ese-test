@@ -10,19 +10,24 @@ import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
 @OpenForTesting
-class SearchViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, val getAllAreas: GetAllAreas, val getAllProvidersTypes: GetAllProvidersTypes, val getAllDegrees: GetAllDegrees, val getAllSpecializations: GetAllSpecializations) : BaseViewModel() {
+class SearchViewModel @Inject constructor(
+    val getAllGoverns: GetAllGoverns,
+    val getAllAreas: GetAllAreas,
+    val getAllProvidersTypes: GetAllProvidersTypes,
+    val getAllDegrees: GetAllDegrees,
+    val getAllSpecializations: GetAllSpecializations
+) : BaseViewModel() {
     private val areaEntityUIMapper = AreaEntityUIMapper()
     private val governEntityUIMapper = GovernEntityUIMapper()
     private val providerTypeEntityUIMapper = ProviderTypeEntityUIMapper()
     private val degreeEntityUIMapper = DegreeEntityUIMapper()
     private val specializationEntityUIMapper = SpecializationEntityUIMapper()
 
-
-    var govIndex = 0;
-    var areaIndex = 0;
-    var providerTypeIndex = 0;
-    var professionIndex = 0;
-    var degreeIndex = 0;
+    var govIndex = 0
+    var areaIndex = 0
+    var providerTypeIndex = 0
+    var professionIndex = 0
+    var degreeIndex = 0
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<SearchViewState> = MutableLiveData()
 
@@ -44,7 +49,6 @@ class SearchViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, val 
                         },
                         { errorState.value = it }
                 )
-
 
         val areasDisposable = getAllAreas.observable()
                 .flatMap {
@@ -92,7 +96,7 @@ class SearchViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, val 
                     }
                 }.subscribe(
                         {
-                            val edited = listOf(DegreeUI(0)) +it
+                            val edited = listOf(DegreeUI(0)) + it
                             viewState.value = viewState.value?.copy(degrees = edited)
                             onContentReceived()
                         },
@@ -118,7 +122,6 @@ class SearchViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, val 
         viewState.value?.degrees?.let {
             onContentReceived()
         } ?: addDisposable(degreesDisposable)
-
     }
 
     private fun onContentReceived() {

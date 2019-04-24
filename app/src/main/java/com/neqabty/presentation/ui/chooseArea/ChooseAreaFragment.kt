@@ -37,14 +37,14 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-
     var governsResultList: List<GovernUI>? = mutableListOf()
     var areasResultList: List<AreaUI>? = mutableListOf()
     var governID: Int = 0
     var areaID: Int = 0
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -66,7 +66,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
         chooseAreaViewModel.errorState.observe(this, Observer { _ ->
-            showConnectionAlert(requireContext(),retryCallback =  {
+            showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
                 chooseAreaViewModel.getAllContent1()
             }, cancelCallback = {
@@ -76,7 +76,6 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
         })
         chooseAreaViewModel.getAllContent1()
         initializeViews()
-
     }
 
     private fun initializeViews() {
@@ -84,11 +83,10 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
 //                ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
 //                ClaimingData.governId = (spGovern.selectedItem as GovernUI).id
             navController().navigate(
-                    ChooseAreaFragmentDirections.openMedical(governID,areaID)
+                    ChooseAreaFragmentDirections.openMedical(governID, areaID)
             )
         }
     }
-
 
     private fun handleViewState(state: ChooseAreaViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE

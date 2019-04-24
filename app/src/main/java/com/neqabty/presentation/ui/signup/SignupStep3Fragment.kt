@@ -30,8 +30,9 @@ class SignupStep3Fragment : BaseFragment(), Injectable {
     lateinit var signupViewModel: SignupViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -53,12 +54,10 @@ class SignupStep3Fragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        binding.bLogin.setOnClickListener{findNavController().navigateUp()}
+        binding.bLogin.setOnClickListener { findNavController().navigateUp() }
     }
 
 //region
 
-
 // endregion
-
 }

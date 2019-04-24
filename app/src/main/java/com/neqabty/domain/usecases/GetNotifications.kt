@@ -2,16 +2,14 @@ package com.neqabty.domain.usecases
 
 import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.common.Transformer
-import com.neqabty.domain.entities.AreaEntity
-import com.neqabty.domain.entities.NewsEntity
 import com.neqabty.domain.entities.NotificationEntity
-import com.neqabty.domain.entities.SyndicateEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetNotifications @Inject constructor(transformer: Transformer<List<NotificationEntity>>,
-                                           private val neqabtyRepository: NeqabtyRepository) : UseCase<List<NotificationEntity>>(transformer) {
-
+class GetNotifications @Inject constructor(
+    transformer: Transformer<List<NotificationEntity>>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<List<NotificationEntity>>(transformer) {
 
     companion object {
         private const val PARAM_USER_NUMBER = "param:userNumber"
@@ -28,7 +26,6 @@ class GetNotifications @Inject constructor(transformer: Transformer<List<Notific
     override fun createObservable(data: Map<String, Any>?): Observable<List<NotificationEntity>> {
         val userNumber = data?.get(GetNotifications.PARAM_USER_NUMBER) as String
         val subSyndicateId = data?.get(GetNotifications.PARAM_SYNDICATE_ID) as String
-        return neqabtyRepository.getNotifications(userNumber , subSyndicateId)
+        return neqabtyRepository.getNotifications(userNumber, subSyndicateId)
     }
-
 }

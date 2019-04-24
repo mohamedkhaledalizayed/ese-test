@@ -6,8 +6,8 @@ import com.neqabty.data.api.Response
 
 @Entity(primaryKeys = ["id"])
 data class DegreeData(
-        @field:SerializedName("degree_id")
-        var id: Int = 0,
-        @field:SerializedName("profession")
-        var profession: String?
-): Response()
+    @field:SerializedName("degree_id")
+    var id: Int = 0,
+    @field:SerializedName("profession")
+    var profession: String?
+) : Response()

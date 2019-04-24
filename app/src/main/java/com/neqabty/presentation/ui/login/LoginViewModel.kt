@@ -24,7 +24,7 @@ class LoginViewModel @Inject constructor(private val signupUser: SignupUser, pri
     var weatherText: String = ""
     private val _photoLoaded: MutableLiveData<Boolean> = MutableLiveData()
     private val userEntityToUIMapper = UserEntityUIMapper()
-    //////////////////////////////////////////////
+    // ////////////////////////////////////////////
     lateinit var userEntity: UserEntity
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<LoginViewState> = MutableLiveData()
@@ -33,8 +33,8 @@ class LoginViewModel @Inject constructor(private val signupUser: SignupUser, pri
         viewState.value = LoginViewState(isLoading = true)
     }
 
-    fun login(mobile:String , password:String , token:String) {
-        addDisposable(loginUser.login(mobile, password , token)
+    fun login(mobile: String, password: String, token: String) {
+        addDisposable(loginUser.login(mobile, password, token)
                 .map {
                     it.let {
                         userEntity = it
@@ -49,8 +49,16 @@ class LoginViewModel @Inject constructor(private val signupUser: SignupUser, pri
         )
     }
 
-
-    fun signup(email: String, fName: String, lName: String, mobile: String, govId: String, mainSyndicateId: String, subSyndicateId: String, password: String) {
+    fun signup(
+        email: String,
+        fName: String,
+        lName: String,
+        mobile: String,
+        govId: String,
+        mainSyndicateId: String,
+        subSyndicateId: String,
+        password: String
+    ) {
         addDisposable(signupUser.signup(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)
                 .map {
                     it.let {
@@ -66,7 +74,6 @@ class LoginViewModel @Inject constructor(private val signupUser: SignupUser, pri
         )
     }
 
-
     private fun onUserReceived(user: UserUI) {
 
         val newViewState = viewState.value?.copy(
@@ -75,15 +82,12 @@ class LoginViewModel @Inject constructor(private val signupUser: SignupUser, pri
 
         viewState.value = newViewState
     }
-    ///////////////////////////////old
+    // /////////////////////////////old
 
     fun setPhotoLoaded(loaded: Boolean) {
         _photoLoaded.value = loaded
     }
 
-
     val photoLoaded: LiveData<Boolean>
         get() = _photoLoaded
-
-
 }

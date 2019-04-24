@@ -12,9 +12,9 @@ import com.neqabty.presentation.entities.NotificationUI
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class NotificationsAdapter(
-        private val dataBindingComponent: DataBindingComponent,
-        appExecutors: AppExecutors,
-        private val callback: ((NotificationUI) -> Unit)?
+    private val dataBindingComponent: DataBindingComponent,
+    appExecutors: AppExecutors,
+    private val callback: ((NotificationUI) -> Unit)?
 ) : DataBoundListAdapter<NotificationUI, NotificationItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<NotificationUI>() {

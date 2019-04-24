@@ -10,8 +10,10 @@ import javax.inject.Singleton
 
 @Singleton
 @OpenForTesting
-class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: CachedNeqabtyDataStore,
-                                                private val remoteDataStore: RemoteNeqabtyDataStore) : NeqabtyRepository {
+class NeqabtyRepositoryImpl @Inject constructor(
+    private val cachedDataStore: CachedNeqabtyDataStore,
+    private val remoteDataStore: RemoteNeqabtyDataStore
+) : NeqabtyRepository {
     override fun getTripDetails(id: String): Observable<TripEntity> {
         return remoteDataStore.getTripDetails(id)
     }
@@ -25,27 +27,57 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
     }
 
     override fun getNotifications(userNumber: String, subSyndicateId: String): Observable<List<NotificationEntity>> {
-        return remoteDataStore.getNotifications(userNumber ,subSyndicateId)
+        return remoteDataStore.getNotifications(userNumber, subSyndicateId)
     }
 
-    override fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, providerType: Int, provider: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
-        return remoteDataStore.sendMedicalRequest(mainSyndicateId,subSyndicateId,userNumber,email,phone,profession,degree,area,doctor,providerType,provider,docsNumber,doc1, doc2, doc3, doc4, doc5)
+    override fun sendMedicalRequest(
+        mainSyndicateId: Int,
+        subSyndicateId: Int,
+        userNumber: String,
+        email: String,
+        phone: String,
+        profession: Int,
+        degree: Int,
+        area: Int,
+        doctor: Int,
+        providerType: Int,
+        provider: Int,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
+    ): Observable<Unit> {
+        return remoteDataStore.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 
-    override fun getAllProviderTypes(type :String): Observable<List<ProviderTypeEntitiy>> {
+    override fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>> {
         return remoteDataStore.getAllProviderTypes(type)
     }
 
-    override fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, userNumber:String): Observable<Unit> {
-        return remoteDataStore.registerUser(mobile,mainSyndicateId,subSyndicateId,token,userNumber)
+    override fun registerUser(
+        mobile: String,
+        mainSyndicateId: Int,
+        subSyndicateId: Int,
+        token: String,
+        userNumber: String
+    ): Observable<Unit> {
+        return remoteDataStore.registerUser(mobile, mainSyndicateId, subSyndicateId, token, userNumber)
     }
 
-    override fun getProviderDetails(id:String, type: String): Observable<ProviderEntity> {
-        return remoteDataStore.getProviderDetails(id,type)
+    override fun getProviderDetails(id: String, type: String): Observable<ProviderEntity> {
+        return remoteDataStore.getProviderDetails(id, type)
     }
 
-    override fun getProvidersByType(providerTypeId: String, govId: String, areaId: String,professionID:String?,degreeID:String?): Observable<List<ProviderEntity>> {
-        return remoteDataStore.getProvidersByType(providerTypeId, govId, areaId,professionID, degreeID)
+    override fun getProvidersByType(
+        providerTypeId: String,
+        govId: String,
+        areaId: String,
+        professionID: String?,
+        degreeID: String?
+    ): Observable<List<ProviderEntity>> {
+        return remoteDataStore.getProvidersByType(providerTypeId, govId, areaId, professionID, degreeID)
     }
 
     override fun getAllDoctors(): Observable<List<DoctorEntity>> {
@@ -76,7 +108,6 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
         return remoteDataStore.geSyndicateById(id)
     }
 
-
     fun saveSyndicate(syndicate: SyndicateEntity): Observable<SyndicateEntity> {
         return cachedDataStore.saveSyndicate(syndicate)
     }
@@ -99,7 +130,6 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
         return remoteDataStore.getTrips(id)
     }
 
-
     fun saveTrips(trips: List<TripEntity>): Observable<List<TripEntity>> {
         return cachedDataStore.saveTrips(trips)
     }
@@ -109,19 +139,25 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
         return remoteDataStore.getSyndicates()
     }
 
-
     fun saveSyndicates(syndicatesList: List<SyndicateEntity>): Observable<List<SyndicateEntity>> {
         return cachedDataStore.saveSyndicates(syndicatesList)
     }
 
-
-    override fun signup(email: String, fName: String, lName: String, mobile: String, govId: String, mainSyndicateId: String, subSyndicateId: String, password: String): Observable<UserEntity> {
+    override fun signup(
+        email: String,
+        fName: String,
+        lName: String,
+        mobile: String,
+        govId: String,
+        mainSyndicateId: String,
+        subSyndicateId: String,
+        password: String
+    ): Observable<UserEntity> {
 
         return remoteDataStore.signup(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)
                 .doOnNext { user ->
                     saveUser(user)
                 }
-
     }
 
     override fun login(mobile: String, password: String, token: String): Observable<UserEntity> {
@@ -136,7 +172,6 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
             }
         }
     }
-
 
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {
         return cachedDataStore.saveUser(userEntity)
@@ -153,5 +188,4 @@ class NeqabtyRepositoryImpl @Inject constructor(private val cachedDataStore: Cac
     fun getFavorites(): Observable<List<ProviderEntity>> {
         return cachedDataStore.getFavorites()
     }
-
 }

@@ -20,7 +20,7 @@ class SubSyndicatesViewModel @Inject constructor(private val getSubSyndicates: G
         viewState.value = SubSyndicatesViewState()
     }
 
-    fun getSubSyndicates(id : String) {
+    fun getSubSyndicates(id: String) {
         viewState.value?.subSyndicates?.let {
             onSubsyndicatesReceived(it)
         } ?: addDisposable(getSubSyndicates.getSubSyndicateById(id)
@@ -39,7 +39,6 @@ class SubSyndicatesViewModel @Inject constructor(private val getSubSyndicates: G
                 )
         )
     }
-
 
     private fun onSubsyndicatesReceived(subSyndicates: List<SyndicateUI>) {
         val newViewState = viewState.value?.copy(

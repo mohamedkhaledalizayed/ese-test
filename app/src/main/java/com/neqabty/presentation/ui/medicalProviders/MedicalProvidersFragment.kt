@@ -39,11 +39,12 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
     var degreeID: String? = ""
     var professionID: String? = ""
 
-    var categoryId : Int = 0
-    var title : String = ""
+    var categoryId: Int = 0
+    var title: String = ""
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -68,7 +69,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         governID = params.governID
         professionID = params.professionID
         degreeID = params.degreeID
-        if(title.isNotBlank()) {setToolbarTitle(title)}
+        if (title.isNotBlank()) { setToolbarTitle(title) }
 
         val adapter = MedicalProvidersAdapter(dataBindingComponent, appExecutors) { provider ->
             provider.type = categoryId.toString()
@@ -85,15 +86,14 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         medicalProvidersViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                medicalProvidersViewModel.getMedicalProviders(categoryId.toString(),governID.toString(),areaID.toString(),professionID,degreeID)
+                medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), professionID, degreeID)
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
 
-        medicalProvidersViewModel.getMedicalProviders(categoryId.toString(),governID.toString(),areaID.toString(),professionID,degreeID)
+        medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), professionID, degreeID)
     }
-
 
     private fun handleViewState(state: MedicalProvidersViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE

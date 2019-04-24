@@ -25,7 +25,6 @@ object WeatherTypeConverters {
         return ints?.joinToString(",")
     }
 
-
 //    @TypeConverter
 //    @JvmStatic
 //    fun listToJson(value: List<WeatherData.WeatherItem>?): String {

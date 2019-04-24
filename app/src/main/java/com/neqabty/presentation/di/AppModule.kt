@@ -28,7 +28,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
-
 @Module(includes = [ViewModelModule::class])
 class AppModule {
     @Provides
@@ -39,7 +38,6 @@ class AppModule {
     fun provideRetrofit(): Retrofit {
         val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY
-
         }
 
         val client: OkHttpClient = OkHttpClient.Builder().apply {
@@ -49,7 +47,7 @@ class AppModule {
         return Retrofit.Builder()
             .baseUrl("http://eea.neqabty.com/")
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//LiveDataCallAdapterFactory()
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // LiveDataCallAdapterFactory()
             .client(client)
             .build()
     }
@@ -80,7 +78,6 @@ class AppModule {
 //    fun provideHistoryDao(db: NeqabtyDb): HistoryDao {
 //        return db.historyDao()
 //    }
-
 
     @Provides
     @Singleton
@@ -119,7 +116,6 @@ class AppModule {
     fun provideSignupUser(neqabtyRepository: NeqabtyRepository): SignupUser {
         return SignupUser(ASyncTransformer(), neqabtyRepository)
     }
-
 
     @Singleton
     @Provides

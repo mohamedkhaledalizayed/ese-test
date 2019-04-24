@@ -13,9 +13,9 @@ import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class MedicalCategoriesAdapter(
-        private val dataBindingComponent: DataBindingComponent,
-        appExecutors: AppExecutors,
-        private val callback: ((MedicalCategoryUI) -> Unit)?
+    private val dataBindingComponent: DataBindingComponent,
+    appExecutors: AppExecutors,
+    private val callback: ((MedicalCategoryUI) -> Unit)?
 ) : DataBoundListAdapter<MedicalCategoryUI, MedicalCategoryItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<MedicalCategoryUI>() {
@@ -44,7 +44,7 @@ class MedicalCategoriesAdapter(
             }
         }
 
-        val layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width *45/100,DisplayMetrics.width *40/100)
+        val layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width *45 / 100, DisplayMetrics.width *40 / 100)
         binding.root.layoutParams = layoutParams
         return binding
     }

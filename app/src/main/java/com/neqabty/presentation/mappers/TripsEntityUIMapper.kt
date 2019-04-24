@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class TripsEntityUIMapper @Inject constructor() : Mapper<TripEntity, TripUI>() {
 
     override fun mapFrom(from: TripEntity): TripUI {
-        var tripUI= TripUI(
+        var tripUI = TripUI(
                 id = from.id,
                 governId = from.governId,
                 subSyndicateId = from.subSyndicateId,

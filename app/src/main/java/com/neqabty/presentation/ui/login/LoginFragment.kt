@@ -34,8 +34,9 @@ class LoginFragment : BaseFragment(), Injectable {
     lateinit var loginViewModel: LoginViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -55,14 +56,13 @@ class LoginFragment : BaseFragment(), Injectable {
 
 //        initializeObservers()
         initializeViews()
-        loginViewModel.login("01119850766","123@pass" , "c4baf341d52e53c01dd0ff4e2f930ab24886f22c5ef1b15e715534832c0e9528")
+        loginViewModel.login("01119850766", "123@pass", "c4baf341d52e53c01dd0ff4e2f930ab24886f22c5ef1b15e715534832c0e9528")
 
 //        loginViewModel.signup("m@m.m", "Mona", "Mohamed", "01119850766", "1", "1", "1", "123@pass")
-
     }
 
     private fun initializeGPS() {
-        loginViewModel.locationManager = this.context!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager;
+        loginViewModel.locationManager = this.context!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
 
     private fun initializeObservers() {
@@ -77,7 +77,6 @@ class LoginFragment : BaseFragment(), Injectable {
 
         if (loginViewModel.photoFilePath.isNotBlank() && loginViewModel.weatherText.isBlank())
             initializeGPS()
-
     }
 
     private fun handleViewState(state: LoginViewState) {
@@ -87,7 +86,7 @@ class LoginFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        binding.tvSignup.setOnClickListener{
+        binding.tvSignup.setOnClickListener {
             navController().navigate(LoginFragmentDirections.signup())
         }
 //        binding.bCapture.setOnClickListener {
@@ -96,15 +95,14 @@ class LoginFragment : BaseFragment(), Injectable {
 //
 //        binding.bHistory.setOnClickListener {
 //            //        navController().navigate(
-////                CaptureFragmentDirections.showHistory()
-////        )
+// //                CaptureFragmentDirections.showHistory()
+// //        )
 //        }
 //
 //        binding.bShare.setOnClickListener { ImageUtils.share(this.context!!, loginViewModel.mCurrentPhotoPath) }
 //        binding.weatherLoaded = false
 //        binding.photoURL = ""
     }
-
 
 //region
 

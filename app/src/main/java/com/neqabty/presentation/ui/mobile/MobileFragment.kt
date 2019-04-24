@@ -25,7 +25,6 @@ import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
-
 @OpenForTesting
 class MobileFragment : BaseFragment(), Injectable {
     @Inject
@@ -38,8 +37,9 @@ class MobileFragment : BaseFragment(), Injectable {
     lateinit var mobileViewModel: MobileViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -71,7 +71,7 @@ class MobileFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        if(!PreferencesHelper(requireContext()).user.equals("null"))
+        if (!PreferencesHelper(requireContext()).user.equals("null"))
             binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
 
         binding.bSend.setOnClickListener {

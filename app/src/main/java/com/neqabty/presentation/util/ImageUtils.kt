@@ -20,7 +20,6 @@ class ImageUtils {
             return ImageUtils.saveImage(bitmap, name + ".jpg", path)
         }
 
-
 //        fun captureScreenshot(view: View , path :String , name :String) : File?{
 //            var file : File? = null
 //            if(view.width != null && view.height != null) {
@@ -58,17 +57,15 @@ class ImageUtils {
             return file
         }
 
-
         @Throws(IOException::class)
         fun createImageFile(dir: File, name: String): File {
             val image = File.createTempFile(
                     name, /* prefix */
                     ".jpg", /* suffix */
-                    dir      /* directory */
+                    dir /* directory */
             )
             return image
         }
-
 
         fun share(context: Context, path: String) {
             val intent = Intent().apply {
@@ -78,7 +75,5 @@ class ImageUtils {
             }
             context.startActivity(Intent.createChooser(intent, context.resources.getText(R.string.sharee)))
         }
-
     }
-
 }

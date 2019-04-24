@@ -4,10 +4,10 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class MedicalCategoryUI(
-        var id :Int= 0,
-        var name : String,
-        var image : Int
-):Parcelable {
+    var id: Int = 0,
+    var name: String,
+    var image: Int
+) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),

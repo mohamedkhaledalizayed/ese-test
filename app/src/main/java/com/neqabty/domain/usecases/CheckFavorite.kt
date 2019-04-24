@@ -6,8 +6,10 @@ import com.neqabty.domain.entities.ProviderEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class CheckFavorite @Inject constructor(transformer: Transformer<Boolean>,
-                                        private val neqabtyCache: NeqabtyCache) : UseCase<Boolean>(transformer) {
+class CheckFavorite @Inject constructor(
+    transformer: Transformer<Boolean>,
+    private val neqabtyCache: NeqabtyCache
+) : UseCase<Boolean>(transformer) {
 
     companion object {
         private const val PARAM_ENTITY = "param:entity"
@@ -23,5 +25,4 @@ class CheckFavorite @Inject constructor(transformer: Transformer<Boolean>,
         val providerEntity = data?.get(CheckFavorite.PARAM_ENTITY) as ProviderEntity
         return neqabtyCache.checkFavorite(providerEntity)
     }
-
 }

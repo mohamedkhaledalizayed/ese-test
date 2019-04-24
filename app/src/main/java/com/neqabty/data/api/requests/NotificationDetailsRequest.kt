@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 import com.neqabty.data.api.Request
 
 data class NotificationDetailsRequest(
-        @SerializedName("request_id")
-        var id: String = ""
+    @SerializedName("request_id")
+    var id: String = ""
 ) : Request()

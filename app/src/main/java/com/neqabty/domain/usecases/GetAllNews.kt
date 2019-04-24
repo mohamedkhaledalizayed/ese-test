@@ -6,8 +6,10 @@ import com.neqabty.domain.entities.NewsEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetAllNews @Inject constructor(transformer: Transformer<List<NewsEntity>>,
-                                     private val neqabtyRepository: NeqabtyRepository) : UseCase<List<NewsEntity>>(transformer) {
+class GetAllNews @Inject constructor(
+    transformer: Transformer<List<NewsEntity>>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<List<NewsEntity>>(transformer) {
 
     companion object {
         private const val PARAM_ID = "param:id"
@@ -22,5 +24,4 @@ class GetAllNews @Inject constructor(transformer: Transformer<List<NewsEntity>>,
         val id = data?.get(GetAllNews.PARAM_ID) as String
         return neqabtyRepository.getNews(id)
     }
-
 }

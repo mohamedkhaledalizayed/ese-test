@@ -11,13 +11,19 @@ import java.io.File
 import javax.inject.Inject
 
 @OpenForTesting
-class ClaimingViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, val getAllAreas: GetAllAreas, val getProvidersByType: GetProvidersByType, val getAllProvidersTypes: GetAllProvidersTypes, val sendMedicalRequest: SendMedicalRequest, private val validateUser: ValidateUser) : BaseViewModel() {
+class ClaimingViewModel @Inject constructor(
+    val getAllGoverns: GetAllGoverns,
+    val getAllAreas: GetAllAreas,
+    val getProvidersByType: GetProvidersByType,
+    val getAllProvidersTypes: GetAllProvidersTypes,
+    val sendMedicalRequest: SendMedicalRequest,
+    private val validateUser: ValidateUser
+) : BaseViewModel() {
     private val areaEntityUIMapper = AreaEntityUIMapper()
     private val governEntityUIMapper = GovernEntityUIMapper()
     private val providerTypeEntityUIMapper = ProviderTypeEntityUIMapper()
     private val providerEntityUIMapper = ProviderEntityUIMapper()
     private val memberEntityUIMapper = MemberEntityUIMapper()
-
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<ClaimingViewState> = MutableLiveData()
@@ -41,7 +47,6 @@ class ClaimingViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, va
                         { errorState.value = it }
                 )
 
-
         val areasDisposable = getAllAreas.observable()
                 .flatMap {
                     it.let {
@@ -62,7 +67,6 @@ class ClaimingViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, va
         viewState.value?.governs?.let {
             onContent1Received()
         } ?: addDisposable(governsDisposable)
-
     }
 
     fun getProviderTypes(govId: String, areaId: String) {
@@ -107,8 +111,25 @@ class ClaimingViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, va
 //        } ?: addDisposable(providersDisposable)
     }
 
-
-    fun sendMedicalRequest(mainSyndicateId: Int, subSyndicateId: Int, userNumber: String, email: String, phone: String, profession: Int, degree: Int, area: Int, doctor: Int, providerType: Int, provider: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?) {
+    fun sendMedicalRequest(
+        mainSyndicateId: Int,
+        subSyndicateId: Int,
+        userNumber: String,
+        email: String,
+        phone: String,
+        profession: Int,
+        degree: Int,
+        area: Int,
+        doctor: Int,
+        providerType: Int,
+        provider: Int,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
+    ) {
         viewState.value = viewState.value?.copy(isLoading = true)
         addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, docsNumber, doc1, doc2, doc3, doc4, doc5)
                 .subscribe(
@@ -117,7 +138,6 @@ class ClaimingViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, va
                 )
         )
     }
-
 
     fun validateUser(number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
@@ -135,7 +155,6 @@ class ClaimingViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, va
                 )
         )
     }
-
 
     private fun onValidationReceived(member: MemberUI) {
         val newViewState = viewState.value?.copy(

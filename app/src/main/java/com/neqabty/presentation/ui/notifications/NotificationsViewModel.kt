@@ -9,7 +9,6 @@ import com.neqabty.presentation.mappers.NotificationEntityUIMapper
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
-
 @OpenForTesting
 class NotificationsViewModel @Inject constructor(private val getNotifications: GetNotifications) : BaseViewModel() {
 
@@ -21,10 +20,10 @@ class NotificationsViewModel @Inject constructor(private val getNotifications: G
         viewState.value = NotificationsViewState()
     }
 
-    fun getNotifications(userNumber : String,subSyndicateId : String) {
+    fun getNotifications(userNumber: String, subSyndicateId: String) {
         viewState.value?.notifications?.let {
             onNotificationsReceived(it)
-        } ?: addDisposable(getNotifications.getNotifications(userNumber,subSyndicateId)
+        } ?: addDisposable(getNotifications.getNotifications(userNumber, subSyndicateId)
                 .flatMap {
                     it.let {
                         notificationEntityUIMapper.observable(it)
@@ -38,7 +37,6 @@ class NotificationsViewModel @Inject constructor(private val getNotifications: G
                 )
         )
     }
-
 
     private fun onNotificationsReceived(notifications: List<NotificationUI>) {
         val newViewState = viewState.value?.copy(

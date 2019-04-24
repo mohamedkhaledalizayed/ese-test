@@ -48,8 +48,9 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 
     lateinit var pager: ViewPager
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -71,7 +72,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
         claimingViewModel.errorState.observe(this, Observer { _ ->
-            showConnectionAlert(requireContext(),retryCallback =  {
+            showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
                 claimingViewModel.validateUser(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
@@ -90,7 +91,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             binding.progressbar.visibility = View.VISIBLE
             isValid = true
             claimingViewModel.getAllContent1()
-        }else if(state.member?.message != null && !isValid){
+        } else if (state.member?.message != null && !isValid) {
             showMemberValidationAlert(state.member?.message!!)
             state.member?.message = null
         }
@@ -108,12 +109,12 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        if(PreferencesHelper(requireContext()).user.isNotEmpty()){
+        if (PreferencesHelper(requireContext()).user.isNotEmpty()) {
             binding.edNumber.setText(PreferencesHelper(requireContext()).user)
             binding.edNumber.isEnabled = false
         }
         binding.bNext.setOnClickListener {
-            if (isDataValid(binding.edNumber.text.toString() , binding.edCardNumber.text.toString(), spArea.selectedItem, spGovern.selectedItem)) {
+            if (isDataValid(binding.edNumber.text.toString(), binding.edCardNumber.text.toString(), spArea.selectedItem, spGovern.selectedItem)) {
                 ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
                 ClaimingData.governId = (spGovern.selectedItem as GovernUI).id
                 pager.setCurrentItem(1, true)
@@ -155,15 +156,14 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
     }
 
     private fun isDataValid(memberNumber: String, cardNumber: String, area: Any?, govern: Any?): Boolean {
-        return if (memberNumber.trim().isNotEmpty() && cardNumber.trim().isNotEmpty()
-                && area != null&& govern != null)
+        return if (memberNumber.trim().isNotEmpty() && cardNumber.trim().isNotEmpty() &&
+                area != null && govern != null)
             true
         else {
             showInvalidDataAlert()
             false
         }
     }
-
 
     private fun showInvalidDataAlert() {
         val builder = AlertDialog.Builder(requireContext())
@@ -177,8 +177,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         dialog.show()
     }
 
-
-    private fun showMemberValidationAlert(message : String) {
+    private fun showMemberValidationAlert(message: String) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.error))
         builder.setCancelable(false)
@@ -192,7 +191,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
-//TODO
+// TODO
     override fun onPause() {
         super.onPause()
         hideKeyboard()
@@ -204,5 +203,4 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
     }
     // endregion
 fun navController() = findNavController()
-
 }

@@ -25,7 +25,6 @@ open class BaseFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = title
     }
 
-
     fun showConnectionAlert(context: Context, retryCallback: (() -> Unit), cancelCallback: (() -> Unit)) {
         builder = AlertDialog.Builder(context)
         builder?.setTitle(getString(R.string.error))

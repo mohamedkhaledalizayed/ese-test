@@ -21,7 +21,6 @@ import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
-
 @OpenForTesting
 class NotificationsFragment : BaseFragment(), Injectable {
     @Inject
@@ -38,8 +37,9 @@ class NotificationsFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -89,7 +89,6 @@ class NotificationsFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
     }
-
 
     //region
 // endregion

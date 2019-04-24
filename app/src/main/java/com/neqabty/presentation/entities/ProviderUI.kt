@@ -4,18 +4,18 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class ProviderUI(
-        var id: Int = 0,
-        var name: String?,
-        var governId: String?,
-        var areaId: String?,
-        var address: String?,
-        var phones: String?,
-        var emails: String?,
-        var createdBy: String?,
-        var updatedBy: String?,
-        var createdAt: String?,
-        var updatedAt: String?,
-        var type: String?
+    var id: Int = 0,
+    var name: String?,
+    var governId: String?,
+    var areaId: String?,
+    var address: String?,
+    var phones: String?,
+    var emails: String?,
+    var createdBy: String?,
+    var updatedBy: String?,
+    var createdAt: String?,
+    var updatedAt: String?,
+    var type: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),

@@ -33,8 +33,9 @@ class SignupFragment : BaseFragment(), Injectable {
 //    private lateinit var viewPager: ViewPager
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -55,7 +56,6 @@ class SignupFragment : BaseFragment(), Injectable {
 //        initializeObservers()
         initializeViews()
 //        signupViewModel.signup("m@m.m", "Mona", "Mohamed", "01119850766", "1", "1", "1", "123@pass")
-
     }
     private fun handleViewState(state: SignupViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
@@ -69,7 +69,7 @@ class SignupFragment : BaseFragment(), Injectable {
         adapter.addFragment(SignupStep2Fragment())
         adapter.addFragment(SignupStep3Fragment())
         binding.viewpager.adapter = adapter
-        binding.viewpager.setSwipePagingEnabled(true)//TODO
+        binding.viewpager.setSwipePagingEnabled(true) // TODO
         binding.indicator.setViewPager(binding.viewpager)
 
         binding.viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -79,13 +79,9 @@ class SignupFragment : BaseFragment(), Injectable {
                 binding.tvTitle.setText(Model.values()[position].titleResId)
             }
         })
-
-
     }
 
-
 //region
-
 
 // endregion
 

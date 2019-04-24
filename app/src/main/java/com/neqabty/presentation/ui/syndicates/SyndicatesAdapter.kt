@@ -14,9 +14,9 @@ import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class SyndicatesAdapter(
-        private val dataBindingComponent: DataBindingComponent,
-        appExecutors: AppExecutors,
-        private val callback: ((SyndicateUI) -> Unit)?
+    private val dataBindingComponent: DataBindingComponent,
+    appExecutors: AppExecutors,
+    private val callback: ((SyndicateUI) -> Unit)?
 ) : DataBoundListAdapter<SyndicateUI, SyndicateItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<SyndicateUI>() {
@@ -45,7 +45,7 @@ class SyndicatesAdapter(
             }
         }
 
-        val layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width /3,DisplayMetrics.width /3)
+        val layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width / 3, DisplayMetrics.width / 3)
         binding.root.layoutParams = layoutParams
         return binding
     }

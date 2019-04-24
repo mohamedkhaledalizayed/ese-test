@@ -38,12 +38,10 @@ class InquiryViewModel @Inject constructor(private val validateUser: ValidateUse
         )
     }
 
-
     private fun onValidationReceived(member: MemberUI) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
                 member = member)
         viewState.value = newViewState
     }
-
 }

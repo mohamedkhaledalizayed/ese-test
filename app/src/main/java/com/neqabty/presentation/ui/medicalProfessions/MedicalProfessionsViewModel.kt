@@ -9,7 +9,7 @@ import com.neqabty.presentation.mappers.SpecializationEntityUIMapper
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 @OpenForTesting
-class MedicalProfessionsViewModel @Inject constructor(private  val getAllSpecializations: GetAllSpecializations) : BaseViewModel() {
+class MedicalProfessionsViewModel @Inject constructor(private val getAllSpecializations: GetAllSpecializations) : BaseViewModel() {
 
     private val specializationEntityUIMapper = SpecializationEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
@@ -19,7 +19,7 @@ class MedicalProfessionsViewModel @Inject constructor(private  val getAllSpecial
         viewState.value = MedicalProfessionsViewState()
     }
 
-    fun getMedicalProfessions(id:String,govID:String,areaID:String) {
+    fun getMedicalProfessions(id: String, govID: String, areaID: String) {
         viewState.value?.professions?.let {
             onProfessionsReceived(it)
         } ?: addDisposable(getAllSpecializations.observable()
@@ -36,7 +36,6 @@ class MedicalProfessionsViewModel @Inject constructor(private  val getAllSpecial
                 )
         )
     }
-
 
     private fun onProfessionsReceived(professions: List<SpecializationUI>) {
         val newViewState = viewState.value?.copy(

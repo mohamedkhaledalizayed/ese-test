@@ -12,9 +12,9 @@ import com.neqabty.presentation.entities.NewsUI
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class NewsAdapter(
-        private val dataBindingComponent: DataBindingComponent,
-        appExecutors: AppExecutors,
-        private val callback: ((NewsUI) -> Unit)?
+    private val dataBindingComponent: DataBindingComponent,
+    appExecutors: AppExecutors,
+    private val callback: ((NewsUI) -> Unit)?
 ) : DataBoundListAdapter<NewsUI, NewsItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<NewsUI>() {

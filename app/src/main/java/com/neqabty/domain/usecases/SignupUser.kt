@@ -6,8 +6,10 @@ import com.neqabty.domain.entities.UserEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class SignupUser @Inject constructor(transformer: Transformer<UserEntity>,
-                                     private val neqabtyRepository: NeqabtyRepository) : UseCase<UserEntity>(transformer) {
+class SignupUser @Inject constructor(
+    transformer: Transformer<UserEntity>,
+    private val neqabtyRepository: NeqabtyRepository
+) : UseCase<UserEntity>(transformer) {
 
     companion object {
         private const val PARAM_EMAIL = "param:email"
@@ -20,7 +22,16 @@ class SignupUser @Inject constructor(transformer: Transformer<UserEntity>,
         private const val PARAM_PASSWORD = "param:password"
     }
 
-    fun signup(email: String, fName: String, lName: String, mobile: String, govId: String, mainSyndicateId: String, subSyndicateId: String, password: String): Observable<UserEntity> {
+    fun signup(
+        email: String,
+        fName: String,
+        lName: String,
+        mobile: String,
+        govId: String,
+        mainSyndicateId: String,
+        subSyndicateId: String,
+        password: String
+    ): Observable<UserEntity> {
         val data = HashMap<String, String>()
         data[PARAM_EMAIL] = email
         data[PARAM_FNAME] = fName
@@ -44,5 +55,4 @@ class SignupUser @Inject constructor(transformer: Transformer<UserEntity>,
         val password = data?.get(PARAM_PASSWORD) as String
         return neqabtyRepository.signup(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)
     }
-
 }

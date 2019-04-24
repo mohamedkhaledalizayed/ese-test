@@ -23,7 +23,6 @@ import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 
-
 @OpenForTesting
 class InquiryFragment : BaseFragment(), Injectable {
     @Inject
@@ -36,8 +35,9 @@ class InquiryFragment : BaseFragment(), Injectable {
     lateinit var inquiryViewModel: InquiryViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,

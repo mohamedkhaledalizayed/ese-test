@@ -19,7 +19,7 @@ class NewsViewModel @Inject constructor(private val getAllNews: GetAllNews) : Ba
         viewState.value = NewsViewState()
     }
 
-    fun getNews(id:String) {
+    fun getNews(id: String) {
         viewState.value?.news?.let {
             onNewsReceived(it)
         } ?: addDisposable(getAllNews.getAllNews(id)
@@ -36,7 +36,6 @@ class NewsViewModel @Inject constructor(private val getAllNews: GetAllNews) : Ba
                 )
         )
     }
-
 
     private fun onNewsReceived(news: List<NewsUI>) {
         val newViewState = viewState.value?.copy(

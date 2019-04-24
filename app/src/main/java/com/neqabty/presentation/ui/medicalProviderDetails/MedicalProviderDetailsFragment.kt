@@ -38,8 +38,9 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable, HasFavoriteOp
 
     lateinit var state: MedicalProviderDetailsViewState
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -84,7 +85,6 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable, HasFavoriteOp
             binding.providerItem = it
         }
         activity?.invalidateOptionsMenu()
-
     }
 
     //region
@@ -95,7 +95,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable, HasFavoriteOp
             medicalProviderDetailsViewModel.addFavorite(providerItem)
     }
 
-    override fun renderFav():Int {
+    override fun renderFav(): Int {
          return if (state.isFavorite) R.mipmap.added_fav else R.mipmap.add_fav
     }
 // endregion

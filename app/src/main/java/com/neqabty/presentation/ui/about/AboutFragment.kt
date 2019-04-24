@@ -25,7 +25,6 @@ import com.neqabty.testing.OpenForTesting
 import kotlinx.android.synthetic.main.about_fragment.*
 import javax.inject.Inject
 
-
 @OpenForTesting
 class AboutFragment : BaseFragment(), Injectable {
     @Inject
@@ -41,8 +40,9 @@ class AboutFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -64,7 +64,7 @@ class AboutFragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
         aboutViewModel.errorState.observe(this, Observer { _ ->
-            showConnectionAlert(requireContext(),retryCallback =  {
+            showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
                 aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
@@ -98,7 +98,6 @@ class AboutFragment : BaseFragment(), Injectable {
         }
     }
 
-
     //region
     private fun openMaps(address: String) {
         val uri = "geo:0,0?q=$address"
@@ -107,7 +106,7 @@ class AboutFragment : BaseFragment(), Injectable {
     }
 
     private fun call(phone: String) {
-        val intent = Intent(Intent.ACTION_DIAL);
+        val intent = Intent(Intent.ACTION_DIAL)
         intent.data = Uri.parse("tel:$phone")
         startActivity(intent)
     }
@@ -118,7 +117,7 @@ class AboutFragment : BaseFragment(), Injectable {
         val uri = Uri.parse(uriText)
         intent.setData(uri)
         if (intent.resolveActivity(requireContext().packageManager) != null)
-            startActivity(intent);
+            startActivity(intent)
     }
 // endregion
 

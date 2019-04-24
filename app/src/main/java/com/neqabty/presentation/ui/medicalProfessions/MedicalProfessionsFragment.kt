@@ -36,11 +36,12 @@ class MedicalProfessionsFragment : BaseFragment(), Injectable {
 
     var areaID: Int = 0
     var governID: Int = 0
-    var categoryId : Int = 0
-    var title : String = ""
+    var categoryId: Int = 0
+    var title: String = ""
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -63,11 +64,11 @@ class MedicalProfessionsFragment : BaseFragment(), Injectable {
         categoryId = params.categoryId
         areaID = params.areaID
         governID = params.governID
-        if(title.isNotBlank()) {setToolbarTitle(title)}
+        if (title.isNotBlank()) { setToolbarTitle(title) }
 
         val adapter = MedicalProfessionsAdapter(dataBindingComponent, appExecutors) { profession ->
             navController().navigate(
-                    MedicalProfessionsFragmentDirections.openProviders("",categoryId,governID,areaID,profession.id.toString(),"")
+                    MedicalProfessionsFragmentDirections.openProviders("", categoryId, governID, areaID, profession.id.toString(), "")
             )
         }
         this.adapter = adapter
@@ -79,15 +80,14 @@ class MedicalProfessionsFragment : BaseFragment(), Injectable {
         medicalProfessionsViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                medicalProfessionsViewModel.getMedicalProfessions(categoryId.toString(),governID.toString(),areaID.toString())
+                medicalProfessionsViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
 
-        medicalProfessionsViewModel.getMedicalProfessions(categoryId.toString(),governID.toString(),areaID.toString())
+        medicalProfessionsViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())
     }
-
 
     private fun handleViewState(state: MedicalProfessionsViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE

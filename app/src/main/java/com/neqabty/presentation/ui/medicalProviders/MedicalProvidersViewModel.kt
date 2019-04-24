@@ -9,7 +9,7 @@ import com.neqabty.presentation.mappers.ProviderEntityUIMapper
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
 @OpenForTesting
-class MedicalProvidersViewModel @Inject constructor(private  val getProvidersByType: GetProvidersByType) : BaseViewModel() {
+class MedicalProvidersViewModel @Inject constructor(private val getProvidersByType: GetProvidersByType) : BaseViewModel() {
 
     private val providerEntityUIMapper = ProviderEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
@@ -19,10 +19,10 @@ class MedicalProvidersViewModel @Inject constructor(private  val getProvidersByT
         viewState.value = MedicalProvidersViewState()
     }
 
-    fun getMedicalProviders(id:String,govID:String,areaID:String,professionID:String?,degreeID:String?) {
+    fun getMedicalProviders(id: String, govID: String, areaID: String, professionID: String?, degreeID: String?) {
         viewState.value?.providers?.let {
             onProvidersReceived(it)
-        } ?: addDisposable(getProvidersByType.getProvidersByType(id,govID,areaID,professionID, degreeID)
+        } ?: addDisposable(getProvidersByType.getProvidersByType(id, govID, areaID, professionID, degreeID)
                 .flatMap {
                     it.let {
                         providerEntityUIMapper.observable(it)
@@ -36,7 +36,6 @@ class MedicalProvidersViewModel @Inject constructor(private  val getProvidersByT
                 )
         )
     }
-
 
     private fun onProvidersReceived(providers: List<ProviderUI>) {
         val newViewState = viewState.value?.copy(

@@ -37,8 +37,9 @@ class TripsFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -57,7 +58,6 @@ class TripsFragment : BaseFragment(), Injectable {
                 .get(TripsViewModel::class.java)
 
         initializeViews()
-
 
         val adapter = com.neqabty.presentation.ui.trips.TripsAdapter(dataBindingComponent, appExecutors) { trip ->
             navController().navigate(
@@ -91,9 +91,7 @@ class TripsFragment : BaseFragment(), Injectable {
     fun initializeViews() {
     }
 
-
 //region
-
 
 // endregion
 

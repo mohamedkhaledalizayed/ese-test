@@ -19,8 +19,8 @@ interface NeqabtyCache {
     fun getTrips(): Observable<List<TripEntity>>
     fun saveTrips(trips: List<TripEntity>): Observable<List<TripEntity>>
 
-    fun saveUser(userEntity: UserEntity) : Observable<UserEntity>
-    fun getUser() : Observable<UserEntity>
+    fun saveUser(userEntity: UserEntity): Observable<UserEntity>
+    fun getUser(): Observable<UserEntity>
 
     fun getFavorites(): Observable<List<ProviderEntity>>
     fun addFavorite(providerEntity: ProviderEntity): Observable<ProviderEntity>
