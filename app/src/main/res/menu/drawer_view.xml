@@ -6,12 +6,12 @@
         android:title="@string/home_title" />
 
     <!--<group>-->
-    <!--<item-->
-        <!--android:id="@+id/news_fragment"-->
-        <!--android:title="@string/news_title" />-->
-    <!--<item-->
-        <!--android:id="@+id/trips_fragment"-->
-        <!--android:title="@string/trips_title" />-->
+    <item
+        android:id="@+id/news_fragment"
+        android:title="@string/news_title" />
+    <item
+        android:id="@+id/trips_fragment"
+        android:title="@string/trips_title" />
     <item
         android:id="@+id/claiming_fragment"
         android:title="@string/claiming_title" />

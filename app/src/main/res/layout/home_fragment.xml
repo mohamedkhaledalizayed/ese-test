@@ -70,71 +70,71 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/llNews"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical">-->
+                <LinearLayout
+                    android:id="@+id/llNews"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:background="@mipmap/card_2"-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:padding="@dimen/margin_horizontal_small">-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@mipmap/card_2"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_horizontal_small">
 
-                        <!--<TextView-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_gravity="center_horizontal|top"-->
-                            <!--android:layout_margin="@dimen/margin_horizontal_small"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="@string/news_title"-->
-                            <!--android:textColor="@color/white"-->
-                            <!--android:textSize="@dimen/text_size_small" />-->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|top"
+                            android:layout_margin="@dimen/margin_horizontal_small"
+                            android:gravity="center"
+                            android:text="@string/news_title"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_small" />
 
-                        <!--<ImageView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_gravity="center"-->
-                            <!--android:src="@mipmap/news_ic_7" />-->
-                    <!--</LinearLayout>-->
-                <!--</LinearLayout>-->
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/news_ic_7" />
+                    </LinearLayout>
+                </LinearLayout>
 
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/llTrips"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:orientation="vertical">-->
+                <LinearLayout
+                    android:id="@+id/llTrips"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:background="@mipmap/card_3"-->
-                        <!--android:orientation="vertical"-->
-                        <!--android:padding="@dimen/margin_horizontal_small">-->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@mipmap/card_3"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_horizontal_small">
 
-                        <!--<TextView-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_gravity="center_horizontal|top"-->
-                            <!--android:layout_margin="@dimen/margin_horizontal_small"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="@string/trips_title"-->
-                            <!--android:textColor="@color/white"-->
-                            <!--android:textSize="@dimen/text_size_small" />-->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|top"
+                            android:layout_margin="@dimen/margin_horizontal_small"
+                            android:gravity="center"
+                            android:text="@string/trips_title"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_small" />
 
-                        <!--<ImageView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_gravity="center"-->
-                            <!--android:src="@mipmap/trips_ic_6" />-->
-                    <!--</LinearLayout>-->
-                <!--</LinearLayout>-->
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@mipmap/trips_ic_6" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llMedical"
@@ -175,16 +175,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_horizontal_small"
-                android:text="@string/home_paragraph"
+                android:text="@string/news_title"
                 android:textSize="@dimen/text_size_large" />
 
-            <!--<android.support.v7.widget.RecyclerView-->
-                <!--android:id="@+id/rvNews"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="@dimen/margin_horizontal_small"-->
-                <!--app:layoutManager="android.support.v7.widget.LinearLayoutManager"-->
-                <!--tools:listitem="@layout/news_item" />-->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvNews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_horizontal_small"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/news_item" />
         </LinearLayout>
 
         <ProgressBar
@@ -193,7 +193,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="true"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
