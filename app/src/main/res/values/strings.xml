@@ -107,7 +107,7 @@
     <string name="trips_title">الرحلات</string>
     <string name="claiming_title">مطالبات طبية</string>
     <string name="medical_title">الدليل الطبي</string>
-    <string name="inquiry_title">سداد مستحقات</string>
+    <string name="inquiry_title">استعلام عن السداد</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">اتصل بنا</string>
@@ -122,6 +122,7 @@
     <string name="no_connection_retry">محاولة أخرى</string>
     <string name="invalid_mobile">من فضلك ادخل رقم موبايل صحيح</string>
     <string name="invalid_data">من فضلك أكمل ادخال البيانات</string>
+    <string name="invalid_number">رقم العضوية غير صحيح</string>
     <string name="pick_photo">من فضلك أرفق صورة الطلب</string>
     <string name="ok_btn">موافق</string>
 
@@ -139,4 +140,7 @@
     <string name="provider_title">مقدم الخدمة: </string>
     <string name="status_title">حالة الطلب: </string>
     <string name="approval_title">رقم الموافقة: </string>
+
+    <string name="home_paragraph">في اطار تقديم خدمة متميزة ومتطورة لاعضاء نقابة المهندسين قامت النقابة العامه للمهندسين باتاحه خدمة ارسال الموافقات الطبية الكترونيا من خلال تطبيق نقابتي وذلك من خلال اتاحة امكانيه رفع المرفقات الخاصة بالمطالبة الطبية ويمكن للعضو متابعة حالة الطلب من خلال خدمة الاشعارات التنبيهية.</string>
+
 </resources>

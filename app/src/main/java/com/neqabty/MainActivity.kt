@@ -121,12 +121,12 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.home_fragment -> {
                     drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 }
-                R.id.news_fragment -> {
-                    navController.navigate(R.id.newsFragment)
-                }
-                R.id.trips_fragment -> {
-                    navController.navigate(R.id.tripsFragment)
-                }
+//                R.id.news_fragment -> {
+//                    navController.navigate(R.id.newsFragment)
+//                }
+//                R.id.trips_fragment -> {
+//                    navController.navigate(R.id.tripsFragment)
+//                }
                 R.id.claiming_fragment -> { // TODO
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.claimingFragment)

@@ -73,7 +73,7 @@ interface WebService {
         @Part doc5: MultipartBody.Part?
     ): Observable<ApiResponse<Unit>>
 
-    @POST("http://18.188.152.62:3000/neqabty/inquiry")
+    @POST("http://196.219.102.225:3000/neqabty/inquiry")
     fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
     @POST("api/Auth/Login")

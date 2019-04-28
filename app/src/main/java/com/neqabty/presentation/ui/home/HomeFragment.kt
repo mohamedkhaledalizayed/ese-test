@@ -76,21 +76,21 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
             )
         }
         this.adapter = adapter
-        binding.rvNews.adapter = adapter
+//        binding.rvNews.adapter = adapter
 
         homeViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
         homeViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+//                binding.progressbar.visibility = View.VISIBLE
                 homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
 
-        homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
+//        homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
     }
 
     override fun onResume() {
@@ -99,7 +99,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
     }
 
     private fun handleViewState(state: HomeViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+//        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.news?.let {
             adapter.submitList(it)
         }
@@ -113,12 +113,12 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
             else
                 navController().navigate(R.id.mobileFragment)
         }
-        binding.llNews.setOnClickListener {
-            navController().navigate(R.id.newsFragment)
-        }
-        binding.llTrips.setOnClickListener {
-            navController().navigate(R.id.tripsFragment)
-        }
+//        binding.llNews.setOnClickListener {
+//            navController().navigate(R.id.newsFragment)
+//        }
+//        binding.llTrips.setOnClickListener {
+//            navController().navigate(R.id.tripsFragment)
+//        }
         binding.llMedical.setOnClickListener {
             navController().navigate(R.id.chooseAreaFragment)
         }

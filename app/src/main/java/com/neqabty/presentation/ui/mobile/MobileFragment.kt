@@ -109,6 +109,10 @@ class MobileFragment : BaseFragment(), Injectable {
         return if (number.isBlank()) {
             showAlert(getString(R.string.invalid_data))
             false
+        }
+        else if(number.length > 7){
+            showAlert(getString(R.string.invalid_number))
+            false
         } else if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
             true
         else {

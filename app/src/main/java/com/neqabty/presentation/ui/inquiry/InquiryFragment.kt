@@ -18,7 +18,6 @@ import com.neqabty.databinding.InquiryFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.testing.OpenForTesting
 import javax.inject.Inject
@@ -69,8 +68,8 @@ class InquiryFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        if (!PreferencesHelper(requireContext()).user.equals("null"))
-            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
+//        if (!PreferencesHelper(requireContext()).user.equals("null"))
+//            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
 
         binding.bSend.setOnClickListener {
             if (isDataValid(binding.edMemberNumber.text.toString())) {
@@ -84,7 +83,7 @@ class InquiryFragment : BaseFragment(), Injectable {
         hideKeyboard()
         activity?.invalidateOptionsMenu()
         if (!state.isLoading && state.member != null) {
-            PreferencesHelper(requireContext()).user = state.member?.engineerID.toString()
+//            PreferencesHelper(requireContext()).user = state.member?.engineerID.toString()
             navController().navigate(
                     InquiryFragmentDirections.inquiryDetails(state.member!!)
             )
@@ -96,6 +95,9 @@ class InquiryFragment : BaseFragment(), Injectable {
     private fun isDataValid(number: String): Boolean {
         return if (number.isBlank()) {
             showAlert(getString(R.string.invalid_data))
+            false
+        } else if(number.length > 7){
+            showAlert(getString(R.string.invalid_number))
             false
         } else {
             true
