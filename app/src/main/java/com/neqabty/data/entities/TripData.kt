@@ -26,7 +26,7 @@ data class TripData(
     var governId: String?,
     @field:SerializedName("trip_desc")
     var desc: String?,
-    @field:SerializedName("hotel_one_person")
+    @field:SerializedName("price")
     var price: String?,
     @field:SerializedName("images")
     var imgs: List<String>? = null

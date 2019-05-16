@@ -86,7 +86,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: ClaimingViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        if (state.member?.code == 0 && !isValid) {
+        if (state.member?.code != 3 &&state.member?.code != 4 && !isValid) {
             val prefs = PreferencesHelper(requireContext())
             binding.progressbar.visibility = View.VISIBLE
             isValid = true
