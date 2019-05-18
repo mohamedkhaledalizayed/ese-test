@@ -81,10 +81,10 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
         state.notification?.let {
             var tempNotification = it.copy()
             tempNotification.createdAt?.let { tempNotification.createdAt = getString(R.string.date_title) + " " + it }
-            tempNotification.doctor?.let { tempNotification.doctor = getString(R.string.doctor_title) + " " + it }
             tempNotification.provider?.let { tempNotification.provider = getString(R.string.provider_title) + " " + it }
             tempNotification.approvalNumber?.let { tempNotification.approvalNumber = getString(R.string.approval_title) + " " + it }
             tempNotification.status?.let { tempNotification.status = getString(R.string.status_title) + " " + it }
+            tempNotification.comment?.let { tempNotification.comment = getString(R.string.comment) + " " + it }
             initializeViews(tempNotification)
         }
     }

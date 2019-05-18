@@ -11,26 +11,47 @@ class TripsEntityUIMapper @Inject constructor() : Mapper<TripEntity, TripUI>() {
 
     override fun mapFrom(from: TripEntity): TripUI {
         var tripUI = TripUI(
-                id = from.id,
-                governId = from.governId,
-                subSyndicateId = from.subSyndicateId,
-                mainSyndicateId = from.mainSyndicateId,
-                dateFrom = from.dateFrom,
-                dateTo = from.dateTo,
-                desc = from.desc,
-                img = from.img,
-                title = from.title,
-                typeId = from.typeId,
-                price = from.price + " ج",
-                imgs = from.imgs
+            id = from.id,
+            governId = from.governId,
+            subSyndicateId = from.subSyndicateId,
+            mainSyndicateId = from.mainSyndicateId,
+            dateFrom = from.dateFrom,
+            dateTo = from.dateTo,
+            desc = from.desc,
+            img = from.img,
+            title = from.title,
+            typeId = from.typeId,
+            price = from.price,
+            notes = from.notes,
+            imgs = from.imgs
         )
-//
-//        from.imgs?.let {
-//            var imgs: List<TripUI.TripImage> = it.map { imageItem ->
-//                return@map TripUI.TripImage(imageItem.imageId, imageItem.file, imageItem.tripId, imageItem.createdBy, imageItem.updatedBy, imageItem.createdAt, imageItem.updatedAt)
-//            }
-//            tripUI.imgs = imgs
-//        }
+
+        from.regiments?.let {
+            var regiments: List<TripUI.TripRegiment> = it.map { regimentItem ->
+                return@map TripUI.TripRegiment(
+                    regimentItem.regimentId,
+                    regimentItem.tripId,
+                    regimentItem.dateFrom,
+                    regimentItem.dateTo,
+                    regimentItem.hotelOnePerson,
+                    regimentItem.hotelTwoPerson,
+                    regimentItem.hotelThreePerson,
+                    regimentItem.viewPrice,
+                    regimentItem.sidePrice,
+                    regimentItem.price,
+                    regimentItem.tripType,
+                    regimentItem.createdBy,
+                    regimentItem.updatedBy,
+                    regimentItem.createdAt,
+                    regimentItem.updatedAt
+                )
+            }
+            tripUI.regiments = regiments
+        }
+        from.place?.let {
+            var place: TripUI.TripPlace = TripUI.TripPlace(it.placeId,it.details)
+            tripUI.place = place
+        }
         return tripUI
     }
 }

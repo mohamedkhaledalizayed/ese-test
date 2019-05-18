@@ -26,25 +26,52 @@ data class TripData(
     var governId: String?,
     @field:SerializedName("trip_desc")
     var desc: String?,
+    @field:SerializedName("notes")
+    var notes: String?,
     @field:SerializedName("price")
     var price: String?,
     @field:SerializedName("images")
-    var imgs: List<String>? = null
+    var imgs: List<String>? = null,
+    @field:SerializedName("regiments")
+    var regiments: List<TripRegiment>? = null,
+    @field:SerializedName("place")
+    var place: TripPlace? = null
 ) : Response() {
-        data class TripImage(
-            @field:SerializedName("id")
-            var imageId: Int = 0,
-            @field:SerializedName("image")
-            var file: String?,
-            @field:SerializedName("place_id")
-            var tripId: Int?,
-            @field:SerializedName("created_by")
-            var createdBy: String?,
-            @field:SerializedName("updated_by")
-            var updatedBy: String?,
-            @field:SerializedName("created_at")
-            var createdAt: String?,
-            @field:SerializedName("updated_at")
-            var updatedAt: String?
-        )
+    data class TripRegiment(
+        @field:SerializedName("id")
+        var regimentId: Int = 0,
+        @field:SerializedName("tripID")
+        var tripId: Int?,
+        @field:SerializedName("date_from")
+        var dateFrom: String?,
+        @field:SerializedName("date_to")
+        var dateTo: String?,
+        @field:SerializedName("hotel_one_person")
+        var hotelOnePerson: Int?,
+        @field:SerializedName("hotel_tow_person")
+        var hotelTwoPerson: Int?,
+        @field:SerializedName("hotel_three_person")
+        var hotelThreePerson: Int?,
+        @field:SerializedName("apartment_view_price")
+        var viewPrice: Int?,
+        @field:SerializedName("apartment_side_price")
+        var sidePrice: Int?,
+        @field:SerializedName("price")
+        var price: Int?,
+        @field:SerializedName("trip_type")
+        var tripType: String?,
+        @field:SerializedName("created_by")
+        var createdBy: String?,
+        @field:SerializedName("updated_by")
+        var updatedBy: String?,
+        @field:SerializedName("created_at")
+        var createdAt: String?,
+        @field:SerializedName("updated_at")
+        var updatedAt: String?
+    )
+    data class TripPlace(
+        @field:SerializedName("id")
+        var placeId: Int = 0,
+        @field:SerializedName("details")
+        var details: String?)
 }

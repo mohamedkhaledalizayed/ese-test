@@ -9,6 +9,7 @@ import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.TripsItemBinding
 import com.neqabty.presentation.entities.TripUI
+import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class TripsAdapter(
@@ -16,34 +17,37 @@ class TripsAdapter(
     appExecutors: AppExecutors,
     private val callback: ((TripUI) -> Unit)?
 ) : DataBoundListAdapter<TripUI, TripsItemBinding>(
-        appExecutors = appExecutors,
-        diffCallback = object : DiffUtil.ItemCallback<TripUI>() {
-            override fun areItemsTheSame(oldItem: TripUI, newItem: TripUI): Boolean {
-                return oldItem.id == newItem.id
-            }
-
-            override fun areContentsTheSame(oldItem: TripUI, newItem: TripUI): Boolean {
-                return oldItem.img == newItem.img
-            }
+    appExecutors = appExecutors,
+    diffCallback = object : DiffUtil.ItemCallback<TripUI>() {
+        override fun areItemsTheSame(oldItem: TripUI, newItem: TripUI): Boolean {
+            return oldItem.id == newItem.id
         }
+
+        override fun areContentsTheSame(oldItem: TripUI, newItem: TripUI): Boolean {
+            return oldItem.img == newItem.img
+        }
+    }
 ) {
 
     override fun createBinding(parent: ViewGroup): TripsItemBinding {
         val binding = DataBindingUtil
-                .inflate<TripsItemBinding>(
-                        LayoutInflater.from(parent.context),
-                        R.layout.trips_item,
-                        parent,
-                        false,
-                        dataBindingComponent
-                )
+            .inflate<TripsItemBinding>(
+                LayoutInflater.from(parent.context),
+                R.layout.trips_item,
+                parent,
+                false,
+                dataBindingComponent
+            )
         binding.root.setOnClickListener {
             binding.trip?.let {
                 callback?.invoke(it)
             }
         }
-//        val layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, DisplayMetrics.width /4)
-//        binding.clLogo.layoutParams = layoutParams
+//        val layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, DisplayMetrics.width /3)
+//        binding.clHolder.layoutParams = layoutParams
+        binding.ivLogo.layoutParams.height = DisplayMetrics.width /6;
+        binding.ivLogo.requestLayout()
+
         return binding
     }
 

@@ -27,17 +27,17 @@ import org.junit.runners.JUnit4
 import retrofit2.Response
 
 @RunWith(JUnit4::class)
-class ApiResponseMasterTest {
+class ApiResponseTest {
     @Test
     fun exception() {
         val exception = Exception("foo")
-        val (errorMessage) = ApiResponseMaster.create<String>(exception)
+        val (errorMessage) = ApiResponse.create<String>(exception)
         assertThat<String>(errorMessage, `is`("foo"))
     }
 
     @Test
     fun success() {
-        val apiResponse: ApiSuccessResponse<String> = ApiResponseMaster
+        val apiResponse: ApiSuccessResponse<String> = ApiResponse
             .create<String>(Response.success("foo")) as ApiSuccessResponse<String>
         assertThat<String>(apiResponse.body, `is`("foo"))
         assertThat<Int>(apiResponse.nextPage, `is`(nullValue()))
@@ -49,7 +49,7 @@ class ApiResponseMasterTest {
             "<https://api.workshop.com/search/repositories?q=foo&page=2>; rel=\"next\"," +
                     " <https://api.workshop.com/search/repositories?q=foo&page=34>; rel=\"last\""
         val headers = okhttp3.Headers.of("link", link)
-        val response = ApiResponseMaster.create<String>(Response.success("foo", headers))
+        val response = ApiResponse.create<String>(Response.success("foo", headers))
         assertThat<Int>((response as ApiSuccessResponse).nextPage, `is`(2))
     }
 
@@ -57,7 +57,7 @@ class ApiResponseMasterTest {
     fun badPageNumber() {
         val link = "<https://api.workshop.com/search/repositories?q=foo&page=dsa>; rel=\"next\""
         val headers = okhttp3.Headers.of("link", link)
-        val response = ApiResponseMaster.create<String>(Response.success("foo", headers))
+        val response = ApiResponse.create<String>(Response.success("foo", headers))
         assertThat<Int>((response as ApiSuccessResponse).nextPage, nullValue())
     }
 
@@ -65,7 +65,7 @@ class ApiResponseMasterTest {
     fun badLinkHeader() {
         val link = "<https://api.workshop.com/search/repositories?q=foo&page=dsa>; relx=\"next\""
         val headers = okhttp3.Headers.of("link", link)
-        val response = ApiResponseMaster.create<String>(Response.success("foo", headers))
+        val response = ApiResponse.create<String>(Response.success("foo", headers))
         assertThat<Int>((response as ApiSuccessResponse).nextPage, nullValue())
     }
 
@@ -75,7 +75,7 @@ class ApiResponseMasterTest {
             400,
             ResponseBody.create(MediaType.parse("application/txt"), "blah")
         )
-        val (errorMessage) = ApiResponseMaster.create<String>(errorResponse) as ApiErrorResponse<String>
+        val (errorMessage) = ApiResponse.create<String>(errorResponse) as ApiErrorResponse<String>
         assertThat<String>(errorMessage, `is`("blah"))
     }
 }

@@ -37,7 +37,17 @@
     <string name="sharee">مشاركة</string>
     <string name="news">الأخبار</string>
     <string name="trips">الرحلات</string>
-    <string name="currency">ج</string>
+    <string name="currency">%s ج</string>
+    <string name="date_from">من: %s</string>
+    <string name="date_to">إلى: %s</string>
+    <string name="one_person">فردي</string>
+    <string name="two_persons">ثنائي</string>
+    <string name="three_persons">ثلاثي</string>
+    <string name="view_price">أمامي</string>
+    <string name="side_price">جانبي</string>
+    <string name="regiments">الأفواج</string>
+    <string name="trip_desc">وصف الرحلة</string>
+    <string name="about_hotel">عن الفندق</string>
     <string name="addProfileImage">اضافة صورة البروفايل</string>
     <string name="viewPhoto">عرض الصورة</string>
     <string name="format">yyyy/MM/dd</string>
@@ -140,6 +150,8 @@
     <string name="provider_title">مقدم الخدمة: </string>
     <string name="status_title">حالة الطلب: </string>
     <string name="approval_title">رقم الموافقة: </string>
+    <string name="comment">تعليق: </string>
+
 
     <string name="home_paragraph">في اطار تقديم خدمة متميزة ومتطورة لاعضاء نقابة المهندسين قامت النقابة العامه للمهندسين باتاحه خدمة ارسال الموافقات الطبية الكترونيا من خلال تطبيق نقابتي وذلك من خلال اتاحة امكانيه رفع المرفقات الخاصة بالمطالبة الطبية ويمكن للعضو متابعة حالة الطلب من خلال خدمة الاشعارات التنبيهية.</string>
 

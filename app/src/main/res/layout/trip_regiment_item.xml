@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="regiment"
+            type="com.neqabty.presentation.entities.TripUI.TripRegiment" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_horizontal_small"
+        android:elevation="@dimen/elevation_level_one"
+        android:padding="@dimen/margin_horizontal_normal">
+
+        <LinearLayout
+            android:id="@+id/llDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@id/tvPrice"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/llDates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvDateFrom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:lineSpacingMultiplier="0.6"
+                    android:maxLines="1"
+                    android:text="@{String.format(@string/date_from, regiment.dateFrom)}"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tvDateTo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="end"
+                    android:lineSpacingMultiplier="0.8"
+                    android:maxLines="1"
+                    android:text="@{String.format(@string/date_to, regiment.dateTo)}"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llPrices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/llOne"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/grey"
+                    android:orientation="vertical"
+                    android:visibility="@{regiment.hotelOnePerson == 0 ?  View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/tvOneTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@string/one_person"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <TextView
+                        android:id="@+id/tvOnePrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@{String.format(@string/currency, regiment.hotelOnePerson)}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llTwo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_horizontal_normal"
+                    android:layout_marginEnd="@dimen/margin_horizontal_normal"
+                    android:layout_weight="1"
+                    android:background="@color/grey"
+                    android:orientation="vertical"
+                    android:visibility="@{regiment.hotelTwoPerson == 0 ?  View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/tvTwoTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@string/two_persons"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <TextView
+                        android:id="@+id/tvTwoPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@{String.format(@string/currency, regiment.hotelTwoPerson)}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llThree"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/grey"
+                    android:orientation="vertical"
+                    android:visibility="@{regiment.hotelThreePerson == 0 ?  View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/tvThreeTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@string/three_persons"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <TextView
+                        android:id="@+id/tvThreePrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@{String.format(@string/currency, regiment.hotelThreePerson)}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/grey"
+                    android:layout_marginEnd="@dimen/margin_horizontal_normal"
+                    android:orientation="vertical"
+                    android:visibility="@{regiment.viewPrice == 0 ?  View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/tvViewPriceTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@string/view_price"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <TextView
+                        android:id="@+id/tvViewPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@{String.format(@string/currency, regiment.viewPrice)}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llSide"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/grey"
+                    android:layout_marginStart="@dimen/margin_horizontal_normal"
+                    android:orientation="vertical"
+                    android:visibility="@{regiment.sidePrice == 0 ?  View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/tvSidePriceTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@string/side_price"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <TextView
+                        android:id="@+id/tvSidePrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@{String.format(@string/currency, regiment.sidePrice)}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/price_bg"
+            android:gravity="center_horizontal|bottom"
+            android:maxLines="1"
+            android:text="@{String.format(@string/currency, regiment.price)}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            android:visibility="@{regiment.price == 0 ?  View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/llDetails" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

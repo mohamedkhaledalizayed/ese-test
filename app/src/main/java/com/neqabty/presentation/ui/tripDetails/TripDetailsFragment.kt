@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.TripDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -28,10 +29,14 @@ class TripDetailsFragment : BaseFragment(), Injectable {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<TripDetailsFragmentBinding>()
+    private var adapter by autoCleared<RegimentsAdapter>()
 
     var tripId: Int = 0
 
     lateinit var tripDetailsViewModel: TripDetailsViewModel
+
+    @Inject
+    lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,11 +44,11 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.trip_details_fragment,
-                container,
-                false,
-                dataBindingComponent
+            inflater,
+            R.layout.trip_details_fragment,
+            container,
+            false,
+            dataBindingComponent
         )
 
         return binding.root
@@ -56,7 +61,7 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         tripId = params.tripItem.id
 
         tripDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(TripDetailsViewModel::class.java)
+            .get(TripDetailsViewModel::class.java)
 
         tripDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
@@ -81,7 +86,7 @@ class TripDetailsFragment : BaseFragment(), Injectable {
 
     fun initializeViews(tripItem: TripUI) {
         tripItem.imgs?.let {
-//            var imgs = mutableListOf<String>()
+            //            var imgs = mutableListOf<String>()
 //            for (i in 0 until it.size) {
 //                imgs.add(it[i].file!!)
 //            }
@@ -95,6 +100,12 @@ class TripDetailsFragment : BaseFragment(), Injectable {
 
         binding.svContent.visibility = View.VISIBLE
         binding.tripItem = tripItem
+
+        val adapter = RegimentsAdapter(dataBindingComponent, appExecutors){}
+        this.adapter = adapter
+        binding.rvRegiments.adapter = adapter
+        adapter.submitList(tripItem.regiments)
+
     }
 
 //region
