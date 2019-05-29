@@ -6,11 +6,11 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.mappers.*
-import com.neqabty.testing.OpenForTesting
+
 import java.io.File
 import javax.inject.Inject
 
-@OpenForTesting
+
 class ClaimingViewModel @Inject constructor(
     val getAllGoverns: GetAllGoverns,
     val getAllAreas: GetAllAreas,

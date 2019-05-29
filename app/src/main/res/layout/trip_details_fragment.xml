@@ -31,11 +31,10 @@
                 android:scaleType="fitXY"
                 android:src="@mipmap/header_bg" />
 
-            <ScrollView
+            <android.support.v4.widget.NestedScrollView
                 android:id="@+id/svContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"
                 android:scrollbars="none"
                 android:visibility="gone">
 
@@ -48,7 +47,7 @@
                     <com.neqabty.presentation.ui.common.SwipeLockableViewPager
                         android:id="@+id/viewpager"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
+                        android:layout_height="200dp"
                         android:layout_margin="@dimen/margin_horizontal_normal"
                         android:visibility="gone" />
 
@@ -93,7 +92,7 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvRegiments"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_horizontal_small"
                         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                         tools:listitem="@layout/trip_regiment_item" />
@@ -133,7 +132,7 @@
                         android:textSize="@dimen/text_size_medium" />
 
                 </LinearLayout>
-            </ScrollView>
+            </android.support.v4.widget.NestedScrollView>
 
         </LinearLayout>
 

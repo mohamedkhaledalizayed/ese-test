@@ -5,6 +5,7 @@ import io.reactivex.Observable
 import java.io.File
 
 interface NeqabtyRepository {
+    fun getAppVersion(): Observable<AppVersionEntity>
     fun getSyndicates(): Observable<List<SyndicateEntity>>
     fun geSyndicateById(id: String): Observable<SyndicateEntity>
     fun geSubSyndicatesById(id: String): Observable<List<SyndicateEntity>>
@@ -24,9 +25,21 @@ interface NeqabtyRepository {
         professionID: String?,
         degreeID: String?
     ): Observable<List<ProviderEntity>>
+
     fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>>
-    fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, userNumber: String): Observable<Unit>
-    fun getNotifications(userNumber: String, subSyndicateId: String): Observable<List<NotificationEntity>>
+    fun registerUser(
+        mobile: String,
+        mainSyndicateId: Int,
+        subSyndicateId: Int,
+        token: String,
+        userNumber: String
+    ): Observable<Unit>
+
+    fun getNotifications(
+        userNumber: String,
+        subSyndicateId: String
+    ): Observable<List<NotificationEntity>>
+
     fun getNotificationDetails(id: String): Observable<NotificationEntity>
     fun sendMedicalRequest(
         mainSyndicateId: Int,
@@ -47,6 +60,7 @@ interface NeqabtyRepository {
         doc4: File?,
         doc5: File?
     ): Observable<Unit>
+
     fun validateUser(userNumber: String): Observable<MemberEntity>
 
     fun login(mobile: String, password: String, token: String): Observable<UserEntity>

@@ -2,18 +2,22 @@ package com.neqabty.data.repositories
 
 import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.entities.*
-import com.neqabty.testing.OpenForTesting
+
 import io.reactivex.Observable
 import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-@OpenForTesting
+
 class NeqabtyRepositoryImpl @Inject constructor(
     private val cachedDataStore: CachedNeqabtyDataStore,
     private val remoteDataStore: RemoteNeqabtyDataStore
 ) : NeqabtyRepository {
+    override fun getAppVersion(): Observable<AppVersionEntity> {
+        return remoteDataStore.getAppVersion()
+    }
+
     override fun getTripDetails(id: String): Observable<TripEntity> {
         return remoteDataStore.getTripDetails(id)
     }

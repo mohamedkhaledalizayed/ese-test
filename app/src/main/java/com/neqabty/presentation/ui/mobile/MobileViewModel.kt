@@ -6,10 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.DoctorEntityUIMapper
 import com.neqabty.presentation.util.PreferencesHelper
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
 
-@OpenForTesting
+
 class MobileViewModel @Inject constructor(val getUserRegistered: GetUserRegistered) : BaseViewModel() {
 
     private val doctorEntityUIMapper = DoctorEntityUIMapper()

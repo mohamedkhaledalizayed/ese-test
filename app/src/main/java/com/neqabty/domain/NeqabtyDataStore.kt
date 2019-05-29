@@ -5,6 +5,7 @@ import io.reactivex.Observable
 import java.io.File
 
 interface NeqabtyDataStore {
+    fun getAppVersion(): Observable<AppVersionEntity>
     fun getSyndicates(): Observable<List<SyndicateEntity>>
     fun geSyndicateById(id: String): Observable<SyndicateEntity>
     fun geSubSyndicatesById(id: String): Observable<List<SyndicateEntity>>

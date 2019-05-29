@@ -45,6 +45,9 @@
     <string name="three_persons">ثلاثي</string>
     <string name="view_price">أمامي</string>
     <string name="side_price">جانبي</string>
+    <string name="one_room">غرفة</string>
+    <string name="two_rooms">غرفتين</string>
+    <string name="studio">استوديو</string>
     <string name="regiments">الأفواج</string>
     <string name="trip_desc">وصف الرحلة</string>
     <string name="about_hotel">عن الفندق</string>
@@ -65,6 +68,7 @@
     <string name="request_status">طلبكم تحت الدراسة</string>
     <string name="continue_btn">متابعة</string>
     <string name="loginHint">يمكنك الآن الدخول على التطبيق و الاستمتاع بخدمات نقابتك</string>
+    <string name="update_msg">حتى تتمكن من استخدام التطبيق يرجى التحديث</string>
 
     <string name="doctors">الأطباء</string>
     <string name="hospitals">المستشفيات</string>
@@ -144,6 +148,7 @@
     <string name="expiration_date_title">التاريخ: </string>
     <string name="amount_title">القيمة: </string>
     <string name="pay">الدفع</string>
+    <string name="inquiry">استعلام</string>
 
     <string name="date_title">تاريخ الطلب: </string>
     <string name="doctor_title">الطبيب: </string>

@@ -2,13 +2,13 @@ package com.neqabty.data.repositories
 
 import com.neqabty.domain.NeqabtyCache
 import com.neqabty.domain.entities.*
-import com.neqabty.testing.OpenForTesting
+
 import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-@OpenForTesting
+
 class MemoryNeqabtyCache @Inject constructor() : NeqabtyCache {
     override fun checkFavorite(providerEntity: ProviderEntity): Observable<Boolean> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.

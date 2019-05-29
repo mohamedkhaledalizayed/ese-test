@@ -39,6 +39,9 @@ class TripsDataEntityMapper @Inject constructor() : Mapper<TripData, TripEntity>
                     regimentItem.viewPrice,
                     regimentItem.sidePrice,
                     regimentItem.price,
+                    regimentItem.oneRoom,
+                    regimentItem.twoRooms,
+                    regimentItem.studio,
                     regimentItem.tripType,
                     regimentItem.createdBy,
                     regimentItem.updatedBy,
@@ -49,7 +52,7 @@ class TripsDataEntityMapper @Inject constructor() : Mapper<TripData, TripEntity>
             tripEntity.regiments = regiments
         }
         from.place?.let {
-            var place: TripEntity.TripPlace = TripEntity.TripPlace(it.placeId,it.details)
+            var place: TripEntity.TripPlace = TripEntity.TripPlace(it.placeId,it.details,it.name)
             tripEntity.place = place
         }
         return tripEntity

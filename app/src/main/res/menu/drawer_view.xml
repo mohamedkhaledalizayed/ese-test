@@ -27,22 +27,22 @@
 
     <!--</group>-->
 
-    <item
-        android:id="@+id/settings_fragment"
-        android:icon="@mipmap/setting"
-        android:title="@string/settings_title" />
+    <!--<item-->
+        <!--android:id="@+id/settings_fragment"-->
+        <!--android:icon="@mipmap/setting"-->
+        <!--android:title="@string/settings_title" />-->
     <item
         android:id="@+id/contactus_fragment"
         android:icon="@mipmap/contact_us_ic"
         android:title="@string/contactus_title" />
-    <item
-        android:id="@+id/aboutapp_fragment"
-        android:icon="@mipmap/about_app_ic"
-        android:title="@string/aboutapp_title" />
-    <item
-        android:id="@+id/help_fragment"
-        android:icon="@mipmap/help_ic"
-        android:title="@string/help_title" />
+    <!--<item-->
+        <!--android:id="@+id/aboutapp_fragment"-->
+        <!--android:icon="@mipmap/about_app_ic"-->
+        <!--android:title="@string/aboutapp_title" />-->
+    <!--<item-->
+        <!--android:id="@+id/help_fragment"-->
+        <!--android:icon="@mipmap/help_ic"-->
+        <!--android:title="@string/help_title" />-->
     <item
         android:id="@+id/logout_fragment"
         android:icon="@mipmap/logout_ic"

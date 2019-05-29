@@ -10,10 +10,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.UserUI
 import com.neqabty.presentation.mappers.UserEntityUIMapper
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
 
-@OpenForTesting
+
 class LoginViewModel @Inject constructor(private val signupUser: SignupUser, private val loginUser: LoginUser) : BaseViewModel() {
 
     lateinit var locationManager: LocationManager

@@ -240,6 +240,108 @@
                         android:textSize="@dimen/text_size_large"
                         android:textStyle="bold" />
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llOneRoom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/grey"
+                    android:layout_marginStart="@dimen/margin_horizontal_normal"
+                    android:orientation="vertical"
+                    android:visibility="@{regiment.oneRoom == 0 ?  View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/tvOneRoomTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@string/one_room"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <TextView
+                        android:id="@+id/tvOneRoomPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@{String.format(@string/currency, regiment.oneRoom)}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llTwoRooms"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/grey"
+                    android:layout_marginStart="@dimen/margin_horizontal_normal"
+                    android:orientation="vertical"
+                    android:visibility="@{regiment.twoRooms == 0 ?  View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/tvTwoRoomsTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@string/two_rooms"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <TextView
+                        android:id="@+id/tvTwoRoomsPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@{String.format(@string/currency, regiment.twoRooms)}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llStudio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/grey"
+                    android:layout_marginStart="@dimen/margin_horizontal_normal"
+                    android:orientation="vertical"
+                    android:visibility="@{regiment.studio == 0 ?  View.GONE : View.VISIBLE}">
+
+                    <TextView
+                        android:id="@+id/tvStudioTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@string/studio"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <TextView
+                        android:id="@+id/tvStudioPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:lineSpacingMultiplier="0.8"
+                        android:maxLines="1"
+                        android:text="@{String.format(@string/currency, regiment.studio)}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

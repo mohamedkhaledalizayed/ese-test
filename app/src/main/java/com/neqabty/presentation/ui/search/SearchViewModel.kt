@@ -6,10 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.DegreeUI
 import com.neqabty.presentation.mappers.*
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
 
-@OpenForTesting
+
 class SearchViewModel @Inject constructor(
     val getAllGoverns: GetAllGoverns,
     val getAllAreas: GetAllAreas,

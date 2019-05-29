@@ -25,11 +25,11 @@ import com.neqabty.presentation.entities.ProviderTypeUI
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import com.neqabty.testing.OpenForTesting
+
 import kotlinx.android.synthetic.main.claiming2_fragment.*
 import javax.inject.Inject
 
-@OpenForTesting
+
 class ClaimingStep2Fragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

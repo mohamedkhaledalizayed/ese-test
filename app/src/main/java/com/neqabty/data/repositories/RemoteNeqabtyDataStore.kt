@@ -6,7 +6,7 @@ import com.neqabty.data.api.requests.*
 import com.neqabty.data.mappers.*
 import com.neqabty.domain.NeqabtyDataStore
 import com.neqabty.domain.entities.*
-import com.neqabty.testing.OpenForTesting
+
 import io.reactivex.Observable
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -16,8 +16,13 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-@OpenForTesting
+
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
+    private val appVersionDataEntityMapper = AppVersionDataEntityMapper()
+
+    override fun getAppVersion(): Observable<AppVersionEntity> {
+        return api.getAppVersion().map { version ->  appVersionDataEntityMapper.mapFrom(version)}
+    }
 
     private val memberDataEntityMapper = MemberDataEntityMapper()
 

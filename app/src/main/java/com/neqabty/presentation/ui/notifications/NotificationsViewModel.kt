@@ -6,10 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.NotificationUI
 import com.neqabty.presentation.mappers.NotificationEntityUIMapper
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
 
-@OpenForTesting
+
 class NotificationsViewModel @Inject constructor(private val getNotifications: GetNotifications) : BaseViewModel() {
 
     private val notificationEntityUIMapper = NotificationEntityUIMapper()

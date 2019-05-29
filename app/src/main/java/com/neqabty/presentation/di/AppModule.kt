@@ -125,6 +125,11 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetAppVersion(neqabtyRepository: NeqabtyRepository): GetAppVersion {
+        return GetAppVersion(ASyncTransformer(), neqabtyRepository)
+    }
+    @Singleton
+    @Provides
     fun provideGetAllSyndicates(neqabtyRepository: NeqabtyRepository): GetAllSyndicates {
         return GetAllSyndicates(ASyncTransformer(), neqabtyRepository)
     }

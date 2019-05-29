@@ -10,9 +10,9 @@ import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.mappers.ProviderEntityUIMapper
 import com.neqabty.presentation.mappers.ProviderUIEntityMapper
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
-@OpenForTesting
+
 class MedicalProviderDetailsViewModel @Inject constructor(
     private val addFavorite: AddFavorite,
     private val removeFavorite: RemoveFavorite,

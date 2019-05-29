@@ -7,10 +7,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.AreaEntityUIMapper
 import com.neqabty.presentation.mappers.GovernEntityUIMapper
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
 
-@OpenForTesting
+
 class ChooseAreaViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, val getAllAreas: GetAllAreas) : BaseViewModel() {
     private val areaEntityUIMapper = AreaEntityUIMapper()
     private val governEntityUIMapper = GovernEntityUIMapper()

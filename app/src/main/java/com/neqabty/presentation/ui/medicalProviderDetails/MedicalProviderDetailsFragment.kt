@@ -19,10 +19,10 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.util.HasFavoriteOptionsMenu
 import com.neqabty.presentation.util.autoCleared
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
 
-@OpenForTesting
+
 class MedicalProviderDetailsFragment : BaseFragment(), Injectable, HasFavoriteOptionsMenu {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

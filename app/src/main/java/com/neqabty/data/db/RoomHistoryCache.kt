@@ -4,13 +4,13 @@ import com.neqabty.data.mappers.ProviderDataEntityMapper
 import com.neqabty.data.mappers.ProviderEntityDataMapper
 import com.neqabty.domain.NeqabtyCache
 import com.neqabty.domain.entities.*
-import com.neqabty.testing.OpenForTesting
+
 import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-@OpenForTesting
+
 class RoomHistoryCache @Inject constructor(
     database: NeqabtyDb,
     private val providerDataEntityMapper: ProviderDataEntityMapper,

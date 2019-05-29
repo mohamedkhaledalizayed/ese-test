@@ -11,10 +11,13 @@ import retrofit2.http.*
  */
 interface WebService {
 
+    @GET("api/min-version")
+    fun getAppVersion(): Observable<AppVersionData>
+
     @GET("api/v2/syndicates/All")
     fun getAllSyndicates(): Observable<ApiResponse<List<SyndicateData>>>
 
-    @POST("api/v2/Syndicates/Main/By_Id")
+    @POST("api/Syndicates/Main/By_Id")
     fun getSyndicateById(@Body syndicateRequest: SyndicateRequest): Observable<ApiResponse<SyndicateData>>
 
     @POST("api/v2/Syndicates/Sub/All/byMain")
@@ -73,7 +76,7 @@ interface WebService {
         @Part doc5: MultipartBody.Part?
     ): Observable<ApiResponse<Unit>>
 
-    @POST("http://196.219.102.225:3000/neqabty/inquiry")
+    @POST("http://18.188.152.62:3000/neqabty/inquiry")
     fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
     @POST("api/Auth/Login")

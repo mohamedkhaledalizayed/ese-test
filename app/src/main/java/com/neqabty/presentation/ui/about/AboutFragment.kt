@@ -21,11 +21,11 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import com.neqabty.testing.OpenForTesting
+
 import kotlinx.android.synthetic.main.about_fragment.*
 import javax.inject.Inject
 
-@OpenForTesting
+
 class AboutFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

@@ -6,10 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.mappers.TripsEntityUIMapper
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
 
-@OpenForTesting
+
 class TripsViewModel @Inject constructor(private val getAllTrips: GetAllTrips) : BaseViewModel() {
 
     private val tripsEntityUIMapper = TripsEntityUIMapper()

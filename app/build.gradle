@@ -2,36 +2,78 @@ apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-
 apply plugin: 'kotlin-allopen'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android-extensions'
 
-allOpen {
-    // allows mocking for classes w/o directly opening them for release builds
-    annotation 'com.neqabty.testing.OpenClass'
+
+def versionTemplate = "1.0.{label}"
+def serverBuild = System.getenv('NEQABTY_BUILDNUMBER')
+def secret = System.getenv('NEQABTY_SECRET')
+
+
+def getLocalSigningConfig(String secret) {
+    if (secret != null) {
+        return android.signingConfigs.config
+    } else {
+        return null
+    }
 }
+
+String getVersionName(String versionTemplate, int serverBuild) {
+    return (versionTemplate).replace("{label}", Integer.toString(serverBuild))
+}
+
+int getVersionCode(String serverBuild) {
+    if (serverBuild != null && !serverBuild.isEmpty()) {
+        return (Integer.parseInt(serverBuild))
+    }
+    return 0
+}
+
+//allOpen {
+//    // allows mocking for classes w/o directly opening them for release builds
+//    annotation 'com.neqabty.testing.OpenClass'
+//}
 android {
     compileSdkVersion build_versions.target_sdk
     buildToolsVersion build_versions.build_tools
+    signingConfigs {
+        config {
+            keyAlias 'neqabty'
+            keyPassword secret
+            storeFile file('E:/Work/Android/Kotlin/NeQabty/keyStore.jks')
+            storePassword secret
+        }
+    }
     defaultConfig {
         applicationId "com.neqabty"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 1
-        versionName "1.0"
+        versionCode getVersionCode(serverBuild)
+        versionName getVersionName(versionTemplate , getVersionCode(serverBuild))
         testInstrumentationRunner "com.neqabty.presentation.util.GithubTestRunner"
         multiDexEnabled true
-
+        signingConfig signingConfigs.config
     }
     buildTypes {
         debug {
             testCoverageEnabled !project.hasProperty('android.injected.invoked.from.ide')
+            debuggable = false
         }
         release {
             minifyEnabled false
+            testCoverageEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig getLocalSigningConfig(secret)
+            debuggable = false
+
+            shrinkResources false
+            jniDebuggable false
+            renderscriptDebuggable false
+            pseudoLocalesEnabled false
+            zipAlignEnabled false
         }
     }
     dataBinding {
@@ -48,7 +90,9 @@ android {
     lintOptions {
         lintConfig rootProject.file('lint.xml')
     }
+//    kapt { generateStubs = true }
     kapt {
+//        generateStubs = true
         javacOptions {
             // Increase the max count of errors from annotation processors.
             // Default is 100.
@@ -161,4 +205,8 @@ project.tasks.whenTaskAdded {
     if (it.name == "testReleaseUnitTest") {
         it.enabled = false
     }
+}
+
+task printBuildNumber{
+    println System.getenv("NEQABTY_BUILDNUMBER")
 }

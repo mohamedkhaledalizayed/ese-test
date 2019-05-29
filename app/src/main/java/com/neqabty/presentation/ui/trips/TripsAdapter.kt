@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.trips
 
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
+import android.support.constraint.ConstraintLayout
 import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -43,8 +44,6 @@ class TripsAdapter(
                 callback?.invoke(it)
             }
         }
-//        val layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, DisplayMetrics.width /3)
-//        binding.clHolder.layoutParams = layoutParams
         binding.ivLogo.layoutParams.height = DisplayMetrics.width /6;
         binding.ivLogo.requestLayout()
 

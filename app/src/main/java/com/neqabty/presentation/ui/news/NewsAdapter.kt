@@ -9,6 +9,7 @@ import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.NewsItemBinding
 import com.neqabty.presentation.entities.NewsUI
+import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class NewsAdapter(
@@ -42,6 +43,10 @@ class NewsAdapter(
                 callback?.invoke(it)
             }
         }
+
+        binding.ivLogo.layoutParams.height = DisplayMetrics.width /6;
+        binding.ivLogo.requestLayout()
+
         return binding
     }
 

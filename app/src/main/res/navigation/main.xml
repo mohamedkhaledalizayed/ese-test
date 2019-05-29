@@ -107,6 +107,9 @@
         android:label="@string/home_title"
         tools:layout="@layout/home_fragment">
         <action
+            android:id="@+id/tripDetails"
+            app:destination="@id/tripDetailsFragment" />
+        <action
             android:id="@+id/newsDetails"
             app:destination="@id/newsDetailsFragment" />
     </fragment>

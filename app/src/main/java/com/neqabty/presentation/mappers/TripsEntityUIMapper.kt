@@ -39,6 +39,9 @@ class TripsEntityUIMapper @Inject constructor() : Mapper<TripEntity, TripUI>() {
                     regimentItem.viewPrice,
                     regimentItem.sidePrice,
                     regimentItem.price,
+                    regimentItem.oneRoom,
+                    regimentItem.twoRooms,
+                    regimentItem.studio,
                     regimentItem.tripType,
                     regimentItem.createdBy,
                     regimentItem.updatedBy,
@@ -49,7 +52,7 @@ class TripsEntityUIMapper @Inject constructor() : Mapper<TripEntity, TripUI>() {
             tripUI.regiments = regiments
         }
         from.place?.let {
-            var place: TripUI.TripPlace = TripUI.TripPlace(it.placeId,it.details)
+            var place: TripUI.TripPlace = TripUI.TripPlace(it.placeId,it.details,it.name)
             tripUI.place = place
         }
         return tripUI

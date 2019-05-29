@@ -6,10 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.mappers.MemberEntityUIMapper
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
 
-@OpenForTesting
+
 class InquiryViewModel @Inject constructor(private val validateUser: ValidateUser) : BaseViewModel() {
 
     private val memberEntityUIMapper = MemberEntityUIMapper()

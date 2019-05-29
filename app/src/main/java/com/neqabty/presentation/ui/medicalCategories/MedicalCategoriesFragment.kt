@@ -15,10 +15,10 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.HasMedicalOptionsMenu
 import com.neqabty.presentation.util.autoCleared
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
 
-@OpenForTesting
+
 class MedicalCategoriesFragment : BaseFragment(), HasMedicalOptionsMenu, Injectable {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
@@ -64,7 +64,7 @@ class MedicalCategoriesFragment : BaseFragment(), HasMedicalOptionsMenu, Injecta
         categoriesList.add(MedicalCategoryUI(17, getString(R.string.laboratories), R.mipmap.lab_ic))
         categoriesList.add(MedicalCategoryUI(18, getString(R.string.medical_services), R.mipmap.med_serv_ic)) // 2027 2028
         categoriesList.add(MedicalCategoryUI(2028, getString(R.string.optics), R.mipmap.optics)) // 2028
-        categoriesList.add(MedicalCategoryUI(2027, getString(R.string.artificial_limbs), R.mipmap.artificial_limbs)) // 2027 2028
+        categoriesList.add(MedicalCategoryUI(2027, getString(R.string.artificial_limbs), R.mipmap.artificial_limbs_ic)) // 2027 2028
 
         adapter = MedicalCategoriesAdapter(dataBindingComponent, appExecutors) { category ->
             when (category.id) {

@@ -6,10 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.mappers.SyndicateEntityUIMapper
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
 
-@OpenForTesting
+
 class SubSyndicatesViewModel @Inject constructor(private val getSubSyndicates: GetSubSyndicates) : BaseViewModel() {
 
     private val syndicateEntityUIMapper = SyndicateEntityUIMapper()

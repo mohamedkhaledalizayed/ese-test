@@ -6,9 +6,9 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.SpecializationUI
 import com.neqabty.presentation.mappers.SpecializationEntityUIMapper
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
-@OpenForTesting
+
 class MedicalProfessionsViewModel @Inject constructor(private val getAllSpecializations: GetAllSpecializations) : BaseViewModel() {
 
     private val specializationEntityUIMapper = SpecializationEntityUIMapper()

@@ -58,6 +58,12 @@ data class TripData(
         var sidePrice: Int?,
         @field:SerializedName("price")
         var price: Int?,
+        @field:SerializedName("apartment_oneRoom_price")
+        var oneRoom: Int?,
+        @field:SerializedName("apartment_towRooms_price")
+        var twoRooms: Int?,
+        @field:SerializedName("apartment_studio_price")
+        var studio: Int?,
         @field:SerializedName("trip_type")
         var tripType: String?,
         @field:SerializedName("created_by")
@@ -73,5 +79,7 @@ data class TripData(
         @field:SerializedName("id")
         var placeId: Int = 0,
         @field:SerializedName("details")
-        var details: String?)
+        var details: String?,
+        @field:SerializedName("name")
+        var name: String?)
 }

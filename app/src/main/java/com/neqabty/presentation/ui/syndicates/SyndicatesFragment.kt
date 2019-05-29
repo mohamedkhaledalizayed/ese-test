@@ -21,10 +21,10 @@ import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesFragment
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import com.neqabty.testing.OpenForTesting
+
 import javax.inject.Inject
 
-@OpenForTesting
+
 class SyndicatesFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

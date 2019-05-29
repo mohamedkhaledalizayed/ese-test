@@ -31,12 +31,12 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import com.neqabty.testing.OpenForTesting
+
 import java.io.*
 import java.util.*
 import javax.inject.Inject
 
-@OpenForTesting
+
 class ClaimingStep3Fragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

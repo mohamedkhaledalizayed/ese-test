@@ -32,6 +32,9 @@ data class TripUI(
         var viewPrice: Int?,
         var sidePrice: Int?,
         var price: Int?,
+        var oneRoom: Int?,
+        var twoRooms: Int?,
+        var studio: Int?,
         var tripType: String?,
         var createdBy: String?,
         var updatedBy: String?,
@@ -40,7 +43,8 @@ data class TripUI(
     )
     data class TripPlace(
         var placeId: Int = 0,
-        var details: String?
+        var details: String?,
+        var name: String?
     )
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
