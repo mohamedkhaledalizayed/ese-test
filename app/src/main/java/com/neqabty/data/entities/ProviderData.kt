@@ -16,7 +16,7 @@ data class ProviderData(
     var areaId: String?,
     @field:SerializedName("address")
     var address: String?,
-    @field:SerializedName("phone")
+    @field:SerializedName("phones")
     var phones: String?,
     @field:SerializedName("emails")
     var emails: String?,

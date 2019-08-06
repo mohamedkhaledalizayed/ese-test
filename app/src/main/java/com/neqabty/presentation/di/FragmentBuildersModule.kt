@@ -17,6 +17,7 @@ import com.neqabty.presentation.ui.news.NewsFragment
 import com.neqabty.presentation.ui.newsDetails.NewsDetailsFragment
 import com.neqabty.presentation.ui.notificationDetails.NotificationDetailsFragment
 import com.neqabty.presentation.ui.notifications.NotificationsFragment
+import com.neqabty.presentation.ui.notifications.NotificationsListFragment
 import com.neqabty.presentation.ui.search.SearchFragment
 import com.neqabty.presentation.ui.signup.SignupFragment
 import com.neqabty.presentation.ui.signup.SignupStep1Fragment
@@ -26,6 +27,7 @@ import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesFragment
 import com.neqabty.presentation.ui.syndicates.SyndicatesFragment
 import com.neqabty.presentation.ui.tripDetails.TripDetailsFragment
 import com.neqabty.presentation.ui.trips.TripsFragment
+import com.neqabty.presentation.ui.tripsReservation.TripReservationFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -81,6 +83,9 @@ abstract class FragmentBuildersModule {
     abstract fun contributeTripDetailsFragment(): TripDetailsFragment
 
     @ContributesAndroidInjector
+    abstract fun contributeTripReservationFragment(): TripReservationFragment
+
+    @ContributesAndroidInjector
     abstract fun contributeNewsFragment(): NewsFragment
 
     @ContributesAndroidInjector
@@ -88,6 +93,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeNotificationsFragment(): NotificationsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeNotificationsListFragment(): NotificationsListFragment
 
     @ContributesAndroidInjector
     abstract fun contributeNotificationsDetailsFragment(): NotificationDetailsFragment

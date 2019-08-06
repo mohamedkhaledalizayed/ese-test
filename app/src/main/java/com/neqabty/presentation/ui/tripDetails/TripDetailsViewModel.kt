@@ -9,7 +9,6 @@ import com.neqabty.presentation.mappers.TripsEntityUIMapper
 
 import javax.inject.Inject
 
-
 class TripDetailsViewModel @Inject constructor(private val getTripDetails: GetTripDetails) : BaseViewModel() {
 
     private val tripEntityUIMapper = TripsEntityUIMapper()

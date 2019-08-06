@@ -21,7 +21,6 @@ import com.neqabty.presentation.util.autoCleared
 
 import javax.inject.Inject
 
-
 class TripsFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -59,7 +58,7 @@ class TripsFragment : BaseFragment(), Injectable {
 
         initializeViews()
 
-        val adapter = com.neqabty.presentation.ui.trips.TripsAdapter(dataBindingComponent, appExecutors){ trip ->
+        val adapter = com.neqabty.presentation.ui.trips.TripsAdapter(dataBindingComponent, appExecutors) { trip ->
             navController().navigate(
                     TripsFragmentDirections.tripDetails(trip))
         }

@@ -1,12 +1,16 @@
 package com.neqabty.presentation.common
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.support.annotation.CallSuper
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.neqabty.R
+
 
 open class BaseFragment : Fragment() {
     var builder: AlertDialog.Builder? = null
@@ -47,5 +51,16 @@ open class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (activity as AppCompatActivity).invalidateOptionsMenu()
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    @CallSuper
+    override fun onPause() {
+        super.onPause()
+        hideKeyboard()
+    }
+
+    private fun hideKeyboard() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(activity?.window?.decorView?.rootView?.windowToken, 0)
     }
 }

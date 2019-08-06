@@ -9,7 +9,6 @@ import com.neqabty.presentation.mappers.MemberEntityUIMapper
 
 import javax.inject.Inject
 
-
 class InquiryViewModel @Inject constructor(private val validateUser: ValidateUser) : BaseViewModel() {
 
     private val memberEntityUIMapper = MemberEntityUIMapper()

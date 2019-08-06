@@ -20,7 +20,6 @@ import com.neqabty.presentation.util.autoCleared
 
 import javax.inject.Inject
 
-
 class ClaimingFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -62,6 +61,7 @@ class ClaimingFragment : BaseFragment(), Injectable {
 //        adapter.addFragment(ClaimingStep4Fragment())
         binding.viewpager.adapter = adapter
         binding.viewpager.setSwipePagingEnabled(false)
+        binding.viewpager.offscreenPageLimit = 2;
         binding.indicator.setViewPager(binding.viewpager)
 
         binding.viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {

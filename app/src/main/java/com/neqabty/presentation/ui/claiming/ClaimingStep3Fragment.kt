@@ -29,13 +29,13 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
+import com.neqabty.presentation.ui.common.PhotosAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 
 import java.io.*
 import java.util.*
 import javax.inject.Inject
-
 
 class ClaimingStep3Fragment : BaseFragment(), Injectable {
     @Inject
@@ -87,11 +87,13 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
 
         binding.edNumber.setText(PreferencesHelper(requireContext()).user)
         binding.edProvider.setText(ClaimingData.providerName)
-
+        binding.bPrev.setOnClickListener {
+            pager.setCurrentItem(1, true)
+        }
         binding.bSend.setOnClickListener {
             if (photosList.size > 0) {
                 val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             } else
                 showPickPhotoAlert()
         }
@@ -116,7 +118,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
                 val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)

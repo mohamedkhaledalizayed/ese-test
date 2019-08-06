@@ -20,7 +20,6 @@ import com.neqabty.presentation.util.autoCleared
 
 import javax.inject.Inject
 
-
 class SignupFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

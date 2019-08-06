@@ -15,8 +15,6 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.NewsUI
 import com.neqabty.presentation.util.autoCleared
 
-
-
 class NewsDetailsFragment : BaseFragment(), Injectable {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 

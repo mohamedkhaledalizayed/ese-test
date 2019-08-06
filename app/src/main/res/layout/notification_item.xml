@@ -5,6 +5,10 @@
 
     <data>
 
+        <import type="android.text.Html" />
+
+        <import type="android.view.View" />
+
         <variable
             name="notification"
             type="com.neqabty.presentation.entities.NotificationUI" />
@@ -34,8 +38,16 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{notification.createdAt}"
-                android:textColor="@color/colorPrimary"
+                android:text="@{Html.fromHtml(@string/date_title(notification.date))}"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{Html.fromHtml(@string/time(notification.time))}"
                 android:textSize="@dimen/text_size_medium" />
 
             <TextView
@@ -44,8 +56,25 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{notification.provider}"
-                android:textSize="@dimen/text_size_small" />
+                android:text="@{Html.fromHtml(@string/provider_title(notification.providerName))}"
+                android:textSize="@dimen/text_size_medium"
+                android:visibility='@{notification.providerName == null ? View.GONE : View.VISIBLE}' />
+
+            <TextView
+                android:id="@+id/tvTrip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{Html.fromHtml(@string/trip_title(notification.trip))}"
+                android:textSize="@dimen/text_size_medium"
+                android:visibility='@{notification.trip == null ? View.GONE : View.VISIBLE}' />
+
+            <TextView
+                android:id="@+id/tvRegiment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{Html.fromHtml(@string/regiment_title(notification.regiment))}"
+                android:textSize="@dimen/text_size_medium"
+                android:visibility='@{notification.regiment == null ? View.GONE : View.VISIBLE}' />
 
             <TextView
                 android:id="@+id/tvStatus"
@@ -53,8 +82,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{notification.status}"
-                android:textSize="@dimen/text_size_small" />
+                android:text="@{Html.fromHtml(@string/status_title(notification.status))}"
+                android:textSize="@dimen/text_size_medium" />
 
         </LinearLayout>
 

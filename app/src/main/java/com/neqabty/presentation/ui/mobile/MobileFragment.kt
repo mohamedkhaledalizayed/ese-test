@@ -20,11 +20,13 @@ import com.neqabty.databinding.MobileFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.TripUI
+import com.neqabty.presentation.ui.tripDetails.TripDetailsFragmentArgs
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import java.lang.Exception
 
 import javax.inject.Inject
-
 
 class MobileFragment : BaseFragment(), Injectable {
     @Inject
@@ -35,11 +37,12 @@ class MobileFragment : BaseFragment(), Injectable {
     var binding by autoCleared<MobileFragmentBinding>()
 
     lateinit var mobileViewModel: MobileViewModel
+    var tripItem: TripUI? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -53,6 +56,13 @@ class MobileFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        try {
+            val params = MobileFragmentArgs.fromBundle(arguments!!)
+            tripItem = params.tripItem
+        } catch (e: Exception) {
+            tripItem = null
+        }
         mobileViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MobileViewModel::class.java)
 
@@ -96,11 +106,16 @@ class MobileFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: MobileViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful) {
-            hideKeyboard()
             activity?.invalidateOptionsMenu()
-            navController().navigate(
-                    MobileFragmentDirections.openClaiming()
-            )
+            if (tripItem == null) {
+                navController().navigate(
+                        MobileFragmentDirections.openClaiming()
+                )
+            } else {
+                navController().navigate(
+                        MobileFragmentDirections.openTripReservation(tripItem!!)
+                )
+            }
         }
     }
 
@@ -109,8 +124,7 @@ class MobileFragment : BaseFragment(), Injectable {
         return if (number.isBlank()) {
             showAlert(getString(R.string.invalid_data))
             false
-        }
-        else if(number.length > 7){
+        } else if (number.length > 7) {
             showAlert(getString(R.string.invalid_number))
             false
         } else if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
@@ -131,11 +145,6 @@ class MobileFragment : BaseFragment(), Injectable {
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
-    }
-
-    fun hideKeyboard() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.edMobile.windowToken, 0)
     }
 // endregion
 

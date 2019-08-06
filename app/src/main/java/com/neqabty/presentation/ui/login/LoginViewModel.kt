@@ -13,7 +13,6 @@ import com.neqabty.presentation.mappers.UserEntityUIMapper
 
 import javax.inject.Inject
 
-
 class LoginViewModel @Inject constructor(private val signupUser: SignupUser, private val loginUser: LoginUser) : BaseViewModel() {
 
     lateinit var locationManager: LocationManager

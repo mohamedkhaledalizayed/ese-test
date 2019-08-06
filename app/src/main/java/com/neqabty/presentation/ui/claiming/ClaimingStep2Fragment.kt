@@ -1,5 +1,6 @@
 package com.neqabty.presentation.ui.claiming
 
+import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -8,7 +9,6 @@ import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.view.ViewPager
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +29,6 @@ import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.claiming2_fragment.*
 import javax.inject.Inject
 
-
 class ClaimingStep2Fragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -39,17 +38,18 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
     var binding by autoCleared<Claiming2FragmentBinding>()
 
     lateinit var claimingViewModel: ClaimingViewModel
-    var providersTypesResultList: List<ProviderTypeUI>? = mutableListOf()
-    var providersResultList: List<ProviderUI>? = null
+    var providersTypesResultList: MutableList<ProviderTypeUI>? = mutableListOf()
+    var providersResultList: MutableList<ProviderUI>? = mutableListOf()
 
     var providerTypeID: Int = 0
     var providerID: Int = 0
 
+    var isProvidersRequested = false
     lateinit var pager: ViewPager
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -64,14 +64,19 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser)
+        if (isVisibleToUser){
             initializeViews()
+        }
     }
 
     fun initializeViews() {
         hideKeyboard()
+        providersTypesResultList?.clear()
+        providersResultList?.clear()
         claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(ClaimingViewModel::class.java)
+
+        claimingViewModel.viewState.value = claimingViewModel.viewState.value?.copy(providerTypes = null , providers = null)
 
         claimingViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
@@ -79,7 +84,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         claimingViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                claimingViewModel.getProviderTypes(ClaimingData.governId.toString(), ClaimingData.areaId.toString())
+                loadProviders()
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
@@ -87,7 +92,9 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         })
 
         binding.edNumber.setText(PreferencesHelper(requireContext()).user)
-
+        binding.bPrev.setOnClickListener {
+            pager.setCurrentItem(0, true)
+        }
         binding.bNext.setOnClickListener {
             if (isDataValid(spProvider.selectedItem)) {
                 ClaimingData.providerTypeId = (spProviderType.selectedItem as ProviderTypeUI).id
@@ -96,26 +103,35 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
                 pager.setCurrentItem(2, true)
             }
         }
-        claimingViewModel.getProviderTypes(ClaimingData.governId.toString(), ClaimingData.areaId.toString())
+        loadProviders()
     }
 
     private fun handleViewState(state: ClaimingViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
         state.providerTypes?.let {
-            providersTypesResultList = it
+            providersTypesResultList = it.toMutableList()
         }
         state.providers?.let {
-            providersResultList = it
+            if (it.isEmpty()) {
+                providersResultList?.clear()
+                providersResultList!!.add(ProviderUI(0, getString(R.string.no_data_found), "", "", "", "", "", "", "", "", "", ""))
+            } else
+                providersResultList = it.toMutableList()
         }
-        if (state.providerTypes != null && providersResultList == null && !state.isLoading)
-            initializeSpinners()
-        else if (!state.isLoading) {
+        if (isProvidersRequested && !state.isLoading) {
+            isProvidersRequested = false
             renderProviders()
             binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
+        } else if (state.providerTypes != null && providersResultList?.size == 0 && !state.isLoading) {
+            initializeSpinners()
         }
     }
 
+    fun loadProviders() {
+        binding.progressbar.visibility = View.VISIBLE
+        claimingViewModel.getProviderTypes(ClaimingData.governId.toString(), ClaimingData.areaId.toString())
+    }
 //region
 
     fun initializeSpinners() {
@@ -127,9 +143,6 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         binding.spProviderType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-//                if (providerTypeID.equals((parent.getItemAtPosition(position) as ProviderTypeUI).id.toString()!!))
-//                    return
-
                 providerTypeID = (parent.getItemAtPosition(position) as ProviderTypeUI).id
                 getProviders(providerTypeID)
             }
@@ -144,14 +157,16 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
             }
         }
+
     }
 
     fun getProviders(providerTypeID: Int) {
+        isProvidersRequested = true
         claimingViewModel.getProvidersByType(providerTypeID.toString(), ClaimingData.governId.toString(), ClaimingData.areaId.toString())
     }
 
     private fun isDataValid(doctor: Any?): Boolean {
-        return if (doctor != null)
+        return if (doctor != null && doctor.toString() != getString(R.string.no_data_found))
             true
         else {
             showInvalidDataAlert()
@@ -175,6 +190,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.edNumber.windowToken, 0)
     }
-// endregion
-fun navController() = findNavController()
+
+    // endregion
+    fun navController() = findNavController()
 }

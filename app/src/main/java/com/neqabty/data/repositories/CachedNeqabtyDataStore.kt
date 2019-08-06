@@ -12,8 +12,20 @@ import javax.inject.Singleton
 @Singleton
 
 class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: NeqabtyCache) : NeqabtyDataStore {
-    override fun getAppVersion(): Observable<AppVersionEntity> {
+    override fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun bookTrip(mainSyndicateId: Int, userNumber: String, phone: String, tripID: Int, regimentID: Int, regimentDate: String, housingType: String, numChild: Int, ages: String, name: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?): Observable<Unit> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getAppVersion(): Observable<AppVersionEntity> {
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getProvidersByType(
@@ -38,14 +50,6 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getNotificationDetails(id: String): Observable<NotificationEntity> {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getNotifications(userNumber: String, subSyndicateId: String): Observable<List<NotificationEntity>> {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun sendMedicalRequest(
         mainSyndicateId: Int,
         subSyndicateId: Int,
@@ -58,6 +62,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         doctor: Int,
         providerType: Int,
         provider: Int,
+        name: String,
         docsNumber: Int,
         doc1: File?,
         doc2: File?,

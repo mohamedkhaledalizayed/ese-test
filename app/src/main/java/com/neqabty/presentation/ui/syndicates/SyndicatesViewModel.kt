@@ -9,7 +9,6 @@ import com.neqabty.presentation.mappers.SyndicateEntityUIMapper
 
 import javax.inject.Inject
 
-
 class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetAllSyndicates) :
     BaseViewModel() {
 

@@ -3,7 +3,6 @@ package com.neqabty.presentation.ui.claiming
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -12,7 +11,6 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
@@ -29,7 +27,6 @@ import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.claiming1_fragment.*
 import javax.inject.Inject
 
-
 class ClaimingStep1Fragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -45,6 +42,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
     var governID: Int = 0
     var areaID: Int = 0
     private var isValid = false
+    private var memberName = ""
 
     lateinit var pager: ViewPager
     override fun onCreateView(
@@ -80,15 +78,15 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                 navController().navigate(R.id.homeFragment)
             })
         })
-        initializeViews()
         claimingViewModel.validateUser(PreferencesHelper(requireContext()).user)
     }
 
     private fun handleViewState(state: ClaimingViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        if (state.member?.code != 3 &&state.member?.code != 4 && !isValid) {
+        if (state.member != null && state.member?.code != 3 && state.member?.code != 4 && !isValid) {
             val prefs = PreferencesHelper(requireContext())
             binding.progressbar.visibility = View.VISIBLE
+            memberName = state.member!!.engineerName!!
             isValid = true
             claimingViewModel.getAllContent1()
         } else if (state.member?.message != null && !isValid) {
@@ -104,7 +102,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                 areasResultList = it
             }
             if (state.governs != null && state.areas != null)
-                initializeSpinners()
+                initializeViews()
         }
     }
 
@@ -112,6 +110,8 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         if (PreferencesHelper(requireContext()).user.isNotEmpty()) {
             binding.edNumber.setText(PreferencesHelper(requireContext()).user)
             binding.edNumber.isEnabled = false
+            binding.edName.setText(memberName)
+            binding.edName.isEnabled = false
         }
         binding.bNext.setOnClickListener {
             if (isDataValid(binding.edNumber.text.toString(), binding.edCardNumber.text.toString(), spArea.selectedItem, spGovern.selectedItem)) {
@@ -120,6 +120,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                 pager.setCurrentItem(1, true)
             }
         }
+        initializeSpinners()
     }
 
     fun initializeSpinners() {
@@ -192,15 +193,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         dialog.show()
     }
 // TODO
-    override fun onPause() {
-        super.onPause()
-        hideKeyboard()
-    }
 
-    fun hideKeyboard() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.edCardNumber.windowToken, 0)
-    }
     // endregion
 fun navController() = findNavController()
 }

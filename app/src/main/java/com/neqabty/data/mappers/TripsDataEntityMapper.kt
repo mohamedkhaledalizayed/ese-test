@@ -52,7 +52,7 @@ class TripsDataEntityMapper @Inject constructor() : Mapper<TripData, TripEntity>
             tripEntity.regiments = regiments
         }
         from.place?.let {
-            var place: TripEntity.TripPlace = TripEntity.TripPlace(it.placeId,it.details,it.name)
+            var place: TripEntity.TripPlace = TripEntity.TripPlace(it.placeId, it.details, it.name)
             tripEntity.place = place
         }
         return tripEntity

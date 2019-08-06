@@ -22,7 +22,6 @@ import com.neqabty.presentation.util.autoCleared
 
 import javax.inject.Inject
 
-
 class InquiryFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -34,9 +33,9 @@ class InquiryFragment : BaseFragment(), Injectable {
     lateinit var inquiryViewModel: InquiryViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -80,15 +79,14 @@ class InquiryFragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: InquiryViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        hideKeyboard()
         activity?.invalidateOptionsMenu()
         if (!state.isLoading && state.member != null) {
 //            PreferencesHelper(requireContext()).user = state.member?.engineerID.toString()
-            if(state?.member?.code == 0){
-            navController().navigate(
-                    InquiryFragmentDirections.inquiryDetails(state.member!!)
-            )
-            }else{
+            if (state?.member?.code == 0 || state.member?.code == 1) {
+                navController().navigate(
+                        InquiryFragmentDirections.inquiryDetails(state.member!!)
+                )
+            } else {
                 showAlert(state?.member?.message!!)
             }
             state.member = null
@@ -100,7 +98,7 @@ class InquiryFragment : BaseFragment(), Injectable {
         return if (number.isBlank()) {
             showAlert(getString(R.string.invalid_data))
             false
-        } else if(number.length > 7){
+        } else if (number.length > 7) {
             showAlert(getString(R.string.invalid_number))
             false
         } else {
@@ -120,10 +118,6 @@ class InquiryFragment : BaseFragment(), Injectable {
         dialog.show()
     }
 
-    fun hideKeyboard() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.edMemberNumber.windowToken, 0)
-    }
 // endregion
 
     fun navController() = findNavController()

@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.TripsCardBinding
-import com.neqabty.databinding.TripsItemBinding
 import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
@@ -18,7 +17,7 @@ class TripsAdapter(
     private val dataBindingComponent: DataBindingComponent,
     appExecutors: AppExecutors,
     private val callback: ((TripUI) -> Unit)?
-    ) : DataBoundListAdapter<TripUI, TripsCardBinding>(
+) : DataBoundListAdapter<TripUI, TripsCardBinding>(
     appExecutors = appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<TripUI>() {
         override fun areItemsTheSame(oldItem: TripUI, newItem: TripUI): Boolean {
@@ -45,7 +44,7 @@ class TripsAdapter(
                 callback?.invoke(it)
             }
         }
-        binding.clHolder.layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width * 40 /100, DisplayMetrics.width * 40 /100)
+        binding.clHolder.layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width * 40 / 100, DisplayMetrics.width * 40 / 100)
         return binding
     }
 

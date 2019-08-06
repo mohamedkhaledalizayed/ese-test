@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.text.Html"/>
         <variable
             name="memberItem"
             type="com.neqabty.presentation.entities.MemberUI" />
@@ -38,23 +38,22 @@
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{memberItem.engineerName}"
-                    android:textColor="@color/colorPrimary"
+                    android:text="@{Html.fromHtml(@string/name_title(memberItem.engineerName))}"
                     android:textSize="@dimen/text_size_large" />
 
                 <TextView
                     android:id="@+id/tvExpirationDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{memberItem.expirationDate}"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:text="@{Html.fromHtml(@string/expiration_date_title(memberItem.billDate))}"
+                    android:textSize="@dimen/text_size_large" />
 
                 <TextView
                     android:id="@+id/tvAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{memberItem.amount}"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:text="@{Html.fromHtml(@string/amount_title(memberItem.amount))}"
+                    android:textSize="@dimen/text_size_large" />
 
                 <Button
                     android:id="@+id/bPay"

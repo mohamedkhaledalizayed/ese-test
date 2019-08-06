@@ -24,7 +24,6 @@ import com.neqabty.presentation.util.autoCleared
 
 import javax.inject.Inject
 
-
 class SyndicatesFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

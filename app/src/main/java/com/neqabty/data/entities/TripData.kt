@@ -81,5 +81,6 @@ data class TripData(
         @field:SerializedName("details")
         var details: String?,
         @field:SerializedName("name")
-        var name: String?)
+        var name: String?
+    )
 }

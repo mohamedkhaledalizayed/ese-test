@@ -25,7 +25,6 @@ import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.about_fragment.*
 import javax.inject.Inject
 
-
 class AboutFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

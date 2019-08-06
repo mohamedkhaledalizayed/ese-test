@@ -9,7 +9,6 @@ import com.neqabty.presentation.util.PreferencesHelper
 
 import javax.inject.Inject
 
-
 class MobileViewModel @Inject constructor(val getUserRegistered: GetUserRegistered) : BaseViewModel() {
 
     private val doctorEntityUIMapper = DoctorEntityUIMapper()

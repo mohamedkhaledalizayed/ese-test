@@ -10,7 +10,6 @@ import com.neqabty.presentation.mappers.*
 import java.io.File
 import javax.inject.Inject
 
-
 class ClaimingViewModel @Inject constructor(
     val getAllGoverns: GetAllGoverns,
     val getAllAreas: GetAllAreas,
@@ -85,9 +84,9 @@ class ClaimingViewModel @Inject constructor(
                         { errorState.value = it }
                 )
 
-        viewState.value?.providerTypes?.let {
-            onProviderTypesReceived()
-        } ?: addDisposable(providersTypesDisposable)
+//        viewState.value?.providerTypes?.let {
+//            onProviderTypesReceived()
+//        } ?: addDisposable(providersTypesDisposable)
     }
 
     fun getProvidersByType(typeId: String, govId: String, areaId: String) {
@@ -123,6 +122,7 @@ class ClaimingViewModel @Inject constructor(
         doctor: Int,
         providerType: Int,
         provider: Int,
+        name: String,
         docsNumber: Int,
         doc1: File?,
         doc2: File?,
@@ -131,7 +131,7 @@ class ClaimingViewModel @Inject constructor(
         doc5: File?
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, docsNumber, doc1, doc2, doc3, doc4, doc5)
+        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, docsNumber, doc1, doc2, doc3, doc4, doc5)
                 .subscribe(
                         { viewState.value = viewState.value?.copy(isLoading = false) },
                         { errorState.value = it }

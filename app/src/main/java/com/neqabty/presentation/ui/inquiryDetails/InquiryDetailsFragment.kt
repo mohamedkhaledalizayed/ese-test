@@ -18,7 +18,6 @@ import com.neqabty.presentation.util.autoCleared
 
 import javax.inject.Inject
 
-
 class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
@@ -55,11 +54,11 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         memberItem = params.memberItem
 
         memberItem?.let {
-            var tempMember = it.copy()
-            tempMember.engineerName = getString(R.string.name_title) + " " + it.engineerName
-            tempMember.expirationDate = getString(R.string.expiration_date_title) + " " + it.expirationDate
-            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
-            binding.memberItem = tempMember
+//            var tempMember = it.copy()
+//            tempMember.engineerName = getString(R.string.name_title) + " " + it.engineerName
+//            tempMember.expirationDate = getString(R.string.expiration_date_title) + " " + it.billDate
+//            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
+            binding.memberItem = it
         }
     }
 

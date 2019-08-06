@@ -11,7 +11,6 @@ import com.neqabty.presentation.mappers.TripsEntityUIMapper
 
 import javax.inject.Inject
 
-
 class HomeViewModel @Inject constructor(
     private val getAllNews: GetAllNews,
     private val getAllTrips: GetAllTrips,
@@ -32,7 +31,6 @@ class HomeViewModel @Inject constructor(
         getNews(id)
         getTrips(id)
     }
-
 
     fun getAppVersion() {
         viewState.value?.appVersion?.let {

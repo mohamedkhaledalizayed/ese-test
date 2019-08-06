@@ -10,7 +10,6 @@ import com.neqabty.presentation.mappers.UserEntityUIMapper
 
 import javax.inject.Inject
 
-
 class SignupViewModel @Inject constructor(private val signupUser: SignupUser) : BaseViewModel() {
 
     private val userEntityToUIMapper = UserEntityUIMapper()

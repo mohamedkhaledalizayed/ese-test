@@ -69,16 +69,38 @@
                     android:textDirection="rtl"
                     android:textSize="@dimen/text_size_medium" />
 
-                <Button
-                    android:id="@+id/bNext"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/btn"
-                    android:elevation="@dimen/elevation_level_one"
-                    android:gravity="center"
-                    android:text="@string/next"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/bPrev"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@mipmap/btn"
+                        android:elevation="@dimen/elevation_level_one"
+                        android:gravity="center"
+                        android:layout_margin="@dimen/margin_horizontal_normal"
+                        android:text="@string/prev"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <Button
+                        android:id="@+id/bNext"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@mipmap/btn"
+                        android:elevation="@dimen/elevation_level_one"
+                        android:gravity="center"
+                        android:layout_margin="@dimen/margin_horizontal_normal"
+                        android:text="@string/next"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_medium" />
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
 

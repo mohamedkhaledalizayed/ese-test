@@ -23,6 +23,7 @@ import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesViewModel
 import com.neqabty.presentation.ui.syndicates.SyndicatesViewModel
 import com.neqabty.presentation.ui.tripDetails.TripDetailsViewModel
 import com.neqabty.presentation.ui.trips.TripsViewModel
+import com.neqabty.presentation.ui.tripsReservation.TripReservationViewModel
 import com.neqabty.presentation.viewmodel.NeqabtyViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -85,6 +86,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(TripDetailsViewModel::class)
     abstract fun bindTripDetailsViewModel(tripDetailsViewModel: TripDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TripReservationViewModel::class)
+    abstract fun bindTripReservationViewModel(tripDetailsViewModel: TripReservationViewModel): ViewModel
 
     @Binds
     @IntoMap

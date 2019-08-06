@@ -232,6 +232,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideBookTrip (neqabtyRepository: NeqabtyRepository): BookTrip {
+        return BookTrip(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideValidateUser(neqabtyRepository: NeqabtyRepository): ValidateUser {
         return ValidateUser(ASyncTransformer(), neqabtyRepository)
     }

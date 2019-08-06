@@ -19,6 +19,7 @@
     <string name="confirmPassword">تأكيد كلمة السر</string>
     <string name="age">تاريخ الميلاد</string>
     <string name="gender">النوع</string>
+    <string name="prev">السابق</string>
     <string name="next">التالي</string>
     <string name="signup_title">إنشاء حساب</string>
     <string name="personalDetails">البيانات الشخصية</string>
@@ -49,8 +50,18 @@
     <string name="two_rooms">غرفتين</string>
     <string name="studio">استوديو</string>
     <string name="regiments">الأفواج</string>
+    <string name="children">الأطفال</string>
+    <string name="child_one">عمر الطفل الأول</string>
+    <string name="child_two">عمر الطفل الثاني</string>
+    <string name="child_three">عمر الطفل الثالث</string>
+    <string name="room_type">نوع الغرفة</string>
     <string name="trip_desc">وصف الرحلة</string>
     <string name="about_hotel">عن الفندق</string>
+    <string name="reserve">حجز</string>
+    <string name="confirm_reservation">تأكيد الحجز</string>
+    <string name="attach_photo">إضافة صورة</string>
+    <string name="thanks">شكراً</string>
+    <string name="confirm_reservation_msg">لقد تم تسجيل طلبكم و سيتم الرد عليكم في خلال ٤٨ ساعة</string>
     <string name="addProfileImage">اضافة صورة البروفايل</string>
     <string name="viewPhoto">عرض الصورة</string>
     <string name="format">yyyy/MM/dd</string>
@@ -84,6 +95,7 @@
     <string name="enter_member_number">ادخل رقم العضوية</string>
     <string name="medicalRequest">تقديم مطالبة طبية</string>
     <string name="syndicateNumber">رقم العضوية</string>
+    <string name="member_name">اسم العضو</string>
     <string name="cardNumber">رقم البطاقة الطبية</string>
     <string name="selectDoctor">اختر الدكتور المعالج</string>
     <string name="addRequestImage">اضافة مطالبة طبية</string>
@@ -121,7 +133,7 @@
     <string name="trips_title">الرحلات</string>
     <string name="claiming_title">مطالبات طبية</string>
     <string name="medical_title">الدليل الطبي</string>
-    <string name="inquiry_title">استعلام عن السداد</string>
+    <string name="inquiry_title">سداد اشتراكات</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">اتصل بنا</string>
@@ -138,25 +150,75 @@
     <string name="invalid_data">من فضلك أكمل ادخال البيانات</string>
     <string name="invalid_number">رقم العضوية غير صحيح</string>
     <string name="pick_photo">من فضلك أرفق صورة الطلب</string>
+    <string name="pick_photo_trips">من فضلك أرفق صور المستندات المطلوبة</string>
     <string name="ok_btn">موافق</string>
 
     <string name="address_title">العنوان: </string>
     <string name="phone_title">التليفون: </string>
     <string name="email_title">البريد الالكتروني: </string>
 
-    <string name="name_title">الإسم: </string>
-    <string name="expiration_date_title">التاريخ: </string>
-    <string name="amount_title">القيمة: </string>
+    <string name="name_title">
+    <![CDATA[<font color="#1d1ad2">الإسم: </font>]]>%s
+    </string>
+
+    <string name="expiration_date_title">
+    <![CDATA[<font color="#1d1ad2">التاريخ: </font>]]>%s
+    </string>
+
+    <string name="amount_title">
+    <![CDATA[<font color="#1d1ad2">القيمة: </font>]]>%s
+        جنيه
+    </string>
+
     <string name="pay">الدفع</string>
-    <string name="inquiry">استعلام</string>
+    <string name="inquiry">سداد اشتراكات</string>
 
-    <string name="date_title">تاريخ الطلب: </string>
-    <string name="doctor_title">الطبيب: </string>
-    <string name="provider_title">مقدم الخدمة: </string>
-    <string name="status_title">حالة الطلب: </string>
-    <string name="approval_title">رقم الموافقة: </string>
-    <string name="comment">تعليق: </string>
+    <string name="date_title">
+    <![CDATA[<font color="#1d1ad2">تاريخ الطلب: </font>]]>%s
+    </string>
 
+    <string name="date">
+    <![CDATA[<font color="#1d1ad2">التاريخ: </font>]]>%s
+    </string>
+
+    <string name="time">
+    <![CDATA[<font color="#1d1ad2">الوقت: </font>]]>%s
+    </string>
+
+    <string name="source">
+    <![CDATA[<font color="#1d1ad2">المصدر: </font>]]>%s
+    </string>
+
+    <string name="doctor_title">
+    <![CDATA[<font color="#1d1ad2">الطبيب: </font>]]>%s
+    </string>
+
+    <string name="trip_title">
+    <![CDATA[<font color="#1d1ad2">الرحلة: </font>]]>%s
+    </string>
+
+    <string name="regiment_title">
+    <![CDATA[<font color="#1d1ad2">الفوج: </font>]]>%s
+    </string>
+
+    <string name="provider_title">
+    <![CDATA[<font color="#1d1ad2">مقدم الخدمة: </font>]]>%s
+    </string>
+
+    <string name="status_title">
+    <![CDATA[<font color="#1d1ad2">حالة الطلب: </font>]]>%s
+    </string>
+
+    <string name="approval_title">
+    <![CDATA[<font color="#1d1ad2">رقم الموافقة: </font>]]>%s
+    </string>
+
+    <string name="comment">
+    <![CDATA[<font color="#1d1ad2">تعليق: </font>]]>%s
+    </string>
+
+    <string name="type">النوع</string>
+    <string name="no_data_found">لا توجد بيانات</string>
 
     <string name="home_paragraph">في اطار تقديم خدمة متميزة ومتطورة لاعضاء نقابة المهندسين قامت النقابة العامه للمهندسين باتاحه خدمة ارسال الموافقات الطبية الكترونيا من خلال تطبيق نقابتي وذلك من خلال اتاحة امكانيه رفع المرفقات الخاصة بالمطالبة الطبية ويمكن للعضو متابعة حالة الطلب من خلال خدمة الاشعارات التنبيهية.</string>
 

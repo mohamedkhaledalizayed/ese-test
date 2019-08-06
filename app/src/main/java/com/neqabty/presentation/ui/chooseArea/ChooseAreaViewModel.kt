@@ -10,7 +10,6 @@ import com.neqabty.presentation.mappers.GovernEntityUIMapper
 
 import javax.inject.Inject
 
-
 class ChooseAreaViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, val getAllAreas: GetAllAreas) : BaseViewModel() {
     private val areaEntityUIMapper = AreaEntityUIMapper()
     private val governEntityUIMapper = GovernEntityUIMapper()

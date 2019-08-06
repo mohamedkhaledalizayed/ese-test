@@ -35,10 +35,18 @@
         android:name="com.neqabty.presentation.ui.mobile.MobileFragment"
         android:label="@string/mobile_title"
         tools:layout="@layout/mobile_fragment">
+        <argument
+            android:name="tripItem"
+            app:argType="com.neqabty.presentation.entities.TripUI" />
         <action
             android:id="@+id/openClaiming"
             app:destination="@id/claimingFragment"
             app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openTripReservation"
+            app:destination="@id/tripReservationFragment"
+            app:popUpTo="@id/tripDetailsFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
@@ -63,6 +71,9 @@
         tools:layout="@layout/notification_details_fragment">
         <argument
             android:name="notificationId"
+            app:argType="java.lang.String" />
+        <argument
+            android:name="serviceId"
             app:argType="java.lang.String" />
     </fragment>
     <fragment
@@ -100,6 +111,24 @@
         <argument
             android:name="tripItem"
             app:argType="com.neqabty.presentation.entities.TripUI" />
+        <action
+            android:id="@+id/openLogin"
+            app:destination="@id/mobileFragment" />
+        <action
+            android:id="@+id/openTripReservation"
+            app:destination="@id/tripReservationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tripReservationFragment"
+        android:name="com.neqabty.presentation.ui.tripsReservation.TripReservationFragment"
+        android:label="@string/reserve"
+        tools:layout="@layout/trip_reservation_fragment">
+        <argument
+            android:name="tripItem"
+            app:argType="com.neqabty.presentation.entities.TripUI" />
+        <action
+            android:id="@+id/openLogin"
+            app:destination="@id/mobileFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -112,6 +141,9 @@
         <action
             android:id="@+id/newsDetails"
             app:destination="@id/newsDetailsFragment" />
+        <action
+            android:id="@+id/openLogin"
+            app:destination="@id/mobileFragment" />
     </fragment>
     <fragment
         android:id="@+id/medicalCategoriesFragment"

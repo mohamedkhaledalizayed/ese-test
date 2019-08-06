@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.claiming
+package com.neqabty.presentation.ui.common
 
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil

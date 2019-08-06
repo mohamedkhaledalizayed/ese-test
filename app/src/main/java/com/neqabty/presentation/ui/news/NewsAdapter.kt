@@ -44,7 +44,7 @@ class NewsAdapter(
             }
         }
 
-        binding.ivLogo.layoutParams.height = DisplayMetrics.width /6;
+        binding.ivLogo.layoutParams.height = DisplayMetrics.width / 6
         binding.ivLogo.requestLayout()
 
         return binding

@@ -23,7 +23,6 @@ import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.subsyndicates_fragment.*
 import javax.inject.Inject
 
-
 class SubSyndicatesFragment : DialogFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

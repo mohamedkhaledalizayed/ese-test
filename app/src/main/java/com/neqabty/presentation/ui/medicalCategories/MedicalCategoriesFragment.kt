@@ -18,7 +18,6 @@ import com.neqabty.presentation.util.autoCleared
 
 import javax.inject.Inject
 
-
 class MedicalCategoriesFragment : BaseFragment(), HasMedicalOptionsMenu, Injectable {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)

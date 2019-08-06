@@ -24,13 +24,12 @@ class CustomTripsPagerAdapter(val context: Context, val trips: List<TripUI>) : P
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = LayoutInflater.from(context).inflate(R.layout.trips_card, null)
         var clHolder = view.findViewById<ConstraintLayout>(R.id.clHolder)
-        val layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width /4,DisplayMetrics.width /4)
+        val layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width / 4, DisplayMetrics.width / 4)
         clHolder.layoutParams = layoutParams
         var imageView = view.findViewById<ImageView>(R.id.ivLogo)
 //        Glide.with(context).load(Uri.parse(trips[position].img)).into(imageView)
         var tvTitle = view.findViewById<TextView>(R.id.tvTitle)
         tvTitle.text = trips[position].title
-
 
 //        imageView.setTag(R.id.ivLogo, position); // "i" means some integer value
 //        imageView.setTag(R.id.ivLogo, position)

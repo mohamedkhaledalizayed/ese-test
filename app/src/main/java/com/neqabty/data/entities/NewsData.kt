@@ -14,6 +14,12 @@ data class NewsData(
     var img: String?,
     @field:SerializedName("news_desc")
     var desc: String?,
+    @field:SerializedName("date")
+    var date: String?,
+    @field:SerializedName("time")
+    var time: String?,
+    @field:SerializedName("source")
+    var source: String?,
     @field:SerializedName("main_syndicate_id")
     var mainSyndicateId: String?,
     @field:SerializedName("sub_syndicate_id")

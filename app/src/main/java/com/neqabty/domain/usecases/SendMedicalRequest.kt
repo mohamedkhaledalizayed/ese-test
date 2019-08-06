@@ -23,6 +23,7 @@ class SendMedicalRequest @Inject constructor(
         private const val PARAM_DOCTOR = "param:doctor"
         private const val PARAM_PROVIDER_TYPE = "param:providerType"
         private const val PARAM_PROVIDER = "param:provider"
+        private const val PARAM_NAME = "param:name"
         private const val PARAM_DOCS_COUNT = "param:docsNumber"
         private const val PARAM_DOC1 = "param:doc1"
         private const val PARAM_DOC2 = "param:doc2"
@@ -43,6 +44,7 @@ class SendMedicalRequest @Inject constructor(
         doctor: Int,
         providerType: Int,
         provider: Int,
+        name: String,
         docsNumber: Int,
         doc1: File?,
         doc2: File?,
@@ -62,6 +64,7 @@ class SendMedicalRequest @Inject constructor(
         data[PARAM_DOCTOR] = doctor
         data[PARAM_PROVIDER_TYPE] = providerType
         data[PARAM_PROVIDER] = provider
+        data[PARAM_NAME] = name
         data[PARAM_DOCS_COUNT] = docsNumber
         doc1?.let { data[PARAM_DOC1] = it }
         doc2?.let { data[PARAM_DOC2] = it }
@@ -84,11 +87,12 @@ class SendMedicalRequest @Inject constructor(
         val docsNumber = data?.get(SendMedicalRequest.PARAM_DOCS_COUNT) as Int
         val providerType = data?.get(SendMedicalRequest.PARAM_PROVIDER_TYPE) as Int
         val provider = data?.get(SendMedicalRequest.PARAM_PROVIDER) as Int
+        val name = data?.get(SendMedicalRequest.PARAM_NAME) as String
         val doc1 = data?.get(SendMedicalRequest.PARAM_DOC1) as File?
         val doc2 = data?.get(SendMedicalRequest.PARAM_DOC2) as File?
         val doc3 = data?.get(SendMedicalRequest.PARAM_DOC3) as File?
         val doc4 = data?.get(SendMedicalRequest.PARAM_DOC4) as File?
         val doc5 = data?.get(SendMedicalRequest.PARAM_DOC5) as File?
-        return neqabtyRepository.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, docsNumber, doc1, doc2, doc3, doc4, doc5)
+        return neqabtyRepository.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name , docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 }

@@ -9,7 +9,6 @@ import com.neqabty.presentation.mappers.NotificationEntityUIMapper
 
 import javax.inject.Inject
 
-
 class NotificationDetailsViewModel @Inject constructor(private val getNotificationDetails: GetNotificationDetails) : BaseViewModel() {
 
     private val notificationEntityUIMapper = NotificationEntityUIMapper()
@@ -20,10 +19,10 @@ class NotificationDetailsViewModel @Inject constructor(private val getNotificati
         viewState.value = NotificationDetailsViewState()
     }
 
-    fun getNotificationDetails(id: String) {
+    fun getNotificationDetails(serviceID : Int, type: Int, userNumber: Int,requestID : Int) {
         viewState.value?.notification?.let {
             onNotificationDetailsReceived(it)
-        } ?: addDisposable(getNotificationDetails.getNotificationDetails(id)
+        } ?: addDisposable(getNotificationDetails.getNotificationDetails(serviceID, type, userNumber, requestID)
                 .map {
                     it.let {
                         notificationEntityUIMapper.mapFrom(it)

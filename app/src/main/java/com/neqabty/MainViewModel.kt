@@ -8,7 +8,6 @@ import com.neqabty.presentation.util.PreferencesHelper
 
 import javax.inject.Inject
 
-
 class MainViewModel @Inject constructor(val getUserRegistered: GetUserRegistered) : BaseViewModel() {
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()

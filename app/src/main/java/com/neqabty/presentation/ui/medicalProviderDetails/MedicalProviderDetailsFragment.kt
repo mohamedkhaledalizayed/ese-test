@@ -22,7 +22,6 @@ import com.neqabty.presentation.util.autoCleared
 
 import javax.inject.Inject
 
-
 class MedicalProviderDetailsFragment : BaseFragment(), Injectable, HasFavoriteOptionsMenu {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

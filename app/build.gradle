@@ -38,7 +38,6 @@ int getVersionCode(String serverBuild) {
 //}
 android {
     compileSdkVersion build_versions.target_sdk
-    buildToolsVersion build_versions.build_tools
     signingConfigs {
         config {
             keyAlias 'neqabty'
@@ -52,7 +51,7 @@ android {
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
         versionCode getVersionCode(serverBuild)
-        versionName getVersionName(versionTemplate , getVersionCode(serverBuild))
+        versionName getVersionName(versionTemplate, getVersionCode(serverBuild))
         testInstrumentationRunner "com.neqabty.presentation.util.GithubTestRunner"
         multiDexEnabled true
         signingConfig signingConfigs.config
@@ -60,7 +59,7 @@ android {
     buildTypes {
         debug {
             testCoverageEnabled !project.hasProperty('android.injected.invoked.from.ide')
-            debuggable = false
+            debuggable = true
         }
         release {
             minifyEnabled false
@@ -132,7 +131,6 @@ dependencies {
 
     implementation deps.timber
 
-    implementation deps.facebook
     implementation deps.firebase.core
     implementation deps.firebase.messaging
     implementation deps.firebase.jobdispatcher
@@ -207,6 +205,6 @@ project.tasks.whenTaskAdded {
     }
 }
 
-task printBuildNumber{
+task printBuildNumber {
     println System.getenv("NEQABTY_BUILDNUMBER")
 }

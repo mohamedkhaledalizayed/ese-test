@@ -19,6 +19,9 @@ class NewsDataEntityMapper @Inject constructor() : Mapper<NewsData, NewsEntity>(
                 title = from.title,
                 img = from.img,
                 desc = from.desc,
+                date = from.date,
+                time = from.time,
+                source = from.source,
                 mainSyndicateId = from.mainSyndicateId,
                 subSyndicateId = from.subSyndicateId
         )

@@ -31,8 +31,6 @@ import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
 
-
-
 class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeOptionsMenu {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

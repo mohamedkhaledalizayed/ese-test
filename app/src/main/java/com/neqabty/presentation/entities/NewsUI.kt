@@ -8,6 +8,9 @@ data class NewsUI(
     var title: String?,
     var img: String?,
     var desc: String?,
+    var date: String?,
+    var time: String?,
+    var source: String?,
     var mainSyndicateId: String?,
     var subSyndicateId: String?,
     var createdBy: String?,
@@ -17,6 +20,9 @@ data class NewsUI(
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),

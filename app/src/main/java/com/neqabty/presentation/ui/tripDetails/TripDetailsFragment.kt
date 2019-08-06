@@ -16,12 +16,16 @@ import com.neqabty.databinding.TripDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.AreaUI
+import com.neqabty.presentation.entities.GovernUI
 import com.neqabty.presentation.entities.TripUI
+import com.neqabty.presentation.ui.claiming.ClaimingData
 import com.neqabty.presentation.ui.common.CustomImagePagerAdapter
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import kotlinx.android.synthetic.main.claiming1_fragment.*
 
 import javax.inject.Inject
-
 
 class TripDetailsFragment : BaseFragment(), Injectable {
     @Inject
@@ -39,16 +43,16 @@ class TripDetailsFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.trip_details_fragment,
-            container,
-            false,
-            dataBindingComponent
+                inflater,
+                R.layout.trip_details_fragment,
+                container,
+                false,
+                dataBindingComponent
         )
 
         return binding.root
@@ -61,7 +65,7 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         tripId = params.tripItem.id
 
         tripDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
-            .get(TripDetailsViewModel::class.java)
+                .get(TripDetailsViewModel::class.java)
 
         tripDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
@@ -101,11 +105,17 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         binding.svContent.visibility = View.VISIBLE
         binding.tripItem = tripItem
 
-        val adapter = RegimentsAdapter(dataBindingComponent, appExecutors){}
+        val adapter = RegimentsAdapter(dataBindingComponent, appExecutors) {}
         this.adapter = adapter
         binding.rvRegiments.adapter = adapter
         adapter.submitList(tripItem.regiments)
 
+        binding.bReserve.setOnClickListener {
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(TripDetailsFragmentDirections.openTripReservation(tripItem))
+            else
+                navController().navigate(TripDetailsFragmentDirections.openLogin(tripItem))
+        }
     }
 
 //region

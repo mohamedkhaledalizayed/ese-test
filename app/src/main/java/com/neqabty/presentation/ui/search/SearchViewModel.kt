@@ -9,7 +9,6 @@ import com.neqabty.presentation.mappers.*
 
 import javax.inject.Inject
 
-
 class SearchViewModel @Inject constructor(
     val getAllGoverns: GetAllGoverns,
     val getAllAreas: GetAllAreas,

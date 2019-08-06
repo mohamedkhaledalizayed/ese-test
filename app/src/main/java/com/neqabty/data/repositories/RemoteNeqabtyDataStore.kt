@@ -18,10 +18,39 @@ import javax.inject.Singleton
 @Singleton
 
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
+    override fun bookTrip(mainSyndicateId: Int, userNumber: String, phone: String, tripID: Int, regimentID: Int, regimentDate: String, housingType: String, numChild: Int, ages: String, name: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?): Observable<Unit> {
+
+        var file1: MultipartBody.Part? = null
+        var file2: MultipartBody.Part? = null
+        var file3: MultipartBody.Part? = null
+        var file4: MultipartBody.Part? = null
+
+        doc1?.let {
+            val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
+            file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
+        }
+        doc2?.let {
+            val doc2RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc2)
+            file2 = MultipartBody.Part.createFormData("doc2", doc2?.name, doc2RequestFile)
+        }
+        doc3?.let {
+            val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
+            file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
+        }
+        doc4?.let {
+            val doc4RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc4)
+            file4 = MultipartBody.Part.createFormData("doc4", doc4?.name, doc4RequestFile)
+        }
+
+        return api.bookTrip(BookTripRequest(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, docsNumber), file1, file2, file3, file4).map { result ->
+            result.data ?: Unit
+        }
+    }
+
     private val appVersionDataEntityMapper = AppVersionDataEntityMapper()
 
     override fun getAppVersion(): Observable<AppVersionEntity> {
-        return api.getAppVersion().map { version ->  appVersionDataEntityMapper.mapFrom(version)}
+        return api.getAppVersion().map { version -> appVersionDataEntityMapper.mapFrom(version) }
     }
 
     private val memberDataEntityMapper = MemberDataEntityMapper()
@@ -34,36 +63,37 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     private val notificationDataEntityMapper = NotificationDataEntityMapper()
 
-    override fun getNotifications(userNumber: String, subSyndicateId: String): Observable<List<NotificationEntity>> {
-        return api.getNotifications(NotificationRequest(userNumber, subSyndicateId)).map { notifications ->
+    override fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>> {
+        return api.getNotifications(NotificationRequest(serviceID, type, userNumber)).map { notifications ->
             notifications.map { notificationDataEntityMapper.mapFrom(it) }
         }
     }
 
-    override fun getNotificationDetails(id: String): Observable<NotificationEntity> {
-        return api.getNotificationDetails(NotificationDetailsRequest(id)).flatMap { notification ->
+    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity> {
+        return api.getNotificationDetails(NotificationRequest(serviceID, type, userNumber, requestID)).flatMap { notification ->
             Observable.just(notificationDataEntityMapper.mapFrom(notification))
         }
     }
 
     override fun sendMedicalRequest(
-        mainSyndicateId: Int,
-        subSyndicateId: Int,
-        userNumber: String,
-        email: String,
-        phone: String,
-        profession: Int,
-        degree: Int,
-        area: Int,
-        doctor: Int,
-        providerType: Int,
-        provider: Int,
-        docsNumber: Int,
-        doc1: File?,
-        doc2: File?,
-        doc3: File?,
-        doc4: File?,
-        doc5: File?
+            mainSyndicateId: Int,
+            subSyndicateId: Int,
+            userNumber: String,
+            email: String,
+            phone: String,
+            profession: Int,
+            degree: Int,
+            area: Int,
+            doctor: Int,
+            providerType: Int,
+            provider: Int,
+            name: String,
+            docsNumber: Int,
+            doc1: File?,
+            doc2: File?,
+            doc3: File?,
+            doc4: File?,
+            doc5: File?
     ): Observable<Unit> {
         var file1: MultipartBody.Part? = null
         var file2: MultipartBody.Part? = null
@@ -92,7 +122,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
         }
 
-        return api.sendMedicalRequest(MedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, docsNumber), file1, file2, file3, file4, file5).map { result ->
+        return api.sendMedicalRequest(MedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, docsNumber), file1, file2, file3, file4, file5).map { result ->
             result.data ?: Unit
         }
     }
@@ -106,11 +136,11 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     }
 
     override fun registerUser(
-        mobile: String,
-        mainSyndicateId: Int,
-        subSyndicateId: Int,
-        token: String,
-        userNumber: String
+            mobile: String,
+            mainSyndicateId: Int,
+            subSyndicateId: Int,
+            token: String,
+            userNumber: String
     ): Observable<Unit> {
         return api.registerUser(RegisterRequest(mobile, mainSyndicateId, subSyndicateId, token, userNumber)).map { result ->
             result.data ?: Unit
@@ -126,11 +156,11 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     }
 
     override fun getProvidersByType(
-        providerTypeId: String,
-        govId: String,
-        areaId: String,
-        professionID: String?,
-        degreeID: String?
+            providerTypeId: String,
+            govId: String,
+            areaId: String,
+            professionID: String?,
+            degreeID: String?
     ): Observable<List<ProviderEntity>> {
         return api.getProvidersById(ProviderRequest(providerTypeId, govId, areaId, professionID, degreeID)).map { providers ->
             providers.data?.map { providerDataEntityMapper.mapFrom(it) }
@@ -160,6 +190,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             areas.data?.map { areaDataEntityMapper.mapFrom(it) }
         }
     }
+
     private val governDataEntityMapper = GovernDataEntityMapper()
 
     override fun getAllGoverns(): Observable<List<GovernEntity>> {
@@ -203,6 +234,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             trips.data?.map { tripsDataEntityMapper.mapFrom(it) }
         }
     }
+
     override fun getTripDetails(id: String): Observable<TripEntity> {
         return api.getTripDetails(TripDetailsRequest(id)).flatMap { tripDetails ->
             Observable.just(tripsDataEntityMapper.mapFrom(tripDetails.data!!))
@@ -220,14 +252,14 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val userDataMapper = com.neqabty.data.mappers.UserDataEntityMapper()
 
     override fun signup(
-        email: String,
-        fName: String,
-        lName: String,
-        mobile: String,
-        govId: String,
-        mainSyndicateId: String,
-        subSyndicateId: String,
-        password: String
+            email: String,
+            fName: String,
+            lName: String,
+            mobile: String,
+            govId: String,
+            mainSyndicateId: String,
+            subSyndicateId: String,
+            password: String
     ): Observable<UserEntity> {
         return api.signup(SignupRequest(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)).flatMap { userDataResponse ->
             Log.e("TAG", userDataResponse.toString())
