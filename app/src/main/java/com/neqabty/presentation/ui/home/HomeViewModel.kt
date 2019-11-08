@@ -1,11 +1,10 @@
 package com.neqabty.presentation.ui.home
 
 import android.arch.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.GetAllNews
-import com.neqabty.domain.usecases.GetAllTrips
-import com.neqabty.domain.usecases.GetAppVersion
+import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
+import com.neqabty.presentation.entities.NotificationUI
 import com.neqabty.presentation.mappers.NewsEntityUIMapper
 import com.neqabty.presentation.mappers.TripsEntityUIMapper
 
@@ -14,7 +13,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getAllNews: GetAllNews,
     private val getAllTrips: GetAllTrips,
-    private val getAppVersion: GetAppVersion
+    private val getAppVersion: GetAppVersion,
+    private val getNotificationsCount: GetNotificationsCount
 ) : BaseViewModel() {
 
     private val tripsEntityUIMapper = TripsEntityUIMapper()
@@ -26,10 +26,12 @@ class HomeViewModel @Inject constructor(
         viewState.value = HomeViewState()
     }
 
-    fun getContent(id: String) {
+    fun getContent(id: String, userNumber: String){
         getAppVersion()
         getNews(id)
         getTrips(id)
+        if (userNumber != "")
+            getNotifications(userNumber)
     }
 
     fun getAppVersion() {
@@ -90,6 +92,22 @@ class HomeViewModel @Inject constructor(
                     errorState.value = it
                 }
             )
+        )
+    }
+
+
+    fun getNotifications(userNumber: String) {
+        addDisposable(getNotificationsCount.getNotificationsCount(userNumber)
+                .subscribe(
+                        {
+                            viewState.value = viewState.value?.copy(notificationsCount = it.notificationsCount.toInt())
+                            onContentReceived()
+                        },
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false)
+                            errorState.value = it
+                        }
+                )
         )
     }
 

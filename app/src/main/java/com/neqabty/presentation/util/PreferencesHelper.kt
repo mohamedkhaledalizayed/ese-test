@@ -9,9 +9,11 @@ class PreferencesHelper(context: Context) {
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val SUB_SYNDICATE = "data.source.prefs.SUB_SYNDICATE"
         private const val USER = "data.source.prefs.USER"
+        private const val NAME = "data.source.prefs.NAME"
         private const val MOBILE = "data.source.prefs.MOBILE"
         private const val TOKEN = "data.source.prefs.TOKEN"
         private const val IS_REGISTERED = "data.source.prefs.IS_REGISTERED"
+        private const val NOTIFICATION_COUNT = "data.source.prefs.NOTIFICATION_COUNT"
     }
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -33,6 +35,12 @@ class PreferencesHelper(context: Context) {
 
     var user = preferences.getString(USER, "")
         set(value) = preferences.edit().putString(USER, value).apply()
+
+    var name = preferences.getString(NAME, "")
+        set(value) = preferences.edit().putString(NAME, value).apply()
+
+    var notificationsCount = preferences.getInt(NOTIFICATION_COUNT, 0)
+        set(value) = preferences.edit().putInt(NOTIFICATION_COUNT, value).apply()
 
     fun isSyndicateChosen(): Boolean {
         return mainSyndicate != 0

@@ -4,13 +4,14 @@
     <item
         android:id="@+id/notifications_fragment"
         android:icon="@mipmap/notification_ic"
+        app:actionLayout="@layout/notification_custom_action_item"
         android:title="@string/notifications_title"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/logout_fragment"
-        android:icon="@mipmap/logout_ic"
-        android:title="@string/logout_title"
-        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/logout_fragment"-->
+        <!--android:icon="@mipmap/logout_ic"-->
+        <!--android:title="@string/logout_title"-->
+        <!--app:showAsAction="always" />-->
     <item
         android:id="@+id/search_fragment"
         android:icon="@mipmap/search"
@@ -18,7 +19,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/favorites_fragment"
-        android:icon="@mipmap/add_fav"
+        android:icon="@mipmap/star_white"
         android:title="@string/favorites"
         app:showAsAction="always" />
 </menu>

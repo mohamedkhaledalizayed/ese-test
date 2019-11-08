@@ -97,13 +97,13 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         homeViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString())
+                homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(context!!).user)
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
 
-        homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString())
+        homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(context!!).user)
     }
 
     override fun onResume() {
@@ -126,6 +126,10 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
                 if (!isAlertShown)
                     showAlert()
             }
+        }
+        state.notificationsCount?.let {
+            PreferencesHelper(requireContext()).notificationsCount = it
+            activity?.invalidateOptionsMenu()
         }
     }
 

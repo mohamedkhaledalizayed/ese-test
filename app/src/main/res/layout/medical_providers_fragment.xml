@@ -23,6 +23,16 @@
                 android:scaleType="fitXY"
                 android:src="@mipmap/header_bg" />
 
+            <TextView
+                android:id="@+id/tvNoDataFound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/text_size_medium"
+                android:layout_margin="@dimen/margin_horizontal_normal"
+                android:text="@string/no_providers_found"
+                android:visibility="gone"/>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvProviders"
                 android:layout_width="match_parent"

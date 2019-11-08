@@ -1,6 +1,7 @@
 package com.neqabty.domain.entities
 
 data class NotificationEntity(
+        var notificationType: Int = 0,
         var id: Int = 0,
         var date: String?,
         var time: String?,
@@ -16,8 +17,9 @@ data class NotificationEntity(
         var doc1: String?,
         var trip: String?,
         var regiment: String?,
-        var approvalAmmountCost: String?,
+        var approvalAmountCost: String?,
         var housingType: String?,
         var numChild: String?,
-        var name: String?
+        var name: String?,
+        var mobileView: Int?
 )

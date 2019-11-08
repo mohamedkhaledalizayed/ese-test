@@ -22,6 +22,12 @@
         android:id="@+id/inquiry_fragment"
         android:title="@string/inquiry_title" />
     <item
+        android:id="@+id/engineering_records_fragment"
+        android:title="@string/engineering_records_title" />
+    <item
+        android:id="@+id/update_data_fragment"
+        android:title="@string/update_data_title" />
+    <item
         android:id="@+id/about_fragment"
         android:title="@string/about_title" />
 
@@ -43,9 +49,9 @@
         <!--android:id="@+id/help_fragment"-->
         <!--android:icon="@mipmap/help_ic"-->
         <!--android:title="@string/help_title" />-->
-    <item
-        android:id="@+id/logout_fragment"
-        android:icon="@mipmap/logout_ic_2"
-        android:title="@string/logout_title"
-        android:visible="false" />
+    <!--<item-->
+        <!--android:id="@+id/logout_fragment"-->
+        <!--android:icon="@mipmap/logout_ic_2"-->
+        <!--android:title="@string/logout_title"-->
+        <!--android:visible="false" />-->
 </menu>

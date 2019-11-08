@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class NotificationUI(
+        var notificationType: Int = 0,
         var id: Int = 0,
         var date: String?,
         var time: String?,
@@ -19,13 +20,16 @@ data class NotificationUI(
         var doc1: String?,
         var trip: String?,
         var regiment: String?,
-        var approvalAmmountCost: String?,
+        var approvalAmountCost: String?,
         var housingType: String?,
         var numChild: String?,
-        var name: String?
+        var name: String?,
+        var type: String?,
+        var isRead: Boolean = false
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
+            parcel.readInt(),
             parcel.readString(),
             parcel.readString(),
             parcel.readInt(),
@@ -43,10 +47,13 @@ data class NotificationUI(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readString()) {
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString().toBoolean()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(notificationType)
         parcel.writeInt(id)
         parcel.writeString(date)
         parcel.writeString(time)
@@ -62,10 +69,11 @@ data class NotificationUI(
         parcel.writeString(doc1)
         parcel.writeString(trip)
         parcel.writeString(regiment)
-        parcel.writeString(approvalAmmountCost)
+        parcel.writeString(approvalAmountCost)
         parcel.writeString(housingType)
         parcel.writeString(numChild)
         parcel.writeString(name)
+        parcel.writeString(type)
     }
 
     override fun describeContents(): Int {

@@ -117,6 +117,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             if (isDataValid(binding.edNumber.text.toString(), binding.edCardNumber.text.toString(), spArea.selectedItem, spGovern.selectedItem)) {
                 ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
                 ClaimingData.governId = (spGovern.selectedItem as GovernUI).id
+                ClaimingData.cardId = edCardNumber.text.toString().toInt()
                 pager.setCurrentItem(1, true)
             }
         }

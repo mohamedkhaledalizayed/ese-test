@@ -97,6 +97,8 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: MedicalProvidersViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.providers?.let {
+            if(it.size == 0)
+                binding.tvNoDataFound.visibility = View.VISIBLE
             adapter.submitList(it)
         }
     }

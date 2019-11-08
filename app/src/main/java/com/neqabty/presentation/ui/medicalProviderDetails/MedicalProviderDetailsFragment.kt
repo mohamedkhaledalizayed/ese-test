@@ -17,12 +17,11 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ProviderUI
-import com.neqabty.presentation.util.HasFavoriteOptionsMenu
 import com.neqabty.presentation.util.autoCleared
 
 import javax.inject.Inject
 
-class MedicalProviderDetailsFragment : BaseFragment(), Injectable, HasFavoriteOptionsMenu {
+class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -78,24 +77,29 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable, HasFavoriteOp
 
     private fun handleViewState(state: MedicalProviderDetailsViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        binding.llHolder.visibility = if (state.isLoading) View.GONE else View.VISIBLE
+        binding.llHolder.visibility = if (state.isLoading) View.INVISIBLE else View.VISIBLE
+        binding.ivFav.visibility = if (state.isLoading) View.INVISIBLE else View.VISIBLE
         this.state = state
         state.providerDetails?.let {
             binding.providerItem = it
         }
-        activity?.invalidateOptionsMenu()
+//        activity?.invalidateOptionsMenu()
+        renderFav()
+        binding.ivFav.setOnClickListener{
+            toggleFav()
+        }
     }
 
     //region
-    override fun toggleFav() {
+    fun toggleFav() {
         if (state.isFavorite)
             medicalProviderDetailsViewModel.removeFavorite(providerItem)
         else
             medicalProviderDetailsViewModel.addFavorite(providerItem)
     }
 
-    override fun renderFav(): Int {
-         return if (state.isFavorite) R.mipmap.added_fav else R.mipmap.add_fav
+    fun renderFav() {
+        binding.ivFav.setImageResource(if (state.isFavorite) R.mipmap.star_selected else R.mipmap.star_outline)
     }
 // endregion
 

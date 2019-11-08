@@ -23,11 +23,14 @@ interface WebService {
     @POST("api/v2/Syndicates/Sub/All/byMain")
     fun getSubSyndicatesById(@Body subSyndicateRequest: SubSyndicateRequest): Observable<ApiResponse<List<SyndicateData>>>
 
-    @POST("api/notifications")
+    @POST("api/v1/countnotification")
+    fun getNotificationsCount(@Body notificationRequest: NotificationRequest): Observable<NotificationsCountData>
+
+    @POST("api/v1/listnotification")
     fun getNotifications(@Body notificationRequest: NotificationRequest): Observable<List<NotificationData>>
 
-    @POST("api/notifications")
-    fun getNotificationDetails(@Body notificationRequest: NotificationRequest): Observable<NotificationData>
+    @GET("api/v1/shownotification/{notificationId}")
+    fun getNotificationDetails(@Path("notificationId") notificationId:Int, @Query("notification_type") notificationType:Int): Observable<NotificationData>
 
     @POST("api/v2/news/main_syndicate")
     fun getAllNews(@Body newsRequest: NewsRequest): Observable<ApiResponse<List<NewsData>>>
@@ -86,8 +89,30 @@ interface WebService {
             @Part doc4: MultipartBody.Part?
     ): Observable<ApiResponse<Unit>>
 
+    @POST("api/v1/transactions/generate-hash")
+    fun getTransactionHash(@Body validationRequest: ValidationRequest): Observable<MemberData>
+
     @POST("http://18.188.152.62:3000/neqabty/inquiry")
     fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
+
+    @POST("api/v1/Engineer/search")
+    fun updateUserDataInquiry(@Body inquireUpdateUserDataRequest: InquireUpdateUserDataRequest): Observable<InquireUpdateUserData>
+
+    @POST("api/v1/Engineer/sendverifysms")
+    fun sendVerifySMS(@Body sendSMSRequest: SendSMSRequest): Observable<VerifyUserData>
+
+    @POST("api/v1/Engineer/update")
+    fun updateUserData(@Body updateUserDataRequest: UpdateUserDataRequest): Observable<UpdateUserData>
+
+    @POST("api/EnginneringRecordsRegistry")
+    fun engineeringRecordsInquiry(@Body engineeringRecordsInquiryRequest: EngineeringRecordsInquiryRequest): Observable<ApiResponse<EngineeringRecordData>>
+
+    @Multipart
+    @POST("api/EnginneringRecordsRegistry/request")
+    fun engineeringRecordsRequest(
+            @Part("json_request") engineeringRecordsRequest: EngineeringRecordsRequest,
+            @Part doc1: MultipartBody.Part?
+    ): Observable<ApiResponse<Unit>>
 
     @POST("api/Auth/Login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>

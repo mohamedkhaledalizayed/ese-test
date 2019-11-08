@@ -86,6 +86,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
                 .get(ClaimingViewModel::class.java)
 
         binding.edNumber.setText(PreferencesHelper(requireContext()).user)
+        binding.edCardNumber.setText(ClaimingData.cardId.toString())
         binding.edProvider.setText(ClaimingData.providerName)
         binding.bPrev.setOnClickListener {
             pager.setCurrentItem(1, true)
@@ -275,7 +276,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
 
     fun showSuccessAlert() {
         builder = AlertDialog.Builder(requireContext())
-        builder?.setTitle(getString(R.string.congrats))
+        builder?.setTitle(getString(R.string.thanks))
         builder?.setMessage(getString(R.string.request_sent))
         builder?.setCancelable(false)
         builder?.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->

@@ -18,6 +18,48 @@ import javax.inject.Singleton
 @Singleton
 
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
+    private val inquireUpdateUserDataEntityMapper = InquireUpdateUserDataEntityMapper()
+    override fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity> {
+        return api.updateUserDataInquiry(InquireUpdateUserDataRequest(userNumber.toInt())).flatMap { userDataResponse ->
+            Observable.just(inquireUpdateUserDataEntityMapper.mapFrom(userDataResponse))
+        }
+    }
+
+    private val verifyUserDataEntityMapper = VerifyUserDataEntityMapper()
+    override fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity> {
+        return api.sendVerifySMS(SendSMSRequest(userNumber,mobileNumber)).map { result ->
+            verifyUserDataEntityMapper.mapFrom(result)
+        }
+    }
+
+    private val updateUserDataEntityMapper = UpdateUserDataEntityMapper()
+    override fun updateUserData(userNumber: String, fullName: String, nationalID: String, gender: String, userID: String): Observable<UpdateUserDataEntity> {
+        return api.updateUserData(UpdateUserDataRequest(userNumber.toInt(), fullName, nationalID, gender, userID)).map { userData ->
+            updateUserDataEntityMapper.mapFrom(userData)
+        }
+    }
+
+    private val registeryDataEntityMapper = RegisteryDataEntityMapper()
+
+    override fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity> {
+        return api.engineeringRecordsInquiry(EngineeringRecordsInquiryRequest(userNumber.toInt())).map { registeryData ->
+            registeryData.data?.registeryData!!.statusCode = registeryData.data?.statusCode!!
+            registeryDataEntityMapper.mapFrom(registeryData.data?.registeryData!!)
+        }
+    }
+
+    override fun requestEngineeringRecords(name: String, phone: String, typeId: String, mainSyndicate: String, userNumber: String, lastRenewYear: String, statusID: Int, isOwner: Int, docsNumber: Int, doc1: File?): Observable<Unit> {
+        var file1: MultipartBody.Part? = null
+
+        doc1?.let {
+            val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
+            file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
+        }
+        return api.engineeringRecordsRequest(EngineeringRecordsRequest(name, phone,typeId,mainSyndicate,userNumber, lastRenewYear, statusID, isOwner,docsNumber) , file1).map { result ->
+            result.data ?: Unit
+        }
+    }
+
     override fun bookTrip(mainSyndicateId: Int, userNumber: String, phone: String, tripID: Int, regimentID: Int, regimentDate: String, housingType: String, numChild: Int, ages: String, name: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?): Observable<Unit> {
 
         var file1: MultipartBody.Part? = null
@@ -60,17 +102,24 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             Observable.just(memberDataEntityMapper.mapFrom(user))
         }
     }
+    private val notificationsCountDataEntityMapper = NotificationsCountDataEntityMapper()
+
+    override fun getNotificationsCount(userNumber: Int): Observable<NotificationsCountEntity> {
+        return api.getNotificationsCount(NotificationRequest(userNumber = userNumber)).map { count ->
+                notificationsCountDataEntityMapper.mapFrom(count)
+        }
+    }
 
     private val notificationDataEntityMapper = NotificationDataEntityMapper()
 
     override fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>> {
-        return api.getNotifications(NotificationRequest(serviceID, type, userNumber)).map { notifications ->
+        return api.getNotifications(NotificationRequest(userNumber)).map { notifications ->
             notifications.map { notificationDataEntityMapper.mapFrom(it) }
         }
     }
 
     override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity> {
-        return api.getNotificationDetails(NotificationRequest(serviceID, type, userNumber, requestID)).flatMap { notification ->
+        return api.getNotificationDetails(requestID,type).flatMap { notification ->
             Observable.just(notificationDataEntityMapper.mapFrom(notification))
         }
     }
@@ -268,7 +317,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     }
 
     override fun login(mobile: String, password: String, token: String): Observable<UserEntity> {
-//        return api.login(ApiResponse<LoginRequest>().createRequest(LoginRequest(mobile,password , token))).flatMap { userData ->
+//        return api.login(ApiResponse<LoginRequest>().createRequest(LoginRequest(mobile,password , token))).flatMap { userDataInquire ->
         return api.login(LoginRequest(mobile, password, token)).flatMap { userDataResponse ->
             Log.e("TAG", userDataResponse.toString())
             Observable.just(userDataMapper.mapFrom(userDataResponse.data!!))

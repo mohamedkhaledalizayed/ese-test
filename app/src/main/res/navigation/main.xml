@@ -131,6 +131,21 @@
             app:destination="@id/mobileFragment" />
     </fragment>
     <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.neqabty.presentation.ui.payment.PaymentFragment"
+        android:label="@string/pay"
+        tools:layout="@layout/payment_fragment">
+
+        <argument
+            android:name="amount"
+            app:argType="java.lang.Integer" />
+
+        <argument
+            android:name="memberID"
+            app:argType="java.lang.Integer" />
+
+    </fragment>
+    <fragment
         android:id="@+id/homeFragment"
         android:name="com.neqabty.presentation.ui.home.HomeFragment"
         android:label="@string/home_title"
@@ -248,6 +263,67 @@
             app:destination="@id/medicalProviderDetailsFragment" />
     </fragment>
     <fragment
+        android:id="@+id/updateDataFragment"
+        android:name="com.neqabty.presentation.ui.updateData.UpdateDataFragment"
+        android:label="@string/update_data_title"
+        tools:layout="@layout/update_data_fragment">
+        <action
+            android:id="@+id/updateDataDetails"
+            app:destination="@id/updateDataDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateDataDetailsFragment"
+        android:name="com.neqabty.presentation.ui.updateDataDetails.UpdateDataDetailsFragment"
+        android:label="@string/update_data_title"
+        tools:layout="@layout/update_data_details_fragment">
+
+        <argument
+            android:name="userDataInquire"
+            app:argType="com.neqabty.presentation.entities.InquireUpdateUserDataUI" />
+
+        <action
+            android:id="@+id/updateDataVerification"
+            app:destination="@id/updateDataVerificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateDataVerificationFragment"
+        android:name="com.neqabty.presentation.ui.updateDataVerification.UpdateDataVerificationFragment"
+        android:label="@string/update_data_title"
+        tools:layout="@layout/update_data_verification_fragment">
+
+        <argument
+            android:name="userDataInquire"
+            app:argType="com.neqabty.presentation.entities.InquireUpdateUserDataUI" />
+
+        <argument
+            android:name="code"
+            app:argType="java.lang.String" />
+
+        <action
+            android:id="@+id/updateDataVerification"
+            app:destination="@id/updateDataVerificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/engineeringRecordsInquiryFragment"
+        android:name="com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryFragment"
+        android:label="@string/engineering_records_title"
+        tools:layout="@layout/engineering_records_inquiry_fragment">
+        <action
+            android:id="@+id/engineeringRecordsDetails"
+            app:destination="@id/engineeringRecordsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/engineeringRecordsDetailsFragment"
+        android:name="com.neqabty.presentation.ui.engineeringRecordsDetails.EngineeringRecordsDetailsFragment"
+        android:label="@string/engineering_records_title"
+        tools:layout="@layout/engineering_records_details_fragment">
+
+        <argument
+            android:name="memberItem"
+            app:argType="com.neqabty.presentation.entities.RegisteryUI" />
+
+    </fragment>
+    <fragment
         android:id="@+id/inquiryFragment"
         android:name="com.neqabty.presentation.ui.inquiry.InquiryFragment"
         android:label="@string/inquiry_title"
@@ -264,6 +340,10 @@
         <argument
             android:name="memberItem"
             app:argType="com.neqabty.presentation.entities.MemberUI" />
+
+        <action
+            android:id="@+id/openPayment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"

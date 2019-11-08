@@ -214,6 +214,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetNotificationsCount(neqabtyRepository: NeqabtyRepository): GetNotificationsCount {
+        return GetNotificationsCount(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetNotifications(neqabtyRepository: NeqabtyRepository): GetNotifications {
         return GetNotifications(ASyncTransformer(), neqabtyRepository)
     }
@@ -235,6 +241,47 @@ class AppModule {
     fun provideBookTrip (neqabtyRepository: NeqabtyRepository): BookTrip {
         return BookTrip(ASyncTransformer(), neqabtyRepository)
     }
+
+    @Singleton
+    @Provides
+    fun provideGetTransactionHash(neqabtyRepository: NeqabtyRepository): GetTransactionHash {
+        return GetTransactionHash(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSendEngineeringRecordsRequest(neqabtyRepository: NeqabtyRepository): SendEngineeringRecordsRequest {
+        return SendEngineeringRecordsRequest(ASyncTransformer(), neqabtyRepository)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideSendEngineeringRecordsInquiry(neqabtyRepository: NeqabtyRepository): SendEngineeringRecordsInquiry {
+        return SendEngineeringRecordsInquiry(ASyncTransformer(), neqabtyRepository)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideUpdateUserDataInquiry(neqabtyRepository: NeqabtyRepository): GetUpdateUserDataInquiry {
+        return GetUpdateUserDataInquiry(ASyncTransformer(), neqabtyRepository)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideGetUpdateUserDataDetails(neqabtyRepository: NeqabtyRepository): UpdateUserData {
+        return UpdateUserData(ASyncTransformer(), neqabtyRepository)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideVerifyUpdateUserData(neqabtyRepository: NeqabtyRepository): VerifyUpdateUserData {
+        return VerifyUpdateUserData(ASyncTransformer(), neqabtyRepository)
+    }
+
 
     @Singleton
     @Provides

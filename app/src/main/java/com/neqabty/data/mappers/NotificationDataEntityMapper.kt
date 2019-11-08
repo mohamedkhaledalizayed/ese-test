@@ -11,6 +11,7 @@ class NotificationDataEntityMapper @Inject constructor() : Mapper<NotificationDa
 
     override fun mapFrom(from: NotificationData): NotificationEntity {
         return NotificationEntity(
+                notificationType = from.notificationType,
                 id = from.id,
                 date = from.date,
                 time = from.time,
@@ -24,12 +25,13 @@ class NotificationDataEntityMapper @Inject constructor() : Mapper<NotificationDa
                 profession = from.profession,
                 providerName = from.providerName,
                 userNumber = from.userNumber,
-                approvalAmmountCost = from.approvalAmmountCost,
+                approvalAmountCost = from.approvalAmountCost,
                 housingType = from.housingType,
                 name = from.name,
                 numChild = from.numChild,
                 regiment = from.regiment,
-                trip = from.trip
+                trip = from.trip,
+                mobileView = from.mobileView
         )
     }
 }

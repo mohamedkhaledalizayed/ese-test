@@ -24,6 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <LinearLayout
             android:id="@+id/llHolder"
             android:layout_width="match_parent"
@@ -32,7 +33,7 @@
             android:elevation="@dimen/elevation_level_one"
             android:padding="@dimen/margin_horizontal_normal"
             android:layout_margin="@dimen/margin_horizontal_normal"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivHeader">
@@ -58,7 +59,19 @@
                 android:layout_height="wrap_content"
                 android:text="@{providerItem.phones}"
                 android:textSize="@dimen/text_size_medium" />
+
         </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/llHolder"
+            android:layout_margin="@dimen/margin_horizontal_normal"
+            android:visibility="invisible"
+            android:elevation="@dimen/elevation_level_one"
+            app:layout_constraintTop_toTopOf="@id/llHolder"
+            android:id="@+id/ivFav"/>
 
         <ProgressBar
             android:id="@+id/progressbar"

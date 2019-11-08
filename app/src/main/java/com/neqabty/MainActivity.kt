@@ -16,11 +16,12 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.text.Html
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.WindowManager
+import android.view.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -149,6 +150,12 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.inquiry_fragment -> {
                     navController.navigate(R.id.inquiryFragment)
                 }
+                R.id.engineering_records_fragment -> {
+                    navController.navigate(R.id.engineeringRecordsInquiryFragment)
+                }
+                R.id.update_data_fragment -> {
+                    navController.navigate(R.id.updateDataFragment)
+                }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
                 }
@@ -164,10 +171,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 //                }
 //                R.id.help_fragment -> {
 //                }
-                R.id.logout_fragment -> {
-                    PreferencesHelper(this).isRegistered = false
-                    invalidateOptionsMenu()
-                } // TODO
+//                R.id.logout_fragment -> {
+//                    PreferencesHelper(this).isRegistered = false
+//                    invalidateOptionsMenu()
+//                } // TODO
             }
             drawer_layout.closeDrawer(GravityCompat.START)
             true
@@ -242,25 +249,47 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         val notificationsItem = menu?.findItem(R.id.notifications_fragment)
         val favoritesItem = menu?.findItem(R.id.favorites_fragment)
         val searchItem = menu?.findItem(R.id.search_fragment)
-        val logoutItem = menu?.findItem(R.id.logout_fragment)
+//        val logoutItem = menu?.findItem(R.id.logout_fragment)
 
         var currentFragment =
                 (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
         notificationsItem?.isVisible = currentFragment is HasHomeOptionsMenu &&
                 PreferencesHelper(this).isRegistered
-        logoutItem?.isVisible = currentFragment is HasHomeOptionsMenu &&
-                PreferencesHelper(this).isRegistered
-        favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu ||
-                currentFragment is HasFavoriteOptionsMenu
+//        logoutItem?.isVisible = currentFragment is HasHomeOptionsMenu &&
+//                PreferencesHelper(this).isRegistered
+        favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu //|| currentFragment is HasFavoriteOptionsMenu
         searchItem?.isVisible = currentFragment is HasMedicalOptionsMenu
 
-        if (currentFragment is HasFavoriteOptionsMenu)
-            favoritesItem?.setIcon(currentFragment.renderFav())
+//        if (currentFragment is HasFavoriteOptionsMenu)
+//            favoritesItem?.setIcon(currentFragment.renderFav())
 
         var navigationView: NavigationView = nav_view
         var navMenu = navigationView.menu
-        navMenu.findItem(R.id.logout_fragment)?.isVisible = PreferencesHelper(this).isRegistered
+//        navMenu.findItem(R.id.logout_fragment)?.isVisible = PreferencesHelper(this).isRegistered
+        nav_view.getHeaderView(0).findViewById<Button>(R.id.bLogout).setOnClickListener {
+            PreferencesHelper(this).isRegistered = false
+            PreferencesHelper(this).user = ""
+            PreferencesHelper(this).notificationsCount = 0
+            invalidateOptionsMenu()
+        }
+//        nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvName).setText(getString(R.string.member_name) +" : " + PreferencesHelper(this).user)
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber , PreferencesHelper(this).mobile)))
 
+        nav_view.getHeaderView(0).visibility = if (PreferencesHelper(this).isRegistered) View.VISIBLE else View.GONE
+
+
+        val tvBadge = notificationsItem?.actionView?.findViewById<TextView>(R.id.tvBadge)
+        if (PreferencesHelper(this).notificationsCount == 0) tvBadge?.visibility = View.INVISIBLE
+        else {
+            tvBadge?.visibility = View.VISIBLE
+            tvBadge?.setText(PreferencesHelper(this).notificationsCount.toString())
+        }
+        val ivNotification = notificationsItem?.actionView?.findViewById<ImageView>(R.id.ivNotification)
+        ivNotification?.setOnClickListener {
+            Navigation.findNavController(this, R.id.container)
+                    .navigate(R.id.notificationsFragment)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -272,10 +301,12 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 Navigation.findNavController(this, R.id.container)
                         .navigate(R.id.notificationsFragment)
             }
-            R.id.logout_fragment -> {
-                PreferencesHelper(this).isRegistered = false
-                invalidateOptionsMenu()
-            }
+//            R.id.logout_fragment -> {
+//                PreferencesHelper(this).isRegistered = false
+//                PreferencesHelper(this).user = ""
+//                PreferencesHelper(this).notificationsCount = 0
+//                invalidateOptionsMenu()
+//            }
             R.id.search_fragment -> {
                 Navigation.findNavController(this, R.id.container).navigate(R.id.searchFragment)
             }
@@ -285,8 +316,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                             this,
                             R.id.container
                     ).navigate(R.id.favoritesFragment)
-                else if (currentFragment is HasFavoriteOptionsMenu)
-                    currentFragment.toggleFav()
+//                else if (currentFragment is HasFavoriteOptionsMenu)
+//                    currentFragment.toggleFav()
             }
         }
         return super.onOptionsItemSelected(item)

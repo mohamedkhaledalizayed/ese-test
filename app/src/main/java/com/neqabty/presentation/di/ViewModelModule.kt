@@ -6,6 +6,8 @@ import com.neqabty.MainViewModel
 import com.neqabty.presentation.ui.about.AboutViewModel
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaViewModel
 import com.neqabty.presentation.ui.claiming.ClaimingViewModel
+import com.neqabty.presentation.ui.engineeringRecordsDetails.EngineeringRecordsDetailsViewModel
+import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryViewModel
 import com.neqabty.presentation.ui.favorites.FavoritesViewModel
 import com.neqabty.presentation.ui.home.HomeViewModel
 import com.neqabty.presentation.ui.inquiry.InquiryViewModel
@@ -17,6 +19,7 @@ import com.neqabty.presentation.ui.mobile.MobileViewModel
 import com.neqabty.presentation.ui.news.NewsViewModel
 import com.neqabty.presentation.ui.notificationDetails.NotificationDetailsViewModel
 import com.neqabty.presentation.ui.notifications.NotificationsViewModel
+import com.neqabty.presentation.ui.payment.PaymentViewModel
 import com.neqabty.presentation.ui.search.SearchViewModel
 import com.neqabty.presentation.ui.signup.SignupViewModel
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesViewModel
@@ -24,6 +27,9 @@ import com.neqabty.presentation.ui.syndicates.SyndicatesViewModel
 import com.neqabty.presentation.ui.tripDetails.TripDetailsViewModel
 import com.neqabty.presentation.ui.trips.TripsViewModel
 import com.neqabty.presentation.ui.tripsReservation.TripReservationViewModel
+import com.neqabty.presentation.ui.updateData.UpdateDataViewModel
+import com.neqabty.presentation.ui.updateDataDetails.UpdateDataDetailsViewModel
+import com.neqabty.presentation.ui.updateDataVerification.UpdateDataVerificationViewModel
 import com.neqabty.presentation.viewmodel.NeqabtyViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -134,8 +140,39 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(UpdateDataViewModel::class)
+    abstract fun bindUpdateDataViewModel(updateDataViewModel: UpdateDataViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UpdateDataDetailsViewModel::class)
+    abstract fun bindUpdateDataDetailsViewModel(updateDataDetailsViewModel: UpdateDataDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UpdateDataVerificationViewModel::class)
+    abstract fun bindUpdateDataVerificationViewModel(updateDataVerificationViewModel: UpdateDataVerificationViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EngineeringRecordsInquiryViewModel::class)
+    abstract fun bindEngineeringRecordsInquiryViewModel(engineeringRecordsInquiryViewModel: EngineeringRecordsInquiryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EngineeringRecordsDetailsViewModel::class)
+    abstract fun bindEngineeringRecordsDetailsViewModel(engineeringRecordsDetailsViewModel: EngineeringRecordsDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(InquiryViewModel::class)
     abstract fun bindInquiryViewModel(inquiryViewModel: InquiryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PaymentViewModel::class)
+    abstract fun bindPaymentViewModel(paymentViewModel: PaymentViewModel): ViewModel
 
     @Binds
     @IntoMap

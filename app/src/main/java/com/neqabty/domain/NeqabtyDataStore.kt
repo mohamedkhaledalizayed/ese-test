@@ -28,6 +28,7 @@ interface NeqabtyDataStore {
 
     fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>>
     fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, userNumber: String): Observable<Unit>
+    fun getNotificationsCount( userNumber: Int): Observable<NotificationsCountEntity>
     fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>>
     fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity>
     fun sendMedicalRequest(
@@ -70,6 +71,21 @@ interface NeqabtyDataStore {
     ): Observable<Unit>
 
     fun validateUser(userNumber: String): Observable<MemberEntity>
+    fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>
+    fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity>
+    fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity>
+    fun updateUserData(userNumber: String,fullName: String,nationalID: String,gender: String,userID: String): Observable<UpdateUserDataEntity>
+    fun requestEngineeringRecords(
+            name: String,
+            phone: String,
+            typeId: String,
+            mainSyndicate: String,
+            userNumber: String,
+            lastRenewYear: String,
+            statusID: Int,
+            isOwner: Int,
+            docsNumber: Int,
+            doc1: File?): Observable<Unit>
 
     fun login(mobile: String, password: String, token: String): Observable<UserEntity>
     fun signup(

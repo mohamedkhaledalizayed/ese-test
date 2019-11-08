@@ -65,12 +65,12 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
         notificationDetailsViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                notificationDetailsViewModel.getNotificationDetails(serviceId, 1, PreferencesHelper(requireContext()).user.toInt(), notificationId.toInt())
+                notificationDetailsViewModel.getNotificationDetails(serviceId, serviceId, PreferencesHelper(requireContext()).user.toInt(), notificationId.toInt())
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
-        notificationDetailsViewModel.getNotificationDetails(serviceId, 1, PreferencesHelper(requireContext()).user.toInt(), notificationId.toInt())
+        notificationDetailsViewModel.getNotificationDetails(serviceId, serviceId, PreferencesHelper(requireContext()).user.toInt(), notificationId.toInt())
     }
 
     fun initializeViews(notificationItem: NotificationUI) {

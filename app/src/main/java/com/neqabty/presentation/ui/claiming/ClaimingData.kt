@@ -7,5 +7,6 @@ class ClaimingData {
         var providerTypeId: Int = 0
         var areaId: Int = 0
         var governId: Int = 0
+        var cardId: Int = 0
     }
 }

@@ -15,6 +15,7 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.util.autoCleared
+import kotlinx.android.synthetic.main.inquiry_details_fragment.*
 
 import javax.inject.Inject
 
@@ -59,6 +60,12 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 //            tempMember.expirationDate = getString(R.string.expiration_date_title) + " " + it.billDate
 //            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
             binding.memberItem = it
+        }
+
+        bPay.setOnClickListener {
+            navController().navigate(
+                    InquiryDetailsFragmentDirections.openPayment(memberItem.amount!!.toInt(),memberItem.engineerID!!.toInt())
+            )
         }
     }
 

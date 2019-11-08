@@ -23,7 +23,7 @@ class NotificationsAdapter(
             }
 
             override fun areContentsTheSame(oldItem: NotificationUI, newItem: NotificationUI): Boolean {
-                return oldItem.doc1 == newItem.doc1
+                return oldItem.isRead == newItem.isRead
             }
         }
 ) {

@@ -35,6 +35,7 @@ class MobileViewModel @Inject constructor(val getUserRegistered: GetUserRegister
                         {
                             prefs.token = token
                             prefs.mobile = mobile
+                            prefs.name = mobile
                             prefs.isRegistered = true
                             viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = true)
                         },

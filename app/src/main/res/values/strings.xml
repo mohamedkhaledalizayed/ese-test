@@ -24,7 +24,6 @@
     <string name="signup_title">إنشاء حساب</string>
     <string name="personalDetails">البيانات الشخصية</string>
     <string name="confirm">تأكيد</string>
-    <string name="congrats">تهانينا</string>
     <string name="welcome">مرحبا بالزائر</string>
     <string name="main">الرئيسية</string>
     <string name="aboutNeqaba">عن النقابة</string>
@@ -128,12 +127,16 @@
 
 
     <string name="syndicates_title">اختر النقابة المفضلة</string>
+    <string name="menu_syndicateNumber"><![CDATA[<font color="#1d1ad2">رقم العضوية: </font>]]>%s</string>
+    <string name="menu_phoneNumber"><![CDATA[<font color="#1d1ad2">رقم الموبايل: </font>]]>%s</string>
     <string name="home_title">الرئيسية</string>
     <string name="news_title">الأخبار</string>
     <string name="trips_title">الرحلات</string>
     <string name="claiming_title">مطالبات طبية</string>
     <string name="medical_title">الدليل الطبي</string>
     <string name="inquiry_title">سداد اشتراكات</string>
+    <string name="engineering_records_title">تجديد سجل هندسي</string>
+    <string name="update_data_title">تحديث البيانات</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">اتصل بنا</string>
@@ -153,6 +156,8 @@
     <string name="pick_photo_trips">من فضلك أرفق صور المستندات المطلوبة</string>
     <string name="ok_btn">موافق</string>
 
+    <string name="enter_verification_code">ادخل كود التأكيد</string>
+
     <string name="address_title">العنوان: </string>
     <string name="phone_title">التليفون: </string>
     <string name="email_title">البريد الالكتروني: </string>
@@ -161,8 +166,22 @@
     <![CDATA[<font color="#1d1ad2">الإسم: </font>]]>%s
     </string>
 
+    <string name="user_number_title">
+    <![CDATA[<font color="#1d1ad2">رقم العضوية: </font>]]>%s
+    </string>
+
+    <string name="national_id_title">رقم البطاقة:</string>
+
+    <string name="record_type_title">
+    <![CDATA[<font color="#1d1ad2">نوع السجل: </font>]]>%s
+    </string>
+
     <string name="expiration_date_title">
     <![CDATA[<font color="#1d1ad2">التاريخ: </font>]]>%s
+    </string>
+
+    <string name="last_renewal_date_title">
+    <![CDATA[<font color="#1d1ad2">تاريخ آخر تجديد: </font>]]>%s
     </string>
 
     <string name="amount_title">
@@ -175,6 +194,10 @@
 
     <string name="date_title">
     <![CDATA[<font color="#1d1ad2">تاريخ الطلب: </font>]]>%s
+    </string>
+
+    <string name="type_title">
+    <![CDATA[<font color="#1d1ad2">نوع الطلب: </font>]]>%s
     </string>
 
     <string name="date">
@@ -219,7 +242,17 @@
 
     <string name="type">النوع</string>
     <string name="no_data_found">لا توجد بيانات</string>
-
+    <string name="no_providers_found">لا توجد بيانات في هذا القسم</string>
     <string name="home_paragraph">في اطار تقديم خدمة متميزة ومتطورة لاعضاء نقابة المهندسين قامت النقابة العامه للمهندسين باتاحه خدمة ارسال الموافقات الطبية الكترونيا من خلال تطبيق نقابتي وذلك من خلال اتاحة امكانيه رفع المرفقات الخاصة بالمطالبة الطبية ويمكن للعضو متابعة حالة الطلب من خلال خدمة الاشعارات التنبيهية.</string>
+    <string name="records_add_photos">*السجل لمكتب هندسي\n
+        برجاء رفع المرفقات التاليه:\n
+        - الصفحة المقيد بها بيانات المهندس والسجل الهندسي\n
+        - الصفحة التي تحتوي علي اخر ختم تجديد\n
+        - اخر صفحة من صفحات السجل الهندسي</string>
+    <string name="update_data_add_photos">* برجاء ارفاق صورة وجه البطاقة \n صورة ظهر البطاقة \n صورة كارنيه العضوية</string>
+    <string name="update_data_add_photo">إضافة صورة</string>
+    <string name="user_not_allowed">التجديد لهذا العضو غير مسموح</string>
+    <string name="wrong_verification_code">كود التأكيد غير مطابق</string>
+    <string name="records_request_sent">لقد تم ارسال الطلب بنجاح للمراجعة .. ستيم الرد عليكم في خلال ٤٨ ساعة</string>
 
 </resources>

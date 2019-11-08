@@ -1,5 +1,7 @@
 package com.neqabty.presentation.mappers
 
+import android.content.Context
+import com.neqabty.R
 import com.neqabty.domain.common.Mapper
 import com.neqabty.domain.entities.NotificationEntity
 import com.neqabty.presentation.entities.NotificationUI
@@ -11,6 +13,7 @@ class NotificationEntityUIMapper @Inject constructor() : Mapper<NotificationEnti
 
     override fun mapFrom(from: NotificationEntity): NotificationUI {
         return NotificationUI(
+                notificationType = from.notificationType,
                 id = from.id,
                 date = from.date,
                 time = from.time,
@@ -24,12 +27,14 @@ class NotificationEntityUIMapper @Inject constructor() : Mapper<NotificationEnti
                 profession = from.profession,
                 providerName = from.providerName,
                 userNumber = from.userNumber,
-                approvalAmmountCost = from.approvalAmmountCost,
+                approvalAmountCost = from.approvalAmountCost,
                 housingType = from.housingType,
                 name = from.name,
                 numChild = from.numChild,
                 regiment = from.regiment,
-                trip = from.trip
+                trip = from.trip,
+                type = if(from.notificationType == 1) "مطالبات طبية" else "الرحلات",
+                isRead = from.mobileView == 1
         )
     }
 }

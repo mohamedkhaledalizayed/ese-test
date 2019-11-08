@@ -50,12 +50,12 @@
             android:background="@android:color/white"
             android:fitsSystemWindows="true"
             android:isScrollContainer="true"
-            android:paddingTop="?attr/actionBarSize"
             android:saveEnabled="true"
             android:scrollY="1dp"
             android:scrollbars="none"
             android:theme="@style/NavigationView"
             app:elevation="2dp"
+            app:headerLayout="@layout/navigation_header"
             app:insetForeground="@color/colorPrimaryDark"
             app:itemIconTint="@color/colorPrimaryDark"
             app:menu="@menu/drawer_view" />

@@ -92,6 +92,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         })
 
         binding.edNumber.setText(PreferencesHelper(requireContext()).user)
+        binding.edCardNumber.setText(ClaimingData.cardId.toString())
         binding.bPrev.setOnClickListener {
             pager.setCurrentItem(0, true)
         }
