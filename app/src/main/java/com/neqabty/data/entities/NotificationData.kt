@@ -20,6 +20,10 @@ data class NotificationData(
         var approvalImage: String?,
         @field:SerializedName("comment")
         var comment: String?,
+        @field:SerializedName("date")
+        var detailsDate: String?,
+        @field:SerializedName("time")
+        var detailsTime: String?,
         @field:SerializedName("created_at")
         var date: String?,
         @field:SerializedName("updated_at")

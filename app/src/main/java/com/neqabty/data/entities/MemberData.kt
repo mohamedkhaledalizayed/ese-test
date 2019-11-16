@@ -6,24 +6,24 @@ import com.neqabty.data.api.Response
 
 @Entity(primaryKeys = ["id"])
 data class MemberData(
-    @field:SerializedName("engineerID")
-    var engineerID: Int = 0,
-    @field:SerializedName("engineerName")
+    @field:SerializedName("OldRefID")
+    var engineerID: String = "",
+    @field:SerializedName("name")
     var engineerName: String?,
-    @field:SerializedName("expirationDate")
+    @field:SerializedName("datee")
     var expirationDate: String?,
     @field:SerializedName("paymentType")
     var paymentType: String?,
-    @field:SerializedName("BillDate")
+    @field:SerializedName("date")
     var billDate: String?,
     @field:SerializedName("Code")
     var code: Int?,
     @field:SerializedName("InterfaceLanguage")
     var interfaceLanguage: String?,
-    @field:SerializedName("LastPaymentDate")
+    @field:SerializedName("dateee")
     var lastPaymentDate: String?,
     @field:SerializedName("Message")
     var message: String?,
-    @field:SerializedName("amount")
-    var amount: String?
+    @field:SerializedName("total_amount")
+    var amount: Int?
 ) : Response()

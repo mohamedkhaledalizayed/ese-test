@@ -24,7 +24,7 @@
     <string name="signup_title">إنشاء حساب</string>
     <string name="personalDetails">البيانات الشخصية</string>
     <string name="confirm">تأكيد</string>
-    <string name="welcome">مرحبا بالزائر</string>
+    <string name="welcome">مرحبا بكم</string>
     <string name="main">الرئيسية</string>
     <string name="aboutNeqaba">عن النقابة</string>
     <string name="settings">الاعدادات</string>
@@ -127,8 +127,8 @@
 
 
     <string name="syndicates_title">اختر النقابة المفضلة</string>
-    <string name="menu_syndicateNumber"><![CDATA[<font color="#1d1ad2">رقم العضوية: </font>]]>%s</string>
-    <string name="menu_phoneNumber"><![CDATA[<font color="#1d1ad2">رقم الموبايل: </font>]]>%s</string>
+    <string name="menu_syndicateNumber">رقم العضوية:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
+    <string name="menu_phoneNumber">رقم الموبايل:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="home_title">الرئيسية</string>
     <string name="news_title">الأخبار</string>
     <string name="trips_title">الرحلات</string>
@@ -153,6 +153,7 @@
     <string name="invalid_data">من فضلك أكمل ادخال البيانات</string>
     <string name="invalid_number">رقم العضوية غير صحيح</string>
     <string name="pick_photo">من فضلك أرفق صورة الطلب</string>
+    <string name="pick_photos">من فضلك أرفق الصور المطلوبة</string>
     <string name="pick_photo_trips">من فضلك أرفق صور المستندات المطلوبة</string>
     <string name="ok_btn">موافق</string>
 
@@ -170,7 +171,13 @@
     <![CDATA[<font color="#1d1ad2">رقم العضوية: </font>]]>%s
     </string>
 
-    <string name="national_id_title">رقم البطاقة:</string>
+    <string name="national_id_title">
+        <![CDATA[<font color="#1d1ad2">رقم البطاقة: </font>]]>
+    </string>
+
+    <string name="enter_mobile_title">
+            <![CDATA[<font color="#1d1ad2">ادخل رقم الموبايل الخاص بك: </font>]]>
+    </string>
 
     <string name="record_type_title">
     <![CDATA[<font color="#1d1ad2">نوع السجل: </font>]]>%s
@@ -245,14 +252,27 @@
     <string name="no_providers_found">لا توجد بيانات في هذا القسم</string>
     <string name="home_paragraph">في اطار تقديم خدمة متميزة ومتطورة لاعضاء نقابة المهندسين قامت النقابة العامه للمهندسين باتاحه خدمة ارسال الموافقات الطبية الكترونيا من خلال تطبيق نقابتي وذلك من خلال اتاحة امكانيه رفع المرفقات الخاصة بالمطالبة الطبية ويمكن للعضو متابعة حالة الطلب من خلال خدمة الاشعارات التنبيهية.</string>
     <string name="records_add_photos">*السجل لمكتب هندسي\n
-        برجاء رفع المرفقات التاليه:\n
+        برجاء رفع المرفقات التالية:\n
         - الصفحة المقيد بها بيانات المهندس والسجل الهندسي\n
         - الصفحة التي تحتوي علي اخر ختم تجديد\n
         - اخر صفحة من صفحات السجل الهندسي</string>
-    <string name="update_data_add_photos">* برجاء ارفاق صورة وجه البطاقة \n صورة ظهر البطاقة \n صورة كارنيه العضوية</string>
+
+    <string name="records_add_photos_0"> برجاء رفع المرفقات التالية:</string>
+
+    <string name="records_add_photos_1">- الصفحة المقيد بها بيانات المهندس والسجل الهندسي</string>
+
+    <string name="records_add_photos_2">- الصفحة التي تحتوي علي اخر ختم تجديد</string>
+
+    <string name="records_add_photos_3">- اخر صفحة من صفحات السجل الهندسي</string>
+
+    <string name="update_data_add_photos"> برجاء رفع المرفقات التالية:</string>
+    <string name="update_data_add_photos_1">- صورة وجه البطاقة</string>
+    <string name="update_data_add_photos_2">- صورة ظهر البطاقة</string>
+    <string name="update_data_add_photos_3">- صورة كارنيه العضوية</string>
+
     <string name="update_data_add_photo">إضافة صورة</string>
     <string name="user_not_allowed">التجديد لهذا العضو غير مسموح</string>
     <string name="wrong_verification_code">كود التأكيد غير مطابق</string>
-    <string name="records_request_sent">لقد تم ارسال الطلب بنجاح للمراجعة .. ستيم الرد عليكم في خلال ٤٨ ساعة</string>
+    <string name="records_request_sent">لقد تم ارسال الطلب بنجاح للمراجعة .. سيتم الرد عليكم في خلال ٤٨ ساعة</string>
 
 </resources>

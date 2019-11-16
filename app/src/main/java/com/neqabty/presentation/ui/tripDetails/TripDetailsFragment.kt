@@ -21,6 +21,7 @@ import com.neqabty.presentation.entities.GovernUI
 import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.ui.claiming.ClaimingData
 import com.neqabty.presentation.ui.common.CustomImagePagerAdapter
+import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.claiming1_fragment.*
@@ -111,10 +112,11 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         adapter.submitList(tripItem.regiments)
 
         binding.bReserve.setOnClickListener {
+            TripsData.tripItem = tripItem
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(TripDetailsFragmentDirections.openTripReservation(tripItem))
             else
-                navController().navigate(TripDetailsFragmentDirections.openLogin(tripItem))
+                navController().navigate(TripDetailsFragmentDirections.openLogin(2))
         }
     }
 

@@ -118,12 +118,23 @@ class TripReservationFragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: TripReservationViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        if (state.member != null && state.member?.code != 3 && state.member?.code != 4 && !isValid) {
+//        if (state.member != null && state.member?.code != 3 && state.member?.code != 4 && !isValid) {
+//            isValid = true
+//            memberName = state.member!!.engineerName!!
+//            initializeViews()
+//        } else if (state.member?.message != null && !isValid) {
+//            showMemberValidationAlert(state.member?.message!!)
+//            state.member?.message = null
+//        }
+//        else if (!state.isLoading && isValid && reservationRequested)
+//            showSuccessAlert()
+
+        if (state.member != null && state.member?.amount?.toInt() == 0 && !isValid) {
             isValid = true
             memberName = state.member!!.engineerName!!
             initializeViews()
         } else if (state.member?.message != null && !isValid) {
-            showMemberValidationAlert(state.member?.message!!)
+            showMemberValidationAlert(getString(R.string.user_not_allowed))
             state.member?.message = null
         }
         else if (!state.isLoading && isValid && reservationRequested)
@@ -449,7 +460,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
         builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
             dialog.dismiss()
             navController().popBackStack()
-            navController().navigate(TripReservationFragmentDirections.openLogin(tripItem))
+            navController().navigate(TripReservationFragmentDirections.openLogin(2))
         }
 
         val dialog: AlertDialog = builder.create()

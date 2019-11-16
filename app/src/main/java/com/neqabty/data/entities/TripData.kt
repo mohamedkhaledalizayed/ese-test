@@ -40,7 +40,7 @@ data class TripData(
     data class TripRegiment(
         @field:SerializedName("id")
         var regimentId: Int = 0,
-        @field:SerializedName("tripID")
+        @field:SerializedName("trip_id")
         var tripId: Int?,
         @field:SerializedName("date_from")
         var dateFrom: String?,

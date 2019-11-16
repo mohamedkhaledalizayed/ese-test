@@ -83,14 +83,36 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: ClaimingViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        if (state.member != null && state.member?.code != 3 && state.member?.code != 4 && !isValid) {
+//        if (state.member != null && state.member?.code != 3 && state.member?.code != 4 && !isValid) {
+//            val prefs = PreferencesHelper(requireContext())
+//            binding.progressbar.visibility = View.VISIBLE
+//            memberName = state.member!!.engineerName!!
+//            isValid = true
+//            claimingViewModel.getAllContent1()
+//        } else if (state.member?.message != null && !isValid) {
+//            showMemberValidationAlert(state.member?.message!!)
+//            state.member?.message = null
+//        }
+//        if (state.governs != null && state.areas != null && isValid) {
+//            binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
+//            state.governs?.let {
+//                governsResultList = it
+//            }
+//            state.areas?.let {
+//                areasResultList = it
+//            }
+//            if (state.governs != null && state.areas != null)
+//                initializeViews()
+//        }
+
+        if (state.member != null && state.member?.amount?.toInt() == 0 && !isValid) {
             val prefs = PreferencesHelper(requireContext())
             binding.progressbar.visibility = View.VISIBLE
             memberName = state.member!!.engineerName!!
             isValid = true
             claimingViewModel.getAllContent1()
         } else if (state.member?.message != null && !isValid) {
-            showMemberValidationAlert(state.member?.message!!)
+            showMemberValidationAlert(getString(R.string.user_not_allowed))
             state.member?.message = null
         }
         if (state.governs != null && state.areas != null && isValid) {

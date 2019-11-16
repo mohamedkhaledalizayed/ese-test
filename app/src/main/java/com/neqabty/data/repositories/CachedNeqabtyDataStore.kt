@@ -70,7 +70,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun validateUser(userNumber: String): Observable<MemberEntity> {
+    override fun validateUser(userNumber: Int): Observable<MemberEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 

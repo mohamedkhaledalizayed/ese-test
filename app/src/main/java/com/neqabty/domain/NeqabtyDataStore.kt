@@ -70,7 +70,7 @@ interface NeqabtyDataStore {
             doc4: File?
     ): Observable<Unit>
 
-    fun validateUser(userNumber: String): Observable<MemberEntity>
+    fun validateUser(userNumber: Int): Observable<MemberEntity>
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>
     fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity>
     fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity>

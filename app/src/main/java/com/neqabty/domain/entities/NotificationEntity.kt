@@ -21,5 +21,7 @@ data class NotificationEntity(
         var housingType: String?,
         var numChild: String?,
         var name: String?,
-        var mobileView: Int?
+        var mobileView: Int?,
+        var detailsDate: String?,
+        var detailsTime: String?
 )

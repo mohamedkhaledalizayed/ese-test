@@ -3,7 +3,6 @@ package com.neqabty.presentation.ui.mobile
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -11,7 +10,6 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -21,11 +19,9 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.TripUI
-import com.neqabty.presentation.ui.tripDetails.TripDetailsFragmentArgs
+import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import java.lang.Exception
-
 import javax.inject.Inject
 
 class MobileFragment : BaseFragment(), Injectable {
@@ -37,7 +33,7 @@ class MobileFragment : BaseFragment(), Injectable {
     var binding by autoCleared<MobileFragmentBinding>()
 
     lateinit var mobileViewModel: MobileViewModel
-    var tripItem: TripUI? = null
+    var type: Int? = 0
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -57,12 +53,9 @@ class MobileFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        try {
-            val params = MobileFragmentArgs.fromBundle(arguments!!)
-            tripItem = params.tripItem
-        } catch (e: Exception) {
-            tripItem = null
-        }
+        val params = MobileFragmentArgs.fromBundle(arguments!!)
+        type = params.type
+
         mobileViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MobileViewModel::class.java)
 
@@ -107,13 +100,21 @@ class MobileFragment : BaseFragment(), Injectable {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful) {
             activity?.invalidateOptionsMenu()
-            if (tripItem == null) {
-                navController().navigate(
+            when (type) {
+                1 -> navController().navigate(
                         MobileFragmentDirections.openClaiming()
                 )
-            } else {
-                navController().navigate(
-                        MobileFragmentDirections.openTripReservation(tripItem!!)
+
+                2 -> navController().navigate(
+                        MobileFragmentDirections.openTripReservation(TripsData.tripItem!!)
+                )
+
+                3 -> navController().navigate(
+                        MobileFragmentDirections.openEngineeringRecords()
+                )
+
+                4 -> navController().navigate(
+                        MobileFragmentDirections.openUpdateData()
                 )
             }
         }

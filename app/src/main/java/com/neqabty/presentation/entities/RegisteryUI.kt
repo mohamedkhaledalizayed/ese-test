@@ -16,7 +16,8 @@ data class RegisteryUI(
         var isOwner: Boolean = false,
         var birthDate: String?,
         var mobile: String?,
-        var registerOffice: String?
+        var registerOffice: String?,
+        var msg: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
@@ -29,6 +30,7 @@ data class RegisteryUI(
             parcel.readString(),
             parcel.readString(),
             parcel.readString().toBoolean(),
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString()) {
@@ -48,6 +50,7 @@ data class RegisteryUI(
         parcel.writeString(birthDate)
         parcel.writeString(mobile)
         parcel.writeString(registerOffice)
+        parcel.writeString(msg)
     }
 
     override fun describeContents(): Int {

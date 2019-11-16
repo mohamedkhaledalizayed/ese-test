@@ -25,7 +25,8 @@ class RegisteryEntityUIMapper @Inject constructor() : Mapper<RegisteryEntity, Re
                 registerOffice = from.registerOffice,
                 registryDataID = from.registryDataID,
                 registryEngineerID = from.registryEngineerID,
-                registryTypeID = from.registryTypeID
+                registryTypeID = from.registryTypeID,
+                msg = from.msg
         )
     }
 }

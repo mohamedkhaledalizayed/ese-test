@@ -36,8 +36,8 @@
         android:label="@string/mobile_title"
         tools:layout="@layout/mobile_fragment">
         <argument
-            android:name="tripItem"
-            app:argType="com.neqabty.presentation.entities.TripUI" />
+            android:name="type"
+            app:argType="java.lang.Integer" />
         <action
             android:id="@+id/openClaiming"
             app:destination="@id/claimingFragment"
@@ -47,6 +47,16 @@
             android:id="@+id/openTripReservation"
             app:destination="@id/tripReservationFragment"
             app:popUpTo="@id/tripDetailsFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openEngineeringRecords"
+            app:destination="@id/engineeringRecordsDetailsFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openUpdateData"
+            app:destination="@id/updateDataDetailsFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
@@ -277,9 +287,9 @@
         android:label="@string/update_data_title"
         tools:layout="@layout/update_data_details_fragment">
 
-        <argument
-            android:name="userDataInquire"
-            app:argType="com.neqabty.presentation.entities.InquireUpdateUserDataUI" />
+        <!--<argument-->
+            <!--android:name="userDataInquire"-->
+            <!--app:argType="com.neqabty.presentation.entities.InquireUpdateUserDataUI" />-->
 
         <action
             android:id="@+id/updateDataVerification"
@@ -318,9 +328,9 @@
         android:label="@string/engineering_records_title"
         tools:layout="@layout/engineering_records_details_fragment">
 
-        <argument
-            android:name="memberItem"
-            app:argType="com.neqabty.presentation.entities.RegisteryUI" />
+        <!--<argument-->
+            <!--android:name="memberItem"-->
+            <!--app:argType="com.neqabty.presentation.entities.RegisteryUI" />-->
 
     </fragment>
     <fragment

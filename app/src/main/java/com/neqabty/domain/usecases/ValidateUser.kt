@@ -23,6 +23,6 @@ class ValidateUser @Inject constructor(
 
     override fun createObservable(data: Map<String, Any>?): Observable<MemberEntity> {
         val userNumber = data?.get(ValidateUser.PARAM_USER_NUMBER) as String
-        return neqabtyRepository.validateUser(userNumber)
+        return neqabtyRepository.validateUser(userNumber.toInt())
     }
 }

@@ -47,7 +47,7 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<EngineeringRecordsDetailsFragmentBinding>()
-    private var adapter by autoCleared<PhotosAdapter>()
+//    private var adapter by autoCleared<PhotosAdapter>()
 
     lateinit var engineeringRecordsDetailsViewModel: EngineeringRecordsDetailsViewModel
 
@@ -61,6 +61,8 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
     private var captureImage = false
 
     private var photosList: MutableList<PhotoUI> = mutableListOf<PhotoUI>()
+
+    var selectedIndex = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -81,9 +83,6 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val params = EngineeringRecordsDetailsFragmentArgs.fromBundle(arguments!!)
-        memberItem = params.memberItem
-
         engineeringRecordsDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(EngineeringRecordsDetailsViewModel::class.java)
 
@@ -93,18 +92,32 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         engineeringRecordsDetailsViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!! , memberItem.mobile!!, memberItem.registryTypeID!! , "5",memberItem.registryDataID!!,
-                        memberItem.lastRenewYear!!,memberItem.regDataStatusID!!.toInt(), if(memberItem.isOwner) 1 else 0  , photosList.size , getPhoto(0))
+                engineeringRecordsDetailsViewModel.sendEngineeringRecordsInquiry(PreferencesHelper(requireContext()).user)
+//                engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!! , memberItem.mobile!!, memberItem.registryTypeID!! , "5",memberItem.registryDataID!!,
+//                        memberItem.lastRenewYear!!,memberItem.regDataStatusID!!.toInt(), if(memberItem.isOwner) 1 else 0  , photosList.size , getPhoto(0))
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
-        initializeViews()
+        engineeringRecordsDetailsViewModel.sendEngineeringRecordsInquiry(PreferencesHelper(requireContext()).user)
     }
 
 
     private fun handleViewState(state: EngineeringRecordsDetailsViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        if (!state.isLoading && state.memberItem != null && !state.isSuccessful) {
+            state.memberItem?.registryDataID = PreferencesHelper(requireContext()).user
+                when(state.memberItem?.statusCode) {
+                    0 -> {
+                        binding.svContent.visibility = View.VISIBLE
+                        memberItem = state.memberItem!!
+                        binding.memberItem = state.memberItem!!
+                        state.memberItem = null
+                        initializeViews()
+                    }
+                    else -> showAlert(state.memberItem?.msg ?: getString(R.string.user_not_allowed))
+                }
+        }
         if (!state.isLoading && state.isSuccessful) {
             showSuccessAlert()
         }
@@ -112,35 +125,64 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
 
-        memberItem?.let {
-//            var tempMember = it.copy()
-//            tempMember.engineerName = getString(R.string.name_title) + " " + it.engineerName
-//            tempMember.expirationDate = getString(R.string.expiration_date_title) + " " + it.billDate
-//            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
-            binding.memberItem = it
+//        memberItem?.let {
+////            var tempMember = it.copy()
+////            tempMember.engineerName = getString(R.string.name_title) + " " + it.engineerName
+////            tempMember.expirationDate = getString(R.string.expiration_date_title) + " " + it.billDate
+////            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
+//            binding.memberItem = it
+//        }
+
+
+        photosList.add(0,PhotoUI(null,null))
+        photosList.add(1,PhotoUI(null,null))
+        photosList.add(2,PhotoUI(null,null))
+
+        binding.ibAddPhoto1.setOnClickListener {
+            selectedIndex = 0
+//            if (photosList[0].name == null)
+                addPhoto()
+//            else {
+//                photosList[0].name = null
+//                ibAddPhoto_1.setImageResource(R.drawable.ic_close)
+//            }
         }
 
-
-        binding.bAddPhoto.setOnClickListener {
-            if (photosList.size < 10)
+        binding.ibAddPhoto2.setOnClickListener {
+            selectedIndex = 1
+//            if (photosList[1].name == null)
                 addPhoto()
+//            else {
+//                photosList[1].name = null
+//                ibAddPhoto_2.setImageResource(R.drawable.ic_close)
+//            }
+        }
+
+        binding.ibAddPhoto3.setOnClickListener {
+            selectedIndex = 2
+//            if (photosList[2].name == null)
+                addPhoto()
+//            else {
+//                photosList[2].name = null
+//                ibAddPhoto_3.setImageResource(R.drawable.ic_close)
+//            }
         }
 
         bSubmit.setOnClickListener {
-            if (photosList.size > 0) {
+            if (photosList[0].name != null && photosList[1].name != null && photosList[2].name != null) {
                 engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!! , memberItem.mobile!!, memberItem.registryTypeID!! , "5",memberItem.registryDataID!!,
                         memberItem.lastRenewYear!!,memberItem.regDataStatusID!!.toInt(), if(memberItem.isOwner) 1 else 0  , photosList.size , getPhoto(0))
             } else
                 showPickPhotoAlert()
         }
-
-
-        val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
-            photosList.remove(photo)
-            adapter.notifyDataSetChanged()
-        }
-        this.adapter = adapter
-        binding.rvPhotos.adapter = adapter
+//
+//
+//        val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
+//            photosList.remove(photo)
+//            adapter.notifyDataSetChanged()
+//        }
+//        this.adapter = adapter
+//        binding.rvPhotos.adapter = adapter
 
     }
 
@@ -202,9 +244,8 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
             try {
                 val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data.data)
                 val photoUI = saveImage(bitmap)
-                photosList.add(photoUI)
-                adapter.submitList(photosList)
-                adapter.notifyDataSetChanged()
+                addToPhotos(photoUI)
+                updateIcons()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -231,9 +272,9 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
             e.printStackTrace()
         }
 
-        photosList.add(PhotoUI(Environment.getExternalStorageDirectory().toString(), name))
-        adapter.submitList(photosList)
-        adapter.notifyDataSetChanged()
+
+        addToPhotos(PhotoUI(Environment.getExternalStorageDirectory().toString(), name))
+        updateIcons()
     }
 
     fun saveImage(myBitmap: Bitmap): PhotoUI {
@@ -274,7 +315,7 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
     private fun showPickPhotoAlert() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.alert_title))
-        builder.setMessage(getString(R.string.pick_photo))
+        builder.setMessage(getString(R.string.pick_photos))
         builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
             dialog.dismiss()
         }
@@ -298,6 +339,30 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         dialog?.show()
     }
 
+    private fun updateIcons(){
+        when(selectedIndex){
+            0 -> ibAddPhoto_1.setImageResource(R.drawable.ic_done)
+            1 -> ibAddPhoto_2.setImageResource(R.drawable.ic_done)
+            2 -> ibAddPhoto_3.setImageResource(R.drawable.ic_done)
+        }
+    }
+
+    private fun showAlert(msg: String) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(msg)
+        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun addToPhotos(photoUI: PhotoUI){
+        photosList[selectedIndex] = photoUI
+    }
 // endregion
 
     fun navController() = findNavController()

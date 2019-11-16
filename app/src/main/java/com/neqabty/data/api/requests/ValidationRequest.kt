@@ -6,5 +6,5 @@ data class ValidationRequest(
     @SerializedName("engineerID")
     var syndicateId: Int = 0,
     @SerializedName("paymentType")
-    var paymentType: Int = 1
+    var paymentType: Int = 2
 )

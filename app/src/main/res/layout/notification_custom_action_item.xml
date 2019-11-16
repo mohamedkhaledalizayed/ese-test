@@ -18,11 +18,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|start|top"
         android:background="@drawable/circle_badge"
-        android:layout_marginEnd="-15dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginEnd="-5dp"
+        android:layout_marginTop="3dp"
         android:gravity="center"
-        android:padding="2dp"
-        android:text="00"
+        android:padding="4dp"
+        android:text="0"
         android:textColor="@android:color/white"
         android:textSize="8sp" />
 </FrameLayout>

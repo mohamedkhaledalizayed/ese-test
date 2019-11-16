@@ -5,13 +5,6 @@ import com.google.gson.annotations.SerializedName
 import com.neqabty.data.api.Response
 
 @Entity(primaryKeys = ["registryDataID"])
-data class EngineeringRecordData(
-        @field:SerializedName("status_code")
-        var statusCode: Int = 0,
-        @field:SerializedName("registryData")
-        var registeryData: RegisteryData
-) : Response()
-
 data class RegisteryData(
         @field:SerializedName("status_code")
         var statusCode: Int = 0,
@@ -38,5 +31,7 @@ data class RegisteryData(
         @field:SerializedName("Mobile")
         var mobile: String?,
         @field:SerializedName("RegisterOffice")
-        var registerOffice: String?
-)
+        var registerOffice: String?,
+        @field:SerializedName("msg")
+        var msg: String?
+) : Response()

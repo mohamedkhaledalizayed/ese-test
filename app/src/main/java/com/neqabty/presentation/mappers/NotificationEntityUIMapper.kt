@@ -34,7 +34,9 @@ class NotificationEntityUIMapper @Inject constructor() : Mapper<NotificationEnti
                 regiment = from.regiment,
                 trip = from.trip,
                 type = if(from.notificationType == 1) "مطالبات طبية" else "الرحلات",
-                isRead = from.mobileView == 1
+                isRead = from.mobileView == 1,
+                detailsDate = from.detailsDate,
+                detailsTime = from.detailsTime
         )
     }
 }

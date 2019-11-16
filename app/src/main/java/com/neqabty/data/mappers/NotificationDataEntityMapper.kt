@@ -31,7 +31,9 @@ class NotificationDataEntityMapper @Inject constructor() : Mapper<NotificationDa
                 numChild = from.numChild,
                 regiment = from.regiment,
                 trip = from.trip,
-                mobileView = from.mobileView
+                mobileView = from.mobileView,
+                detailsDate = from.detailsDate,
+                detailsTime = from.detailsTime
         )
     }
 }

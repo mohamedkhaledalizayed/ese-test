@@ -82,12 +82,19 @@ class InquiryFragment : BaseFragment(), Injectable {
         activity?.invalidateOptionsMenu()
         if (!state.isLoading && state.member != null) {
 //            PreferencesHelper(requireContext()).user = state.member?.engineerID.toString()
-            if (state?.member?.code == 0 || state.member?.code == 1) {
+//            if (state?.member?.code == 0 || state.member?.code == 1) {
+//                navController().navigate(
+//                        InquiryFragmentDirections.inquiryDetails(state.member!!)
+//                )
+//            } else {
+//                showAlert(state?.member?.message!!)
+//            }
+            if (state?.member?.amount != 0) {
                 navController().navigate(
                         InquiryFragmentDirections.inquiryDetails(state.member!!)
                 )
             } else {
-                showAlert(state?.member?.message!!)
+                showAlert(getString(R.string.user_not_allowed))
             }
             state.member = null
         }

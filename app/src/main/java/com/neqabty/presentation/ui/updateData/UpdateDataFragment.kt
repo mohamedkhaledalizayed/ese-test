@@ -78,12 +78,12 @@ class UpdateDataFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: UpdateDataViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         activity?.invalidateOptionsMenu()
-        if (!state.isLoading && state.userDataInquire != null) {
-                navController().navigate(
-                        UpdateDataFragmentDirections.updateDataDetails(state.userDataInquire!!)
-                )
-            state.userDataInquire = null
-        }
+//        if (!state.isLoading && state.userDataInquire != null) {
+//                navController().navigate(
+//                        UpdateDataFragmentDirections.updateDataDetails(state.userDataInquire!!)
+//                )
+//            state.userDataInquire = null
+//        }
     }
 
     //region

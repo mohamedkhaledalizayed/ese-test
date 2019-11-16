@@ -61,14 +61,14 @@
                             android:id="@+id/tvDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{Html.fromHtml(@string/date_title(notificationItem.date))}"
+                            android:text="@{Html.fromHtml(@string/date_title(notificationItem.detailsDate))}"
                             android:textSize="@dimen/text_size_large" />
 
                         <TextView
                             android:id="@+id/tvTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{Html.fromHtml(@string/time(notificationItem.time))}"
+                            android:text="@{Html.fromHtml(@string/time(notificationItem.detailsTime))}"
                             android:textSize="@dimen/text_size_large" />
 
                         <TextView

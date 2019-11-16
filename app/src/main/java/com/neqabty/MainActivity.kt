@@ -141,8 +141,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.claiming_fragment -> { // TODO
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.claimingFragment)
-                    else
-                        navController.navigate(R.id.mobileFragment)
+                    else {
+                        val bundle: Bundle = Bundle()
+                        bundle.putInt("type", 1)
+                        navController.navigate(R.id.mobileFragment, bundle)
+                    }
                 }
                 R.id.medical_fragment -> {
                     navController.navigate(R.id.chooseAreaFragment)
@@ -151,10 +154,22 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     navController.navigate(R.id.inquiryFragment)
                 }
                 R.id.engineering_records_fragment -> {
-                    navController.navigate(R.id.engineeringRecordsInquiryFragment)
+                    if (PreferencesHelper(this).isRegistered)
+                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
+                    else {
+                        val bundle: Bundle = Bundle()
+                        bundle.putInt("type", 3)
+                        navController.navigate(R.id.mobileFragment, bundle)
+                    }
                 }
                 R.id.update_data_fragment -> {
-                    navController.navigate(R.id.updateDataFragment)
+                    if (PreferencesHelper(this).isRegistered)
+                        navController.navigate(R.id.updateDataDetailsFragment)
+                    else {
+                        val bundle: Bundle = Bundle()
+                        bundle.putInt("type", 4)
+                        navController.navigate(R.id.mobileFragment, bundle)
+                    }
                 }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
@@ -274,10 +289,14 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
 //        nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvName).setText(getString(R.string.member_name) +" : " + PreferencesHelper(this).user)
         nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
-        nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber , PreferencesHelper(this).mobile)))
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, PreferencesHelper(this).mobile)))
 
         nav_view.getHeaderView(0).visibility = if (PreferencesHelper(this).isRegistered) View.VISIBLE else View.GONE
 
+        if (!PreferencesHelper(this).isRegistered)
+            nav_view.getChildAt(0).setPadding(0, 100, 0, 0)
+        else
+            nav_view.getChildAt(0).setPadding(0, 0, 0, 0)
 
         val tvBadge = notificationsItem?.actionView?.findViewById<TextView>(R.id.tvBadge)
         if (PreferencesHelper(this).notificationsCount == 0) tvBadge?.visibility = View.INVISIBLE

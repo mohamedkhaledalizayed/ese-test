@@ -92,8 +92,11 @@ interface WebService {
     @POST("api/v1/transactions/generate-hash")
     fun getTransactionHash(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
-    @POST("http://18.188.152.62:3000/neqabty/inquiry")
-    fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
+    @GET("api/v1/Service/inquiry")
+    fun validateUser(@Query("OldRefID") userNumber:Int, @Query("ServiceGroupID") serviceGroupID:Int): Observable<MemberData>
+
+//    @POST("http://18.188.152.62:3000/neqabty/inquiry")
+//    fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
     @POST("api/v1/Engineer/search")
     fun updateUserDataInquiry(@Body inquireUpdateUserDataRequest: InquireUpdateUserDataRequest): Observable<InquireUpdateUserData>
@@ -105,7 +108,7 @@ interface WebService {
     fun updateUserData(@Body updateUserDataRequest: UpdateUserDataRequest): Observable<UpdateUserData>
 
     @POST("api/EnginneringRecordsRegistry")
-    fun engineeringRecordsInquiry(@Body engineeringRecordsInquiryRequest: EngineeringRecordsInquiryRequest): Observable<ApiResponse<EngineeringRecordData>>
+    fun engineeringRecordsInquiry(@Body engineeringRecordsInquiryRequest: EngineeringRecordsInquiryRequest): Observable<ApiResponse<RegisteryData>>
 
     @Multipart
     @POST("api/EnginneringRecordsRegistry/request")

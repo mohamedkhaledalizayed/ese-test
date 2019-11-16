@@ -80,15 +80,15 @@ class EngineeringRecordsInquiryFragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: EngineeringRecordsInquiryViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        if (!state.isLoading && state.memberItem != null) {
-            state.memberItem?.registryDataID = edMemberNumber.text.toString()
-                when(state.memberItem?.statusCode){
-                    0 ->  navController().navigate(
-                            EngineeringRecordsInquiryFragmentDirections.engineeringRecordsDetails(state.memberItem!!))
-                    else ->  showAlert(getString(R.string.user_not_allowed))
-                }//TODO
-                state.memberItem = null
-        }
+//        if (!state.isLoading && state.memberItem != null) {
+//            state.memberItem?.registryDataID = edMemberNumber.text.toString()
+//                when(state.memberItem?.statusCode){
+//                    0 ->  navController().navigate(
+//                            EngineeringRecordsInquiryFragmentDirections.engineeringRecordsDetails(state.memberItem!!))
+//                    else ->  showAlert(state.memberItem?.msg ?: getString(R.string.user_not_allowed))
+//                }//TODO
+//                state.memberItem = null
+//        }
     }
 
     //region

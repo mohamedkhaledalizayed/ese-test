@@ -12,9 +12,10 @@ import com.neqabty.presentation.mappers.VerifyUserDataEntityUIMapper
 
 import javax.inject.Inject
 
-class UpdateDataDetailsViewModel @Inject constructor(private val verifyUpdateUserData: VerifyUpdateUserData) : BaseViewModel() {
+class UpdateDataDetailsViewModel @Inject constructor(private val getUpdateUserDataInquiry: GetUpdateUserDataInquiry,private val verifyUpdateUserData: VerifyUpdateUserData) : BaseViewModel() {
 
     private val verifyUserDataEntityUIMapper = VerifyUserDataEntityUIMapper()
+    private val updateUserDataEntityUIMapper = InquireUpdateUserDataEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<UpdateDataDetailsViewState> = MutableLiveData()
@@ -38,6 +39,30 @@ class UpdateDataDetailsViewModel @Inject constructor(private val verifyUpdateUse
                         }
                 )
         )
+    }
+
+    fun inquireUpdateUserData(number: String) {
+        viewState.value = viewState.value?.copy(isLoading = true)
+        addDisposable(getUpdateUserDataInquiry.inquireUpdateUserData(number)
+                .map {
+                    it.let {
+                        updateUserDataEntityUIMapper.mapFrom(it)
+                    }
+                }.subscribe(
+                        { onUpdateUserDataReceived(it) },
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false)
+                            errorState.value = it
+                        }
+                )
+        )
+    }
+
+    private fun onUpdateUserDataReceived(userDataInquire: InquireUpdateUserDataUI) {
+        val newViewState = viewState.value?.copy(
+                isLoading = false,
+                userDataInquire = userDataInquire)
+        viewState.value = newViewState
     }
 
     private fun onVerifyUserDataReceived(verifyUserData: VerifyUserDataUI) {

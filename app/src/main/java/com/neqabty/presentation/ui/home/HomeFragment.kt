@@ -48,16 +48,16 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
 
     var isAlertShown = false
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.home_fragment,
-            container,
-            false,
-            dataBindingComponent
+                inflater,
+                R.layout.home_fragment,
+                container,
+                false,
+                dataBindingComponent
         )
         return binding.root
     }
@@ -73,11 +73,11 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)
-            .get(HomeViewModel::class.java)
+                .get(HomeViewModel::class.java)
 
         val newsAdapter = NewsAdapter(dataBindingComponent, appExecutors) { newsItem ->
             navController().navigate(
-                HomeFragmentDirections.newsDetails(newsItem)
+                    HomeFragmentDirections.newsDetails(newsItem)
             )
         }
         this.newsAdapter = newsAdapter
@@ -85,7 +85,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
 
         val tripsAdapter = TripsAdapter(dataBindingComponent, appExecutors) { tripsItem ->
             navController().navigate(
-                HomeFragmentDirections.tripDetails(tripsItem)
+                    HomeFragmentDirections.tripDetails(tripsItem)
             )
         }
         this.tripsAdapter = tripsAdapter
@@ -138,8 +138,11 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         binding.llClaiming.setOnClickListener {
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(R.id.claimingFragment)
-            else
-                navController().navigate(R.id.mobileFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", 1)
+                navController().navigate(R.id.mobileFragment, bundle)
+            }
         }
         binding.llNews.setOnClickListener {
             navController().navigate(R.id.newsFragment)
@@ -171,17 +174,17 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
             val appPackageName = requireContext().packageName
             try {
                 startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("market://details?id=$appPackageName")
-                    )
+                        Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("market://details?id=$appPackageName")
+                        )
                 )
             } catch (anfe: android.content.ActivityNotFoundException) {
                 startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
-                    )
+                        Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                        )
                 )
             }
             showAlert()

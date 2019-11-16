@@ -25,7 +25,9 @@ data class NotificationUI(
         var numChild: String?,
         var name: String?,
         var type: String?,
-        var isRead: Boolean = false
+        var isRead: Boolean = false,
+        var detailsDate : String?,
+        var detailsTime: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
@@ -49,7 +51,9 @@ data class NotificationUI(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readString().toBoolean()) {
+            parcel.readString().toBoolean(),
+            parcel.readString(),
+            parcel.readString()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -74,6 +78,8 @@ data class NotificationUI(
         parcel.writeString(numChild)
         parcel.writeString(name)
         parcel.writeString(type)
+        parcel.writeString(detailsDate)
+        parcel.writeString(detailsTime)
     }
 
     override fun describeContents(): Int {

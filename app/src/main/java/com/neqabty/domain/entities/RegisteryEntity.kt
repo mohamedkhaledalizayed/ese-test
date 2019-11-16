@@ -13,5 +13,6 @@ data class RegisteryEntity(
         var isOwner: Int?,
         var birthDate: String?,
         var mobile: String?,
-        var registerOffice: String?
+        var registerOffice: String?,
+        var msg: String?
 )

@@ -43,8 +43,8 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     override fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity> {
         return api.engineeringRecordsInquiry(EngineeringRecordsInquiryRequest(userNumber.toInt())).map { registeryData ->
-            registeryData.data?.registeryData!!.statusCode = registeryData.data?.statusCode!!
-            registeryDataEntityMapper.mapFrom(registeryData.data?.registeryData!!)
+            registeryData.data?.msg = registeryData.arMsg
+            registeryDataEntityMapper.mapFrom(registeryData.data!!)
         }
     }
 
@@ -97,11 +97,18 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     private val memberDataEntityMapper = MemberDataEntityMapper()
 
-    override fun validateUser(userNumber: String): Observable<MemberEntity> {
-        return api.validateUser(ValidationRequest(userNumber.toInt())).flatMap { user ->
+//    override fun validateUser(userNumber: String): Observable<MemberEntity> {
+//        return api.validateUser(ValidationRequest(userNumber.toInt())).flatMap { user ->
+//            Observable.just(memberDataEntityMapper.mapFrom(user))
+//        }
+//    }
+
+    override fun validateUser(userNumber: Int): Observable<MemberEntity> {
+        return api.validateUser(userNumber , 2).flatMap { user ->
             Observable.just(memberDataEntityMapper.mapFrom(user))
         }
     }
+
     private val notificationsCountDataEntityMapper = NotificationsCountDataEntityMapper()
 
     override fun getNotificationsCount(userNumber: Int): Observable<NotificationsCountEntity> {
