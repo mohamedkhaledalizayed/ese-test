@@ -170,8 +170,8 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
 
         bSubmit.setOnClickListener {
             if (photosList[0].name != null && photosList[1].name != null && photosList[2].name != null) {
-                engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!! , memberItem.mobile!!, memberItem.registryTypeID!! , "5",memberItem.registryDataID!!,
-                        memberItem.lastRenewYear!!,memberItem.regDataStatusID!!.toInt(), if(memberItem.isOwner) 1 else 0  , photosList.size , getPhoto(0))
+                engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!! , PreferencesHelper(requireContext()).mobile, memberItem.registryTypeID!! , "5",memberItem.registryDataID!!,
+                        memberItem.lastRenewYear!!,memberItem.regDataStatusID!!.toInt(), if(memberItem.isOwner) 1 else 0  , photosList.size , getPhoto(0), getPhoto(1), getPhoto(2))
             } else
                 showPickPhotoAlert()
         }

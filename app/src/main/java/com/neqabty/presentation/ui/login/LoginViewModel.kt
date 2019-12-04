@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.location.LocationManager
 import com.neqabty.domain.entities.UserEntity
-import com.neqabty.domain.usecases.LoginUser
+import com.neqabty.domain.usecases.GetVisitorLoggedIn
 import com.neqabty.domain.usecases.SignupUser
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -13,18 +13,10 @@ import com.neqabty.presentation.mappers.UserEntityUIMapper
 
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val signupUser: SignupUser, private val loginUser: LoginUser) : BaseViewModel() {
+class LoginViewModel @Inject constructor(val getVisitorLoggedIn: GetVisitorLoggedIn) : BaseViewModel() {
 
-    lateinit var locationManager: LocationManager
-
-    var mCurrentPhotoPath: String = ""
-    var mCurrentPhotoName: String = ""
-    var photoFilePath: String = ""
-    var weatherText: String = ""
-    private val _photoLoaded: MutableLiveData<Boolean> = MutableLiveData()
     private val userEntityToUIMapper = UserEntityUIMapper()
     // ////////////////////////////////////////////
-    lateinit var userEntity: UserEntity
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<LoginViewState> = MutableLiveData()
 
@@ -32,39 +24,11 @@ class LoginViewModel @Inject constructor(private val signupUser: SignupUser, pri
         viewState.value = LoginViewState(isLoading = true)
     }
 
-    fun login(mobile: String, password: String, token: String) {
-        addDisposable(loginUser.login(mobile, password, token)
+    fun login(mobile: String) {
+        addDisposable(getVisitorLoggedIn.login(mobile)
                 .map {
                     it.let {
-                        userEntity = it
-                        userEntityToUIMapper.mapFrom(userEntity)
-                    } ?: run {
-                        throw Throwable("Something went wrong :(")
-                    }
-                }.subscribe(
-                        { onUserReceived(it) },
-                        { errorState.value = it }
-                )
-        )
-    }
-
-    fun signup(
-        email: String,
-        fName: String,
-        lName: String,
-        mobile: String,
-        govId: String,
-        mainSyndicateId: String,
-        subSyndicateId: String,
-        password: String
-    ) {
-        addDisposable(signupUser.signup(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)
-                .map {
-                    it.let {
-                        userEntity = it
-                        userEntityToUIMapper.mapFrom(userEntity)
-                    } ?: run {
-                        throw Throwable("Something went wrong :(")
+                        userEntityToUIMapper.mapFrom(it)
                     }
                 }.subscribe(
                         { onUserReceived(it) },
@@ -81,12 +45,5 @@ class LoginViewModel @Inject constructor(private val signupUser: SignupUser, pri
 
         viewState.value = newViewState
     }
-    // /////////////////////////////old
 
-    fun setPhotoLoaded(loaded: Boolean) {
-        _photoLoaded.value = loaded
-    }
-
-    val photoLoaded: LiveData<Boolean>
-        get() = _photoLoaded
 }

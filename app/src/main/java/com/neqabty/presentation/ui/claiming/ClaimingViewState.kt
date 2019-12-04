@@ -8,5 +8,5 @@ data class ClaimingViewState(
     var governs: List<GovernUI>? = null,
     var providerTypes: List<ProviderTypeUI>? = null,
     var providers: List<ProviderUI>? = null,
-    var member: MemberUI? = null
+    var member: ClaimingValidationUI? = null
 )

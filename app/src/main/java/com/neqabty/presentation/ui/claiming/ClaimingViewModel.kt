@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
+import com.neqabty.presentation.entities.ClaimingValidationUI
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.mappers.*
 
@@ -16,13 +17,13 @@ class ClaimingViewModel @Inject constructor(
     val getProvidersByType: GetProvidersByType,
     val getAllProvidersTypes: GetAllProvidersTypes,
     val sendMedicalRequest: SendMedicalRequest,
-    private val validateUser: ValidateUser
+    private val validateUserForClaiming: ValidateUserForClaiming
 ) : BaseViewModel() {
     private val areaEntityUIMapper = AreaEntityUIMapper()
     private val governEntityUIMapper = GovernEntityUIMapper()
     private val providerTypeEntityUIMapper = ProviderTypeEntityUIMapper()
     private val providerEntityUIMapper = ProviderEntityUIMapper()
-    private val memberEntityUIMapper = MemberEntityUIMapper()
+    private val claimingValidationEntityUIMapper = ClaimingValidationEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<ClaimingViewState> = MutableLiveData()
@@ -141,10 +142,10 @@ class ClaimingViewModel @Inject constructor(
 
     fun validateUser(number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(validateUser.validateUser(number)
+        addDisposable(validateUserForClaiming.validateUser(number)
                 .map {
                     it.let {
-                        memberEntityUIMapper.mapFrom(it)
+                        claimingValidationEntityUIMapper.mapFrom(it)
                     }
                 }.subscribe(
                         { onValidationReceived(it) },
@@ -156,7 +157,7 @@ class ClaimingViewModel @Inject constructor(
         )
     }
 
-    private fun onValidationReceived(member: MemberUI) {
+    private fun onValidationReceived(member: ClaimingValidationUI) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
                 member = member)

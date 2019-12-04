@@ -4,12 +4,9 @@ import com.google.gson.annotations.SerializedName
 import com.neqabty.data.api.Request
 
 data class LoginRequest(
-    @SerializedName("mobile")
-    var mobile: String = "",
+    @SerializedName("user_number")
+    var userNumber: String = "",
 
-    @SerializedName("password")
-    var password: String = "",
-
-    @SerializedName("user_token")
-    var user_token: String = ""
-) : Request()
+    @SerializedName("push_token")
+    var token: String = ""
+)

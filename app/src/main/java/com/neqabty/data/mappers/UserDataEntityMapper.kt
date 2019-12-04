@@ -11,19 +11,9 @@ class UserDataEntityMapper @Inject constructor() : Mapper<UserData, UserEntity>(
 
     override fun mapFrom(from: UserData): UserEntity {
         return UserEntity(
-                id = from.id,
-                fName = from.fName,
-                lName = from.lName,
-                email = from.email,
-                number = from.number,
-                password = from.password,
-                mainSyndicateId = from.mainSyndicateId,
-                subSyndicateId = from.subSyndicateId,
-                verificationCode = from.verificationCode,
-                syndicateUserMobile = from.syndicateUserMobile,
-                createdAt = from.createdAt,
-                updatedAt = from.updatedAt,
-                userToken = from.userToken
+                token = from.token,
+                type = from.type,
+                name = from.name
         )
     }
 }

@@ -282,7 +282,7 @@
 	<error line="29" column="44" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="30" column="128" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
-<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\GetUserRegistered.kt">
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\GetUserLoggedIn.kt">
 	<error line="19" column="6" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="21" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>

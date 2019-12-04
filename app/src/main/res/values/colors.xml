@@ -5,6 +5,8 @@
     <color name="white">#ffffff</color>
     <color name="red">#E70F0F</color>
     <color name="grey">#e4e0e0</color>
+    <color name="dark_grey">#C0BBBB</color>
+    <color name="light_grey">#F5F3F3</color>
     <color name="yellow">#FFBA00</color>
     <color name="colorAccent">#959692</color>
 </resources>

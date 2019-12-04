@@ -59,7 +59,7 @@ class NotificationsFragment : BaseFragment(), Injectable {
 
         val adapter = NotificationsAdapter(dataBindingComponent, appExecutors) { notificationItem ->
             navController().navigate(
-                    NotificationsFragmentDirections.notificationDetails(notificationItem.id.toString(),notificationItem.notificationType.toString())
+                    NotificationsFragmentDirections.notificationDetails(notificationItem.id.toString(),notificationItem.notificationTypeID.toString())
             )
         }
         this.adapter = adapter

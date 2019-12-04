@@ -11,12 +11,9 @@ class UserEntityUIMapper @Inject constructor() : Mapper<UserEntity, UserUI>() {
 
     override fun mapFrom(from: UserEntity): UserUI {
         return UserUI(
-                id = from.id,
-                fName = from.fName,
-                lName = from.lName,
-                email = from.email,
-                number = from.number,
-                password = from.password
+                token = from.token,
+                type = from.type,
+                name = from.name
         )
     }
 }

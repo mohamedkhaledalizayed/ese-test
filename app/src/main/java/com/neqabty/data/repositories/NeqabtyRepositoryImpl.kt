@@ -14,6 +14,9 @@ class NeqabtyRepositoryImpl @Inject constructor(
         private val cachedDataStore: CachedNeqabtyDataStore,
         private val remoteDataStore: RemoteNeqabtyDataStore
 ) : NeqabtyRepository {
+    override fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity> {
+        return remoteDataStore.validateUserForClaiming(userNumber)
+    }
 
     override fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity> {
         return remoteDataStore.updateUserDataInquiry(userNumber)
@@ -30,8 +33,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.inquireEngineeringRecords(userNumber)
     }
 
-    override fun requestEngineeringRecords(name: String, phone: String, typeId: String, mainSyndicate: String, userNumber: String, lastRenewYear: String, statusID: Int, isOwner: Int, docsNumber: Int, doc1: File?): Observable<Unit> {
-        return remoteDataStore.requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1)
+    override fun requestEngineeringRecords(name: String, phone: String, typeId: String, mainSyndicate: String, userNumber: String, lastRenewYear: String, statusID: Int, isOwner: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?): Observable<Unit> {
+        return remoteDataStore.requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1, doc2, doc3)
     }
 
     override fun bookTrip(mainSyndicateId: Int, userNumber: String, phone: String, tripID: Int, regimentID: Int, regimentDate: String, housingType: String, numChild: Int, ages: String, name: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?): Observable<Unit> {
@@ -86,16 +89,6 @@ class NeqabtyRepositoryImpl @Inject constructor(
 
     override fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>> {
         return remoteDataStore.getAllProviderTypes(type)
-    }
-
-    override fun registerUser(
-            mobile: String,
-            mainSyndicateId: Int,
-            subSyndicateId: Int,
-            token: String,
-            userNumber: String
-    ): Observable<Unit> {
-        return remoteDataStore.registerUser(mobile, mainSyndicateId, subSyndicateId, token, userNumber)
     }
 
     override fun getProviderDetails(id: String, type: String): Observable<ProviderEntity> {
@@ -192,17 +185,13 @@ class NeqabtyRepositoryImpl @Inject constructor(
                 }
     }
 
-    override fun login(mobile: String, password: String, token: String): Observable<UserEntity> {
-        return cachedDataStore.isEmpty().flatMap { empty ->
-            if (!empty) {
-                return@flatMap cachedDataStore.login(mobile, password, token)
-            } else {
-                return@flatMap remoteDataStore.login(mobile, password, token)
-                        .doOnNext { user ->
-                            saveUser(user)
-                        }
-            }
-        }
+
+    override fun loginUser(mobile: String, userNumber: String, token: String): Observable<UserEntity> {
+        return remoteDataStore.loginUser(mobile, userNumber,token)
+    }
+
+    override fun loginVisitor(mobile: String): Observable<UserEntity> {
+        return remoteDataStore.loginVisitor(mobile)
     }
 
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {

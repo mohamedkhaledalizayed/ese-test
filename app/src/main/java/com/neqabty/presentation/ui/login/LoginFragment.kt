@@ -8,6 +8,7 @@ import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.location.LocationManager
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +18,11 @@ import com.neqabty.R
 import com.neqabty.databinding.LoginFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import kotlinx.android.synthetic.main.login_fragment.*
 
 import javax.inject.Inject
 
@@ -37,6 +41,7 @@ class LoginFragment : BaseFragment(), Injectable {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setupToolbar(false)
         binding = DataBindingUtil.inflate(
                 inflater,
                 R.layout.login_fragment,
@@ -53,15 +58,8 @@ class LoginFragment : BaseFragment(), Injectable {
         loginViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(LoginViewModel::class.java)
 
-//        initializeObservers()
+        initializeObservers()
         initializeViews()
-        loginViewModel.login("01119850766", "123@pass", "c4baf341d52e53c01dd0ff4e2f930ab24886f22c5ef1b15e715534832c0e9528")
-
-//        loginViewModel.signup("m@m.m", "Mona", "Mohamed", "01119850766", "1", "1", "1", "123@pass")
-    }
-
-    private fun initializeGPS() {
-        loginViewModel.locationManager = this.context!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
 
     private fun initializeObservers() {
@@ -69,44 +67,56 @@ class LoginFragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
         loginViewModel.errorState.observe(this, Observer { throwable ->
-            throwable?.let {
-                Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
-            }
+            showConnectionAlert(requireContext(), retryCallback = {
+                binding.progressbar.visibility = View.VISIBLE
+                loginViewModel.login(edMobile.text.toString())
+            }, cancelCallback = {
+                binding.progressbar.visibility = View.GONE
+                navController().navigateUp()
+            })
+//            throwable?.let {
+//                Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
+//            }
         })
-
-        if (loginViewModel.photoFilePath.isNotBlank() && loginViewModel.weatherText.isBlank())
-            initializeGPS()
     }
 
     private fun handleViewState(state: LoginViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.user?.let {
+            PreferencesHelper(requireContext()).mobile = edMobile.text.toString()
+            PreferencesHelper(requireContext()).jwt = it.token
+            navController().navigate(LoginFragmentDirections.openSyndicatesFragment())
         }
     }
 
     fun initializeViews() {
-        binding.tvSignup.setOnClickListener {
-            navController().navigate(LoginFragmentDirections.signup())
+        binding.bSend.setOnClickListener {
+            if(isDataValid(edMobile.text.toString()))
+                loginViewModel.login(edMobile.text.toString())
         }
-//        binding.bCapture.setOnClickListener {
-//            grantCameraPermission()
-//        }
-//
-//        binding.bHistory.setOnClickListener {
-//            //        navController().navigate(
-// //                CaptureFragmentDirections.showHistory()
-// //        )
-//        }
-//
-//        binding.bShare.setOnClickListener { ImageUtils.share(this.context!!, loginViewModel.mCurrentPhotoPath) }
-//        binding.weatherLoaded = false
-//        binding.photoURL = ""
     }
 
 //region
 
-    private fun displayMessage(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    private fun isDataValid(mobile: String): Boolean {
+        return if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
+            true
+        else {
+            showAlert(getString(R.string.invalid_mobile))
+            false
+        }
+    }
+
+    private fun showAlert(msg: String) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(msg)
+        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
 // endregion

@@ -19,7 +19,7 @@ class MemberEntityUIMapper @Inject constructor() : Mapper<MemberEntity, MemberUI
                 expirationDate = from.expirationDate,
                 interfaceLanguage = from.interfaceLanguage,
                 lastPaymentDate = from.lastPaymentDate,
-                message = from.message,
+                message = "",
                 paymentType = from.paymentType
         )
     }

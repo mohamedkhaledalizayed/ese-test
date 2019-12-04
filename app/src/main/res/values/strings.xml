@@ -25,6 +25,7 @@
     <string name="personalDetails">البيانات الشخصية</string>
     <string name="confirm">تأكيد</string>
     <string name="welcome">مرحبا بكم</string>
+    <string name="welcome_to_neqabty">مرحبا بكم في تطبيق نقابتي</string>
     <string name="main">الرئيسية</string>
     <string name="aboutNeqaba">عن النقابة</string>
     <string name="settings">الاعدادات</string>
@@ -90,7 +91,7 @@
     <string name="laboratories">معامل التحاليل</string>
 
     <string name="mobile_title">تسجيل دخول</string>
-    <string name="enter_mobile">ادخل رقم الموبايل الخاص بك</string>
+    <string name="enter_mobile">برجاء ادخال رقم الهاتف المحمول الخاص بك</string>
     <string name="enter_member_number">ادخل رقم العضوية</string>
     <string name="medicalRequest">تقديم مطالبة طبية</string>
     <string name="syndicateNumber">رقم العضوية</string>
@@ -127,6 +128,7 @@
 
 
     <string name="syndicates_title">اختر النقابة المفضلة</string>
+    <string name="menu_memberName">اسم العضو:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="menu_syndicateNumber">رقم العضوية:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="menu_phoneNumber">رقم الموبايل:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="home_title">الرئيسية</string>
@@ -232,7 +234,7 @@
     </string>
 
     <string name="provider_title">
-    <![CDATA[<font color="#1d1ad2">مقدم الخدمة: </font>]]>%s
+    <![CDATA[<font color="#1d1ad2">%s: </font>]]>%s
     </string>
 
     <string name="status_title">
@@ -247,6 +249,18 @@
     <![CDATA[<font color="#1d1ad2">تعليق: </font>]]>%s
     </string>
 
+    <string name="cost">
+    <![CDATA[<font color="#1d1ad2">التكلفة: </font>]]>%s
+    </string>
+
+    <string name="child_num_title">
+    <![CDATA[<font color="#1d1ad2">عدد الأطفال: </font>]]>%s
+    </string>
+
+    <string name="housing_type_title">
+    <![CDATA[<font color="#1d1ad2">نوع الغرفة: </font>]]>%s
+    </string>
+
     <string name="type">النوع</string>
     <string name="no_data_found">لا توجد بيانات</string>
     <string name="no_providers_found">لا توجد بيانات في هذا القسم</string>
@@ -257,15 +271,23 @@
         - الصفحة التي تحتوي علي اخر ختم تجديد\n
         - اخر صفحة من صفحات السجل الهندسي</string>
 
-    <string name="records_add_photos_0"> برجاء رفع المرفقات التالية:</string>
+    <string name="records_add_photos_0">
+    <![CDATA[<font color="#1d1ad2"> برجاء رفع المرفقات التالية: </font>]]>
+    </string>
 
-    <string name="records_add_photos_1">- الصفحة المقيد بها بيانات المهندس والسجل الهندسي</string>
+    <string name="records_title">
+    <![CDATA[<font color="#1d1ad2"> بيانات السجل الهندسي </font>]]>
+    </string>
 
-    <string name="records_add_photos_2">- الصفحة التي تحتوي علي اخر ختم تجديد</string>
+    <string name="records_add_photos_1">∎ صفحة السجل المقيد بها بيانات السجل الهندسي</string>
 
-    <string name="records_add_photos_3">- اخر صفحة من صفحات السجل الهندسي</string>
+    <string name="records_add_photos_2">∎ صفحة السجل التي تحتوي علي اخر ختم تجديد</string>
 
-    <string name="update_data_add_photos"> برجاء رفع المرفقات التالية:</string>
+    <string name="records_add_photos_3">∎ اخر صفحات السجل الهندسي مقيد بها أعمال</string>
+
+    <string name="update_data_add_photos">
+            <![CDATA[<font color="#1d1ad2"> برجاء رفع المرفقات التالية: </font>]]>
+    </string>
     <string name="update_data_add_photos_1">- صورة وجه البطاقة</string>
     <string name="update_data_add_photos_2">- صورة ظهر البطاقة</string>
     <string name="update_data_add_photos_3">- صورة كارنيه العضوية</string>

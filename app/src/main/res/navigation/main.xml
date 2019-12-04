@@ -2,16 +2,23 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/homeFragment">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <action
+        android:id="@+id/openLoginFragment"
+        app:destination="@id/loginFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"/>
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.neqabty.presentation.ui.login.LoginFragment"
-        android:label="@string/login"
+        android:label="@string/mobile_title"
         tools:layout="@layout/login_fragment">
         <action
-            android:id="@+id/signup"
-            app:destination="@id/signupFragment" />
+            android:id="@+id/openSyndicatesFragment"
+            app:destination="@id/syndicatesFragment" />
     </fragment>
 
     <fragment

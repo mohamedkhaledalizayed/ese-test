@@ -20,23 +20,19 @@ class NotificationEntityUIMapper @Inject constructor() : Mapper<NotificationEnti
                 status = from.status,
                 approvalImage = from.approvalImage,
                 approvalNumber = from.approvalNumber,
-                area = from.area,
                 comment = from.comment,
-                degree = from.degree,
-                doc1 = from.doc1,
-                profession = from.profession,
-                providerName = from.providerName,
+                cost = from.cost,
                 userNumber = from.userNumber,
-                approvalAmountCost = from.approvalAmountCost,
                 housingType = from.housingType,
+                title = from.title,
                 name = from.name,
                 numChild = from.numChild,
                 regiment = from.regiment,
                 trip = from.trip,
-                type = if(from.notificationType == 1) "مطالبات طبية" else "الرحلات",
-                isRead = from.mobileView == 1,
-                detailsDate = from.detailsDate,
-                detailsTime = from.detailsTime
+                mobileView = from.mobileView,
+                notificationTypeID = from.notificationTypeID,
+                phone = from.phone,
+                isRead = from.mobileView == 1
         )
     }
 }

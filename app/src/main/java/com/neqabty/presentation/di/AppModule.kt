@@ -18,9 +18,13 @@ import com.neqabty.domain.NeqabtyCache
 import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.ASyncTransformer
+import com.neqabty.presentation.common.Constants
+import com.neqabty.presentation.util.PreferencesHelper
 import dagger.Module
 import dagger.Provides
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -40,16 +44,38 @@ class AppModule {
             this.level = HttpLoggingInterceptor.Level.BODY
         }
 
-        val client: OkHttpClient = OkHttpClient.Builder().apply {
-            this.addInterceptor(interceptor)
-        }.build()
+        val client: OkHttpClient = OkHttpClient.Builder()
+                .addInterceptor(object : Interceptor {
+                    override fun intercept(chain: Interceptor.Chain): Response {
+                        val request = chain.request()
+                        val response = chain.proceed(request)
+
+                        if (!request.url().url().toString().contains("upgrade", true)) {
+                            return response
+                        }
+
+                        var newRequest = request.newBuilder()
+                                // .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlZ3lwdFxcYWhtZWQuZm91YWRnb21hYSIsImV4cCI6MTU3NDA4MjkyMCwiaWF0IjoxNTc0MDY0OTIwfQ.n8CvCPxVyJnoSHcfD9ePMS48Q3nFdN3Lvqmmdi3oy947X7g99i2Bk_sReyzkyGw9appwTeht1F-dlx7IzrrxEA")
+                                .header("Authorization", "Bearer " + Constants.JWT)
+                                .header("Accept", "application/json")
+                                .removeHeader("Content-Type")
+                                .build()
+
+                        var newResponse = chain.proceed(newRequest)
+                        return newResponse
+                    }
+
+                })
+                .addInterceptor(interceptor)
+                .build()
 
         return Retrofit.Builder()
-            .baseUrl("http://eea.neqabty.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // LiveDataCallAdapterFactory()
-            .client(client)
-            .build()
+                .baseUrl("http://eea.neqabty.com/")
+//            .baseUrl("http://webapp.neqabty.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // LiveDataCallAdapterFactory()
+                .client(client)
+                .build()
     }
 
     @Singleton
@@ -62,9 +88,9 @@ class AppModule {
     @Provides
     fun provideDb(app: Application): NeqabtyDb {
         return Room
-            .databaseBuilder(app, NeqabtyDb::class.java, "Neqabty.db")
-            .fallbackToDestructiveMigration().allowMainThreadQueries()
-            .build()
+                .databaseBuilder(app, NeqabtyDb::class.java, "Neqabty.db")
+                .fallbackToDestructiveMigration().allowMainThreadQueries()
+                .build()
     }
 
     @Singleton
@@ -82,8 +108,8 @@ class AppModule {
     @Provides
     @Singleton
     fun provideWeatherRepository(
-        api: WebService,
-        @Named(DI.inMemoryCache) cache: NeqabtyCache
+            api: WebService,
+            @Named(DI.inMemoryCache) cache: NeqabtyCache
     ): NeqabtyRepository {
 
         val cachedWeatherDataStore = CachedNeqabtyDataStore(cache)
@@ -107,8 +133,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideLoginUser(neqabtyRepository: NeqabtyRepository): LoginUser {
-        return LoginUser(ASyncTransformer(), neqabtyRepository)
+    fun provideLoginUser(neqabtyRepository: NeqabtyRepository): GetVisitorLoggedIn {
+        return GetVisitorLoggedIn(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
@@ -119,8 +145,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideGetUserRegistered(neqabtyRepository: NeqabtyRepository): GetUserRegistered {
-        return GetUserRegistered(ASyncTransformer(), neqabtyRepository)
+    fun provideGetUserRegistered(neqabtyRepository: NeqabtyRepository): GetUserLoggedIn {
+        return GetUserLoggedIn(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
@@ -128,6 +154,7 @@ class AppModule {
     fun provideGetAppVersion(neqabtyRepository: NeqabtyRepository): GetAppVersion {
         return GetAppVersion(ASyncTransformer(), neqabtyRepository)
     }
+
     @Singleton
     @Provides
     fun provideGetAllSyndicates(neqabtyRepository: NeqabtyRepository): GetAllSyndicates {
@@ -238,7 +265,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideBookTrip (neqabtyRepository: NeqabtyRepository): BookTrip {
+    fun provideBookTrip(neqabtyRepository: NeqabtyRepository): BookTrip {
         return BookTrip(ASyncTransformer(), neqabtyRepository)
     }
 
@@ -280,6 +307,13 @@ class AppModule {
     @Provides
     fun provideVerifyUpdateUserData(neqabtyRepository: NeqabtyRepository): VerifyUpdateUserData {
         return VerifyUpdateUserData(ASyncTransformer(), neqabtyRepository)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideValidateUserForClaiming(neqabtyRepository: NeqabtyRepository): ValidateUserForClaiming {
+        return ValidateUserForClaiming(ASyncTransformer(), neqabtyRepository)
     }
 
 

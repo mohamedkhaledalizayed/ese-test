@@ -61,22 +61,30 @@
                             android:id="@+id/tvDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{Html.fromHtml(@string/date_title(notificationItem.detailsDate))}"
+                            android:text="@{Html.fromHtml(@string/date_title(notificationItem.date))}"
                             android:textSize="@dimen/text_size_large" />
 
                         <TextView
                             android:id="@+id/tvTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{Html.fromHtml(@string/time(notificationItem.detailsTime))}"
+                            android:text="@{Html.fromHtml(@string/time(notificationItem.time))}"
                             android:textSize="@dimen/text_size_large" />
 
+                        <!--<TextView-->
+                            <!--android:id="@+id/tvProviderName"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="@{Html.fromHtml(@string/provider_title(notificationItem.title,notificationItem.name))}"-->
+                            <!--android:visibility='@{notificationItem.name == null ? View.GONE : View.VISIBLE}'-->
+                            <!--android:textSize="@dimen/text_size_large" />-->
+
                         <TextView
-                            android:id="@+id/tvProviderName"
+                            android:id="@+id/tvName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{Html.fromHtml(@string/provider_title(notificationItem.providerName))}"
-                            android:visibility='@{notificationItem.providerName == null ? View.GONE : View.VISIBLE}'
+                            android:text="@{Html.fromHtml(@string/provider_title(notificationItem.title,notificationItem.name))}"
+                            android:visibility='@{(notificationItem.name == null || notificationItem.name == "") ? View.GONE : View.VISIBLE}'
                             android:textSize="@dimen/text_size_large" />
 
                         <TextView
@@ -117,6 +125,30 @@
                             android:text="@{Html.fromHtml(@string/comment(notificationItem.comment))}"
                             android:visibility='@{notificationItem.comment.equals("") || notificationItem.comment == null ? View.GONE : View.VISIBLE}'
                             android:textSize="@dimen/text_size_large" />
+
+                        <TextView
+                            android:id="@+id/tvCost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{Html.fromHtml(@string/cost(notificationItem.cost))}"
+                            android:textSize="@dimen/text_size_large"
+                            android:visibility='@{notificationItem.cost == null ? View.GONE : View.VISIBLE}' />
+
+                        <TextView
+                            android:id="@+id/tvHousingType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{Html.fromHtml(@string/housing_type_title(notificationItem.housingType))}"
+                            android:textSize="@dimen/text_size_large"
+                            android:visibility='@{notificationItem.housingType == null ? View.GONE : View.VISIBLE}' />
+
+                        <TextView
+                            android:id="@+id/tvChildNum"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{Html.fromHtml(@string/child_num_title(notificationItem.numChild))}"
+                            android:textSize="@dimen/text_size_large"
+                            android:visibility='@{notificationItem.numChild == null ? View.GONE : View.VISIBLE}' />
 
                         <android.support.v7.widget.CardView
                             android:layout_width="match_parent"

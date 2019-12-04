@@ -2,13 +2,14 @@ package com.neqabty.domain.usecases
 
 import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.common.Transformer
+import com.neqabty.domain.entities.UserEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class GetUserRegistered @Inject constructor(
-    transformer: Transformer<Unit>,
+class GetUserLoggedIn @Inject constructor(
+    transformer: Transformer<UserEntity>,
     private val neqabtyRepository: NeqabtyRepository
-) : UseCase<Unit>(transformer) {
+) : UseCase<UserEntity>(transformer) {
 
     companion object {
         private const val PARAM_MOBILE = "param:mobile"
@@ -18,7 +19,7 @@ class GetUserRegistered @Inject constructor(
         private const val PARAM_USER_NUMBER = "param:userNumber"
     }
 
-    fun getUserRegistered(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, userNumber: String): Observable<Unit> {
+    fun getUserRegistered(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, userNumber: String): Observable<UserEntity> {
         val data = HashMap<String, Any>()
         data[PARAM_MOBILE] = mobile
         data[PARAM_MAIN_SYNDICATE] = mainSyndicateId
@@ -28,12 +29,12 @@ class GetUserRegistered @Inject constructor(
         return observable(data)
     }
 
-    override fun createObservable(data: Map<String, Any>?): Observable<Unit> {
-        val mobile = data?.get(GetUserRegistered.PARAM_MOBILE) as String
-        val mainSyndicateId = data?.get(GetUserRegistered.PARAM_MAIN_SYNDICATE) as Int
-        val subSyndicateId = data?.get(GetUserRegistered.PARAM_SUB_SYNDICATE) as Int
-        val token = data?.get(GetUserRegistered.PARAM_TOKEN) as String
-        val userNumber = data?.get(GetUserRegistered.PARAM_USER_NUMBER) as String
-        return neqabtyRepository.registerUser(mobile, mainSyndicateId, subSyndicateId, token, userNumber)
+    override fun createObservable(data: Map<String, Any>?): Observable<UserEntity> {
+        val mobile = data?.get(GetUserLoggedIn.PARAM_MOBILE) as String
+        val mainSyndicateId = data?.get(GetUserLoggedIn.PARAM_MAIN_SYNDICATE) as Int
+        val subSyndicateId = data?.get(GetUserLoggedIn.PARAM_SUB_SYNDICATE) as Int
+        val token = data?.get(GetUserLoggedIn.PARAM_TOKEN) as String
+        val userNumber = data?.get(GetUserLoggedIn.PARAM_USER_NUMBER) as String
+        return neqabtyRepository.loginUser(mobile, userNumber ,token)
     }
 }

@@ -20,7 +20,7 @@ data class RegisteryData(
         var fullName: String?,
         @field:SerializedName("LastRenewYear")
         var lastRenewYear: String?,
-        @field:SerializedName("RegistryTypeID")
+        @field:SerializedName("RegistryTypeName")
         var registryTypeID: String?,
         @field:SerializedName("RegDataStatusID")
         var regDataStatusID: String?,

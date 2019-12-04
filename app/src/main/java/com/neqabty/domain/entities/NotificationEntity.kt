@@ -1,27 +1,23 @@
 package com.neqabty.domain.entities
 
 data class NotificationEntity(
-        var notificationType: Int = 0,
         var id: Int = 0,
+        var notificationTypeID: Int = 0,
+        var notificationType: String?,
+        var status: String?,
         var date: String?,
         var time: String?,
-        var userNumber: Int = 0,
-        var profession: String?,
-        var degree: String?,
-        var area: String?,
-        var providerName: String?,
-        var status: String?,
+        var mobileView: Int?,
+        var userNumber: Int,
         var approvalNumber: String?,
         var approvalImage: String?,
         var comment: String?,
-        var doc1: String?,
+        var title: String?,
+        var name: String?,
         var trip: String?,
         var regiment: String?,
-        var approvalAmountCost: String?,
+        var cost: String?,
         var housingType: String?,
         var numChild: String?,
-        var name: String?,
-        var mobileView: Int?,
-        var detailsDate: String?,
-        var detailsTime: String?
+        var phone: String?
 )

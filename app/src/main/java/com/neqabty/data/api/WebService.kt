@@ -95,8 +95,8 @@ interface WebService {
     @GET("api/v1/Service/inquiry")
     fun validateUser(@Query("OldRefID") userNumber:Int, @Query("ServiceGroupID") serviceGroupID:Int): Observable<MemberData>
 
-//    @POST("http://18.188.152.62:3000/neqabty/inquiry")
-//    fun validateUser(@Body validationRequest: ValidationRequest): Observable<MemberData>
+    @POST("api/v2/medical/Beneficiary")
+    fun validateUser(@Body claimingValidationRequest: ClaimingValidationRequest): Observable<ApiResponse<ClaimingValidationData>>
 
     @POST("api/v1/Engineer/search")
     fun updateUserDataInquiry(@Body inquireUpdateUserDataRequest: InquireUpdateUserDataRequest): Observable<InquireUpdateUserData>
@@ -114,8 +114,16 @@ interface WebService {
     @POST("api/EnginneringRecordsRegistry/request")
     fun engineeringRecordsRequest(
             @Part("json_request") engineeringRecordsRequest: EngineeringRecordsRequest,
-            @Part doc1: MultipartBody.Part?
+            @Part doc1: MultipartBody.Part?,
+            @Part doc2: MultipartBody.Part?,
+            @Part doc3: MultipartBody.Part?
     ): Observable<ApiResponse<Unit>>
+
+    @POST("http://test.neqabty.com/api/v1/login/member/mobile")
+    fun loginVisitor(@Body loginVisitorRequest: LoginVisitorRequest): Observable<ApiResponse<UserData>>
+
+    @POST("http://test.neqabty.com/api/v1/upgrade/member/client")
+    fun loginUser(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>
 
     @POST("api/Auth/Login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>

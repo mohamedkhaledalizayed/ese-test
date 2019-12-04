@@ -93,28 +93,24 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 //            showMemberValidationAlert(state.member?.message!!)
 //            state.member?.message = null
 //        }
-//        if (state.governs != null && state.areas != null && isValid) {
-//            binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
-//            state.governs?.let {
-//                governsResultList = it
-//            }
-//            state.areas?.let {
-//                areasResultList = it
-//            }
-//            if (state.governs != null && state.areas != null)
-//                initializeViews()
-//        }
 
-        if (state.member != null && state.member?.amount?.toInt() == 0 && !isValid) {
-            val prefs = PreferencesHelper(requireContext())
-            binding.progressbar.visibility = View.VISIBLE
-            memberName = state.member!!.engineerName!!
-            isValid = true
-            claimingViewModel.getAllContent1()
-        } else if (state.member?.message != null && !isValid) {
-            showMemberValidationAlert(getString(R.string.user_not_allowed))
-            state.member?.message = null
+        if (state.member != null && !isValid) {
+            when(state.member?.code) {
+                0 -> {
+                    val prefs = PreferencesHelper(requireContext())
+                    binding.progressbar.visibility = View.VISIBLE
+                    memberName = state.member!!.engineerName
+                    isValid = true
+                    claimingViewModel.getAllContent1()
+                    state.member = null
+                }
+                else -> {
+                    if(state.member?.message != null) showMemberValidationAlert(state.member?.message ?: getString(R.string.user_not_allowed))
+                    state.member?.message = null
+                }
+            }
         }
+
         if (state.governs != null && state.areas != null && isValid) {
             binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
             state.governs?.let {
@@ -209,7 +205,9 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
             dialog.dismiss()
             navController().popBackStack()
-            navController().navigate(R.id.mobileFragment)
+            var bundle = Bundle()
+            bundle.putInt("type" , 1)
+            navController().navigate(R.id.mobileFragment , bundle)
         }
 
         val dialog: AlertDialog = builder.create()

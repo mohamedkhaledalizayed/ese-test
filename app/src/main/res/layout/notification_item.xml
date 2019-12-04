@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{Html.fromHtml(@string/type_title(notification.type))}"
+                android:text="@{Html.fromHtml(@string/type_title(notification.notificationType))}"
                 android:textSize="@dimen/text_size_medium"
                 android:typeface="@{notification.isRead}" />
 
@@ -67,28 +67,28 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="@{Html.fromHtml(@string/provider_title(notification.name))}"
+                android:text="@{Html.fromHtml(@string/provider_title(notification.title,notification.name))}"
                 android:textSize="@dimen/text_size_medium"
                 android:typeface="@{notification.isRead}"
-                android:visibility='@{notification.name == null ? View.GONE : View.VISIBLE}' />
+                android:visibility='@{(notification.name == null || notification.name == "") ? View.GONE : View.VISIBLE}' />
 
-            <TextView
-                android:id="@+id/tvTrip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{Html.fromHtml(@string/trip_title(notification.trip))}"
-                android:textSize="@dimen/text_size_medium"
-                android:typeface="@{notification.isRead}"
-                android:visibility='@{notification.trip == null ? View.GONE : View.VISIBLE}' />
+            <!--<TextView-->
+                <!--android:id="@+id/tvTrip"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@{Html.fromHtml(@string/trip_title(notification.trip))}"-->
+                <!--android:textSize="@dimen/text_size_medium"-->
+                <!--android:typeface="@{notification.isRead}"-->
+                <!--android:visibility='@{notification.trip == null ? View.GONE : View.VISIBLE}' />-->
 
-            <TextView
-                android:id="@+id/tvRegiment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{Html.fromHtml(@string/regiment_title(notification.regiment))}"
-                android:textSize="@dimen/text_size_medium"
-                android:typeface="@{notification.isRead}"
-                android:visibility='@{notification.regiment == null ? View.GONE : View.VISIBLE}' />
+            <!--<TextView-->
+                <!--android:id="@+id/tvRegiment"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@{Html.fromHtml(@string/regiment_title(notification.regiment))}"-->
+                <!--android:textSize="@dimen/text_size_medium"-->
+                <!--android:typeface="@{notification.isRead}"-->
+                <!--android:visibility='@{notification.regiment == null ? View.GONE : View.VISIBLE}' />-->
 
             <TextView
                 android:id="@+id/tvStatus"

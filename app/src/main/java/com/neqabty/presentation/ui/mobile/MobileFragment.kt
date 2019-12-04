@@ -17,6 +17,7 @@ import com.neqabty.R
 import com.neqabty.databinding.MobileFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.ui.trips.TripsData
@@ -62,26 +63,29 @@ class MobileFragment : BaseFragment(), Injectable {
         mobileViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        mobileViewModel.errorState.observe(this, Observer { _ ->
+        mobileViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), PreferencesHelper(requireContext()).user)
+                mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            } , message = error?.message)
         })
         initializeViews()
     }
 
     fun initializeViews() {
+        if (PreferencesHelper(requireContext()).mobile.isNotEmpty())
+            binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
+
         if (!PreferencesHelper(requireContext()).user.equals("null"))
             binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
 
         binding.bSend.setOnClickListener {
+            Constants.JWT = PreferencesHelper(requireContext()).jwt
             if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString())) {
-                PreferencesHelper(requireContext()).user = binding.edMemberNumber.text.toString()
                 if (PreferencesHelper(requireContext()).token.isNotBlank())
-                    mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), PreferencesHelper(requireContext()).user)
+                    mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
                 else {
                     FirebaseInstanceId.getInstance().instanceId
                             .addOnCompleteListener(OnCompleteListener { task ->
@@ -89,7 +93,7 @@ class MobileFragment : BaseFragment(), Injectable {
                                     return@OnCompleteListener
                                 val token = task.result?.token
                                 mobileViewModel.registerUser(binding.edMobile.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, token
-                                        ?: "", PreferencesHelper(requireContext()), PreferencesHelper(requireContext()).user)
+                                        ?: "", PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
                             })
                 }
             }
@@ -99,6 +103,7 @@ class MobileFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: MobileViewState) {
         binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful) {
+            PreferencesHelper(requireContext()).user = binding.edMemberNumber.text.toString()
             activity?.invalidateOptionsMenu()
             when (type) {
                 1 -> navController().navigate(

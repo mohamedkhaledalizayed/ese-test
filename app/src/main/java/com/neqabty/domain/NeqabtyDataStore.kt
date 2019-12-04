@@ -27,7 +27,6 @@ interface NeqabtyDataStore {
     ): Observable<List<ProviderEntity>>
 
     fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>>
-    fun registerUser(mobile: String, mainSyndicateId: Int, subSyndicateId: Int, token: String, userNumber: String): Observable<Unit>
     fun getNotificationsCount( userNumber: Int): Observable<NotificationsCountEntity>
     fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>>
     fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity>
@@ -71,6 +70,7 @@ interface NeqabtyDataStore {
     ): Observable<Unit>
 
     fun validateUser(userNumber: Int): Observable<MemberEntity>
+    fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>
     fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity>
     fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity>
@@ -85,9 +85,13 @@ interface NeqabtyDataStore {
             statusID: Int,
             isOwner: Int,
             docsNumber: Int,
-            doc1: File?): Observable<Unit>
+            doc1: File?,
+            doc2: File?,
+            doc3: File?): Observable<Unit>
 
-    fun login(mobile: String, password: String, token: String): Observable<UserEntity>
+
+    fun loginVisitor(mobile: String): Observable<UserEntity>
+    fun loginUser(mobile: String , userNumber: String, token: String): Observable<UserEntity>
     fun signup(
             email: String,
             fName: String,

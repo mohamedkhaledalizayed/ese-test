@@ -111,7 +111,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         val navController = Navigation.findNavController(this, R.id.container)
 //        graph.desetDefaultArguments(intent.extras)
 
-        if (PreferencesHelper(this).isSyndicateChosen()) // TODO
+        if (PreferencesHelper(this).mobile.isEmpty()) // TODO
+            graph.startDestination = R.id.loginFragment
+        else if (PreferencesHelper(this).isSyndicateChosen()) // TODO
             graph.startDestination = R.id.homeFragment
         else
             graph.startDestination = R.id.syndicatesFragment
@@ -284,16 +286,34 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         nav_view.getHeaderView(0).findViewById<Button>(R.id.bLogout).setOnClickListener {
             PreferencesHelper(this).isRegistered = false
             PreferencesHelper(this).user = ""
+            PreferencesHelper(this).name = ""
+            PreferencesHelper(this).mobile = ""
             PreferencesHelper(this).notificationsCount = 0
             invalidateOptionsMenu()
+
+            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            Navigation.findNavController(this, R.id.container)
+                    .navigate(R.id.openLoginFragment)
         }
-//        nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvName).setText(getString(R.string.member_name) +" : " + PreferencesHelper(this).user)
-        nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
+
+        if(PreferencesHelper(this).name.isNotEmpty()) {
+            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
+            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).setText(Html.fromHtml(getString(R.string.menu_memberName, PreferencesHelper(this).name)))
+        } else
+            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
+
+        if(PreferencesHelper(this).user.isNotEmpty()) {
+            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.VISIBLE
+            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
+        } else
+            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.GONE
+
         nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, PreferencesHelper(this).mobile)))
 
-        nav_view.getHeaderView(0).visibility = if (PreferencesHelper(this).isRegistered) View.VISIBLE else View.GONE
+        nav_view.getHeaderView(0).visibility = if (PreferencesHelper(this).mobile.isNotEmpty()) View.VISIBLE else View.GONE
 
-        if (!PreferencesHelper(this).isRegistered)
+        if (!PreferencesHelper(this).mobile.isNotEmpty())
             nav_view.getChildAt(0).setPadding(0, 100, 0, 0)
         else
             nav_view.getChildAt(0).setPadding(0, 0, 0, 0)

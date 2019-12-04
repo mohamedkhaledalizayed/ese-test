@@ -18,27 +18,22 @@
             android:id="@+id/ivHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scaleType="fitXY"
             android:src="@mipmap/header_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_share"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/margin_horizontal_large"
+            android:paddingEnd="@dimen/margin_horizontal_large"
+            android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivHeader"
-            android:paddingStart="@dimen/margin_horizontal_extra_large"
-            android:paddingEnd="@dimen/margin_horizontal_extra_large">
+            app:layout_constraintTop_toBottomOf="@id/ivHeader">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,54 +41,91 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/welcome_to_neqabty"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/enter_mobile"
+                    android:textSize="@dimen/text_size_medium" />
 
                 <EditText
                     android:id="@+id/edMobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/phone_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
-
-                    android:hint="@string/phoneNumber"
-                    android:inputType="phone"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <EditText
-                    android:id="@+id/edPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@mipmap/password_ic"
-                    android:drawablePadding="@dimen/margin_horizontal_small"
-
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_large" />
 
                 <Button
-                    android:id="@+id/bLogin"
+                    android:id="@+id/bSend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
                     android:background="@mipmap/btn"
-
-                    android:padding="@dimen/margin_horizontal_small"
-                    android:text="@string/login"
                     android:gravity="center"
+                    android:padding="@dimen/margin_horizontal_small"
+                    android:text="@string/send"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
 
-                <TextView
-                    android:id="@+id/tvSignup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <!--<EditText-->
+                    <!--android:id="@+id/edMobile"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:drawableStart="@mipmap/phone_ic"-->
+                    <!--android:drawablePadding="@dimen/margin_horizontal_small"-->
 
-                    android:text="@string/register"
-                    android:textSize="@dimen/text_size_medium" />
+                    <!--android:hint="@string/phoneNumber"-->
+                    <!--android:inputType="phone"-->
+                    <!--android:textSize="@dimen/text_size_medium" />-->
 
+                <!--<EditText-->
+                    <!--android:id="@+id/edPassword"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:drawableStart="@mipmap/password_ic"-->
+                    <!--android:drawablePadding="@dimen/margin_horizontal_small"-->
 
-                <!--<com.facebook.login.widget.LoginButton-->
-                    <!--android:id="@+id/bFBLogin"-->
+                    <!--android:hint="@string/password"-->
+                    <!--android:inputType="textPassword"-->
+                    <!--android:textSize="@dimen/text_size_medium" />-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/bLogin"-->
                     <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@mipmap/btn"-->
+
+                    <!--android:padding="@dimen/margin_horizontal_small"-->
+                    <!--android:text="@string/login"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textColor="@android:color/white"-->
+                    <!--android:textSize="@dimen/text_size_medium" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvSignup"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:text="@string/register"-->
+                    <!--android:textSize="@dimen/text_size_medium" />-->
+
+
+                <!--&lt;!&ndash;<com.facebook.login.widget.LoginButton&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/bFBLogin"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
 
             </LinearLayout>
         </ScrollView>

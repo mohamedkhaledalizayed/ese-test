@@ -18,22 +18,18 @@ class NotificationDataEntityMapper @Inject constructor() : Mapper<NotificationDa
                 status = from.status,
                 approvalImage = from.approvalImage,
                 approvalNumber = from.approvalNumber,
-                area = from.area,
                 comment = from.comment,
-                degree = from.degree,
-                doc1 = from.doc1,
-                profession = from.profession,
-                providerName = from.providerName,
+                cost = from.cost,
                 userNumber = from.userNumber,
-                approvalAmountCost = from.approvalAmountCost,
                 housingType = from.housingType,
+                title = from.title,
                 name = from.name,
                 numChild = from.numChild,
                 regiment = from.regiment,
                 trip = from.trip,
                 mobileView = from.mobileView,
-                detailsDate = from.detailsDate,
-                detailsTime = from.detailsTime
+                notificationTypeID = from.notificationTypeID,
+                phone = from.phone
         )
     }
 }

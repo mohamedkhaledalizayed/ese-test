@@ -12,7 +12,7 @@ data class MemberUI(
     var code: Int?,
     var interfaceLanguage: String?,
     var lastPaymentDate: String?,
-    var message: String?,
+    var message: String? = "",
     var amount: Int?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(

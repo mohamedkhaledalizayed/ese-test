@@ -31,61 +31,83 @@
                 android:id="@+id/svContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/margin_horizontal_large"
-                android:visibility="gone"
-                android:scrollbars="none">
+                android:fillViewport="true"
+                android:scrollbars="none"
+                android:visibility="gone">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+
                     <TextView
-                        android:id="@+id/tvMemberName"
+                        android:id="@+id/tvTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{Html.fromHtml(@string/name_title(memberItem.fullName))}"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:background="@color/light_grey"
+                        android:padding="@dimen/margin_horizontal_small"
+                        android:text="@{Html.fromHtml(@string/records_title)}"
                         android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvUserNumber"
-                        android:layout_width="match_parent"
+                        android:id="@+id/tvMemberName"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@{Html.fromHtml(@string/name_title(memberItem.fullName))}"
+                        android:textSize="@dimen/text_size_large"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+                    <TextView
+                        android:id="@+id/tvUserNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@{Html.fromHtml(@string/user_number_title(memberItem.registryDataID))}"
                         android:textSize="@dimen/text_size_large"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvMemberName" />
 
 
                     <TextView
                         android:id="@+id/tvType"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@{Html.fromHtml(@string/record_type_title(memberItem.registryTypeID))}"
                         android:textSize="@dimen/text_size_large"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvUserNumber" />
 
                     <TextView
                         android:id="@+id/tvRenewalDate"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@{Html.fromHtml(@string/last_renewal_date_title(memberItem.lastRenewYear))}"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
                         app:layout_constraintTop_toBottomOf="@id/tvType" />
 
                     <TextView
                         android:id="@+id/tvAddPhoto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/records_add_photos_0"
-                        android:textSize="@dimen/text_size_large"
                         android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:background="@color/light_grey"
+                        android:padding="@dimen/margin_horizontal_small"
+                        android:text="@{Html.fromHtml(@string/records_add_photos_0)}"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvRenewalDate" />
 
@@ -96,26 +118,29 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginEnd="@dimen/margin_horizontal_normal"
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_add"
-                        android:tint="@color/colorAccent"
                         android:text="@string/update_data_add_photo"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_size_medium"
+                        android:tint="@color/colorAccent"
+                        app:layout_constraintBottom_toBottomOf="@id/tvAddPhoto_1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_1"
-                        app:layout_constraintTop_toBottomOf="@id/tvAddPhoto" />
+                        app:layout_constraintTop_toTopOf="@id/tvAddPhoto_1" />
 
                     <TextView
                         android:id="@+id/tvAddPhoto_1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@string/records_add_photos_1"
                         android:textSize="@dimen/text_size_medium"
-                        app:layout_constraintBottom_toBottomOf="@id/ibAddPhoto_1"
                         app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_1"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/ibAddPhoto_1" />
+                        app:layout_constraintTop_toBottomOf="@id/tvAddPhoto" />
 
 
                     <ImageButton
@@ -125,12 +150,13 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/margin_horizontal_normal"
                         android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:layout_marginEnd="@dimen/margin_horizontal_normal"
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_add"
-                        android:tint="@color/colorAccent"
                         android:text="@string/update_data_add_photo"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_size_medium"
+                        android:tint="@color/colorAccent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_2"
                         app:layout_constraintTop_toBottomOf="@id/ibAddPhoto_1" />
@@ -139,6 +165,7 @@
                         android:id="@+id/tvAddPhoto_2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
                         android:text="@string/records_add_photos_2"
                         android:textSize="@dimen/text_size_medium"
                         app:layout_constraintBottom_toBottomOf="@id/ibAddPhoto_2"
@@ -154,12 +181,13 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/margin_horizontal_normal"
                         android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:layout_marginEnd="@dimen/margin_horizontal_normal"
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_add"
-                        android:tint="@color/colorAccent"
                         android:text="@string/update_data_add_photo"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_size_medium"
+                        android:tint="@color/colorAccent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_3"
                         app:layout_constraintTop_toBottomOf="@id/ibAddPhoto_2" />
@@ -168,6 +196,7 @@
                         android:id="@+id/tvAddPhoto_3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
                         android:text="@string/records_add_photos_3"
                         android:textSize="@dimen/text_size_medium"
                         app:layout_constraintBottom_toBottomOf="@id/ibAddPhoto_3"
@@ -200,6 +229,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/ibAddPhoto_3" />
+
                 </android.support.constraint.ConstraintLayout>
 
             </ScrollView>

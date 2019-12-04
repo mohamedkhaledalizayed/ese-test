@@ -29,10 +29,10 @@ open class BaseFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = title
     }
 
-    fun showConnectionAlert(context: Context, retryCallback: (() -> Unit), cancelCallback: (() -> Unit)) {
+    fun showConnectionAlert(context: Context, retryCallback: (() -> Unit), cancelCallback: (() -> Unit), message: String? = getString(R.string.error_msg)) {
         builder = AlertDialog.Builder(context)
         builder?.setTitle(getString(R.string.error))
-        builder?.setMessage(getString(R.string.error_msg))
+        builder?.setMessage(message)
         builder?.setCancelable(false)
         builder?.setPositiveButton(getString(R.string.no_connection_retry)) { dialog, which ->
             retryCallback.invoke()

@@ -12,6 +12,10 @@ import javax.inject.Singleton
 @Singleton
 
 class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: NeqabtyCache) : NeqabtyDataStore {
+    override fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -28,7 +32,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun requestEngineeringRecords(name: String, phone: String, typeId: String, mainSyndicate: String, userNumber: String, lastRenewYear: String, statusID: Int, isOwner: Int, docsNumber: Int, doc1: File?): Observable<Unit> {
+    override fun requestEngineeringRecords(name: String, phone: String, typeId: String, mainSyndicate: String, userNumber: String, lastRenewYear: String, statusID: Int, isOwner: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?): Observable<Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -101,16 +105,6 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun registerUser(
-        mobile: String,
-        mainSyndicateId: Int,
-        subSyndicateId: Int,
-        token: String,
-        userNumber: String
-    ): Observable<Unit> {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun getProviderDetails(id: String, type: String): Observable<ProviderEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -166,7 +160,11 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         return neqabtyCache.saveTrips(trips)
     }
 
-    override fun login(mobile: String, password: String, token: String): Observable<UserEntity> {
+    override fun loginUser(mobile: String, userNumber: String, token: String): Observable<UserEntity> {
+        return neqabtyCache.getUser()
+    }
+
+    override fun loginVisitor(mobile: String): Observable<UserEntity> {
         return neqabtyCache.getUser()
     }
 
