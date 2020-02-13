@@ -114,7 +114,8 @@
                         android:id="@+id/llChildren"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tvChildren"
@@ -199,6 +200,28 @@
                             android:textSize="@dimen/text_size_medium"
                             android:visibility="gone" />
                     </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvCompanions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_horizontal_small"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:listitem="@layout/photo_item" />
+
+                    <Button
+                        android:id="@+id/bAttachCompanion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@mipmap/btn"
+                        android:elevation="@dimen/elevation_level_one"
+                        android:gravity="center"
+                        android:text="@string/attach_companion"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_medium" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvPhotos"

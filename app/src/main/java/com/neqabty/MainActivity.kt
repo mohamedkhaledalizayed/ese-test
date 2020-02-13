@@ -34,6 +34,7 @@ import com.neqabty.presentation.util.*
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.main_activity.*
+import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         setSupportActionBar(toolbar)
 //        verifyAvailableNetwork()//TODO
         getToken()
+//        checkRoot()
         startActivities()
         val notificationId: String? = intent?.extras?.getString("notificationId")
         notificationId?.let {
@@ -76,33 +78,38 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
 
-    private fun verifyAvailableNetwork() {
-        val connectivityManager =
-                this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.activeNetworkInfo
-        if (networkInfo != null && networkInfo.isConnected) {
-            getToken()
-            startActivities()
-        } else {
-            showConnectionAlert()
-        }
-    }
+//    private fun verifyAvailableNetwork() {
+//        val connectivityManager =
+//                this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+//        val networkInfo = connectivityManager.activeNetworkInfo
+//        if (networkInfo != null && networkInfo.isConnected) {
+//            getToken()
+//            startActivities()
+//        } else {
+//            showConnectionAlert()
+//        }
+//    }
 
-    private fun showConnectionAlert() {
-        val builder = AlertDialog.Builder(this@MainActivity)
-        builder.setTitle(getString(R.string.alert_title))
-        builder.setMessage(getString(R.string.no_connection_msg))
-        builder.setCancelable(false)
-        builder.setPositiveButton(getString(R.string.no_connection_retry)) { dialog, which ->
-            verifyAvailableNetwork()
-        }
-        builder.setNegativeButton(getString(R.string.no_connection_cancel)) { dialog, which ->
-            finishAffinity()
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
+//    private fun showConnectionAlert() {
+//        val builder = AlertDialog.Builder(this@MainActivity)
+//        builder.setTitle(getString(R.string.alert_title))
+//        builder.setMessage(getString(R.string.no_connection_msg))
+//        builder.setCancelable(false)
+//        builder.setPositiveButton(getString(R.string.no_connection_retry)) { dialog, which ->
+//            verifyAvailableNetwork()
+//        }
+//        builder.setNegativeButton(getString(R.string.no_connection_cancel)) { dialog, which ->
+//            finishAffinity()
+//        }
+//        val dialog: AlertDialog = builder.create()
+//        dialog.show()
+//    }
 
+//    private fun checkRoot(){
+//        if (DeviceUtils().isDeviceRooted()) {
+//            showAlertDialogAndExitApp(getString(R.string.root_msg));
+//        }
+//    }
     private fun startActivities() {
         val navHostFragment =
                 supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
@@ -152,27 +159,27 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.medical_fragment -> {
                     navController.navigate(R.id.chooseAreaFragment)
                 }
-                R.id.inquiry_fragment -> {
-                    navController.navigate(R.id.inquiryFragment)
-                }
-                R.id.engineering_records_fragment -> {
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
-                    else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", 3)
-                        navController.navigate(R.id.mobileFragment, bundle)
-                    }
-                }
-                R.id.update_data_fragment -> {
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.updateDataDetailsFragment)
-                    else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", 4)
-                        navController.navigate(R.id.mobileFragment, bundle)
-                    }
-                }
+//                R.id.inquiry_fragment -> {
+//                    navController.navigate(R.id.inquiryFragment)
+//                }
+//                R.id.engineering_records_fragment -> {
+//                    if (PreferencesHelper(this).isRegistered)
+//                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
+//                    else {
+//                        val bundle: Bundle = Bundle()
+//                        bundle.putInt("type", 3)
+//                        navController.navigate(R.id.mobileFragment, bundle)
+//                    }
+//                }
+//                R.id.update_data_fragment -> {
+//                    if (PreferencesHelper(this).isRegistered)
+//                        navController.navigate(R.id.updateDataDetailsFragment)
+//                    else {
+//                        val bundle: Bundle = Bundle()
+//                        bundle.putInt("type", 4)
+//                        navController.navigate(R.id.mobileFragment, bundle)
+//                    }
+//                }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
                 }
@@ -288,7 +295,15 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             PreferencesHelper(this).user = ""
             PreferencesHelper(this).name = ""
             PreferencesHelper(this).mobile = ""
+            PreferencesHelper(this).token = ""
             PreferencesHelper(this).notificationsCount = 0
+            Thread(Runnable {
+                try {
+                    FirebaseInstanceId.getInstance().deleteInstanceId()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }).start()
             invalidateOptionsMenu()
 
             drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
@@ -360,6 +375,20 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun showAlertDialogAndExitApp(message: String) {
+        val alertDialog = AlertDialog.Builder(applicationContext!!).create()
+        alertDialog.setTitle("Alert")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(false)
+        alertDialog.setButton(
+                AlertDialog.BUTTON_NEUTRAL, "OK"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            finish()
+        }
+        alertDialog.show()
     }
 //endregion//
 }

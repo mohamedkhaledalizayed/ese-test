@@ -153,9 +153,9 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         binding.llMedical.setOnClickListener {
             navController().navigate(R.id.chooseAreaFragment)
         }
-        binding.llInquiry.setOnClickListener {
-            navController().navigate(R.id.inquiryFragment)
-        }
+//        binding.llInquiry.setOnClickListener {
+//            navController().navigate(R.id.inquiryFragment)
+//        }
     }
 
     override fun onBackPressed() {

@@ -5,5 +5,8 @@ import com.neqabty.data.api.Request
 
 data class LoginVisitorRequest(
     @SerializedName("mobile")
-    var mobile: String = ""
+    var mobile: String = "",
+
+    @SerializedName("mobile_token")
+    var token: String = ""
 ) : Request()

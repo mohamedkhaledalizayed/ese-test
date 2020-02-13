@@ -119,10 +119,10 @@ interface WebService {
             @Part doc3: MultipartBody.Part?
     ): Observable<ApiResponse<Unit>>
 
-    @POST("http://test.neqabty.com/api/v1/login/member/mobile")
+    @POST("api/v1/login/member/mobile")
     fun loginVisitor(@Body loginVisitorRequest: LoginVisitorRequest): Observable<ApiResponse<UserData>>
 
-    @POST("http://test.neqabty.com/api/v1/upgrade/member/client")
+    @POST("api/v1/upgrade/member/client")
     fun loginUser(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>
 
     @POST("api/Auth/Login")

@@ -146,6 +146,14 @@
         <action
             android:id="@+id/openLogin"
             app:destination="@id/mobileFragment" />
+        <action
+            android:id="@+id/openAddCompanionFragment"
+            app:destination="@id/addCompanionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCompanionFragment"
+        android:name="com.neqabty.presentation.ui.addCompanion.AddCompanionFragment"
+        tools:layout="@layout/add_companion_fragment">
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"

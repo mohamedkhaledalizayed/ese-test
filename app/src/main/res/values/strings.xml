@@ -54,12 +54,17 @@
     <string name="child_one">عمر الطفل الأول</string>
     <string name="child_two">عمر الطفل الثاني</string>
     <string name="child_three">عمر الطفل الثالث</string>
+    <string name="trip_type">نوع الرحلة</string>
     <string name="room_type">نوع الغرفة</string>
     <string name="trip_desc">وصف الرحلة</string>
     <string name="about_hotel">عن الفندق</string>
     <string name="reserve">حجز</string>
     <string name="confirm_reservation">تأكيد الحجز</string>
     <string name="attach_photo">إضافة صورة</string>
+    <string name="attach_companion">إضافة مرافق</string>
+    <string name="relation_degree">درجة القرابة</string>
+    <string name="age_on_trip">العمر وقت الرحلة</string>
+    <string name="birth_date">تاريخ الميلاد</string>
     <string name="thanks">شكراً</string>
     <string name="confirm_reservation_msg">لقد تم تسجيل طلبكم و سيتم الرد عليكم في خلال ٤٨ ساعة</string>
     <string name="addProfileImage">اضافة صورة البروفايل</string>
@@ -80,6 +85,7 @@
     <string name="continue_btn">متابعة</string>
     <string name="loginHint">يمكنك الآن الدخول على التطبيق و الاستمتاع بخدمات نقابتك</string>
     <string name="update_msg">حتى تتمكن من استخدام التطبيق يرجى التحديث</string>
+    <string name="root_msg">هذا الجهاز غير آمن, لا يمكنك استخدام التطبيق.</string>
 
     <string name="doctors">الأطباء</string>
     <string name="hospitals">المستشفيات</string>
@@ -158,6 +164,7 @@
     <string name="pick_photos">من فضلك أرفق الصور المطلوبة</string>
     <string name="pick_photo_trips">من فضلك أرفق صور المستندات المطلوبة</string>
     <string name="ok_btn">موافق</string>
+    <string name="cancel_btn">إلغاء</string>
 
     <string name="enter_verification_code">ادخل كود التأكيد</string>
 

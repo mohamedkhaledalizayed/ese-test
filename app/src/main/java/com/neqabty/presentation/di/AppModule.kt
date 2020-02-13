@@ -22,6 +22,7 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.util.PreferencesHelper
 import dagger.Module
 import dagger.Provides
+import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -43,6 +44,11 @@ class AppModule {
         val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
             this.level = HttpLoggingInterceptor.Level.BODY
         }
+//        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+//                .add(
+//                        "weapps.te.eg",
+//                        "sha256/1bMfEx60y/CeKMkWEi7TiqZDppseBC3KKs220b6NXQQ="
+//                ).build()
 
         val client: OkHttpClient = OkHttpClient.Builder()
                 .addInterceptor(object : Interceptor {
@@ -66,12 +72,17 @@ class AppModule {
                     }
 
                 })
-                .addInterceptor(interceptor)
+                .addInterceptor(interceptor) // TODO Interceptor
+//                .certificatePinner(certificatePinner)
                 .build()
 
         return Retrofit.Builder()
-                .baseUrl("http://eea.neqabty.com/")
+                .baseUrl("http://ec2-3-132-198-61.us-east-2.compute.amazonaws.com/")
+//                .baseUrl("http://eea.neqabty.com/")
+//                .baseUrl("http://3.132.198.61")
 //            .baseUrl("http://webapp.neqabty.com/")
+//            .baseUrl("https://192.168.196.65")
+//            .baseUrl("https://neqabty-stage.efinance.com.eg")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // LiveDataCallAdapterFactory()
                 .client(client)

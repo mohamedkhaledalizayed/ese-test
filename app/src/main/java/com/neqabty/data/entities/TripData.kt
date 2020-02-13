@@ -12,7 +12,7 @@ data class TripData(
     var img: String?,
     @field:SerializedName("trip_title")
     var title: String?,
-    @field:SerializedName("type_id")
+    @field:SerializedName("trip_place_type_id")
     var typeId: String?,
     @field:SerializedName("trip_dateFrom")
     var dateFrom: String?,

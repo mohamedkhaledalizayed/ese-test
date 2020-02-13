@@ -14,6 +14,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.neqabty.R
 import com.neqabty.databinding.LoginFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -69,7 +71,7 @@ class LoginFragment : BaseFragment(), Injectable {
         loginViewModel.errorState.observe(this, Observer { throwable ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                loginViewModel.login(edMobile.text.toString())
+                login()
             }, cancelCallback = {
                 binding.progressbar.visibility = View.GONE
                 navController().navigateUp()
@@ -91,11 +93,31 @@ class LoginFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
         binding.bSend.setOnClickListener {
-            if(isDataValid(edMobile.text.toString()))
-                loginViewModel.login(edMobile.text.toString())
+            login()
         }
+
+//        bSkip.setOnClickListener {
+//            PreferencesHelper(requireContext()).mobile = "01119850766"
+//            PreferencesHelper(requireContext()).jwt = ""
+//            navController().navigate(LoginFragmentDirections.openSyndicatesFragment())
+//        }
     }
 
+    fun login(){
+        if(isDataValid(edMobile.text.toString())) {
+            if (PreferencesHelper(requireContext()).token.isNotBlank())
+                loginViewModel.login(edMobile.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
+            else {
+                FirebaseInstanceId.getInstance().instanceId
+                        .addOnCompleteListener(OnCompleteListener { task ->
+                            if (!task.isSuccessful)
+                                return@OnCompleteListener
+                            val token = task.result?.token
+                            loginViewModel.login(edMobile.text.toString(), token!!, PreferencesHelper(requireContext()))
+                        })
+            }
+        }
+    }
 //region
 
     private fun isDataValid(mobile: String): Boolean {

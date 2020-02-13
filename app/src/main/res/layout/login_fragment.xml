@@ -79,6 +79,18 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
 
+                <!--<Button-->
+                    <!--android:id="@+id/bSkip"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="@dimen/margin_vertical_large"-->
+                    <!--android:background="@mipmap/btn"-->
+                    <!--android:gravity="center"-->
+                    <!--android:padding="@dimen/margin_horizontal_small"-->
+                    <!--android:text="تخطي"-->
+                    <!--android:textColor="@android:color/white"-->
+                    <!--android:textSize="@dimen/text_size_medium" />-->
+
                 <!--<EditText-->
                     <!--android:id="@+id/edMobile"-->
                     <!--android:layout_width="match_parent"-->

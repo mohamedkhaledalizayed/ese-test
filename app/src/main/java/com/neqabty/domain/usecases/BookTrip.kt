@@ -1,7 +1,9 @@
 package com.neqabty.domain.usecases
 
+import android.app.Person
 import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.common.Transformer
+import com.neqabty.domain.entities.PersonEntity
 import io.reactivex.Observable
 import java.io.File
 import javax.inject.Inject
@@ -22,7 +24,9 @@ class BookTrip @Inject constructor(
         private const val PARAM_NUM_CHILD = "param:numChild"
         private const val PARAM_AGES = "param:ages"
         private const val PARAM_NAME = "param:name"
+        private const val PARAM_PERSONS_LIST = "param:personsList"
         private const val PARAM_DOCS_COUNT = "param:docsNumber"
+        private const val PARAM_PEOPLES_COUNT = "param:peoplesNumber"
         private const val PARAM_DOC1 = "param:doc1"
         private const val PARAM_DOC2 = "param:doc2"
         private const val PARAM_DOC3 = "param:doc3"
@@ -40,7 +44,9 @@ class BookTrip @Inject constructor(
         numChild: Int,
         ages: String,
         name: String,
+        personsList: List<PersonEntity>,
         docsNumber: Int,
+        peoplesNumber: Int,
         doc1: File?,
         doc2: File?,
         doc3: File?,
@@ -57,6 +63,7 @@ class BookTrip @Inject constructor(
         data[PARAM_NUM_CHILD] = numChild
         data[PARAM_AGES] = ages
         data[PARAM_NAME] = name
+        data[PARAM_PERSONS_LIST] = personsList
         data[PARAM_DOCS_COUNT] = docsNumber
         doc1?.let { data[PARAM_DOC1] = it }
         doc2?.let { data[PARAM_DOC2] = it }
@@ -76,11 +83,13 @@ class BookTrip @Inject constructor(
         val numChild = data?.get(BookTrip.PARAM_NUM_CHILD) as Int
         val ages = data?.get(BookTrip.PARAM_AGES) as String
         val name = data?.get(BookTrip.PARAM_NAME) as String
+        val personsList = data?.get(BookTrip.PARAM_PERSONS_LIST) as List<PersonEntity>
         val docsNumber = data?.get(BookTrip.PARAM_DOCS_COUNT) as Int
+        val peoplesNumber = data?.get(BookTrip.PARAM_DOCS_COUNT) as Int
         val doc1 = data?.get(BookTrip.PARAM_DOC1) as File?
         val doc2 = data?.get(BookTrip.PARAM_DOC2) as File?
         val doc3 = data?.get(BookTrip.PARAM_DOC3) as File?
         val doc4 = data?.get(BookTrip.PARAM_DOC4) as File?
-        return neqabtyRepository.bookTrip(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, docsNumber, doc1, doc2, doc3, doc4)
+        return neqabtyRepository.bookTrip(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name,personsList, docsNumber, peoplesNumber, doc1, doc2, doc3, doc4)
     }
 }

@@ -25,5 +25,11 @@ data class BookTripRequest(
     @SerializedName("name")
     var name: String = "",
     @SerializedName("docs_num")
-    var docsNumber: Int = 0
+    var docsNumber: Int = 0,
+    @SerializedName("person_num")
+    var personsNumber: Int = 0,
+    @SerializedName("json_persons")
+    var persons: List<PersonRequest>,
+    @SerializedName("division")
+var division: String? = "xcxcxcxc"
 ) : Request()

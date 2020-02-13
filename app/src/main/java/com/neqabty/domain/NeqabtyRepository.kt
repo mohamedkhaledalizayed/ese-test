@@ -67,7 +67,9 @@ interface NeqabtyRepository {
             numChild: Int,
             ages: String,
             name: String,
+            personsList: List<PersonEntity>,
             docsNumber: Int,
+            personsNumber: Int,
             doc1: File?,
             doc2: File?,
             doc3: File?,
@@ -94,7 +96,7 @@ interface NeqabtyRepository {
             doc2: File?,
             doc3: File?): Observable<Unit>
 
-    fun loginVisitor(mobile: String): Observable<UserEntity>
+    fun loginVisitor(mobile: String, token: String): Observable<UserEntity>
     fun loginUser(mobile: String , userNumber: String , token: String): Observable<UserEntity>
     fun signup(
             email: String,

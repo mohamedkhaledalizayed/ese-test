@@ -1,6 +1,7 @@
 package com.neqabty.presentation.ui.tripsReservation
 
 import android.arch.lifecycle.MutableLiveData
+import com.neqabty.domain.entities.PersonEntity
 import com.neqabty.domain.usecases.BookTrip
 import com.neqabty.domain.usecases.GetTripDetails
 import com.neqabty.domain.usecases.ValidateUser
@@ -60,7 +61,9 @@ class TripReservationViewModel @Inject constructor(private val bookTrip: BookTri
             numChild: Int,
             ages: String,
             name: String,
+            personsList: List<PersonEntity>,
             docsNumber: Int,
+            peoplesNumber: Int,
             doc1: File?,
             doc2: File?,
             doc3: File?,
@@ -77,13 +80,17 @@ class TripReservationViewModel @Inject constructor(private val bookTrip: BookTri
                 numChild,
                 ages,
                 name,
+                personsList,
                 docsNumber,
+                peoplesNumber,
                 doc1,
                 doc2,
                 doc3,
                 doc4)
                 .subscribe(
-                        { viewState.value = viewState.value?.copy(isLoading = false) },
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false)
+                        },
                         { errorState.value = it }
                 )
         )

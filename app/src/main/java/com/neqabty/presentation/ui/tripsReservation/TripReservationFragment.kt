@@ -16,7 +16,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,15 +24,14 @@ import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
-import com.neqabty.databinding.TripDetailsFragmentBinding
 import com.neqabty.databinding.TripReservationFragmentBinding
+import com.neqabty.domain.entities.PersonEntity
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.entities.GovernUI
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.entities.TripUI
-import com.neqabty.presentation.ui.common.CustomImagePagerAdapter
+import com.neqabty.presentation.ui.addCompanion.AddCompanionFragment
 import com.neqabty.presentation.ui.common.PhotosAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -54,14 +52,17 @@ class TripReservationFragment : BaseFragment(), Injectable {
 
     lateinit var tripReservationViewModel: TripReservationViewModel
 
-    private var adapter by autoCleared<PhotosAdapter>()
+    private var photosAdapter by autoCleared<PhotosAdapter>()
+    private var companionsAdapter by autoCleared<CompanionsAdapter>()
 
     private val REQUEST_CAMERA = 0
     private val SELECT_FILE = 1
+    private val ADD_COMPANION = 2
 
     private var captureImage = false
 
     private var photosList: MutableList<PhotoUI> = mutableListOf<PhotoUI>()
+    private var companionsList: MutableList<PersonEntity> = mutableListOf<PersonEntity>()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -112,8 +113,8 @@ class TripReservationFragment : BaseFragment(), Injectable {
                 navController().navigateUp()
             })
         })
-        tripReservationViewModel.validateUser(PreferencesHelper(requireContext()).user)
-//        initializeViews()
+//        tripReservationViewModel.validateUser(PreferencesHelper(requireContext()).user)
+        initializeViews()
     }
 
     private fun handleViewState(state: TripReservationViewState) {
@@ -148,25 +149,35 @@ class TripReservationFragment : BaseFragment(), Injectable {
         renderRegiments()
         renderChildrenNumber()
 
-        binding.llChildren.visibility = if (tripItem.regiments?.get(0)?.tripType?.toInt() == 1) View.VISIBLE else View.GONE
+//        binding.llChildren.visibility = if (tripItem.regiments?.get(0)?.tripType?.toInt() == 1) View.VISIBLE else View.GONE
+        binding.bAttachCompanion.setOnClickListener {
+            openAddCompanionFragment()
+        }
+
         binding.bAttachPhoto.setOnClickListener {
             if (photosList.size < 4)
-                addPhoto()
+                grantCameraPermission()
         }
 
 
         val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
             photosList.remove(photo)
-            adapter.notifyDataSetChanged()
+            photosAdapter.notifyDataSetChanged()
         }
-        this.adapter = adapter
+        this.photosAdapter = adapter
         binding.rvPhotos.adapter = adapter
+
+        companionsAdapter = CompanionsAdapter(dataBindingComponent, appExecutors) { companion ->
+            companionsList.remove(companion)
+            companionsAdapter.notifyDataSetChanged()
+        }
+        binding.rvCompanions.adapter = companionsAdapter
 
         binding.bConfirmReservation.setOnClickListener {
             if (photosList.size > 0) {
                 reservationRequested = true
                 val prefs = PreferencesHelper(requireContext())
-                tripReservationViewModel.bookTrip(prefs.mainSyndicate, PreferencesHelper(requireContext()).user, prefs.mobile, tripItem.regiments?.get(0)?.tripId!!, regimentID, spRegiments.selectedItem.toString(), spRooms.selectedItem.toString(),spChildren.selectedItem.toString().toInt() , spChild1.selectedItem?.toString()+","+spChild2.selectedItem?.toString()+","+spChild3.selectedItem?.toString(), memberName, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3))
+                tripReservationViewModel.bookTrip(prefs.mainSyndicate, PreferencesHelper(requireContext()).user, prefs.mobile, tripItem.regiments?.get(0)?.tripId!!, regimentID, spRegiments.selectedItem.toString(), spRooms.selectedItem.toString(),spChildren.selectedItem.toString().toInt() , spChild1.selectedItem?.toString()+","+spChild2.selectedItem?.toString()+","+spChild3.selectedItem?.toString(), memberName,companionsList.toList(), photosList.size, companionsList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3))
             } else
                 showPickPhotoAlert()
         }
@@ -306,6 +317,9 @@ class TripReservationFragment : BaseFragment(), Injectable {
                 onSelectFromGalleryResult(data!!)
             else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data!!)
+            else if (requestCode == ADD_COMPANION) {
+                addCompanion(data!!)
+            }
         }
     }
 
@@ -315,6 +329,20 @@ class TripReservationFragment : BaseFragment(), Injectable {
         }
     }
 
+
+    private fun openAddCompanionFragment() {
+        val fragmentManager = this@TripReservationFragment.fragmentManager
+        val addCompanionFragment = AddCompanionFragment()
+        addCompanionFragment.setTargetFragment(this, ADD_COMPANION)
+        addCompanionFragment.show(fragmentManager, "name")
+    }
+
+    private fun addCompanion(data: Intent) {
+        val companion = data.extras?.getParcelable<PersonEntity>("companion")
+        companionsList.add(companion as PersonEntity)
+        companionsAdapter.submitList(companionsList)
+        companionsAdapter.notifyDataSetChanged()
+    }
 
     private fun addPhoto() {
         val pictureDialog = AlertDialog.Builder(requireContext())
@@ -358,8 +386,8 @@ class TripReservationFragment : BaseFragment(), Injectable {
                 val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data.data)
                 val photoUI = saveImage(bitmap)
                 photosList.add(photoUI)
-                adapter.submitList(photosList)
-                adapter.notifyDataSetChanged()
+                photosAdapter.submitList(photosList)
+                photosAdapter.notifyDataSetChanged()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -387,8 +415,8 @@ class TripReservationFragment : BaseFragment(), Injectable {
         }
 
         photosList.add(PhotoUI(Environment.getExternalStorageDirectory().toString(), name))
-        adapter.submitList(photosList)
-        adapter.notifyDataSetChanged()
+        photosAdapter.submitList(photosList)
+        photosAdapter.notifyDataSetChanged()
     }
 
     fun saveImage(myBitmap: Bitmap): PhotoUI {
@@ -397,7 +425,6 @@ class TripReservationFragment : BaseFragment(), Injectable {
         val path: String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
         val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
         val directory = File(path)
-        Log.d("fee", directory.toString())
         if (!directory.exists())
             directory.mkdirs()
 
@@ -408,8 +435,6 @@ class TripReservationFragment : BaseFragment(), Injectable {
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
             fo.close()
-            Log.d("TAG", "File Saved::--->" + f.absolutePath)
-
             return PhotoUI(path, name)
         } catch (e1: IOException) {
             e1.printStackTrace()

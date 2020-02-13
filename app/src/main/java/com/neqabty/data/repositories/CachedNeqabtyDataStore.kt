@@ -48,7 +48,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun bookTrip(mainSyndicateId: Int, userNumber: String, phone: String, tripID: Int, regimentID: Int, regimentDate: String, housingType: String, numChild: Int, ages: String, name: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?): Observable<Unit> {
+    override fun bookTrip(mainSyndicateId: Int, userNumber: String, phone: String, tripID: Int, regimentID: Int, regimentDate: String, housingType: String, numChild: Int, ages: String, name: String,personsList: List<PersonEntity>, docsNumber: Int, personsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?): Observable<Unit> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -164,7 +164,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         return neqabtyCache.getUser()
     }
 
-    override fun loginVisitor(mobile: String): Observable<UserEntity> {
+    override fun loginVisitor(mobile: String, token: String): Observable<UserEntity> {
         return neqabtyCache.getUser()
     }
 

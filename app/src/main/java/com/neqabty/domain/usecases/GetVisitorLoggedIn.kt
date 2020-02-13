@@ -17,11 +17,11 @@ class GetVisitorLoggedIn @Inject constructor(
         private const val PARAM_TOKEN = "param:token"
     }
 
-    fun login(mobile: String): Observable<UserEntity> {
+    fun login(mobile: String, token: String): Observable<UserEntity> {
         val data = HashMap<String, String>()
         data[PARAM_MOBILE] = mobile
 //        data[PARAM_PASSWORD] = password
-//        data[PARAM_TOKEN] = token
+        data[PARAM_TOKEN] = token
         return observable(data)
     }
 
@@ -36,7 +36,7 @@ class GetVisitorLoggedIn @Inject constructor(
     override fun createObservable(data: Map<String, Any>?): Observable<UserEntity> {
         val mobile = data?.get(PARAM_MOBILE) as String
 //        val password = data?.get(PARAM_PASSWORD) as String
-//        val token = data?.get(PARAM_TOKEN) as String
-        return neqabtyRepository.loginVisitor(mobile)
+        val token = data?.get(PARAM_TOKEN) as String
+        return neqabtyRepository.loginVisitor(mobile, token)
     }
 }

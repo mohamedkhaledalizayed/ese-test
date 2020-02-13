@@ -101,7 +101,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
 
         binding.bAddPhoto.setOnClickListener {
             if (photosList.size < 5)
-                addPhoto()
+                grantCameraPermission()
         }
 
         val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
@@ -233,7 +233,6 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         val path: String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
         val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
         val directory = File(path)
-        Log.d("fee", directory.toString())
         if (!directory.exists())
             directory.mkdirs()
 
@@ -244,8 +243,6 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
             fo.close()
-            Log.d("TAG", "File Saved::--->" + f.absolutePath)
-
             return PhotoUI(path, name)
         } catch (e1: IOException) {
             e1.printStackTrace()

@@ -37,8 +37,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1, doc2, doc3)
     }
 
-    override fun bookTrip(mainSyndicateId: Int, userNumber: String, phone: String, tripID: Int, regimentID: Int, regimentDate: String, housingType: String, numChild: Int, ages: String, name: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?): Observable<Unit> {
-        return remoteDataStore.bookTrip(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, docsNumber, doc1, doc2, doc3, doc4)
+    override fun bookTrip(mainSyndicateId: Int, userNumber: String, phone: String, tripID: Int, regimentID: Int, regimentDate: String, housingType: String, numChild: Int, ages: String, name: String,personsList: List<PersonEntity>, docsNumber: Int, personsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?): Observable<Unit> {
+        return remoteDataStore.bookTrip(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name,personsList, docsNumber, personsNumber, doc1, doc2, doc3, doc4)
     }
 
     override fun getAppVersion(): Observable<AppVersionEntity> {
@@ -190,8 +190,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.loginUser(mobile, userNumber,token)
     }
 
-    override fun loginVisitor(mobile: String): Observable<UserEntity> {
-        return remoteDataStore.loginVisitor(mobile)
+    override fun loginVisitor(mobile: String, token: String): Observable<UserEntity> {
+        return remoteDataStore.loginVisitor(mobile, token)
     }
 
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {

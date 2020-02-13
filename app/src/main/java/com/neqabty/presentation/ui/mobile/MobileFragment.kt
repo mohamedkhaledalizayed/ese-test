@@ -66,7 +66,7 @@ class MobileFragment : BaseFragment(), Injectable {
         mobileViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 binding.progressbar.visibility = View.VISIBLE
-                mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
+                login()
             }, cancelCallback = {
                 navController().navigateUp()
             } , message = error?.message)
@@ -82,21 +82,7 @@ class MobileFragment : BaseFragment(), Injectable {
             binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
 
         binding.bSend.setOnClickListener {
-            Constants.JWT = PreferencesHelper(requireContext()).jwt
-            if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString())) {
-                if (PreferencesHelper(requireContext()).token.isNotBlank())
-                    mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
-                else {
-                    FirebaseInstanceId.getInstance().instanceId
-                            .addOnCompleteListener(OnCompleteListener { task ->
-                                if (!task.isSuccessful)
-                                    return@OnCompleteListener
-                                val token = task.result?.token
-                                mobileViewModel.registerUser(binding.edMobile.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, token
-                                        ?: "", PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
-                            })
-                }
-            }
+            login()
         }
     }
 
@@ -125,6 +111,23 @@ class MobileFragment : BaseFragment(), Injectable {
         }
     }
 
+    fun login(){
+        Constants.JWT = PreferencesHelper(requireContext()).jwt
+        if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString())) {
+            if (PreferencesHelper(requireContext()).token.isNotBlank())
+                mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
+            else {
+                FirebaseInstanceId.getInstance().instanceId
+                        .addOnCompleteListener(OnCompleteListener { task ->
+                            if (!task.isSuccessful)
+                                return@OnCompleteListener
+                            val token = task.result?.token
+                            mobileViewModel.registerUser(binding.edMobile.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, token
+                                    ?: "", PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
+                        })
+            }
+        }
+    }
     //region
     private fun isDataValid(mobile: String, number: String): Boolean {
         return if (number.isBlank()) {

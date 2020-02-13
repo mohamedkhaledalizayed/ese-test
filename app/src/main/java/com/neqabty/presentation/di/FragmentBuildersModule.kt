@@ -1,6 +1,7 @@
 package com.neqabty.presentation.di
 
 import com.neqabty.presentation.ui.about.AboutFragment
+import com.neqabty.presentation.ui.addCompanion.AddCompanionFragment
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaFragment
 import com.neqabty.presentation.ui.claiming.*
 import com.neqabty.presentation.ui.engineeringRecordsDetails.EngineeringRecordsDetailsFragment
@@ -90,6 +91,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeTripReservationFragment(): TripReservationFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAddCompanionFragment(): AddCompanionFragment
 
     @ContributesAndroidInjector
     abstract fun contributePaymentFragment(): PaymentFragment

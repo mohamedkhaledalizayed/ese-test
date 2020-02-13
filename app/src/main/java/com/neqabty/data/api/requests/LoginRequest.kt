@@ -7,6 +7,6 @@ data class LoginRequest(
     @SerializedName("user_number")
     var userNumber: String = "",
 
-    @SerializedName("push_token")
+    @SerializedName("mobile_token")
     var token: String = ""
 )

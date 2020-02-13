@@ -141,7 +141,7 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         binding.ibAddPhoto1.setOnClickListener {
             selectedIndex = 0
 //            if (photosList[0].name == null)
-                addPhoto()
+            grantCameraPermission()
 //            else {
 //                photosList[0].name = null
 //                ibAddPhoto_1.setImageResource(R.drawable.ic_close)
@@ -151,7 +151,7 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         binding.ibAddPhoto2.setOnClickListener {
             selectedIndex = 1
 //            if (photosList[1].name == null)
-                addPhoto()
+            grantCameraPermission()
 //            else {
 //                photosList[1].name = null
 //                ibAddPhoto_2.setImageResource(R.drawable.ic_close)
@@ -161,7 +161,7 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         binding.ibAddPhoto3.setOnClickListener {
             selectedIndex = 2
 //            if (photosList[2].name == null)
-                addPhoto()
+            grantCameraPermission()
 //            else {
 //                photosList[2].name = null
 //                ibAddPhoto_3.setImageResource(R.drawable.ic_close)
@@ -283,7 +283,6 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         val path: String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
         val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
         val directory = File(path)
-        Log.d("fee", directory.toString())
         if (!directory.exists())
             directory.mkdirs()
 
@@ -294,8 +293,6 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
             fo.close()
-            Log.d("TAG", "File Saved::--->" + f.absolutePath)
-
             return PhotoUI(path, name)
         } catch (e1: IOException) {
             e1.printStackTrace()

@@ -10,6 +10,7 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.UserUI
 import com.neqabty.presentation.mappers.UserEntityUIMapper
+import com.neqabty.presentation.util.PreferencesHelper
 
 import javax.inject.Inject
 
@@ -24,14 +25,18 @@ class LoginViewModel @Inject constructor(val getVisitorLoggedIn: GetVisitorLogge
         viewState.value = LoginViewState(isLoading = true)
     }
 
-    fun login(mobile: String) {
-        addDisposable(getVisitorLoggedIn.login(mobile)
+    fun login(mobile: String,
+              token: String,
+              prefs: PreferencesHelper) {
+        addDisposable(getVisitorLoggedIn.login(mobile,token)
                 .map {
                     it.let {
                         userEntityToUIMapper.mapFrom(it)
                     }
                 }.subscribe(
-                        { onUserReceived(it) },
+                        {
+                            prefs.token = token
+                            onUserReceived(it) },
                         { errorState.value = it }
                 )
         )
