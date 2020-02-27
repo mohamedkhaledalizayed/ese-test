@@ -80,7 +80,7 @@ class SyndicatesFragment : BaseFragment(), Injectable {
         })
         syndicatesViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 syndicatesViewModel.getSyndicates()
             }, cancelCallback = {
                 navController().navigateUp()
@@ -91,7 +91,7 @@ class SyndicatesFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: SyndicatesViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.syndicates?.let {
             val temp = listOf(it[0])
             adapter.submitList(temp)

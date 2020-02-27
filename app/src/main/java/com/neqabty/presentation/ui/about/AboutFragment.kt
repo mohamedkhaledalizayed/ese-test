@@ -64,7 +64,7 @@ class AboutFragment : BaseFragment(), Injectable {
         })
         aboutViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
@@ -74,7 +74,7 @@ class AboutFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: AboutViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.syndicate?.let {
             initializeViews(it)
             var tempSyndicate = it.copy()

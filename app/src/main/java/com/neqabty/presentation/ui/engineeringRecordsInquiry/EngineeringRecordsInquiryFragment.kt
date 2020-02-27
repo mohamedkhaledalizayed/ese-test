@@ -57,7 +57,7 @@ class EngineeringRecordsInquiryFragment : BaseFragment(), Injectable {
         })
         engineeringRecordsInquiryViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 engineeringRecordsInquiryViewModel.sendEngineeringRecordsInquiry(binding.edMemberNumber.text.toString())
             }, cancelCallback = {
                 navController().navigateUp()
@@ -79,7 +79,7 @@ class EngineeringRecordsInquiryFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: EngineeringRecordsInquiryViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 //        if (!state.isLoading && state.memberItem != null) {
 //            state.memberItem?.registryDataID = edMemberNumber.text.toString()
 //                when(state.memberItem?.statusCode){

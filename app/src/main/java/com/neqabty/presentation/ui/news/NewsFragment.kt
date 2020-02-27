@@ -71,7 +71,7 @@ class NewsFragment : BaseFragment(), Injectable {
         })
         newsViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 newsViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
@@ -82,7 +82,7 @@ class NewsFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: NewsViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.news?.let {
             adapter.submitList(it)
         }

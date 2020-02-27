@@ -65,7 +65,7 @@ class MobileFragment : BaseFragment(), Injectable {
         })
         mobileViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 login()
             }, cancelCallback = {
                 navController().navigateUp()
@@ -87,7 +87,7 @@ class MobileFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: MobileViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful) {
             PreferencesHelper(requireContext()).user = binding.edMemberNumber.text.toString()
             activity?.invalidateOptionsMenu()

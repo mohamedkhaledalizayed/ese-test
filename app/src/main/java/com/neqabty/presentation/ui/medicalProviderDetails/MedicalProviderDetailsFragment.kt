@@ -64,7 +64,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
 
         medicalProviderDetailsViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 medicalProviderDetailsViewModel.isFavorite(providerItem)
                 medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.type!!)
             }, cancelCallback = {
@@ -76,7 +76,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: MedicalProviderDetailsViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         binding.llHolder.visibility = if (state.isLoading) View.INVISIBLE else View.VISIBLE
         binding.ivFav.visibility = if (state.isLoading) View.INVISIBLE else View.VISIBLE
         this.state = state

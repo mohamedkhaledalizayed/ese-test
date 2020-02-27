@@ -55,7 +55,7 @@ class UpdateDataFragment : BaseFragment(), Injectable {
         })
         updateDataViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 updateDataViewModel.inquireUpdateUserData(binding.edMemberNumber.text.toString())
             }, cancelCallback = {
                 navController().navigateUp()
@@ -76,7 +76,7 @@ class UpdateDataFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: UpdateDataViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         activity?.invalidateOptionsMenu()
 //        if (!state.isLoading && state.userDataInquire != null) {
 //                navController().navigate(

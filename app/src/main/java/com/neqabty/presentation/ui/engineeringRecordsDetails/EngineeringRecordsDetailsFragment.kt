@@ -91,7 +91,7 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         })
         engineeringRecordsDetailsViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 engineeringRecordsDetailsViewModel.sendEngineeringRecordsInquiry(PreferencesHelper(requireContext()).user)
 //                engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!! , memberItem.mobile!!, memberItem.registryTypeID!! , "5",memberItem.registryDataID!!,
 //                        memberItem.lastRenewYear!!,memberItem.regDataStatusID!!.toInt(), if(memberItem.isOwner) 1 else 0  , photosList.size , getPhoto(0))
@@ -104,7 +104,7 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
 
 
     private fun handleViewState(state: EngineeringRecordsDetailsViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading && state.memberItem != null && !state.isSuccessful) {
             state.memberItem?.registryDataID = PreferencesHelper(requireContext()).user
                 when(state.memberItem?.statusCode) {

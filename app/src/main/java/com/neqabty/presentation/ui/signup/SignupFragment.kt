@@ -57,7 +57,7 @@ class SignupFragment : BaseFragment(), Injectable {
 //        signupViewModel.signup("m@m.m", "Mona", "Mohamed", "01119850766", "1", "1", "1", "123@pass")
     }
     private fun handleViewState(state: SignupViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.user?.let {
         }
     }

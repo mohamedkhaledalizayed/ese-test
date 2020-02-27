@@ -117,7 +117,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
 
         claimingViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 val prefs = PreferencesHelper(requireContext())
                 claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             }, cancelCallback = {
@@ -125,11 +125,11 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
                 navController().navigate(R.id.homeFragment)
             })
         })
-        binding.progressbar.visibility = View.INVISIBLE
+        llSuperProgressbar.visibility = View.INVISIBLE
     }
 
     private fun handleViewState(state: ClaimingViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading)
             showSuccessAlert()
 //            pager.setCurrentItem(3, true)

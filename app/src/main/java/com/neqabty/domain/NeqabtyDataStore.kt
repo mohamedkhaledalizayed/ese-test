@@ -104,4 +104,6 @@ interface NeqabtyDataStore {
             subSyndicateId: String,
             password: String
     ): Observable<UserEntity>
+    fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>>
+    fun createComplaint(name: String, phone: String, type: String, body: String, token: String): Observable<Unit>
 }

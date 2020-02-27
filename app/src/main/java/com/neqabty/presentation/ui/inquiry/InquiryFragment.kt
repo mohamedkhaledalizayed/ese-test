@@ -57,7 +57,7 @@ class InquiryFragment : BaseFragment(), Injectable {
         })
         inquiryViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 inquiryViewModel.validateUser(binding.edMemberNumber.text.toString())
             }, cancelCallback = {
                 navController().navigateUp()
@@ -78,7 +78,7 @@ class InquiryFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: InquiryViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         activity?.invalidateOptionsMenu()
         if (!state.isLoading && state.member != null) {
 //            PreferencesHelper(requireContext()).user = state.member?.engineerID.toString()

@@ -63,7 +63,7 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
         })
         updateDataVerificationViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 updateDataVerificationViewModel.updateUserData(userDataInquire.oldRefID,userDataInquire.fullName!!,userDataInquire.nationalID!!,"male",userDataInquire.oldRefID)
             }, cancelCallback = {
                 navController().navigateUp()
@@ -73,7 +73,7 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: UpdateDataVerificationViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         activity?.invalidateOptionsMenu()
         if (!state.isLoading && state.message != "") {
             showSuccessAlert(getString(R.string.confirm_reservation_msg))

@@ -6,6 +6,7 @@ import com.neqabty.MainViewModel
 import com.neqabty.presentation.ui.about.AboutViewModel
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaViewModel
 import com.neqabty.presentation.ui.claiming.ClaimingViewModel
+import com.neqabty.presentation.ui.complaint.ComplaintViewModel
 import com.neqabty.presentation.ui.engineeringRecordsDetails.EngineeringRecordsDetailsViewModel
 import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryViewModel
 import com.neqabty.presentation.ui.favorites.FavoritesViewModel
@@ -178,6 +179,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ComplaintViewModel::class)
+    abstract fun bindComplaintViewModel(complaintViewModel: ComplaintViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: NeqabtyViewModelFactory): ViewModelProvider.Factory

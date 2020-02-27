@@ -14,6 +14,14 @@ class NeqabtyRepositoryImpl @Inject constructor(
         private val cachedDataStore: CachedNeqabtyDataStore,
         private val remoteDataStore: RemoteNeqabtyDataStore
 ) : NeqabtyRepository {
+    override fun createComplaint(name: String, phone: String, type: String, body: String, token: String): Observable<Unit> {
+        return remoteDataStore.createComplaint(name, phone, type,body,token)
+    }
+
+    override fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>> {
+        return remoteDataStore.getComplaintTypes()
+    }
+
     override fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity> {
         return remoteDataStore.validateUserForClaiming(userNumber)
     }

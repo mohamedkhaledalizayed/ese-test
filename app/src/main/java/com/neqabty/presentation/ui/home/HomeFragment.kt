@@ -96,7 +96,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         })
         homeViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(context!!).user)
             }, cancelCallback = {
                 navController().navigateUp()
@@ -112,7 +112,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
     }
 
     private fun handleViewState(state: HomeViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.news?.let {
             binding.tvNews.visibility = View.VISIBLE
             newsAdapter.submitList(it)

@@ -107,7 +107,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
         })
         tripReservationViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 tripReservationViewModel.validateUser(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().navigateUp()
@@ -118,7 +118,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: TripReservationViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 //        if (state.member != null && state.member?.code != 3 && state.member?.code != 4 && !isValid) {
 //            isValid = true
 //            memberName = state.member!!.engineerName!!

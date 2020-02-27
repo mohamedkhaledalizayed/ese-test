@@ -22,12 +22,13 @@ class LoginViewModel @Inject constructor(val getVisitorLoggedIn: GetVisitorLogge
     var viewState: MutableLiveData<LoginViewState> = MutableLiveData()
 
     init {
-        viewState.value = LoginViewState(isLoading = true)
+        viewState.value = LoginViewState()
     }
 
     fun login(mobile: String,
               token: String,
               prefs: PreferencesHelper) {
+        viewState.value = viewState.value?.copy(isLoading = true)
         addDisposable(getVisitorLoggedIn.login(mobile,token)
                 .map {
                     it.let {

@@ -28,6 +28,10 @@
         <!--android:id="@+id/update_data_fragment"-->
         <!--android:title="@string/update_data_title" />-->
     <item
+        android:id="@+id/complaints_fragment"
+        android:title="@string/complaints_title" />
+
+    <item
         android:id="@+id/about_fragment"
         android:title="@string/about_title" />
 

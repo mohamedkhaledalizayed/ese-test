@@ -145,6 +145,7 @@
     <string name="inquiry_title">سداد اشتراكات</string>
     <string name="engineering_records_title">تجديد سجل هندسي</string>
     <string name="update_data_title">تحديث البيانات</string>
+    <string name="complaints_title">شكاوى ومقترحات</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">اتصل بنا</string>
@@ -304,4 +305,9 @@
     <string name="wrong_verification_code">كود التأكيد غير مطابق</string>
     <string name="records_request_sent">لقد تم ارسال الطلب بنجاح للمراجعة .. سيتم الرد عليكم في خلال ٤٨ ساعة</string>
 
+    <string name="complaint_type">نوع الشكوى</string>
+    <string name="complaint_name">اسم مقدم الشكوى</string>
+    <string name="complaint_mobile">هاتف الشكوى</string>
+    <string name="complaint_body">موضوع الشكوى</string>
+    <string name="complaint_sent">لقد تم إرسال الشكوى بنجاح</string>
 </resources>

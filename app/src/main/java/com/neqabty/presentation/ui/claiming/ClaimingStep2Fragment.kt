@@ -83,7 +83,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         })
         claimingViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 loadProviders()
             }, cancelCallback = {
                 navController().popBackStack()
@@ -108,7 +108,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: ClaimingViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
         state.providerTypes?.let {
             providersTypesResultList = it.toMutableList()
@@ -130,7 +130,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
     }
 
     fun loadProviders() {
-        binding.progressbar.visibility = View.VISIBLE
+        llSuperProgressbar.visibility = View.VISIBLE
         claimingViewModel.getProviderTypes(ClaimingData.governId.toString(), ClaimingData.areaId.toString())
     }
 //region

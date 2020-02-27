@@ -66,7 +66,7 @@ class PaymentFragment : BaseFragment(), Injectable {
         })
         paymentViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 paymentViewModel.getSyndicates()
             }, cancelCallback = {
                 navController().navigateUp()
@@ -77,7 +77,7 @@ class PaymentFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: PaymentViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
     }
 

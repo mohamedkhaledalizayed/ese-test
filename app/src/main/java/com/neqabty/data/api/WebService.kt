@@ -130,4 +130,10 @@ interface WebService {
 
     @POST("api/Auth/SignUp")
     fun signup(@Body signupRequest: SignupRequest): Observable<ApiResponse<UserData>>
+
+    @GET("api/complaintServices")
+    fun getComplaintTypes(): Observable<List<ComplaintTypeData>>
+
+    @POST("api/complaints/request")
+    fun sendComplaint(@Body complaintRequest: ComplaintRequest): Observable<ApiResponse<Unit>>
 }

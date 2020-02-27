@@ -71,7 +71,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         })
         claimingViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 claimingViewModel.validateUser(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().popBackStack()
@@ -82,10 +82,10 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: ClaimingViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 //        if (state.member != null && state.member?.code != 3 && state.member?.code != 4 && !isValid) {
 //            val prefs = PreferencesHelper(requireContext())
-//            binding.progressbar.visibility = View.VISIBLE
+//            llSuperProgressbar.visibility = View.VISIBLE
 //            memberName = state.member!!.engineerName!!
 //            isValid = true
 //            claimingViewModel.getAllContent1()
@@ -98,7 +98,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             when(state.member?.code) {
                 0 -> {
                     val prefs = PreferencesHelper(requireContext())
-                    binding.progressbar.visibility = View.VISIBLE
+                    llSuperProgressbar.visibility = View.VISIBLE
                     memberName = state.member!!.engineerName
                     isValid = true
                     claimingViewModel.getAllContent1()

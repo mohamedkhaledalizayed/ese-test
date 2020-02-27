@@ -64,7 +64,7 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
         })
         notificationDetailsViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 notificationDetailsViewModel.getNotificationDetails(serviceId, serviceId, PreferencesHelper(requireContext()).user.toInt(), notificationId.toInt())
             }, cancelCallback = {
                 navController().navigateUp()
@@ -78,7 +78,7 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: NotificationDetailsViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         binding.llContainer.visibility = if (state.isLoading) View.GONE else View.VISIBLE
         state.notification?.let {
             initializeViews(it)

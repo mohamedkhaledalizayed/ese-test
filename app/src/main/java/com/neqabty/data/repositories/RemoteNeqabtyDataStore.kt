@@ -18,6 +18,20 @@ import javax.inject.Singleton
 @Singleton
 
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
+
+    override fun createComplaint(name: String, phone: String, type: String, body: String, token: String): Observable<Unit> {
+        return api.sendComplaint(ComplaintRequest(name, phone,type,body, token)).map { result ->
+            result.data ?: Unit
+        }
+    }
+
+    private val complaintTypeDataEntityMapper = ComplaintTypeDataEntityMapper()
+    override fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>> {
+        return api.getComplaintTypes().map { types ->
+            types.map { complaintTypeDataEntityMapper.mapFrom(it) }
+        }
+    }
+
     private val inquireUpdateUserDataEntityMapper = InquireUpdateUserDataEntityMapper()
     override fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity> {
         return api.updateUserDataInquiry(InquireUpdateUserDataRequest(userNumber.toInt())).flatMap { userDataResponse ->

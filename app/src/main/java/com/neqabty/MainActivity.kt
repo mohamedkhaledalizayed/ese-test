@@ -180,6 +180,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 //                        navController.navigate(R.id.mobileFragment, bundle)
 //                    }
 //                }
+                R.id.complaints_fragment -> {
+                    navController.navigate(R.id.complaintsFragment)
+                }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
                 }

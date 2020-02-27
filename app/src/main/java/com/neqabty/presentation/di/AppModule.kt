@@ -336,6 +336,18 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetComplaintTypes(neqabtyRepository: NeqabtyRepository): GetComplaintTypes {
+        return GetComplaintTypes(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCreateComplaint(neqabtyRepository: NeqabtyRepository): CreateComplaint {
+        return CreateComplaint(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideAddFavorite(@Named(DI.roomCache) neqabtyCache: NeqabtyCache): AddFavorite {
         return AddFavorite(ASyncTransformer(), neqabtyCache)
     }

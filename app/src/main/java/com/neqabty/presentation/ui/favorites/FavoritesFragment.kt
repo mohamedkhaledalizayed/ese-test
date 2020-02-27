@@ -56,7 +56,7 @@ class FavoritesFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: FavoritesViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.favorites?.let {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
@@ -82,7 +82,7 @@ class FavoritesFragment : BaseFragment(), Injectable {
         })
         favoritesViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 favoritesViewModel.getFavorites()
             }, cancelCallback = {
                 navController().navigateUp()

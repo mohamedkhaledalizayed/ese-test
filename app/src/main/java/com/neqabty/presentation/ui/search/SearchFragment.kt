@@ -73,7 +73,7 @@ class SearchFragment : BaseFragment(), Injectable {
         })
         searchViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 searchViewModel.getAllContent()
             }, cancelCallback = {
                 navController().popBackStack()
@@ -93,7 +93,7 @@ class SearchFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: SearchViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.governs != null && state.areas != null && state.providerTypes != null && state.degrees != null && state.professions != null) {
             binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
             state.governs?.let {

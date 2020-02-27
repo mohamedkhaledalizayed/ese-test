@@ -90,7 +90,7 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
     }
 
     private fun handleViewState(state: SubSyndicatesViewState) {
-//        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+//        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.subSyndicates?.let {
             adapter.submitList(it)
         }

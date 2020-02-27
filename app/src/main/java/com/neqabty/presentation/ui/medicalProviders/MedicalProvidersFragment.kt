@@ -84,7 +84,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         })
         medicalProvidersViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), professionID, degreeID)
             }, cancelCallback = {
                 navController().navigateUp()
@@ -95,7 +95,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: MedicalProvidersViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.providers?.let {
             if(it.size == 0)
                 binding.tvNoDataFound.visibility = View.VISIBLE

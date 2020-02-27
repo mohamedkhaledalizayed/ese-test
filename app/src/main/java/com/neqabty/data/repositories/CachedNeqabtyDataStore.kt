@@ -12,6 +12,14 @@ import javax.inject.Singleton
 @Singleton
 
 class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: NeqabtyCache) : NeqabtyDataStore {
+    override fun createComplaint(name: String, phone: String, type: String, body: String, token: String): Observable<Unit> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

@@ -66,7 +66,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
         })
         chooseAreaViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 chooseAreaViewModel.getAllContent1()
             }, cancelCallback = {
                 navController().popBackStack()
@@ -88,7 +88,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: ChooseAreaViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.governs != null && state.areas != null) {
             binding.llHolder.visibility = if (state.isLoading) View.GONE else View.VISIBLE
             state.governs?.let {

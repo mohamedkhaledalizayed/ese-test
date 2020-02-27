@@ -73,7 +73,7 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         })
         tripDetailsViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 tripDetailsViewModel.getTripDetails(tripId.toString())
             }, cancelCallback = {
                 navController().navigateUp()
@@ -83,7 +83,7 @@ class TripDetailsFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: TripDetailsViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.trip?.let {
             initializeViews(it)
         }

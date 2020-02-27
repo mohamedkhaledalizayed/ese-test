@@ -80,7 +80,7 @@ class NotificationsListFragment : BaseFragment(), Injectable {
             binding.tvError.visibility = View.VISIBLE
             binding.rvNotifications.visibility = View.GONE
 //            showConnectionAlert(requireContext(), retryCallback = {
-//                binding.progressbar.visibility = View.VISIBLE
+//                llSuperProgressbar.visibility = View.VISIBLE
 //                loadNotifications(typeID)
 //            }, cancelCallback = {
 //                navController().navigateUp()
@@ -91,7 +91,7 @@ class NotificationsListFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: NotificationsViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.notifications?.let {
             binding.tvError.visibility = View.GONE
             binding.rvNotifications.visibility = View.VISIBLE
@@ -104,7 +104,7 @@ class NotificationsListFragment : BaseFragment(), Injectable {
     }
 
     fun loadNotifications(typeID: Int) {
-        binding.progressbar.visibility = View.VISIBLE
+        llSuperProgressbar.visibility = View.VISIBLE
         binding.tvError.visibility = View.GONE
         notificationsViewModel.getNotifications(typeID, 2, PreferencesHelper(requireContext()).user.toInt())
     }

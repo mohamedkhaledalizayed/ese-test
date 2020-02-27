@@ -36,10 +36,25 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:fitsSystemWindows="true"
-                app:navigationIcon="@mipmap/menu_ic"
                 android:minHeight="?attr/actionBarSize"
-                android:theme="@style/ToolbarTheme" />
+                android:theme="@style/ToolbarTheme"
+                app:navigationIcon="@mipmap/menu_ic" />
 
+            <LinearLayout
+                android:id="@+id/llSuperProgressbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:id="@+id/superProgressbar"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true" />
+            </LinearLayout>
         </FrameLayout>
 
         <android.support.design.widget.NavigationView

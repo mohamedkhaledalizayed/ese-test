@@ -1,6 +1,7 @@
 package com.neqabty.presentation.common
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.CallSuper
@@ -9,12 +10,16 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import com.neqabty.R
 
 
 open class BaseFragment : Fragment() {
     var builder: AlertDialog.Builder? = null
     var dialog: AlertDialog? = null
+    lateinit var llSuperProgressbar: LinearLayout
+
     fun setupToolbar(showUp: Boolean = true, show: Boolean = true) {
         when (show) {
             true -> {
@@ -50,6 +55,7 @@ open class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (activity as AppCompatActivity).invalidateOptionsMenu()
+        llSuperProgressbar = (activity as AppCompatActivity).findViewById(R.id.llSuperProgressbar)
         super.onViewCreated(view, savedInstanceState)
     }
 

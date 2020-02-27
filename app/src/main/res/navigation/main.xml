@@ -9,7 +9,7 @@
         android:id="@+id/openLoginFragment"
         app:destination="@id/loginFragment"
         app:popUpTo="@id/nav_graph"
-        app:popUpToInclusive="true"/>
+        app:popUpToInclusive="true" />
 
     <fragment
         android:id="@+id/loginFragment"
@@ -153,8 +153,7 @@
     <fragment
         android:id="@+id/addCompanionFragment"
         android:name="com.neqabty.presentation.ui.addCompanion.AddCompanionFragment"
-        tools:layout="@layout/add_companion_fragment">
-    </fragment>
+        tools:layout="@layout/add_companion_fragment"></fragment>
     <fragment
         android:id="@+id/paymentFragment"
         android:name="com.neqabty.presentation.ui.payment.PaymentFragment"
@@ -303,8 +302,8 @@
         tools:layout="@layout/update_data_details_fragment">
 
         <!--<argument-->
-            <!--android:name="userDataInquire"-->
-            <!--app:argType="com.neqabty.presentation.entities.InquireUpdateUserDataUI" />-->
+        <!--android:name="userDataInquire"-->
+        <!--app:argType="com.neqabty.presentation.entities.InquireUpdateUserDataUI" />-->
 
         <action
             android:id="@+id/updateDataVerification"
@@ -344,8 +343,8 @@
         tools:layout="@layout/engineering_records_details_fragment">
 
         <!--<argument-->
-            <!--android:name="memberItem"-->
-            <!--app:argType="com.neqabty.presentation.entities.RegisteryUI" />-->
+        <!--android:name="memberItem"-->
+        <!--app:argType="com.neqabty.presentation.entities.RegisteryUI" />-->
 
     </fragment>
     <fragment
@@ -370,6 +369,11 @@
             android:id="@+id/openPayment"
             app:destination="@id/paymentFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/complaintsFragment"
+        android:name="com.neqabty.presentation.ui.complaint.ComplaintFragment"
+        android:label="@string/complaints_title"
+        tools:layout="@layout/complaint_fragment" />
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.neqabty.presentation.ui.about.AboutFragment"

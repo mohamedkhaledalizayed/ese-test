@@ -70,10 +70,10 @@ class LoginFragment : BaseFragment(), Injectable {
         })
         loginViewModel.errorState.observe(this, Observer { throwable ->
             showConnectionAlert(requireContext(), retryCallback = {
-                binding.progressbar.visibility = View.VISIBLE
+                llSuperProgressbar.visibility = View.VISIBLE
                 login()
             }, cancelCallback = {
-                binding.progressbar.visibility = View.GONE
+                llSuperProgressbar.visibility = View.GONE
                 navController().navigateUp()
             })
 //            throwable?.let {
@@ -83,7 +83,7 @@ class LoginFragment : BaseFragment(), Injectable {
     }
 
     private fun handleViewState(state: LoginViewState) {
-        binding.progressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.user?.let {
             PreferencesHelper(requireContext()).mobile = edMobile.text.toString()
             PreferencesHelper(requireContext()).jwt = it.token
