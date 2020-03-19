@@ -11,6 +11,7 @@ import com.neqabty.presentation.ui.favorites.FavoritesFragment
 import com.neqabty.presentation.ui.home.HomeFragment
 import com.neqabty.presentation.ui.inquiry.InquiryFragment
 import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsFragment
+import com.neqabty.presentation.ui.intro.IntroFragment
 import com.neqabty.presentation.ui.login.LoginFragment
 import com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragment
 import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsFragment
@@ -42,6 +43,9 @@ import dagger.android.ContributesAndroidInjector
 @Suppress("unused")
 @Module
 abstract class FragmentBuildersModule {
+    @ContributesAndroidInjector
+    abstract fun contributeIntroFragment(): IntroFragment
+
     @ContributesAndroidInjector
     abstract fun contributeLoginFragment(): LoginFragment
 

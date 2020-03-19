@@ -79,7 +79,7 @@ class AppModule {
         return Retrofit.Builder()
                 .baseUrl("http://ec2-3-132-198-61.us-east-2.compute.amazonaws.com/")
 //                .baseUrl("http://eea.neqabty.com/")
-//                .baseUrl("http://3.132.198.61")
+//                .baseUrl("http://192.168.178.38/")
 //            .baseUrl("http://webapp.neqabty.com/")
 //            .baseUrl("https://192.168.196.65")
 //            .baseUrl("https://neqabty-stage.efinance.com.eg")

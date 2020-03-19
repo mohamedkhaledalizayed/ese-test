@@ -108,7 +108,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
         tripReservationViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                tripReservationViewModel.validateUser(PreferencesHelper(requireContext()).user)
+//                tripReservationViewModel.validateUser(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().navigateUp()
             })
@@ -130,15 +130,16 @@ class TripReservationFragment : BaseFragment(), Injectable {
 //        else if (!state.isLoading && isValid && reservationRequested)
 //            showSuccessAlert()
 
-        if (state.member != null && state.member?.amount?.toInt() == 0 && !isValid) {
-            isValid = true
-            memberName = state.member!!.engineerName!!
-            initializeViews()
-        } else if (state.member?.message != null && !isValid) {
-            showMemberValidationAlert(getString(R.string.user_not_allowed))
-            state.member?.message = null
-        }
-        else if (!state.isLoading && isValid && reservationRequested)
+//        if (state.member != null && state.member?.amount?.toInt() == 0 && !isValid) {
+//            isValid = true
+//            memberName = state.member!!.engineerName!!
+//            initializeViews()
+//        } else if (state.member?.message != null && !isValid) {
+//            showMemberValidationAlert(getString(R.string.user_not_allowed))
+//            state.member?.message = null
+//        }
+//        else
+            if (!state.isLoading && reservationRequested)
             showSuccessAlert()
     }
 

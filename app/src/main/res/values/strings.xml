@@ -66,7 +66,7 @@
     <string name="age_on_trip">العمر وقت الرحلة</string>
     <string name="birth_date">تاريخ الميلاد</string>
     <string name="thanks">شكراً</string>
-    <string name="confirm_reservation_msg">لقد تم تسجيل طلبكم و سيتم الرد عليكم في خلال ٤٨ ساعة</string>
+    <string name="confirm_reservation_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
     <string name="addProfileImage">اضافة صورة البروفايل</string>
     <string name="viewPhoto">عرض الصورة</string>
     <string name="format">yyyy/MM/dd</string>
@@ -80,7 +80,7 @@
     <font color="#1d1ad2"><u>اعادة ارسال</u></font>
     </string>
     <string name="congratulations">تم التسجيل بنجاح</string>
-    <string name="request_sent">لقد تم إرسال الطلب بنجاح</string>
+    <string name="request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
     <string name="request_status">طلبكم تحت الدراسة</string>
     <string name="continue_btn">متابعة</string>
     <string name="loginHint">يمكنك الآن الدخول على التطبيق و الاستمتاع بخدمات نقابتك</string>
@@ -303,11 +303,11 @@
     <string name="update_data_add_photo">إضافة صورة</string>
     <string name="user_not_allowed">التجديد لهذا العضو غير مسموح</string>
     <string name="wrong_verification_code">كود التأكيد غير مطابق</string>
-    <string name="records_request_sent">لقد تم ارسال الطلب بنجاح للمراجعة .. سيتم الرد عليكم في خلال ٤٨ ساعة</string>
+    <string name="records_request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
 
     <string name="complaint_type">نوع الشكوى</string>
     <string name="complaint_name">اسم مقدم الشكوى</string>
     <string name="complaint_mobile">هاتف الشكوى</string>
     <string name="complaint_body">موضوع الشكوى</string>
-    <string name="complaint_sent">لقد تم إرسال الشكوى بنجاح</string>
+    <string name="complaint_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
 </resources>

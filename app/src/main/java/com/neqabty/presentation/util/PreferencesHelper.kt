@@ -6,6 +6,7 @@ import android.preference.PreferenceManager
 class PreferencesHelper(context: Context) {
     companion object {
         const val DEVELOP_MODE = false
+        private const val IS_INTRO_SKIPPED = "data.source.prefs.IS_INTRO_SKIPPED"
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val SUB_SYNDICATE = "data.source.prefs.SUB_SYNDICATE"
         private const val USER = "data.source.prefs.USER"
@@ -18,6 +19,9 @@ class PreferencesHelper(context: Context) {
     }
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+    var isIntroSkipped = preferences.getBoolean(IS_INTRO_SKIPPED, false)
+        set(value) = preferences.edit().putBoolean(IS_INTRO_SKIPPED, value).apply()
 
     var mainSyndicate = preferences.getInt(MAIN_SYNDICATE, 0)
         set(value) = preferences.edit().putInt(MAIN_SYNDICATE, value).apply()

@@ -34,6 +34,7 @@ versions.firebase_jobdispatcher = "0.8.5"
 versions.gms = "4.0.1"
 versions.indicator = "0.2.0"
 versions.kotlinx = "0.2.0"
+versions.mastercard = "1.1.1"
 
 def deps = [:]
 
@@ -162,6 +163,9 @@ deps.gms = gms
 
 def kotlinx = "org.jetbrains.kotlin:kotlin-android-extensions:$versions.kotlinx"
 deps.kotlinx = kotlinx
+
+def mastercard = "com.mastercard.gateway:gateway-android:$versions.mastercard"
+deps.mastercard = mastercard
 
 ext.deps = deps
 

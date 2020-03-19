@@ -131,17 +131,17 @@
                         android:text="@{tripItem.place.details}"
                         android:textSize="@dimen/text_size_medium" />
 
-                    <!--<Button-->
-                        <!--android:id="@+id/bReserve"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@mipmap/btn"-->
-                        <!--android:gravity="center"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:text="@string/reserve"-->
-                        <!--android:textColor="@android:color/white"-->
-                        <!--android:elevation="@dimen/elevation_level_one"-->
-                        <!--android:textSize="@dimen/text_size_medium" />-->
+                    <Button
+                        android:id="@+id/bReserve"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/btn"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="@string/reserve"
+                        android:textColor="@android:color/white"
+                        android:elevation="@dimen/elevation_level_one"
+                        android:textSize="@dimen/text_size_medium" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
 

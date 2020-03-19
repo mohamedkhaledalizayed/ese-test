@@ -55,6 +55,48 @@
                     android:text="@{Html.fromHtml(@string/amount_title(memberItem.amount))}"
                     android:textSize="@dimen/text_size_large" />
 
+
+                <RadioGroup
+                    android:id="@+id/rgPaymentMechanismType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/rb_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:checked="true"
+                        android:text="Card"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_channel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Channel"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_mobileWallet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mobile Wallet"
+                        android:textSize="18sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_meeza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Meeza"
+                        android:textSize="18sp"/>
+
+                </RadioGroup>
+
                 <Button
                     android:id="@+id/bPay"
                     android:layout_width="wrap_content"

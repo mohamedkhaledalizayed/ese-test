@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -105,7 +104,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 //        dialog.show()
 //    }
 
-//    private fun checkRoot(){
+    //    private fun checkRoot(){
 //        if (DeviceUtils().isDeviceRooted()) {
 //            showAlertDialogAndExitApp(getString(R.string.root_msg));
 //        }
@@ -118,12 +117,12 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         val navController = Navigation.findNavController(this, R.id.container)
 //        graph.desetDefaultArguments(intent.extras)
 
-        if (PreferencesHelper(this).mobile.isEmpty()) // TODO
+        if (!PreferencesHelper(this).isIntroSkipped) // TODO
+            graph.startDestination = R.id.introFragment
+        else if (PreferencesHelper(this).mobile.isEmpty()) // TODO
             graph.startDestination = R.id.loginFragment
-        else if (PreferencesHelper(this).isSyndicateChosen()) // TODO
-            graph.startDestination = R.id.homeFragment
         else
-            graph.startDestination = R.id.syndicatesFragment
+            graph.startDestination = R.id.homeFragment
 
         navHostFragment.navController.graph = graph
         supportFragmentManager.beginTransaction().setPrimaryNavigationFragment(navHostFragment)
@@ -159,27 +158,27 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.medical_fragment -> {
                     navController.navigate(R.id.chooseAreaFragment)
                 }
-//                R.id.inquiry_fragment -> {
-//                    navController.navigate(R.id.inquiryFragment)
-//                }
-//                R.id.engineering_records_fragment -> {
-//                    if (PreferencesHelper(this).isRegistered)
-//                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
-//                    else {
-//                        val bundle: Bundle = Bundle()
-//                        bundle.putInt("type", 3)
-//                        navController.navigate(R.id.mobileFragment, bundle)
-//                    }
-//                }
-//                R.id.update_data_fragment -> {
-//                    if (PreferencesHelper(this).isRegistered)
-//                        navController.navigate(R.id.updateDataDetailsFragment)
-//                    else {
-//                        val bundle: Bundle = Bundle()
-//                        bundle.putInt("type", 4)
-//                        navController.navigate(R.id.mobileFragment, bundle)
-//                    }
-//                }
+                R.id.inquiry_fragment -> {
+                    navController.navigate(R.id.inquiryFragment)
+                }
+                R.id.engineering_records_fragment -> {
+                    if (PreferencesHelper(this).isRegistered)
+                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
+                    else {
+                        val bundle: Bundle = Bundle()
+                        bundle.putInt("type", 3)
+                        navController.navigate(R.id.mobileFragment, bundle)
+                    }
+                }
+                R.id.update_data_fragment -> {
+                    if (PreferencesHelper(this).isRegistered)
+                        navController.navigate(R.id.updateDataDetailsFragment)
+                    else {
+                        val bundle: Bundle = Bundle()
+                        bundle.putInt("type", 4)
+                        navController.navigate(R.id.mobileFragment, bundle)
+                    }
+                }
                 R.id.complaints_fragment -> {
                     navController.navigate(R.id.complaintsFragment)
                 }
@@ -254,7 +253,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
             if (currentFragment is OnBackPressedListener)
                 finishAffinity()
-            super.onBackPressed()
+            else
+                super.onBackPressed()
         }
     }
 
@@ -315,13 +315,13 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     .navigate(R.id.openLoginFragment)
         }
 
-        if(PreferencesHelper(this).name.isNotEmpty()) {
+        if (PreferencesHelper(this).name.isNotEmpty()) {
             nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
             nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).setText(Html.fromHtml(getString(R.string.menu_memberName, PreferencesHelper(this).name)))
         } else
             nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
 
-        if(PreferencesHelper(this).user.isNotEmpty()) {
+        if (PreferencesHelper(this).user.isNotEmpty()) {
             nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.VISIBLE
             nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
         } else

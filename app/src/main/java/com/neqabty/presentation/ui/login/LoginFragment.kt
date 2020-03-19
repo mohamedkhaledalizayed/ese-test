@@ -87,7 +87,10 @@ class LoginFragment : BaseFragment(), Injectable {
         state.user?.let {
             PreferencesHelper(requireContext()).mobile = edMobile.text.toString()
             PreferencesHelper(requireContext()).jwt = it.token
-            navController().navigate(LoginFragmentDirections.openSyndicatesFragment())
+
+            PreferencesHelper(requireContext()).mainSyndicate = 5
+            PreferencesHelper(requireContext()).subSyndicate = 0
+            navController().navigate(LoginFragmentDirections.openHome())
         }
     }
 

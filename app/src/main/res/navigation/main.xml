@@ -5,20 +5,31 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
 
-    <action
-        android:id="@+id/openLoginFragment"
-        app:destination="@id/loginFragment"
-        app:popUpTo="@id/nav_graph"
-        app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.neqabty.presentation.ui.intro.IntroFragment"
+        android:label=" "
+        tools:layout="@layout/intro_fragment">
+
+        <action
+            android:id="@+id/openLoginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.neqabty.presentation.ui.login.LoginFragment"
         android:label="@string/mobile_title"
         tools:layout="@layout/login_fragment">
+        <!--        <action-->
+        <!--            android:id="@+id/openSyndicatesFragment"-->
+        <!--            app:destination="@id/syndicatesFragment" />-->
+
         <action
-            android:id="@+id/openSyndicatesFragment"
-            app:destination="@id/syndicatesFragment" />
+            android:id="@+id/openHome"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment

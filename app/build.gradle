@@ -142,6 +142,9 @@ dependencies {
     kapt deps.room.compiler
     kapt deps.lifecycle.compiler
 
+    implementation deps.mastercard
+    implementation project(':mobilepaymentsdk-v2.0')
+
     testImplementation deps.junit
     testImplementation deps.mock_web_server
     testImplementation(deps.arch_core.testing, {

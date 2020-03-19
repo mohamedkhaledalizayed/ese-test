@@ -111,13 +111,13 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         binding.rvRegiments.adapter = adapter
         adapter.submitList(tripItem.regiments)
 
-//        binding.bReserve.setOnClickListener {
-//            TripsData.tripItem = tripItem
-//            if (PreferencesHelper(requireContext()).isRegistered)
-//                navController().navigate(TripDetailsFragmentDirections.openTripReservation(tripItem))
-//            else
-//                navController().navigate(TripDetailsFragmentDirections.openLogin(2))
-//        }
+        binding.bReserve.setOnClickListener {
+            TripsData.tripItem = tripItem
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(TripDetailsFragmentDirections.openTripReservation(tripItem))
+            else
+                navController().navigate(TripDetailsFragmentDirections.openLogin(2))
+        }
     }
 
 //region

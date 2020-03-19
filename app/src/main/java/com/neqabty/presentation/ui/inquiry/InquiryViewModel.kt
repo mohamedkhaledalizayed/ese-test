@@ -30,8 +30,9 @@ class InquiryViewModel @Inject constructor(private val validateUser: ValidateUse
                 }.subscribe(
                         { onValidationReceived(it) },
                         {
-                            viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            onValidationReceived(MemberUI("3308222","MonaZ","2-2-2020","MasterCard","1-1-2020",200,"AR","2-2-2020","MSG",119))
+//                            viewState.value = viewState.value?.copy(isLoading = false)
+//                            errorState.value = it
                         }
                 )
         )
