@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.AddCompanionFragmentBinding
@@ -91,21 +90,17 @@ class AddCompanionFragment : DialogFragment(), Injectable {
         }
 
         bOK.setOnClickListener {
-            if (edAgeOnTrip.text.toString().length == 0) {
-                Toast.makeText(context, getString(R.string.invalid_data), Toast.LENGTH_LONG).show()
-            } else {
-                companion.name = ""
-                companion.relationship = selectedRelation
-                companion.ageOnTrip = edAgeOnTrip.text.toString().toInt()
-                companion.birthDate = edBirthDate.text.toString()
+            companion.name = ""
+            companion.relationship = selectedRelation
+            companion.ageOnTrip = 0
+            companion.birthDate = edBirthDate.text.toString()
 
-                val intent = Intent()
-                val bundle = Bundle()
-                bundle.putParcelable("companion", companion)
-                intent.putExtras(bundle)
-                targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
-                dialog.dismiss()
-            }
+            val intent = Intent()
+            val bundle = Bundle()
+            bundle.putParcelable("companion", companion)
+            intent.putExtras(bundle)
+            targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
+            dialog.dismiss()
         }
 
         bCancel.setOnClickListener { dialog.dismiss() }

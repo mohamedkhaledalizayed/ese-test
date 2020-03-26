@@ -7,6 +7,7 @@ class PreferencesHelper(context: Context) {
     companion object {
         const val DEVELOP_MODE = false
         private const val IS_INTRO_SKIPPED = "data.source.prefs.IS_INTRO_SKIPPED"
+        private const val IS_NOTIFICATIONS_ENABLED = "data.source.prefs.IS_NOTIFICATIONS_ENABLED"
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val SUB_SYNDICATE = "data.source.prefs.SUB_SYNDICATE"
         private const val USER = "data.source.prefs.USER"
@@ -19,6 +20,9 @@ class PreferencesHelper(context: Context) {
     }
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+    var isNotificationsEnabled = preferences.getBoolean(IS_NOTIFICATIONS_ENABLED, true)
+        set(value) = preferences.edit().putBoolean(IS_NOTIFICATIONS_ENABLED, value).apply()
 
     var isIntroSkipped = preferences.getBoolean(IS_INTRO_SKIPPED, false)
         set(value) = preferences.edit().putBoolean(IS_INTRO_SKIPPED, value).apply()

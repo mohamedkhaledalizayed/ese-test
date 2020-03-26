@@ -92,8 +92,11 @@ interface WebService {
     @POST("api/v1/transactions/generate-hash")
     fun getTransactionHash(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
-    @GET("api/v1/Service/inquiry")
-    fun validateUser(@Query("OldRefID") userNumber:Int, @Query("ServiceGroupID") serviceGroupID:Int): Observable<MemberData>
+    @GET("http://ese.neqabty.com/api/services")
+    fun getAllServices(): Observable<ResponseWrapper<List<List<ServiceData>>>>
+
+    @GET("http://ese.neqabty.com/api/service")
+    fun paymentInquiry(@Query("oldRefID") userNumber:Int, @Query("serviceID") serviceID:Int): Observable<ResponseWrapper<MemberData>>
 
     @POST("api/v2/medical/Beneficiary")
     fun validateUser(@Body claimingValidationRequest: ClaimingValidationRequest): Observable<ApiResponse<ClaimingValidationData>>

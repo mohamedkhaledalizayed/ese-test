@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.text.Html"/>
+
+        <import type="android.text.Html" />
+
         <variable
             name="memberItem"
             type="com.neqabty.presentation.entities.MemberUI" />
@@ -41,12 +43,12 @@
                     android:text="@{Html.fromHtml(@string/name_title(memberItem.engineerName))}"
                     android:textSize="@dimen/text_size_large" />
 
-                <TextView
-                    android:id="@+id/tvExpirationDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{Html.fromHtml(@string/expiration_date_title(memberItem.billDate))}"
-                    android:textSize="@dimen/text_size_large" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvRequestID"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@{Html.fromHtml(@string/expiration_date_title(memberItem.billDate))}"-->
+                <!--                    android:textSize="@dimen/text_size_large" />-->
 
                 <TextView
                     android:id="@+id/tvAmount"
@@ -55,6 +57,29 @@
                     android:text="@{Html.fromHtml(@string/amount_title(memberItem.amount))}"
                     android:textSize="@dimen/text_size_large" />
 
+
+                <TextView
+                    android:id="@+id/tvDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/details"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_large" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    tools:listitem="@layout/payment_item" />
+
+                <TextView
+                    android:id="@+id/tvPaymentMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payment_method"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_large" />
 
                 <RadioGroup
                     android:id="@+id/rgPaymentMechanismType"
@@ -71,29 +96,33 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:checked="true"
-                        android:text="Card"
-                        android:textSize="18sp" />
+                        android:text="@string/payment_card"
+                        android:textSize="@dimen/text_size_large"
+                        android:buttonTint="@color/colorPrimary" />
 
                     <RadioButton
                         android:id="@+id/rb_channel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Channel"
-                        android:textSize="18sp" />
+                        android:text="@string/payment_channel"
+                        android:textSize="@dimen/text_size_large"
+                        android:buttonTint="@color/colorPrimary" />
 
                     <RadioButton
                         android:id="@+id/rb_mobileWallet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mobile Wallet"
-                        android:textSize="18sp"/>
+                        android:text="@string/payment_wallet"
+                        android:textSize="@dimen/text_size_large"
+                        android:buttonTint="@color/colorPrimary"/>
 
                     <RadioButton
                         android:id="@+id/rb_meeza"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Meeza"
-                        android:textSize="18sp"/>
+                        android:text="@string/payment_meeza"
+                        android:textSize="@dimen/text_size_large"
+                        android:buttonTint="@color/colorPrimary" />
 
                 </RadioGroup>
 
@@ -101,10 +130,10 @@
                     android:id="@+id/bPay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/margin_vertical_large"
                     android:background="@mipmap/btn"
                     android:gravity="center"
-                    android:layout_gravity="center"
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/pay"
                     android:textColor="@android:color/white"

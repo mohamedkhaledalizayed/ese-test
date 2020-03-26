@@ -4,40 +4,29 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class MemberUI(
-    var engineerID: String = "",
-    var engineerName: String?,
-    var expirationDate: String?,
-    var paymentType: String?,
-    var billDate: String?,
-    var code: Int?,
-    var interfaceLanguage: String?,
-    var lastPaymentDate: String?,
-    var message: String? = "",
-    var amount: Int?
+        var requestID: String = "",
+        var engineerName: String?,
+        var amount: Int?,
+        var msg: String?,
+        var payments: List<PaymentItem>? = null
 ) : Parcelable {
+    data class PaymentItem(
+            var quantity: Int = 0,
+            var totalPrice: String?,
+            var name: String?
+    )
+
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
             parcel.readInt(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readInt())
-
+            parcel.readString()
+    )
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(engineerID)
+        parcel.writeString(requestID)
         parcel.writeString(engineerName)
-        parcel.writeString(expirationDate)
-        parcel.writeString(paymentType)
-        parcel.writeString(billDate)
-        parcel.writeInt(code ?: 0)
-        parcel.writeString(interfaceLanguage)
-        parcel.writeString(lastPaymentDate)
-        parcel.writeString(message)
         parcel.writeInt(amount!!)
+        parcel.writeString(msg)
     }
 
     override fun describeContents(): Int {

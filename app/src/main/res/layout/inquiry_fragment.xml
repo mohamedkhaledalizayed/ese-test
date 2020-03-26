@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -36,14 +35,36 @@
             app:layout_constraintTop_toBottomOf="@id/ivHeader">
 
             <LinearLayout
+                android:id="@+id/llContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:visibility="invisible"
                 android:orientation="vertical">
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:gravity="center"
+                    android:text="@string/choose_service"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Spinner
+                    android:id="@+id/spService"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:hint="@string/governorate"
+                    android:textDirection="rtl"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
                     android:gravity="center"
                     android:text="@string/enter_member_number"
                     android:textSize="@dimen/text_size_medium" />
@@ -52,9 +73,11 @@
                     android:id="@+id/edMemberNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:gravity="center"
                     android:inputType="number"
                     android:maxLength="11"
-                    android:gravity="center"
+                    android:text="3308222"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large" />
 

@@ -73,12 +73,12 @@ class IntroFragment : BaseFragment(), Injectable {
 
         binding.bSkip.setOnClickListener {
             PreferencesHelper(requireContext()).isIntroSkipped = true
-            navController().navigate(IntroFragmentDirections.openLoginFragment())
+            navController().navigate(R.id.openLoginFragment)
         }
 
         binding.bContinue.setOnClickListener {
             if (vpIntro.currentItem == vpIntro.childCount - 1)
-                navController().navigate(IntroFragmentDirections.openLoginFragment())
+                navController().navigate(R.id.openLoginFragment)
             else
                 vpIntro.setCurrentItem(vpIntro.currentItem + 1, true)
         }

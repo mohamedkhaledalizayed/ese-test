@@ -98,6 +98,7 @@
 
     <string name="mobile_title">تسجيل دخول</string>
     <string name="enter_mobile">برجاء ادخال رقم الهاتف المحمول الخاص بك</string>
+    <string name="choose_service">اختار الخدمة</string>
     <string name="enter_member_number">ادخل رقم العضوية</string>
     <string name="medicalRequest">تقديم مطالبة طبية</string>
     <string name="syndicateNumber">رقم العضوية</string>
@@ -173,6 +174,8 @@
     <string name="phone_title">التليفون: </string>
     <string name="email_title">البريد الالكتروني: </string>
 
+    <string name="notifications_settings">الإشعارات</string>
+
     <string name="name_title">
     <![CDATA[<font color="#1d1ad2">الإسم: </font>]]>%s
     </string>
@@ -208,6 +211,18 @@
 
     <string name="pay">الدفع</string>
     <string name="inquiry">سداد اشتراكات</string>
+    <string name="details">التفاصيل:</string>
+    <string name="payment_method">طريقة الدفع:</string>
+    <string name="payment_card">بطاقات بنكية</string>
+    <string name="payment_channel">قنوات دفع</string>
+    <string name="payment_wallet">محافظ إلكترونية</string>
+    <string name="payment_meeza">ميزة</string>
+    <string name="name_on_card">إسم صاحب البطاقة</string>
+    <string name="card_number">رقم الكارت</string>
+    <string name="card_expiry_date">تاريخ الإنتهاء</string>
+    <string name="card_cvv">الرقم السري</string>
+    <string name="token">الرمز</string>
+    <string name="save_card_info">حفظ بيانات البطاقة؟</string>
 
     <string name="date_title">
     <![CDATA[<font color="#1d1ad2">تاريخ الطلب: </font>]]>%s
@@ -269,6 +284,7 @@
     <![CDATA[<font color="#1d1ad2">نوع الغرفة: </font>]]>%s
     </string>
 
+    <string name="view_attachment">عرض ملف الموافقة</string>
     <string name="type">النوع</string>
     <string name="no_data_found">لا توجد بيانات</string>
     <string name="no_providers_found">لا توجد بيانات في هذا القسم</string>
@@ -293,6 +309,7 @@
 
     <string name="records_add_photos_3">∎ اخر صفحات السجل الهندسي مقيد بها أعمال</string>
 
+    <string name="bullet">∎ </string>
     <string name="update_data_add_photos">
             <![CDATA[<font color="#1d1ad2"> برجاء رفع المرفقات التالية: </font>]]>
     </string>

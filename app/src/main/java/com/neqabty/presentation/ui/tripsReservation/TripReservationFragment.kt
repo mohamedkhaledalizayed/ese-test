@@ -75,7 +75,6 @@ class TripReservationFragment : BaseFragment(), Injectable {
     var childrenID: Int = 0
 
     var reservationRequested = false
-    var memberName = ""
     private var isValid = false
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -108,12 +107,12 @@ class TripReservationFragment : BaseFragment(), Injectable {
         tripReservationViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-//                tripReservationViewModel.validateUser(PreferencesHelper(requireContext()).user)
+//                tripReservationViewModel.paymentInquiry(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
-//        tripReservationViewModel.validateUser(PreferencesHelper(requireContext()).user)
+//        tripReservationViewModel.paymentInquiry(PreferencesHelper(requireContext()).user)
         initializeViews()
     }
 
@@ -178,7 +177,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
             if (photosList.size > 0) {
                 reservationRequested = true
                 val prefs = PreferencesHelper(requireContext())
-                tripReservationViewModel.bookTrip(prefs.mainSyndicate, PreferencesHelper(requireContext()).user, prefs.mobile, tripItem.regiments?.get(0)?.tripId!!, regimentID, spRegiments.selectedItem.toString(), spRooms.selectedItem.toString(),spChildren.selectedItem.toString().toInt() , spChild1.selectedItem?.toString()+","+spChild2.selectedItem?.toString()+","+spChild3.selectedItem?.toString(), memberName,companionsList.toList(), photosList.size, companionsList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3))
+                tripReservationViewModel.bookTrip(prefs.mainSyndicate, PreferencesHelper(requireContext()).user, prefs.mobile, tripItem.regiments?.get(0)?.tripId!!, regimentID, spRegiments.selectedItem.toString(), spRooms.selectedItem.toString(),spChildren.selectedItem.toString().toInt() , spChild1.selectedItem?.toString()+","+spChild2.selectedItem?.toString()+","+spChild3.selectedItem?.toString(), PreferencesHelper(requireContext()).name,companionsList.toList(), photosList.size, companionsList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3))
             } else
                 showPickPhotoAlert()
         }

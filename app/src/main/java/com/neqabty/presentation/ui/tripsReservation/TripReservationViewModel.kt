@@ -3,20 +3,17 @@ package com.neqabty.presentation.ui.tripsReservation
 import android.arch.lifecycle.MutableLiveData
 import com.neqabty.domain.entities.PersonEntity
 import com.neqabty.domain.usecases.BookTrip
-import com.neqabty.domain.usecases.GetTripDetails
-import com.neqabty.domain.usecases.ValidateUser
+import com.neqabty.domain.usecases.PaymentInquiry
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.MemberUI
-import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.mappers.MemberEntityUIMapper
-import com.neqabty.presentation.mappers.TripsEntityUIMapper
 import java.io.File
 
 import javax.inject.Inject
 
 class TripReservationViewModel @Inject constructor(private val bookTrip: BookTrip,
-                                                   private val validateUser: ValidateUser) : BaseViewModel() {
+                                                   private val paymentInquiry: PaymentInquiry) : BaseViewModel() {
 
     private val memberEntityUIMapper = MemberEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
@@ -26,22 +23,22 @@ class TripReservationViewModel @Inject constructor(private val bookTrip: BookTri
         viewState.value = TripReservationViewState(isLoading = false)
     }
 
-    fun validateUser(number: String) {
-        viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(validateUser.validateUser(number)
-                .map {
-                    it.let {
-                        memberEntityUIMapper.mapFrom(it)
-                    }
-                }.subscribe(
-                        { onValidationReceived(it) },
-                        {
-                            viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
-                        }
-                )
-        )
-    }
+//    fun paymentInquiry(number: String) {
+//        viewState.value = viewState.value?.copy(isLoading = true)
+//        addDisposable(paymentInquiry.paymentInquiry(number)
+//                .map {
+//                    it.let {
+//                        memberEntityUIMapper.mapFrom(it)
+//                    }
+//                }.subscribe(
+//                        { onValidationReceived(it) },
+//                        {
+//                            viewState.value = viewState.value?.copy(isLoading = false)
+//                            errorState.value = it
+//                        }
+//                )
+//        )
+//    }
 
     private fun onValidationReceived(member: MemberUI) {
         val newViewState = viewState.value?.copy(

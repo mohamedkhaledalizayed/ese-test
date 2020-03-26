@@ -3,23 +3,27 @@ package com.neqabty.presentation.ui.payment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
+import android.content.Intent
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.efinance.mobilepaymentsdk.PaymentConfirmationCallback
+import com.efinance.mobilepaymentsdk.PaymentConfirmationResponse
+import com.efinance.mobilepaymentsdk.PaymentException
 import com.neqabty.AppExecutors
+import com.neqabty.MainActivity
 import com.neqabty.R
-import com.neqabty.data.api.requests.ValidationRequest
 import com.neqabty.databinding.PaymentFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.payment_fragment.*
 import javax.inject.Inject
@@ -73,7 +77,7 @@ class PaymentFragment : BaseFragment(), Injectable {
             })
         })
 
-        paymentViewModel.getSyndicates()
+//        paymentViewModel.getSyndicates()
     }
 
     private fun handleViewState(state: PaymentViewState) {
@@ -82,50 +86,42 @@ class PaymentFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        val params = PaymentFragmentArgs.fromBundle(arguments!!)
-        startWebView("http://eea.neqabty.com/api/v1/transactions/create?amount="+params.amount+"&membership_id="+ params.memberID+"&syndicate_id="+PreferencesHelper(requireContext()).mainSyndicate+"&service_id="+ ValidationRequest().paymentType)
+//        val params = PaymentFragmentArgs.fromBundle(arguments!!)
+        bConfirm.setOnClickListener {
+            //            createPayment()
+        }
     }
 
-    private fun startWebView(url: String) {
-        webview.setWebViewClient(object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-//                view.loadUrl(url)
-                return false
-            }
-
-            //Show loader on url load
-            override fun onLoadResource(view: WebView, url: String) {}
-
-            override fun onPageFinished(view: WebView, url: String) {
-
-                try {
-
-//                    if (url.contains("/wallet-recharge/failed")) {
-//                        finishMethod()
-//                    } else if (url.contains("/wallet-recharge/pay-completed")) {
-//                        webview.clearHistory()
-//                        val broadcastIntent = Intent()
-//                        broadcastIntent.action = "com.package.ACTION_CLASS_CABILY_MONEY_REFRESH"
-//                        sendBroadcast(broadcastIntent)
-//                        finishMethod()
-//                    } else if (url.contains("/wallet-recharge/pay-cancel")) {
-//                        finishMethod()
-//                    }
-
-                } catch (exception: Exception) {
-                    exception.printStackTrace()
-                }
-
-            }
-        })
-
-        //Load url in webView
-        webview.settings.javaScriptEnabled = true
-        webview.loadUrl(url)
-    }
 //region
 
 // endregion
+
+
+// region callback
+class MobilePaymentConfirmationCallback(private val context: Context) : PaymentConfirmationCallback {
+
+    override fun onSuccess(response: PaymentConfirmationResponse) {
+        Log.i("NEQABTY", "Request Completed Successfully")
+
+        Toast.makeText(context, "Payment Confirmed Successfully", Toast.LENGTH_LONG).show()
+
+        //        Intent intent = new Intent(context, PaymentStatusInquiryActivity.class);
+        val intent = Intent(context, MainActivity::class.java)
+
+        intent.putExtra("senderRequestNumber", response.SenderRequestNumber)
+
+        context.startActivity(intent)
+
+    }
+
+    override fun onError(paymentException: PaymentException) {
+        Log.e("NEQABTY", paymentException.details.message)
+
+
+    }
+}
+
+    // endregion
 
     fun navController() = findNavController()
 }

@@ -35,6 +35,26 @@
             app:layout_constraintTop_toBottomOf="@id/ivHeader">
 
             <TextView
+                android:id="@+id/tvMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_horizontal_small"
+                android:text="@string/complaint_mobile"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_medium" />
+
+            <EditText
+                android:id="@+id/edMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_horizontal_small"
+                android:inputType="number"
+                android:enabled="false"
+                android:maxLength="11"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_large" />
+
+            <TextView
                 android:id="@+id/tvTypes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,25 +90,6 @@
                 android:maxLength="140"
                 android:gravity="center"
                 android:layout_margin="@dimen/margin_horizontal_small"
-                android:textSize="@dimen/text_size_large" />
-
-            <TextView
-                android:id="@+id/tvMobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_horizontal_small"
-                android:text="@string/complaint_mobile"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_medium" />
-
-            <EditText
-                android:id="@+id/edMobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_horizontal_small"
-                android:inputType="number"
-                android:maxLength="11"
-                android:gravity="center"
                 android:textSize="@dimen/text_size_large" />
 
             <TextView

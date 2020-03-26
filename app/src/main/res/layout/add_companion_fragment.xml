@@ -71,29 +71,29 @@
                     android:textSize="@dimen/text_size_large"
                     app:layout_constraintTop_toBottomOf="@id/tvBirthDate" />
 
-                <TextView
-                    android:id="@+id/tvAge"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:text="@string/age_on_trip"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edBirthDate" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvAge"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+<!--                    android:text="@string/age_on_trip"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:textSize="@dimen/text_size_medium"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/edBirthDate" />-->
 
-                <EditText
-                    android:id="@+id/edAgeOnTrip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:maxLength="2"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large"
-                    app:layout_constraintTop_toBottomOf="@id/tvAge" />
+<!--                <EditText-->
+<!--                    android:id="@+id/edAgeOnTrip"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+<!--                    android:gravity="center"-->
+<!--                    android:inputType="number"-->
+<!--                    android:maxLength="2"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:textSize="@dimen/text_size_large"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tvAge" />-->
 
                 <Button
                     android:id="@+id/bOK"
@@ -109,7 +109,7 @@
                     app:layout_constraintEnd_toStartOf="@id/bCancel"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edAgeOnTrip" />
+                    app:layout_constraintTop_toBottomOf="@id/edBirthDate" />
 
                 <Button
                     android:id="@+id/bCancel"
@@ -124,7 +124,7 @@
                     android:textSize="@dimen/text_size_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/bOK"
-                    app:layout_constraintTop_toBottomOf="@id/edAgeOnTrip" />
+                    app:layout_constraintTop_toBottomOf="@id/edBirthDate" />
             </android.support.constraint.ConstraintLayout>
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>

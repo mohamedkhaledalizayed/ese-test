@@ -107,6 +107,10 @@ class MobileFragment : BaseFragment(), Injectable {
                 4 -> navController().navigate(
                         MobileFragmentDirections.openUpdateData()
                 )
+
+                5 -> navController().navigate(
+                        MobileFragmentDirections.openComplaints()
+                )
             }
         }
     }

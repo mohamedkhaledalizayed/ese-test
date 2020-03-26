@@ -76,7 +76,8 @@ interface NeqabtyRepository {
             doc4: File?
     ): Observable<Unit>
 
-    fun validateUser(userNumber: Int): Observable<MemberEntity>
+    fun getAllServices(): Observable<List<ServiceEntity>>
+    fun inquirePayment(userNumber: Int, serviceID: Int): Observable<MemberEntity>
     fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>
     fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity>

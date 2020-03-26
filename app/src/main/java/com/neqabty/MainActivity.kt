@@ -180,10 +180,19 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                     }
                 }
                 R.id.complaints_fragment -> {
-                    navController.navigate(R.id.complaintsFragment)
+                    if (PreferencesHelper(this).isRegistered)
+                        navController.navigate(R.id.complaintsFragment)
+                    else {
+                        val bundle: Bundle = Bundle()
+                        bundle.putInt("type", 5)
+                        navController.navigate(R.id.mobileFragment, bundle)
+                    }
                 }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
+                }
+                R.id.settings_fragment -> {
+                    navController.navigate(R.id.settingsFragment)
                 }
                 R.id.contactus_fragment -> {
                     val intent = Intent(Intent.ACTION_SENDTO)

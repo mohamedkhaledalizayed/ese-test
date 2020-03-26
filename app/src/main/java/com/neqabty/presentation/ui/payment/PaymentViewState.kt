@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.payment
 
 data class PaymentViewState(
-    var isLoading: Boolean = true,
+    var isLoading: Boolean = false,
     var hash: String? = null
 )

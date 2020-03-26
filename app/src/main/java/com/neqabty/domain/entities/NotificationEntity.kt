@@ -16,7 +16,7 @@ data class NotificationEntity(
         var name: String?,
         var trip: String?,
         var regiment: String?,
-        var cost: String?,
+        var cost: Int?,
         var housingType: String?,
         var numChild: String?,
         var phone: String?

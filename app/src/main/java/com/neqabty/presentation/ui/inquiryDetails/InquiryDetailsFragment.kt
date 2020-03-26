@@ -1,5 +1,7 @@
 package com.neqabty.presentation.ui.inquiryDetails
 
+import android.content.Context
+import android.content.Intent
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -8,11 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.efinance.mobilepaymentsdk.PaymentCreationRequest
-import com.efinance.mobilepaymentsdk.PaymentCreationResponse
-import com.efinance.mobilepaymentsdk.PaymentGateway
+import com.efinance.mobilepaymentsdk.*
 import com.neqabty.AppExecutors
+import com.neqabty.MainActivity
 import com.neqabty.R
 import com.neqabty.databinding.InquiryDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -20,7 +22,6 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.util.CryptoHelp
-import com.neqabty.presentation.util.MobilePaymentCreationCallback
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
 
@@ -30,6 +31,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
+    private var adapter by autoCleared<PaymentItemsAdapter>()
     var binding by autoCleared<InquiryDetailsFragmentBinding>()
 
     @Inject
@@ -61,19 +63,25 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         val params = InquiryDetailsFragmentArgs.fromBundle(arguments!!)
         memberItem = params.memberItem
 
+        val adapter = PaymentItemsAdapter(dataBindingComponent, appExecutors) { }
+        this.adapter = adapter
+
+
         memberItem?.let {
-//            var tempMember = it.copy()
-//            tempMember.engineerName = getString(R.string.name_title) + " " + it.engineerName
-//            tempMember.expirationDate = getString(R.string.expiration_date_title) + " " + it.billDate
-//            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
             binding.memberItem = it
+
+            it.payments?.let {
+                adapter.submitList(it)
+            }
         }
 
+
+        binding.rvDetails.adapter = adapter
         bPay.setOnClickListener {
-            createPayment()
-//            navController().navigate(
-//                    InquiryDetailsFragmentDirections.openPayment(memberItem.amount!!.toInt(),memberItem.engineerID!!.toInt())
-//            )
+//            createPayment()
+            navController().navigate(
+                    InquiryDetailsFragmentDirections.openPayment()
+            )
         }
     }
 
@@ -111,16 +119,16 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
 
 
-            if (mechanismTypeButton.getText().toString() == "Card") {
+            if (mechanismTypeButton.getText().toString() == getString(R.string.payment_card)) {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Card
-            } else if (mechanismTypeButton.getText().toString() == "Channel") {
+            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Channel
 
                 paymentCreationRequest.PaymentMechanism.Channel.Email = "xxxx@xx.xx"
                 paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = "01111111111"
-            } else if (mechanismTypeButton.getText().toString() == "Mobile Wallet") {
+            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_wallet)) {
                 paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = "01111111111"
-            } else if (mechanismTypeButton.getText().toString() == "Meeza") {
+            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_meeza)) {
                 paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = "01111111111"
             }
 
@@ -138,7 +146,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                     "urKtA1lTWv+Ao9oqexy1BJzMytpS+BAz9kNzmt/g7RcdbXd0MxFotvoHjl2jwE1w\n" +
                     "LwIDAQAB"
 
-            paymentGateway.CreatePayment(paymentCreationRequest, signature, publicKey, MobilePaymentCreationCallback(activity, mechanismTypeButton.getText().toString()))
+            paymentGateway.CreatePayment(paymentCreationRequest, signature, publicKey, MobilePaymentCreationCallback(requireContext(), mechanismTypeButton.getText().toString()))
         } catch (ex: Exception) {
             Log.i("Error", ex.message)
         }
@@ -146,6 +154,46 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
     }
 
     // endregion
+
+// region callback
+    class MobilePaymentCreationCallback(private val context: Context, private val paymentMethod: String) : PaymentCreationCallback {
+
+        override fun onSuccess(response: PaymentCreationResponse) {
+            Log.i("NEQABTY", "Request Completed Successfully")
+
+            Toast.makeText(context, "Payment Created Successfully", Toast.LENGTH_LONG).show()
+
+            if (paymentMethod == context.getString(R.string.payment_card)) {
+                //            Intent intent = new Intent(CreatePaymentActivity.this, ConfirmPaymentActivity.class);
+                val intent = Intent(context, MainActivity::class.java)
+
+                intent.putExtra("senderRequestNumber", response.OriginalSenderRequestNumber)
+                intent.putExtra("cardRequestNumber", response.CardRequestNumber)
+                intent.putExtra("sessionID", response.SessionId)
+                intent.putExtra("amount", java.lang.Double.toString(response.TotalAuthorizationAmount))
+
+                context.startActivity(intent)
+            } else if (paymentMethod == context.getString(R.string.payment_channel) ||
+                    paymentMethod == context.getString(R.string.payment_wallet) ||
+                    paymentMethod == context.getString(R.string.payment_meeza)) {
+
+                Toast.makeText(context, "Use this number as a reference: " + response.CardRequestNumber, Toast.LENGTH_LONG).show()
+                //            Intent intent = new Intent(CreatePaymentActivity.this, PaymentStatusInquiryActivity.class);
+
+                val intent = Intent(context, MainActivity::class.java)
+
+                intent.putExtra("senderRequestNumber", response.OriginalSenderRequestNumber)
+
+                context.startActivity(intent)
+            }
+
+        }
+
+        override fun onError(paymentException: PaymentException) {
+            Log.e("NEQABTY", paymentException.details.message)
+        }
+    }
+    //endregion
 
     fun navController() = findNavController()
 }

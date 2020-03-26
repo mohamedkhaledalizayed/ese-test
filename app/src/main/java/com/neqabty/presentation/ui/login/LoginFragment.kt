@@ -96,6 +96,12 @@ class LoginFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
         binding.bSend.setOnClickListener {
+//            PreferencesHelper(requireContext()).mobile = edMobile.text.toString()
+//            PreferencesHelper(requireContext()).jwt = ""
+//
+//            PreferencesHelper(requireContext()).mainSyndicate = 5
+//            PreferencesHelper(requireContext()).subSyndicate = 0
+//            navController().navigate(LoginFragmentDirections.openHome())
             login()
         }
 

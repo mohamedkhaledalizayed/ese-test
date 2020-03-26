@@ -12,13 +12,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.InquiryFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.ServiceUI
 import com.neqabty.presentation.util.autoCleared
+import kotlinx.android.synthetic.main.inquiry_fragment.*
+import kotlinx.android.synthetic.main.inquiry_fragment.view.*
 
 import javax.inject.Inject
 
@@ -32,6 +37,8 @@ class InquiryFragment : BaseFragment(), Injectable {
 
     lateinit var inquiryViewModel: InquiryViewModel
 
+    var servicesResultList: List<ServiceUI>? = mutableListOf()
+    var serviceID: Int = 0
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -58,21 +65,23 @@ class InquiryFragment : BaseFragment(), Injectable {
         inquiryViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                inquiryViewModel.validateUser(binding.edMemberNumber.text.toString())
+                inquiryViewModel.getAllServices()
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
-        initializeViews()
+        inquiryViewModel.getAllServices()
     }
 
     fun initializeViews() {
 //        if (!PreferencesHelper(requireContext()).user.equals("null"))
 //            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
 
-        binding.bSend.setOnClickListener {
+        llContent.visibility = View.VISIBLE
+        renderServices()
+        bSend.setOnClickListener {
             if (isDataValid(binding.edMemberNumber.text.toString())) {
-                inquiryViewModel.validateUser(binding.edMemberNumber.text.toString())
+                inquiryViewModel.paymentInquiry(binding.edMemberNumber.text.toString(), serviceID.toString())
             }
         }
     }
@@ -80,7 +89,10 @@ class InquiryFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: InquiryViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         activity?.invalidateOptionsMenu()
-        if (!state.isLoading && state.member != null) {
+        if(llContent.visibility == View.INVISIBLE && state.services != null){
+            servicesResultList = state.services
+            initializeViews()
+        }else if (!state.isLoading && state.member != null) {
 //            PreferencesHelper(requireContext()).user = state.member?.engineerID.toString()
 //            if (state?.member?.code == 0 || state.member?.code == 1) {
 //                navController().navigate(
@@ -89,17 +101,28 @@ class InquiryFragment : BaseFragment(), Injectable {
 //            } else {
 //                showAlert(state?.member?.message!!)
 //            }
-            if (state?.member?.amount != 0) {
+            if (state.member?.msg == ""){
                 navController().navigate(
                         InquiryFragmentDirections.inquiryDetails(state.member!!)
                 )
             } else {
-                showAlert(getString(R.string.user_not_allowed))
+                showAlert(state.member?.msg as String)
             }
             state.member = null
         }
     }
 
+
+    fun renderServices() {
+        binding.spService.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, servicesResultList)
+        binding.spService.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                serviceID = (parent.getItemAtPosition(position) as ServiceUI).id
+            }
+        }
+        binding.spService.setSelection(0)
+    }
     //region
     private fun isDataValid(number: String): Boolean {
         return if (number.isBlank()) {

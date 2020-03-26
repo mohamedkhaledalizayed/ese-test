@@ -1,14 +1,15 @@
 package com.neqabty.domain.entities
 
 data class MemberEntity(
-    var engineerID: String = "",
+    var requestID: String = "",
     var engineerName: String?,
-    var expirationDate: String?,
-    var paymentType: String?,
-    var billDate: String?,
-    var code: Int?,
-    var interfaceLanguage: String?,
-    var lastPaymentDate: String?,
-    var message: String?,
-    var amount: Int?
-)
+    var amount: Int?,
+    var msg: String?,
+    var payments: List<PaymentItem>? = null
+){
+    data class PaymentItem(
+            var quantity: Int = 0,
+            var totalPrice: String?,
+            var name: String?
+    )
+}

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.support.v4.app.NotificationCompat
 import android.support.v4.app.TaskStackBuilder
 import com.firebase.jobdispatcher.FirebaseJobDispatcher
@@ -62,22 +63,21 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .addNextIntent(intent)
                 .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val channelId = getString(com.neqabty.R.string.app_name)
-        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val channelId = "Notifications"
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle(remoteMessage?.data?.get("title"))
                 .setContentText(remoteMessage?.data?.get("body"))
                 .setAutoCancel(true)
-                .setSound(defaultSoundUri)
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 .setContentIntent(pendingIntent)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(channelId,
-                    getString(R.string.app_name),
+                    channelId,
                     NotificationManager.IMPORTANCE_DEFAULT)
             notificationManager.createNotificationChannel(channel)
         }

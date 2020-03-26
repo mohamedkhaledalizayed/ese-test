@@ -130,11 +130,20 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
         }
     }
 
+    private val serviceDataEntityMapper = ServiceDataEntityMapper()
+
+    override fun getAllServices(): Observable<List<ServiceEntity>> {
+        return api.getAllServices().map { services ->
+            services.data?.get(0)?.map { serviceDataEntityMapper.mapFrom(it) }
+        }
+    }
+
     private val memberDataEntityMapper = MemberDataEntityMapper()
 
-    override fun validateUser(userNumber: Int): Observable<MemberEntity> {
-        return api.validateUser(userNumber , 2).flatMap { user ->
-            Observable.just(memberDataEntityMapper.mapFrom(user))
+    override fun inquirePayment(userNumber: Int, serviceID: Int): Observable<MemberEntity> {
+        return api.paymentInquiry(userNumber , serviceID).flatMap { user ->
+            user.data?.msg = user.status.message
+            Observable.just(memberDataEntityMapper.mapFrom(user.data!!))
         }
     }
 

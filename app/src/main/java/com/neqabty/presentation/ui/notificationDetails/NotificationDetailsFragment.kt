@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.neqabty.R
 import com.neqabty.databinding.NotificationDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
@@ -18,8 +17,11 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.NotificationUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-
 import javax.inject.Inject
+import android.content.Intent
+import android.net.Uri
+import com.neqabty.R
+
 
 class NotificationDetailsFragment : BaseFragment(), Injectable {
     @Inject
@@ -75,6 +77,14 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
 
     fun initializeViews(notificationItem: NotificationUI) {
         binding.notificationItem = notificationItem
+        binding.bViewAttachment.setOnClickListener{
+            val attachmentIntent = Intent(Intent.ACTION_VIEW, Uri.parse(notificationItem.approvalImage))
+            startActivity(attachmentIntent)
+        }
+        binding.bPay.setOnClickListener{
+//            val attachmentIntent = Intent(Intent.ACTION_VIEW, Uri.parse(notificationItem.approvalImage))
+//            startActivity(attachmentIntent)
+        }
     }
 
     private fun handleViewState(state: NotificationDetailsViewState) {

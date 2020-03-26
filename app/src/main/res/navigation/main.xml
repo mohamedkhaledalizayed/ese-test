@@ -5,17 +5,17 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
 
+    <action
+        android:id="@+id/openLoginFragment"
+        app:destination="@id/loginFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
     <fragment
         android:id="@+id/introFragment"
         android:name="com.neqabty.presentation.ui.intro.IntroFragment"
         android:label=" "
         tools:layout="@layout/intro_fragment">
-
-        <action
-            android:id="@+id/openLoginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -74,6 +74,11 @@
         <action
             android:id="@+id/openUpdateData"
             app:destination="@id/updateDataDetailsFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openComplaints"
+            app:destination="@id/complaintsFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -170,14 +175,6 @@
         android:name="com.neqabty.presentation.ui.payment.PaymentFragment"
         android:label="@string/pay"
         tools:layout="@layout/payment_fragment">
-
-        <argument
-            android:name="amount"
-            app:argType="java.lang.Integer" />
-
-        <argument
-            android:name="memberID"
-            app:argType="java.lang.Integer" />
 
     </fragment>
     <fragment
@@ -390,4 +387,9 @@
         android:name="com.neqabty.presentation.ui.about.AboutFragment"
         android:label="@string/about_title"
         tools:layout="@layout/about_fragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.neqabty.presentation.ui.settings.SettingsFragment"
+        android:label="@string/settings_title"
+        tools:layout="@layout/settings_fragment" />
 </navigation>

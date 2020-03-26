@@ -19,10 +19,8 @@ import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.ASyncTransformer
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.util.PreferencesHelper
 import dagger.Module
 import dagger.Provides
-import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -77,12 +75,12 @@ class AppModule {
                 .build()
 
         return Retrofit.Builder()
-                .baseUrl("http://ec2-3-132-198-61.us-east-2.compute.amazonaws.com/")
-//                .baseUrl("http://eea.neqabty.com/")
+//                .baseUrl("http://ec2-3-132-198-61.us-east-2.compute.amazonaws.com/")
+                .baseUrl("http://back.neqabty.com/")
 //                .baseUrl("http://192.168.178.38/")
 //            .baseUrl("http://webapp.neqabty.com/")
-//            .baseUrl("https://192.168.196.65")
-//            .baseUrl("https://neqabty-stage.efinance.com.eg")
+//            .baseUrl("https://192.168.196.66")
+//            .baseUrl("https://neqabty-stage.efinance.com.eg/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // LiveDataCallAdapterFactory()
                 .client(client)
@@ -330,8 +328,15 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideValidateUser(neqabtyRepository: NeqabtyRepository): ValidateUser {
-        return ValidateUser(ASyncTransformer(), neqabtyRepository)
+    fun provideGetAllServices(neqabtyRepository: NeqabtyRepository): GetAllServices {
+        return GetAllServices(ASyncTransformer(), neqabtyRepository)
+    }
+
+
+    @Singleton
+    @Provides
+    fun providePaymentInquiry(neqabtyRepository: NeqabtyRepository): PaymentInquiry {
+        return PaymentInquiry(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

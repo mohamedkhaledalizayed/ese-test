@@ -10,17 +10,18 @@ import javax.inject.Singleton
 class MemberEntityUIMapper @Inject constructor() : Mapper<MemberEntity, MemberUI>() {
 
     override fun mapFrom(from: MemberEntity): MemberUI {
-        return MemberUI(
-                engineerID = from.engineerID,
-                code = from.code,
-                amount = from.amount,
-                billDate = from.billDate,
+        val memberUI: MemberUI = MemberUI(
+                requestID = from.requestID,
                 engineerName = from.engineerName,
-                expirationDate = from.expirationDate,
-                interfaceLanguage = from.interfaceLanguage,
-                lastPaymentDate = from.lastPaymentDate,
-                message = "",
-                paymentType = from.paymentType
+                amount = from.amount,
+                msg = from.msg
         )
+        from.payments?.let {
+            var payments: List<MemberUI.PaymentItem> = it.map { paymentItem ->
+                return@map MemberUI.PaymentItem(paymentItem.quantity, paymentItem.totalPrice, paymentItem.name)}
+            memberUI.payments = payments
+        }
+
+        return memberUI
     }
 }
