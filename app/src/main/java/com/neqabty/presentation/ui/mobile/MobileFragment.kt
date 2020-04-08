@@ -90,20 +90,20 @@ class MobileFragment : BaseFragment(), Injectable {
             login()
         }
 
-//        val vto = ivHint.getViewTreeObserver()
-//        vto.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
-//            override fun onGlobalLayout() {
-//                ivHint.viewTreeObserver.removeOnGlobalLayoutListener(this)
-//                ivHint.layoutParams.width = ivHint.height
-//                binding.ivHint.requestLayout()
-//                binding.edMemberNumber.requestLayout()
-//            }
-//
-//        })
-//
-//        ivHint.setOnClickListener {
-//            showCardDialog()
-//        }
+        val vto = ivHint.getViewTreeObserver()
+        vto.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                ivHint.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                ivHint.layoutParams.width = ivHint.height
+                binding.ivHint.requestLayout()
+                binding.edMemberNumber.requestLayout()
+            }
+
+        })
+
+        ivHint.setOnClickListener {
+            showCardDialog()
+        }
     }
 
     private fun handleViewState(state: MobileViewState) {
