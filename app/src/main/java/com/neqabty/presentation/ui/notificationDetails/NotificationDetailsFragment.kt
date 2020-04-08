@@ -3,24 +3,25 @@ package com.neqabty.presentation.ui.notificationDetails
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.neqabty.R
 import com.neqabty.databinding.NotificationDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.entities.NotificationUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import javax.inject.Inject
-import android.content.Intent
-import android.net.Uri
-import com.neqabty.R
 
 
 class NotificationDetailsFragment : BaseFragment(), Injectable {
@@ -76,14 +77,16 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews(notificationItem: NotificationUI) {
+        notificationItem.cost = 3000 //TODO remove
         binding.notificationItem = notificationItem
-        binding.bViewAttachment.setOnClickListener{
+        binding.bViewAttachment.setOnClickListener {
             val attachmentIntent = Intent(Intent.ACTION_VIEW, Uri.parse(notificationItem.approvalImage))
             startActivity(attachmentIntent)
         }
-        binding.bPay.setOnClickListener{
-//            val attachmentIntent = Intent(Intent.ACTION_VIEW, Uri.parse(notificationItem.approvalImage))
-//            startActivity(attachmentIntent)
+        binding.bPay.setOnClickListener {
+            navController().navigate(
+                    NotificationDetailsFragmentDirections.openInquiryDetailsFragment(1, notificationItem.notificationType!!, MemberUI(amount = notificationItem.cost!!, requestID = notificationItem.approvalNumber!!, engineerNumber = "3308222", engineerName = notificationItem.name!!), "2")//TODO serviceID, usernumber notificationItem.userNumber.toString()
+            )
         }
     }
 

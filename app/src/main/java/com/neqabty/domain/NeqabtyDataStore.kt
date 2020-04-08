@@ -27,7 +27,7 @@ interface NeqabtyDataStore {
     ): Observable<List<ProviderEntity>>
 
     fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>>
-    fun getNotificationsCount( userNumber: Int): Observable<NotificationsCountEntity>
+    fun getNotificationsCount(userNumber: Int): Observable<NotificationsCountEntity>
     fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>>
     fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity>
     fun sendMedicalRequest(
@@ -73,11 +73,12 @@ interface NeqabtyDataStore {
 
     fun getAllServices(): Observable<List<ServiceEntity>>
     fun inquirePayment(userNumber: Int, serviceID: Int): Observable<MemberEntity>
+    fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
     fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>
     fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity>
     fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity>
-    fun updateUserData(userNumber: String,fullName: String,nationalID: String,gender: String,userID: String): Observable<UpdateUserDataEntity>
+    fun updateUserData(userNumber: String, fullName: String, nationalID: String, gender: String, userID: String): Observable<UpdateUserDataEntity>
     fun requestEngineeringRecords(
             name: String,
             phone: String,
@@ -94,7 +95,7 @@ interface NeqabtyDataStore {
 
 
     fun loginVisitor(mobile: String, token: String): Observable<UserEntity>
-    fun loginUser(mobile: String , userNumber: String, token: String): Observable<UserEntity>
+    fun loginUser(mobile: String, userNumber: String, token: String): Observable<UserEntity>
     fun signup(
             email: String,
             fName: String,
@@ -105,6 +106,7 @@ interface NeqabtyDataStore {
             subSyndicateId: String,
             password: String
     ): Observable<UserEntity>
+
     fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>>
-    fun createComplaint(name: String, phone: String, type: String, body: String, token: String): Observable<Unit>
+    fun createComplaint(name: String, phone: String, type: String, body: String, token: String, memberNumber: String): Observable<Unit>
 }

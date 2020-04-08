@@ -1,8 +1,10 @@
 package com.neqabty.presentation.ui.mobile
 
+import android.app.Dialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -10,6 +12,9 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.view.Window
+import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -19,10 +24,10 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import kotlinx.android.synthetic.main.mobile_fragment.*
 import javax.inject.Inject
 
 class MobileFragment : BaseFragment(), Injectable {
@@ -69,7 +74,7 @@ class MobileFragment : BaseFragment(), Injectable {
                 login()
             }, cancelCallback = {
                 navController().navigateUp()
-            } , message = error?.message)
+            }, message = error?.message)
         })
         initializeViews()
     }
@@ -84,6 +89,21 @@ class MobileFragment : BaseFragment(), Injectable {
         binding.bSend.setOnClickListener {
             login()
         }
+
+//        val vto = ivHint.getViewTreeObserver()
+//        vto.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+//            override fun onGlobalLayout() {
+//                ivHint.viewTreeObserver.removeOnGlobalLayoutListener(this)
+//                ivHint.layoutParams.width = ivHint.height
+//                binding.ivHint.requestLayout()
+//                binding.edMemberNumber.requestLayout()
+//            }
+//
+//        })
+//
+//        ivHint.setOnClickListener {
+//            showCardDialog()
+//        }
     }
 
     private fun handleViewState(state: MobileViewState) {
@@ -115,7 +135,7 @@ class MobileFragment : BaseFragment(), Injectable {
         }
     }
 
-    fun login(){
+    fun login() {
         Constants.JWT = PreferencesHelper(requireContext()).jwt
         if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString())) {
             if (PreferencesHelper(requireContext()).token.isNotBlank())
@@ -132,6 +152,7 @@ class MobileFragment : BaseFragment(), Injectable {
             }
         }
     }
+
     //region
     private fun isDataValid(mobile: String, number: String): Boolean {
         return if (number.isBlank()) {
@@ -159,6 +180,25 @@ class MobileFragment : BaseFragment(), Injectable {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
+
+    private fun showCardDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setContentView(layoutInflater.inflate(R.layout.image_item, null), ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.show()
+    }
+
+//    private fun hideKeyboard() {
+//        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.hideSoftInputFromWindow(activity?.window?.decorView?.rootView?.windowToken, 0)
+//    }
+//
+//    private fun showKeyboard() {
+//        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+//    }
 // endregion
 
     fun navController() = findNavController()

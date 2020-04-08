@@ -6,7 +6,11 @@
     <data>
 
         <import type="android.text.Html" />
+        <import type="android.view.View"/>
 
+        <variable
+            name="title"
+            type="java.lang.String" />
         <variable
             name="memberItem"
             type="com.neqabty.presentation.entities.MemberUI" />
@@ -32,15 +36,32 @@
             android:scrollbars="none">
 
             <LinearLayout
+                android:id="@+id/llContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvService"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@{title}"
+                    android:textSize="@dimen/text_size_large" />
 
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{Html.fromHtml(@string/name_title(memberItem.engineerName))}"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    android:id="@+id/tvMemberNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{Html.fromHtml(@string/user_number_title(memberItem.engineerNumber))}"
                     android:textSize="@dimen/text_size_large" />
 
                 <!--                <TextView-->
@@ -64,6 +85,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/details"
                     android:textColor="@color/colorPrimary"
+                    android:visibility='@{memberItem.payments == null ? View.GONE : View.VISIBLE}'
                     android:textSize="@dimen/text_size_large" />
 
                 <android.support.v7.widget.RecyclerView

@@ -59,9 +59,9 @@ class MedicalCategoriesFragment : BaseFragment(), HasMedicalOptionsMenu, Injecta
         categoriesList.add(MedicalCategoryUI(1, getString(R.string.hospitals), R.mipmap.hosp_ic))
         categoriesList.add(MedicalCategoryUI(2, getString(R.string.doctors), R.mipmap.dr_ic))
         categoriesList.add(MedicalCategoryUI(16, getString(R.string.pharmacies), R.mipmap.pharma_ic))
-        categoriesList.add(MedicalCategoryUI(4, getString(R.string.scan_centers), R.mipmap.scan_ic))
-        categoriesList.add(MedicalCategoryUI(17, getString(R.string.laboratories), R.mipmap.lab_ic))
-        categoriesList.add(MedicalCategoryUI(18, getString(R.string.medical_services), R.mipmap.med_serv_ic)) // 2027 2028
+        categoriesList.add(MedicalCategoryUI(3, getString(R.string.scan_centers), R.mipmap.scan_ic))
+        categoriesList.add(MedicalCategoryUI(4, getString(R.string.laboratories), R.mipmap.lab_ic))
+        categoriesList.add(MedicalCategoryUI(18, getString(R.string.others), R.mipmap.med_serv_ic)) // 2027 2028
         categoriesList.add(MedicalCategoryUI(2028, getString(R.string.optics), R.mipmap.optics)) // 2028
         categoriesList.add(MedicalCategoryUI(2027, getString(R.string.artificial_limbs), R.mipmap.artificial_limbs_ic)) // 2027 2028
 

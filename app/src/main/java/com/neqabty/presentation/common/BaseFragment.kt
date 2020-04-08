@@ -53,6 +53,18 @@ open class BaseFragment : Fragment() {
             dialog?.show()
     }
 
+
+    fun showAlert(message: String, title: String = getString(R.string.alert_title)) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(title)
+        builder.setCancelable(false)
+        builder.setMessage(message)
+        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (activity as AppCompatActivity).invalidateOptionsMenu()
         llSuperProgressbar = (activity as AppCompatActivity).findViewById(R.id.llSuperProgressbar)

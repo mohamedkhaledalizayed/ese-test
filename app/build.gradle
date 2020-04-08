@@ -75,6 +75,20 @@ android {
             zipAlignEnabled false
         }
     }
+    flavorDimensions "mode"
+
+    productFlavors {
+        dev {
+            dimension "mode"
+            minSdkVersion 25
+            resConfigs "en", "hdpi"
+        }
+
+        prod {
+            dimension "mode"
+        }
+    }
+
     dataBinding {
         enabled = true
     }
@@ -143,7 +157,7 @@ dependencies {
     kapt deps.lifecycle.compiler
 
     implementation deps.mastercard
-    implementation project(':mobilepaymentsdk-v2.0')
+    implementation project(':mobilepaymentsdk-v2.1')
 
     testImplementation deps.junit
     testImplementation deps.mock_web_server

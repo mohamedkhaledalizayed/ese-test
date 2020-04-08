@@ -49,7 +49,7 @@ class InquiryViewModel @Inject constructor(private val getAllServices: GetAllSer
                         memberEntityUIMapper.mapFrom(it)
                     }
                 }.subscribe(
-                        { onValidationReceived(it) },
+                        { onInquiryReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
                             errorState.value = it
@@ -65,7 +65,7 @@ class InquiryViewModel @Inject constructor(private val getAllServices: GetAllSer
         viewState.value = newViewState
     }
 
-    private fun onValidationReceived(member: MemberUI) {
+    private fun onInquiryReceived(member: MemberUI) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
                 member = member)

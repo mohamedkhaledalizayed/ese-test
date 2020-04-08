@@ -68,6 +68,11 @@
                     android:scheme="app" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.mastercard.gateway.android.sdk.Gateway3DSecureActivity"
+            android:label="@string/gateway_3d_secure_authentication"
+            android:screenOrientation="portrait" />
         <activity android:name="com.neqabty.testing.SingleFragmentActivity"></activity>
 
 

@@ -54,13 +54,15 @@ class IntroFragment : BaseFragment(), Injectable {
     fun initializeViews() {
 
         val adapter = CustomFragmentPagerAdapter(childFragmentManager)
-        adapter.addFragment(IntroPagerFragment.newInstance(R.drawable.logo, R.string.loading))
-        adapter.addFragment(IntroPagerFragment.newInstance(R.mipmap.btn, R.string.congratulations))
-        adapter.addFragment(IntroPagerFragment.newInstance(R.mipmap.card_2, R.string.request_sent))
+        adapter.addFragment(IntroPagerFragment.newInstance(R.drawable.intro_one, R.string.intro_one))
+        adapter.addFragment(IntroPagerFragment.newInstance(R.drawable.intro_two, R.string.intro_two))
+        adapter.addFragment(IntroPagerFragment.newInstance(R.drawable.intro_three, R.string.intro_three))
+        adapter.addFragment(IntroPagerFragment.newInstance(R.drawable.intro_four, R.string.intro_four))
+        adapter.addFragment(IntroPagerFragment.newInstance(R.drawable.intro_five, R.string.intro_five))
 
         binding.vpIntro.adapter = adapter
         binding.vpIntro.setSwipePagingEnabled(false)
-        binding.vpIntro.offscreenPageLimit = 2
+        binding.vpIntro.offscreenPageLimit = 4
         binding.dotsIndicator.setViewPager(binding.vpIntro)
 
         binding.vpIntro.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -73,12 +75,12 @@ class IntroFragment : BaseFragment(), Injectable {
 
         binding.bSkip.setOnClickListener {
             PreferencesHelper(requireContext()).isIntroSkipped = true
-            navController().navigate(R.id.openLoginFragment)
+            navigateToNext()
         }
 
-        binding.bContinue.setOnClickListener {
+        binding.bNext.setOnClickListener {
             if (vpIntro.currentItem == vpIntro.childCount - 1)
-                navController().navigate(R.id.openLoginFragment)
+                navigateToNext()
             else
                 vpIntro.setCurrentItem(vpIntro.currentItem + 1, true)
         }
@@ -87,6 +89,12 @@ class IntroFragment : BaseFragment(), Injectable {
 
 //region
 
+    fun navigateToNext(){
+        if (PreferencesHelper(requireContext()).mobile.isEmpty())
+            navController().navigate(R.id.openLoginFragment)
+        else
+            navController().navigate(R.id.openHomeFragment)
+    }
 // endregion
 
     fun navController() = findNavController()

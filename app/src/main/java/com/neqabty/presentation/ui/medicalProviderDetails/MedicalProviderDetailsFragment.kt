@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -17,7 +18,11 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ProviderUI
+import com.neqabty.presentation.ui.phones.PhonesFragment
 import com.neqabty.presentation.util.autoCleared
+import com.neqabty.presentation.util.call
+import com.neqabty.presentation.util.openMap
+import kotlinx.android.synthetic.main.medical_provider_details_fragment.*
 
 import javax.inject.Inject
 
@@ -77,16 +82,28 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: MedicalProviderDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        binding.llHolder.visibility = if (state.isLoading) View.INVISIBLE else View.VISIBLE
+        binding.clHolder.visibility = if (state.isLoading) View.INVISIBLE else View.VISIBLE
         binding.ivFav.visibility = if (state.isLoading) View.INVISIBLE else View.VISIBLE
         this.state = state
         state.providerDetails?.let {
             binding.providerItem = it
         }
+        initializeViews(state)
 //        activity?.invalidateOptionsMenu()
         renderFav()
         binding.ivFav.setOnClickListener{
             toggleFav()
+        }
+    }
+
+    private fun initializeViews(state: MedicalProviderDetailsViewState) {
+
+        tvAddress.setOnClickListener {
+            state.providerDetails?.address?.let { tvAddress.openMap(it, requireContext()) }
+        }
+
+        tvPhone.setOnClickListener {
+            openCallFragment(state.providerDetails?.phones!!)
         }
     }
 
@@ -100,6 +117,16 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
 
     fun renderFav() {
         binding.ivFav.setImageResource(if (state.isFavorite) R.mipmap.star_selected else R.mipmap.star_outline)
+    }
+
+    fun openCallFragment(phones: String) {
+        val fragmentManager = this@MedicalProviderDetailsFragment.fragmentManager
+        val subSyndicatesFragment = PhonesFragment()
+        val bundle = Bundle()
+        bundle.putString("phones", phones)
+        subSyndicatesFragment.arguments = bundle
+        subSyndicatesFragment.setTargetFragment(this, 255)
+        subSyndicatesFragment.show(fragmentManager, "name")
     }
 // endregion
 

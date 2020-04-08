@@ -339,6 +339,13 @@ class AppModule {
         return PaymentInquiry(ASyncTransformer(), neqabtyRepository)
     }
 
+
+    @Singleton
+    @Provides
+    fun provideEncryptData(neqabtyRepository: NeqabtyRepository): EncryptData {
+        return EncryptData(ASyncTransformer(), neqabtyRepository)
+    }
+
     @Singleton
     @Provides
     fun provideGetComplaintTypes(neqabtyRepository: NeqabtyRepository): GetComplaintTypes {

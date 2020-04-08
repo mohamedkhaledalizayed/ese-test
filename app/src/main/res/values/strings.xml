@@ -8,6 +8,13 @@
     <string name="unknown_error">unknown error</string>
 
 
+    <string name="intro_one">كل خدمات نقابة المهندسين الآن متاحه بين يديك من خلال تطبيق نقابتي</string>
+    <string name="intro_two">يمكنك الآن سداد كل اشتراكاتك من خلال خدمة الدفع الالكتروني </string>
+    <string name="intro_three">يمكنك الآن الحصول علي كل  خدماتك وموافقاتك الطبية من خلال تطبيق نقابتي</string>
+    <string name="intro_four">يمكنك متابعة كافة الأخبار والتنبيهات الخاصة بالنقابة أولاً بأول</string>
+    <string name="intro_five">كما يمكنك التعرف علي جميع الرحلات المقدمة من النقابة مع إمكانية الحجز والسداد</string>
+
+
     <string name="phoneNumber">رقم الجوال</string>
     <string name="password">كلمة السر</string>
     <string name="forgetPassword">نسيت كلمة السر</string>
@@ -83,17 +90,18 @@
     <string name="request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
     <string name="request_status">طلبكم تحت الدراسة</string>
     <string name="continue_btn">متابعة</string>
+    <string name="skip_btn">تخطي</string>
     <string name="loginHint">يمكنك الآن الدخول على التطبيق و الاستمتاع بخدمات نقابتك</string>
     <string name="update_msg">حتى تتمكن من استخدام التطبيق يرجى التحديث</string>
     <string name="root_msg">هذا الجهاز غير آمن, لا يمكنك استخدام التطبيق.</string>
 
-    <string name="doctors">الأطباء</string>
-    <string name="hospitals">المستشفيات</string>
-    <string name="scan_centers">مراكز الأشعة</string>
-    <string name="pharmacies">الصيدليات</string>
-    <string name="medical_services">خدمات طبية</string>
+    <string name="doctors">أطباء ومراكز علاج طبيعي</string>
+    <string name="hospitals">مستشفيات</string>
+    <string name="scan_centers">مراكز أشعة</string>
+    <string name="pharmacies">صيدليات</string>
+    <string name="others">خدمات أخرى</string>
     <string name="optics">بصريات</string>
-    <string name="artificial_limbs">اجهزة تعويضية</string>
+    <string name="artificial_limbs">أجهزة تعويضية</string>
     <string name="laboratories">معامل التحاليل</string>
 
     <string name="mobile_title">تسجيل دخول</string>
@@ -173,6 +181,9 @@
     <string name="address_title">العنوان: </string>
     <string name="phone_title">التليفون: </string>
     <string name="email_title">البريد الالكتروني: </string>
+    <string name="address_content">
+        <![CDATA[<font color="#1d1ad2"><u>%s</u></font>]]>
+    </string>
 
     <string name="notifications_settings">الإشعارات</string>
 
@@ -217,10 +228,16 @@
     <string name="payment_channel">قنوات دفع</string>
     <string name="payment_wallet">محافظ إلكترونية</string>
     <string name="payment_meeza">ميزة</string>
-    <string name="name_on_card">إسم صاحب البطاقة</string>
+    <string name="payment_reference">كود الدفع: </string>
+    <string name="payment_successful">تمت العملية بنجاح</string>
+    <string name="name_on_card">إسم صاحب الكارت</string>
     <string name="card_number">رقم الكارت</string>
+    <string name="card_expiry_year">تاريخ سنة الإنتهاء</string>
+    <string name="card_expiry_month">تاريخ شهر الإنتهاء</string>
     <string name="card_expiry_date">تاريخ الإنتهاء</string>
-    <string name="card_cvv">الرقم السري</string>
+    <string name="month">شهر</string>
+    <string name="year">سنة</string>
+    <string name="card_cvv">CVV</string>
     <string name="token">الرمز</string>
     <string name="save_card_info">حفظ بيانات البطاقة؟</string>
 

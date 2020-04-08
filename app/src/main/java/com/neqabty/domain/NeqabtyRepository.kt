@@ -78,6 +78,7 @@ interface NeqabtyRepository {
 
     fun getAllServices(): Observable<List<ServiceEntity>>
     fun inquirePayment(userNumber: Int, serviceID: Int): Observable<MemberEntity>
+    fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
     fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>
     fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity>
@@ -110,5 +111,5 @@ interface NeqabtyRepository {
             password: String
     ): Observable<UserEntity>
     fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>>
-    fun createComplaint(name: String, phone: String, type: String, body: String, token: String): Observable<Unit>
+    fun createComplaint(name: String, phone: String, type: String, body: String, token: String, memberNumber: String): Observable<Unit>
 }

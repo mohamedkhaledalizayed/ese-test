@@ -13,17 +13,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.6" />
+
         <ImageView
             android:id="@+id/ivImage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_vertical_normal"
             android:layout_marginBottom="@dimen/margin_vertical_normal"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toTopOf="@id/tv_pageText"
+            android:padding="@dimen/margin_vertical_large"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@id/guideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_weight="4" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_pageText"
@@ -31,11 +38,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_vertical_normal"
             android:gravity="center"
+            android:padding="@dimen/margin_horizontal_normal"
+            android:textSize="@dimen/text_size_large"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivImage"
-            app:layout_constraintVertical_weight="1" />
+            app:layout_constraintTop_toBottomOf="@id/guideline" />
 
 
     </android.support.constraint.ConstraintLayout>

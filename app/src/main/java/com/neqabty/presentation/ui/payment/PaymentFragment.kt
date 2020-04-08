@@ -3,8 +3,6 @@ package com.neqabty.presentation.ui.payment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
-import android.content.Intent
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -12,13 +10,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
-import com.efinance.mobilepaymentsdk.PaymentConfirmationCallback
-import com.efinance.mobilepaymentsdk.PaymentConfirmationResponse
-import com.efinance.mobilepaymentsdk.PaymentException
+import com.efinance.mobilepaymentsdk.*
 import com.neqabty.AppExecutors
-import com.neqabty.MainActivity
 import com.neqabty.R
 import com.neqabty.databinding.PaymentFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -42,6 +38,13 @@ class PaymentFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
+    lateinit var paymentGateway: PaymentGateway
+    lateinit var paymentConfirmationRequest: PaymentConfirmationRequest
+    var monthsList: List<String>? = mutableListOf("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
+    var yearsList: List<String>? = mutableListOf("2020", "2021", "2022", "2023", "2024", "2025", "2026")
+
+    var month: String = ""
+    var year: String = ""
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -87,9 +90,93 @@ class PaymentFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
 //        val params = PaymentFragmentArgs.fromBundle(arguments!!)
-        bConfirm.setOnClickListener {
-            //            createPayment()
+
+        binding.spMonth.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, monthsList)
+        binding.spMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                month = parent.getItemAtPosition(position) as String
+            }
         }
+
+        binding.spYear.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, yearsList)
+        binding.spYear.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                year = parent.getItemAtPosition(position) as String
+            }
+        }
+        bConfirm.setOnClickListener {
+            llSuperProgressbar.visibility = View.VISIBLE
+            confirmPayment()
+        }
+    }
+
+
+    fun confirmPayment() {
+        val params = PaymentFragmentArgs.fromBundle(arguments!!)
+        try {
+
+            paymentGateway = PaymentGateway(activity, "1234")
+            paymentConfirmationRequest = PaymentConfirmationRequest()
+
+            paymentConfirmationRequest.Sender.Id = "077"
+            paymentConfirmationRequest.Sender.Name = "MSAD"
+            paymentConfirmationRequest.Sender.Password = "1234"
+
+            paymentConfirmationRequest.SenderRequestNumber = params.senderRequestNumber
+
+            paymentConfirmationRequest.SessionID = params.sessionID
+
+
+            /**
+             * Test Cards
+             *
+             * CardNumber = "5111111111111118";  //3D Secure Not Enrolled
+             * CardNumber = "5123450000000008";  //3D Secure Enrolled
+             *
+             * CardCVV = "123";
+             * CardExpiryMonth = "07";
+             * CardExpiryYear = "20";
+             *
+             *
+             * */
+
+
+            paymentConfirmationRequest.Card.NameOnCard = edName.text.toString()
+            paymentConfirmationRequest.Card.CardNumber = "5111111111111118"
+            paymentConfirmationRequest.Card.CardCVV = edCVV.text.toString()
+            paymentConfirmationRequest.Card.CardExpiryMonth = spMonth.selectedItem.toString()
+            paymentConfirmationRequest.Card.CardExpiryYear = spYear.selectedItem.toString()
+            paymentConfirmationRequest.Card.SaveCardFlag = true
+
+
+            paymentConfirmationRequest.CardToken = ""
+
+            paymentConfirmationRequest.Amount = params.amount.toDouble()
+
+            paymentConfirmationRequest.CardRequestNumber = params.cardRequestNumber
+
+            paymentConfirmationRequest.serialize()
+
+            val successCallback: ((response: PaymentConfirmationResponse) -> Unit) = { response ->
+
+                llSuperProgressbar.visibility = View.INVISIBLE
+
+
+                showAlert(getString(R.string.payment_successful))
+//                "senderRequestNumber"+ response.SenderRequestNumber
+            }
+
+            val failureCallback = {
+                llSuperProgressbar.visibility = View.INVISIBLE
+            }
+            paymentGateway.ConfirmPayment(paymentConfirmationRequest, "", MobilePaymentConfirmationCallback(successCallback, failureCallback))
+
+        } catch (ex: Exception) {
+            Log.i("Error", ex.message)
+        }
+
     }
 
 //region
@@ -97,29 +184,19 @@ class PaymentFragment : BaseFragment(), Injectable {
 // endregion
 
 
-// region callback
-class MobilePaymentConfirmationCallback(private val context: Context) : PaymentConfirmationCallback {
+    // region callback
+    class MobilePaymentConfirmationCallback(private val successCallback: ((response: PaymentConfirmationResponse) -> Unit), private val failureCallback: (() -> Unit)) : PaymentConfirmationCallback {
 
-    override fun onSuccess(response: PaymentConfirmationResponse) {
-        Log.i("NEQABTY", "Request Completed Successfully")
+        override fun onSuccess(response: PaymentConfirmationResponse) {
+            Log.i("NEQABTY", "Request Completed Successfully")
+            successCallback.invoke(response)
+        }
 
-        Toast.makeText(context, "Payment Confirmed Successfully", Toast.LENGTH_LONG).show()
-
-        //        Intent intent = new Intent(context, PaymentStatusInquiryActivity.class);
-        val intent = Intent(context, MainActivity::class.java)
-
-        intent.putExtra("senderRequestNumber", response.SenderRequestNumber)
-
-        context.startActivity(intent)
-
+        override fun onError(paymentException: PaymentException) {
+            Log.e("NEQABTY", paymentException.details.message)
+            failureCallback.invoke()
+        }
     }
-
-    override fun onError(paymentException: PaymentException) {
-        Log.e("NEQABTY", paymentException.details.message)
-
-
-    }
-}
 
     // endregion
 

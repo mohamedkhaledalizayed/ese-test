@@ -95,8 +95,11 @@ interface WebService {
     @GET("http://ese.neqabty.com/api/services")
     fun getAllServices(): Observable<ResponseWrapper<List<List<ServiceData>>>>
 
-    @GET("http://ese.neqabty.com/api/service")
+    @GET("http://3.132.198.61/api/v1/service")
     fun paymentInquiry(@Query("oldRefID") userNumber:Int, @Query("serviceID") serviceID:Int): Observable<ResponseWrapper<MemberData>>
+
+    @POST("http://3.132.198.61/api/v1/encrypt")
+    fun paymentEncryption(@Body encryptionRequest: EncryptionRequest): Observable<EncryptionData>
 
     @POST("api/v2/medical/Beneficiary")
     fun validateUser(@Body claimingValidationRequest: ClaimingValidationRequest): Observable<ApiResponse<ClaimingValidationData>>

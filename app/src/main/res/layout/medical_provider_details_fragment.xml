@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.text.Html" />
+
         <variable
             name="providerItem"
             type="com.neqabty.presentation.entities.ProviderUI" />
@@ -25,8 +27,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <LinearLayout
-            android:id="@+id/llHolder"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clHolder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_bg"
@@ -43,34 +45,67 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{providerItem.name}"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_large" />
 
+
+            <ImageView
+                android:id="@+id/ivAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_vertical_normal"
+                android:src="@drawable/ic_pin"
+                android:tint="@color/colorAccent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvName" />
+
             <TextView
                 android:id="@+id/tvAddress"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{providerItem.address}"
-                android:textSize="@dimen/text_size_medium" />
+                android:layout_marginStart="@dimen/margin_horizontal_normal"
+                android:text="@{Html.fromHtml(@string/address_content(providerItem.address))}"
+                android:textSize="@dimen/text_size_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivAddress"
+                app:layout_constraintTop_toTopOf="@id/ivAddress" />
+
+            <ImageView
+                android:id="@+id/ivPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_vertical_normal"
+                android:src="@drawable/ic_phone"
+                android:tint="@color/colorAccent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAddress" />
 
             <TextView
                 android:id="@+id/tvPhone"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_horizontal_normal"
                 android:text="@{providerItem.phones}"
-                android:textSize="@dimen/text_size_medium" />
+                android:textDirection="anyRtl"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_large"
+                app:layout_constraintStart_toEndOf="@id/ivPhone"
+                app:layout_constraintTop_toTopOf="@id/ivPhone" />
 
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/llHolder"
+            app:layout_constraintEnd_toEndOf="@id/clHolder"
             android:layout_margin="@dimen/margin_horizontal_normal"
             android:visibility="invisible"
             android:elevation="@dimen/elevation_level_one"
-            app:layout_constraintTop_toTopOf="@id/llHolder"
+            app:layout_constraintTop_toTopOf="@id/clHolder"
             android:id="@+id/ivFav"/>
 
     </android.support.constraint.ConstraintLayout>

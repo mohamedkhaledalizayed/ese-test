@@ -24,6 +24,7 @@ import com.neqabty.presentation.ui.notificationDetails.NotificationDetailsFragme
 import com.neqabty.presentation.ui.notifications.NotificationsFragment
 import com.neqabty.presentation.ui.notifications.NotificationsListFragment
 import com.neqabty.presentation.ui.payment.PaymentFragment
+import com.neqabty.presentation.ui.phones.PhonesFragment
 import com.neqabty.presentation.ui.search.SearchFragment
 import com.neqabty.presentation.ui.settings.SettingsFragment
 import com.neqabty.presentation.ui.signup.SignupFragment
@@ -139,6 +140,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMedicalProviderDetailsFragment(): MedicalProviderDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributePhonesFragment(): PhonesFragment
 
     @ContributesAndroidInjector
     abstract fun contributeUpdateDataFragment(): UpdateDataFragment

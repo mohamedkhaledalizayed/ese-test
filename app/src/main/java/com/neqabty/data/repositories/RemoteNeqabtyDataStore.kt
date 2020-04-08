@@ -1,12 +1,10 @@
 package com.neqabty.data.repositories
 
-import android.util.Log
 import com.neqabty.data.api.WebService
 import com.neqabty.data.api.requests.*
 import com.neqabty.data.mappers.*
 import com.neqabty.domain.NeqabtyDataStore
 import com.neqabty.domain.entities.*
-
 import io.reactivex.Observable
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -19,8 +17,8 @@ import javax.inject.Singleton
 
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
 
-    override fun createComplaint(name: String, phone: String, type: String, body: String, token: String): Observable<Unit> {
-        return api.sendComplaint(ComplaintRequest(name, phone,type,body, token)).map { result ->
+    override fun createComplaint(name: String, phone: String, type: String, body: String, token: String, memberNumber: String): Observable<Unit> {
+        return api.sendComplaint(ComplaintRequest(name, phone, type, body, token, memberNumber)).map { result ->
             result.data ?: Unit
         }
     }
@@ -41,7 +39,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     private val verifyUserDataEntityMapper = VerifyUserDataEntityMapper()
     override fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity> {
-        return api.sendVerifySMS(SendSMSRequest(userNumber,mobileNumber)).map { result ->
+        return api.sendVerifySMS(SendSMSRequest(userNumber, mobileNumber)).map { result ->
             verifyUserDataEntityMapper.mapFrom(result)
         }
     }
@@ -79,7 +77,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
             file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
         }
-        return api.engineeringRecordsRequest(EngineeringRecordsRequest(name, phone,typeId,mainSyndicate,userNumber, lastRenewYear, statusID, isOwner,docsNumber) , file1, file2, file3).map { result ->
+        return api.engineeringRecordsRequest(EngineeringRecordsRequest(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber), file1, file2, file3).map { result ->
             result.data ?: Unit
         }
     }
@@ -90,7 +88,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
         var file2: MultipartBody.Part? = null
         var file3: MultipartBody.Part? = null
         var file4: MultipartBody.Part? = null
-        var personsRequestsList: List<PersonRequest> = personsList.map { personEntity -> PersonRequest(personEntity.name , personEntity.relationship ,personEntity.birthDate,personEntity.ageOnTrip) }
+        var personsRequestsList: List<PersonRequest> = personsList.map { personEntity -> PersonRequest(personEntity.name, personEntity.relationship, personEntity.birthDate, personEntity.ageOnTrip) }
 
         doc1?.let {
             val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
@@ -109,7 +107,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             file4 = MultipartBody.Part.createFormData("doc4", doc4?.name, doc4RequestFile)
         }
 
-        return api.bookTrip(BookTripRequest(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, docsNumber,personsNumber,personsRequestsList), file1, file2, file3, file4).map { result ->
+        return api.bookTrip(BookTripRequest(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, docsNumber, personsNumber, personsRequestsList), file1, file2, file3, file4).map { result ->
             result.data ?: Unit
         }
     }
@@ -141,9 +139,20 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val memberDataEntityMapper = MemberDataEntityMapper()
 
     override fun inquirePayment(userNumber: Int, serviceID: Int): Observable<MemberEntity> {
-        return api.paymentInquiry(userNumber , serviceID).flatMap { user ->
+        return api.paymentInquiry(userNumber, serviceID).flatMap { user ->
             user.data?.msg = user.status.message
-            Observable.just(memberDataEntityMapper.mapFrom(user.data!!))
+            if (!user.data?.msg.isNullOrEmpty()) {
+                Observable.just(MemberEntity(msg = user.data?.msg!!))
+            } else
+                Observable.just(memberDataEntityMapper.mapFrom(user.data!!))
+        }
+    }
+
+    private val encryptionDataEntityMapper = EncryptionDataEntityMapper()
+
+    override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {
+        return api.paymentEncryption(EncryptionRequest(userName, password, description)).flatMap { data ->
+            Observable.just(encryptionDataEntityMapper.mapFrom(data))
         }
     }
 
@@ -151,7 +160,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     override fun getNotificationsCount(userNumber: Int): Observable<NotificationsCountEntity> {
         return api.getNotificationsCount(NotificationRequest(userNumber = userNumber)).map { count ->
-                notificationsCountDataEntityMapper.mapFrom(count)
+            notificationsCountDataEntityMapper.mapFrom(count)
         }
     }
 
@@ -164,7 +173,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     }
 
     override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity> {
-        return api.getNotificationDetails(requestID,type).flatMap { notification ->
+        return api.getNotificationDetails(requestID, type).flatMap { notification ->
             Observable.just(notificationDataEntityMapper.mapFrom(notification))
         }
     }
@@ -350,7 +359,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     }
 
     override fun loginUser(mobile: String, userNumber: String, token: String): Observable<UserEntity> {
-        return api.loginUser(LoginRequest(userNumber,token)).map { userData ->
+        return api.loginUser(LoginRequest(userNumber, token)).map { userData ->
             userDataEntityMapper.mapFrom(userData.data!!)
         }
     }

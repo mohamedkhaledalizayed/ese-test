@@ -11,12 +11,17 @@
         app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true" />
 
+    <action
+        android:id="@+id/openHomeFragment"
+        app:destination="@id/homeFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true" />
+
     <fragment
         android:id="@+id/introFragment"
         android:name="com.neqabty.presentation.ui.intro.IntroFragment"
         android:label=" "
-        tools:layout="@layout/intro_fragment">
-    </fragment>
+        tools:layout="@layout/intro_fragment" />
 
     <fragment
         android:id="@+id/loginFragment"
@@ -108,6 +113,10 @@
         <argument
             android:name="serviceId"
             app:argType="java.lang.String" />
+
+        <action
+            android:id="@+id/openInquiryDetailsFragment"
+            app:destination="@id/inquiryDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
@@ -169,13 +178,25 @@
     <fragment
         android:id="@+id/addCompanionFragment"
         android:name="com.neqabty.presentation.ui.addCompanion.AddCompanionFragment"
-        tools:layout="@layout/add_companion_fragment"></fragment>
+        tools:layout="@layout/add_companion_fragment" />
     <fragment
         android:id="@+id/paymentFragment"
         android:name="com.neqabty.presentation.ui.payment.PaymentFragment"
         android:label="@string/pay"
         tools:layout="@layout/payment_fragment">
 
+        <argument
+            android:name="senderRequestNumber"
+            app:argType="java.lang.String" />
+        <argument
+            android:name="cardRequestNumber"
+            app:argType="java.lang.String" />
+        <argument
+            android:name="sessionID"
+            app:argType="java.lang.String" />
+        <argument
+            android:name="amount"
+            app:argType="java.lang.String" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -266,6 +287,20 @@
         <argument
             android:name="medicalProviderItem"
             app:argType="com.neqabty.presentation.entities.ProviderUI" />
+        <action
+            android:id="@+id/openPhonesFragment"
+            app:destination="@id/phonesFragment"
+            app:enterAnim="@anim/slide_in_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/phonesFragment"
+        android:name="com.neqabty.presentation.ui.phones.PhonesFragment"
+        android:label=" "
+        tools:layout="@layout/phones_fragment">
+        <argument
+            android:name="phones"
+            app:argType="java.lang.String" />
     </fragment>
     <fragment
         android:id="@+id/chooseAreaFragment"
@@ -361,7 +396,7 @@
         android:label="@string/inquiry_title"
         tools:layout="@layout/inquiry_fragment">
         <action
-            android:id="@+id/inquiryDetails"
+            android:id="@+id/openInquiryDetails"
             app:destination="@id/inquiryDetailsFragment" />
     </fragment>
     <fragment
@@ -370,8 +405,20 @@
         android:label="@string/inquiry_title"
         tools:layout="@layout/inquiry_details_fragment">
         <argument
+            android:name="type"
+            app:argType="java.lang.Integer" />
+
+        <argument
+            android:name="title"
+            app:argType="java.lang.String" />
+
+
+        <argument
             android:name="memberItem"
             app:argType="com.neqabty.presentation.entities.MemberUI" />
+        <argument
+            android:name="serviceID"
+            app:argType="java.lang.String" />
 
         <action
             android:id="@+id/openPayment"

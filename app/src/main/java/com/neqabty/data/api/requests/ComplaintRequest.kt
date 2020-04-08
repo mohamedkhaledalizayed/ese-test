@@ -13,5 +13,7 @@ data class ComplaintRequest(
     @SerializedName("details")
     var details: String = "",
     @SerializedName("mobile_token")
-    var token: String = ""
+    var token: String = "",
+    @SerializedName("user_number")
+    var memberNumber: String = ""
 ) : Request()

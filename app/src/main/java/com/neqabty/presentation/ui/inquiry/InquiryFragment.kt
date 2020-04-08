@@ -102,8 +102,9 @@ class InquiryFragment : BaseFragment(), Injectable {
 //                showAlert(state?.member?.message!!)
 //            }
             if (state.member?.msg == ""){
+                state.member?.engineerNumber = edMemberNumber.text.toString()
                 navController().navigate(
-                        InquiryFragmentDirections.inquiryDetails(state.member!!)
+                        InquiryFragmentDirections.openInquiryDetails(0, spService.selectedItem.toString(), state.member!!, serviceID.toString())
                 )
             } else {
                 showAlert(state.member?.msg as String)

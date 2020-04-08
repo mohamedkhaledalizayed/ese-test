@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -34,14 +32,32 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/margin_horizontal_normal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/margin_horizontal_normal">
+
+                <TextView
+                    android:id="@+id/tvNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/card_number"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_large" />
+
+                <EditText
+                    android:id="@+id/edNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_vertical_normal"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="14"
+                    android:text="5111111111111118"
+                    android:textSize="@dimen/text_size_large" />
 
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
                     android:text="@string/name_on_card"
                     android:textSize="@dimen/text_size_large" />
 
@@ -49,58 +65,18 @@
                     android:id="@+id/edName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_vertical_normal"
+                    android:gravity="center"
                     android:inputType="text"
                     android:maxLength="40"
-                    android:hint="@string/name_on_card"
-                    android:layout_marginBottom="@dimen/margin_vertical_normal"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimary"
+                    android:text="Ahmed Mohamed"
                     android:textSize="@dimen/text_size_large" />
-
-                <TextView
-                    android:id="@+id/tvNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:text="@string/card_number"
-                    android:textSize="@dimen/text_size_large" />
-
-                <EditText
-                    android:id="@+id/edNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:maxLength="14"
-                    android:layout_marginBottom="@dimen/margin_vertical_normal"
-                    android:gravity="center"
-                    android:hint="@string/card_number"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large" />
-
-                <TextView
-                    android:id="@+id/tvExpiryDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:text="@string/card_expiry_date"
-                    android:textSize="@dimen/text_size_large" />
-
-                <EditText
-                    android:id="@+id/edExpiryDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLength="5"
-                    android:layout_marginBottom="@dimen/margin_vertical_normal"
-                    android:gravity="center"
-                    android:hint="@string/card_expiry_date"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large" />
-
 
                 <TextView
                     android:id="@+id/tvCVV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="right"
                     android:text="@string/card_cvv"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large" />
@@ -109,41 +85,77 @@
                     android:id="@+id/edCVV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:maxLength="3"
                     android:layout_marginBottom="@dimen/margin_vertical_normal"
                     android:gravity="center"
-                    android:hint="@string/card_cvv"
-                    android:textColor="@color/colorPrimary"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:text="123"
                     android:textSize="@dimen/text_size_large" />
 
                 <TextView
-                    android:id="@+id/tvToken"
+                    android:id="@+id/tvExpiryYear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/token"
+                    android:text="@string/card_expiry_date"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large" />
 
-                <EditText
-                    android:id="@+id/edToken"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:maxLength="14"
-                    android:layout_marginBottom="@dimen/margin_vertical_normal"
-                    android:gravity="center"
-                    android:hint="@string/token"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large" />
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/spMonth"
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_horizontal_normal"
+                        android:layout_weight="1"
+                        android:hint="@string/month"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <Spinner
+                        android:id="@+id/spYear"
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_horizontal_normal"
+                        android:layout_weight="1"
+                        android:hint="@string/month"
+                        android:textDirection="rtl"
+                        android:textSize="@dimen/text_size_medium" />
+
+                </LinearLayout>
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvToken"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/token"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:textSize="@dimen/text_size_large" />-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/edToken"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="@dimen/margin_vertical_normal"-->
+<!--                    android:gravity="center"-->
+<!--                    android:hint="@string/token"-->
+<!--                    android:inputType="number"-->
+<!--                    android:maxLength="14"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:textSize="@dimen/text_size_large" />-->
 
                 <com.neqabty.presentation.ui.common.CustomSwitch
                     android:id="@+id/switchSaveData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/save_card_info"
                     android:layout_marginBottom="@dimen/margin_vertical_normal"
-                    android:textSize="@dimen/text_size_large"/>
+                    android:text="@string/save_card_info"
+                    android:textSize="@dimen/text_size_large" />
 
                 <Button
                     android:id="@+id/bConfirm"

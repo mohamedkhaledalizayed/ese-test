@@ -60,16 +60,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         getToken()
 //        checkRoot()
         startActivities()
-        val notificationId: String? = intent?.extras?.getString("notificationId")
-        notificationId?.let {
-            val args = Bundle()
-            val serviceId: String? = intent?.extras?.getString("serviceId")!!
-
-            args.putString("notificationId", it)
-            args.putString("serviceId", serviceId)
-            Navigation.findNavController(this, R.id.container)
-                    .navigate(R.id.notificationDetailsFragment, args)
-        }
         mainViewModel.viewState.observe(this, Observer {
             invalidateOptionsMenu()
         })
@@ -110,6 +100,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 //        }
 //    }
     private fun startActivities() {
+        val notificationId: String? = intent?.extras?.getString("notificationId")
         val navHostFragment =
                 supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         val inflater = navHostFragment.navController.navInflater
@@ -117,7 +108,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         val navController = Navigation.findNavController(this, R.id.container)
 //        graph.desetDefaultArguments(intent.extras)
 
-        if (!PreferencesHelper(this).isIntroSkipped) // TODO
+        if (notificationId != null)
+            graph.startDestination = R.id.homeFragment
+        else if (!PreferencesHelper(this).isIntroSkipped) // TODO
             graph.startDestination = R.id.introFragment
         else if (PreferencesHelper(this).mobile.isEmpty()) // TODO
             graph.startDestination = R.id.loginFragment
@@ -213,6 +206,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             }
             drawer_layout.closeDrawer(GravityCompat.START)
             true
+        }
+
+        notificationId?.let {
+            val args = Bundle()
+            val serviceId: String? = intent?.extras?.getString("serviceId")!!
+
+            args.putString("notificationId", it)
+            args.putString("serviceId", serviceId)
+            Navigation.findNavController(this, R.id.container)
+                    .navigate(R.id.notificationDetailsFragment, args)
         }
     }
 

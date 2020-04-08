@@ -12,6 +12,7 @@ import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsI
 import com.neqabty.presentation.ui.favorites.FavoritesViewModel
 import com.neqabty.presentation.ui.home.HomeViewModel
 import com.neqabty.presentation.ui.inquiry.InquiryViewModel
+import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsViewModel
 import com.neqabty.presentation.ui.login.LoginViewModel
 import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsViewModel
 import com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsViewModel
@@ -169,6 +170,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(InquiryViewModel::class)
     abstract fun bindInquiryViewModel(inquiryViewModel: InquiryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InquiryDetailsViewModel::class)
+    abstract fun bindInquiryDetailsViewModel(inquiryDetailsViewModel: InquiryDetailsViewModel): ViewModel
 
     @Binds
     @IntoMap
