@@ -104,8 +104,10 @@ class HomeViewModel @Inject constructor(
                             onContentReceived()
                         },
                         {
-                            viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            viewState.value = viewState.value?.copy(notificationsCount = 0)
+                            onContentReceived()
+//                            viewState.value = viewState.value?.copy(isLoading = false)
+//                            errorState.value = it
                         }
                 )
         )

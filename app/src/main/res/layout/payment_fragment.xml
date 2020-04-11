@@ -51,7 +51,6 @@
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="14"
-                    android:text="5111111111111118"
                     android:textSize="@dimen/text_size_large" />
 
                 <TextView
@@ -69,7 +68,6 @@
                     android:gravity="center"
                     android:inputType="text"
                     android:maxLength="40"
-                    android:text="Ahmed Mohamed"
                     android:textSize="@dimen/text_size_large" />
 
                 <TextView
@@ -89,7 +87,6 @@
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="3"
-                    android:text="123"
                     android:textSize="@dimen/text_size_large" />
 
                 <TextView

@@ -77,8 +77,9 @@ interface NeqabtyRepository {
     ): Observable<Unit>
 
     fun getAllServices(): Observable<List<ServiceEntity>>
-    fun inquirePayment(userNumber: Int, serviceID: Int): Observable<MemberEntity>
+    fun inquirePayment(userNumber: Int, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity>
     fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
+    fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity>
     fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>
     fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity>

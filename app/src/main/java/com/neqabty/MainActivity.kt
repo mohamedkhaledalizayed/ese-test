@@ -297,7 +297,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 //        logoutItem?.isVisible = currentFragment is HasHomeOptionsMenu &&
 //                PreferencesHelper(this).isRegistered
         favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu //|| currentFragment is HasFavoriteOptionsMenu
-        searchItem?.isVisible = currentFragment is HasMedicalOptionsMenu
+//        searchItem?.isVisible = currentFragment is HasMedicalOptionsMenu//TODO
 
 //        if (currentFragment is HasFavoriteOptionsMenu)
 //            favoritesItem?.setIcon(currentFragment.renderFav())

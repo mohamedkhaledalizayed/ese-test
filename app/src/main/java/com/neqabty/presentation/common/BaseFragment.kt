@@ -54,13 +54,13 @@ open class BaseFragment : Fragment() {
     }
 
 
-    fun showAlert(message: String, title: String = getString(R.string.alert_title)) {
+    fun showAlert(message: String, title: String = getString(R.string.alert_title), okCallback: (() -> Unit) = {dialog?.dismiss()}) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)
         builder.setCancelable(false)
         builder.setMessage(message)
         builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
-            dialog.dismiss()
+            okCallback.invoke()
         }
         val dialog: AlertDialog = builder.create()
         dialog.show()

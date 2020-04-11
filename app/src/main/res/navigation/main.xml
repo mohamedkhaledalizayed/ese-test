@@ -186,6 +186,9 @@
         tools:layout="@layout/payment_fragment">
 
         <argument
+            android:name="memberItem"
+            app:argType="com.neqabty.presentation.entities.MemberUI" />
+        <argument
             android:name="senderRequestNumber"
             app:argType="java.lang.String" />
         <argument

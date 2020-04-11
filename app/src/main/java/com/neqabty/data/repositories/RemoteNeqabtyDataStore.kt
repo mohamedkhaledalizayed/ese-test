@@ -138,8 +138,8 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     private val memberDataEntityMapper = MemberDataEntityMapper()
 
-    override fun inquirePayment(userNumber: Int, serviceID: Int): Observable<MemberEntity> {
-        return api.paymentInquiry(userNumber, serviceID).flatMap { user ->
+    override fun inquirePayment(userNumber: Int, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity> {
+        return api.paymentInquiry(userNumber, serviceID, requestID, amount).flatMap { user ->
             user.data?.msg = user.status.message
             if (!user.data?.msg.isNullOrEmpty()) {
                 Observable.just(MemberEntity(msg = user.data?.msg!!))
@@ -153,6 +153,14 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {
         return api.paymentEncryption(EncryptionRequest(userName, password, description)).flatMap { data ->
             Observable.just(encryptionDataEntityMapper.mapFrom(data))
+        }
+    }
+
+    private val decryptionDataEntityMapper = DecryptionDataEntityMapper()
+
+    override fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity> {
+        return api.sendDecryptionKey(DecryptionRequest(requestNumber, decryptionKey)).flatMap { result ->
+            Observable.just(decryptionDataEntityMapper.mapFrom(result.data!!))
         }
     }
 

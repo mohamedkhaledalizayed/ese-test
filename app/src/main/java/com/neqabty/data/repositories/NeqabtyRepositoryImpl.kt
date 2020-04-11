@@ -62,12 +62,16 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getAllServices()
     }
 
-    override fun inquirePayment(userNumber: Int, serviceID: Int): Observable<MemberEntity> {
-        return remoteDataStore.inquirePayment(userNumber, serviceID)
+    override fun inquirePayment(userNumber: Int, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity> {
+        return remoteDataStore.inquirePayment(userNumber, serviceID, requestID, amount)
     }
 
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {
         return remoteDataStore.encrypt(userName, password, description)
+    }
+
+    override fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity> {
+        return remoteDataStore.sendDecryptionKey(requestNumber, decryptionKey)
     }
 
     override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity> {

@@ -16,6 +16,7 @@
         android:id="@+id/search_fragment"
         android:icon="@mipmap/search"
         android:title="@string/search"
+        android:visible="false"
         app:showAsAction="always" />
     <item
         android:id="@+id/favorites_fragment"

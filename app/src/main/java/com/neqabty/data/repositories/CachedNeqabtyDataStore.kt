@@ -12,6 +12,11 @@ import javax.inject.Singleton
 @Singleton
 
 class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: NeqabtyCache) : NeqabtyDataStore {
+
+    override fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -90,7 +95,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun inquirePayment(userNumber: Int, serviceID: Int): Observable<MemberEntity> {
+    override fun inquirePayment(userNumber: Int, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 

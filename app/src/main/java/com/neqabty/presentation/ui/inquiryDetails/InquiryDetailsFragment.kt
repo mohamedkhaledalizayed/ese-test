@@ -20,6 +20,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MemberUI
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
 import javax.inject.Inject
@@ -45,6 +46,9 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
     lateinit var mechanismTypeButton: RadioButton
 
     lateinit var params: InquiryDetailsFragmentArgs
+    var sendDecryptionKey = false
+
+    lateinit var paymentCreationResponse: PaymentCreationResponse
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -72,7 +76,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         inquiryDetailsViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                inquiryDetailsViewModel.paymentInquiry(memberItem.engineerNumber, params.serviceID)
+                inquiryDetailsViewModel.paymentInquiry(memberItem.engineerNumber, params.serviceID, memberItem.requestID, memberItem.amount.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             })
@@ -82,7 +86,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         memberItem = params.memberItem
 
 //        initializeViews()
-        inquiryDetailsViewModel.paymentInquiry(memberItem.engineerNumber, params.serviceID)
+        inquiryDetailsViewModel.paymentInquiry(memberItem.engineerNumber, params.serviceID, memberItem.requestID, memberItem.amount.toString())
     }
 
     fun initializeViews() {
@@ -112,10 +116,30 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: InquiryDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
-            state.member?.let {
-                memberItem.paymentCreationRequest = it.paymentCreationRequest
-                memberItem.paymentCreationRequest?.senderRequestNumber = it.paymentCreationRequest?.senderRequestNumber!!
-                initializeViews()
+            if (sendDecryptionKey) {
+                llSuperProgressbar.visibility = View.INVISIBLE
+                val paymentMethod = mechanismTypeButton.getText().toString()
+                if (paymentMethod == getString(R.string.payment_card)) {
+                    navController().navigate(
+                            InquiryDetailsFragmentDirections.openPayment(memberItem, paymentCreationResponse.OriginalSenderRequestNumber,
+                                    paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
+                    )
+                } else if (paymentMethod == getString(R.string.payment_channel) ||
+                        paymentMethod == getString(R.string.payment_wallet) ||
+                        paymentMethod == getString(R.string.payment_meeza)) {
+                    showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
+                        navController().popBackStack()
+                        navController().navigate(R.id.homeFragment)
+                    }
+//                    "senderRequestNumber" + response.OriginalSenderRequestNumber
+                }
+
+            } else {
+                state.member?.let {
+                    memberItem.paymentCreationRequest = it.paymentCreationRequest
+                    memberItem.paymentCreationRequest?.senderRequestNumber = it.paymentCreationRequest?.senderRequestNumber!!
+                    initializeViews()
+                }
             }
         }
     }
@@ -128,8 +152,8 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
             paymentGateway = PaymentGateway(activity, memberItem.paymentCreationRequest?.sender?.password)
             paymentCreationRequest = PaymentCreationRequest()
 
-//            paymentCreationRequest.Sender.Id = memberItem.paymentCreationRequest?.sender?.id
-            paymentCreationRequest.Sender.Id = "077"
+            paymentCreationRequest.Sender.Id = memberItem.paymentCreationRequest?.sender?.id
+//            paymentCreationRequest.Sender.Id = "077"
             paymentCreationRequest.Sender.Name = memberItem.paymentCreationRequest?.sender?.name
 //            paymentCreationRequest.Sender.Name = "MSAD"
             paymentCreationRequest.Sender.Password = memberItem.paymentCreationRequest?.sender?.password
@@ -140,20 +164,20 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
 //            paymentCreationRequest.SenderRequestNumber = memberItem.paymentCreationRequest?.senderRequestNumber + "032110010100"
             paymentCreationRequest.SenderRequestNumber = memberItem.paymentCreationRequest?.senderRequestNumber
-//            paymentCreationRequest.ServiceCode = memberItem.paymentCreationRequest?.serviceCode
-            paymentCreationRequest.ServiceCode = "172"
+            paymentCreationRequest.ServiceCode = memberItem.paymentCreationRequest?.serviceCode
+//            paymentCreationRequest.ServiceCode = "172"
 
             val settlementAmount = PaymentCreationRequest.SettlementAmount()
 
             settlementAmount.Amount = memberItem.paymentCreationRequest?.settlementAmounts?.amount?.toDouble()!!
-//            settlementAmount.SettlementAccountCode = memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode!!.toInt()
-            settlementAmount.SettlementAccountCode = 777
+            settlementAmount.SettlementAccountCode = memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode!!.toInt()
+//            settlementAmount.SettlementAccountCode = 777
             settlementAmount.Description = "Test"
 
             paymentCreationRequest.SettlementAmounts.add(settlementAmount)
 
-//            paymentCreationRequest.Currency = memberItem.paymentCreationRequest?.currency
-            paymentCreationRequest.Currency = "818"
+            paymentCreationRequest.Currency = memberItem.paymentCreationRequest?.currency
+//            paymentCreationRequest.Currency = "818"
 
             mechanismTypeButton = binding.root.findViewById(rgPaymentMechanismType.getCheckedRadioButtonId())
 
@@ -165,51 +189,47 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Channel
 
                 paymentCreationRequest.PaymentMechanism.Channel.Email = "xxxx@xx.xx"
-                paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = "01111111111"
+                paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = PreferencesHelper(requireContext()).mobile
             } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_wallet)) {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.MobileWallet
-                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = "01111111111"
+                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = PreferencesHelper(requireContext()).mobile
             } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_meeza)) {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Meeza
-                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = "01111111111"
+                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = PreferencesHelper(requireContext()).mobile
             }
 
-//            paymentCreationRequest.RequestExpiryDate = memberItem.paymentCreationRequest?.requestExpiryDate
-            paymentCreationRequest.RequestExpiryDate = "2020-04-10"
+            paymentCreationRequest.RequestExpiryDate = memberItem.paymentCreationRequest?.requestExpiryDate
+//            paymentCreationRequest.RequestExpiryDate = "2020-04-10"
 
-//            paymentCreationRequest.UserUniqueIdentifier = memberItem.paymentCreationRequest?.userUniqueIdentifier
-            paymentCreationRequest.UserUniqueIdentifier = "12346743298546"
+            paymentCreationRequest.UserUniqueIdentifier = memberItem.paymentCreationRequest?.userUniqueIdentifier
+//            paymentCreationRequest.UserUniqueIdentifier = "12346743298546"
 
-            val publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4vDGDLMEPRUJmT7BC4mL\n" +
-                    "32e+jORKSMq3rv+FTrXAUzatQ18je2C3YtGMcy1k7m9v4V6gswxJvJEPPHzJE+dZ\n" +
-                    "bwWZYhlmgxfyA0yTu8JVrAlcPbX0VHKxAsorbgTmrNyPitdEeYneARKmqDCdYIqx\n" +
-                    "e76l3R1YoiILe2CVB185sTQ3TDgtfgCgpfWbCZbhmnyMIW3QiaDX7bfrMtv30qpj\n" +
-                    "MG73570cxoX9Zkq3tUj/orYrM+D9+gHscnZke94x7Zwey/VwjUeIFifLuD3XTv01\n" +
-                    "ifiwqIgOtbchdmoWDTAmwMfd6lhrK6kr/d9oK6I2vPwc+MyJhut0Njwx8h7OF0zg\n" +
-                    "/QIDAQAB"
+            val publicKey = memberItem.paymentCreationRequest?.publicKey
+//            val publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4vDGDLMEPRUJmT7BC4mL\n" +
+//                    "32e+jORKSMq3rv+FTrXAUzatQ18je2C3YtGMcy1k7m9v4V6gswxJvJEPPHzJE+dZ\n" +
+//                    "bwWZYhlmgxfyA0yTu8JVrAlcPbX0VHKxAsorbgTmrNyPitdEeYneARKmqDCdYIqx\n" +
+//                    "e76l3R1YoiILe2CVB185sTQ3TDgtfgCgpfWbCZbhmnyMIW3QiaDX7bfrMtv30qpj\n" +
+//                    "MG73570cxoX9Zkq3tUj/orYrM+D9+gHscnZke94x7Zwey/VwjUeIFifLuD3XTv01\n" +
+//                    "ifiwqIgOtbchdmoWDTAmwMfd6lhrK6kr/d9oK6I2vPwc+MyJhut0Njwx8h7OF0zg\n" +
+//                    "/QIDAQAB"
+
 //            inquiryDetailsViewModel.encryptData(paymentCreationRequest.Sender.Name, paymentCreationRequest.Sender.Password, paymentCreationRequest.serialize())
             paymentCreationRequest.serialize()
 
             val successCallback: ((response: PaymentCreationResponse) -> Unit) = { response ->
-
-                llSuperProgressbar.visibility = View.INVISIBLE
-                val paymentMethod = mechanismTypeButton.getText().toString()
-                if (paymentMethod == getString(R.string.payment_card)) {
-                    navController().navigate(
-                            InquiryDetailsFragmentDirections.openPayment(response.OriginalSenderRequestNumber,
-                                    response.CardRequestNumber, response.SessionId, response.TotalAuthorizationAmount.toString())
-                    )
-                } else if (paymentMethod == getString(R.string.payment_channel) ||
-                        paymentMethod == getString(R.string.payment_wallet) ||
-                        paymentMethod == getString(R.string.payment_meeza)) {
-                    showAlert(getString(R.string.payment_reference) + response.CardRequestNumber)
-//                    "senderRequestNumber" + response.OriginalSenderRequestNumber
-                }
-
+                sendDecryptionKey = true
+                paymentCreationResponse = response
+                inquiryDetailsViewModel.sendDecryptionKey(response.OriginalSenderRequestNumber, response.RequestDecryptionKey)
             }
 
             val failureCallback = {
                 llSuperProgressbar.visibility = View.INVISIBLE
+                showConnectionAlert(requireContext(), retryCallback = {
+                    llContent.visibility = View.INVISIBLE
+                    inquiryDetailsViewModel.paymentInquiry(memberItem.engineerNumber, params.serviceID, memberItem.requestID, memberItem.amount.toString())
+                }, cancelCallback = {
+                    navController().navigateUp()
+                })
             }
 
             paymentGateway.CreatePayment(paymentCreationRequest, "", publicKey, MobilePaymentCreationCallback(successCallback, failureCallback))

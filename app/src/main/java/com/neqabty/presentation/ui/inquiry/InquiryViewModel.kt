@@ -43,7 +43,7 @@ class InquiryViewModel @Inject constructor(private val getAllServices: GetAllSer
 
     fun paymentInquiry(number: String, serviceID: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(paymentInquiry.paymentInquiry(number, serviceID)
+        addDisposable(paymentInquiry.paymentInquiry(number, serviceID, "", "")
                 .map {
                     it.let {
                         memberEntityUIMapper.mapFrom(it)

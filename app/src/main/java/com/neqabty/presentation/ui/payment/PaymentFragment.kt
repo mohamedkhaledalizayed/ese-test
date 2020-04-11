@@ -20,6 +20,7 @@ import com.neqabty.databinding.PaymentFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.payment_fragment.*
 import javax.inject.Inject
@@ -41,10 +42,14 @@ class PaymentFragment : BaseFragment(), Injectable {
     lateinit var paymentGateway: PaymentGateway
     lateinit var paymentConfirmationRequest: PaymentConfirmationRequest
     var monthsList: List<String>? = mutableListOf("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-    var yearsList: List<String>? = mutableListOf("2020", "2021", "2022", "2023", "2024", "2025", "2026")
+    var yearsList: List<String>? = mutableListOf("20", "21", "22", "23", "24", "25", "26")
 
     var month: String = ""
     var year: String = ""
+
+    lateinit var params: PaymentFragmentArgs
+    lateinit var memberItem: MemberUI
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -66,21 +71,20 @@ class PaymentFragment : BaseFragment(), Injectable {
         paymentViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(PaymentViewModel::class.java)
 
-        initializeViews()
-
         paymentViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
         paymentViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                paymentViewModel.getSyndicates()
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
 
-//        paymentViewModel.getSyndicates()
+        params = PaymentFragmentArgs.fromBundle(arguments!!)
+        memberItem = params.memberItem
+        initializeViews()
     }
 
     private fun handleViewState(state: PaymentViewState) {
@@ -89,8 +93,6 @@ class PaymentFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-//        val params = PaymentFragmentArgs.fromBundle(arguments!!)
-
         binding.spMonth.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, monthsList)
         binding.spMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -113,16 +115,18 @@ class PaymentFragment : BaseFragment(), Injectable {
     }
 
 
-    fun confirmPayment() {
+    private fun confirmPayment() {
         val params = PaymentFragmentArgs.fromBundle(arguments!!)
         try {
 
-            paymentGateway = PaymentGateway(activity, "1234")
+            paymentGateway = PaymentGateway(activity, memberItem.paymentCreationRequest?.sender?.password)
             paymentConfirmationRequest = PaymentConfirmationRequest()
 
-            paymentConfirmationRequest.Sender.Id = "077"
-            paymentConfirmationRequest.Sender.Name = "MSAD"
-            paymentConfirmationRequest.Sender.Password = "1234"
+            paymentConfirmationRequest.Sender.Id = memberItem.paymentCreationRequest?.sender?.id
+//            paymentConfirmationRequest.Sender.Id = "077"
+            paymentConfirmationRequest.Sender.Name = memberItem.paymentCreationRequest?.sender?.name
+//            paymentConfirmationRequest.Sender.Name = "MSAD"
+            paymentConfirmationRequest.Sender.Password = memberItem.paymentCreationRequest?.sender?.password
 
             paymentConfirmationRequest.SenderRequestNumber = params.senderRequestNumber
 
@@ -143,11 +147,11 @@ class PaymentFragment : BaseFragment(), Injectable {
              * */
 
 
-            paymentConfirmationRequest.Card.NameOnCard = edName.text.toString()
-            paymentConfirmationRequest.Card.CardNumber = "5111111111111118"
-            paymentConfirmationRequest.Card.CardCVV = edCVV.text.toString()
-            paymentConfirmationRequest.Card.CardExpiryMonth = spMonth.selectedItem.toString()
-            paymentConfirmationRequest.Card.CardExpiryYear = spYear.selectedItem.toString()
+//            paymentConfirmationRequest.Card.NameOnCard = edName.text.toString()
+//            paymentConfirmationRequest.Card.CardNumber = "5111111111111118"
+//            paymentConfirmationRequest.Card.CardCVV = edCVV.text.toString()
+//            paymentConfirmationRequest.Card.CardExpiryMonth = spMonth.selectedItem.toString()
+//            paymentConfirmationRequest.Card.CardExpiryYear = spYear.selectedItem.toString()
             paymentConfirmationRequest.Card.SaveCardFlag = true
 
 
@@ -164,12 +168,20 @@ class PaymentFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.INVISIBLE
 
 
-                showAlert(getString(R.string.payment_successful))
+                showAlert(getString(R.string.payment_successful)){
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
 //                "senderRequestNumber"+ response.SenderRequestNumber
             }
 
             val failureCallback = {
                 llSuperProgressbar.visibility = View.INVISIBLE
+                showConnectionAlert(requireContext(), retryCallback = {
+                    navController().navigateUp()
+                }, cancelCallback = {
+                    navController().navigateUp()
+                })
             }
             paymentGateway.ConfirmPayment(paymentConfirmationRequest, "", MobilePaymentConfirmationCallback(successCallback, failureCallback))
 

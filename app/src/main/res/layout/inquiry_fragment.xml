@@ -77,7 +77,6 @@
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="11"
-                    android:text="3308222"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large" />
 

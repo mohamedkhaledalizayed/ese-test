@@ -3,18 +3,22 @@ package com.neqabty.presentation.ui.inquiryDetails
 import android.arch.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.EncryptData
 import com.neqabty.domain.usecases.PaymentInquiry
+import com.neqabty.domain.usecases.SendDecryptionKey
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
+import com.neqabty.presentation.entities.DecryptionUI
 import com.neqabty.presentation.entities.EncryptionUI
 import com.neqabty.presentation.entities.MemberUI
+import com.neqabty.presentation.mappers.DecryptionEntityUIMapper
 import com.neqabty.presentation.mappers.EncryptionEntityUIMapper
 import com.neqabty.presentation.mappers.MemberEntityUIMapper
 import javax.inject.Inject
 
-class InquiryDetailsViewModel @Inject constructor(private val encryptData: EncryptData, private val paymentInquiry: PaymentInquiry) : BaseViewModel() {
+class InquiryDetailsViewModel @Inject constructor(private val sendDecryptionKey: SendDecryptionKey,private val encryptData: EncryptData, private val paymentInquiry: PaymentInquiry) : BaseViewModel() {
 
     private val memberEntityUIMapper = MemberEntityUIMapper()
     private val encryptionEntityUIMapper = EncryptionEntityUIMapper()
+    private val decryptionEntityUIMapper = DecryptionEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<InquiryDetailsViewState> = MutableLiveData()
@@ -40,9 +44,25 @@ class InquiryDetailsViewModel @Inject constructor(private val encryptData: Encry
                 )
     }
 
-    fun paymentInquiry(number: String, serviceID: String) {
+    fun sendDecryptionKey(requestNumber: String, decryptionKey: String) {
+        viewState.value?.decryptionData?.let {
+            onSendDecryptionDataReceived(it)
+        } ?: sendDecryptionKey.sendDecryptionKey(requestNumber, decryptionKey)
+                .map {
+                    it.let {
+                        decryptionEntityUIMapper.mapFrom(it)
+                    }
+                }.subscribe(
+                        {
+                            onSendDecryptionDataReceived(it)
+                        },
+                        { errorState.value = it }
+                )
+    }
+
+    fun paymentInquiry(number: String, serviceID: String, requestID: String, amount: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(paymentInquiry.paymentInquiry(number, serviceID)
+        addDisposable(paymentInquiry.paymentInquiry(number, serviceID, requestID, amount)
                 .map {
                     it.let {
                         memberEntityUIMapper.mapFrom(it)
@@ -61,6 +81,13 @@ class InquiryDetailsViewModel @Inject constructor(private val encryptData: Encry
         val newViewState = viewState.value?.copy(
                 isLoading = false,
                 encryptionData = data)
+        viewState.value = newViewState
+    }
+
+    private fun onSendDecryptionDataReceived(data: DecryptionUI) {
+        val newViewState = viewState.value?.copy(
+                isLoading = false,
+                decryptionData = data)
         viewState.value = newViewState
     }
 

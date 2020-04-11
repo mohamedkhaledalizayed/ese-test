@@ -76,7 +76,7 @@ class AppModule {
 
         return Retrofit.Builder()
 //                .baseUrl("http://ec2-3-132-198-61.us-east-2.compute.amazonaws.com/")
-                .baseUrl("http://back.neqabty.com/")
+                .baseUrl("https://front.neqabty.com/")
 //                .baseUrl("http://192.168.178.38/")
 //            .baseUrl("http://webapp.neqabty.com/")
 //            .baseUrl("https://192.168.196.66")
@@ -344,6 +344,12 @@ class AppModule {
     @Provides
     fun provideEncryptData(neqabtyRepository: NeqabtyRepository): EncryptData {
         return EncryptData(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSendDecryptionKey(neqabtyRepository: NeqabtyRepository): SendDecryptionKey {
+        return SendDecryptionKey(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

@@ -77,7 +77,9 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews(notificationItem: NotificationUI) {
-        notificationItem.cost = 3000 //TODO remove
+        if (notificationItem.cost == null)
+            notificationItem.cost = 3000 //TODO remove
+
         binding.notificationItem = notificationItem
         binding.bViewAttachment.setOnClickListener {
             val attachmentIntent = Intent(Intent.ACTION_VIEW, Uri.parse(notificationItem.approvalImage))
@@ -85,7 +87,7 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
         }
         binding.bPay.setOnClickListener {
             navController().navigate(
-                    NotificationDetailsFragmentDirections.openInquiryDetailsFragment(1, notificationItem.notificationType!!, MemberUI(amount = notificationItem.cost!!, requestID = notificationItem.approvalNumber!!, engineerNumber = "3308222", engineerName = notificationItem.name!!), "2")//TODO serviceID, usernumber notificationItem.userNumber.toString()
+                    NotificationDetailsFragmentDirections.openInquiryDetailsFragment(1, notificationItem.notificationType!!, MemberUI(amount = notificationItem.cost!!, requestID = notificationItem.approvalNumber!!, engineerNumber = notificationItem.userNumber.toString(), engineerName = notificationItem.name!!), if (notificationItem.notificationTypeID == 2) "9991" else "9992")//TODO serviceID, 2 trips 3 records
             )
         }
     }
