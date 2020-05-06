@@ -19,7 +19,6 @@ import com.neqabty.databinding.ComplaintFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.ComplaintTypeUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -42,9 +41,9 @@ class ComplaintFragment : BaseFragment(), Injectable {
     var complaintsTypeID: Int = 0
     var isSubmitted: Boolean = false
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -82,17 +81,16 @@ class ComplaintFragment : BaseFragment(), Injectable {
         binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
         binding.bNext.setOnClickListener {
             isSubmitted = true
-            complaintViewModel.createComplaint(edName.text.toString(),edMobile.text.toString(),complaintsTypeID.toString(),edBody.text.toString(),PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()).user)
+            complaintViewModel.createComplaint(edName.text.toString(), edMobile.text.toString(), complaintsTypeID.toString(), edBody.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()).user)
         }
     }
 
     private fun handleViewState(state: ComplaintViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        if(isSubmitted){
+        if (!state.isLoading && state.message.isNotBlank() && isSubmitted) {
             isSubmitted = false
             showSuccessAlert()
-        }
-        else if (state.types != null) {
+        } else if (!state.isLoading && state.types != null) {
             binding.llHolder.visibility = if (state.isLoading) View.GONE else View.VISIBLE
             state.types?.let {
                 complaintsTypesList = it

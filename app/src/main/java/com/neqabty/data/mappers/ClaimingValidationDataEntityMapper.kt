@@ -13,7 +13,8 @@ class ClaimingValidationDataEntityMapper @Inject constructor() : Mapper<Claiming
         return ClaimingValidationEntity(
                 engineerName = from.engineerName,
                 code = from.code,
-                message = from.message
+                message = from.message,
+                oldbenid = from.oldbenid
         )
     }
 }

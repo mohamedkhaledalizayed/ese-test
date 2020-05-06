@@ -6,6 +6,6 @@ import com.neqabty.data.api.Response
 
 @Entity(primaryKeys = ["code"])
 data class VerifyUserData(
-    @field:SerializedName("Code")
+    @field:SerializedName("phone_code")
     var code: String
 ) : Response()

@@ -43,6 +43,7 @@ interface NeqabtyDataStore {
             providerType: Int,
             provider: Int,
             name: String,
+            oldbenid: String,
             docsNumber: Int,
             doc1: File?,
             doc2: File?,
@@ -110,4 +111,20 @@ interface NeqabtyDataStore {
 
     fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>>
     fun createComplaint(name: String, phone: String, type: String, body: String, token: String, memberNumber: String): Observable<Unit>
+    fun createCoronaRequest(
+            userNumber: String,
+            phone: String,
+            type: String,
+            job: String,
+            work: String,
+            treatmentDestination: String,
+            treatmentDestinationAddress: String,
+            family: Int,
+            injury: String,
+            docsNumber: Int,
+            doc1: File?,
+            doc2: File?,
+            doc3: File?,
+            doc4: File?,
+            doc5: File?): Observable<Unit>
 }

@@ -107,13 +107,13 @@ interface WebService {
     @POST("api/v2/medical/Beneficiary")
     fun validateUser(@Body claimingValidationRequest: ClaimingValidationRequest): Observable<ApiResponse<ClaimingValidationData>>
 
-    @POST("api/v1/Engineer/search")
-    fun updateUserDataInquiry(@Body inquireUpdateUserDataRequest: InquireUpdateUserDataRequest): Observable<InquireUpdateUserData>
+    @POST("api/v1/Engineer/Data")
+    fun updateUserDataInquiry(@Body inquireUpdateUserDataRequest: InquireUpdateUserDataRequest): Observable<ApiResponse<InquireUpdateUserData>>
 
-    @POST("api/v1/Engineer/sendverifysms")
+    @POST("api/Engineer/sendsms")
     fun sendVerifySMS(@Body sendSMSRequest: SendSMSRequest): Observable<VerifyUserData>
 
-    @POST("api/v1/Engineer/update")
+    @POST("api/v1/RecieveEngineerRquest")
     fun updateUserData(@Body updateUserDataRequest: UpdateUserDataRequest): Observable<UpdateUserData>
 
     @POST("api/EnginneringRecordsRegistry")
@@ -145,4 +145,14 @@ interface WebService {
 
     @POST("api/complaints/request")
     fun sendComplaint(@Body complaintRequest: ComplaintRequest): Observable<ApiResponse<Unit>>
+
+    @Multipart
+    @POST("api/v1/RecieveCovid19Rquest")
+    fun createCoronaRequest(
+            @Part("json_request") coronaRequest: CoronaRequest,
+            @Part doc1: MultipartBody.Part?,
+            @Part doc2: MultipartBody.Part?,
+            @Part doc3: MultipartBody.Part?,
+            @Part doc4: MultipartBody.Part?,
+            @Part doc5: MultipartBody.Part?): Observable<ApiResponse<Unit>>
 }

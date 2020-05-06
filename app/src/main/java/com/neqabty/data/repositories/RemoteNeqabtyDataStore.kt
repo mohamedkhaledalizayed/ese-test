@@ -17,6 +17,39 @@ import javax.inject.Singleton
 
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
 
+    override fun createCoronaRequest(userNumber: String, phone: String, type: String, job: String, work: String, treatmentDestination: String, treatmentDestinationAddress: String, family: Int, injury: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
+        var file1: MultipartBody.Part? = null
+        var file2: MultipartBody.Part? = null
+        var file3: MultipartBody.Part? = null
+        var file4: MultipartBody.Part? = null
+        var file5: MultipartBody.Part? = null
+
+        doc1?.let {
+            val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
+            file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
+        }
+        doc2?.let {
+            val doc2RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc2)
+            file2 = MultipartBody.Part.createFormData("doc2", doc2?.name, doc2RequestFile)
+        }
+        doc3?.let {
+            val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
+            file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
+        }
+        doc4?.let {
+            val doc4RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc4)
+            file4 = MultipartBody.Part.createFormData("doc4", doc4?.name, doc4RequestFile)
+        }
+        doc5?.let {
+            val doc5RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc5)
+            file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
+        }
+
+        return api.createCoronaRequest(CoronaRequest(userNumber, phone, type, job, work, treatmentDestination, treatmentDestinationAddress,family,injury, docsNumber), file1, file2, file3, file4, file5).map { result ->
+            result.data ?: Unit
+        }
+    }
+
     override fun createComplaint(name: String, phone: String, type: String, body: String, token: String, memberNumber: String): Observable<Unit> {
         return api.sendComplaint(ComplaintRequest(name, phone, type, body, token, memberNumber)).map { result ->
             result.data ?: Unit
@@ -33,7 +66,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val inquireUpdateUserDataEntityMapper = InquireUpdateUserDataEntityMapper()
     override fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity> {
         return api.updateUserDataInquiry(InquireUpdateUserDataRequest(userNumber.toInt())).flatMap { userDataResponse ->
-            Observable.just(inquireUpdateUserDataEntityMapper.mapFrom(userDataResponse))
+            Observable.just(inquireUpdateUserDataEntityMapper.mapFrom(userDataResponse.data!!))
         }
     }
 
@@ -199,6 +232,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             providerType: Int,
             provider: Int,
             name: String,
+            oldbenid: String,
             docsNumber: Int,
             doc1: File?,
             doc2: File?,
@@ -233,7 +267,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
         }
 
-        return api.sendMedicalRequest(MedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, docsNumber), file1, file2, file3, file4, file5).map { result ->
+        return api.sendMedicalRequest(MedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, oldbenid, docsNumber), file1, file2, file3, file4, file5).map { result ->
             result.data ?: Unit
         }
     }

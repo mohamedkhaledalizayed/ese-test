@@ -165,7 +165,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 }
                 R.id.update_data_fragment -> {
                     if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.updateDataDetailsFragment)
+                        navController.navigate(R.id.updateDataVerificationFragment)
                     else {
                         val bundle: Bundle = Bundle()
                         bundle.putInt("type", 4)

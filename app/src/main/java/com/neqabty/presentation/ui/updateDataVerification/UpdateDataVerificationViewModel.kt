@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.updateDataVerification
 
 import android.arch.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.UpdateUserData
+import com.neqabty.domain.usecases.VerifyUpdateUserData
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.UpdateUserDataUI
@@ -11,9 +12,9 @@ import com.neqabty.presentation.mappers.VerifyUserDataEntityUIMapper
 
 import javax.inject.Inject
 
-class UpdateDataVerificationViewModel @Inject constructor(private val updateUserData: UpdateUserData) : BaseViewModel() {
+class UpdateDataVerificationViewModel @Inject constructor(private val verifyUpdateUserData: VerifyUpdateUserData) : BaseViewModel() {
 
-    private val UpdateUserDataEntityUIMapper = UpdateUserDataEntityUIMapper()
+    private val verifyUserDataEntityUIMapper = VerifyUserDataEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<UpdateDataVerificationViewState> = MutableLiveData()
@@ -22,15 +23,15 @@ class UpdateDataVerificationViewModel @Inject constructor(private val updateUser
         viewState.value = UpdateDataVerificationViewState()
     }
 
-    fun updateUserData(userNumber: String,fullName: String,nationalID: String,gender: String,userID: String) {
+    fun verifyUser(userNumber: String, mobileNumber: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(updateUserData.updateUserData(userNumber,fullName, nationalID, gender, userID)
+        addDisposable(verifyUpdateUserData.verifyUser(userNumber,mobileNumber)
                 .map {
                     it.let {
-                        UpdateUserDataEntityUIMapper.mapFrom(it)
+                        verifyUserDataEntityUIMapper.mapFrom(it)
                     }
                 }.subscribe(
-                        { onDataReceived(it) },
+                        { onVerifyUserDataReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
                             errorState.value = it
@@ -39,10 +40,10 @@ class UpdateDataVerificationViewModel @Inject constructor(private val updateUser
         )
     }
 
-    private fun onDataReceived(updateUserDataUI: UpdateUserDataUI) {
+    private fun onVerifyUserDataReceived(verifyUserData: VerifyUserDataUI) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
-                message = updateUserDataUI.message)
+                code = verifyUserData.code)
         viewState.value = newViewState
     }
 }

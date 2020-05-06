@@ -125,7 +125,7 @@ class MobileFragment : BaseFragment(), Injectable {
                 )
 
                 4 -> navController().navigate(
-                        MobileFragmentDirections.openUpdateData()
+                        MobileFragmentDirections.openUpdateDataVerification()
                 )
 
                 5 -> navController().navigate(

@@ -4,20 +4,18 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class InquireUpdateUserDataUI(
-        var id: Int = 0,
         var oldRefID: String = "",
         var fullName: String?,
-        var nationalID: String?,
-        var nationalVerified: String?,
-        var phoneNumber: String?,
-        var phoneCode: String?,
-        var phoneVerified: String?,
+        var address: String?,
+        var phone: String?,
+        var mobile: String?,
+        var email: String?,
         var birthdate: String?,
-        var createdAt: String?,
-        var updatedAt: String?
+        var graduationyear: String?,
+        var passportNumber: String?,
+        var nationalID: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readInt(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),

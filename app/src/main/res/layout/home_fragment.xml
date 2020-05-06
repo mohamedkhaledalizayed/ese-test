@@ -17,8 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="start"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -44,172 +44,7 @@
                         android:layout_height="wrap_content"
                         android:scrollbars="none">
 
-                        <LinearLayout
-                            android:id="@+id/llGrid"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:id="@+id/llClaiming"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@mipmap/card"
-                                    android:orientation="vertical"
-                                    android:padding="@dimen/margin_horizontal_small">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_horizontal|top"
-                                        android:layout_margin="@dimen/margin_horizontal_small"
-                                        android:gravity="center"
-                                        android:text="@string/claiming_title"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/text_size_small" />
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:src="@mipmap/medical_ic_1" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/llNews"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@mipmap/card_2"
-                                    android:orientation="vertical"
-                                    android:padding="@dimen/margin_horizontal_small">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_horizontal|top"
-                                        android:layout_margin="@dimen/margin_horizontal_small"
-                                        android:gravity="center"
-                                        android:text="@string/news_title"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/text_size_small" />
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:src="@mipmap/news_ic_7" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/llTrips"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@mipmap/card_3"
-                                    android:orientation="vertical"
-                                    android:padding="@dimen/margin_horizontal_small">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_horizontal|top"
-                                        android:layout_margin="@dimen/margin_horizontal_small"
-                                        android:gravity="center"
-                                        android:text="@string/trips_title"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/text_size_small" />
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:src="@mipmap/trips_ic_6" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/llMedical"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@mipmap/card_4"
-                                    android:orientation="vertical"
-                                    android:padding="@dimen/margin_horizontal_small">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_horizontal|top"
-                                        android:layout_margin="@dimen/margin_horizontal_small"
-                                        android:gravity="center"
-                                        android:text="@string/medicalDirectory"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/text_size_small" />
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:src="@mipmap/medical_ic_2" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/llInquiry"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@mipmap/card_5"
-                                    android:orientation="vertical"
-                                    android:padding="@dimen/margin_horizontal_small">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_horizontal|top"
-                                        android:layout_margin="@dimen/margin_horizontal_small"
-                                        android:gravity="center"
-                                        android:text="@string/inquiry"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/text_size_small" />
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:src="@mipmap/question_ic_5" />
-                                </LinearLayout>
-                            </LinearLayout>
-                        </LinearLayout>
+                        <include layout="@layout/home_horizontal_cards" />
                     </HorizontalScrollView>
 
                     <TextView
@@ -236,6 +71,11 @@
                         android:layout_marginStart="@dimen/margin_horizontal_small"
                         android:text="@string/news_title"
                         android:textSize="@dimen/text_size_large"
+                        android:visibility="gone" />
+
+                    <include
+                        android:id="@+id/llCorona"
+                        layout="@layout/corona_card"
                         android:visibility="gone" />
 
                     <android.support.v7.widget.RecyclerView

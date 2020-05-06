@@ -147,11 +147,11 @@ class PaymentFragment : BaseFragment(), Injectable {
              * */
 
 
-//            paymentConfirmationRequest.Card.NameOnCard = edName.text.toString()
-//            paymentConfirmationRequest.Card.CardNumber = "5111111111111118"
-//            paymentConfirmationRequest.Card.CardCVV = edCVV.text.toString()
-//            paymentConfirmationRequest.Card.CardExpiryMonth = spMonth.selectedItem.toString()
-//            paymentConfirmationRequest.Card.CardExpiryYear = spYear.selectedItem.toString()
+            paymentConfirmationRequest.Card.NameOnCard = edName.text.toString()
+            paymentConfirmationRequest.Card.CardNumber = edNumber.text.toString()
+            paymentConfirmationRequest.Card.CardCVV = edCVV.text.toString()
+            paymentConfirmationRequest.Card.CardExpiryMonth = spMonth.selectedItem.toString()
+            paymentConfirmationRequest.Card.CardExpiryYear = spYear.selectedItem.toString()
             paymentConfirmationRequest.Card.SaveCardFlag = true
 
 

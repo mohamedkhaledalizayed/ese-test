@@ -77,9 +77,6 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews(notificationItem: NotificationUI) {
-        if (notificationItem.cost == null)
-            notificationItem.cost = 3000 //TODO remove
-
         binding.notificationItem = notificationItem
         binding.bViewAttachment.setOnClickListener {
             val attachmentIntent = Intent(Intent.ACTION_VIEW, Uri.parse(notificationItem.approvalImage))

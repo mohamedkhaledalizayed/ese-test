@@ -77,8 +77,8 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
-            android:id="@+id/openUpdateData"
-            app:destination="@id/updateDataDetailsFragment"
+            android:id="@+id/openUpdateDataVerification"
+            app:destination="@id/updateDataVerificationFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
@@ -333,12 +333,15 @@
             app:destination="@id/medicalProviderDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/updateDataFragment"
-        android:name="com.neqabty.presentation.ui.updateData.UpdateDataFragment"
+        android:id="@+id/updateDataVerificationFragment"
+        android:name="com.neqabty.presentation.ui.updateDataVerification.UpdateDataVerificationFragment"
         android:label="@string/update_data_title"
-        tools:layout="@layout/update_data_fragment">
+        tools:layout="@layout/update_data_verification_fragment">
+
         <action
             android:id="@+id/updateDataDetails"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"
             app:destination="@id/updateDataDetailsFragment" />
     </fragment>
     <fragment
@@ -351,28 +354,19 @@
         <!--android:name="userDataInquire"-->
         <!--app:argType="com.neqabty.presentation.entities.InquireUpdateUserDataUI" />-->
 
-        <action
-            android:id="@+id/updateDataVerification"
-            app:destination="@id/updateDataVerificationFragment" />
+<!--        <action-->
+<!--            android:id="@+id/updateDataVerification"-->
+<!--            app:destination="@id/updateDataVerificationFragment" />-->
     </fragment>
-    <fragment
-        android:id="@+id/updateDataVerificationFragment"
-        android:name="com.neqabty.presentation.ui.updateDataVerification.UpdateDataVerificationFragment"
-        android:label="@string/update_data_title"
-        tools:layout="@layout/update_data_verification_fragment">
-
-        <argument
-            android:name="userDataInquire"
-            app:argType="com.neqabty.presentation.entities.InquireUpdateUserDataUI" />
-
-        <argument
-            android:name="code"
-            app:argType="java.lang.String" />
-
-        <action
-            android:id="@+id/updateDataVerification"
-            app:destination="@id/updateDataVerificationFragment" />
-    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/updateDataFragment"-->
+<!--        android:name="com.neqabty.presentation.ui.updateData.UpdateDataFragment"-->
+<!--        android:label="@string/update_data_title"-->
+<!--        tools:layout="@layout/update_data_fragment">-->
+<!--        <action-->
+<!--            android:id="@+id/updateDataDetails"-->
+<!--            app:destination="@id/updateDataDetailsFragment" />-->
+<!--    </fragment>-->
     <fragment
         android:id="@+id/engineeringRecordsInquiryFragment"
         android:name="com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryFragment"
@@ -442,4 +436,9 @@
         android:name="com.neqabty.presentation.ui.settings.SettingsFragment"
         android:label="@string/settings_title"
         tools:layout="@layout/settings_fragment" />
+    <fragment
+        android:id="@+id/coronaFragment"
+        android:name="com.neqabty.presentation.ui.corona.CoronaFragment"
+        android:label="@string/corona_title"
+        tools:layout="@layout/corona_fragment" />
 </navigation>

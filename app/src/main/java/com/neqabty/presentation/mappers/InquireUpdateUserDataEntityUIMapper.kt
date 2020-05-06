@@ -11,17 +11,16 @@ class InquireUpdateUserDataEntityUIMapper @Inject constructor() : Mapper<Inquire
 
     override fun mapFrom(from: InquireUpdateUserDataEntity): InquireUpdateUserDataUI {
         return InquireUpdateUserDataUI(
-                id = from.id,
-                fullName = from.fullName,
-                birthdate = from.birthdate,
-                createdAt = from.createdAt,
-                nationalID = from.nationalID,
-                nationalVerified = from.nationalVerified,
                 oldRefID = from.oldRefID,
-                phoneCode = from.phoneCode,
-                phoneNumber = from.phoneNumber,
-                phoneVerified = from.phoneVerified,
-                updatedAt = from.updatedAt
+                address = from.address,
+                birthdate = from.birthdate,
+                email = from.email,
+                fullName = from.fullName,
+                graduationyear = from.graduationyear,
+                mobile = from.mobile,
+                nationalID = from.nationalID,
+                passportNumber = from.passportNumber,
+                phone = from.phone
         )
     }
 }

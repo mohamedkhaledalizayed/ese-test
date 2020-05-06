@@ -16,15 +16,11 @@ import com.neqabty.databinding.TripDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.entities.AreaUI
-import com.neqabty.presentation.entities.GovernUI
 import com.neqabty.presentation.entities.TripUI
-import com.neqabty.presentation.ui.claiming.ClaimingData
 import com.neqabty.presentation.ui.common.CustomImagePagerAdapter
 import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import kotlinx.android.synthetic.main.claiming1_fragment.*
 
 import javax.inject.Inject
 

@@ -102,7 +102,7 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:maxLength="11"
-                        android:text="@{userData.phoneNumber}"
+                        android:text="@{userData.phone}"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintStart_toStartOf="parent"

@@ -5,6 +5,7 @@ import com.neqabty.presentation.ui.addCompanion.AddCompanionFragment
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaFragment
 import com.neqabty.presentation.ui.claiming.*
 import com.neqabty.presentation.ui.complaint.ComplaintFragment
+import com.neqabty.presentation.ui.corona.CoronaFragment
 import com.neqabty.presentation.ui.engineeringRecordsDetails.EngineeringRecordsDetailsFragment
 import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryFragment
 import com.neqabty.presentation.ui.favorites.FavoritesFragment
@@ -173,4 +174,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeComplaintFragment(): ComplaintFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCoronaFragment(): CoronaFragment
 }

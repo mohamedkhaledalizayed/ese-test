@@ -15,6 +15,9 @@
     <string name="intro_five">كما يمكنك التعرف علي جميع الرحلات المقدمة من النقابة مع إمكانية الحجز والسداد</string>
 
 
+    <string name="corona_item_title">COVID-19 هام للسادة المهندسين </string>
+    <string name="corona_item_description">اذا كنت أحد المصابين بالفيروس او أحد المتضررين برجاء ملي البيانات الخاصة بكم</string>
+
     <string name="phoneNumber">رقم الجوال</string>
     <string name="password">كلمة السر</string>
     <string name="forgetPassword">نسيت كلمة السر</string>
@@ -162,6 +165,7 @@
     <string name="help_title">مساعدة</string>
     <string name="logout_title">خروج</string>
     <string name="notifications_title">الأشعارات</string>
+    <string name="corona_title">بيانات المهندس</string>
 
     <string name="alert_title">تنبيه</string>
     <string name="no_connection_msg">من فضلك تحقق من إتصالك بالإنترنت</string>
@@ -344,4 +348,21 @@
     <string name="complaint_mobile">هاتف الشكوى</string>
     <string name="complaint_body">موضوع الشكوى</string>
     <string name="complaint_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
+
+
+    <string name="corona_desc">بيانات المهندسين المصابين أو المتضررين بفيروس كورونا</string>
+    <string name="corona_type_one">مصاب اصابة ايجابية</string>
+    <string name="corona_job">الوظيفة</string>
+    <string name="corona_work">جهة العمل</string>
+    <string name="corona_medication">جهة العلاج</string>
+    <string name="corona_quarantine">عنوان جهة العلاج العزل</string>
+    <string name="corona_imgs">إضافة صورة التحليل</string>
+
+    <string name="corona_type_two">متضرر</string>
+    <string name="corona_family">عدد افراد الأسرة</string>
+    <string name="corona_damage_type">نوع ووصف الضرر</string>
+    <string name="corona_docs">إضافة مستندات الحالة</string>
+
+    <string name="corona_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في أقرب وقت</string>
+
 </resources>

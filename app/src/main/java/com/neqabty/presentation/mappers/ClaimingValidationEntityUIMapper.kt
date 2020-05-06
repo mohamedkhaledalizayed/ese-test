@@ -14,7 +14,8 @@ class ClaimingValidationEntityUIMapper @Inject constructor() : Mapper<ClaimingVa
         return ClaimingValidationUI(
                 engineerName = from.engineerName,
                 code = from.code,
-                message = from.message
+                message = from.message,
+                oldbenid = from.oldbenid
         )
     }
 }

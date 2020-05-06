@@ -100,6 +100,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                     val prefs = PreferencesHelper(requireContext())
                     llSuperProgressbar.visibility = View.VISIBLE
                     memberName = state.member!!.engineerName
+                    ClaimingData.oldbenid = state.member!!.oldbenid!!
                     isValid = true
                     claimingViewModel.getAllContent1()
                     state.member = null
@@ -206,8 +207,8 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             dialog.dismiss()
             navController().popBackStack()
             var bundle = Bundle()
-            bundle.putInt("type" , 1)
-            navController().navigate(R.id.mobileFragment , bundle)
+            bundle.putInt("type", 1)
+            navController().navigate(R.id.homeFragment , bundle)
         }
 
         val dialog: AlertDialog = builder.create()

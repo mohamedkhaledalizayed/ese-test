@@ -16,7 +16,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +43,6 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<UpdateDataDetailsFragmentBinding>()
-    private var adapter by autoCleared<PhotosAdapter>()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -87,7 +85,6 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 updateDataDetailsViewModel.inquireUpdateUserData(PreferencesHelper(requireContext()).user)
-//                updateDataDetailsViewModel.verifyUser(userDataInquire.oldRefID,binding.edMobileNumber.text.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             })
@@ -97,28 +94,19 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: UpdateDataDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        activity?.invalidateOptionsMenu()
-        if (!state.isLoading && state.userDataInquire != null && state.code == "") {
+        if (!state.isLoading && state.userDataInquire != null && state.message == "") {
             binding.svContent.visibility = View.VISIBLE
             userDataInquire = state.userDataInquire!!
             binding.userData = state.userDataInquire!!
             state.userDataInquire = null
             initializeViews()
         }
-        if (!state.isLoading && state.code != "") {
-            userDataInquire.nationalID = edNationalID.text.toString()
-            userDataInquire.phoneNumber = edMobileNumber.text.toString()
-            navController().navigate(
-                    UpdateDataDetailsFragmentDirections.updateDataVerification(userDataInquire, state.code)
-            )
-            state.code = ""
+        if (!state.isLoading && state.message != "") {
+            showSuccessAlert(getString(R.string.confirm_reservation_msg))
         }
     }
 
     fun initializeViews() {
-//        val params = UpdateDataDetailsFragmentArgs.fromBundle(arguments!!)
-//        userDataInquire = params.userDataInquire
-//
 //        userDataInquire?.let {
 ////            var tempMember = it.copy()
 ////            tempMember.engineerName = getString(R.string.name_title) + " " + it.engineerName
@@ -126,8 +114,6 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 ////            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
 //            binding.userData = it
 //        }
-
-
         photosList.add(0, PhotoUI(null, null))
         photosList.add(1, PhotoUI(null, null))
         photosList.add(2, PhotoUI(null, null))
@@ -169,30 +155,21 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 //
         bUpdate.setOnClickListener {
             if (photosList[0].name != null && photosList[1].name != null && photosList[2].name != null) {
-            updateDataDetailsViewModel.verifyUser(userDataInquire.oldRefID,binding.edMobileNumber.text.toString())
+                userDataInquire.nationalID = edNationalID.text.toString()
+                userDataInquire.phone = edMobileNumber.text.toString()
+                updateDataDetailsViewModel.updateUserData(userDataInquire.oldRefID, userDataInquire.fullName!!, userDataInquire.nationalID!!, "male", userDataInquire.oldRefID)
             } else
                 showPickPhotoAlert()
         }
-//        bUpdate.setOnClickListener {
-//            updateDataDetailsViewModel.verifyUser(userDataInquire.oldRefID,binding.edMobileNumber.text.toString())
-//        }
-//
-//
-//        val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
-//            photosList.remove(photo)
-//            adapter.notifyDataSetChanged()
-//        }
-//        this.adapter = adapter
-//        binding.rvPhotos.adapter = adapter
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data!!)
-            else if (requestCode == REQUEST_CAMERA)
+//            if (requestCode == SELECT_FILE)
+//                onSelectFromGalleryResult(data!!)
+//            else
+            if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data!!)
         }
     }
@@ -240,18 +217,18 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
         }
     }
 
-    private fun onSelectFromGalleryResult(data: Intent) {
-        if (data != null) {
-            try {
-                val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data.data)
-                val photoUI = saveImage(bitmap)
-                addToPhotos(photoUI)
-                updateIcons()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-    }
+//    private fun onSelectFromGalleryResult(data: Intent) {
+//        if (data != null) {
+//            try {
+//                val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data.data)
+//                val photoUI = saveImage(bitmap)
+//                addToPhotos(photoUI)
+//                updateIcons()
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//            }
+//        }
+//    }
 
     private fun onCaptureImageResult(data: Intent) {
         var thumbnail: Bitmap = data.getExtras().get("data") as Bitmap
@@ -333,6 +310,21 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
     private fun addToPhotos(photoUI: PhotoUI) {
         photosList[selectedIndex] = photoUI
     }
+
+    fun showSuccessAlert(message: String) {
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.thanks))
+        builder?.setMessage(message)
+        builder?.setCancelable(false)
+        builder?.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
+        var dialog = builder?.create()
+        dialog?.show()
+    }
+
+
 // endregion
 
     fun navController() = findNavController()

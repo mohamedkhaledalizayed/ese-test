@@ -27,6 +27,8 @@ import com.neqabty.presentation.util.HasHomeOptionsMenu
 import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.android.synthetic.main.home_horizontal_cards.*
 
 import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
@@ -115,6 +117,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.news?.let {
             binding.tvNews.visibility = View.VISIBLE
+            llCorona.visibility = View.VISIBLE
             newsAdapter.submitList(it)
         }
         state.trips?.let {
@@ -135,7 +138,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
 
     fun initializeViews() {
         (activity as AppCompatActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-        binding.llClaiming.setOnClickListener {
+        llClaiming.setOnClickListener {
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(R.id.claimingFragment)
             else {
@@ -144,17 +147,20 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
                 navController().navigate(R.id.mobileFragment, bundle)
             }
         }
-        binding.llNews.setOnClickListener {
+        llNews.setOnClickListener {
             navController().navigate(R.id.newsFragment)
         }
-        binding.llTrips.setOnClickListener {
+        llTrips.setOnClickListener {
             navController().navigate(R.id.tripsFragment)
         }
-        binding.llMedical.setOnClickListener {
+        llMedical.setOnClickListener {
             navController().navigate(R.id.chooseAreaFragment)
         }
-        binding.llInquiry.setOnClickListener {
+        llInquiry.setOnClickListener {
             navController().navigate(R.id.inquiryFragment)
+        }
+        llCorona.setOnClickListener{
+            navController().navigate(R.id.coronaFragment)
         }
     }
 

@@ -11,6 +11,8 @@ data class ClaimingValidationData(
     @field:SerializedName("FullName")
     var engineerName: String = "",
     @field:SerializedName("message")
-    var message: String?
+    var message: String?,
+    @field:SerializedName("oldbenid")
+    var oldbenid: String?
 ) : Response()
 

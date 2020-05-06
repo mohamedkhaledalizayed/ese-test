@@ -48,7 +48,7 @@ class ComplaintViewModel @Inject constructor(val getComplaintTypes: GetComplaint
         viewState.value = viewState.value?.copy(isLoading = true)
         addDisposable(createComplaint.createComplaint(name, phone, type, body, token, memberNumber)
                 .subscribe(
-                        { viewState.value = viewState.value?.copy(isLoading = false) },
+                        { viewState.value = viewState.value?.copy(isLoading = false, message = "success") },
                         { errorState.value = it }
                 )
         )

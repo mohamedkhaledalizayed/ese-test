@@ -6,26 +6,24 @@ import com.neqabty.data.api.Response
 
 @Entity(primaryKeys = ["id"])
 data class InquireUpdateUserData(
-        @field:SerializedName("id")
-        var id: Int = 0,
         @field:SerializedName("OldRefID")
         var oldRefID: String = "",
-        @field:SerializedName("full_name")
+        @field:SerializedName("name")
         var fullName: String?,
-        @field:SerializedName("national_id")
-        var nationalID: String?,
-        @field:SerializedName("national_verified")
-        var nationalVerified: String?,
-        @field:SerializedName("phone_number")
-        var phoneNumber: String?,
-        @field:SerializedName("phone_code")
-        var phoneCode: String?,
-        @field:SerializedName("phone_verified")
-        var phoneVerified: String?,
+        @field:SerializedName("address")
+        var address: String?,
+        @field:SerializedName("phone")
+        var phone: String?,
+        @field:SerializedName("mobile")
+        var mobile: String?,
+        @field:SerializedName("email")
+        var email: String?,
         @field:SerializedName("birthdate")
         var birthdate: String?,
-        @field:SerializedName("created_at")
-        var createdAt: String?,
-        @field:SerializedName("updated_at")
-        var updatedAt: String?
+        @field:SerializedName("graduationyear")
+        var graduationyear: String?,
+        @field:SerializedName("PassportNumber")
+        var passportNumber: String?,
+        @field:SerializedName("NationalNumber")
+        var nationalID: String?
 ) : Response()

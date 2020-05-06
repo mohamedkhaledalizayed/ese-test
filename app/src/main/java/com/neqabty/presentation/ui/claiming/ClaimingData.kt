@@ -8,5 +8,6 @@ class ClaimingData {
         var areaId: Int = 0
         var governId: Int = 0
         var cardId: Int = 0
+        var oldbenid: String = ""
     }
 }

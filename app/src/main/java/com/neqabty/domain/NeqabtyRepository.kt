@@ -48,6 +48,7 @@ interface NeqabtyRepository {
             providerType: Int,
             provider: Int,
             name: String,
+            oldbenid: String,
             docsNumber: Int,
             doc1: File?,
             doc2: File?,
@@ -83,7 +84,7 @@ interface NeqabtyRepository {
     fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>
     fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity>
-    fun updateUserData(userNumber: String,fullName: String,nationalID: String,gender: String,userID: String): Observable<UpdateUserDataEntity>
+    fun updateUserData(userNumber: String, fullName: String, nationalID: String, gender: String, userID: String): Observable<UpdateUserDataEntity>
     fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity>
     fun requestEngineeringRecords(
             name: String,
@@ -100,7 +101,7 @@ interface NeqabtyRepository {
             doc3: File?): Observable<Unit>
 
     fun loginVisitor(mobile: String, token: String): Observable<UserEntity>
-    fun loginUser(mobile: String , userNumber: String , token: String): Observable<UserEntity>
+    fun loginUser(mobile: String, userNumber: String, token: String): Observable<UserEntity>
     fun signup(
             email: String,
             fName: String,
@@ -111,6 +112,23 @@ interface NeqabtyRepository {
             subSyndicateId: String,
             password: String
     ): Observable<UserEntity>
+
     fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>>
     fun createComplaint(name: String, phone: String, type: String, body: String, token: String, memberNumber: String): Observable<Unit>
+    fun createCoronaRequest(
+            userNumber: String,
+            phone: String,
+            type: String,
+            job: String,
+            work: String,
+            treatmentDestination: String,
+            treatmentDestinationAddress: String,
+            family: Int,
+            injury: String,
+            docsNumber: Int,
+            doc1: File?,
+            doc2: File?,
+            doc3: File?,
+            doc4: File?,
+            doc5: File?): Observable<Unit>
 }
