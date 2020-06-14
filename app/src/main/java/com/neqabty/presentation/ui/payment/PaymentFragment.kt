@@ -1,8 +1,10 @@
 package com.neqabty.presentation.ui.payment
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -207,6 +209,14 @@ class PaymentFragment : BaseFragment(), Injectable {
         override fun onError(paymentException: PaymentException) {
             Log.e("NEQABTY", paymentException.details.message)
             failureCallback.invoke()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == 10000)
+                paymentGateway.handle3DSecureAuthenticationResult(requestCode, resultCode, data)
         }
     }
 

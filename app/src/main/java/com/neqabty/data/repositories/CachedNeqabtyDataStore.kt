@@ -44,7 +44,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun updateUserData(userNumber: String, fullName: String, nationalID: String, gender: String, userID: String): Observable<UpdateUserDataEntity> {
+    override fun updateUserData(userNumber: String, name: String, nationalID: String, mobile: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?): Observable<UpdateUserDataEntity> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

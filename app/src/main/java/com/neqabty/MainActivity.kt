@@ -1,5 +1,6 @@
 package com.neqabty
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
@@ -154,15 +155,15 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.inquiry_fragment -> {
                     navController.navigate(R.id.inquiryFragment)
                 }
-                R.id.engineering_records_fragment -> {
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
-                    else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", 3)
-                        navController.navigate(R.id.mobileFragment, bundle)
-                    }
-                }
+//                R.id.engineering_records_fragment -> {
+//                    if (PreferencesHelper(this).isRegistered)
+//                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
+//                    else {
+//                        val bundle: Bundle = Bundle()
+//                        bundle.putInt("type", 3)
+//                        navController.navigate(R.id.mobileFragment, bundle)
+//                    }
+//                }
                 R.id.update_data_fragment -> {
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.updateDataVerificationFragment)
@@ -404,6 +405,18 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             finish()
         }
         alertDialog.show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == 10000) {
+                var currentFragment =
+                        (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
+                currentFragment.onActivityResult(requestCode,resultCode,data)
+//                paymentGateway.handle3DSecureAuthenticationResult(requestCode, resultCode, data)
+            }
+        }
     }
 //endregion//
 }

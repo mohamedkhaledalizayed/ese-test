@@ -32,7 +32,7 @@
                 android:id="@+id/svContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/margin_horizontal_large"
+                android:padding="@dimen/margin_horizontal_normal"
                 android:scrollbars="none"
                 android:visibility="gone">
 
@@ -78,6 +78,7 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:maxLength="14"
+                        android:enabled="false"
                         android:text="@{userData.nationalID}"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/text_size_large"

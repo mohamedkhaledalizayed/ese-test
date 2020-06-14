@@ -38,8 +38,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.verifyUser(userNumber, mobileNumber)
     }
 
-    override fun updateUserData(userNumber: String, fullName: String, nationalID: String, gender: String, userID: String): Observable<UpdateUserDataEntity> {
-        return remoteDataStore.updateUserData(userNumber, fullName, nationalID, gender, userID)
+    override fun updateUserData(userNumber: String, name: String, nationalID: String, mobile: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?): Observable<UpdateUserDataEntity> {
+        return remoteDataStore.updateUserData(userNumber, name, nationalID, mobile, docsNumber, doc1, doc2, doc3)
     }
 
     override fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity> {

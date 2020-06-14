@@ -17,6 +17,7 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import com.santalu.autoviewpager.AutoViewPager
 import kotlinx.android.synthetic.main.intro_fragment.*
 import javax.inject.Inject
 
@@ -61,29 +62,28 @@ class IntroFragment : BaseFragment(), Injectable {
         adapter.addFragment(IntroPagerFragment.newInstance(R.drawable.intro_five, R.string.intro_five))
 
         binding.vpIntro.adapter = adapter
-        binding.vpIntro.setSwipePagingEnabled(false)
-        binding.vpIntro.offscreenPageLimit = 4
-        binding.dotsIndicator.setViewPager(binding.vpIntro)
+        binding.vpIntro.setDuration(10000)
+//        binding.dotsIndicator.setViewPager(binding.vpIntro)
 
-        binding.vpIntro.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-            override fun onPageSelected(position: Int) {
-//                binding.tvTitle.setText(PagerModel.values()[position].titleResId)
-            }
-        })
+//        binding.vpIntro.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+//            override fun onPageScrollStateChanged(state: Int) {}
+//            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+//            override fun onPageSelected(position: Int) {
+////                binding.tvTitle.setText(PagerModel.values()[position].titleResId)
+//            }
+//        })
 
         binding.bSkip.setOnClickListener {
             PreferencesHelper(requireContext()).isIntroSkipped = true
             navigateToNext()
         }
 
-        binding.bNext.setOnClickListener {
-            if (vpIntro.currentItem == vpIntro.childCount - 1)
-                navigateToNext()
-            else
-                vpIntro.setCurrentItem(vpIntro.currentItem + 1, true)
-        }
+//        binding.bNext.setOnClickListener {
+//            if (vpIntro.currentItem == vpIntro.childCount - 1)
+//                navigateToNext()
+//            else
+//                vpIntro.setCurrentItem(vpIntro.currentItem + 1, true)
+//        }
 
     }
 

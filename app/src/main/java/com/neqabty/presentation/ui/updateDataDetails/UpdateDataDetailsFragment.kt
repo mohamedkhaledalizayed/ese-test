@@ -157,7 +157,7 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
             if (photosList[0].name != null && photosList[1].name != null && photosList[2].name != null) {
                 userDataInquire.nationalID = edNationalID.text.toString()
                 userDataInquire.phone = edMobileNumber.text.toString()
-                updateDataDetailsViewModel.updateUserData(userDataInquire.oldRefID, userDataInquire.fullName!!, userDataInquire.nationalID!!, "male", userDataInquire.oldRefID)
+                updateDataDetailsViewModel.updateUserData(userDataInquire.oldRefID, userDataInquire.fullName!!, userDataInquire.nationalID!!, userDataInquire.phone!!, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2))
             } else
                 showPickPhotoAlert()
         }

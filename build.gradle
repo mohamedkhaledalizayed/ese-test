@@ -26,6 +26,10 @@ allprojects {
         detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.0.0-RC14"
         detektPlugins "io.gitlab.arturbosch.detekt:detekt-cli:1.0.0-RC14"
     }
+
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
 }
 
 task runUnitTests(dependsOn: [':app:testDebugUnitTest']) {

@@ -11,6 +11,7 @@ import com.neqabty.presentation.entities.UpdateUserDataUI
 import com.neqabty.presentation.entities.VerifyUserDataUI
 import com.neqabty.presentation.mappers.InquireUpdateUserDataEntityUIMapper
 import com.neqabty.presentation.mappers.VerifyUserDataEntityUIMapper
+import java.io.File
 
 import javax.inject.Inject
 
@@ -44,9 +45,9 @@ class UpdateDataDetailsViewModel @Inject constructor(private val getUpdateUserDa
     }
 
 
-    fun updateUserData(userNumber: String,fullName: String,nationalID: String,gender: String,userID: String) {
+    fun updateUserData(userNumber: String, fullName: String, nationalID: String, mobile: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(updateUserData.updateUserData(userNumber,fullName, nationalID, gender, userID)
+        addDisposable(updateUserData.updateUserData(userNumber,fullName, nationalID, mobile, docsNumber, doc1, doc2, doc3)
                 .map {
                     it.let {
                         UpdateUserDataEntityUIMapper.mapFrom(it)

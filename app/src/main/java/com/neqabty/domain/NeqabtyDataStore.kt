@@ -80,7 +80,7 @@ interface NeqabtyDataStore {
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>
     fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity>
     fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity>
-    fun updateUserData(userNumber: String, fullName: String, nationalID: String, gender: String, userID: String): Observable<UpdateUserDataEntity>
+    fun updateUserData(userNumber: String, name: String, nationalID: String, mobile: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?): Observable<UpdateUserDataEntity>
     fun requestEngineeringRecords(
             name: String,
             phone: String,

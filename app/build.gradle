@@ -149,6 +149,7 @@ dependencies {
     implementation deps.firebase.messaging
     implementation deps.firebase.jobdispatcher
 
+    implementation deps.viewpager.pager
     implementation deps.viewpager.indicator
 
     kapt deps.dagger.android_support_compiler

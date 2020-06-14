@@ -92,16 +92,16 @@ interface WebService {
     @POST("api/v1/transactions/generate-hash")
     fun getTransactionHash(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
-    @GET("http://3.132.198.61/api/v1/services")
+    @GET("api/v1/services")
     fun getAllServices(): Observable<ResponseWrapper<List<List<ServiceData>>>>
 
-    @GET("http://3.132.198.61/api/v1/service")
+    @GET("api/v1/service")
     fun paymentInquiry(@Query("oldRefID") userNumber: Int, @Query("serviceID") serviceID: Int, @Query("requestID") requestID: String, @Query("amount") amount: String): Observable<ResponseWrapper<MemberData>>
 
-    @POST("http://3.132.198.61/api/v1/encrypt")
+    @POST("api/v1/encrypt")
     fun paymentEncryption(@Body encryptionRequest: EncryptionRequest): Observable<EncryptionData>
 
-    @POST("http://3.132.198.61/api/v1/service/response")
+    @POST("api/v1/service/response")
     fun sendDecryptionKey(@Body decryptionRequest: DecryptionRequest): Observable<ResponseWrapper<DecryptionData>>
 
     @POST("api/v2/medical/Beneficiary")
@@ -113,8 +113,13 @@ interface WebService {
     @POST("api/Engineer/sendsms")
     fun sendVerifySMS(@Body sendSMSRequest: SendSMSRequest): Observable<VerifyUserData>
 
+    @Multipart
     @POST("api/v1/RecieveEngineerRquest")
-    fun updateUserData(@Body updateUserDataRequest: UpdateUserDataRequest): Observable<UpdateUserData>
+    fun updateUserData(
+            @Part("json_request") updateUserDataRequest: UpdateUserDataRequest,
+            @Part doc1: MultipartBody.Part?,
+            @Part doc2: MultipartBody.Part?,
+            @Part doc3: MultipartBody.Part?): Observable<UpdateUserData>
 
     @POST("api/EnginneringRecordsRegistry")
     fun engineeringRecordsInquiry(@Body engineeringRecordsInquiryRequest: EngineeringRecordsInquiryRequest): Observable<ApiResponse<RegisteryData>>

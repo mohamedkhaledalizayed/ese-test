@@ -5,12 +5,12 @@ import com.google.gson.annotations.SerializedName
 data class UpdateUserDataRequest(
         @SerializedName("OldRefID")
         var userNumber: Int = 0,
-        @SerializedName("full_name")
+        @SerializedName("name")
         var fullName: String = "",
-        @SerializedName("national_id")
+        @SerializedName("nationalNumber")
         var nationalID: String = "",
-        @SerializedName("gender")
-        var gender: String = "",
-        @SerializedName("user_id")
-        var userID: String = ""
+        @SerializedName("mobile")
+        var mobile: String = "",
+        @SerializedName("docs_num")
+        var docsNumber: Int = 0
 )

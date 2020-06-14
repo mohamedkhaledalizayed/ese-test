@@ -32,6 +32,7 @@ versions.firebase_core = "16.0.3"
 versions.firebase_messaging = "17.3.0"
 versions.firebase_jobdispatcher = "0.8.5"
 versions.gms = "4.0.1"
+versions.pager = "1.0.1"
 versions.indicator = "0.2.0"
 versions.kotlinx = "0.2.0"
 versions.mastercard = "1.1.1"
@@ -155,6 +156,7 @@ firebase.jobdispatcher = "com.firebase:firebase-jobdispatcher:$versions.firebase
 deps.firebase = firebase
 
 def viewpager = [:]
+viewpager.pager = "com.github.santalu:auto-viewpager:$versions.pager"
 viewpager.indicator = "com.romandanylyk:pageindicatorview:$versions.indicator"
 deps.viewpager = viewpager
 

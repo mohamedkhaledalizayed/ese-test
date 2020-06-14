@@ -49,7 +49,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_large" />
+                android:textSize="@dimen/text_size_medium" />
 
 
             <ImageView
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_horizontal_normal"
                 android:text="@{Html.fromHtml(@string/address_content(providerItem.address))}"
-                android:textSize="@dimen/text_size_large"
+                android:textSize="@dimen/text_size_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivAddress"
                 app:layout_constraintTop_toTopOf="@id/ivAddress" />
@@ -91,7 +91,7 @@
                 android:text="@{providerItem.phones}"
                 android:textDirection="anyRtl"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_large"
+                android:textSize="@dimen/text_size_medium"
                 app:layout_constraintStart_toEndOf="@id/ivPhone"
                 app:layout_constraintTop_toTopOf="@id/ivPhone" />
 

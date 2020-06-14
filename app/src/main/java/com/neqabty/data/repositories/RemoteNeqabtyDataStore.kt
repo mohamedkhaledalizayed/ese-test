@@ -45,7 +45,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
         }
 
-        return api.createCoronaRequest(CoronaRequest(userNumber, phone, type, job, work, treatmentDestination, treatmentDestinationAddress,family,injury, docsNumber), file1, file2, file3, file4, file5).map { result ->
+        return api.createCoronaRequest(CoronaRequest(userNumber, phone, type, job, work, treatmentDestination, treatmentDestinationAddress, family, injury, docsNumber), file1, file2, file3, file4, file5).map { result ->
             result.data ?: Unit
         }
     }
@@ -78,8 +78,26 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     }
 
     private val updateUserDataEntityMapper = UpdateUserDataEntityMapper()
-    override fun updateUserData(userNumber: String, fullName: String, nationalID: String, gender: String, userID: String): Observable<UpdateUserDataEntity> {
-        return api.updateUserData(UpdateUserDataRequest(userNumber.toInt(), fullName, nationalID, gender, userID)).map { userData ->
+    override fun updateUserData(userNumber: String, name: String, nationalID: String, mobile: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?): Observable<UpdateUserDataEntity> {
+
+        var file1: MultipartBody.Part? = null
+        var file2: MultipartBody.Part? = null
+        var file3: MultipartBody.Part? = null
+
+        doc1?.let {
+            val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
+            file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
+        }
+        doc2?.let {
+            val doc2RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc2)
+            file2 = MultipartBody.Part.createFormData("doc2", doc2?.name, doc2RequestFile)
+        }
+        doc3?.let {
+            val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
+            file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
+        }
+
+        return api.updateUserData(UpdateUserDataRequest(userNumber.toInt(), name, nationalID, mobile, docsNumber), file1, file2, file3).map { userData ->
             updateUserDataEntityMapper.mapFrom(userData)
         }
     }

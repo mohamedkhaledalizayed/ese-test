@@ -21,9 +21,9 @@
     <item
         android:id="@+id/inquiry_fragment"
         android:title="@string/inquiry_title" />
-    <item
-        android:id="@+id/engineering_records_fragment"
-        android:title="@string/engineering_records_title" />
+<!--    <item-->
+<!--        android:id="@+id/engineering_records_fragment"-->
+<!--        android:title="@string/engineering_records_title" />-->
     <item
         android:id="@+id/update_data_fragment"
         android:title="@string/update_data_title" />
