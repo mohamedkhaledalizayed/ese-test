@@ -156,9 +156,9 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         llMedical.setOnClickListener {
             navController().navigate(R.id.chooseAreaFragment)
         }
-//        llInquiry.setOnClickListener {
-//            navController().navigate(R.id.inquiryFragment)
-//        }
+        llInquiry.setOnClickListener {
+            navController().navigate(R.id.inquiryFragment)
+        }
         llCorona.setOnClickListener{
             navController().navigate(R.id.coronaFragment)
         }

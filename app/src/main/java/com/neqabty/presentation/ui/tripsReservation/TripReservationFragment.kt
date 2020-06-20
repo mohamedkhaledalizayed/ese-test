@@ -397,7 +397,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
     private fun onCaptureImageResult(data: Intent) {
         var thumbnail: Bitmap = data.getExtras().get("data") as Bitmap
         var bytes: ByteArrayOutputStream = ByteArrayOutputStream()
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
 
         var name = System.currentTimeMillis().toString() + ".jpg"
         var destination: File = File(Environment.getExternalStorageDirectory(), name)
@@ -421,7 +421,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
 
     fun saveImage(myBitmap: Bitmap): PhotoUI {
         val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
         val path: String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
         val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
         val directory = File(path)

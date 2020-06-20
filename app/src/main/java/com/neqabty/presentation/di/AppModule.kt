@@ -75,7 +75,7 @@ class AppModule {
                 .build()
 
         return Retrofit.Builder()
-//                .baseUrl("http://3.20.85.44:36987/")
+//                .baseUrl("http://3.19.120.246/")
                 .baseUrl("http://front.neqabty.com/")
 //                .baseUrl("http://192.168.178.38/")
 //            .baseUrl("http://webapp.neqabty.com/")

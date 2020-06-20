@@ -214,7 +214,7 @@ class CoronaFragment : BaseFragment(), Injectable {
     private fun onCaptureImageResult(data: Intent) {
         var thumbnail: Bitmap = data.getExtras().get("data") as Bitmap
         var bytes: ByteArrayOutputStream = ByteArrayOutputStream()
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
 
         var name = System.currentTimeMillis().toString() + ".jpg"
         var destination: File = File(Environment.getExternalStorageDirectory(), name)

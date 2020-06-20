@@ -100,7 +100,6 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                     val prefs = PreferencesHelper(requireContext())
                     llSuperProgressbar.visibility = View.VISIBLE
                     memberName = state.member!!.engineerName
-                    ClaimingData.oldbenid = state.member!!.oldbenid!!
                     isValid = true
                     claimingViewModel.getAllContent1()
                     state.member = null
@@ -137,6 +136,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                 ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
                 ClaimingData.governId = (spGovern.selectedItem as GovernUI).id
                 ClaimingData.cardId = edCardNumber.text.toString().toInt()
+                ClaimingData.oldbenid = edCardNumber.text.toString()
                 pager.setCurrentItem(1, true)
             }
         }
