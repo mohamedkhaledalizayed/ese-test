@@ -14,8 +14,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
         private val cachedDataStore: CachedNeqabtyDataStore,
         private val remoteDataStore: RemoteNeqabtyDataStore
 ) : NeqabtyRepository {
-    override fun createCoronaRequest(userNumber: String, phone: String, type: String, job: String, work: String, treatmentDestination: String, treatmentDestinationAddress: String, family: Int, injury: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
-        return remoteDataStore.createCoronaRequest(userNumber, phone, type, job, work, treatmentDestination, treatmentDestinationAddress, family, injury, docsNumber, doc1, doc2, doc3, doc4, doc5)
+    override fun createCoronaRequest(userNumber: String, phone: String, syndicateID: Int, name: String, type: String, job: String, work: String, treatmentDestination: String, treatmentDestinationAddress: String, family: Int, injury: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
+        return remoteDataStore.createCoronaRequest(userNumber, phone, syndicateID, name, type, job, work, treatmentDestination, treatmentDestinationAddress, family, injury, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 
     override fun createComplaint(name: String, phone: String, type: String, body: String, token: String, memberNumber: String): Observable<Unit> {
@@ -111,7 +111,7 @@ class NeqabtyRepositoryImpl @Inject constructor(
             doc4: File?,
             doc5: File?
     ): Observable<Unit> {
-        return remoteDataStore.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, oldbenid,docsNumber, doc1, doc2, doc3, doc4, doc5)
+        return remoteDataStore.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 
     override fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>> {

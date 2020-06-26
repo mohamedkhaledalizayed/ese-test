@@ -294,7 +294,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         var currentFragment =
                 (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
         notificationsItem?.isVisible = currentFragment is HasHomeOptionsMenu &&
-                PreferencesHelper(this).isRegistered
+                PreferencesHelper(this).isRegistered // && PreferencesHelper(this).notificationsCount != 0
 //        logoutItem?.isVisible = currentFragment is HasHomeOptionsMenu &&
 //                PreferencesHelper(this).isRegistered
         favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu //|| currentFragment is HasFavoriteOptionsMenu

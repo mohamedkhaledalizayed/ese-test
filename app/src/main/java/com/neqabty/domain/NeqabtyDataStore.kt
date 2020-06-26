@@ -114,6 +114,8 @@ interface NeqabtyDataStore {
     fun createCoronaRequest(
             userNumber: String,
             phone: String,
+            syndicateID: Int,
+            name: String,
             type: String,
             job: String,
             work: String,

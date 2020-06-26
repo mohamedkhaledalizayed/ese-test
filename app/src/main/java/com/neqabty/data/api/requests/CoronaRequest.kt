@@ -6,8 +6,12 @@ import com.neqabty.data.api.Request
 data class CoronaRequest(
         @SerializedName("syndicate_user_number")
         var userNumber: String = "",
-        @SerializedName("phone")
+        @SerializedName("mobile")
         var phone: String = "",
+        @SerializedName("sub_syndicate_id")
+        var syndicateID: Int = 0,
+        @SerializedName("name")
+        var name: String = "",
         @SerializedName("type_of_injury")
         var type: String = "",
         @SerializedName("job")

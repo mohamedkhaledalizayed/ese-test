@@ -28,6 +28,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
+import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.ui.common.PhotosAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -52,8 +53,10 @@ class CoronaFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
+    var isSubmitted: Boolean = false
     lateinit var coronasTypesList: List<String>
     var selectedType: String = ""
+    var selectedSyndicate: Int = 0
     //    var isSubmitted: Boolean = false
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -83,26 +86,20 @@ class CoronaFragment : BaseFragment(), Injectable {
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
 
-                coronaViewModel.createRequest(edMemberNumber.text.toString(),
-                        PreferencesHelper(requireContext()).mobile,
-                        spTypes.selectedItem as String,
-                        edJob.text.toString(),
-                        edWork.text.toString(),
-                        edMedication.text.toString(),
-                        edQuarantine.text.toString(),
-                        edFamily.text.toString().toInt(),
-                        edDamageType.text.toString(),
-                        photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                coronaViewModel.getSyndicates()
 
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
             })
         })
-        initializeViews()
     }
 
     private fun initializeViews() {
+        edName.setText(PreferencesHelper(requireContext()).name)
+        edMemberNumber.setText(PreferencesHelper(requireContext()).user)
+        edMobileNumber.setText(PreferencesHelper(requireContext()).mobile)
+        renderSyndicates()
         renderTypes()
 
         binding.bAddPhotos1.setOnClickListener {
@@ -120,17 +117,20 @@ class CoronaFragment : BaseFragment(), Injectable {
                     edMedication.text.isNullOrBlank() && edMedication.visibility == View.VISIBLE ||
                     edQuarantine.text.isNullOrBlank() && edQuarantine.visibility == View.VISIBLE ||
                     edFamily.text.isNullOrBlank() && edFamily.visibility == View.VISIBLE ||
-                    edDamageType.text.isNullOrBlank() && edDamageType.visibility == View.VISIBLE ) {
+                    edDamageType.text.isNullOrBlank() && edDamageType.visibility == View.VISIBLE) {
                 showInvalidDataAlert()
             } else if (photosList.size > 0) {
+                isSubmitted = true
                 coronaViewModel.createRequest(edMemberNumber.text.toString(),
                         PreferencesHelper(requireContext()).mobile,
+                        selectedSyndicate,
+                        PreferencesHelper(requireContext()).name,
                         spTypes.selectedItem as String,
                         edJob.text.toString(),
                         edWork.text.toString(),
                         edMedication.text.toString(),
                         edQuarantine.text.toString(),
-                        if(edFamily.text.toString().isNotBlank()) edFamily.text.toString().toInt() else 0,
+                        if (edFamily.text.toString().isNotBlank()) edFamily.text.toString().toInt() else 0,
                         edDamageType.text.toString(),
                         photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
 
@@ -149,8 +149,12 @@ class CoronaFragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: CoronaViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        if (!state.isLoading && state.message.isNotEmpty()) {
+        if (!state.isLoading && state.message.isNotBlank() && isSubmitted) {
+            isSubmitted = false
             showSuccessAlert()
+        } else if (!state.isLoading && state.syndicates != null) {
+            binding.llHolder.visibility = if (state.isLoading) View.GONE else View.VISIBLE
+            initializeViews()
         }
     }
 
@@ -167,6 +171,17 @@ class CoronaFragment : BaseFragment(), Injectable {
         if (requestCode == REQUEST_CAMERA) {
             grantCameraPermission()
         }
+    }
+
+    fun renderSyndicates() {
+        binding.spSyndicates.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, coronaViewModel.viewState.value!!.syndicates)
+        binding.spSyndicates.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                selectedSyndicate = (parent.getItemAtPosition(position) as SyndicateUI).id
+            }
+        }
+        binding.spSyndicates.setSelection(0)
     }
 
     fun renderTypes() {

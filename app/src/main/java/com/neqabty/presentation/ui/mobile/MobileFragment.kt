@@ -131,6 +131,10 @@ class MobileFragment : BaseFragment(), Injectable {
                 5 -> navController().navigate(
                         MobileFragmentDirections.openComplaints()
                 )
+
+                6 -> navController().navigate(
+                        MobileFragmentDirections.openCorona()
+                )
             }
         }
     }

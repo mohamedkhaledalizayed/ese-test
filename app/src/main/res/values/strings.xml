@@ -83,7 +83,7 @@
     <string name="mandatoryField">هذا الحقل مطلوب</string>
     <string name="loginError">خطأ في اسم المستخدم أو كلمة المرور</string>
     <string name="passwordMatchError">يجب أن تتطابق كلمة المرور و تأكيد كلمة المرور</string>
-    <string name="selectSubSyndicate">اختر النقابة الفرعية</string>
+    <string name="selectSubSyndicate">اختر النقابة</string>
     <string name="confirmation_sent">تم ارسال الرقم التأكيدي لرقم الجوال الخاص بك</string>
     <string name="enter_confirmation_code">من فضلك ادخل الرمز التأكيدي</string>
     <string name="resend_code">لم يصلني الرمز التأكيدي ....

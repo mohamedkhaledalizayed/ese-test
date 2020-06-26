@@ -159,8 +159,14 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         llInquiry.setOnClickListener {
             navController().navigate(R.id.inquiryFragment)
         }
-        llCorona.setOnClickListener{
-            navController().navigate(R.id.coronaFragment)
+        llCorona.setOnClickListener {
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(R.id.coronaFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", 6)
+                navController().navigate(R.id.mobileFragment, bundle)
+            }
         }
     }
 

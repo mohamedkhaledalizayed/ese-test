@@ -14,8 +14,8 @@ interface WebService {
     @GET("api/min-version")
     fun getAppVersion(): Observable<AppVersionData>
 
-    @GET("api/v2/syndicates/All")
-    fun getAllSyndicates(): Observable<ApiResponse<List<SyndicateData>>>
+    @GET("api/v1/SubSyndicate")
+    fun getAllSyndicates(): Observable<List<SyndicateData>>
 
     @POST("api/v2/Syndicates/Main/By_Id")
     fun getSyndicateById(@Body syndicateRequest: SyndicateRequest): Observable<ApiResponse<SyndicateData>>

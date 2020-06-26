@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -31,10 +32,10 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivHeader"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivHeader">
 
             <LinearLayout
                 android:id="@+id/llHolder"
@@ -43,16 +44,53 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="@dimen/margin_horizontal_normal"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivHeader">
-                
+
                 <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/corona_desc"
                     android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <EditText
+                    android:id="@+id/edName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:enabled="false"
+                    android:hint="@string/member_name"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <EditText
+                    android:id="@+id/edMemberNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:enabled="false"
+                    android:hint="@string/enter_member_number"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <EditText
+                    android:id="@+id/edMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:enabled="false"
+                    android:hint="@string/enter_mobile"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Spinner
+                    android:id="@+id/spSyndicates"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:hint="@string/selectSubSyndicate"
+                    android:textDirection="rtl"
                     android:textSize="@dimen/text_size_medium" />
 
                 <Spinner
@@ -66,23 +104,13 @@
                     android:textSize="@dimen/text_size_medium" />
 
                 <EditText
-                    android:id="@+id/edMemberNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_horizontal_small"
-                    android:inputType="number"
-                    android:hint="@string/syndicateNumber"
-                    android:maxLength="7"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <EditText
                     android:id="@+id/edJob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_horizontal_small"
+                    android:hint="@string/corona_job"
                     android:inputType="text"
                     android:maxLength="140"
-                    android:hint="@string/corona_job"
                     android:textSize="@dimen/text_size_medium" />
 
                 <EditText
@@ -90,8 +118,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_horizontal_small"
-                    android:inputType="text"
                     android:hint="@string/corona_work"
+                    android:inputType="text"
                     android:maxLines="4"
                     android:textSize="@dimen/text_size_medium" />
 
@@ -100,19 +128,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_horizontal_small"
-                    android:inputType="text"
                     android:hint="@string/corona_medication"
+                    android:inputType="text"
                     android:maxLines="4"
                     android:textSize="@dimen/text_size_medium"
-                    android:visibility='@{(type == 1) ? View.VISIBLE : View.GONE}'/>
+                    android:visibility='@{(type == 1) ? View.VISIBLE : View.GONE}' />
 
                 <EditText
                     android:id="@+id/edQuarantine"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_horizontal_small"
-                    android:inputType="text"
                     android:hint="@string/corona_quarantine"
+                    android:inputType="text"
                     android:maxLines="4"
                     android:textSize="@dimen/text_size_medium"
                     android:visibility='@{(type == 1) ? View.VISIBLE : View.GONE}' />
@@ -122,8 +150,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_horizontal_small"
-                    android:inputType="number"
                     android:hint="@string/corona_family"
+                    android:inputType="number"
                     android:maxLength="2"
                     android:textSize="@dimen/text_size_medium"
                     android:visibility='@{(type == 2) ? View.VISIBLE : View.GONE}' />
@@ -133,8 +161,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_horizontal_small"
-                    android:inputType="text"
                     android:hint="@string/corona_damage_type"
+                    android:inputType="text"
                     android:maxLines="4"
                     android:textSize="@dimen/text_size_medium"
                     android:visibility='@{(type == 2) ? View.VISIBLE : View.GONE}' />

@@ -6,9 +6,9 @@ import com.neqabty.data.api.Response
 
 @Entity(primaryKeys = ["id"])
 data class SyndicateData(
-    @field:SerializedName("syndicate_id")
+    @field:SerializedName("subsyndicate_id")
     var id: Int = 0,
-    @field:SerializedName("syndicate_desc_ar")
+    @field:SerializedName("sub_syndicate_name")
     var descAr: String?,
     @field:SerializedName("syndicate_desc_en")
     var descEn: String?,

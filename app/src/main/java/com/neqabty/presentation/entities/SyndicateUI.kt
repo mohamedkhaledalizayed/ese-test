@@ -75,4 +75,8 @@ data class SyndicateUI(
             return arrayOfNulls(size)
         }
     }
+
+    override fun toString(): String {
+        return descAr ?: ""
+    }
 }

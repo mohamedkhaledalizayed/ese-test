@@ -17,7 +17,7 @@ import javax.inject.Singleton
 
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
 
-    override fun createCoronaRequest(userNumber: String, phone: String, type: String, job: String, work: String, treatmentDestination: String, treatmentDestinationAddress: String, family: Int, injury: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
+    override fun createCoronaRequest(userNumber: String, phone: String, syndicateID: Int, name: String, type: String, job: String, work: String, treatmentDestination: String, treatmentDestinationAddress: String, family: Int, injury: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
         var file1: MultipartBody.Part? = null
         var file2: MultipartBody.Part? = null
         var file3: MultipartBody.Part? = null
@@ -45,7 +45,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
         }
 
-        return api.createCoronaRequest(CoronaRequest(userNumber, phone, type, job, work, treatmentDestination, treatmentDestinationAddress, family, injury, docsNumber), file1, file2, file3, file4, file5).map { result ->
+        return api.createCoronaRequest(CoronaRequest(userNumber, phone, syndicateID, name, type, job, work, treatmentDestination, treatmentDestinationAddress, family, injury, docsNumber), file1, file2, file3, file4, file5).map { result ->
             result.data ?: Unit
         }
     }
@@ -397,7 +397,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     override fun getSyndicates(): Observable<List<SyndicateEntity>> {
         return api.getAllSyndicates().map { results ->
-            results.data?.map { syndicateDataEntityMapper.mapFrom(it) }
+            results.map { syndicateDataEntityMapper.mapFrom(it) }
         }
     }
 

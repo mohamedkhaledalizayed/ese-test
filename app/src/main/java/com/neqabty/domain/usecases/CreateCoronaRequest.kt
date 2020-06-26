@@ -14,6 +14,8 @@ class CreateCoronaRequest @Inject constructor(
     companion object {
         private const val PARAM_USER_NUMBER = "param:syndicateUserNumber"
         private const val PARAM_PHONE = "param:phone"
+        private const val PARAM_SYNDICATE_ID = "param:syndicateID"
+        private const val PARAM_NAME = "param:name"
         private const val PARAM_TYPE = "param:type"
         private const val PARAM_JOB = "param:job"
         private const val PARAM_WORK = "param:work"
@@ -31,6 +33,8 @@ class CreateCoronaRequest @Inject constructor(
 
     fun createCoronaRequest(userNumber: String,
                             phone: String,
+                            syndicateID: Int,
+                            name: String,
                             type: String,
                             job: String,
                             work: String,
@@ -47,6 +51,8 @@ class CreateCoronaRequest @Inject constructor(
         val data = HashMap<String, Any>()
         data[PARAM_USER_NUMBER] = userNumber
         data[PARAM_PHONE] = phone
+        data[PARAM_SYNDICATE_ID] = syndicateID
+        data[PARAM_NAME] = name
         data[PARAM_TYPE] = type
         data[PARAM_JOB] = job
         data[PARAM_WORK] = work
@@ -66,6 +72,8 @@ class CreateCoronaRequest @Inject constructor(
     override fun createObservable(data: Map<String, Any>?): Observable<Unit> {
         val userNumber = data?.get(PARAM_USER_NUMBER) as String
         val phone = data?.get(PARAM_PHONE) as String
+        val syndicateID = data?.get(PARAM_SYNDICATE_ID) as Int
+        val name = data?.get(PARAM_NAME) as String
         val type = data?.get(PARAM_TYPE) as String
         val job = data?.get(PARAM_JOB) as String
         val work = data?.get(PARAM_WORK) as String
@@ -79,6 +87,6 @@ class CreateCoronaRequest @Inject constructor(
         val doc3 = data?.get(PARAM_DOC3) as File?
         val doc4 = data?.get(PARAM_DOC4) as File?
         val doc5 = data?.get(PARAM_DOC5) as File?
-        return neqabtyRepository.createCoronaRequest(userNumber, phone, type, job, work, treatmentDestination, treatmentDestinationAddress, family, injury, docsNumber, doc1, doc2, doc3, doc4, doc5)
+        return neqabtyRepository.createCoronaRequest(userNumber, phone, syndicateID, name, type, job, work, treatmentDestination, treatmentDestinationAddress, family, injury, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 }
