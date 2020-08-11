@@ -30,7 +30,10 @@ interface WebService {
     fun getNotifications(@Body notificationRequest: NotificationRequest): Observable<List<NotificationData>>
 
     @GET("api/v1/shownotification/{notificationId}")
-    fun getNotificationDetails(@Path("notificationId") notificationId: Int, @Query("notification_type") notificationType: Int): Observable<NotificationData>
+    fun getNotificationDetails(
+        @Path("notificationId") notificationId: Int,
+        @Query("notification_type") notificationType: Int
+    ): Observable<NotificationData>
 
     @POST("api/v2/news/main_syndicate")
     fun getAllNews(@Body newsRequest: NewsRequest): Observable<ApiResponse<List<NewsData>>>
@@ -71,22 +74,22 @@ interface WebService {
     @Multipart
     @POST("api/v2/medical/request")
     fun sendMedicalRequest(
-            @Part("json_request") medicalRequest: MedicalRequest,
-            @Part doc1: MultipartBody.Part?,
-            @Part doc2: MultipartBody.Part?,
-            @Part doc3: MultipartBody.Part?,
-            @Part doc4: MultipartBody.Part?,
-            @Part doc5: MultipartBody.Part?
+        @Part("json_request") medicalRequest: MedicalRequest,
+        @Part doc1: MultipartBody.Part?,
+        @Part doc2: MultipartBody.Part?,
+        @Part doc3: MultipartBody.Part?,
+        @Part doc4: MultipartBody.Part?,
+        @Part doc5: MultipartBody.Part?
     ): Observable<ApiResponse<Unit>>
 
     @Multipart
     @POST("/api/v2/trips/request")
     fun bookTrip(
-            @Part("json_request") bookTripRequest: BookTripRequest,
-            @Part doc1: MultipartBody.Part?,
-            @Part doc2: MultipartBody.Part?,
-            @Part doc3: MultipartBody.Part?,
-            @Part doc4: MultipartBody.Part?
+        @Part("json_request") bookTripRequest: BookTripRequest,
+        @Part doc1: MultipartBody.Part?,
+        @Part doc2: MultipartBody.Part?,
+        @Part doc3: MultipartBody.Part?,
+        @Part doc4: MultipartBody.Part?
     ): Observable<ApiResponse<Unit>>
 
     @POST("api/v1/transactions/generate-hash")
@@ -96,7 +99,12 @@ interface WebService {
     fun getAllServices(): Observable<ResponseWrapper<List<List<ServiceData>>>>
 
     @GET("api/v1/service")
-    fun paymentInquiry(@Query("oldRefID") userNumber: Int, @Query("serviceID") serviceID: Int, @Query("requestID") requestID: String, @Query("amount") amount: String): Observable<ResponseWrapper<MemberData>>
+    fun paymentInquiry(
+        @Query("oldRefID") userNumber: Int,
+        @Query("serviceID") serviceID: Int,
+        @Query("requestID") requestID: String,
+        @Query("amount") amount: String
+    ): Observable<ResponseWrapper<MemberData>>
 
     @POST("api/v1/encrypt")
     fun paymentEncryption(@Body encryptionRequest: EncryptionRequest): Observable<EncryptionData>
@@ -116,10 +124,11 @@ interface WebService {
     @Multipart
     @POST("api/v1/RecieveEngineerRquest")
     fun updateUserData(
-            @Part("json_request") updateUserDataRequest: UpdateUserDataRequest,
-            @Part doc1: MultipartBody.Part?,
-            @Part doc2: MultipartBody.Part?,
-            @Part doc3: MultipartBody.Part?): Observable<UpdateUserData>
+        @Part("json_request") updateUserDataRequest: UpdateUserDataRequest,
+        @Part doc1: MultipartBody.Part?,
+        @Part doc2: MultipartBody.Part?,
+        @Part doc3: MultipartBody.Part?
+    ): Observable<UpdateUserData>
 
     @POST("api/EnginneringRecordsRegistry")
     fun engineeringRecordsInquiry(@Body engineeringRecordsInquiryRequest: EngineeringRecordsInquiryRequest): Observable<ApiResponse<RegisteryData>>
@@ -127,10 +136,10 @@ interface WebService {
     @Multipart
     @POST("api/EnginneringRecordsRegistry/request")
     fun engineeringRecordsRequest(
-            @Part("json_request") engineeringRecordsRequest: EngineeringRecordsRequest,
-            @Part doc1: MultipartBody.Part?,
-            @Part doc2: MultipartBody.Part?,
-            @Part doc3: MultipartBody.Part?
+        @Part("json_request") engineeringRecordsRequest: EngineeringRecordsRequest,
+        @Part doc1: MultipartBody.Part?,
+        @Part doc2: MultipartBody.Part?,
+        @Part doc3: MultipartBody.Part?
     ): Observable<ApiResponse<Unit>>
 
     @POST("api/v1/login/member/mobile")
@@ -154,10 +163,11 @@ interface WebService {
     @Multipart
     @POST("api/v1/RecieveCovid19Rquest")
     fun createCoronaRequest(
-            @Part("json_request") coronaRequest: CoronaRequest,
-            @Part doc1: MultipartBody.Part?,
-            @Part doc2: MultipartBody.Part?,
-            @Part doc3: MultipartBody.Part?,
-            @Part doc4: MultipartBody.Part?,
-            @Part doc5: MultipartBody.Part?): Observable<ApiResponse<Unit>>
+        @Part("json_request") coronaRequest: CoronaRequest,
+        @Part doc1: MultipartBody.Part?,
+        @Part doc2: MultipartBody.Part?,
+        @Part doc3: MultipartBody.Part?,
+        @Part doc4: MultipartBody.Part?,
+        @Part doc5: MultipartBody.Part?
+    ): Observable<ApiResponse<Unit>>
 }

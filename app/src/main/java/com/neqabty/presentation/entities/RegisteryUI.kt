@@ -4,20 +4,20 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class RegisteryUI(
-        var statusCode: Int = 0,
-        var registryDataID: String? = "",
-        var registryEngineerID: String?,
-        var engID: String?,
-        var contactID: String?,
-        var fullName: String?,
-        var lastRenewYear: String?,
-        var registryTypeID: String?,
-        var regDataStatusID: String?,
-        var isOwner: Boolean = false,
-        var birthDate: String?,
-        var mobile: String?,
-        var registerOffice: String?,
-        var msg: String?
+    var statusCode: Int = 0,
+    var registryDataID: String? = "",
+    var registryEngineerID: String?,
+    var engID: String?,
+    var contactID: String?,
+    var fullName: String?,
+    var lastRenewYear: String?,
+    var registryTypeID: String?,
+    var regDataStatusID: String?,
+    var isOwner: Boolean = false,
+    var birthDate: String?,
+    var mobile: String?,
+    var registerOffice: String?,
+    var msg: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),

@@ -14,7 +14,11 @@ import com.neqabty.presentation.mappers.EncryptionEntityUIMapper
 import com.neqabty.presentation.mappers.MemberEntityUIMapper
 import javax.inject.Inject
 
-class InquiryDetailsViewModel @Inject constructor(private val sendDecryptionKey: SendDecryptionKey,private val encryptData: EncryptData, private val paymentInquiry: PaymentInquiry) : BaseViewModel() {
+class InquiryDetailsViewModel @Inject constructor(
+    private val sendDecryptionKey: SendDecryptionKey,
+    private val encryptData: EncryptData,
+    private val paymentInquiry: PaymentInquiry
+) : BaseViewModel() {
 
     private val memberEntityUIMapper = MemberEntityUIMapper()
     private val encryptionEntityUIMapper = EncryptionEntityUIMapper()
@@ -26,7 +30,6 @@ class InquiryDetailsViewModel @Inject constructor(private val sendDecryptionKey:
     init {
         viewState.value = InquiryDetailsViewState()
     }
-
 
     fun encryptData(username: String, password: String, description: String) {
         viewState.value?.encryptionData?.let {

@@ -12,8 +12,10 @@ import java.io.File
 
 import javax.inject.Inject
 
-class TripReservationViewModel @Inject constructor(private val bookTrip: BookTrip,
-                                                   private val paymentInquiry: PaymentInquiry) : BaseViewModel() {
+class TripReservationViewModel @Inject constructor(
+    private val bookTrip: BookTrip,
+    private val paymentInquiry: PaymentInquiry
+) : BaseViewModel() {
 
     private val memberEntityUIMapper = MemberEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
@@ -48,23 +50,24 @@ class TripReservationViewModel @Inject constructor(private val bookTrip: BookTri
     }
 
     fun bookTrip(
-            mainSyndicateId: Int,
-            userNumber: String,
-            phone: String,
-            tripID: Int,
-            regimentID: Int,
-            regimentDate: String,
-            housingType: String,
-            numChild: Int,
-            ages: String,
-            name: String,
-            personsList: List<PersonEntity>,
-            docsNumber: Int,
-            peoplesNumber: Int,
-            doc1: File?,
-            doc2: File?,
-            doc3: File?,
-            doc4: File?) {
+        mainSyndicateId: Int,
+        userNumber: String,
+        phone: String,
+        tripID: Int,
+        regimentID: Int,
+        regimentDate: String,
+        housingType: String,
+        numChild: Int,
+        ages: String,
+        name: String,
+        personsList: List<PersonEntity>,
+        docsNumber: Int,
+        peoplesNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?,
+        doc4: File?
+    ) {
         viewState.value = viewState.value?.copy(isLoading = true)
         addDisposable(bookTrip.bookTrip(
                 mainSyndicateId,

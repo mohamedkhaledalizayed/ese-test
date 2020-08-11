@@ -26,7 +26,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-
 class AddCompanionFragment : DialogFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -41,12 +40,11 @@ class AddCompanionFragment : DialogFragment(), Injectable {
     var relationsList: MutableList<String>? = mutableListOf("مهندس/عضو", "زوجة", "ابن", "ابنة", "والد", "والدة", "طفل")
     var selectedRelation = ""
 
-
     var companion = PersonEntity()
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -79,9 +77,9 @@ class AddCompanionFragment : DialogFragment(), Injectable {
         val day = myCalendar.get(Calendar.DAY_OF_MONTH)
 
         val datePicker = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, monthOfYear)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             updateLabel()
         }, year, month, day)
 
@@ -106,14 +104,12 @@ class AddCompanionFragment : DialogFragment(), Injectable {
         bCancel.setOnClickListener { dialog.dismiss() }
     }
 
-
     //region
     private fun updateLabel() {
-        val myFormat = "MM/dd/yy"; //In which you need put here
+        val myFormat = "MM/dd/yy"; // In which you need put here
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         edBirthDate.setText(sdf.format(myCalendar.getTime()))
     }
-
 
     fun renderRelations() {
         binding.spRelationDegree.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, relationsList)

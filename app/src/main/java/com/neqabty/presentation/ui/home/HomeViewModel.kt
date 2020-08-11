@@ -4,7 +4,6 @@ import android.arch.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
-import com.neqabty.presentation.entities.NotificationUI
 import com.neqabty.presentation.mappers.NewsEntityUIMapper
 import com.neqabty.presentation.mappers.TripsEntityUIMapper
 
@@ -26,7 +25,7 @@ class HomeViewModel @Inject constructor(
         viewState.value = HomeViewState()
     }
 
-    fun getContent(id: String, userNumber: String){
+    fun getContent(id: String, userNumber: String) {
         getAppVersion()
         getNews(id)
         getTrips(id)
@@ -94,7 +93,6 @@ class HomeViewModel @Inject constructor(
             )
         )
     }
-
 
     fun getNotifications(userNumber: String) {
         addDisposable(getNotificationsCount.getNotificationsCount(userNumber)

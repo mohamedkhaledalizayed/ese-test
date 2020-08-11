@@ -9,17 +9,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
-import com.neqabty.databinding.NotificationsFragmentBinding
 import com.neqabty.databinding.NotificationsListFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.entities.GovernUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 
@@ -42,9 +38,9 @@ class NotificationsListFragment : BaseFragment(), Injectable {
     var typeID = 2
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -67,7 +63,7 @@ class NotificationsListFragment : BaseFragment(), Injectable {
 
         val adapter = NotificationsAdapter(dataBindingComponent, appExecutors) { notificationItem ->
             navController().navigate(
-                    NotificationsFragmentDirections.notificationDetails(notificationItem.id.toString(),typeID.toString())
+                    NotificationsFragmentDirections.notificationDetails(notificationItem.id.toString(), typeID.toString())
             )
         }
         this.adapter = adapter

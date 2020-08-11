@@ -41,9 +41,9 @@ class ComplaintFragment : BaseFragment(), Injectable {
     var complaintsTypeID: Int = 0
     var isSubmitted: Boolean = false
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -111,7 +111,6 @@ class ComplaintFragment : BaseFragment(), Injectable {
         binding.spTypes.setSelection(0)
     }
 
-
     fun showSuccessAlert() {
         builder = AlertDialog.Builder(requireContext())
         builder?.setTitle(getString(R.string.thanks))
@@ -123,7 +122,6 @@ class ComplaintFragment : BaseFragment(), Injectable {
         var dialog = builder?.create()
         dialog?.show()
     }
-
 
 // endregion
 

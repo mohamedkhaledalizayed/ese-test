@@ -9,12 +9,9 @@ import com.neqabty.presentation.util.PreferencesHelper
 import retrofit2.HttpException
 
 import javax.inject.Inject
-import android.widget.Toast
 import retrofit2.adapter.rxjava2.Result.response
 import android.R.string
 import org.json.JSONObject
-
-
 
 class MobileViewModel @Inject constructor(val getUserLoggedIn: GetUserLoggedIn) : BaseViewModel() {
 
@@ -47,7 +44,7 @@ class MobileViewModel @Inject constructor(val getUserLoggedIn: GetUserLoggedIn) 
                             viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = true)
                         },
                         {
-                            viewState.value = viewState.value?.copy(isLoading = false,isSuccessful = false)
+                            viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = false)
                             val exception = it as HttpException
                             val jObjError = JSONObject(exception.response().errorBody()?.string())
                             errorState.value = Throwable(jObjError.getString("error"))

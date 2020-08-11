@@ -23,7 +23,6 @@ import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import javax.inject.Inject
 
-
 class NotificationDetailsFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -37,9 +36,9 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
     lateinit var notificationDetailsViewModel: NotificationDetailsViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -84,7 +83,7 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
         }
         binding.bPay.setOnClickListener {
             navController().navigate(
-                    NotificationDetailsFragmentDirections.openInquiryDetailsFragment(1, notificationItem.notificationType!!, MemberUI(amount = notificationItem.cost!!, requestID = notificationItem.approvalNumber!!, engineerNumber = notificationItem.userNumber.toString(), engineerName = notificationItem.name!!), if (notificationItem.notificationTypeID == 2) "9991" else "9992")//TODO serviceID, 2 trips 3 records
+                    NotificationDetailsFragmentDirections.openInquiryDetailsFragment(1, notificationItem.notificationType!!, MemberUI(amount = notificationItem.cost!!, requestID = notificationItem.approvalNumber!!, engineerNumber = notificationItem.userNumber.toString(), engineerName = notificationItem.name!!), if (notificationItem.notificationTypeID == 2) "9991" else "9992") // TODO serviceID, 2 trips 3 records
             )
         }
     }

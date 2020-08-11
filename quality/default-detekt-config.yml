@@ -25,7 +25,7 @@ test-pattern: # Configure exclusions for test sources
     - 'InstanceOfCheckForException'
 
 build:
-  maxIssues: 10
+  maxIssues: 600
   weights:
     # complexity: 2
     # LongParameterList: 1

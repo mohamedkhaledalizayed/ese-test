@@ -2,11 +2,10 @@ package com.neqabty.presentation.util
 
 import java.io.File
 
-
 class DeviceUtils {
 
     fun isDeviceRooted(): Boolean {
-        return isrooted()  || findBinary("su")
+        return isrooted() || findBinary("su")
     }
 
     private fun isrooted(): Boolean {
@@ -14,13 +13,11 @@ class DeviceUtils {
         return file.exists()
     }
 
-
     private fun isrooted2(): Boolean {
-        return (canExecuteCommand("/system/xbin/which su")
-                || canExecuteCommand("/system/bin/which su")
-                || canExecuteCommand("which su"))
+        return (canExecuteCommand("/system/xbin/which su") ||
+                canExecuteCommand("/system/bin/which su") ||
+                canExecuteCommand("which su"))
     }
-
 
     private fun canExecuteCommand(command: String): Boolean {
         var executedSuccesfully: Boolean

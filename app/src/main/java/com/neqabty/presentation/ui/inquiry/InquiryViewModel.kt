@@ -12,7 +12,10 @@ import com.neqabty.presentation.mappers.ServiceEntityUIMapper
 
 import javax.inject.Inject
 
-class InquiryViewModel @Inject constructor(private val getAllServices: GetAllServices, private val paymentInquiry: PaymentInquiry) : BaseViewModel() {
+class InquiryViewModel @Inject constructor(
+    private val getAllServices: GetAllServices,
+    private val paymentInquiry: PaymentInquiry
+) : BaseViewModel() {
 
     private val memberEntityUIMapper = MemberEntityUIMapper()
     private val serviceEntityUIMapper = ServiceEntityUIMapper()
@@ -23,7 +26,6 @@ class InquiryViewModel @Inject constructor(private val getAllServices: GetAllSer
     init {
         viewState.value = InquiryViewState()
     }
-
 
     fun getAllServices() {
         viewState.value?.services?.let {

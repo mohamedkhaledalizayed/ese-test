@@ -1,13 +1,10 @@
 package com.neqabty.presentation.ui.updateDataVerification
 
 import android.arch.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.UpdateUserData
 import com.neqabty.domain.usecases.VerifyUpdateUserData
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
-import com.neqabty.presentation.entities.UpdateUserDataUI
 import com.neqabty.presentation.entities.VerifyUserDataUI
-import com.neqabty.presentation.mappers.UpdateUserDataEntityUIMapper
 import com.neqabty.presentation.mappers.VerifyUserDataEntityUIMapper
 
 import javax.inject.Inject
@@ -25,7 +22,7 @@ class UpdateDataVerificationViewModel @Inject constructor(private val verifyUpda
 
     fun verifyUser(userNumber: String, mobileNumber: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(verifyUpdateUserData.verifyUser(userNumber,mobileNumber)
+        addDisposable(verifyUpdateUserData.verifyUser(userNumber, mobileNumber)
                 .map {
                     it.let {
                         verifyUserDataEntityUIMapper.mapFrom(it)

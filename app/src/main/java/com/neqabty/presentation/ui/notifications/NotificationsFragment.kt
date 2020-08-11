@@ -6,7 +6,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,9 +35,9 @@ class NotificationsFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -59,7 +58,7 @@ class NotificationsFragment : BaseFragment(), Injectable {
 
         val adapter = NotificationsAdapter(dataBindingComponent, appExecutors) { notificationItem ->
             navController().navigate(
-                    NotificationsFragmentDirections.notificationDetails(notificationItem.id.toString(),notificationItem.notificationTypeID.toString())
+                    NotificationsFragmentDirections.notificationDetails(notificationItem.id.toString(), notificationItem.notificationTypeID.toString())
             )
         }
         this.adapter = adapter
@@ -110,7 +109,6 @@ class NotificationsFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-
     }
 
     private fun handleViewState(state: NotificationsViewState) {
@@ -122,7 +120,6 @@ class NotificationsFragment : BaseFragment(), Injectable {
             (rvNotifications.adapter as NotificationsAdapter).notifyDataSetChanged()
         }
     }
-
 
     fun loadNotifications(typeID: Int) {
         llSuperProgressbar.visibility = View.VISIBLE

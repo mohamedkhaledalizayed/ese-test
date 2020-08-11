@@ -12,68 +12,133 @@ import javax.inject.Singleton
 @Singleton
 
 class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: NeqabtyCache) : NeqabtyDataStore {
-    override fun createCoronaRequest(userNumber: String, phone: String, syndicateID: Int, name: String, type: String, job: String, work: String, treatmentDestination: String, treatmentDestinationAddress: String, family: Int, injury: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun createCoronaRequest(
+        userNumber: String,
+        phone: String,
+        syndicateID: Int,
+        name: String,
+        type: String,
+        job: String,
+        work: String,
+        treatmentDestination: String,
+        treatmentDestinationAddress: String,
+        family: Int,
+        injury: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
+    ): Observable<Unit> {
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getAllServices(): Observable<List<ServiceEntity>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun createComplaint(name: String, phone: String, type: String, body: String, token: String, memberNumber: String): Observable<Unit> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun createComplaint(
+        name: String,
+        phone: String,
+        type: String,
+        body: String,
+        token: String,
+        memberNumber: String
+    ): Observable<Unit> {
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun updateUserData(userNumber: String, name: String, nationalID: String, mobile: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?): Observable<UpdateUserDataEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun updateUserData(
+        userNumber: String,
+        name: String,
+        nationalID: String,
+        mobile: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
+    ): Observable<UpdateUserDataEntity> {
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun requestEngineeringRecords(name: String, phone: String, typeId: String, mainSyndicate: String, userNumber: String, lastRenewYear: String, statusID: Int, isOwner: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?): Observable<Unit> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun requestEngineeringRecords(
+        name: String,
+        phone: String,
+        typeId: String,
+        mainSyndicate: String,
+        userNumber: String,
+        lastRenewYear: String,
+        statusID: Int,
+        isOwner: Int,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
+    ): Observable<Unit> {
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getNotificationsCount(userNumber: Int): Observable<NotificationsCountEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun bookTrip(mainSyndicateId: Int, userNumber: String, phone: String, tripID: Int, regimentID: Int, regimentDate: String, housingType: String, numChild: Int, ages: String, name: String,personsList: List<PersonEntity>, docsNumber: Int, personsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?): Observable<Unit> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun bookTrip(
+        mainSyndicateId: Int,
+        userNumber: String,
+        phone: String,
+        tripID: Int,
+        regimentID: Int,
+        regimentDate: String,
+        housingType: String,
+        numChild: Int,
+        ages: String,
+        name: String,
+        personsList: List<PersonEntity>,
+        docsNumber: Int,
+        personsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?,
+        doc4: File?
+    ): Observable<Unit> {
+        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getAppVersion(): Observable<AppVersionEntity> {

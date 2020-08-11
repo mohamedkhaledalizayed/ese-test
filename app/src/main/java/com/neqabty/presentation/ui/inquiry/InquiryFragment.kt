@@ -3,7 +3,6 @@ package com.neqabty.presentation.ui.inquiry
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -11,7 +10,6 @@ import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
@@ -40,9 +38,9 @@ class InquiryFragment : BaseFragment(), Injectable {
     var servicesResultList: List<ServiceUI>? = mutableListOf()
     var serviceID: Int = 0
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -89,10 +87,10 @@ class InquiryFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: InquiryViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         activity?.invalidateOptionsMenu()
-        if(llContent.visibility == View.INVISIBLE && state.services != null){
+        if (llContent.visibility == View.INVISIBLE && state.services != null) {
             servicesResultList = state.services
             initializeViews()
-        }else if (!state.isLoading && state.member != null) {
+        } else if (!state.isLoading && state.member != null) {
 //            PreferencesHelper(requireContext()).user = state.member?.engineerID.toString()
 //            if (state?.member?.code == 0 || state.member?.code == 1) {
 //                navController().navigate(
@@ -101,7 +99,7 @@ class InquiryFragment : BaseFragment(), Injectable {
 //            } else {
 //                showAlert(state?.member?.message!!)
 //            }
-            if (state.member?.msg == ""){
+            if (state.member?.msg == "") {
                 state.member?.engineerNumber = edMemberNumber.text.toString()
                 navController().navigate(
                         InquiryFragmentDirections.openInquiryDetails(0, spService.selectedItem.toString(), state.member!!, serviceID.toString())
@@ -112,7 +110,6 @@ class InquiryFragment : BaseFragment(), Injectable {
             state.member = null
         }
     }
-
 
     fun renderServices() {
         binding.spService.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, servicesResultList)

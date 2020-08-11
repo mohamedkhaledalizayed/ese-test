@@ -27,18 +27,18 @@ class SendEngineeringRecordsRequest @Inject constructor(
     }
 
     fun requestEngineeringRecords(
-            name: String,
-            phone: String,
-            typeId: String,
-            mainSyndicate: String,
-            userNumber: String,
-            lastRenewYear: String,
-            statusID: Int,
-            isOwner: Int,
-            docsNumber: Int,
-            doc1: File?,
-            doc2: File?,
-            doc3: File?
+        name: String,
+        phone: String,
+        typeId: String,
+        mainSyndicate: String,
+        userNumber: String,
+        lastRenewYear: String,
+        statusID: Int,
+        isOwner: Int,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
     ): Observable<Unit> {
         val data = HashMap<String, Any>()
         data[PARAM_NAME] = name
@@ -69,6 +69,6 @@ class SendEngineeringRecordsRequest @Inject constructor(
         val doc1 = data?.get(PARAM_DOC1) as File?
         val doc2 = data?.get(PARAM_DOC2) as File?
         val doc3 = data?.get(PARAM_DOC3) as File?
-        return neqabtyRepository.requestEngineeringRecords(name, phone,typeID,mainSyndicateId,userNumber, renewalYear, statusID, isOwner,docsNumber , doc1, doc2, doc3)
+        return neqabtyRepository.requestEngineeringRecords(name, phone, typeID, mainSyndicateId, userNumber, renewalYear, statusID, isOwner, docsNumber, doc1, doc2, doc3)
     }
 }

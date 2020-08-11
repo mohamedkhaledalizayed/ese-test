@@ -3,19 +3,19 @@ package com.neqabty.presentation.ui.updateDataDetails
 import android.arch.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetUpdateUserDataInquiry
 import com.neqabty.domain.usecases.UpdateUserData
-import com.neqabty.domain.usecases.VerifyUpdateUserData
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.InquireUpdateUserDataUI
 import com.neqabty.presentation.entities.UpdateUserDataUI
-import com.neqabty.presentation.entities.VerifyUserDataUI
 import com.neqabty.presentation.mappers.InquireUpdateUserDataEntityUIMapper
-import com.neqabty.presentation.mappers.VerifyUserDataEntityUIMapper
 import java.io.File
 
 import javax.inject.Inject
 
-class UpdateDataDetailsViewModel @Inject constructor(private val getUpdateUserDataInquiry: GetUpdateUserDataInquiry,private val updateUserData: UpdateUserData) : BaseViewModel() {
+class UpdateDataDetailsViewModel @Inject constructor(
+    private val getUpdateUserDataInquiry: GetUpdateUserDataInquiry,
+    private val updateUserData: UpdateUserData
+) : BaseViewModel() {
 
     private val updateUserDataEntityUIMapper = InquireUpdateUserDataEntityUIMapper()
     private val UpdateUserDataEntityUIMapper = com.neqabty.presentation.mappers.UpdateUserDataEntityUIMapper()
@@ -44,10 +44,18 @@ class UpdateDataDetailsViewModel @Inject constructor(private val getUpdateUserDa
         )
     }
 
-
-    fun updateUserData(userNumber: String, fullName: String, nationalID: String, mobile: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?) {
+    fun updateUserData(
+        userNumber: String,
+        fullName: String,
+        nationalID: String,
+        mobile: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
+    ) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(updateUserData.updateUserData(userNumber,fullName, nationalID, mobile, docsNumber, doc1, doc2, doc3)
+        addDisposable(updateUserData.updateUserData(userNumber, fullName, nationalID, mobile, docsNumber, doc1, doc2, doc3)
                 .map {
                     it.let {
                         UpdateUserDataEntityUIMapper.mapFrom(it)
@@ -75,5 +83,4 @@ class UpdateDataDetailsViewModel @Inject constructor(private val getUpdateUserDa
                 userDataInquire = userDataInquire)
         viewState.value = newViewState
     }
-
 }

@@ -50,9 +50,9 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     lateinit var paymentCreationResponse: PaymentCreationResponse
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -94,7 +94,6 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         val adapter = PaymentItemsAdapter(dataBindingComponent, appExecutors) { }
         this.adapter = adapter
 
-
         binding.title = params.title
         memberItem?.let {
             binding.memberItem = it
@@ -104,14 +103,12 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
             }
         }
 
-
         binding.rvDetails.adapter = adapter
         bPay.setOnClickListener {
             llSuperProgressbar.visibility = View.VISIBLE
             createPayment()
         }
     }
-
 
     private fun handleViewState(state: InquiryDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
@@ -133,7 +130,6 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                     }
 //                    "senderRequestNumber" + response.OriginalSenderRequestNumber
                 }
-
             } else {
                 state.member?.let {
                     memberItem.paymentCreationRequest = it.paymentCreationRequest
@@ -180,8 +176,6 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 //            paymentCreationRequest.Currency = "818"
 
             mechanismTypeButton = binding.root.findViewById(rgPaymentMechanismType.getCheckedRadioButtonId())
-
-
 
             if (mechanismTypeButton.getText().toString() == getString(R.string.payment_card)) {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Card
@@ -236,16 +230,15 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         } catch (ex: Exception) {
             Log.i("Error", ex.message)
         }
-
     }
 
     private fun completePaymentCreation(encryptedData: String) {
         try {
 //            val publicKey = memberItem.paymentCreationRequest?.publicKey
-////            var signature = paymentCreationRequest.serialize()
-////            Log.d("NEQBTY", signature)
+// //            var signature = paymentCreationRequest.serialize()
+// //            Log.d("NEQBTY", signature)
 //
-////            val signature = "qf9Qo2fZ792GyoDiXik6eAQ6fadqHaib+yaBTBp4PGj1xf6KlVn3pP822D8VyADm+OEvuPVtLc3nvutiTEDZgo4oeJnUIwXveAzQUV6RM9oyMfOu78Kj9NcD3wMW1Jb6hwAKfHQ/tLsY7oJYIhXmh1x2INU9am6K6JrD468ToBNhWU6Df9SlJsMezZWMLrG0Z4bElqTsIVcpATiu8rJ4lGHMl+qC4AX+2pAViz31TPXGREdYsQpLDHbnBXaVvLLY8fKNyOjDaskxEoeJikPdzkAmBn1HDmzwWhb9GyYRsGJw4wm1szIXrMIRvgGYIarsVwxL7uaSWs/yrjHUFhT8AQ=="
+// //            val signature = "qf9Qo2fZ792GyoDiXik6eAQ6fadqHaib+yaBTBp4PGj1xf6KlVn3pP822D8VyADm+OEvuPVtLc3nvutiTEDZgo4oeJnUIwXveAzQUV6RM9oyMfOu78Kj9NcD3wMW1Jb6hwAKfHQ/tLsY7oJYIhXmh1x2INU9am6K6JrD468ToBNhWU6Df9SlJsMezZWMLrG0Z4bElqTsIVcpATiu8rJ4lGHMl+qC4AX+2pAViz31TPXGREdYsQpLDHbnBXaVvLLY8fKNyOjDaskxEoeJikPdzkAmBn1HDmzwWhb9GyYRsGJw4wm1szIXrMIRvgGYIarsVwxL7uaSWs/yrjHUFhT8AQ=="
 //
 //            paymentGateway.CreatePayment(paymentCreationRequest, encryptedData, publicKey, MobilePaymentCreationCallback(requireContext(), mechanismTypeButton.getText().toString(), navController()))
         } catch (ex: Exception) {
@@ -255,7 +248,10 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
     // endregion
 
     // region callback
-    class MobilePaymentCreationCallback(private val successCallback: ((response: PaymentCreationResponse) -> Unit), private val failureCallback: (() -> Unit)) : PaymentCreationCallback {
+    class MobilePaymentCreationCallback(
+        private val successCallback: ((response: PaymentCreationResponse) -> Unit),
+        private val failureCallback: (() -> Unit)
+    ) : PaymentCreationCallback {
         override fun onSuccess(response: PaymentCreationResponse) {
             successCallback.invoke(response)
         }
@@ -265,7 +261,6 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
             failureCallback.invoke()
         }
     }
-
 
 //    private fun generateRequestNumber(): String {
 //        val random = Random()

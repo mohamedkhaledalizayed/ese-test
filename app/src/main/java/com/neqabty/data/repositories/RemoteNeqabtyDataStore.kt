@@ -17,7 +17,25 @@ import javax.inject.Singleton
 
 class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
 
-    override fun createCoronaRequest(userNumber: String, phone: String, syndicateID: Int, name: String, type: String, job: String, work: String, treatmentDestination: String, treatmentDestinationAddress: String, family: Int, injury: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?): Observable<Unit> {
+    override fun createCoronaRequest(
+        userNumber: String,
+        phone: String,
+        syndicateID: Int,
+        name: String,
+        type: String,
+        job: String,
+        work: String,
+        treatmentDestination: String,
+        treatmentDestinationAddress: String,
+        family: Int,
+        injury: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
+    ): Observable<Unit> {
         var file1: MultipartBody.Part? = null
         var file2: MultipartBody.Part? = null
         var file3: MultipartBody.Part? = null
@@ -50,7 +68,14 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
         }
     }
 
-    override fun createComplaint(name: String, phone: String, type: String, body: String, token: String, memberNumber: String): Observable<Unit> {
+    override fun createComplaint(
+        name: String,
+        phone: String,
+        type: String,
+        body: String,
+        token: String,
+        memberNumber: String
+    ): Observable<Unit> {
         return api.sendComplaint(ComplaintRequest(name, phone, type, body, token, memberNumber)).map { result ->
             result.data ?: Unit
         }
@@ -78,7 +103,16 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     }
 
     private val updateUserDataEntityMapper = UpdateUserDataEntityMapper()
-    override fun updateUserData(userNumber: String, name: String, nationalID: String, mobile: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?): Observable<UpdateUserDataEntity> {
+    override fun updateUserData(
+        userNumber: String,
+        name: String,
+        nationalID: String,
+        mobile: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
+    ): Observable<UpdateUserDataEntity> {
 
         var file1: MultipartBody.Part? = null
         var file2: MultipartBody.Part? = null
@@ -111,7 +145,20 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
         }
     }
 
-    override fun requestEngineeringRecords(name: String, phone: String, typeId: String, mainSyndicate: String, userNumber: String, lastRenewYear: String, statusID: Int, isOwner: Int, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?): Observable<Unit> {
+    override fun requestEngineeringRecords(
+        name: String,
+        phone: String,
+        typeId: String,
+        mainSyndicate: String,
+        userNumber: String,
+        lastRenewYear: String,
+        statusID: Int,
+        isOwner: Int,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
+    ): Observable<Unit> {
         var file1: MultipartBody.Part? = null
         var file2: MultipartBody.Part? = null
         var file3: MultipartBody.Part? = null
@@ -133,7 +180,25 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
         }
     }
 
-    override fun bookTrip(mainSyndicateId: Int, userNumber: String, phone: String, tripID: Int, regimentID: Int, regimentDate: String, housingType: String, numChild: Int, ages: String, name: String, personsList: List<PersonEntity>, docsNumber: Int, personsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?): Observable<Unit> {
+    override fun bookTrip(
+        mainSyndicateId: Int,
+        userNumber: String,
+        phone: String,
+        tripID: Int,
+        regimentID: Int,
+        regimentDate: String,
+        housingType: String,
+        numChild: Int,
+        ages: String,
+        name: String,
+        personsList: List<PersonEntity>,
+        docsNumber: Int,
+        personsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?,
+        doc4: File?
+    ): Observable<Unit> {
 
         var file1: MultipartBody.Part? = null
         var file2: MultipartBody.Part? = null
@@ -238,25 +303,25 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     }
 
     override fun sendMedicalRequest(
-            mainSyndicateId: Int,
-            subSyndicateId: Int,
-            userNumber: String,
-            email: String,
-            phone: String,
-            profession: Int,
-            degree: Int,
-            area: Int,
-            doctor: Int,
-            providerType: Int,
-            provider: Int,
-            name: String,
-            oldbenid: String,
-            docsNumber: Int,
-            doc1: File?,
-            doc2: File?,
-            doc3: File?,
-            doc4: File?,
-            doc5: File?
+        mainSyndicateId: Int,
+        subSyndicateId: Int,
+        userNumber: String,
+        email: String,
+        phone: String,
+        profession: Int,
+        degree: Int,
+        area: Int,
+        doctor: Int,
+        providerType: Int,
+        provider: Int,
+        name: String,
+        oldbenid: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
     ): Observable<Unit> {
         var file1: MultipartBody.Part? = null
         var file2: MultipartBody.Part? = null
@@ -298,7 +363,6 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
         }
     }
 
-
     private val providerDataEntityMapper = ProviderDataEntityMapper()
 
     override fun getProviderDetails(id: String, type: String): Observable<ProviderEntity> {
@@ -308,11 +372,11 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     }
 
     override fun getProvidersByType(
-            providerTypeId: String,
-            govId: String,
-            areaId: String,
-            professionID: String?,
-            degreeID: String?
+        providerTypeId: String,
+        govId: String,
+        areaId: String,
+        professionID: String?,
+        degreeID: String?
     ): Observable<List<ProviderEntity>> {
         return api.getProvidersById(ProviderRequest(providerTypeId, govId, areaId, professionID, degreeID)).map { providers ->
             providers.data?.map { providerDataEntityMapper.mapFrom(it) }
@@ -404,14 +468,14 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val userDataEntityMapper = com.neqabty.data.mappers.UserDataEntityMapper()
 
     override fun signup(
-            email: String,
-            fName: String,
-            lName: String,
-            mobile: String,
-            govId: String,
-            mainSyndicateId: String,
-            subSyndicateId: String,
-            password: String
+        email: String,
+        fName: String,
+        lName: String,
+        mobile: String,
+        govId: String,
+        mainSyndicateId: String,
+        subSyndicateId: String,
+        password: String
     ): Observable<UserEntity> {
         return api.signup(SignupRequest(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)).flatMap { userDataResponse ->
             Observable.just(userDataEntityMapper.mapFrom(userDataResponse.data!!))
@@ -429,5 +493,4 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             userDataEntityMapper.mapFrom(userData.data!!)
         }
     }
-
 }

@@ -12,7 +12,6 @@ import android.support.v4.app.NotificationManagerCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -23,7 +22,6 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import javax.inject.Inject
-
 
 class SettingsFragment : BaseFragment(), Injectable {
     @Inject
@@ -37,9 +35,9 @@ class SettingsFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -66,7 +64,7 @@ class SettingsFragment : BaseFragment(), Injectable {
                 val intent = Intent()
                 intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
 
-                //for Android 5-7
+                // for Android 5-7
                 intent.putExtra("app_package", activity!!.getPackageName())
                 intent.putExtra("app_uid", activity!!.getApplicationInfo().uid)
 
@@ -77,7 +75,6 @@ class SettingsFragment : BaseFragment(), Injectable {
             }
         })
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

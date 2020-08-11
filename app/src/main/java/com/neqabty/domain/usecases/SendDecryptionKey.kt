@@ -7,8 +7,8 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class SendDecryptionKey @Inject constructor(
-        transformer: Transformer<DecryptionEntity>,
-        private val neqabtyRepository: NeqabtyRepository
+    transformer: Transformer<DecryptionEntity>,
+    private val neqabtyRepository: NeqabtyRepository
 ) : UseCase<DecryptionEntity>(transformer) {
 
     companion object {

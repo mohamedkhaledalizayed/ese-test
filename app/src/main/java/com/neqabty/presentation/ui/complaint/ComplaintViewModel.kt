@@ -8,7 +8,10 @@ import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.ComplaintTypeEntityUIMapper
 import javax.inject.Inject
 
-class ComplaintViewModel @Inject constructor(val getComplaintTypes: GetComplaintTypes, val createComplaint: CreateComplaint) : BaseViewModel() {
+class ComplaintViewModel @Inject constructor(
+    val getComplaintTypes: GetComplaintTypes,
+    val createComplaint: CreateComplaint
+) : BaseViewModel() {
     private val complaintTypeEntityUIMapper = ComplaintTypeEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
@@ -36,7 +39,6 @@ class ComplaintViewModel @Inject constructor(val getComplaintTypes: GetComplaint
         viewState.value?.types?.let {
             onTypesReceived()
         } ?: addDisposable(typesDisposable)
-
     }
 
     private fun onTypesReceived() {

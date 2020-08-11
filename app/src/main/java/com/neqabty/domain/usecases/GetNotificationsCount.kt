@@ -2,14 +2,13 @@ package com.neqabty.domain.usecases
 
 import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.common.Transformer
-import com.neqabty.domain.entities.AppVersionEntity
 import com.neqabty.domain.entities.NotificationsCountEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
 class GetNotificationsCount @Inject constructor(
-        transformer: Transformer<NotificationsCountEntity>,
-        private val neqabtyRepository: NeqabtyRepository
+    transformer: Transformer<NotificationsCountEntity>,
+    private val neqabtyRepository: NeqabtyRepository
 ) : UseCase<NotificationsCountEntity>(transformer) {
 
     companion object {

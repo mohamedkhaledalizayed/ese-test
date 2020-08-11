@@ -27,7 +27,6 @@ import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.payment_fragment.*
 import javax.inject.Inject
 
-
 class PaymentFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -53,9 +52,9 @@ class PaymentFragment : BaseFragment(), Injectable {
     lateinit var memberItem: MemberUI
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -91,7 +90,6 @@ class PaymentFragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: PaymentViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-
     }
 
     fun initializeViews() {
@@ -116,7 +114,6 @@ class PaymentFragment : BaseFragment(), Injectable {
         }
     }
 
-
     private fun confirmPayment() {
         val params = PaymentFragmentArgs.fromBundle(arguments!!)
         try {
@@ -134,7 +131,6 @@ class PaymentFragment : BaseFragment(), Injectable {
 
             paymentConfirmationRequest.SessionID = params.sessionID
 
-
             /**
              * Test Cards
              *
@@ -148,14 +144,12 @@ class PaymentFragment : BaseFragment(), Injectable {
              *
              * */
 
-
             paymentConfirmationRequest.Card.NameOnCard = edName.text.toString()
             paymentConfirmationRequest.Card.CardNumber = edNumber.text.toString()
             paymentConfirmationRequest.Card.CardCVV = edCVV.text.toString()
             paymentConfirmationRequest.Card.CardExpiryMonth = spMonth.selectedItem.toString()
             paymentConfirmationRequest.Card.CardExpiryYear = spYear.selectedItem.toString()
             paymentConfirmationRequest.Card.SaveCardFlag = true
-
 
             paymentConfirmationRequest.CardToken = ""
 
@@ -169,8 +163,7 @@ class PaymentFragment : BaseFragment(), Injectable {
 
                 llSuperProgressbar.visibility = View.INVISIBLE
 
-
-                showAlert(getString(R.string.payment_successful)){
+                showAlert(getString(R.string.payment_successful)) {
                     navController().popBackStack()
                     navController().navigate(R.id.homeFragment)
                 }
@@ -186,20 +179,20 @@ class PaymentFragment : BaseFragment(), Injectable {
                 })
             }
             paymentGateway.ConfirmPayment(paymentConfirmationRequest, "", MobilePaymentConfirmationCallback(successCallback, failureCallback))
-
         } catch (ex: Exception) {
             Log.i("Error", ex.message)
         }
-
     }
 
 //region
 
 // endregion
 
-
     // region callback
-    class MobilePaymentConfirmationCallback(private val successCallback: ((response: PaymentConfirmationResponse) -> Unit), private val failureCallback: (() -> Unit)) : PaymentConfirmationCallback {
+    class MobilePaymentConfirmationCallback(
+        private val successCallback: ((response: PaymentConfirmationResponse) -> Unit),
+        private val failureCallback: (() -> Unit)
+    ) : PaymentConfirmationCallback {
 
         override fun onSuccess(response: PaymentConfirmationResponse) {
             Log.i("NEQABTY", "Request Completed Successfully")

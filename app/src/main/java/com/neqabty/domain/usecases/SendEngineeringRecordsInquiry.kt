@@ -4,7 +4,6 @@ import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.common.Transformer
 import com.neqabty.domain.entities.RegisteryEntity
 import io.reactivex.Observable
-import java.io.File
 import javax.inject.Inject
 
 class SendEngineeringRecordsInquiry @Inject constructor(

@@ -7,8 +7,8 @@ import java.io.File
 import javax.inject.Inject
 
 class CreateCoronaRequest @Inject constructor(
-        transformer: Transformer<Unit>,
-        private val neqabtyRepository: NeqabtyRepository
+    transformer: Transformer<Unit>,
+    private val neqabtyRepository: NeqabtyRepository
 ) : UseCase<Unit>(transformer) {
 
     companion object {
@@ -31,23 +31,25 @@ class CreateCoronaRequest @Inject constructor(
         private const val PARAM_DOC5 = "param:doc5"
     }
 
-    fun createCoronaRequest(userNumber: String,
-                            phone: String,
-                            syndicateID: Int,
-                            name: String,
-                            type: String,
-                            job: String,
-                            work: String,
-                            treatmentDestination: String,
-                            treatmentDestinationAddress: String,
-                            family: Int,
-                            injury: String,
-                            docsNumber: Int,
-                            doc1: File?,
-                            doc2: File?,
-                            doc3: File?,
-                            doc4: File?,
-                            doc5: File?): Observable<Unit> {
+    fun createCoronaRequest(
+        userNumber: String,
+        phone: String,
+        syndicateID: Int,
+        name: String,
+        type: String,
+        job: String,
+        work: String,
+        treatmentDestination: String,
+        treatmentDestinationAddress: String,
+        family: Int,
+        injury: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
+    ): Observable<Unit> {
         val data = HashMap<String, Any>()
         data[PARAM_USER_NUMBER] = userNumber
         data[PARAM_PHONE] = phone

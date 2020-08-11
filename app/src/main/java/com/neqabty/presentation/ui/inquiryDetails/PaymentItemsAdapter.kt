@@ -7,11 +7,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.neqabty.AppExecutors
 import com.neqabty.R
-import com.neqabty.databinding.NewsItemBinding
 import com.neqabty.databinding.PaymentItemBinding
 import com.neqabty.presentation.entities.MemberUI
-import com.neqabty.presentation.entities.NewsUI
-import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class PaymentItemsAdapter(

@@ -59,9 +59,9 @@ class CoronaFragment : BaseFragment(), Injectable {
     var selectedSyndicate: Int = 0
     //    var isSubmitted: Boolean = false
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -87,7 +87,6 @@ class CoronaFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.VISIBLE
 
                 coronaViewModel.getSyndicates()
-
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
@@ -133,7 +132,6 @@ class CoronaFragment : BaseFragment(), Injectable {
                         if (edFamily.text.toString().isNotBlank()) edFamily.text.toString().toInt() else 0,
                         edDamageType.text.toString(),
                         photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
-
             } else
                 showPickPhotoAlert()
         }
@@ -144,7 +142,6 @@ class CoronaFragment : BaseFragment(), Injectable {
         }
         this.photosAdapter = adapter
         binding.rvPhotos.adapter = adapter
-
     }
 
     private fun handleViewState(state: CoronaViewState) {
@@ -197,7 +194,6 @@ class CoronaFragment : BaseFragment(), Injectable {
         binding.spTypes.setSelection(0)
     }
 
-
     fun showSuccessAlert() {
         builder = AlertDialog.Builder(requireContext())
         builder?.setTitle(getString(R.string.thanks))
@@ -225,7 +221,6 @@ class CoronaFragment : BaseFragment(), Injectable {
         }
     }
 
-
     private fun onCaptureImageResult(data: Intent) {
         var thumbnail: Bitmap = data.getExtras().get("data") as Bitmap
         var bytes: ByteArrayOutputStream = ByteArrayOutputStream()
@@ -250,7 +245,6 @@ class CoronaFragment : BaseFragment(), Injectable {
         photosAdapter.submitList(photosList)
         photosAdapter.notifyDataSetChanged()
     }
-
 
     fun getPhoto(index: Int): File? {
         if (photosList.size > index) {
@@ -283,7 +277,6 @@ class CoronaFragment : BaseFragment(), Injectable {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
-
 
 // endregion
 

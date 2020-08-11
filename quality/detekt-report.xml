@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <checkstyle version="4.3">
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\api\WebService.kt">
-	<error line="70" column="27" severity="warning" message="The function sendMedicalRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
-	<error line="9" column="1" severity="warning" message="Interface &apos;WebService&apos; with &apos;22&apos; functions detected. Defined threshold inside interfaces is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="76" column="27" severity="warning" message="The function sendMedicalRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="165" column="28" severity="warning" message="The function createCoronaRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="9" column="1" severity="warning" message="Interface &apos;WebService&apos; with &apos;39&apos; functions detected. Defined threshold inside interfaces is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
 	<error line="3" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="4" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="7" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="23" column="46" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="29" column="44" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="56" column="42" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="62" column="42" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="115" column="40" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="118" column="34" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="133" column="44" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="3" column="1" severity="warning" message="com.neqabty.data.api.requests.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 	<error line="4" column="1" severity="warning" message="com.neqabty.data.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 	<error line="7" column="1" severity="warning" message="retrofit2.http.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 	<error line="23" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="29" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="56" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="62" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="115" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="118" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="133" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\db\RoomHistoryCache.kt">
 	<error line="12" column="1" severity="warning" message="Class &apos;RoomHistoryCache&apos; with &apos;18&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
@@ -22,9 +27,13 @@
 	<error line="6" column="1" severity="warning" message="com.neqabty.domain.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\repositories\CachedNeqabtyDataStore.kt">
-	<error line="12" column="1" severity="warning" message="Class &apos;CachedNeqabtyDataStore&apos; with &apos;31&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="12" column="1" severity="warning" message="Class &apos;CachedNeqabtyDataStore&apos; with &apos;45&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
 	<error line="5" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="116" column="6" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="164" column="6" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="5" column="1" severity="warning" message="com.neqabty.domain.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="118" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="166" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\repositories\MemoryNeqabtyCache.kt">
 	<error line="10" column="1" severity="warning" message="Class &apos;MemoryNeqabtyCache&apos; with &apos;18&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
@@ -32,29 +41,52 @@
 	<error line="4" column="1" severity="warning" message="com.neqabty.domain.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\repositories\NeqabtyRepositoryImpl.kt">
-	<error line="11" column="1" severity="warning" message="Class &apos;NeqabtyRepositoryImpl&apos; with &apos;31&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
-	<error line="55" column="26" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="11" column="1" severity="warning" message="Class &apos;NeqabtyRepositoryImpl&apos; with &apos;45&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
 	<error line="4" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="35" column="26" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="96" column="26" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="118" column="26" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="132" column="6" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="144" column="6" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="178" column="26" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="4" column="1" severity="warning" message="com.neqabty.domain.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
-	<error line="56" column="209" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="36" column="215" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="97" column="169" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="119" column="209" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="134" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="146" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="179" column="225" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\repositories\RemoteNeqabtyDataStore.kt">
-	<error line="18" column="1" severity="warning" message="Class &apos;RemoteNeqabtyDataStore&apos; with &apos;22&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="16" column="1" severity="warning" message="Class &apos;RemoteNeqabtyDataStore&apos; with &apos;36&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="64" column="10" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="132" column="10" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="141" column="94" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="177" column="10" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="206" column="46" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="224" column="10" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="255" column="66" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="297" column="6" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="351" column="10" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="380" column="42" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="479" column="32" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="4" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="5" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
-	<error line="6" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
-	<error line="8" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
-	<error line="93" column="10" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="114" column="26" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="134" column="42" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="231" column="32" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="5" column="1" severity="warning" message="com.neqabty.data.api.requests.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
-	<error line="6" column="1" severity="warning" message="com.neqabty.data.mappers.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
-	<error line="8" column="1" severity="warning" message="com.neqabty.domain.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
-	<error line="95" column="223" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="115" column="114" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="135" column="113" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="232" column="129" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="239" column="131" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="7" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="4" column="1" severity="warning" message="com.neqabty.data.api.requests.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="5" column="1" severity="warning" message="com.neqabty.data.mappers.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="7" column="1" severity="warning" message="com.neqabty.domain.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="66" column="228" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="134" column="141" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="142" column="104" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="178" column="192" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="207" column="9" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="226" column="231" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="257" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="299" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="353" column="239" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="381" column="113" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="480" column="129" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\common\TestNeqabtyCache.kt">
 	<error line="7" column="1" severity="warning" message="Class &apos;TestNeqabtyCache&apos; with &apos;18&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
@@ -67,154 +99,318 @@
 	<error line="3" column="1" severity="warning" message="com.neqabty.domain.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\NeqabtyDataStore.kt">
-	<error line="32" column="27" severity="warning" message="The function sendMedicalRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
-	<error line="54" column="15" severity="warning" message="The function signup has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
-	<error line="7" column="1" severity="warning" message="Interface &apos;NeqabtyDataStore&apos; with &apos;22&apos; functions detected. Defined threshold inside interfaces is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="33" column="27" severity="warning" message="The function sendMedicalRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="55" column="17" severity="warning" message="The function bookTrip has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="83" column="23" severity="warning" message="The function updateUserData has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="93" column="34" severity="warning" message="The function requestEngineeringRecords has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="110" column="15" severity="warning" message="The function signup has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="122" column="24" severity="warning" message="The function createComplaint has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="123" column="28" severity="warning" message="The function createCoronaRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="7" column="1" severity="warning" message="Interface &apos;NeqabtyDataStore&apos; with &apos;36&apos; functions detected. Defined threshold inside interfaces is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="31" column="107" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="121" column="67" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="3" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
-	<error line="28" column="81" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="3" column="1" severity="warning" message="com.neqabty.domain.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
-	<error line="29" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="32" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="122" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\NeqabtyRepository.kt">
-	<error line="44" column="27" severity="warning" message="The function sendMedicalRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
-	<error line="67" column="15" severity="warning" message="The function signup has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
-	<error line="7" column="1" severity="warning" message="Interface &apos;NeqabtyRepository&apos; with &apos;22&apos; functions detected. Defined threshold inside interfaces is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="40" column="27" severity="warning" message="The function sendMedicalRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="62" column="17" severity="warning" message="The function bookTrip has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="89" column="23" severity="warning" message="The function updateUserData has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="100" column="34" severity="warning" message="The function requestEngineeringRecords has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="117" column="15" severity="warning" message="The function signup has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="129" column="24" severity="warning" message="The function createComplaint has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="130" column="28" severity="warning" message="The function createCoronaRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="7" column="1" severity="warning" message="Interface &apos;NeqabtyRepository&apos; with &apos;36&apos; functions detected. Defined threshold inside interfaces is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="37" column="44" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="128" column="67" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="3" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="3" column="1" severity="warning" message="com.neqabty.domain.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="39" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="129" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\BookTrip.kt">
+	<error line="35" column="17" severity="warning" message="The function bookTrip has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="91" column="59" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="92" column="211" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\CreateComplaint.kt">
+	<error line="22" column="24" severity="warning" message="The function createComplaint has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="20" column="6" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="22" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\CreateCoronaRequest.kt">
+	<error line="34" column="28" severity="warning" message="The function createCoronaRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="91" column="50" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="92" column="217" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\SendEngineeringRecordsRequest.kt">
+	<error line="29" column="34" severity="warning" message="The function requestEngineeringRecords has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="71" column="50" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="72" column="171" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\SendMedicalRequest.kt">
-	<error line="34" column="27" severity="warning" message="The function sendMedicalRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
-	<error line="91" column="69" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="92" column="211" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="36" column="27" severity="warning" message="The function sendMedicalRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="99" column="50" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="100" column="227" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\SignupUser.kt">
 	<error line="25" column="15" severity="warning" message="The function signup has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
 </file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\UpdateUserData.kt">
+	<error line="26" column="23" severity="warning" message="The function updateUserData has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\MainActivity.kt">
-	<error line="102" column="5" severity="warning" message="The function startActivities is too long. The maximum length is 60." source="detekt.LongMethod" />
-	<error line="102" column="5" severity="warning" message="The function startActivities appears to be too complex." source="detekt.ComplexMethod" />
-	<error line="39" column="1" severity="warning" message="Class &apos;MainActivity&apos; with &apos;12&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
-	<error line="216" column="34" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="244" column="30" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="263" column="30" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="32" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
-	<error line="36" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
-	<error line="32" column="1" severity="warning" message="com.neqabty.presentation.util.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
-	<error line="216" column="13" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="244" column="9" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="263" column="9" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="285" column="5" severity="warning" message="The function onCreateOptionsMenu is too long. The maximum length is 60." source="detekt.LongMethod" />
+	<error line="98" column="5" severity="warning" message="The function startActivities is too long. The maximum length is 60." source="detekt.LongMethod" />
+	<error line="98" column="5" severity="warning" message="The function startActivities appears to be too complex." source="detekt.ComplexMethod" />
+	<error line="285" column="5" severity="warning" message="The function onCreateOptionsMenu appears to be too complex." source="detekt.ComplexMethod" />
+	<error line="41" column="1" severity="warning" message="Class &apos;MainActivity&apos; with &apos;12&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="21" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="33" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="38" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="265" column="34" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="294" column="30" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="299" column="55" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="332" column="106" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="338" column="108" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="341" column="105" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="343" column="171" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="367" column="30" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="414" column="38" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="21" column="1" severity="warning" message="android.view.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="33" column="1" severity="warning" message="com.neqabty.presentation.util.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="265" column="13" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="294" column="9" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="300" column="124" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="333" column="170" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="339" column="177" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="343" column="171" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="345" column="124" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="367" column="9" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="414" column="17" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="172" column="47" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="181" column="47" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="348" column="50" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="413" column="32" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\MainViewModel.kt">
 	<error line="20" column="21" severity="warning" message="The function registerUser has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\di\AppModule.kt">
-	<error line="31" column="1" severity="warning" message="Class &apos;AppModule&apos; with &apos;34&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="34" column="1" severity="warning" message="Class &apos;AppModule&apos; with &apos;49&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
 	<error line="19" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="19" column="1" severity="warning" message="com.neqabty.domain.usecases.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="62" column="269" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\di\FragmentBuildersModule.kt">
-	<error line="32" column="1" severity="warning" message="Class &apos;FragmentBuildersModule&apos; with &apos;30&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
-	<error line="5" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
-	<error line="5" column="1" severity="warning" message="com.neqabty.presentation.ui.claiming.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="46" column="1" severity="warning" message="Class &apos;FragmentBuildersModule&apos; with &apos;44&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="6" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="6" column="1" severity="warning" message="com.neqabty.presentation.ui.claiming.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\di\ViewModelModule.kt">
-	<error line="31" column="1" severity="warning" message="Class &apos;ViewModelModule&apos; with &apos;22&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
-	<error line="126" column="58" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="124" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="41" column="1" severity="warning" message="Class &apos;ViewModelModule&apos; with &apos;32&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="141" column="58" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="156" column="58" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="139" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="154" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\claiming\ClaimingStep1Fragment.kt">
-	<error line="86" column="5" severity="warning" message="The function handleViewState appears to be too complex." source="detekt.ComplexMethod" />
-	<error line="32" column="1" severity="warning" message="Class &apos;ClaimingStep1Fragment&apos; with &apos;13&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
-	<error line="158" column="20" severity="warning" message="This condition is too complex." source="detekt.ComplexCondition" />
-	<error line="115" column="43" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="116" column="147" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="88" column="35" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="88" column="62" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="84" column="5" severity="warning" message="The function handleViewState appears to be too complex." source="detekt.ComplexMethod" />
+	<error line="30" column="1" severity="warning" message="Class &apos;ClaimingStep1Fragment&apos; with &apos;11&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="180" column="20" severity="warning" message="This condition is too complex." source="detekt.ComplexCondition" />
+	<error line="107" column="26" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="134" column="43" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="108" column="144" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="135" column="147" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\claiming\ClaimingStep2Fragment.kt">
-	<error line="101" column="5" severity="warning" message="The function handleViewState appears to be too complex." source="detekt.ComplexMethod" />
-	<error line="32" column="1" severity="warning" message="Class &apos;ClaimingStep2Fragment&apos; with &apos;12&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
-	<error line="148" column="44" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="149" column="138" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="110" column="5" severity="warning" message="The function handleViewState appears to be too complex." source="detekt.ComplexMethod" />
+	<error line="32" column="1" severity="warning" message="Class &apos;ClaimingStep2Fragment&apos; with &apos;13&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="77" column="52" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="118" column="45" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="164" column="36" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="79" column="124" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="119" column="132" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="165" column="138" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\claiming\ClaimingStep3Fragment.kt">
 	<error line="39" column="1" severity="warning" message="Class &apos;ClaimingStep3Fragment&apos; with &apos;17&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
-	<error line="92" column="64" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="117" column="64" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="177" column="34" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="179" column="32" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="281" column="10" severity="warning" message="Unexpected indentation (9) (it should be 8)" source="detekt.Indentation" />
 	<error line="282" column="40" severity="warning" message="Unexpected indentation (9) (it should be 8)" source="detekt.Indentation" />
 	<error line="35" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="36" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="95" column="64" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="120" column="64" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="180" column="34" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="182" column="32" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="55" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
 	<error line="56" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
 	<error line="35" column="1" severity="warning" message="java.io.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
-	<error line="93" column="325" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="118" column="325" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="178" column="131" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="180" column="128" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="93" column="309" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="93" column="322" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="99" column="35" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="118" column="309" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="118" column="322" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="204" column="56" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="228" column="55" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="96" column="375" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="121" column="375" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="181" column="131" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="183" column="128" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="96" column="359" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="96" column="372" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="102" column="35" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="121" column="359" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="121" column="372" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="207" column="56" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="231" column="55" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\claiming\ClaimingViewModel.kt">
 	<error line="113" column="27" severity="warning" message="The function sendMedicalRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
 	<error line="77" column="25" severity="error" message="Throwable is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
 	<error line="99" column="25" severity="error" message="Throwable is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
-	<error line="132" column="66" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="4" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="8" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="134" column="66" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="4" column="1" severity="warning" message="com.neqabty.domain.usecases.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 	<error line="8" column="1" severity="warning" message="com.neqabty.presentation.mappers.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
-	<error line="133" column="219" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="135" column="235" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
-<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\login\LoginViewModel.kt">
-	<error line="51" column="15" severity="warning" message="The function signup has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
-	<error line="42" column="25" severity="error" message="Throwable is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
-	<error line="67" column="25" severity="error" message="Throwable is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
-	<error line="16" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="16" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\complaint\ComplaintViewModel.kt">
+	<error line="49" column="24" severity="warning" message="The function createComplaint has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\corona\CoronaFragment.kt">
+	<error line="39" column="1" severity="warning" message="Class &apos;CoronaFragment&apos; with &apos;16&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="114" column="17" severity="warning" message="This condition is too complex." source="detekt.ComplexCondition" />
+	<error line="173" column="29" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="214" column="34" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="216" column="32" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="36" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="49" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
+	<error line="36" column="1" severity="warning" message="java.io.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="174" column="139" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="215" column="131" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="217" column="128" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="105" column="35" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="110" column="35" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="134" column="90" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="134" column="103" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="227" column="56" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\corona\CoronaViewModel.kt">
+	<error line="54" column="22" severity="warning" message="The function createRequest has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="73" column="66" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="74" column="226" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\engineeringRecordsDetails\EngineeringRecordsDetailsFragment.kt">
+	<error line="39" column="1" severity="warning" message="Class &apos;EngineeringRecordsDetailsFragment&apos; with &apos;20&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="34" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="35" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="90" column="61" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="166" column="106" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="167" column="207" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="225" column="34" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="227" column="32" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="54" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
+	<error line="55" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
+	<error line="34" column="1" severity="warning" message="java.io.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="91" column="123" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="92" column="187" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="93" column="157" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="167" column="207" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="168" column="180" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="226" column="131" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="228" column="128" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="251" column="56" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="274" column="55" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\engineeringRecordsDetails\EngineeringRecordsDetailsViewModel.kt">
+	<error line="26" column="34" severity="warning" message="The function requestEngineeringRecords has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="40" column="66" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="46" column="27" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="42" column="190" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="47" column="166" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\inquiryDetails\InquiryDetailsFragment.kt">
+	<error line="113" column="5" severity="warning" message="The function handleViewState appears to be too complex." source="detekt.ComplexMethod" />
+	<error line="145" column="5" severity="warning" message="The function createPayment appears to be too complex." source="detekt.ComplexMethod" />
+	<error line="230" column="18" severity="error" message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="244" column="18" severity="error" message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="15" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="78" column="61" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="88" column="28" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="120" column="46" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="121" column="138" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="126" column="78" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="135" column="82" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="168" column="113" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="185" column="85" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="188" column="120" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="191" column="113" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="215" column="51" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="222" column="58" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="227" column="14" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="15" column="1" severity="warning" message="com.efinance.mobilepaymentsdk.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="79" column="152" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="89" column="144" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="121" column="138" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="122" column="175" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="127" column="121" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="136" column="126" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="161" column="131" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="169" column="139" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="186" column="122" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="189" column="127" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="192" column="128" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="210" column="162" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="216" column="127" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="223" column="156" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="229" column="145" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="241" column="380" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="243" column="201" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\login\LoginFragment.kt">
+	<error line="129" column="20" severity="warning" message="This condition is too complex." source="detekt.ComplexCondition" />
+	<error line="113" column="72" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="128" column="55" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="114" column="143" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="129" column="244" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="87" column="65" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="129" column="79" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="129" column="106" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="129" column="146" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="129" column="186" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="129" column="226" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\mobile\MobileFragment.kt">
-	<error line="114" column="20" severity="warning" message="This condition is too complex." source="detekt.ComplexCondition" />
-	<error line="63" column="62" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="79" column="76" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="86" column="63" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="87" column="197" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="113" column="18" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="64" column="302" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="80" column="306" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="87" column="197" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="88" column="126" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="114" column="244" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="111" column="36" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="114" column="79" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="114" column="106" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="114" column="146" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="114" column="186" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
-	<error line="114" column="226" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="106" column="5" severity="warning" message="The function handleViewState appears to be too complex." source="detekt.ComplexMethod" />
+	<error line="165" column="20" severity="warning" message="This condition is too complex." source="detekt.ComplexCondition" />
+	<error line="142" column="72" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="149" column="59" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="164" column="18" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="188" column="86" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="143" column="300" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="150" column="193" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="165" column="244" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="189" column="179" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="120" column="17" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="124" column="17" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="128" column="17" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="132" column="17" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="162" column="36" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="162" column="57" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="165" column="79" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="165" column="106" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="165" column="146" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="165" column="186" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="165" column="226" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\mobile\MobileViewModel.kt">
-	<error line="23" column="21" severity="warning" message="The function registerUser has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
-</file>
-<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\notificationDetails\NotificationDetailsFragment.kt">
-	<error line="77" column="5" severity="warning" message="The function handleViewState appears to be too complex." source="detekt.ComplexMethod" />
-	<error line="83" column="121" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="84" column="133" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="27" column="21" severity="warning" message="The function registerUser has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\search\SearchFragment.kt">
 	<error line="95" column="5" severity="warning" message="The function handleViewState appears to be too complex." source="detekt.ComplexMethod" />
 	<error line="26" column="1" severity="warning" message="Class &apos;SearchFragment&apos; with &apos;11&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
 	<error line="97" column="13" severity="warning" message="This condition is too complex." source="detekt.ComplexCondition" />
-	<error line="21" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="89" column="38" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="96" column="90" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="96" column="89" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="188" column="34" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="21" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="21" column="1" severity="warning" message="com.neqabty.presentation.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 	<error line="90" column="174" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 	<error line="97" column="145" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
@@ -235,6 +431,54 @@
 	<error line="24" column="15" severity="warning" message="The function signup has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
 	<error line="40" column="25" severity="error" message="Throwable is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
 </file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\tripsReservation\TripReservationFragment.kt">
+	<error line="44" column="1" severity="warning" message="Class &apos;TripReservationFragment&apos; with &apos;27&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="178" column="64" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="371" column="34" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="373" column="32" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="39" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="40" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="58" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
+	<error line="59" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
+	<error line="60" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
+	<error line="39" column="1" severity="warning" message="java.io.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="152" column="126" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="179" column="567" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="372" column="131" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="374" column="128" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="158" column="35" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="179" column="564" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="262" column="27" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="288" column="13" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="306" column="27" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="398" column="56" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="422" column="55" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\tripsReservation\TripReservationViewModel.kt">
+	<error line="52" column="17" severity="warning" message="The function bookTrip has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\updateDataDetails\UpdateDataDetailsFragment.kt">
+	<error line="38" column="1" severity="warning" message="Class &apos;UpdateDataDetailsFragment&apos; with &apos;18&apos; functions detected. Defined threshold inside classes is set to &apos;11&apos;" source="detekt.TooManyFunctions" />
+	<error line="158" column="71" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="209" column="34" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="211" column="32" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="34" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="35" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="50" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
+	<error line="51" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
+	<error line="34" column="1" severity="warning" message="java.io.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="159" column="223" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="210" column="131" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="212" column="128" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="235" column="56" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="258" column="55" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\updateDataDetails\UpdateDataDetailsViewModel.kt">
+	<error line="47" column="23" severity="warning" message="The function updateUserData has too many parameters. The current threshold is set to 6." source="detekt.LongParameterList" />
+	<error line="57" column="66" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="21" column="5" severity="warning" message="Private variable names should match the pattern: (_)?[a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
+	<error line="58" column="124" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\api\Response.kt">
 	<error line="3" column="1" severity="info" message="The class or object  Response is empty." source="detekt.EmptyClassBlock" />
 </file>
@@ -242,17 +486,32 @@
 	<error line="5" column="5" severity="info" message="The class or object  Companion is empty." source="detekt.EmptyClassBlock" />
 	<error line="5" column="5" severity="info" message="The class or object  Companion is empty." source="detekt.EmptyClassBlock" />
 </file>
-<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\entities\NewsUI.kt">
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\common\SingleLiveEvent.kt">
+	<error line="24" column="35" severity="info" message="This empty block of code can be removed." source="detekt.EmptyIfBlock" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\entities\InquireUpdateUserDataUI.kt">
 	<error line="28" column="34" severity="info" message="This empty block of code can be removed." source="detekt.EmptySecondaryConstructor" />
 </file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\entities\NewsUI.kt">
+	<error line="34" column="34" severity="info" message="This empty block of code can be removed." source="detekt.EmptySecondaryConstructor" />
+</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\entities\NotificationUI.kt">
-	<error line="32" column="34" severity="info" message="This empty block of code can be removed." source="detekt.EmptySecondaryConstructor" />
+	<error line="48" column="46" severity="info" message="This empty block of code can be removed." source="detekt.EmptySecondaryConstructor" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\entities\ProviderUI.kt">
 	<error line="32" column="34" severity="info" message="This empty block of code can be removed." source="detekt.EmptySecondaryConstructor" />
 </file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\entities\RegisteryUI.kt">
+	<error line="36" column="34" severity="info" message="This empty block of code can be removed." source="detekt.EmptySecondaryConstructor" />
+</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\entities\SyndicateUI.kt">
 	<error line="42" column="51" severity="info" message="This empty block of code can be removed." source="detekt.EmptySecondaryConstructor" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\common\CustomSwitch.kt">
+	<error line="13" column="52" severity="info" message="This empty block of code can be removed." source="detekt.EmptySecondaryConstructor" />
+	<error line="15" column="80" severity="info" message="This empty block of code can be removed." source="detekt.EmptySecondaryConstructor" />
+	<error line="17" column="113" severity="info" message="This empty block of code can be removed." source="detekt.EmptySecondaryConstructor" />
+	<error line="40" column="22" severity="error" message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\medicalCategories\MedicalCategoryUI.kt">
 	<error line="14" column="31" severity="info" message="This empty block of code can be removed." source="detekt.EmptySecondaryConstructor" />
@@ -261,10 +520,25 @@
 	<error line="6" column="21" severity="info" message="An empty default constructor can be removed." source="detekt.EmptyDefaultConstructor" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\home\HomeViewModel.kt">
-	<error line="60" column="21" severity="error" message="Throwable is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
+	<error line="61" column="21" severity="error" message="Throwable is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
+	<error line="4" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="4" column="1" severity="warning" message="com.neqabty.domain.usecases.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\payment\PaymentFragment.kt">
+	<error line="182" column="18" severity="error" message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
+	<error line="18" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="44" column="72" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="180" column="14" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="18" column="1" severity="warning" message="com.efinance.mobilepaymentsdk.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
+	<error line="45" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="181" column="143" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="211" column="32" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\subsyndicates\SubSyndicatesViewModel.kt">
 	<error line="30" column="25" severity="error" message="Throwable is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case." source="detekt.TooGenericExceptionThrown" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\util\DeviceUtils.kt">
+	<error line="27" column="18" severity="error" message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\util\ImageUtils.kt">
 	<error line="54" column="22" severity="error" message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled." source="detekt.TooGenericExceptionCaught" />
@@ -278,11 +552,39 @@
 	<error line="3" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="3" column="1" severity="warning" message="android.arch.persistence.room.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 </file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\mappers\ClaimingValidationDataEntityMapper.kt">
+	<error line="10" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="9" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\mappers\InquireUpdateUserDataEntityMapper.kt">
+	<error line="10" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="9" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\mappers\MemberDataEntityMapper.kt">
+	<error line="27" column="43" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="28" column="122" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="29" column="175" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="28" column="13" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="29" column="13" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="30" column="13" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\mappers\NotificationsCountDataEntityMapper.kt">
+	<error line="10" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="9" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\mappers\SyndicateDataEntityMapper.kt">
 	<error line="29" column="44" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="30" column="128" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\GetNotificationDetails.kt">
+	<error line="19" column="6" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="21" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\GetUserLoggedIn.kt">
+	<error line="20" column="6" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="22" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\PaymentInquiry.kt">
 	<error line="19" column="6" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="21" column="5" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
@@ -295,9 +597,33 @@
 	<error line="14" column="127" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 	<error line="1" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\mappers\ClaimingValidationEntityUIMapper.kt">
+	<error line="10" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="9" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\mappers\InquireUpdateUserDataEntityUIMapper.kt">
+	<error line="10" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="9" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\mappers\MemberEntityUIMapper.kt">
+	<error line="27" column="114" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="28" column="167" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="28" column="13" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="29" column="13" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\mappers\NewsEntityUIMapper.kt">
+	<error line="6" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\mappers\SyndicateEntityUIMapper.kt">
 	<error line="29" column="44" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="30" column="130" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\addCompanion\AddCompanionFragment.kt">
+	<error line="26" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
+	<error line="77" column="56" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="79" column="9" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="69" column="81" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="69" column="85" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\chooseArea\ChooseAreaViewModel.kt">
 	<error line="13" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
@@ -307,6 +633,18 @@
 	<error line="3" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="3" column="1" severity="warning" message="com.neqabty.presentation.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 </file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\complaint\ComplaintFragment.kt">
+	<error line="83" column="31" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="84" column="235" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\home\HomeFragment.kt">
+	<error line="101" column="61" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="106" column="11" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="102" column="138" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="108" column="130" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="125" column="51" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+	<error line="167" column="39" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\home\TripsAdapter.kt">
 	<error line="46" column="10" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="47" column="136" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
@@ -315,16 +653,15 @@
 	<error line="47" column="127" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 	<error line="47" column="132" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
-<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\login\LoginFragment.kt">
-	<error line="57" column="26" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="58" column="124" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\inquiry\InquiryFragment.kt">
+	<error line="104" column="42" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="105" column="145" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="129" column="36" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\medicalCategories\MedicalCategoriesFragment.kt">
-	<error line="63" column="101" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="65" column="105" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="71" column="46" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="75" column="46" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="64" column="123" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 	<error line="66" column="133" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 	<error line="72" column="126" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 	<error line="76" column="132" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
@@ -337,7 +674,7 @@
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\medicalProfessions\MedicalProfessionsFragment.kt">
 	<error line="69" column="38" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="81" column="62" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="81" column="61" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="70" column="135" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 	<error line="82" column="129" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
@@ -345,11 +682,8 @@
 	<error line="12" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="12" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
-<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\medicalProviderDetails\MedicalProviderDetailsFragment.kt">
-	<error line="97" column="36" severity="warning" message="Unexpected indentation (9) (it should be 8)" source="detekt.Indentation" />
-</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\medicalProviders\MedicalProvidersFragment.kt">
-	<error line="87" column="62" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="87" column="61" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="92" column="11" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="88" column="149" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 	<error line="94" column="141" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
@@ -358,24 +692,45 @@
 	<error line="12" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="12" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\notificationDetails\NotificationDetailsFragment.kt">
+	<error line="69" column="61" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="74" column="11" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="85" column="38" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="70" column="164" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="75" column="156" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="86" column="416" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\notificationDetails\NotificationDetailsViewModel.kt">
 	<error line="12" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="12" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\notifications\NotificationsFragment.kt">
-	<error line="73" column="62" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="78" column="11" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="74" column="159" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
-	<error line="79" column="151" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="60" column="38" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="61" column="152" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\notifications\NotificationsListFragment.kt">
+	<error line="65" column="38" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="66" column="123" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\notifications\NotificationsTabAdapter.kt">
+	<error line="9" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="11" column="5" severity="warning" message="Function getItem has 3 return statements which exceeds the limit of 2." source="detekt.ReturnCount" />
+	<error line="9" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\search\SearchViewState.kt">
 	<error line="3" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="3" column="1" severity="warning" message="com.neqabty.presentation.entities.* is a wildcard import. Replace it with fully qualified imports." source="detekt.WildcardImport" />
 </file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\settings\SettingsFragment.kt">
+	<error line="58" column="36" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="81" column="32" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="59" column="137" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="82" column="145" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\signup\SignupStep1Fragment.kt">
+	<error line="20" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="68" column="68" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
 	<error line="86" column="47" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
-	<error line="20" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="56" column="126" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 	<error line="69" column="122" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
 	<error line="87" column="9" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
@@ -392,6 +747,20 @@
 	<error line="105" column="49" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 	<error line="120" column="51" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\updateData\UpdateDataViewModel.kt">
+	<error line="12" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="12" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\updateDataVerification\UpdateDataVerificationFragment.kt">
+	<error line="64" column="61" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="69" column="11" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="65" column="145" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+	<error line="70" column="137" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\updateDataVerification\UpdateDataVerificationViewModel.kt">
+	<error line="12" column="1" severity="warning" message="Exceeded max line length (120)" source="detekt.MaximumLineLength" />
+	<error line="12" column="1" severity="warning" message="Line detected that is longer than the defined maximum line length in the code style." source="detekt.MaxLineLength" />
+</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\util\Config.kt">
 	<error line="6" column="1" severity="warning" message="Wildcard import" source="detekt.NoWildcardImports" />
 	<error line="24" column="46" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
@@ -400,14 +769,15 @@
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\api\Request.kt">
 	<error line="7" column="5" severity="warning" message="Variable names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.VariableNaming" />
 </file>
-<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\data\api\requests\LoginRequest.kt">
-	<error line="13" column="5" severity="warning" message="Constructor parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.ConstructorParameterNaming" />
-</file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\domain\usecases\CheckFavorite.kt">
 	<error line="18" column="5" severity="warning" message="Function names should match the pattern: ^([a-z$][a-zA-Z$0-9]*)|(`.*`)$" source="detekt.FunctionNaming" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\common\CustomViewPager.kt">
 	<error line="1" column="1" severity="warning" message="The file name &apos;CustomViewPager.kt&apos; does not match the name of the single top-level declaration &apos;SwipeLockableViewPager&apos;." source="detekt.MatchingDeclarationName" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\intro\IntroPagerFragment.kt">
+	<error line="22" column="25" severity="warning" message="Function parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.FunctionParameterNaming" />
+	<error line="22" column="37" severity="warning" message="Function parameter names should match the pattern: [a-z][A-Za-z0-9]*" source="detekt.FunctionParameterNaming" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\signup\PagerModel.kt">
 	<error line="1" column="1" severity="warning" message="The file name &apos;PagerModel.kt&apos; does not match the name of the single top-level declaration &apos;Model&apos;." source="detekt.MatchingDeclarationName" />
@@ -425,17 +795,20 @@
 	<error line="27" column="81" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 	<error line="27" column="107" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
-<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\home\HomeFragment.kt">
-	<error line="122" column="51" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\engineeringRecordsInquiry\EngineeringRecordsInquiryFragment.kt">
+	<error line="99" column="36" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
-<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\inquiry\InquiryFragment.kt">
-	<error line="102" column="36" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\intro\IntroFragment.kt">
+	<error line="63" column="37" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\medicalCategories\MedicalCategoriesAdapter.kt">
 	<error line="47" column="80" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 	<error line="47" column="85" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 	<error line="47" column="112" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 	<error line="47" column="117" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\medicalProviderDetails\MedicalProviderDetailsFragment.kt">
+	<error line="126" column="55" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\news\NewsAdapter.kt">
 	<error line="47" column="69" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
@@ -449,5 +822,8 @@
 </file>
 <file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\trips\TripsAdapter.kt">
 	<error line="46" column="69" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
+</file>
+<file name="E:\Work\Android\Kotlin\NeQabty\app\src\main\java\com\neqabty\presentation\ui\updateData\UpdateDataFragment.kt">
+	<error line="94" column="36" severity="warning" message="This expression contains a magic number. Consider defining it to a well named constant." source="detekt.MagicNumber" />
 </file>
 </checkstyle>

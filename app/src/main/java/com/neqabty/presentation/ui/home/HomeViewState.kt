@@ -1,7 +1,6 @@
 package com.neqabty.presentation.ui.home
 
 import com.neqabty.presentation.entities.NewsUI
-import com.neqabty.presentation.entities.NotificationUI
 import com.neqabty.presentation.entities.TripUI
 
 data class HomeViewState(

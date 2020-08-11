@@ -1,6 +1,5 @@
 package com.neqabty.presentation.util
 
-import android.util.Log
 import com.firebase.jobdispatcher.JobParameters
 import com.firebase.jobdispatcher.JobService
 

@@ -1,5 +1,5 @@
 package com.neqabty.presentation.common
 
 object Constants {
-    var JWT: String =""
+    var JWT: String = ""
 }

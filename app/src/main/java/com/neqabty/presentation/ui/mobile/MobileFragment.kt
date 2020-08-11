@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -14,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.Window
-import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -42,9 +40,9 @@ class MobileFragment : BaseFragment(), Injectable {
     var type: Int? = 0
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -98,7 +96,6 @@ class MobileFragment : BaseFragment(), Injectable {
                 binding.ivHint.requestLayout()
                 binding.edMemberNumber.requestLayout()
             }
-
         })
 
         ivHint.setOnClickListener {

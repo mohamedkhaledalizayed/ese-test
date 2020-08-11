@@ -61,7 +61,7 @@ class ClaimingFragment : BaseFragment(), Injectable {
 //        adapter.addFragment(ClaimingStep4Fragment())
         binding.viewpager.adapter = adapter
         binding.viewpager.setSwipePagingEnabled(false)
-        binding.viewpager.offscreenPageLimit = 2;
+        binding.viewpager.offscreenPageLimit = 2
         binding.indicator.setViewPager(binding.viewpager)
 
         binding.viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {

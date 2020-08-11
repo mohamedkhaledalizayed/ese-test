@@ -50,9 +50,9 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
 
     var isAlertShown = false
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -156,9 +156,9 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         llMedical.setOnClickListener {
             navController().navigate(R.id.chooseAreaFragment)
         }
-        llInquiry.setOnClickListener {
-            navController().navigate(R.id.inquiryFragment)
-        }
+//        llInquiry.setOnClickListener {
+//            navController().navigate(R.id.inquiryFragment)
+//        }
         llCorona.setOnClickListener {
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(R.id.coronaFragment)

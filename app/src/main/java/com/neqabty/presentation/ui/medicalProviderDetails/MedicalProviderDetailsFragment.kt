@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -20,7 +19,6 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.ui.phones.PhonesFragment
 import com.neqabty.presentation.util.autoCleared
-import com.neqabty.presentation.util.call
 import com.neqabty.presentation.util.openMap
 import kotlinx.android.synthetic.main.medical_provider_details_fragment.*
 
@@ -91,7 +89,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
         initializeViews(state)
 //        activity?.invalidateOptionsMenu()
         renderFav()
-        binding.ivFav.setOnClickListener{
+        binding.ivFav.setOnClickListener {
             toggleFav()
         }
     }

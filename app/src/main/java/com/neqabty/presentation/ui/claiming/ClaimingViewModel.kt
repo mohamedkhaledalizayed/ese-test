@@ -5,7 +5,6 @@ import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.ClaimingValidationUI
-import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.mappers.*
 
 import java.io.File
@@ -133,7 +132,7 @@ class ClaimingViewModel @Inject constructor(
         doc5: File?
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, oldbenid , docsNumber, doc1, doc2, doc3, doc4, doc5)
+        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
                 .subscribe(
                         { viewState.value = viewState.value?.copy(isLoading = false) },
                         { errorState.value = it }

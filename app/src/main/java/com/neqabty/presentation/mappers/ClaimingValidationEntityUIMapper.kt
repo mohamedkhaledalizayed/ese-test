@@ -1,6 +1,5 @@
 package com.neqabty.presentation.mappers
 
-import com.neqabty.data.entities.ClaimingValidationData
 import com.neqabty.domain.common.Mapper
 import com.neqabty.domain.entities.ClaimingValidationEntity
 import com.neqabty.presentation.entities.ClaimingValidationUI

@@ -1,6 +1,5 @@
 package com.neqabty.domain.usecases
 
-import android.app.Person
 import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.common.Transformer
 import com.neqabty.domain.entities.PersonEntity
@@ -90,6 +89,6 @@ class BookTrip @Inject constructor(
         val doc2 = data?.get(BookTrip.PARAM_DOC2) as File?
         val doc3 = data?.get(BookTrip.PARAM_DOC3) as File?
         val doc4 = data?.get(BookTrip.PARAM_DOC4) as File?
-        return neqabtyRepository.bookTrip(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name,personsList, docsNumber, peoplesNumber, doc1, doc2, doc3, doc4)
+        return neqabtyRepository.bookTrip(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, personsList, docsNumber, peoplesNumber, doc1, doc2, doc3, doc4)
     }
 }

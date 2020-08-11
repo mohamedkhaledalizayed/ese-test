@@ -7,8 +7,8 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class GetNotificationDetails @Inject constructor(
-        transformer: Transformer<NotificationEntity>,
-        private val neqabtyRepository: NeqabtyRepository
+    transformer: Transformer<NotificationEntity>,
+    private val neqabtyRepository: NeqabtyRepository
 ) : UseCase<NotificationEntity>(transformer) {
 
     companion object {
@@ -16,7 +16,6 @@ class GetNotificationDetails @Inject constructor(
         private const val PARAM_TYPE = "param:type"
         private const val PARAM_USER_NUMBER = "param:userNumber"
         private const val PARAM_REQUEST_ID = "param:requestID"
-
     }
 
     fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity> {

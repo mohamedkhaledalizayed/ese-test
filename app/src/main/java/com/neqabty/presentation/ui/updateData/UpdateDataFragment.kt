@@ -31,9 +31,9 @@ class UpdateDataFragment : BaseFragment(), Injectable {
     lateinit var updateDataViewModel: UpdateDataViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,

@@ -68,7 +68,6 @@ class AppModule {
                         var newResponse = chain.proceed(newRequest)
                         return newResponse
                     }
-
                 })
                 .addInterceptor(interceptor) // TODO Interceptor
 //                .certificatePinner(certificatePinner)
@@ -117,8 +116,8 @@ class AppModule {
     @Provides
     @Singleton
     fun provideWeatherRepository(
-            api: WebService,
-            @Named(DI.inMemoryCache) cache: NeqabtyCache
+        api: WebService,
+        @Named(DI.inMemoryCache) cache: NeqabtyCache
     ): NeqabtyRepository {
 
         val cachedWeatherDataStore = CachedNeqabtyDataStore(cache)
@@ -290,13 +289,11 @@ class AppModule {
         return SendEngineeringRecordsRequest(ASyncTransformer(), neqabtyRepository)
     }
 
-
     @Singleton
     @Provides
     fun provideSendEngineeringRecordsInquiry(neqabtyRepository: NeqabtyRepository): SendEngineeringRecordsInquiry {
         return SendEngineeringRecordsInquiry(ASyncTransformer(), neqabtyRepository)
     }
-
 
     @Singleton
     @Provides
@@ -304,13 +301,11 @@ class AppModule {
         return GetUpdateUserDataInquiry(ASyncTransformer(), neqabtyRepository)
     }
 
-
     @Singleton
     @Provides
     fun provideGetUpdateUserDataDetails(neqabtyRepository: NeqabtyRepository): UpdateUserData {
         return UpdateUserData(ASyncTransformer(), neqabtyRepository)
     }
-
 
     @Singleton
     @Provides
@@ -318,13 +313,11 @@ class AppModule {
         return VerifyUpdateUserData(ASyncTransformer(), neqabtyRepository)
     }
 
-
     @Singleton
     @Provides
     fun provideValidateUserForClaiming(neqabtyRepository: NeqabtyRepository): ValidateUserForClaiming {
         return ValidateUserForClaiming(ASyncTransformer(), neqabtyRepository)
     }
-
 
     @Singleton
     @Provides
@@ -332,13 +325,11 @@ class AppModule {
         return GetAllServices(ASyncTransformer(), neqabtyRepository)
     }
 
-
     @Singleton
     @Provides
     fun providePaymentInquiry(neqabtyRepository: NeqabtyRepository): PaymentInquiry {
         return PaymentInquiry(ASyncTransformer(), neqabtyRepository)
     }
-
 
     @Singleton
     @Provides

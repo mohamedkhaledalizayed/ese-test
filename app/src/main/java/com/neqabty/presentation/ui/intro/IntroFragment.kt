@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModelProvider
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import com.santalu.autoviewpager.AutoViewPager
 import kotlinx.android.synthetic.main.intro_fragment.*
 import javax.inject.Inject
 
@@ -30,9 +28,9 @@ class IntroFragment : BaseFragment(), Injectable {
     var binding by autoCleared<IntroFragmentBinding>()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         setupToolbar(false)
         binding = DataBindingUtil.inflate(
@@ -69,7 +67,7 @@ class IntroFragment : BaseFragment(), Injectable {
 //            override fun onPageScrollStateChanged(state: Int) {}
 //            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 //            override fun onPageSelected(position: Int) {
-////                binding.tvTitle.setText(PagerModel.values()[position].titleResId)
+// //                binding.tvTitle.setText(PagerModel.values()[position].titleResId)
 //            }
 //        })
 
@@ -84,12 +82,11 @@ class IntroFragment : BaseFragment(), Injectable {
 //            else
 //                vpIntro.setCurrentItem(vpIntro.currentItem + 1, true)
 //        }
-
     }
 
 //region
 
-    fun navigateToNext(){
+    fun navigateToNext() {
         if (PreferencesHelper(requireContext()).mobile.isEmpty())
             navController().navigate(R.id.openLoginFragment)
         else

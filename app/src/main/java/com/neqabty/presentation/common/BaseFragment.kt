@@ -1,7 +1,5 @@
 package com.neqabty.presentation.common
 
-import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.CallSuper
@@ -11,9 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import com.neqabty.R
-
 
 open class BaseFragment : Fragment() {
     var builder: AlertDialog.Builder? = null
@@ -34,7 +30,12 @@ open class BaseFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = title
     }
 
-    fun showConnectionAlert(context: Context, retryCallback: (() -> Unit), cancelCallback: (() -> Unit), message: String? = getString(R.string.error_msg)) {
+    fun showConnectionAlert(
+        context: Context,
+        retryCallback: (() -> Unit),
+        cancelCallback: (() -> Unit),
+        message: String? = getString(R.string.error_msg)
+    ) {
         builder = AlertDialog.Builder(context)
         builder?.setTitle(getString(R.string.error))
         builder?.setMessage(message)
@@ -53,8 +54,11 @@ open class BaseFragment : Fragment() {
             dialog?.show()
     }
 
-
-    fun showAlert(message: String, title: String = getString(R.string.alert_title), okCallback: (() -> Unit) = {dialog?.dismiss()}) {
+    fun showAlert(
+        message: String,
+        title: String = getString(R.string.alert_title),
+        okCallback: (() -> Unit) = { dialog?.dismiss() }
+    ) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)
         builder.setCancelable(false)

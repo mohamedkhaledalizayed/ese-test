@@ -4,10 +4,10 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class PersonEntity(
-        var name: String = "",
-        var relationship: String = "",
-        var birthDate: String = "",
-        var ageOnTrip: Int = 0
+    var name: String = "",
+    var relationship: String = "",
+    var birthDate: String = "",
+    var ageOnTrip: Int = 0
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),

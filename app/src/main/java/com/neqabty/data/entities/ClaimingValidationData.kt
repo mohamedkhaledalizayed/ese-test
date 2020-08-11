@@ -15,4 +15,3 @@ data class ClaimingValidationData(
     @field:SerializedName("oldbenid")
     var oldbenid: String?
 ) : Response()
-

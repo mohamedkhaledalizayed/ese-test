@@ -1,12 +1,8 @@
 package com.neqabty.presentation.mappers
 
-import android.text.format.DateFormat
 import com.neqabty.domain.common.Mapper
 import com.neqabty.domain.entities.NewsEntity
 import com.neqabty.presentation.entities.NewsUI
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton

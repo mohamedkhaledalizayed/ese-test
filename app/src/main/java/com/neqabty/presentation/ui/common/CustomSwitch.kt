@@ -8,7 +8,6 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.widget.Switch
 
-
 class CustomSwitch : Switch {
 
     constructor(context: Context) : super(context) {}
@@ -41,7 +40,6 @@ class CustomSwitch : Switch {
             } catch (e: NullPointerException) {
                 e.printStackTrace()
             }
-
         }
     }
 }

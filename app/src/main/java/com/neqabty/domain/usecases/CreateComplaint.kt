@@ -6,8 +6,8 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class CreateComplaint @Inject constructor(
-        transformer: Transformer<Unit>,
-        private val neqabtyRepository: NeqabtyRepository
+    transformer: Transformer<Unit>,
+    private val neqabtyRepository: NeqabtyRepository
 ) : UseCase<Unit>(transformer) {
 
     companion object {

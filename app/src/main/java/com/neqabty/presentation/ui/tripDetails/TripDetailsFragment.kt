@@ -40,9 +40,9 @@ class TripDetailsFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,

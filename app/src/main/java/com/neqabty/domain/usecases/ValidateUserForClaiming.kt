@@ -3,7 +3,6 @@ package com.neqabty.domain.usecases
 import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.common.Transformer
 import com.neqabty.domain.entities.ClaimingValidationEntity
-import com.neqabty.domain.entities.MemberEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 

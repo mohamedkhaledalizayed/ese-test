@@ -4,42 +4,42 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class TripUI(
-        var id: Int = 0,
-        var img: String?,
-        var title: String?,
-        var typeId: String?,
-        var dateFrom: String?,
-        var dateTo: String?,
-        var mainSyndicateId: String?,
-        var subSyndicateId: String?,
-        var governId: String?,
-        var desc: String?,
-        var notes: String?,
-        var price: String?,
-        var imgs: List<String>? = null,
-        var regiments: List<TripRegiment>? = null,
-        var place: TripPlace? = null
+    var id: Int = 0,
+    var img: String?,
+    var title: String?,
+    var typeId: String?,
+    var dateFrom: String?,
+    var dateTo: String?,
+    var mainSyndicateId: String?,
+    var subSyndicateId: String?,
+    var governId: String?,
+    var desc: String?,
+    var notes: String?,
+    var price: String?,
+    var imgs: List<String>? = null,
+    var regiments: List<TripRegiment>? = null,
+    var place: TripPlace? = null
 ) : Parcelable {
 
     data class TripRegiment(
-            var regimentId: Int = 0,
-            var tripId: Int?,
-            var dateFrom: String?,
-            var dateTo: String?,
-            var hotelOnePerson: Int?,
-            var hotelTwoPerson: Int?,
-            var hotelThreePerson: Int?,
-            var viewPrice: Int?,
-            var sidePrice: Int?,
-            var price: Int?,
-            var oneRoom: Int?,
-            var twoRooms: Int?,
-            var studio: Int?,
-            var tripType: String?,
-            var createdBy: String?,
-            var updatedBy: String?,
-            var createdAt: String?,
-            var updatedAt: String?
+        var regimentId: Int = 0,
+        var tripId: Int?,
+        var dateFrom: String?,
+        var dateTo: String?,
+        var hotelOnePerson: Int?,
+        var hotelTwoPerson: Int?,
+        var hotelThreePerson: Int?,
+        var viewPrice: Int?,
+        var sidePrice: Int?,
+        var price: Int?,
+        var oneRoom: Int?,
+        var twoRooms: Int?,
+        var studio: Int?,
+        var tripType: String?,
+        var createdBy: String?,
+        var updatedBy: String?,
+        var createdAt: String?,
+        var updatedAt: String?
     ) {
         override fun toString(): String {
             return dateFrom ?: "" + dateTo ?: ""
@@ -47,15 +47,15 @@ data class TripUI(
     }
 
     data class TripPlace(
-            var placeId: Int = 0,
-            var details: String?,
-            var name: String?
+        var placeId: Int = 0,
+        var details: String?,
+        var name: String?
     )
 
     data class TripRoom(
-            var roomId: Int = 0,
-            var name: String?,
-            var price: Int?
+        var roomId: Int = 0,
+        var name: String?,
+        var price: Int?
     ) {
         override fun toString(): String {
             return name ?: ""

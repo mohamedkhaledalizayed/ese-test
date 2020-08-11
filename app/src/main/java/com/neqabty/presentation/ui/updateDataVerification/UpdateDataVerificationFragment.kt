@@ -36,9 +36,9 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
 
     lateinit var updateDataVerificationViewModel: UpdateDataVerificationViewModel
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -99,7 +99,6 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
         var dialog = builder?.create()
         dialog?.show()
     }
-
 
 // endregion
 

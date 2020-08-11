@@ -2,15 +2,14 @@ package com.neqabty.domain.usecases
 
 import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.common.Transformer
-import com.neqabty.domain.entities.InquireUpdateUserDataEntity
 import com.neqabty.domain.entities.UpdateUserDataEntity
 import io.reactivex.Observable
 import java.io.File
 import javax.inject.Inject
 
 class UpdateUserData @Inject constructor(
-        transformer: Transformer<UpdateUserDataEntity>,
-        private val neqabtyRepository: NeqabtyRepository
+    transformer: Transformer<UpdateUserDataEntity>,
+    private val neqabtyRepository: NeqabtyRepository
 ) : UseCase<UpdateUserDataEntity>(transformer) {
 
     companion object {
@@ -25,7 +24,14 @@ class UpdateUserData @Inject constructor(
     }
 
     fun updateUserData(
-            userNumber: String, name: String, nationalID: String, mobile: String, docsNumber: Int, doc1: File?, doc2: File?, doc3: File?
+        userNumber: String,
+        name: String,
+        nationalID: String,
+        mobile: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
     ): Observable<UpdateUserDataEntity> {
         val data = HashMap<String, Any>()
         data[PARAM_USER_NUMBER] = userNumber

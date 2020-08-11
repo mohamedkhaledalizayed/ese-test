@@ -7,8 +7,8 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class GetUpdateUserDataInquiry @Inject constructor(
-        transformer: Transformer<InquireUpdateUserDataEntity>,
-        private val neqabtyRepository: NeqabtyRepository
+    transformer: Transformer<InquireUpdateUserDataEntity>,
+    private val neqabtyRepository: NeqabtyRepository
 ) : UseCase<InquireUpdateUserDataEntity>(transformer) {
 
     companion object {

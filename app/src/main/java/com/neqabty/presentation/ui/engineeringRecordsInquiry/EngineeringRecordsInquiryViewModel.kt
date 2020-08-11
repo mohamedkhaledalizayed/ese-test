@@ -7,7 +7,9 @@ import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.RegisteryEntityUIMapper
 import javax.inject.Inject
 
-class EngineeringRecordsInquiryViewModel @Inject constructor(val sendEngineeringRecordsInquiry: SendEngineeringRecordsInquiry) : BaseViewModel() {
+class EngineeringRecordsInquiryViewModel @Inject constructor(
+    val sendEngineeringRecordsInquiry: SendEngineeringRecordsInquiry
+) : BaseViewModel() {
 
     private val registeryEntityUIMapper = RegisteryEntityUIMapper()
 
@@ -19,7 +21,7 @@ class EngineeringRecordsInquiryViewModel @Inject constructor(val sendEngineering
     }
 
     fun sendEngineeringRecordsInquiry(
-            userNumber: String
+        userNumber: String
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
 
@@ -34,10 +36,9 @@ class EngineeringRecordsInquiryViewModel @Inject constructor(val sendEngineering
                             viewState.value = viewState.value?.copy(memberItem = it)
                             onDataReceived()
                         },
-                        { errorState.value = it  }
+                        { errorState.value = it }
                 ))
     }
-
 
     private fun onDataReceived() {
         if (viewState.value?.memberItem != null)

@@ -90,7 +90,7 @@ class AboutFragment : BaseFragment(), Injectable {
 
     fun initializeViews(syndicate: SyndicateUI) {
         tvAddress.setOnClickListener {
-            syndicate.address?.let {  tvAddress.openMap(it, requireContext()) }
+            syndicate.address?.let { tvAddress.openMap(it, requireContext()) }
         }
         tvPhone.setOnClickListener {
             syndicate.phone?.let { tvPhone.call(it, requireContext()) }

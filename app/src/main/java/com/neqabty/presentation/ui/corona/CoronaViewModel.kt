@@ -10,7 +10,10 @@ import com.neqabty.presentation.mappers.SyndicateEntityUIMapper
 import java.io.File
 import javax.inject.Inject
 
-class CoronaViewModel @Inject constructor(val createCoronaRequest: CreateCoronaRequest, private val getAllSyndicates: GetAllSyndicates) : BaseViewModel() {
+class CoronaViewModel @Inject constructor(
+    val createCoronaRequest: CreateCoronaRequest,
+    private val getAllSyndicates: GetAllSyndicates
+) : BaseViewModel() {
 
     private val syndicateEntityUIMapper = SyndicateEntityUIMapper()
 
@@ -21,7 +24,6 @@ class CoronaViewModel @Inject constructor(val createCoronaRequest: CreateCoronaR
         viewState.value = CoronaViewState(isLoading = true)
         getSyndicates()
     }
-
 
     fun getSyndicates() {
         viewState.value?.syndicates?.let {
@@ -49,23 +51,25 @@ class CoronaViewModel @Inject constructor(val createCoronaRequest: CreateCoronaR
         viewState.value = newViewState
     }
 
-    fun createRequest(userNumber: String,
-                      phone: String,
-                      syndicateID: Int,
-                      name: String,
-                      type: String,
-                      job: String,
-                      work: String,
-                      treatmentDestination: String,
-                      treatmentDestinationAddress: String,
-                      family: Int,
-                      injury: String,
-                      docsNumber: Int,
-                      doc1: File?,
-                      doc2: File?,
-                      doc3: File?,
-                      doc4: File?,
-                      doc5: File?) {
+    fun createRequest(
+        userNumber: String,
+        phone: String,
+        syndicateID: Int,
+        name: String,
+        type: String,
+        job: String,
+        work: String,
+        treatmentDestination: String,
+        treatmentDestinationAddress: String,
+        family: Int,
+        injury: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
+    ) {
         viewState.value = viewState.value?.copy(isLoading = true)
         addDisposable(createCoronaRequest.createCoronaRequest(userNumber, phone, syndicateID, name, type, job, work, treatmentDestination, treatmentDestinationAddress, family, injury, docsNumber, doc1, doc2, doc3, doc4, doc5)
                 .subscribe(

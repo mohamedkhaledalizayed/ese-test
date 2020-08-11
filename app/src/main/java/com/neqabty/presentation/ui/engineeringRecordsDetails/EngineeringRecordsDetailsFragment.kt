@@ -16,7 +16,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,14 +23,11 @@ import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.EngineeringRecordsDetailsFragmentBinding
-import com.neqabty.databinding.UpdateDataDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.entities.RegisteryUI
-import com.neqabty.presentation.ui.common.PhotosAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.engineering_records_details_fragment.*
@@ -102,12 +98,11 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         engineeringRecordsDetailsViewModel.sendEngineeringRecordsInquiry(PreferencesHelper(requireContext()).user)
     }
 
-
     private fun handleViewState(state: EngineeringRecordsDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading && state.memberItem != null && !state.isSuccessful) {
             state.memberItem?.registryDataID = PreferencesHelper(requireContext()).user
-                when(state.memberItem?.statusCode) {
+                when (state.memberItem?.statusCode) {
                     0 -> {
                         binding.svContent.visibility = View.VISIBLE
                         memberItem = state.memberItem!!
@@ -126,17 +121,16 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
     fun initializeViews() {
 
 //        memberItem?.let {
-////            var tempMember = it.copy()
-////            tempMember.engineerName = getString(R.string.name_title) + " " + it.engineerName
-////            tempMember.expirationDate = getString(R.string.expiration_date_title) + " " + it.billDate
-////            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
+// //            var tempMember = it.copy()
+// //            tempMember.engineerName = getString(R.string.name_title) + " " + it.engineerName
+// //            tempMember.expirationDate = getString(R.string.expiration_date_title) + " " + it.billDate
+// //            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
 //            binding.memberItem = it
 //        }
 
-
-        photosList.add(0,PhotoUI(null,null))
-        photosList.add(1,PhotoUI(null,null))
-        photosList.add(2,PhotoUI(null,null))
+        photosList.add(0, PhotoUI(null, null))
+        photosList.add(1, PhotoUI(null, null))
+        photosList.add(2, PhotoUI(null, null))
 
         binding.ibAddPhoto1.setOnClickListener {
             selectedIndex = 0
@@ -170,8 +164,8 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
 
         bSubmit.setOnClickListener {
             if (photosList[0].name != null && photosList[1].name != null && photosList[2].name != null) {
-                engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!! , PreferencesHelper(requireContext()).mobile, memberItem.registryTypeID!! , "5",memberItem.registryDataID!!,
-                        memberItem.lastRenewYear!!,memberItem.regDataStatusID!!.toInt(), if(memberItem.isOwner) 1 else 0  , photosList.size , getPhoto(0), getPhoto(1), getPhoto(2))
+                engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!!, PreferencesHelper(requireContext()).mobile, memberItem.registryTypeID!!, "5", memberItem.registryDataID!!,
+                        memberItem.lastRenewYear!!, memberItem.regDataStatusID!!.toInt(), if (memberItem.isOwner) 1 else 0, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2))
             } else
                 showPickPhotoAlert()
         }
@@ -183,7 +177,6 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
 //        }
 //        this.adapter = adapter
 //        binding.rvPhotos.adapter = adapter
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -272,7 +265,6 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
             e.printStackTrace()
         }
 
-
         addToPhotos(PhotoUI(Environment.getExternalStorageDirectory().toString(), name))
         updateIcons()
     }
@@ -321,8 +313,6 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         dialog.show()
     }
 
-
-
     fun showSuccessAlert() {
         builder = AlertDialog.Builder(requireContext())
         builder?.setTitle(getString(R.string.thanks))
@@ -336,8 +326,8 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         dialog?.show()
     }
 
-    private fun updateIcons(){
-        when(selectedIndex){
+    private fun updateIcons() {
+        when (selectedIndex) {
             0 -> ibAddPhoto_1.setImageResource(R.drawable.ic_done)
             1 -> ibAddPhoto_2.setImageResource(R.drawable.ic_done)
             2 -> ibAddPhoto_3.setImageResource(R.drawable.ic_done)
@@ -357,7 +347,7 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         dialog.show()
     }
 
-    private fun addToPhotos(photoUI: PhotoUI){
+    private fun addToPhotos(photoUI: PhotoUI) {
         photosList[selectedIndex] = photoUI
     }
 // endregion

@@ -7,8 +7,8 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class PaymentInquiry @Inject constructor(
-        transformer: Transformer<MemberEntity>,
-        private val neqabtyRepository: NeqabtyRepository
+    transformer: Transformer<MemberEntity>,
+    private val neqabtyRepository: NeqabtyRepository
 ) : UseCase<MemberEntity>(transformer) {
 
     companion object {

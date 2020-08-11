@@ -19,7 +19,7 @@ class MemberEntityUIMapper @Inject constructor() : Mapper<MemberEntity, MemberUI
         )
         from.payments?.let {
             var payments: List<MemberUI.PaymentItem> = it.map { paymentItem ->
-                return@map MemberUI.PaymentItem(paymentItem.quantity, paymentItem.totalPrice, paymentItem.name)}
+                return@map MemberUI.PaymentItem(paymentItem.quantity, paymentItem.totalPrice, paymentItem.name) }
             memberUI.payments = payments
         }
 

@@ -95,7 +95,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 //        }
 
         if (state.member != null && !isValid) {
-            when(state.member?.code) {
+            when (state.member?.code) {
                 0 -> {
                     val prefs = PreferencesHelper(requireContext())
                     llSuperProgressbar.visibility = View.VISIBLE
@@ -105,7 +105,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                     state.member = null
                 }
                 else -> {
-                    if(state.member?.message != null) showMemberValidationAlert(state.member?.message ?: getString(R.string.user_not_allowed))
+                    if (state.member?.message != null) showMemberValidationAlert(state.member?.message ?: getString(R.string.user_not_allowed))
                     state.member?.message = null
                 }
             }
@@ -208,7 +208,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             navController().popBackStack()
             var bundle = Bundle()
             bundle.putInt("type", 1)
-            navController().navigate(R.id.homeFragment , bundle)
+            navController().navigate(R.id.homeFragment, bundle)
         }
 
         val dialog: AlertDialog = builder.create()

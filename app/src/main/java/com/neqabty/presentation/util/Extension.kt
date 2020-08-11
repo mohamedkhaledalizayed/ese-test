@@ -5,8 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.TextView
 
-
-fun TextView.openMap(address: String, context: Context){
+fun TextView.openMap(address: String, context: Context) {
     val uri = "geo:0,0?q=$address"
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
     context.startActivity(intent)

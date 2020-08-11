@@ -1,11 +1,7 @@
 package com.neqabty.presentation.ui.login
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.location.LocationManager
-import com.neqabty.domain.entities.UserEntity
 import com.neqabty.domain.usecases.GetVisitorLoggedIn
-import com.neqabty.domain.usecases.SignupUser
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.UserUI
@@ -25,11 +21,13 @@ class LoginViewModel @Inject constructor(val getVisitorLoggedIn: GetVisitorLogge
         viewState.value = LoginViewState()
     }
 
-    fun login(mobile: String,
-              token: String,
-              prefs: PreferencesHelper) {
+    fun login(
+        mobile: String,
+        token: String,
+        prefs: PreferencesHelper
+    ) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(getVisitorLoggedIn.login(mobile,token)
+        addDisposable(getVisitorLoggedIn.login(mobile, token)
                 .map {
                     it.let {
                         userEntityToUIMapper.mapFrom(it)
@@ -51,5 +49,4 @@ class LoginViewModel @Inject constructor(val getVisitorLoggedIn: GetVisitorLogge
 
         viewState.value = newViewState
     }
-
 }

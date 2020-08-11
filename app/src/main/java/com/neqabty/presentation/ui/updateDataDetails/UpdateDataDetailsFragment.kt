@@ -28,7 +28,6 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.InquireUpdateUserDataUI
 import com.neqabty.presentation.entities.PhotoUI
-import com.neqabty.presentation.ui.common.PhotosAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.update_data_details_fragment.*
@@ -58,9 +57,9 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 
     var selectedIndex = 0
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -108,10 +107,10 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
 //        userDataInquire?.let {
-////            var tempMember = it.copy()
-////            tempMember.engineerName = getString(R.string.name_title) + " " + it.engineerName
-////            tempMember.expirationDate = getString(R.string.expiration_date_title) + " " + it.billDate
-////            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
+// //            var tempMember = it.copy()
+// //            tempMember.engineerName = getString(R.string.name_title) + " " + it.engineerName
+// //            tempMember.expirationDate = getString(R.string.expiration_date_title) + " " + it.billDate
+// //            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
 //            binding.userData = it
 //        }
         photosList.add(0, PhotoUI(null, null))
@@ -306,7 +305,6 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
         }
     }
 
-
     private fun addToPhotos(photoUI: PhotoUI) {
         photosList[selectedIndex] = photoUI
     }
@@ -323,7 +321,6 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
         var dialog = builder?.create()
         dialog?.show()
     }
-
 
 // endregion
 

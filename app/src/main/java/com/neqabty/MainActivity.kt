@@ -152,18 +152,18 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.medical_fragment -> {
                     navController.navigate(R.id.chooseAreaFragment)
                 }
-                R.id.inquiry_fragment -> {
-                    navController.navigate(R.id.inquiryFragment)
-                }
-                R.id.engineering_records_fragment -> {
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
-                    else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", 3)
-                        navController.navigate(R.id.mobileFragment, bundle)
-                    }
-                }
+//                R.id.inquiry_fragment -> {
+//                    navController.navigate(R.id.inquiryFragment)
+//                }
+//                R.id.engineering_records_fragment -> {
+//                    if (PreferencesHelper(this).isRegistered)
+//                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
+//                    else {
+//                        val bundle: Bundle = Bundle()
+//                        bundle.putInt("type", 3)
+//                        navController.navigate(R.id.mobileFragment, bundle)
+//                    }
+//                }
                 R.id.update_data_fragment -> {
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.updateDataVerificationFragment)
@@ -297,7 +297,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 PreferencesHelper(this).isRegistered // && PreferencesHelper(this).notificationsCount != 0
 //        logoutItem?.isVisible = currentFragment is HasHomeOptionsMenu &&
 //                PreferencesHelper(this).isRegistered
-        favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu //|| currentFragment is HasFavoriteOptionsMenu
+        favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu // || currentFragment is HasFavoriteOptionsMenu
 //        searchItem?.isVisible = currentFragment is HasMedicalOptionsMenu//TODO
 
 //        if (currentFragment is HasFavoriteOptionsMenu)
@@ -413,7 +413,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             if (requestCode == 10000) {
                 var currentFragment =
                         (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
-                currentFragment.onActivityResult(requestCode,resultCode,data)
+                currentFragment.onActivityResult(requestCode, resultCode, data)
 //                paymentGateway.handle3DSecureAuthenticationResult(requestCode, resultCode, data)
             }
         }

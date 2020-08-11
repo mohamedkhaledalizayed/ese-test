@@ -35,6 +35,6 @@ class GetUserLoggedIn @Inject constructor(
         val subSyndicateId = data?.get(GetUserLoggedIn.PARAM_SUB_SYNDICATE) as Int
         val token = data?.get(GetUserLoggedIn.PARAM_TOKEN) as String
         val userNumber = data?.get(GetUserLoggedIn.PARAM_USER_NUMBER) as String
-        return neqabtyRepository.loginUser(mobile, userNumber ,token)
+        return neqabtyRepository.loginUser(mobile, userNumber, token)
     }
 }

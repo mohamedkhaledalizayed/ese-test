@@ -7,8 +7,8 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class GetNotifications @Inject constructor(
-        transformer: Transformer<List<NotificationEntity>>,
-        private val neqabtyRepository: NeqabtyRepository
+    transformer: Transformer<List<NotificationEntity>>,
+    private val neqabtyRepository: NeqabtyRepository
 ) : UseCase<List<NotificationEntity>>(transformer) {
 
     companion object {

@@ -97,6 +97,6 @@ class SendMedicalRequest @Inject constructor(
         val doc3 = data?.get(PARAM_DOC3) as File?
         val doc4 = data?.get(PARAM_DOC4) as File?
         val doc5 = data?.get(PARAM_DOC5) as File?
-        return neqabtyRepository.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name , oldbenid,docsNumber, doc1, doc2, doc3, doc4, doc5)
+        return neqabtyRepository.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 }

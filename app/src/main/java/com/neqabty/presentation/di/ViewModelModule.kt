@@ -156,16 +156,19 @@ abstract class ViewModelModule {
     @ViewModelKey(UpdateDataVerificationViewModel::class)
     abstract fun bindUpdateDataVerificationViewModel(updateDataVerificationViewModel: UpdateDataVerificationViewModel): ViewModel
 
-
     @Binds
     @IntoMap
     @ViewModelKey(EngineeringRecordsInquiryViewModel::class)
-    abstract fun bindEngineeringRecordsInquiryViewModel(engineeringRecordsInquiryViewModel: EngineeringRecordsInquiryViewModel): ViewModel
+    abstract fun bindEngineeringRecordsInquiryViewModel(
+        engineeringRecordsInquiryViewModel: EngineeringRecordsInquiryViewModel
+    ): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(EngineeringRecordsDetailsViewModel::class)
-    abstract fun bindEngineeringRecordsDetailsViewModel(engineeringRecordsDetailsViewModel: EngineeringRecordsDetailsViewModel): ViewModel
+    abstract fun bindEngineeringRecordsDetailsViewModel(
+        engineeringRecordsDetailsViewModel: EngineeringRecordsDetailsViewModel
+    ): ViewModel
 
     @Binds
     @IntoMap

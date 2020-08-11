@@ -18,7 +18,6 @@ class IntroPagerFragment : Fragment() {
 
     var binding by autoCleared<IntroPagerFragmentBinding>()
 
-
     companion object {
         fun newInstance(Image: Int, Text: Int) = IntroPagerFragment().apply {
             arguments = Bundle().apply {
@@ -53,5 +52,4 @@ class IntroPagerFragment : Fragment() {
         binding.ivImage.setImageResource(imageview)
         binding.tvPageText.setText(textview)
     }
-
 }

@@ -3,16 +3,13 @@ package com.neqabty.presentation.ui.login
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
-import android.location.LocationManager
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -20,7 +17,6 @@ import com.neqabty.R
 import com.neqabty.databinding.LoginFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -112,8 +108,8 @@ class LoginFragment : BaseFragment(), Injectable {
 //        }
     }
 
-    fun login(){
-        if(isDataValid(edMobile.text.toString())) {
+    fun login() {
+        if (isDataValid(edMobile.text.toString())) {
             if (PreferencesHelper(requireContext()).token.isNotBlank())
                 loginViewModel.login(edMobile.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
             else {

@@ -2,7 +2,6 @@ package com.neqabty.domain.usecases
 
 import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.common.Transformer
-import com.neqabty.domain.entities.AreaEntity
 import com.neqabty.domain.entities.ServiceEntity
 import io.reactivex.Observable
 import javax.inject.Inject

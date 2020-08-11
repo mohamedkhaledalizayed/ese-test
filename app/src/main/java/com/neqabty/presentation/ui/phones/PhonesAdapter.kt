@@ -6,7 +6,6 @@ import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.PhoneItemBinding
@@ -47,7 +46,7 @@ class PhonesAdapter(
     }
 
     override fun onBindViewHolder(holder: DataBoundViewHolder<PhoneItemBinding>, position: Int) {
-        if (position == itemCount-1){
+        if (position == itemCount - 1) {
             holder.binding.view.visibility = View.GONE
         }
         holder.binding.tvPhone.setText(getItem(position))

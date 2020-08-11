@@ -77,9 +77,9 @@ class TripReservationFragment : BaseFragment(), Injectable {
     var reservationRequested = false
     private var isValid = false
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -159,7 +159,6 @@ class TripReservationFragment : BaseFragment(), Injectable {
                 grantCameraPermission()
         }
 
-
         val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
             photosList.remove(photo)
             photosAdapter.notifyDataSetChanged()
@@ -177,7 +176,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
             if (photosList.size > 0) {
                 reservationRequested = true
                 val prefs = PreferencesHelper(requireContext())
-                tripReservationViewModel.bookTrip(prefs.mainSyndicate, PreferencesHelper(requireContext()).user, prefs.mobile, tripItem.regiments?.get(0)?.tripId!!, regimentID, spRegiments.selectedItem.toString(), spRooms.selectedItem.toString(),spChildren.selectedItem.toString().toInt() , spChild1.selectedItem?.toString()+","+spChild2.selectedItem?.toString()+","+spChild3.selectedItem?.toString(), PreferencesHelper(requireContext()).name,companionsList.toList(), photosList.size, companionsList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3))
+                tripReservationViewModel.bookTrip(prefs.mainSyndicate, PreferencesHelper(requireContext()).user, prefs.mobile, tripItem.regiments?.get(0)?.tripId!!, regimentID, spRegiments.selectedItem.toString(), spRooms.selectedItem.toString(), spChildren.selectedItem.toString().toInt(), spChild1.selectedItem?.toString() + "," + spChild2.selectedItem?.toString() + "," + spChild3.selectedItem?.toString(), PreferencesHelper(requireContext()).name, companionsList.toList(), photosList.size, companionsList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3))
             } else
                 showPickPhotoAlert()
         }
@@ -329,7 +328,6 @@ class TripReservationFragment : BaseFragment(), Injectable {
         }
     }
 
-
     private fun openAddCompanionFragment() {
         val fragmentManager = this@TripReservationFragment.fragmentManager
         val addCompanionFragment = AddCompanionFragment()
@@ -475,7 +473,6 @@ class TripReservationFragment : BaseFragment(), Injectable {
         var dialog = builder?.create()
         dialog?.show()
     }
-
 
     private fun showMemberValidationAlert(message: String) {
         val builder = AlertDialog.Builder(requireContext())

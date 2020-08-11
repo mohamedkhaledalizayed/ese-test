@@ -10,7 +10,10 @@ import java.io.File
 
 import javax.inject.Inject
 
-class EngineeringRecordsDetailsViewModel @Inject constructor(val sendEngineeringRecordsInquiry: SendEngineeringRecordsInquiry, val sendEngineeringRecordsRequest: SendEngineeringRecordsRequest) : BaseViewModel() {
+class EngineeringRecordsDetailsViewModel @Inject constructor(
+    val sendEngineeringRecordsInquiry: SendEngineeringRecordsInquiry,
+    val sendEngineeringRecordsRequest: SendEngineeringRecordsRequest
+) : BaseViewModel() {
     private val registeryEntityUIMapper = RegisteryEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
@@ -21,32 +24,32 @@ class EngineeringRecordsDetailsViewModel @Inject constructor(val sendEngineering
     }
 
     fun requestEngineeringRecords(
-            name: String,
-            phone: String,
-            typeId: String,
-            mainSyndicate: String,
-            userNumber: String,
-            lastRenewYear: String,
-            statusID: Int,
-            isOwner: Int,
-            docsNumber: Int,
-            doc1: File?,
-            doc2: File?,
-            doc3: File?
+        name: String,
+        phone: String,
+        typeId: String,
+        mainSyndicate: String,
+        userNumber: String,
+        lastRenewYear: String,
+        statusID: Int,
+        isOwner: Int,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
 
-        addDisposable(sendEngineeringRecordsRequest.requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1,doc2,doc3)
+        addDisposable(sendEngineeringRecordsRequest.requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1, doc2, doc3)
                 .subscribe(
                         {
                             viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = true)
                         },
-                        { requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1,doc2,doc3) }
+                        { requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1, doc2, doc3) }
                 ))
     }
 
     fun sendEngineeringRecordsInquiry(
-            userNumber: String
+        userNumber: String
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
 
@@ -61,10 +64,9 @@ class EngineeringRecordsDetailsViewModel @Inject constructor(val sendEngineering
                             viewState.value = viewState.value?.copy(memberItem = it)
                             onDataReceived()
                         },
-                        { errorState.value = it  }
+                        { errorState.value = it }
                 ))
     }
-
 
     private fun onDataReceived() {
         if (viewState.value?.memberItem != null)

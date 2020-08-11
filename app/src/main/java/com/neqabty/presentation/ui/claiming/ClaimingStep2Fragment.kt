@@ -47,9 +47,9 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
     var isProvidersRequested = false
     lateinit var pager: ViewPager
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -64,7 +64,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser){
+        if (isVisibleToUser) {
             initializeViews()
         }
     }
@@ -76,7 +76,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(ClaimingViewModel::class.java)
 
-        claimingViewModel.viewState.value = claimingViewModel.viewState.value?.copy(providerTypes = null , providers = null)
+        claimingViewModel.viewState.value = claimingViewModel.viewState.value?.copy(providerTypes = null, providers = null)
 
         claimingViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
@@ -158,7 +158,6 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
             }
         }
-
     }
 
     fun getProviders(providerTypeID: Int) {

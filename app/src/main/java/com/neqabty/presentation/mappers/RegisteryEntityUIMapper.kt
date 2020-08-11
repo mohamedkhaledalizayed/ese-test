@@ -1,7 +1,5 @@
 package com.neqabty.presentation.mappers
 
-import android.content.Context
-import com.neqabty.R
 import com.neqabty.domain.common.Mapper
 import com.neqabty.domain.entities.RegisteryEntity
 import com.neqabty.presentation.entities.RegisteryUI
