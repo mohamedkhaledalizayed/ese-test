@@ -14,21 +14,94 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/ivHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/home_header_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivHeaderLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/logo_home"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTopTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_horizontal_large"
+            android:paddingTop="?attr/actionBarSize"
+            android:text="@string/wheel_news"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvdummy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <github.hellocsl.cursorwheel.CursorWheelLayout
+            android:id="@+id/wheel"
+            android:layout_width="match_parent"
+            android:layout_height="306dip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvdummy"
+            app:wheelBackgroundColor="@color/bg_wheel"
+            app:wheelCursorColor="@android:color/transparent"
+            app:wheelCursorHeight="1dp"
+            app:layout_constraintVertical_bias=".45"
+            app:wheelItemRadio="0.15"
+            app:wheelPaddingRadio="0.0"
+            android:padding="0dp"
+            app:wheelSelectedAngle="270.0" />
+
+        <TextView
+            android:id="@+id/tvBottomTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wheel_news"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/wheel"
+            app:layout_constraintVertical_bias=".8" />
+
+
+        <com.neqabty.presentation.ui.common.SwipeLockableViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/wheel"
+            app:layout_constraintTop_toBottomOf="@id/tvTopTitle"
+            android:layout_marginBottom="@dimen/margin_vertical_normal"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/ivHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@mipmap/header_bg" />
 
             <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -48,23 +121,6 @@
                     </HorizontalScrollView>
 
                     <TextView
-                        android:id="@+id/tvTrips"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_horizontal_small"
-                        android:text="@string/trips_title"
-                        android:textSize="@dimen/text_size_large"
-                        android:visibility="gone" />
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rvTrips"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                        tools:listitem="@layout/news_item" />
-
-                    <TextView
                         android:id="@+id/tvNews"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -78,12 +134,6 @@
                         layout="@layout/corona_card"
                         android:visibility="gone" />
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rvNews"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                        tools:listitem="@layout/news_item" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </LinearLayout>

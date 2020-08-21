@@ -10,6 +10,9 @@ import com.neqabty.presentation.ui.engineeringRecordsDetails.EngineeringRecordsD
 import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryFragment
 import com.neqabty.presentation.ui.favorites.FavoritesFragment
 import com.neqabty.presentation.ui.home.HomeFragment
+import com.neqabty.presentation.ui.home.WheelNewsFragment
+import com.neqabty.presentation.ui.home.WheelPaymentsFragment
+import com.neqabty.presentation.ui.home.WheelTripsFragment
 import com.neqabty.presentation.ui.inquiry.InquiryFragment
 import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsFragment
 import com.neqabty.presentation.ui.intro.IntroFragment
@@ -171,6 +174,15 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeHomeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWheelNewsFragment(): WheelNewsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWheelTripsFragment(): WheelTripsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWheelPaymentsFragment(): WheelPaymentsFragment
 
     @ContributesAndroidInjector
     abstract fun contributeComplaintFragment(): ComplaintFragment

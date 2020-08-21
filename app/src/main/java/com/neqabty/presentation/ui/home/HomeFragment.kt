@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.BuildConfig
@@ -22,16 +23,17 @@ import com.neqabty.databinding.HomeFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.ui.news.NewsAdapter
+import com.neqabty.presentation.ui.claiming.ClaimingStep4Fragment
+import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
+import com.neqabty.presentation.ui.complaint.ComplaintFragment
 import com.neqabty.presentation.util.HasHomeOptionsMenu
 import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.home_horizontal_cards.*
-
 import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
+
 
 class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeOptionsMenu {
     @Inject
@@ -40,8 +42,6 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<HomeFragmentBinding>()
-    private var newsAdapter by autoCleared<NewsAdapter>()
-    private var tripsAdapter by autoCleared<TripsAdapter>()
 
     lateinit var homeViewModel: HomeViewModel
 
@@ -50,9 +50,9 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
 
     var isAlertShown = false
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -77,22 +77,6 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(HomeViewModel::class.java)
 
-        val newsAdapter = NewsAdapter(dataBindingComponent, appExecutors) { newsItem ->
-            navController().navigate(
-                    HomeFragmentDirections.newsDetails(newsItem)
-            )
-        }
-        this.newsAdapter = newsAdapter
-        binding.rvNews.adapter = newsAdapter
-
-        val tripsAdapter = TripsAdapter(dataBindingComponent, appExecutors) { tripsItem ->
-            navController().navigate(
-                    HomeFragmentDirections.tripDetails(tripsItem)
-            )
-        }
-        this.tripsAdapter = tripsAdapter
-        binding.rvTrips.adapter = tripsAdapter
-
         homeViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
@@ -115,15 +99,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
 
     private fun handleViewState(state: HomeViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        state.news?.let {
-            binding.tvNews.visibility = View.VISIBLE
-            llCorona.visibility = View.VISIBLE
-            newsAdapter.submitList(it)
-        }
-        state.trips?.let {
-            binding.tvTrips.visibility = View.VISIBLE
-            tripsAdapter.submitList(it.subList(0, 5))
-        }
+
         state.appVersion?.let {
             if (BuildConfig.VERSION_CODE < it) {
                 if (!isAlertShown)
@@ -134,40 +110,74 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
             PreferencesHelper(requireContext()).notificationsCount = it
             activity?.invalidateOptionsMenu()
         }
+
+        val sectionsList = mutableListOf<String>(getString(R.string.wheel_news), getString(R.string.wheel_trips), getString(R.string.wheel_payment), getString(R.string.wheel_employment),
+                getString(R.string.wheel_delivery), getString(R.string.wheel_training), getString(R.string.wheel_customer_service)
+                , getString(R.string.wheel_complaints), getString(R.string.wheel_syndicate_services),
+                getString(R.string.wheel_medical))
+        val iconsList = mutableListOf<Int>(R.drawable.ic_wheel_news, R.drawable.ic_wheel_trip, R.drawable.ic_wheel_payments, R.drawable.ic_wheel_record_renewal, R.drawable.ic_wheel_guide,
+                R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_medical_approval)
+
+        val wheelAdapter = WheelAdapter(context!!, sectionsList, iconsList, 0)
+        wheel.setAdapter(wheelAdapter)
+        wheel.setOnMenuSelectedListener { parent, view, pos ->
+            if ((wheel.adapter as WheelAdapter).selectedItemPosition != pos) {
+                wheelAdapter.selectedItemPosition = pos
+                wheel.setAdapter(wheelAdapter)
+                tvTopTitle.setText(sectionsList[pos])
+                tvBottomTitle.setText(sectionsList[pos])
+//                Toast.makeText(context, "position:$pos", Toast.LENGTH_SHORT).show()
+                viewpager.setCurrentItem(pos, true)
+            }
+        }
+
+        wheel.setOnMenuItemClickListener { view, pos ->
+//            Toast.makeText(context, "Top Menu click position:$pos", Toast.LENGTH_SHORT).show()
+        }
+
+        val adapter = CustomFragmentPagerAdapter(childFragmentManager)
+        adapter.addFragment(WheelNewsFragment())
+        adapter.addFragment(WheelTripsFragment())
+        adapter.addFragment(WheelPaymentsFragment())
+        adapter.addFragment(ClaimingStep4Fragment())
+        binding.viewpager.adapter = adapter
+        binding.viewpager.setSwipePagingEnabled(false)
+        binding.viewpager.offscreenPageLimit = 2
+//        binding.indicator.setViewPager(binding.viewpager)
     }
 
     fun initializeViews() {
         (activity as AppCompatActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-        llClaiming.setOnClickListener {
-            if (PreferencesHelper(requireContext()).isRegistered)
-                navController().navigate(R.id.claimingFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", 1)
-                navController().navigate(R.id.mobileFragment, bundle)
-            }
-        }
-        llNews.setOnClickListener {
-            navController().navigate(R.id.newsFragment)
-        }
-        llTrips.setOnClickListener {
-            navController().navigate(R.id.tripsFragment)
-        }
-        llMedical.setOnClickListener {
-            navController().navigate(R.id.chooseAreaFragment)
-        }
-//        llInquiry.setOnClickListener {
-//            navController().navigate(R.id.inquiryFragment)
+//        llClaiming.setOnClickListener {
+//            if (PreferencesHelper(requireContext()).isRegistered)
+//                navController().navigate(R.id.claimingFragment)
+//            else {
+//                val bundle: Bundle = Bundle()
+//                bundle.putInt("type", 1)
+//                navController().navigate(R.id.mobileFragment, bundle)
+//            }
 //        }
-        llCorona.setOnClickListener {
-            if (PreferencesHelper(requireContext()).isRegistered)
-                navController().navigate(R.id.coronaFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", 6)
-                navController().navigate(R.id.mobileFragment, bundle)
-            }
-        }
+//        llNews.setOnClickListener {
+//            navController().navigate(R.id.newsFragment)
+//        }
+//        llTrips.setOnClickListener {
+//            navController().navigate(R.id.tripsFragment)
+//        }
+//        llMedical.setOnClickListener {
+//            navController().navigate(R.id.chooseAreaFragment)
+//        }
+////        llInquiry.setOnClickListener {
+////            navController().navigate(R.id.inquiryFragment)
+////        }
+//        llCorona.setOnClickListener {
+//            if (PreferencesHelper(requireContext()).isRegistered)
+//                navController().navigate(R.id.coronaFragment)
+//            else {
+//                val bundle: Bundle = Bundle()
+//                bundle.putInt("type", 6)
+//                navController().navigate(R.id.mobileFragment, bundle)
+//            }
+//        }
     }
 
     override fun onBackPressed() {

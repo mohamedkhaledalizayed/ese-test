@@ -209,7 +209,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.neqabty.presentation.ui.home.HomeFragment"
-        android:label="@string/home_title"
+        android:label=" "
         tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/tripDetails"

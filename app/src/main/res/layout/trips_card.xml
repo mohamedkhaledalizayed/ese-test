@@ -12,7 +12,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clHolder"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_horizontal_small"
         android:elevation="@dimen/elevation_level_one">
@@ -46,7 +46,6 @@
                     android:id="@+id/clDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
                     android:padding="@dimen/margin_horizontal_small"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
@@ -61,7 +60,7 @@
                         android:maxLines="1"
                         android:text="@{trip.price}"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="@dimen/text_size_large"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +75,7 @@
                         android:maxLines="2"
                         android:text="@{trip.title}"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_small"
+                        android:textSize="@dimen/text_size_large"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/tvPrice"
                         app:layout_constraintStart_toStartOf="parent" />

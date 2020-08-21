@@ -167,6 +167,22 @@
     <string name="notifications_title">الأشعارات</string>
     <string name="corona_title">بيانات المهندس</string>
 
+    <string name="wheel_news">أخبارنا</string>
+    <string name="wheel_trips">الرحلات</string>
+    <string name="wheel_payment">المدفوعات</string>
+    <string name="wheel_employment">مزاولة المهنة</string>
+    <string name="wheel_delivery">التوصيل المنزلي</string>
+    <string name="wheel_training">تدريب وتوظيف</string>
+    <string name="wheel_customer_service">خدمة العملاء</string>
+    <string name="wheel_complaints">شكاوى ومقترحات</string>
+    <string name="wheel_syndicate_services">خدمات نقابية</string>
+    <string name="wheel_medical">الرعاية الصحية</string>
+
+
+    <string name="wheel_seemore">شاهد المزيد</string>
+    <string name="wheel_enter_service">الدخول على الخدمة</string>
+    <string name="wheel_payments_content">يمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيد يمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيديمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيديمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيد</string>
+
     <string name="alert_title">تنبيه</string>
     <string name="no_connection_msg">من فضلك تحقق من إتصالك بالإنترنت</string>
     <string name="no_connection_cancel">إلغاء</string>

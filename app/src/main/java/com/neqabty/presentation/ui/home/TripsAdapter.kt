@@ -44,7 +44,7 @@ class TripsAdapter(
                 callback?.invoke(it)
             }
         }
-        binding.clHolder.layoutParams = ConstraintLayout.LayoutParams(DisplayMetrics.width * 40 / 100, DisplayMetrics.width * 40 / 100)
+        binding.clHolder.layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, DisplayMetrics.height * 15 / 100)
         return binding
     }
 

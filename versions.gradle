@@ -36,6 +36,7 @@ versions.pager = "1.0.1"
 versions.indicator = "0.2.0"
 versions.kotlinx = "0.2.0"
 versions.mastercard = "1.1.1"
+versions.wheel = "1.1.0"
 
 def deps = [:]
 
@@ -126,7 +127,7 @@ ext.deps = deps
 
 def build_versions = [:]
 build_versions.min_sdk = 19
-build_versions.target_sdk = 28
+build_versions.target_sdk = 29
 build_versions.build_tools = "28.0.2"
 ext.build_versions = build_versions
 
@@ -168,6 +169,9 @@ deps.kotlinx = kotlinx
 
 def mastercard = "com.mastercard.gateway:gateway-android:$versions.mastercard"
 deps.mastercard = mastercard
+
+def wheel = "github.hellocsl:CursorWheelLayout:$versions.wheel"
+deps.wheel = wheel
 
 ext.deps = deps
 
