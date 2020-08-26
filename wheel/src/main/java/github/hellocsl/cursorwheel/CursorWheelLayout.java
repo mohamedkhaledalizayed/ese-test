@@ -26,16 +26,16 @@ import android.view.WindowManager;
  * The base cycle wheel menu layout with cursor
  *
  * @author chensuilun
- * @attr  R.styleable.CursorWheelLayout_wheelSelectedAngle
- * @attr  R.styleable.CursorWheelLayout_wheelPaddingRadio
- * @attr  R.styleable.CursorWheelLayout_wheelCenterRadio
- * @attr  R.styleable.CursorWheelLayout_wheelItemRadio
- * @attr  R.styleable.CursorWheelLayout_wheelFlingValue
- * @attr  R.styleable.CursorWheelLayout_wheelCursorColor
- * @attr  R.styleable.CursorWheelLayout_wheelCursorHeight
- * @attr  R.styleable.CursorWheelLayout_wheelItemRotateMode
- * @attr  R.styleable.CursorWheelLayout_wheelGuideLineWidth
- * @attr  R.styleable.CursorWheelLayout_wheelGuideLineColor
+ * @attr R.styleable.CursorWheelLayout_wheelSelectedAngle
+ * @attr R.styleable.CursorWheelLayout_wheelPaddingRadio
+ * @attr R.styleable.CursorWheelLayout_wheelCenterRadio
+ * @attr R.styleable.CursorWheelLayout_wheelItemRadio
+ * @attr R.styleable.CursorWheelLayout_wheelFlingValue
+ * @attr R.styleable.CursorWheelLayout_wheelCursorColor
+ * @attr R.styleable.CursorWheelLayout_wheelCursorHeight
+ * @attr R.styleable.CursorWheelLayout_wheelItemRotateMode
+ * @attr R.styleable.CursorWheelLayout_wheelGuideLineWidth
+ * @attr R.styleable.CursorWheelLayout_wheelGuideLineColor
  */
 public class CursorWheelLayout extends ViewGroup {
     private static final String TAG = "CircleMenuLayout";
@@ -43,6 +43,7 @@ public class CursorWheelLayout extends ViewGroup {
      * size of menu item relative to parent
      */
     private static final float RADIO_DEFAULT_CHILD_DIMENSION = 1 / 4f;
+    private static final float RADIO_DEFAULT_WHEEL_WIDTH_PERCENTAGE = 1.0f;
 
     /**
      * size of center item relative to parent
@@ -61,7 +62,7 @@ public class CursorWheelLayout extends ViewGroup {
 
     /**
      * Angle a touch can wander before we think the user is flinging
-     */
+     *///TODO
     private static final int FLINGABLE_VALUE = 300;
 
     /**
@@ -144,8 +145,10 @@ public class CursorWheelLayout extends ViewGroup {
      *
      */
     private boolean mIsDraging;
+    private int mBounce = 0;
 
     /**
+     *
      */
     private float mLastX;
     private float mLastY;
@@ -220,6 +223,7 @@ public class CursorWheelLayout extends ViewGroup {
     private
     @ColorInt
     int mCursorColor;
+    private float mWheelWidthPercentage;
     private float mMenuRadioDimension;
     private float mCenterRadioDimension;
     private float mPaddingRadio;
@@ -275,6 +279,7 @@ public class CursorWheelLayout extends ViewGroup {
             mWheelBgColor = ta.getColor(R.styleable.CursorWheelLayout_wheelBackgroundColor, DEFAULT_WHEEL_BG_COLOR);
             mCursorColor = ta.getColor(R.styleable.CursorWheelLayout_wheelCursorColor, DEFAULT_CURSOR_COLOR);
             mTriangleHeight = ta.getDimensionPixelOffset(R.styleable.CursorWheelLayout_wheelCursorHeight, mTriangleHeight);
+            mWheelWidthPercentage = ta.getFloat(R.styleable.CursorWheelLayout_wheelWidthPercentage, RADIO_DEFAULT_WHEEL_WIDTH_PERCENTAGE);
             mMenuRadioDimension = ta.getFloat(R.styleable.CursorWheelLayout_wheelItemRadio, RADIO_DEFAULT_CHILD_DIMENSION);
             mCenterRadioDimension = ta.getFloat(R.styleable.CursorWheelLayout_wheelCenterRadio, RADIO_DEFAULT_CENTER_DIMENSION);
             mPaddingRadio = ta.getFloat(R.styleable.CursorWheelLayout_wheelPaddingRadio, RADIO_PADDING_LAYOUT);
@@ -316,14 +321,14 @@ public class CursorWheelLayout extends ViewGroup {
         int heightSpec = resolveSizeAndState(desiredHeight, heightMeasureSpec);
         setMeasuredDimension(widthSpec, heightSpec);
 
-        mRootDiameter = Math.max(getMeasuredWidth(), getMeasuredHeight());
-//        mRootDiameter = Math.max((int) (getMeasuredWidth()*1.2), getMeasuredHeight());
+//        mRootDiameter = Math.max(getMeasuredWidth(), getMeasuredHeight());
+        mRootDiameter = Math.max((int) (getMeasuredWidth() * mWheelWidthPercentage), (int) (getMeasuredHeight() * mWheelWidthPercentage));
 
         final int count = getChildCount();
         // menu item 's size
         int childSize = (int) (mRootDiameter * mMenuRadioDimension);
-        // menu item 's MeasureSpec
-        int childMode = MeasureSpec.EXACTLY;
+        // menu item 's MeasureSpec//TODO
+        int childMode = MeasureSpec.AT_MOST;
 
         for (int i = 0; i < count; i++) {
             final View child = getChildAt(i);
@@ -463,7 +468,7 @@ public class CursorWheelLayout extends ViewGroup {
                     * cWidth);
 //            top = top/2;
 
-            child.layout(left, top, left + cWidth, top + cWidth);
+            child.layout((int) (left - (getMeasuredWidth() * (mWheelWidthPercentage - 1) / 2)), top, (int) (left - (getMeasuredWidth() * (mWheelWidthPercentage - 1) / 2)) + cWidth, top + cWidth);
             float angel;
             switch (mItemRotateMode) {
                 case ITEM_ROTATE_MODE_NONE:
@@ -527,7 +532,7 @@ public class CursorWheelLayout extends ViewGroup {
         }
 //        Path mWheelCustomBgPath = mWheelBgPath;
         int cWidth = (int) (mRootDiameter * mMenuRadioDimension);
-        mWheelBgPath.addCircle(0, 0, radial-cWidth/2, Path.Direction.CW);
+        mWheelBgPath.addCircle((float) (0 - (getMeasuredWidth() * (mWheelWidthPercentage - 1) / 2)), 0, radial - cWidth / 2, Path.Direction.CW);
         canvas.drawPath(mWheelBgPath, mWheelPaint);
         canvas.restore();
     }
@@ -818,7 +823,7 @@ public class CursorWheelLayout extends ViewGroup {
                 Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
-        return Math.min(outMetrics.widthPixels, outMetrics.heightPixels);
+        return (int) Math.min(outMetrics.widthPixels * mWheelWidthPercentage, outMetrics.heightPixels * mWheelWidthPercentage);
     }
 
 
@@ -997,9 +1002,14 @@ public class CursorWheelLayout extends ViewGroup {
             } else {
                 mStartAngle %= 360;
                 if (Math.abs((int) (mEndAngle - mInitStarAngle)) == 0 || (mBiggerBefore && (mInitStarAngle < mEndAngle)) || (!mBiggerBefore && (mInitStarAngle > mEndAngle))) {
-                    mNeedSlotIntoCenter = false;
-                    stop(true);
-                    return;
+                    if (mBounce == 0)
+                        mBounce++;
+                    else {
+                        mNeedSlotIntoCenter = false;
+                        stop(true);
+                        mBounce = 0;
+                        return;
+                    }
                 }
                 mIsFling = true;
                 double change = mSweepAngle / 5;

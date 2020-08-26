@@ -81,7 +81,7 @@ android {
         dev {
             dimension "mode"
             minSdkVersion 25
-            resConfigs "en", "hdpi"
+            resConfigs "en", "xhdpi"
         }
 
         prod {

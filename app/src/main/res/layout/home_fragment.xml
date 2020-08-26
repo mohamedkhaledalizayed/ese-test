@@ -64,8 +64,9 @@
             app:wheelBackgroundColor="@color/bg_wheel"
             app:wheelCursorColor="@android:color/transparent"
             app:wheelCursorHeight="1dp"
-            app:layout_constraintVertical_bias=".45"
+            app:layout_constraintVertical_bias=".57"
             app:wheelItemRadio="0.15"
+            app:wheelWidthPercentage="1.1"
             app:wheelPaddingRadio="0.0"
             android:padding="0dp"
             app:wheelSelectedAngle="270.0" />
@@ -92,51 +93,5 @@
             app:layout_constraintBottom_toTopOf="@id/wheel"
             app:layout_constraintTop_toBottomOf="@id/tvTopTitle"
             android:layout_marginBottom="@dimen/margin_vertical_normal"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <android.support.v4.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <HorizontalScrollView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="none">
-
-                        <include layout="@layout/home_horizontal_cards" />
-                    </HorizontalScrollView>
-
-                    <TextView
-                        android:id="@+id/tvNews"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_horizontal_small"
-                        android:text="@string/news_title"
-                        android:textSize="@dimen/text_size_large"
-                        android:visibility="gone" />
-
-                    <include
-                        android:id="@+id/llCorona"
-                        layout="@layout/corona_card"
-                        android:visibility="gone" />
-
-                </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
-        </LinearLayout>
-
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -25,7 +26,6 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.claiming.ClaimingStep4Fragment
 import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
-import com.neqabty.presentation.ui.complaint.ComplaintFragment
 import com.neqabty.presentation.util.HasHomeOptionsMenu
 import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.PreferencesHelper
@@ -126,14 +126,20 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
                 wheel.setAdapter(wheelAdapter)
                 tvTopTitle.setText(sectionsList[pos])
                 tvBottomTitle.setText(sectionsList[pos])
-//                Toast.makeText(context, "position:$pos", Toast.LENGTH_SHORT).show()
                 viewpager.setCurrentItem(pos, true)
+                viewpager.animateViewPager(viewpager, 3, 200);
             }
         }
 
-        wheel.setOnMenuItemClickListener { view, pos ->
-//            Toast.makeText(context, "Top Menu click position:$pos", Toast.LENGTH_SHORT).show()
+        wheel.setOnDragListener { view, dragEvent ->
+            Toast.makeText(context, "position:", Toast.LENGTH_SHORT).show()
+            viewpager.onTouchEvent(MotionEvent.obtain(10, 10, MotionEvent.ACTION_DOWN, dragEvent.x, dragEvent.y, MotionEvent.ACTION_DOWN))
         }
+//        wheel.setOnTouchListener { view, motionEvent ->
+//            Toast.makeText(context, "position:", Toast.LENGTH_SHORT).show()
+//
+////            viewpager.onTouchEvent(motionEvent)
+//        }
 
         val adapter = CustomFragmentPagerAdapter(childFragmentManager)
         adapter.addFragment(WheelNewsFragment())

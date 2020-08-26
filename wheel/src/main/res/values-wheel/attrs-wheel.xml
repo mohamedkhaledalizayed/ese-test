@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="CursorWheelLayout">
         <attr name="wheelSelectedAngle" format="float"></attr>
+        <attr name="wheelWidthPercentage" format="float"></attr>
         <attr name="wheelPaddingRadio" format="float"></attr>
         <attr name="wheelCenterRadio" format="float"></attr>
         <attr name="wheelItemRadio" format="float"></attr>
