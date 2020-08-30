@@ -3,6 +3,7 @@ package com.neqabty.presentation.ui.inquiryDetails
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -23,6 +24,8 @@ import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
+import me.cowpay.PaymentMethodsActivity
+import me.cowpay.util.CowpayConstantKeys
 import javax.inject.Inject
 
 class InquiryDetailsFragment : BaseFragment(), Injectable {
@@ -50,9 +53,9 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     lateinit var paymentCreationResponse: PaymentCreationResponse
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -134,6 +137,12 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                 state.member?.let {
                     memberItem.paymentCreationRequest = it.paymentCreationRequest
                     memberItem.paymentCreationRequest?.senderRequestNumber = it.paymentCreationRequest?.senderRequestNumber!!
+                    var intent = Intent(context, PaymentMethodsActivity::class.java)
+                    intent.putExtra(CowpayConstantKeys().MerchantCode, "GHIu9nk25D5z")
+                    intent.putExtra(
+                            CowpayConstantKeys().MerchantHashKey,
+                            "MerchantHashKey"
+                    )
                     initializeViews()
                 }
             }
@@ -249,8 +258,8 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     // region callback
     class MobilePaymentCreationCallback(
-        private val successCallback: ((response: PaymentCreationResponse) -> Unit),
-        private val failureCallback: (() -> Unit)
+            private val successCallback: ((response: PaymentCreationResponse) -> Unit),
+            private val failureCallback: (() -> Unit)
     ) : PaymentCreationCallback {
         override fun onSuccess(response: PaymentCreationResponse) {
             successCallback.invoke(response)
