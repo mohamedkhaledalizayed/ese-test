@@ -152,18 +152,18 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.medical_fragment -> {
                     navController.navigate(R.id.chooseAreaFragment)
                 }
-//                R.id.inquiry_fragment -> {
-//                    navController.navigate(R.id.inquiryFragment)
-//                }
-//                R.id.engineering_records_fragment -> {
-//                    if (PreferencesHelper(this).isRegistered)
-//                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
-//                    else {
-//                        val bundle: Bundle = Bundle()
-//                        bundle.putInt("type", 3)
-//                        navController.navigate(R.id.mobileFragment, bundle)
-//                    }
-//                }
+                R.id.inquiry_fragment -> {
+                    navController.navigate(R.id.inquiryFragment)
+                }
+                R.id.engineering_records_fragment -> {
+                    if (PreferencesHelper(this).isRegistered)
+                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
+                    else {
+                        val bundle: Bundle = Bundle()
+                        bundle.putInt("type", 3)
+                        navController.navigate(R.id.mobileFragment, bundle)
+                    }
+                }
                 R.id.update_data_fragment -> {
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.updateDataVerificationFragment)

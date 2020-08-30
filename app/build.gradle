@@ -80,7 +80,7 @@ android {
     productFlavors {
         dev {
             dimension "mode"
-            minSdkVersion 25
+            minSdkVersion 24
             resConfigs "en", "xhdpi"
         }
 
