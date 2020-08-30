@@ -45,7 +45,7 @@ data class NotificationUI(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readString().toBoolean()) {
+            parcel.readString()!!.toBoolean()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

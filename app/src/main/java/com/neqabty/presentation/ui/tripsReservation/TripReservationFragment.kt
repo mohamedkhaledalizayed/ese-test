@@ -183,7 +183,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
     }
 
     fun renderRegiments() {
-        binding.spRegiments.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, regimentsList)
+        binding.spRegiments.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, regimentsList!!)
         binding.spRegiments.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -196,7 +196,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
 
     fun renderRooms() {
         prepareRooms()
-        binding.spRooms.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, roomsList)
+        binding.spRooms.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, roomsList!!)
         binding.spRooms.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -246,7 +246,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
 
     fun renderChildrenNumber() {
         prepareChildrenNumber()
-        binding.spChildren.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, childrenList)
+        binding.spChildren.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, childrenList!!)
         binding.spChildren.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -295,9 +295,9 @@ class TripReservationFragment : BaseFragment(), Injectable {
             }
         }
 
-        binding.spChild1.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList)
-        binding.spChild2.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList)
-        binding.spChild3.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList)
+        binding.spChild1.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList!!)
+        binding.spChild2.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList!!)
+        binding.spChild3.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList!!)
 //        binding.spChild1.setSelection(0)
     }
 
@@ -393,7 +393,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
     }
 
     private fun onCaptureImageResult(data: Intent) {
-        var thumbnail: Bitmap = data.getExtras().get("data") as Bitmap
+        var thumbnail: Bitmap = data.getExtras()!!.get("data") as Bitmap
         var bytes: ByteArrayOutputStream = ByteArrayOutputStream()
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
 

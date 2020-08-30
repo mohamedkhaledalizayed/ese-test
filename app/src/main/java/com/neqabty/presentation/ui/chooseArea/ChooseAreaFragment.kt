@@ -108,7 +108,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
 
     //region
     fun renderGoverns() {
-        binding.spGovern.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, governsResultList)
+        binding.spGovern.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, governsResultList!!)
         binding.spGovern.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -126,7 +126,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
             it.govId == governID
         }
 
-        binding.spArea.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, filteredAreasList)
+        binding.spArea.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, filteredAreasList!!)
         binding.spArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {

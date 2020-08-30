@@ -184,8 +184,8 @@ class MobileFragment : BaseFragment(), Injectable {
 
     private fun showCardDialog() {
         val dialog = Dialog(requireContext())
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE)
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.getWindow()!!.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.getWindow()!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(layoutInflater.inflate(R.layout.image_item, null), ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
         dialog.setCanceledOnTouchOutside(true)
         dialog.show()

@@ -101,7 +101,7 @@ class ComplaintFragment : BaseFragment(), Injectable {
 
     //region
     fun renderTypes() {
-        binding.spTypes.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, complaintsTypesList)
+        binding.spTypes.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, complaintsTypesList!!)
         binding.spTypes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {

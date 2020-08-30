@@ -112,7 +112,7 @@ class InquiryFragment : BaseFragment(), Injectable {
     }
 
     fun renderServices() {
-        binding.spService.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, servicesResultList)
+        binding.spService.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, servicesResultList!!)
         binding.spService.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {

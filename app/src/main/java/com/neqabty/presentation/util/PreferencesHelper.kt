@@ -33,22 +33,22 @@ class PreferencesHelper(context: Context) {
     var subSyndicate = preferences.getInt(SUB_SYNDICATE, 0)
         set(value) = preferences.edit().putInt(SUB_SYNDICATE, value).apply()
 
-    var mobile = preferences.getString(MOBILE, "")
+    var mobile = preferences.getString(MOBILE, "")!!
         set(value) = preferences.edit().putString(MOBILE, value).apply()
 
-    var jwt = preferences.getString(JWT, "")
+    var jwt = preferences.getString(JWT, "")!!
         set(value) = preferences.edit().putString(JWT, value).apply()
 
-    var token = preferences.getString(TOKEN, "")
+    var token = preferences.getString(TOKEN, "")!!
         set(value) = preferences.edit().putString(TOKEN, value).apply()
 
     var isRegistered = preferences.getBoolean(IS_REGISTERED, false)
         set(value) = preferences.edit().putBoolean(IS_REGISTERED, value).apply()
 
-    var user = preferences.getString(USER, "")
+    var user = preferences.getString(USER, "")!!
         set(value) = preferences.edit().putString(USER, value).apply()
 
-    var name = preferences.getString(NAME, "")
+    var name = preferences.getString(NAME, "")!!
         set(value) = preferences.edit().putString(NAME, value).apply()
 
     var notificationsCount = preferences.getInt(NOTIFICATION_COUNT, 0)

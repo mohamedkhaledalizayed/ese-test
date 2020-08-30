@@ -38,7 +38,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun sendRegistrationToServer(token: String?) {
-        PreferencesHelper(applicationContext).token = token
+        PreferencesHelper(applicationContext).token = token!!
         PreferencesHelper(applicationContext).isRegistered = false
     }
 

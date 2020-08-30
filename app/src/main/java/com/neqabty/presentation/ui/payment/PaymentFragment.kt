@@ -93,7 +93,7 @@ class PaymentFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        binding.spMonth.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, monthsList)
+        binding.spMonth.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, monthsList!!)
         binding.spMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -101,7 +101,7 @@ class PaymentFragment : BaseFragment(), Injectable {
             }
         }
 
-        binding.spYear.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, yearsList)
+        binding.spYear.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, yearsList!!)
         binding.spYear.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {

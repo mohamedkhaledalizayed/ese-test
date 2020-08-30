@@ -226,7 +226,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 .addOnCompleteListener(OnCompleteListener { task ->
                     if (!task.isSuccessful)
                         return@OnCompleteListener
-                    val token = task.result?.token
+                    val token = task.result?.token!!
 
                     if (PreferencesHelper(this).mobile.isNotBlank() && !token.equals(
                                     PreferencesHelper(

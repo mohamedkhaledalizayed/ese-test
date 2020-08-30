@@ -84,7 +84,7 @@ class SignupStep1Fragment : BaseFragment(), Injectable {
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-        val datePickerDialog = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+        val datePickerDialog = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             val month = monthOfYear + 1
             binding.edAge.setText("$dayOfMonth/$month/$year")
         }, year, month, day)

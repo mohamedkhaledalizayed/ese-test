@@ -29,7 +29,7 @@ data class RegisteryUI(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readString().toBoolean(),
+            parcel.readString()!!.toBoolean(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),

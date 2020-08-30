@@ -171,7 +171,7 @@ class CoronaFragment : BaseFragment(), Injectable {
     }
 
     fun renderSyndicates() {
-        binding.spSyndicates.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, coronaViewModel.viewState.value!!.syndicates)
+        binding.spSyndicates.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, coronaViewModel.viewState.value!!.syndicates!!)
         binding.spSyndicates.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -222,7 +222,7 @@ class CoronaFragment : BaseFragment(), Injectable {
     }
 
     private fun onCaptureImageResult(data: Intent) {
-        var thumbnail: Bitmap = data.getExtras().get("data") as Bitmap
+        var thumbnail: Bitmap = data.getExtras()!!.get("data") as Bitmap
         var bytes: ByteArrayOutputStream = ByteArrayOutputStream()
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
 

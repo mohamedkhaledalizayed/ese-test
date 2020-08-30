@@ -47,7 +47,7 @@ class PhonesFragment : DialogFragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
 
         val bundle = this.arguments
-        bundle?.let { phoneNumbers = it.getString("phones") }
+        bundle?.let { phoneNumbers = it.getString("phones")!! }
         val phoneNumbers = phoneNumbers.replace(" ", "").replace("\r\n", "-")
                 .replace('\n', '-').replace('\r', '-').split("-")
 

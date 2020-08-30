@@ -61,7 +61,7 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
                 .get(SubSyndicatesViewModel::class.java)
 
         val bundle = this.arguments
-        bundle?.let { syndicate = it.getParcelable("syndicate") }
+        bundle?.let { syndicate = it.getParcelable("syndicate")!! }
 
         initializeViews()
 
