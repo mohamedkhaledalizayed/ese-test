@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.medicalProviderDetails
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.AddFavorite
 import com.neqabty.domain.usecases.CheckFavorite
 import com.neqabty.domain.usecases.GetProviderDetails

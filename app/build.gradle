@@ -55,6 +55,16 @@ android {
         testInstrumentationRunner "com.neqabty.presentation.util.GithubTestRunner"
         multiDexEnabled true
         signingConfig signingConfigs.config
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
+
     }
     buildTypes {
         debug {
@@ -105,7 +115,8 @@ android {
     }
 //    kapt { generateStubs = true }
     kapt {
-//        generateStubs = true
+        generateStubs = true
+        correctErrorTypes = true
         javacOptions {
             // Increase the max count of errors from annotation processors.
             // Default is 100.
@@ -125,6 +136,7 @@ dependencies {
     implementation deps.support.design
     implementation deps.navigation.fragment_ktx
     implementation deps.navigation.ui_ktx
+    implementation deps.room.common
     implementation deps.room.runtime
     implementation deps.rxjava2
     implementation deps.rx_android
@@ -156,11 +168,12 @@ dependencies {
     kapt deps.dagger.compiler
     kapt deps.room.compiler
     kapt deps.lifecycle.compiler
+    kapt deps.binding.compiler
 
     implementation deps.mastercard
-    implementation project(':cowpaysdk')
+    implementation files('libs/cowpaysdk.aar')
+    implementation files('libs/mobilepaymentsdk-v2.1.aar')
     implementation project(':wheel')
-    implementation project(':mobilepaymentsdk-v2.1')
 
     testImplementation deps.junit
     testImplementation deps.mock_web_server
@@ -200,29 +213,7 @@ task fullCoverageReport(type: JacocoReport) {
         html.enabled = true
     }
 
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
-                      '**/*Test*.*', 'android/**/*.*',
-                      '**/*_MembersInjector.class',
-                      '**/Dagger*Component.class',
-                      '**/Dagger*Component$Builder.class',
-                      '**/*_*Factory.class',
-                      '**/*ComponentImpl.class',
-                      '**/*SubComponentBuilder.class']
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
-    def mainSrc = "${project.projectDir}/src/main/java"
 
-    sourceDirectories = files([mainSrc])
-    classDirectories = files([debugTree])
-    executionData = fileTree(dir: "$buildDir", includes: [
-            "jacoco/testDebugUnitTest.exec",
-            "outputs/code-coverage/connected/*coverage.ec"
-    ])
-}
-// we need all open to run tests which  a we enable only for debug builds.
-project.tasks.whenTaskAdded {
-    if (it.name == "testReleaseUnitTest") {
-        it.enabled = false
-    }
 }
 
 task printBuildNumber {

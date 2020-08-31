@@ -2,25 +2,25 @@ package com.neqabty.presentation.ui.tripsReservation
 
 import android.Manifest
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -95,13 +95,13 @@ class TripReservationFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val params = TripReservationFragmentArgs.fromBundle(arguments!!)
+        val params = TripReservationFragmentArgs.fromBundle(requireArguments())
         tripItem = params.tripItem
 
         tripReservationViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(TripReservationViewModel::class.java)
 
-        tripReservationViewModel.viewState.observe(this, Observer {
+        tripReservationViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
         tripReservationViewModel.errorState.observe(this, Observer { _ ->
@@ -332,7 +332,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
         val fragmentManager = this@TripReservationFragment.fragmentManager
         val addCompanionFragment = AddCompanionFragment()
         addCompanionFragment.setTargetFragment(this, ADD_COMPANION)
-        addCompanionFragment.show(fragmentManager, "name")
+        addCompanionFragment.show(requireFragmentManager(), "name")
     }
 
     private fun addCompanion(data: Intent) {
@@ -369,7 +369,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
     }
 
     fun grantCameraPermission() {
-        if (ActivityCompat.checkSelfPermission(this.context!!, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             captureImage = true
             requestPermissions(arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CAMERA)
         } else {

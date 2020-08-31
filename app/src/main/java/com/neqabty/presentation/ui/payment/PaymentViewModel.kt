@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.payment
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetTransactionHash
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent

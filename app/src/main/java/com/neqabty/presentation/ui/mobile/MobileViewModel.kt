@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.mobile
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetUserLoggedIn
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent

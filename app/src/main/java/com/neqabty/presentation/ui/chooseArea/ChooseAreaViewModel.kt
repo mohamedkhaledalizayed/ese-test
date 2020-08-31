@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.chooseArea
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetAllAreas
 import com.neqabty.domain.usecases.GetAllGoverns
 import com.neqabty.presentation.common.BaseViewModel

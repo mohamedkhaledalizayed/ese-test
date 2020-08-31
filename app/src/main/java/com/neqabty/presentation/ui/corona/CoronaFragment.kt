@@ -2,19 +2,19 @@ package com.neqabty.presentation.ui.corona
 
 import android.Manifest
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v7.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -79,7 +79,7 @@ class CoronaFragment : BaseFragment(), Injectable {
         coronaViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(CoronaViewModel::class.java)
 
-        coronaViewModel.viewState.observe(this, Observer {
+        coronaViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
         coronaViewModel.errorState.observe(this, Observer { _ ->
@@ -212,7 +212,7 @@ class CoronaFragment : BaseFragment(), Injectable {
     }
 
     fun grantCameraPermission() {
-        if (ActivityCompat.checkSelfPermission(this.context!!, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             captureImage = true
             requestPermissions(arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CAMERA)
         } else {

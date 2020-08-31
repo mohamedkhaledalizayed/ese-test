@@ -1,13 +1,12 @@
 package com.neqabty.presentation.ui.home
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,10 +62,20 @@ class WheelTripsFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+    }
+
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser)
+            initializeViews()
+    }
+
+    private fun initializeViews() {
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(HomeViewModel::class.java)
 
-        homeViewModel.viewState.observe(this, Observer {
+        homeViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
         homeViewModel.errorState.observe(this, Observer { _ ->
@@ -78,8 +87,7 @@ class WheelTripsFragment : BaseFragment(), Injectable {
                 navController().navigate(R.id.homeFragment)
             })
         })
-        homeViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())
-    }
+        homeViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())    }
 
     private fun handleViewState(state: HomeViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE

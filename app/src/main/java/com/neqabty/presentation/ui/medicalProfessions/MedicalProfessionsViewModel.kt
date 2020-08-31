@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.medicalProfessions
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetAllSpecializations
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent

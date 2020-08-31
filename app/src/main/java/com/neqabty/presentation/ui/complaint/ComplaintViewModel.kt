@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.complaint
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.CreateComplaint
 import com.neqabty.domain.usecases.GetComplaintTypes
 import com.neqabty.presentation.common.BaseViewModel

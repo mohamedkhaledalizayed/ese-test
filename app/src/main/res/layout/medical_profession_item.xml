@@ -10,7 +10,7 @@
             type="com.neqabty.presentation.entities.SpecializationUI" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -35,5 +35,5 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_medium" />
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

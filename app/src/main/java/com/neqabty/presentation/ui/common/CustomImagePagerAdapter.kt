@@ -2,11 +2,11 @@ package com.neqabty.presentation.ui.common
 
 import android.content.Context
 import android.net.Uri
-import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.neqabty.R
 

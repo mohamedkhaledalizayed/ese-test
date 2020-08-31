@@ -1,8 +1,8 @@
 package com.neqabty.presentation.ui.intro
 
-import android.arch.lifecycle.ViewModelProvider
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

@@ -16,11 +16,11 @@
             android:scaleType="fitXY"
             android:src="@mipmap/header_bg" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCategories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:layoutManager="GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/medical_category_item" />
 

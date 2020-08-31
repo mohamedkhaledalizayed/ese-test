@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.tripsReservation
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.entities.PersonEntity
 import com.neqabty.domain.usecases.BookTrip
 import com.neqabty.domain.usecases.PaymentInquiry

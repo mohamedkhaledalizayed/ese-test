@@ -10,7 +10,7 @@
             type="com.neqabty.presentation.entities.ProviderUI" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -44,5 +44,5 @@
                 android:text="@{provider.address}"
                 android:textSize="@dimen/text_size_small" />
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

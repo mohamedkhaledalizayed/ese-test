@@ -1,17 +1,18 @@
 package com.neqabty.presentation.ui.inquiry
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import android.content.Intent
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.InquiryFragmentBinding
@@ -22,6 +23,8 @@ import com.neqabty.presentation.entities.ServiceUI
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.inquiry_fragment.*
 import kotlinx.android.synthetic.main.inquiry_fragment.view.*
+import me.cowpay.PaymentMethodsActivity
+import me.cowpay.util.CowpayConstantKeys
 
 import javax.inject.Inject
 
@@ -57,7 +60,7 @@ class InquiryFragment : BaseFragment(), Injectable {
         inquiryViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(InquiryViewModel::class.java)
 
-        inquiryViewModel.viewState.observe(this, Observer {
+        inquiryViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
         inquiryViewModel.errorState.observe(this, Observer { _ ->
@@ -78,9 +81,16 @@ class InquiryFragment : BaseFragment(), Injectable {
         llContent.visibility = View.VISIBLE
         renderServices()
         bSend.setOnClickListener {
-            if (isDataValid(binding.edMemberNumber.text.toString())) {
-                inquiryViewModel.paymentInquiry(binding.edMemberNumber.text.toString(), serviceID.toString())
-            }
+//            if (isDataValid(binding.edMemberNumber.text.toString())) {
+//                inquiryViewModel.paymentInquiry(binding.edMemberNumber.text.toString(), serviceID.toString())
+//            }
+            var intent = Intent(context, PaymentMethodsActivity::class.java)
+            intent.putExtra(CowpayConstantKeys().MerchantCode, "3GpZbdrsnOrT")
+            intent.putExtra(
+                    CowpayConstantKeys().MerchantHashKey,
+                    "\$2y\$10$"+"gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
+            )
+            startActivity(intent)
         }
     }
 

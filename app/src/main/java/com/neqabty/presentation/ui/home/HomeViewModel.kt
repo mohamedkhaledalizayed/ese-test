@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.home
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetAllNews
 import com.neqabty.domain.usecases.GetAllTrips
 import com.neqabty.domain.usecases.GetAppVersion

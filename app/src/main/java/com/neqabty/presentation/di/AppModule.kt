@@ -1,8 +1,8 @@
 package com.neqabty.presentation.di
 
 import android.app.Application
-import android.arch.persistence.room.Room
 import android.content.Context
+import androidx.room.Room
 import com.neqabty.MyApp
 import com.neqabty.data.api.WebService
 import com.neqabty.data.db.NeqabtyDb

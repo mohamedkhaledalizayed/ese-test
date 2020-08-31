@@ -1,11 +1,11 @@
 package com.neqabty.presentation.ui.home
 
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
-import android.support.constraint.ConstraintLayout
-import android.support.v7.util.DiffUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.TripsCardBinding

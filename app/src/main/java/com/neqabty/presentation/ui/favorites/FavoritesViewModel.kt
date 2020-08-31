@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.favorites
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetFavorites
 import com.neqabty.domain.usecases.RemoveFavorite
 import com.neqabty.presentation.common.BaseViewModel

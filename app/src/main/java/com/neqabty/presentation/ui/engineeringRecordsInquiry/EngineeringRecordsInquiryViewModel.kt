@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.engineeringRecordsInquiry
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.SendEngineeringRecordsInquiry
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent

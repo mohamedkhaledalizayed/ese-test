@@ -88,11 +88,11 @@
                     android:visibility='@{memberItem.payments == null ? View.GONE : View.VISIBLE}'
                     android:textSize="@dimen/text_size_large" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:layoutManager="LinearLayoutManager"
                     tools:listitem="@layout/payment_item" />
 
                 <TextView

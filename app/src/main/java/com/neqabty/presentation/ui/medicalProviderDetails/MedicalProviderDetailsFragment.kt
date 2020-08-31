@@ -1,10 +1,10 @@
 package com.neqabty.presentation.ui.medicalProviderDetails
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -59,9 +59,9 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
         medicalProviderDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MedicalProviderDetailsViewModel::class.java)
 
-        val params = MedicalProviderDetailsFragmentArgs.fromBundle(arguments!!)
+        val params = MedicalProviderDetailsFragmentArgs.fromBundle(requireArguments())
         providerItem = params.medicalProviderItem
-        medicalProviderDetailsViewModel.viewState.observe(this, Observer {
+        medicalProviderDetailsViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
 
@@ -124,7 +124,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
         bundle.putString("phones", phones)
         subSyndicatesFragment.arguments = bundle
         subSyndicatesFragment.setTargetFragment(this, 255)
-        subSyndicatesFragment.show(fragmentManager, "name")
+        subSyndicatesFragment.show(requireFragmentManager(), "name")
     }
 // endregion
 

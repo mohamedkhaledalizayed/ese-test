@@ -1,10 +1,10 @@
 package com.neqabty.presentation.ui.tripsReservation
 
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
-import android.support.v7.util.DiffUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.CompanionItemBinding

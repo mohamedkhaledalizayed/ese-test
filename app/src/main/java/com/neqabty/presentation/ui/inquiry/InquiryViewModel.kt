@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.inquiry
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetAllServices
 import com.neqabty.domain.usecases.PaymentInquiry
 import com.neqabty.presentation.common.BaseViewModel

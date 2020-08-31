@@ -10,7 +10,7 @@
             type="com.neqabty.presentation.entities.TripUI" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -31,7 +31,7 @@
                 android:scaleType="fitXY"
                 android:src="@mipmap/header_bg" />
 
-            <android.support.v4.widget.NestedScrollView
+            <androidx.core.widget.NestedScrollView
                 android:id="@+id/svContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -201,12 +201,12 @@
                             android:visibility="gone" />
                     </LinearLayout>
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvCompanions"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_horizontal_small"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        app:layoutManager="LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:listitem="@layout/photo_item" />
@@ -223,12 +223,12 @@
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_size_medium" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvPhotos"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_horizontal_small"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        app:layoutManager="LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:listitem="@layout/photo_item" />
@@ -257,9 +257,9 @@
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_size_medium" />
                 </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
+            </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

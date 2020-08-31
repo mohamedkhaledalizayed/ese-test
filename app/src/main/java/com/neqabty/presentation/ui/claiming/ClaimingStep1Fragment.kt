@@ -1,19 +1,19 @@
 package com.neqabty.presentation.ui.claiming
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager.widget.ViewPager
 import com.neqabty.R
 import com.neqabty.databinding.Claiming1FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent

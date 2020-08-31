@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.inquiryDetails
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.EncryptData
 import com.neqabty.domain.usecases.PaymentInquiry
 import com.neqabty.domain.usecases.SendDecryptionKey

@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.updateDataDetails
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetUpdateUserDataInquiry
 import com.neqabty.domain.usecases.UpdateUserData
 import com.neqabty.presentation.common.BaseViewModel

@@ -1,11 +1,11 @@
 package com.neqabty.presentation.ui.syndicates
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -75,7 +75,7 @@ class SyndicatesFragment : BaseFragment(), Injectable {
         this.adapter = adapter
         binding.rvSyndicates.adapter = adapter
 
-        syndicatesViewModel.viewState.observe(this, Observer {
+        syndicatesViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
         syndicatesViewModel.errorState.observe(this, Observer { _ ->
@@ -118,7 +118,7 @@ fun pickSubSyndicate(syndicate: SyndicateUI) {
     bundle.putParcelable("syndicate", syndicate)
     subSyndicatesFragment.arguments = bundle
     subSyndicatesFragment.setTargetFragment(this, 255)
-    subSyndicatesFragment.show(fragmentManager, "name")
+    subSyndicatesFragment.show(requireFragmentManager(), "name")
 }
 // endregion
 

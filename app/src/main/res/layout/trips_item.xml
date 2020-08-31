@@ -10,7 +10,7 @@
             type="com.neqabty.presentation.entities.TripUI" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         android:paddingBottom="@dimen/margin_horizontal_normal">
 
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cvImage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:cropToPadding="false"
                 android:scaleType="fitXY"
                 app:imageUrl="@{trip.img}" />
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:id="@+id/llTitle"
@@ -97,5 +97,5 @@
             app:layout_constraintStart_toEndOf="@id/llTitle" />
 
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -2,18 +2,18 @@ package com.neqabty.presentation.ui.addCompanion
 
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.content.res.Resources
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.DialogFragment
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.AddCompanionFragmentBinding
@@ -98,10 +98,10 @@ class AddCompanionFragment : DialogFragment(), Injectable {
             bundle.putParcelable("companion", companion)
             intent.putExtras(bundle)
             targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
-            dialog.dismiss()
+            dialog?.dismiss()
         }
 
-        bCancel.setOnClickListener { dialog.dismiss() }
+        bCancel.setOnClickListener { dialog?.dismiss() }
     }
 
     //region

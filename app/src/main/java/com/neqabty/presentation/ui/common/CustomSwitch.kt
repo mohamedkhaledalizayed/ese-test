@@ -3,7 +3,6 @@ package com.neqabty.presentation.ui.common
 import android.content.Context
 import android.graphics.PorterDuff
 import android.os.Build
-import android.databinding.adapters.CompoundButtonBindingAdapter.setChecked
 import android.graphics.Color
 import android.util.AttributeSet
 import android.widget.Switch

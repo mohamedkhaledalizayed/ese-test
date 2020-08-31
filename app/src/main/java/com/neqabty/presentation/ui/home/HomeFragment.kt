@@ -1,21 +1,21 @@
 package com.neqabty.presentation.ui.home
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.BuildConfig
@@ -77,19 +77,19 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(HomeViewModel::class.java)
 
-        homeViewModel.viewState.observe(this, Observer {
+        homeViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
         homeViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(context!!).user)
+                homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
 
-        homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(context!!).user)
+        homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(requireContext()).user)
     }
 
     override fun onResume() {
@@ -118,7 +118,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         val iconsList = mutableListOf<Int>(R.drawable.ic_wheel_news, R.drawable.ic_wheel_trip, R.drawable.ic_wheel_payments, R.drawable.ic_wheel_record_renewal, R.drawable.ic_wheel_guide,
                 R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_medical_approval)
 
-        val wheelAdapter = WheelAdapter(context!!, sectionsList, iconsList, 0)
+        val wheelAdapter = WheelAdapter(requireContext(), sectionsList, iconsList, 0)
         wheel.setAdapter(wheelAdapter)
         wheel.setOnMenuSelectedListener { parent, view, pos ->
             if ((wheel.adapter as WheelAdapter).selectedItemPosition != pos) {
@@ -153,7 +153,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
     }
 
     fun initializeViews() {
-        (activity as AppCompatActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        (((activity as AppCompatActivity).drawer_layout) as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 //        llClaiming.setOnClickListener {
 //            if (PreferencesHelper(requireContext()).isRegistered)
 //                navController().navigate(R.id.claimingFragment)

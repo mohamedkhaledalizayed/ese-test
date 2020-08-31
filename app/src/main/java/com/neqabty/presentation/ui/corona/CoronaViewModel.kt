@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.corona
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.CreateCoronaRequest
 import com.neqabty.domain.usecases.GetAllSyndicates
 import com.neqabty.presentation.common.BaseViewModel
