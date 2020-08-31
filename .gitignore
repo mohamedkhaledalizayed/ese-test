@@ -8,3 +8,5 @@ build/
 .externalNativeBuild
 app/build
 build
+/app/debug/
+/app/release/
