@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:src="@mipmap/header_bg" />
+            android:src="@drawable/home_header_bg" />
 
         <ScrollView
             android:id="@+id/svContent"

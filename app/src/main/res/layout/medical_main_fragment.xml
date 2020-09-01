@@ -16,13 +16,20 @@
             android:scaleType="fitXY"
             android:src="@drawable/home_header_bg" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCategories"
-            android:layout_width="wrap_content"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="GridLayoutManager"
-            app:spanCount="2"
-            tools:listitem="@layout/medical_category_item" />
+            android:background="@android:color/transparent"
+            android:layoutDirection="ltr"
+            app:tabTextColor="@color/colorPrimary"/>
+
+
+        <com.neqabty.presentation.ui.common.SwipeLockableViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/margin_vertical_normal"/>
 
     </LinearLayout>
 </layout>

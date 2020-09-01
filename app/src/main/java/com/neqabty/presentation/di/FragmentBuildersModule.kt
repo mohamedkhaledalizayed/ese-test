@@ -9,15 +9,13 @@ import com.neqabty.presentation.ui.corona.CoronaFragment
 import com.neqabty.presentation.ui.engineeringRecordsDetails.EngineeringRecordsDetailsFragment
 import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryFragment
 import com.neqabty.presentation.ui.favorites.FavoritesFragment
-import com.neqabty.presentation.ui.home.HomeFragment
-import com.neqabty.presentation.ui.home.WheelNewsFragment
-import com.neqabty.presentation.ui.home.WheelPaymentsFragment
-import com.neqabty.presentation.ui.home.WheelTripsFragment
+import com.neqabty.presentation.ui.home.*
 import com.neqabty.presentation.ui.inquiry.InquiryFragment
 import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsFragment
 import com.neqabty.presentation.ui.intro.IntroFragment
 import com.neqabty.presentation.ui.login.LoginFragment
 import com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragment
+import com.neqabty.presentation.ui.medicalMain.MedicalMainFragment
 import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsFragment
 import com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsFragment
 import com.neqabty.presentation.ui.medicalProviders.MedicalProvidersFragment
@@ -140,6 +138,9 @@ abstract class FragmentBuildersModule {
     abstract fun contributeMedicalCategoriesFragment(): MedicalCategoriesFragment
 
     @ContributesAndroidInjector
+    abstract fun contributeMedicalMainFragment(): MedicalMainFragment
+
+    @ContributesAndroidInjector
     abstract fun contributeMedicalProvidersFragment(): MedicalProvidersFragment
 
     @ContributesAndroidInjector
@@ -183,6 +184,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeWheelPaymentsFragment(): WheelPaymentsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWheelMedicalFragment(): WheelMedicalFragment
 
     @ContributesAndroidInjector
     abstract fun contributeComplaintFragment(): ComplaintFragment

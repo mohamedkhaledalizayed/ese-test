@@ -81,8 +81,11 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
         binding.bNext.setOnClickListener {
 //                ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
 //                ClaimingData.governId = (spGovern.selectedItem as GovernUI).id
+//            navController().navigate(
+//                    ChooseAreaFragmentDirections.openMedical(governID, areaID)
+//            )
             navController().navigate(
-                    ChooseAreaFragmentDirections.openMedical(governID, areaID)
+                    ChooseAreaFragmentDirections.openMedicalMain(governID, areaID)
             )
         }
     }

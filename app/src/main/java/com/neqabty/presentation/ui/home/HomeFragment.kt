@@ -146,6 +146,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         adapter.addFragment(WheelTripsFragment())
         adapter.addFragment(WheelPaymentsFragment())
         adapter.addFragment(ClaimingStep4Fragment())
+        adapter.addFragment(WheelMedicalFragment())
         binding.viewpager.adapter = adapter
         binding.viewpager.setSwipePagingEnabled(false)
         binding.viewpager.offscreenPageLimit = 2

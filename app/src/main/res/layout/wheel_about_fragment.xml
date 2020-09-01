@@ -11,7 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ivLogo"
@@ -24,7 +24,7 @@
             android:adjustViewBounds="false"
             android:cropToPadding="false"
             android:scaleType="fitXY"
-            android:src="@drawable/payments_header"
+            android:src="@drawable/about_header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,18 +41,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
-        <Button
-            android:id="@+id/bGo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_horizontal_extra_large"
-            android:layout_marginEnd="@dimen/margin_horizontal_extra_large"
-            android:background="@drawable/btn_green"
-            android:text="@string/wheel_enter_service"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_medium"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

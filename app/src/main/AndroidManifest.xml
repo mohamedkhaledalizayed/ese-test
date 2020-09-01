@@ -23,7 +23,8 @@
         tools:replace="android:name,android:theme,android:allowBackup"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:requestLegacyExternalStorage="true">
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

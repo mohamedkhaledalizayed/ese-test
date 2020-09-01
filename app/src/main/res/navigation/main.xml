@@ -222,6 +222,24 @@
             app:destination="@id/mobileFragment" />
     </fragment>
     <fragment
+        android:id="@+id/medicalMainFragment"
+        android:name="com.neqabty.presentation.ui.medicalMain.MedicalMainFragment"
+        android:label="@string/medicalDirectory"
+        tools:layout="@layout/medical_main_fragment">
+        <action
+            android:id="@+id/openProviders"
+            app:destination="@id/medicalProvidersFragment" />
+        <action
+            android:id="@+id/openProviderDetails"
+            app:destination="@id/medicalProviderDetailsFragment" />
+        <argument
+            android:name="governID"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="areaID"
+            app:argType="java.lang.Integer" />
+    </fragment>
+    <fragment
         android:id="@+id/medicalCategoriesFragment"
         android:name="com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragment"
         android:label="@string/medicalDirectory"
@@ -318,6 +336,9 @@
         <action
             android:id="@+id/openMedical"
             app:destination="@id/medicalCategoriesFragment" />
+        <action
+            android:id="@+id/openMedicalMain"
+            app:destination="@id/medicalMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"

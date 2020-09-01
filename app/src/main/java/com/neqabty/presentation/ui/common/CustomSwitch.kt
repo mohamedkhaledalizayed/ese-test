@@ -26,7 +26,7 @@ class CustomSwitch : Switch {
             val trackColor: Int
 
             if (isChecked) {
-                thumbColor = Color.parseColor("#1d1ad2")
+                thumbColor = Color.parseColor("#41941b")
                 trackColor = thumbColor
             } else {
                 thumbColor = Color.parseColor("grey")
