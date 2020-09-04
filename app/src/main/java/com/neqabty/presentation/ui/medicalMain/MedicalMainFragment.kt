@@ -18,8 +18,6 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragmentArgs
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.medical_main_fragment.*
-import kotlinx.android.synthetic.main.medical_main_fragment.tabLayout
-import kotlinx.android.synthetic.main.notifications_fragment_old.*
 import javax.inject.Inject
 
 class MedicalMainFragment : BaseFragment(), Injectable {
@@ -34,9 +32,9 @@ class MedicalMainFragment : BaseFragment(), Injectable {
     var areaID: Int = 0
     var governID: Int = 0
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -60,12 +58,24 @@ class MedicalMainFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.trips)))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.claiming_title)))
-        binding.tabLayout.tabGravity = TabLayout.GRAVITY_FILL
 
-        val adapter = CategoriesTabAdapter(requireContext(), childFragmentManager, tabLayout!!.tabCount)
-        viewpager.adapter = adapter
+        val categoriesNameList = mutableListOf<String>(getString(R.string.artificial_limbs), getString(R.string.optics), getString(R.string.others), getString(R.string.laboratories),
+                getString(R.string.scan_centers), getString(R.string.pharmacies), getString(R.string.doctors)
+                , getString(R.string.hospitals))
+        val categoriesIDList = mutableListOf<Int>(2027, 2028, 18, 4, 3, 16, 2, 1)
+
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[0]))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[1]))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[2]))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[3]))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[4]))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[5]))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[6]))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[7]))
+        binding.tabLayout.tabGravity = TabLayout.GRAVITY_CENTER
+
+        viewpager.adapter = CategoriesTabAdapter(requireContext(), childFragmentManager, tabLayout!!.tabCount, categoriesIDList, categoriesNameList, areaID, governID)
+
 
         viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
 
@@ -83,9 +93,9 @@ class MedicalMainFragment : BaseFragment(), Injectable {
             }
         })
 
-        val tab = binding.tabLayout.getTabAt(0)
+        val tab = binding.tabLayout.getTabAt(7)
         tab?.select()
-        viewpager.currentItem = 1
+        viewpager.currentItem = 7
 
 
 //        val adapter = CustomFragmentPagerAdapter(childFragmentManager)
