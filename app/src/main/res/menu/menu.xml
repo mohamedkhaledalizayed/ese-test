@@ -20,7 +20,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/favorites_fragment"
-        android:icon="@mipmap/star_white"
+        android:icon="@drawable/ic_fav_white"
         android:title="@string/favorites"
         app:showAsAction="always" />
 </menu>

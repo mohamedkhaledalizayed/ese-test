@@ -29,5 +29,7 @@ data class ProviderData(
     @field:SerializedName("updated_at")
     var updatedAt: String?,
     @field:SerializedName("provider_type_id")
-    var type: String?
+    var typeID: String?,
+    @field:SerializedName("provider_type_name")
+    var typeName: String?
 ) : Response()

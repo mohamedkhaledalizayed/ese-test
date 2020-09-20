@@ -10,17 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/ivHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@mipmap/header_logo_bg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
         <com.santalu.autoviewpager.AutoViewPager
             android:id="@+id/vpIntro"
             android:layout_width="match_parent"
@@ -28,7 +17,7 @@
             app:layout_constraintBottom_toTopOf="@id/dotsIndicator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivHeader"
+            app:layout_constraintTop_toTopOf="parent"
             android:overScrollMode="always"
             app:avp_autoScroll="true" />
 

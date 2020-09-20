@@ -112,6 +112,7 @@ android {
     }
     lintOptions {
         lintConfig rootProject.file('lint.xml')
+        abortOnError false
     }
 //    kapt { generateStubs = true }
     kapt {
@@ -146,6 +147,7 @@ dependencies {
     implementation deps.retrofit.runtime
     implementation deps.retrofit.adapter
     implementation deps.retrofit.gson
+    implementation deps.retrofit.scalars
     implementation deps.okhttp_logging_interceptor
     implementation deps.glide.runtime
 

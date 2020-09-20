@@ -16,6 +16,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <Spinner
+                android:id="@+id/spSpecialization"
+                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/speciality"
+                android:visibility="gone"
+                android:textDirection="rtl"
+                android:textSize="@dimen/text_size_medium"/>
+
             <TextView
                 android:id="@+id/tvNoDataFound"
                 android:layout_width="wrap_content"
@@ -29,8 +39,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvProviders"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_horizontal_small"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
                 app:layoutManager="LinearLayoutManager"
                 tools:listitem="@layout/medical_provider_item" />
         </LinearLayout>

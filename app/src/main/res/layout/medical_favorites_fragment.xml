@@ -16,13 +16,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/ivHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@drawable/home_header_bg" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFavorites"
                 android:layout_width="match_parent"

@@ -59,7 +59,7 @@ class MedicalProfessionsFragment : BaseFragment(), Injectable {
                 .get(MedicalProfessionsViewModel::class.java)
 
         val params = MedicalProfessionsFragmentArgs.fromBundle(arguments!!)
-        title = params.title
+//        title = params.title
         categoryId = params.categoryId
         areaID = params.areaID
         governID = params.governID

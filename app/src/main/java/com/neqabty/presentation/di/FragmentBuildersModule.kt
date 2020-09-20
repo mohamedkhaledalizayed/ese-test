@@ -186,6 +186,21 @@ abstract class FragmentBuildersModule {
     abstract fun contributeWheelPaymentsFragment(): WheelPaymentsFragment
 
     @ContributesAndroidInjector
+    abstract fun contributeWheelRetireesFragment(): WheelRetireesFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWheelTrainingFragment(): WheelTrainingFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWheelComplaintsFragment(): WheelComplaintsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWheelEmploymentFragment(): WheelEmploymentFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWheelCustomerServiceFragment(): WheelCustomerServiceFragment
+
+    @ContributesAndroidInjector
     abstract fun contributeWheelMedicalFragment(): WheelMedicalFragment
 
     @ContributesAndroidInjector

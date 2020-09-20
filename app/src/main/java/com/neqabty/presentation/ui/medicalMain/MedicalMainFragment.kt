@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TableLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -16,11 +19,14 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragmentArgs
+import com.neqabty.presentation.util.DisplayMetrics
+import com.neqabty.presentation.util.HasMedicalOptionsMenu
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.medical_main_fragment.*
 import javax.inject.Inject
 
-class MedicalMainFragment : BaseFragment(), Injectable {
+
+class MedicalMainFragment : BaseFragment(), HasMedicalOptionsMenu, Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
@@ -72,7 +78,29 @@ class MedicalMainFragment : BaseFragment(), Injectable {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[5]))
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[6]))
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[7]))
-        binding.tabLayout.tabGravity = TabLayout.GRAVITY_CENTER
+
+        val headerView: View = LayoutInflater.from(context).inflate(R.layout.tab_medical_item, null, false)
+
+        binding.tabLayout.getTabAt(0)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clArtificialLimbs))
+        binding.tabLayout.getTabAt(1)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clOptics))
+        binding.tabLayout.getTabAt(2)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clOthers))
+        binding.tabLayout.getTabAt(3)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clLabs))
+        binding.tabLayout.getTabAt(4)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clScans))
+        binding.tabLayout.getTabAt(5)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clPharmacies))
+        binding.tabLayout.getTabAt(6)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clDoctors))
+        binding.tabLayout.getTabAt(7)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clHospitals))
+
+        tabLayout.requestLayout()
+
+//        val itemLayoutParams = headerView.layoutParams
+
+        val layoutParams: ViewGroup.LayoutParams = tabLayout.layoutParams
+        layoutParams.height = DisplayMetrics.width * 35 / 100
+        tabLayout.layoutParams = layoutParams
+
+//        binding.tabLayout.getTabAt(0)?.view?.tab!!.customView?.layoutParams = LinearLayout.LayoutParams(DisplayMetrics.width / 3,DisplayMetrics.width / 3 - 20)
+//        binding.tabLayout.getTabAt(0)?.customView?.setPadding(10, 10, 10, 10);
+//        binding.tabLayout.layoutParams = LinearLayout.LayoutParams(DisplayMetrics.width / 3, DisplayMetrics.width / 3)
 
         viewpager.adapter = CategoriesTabAdapter(requireContext(), childFragmentManager, tabLayout!!.tabCount, categoriesIDList, categoriesNameList, areaID, governID)
 
@@ -106,9 +134,12 @@ class MedicalMainFragment : BaseFragment(), Injectable {
 //        adapter.addFragment(WheelMedicalFragment())
 //        binding.viewpager.adapter = adapter
 //        binding.viewpager.setSwipePagingEnabled(false)
-//        binding.viewpager.offscreenPageLimit = 2
+        binding.viewpager.offscreenPageLimit = 0
     }
 
+    override fun showOptionsMenu() {
+        TODO("Not yet implemented")
+    }
     //region
 // endregion
 

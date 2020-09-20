@@ -46,9 +46,9 @@ class PhonesAdapter(
     }
 
     override fun onBindViewHolder(holder: DataBoundViewHolder<PhoneItemBinding>, position: Int) {
-        if (position == itemCount - 1) {
-            holder.binding.view.visibility = View.GONE
-        }
+//        if (position == itemCount - 1) {
+//            holder.binding.view.visibility = View.GONE
+//        }
         holder.binding.tvPhone.setText(getItem(position))
     }
 

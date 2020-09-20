@@ -81,16 +81,9 @@ class InquiryFragment : BaseFragment(), Injectable {
         llContent.visibility = View.VISIBLE
         renderServices()
         bSend.setOnClickListener {
-//            if (isDataValid(binding.edMemberNumber.text.toString())) {
-//                inquiryViewModel.paymentInquiry(binding.edMemberNumber.text.toString(), serviceID.toString())
-//            }
-            var intent = Intent(context, PaymentMethodsActivity::class.java)
-            intent.putExtra(CowpayConstantKeys().MerchantCode, "3GpZbdrsnOrT")
-            intent.putExtra(
-                    CowpayConstantKeys().MerchantHashKey,
-                    "\$2y\$10$"+"gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
-            )
-            startActivity(intent)
+            if (isDataValid(binding.edMemberNumber.text.toString())) {
+                inquiryViewModel.paymentInquiry(binding.edMemberNumber.text.toString(), serviceID.toString())
+            }
         }
     }
 

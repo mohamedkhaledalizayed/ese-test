@@ -1,26 +1,26 @@
 package com.neqabty
 
 import android.app.Activity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import android.text.Html
 import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             customiseStatusbar()
         setContentView(R.layout.main_activity)
-
+        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         mainViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MainViewModel::class.java)
 
@@ -111,8 +111,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
         if (notificationId != null)
             graph.startDestination = R.id.homeFragment
-        else if (!PreferencesHelper(this).isIntroSkipped) // TODO
-            graph.startDestination = R.id.introFragment
+//        else if (!PreferencesHelper(this).isIntroSkipped) // TODO
+//            graph.startDestination = R.id.introFragment
         else if (PreferencesHelper(this).mobile.isEmpty()) // TODO
             graph.startDestination = R.id.loginFragment
         else
@@ -209,6 +209,19 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             true
         }
 
+        navController.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { controller, destination, arguments ->
+            if(destination.id == R.id.homeFragment)
+                supportActionBar?.apply {
+                    setDisplayHomeAsUpEnabled(true)
+                    setHomeAsUpIndicator(R.mipmap.menu_ic)
+                }
+            else
+                supportActionBar?.apply {
+                setDisplayHomeAsUpEnabled(true)
+                setHomeAsUpIndicator(R.drawable.ic_up)
+            }
+        })
+
         notificationId?.let {
             val args = Bundle()
             val serviceId: String? = intent?.extras?.getString("serviceId")!!
@@ -297,6 +310,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 PreferencesHelper(this).isRegistered // && PreferencesHelper(this).notificationsCount != 0
 //        logoutItem?.isVisible = currentFragment is HasHomeOptionsMenu &&
 //                PreferencesHelper(this).isRegistered
+        ivHeaderLogo?.visibility = if (currentFragment is HasHomeOptionsMenu) View.VISIBLE else View.GONE
         favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu // || currentFragment is HasFavoriteOptionsMenu
 //        searchItem?.isVisible = currentFragment is HasMedicalOptionsMenu//TODO
 

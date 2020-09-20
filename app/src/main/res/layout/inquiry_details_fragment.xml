@@ -21,13 +21,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/ivHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/home_header_bg" />
-
         <ScrollView
             android:id="@+id/svContent"
             android:layout_width="match_parent"
@@ -160,7 +153,6 @@
                     android:gravity="center"
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/pay"
-                    android:visibility="gone"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>

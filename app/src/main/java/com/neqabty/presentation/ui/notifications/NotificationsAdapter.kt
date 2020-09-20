@@ -1,20 +1,21 @@
 package com.neqabty.presentation.ui.notifications
 
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.NotificationItemBinding
 import com.neqabty.presentation.entities.NotificationUI
+import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 
 class NotificationsAdapter(
-    private val dataBindingComponent: DataBindingComponent,
-    appExecutors: AppExecutors,
-    private val callback: ((NotificationUI) -> Unit)?
+        private val dataBindingComponent: DataBindingComponent,
+        appExecutors: AppExecutors,
+        private val callback: ((NotificationUI) -> Unit)?
 ) : DataBoundListAdapter<NotificationUI, NotificationItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<NotificationUI>() {
@@ -42,6 +43,8 @@ class NotificationsAdapter(
                 callback?.invoke(it)
             }
         }
+        binding.ivNotification.layoutParams.width = DisplayMetrics.width / 6
+        binding.ivNotification.layoutParams.height = DisplayMetrics.width / 6
         return binding
     }
 

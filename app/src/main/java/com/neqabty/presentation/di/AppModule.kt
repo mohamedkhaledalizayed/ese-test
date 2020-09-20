@@ -28,6 +28,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -49,6 +50,8 @@ class AppModule {
 //                ).build()
 
         val client: OkHttpClient = OkHttpClient.Builder()
+                .connectTimeout(3000, TimeUnit.SECONDS)
+                .readTimeout(3000, TimeUnit.SECONDS)
                 .addInterceptor(object : Interceptor {
                     override fun intercept(chain: Interceptor.Chain): Response {
                         val request = chain.request()
@@ -74,7 +77,8 @@ class AppModule {
                 .build()
 
         return Retrofit.Builder()
-                .baseUrl("http://3.20.85.44:44392/")
+                .baseUrl("http://3.20.85.44:44390/") // TEST
+//                .baseUrl("http://3.20.85.44:44382/") // PROD
 //                .baseUrl("http://front.neqabty.com/")
 //                .baseUrl("http://192.168.178.38/")
 //            .baseUrl("https://neqabty-stage.efinance.com.eg/")

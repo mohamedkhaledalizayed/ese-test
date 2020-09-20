@@ -98,7 +98,7 @@
     <string name="update_msg">حتى تتمكن من استخدام التطبيق يرجى التحديث</string>
     <string name="root_msg">هذا الجهاز غير آمن, لا يمكنك استخدام التطبيق.</string>
 
-    <string name="doctors">أطباء ومراكز علاج طبيعي</string>
+    <string name="doctors">أطباء</string>
     <string name="hospitals">مستشفيات</string>
     <string name="scan_centers">مراكز أشعة</string>
     <string name="pharmacies">صيدليات</string>
@@ -171,7 +171,7 @@
     <string name="wheel_trips">الرحلات</string>
     <string name="wheel_payment">المدفوعات</string>
     <string name="wheel_employment">مزاولة المهنة</string>
-    <string name="wheel_delivery">التوصيل المنزلي</string>
+    <string name="wheel_retirees">المعاشات</string>
     <string name="wheel_training">تدريب وتوظيف</string>
     <string name="wheel_customer_service">خدمة العملاء</string>
     <string name="wheel_complaints">شكاوى ومقترحات</string>
@@ -186,6 +186,13 @@
     <string name="wheel_payments_content">يمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيد يمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيديمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيديمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيد</string>
     <string name="wheel_about_content">تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه  تفاصيل عن النقابهتفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه</string>
     <string name="wheel_medical_content">يمكتك الدخول على الخدمه  ا للتعرف على المزيد يمكتك الدخول على الخدمه   للتعرف على المزيديمكتك الدخول على الخدمه  للتعرف على المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد</string>
+    <string name="wheel_retirees_content">يمكنك معرفه  المزيد عن خدمه المعاشات قريباً</string>
+    <string name="wheel_training_content">يمكنك معرفه  المزيد عن خدمه  التدريب و التوظيف قريباً</string>
+    <string name="wheel_complaints_content">يمكتك الدخول على الخدمه  ا للتعرف على المزيد يمكتك الدخول على الخدمه   للتعرف على المزيديمكتك الدخول على الخدمه  للتعرف على المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد</string>
+    <string name="wheel_update_data_content">يمكتك الدخول على الخدمه  ا للتعرف على المزيد يمكتك الدخول على الخدمه   للتعرف على المزيديمكتك الدخول على الخدمه  للتعرف على المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد</string>
+    <string name="wheel_renew_record_content">يمكتك الدخول على الخدمه  ا للتعرف على المزيد يمكتك الدخول على الخدمه   للتعرف على المزيديمكتك الدخول على الخدمه  للتعرف على المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد</string>
+    <string name="wheel_employment_content">يمكنك معرفه  المزيد عن خدمه خدمة مزاولة المهنة قريباً</string>
+    <string name="wheel_customer_service_content">يمكنك معرفه  المزيد عن خدمه خدمه العملاء قريباً</string>
 
     <string name="alert_title">تنبيه</string>
     <string name="no_connection_msg">من فضلك تحقق من إتصالك بالإنترنت</string>
@@ -203,7 +210,10 @@
     <string name="enter_verification_code">ادخل كود التأكيد</string>
 
     <string name="address_title">العنوان: </string>
+    <string name="address">العنوان</string>
+    <string name="location_on_map">الموقع على الخريطة</string>
     <string name="phone_title">التليفون: </string>
+    <string name="phone">التليفون</string>
     <string name="email_title">البريد الالكتروني: </string>
     <string name="address_content">
         <![CDATA[<font color="#1d1ad2"><u>%s</u></font>]]>

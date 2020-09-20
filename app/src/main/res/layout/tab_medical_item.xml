@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="loading"
+            type="boolean" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/llHolder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clArtificialLimbs"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivBgArtificialLimbs"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_tab_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivImageArtificialLimbs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_horizontal_normal"
+                android:background="@drawable/tab_circle_green_bg"
+                android:padding="@dimen/margin_vertical_normal"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_therapy_green"
+                android:tint="@color/selector_tab_color"
+                app:layout_constraintBottom_toTopOf="@id/tv_pageTextArtificialLimbs"
+                app:layout_constraintEnd_toEndOf="@id/ivBgArtificialLimbs"
+                app:layout_constraintStart_toStartOf="@id/ivBgArtificialLimbs"
+                app:layout_constraintTop_toTopOf="@id/ivBgArtificialLimbs" />
+
+            <TextView
+                android:id="@+id/tv_pageTextArtificialLimbs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:textColor="@color/selector_tab_color"
+                android:text="@string/artificial_limbs"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/ivBgArtificialLimbs"
+                app:layout_constraintEnd_toEndOf="@id/ivBgArtificialLimbs"
+                app:layout_constraintStart_toStartOf="@id/ivBgArtificialLimbs"
+                app:layout_constraintTop_toBottomOf="@id/ivImageArtificialLimbs"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clOptics"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivBgOptics"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_tab_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivImageOptics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_horizontal_normal"
+                android:background="@drawable/tab_circle_green_bg"
+                android:padding="@dimen/margin_vertical_normal"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_optics_green"
+                android:tint="@color/selector_tab_color"
+                app:layout_constraintBottom_toTopOf="@id/tv_pageTextOptics"
+                app:layout_constraintEnd_toEndOf="@id/ivBgOptics"
+                app:layout_constraintStart_toStartOf="@id/ivBgOptics"
+                app:layout_constraintTop_toTopOf="@id/ivBgOptics" />
+
+            <TextView
+                android:id="@+id/tv_pageTextOptics"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:textColor="@color/selector_tab_color"
+                android:text="@string/optics"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/ivBgOptics"
+                app:layout_constraintEnd_toEndOf="@id/ivBgOptics"
+                app:layout_constraintStart_toStartOf="@id/ivBgOptics"
+                app:layout_constraintTop_toBottomOf="@id/ivImageOptics"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clOthers"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivBgOthers"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_tab_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivImageOthers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_horizontal_normal"
+                android:background="@drawable/tab_circle_green_bg"
+                android:padding="@dimen/margin_vertical_normal"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_others_green"
+                android:tint="@color/selector_tab_color"
+                app:layout_constraintBottom_toTopOf="@id/tv_pageTextOthers"
+                app:layout_constraintEnd_toEndOf="@id/ivBgOthers"
+                app:layout_constraintStart_toStartOf="@id/ivBgOthers"
+                app:layout_constraintTop_toTopOf="@id/ivBgOthers" />
+
+            <TextView
+                android:id="@+id/tv_pageTextOthers"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:textColor="@color/selector_tab_color"
+                android:text="@string/others"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/ivBgOthers"
+                app:layout_constraintEnd_toEndOf="@id/ivBgOthers"
+                app:layout_constraintStart_toStartOf="@id/ivBgOthers"
+                app:layout_constraintTop_toBottomOf="@id/ivImageOthers"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clLabs"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivBgLabs"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_tab_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivImageLabs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_horizontal_normal"
+                android:background="@drawable/tab_circle_green_bg"
+                android:padding="@dimen/margin_vertical_normal"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_labs_green"
+                android:tint="@color/selector_tab_color"
+                app:layout_constraintBottom_toTopOf="@id/tv_pageTextLabs"
+                app:layout_constraintEnd_toEndOf="@id/ivBgLabs"
+                app:layout_constraintStart_toStartOf="@id/ivBgLabs"
+                app:layout_constraintTop_toTopOf="@id/ivBgLabs" />
+
+            <TextView
+                android:id="@+id/tv_pageTextLabs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:textColor="@color/selector_tab_color"
+                android:text="@string/laboratories"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/ivBgLabs"
+                app:layout_constraintEnd_toEndOf="@id/ivBgLabs"
+                app:layout_constraintStart_toStartOf="@id/ivBgLabs"
+                app:layout_constraintTop_toBottomOf="@id/ivImageLabs"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clScans"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivBgScans"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_tab_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivImageScans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_horizontal_normal"
+                android:background="@drawable/tab_circle_green_bg"
+                android:padding="@dimen/margin_vertical_normal"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_scan_green"
+                android:tint="@color/selector_tab_color"
+                app:layout_constraintBottom_toTopOf="@id/tv_pageTextScans"
+                app:layout_constraintEnd_toEndOf="@id/ivBgScans"
+                app:layout_constraintStart_toStartOf="@id/ivBgScans"
+                app:layout_constraintTop_toTopOf="@id/ivBgScans" />
+
+            <TextView
+                android:id="@+id/tv_pageTextScans"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:textColor="@color/selector_tab_color"
+                android:text="@string/scan_centers"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/ivBgScans"
+                app:layout_constraintEnd_toEndOf="@id/ivBgScans"
+                app:layout_constraintStart_toStartOf="@id/ivBgScans"
+                app:layout_constraintTop_toBottomOf="@id/ivImageScans"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPharmacies"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivBgPharmacies"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_tab_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivImagePharmacies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_horizontal_normal"
+                android:background="@drawable/tab_circle_green_bg"
+                android:padding="@dimen/margin_vertical_normal"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_pharmacy_green"
+                android:tint="@color/selector_tab_color"
+                app:layout_constraintBottom_toTopOf="@id/tv_pageTextPharmacies"
+                app:layout_constraintEnd_toEndOf="@id/ivBgPharmacies"
+                app:layout_constraintStart_toStartOf="@id/ivBgPharmacies"
+                app:layout_constraintTop_toTopOf="@id/ivBgPharmacies" />
+
+            <TextView
+                android:id="@+id/tv_pageTextPharmacies"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:textColor="@color/selector_tab_color"
+                android:text="@string/pharmacies"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/ivBgPharmacies"
+                app:layout_constraintEnd_toEndOf="@id/ivBgPharmacies"
+                app:layout_constraintStart_toStartOf="@id/ivBgPharmacies"
+                app:layout_constraintTop_toBottomOf="@id/ivImagePharmacies"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clDoctors"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivBgDoctors"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_tab_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivImageDoctors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_horizontal_normal"
+                android:background="@drawable/tab_circle_green_bg"
+                android:padding="@dimen/margin_vertical_normal"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_doctor_green"
+                android:tint="@color/selector_tab_color"
+                app:layout_constraintBottom_toTopOf="@id/tv_pageTextDoctors"
+                app:layout_constraintEnd_toEndOf="@id/ivBgDoctors"
+                app:layout_constraintStart_toStartOf="@id/ivBgDoctors"
+                app:layout_constraintTop_toTopOf="@id/ivBgDoctors" />
+
+            <TextView
+                android:id="@+id/tv_pageTextDoctors"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:textColor="@color/selector_tab_color"
+                android:text="@string/doctors"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/ivBgDoctors"
+                app:layout_constraintEnd_toEndOf="@id/ivBgDoctors"
+                app:layout_constraintStart_toStartOf="@id/ivBgDoctors"
+                app:layout_constraintTop_toBottomOf="@id/ivImageDoctors"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clHospitals"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivBgHospitals"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_tab_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivImageHospitals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_horizontal_normal"
+                android:background="@drawable/tab_circle_green_bg"
+                android:padding="@dimen/margin_vertical_normal"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_hospital_white"
+                android:tint="@color/selector_tab_color"
+                app:layout_constraintBottom_toTopOf="@id/tv_pageTextHospitals"
+                app:layout_constraintEnd_toEndOf="@id/ivBgHospitals"
+                app:layout_constraintStart_toStartOf="@id/ivBgHospitals"
+                app:layout_constraintTop_toTopOf="@id/ivBgHospitals" />
+
+            <TextView
+                android:id="@+id/tv_pageTextHospitals"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                android:textColor="@color/selector_tab_color"
+                android:text="@string/hospitals"
+                app:layout_constraintBottom_toBottomOf="@id/ivBgHospitals"
+                app:layout_constraintEnd_toEndOf="@id/ivBgHospitals"
+                app:layout_constraintStart_toStartOf="@id/ivBgHospitals"
+                app:layout_constraintTop_toBottomOf="@id/ivImageHospitals"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</layout>

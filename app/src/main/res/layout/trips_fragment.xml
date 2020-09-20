@@ -16,18 +16,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/ivHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@drawable/home_header_bg" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTrips"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_horizontal_small"
+                android:layout_marginStart="@dimen/margin_horizontal_small"
+                android:layout_marginEnd="@dimen/margin_horizontal_small"
+                android:layout_marginBottom="@dimen/margin_horizontal_small"
                 app:layoutManager="LinearLayoutManager"
                 tools:listitem="@layout/trips_item" />
         </LinearLayout>

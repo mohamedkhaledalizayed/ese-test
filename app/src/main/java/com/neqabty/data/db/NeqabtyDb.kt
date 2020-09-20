@@ -6,7 +6,7 @@ import com.neqabty.data.entities.ProviderData
 
 @Database(
     entities = [ProviderData::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class NeqabtyDb : RoomDatabase() {

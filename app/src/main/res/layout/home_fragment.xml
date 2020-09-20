@@ -14,32 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/ivHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/home_header_bg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/ivHeaderLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/logo_home"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/tvTopTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_horizontal_large"
-            android:paddingTop="?attr/actionBarSize"
+            android:layout_marginStart="@dimen/margin_horizontal_large"
             android:text="@string/wheel_news"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_large"
@@ -64,7 +43,7 @@
             app:wheelBackgroundColor="@color/bg_wheel"
             app:wheelCursorColor="@android:color/transparent"
             app:wheelCursorHeight="1dp"
-            app:layout_constraintVertical_bias=".57"
+            app:layout_constraintVertical_bias=".55"
             app:wheelItemRadio="0.15"
             app:wheelWidthPercentage="1.1"
             app:wheelPaddingRadio="0.0"

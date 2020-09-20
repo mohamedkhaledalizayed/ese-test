@@ -43,7 +43,7 @@ class FavoritesAdapter(
                 callback?.invoke(it)
             }
         }
-        binding.ivClose.setOnClickListener {
+        binding.ivRemove.setOnClickListener {
             binding.provider?.let {
                 removeCallback?.invoke(it)
             }

@@ -5,11 +5,14 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
+import android.os.Environment
 import android.view.View
 import com.neqabty.R
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ImageUtils {
 
@@ -58,14 +61,30 @@ class ImageUtils {
         }
 
         @Throws(IOException::class)
-        fun createImageFile(dir: File, name: String): File {
-            val image = File.createTempFile(
-                    name, /* prefix */
+        fun createImageFile(context: Context): File {
+            // Create an image file name
+            val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss" , Locale.ENGLISH).format(Date())
+            val storageDir: File = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+            return File.createTempFile(
+                    "JPEG_${timeStamp}_", /* prefix */
                     ".jpg", /* suffix */
-                    dir /* directory */
+                    storageDir /* directory */
             )
-            return image
+//                    .apply {
+//                // Save a file: path for use with ACTION_VIEW intents
+//                currentPhotoPath = absolutePath
+//            }
         }
+
+//        @Throws(IOException::class)
+//        fun createImageFile(dir: File, name: String): File {
+//            val image = File.createTempFile(
+//                    name, /* prefix */
+//                    ".jpg", /* suffix */
+//                    dir /* directory */
+//            )
+//            return image
+//        }
 
         fun share(context: Context, path: String) {
             val intent = Intent().apply {

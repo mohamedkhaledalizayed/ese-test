@@ -22,7 +22,8 @@ class ProviderEntityDataMapper @Inject constructor() : Mapper<ProviderEntity, Pr
                 areaId = from.areaId,
                 emails = from.emails,
                 phones = from.phones,
-                type = from.type
+                typeID = from.typeID,
+                typeName = from.typeName
         )
     }
 }

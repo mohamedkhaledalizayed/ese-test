@@ -112,11 +112,11 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         }
 
         val sectionsList = mutableListOf<String>(getString(R.string.wheel_news), getString(R.string.wheel_trips), getString(R.string.wheel_payment), getString(R.string.wheel_employment),
-                getString(R.string.wheel_delivery), getString(R.string.wheel_training), getString(R.string.wheel_customer_service)
+                getString(R.string.wheel_retirees), getString(R.string.wheel_training), getString(R.string.wheel_customer_service)
                 , getString(R.string.wheel_complaints), getString(R.string.wheel_syndicate_services),
                 getString(R.string.wheel_medical))
-        val iconsList = mutableListOf<Int>(R.drawable.ic_wheel_news, R.drawable.ic_wheel_trip, R.drawable.ic_wheel_payments, R.drawable.ic_wheel_record_renewal, R.drawable.ic_wheel_guide,
-                R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_medical_approval)
+        val iconsList = mutableListOf<Int>(R.drawable.ic_wheel_news, R.drawable.ic_wheel_trip, R.drawable.ic_wheel_payments, R.drawable.ic_wheel_employment, R.drawable.ic_wheel_retirees,
+                R.drawable.ic_wheel_training, R.drawable.ic_wheel_customer_service, R.drawable.ic_wheel_complaints, R.drawable.ic_wheel_syndicate_services, R.drawable.ic_wheel_medical_approval)
 
         val wheelAdapter = WheelAdapter(requireContext(), sectionsList, iconsList, 0)
         wheel.setAdapter(wheelAdapter)
@@ -145,11 +145,16 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         adapter.addFragment(WheelNewsFragment())
         adapter.addFragment(WheelTripsFragment())
         adapter.addFragment(WheelPaymentsFragment())
+        adapter.addFragment(WheelEmploymentFragment())
+        adapter.addFragment(WheelRetireesFragment())
+        adapter.addFragment(WheelTrainingFragment())
+        adapter.addFragment(WheelCustomerServiceFragment())
+        adapter.addFragment(WheelComplaintsFragment())
         adapter.addFragment(ClaimingStep4Fragment())
         adapter.addFragment(WheelMedicalFragment())
         binding.viewpager.adapter = adapter
         binding.viewpager.setSwipePagingEnabled(false)
-        binding.viewpager.offscreenPageLimit = 2
+        binding.viewpager.offscreenPageLimit = 8
 //        binding.indicator.setViewPager(binding.viewpager)
     }
 
