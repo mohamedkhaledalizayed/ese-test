@@ -12,26 +12,40 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/margin_horizontal_large">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clHeader"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:padding="@dimen/margin_horizontal_normal"
+            android:background="@drawable/rounded_bg">
 
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_vertical_large"
+                android:layout_marginTop="@dimen/margin_horizontal_normal"
                 android:gravity="center"
-                android:paddingTop="?attr/actionBarSize"
                 android:text="@string/areaDetails"
-                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.neqabty.presentation.ui.common.SwipeLockableViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/margin_horizontal_normal"
+                app:layout_constraintBottom_toTopOf="@id/indicator"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                android:layout_height="0dp" />
+
 
 
             <com.rd.PageIndicatorView
@@ -44,13 +58,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:piv_radius="4dp"
                 app:piv_rtl_mode="on"
-                app:piv_selectedColor="@color/colorPrimary"
+                app:piv_selectedColor="@color/dark_green"
                 app:piv_unselectedColor="@color/colorAccent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.neqabty.presentation.ui.common.SwipeLockableViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 </layout>

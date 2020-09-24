@@ -72,7 +72,8 @@ interface NeqabtyDataStore {
         doc4: File?
     ): Observable<Unit>
 
-    fun getAllServices(): Observable<List<ServiceEntity>>
+    fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>>
+    fun getAllServices(typeID: Int): Observable<List<ServiceEntity>>
     fun inquirePayment(userNumber: Int, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity>
     fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
     fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity>

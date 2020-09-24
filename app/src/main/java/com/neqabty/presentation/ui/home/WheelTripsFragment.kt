@@ -100,7 +100,7 @@ class WheelTripsFragment : BaseFragment(), Injectable {
         this.tripsAdapter = tripsAdapter
         binding.rvTrips.adapter = tripsAdapter
         state.trips?.let {
-            if (it.size >= 3) tripsAdapter.submitList(it.subList(0, 3)) else tripsAdapter.submitList(it)
+            if (it.size >= 5) tripsAdapter.submitList(it.subList(0, 5)) else tripsAdapter.submitList(it)
             bSeemore.visibility = View.VISIBLE
         }
 

@@ -128,6 +128,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         toolbar.setupWithNavController(navController, appBarConfiguration)
         // ////////////////////////////////
         (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        (nav_view as NavigationView).itemIconTintList = null
         (nav_view as NavigationView).setNavigationItemSelectedListener {
             (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             when (it.itemId) {

@@ -83,7 +83,7 @@ class WheelNewsFragment : BaseFragment(), Injectable {
         binding.rvNews.adapter = newsAdapter
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.news?.let {
-            if (it.size >= 3) newsAdapter.submitList(it.subList(0, 3)) else newsAdapter.submitList(it)
+            if (it.size >= 5) newsAdapter.submitList(it.subList(0, 5)) else newsAdapter.submitList(it)
             bSeemore.visibility = View.VISIBLE
         }
 

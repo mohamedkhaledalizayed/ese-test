@@ -20,8 +20,8 @@ class CustomImagePagerAdapter(val context: Context, val imgs: List<String>) : Pa
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val view = LayoutInflater.from(context).inflate(R.layout.image_pager_ietm, null)
-        val imageView = view.findViewById<ImageView>(R.id.ivImage)
+        val view = LayoutInflater.from(context).inflate(R.layout.image_pager_item, null)
+        val imageView = view.findViewById<ImageView>(R.id.ivLogo)
         Glide.with(context).load(Uri.parse(imgs[position])).into(imageView)
         container.addView(view)
         return view

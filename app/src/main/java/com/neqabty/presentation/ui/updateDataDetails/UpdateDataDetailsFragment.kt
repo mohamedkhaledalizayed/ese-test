@@ -57,6 +57,7 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
     private var captureImage = false
 
     private var PhotoFileName = ""
+    lateinit var photoFileURI: Uri
     private var photosList: MutableList<PhotoUI> = mutableListOf<PhotoUI>()
     lateinit var updateDataDetailsViewModel: UpdateDataDetailsViewModel
 
@@ -118,9 +119,9 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 // //            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
 //            binding.userData = it
 //        }
-        photosList.add(0, PhotoUI(null, null))
-        photosList.add(1, PhotoUI(null, null))
-        photosList.add(2, PhotoUI(null, null))
+        photosList.add(0, PhotoUI(null, null, null))
+        photosList.add(1, PhotoUI(null, null, null))
+        photosList.add(2, PhotoUI(null, null, null))
 
         binding.ibAddPhoto1.setOnClickListener {
             selectedIndex = 0
@@ -224,6 +225,7 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
                             it
                     )
                     PhotoFileName = photoFile.name
+                    photoFileURI = photoURI
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     startActivityForResult(takePictureIntent, REQUEST_CAMERA)
                 }
@@ -256,7 +258,7 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 //    }
 
     private fun onCaptureImageResult() {
-        addToPhotos(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName))
+        addToPhotos(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName, photoFileURI))
         val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" +PhotoFileName)
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes)
@@ -283,12 +285,12 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
             fo.close()
-            return PhotoUI(path, name)
+            return PhotoUI(path, name, null)
         } catch (e1: IOException) {
             e1.printStackTrace()
         }
 
-        return PhotoUI(path, name)
+        return PhotoUI(path, name, null)
     }
 
     fun getPhoto(index: Int): File? {

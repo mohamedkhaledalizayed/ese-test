@@ -28,7 +28,7 @@ class TripsFragment : BaseFragment(), Injectable {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<TripsFragmentBinding>()
-    private var adapter by autoCleared<TripsAdapter>()
+    private var adapter by autoCleared<com.neqabty.presentation.ui.home.TripsAdapter>()
 
     lateinit var tripsViewModel: TripsViewModel
 
@@ -58,7 +58,7 @@ class TripsFragment : BaseFragment(), Injectable {
 
         initializeViews()
 
-        val adapter = com.neqabty.presentation.ui.trips.TripsAdapter(dataBindingComponent, appExecutors) { trip ->
+        val adapter = com.neqabty.presentation.ui.home.TripsAdapter(dataBindingComponent, appExecutors) { trip ->
             navController().navigate(
                     TripsFragmentDirections.tripDetails(trip))
         }

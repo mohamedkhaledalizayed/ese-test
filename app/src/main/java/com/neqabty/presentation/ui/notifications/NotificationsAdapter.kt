@@ -11,6 +11,7 @@ import com.neqabty.databinding.NotificationItemBinding
 import com.neqabty.presentation.entities.NotificationUI
 import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
+import com.neqabty.ui.presentation.common.DataBoundViewHolder
 
 class NotificationsAdapter(
         private val dataBindingComponent: DataBindingComponent,
@@ -43,12 +44,20 @@ class NotificationsAdapter(
                 callback?.invoke(it)
             }
         }
-        binding.ivNotification.layoutParams.width = DisplayMetrics.width / 6
-        binding.ivNotification.layoutParams.height = DisplayMetrics.width / 6
+//        binding.ivNotification.layoutParams.width = DisplayMetrics.width / 6
+//        binding.ivNotification.layoutParams.height = DisplayMetrics.width / 6
         return binding
     }
 
     override fun bind(binding: NotificationItemBinding, item: NotificationUI) {
         binding.notification = item
+    }
+
+    override fun onBindViewHolder(holder: DataBoundViewHolder<NotificationItemBinding>, position: Int) {
+        super.onBindViewHolder(holder, position)
+        if(position %2 == 0)
+            holder.binding.clRoot.setBackgroundResource(R.drawable.provider_rounded_green_bg)
+        else
+            holder.binding.clRoot.setBackgroundResource(R.drawable.provider_rounded_blue_bg)
     }
 }

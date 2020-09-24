@@ -1,11 +1,5 @@
 package com.neqabty.presentation.ui.inquiry
 
-import android.content.Intent
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,19 +7,21 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.InquiryFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.ServiceTypeUI
 import com.neqabty.presentation.entities.ServiceUI
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.inquiry_fragment.*
-import kotlinx.android.synthetic.main.inquiry_fragment.view.*
-import me.cowpay.PaymentMethodsActivity
-import me.cowpay.util.CowpayConstantKeys
-
 import javax.inject.Inject
 
 class InquiryFragment : BaseFragment(), Injectable {
@@ -38,12 +34,14 @@ class InquiryFragment : BaseFragment(), Injectable {
 
     lateinit var inquiryViewModel: InquiryViewModel
 
+    var serviceTypesResultList: List<ServiceTypeUI>? = mutableListOf()
     var servicesResultList: List<ServiceUI>? = mutableListOf()
+    var serviceTypeID: Int = 0
     var serviceID: Int = 0
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -66,20 +64,19 @@ class InquiryFragment : BaseFragment(), Injectable {
         inquiryViewModel.errorState.observe(this, Observer { _ ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                inquiryViewModel.getAllServices()
+                inquiryViewModel.getAllServiceTypes()
             }, cancelCallback = {
                 navController().navigateUp()
             })
         })
-        inquiryViewModel.getAllServices()
+        inquiryViewModel.getAllServiceTypes()
     }
 
     fun initializeViews() {
 //        if (!PreferencesHelper(requireContext()).user.equals("null"))
 //            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
-
-        llContent.visibility = View.VISIBLE
         renderServices()
+        llContent.visibility = View.VISIBLE
         bSend.setOnClickListener {
             if (isDataValid(binding.edMemberNumber.text.toString())) {
                 inquiryViewModel.paymentInquiry(binding.edMemberNumber.text.toString(), serviceID.toString())
@@ -90,9 +87,16 @@ class InquiryFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: InquiryViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         activity?.invalidateOptionsMenu()
-        if (llContent.visibility == View.INVISIBLE && state.services != null) {
+        if (state.services != null) {
             servicesResultList = state.services
             initializeViews()
+            state.services = null
+            return
+        } else if (llContent.visibility == View.INVISIBLE && state.serviceTypes != null) {
+            serviceTypesResultList = state.serviceTypes
+            renderServiceTypes()
+            state.serviceTypes = null
+            return
         } else if (!state.isLoading && state.member != null) {
 //            PreferencesHelper(requireContext()).user = state.member?.engineerID.toString()
 //            if (state?.member?.code == 0 || state.member?.code == 1) {
@@ -114,6 +118,20 @@ class InquiryFragment : BaseFragment(), Injectable {
         }
     }
 
+    fun renderServiceTypes() {
+        binding.spServiceTypes.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, serviceTypesResultList!!)
+        binding.spServiceTypes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                serviceTypeID = (parent.getItemAtPosition(position) as ServiceTypeUI).id
+                llSuperProgressbar.visibility = View.VISIBLE
+                inquiryViewModel.getAllServices(serviceTypeID)
+            }
+        }
+        binding.spServiceTypes.setSelection(0)
+        inquiryViewModel.getAllServices((spServiceTypes.selectedItem as ServiceTypeUI).id)
+    }
+
     fun renderServices() {
         binding.spService.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, servicesResultList!!)
         binding.spService.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -124,6 +142,7 @@ class InquiryFragment : BaseFragment(), Injectable {
         }
         binding.spService.setSelection(0)
     }
+
     //region
     private fun isDataValid(number: String): Boolean {
         return if (number.isBlank()) {

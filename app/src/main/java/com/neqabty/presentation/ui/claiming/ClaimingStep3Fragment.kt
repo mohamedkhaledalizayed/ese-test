@@ -58,6 +58,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
     private val SELECT_FILE = 1
 
     private var PhotoFileName = ""
+    lateinit var photoFileURI: Uri
 
     private var captureImage = false
 
@@ -194,6 +195,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
                             it
                     )
                     PhotoFileName = photoFile.name
+                    photoFileURI = photoURI
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     startActivityForResult(takePictureIntent, REQUEST_CAMERA)
                 }
@@ -227,10 +229,10 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
     }
 
     private fun onCaptureImageResult() {
-        photosList.add(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName))
+        photosList.add(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName,photoFileURI))
         val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" +PhotoFileName)
         val bytes = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
         val bos = BufferedOutputStream(FileOutputStream(File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName)))
         bos.write(bytes.toByteArray())
         bos.flush()
@@ -241,7 +243,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
 
     fun saveImage(myBitmap: Bitmap): PhotoUI {
         val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.PNG, 100, bytes)
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 30, bytes)
         val path: String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
         val name = System.currentTimeMillis().toString() + ".jpg"
         val directory = File(path)
@@ -255,12 +257,12 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
             fo.close()
-            return PhotoUI(path, name)
+            return PhotoUI(path, name,null)
         } catch (e1: IOException) {
             e1.printStackTrace()
         }
 
-        return PhotoUI(path, name)
+        return PhotoUI(path, name,null)
     }
 
     fun getPhoto(index: Int): File? {

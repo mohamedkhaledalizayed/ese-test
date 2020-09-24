@@ -95,8 +95,11 @@ interface WebService {
     @POST("api/v1/transactions/generate-hash")
     fun getTransactionHash(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
-    @GET("api/v1/services")
-    fun getAllServices(): Observable<ResponseWrapper<List<List<ServiceData>>>>
+    @GET("api/v1/eseServicesTypes")
+    fun getAllServiceTypes(): Observable<ApiResponse<List<ServiceTypeData>>>
+
+    @POST("api/v1/eseServices")
+    fun getAllServices(@Body servicesRequest: ServicesRequest): Observable<ApiResponse<List<ServiceData>>>
 
     @GET("api/v1/service")
     fun paymentInquiry(

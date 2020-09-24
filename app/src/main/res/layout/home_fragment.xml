@@ -44,7 +44,7 @@
             app:wheelCursorColor="@android:color/transparent"
             app:wheelCursorHeight="1dp"
             app:layout_constraintVertical_bias=".55"
-            app:wheelItemRadio="0.15"
+            app:wheelItemRadio="0.18"
             app:wheelWidthPercentage="1.1"
             app:wheelPaddingRadio="0.0"
             android:padding="0dp"

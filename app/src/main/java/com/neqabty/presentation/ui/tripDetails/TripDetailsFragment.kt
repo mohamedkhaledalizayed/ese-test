@@ -30,7 +30,6 @@ class TripDetailsFragment : BaseFragment(), Injectable {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<TripDetailsFragmentBinding>()
-    private var adapter by autoCleared<RegimentsAdapter>()
 
     var tripId: Int = 0
 
@@ -86,6 +85,7 @@ class TripDetailsFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews(tripItem: TripUI) {
+        tripItem.title?.let { setToolbarTitle(it) }
         tripItem.imgs?.let {
             //            var imgs = mutableListOf<String>()
 //            for (i in 0 until it.size) {
@@ -102,12 +102,7 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         binding.svContent.visibility = View.VISIBLE
         binding.tripItem = tripItem
 
-        val adapter = RegimentsAdapter(dataBindingComponent, appExecutors) {}
-        this.adapter = adapter
-        binding.rvRegiments.adapter = adapter
-        adapter.submitList(tripItem.regiments)
-
-        binding.bReserve.setOnClickListener {
+        binding.bViewRegiments.setOnClickListener {
             TripsData.tripItem = tripItem
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(TripDetailsFragmentDirections.openTripReservation(tripItem))

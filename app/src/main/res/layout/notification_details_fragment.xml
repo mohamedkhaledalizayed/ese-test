@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="android.text.Html"/>
-        <import type="android.view.View"/>
+
+        <import type="android.text.Html" />
+
+        <import type="android.view.View" />
+
         <variable
             name="notificationItem"
             type="com.neqabty.presentation.entities.NotificationUI" />
@@ -14,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:padding="@dimen/margin_horizontal_large">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,13 +30,13 @@
                 android:id="@+id/llContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_horizontal_normal"
+                android:background="@drawable/rounded_bg"
+                android:elevation="@dimen/elevation_level_one"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:background="@drawable/bg"
-                android:visibility="gone"
-                android:elevation="@dimen/elevation_level_one"
-                android:layout_margin="@dimen/margin_horizontal_normal"
-                android:padding="@dimen/margin_horizontal_normal">
+                android:padding="@dimen/margin_horizontal_normal"
+                android:visibility="gone">
 
                 <ScrollView
                     android:id="@+id/svContent"
@@ -53,141 +55,150 @@
                             android:id="@+id/tvDate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{Html.fromHtml(@string/date_title(notificationItem.date))}"
-                            android:textSize="@dimen/text_size_large" />
+                            android:text="@{Html.fromHtml(@string/date_title(notificationItem.date +' '+ notificationItem.time))}"
+                            android:textSize="@dimen/text_size_medium" />
 
-                        <TextView
-                            android:id="@+id/tvTime"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@{Html.fromHtml(@string/time(notificationItem.time))}"
-                            android:textSize="@dimen/text_size_large" />
+                        <!--                        <TextView-->
+                        <!--                            android:id="@+id/tvTime"-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:text="@{Html.fromHtml(@string/time(notificationItem.time))}"-->
+                        <!--                            android:textSize="@dimen/text_size_medium" />-->
 
                         <!--<TextView-->
-                            <!--android:id="@+id/tvProviderName"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:text="@{Html.fromHtml(@string/provider_title(notificationItem.title,notificationItem.name))}"-->
-                            <!--android:visibility='@{notificationItem.name == null ? View.GONE : View.VISIBLE}'-->
-                            <!--android:textSize="@dimen/text_size_large" />-->
+                        <!--android:id="@+id/tvProviderName"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="@{Html.fromHtml(@string/provider_title(notificationItem.title,notificationItem.name))}"-->
+                        <!--android:visibility='@{notificationItem.name == null ? View.GONE : View.VISIBLE}'-->
+                        <!--android:textSize="@dimen/text_size_medium" />-->
 
                         <TextView
                             android:id="@+id/tvName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_horizontal_normal"
                             android:text="@{Html.fromHtml(@string/provider_title(notificationItem.title,notificationItem.name))}"
-                            android:visibility='@{(notificationItem.name == null || notificationItem.name == "") ? View.GONE : View.VISIBLE}'
-                            android:textSize="@dimen/text_size_large" />
+                            android:textSize="@dimen/text_size_medium"
+                            android:visibility='@{(notificationItem.name == null || notificationItem.name == "") ? View.GONE : View.VISIBLE}' />
 
                         <TextView
                             android:id="@+id/tvTrip"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_horizontal_normal"
                             android:text="@{Html.fromHtml(@string/trip_title(notificationItem.trip))}"
-                            android:visibility='@{notificationItem.trip == null ? View.GONE : View.VISIBLE}'
-                            android:textSize="@dimen/text_size_large" />
+                            android:textSize="@dimen/text_size_medium"
+                            android:visibility='@{notificationItem.trip == null ? View.GONE : View.VISIBLE}' />
 
                         <TextView
                             android:id="@+id/tvRegiment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_horizontal_normal"
                             android:text="@{Html.fromHtml(@string/regiment_title(notificationItem.regiment))}"
-                            android:visibility='@{notificationItem.regiment == null ? View.GONE : View.VISIBLE}'
-                            android:textSize="@dimen/text_size_large" />
+                            android:textSize="@dimen/text_size_medium"
+                            android:visibility='@{notificationItem.regiment == null ? View.GONE : View.VISIBLE}' />
 
                         <TextView
                             android:id="@+id/tvStatus"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_horizontal_normal"
                             android:text="@{Html.fromHtml(@string/status_title(notificationItem.status))}"
-                            android:textSize="@dimen/text_size_large" />
+                            android:textSize="@dimen/text_size_medium" />
 
                         <TextView
                             android:id="@+id/tvApprovalNum"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_horizontal_normal"
                             android:text="@{Html.fromHtml(@string/approval_title(notificationItem.approvalNumber))}"
-                            android:visibility='@{notificationItem.approvalNumber == null ? View.GONE : View.VISIBLE}'
-                            android:textSize="@dimen/text_size_large" />
+                            android:textSize="@dimen/text_size_medium"
+                            android:visibility='@{(notificationItem.approvalNumber == null || notificationItem.approvalNumber.equals("0") || notificationItem.approvalNumber.equals(""))? View.GONE : View.VISIBLE}' />
 
                         <TextView
                             android:id="@+id/tvComment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_horizontal_normal"
                             android:text="@{Html.fromHtml(@string/comment(notificationItem.comment))}"
-                            android:visibility='@{notificationItem.comment.equals("") || notificationItem.comment == null ? View.GONE : View.VISIBLE}'
-                            android:textSize="@dimen/text_size_large" />
+                            android:textSize="@dimen/text_size_medium"
+                            android:visibility='@{notificationItem.comment.equals("") || notificationItem.comment == null ? View.GONE : View.VISIBLE}' />
 
                         <TextView
                             android:id="@+id/tvCost"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_horizontal_normal"
                             android:text="@{Html.fromHtml(@string/cost(notificationItem.cost))}"
-                            android:textSize="@dimen/text_size_large"
+                            android:textSize="@dimen/text_size_medium"
                             android:visibility='@{notificationItem.cost == null ? View.GONE : View.VISIBLE}' />
 
                         <TextView
                             android:id="@+id/tvHousingType"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_horizontal_normal"
                             android:text="@{Html.fromHtml(@string/housing_type_title(notificationItem.housingType))}"
-                            android:textSize="@dimen/text_size_large"
+                            android:textSize="@dimen/text_size_medium"
                             android:visibility='@{notificationItem.housingType == null ? View.GONE : View.VISIBLE}' />
 
                         <TextView
                             android:id="@+id/tvChildNum"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_horizontal_normal"
                             android:text="@{Html.fromHtml(@string/child_num_title(notificationItem.numChild))}"
-                            android:textSize="@dimen/text_size_large"
+                            android:textSize="@dimen/text_size_medium"
                             android:visibility='@{notificationItem.numChild == null ? View.GONE : View.VISIBLE}' />
 
                         <Button
                             android:id="@+id/bViewAttachment"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_vertical_large"
-                            android:background="@mipmap/btn"
-                            android:gravity="center"
                             android:layout_gravity="center"
+                            android:layout_margin="@dimen/margin_vertical_large"
+                            android:background="@drawable/btn_green"
+                            android:gravity="center"
                             android:padding="@dimen/margin_horizontal_small"
                             android:text="@string/view_attachment"
-                            android:visibility="@{notificationItem.approvalImage == null ? View.GONE : View.VISIBLE}"
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/text_size_medium" />
+                            android:textSize="@dimen/text_size_medium"
+                            android:visibility="@{notificationItem.approvalImage == null ? View.GONE : View.VISIBLE}" />
 
 
                         <Button
                             android:id="@+id/bPay"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_vertical_large"
-                            android:background="@mipmap/btn"
-                            android:gravity="center"
                             android:layout_gravity="center"
+                            android:layout_margin="@dimen/margin_vertical_large"
+                            android:background="@drawable/btn_green"
+                            android:gravity="center"
                             android:padding="@dimen/margin_horizontal_small"
                             android:text="@string/pay"
-                            android:visibility='@{(notificationItem.cost == 0  || notificationItem.cost == null) ? View.GONE : View.VISIBLE}'
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/text_size_medium" />
+                            android:textSize="@dimen/text_size_medium"
+                            android:visibility='@{(notificationItem.cost == 0  || notificationItem.cost == null) ? View.GONE : View.VISIBLE}' />
 
                         <!--                        <androidx.cardview.widget.CardView-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_margin="@dimen/margin_horizontal_small"-->
-<!--                            android:elevation="@dimen/elevation_level_one"-->
-<!--                            android:shape="ring"-->
-<!--                            app:cardCornerRadius="@dimen/round_radius">-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:layout_margin="@dimen/margin_horizontal_small"-->
+                        <!--                            android:elevation="@dimen/elevation_level_one"-->
+                        <!--                            android:shape="ring"-->
+                        <!--                            app:cardCornerRadius="@dimen/round_radius">-->
 
-<!--                            <ImageView-->
-<!--                                android:id="@+id/ivImage"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:adjustViewBounds="false"-->
-<!--                                android:cropToPadding="false"-->
-<!--                                android:scaleType="fitCenter"-->
-<!--                                app:imageUrl="@{notificationItem.approvalImage}" />-->
-<!--                        </androidx.cardview.widget.CardView>-->
+                        <!--                            <ImageView-->
+                        <!--                                android:id="@+id/ivImage"-->
+                        <!--                                android:layout_width="match_parent"-->
+                        <!--                                android:layout_height="wrap_content"-->
+                        <!--                                android:adjustViewBounds="false"-->
+                        <!--                                android:cropToPadding="false"-->
+                        <!--                                android:scaleType="fitCenter"-->
+                        <!--                                app:imageUrl="@{notificationItem.approvalImage}" />-->
+                        <!--                        </androidx.cardview.widget.CardView>-->
 
                     </LinearLayout>
 

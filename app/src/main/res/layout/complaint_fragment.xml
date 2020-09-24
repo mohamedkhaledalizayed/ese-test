@@ -11,11 +11,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_horizontal_large">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_bg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -31,10 +33,19 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/tvFillData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/complaint_fill_data"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/tvMobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
                     android:text="@string/complaint_mobile"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_medium" />
@@ -54,7 +65,7 @@
                     android:id="@+id/tvTypes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
                     android:text="@string/complaint_type"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_medium" />
@@ -73,7 +84,7 @@
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
                     android:text="@string/complaint_name"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_medium" />
@@ -92,7 +103,7 @@
                     android:id="@+id/tvBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
                     android:text="@string/complaint_body"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_medium" />
@@ -107,14 +118,14 @@
                     android:textSize="@dimen/text_size_medium" />
 
                 <Button
-                    android:id="@+id/bNext"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/bSend"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_horizontal_small"
-                    android:background="@mipmap/btn"
+                    android:layout_margin="@dimen/margin_horizontal_normal"
+                    android:background="@drawable/btn_green"
                     android:elevation="@dimen/elevation_level_one"
                     android:gravity="center"
-                    android:text="@string/next"
+                    android:text="@string/send"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>

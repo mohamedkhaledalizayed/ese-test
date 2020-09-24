@@ -8,36 +8,46 @@
     <!--<group>-->
     <item
         android:id="@+id/news_fragment"
-        android:title="@string/news_title" />
+        android:title="@string/news_title"
+        android:icon="@mipmap/home_ic" />
     <item
         android:id="@+id/trips_fragment"
-        android:title="@string/trips_title" />
+        android:title="@string/trips_title"
+        android:icon="@drawable/ic_menu_trips" />
     <item
         android:id="@+id/claiming_fragment"
-        android:title="@string/claiming_title" />
+        android:title="@string/claiming_title"
+        android:icon="@mipmap/home_ic" />
     <item
         android:id="@+id/medical_fragment"
-        android:title="@string/medical_title" />
+        android:title="@string/medical_title"
+        android:icon="@mipmap/home_ic" />
     <item
         android:id="@+id/inquiry_fragment"
-        android:title="@string/inquiry_title" />
+        android:title="@string/inquiry_title"
+        android:icon="@mipmap/home_ic" />
     <item
         android:id="@+id/engineering_records_fragment"
-        android:title="@string/engineering_records_title" />
+        android:title="@string/engineering_records_title"
+        android:icon="@mipmap/home_ic" />
     <item
         android:id="@+id/update_data_fragment"
-        android:title="@string/update_data_title" />
+        android:title="@string/update_data_title"
+        android:icon="@mipmap/home_ic" />
     <item
         android:id="@+id/complaints_fragment"
-        android:title="@string/complaints_title" />
+        android:title="@string/complaints_title"
+        android:icon="@mipmap/home_ic" />
 
     <item
         android:id="@+id/about_fragment"
-        android:title="@string/about_title" />
+        android:title="@string/about_title"
+        android:icon="@drawable/ic_menu_about_us" />
 
     <item
         android:id="@+id/settings_fragment"
-        android:title="@string/settings_title" />
+        android:title="@string/settings_title"
+        android:icon="@drawable/ic_menu_settings" />
 
     <!--</group>-->
 
@@ -47,7 +57,7 @@
         <!--android:title="@string/settings_title" />-->
     <item
         android:id="@+id/contactus_fragment"
-        android:icon="@mipmap/contact_us_ic"
+        android:icon="@drawable/ic_menu_contact_us"
         android:title="@string/contactus_title" />
     <!--<item-->
         <!--android:id="@+id/aboutapp_fragment"-->

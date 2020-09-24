@@ -42,7 +42,7 @@ data class TripUI(
         var updatedAt: String?
     ) {
         override fun toString(): String {
-            return dateFrom ?: "" + dateTo ?: ""
+            return dateFrom ?: "" + " : " + dateTo ?: ""
         }
     }
 

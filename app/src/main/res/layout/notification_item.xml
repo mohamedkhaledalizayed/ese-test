@@ -14,105 +14,82 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_horizontal_small"
-        android:background="@drawable/bg"
+        android:background="@drawable/provider_rounded_green_bg"
         android:elevation="@dimen/elevation_level_one"
         android:padding="@dimen/margin_horizontal_normal">
 
-        <ImageView
-            android:id="@+id/ivNotification"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="center"
-            android:background="@drawable/circle_background_green"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_notification"/>
-
-        <LinearLayout
-            android:id="@+id/llTitle"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tvType"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_horizontal_small"
-            android:layout_marginStart="@dimen/margin_horizontal_normal"
-            android:orientation="vertical"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{Html.fromHtml(@string/type_title(notification.notificationType))}"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:typeface="@{notification.isRead}" />
+
+        <TextView
+            android:id="@+id/tvProvider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvType"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/margin_horizontal_small"
+            android:text="@{Html.fromHtml(@string/provider_title(notification.title,notification.name))}"
+            android:textSize="@dimen/text_size_medium"
+            android:typeface="@{notification.isRead}"
+            android:visibility='@{(notification.name == null || notification.name == "") ? View.GONE : View.VISIBLE}' />
+
+        <ImageView
+            android:id="@+id/ivClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_clock"
+            android:layout_marginTop="@dimen/margin_horizontal_small"
+            android:tint="@color/dark_grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvProvider"/>
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintStart_toEndOf="@id/ivClock"
+            app:layout_constraintTop_toTopOf="@id/ivClock"
+            android:layout_marginStart="@dimen/margin_horizontal_small"
+            app:layout_constraintBottom_toBottomOf="@id/ivClock"
+            android:text="@{notification.date +' '+  notification.time}"
+            android:textSize="@dimen/text_size_medium"
+            android:typeface="@{notification.isRead}" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_gray_bg"
+            android:backgroundTint="@color/colorPrimaryLight"
+            android:ellipsize="end"
+            android:maxLines="1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ivNotification"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tvType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@{Html.fromHtml(@string/type_title(notification.notificationType))}"
-                android:textSize="@dimen/text_size_medium"
-                android:typeface="@{notification.isRead}" />
-
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@{Html.fromHtml(@string/date_title(notification.date))}"
-                android:textSize="@dimen/text_size_medium"
-                android:typeface="@{notification.isRead}" />
-
-            <TextView
-                android:id="@+id/tvTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@{Html.fromHtml(@string/time(notification.time))}"
-                android:textSize="@dimen/text_size_medium"
-                android:typeface="@{notification.isRead}" />
-
-            <TextView
-                android:id="@+id/tvProvider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@{Html.fromHtml(@string/provider_title(notification.title,notification.name))}"
-                android:textSize="@dimen/text_size_medium"
-                android:typeface="@{notification.isRead}"
-                android:visibility='@{(notification.name == null || notification.name == "") ? View.GONE : View.VISIBLE}' />
-
-            <!--<TextView-->
-            <!--android:id="@+id/tvTrip"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@{Html.fromHtml(@string/trip_title(notification.trip))}"-->
-            <!--android:textSize="@dimen/text_size_medium"-->
-            <!--android:typeface="@{notification.isRead}"-->
-            <!--android:visibility='@{notification.trip == null ? View.GONE : View.VISIBLE}' />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/tvRegiment"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@{Html.fromHtml(@string/regiment_title(notification.regiment))}"-->
-            <!--android:textSize="@dimen/text_size_medium"-->
-            <!--android:typeface="@{notification.isRead}"-->
-            <!--android:visibility='@{notification.regiment == null ? View.GONE : View.VISIBLE}' />-->
-
-            <TextView
-                android:id="@+id/tvStatus"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@{Html.fromHtml(@string/status_title(notification.status))}"
-                android:textSize="@dimen/text_size_medium"
-                android:typeface="@{notification.isRead}" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/tvDate"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{notification.status}"
+            android:textColor="@color/colorPrimary"
+            android:padding="@dimen/margin_horizontal_small"
+            android:layout_marginEnd="@dimen/margin_horizontal_small"
+            android:layout_marginTop="@dimen/margin_horizontal_small"
+            android:textSize="@dimen/text_size_medium"
+            android:typeface="@{notification.isRead}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

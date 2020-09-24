@@ -329,6 +329,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetAllServiceTypes(neqabtyRepository: NeqabtyRepository): GetAllServiceTypes {
+        return GetAllServiceTypes(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun providePaymentInquiry(neqabtyRepository: NeqabtyRepository): PaymentInquiry {
         return PaymentInquiry(ASyncTransformer(), neqabtyRepository)
     }

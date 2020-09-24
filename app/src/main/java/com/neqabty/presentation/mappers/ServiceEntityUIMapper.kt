@@ -12,7 +12,8 @@ class ServiceEntityUIMapper @Inject constructor() : Mapper<ServiceEntity, Servic
     override fun mapFrom(from: ServiceEntity): ServiceUI {
         return ServiceUI(
                 id = from.id,
-                name = from.name
+                name = from.name,
+                cost = from.cost
         )
     }
 }

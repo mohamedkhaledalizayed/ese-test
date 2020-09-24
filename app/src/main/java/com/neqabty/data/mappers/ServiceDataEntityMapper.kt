@@ -12,7 +12,8 @@ class ServiceDataEntityMapper @Inject constructor() : Mapper<ServiceData, Servic
     override fun mapFrom(from: ServiceData): ServiceEntity {
         return ServiceEntity(
                 id = from.id,
-                name = from.name
+                name = from.name,
+                cost = from.cost
         )
     }
 }

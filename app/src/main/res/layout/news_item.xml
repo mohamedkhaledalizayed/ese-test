@@ -73,14 +73,14 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_medium" />
 
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="@{news.date}"
-                android:textSize="@dimen/text_size_small" />
+<!--            <TextView-->
+<!--                android:id="@+id/tvDate"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:ellipsize="end"-->
+<!--                android:maxLines="1"-->
+<!--                android:text="@{news.date}"-->
+<!--                android:textSize="@dimen/text_size_small" />-->
 
             <TextView
                 android:id="@+id/tvDesc"

@@ -54,6 +54,7 @@ class CoronaFragment : BaseFragment(), Injectable {
     private var photosList: MutableList<PhotoUI> = mutableListOf<PhotoUI>()
     private var captureImage = false
     private var PhotoFileName = ""
+    lateinit var photoFileURI: Uri
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -229,6 +230,7 @@ class CoronaFragment : BaseFragment(), Injectable {
                             it
                     )
                     PhotoFileName = photoFile.name
+                    photoFileURI = photoURI
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     startActivityForResult(takePictureIntent, REQUEST_CAMERA)
                 }
@@ -249,7 +251,7 @@ class CoronaFragment : BaseFragment(), Injectable {
 
 
     private fun onCaptureImageResult() {
-        photosList.add(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName))
+        photosList.add(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName,photoFileURI))
         val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" +PhotoFileName)
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes)
