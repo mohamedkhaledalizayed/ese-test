@@ -186,6 +186,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
                 }
+                R.id.about_app_fragment -> {
+                    navController.navigate(R.id.aboutAppFragment)
+                }
                 R.id.settings_fragment -> {
                     navController.navigate(R.id.settingsFragment)
                 }

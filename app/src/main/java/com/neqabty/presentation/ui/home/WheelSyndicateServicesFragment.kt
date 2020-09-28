@@ -13,6 +13,7 @@ import com.neqabty.R
 import com.neqabty.databinding.WheelEmploymentFragmentBinding
 import com.neqabty.databinding.WheelPaymentsFragmentBinding
 import com.neqabty.databinding.WheelRetireesFragmentBinding
+import com.neqabty.databinding.WheelSyndicateServicesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
@@ -20,13 +21,13 @@ import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.wheel_payments_fragment.*
 import javax.inject.Inject
 
-class WheelEmploymentFragment : BaseFragment(), Injectable {
+class WheelSyndicateServicesFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    var binding by autoCleared<WheelEmploymentFragmentBinding>()
+    var binding by autoCleared<WheelSyndicateServicesFragmentBinding>()
 
 
     @Inject
@@ -39,7 +40,7 @@ class WheelEmploymentFragment : BaseFragment(), Injectable {
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.wheel_employment_fragment,
+                R.layout.wheel_syndicate_services_fragment,
                 container,
                 false,
                 dataBindingComponent
@@ -50,7 +51,7 @@ class WheelEmploymentFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        bGo.setOnClickListener { navController().navigate(R.id.engineeringRecordsDetailsFragment) }
+        bGo.setOnClickListener { navController().navigate(R.id.updateDataVerificationFragment) }
 
     }
 

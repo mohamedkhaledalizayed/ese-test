@@ -277,7 +277,7 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         addToPhotos(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName,photoFileURI))
         val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" +PhotoFileName)
         val bytes = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
         val bos = BufferedOutputStream(FileOutputStream(File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName)))
         bos.write(bytes.toByteArray())
         bos.flush()

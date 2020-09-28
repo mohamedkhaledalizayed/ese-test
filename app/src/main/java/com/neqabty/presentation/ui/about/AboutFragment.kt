@@ -80,22 +80,22 @@ class AboutFragment : BaseFragment(), Injectable {
         state.syndicate?.let {
             svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
             initializeViews(it)
-            var tempSyndicate = it.copy()
-            tempSyndicate.address = getString(R.string.address_title) + " " + it.address
-            tempSyndicate.phone = getString(R.string.phone_title) + " " + it.phone
-            tempSyndicate.email = getString(R.string.email_title) + " " + it.email
+//            var tempSyndicate = it.copy()
+//            tempSyndicate.address = getString(R.string.address_title) + " " + it.address
+//            tempSyndicate.phone = getString(R.string.phone_title) + " " + it.phone
+//            tempSyndicate.email = getString(R.string.email_title) + " " + it.email
             binding.syndicate = it
         }
     }
 
     fun initializeViews(syndicate: SyndicateUI) {
-        tvAddress.setOnClickListener {
+        bMap.setOnClickListener {
             syndicate.address?.let { tvAddress.openMap(it, requireContext()) }
         }
-        tvPhone.setOnClickListener {
+        clPhone.setOnClickListener {
             syndicate.phone?.let { tvPhone.call(it, requireContext()) }
         }
-        tvEmail.setOnClickListener {
+        clEmail.setOnClickListener {
             syndicate.email?.let { sendEmail(it) }
         }
     }

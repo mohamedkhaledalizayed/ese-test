@@ -24,23 +24,45 @@
                 android:padding="@dimen/margin_horizontal_normal">
 
                 <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/fullName"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/edName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:gravity="center"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+                <TextView
                     android:id="@+id/tvRelation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/relation_degree"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/edName" />
 
                 <Spinner
                     android:id="@+id/spRelationDegree"
                     style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
                     android:hint="@string/relation_degree"
                     android:textDirection="rtl"
                     android:textSize="@dimen/text_size_medium"
@@ -53,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/birth_date"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -63,13 +85,13 @@
                     android:id="@+id/edBirthDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
                     android:clickable="true"
                     android:editable="false"
                     android:focusable="false"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
                     app:layout_constraintTop_toBottomOf="@id/tvBirthDate" />
 
                 <!--                <TextView-->

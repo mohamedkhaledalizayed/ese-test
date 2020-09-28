@@ -125,7 +125,7 @@
                     android:id="@+id/bNext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/btn"
+                    android:background="@drawable/btn_green"
                     android:elevation="@dimen/elevation_level_one"
                     android:gravity="center"
                     android:text="@string/next"

@@ -1,6 +1,7 @@
 package com.neqabty.presentation.di
 
 import com.neqabty.presentation.ui.about.AboutFragment
+import com.neqabty.presentation.ui.aboutApp.AboutAppFragment
 import com.neqabty.presentation.ui.addCompanion.AddCompanionFragment
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaFragment
 import com.neqabty.presentation.ui.claiming.*
@@ -91,6 +92,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAboutFragment(): AboutFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAboutAppFragment(): AboutAppFragment
 
     @ContributesAndroidInjector
     abstract fun contributeSettingsFragment(): SettingsFragment
@@ -196,6 +200,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeWheelEmploymentFragment(): WheelEmploymentFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeWheelSyndicateServicesFragment(): WheelSyndicateServicesFragment
 
     @ContributesAndroidInjector
     abstract fun contributeWheelCustomerServiceFragment(): WheelCustomerServiceFragment

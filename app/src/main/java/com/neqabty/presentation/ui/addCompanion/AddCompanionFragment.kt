@@ -88,7 +88,7 @@ class AddCompanionFragment : DialogFragment(), Injectable {
         }
 
         bOK.setOnClickListener {
-            companion.name = ""
+            companion.name = edName.text.toString()
             companion.relationship = selectedRelation
             companion.ageOnTrip = 0
             companion.birthDate = edBirthDate.text.toString()

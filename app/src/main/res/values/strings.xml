@@ -190,16 +190,17 @@
     <string name="wheel_enter_service">الدخول على الخدمة</string>
     <string name="wheel_enter_medical">الدليل الطبي</string>
     <string name="wheel_enter_claiming">المطالبات الطبية</string>
-    <string name="wheel_payments_content">يمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيد يمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيديمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيديمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيد</string>
+    <string name="wheel_enter_records">ارسل طلب تجديد سجل هندسى</string>
+    <string name="wheel_enter_update_data">ارسل طلب تحديث بيانات</string>
+    <string name="wheel_payments_content">متاح الان اكثر من ٧٠ خدمة تجديد واشتراك من خلال خدمة الدفع الإلكتروني، علي ان يضاف المزيد من الخدمات الاخري قريبا</string>
     <string name="wheel_about_content">تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه  تفاصيل عن النقابهتفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه</string>
-    <string name="wheel_medical_content">يمكتك الدخول على الخدمه  ا للتعرف على المزيد يمكتك الدخول على الخدمه   للتعرف على المزيديمكتك الدخول على الخدمه  للتعرف على المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد</string>
-    <string name="wheel_retirees_content">يمكنك معرفه  المزيد عن خدمه المعاشات قريباً</string>
-    <string name="wheel_training_content">يمكنك معرفه  المزيد عن خدمه  التدريب و التوظيف قريباً</string>
-    <string name="wheel_complaints_content">يمكتك الدخول على الخدمه  ا للتعرف على المزيد يمكتك الدخول على الخدمه   للتعرف على المزيديمكتك الدخول على الخدمه  للتعرف على المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد</string>
-    <string name="wheel_update_data_content">يمكتك الدخول على الخدمه  ا للتعرف على المزيد يمكتك الدخول على الخدمه   للتعرف على المزيديمكتك الدخول على الخدمه  للتعرف على المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد</string>
-    <string name="wheel_renew_record_content">يمكتك الدخول على الخدمه  ا للتعرف على المزيد يمكتك الدخول على الخدمه   للتعرف على المزيديمكتك الدخول على الخدمه  للتعرف على المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد المزيد يمكتك الدخول على الخدمه  ا للتعرف على المزيد</string>
-    <string name="wheel_employment_content">يمكنك معرفه  المزيد عن خدمه خدمة مزاولة المهنة قريباً</string>
-    <string name="wheel_customer_service_content">يمكنك معرفه  المزيد عن خدمه خدمه العملاء قريباً</string>
+    <string name="wheel_medical_content">يمكنك من هذة الخدمة تقديم ومتابعة جميع مطالبات الطبية بسهولة ويسر، كما يمكنك الاطلاع علي الدليل الطبي لمعرفة شبكة أماكن توافر الخدمات الطبية</string>
+    <string name="wheel_retirees_content">يمكنك معرفه  المزيد عن خدمة المعاشات قريباً</string>
+    <string name="wheel_training_content">يمكنك معرفة المزيد عن خدمات التدريب والتوظيف قريباً</string>
+    <string name="wheel_complaints_content">يمكنك الان التواصل مع النقابة من خلال تقديم الشكاوي واي مقترحات ومتابعتها من خلال خدمة الاشعارات</string>
+    <string name="wheel_employment_content">يستطيع المهندس والمكاتب الاستشارية من تقديم طلبات  تجديد سجلاتهم الهندسية من خلال هذة الخدمة الميسرة، مع خدمات اخري ستضاف قرييا</string>
+    <string name="wheel_syndicate_services_content">تستطيع الان من خلال هذة الخدمة تحديث جميع بياناتك لدي النقابة لسهولة التواصل، مع خدمات اخري ستضاف قريبا</string>
+    <string name="wheel_customer_service_content">يمكنك معرفة المزيد عن خدمات خدمة العملاء قريبا</string>
 
     <string name="alert_title">تنبيه</string>
     <string name="no_connection_msg">من فضلك تحقق من إتصالك بالإنترنت</string>
@@ -299,7 +300,7 @@
     </string>
 
     <string name="source">
-    <![CDATA[<font color="#B6B3B3">المصدر: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">المصدر: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="doctor_title">
@@ -403,4 +404,7 @@
 
     <string name="corona_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في أقرب وقت</string>
 
+
+    <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
+    <string name="app_version">Version 1.0</string>
 </resources>

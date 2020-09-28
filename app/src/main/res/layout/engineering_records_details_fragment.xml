@@ -13,7 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_horizontal_large">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,8 +25,10 @@
                 android:id="@+id/svContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/rounded_bg"
                 android:fillViewport="true"
                 android:scrollbars="none"
+                android:padding="@dimen/margin_horizontal_normal"
                 android:visibility="gone">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,11 +40,11 @@
                         android:id="@+id/tvTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
-                        android:background="@color/light_grey"
+                        android:layout_marginTop="@dimen/margin_vertical_small"
                         android:padding="@dimen/margin_horizontal_small"
                         android:text="@{Html.fromHtml(@string/records_title)}"
                         android:textSize="@dimen/text_size_large"
+                        android:textColor="@color/text_dark"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -50,8 +53,7 @@
                         android:id="@+id/tvMemberName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_horizontal_normal"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:layout_marginTop="@dimen/margin_vertical_small"
                         android:text="@{Html.fromHtml(@string/name_title(memberItem.fullName))}"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +63,6 @@
                         android:id="@+id/tvUserNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_horizontal_normal"
                         android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@{Html.fromHtml(@string/user_number_title(memberItem.registryDataID))}"
                         android:textSize="@dimen/text_size_large"
@@ -73,7 +74,6 @@
                         android:id="@+id/tvType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_horizontal_normal"
                         android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@{Html.fromHtml(@string/record_type_title(memberItem.registryTypeID))}"
                         android:textSize="@dimen/text_size_large"
@@ -84,7 +84,6 @@
                         android:id="@+id/tvRenewalDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_horizontal_normal"
                         android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@{Html.fromHtml(@string/last_renewal_date_title(memberItem.lastRenewYear))}"
                         android:textSize="@dimen/text_size_large"
@@ -95,12 +94,11 @@
                         android:id="@+id/tvAddPhoto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
-                        android:background="@color/light_grey"
-                        android:padding="@dimen/margin_horizontal_small"
+                        android:layout_marginTop="@dimen/margin_vertical_large"
                         android:text="@{Html.fromHtml(@string/records_add_photos_0)}"
                         android:textSize="@dimen/text_size_large"
                         android:textStyle="bold"
+                        android:textColor="@color/text_dark"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvRenewalDate" />
 
@@ -117,7 +115,6 @@
                         android:text="@string/update_data_add_photo"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_size_medium"
-                        android:tint="@color/colorAccent"
                         app:layout_constraintBottom_toBottomOf="@id/tvAddPhoto_1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_1"
@@ -127,8 +124,7 @@
                         android:id="@+id/tvAddPhoto_1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_horizontal_normal"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:layout_marginTop="@dimen/margin_vertical_small"
                         android:text="@string/records_add_photos_1"
                         android:textSize="@dimen/text_size_medium"
                         app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_1"
@@ -140,31 +136,29 @@
                         android:id="@+id/ibAddPhoto_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_marginStart="@dimen/margin_horizontal_normal"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/margin_horizontal_normal"
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_add"
                         android:text="@string/update_data_add_photo"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_size_medium"
-                        android:tint="@color/colorAccent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_2"
-                        app:layout_constraintTop_toBottomOf="@id/ibAddPhoto_1" />
+                        app:layout_constraintTop_toTopOf="@id/tvAddPhoto_2"
+                        app:layout_constraintBottom_toBottomOf="@id/tvAddPhoto_2"/>
 
                     <TextView
                         android:id="@+id/tvAddPhoto_2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@string/records_add_photos_2"
                         android:textSize="@dimen/text_size_medium"
-                        app:layout_constraintBottom_toBottomOf="@id/ibAddPhoto_2"
                         app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_2"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/ibAddPhoto_2" />
+                        app:layout_constraintTop_toBottomOf="@id/tvAddPhoto_1" />
 
 
                     <ImageButton
@@ -173,29 +167,27 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/margin_horizontal_normal"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:layout_marginEnd="@dimen/margin_horizontal_normal"
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_add"
                         android:text="@string/update_data_add_photo"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_size_medium"
-                        android:tint="@color/colorAccent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_3"
-                        app:layout_constraintTop_toBottomOf="@id/ibAddPhoto_2" />
+                        app:layout_constraintTop_toTopOf="@id/tvAddPhoto_3"
+                        app:layout_constraintBottom_toBottomOf="@id/tvAddPhoto_3" />
 
                     <TextView
                         android:id="@+id/tvAddPhoto_3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@string/records_add_photos_3"
                         android:textSize="@dimen/text_size_medium"
-                        app:layout_constraintBottom_toBottomOf="@id/ibAddPhoto_3"
                         app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_3"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/ibAddPhoto_3" />
+                        app:layout_constraintTop_toBottomOf="@id/tvAddPhoto_2" />
 
                     <!--<androidx.recyclerview.widget.RecyclerView-->
                     <!--android:id="@+id/rvPhotos"-->
@@ -209,11 +201,11 @@
 
                     <Button
                         android:id="@+id/bSubmit"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/margin_vertical_large"
-                        android:background="@mipmap/btn"
+                        android:layout_margin="@dimen/margin_horizontal_normal"
+                        android:background="@drawable/btn_green"
                         android:gravity="center"
                         android:padding="@dimen/margin_horizontal_small"
                         android:text="@string/send"
@@ -221,7 +213,7 @@
                         android:textSize="@dimen/text_size_medium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/ibAddPhoto_3" />
+                        app:layout_constraintTop_toBottomOf="@id/tvAddPhoto_3" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

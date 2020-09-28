@@ -14,7 +14,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_horizontal_large">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,6 +26,7 @@
                 android:id="@+id/svContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/rounded_bg"
                 android:padding="@dimen/margin_horizontal_normal"
                 android:scrollbars="none"
                 android:visibility="gone">
@@ -82,7 +84,7 @@
                         android:id="@+id/tvMobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:layout_marginTop="@dimen/margin_vertical_large"
                         android:text="@{Html.fromHtml(@string/enter_mobile_title)}"
                         android:textSize="@dimen/text_size_large"
                         app:layout_constraintStart_toStartOf="parent"
@@ -107,9 +109,10 @@
                         android:id="@+id/tvAddPhoto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:layout_marginTop="@dimen/margin_vertical_large"
                         android:text="@{Html.fromHtml(@string/update_data_add_photos)}"
                         android:textSize="@dimen/text_size_large"
+                        android:textColor="@color/text_dark"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/edMobileNumber" />
@@ -125,7 +128,6 @@
                         android:src="@drawable/ic_add"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_size_medium"
-                        android:tint="@color/colorAccent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_1"
                         app:layout_constraintTop_toBottomOf="@id/tvAddPhoto" />
@@ -154,7 +156,6 @@
                         android:text="@string/update_data_add_photo"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_size_medium"
-                        android:tint="@color/colorAccent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_2"
                         app:layout_constraintTop_toBottomOf="@id/ibAddPhoto_1" />
@@ -183,7 +184,6 @@
                         android:text="@string/update_data_add_photo"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/text_size_medium"
-                        android:tint="@color/colorAccent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_3"
                         app:layout_constraintTop_toBottomOf="@id/ibAddPhoto_2" />
@@ -212,11 +212,11 @@
 
                     <Button
                         android:id="@+id/bUpdate"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/margin_vertical_large"
-                        android:background="@mipmap/btn"
+                        android:layout_margin="@dimen/margin_horizontal_normal"
+                        android:background="@drawable/btn_green"
                         android:gravity="center"
                         android:padding="@dimen/margin_horizontal_small"
                         android:text="@string/update_data_title"

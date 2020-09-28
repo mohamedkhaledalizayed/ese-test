@@ -42,7 +42,7 @@
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
 <!--            android:layout_marginBottom="@dimen/margin_vertical_large"-->
-<!--            android:background="@mipmap/btn"-->
+<!--            android:background="@drawable/btn_green"-->
 <!--            android:padding="@dimen/margin_horizontal_small"-->
 <!--            android:text="@string/next"-->
 <!--            android:textColor="@android:color/white"-->
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_vertical_large"
-            android:background="@mipmap/btn"
+            android:background="@drawable/btn_green"
             android:padding="@dimen/margin_horizontal_small"
             android:text="@string/skip_btn"
             android:textColor="@android:color/white"

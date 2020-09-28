@@ -1,10 +1,6 @@
 package com.neqabty.presentation.ui.home
 
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,8 +10,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.BuildConfig
@@ -24,7 +24,6 @@ import com.neqabty.databinding.HomeFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.ui.claiming.ClaimingStep4Fragment
 import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
 import com.neqabty.presentation.util.HasHomeOptionsMenu
 import com.neqabty.presentation.util.OnBackPressedListener
@@ -111,12 +110,13 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
             activity?.invalidateOptionsMenu()
         }
 
-        val sectionsList = mutableListOf<String>(getString(R.string.wheel_news), getString(R.string.wheel_trips), getString(R.string.wheel_payment), getString(R.string.wheel_employment),
-                getString(R.string.wheel_retirees), getString(R.string.wheel_training), getString(R.string.wheel_customer_service)
-                , getString(R.string.wheel_complaints), getString(R.string.wheel_syndicate_services),
-                getString(R.string.wheel_medical))
-        val iconsList = mutableListOf<Int>(R.drawable.ic_wheel_news, R.drawable.ic_wheel_trip, R.drawable.ic_wheel_payments, R.drawable.ic_wheel_employment, R.drawable.ic_wheel_retirees,
-                R.drawable.ic_wheel_training, R.drawable.ic_wheel_customer_service, R.drawable.ic_wheel_complaints, R.drawable.ic_wheel_syndicate_services, R.drawable.ic_wheel_medical_approval)
+        val sectionsList = mutableListOf<String>(getString(R.string.wheel_news), getString(R.string.wheel_medical), getString(R.string.wheel_trips),
+                getString(R.string.wheel_employment), getString(R.string.wheel_syndicate_services), getString(R.string.wheel_training), getString(R.string.wheel_retirees),
+                getString(R.string.wheel_customer_service), getString(R.string.wheel_complaints), getString(R.string.wheel_payment))
+
+        val iconsList = mutableListOf<Int>(R.drawable.ic_wheel_news, R.drawable.ic_wheel_medical_approval, R.drawable.ic_wheel_trip, R.drawable.ic_wheel_employment,
+                R.drawable.ic_wheel_syndicate_services, R.drawable.ic_wheel_training, R.drawable.ic_wheel_retirees,
+                R.drawable.ic_wheel_customer_service, R.drawable.ic_wheel_complaints, R.drawable.ic_wheel_payments)
 
         val wheelAdapter = WheelAdapter(requireContext(), sectionsList, iconsList, 0)
         wheel.setAdapter(wheelAdapter)
@@ -127,7 +127,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
                 tvTopTitle.setText(sectionsList[pos])
                 tvBottomTitle.setText(sectionsList[pos])
                 viewpager.setCurrentItem(pos, true)
-                viewpager.animateViewPager(viewpager, 3, 200);
+                viewpager.animateViewPager(viewpager, 3, 200)
             }
         }
 
@@ -143,15 +143,15 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
 
         val adapter = CustomFragmentPagerAdapter(childFragmentManager)
         adapter.addFragment(WheelNewsFragment())
+        adapter.addFragment(WheelMedicalFragment())
         adapter.addFragment(WheelTripsFragment())
-        adapter.addFragment(WheelPaymentsFragment())
         adapter.addFragment(WheelEmploymentFragment())
-        adapter.addFragment(WheelRetireesFragment())
+        adapter.addFragment(WheelSyndicateServicesFragment())
         adapter.addFragment(WheelTrainingFragment())
+        adapter.addFragment(WheelRetireesFragment())
         adapter.addFragment(WheelCustomerServiceFragment())
         adapter.addFragment(WheelComplaintsFragment())
-        adapter.addFragment(ClaimingStep4Fragment())
-        adapter.addFragment(WheelMedicalFragment())
+        adapter.addFragment(WheelPaymentsFragment())
         binding.viewpager.adapter = adapter
         binding.viewpager.setSwipePagingEnabled(false)
         binding.viewpager.offscreenPageLimit = 8
