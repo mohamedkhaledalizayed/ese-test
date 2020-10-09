@@ -31,7 +31,7 @@ class TripsViewModel @Inject constructor(private val getAllTrips: GetAllTrips) :
                         { onTripsReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

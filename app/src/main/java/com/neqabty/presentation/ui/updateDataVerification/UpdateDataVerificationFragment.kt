@@ -59,13 +59,13 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
         updateDataVerificationViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        updateDataVerificationViewModel.errorState.observe(this, Observer { _ ->
+        updateDataVerificationViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 updateDataVerificationViewModel.verifyUser(PreferencesHelper(requireContext()).user, PreferencesHelper(requireContext()).mobile)
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         updateDataVerificationViewModel.verifyUser(PreferencesHelper(requireContext()).user, PreferencesHelper(requireContext()).mobile)
     }

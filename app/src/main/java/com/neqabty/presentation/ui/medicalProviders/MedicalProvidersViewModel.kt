@@ -35,7 +35,7 @@ class MedicalProvidersViewModel @Inject constructor(private val getAllSpecializa
                         { onProfessionsReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -60,7 +60,7 @@ class MedicalProvidersViewModel @Inject constructor(private val getAllSpecializa
                         { onProvidersReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

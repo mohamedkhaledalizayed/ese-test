@@ -64,14 +64,14 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
         chooseAreaViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        chooseAreaViewModel.errorState.observe(this, Observer { _ ->
+        chooseAreaViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 chooseAreaViewModel.getAllContent1()
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
-            })
+            }, message = error?.message)
         })
         chooseAreaViewModel.getAllContent1()
         initializeViews()

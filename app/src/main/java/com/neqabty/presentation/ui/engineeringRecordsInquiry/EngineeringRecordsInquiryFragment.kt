@@ -55,13 +55,13 @@ class EngineeringRecordsInquiryFragment : BaseFragment(), Injectable {
         engineeringRecordsInquiryViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
-        engineeringRecordsInquiryViewModel.errorState.observe(this, Observer { _ ->
+        engineeringRecordsInquiryViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 engineeringRecordsInquiryViewModel.sendEngineeringRecordsInquiry(binding.edMemberNumber.text.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         initializeViews()
     }

@@ -32,6 +32,6 @@ class PaymentInquiry @Inject constructor(
         val serviceID = data.get(PaymentInquiry.PARAM_SERVICE_ID) as String
         val requestID = data.get(PaymentInquiry.PARAM_REQUEST_ID) as String
         val amount = data.get(PaymentInquiry.PARAM_AMOUNT) as String
-        return neqabtyRepository.inquirePayment(userNumber.toInt(), serviceID.toInt(), requestID, amount)
+        return neqabtyRepository.inquirePayment(userNumber, serviceID.toInt(), requestID, amount)
     }
 }

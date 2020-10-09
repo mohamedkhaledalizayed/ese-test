@@ -88,7 +88,7 @@ class CoronaFragment : BaseFragment(), Injectable {
         coronaViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
-        coronaViewModel.errorState.observe(this, Observer { _ ->
+        coronaViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
 
@@ -96,7 +96,7 @@ class CoronaFragment : BaseFragment(), Injectable {
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
-            })
+            }, message = error?.message)
         })
     }
 

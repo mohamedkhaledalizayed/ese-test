@@ -72,7 +72,7 @@ class NotificationsListFragment : BaseFragment(), Injectable {
         notificationsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        notificationsViewModel.errorState.observe(this, Observer { _ ->
+        notificationsViewModel.errorState.observe(this, Observer { error ->
             binding.tvError.visibility = View.VISIBLE
             binding.rvNotifications.visibility = View.GONE
 //            showConnectionAlert(requireContext(), retryCallback = {
@@ -80,7 +80,7 @@ class NotificationsListFragment : BaseFragment(), Injectable {
 //                loadNotifications(typeID)
 //            }, cancelCallback = {
 //                navController().navigateUp()
-//            })
+//            }, message = error?.message)
         })
         loadNotifications(typeID)
         initializeViews()

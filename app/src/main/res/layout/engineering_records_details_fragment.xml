@@ -188,7 +188,64 @@
                         app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_3"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvAddPhoto_2" />
+                    
 
+                    <ImageButton
+                        android:id="@+id/ibAddPhoto_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginEnd="@dimen/margin_horizontal_normal"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_add"
+                        android:text="@string/update_data_add_photo"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvAddPhoto_4"
+                        app:layout_constraintTop_toTopOf="@id/tvAddPhoto_4"
+                        app:layout_constraintBottom_toBottomOf="@id/tvAddPhoto_4" />
+
+                    <TextView
+                        android:id="@+id/tvAddPhoto_4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/records_add_photos_4"
+                        android:textSize="@dimen/text_size_medium"
+                        app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvAddPhoto_3" />
+
+
+                    <ImageButton
+                        android:id="@+id/ibAddPhoto_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginEnd="@dimen/margin_horizontal_normal"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_add"
+                        android:text="@string/update_data_add_photo"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_size_medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvAddPhoto_5"
+                        app:layout_constraintTop_toTopOf="@id/tvAddPhoto_5"
+                        app:layout_constraintBottom_toBottomOf="@id/tvAddPhoto_5" />
+
+                    <TextView
+                        android:id="@+id/tvAddPhoto_5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/records_add_photos_5"
+                        android:textSize="@dimen/text_size_medium"
+                        app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvAddPhoto_4" />
                     <!--<androidx.recyclerview.widget.RecyclerView-->
                     <!--android:id="@+id/rvPhotos"-->
                     <!--android:layout_width="match_parent"-->
@@ -213,7 +270,7 @@
                         android:textSize="@dimen/text_size_medium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvAddPhoto_3" />
+                        app:layout_constraintTop_toBottomOf="@id/tvAddPhoto_5" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

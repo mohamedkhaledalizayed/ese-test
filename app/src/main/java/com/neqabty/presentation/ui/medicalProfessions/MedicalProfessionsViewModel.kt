@@ -31,7 +31,7 @@ class MedicalProfessionsViewModel @Inject constructor(private val getAllSpeciali
                         { onProfessionsReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

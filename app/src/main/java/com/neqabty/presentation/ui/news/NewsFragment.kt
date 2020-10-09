@@ -69,13 +69,13 @@ class NewsFragment : BaseFragment(), Injectable {
         newsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        newsViewModel.errorState.observe(this, Observer { _ ->
+        newsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 newsViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         newsViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())

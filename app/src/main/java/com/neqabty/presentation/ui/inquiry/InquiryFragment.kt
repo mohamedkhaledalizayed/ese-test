@@ -61,13 +61,13 @@ class InquiryFragment : BaseFragment(), Injectable {
         inquiryViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
-        inquiryViewModel.errorState.observe(this, Observer { _ ->
+        inquiryViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 inquiryViewModel.getAllServiceTypes()
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         inquiryViewModel.getAllServiceTypes()
     }

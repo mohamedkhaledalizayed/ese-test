@@ -76,13 +76,13 @@ class MedicalProfessionsFragment : BaseFragment(), Injectable {
         medicalProfessionsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        medicalProfessionsViewModel.errorState.observe(this, Observer { _ ->
+        medicalProfessionsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 medicalProfessionsViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         medicalProfessionsViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())

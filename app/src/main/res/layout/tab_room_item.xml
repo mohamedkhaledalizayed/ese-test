@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:background="@drawable/selector_tab_bg">
+        android:background="@drawable/selector_tab_room_bg">
 
         <TextView
             android:id="@+id/tvText"

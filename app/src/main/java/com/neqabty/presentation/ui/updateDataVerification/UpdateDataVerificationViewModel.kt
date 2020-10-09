@@ -31,7 +31,7 @@ class UpdateDataVerificationViewModel @Inject constructor(private val verifyUpda
                         { onVerifyUserDataReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

@@ -32,7 +32,7 @@ class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetA
                 { onSyndicatesReceived(it) },
                 {
                     viewState.value = viewState.value?.copy(isLoading = false)
-                    errorState.value = it
+                    errorState.value = handleError(it)
                 }
             )
         )

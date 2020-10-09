@@ -66,13 +66,13 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         tripDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        tripDetailsViewModel.errorState.observe(this, Observer { _ ->
+        tripDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 tripDetailsViewModel.getTripDetails(tripId.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         tripDetailsViewModel.getTripDetails(tripId.toString())
     }
@@ -102,6 +102,7 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         binding.svContent.visibility = View.VISIBLE
         binding.tripItem = tripItem
 
+        binding.bViewRegiments.visibility = if(tripItem.counter!! > 0) View.VISIBLE else View.INVISIBLE
         binding.bViewRegiments.setOnClickListener {
             TripsData.tripItem = tripItem
             if (PreferencesHelper(requireContext()).isRegistered)

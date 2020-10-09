@@ -37,7 +37,7 @@ class AddCompanionFragment : DialogFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     val myCalendar = Calendar.getInstance()
-    var relationsList: MutableList<String>? = mutableListOf("مهندس/عضو", "زوجة", "ابن", "ابنة", "والد", "والدة", "طفل")
+    var relationsList: MutableList<String>? = mutableListOf("مهندس/عضو", "زوجة", "ابن / ابنة", "والد", "والدة", "طفل")
     var selectedRelation = ""
 
     var companion = PersonEntity()

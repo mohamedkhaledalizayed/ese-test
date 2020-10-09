@@ -64,14 +64,14 @@ class ComplaintFragment : BaseFragment(), Injectable {
         complaintViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        complaintViewModel.errorState.observe(this, Observer { _ ->
+        complaintViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 complaintViewModel.getTypes()
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
-            })
+            }, message = error?.message)
         })
         complaintViewModel.getTypes()
         initializeViews()

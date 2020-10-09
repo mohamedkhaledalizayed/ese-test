@@ -33,7 +33,7 @@ class SubSyndicatesViewModel @Inject constructor(private val getSubSyndicates: G
                         { onSubsyndicatesReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

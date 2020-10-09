@@ -157,11 +157,15 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
         docsNumber: Int,
         doc1: File?,
         doc2: File?,
-        doc3: File?
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
     ): Observable<Unit> {
         var file1: MultipartBody.Part? = null
         var file2: MultipartBody.Part? = null
         var file3: MultipartBody.Part? = null
+        var file4: MultipartBody.Part? = null
+        var file5: MultipartBody.Part? = null
 
         doc1?.let {
             val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
@@ -175,7 +179,15 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
             file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
         }
-        return api.engineeringRecordsRequest(EngineeringRecordsRequest(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber), file1, file2, file3).map { result ->
+        doc4?.let {
+            val doc4RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc4)
+            file4 = MultipartBody.Part.createFormData("doc4", doc4?.name, doc4RequestFile)
+        }
+        doc5?.let {
+            val doc5RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc5)
+            file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
+        }
+        return api.engineeringRecordsRequest(EngineeringRecordsRequest(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber), file1, file2, file3, file4, file5).map { result ->
             result.data ?: Unit
         }
     }
@@ -197,13 +209,25 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
         doc1: File?,
         doc2: File?,
         doc3: File?,
-        doc4: File?
+        doc4: File?,
+        doc5: File?,
+        doc6: File?,
+        doc7: File?,
+        doc8: File?,
+        doc9: File?,
+        doc10: File?
     ): Observable<Unit> {
 
         var file1: MultipartBody.Part? = null
         var file2: MultipartBody.Part? = null
         var file3: MultipartBody.Part? = null
         var file4: MultipartBody.Part? = null
+        var file5: MultipartBody.Part? = null
+        var file6: MultipartBody.Part? = null
+        var file7: MultipartBody.Part? = null
+        var file8: MultipartBody.Part? = null
+        var file9: MultipartBody.Part? = null
+        var file10: MultipartBody.Part? = null
         var personsRequestsList: List<PersonRequest> = personsList.map { personEntity -> PersonRequest(personEntity.name, personEntity.relationship, personEntity.birthDate, personEntity.ageOnTrip) }
 
         doc1?.let {
@@ -222,8 +246,32 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             val doc4RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc4)
             file4 = MultipartBody.Part.createFormData("doc4", doc4?.name, doc4RequestFile)
         }
+        doc5?.let {
+            val doc5RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc5)
+            file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
+        }
+        doc6?.let {
+            val doc6RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc6)
+            file6 = MultipartBody.Part.createFormData("doc6", doc6?.name, doc6RequestFile)
+        }
+        doc7?.let {
+            val doc7RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc7)
+            file7 = MultipartBody.Part.createFormData("doc7", doc7?.name, doc7RequestFile)
+        }
+        doc8?.let {
+            val doc8RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc8)
+            file8 = MultipartBody.Part.createFormData("doc8", doc8?.name, doc8RequestFile)
+        }
+        doc9?.let {
+            val doc9RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc9)
+            file9 = MultipartBody.Part.createFormData("doc9", doc9?.name, doc9RequestFile)
+        }
+        doc10?.let {
+            val doc10RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc10)
+            file10 = MultipartBody.Part.createFormData("doc10", doc10?.name, doc10RequestFile)
+        }
 
-        return api.bookTrip(BookTripRequest(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, docsNumber, personsNumber, personsRequestsList), file1, file2, file3, file4).map { result ->
+        return api.bookTrip(BookTripRequest(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, docsNumber, personsNumber, personsRequestsList), file1, file2, file3, file4, file5, file6, file7, file8, file9, file10).map { result ->
             result.data ?: Unit
         }
     }
@@ -261,7 +309,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     private val memberDataEntityMapper = MemberDataEntityMapper()
 
-    override fun inquirePayment(userNumber: Int, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity> {
+    override fun inquirePayment(userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity> {
         return api.paymentInquiry(userNumber, serviceID, requestID, amount).flatMap { user ->
             user.data?.msg = user.status.message
             if (!user.data?.msg.isNullOrEmpty()) {

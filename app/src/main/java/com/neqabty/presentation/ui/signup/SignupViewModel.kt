@@ -41,7 +41,7 @@ class SignupViewModel @Inject constructor(private val signupUser: SignupUser) : 
                     }
                 }.subscribe(
                         { onUserReceived(it) },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
         )
     }

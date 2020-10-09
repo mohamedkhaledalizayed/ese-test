@@ -80,14 +80,14 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         claimingViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        claimingViewModel.errorState.observe(this, Observer { _ ->
+        claimingViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 loadProviders()
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
-            })
+            }, message = error?.message)
         })
 
         binding.edNumber.setText(PreferencesHelper(requireContext()).user)

@@ -59,14 +59,14 @@ class WheelNewsFragment : BaseFragment(), Injectable {
         homeViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        homeViewModel.errorState.observe(this, Observer { _ ->
+        homeViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
-            })
+            }, message = error?.message)
         })
         homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
     }

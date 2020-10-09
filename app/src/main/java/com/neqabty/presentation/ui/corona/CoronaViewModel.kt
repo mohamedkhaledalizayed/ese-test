@@ -37,7 +37,7 @@ class CoronaViewModel @Inject constructor(
                         { onSyndicatesReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -74,7 +74,7 @@ class CoronaViewModel @Inject constructor(
         addDisposable(createCoronaRequest.createCoronaRequest(userNumber, phone, syndicateID, name, type, job, work, treatmentDestination, treatmentDestinationAddress, family, injury, docsNumber, doc1, doc2, doc3, doc4, doc5)
                 .subscribe(
                         { viewState.value = viewState.value?.copy(isLoading = false, message = "success") },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
         )
     }

@@ -2,13 +2,8 @@ package com.neqabty.presentation.ui.updateDataDetails
 
 import android.Manifest
 import android.app.Activity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
@@ -22,6 +17,11 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -63,9 +63,9 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 
     var selectedIndex = 0
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -86,13 +86,16 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
         updateDataDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        updateDataDetailsViewModel.errorState.observe(this, Observer { _ ->
+        updateDataDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                updateDataDetailsViewModel.inquireUpdateUserData(PreferencesHelper(requireContext()).user)
+                if (photosList.size > 0)
+                    submitRequest()
+                else
+                    updateDataDetailsViewModel.inquireUpdateUserData(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         updateDataDetailsViewModel.inquireUpdateUserData(PreferencesHelper(requireContext()).user)
     }
@@ -159,13 +162,17 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 //        }
 //
         bUpdate.setOnClickListener {
-            if (photosList[0].name != null && photosList[1].name != null && photosList[2].name != null) {
-                userDataInquire.nationalID = edNationalID.text.toString()
-                userDataInquire.phone = edMobileNumber.text.toString()
-                updateDataDetailsViewModel.updateUserData(userDataInquire.oldRefID, userDataInquire.fullName!!, userDataInquire.nationalID!!, userDataInquire.phone!!, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2))
-            } else
-                showPickPhotoAlert()
+            submitRequest()
         }
+    }
+
+    fun submitRequest() {
+        if (photosList[0].name != null && photosList[1].name != null && photosList[2].name != null) {
+            userDataInquire.nationalID = edNationalID.text.toString()
+            userDataInquire.phone = edMobileNumber.text.toString()
+            updateDataDetailsViewModel.updateUserData(userDataInquire.oldRefID, userDataInquire.fullName!!, userDataInquire.nationalID!!, userDataInquire.phone!!, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2))
+        } else
+            showPickPhotoAlert()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -259,7 +266,7 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 
     private fun onCaptureImageResult() {
         addToPhotos(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName, photoFileURI))
-        val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" +PhotoFileName)
+        val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" + PhotoFileName)
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
         val bos = BufferedOutputStream(FileOutputStream(File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName)))

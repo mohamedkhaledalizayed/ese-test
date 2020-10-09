@@ -69,14 +69,14 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         claimingViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        claimingViewModel.errorState.observe(this, Observer { _ ->
+        claimingViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 claimingViewModel.validateUser(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
-            })
+            }, message = error?.message)
         })
         claimingViewModel.validateUser(PreferencesHelper(requireContext()).user)
     }

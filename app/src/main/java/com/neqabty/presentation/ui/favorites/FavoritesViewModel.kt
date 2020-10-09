@@ -35,7 +35,7 @@ class FavoritesViewModel @Inject constructor(
                         { onFavoritesReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -51,7 +51,7 @@ class FavoritesViewModel @Inject constructor(
                         { onRemoveFavoriteReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

@@ -31,7 +31,7 @@ class NewsViewModel @Inject constructor(private val getAllNews: GetAllNews) : Ba
                         { onNewsReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

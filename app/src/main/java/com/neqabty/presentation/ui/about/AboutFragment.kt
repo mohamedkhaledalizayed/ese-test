@@ -64,13 +64,13 @@ class AboutFragment : BaseFragment(), Injectable {
         aboutViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        aboutViewModel.errorState.observe(this, Observer { _ ->
+        aboutViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate.toString())
     }

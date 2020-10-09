@@ -75,12 +75,12 @@ class PaymentFragment : BaseFragment(), Injectable {
         paymentViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        paymentViewModel.errorState.observe(this, Observer { _ ->
+        paymentViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         params = PaymentFragmentArgs.fromBundle(arguments!!)

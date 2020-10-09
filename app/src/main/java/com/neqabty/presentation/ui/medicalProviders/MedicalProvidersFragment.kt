@@ -89,7 +89,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         medicalProvidersViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        medicalProvidersViewModel.errorState.observe(this, Observer { _ ->
+        medicalProvidersViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
 
@@ -100,7 +100,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
 
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         if (categoryId == 2)

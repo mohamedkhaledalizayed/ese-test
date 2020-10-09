@@ -78,13 +78,13 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         inquiryDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        inquiryDetailsViewModel.errorState.observe(this, Observer { _ ->
+        inquiryDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 inquiryDetailsViewModel.paymentInquiry(memberItem.engineerNumber, params.serviceID, memberItem.requestID, memberItem.amount.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         params = InquiryDetailsFragmentArgs.fromBundle(arguments!!)

@@ -36,7 +36,7 @@ class LoginViewModel @Inject constructor(val getVisitorLoggedIn: GetVisitorLogge
                         {
                             prefs.token = token
                             onUserReceived(it) },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
         )
     }

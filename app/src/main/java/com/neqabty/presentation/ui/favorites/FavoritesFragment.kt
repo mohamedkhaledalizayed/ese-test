@@ -80,13 +80,13 @@ class FavoritesFragment : BaseFragment(), Injectable {
         favoritesViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        favoritesViewModel.errorState.observe(this, Observer { _ ->
+        favoritesViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 favoritesViewModel.getFavorites()
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         favoritesViewModel.getFavorites()

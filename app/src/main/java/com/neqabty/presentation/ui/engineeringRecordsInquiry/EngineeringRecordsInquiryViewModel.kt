@@ -36,7 +36,7 @@ class EngineeringRecordsInquiryViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(memberItem = it)
                             onDataReceived()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 ))
     }
 

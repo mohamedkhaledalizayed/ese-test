@@ -38,7 +38,7 @@ class UpdateDataDetailsViewModel @Inject constructor(
                         { onUpdateUserDataReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -64,7 +64,7 @@ class UpdateDataDetailsViewModel @Inject constructor(
                         { onDataReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

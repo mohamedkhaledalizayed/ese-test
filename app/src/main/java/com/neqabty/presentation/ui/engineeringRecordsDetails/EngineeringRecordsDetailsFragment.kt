@@ -2,13 +2,8 @@ package com.neqabty.presentation.ui.engineeringRecordsDetails
 
 import android.Manifest
 import android.app.Activity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
@@ -16,12 +11,17 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import androidx.core.app.ActivityCompat
-import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -37,7 +37,6 @@ import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.engineering_records_details_fragment.*
 import java.io.*
 import java.util.*
-
 import javax.inject.Inject
 
 class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
@@ -67,9 +66,9 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
     var selectedIndex = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -91,15 +90,18 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         engineeringRecordsDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        engineeringRecordsDetailsViewModel.errorState.observe(this, Observer { _ ->
+        engineeringRecordsDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                engineeringRecordsDetailsViewModel.sendEngineeringRecordsInquiry(PreferencesHelper(requireContext()).user)
+                if (photosList.size > 0)
+                    submitRequest()
+                else
+                    engineeringRecordsDetailsViewModel.sendEngineeringRecordsInquiry(PreferencesHelper(requireContext()).user)
 //                engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!! , memberItem.mobile!!, memberItem.registryTypeID!! , "5",memberItem.registryDataID!!,
 //                        memberItem.lastRenewYear!!,memberItem.regDataStatusID!!.toInt(), if(memberItem.isOwner) 1 else 0  , photosList.size , getPhoto(0))
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         engineeringRecordsDetailsViewModel.sendEngineeringRecordsInquiry(PreferencesHelper(requireContext()).user)
     }
@@ -108,16 +110,16 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading && state.memberItem != null && !state.isSuccessful) {
             state.memberItem?.registryDataID = PreferencesHelper(requireContext()).user
-                when (state.memberItem?.statusCode) {
-                    0 -> {
-                        binding.svContent.visibility = View.VISIBLE
-                        memberItem = state.memberItem!!
-                        binding.memberItem = state.memberItem!!
-                        state.memberItem = null
-                        initializeViews()
-                    }
-                    else -> showAlert(state.memberItem?.msg ?: getString(R.string.user_not_allowed))
+            when (state.memberItem?.statusCode) {
+                0 -> {
+                    binding.svContent.visibility = View.VISIBLE
+                    memberItem = state.memberItem!!
+                    binding.memberItem = state.memberItem!!
+                    state.memberItem = null
+                    initializeViews()
                 }
+                else -> showAlert(state.memberItem?.msg ?: getString(R.string.user_not_allowed))
+            }
         }
         if (!state.isLoading && state.isSuccessful) {
             showSuccessAlert()
@@ -134,9 +136,11 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
 //            binding.memberItem = it
 //        }
 
-        photosList.add(0, PhotoUI(null, null,null))
-        photosList.add(1, PhotoUI(null, null,null))
-        photosList.add(2, PhotoUI(null, null,null))
+        photosList.add(0, PhotoUI(null, null, null))
+        photosList.add(1, PhotoUI(null, null, null))
+        photosList.add(2, PhotoUI(null, null, null))
+        photosList.add(3, PhotoUI(null, null, null))
+        photosList.add(4, PhotoUI(null, null, null))
 
         binding.ibAddPhoto1.setOnClickListener {
             selectedIndex = 0
@@ -168,12 +172,28 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
 //            }
         }
 
+        binding.ibAddPhoto4.setOnClickListener {
+            selectedIndex = 3
+//            if (photosList[3].name == null)
+            grantCameraPermission()
+//            else {
+//                photosList[3].name = null
+//                ibAddPhoto_4.setImageResource(R.drawable.ic_close)
+//            }
+        }
+
+        binding.ibAddPhoto5.setOnClickListener {
+            selectedIndex = 4
+//            if (photosList[4].name == null)
+            grantCameraPermission()
+//            else {
+//                photosList[4].name = null
+//                ibAddPhoto_5.setImageResource(R.drawable.ic_close)
+//            }
+        }
+
         bSubmit.setOnClickListener {
-            if (photosList[0].name != null && photosList[1].name != null && photosList[2].name != null) {
-                engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!!, PreferencesHelper(requireContext()).mobile, memberItem.registryTypeID!!, "5", memberItem.registryDataID!!,
-                        memberItem.lastRenewYear!!, memberItem.regDataStatusID!!.toInt(), if (memberItem.isOwner) 1 else 0, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2))
-            } else
-                showPickPhotoAlert()
+          submitRequest()
         }
 //
 //
@@ -185,6 +205,13 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
 //        binding.rvPhotos.adapter = adapter
     }
 
+    fun submitRequest(){
+        if (photosList[0].name != null && photosList[1].name != null && photosList[2].name != null && photosList[3].name != null && photosList[4].name != null) {
+            engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!!, PreferencesHelper(requireContext()).mobile, memberItem.registryTypeID!!, "5", memberItem.registryDataID!!,
+                    memberItem.lastRenewYear!!, memberItem.regDataStatusID!!.toInt(), if (memberItem.isOwner) 1 else 0, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+        } else
+            showPickPhotoAlert()
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -274,8 +301,8 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
     }
 
     private fun onCaptureImageResult() {
-        addToPhotos(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName,photoFileURI))
-        val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" +PhotoFileName)
+        addToPhotos(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName, photoFileURI))
+        val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" + PhotoFileName)
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
         val bos = BufferedOutputStream(FileOutputStream(File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName)))
@@ -301,12 +328,12 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
             fo.close()
-            return PhotoUI(path, name,null)
+            return PhotoUI(path, name, null)
         } catch (e1: IOException) {
             e1.printStackTrace()
         }
 
-        return PhotoUI(path, name,null)
+        return PhotoUI(path, name, null)
     }
 
     fun getPhoto(index: Int): File? {
@@ -347,6 +374,8 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
             0 -> ibAddPhoto_1.setImageResource(R.drawable.ic_done)
             1 -> ibAddPhoto_2.setImageResource(R.drawable.ic_done)
             2 -> ibAddPhoto_3.setImageResource(R.drawable.ic_done)
+            3 -> ibAddPhoto_4.setImageResource(R.drawable.ic_done)
+            4 -> ibAddPhoto_5.setImageResource(R.drawable.ic_done)
         }
     }
 

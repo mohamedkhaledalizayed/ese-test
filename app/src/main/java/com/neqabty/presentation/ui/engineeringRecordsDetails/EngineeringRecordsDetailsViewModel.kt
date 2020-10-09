@@ -35,16 +35,21 @@ class EngineeringRecordsDetailsViewModel @Inject constructor(
         docsNumber: Int,
         doc1: File?,
         doc2: File?,
-        doc3: File?
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
 
-        addDisposable(sendEngineeringRecordsRequest.requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1, doc2, doc3)
+        addDisposable(sendEngineeringRecordsRequest.requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1, doc2, doc3, doc4, doc5)
                 .subscribe(
                         {
                             viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = true)
                         },
-                        { requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1, doc2, doc3) }
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false)
+                            errorState.value = handleError(it)
+                        }
                 ))
     }
 
@@ -64,7 +69,7 @@ class EngineeringRecordsDetailsViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(memberItem = it)
                             onDataReceived()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 ))
     }
 

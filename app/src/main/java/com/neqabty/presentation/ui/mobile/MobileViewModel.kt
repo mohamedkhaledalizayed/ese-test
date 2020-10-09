@@ -45,12 +45,7 @@ class MobileViewModel @Inject constructor(val getUserLoggedIn: GetUserLoggedIn) 
                         },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = false)
-                            val exception = it as HttpException
-                            if(exception.code() == 401)
-//                            val jObjError = JSONObject(exception.response().errorBody()?.string())
-                                errorState.value = Throwable("لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى")
-                            else
-                                errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 ))
     }

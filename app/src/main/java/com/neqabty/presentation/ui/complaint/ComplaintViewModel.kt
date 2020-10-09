@@ -33,7 +33,7 @@ class ComplaintViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(types = it)
                             onTypesReceived()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
 
         viewState.value?.types?.let {
@@ -51,7 +51,7 @@ class ComplaintViewModel @Inject constructor(
         addDisposable(createComplaint.createComplaint(name, phone, type, body, token, memberNumber)
                 .subscribe(
                         { viewState.value = viewState.value?.copy(isLoading = false, message = "success") },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
         )
     }

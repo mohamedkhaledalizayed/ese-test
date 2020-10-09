@@ -31,7 +31,7 @@ class AboutViewModel @Inject constructor(private val getSyndicate: GetSyndicate)
                         { onSyndicateReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -50,7 +50,7 @@ class AboutViewModel @Inject constructor(private val getSyndicate: GetSyndicate)
 //                        { onSyndicateReceived(it) },
 //                        {
 //                            viewState.value = viewState.value?.copy(isLoading = false)
-//                            errorState.value = it
+//
 //                        }
 //                )
 //        )

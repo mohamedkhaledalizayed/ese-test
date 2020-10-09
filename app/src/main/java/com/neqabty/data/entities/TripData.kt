@@ -26,6 +26,8 @@ data class TripData(
     var governId: String?,
     @field:SerializedName("trip_desc")
     var desc: String?,
+    @field:SerializedName("trip_counter")
+    var counter: Int?,
     @field:SerializedName("notes")
     var notes: String?,
     @field:SerializedName("price")

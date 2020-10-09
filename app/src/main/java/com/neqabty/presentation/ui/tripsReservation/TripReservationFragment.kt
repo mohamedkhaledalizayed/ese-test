@@ -115,13 +115,13 @@ class TripReservationFragment : BaseFragment(), Injectable {
         tripReservationViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
-        tripReservationViewModel.errorState.observe(this, Observer { _ ->
+        tripReservationViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
 //                tripReservationViewModel.paymentInquiry(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 //        tripReservationViewModel.paymentInquiry(PreferencesHelper(requireContext()).user)
         initializeViews()
@@ -166,13 +166,15 @@ class TripReservationFragment : BaseFragment(), Injectable {
         }
 
         binding.bAttachPhoto.setOnClickListener {
-            if (photosList.size < 4)
+            if (photosList.size < 10)
                 grantCameraPermission()
         }
 
         val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
             photosList.remove(photo)
             photosAdapter.notifyDataSetChanged()
+            if(photosList.size < 10)
+                bAttachPhoto.visibility = View.VISIBLE
         }
         this.photosAdapter = adapter
         binding.rvPhotos.adapter = adapter
@@ -187,7 +189,10 @@ class TripReservationFragment : BaseFragment(), Injectable {
             if (photosList.size > 0) {
                 reservationRequested = true
                 val prefs = PreferencesHelper(requireContext())
-                tripReservationViewModel.bookTrip(prefs.mainSyndicate, PreferencesHelper(requireContext()).user, prefs.mobile, tripItem.regiments?.get(0)?.tripId!!, regiment.regimentId, regiment.toString() , roomID.toString(), spChildren.selectedItem.toString().toInt(), spChild1.selectedItem?.toString() + "," + spChild2.selectedItem?.toString() + "," + spChild3.selectedItem?.toString(), PreferencesHelper(requireContext()).name, companionsList.toList(), photosList.size, companionsList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3))
+                tripReservationViewModel.bookTrip(prefs.mainSyndicate, PreferencesHelper(requireContext()).user, prefs.mobile, tripItem.regiments?.get(0)?.tripId!!, regiment.regimentId, regiment.toString() , roomID.toString(), spChildren.selectedItem.toString().toInt(), spChild1.selectedItem?.toString() + "," + spChild2.selectedItem?.toString() + "," + spChild3.selectedItem?.toString(), PreferencesHelper(requireContext()).name, companionsList.toList(), photosList.size, companionsList.size,
+                        getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3),
+                        getPhoto(4), getPhoto(5), getPhoto(6), getPhoto(7),
+                        getPhoto(8), getPhoto(9))
             } else
                 showPickPhotoAlert()
         }
@@ -481,6 +486,9 @@ class TripReservationFragment : BaseFragment(), Injectable {
         bos.close()
         photosAdapter.submitList(photosList)
         photosAdapter.notifyDataSetChanged()
+
+        if(photosList.size == 10)
+            bAttachPhoto.visibility = View.GONE
     }
 
     fun saveImage(myBitmap: Bitmap): PhotoUI {

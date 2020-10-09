@@ -44,7 +44,7 @@ class InquiryViewModel @Inject constructor(
                         {
                             onServiceTypesReceived(it)
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
     }
 
@@ -58,7 +58,7 @@ class InquiryViewModel @Inject constructor(
                         {
                             onServicesReceived(it)
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
     }
 
@@ -73,7 +73,7 @@ class InquiryViewModel @Inject constructor(
                         { onInquiryReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

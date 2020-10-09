@@ -31,7 +31,7 @@ class UpdateDataViewModel @Inject constructor(private val getUpdateUserDataInqui
                         { onUpdateUserDataReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

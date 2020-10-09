@@ -78,13 +78,13 @@ class SyndicatesFragment : BaseFragment(), Injectable {
         syndicatesViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
-        syndicatesViewModel.errorState.observe(this, Observer { _ ->
+        syndicatesViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 syndicatesViewModel.getSyndicates()
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         syndicatesViewModel.getSyndicates()

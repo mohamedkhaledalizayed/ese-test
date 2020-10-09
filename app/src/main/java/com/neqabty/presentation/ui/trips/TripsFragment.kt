@@ -68,13 +68,13 @@ class TripsFragment : BaseFragment(), Injectable {
         tripsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        tripsViewModel.errorState.observe(this, Observer { _ ->
+        tripsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 tripsViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         tripsViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())

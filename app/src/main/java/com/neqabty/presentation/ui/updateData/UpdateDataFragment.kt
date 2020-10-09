@@ -53,13 +53,13 @@ class UpdateDataFragment : BaseFragment(), Injectable {
         updateDataViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        updateDataViewModel.errorState.observe(this, Observer { _ ->
+        updateDataViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 updateDataViewModel.inquireUpdateUserData(binding.edMemberNumber.text.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         initializeViews()
     }

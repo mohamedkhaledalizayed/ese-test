@@ -192,15 +192,14 @@
     <string name="wheel_enter_claiming">المطالبات الطبية</string>
     <string name="wheel_enter_records">ارسل طلب تجديد سجل هندسى</string>
     <string name="wheel_enter_update_data">ارسل طلب تحديث بيانات</string>
-    <string name="wheel_payments_content">متاح الان اكثر من ٧٠ خدمة تجديد واشتراك من خلال خدمة الدفع الإلكتروني، علي ان يضاف المزيد من الخدمات الاخري قريبا</string>
-    <string name="wheel_about_content">تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه  تفاصيل عن النقابهتفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه تفاصيل عن النقابه</string>
-    <string name="wheel_medical_content">يمكنك من هذة الخدمة تقديم ومتابعة جميع مطالبات الطبية بسهولة ويسر، كما يمكنك الاطلاع علي الدليل الطبي لمعرفة شبكة أماكن توافر الخدمات الطبية</string>
-    <string name="wheel_retirees_content">يمكنك معرفه  المزيد عن خدمة المعاشات قريباً</string>
-    <string name="wheel_training_content">يمكنك معرفة المزيد عن خدمات التدريب والتوظيف قريباً</string>
-    <string name="wheel_complaints_content">يمكنك الان التواصل مع النقابة من خلال تقديم الشكاوي واي مقترحات ومتابعتها من خلال خدمة الاشعارات</string>
-    <string name="wheel_employment_content">يستطيع المهندس والمكاتب الاستشارية من تقديم طلبات  تجديد سجلاتهم الهندسية من خلال هذة الخدمة الميسرة، مع خدمات اخري ستضاف قرييا</string>
-    <string name="wheel_syndicate_services_content">تستطيع الان من خلال هذة الخدمة تحديث جميع بياناتك لدي النقابة لسهولة التواصل، مع خدمات اخري ستضاف قريبا</string>
-    <string name="wheel_customer_service_content">يمكنك معرفة المزيد عن خدمات خدمة العملاء قريبا</string>
+    <string name="wheel_payments_content">وقتكم محل تقديرنا- متاح الآن أكثر من ٧٠ خدمة  مدفوعات الكترونية عن (بُعد)، ستضاف المزيد من الخدمات الأخرى قريبا.</string>
+    <string name="wheel_medical_content">صحتكم محل اهتمامنا- يمكنك من هذه الخدمة تقديم ومتابعة واستلام جميع طلباتك الطبية بسهولة، كما يمكنك الاطلاع علي الدليل الطبي لمعرفة أماكن توافر الخدمات الطبية الأقرب إليك بواسطة جوجل ماب.</string>
+    <string name="wheel_retirees_content">خدمتكم شرف لنا - يمكنك معرفة المزيد عن خدمات المعاشات قريبا.</string>
+    <string name="wheel_training_content">التدريب المنتهي بالتوظيف هو شعارنا - يمكنك معرفة المزيد عن خدمات التدريب والتوظيف قريبا.</string>
+    <string name="wheel_complaints_content">آراءكم  محل اهتمامنا  - يمكنك الآن التواصل مع النقابة من خلال مقترحاتك وشكواك   ومتابعتها من خلال خدمة الإشعارات.</string>
+    <string name="wheel_employment_content">خدمتكم شرف لنا- يستطيع المهندس الاستشاري  والمكاتب الاستشارية    تجديد سجلاتهم الهندسية من خلال هذه الخدمة الميسرة، مع خدمات أخري لمزاولة المهنة ستضاف قرييا.</string>
+    <string name="wheel_syndicate_services_content">خدمتكم شرف لنا- تستطيع الآن من خلال هذه الخدمة تحديث جميع بياناتك لدي النقابة لحظياً  لسهولة التواصل وسرعة الحصول على الخدمة ، مع عديد من الخدمات العامة  ستضاف قريبا.</string>
+    <string name="wheel_customer_service_content">خدمة الرد على استفساراتكم  هي أولوياتنا -  ستفعل خدمات خدمة العملاء قريباً.</string>
 
     <string name="alert_title">تنبيه</string>
     <string name="no_connection_msg">من فضلك تحقق من إتصالك بالإنترنت</string>
@@ -367,6 +366,10 @@
     <string name="records_add_photos_2">∎ صفحة السجل التي تحتوي علي اخر ختم تجديد</string>
 
     <string name="records_add_photos_3">∎ اخر صفحات السجل الهندسي مقيد بها أعمال</string>
+
+    <string name="records_add_photos_4">∎ صورة وجه بطاقة الرقم القومي</string>
+
+    <string name="records_add_photos_5">∎ صورة ظهر بطاقة الرقم القومي</string>
 
     <string name="bullet">∎ </string>
     <string name="update_data_add_photos">

@@ -36,7 +36,7 @@ class TripReservationViewModel @Inject constructor(
 //                        { onValidationReceived(it) },
 //                        {
 //                            viewState.value = viewState.value?.copy(isLoading = false)
-//                            errorState.value = it
+//                            errorState.value = handleError(it)
 //                        }
 //                )
 //        )
@@ -66,7 +66,13 @@ class TripReservationViewModel @Inject constructor(
         doc1: File?,
         doc2: File?,
         doc3: File?,
-        doc4: File?
+        doc4: File?,
+        doc5: File?,
+        doc6: File?,
+        doc7: File?,
+        doc8: File?,
+        doc9: File?,
+        doc10: File?
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
         addDisposable(bookTrip.bookTrip(
@@ -86,12 +92,20 @@ class TripReservationViewModel @Inject constructor(
                 doc1,
                 doc2,
                 doc3,
-                doc4)
+                doc4,
+                doc5,
+                doc6,
+                doc7,
+                doc8,
+                doc9,
+                doc10)
                 .subscribe(
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
                         },
-                        { errorState.value = it }
+                        {
+                            errorState.value = handleError(it)
+                        }
                 )
         )
     }

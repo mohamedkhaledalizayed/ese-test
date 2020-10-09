@@ -76,12 +76,18 @@ interface NeqabtyRepository {
         doc1: File?,
         doc2: File?,
         doc3: File?,
-        doc4: File?
+        doc4: File?,
+        doc5: File?,
+        doc6: File?,
+        doc7: File?,
+        doc8: File?,
+        doc9: File?,
+        doc10: File?
     ): Observable<Unit>
 
     fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>>
     fun getAllServices(typeID: Int): Observable<List<ServiceEntity>>
-    fun inquirePayment(userNumber: Int, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity>
+    fun inquirePayment(userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity>
     fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
     fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity>
     fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
@@ -110,7 +116,9 @@ interface NeqabtyRepository {
         docsNumber: Int,
         doc1: File?,
         doc2: File?,
-        doc3: File?
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
     ): Observable<Unit>
 
     fun loginVisitor(mobile: String, token: String): Observable<UserEntity>

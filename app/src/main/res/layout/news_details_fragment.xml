@@ -45,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/clLogo"
             app:layout_constraintTop_toTopOf="parent">
@@ -123,6 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_horizontal_normal"
                     android:text="@{newsItem.desc}"
+                    android:justificationMode="inter_word"
                     android:layout_marginStart="@dimen/margin_horizontal_normal"
                     android:textSize="@dimen/text_size_medium"
                     app:layout_constraintStart_toStartOf="parent"

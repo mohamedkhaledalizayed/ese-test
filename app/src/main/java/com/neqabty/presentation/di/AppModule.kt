@@ -50,8 +50,8 @@ class AppModule {
 //                ).build()
 
         val client: OkHttpClient = OkHttpClient.Builder()
-                .connectTimeout(3000, TimeUnit.SECONDS)
-                .readTimeout(3000, TimeUnit.SECONDS)
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(1, TimeUnit.MINUTES)
                 .addInterceptor(object : Interceptor {
                     override fun intercept(chain: Interceptor.Chain): Response {
                         val request = chain.request()
@@ -77,8 +77,8 @@ class AppModule {
                 .build()
 
         return Retrofit.Builder()
-                .baseUrl("http://3.20.85.44:44390/") // TEST
-//                .baseUrl("http://3.20.85.44:44382/") // PROD
+//                .baseUrl("http://3.20.85.44:44392/") // TEST
+                .baseUrl("http://3.20.85.44/") // PROD
 //                .baseUrl("http://front.neqabty.com/")
 //                .baseUrl("http://192.168.178.38/")
 //            .baseUrl("https://neqabty-stage.efinance.com.eg/")

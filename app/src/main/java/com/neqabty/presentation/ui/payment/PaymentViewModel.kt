@@ -32,7 +32,7 @@ class PaymentViewModel @Inject constructor(private val getTransactionHash: GetTr
                 { onTransactionHashReceived(it) },
                 {
                     viewState.value = viewState.value?.copy(isLoading = false)
-                    errorState.value = it
+                    errorState.value = handleError(it)
                 }
             )
         )

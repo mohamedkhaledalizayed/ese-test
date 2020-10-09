@@ -31,7 +31,7 @@ class NotificationDetailsViewModel @Inject constructor(private val getNotificati
                         { onNotificationDetailsReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

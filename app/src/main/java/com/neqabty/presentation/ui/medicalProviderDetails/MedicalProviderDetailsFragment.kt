@@ -67,14 +67,14 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
 
-        medicalProviderDetailsViewModel.errorState.observe(this, Observer { _ ->
+        medicalProviderDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 medicalProviderDetailsViewModel.isFavorite(providerItem)
                 medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeID!!)
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         medicalProviderDetailsViewModel.isFavorite(providerItem)
         medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeID!!)

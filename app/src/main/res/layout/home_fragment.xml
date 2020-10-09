@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -11,6 +10,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -36,19 +36,19 @@
             android:id="@+id/wheel"
             android:layout_width="match_parent"
             android:layout_height="306dip"
+            android:padding="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvdummy"
+            app:layout_constraintVertical_bias=".55"
             app:wheelBackgroundColor="@color/bg_wheel"
             app:wheelCursorColor="@android:color/transparent"
             app:wheelCursorHeight="1dp"
-            app:layout_constraintVertical_bias=".55"
             app:wheelItemRadio="0.18"
-            app:wheelWidthPercentage="1.1"
             app:wheelPaddingRadio="0.0"
-            android:padding="0dp"
-            app:wheelSelectedAngle="270.0" />
+            app:wheelSelectedAngle="270.0"
+            app:wheelWidthPercentage="1.1" />
 
         <TextView
             android:id="@+id/tvBottomTitle"
@@ -69,8 +69,8 @@
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/margin_vertical_normal"
             app:layout_constraintBottom_toTopOf="@id/wheel"
-            app:layout_constraintTop_toBottomOf="@id/tvTopTitle"
-            android:layout_marginBottom="@dimen/margin_vertical_normal"/>
+            app:layout_constraintTop_toBottomOf="@id/tvTopTitle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

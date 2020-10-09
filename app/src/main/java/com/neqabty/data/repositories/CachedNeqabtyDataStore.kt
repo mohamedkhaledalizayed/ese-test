@@ -13,23 +13,23 @@ import javax.inject.Singleton
 
 class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: NeqabtyCache) : NeqabtyDataStore {
     override fun createCoronaRequest(
-        userNumber: String,
-        phone: String,
-        syndicateID: Int,
-        name: String,
-        type: String,
-        job: String,
-        work: String,
-        treatmentDestination: String,
-        treatmentDestinationAddress: String,
-        family: Int,
-        injury: String,
-        docsNumber: Int,
-        doc1: File?,
-        doc2: File?,
-        doc3: File?,
-        doc4: File?,
-        doc5: File?
+            userNumber: String,
+            phone: String,
+            syndicateID: Int,
+            name: String,
+            type: String,
+            job: String,
+            work: String,
+            treatmentDestination: String,
+            treatmentDestinationAddress: String,
+            family: Int,
+            injury: String,
+            docsNumber: Int,
+            doc1: File?,
+            doc2: File?,
+            doc3: File?,
+            doc4: File?,
+            doc5: File?
     ): Observable<Unit> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -51,12 +51,12 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
     }
 
     override fun createComplaint(
-        name: String,
-        phone: String,
-        type: String,
-        body: String,
-        token: String,
-        memberNumber: String
+            name: String,
+            phone: String,
+            type: String,
+            body: String,
+            token: String,
+            memberNumber: String
     ): Observable<Unit> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -74,14 +74,14 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
     }
 
     override fun updateUserData(
-        userNumber: String,
-        name: String,
-        nationalID: String,
-        mobile: String,
-        docsNumber: Int,
-        doc1: File?,
-        doc2: File?,
-        doc3: File?
+            userNumber: String,
+            name: String,
+            nationalID: String,
+            mobile: String,
+            docsNumber: Int,
+            doc1: File?,
+            doc2: File?,
+            doc3: File?
     ): Observable<UpdateUserDataEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -95,18 +95,20 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
     }
 
     override fun requestEngineeringRecords(
-        name: String,
-        phone: String,
-        typeId: String,
-        mainSyndicate: String,
-        userNumber: String,
-        lastRenewYear: String,
-        statusID: Int,
-        isOwner: Int,
-        docsNumber: Int,
-        doc1: File?,
-        doc2: File?,
-        doc3: File?
+            name: String,
+            phone: String,
+            typeId: String,
+            mainSyndicate: String,
+            userNumber: String,
+            lastRenewYear: String,
+            statusID: Int,
+            isOwner: Int,
+            docsNumber: Int,
+            doc1: File?,
+            doc2: File?,
+            doc3: File?,
+            doc4: File?,
+            doc5: File?
     ): Observable<Unit> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -123,26 +125,8 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun bookTrip(
-        mainSyndicateId: Int,
-        userNumber: String,
-        phone: String,
-        tripID: Int,
-        regimentID: Int,
-        regimentDate: String,
-        housingType: String,
-        numChild: Int,
-        ages: String,
-        name: String,
-        personsList: List<PersonEntity>,
-        docsNumber: Int,
-        personsNumber: Int,
-        doc1: File?,
-        doc2: File?,
-        doc3: File?,
-        doc4: File?
-    ): Observable<Unit> {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override fun bookTrip(mainSyndicateId: Int, userNumber: String, phone: String, tripID: Int, regimentID: Int, regimentDate: String, housingType: String, numChild: Int, ages: String, name: String, personsList: List<PersonEntity>, docsNumber: Int, personsNumber: Int, doc1: File?, doc2: File?, doc3: File?, doc4: File?, doc5: File?, doc6: File?, doc7: File?, doc8: File?, doc9: File?, doc10: File?): Observable<Unit> {
+        TODO("Not yet implemented")
     }
 
     override fun getAppVersion(): Observable<AppVersionEntity> {
@@ -150,11 +134,11 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
     }
 
     override fun getProvidersByType(
-        providerTypeId: String,
-        govId: String,
-        areaId: String,
-        professionID: String?,
-        degreeID: String?
+            providerTypeId: String,
+            govId: String,
+            areaId: String,
+            professionID: String?,
+            degreeID: String?
     ): Observable<List<ProviderEntity>> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -167,30 +151,30 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun inquirePayment(userNumber: Int, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity> {
+    override fun inquirePayment(userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
     override fun sendMedicalRequest(
-        mainSyndicateId: Int,
-        subSyndicateId: Int,
-        userNumber: String,
-        email: String,
-        phone: String,
-        profession: Int,
-        degree: Int,
-        area: Int,
-        doctor: Int,
-        providerType: Int,
-        provider: Int,
-        name: String,
-        oldbenid: String,
-        docsNumber: Int,
-        doc1: File?,
-        doc2: File?,
-        doc3: File?,
-        doc4: File?,
-        doc5: File?
+            mainSyndicateId: Int,
+            subSyndicateId: Int,
+            userNumber: String,
+            email: String,
+            phone: String,
+            profession: Int,
+            degree: Int,
+            area: Int,
+            doctor: Int,
+            providerType: Int,
+            provider: Int,
+            name: String,
+            oldbenid: String,
+            docsNumber: Int,
+            doc1: File?,
+            doc2: File?,
+            doc3: File?,
+            doc4: File?,
+            doc5: File?
     ): Observable<Unit> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -206,6 +190,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
     override fun getAllDoctors(): Observable<List<DoctorEntity>> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
+
     override fun getAllDegrees(): Observable<List<DegreeEntity>> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -263,14 +248,14 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
     }
 
     override fun signup(
-        email: String,
-        fName: String,
-        lName: String,
-        mobile: String,
-        govId: String,
-        mainSyndicateId: String,
-        subSyndicateId: String,
-        password: String
+            email: String,
+            fName: String,
+            lName: String,
+            mobile: String,
+            govId: String,
+            mainSyndicateId: String,
+            subSyndicateId: String,
+            password: String
     ): Observable<UserEntity> {
         return neqabtyCache.getUser()
     }

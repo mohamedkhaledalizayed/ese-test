@@ -46,7 +46,7 @@ class HomeViewModel @Inject constructor(
                         },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -69,7 +69,7 @@ class HomeViewModel @Inject constructor(
                         },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -90,7 +90,7 @@ class HomeViewModel @Inject constructor(
                         },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -108,7 +108,7 @@ class HomeViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(isLoading = false)
                             onContentReceived()
 //                            viewState.value = viewState.value?.copy(isLoading = false)
-//                            errorState.value = it
+//                            errorState.value = handleError(it)
                         }
                 )
         )

@@ -71,14 +71,14 @@ class SearchFragment : BaseFragment(), Injectable {
         searchViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        searchViewModel.errorState.observe(this, Observer { _ ->
+        searchViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 searchViewModel.getAllContent()
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
-            })
+            }, message = error?.message)
         })
         searchViewModel.getAllContent()
         initializeViews()
