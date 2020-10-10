@@ -9,7 +9,7 @@ data class NotificationRequest(
 //    @SerializedName("type")
 //    var type: Int = 0,
     @SerializedName("user_number")
-    var userNumber: Int = 0
+    var userNumber: String = ""
 //    @SerializedName("request_id")
 //    var requestID: Int = 0
 ) : Request()

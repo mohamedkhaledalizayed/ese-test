@@ -19,7 +19,7 @@ class NotificationDetailsViewModel @Inject constructor(private val getNotificati
         viewState.value = NotificationDetailsViewState()
     }
 
-    fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int) {
+    fun getNotificationDetails(serviceID: Int, type: Int, userNumber: String, requestID: Int) {
         viewState.value?.notification?.let {
             onNotificationDetailsReceived(it)
         } ?: addDisposable(getNotificationDetails.getNotificationDetails(serviceID, type, userNumber, requestID)

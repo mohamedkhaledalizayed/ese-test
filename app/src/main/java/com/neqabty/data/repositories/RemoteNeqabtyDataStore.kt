@@ -90,7 +90,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     private val inquireUpdateUserDataEntityMapper = InquireUpdateUserDataEntityMapper()
     override fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity> {
-        return api.updateUserDataInquiry(InquireUpdateUserDataRequest(userNumber.toInt())).flatMap { userDataResponse ->
+        return api.updateUserDataInquiry(InquireUpdateUserDataRequest(userNumber)).flatMap { userDataResponse ->
             Observable.just(inquireUpdateUserDataEntityMapper.mapFrom(userDataResponse.data!!))
         }
     }
@@ -131,7 +131,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
             file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
         }
 
-        return api.updateUserData(UpdateUserDataRequest(userNumber.toInt(), name, nationalID, mobile, docsNumber), file1, file2, file3).map { userData ->
+        return api.updateUserData(UpdateUserDataRequest(userNumber, name, nationalID, mobile, docsNumber), file1, file2, file3).map { userData ->
             updateUserDataEntityMapper.mapFrom(userData)
         }
     }
@@ -139,7 +139,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val registeryDataEntityMapper = RegisteryDataEntityMapper()
 
     override fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity> {
-        return api.engineeringRecordsInquiry(EngineeringRecordsInquiryRequest(userNumber.toInt())).map { registeryData ->
+        return api.engineeringRecordsInquiry(EngineeringRecordsInquiryRequest(userNumber)).map { registeryData ->
             registeryData.data?.msg = registeryData.arMsg
             registeryDataEntityMapper.mapFrom(registeryData.data!!)
         }
@@ -337,7 +337,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     private val notificationsCountDataEntityMapper = NotificationsCountDataEntityMapper()
 
-    override fun getNotificationsCount(userNumber: Int): Observable<NotificationsCountEntity> {
+    override fun getNotificationsCount(userNumber: String): Observable<NotificationsCountEntity> {
         return api.getNotificationsCount(NotificationRequest(userNumber = userNumber)).map { count ->
             notificationsCountDataEntityMapper.mapFrom(count)
         }
@@ -345,13 +345,13 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
 
     private val notificationDataEntityMapper = NotificationDataEntityMapper()
 
-    override fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>> {
+    override fun getNotifications(serviceID: Int, type: Int, userNumber: String): Observable<List<NotificationEntity>> {
         return api.getNotifications(NotificationRequest(userNumber)).map { notifications ->
             notifications.map { notificationDataEntityMapper.mapFrom(it) }
         }
     }
 
-    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity> {
+    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: String, requestID: Int): Observable<NotificationEntity> {
         return api.getNotificationDetails(requestID, type).flatMap { notification ->
             Observable.just(notificationDataEntityMapper.mapFrom(notification))
         }

@@ -1,9 +1,6 @@
 package com.neqabty.presentation.ui.mobile
 
 import android.app.Dialog
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.databinding.DataBindingComponent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +8,11 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.Window
 import androidx.appcompat.app.AlertDialog
+import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -40,9 +40,9 @@ class MobileFragment : BaseFragment(), Injectable {
     var type: Int? = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -145,10 +145,12 @@ class MobileFragment : BaseFragment(), Injectable {
                 FirebaseInstanceId.getInstance().instanceId
                         .addOnCompleteListener(OnCompleteListener { task ->
                             if (!task.isSuccessful)
-                                return@OnCompleteListener
-                            val token = task.result?.token
-                            mobileViewModel.registerUser(binding.edMobile.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, token
-                                    ?: "", PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
+                                showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
+                            else {
+                                val token = task.result?.token
+                                mobileViewModel.registerUser(binding.edMobile.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, token
+                                        ?: "", PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
+                            }
                         })
             }
         }

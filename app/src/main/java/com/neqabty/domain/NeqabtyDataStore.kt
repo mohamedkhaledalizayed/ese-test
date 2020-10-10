@@ -27,9 +27,9 @@ interface NeqabtyDataStore {
     ): Observable<List<ProviderEntity>>
 
     fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>>
-    fun getNotificationsCount(userNumber: Int): Observable<NotificationsCountEntity>
-    fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>>
-    fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity>
+    fun getNotificationsCount(userNumber: String): Observable<NotificationsCountEntity>
+    fun getNotifications(serviceID: Int, type: Int, userNumber: String): Observable<List<NotificationEntity>>
+    fun getNotificationDetails(serviceID: Int, type: Int, userNumber: String, requestID: Int): Observable<NotificationEntity>
     fun sendMedicalRequest(
         mainSyndicateId: Int,
         subSyndicateId: Int,

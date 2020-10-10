@@ -19,7 +19,7 @@ class NotificationsViewModel @Inject constructor(private val getNotifications: G
         viewState.value = NotificationsViewState()
     }
 
-    fun getNotifications(serviceID: Int, type: Int, userNumber: Int) {
+    fun getNotifications(serviceID: Int, type: Int, userNumber: String) {
         addDisposable(getNotifications.getNotifications(serviceID, type, userNumber)
                 .flatMap {
                     it.let {

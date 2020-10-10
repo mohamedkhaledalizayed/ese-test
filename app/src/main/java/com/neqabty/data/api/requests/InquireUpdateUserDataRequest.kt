@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class InquireUpdateUserDataRequest(
     @SerializedName("OldRefID")
-    var userNumber: Int = 0
+    var userNumber: String = ""
 )

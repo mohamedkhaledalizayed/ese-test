@@ -161,7 +161,7 @@
     <string name="trips_title">الرحلات</string>
     <string name="claiming_title">مطالبات طبية</string>
     <string name="medical_title">الدليل الطبي</string>
-    <string name="inquiry_title">سداد اشتراكات</string>
+    <string name="inquiry_title">المدفوعات</string>
     <string name="engineering_records_title">تجديد سجل هندسي</string>
     <string name="update_data_title">تحديث البيانات</string>
     <string name="complaints_title">شكاوى ومقترحات</string>
@@ -262,7 +262,7 @@
     </string>
 
     <string name="pay">الدفع</string>
-    <string name="inquiry">سداد اشتراكات</string>
+    <string name="inquiry">المدفوعات</string>
     <string name="details">التفاصيل:</string>
     <string name="payment_method">طريقة الدفع:</string>
     <string name="payment_card">بطاقات بنكية</string>

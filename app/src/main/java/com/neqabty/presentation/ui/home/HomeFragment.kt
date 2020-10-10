@@ -128,7 +128,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         adapter.addFragment(WheelComplaintsFragment())
         adapter.addFragment(WheelPaymentsFragment())
         binding.viewpager.adapter = adapter
-        binding.viewpager.setSwipePagingEnabled(true)
+        binding.viewpager.setSwipePagingEnabled(false)
         binding.viewpager.offscreenPageLimit = 8
 
         val sectionsList = mutableListOf<String>(getString(R.string.wheel_news), getString(R.string.wheel_medical), getString(R.string.wheel_trips),

@@ -113,15 +113,15 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getNotificationsCount(userNumber: Int): Observable<NotificationsCountEntity> {
+    override fun getNotificationsCount(userNumber: String): Observable<NotificationsCountEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>> {
+    override fun getNotifications(serviceID: Int, type: Int, userNumber: String): Observable<List<NotificationEntity>> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity> {
+    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: String, requestID: Int): Observable<NotificationEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 

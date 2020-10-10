@@ -17,6 +17,7 @@ import com.neqabty.databinding.WheelSyndicateServicesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.wheel_payments_fragment.*
 import javax.inject.Inject
@@ -51,7 +52,15 @@ class WheelSyndicateServicesFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        bGo.setOnClickListener { navController().navigate(R.id.updateDataVerificationFragment) }
+        bGo.setOnClickListener {
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(R.id.updateDataVerificationFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", 4)
+                navController().navigate(R.id.mobileFragment, bundle)
+            }
+        }
 
     }
 

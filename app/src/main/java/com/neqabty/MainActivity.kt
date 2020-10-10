@@ -30,10 +30,12 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
+import com.neqabty.presentation.ui.login.LoginFragmentDirections
 import com.neqabty.presentation.util.*
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.android.synthetic.main.main_activity.*
 import java.io.IOException
 import java.util.*
@@ -48,6 +50,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     lateinit var mainViewModel: MainViewModel
 
+    lateinit var newToken: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
@@ -59,10 +63,27 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
         setSupportActionBar(toolbar)
 //        verifyAvailableNetwork()//TODO
-        getToken()
+//        getToken()
 //        checkRoot()
         startActivities()
         mainViewModel.viewState.observe(this, Observer {
+            it.user?.let {
+                PreferencesHelper(this).jwt = it.token
+
+                if(PreferencesHelper(this).mobile.isNotBlank() && PreferencesHelper(this).user.isNotBlank() ){ // client
+                    mainViewModel.registerUser(
+                            PreferencesHelper(this).mobile,
+                            PreferencesHelper(this).mainSyndicate,
+                            PreferencesHelper(this).subSyndicate,
+                            PreferencesHelper(this).token,
+                            PreferencesHelper(this),
+                            PreferencesHelper(this).user)
+                }
+//                else if(PreferencesHelper(this).mobile.isNotBlank()) { // visitor
+//                    }
+                PreferencesHelper(this).token = newToken
+            }
+
             invalidateOptionsMenu()
         })
     }
@@ -214,16 +235,16 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         }
 
         navController.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { controller, destination, arguments ->
-            if(destination.id == R.id.homeFragment)
+            if (destination.id == R.id.homeFragment)
                 supportActionBar?.apply {
                     setDisplayHomeAsUpEnabled(true)
                     setHomeAsUpIndicator(R.mipmap.menu_ic)
                 }
             else
                 supportActionBar?.apply {
-                setDisplayHomeAsUpEnabled(true)
-                setHomeAsUpIndicator(R.drawable.ic_up)
-            }
+                    setDisplayHomeAsUpEnabled(true)
+                    setHomeAsUpIndicator(R.drawable.ic_up)
+                }
         })
 
         notificationId?.let {
@@ -242,27 +263,16 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         FirebaseInstanceId.getInstance().instanceId
                 .addOnCompleteListener(OnCompleteListener { task ->
                     if (!task.isSuccessful)
-                        return@OnCompleteListener
-                    val token = task.result?.token!!
-
-                    if (PreferencesHelper(this).mobile.isNotBlank() && !token.equals(
-                                    PreferencesHelper(
-                                            this
-                                    ).token
-                            )
-                    ) { // TODO register
-                        mainViewModel.registerUser(
-                                PreferencesHelper(this).mobile,
-                                PreferencesHelper(this).mainSyndicate,
-                                PreferencesHelper(this).subSyndicate,
-                                PreferencesHelper(this).token,
-                                PreferencesHelper(this),
-                                PreferencesHelper(this).user
-                        )
-                    } else
-                        PreferencesHelper(this).token = token
-
-                    Log.d("Toooken", token)
+                        getToken()
+                    else {
+                        newToken = task.result?.token!!
+                        if (!newToken.equals(PreferencesHelper(this).token)) // Token has been changed
+                        {
+                            if(PreferencesHelper(this).mobile.isNotBlank()){ // visitor
+                                mainViewModel.login(PreferencesHelper(this).mobile, newToken, PreferencesHelper(this))
+                            }
+                        }
+                    }
                 })
     }
 

@@ -164,16 +164,16 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.sendDecryptionKey(requestNumber, decryptionKey)
     }
 
-    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity> {
+    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: String, requestID: Int): Observable<NotificationEntity> {
         return remoteDataStore.getNotificationDetails(serviceID, type, userNumber, requestID)
     }
 
-    override fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>> {
+    override fun getNotifications(serviceID: Int, type: Int, userNumber: String): Observable<List<NotificationEntity>> {
         return remoteDataStore.getNotifications(serviceID, type, userNumber)
     }
 
     override fun getNotificationsCount(userNumber: String): Observable<NotificationsCountEntity> {
-        return remoteDataStore.getNotificationsCount(userNumber.toInt())
+        return remoteDataStore.getNotificationsCount(userNumber)
     }
 
     override fun sendMedicalRequest(

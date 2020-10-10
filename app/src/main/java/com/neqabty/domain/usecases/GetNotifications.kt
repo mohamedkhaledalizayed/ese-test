@@ -17,7 +17,7 @@ class GetNotifications @Inject constructor(
         private const val PARAM_USER_NUMBER = "param:userNumber"
     }
 
-    fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>> {
+    fun getNotifications(serviceID: Int, type: Int, userNumber: String): Observable<List<NotificationEntity>> {
         val data = HashMap<String, Any>()
         data[PARAM_SERVICE_ID] = serviceID
         data[PARAM_TYPE] = type
@@ -28,7 +28,7 @@ class GetNotifications @Inject constructor(
     override fun createObservable(data: Map<String, Any>?): Observable<List<NotificationEntity>> {
         val serviceID = data?.get(PARAM_SERVICE_ID) as Int
         val type = data?.get(PARAM_TYPE) as Int
-        val userNumber = data?.get(PARAM_USER_NUMBER) as Int
+        val userNumber = data?.get(PARAM_USER_NUMBER) as String
         return neqabtyRepository.getNotifications(serviceID, type, userNumber)
     }
 }

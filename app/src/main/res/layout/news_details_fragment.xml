@@ -112,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_horizontal_large"
                     android:text="@{newsItem.title}"
+                    android:justificationMode="inter_word"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/text_size_large"
                     app:layout_constraintStart_toStartOf="parent"
