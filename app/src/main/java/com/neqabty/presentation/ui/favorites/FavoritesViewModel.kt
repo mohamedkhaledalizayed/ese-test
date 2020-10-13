@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.favorites
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetFavorites
 import com.neqabty.domain.usecases.RemoveFavorite
 import com.neqabty.presentation.common.BaseViewModel
@@ -35,7 +35,7 @@ class FavoritesViewModel @Inject constructor(
                         { onFavoritesReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -51,7 +51,7 @@ class FavoritesViewModel @Inject constructor(
                         { onRemoveFavoriteReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

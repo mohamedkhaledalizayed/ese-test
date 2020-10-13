@@ -1,11 +1,11 @@
 package com.neqabty.presentation.ui.notificationDetails
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -64,15 +64,15 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
         notificationDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        notificationDetailsViewModel.errorState.observe(this, Observer { _ ->
+        notificationDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                notificationDetailsViewModel.getNotificationDetails(serviceId, serviceId, PreferencesHelper(requireContext()).user.toInt(), notificationId.toInt())
+                notificationDetailsViewModel.getNotificationDetails(serviceId, serviceId, PreferencesHelper(requireContext()).user, notificationId.toInt())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
-        notificationDetailsViewModel.getNotificationDetails(serviceId, serviceId, PreferencesHelper(requireContext()).user.toInt(), notificationId.toInt())
+        notificationDetailsViewModel.getNotificationDetails(serviceId, serviceId, PreferencesHelper(requireContext()).user, notificationId.toInt())
     }
 
     fun initializeViews(notificationItem: NotificationUI) {

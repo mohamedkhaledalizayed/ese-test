@@ -1,18 +1,18 @@
 package com.neqabty.presentation.ui.mobile
 
 import android.app.Dialog
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.Window
+import androidx.appcompat.app.AlertDialog
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
@@ -40,9 +40,9 @@ class MobileFragment : BaseFragment(), Injectable {
     var type: Int? = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -145,10 +145,12 @@ class MobileFragment : BaseFragment(), Injectable {
                 FirebaseInstanceId.getInstance().instanceId
                         .addOnCompleteListener(OnCompleteListener { task ->
                             if (!task.isSuccessful)
-                                return@OnCompleteListener
-                            val token = task.result?.token
-                            mobileViewModel.registerUser(binding.edMobile.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, token
-                                    ?: "", PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
+                                showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
+                            else {
+                                val token = task.result?.token
+                                mobileViewModel.registerUser(binding.edMobile.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, token
+                                        ?: "", PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
+                            }
                         })
             }
         }
@@ -184,8 +186,8 @@ class MobileFragment : BaseFragment(), Injectable {
 
     private fun showCardDialog() {
         val dialog = Dialog(requireContext())
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE)
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.getWindow()!!.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.getWindow()!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(layoutInflater.inflate(R.layout.image_item, null), ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
         dialog.setCanceledOnTouchOutside(true)
         dialog.show()

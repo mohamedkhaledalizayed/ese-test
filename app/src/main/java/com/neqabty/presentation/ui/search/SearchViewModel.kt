@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.search
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -10,11 +10,11 @@ import com.neqabty.presentation.mappers.*
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    val getAllGoverns: GetAllGoverns,
-    val getAllAreas: GetAllAreas,
-    val getAllProvidersTypes: GetAllProvidersTypes,
-    val getAllDegrees: GetAllDegrees,
-    val getAllSpecializations: GetAllSpecializations
+        val getAllGoverns: GetAllGoverns,
+        val getAllAreas: GetAllAreas,
+        val getAllProvidersTypes: GetAllProvidersTypes,
+        val getAllDegrees: GetAllDegrees,
+        val getAllSpecializations: GetAllSpecializations
 ) : BaseViewModel() {
     private val areaEntityUIMapper = AreaEntityUIMapper()
     private val governEntityUIMapper = GovernEntityUIMapper()
@@ -46,7 +46,9 @@ class SearchViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(governs = it)
                             onContentReceived()
                         },
-                        { errorState.value = it }
+                        {
+                            errorState.value = handleError(it)
+                        }
                 )
 
         val areasDisposable = getAllAreas.observable()
@@ -59,7 +61,9 @@ class SearchViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(areas = it)
                             onContentReceived()
                         },
-                        { errorState.value = it }
+                        {
+                            errorState.value = handleError(it)
+                        }
                 )
 
         val providerTypesDisposable = getAllProvidersTypes.getProviderTypes("directory")
@@ -72,7 +76,7 @@ class SearchViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(providerTypes = it)
                             onContentReceived()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
 
         val professionsDisposable = getAllSpecializations.observable()
@@ -85,7 +89,7 @@ class SearchViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(professions = it)
                             onContentReceived()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
 
         val degreesDisposable = getAllDegrees.observable()
@@ -99,7 +103,7 @@ class SearchViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(degrees = edited)
                             onContentReceived()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
 
         viewState.value?.areas?.let {

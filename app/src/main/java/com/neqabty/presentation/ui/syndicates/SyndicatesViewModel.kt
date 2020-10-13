@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.syndicates
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetAllSyndicates
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -32,7 +32,7 @@ class SyndicatesViewModel @Inject constructor(private val getAllSyndicates: GetA
                 { onSyndicatesReceived(it) },
                 {
                     viewState.value = viewState.value?.copy(isLoading = false)
-                    errorState.value = it
+                    errorState.value = handleError(it)
                 }
             )
         )

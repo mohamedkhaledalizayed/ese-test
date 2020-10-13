@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.medicalProviderDetails
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.AddFavorite
 import com.neqabty.domain.usecases.CheckFavorite
 import com.neqabty.domain.usecases.GetProviderDetails
@@ -39,7 +39,7 @@ class MedicalProviderDetailsViewModel @Inject constructor(
                         { onProviderDetailsReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -55,7 +55,7 @@ class MedicalProviderDetailsViewModel @Inject constructor(
                         { onAddFavoriteReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -71,7 +71,7 @@ class MedicalProviderDetailsViewModel @Inject constructor(
                         { onRemoveFavoriteReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -83,7 +83,7 @@ class MedicalProviderDetailsViewModel @Inject constructor(
                         { onCheckFavoriteReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

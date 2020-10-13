@@ -2,23 +2,26 @@ package com.neqabty.presentation.ui.updateDataDetails
 
 import android.Manifest
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -28,6 +31,7 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.InquireUpdateUserDataUI
 import com.neqabty.presentation.entities.PhotoUI
+import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.update_data_details_fragment.*
@@ -52,14 +56,16 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 
     private var captureImage = false
 
+    private var PhotoFileName = ""
+    lateinit var photoFileURI: Uri
     private var photosList: MutableList<PhotoUI> = mutableListOf<PhotoUI>()
     lateinit var updateDataDetailsViewModel: UpdateDataDetailsViewModel
 
     var selectedIndex = 0
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -80,13 +86,16 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
         updateDataDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        updateDataDetailsViewModel.errorState.observe(this, Observer { _ ->
+        updateDataDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                updateDataDetailsViewModel.inquireUpdateUserData(PreferencesHelper(requireContext()).user)
+                if (photosList.size > 0)
+                    submitRequest()
+                else
+                    updateDataDetailsViewModel.inquireUpdateUserData(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         updateDataDetailsViewModel.inquireUpdateUserData(PreferencesHelper(requireContext()).user)
     }
@@ -113,9 +122,9 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 // //            tempMember.amount = getString(R.string.amount_title) + " " + it.amount + " ج"
 //            binding.userData = it
 //        }
-        photosList.add(0, PhotoUI(null, null))
-        photosList.add(1, PhotoUI(null, null))
-        photosList.add(2, PhotoUI(null, null))
+        photosList.add(0, PhotoUI(null, null, null))
+        photosList.add(1, PhotoUI(null, null, null))
+        photosList.add(2, PhotoUI(null, null, null))
 
         binding.ibAddPhoto1.setOnClickListener {
             selectedIndex = 0
@@ -153,13 +162,17 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 //        }
 //
         bUpdate.setOnClickListener {
-            if (photosList[0].name != null && photosList[1].name != null && photosList[2].name != null) {
-                userDataInquire.nationalID = edNationalID.text.toString()
-                userDataInquire.phone = edMobileNumber.text.toString()
-                updateDataDetailsViewModel.updateUserData(userDataInquire.oldRefID, userDataInquire.fullName!!, userDataInquire.nationalID!!, userDataInquire.phone!!, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2))
-            } else
-                showPickPhotoAlert()
+            submitRequest()
         }
+    }
+
+    fun submitRequest() {
+        if (photosList[0].name != null && photosList[1].name != null && photosList[2].name != null) {
+            userDataInquire.nationalID = edNationalID.text.toString()
+            userDataInquire.phone = edMobileNumber.text.toString()
+            updateDataDetailsViewModel.updateUserData(userDataInquire.oldRefID, userDataInquire.fullName!!, userDataInquire.nationalID!!, userDataInquire.phone!!, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2))
+        } else
+            showPickPhotoAlert()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -169,7 +182,7 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 //                onSelectFromGalleryResult(data!!)
 //            else
             if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data!!)
+                onCaptureImageResult()
         }
     }
 
@@ -202,8 +215,30 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
     }
 
     private fun cameraIntent() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, REQUEST_CAMERA)
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
+                // Create the File where the photo should go
+                val photoFile: File? = try {
+                    ImageUtils.createImageFile(requireContext())
+                } catch (ex: IOException) {
+                    // Error occurred while creating the File
+                    null
+                }
+                // Continue only if the File was successfully created
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                            requireContext(),
+                            "com.neqabty.fileprovider",
+                            it
+                    )
+                    PhotoFileName = photoFile.name
+                    photoFileURI = photoURI
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_CAMERA)
+                }
+            }
+
+        }
     }
 
     fun grantCameraPermission() {
@@ -229,27 +264,15 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 //        }
 //    }
 
-    private fun onCaptureImageResult(data: Intent) {
-        var thumbnail: Bitmap = data.getExtras().get("data") as Bitmap
-        var bytes: ByteArrayOutputStream = ByteArrayOutputStream()
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-
-        var name = System.currentTimeMillis().toString() + ".jpg"
-        var destination: File = File(Environment.getExternalStorageDirectory(), name)
-
-        var fo: FileOutputStream
-        try {
-            destination.createNewFile()
-            fo = FileOutputStream(destination)
-            fo.write(bytes.toByteArray())
-            fo.close()
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-        addToPhotos(PhotoUI(Environment.getExternalStorageDirectory().toString(), name))
+    private fun onCaptureImageResult() {
+        addToPhotos(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName, photoFileURI))
+        val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" + PhotoFileName)
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
+        val bos = BufferedOutputStream(FileOutputStream(File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName)))
+        bos.write(bytes.toByteArray())
+        bos.flush()
+        bos.close()
         updateIcons()
     }
 
@@ -269,12 +292,12 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
             fo.close()
-            return PhotoUI(path, name)
+            return PhotoUI(path, name, null)
         } catch (e1: IOException) {
             e1.printStackTrace()
         }
 
-        return PhotoUI(path, name)
+        return PhotoUI(path, name, null)
     }
 
     fun getPhoto(index: Int): File? {

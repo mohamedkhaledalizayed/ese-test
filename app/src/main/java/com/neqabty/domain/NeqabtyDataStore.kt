@@ -27,9 +27,9 @@ interface NeqabtyDataStore {
     ): Observable<List<ProviderEntity>>
 
     fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>>
-    fun getNotificationsCount(userNumber: Int): Observable<NotificationsCountEntity>
-    fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>>
-    fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity>
+    fun getNotificationsCount(userNumber: String): Observable<NotificationsCountEntity>
+    fun getNotifications(serviceID: Int, type: Int, userNumber: String): Observable<List<NotificationEntity>>
+    fun getNotificationDetails(serviceID: Int, type: Int, userNumber: String, requestID: Int): Observable<NotificationEntity>
     fun sendMedicalRequest(
         mainSyndicateId: Int,
         subSyndicateId: Int,
@@ -69,11 +69,18 @@ interface NeqabtyDataStore {
         doc1: File?,
         doc2: File?,
         doc3: File?,
-        doc4: File?
+        doc4: File?,
+        doc5: File?,
+        doc6: File?,
+        doc7: File?,
+        doc8: File?,
+        doc9: File?,
+        doc10: File?
     ): Observable<Unit>
 
-    fun getAllServices(): Observable<List<ServiceEntity>>
-    fun inquirePayment(userNumber: Int, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity>
+    fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>>
+    fun getAllServices(typeID: Int): Observable<List<ServiceEntity>>
+    fun inquirePayment(userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity>
     fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
     fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity>
     fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
@@ -102,7 +109,9 @@ interface NeqabtyDataStore {
         docsNumber: Int,
         doc1: File?,
         doc2: File?,
-        doc3: File?
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
     ): Observable<Unit>
 
     fun loginVisitor(mobile: String, token: String): Observable<UserEntity>

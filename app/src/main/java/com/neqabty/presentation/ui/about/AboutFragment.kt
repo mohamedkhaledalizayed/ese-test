@@ -1,11 +1,11 @@
 package com.neqabty.presentation.ui.about
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -64,13 +64,13 @@ class AboutFragment : BaseFragment(), Injectable {
         aboutViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        aboutViewModel.errorState.observe(this, Observer { _ ->
+        aboutViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate.toString())
     }
@@ -80,22 +80,22 @@ class AboutFragment : BaseFragment(), Injectable {
         state.syndicate?.let {
             svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
             initializeViews(it)
-            var tempSyndicate = it.copy()
-            tempSyndicate.address = getString(R.string.address_title) + " " + it.address
-            tempSyndicate.phone = getString(R.string.phone_title) + " " + it.phone
-            tempSyndicate.email = getString(R.string.email_title) + " " + it.email
+//            var tempSyndicate = it.copy()
+//            tempSyndicate.address = getString(R.string.address_title) + " " + it.address
+//            tempSyndicate.phone = getString(R.string.phone_title) + " " + it.phone
+//            tempSyndicate.email = getString(R.string.email_title) + " " + it.email
             binding.syndicate = it
         }
     }
 
     fun initializeViews(syndicate: SyndicateUI) {
-        tvAddress.setOnClickListener {
+        bMap.setOnClickListener {
             syndicate.address?.let { tvAddress.openMap(it, requireContext()) }
         }
-        tvPhone.setOnClickListener {
+        clPhone.setOnClickListener {
             syndicate.phone?.let { tvPhone.call(it, requireContext()) }
         }
-        tvEmail.setOnClickListener {
+        clEmail.setOnClickListener {
             syndicate.email?.let { sendEmail(it) }
         }
     }

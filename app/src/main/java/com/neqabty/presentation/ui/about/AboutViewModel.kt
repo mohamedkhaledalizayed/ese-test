@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.about
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetSyndicate
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -31,7 +31,7 @@ class AboutViewModel @Inject constructor(private val getSyndicate: GetSyndicate)
                         { onSyndicateReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -50,7 +50,7 @@ class AboutViewModel @Inject constructor(private val getSyndicate: GetSyndicate)
 //                        { onSyndicateReceived(it) },
 //                        {
 //                            viewState.value = viewState.value?.copy(isLoading = false)
-//                            errorState.value = it
+//
 //                        }
 //                )
 //        )

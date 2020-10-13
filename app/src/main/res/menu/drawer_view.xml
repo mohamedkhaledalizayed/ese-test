@@ -2,42 +2,57 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home_fragment"
-        android:icon="@mipmap/home_ic"
+        android:icon="@drawable/ic_menu_home"
         android:title="@string/home_title" />
 
     <!--<group>-->
     <item
         android:id="@+id/news_fragment"
-        android:title="@string/news_title" />
+        android:title="@string/news_title"
+        android:icon="@drawable/ic_menu_news" />
     <item
         android:id="@+id/trips_fragment"
-        android:title="@string/trips_title" />
+        android:title="@string/trips_title"
+        android:icon="@drawable/ic_menu_trips" />
     <item
         android:id="@+id/claiming_fragment"
-        android:title="@string/claiming_title" />
+        android:title="@string/claiming_title"
+        android:icon="@drawable/ic_menu_claiming" />
     <item
         android:id="@+id/medical_fragment"
-        android:title="@string/medical_title" />
+        android:title="@string/medical_title"
+        android:icon="@drawable/ic_menu_medical" />
     <item
         android:id="@+id/inquiry_fragment"
-        android:title="@string/inquiry_title" />
+        android:title="@string/inquiry_title"
+        android:icon="@drawable/ic_menu_payments" />
     <item
         android:id="@+id/engineering_records_fragment"
-        android:title="@string/engineering_records_title" />
+        android:title="@string/engineering_records_title"
+        android:icon="@drawable/ic_menu_records" />
     <item
         android:id="@+id/update_data_fragment"
-        android:title="@string/update_data_title" />
+        android:title="@string/update_data_title"
+        android:icon="@drawable/ic_menu_update_data" />
     <item
         android:id="@+id/complaints_fragment"
-        android:title="@string/complaints_title" />
+        android:title="@string/complaints_title"
+        android:icon="@drawable/ic_menu_complaints" />
 
     <item
         android:id="@+id/about_fragment"
-        android:title="@string/about_title" />
+        android:title="@string/about_title"
+        android:icon="@drawable/ic_menu_about_us" />
+
+    <item
+        android:id="@+id/about_app_fragment"
+        android:title="@string/aboutapp_title"
+        android:icon="@drawable/ic_menu_about_app" />
 
     <item
         android:id="@+id/settings_fragment"
-        android:title="@string/settings_title" />
+        android:title="@string/settings_title"
+        android:icon="@drawable/ic_menu_settings" />
 
     <!--</group>-->
 
@@ -47,7 +62,7 @@
         <!--android:title="@string/settings_title" />-->
     <item
         android:id="@+id/contactus_fragment"
-        android:icon="@mipmap/contact_us_ic"
+        android:icon="@drawable/ic_menu_contact_us"
         android:title="@string/contactus_title" />
     <!--<item-->
         <!--android:id="@+id/aboutapp_fragment"-->

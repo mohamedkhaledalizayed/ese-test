@@ -2,25 +2,28 @@ package com.neqabty.presentation.ui.claiming
 
 import android.Manifest
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager.widget.ViewPager
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.Claiming3FragmentBinding
@@ -29,11 +32,10 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.ui.common.PhotosAdapter
+import com.neqabty.presentation.util.ImageUtils.Companion.createImageFile
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-
 import java.io.*
-import java.util.*
 import javax.inject.Inject
 
 class ClaimingStep3Fragment : BaseFragment(), Injectable {
@@ -54,6 +56,9 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
 
     private val REQUEST_CAMERA = 0
     private val SELECT_FILE = 1
+
+    private var PhotoFileName = ""
+    lateinit var photoFileURI: Uri
 
     private var captureImage = false
 
@@ -114,7 +119,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             if (it != null) handleViewState(it)
         })
 
-        claimingViewModel.errorState.observe(this, Observer { _ ->
+        claimingViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 val prefs = PreferencesHelper(requireContext())
@@ -122,7 +127,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
-            })
+            }, message = error?.message)
         })
         llSuperProgressbar.visibility = View.INVISIBLE
     }
@@ -140,7 +145,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             if (requestCode == SELECT_FILE)
                 onSelectFromGalleryResult(data!!)
             else if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data!!)
+                onCaptureImageResult()
         }
     }
 
@@ -173,8 +178,30 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
     }
 
     private fun cameraIntent() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, REQUEST_CAMERA)
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
+                // Create the File where the photo should go
+                val photoFile: File? = try {
+                    createImageFile(requireContext())
+                } catch (ex: IOException) {
+                    // Error occurred while creating the File
+                    null
+                }
+                // Continue only if the File was successfully created
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                            requireContext(),
+                            "com.neqabty.fileprovider",
+                            it
+                    )
+                    PhotoFileName = photoFile.name
+                    photoFileURI = photoURI
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_CAMERA)
+                }
+            }
+
+        }
     }
 
     fun grantCameraPermission() {
@@ -201,36 +228,24 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         }
     }
 
-    private fun onCaptureImageResult(data: Intent) {
-        var thumbnail: Bitmap = data.getExtras().get("data") as Bitmap
-        var bytes: ByteArrayOutputStream = ByteArrayOutputStream()
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-
-        var name = System.currentTimeMillis().toString() + ".jpg"
-        var destination: File = File(Environment.getExternalStorageDirectory(), name)
-
-        var fo: FileOutputStream
-        try {
-            destination.createNewFile()
-            fo = FileOutputStream(destination)
-            fo.write(bytes.toByteArray())
-            fo.close()
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-        photosList.add(PhotoUI(Environment.getExternalStorageDirectory().toString(), name))
+    private fun onCaptureImageResult() {
+        photosList.add(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName,photoFileURI))
+        val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" +PhotoFileName)
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
+        val bos = BufferedOutputStream(FileOutputStream(File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName)))
+        bos.write(bytes.toByteArray())
+        bos.flush()
+        bos.close()
         adapter.submitList(photosList)
         adapter.notifyDataSetChanged()
     }
 
     fun saveImage(myBitmap: Bitmap): PhotoUI {
         val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 30, bytes)
         val path: String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
-        val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
+        val name = System.currentTimeMillis().toString() + ".jpg"
         val directory = File(path)
         if (!directory.exists())
             directory.mkdirs()
@@ -242,12 +257,12 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
             fo.close()
-            return PhotoUI(path, name)
+            return PhotoUI(path, name,null)
         } catch (e1: IOException) {
             e1.printStackTrace()
         }
 
-        return PhotoUI(path, name)
+        return PhotoUI(path, name,null)
     }
 
     fun getPhoto(index: Int): File? {

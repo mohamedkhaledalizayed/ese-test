@@ -1,10 +1,10 @@
 package com.neqabty.presentation.ui.notifications
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -67,7 +67,7 @@ class NotificationsFragment : BaseFragment(), Injectable {
         notificationsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        notificationsViewModel.errorState.observe(this, Observer { _ ->
+        notificationsViewModel.errorState.observe(this, Observer { error ->
             binding.tvError.visibility = View.VISIBLE
             binding.rvNotifications.visibility = View.GONE
 //            showConnectionAlert(requireContext(), retryCallback = {
@@ -75,7 +75,7 @@ class NotificationsFragment : BaseFragment(), Injectable {
 //                loadNotifications(typeID)
 //            }, cancelCallback = {
 //                navController().navigateUp()
-//            })
+//            }, message = error?.message)
         })
         loadNotifications(1)
         initializeViews()
@@ -124,7 +124,7 @@ class NotificationsFragment : BaseFragment(), Injectable {
     fun loadNotifications(typeID: Int) {
         llSuperProgressbar.visibility = View.VISIBLE
         binding.tvError.visibility = View.GONE
-        notificationsViewModel.getNotifications(typeID, 0, PreferencesHelper(requireContext()).user.toInt())
+        notificationsViewModel.getNotifications(typeID, 0, PreferencesHelper(requireContext()).user)
     }
 
     //region

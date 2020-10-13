@@ -10,7 +10,7 @@ data class MedicalCategoryUI(
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
-            parcel.readString(),
+            parcel.readString()!!,
             parcel.readInt()) {
     }
 

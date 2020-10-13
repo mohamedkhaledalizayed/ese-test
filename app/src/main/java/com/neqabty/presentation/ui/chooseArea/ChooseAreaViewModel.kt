@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.chooseArea
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetAllAreas
 import com.neqabty.domain.usecases.GetAllGoverns
 import com.neqabty.presentation.common.BaseViewModel
@@ -33,7 +33,7 @@ class ChooseAreaViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, 
                             viewState.value = viewState.value?.copy(governs = it)
                             onContent1Received()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
 
         val areasDisposable = getAllAreas.observable()
@@ -46,7 +46,7 @@ class ChooseAreaViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, 
                             viewState.value = viewState.value?.copy(areas = it)
                             onContent1Received()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
 
         viewState.value?.areas?.let {

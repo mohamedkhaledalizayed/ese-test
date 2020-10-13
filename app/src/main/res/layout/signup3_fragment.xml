@@ -10,7 +10,7 @@
             type="boolean" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -64,7 +64,7 @@
                     android:id="@+id/bLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/btn"
+                    android:background="@drawable/btn_green"
 
                     android:gravity="center"
                     android:padding="@dimen/margin_horizontal_small"
@@ -73,5 +73,5 @@
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
         </ScrollView>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

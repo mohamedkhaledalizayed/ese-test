@@ -1,6 +1,6 @@
 package com.neqabty.data.entities
 
-import android.arch.persistence.room.Entity
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 import com.neqabty.data.api.Response
 
@@ -21,7 +21,7 @@ data class NotificationData(
     @field:SerializedName("mobile_view")
     var mobileView: Int?,
     @field:SerializedName("user_number")
-    var userNumber: Int,
+    var userNumber: String,
     @field:SerializedName("approval_number")
     var approvalNumber: String?,
     @field:SerializedName("approval_image")

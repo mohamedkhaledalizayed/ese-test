@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/margin_horizontal_normal">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,21 +17,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/ivHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@mipmap/header_bg" />
-
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTrips"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_horizontal_small"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                android:layout_marginStart="@dimen/margin_horizontal_small"
+                android:layout_marginEnd="@dimen/margin_horizontal_small"
+                android:layout_marginBottom="@dimen/margin_horizontal_small"
+                app:layoutManager="LinearLayoutManager"
                 tools:listitem="@layout/trips_item" />
         </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

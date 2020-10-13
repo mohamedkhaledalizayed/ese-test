@@ -1,20 +1,22 @@
 package com.neqabty.presentation.ui.notifications
 
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
-import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.NotificationItemBinding
 import com.neqabty.presentation.entities.NotificationUI
+import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
+import com.neqabty.ui.presentation.common.DataBoundViewHolder
 
 class NotificationsAdapter(
-    private val dataBindingComponent: DataBindingComponent,
-    appExecutors: AppExecutors,
-    private val callback: ((NotificationUI) -> Unit)?
+        private val dataBindingComponent: DataBindingComponent,
+        appExecutors: AppExecutors,
+        private val callback: ((NotificationUI) -> Unit)?
 ) : DataBoundListAdapter<NotificationUI, NotificationItemBinding>(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<NotificationUI>() {
@@ -42,10 +44,20 @@ class NotificationsAdapter(
                 callback?.invoke(it)
             }
         }
+//        binding.ivNotification.layoutParams.width = DisplayMetrics.width / 6
+//        binding.ivNotification.layoutParams.height = DisplayMetrics.width / 6
         return binding
     }
 
     override fun bind(binding: NotificationItemBinding, item: NotificationUI) {
         binding.notification = item
+    }
+
+    override fun onBindViewHolder(holder: DataBoundViewHolder<NotificationItemBinding>, position: Int) {
+        super.onBindViewHolder(holder, position)
+        if(position %2 == 0)
+            holder.binding.clRoot.setBackgroundResource(R.drawable.provider_rounded_green_bg)
+        else
+            holder.binding.clRoot.setBackgroundResource(R.drawable.provider_rounded_blue_bg)
     }
 }

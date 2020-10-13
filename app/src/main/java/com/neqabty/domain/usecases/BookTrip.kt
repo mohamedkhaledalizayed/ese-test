@@ -30,6 +30,12 @@ class BookTrip @Inject constructor(
         private const val PARAM_DOC2 = "param:doc2"
         private const val PARAM_DOC3 = "param:doc3"
         private const val PARAM_DOC4 = "param:doc4"
+        private const val PARAM_DOC5 = "param:doc5"
+        private const val PARAM_DOC6 = "param:doc6"
+        private const val PARAM_DOC7 = "param:doc7"
+        private const val PARAM_DOC8 = "param:doc8"
+        private const val PARAM_DOC9 = "param:doc9"
+        private const val PARAM_DOC10 = "param:doc10"
     }
 
     fun bookTrip(
@@ -49,7 +55,13 @@ class BookTrip @Inject constructor(
         doc1: File?,
         doc2: File?,
         doc3: File?,
-        doc4: File?
+        doc4: File?,
+        doc5: File?,
+        doc6: File?,
+        doc7: File?,
+        doc8: File?,
+        doc9: File?,
+        doc10: File?
     ): Observable<Unit> {
         val data = HashMap<String, Any>()
         data[PARAM_MAIN_SYNDICATE] = mainSyndicateId
@@ -68,6 +80,12 @@ class BookTrip @Inject constructor(
         doc2?.let { data[PARAM_DOC2] = it }
         doc3?.let { data[PARAM_DOC3] = it }
         doc4?.let { data[PARAM_DOC4] = it }
+        doc5?.let { data[PARAM_DOC5] = it }
+        doc6?.let { data[PARAM_DOC6] = it }
+        doc7?.let { data[PARAM_DOC7] = it }
+        doc8?.let { data[PARAM_DOC8] = it }
+        doc9?.let { data[PARAM_DOC9] = it }
+        doc10?.let { data[PARAM_DOC10] = it }
         return observable(data)
     }
 
@@ -89,6 +107,22 @@ class BookTrip @Inject constructor(
         val doc2 = data?.get(BookTrip.PARAM_DOC2) as File?
         val doc3 = data?.get(BookTrip.PARAM_DOC3) as File?
         val doc4 = data?.get(BookTrip.PARAM_DOC4) as File?
-        return neqabtyRepository.bookTrip(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, personsList, docsNumber, peoplesNumber, doc1, doc2, doc3, doc4)
+        val doc5 = data?.get(BookTrip.PARAM_DOC5) as File?
+        val doc6 = data?.get(BookTrip.PARAM_DOC6) as File?
+        val doc7 = data?.get(BookTrip.PARAM_DOC7) as File?
+        val doc8 = data?.get(BookTrip.PARAM_DOC8) as File?
+        val doc9 = data?.get(BookTrip.PARAM_DOC9) as File?
+        val doc10 = data?.get(BookTrip.PARAM_DOC10) as File?
+        return neqabtyRepository.bookTrip(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, personsList, docsNumber, peoplesNumber,
+                doc1,
+                doc2,
+                doc3,
+                doc4,
+                doc5,
+                doc6,
+                doc7,
+                doc8,
+                doc9,
+                doc10)
     }
 }

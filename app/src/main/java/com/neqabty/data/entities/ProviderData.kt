@@ -1,6 +1,6 @@
 package com.neqabty.data.entities
 
-import android.arch.persistence.room.Entity
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 import com.neqabty.data.api.Response
 
@@ -29,5 +29,7 @@ data class ProviderData(
     @field:SerializedName("updated_at")
     var updatedAt: String?,
     @field:SerializedName("provider_type_id")
-    var type: String?
+    var typeID: String?,
+    @field:SerializedName("provider_type_name")
+    var typeName: String?
 ) : Response()

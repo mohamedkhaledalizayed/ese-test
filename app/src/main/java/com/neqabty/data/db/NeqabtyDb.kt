@@ -1,12 +1,12 @@
 package com.neqabty.data.db
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.neqabty.data.entities.ProviderData
 
 @Database(
     entities = [ProviderData::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class NeqabtyDb : RoomDatabase() {

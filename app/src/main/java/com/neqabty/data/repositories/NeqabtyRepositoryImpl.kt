@@ -92,9 +92,11 @@ class NeqabtyRepositoryImpl @Inject constructor(
         docsNumber: Int,
         doc1: File?,
         doc2: File?,
-        doc3: File?
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
     ): Observable<Unit> {
-        return remoteDataStore.requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1, doc2, doc3)
+        return remoteDataStore.requestEngineeringRecords(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 
     override fun bookTrip(
@@ -114,9 +116,24 @@ class NeqabtyRepositoryImpl @Inject constructor(
         doc1: File?,
         doc2: File?,
         doc3: File?,
-        doc4: File?
+        doc4: File?,
+        doc5: File?,
+        doc6: File?,
+        doc7: File?,
+        doc8: File?,
+        doc9: File?,
+        doc10: File?
     ): Observable<Unit> {
-        return remoteDataStore.bookTrip(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, personsList, docsNumber, personsNumber, doc1, doc2, doc3, doc4)
+        return remoteDataStore.bookTrip(mainSyndicateId, userNumber, phone, tripID, regimentID, regimentDate, housingType, numChild, ages, name, personsList, docsNumber, personsNumber, doc1,
+                doc2,
+                doc3,
+                doc4,
+                doc5,
+                doc6,
+                doc7,
+                doc8,
+                doc9,
+                doc10)
     }
 
     override fun getAppVersion(): Observable<AppVersionEntity> {
@@ -127,11 +144,15 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getTripDetails(id)
     }
 
-    override fun getAllServices(): Observable<List<ServiceEntity>> {
-        return remoteDataStore.getAllServices()
+    override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {
+        return remoteDataStore.getAllServices(typeID)
     }
 
-    override fun inquirePayment(userNumber: Int, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity> {
+    override fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>> {
+        return remoteDataStore.getAllServiceTypes()
+    }
+
+    override fun inquirePayment(userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MemberEntity> {
         return remoteDataStore.inquirePayment(userNumber, serviceID, requestID, amount)
     }
 
@@ -143,16 +164,16 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.sendDecryptionKey(requestNumber, decryptionKey)
     }
 
-    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: Int, requestID: Int): Observable<NotificationEntity> {
+    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: String, requestID: Int): Observable<NotificationEntity> {
         return remoteDataStore.getNotificationDetails(serviceID, type, userNumber, requestID)
     }
 
-    override fun getNotifications(serviceID: Int, type: Int, userNumber: Int): Observable<List<NotificationEntity>> {
+    override fun getNotifications(serviceID: Int, type: Int, userNumber: String): Observable<List<NotificationEntity>> {
         return remoteDataStore.getNotifications(serviceID, type, userNumber)
     }
 
     override fun getNotificationsCount(userNumber: String): Observable<NotificationsCountEntity> {
-        return remoteDataStore.getNotificationsCount(userNumber.toInt())
+        return remoteDataStore.getNotificationsCount(userNumber)
     }
 
     override fun sendMedicalRequest(

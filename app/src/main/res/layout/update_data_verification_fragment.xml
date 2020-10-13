@@ -10,32 +10,24 @@
             type="boolean" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/ivHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@mipmap/header_bg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:padding="@dimen/margin_horizontal_large">
 
         <ScrollView
             android:id="@+id/svContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/margin_horizontal_large"
+            android:background="@drawable/rounded_bg"
             android:paddingEnd="@dimen/margin_horizontal_large"
             android:scrollbars="none"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivHeader">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,8 +39,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:textColor="@color/text_dark"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/enter_verification_code"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="@dimen/text_size_large" />
 
                 <EditText
                     android:id="@+id/edVerificationNumber"
@@ -57,16 +51,17 @@
                     android:inputType="number"
                     android:maxLength="5"
                     android:gravity="center"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large" />
 
 
                 <Button
                     android:id="@+id/bSend"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_large"
-                    android:background="@mipmap/btn"
+                    android:layout_margin="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_green"
                     android:gravity="center"
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/send"
@@ -76,5 +71,5 @@
             </LinearLayout>
         </ScrollView>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

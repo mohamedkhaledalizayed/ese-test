@@ -1,12 +1,12 @@
 package com.neqabty.presentation.ui.payment
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -75,12 +75,12 @@ class PaymentFragment : BaseFragment(), Injectable {
         paymentViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        paymentViewModel.errorState.observe(this, Observer { _ ->
+        paymentViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         params = PaymentFragmentArgs.fromBundle(arguments!!)
@@ -93,7 +93,7 @@ class PaymentFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        binding.spMonth.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, monthsList)
+        binding.spMonth.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, monthsList!!)
         binding.spMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -101,7 +101,7 @@ class PaymentFragment : BaseFragment(), Injectable {
             }
         }
 
-        binding.spYear.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, yearsList)
+        binding.spYear.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, yearsList!!)
         binding.spYear.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {

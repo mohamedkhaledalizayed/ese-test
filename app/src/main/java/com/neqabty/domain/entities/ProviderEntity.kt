@@ -12,5 +12,6 @@ data class ProviderEntity(
     var updatedBy: String?,
     var createdAt: String?,
     var updatedAt: String?,
-    var type: String?
+    var typeID: String?,
+    var typeName: String?
 )

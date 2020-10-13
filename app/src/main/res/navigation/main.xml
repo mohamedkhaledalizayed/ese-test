@@ -222,6 +222,24 @@
             app:destination="@id/mobileFragment" />
     </fragment>
     <fragment
+        android:id="@+id/medicalMainFragment"
+        android:name="com.neqabty.presentation.ui.medicalMain.MedicalMainFragment"
+        android:label="@string/medicalDirectory"
+        tools:layout="@layout/medical_main_fragment">
+        <action
+            android:id="@+id/openProviders"
+            app:destination="@id/medicalProvidersFragment" />
+        <action
+            android:id="@+id/openProviderDetails"
+            app:destination="@id/medicalProviderDetailsFragment" />
+        <argument
+            android:name="governID"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="areaID"
+            app:argType="java.lang.Integer" />
+    </fragment>
+    <fragment
         android:id="@+id/medicalCategoriesFragment"
         android:name="com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragment"
         android:label="@string/medicalDirectory"
@@ -318,6 +336,9 @@
         <action
             android:id="@+id/openMedical"
             app:destination="@id/medicalCategoriesFragment" />
+        <action
+            android:id="@+id/openMedicalMain"
+            app:destination="@id/medicalMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -345,9 +366,9 @@
 
         <action
             android:id="@+id/updateDataDetails"
+            app:destination="@id/updateDataDetailsFragment"
             app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false"
-            app:destination="@id/updateDataDetailsFragment" />
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/updateDataDetailsFragment"
@@ -359,19 +380,19 @@
         <!--android:name="userDataInquire"-->
         <!--app:argType="com.neqabty.presentation.entities.InquireUpdateUserDataUI" />-->
 
-<!--        <action-->
-<!--            android:id="@+id/updateDataVerification"-->
-<!--            app:destination="@id/updateDataVerificationFragment" />-->
+        <!--        <action-->
+        <!--            android:id="@+id/updateDataVerification"-->
+        <!--            app:destination="@id/updateDataVerificationFragment" />-->
     </fragment>
-<!--    <fragment-->
-<!--        android:id="@+id/updateDataFragment"-->
-<!--        android:name="com.neqabty.presentation.ui.updateData.UpdateDataFragment"-->
-<!--        android:label="@string/update_data_title"-->
-<!--        tools:layout="@layout/update_data_fragment">-->
-<!--        <action-->
-<!--            android:id="@+id/updateDataDetails"-->
-<!--            app:destination="@id/updateDataDetailsFragment" />-->
-<!--    </fragment>-->
+    <!--    <fragment-->
+    <!--        android:id="@+id/updateDataFragment"-->
+    <!--        android:name="com.neqabty.presentation.ui.updateData.UpdateDataFragment"-->
+    <!--        android:label="@string/update_data_title"-->
+    <!--        tools:layout="@layout/update_data_fragment">-->
+    <!--        <action-->
+    <!--            android:id="@+id/updateDataDetails"-->
+    <!--            app:destination="@id/updateDataDetailsFragment" />-->
+    <!--    </fragment>-->
     <fragment
         android:id="@+id/engineeringRecordsInquiryFragment"
         android:name="com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryFragment"
@@ -436,6 +457,11 @@
         android:name="com.neqabty.presentation.ui.about.AboutFragment"
         android:label="@string/about_title"
         tools:layout="@layout/about_fragment" />
+    <fragment
+        android:id="@+id/aboutAppFragment"
+        android:name="com.neqabty.presentation.ui.aboutApp.AboutAppFragment"
+        android:label="@string/aboutapp_title"
+        tools:layout="@layout/about_app_fragment" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.neqabty.presentation.ui.settings.SettingsFragment"

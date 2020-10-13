@@ -1,24 +1,29 @@
 package com.neqabty.presentation.ui.inquiry
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
+import com.neqabty.domain.usecases.GetAllServiceTypes
 import com.neqabty.domain.usecases.GetAllServices
 import com.neqabty.domain.usecases.PaymentInquiry
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.MemberUI
+import com.neqabty.presentation.entities.ServiceTypeUI
 import com.neqabty.presentation.entities.ServiceUI
 import com.neqabty.presentation.mappers.MemberEntityUIMapper
 import com.neqabty.presentation.mappers.ServiceEntityUIMapper
+import com.neqabty.presentation.mappers.ServiceTypeEntityUIMapper
 
 import javax.inject.Inject
 
 class InquiryViewModel @Inject constructor(
-    private val getAllServices: GetAllServices,
-    private val paymentInquiry: PaymentInquiry
+        private val getAllServiceTypes: GetAllServiceTypes,
+        private val getAllServices: GetAllServices,
+        private val paymentInquiry: PaymentInquiry
 ) : BaseViewModel() {
 
     private val memberEntityUIMapper = MemberEntityUIMapper()
     private val serviceEntityUIMapper = ServiceEntityUIMapper()
+    private val serviceTypeEntityUIMapper = ServiceTypeEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<InquiryViewState> = MutableLiveData()
@@ -27,10 +32,24 @@ class InquiryViewModel @Inject constructor(
         viewState.value = InquiryViewState()
     }
 
-    fun getAllServices() {
-        viewState.value?.services?.let {
-            onServicesReceived(it)
-        } ?: getAllServices.observable()
+    fun getAllServiceTypes() {
+        viewState.value?.serviceTypes?.let {
+            onServiceTypesReceived(it)
+        } ?: getAllServiceTypes.observable()
+                .flatMap {
+                    it.let {
+                        serviceTypeEntityUIMapper.observable(it)
+                    }
+                }.subscribe(
+                        {
+                            onServiceTypesReceived(it)
+                        },
+                        { errorState.value = handleError(it) }
+                )
+    }
+
+    fun getAllServices(typeID :Int) {
+        getAllServices.getAllServices(typeID)
                 .flatMap {
                     it.let {
                         serviceEntityUIMapper.observable(it)
@@ -39,7 +58,7 @@ class InquiryViewModel @Inject constructor(
                         {
                             onServicesReceived(it)
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
     }
 
@@ -54,10 +73,17 @@ class InquiryViewModel @Inject constructor(
                         { onInquiryReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
+    }
+
+    private fun onServiceTypesReceived(serviceTypes: List<ServiceTypeUI>) {
+        val newViewState = viewState.value?.copy(
+                isLoading = false,
+                serviceTypes = serviceTypes)
+        viewState.value = newViewState
     }
 
     private fun onServicesReceived(services: List<ServiceUI>) {

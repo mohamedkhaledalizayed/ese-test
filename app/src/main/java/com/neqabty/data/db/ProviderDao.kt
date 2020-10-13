@@ -1,6 +1,6 @@
 package com.neqabty.data.db
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.neqabty.data.entities.ProviderData
 
 /**

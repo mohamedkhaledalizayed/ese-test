@@ -1,21 +1,21 @@
 package com.neqabty.presentation.ui.claiming
 
 import android.app.AlertDialog
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager.widget.ViewPager
 import com.neqabty.R
 import com.neqabty.databinding.Claiming2FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -25,7 +25,6 @@ import com.neqabty.presentation.entities.ProviderTypeUI
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-
 import kotlinx.android.synthetic.main.claiming2_fragment.*
 import javax.inject.Inject
 
@@ -47,9 +46,9 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
     var isProvidersRequested = false
     lateinit var pager: ViewPager
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -81,14 +80,14 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         claimingViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        claimingViewModel.errorState.observe(this, Observer { _ ->
+        claimingViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 loadProviders()
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
-            })
+            }, message = error?.message)
         })
 
         binding.edNumber.setText(PreferencesHelper(requireContext()).user)
@@ -116,7 +115,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         state.providers?.let {
             if (it.isEmpty()) {
                 providersResultList?.clear()
-                providersResultList!!.add(ProviderUI(0, getString(R.string.no_data_found), "", "", "", "", "", "", "", "", "", ""))
+                providersResultList!!.add(ProviderUI(0, getString(R.string.no_data_found), "", "", "", "", "", "", "", "", "", "", ""))
             } else
                 providersResultList = it.toMutableList()
         }
@@ -140,7 +139,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
     }
 
     fun renderProvidersTypes() {
-        binding.spProviderType.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, providersTypesResultList)
+        binding.spProviderType.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, providersTypesResultList!!)
         binding.spProviderType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -152,7 +151,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
     }
 
     fun renderProviders() {
-        binding.spProvider.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, providersResultList)
+        binding.spProvider.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, providersResultList!!)
         binding.spProvider.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

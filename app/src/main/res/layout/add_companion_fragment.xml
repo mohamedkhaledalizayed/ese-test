@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,11 +12,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clRoot"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -23,23 +24,45 @@
                 android:padding="@dimen/margin_horizontal_normal">
 
                 <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/fullName"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/edName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:gravity="center"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+                <TextView
                     android:id="@+id/tvRelation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/relation_degree"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/edName" />
 
                 <Spinner
                     android:id="@+id/spRelationDegree"
                     style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
                     android:hint="@string/relation_degree"
                     android:textDirection="rtl"
                     android:textSize="@dimen/text_size_medium"
@@ -52,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/birth_date"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -62,45 +85,45 @@
                     android:id="@+id/edBirthDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
                     android:clickable="true"
                     android:editable="false"
                     android:focusable="false"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
                     app:layout_constraintTop_toBottomOf="@id/tvBirthDate" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tvAge"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
-<!--                    android:text="@string/age_on_trip"-->
-<!--                    android:textColor="@color/colorPrimary"-->
-<!--                    android:textSize="@dimen/text_size_medium"-->
-<!--                    android:textStyle="bold"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/edBirthDate" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvAge"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+                <!--                    android:text="@string/age_on_trip"-->
+                <!--                    android:textColor="@color/colorPrimary"-->
+                <!--                    android:textSize="@dimen/text_size_medium"-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/edBirthDate" />-->
 
-<!--                <EditText-->
-<!--                    android:id="@+id/edAgeOnTrip"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
-<!--                    android:gravity="center"-->
-<!--                    android:inputType="number"-->
-<!--                    android:maxLength="2"-->
-<!--                    android:textColor="@color/colorPrimary"-->
-<!--                    android:textSize="@dimen/text_size_large"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tvAge" />-->
+                <!--                <EditText-->
+                <!--                    android:id="@+id/edAgeOnTrip"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:inputType="number"-->
+                <!--                    android:maxLength="2"-->
+                <!--                    android:textColor="@color/colorPrimary"-->
+                <!--                    android:textSize="@dimen/text_size_large"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/tvAge" />-->
 
                 <Button
                     android:id="@+id/bOK"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_horizontal_normal"
-                    android:background="@mipmap/btn"
+                    android:background="@drawable/btn_green"
                     android:elevation="@dimen/elevation_level_one"
                     android:gravity="center"
                     android:text="@string/ok_btn"
@@ -116,7 +139,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_horizontal_normal"
-                    android:background="@mipmap/btn"
+                    android:background="@drawable/btn_green"
                     android:elevation="@dimen/elevation_level_one"
                     android:gravity="center"
                     android:text="@string/cancel_btn"
@@ -125,7 +148,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/bOK"
                     app:layout_constraintTop_toBottomOf="@id/edBirthDate" />
-            </android.support.constraint.ConstraintLayout>
-        </android.support.v4.widget.NestedScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </layout>

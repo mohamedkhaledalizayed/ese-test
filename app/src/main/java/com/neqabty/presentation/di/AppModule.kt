@@ -1,8 +1,8 @@
 package com.neqabty.presentation.di
 
 import android.app.Application
-import android.arch.persistence.room.Room
 import android.content.Context
+import androidx.room.Room
 import com.neqabty.MyApp
 import com.neqabty.data.api.WebService
 import com.neqabty.data.db.NeqabtyDb
@@ -28,6 +28,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -49,6 +50,8 @@ class AppModule {
 //                ).build()
 
         val client: OkHttpClient = OkHttpClient.Builder()
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(1, TimeUnit.MINUTES)
                 .addInterceptor(object : Interceptor {
                     override fun intercept(chain: Interceptor.Chain): Response {
                         val request = chain.request()
@@ -74,7 +77,8 @@ class AppModule {
                 .build()
 
         return Retrofit.Builder()
-                .baseUrl("http://3.20.85.44:44392/")
+//                .baseUrl("http://3.20.85.44:44392/") // TEST
+                .baseUrl("http://3.20.85.44/") // PROD
 //                .baseUrl("http://front.neqabty.com/")
 //                .baseUrl("http://192.168.178.38/")
 //            .baseUrl("https://neqabty-stage.efinance.com.eg/")
@@ -321,6 +325,12 @@ class AppModule {
     @Provides
     fun provideGetAllServices(neqabtyRepository: NeqabtyRepository): GetAllServices {
         return GetAllServices(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetAllServiceTypes(neqabtyRepository: NeqabtyRepository): GetAllServiceTypes {
+        return GetAllServiceTypes(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

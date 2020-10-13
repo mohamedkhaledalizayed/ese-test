@@ -1,10 +1,10 @@
 package com.neqabty.presentation.ui.medicalProfessions
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -59,7 +59,7 @@ class MedicalProfessionsFragment : BaseFragment(), Injectable {
                 .get(MedicalProfessionsViewModel::class.java)
 
         val params = MedicalProfessionsFragmentArgs.fromBundle(arguments!!)
-        title = params.title
+//        title = params.title
         categoryId = params.categoryId
         areaID = params.areaID
         governID = params.governID
@@ -76,13 +76,13 @@ class MedicalProfessionsFragment : BaseFragment(), Injectable {
         medicalProfessionsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        medicalProfessionsViewModel.errorState.observe(this, Observer { _ ->
+        medicalProfessionsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 medicalProfessionsViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         medicalProfessionsViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())

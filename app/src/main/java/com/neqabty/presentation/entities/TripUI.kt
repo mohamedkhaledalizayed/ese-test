@@ -14,6 +14,7 @@ data class TripUI(
     var subSyndicateId: String?,
     var governId: String?,
     var desc: String?,
+    var counter: Int?,
     var notes: String?,
     var price: String?,
     var imgs: List<String>? = null,
@@ -42,7 +43,7 @@ data class TripUI(
         var updatedAt: String?
     ) {
         override fun toString(): String {
-            return dateFrom ?: "" + dateTo ?: ""
+            return dateFrom ?: "" + " : " + dateTo ?: ""
         }
     }
 
@@ -73,6 +74,7 @@ data class TripUI(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
+            parcel.readInt(),
             parcel.readString(),
             parcel.readString()
     )

@@ -1,10 +1,10 @@
 package com.neqabty.presentation.ui.news
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -69,13 +69,13 @@ class NewsFragment : BaseFragment(), Injectable {
         newsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        newsViewModel.errorState.observe(this, Observer { _ ->
+        newsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 newsViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         newsViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())

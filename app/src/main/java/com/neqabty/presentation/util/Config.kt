@@ -26,7 +26,7 @@ class Config {
 
                         val localeList = LocaleList(newLocale)
                         LocaleList.setDefault(localeList)
-                        configuration.locales = localeList
+                        configuration.setLocales(localeList)
 
                         context = context.createConfigurationContext(configuration)
                     }

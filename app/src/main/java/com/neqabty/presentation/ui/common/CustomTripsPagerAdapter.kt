@@ -1,13 +1,13 @@
 package com.neqabty.presentation.ui.common
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
-import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.viewpager.widget.PagerAdapter
 import com.neqabty.R
 import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.util.DisplayMetrics

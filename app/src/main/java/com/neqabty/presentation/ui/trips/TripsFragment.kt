@@ -1,10 +1,10 @@
 package com.neqabty.presentation.ui.trips
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +28,7 @@ class TripsFragment : BaseFragment(), Injectable {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<TripsFragmentBinding>()
-    private var adapter by autoCleared<TripsAdapter>()
+    private var adapter by autoCleared<com.neqabty.presentation.ui.home.TripsAdapter>()
 
     lateinit var tripsViewModel: TripsViewModel
 
@@ -58,7 +58,7 @@ class TripsFragment : BaseFragment(), Injectable {
 
         initializeViews()
 
-        val adapter = com.neqabty.presentation.ui.trips.TripsAdapter(dataBindingComponent, appExecutors) { trip ->
+        val adapter = com.neqabty.presentation.ui.home.TripsAdapter(dataBindingComponent, appExecutors) { trip ->
             navController().navigate(
                     TripsFragmentDirections.tripDetails(trip))
         }
@@ -68,13 +68,13 @@ class TripsFragment : BaseFragment(), Injectable {
         tripsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        tripsViewModel.errorState.observe(this, Observer { _ ->
+        tripsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 tripsViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         tripsViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())

@@ -1,16 +1,19 @@
 package com.neqabty.presentation.ui.inquiryDetails
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.Toast
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.efinance.mobilepaymentsdk.*
 import com.neqabty.AppExecutors
@@ -23,6 +26,8 @@ import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
+import me.cowpay.PaymentMethodsActivity
+import me.cowpay.util.CowpayConstantKeys
 import javax.inject.Inject
 
 class InquiryDetailsFragment : BaseFragment(), Injectable {
@@ -50,9 +55,9 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     lateinit var paymentCreationResponse: PaymentCreationResponse
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -73,13 +78,13 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         inquiryDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        inquiryDetailsViewModel.errorState.observe(this, Observer { _ ->
+        inquiryDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 inquiryDetailsViewModel.paymentInquiry(memberItem.engineerNumber, params.serviceID, memberItem.requestID, memberItem.amount.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         params = InquiryDetailsFragmentArgs.fromBundle(arguments!!)
@@ -105,8 +110,83 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
         binding.rvDetails.adapter = adapter
         bPay.setOnClickListener {
-            llSuperProgressbar.visibility = View.VISIBLE
-            createPayment()
+//            llSuperProgressbar.visibility = View.VISIBLE
+//            createPayment()
+
+            var intent = Intent(context, PaymentMethodsActivity::class.java)
+
+
+            var PaymentMethod = ArrayList<String>()
+            PaymentMethod.add(CowpayConstantKeys().CreditCardMethod)
+//            PaymentMethod.add(CowpayConstantKeys().FawryMethod)
+            intent.putExtra(CowpayConstantKeys().PaymentMethod, PaymentMethod)
+
+
+            //set environment production or sandBox
+            //CowpayConstantKeys().Production or CowpayConstantKeys().SandBox
+            intent.putExtra(CowpayConstantKeys().PaymentEnvironment, CowpayConstantKeys().SandBox)
+            //set locale language
+            intent.putExtra(CowpayConstantKeys().Language, CowpayConstantKeys().ARABIC)
+            // use pay with credit card
+            intent.putExtra(
+                    CowpayConstantKeys().CreditCardMethodType,
+                    CowpayConstantKeys().CreditCardMethodPay
+            )
+
+            intent.putExtra(CowpayConstantKeys().MerchantCode, "3GpZbdrsnOrT")
+            intent.putExtra(
+                    CowpayConstantKeys().MerchantHashKey,
+                    "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
+            )
+            //order id
+            intent.putExtra(CowpayConstantKeys().MerchantReferenceId, memberItem.paymentCreationRequest?.senderRequestNumber)
+            //order price780
+            intent.putExtra(CowpayConstantKeys().Amount, memberItem.paymentCreationRequest?.settlementAmounts?.amount?.toString())
+            //user data
+            intent.putExtra(CowpayConstantKeys().CustomerName, memberItem.engineerName)
+            intent.putExtra(CowpayConstantKeys().CustomerMobile, "01200000000")
+            intent.putExtra(CowpayConstantKeys().CustomerEmail, "customer@customer.com")
+            //user id
+            intent.putExtra(CowpayConstantKeys().CustomerMerchantProfileId, memberItem.paymentCreationRequest?.userUniqueIdentifier)
+
+
+            startActivityForResult(intent, CowpayConstantKeys().PaymentMethodsActivityRequestCode)
+        }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CowpayConstantKeys().PaymentMethodsActivityRequestCode && data != null && resultCode == Activity.RESULT_OK) {
+            var responseCode = data.extras!!.getInt(CowpayConstantKeys().ResponseCode, 0)
+            if (responseCode == CowpayConstantKeys().ErrorCode) {
+                var responseMSG = data.extras!!.getString(CowpayConstantKeys().ResponseMessage)
+//                Toast.makeText(requireContext(), responseMSG, Toast.LENGTH_LONG)
+//                        .show()
+                responseMSG?.let {
+                    showAlert(responseMSG) {
+                        navController().popBackStack()
+                        navController().navigate(R.id.inquiryFragment)
+                    }
+                }
+
+            } else if (responseCode == CowpayConstantKeys().SuccessCode) {
+                var responseMSG = data.extras!!.getString(CowpayConstantKeys().ResponseMessage)
+                var PaymentGatewayReferenceId =
+                        data.extras!!.getString(CowpayConstantKeys().PaymentGatewayReferenceId)
+//                Toast.makeText(
+//                        requireContext(),
+//                        responseMSG.plus(" $PaymentGatewayReferenceId"),
+//                        Toast.LENGTH_LONG
+//                )
+//                        .show()
+                responseMSG?.let {
+                    showAlert(responseMSG + PaymentGatewayReferenceId) {
+                        navController().popBackStack()
+                        navController().navigate(R.id.homeFragment)
+                    }
+                }
+            }
         }
     }
 
@@ -134,6 +214,12 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                 state.member?.let {
                     memberItem.paymentCreationRequest = it.paymentCreationRequest
                     memberItem.paymentCreationRequest?.senderRequestNumber = it.paymentCreationRequest?.senderRequestNumber!!
+                    var intent = Intent(context, PaymentMethodsActivity::class.java)
+                    intent.putExtra(CowpayConstantKeys().MerchantCode, "GHIu9nk25D5z")
+                    intent.putExtra(
+                            CowpayConstantKeys().MerchantHashKey,
+                            "MerchantHashKey"
+                    )
                     initializeViews()
                 }
             }
@@ -249,8 +335,8 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     // region callback
     class MobilePaymentCreationCallback(
-        private val successCallback: ((response: PaymentCreationResponse) -> Unit),
-        private val failureCallback: (() -> Unit)
+            private val successCallback: ((response: PaymentCreationResponse) -> Unit),
+            private val failureCallback: (() -> Unit)
     ) : PaymentCreationCallback {
         override fun onSuccess(response: PaymentCreationResponse) {
             successCallback.invoke(response)

@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.payment
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetTransactionHash
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -32,7 +32,7 @@ class PaymentViewModel @Inject constructor(private val getTransactionHash: GetTr
                 { onTransactionHashReceived(it) },
                 {
                     viewState.value = viewState.value?.copy(isLoading = false)
-                    errorState.value = it
+                    errorState.value = handleError(it)
                 }
             )
         )

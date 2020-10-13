@@ -1,8 +1,8 @@
 package com.neqabty.presentation.ui.phones
 
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
-import android.support.v7.util.DiffUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,9 +46,9 @@ class PhonesAdapter(
     }
 
     override fun onBindViewHolder(holder: DataBoundViewHolder<PhoneItemBinding>, position: Int) {
-        if (position == itemCount - 1) {
-            holder.binding.view.visibility = View.GONE
-        }
+//        if (position == itemCount - 1) {
+//            holder.binding.view.visibility = View.GONE
+//        }
         holder.binding.tvPhone.setText(getItem(position))
     }
 

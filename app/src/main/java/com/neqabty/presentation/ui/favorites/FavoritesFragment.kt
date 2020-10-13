@@ -1,10 +1,10 @@
 package com.neqabty.presentation.ui.favorites
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -80,13 +80,13 @@ class FavoritesFragment : BaseFragment(), Injectable {
         favoritesViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        favoritesViewModel.errorState.observe(this, Observer { _ ->
+        favoritesViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 favoritesViewModel.getFavorites()
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
         favoritesViewModel.getFavorites()

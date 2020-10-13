@@ -1,12 +1,12 @@
 package com.neqabty.presentation.ui.engineeringRecordsInquiry
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,16 +52,16 @@ class EngineeringRecordsInquiryFragment : BaseFragment(), Injectable {
         engineeringRecordsInquiryViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(EngineeringRecordsInquiryViewModel::class.java)
 
-        engineeringRecordsInquiryViewModel.viewState.observe(this, Observer {
+        engineeringRecordsInquiryViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
-        engineeringRecordsInquiryViewModel.errorState.observe(this, Observer { _ ->
+        engineeringRecordsInquiryViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 engineeringRecordsInquiryViewModel.sendEngineeringRecordsInquiry(binding.edMemberNumber.text.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         initializeViews()
     }

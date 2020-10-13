@@ -1,12 +1,12 @@
 package com.neqabty.presentation.ui.updateData
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,13 +53,13 @@ class UpdateDataFragment : BaseFragment(), Injectable {
         updateDataViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        updateDataViewModel.errorState.observe(this, Observer { _ ->
+        updateDataViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 updateDataViewModel.inquireUpdateUserData(binding.edMemberNumber.text.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         initializeViews()
     }

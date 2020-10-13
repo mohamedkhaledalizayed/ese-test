@@ -24,6 +24,8 @@ class SendEngineeringRecordsRequest @Inject constructor(
         private const val PARAM_DOC1 = "param:doc1"
         private const val PARAM_DOC2 = "param:doc2"
         private const val PARAM_DOC3 = "param:doc3"
+        private const val PARAM_DOC4 = "param:doc4"
+        private const val PARAM_DOC5 = "param:doc5"
     }
 
     fun requestEngineeringRecords(
@@ -38,7 +40,9 @@ class SendEngineeringRecordsRequest @Inject constructor(
         docsNumber: Int,
         doc1: File?,
         doc2: File?,
-        doc3: File?
+        doc3: File?,
+        doc4: File?,
+        doc5: File?
     ): Observable<Unit> {
         val data = HashMap<String, Any>()
         data[PARAM_NAME] = name
@@ -53,6 +57,8 @@ class SendEngineeringRecordsRequest @Inject constructor(
         doc1?.let { data[PARAM_DOC1] = it }
         doc2?.let { data[PARAM_DOC2] = it }
         doc3?.let { data[PARAM_DOC3] = it }
+        doc4?.let { data[PARAM_DOC4] = it }
+        doc5?.let { data[PARAM_DOC5] = it }
         return observable(data)
     }
 
@@ -69,6 +75,8 @@ class SendEngineeringRecordsRequest @Inject constructor(
         val doc1 = data?.get(PARAM_DOC1) as File?
         val doc2 = data?.get(PARAM_DOC2) as File?
         val doc3 = data?.get(PARAM_DOC3) as File?
-        return neqabtyRepository.requestEngineeringRecords(name, phone, typeID, mainSyndicateId, userNumber, renewalYear, statusID, isOwner, docsNumber, doc1, doc2, doc3)
+        val doc4 = data?.get(PARAM_DOC4) as File?
+        val doc5 = data?.get(PARAM_DOC5) as File?
+        return neqabtyRepository.requestEngineeringRecords(name, phone, typeID, mainSyndicateId, userNumber, renewalYear, statusID, isOwner, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 }

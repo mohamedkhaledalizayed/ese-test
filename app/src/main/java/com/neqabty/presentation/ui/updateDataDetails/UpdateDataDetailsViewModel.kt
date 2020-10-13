@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.updateDataDetails
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetUpdateUserDataInquiry
 import com.neqabty.domain.usecases.UpdateUserData
 import com.neqabty.presentation.common.BaseViewModel
@@ -38,7 +38,7 @@ class UpdateDataDetailsViewModel @Inject constructor(
                         { onUpdateUserDataReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -64,7 +64,7 @@ class UpdateDataDetailsViewModel @Inject constructor(
                         { onDataReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

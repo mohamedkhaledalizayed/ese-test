@@ -60,6 +60,7 @@
     <string name="two_rooms">غرفتين</string>
     <string name="studio">استوديو</string>
     <string name="regiments">الأفواج</string>
+    <string name="regiment">الفوج</string>
     <string name="children">الأطفال</string>
     <string name="child_one">عمر الطفل الأول</string>
     <string name="child_two">عمر الطفل الثاني</string>
@@ -67,11 +68,17 @@
     <string name="trip_type">نوع الرحلة</string>
     <string name="room_type">نوع الغرفة</string>
     <string name="trip_desc">وصف الرحلة</string>
+    <string name="trip_price">سعر الرحلة</string>
     <string name="about_hotel">عن الفندق</string>
     <string name="reserve">حجز</string>
+    <string name="choose_regiment">اختر الميعاد</string>
+    <string name="view_regiments">عرض الأفواج والمواعيد</string>
     <string name="confirm_reservation">تأكيد الحجز</string>
     <string name="attach_photo">إضافة صورة</string>
+    <string name="attach_companion_title">إضافة المرافقين</string>
     <string name="attach_companion">إضافة مرافق</string>
+    <string name="attach_title">اضافة المرفقات</string>
+    <string name="attach_hint">أضف صوره كارت العضويه - شهادات الميلاد - البطاقه الشخصيه</string>
     <string name="relation_degree">درجة القرابة</string>
     <string name="age_on_trip">العمر وقت الرحلة</string>
     <string name="birth_date">تاريخ الميلاد</string>
@@ -98,7 +105,7 @@
     <string name="update_msg">حتى تتمكن من استخدام التطبيق يرجى التحديث</string>
     <string name="root_msg">هذا الجهاز غير آمن, لا يمكنك استخدام التطبيق.</string>
 
-    <string name="doctors">أطباء ومراكز علاج طبيعي</string>
+    <string name="doctors">أطباء</string>
     <string name="hospitals">مستشفيات</string>
     <string name="scan_centers">مراكز أشعة</string>
     <string name="pharmacies">صيدليات</string>
@@ -154,7 +161,7 @@
     <string name="trips_title">الرحلات</string>
     <string name="claiming_title">مطالبات طبية</string>
     <string name="medical_title">الدليل الطبي</string>
-    <string name="inquiry_title">سداد اشتراكات</string>
+    <string name="inquiry_title">المدفوعات</string>
     <string name="engineering_records_title">تجديد سجل هندسي</string>
     <string name="update_data_title">تحديث البيانات</string>
     <string name="complaints_title">شكاوى ومقترحات</string>
@@ -171,7 +178,7 @@
     <string name="wheel_trips">الرحلات</string>
     <string name="wheel_payment">المدفوعات</string>
     <string name="wheel_employment">مزاولة المهنة</string>
-    <string name="wheel_delivery">التوصيل المنزلي</string>
+    <string name="wheel_retirees">المعاشات</string>
     <string name="wheel_training">تدريب وتوظيف</string>
     <string name="wheel_customer_service">خدمة العملاء</string>
     <string name="wheel_complaints">شكاوى ومقترحات</string>
@@ -181,7 +188,18 @@
 
     <string name="wheel_seemore">شاهد المزيد</string>
     <string name="wheel_enter_service">الدخول على الخدمة</string>
-    <string name="wheel_payments_content">يمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيد يمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيديمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيديمكتك الدخول على الخدمه  المدفوعات للتعرف على المزيد</string>
+    <string name="wheel_enter_medical">الدليل الطبي</string>
+    <string name="wheel_enter_claiming">المطالبات الطبية</string>
+    <string name="wheel_enter_records">ارسل طلب تجديد سجل هندسى</string>
+    <string name="wheel_enter_update_data">ارسل طلب تحديث بيانات</string>
+    <string name="wheel_payments_content">وقتكم محل تقديرنا- متاح الآن أكثر من ٧٠ خدمة  مدفوعات الكترونية عن (بُعد)، ستضاف المزيد من الخدمات الأخرى قريبا.</string>
+    <string name="wheel_medical_content">صحتكم محل اهتمامنا- يمكنك من هذه الخدمة تقديم ومتابعة واستلام جميع طلباتك الطبية بسهولة، كما يمكنك الاطلاع علي الدليل الطبي لمعرفة أماكن توافر الخدمات الطبية الأقرب إليك بواسطة جوجل ماب.</string>
+    <string name="wheel_retirees_content">خدمتكم شرف لنا - يمكنك معرفة المزيد عن خدمات المعاشات قريبا.</string>
+    <string name="wheel_training_content">التدريب المنتهي بالتوظيف هو شعارنا - يمكنك معرفة المزيد عن خدمات التدريب والتوظيف قريبا.</string>
+    <string name="wheel_complaints_content">آراءكم  محل اهتمامنا  - يمكنك الآن التواصل مع النقابة من خلال مقترحاتك وشكواك   ومتابعتها من خلال خدمة الإشعارات.</string>
+    <string name="wheel_employment_content">خدمتكم شرف لنا- يستطيع المهندس الاستشاري  والمكاتب الاستشارية    تجديد سجلاتهم الهندسية من خلال هذه الخدمة الميسرة، مع خدمات أخري لمزاولة المهنة ستضاف قرييا.</string>
+    <string name="wheel_syndicate_services_content">خدمتكم شرف لنا- تستطيع الآن من خلال هذه الخدمة تحديث جميع بياناتك لدي النقابة لحظياً  لسهولة التواصل وسرعة الحصول على الخدمة ، مع عديد من الخدمات العامة  ستضاف قريبا.</string>
+    <string name="wheel_customer_service_content">خدمة الرد على استفساراتكم  هي أولوياتنا -  ستفعل خدمات خدمة العملاء قريباً.</string>
 
     <string name="alert_title">تنبيه</string>
     <string name="no_connection_msg">من فضلك تحقق من إتصالك بالإنترنت</string>
@@ -199,10 +217,13 @@
     <string name="enter_verification_code">ادخل كود التأكيد</string>
 
     <string name="address_title">العنوان: </string>
+    <string name="address">العنوان</string>
+    <string name="location_on_map">الموقع على الخريطة</string>
     <string name="phone_title">التليفون: </string>
+    <string name="phone">التليفون</string>
     <string name="email_title">البريد الالكتروني: </string>
     <string name="address_content">
-        <![CDATA[<font color="#1d1ad2"><u>%s</u></font>]]>
+        <![CDATA[<font color="#0b2031"><u>%s</u></font>]]>
     </string>
 
     <string name="notifications_settings">الإشعارات</string>
@@ -241,7 +262,7 @@
     </string>
 
     <string name="pay">الدفع</string>
-    <string name="inquiry">سداد اشتراكات</string>
+    <string name="inquiry">المدفوعات</string>
     <string name="details">التفاصيل:</string>
     <string name="payment_method">طريقة الدفع:</string>
     <string name="payment_card">بطاقات بنكية</string>
@@ -262,63 +283,63 @@
     <string name="save_card_info">حفظ بيانات البطاقة؟</string>
 
     <string name="date_title">
-    <![CDATA[<font color="#1d1ad2">تاريخ الطلب: </font>]]>%s
+    <![CDATA[<font color="#0b2031">تاريخ الطلب: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="type_title">
-    <![CDATA[<font color="#1d1ad2">نوع الطلب: </font>]]>%s
+    <![CDATA[<font color="#0b2031">نوع الطلب: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="date">
-    <![CDATA[<font color="#1d1ad2">التاريخ: </font>]]>%s
+    <![CDATA[<font color="#0b2031">التاريخ: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="time">
-    <![CDATA[<font color="#1d1ad2">الوقت: </font>]]>%s
+    <![CDATA[<font color="#0b2031">الوقت: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="source">
-    <![CDATA[<font color="#1d1ad2">المصدر: </font>]]>%s
+    <![CDATA[<font color="#0b2031">المصدر: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="doctor_title">
-    <![CDATA[<font color="#1d1ad2">الطبيب: </font>]]>%s
+    <![CDATA[<font color="#0b2031">الطبيب: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="trip_title">
-    <![CDATA[<font color="#1d1ad2">الرحلة: </font>]]>%s
+    <![CDATA[<font color="#0b2031">الرحلة: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="regiment_title">
-    <![CDATA[<font color="#1d1ad2">الفوج: </font>]]>%s
+    <![CDATA[<font color="#0b2031">الفوج: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="provider_title">
-    <![CDATA[<font color="#1d1ad2">%s: </font>]]>%s
+    <![CDATA[<font color="#0b2031">%s: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="status_title">
-    <![CDATA[<font color="#1d1ad2">حالة الطلب: </font>]]>%s
+    <![CDATA[<font color="#0b2031">حالة الطلب: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="approval_title">
-    <![CDATA[<font color="#1d1ad2">رقم الموافقة: </font>]]>%s
+    <![CDATA[<font color="#0b2031">رقم الموافقة: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="comment">
-    <![CDATA[<font color="#1d1ad2">تعليق: </font>]]>%s
+    <![CDATA[<font color="#0b2031">تعليق: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="cost">
-    <![CDATA[<font color="#1d1ad2">التكلفة: </font>]]>%s
+    <![CDATA[<font color="#0b2031">التكلفة: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="child_num_title">
-    <![CDATA[<font color="#1d1ad2">عدد الأطفال: </font>]]>%s
+    <![CDATA[<font color="#0b2031">عدد الأطفال: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="housing_type_title">
-    <![CDATA[<font color="#1d1ad2">نوع الغرفة: </font>]]>%s
+    <![CDATA[<font color="#0b2031">نوع الغرفة: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="view_attachment">عرض ملف الموافقة</string>
@@ -346,6 +367,10 @@
 
     <string name="records_add_photos_3">∎ اخر صفحات السجل الهندسي مقيد بها أعمال</string>
 
+    <string name="records_add_photos_4">∎ صورة وجه بطاقة الرقم القومي</string>
+
+    <string name="records_add_photos_5">∎ صورة ظهر بطاقة الرقم القومي</string>
+
     <string name="bullet">∎ </string>
     <string name="update_data_add_photos">
             <![CDATA[<font color="#1d1ad2"> برجاء رفع المرفقات التالية: </font>]]>
@@ -359,9 +384,10 @@
     <string name="wrong_verification_code">كود التأكيد غير مطابق</string>
     <string name="records_request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
 
+    <string name="complaint_fill_data">املأ من فضلك ما يلي</string>
     <string name="complaint_type">نوع الشكوى</string>
     <string name="complaint_name">اسم مقدم الشكوى</string>
-    <string name="complaint_mobile">هاتف الشكوى</string>
+    <string name="complaint_mobile">هاتف مقدم الشكوى</string>
     <string name="complaint_body">موضوع الشكوى</string>
     <string name="complaint_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
 
@@ -381,4 +407,7 @@
 
     <string name="corona_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في أقرب وقت</string>
 
+
+    <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
+    <string name="app_version">Version 1.0</string>
 </resources>

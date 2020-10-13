@@ -2,14 +2,14 @@ package com.neqabty.presentation.ui.notifications
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 
 class NotificationsTabAdapter(private val myContext: Context, fm: FragmentManager, internal var totalTabs: Int) : FragmentPagerAdapter(fm) {
 
     // this is for fragment tabs
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         when (position) {
             0 -> {
                 val notificationsListFragment = NotificationsListFragment()
@@ -25,7 +25,7 @@ class NotificationsTabAdapter(private val myContext: Context, fm: FragmentManage
                 notificationsListFragment.arguments = bundle
                 return notificationsListFragment
             }
-            else -> return null
+            else -> return NotificationsListFragment()
         }
     }
 

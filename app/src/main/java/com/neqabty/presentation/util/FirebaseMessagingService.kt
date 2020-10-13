@@ -7,8 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.TaskStackBuilder
+import androidx.core.app.NotificationCompat
+import androidx.core.app.TaskStackBuilder
 import com.firebase.jobdispatcher.FirebaseJobDispatcher
 import com.firebase.jobdispatcher.GooglePlayDriver
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -38,7 +38,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun sendRegistrationToServer(token: String?) {
-        PreferencesHelper(applicationContext).token = token
+        PreferencesHelper(applicationContext).token = token!!
         PreferencesHelper(applicationContext).isRegistered = false
     }
 

@@ -10,7 +10,7 @@
             type="boolean" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -99,7 +99,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@mipmap/btn"
+                        android:background="@drawable/btn_green"
                         android:elevation="@dimen/elevation_level_one"
                         android:gravity="center"
                         android:layout_margin="@dimen/margin_horizontal_normal"
@@ -112,7 +112,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@mipmap/btn"
+                        android:background="@drawable/btn_green"
                         android:elevation="@dimen/elevation_level_one"
                         android:gravity="center"
                         android:layout_margin="@dimen/margin_horizontal_normal"
@@ -123,5 +123,5 @@
             </LinearLayout>
         </ScrollView>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

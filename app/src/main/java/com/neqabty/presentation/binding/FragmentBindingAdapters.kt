@@ -1,11 +1,10 @@
 package com.neqabty.presentation.binding
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.net.Uri
-import android.support.v4.app.Fragment
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-
 import javax.inject.Inject
 
 /**

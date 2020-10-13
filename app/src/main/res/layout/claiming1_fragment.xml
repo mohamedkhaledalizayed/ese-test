@@ -8,7 +8,7 @@
             name="loading"
             type="boolean" /></data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -78,10 +78,11 @@
 
                 <Button
                     android:id="@+id/bNext"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/btn"
+                    android:background="@drawable/btn_green"
                     android:gravity="center"
+                    android:layout_margin="@dimen/margin_horizontal_normal"
                     android:text="@string/next"
                     android:textColor="@android:color/white"
                     android:elevation="@dimen/elevation_level_one"
@@ -89,5 +90,5 @@
             </LinearLayout>
         </ScrollView>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

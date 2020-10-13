@@ -1,10 +1,10 @@
 package com.neqabty.presentation.ui.chooseArea
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -64,14 +64,14 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
         chooseAreaViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        chooseAreaViewModel.errorState.observe(this, Observer { _ ->
+        chooseAreaViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 chooseAreaViewModel.getAllContent1()
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
-            })
+            }, message = error?.message)
         })
         chooseAreaViewModel.getAllContent1()
         initializeViews()
@@ -81,8 +81,11 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
         binding.bNext.setOnClickListener {
 //                ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
 //                ClaimingData.governId = (spGovern.selectedItem as GovernUI).id
+//            navController().navigate(
+//                    ChooseAreaFragmentDirections.openMedical(governID, areaID)
+//            )
             navController().navigate(
-                    ChooseAreaFragmentDirections.openMedical(governID, areaID)
+                    ChooseAreaFragmentDirections.openMedicalMain(governID, areaID)
             )
         }
     }
@@ -108,7 +111,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
 
     //region
     fun renderGoverns() {
-        binding.spGovern.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, governsResultList)
+        binding.spGovern.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, governsResultList!!)
         binding.spGovern.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -126,7 +129,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
             it.govId == governID
         }
 
-        binding.spArea.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, filteredAreasList)
+        binding.spArea.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, filteredAreasList!!)
         binding.spArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {

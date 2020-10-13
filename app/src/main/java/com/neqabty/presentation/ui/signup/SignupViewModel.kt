@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.signup
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.entities.UserEntity
 import com.neqabty.domain.usecases.SignupUser
 import com.neqabty.presentation.common.BaseViewModel
@@ -41,7 +41,7 @@ class SignupViewModel @Inject constructor(private val signupUser: SignupUser) : 
                     }
                 }.subscribe(
                         { onUserReceived(it) },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
         )
     }

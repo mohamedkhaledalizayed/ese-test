@@ -11,7 +11,7 @@ data class NotificationUI(
     var date: String?,
     var time: String?,
     var mobileView: Int?,
-    var userNumber: Int,
+    var userNumber: String,
     var approvalNumber: String?,
     var approvalImage: String?,
     var comment: String?,
@@ -33,7 +33,7 @@ data class NotificationUI(
             parcel.readString(),
             parcel.readString(),
             parcel.readInt(),
-            parcel.readInt(),
+            parcel.readString()!!,
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -45,7 +45,7 @@ data class NotificationUI(
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
-            parcel.readString().toBoolean()) {
+            parcel.readString()!!.toBoolean()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

@@ -1,10 +1,10 @@
 package com.neqabty.presentation.ui.tripDetails
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +30,6 @@ class TripDetailsFragment : BaseFragment(), Injectable {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<TripDetailsFragmentBinding>()
-    private var adapter by autoCleared<RegimentsAdapter>()
 
     var tripId: Int = 0
 
@@ -67,13 +66,13 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         tripDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        tripDetailsViewModel.errorState.observe(this, Observer { _ ->
+        tripDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 tripDetailsViewModel.getTripDetails(tripId.toString())
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         tripDetailsViewModel.getTripDetails(tripId.toString())
     }
@@ -86,6 +85,7 @@ class TripDetailsFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews(tripItem: TripUI) {
+        tripItem.title?.let { setToolbarTitle(it) }
         tripItem.imgs?.let {
             //            var imgs = mutableListOf<String>()
 //            for (i in 0 until it.size) {
@@ -102,12 +102,8 @@ class TripDetailsFragment : BaseFragment(), Injectable {
         binding.svContent.visibility = View.VISIBLE
         binding.tripItem = tripItem
 
-        val adapter = RegimentsAdapter(dataBindingComponent, appExecutors) {}
-        this.adapter = adapter
-        binding.rvRegiments.adapter = adapter
-        adapter.submitList(tripItem.regiments)
-
-        binding.bReserve.setOnClickListener {
+        binding.bViewRegiments.visibility = if(tripItem.counter!! > 0) View.VISIBLE else View.INVISIBLE
+        binding.bViewRegiments.setOnClickListener {
             TripsData.tripItem = tripItem
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(TripDetailsFragmentDirections.openTripReservation(tripItem))

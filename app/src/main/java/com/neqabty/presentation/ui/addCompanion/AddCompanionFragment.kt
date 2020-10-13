@@ -2,18 +2,18 @@ package com.neqabty.presentation.ui.addCompanion
 
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.content.res.Resources
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.DialogFragment
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.AddCompanionFragmentBinding
@@ -37,7 +37,7 @@ class AddCompanionFragment : DialogFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     val myCalendar = Calendar.getInstance()
-    var relationsList: MutableList<String>? = mutableListOf("مهندس/عضو", "زوجة", "ابن", "ابنة", "والد", "والدة", "طفل")
+    var relationsList: MutableList<String>? = mutableListOf("مهندس/عضو", "زوجة", "ابن / ابنة", "والد", "والدة", "طفل")
     var selectedRelation = ""
 
     var companion = PersonEntity()
@@ -76,7 +76,7 @@ class AddCompanionFragment : DialogFragment(), Injectable {
         val month = myCalendar.get(Calendar.MONTH)
         val day = myCalendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePicker = DatePickerDialog(activity, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+        val datePicker = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, monthOfYear)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -88,7 +88,7 @@ class AddCompanionFragment : DialogFragment(), Injectable {
         }
 
         bOK.setOnClickListener {
-            companion.name = ""
+            companion.name = edName.text.toString()
             companion.relationship = selectedRelation
             companion.ageOnTrip = 0
             companion.birthDate = edBirthDate.text.toString()
@@ -98,10 +98,10 @@ class AddCompanionFragment : DialogFragment(), Injectable {
             bundle.putParcelable("companion", companion)
             intent.putExtras(bundle)
             targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
-            dialog.dismiss()
+            dialog?.dismiss()
         }
 
-        bCancel.setOnClickListener { dialog.dismiss() }
+        bCancel.setOnClickListener { dialog?.dismiss() }
     }
 
     //region
@@ -112,7 +112,7 @@ class AddCompanionFragment : DialogFragment(), Injectable {
     }
 
     fun renderRelations() {
-        binding.spRelationDegree.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, relationsList)
+        binding.spRelationDegree.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, relationsList!!)
         binding.spRelationDegree.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {

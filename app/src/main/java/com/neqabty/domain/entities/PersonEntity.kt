@@ -10,9 +10,9 @@ data class PersonEntity(
     var ageOnTrip: Int = 0
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
             parcel.readInt())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

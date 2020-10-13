@@ -1,21 +1,22 @@
 package com.neqabty.presentation.ui.home
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.BuildConfig
@@ -24,7 +25,6 @@ import com.neqabty.databinding.HomeFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.ui.claiming.ClaimingStep4Fragment
 import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
 import com.neqabty.presentation.util.HasHomeOptionsMenu
 import com.neqabty.presentation.util.OnBackPressedListener
@@ -77,24 +77,25 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         homeViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(HomeViewModel::class.java)
 
-        homeViewModel.viewState.observe(this, Observer {
+        homeViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
-        homeViewModel.errorState.observe(this, Observer { _ ->
+        homeViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(context!!).user)
+                homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
-        homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(context!!).user)
+        homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(requireContext()).user)
+
+        initializeViews()
     }
 
     override fun onResume() {
         super.onResume()
-        initializeViews()
     }
 
     private fun handleViewState(state: HomeViewState) {
@@ -110,15 +111,35 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
             PreferencesHelper(requireContext()).notificationsCount = it
             activity?.invalidateOptionsMenu()
         }
+}
 
-        val sectionsList = mutableListOf<String>(getString(R.string.wheel_news), getString(R.string.wheel_trips), getString(R.string.wheel_payment), getString(R.string.wheel_employment),
-                getString(R.string.wheel_delivery), getString(R.string.wheel_training), getString(R.string.wheel_customer_service)
-                , getString(R.string.wheel_complaints), getString(R.string.wheel_syndicate_services),
-                getString(R.string.wheel_medical))
-        val iconsList = mutableListOf<Int>(R.drawable.ic_wheel_news, R.drawable.ic_wheel_trip, R.drawable.ic_wheel_payments, R.drawable.ic_wheel_record_renewal, R.drawable.ic_wheel_guide,
-                R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_guide, R.drawable.ic_wheel_medical_approval)
+    fun initializeViews() {
+        (((activity as AppCompatActivity).drawer_layout) as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
-        val wheelAdapter = WheelAdapter(context!!, sectionsList, iconsList, 0)
+        val adapter = CustomFragmentPagerAdapter(childFragmentManager)
+        adapter.addFragment(WheelNewsFragment())
+        adapter.addFragment(WheelMedicalFragment())
+        adapter.addFragment(WheelTripsFragment())
+        adapter.addFragment(WheelEmploymentFragment())
+        adapter.addFragment(WheelSyndicateServicesFragment())
+        adapter.addFragment(WheelTrainingFragment())
+        adapter.addFragment(WheelRetireesFragment())
+        adapter.addFragment(WheelCustomerServiceFragment())
+        adapter.addFragment(WheelComplaintsFragment())
+        adapter.addFragment(WheelPaymentsFragment())
+        binding.viewpager.adapter = adapter
+        binding.viewpager.setSwipePagingEnabled(false)
+        binding.viewpager.offscreenPageLimit = 8
+
+        val sectionsList = mutableListOf<String>(getString(R.string.wheel_news), getString(R.string.wheel_medical), getString(R.string.wheel_trips),
+                getString(R.string.wheel_employment), getString(R.string.wheel_syndicate_services), getString(R.string.wheel_training), getString(R.string.wheel_retirees),
+                getString(R.string.wheel_customer_service), getString(R.string.wheel_complaints), getString(R.string.wheel_payment))
+
+        val iconsList = mutableListOf<Int>(R.drawable.ic_wheel_news, R.drawable.ic_wheel_medical_approval, R.drawable.ic_wheel_trip, R.drawable.ic_wheel_employment,
+                R.drawable.ic_wheel_syndicate_services, R.drawable.ic_wheel_training, R.drawable.ic_wheel_retirees,
+                R.drawable.ic_wheel_customer_service, R.drawable.ic_wheel_complaints, R.drawable.ic_wheel_payments)
+
+        val wheelAdapter = WheelAdapter(requireContext(), sectionsList, iconsList, 0)
         wheel.setAdapter(wheelAdapter)
         wheel.setOnMenuSelectedListener { parent, view, pos ->
             if ((wheel.adapter as WheelAdapter).selectedItemPosition != pos) {
@@ -127,33 +148,27 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
                 tvTopTitle.setText(sectionsList[pos])
                 tvBottomTitle.setText(sectionsList[pos])
                 viewpager.setCurrentItem(pos, true)
-                viewpager.animateViewPager(viewpager, 3, 200);
+                viewpager.animateViewPager(viewpager, 3, 200)
             }
+            else
+                viewpager.setCurrentItem(pos, true)
         }
 
         wheel.setOnDragListener { view, dragEvent ->
-            Toast.makeText(context, "position:", Toast.LENGTH_SHORT).show()
+            Log.d("position:", dragEvent.toString())
             viewpager.onTouchEvent(MotionEvent.obtain(10, 10, MotionEvent.ACTION_DOWN, dragEvent.x, dragEvent.y, MotionEvent.ACTION_DOWN))
         }
 //        wheel.setOnTouchListener { view, motionEvent ->
-//            Toast.makeText(context, "position:", Toast.LENGTH_SHORT).show()
-//
-////            viewpager.onTouchEvent(motionEvent)
+//            Log.d("position:", motionEvent.toString())
+//            viewpager.animateViewPager(viewpager, motionEvent.x.toInt(), motionEvent.eventTime.toInt())
+////            binding.viewpager.onInterceptTouchEvent(motionEvent)
+//            return@setOnTouchListener true
 //        }
 
-        val adapter = CustomFragmentPagerAdapter(childFragmentManager)
-        adapter.addFragment(WheelNewsFragment())
-        adapter.addFragment(WheelTripsFragment())
-        adapter.addFragment(WheelPaymentsFragment())
-        adapter.addFragment(ClaimingStep4Fragment())
-        binding.viewpager.adapter = adapter
-        binding.viewpager.setSwipePagingEnabled(false)
-        binding.viewpager.offscreenPageLimit = 2
-//        binding.indicator.setViewPager(binding.viewpager)
-    }
+        wheel.setSelection(0)
 
-    fun initializeViews() {
-        (activity as AppCompatActivity).drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+//        binding.viewpager.touc
+//////////////////////////********************************************///////////////////////////////////////////////
 //        llClaiming.setOnClickListener {
 //            if (PreferencesHelper(requireContext()).isRegistered)
 //                navController().navigate(R.id.claimingFragment)

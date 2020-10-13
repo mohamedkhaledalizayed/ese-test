@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.notifications
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetNotifications
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -19,7 +19,7 @@ class NotificationsViewModel @Inject constructor(private val getNotifications: G
         viewState.value = NotificationsViewState()
     }
 
-    fun getNotifications(serviceID: Int, type: Int, userNumber: Int) {
+    fun getNotifications(serviceID: Int, type: Int, userNumber: String) {
         addDisposable(getNotifications.getNotifications(serviceID, type, userNumber)
                 .flatMap {
                     it.let {
@@ -29,7 +29,7 @@ class NotificationsViewModel @Inject constructor(private val getNotifications: G
                         { onNotificationsReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

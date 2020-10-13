@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.claiming
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -43,7 +43,7 @@ class ClaimingViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(governs = it)
                             onContent1Received()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
 
         val areasDisposable = getAllAreas.observable()
@@ -56,7 +56,7 @@ class ClaimingViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(areas = it)
                             onContent1Received()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
 
         viewState.value?.areas?.let {
@@ -81,7 +81,7 @@ class ClaimingViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(providerTypes = it)
                             onProviderTypesReceived()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
 
 //        viewState.value?.providerTypes?.let {
@@ -103,7 +103,7 @@ class ClaimingViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(isLoading = false, providers = it)
                             onProvidersReceived()
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
 //        viewState.value?.providers?.let {
 //            onProvidersReceived()
@@ -135,7 +135,7 @@ class ClaimingViewModel @Inject constructor(
         addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
                 .subscribe(
                         { viewState.value = viewState.value?.copy(isLoading = false) },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
         )
     }
@@ -151,7 +151,7 @@ class ClaimingViewModel @Inject constructor(
                         { onValidationReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

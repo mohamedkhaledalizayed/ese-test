@@ -1,10 +1,10 @@
 package com.neqabty.presentation.ui.medicalProviderDetails
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +17,9 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ProviderUI
+import com.neqabty.presentation.ui.phones.PhonesAdapter
 import com.neqabty.presentation.ui.phones.PhonesFragment
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.presentation.util.openMap
 import kotlinx.android.synthetic.main.medical_provider_details_fragment.*
@@ -59,29 +61,28 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
         medicalProviderDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MedicalProviderDetailsViewModel::class.java)
 
-        val params = MedicalProviderDetailsFragmentArgs.fromBundle(arguments!!)
+        val params = MedicalProviderDetailsFragmentArgs.fromBundle(requireArguments())
         providerItem = params.medicalProviderItem
-        medicalProviderDetailsViewModel.viewState.observe(this, Observer {
+        medicalProviderDetailsViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
 
-        medicalProviderDetailsViewModel.errorState.observe(this, Observer { _ ->
+        medicalProviderDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 medicalProviderDetailsViewModel.isFavorite(providerItem)
-                medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.type!!)
+                medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeID!!)
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
         medicalProviderDetailsViewModel.isFavorite(providerItem)
-        medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.type!!)
+        medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeID!!)
     }
 
     private fun handleViewState(state: MedicalProviderDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         binding.clHolder.visibility = if (state.isLoading) View.INVISIBLE else View.VISIBLE
-        binding.ivFav.visibility = if (state.isLoading) View.INVISIBLE else View.VISIBLE
         this.state = state
         state.providerDetails?.let {
             binding.providerItem = it
@@ -95,14 +96,30 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
     }
 
     private fun initializeViews(state: MedicalProviderDetailsViewState) {
+        val phoneNumbers = providerItem.phones?.replace(" ", "")?.replace("_x000D_\n", "-")?.replace("\r\n", "-")
+                ?.replace('\n', '-')?.replace('\r', '-')?.split("-")
 
-        tvAddress.setOnClickListener {
-            state.providerDetails?.address?.let { tvAddress.openMap(it, requireContext()) }
+        val adapter = PhonesAdapter(dataBindingComponent, appExecutors)
+        adapter.submitList(phoneNumbers)
+        binding.rvPhones.adapter = adapter
+
+        bMap.setOnClickListener {
+            state.providerDetails?.address?.let { bMap.openMap(it, requireContext()) }
         }
 
-        tvPhone.setOnClickListener {
-            openCallFragment(state.providerDetails?.phones!!)
+        bClaiming.setOnClickListener {
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(R.id.claimingFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", 1)
+                navController().navigate(R.id.mobileFragment, bundle)
+            }
         }
+
+//        tvPhone.setOnClickListener {
+//            openCallFragment(state.providerDetails?.phones!!)
+//        }
     }
 
     //region
@@ -114,7 +131,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
     }
 
     fun renderFav() {
-        binding.ivFav.setImageResource(if (state.isFavorite) R.mipmap.star_selected else R.mipmap.star_outline)
+        binding.ivFav.setImageResource(if (state.isFavorite) R.drawable.ic_fav_white else R.drawable.ic_fav_outline)
     }
 
     fun openCallFragment(phones: String) {
@@ -124,7 +141,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
         bundle.putString("phones", phones)
         subSyndicatesFragment.arguments = bundle
         subSyndicatesFragment.setTargetFragment(this, 255)
-        subSyndicatesFragment.show(fragmentManager, "name")
+        subSyndicatesFragment.show(requireFragmentManager(), "name")
     }
 // endregion
 

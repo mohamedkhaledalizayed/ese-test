@@ -2,26 +2,33 @@ package com.neqabty.presentation.ui.tripsReservation
 
 import android.Manifest
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v7.app.AlertDialog
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.FileProvider
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.tabs.TabLayout
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.TripReservationFragmentBinding
@@ -33,12 +40,14 @@ import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.ui.addCompanion.AddCompanionFragment
 import com.neqabty.presentation.ui.common.PhotosAdapter
+import com.neqabty.presentation.util.DisplayMetrics
+import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import kotlinx.android.synthetic.main.medical_main_fragment.*
 import kotlinx.android.synthetic.main.trip_reservation_fragment.*
 import java.io.*
 import java.util.*
-
 import javax.inject.Inject
 
 class TripReservationFragment : BaseFragment(), Injectable {
@@ -60,6 +69,8 @@ class TripReservationFragment : BaseFragment(), Injectable {
     private val ADD_COMPANION = 2
 
     private var captureImage = false
+    private var PhotoFileName = ""
+    lateinit var photoFileURI: Uri
 
     private var photosList: MutableList<PhotoUI> = mutableListOf<PhotoUI>()
     private var companionsList: MutableList<PersonEntity> = mutableListOf<PersonEntity>()
@@ -70,16 +81,16 @@ class TripReservationFragment : BaseFragment(), Injectable {
     var roomsList: MutableList<TripUI.TripRoom>? = mutableListOf()
     var childrenList: MutableList<Int>? = mutableListOf()
     var agesList: MutableList<Int>? = mutableListOf()
-    var regimentID: Int = 0
+    lateinit var regiment: TripUI.TripRegiment
     var roomID: Int = 0
     var childrenID: Int = 0
 
     var reservationRequested = false
     private var isValid = false
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -95,22 +106,22 @@ class TripReservationFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val params = TripReservationFragmentArgs.fromBundle(arguments!!)
+        val params = TripReservationFragmentArgs.fromBundle(requireArguments())
         tripItem = params.tripItem
 
         tripReservationViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(TripReservationViewModel::class.java)
 
-        tripReservationViewModel.viewState.observe(this, Observer {
+        tripReservationViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
-        tripReservationViewModel.errorState.observe(this, Observer { _ ->
+        tripReservationViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
 //                tripReservationViewModel.paymentInquiry(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 //        tripReservationViewModel.paymentInquiry(PreferencesHelper(requireContext()).user)
         initializeViews()
@@ -138,7 +149,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
 //            state.member?.message = null
 //        }
 //        else
-            if (!state.isLoading && reservationRequested)
+        if (!state.isLoading && reservationRequested)
             showSuccessAlert()
     }
 
@@ -155,13 +166,15 @@ class TripReservationFragment : BaseFragment(), Injectable {
         }
 
         binding.bAttachPhoto.setOnClickListener {
-            if (photosList.size < 4)
+            if (photosList.size < 10)
                 grantCameraPermission()
         }
 
         val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
             photosList.remove(photo)
             photosAdapter.notifyDataSetChanged()
+            if(photosList.size < 10)
+                bAttachPhoto.visibility = View.VISIBLE
         }
         this.photosAdapter = adapter
         binding.rvPhotos.adapter = adapter
@@ -176,40 +189,88 @@ class TripReservationFragment : BaseFragment(), Injectable {
             if (photosList.size > 0) {
                 reservationRequested = true
                 val prefs = PreferencesHelper(requireContext())
-                tripReservationViewModel.bookTrip(prefs.mainSyndicate, PreferencesHelper(requireContext()).user, prefs.mobile, tripItem.regiments?.get(0)?.tripId!!, regimentID, spRegiments.selectedItem.toString(), spRooms.selectedItem.toString(), spChildren.selectedItem.toString().toInt(), spChild1.selectedItem?.toString() + "," + spChild2.selectedItem?.toString() + "," + spChild3.selectedItem?.toString(), PreferencesHelper(requireContext()).name, companionsList.toList(), photosList.size, companionsList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3))
+                tripReservationViewModel.bookTrip(prefs.mainSyndicate, PreferencesHelper(requireContext()).user, prefs.mobile, tripItem.regiments?.get(0)?.tripId!!, regiment.regimentId, regiment.toString() , roomID.toString(), spChildren.selectedItem.toString().toInt(), spChild1.selectedItem?.toString() + "," + spChild2.selectedItem?.toString() + "," + spChild3.selectedItem?.toString(), PreferencesHelper(requireContext()).name, companionsList.toList(), photosList.size, companionsList.size,
+                        getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3),
+                        getPhoto(4), getPhoto(5), getPhoto(6), getPhoto(7),
+                        getPhoto(8), getPhoto(9))
             } else
                 showPickPhotoAlert()
         }
     }
 
     fun renderRegiments() {
-        binding.spRegiments.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, regimentsList)
-        binding.spRegiments.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                regimentID = (parent.getItemAtPosition(position) as TripUI.TripRegiment).regimentId
+        for (i in 0 until regimentsList?.size!!) {
+            binding.tlRegiments.addTab(binding.tlRegiments.newTab().setText(regimentsList!![i].dateFrom + " :" + regimentsList!![i].dateTo))
+            val headerView: View = LayoutInflater.from(context).inflate(R.layout.tab_regiment_item, null, false)
+            headerView.findViewById<TextView>(R.id.tvRegiment).setText(getString(R.string.regiment) + " " + (i+1) )
+            headerView.findViewById<TextView>(R.id.tvDateFrom).setText(Html.fromHtml(getString(R.string.date_from, regimentsList!![i].dateFrom)))
+            headerView.findViewById<TextView>(R.id.tvDateTo).setText(Html.fromHtml(getString(R.string.date_to, regimentsList!![i].dateTo)))
+            binding.tlRegiments.getTabAt(i)?.setCustomView(headerView.rootView)
+        }
+
+        tlRegiments.requestLayout()
+
+        val layoutParams: ViewGroup.LayoutParams = tlRegiments.layoutParams
+        layoutParams.height = DisplayMetrics.width * 35 / 100
+        tlRegiments.layoutParams = layoutParams
+
+        tlRegiments!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                regiment = regimentsList!![tab.position]
                 renderRooms()
             }
-        }
-        binding.spRegiments.setSelection(0)
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+
+            }
+        })
+        binding.tlRegiments.getTabAt(regimentsList!!.size-1)!!.select()
+        binding.tlRegiments.getTabAt(0)!!.select()
     }
 
     fun renderRooms() {
         prepareRooms()
-        binding.spRooms.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, roomsList)
-        binding.spRooms.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                roomID = (parent.getItemAtPosition(position) as TripUI.TripRoom).roomId
-            }
+        binding.tlRoomType.removeAllTabs()
+
+        for (i in 0 until roomsList?.size!!) {
+            binding.tlRoomType.addTab(binding.tlRoomType.newTab().setText(roomsList!![i].name))
+            val headerView: View = LayoutInflater.from(context).inflate(R.layout.tab_room_item, null, false)
+            headerView.findViewById<TextView>(R.id.tvText).setText(roomsList!![i].name)
+            headerView.findViewById<TextView>(R.id.tvPrice).setText(Html.fromHtml(getString(R.string.currency, roomsList!![i].price.toString())))
+            binding.tlRoomType.getTabAt(i)?.setCustomView(headerView.rootView)
         }
-        binding.spRooms.setSelection(0)
+
+        tlRoomType.requestLayout()
+
+        val layoutParams: ViewGroup.LayoutParams = tlRoomType.layoutParams
+        layoutParams.height = DisplayMetrics.width * 20 / 100
+        tlRoomType.layoutParams = layoutParams
+
+        tlRoomType!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                roomID = roomsList!![tab.position].roomId
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+
+            }
+        })
+
+        tlRoomType.getTabAt(0)?.select()
     }
 
     fun prepareRooms() {
         var j = 1
         roomsList?.clear()
-        var regiment: TripUI.TripRegiment = regimentsList!![spRegiments.selectedItemPosition]
         if (regiment.hotelOnePerson != 0) {
             roomsList!!.add(TripUI.TripRoom(j, getString(R.string.one_person), regiment.hotelOnePerson))
             j++
@@ -246,7 +307,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
 
     fun renderChildrenNumber() {
         prepareChildrenNumber()
-        binding.spChildren.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, childrenList)
+        binding.spChildren.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, childrenList!!)
         binding.spChildren.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -295,9 +356,9 @@ class TripReservationFragment : BaseFragment(), Injectable {
             }
         }
 
-        binding.spChild1.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList)
-        binding.spChild2.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList)
-        binding.spChild3.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList)
+        binding.spChild1.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList!!)
+        binding.spChild2.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList!!)
+        binding.spChild3.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, agesList!!)
 //        binding.spChild1.setSelection(0)
     }
 
@@ -315,7 +376,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
             if (requestCode == SELECT_FILE)
                 onSelectFromGalleryResult(data!!)
             else if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data!!)
+                onCaptureImageResult()
             else if (requestCode == ADD_COMPANION) {
                 addCompanion(data!!)
             }
@@ -332,7 +393,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
         val fragmentManager = this@TripReservationFragment.fragmentManager
         val addCompanionFragment = AddCompanionFragment()
         addCompanionFragment.setTargetFragment(this, ADD_COMPANION)
-        addCompanionFragment.show(fragmentManager, "name")
+        addCompanionFragment.show(requireFragmentManager(), "name")
     }
 
     private fun addCompanion(data: Intent) {
@@ -364,12 +425,34 @@ class TripReservationFragment : BaseFragment(), Injectable {
     }
 
     private fun cameraIntent() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, REQUEST_CAMERA)
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
+                // Create the File where the photo should go
+                val photoFile: File? = try {
+                    ImageUtils.createImageFile(requireContext())
+                } catch (ex: IOException) {
+                    // Error occurred while creating the File
+                    null
+                }
+                // Continue only if the File was successfully created
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                            requireContext(),
+                            "com.neqabty.fileprovider",
+                            it
+                    )
+                    PhotoFileName = photoFile.name
+                    photoFileURI = photoURI
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_CAMERA)
+                }
+            }
+
+        }
     }
 
     fun grantCameraPermission() {
-        if (ActivityCompat.checkSelfPermission(this.context!!, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             captureImage = true
             requestPermissions(arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CAMERA)
         } else {
@@ -392,29 +475,20 @@ class TripReservationFragment : BaseFragment(), Injectable {
         }
     }
 
-    private fun onCaptureImageResult(data: Intent) {
-        var thumbnail: Bitmap = data.getExtras().get("data") as Bitmap
-        var bytes: ByteArrayOutputStream = ByteArrayOutputStream()
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-
-        var name = System.currentTimeMillis().toString() + ".jpg"
-        var destination: File = File(Environment.getExternalStorageDirectory(), name)
-
-        var fo: FileOutputStream
-        try {
-            destination.createNewFile()
-            fo = FileOutputStream(destination)
-            fo.write(bytes.toByteArray())
-            fo.close()
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-        photosList.add(PhotoUI(Environment.getExternalStorageDirectory().toString(), name))
+    private fun onCaptureImageResult() {
+        photosList.add(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName, photoFileURI))
+        val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" + PhotoFileName)
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
+        val bos = BufferedOutputStream(FileOutputStream(File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName)))
+        bos.write(bytes.toByteArray())
+        bos.flush()
+        bos.close()
         photosAdapter.submitList(photosList)
         photosAdapter.notifyDataSetChanged()
+
+        if(photosList.size == 10)
+            bAttachPhoto.visibility = View.GONE
     }
 
     fun saveImage(myBitmap: Bitmap): PhotoUI {
@@ -433,12 +507,12 @@ class TripReservationFragment : BaseFragment(), Injectable {
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
             fo.close()
-            return PhotoUI(path, name)
+            return PhotoUI(path, name, null)
         } catch (e1: IOException) {
             e1.printStackTrace()
         }
 
-        return PhotoUI(path, name)
+        return PhotoUI(path, name, null)
     }
 
     fun getPhoto(index: Int): File? {

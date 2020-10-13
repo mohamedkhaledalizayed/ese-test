@@ -1,73 +1,94 @@
 package com.neqabty
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.text.Html
 import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
+import com.neqabty.presentation.ui.login.LoginFragmentDirections
 import com.neqabty.presentation.util.*
+import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.android.HasAndroidInjector
+import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.android.synthetic.main.main_activity.*
 import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
+class MainActivity : AppCompatActivity(), HasAndroidInjector {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     lateinit var mainViewModel: MainViewModel
+
+    lateinit var newToken: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             customiseStatusbar()
         setContentView(R.layout.main_activity)
-
+        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         mainViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MainViewModel::class.java)
 
         setSupportActionBar(toolbar)
 //        verifyAvailableNetwork()//TODO
-        getToken()
+//        getToken()
 //        checkRoot()
         startActivities()
         mainViewModel.viewState.observe(this, Observer {
+            it.user?.let {
+                PreferencesHelper(this).jwt = it.token
+
+                if(PreferencesHelper(this).mobile.isNotBlank() && PreferencesHelper(this).user.isNotBlank() ){ // client
+                    mainViewModel.registerUser(
+                            PreferencesHelper(this).mobile,
+                            PreferencesHelper(this).mainSyndicate,
+                            PreferencesHelper(this).subSyndicate,
+                            PreferencesHelper(this).token,
+                            PreferencesHelper(this),
+                            PreferencesHelper(this).user)
+                }
+//                else if(PreferencesHelper(this).mobile.isNotBlank()) { // visitor
+//                    }
+                PreferencesHelper(this).token = newToken
+            }
+
             invalidateOptionsMenu()
         })
     }
 
-    override fun supportFragmentInjector() = dispatchingAndroidInjector
-
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 //    private fun verifyAvailableNetwork() {
 //        val connectivityManager =
 //                this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -111,8 +132,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         if (notificationId != null)
             graph.startDestination = R.id.homeFragment
-        else if (!PreferencesHelper(this).isIntroSkipped) // TODO
-            graph.startDestination = R.id.introFragment
+//        else if (!PreferencesHelper(this).isIntroSkipped) // TODO
+//            graph.startDestination = R.id.introFragment
         else if (PreferencesHelper(this).mobile.isEmpty()) // TODO
             graph.startDestination = R.id.loginFragment
         else
@@ -121,18 +142,19 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         navHostFragment.navController.graph = graph
         supportFragmentManager.beginTransaction().setPrimaryNavigationFragment(navHostFragment)
                 .commit()
-        NavigationUI.setupActionBarWithNavController(this, navController, drawer_layout)
-        nav_view.setupWithNavController(navController)
+        NavigationUI.setupActionBarWithNavController(this, navController, (drawer_layout as DrawerLayout))
+        (nav_view as NavigationView).setupWithNavController(navController)
         val appBarConfiguration =
-                AppBarConfiguration(setOf(R.id.homeFragment, R.id.syndicatesFragment), drawer_layout)
+                AppBarConfiguration(setOf(R.id.homeFragment, R.id.syndicatesFragment), (drawer_layout as DrawerLayout))
         toolbar.setupWithNavController(navController, appBarConfiguration)
         // ////////////////////////////////
-        drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        nav_view.setNavigationItemSelectedListener {
-            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        (nav_view as NavigationView).itemIconTintList = null
+        (nav_view as NavigationView).setNavigationItemSelectedListener {
+            (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             when (it.itemId) {
                 R.id.home_fragment -> {
-                    drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                    (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 }
                 R.id.news_fragment -> {
                     navController.navigate(R.id.newsFragment)
@@ -185,6 +207,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
                 }
+                R.id.about_app_fragment -> {
+                    navController.navigate(R.id.aboutAppFragment)
+                }
                 R.id.settings_fragment -> {
                     navController.navigate(R.id.settingsFragment)
                 }
@@ -205,9 +230,22 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 //                    invalidateOptionsMenu()
 //                } // TODO
             }
-            drawer_layout.closeDrawer(GravityCompat.START)
+            (drawer_layout as DrawerLayout).closeDrawer(GravityCompat.START)
             true
         }
+
+        navController.addOnDestinationChangedListener(NavController.OnDestinationChangedListener { controller, destination, arguments ->
+            if (destination.id == R.id.homeFragment)
+                supportActionBar?.apply {
+                    setDisplayHomeAsUpEnabled(true)
+                    setHomeAsUpIndicator(R.mipmap.menu_ic)
+                }
+            else
+                supportActionBar?.apply {
+                    setDisplayHomeAsUpEnabled(true)
+                    setHomeAsUpIndicator(R.drawable.ic_up)
+                }
+        })
 
         notificationId?.let {
             val args = Bundle()
@@ -225,27 +263,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         FirebaseInstanceId.getInstance().instanceId
                 .addOnCompleteListener(OnCompleteListener { task ->
                     if (!task.isSuccessful)
-                        return@OnCompleteListener
-                    val token = task.result?.token
-
-                    if (PreferencesHelper(this).mobile.isNotBlank() && !token.equals(
-                                    PreferencesHelper(
-                                            this
-                                    ).token
-                            )
-                    ) { // TODO register
-                        mainViewModel.registerUser(
-                                PreferencesHelper(this).mobile,
-                                PreferencesHelper(this).mainSyndicate,
-                                PreferencesHelper(this).subSyndicate,
-                                PreferencesHelper(this).token,
-                                PreferencesHelper(this),
-                                PreferencesHelper(this).user
-                        )
-                    } else
-                        PreferencesHelper(this).token = token
-
-                    Log.d("Toooken", token)
+                        getToken()
+                    else {
+                        newToken = task.result?.token!!
+                        if (!newToken.equals(PreferencesHelper(this).token)) // Token has been changed
+                        {
+                            if(PreferencesHelper(this).mobile.isNotBlank()){ // visitor
+                                mainViewModel.login(PreferencesHelper(this).mobile, newToken, PreferencesHelper(this))
+                            }
+                        }
+                    }
                 })
     }
 
@@ -254,13 +281,13 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(
                 Navigation.findNavController(this, R.id.container),
-                drawer_layout
+                (drawer_layout as DrawerLayout)
         )
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if ((drawer_layout as DrawerLayout).isDrawerOpen(GravityCompat.START)) {
+            (drawer_layout as DrawerLayout).closeDrawer(GravityCompat.START)
         } else {
             var currentFragment =
                     (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
@@ -297,16 +324,17 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 PreferencesHelper(this).isRegistered // && PreferencesHelper(this).notificationsCount != 0
 //        logoutItem?.isVisible = currentFragment is HasHomeOptionsMenu &&
 //                PreferencesHelper(this).isRegistered
+        ivHeaderLogo?.visibility = if (currentFragment is HasHomeOptionsMenu) View.VISIBLE else View.GONE
         favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu // || currentFragment is HasFavoriteOptionsMenu
 //        searchItem?.isVisible = currentFragment is HasMedicalOptionsMenu//TODO
 
 //        if (currentFragment is HasFavoriteOptionsMenu)
 //            favoritesItem?.setIcon(currentFragment.renderFav())
 
-        var navigationView: NavigationView = nav_view
+        var navigationView: NavigationView = (nav_view as NavigationView)
         var navMenu = navigationView.menu
 //        navMenu.findItem(R.id.logout_fragment)?.isVisible = PreferencesHelper(this).isRegistered
-        nav_view.getHeaderView(0).findViewById<Button>(R.id.bLogout).setOnClickListener {
+        (nav_view as NavigationView).getHeaderView(0).findViewById<Button>(R.id.bLogout).setOnClickListener {
             PreferencesHelper(this).isRegistered = false
             PreferencesHelper(this).user = ""
             PreferencesHelper(this).name = ""
@@ -322,32 +350,32 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             }).start()
             invalidateOptionsMenu()
 
-            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             Navigation.findNavController(this, R.id.container)
                     .navigate(R.id.openLoginFragment)
         }
 
         if (PreferencesHelper(this).name.isNotEmpty()) {
-            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
-            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).setText(Html.fromHtml(getString(R.string.menu_memberName, PreferencesHelper(this).name)))
+            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
+            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).setText(Html.fromHtml(getString(R.string.menu_memberName, PreferencesHelper(this).name)))
         } else
-            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
+            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
 
         if (PreferencesHelper(this).user.isNotEmpty()) {
-            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.VISIBLE
-            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
+            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.VISIBLE
+            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
         } else
-            nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.GONE
+            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.GONE
 
-        nav_view.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, PreferencesHelper(this).mobile)))
+        (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, PreferencesHelper(this).mobile)))
 
-        nav_view.getHeaderView(0).visibility = if (PreferencesHelper(this).mobile.isNotEmpty()) View.VISIBLE else View.GONE
+        (nav_view as NavigationView).getHeaderView(0).visibility = if (PreferencesHelper(this).mobile.isNotEmpty()) View.VISIBLE else View.GONE
 
         if (!PreferencesHelper(this).mobile.isNotEmpty())
-            nav_view.getChildAt(0).setPadding(0, 100, 0, 0)
+            (nav_view as NavigationView).getChildAt(0).setPadding(0, 100, 0, 0)
         else
-            nav_view.getChildAt(0).setPadding(0, 0, 0, 0)
+            (nav_view as NavigationView).getChildAt(0).setPadding(0, 0, 0, 0)
 
         val tvBadge = notificationsItem?.actionView?.findViewById<TextView>(R.id.tvBadge)
         if (PreferencesHelper(this).notificationsCount == 0) tvBadge?.visibility = View.INVISIBLE

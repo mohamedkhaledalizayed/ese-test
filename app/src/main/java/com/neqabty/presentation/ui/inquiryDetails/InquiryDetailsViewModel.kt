@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.inquiryDetails
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.EncryptData
 import com.neqabty.domain.usecases.PaymentInquiry
 import com.neqabty.domain.usecases.SendDecryptionKey
@@ -43,7 +43,7 @@ class InquiryDetailsViewModel @Inject constructor(
                         {
                             onEncryptionDataReceived(it)
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
     }
 
@@ -59,7 +59,7 @@ class InquiryDetailsViewModel @Inject constructor(
                         {
                             onSendDecryptionDataReceived(it)
                         },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
     }
 
@@ -74,7 +74,7 @@ class InquiryDetailsViewModel @Inject constructor(
                         { onInquiryReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

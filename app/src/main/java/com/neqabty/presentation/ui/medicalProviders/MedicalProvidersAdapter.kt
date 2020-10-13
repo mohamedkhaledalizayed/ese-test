@@ -1,8 +1,8 @@
 package com.neqabty.presentation.ui.medicalProviders
 
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
-import android.support.v7.util.DiffUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.neqabty.AppExecutors
@@ -10,6 +10,7 @@ import com.neqabty.R
 import com.neqabty.databinding.MedicalProviderItemBinding
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
+import com.neqabty.ui.presentation.common.DataBoundViewHolder
 
 class MedicalProvidersAdapter(
     private val dataBindingComponent: DataBindingComponent,
@@ -47,5 +48,13 @@ class MedicalProvidersAdapter(
 
     override fun bind(binding: MedicalProviderItemBinding, item: ProviderUI) {
         binding.provider = item
+    }
+
+    override fun onBindViewHolder(holder: DataBoundViewHolder<MedicalProviderItemBinding>, position: Int) {
+        super.onBindViewHolder(holder, position)
+        if(position %2 == 0)
+            holder.binding.clRoot.setBackgroundResource(R.drawable.provider_rounded_green_bg)
+        else
+            holder.binding.clRoot.setBackgroundResource(R.drawable.provider_rounded_blue_bg)
     }
 }

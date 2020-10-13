@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.home
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetAllNews
 import com.neqabty.domain.usecases.GetAllTrips
 import com.neqabty.domain.usecases.GetAppVersion
@@ -46,7 +46,7 @@ class HomeViewModel @Inject constructor(
                         },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -69,7 +69,7 @@ class HomeViewModel @Inject constructor(
                         },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -90,7 +90,7 @@ class HomeViewModel @Inject constructor(
                         },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )
@@ -108,7 +108,7 @@ class HomeViewModel @Inject constructor(
                             viewState.value = viewState.value?.copy(isLoading = false)
                             onContentReceived()
 //                            viewState.value = viewState.value?.copy(isLoading = false)
-//                            errorState.value = it
+//                            errorState.value = handleError(it)
                         }
                 )
         )

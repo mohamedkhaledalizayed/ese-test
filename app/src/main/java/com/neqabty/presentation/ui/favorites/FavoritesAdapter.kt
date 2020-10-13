@@ -1,8 +1,8 @@
 package com.neqabty.presentation.ui.favorites
 
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
-import android.support.v7.util.DiffUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.neqabty.AppExecutors
@@ -43,7 +43,7 @@ class FavoritesAdapter(
                 callback?.invoke(it)
             }
         }
-        binding.ivClose.setOnClickListener {
+        binding.ivRemove.setOnClickListener {
             binding.provider?.let {
                 removeCallback?.invoke(it)
             }

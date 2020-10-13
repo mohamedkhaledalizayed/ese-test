@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.login
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetVisitorLoggedIn
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -36,7 +36,7 @@ class LoginViewModel @Inject constructor(val getVisitorLoggedIn: GetVisitorLogge
                         {
                             prefs.token = token
                             onUserReceived(it) },
-                        { errorState.value = it }
+                        { errorState.value = handleError(it) }
                 )
         )
     }

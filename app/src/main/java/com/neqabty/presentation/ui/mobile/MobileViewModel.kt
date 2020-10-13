@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.mobile
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetUserLoggedIn
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -39,15 +39,13 @@ class MobileViewModel @Inject constructor(val getUserLoggedIn: GetUserLoggedIn) 
                         {
                             prefs.token = token
                             prefs.mobile = mobile
-                            prefs.name = it.name
+                            prefs.name = it.name!!
                             prefs.isRegistered = true
                             viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = true)
                         },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = false)
-                            val exception = it as HttpException
-                            val jObjError = JSONObject(exception.response().errorBody()?.string())
-                            errorState.value = Throwable(jObjError.getString("error"))
+                            errorState.value = handleError(it)
                         }
                 ))
     }

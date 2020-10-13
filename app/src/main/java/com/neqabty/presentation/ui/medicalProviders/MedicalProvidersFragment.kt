@@ -1,14 +1,16 @@
 package com.neqabty.presentation.ui.medicalProviders
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -16,8 +18,9 @@ import com.neqabty.databinding.MedicalProvidersFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.SpecializationUI
 import com.neqabty.presentation.util.autoCleared
-
+import kotlinx.android.synthetic.main.medical_providers_fragment.*
 import javax.inject.Inject
 
 class MedicalProvidersFragment : BaseFragment(), Injectable {
@@ -40,10 +43,11 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
 
     var categoryId: Int = 0
     var title: String = ""
+    var specializations = mutableListOf<SpecializationUI>()
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -68,10 +72,13 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         governID = params.governID
         professionID = params.professionID
         degreeID = params.degreeID
-        if (title.isNotBlank()) { setToolbarTitle(title) }
+//        if (title.isNotBlank()) {
+//            setToolbarTitle(title)
+//        }
 
         val adapter = MedicalProvidersAdapter(dataBindingComponent, appExecutors) { provider ->
-            provider.type = categoryId.toString()
+            provider.typeID = categoryId.toString()
+            provider.typeName = title
             navController().navigate(
                     MedicalProvidersFragmentDirections.openProviderDetails(provider)
             )
@@ -82,27 +89,60 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         medicalProvidersViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        medicalProvidersViewModel.errorState.observe(this, Observer { _ ->
+        medicalProvidersViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), professionID, degreeID)
+
+                if (categoryId == 2)
+                    medicalProvidersViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())
+                else
+                    medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), "", degreeID)
+
             }, cancelCallback = {
                 navController().navigateUp()
-            })
+            }, message = error?.message)
         })
 
-        medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), professionID, degreeID)
+        if (categoryId == 2)
+            medicalProvidersViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())
+        else
+            medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), "", degreeID)
     }
 
     private fun handleViewState(state: MedicalProvidersViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.providers?.let {
+            if (categoryId == 2)
+                spSpecialization.visibility = View.VISIBLE
+            else
+                spSpecialization.visibility = View.GONE
+
             if (it.size == 0)
                 binding.tvNoDataFound.visibility = View.VISIBLE
+            else
+                binding.tvNoDataFound.visibility = View.GONE
+
             adapter.submitList(it)
+            state.providers = null
+            return
+        }
+        state.professions?.let {
+            specializations = it.toMutableList()
+            state.professions = null
+            spSpecialization.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, specializations)
+            initializeViews()
         }
     }
+
     fun initializeViews() {
+        spSpecialization.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), (parent.getItemAtPosition(position) as SpecializationUI).id.toString(), degreeID)
+            }
+        }
+        spSpecialization.setSelection(0)
+        medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), specializations[0].id.toString(), degreeID)
     }
 
 //region

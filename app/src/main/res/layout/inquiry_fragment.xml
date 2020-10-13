@@ -9,20 +9,11 @@
             type="boolean" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_horizontal_normal"
         android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/ivHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@mipmap/header_bg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -32,7 +23,7 @@
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivHeader">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:id="@+id/llContent"
@@ -40,6 +31,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:visibility="invisible"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:background="@drawable/rounded_bg"
                 android:orientation="vertical">
 
 
@@ -48,7 +41,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_large"
                     android:gravity="center"
+                    android:textStyle="bold"
                     android:text="@string/choose_service"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Spinner
+                    android:id="@+id/spServiceTypes"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:hint="@string/governorate"
+                    android:textDirection="rtl"
                     android:textSize="@dimen/text_size_medium" />
 
                 <Spinner
@@ -66,6 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_large"
                     android:gravity="center"
+                    android:textStyle="bold"
                     android:text="@string/enter_member_number"
                     android:textSize="@dimen/text_size_medium" />
 
@@ -82,12 +87,11 @@
 
                 <Button
                     android:id="@+id/bSend"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_large"
-                    android:background="@mipmap/btn"
+                    android:layout_margin="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_green"
                     android:gravity="center"
-                    android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/send"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
@@ -95,5 +99,5 @@
             </LinearLayout>
         </ScrollView>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

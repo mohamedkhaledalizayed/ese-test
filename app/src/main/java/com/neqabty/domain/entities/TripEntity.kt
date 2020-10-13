@@ -11,6 +11,7 @@ data class TripEntity(
     var subSyndicateId: String?,
     var governId: String?,
     var desc: String?,
+    var counter: Int?,
     var price: String?,
     var notes: String?,
     var imgs: List<String>? = null,

@@ -19,20 +19,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/ivHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@mipmap/header_bg" />
+        android:orientation="vertical"
+        android:padding="@dimen/margin_horizontal_large">
 
         <ScrollView
             android:id="@+id/svContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_horizontal_normal"
+            android:background="@drawable/rounded_bg"
             android:scrollbars="none">
 
             <LinearLayout
@@ -46,6 +41,7 @@
                     android:id="@+id/tvService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:textColor="@color/colorPrimary"
                     android:text="@{title}"
                     android:textSize="@dimen/text_size_large" />
@@ -54,29 +50,32 @@
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@{Html.fromHtml(@string/name_title(memberItem.engineerName))}"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_medium" />
 
                 <TextView
                     android:id="@+id/tvMemberNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@{Html.fromHtml(@string/user_number_title(memberItem.engineerNumber))}"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_medium" />
 
                 <!--                <TextView-->
                 <!--                    android:id="@+id/tvRequestID"-->
                 <!--                    android:layout_width="match_parent"-->
                 <!--                    android:layout_height="wrap_content"-->
                 <!--                    android:text="@{Html.fromHtml(@string/expiration_date_title(memberItem.billDate))}"-->
-                <!--                    android:textSize="@dimen/text_size_large" />-->
+                <!--                    android:textSize="@dimen/text_size_medium" />-->
 
                 <TextView
                     android:id="@+id/tvAmount"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:layout_height="wrap_content"
                     android:text="@{Html.fromHtml(@string/amount_title(memberItem.amount))}"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_medium" />
 
 
                 <TextView
@@ -84,15 +83,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/details"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:textColor="@color/colorPrimary"
                     android:visibility='@{memberItem.payments == null ? View.GONE : View.VISIBLE}'
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_medium" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:layoutManager="LinearLayoutManager"
                     tools:listitem="@layout/payment_item" />
 
                 <TextView
@@ -152,15 +152,13 @@
 
                 <Button
                     android:id="@+id/bPay"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/margin_vertical_large"
-                    android:background="@mipmap/btn"
+                    android:layout_margin="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_green"
                     android:gravity="center"
-                    android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/pay"
-                    android:visibility="gone"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>

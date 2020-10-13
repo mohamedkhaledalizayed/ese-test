@@ -1,12 +1,12 @@
 package com.neqabty.presentation.ui.complaint
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,14 +64,14 @@ class ComplaintFragment : BaseFragment(), Injectable {
         complaintViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        complaintViewModel.errorState.observe(this, Observer { _ ->
+        complaintViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 complaintViewModel.getTypes()
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
-            })
+            }, message = error?.message)
         })
         complaintViewModel.getTypes()
         initializeViews()
@@ -79,7 +79,7 @@ class ComplaintFragment : BaseFragment(), Injectable {
 
     private fun initializeViews() {
         binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
-        binding.bNext.setOnClickListener {
+        binding.bSend.setOnClickListener {
             isSubmitted = true
             complaintViewModel.createComplaint(edName.text.toString(), edMobile.text.toString(), complaintsTypeID.toString(), edBody.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()).user)
         }
@@ -101,7 +101,7 @@ class ComplaintFragment : BaseFragment(), Injectable {
 
     //region
     fun renderTypes() {
-        binding.spTypes.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, complaintsTypesList)
+        binding.spTypes.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, complaintsTypesList!!)
         binding.spTypes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {

@@ -1,9 +1,9 @@
 package com.neqabty.presentation.ui.phones
 
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +47,7 @@ class PhonesFragment : DialogFragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
 
         val bundle = this.arguments
-        bundle?.let { phoneNumbers = it.getString("phones") }
+        bundle?.let { phoneNumbers = it.getString("phones")!! }
         val phoneNumbers = phoneNumbers.replace(" ", "").replace("\r\n", "-")
                 .replace('\n', '-').replace('\r', '-').split("-")
 

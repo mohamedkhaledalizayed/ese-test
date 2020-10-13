@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.updateDataVerification
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.VerifyUpdateUserData
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -31,7 +31,7 @@ class UpdateDataVerificationViewModel @Inject constructor(private val verifyUpda
                         { onVerifyUserDataReceived(it) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
-                            errorState.value = it
+                            errorState.value = handleError(it)
                         }
                 )
         )

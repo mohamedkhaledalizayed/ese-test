@@ -1,151 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.text.Html" />
+
+        <import type="android.view.View" />
 
         <variable
             name="tripItem"
             type="com.neqabty.presentation.entities.TripUI" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/margin_horizontal_large">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/svContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:visibility="gone">
 
-            <ImageView
-                android:id="@+id/ivHeader"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@mipmap/header_bg" />
+                android:orientation="vertical">
 
-            <android.support.v4.widget.NestedScrollView
-                android:id="@+id/svContent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none"
-                android:visibility="gone">
+                <com.neqabty.presentation.ui.common.SwipeLockableViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layoutDirection="rtl"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <LinearLayout
+                <com.rd.PageIndicatorView
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:padding="@dimen/margin_horizontal_small"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewpager"
+                    app:piv_radius="4dp"
+                    app:piv_rtl_mode="on"
+                    app:piv_selectedColor="@color/dark_green"
+                    app:piv_unselectedColor="@color/colorAccent" />
+
+                <TextView
+                    android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lineSpacingMultiplier="0.6"
+                    android:maxLines="2"
+                    android:text="@{tripItem.title}"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/indicator" />
+
+                <TextView
+                    android:id="@+id/tvPriceTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/trip_price"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/tvPrice"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvPrice" />
+
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@{Html.fromHtml(@string/currency(tripItem.price))}"
+                    android:textColor="@color/dark_green"
+                    android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    app:cardCornerRadius="@dimen/round_radius_large"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:background="@drawable/rounded_bg"
                     android:padding="@dimen/margin_horizontal_normal"
-                    android:orientation="vertical">
+                    android:visibility='@{(tripItem.desc == null || tripItem.desc.equals("")) ? View.GONE : View.VISIBLE}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPrice">
 
-                    <com.neqabty.presentation.ui.common.SwipeLockableViewPager
-                        android:id="@+id/viewpager"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_margin="@dimen/margin_horizontal_normal"
-                        android:visibility="gone" />
-
-                    <com.rd.PageIndicatorView
-                        android:id="@+id/indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:padding="@dimen/margin_horizontal_small"
-                        android:visibility="gone"
-                        app:piv_radius="4dp"
-                        app:piv_selectedColor="@color/colorPrimary"
-                        app:piv_unselectedColor="@color/colorAccent" />
-
-                    <TextView
-                        android:id="@+id/tvTitle"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:lineSpacingMultiplier="0.6"
-                        android:maxLines="2"
-                        android:text="@{tripItem.title}"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large" />
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_horizontal_normal">
 
-                    <TextView
-                        android:id="@+id/tvNotes"
+                        <TextView
+                            android:id="@+id/tvDescTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/trip_desc"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/text_size_medium"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvDesc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="0.8"
+                            android:text="@{tripItem.desc}"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="@dimen/text_size_medium" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvAbout"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/round_radius_large"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:background="@drawable/rounded_bg"
+                    android:padding="@dimen/margin_horizontal_normal"
+                    android:visibility='@{(tripItem.place.details == null || tripItem.place.details.equals("")) ? View.GONE : View.VISIBLE}'
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cvDesc">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:lineSpacingMultiplier="0.8"
-                        android:text="@{tripItem.notes}"
-                        android:textSize="@dimen/text_size_medium" />
-                    <TextView
-                        android:id="@+id/tvRegiments"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/regiments"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_size_large" />
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_horizontal_normal">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rvRegiments"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/margin_horizontal_small"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                        tools:listitem="@layout/trip_regiment_item" />
+                        <TextView
+                            android:id="@+id/tvAboutTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/about_hotel"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/text_size_medium"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent" />
 
-                    <TextView
-                        android:id="@+id/tvDescTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/trip_desc"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/text_size_large" />
 
-                    <TextView
-                        android:id="@+id/tvDesc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:lineSpacingMultiplier="0.8"
-                        android:text="@{tripItem.desc}"
-                        android:textSize="@dimen/text_size_medium" />
+                        <TextView
+                            android:id="@+id/tvAbout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingMultiplier="0.8"
+                            android:text="@{tripItem.place.details}"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="@dimen/text_size_medium"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:id="@+id/tvAboutTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/about_hotel"
-                        android:textStyle="bold"
-                        android:layout_marginTop="@dimen/margin_vertical_normal"
-                        android:textSize="@dimen/text_size_large" />
+                <Button
+                    android:id="@+id/bViewRegiments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_horizontal_normal"
+                    android:background="@drawable/btn_green"
+                    android:elevation="@dimen/elevation_level_one"
+                    android:gravity="center"
+                    android:text="@string/view_regiments"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cvAbout" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
-                    <TextView
-                        android:id="@+id/tvAbout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:lineSpacingMultiplier="0.8"
-                        android:text="@{tripItem.place.details}"
-                        android:textSize="@dimen/text_size_medium" />
-
-                    <Button
-                        android:id="@+id/bReserve"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/btn"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:text="@string/reserve"
-                        android:textColor="@android:color/white"
-                        android:elevation="@dimen/elevation_level_one"
-                        android:textSize="@dimen/text_size_medium" />
-                </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
-
-        </LinearLayout>
-
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
