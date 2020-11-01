@@ -111,7 +111,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
             PreferencesHelper(requireContext()).notificationsCount = it
             activity?.invalidateOptionsMenu()
         }
-}
+    }
 
     fun initializeViews() {
         (((activity as AppCompatActivity).drawer_layout) as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
@@ -129,7 +129,7 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
         adapter.addFragment(WheelPaymentsFragment())
         binding.viewpager.adapter = adapter
         binding.viewpager.setSwipePagingEnabled(false)
-        binding.viewpager.offscreenPageLimit = 8
+        binding.viewpager.offscreenPageLimit = 0
 
         val sectionsList = mutableListOf<String>(getString(R.string.wheel_news), getString(R.string.wheel_medical), getString(R.string.wheel_trips),
                 getString(R.string.wheel_employment), getString(R.string.wheel_syndicate_services), getString(R.string.wheel_training), getString(R.string.wheel_retirees),
@@ -154,51 +154,20 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
                 viewpager.setCurrentItem(pos, true)
         }
 
-        wheel.setOnDragListener { view, dragEvent ->
-            Log.d("position:", dragEvent.toString())
-            viewpager.onTouchEvent(MotionEvent.obtain(10, 10, MotionEvent.ACTION_DOWN, dragEvent.x, dragEvent.y, MotionEvent.ACTION_DOWN))
-        }
-//        wheel.setOnTouchListener { view, motionEvent ->
-//            Log.d("position:", motionEvent.toString())
-//            viewpager.animateViewPager(viewpager, motionEvent.x.toInt(), motionEvent.eventTime.toInt())
-////            binding.viewpager.onInterceptTouchEvent(motionEvent)
-//            return@setOnTouchListener true
-//        }
-
         wheel.setSelection(0)
 
-//        binding.viewpager.touc
-//////////////////////////********************************************///////////////////////////////////////////////
-//        llClaiming.setOnClickListener {
-//            if (PreferencesHelper(requireContext()).isRegistered)
-//                navController().navigate(R.id.claimingFragment)
-//            else {
-//                val bundle: Bundle = Bundle()
-//                bundle.putInt("type", 1)
-//                navController().navigate(R.id.mobileFragment, bundle)
-//            }
-//        }
-//        llNews.setOnClickListener {
-//            navController().navigate(R.id.newsFragment)
-//        }
-//        llTrips.setOnClickListener {
-//            navController().navigate(R.id.tripsFragment)
-//        }
-//        llMedical.setOnClickListener {
-//            navController().navigate(R.id.chooseAreaFragment)
-//        }
-////        llInquiry.setOnClickListener {
-////            navController().navigate(R.id.inquiryFragment)
-////        }
-//        llCorona.setOnClickListener {
-//            if (PreferencesHelper(requireContext()).isRegistered)
-//                navController().navigate(R.id.coronaFragment)
-//            else {
-//                val bundle: Bundle = Bundle()
-//                bundle.putInt("type", 6)
-//                navController().navigate(R.id.mobileFragment, bundle)
-//            }
-//        }
+        ibNext.setOnClickListener{
+            if(wheel.selectedPosition == iconsList.size - 1)
+                wheel.setSelection(0)
+            else
+                wheel.setSelection(wheel.selectedPosition + 1)
+        }
+        ibPrev.setOnClickListener{
+            if(wheel.selectedPosition == 0)
+                wheel.setSelection(iconsList.size - 1)
+            else
+                wheel.setSelection(wheel.selectedPosition - 1)
+        }
     }
 
     override fun onBackPressed() {

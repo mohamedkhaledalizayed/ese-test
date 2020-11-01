@@ -174,8 +174,8 @@ dependencies {
 
     implementation deps.mastercard
     implementation files('libs/cowpaysdk.aar')
-    implementation files('libs/mobilepaymentsdk-v2.1.aar')
     implementation project(':wheel')
+    implementation project(':mobilepaymentsdktest')
 
     testImplementation deps.junit
     testImplementation deps.mock_web_server

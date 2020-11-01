@@ -72,5 +72,29 @@
             android:layout_marginBottom="@dimen/margin_vertical_normal"
             app:layout_constraintBottom_toTopOf="@id/wheel"
             app:layout_constraintTop_toBottomOf="@id/tvTopTitle" />
+
+
+        <ImageButton
+            android:id="@+id/ibNext"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@color/alpha_light_grey"
+            android:src="@drawable/ic_arrow"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="@id/viewpager"
+            app:layout_constraintStart_toStartOf="@id/viewpager"
+            app:layout_constraintTop_toTopOf="@id/viewpager" />
+
+        <ImageButton
+            android:id="@+id/ibPrev"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@color/alpha_light_grey"
+            android:src="@drawable/ic_arrow"
+            android:text="@string/prev"
+            app:layout_constraintBottom_toBottomOf="@id/viewpager"
+            app:layout_constraintEnd_toEndOf="@id/viewpager"
+            app:layout_constraintTop_toTopOf="@id/viewpager" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

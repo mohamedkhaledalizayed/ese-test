@@ -77,8 +77,8 @@ class AppModule {
                 .build()
 
         return Retrofit.Builder()
-//                .baseUrl("http://3.20.85.44:44392/") // TEST
-                .baseUrl("http://3.20.85.44/") // PROD
+//                .baseUrl("http://3.131.229.146:44392/") // TEST
+                .baseUrl("http://3.131.229.146/") // PROD
 //                .baseUrl("http://front.neqabty.com/")
 //                .baseUrl("http://192.168.178.38/")
 //            .baseUrl("https://neqabty-stage.efinance.com.eg/")

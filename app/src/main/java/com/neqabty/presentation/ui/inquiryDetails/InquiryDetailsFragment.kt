@@ -110,47 +110,47 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
         binding.rvDetails.adapter = adapter
         bPay.setOnClickListener {
-//            llSuperProgressbar.visibility = View.VISIBLE
-//            createPayment()
+            llSuperProgressbar.visibility = View.VISIBLE
+            createPayment()
 
-            var intent = Intent(context, PaymentMethodsActivity::class.java)
-
-
-            var PaymentMethod = ArrayList<String>()
-            PaymentMethod.add(CowpayConstantKeys().CreditCardMethod)
-//            PaymentMethod.add(CowpayConstantKeys().FawryMethod)
-            intent.putExtra(CowpayConstantKeys().PaymentMethod, PaymentMethod)
-
-
-            //set environment production or sandBox
-            //CowpayConstantKeys().Production or CowpayConstantKeys().SandBox
-            intent.putExtra(CowpayConstantKeys().PaymentEnvironment, CowpayConstantKeys().SandBox)
-            //set locale language
-            intent.putExtra(CowpayConstantKeys().Language, CowpayConstantKeys().ARABIC)
-            // use pay with credit card
-            intent.putExtra(
-                    CowpayConstantKeys().CreditCardMethodType,
-                    CowpayConstantKeys().CreditCardMethodPay
-            )
-
-            intent.putExtra(CowpayConstantKeys().MerchantCode, "3GpZbdrsnOrT")
-            intent.putExtra(
-                    CowpayConstantKeys().MerchantHashKey,
-                    "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
-            )
-            //order id
-            intent.putExtra(CowpayConstantKeys().MerchantReferenceId, memberItem.paymentCreationRequest?.senderRequestNumber)
-            //order price780
-            intent.putExtra(CowpayConstantKeys().Amount, memberItem.paymentCreationRequest?.settlementAmounts?.amount?.toString())
-            //user data
-            intent.putExtra(CowpayConstantKeys().CustomerName, memberItem.engineerName)
-            intent.putExtra(CowpayConstantKeys().CustomerMobile, "01200000000")
-            intent.putExtra(CowpayConstantKeys().CustomerEmail, "customer@customer.com")
-            //user id
-            intent.putExtra(CowpayConstantKeys().CustomerMerchantProfileId, memberItem.paymentCreationRequest?.userUniqueIdentifier)
-
-
-            startActivityForResult(intent, CowpayConstantKeys().PaymentMethodsActivityRequestCode)
+//            var intent = Intent(context, PaymentMethodsActivity::class.java)
+//
+//
+//            var PaymentMethod = ArrayList<String>()
+//            PaymentMethod.add(CowpayConstantKeys().CreditCardMethod)
+////            PaymentMethod.add(CowpayConstantKeys().FawryMethod)
+//            intent.putExtra(CowpayConstantKeys().PaymentMethod, PaymentMethod)
+//
+//
+//            //set environment production or sandBox
+//            //CowpayConstantKeys().Production or CowpayConstantKeys().SandBox
+//            intent.putExtra(CowpayConstantKeys().PaymentEnvironment, CowpayConstantKeys().SandBox)
+//            //set locale language
+//            intent.putExtra(CowpayConstantKeys().Language, CowpayConstantKeys().ARABIC)
+//            // use pay with credit card
+//            intent.putExtra(
+//                    CowpayConstantKeys().CreditCardMethodType,
+//                    CowpayConstantKeys().CreditCardMethodPay
+//            )
+//
+//            intent.putExtra(CowpayConstantKeys().MerchantCode, "3GpZbdrsnOrT")
+//            intent.putExtra(
+//                    CowpayConstantKeys().MerchantHashKey,
+//                    "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
+//            )
+//            //order id
+//            intent.putExtra(CowpayConstantKeys().MerchantReferenceId, memberItem.paymentCreationRequest?.senderRequestNumber)
+//            //order price780
+//            intent.putExtra(CowpayConstantKeys().Amount, memberItem.paymentCreationRequest?.settlementAmounts?.amount?.toString())
+//            //user data
+//            intent.putExtra(CowpayConstantKeys().CustomerName, memberItem.engineerName)
+//            intent.putExtra(CowpayConstantKeys().CustomerMobile, "01200000000")
+//            intent.putExtra(CowpayConstantKeys().CustomerEmail, "customer@customer.com")
+//            //user id
+//            intent.putExtra(CowpayConstantKeys().CustomerMerchantProfileId, memberItem.paymentCreationRequest?.userUniqueIdentifier)
+//
+//
+//            startActivityForResult(intent, CowpayConstantKeys().PaymentMethodsActivityRequestCode)
         }
     }
 
@@ -213,6 +213,10 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
             } else {
                 state.member?.let {
                     memberItem.paymentCreationRequest = it.paymentCreationRequest
+                    // static set
+                    memberItem.paymentCreationRequest?.sender?.id = "071"
+                    memberItem.paymentCreationRequest?.serviceCode = "171"
+                    memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode = "647"
                     memberItem.paymentCreationRequest?.senderRequestNumber = it.paymentCreationRequest?.senderRequestNumber!!
                     var intent = Intent(context, PaymentMethodsActivity::class.java)
                     intent.putExtra(CowpayConstantKeys().MerchantCode, "GHIu9nk25D5z")
