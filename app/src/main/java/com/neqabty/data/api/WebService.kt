@@ -153,13 +153,7 @@ interface WebService {
             @Part doc5: MultipartBody.Part?
     ): Observable<ApiResponse<Unit>>
 
-    @POST("api/v1/login/member/mobile")
-    fun loginVisitor(@Body loginVisitorRequest: LoginVisitorRequest): Observable<ApiResponse<UserData>>
-
-    @POST("api/v1/upgrade/member/client")
-    fun loginUser(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>
-
-    @POST("api/Auth/Login")
+    @POST("api/user/login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>
 
     @POST("api/Auth/SignUp")

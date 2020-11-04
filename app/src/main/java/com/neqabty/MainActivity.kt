@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.ui.login.LoginFragmentDirections
 import com.neqabty.presentation.util.*
 import dagger.android.AndroidInjector
@@ -62,59 +63,17 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 .get(MainViewModel::class.java)
 
         setSupportActionBar(toolbar)
-//        verifyAvailableNetwork()//TODO
-//        getToken()
+        getToken()
 //        checkRoot()
         startActivities()
-        mainViewModel.viewState.observe(this, Observer {
-            it.user?.let {
-                PreferencesHelper(this).jwt = it.token
 
-                if(PreferencesHelper(this).mobile.isNotBlank() && PreferencesHelper(this).user.isNotBlank() ){ // client
-                    mainViewModel.registerUser(
-                            PreferencesHelper(this).mobile,
-                            PreferencesHelper(this).mainSyndicate,
-                            PreferencesHelper(this).subSyndicate,
-                            PreferencesHelper(this).token,
-                            PreferencesHelper(this),
-                            PreferencesHelper(this).user)
-                }
-//                else if(PreferencesHelper(this).mobile.isNotBlank()) { // visitor
-//                    }
-                PreferencesHelper(this).token = newToken
-            }
-
-            invalidateOptionsMenu()
+        Constants.isFirebaseTokenUpdated.observe(this, Observer {
+            if(it)
+                getToken()
         })
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
-//    private fun verifyAvailableNetwork() {
-//        val connectivityManager =
-//                this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-//        val networkInfo = connectivityManager.activeNetworkInfo
-//        if (networkInfo != null && networkInfo.isConnected) {
-//            getToken()
-//            startActivities()
-//        } else {
-//            showConnectionAlert()
-//        }
-//    }
-
-//    private fun showConnectionAlert() {
-//        val builder = AlertDialog.Builder(this@MainActivity)
-//        builder.setTitle(getString(R.string.alert_title))
-//        builder.setMessage(getString(R.string.no_connection_msg))
-//        builder.setCancelable(false)
-//        builder.setPositiveButton(getString(R.string.no_connection_retry)) { dialog, which ->
-//            verifyAvailableNetwork()
-//        }
-//        builder.setNegativeButton(getString(R.string.no_connection_cancel)) { dialog, which ->
-//            finishAffinity()
-//        }
-//        val dialog: AlertDialog = builder.create()
-//        dialog.show()
-//    }
 
     //    private fun checkRoot(){
 //        if (DeviceUtils().isDeviceRooted()) {
@@ -172,6 +131,13 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                     }
                 }
                 R.id.medical_fragment -> {
+//                    Thread(Runnable {
+//                        try {
+//                            FirebaseInstanceId.getInstance().deleteInstanceId()
+//                        } catch (e: IOException) {
+//                            e.printStackTrace()
+//                        }
+//                    }).start()
                     navController.navigate(R.id.chooseAreaFragment)
                 }
                 R.id.inquiry_fragment -> {
@@ -268,8 +234,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                         newToken = task.result?.token!!
                         if (!newToken.equals(PreferencesHelper(this).token)) // Token has been changed
                         {
-                            if(PreferencesHelper(this).mobile.isNotBlank()){ // visitor
-                                mainViewModel.login(PreferencesHelper(this).mobile, newToken, PreferencesHelper(this))
+                            if(PreferencesHelper(this).mobile.isNotBlank()){ // visitor or client
+                                mainViewModel.login(PreferencesHelper(this).mobile, PreferencesHelper(this).user, newToken, PreferencesHelper(this))
                             }
                         }
                     }

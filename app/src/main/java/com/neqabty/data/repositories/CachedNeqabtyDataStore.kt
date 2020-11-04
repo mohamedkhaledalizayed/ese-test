@@ -239,11 +239,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         return neqabtyCache.saveTrips(trips)
     }
 
-    override fun loginUser(mobile: String, userNumber: String, token: String): Observable<UserEntity> {
-        return neqabtyCache.getUser()
-    }
-
-    override fun loginVisitor(mobile: String, token: String): Observable<UserEntity> {
+    override fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String): Observable<UserEntity> {
         return neqabtyCache.getUser()
     }
 

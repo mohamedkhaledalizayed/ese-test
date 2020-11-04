@@ -77,8 +77,8 @@ class AppModule {
                 .build()
 
         return Retrofit.Builder()
-//                .baseUrl("http://3.131.229.146:44392/") // TEST
-                .baseUrl("http://3.131.229.146/") // PROD
+                .baseUrl("http://3.131.229.146:44392/") // TEST
+//                .baseUrl("http://3.131.229.146/") // PROD
 //                .baseUrl("http://front.neqabty.com/")
 //                .baseUrl("http://192.168.178.38/")
 //            .baseUrl("https://neqabty-stage.efinance.com.eg/")
@@ -143,20 +143,14 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideLoginUser(neqabtyRepository: NeqabtyRepository): GetVisitorLoggedIn {
-        return GetVisitorLoggedIn(ASyncTransformer(), neqabtyRepository)
+    fun provideLogin(neqabtyRepository: NeqabtyRepository): Login {
+        return Login(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
     @Provides
     fun provideSignupUser(neqabtyRepository: NeqabtyRepository): SignupUser {
         return SignupUser(ASyncTransformer(), neqabtyRepository)
-    }
-
-    @Singleton
-    @Provides
-    fun provideGetUserRegistered(neqabtyRepository: NeqabtyRepository): GetUserLoggedIn {
-        return GetUserLoggedIn(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

@@ -1,7 +1,7 @@
 package com.neqabty.presentation.ui.login
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.GetVisitorLoggedIn
+import com.neqabty.domain.usecases.Login
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.UserUI
@@ -10,9 +10,10 @@ import com.neqabty.presentation.util.PreferencesHelper
 
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(val getVisitorLoggedIn: GetVisitorLoggedIn) : BaseViewModel() {
+class LoginViewModel @Inject constructor(val login: Login) : BaseViewModel() {
 
     private val userEntityToUIMapper = UserEntityUIMapper()
+
     // ////////////////////////////////////////////
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<LoginViewState> = MutableLiveData()
@@ -22,12 +23,12 @@ class LoginViewModel @Inject constructor(val getVisitorLoggedIn: GetVisitorLogge
     }
 
     fun login(
-        mobile: String,
-        token: String,
-        prefs: PreferencesHelper
+            mobile: String,
+            token: String,
+            prefs: PreferencesHelper
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(getVisitorLoggedIn.login(mobile, token)
+        addDisposable(login.login(Login.PARAM_ACTION_LOGIN, mobile, "", token, prefs.token)
                 .map {
                     it.let {
                         userEntityToUIMapper.mapFrom(it)
@@ -35,7 +36,8 @@ class LoginViewModel @Inject constructor(val getVisitorLoggedIn: GetVisitorLogge
                 }.subscribe(
                         {
                             prefs.token = token
-                            onUserReceived(it) },
+                            onUserReceived(it)
+                        },
                         { errorState.value = handleError(it) }
                 )
         )

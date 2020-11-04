@@ -1,8 +1,7 @@
 package com.neqabty
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.GetUserLoggedIn
-import com.neqabty.domain.usecases.GetVisitorLoggedIn
+import com.neqabty.domain.usecases.Login
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.UserUI
@@ -10,7 +9,7 @@ import com.neqabty.presentation.mappers.UserEntityUIMapper
 import com.neqabty.presentation.util.PreferencesHelper
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(val getUserLoggedIn: GetUserLoggedIn, val getVisitorLoggedIn: GetVisitorLoggedIn) : BaseViewModel() {
+class MainViewModel @Inject constructor(val login: Login) : BaseViewModel() {
     private val userEntityToUIMapper = UserEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
@@ -20,34 +19,14 @@ class MainViewModel @Inject constructor(val getUserLoggedIn: GetUserLoggedIn, va
         viewState.value = MainViewState()
     }
 
-    fun registerUser(
-            mobile: String,
-            mainSyndicateId: Int,
-            subSyndicateId: Int,
-            token: String,
-            prefs: PreferencesHelper,
-            userNumber: String
-    ) {
-        addDisposable(getUserLoggedIn.getUserRegistered(mobile, mainSyndicateId, subSyndicateId, token, userNumber)
-                .subscribe(
-                        {
-                            prefs.token = token
-                            prefs.isRegistered = true
-                            viewState.value?.copy(
-                                    isLoading = false)
-                        },
-                        { errorState.value = handleError(it) }
-                ))
-    }
-
-
     fun login(
             mobile: String,
+            userNumber: String,
             token: String,
             prefs: PreferencesHelper
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(getVisitorLoggedIn.login(mobile, token)
+        addDisposable(login.login(Login.PARAM_ACTION_LOGIN, mobile, userNumber, token, prefs.token)
                 .map {
                     it.let {
                         userEntityToUIMapper.mapFrom(it)

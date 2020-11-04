@@ -10,10 +10,13 @@ import javax.inject.Singleton
 class UserEntityUIMapper @Inject constructor() : Mapper<UserEntity, UserUI>() {
 
     override fun mapFrom(from: UserEntity): UserUI {
-        return UserUI(
-                token = from.token,
+        val userUI = UserUI(
+                mobile = from.mobile,
                 type = from.type,
-                name = from.name
+                details = from.details?.map {userDetails ->
+                    return@map UserUI.UserDetails(userDetails.name, userDetails.userNumber)
+                }
         )
+        return userUI
     }
 }

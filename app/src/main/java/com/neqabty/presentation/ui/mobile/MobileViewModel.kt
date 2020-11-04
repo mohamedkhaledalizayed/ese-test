@@ -1,21 +1,13 @@
 package com.neqabty.presentation.ui.mobile
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.GetUserLoggedIn
+import com.neqabty.domain.usecases.Login
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
-import com.neqabty.presentation.mappers.DoctorEntityUIMapper
 import com.neqabty.presentation.util.PreferencesHelper
-import retrofit2.HttpException
-
 import javax.inject.Inject
-import retrofit2.adapter.rxjava2.Result.response
-import android.R.string
-import org.json.JSONObject
 
-class MobileViewModel @Inject constructor(val getUserLoggedIn: GetUserLoggedIn) : BaseViewModel() {
-
-    private val doctorEntityUIMapper = DoctorEntityUIMapper()
+class MobileViewModel @Inject constructor(val login: Login) : BaseViewModel() {
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<MobileViewState> = MutableLiveData()
@@ -25,21 +17,20 @@ class MobileViewModel @Inject constructor(val getUserLoggedIn: GetUserLoggedIn) 
     }
 
     fun registerUser(
-        mobile: String,
-        mainSyndicateId: Int,
-        subSyndicateId: Int,
-        token: String,
-        prefs: PreferencesHelper,
-        userNumber: String
+            mobile: String,
+            userNumber: String,
+            token: String,
+            prefs: PreferencesHelper
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
 
-        addDisposable(getUserLoggedIn.getUserRegistered(mobile, mainSyndicateId, subSyndicateId, token, userNumber)
+        addDisposable(login.login(Login.PARAM_ACTION_UPGRADE, mobile, userNumber, token, prefs.token)
                 .subscribe(
                         {
                             prefs.token = token
                             prefs.mobile = mobile
-                            prefs.name = it.name!!
+                            prefs.user = it.details!![0].userNumber!!
+                            prefs.name = it.details!![0].name!!
                             prefs.isRegistered = true
                             viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = true)
                         },

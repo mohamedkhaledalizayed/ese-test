@@ -67,50 +67,39 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
         })
         loginViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
-                llSuperProgressbar.visibility = View.VISIBLE
                 login()
             }, cancelCallback = {
                 llSuperProgressbar.visibility = View.GONE
                 navController().navigateUp()
             }, message = error?.message)
-//            throwable?.let {
-//                Toast.makeText(requireContext(), throwable.message, Toast.LENGTH_LONG).show()
-//            }
         })
     }
 
     private fun handleViewState(state: LoginViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.user?.let {
-            PreferencesHelper(requireContext()).mobile = edMobile.text.toString()
-            PreferencesHelper(requireContext()).jwt = it.token
-
+            //TODO subscribe
+            //TODO set coming data it.details!![0]
+            PreferencesHelper(requireContext()).mobile = it.mobile
+            PreferencesHelper(requireContext()).userType = it.type
             PreferencesHelper(requireContext()).mainSyndicate = 5
             PreferencesHelper(requireContext()).subSyndicate = 0
+            if(it.type.equals("client")){
+                PreferencesHelper(requireContext()).name = it.details!![0].name!!
+                PreferencesHelper(requireContext()).user = it.details!![0].userNumber!!
+                PreferencesHelper(requireContext()).isRegistered = true
+            }
             navController().navigate(LoginFragmentDirections.openHome())
         }
     }
 
     fun initializeViews() {
         binding.bSend.setOnClickListener {
-//            PreferencesHelper(requireContext()).mobile = edMobile.text.toString()
-//            PreferencesHelper(requireContext()).jwt = ""
-//
-//            PreferencesHelper(requireContext()).mainSyndicate = 5
-//            PreferencesHelper(requireContext()).subSyndicate = 0
-//            navController().navigate(LoginFragmentDirections.openHome())
             login()
         }
-
-//        bSkip.setOnClickListener {
-//            PreferencesHelper(requireContext()).mobile = "01119850766"
-//            PreferencesHelper(requireContext()).jwt = ""
-//            navController().navigate(LoginFragmentDirections.openSyndicatesFragment())
-//        }
     }
 
     fun login() {
-        llSuperProgressbar.visibility = View.VISIBLE
         if (isDataValid(edMobile.text.toString())) {
             if (PreferencesHelper(requireContext()).token.isNotBlank())
                 loginViewModel.login(edMobile.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
@@ -124,9 +113,6 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
                                 val token = task.result?.token
                                 loginViewModel.login(edMobile.text.toString(), token!!, PreferencesHelper(requireContext()))
                             }
-//                            catch (e: Exception) {
-//                                showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
-//                            }
                         })
             }
         }

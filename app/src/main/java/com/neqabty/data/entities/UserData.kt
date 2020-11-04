@@ -6,12 +6,17 @@ import com.neqabty.data.api.Response
 
 @Entity(primaryKeys = ["id"])
 data class UserData(
-    @field:SerializedName("token")
-    var token: String = "",
-
-    @field:SerializedName("type") //
-    var type: String? = "",
-
-    @field:SerializedName("name") //
-    var name: String? = ""
-) : Response()
+        @field:SerializedName("mobile")
+        var mobile: String = "",
+        @field:SerializedName("type")
+        var type: String? = "",
+        @field:SerializedName("details")
+        var details: List<UserDetails>? = null
+) : Response() {
+    data class UserDetails(
+            @field:SerializedName("name")
+            var name: String?,
+            @field:SerializedName("user_number")
+            var userNumber: String?
+    )
+}

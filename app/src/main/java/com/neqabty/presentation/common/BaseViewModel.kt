@@ -30,7 +30,8 @@ open class BaseViewModel : ViewModel() {
 
             if (exception.code() == 406) {
                 try {
-                    return Throwable(JSONObject(exception.response().errorBody()?.string()).getString("status_message_ar"))
+                    val errorObject = JSONObject(exception.response().errorBody()?.string())
+                    return Throwable(errorObject.getString("status_message_ar"))
                 } catch (e: Exception) {
                     return Throwable("حدث خطأ بالإتصال")
                 }

@@ -20,7 +20,6 @@ import com.neqabty.R
 import com.neqabty.databinding.MobileFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
@@ -68,9 +67,9 @@ class MobileFragment : BaseFragment(), Injectable {
         })
         mobileViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
-                llSuperProgressbar.visibility = View.VISIBLE
                 login()
             }, cancelCallback = {
+                llSuperProgressbar.visibility = View.GONE
                 navController().navigateUp()
             }, message = error?.message)
         })
@@ -106,7 +105,6 @@ class MobileFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: MobileViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful) {
-            PreferencesHelper(requireContext()).user = binding.edMemberNumber.text.toString()
             activity?.invalidateOptionsMenu()
             when (type) {
                 1 -> navController().navigate(
@@ -137,19 +135,18 @@ class MobileFragment : BaseFragment(), Injectable {
     }
 
     fun login() {
-        Constants.JWT = PreferencesHelper(requireContext()).jwt
         if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString())) {
             if (PreferencesHelper(requireContext()).token.isNotBlank())
-                mobileViewModel.registerUser(binding.edMobile.text.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
+                mobileViewModel.registerUser(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
             else {
                 FirebaseInstanceId.getInstance().instanceId
                         .addOnCompleteListener(OnCompleteListener { task ->
+                            llSuperProgressbar.visibility = View.GONE
                             if (!task.isSuccessful)
                                 showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
                             else {
                                 val token = task.result?.token
-                                mobileViewModel.registerUser(binding.edMobile.toString(), PreferencesHelper(requireContext()).mainSyndicate, PreferencesHelper(requireContext()).subSyndicate, token
-                                        ?: "", PreferencesHelper(requireContext()), binding.edMemberNumber.text.toString())
+                                mobileViewModel.registerUser(binding.edMobile.toString(), binding.edMemberNumber.text.toString(), token!!, PreferencesHelper(requireContext()))
                             }
                         })
             }

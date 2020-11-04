@@ -93,9 +93,7 @@
     <string name="selectSubSyndicate">اختر النقابة</string>
     <string name="confirmation_sent">تم ارسال الرقم التأكيدي لرقم الجوال الخاص بك</string>
     <string name="enter_confirmation_code">من فضلك ادخل الرمز التأكيدي</string>
-    <string name="resend_code">لم يصلني الرمز التأكيدي ....
-    <font color="#1d1ad2"><u>اعادة ارسال</u></font>
-    </string>
+    <string name="resend_code"> لم يصلني الرمز التأكيدي ....اعادة ارسال %s</string>
     <string name="congratulations">تم التسجيل بنجاح</string>
     <string name="request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
     <string name="request_status">طلبكم تحت الدراسة</string>
@@ -116,8 +114,10 @@
 
     <string name="mobile_title">تسجيل دخول</string>
     <string name="enter_mobile">برجاء ادخال رقم الهاتف المحمول الخاص بك</string>
+    <string name="login_visitor_enter_mobile">برجاء ادخال رقم الهاتف المحمول لانشاء حسابك الخاص</string>
     <string name="choose_service">اختار الخدمة</string>
     <string name="enter_member_number">ادخل رقم العضوية</string>
+    <string name="login_member_enter_member_number">برجاء ادخال رقم العضوية الخاص بك لاستكمال بيانات الحساب</string>
     <string name="medicalRequest">تقديم مطالبة طبية</string>
     <string name="syndicateNumber">رقم العضوية</string>
     <string name="member_name">اسم العضو</string>

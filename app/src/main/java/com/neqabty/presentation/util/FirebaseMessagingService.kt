@@ -15,6 +15,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.neqabty.MainActivity
 import com.neqabty.R
+import com.neqabty.presentation.common.Constants
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
@@ -22,7 +23,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String?) {
-        sendRegistrationToServer(token)
+        token?.let {
+            if(!token.equals(PreferencesHelper(applicationContext).token))
+                sendRegistrationToServer(token)
+        }
     }
 
     private fun scheduleJob() {
@@ -37,9 +41,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun handleNow() {
     }
 
-    private fun sendRegistrationToServer(token: String?) {
-        PreferencesHelper(applicationContext).token = token!!
-        PreferencesHelper(applicationContext).isRegistered = false
+    private fun sendRegistrationToServer(token: String) {
+//        PreferencesHelper(applicationContext).token = token!!
+//        PreferencesHelper(applicationContext).isRegistered = false
+        Constants.isFirebaseTokenUpdated.postValue(true)
     }
 
     private fun sendNotification(remoteMessage: RemoteMessage?) {

@@ -100,6 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/payment_method"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:visibility="visible"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large" />
@@ -121,32 +122,34 @@
                         android:layout_marginEnd="20dp"
                         android:checked="true"
                         android:text="@string/payment_card"
-                        android:textSize="@dimen/text_size_large"
-                        android:buttonTint="@color/colorPrimary" />
+                        android:textSize="@dimen/text_size_medium"
+                        android:buttonTint="@color/dark_green" />
 
                     <RadioButton
                         android:id="@+id/rb_channel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/payment_channel"
-                        android:textSize="@dimen/text_size_large"
-                        android:buttonTint="@color/colorPrimary" />
+                        android:textSize="@dimen/text_size_medium"
+                        android:buttonTint="@color/dark_green" />
 
                     <RadioButton
                         android:id="@+id/rb_mobileWallet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/payment_wallet"
-                        android:textSize="@dimen/text_size_large"
-                        android:buttonTint="@color/colorPrimary"/>
+                        android:visibility="gone"
+                        android:textSize="@dimen/text_size_medium"
+                        android:buttonTint="@color/dark_green"/>
 
                     <RadioButton
                         android:id="@+id/rb_meeza"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/payment_meeza"
-                        android:textSize="@dimen/text_size_large"
-                        android:buttonTint="@color/colorPrimary" />
+                        android:textSize="@dimen/text_size_medium"
+                        android:visibility="gone"
+                        android:buttonTint="@color/dark_green" />
 
                 </RadioGroup>
 

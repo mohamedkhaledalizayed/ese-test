@@ -1,15 +1,16 @@
 package com.neqabty.presentation.ui.updateDataVerification
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -32,13 +33,16 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    lateinit var verificationCode: String
-
+    var verificationCode: String = ""
+    private var counterTimeout: Long = 30000
+    private var isTimerFinished = true
+    lateinit var timer: CountDownTimer
     lateinit var updateDataVerificationViewModel: UpdateDataVerificationViewModel
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -53,6 +57,7 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         updateDataVerificationViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(UpdateDataVerificationViewModel::class.java)
 
@@ -62,11 +67,22 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
         updateDataVerificationViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                updateDataVerificationViewModel.verifyUser(PreferencesHelper(requireContext()).user, PreferencesHelper(requireContext()).mobile)
+                verifyUser()
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
+        initializeViews()
+    }
+
+    override fun onPause() {
+        super.onPause()
+//        binding.counter = ""
+//        cancelTimer()
+//        tvResend.isEnabled = true
+    }
+
+    private fun verifyUser() {
         updateDataVerificationViewModel.verifyUser(PreferencesHelper(requireContext()).user, PreferencesHelper(requireContext()).mobile)
     }
 
@@ -74,17 +90,50 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading && state.code.isNotEmpty()) {
             verificationCode = state.code
-            initializeViews()
+            startCountingDown()
         }
     }
 
     fun initializeViews() {
-        svContent.visibility = View.VISIBLE
         bSend.setOnClickListener {
-            if (binding.edVerificationNumber.text.toString() == verificationCode)
+            if (binding.edVerificationNumber.text.toString() == verificationCode && binding.edVerificationNumber.text.toString().isNotEmpty())
                 navController().navigate(UpdateDataVerificationFragmentDirections.updateDataDetails())
             else
                 showErrorAlert(getString(R.string.wrong_verification_code))
+        }
+        tvResend.setOnClickListener {
+            verifyUser()
+        }
+        startCountingDown()
+    }
+
+
+    fun startCountingDown() {
+        if (isTimerFinished) {
+            timer = object : CountDownTimer(counterTimeout, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    try {
+                        binding.counter = (millisUntilFinished / 1000).toString()
+                    } catch (e: Exception) {
+                    }
+                }
+
+                override fun onFinish() {
+                    try {
+                        binding.counter = ""
+                        tvResend.setTextColor(resources.getColor(R.color.colorPrimary))
+                        tvResend.isEnabled = true
+                    } catch (e: Exception) {
+                    }
+                    timer.cancel()
+                    isTimerFinished = true
+                }
+            }
+            timer.start()
+            isTimerFinished = false
+
+            tvResend.isEnabled = false
+            tvResend.setTextColor(resources.getColor(R.color.gray_dark))
         }
     }
 
@@ -99,7 +148,6 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
         var dialog = builder?.create()
         dialog?.show()
     }
-
 // endregion
 
     fun navController() = findNavController()

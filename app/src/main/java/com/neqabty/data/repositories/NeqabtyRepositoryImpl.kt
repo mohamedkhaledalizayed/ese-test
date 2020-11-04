@@ -297,13 +297,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
                     saveUser(user)
                 }
     }
-
-    override fun loginUser(mobile: String, userNumber: String, token: String): Observable<UserEntity> {
-        return remoteDataStore.loginUser(mobile, userNumber, token)
-    }
-
-    override fun loginVisitor(mobile: String, token: String): Observable<UserEntity> {
-        return remoteDataStore.loginVisitor(mobile, token)
+    override fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String): Observable<UserEntity> {
+        return remoteDataStore.login(actionType, mobile, userNumber, newToken, oldToken)
     }
 
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {

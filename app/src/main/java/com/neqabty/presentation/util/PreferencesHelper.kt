@@ -13,10 +13,10 @@ class PreferencesHelper(context: Context) {
         private const val USER = "data.source.prefs.USER"
         private const val NAME = "data.source.prefs.NAME"
         private const val MOBILE = "data.source.prefs.MOBILE"
-        private const val JWT = "data.source.prefs.JWT"
         private const val TOKEN = "data.source.prefs.TOKEN"
         private const val IS_REGISTERED = "data.source.prefs.IS_REGISTERED"
         private const val NOTIFICATION_COUNT = "data.source.prefs.NOTIFICATION_COUNT"
+        private const val USER_TYPE = "data.source.prefs.USER_TYPE"
     }
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -36,9 +36,6 @@ class PreferencesHelper(context: Context) {
     var mobile = preferences.getString(MOBILE, "")!!
         set(value) = preferences.edit().putString(MOBILE, value).apply()
 
-    var jwt = preferences.getString(JWT, "")!!
-        set(value) = preferences.edit().putString(JWT, value).apply()
-
     var token = preferences.getString(TOKEN, "")!!
         set(value) = preferences.edit().putString(TOKEN, value).apply()
 
@@ -53,6 +50,9 @@ class PreferencesHelper(context: Context) {
 
     var notificationsCount = preferences.getInt(NOTIFICATION_COUNT, 0)
         set(value) = preferences.edit().putInt(NOTIFICATION_COUNT, value).apply()
+
+    var userType = preferences.getString(USER_TYPE, "")
+        set(value) = preferences.edit().putString(USER_TYPE, value).apply()
 
     fun isSyndicateChosen(): Boolean {
         return mainSyndicate != 0
