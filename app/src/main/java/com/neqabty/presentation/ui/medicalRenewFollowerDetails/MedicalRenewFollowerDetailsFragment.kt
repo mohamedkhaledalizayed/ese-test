@@ -1,5 +1,7 @@
-package com.neqabty.presentation.ui.home
+package com.neqabty.presentation.ui.medicalRenewFollowerDetails
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,27 +12,26 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
-import com.neqabty.databinding.WheelComplaintsFragmentBinding
+import com.neqabty.databinding.MedicalRenewFollowerDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.util.PreferencesHelper
+import com.neqabty.presentation.entities.MedicalRenewalUI
+import com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragmentArgs
 import com.neqabty.presentation.util.autoCleared
-import kotlinx.android.synthetic.main.wheel_payments_fragment.*
+import kotlinx.android.synthetic.main.medical_renew_follower_details_fragment.*
 import javax.inject.Inject
 
-class WheelComplaintsFragment : BaseFragment(), Injectable {
+class MedicalRenewFollowerDetailsFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
-
-    var binding by autoCleared<WheelComplaintsFragmentBinding>()
-
+    var binding by autoCleared<MedicalRenewFollowerDetailsFragmentBinding>()
 
     @Inject
     lateinit var appExecutors: AppExecutors
+
+    lateinit var followerItem: MedicalRenewalUI.FollowerItem
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -39,7 +40,7 @@ class WheelComplaintsFragment : BaseFragment(), Injectable {
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.wheel_complaints_fragment,
+                R.layout.medical_renew_follower_details_fragment,
                 container,
                 false,
                 dataBindingComponent
@@ -50,19 +51,24 @@ class WheelComplaintsFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        bGo.setOnClickListener {
-            if (PreferencesHelper(requireContext()).isRegistered)
-                navController().navigate(R.id.complaintsFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.COMPLAINTS)
-                navController().navigate(R.id.mobileFragment, bundle)
-            }
-        }
-
+        initializeViews()
     }
 
+    private fun initializeViews() {
+        val params = MedicalRenewFollowerDetailsFragmentArgs.fromBundle(arguments!!)
+        binding.followerItem = params.followerItem
+
+        bSave.setOnClickListener {
+            val intent = Intent()
+            val bundle = Bundle()
+//            bundle.putParcelable("companion", companion)
+            intent.putExtras(bundle)
+            parentFragmentManager?.setFragmentResult("bundle",bundle)
+            navController().navigateUp()
+        }
+    }
     //region
-    // endregion
+// endregion
+
     fun navController() = findNavController()
 }

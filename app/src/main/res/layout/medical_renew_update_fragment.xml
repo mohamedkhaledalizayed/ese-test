@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.text.Html" />
+        <import type="android.view.View"/>
+
+        <variable
+            name="title"
+            type="java.lang.String" />
+        <variable
+            name="medicalRenewalData"
+            type="com.neqabty.presentation.entities.MedicalRenewalUI" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_horizontal_large">
+
+        <ScrollView
+            android:id="@+id/svContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_horizontal_normal"
+            android:background="@drawable/rounded_bg"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@{Html.fromHtml(@string/name_title(medicalRenewalData.contact.name))}"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tvMemberNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@{Html.fromHtml(@string/user_number_title(medicalRenewalData.contact.contactID))}"
+                    android:textSize="@dimen/text_size_medium" />
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvAmount"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@{Html.fromHtml(@string/amount_title(medicalRenewalData.followers[0].name))}"-->
+<!--                    android:textSize="@dimen/text_size_medium" />-->
+
+
+                <TextView
+                    android:id="@+id/tvFollowers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/followers"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvFollowers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:listitem="@layout/follower_update_item" />
+
+
+                <Button
+                    android:id="@+id/bAddFollower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_blue"
+                    android:gravity="center"
+                    android:text="@string/add_follower"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/bSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_green"
+                    android:gravity="center"
+                    android:text="@string/submit"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+</layout>

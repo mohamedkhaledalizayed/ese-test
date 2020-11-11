@@ -159,6 +159,8 @@
     <string name="home_title">الرئيسية</string>
     <string name="news_title">الأخبار</string>
     <string name="trips_title">الرحلات</string>
+    <string name="medical_renew_title">مدفوعات طبية</string>
+    <string name="medical_renew_update_title">تعديل بيانات طبية</string>
     <string name="claiming_title">مطالبات طبية</string>
     <string name="medical_title">الدليل الطبي</string>
     <string name="inquiry_title">المدفوعات</string>
@@ -203,6 +205,9 @@
 
     <string name="alert_title">تنبيه</string>
     <string name="no_connection_msg">من فضلك تحقق من إتصالك بالإنترنت</string>
+    <string name="alert_no">لا</string>
+    <string name="alert_yes">نعم</string>
+    <string name="alert_confirm">تأكيد</string>
     <string name="no_connection_cancel">إلغاء</string>
     <string name="no_connection_retry">محاولة أخرى</string>
     <string name="invalid_mobile">من فضلك ادخل رقم موبايل صحيح</string>
@@ -262,6 +267,23 @@
     </string>
 
     <string name="pay">الدفع</string>
+    <string name="delivery_method">طريقة التوصيل</string>
+    <string name="delivery_mobile_title">رقم الموبايل</string>
+    <string name="delivery_mobile_hint">رقم الهاتف الذي سيتم التواصل عليه عند الاستلام</string>
+    <string name="home_delivery">توصيل للمنزل
+        (قيمة التوصيل :١٥ جنيه سيتم تحصيلها عند الاستلام)</string>
+    <string name="syndicate_delivery">إستلام من النقابة الفرعية
+    (بدون مصاريف توصيل )</string>
+
+    <string name="subSyndicate_delivery">
+    <![CDATA[<font color="#1d1ad2">النقابة الفرعية التابع لها المهندس: </font>]]>%s
+    </string>
+    <string name="followers">التابعين:</string>
+    <string name="add_follower">اضافة تابع</string>
+    <string name="save_follower">حفظ بيانات التابع</string>
+    <string name="remove_follower">حذف</string>
+    <string name="remove_follower_confirmation">هل تريد إتمام عملية الحذف؟!</string>
+    <string name="edit_follower">تعديل</string>
     <string name="inquiry">المدفوعات</string>
     <string name="details">التفاصيل:</string>
     <string name="payment_method">طريقة الدفع:</string>

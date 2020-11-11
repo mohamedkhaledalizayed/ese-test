@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+        <import type="android.view.View"/>
+
+        <variable
+            name="medicalRenewalPayment"
+            type="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_horizontal_large">
+
+        <ScrollView
+            android:id="@+id/svContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_horizontal_normal"
+            android:background="@drawable/rounded_bg"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvService"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@{medicalRenewalPayment.paymentItem.name}"
+                    android:textSize="@dimen/text_size_large" />
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvName"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+<!--                    android:text="@{Html.fromHtml(@string/name_title(medicalRenewalPayment.paymentItem.name))}"-->
+<!--                    android:textSize="@dimen/text_size_medium" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvMemberNumber"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+<!--                    android:text="@{Html.fromHtml(@string/user_number_title(medicalRenewalPayment.paymentItem.name))}"-->
+<!--                    android:textSize="@dimen/text_size_medium" />-->
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvRequestID"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@{Html.fromHtml(@string/expiration_date_title(memberItem.billDate))}"-->
+                <!--                    android:textSize="@dimen/text_size_medium" />-->
+
+                <TextView
+                    android:id="@+id/tvAmount"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:layout_height="wrap_content"
+                    android:text="@{Html.fromHtml(@string/amount_title(medicalRenewalPayment.paymentItem.amount))}"
+                    android:textSize="@dimen/text_size_medium" />
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvDetails"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/details"-->
+<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:visibility='@{medicalRenewalPayment.paymentItem == null ? View.GONE : View.VISIBLE}'-->
+<!--                    android:textSize="@dimen/text_size_medium" />-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:listitem="@layout/medical_renew_payment_item" />
+
+                <TextView
+                    android:id="@+id/tvPaymentMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payment_method"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:visibility="visible"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_large" />
+
+                <RadioGroup
+                    android:id="@+id/rgPaymentMechanismType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/rb_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:checked="true"
+                        android:text="@string/payment_card"
+                        android:textSize="@dimen/text_size_medium"
+                        android:buttonTint="@color/dark_green" />
+
+                    <RadioButton
+                        android:id="@+id/rb_channel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_channel"
+                        android:textSize="@dimen/text_size_medium"
+                        android:buttonTint="@color/dark_green" />
+
+                    <RadioButton
+                        android:id="@+id/rb_mobileWallet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_wallet"
+                        android:visibility="gone"
+                        android:textSize="@dimen/text_size_medium"
+                        android:buttonTint="@color/dark_green"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_meeza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_meeza"
+                        android:textSize="@dimen/text_size_medium"
+                        android:visibility="gone"
+                        android:buttonTint="@color/dark_green" />
+
+                </RadioGroup>
+
+                <Button
+                    android:id="@+id/bPay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_green"
+                    android:gravity="center"
+                    android:text="@string/pay"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+</layout>

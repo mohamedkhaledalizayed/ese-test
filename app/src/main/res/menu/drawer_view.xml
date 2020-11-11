@@ -8,73 +8,81 @@
     <!--<group>-->
     <item
         android:id="@+id/news_fragment"
-        android:title="@string/news_title"
-        android:icon="@drawable/ic_menu_news" />
+        android:icon="@drawable/ic_menu_news"
+        android:title="@string/news_title" />
     <item
         android:id="@+id/trips_fragment"
-        android:title="@string/trips_title"
-        android:icon="@drawable/ic_menu_trips" />
+        android:icon="@drawable/ic_menu_trips"
+        android:title="@string/trips_title" />
+    <item
+        android:id="@+id/medical_renew_update_fragment"
+        android:icon="@drawable/ic_menu_claiming"
+        android:title="@string/medical_renew_update_title" />
+    <item
+        android:id="@+id/medical_renew_fragment"
+        android:icon="@drawable/ic_menu_claiming"
+        android:title="@string/medical_renew_title" />
     <item
         android:id="@+id/claiming_fragment"
-        android:title="@string/claiming_title"
-        android:icon="@drawable/ic_menu_claiming" />
+        android:icon="@drawable/ic_menu_claiming"
+        android:title="@string/claiming_title" />
     <item
         android:id="@+id/medical_fragment"
-        android:title="@string/medical_title"
-        android:icon="@drawable/ic_menu_medical" />
+        android:icon="@drawable/ic_menu_medical"
+        android:title="@string/medical_title" />
     <item
         android:id="@+id/inquiry_fragment"
-        android:title="@string/inquiry_title"
-        android:icon="@drawable/ic_menu_payments" />
+        android:icon="@drawable/ic_menu_payments"
+        android:title="@string/inquiry_title" />
     <item
         android:id="@+id/engineering_records_fragment"
-        android:title="@string/engineering_records_title"
-        android:icon="@drawable/ic_menu_records" />
+        android:icon="@drawable/ic_menu_records"
+        android:title="@string/engineering_records_title" />
     <item
         android:id="@+id/update_data_fragment"
-        android:title="@string/update_data_title"
-        android:icon="@drawable/ic_menu_update_data" />
+        android:icon="@drawable/ic_menu_update_data"
+        android:title="@string/update_data_title" />
     <item
         android:id="@+id/complaints_fragment"
-        android:title="@string/complaints_title"
-        android:icon="@drawable/ic_menu_complaints" />
+        android:icon="@drawable/ic_menu_complaints"
+        android:title="@string/complaints_title" />
 
     <item
         android:id="@+id/about_fragment"
-        android:title="@string/about_title"
-        android:icon="@drawable/ic_menu_about_us" />
+        android:icon="@drawable/ic_menu_about_us"
+        android:title="@string/about_title" />
 
     <item
         android:id="@+id/about_app_fragment"
-        android:title="@string/aboutapp_title"
-        android:icon="@drawable/ic_menu_about_app" />
+        android:icon="@drawable/ic_menu_about_app"
+        android:title="@string/aboutapp_title" />
 
     <item
         android:id="@+id/settings_fragment"
-        android:title="@string/settings_title"
-        android:icon="@drawable/ic_menu_settings" />
+        android:icon="@drawable/ic_menu_settings"
+        android:title="@string/settings_title" />
 
     <!--</group>-->
 
     <!--<item-->
-        <!--android:id="@+id/settings_fragment"-->
-        <!--android:icon="@mipmap/setting"-->
-        <!--android:title="@string/settings_title" />-->
+    <!--android:id="@+id/settings_fragment"-->
+    <!--android:icon="@mipmap/setting"-->
+    <!--android:title="@string/settings_title" />-->
     <item
         android:id="@+id/contactus_fragment"
         android:icon="@drawable/ic_menu_contact_us"
         android:title="@string/contactus_title" />
     <!--<item-->
-        <!--android:id="@+id/aboutapp_fragment"-->
-        <!--android:icon="@mipmap/about_app_ic"-->
-        <!--android:title="@string/aboutapp_title" />-->
+    <!--android:id="@+id/aboutapp_fragment"-->
+    <!--android:icon="@mipmap/about_app_ic"-->
+    <!--android:title="@string/aboutapp_title" />-->
     <!--<item-->
-        <!--android:id="@+id/help_fragment"-->
-        <!--android:icon="@mipmap/help_ic"-->
-        <!--android:title="@string/help_title" />-->
+    <!--android:id="@+id/help_fragment"-->
+    <!--android:icon="@mipmap/help_ic"-->
+    <!--android:title="@string/help_title" />-->
     <!--<item-->
-        <!--android:id="@+id/logout_fragment"-->
-        <!--android:icon="@mipmap/logout_ic_2"-->
-        <!--android:title="@string/logout_title"-->
-        <!--android:visible="false" />-->
+    <!--android:id="@+id/logout_fragment"-->
+    <!--android:icon="@mipmap/logout_ic_2"-->
+    <!--android:title="@string/logout_title"-->
+    <!--android:visible="false" />-->
 </menu>

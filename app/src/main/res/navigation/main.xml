@@ -62,6 +62,16 @@
             android:name="type"
             app:argType="java.lang.Integer" />
         <action
+            android:id="@+id/openMedicalRenew"
+            app:destination="@id/medicalRenewFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openMedicalRenewUpdate"
+            app:destination="@id/medicalRenewUpdateFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openClaiming"
             app:destination="@id/claimingFragment"
             app:popUpTo="@id/homeFragment"
@@ -92,6 +102,59 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
+
+    <fragment
+        android:id="@+id/medicalRenewFragment"
+        android:name="com.neqabty.presentation.ui.medicalRenew.MedicalRenewFragment"
+        android:label="@string/medical_renew_title"
+        tools:layout="@layout/medical_renew_fragment">
+        <action
+            android:id="@+id/openMedicalRenewDetailsFragment"
+            app:destination="@id/medicalRenewDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicalRenewDetailsFragment"
+        android:name="com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewDetailsFragment"
+        android:label="@string/medical_renew_title"
+        tools:layout="@layout/medical_renew_details_fragment">
+        <argument
+            android:name="deliveryType"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="address"
+            app:argType="java.lang.String" />
+        <argument
+            android:name="mobile"
+            app:argType="java.lang.String" />
+        <argument
+            android:name="medicalRenewalUI"
+            app:argType="com.neqabty.presentation.entities.MedicalRenewalUI" />
+        <action
+            android:id="@+id/openPayment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicalRenewUpdateFragment"
+        android:name="com.neqabty.presentation.ui.medicalRenewUpdate.MedicalRenewUpdateFragment"
+        android:label="@string/medical_renew_update_title"
+        tools:layout="@layout/medical_renew_update_fragment">
+        <action
+            android:id="@+id/openMedicalRenewFollowerDetailsFragment"
+            app:destination="@id/medicalRenewFollowerDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicalRenewFollowerDetailsFragment"
+        android:name="com.neqabty.presentation.ui.medicalRenewFollowerDetails.MedicalRenewFollowerDetailsFragment"
+        android:label="@string/medical_renew_update_title"
+        tools:layout="@layout/medical_renew_follower_details_fragment">
+        <argument
+            android:name="followerItem"
+            app:argType="com.neqabty.presentation.entities.MedicalRenewalUI$FollowerItem" />
+    </fragment>
+
     <fragment
         android:id="@+id/claimingFragment"
         android:name="com.neqabty.presentation.ui.claiming.ClaimingFragment"

@@ -282,6 +282,22 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
         return api.getAppVersion().map { version -> appVersionDataEntityMapper.mapFrom(version) }
     }
 
+    private val medicalRenewalDataEntityMapper = MedicalRenewalDataEntityMapper()
+
+    override fun getMedicalRenewalData(userNumber: String): Observable<MedicalRenewalEntity> {
+        return api.getMedicalRenewData(userNumber).flatMap { renewalInfo ->
+            Observable.just(medicalRenewalDataEntityMapper.mapFrom(renewalInfo))
+        }
+    }
+
+    private val medicalRenewalPaymentDataEntityMapper = MedicalRenewalPaymentDataEntityMapper()
+
+    override fun inquireMedicalRenewalPayment(userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
+        return api.getMedicalRenewPaymentData(userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
+            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
+        }
+    }
+
     private val claimingValidationDataEntityMapper = ClaimingValidationDataEntityMapper()
 
     override fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity> {

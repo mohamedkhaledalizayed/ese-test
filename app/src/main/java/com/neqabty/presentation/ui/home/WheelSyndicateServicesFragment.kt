@@ -16,6 +16,7 @@ import com.neqabty.databinding.WheelRetireesFragmentBinding
 import com.neqabty.databinding.WheelSyndicateServicesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -57,7 +58,7 @@ class WheelSyndicateServicesFragment : BaseFragment(), Injectable {
                 navController().navigate(R.id.updateDataVerificationFragment)
             else {
                 val bundle: Bundle = Bundle()
-                bundle.putInt("type", 4)
+                bundle.putInt("type", Constants.UPDATE_DATA)
                 navController().navigate(R.id.mobileFragment, bundle)
             }
         }

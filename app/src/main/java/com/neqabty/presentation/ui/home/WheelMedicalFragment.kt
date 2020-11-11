@@ -13,6 +13,7 @@ import com.neqabty.R
 import com.neqabty.databinding.WheelMedicalFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -55,7 +56,25 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
                 navController().navigate(R.id.claimingFragment)
             else {
                 val bundle: Bundle = Bundle()
-                bundle.putInt("type", 1)
+                bundle.putInt("type", Constants.CLAIMING)
+                navController().navigate(R.id.mobileFragment, bundle)
+            }
+        }
+        bRenew.setOnClickListener {
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(R.id.medicalRenewFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_RENEW)
+                navController().navigate(R.id.mobileFragment, bundle)
+            }
+        }
+        bRenewUpdate.setOnClickListener {
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(R.id.medicalRenewUpdateFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_RENEW_UPDATE)
                 navController().navigate(R.id.mobileFragment, bundle)
             }
         }

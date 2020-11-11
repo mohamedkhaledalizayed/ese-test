@@ -121,12 +121,30 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 R.id.trips_fragment -> {
                     navController.navigate(R.id.tripsFragment)
                 }
+                R.id.medical_renew_fragment -> { // TODO
+                    if (PreferencesHelper(this).isRegistered)
+                        navController.navigate(R.id.medicalRenewFragment)
+                    else {
+                        val bundle: Bundle = Bundle()
+                        bundle.putInt("type", Constants.MEDICAL_RENEW)
+                        navController.navigate(R.id.mobileFragment, bundle)
+                    }
+                }
+                R.id.medical_renew_update_fragment -> {
+                    if (PreferencesHelper(this).isRegistered)
+                        navController.navigate(R.id.medicalRenewUpdateFragment)
+                    else {
+                        val bundle: Bundle = Bundle()
+                        bundle.putInt("type", Constants.MEDICAL_RENEW_UPDATE)
+                        navController.navigate(R.id.mobileFragment, bundle)
+                    }
+                }
                 R.id.claiming_fragment -> { // TODO
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.claimingFragment)
                     else {
                         val bundle: Bundle = Bundle()
-                        bundle.putInt("type", 1)
+                        bundle.putInt("type", Constants.CLAIMING)
                         navController.navigate(R.id.mobileFragment, bundle)
                     }
                 }
@@ -148,7 +166,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                         navController.navigate(R.id.engineeringRecordsDetailsFragment)
                     else {
                         val bundle: Bundle = Bundle()
-                        bundle.putInt("type", 3)
+                        bundle.putInt("type", Constants.RECORDS)
                         navController.navigate(R.id.mobileFragment, bundle)
                     }
                 }
@@ -157,7 +175,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                         navController.navigate(R.id.updateDataVerificationFragment)
                     else {
                         val bundle: Bundle = Bundle()
-                        bundle.putInt("type", 4)
+                        bundle.putInt("type", Constants.UPDATE_DATA)
                         navController.navigate(R.id.mobileFragment, bundle)
                     }
                 }
@@ -166,7 +184,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                         navController.navigate(R.id.complaintsFragment)
                     else {
                         val bundle: Bundle = Bundle()
-                        bundle.putInt("type", 5)
+                        bundle.putInt("type", Constants.COMPLAINTS)
                         navController.navigate(R.id.mobileFragment, bundle)
                     }
                 }

@@ -18,6 +18,7 @@ import com.neqabty.R
 import com.neqabty.databinding.Claiming1FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.GovernUI
@@ -207,7 +208,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             dialog.dismiss()
             navController().popBackStack()
             var bundle = Bundle()
-            bundle.putInt("type", 1)
+            bundle.putInt("type", Constants.CLAIMING)
             navController().navigate(R.id.homeFragment, bundle)
         }
 

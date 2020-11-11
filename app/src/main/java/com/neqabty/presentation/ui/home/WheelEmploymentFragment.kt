@@ -15,6 +15,7 @@ import com.neqabty.databinding.WheelPaymentsFragmentBinding
 import com.neqabty.databinding.WheelRetireesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -56,7 +57,7 @@ class WheelEmploymentFragment : BaseFragment(), Injectable {
                 navController().navigate(R.id.engineeringRecordsDetailsFragment)
             else {
                 val bundle: Bundle = Bundle()
-                bundle.putInt("type", 3)
+                bundle.putInt("type", Constants.RECORDS)
                 navController().navigate(R.id.mobileFragment, bundle)
             }
         }

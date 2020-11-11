@@ -18,6 +18,9 @@ import com.neqabty.presentation.ui.login.LoginViewModel
 import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsViewModel
 import com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsViewModel
 import com.neqabty.presentation.ui.medicalProviders.MedicalProvidersViewModel
+import com.neqabty.presentation.ui.medicalRenew.MedicalRenewViewModel
+import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewDetailsViewModel
+import com.neqabty.presentation.ui.medicalRenewUpdate.MedicalRenewUpdateViewModel
 import com.neqabty.presentation.ui.mobile.MobileViewModel
 import com.neqabty.presentation.ui.news.NewsViewModel
 import com.neqabty.presentation.ui.notificationDetails.NotificationDetailsViewModel
@@ -60,6 +63,21 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MobileViewModel::class)
     abstract fun bindMobileViewModel(mobileViewModel: MobileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MedicalRenewViewModel::class)
+    abstract fun bindMedicalRenewViewModel(medicalRenewViewModel: MedicalRenewViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MedicalRenewDetailsViewModel::class)
+    abstract fun bindMedicalRenewDetailsViewModel(medicalRenewDetailsViewModel: MedicalRenewDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MedicalRenewUpdateViewModel::class)
+    abstract fun bindMedicalRenewUpdateViewModel(medicalRenewUpdateViewModel: MedicalRenewUpdateViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -160,14 +178,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(EngineeringRecordsInquiryViewModel::class)
     abstract fun bindEngineeringRecordsInquiryViewModel(
-        engineeringRecordsInquiryViewModel: EngineeringRecordsInquiryViewModel
+            engineeringRecordsInquiryViewModel: EngineeringRecordsInquiryViewModel
     ): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(EngineeringRecordsDetailsViewModel::class)
     abstract fun bindEngineeringRecordsDetailsViewModel(
-        engineeringRecordsDetailsViewModel: EngineeringRecordsDetailsViewModel
+            engineeringRecordsDetailsViewModel: EngineeringRecordsDetailsViewModel
     ): ViewModel
 
     @Binds

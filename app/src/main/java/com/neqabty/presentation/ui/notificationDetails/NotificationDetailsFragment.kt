@@ -16,6 +16,7 @@ import com.neqabty.R
 import com.neqabty.databinding.NotificationDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.entities.NotificationUI
@@ -83,7 +84,7 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
         }
         binding.bPay.setOnClickListener {
             navController().navigate(
-                    NotificationDetailsFragmentDirections.openInquiryDetailsFragment(1, notificationItem.notificationType!!, MemberUI(amount = notificationItem.cost!!, requestID = notificationItem.approvalNumber!!, engineerNumber = notificationItem.userNumber.toString(), engineerName = notificationItem.name!!), if (notificationItem.notificationTypeID == 2) "9991" else "9992") // TODO serviceID, 2 trips 3 records
+                    NotificationDetailsFragmentDirections.openInquiryDetailsFragment(1, notificationItem.notificationType!!, MemberUI(amount = notificationItem.cost!!, requestID = notificationItem.approvalNumber!!, engineerNumber = notificationItem.userNumber.toString(), engineerName = notificationItem.name!!), if (notificationItem.notificationTypeID == 2) Constants.PAYMENT_TYPE_TRIPS else Constants.PAYMENT_TYPE_RECORDS) // TODO serviceID, 2 trips 3 records
             )
         }
     }

@@ -15,6 +15,7 @@ import com.neqabty.R
 import com.neqabty.databinding.MedicalProviderDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.ui.phones.PhonesAdapter
@@ -112,7 +113,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
                 navController().navigate(R.id.claimingFragment)
             else {
                 val bundle: Bundle = Bundle()
-                bundle.putInt("type", 1)
+                bundle.putInt("type", Constants.CLAIMING)
                 navController().navigate(R.id.mobileFragment, bundle)
             }
         }

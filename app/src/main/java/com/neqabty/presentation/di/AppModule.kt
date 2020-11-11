@@ -311,6 +311,18 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetMedicalRenewalData(neqabtyRepository: NeqabtyRepository): GetMedicalRenewalData {
+        return GetMedicalRenewalData(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMedicalRenewPaymentInquiry(neqabtyRepository: NeqabtyRepository): MedicalRenewPaymentInquiry {
+        return MedicalRenewPaymentInquiry(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideValidateUserForClaiming(neqabtyRepository: NeqabtyRepository): ValidateUserForClaiming {
         return ValidateUserForClaiming(ASyncTransformer(), neqabtyRepository)
     }

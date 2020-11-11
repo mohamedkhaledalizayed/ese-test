@@ -20,6 +20,7 @@ import com.neqabty.R
 import com.neqabty.databinding.MobileFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
@@ -107,28 +108,36 @@ class MobileFragment : BaseFragment(), Injectable {
         if (state.isSuccessful) {
             activity?.invalidateOptionsMenu()
             when (type) {
-                1 -> navController().navigate(
+                Constants.CLAIMING -> navController().navigate(
                         MobileFragmentDirections.openClaiming()
                 )
 
-                2 -> navController().navigate(
+                Constants.TRIPS -> navController().navigate(
                         MobileFragmentDirections.openTripReservation(TripsData.tripItem!!)
                 )
 
-                3 -> navController().navigate(
+                Constants.RECORDS -> navController().navigate(
                         MobileFragmentDirections.openEngineeringRecords()
                 )
 
-                4 -> navController().navigate(
+                Constants.UPDATE_DATA -> navController().navigate(
                         MobileFragmentDirections.openUpdateDataVerification()
                 )
 
-                5 -> navController().navigate(
+                Constants.COMPLAINTS -> navController().navigate(
                         MobileFragmentDirections.openComplaints()
                 )
 
-                6 -> navController().navigate(
+                Constants.CORONA -> navController().navigate(
                         MobileFragmentDirections.openCorona()
+                )
+
+                Constants.MEDICAL_RENEW -> navController().navigate(
+                        MobileFragmentDirections.openMedicalRenew()
+                )
+
+                Constants.MEDICAL_RENEW_UPDATE -> navController().navigate(
+                        MobileFragmentDirections.openMedicalRenewUpdate()
                 )
             }
         }

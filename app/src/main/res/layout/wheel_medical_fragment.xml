@@ -77,8 +77,38 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_horizontal_extra_large"
             android:layout_marginEnd="@dimen/margin_horizontal_extra_large"
+            android:layout_marginBottom="@dimen/margin_vertical_normal"
             android:background="@drawable/btn_blue"
             android:text="@string/wheel_enter_claiming"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintBottom_toTopOf="@id/bRenew"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/bRenew"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_horizontal_extra_large"
+            android:layout_marginBottom="@dimen/margin_vertical_normal"
+            android:layout_marginEnd="@dimen/margin_horizontal_extra_large"
+            android:background="@drawable/btn_green"
+            android:text="@string/medical_renew_title"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintBottom_toTopOf="@id/bRenewUpdate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/bRenewUpdate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_horizontal_extra_large"
+            android:layout_marginEnd="@dimen/margin_horizontal_extra_large"
+            android:background="@drawable/btn_blue"
+            android:text="@string/medical_renew_update_title"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_size_medium"
             app:layout_constraintBottom_toBottomOf="parent"

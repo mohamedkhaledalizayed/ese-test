@@ -20,6 +20,10 @@ import com.neqabty.presentation.ui.medicalMain.MedicalMainFragment
 import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsFragment
 import com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsFragment
 import com.neqabty.presentation.ui.medicalProviders.MedicalProvidersFragment
+import com.neqabty.presentation.ui.medicalRenew.MedicalRenewFragment
+import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewDetailsFragment
+import com.neqabty.presentation.ui.medicalRenewFollowerDetails.MedicalRenewFollowerDetailsFragment
+import com.neqabty.presentation.ui.medicalRenewUpdate.MedicalRenewUpdateFragment
 import com.neqabty.presentation.ui.mobile.MobileFragment
 import com.neqabty.presentation.ui.news.NewsFragment
 import com.neqabty.presentation.ui.newsDetails.NewsDetailsFragment
@@ -68,6 +72,18 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMobileFragment(): MobileFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMedicalRenewFragment(): MedicalRenewFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMedicalRenewDetailsFragment(): MedicalRenewDetailsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMedicalRenewUpdateFragment(): MedicalRenewUpdateFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMedicalRenewFollowerDetailsFragment(): MedicalRenewFollowerDetailsFragment
 
     @ContributesAndroidInjector
     abstract fun contributeClaimingFragment(): ClaimingFragment
