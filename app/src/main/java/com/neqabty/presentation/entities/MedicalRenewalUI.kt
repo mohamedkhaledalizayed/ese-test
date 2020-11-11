@@ -20,6 +20,8 @@ data class MedicalRenewalUI(
     data class FollowerItem(
             var name: String = "",
             var id: Int = 0,
-            var isDeleted: Boolean = false
+            var isDeleted: Boolean = false,
+            var birthDate: String = "",
+            var pic: String? = ""
     ) : Parcelable
 }

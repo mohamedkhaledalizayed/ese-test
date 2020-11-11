@@ -73,6 +73,10 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("Not yet implemented")
     }
 
+    override fun updateMedicalRenewalData(medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
+        TODO("Not yet implemented")
+    }
+
     override fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }

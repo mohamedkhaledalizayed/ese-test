@@ -298,6 +298,15 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
         }
     }
 
+    private val medicalRenewalEntityDataMapper = MedicalRenewalEntityDataMapper()
+    private val medicalRenewalUpdateDataEntityMapper = MedicalRenewalUpdateDataEntityMapper()
+
+    override fun updateMedicalRenewalData(medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
+        return api.updateMedicalRenewPaymentData(medicalRenewalEntityDataMapper.mapFrom(medicalRenewalData)).flatMap { updateInfoResult ->
+            Observable.just(medicalRenewalUpdateDataEntityMapper.mapFrom(updateInfoResult))
+        }
+    }
+
     private val claimingValidationDataEntityMapper = ClaimingValidationDataEntityMapper()
 
     override fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity> {

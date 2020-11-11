@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_horizontal_small"
             android:background="@drawable/rounded_green_bg"
-            android:duplicateParentState="true"
+            android:duplicateParentState="false"
             android:minHeight="1dp"
             android:minWidth="1dp"
             android:padding="@dimen/margin_horizontal_normal"

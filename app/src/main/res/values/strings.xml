@@ -281,6 +281,8 @@
     <string name="followers">التابعين:</string>
     <string name="add_follower">اضافة تابع</string>
     <string name="save_follower">حفظ بيانات التابع</string>
+    <string name="edit_follower_photo">تعديل الصورة</string>
+    <string name="add_follower_photo">إضافة صورة</string>
     <string name="remove_follower">حذف</string>
     <string name="remove_follower_confirmation">هل تريد إتمام عملية الحذف؟!</string>
     <string name="edit_follower">تعديل</string>

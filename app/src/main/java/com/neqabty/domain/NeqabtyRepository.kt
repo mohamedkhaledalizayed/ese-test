@@ -92,6 +92,7 @@ interface NeqabtyRepository {
     fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity>
     fun getMedicalRenewalData(userNumber: String): Observable<MedicalRenewalEntity>
     fun inquireMedicalRenewalPayment(userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity>
+    fun updateMedicalRenewalData(medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity>
     fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>
     fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity>

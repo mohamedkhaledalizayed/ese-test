@@ -127,6 +127,9 @@ interface WebService {
     @POST("http://test.boniantech.com/costcard/api/apiPaymentRequest/AddHealthCareRequest")
     fun getMedicalRenewPaymentData(@Query("oldRefId") contactId: String, @Query("deliveryLocation") locationType: Int, @Query("deliveryAddress") address: String, @Query("deliveryPhone") mobile: String): Observable<MedicalRenewalPaymentData>
 
+    @POST("http://test.boniantech.com/costcard/api/ApiHealthCare/MedBeneficiaryFollowersUpdate")
+    fun updateMedicalRenewPaymentData(@Body medicalRenewalDataRequest: MedicalRenewalData): Observable<MedicalRenewalUpdateData>
+
     @POST("api/v2/medical/Beneficiary")
     fun validateUser(@Body claimingValidationRequest: ClaimingValidationRequest): Observable<ApiResponse<ClaimingValidationData>>
 

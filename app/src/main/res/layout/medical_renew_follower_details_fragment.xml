@@ -40,15 +40,68 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:text="@{Html.fromHtml(@string/name_title(followerItem.name))}"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:text="@string/fullName"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/edName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:gravity="center"
+                    android:text="@{followerItem.name}"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    app:layout_constraintTop_toBottomOf="@id/tvName" />
 
                 <TextView
-                    android:id="@+id/tvMemberNumber"
+                    android:id="@+id/tvBirthDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:text="@{Html.fromHtml(@string/user_number_title(followerItem.id))}"
+                    android:text="@string/birth_date"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/spRelationDegree" />
+
+                <EditText
+                    android:id="@+id/edBirthDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:text="@{followerItem.birthDate}"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    app:layout_constraintTop_toBottomOf="@id/tvBirthDate" />
+
+                    <ImageView
+                        android:id="@+id/ivPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="false"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY" />
+
+                <Button
+                    android:id="@+id/bEditPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_blue"
+                    android:gravity="center"
+                    android:text="@string/edit_follower_photo"
+                    android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
 
                 <Button
@@ -62,6 +115,7 @@
                     android:text="@string/save_follower"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
+
             </LinearLayout>
 
         </ScrollView>

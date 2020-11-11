@@ -49,6 +49,11 @@ class FollowersUpdateAdapter(
                 removeCallback?.invoke(it)
             }
         }
+        binding.root.bEdit.setOnClickListener {
+            binding.follower?.let {
+                editCallback?.invoke(it)
+            }
+        }
 
         return binding
     }

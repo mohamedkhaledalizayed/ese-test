@@ -27,6 +27,10 @@ data class MedicalRenewalData(
             @field:SerializedName("BenID")
             var id: Int = 0,
             @field:SerializedName("ISDELETED")
-            var isDeleted: Boolean = false
+            var isDeleted: Boolean = false,
+            @field:SerializedName("BIRTHDATE")
+            var birthDate: String = "",
+            @field:SerializedName("PIC")
+            var pic: String? = ""
     )
 }

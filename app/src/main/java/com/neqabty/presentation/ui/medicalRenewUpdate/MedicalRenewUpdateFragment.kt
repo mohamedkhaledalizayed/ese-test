@@ -1,6 +1,5 @@
 package com.neqabty.presentation.ui.medicalRenewUpdate
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,8 +40,11 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
     lateinit var medicalRenewalUI: MedicalRenewalUI
 
     lateinit var selectedFollower: MedicalRenewalUI.FollowerItem
+
     @Inject
     lateinit var appExecutors: AppExecutors
+    var isEdit = true
+    var incrementedID = 2
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -109,9 +111,11 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
 
                     if (!dialog?.isShowing!!)
                         dialog?.show()
-                    },
+                },
                 editCallback = { follower ->
-                    navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(follower))
+                    selectedFollower = follower
+                    isEdit = true
+                    navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
                 })
         this.adapter = adapter
         binding.rvFollowers.adapter = adapter
@@ -121,23 +125,44 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
         binding.tvFollowers.visibility = if (medicalRenewalUI.followers?.filter { it.isDeleted == false }?.size == 0) View.INVISIBLE else View.VISIBLE
 
         bAddFollower.setOnClickListener {
-            medicalRenewalUI.followers?.get(0).let {
-                parentFragmentManager.setFragmentResultListener("bundle",
-                        this,
-                        FragmentResultListener { key, result ->
-                            val result = result.getString("bundle")
-                            medicalRenewalUI.followers?.add(medicalRenewalUI.followers?.get(0)!!)
-                            binding.tvFollowers.visibility = if (medicalRenewalUI.followers?.filter { it.isDeleted == false }?.size == 0) View.INVISIBLE else View.VISIBLE
-                        })
-                navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(it!!))
+            isEdit = false
+            parentFragmentManager.setFragmentResultListener("bundle",
+                    this,
+                    FragmentResultListener { key, result ->
+                        val updatedFollower = result.getParcelable<MedicalRenewalUI.FollowerItem>("followerItem") ?: MedicalRenewalUI.FollowerItem(id= incrementedID)
+                        if (isEdit) //TODO
+                        {
+                            medicalRenewalUI.followers?.replaceAll { followerItem ->
+                                if (followerItem.id == updatedFollower.id)
+                                    updatedFollower
+                                else
+                                    followerItem
+                            }
+
+                        } else {
+                            medicalRenewalUI.followers?.add(updatedFollower)
+                        }
+                        isEdit = false
+                        binding.tvFollowers.visibility = if (medicalRenewalUI.followers?.filter { it.isDeleted == false }?.size == 0) View.INVISIBLE else View.VISIBLE
+                    })
+            if (isEdit) //TODO
+            {
+                navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
+            } else {
+                incrementedID += 11
+                navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(MedicalRenewalUI.FollowerItem(id = incrementedID)))
             }
         }
         bSubmit.setOnClickListener {
+            medicalRenewUpdateViewModel.updateMedicalRenewalData(medicalRenewalUI)
         }
     }
 
     private fun handleViewState(state: MedicalRenewUpdateViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        state.medicalRenewalUpdateUI?.let {
+            return
+        }
         state.medicalRenewalUI?.let {
             state.medicalRenewalUI?.contact?.contactID = PreferencesHelper(requireContext()).user
 //            filteredFollowersList = state.medicalRenewalUI?.followers?.filter{ it.isDeleted == false }!!.toMutableList()
