@@ -35,7 +35,7 @@
     <string name="personalDetails">البيانات الشخصية</string>
     <string name="confirm">تأكيد</string>
     <string name="welcome">مرحبا بكم</string>
-    <string name="welcome_to_neqabty">مرحبا بكم في تطبيق نقابتي</string>
+    <string name="welcome_to_neqabty">مرحبا بكم في تطبيق نقابة المهندسين المصرية - نقابتي</string>
     <string name="main">الرئيسية</string>
     <string name="aboutNeqaba">عن النقابة</string>
     <string name="settings">الاعدادات</string>
@@ -159,8 +159,8 @@
     <string name="home_title">الرئيسية</string>
     <string name="news_title">الأخبار</string>
     <string name="trips_title">الرحلات</string>
-    <string name="medical_renew_title">مدفوعات طبية</string>
-    <string name="medical_renew_update_title">تعديل بيانات طبية</string>
+    <string name="medical_renew_title">اشتراكات رعاية صحية</string>
+    <string name="medical_renew_update_title">تعديل بيانات الرعاية الصحية</string>
     <string name="claiming_title">مطالبات طبية</string>
     <string name="medical_title">الدليل الطبي</string>
     <string name="inquiry_title">المدفوعات</string>
@@ -191,7 +191,7 @@
     <string name="wheel_seemore">شاهد المزيد</string>
     <string name="wheel_enter_service">الدخول على الخدمة</string>
     <string name="wheel_enter_medical">الدليل الطبي</string>
-    <string name="wheel_enter_claiming">المطالبات الطبية</string>
+    <string name="wheel_enter_claiming">موافقات الرعاية الصحية</string>
     <string name="wheel_enter_records">ارسل طلب تجديد سجل هندسى</string>
     <string name="wheel_enter_update_data">ارسل طلب تحديث بيانات</string>
     <string name="wheel_payments_content">وقتكم محل تقديرنا- متاح الآن أكثر من ٧٠ خدمة  مدفوعات الكترونية عن (بُعد)، ستضاف المزيد من الخدمات الأخرى قريبا.</string>
@@ -286,6 +286,7 @@
     <string name="remove_follower">حذف</string>
     <string name="remove_follower_confirmation">هل تريد إتمام عملية الحذف؟!</string>
     <string name="edit_follower">تعديل</string>
+    <string name="confirm_followers_edit_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم قريباً</string>
     <string name="inquiry">المدفوعات</string>
     <string name="details">التفاصيل:</string>
     <string name="payment_method">طريقة الدفع:</string>

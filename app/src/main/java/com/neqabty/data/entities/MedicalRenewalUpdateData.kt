@@ -6,6 +6,6 @@ import com.neqabty.data.api.Response
 
 @Entity(primaryKeys = ["id"])
 data class MedicalRenewalUpdateData(
-    @field:SerializedName("Id")
+    @field:SerializedName("ResultType")
     var requestID: String = ""
 ) : Response()

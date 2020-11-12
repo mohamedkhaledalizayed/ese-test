@@ -46,6 +46,8 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
     var isEdit = true
     var incrementedID = 2
 
+    var reservationRequested = false
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -81,7 +83,6 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
         })
 
         medicalRenewUpdateViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).user)
-//        medicalRenewViewModel.getMedicalRenewalData("2305693")
     }
 
     private fun initializeViews() {
@@ -90,79 +91,37 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
 
         val adapter = FollowersUpdateAdapter(dataBindingComponent, appExecutors,
                 removeCallback = { follower ->
-                    selectedFollower = follower
-                    builder = AlertDialog.Builder(requireContext())
-                    builder?.setTitle(getString(R.string.alert_title))
-                    builder?.setMessage(getString(R.string.remove_follower_confirmation))
-                    builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
-                        medicalRenewalUI.followers?.find { it.id == selectedFollower.id }?.isDeleted = true
-                        adapter.submitList(medicalRenewalUI.followers?.filter { it.isDeleted == false })
-                        adapter.notifyDataSetChanged()
-                        rvFollowers.adapter = adapter
-
-                        binding.tvFollowers.visibility = if (medicalRenewalUI.followers?.filter { it.isDeleted == false }?.size == 0) View.INVISIBLE else View.VISIBLE
-                    }
-                    builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
-                        dialog.dismiss()
-                    }
-
-                    if (dialog == null)
-                        dialog = builder?.create()
-
-                    if (!dialog?.isShowing!!)
-                        dialog?.show()
+                    removeFollower(follower)
                 },
                 editCallback = { follower ->
-                    selectedFollower = follower
-                    isEdit = true
-                    navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
+                    editFollower(follower)
                 })
         this.adapter = adapter
         binding.rvFollowers.adapter = adapter
         medicalRenewalUI.followers?.let {
             adapter.submitList(it.filter { it.isDeleted == false }.toMutableList())
         }
-        binding.tvFollowers.visibility = if (medicalRenewalUI.followers?.filter { it.isDeleted == false }?.size == 0) View.INVISIBLE else View.VISIBLE
 
         bAddFollower.setOnClickListener {
             isEdit = false
-            parentFragmentManager.setFragmentResultListener("bundle",
-                    this,
-                    FragmentResultListener { key, result ->
-                        val updatedFollower = result.getParcelable<MedicalRenewalUI.FollowerItem>("followerItem") ?: MedicalRenewalUI.FollowerItem(id= incrementedID)
-                        if (isEdit) //TODO
-                        {
-                            medicalRenewalUI.followers?.replaceAll { followerItem ->
-                                if (followerItem.id == updatedFollower.id)
-                                    updatedFollower
-                                else
-                                    followerItem
-                            }
-
-                        } else {
-                            medicalRenewalUI.followers?.add(updatedFollower)
-                        }
-                        isEdit = false
-                        binding.tvFollowers.visibility = if (medicalRenewalUI.followers?.filter { it.isDeleted == false }?.size == 0) View.INVISIBLE else View.VISIBLE
-                    })
-            if (isEdit) //TODO
-            {
-                navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
-            } else {
-                incrementedID += 11
-                navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(MedicalRenewalUI.FollowerItem(id = incrementedID)))
-            }
+            goToEditFollower()
         }
         bSubmit.setOnClickListener {
+            reservationRequested = true
             medicalRenewUpdateViewModel.updateMedicalRenewalData(medicalRenewalUI)
         }
+        updateFollowersTitleVisibility()
     }
 
     private fun handleViewState(state: MedicalRenewUpdateViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        state.medicalRenewalUpdateUI?.let {
-            return
-        }
+
+        if (!state.isLoading && reservationRequested)
+            state.medicalRenewalUpdateUI?.let {
+                reservationRequested = false
+                if (it.requestID.equals("1"))
+                    showSuccessAlert()
+            }
         state.medicalRenewalUI?.let {
             state.medicalRenewalUI?.contact?.contactID = PreferencesHelper(requireContext()).user
 //            filteredFollowersList = state.medicalRenewalUI?.followers?.filter{ it.isDeleted == false }!!.toMutableList()
@@ -172,6 +131,87 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
     }
 
     //region
+    private fun removeFollower(follower: MedicalRenewalUI.FollowerItem) {
+        selectedFollower = follower
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.alert_title))
+        builder?.setMessage(getString(R.string.remove_follower_confirmation))
+        builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
+            medicalRenewalUI.followers?.find { it.id == selectedFollower.id }?.isDeleted = true
+            adapter.submitList(medicalRenewalUI.followers?.filter { it.isDeleted == false })
+            adapter.notifyDataSetChanged()
+            rvFollowers.adapter = adapter
+
+            updateFollowersTitleVisibility()
+        }
+        builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        if (dialog == null)
+            dialog = builder?.create()
+
+        if (!dialog?.isShowing!!)
+            dialog?.show()
+    }
+
+    private fun editFollower(follower: MedicalRenewalUI.FollowerItem) {
+        selectedFollower = follower
+        isEdit = true
+        if(selectedFollower.isNew)
+            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(selectedFollower))
+        else
+            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
+    }
+
+    private fun goToEditFollower() {
+        parentFragmentManager.setFragmentResultListener("bundle", this, FragmentResultListener { key, result ->
+            val updatedFollower = result.getParcelable<MedicalRenewalUI.FollowerItem>("followerItem")!!
+            if (isEdit) {
+                medicalRenewalUI.followers?.replaceAll { followerItem ->
+                    if (followerItem.id == updatedFollower.id)
+                        updatedFollower
+                    else
+                        followerItem
+                }
+
+            } else {
+                if(medicalRenewalUI.followers?.find {it.id == updatedFollower.id } == null)
+                    medicalRenewalUI.followers?.add(updatedFollower)
+            }
+            isEdit = false
+            updateFollowersTitleVisibility()
+        })
+
+        if (isEdit) {
+            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
+        } else {
+            incrementedID += 11
+            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(MedicalRenewalUI.FollowerItem(id = incrementedID)))
+        }
+    }
+
+    private fun updateFollowersTitleVisibility() {
+        binding.tvFollowers.visibility = if (medicalRenewalUI.followers?.filter { it.isDeleted == false }?.size == 0) View.INVISIBLE else View.VISIBLE
+    }
+
+    fun showSuccessAlert() {
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.thanks))
+        builder?.setMessage(getString(R.string.confirm_followers_edit_msg))
+        builder?.setCancelable(false)
+        builder?.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
+        var dialog = builder?.create()
+        dialog?.show()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        savedInstanceState?.clear()
+    }
 // endregion
 
     fun navController() = findNavController()

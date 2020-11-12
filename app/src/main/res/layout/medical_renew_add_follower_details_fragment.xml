@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.text.Html" />
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
 
         <variable
             name="followerItem"
@@ -22,8 +24,8 @@
             android:id="@+id/svContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_horizontal_normal"
             android:background="@drawable/rounded_bg"
+            android:padding="@dimen/margin_horizontal_normal"
             android:scrollbars="none">
 
             <LinearLayout
@@ -40,9 +42,7 @@
                     android:text="@string/fullName"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edName"
@@ -50,11 +50,30 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_small"
                     android:gravity="center"
-                    android:enabled="false"
                     android:text="@{followerItem.name}"
                     android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tvRelation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/relation_degree"
+                    android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium"
-                    app:layout_constraintTop_toBottomOf="@id/tvName" />
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spRelationDegree"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:hint="@string/relation_degree"
+                    android:textDirection="rtl"
+                    android:textSize="@dimen/text_size_medium" />
+
 
                 <TextView
                     android:id="@+id/tvBirthDate"
@@ -64,9 +83,7 @@
                     android:text="@string/birth_date"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/spRelationDegree" />
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edBirthDate"
@@ -76,30 +93,51 @@
                     android:clickable="true"
                     android:editable="false"
                     android:focusable="false"
-                    android:enabled="false"
                     android:gravity="center"
                     android:text="@{followerItem.birthDate}"
                     android:textColor="@color/text_dark"
-                    android:textSize="@dimen/text_size_medium"
-                    app:layout_constraintTop_toBottomOf="@id/tvBirthDate" />
+                    android:textSize="@dimen/text_size_medium" />
 
-                    <ImageView
-                        android:id="@+id/ivPhoto"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:scaleType="fitXY" />
-
-                <Button
-                    android:id="@+id/bEditPhoto"
+                <TextView
+                    android:id="@+id/tvHint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/margin_vertical_large"
-                    android:background="@drawable/btn_blue"
-                    android:gravity="center"
-                    android:text="@string/edit_follower_photo"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_small" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvPhotos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/bAttachPhoto"
+                        android:nestedScrollingEnabled="true"
+                        android:clipToPadding="false"
+                        android:clipChildren="false"
+                        app:layoutManager="LinearLayoutManager"
+                        tools:listitem="@layout/photo_item" />
+
+                    <ImageView
+                        android:id="@+id/bAttachPhoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:elevation="@dimen/elevation_level_one"
+                        android:scaleType="fitXY"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@drawable/ic_add" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
                     android:id="@+id/bSave"

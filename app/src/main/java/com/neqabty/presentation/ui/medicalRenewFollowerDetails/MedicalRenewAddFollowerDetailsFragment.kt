@@ -5,7 +5,9 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -14,6 +16,8 @@ import android.util.Base64.NO_WRAP
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
@@ -24,38 +28,45 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.neqabty.AppExecutors
 import com.neqabty.R
-import com.neqabty.databinding.MedicalRenewFollowerDetailsFragmentBinding
+import com.neqabty.databinding.MedicalRenewAddFollowerDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalUI
+import com.neqabty.presentation.entities.PhotoUI
+import com.neqabty.presentation.ui.common.PhotosAdapter
 import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.autoCleared
-import kotlinx.android.synthetic.main.medical_renew_follower_details_fragment.*
-import java.io.File
-import java.io.IOException
+import kotlinx.android.synthetic.main.medical_renew_add_follower_details_fragment.*
+import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class MedicalRenewFollowerDetailsFragment : BaseFragment(), Injectable {
+class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
-    var binding by autoCleared<MedicalRenewFollowerDetailsFragmentBinding>()
+    var binding by autoCleared<MedicalRenewAddFollowerDetailsFragmentBinding>()
 
     @Inject
     lateinit var appExecutors: AppExecutors
     val myCalendar = Calendar.getInstance()
+    var relationsList: MutableList<String>? = mutableListOf("زوجة", "والد", "والدة", "ابناء اقل من ١٦ سنة", "بناء بعد سن ١٨ سنة", "ابناء بعد سن ٢٥ سنة")
+    var hintsList: MutableList<String>? = mutableListOf("زوجةزوجة", "والزوجةزوجةد", "وازوجةزوجةلدة", "ابناء اقل من ١٦زوجةزوجة سنة", "بناء بعد سن ١٨ زوجةزوجةسنة", "ابناء بعد سن ٢٥زوجةزوجة سنة")
+    var selectedRelation = ""
 
     lateinit var followerItem: MedicalRenewalUI.FollowerItem
 
     private val REQUEST_CAMERA = 0
     private val SELECT_FILE = 1
 
+    private var photosAdapter by autoCleared<PhotosAdapter>()
     private var captureImage = false
     private var photoFileName = ""
+    private var photosList: MutableList<PhotoUI> = mutableListOf<PhotoUI>()
 
+    lateinit var photoFileURI: Uri
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -63,7 +74,7 @@ class MedicalRenewFollowerDetailsFragment : BaseFragment(), Injectable {
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.medical_renew_follower_details_fragment,
+                R.layout.medical_renew_add_follower_details_fragment,
                 container,
                 false,
                 dataBindingComponent
@@ -82,10 +93,22 @@ class MedicalRenewFollowerDetailsFragment : BaseFragment(), Injectable {
         followerItem = params.followerItem
         binding.followerItem = followerItem
 
-        updateEditPhotoTitle()
         setBirthDate()
         setAvatar()
-        bEditPhoto.setOnClickListener { addPhoto() }
+        renderRelations()
+        bAttachPhoto.setOnClickListener {
+            if (photosList.size < 10)
+                addPhoto()
+        }
+
+        val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
+            photosList.remove(photo)
+            photosAdapter.notifyDataSetChanged()
+            if (photosList.size < 10)
+                bAttachPhoto.visibility = View.VISIBLE
+        }
+        this.photosAdapter = adapter
+        binding.rvPhotos.adapter = adapter
 
         bSave.setOnClickListener { navigateBackWithResult() }
     }
@@ -147,6 +170,7 @@ class MedicalRenewFollowerDetailsFragment : BaseFragment(), Injectable {
                             it
                     )
                     photoFileName = photoFile.name
+                    photoFileURI = photoURI
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     startActivityForResult(takePictureIntent, REQUEST_CAMERA)
                 }
@@ -168,26 +192,62 @@ class MedicalRenewFollowerDetailsFragment : BaseFragment(), Injectable {
     private fun onSelectFromGalleryResult(data: Intent) {
         try {
             val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data.data)
-            ivPhoto.setImageURI(null)
-            binding.ivPhoto.setImageBitmap(bitmap)
-            updateEditPhotoTitle()
+            val photoUI = saveImage(bitmap)
+            photosList.add(photoUI)
+            photosAdapter.submitList(photosList)
+            photosAdapter.notifyDataSetChanged()
         } catch (e: IOException) {
             e.printStackTrace()
         }
     }
 
     private fun onCaptureImageResult() {
-        var bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" + photoFileName)
-        ivPhoto.setImageURI(null)
-        binding.ivPhoto.setImageBitmap(bitmap)
-        updateEditPhotoTitle()
+        photosList.add(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), photoFileName, photoFileURI))
+        val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" + photoFileName)
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
+        val bos = BufferedOutputStream(FileOutputStream(File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), photoFileName)))
+        bos.write(bytes.toByteArray())
+        bos.flush()
+        bos.close()
+        photosAdapter.submitList(photosList)
+        photosAdapter.notifyDataSetChanged()
+
+        if (photosList.size == 10)
+            bAttachPhoto.visibility = View.GONE
     }
 
-    private fun updateEditPhotoTitle() {
-        if (followerItem.pic.isNullOrBlank() && ImageUtils.getByteArrayFromImageView(ivPhoto) == null)
-            bEditPhoto.text = getString(R.string.add_follower_photo)
-        else
-            bEditPhoto.text = getString(R.string.edit_follower_photo)
+    fun saveImage(myBitmap: Bitmap): PhotoUI {
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path: String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
+        val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
+        val directory = File(path)
+        if (!directory.exists())
+            directory.mkdirs()
+
+        try {
+            val f = File(directory, name)
+            f.createNewFile()
+            val fo = FileOutputStream(f)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
+            fo.close()
+            return PhotoUI(path, name, Uri.parse(path+"/"+name))
+        } catch (e1: IOException) {
+            e1.printStackTrace()
+        }
+
+        return PhotoUI(path, name, null)
+    }
+
+
+    fun getPhoto(index: Int): File? {
+        if (photosList.size > index) {
+            var photoUI: PhotoUI? = photosList.get(index)
+            photoUI?.let { return File(photoUI.path, photoUI.name) } ?: null
+        }
+        return null
     }
 
     private fun setBirthDate() {
@@ -214,29 +274,42 @@ class MedicalRenewFollowerDetailsFragment : BaseFragment(), Injectable {
     }
 
     private fun setAvatar() {
-        if (followerItem.pic.isNullOrBlank()) return
-        if (followerItem.pic?.contains("http", true) == true) {
-            Glide.with(this).load(Uri.parse(followerItem.pic)).into(ivPhoto)
-            return
+//        if (followerItem.pic.isNullOrBlank()) return
+//        if (followerItem.pic?.contains("http", true) == true) {
+//            Glide.with(this).load(Uri.parse(followerItem.pic)).into(ivPhoto)
+//            return
+//        }
+//        var byteArray = android.util.Base64.decode(followerItem.pic, NO_WRAP)
+//        ivPhoto.setImageBitmap(null)
+//        ivPhoto.setImageBitmap(ImageUtils.getBitmapFromByteArray(byteArray!!))
+    }
+
+    fun renderRelations() {
+        binding.spRelationDegree.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, relationsList!!)
+        binding.spRelationDegree.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                selectedRelation = (parent.getItemAtPosition(position) as String)
+                tvHint.text = hintsList?.get(position)
+            }
         }
-        var byteArray = android.util.Base64.decode(followerItem.pic, NO_WRAP)
-        ivPhoto.setImageBitmap(null)
-        ivPhoto.setImageBitmap(ImageUtils.getBitmapFromByteArray(byteArray!!))
+        binding.spRelationDegree.setSelection(0)
     }
 
     private fun navigateBackWithResult() {
         val intent = Intent()
         val bundle = Bundle()
+        followerItem.isNew = true
         followerItem.name = binding.edName.text.toString()
         followerItem.birthDate = binding.edBirthDate.text.toString()
-        try {
-            followerItem.pic = android.util.Base64.encodeToString(ImageUtils.getByteArrayFromImageView(ivPhoto), NO_WRAP).replace("\\", "")
-//        followerItem.pic = "145709_2_2.jpg"
-        }catch (e: Exception){
-            showAlert(getString(R.string.invalid_data))
-            return
-        }
-        if (followerItem.name.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || (followerItem.pic.isNullOrBlank())) {
+//        try {
+//            followerItem.pic = android.util.Base64.encodeToString(ImageUtils.getByteArrayFromImageView(ivPhoto), NO_WRAP).replace("\\", "")
+////        followerItem.pic = "145709_2_2.jpg"
+//        } catch (e: Exception) {
+//            showAlert(getString(R.string.invalid_data))
+//            return
+//        }
+        if (followerItem.name.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || photosList.size == 0) {
             showAlert(getString(R.string.invalid_data))
             return
         }

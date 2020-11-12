@@ -15,21 +15,21 @@
         android:icon="@drawable/ic_menu_trips"
         android:title="@string/trips_title" />
     <item
-        android:id="@+id/medical_renew_update_fragment"
-        android:icon="@drawable/ic_menu_claiming"
-        android:title="@string/medical_renew_update_title" />
-    <item
         android:id="@+id/medical_renew_fragment"
         android:icon="@drawable/ic_menu_claiming"
         android:title="@string/medical_renew_title" />
+    <item
+        android:id="@+id/medical_fragment"
+        android:icon="@drawable/ic_menu_medical"
+        android:title="@string/medical_title" />
     <item
         android:id="@+id/claiming_fragment"
         android:icon="@drawable/ic_menu_claiming"
         android:title="@string/claiming_title" />
     <item
-        android:id="@+id/medical_fragment"
-        android:icon="@drawable/ic_menu_medical"
-        android:title="@string/medical_title" />
+        android:id="@+id/medical_renew_update_fragment"
+        android:icon="@drawable/ic_menu_claiming"
+        android:title="@string/medical_renew_update_title" />
     <item
         android:id="@+id/inquiry_fragment"
         android:icon="@drawable/ic_menu_payments"

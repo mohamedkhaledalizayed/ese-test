@@ -1,18 +1,23 @@
 package com.neqabty.presentation.util
 
+import android.R
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Environment
 import android.view.View
-import com.neqabty.R
+import android.widget.ImageView
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class ImageUtils {
 
@@ -63,7 +68,7 @@ class ImageUtils {
         @Throws(IOException::class)
         fun createImageFile(context: Context): File {
             // Create an image file name
-            val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss" , Locale.ENGLISH).format(Date())
+            val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(Date())
             val storageDir: File = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
             return File.createTempFile(
                     "JPEG_${timeStamp}_", /* prefix */
@@ -87,12 +92,42 @@ class ImageUtils {
 //        }
 
         fun share(context: Context, path: String) {
-            val intent = Intent().apply {
-                this.action = Intent.ACTION_SEND
-                this.putExtra(Intent.EXTRA_STREAM, Uri.parse(path))
-                this.type = "image/*"
+//            val intent = Intent().apply {
+//                this.action = Intent.ACTION_SEND
+//                this.putExtra(Intent.EXTRA_STREAM, Uri.parse(path))
+//                this.type = "image/*"
+//            }
+//            context.startActivity(Intent.createChooser(intent, context.resources.getText(R.string.sharee)))
+        }
+
+        fun getByteArrayFromImageView(imageView: ImageView): ByteArray? {
+            try {
+                val bitmapDrawable = imageView.getDrawable() as BitmapDrawable
+                val bitmap: Bitmap
+                val byteArr: ByteArray
+                if (bitmapDrawable == null) {
+                    imageView.buildDrawingCache()
+                    bitmap = imageView.getDrawingCache()
+                    imageView.buildDrawingCache(false)
+                } else {
+                    bitmap = bitmapDrawable.bitmap
+                }
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream)
+                byteArr = stream.toByteArray()
+                return byteArr
+            }catch (e: Exception){
+                return null
             }
-            context.startActivity(Intent.createChooser(intent, context.resources.getText(R.string.sharee)))
+        }
+
+        fun getBitmapFromByteArray(byteArray: ByteArray): Bitmap? {
+            try {
+                val bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+                return bmp
+            }catch (e: Exception){
+                return null
+            }
         }
     }
 }

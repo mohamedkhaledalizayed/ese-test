@@ -32,5 +32,7 @@ data class MedicalRenewalData(
             var birthDate: String = "",
             @field:SerializedName("PIC")
             var pic: String? = ""
+
+//            var pic: String? = "http://3.131.229.146:44392/images/news/8713684/15985232651598523265685f478781748b8_id.jpeg"
     )
 }
