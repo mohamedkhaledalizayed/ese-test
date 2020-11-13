@@ -135,10 +135,6 @@ class MobileFragment : BaseFragment(), Injectable {
                 Constants.MEDICAL_RENEW -> navController().navigate(
                         MobileFragmentDirections.openMedicalRenew()
                 )
-
-                Constants.MEDICAL_RENEW_UPDATE -> navController().navigate(
-                        MobileFragmentDirections.openMedicalRenewUpdate()
-                )
             }
         }
     }

@@ -14,7 +14,6 @@ object Constants {
     var COMPLAINTS = 5
     var CORONA = 6
     var MEDICAL_RENEW = 7
-    var MEDICAL_RENEW_UPDATE = 8
 
 
     var DELIVERY_LOCATION_SYNDICATE = 1

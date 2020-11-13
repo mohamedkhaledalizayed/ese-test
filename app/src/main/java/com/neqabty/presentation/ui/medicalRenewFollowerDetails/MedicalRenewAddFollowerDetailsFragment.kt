@@ -12,12 +12,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Base64.NO_WRAP
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
@@ -25,7 +25,6 @@ import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.MedicalRenewAddFollowerDetailsFragmentBinding
@@ -52,8 +51,11 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
     val myCalendar = Calendar.getInstance()
-    var relationsList: MutableList<String>? = mutableListOf("زوجة", "والد", "والدة", "ابناء اقل من ١٦ سنة", "بناء بعد سن ١٨ سنة", "ابناء بعد سن ٢٥ سنة")
-    var hintsList: MutableList<String>? = mutableListOf("زوجةزوجة", "والزوجةزوجةد", "وازوجةزوجةلدة", "ابناء اقل من ١٦زوجةزوجة سنة", "بناء بعد سن ١٨ زوجةزوجةسنة", "ابناء بعد سن ٢٥زوجةزوجة سنة")
+    var relationsList: MutableList<String>? = mutableListOf("زوجة", "والد", "والدة", "ابناء اقل من ١٦ سنة", "ابناء بعد سن ١٨ سنة", "ابناء بعد سن ٢٥ سنة")
+    var hintsList: MutableList<String>? = mutableListOf("لإضافة الزوجة برجاء إرفاق صورة قسيمة الزواج او صورة بطاقة الرقم القومي وصورة شخصية",
+            "لإضافة الوالد برجاء إرفاق صورة البطاقة الشخصية للوالد وصورة شخصية", "لإضافة الوالدة برجاء إرفاق صورة شهادة ميلاد المهندس والبطاقة الشخصية للوالدة و صورة شخصية",
+            "لإضافة أبناء اقل من ١٦ سنة برجاء إرفاق شهادة الميلاد وصورة شخصية", "لإضافة أبناء بعد سن ١٨ سنة برجاء إرفاق صورة بطاقة الرقم القومي + صورة شخصية",
+            "لإضافة أبناء بعد سن ٢٥ سنة برجاء إرفاق صورة بطاقة الرقم القومي وما يفيد انه طالب و صورة شخصية")
     var selectedRelation = ""
 
     lateinit var followerItem: MedicalRenewalUI.FollowerItem
@@ -319,7 +321,6 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         parentFragmentManager?.setFragmentResult("bundle", bundle)
         navController().navigateUp()
     }
-
 // endregion
 
     fun navController() = findNavController()

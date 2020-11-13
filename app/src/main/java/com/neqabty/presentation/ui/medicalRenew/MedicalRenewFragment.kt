@@ -96,6 +96,10 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 edAddress.visibility = View.GONE
             }
         }
+
+        bEdit.setOnClickListener {
+            navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewUpdateFragment())
+        }
         bContinue.setOnClickListener {
             if (!isDataValid(edMobile.text.toString()))
                 return@setOnClickListener

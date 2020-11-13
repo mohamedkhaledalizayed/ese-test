@@ -69,12 +69,12 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
                 navController().navigate(R.id.mobileFragment, bundle)
             }
         }
-        bRenewUpdate.setOnClickListener {
+        bComplaints.setOnClickListener {
             if (PreferencesHelper(requireContext()).isRegistered)
-                navController().navigate(R.id.medicalRenewUpdateFragment)
+                navController().navigate(R.id.complaintsFragment)
             else {
                 val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.MEDICAL_RENEW_UPDATE)
+                bundle.putInt("type", Constants.COMPLAINTS)
                 navController().navigate(R.id.mobileFragment, bundle)
             }
         }

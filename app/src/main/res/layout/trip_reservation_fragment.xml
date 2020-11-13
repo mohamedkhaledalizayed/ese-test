@@ -184,6 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_large"
                     android:text="@string/attach_companion_title"
+                    android:visibility="gone"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold" />
@@ -207,6 +208,7 @@
                     android:background="@drawable/btn_green"
                     android:elevation="@dimen/elevation_level_one"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:text="@string/attach_companion"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
@@ -218,12 +220,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_large"
                     android:text="@string/attach_title"
+                    android:visibility="gone"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvAttachPhoto"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_small"
@@ -233,6 +237,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
+                        android:visibility="gone"
                         android:layout_height="wrap_content">
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -269,6 +274,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:visibility="gone"
             android:layout_marginStart="@dimen/margin_horizontal_normal"
             android:layout_marginEnd="@dimen/margin_horizontal_normal"
             android:background="@drawable/btn_green"

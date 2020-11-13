@@ -12,6 +12,7 @@ import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -130,15 +131,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                         navController.navigate(R.id.mobileFragment, bundle)
                     }
                 }
-                R.id.medical_renew_update_fragment -> {
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.medicalRenewUpdateFragment)
-                    else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", Constants.MEDICAL_RENEW_UPDATE)
-                        navController.navigate(R.id.mobileFragment, bundle)
-                    }
-                }
                 R.id.claiming_fragment -> { // TODO
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.claimingFragment)
@@ -161,24 +153,24 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 R.id.inquiry_fragment -> {
                     navController.navigate(R.id.inquiryFragment)
                 }
-                R.id.engineering_records_fragment -> {
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
-                    else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", Constants.RECORDS)
-                        navController.navigate(R.id.mobileFragment, bundle)
-                    }
-                }
-                R.id.update_data_fragment -> {
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.updateDataVerificationFragment)
-                    else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", Constants.UPDATE_DATA)
-                        navController.navigate(R.id.mobileFragment, bundle)
-                    }
-                }
+//                R.id.engineering_records_fragment -> {
+//                    if (PreferencesHelper(this).isRegistered)
+//                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
+//                    else {
+//                        val bundle: Bundle = Bundle()
+//                        bundle.putInt("type", Constants.RECORDS)
+//                        navController.navigate(R.id.mobileFragment, bundle)
+//                    }
+//                }
+//                R.id.update_data_fragment -> {
+//                    if (PreferencesHelper(this).isRegistered)
+//                        navController.navigate(R.id.updateDataVerificationFragment)
+//                    else {
+//                        val bundle: Bundle = Bundle()
+//                        bundle.putInt("type", Constants.UPDATE_DATA)
+//                        navController.navigate(R.id.mobileFragment, bundle)
+//                    }
+//                }
                 R.id.complaints_fragment -> {
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.complaintsFragment)
@@ -429,6 +421,11 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 //                paymentGateway.handle3DSecureAuthenticationResult(requestCode, resultCode, data)
             }
         }
+    }
+
+    override fun onSaveInstanceState(@NonNull outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.clear()
     }
 //endregion//
 }

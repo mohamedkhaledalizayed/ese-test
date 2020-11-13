@@ -67,11 +67,6 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
-            android:id="@+id/openMedicalRenewUpdate"
-            app:destination="@id/medicalRenewUpdateFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
-        <action
             android:id="@+id/openClaiming"
             app:destination="@id/claimingFragment"
             app:popUpTo="@id/homeFragment"
@@ -108,6 +103,9 @@
         android:name="com.neqabty.presentation.ui.medicalRenew.MedicalRenewFragment"
         android:label="@string/medical_renew_title"
         tools:layout="@layout/medical_renew_fragment">
+        <action
+            android:id="@+id/openMedicalRenewUpdateFragment"
+            app:destination="@id/medicalRenewUpdateFragment" />
         <action
             android:id="@+id/openMedicalRenewDetailsFragment"
             app:destination="@id/medicalRenewDetailsFragment" />
@@ -244,7 +242,7 @@
     <fragment
         android:id="@+id/tripReservationFragment"
         android:name="com.neqabty.presentation.ui.tripsReservation.TripReservationFragment"
-        android:label="@string/reserve"
+        android:label="@string/trips_title"
         tools:layout="@layout/trip_reservation_fragment">
         <argument
             android:name="tripItem"

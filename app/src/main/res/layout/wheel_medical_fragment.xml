@@ -39,20 +39,6 @@
                     android:src="@drawable/medical_header"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/tvContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_horizontal_normal"
-                    android:layout_marginEnd="@dimen/margin_horizontal_normal"
-                    android:gravity="center"
-                    android:text="@string/wheel_medical_content"
-                    android:textColor="@color/text_dark"
-                    android:textSize="@dimen/text_size_medium"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivLogo" />
             </LinearLayout>
         </ScrollView>
 
@@ -97,19 +83,19 @@
             android:text="@string/wheel_enter_claiming"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_size_medium"
-            app:layout_constraintBottom_toTopOf="@id/bRenewUpdate"
+            app:layout_constraintBottom_toTopOf="@id/bComplaints"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
 
         <Button
-            android:id="@+id/bRenewUpdate"
+            android:id="@+id/bComplaints"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_horizontal_extra_large"
             android:layout_marginEnd="@dimen/margin_horizontal_extra_large"
             android:background="@drawable/btn_blue"
-            android:text="@string/medical_renew_update_title"
+            android:text="@string/complaints_title"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_size_medium"
             app:layout_constraintBottom_toBottomOf="parent"

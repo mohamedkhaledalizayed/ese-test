@@ -192,6 +192,18 @@
                     android:text="@string/continue_btn"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/bEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_blue"
+                    android:gravity="center"
+                    android:text="@string/medical_renew_update_title"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
 
         </ScrollView>
