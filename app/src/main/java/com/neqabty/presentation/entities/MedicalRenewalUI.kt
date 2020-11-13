@@ -23,6 +23,7 @@ data class MedicalRenewalUI(
             var isDeleted: Boolean = false,
             var birthDate: String = "",
             var pic: String? = "",
-            var isNew: Boolean = false
+            var isNew: Boolean = false,
+            var attachments: MutableList<String> = mutableListOf()
     ) : Parcelable
 }

@@ -410,7 +410,8 @@
     <string name="records_request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
 
     <string name="complaint_title">استفسارات</string>
-    <string name="complaint_description">للاستفسارات نرجو الاتصال علي الرقم المختصر الاتي: 19000</string>
+    <string name="complaint_section_title">شكاوى ومقترحات</string>
+    <string name="complaint_description">للاستفسارات نرجو الاتصال علي الرقم المختصر <![CDATA[<font color="#1d1ad2">19000</font>]]></string>
     <string name="complaint_fill_data">املأ من فضلك ما يلي</string>
     <string name="complaint_type">نوع الشكوى</string>
     <string name="complaint_name">اسم مقدم الشكوى</string>

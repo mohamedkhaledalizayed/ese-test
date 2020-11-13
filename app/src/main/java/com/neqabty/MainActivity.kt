@@ -150,9 +150,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 //                    }).start()
                     navController.navigate(R.id.chooseAreaFragment)
                 }
-                R.id.inquiry_fragment -> {
-                    navController.navigate(R.id.inquiryFragment)
-                }
+//                R.id.inquiry_fragment -> {
+//                    navController.navigate(R.id.inquiryFragment)
+//                }
 //                R.id.engineering_records_fragment -> {
 //                    if (PreferencesHelper(this).isRegistered)
 //                        navController.navigate(R.id.engineeringRecordsDetailsFragment)

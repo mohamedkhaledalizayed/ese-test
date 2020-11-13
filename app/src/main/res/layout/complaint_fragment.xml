@@ -4,6 +4,7 @@
 
     <data>
 
+        <import type="android.text.Html" />
         <variable
             name="loading"
             type="boolean" />
@@ -45,26 +46,27 @@
                     android:id="@+id/tvDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/complaint_description"
                     android:textColor="@color/text_dark"
-                    android:textSize="@dimen/text_size_medium"
+                    android:gravity="center"
+                    android:text="@{Html.fromHtml(@string/complaint_description)}"
+                    android:textSize="@dimen/text_size_large"
                     android:textStyle="bold" />
 
+
                 <TextView
-                    android:id="@+id/tvFillData"
+                    android:id="@+id/tvComplaintsTitle"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/complaint_fill_data"
-                    android:textColor="@color/text_dark"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:textSize="@dimen/text_size_medium"
+                    android:text="@string/complaint_section_title"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_large"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvMobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_large"
                     android:text="@string/complaint_mobile"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_medium" />
