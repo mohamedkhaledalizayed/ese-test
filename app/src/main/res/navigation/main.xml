@@ -164,6 +164,9 @@
         <argument
             android:name="followerItem"
             app:argType="com.neqabty.presentation.entities.MedicalRenewalUI$FollowerItem" />
+        <argument
+            android:name="medicalRenewalUI"
+            app:argType="com.neqabty.presentation.entities.MedicalRenewalUI" />
     </fragment>
 
     <fragment

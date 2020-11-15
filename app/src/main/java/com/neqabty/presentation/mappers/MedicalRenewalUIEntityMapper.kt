@@ -12,8 +12,12 @@ class MedicalRenewalUIEntityMapper @Inject constructor() : Mapper<MedicalRenewal
     override fun mapFrom(from: MedicalRenewalUI): MedicalRenewalEntity {
         return MedicalRenewalEntity(
                 oldRefId = from.oldRefId,
-                contact = from.contact?.let { return@let MedicalRenewalEntity.ContactData(name = it.name, syndicateName = it.syndicateName, isNew = it.isNew, requestStatus = it.requestStatus) },
-                followers = from.followers?.map { return@map MedicalRenewalEntity.FollowerItem(name = it.name, id = it.id, isDeleted = it.isDeleted, birthDate = it.birthDate, pic = it.pic, attachments = it.attachments) }?.toMutableList()
+                isSubscribed = from.isSubscribed,
+                requestStatus = from.requestStatus,
+                relations = from.relations?.map { return@map  MedicalRenewalEntity.RelationItem(id = it.id, name = it.name) },
+                rejectionMsg = from.rejectionMsg,
+                contact = from.contact?.let { return@let MedicalRenewalEntity.ContactData(name = it.name, syndicateName = it.syndicateName) },
+                followers = from.followers?.map { return@map MedicalRenewalEntity.FollowerItem(name = it.name, id = it.id, isDeleted = it.isDeleted, birthDate = it.birthDate, pic = it.pic, attachments = it.attachments, mobile = it.mobile, nationalId = it.nationalId, relationType = it.relationType, gender = it.gender) }?.toMutableList()
         )
     }
 }

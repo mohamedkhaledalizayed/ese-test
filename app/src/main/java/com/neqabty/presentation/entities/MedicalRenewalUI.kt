@@ -6,16 +6,18 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class MedicalRenewalUI(
         var oldRefId: String? = "",
+        var isSubscribed: Boolean? = false,
+        var requestStatus: Int? = -1,
         var contact: ContactData? = null,
-        var followers: MutableList<FollowerItem>? = null
+        var followers: MutableList<FollowerItem>? = null,
+        var relations: List<RelationItem>? = null,
+        var rejectionMsg: String? = ""
 ) : Parcelable {
 
     @Parcelize
     data class ContactData(
-            var name: String = "",
-            var syndicateName: String? = "",
-            var isNew: Boolean? = false,
-            var requestStatus: Int? = 0
+            var name: String? = "",
+            var syndicateName: String? = ""
     ) : Parcelable
 
     @Parcelize
@@ -26,6 +28,22 @@ data class MedicalRenewalUI(
             var birthDate: String = "",
             var pic: String? = "",
             var attachments: MutableList<String> = mutableListOf(),
-            var isNew: Boolean = false
+            var isNew: Boolean = false,
+            var mobile: String? = null,
+            var nationalId: String? = null,
+            var relationType: String? = null,
+            var gender: String? = null
     ) : Parcelable
+
+
+    @Parcelize
+    data class RelationItem(
+            var id: String? = "",
+            var name: String? = ""
+    ) : Parcelable{
+        override fun toString(): String {
+            return name ?: ""
+        }
+    }
+
 }

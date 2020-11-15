@@ -244,6 +244,7 @@
     <string name="national_id_title">
         <![CDATA[<font color="#1d1ad2">رقم البطاقة: </font>]]>
     </string>
+    <string name="national_id">رقم البطاقة</string>
 
     <string name="enter_mobile_title">
             <![CDATA[<font color="#1d1ad2">ادخل رقم الموبايل الخاص بك: </font>]]>
@@ -290,7 +291,7 @@
     <string name="confirm_followers_edit_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم قريباً</string>
     <string name="medical_update_request_status_processing">طلبكم ما زال تحت الدراسة</string>
     <string name="medical_update_request_status_approved">لقد تم قبول الطلب وبرجاء الاستمرار لاتمام عمليه الدفع</string>
-    <string name="medical_update_request_status_rejected">لقد تم رفض الطلب المقدم من طرفكم . برجاء الرجوع الي النقابة</string>
+    <string name="medical_update_request_status_rejected">لقد تم رفض طلبكم ويمكنكم الاتصال بخدمة العملاء او التوجه الي مقر النقابة</string>
     <string name="inquiry">المدفوعات</string>
     <string name="details">التفاصيل:</string>
     <string name="payment_method">طريقة الدفع:</string>

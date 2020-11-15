@@ -37,11 +37,6 @@ import com.neqabty.presentation.ui.common.PhotosAdapter
 import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.medical_renew_add_follower_details_fragment.*
-import kotlinx.android.synthetic.main.medical_renew_add_follower_details_fragment.bEditPhoto
-import kotlinx.android.synthetic.main.medical_renew_add_follower_details_fragment.bSave
-import kotlinx.android.synthetic.main.medical_renew_add_follower_details_fragment.edBirthDate
-import kotlinx.android.synthetic.main.medical_renew_add_follower_details_fragment.ivPhoto
-import kotlinx.android.synthetic.main.medical_renew_follower_details_fragment.*
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -56,13 +51,17 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
     val myCalendar = Calendar.getInstance()
-    var relationsList: MutableList<String>? = mutableListOf("زوجة", "والد", "والدة", "ابناء اقل من ١٦ سنة", "ابناء بعد سن ١٨ سنة", "ابناء بعد سن ٢٥ سنة")
+    var genderList: MutableList<String>? = mutableListOf("ذكر", "انثى")
+    var relationsList: MutableList<MedicalRenewalUI.RelationItem>? = mutableListOf()
+
+    //    var relationsList: MutableList<String>? = mutableListOf("زوجة", "والد", "والدة", "ابناء اقل من ١٦ سنة", "ابناء بعد سن ١٨ سنة", "ابناء بعد سن ٢٥ سنة")
     var hintsList: MutableList<String>? = mutableListOf("لإضافة الزوجة برجاء إرفاق صورة قسيمة الزواج او صورة بطاقة الرقم القومي وصورة شخصية",
             "لإضافة الوالد برجاء إرفاق صورة البطاقة الشخصية للوالد وصورة شخصية", "لإضافة الوالدة برجاء إرفاق صورة شهادة ميلاد المهندس والبطاقة الشخصية للوالدة و صورة شخصية",
             "لإضافة أبناء اقل من ١٦ سنة برجاء إرفاق شهادة الميلاد وصورة شخصية", "لإضافة أبناء بعد سن ١٨ سنة برجاء إرفاق صورة بطاقة الرقم القومي + صورة شخصية",
             "لإضافة أبناء بعد سن ٢٥ سنة برجاء إرفاق صورة بطاقة الرقم القومي وما يفيد انه طالب و صورة شخصية")
-    var selectedRelation = ""
+    var selectedRelationID = ""
 
+    var selectedGender = ""
     lateinit var followerItem: MedicalRenewalUI.FollowerItem
 
     private val REQUEST_CAMERA = 0
@@ -97,19 +96,21 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
     }
 
     private fun initializeViews() {
-        val params = MedicalRenewFollowerDetailsFragmentArgs.fromBundle(arguments!!)
+        val params = MedicalRenewAddFollowerDetailsFragmentArgs.fromBundle(arguments!!)
+        relationsList = params.medicalRenewalUI.relations?.toMutableList()
         followerItem = params.followerItem
         binding.followerItem = followerItem
 
         setBirthDate()
         renderRelations()
+        renderGenders()
         updateEditPhotoTitle()
         bEditPhoto.setOnClickListener {
             isForPP = true
             addPhoto()
         }
         bAttachPhoto.setOnClickListener {
-            if (photosList.size < 2) {
+            if (photosList.size < 4) {
                 isForPP = false
                 addPhoto()
             }
@@ -118,7 +119,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
             photosList.remove(photo)
             photosAdapter.notifyDataSetChanged()
-            if (photosList.size < 2)
+            if (photosList.size < 4)
                 bAttachPhoto.visibility = View.VISIBLE
         }
         this.photosAdapter = adapter
@@ -227,11 +228,11 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
             var bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" + photoFileName)
             ivPhoto.setImageBitmap(bitmap)
             updateEditPhotoTitle()
-        }else {
+        } else {
             photosList.add(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), photoFileName, photoFileURI))
             val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" + photoFileName)
             val bytes = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes)
             val bos = BufferedOutputStream(FileOutputStream(File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), photoFileName)))
             bos.write(bytes.toByteArray())
             bos.flush()
@@ -239,7 +240,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
             photosAdapter.submitList(photosList)
             photosAdapter.notifyDataSetChanged()
 
-            if (photosList.size == 2)
+            if (photosList.size == 4)
                 bAttachPhoto.visibility = View.GONE
         }
     }
@@ -348,11 +349,22 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         binding.spRelationDegree.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                selectedRelation = (parent.getItemAtPosition(position) as String)
+                selectedRelationID = (parent.getItemAtPosition(position) as MedicalRenewalUI.RelationItem).id ?: "0"
                 tvHint.text = hintsList?.get(position)
             }
         }
         binding.spRelationDegree.setSelection(0)
+    }
+
+    fun renderGenders() {
+        binding.spGender.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, genderList!!)
+        binding.spGender.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                selectedGender = (parent.getItemAtPosition(position) as String)
+            }
+        }
+        binding.spGender.setSelection(0)
     }
 
     private fun navigateBackWithResult() {
@@ -361,6 +373,14 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         followerItem.isNew = true
         followerItem.name = binding.edName.text.toString()
         followerItem.birthDate = binding.edBirthDate.text.toString()
+        followerItem.gender = when (selectedGender) {
+            genderList!![0] -> "M"
+            genderList!![1] -> "F"
+            else -> "M"
+        }
+        followerItem.relationType = selectedRelationID
+        followerItem.mobile = binding.edMobileNumber.text.toString()
+        followerItem.nationalId = binding.edNationalID.text.toString()
         try {
             followerItem.pic = android.util.Base64.encodeToString(ImageUtils.getByteArrayFromImageView(ivPhoto), NO_WRAP).replace("\\", "")
 
@@ -372,7 +392,8 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
             showAlert(getString(R.string.invalid_data))
             return
         }
-        if (followerItem.name.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || photosList.size == 0 || (followerItem.pic.isNullOrBlank())) {
+        if (followerItem.name.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || photosList.size == 0 || (followerItem.pic.isNullOrBlank())
+                || followerItem.nationalId.isNullOrBlank() || followerItem.mobile.isNullOrBlank()) {
             showAlert(getString(R.string.invalid_data))
             return
         }

@@ -110,16 +110,23 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             else
                 navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewDetailsFragment(if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else Constants.DELIVERY_LOCATION_HOME, edAddress.text.toString(), edMobile.text.toString(), medicalRenewalUI))
         }
-        medicalRenewalUI.contact?.requestStatus = 0
-        when (medicalRenewalUI.contact?.requestStatus) {
+        medicalRenewalUI.requestStatus = -1 // TODO TODOTODO TODOTODO TODOTODO TODOTODO TODOTODO TODO
+        when (medicalRenewalUI.requestStatus) {
             -1 -> tvRequestStatus.visibility = View.GONE
             0 -> {
                 bEdit.visibility = View.GONE
                 bContinue.visibility = View.GONE
+                tvRequestStatus.setTextColor(resources.getColor(R.color.blue))
                 tvRequestStatus.text = getString(R.string.medical_update_request_status_processing)
             }
-            1 -> tvRequestStatus.text = getString(R.string.medical_update_request_status_approved)
-            2 -> tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected)
+            1 -> {
+                tvRequestStatus.setTextColor(resources.getColor(R.color.green))
+                tvRequestStatus.text = getString(R.string.medical_update_request_status_approved)
+            }
+            2 ->{
+                tvRequestStatus.setTextColor(resources.getColor(R.color.red))
+                tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected)+" "+medicalRenewalUI.rejectionMsg
+            }
         }
     }
 
@@ -129,10 +136,10 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             state.medicalRenewalUI?.oldRefId = PreferencesHelper(requireContext()).user
             medicalRenewalUI = state.medicalRenewalUI!!
 //            medicalRenewalUI.contact?.isNew = true
-            if (medicalRenewalUI.contact?.isNew ?: false)
-                showNewMemberAlert()
-            else
+            if (medicalRenewalUI.isSubscribed!!)
                 initializeViews()
+            else
+                showNewMemberAlert()
         }
     }
 

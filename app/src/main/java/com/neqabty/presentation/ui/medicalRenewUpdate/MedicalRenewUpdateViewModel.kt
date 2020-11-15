@@ -1,14 +1,12 @@
 package com.neqabty.presentation.ui.medicalRenewUpdate
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.entities.MedicalRenewalEntity
 import com.neqabty.domain.usecases.GetMedicalRenewalData
 import com.neqabty.domain.usecases.UpdateMedicalRenewalData
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.entities.MedicalRenewalUpdateUI
-import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.mappers.MedicalRenewalEntityUIMapper
 import com.neqabty.presentation.mappers.MedicalRenewalUIEntityMapper
 import com.neqabty.presentation.mappers.MedicalRenewalUpdateEntityUIMapper
@@ -52,6 +50,10 @@ class MedicalRenewUpdateViewModel @Inject constructor(
 
     fun updateMedicalRenewalData(medicalRenewalUI: MedicalRenewalUI) {
         viewState.value = viewState.value?.copy(isLoading = true)
+        for (i in 0 until medicalRenewalUI.followers!!.size) {
+            if (medicalRenewalUI.followers!![i].isNew)
+                medicalRenewalUI.followers!![i].id = 0
+        }
         addDisposable(updateMedicalRenewalData.updateMedicalRenewalData(medicalRenewalUIEntityMapper.mapFrom(medicalRenewalUI))
                 .map {
                     it.let {

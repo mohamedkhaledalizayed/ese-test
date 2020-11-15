@@ -11,18 +11,22 @@ data class MedicalRenewalData(
         @field:SerializedName("engineer")
         var contact: ContactData? = null,
         @field:SerializedName("followerslist")
-        var followers: List<FollowerItem>? = null
+        var followers: List<FollowerItem>? = null,
+        @field:SerializedName("IsHealthCareSupscribed")
+        var isSubscribed: Boolean? = false,
+        @field:SerializedName("UpdateRequestStatus")
+        var requestStatus: Int? = 0,
+        @field:SerializedName("RelationTypeList")
+        var relations: List<RelationItem>? = null,
+        @field:SerializedName("RejectedDescreptionMessage")
+        var rejectionMsg: String? = ""
 ) : Response() {
 
     data class ContactData(
             @field:SerializedName("BENNAME")
-            var name: String = "",
+            var name: String? = "",
             @field:SerializedName("SyndicateName")
-            var syndicateName: String? = "",
-            @field:SerializedName("isHealthCareSubscribed")
-            var isNew: Boolean? = false,
-            @field:SerializedName("requestStatus")
-            var requestStatus: Int? = 0
+            var syndicateName: String? = ""
     )
 
     data class FollowerItem(
@@ -37,7 +41,23 @@ data class MedicalRenewalData(
             @field:SerializedName("PicBase64")
             var pic: String? = "",
             @field:SerializedName("AttachmentList")
-            var attachments: MutableList<String>? = mutableListOf()
+            var attachments: MutableList<String>? = mutableListOf(),
+            @field:SerializedName("MOBILE")
+            var mobile: String? = null,
+            @field:SerializedName("NATIONALID")
+            var nationalId: String? = null,
+            @field:SerializedName("RELATIONTYPE")
+            var relationType: String? = null,
+            @field:SerializedName("GENDER")
+            var gender: String? = null
 
     )
+
+    data class RelationItem(
+            @field:SerializedName("Id")
+            var id: String? = "",
+            @field:SerializedName("RelationTypeName")
+            var name: String? = ""
+    )
+
 }

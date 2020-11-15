@@ -160,7 +160,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
         selectedFollower = follower
         isEdit = true
         if(selectedFollower.isNew)
-            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(selectedFollower))
+            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(selectedFollower, medicalRenewalUI))
         else
             navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
     }
@@ -188,7 +188,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
             navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
         } else {
             incrementedID += 11
-            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(MedicalRenewalUI.FollowerItem(id = incrementedID)))
+            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(MedicalRenewalUI.FollowerItem(id = incrementedID), medicalRenewalUI))
         }
     }
 

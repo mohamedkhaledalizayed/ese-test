@@ -76,6 +76,26 @@
 
 
                 <TextView
+                    android:id="@+id/tvGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/gender"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spGender"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:hint="@string/gender"
+                    android:textDirection="rtl"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
                     android:id="@+id/tvBirthDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,6 +115,50 @@
                     android:focusable="false"
                     android:gravity="center"
                     android:text="@{followerItem.birthDate}"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tvNationalID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/national_id"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edNationalID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:gravity="start"
+                    android:inputType="number"
+                    android:maxLength="14"
+                    android:text="@{followerItem.nationalId}"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tvMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/delivery_mobile_title"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:gravity="start"
+                    android:inputType="number"
+                    android:text="@{followerItem.mobile}"
+                    android:maxLength="11"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium" />
 
@@ -127,21 +191,21 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_small"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvPhotos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:nestedScrollingEnabled="true"
                         android:orientation="horizontal"
+                        app:layoutManager="LinearLayoutManager"
+                        app:layout_constraintEnd_toStartOf="@id/bAttachPhoto"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/bAttachPhoto"
-                        android:nestedScrollingEnabled="true"
-                        android:clipToPadding="false"
-                        android:clipChildren="false"
-                        app:layoutManager="LinearLayoutManager"
                         tools:listitem="@layout/photo_item" />
 
                     <ImageView
@@ -151,10 +215,10 @@
                         android:layout_gravity="center_vertical"
                         android:elevation="@dimen/elevation_level_one"
                         android:scaleType="fitXY"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/ic_add"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:src="@drawable/ic_add" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
