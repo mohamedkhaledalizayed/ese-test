@@ -47,7 +47,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
     var isEdit = true
     var incrementedID = 2
 
-    var reservationRequested = false
+    var updateRequested = false
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -108,7 +108,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
             goToEditFollower()
         }
         bSubmit.setOnClickListener {
-            reservationRequested = true
+            updateRequested = true
             medicalRenewUpdateViewModel.updateMedicalRenewalData(medicalRenewalUI)
         }
         updateFollowersTitleVisibility()
@@ -117,14 +117,14 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: MedicalRenewUpdateViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
-        if (!state.isLoading && reservationRequested)
+        if (!state.isLoading && updateRequested)
             state.medicalRenewalUpdateUI?.let {
-                reservationRequested = false
+                updateRequested = false
                 if (it.requestID.equals("1"))
                     showSuccessAlert()
             }
         state.medicalRenewalUI?.let {
-            state.medicalRenewalUI?.contact?.contactID = PreferencesHelper(requireContext()).user
+            state.medicalRenewalUI?.oldRefId = PreferencesHelper(requireContext()).user
 //            filteredFollowersList = state.medicalRenewalUI?.followers?.filter{ it.isDeleted == false }!!.toMutableList()
             medicalRenewalUI = state.medicalRenewalUI!!
             initializeViews()

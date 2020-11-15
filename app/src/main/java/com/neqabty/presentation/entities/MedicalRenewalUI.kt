@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class MedicalRenewalUI(
+        var oldRefId: String? = "",
         var contact: ContactData? = null,
         var followers: MutableList<FollowerItem>? = null
 ) : Parcelable {
@@ -12,8 +13,9 @@ data class MedicalRenewalUI(
     @Parcelize
     data class ContactData(
             var name: String = "",
-            var contactID: String = "",
-            var syndicateName: String = ""
+            var syndicateName: String? = "",
+            var isNew: Boolean? = false,
+            var requestStatus: Int? = 0
     ) : Parcelable
 
     @Parcelize
@@ -23,7 +25,7 @@ data class MedicalRenewalUI(
             var isDeleted: Boolean = false,
             var birthDate: String = "",
             var pic: String? = "",
-            var isNew: Boolean = false,
-            var attachments: MutableList<String> = mutableListOf()
+            var attachments: MutableList<String> = mutableListOf(),
+            var isNew: Boolean = false
     ) : Parcelable
 }

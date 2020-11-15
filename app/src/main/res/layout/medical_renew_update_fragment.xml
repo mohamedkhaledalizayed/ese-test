@@ -49,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:text="@{Html.fromHtml(@string/user_number_title(medicalRenewalData.contact.contactID))}"
+                    android:text="@{Html.fromHtml(@string/user_number_title(medicalRenewalData.oldRefId))}"
                     android:textSize="@dimen/text_size_medium" />
 
 <!--                <TextView-->

@@ -6,6 +6,8 @@ import com.neqabty.data.api.Response
 
 @Entity(primaryKeys = ["id"])
 data class MedicalRenewalData(
+        @field:SerializedName("oldRefId")
+        var oldRefId: String? = "",
         @field:SerializedName("engineer")
         var contact: ContactData? = null,
         @field:SerializedName("followerslist")
@@ -15,10 +17,12 @@ data class MedicalRenewalData(
     data class ContactData(
             @field:SerializedName("BENNAME")
             var name: String = "",
-            @field:SerializedName("ContactID")
-            var contactID: String = "",
             @field:SerializedName("SyndicateName")
-            var syndicateName: String = ""
+            var syndicateName: String? = "",
+            @field:SerializedName("isHealthCareSubscribed")
+            var isNew: Boolean? = false,
+            @field:SerializedName("requestStatus")
+            var requestStatus: Int? = 0
     )
 
     data class FollowerItem(
@@ -30,9 +34,10 @@ data class MedicalRenewalData(
             var isDeleted: Boolean = false,
             @field:SerializedName("BIRTHDATE")
             var birthDate: String = "",
-            @field:SerializedName("PIC")
-            var pic: String? = ""
+            @field:SerializedName("PicBase64")
+            var pic: String? = "",
+            @field:SerializedName("AttachmentList")
+            var attachments: MutableList<String>? = mutableListOf()
 
-//            var pic: String? = "http://3.131.229.146:44392/images/news/8713684/15985232651598523265685f478781748b8_id.jpeg"
     )
 }

@@ -215,10 +215,10 @@ class MedicalRenewFollowerDetailsFragment : BaseFragment(), Injectable {
 
     private fun setAvatar() {
         if (followerItem.pic.isNullOrBlank()) return
-        if (followerItem.pic?.contains("http", true) == true) {
-            Glide.with(this).load(Uri.parse(followerItem.pic)).into(ivPhoto)
-            return
-        }
+//        if (followerItem.pic?.contains("http", true) == true) {
+//            Glide.with(this).load(Uri.parse(followerItem.pic)).into(ivPhoto)
+//            return
+//        }
         var byteArray = android.util.Base64.decode(followerItem.pic, NO_WRAP)
         ivPhoto.setImageBitmap(null)
         ivPhoto.setImageBitmap(ImageUtils.getBitmapFromByteArray(byteArray!!))

@@ -293,7 +293,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val medicalRenewalPaymentDataEntityMapper = MedicalRenewalPaymentDataEntityMapper()
 
     override fun inquireMedicalRenewalPayment(userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
-        return api.getMedicalRenewPaymentData(userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
+        return api.getMedicalRenewPaymentData(HealthCareRequest(userNumber, locationType, address, mobile)).flatMap { renewalPaymentInfo ->
             Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
         }
     }

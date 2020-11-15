@@ -125,7 +125,7 @@ interface WebService {
     fun getMedicalRenewData(@Query("oldRefId") contactId: String): Observable<MedicalRenewalData>
 
     @POST("http://test.boniantech.com/costcard/api/apiPaymentRequest/AddHealthCareRequest")
-    fun getMedicalRenewPaymentData(@Query("oldRefId") contactId: String, @Query("deliveryLocation") locationType: Int, @Query("deliveryAddress") address: String, @Query("deliveryPhone") mobile: String): Observable<MedicalRenewalPaymentData>
+    fun getMedicalRenewPaymentData(@Body healthCareRequest: HealthCareRequest): Observable<MedicalRenewalPaymentData>
 
     @POST("http://test.boniantech.com/costcard/api/ApiHealthCare/MedBeneficiaryFollowersUpdate")
     fun updateMedicalRenewPaymentData(@Body medicalRenewalDataRequest: MedicalRenewalData): Observable<MedicalRenewalUpdateData>
