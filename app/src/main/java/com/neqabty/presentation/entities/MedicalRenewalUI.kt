@@ -32,7 +32,7 @@ data class MedicalRenewalUI(
             var mobile: String? = null,
             var nationalId: String? = null,
             var relationType: String? = null,
-            var gender: String? = null
+            var gender: String? = "M"
     ) : Parcelable
 
 

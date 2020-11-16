@@ -110,7 +110,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             else
                 navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewDetailsFragment(if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else Constants.DELIVERY_LOCATION_HOME, edAddress.text.toString(), edMobile.text.toString(), medicalRenewalUI))
         }
-        medicalRenewalUI.requestStatus = -1 // TODO TODOTODO TODOTODO TODOTODO TODOTODO TODOTODO TODO
+//        medicalRenewalUI.requestStatus = -1 // TODO TODOTODO TODOTODO TODOTODO TODOTODO TODOTODO TODO
         when (medicalRenewalUI.requestStatus) {
             -1 -> tvRequestStatus.visibility = View.GONE
             0 -> {

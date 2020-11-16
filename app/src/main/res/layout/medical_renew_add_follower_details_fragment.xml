@@ -157,16 +157,24 @@
                     android:layout_marginTop="@dimen/margin_vertical_small"
                     android:gravity="start"
                     android:inputType="number"
-                    android:text="@{followerItem.mobile}"
                     android:maxLength="11"
+                    android:text="@{followerItem.mobile}"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium" />
 
-                <ImageView
-                    android:id="@+id/ivPhoto"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:scaleType="fitXY" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivPhoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintDimensionRatio="1:1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
                     android:id="@+id/bEditPhoto"

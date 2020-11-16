@@ -55,10 +55,12 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
     var relationsList: MutableList<MedicalRenewalUI.RelationItem>? = mutableListOf()
 
     //    var relationsList: MutableList<String>? = mutableListOf("زوجة", "والد", "والدة", "ابناء اقل من ١٦ سنة", "ابناء بعد سن ١٨ سنة", "ابناء بعد سن ٢٥ سنة")
-    var hintsList: MutableList<String>? = mutableListOf("لإضافة الزوجة برجاء إرفاق صورة قسيمة الزواج او صورة بطاقة الرقم القومي وصورة شخصية",
-            "لإضافة الوالد برجاء إرفاق صورة البطاقة الشخصية للوالد وصورة شخصية", "لإضافة الوالدة برجاء إرفاق صورة شهادة ميلاد المهندس والبطاقة الشخصية للوالدة و صورة شخصية",
-            "لإضافة أبناء اقل من ١٦ سنة برجاء إرفاق شهادة الميلاد وصورة شخصية", "لإضافة أبناء بعد سن ١٨ سنة برجاء إرفاق صورة بطاقة الرقم القومي + صورة شخصية",
-            "لإضافة أبناء بعد سن ٢٥ سنة برجاء إرفاق صورة بطاقة الرقم القومي وما يفيد انه طالب و صورة شخصية")
+    var hintsList: MutableList<String>? = mutableListOf("- برجاء إرفاق صورة قسيمة الزواج او صورة بطاقة الرقم القومي",
+            "-  أبناء اقل من ١٦ سنة برجاء إرفاق شهادة الميلاد\n" +
+                    "- أبناء بعد ١٨ سنة برجاء إرفاق صورة بطاقة الرقم القومي\n" +
+                    "- أبناء بعد ٢٥ سنة برجاء إرفاق صورة بطاقة الرقم القومي وما يفيد انه طالب",
+            "- لإضافة الوالدة برجاء إرفاق صورة شهادة ميلاد المهندس والبطاقة الشخصية للوالدة\n" +
+                    " - لإضافة الوالد برجاء إرفاق صورة البطاقة الشخصية للوالد")
     var selectedRelationID = ""
 
     var selectedGender = ""
@@ -217,6 +219,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
                 photosList.add(photoUI)
                 photosAdapter.submitList(photosList)
                 photosAdapter.notifyDataSetChanged()
+                updateAttachPhotoVisibility()
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -240,8 +243,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
             photosAdapter.submitList(photosList)
             photosAdapter.notifyDataSetChanged()
 
-            if (photosList.size == 4)
-                bAttachPhoto.visibility = View.GONE
+            updateAttachPhotoVisibility()
         }
     }
 
@@ -321,8 +323,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
                 photosList.add(photoUI)
 //                (rvPhotos.findViewHolderForAdapterPosition(i)!!.itemView.findViewById(R.id.ivImage) as ImageView).setImageBitmap(ImageUtils.getBitmapFromByteArray(byteArray!!))
             }
-            if (photosList.size == 10)
-                bAttachPhoto.visibility = View.GONE
+            updateAttachPhotoVisibility()
 
             (rvPhotos.adapter as PhotosAdapter).submitList(photosList)
         }
@@ -344,16 +345,25 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
             bEditPhoto.text = getString(R.string.edit_follower_photo)
     }
 
+    private fun updateAttachPhotoVisibility() {
+        if (photosList.size == 4)
+            bAttachPhoto.visibility = View.INVISIBLE
+        else
+            bAttachPhoto.visibility = View.VISIBLE
+    }
+
     fun renderRelations() {
         binding.spRelationDegree.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, relationsList!!)
         binding.spRelationDegree.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                selectedRelationID = (parent.getItemAtPosition(position) as MedicalRenewalUI.RelationItem).id ?: "0"
+                selectedRelationID = (parent.getItemAtPosition(position) as MedicalRenewalUI.RelationItem).id
+                        ?: "0"
                 tvHint.text = hintsList?.get(position)
             }
         }
-        binding.spRelationDegree.setSelection(0)
+
+        binding.spRelationDegree.setSelection(relationsList!!.indexOf(relationsList!!.find { it.id == followerItem.relationType }))
     }
 
     fun renderGenders() {
@@ -364,7 +374,10 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
                 selectedGender = (parent.getItemAtPosition(position) as String)
             }
         }
-        binding.spGender.setSelection(0)
+        if (followerItem.gender.equals("M", true))
+            binding.spGender.setSelection(0)
+        else
+            binding.spGender.setSelection(1)
     }
 
     private fun navigateBackWithResult() {

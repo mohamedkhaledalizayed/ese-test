@@ -166,7 +166,7 @@
     <string name="inquiry_title">المدفوعات</string>
     <string name="engineering_records_title">تجديد سجل هندسي</string>
     <string name="update_data_title">تحديث البيانات</string>
-    <string name="complaints_title">استفسارات وشكاوى</string>
+    <string name="complaints_title">خدمة العملاء والشكاوى</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">اتصل بنا</string>
@@ -242,9 +242,9 @@
     </string>
 
     <string name="national_id_title">
-        <![CDATA[<font color="#1d1ad2">رقم البطاقة: </font>]]>
+        <![CDATA[<font color="#1d1ad2">الرقم القومي: </font>]]>
     </string>
-    <string name="national_id">رقم البطاقة</string>
+    <string name="national_id">الرقم القومي</string>
 
     <string name="enter_mobile_title">
             <![CDATA[<font color="#1d1ad2">ادخل رقم الموبايل الخاص بك: </font>]]>
@@ -282,8 +282,8 @@
     <string name="followers">التابعين:</string>
     <string name="add_follower">اضافة تابع</string>
     <string name="save_follower">حفظ بيانات التابع</string>
-    <string name="edit_follower_photo">تعديل الصورة</string>
-    <string name="add_follower_photo">إضافة صورة</string>
+    <string name="edit_follower_photo">تعديل الصورة الشخصية</string>
+    <string name="add_follower_photo">إضافة الصورة الشخصية</string>
     <string name="remove_follower">حذف</string>
     <string name="remove_follower_confirmation">هل تريد إتمام عملية الحذف؟!</string>
     <string name="medical_subscribe_confirmation">هذا المهندس غير مسجل بخدمة الرعاية الصحية، هل تود الاشتراك في الخدمة ؟</string>
