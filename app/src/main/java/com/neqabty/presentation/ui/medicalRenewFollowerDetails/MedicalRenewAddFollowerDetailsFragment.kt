@@ -55,7 +55,8 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
     var relationsList: MutableList<MedicalRenewalUI.RelationItem>? = mutableListOf()
 
     //    var relationsList: MutableList<String>? = mutableListOf("زوجة", "والد", "والدة", "ابناء اقل من ١٦ سنة", "ابناء بعد سن ١٨ سنة", "ابناء بعد سن ٢٥ سنة")
-    var hintsList: MutableList<String>? = mutableListOf("- برجاء إرفاق صورة قسيمة الزواج او صورة بطاقة الرقم القومي",
+    var hintsList: MutableList<String>? = mutableListOf("",
+            "- برجاء إرفاق صورة قسيمة الزواج او صورة بطاقة الرقم القومي",
             "-  أبناء اقل من ١٦ سنة برجاء إرفاق شهادة الميلاد\n" +
                     "- أبناء بعد ١٨ سنة برجاء إرفاق صورة بطاقة الرقم القومي\n" +
                     "- أبناء بعد ٢٥ سنة برجاء إرفاق صورة بطاقة الرقم القومي وما يفيد انه طالب",
@@ -280,6 +281,22 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         return null
     }
 
+
+    private fun isDataValid(nationalId: String, mobile: String): Boolean {
+        return if (!nationalId.matches(Regex("[0-9]*")) || nationalId.trim().length != 14) {
+            showAlert(getString(R.string.invalid_national_id))
+            false
+        } else if (!mobile.matches(Regex("[0-9]*")) || mobile.trim().length != 11 || (!mobile.substring(0, 3).equals("012") && !mobile.substring(0, 3).equals("010") && !mobile.substring(0, 3).equals("011") && !mobile.substring(0, 3).equals("015"))) {
+            showAlert(getString(R.string.invalid_mobile))
+            false
+        } else if (followerItem.name.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || photosList.size == 0 || (followerItem.pic.isNullOrBlank())
+                || followerItem.nationalId.isNullOrBlank() || followerItem.mobile.isNullOrBlank()) {
+            showAlert(getString(R.string.invalid_data))
+            false
+        } else
+            true
+    }
+
     private fun setBirthDate() {
         edBirthDate.setOnClickListener {
             val year = myCalendar.get(Calendar.YEAR)
@@ -292,6 +309,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 updateLabel()
             }, year, month, day)
+            datePicker.datePicker.maxDate = System.currentTimeMillis()
 
             datePicker.show()
         }
@@ -316,9 +334,9 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
 
     private fun renderAttachments() {
         photosList.clear()
-        if (followerItem.attachments.size > 0) {
-            for (i in 0 until followerItem.attachments.size) {
-                var byteArray = android.util.Base64.decode(followerItem.attachments[i], NO_WRAP)
+        if (followerItem.attachments?.size!! > 0) {
+            for (i in 0 until followerItem.attachments?.size!!) {
+                var byteArray = android.util.Base64.decode(followerItem.attachments!![i], NO_WRAP)
                 val photoUI = saveImage(ImageUtils.getBitmapFromByteArray(byteArray)!!)
                 photosList.add(photoUI)
 //                (rvPhotos.findViewHolderForAdapterPosition(i)!!.itemView.findViewById(R.id.ivImage) as ImageView).setImageBitmap(ImageUtils.getBitmapFromByteArray(byteArray!!))
@@ -383,7 +401,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
     private fun navigateBackWithResult() {
         val intent = Intent()
         val bundle = Bundle()
-        followerItem.isNew = true
+//        followerItem.isNew = true
         followerItem.name = binding.edName.text.toString()
         followerItem.birthDate = binding.edBirthDate.text.toString()
         followerItem.gender = when (selectedGender) {
@@ -397,17 +415,15 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         try {
             followerItem.pic = android.util.Base64.encodeToString(ImageUtils.getByteArrayFromImageView(ivPhoto), NO_WRAP).replace("\\", "")
 
-            followerItem.attachments.clear()
+            followerItem.attachments!!.clear()
             for (i in 0 until photosList?.size!!) {
-                followerItem.attachments.add(android.util.Base64.encodeToString(ImageUtils.getByteArrayFromImageView(rvPhotos.findViewHolderForAdapterPosition(i)!!.itemView.findViewById(R.id.ivImage)), NO_WRAP).replace("\\", ""))
+                followerItem.attachments!!.add(android.util.Base64.encodeToString(ImageUtils.getByteArrayFromImageView(rvPhotos.findViewHolderForAdapterPosition(i)!!.itemView.findViewById(R.id.ivImage)), NO_WRAP).replace("\\", ""))
             }
         } catch (e: Exception) {
             showAlert(getString(R.string.invalid_data))
             return
         }
-        if (followerItem.name.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || photosList.size == 0 || (followerItem.pic.isNullOrBlank())
-                || followerItem.nationalId.isNullOrBlank() || followerItem.mobile.isNullOrBlank()) {
-            showAlert(getString(R.string.invalid_data))
+        if (!isDataValid(followerItem.nationalId ?: "", followerItem.mobile ?: "")) {
             return
         }
 

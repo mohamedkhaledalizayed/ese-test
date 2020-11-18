@@ -80,6 +80,8 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         binding.medicalRenewalData = medicalRenewalUI
         llContent.visibility = View.VISIBLE
 
+        edMobile.setText(medicalRenewalUI.contact!!.mobile ?: "")
+        edAddress.setText(medicalRenewalUI.contact!!.address ?: "")
         val adapter = FollowersAdapter(dataBindingComponent, appExecutors) { }
         this.adapter = adapter
         binding.rvFollowers.adapter = adapter
@@ -89,6 +91,12 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         rb_home.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 edAddress.visibility = View.VISIBLE
+                tvSyndicate.visibility = View.GONE
+            }
+        }
+        rb_mainSyndicate.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                edAddress.visibility = View.GONE
                 tvSyndicate.visibility = View.GONE
             }
         }
@@ -105,10 +113,10 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         bContinue.setOnClickListener {
             if (!isDataValid(edMobile.text.toString()))
                 return@setOnClickListener
-            if ((rb_home.isChecked && edAddress.text.toString().isBlank()) || (rb_syndicate.isChecked && tvDeliveryMethod.text.isNullOrBlank()))
+            if ((rb_home.isChecked && edAddress.text.toString().isBlank()))
                 showAlert(getString(R.string.invalid_data))
             else
-                navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewDetailsFragment(if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else Constants.DELIVERY_LOCATION_HOME, edAddress.text.toString(), edMobile.text.toString(), medicalRenewalUI))
+                navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewDetailsFragment(if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE , edAddress.text.toString(), edMobile.text.toString(), medicalRenewalUI))
         }
 //        medicalRenewalUI.requestStatus = -1 // TODO TODOTODO TODOTODO TODOTODO TODOTODO TODOTODO TODO
         when (medicalRenewalUI.requestStatus) {
@@ -123,10 +131,41 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 tvRequestStatus.setTextColor(resources.getColor(R.color.green))
                 tvRequestStatus.text = getString(R.string.medical_update_request_status_approved)
             }
-            2 ->{
+            2 -> {
                 tvRequestStatus.setTextColor(resources.getColor(R.color.red))
-                tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected)+" "+medicalRenewalUI.rejectionMsg
+                tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected) + " " + medicalRenewalUI.rejectionMsg
             }
+        }
+    }
+
+    private fun checkStatus(){
+        when (medicalRenewalUI.engineerStatus) {
+            -1 -> {
+                showInEligibleMemberAlert(getString(R.string.error_msg))
+                return
+            }
+            1 -> {
+                showInEligibleMemberAlert(getString(R.string.medical_subscription_unsubscribed))
+                return
+            }
+            2 -> {
+                showInEligibleMemberAlert(getString(R.string.medical_subscription_suspended))
+                return
+            }
+        }
+        if(medicalRenewalUI.contact?.isDead == true && medicalRenewalUI.followers?.size == 0){
+            bContinue.visibility = View.GONE
+        }
+        when (medicalRenewalUI.healthCareStatus) {
+            -1 -> {
+                showInEligibleMemberAlert(getString(R.string.error_msg))
+                return
+            }
+            1 -> {
+                showNewMemberAlert()
+                return
+            }
+            3 -> bContinue.visibility = View.GONE
         }
     }
 
@@ -135,11 +174,8 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         state.medicalRenewalUI?.let {
             state.medicalRenewalUI?.oldRefId = PreferencesHelper(requireContext()).user
             medicalRenewalUI = state.medicalRenewalUI!!
-//            medicalRenewalUI.contact?.isNew = true
-            if (medicalRenewalUI.isSubscribed!!)
-                initializeViews()
-            else
-                showNewMemberAlert()
+            checkStatus()
+            initializeViews()
         }
     }
 
@@ -163,6 +199,24 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             initializeViews()
         }
         builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
+
+        if (dialog == null)
+            dialog = builder?.create()
+
+        if (!dialog?.isShowing!!)
+            dialog?.show()
+
+    }
+
+    private fun showInEligibleMemberAlert(msg: String) {
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.alert_title))
+        builder?.setCancelable(false)
+        builder?.setMessage(msg)
+        builder?.setNegativeButton(getString(R.string.ok_btn)) { dialog, which ->
             navController().popBackStack()
             navController().navigate(R.id.homeFragment)
         }

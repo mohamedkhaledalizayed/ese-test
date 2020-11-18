@@ -159,10 +159,10 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
     private fun editFollower(follower: MedicalRenewalUI.FollowerItem) {
         selectedFollower = follower
         isEdit = true
-        if(selectedFollower.isNew)
+//        if(selectedFollower.isNew)
             navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(selectedFollower, medicalRenewalUI))
-        else
-            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
+//        else
+//            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
     }
 
     private fun goToEditFollower() {
@@ -184,12 +184,12 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
             updateFollowersTitleVisibility()
         })
 
-        if (isEdit) {
-            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
-        } else {
+//        if (isEdit) {
+//            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
+//        } else {
             incrementedID += 11
-            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(MedicalRenewalUI.FollowerItem(id = incrementedID), medicalRenewalUI))
-        }
+            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(MedicalRenewalUI.FollowerItem(id = incrementedID, isNew = true), medicalRenewalUI))
+//        }
     }
 
     private fun updateFollowersTitleVisibility() {

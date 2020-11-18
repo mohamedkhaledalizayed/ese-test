@@ -12,8 +12,10 @@ data class MedicalRenewalData(
         var contact: ContactData? = null,
         @field:SerializedName("followerslist")
         var followers: List<FollowerItem>? = null,
-        @field:SerializedName("IsHealthCareSupscribed")
-        var isSubscribed: Boolean? = false,
+        @field:SerializedName("HealthCareStatus")
+        var healthCareStatus: Int? = 0,
+        @field:SerializedName("EngineerStatus")
+        var engineerStatus: Int? = 0,
         @field:SerializedName("UpdateRequestStatus")
         var requestStatus: Int? = 0,
         @field:SerializedName("RelationTypeList")
@@ -26,18 +28,24 @@ data class MedicalRenewalData(
             @field:SerializedName("BENNAME")
             var name: String? = "",
             @field:SerializedName("SyndicateName")
-            var syndicateName: String? = ""
+            var syndicateName: String? = "",
+            @field:SerializedName("IsDead")
+            var isDead: Boolean? = false,
+            @field:SerializedName("ADDRESS")
+            var address: String? = "",
+            @field:SerializedName("MOBILE")
+            var mobile: String? = ""
     )
 
     data class FollowerItem(
             @field:SerializedName("BENNAME")
-            var name: String = "",
+            var name: String? = "",
             @field:SerializedName("BenID")
-            var id: Int = 0,
+            var id: Int? = 0,
             @field:SerializedName("ISDELETED")
-            var isDeleted: Boolean = false,
+            var isDeleted: Boolean? = false,
             @field:SerializedName("BIRTHDATE")
-            var birthDate: String = "",
+            var birthDate: String? = "",
             @field:SerializedName("PicBase64")
             var pic: String? = "",
             @field:SerializedName("AttachmentList")

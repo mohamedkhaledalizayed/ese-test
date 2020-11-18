@@ -51,7 +51,7 @@ class MedicalRenewUpdateViewModel @Inject constructor(
     fun updateMedicalRenewalData(medicalRenewalUI: MedicalRenewalUI) {
         viewState.value = viewState.value?.copy(isLoading = true)
         for (i in 0 until medicalRenewalUI.followers!!.size) {
-            if (medicalRenewalUI.followers!![i].isNew)
+            if (medicalRenewalUI.followers!![i].isNew!!)
                 medicalRenewalUI.followers!![i].id = 0
         }
         addDisposable(updateMedicalRenewalData.updateMedicalRenewalData(medicalRenewalUIEntityMapper.mapFrom(medicalRenewalUI))

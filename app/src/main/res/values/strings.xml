@@ -211,6 +211,7 @@
     <string name="no_connection_cancel">إلغاء</string>
     <string name="no_connection_retry">محاولة أخرى</string>
     <string name="invalid_mobile">من فضلك ادخل رقم موبايل صحيح</string>
+    <string name="invalid_national_id">من فضلك ادخل رقم قومي صحيح</string>
     <string name="invalid_data">من فضلك أكمل ادخال البيانات</string>
     <string name="invalid_number">رقم العضوية غير صحيح</string>
     <string name="pick_photo">من فضلك أرفق صورة الطلب</string>
@@ -273,6 +274,8 @@
     <string name="delivery_mobile_hint">رقم الهاتف الذي سيتم التواصل عليه عند الاستلام</string>
     <string name="home_delivery">توصيل للمنزل
         (قيمة التوصيل :١٥ جنيه سيتم تحصيلها عند الاستلام)</string>
+    <string name="main_syndicate_delivery">إستلام من النقابة العامة
+    (بدون مصاريف توصيل )</string>
     <string name="syndicate_delivery">إستلام من النقابة الفرعية
     (بدون مصاريف توصيل )</string>
 
@@ -287,6 +290,8 @@
     <string name="remove_follower">حذف</string>
     <string name="remove_follower_confirmation">هل تريد إتمام عملية الحذف؟!</string>
     <string name="medical_subscribe_confirmation">هذا المهندس غير مسجل بخدمة الرعاية الصحية، هل تود الاشتراك في الخدمة ؟</string>
+    <string name="medical_subscription_unsubscribed">غير مشترك بالنقابة</string>
+    <string name="medical_subscription_suspended">موقوف</string>
     <string name="edit_follower">تعديل</string>
     <string name="confirm_followers_edit_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم قريباً</string>
     <string name="medical_update_request_status_processing">طلبكم ما زال تحت الدراسة</string>
