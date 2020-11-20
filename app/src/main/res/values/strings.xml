@@ -290,13 +290,14 @@
     <string name="remove_follower">حذف</string>
     <string name="remove_follower_confirmation">هل تريد إتمام عملية الحذف؟!</string>
     <string name="medical_subscribe_confirmation">هذا المهندس غير مسجل بخدمة الرعاية الصحية، هل تود الاشتراك في الخدمة ؟</string>
-    <string name="medical_subscription_unsubscribed">غير مشترك بالنقابة</string>
-    <string name="medical_subscription_suspended">موقوف</string>
+    <string name="medical_subscription_unsubscribed">هذا الرقم غير مقيد بالنقابة، برجاء الرجوع للنقابة لطلب العضوية</string>
+    <string name="medical_subscription_suspended">هذه العضوية موقوفة برجاء الرجوع إلى النقابة</string>
     <string name="edit_follower">تعديل</string>
     <string name="confirm_followers_edit_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم قريباً</string>
     <string name="medical_update_request_status_processing">طلبكم ما زال تحت الدراسة</string>
     <string name="medical_update_request_status_approved">لقد تم قبول الطلب وبرجاء الاستمرار لاتمام عمليه الدفع</string>
-    <string name="medical_update_request_status_rejected">لقد تم رفض طلبكم ويمكنكم الاتصال بخدمة العملاء او التوجه الي مقر النقابة</string>
+    <string name="medical_update_request_status_rejected">لقد تم رفض طلبكم.</string>
+    <string name="medical_update_request_rejection_reason">سبب الرفض: </string>
     <string name="inquiry">المدفوعات</string>
     <string name="details">التفاصيل:</string>
     <string name="payment_method">طريقة الدفع:</string>

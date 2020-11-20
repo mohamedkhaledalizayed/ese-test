@@ -133,7 +133,10 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             }
             2 -> {
                 tvRequestStatus.setTextColor(resources.getColor(R.color.red))
-                tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected) + " " + medicalRenewalUI.rejectionMsg
+                if(medicalRenewalUI.rejectionMsg.isNullOrEmpty())
+                    tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected)
+                else
+                    tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected) + "\n" + getString(R.string.medical_update_request_rejection_reason) + " "+ medicalRenewalUI.rejectionMsg
             }
         }
     }
@@ -166,6 +169,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 return
             }
             3 -> bContinue.visibility = View.GONE
+            4 -> bContinue.visibility = View.GONE
         }
     }
 

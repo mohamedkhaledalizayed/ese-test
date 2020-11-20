@@ -105,6 +105,9 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
         this.adapter = adapter
 
         medicalRenewalPaymentUI?.let {
+            bPay.visibility = if (it.paymentItem?.amount == null || it.paymentItem?.amount == 0) View.GONE else View.VISIBLE
+        }
+        medicalRenewalPaymentUI?.let {
             binding.medicalRenewalPayment = it
 
             it.paymentItem?.let {
@@ -281,7 +284,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
             }
 
 //            paymentCreationRequest.RequestExpiryDate = medicalRenewalPaymentUI.paymentCreationRequest?.requestExpiryDate
-            paymentCreationRequest.RequestExpiryDate = "2020-11-08"
+            paymentCreationRequest.RequestExpiryDate = "2020-11-20"
 
             paymentCreationRequest.UserUniqueIdentifier = "12346743298546"
 
@@ -314,7 +317,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
 
             paymentGateway.CreatePayment(paymentCreationRequest, "", publicKey, MobilePaymentCreationCallback(successCallback, failureCallback))
         } catch (ex: Exception) {
-            Log.i("Error", ex.message)
+//            Log.i("Error", ex.message)
         }
     }
 

@@ -1,12 +1,7 @@
 package com.neqabty.presentation.ui.payment
 
 import android.app.Activity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.efinance.mobilepaymentsdk.*
 import com.neqabty.AppExecutors
@@ -52,9 +52,9 @@ class PaymentFragment : BaseFragment(), Injectable {
     lateinit var memberItem: MemberUI
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -118,18 +118,36 @@ class PaymentFragment : BaseFragment(), Injectable {
         val params = PaymentFragmentArgs.fromBundle(arguments!!)
         try {
 
-            paymentGateway = PaymentGateway(activity, memberItem.paymentCreationRequest?.sender?.password)
+//static set
+            var id = "071"
+            var name = "MSAD"
+            var password = "1234"
+
+            paymentGateway = PaymentGateway(activity, password)
             paymentConfirmationRequest = PaymentConfirmationRequest()
 
-            paymentConfirmationRequest.Sender.Id = memberItem.paymentCreationRequest?.sender?.id
+            paymentConfirmationRequest.Sender.Id = id
 //            paymentConfirmationRequest.Sender.Id = "077"
-            paymentConfirmationRequest.Sender.Name = memberItem.paymentCreationRequest?.sender?.name
+            paymentConfirmationRequest.Sender.Name = name
 //            paymentConfirmationRequest.Sender.Name = "MSAD"
-            paymentConfirmationRequest.Sender.Password = memberItem.paymentCreationRequest?.sender?.password
+            paymentConfirmationRequest.Sender.Password = password
 
             paymentConfirmationRequest.SenderRequestNumber = params.senderRequestNumber
 
             paymentConfirmationRequest.SessionID = params.sessionID
+            ///////////
+//            paymentGateway = PaymentGateway(activity, memberItem.paymentCreationRequest?.sender?.password)
+//            paymentConfirmationRequest = PaymentConfirmationRequest()
+//
+//            paymentConfirmationRequest.Sender.Id = memberItem.paymentCreationRequest?.sender?.id
+////            paymentConfirmationRequest.Sender.Id = "077"
+//            paymentConfirmationRequest.Sender.Name = memberItem.paymentCreationRequest?.sender?.name
+////            paymentConfirmationRequest.Sender.Name = "MSAD"
+//            paymentConfirmationRequest.Sender.Password = memberItem.paymentCreationRequest?.sender?.password
+//
+//            paymentConfirmationRequest.SenderRequestNumber = params.senderRequestNumber
+//
+//            paymentConfirmationRequest.SessionID = params.sessionID
 
             /**
              * Test Cards
@@ -190,7 +208,7 @@ class PaymentFragment : BaseFragment(), Injectable {
 
     // region callback
     class MobilePaymentConfirmationCallback(
-        private val successCallback: ((response: PaymentConfirmationResponse) -> Unit),
+            private val successCallback: ((response: PaymentConfirmationResponse) -> Unit),
         private val failureCallback: (() -> Unit)
     ) : PaymentConfirmationCallback {
 
