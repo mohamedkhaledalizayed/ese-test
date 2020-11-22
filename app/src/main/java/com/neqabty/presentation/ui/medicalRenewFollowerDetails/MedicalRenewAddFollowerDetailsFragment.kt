@@ -104,6 +104,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         followerItem = params.followerItem
         binding.followerItem = followerItem
 
+        edMobileNumber.setText(followerItem.mobile ?: params.medicalRenewalUI.contact!!.mobile)
         setBirthDate()
         renderRelations()
         renderGenders()
@@ -236,7 +237,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
             photosList.add(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), photoFileName, photoFileURI))
             val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" + photoFileName)
             val bytes = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, bytes)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
             val bos = BufferedOutputStream(FileOutputStream(File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), photoFileName)))
             bos.write(bytes.toByteArray())
             bos.flush()
@@ -250,7 +251,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
 
     fun saveImage(myBitmap: Bitmap): PhotoUI {
         val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 50, bytes)
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
         val path: String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
         val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
         val directory = File(path)
@@ -283,14 +284,18 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
 
 
     private fun isDataValid(nationalId: String, mobile: String): Boolean {
-        return if (!nationalId.matches(Regex("[0-9]*")) || nationalId.trim().length != 14) {
+        return if (!nationalId.matches(Regex("[0-9]*")) || (nationalId.trim().length != 14 && nationalId.trim().length != 0)) {
             showAlert(getString(R.string.invalid_national_id))
             false
-        } else if (!mobile.matches(Regex("[0-9]*")) || mobile.trim().length != 11 || (!mobile.substring(0, 3).equals("012") && !mobile.substring(0, 3).equals("010") && !mobile.substring(0, 3).equals("011") && !mobile.substring(0, 3).equals("015"))) {
+        } else if (!mobile.matches(Regex("[0-9]*")) || (mobile.trim().length != 11 && mobile.trim().length != 0)) {
             showAlert(getString(R.string.invalid_mobile))
             false
-        } else if (followerItem.name.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || photosList.size == 0 || (followerItem.pic.isNullOrBlank())
-                || followerItem.nationalId.isNullOrBlank() || followerItem.mobile.isNullOrBlank()) {
+        } else if (mobile.trim().length >= 3) {
+            if (!mobile.substring(0, 3).equals("012") && !mobile.substring(0, 3).equals("010") && !mobile.substring(0, 3).equals("011") && !mobile.substring(0, 3).equals("015")) {
+                showAlert(getString(R.string.invalid_mobile))
+                false
+            }else{true}
+        } else if (followerItem.name.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || photosList.size == 0 || (followerItem.pic.isNullOrBlank())) {
             showAlert(getString(R.string.invalid_data))
             false
         } else

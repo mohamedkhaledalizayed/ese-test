@@ -108,16 +108,22 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         }
 
         bEdit.setOnClickListener {
-            navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewUpdateFragment())
+            if (!isEngineerDataValid())
+                return@setOnClickListener
+            else
+                navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewUpdateFragment())
         }
         bContinue.setOnClickListener {
+            if (!isEngineerDataValid())
+                return@setOnClickListener
             if (!isDataValid(edMobile.text.toString()))
                 return@setOnClickListener
             if ((rb_home.isChecked && edAddress.text.toString().isBlank()))
                 showAlert(getString(R.string.invalid_data))
             else
-                navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewDetailsFragment(if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE , edAddress.text.toString(), edMobile.text.toString(), medicalRenewalUI))
+                navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewDetailsFragment(if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE, edAddress.text.toString(), edMobile.text.toString(), medicalRenewalUI))
         }
+//        edMobile.setText("01119850766")
 //        medicalRenewalUI.requestStatus = -1 // TODO TODOTODO TODOTODO TODOTODO TODOTODO TODOTODO TODO
         when (medicalRenewalUI.requestStatus) {
             -1 -> tvRequestStatus.visibility = View.GONE
@@ -133,15 +139,15 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             }
             2 -> {
                 tvRequestStatus.setTextColor(resources.getColor(R.color.red))
-                if(medicalRenewalUI.rejectionMsg.isNullOrEmpty())
+                if (medicalRenewalUI.rejectionMsg.isNullOrEmpty())
                     tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected)
                 else
-                    tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected) + "\n" + getString(R.string.medical_update_request_rejection_reason) + " "+ medicalRenewalUI.rejectionMsg
+                    tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected) + "\n" + getString(R.string.medical_update_request_rejection_reason) + " " + medicalRenewalUI.rejectionMsg
             }
         }
     }
 
-    private fun checkStatus(){
+    private fun checkStatus() {
         when (medicalRenewalUI.engineerStatus) {
             -1 -> {
                 showInEligibleMemberAlert(getString(R.string.error_msg))
@@ -155,8 +161,12 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 showInEligibleMemberAlert(getString(R.string.medical_subscription_suspended))
                 return
             }
+            3 -> {
+                showInEligibleMemberAlert(getString(R.string.medical_subscription_renew_syndicate_membership))
+                return
+            }
         }
-        if(medicalRenewalUI.contact?.isDead == true && medicalRenewalUI.followers?.size == 0){
+        if (medicalRenewalUI.contact?.isDead == true && medicalRenewalUI.followers?.size == 0) {
             bContinue.visibility = View.GONE
         }
         when (medicalRenewalUI.healthCareStatus) {
@@ -190,6 +200,15 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             true
         else {
             showAlert(getString(R.string.invalid_mobile))
+            false
+        }
+    }
+
+    private fun isEngineerDataValid(): Boolean {
+        return if (!medicalRenewalUI.contact?.mobile.isNullOrEmpty() && !medicalRenewalUI.contact?.address.isNullOrEmpty() && !medicalRenewalUI.contact?.name.isNullOrEmpty() && !medicalRenewalUI.contact?.syndicateName.isNullOrEmpty())
+            true
+        else {
+            showAlert(getString(R.string.medical_subscription_renew_incomplete_data))
             false
         }
     }

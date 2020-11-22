@@ -6,7 +6,8 @@
     <data>
 
         <import type="android.text.Html" />
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
 
         <variable
             name="medicalRenewalPayment"
@@ -23,41 +24,41 @@
             android:id="@+id/svContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_horizontal_normal"
             android:background="@drawable/rounded_bg"
+            android:padding="@dimen/margin_horizontal_normal"
             android:scrollbars="none">
 
             <LinearLayout
                 android:id="@+id/llContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="invisible">
 
                 <TextView
                     android:id="@+id/tvService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"
                     android:text="@{medicalRenewalPayment.paymentItem.name}"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tvName"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
-<!--                    android:text="@{Html.fromHtml(@string/name_title(medicalRenewalPayment.paymentItem.name))}"-->
-<!--                    android:textSize="@dimen/text_size_medium" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvName"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+                <!--                    android:text="@{Html.fromHtml(@string/name_title(medicalRenewalPayment.paymentItem.name))}"-->
+                <!--                    android:textSize="@dimen/text_size_medium" />-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tvMemberNumber"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
-<!--                    android:text="@{Html.fromHtml(@string/user_number_title(medicalRenewalPayment.paymentItem.name))}"-->
-<!--                    android:textSize="@dimen/text_size_medium" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvMemberNumber"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+                <!--                    android:text="@{Html.fromHtml(@string/user_number_title(medicalRenewalPayment.paymentItem.name))}"-->
+                <!--                    android:textSize="@dimen/text_size_medium" />-->
 
                 <!--                <TextView-->
                 <!--                    android:id="@+id/tvRequestID"-->
@@ -69,21 +70,21 @@
                 <TextView
                     android:id="@+id/tvAmount"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@{Html.fromHtml(@string/amount_title(medicalRenewalPayment.paymentItem.amount))}"
                     android:textSize="@dimen/text_size_medium" />
 
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tvDetails"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/details"-->
-<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
-<!--                    android:textColor="@color/colorPrimary"-->
-<!--                    android:visibility='@{medicalRenewalPayment.paymentItem == null ? View.GONE : View.VISIBLE}'-->
-<!--                    android:textSize="@dimen/text_size_medium" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvDetails"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@string/details"-->
+                <!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+                <!--                    android:textColor="@color/colorPrimary"-->
+                <!--                    android:visibility='@{medicalRenewalPayment.paymentItem == null ? View.GONE : View.VISIBLE}'-->
+                <!--                    android:textSize="@dimen/text_size_medium" />-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvDetails"
@@ -96,11 +97,11 @@
                     android:id="@+id/tvPaymentMethod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/payment_method"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:visibility="visible"
+                    android:text="@string/payment_method"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="@dimen/text_size_large"
+                    android:visibility="visible" />
 
                 <RadioGroup
                     android:id="@+id/rgPaymentMechanismType"
@@ -117,38 +118,44 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
+                        android:buttonTint="@color/dark_green"
                         android:checked="true"
                         android:text="@string/payment_card"
-                        android:textSize="@dimen/text_size_medium"
-                        android:buttonTint="@color/dark_green" />
+                        android:textSize="@dimen/text_size_medium" />
 
                     <RadioButton
                         android:id="@+id/rb_channel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:buttonTint="@color/dark_green"
                         android:text="@string/payment_channel"
-                        android:textSize="@dimen/text_size_medium"
-                        android:buttonTint="@color/dark_green" />
+                        android:textSize="@dimen/text_size_medium" />
 
                     <RadioButton
                         android:id="@+id/rb_mobileWallet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:buttonTint="@color/dark_green"
                         android:text="@string/payment_wallet"
-                        android:visibility="gone"
                         android:textSize="@dimen/text_size_medium"
-                        android:buttonTint="@color/dark_green"/>
+                        android:visibility="gone" />
 
                     <RadioButton
                         android:id="@+id/rb_meeza"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:buttonTint="@color/dark_green"
                         android:text="@string/payment_meeza"
                         android:textSize="@dimen/text_size_medium"
-                        android:visibility="gone"
-                        android:buttonTint="@color/dark_green" />
+                        android:visibility="gone" />
 
                 </RadioGroup>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/pos" />
 
                 <Button
                     android:id="@+id/bPay"

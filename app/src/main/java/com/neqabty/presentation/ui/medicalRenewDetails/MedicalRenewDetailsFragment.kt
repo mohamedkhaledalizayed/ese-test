@@ -24,6 +24,7 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
+import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
@@ -133,7 +134,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
 //            //CowpayConstantKeys().Production or CowpayConstantKeys().SandBox
 //            intent.putExtra(CowpayConstantKeys().PaymentEnvironment, CowpayConstantKeys().SandBox)
 //            //set locale language
-//            intent.putExtra(CowpayConstantKeys().Language, CowpayConstantKeys().ARABIC)
+//            intent.putExtra(CowpayConstantKeys().Language, CowpayConstantKeys().ENGLISH)
 //            // use pay with credit card
 //            intent.putExtra(
 //                    CowpayConstantKeys().CreditCardMethodType,
@@ -146,15 +147,15 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
 //                    "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
 //            )
 //            //order id
-//            intent.putExtra(CowpayConstantKeys().MerchantReferenceId, memberItem.paymentCreationRequest?.senderRequestNumber)
+//            intent.putExtra(CowpayConstantKeys().MerchantReferenceId, medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber)
 //            //order price780
-//            intent.putExtra(CowpayConstantKeys().Amount, memberItem.paymentCreationRequest?.settlementAmounts?.amount?.toString())
+//            intent.putExtra(CowpayConstantKeys().Amount, medicalRenewalPaymentUI.paymentItem?.amount.toString())
 //            //user data
-//            intent.putExtra(CowpayConstantKeys().CustomerName, memberItem.engineerName)
+//            intent.putExtra(CowpayConstantKeys().CustomerName, medicalRenewalPaymentUI.paymentItem?.name)
 //            intent.putExtra(CowpayConstantKeys().CustomerMobile, "01200000000")
 //            intent.putExtra(CowpayConstantKeys().CustomerEmail, "customer@customer.com")
 //            //user id
-//            intent.putExtra(CowpayConstantKeys().CustomerMerchantProfileId, memberItem.paymentCreationRequest?.userUniqueIdentifier)
+//            intent.putExtra(CowpayConstantKeys().CustomerMerchantProfileId, medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber)
 //
 //
 //            startActivityForResult(intent, CowpayConstantKeys().PaymentMethodsActivityRequestCode)
@@ -173,7 +174,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
                 responseMSG?.let {
                     showAlert(responseMSG) {
                         navController().popBackStack()
-                        navController().navigate(R.id.inquiryFragment)
+                        navController().navigate(R.id.homeFragment)
                     }
                 }
 

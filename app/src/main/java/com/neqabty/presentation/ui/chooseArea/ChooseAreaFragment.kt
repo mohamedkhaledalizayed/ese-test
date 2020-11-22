@@ -1,5 +1,7 @@
 package com.neqabty.presentation.ui.chooseArea
 
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -78,6 +80,10 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
     }
 
     private fun initializeViews() {
+        binding.bSubscriptionRules.setOnClickListener {
+            val subscriptionIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"))
+            startActivity(subscriptionIntent)
+        }
         binding.bNext.setOnClickListener {
 //                ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
 //                ClaimingData.governId = (spGovern.selectedItem as GovernUI).id

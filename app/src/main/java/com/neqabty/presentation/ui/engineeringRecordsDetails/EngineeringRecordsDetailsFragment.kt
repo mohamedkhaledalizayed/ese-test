@@ -314,7 +314,7 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
 
     fun saveImage(myBitmap: Bitmap): PhotoUI {
         val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
         val path: String = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
         val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
         val directory = File(path)

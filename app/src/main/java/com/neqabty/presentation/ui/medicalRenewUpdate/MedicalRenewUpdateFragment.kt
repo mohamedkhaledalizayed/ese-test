@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
@@ -108,8 +107,12 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
             goToEditFollower()
         }
         bSubmit.setOnClickListener {
-            updateRequested = true
-            medicalRenewUpdateViewModel.updateMedicalRenewalData(medicalRenewalUI)
+            if (medicalRenewalUI.followers?.size == 0) {
+                showAlert(getString(R.string.medical_subscription_renew_add_follower))
+            } else {
+                updateRequested = true
+                medicalRenewUpdateViewModel.updateMedicalRenewalData(medicalRenewalUI)
+            }
         }
         updateFollowersTitleVisibility()
     }
@@ -160,7 +163,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
         selectedFollower = follower
         isEdit = true
 //        if(selectedFollower.isNew)
-            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(selectedFollower, medicalRenewalUI))
+        navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(selectedFollower, medicalRenewalUI))
 //        else
 //            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
     }
@@ -177,7 +180,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
                 }
 
             } else {
-                if(medicalRenewalUI.followers?.find {it.id == updatedFollower.id } == null)
+                if (medicalRenewalUI.followers?.find { it.id == updatedFollower.id } == null)
                     medicalRenewalUI.followers?.add(updatedFollower)
             }
             isEdit = false
@@ -187,8 +190,8 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
 //        if (isEdit) {
 //            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
 //        } else {
-            incrementedID += 11
-            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(MedicalRenewalUI.FollowerItem(id = incrementedID, isNew = true), medicalRenewalUI))
+        incrementedID += 11
+        navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(MedicalRenewalUI.FollowerItem(id = incrementedID, isNew = true), medicalRenewalUI))
 //        }
     }
 
