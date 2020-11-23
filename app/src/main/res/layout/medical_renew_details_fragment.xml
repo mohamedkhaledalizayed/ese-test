@@ -75,16 +75,15 @@
                     android:text="@{Html.fromHtml(@string/amount_title(medicalRenewalPayment.paymentItem.amount))}"
                     android:textSize="@dimen/text_size_medium" />
 
-
-                <!--                <TextView-->
-                <!--                    android:id="@+id/tvDetails"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:text="@string/details"-->
-                <!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
-                <!--                    android:textColor="@color/colorPrimary"-->
-                <!--                    android:visibility='@{medicalRenewalPayment.paymentItem == null ? View.GONE : View.VISIBLE}'-->
-                <!--                    android:textSize="@dimen/text_size_medium" />-->
+                <TextView
+                    android:id="@+id/tvDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/details"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium"
+                    android:visibility='@{(medicalRenewalPayment.paymentItem.paymentDetailsItems == null || medicalRenewalPayment.paymentItem.paymentDetailsItems.size() == 0)? View.GONE : View.VISIBLE}' />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvDetails"
@@ -105,7 +104,7 @@
 
                 <RadioGroup
                     android:id="@+id/rgPaymentMechanismType"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="visible"
@@ -123,6 +122,13 @@
                         android:text="@string/payment_card"
                         android:textSize="@dimen/text_size_medium" />
 
+                    <ImageView
+                        android:id="@+id/ivCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/pos" />
+
                     <RadioButton
                         android:id="@+id/rb_channel"
                         android:layout_width="wrap_content"
@@ -130,6 +136,14 @@
                         android:buttonTint="@color/dark_green"
                         android:text="@string/payment_channel"
                         android:textSize="@dimen/text_size_medium" />
+
+                    <ImageView
+                        android:id="@+id/ivChannels"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/pos"
+                        android:visibility="gone" />
 
                     <RadioButton
                         android:id="@+id/rb_mobileWallet"
@@ -150,12 +164,6 @@
                         android:visibility="gone" />
 
                 </RadioGroup>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/pos" />
 
                 <Button
                     android:id="@+id/bPay"

@@ -108,13 +108,13 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         }
 
         bEdit.setOnClickListener {
-            if (!isEngineerDataValid())
+            if (!isEngineerDataValid())// TODO TODOTODO TODOTODO TODOTODO TODOTODO TODOTODO TODO
                 return@setOnClickListener
             else
                 navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewUpdateFragment())
         }
         bContinue.setOnClickListener {
-            if (!isEngineerDataValid())
+            if (!isEngineerDataValid())// TODO TODOTODO TODOTODO TODOTODO TODOTODO TODOTODO TODO
                 return@setOnClickListener
             if (!isDataValid(edMobile.text.toString()))
                 return@setOnClickListener
@@ -148,6 +148,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     }
 
     private fun checkStatus() {
+//        medicalRenewalUI.engineerStatus = 0
         when (medicalRenewalUI.engineerStatus) {
             -1 -> {
                 showInEligibleMemberAlert(getString(R.string.error_msg))
@@ -162,7 +163,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 return
             }
             3 -> {
-                showInEligibleMemberAlert(getString(R.string.medical_subscription_renew_syndicate_membership))
+                showGoToRenewalPaymentAlert(getString(R.string.medical_subscription_renew_syndicate_membership))
                 return
             }
         }
@@ -240,6 +241,30 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         builder?.setCancelable(false)
         builder?.setMessage(msg)
         builder?.setNegativeButton(getString(R.string.ok_btn)) { dialog, which ->
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
+
+        if (dialog == null)
+            dialog = builder?.create()
+
+        if (!dialog?.isShowing!!)
+            dialog?.show()
+
+    }
+
+
+    private fun showGoToRenewalPaymentAlert(msg: String) {
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.alert_title))
+        builder?.setCancelable(false)
+        builder?.setMessage(msg)
+        builder?.setPositiveButton(getString(R.string.go_to_payment)) { dialog, which ->
+            navController().popBackStack()
+            navController().navigate(R.id.inquiryFragment)
+        }
+
+        builder?.setNegativeButton(getString(R.string.cancel_btn)) { dialog, which ->
             navController().popBackStack()
             navController().navigate(R.id.homeFragment)
         }

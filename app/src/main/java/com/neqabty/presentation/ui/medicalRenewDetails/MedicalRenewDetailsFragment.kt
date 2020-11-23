@@ -24,10 +24,9 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
-import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import kotlinx.android.synthetic.main.inquiry_details_fragment.*
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.*
 import me.cowpay.util.CowpayConstantKeys
 import javax.inject.Inject
 
@@ -106,17 +105,29 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
         this.adapter = adapter
 
         medicalRenewalPaymentUI?.let {
-            bPay.visibility = if (it.paymentItem?.amount == null || it.paymentItem?.amount == 0) View.GONE else View.VISIBLE
-        }
-        medicalRenewalPaymentUI?.let {
             binding.medicalRenewalPayment = it
 
             it.paymentItem?.let {
-                adapter.submitList(mutableListOf())
+                adapter.submitList(it.paymentDetailsItems)
             }
+            bPay.visibility = if (it.paymentItem?.amount == null || it.paymentItem?.amount == 0) View.GONE else View.VISIBLE
         }
 
         binding.rvDetails.adapter = adapter
+
+        rb_card.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                ivCard.visibility = View.VISIBLE
+                ivChannels.visibility = View.GONE
+            }
+        }
+        rb_channel.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                ivChannels.visibility = View.VISIBLE
+                ivCard.visibility = View.GONE
+            }
+        }
+
         bPay.setOnClickListener {
             llSuperProgressbar.visibility = View.VISIBLE
             createPayment()

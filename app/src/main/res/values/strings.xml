@@ -211,6 +211,7 @@
     <string name="alert_confirm">تأكيد</string>
     <string name="no_connection_cancel">إلغاء</string>
     <string name="no_connection_retry">محاولة أخرى</string>
+    <string name="go_to_payment">تجديد الإشتراك</string>
     <string name="invalid_mobile">من فضلك ادخل رقم موبايل صحيح</string>
     <string name="invalid_national_id">من فضلك ادخل رقم قومي صحيح</string>
     <string name="invalid_data">من فضلك أكمل ادخال البيانات</string>

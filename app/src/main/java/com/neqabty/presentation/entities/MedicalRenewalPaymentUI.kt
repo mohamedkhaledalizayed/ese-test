@@ -7,6 +7,12 @@ data class MedicalRenewalPaymentUI(
     data class PaymentItem(
             var paymentRequestNumber: String = "",
             var amount: Int?,
-            var name: String?
+            var name: String?,
+            var paymentDetailsItems: List<PaymentDetailsItem>? = null
+    )
+
+    data class PaymentDetailsItem(
+            var name: String = "",
+            var totalAmount: String = ""
     )
 }

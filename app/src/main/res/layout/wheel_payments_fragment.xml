@@ -66,7 +66,7 @@
             android:text="@string/wheel_enter_service"
             android:textColor="@android:color/white"
             android:textSize="@dimen/text_size_medium"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
