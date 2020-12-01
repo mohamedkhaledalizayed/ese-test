@@ -34,7 +34,13 @@ data class MedicalRenewalData(
             @field:SerializedName("ADDRESS")
             var address: String? = "",
             @field:SerializedName("MOBILE")
-            var mobile: String? = ""
+            var mobile: String? = "",
+            @field:SerializedName("NATIONALID")
+            var nationalId: String? = "",
+            @field:SerializedName("BIRTHDATE")
+            var birthDate: String? = "",
+            @field:SerializedName("PicBase64")
+            var pic: String? = ""
     )
 
     data class FollowerItem(
@@ -56,6 +62,8 @@ data class MedicalRenewalData(
             var nationalId: String? = null,
             @field:SerializedName("RELATIONTYPE")
             var relationType: String? = null,
+            @field:SerializedName("MedRelationTypeName")
+            var relationTypeName: String? = "",
             @field:SerializedName("GENDER")
             var gender: String? = null
 

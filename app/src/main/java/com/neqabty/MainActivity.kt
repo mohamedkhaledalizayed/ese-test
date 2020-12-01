@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
@@ -32,12 +31,10 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.ui.login.LoginFragmentDirections
 import com.neqabty.presentation.util.*
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.android.synthetic.main.main_activity.*
 import java.io.IOException
 import java.util.*
@@ -65,22 +62,23 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
         setSupportActionBar(toolbar)
         getToken()
-//        checkRoot()
+        checkRoot()
         startActivities()
 
         Constants.isFirebaseTokenUpdated.observe(this, Observer {
-            if(it)
+            if (it)
                 getToken()
         })
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
-    //    private fun checkRoot(){
-//        if (DeviceUtils().isDeviceRooted()) {
-//            showAlertDialogAndExitApp(getString(R.string.root_msg));
-//        }
-//    }
+    private fun checkRoot() {
+        if (DeviceUtils().isDeviceRooted()) {
+            showAlertDialogAndExitApp(getString(R.string.root_msg));
+        }
+    }
+
     private fun startActivities() {
         val notificationId: String? = intent?.extras?.getString("notificationId")
         val navHostFragment =
@@ -244,7 +242,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                         newToken = task.result?.token!!
                         if (!newToken.equals(PreferencesHelper(this).token)) // Token has been changed
                         {
-                            if(PreferencesHelper(this).mobile.isNotBlank()){ // visitor or client
+                            if (PreferencesHelper(this).mobile.isNotBlank()) { // visitor or client
                                 mainViewModel.login(PreferencesHelper(this).mobile, PreferencesHelper(this).user, newToken, PreferencesHelper(this))
                             }
                         }

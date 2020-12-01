@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
@@ -108,18 +109,17 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         }
 
         bEdit.setOnClickListener {
-            if (!isEngineerDataValid())// TODO TODOTODO TODOTODO TODOTODO TODOTODO TODOTODO TODO
-                return@setOnClickListener
-            else
+            if (isEngineerDataValid())
                 navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewUpdateFragment())
         }
         bContinue.setOnClickListener {
-            if (!isEngineerDataValid())// TODO TODOTODO TODOTODO TODOTODO TODOTODO TODOTODO TODO
-                return@setOnClickListener
-            if (!isDataValid(edMobile.text.toString()))
-                return@setOnClickListener
-            if ((rb_home.isChecked && edAddress.text.toString().isBlank()))
+            if ((rb_home.isChecked && edAddress.text.toString().isBlank())) {
                 showAlert(getString(R.string.invalid_data))
+                return@setOnClickListener
+            } else if (!isEngineerDataValid())
+                return@setOnClickListener
+            else if (!isDataValid(edMobile.text.toString()))
+                return@setOnClickListener
             else
                 navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewDetailsFragment(if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE, edAddress.text.toString(), edMobile.text.toString(), medicalRenewalUI))
         }
@@ -149,6 +149,8 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
 
     private fun checkStatus() {
 //        medicalRenewalUI.engineerStatus = 0
+//        medicalRenewalUI.contact?.pic = "jhkdfjv"
+//        medicalRenewalUI.contact?.syndicateName = "jhcj,d"
         when (medicalRenewalUI.engineerStatus) {
             -1 -> {
                 showInEligibleMemberAlert(getString(R.string.error_msg))
@@ -177,10 +179,10 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             }
             1 -> {
                 showNewMemberAlert()
-                return
             }
             3 -> bContinue.visibility = View.GONE
             4 -> bContinue.visibility = View.GONE
+            5 -> bEdit.visibility = View.GONE
         }
     }
 
@@ -206,11 +208,17 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     }
 
     private fun isEngineerDataValid(): Boolean {
-        return if (!medicalRenewalUI.contact?.mobile.isNullOrEmpty() && !medicalRenewalUI.contact?.address.isNullOrEmpty() && !medicalRenewalUI.contact?.name.isNullOrEmpty() && !medicalRenewalUI.contact?.syndicateName.isNullOrEmpty())
+        return if (medicalRenewalUI.contact?.pic.isNullOrEmpty() || medicalRenewalUI.contact?.syndicateName.isNullOrEmpty()) {
+            showAlert(getString(R.string.medical_subscription_renew_incomplete_data)) {
+                navController().popBackStack()
+                navController().navigate(R.id.homeFragment)
+            }
+            false
+        } else if (!medicalRenewalUI.contact?.mobile.isNullOrEmpty() && !medicalRenewalUI.contact?.address.isNullOrEmpty() && !medicalRenewalUI.contact?.name.isNullOrEmpty() && !medicalRenewalUI.contact?.nationalId.isNullOrEmpty() && !medicalRenewalUI.contact?.birthDate.isNullOrEmpty())
             true
         else {
-            showAlert(getString(R.string.medical_subscription_renew_incomplete_data))
-            false
+            Toast.makeText(requireContext(), getString(R.string.medical_subscription_renew_incomplete_data), Toast.LENGTH_LONG).show()
+            true
         }
     }
 

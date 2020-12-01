@@ -21,7 +21,10 @@ data class MedicalRenewalUI(
             var syndicateName: String? = "",
             var isDead: Boolean? = false,
             var address: String? = "",
-            var mobile: String? = ""
+            var mobile: String? = "",
+            var nationalId: String? = "",
+            var birthDate: String? = "",
+            var pic: String? = ""
     ) : Parcelable
 
     @Parcelize
@@ -36,6 +39,7 @@ data class MedicalRenewalUI(
             var mobile: String? = null,
             var nationalId: String? = null,
             var relationType: String? = null,
+            var relationTypeName: String? = null,
             var gender: String? = "M"
     ) : Parcelable
 

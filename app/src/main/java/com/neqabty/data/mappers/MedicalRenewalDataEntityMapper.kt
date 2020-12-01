@@ -15,10 +15,10 @@ class MedicalRenewalDataEntityMapper @Inject constructor() : Mapper<MedicalRenew
                 healthCareStatus = from.healthCareStatus,
                 engineerStatus = from.engineerStatus,
                 requestStatus = from.requestStatus,
-                relations = from.relations?.map { return@map  MedicalRenewalEntity.RelationItem(id = it.id, name = it.name) },
+                relations = from.relations?.map { return@map MedicalRenewalEntity.RelationItem(id = it.id, name = it.name) },
                 rejectionMsg = from.rejectionMsg,
-                contact = from.contact?.let { return@let MedicalRenewalEntity.ContactData(name = it.name, syndicateName = it.syndicateName, isDead = it.isDead, address = it.address, mobile = it.mobile) },
-                followers = from.followers?.map { return@map MedicalRenewalEntity.FollowerItem(name = it.name, id = it.id, isDeleted = it.isDeleted, birthDate = it.birthDate, pic = it.pic, attachments = it.attachments, mobile = it.mobile, nationalId = it.nationalId, relationType = it.relationType, gender = it.gender) }
+                contact = from.contact?.let { return@let MedicalRenewalEntity.ContactData(name = it.name, syndicateName = it.syndicateName, isDead = it.isDead, address = it.address, mobile = it.mobile, nationalId = it.nationalId, birthDate = it.birthDate, pic = it.pic) },
+                followers = from.followers?.map { return@map MedicalRenewalEntity.FollowerItem(name = it.name, id = it.id, isDeleted = it.isDeleted, birthDate = it.birthDate, pic = it.pic, attachments = it.attachments, mobile = it.mobile, nationalId = it.nationalId, relationType = it.relationType, relationTypeName = it.relationTypeName, gender = it.gender) }
         )
     }
 }

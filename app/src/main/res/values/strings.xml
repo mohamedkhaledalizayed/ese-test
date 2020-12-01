@@ -132,7 +132,7 @@
     <string name="governorate">المحافظة</string>
     <string name="area">المنطقة</string>
     <string name="choose_area">برجاء اختيار مكان مقدم الخدمة</string>
-    <string name="subscription_rules">قواعد الاشتراكات</string>
+    <string name="subscription_rules">قواعد المشروع</string>
     <string name="service">الخدمات</string>
     <string name="degree">الدرجة العلمية</string>
     <string name="speciality">التخصص</string>
@@ -145,7 +145,7 @@
     <string name="serviceProvider">مقدم الخدمة الطبية</string>
     <string name="serviceProviderDetails">بيانات مقدم الخدمة</string>
     <string name="attachPhotoDetails">بيانات الموافقات الطبية</string>
-    <string name="addPhoto">إضافة صورة الموافقات الطبية</string>
+    <string name="addPhoto">اضافة المرفقات</string>
     <string name="send">إرسال</string>
     <string name="select">اكمل بإستخدام..</string>
     <string name="gallery">المعرض</string>
@@ -161,7 +161,7 @@
     <string name="news_title">الأخبار</string>
     <string name="trips_title">الرحلات</string>
     <string name="medical_renew_title">اشتراك الرعاية الصحية</string>
-    <string name="medical_renew_update_title">تعديل بيانات اشتراك الرعاية الصحية</string>
+    <string name="medical_renew_update_title">تعديل / اضافة / حذف تابعين</string>
     <string name="claiming_title">الموافقات الطبية</string>
     <string name="medical_title">الدليل الطبي</string>
     <string name="inquiry_title">المدفوعات</string>
@@ -270,7 +270,7 @@
         جنيه
     </string>
 
-    <string name="pay">الدفع</string>
+    <string name="pay">دفع</string>
     <string name="delivery_method">طريقة التوصيل</string>
     <string name="delivery_mobile_title">رقم الموبايل</string>
     <string name="delivery_mobile_hint">رقم الهاتف الذي سيتم التواصل عليه عند الاستلام</string>
@@ -303,6 +303,7 @@
     <string name="medical_update_request_status_approved">لقد تم قبول الطلب وبرجاء الاستمرار لاتمام عمليه الدفع</string>
     <string name="medical_update_request_status_rejected">لقد تم رفض طلبكم.</string>
     <string name="medical_update_request_rejection_reason">سبب الرفض: </string>
+    <string name="follower_item"><![CDATA[<font><b>%s: </b></font>]]>%s</string>
     <string name="inquiry">المدفوعات</string>
     <string name="details">التفاصيل:</string>
     <string name="payment_method">طريقة الدفع:</string>
@@ -427,7 +428,7 @@
 
     <string name="complaint_title">استفسارات</string>
     <string name="complaint_section_title">شكاوى ومقترحات</string>
-    <string name="complaint_description">للاستفسارات نرجو الاتصال علي الرقم المختصر <![CDATA[<font color="#1d1ad2">19000</font>]]></string>
+    <string name="complaint_description">للاستفسارات نرجو الاتصال علي مركز خدمة العملاء (الكول سنتر) علي الرقم التالي <![CDATA[<font color="#1d1ad2">0235317300</font>]]></string>
     <string name="complaint_fill_data">املأ من فضلك ما يلي</string>
     <string name="complaint_type">نوع الشكوى</string>
     <string name="complaint_name">اسم مقدم الشكوى</string>

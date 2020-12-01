@@ -5,8 +5,8 @@ data class MedicalRenewalEntity(
         var engineerStatus: Int? = 0,
         var requestStatus: Int? = 0,
         var healthCareStatus: Int? = 0,
-        var contact: MedicalRenewalEntity.ContactData? = null,
-        var followers: List<MedicalRenewalEntity.FollowerItem>? = null,
+        var contact: ContactData? = null,
+        var followers: List<FollowerItem>? = null,
         var relations: List<RelationItem>? = null,
         var rejectionMsg: String? = ""
 ) {
@@ -16,7 +16,10 @@ data class MedicalRenewalEntity(
             var syndicateName: String? = "",
             var isDead: Boolean? = false,
             var address: String? = "",
-            var mobile: String? = ""
+            var mobile: String? = "",
+            var nationalId: String? = "",
+            var birthDate: String? = "",
+            var pic: String? = ""
     )
 
     data class FollowerItem(
@@ -29,6 +32,7 @@ data class MedicalRenewalEntity(
             var mobile: String? = null,
             var nationalId: String? = null,
             var relationType: String? = null,
+            var relationTypeName: String? = null,
             var gender: String? = null
     )
 

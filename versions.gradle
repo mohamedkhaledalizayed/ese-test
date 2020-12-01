@@ -37,6 +37,7 @@ versions.indicator = "0.2.0"
 versions.kotlinx = "0.2.0"
 versions.mastercard = "1.1.1"
 versions.wheel = "1.1.0"
+versions.ClearableEditText = "3.2.0"
 
 def deps = [:]
 
@@ -178,6 +179,9 @@ deps.mastercard = mastercard
 
 def wheel = "github.hellocsl:CursorWheelLayout:$versions.wheel"
 deps.wheel = wheel
+
+def clearableEditText = "org.droidparts:droidparts:$versions.ClearableEditText"
+deps.clearableEditText = clearableEditText
 
 ext.deps = deps
 

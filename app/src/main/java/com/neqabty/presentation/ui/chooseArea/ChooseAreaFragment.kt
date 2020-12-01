@@ -2,28 +2,28 @@ package com.neqabty.presentation.ui.chooseArea
 
 import android.content.Intent
 import android.net.Uri
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.ChooseAreaFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.GovernUI
 import com.neqabty.presentation.util.autoCleared
-
 import javax.inject.Inject
 
 class ChooseAreaFragment : BaseFragment(), Injectable {
@@ -43,9 +43,9 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
     var governID: Int = 0
     var areaID: Int = 0
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -81,7 +81,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
 
     private fun initializeViews() {
         binding.bSubscriptionRules.setOnClickListener {
-            val subscriptionIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"))
+            val subscriptionIntent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.IP + "pdf/Medical.pdf"))
             startActivity(subscriptionIntent)
         }
         binding.bNext.setOnClickListener {

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.text.Html" />
 
         <variable
             name="follower"
@@ -12,8 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/square_bg"
-        android:layout_margin="@dimen/margin_horizontal_small">
+        android:layout_margin="@dimen/margin_horizontal_small"
+        android:background="@drawable/square_bg">
 
 
         <TextView
@@ -42,7 +43,7 @@
             android:maxLines="1"
             android:paddingStart="@dimen/margin_horizontal_small"
             android:paddingEnd="@dimen/margin_horizontal_small"
-            android:text="@{follower.name}"
+            android:text="@{Html.fromHtml(@string/follower_item(follower.relationTypeName,  follower.name))}"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/text_size_medium"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -55,11 +56,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_horizontal_normal"
+            android:text="@{String.format(@string/currency, follower.name)}"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_large"
             android:textStyle="bold"
             android:visibility="gone"
-            android:text="@{String.format(@string/currency, follower.name)}"
-            android:textColor="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tvName"

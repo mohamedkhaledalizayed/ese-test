@@ -22,6 +22,7 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ComplaintTypeUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import com.neqabty.presentation.util.call
 import kotlinx.android.synthetic.main.complaint_fragment.*
 import javax.inject.Inject
 
@@ -78,6 +79,9 @@ class ComplaintFragment : BaseFragment(), Injectable {
     }
 
     private fun initializeViews() {
+        binding.tvDescription.setOnClickListener {
+            tvDescription.call("0235317300", requireContext())
+        }
         binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
         binding.bSend.setOnClickListener {
             isSubmitted = true

@@ -107,7 +107,7 @@
 
                 <RadioGroup
                     android:id="@+id/rgPaymentMechanismType"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="visible"
@@ -125,6 +125,13 @@
                         android:textSize="@dimen/text_size_medium"
                         android:buttonTint="@color/dark_green" />
 
+                    <ImageView
+                        android:id="@+id/ivCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/visa" />
+
                     <RadioButton
                         android:id="@+id/rb_channel"
                         android:layout_width="wrap_content"
@@ -132,6 +139,14 @@
                         android:text="@string/payment_channel"
                         android:textSize="@dimen/text_size_medium"
                         android:buttonTint="@color/dark_green" />
+
+                    <ImageView
+                        android:id="@+id/ivChannels"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/pos"
+                        android:visibility="gone" />
 
                     <RadioButton
                         android:id="@+id/rb_mobileWallet"

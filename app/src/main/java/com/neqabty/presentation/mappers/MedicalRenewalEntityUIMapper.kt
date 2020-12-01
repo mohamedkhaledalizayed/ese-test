@@ -15,10 +15,10 @@ class MedicalRenewalEntityUIMapper @Inject constructor() : Mapper<MedicalRenewal
                 healthCareStatus = from.healthCareStatus,
                 engineerStatus = from.engineerStatus,
                 requestStatus = from.requestStatus,
-                relations = from.relations?.map { return@map  MedicalRenewalUI.RelationItem(id = it.id, name = it.name) },
+                relations = from.relations?.map { return@map MedicalRenewalUI.RelationItem(id = it.id, name = it.name) },
                 rejectionMsg = from.rejectionMsg,
-                contact = from.contact?.let { return@let MedicalRenewalUI.ContactData(name= it.name, syndicateName = it.syndicateName, isDead = it.isDead, address = it.address, mobile = it.mobile)},
-                followers = from.followers?.map { return@map MedicalRenewalUI.FollowerItem(name = it.name, id = it.id, isDeleted = it.isDeleted, birthDate = it.birthDate, pic = it.pic, mobile = it.mobile, nationalId = it.nationalId, relationType = it.relationType, gender = it.gender) }?.toMutableList()
+                contact = from.contact?.let { return@let MedicalRenewalUI.ContactData(name = it.name, syndicateName = it.syndicateName, isDead = it.isDead, address = it.address, mobile = it.mobile, nationalId = it.nationalId, birthDate = it.birthDate, pic = it.pic) },
+                followers = from.followers?.map { return@map MedicalRenewalUI.FollowerItem(name = it.name, id = it.id, isDeleted = it.isDeleted, birthDate = it.birthDate, pic = it.pic, mobile = it.mobile, nationalId = it.nationalId, relationType = it.relationType, relationTypeName = it.relationTypeName, gender = it.gender) }?.toMutableList()
         )
     }
 }

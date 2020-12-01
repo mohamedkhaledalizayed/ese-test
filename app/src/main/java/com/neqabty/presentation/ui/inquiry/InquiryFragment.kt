@@ -20,6 +20,7 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ServiceTypeUI
 import com.neqabty.presentation.entities.ServiceUI
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.inquiry_fragment.*
 import javax.inject.Inject
@@ -73,8 +74,9 @@ class InquiryFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-//        if (!PreferencesHelper(requireContext()).user.equals("null"))
-//            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
+        if (!PreferencesHelper(requireContext()).user.isNullOrEmpty())
+            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
+
         renderServices()
         llContent.visibility = View.VISIBLE
         bSend.setOnClickListener {

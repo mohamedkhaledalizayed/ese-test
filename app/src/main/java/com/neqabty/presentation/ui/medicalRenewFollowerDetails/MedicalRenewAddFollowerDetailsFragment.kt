@@ -12,6 +12,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Base64.NO_WRAP
 import android.view.LayoutInflater
 import android.view.View
@@ -63,6 +65,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
             "- لإضافة الوالدة برجاء إرفاق صورة شهادة ميلاد المهندس والبطاقة الشخصية للوالدة\n" +
                     " - لإضافة الوالد برجاء إرفاق صورة البطاقة الشخصية للوالد")
     var selectedRelationID = ""
+    var selectedRelationName = ""
 
     var selectedGender = ""
     lateinit var followerItem: MedicalRenewalUI.FollowerItem
@@ -109,6 +112,19 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         renderRelations()
         renderGenders()
         updateEditPhotoTitle()
+        edNationalID.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0.toString().length == 14)
+                    parseID()
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        }
+        )
         bEditPhoto.setOnClickListener {
             isForPP = true
             addPhoto()
@@ -294,7 +310,9 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
             if (!mobile.substring(0, 3).equals("012") && !mobile.substring(0, 3).equals("010") && !mobile.substring(0, 3).equals("011") && !mobile.substring(0, 3).equals("015")) {
                 showAlert(getString(R.string.invalid_mobile))
                 false
-            }else{true}
+            } else {
+                true
+            }
         } else if (followerItem.name.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || photosList.size == 0 || (followerItem.pic.isNullOrBlank())) {
             showAlert(getString(R.string.invalid_data))
             false
@@ -312,7 +330,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
                 myCalendar.set(Calendar.YEAR, year)
                 myCalendar.set(Calendar.MONTH, monthOfYear)
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                updateLabel()
+                updateBDLabel()
             }, year, month, day)
             datePicker.datePicker.maxDate = System.currentTimeMillis()
 
@@ -320,8 +338,26 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         }
     }
 
-    private fun updateLabel() {
-        val myFormat = "MM/dd/yy"; // In which you need put here
+    private fun parseID() {
+        val natID = edNationalID.text.toString()
+        val millennium = natID.substring(0, 1)
+        val year = natID.substring(1, 3)
+        val month = natID.substring(3, 5)
+        val day = natID.substring(5, 7)
+
+        if (millennium.toInt() == 3)
+            myCalendar.set(Calendar.YEAR, year.toInt() + 2000)
+        else
+            myCalendar.set(Calendar.YEAR, year.toInt())
+        myCalendar.set(Calendar.MONTH, month.toInt() - 1)
+        myCalendar.set(Calendar.DAY_OF_MONTH, day.toInt())
+        updateBDLabel()
+
+        if (natID.substring(12, 13).toInt() % 2 == 0) spGender.setSelection(1) else spGender.setSelection(0)
+    }
+
+    private fun updateBDLabel() {
+        val myFormat = "dd/MM/yy"; // In which you need put here
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         edBirthDate.setText(sdf.format(myCalendar.getTime()))
     }
@@ -382,6 +418,8 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 selectedRelationID = (parent.getItemAtPosition(position) as MedicalRenewalUI.RelationItem).id
                         ?: "0"
+                selectedRelationName = (parent.getItemAtPosition(position) as MedicalRenewalUI.RelationItem).name
+                        ?: ""
                 tvHint.text = hintsList?.get(position)
             }
         }
@@ -415,6 +453,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
             else -> "M"
         }
         followerItem.relationType = selectedRelationID
+        followerItem.relationTypeName = selectedRelationName
         followerItem.mobile = binding.edMobileNumber.text.toString()
         followerItem.nationalId = binding.edNationalID.text.toString()
         try {

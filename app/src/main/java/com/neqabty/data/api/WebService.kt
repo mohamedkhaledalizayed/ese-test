@@ -121,14 +121,17 @@ interface WebService {
     @POST("api/v1/service/response")
     fun sendDecryptionKey(@Body decryptionRequest: DecryptionRequest): Observable<ResponseWrapper<DecryptionData>>
 
-    @GET("http://test.boniantech.com/costcard/api/ApiHealthCare/GetFollowersList")
-    fun getMedicalRenewData(@Query("oldRefId") contactId: String): Observable<MedicalRenewalData>
+    @GET("api/ApiHealthCare/GetFollowersList")
+    fun getMedicalRenewData(@Query("oldRefId") contactId: String, @Query("server") server: String = ""): Observable<MedicalRenewalData>
 
-    @POST("http://test.boniantech.com/costcard/api/apiPaymentRequest/AddHealthCareRequest")
-    fun getMedicalRenewPaymentData(@Query("oldRefId") contactId: String, @Query("deliveryLocation") locationType: Int, @Query("deliveryAddress") address: String, @Query("deliveryPhone") mobile: String): Observable<MedicalRenewalPaymentData>
+    @POST("api/apiPaymentRequest/AddHealthCareRequest")
+    fun getMedicalRenewPaymentData(@Query("oldRefId") contactId: String, @Query("deliveryLocation") locationType: Int, @Query("deliveryAddress") address: String, @Query("deliveryPhone") mobile: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
 
-    @POST("http://test.boniantech.com/costcard/api/ApiHealthCare/MedBeneficiaryFollowersUpdate")
-    fun updateMedicalRenewPaymentData(@Body medicalRenewalDataRequest: MedicalRenewalData): Observable<MedicalRenewalUpdateData>
+    @POST("api/ApiHealthCare/MedBeneficiaryFollowersUpdate")
+    fun updateMedicalRenewPaymentData(@Body medicalRenewalDataRequest: MedicalRenewalData, @Query("server") server: String = ""): Observable<MedicalRenewalUpdateData>
+
+    @POST("api/v1/transactions/testCallback")
+    fun setPaid(@Body syndicateRequest: SyndicateRequest): Observable<ApiResponse<List<Unit>>>
 
     @POST("api/v2/medical/Beneficiary")
     fun validateUser(@Body claimingValidationRequest: ClaimingValidationRequest): Observable<ApiResponse<ClaimingValidationData>>

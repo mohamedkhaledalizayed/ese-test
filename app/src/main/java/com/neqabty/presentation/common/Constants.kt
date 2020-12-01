@@ -7,6 +7,8 @@ object Constants {
     var JWT: String = ""
     var isFirebaseTokenUpdated: MutableLiveData<Boolean> = MutableLiveData(false)
 
+    var IP = "http://3.131.229.146:44392/"
+
     var CLAIMING = 1
     var TRIPS = 2
     var RECORDS = 3

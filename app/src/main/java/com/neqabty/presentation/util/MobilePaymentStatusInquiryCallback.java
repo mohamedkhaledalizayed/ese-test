@@ -23,7 +23,7 @@ public class MobilePaymentStatusInquiryCallback implements PaymentStatusInquiryC
 
     @Override
     public void onSuccess(PaymentStatusInquiryResponse response) {
-        Log.i("NEQABTY", "Request Completed Successfully");
+//        Log.i("NEQABTY", "Request Completed Successfully");
 
         Toast.makeText(context, response.PaymentRequestStatus.Name, Toast.LENGTH_LONG).show();
 
@@ -31,7 +31,7 @@ public class MobilePaymentStatusInquiryCallback implements PaymentStatusInquiryC
 
     @Override
     public void onError(PaymentException paymentException) {
-        Log.e("NEQABTY", paymentException.details.getMessage());
+//        Log.e("NEQABTY", paymentException.details.getMessage());
 
 
     }
