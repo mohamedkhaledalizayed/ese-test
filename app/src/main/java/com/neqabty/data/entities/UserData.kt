@@ -10,6 +10,8 @@ data class UserData(
         var mobile: String = "",
         @field:SerializedName("type")
         var type: String? = "",
+        @field:SerializedName("jwt_token")
+        var jwt: String? = "",
         @field:SerializedName("details")
         var details: List<UserDetails>? = null
 ) : Response() {

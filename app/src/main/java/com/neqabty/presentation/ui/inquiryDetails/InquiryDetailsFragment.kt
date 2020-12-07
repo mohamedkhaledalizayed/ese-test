@@ -3,12 +3,10 @@ package com.neqabty.presentation.ui.inquiryDetails
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.Toast
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -109,79 +107,44 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         }
 
         binding.rvDetails.adapter = adapter
+
+        rb_card.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                ivCard.visibility = View.VISIBLE
+                ivChannels.visibility = View.GONE
+            }
+        }
+        rb_channel.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                ivChannels.visibility = View.VISIBLE
+                ivCard.visibility = View.GONE
+            }
+        }
+
         bPay.setOnClickListener {
             llSuperProgressbar.visibility = View.VISIBLE
-            createPayment()
-
-//            var intent = Intent(context, PaymentMethodsActivity::class.java)
-//
-//
-//            var PaymentMethod = ArrayList<String>()
-//            PaymentMethod.add(CowpayConstantKeys().CreditCardMethod)
-////            PaymentMethod.add(CowpayConstantKeys().FawryMethod)
-//            intent.putExtra(CowpayConstantKeys().PaymentMethod, PaymentMethod)
-//
-//
-//            //set environment production or sandBox
-//            //CowpayConstantKeys().Production or CowpayConstantKeys().SandBox
-//            intent.putExtra(CowpayConstantKeys().PaymentEnvironment, CowpayConstantKeys().SandBox)
-//            //set locale language
-//            intent.putExtra(CowpayConstantKeys().Language, CowpayConstantKeys().ARABIC)
-//            // use pay with credit card
-//            intent.putExtra(
-//                    CowpayConstantKeys().CreditCardMethodType,
-//                    CowpayConstantKeys().CreditCardMethodPay
-//            )
-//
-//            intent.putExtra(CowpayConstantKeys().MerchantCode, "3GpZbdrsnOrT")
-//            intent.putExtra(
-//                    CowpayConstantKeys().MerchantHashKey,
-//                    "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
-//            )
-//            //order id
-//            intent.putExtra(CowpayConstantKeys().MerchantReferenceId, memberItem.paymentCreationRequest?.senderRequestNumber)
-//            //order price780
-//            intent.putExtra(CowpayConstantKeys().Amount, memberItem.paymentCreationRequest?.settlementAmounts?.amount?.toString())
-//            //user data
-//            intent.putExtra(CowpayConstantKeys().CustomerName, memberItem.engineerName)
-//            intent.putExtra(CowpayConstantKeys().CustomerMobile, "01200000000")
-//            intent.putExtra(CowpayConstantKeys().CustomerEmail, "customer@customer.com")
-//            //user id
-//            intent.putExtra(CowpayConstantKeys().CustomerMerchantProfileId, memberItem.paymentCreationRequest?.userUniqueIdentifier)
-//
-//
-//            startActivityForResult(intent, CowpayConstantKeys().PaymentMethodsActivityRequestCode)
+//            createPayment()
+            cowPayPayment()
         }
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CowpayConstantKeys().PaymentMethodsActivityRequestCode && data != null && resultCode == Activity.RESULT_OK) {
-            var responseCode = data.extras!!.getInt(CowpayConstantKeys().ResponseCode, 0)
-            if (responseCode == CowpayConstantKeys().ErrorCode) {
-                var responseMSG = data.extras!!.getString(CowpayConstantKeys().ResponseMessage)
-//                Toast.makeText(requireContext(), responseMSG, Toast.LENGTH_LONG)
-//                        .show()
-                responseMSG?.let {
-                    showAlert(responseMSG) {
-                        navController().popBackStack()
-                        navController().navigate(R.id.inquiryFragment)
-                    }
-                }
+        if (requestCode == CowpayConstantKeys.PaymentMethodsActivityRequestCode && data != null && resultCode == Activity.RESULT_OK) {
+            var responseCode = data.extras!!.getInt(CowpayConstantKeys.ResponseCode, 0)
 
-            } else if (responseCode == CowpayConstantKeys().SuccessCode) {
-                var responseMSG = data.extras!!.getString(CowpayConstantKeys().ResponseMessage)
+            if (responseCode == CowpayConstantKeys.ErrorCode) {
+                showAlert(getString(R.string.payment_canceled)) {
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+            } else if (responseCode == CowpayConstantKeys.SuccessCode) {
+                var responseMSG = data.extras!!.getString(CowpayConstantKeys.ResponseMessage)
                 var PaymentGatewayReferenceId =
-                        data.extras!!.getString(CowpayConstantKeys().PaymentGatewayReferenceId)
-//                Toast.makeText(
-//                        requireContext(),
-//                        responseMSG.plus(" $PaymentGatewayReferenceId"),
-//                        Toast.LENGTH_LONG
-//                )
-//                        .show()
+                        data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
                 responseMSG?.let {
-                    showAlert(responseMSG + PaymentGatewayReferenceId) {
+                    showAlert(getString(R.string.payment_successful) + PaymentGatewayReferenceId) {
                         navController().popBackStack()
                         navController().navigate(R.id.homeFragment)
                     }
@@ -213,17 +176,17 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
             } else {
                 state.member?.let {
                     memberItem.paymentCreationRequest = it.paymentCreationRequest
-                    // static set
-                    memberItem.paymentCreationRequest?.sender?.id = "071"
-                    memberItem.paymentCreationRequest?.serviceCode = "171"
-                    memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode = "647"
-                    memberItem.paymentCreationRequest?.senderRequestNumber = it.paymentCreationRequest?.senderRequestNumber!!
-                    var intent = Intent(context, PaymentMethodsActivity::class.java)
-                    intent.putExtra(CowpayConstantKeys().MerchantCode, "GHIu9nk25D5z")
-                    intent.putExtra(
-                            CowpayConstantKeys().MerchantHashKey,
-                            "MerchantHashKey"
-                    )
+//                    // static set
+//                    memberItem.paymentCreationRequest?.sender?.id = "071"
+//                    memberItem.paymentCreationRequest?.serviceCode = "171"
+//                    memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode = "647"
+//                    memberItem.paymentCreationRequest?.senderRequestNumber = it.paymentCreationRequest?.senderRequestNumber!!
+//                    var intent = Intent(context, PaymentMethodsActivity::class.java)
+//                    intent.putExtra(CowpayConstantKeys.MerchantCode, "GHIu9nk25D5z")
+//                    intent.putExtra(
+//                            CowpayConstantKeys.MerchantHashKey,
+//                            "MerchantHashKey"
+//                    )
                     initializeViews()
                 }
             }
@@ -232,14 +195,55 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     //region
 
+    fun cowPayPayment() {
+        var intent = Intent(context, PaymentMethodsActivity::class.java)
+
+        var PaymentMethod = ArrayList<String>()
+        PaymentMethod.add(CowpayConstantKeys.CreditCardMethod)
+//            PaymentMethod.add(CowpayConstantKeys.FawryMethod)
+        intent.putExtra(CowpayConstantKeys.PaymentMethod, PaymentMethod)
+
+        intent.putExtra(CowpayConstantKeys.AuthorizationToken, "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQ1OGUwYzQxMGNhYzFiYTYzNmZlZmY5ODMwNDhkNGFjNDg3MWQ3M2Q3OTI2ZGQ4ZDFmYWYwM2IzYWY1YTYyM2Y0OWY1NWRmOWQ1MGNhYTFjIn0.eyJhdWQiOiIxIiwianRpIjoiZDU4ZTBjNDEwY2FjMWJhNjM2ZmVmZjk4MzA0OGQ0YWM0ODcxZDczZDc5MjZkZDhkMWZhZjAzYjNhZjVhNjIzZjQ5ZjU1ZGY5ZDUwY2FhMWMiLCJpYXQiOjE2MDY5MzA2MzUsIm5iZiI6MTYwNjkzMDYzNSwiZXhwIjoxNjM4NDY2NjM1LCJzdWIiOiIzODciLCJzY29wZXMiOltdfQ.PTyQdVixvfIJRcsMWdId7TrwOuGGPaNIor24XsHLExNMPcOemh1nmw6sRWgem9kb4xKB73Q3DWcRnudv44vhDw")
+
+        //set environment production or sandBox
+        //CowpayConstantKeys.Production or CowpayConstantKeys.SandBox
+        intent.putExtra(CowpayConstantKeys.PaymentEnvironment, CowpayConstantKeys.SandBox)
+        //set locale language
+        intent.putExtra(CowpayConstantKeys.Language, CowpayConstantKeys.ENGLISH)
+        // use pay with credit card
+        intent.putExtra(
+                CowpayConstantKeys.CreditCardMethodType,
+                CowpayConstantKeys.CreditCardMethodPay
+        )
+
+        intent.putExtra(CowpayConstantKeys.MerchantCode, "3GpZbdrsnOrT")
+        intent.putExtra(
+                CowpayConstantKeys.MerchantHashKey,
+                "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
+        )
+        //order id
+        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, memberItem.paymentCreationRequest?.senderRequestNumber)
+        //order price780
+        intent.putExtra(CowpayConstantKeys.Amount, memberItem.paymentCreationRequest?.settlementAmounts?.amount?.toString())
+        //user data
+        intent.putExtra(CowpayConstantKeys.CustomerName, memberItem.engineerName)
+        intent.putExtra(CowpayConstantKeys.CustomerMobile, PreferencesHelper(requireContext()).mobile)
+        intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
+        //user id
+        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, memberItem.paymentCreationRequest?.userUniqueIdentifier)
+
+
+        startActivityForResult(intent, CowpayConstantKeys.PaymentMethodsActivityRequestCode)
+    }
+
     fun createPayment() {
         try {
 
             paymentGateway = PaymentGateway(activity, memberItem.paymentCreationRequest?.sender?.password)
             paymentCreationRequest = PaymentCreationRequest()
 
-            paymentCreationRequest.Sender.Id = memberItem.paymentCreationRequest?.sender?.id
-//            paymentCreationRequest.Sender.Id = "077"
+//            paymentCreationRequest.Sender.Id = memberItem.paymentCreationRequest?.sender?.id
+            paymentCreationRequest.Sender.Id = "071"
             paymentCreationRequest.Sender.Name = memberItem.paymentCreationRequest?.sender?.name
 //            paymentCreationRequest.Sender.Name = "MSAD"
             paymentCreationRequest.Sender.Password = memberItem.paymentCreationRequest?.sender?.password
@@ -250,14 +254,14 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
 //            paymentCreationRequest.SenderRequestNumber = memberItem.paymentCreationRequest?.senderRequestNumber + "032110010100"
             paymentCreationRequest.SenderRequestNumber = memberItem.paymentCreationRequest?.senderRequestNumber
-            paymentCreationRequest.ServiceCode = memberItem.paymentCreationRequest?.serviceCode
-//            paymentCreationRequest.ServiceCode = "172"
+//            paymentCreationRequest.ServiceCode = memberItem.paymentCreationRequest?.serviceCode
+            paymentCreationRequest.ServiceCode = "171"
 
             val settlementAmount = PaymentCreationRequest.SettlementAmount()
 
             settlementAmount.Amount = memberItem.paymentCreationRequest?.settlementAmounts?.amount?.toDouble()!!
-            settlementAmount.SettlementAccountCode = memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode!!.toInt()
-//            settlementAmount.SettlementAccountCode = 777
+//            settlementAmount.SettlementAccountCode = memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode!!.toInt()
+            settlementAmount.SettlementAccountCode = 647
             settlementAmount.Description = "Test"
 
             paymentCreationRequest.SettlementAmounts.add(settlementAmount)
@@ -282,20 +286,14 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                 paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = PreferencesHelper(requireContext()).mobile
             }
 
-            paymentCreationRequest.RequestExpiryDate = memberItem.paymentCreationRequest?.requestExpiryDate
-//            paymentCreationRequest.RequestExpiryDate = "2020-04-10"
+//            paymentCreationRequest.RequestExpiryDate = memberItem.paymentCreationRequest?.requestExpiryDate
+            paymentCreationRequest.RequestExpiryDate = "2020-12-07"
 
             paymentCreationRequest.UserUniqueIdentifier = memberItem.paymentCreationRequest?.userUniqueIdentifier
 //            paymentCreationRequest.UserUniqueIdentifier = "12346743298546"
 
-            val publicKey = memberItem.paymentCreationRequest?.publicKey
-//            val publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4vDGDLMEPRUJmT7BC4mL\n" +
-//                    "32e+jORKSMq3rv+FTrXAUzatQ18je2C3YtGMcy1k7m9v4V6gswxJvJEPPHzJE+dZ\n" +
-//                    "bwWZYhlmgxfyA0yTu8JVrAlcPbX0VHKxAsorbgTmrNyPitdEeYneARKmqDCdYIqx\n" +
-//                    "e76l3R1YoiILe2CVB185sTQ3TDgtfgCgpfWbCZbhmnyMIW3QiaDX7bfrMtv30qpj\n" +
-//                    "MG73570cxoX9Zkq3tUj/orYrM+D9+gHscnZke94x7Zwey/VwjUeIFifLuD3XTv01\n" +
-//                    "ifiwqIgOtbchdmoWDTAmwMfd6lhrK6kr/d9oK6I2vPwc+MyJhut0Njwx8h7OF0zg\n" +
-//                    "/QIDAQAB"
+//            val publicKey = memberItem.paymentCreationRequest?.publicKey
+            val publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0MAVRsQax/cxZwZcfp+s0mzZtFGNRpuRLnyKUosdnlHn2JC1FSHpnmsON1Mp/SY+GR/Wk1kO2QGNNdszikPgAnN5/fcX6JPIkzSHCMLqPxUNqaCfn0eaLrwgsc1SCwlm+f8c+CseG3OeR+sUdq52PHf7edpjC60V4bNo/gEVRLV+VsvBde8jhet6Z/wRrKL5K1MQH0ByYn9upf96myRiTOSvocuBVHnlb2O+tapLVrNq7dMNXCHHB7IuNCFvP0f0QILeDW5CxebcsTItzxLLurKtA1lTWv+Ao9oqexy1BJzMytpS+BAz9kNzmt/g7RcdbXd0MxFotvoHjl2jwE1wLwIDAQAB"
 
 //            inquiryDetailsViewModel.encryptData(paymentCreationRequest.Sender.Name, paymentCreationRequest.Sender.Password, paymentCreationRequest.serialize())
             paymentCreationRequest.serialize()
@@ -303,6 +301,28 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
             val successCallback: ((response: PaymentCreationResponse) -> Unit) = { response ->
                 sendDecryptionKey = true
                 paymentCreationResponse = response
+
+//                if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
+//
+//                    offlineSetPaid(response.OriginalSenderRequestNumber)
+//                } else {
+//                    llSuperProgressbar.visibility = View.INVISIBLE
+//                    val paymentMethod = mechanismTypeButton.getText().toString()
+//                    if (paymentMethod == getString(R.string.payment_card)) {
+//                        navController().navigate(
+//                                MedicalRenewDetailsFragmentDirections.openPayment(MemberUI(), paymentCreationResponse.OriginalSenderRequestNumber,
+//                                        paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
+//                        )
+//                    } else if (paymentMethod == getString(R.string.payment_channel) ||
+//                            paymentMethod == getString(R.string.payment_wallet) ||
+//                            paymentMethod == getString(R.string.payment_meeza)) {
+//                        showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
+//                            navController().popBackStack()
+//                            navController().navigate(R.id.homeFragment)
+//                        }
+////                    "senderRequestNumber" + response.OriginalSenderRequestNumber
+//                    }
+//                }
                 inquiryDetailsViewModel.sendDecryptionKey(response.OriginalSenderRequestNumber, response.RequestDecryptionKey)
             }
 
@@ -318,12 +338,12 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
             paymentGateway.CreatePayment(paymentCreationRequest, "", publicKey, MobilePaymentCreationCallback(successCallback, failureCallback))
         } catch (ex: Exception) {
-            Log.i("Error", ex.message)
+//            Log.i("Error", ex.message)
         }
     }
 
-    private fun completePaymentCreation(encryptedData: String) {
-        try {
+//    private fun completePaymentCreation(encryptedData: String) {
+//        try {
 //            val publicKey = memberItem.paymentCreationRequest?.publicKey
 // //            var signature = paymentCreationRequest.serialize()
 // //            Log.d("NEQBTY", signature)
@@ -331,10 +351,10 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 // //            val signature = "qf9Qo2fZ792GyoDiXik6eAQ6fadqHaib+yaBTBp4PGj1xf6KlVn3pP822D8VyADm+OEvuPVtLc3nvutiTEDZgo4oeJnUIwXveAzQUV6RM9oyMfOu78Kj9NcD3wMW1Jb6hwAKfHQ/tLsY7oJYIhXmh1x2INU9am6K6JrD468ToBNhWU6Df9SlJsMezZWMLrG0Z4bElqTsIVcpATiu8rJ4lGHMl+qC4AX+2pAViz31TPXGREdYsQpLDHbnBXaVvLLY8fKNyOjDaskxEoeJikPdzkAmBn1HDmzwWhb9GyYRsGJw4wm1szIXrMIRvgGYIarsVwxL7uaSWs/yrjHUFhT8AQ=="
 //
 //            paymentGateway.CreatePayment(paymentCreationRequest, encryptedData, publicKey, MobilePaymentCreationCallback(requireContext(), mechanismTypeButton.getText().toString(), navController()))
-        } catch (ex: Exception) {
-            Log.i("Error", ex.message)
-        }
-    }
+//        } catch (ex: Exception) {
+////            Log.i("Error", ex.message)
+//        }
+//    }
     // endregion
 
     // region callback
@@ -347,7 +367,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         }
 
         override fun onError(paymentException: PaymentException) {
-            Log.e("NEQABTY", paymentException.details.message)
+//            Log.e("NEQABTY", paymentException.details.message)
             failureCallback.invoke()
         }
     }
@@ -359,6 +379,10 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 //        return requestNumber.toString()
 //    }
 
+    fun offlineSetPaid(originalSenderRequestNumber: String) {
+
+//        inquiryDetailsViewModel.setPaid(originalSenderRequestNumber)
+    }
     //endregion
 
     fun navController() = findNavController()

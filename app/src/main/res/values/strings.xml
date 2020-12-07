@@ -198,6 +198,7 @@
     <string name="wheel_payments_content">وقتكم محل تقديرنا- متاح الآن أكثر من ٧٠ خدمة  مدفوعات الكترونية عن (بُعد)، ستضاف المزيد من الخدمات الأخرى قريبا.</string>
     <string name="wheel_medical_content">صحتكم محل اهتمامنا- يمكنك من هذه الخدمة تقديم ومتابعة واستلام جميع طلباتك الطبية بسهولة، كما يمكنك الاطلاع علي الدليل الطبي لمعرفة أماكن توافر الخدمات الطبية الأقرب إليك بواسطة جوجل ماب.</string>
     <string name="wheel_retirees_content">خدمتكم شرف لنا - يمكنك معرفة المزيد عن خدمات المعاشات قريبا.</string>
+    <string name="wheel_trips_content">سيتم إتاحة عرض وحجز الرحلات قريبا.</string>
     <string name="wheel_training_content">التدريب المنتهي بالتوظيف هو شعارنا - يمكنك معرفة المزيد عن خدمات التدريب والتوظيف قريبا.</string>
     <string name="wheel_complaints_content">آراءكم  محل اهتمامنا  - يمكنك الآن التواصل مع النقابة من خلال مقترحاتك وشكواك   ومتابعتها من خلال خدمة الإشعارات.</string>
     <string name="wheel_employment_content">خدمتكم شرف لنا- يستطيع المهندس الاستشاري  والمكاتب الاستشارية    تجديد سجلاتهم الهندسية من خلال هذه الخدمة الميسرة، مع خدمات أخري لمزاولة المهنة ستضاف قرييا.</string>
@@ -312,7 +313,9 @@
     <string name="payment_wallet">محافظ إلكترونية</string>
     <string name="payment_meeza">ميزة</string>
     <string name="payment_reference">كود الدفع: </string>
-    <string name="payment_successful">تمت العملية بنجاح</string>
+    <string name="payment_canceled">لقد تم الغاء عملية الدفع</string>
+    <string name="payment_successful">تمت عملية الدفع بنجاح \n
+رقم العملية </string>
     <string name="name_on_card">إسم صاحب الكارت</string>
     <string name="card_number">رقم الكارت</string>
     <string name="card_expiry_year">تاريخ سنة الإنتهاء</string>

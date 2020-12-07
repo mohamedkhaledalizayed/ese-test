@@ -1,6 +1,10 @@
 package com.neqabty.presentation.ui.medicalRenewDetails
 
 import androidx.lifecycle.MutableLiveData
+import com.neqabty.data.api.WebService
+import com.neqabty.data.api.requests.SyndicateRequest
+import com.neqabty.data.repositories.RemoteNeqabtyDataStore
+import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.usecases.EncryptData
 import com.neqabty.domain.usecases.MedicalRenewPaymentInquiry
 import com.neqabty.domain.usecases.SendDecryptionKey
@@ -12,12 +16,16 @@ import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.mappers.DecryptionEntityUIMapper
 import com.neqabty.presentation.mappers.EncryptionEntityUIMapper
 import com.neqabty.presentation.mappers.MedicalRenewalPaymentEntityUIMapper
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MedicalRenewDetailsViewModel @Inject constructor(
         private val sendDecryptionKey: SendDecryptionKey,
         private val encryptData: EncryptData,
-        private val paymentInquiry: MedicalRenewPaymentInquiry
+        private val paymentInquiry: MedicalRenewPaymentInquiry,
+        private val api: WebService
 ) : BaseViewModel() {
 
     private val medicalRenewalPaymentEntityUIMapper = MedicalRenewalPaymentEntityUIMapper()
@@ -46,6 +54,15 @@ class MedicalRenewDetailsViewModel @Inject constructor(
                         { errorState.value = handleError(it) }
                 )
     }
+
+//    fun setPaid(username: String) {
+//        api.setPaid(SyndicateRequest(username)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+//                {
+//                    viewState.value = viewState.value?.copy(isLoading = false)
+//                },
+//                { errorState.value = handleError(it) }
+//        )
+//    }
 
     fun sendDecryptionKey(requestNumber: String, decryptionKey: String) {
         viewState.value?.decryptionData?.let {

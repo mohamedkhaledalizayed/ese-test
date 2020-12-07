@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     lateinit var newToken: String
 
+    var isAlertShown = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
@@ -61,7 +62,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 .get(MainViewModel::class.java)
 
         setSupportActionBar(toolbar)
+        getMinSupportedVersion()
         getToken()
+        setJWT()
         checkRoot()
         startActivities()
 
@@ -117,9 +120,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 R.id.news_fragment -> {
                     navController.navigate(R.id.newsFragment)
                 }
-                R.id.trips_fragment -> {
-                    navController.navigate(R.id.tripsFragment)
-                }
+//                R.id.trips_fragment -> {
+//                    navController.navigate(R.id.tripsFragment)
+//                }
                 R.id.medical_renew_fragment -> { // TODO
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.medicalRenewFragment)
@@ -232,6 +235,10 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         }
     }
 
+    private fun setJWT(){
+        Constants.JWT = PreferencesHelper(this).jwt ?: ""
+    }
+
     private fun getToken() { // TODO
         FirebaseApp.initializeApp(this)
         FirebaseInstanceId.getInstance().instanceId
@@ -252,6 +259,23 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
 //region//
 
+    private fun getMinSupportedVersion(){
+        mainViewModel.viewState.observe(this, Observer {
+            if (it != null) {
+                it.appVersion?.let {
+                    if (BuildConfig.VERSION_CODE < it) {
+                        if (!isAlertShown)
+                            showAlert()
+                    }
+                }
+            }
+        })
+        mainViewModel.errorState.observe(this, Observer { error ->
+            mainViewModel.getAppVersion()
+        })
+        mainViewModel.getAppVersion()
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(
                 Navigation.findNavController(this, R.id.container),
@@ -270,6 +294,36 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             else
                 super.onBackPressed()
         }
+    }
+
+
+    private fun showAlert() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(getString(R.string.update_msg))
+        builder.setCancelable(false)
+        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
+            val appPackageName = this.packageName
+            try {
+                startActivity(
+                        Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("market://details?id=$appPackageName")
+                        )
+                )
+            } catch (anfe: android.content.ActivityNotFoundException) {
+                startActivity(
+                        Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                        )
+                )
+            }
+            showAlert()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+        isAlertShown = true
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

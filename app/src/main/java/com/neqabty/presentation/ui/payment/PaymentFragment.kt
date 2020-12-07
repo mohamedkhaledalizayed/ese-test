@@ -51,6 +51,7 @@ class PaymentFragment : BaseFragment(), Injectable {
     lateinit var params: PaymentFragmentArgs
     lateinit var memberItem: MemberUI
 
+    var requestNumber = "0"
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -90,9 +91,19 @@ class PaymentFragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: PaymentViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+
+        if(state.hash.equals("123")){
+        showAlert(getString(R.string.payment_successful)) {
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }}
     }
 
     fun initializeViews() {
+
+        edCVV.setText("123")
+        edNumber.setText("5111111111111118")
+        edName.setText("Ahmed Mohamed")
         binding.spMonth.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, monthsList!!)
         binding.spMonth.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -132,6 +143,7 @@ class PaymentFragment : BaseFragment(), Injectable {
 //            paymentConfirmationRequest.Sender.Name = "MSAD"
             paymentConfirmationRequest.Sender.Password = password
 
+            requestNumber = params.senderRequestNumber
             paymentConfirmationRequest.SenderRequestNumber = params.senderRequestNumber
 
             paymentConfirmationRequest.SessionID = params.sessionID
@@ -180,12 +192,8 @@ class PaymentFragment : BaseFragment(), Injectable {
             val successCallback: ((response: PaymentConfirmationResponse) -> Unit) = { response ->
 
                 llSuperProgressbar.visibility = View.INVISIBLE
-
-                showAlert(getString(R.string.payment_successful)) {
-                    navController().popBackStack()
-                    navController().navigate(R.id.homeFragment)
-                }
-//                "senderRequestNumber"+ response.SenderRequestNumber
+//                offlineSetPaid()
+                "senderRequestNumber"+ response.SenderRequestNumber
             }
 
             val failureCallback = {
@@ -198,7 +206,7 @@ class PaymentFragment : BaseFragment(), Injectable {
             }
             paymentGateway.ConfirmPayment(paymentConfirmationRequest, "", MobilePaymentConfirmationCallback(successCallback, failureCallback))
         } catch (ex: Exception) {
-            Log.i("Error", ex.message)
+//            Log.i("Error", ex.message)
         }
     }
 
@@ -213,12 +221,12 @@ class PaymentFragment : BaseFragment(), Injectable {
     ) : PaymentConfirmationCallback {
 
         override fun onSuccess(response: PaymentConfirmationResponse) {
-            Log.i("NEQABTY", "Request Completed Successfully")
+//            Log.i("NEQABTY", "Request Completed Successfully")
             successCallback.invoke(response)
         }
 
         override fun onError(paymentException: PaymentException) {
-            Log.e("NEQABTY", paymentException.details.message)
+//            Log.e("NEQABTY", paymentException.details.message)
             failureCallback.invoke()
         }
     }
@@ -231,6 +239,10 @@ class PaymentFragment : BaseFragment(), Injectable {
         }
     }
 
+    fun offlineSetPaid() {
+
+        paymentViewModel.setPaid(requestNumber)
+    }
     // endregion
 
     fun navController() = findNavController()

@@ -1,6 +1,8 @@
 package com.neqabty.presentation.ui.inquiryDetails
 
 import androidx.lifecycle.MutableLiveData
+import com.neqabty.data.api.WebService
+import com.neqabty.data.api.requests.SyndicateRequest
 import com.neqabty.domain.usecases.EncryptData
 import com.neqabty.domain.usecases.PaymentInquiry
 import com.neqabty.domain.usecases.SendDecryptionKey
@@ -12,12 +14,15 @@ import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.mappers.DecryptionEntityUIMapper
 import com.neqabty.presentation.mappers.EncryptionEntityUIMapper
 import com.neqabty.presentation.mappers.MemberEntityUIMapper
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class InquiryDetailsViewModel @Inject constructor(
     private val sendDecryptionKey: SendDecryptionKey,
     private val encryptData: EncryptData,
-    private val paymentInquiry: PaymentInquiry
+    private val paymentInquiry: PaymentInquiry,
+    private val api: WebService
 ) : BaseViewModel() {
 
     private val memberEntityUIMapper = MemberEntityUIMapper()
@@ -100,4 +105,14 @@ class InquiryDetailsViewModel @Inject constructor(
                 member = member)
         viewState.value = newViewState
     }
+//
+//    fun setPaid(username: String) {
+//        api.setPaid(SyndicateRequest(username)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+//                {
+//                    viewState.value = viewState.value?.copy(isLoading = false)
+//                },
+//                { errorState.value = handleError(it) }
+//        )
+//    }
+
 }

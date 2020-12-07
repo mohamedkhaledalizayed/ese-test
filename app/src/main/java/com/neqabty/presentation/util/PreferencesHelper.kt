@@ -14,6 +14,7 @@ class PreferencesHelper(context: Context) {
         private const val NAME = "data.source.prefs.NAME"
         private const val MOBILE = "data.source.prefs.MOBILE"
         private const val TOKEN = "data.source.prefs.TOKEN"
+        private const val JWT = "data.source.prefs.JWT"
         private const val IS_REGISTERED = "data.source.prefs.IS_REGISTERED"
         private const val NOTIFICATION_COUNT = "data.source.prefs.NOTIFICATION_COUNT"
         private const val USER_TYPE = "data.source.prefs.USER_TYPE"
@@ -38,6 +39,9 @@ class PreferencesHelper(context: Context) {
 
     var token = preferences.getString(TOKEN, "")!!
         set(value) = preferences.edit().putString(TOKEN, value).apply()
+
+    var jwt = preferences.getString(JWT, "")
+        set(value) = preferences.edit().putString(JWT, value).apply()
 
     var isRegistered = preferences.getBoolean(IS_REGISTERED, false)
         set(value) = preferences.edit().putBoolean(IS_REGISTERED, value).apply()

@@ -190,7 +190,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
 //        if (isEdit) {
 //            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewFollowerDetailsFragment(selectedFollower))
 //        } else {
-        incrementedID += 11
+        incrementedID += 22
         navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewAddFollowerDetailsFragment(MedicalRenewalUI.FollowerItem(id = incrementedID, isNew = true), medicalRenewalUI))
 //        }
     }

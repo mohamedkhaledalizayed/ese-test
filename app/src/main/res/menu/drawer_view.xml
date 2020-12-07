@@ -10,10 +10,10 @@
         android:id="@+id/news_fragment"
         android:icon="@drawable/ic_menu_news"
         android:title="@string/news_title" />
-    <item
-        android:id="@+id/trips_fragment"
-        android:icon="@drawable/ic_menu_trips"
-        android:title="@string/trips_title" />
+<!--    <item-->
+<!--        android:id="@+id/trips_fragment"-->
+<!--        android:icon="@drawable/ic_menu_trips"-->
+<!--        android:title="@string/trips_title" />-->
     <item
         android:id="@+id/medical_renew_fragment"
         android:icon="@drawable/ic_menu_claiming"

@@ -146,6 +146,7 @@ dependencies {
     implementation deps.lifecycle.java8
     implementation deps.retrofit.runtime
     implementation deps.retrofit.adapter
+    implementation deps.retrofit.jadapter
     implementation deps.retrofit.gson
     implementation deps.retrofit.scalars
     implementation deps.okhttp_logging_interceptor

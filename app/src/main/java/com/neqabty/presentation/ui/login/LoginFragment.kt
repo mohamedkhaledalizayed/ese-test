@@ -17,6 +17,7 @@ import com.neqabty.R
 import com.neqabty.databinding.LoginFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.HasHomeOptionsMenu
 import com.neqabty.presentation.util.PreferencesHelper
@@ -82,6 +83,8 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
             //TODO set coming data it.details!![0]
             PreferencesHelper(requireContext()).mobile = it.mobile
             PreferencesHelper(requireContext()).userType = it.type
+            PreferencesHelper(requireContext()).jwt = it.jwt
+            Constants.JWT = it.jwt ?: ""
             PreferencesHelper(requireContext()).mainSyndicate = 5
             PreferencesHelper(requireContext()).subSyndicate = 0
             if(it.type.equals("client")){

@@ -57,6 +57,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+//        PreferencesHelper(requireContext()).user = "8608478"
         medicalRenewViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MedicalRenewViewModel::class.java)
 
@@ -165,8 +166,8 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 return
             }
             3 -> {
-                showGoToRenewalPaymentAlert(getString(R.string.medical_subscription_renew_syndicate_membership))
-                return
+                showShouldRenewSyndicateMembershipAlert(getString(R.string.medical_subscription_renew_syndicate_membership))
+                bContinue.visibility = View.GONE
             }
         }
         if (medicalRenewalUI.contact?.isDead == true && medicalRenewalUI.followers?.size == 0) {
@@ -261,6 +262,28 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
 
     }
 
+
+    private fun showShouldRenewSyndicateMembershipAlert(msg: String) {
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.alert_title))
+        builder?.setCancelable(false)
+        builder?.setMessage(msg)
+        builder?.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        builder?.setNegativeButton(getString(R.string.cancel_btn)) { dialog, which ->
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
+
+        if (dialog == null)
+            dialog = builder?.create()
+
+        if (!dialog?.isShowing!!)
+            dialog?.show()
+
+    }
 
     private fun showGoToRenewalPaymentAlert(msg: String) {
         builder = AlertDialog.Builder(requireContext())

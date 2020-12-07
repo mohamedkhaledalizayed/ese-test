@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/payment_method"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large" />
 
@@ -110,7 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">

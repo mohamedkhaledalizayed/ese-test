@@ -87,7 +87,9 @@ class WheelTripsFragment : BaseFragment(), Injectable {
                 navController().navigate(R.id.homeFragment)
             }, message = error?.message)
         })
-        homeViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())    }
+        llSuperProgressbar.visibility = View.GONE
+//        homeViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())
+    }
 
     private fun handleViewState(state: HomeViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE

@@ -57,7 +57,7 @@ class AppModule {
                         val request = chain.request()
                         val response = chain.proceed(request)
 
-                        if (!request.url().url().toString().contains("upgrade", true)) {
+                        if (request.url().url().toString().contains("min-version", true)) {
                             return response
                         }
 
