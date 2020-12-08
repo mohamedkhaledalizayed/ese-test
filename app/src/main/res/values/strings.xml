@@ -195,7 +195,8 @@
     <string name="wheel_enter_claiming">الموافقات الطبية</string>
     <string name="wheel_enter_records">ارسل طلب تجديد سجل هندسى</string>
     <string name="wheel_enter_update_data">ارسل طلب تحديث بيانات</string>
-    <string name="wheel_payments_content">وقتكم محل تقديرنا- متاح الآن أكثر من ٧٠ خدمة  مدفوعات الكترونية عن (بُعد)، ستضاف المزيد من الخدمات الأخرى قريبا.</string>
+    <!--    <string name="wheel_payments_content">وقتكم محل تقديرنا- متاح الآن أكثر من ٧٠ خدمة  مدفوعات الكترونية عن (بُعد)، ستضاف المزيد من الخدمات الأخرى قريبا.</string>-->
+    <string name="wheel_payments_content">وقتكم محل تقديرنا- متاح الآن تجديد إشتراك الرعاية الصحية الكترونياً عن (بُعد)، ستضاف المزيد من الخدمات الأخرى قريبا.</string>
     <string name="wheel_medical_content">صحتكم محل اهتمامنا- يمكنك من هذه الخدمة تقديم ومتابعة واستلام جميع طلباتك الطبية بسهولة، كما يمكنك الاطلاع علي الدليل الطبي لمعرفة أماكن توافر الخدمات الطبية الأقرب إليك بواسطة جوجل ماب.</string>
     <string name="wheel_retirees_content">خدمتكم شرف لنا - يمكنك معرفة المزيد عن خدمات المعاشات قريبا.</string>
     <string name="wheel_trips_content">سيتم إتاحة عرض وحجز الرحلات قريبا.</string>

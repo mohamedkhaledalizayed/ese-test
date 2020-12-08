@@ -26,10 +26,10 @@
         android:id="@+id/claiming_fragment"
         android:icon="@drawable/ic_menu_claiming"
         android:title="@string/claiming_title" />
-    <item
-        android:id="@+id/inquiry_fragment"
-        android:icon="@drawable/ic_menu_payments"
-        android:title="@string/inquiry_title" />
+<!--    <item-->
+<!--        android:id="@+id/inquiry_fragment"-->
+<!--        android:icon="@drawable/ic_menu_payments"-->
+<!--        android:title="@string/inquiry_title" />-->
 <!--    <item-->
 <!--        android:id="@+id/engineering_records_fragment"-->
 <!--        android:icon="@drawable/ic_menu_records"-->

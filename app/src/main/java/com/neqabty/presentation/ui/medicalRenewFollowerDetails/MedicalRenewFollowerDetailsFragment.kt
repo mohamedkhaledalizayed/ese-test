@@ -208,7 +208,7 @@ class MedicalRenewFollowerDetailsFragment : BaseFragment(), Injectable {
     }
 
     private fun updateLabel() {
-        val myFormat = "MM/dd/yy"; // In which you need put here
+        val myFormat = "yyyy-MM-dd"; // In which you need put here
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         edBirthDate.setText(sdf.format(myCalendar.getTime()))
     }

@@ -57,7 +57,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-//        PreferencesHelper(requireContext()).user = "8608478"
+//        PreferencesHelper(requireContext()).user = "1008479"
         medicalRenewViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MedicalRenewViewModel::class.java)
 
@@ -149,7 +149,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     }
 
     private fun checkStatus() {
-//        medicalRenewalUI.engineerStatus = 0
+//        medicalRenewalUI.healthCareStatus = 0
 //        medicalRenewalUI.contact?.pic = "jhkdfjv"
 //        medicalRenewalUI.contact?.syndicateName = "jhcj,d"
         when (medicalRenewalUI.engineerStatus) {
@@ -209,7 +209,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     }
 
     private fun isEngineerDataValid(): Boolean {
-        return if (medicalRenewalUI.contact?.pic.isNullOrEmpty() || medicalRenewalUI.contact?.syndicateName.isNullOrEmpty()) {
+        return if (medicalRenewalUI.contact?.syndicateName.isNullOrEmpty()) {//medicalRenewalUI.contact?.pic.isNullOrEmpty() ||
             showAlert(getString(R.string.medical_subscription_renew_incomplete_data)) {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)

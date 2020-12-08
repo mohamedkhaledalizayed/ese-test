@@ -5,17 +5,19 @@ import com.neqabty.data.api.requests.*
 import com.neqabty.data.mappers.*
 import com.neqabty.domain.NeqabtyDataStore
 import com.neqabty.domain.entities.*
+import com.neqabty.presentation.di.DI
 import io.reactivex.Observable
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
 
-class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : NeqabtyDataStore {
+class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private val api: WebService, @Named(DI.unAuthorized) private val unauthorizedApi: WebService) : NeqabtyDataStore {
 
     override fun createCoronaRequest(
             userNumber: String,
@@ -279,7 +281,7 @@ class RemoteNeqabtyDataStore @Inject constructor(private val api: WebService) : 
     private val appVersionDataEntityMapper = AppVersionDataEntityMapper()
 
     override fun getAppVersion(): Observable<AppVersionEntity> {
-        return api.getAppVersion().map { version -> appVersionDataEntityMapper.mapFrom(version) }
+        return unauthorizedApi.getAppVersion().map { version -> appVersionDataEntityMapper.mapFrom(version) }
     }
 
     private val medicalRenewalDataEntityMapper = MedicalRenewalDataEntityMapper()

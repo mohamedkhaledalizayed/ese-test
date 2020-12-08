@@ -357,7 +357,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
     }
 
     private fun updateBDLabel() {
-        val myFormat = "dd/MM/yy"; // In which you need put here
+        val myFormat = "yyyy-MM-dd"; // In which you need put here
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         edBirthDate.setText(sdf.format(myCalendar.getTime()))
     }
@@ -446,7 +446,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         val bundle = Bundle()
 //        followerItem.isNew = true
         followerItem.name = binding.edName.text.toString()
-        followerItem.birthDate = binding.edBirthDate.text.toString()
+        followerItem.birthDate = if(binding.edBirthDate.text.toString().contains("00:00")) binding.edBirthDate.text.toString() else binding.edBirthDate.text.toString()+"T00:00:00"
         followerItem.gender = when (selectedGender) {
             genderList!![0] -> "M"
             genderList!![1] -> "F"

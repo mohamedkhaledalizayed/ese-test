@@ -19,6 +19,7 @@ import com.neqabty.R
 import com.neqabty.databinding.InquiryDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.util.PreferencesHelper
@@ -200,14 +201,14 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
         var PaymentMethod = ArrayList<String>()
         PaymentMethod.add(CowpayConstantKeys.CreditCardMethod)
-//            PaymentMethod.add(CowpayConstantKeys.FawryMethod)
+        PaymentMethod.add(CowpayConstantKeys.FawryMethod)
         intent.putExtra(CowpayConstantKeys.PaymentMethod, PaymentMethod)
 
-        intent.putExtra(CowpayConstantKeys.AuthorizationToken, "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQ1OGUwYzQxMGNhYzFiYTYzNmZlZmY5ODMwNDhkNGFjNDg3MWQ3M2Q3OTI2ZGQ4ZDFmYWYwM2IzYWY1YTYyM2Y0OWY1NWRmOWQ1MGNhYTFjIn0.eyJhdWQiOiIxIiwianRpIjoiZDU4ZTBjNDEwY2FjMWJhNjM2ZmVmZjk4MzA0OGQ0YWM0ODcxZDczZDc5MjZkZDhkMWZhZjAzYjNhZjVhNjIzZjQ5ZjU1ZGY5ZDUwY2FhMWMiLCJpYXQiOjE2MDY5MzA2MzUsIm5iZiI6MTYwNjkzMDYzNSwiZXhwIjoxNjM4NDY2NjM1LCJzdWIiOiIzODciLCJzY29wZXMiOltdfQ.PTyQdVixvfIJRcsMWdId7TrwOuGGPaNIor24XsHLExNMPcOemh1nmw6sRWgem9kb4xKB73Q3DWcRnudv44vhDw")
+        intent.putExtra(CowpayConstantKeys.AuthorizationToken, Constants.cowpayAuthToken)
 
         //set environment production or sandBox
         //CowpayConstantKeys.Production or CowpayConstantKeys.SandBox
-        intent.putExtra(CowpayConstantKeys.PaymentEnvironment, CowpayConstantKeys.SandBox)
+        intent.putExtra(CowpayConstantKeys.PaymentEnvironment, Constants.COWPAY_MODE)
         //set locale language
         intent.putExtra(CowpayConstantKeys.Language, CowpayConstantKeys.ENGLISH)
         // use pay with credit card
@@ -287,7 +288,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
             }
 
 //            paymentCreationRequest.RequestExpiryDate = memberItem.paymentCreationRequest?.requestExpiryDate
-            paymentCreationRequest.RequestExpiryDate = "2020-12-07"
+            paymentCreationRequest.RequestExpiryDate = "2020-12-09"
 
             paymentCreationRequest.UserUniqueIdentifier = memberItem.paymentCreationRequest?.userUniqueIdentifier
 //            paymentCreationRequest.UserUniqueIdentifier = "12346743298546"

@@ -10,6 +10,7 @@ import com.neqabty.domain.usecases.MedicalRenewPaymentInquiry
 import com.neqabty.domain.usecases.SendDecryptionKey
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
+import com.neqabty.presentation.di.DI
 import com.neqabty.presentation.entities.DecryptionUI
 import com.neqabty.presentation.entities.EncryptionUI
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
@@ -20,12 +21,13 @@ import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+import javax.inject.Named
 
 class MedicalRenewDetailsViewModel @Inject constructor(
         private val sendDecryptionKey: SendDecryptionKey,
         private val encryptData: EncryptData,
         private val paymentInquiry: MedicalRenewPaymentInquiry,
-        private val api: WebService
+        @Named(DI.authorized) private val api: WebService
 ) : BaseViewModel() {
 
     private val medicalRenewalPaymentEntityUIMapper = MedicalRenewalPaymentEntityUIMapper()

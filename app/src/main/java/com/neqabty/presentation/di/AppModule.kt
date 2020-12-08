@@ -3,6 +3,7 @@ package com.neqabty.presentation.di
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import com.neqabty.BuildConfig
 import com.neqabty.MyApp
 import com.neqabty.data.api.WebService
 import com.neqabty.data.db.NeqabtyDb
@@ -21,6 +22,7 @@ import com.neqabty.presentation.common.ASyncTransformer
 import com.neqabty.presentation.common.Constants
 import dagger.Module
 import dagger.Provides
+import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -37,30 +39,31 @@ class AppModule {
     @Provides
     fun provideContext(application: MyApp): Context = application.applicationContext
 
+
     @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit {
-        val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-            this.level = HttpLoggingInterceptor.Level.BODY
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            this.level = if(BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else  HttpLoggingInterceptor.Level.NONE
         }
-//        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-//                .add(
-//                        "weapps.te.eg",
-//                        "sha256/1bMfEx60y/CeKMkWEi7TiqZDppseBC3KKs220b6NXQQ="
-//                ).build()
+    }
 
-        val client: OkHttpClient = OkHttpClient.Builder()
+    @Singleton
+    @Provides
+    @Named(DI.authorized)
+    fun provideOkHttpClient(httpLoggingInterceptor :HttpLoggingInterceptor): OkHttpClient {
+        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+                .add(
+                        Constants.PROD_IP,
+                        "sha256/TlI6WuW0Y2x1kBt5+vvTkS5B3HmHQU5oiwnUtDb/IrM="
+                ).build()
+
+        return OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.MINUTES)
                 .readTimeout(5, TimeUnit.MINUTES)
                 .addInterceptor(object : Interceptor {
                     override fun intercept(chain: Interceptor.Chain): Response {
                         val request = chain.request()
-                        val response = chain.proceed(request)
-
-                        if (request.url().url().toString().contains("min-version", true)) {
-                            return response
-                        }
-
                         var newRequest = request.newBuilder()
                                 // .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlZ3lwdFxcYWhtZWQuZm91YWRnb21hYSIsImV4cCI6MTU3NDA4MjkyMCwiaWF0IjoxNTc0MDY0OTIwfQ.n8CvCPxVyJnoSHcfD9ePMS48Q3nFdN3Lvqmmdi3oy947X7g99i2Bk_sReyzkyGw9appwTeht1F-dlx7IzrrxEA")
                                 .header("Authorization", "Bearer " + Constants.JWT)
@@ -72,25 +75,57 @@ class AppModule {
                         return newResponse
                     }
                 })
-                .addInterceptor(interceptor) // TODO Interceptor
+                .addInterceptor(httpLoggingInterceptor) // TODO Interceptor
 //                .certificatePinner(certificatePinner)
-                .build()
-
-        return Retrofit.Builder()
-                .baseUrl(Constants.IP) // TEST
-//                .baseUrl("http://3.131.229.146/") // PROD
-//                .baseUrl("http://front.neqabty.com/")
-//                .baseUrl("http://192.168.178.38/")
-//            .baseUrl("https://neqabty-stage.efinance.com.eg/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // LiveDataCallAdapterFactory()
-                .client(client)
                 .build()
     }
 
     @Singleton
     @Provides
-    fun provideWebService(retrofit: Retrofit): WebService {
+    @Named(DI.unAuthorized)
+    fun provideUnauthorizedOkHttpClient(httpLoggingInterceptor :HttpLoggingInterceptor): OkHttpClient {
+        return OkHttpClient.Builder()
+                .connectTimeout(5, TimeUnit.MINUTES)
+                .readTimeout(5, TimeUnit.MINUTES)
+                .addInterceptor(httpLoggingInterceptor)
+                .build()
+    }
+
+    @Singleton
+    @Provides
+    @Named(DI.authorized)
+    fun provideRetrofit(@Named(DI.authorized) okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+                .baseUrl(Constants.DNS)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // LiveDataCallAdapterFactory()
+                .client(okHttpClient)
+                .build()
+    }
+
+    @Singleton
+    @Provides
+    @Named(DI.unAuthorized)
+    fun provideUnauthorizedRetrofit(@Named(DI.unAuthorized) okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+                .baseUrl(Constants.DNS)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // LiveDataCallAdapterFactory()
+                .client(okHttpClient)
+                .build()
+    }
+
+    @Singleton
+    @Provides
+    @Named(DI.authorized)
+    fun provideWebService(@Named(DI.authorized) retrofit: Retrofit): WebService {
+        return retrofit.create(WebService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    @Named(DI.unAuthorized)
+    fun provideUnauthorizedWebService(@Named(DI.unAuthorized) retrofit: Retrofit): WebService {
         return retrofit.create(WebService::class.java)
     }
 
@@ -118,12 +153,13 @@ class AppModule {
     @Provides
     @Singleton
     fun provideWeatherRepository(
-        api: WebService,
-        @Named(DI.inMemoryCache) cache: NeqabtyCache
+            @Named(DI.authorized) api: WebService,
+            @Named(DI.unAuthorized) unauthorizedApi: WebService,
+            @Named(DI.inMemoryCache) cache: NeqabtyCache
     ): NeqabtyRepository {
 
         val cachedWeatherDataStore = CachedNeqabtyDataStore(cache)
-        val remoteWeatherDataStore = RemoteNeqabtyDataStore(api)
+        val remoteWeatherDataStore = RemoteNeqabtyDataStore(api, unauthorizedApi)
         return NeqabtyRepositoryImpl(cachedWeatherDataStore, remoteWeatherDataStore)
     }
 
