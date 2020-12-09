@@ -191,12 +191,13 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                     navController.navigate(R.id.settingsFragment)
                 }
                 R.id.contactus_fragment -> {
-                    val intent = Intent(Intent.ACTION_SENDTO)
-                    val uriText = "mailto:" + Uri.encode("info@neqabty.com")
-                    val uri = Uri.parse(uriText)
-                    intent.setData(uri)
-                    if (intent.resolveActivity(packageManager) != null)
-                        startActivity(intent)
+                    (nav_view as NavigationView).getHeaderView(0).findViewById<Button>(R.id.tvMobileNumber).call(Constants.CALL_CENTER, this)
+//                    val intent = Intent(Intent.ACTION_SENDTO)
+//                    val uriText = "mailto:" + Uri.encode("info@neqabty.com")
+//                    val uri = Uri.parse(uriText)
+//                    intent.setData(uri)
+//                    if (intent.resolveActivity(packageManager) != null)
+//                        startActivity(intent)
                 }
 //                R.id.aboutapp_fragment -> {
 //                }

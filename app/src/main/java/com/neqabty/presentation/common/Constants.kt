@@ -12,6 +12,8 @@ object Constants {
     var cowpayAuthToken: String = if(BuildConfig.DEBUG) cowpayAuthTokenTest else cowpayAuthTokenProd
     var isFirebaseTokenUpdated: MutableLiveData<Boolean> = MutableLiveData(false)
 
+    var CALL_CENTER = "0235317300"
+
     var IP = "http://3.131.229.146:44392/"
     var PROD_IP = "front.neqabty.com"
     var DNS = if(BuildConfig.DEBUG) IP else "http://$PROD_IP"

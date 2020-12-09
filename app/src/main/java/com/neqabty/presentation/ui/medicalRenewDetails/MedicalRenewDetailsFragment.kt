@@ -210,7 +210,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
 
         var PaymentMethod = ArrayList<String>()
         PaymentMethod.add(CowpayConstantKeys.CreditCardMethod)
-//            PaymentMethod.add(CowpayConstantKeys.FawryMethod)
+        PaymentMethod.add(CowpayConstantKeys.FawryMethod)
         intent.putExtra(CowpayConstantKeys.PaymentMethod, PaymentMethod)
 
         intent.putExtra(CowpayConstantKeys.AuthorizationToken, Constants.cowpayAuthToken)

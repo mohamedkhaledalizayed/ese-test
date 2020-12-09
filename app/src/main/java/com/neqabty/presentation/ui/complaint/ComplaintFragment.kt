@@ -18,6 +18,7 @@ import com.neqabty.R
 import com.neqabty.databinding.ComplaintFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ComplaintTypeUI
 import com.neqabty.presentation.util.PreferencesHelper
@@ -80,7 +81,7 @@ class ComplaintFragment : BaseFragment(), Injectable {
 
     private fun initializeViews() {
         binding.tvDescription.setOnClickListener {
-            tvDescription.call("0235317300", requireContext())
+            tvDescription.call(Constants.CALL_CENTER, requireContext())
         }
         binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
         binding.bSend.setOnClickListener {
