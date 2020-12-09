@@ -22,6 +22,7 @@ import com.neqabty.databinding.PaymentFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.payment_fragment.*
@@ -49,7 +50,7 @@ class PaymentFragment : BaseFragment(), Injectable {
     var year: String = ""
 
     lateinit var params: PaymentFragmentArgs
-    lateinit var memberItem: MemberUI
+    lateinit var medicalRenewalPaymentUI: MedicalRenewalPaymentUI
 
     var requestNumber = "0"
     override fun onCreateView(
@@ -85,7 +86,7 @@ class PaymentFragment : BaseFragment(), Injectable {
         })
 
         params = PaymentFragmentArgs.fromBundle(arguments!!)
-        memberItem = params.memberItem
+        medicalRenewalPaymentUI = params.medicalRenewalPaymentUI
         initializeViews()
     }
 
@@ -239,10 +240,9 @@ class PaymentFragment : BaseFragment(), Injectable {
         }
     }
 
-    fun offlineSetPaid() {
-
-        paymentViewModel.setPaid(requestNumber)
-    }
+//    fun offlineSetPaid() {
+//        paymentViewModel.setPaid(requestNumber)
+//    }
     // endregion
 
     fun navController() = findNavController()

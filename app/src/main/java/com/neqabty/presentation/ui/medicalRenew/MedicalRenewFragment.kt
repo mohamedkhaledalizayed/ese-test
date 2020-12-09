@@ -166,7 +166,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 return
             }
             3 -> {
-                showShouldRenewSyndicateMembershipAlert(getString(R.string.medical_subscription_renew_syndicate_membership))
+                showGoToRenewalPaymentAlert(getString(R.string.medical_subscription_renew_syndicate_membership))
                 bContinue.visibility = View.GONE
             }
         }
@@ -262,29 +262,6 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
 
     }
 
-
-    private fun showShouldRenewSyndicateMembershipAlert(msg: String) {
-        builder = AlertDialog.Builder(requireContext())
-        builder?.setTitle(getString(R.string.alert_title))
-        builder?.setCancelable(false)
-        builder?.setMessage(msg)
-        builder?.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
-            dialog.dismiss()
-        }
-
-        builder?.setNegativeButton(getString(R.string.cancel_btn)) { dialog, which ->
-            navController().popBackStack()
-            navController().navigate(R.id.homeFragment)
-        }
-
-        if (dialog == null)
-            dialog = builder?.create()
-
-        if (!dialog?.isShowing!!)
-            dialog?.show()
-
-    }
-
     private fun showGoToRenewalPaymentAlert(msg: String) {
         builder = AlertDialog.Builder(requireContext())
         builder?.setTitle(getString(R.string.alert_title))
@@ -295,9 +272,8 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             navController().navigate(R.id.inquiryFragment)
         }
 
-        builder?.setNegativeButton(getString(R.string.cancel_btn)) { dialog, which ->
-            navController().popBackStack()
-            navController().navigate(R.id.homeFragment)
+        builder?.setNegativeButton(getString(R.string.continue_btn)) { dialog, which ->
+            dialog.dismiss()
         }
 
         if (dialog == null)

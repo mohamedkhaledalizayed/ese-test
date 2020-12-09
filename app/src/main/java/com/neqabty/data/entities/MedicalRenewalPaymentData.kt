@@ -18,6 +18,10 @@ data class MedicalRenewalPaymentData(
             var amount: Int?,
             @field:SerializedName("PaymentRequestName")
             var name: String?,
+            @field:SerializedName("EngineerName")
+            var engName: String?,
+            @field:SerializedName("OldRefId")
+            var engNumber: String?,
             @field:SerializedName("PaymentRequestDetailsDescriptionList")
             var paymentDetailsItems: List<PaymentDetailsItem>? = null
     )

@@ -15,8 +15,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class PaymentViewModel @Inject constructor(
-        private val getTransactionHash: GetTransactionHash,
-        @Named(DI.authorized) private val api: WebService) : BaseViewModel() {
+        private val getTransactionHash: GetTransactionHash) : BaseViewModel() {
 
     private val syndicateEntityUIMapper = SyndicateEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
@@ -44,15 +43,15 @@ class PaymentViewModel @Inject constructor(
         )
     }
 
-    fun setPaid(username: String) {
-        api.setPaid(SyndicateRequest(username)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                {
-
-                    viewState.value = viewState.value?.copy(isLoading = false, hash = "123")
-                },
-                { errorState.value = handleError(it) }
-        )
-    }
+//    fun setPaid(username: String) {
+//        api.setPaid(SyndicateRequest(username)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+//                {
+//
+//                    viewState.value = viewState.value?.copy(isLoading = false, hash = "123")
+//                },
+//                { errorState.value = handleError(it) }
+//        )
+//    }
 
     private fun onTransactionHashReceived(syndicates: List<SyndicateUI>) {
 //        val newViewState = viewState.value?.copy(

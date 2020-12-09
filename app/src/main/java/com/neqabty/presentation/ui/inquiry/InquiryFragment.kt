@@ -18,6 +18,8 @@ import com.neqabty.databinding.InquiryFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
+import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.entities.ServiceTypeUI
 import com.neqabty.presentation.entities.ServiceUI
 import com.neqabty.presentation.util.PreferencesHelper
@@ -99,24 +101,11 @@ class InquiryFragment : BaseFragment(), Injectable {
             renderServiceTypes()
             state.serviceTypes = null
             return
-        } else if (!state.isLoading && state.member != null) {
-//            PreferencesHelper(requireContext()).user = state.member?.engineerID.toString()
-//            if (state?.member?.code == 0 || state.member?.code == 1) {
-//                navController().navigate(
-//                        InquiryFragmentDirections.inquiryDetails(state.member!!)
-//                )
-//            } else {
-//                showAlert(state?.member?.message!!)
-//            }
-            if (state.member?.msg == "") {
-                state.member?.engineerNumber = edMemberNumber.text.toString()
+        } else if (!state.isLoading && state.medicalRenewalPayment != null) {
                 navController().navigate(
-                        InquiryFragmentDirections.openInquiryDetails(0, spService.selectedItem.toString(), state.member!!, serviceID.toString())
+                        InquiryFragmentDirections.openInquiryDetails(edMemberNumber.text.toString(),0, spService.selectedItem.toString(), state.medicalRenewalPayment as MedicalRenewalPaymentUI, serviceID.toString())
                 )
-            } else {
-                showAlert(state.member?.msg as String)
-            }
-            state.member = null
+            state.medicalRenewalPayment = null
         }
     }
 

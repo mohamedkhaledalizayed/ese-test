@@ -304,28 +304,28 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
                 sendDecryptionKey = true
                 paymentCreationResponse = response
 
-                if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
-
-                    offlineSetPaid()
-                } else {
-                    llSuperProgressbar.visibility = View.INVISIBLE
-                    val paymentMethod = mechanismTypeButton.getText().toString()
-                    if (paymentMethod == getString(R.string.payment_card)) {
-                        navController().navigate(
-                                MedicalRenewDetailsFragmentDirections.openPayment(MemberUI(), paymentCreationResponse.OriginalSenderRequestNumber,
-                                        paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
-                        )
-                    } else if (paymentMethod == getString(R.string.payment_channel) ||
-                            paymentMethod == getString(R.string.payment_wallet) ||
-                            paymentMethod == getString(R.string.payment_meeza)) {
-                        showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
-                            navController().popBackStack()
-                            navController().navigate(R.id.homeFragment)
-                        }
-//                    "senderRequestNumber" + response.OriginalSenderRequestNumber
-                    }
-                }
-//                medicalRenewDetailsViewModel.sendDecryptionKey(response.OriginalSenderRequestNumber, response.RequestDecryptionKey)
+//                if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
+//
+////                    offlineSetPaid()
+//                } else {
+//                    llSuperProgressbar.visibility = View.INVISIBLE
+//                    val paymentMethod = mechanismTypeButton.getText().toString()
+//                    if (paymentMethod == getString(R.string.payment_card)) {
+//                        navController().navigate(
+//                                MedicalRenewDetailsFragmentDirections.openPayment(MemberUI(), paymentCreationResponse.OriginalSenderRequestNumber,
+//                                        paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
+//                        )
+//                    } else if (paymentMethod == getString(R.string.payment_channel) ||
+//                            paymentMethod == getString(R.string.payment_wallet) ||
+//                            paymentMethod == getString(R.string.payment_meeza)) {
+//                        showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
+//                            navController().popBackStack()
+//                            navController().navigate(R.id.homeFragment)
+//                        }
+////                    "senderRequestNumber" + response.OriginalSenderRequestNumber
+//                    }
+//                }
+                medicalRenewDetailsViewModel.sendDecryptionKey(response.OriginalSenderRequestNumber, response.RequestDecryptionKey)
             }
 
             val failureCallback = {
@@ -361,10 +361,10 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
         }
     }
 
-    fun offlineSetPaid() {
-
-//        medicalRenewDetailsViewModel.setPaid(medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber!!)
-    }
+//    fun offlineSetPaid() {
+//
+////        medicalRenewDetailsViewModel.setPaid(medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber!!)
+//    }
     //endregion
 
     fun navController() = findNavController()

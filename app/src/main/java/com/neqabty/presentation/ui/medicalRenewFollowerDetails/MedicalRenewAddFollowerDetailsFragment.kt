@@ -348,7 +348,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         if (millennium.toInt() == 3)
             myCalendar.set(Calendar.YEAR, year.toInt() + 2000)
         else
-            myCalendar.set(Calendar.YEAR, year.toInt())
+            myCalendar.set(Calendar.YEAR, year.toInt() + 1900)
         myCalendar.set(Calendar.MONTH, month.toInt() - 1)
         myCalendar.set(Calendar.DAY_OF_MONTH, day.toInt())
         updateBDLabel()
@@ -446,7 +446,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         val bundle = Bundle()
 //        followerItem.isNew = true
         followerItem.name = binding.edName.text.toString()
-        followerItem.birthDate = if(binding.edBirthDate.text.toString().contains("00:00")) binding.edBirthDate.text.toString() else binding.edBirthDate.text.toString()+"T00:00:00"
+        followerItem.birthDate = if (binding.edBirthDate.text.toString().contains("00:00")) binding.edBirthDate.text.toString() else binding.edBirthDate.text.toString() + "T00:00:00"
         followerItem.gender = when (selectedGender) {
             genderList!![0] -> "M"
             genderList!![1] -> "F"

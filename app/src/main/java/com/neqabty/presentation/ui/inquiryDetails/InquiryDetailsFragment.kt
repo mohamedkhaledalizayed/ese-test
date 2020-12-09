@@ -21,7 +21,9 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MemberUI
+import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
@@ -35,7 +37,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    private var adapter by autoCleared<PaymentItemsAdapter>()
+    private var adapter by autoCleared<MedicalRenewPaymentItemsAdapter>()
 
     lateinit var inquiryDetailsViewModel: InquiryDetailsViewModel
 
@@ -43,7 +45,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    lateinit var memberItem: MemberUI
+    lateinit var medicalRenewalPayment: MedicalRenewalPaymentUI
 
     lateinit var paymentGateway: PaymentGateway
     lateinit var paymentCreationRequest: PaymentCreationRequest
@@ -51,6 +53,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     lateinit var params: InquiryDetailsFragmentArgs
     var sendDecryptionKey = false
+    var title = ""
 
     lateinit var paymentCreationResponse: PaymentCreationResponse
     override fun onCreateView(
@@ -80,29 +83,30 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         inquiryDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                inquiryDetailsViewModel.paymentInquiry(memberItem.engineerNumber, params.serviceID, memberItem.requestID, memberItem.amount.toString())
+                inquiryDetailsViewModel.paymentInquiry(params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
 
         params = InquiryDetailsFragmentArgs.fromBundle(arguments!!)
-        memberItem = params.memberItem
+        medicalRenewalPayment = params.medicalRenewalPaymentUI
 
 //        initializeViews()
-        inquiryDetailsViewModel.paymentInquiry(memberItem.engineerNumber, params.serviceID, memberItem.requestID, memberItem.amount.toString())
+        inquiryDetailsViewModel.paymentInquiry(params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
     }
 
     fun initializeViews() {
         llContent.visibility = View.VISIBLE
-        val adapter = PaymentItemsAdapter(dataBindingComponent, appExecutors) { }
+        val adapter = MedicalRenewPaymentItemsAdapter(dataBindingComponent, appExecutors) { }
         this.adapter = adapter
 
         binding.title = params.title
-        memberItem?.let {
-            binding.memberItem = it
+        title = params.title
+        medicalRenewalPayment?.let {
+            binding.medicalRenewalPayment = it
 
-            it.payments?.let {
+            it.paymentItem?.paymentDetailsItems?.let {
                 adapter.submitList(it)
             }
         }
@@ -162,7 +166,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                 val paymentMethod = mechanismTypeButton.getText().toString()
                 if (paymentMethod == getString(R.string.payment_card)) {
                     navController().navigate(
-                            InquiryDetailsFragmentDirections.openPayment(memberItem, paymentCreationResponse.OriginalSenderRequestNumber,
+                            InquiryDetailsFragmentDirections.openPayment(medicalRenewalPayment, paymentCreationResponse.OriginalSenderRequestNumber,
                                     paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
                     )
                 } else if (paymentMethod == getString(R.string.payment_channel) ||
@@ -175,8 +179,8 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 //                    "senderRequestNumber" + response.OriginalSenderRequestNumber
                 }
             } else {
-                state.member?.let {
-                    memberItem.paymentCreationRequest = it.paymentCreationRequest
+                state.medicalRenewalPayment?.let {
+//                    medicalRenewalPayment.paymentCreationRequest = it.paymentCreationRequest
 //                    // static set
 //                    memberItem.paymentCreationRequest?.sender?.id = "071"
 //                    memberItem.paymentCreationRequest?.serviceCode = "171"
@@ -223,15 +227,15 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                 "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
         )
         //order id
-        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, memberItem.paymentCreationRequest?.senderRequestNumber)
+        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, medicalRenewalPayment.paymentItem?.paymentRequestNumber)
         //order price780
-        intent.putExtra(CowpayConstantKeys.Amount, memberItem.paymentCreationRequest?.settlementAmounts?.amount?.toString())
+        intent.putExtra(CowpayConstantKeys.Amount, medicalRenewalPayment.paymentItem?.amount?.toString())
         //user data
-        intent.putExtra(CowpayConstantKeys.CustomerName, memberItem.engineerName)
+        intent.putExtra(CowpayConstantKeys.CustomerName, medicalRenewalPayment.paymentItem?.engName ?: title)
         intent.putExtra(CowpayConstantKeys.CustomerMobile, PreferencesHelper(requireContext()).mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
         //user id
-        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, memberItem.paymentCreationRequest?.userUniqueIdentifier)
+        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, medicalRenewalPayment.paymentItem?.paymentRequestNumber)
 
 
         startActivityForResult(intent, CowpayConstantKeys.PaymentMethodsActivityRequestCode)
@@ -240,35 +244,35 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
     fun createPayment() {
         try {
 
-            paymentGateway = PaymentGateway(activity, memberItem.paymentCreationRequest?.sender?.password)
+            paymentGateway = PaymentGateway(activity, "1234")
             paymentCreationRequest = PaymentCreationRequest()
 
 //            paymentCreationRequest.Sender.Id = memberItem.paymentCreationRequest?.sender?.id
             paymentCreationRequest.Sender.Id = "071"
-            paymentCreationRequest.Sender.Name = memberItem.paymentCreationRequest?.sender?.name
-//            paymentCreationRequest.Sender.Name = "MSAD"
-            paymentCreationRequest.Sender.Password = memberItem.paymentCreationRequest?.sender?.password
+//            paymentCreationRequest.Sender.Name = memberItem.paymentCreationRequest?.sender?.name
+            paymentCreationRequest.Sender.Name = "MSAD"
+            paymentCreationRequest.Sender.Password = "1234"
             paymentCreationRequest.Description = "Test"
 //            paymentCreationRequest.SenderInvoiceNumber = memberItem.paymentCreationRequest?.senderRequestNumber
-            paymentCreationRequest.SenderInvoiceNumber = memberItem.paymentCreationRequest?.senderRequestNumber
+            paymentCreationRequest.SenderInvoiceNumber = medicalRenewalPayment.requestID
             paymentCreationRequest.AdditionalInfo = "Test"
 
 //            paymentCreationRequest.SenderRequestNumber = memberItem.paymentCreationRequest?.senderRequestNumber + "032110010100"
-            paymentCreationRequest.SenderRequestNumber = memberItem.paymentCreationRequest?.senderRequestNumber
+            paymentCreationRequest.SenderRequestNumber = medicalRenewalPayment.requestID
 //            paymentCreationRequest.ServiceCode = memberItem.paymentCreationRequest?.serviceCode
             paymentCreationRequest.ServiceCode = "171"
 
             val settlementAmount = PaymentCreationRequest.SettlementAmount()
 
-            settlementAmount.Amount = memberItem.paymentCreationRequest?.settlementAmounts?.amount?.toDouble()!!
+            settlementAmount.Amount = medicalRenewalPayment.paymentItem?.amount?.toDouble()!!
 //            settlementAmount.SettlementAccountCode = memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode!!.toInt()
             settlementAmount.SettlementAccountCode = 647
             settlementAmount.Description = "Test"
 
             paymentCreationRequest.SettlementAmounts.add(settlementAmount)
 
-            paymentCreationRequest.Currency = memberItem.paymentCreationRequest?.currency
-//            paymentCreationRequest.Currency = "818"
+//            paymentCreationRequest.Currency = memberItem.paymentCreationRequest?.currency
+            paymentCreationRequest.Currency = "818"
 
             mechanismTypeButton = binding.root.findViewById(rgPaymentMechanismType.getCheckedRadioButtonId())
 
@@ -290,7 +294,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 //            paymentCreationRequest.RequestExpiryDate = memberItem.paymentCreationRequest?.requestExpiryDate
             paymentCreationRequest.RequestExpiryDate = "2020-12-09"
 
-            paymentCreationRequest.UserUniqueIdentifier = memberItem.paymentCreationRequest?.userUniqueIdentifier
+            paymentCreationRequest.UserUniqueIdentifier = medicalRenewalPayment.requestID
 //            paymentCreationRequest.UserUniqueIdentifier = "12346743298546"
 
 //            val publicKey = memberItem.paymentCreationRequest?.publicKey
@@ -331,7 +335,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.INVISIBLE
                 showConnectionAlert(requireContext(), retryCallback = {
                     llContent.visibility = View.INVISIBLE
-                    inquiryDetailsViewModel.paymentInquiry(memberItem.engineerNumber, params.serviceID, memberItem.requestID, memberItem.amount.toString())
+                    inquiryDetailsViewModel.paymentInquiry(params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
                 }, cancelCallback = {
                     navController().navigateUp()
                 })

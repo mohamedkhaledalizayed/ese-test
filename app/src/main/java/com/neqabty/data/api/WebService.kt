@@ -113,7 +113,7 @@ interface WebService {
             @Query("serviceID") serviceID: Int,
             @Query("requestID") requestID: String,
             @Query("amount") amount: String
-    ): Observable<ResponseWrapper<MemberData>>
+    ): Observable<MedicalRenewalPaymentData>
 
     @POST("api/v1/encrypt")
     fun paymentEncryption(@Body encryptionRequest: EncryptionRequest): Observable<EncryptionData>
@@ -129,9 +129,6 @@ interface WebService {
 
     @POST("api/ApiHealthCare/MedBeneficiaryFollowersUpdate")
     fun updateMedicalRenewPaymentData(@Body medicalRenewalDataRequest: MedicalRenewalData, @Query("server") server: String = ""): Observable<MedicalRenewalUpdateData>
-
-    @POST("api/v1/transactions/testCallback")
-    fun setPaid(@Body syndicateRequest: SyndicateRequest): Observable<ApiResponse<List<Unit>>>
 
     @POST("api/v2/medical/Beneficiary")
     fun validateUser(@Body claimingValidationRequest: ClaimingValidationRequest): Observable<ApiResponse<ClaimingValidationData>>

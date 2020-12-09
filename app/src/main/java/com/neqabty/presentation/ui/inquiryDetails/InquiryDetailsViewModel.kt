@@ -11,9 +11,11 @@ import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.di.DI
 import com.neqabty.presentation.entities.DecryptionUI
 import com.neqabty.presentation.entities.EncryptionUI
+import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.mappers.DecryptionEntityUIMapper
 import com.neqabty.presentation.mappers.EncryptionEntityUIMapper
+import com.neqabty.presentation.mappers.MedicalRenewalPaymentEntityUIMapper
 import com.neqabty.presentation.mappers.MemberEntityUIMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -27,6 +29,7 @@ class InquiryDetailsViewModel @Inject constructor(
     @Named(DI.authorized) private val api: WebService
 ) : BaseViewModel() {
 
+    private val medicalRenewalPaymentEntityUIMapper = MedicalRenewalPaymentEntityUIMapper()
     private val memberEntityUIMapper = MemberEntityUIMapper()
     private val encryptionEntityUIMapper = EncryptionEntityUIMapper()
     private val decryptionEntityUIMapper = DecryptionEntityUIMapper()
@@ -75,10 +78,12 @@ class InquiryDetailsViewModel @Inject constructor(
         addDisposable(paymentInquiry.paymentInquiry(number, serviceID, requestID, amount)
                 .map {
                     it.let {
-                        memberEntityUIMapper.mapFrom(it)
+                        medicalRenewalPaymentEntityUIMapper.mapFrom(it)
                     }
                 }.subscribe(
-                        { onInquiryReceived(it) },
+                        {
+                            onInquiryReceived(it)
+                        },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
                             errorState.value = handleError(it)
@@ -101,13 +106,13 @@ class InquiryDetailsViewModel @Inject constructor(
         viewState.value = newViewState
     }
 
-    private fun onInquiryReceived(member: MemberUI) {
+    private fun onInquiryReceived(medicalRenewalPayment: MedicalRenewalPaymentUI) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
-                member = member)
+                medicalRenewalPayment = medicalRenewalPayment)
         viewState.value = newViewState
     }
-//
+
 //    fun setPaid(username: String) {
 //        api.setPaid(SyndicateRequest(username)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
 //                {

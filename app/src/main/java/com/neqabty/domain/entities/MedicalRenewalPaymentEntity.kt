@@ -8,6 +8,8 @@ data class MedicalRenewalPaymentEntity(
             var paymentRequestNumber: String = "",
             var amount: Int?,
             var name: String?,
+            var engName: String?,
+            var engNumber: String?,
             var paymentDetailsItems: List<PaymentDetailsItem>? = null
     )
 

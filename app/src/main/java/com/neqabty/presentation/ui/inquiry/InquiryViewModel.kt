@@ -6,9 +6,11 @@ import com.neqabty.domain.usecases.GetAllServices
 import com.neqabty.domain.usecases.PaymentInquiry
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
+import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.entities.ServiceTypeUI
 import com.neqabty.presentation.entities.ServiceUI
+import com.neqabty.presentation.mappers.MedicalRenewalPaymentEntityUIMapper
 import com.neqabty.presentation.mappers.MemberEntityUIMapper
 import com.neqabty.presentation.mappers.ServiceEntityUIMapper
 import com.neqabty.presentation.mappers.ServiceTypeEntityUIMapper
@@ -21,7 +23,7 @@ class InquiryViewModel @Inject constructor(
         private val paymentInquiry: PaymentInquiry
 ) : BaseViewModel() {
 
-    private val memberEntityUIMapper = MemberEntityUIMapper()
+    private val medicalRenewalPaymentEntityUIMapper = MedicalRenewalPaymentEntityUIMapper()
     private val serviceEntityUIMapper = ServiceEntityUIMapper()
     private val serviceTypeEntityUIMapper = ServiceTypeEntityUIMapper()
 
@@ -67,10 +69,12 @@ class InquiryViewModel @Inject constructor(
         addDisposable(paymentInquiry.paymentInquiry(number, serviceID, "", "")
                 .map {
                     it.let {
-                        memberEntityUIMapper.mapFrom(it)
+                        medicalRenewalPaymentEntityUIMapper.mapFrom(it)
                     }
                 }.subscribe(
-                        { onInquiryReceived(it) },
+                        {
+                            onInquiryReceived(it)
+                            },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
                             errorState.value = handleError(it)
@@ -93,10 +97,10 @@ class InquiryViewModel @Inject constructor(
         viewState.value = newViewState
     }
 
-    private fun onInquiryReceived(member: MemberUI) {
+    private fun onInquiryReceived(medicalRenewalPayment: MedicalRenewalPaymentUI) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
-                member = member)
+                medicalRenewalPayment = medicalRenewalPayment)
         viewState.value = newViewState
     }
 }

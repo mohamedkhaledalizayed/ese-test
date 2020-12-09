@@ -1,16 +1,16 @@
 package com.neqabty.presentation.ui.notificationDetails
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.NotificationDetailsFragmentBinding
@@ -18,6 +18,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.entities.NotificationUI
 import com.neqabty.presentation.util.PreferencesHelper
@@ -37,9 +38,9 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
     lateinit var notificationDetailsViewModel: NotificationDetailsViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -84,7 +85,7 @@ class NotificationDetailsFragment : BaseFragment(), Injectable {
         }
         binding.bPay.setOnClickListener {
             navController().navigate(
-                    NotificationDetailsFragmentDirections.openInquiryDetailsFragment(1, notificationItem.notificationType!!, MemberUI(amount = notificationItem.cost!!, requestID = notificationItem.approvalNumber!!, engineerNumber = notificationItem.userNumber.toString(), engineerName = notificationItem.name!!), if (notificationItem.notificationTypeID == 2) Constants.PAYMENT_TYPE_TRIPS else Constants.PAYMENT_TYPE_RECORDS) // TODO serviceID, 2 trips 3 records
+                    NotificationDetailsFragmentDirections.openInquiryDetailsFragment(notificationItem.userNumber!!, 1, notificationItem.notificationType!!, MedicalRenewalPaymentUI(requestID = notificationItem.approvalNumber!!, paymentItem = MedicalRenewalPaymentUI.PaymentItem(paymentRequestNumber = notificationItem.approvalNumber!!, amount = notificationItem.cost!!, engNumber = notificationItem.userNumber.toString(), engName = notificationItem.name!!, name = notificationItem.name!!)), if (notificationItem.notificationTypeID == 2) Constants.PAYMENT_TYPE_TRIPS else Constants.PAYMENT_TYPE_RECORDS) // TODO serviceID, 2 trips 3 records
             )
         }
     }

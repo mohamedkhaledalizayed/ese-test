@@ -8,7 +8,7 @@ data class NotificationEntity(
     var date: String?,
     var time: String?,
     var mobileView: Int?,
-    var userNumber: String,
+    var userNumber: String?,
     var approvalNumber: String?,
     var approvalImage: String?,
     var comment: String?,

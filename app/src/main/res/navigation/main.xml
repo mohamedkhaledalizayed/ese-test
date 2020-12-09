@@ -268,8 +268,8 @@
         tools:layout="@layout/payment_fragment">
 
         <argument
-            android:name="memberItem"
-            app:argType="com.neqabty.presentation.entities.MemberUI" />
+            android:name="medicalRenewalPaymentUI"
+            app:argType="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
         <argument
             android:name="senderRequestNumber"
             app:argType="java.lang.String" />
@@ -505,6 +505,10 @@
         android:label="@string/inquiry_title"
         tools:layout="@layout/inquiry_details_fragment">
         <argument
+            android:name="number"
+            app:argType="java.lang.String" />
+
+        <argument
             android:name="type"
             app:argType="java.lang.Integer" />
 
@@ -514,8 +518,8 @@
 
 
         <argument
-            android:name="memberItem"
-            app:argType="com.neqabty.presentation.entities.MemberUI" />
+            android:name="medicalRenewalPaymentUI"
+            app:argType="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
         <argument
             android:name="serviceID"
             app:argType="java.lang.String" />
