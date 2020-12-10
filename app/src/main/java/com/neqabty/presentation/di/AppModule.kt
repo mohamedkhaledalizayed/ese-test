@@ -55,7 +55,7 @@ class AppModule {
         val certificatePinner : CertificatePinner = CertificatePinner.Builder()
                 .add(
                         Constants.PROD_IP,
-                        "sha256/TlI6WuW0Y2x1kBt5+vvTkS5B3HmHQU5oiwnUtDb/IrM="
+                        "sha256/Zi7WyG7/3sg3UCgKI7P8BcO8Lz/5zMHcPmyGZGAw4+c="
                 ).build()
 
         return OkHttpClient.Builder()
@@ -76,7 +76,7 @@ class AppModule {
                     }
                 })
                 .addInterceptor(httpLoggingInterceptor) // TODO Interceptor
-//                .certificatePinner(certificatePinner)
+                .certificatePinner(certificatePinner)
                 .build()
     }
 
