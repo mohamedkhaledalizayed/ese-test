@@ -1,6 +1,7 @@
 package com.neqabty.domain.entities
 
 data class MedicalRenewalPaymentEntity(
+        var resultType: String = "",
         var requestID: String = "",
         var paymentItem: PaymentItem? = null
 ) {

@@ -16,14 +16,16 @@ class MedicalRenewPaymentInquiry @Inject constructor(
         private const val PARAM_DELIVERY_TYPE = "param:deliveryType"
         private const val PARAM_ADDRESS = "param:address"
         private const val PARAM_MOBILE = "param:mobile"
+        private const val PARAM_MOBILE_NUMBER = "param:mobileNumber"
     }
 
-    fun paymentInquiry(userNumber: String, deliveryType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
+    fun paymentInquiry(mobileNumber: String, userNumber: String, deliveryType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
         val data = HashMap<String, Any>()
         data[PARAM_USER_NUMBER] = userNumber
         data[PARAM_DELIVERY_TYPE] = deliveryType
         data[PARAM_ADDRESS] = address
         data[PARAM_MOBILE] = mobile
+        data[PARAM_MOBILE_NUMBER] = mobileNumber
         return observable(data)
     }
 
@@ -32,6 +34,7 @@ class MedicalRenewPaymentInquiry @Inject constructor(
         val deliveryType = data?.get(PARAM_DELIVERY_TYPE) as Int
         val address = data?.get(PARAM_ADDRESS) as String
         val mobile = data?.get(PARAM_MOBILE) as String
-        return neqabtyRepository.inquireMedicalRenewalPayment(userNumber, deliveryType, address, mobile)
+        val mobileNumber = data?.get(PARAM_MOBILE_NUMBER) as String
+        return neqabtyRepository.inquireMedicalRenewalPayment(mobileNumber, userNumber, deliveryType, address, mobile)
     }
 }

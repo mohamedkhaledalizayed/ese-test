@@ -75,14 +75,14 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
         medicalRenewUpdateViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                medicalRenewUpdateViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).user)
+                medicalRenewUpdateViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
             }, message = error?.message)
         })
 
-        medicalRenewUpdateViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).user)
+        medicalRenewUpdateViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
     }
 
     private fun initializeViews() {
@@ -111,7 +111,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
                 showAlert(getString(R.string.medical_subscription_renew_add_follower))
             } else {
                 updateRequested = true
-                medicalRenewUpdateViewModel.updateMedicalRenewalData(medicalRenewalUI)
+                medicalRenewUpdateViewModel.updateMedicalRenewalData(PreferencesHelper(requireContext()).mobile, medicalRenewalUI)
             }
         }
         updateFollowersTitleVisibility()

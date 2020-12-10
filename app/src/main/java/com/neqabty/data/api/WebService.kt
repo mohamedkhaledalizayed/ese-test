@@ -109,6 +109,7 @@ interface WebService {
 
     @GET("api/v1/service")
     fun paymentInquiry(
+            @Query("mobile_number") mobileNumber: String,
             @Query("oldRefID") userNumber: String,
             @Query("serviceID") serviceID: Int,
             @Query("requestID") requestID: String,
@@ -122,13 +123,13 @@ interface WebService {
     fun sendDecryptionKey(@Body decryptionRequest: DecryptionRequest): Observable<ResponseWrapper<DecryptionData>>
 
     @GET("api/ApiHealthCare/GetFollowersList")
-    fun getMedicalRenewData(@Query("oldRefId") contactId: String, @Query("server") server: String = ""): Observable<MedicalRenewalData>
+    fun getMedicalRenewData(@Query("mobile_number") mobileNumber: String, @Query("oldRefId") contactId: String, @Query("server") server: String = ""): Observable<MedicalRenewalData>
 
     @POST("api/apiPaymentRequest/AddHealthCareRequest")
-    fun getMedicalRenewPaymentData(@Query("oldRefId") contactId: String, @Query("deliveryLocation") locationType: Int, @Query("deliveryAddress") address: String, @Query("deliveryPhone") mobile: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
+    fun getMedicalRenewPaymentData(@Query("mobile_number") mobileNumber: String, @Query("oldRefId") contactId: String, @Query("deliveryLocation") locationType: Int, @Query("deliveryAddress") address: String, @Query("deliveryPhone") mobile: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
 
     @POST("api/ApiHealthCare/MedBeneficiaryFollowersUpdate")
-    fun updateMedicalRenewPaymentData(@Body medicalRenewalDataRequest: MedicalRenewalData, @Query("server") server: String = ""): Observable<MedicalRenewalUpdateData>
+    fun updateMedicalRenewPaymentData(@Query("mobile_number") mobileNumber: String, @Body medicalRenewalDataRequest: MedicalRenewalData, @Query("server") server: String = ""): Observable<MedicalRenewalUpdateData>
 
     @POST("api/v2/medical/Beneficiary")
     fun validateUser(@Body claimingValidationRequest: ClaimingValidationRequest): Observable<ApiResponse<ClaimingValidationData>>

@@ -80,12 +80,12 @@ interface NeqabtyDataStore {
 
     fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>>
     fun getAllServices(typeID: Int): Observable<List<ServiceEntity>>
-    fun inquirePayment(userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MedicalRenewalPaymentEntity>
+    fun inquirePayment(mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MedicalRenewalPaymentEntity>
     fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
     fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity>
-    fun getMedicalRenewalData(userNumber: String): Observable<MedicalRenewalEntity>
-    fun inquireMedicalRenewalPayment(userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity>
-    fun updateMedicalRenewalData(medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity>
+    fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity>
+    fun inquireMedicalRenewalPayment(mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity>
+    fun updateMedicalRenewalData(mobileNumber: String, medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity>
     fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>
     fun inquireEngineeringRecords(userNumber: String): Observable<RegisteryEntity>

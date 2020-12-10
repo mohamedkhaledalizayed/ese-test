@@ -83,7 +83,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         inquiryDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                inquiryDetailsViewModel.paymentInquiry(params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
+                inquiryDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
@@ -93,7 +93,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         medicalRenewalPayment = params.medicalRenewalPaymentUI
 
 //        initializeViews()
-        inquiryDetailsViewModel.paymentInquiry(params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
+        inquiryDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
     }
 
     fun initializeViews() {
@@ -335,7 +335,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.INVISIBLE
                 showConnectionAlert(requireContext(), retryCallback = {
                     llContent.visibility = View.INVISIBLE
-                    inquiryDetailsViewModel.paymentInquiry(params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
+                    inquiryDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
                 }, cancelCallback = {
                     navController().navigateUp()
                 })

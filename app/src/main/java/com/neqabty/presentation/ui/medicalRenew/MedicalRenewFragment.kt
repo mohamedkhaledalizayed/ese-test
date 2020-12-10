@@ -57,7 +57,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-//        PreferencesHelper(requireContext()).user = "1008479"
+//        PreferencesHelper(requireContext()).user = "3806206"
         medicalRenewViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MedicalRenewViewModel::class.java)
 
@@ -67,14 +67,14 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         medicalRenewViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                medicalRenewViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).user)
+                medicalRenewViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
             }, message = error?.message)
         })
 
-        medicalRenewViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).user)
+        medicalRenewViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
 //        medicalRenewViewModel.getMedicalRenewalData("2305693")
     }
 
@@ -181,7 +181,10 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             1 -> {
                 showNewMemberAlert()
             }
-            3 -> bContinue.visibility = View.GONE
+            3 -> {
+                Toast.makeText(requireContext(), getString(R.string.medical_subscription_subscribed), Toast.LENGTH_SHORT).show()
+                bContinue.visibility = View.GONE
+            }
             4 -> bContinue.visibility = View.GONE
             5 -> bEdit.visibility = View.GONE
         }
@@ -218,7 +221,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         } else if (!medicalRenewalUI.contact?.mobile.isNullOrEmpty() && !medicalRenewalUI.contact?.address.isNullOrEmpty() && !medicalRenewalUI.contact?.name.isNullOrEmpty() && !medicalRenewalUI.contact?.nationalId.isNullOrEmpty() && !medicalRenewalUI.contact?.birthDate.isNullOrEmpty())
             true
         else {
-            Toast.makeText(requireContext(), getString(R.string.medical_subscription_renew_incomplete_data), Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), getString(R.string.medical_subscription_renew_incomplete_data), Toast.LENGTH_SHORT).show()
             true
         }
     }

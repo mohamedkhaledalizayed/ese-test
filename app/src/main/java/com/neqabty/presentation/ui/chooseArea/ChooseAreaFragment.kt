@@ -81,7 +81,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
 
     private fun initializeViews() {
         binding.bSubscriptionRules.setOnClickListener {
-            val subscriptionIntent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.IP + "pdf/Medical.pdf"))
+            val subscriptionIntent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.DNS + "/pdf/Medical.pdf"))
             startActivity(subscriptionIntent)
         }
         binding.bNext.setOnClickListener {

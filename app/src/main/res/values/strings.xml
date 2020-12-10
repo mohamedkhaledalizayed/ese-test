@@ -298,7 +298,9 @@
     <string name="medical_subscription_suspended">هذه العضوية موقوفة برجاء الرجوع إلى النقابة</string>
     <string name="medical_subscription_renew_syndicate_membership">لم يجدد اشتراك النقابة يجب تجديد الاشتراك اولا قبل طلب الرعاية الصحية</string>
     <string name="medical_subscription_renew_incomplete_data">بيانات المهندس غير مكتمله برجاء الرجوع الي النقابة او الاتصال علي مركز خدمة العملاء</string>
+    <string name="medical_subscription_subscribed">انت مشترك بالفعل في خدمة الرعاية الصحية ويمكنك تعديل / اضافة / او حذف تابعين في حالة الرغبة في ذلك</string>
     <string name="medical_subscription_renew_add_follower">يرجى اضافة التابعين للإستمرار</string>
+    <string name="already_paid">لقد تم تسديد الإشتراك من قبل</string>
     <string name="edit_follower">تعديل</string>
     <string name="confirm_followers_edit_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم قريباً</string>
     <string name="medical_update_request_status_processing">طلبكم ما زال تحت الدراسة</string>

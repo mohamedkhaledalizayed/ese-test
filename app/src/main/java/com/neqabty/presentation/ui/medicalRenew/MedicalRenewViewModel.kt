@@ -21,13 +21,13 @@ class MedicalRenewViewModel @Inject constructor(
     }
 
 
-    fun getMedicalRenewalData(number: String) {
+    fun getMedicalRenewalData(mobileNumber: String, number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
 
 //        viewState.value?.medicalRenewalUI?.let {
 //            onMedicalRenewalDataReceived(it)
 //        } ?:
-        addDisposable(getMedicalRenewalData.getMedicalRenewalData(number)
+        addDisposable(getMedicalRenewalData.getMedicalRenewalData(mobileNumber, number)
                     .map {
                         it.let {
                             medicalRenewalEntityUIMapper.mapFrom(it)

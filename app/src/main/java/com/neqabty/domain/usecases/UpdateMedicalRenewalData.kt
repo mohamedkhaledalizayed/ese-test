@@ -15,16 +15,19 @@ class UpdateMedicalRenewalData @Inject constructor(
 
     companion object {
         private const val PARAM_ENTITY = "param:entity"
+        private const val PARAM_MOBILE_NUMBER = "param:mobileNumber"
     }
 
-    fun updateMedicalRenewalData(medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
+    fun updateMedicalRenewalData(mobileNumber: String, medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
         val data = HashMap<String, Any>()
         data[PARAM_ENTITY] = medicalRenewalData
+        data[PARAM_MOBILE_NUMBER] = mobileNumber
         return observable(data)
     }
 
     override fun createObservable(data: Map<String, Any>?): Observable<MedicalRenewalUpdateEntity> {
         val medicalRenewalData = data?.get(PARAM_ENTITY) as MedicalRenewalEntity
-        return neqabtyRepository.updateMedicalRenewalData(medicalRenewalData)
+        val mobileNumber = data?.get(PARAM_MOBILE_NUMBER) as String
+        return neqabtyRepository.updateMedicalRenewalData(mobileNumber, medicalRenewalData)
     }
 }

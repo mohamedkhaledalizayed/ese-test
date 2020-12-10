@@ -286,16 +286,16 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
 
     private val medicalRenewalDataEntityMapper = MedicalRenewalDataEntityMapper()
 
-    override fun getMedicalRenewalData(userNumber: String): Observable<MedicalRenewalEntity> {
-        return api.getMedicalRenewData(userNumber).flatMap { renewalInfo ->
+    override fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity> {
+        return api.getMedicalRenewData(mobileNumber, userNumber).flatMap { renewalInfo ->
             Observable.just(medicalRenewalDataEntityMapper.mapFrom(renewalInfo))
         }
     }
 
     private val medicalRenewalPaymentDataEntityMapper = MedicalRenewalPaymentDataEntityMapper()
 
-    override fun inquireMedicalRenewalPayment(userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
-        return api.getMedicalRenewPaymentData(userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
+    override fun inquireMedicalRenewalPayment(mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
+        return api.getMedicalRenewPaymentData(mobileNumber, userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
             Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
         }
     }
@@ -303,8 +303,8 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     private val medicalRenewalEntityDataMapper = MedicalRenewalEntityDataMapper()
     private val medicalRenewalUpdateDataEntityMapper = MedicalRenewalUpdateDataEntityMapper()
 
-    override fun updateMedicalRenewalData(medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
-        return api.updateMedicalRenewPaymentData(medicalRenewalEntityDataMapper.mapFrom(medicalRenewalData)).flatMap { updateInfoResult ->
+    override fun updateMedicalRenewalData(mobileNumber: String, medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
+        return api.updateMedicalRenewPaymentData(mobileNumber, medicalRenewalEntityDataMapper.mapFrom(medicalRenewalData)).flatMap { updateInfoResult ->
             Observable.just(medicalRenewalUpdateDataEntityMapper.mapFrom(updateInfoResult))
         }
     }
@@ -337,8 +337,8 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
 
     private val memberDataEntityMapper = MemberDataEntityMapper()
 
-    override fun inquirePayment(userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MedicalRenewalPaymentEntity> {
-        return api.paymentInquiry(userNumber, serviceID, requestID, amount).flatMap { renewalData ->
+    override fun inquirePayment(mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MedicalRenewalPaymentEntity> {
+        return api.paymentInquiry(mobileNumber, userNumber, serviceID, requestID, amount).flatMap { renewalData ->
 //            if (!user.data?.msg.isNullOrEmpty()) {
 //                Observable.just(MemberEntity(msg = user.data?.msg!!))
 //            } else

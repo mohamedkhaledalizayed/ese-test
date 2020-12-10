@@ -51,16 +51,16 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getComplaintTypes()
     }
 
-    override fun getMedicalRenewalData(userNumber: String): Observable<MedicalRenewalEntity> {
-        return remoteDataStore.getMedicalRenewalData(userNumber)
+    override fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity> {
+        return remoteDataStore.getMedicalRenewalData(mobileNumber, userNumber)
     }
 
-    override fun inquireMedicalRenewalPayment(userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
-        return remoteDataStore.inquireMedicalRenewalPayment(userNumber, locationType, address, mobile)
+    override fun inquireMedicalRenewalPayment(mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
+        return remoteDataStore.inquireMedicalRenewalPayment(mobileNumber, userNumber, locationType, address, mobile)
     }
 
-    override fun updateMedicalRenewalData(medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
-        return remoteDataStore.updateMedicalRenewalData(medicalRenewalData)
+    override fun updateMedicalRenewalData(mobileNumber: String, medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
+        return remoteDataStore.updateMedicalRenewalData(mobileNumber, medicalRenewalData)
     }
 
     override fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity> {
@@ -164,8 +164,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getAllServiceTypes()
     }
 
-    override fun inquirePayment(userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MedicalRenewalPaymentEntity> {
-        return remoteDataStore.inquirePayment(userNumber, serviceID, requestID, amount)
+    override fun inquirePayment(mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MedicalRenewalPaymentEntity> {
+        return remoteDataStore.inquirePayment(mobileNumber, userNumber, serviceID, requestID, amount)
     }
 
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {

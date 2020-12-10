@@ -28,11 +28,11 @@ class MedicalRenewUpdateViewModel @Inject constructor(
     }
 
 
-    fun getMedicalRenewalData(number: String) {
+    fun getMedicalRenewalData(mobileNumber: String, number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
         viewState.value?.medicalRenewalUI?.let {
             onMedicalRenewalDataReceived(it)
-        } ?: addDisposable(getMedicalRenewalData.getMedicalRenewalData(number)
+        } ?: addDisposable(getMedicalRenewalData.getMedicalRenewalData(mobileNumber, number)
                 .map {
                     it.let {
                         medicalRenewalEntityUIMapper.mapFrom(it)
@@ -48,13 +48,13 @@ class MedicalRenewUpdateViewModel @Inject constructor(
     }
 
 
-    fun updateMedicalRenewalData(medicalRenewalUI: MedicalRenewalUI) {
+    fun updateMedicalRenewalData(mobileNumber: String, medicalRenewalUI: MedicalRenewalUI) {
         viewState.value = viewState.value?.copy(isLoading = true)
         for (i in 0 until medicalRenewalUI.followers!!.size) {
             if (medicalRenewalUI.followers!![i].isNew!!)
                 medicalRenewalUI.followers!![i].id = 0
         }
-        addDisposable(updateMedicalRenewalData.updateMedicalRenewalData(medicalRenewalUIEntityMapper.mapFrom(medicalRenewalUI))
+        addDisposable(updateMedicalRenewalData.updateMedicalRenewalData(mobileNumber, medicalRenewalUIEntityMapper.mapFrom(medicalRenewalUI))
                 .map {
                     it.let {
                         medicalRenewalUpdateEntityUIMapper.mapFrom(it)

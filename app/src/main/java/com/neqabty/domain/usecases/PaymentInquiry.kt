@@ -18,14 +18,16 @@ class PaymentInquiry @Inject constructor(
         private const val PARAM_SERVICE_ID = "param:serviceID"
         private const val PARAM_REQUEST_ID = "param:requestID"
         private const val PARAM_AMOUNT = "param:amount"
+        private const val PARAM_MOBILE_NUMBER = "param:mobileNumber"
     }
 
-    fun paymentInquiry(userNumber: String, serviceID: String, requestID: String, amount: String): Observable<MedicalRenewalPaymentEntity> {
+    fun paymentInquiry(mobileNumber: String, userNumber: String, serviceID: String, requestID: String, amount: String): Observable<MedicalRenewalPaymentEntity> {
         val data = HashMap<String, String>()
         data[PARAM_USER_NUMBER] = userNumber
         data[PARAM_SERVICE_ID] = serviceID
         data[PARAM_REQUEST_ID] = requestID
         data[PARAM_AMOUNT] = amount
+        data[PARAM_MOBILE_NUMBER] = mobileNumber
         return observable(data)
     }
 
@@ -34,6 +36,7 @@ class PaymentInquiry @Inject constructor(
         val serviceID = data.get(PaymentInquiry.PARAM_SERVICE_ID) as String
         val requestID = data.get(PaymentInquiry.PARAM_REQUEST_ID) as String
         val amount = data.get(PaymentInquiry.PARAM_AMOUNT) as String
-        return neqabtyRepository.inquirePayment(userNumber, serviceID.toInt(), requestID, amount)
+        val mobileNumber = data?.get(PARAM_MOBILE_NUMBER) as String
+        return neqabtyRepository.inquirePayment(mobileNumber, userNumber, serviceID.toInt(), requestID, amount)
     }
 }

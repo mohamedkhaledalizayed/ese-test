@@ -83,7 +83,7 @@ class InquiryFragment : BaseFragment(), Injectable {
         llContent.visibility = View.VISIBLE
         bSend.setOnClickListener {
             if (isDataValid(binding.edMemberNumber.text.toString())) {
-                inquiryViewModel.paymentInquiry(binding.edMemberNumber.text.toString(), serviceID.toString())
+                inquiryViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, binding.edMemberNumber.text.toString(), serviceID.toString())
             }
         }
     }
@@ -102,6 +102,11 @@ class InquiryFragment : BaseFragment(), Injectable {
             state.serviceTypes = null
             return
         } else if (!state.isLoading && state.medicalRenewalPayment != null) {
+            if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-2")
+                showAlert(getString(R.string.already_paid))
+            else if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-1")
+                showAlert(getString(R.string.error_msg))
+            else
                 navController().navigate(
                         InquiryFragmentDirections.openInquiryDetails(edMemberNumber.text.toString(),0, spService.selectedItem.toString(), state.medicalRenewalPayment as MedicalRenewalPaymentUI, serviceID.toString())
                 )

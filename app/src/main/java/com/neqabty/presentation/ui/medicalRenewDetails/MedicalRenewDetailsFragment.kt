@@ -91,13 +91,13 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
         medicalRenewDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                medicalRenewDetailsViewModel.paymentInquiry(medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
+                medicalRenewDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
 //        initializeViews()
-        medicalRenewDetailsViewModel.paymentInquiry(medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
+        medicalRenewDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
     }
 
     fun initializeViews() {
@@ -332,7 +332,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.INVISIBLE
                 showConnectionAlert(requireContext(), retryCallback = {
                     llContent.visibility = View.INVISIBLE
-                    medicalRenewDetailsViewModel.paymentInquiry(medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
+                    medicalRenewDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
                 }, cancelCallback = {
                     navController().navigateUp()
                 })

@@ -368,6 +368,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             PreferencesHelper(this).user = ""
             PreferencesHelper(this).name = ""
             PreferencesHelper(this).mobile = ""
+            PreferencesHelper(this).jwt = ""
             PreferencesHelper(this).token = ""
             PreferencesHelper(this).notificationsCount = 0
             Thread(Runnable {

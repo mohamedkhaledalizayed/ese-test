@@ -11,6 +11,7 @@ class MedicalRenewalPaymentDataEntityMapper @Inject constructor() : Mapper<Medic
 
     override fun mapFrom(from: MedicalRenewalPaymentData): MedicalRenewalPaymentEntity {
         return MedicalRenewalPaymentEntity(
+                resultType = from.resultType,
                 requestID = from.requestID,
                 paymentItem = from.paymentItem?.let { return@let MedicalRenewalPaymentEntity.PaymentItem(paymentRequestNumber = it.paymentRequestNumber, amount = it.amount, name = it.name, engName = it.engName, engNumber = it.engNumber, paymentDetailsItems = it.paymentDetailsItems?.map { item -> MedicalRenewalPaymentEntity.PaymentDetailsItem(item.name, item.totalAmount) }) }
         )

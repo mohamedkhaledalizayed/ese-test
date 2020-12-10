@@ -14,7 +14,7 @@ object Constants {
 
     var CALL_CENTER = "0235317300"
 
-    var IP = "http://3.131.229.146:44392/"
+    var IP = "http://3.131.229.146:44392"
     var PROD_IP = "front.neqabty.com"
     var DNS = if(BuildConfig.DEBUG) IP else "https://$PROD_IP"
 
