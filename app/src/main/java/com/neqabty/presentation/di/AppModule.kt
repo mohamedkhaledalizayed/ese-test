@@ -55,7 +55,7 @@ class AppModule {
         val certificatePinner : CertificatePinner = CertificatePinner.Builder()
                 .add(
                         Constants.PROD_IP,
-                        "sha256/Zi7WyG7/3sg3UCgKI7P8BcO8Lz/5zMHcPmyGZGAw4+c="
+                        "sha256/m+xIVFVEt6x0ZNIpEd4P7I03Bnd31TNe7HpBvHzqxq4="
                 ).build()
 
         return OkHttpClient.Builder()

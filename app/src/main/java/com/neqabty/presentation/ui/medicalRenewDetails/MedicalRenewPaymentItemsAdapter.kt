@@ -19,11 +19,11 @@ class MedicalRenewPaymentItemsAdapter(
         appExecutors = appExecutors,
         diffCallback = object : DiffUtil.ItemCallback<MedicalRenewalPaymentUI.PaymentDetailsItem>() {
             override fun areItemsTheSame(oldItem: MedicalRenewalPaymentUI.PaymentDetailsItem, newItem: MedicalRenewalPaymentUI.PaymentDetailsItem): Boolean {
-                return oldItem.name == newItem.name
+                return oldItem.totalAmount == newItem.totalAmount
             }
 
             override fun areContentsTheSame(oldItem: MedicalRenewalPaymentUI.PaymentDetailsItem, newItem: MedicalRenewalPaymentUI.PaymentDetailsItem): Boolean {
-                return oldItem.name == newItem.name
+                return oldItem.totalAmount == newItem.totalAmount
             }
         }
 ) {

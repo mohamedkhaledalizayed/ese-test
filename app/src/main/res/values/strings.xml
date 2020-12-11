@@ -22,6 +22,7 @@
     <string name="password">كلمة السر</string>
     <string name="forgetPassword">نسيت كلمة السر</string>
     <string name="login">دخول</string>
+    <string name="experimental_version">(نسخة تجريبية)</string>
     <string name="register"><u>لا يوجد حساب  تسجيل</u></string>
     <string name="skip">دخول كزائر</string>
     <string name="fullName">الاسم بالكامل</string>
@@ -310,12 +311,14 @@
     <string name="follower_item"><![CDATA[<font><b>%s: </b></font>]]>%s</string>
     <string name="inquiry">المدفوعات</string>
     <string name="details">التفاصيل:</string>
+    <string name="commission">مصروفات ادارية بنكية</string>
     <string name="payment_method">طريقة الدفع:</string>
     <string name="payment_card">بطاقات بنكية</string>
     <string name="payment_channel">قنوات دفع</string>
     <string name="payment_wallet">محافظ إلكترونية</string>
     <string name="payment_meeza">ميزة</string>
-    <string name="payment_reference">كود الدفع: </string>
+    <string name="payment_reference">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك \n
+        كود الدفع:</string>
     <string name="payment_canceled">لقد تم الغاء عملية الدفع</string>
     <string name="payment_successful">تمت عملية الدفع بنجاح \n
 رقم العملية </string>

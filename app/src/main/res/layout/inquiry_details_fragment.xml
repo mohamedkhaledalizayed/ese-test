@@ -11,6 +11,14 @@
         <variable
             name="title"
             type="java.lang.String" />
+
+        <variable
+            name="number"
+            type="java.lang.String" />
+
+        <variable
+            name="newAmount"
+            type="java.lang.Double" />
         <variable
             name="medicalRenewalPayment"
             type="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
@@ -54,13 +62,13 @@
 <!--                    android:text="@{Html.fromHtml(@string/name_title(medicalRenewalPayment.engineerName))}"-->
 <!--                    android:textSize="@dimen/text_size_medium" />-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tvMemberNumber"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
-<!--                    android:text="@{Html.fromHtml(@string/user_number_title(medicalRenewalPayment.PaymentItem.engineerNumber))}"-->
-<!--                    android:textSize="@dimen/text_size_medium" />-->
+                <TextView
+                    android:id="@+id/tvMemberNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@{Html.fromHtml(@string/user_number_title(number))}"
+                    android:textSize="@dimen/text_size_medium" />
 
                 <!--                <TextView-->
                 <!--                    android:id="@+id/tvRequestID"-->
@@ -74,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:layout_height="wrap_content"
-                    android:text="@{Html.fromHtml(@string/amount_title(medicalRenewalPayment.paymentItem.amount))}"
+                    android:text="@{Html.fromHtml(@string/amount_title(newAmount.toString()))}"
                     android:textSize="@dimen/text_size_medium" />
 
 
@@ -101,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/payment_method"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large" />
 
@@ -110,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -142,10 +150,11 @@
 
                     <ImageView
                         android:id="@+id/ivChannels"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="fitXY"
                         android:src="@drawable/pos"
+                        android:layout_gravity="center_horizontal"
                         android:visibility="gone" />
 
                     <RadioButton

@@ -230,7 +230,15 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         try {
             val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, data.data)
             if (isForPP) {
-                ivPhoto.setImageBitmap(bitmap)
+                val bytes = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
+                var file = ImageUtils.createImageFile(requireContext())
+                val bos = BufferedOutputStream(FileOutputStream(file))
+                bos.write(bytes.toByteArray())
+                bos.flush()
+                bos.close()
+                var compressedBitmap = BitmapFactory.decodeFile(file.path)
+                ivPhoto.setImageBitmap(compressedBitmap)
                 updateEditPhotoTitle()
             } else {
                 val photoUI = saveImage(bitmap)
@@ -246,8 +254,16 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
 
     private fun onCaptureImageResult() {
         if (isForPP) {
-            var bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" + photoFileName)
-            ivPhoto.setImageBitmap(bitmap)
+            var file = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" + photoFileName
+            var bitmap = BitmapFactory.decodeFile(file)
+            val bytes = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
+            val bos = BufferedOutputStream(FileOutputStream(file))
+            bos.write(bytes.toByteArray())
+            bos.flush()
+            bos.close()
+            var compressedBitmap = BitmapFactory.decodeFile(file)
+            ivPhoto.setImageBitmap(compressedBitmap)
             updateEditPhotoTitle()
         } else {
             photosList.add(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), photoFileName, photoFileURI))
@@ -446,7 +462,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         val bundle = Bundle()
 //        followerItem.isNew = true
         followerItem.name = binding.edName.text.toString()
-        followerItem.birthDate = if (binding.edBirthDate.text.toString().contains("00:00")) binding.edBirthDate.text.toString() else binding.edBirthDate.text.toString() + "T00:00:00"
+        followerItem.birthDate = if (binding.edBirthDate.text.toString().length == 0 || binding.edBirthDate.text.toString().contains("00:00")) binding.edBirthDate.text.toString() else binding.edBirthDate.text.toString() + "T00:00:00"
         followerItem.gender = when (selectedGender) {
             genderList!![0] -> "M"
             genderList!![1] -> "F"

@@ -6,7 +6,7 @@ import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MemberUI
 
 data class InquiryDetailsViewState(
-    var isLoading: Boolean = true,
+    var isLoading: Boolean = false,
     var encryptionData: EncryptionUI? = null,
     var decryptionData: DecryptionUI? = null,
     var medicalRenewalPayment: MedicalRenewalPaymentUI? = null

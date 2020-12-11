@@ -10,6 +10,9 @@
         <import type="android.view.View" />
 
         <variable
+            name="newAmount"
+            type="java.lang.Double" />
+        <variable
             name="medicalRenewalPayment"
             type="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
     </data>
@@ -72,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:text="@{Html.fromHtml(@string/amount_title(medicalRenewalPayment.paymentItem.amount))}"
+                    android:text="@{Html.fromHtml(@string/amount_title(newAmount.toString()))}"
                     android:textSize="@dimen/text_size_medium" />
 
                 <TextView
@@ -100,14 +103,14 @@
                     android:text="@string/payment_method"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <RadioGroup
                     android:id="@+id/rgPaymentMechanismType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -139,9 +142,10 @@
 
                     <ImageView
                         android:id="@+id/ivChannels"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="fitXY"
+                        android:layout_gravity="center_horizontal"
                         android:src="@drawable/pos"
                         android:visibility="gone" />
 

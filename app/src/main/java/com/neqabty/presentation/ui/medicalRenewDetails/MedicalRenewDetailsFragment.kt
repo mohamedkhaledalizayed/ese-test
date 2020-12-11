@@ -23,7 +23,6 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
-import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.medical_renew_details_fragment.*
@@ -57,6 +56,8 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
     lateinit var mobile: String
     lateinit var medicalRenewalUI: MedicalRenewalUI
 
+    var commission: Double = 0.0
+    var newAmount: Double = 0.0
     lateinit var paymentCreationResponse: PaymentCreationResponse
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -104,13 +105,12 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
         llContent.visibility = View.VISIBLE
         val adapter = MedicalRenewPaymentItemsAdapter(dataBindingComponent, appExecutors) { }
         this.adapter = adapter
+
+        calculateCommission(true)
 //        medicalRenewalPaymentUI.paymentItem = MedicalRenewalPaymentUI.PaymentItem(paymentRequestNumber = "111",amount = 555,name = "mona",paymentDetailsItems = null)
         medicalRenewalPaymentUI?.let {
             binding.medicalRenewalPayment = it
 
-            it.paymentItem?.let {
-                adapter.submitList(it.paymentDetailsItems)
-            }
             bPay.visibility = if (it.paymentItem?.amount == null || it.paymentItem?.amount == 0) View.GONE else View.VISIBLE
         }
 
@@ -118,12 +118,14 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
 
         rb_card.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
+                calculateCommission(true)
                 ivCard.visibility = View.VISIBLE
                 ivChannels.visibility = View.GONE
             }
         }
         rb_channel.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
+                calculateCommission(false)
                 ivChannels.visibility = View.VISIBLE
                 ivCard.visibility = View.GONE
             }
@@ -133,7 +135,10 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
             llSuperProgressbar.visibility = View.VISIBLE
 //            createPayment()
 
-            cowPayPayment()
+            if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
+                cowPayPayment(true)
+            else
+                cowPayPayment(false)
         }
     }
 
@@ -153,7 +158,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
                 var PaymentGatewayReferenceId =
                         data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
                 responseMSG?.let {
-                    showAlert(getString(R.string.payment_successful) + PaymentGatewayReferenceId) {
+                    showAlert(if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(R.string.payment_successful) + PaymentGatewayReferenceId else getString(R.string.payment_reference) + PaymentGatewayReferenceId) {
                         navController().popBackStack()
                         navController().navigate(R.id.homeFragment)
                     }
@@ -185,6 +190,13 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
             } else {
                 state.medicalRenewalPayment?.let {
                     medicalRenewalPaymentUI = it
+                    if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-2")
+                        showAlert(getString(R.string.already_paid)){
+                            navController().popBackStack()
+                            navController().navigate(R.id.homeFragment)
+                        }
+                    else
+                        initializeViews()
 //                    memberItem.paymentCreationRequest = it.paymentCreationRequest
 //                    // static set
 //                    memberItem.paymentCreationRequest?.sender?.id = "071"
@@ -197,7 +209,6 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
 //                            CowpayConstantKeys.MerchantHashKey,
 //                            "MerchantHashKey"
 //                    )
-                    initializeViews()
                 }
             }
         }
@@ -205,12 +216,14 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
 
     //region
 
-    fun cowPayPayment() {
+    fun cowPayPayment(isCredit: Boolean) {
         var intent = Intent(context, PaymentMethodsActivity::class.java)
 
         var PaymentMethod = ArrayList<String>()
-        PaymentMethod.add(CowpayConstantKeys.CreditCardMethod)
-        PaymentMethod.add(CowpayConstantKeys.FawryMethod)
+        if (isCredit)
+            PaymentMethod.add(CowpayConstantKeys.CreditCardMethod)
+        else
+            PaymentMethod.add(CowpayConstantKeys.FawryMethod)
         intent.putExtra(CowpayConstantKeys.PaymentMethod, PaymentMethod)
 
         intent.putExtra(CowpayConstantKeys.AuthorizationToken, Constants.cowpayAuthToken)
@@ -234,7 +247,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
         //order id
         intent.putExtra(CowpayConstantKeys.MerchantReferenceId, medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber)
         //order price780
-        intent.putExtra(CowpayConstantKeys.Amount, medicalRenewalPaymentUI.paymentItem?.amount.toString())
+        intent.putExtra(CowpayConstantKeys.Amount, newAmount.toString())
         //user data
         intent.putExtra(CowpayConstantKeys.CustomerName, medicalRenewalPaymentUI.paymentItem?.name)
         intent.putExtra(CowpayConstantKeys.CustomerMobile, PreferencesHelper(requireContext()).mobile)
@@ -365,6 +378,29 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
 //
 ////        medicalRenewDetailsViewModel.setPaid(medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber!!)
 //    }
+
+    private fun calculateCommission(isCredit: Boolean) {
+        if (isCredit) {
+            commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
+        } else {
+            commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
+        }
+        commission = Math.round(commission * 10.0) / 10.0
+        newAmount = (medicalRenewalPaymentUI.paymentItem?.amount ?: 0) + commission
+        binding.newAmount = newAmount
+        updateCommissionInList()
+    }
+
+    private fun updateCommissionInList() {
+        medicalRenewalPaymentUI.paymentItem?.paymentDetailsItems?.let {
+            it.let {
+                val tmp = it.toMutableList()
+                tmp.add(MedicalRenewalPaymentUI.PaymentDetailsItem(getString(R.string.commission), commission.toString()))
+                adapter.submitList(tmp)
+                rvDetails.adapter = adapter
+            }
+        }
+    }
     //endregion
 
     fun navController() = findNavController()
