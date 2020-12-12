@@ -302,6 +302,7 @@
     <string name="medical_subscription_subscribed">انت مشترك بالفعل في خدمة الرعاية الصحية ويمكنك تعديل / اضافة / او حذف تابعين في حالة الرغبة في ذلك</string>
     <string name="medical_subscription_renew_add_follower">يرجى اضافة التابعين للإستمرار</string>
     <string name="already_paid">لقد تم تسديد الإشتراك من قبل</string>
+    <string name="retiree">حالة المهندس معاش وليس له اشتراك سنوي</string>
     <string name="edit_follower">تعديل</string>
     <string name="confirm_followers_edit_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم قريباً</string>
     <string name="medical_update_request_status_processing">طلبكم ما زال تحت الدراسة</string>

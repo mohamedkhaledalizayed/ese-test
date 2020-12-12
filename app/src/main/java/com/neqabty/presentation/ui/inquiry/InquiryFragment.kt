@@ -105,7 +105,9 @@ class InquiryFragment : BaseFragment(), Injectable {
             if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-2")
                 showAlert(getString(R.string.already_paid))
             else if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-1")
-                showAlert(getString(R.string.error_msg))
+                showAlert(getString(R.string.invalid_number))
+            else if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-3")
+                showAlert(getString(R.string.retiree))
             else if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).paymentItem != null)
                 navController().navigate(
                         InquiryFragmentDirections.openInquiryDetails(edMemberNumber.text.toString(),0, spService.selectedItem.toString(), state.medicalRenewalPayment as MedicalRenewalPaymentUI, serviceID.toString())
