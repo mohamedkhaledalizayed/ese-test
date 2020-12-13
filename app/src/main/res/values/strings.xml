@@ -22,6 +22,8 @@
     <string name="password">كلمة السر</string>
     <string name="forgetPassword">نسيت كلمة السر</string>
     <string name="login">دخول</string>
+    <string name="member_number_confirmation">هل أنت متأكد من رقم العضوية؟!</string>
+    <string name="mobile_number_confirmation">هل أنت متأكد من رقم الموبايل؟!</string>
     <string name="experimental_version">(نسخة تجريبية)</string>
     <string name="register"><u>لا يوجد حساب  تسجيل</u></string>
     <string name="skip">دخول كزائر</string>

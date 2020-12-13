@@ -85,7 +85,7 @@ class MobileFragment : BaseFragment(), Injectable {
             binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
 
         binding.bSend.setOnClickListener {
-            login()
+            ensureLogin()
         }
 
         val vto = ivHint.getViewTreeObserver()
@@ -193,6 +193,25 @@ class MobileFragment : BaseFragment(), Injectable {
         dialog.setContentView(layoutInflater.inflate(R.layout.image_item, null), ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
         dialog.setCanceledOnTouchOutside(true)
         dialog.show()
+    }
+
+    private fun ensureLogin() {
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.alert_title))
+        builder?.setMessage(getString(R.string.member_number_confirmation))
+        builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
+            login()
+            dialog.dismiss()
+        }
+        builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        if (dialog == null)
+            dialog = builder?.create()
+
+        if (!dialog?.isShowing!!)
+            dialog?.show()
     }
 
 //    private fun hideKeyboard() {

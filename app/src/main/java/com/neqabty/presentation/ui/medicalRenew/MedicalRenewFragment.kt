@@ -167,6 +167,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             }
             3 -> {
                 showGoToRenewalPaymentAlert(getString(R.string.medical_subscription_renew_syndicate_membership))
+                bEdit.visibility = View.GONE
                 bContinue.visibility = View.GONE
             }
         }

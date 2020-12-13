@@ -98,7 +98,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
 
     fun initializeViews() {
         binding.bSend.setOnClickListener {
-            login()
+            ensureLogin()
         }
     }
 
@@ -141,6 +141,25 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+
+    private fun ensureLogin() {
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.alert_title))
+        builder?.setMessage(getString(R.string.mobile_number_confirmation))
+        builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
+            login()
+            dialog.dismiss()
+        }
+        builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        if (dialog == null)
+            dialog = builder?.create()
+
+        if (!dialog?.isShowing!!)
+            dialog?.show()
     }
 
     override fun showOptionsMenu() {
