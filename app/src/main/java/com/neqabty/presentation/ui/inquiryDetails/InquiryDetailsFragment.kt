@@ -238,8 +238,9 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         //order price780
         intent.putExtra(CowpayConstantKeys.Amount, newAmount.toString())
         //user data
-        intent.putExtra(CowpayConstantKeys.CustomerName, medicalRenewalPayment.paymentItem?.engName
-                ?: title)
+        intent.putExtra(CowpayConstantKeys.Description, medicalRenewalPayment.paymentItem?.engName
+                + " " + title)
+        intent.putExtra(CowpayConstantKeys.CustomerName, params.number)
         intent.putExtra(CowpayConstantKeys.CustomerMobile, PreferencesHelper(requireContext()).mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
         //user id
