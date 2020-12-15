@@ -107,12 +107,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
             goToEditFollower()
         }
         bSubmit.setOnClickListener {
-            if (medicalRenewalUI.followers?.size == 0) {
-                showAlert(getString(R.string.medical_subscription_renew_add_follower))
-            } else {
-                updateRequested = true
-                medicalRenewUpdateViewModel.updateMedicalRenewalData(PreferencesHelper(requireContext()).mobile, medicalRenewalUI)
-            }
+            sendRequestConfirmation()
         }
         updateFollowersTitleVisibility()
     }
@@ -152,11 +147,29 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
             dialog.dismiss()
         }
 
-        if (dialog == null)
-            dialog = builder?.create()
+        var dialog = builder?.create()
+        dialog?.show()
+    }
 
-        if (!dialog?.isShowing!!)
-            dialog?.show()
+    private fun sendRequestConfirmation() {
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.alert_title))
+        builder?.setMessage(getString(R.string.send_request_confirmation))
+        builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
+            if (medicalRenewalUI.followers?.size == 0) {
+                showAlert(getString(R.string.medical_subscription_renew_add_follower))
+            } else {
+                updateRequested = true
+                medicalRenewUpdateViewModel.updateMedicalRenewalData(PreferencesHelper(requireContext()).mobile, medicalRenewalUI)
+            }
+            dialog.dismiss()
+        }
+        builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        var dialog = builder?.create()
+        dialog?.show()
     }
 
     private fun editFollower(follower: MedicalRenewalUI.FollowerItem) {

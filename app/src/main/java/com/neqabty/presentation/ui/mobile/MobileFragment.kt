@@ -200,18 +200,15 @@ class MobileFragment : BaseFragment(), Injectable {
         builder?.setTitle(getString(R.string.alert_title))
         builder?.setMessage(getString(R.string.member_number_confirmation))
         builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
-            login()
             dialog.dismiss()
+            login()
         }
         builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
             dialog.dismiss()
         }
 
-        if (dialog == null)
-            dialog = builder?.create()
-
-        if (!dialog?.isShowing!!)
-            dialog?.show()
+        var dialog = builder?.create()
+        dialog?.show()
     }
 
 //    private fun hideKeyboard() {

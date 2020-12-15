@@ -83,7 +83,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         llContent.visibility = View.VISIBLE
 
         edMobile.setText(medicalRenewalUI.contact!!.mobile ?: "")
-        edAddress.setText(medicalRenewalUI.contact!!.address ?: "")
+//        edAddress.setText(medicalRenewalUI.contact!!.address ?: "")
         val adapter = FollowersAdapter(dataBindingComponent, appExecutors) { }
         this.adapter = adapter
         binding.rvFollowers.adapter = adapter
@@ -187,7 +187,10 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 bContinue.visibility = View.GONE
             }
             4 -> bContinue.visibility = View.GONE
-            5 -> bEdit.visibility = View.GONE
+            5 -> {
+                bContinue.visibility = View.GONE
+                bEdit.visibility = View.GONE
+            }
         }
     }
 
@@ -240,11 +243,9 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             navController().navigate(R.id.homeFragment)
         }
 
-        if (dialog == null)
-            dialog = builder?.create()
 
-        if (!dialog?.isShowing!!)
-            dialog?.show()
+        var dialog = builder?.create()
+        dialog?.show()
 
     }
 
@@ -258,11 +259,9 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             navController().navigate(R.id.homeFragment)
         }
 
-        if (dialog == null)
-            dialog = builder?.create()
 
-        if (!dialog?.isShowing!!)
-            dialog?.show()
+        var dialog = builder?.create()
+        dialog?.show()
 
     }
 
@@ -280,11 +279,9 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             dialog.dismiss()
         }
 
-        if (dialog == null)
-            dialog = builder?.create()
 
-        if (!dialog?.isShowing!!)
-            dialog?.show()
+        var dialog = builder?.create()
+        dialog?.show()
 
     }
 // endregion

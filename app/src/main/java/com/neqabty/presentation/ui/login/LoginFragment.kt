@@ -155,11 +155,8 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
             dialog.dismiss()
         }
 
-        if (dialog == null)
-            dialog = builder?.create()
-
-        if (!dialog?.isShowing!!)
-            dialog?.show()
+        var dialog = builder?.create()
+        dialog?.show()
     }
 
     override fun showOptionsMenu() {

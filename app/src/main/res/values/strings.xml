@@ -164,6 +164,8 @@
     <string name="news_title">الأخبار</string>
     <string name="trips_title">الرحلات</string>
     <string name="medical_renew_title">اشتراك الرعاية الصحية</string>
+    <string name="save_edits">تأكيد بيانات التابعين</string>
+    <string name="continue_payment">اتمام عملية الدفع</string>
     <string name="medical_renew_update_title">تعديل / اضافة / حذف تابعين</string>
     <string name="claiming_title">الموافقات الطبية</string>
     <string name="medical_title">الدليل الطبي</string>
@@ -296,6 +298,7 @@
     <string name="add_follower_photo">إضافة الصورة الشخصية</string>
     <string name="remove_follower">حذف</string>
     <string name="remove_follower_confirmation">هل تريد إتمام عملية الحذف؟!</string>
+    <string name="send_request_confirmation">هل انت متأكد انك تريد ارسال الطلب إلى المراجعة؟!</string>
     <string name="medical_subscribe_confirmation">هذا المهندس غير مسجل بخدمة الرعاية الصحية، هل تود الاشتراك في الخدمة ؟</string>
     <string name="medical_subscription_unsubscribed">هذا الرقم غير مقيد بالنقابة، برجاء الرجوع للنقابة لطلب العضوية</string>
     <string name="medical_subscription_suspended">هذه العضوية موقوفة برجاء الرجوع إلى النقابة</string>
