@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.view.WindowManager
+import androidx.multidex.MultiDexApplication
 import com.neqabty.presentation.di.AppInjector
 import com.neqabty.presentation.util.DisplayMetrics
 import dagger.android.AndroidInjector
@@ -12,7 +13,7 @@ import dagger.android.HasAndroidInjector
 import timber.log.Timber
 import javax.inject.Inject
 
-class MyApp : Application(), HasAndroidInjector {
+class MyApp : MultiDexApplication(), HasAndroidInjector {
     @Inject // AndroidInjection.inject() gets a DispatchingAndroidInjector<Activity> from the Application and passes your activity to inject(Activity).
     lateinit var androidInjector : DispatchingAndroidInjector<Any>
     override fun onCreate() {

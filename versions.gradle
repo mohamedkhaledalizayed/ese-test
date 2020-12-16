@@ -38,6 +38,7 @@ versions.kotlinx = "0.2.0"
 versions.mastercard = "1.1.1"
 versions.wheel = "1.1.0"
 versions.ClearableEditText = "3.2.0"
+versions.multidex = "1.0.1"
 
 def deps = [:]
 
@@ -183,6 +184,9 @@ deps.wheel = wheel
 
 def clearableEditText = "org.droidparts:droidparts:$versions.ClearableEditText"
 deps.clearableEditText = clearableEditText
+
+def multidex = "com.android.support:multidex:$versions.multidex"
+deps.multidex = multidex
 
 ext.deps = deps
 
