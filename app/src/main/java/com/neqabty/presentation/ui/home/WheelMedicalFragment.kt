@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -52,13 +53,15 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
 
         bMedical.setOnClickListener { navController().navigate(R.id.chooseAreaFragment) }
         bClaiming.setOnClickListener {
-            if (PreferencesHelper(requireContext()).isRegistered)
-                navController().navigate(R.id.claimingFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.CLAIMING)
-                navController().navigate(R.id.mobileFragment, bundle)
-            }
+            Toast.makeText(requireContext(), getString(R.string.closed_claiming), Toast.LENGTH_SHORT).show()
+
+//            if (PreferencesHelper(requireContext()).isRegistered)
+//                navController().navigate(R.id.claimingFragment)
+//            else {
+//                val bundle: Bundle = Bundle()
+//                bundle.putInt("type", Constants.CLAIMING)
+//                navController().navigate(R.id.mobileFragment, bundle)
+//            }
         }
         bRenew.setOnClickListener {
             if (PreferencesHelper(requireContext()).isRegistered)
@@ -70,13 +73,15 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
             }
         }
         bComplaints.setOnClickListener {
-            if (PreferencesHelper(requireContext()).isRegistered)
-                navController().navigate(R.id.complaintsFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.COMPLAINTS)
-                navController().navigate(R.id.mobileFragment, bundle)
-            }
+            Toast.makeText(requireContext(), getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
+
+//            if (PreferencesHelper(requireContext()).isRegistered)
+//                navController().navigate(R.id.complaintsFragment)
+//            else {
+//                val bundle: Bundle = Bundle()
+//                bundle.putInt("type", Constants.COMPLAINTS)
+//                navController().navigate(R.id.mobileFragment, bundle)
+//            }
         }
 
     }

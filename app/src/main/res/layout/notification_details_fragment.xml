@@ -180,7 +180,8 @@
                             android:text="@string/pay"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/text_size_medium"
-                            android:visibility='@{(notificationItem.cost == 0  || notificationItem.cost == null) ? View.GONE : View.VISIBLE}' />
+                            android:visibility="gone"/>
+<!--                            android:visibility='@{(notificationItem.cost == 0  || notificationItem.cost == null) ? View.GONE : View.VISIBLE}' />-->
 
                         <!--                        <androidx.cardview.widget.CardView-->
                         <!--                            android:layout_width="match_parent"-->

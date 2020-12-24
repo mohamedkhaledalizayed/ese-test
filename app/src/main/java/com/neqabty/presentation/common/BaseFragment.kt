@@ -44,7 +44,9 @@ open class BaseFragment : Fragment() {
             retryCallback.invoke()
         }
         builder?.setNegativeButton(getString(R.string.no_connection_cancel)) { dialog, which ->
+            try{
             cancelCallback.invoke()
+            }catch(e: Exception){}
         }
 
         if (dialog == null)

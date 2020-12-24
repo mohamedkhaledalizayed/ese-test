@@ -57,8 +57,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
     var relationsList: MutableList<MedicalRenewalUI.RelationItem>? = mutableListOf()
 
     //    var relationsList: MutableList<String>? = mutableListOf("زوجة", "والد", "والدة", "ابناء اقل من ١٦ سنة", "ابناء بعد سن ١٨ سنة", "ابناء بعد سن ٢٥ سنة")
-    var hintsList: MutableList<String>? = mutableListOf("",
-            "- برجاء إرفاق صورة قسيمة الزواج او صورة بطاقة الرقم القومي",
+    var hintsList: MutableList<String>? = mutableListOf("- برجاء إرفاق صورة قسيمة الزواج او صورة بطاقة الرقم القومي",
             "-  أبناء اقل من ١٦ سنة برجاء إرفاق شهادة الميلاد\n" +
                     "- أبناء بعد ١٨ سنة برجاء إرفاق صورة بطاقة الرقم القومي\n" +
                     "- أبناء بعد ٢٥ سنة برجاء إرفاق صورة بطاقة الرقم القومي وما يفيد انه طالب",
@@ -104,6 +103,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
     private fun initializeViews() {
         val params = MedicalRenewAddFollowerDetailsFragmentArgs.fromBundle(arguments!!)
         relationsList = params.medicalRenewalUI.relations?.toMutableList()
+        relationsList?.removeFirst()
         followerItem = params.followerItem
         binding.followerItem = followerItem
 
@@ -322,13 +322,9 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         } else if (!mobile.matches(Regex("[0-9]*")) || (mobile.trim().length != 11 && mobile.trim().length != 0)) {
             showAlert(getString(R.string.invalid_mobile))
             false
-        } else if (mobile.trim().length >= 3) {
-            if (!mobile.substring(0, 3).equals("012") && !mobile.substring(0, 3).equals("010") && !mobile.substring(0, 3).equals("011") && !mobile.substring(0, 3).equals("015")) {
+        } else if (mobile.trim().length >= 3 && !mobile.substring(0, 3).equals("012") && !mobile.substring(0, 3).equals("010") && !mobile.substring(0, 3).equals("011") && !mobile.substring(0, 3).equals("015")) {
                 showAlert(getString(R.string.invalid_mobile))
                 false
-            } else {
-                true
-            }
         } else if (followerItem.name.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || photosList.size == 0 || (followerItem.pic.isNullOrBlank())) {
             showAlert(getString(R.string.invalid_data))
             false
@@ -487,6 +483,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
             return
         }
 
+        followerItem.isEdited = true
         bundle.putParcelable("followerItem", followerItem)
         intent.putExtras(bundle)
         parentFragmentManager?.setFragmentResult("bundle", bundle)

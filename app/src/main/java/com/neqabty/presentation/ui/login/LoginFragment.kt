@@ -1,6 +1,7 @@
 package com.neqabty.presentation.ui.login
 
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -146,7 +147,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
     private fun ensureLogin() {
         builder = AlertDialog.Builder(requireContext())
         builder?.setTitle(getString(R.string.alert_title))
-        builder?.setMessage(getString(R.string.mobile_number_confirmation))
+        builder?.setMessage(Html.fromHtml(getString(R.string.number_confirmation, edMobile.text.toString() )+ getString(R.string.mobile_number_confirmation)))
         builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
             login()
             dialog.dismiss()

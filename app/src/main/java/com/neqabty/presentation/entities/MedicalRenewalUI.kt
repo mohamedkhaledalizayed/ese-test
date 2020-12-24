@@ -36,6 +36,7 @@ data class MedicalRenewalUI(
             var pic: String? = "",
             var attachments: MutableList<String>? = mutableListOf(),
             var isNew: Boolean? = false,
+            var isEdited: Boolean? = false,
             var mobile: String? = null,
             var nationalId: String? = null,
             var relationType: String? = null,

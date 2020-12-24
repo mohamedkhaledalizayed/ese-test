@@ -98,6 +98,8 @@
                     android:layout_marginStart="@dimen/margin_vertical_large"
                     android:layout_marginEnd="@dimen/margin_vertical_large"
                     android:layout_marginBottom="@dimen/margin_vertical_large"
+                    android:backgroundTint="@color/gray"
+                    android:enabled="false"
                     android:background="@drawable/btn_green"
                     android:gravity="center"
                     android:text="@string/save_edits"

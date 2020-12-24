@@ -31,7 +31,7 @@ interface WebService {
 
     @GET("api/v1/shownotification/{notificationId}")
     fun getNotificationDetails(
-            @Path("notificationId") notificationId: Int,
+            @Path("notificationId") notificationId: String,
             @Query("notification_type") notificationType: Int
     ): Observable<NotificationData>
 

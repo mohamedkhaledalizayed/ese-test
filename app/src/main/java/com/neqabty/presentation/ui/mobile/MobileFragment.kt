@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.mobile
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -198,7 +199,7 @@ class MobileFragment : BaseFragment(), Injectable {
     private fun ensureLogin() {
         builder = AlertDialog.Builder(requireContext())
         builder?.setTitle(getString(R.string.alert_title))
-        builder?.setMessage(getString(R.string.member_number_confirmation))
+        builder?.setMessage(Html.fromHtml(getString(R.string.number_confirmation, edMemberNumber.text.toString() )+ getString(R.string.member_number_confirmation)))
         builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
             dialog.dismiss()
             login()

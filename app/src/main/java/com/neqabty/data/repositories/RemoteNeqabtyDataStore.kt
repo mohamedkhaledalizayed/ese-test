@@ -378,7 +378,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
-    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: String, requestID: Int): Observable<NotificationEntity> {
+    override fun getNotificationDetails(serviceID: Int, type: Int, userNumber: String, requestID: String): Observable<NotificationEntity> {
         return api.getNotificationDetails(requestID, type).flatMap { notification ->
             Observable.just(notificationDataEntityMapper.mapFrom(notification))
         }

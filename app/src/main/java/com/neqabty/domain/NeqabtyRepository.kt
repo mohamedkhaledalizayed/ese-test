@@ -36,7 +36,7 @@ interface NeqabtyRepository {
             userNumber: String
     ): Observable<List<NotificationEntity>>
 
-    fun getNotificationDetails(serviceID: Int, type: Int, userNumber: String, requestID: Int): Observable<NotificationEntity>
+    fun getNotificationDetails(serviceID: Int, type: Int, userNumber: String, requestID: String): Observable<NotificationEntity>
     fun sendMedicalRequest(
             mainSyndicateId: Int,
             subSyndicateId: Int,

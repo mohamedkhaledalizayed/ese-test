@@ -11,6 +11,7 @@ import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -133,13 +134,15 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                     }
                 }
                 R.id.claiming_fragment -> { // TODO
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.claimingFragment)
-                    else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", Constants.CLAIMING)
-                        navController.navigate(R.id.mobileFragment, bundle)
-                    }
+                    Toast.makeText(this, getString(R.string.closed_claiming), Toast.LENGTH_SHORT).show()
+
+//                    if (PreferencesHelper(this).isRegistered)
+//                        navController.navigate(R.id.claimingFragment)
+//                    else {
+//                        val bundle: Bundle = Bundle()
+//                        bundle.putInt("type", Constants.CLAIMING)
+//                        navController.navigate(R.id.mobileFragment, bundle)
+//                    }
                 }
                 R.id.medical_fragment -> {
 //                    Thread(Runnable {
@@ -173,13 +176,15 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 //                    }
 //                }
                 R.id.complaints_fragment -> {
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.complaintsFragment)
-                    else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", Constants.COMPLAINTS)
-                        navController.navigate(R.id.mobileFragment, bundle)
-                    }
+                    Toast.makeText(this, getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
+
+//                    if (PreferencesHelper(this).isRegistered)
+//                        navController.navigate(R.id.complaintsFragment)
+//                    else {
+//                        val bundle: Bundle = Bundle()
+//                        bundle.putInt("type", Constants.COMPLAINTS)
+//                        navController.navigate(R.id.mobileFragment, bundle)
+//                    }
                 }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)
@@ -452,12 +457,12 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     }
 
     fun showAlertDialogAndExitApp(message: String) {
-        val alertDialog = AlertDialog.Builder(applicationContext!!).create()
-        alertDialog.setTitle("Alert")
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert_title))
         alertDialog.setMessage(message)
         alertDialog.setCancelable(false)
         alertDialog.setButton(
-                AlertDialog.BUTTON_NEUTRAL, "OK"
+                AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok_btn)
         ) { dialog, _ ->
             dialog.dismiss()
             finish()

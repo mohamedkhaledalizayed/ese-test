@@ -2,16 +2,21 @@ package com.neqabty.presentation.ui.medicalRenew
 
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetMedicalRenewalData
+import com.neqabty.domain.usecases.MedicalRenewPaymentInquiry
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
+import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.mappers.MedicalRenewalEntityUIMapper
+import com.neqabty.presentation.mappers.MedicalRenewalPaymentEntityUIMapper
 import javax.inject.Inject
 
 class MedicalRenewViewModel @Inject constructor(
-        private val getMedicalRenewalData: GetMedicalRenewalData
+        private val getMedicalRenewalData: GetMedicalRenewalData,
+        private val paymentInquiry: MedicalRenewPaymentInquiry
 ) : BaseViewModel() {
 
+    private val medicalRenewalPaymentEntityUIMapper = MedicalRenewalPaymentEntityUIMapper()
     private val medicalRenewalEntityUIMapper = MedicalRenewalEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<MedicalRenewViewState> = MutableLiveData()
@@ -45,9 +50,32 @@ class MedicalRenewViewModel @Inject constructor(
 
     private fun onMedicalRenewalDataReceived(medicalRenewalData: MedicalRenewalUI) {
         val newViewState = viewState.value?.copy(
-                isLoading = false,
+                isLoading = true,
                 medicalRenewalUI = medicalRenewalData)
         viewState.value = newViewState
     }
 
+    fun paymentInquiry(mobileNumber: String, number: String, deliveryType: Int, address: String, mobile: String) {
+        viewState.value = viewState.value?.copy(isLoading = true)
+        addDisposable(paymentInquiry.paymentInquiry(mobileNumber, number, deliveryType, address, mobile)
+                .map {
+                    it.let {
+                        medicalRenewalPaymentEntityUIMapper.mapFrom(it)
+                    }
+                }.subscribe(
+                        { onInquiryReceived(it) },
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false)
+                            errorState.value = handleError(it)
+                        }
+                )
+        )
+    }
+
+    private fun onInquiryReceived(medicalRenewalPayment: MedicalRenewalPaymentUI) {
+        val newViewState = viewState.value?.copy(
+                isLoading = true,
+                medicalRenewalPayment = medicalRenewalPayment)
+        viewState.value = newViewState
+    }
 }

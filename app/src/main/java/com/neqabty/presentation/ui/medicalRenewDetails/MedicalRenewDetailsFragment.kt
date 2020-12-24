@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -132,16 +133,11 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
         }
 
         bPay.setOnClickListener {
-            llSuperProgressbar.visibility = View.VISIBLE
-//            createPayment()
-
-            if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-                cowPayPayment(true)
-            else
-                cowPayPayment(false)
+            bPay.isEnabled = false
+            proceedToPaymentConfirmation()
+            bPay.isEnabled = true
         }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -158,7 +154,8 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
                 var PaymentGatewayReferenceId =
                         data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
                 responseMSG?.let {
-                    showAlert(if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(R.string.payment_successful) + PaymentGatewayReferenceId else getString(R.string.payment_reference) + PaymentGatewayReferenceId) {
+                    showAlert(if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(R.string.payment_successful) + PaymentGatewayReferenceId + getString(R.string.medical_card_delivery)
+                    else getString(R.string.payment_reference) + PaymentGatewayReferenceId + getString(R.string.medical_card_delivery)) {
                         navController().popBackStack()
                         navController().navigate(R.id.homeFragment)
                     }
@@ -402,6 +399,27 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
             }
         }
     }
+
+    private fun proceedToPaymentConfirmation() {
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.alert_title))
+        builder?.setMessage(getString(R.string.confirm_proceed_to_payment_msg))
+        builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
+            llSuperProgressbar.visibility = View.VISIBLE
+            if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
+                cowPayPayment(true)
+            else
+                cowPayPayment(false)
+            dialog.dismiss()
+        }
+        builder?.setNegativeButton(getString(R.string.cancel_btn)) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        var dialog = builder?.create()
+        dialog?.show()
+    }
+
     //endregion
 
     fun navController() = findNavController()

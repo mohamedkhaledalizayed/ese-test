@@ -19,7 +19,9 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
+import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.medical_renew_fragment.*
@@ -30,14 +32,15 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     var binding by autoCleared<MedicalRenewFragmentBinding>()
-    private var adapter by autoCleared<FollowersAdapter>()
+    private var followersAdapter by autoCleared<FollowersAdapter>()
+    private var medicalRenewPaymentItemsAdapter by autoCleared<MedicalRenewPaymentItemsAdapter>()
 
     @Inject
     lateinit var medicalRenewViewModel: MedicalRenewViewModel
 
     @Inject
     lateinit var appExecutors: AppExecutors
-
+    lateinit var medicalRenewalPaymentUI: MedicalRenewalPaymentUI
     lateinit var medicalRenewalUI: MedicalRenewalUI
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -68,6 +71,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 medicalRenewViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
+                medicalRenewViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user, 1, "address", "mobile")
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
@@ -75,21 +79,31 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         })
 
         medicalRenewViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
-//        medicalRenewViewModel.getMedicalRenewalData("2305693")
+        medicalRenewViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user, 1, "address", "mobile")
     }
 
     private fun initializeViews() {
         binding.medicalRenewalData = medicalRenewalUI
         llContent.visibility = View.VISIBLE
 
-        edMobile.setText(medicalRenewalUI.contact!!.mobile ?: "")
-//        edAddress.setText(medicalRenewalUI.contact!!.address ?: "")
-        val adapter = FollowersAdapter(dataBindingComponent, appExecutors) { }
-        this.adapter = adapter
-        binding.rvFollowers.adapter = adapter
+        val followersAdapter = FollowersAdapter(dataBindingComponent, appExecutors) { }
+        this.followersAdapter = followersAdapter
+        binding.rvFollowers.adapter = followersAdapter
         medicalRenewalUI.followers?.let {
-            adapter.submitList(it)
+            followersAdapter.submitList(it)
         }
+
+        val medicalRenewPaymentItemsAdapter = MedicalRenewPaymentItemsAdapter(dataBindingComponent, appExecutors) { }
+        this.medicalRenewPaymentItemsAdapter = medicalRenewPaymentItemsAdapter
+        medicalRenewalPaymentUI?.let {
+            binding.medicalRenewalPayment = it
+        }
+
+        binding.rvDetails.adapter = medicalRenewPaymentItemsAdapter
+        medicalRenewalPaymentUI.paymentItem?.paymentDetailsItems?.let {
+            medicalRenewPaymentItemsAdapter.submitList(it)
+        }
+
         rb_home.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 edAddress.visibility = View.VISIBLE
@@ -183,11 +197,18 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 showNewMemberAlert()
             }
             3 -> {
-                Toast.makeText(requireContext(), getString(R.string.medical_subscription_subscribed), Toast.LENGTH_SHORT).show()
+                tvSubscribtionStatus.setText(getString(R.string.medical_subscription_subscribed))
+                tvSubscribtionStatus.visibility = View.VISIBLE
                 bContinue.visibility = View.GONE
             }
             4 -> bContinue.visibility = View.GONE
-            5 -> {
+//            5 -> {
+//                bEdit.visibility = View.GONE
+//            }
+            6 -> {
+                tvSubscribtionStatus.setText(getString(R.string.medical_subscription_status_pending))
+                tvSubscribtionStatus.visibility = View.VISIBLE
+                tvRequestStatus.visibility = View.GONE
                 bContinue.visibility = View.GONE
                 bEdit.visibility = View.GONE
             }
@@ -196,9 +217,13 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
 
     private fun handleViewState(state: MedicalRenewViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        state.medicalRenewalUI?.let {
+
+        if(state.medicalRenewalUI != null && state.medicalRenewalPayment != null){
+            llSuperProgressbar.visibility = View.GONE
+
             state.medicalRenewalUI?.oldRefId = PreferencesHelper(requireContext()).user
             medicalRenewalUI = state.medicalRenewalUI!!
+            medicalRenewalPaymentUI = state.medicalRenewalPayment as MedicalRenewalPaymentUI
             checkStatus()
             initializeViews()
         }

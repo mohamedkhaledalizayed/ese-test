@@ -1,9 +1,12 @@
 package com.neqabty.presentation.ui.medicalRenewUpdate
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
@@ -107,9 +110,12 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
             goToEditFollower()
         }
         bSubmit.setOnClickListener {
+            bSubmit.isEnabled = false
             sendRequestConfirmation()
+            bSubmit.isEnabled = true
         }
         updateFollowersTitleVisibility()
+        updateSubmitBtnState()
     }
 
     private fun handleViewState(state: MedicalRenewUpdateViewState) {
@@ -137,11 +143,13 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
         builder?.setMessage(getString(R.string.remove_follower_confirmation))
         builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
             medicalRenewalUI.followers?.find { it.id == selectedFollower.id }?.isDeleted = true
+            medicalRenewalUI.followers?.find { it.id == selectedFollower.id }?.isEdited = false
             adapter.submitList(medicalRenewalUI.followers?.filter { it.isDeleted == false })
             adapter.notifyDataSetChanged()
             rvFollowers.adapter = adapter
 
             updateFollowersTitleVisibility()
+            updateSubmitBtnState()
         }
         builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
             dialog.dismiss()
@@ -198,6 +206,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
             }
             isEdit = false
             updateFollowersTitleVisibility()
+            updateSubmitBtnState()
         })
 
 //        if (isEdit) {
@@ -210,6 +219,13 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
 
     private fun updateFollowersTitleVisibility() {
         binding.tvFollowers.visibility = if (medicalRenewalUI.followers?.filter { it.isDeleted == false }?.size == 0) View.INVISIBLE else View.VISIBLE
+    }
+
+
+    @SuppressLint("NewApi")
+    private fun updateSubmitBtnState() {
+        bSubmit.isEnabled = medicalRenewalUI.followers?.filter { (it.isNew == true && it.isDeleted == false) ||  (it.isNew == false && it.isDeleted == true) || it.isEdited == true}?.size != 0
+        bSubmit.backgroundTintList = if(medicalRenewalUI.followers?.filter { (it.isNew == true && it.isDeleted == false) ||  (it.isNew == false && it.isDeleted == true) || it.isEdited == true }?.size != 0) null else ColorStateList.valueOf(resources.getColor(R.color.gray))
     }
 
     fun showSuccessAlert() {

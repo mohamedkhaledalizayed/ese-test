@@ -22,6 +22,7 @@
     <string name="password">كلمة السر</string>
     <string name="forgetPassword">نسيت كلمة السر</string>
     <string name="login">دخول</string>
+    <string name="number_confirmation">الرقم الذي قمت بإدخاله <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]></string>
     <string name="member_number_confirmation">هل أنت متأكد من رقم العضوية؟!</string>
     <string name="mobile_number_confirmation">هل أنت متأكد من رقم الموبايل؟!</string>
     <string name="experimental_version">(نسخة تجريبية)</string>
@@ -103,8 +104,8 @@
     <string name="continue_btn">متابعة</string>
     <string name="skip_btn">تخطي</string>
     <string name="loginHint">يمكنك الآن الدخول على التطبيق و الاستمتاع بخدمات نقابتك</string>
-    <string name="update_msg">حتى تتمكن من استخدام التطبيق يرجى التحديث</string>
-    <string name="root_msg">هذا الجهاز غير آمن, لا يمكنك استخدام التطبيق.</string>
+    <string name="update_msg">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
+    <string name="root_msg">هذا الجهاز غير متوافق مع الحد الادني من شروط الامان الخاصة بالتطبيق.</string>
 
     <string name="doctors">أطباء</string>
     <string name="hospitals">مستشفيات</string>
@@ -210,6 +211,8 @@
     <string name="wheel_employment_content">خدمتكم شرف لنا- يستطيع المهندس الاستشاري  والمكاتب الاستشارية    تجديد سجلاتهم الهندسية من خلال هذه الخدمة الميسرة، مع خدمات أخري لمزاولة المهنة ستضاف قرييا.</string>
     <string name="wheel_syndicate_services_content">خدمتكم شرف لنا- تستطيع الآن من خلال هذه الخدمة تحديث جميع بياناتك لدي النقابة لحظياً  لسهولة التواصل وسرعة الحصول على الخدمة ، مع عديد من الخدمات العامة  ستضاف قريبا.</string>
     <string name="wheel_customer_service_content">خدمة الرد على استفساراتكم  هي أولوياتنا -  ستفعل خدمات خدمة العملاء قريباً.</string>
+    <string name="closed_claiming">برجاء العلم ان خدمة الموافقات الطبية غير متاحه الان من خلال التطبيق وستفعل بتاريخ 1 يناير ٢٠٢١</string>
+    <string name="closed_complaints">برجاء العلم ان خدمة تلقي الشكاوى والمقترحات غير متاحه الان من خلال التطبيق وستفعل بتاريخ 1 يناير ٢٠٢١</string>
 
     <string name="alert_title">تنبيه</string>
     <string name="no_connection_msg">من فضلك تحقق من إتصالك بالإنترنت</string>
@@ -277,8 +280,14 @@
         جنيه
     </string>
 
+    <string name="current_amount_title">
+    <![CDATA[<font color="#1d1ad2">قيمة الفاتورة الحالية: </font>]]>%s
+        جنيه
+    </string>
+
     <string name="pay">دفع</string>
     <string name="delivery_method">طريقة التوصيل</string>
+    <string name="delivery_method_hint">التوصيل مقتصر علي المنازل لتلافي التجمعات وفقا لاجراءات التباعد الإجتماعي</string>
     <string name="delivery_mobile_title">رقم الموبايل</string>
     <string name="delivery_mobile_hint">رقم الهاتف الذي سيتم التواصل عليه عند الاستلام</string>
     <string name="home_delivery">توصيل للمنزل
@@ -304,16 +313,18 @@
     <string name="medical_subscription_suspended">هذه العضوية موقوفة برجاء الرجوع إلى النقابة</string>
     <string name="medical_subscription_renew_syndicate_membership">لم يجدد اشتراك النقابة يجب تجديد الاشتراك اولا قبل طلب الرعاية الصحية</string>
     <string name="medical_subscription_renew_incomplete_data">بيانات المهندس غير مكتمله برجاء الرجوع الي النقابة او الاتصال علي مركز خدمة العملاء</string>
-    <string name="medical_subscription_subscribed">انت مشترك بالفعل في خدمة الرعاية الصحية ويمكنك تعديل / اضافة / او حذف تابعين في حالة الرغبة في ذلك</string>
+    <string name="medical_subscription_subscribed">لقد تم السداد بالفعل</string>
     <string name="medical_subscription_renew_add_follower">يرجى اضافة التابعين للإستمرار</string>
-    <string name="already_paid">لقد تم تسديد الإشتراك من قبل</string>
+    <string name="already_paid">تم تأكيد إشتراك هذا المشروع من قبل</string>
     <string name="retiree">حالة المهندس معاش وليس له اشتراك سنوي</string>
     <string name="edit_follower">تعديل</string>
+    <string name="confirm_proceed_to_payment_msg">برجاء العلم انه في حالة اختيار الدفع بكود فوري لن تتمكن من تعديل التابعين مره اخري حتي اتمام الدفع</string>
     <string name="confirm_followers_edit_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم قريباً</string>
     <string name="medical_update_request_status_processing">طلبكم ما زال تحت الدراسة</string>
     <string name="medical_update_request_status_approved">لقد تم قبول الطلب وبرجاء الاستمرار لاتمام عمليه الدفع</string>
     <string name="medical_update_request_status_rejected">لقد تم رفض طلبكم.</string>
     <string name="medical_update_request_rejection_reason">سبب الرفض: </string>
+    <string name="medical_subscription_status_pending">لقد تم تاكيد الطلب وفي انتظار السداد في أحد منافذ الدفع باستخدام كود الدفع</string>
     <string name="follower_item"><![CDATA[<font><b>%s: </b></font>]]>%s</string>
     <string name="inquiry">المدفوعات</string>
     <string name="details">التفاصيل:</string>
@@ -328,6 +339,7 @@
     <string name="payment_canceled">لقد تم الغاء عملية الدفع</string>
     <string name="payment_successful">تمت عملية الدفع بنجاح \n
 رقم العملية </string>
+    <string name="medical_card_delivery">\nسيتم تسليم الكروت في خلال 15 يوم من تاريخ الاشتراك</string>
     <string name="name_on_card">إسم صاحب الكارت</string>
     <string name="card_number">رقم الكارت</string>
     <string name="card_expiry_year">تاريخ سنة الإنتهاء</string>
