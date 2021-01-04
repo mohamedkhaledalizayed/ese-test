@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.neqabty.MainViewModel
 import com.neqabty.presentation.ui.about.AboutViewModel
+import com.neqabty.presentation.ui.changeNumber.ChangeNumberViewModel
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaViewModel
 import com.neqabty.presentation.ui.claiming.ClaimingViewModel
 import com.neqabty.presentation.ui.complaint.ComplaintViewModel
@@ -58,6 +59,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChangeNumberViewModel::class)
+    abstract fun bindChangeNumberViewModel(changeNumberViewModel: ChangeNumberViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -36,6 +36,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
 
     lateinit var loginViewModel: LoginViewModel
 
+    var newToken = ""
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -88,16 +89,30 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
             Constants.JWT = it.jwt ?: ""
             PreferencesHelper(requireContext()).mainSyndicate = 5
             PreferencesHelper(requireContext()).subSyndicate = 0
-            if(it.type.equals("client")){
-                PreferencesHelper(requireContext()).name = it.details!![0].name!!
-                PreferencesHelper(requireContext()).user = it.details!![0].userNumber!!
-                PreferencesHelper(requireContext()).isRegistered = true
+            if (it.type.equals("client")) {
+                showTwoButtonsAlert(message = getString(R.string.welcome_with_name_login, it.details!![0].name!!),
+                        okCallback = {
+                            PreferencesHelper(requireContext()).name = it.details!![0].name!!
+                            PreferencesHelper(requireContext()).user = it.details!![0].userNumber!!
+                            PreferencesHelper(requireContext()).isRegistered = true
+                            state.user = null
+                            navController().navigate(LoginFragmentDirections.openHome())
+                        },
+                        cancelCallback = {
+                            PreferencesHelper(requireContext()).name = it.details!![0].name!!
+                            PreferencesHelper(requireContext()).user = it.details!![0].userNumber!!
+                            PreferencesHelper(requireContext()).isRegistered = true
+                            state.user = null
+                            navController().navigate(R.id.changeNumberFragment)
+                        })
+            } else {
+                navController().navigate(LoginFragmentDirections.openHome())
             }
-            navController().navigate(LoginFragmentDirections.openHome())
         }
     }
 
     fun initializeViews() {
+        newToken = PreferencesHelper(requireContext()).token
         binding.bSend.setOnClickListener {
             ensureLogin()
         }
@@ -114,8 +129,8 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
                             if (!task.isSuccessful)
                                 showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
                             else {
-                                val token = task.result?.token
-                                loginViewModel.login(edMobile.text.toString(), token!!, PreferencesHelper(requireContext()))
+                                newToken = task.result?.token!!
+                                loginViewModel.login(edMobile.text.toString(), newToken!!, PreferencesHelper(requireContext()))
                             }
                         })
             }
@@ -147,7 +162,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
     private fun ensureLogin() {
         builder = AlertDialog.Builder(requireContext())
         builder?.setTitle(getString(R.string.alert_title))
-        builder?.setMessage(Html.fromHtml(getString(R.string.number_confirmation, edMobile.text.toString() )+ getString(R.string.mobile_number_confirmation)))
+        builder?.setMessage(Html.fromHtml(getString(R.string.number_confirmation, edMobile.text.toString()) + getString(R.string.mobile_number_confirmation)))
         builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
             login()
             dialog.dismiss()

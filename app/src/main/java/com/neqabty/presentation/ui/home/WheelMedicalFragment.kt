@@ -53,15 +53,13 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
 
         bMedical.setOnClickListener { navController().navigate(R.id.chooseAreaFragment) }
         bClaiming.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.closed_claiming), Toast.LENGTH_SHORT).show()
-
-//            if (PreferencesHelper(requireContext()).isRegistered)
-//                navController().navigate(R.id.claimingFragment)
-//            else {
-//                val bundle: Bundle = Bundle()
-//                bundle.putInt("type", Constants.CLAIMING)
-//                navController().navigate(R.id.mobileFragment, bundle)
-//            }
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(R.id.claimingFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.CLAIMING)
+                navController().navigate(R.id.mobileFragment, bundle)
+            }
         }
         bRenew.setOnClickListener {
             if (PreferencesHelper(requireContext()).isRegistered)

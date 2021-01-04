@@ -134,15 +134,13 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                     }
                 }
                 R.id.claiming_fragment -> { // TODO
-                    Toast.makeText(this, getString(R.string.closed_claiming), Toast.LENGTH_SHORT).show()
-
-//                    if (PreferencesHelper(this).isRegistered)
-//                        navController.navigate(R.id.claimingFragment)
-//                    else {
-//                        val bundle: Bundle = Bundle()
-//                        bundle.putInt("type", Constants.CLAIMING)
-//                        navController.navigate(R.id.mobileFragment, bundle)
-//                    }
+                    if (PreferencesHelper(this).isRegistered)
+                        navController.navigate(R.id.claimingFragment)
+                    else {
+                        val bundle: Bundle = Bundle()
+                        bundle.putInt("type", Constants.CLAIMING)
+                        navController.navigate(R.id.mobileFragment, bundle)
+                    }
                 }
                 R.id.medical_fragment -> {
 //                    Thread(Runnable {
@@ -390,6 +388,12 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             Navigation.findNavController(this, R.id.container)
                     .navigate(R.id.openLoginFragment)
         }
+        (nav_view as NavigationView).getHeaderView(0).findViewById<Button>(R.id.bChangeNumber).setOnClickListener {
+            (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            Navigation.findNavController(this, R.id.container)
+                    .navigate(R.id.openChangeNumberFragment)
+        }
 
         if (PreferencesHelper(this).name.isNotEmpty()) {
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
@@ -398,11 +402,13 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
 
         if (PreferencesHelper(this).user.isNotEmpty()) {
+            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.bChangeNumber).visibility = View.VISIBLE
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.VISIBLE
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
-        } else
+        } else {
+            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.bChangeNumber).visibility = View.INVISIBLE
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.GONE
-
+        }
         (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, PreferencesHelper(this).mobile)))
 
         (nav_view as NavigationView).getHeaderView(0).visibility = if (PreferencesHelper(this).mobile.isNotEmpty()) View.VISIBLE else View.GONE

@@ -17,6 +17,10 @@
         app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true" />
 
+    <action
+        android:id="@+id/openChangeNumberFragment"
+        app:destination="@id/changeNumberFragment" />
+
     <fragment
         android:id="@+id/introFragment"
         android:name="com.neqabty.presentation.ui.intro.IntroFragment"
@@ -52,6 +56,12 @@
             android:id="@+id/openHome"
             app:destination="@id/homeFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/changeNumberFragment"
+        android:name="com.neqabty.presentation.ui.changeNumber.ChangeNumberFragment"
+        android:label="@string/change_number_title"
+        tools:layout="@layout/change_number_fragment"/>
 
     <fragment
         android:id="@+id/mobileFragment"

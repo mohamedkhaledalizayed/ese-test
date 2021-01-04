@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.mobile
+package com.neqabty.presentation.ui.changeNumber
 
 import android.app.Dialog
 import android.os.Bundle
@@ -18,26 +18,24 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.neqabty.R
-import com.neqabty.databinding.MobileFragmentBinding
+import com.neqabty.databinding.ChangeNumberFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import kotlinx.android.synthetic.main.mobile_fragment.*
+import kotlinx.android.synthetic.main.change_number_fragment.*
 import javax.inject.Inject
 
-class MobileFragment : BaseFragment(), Injectable {
+class ChangeNumberFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    var binding by autoCleared<MobileFragmentBinding>()
+    var binding by autoCleared<ChangeNumberFragmentBinding>()
 
-    lateinit var mobileViewModel: MobileViewModel
+    lateinit var changeNumberViewModel: ChangeNumberViewModel
     var type: Int? = 0
 
     var newToken = ""
@@ -48,7 +46,7 @@ class MobileFragment : BaseFragment(), Injectable {
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.mobile_fragment,
+                R.layout.change_number_fragment,
                 container,
                 false,
                 dataBindingComponent
@@ -59,18 +57,15 @@ class MobileFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val params = MobileFragmentArgs.fromBundle(arguments!!)
-        type = params.type
+        changeNumberViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(ChangeNumberViewModel::class.java)
 
-        mobileViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(MobileViewModel::class.java)
-
-        mobileViewModel.viewState.observe(this, Observer {
+        changeNumberViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        mobileViewModel.errorState.observe(this, Observer { error ->
+        changeNumberViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
-                login()
+                changeNumber()
             }, cancelCallback = {
                 llSuperProgressbar.visibility = View.GONE
                 navController().navigateUp()
@@ -84,11 +79,12 @@ class MobileFragment : BaseFragment(), Injectable {
         if (PreferencesHelper(requireContext()).mobile.isNotEmpty())
             binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
 
-        if (!PreferencesHelper(requireContext()).user.equals("null"))
-            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
+//        if (!PreferencesHelper(requireContext()).user.equals("null"))
+//            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
 
         binding.bSend.setOnClickListener {
-            ensureLogin()
+            if(!binding.edMemberNumber.equals(PreferencesHelper(requireContext()).user))
+                ensureChangeNumber()
         }
 
         val vto = ivHint.getViewTreeObserver()
@@ -106,7 +102,7 @@ class MobileFragment : BaseFragment(), Injectable {
         }
     }
 
-    private fun handleViewState(state: MobileViewState) {
+    private fun handleViewState(state: ChangeNumberViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful && state.user != null) {
             activity?.invalidateOptionsMenu()
@@ -118,48 +114,15 @@ class MobileFragment : BaseFragment(), Injectable {
             showTwoButtonsAlert(message = getString(R.string.welcome_with_name, state.user?.details!![0].name!!),
                     okCallback = {
                         state.user = null
-                        when (type) {
-                            Constants.CLAIMING -> navController().navigate(
-                                    MobileFragmentDirections.openClaiming()
-                            )
-
-                            Constants.TRIPS -> navController().navigate(
-                                    MobileFragmentDirections.openTripReservation(TripsData.tripItem!!)
-                            )
-
-                            Constants.RECORDS -> navController().navigate(
-                                    MobileFragmentDirections.openEngineeringRecords()
-                            )
-
-                            Constants.UPDATE_DATA -> navController().navigate(
-                                    MobileFragmentDirections.openUpdateDataVerification()
-                            )
-
-                            Constants.COMPLAINTS -> navController().navigate(
-                                    MobileFragmentDirections.openComplaints()
-                            )
-
-                            Constants.CORONA -> navController().navigate(
-                                    MobileFragmentDirections.openCorona()
-                            )
-
-                            Constants.MEDICAL_RENEW -> navController().navigate(
-                                    MobileFragmentDirections.openMedicalRenew()
-                            )
-                        }
-                    },
-                    cancelCallback = {
-                        state.user = null
-                        navController().popBackStack(R.id.homeFragment,false)
-                        navController().navigate(R.id.changeNumberFragment)
-                    })
+                        navController().navigateUp()
+                    },cancelCallback = { state.user = null })
         }
     }
 
-    fun login() {
+    fun changeNumber() {
         if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString())) {
             if (PreferencesHelper(requireContext()).token.isNotBlank())
-                mobileViewModel.registerUser(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
+                changeNumberViewModel.changeNumber(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
             else {
                 FirebaseInstanceId.getInstance().instanceId
                         .addOnCompleteListener(OnCompleteListener { task ->
@@ -168,7 +131,7 @@ class MobileFragment : BaseFragment(), Injectable {
                                 showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
                             else {
                                 newToken = task.result?.token!!
-                                mobileViewModel.registerUser(binding.edMobile.toString(), binding.edMemberNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
+                                changeNumberViewModel.changeNumber(binding.edMobile.toString(), binding.edMemberNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
                             }
                         })
             }
@@ -212,13 +175,13 @@ class MobileFragment : BaseFragment(), Injectable {
         dialog.show()
     }
 
-    private fun ensureLogin() {
+    private fun ensureChangeNumber() {
         builder = AlertDialog.Builder(requireContext())
         builder?.setTitle(getString(R.string.alert_title))
         builder?.setMessage(Html.fromHtml(getString(R.string.number_confirmation, edMemberNumber.text.toString()) + getString(R.string.member_number_confirmation)))
         builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
             dialog.dismiss()
-            login()
+            changeNumber()
         }
         builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
             dialog.dismiss()

@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.mobile
+package com.neqabty.presentation.ui.changeNumber
 
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.Login
@@ -8,17 +8,18 @@ import com.neqabty.presentation.mappers.UserEntityUIMapper
 import com.neqabty.presentation.util.PreferencesHelper
 import javax.inject.Inject
 
-class MobileViewModel @Inject constructor(val login: Login) : BaseViewModel() {
+class ChangeNumberViewModel @Inject constructor(val login: Login) : BaseViewModel() {
 
     private val userEntityToUIMapper = UserEntityUIMapper()
+
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
-    var viewState: MutableLiveData<MobileViewState> = MutableLiveData()
+    var viewState: MutableLiveData<ChangeNumberViewState> = MutableLiveData()
 
     init {
-        viewState.value = MobileViewState()
+        viewState.value = ChangeNumberViewState()
     }
 
-    fun registerUser(
+    fun changeNumber(
             mobile: String,
             userNumber: String,
             token: String,
@@ -26,7 +27,7 @@ class MobileViewModel @Inject constructor(val login: Login) : BaseViewModel() {
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
 
-        addDisposable(login.login(Login.PARAM_ACTION_UPGRADE, mobile, userNumber, token, prefs.token)
+        addDisposable(login.login(Login.PARAM_ACTION_CHANGE, mobile, userNumber, token, prefs.token)
                 .map {
                     it.let {
                         userEntityToUIMapper.mapFrom(it)

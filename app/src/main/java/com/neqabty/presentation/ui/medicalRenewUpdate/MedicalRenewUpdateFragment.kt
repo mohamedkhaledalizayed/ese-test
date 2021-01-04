@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.medicalRenewUpdate
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -222,10 +223,11 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
     }
 
 
-    @SuppressLint("NewApi")
     private fun updateSubmitBtnState() {
         bSubmit.isEnabled = medicalRenewalUI.followers?.filter { (it.isNew == true && it.isDeleted == false) ||  (it.isNew == false && it.isDeleted == true) || it.isEdited == true}?.size != 0
-        bSubmit.backgroundTintList = if(medicalRenewalUI.followers?.filter { (it.isNew == true && it.isDeleted == false) ||  (it.isNew == false && it.isDeleted == true) || it.isEdited == true }?.size != 0) null else ColorStateList.valueOf(resources.getColor(R.color.gray))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            bSubmit.backgroundTintList = if(medicalRenewalUI.followers?.filter { (it.isNew == true && it.isDeleted == false) ||  (it.isNew == false && it.isDeleted == true) || it.isEdited == true }?.size != 0) null else ColorStateList.valueOf(resources.getColor(R.color.gray))
+        }
     }
 
     fun showSuccessAlert() {

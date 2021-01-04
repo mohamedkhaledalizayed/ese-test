@@ -103,7 +103,6 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
     private fun initializeViews() {
         val params = MedicalRenewAddFollowerDetailsFragmentArgs.fromBundle(arguments!!)
         relationsList = params.medicalRenewalUI.relations?.toMutableList()
-        relationsList?.removeFirst()
         followerItem = params.followerItem
         binding.followerItem = followerItem
 
@@ -220,7 +219,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data!!)
+                data?.let { onSelectFromGalleryResult(data) }
             else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult()
         }

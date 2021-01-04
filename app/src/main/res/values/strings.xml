@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NeQabty</string>
+    <string name="my_app_name" translatable="false">NeQabty</string>
     <string name="capture">Capture Photo</string>
     <string name="history">Show History</string>
     <string name="turn_on_gps">Please turn on your GPS</string>
@@ -39,6 +39,8 @@
     <string name="personalDetails">البيانات الشخصية</string>
     <string name="confirm">تأكيد</string>
     <string name="welcome">مرحبا بكم</string>
+    <string name="welcome_with_name">مرحباً  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]>تم تسجيل الدخول بنجاح</string>
+    <string name="welcome_with_name_login">هذا الرقم مسجل بإسم  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]>هل تريد تأكيد الدخول؟</string>
     <string name="welcome_to_neqabty">مرحبا بكم في تطبيق نقابة المهندسين المصرية - نقابتي</string>
     <string name="main">الرئيسية</string>
     <string name="aboutNeqaba">عن النقابة</string>
@@ -87,7 +89,7 @@
     <string name="age_on_trip">العمر وقت الرحلة</string>
     <string name="birth_date">تاريخ الميلاد</string>
     <string name="thanks">شكراً</string>
-    <string name="confirm_reservation_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
+    <string name="confirm_reservation_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
     <string name="addProfileImage">اضافة صورة البروفايل</string>
     <string name="viewPhoto">عرض الصورة</string>
     <string name="format">yyyy/MM/dd</string>
@@ -99,7 +101,7 @@
     <string name="enter_confirmation_code">من فضلك ادخل الرمز التأكيدي</string>
     <string name="resend_code"> لم يصلني الرمز التأكيدي ....اعادة ارسال %s</string>
     <string name="congratulations">تم التسجيل بنجاح</string>
-    <string name="request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
+    <string name="request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
     <string name="request_status">طلبكم تحت الدراسة</string>
     <string name="continue_btn">متابعة</string>
     <string name="skip_btn">تخطي</string>
@@ -116,12 +118,14 @@
     <string name="artificial_limbs">أجهزة تعويضية</string>
     <string name="laboratories">معامل التحاليل</string>
 
+    <string name="change_number_title">تغيير رقم العضوية</string>
     <string name="mobile_title">تسجيل دخول</string>
     <string name="enter_mobile">برجاء ادخال رقم الهاتف المحمول الخاص بك</string>
     <string name="login_visitor_enter_mobile">برجاء ادخال رقم الهاتف المحمول لانشاء حسابك الخاص</string>
     <string name="choose_service">اختار الخدمة</string>
     <string name="enter_member_number">ادخل رقم العضوية</string>
     <string name="login_member_enter_member_number">برجاء ادخال رقم العضوية الخاص بك لاستكمال بيانات الحساب</string>
+    <string name="change_number_enter_member_number">برجاء ادخال رقم العضوية الصحيح الخاص بك لاستكمال بيانات الحساب</string>
     <string name="medicalRequest">تقديم الموافقات الطبية</string>
     <string name="syndicateNumber">رقم العضوية</string>
     <string name="member_name">اسم العضو</string>
@@ -211,14 +215,15 @@
     <string name="wheel_employment_content">خدمتكم شرف لنا- يستطيع المهندس الاستشاري  والمكاتب الاستشارية    تجديد سجلاتهم الهندسية من خلال هذه الخدمة الميسرة، مع خدمات أخري لمزاولة المهنة ستضاف قرييا.</string>
     <string name="wheel_syndicate_services_content">خدمتكم شرف لنا- تستطيع الآن من خلال هذه الخدمة تحديث جميع بياناتك لدي النقابة لحظياً  لسهولة التواصل وسرعة الحصول على الخدمة ، مع عديد من الخدمات العامة  ستضاف قريبا.</string>
     <string name="wheel_customer_service_content">خدمة الرد على استفساراتكم  هي أولوياتنا -  ستفعل خدمات خدمة العملاء قريباً.</string>
-    <string name="closed_claiming">برجاء العلم ان خدمة الموافقات الطبية غير متاحه الان من خلال التطبيق وستفعل بتاريخ 1 يناير ٢٠٢١</string>
-    <string name="closed_complaints">برجاء العلم ان خدمة تلقي الشكاوى والمقترحات غير متاحه الان من خلال التطبيق وستفعل بتاريخ 1 يناير ٢٠٢١</string>
+    <string name="closed_complaints">برجاء العلم ان خدمة تلقي الشكاوى والمقترحات غير متاحه الان من خلال التطبيق وستفعل بتاريخ 1 فبراير ٢٠٢١</string>
 
     <string name="alert_title">تنبيه</string>
     <string name="no_connection_msg">من فضلك تحقق من إتصالك بالإنترنت</string>
     <string name="alert_no">لا</string>
     <string name="alert_yes">نعم</string>
     <string name="alert_confirm">تأكيد</string>
+    <string name="alert_confirm_login">تأكيد الدخول</string>
+    <string name="alert_change_number">تغيير الرقم</string>
     <string name="no_connection_cancel">إلغاء</string>
     <string name="no_connection_retry">محاولة أخرى</string>
     <string name="go_to_payment">تجديد الإشتراك</string>
@@ -311,7 +316,7 @@
     <string name="medical_subscribe_confirmation">هذا المهندس غير مسجل بخدمة الرعاية الصحية، هل تود الاشتراك في الخدمة ؟</string>
     <string name="medical_subscription_unsubscribed">هذا الرقم غير مقيد بالنقابة، برجاء الرجوع للنقابة لطلب العضوية</string>
     <string name="medical_subscription_suspended">هذه العضوية موقوفة برجاء الرجوع إلى النقابة</string>
-    <string name="medical_subscription_renew_syndicate_membership">لم يجدد اشتراك النقابة يجب تجديد الاشتراك اولا قبل طلب الرعاية الصحية</string>
+    <string name="medical_subscription_renew_syndicate_membership">لم يجدد اشتراك النقابة، يجب تجديد الاشتراك عن العام الحالي حتى تتمكن من تجديد اشتراك الرعاية الصحية</string>
     <string name="medical_subscription_renew_incomplete_data">بيانات المهندس غير مكتمله برجاء الرجوع الي النقابة او الاتصال علي مركز خدمة العملاء</string>
     <string name="medical_subscription_subscribed">لقد تم السداد بالفعل</string>
     <string name="medical_subscription_renew_add_follower">يرجى اضافة التابعين للإستمرار</string>
@@ -451,7 +456,7 @@
     <string name="update_data_add_photo">إضافة صورة</string>
     <string name="user_not_allowed">التجديد لهذا العضو غير مسموح</string>
     <string name="wrong_verification_code">كود التأكيد غير مطابق</string>
-    <string name="records_request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
+    <string name="records_request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
 
     <string name="complaint_title">استفسارات</string>
     <string name="complaint_section_title">شكاوى ومقترحات</string>
@@ -461,7 +466,7 @@
     <string name="complaint_name">اسم مقدم الشكوى</string>
     <string name="complaint_mobile">هاتف مقدم الشكوى</string>
     <string name="complaint_body">موضوع الشكوى</string>
-    <string name="complaint_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال 4 ساعات</string>
+    <string name="complaint_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
 
 
     <string name="corona_desc">بيانات المهندسين المصابين أو المتضررين بفيروس كورونا</string>

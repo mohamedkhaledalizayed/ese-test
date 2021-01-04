@@ -2,13 +2,14 @@ package com.neqabty.presentation.common
 
 import android.content.Context
 import android.os.Bundle
-import androidx.annotation.CallSuper
-import androidx.fragment.app.Fragment
+import android.text.Html
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
+import androidx.annotation.CallSuper
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.neqabty.R
 
 open class BaseFragment : Fragment() {
@@ -31,22 +32,26 @@ open class BaseFragment : Fragment() {
     }
 
     fun showConnectionAlert(
-        context: Context,
-        retryCallback: (() -> Unit),
-        cancelCallback: (() -> Unit),
-        message: String? = getString(R.string.error_msg)
+            context: Context,
+            retryCallback: (() -> Unit),
+            cancelCallback: (() -> Unit),
+            message: String? = getString(R.string.error_msg)
     ) {
         builder = AlertDialog.Builder(context)
         builder?.setTitle(getString(R.string.error))
         builder?.setMessage(message)
         builder?.setCancelable(false)
         builder?.setPositiveButton(getString(R.string.no_connection_retry)) { dialog, which ->
-            retryCallback.invoke()
+            try {
+                retryCallback.invoke()
+            } catch (e: Exception) {
+            }
         }
         builder?.setNegativeButton(getString(R.string.no_connection_cancel)) { dialog, which ->
-            try{
-            cancelCallback.invoke()
-            }catch(e: Exception){}
+            try {
+                cancelCallback.invoke()
+            } catch (e: Exception) {
+            }
         }
 
         if (dialog == null)
@@ -57,20 +62,52 @@ open class BaseFragment : Fragment() {
     }
 
     fun showAlert(
-        message: String,
-        title: String = getString(R.string.alert_title),
-        okCallback: (() -> Unit) = { dialog?.dismiss() }
+            message: String,
+            title: String = getString(R.string.alert_title),
+            okCallback: (() -> Unit) = { dialog?.dismiss() }
     ) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)
         builder.setCancelable(false)
         builder.setMessage(message)
         builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
-            okCallback.invoke()
+            try {
+                okCallback.invoke()
+            } catch (e: Exception) {
+            }
         }
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
+
+
+    fun showTwoButtonsAlert(
+            message: String,
+            title: String = getString(R.string.alert_title),
+            okCallback: (() -> Unit) = { dialog?.dismiss() },
+            cancelCallback: (() -> Unit) = { dialog?.dismiss() }
+    ) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(title)
+        builder.setCancelable(false)
+        builder.setMessage(Html.fromHtml(message))
+        builder.setPositiveButton(getString(R.string.alert_confirm_login)) { dialog, _ ->
+            try {
+                okCallback.invoke()
+            } catch (e: Exception) {
+            }
+        }
+        builder.setNegativeButton(getString(R.string.change_number_title)) { dialog, which ->
+            try {
+                cancelCallback.invoke()
+                dialog?.dismiss()
+            } catch (e: Exception) {
+            }
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (activity as AppCompatActivity).invalidateOptionsMenu()
         llSuperProgressbar = (activity as AppCompatActivity).findViewById(R.id.llSuperProgressbar)

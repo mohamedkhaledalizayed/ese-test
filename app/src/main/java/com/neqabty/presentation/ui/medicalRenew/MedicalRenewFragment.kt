@@ -185,9 +185,9 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 bContinue.visibility = View.GONE
             }
         }
-        if (medicalRenewalUI.contact?.isDead == true && medicalRenewalUI.followers?.size == 0) {
-            bContinue.visibility = View.GONE
-        }
+//        if (medicalRenewalUI.contact?.isDead == true && medicalRenewalUI.followers?.size == 0) {
+//            bContinue.visibility = View.GONE
+//        }
         when (medicalRenewalUI.healthCareStatus) {
             -1 -> {
                 showInEligibleMemberAlert(getString(R.string.error_msg))
@@ -199,7 +199,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             3 -> {
                 tvSubscribtionStatus.setText(getString(R.string.medical_subscription_subscribed))
                 tvSubscribtionStatus.visibility = View.VISIBLE
-                bContinue.visibility = View.GONE
+                bContinue.visibility = if (medicalRenewalPaymentUI.paymentItem?.amount == null || medicalRenewalPaymentUI.paymentItem?.amount == 0) View.GONE else View.VISIBLE
             }
             4 -> bContinue.visibility = View.GONE
 //            5 -> {
