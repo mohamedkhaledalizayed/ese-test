@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.claiming
 
 class ClaimingData {
     companion object {
+        var searchProviderName: String = ""
         var providerName: String = ""
         var providerId: Int = 0
         var providerTypeId: Int = 0

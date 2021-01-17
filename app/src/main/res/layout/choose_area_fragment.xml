@@ -45,6 +45,25 @@
                 android:textSize="@dimen/text_size_medium" />
 
             <TextView
+                android:id="@+id/tvServiceProviderName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_horizontal_small"
+                android:text="@string/serviceProviderName"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_medium" />
+
+            <EditText
+                android:id="@+id/edServiceProviderName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/serviceProviderName"
+                android:inputType="text"
+                android:maxLength="30"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
                 android:id="@+id/tvGovern"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

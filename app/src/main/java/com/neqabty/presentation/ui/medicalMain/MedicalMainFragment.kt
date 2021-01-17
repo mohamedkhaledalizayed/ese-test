@@ -37,6 +37,7 @@ class MedicalMainFragment : BaseFragment(), HasMedicalOptionsMenu, Injectable {
     lateinit var appExecutors: AppExecutors
     var areaID: Int = 0
     var governID: Int = 0
+    var name: String = ""
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -56,7 +57,8 @@ class MedicalMainFragment : BaseFragment(), HasMedicalOptionsMenu, Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val params = MedicalCategoriesFragmentArgs.fromBundle(arguments!!)
+        val params = MedicalMainFragmentArgs.fromBundle(arguments!!)
+        name = params.name
         areaID = params.areaID
         governID = params.governID
 
@@ -102,7 +104,7 @@ class MedicalMainFragment : BaseFragment(), HasMedicalOptionsMenu, Injectable {
 //        binding.tabLayout.getTabAt(0)?.customView?.setPadding(10, 10, 10, 10);
 //        binding.tabLayout.layoutParams = LinearLayout.LayoutParams(DisplayMetrics.width / 3, DisplayMetrics.width / 3)
 
-        viewpager.adapter = CategoriesTabAdapter(requireContext(), childFragmentManager, tabLayout!!.tabCount, categoriesIDList, categoriesNameList, areaID, governID)
+        viewpager.adapter = CategoriesTabAdapter(requireContext(), childFragmentManager, tabLayout!!.tabCount, categoriesIDList, categoriesNameList, name, areaID, governID)
 
 
         viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))

@@ -10,6 +10,8 @@ data class ProviderRequest(
     var govId: String = "",
     @SerializedName("area_id")
     var areaId: String = "",
+    @SerializedName("provider_name")
+    var providerName: String? = "",
     @SerializedName("profession_id")
     var professionId: String? = "",
     @SerializedName("degree_id")

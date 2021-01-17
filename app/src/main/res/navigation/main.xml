@@ -320,6 +320,9 @@
             android:id="@+id/openProviderDetails"
             app:destination="@id/medicalProviderDetailsFragment" />
         <argument
+            android:name="name"
+            app:argType="java.lang.String" />
+        <argument
             android:name="governID"
             app:argType="java.lang.Integer" />
         <argument
@@ -385,6 +388,9 @@
         <argument
             android:name="areaID"
             app:argType="java.lang.Integer" />
+        <argument
+            android:name="name"
+            app:argType="java.lang.String" />
         <argument
             android:name="professionID"
             app:argType="java.lang.String" />

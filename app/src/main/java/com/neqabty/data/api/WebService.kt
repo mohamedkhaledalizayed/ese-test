@@ -123,7 +123,10 @@ interface WebService {
     fun sendDecryptionKey(@Body decryptionRequest: DecryptionRequest): Observable<ResponseWrapper<DecryptionData>>
 
     @GET("api/ApiHealthCare/GetFollowersList")
-    fun getMedicalRenewData(@Query("mobile_number") mobileNumber: String, @Query("oldRefId") contactId: String, @Query("server") server: String = ""): Observable<MedicalRenewalData>
+    fun getMedicalRenewData(@Query("oldRefId") contactId: String, @Query("server") server: String = ""): Observable<MedicalRenewalData>
+
+    @GET("api/apiPaymentRequest/RenewalInquiryDetails")
+    fun inquireHealthCare(@Query("OldrefID") oldRefId: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
 
     @POST("api/apiPaymentRequest/AddHealthCareRequest")
     fun getMedicalRenewPaymentData(@Query("mobile_number") mobileNumber: String, @Query("oldRefId") contactId: String, @Query("deliveryLocation") locationType: Int, @Query("deliveryAddress") address: String, @Query("deliveryPhone") mobile: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>

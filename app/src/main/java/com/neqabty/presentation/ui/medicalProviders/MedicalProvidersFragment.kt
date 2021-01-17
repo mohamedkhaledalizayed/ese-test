@@ -38,6 +38,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
 
     var areaID: Int = 0
     var governID: Int = 0
+    var name: String = ""
     var degreeID: String? = ""
     var professionID: String? = ""
 
@@ -68,6 +69,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         val params = MedicalProvidersFragmentArgs.fromBundle(arguments!!)
         title = params.title
         categoryId = params.categoryId
+        name = params.name
         areaID = params.areaID
         governID = params.governID
         professionID = params.professionID
@@ -96,7 +98,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
                 if (categoryId == 2)
                     medicalProvidersViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())
                 else
-                    medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), "", degreeID)
+                    medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), name, governID.toString(), areaID.toString(), "", degreeID)
 
             }, cancelCallback = {
                 navController().navigateUp()
@@ -106,7 +108,7 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         if (categoryId == 2)
             medicalProvidersViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())
         else
-            medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), "", degreeID)
+            medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), name, governID.toString(), areaID.toString(), "", degreeID)
     }
 
     private fun handleViewState(state: MedicalProvidersViewState) {
@@ -138,11 +140,11 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         spSpecialization.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), (parent.getItemAtPosition(position) as SpecializationUI).id.toString(), degreeID)
+                medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), name, governID.toString(), areaID.toString(), (parent.getItemAtPosition(position) as SpecializationUI).id.toString(), degreeID)
             }
         }
         spSpecialization.setSelection(0)
-        medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), governID.toString(), areaID.toString(), specializations[0].id.toString(), degreeID)
+        medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), name, governID.toString(), areaID.toString(), specializations[0].id.toString(), degreeID)
     }
 
 //region

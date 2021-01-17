@@ -73,7 +73,7 @@ class MedicalCategoriesFragment : BaseFragment(), HasMedicalOptionsMenu, Injecta
                     )
                 else ->
                     navController().navigate(
-                            MedicalCategoriesFragmentDirections.openProviders(category.name, category.id, governID, areaID, "", "")
+                            MedicalCategoriesFragmentDirections.openProviders(category.name, category.id, governID, areaID, "","", "")
                     )
             }
         }

@@ -67,7 +67,7 @@ class MedicalProfessionsFragment : BaseFragment(), Injectable {
 
         val adapter = MedicalProfessionsAdapter(dataBindingComponent, appExecutors) { profession ->
             navController().navigate(
-                    MedicalProfessionsFragmentDirections.openProviders("", categoryId, governID, areaID, profession.id.toString(), "")
+                    MedicalProfessionsFragmentDirections.openProviders("", categoryId, governID, areaID, "",profession.id.toString(), "")
             )
         }
         this.adapter = adapter

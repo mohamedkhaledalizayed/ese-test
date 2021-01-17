@@ -48,10 +48,10 @@ class MedicalProvidersViewModel @Inject constructor(private val getAllSpecializa
         viewState.value = newViewState
     }
 
-    fun getMedicalProviders(id: String, govID: String, areaID: String, professionID: String?, degreeID: String?) {
+    fun getMedicalProviders(id: String, name: String, govID: String, areaID: String, professionID: String?, degreeID: String?) {
         viewState.value?.providers?.let {
             onProvidersReceived(it)
-        } ?: addDisposable(getProvidersByType.getProvidersByType(id, govID, areaID, professionID, degreeID)
+        } ?: addDisposable(getProvidersByType.getProvidersByType(id, govID, areaID, name, professionID, degreeID)
                 .flatMap {
                     it.let {
                         providerEntityUIMapper.observable(it)

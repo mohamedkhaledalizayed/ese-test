@@ -58,6 +58,17 @@
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_size_medium" />
 
+                <EditText
+                    android:id="@+id/edServiceProviderName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/serviceProviderName"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_size_medium" />
+
                 <Spinner
                     android:id="@+id/spGovern"
                     android:layout_width="match_parent"

@@ -161,7 +161,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
 
     fun getProviders(providerTypeID: Int) {
         isProvidersRequested = true
-        claimingViewModel.getProvidersByType(providerTypeID.toString(), ClaimingData.governId.toString(), ClaimingData.areaId.toString())
+        claimingViewModel.getProvidersByType(providerTypeID.toString(), ClaimingData.governId.toString(), ClaimingData.areaId.toString(), ClaimingData.searchProviderName)
     }
 
     private fun isDataValid(doctor: Any?): Boolean {

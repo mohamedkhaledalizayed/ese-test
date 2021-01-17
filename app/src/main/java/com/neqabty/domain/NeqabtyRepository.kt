@@ -22,6 +22,7 @@ interface NeqabtyRepository {
             providerTypeId: String,
             govId: String,
             areaId: String,
+            providerName: String?,
             professionID: String?,
             degreeID: String?
     ): Observable<List<ProviderEntity>>
@@ -45,6 +46,7 @@ interface NeqabtyRepository {
             phone: String,
             profession: Int,
             degree: Int,
+            gov: Int,
             area: Int,
             doctor: Int,
             providerType: Int,
@@ -91,7 +93,7 @@ interface NeqabtyRepository {
     fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
     fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity>
     fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity>
-    fun inquireMedicalRenewalPayment(mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity>
+    fun inquireMedicalRenewalPayment(isInquire: Boolean, mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity>
     fun updateMedicalRenewalData(mobileNumber: String, medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity>
     fun validateUserForClaiming(userNumber: String): Observable<ClaimingValidationEntity>
     fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity>

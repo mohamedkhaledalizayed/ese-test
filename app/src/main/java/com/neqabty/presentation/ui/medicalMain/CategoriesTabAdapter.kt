@@ -7,13 +7,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.neqabty.presentation.ui.medicalProviders.MedicalProvidersFragment
 
-class CategoriesTabAdapter(private val myContext: Context, fm: FragmentManager, internal var totalTabs: Int, var categoriesIDList: List<Int>, var categoriesNameList: List<String>, var areaID: Int, var governID: Int) : FragmentPagerAdapter(fm) {
+class CategoriesTabAdapter(private val myContext: Context, fm: FragmentManager, internal var totalTabs: Int, var categoriesIDList: List<Int>, var categoriesNameList: List<String>, var name: String, var areaID: Int, var governID: Int) : FragmentPagerAdapter(fm) {
 
     // this is for fragment tabs
     override fun getItem(position: Int): Fragment {
         val bundle = Bundle()
         bundle.putString("title", categoriesNameList[position])
         bundle.putInt("categoryId", categoriesIDList[position])
+        bundle.putString("name", name)
         bundle.putInt("areaID", areaID)
         bundle.putInt("governID", governID)
         bundle.putString("degreeID", "")

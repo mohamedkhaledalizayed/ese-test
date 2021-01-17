@@ -15,6 +15,7 @@ class GetProvidersByType @Inject constructor(
         private const val PARAM_PROVIDER_TYPE_ID = "param:providerTypeId"
         private const val PARAM_GOV_ID = "param:govId"
         private const val PARAM_AREA_ID = "param:areaId"
+        private const val PARAM_PROVIDER_NAME = "param:providerName"
         private const val PARAM_PROFESSION_ID = "param:professionId"
         private const val PARAM_DEGREE_ID = "param:degreeId"
     }
@@ -23,6 +24,7 @@ class GetProvidersByType @Inject constructor(
         providerTypeId: String,
         govId: String,
         areaId: String,
+        providerName: String? = "",
         professionID: String? = "",
         degreeID: String? = ""
     ): Observable<List<ProviderEntity>> {
@@ -30,17 +32,19 @@ class GetProvidersByType @Inject constructor(
         data[PARAM_PROVIDER_TYPE_ID] = providerTypeId
         data[PARAM_GOV_ID] = govId
         data[PARAM_AREA_ID] = areaId
-        professionID?.let { data[com.neqabty.domain.usecases.GetProvidersByType.Companion.PARAM_PROFESSION_ID] = it }
-        degreeID?.let { data[com.neqabty.domain.usecases.GetProvidersByType.Companion.PARAM_DEGREE_ID] = it }
+        providerName?.let { data[PARAM_PROVIDER_NAME] = it }
+        professionID?.let { data[PARAM_PROFESSION_ID] = it }
+        degreeID?.let { data[PARAM_DEGREE_ID] = it }
         return observable(data)
     }
 
     override fun createObservable(data: Map<String, Any>?): Observable<List<ProviderEntity>> {
-        val providerTypeId = data?.get(GetProvidersByType.PARAM_PROVIDER_TYPE_ID) as String
-        val govId = data?.get(GetProvidersByType.PARAM_GOV_ID) as String
-        val areaId = data?.get(GetProvidersByType.PARAM_AREA_ID) as String
-        val professionID = data?.get(GetProvidersByType.PARAM_PROFESSION_ID) as String
-        val degreeID = data?.get(GetProvidersByType.PARAM_DEGREE_ID) as String
-        return neqabtyRepository.getProvidersByType(providerTypeId, govId, areaId, professionID, degreeID)
+        val providerTypeId = data?.get(PARAM_PROVIDER_TYPE_ID) as String
+        val govId = data?.get(PARAM_GOV_ID) as String
+        val areaId = data?.get(PARAM_AREA_ID) as String
+        val providerName = data?.get(PARAM_PROVIDER_NAME) as String
+        val professionID = data?.get(PARAM_PROFESSION_ID) as String
+        val degreeID = data?.get(PARAM_DEGREE_ID) as String
+        return neqabtyRepository.getProvidersByType(providerTypeId, govId, areaId, providerName, professionID, degreeID)
     }
 }

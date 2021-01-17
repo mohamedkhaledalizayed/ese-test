@@ -18,6 +18,8 @@ data class MedicalRequest(
     var professionId: Int = 0,
     @SerializedName("degree_id")
     var degreeId: Int = 0,
+    @SerializedName("gov_id")
+    var govId: Int = 0,
     @SerializedName("area_id")
     var areaId: Int = 0,
     @SerializedName("doctor_id")

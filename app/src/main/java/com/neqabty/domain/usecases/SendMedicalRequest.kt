@@ -20,6 +20,7 @@ class SendMedicalRequest @Inject constructor(
         private const val PARAM_PROFESSION = "param:profession"
         private const val PARAM_DEGREE = "param:degree"
         private const val PARAM_AREA = "param:area"
+        private const val PARAM_GOV = "param:gov"
         private const val PARAM_DOCTOR = "param:doctor"
         private const val PARAM_PROVIDER_TYPE = "param:providerType"
         private const val PARAM_PROVIDER = "param:provider"
@@ -41,6 +42,7 @@ class SendMedicalRequest @Inject constructor(
         phone: String,
         profession: Int,
         degree: Int,
+        gov: Int,
         area: Int,
         doctor: Int,
         providerType: Int,
@@ -62,6 +64,7 @@ class SendMedicalRequest @Inject constructor(
         data[PARAM_PHONE] = phone
         data[PARAM_PROFESSION] = profession
         data[PARAM_DEGREE] = degree
+        data[PARAM_GOV] = gov
         data[PARAM_AREA] = area
         data[PARAM_DOCTOR] = doctor
         data[PARAM_PROVIDER_TYPE] = providerType
@@ -85,6 +88,7 @@ class SendMedicalRequest @Inject constructor(
         val phone = data?.get(PARAM_PHONE) as String
         val profession = data?.get(PARAM_PROFESSION) as Int
         val degree = data?.get(PARAM_DEGREE) as Int
+        val gov = data?.get(PARAM_GOV) as Int
         val area = data?.get(PARAM_AREA) as Int
         val doctor = data?.get(PARAM_DOCTOR) as Int
         val docsNumber = data?.get(PARAM_DOCS_COUNT) as Int
@@ -97,6 +101,6 @@ class SendMedicalRequest @Inject constructor(
         val doc3 = data?.get(PARAM_DOC3) as File?
         val doc4 = data?.get(PARAM_DOC4) as File?
         val doc5 = data?.get(PARAM_DOC5) as File?
-        return neqabtyRepository.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
+        return neqabtyRepository.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 }

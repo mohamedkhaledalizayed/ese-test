@@ -57,7 +57,7 @@ class MedicalRenewViewModel @Inject constructor(
 
     fun paymentInquiry(mobileNumber: String, number: String, deliveryType: Int, address: String, mobile: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(paymentInquiry.paymentInquiry(mobileNumber, number, deliveryType, address, mobile)
+        addDisposable(paymentInquiry.paymentInquiry(true, mobileNumber, number, deliveryType, address, mobile)
                 .map {
                     it.let {
                         medicalRenewalPaymentEntityUIMapper.mapFrom(it)

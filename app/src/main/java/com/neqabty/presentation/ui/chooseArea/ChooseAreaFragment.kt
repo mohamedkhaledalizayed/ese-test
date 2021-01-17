@@ -91,7 +91,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
 //                    ChooseAreaFragmentDirections.openMedical(governID, areaID)
 //            )
             navController().navigate(
-                    ChooseAreaFragmentDirections.openMedicalMain(governID, areaID)
+                    ChooseAreaFragmentDirections.openMedicalMain(binding.edServiceProviderName.text.toString(), governID, areaID)
             )
         }
     }

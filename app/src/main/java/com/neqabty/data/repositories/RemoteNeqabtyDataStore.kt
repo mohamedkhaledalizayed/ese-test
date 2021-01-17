@@ -287,15 +287,17 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     private val medicalRenewalDataEntityMapper = MedicalRenewalDataEntityMapper()
 
     override fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity> {
-        return api.getMedicalRenewData(mobileNumber, userNumber).flatMap { renewalInfo ->
+        return api.getMedicalRenewData(userNumber).flatMap { renewalInfo ->
             Observable.just(medicalRenewalDataEntityMapper.mapFrom(renewalInfo))
         }
     }
 
     private val medicalRenewalPaymentDataEntityMapper = MedicalRenewalPaymentDataEntityMapper()
 
-    override fun inquireMedicalRenewalPayment(mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
-        return api.getMedicalRenewPaymentData(mobileNumber, userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
+    override fun inquireMedicalRenewalPayment(isInquire: Boolean, mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
+        return if(isInquire) api.inquireHealthCare(userNumber).flatMap { renewalPaymentInfo ->
+            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
+        } else api.getMedicalRenewPaymentData(mobileNumber, userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
             Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
         }
     }
@@ -392,6 +394,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             phone: String,
             profession: Int,
             degree: Int,
+            gov: Int,
             area: Int,
             doctor: Int,
             providerType: Int,
@@ -432,7 +435,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
         }
 
-        return api.sendMedicalRequest(MedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, oldbenid, docsNumber), file1, file2, file3, file4, file5).map { result ->
+        return api.sendMedicalRequest(MedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, docsNumber), file1, file2, file3, file4, file5).map { result ->
             result.data ?: Unit
         }
     }
@@ -457,10 +460,11 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             providerTypeId: String,
             govId: String,
             areaId: String,
+            providerName: String?,
             professionID: String?,
             degreeID: String?
     ): Observable<List<ProviderEntity>> {
-        return api.getProvidersById(ProviderRequest(providerTypeId, govId, areaId, professionID, degreeID)).map { providers ->
+        return api.getProvidersById(ProviderRequest(providerTypeId, govId, areaId, providerName, professionID, degreeID)).map { providers ->
             providers.data?.map { providerDataEntityMapper.mapFrom(it) }
         }
     }

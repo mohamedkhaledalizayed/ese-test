@@ -55,8 +55,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getMedicalRenewalData(mobileNumber, userNumber)
     }
 
-    override fun inquireMedicalRenewalPayment(mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
-        return remoteDataStore.inquireMedicalRenewalPayment(mobileNumber, userNumber, locationType, address, mobile)
+    override fun inquireMedicalRenewalPayment(isInquire: Boolean, mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
+        return remoteDataStore.inquireMedicalRenewalPayment(isInquire, mobileNumber, userNumber, locationType, address, mobile)
     }
 
     override fun updateMedicalRenewalData(mobileNumber: String, medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
@@ -196,6 +196,7 @@ class NeqabtyRepositoryImpl @Inject constructor(
             phone: String,
             profession: Int,
             degree: Int,
+            gov: Int,
             area: Int,
             doctor: Int,
             providerType: Int,
@@ -209,7 +210,7 @@ class NeqabtyRepositoryImpl @Inject constructor(
             doc4: File?,
             doc5: File?
     ): Observable<Unit> {
-        return remoteDataStore.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
+        return remoteDataStore.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 
     override fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>> {
@@ -224,10 +225,11 @@ class NeqabtyRepositoryImpl @Inject constructor(
             providerTypeId: String,
             govId: String,
             areaId: String,
+            providerName: String?,
             professionID: String?,
             degreeID: String?
     ): Observable<List<ProviderEntity>> {
-        return remoteDataStore.getProvidersByType(providerTypeId, govId, areaId, professionID, degreeID)
+        return remoteDataStore.getProvidersByType(providerTypeId, govId, areaId, providerName, professionID, degreeID)
     }
 
     override fun getAllDoctors(): Observable<List<DoctorEntity>> {

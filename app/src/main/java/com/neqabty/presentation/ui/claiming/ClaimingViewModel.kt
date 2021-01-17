@@ -89,9 +89,9 @@ class ClaimingViewModel @Inject constructor(
 //        } ?: addDisposable(providersTypesDisposable)
     }
 
-    fun getProvidersByType(typeId: String, govId: String, areaId: String) {
+    fun getProvidersByType(typeId: String, govId: String, areaId: String, providerName: String?) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        val providersDisposable = getProvidersByType.getProvidersByType(typeId, govId, areaId)
+        val providersDisposable = getProvidersByType.getProvidersByType(typeId, govId, areaId, providerName)
                 .flatMap {
                     it.let {
                         providerEntityUIMapper.observable(it)
@@ -118,6 +118,7 @@ class ClaimingViewModel @Inject constructor(
         phone: String,
         profession: Int,
         degree: Int,
+        gov: Int,
         area: Int,
         doctor: Int,
         providerType: Int,
@@ -132,7 +133,7 @@ class ClaimingViewModel @Inject constructor(
         doc5: File?
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
+        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
                 .subscribe(
                         { viewState.value = viewState.value?.copy(isLoading = false) },
                         { errorState.value = handleError(it) }

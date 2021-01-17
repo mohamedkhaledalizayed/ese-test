@@ -11,7 +11,7 @@ data class MedicalRenewalPaymentUI(
 ): Parcelable {
     @Parcelize
     data class PaymentItem(
-            var paymentRequestNumber: String = "",
+            var paymentRequestNumber: String? = "",
             var amount: Int?,
             var name: String?,
             var engName: String?,

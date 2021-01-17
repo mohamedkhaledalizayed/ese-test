@@ -15,7 +15,7 @@ data class MedicalRenewalPaymentData(
 ) : Response() {
     data class PaymentItem(
             @field:SerializedName("PaymentRequestNumber")
-            var paymentRequestNumber: String = "",
+            var paymentRequestNumber: String? = "",
             @field:SerializedName("Value")
             var amount: Int?,
             @field:SerializedName("PaymentRequestName")

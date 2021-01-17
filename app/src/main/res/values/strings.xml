@@ -151,6 +151,7 @@
     <string name="doctorName">اسم الطبيب</string>
     <string name="serviceProviderType">نوع مقدم الخدمة</string>
     <string name="serviceProvider">مقدم الخدمة الطبية</string>
+    <string name="serviceProviderName">اسم مقدم الخدمة</string>
     <string name="serviceProviderDetails">بيانات مقدم الخدمة</string>
     <string name="attachPhotoDetails">بيانات الموافقات الطبية</string>
     <string name="addPhoto">اضافة المرفقات</string>

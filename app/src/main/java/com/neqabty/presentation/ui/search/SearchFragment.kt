@@ -20,6 +20,7 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.*
 import com.neqabty.presentation.util.autoCleared
+import kotlinx.android.synthetic.main.search_fragment.*
 
 import javax.inject.Inject
 
@@ -87,7 +88,7 @@ class SearchFragment : BaseFragment(), Injectable {
     private fun initializeViews() {
         binding.bNext.setOnClickListener {
             navController().navigate(
-                    SearchFragmentDirections.openProviders("", providerTypeID, governID, areaID, specializationID.toString(), if (degreeID == 0) "" else degreeID.toString())
+                    SearchFragmentDirections.openProviders("", providerTypeID, governID, areaID, edServiceProviderName.text.toString(), specializationID.toString(), if (degreeID == 0) "" else degreeID.toString())
             )
         }
     }

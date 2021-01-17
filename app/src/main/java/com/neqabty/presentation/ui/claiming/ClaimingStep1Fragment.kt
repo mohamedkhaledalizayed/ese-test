@@ -138,6 +138,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                 ClaimingData.governId = (spGovern.selectedItem as GovernUI).id
                 ClaimingData.cardId = edCardNumber.text.toString().toInt()
                 ClaimingData.oldbenid = edCardNumber.text.toString()
+                ClaimingData.searchProviderName = edServiceProviderName.text.toString()
                 pager.setCurrentItem(1, true)
             }
         }

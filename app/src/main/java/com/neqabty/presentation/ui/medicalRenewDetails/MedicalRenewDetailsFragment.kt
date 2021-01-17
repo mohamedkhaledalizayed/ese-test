@@ -246,7 +246,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
         //order price780
         intent.putExtra(CowpayConstantKeys.Amount, newAmount.toString())
         //user data
-        intent.putExtra(CowpayConstantKeys.Description, PreferencesHelper(requireContext()).name + " " + medicalRenewalPaymentUI.paymentItem?.name+ " " + medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber)
+        intent.putExtra(CowpayConstantKeys.Description,  medicalRenewalPaymentUI.paymentItem?.name)
         intent.putExtra(CowpayConstantKeys.CustomerName, medicalRenewalUI.oldRefId)
         intent.putExtra(CowpayConstantKeys.CustomerMobile, PreferencesHelper(requireContext()).mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")

@@ -69,7 +69,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("Not yet implemented")
     }
 
-    override fun inquireMedicalRenewalPayment(mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
+    override fun inquireMedicalRenewalPayment(isInquire: Boolean, mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
         TODO("Not yet implemented")
     }
 
@@ -149,6 +149,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
             providerTypeId: String,
             govId: String,
             areaId: String,
+            providerName: String?,
             professionID: String?,
             degreeID: String?
     ): Observable<List<ProviderEntity>> {
@@ -175,6 +176,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
             phone: String,
             profession: Int,
             degree: Int,
+            gov: Int,
             area: Int,
             doctor: Int,
             providerType: Int,
