@@ -292,6 +292,8 @@
     </string>
 
     <string name="pay">دفع</string>
+    <string name="basic_info_title">البيانات الاساسية</string>
+    <string name="delivery_info_title">بيانات التوصيل والاستلام</string>
     <string name="delivery_method">طريقة التوصيل</string>
     <string name="delivery_method_hint">التوصيل مقتصر علي المنازل لتلافي التجمعات وفقا لاجراءات التباعد الإجتماعي</string>
     <string name="delivery_mobile_title">رقم الموبايل</string>
@@ -307,7 +309,7 @@
     <![CDATA[<font color="#1d1ad2">النقابة الفرعية التابع لها المهندس: </font>]]>%s
     </string>
     <string name="followers">التابعين:</string>
-    <string name="add_follower">اضافة تابع</string>
+    <string name="add_follower">اضافة تابع جديد</string>
     <string name="save_follower">حفظ بيانات التابع</string>
     <string name="edit_follower_photo">تعديل الصورة الشخصية</string>
     <string name="add_follower_photo">إضافة الصورة الشخصية</string>

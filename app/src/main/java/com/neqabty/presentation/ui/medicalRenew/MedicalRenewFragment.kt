@@ -107,6 +107,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         rb_home.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 edAddress.visibility = View.VISIBLE
+                edMobile.visibility = View.VISIBLE
                 tvSyndicate.visibility = View.GONE
             }
         }
@@ -145,6 +146,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             0 -> {
                 bEdit.visibility = View.GONE
                 bContinue.visibility = View.GONE
+                llDelivery.visibility = View.GONE
                 tvRequestStatus.setTextColor(resources.getColor(R.color.blue))
                 tvRequestStatus.text = getString(R.string.medical_update_request_status_processing)
             }
@@ -183,10 +185,12 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 showGoToRenewalPaymentAlert(getString(R.string.medical_subscription_renew_syndicate_membership))
                 bEdit.visibility = View.GONE
                 bContinue.visibility = View.GONE
+                llDelivery.visibility = View.GONE
             }
         }
 //        if (medicalRenewalUI.contact?.isDead == true && medicalRenewalUI.followers?.size == 0) {
 //            bContinue.visibility = View.GONE
+//            llDelivery.visibility = View.GONE
 //        }
         when (medicalRenewalUI.healthCareStatus) {
             -1 -> {
@@ -200,8 +204,12 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 tvSubscribtionStatus.setText(getString(R.string.medical_subscription_subscribed))
                 tvSubscribtionStatus.visibility = View.VISIBLE
                 bContinue.visibility = if (medicalRenewalPaymentUI.paymentItem?.amount == null || medicalRenewalPaymentUI.paymentItem?.amount == 0) View.GONE else View.VISIBLE
+                llDelivery.visibility = if (medicalRenewalPaymentUI.paymentItem?.amount == null || medicalRenewalPaymentUI.paymentItem?.amount == 0) View.GONE else View.VISIBLE
             }
-            4 -> bContinue.visibility = View.GONE
+            4 -> {
+                bContinue.visibility = View.GONE
+                llDelivery.visibility = View.GONE
+            }
 //            5 -> {
 //                bEdit.visibility = View.GONE
 //            }
@@ -210,6 +218,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 tvSubscribtionStatus.visibility = View.VISIBLE
                 tvRequestStatus.visibility = View.GONE
                 bContinue.visibility = View.GONE
+                llDelivery.visibility = View.GONE
                 bEdit.visibility = View.GONE
             }
         }

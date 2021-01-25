@@ -7,6 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class MedicalRenewalPaymentUI(
         var resultType: String = "",
         var requestID: String = "",
+        var msg: String = "",
         var paymentItem: PaymentItem? = null
 ): Parcelable {
     @Parcelize

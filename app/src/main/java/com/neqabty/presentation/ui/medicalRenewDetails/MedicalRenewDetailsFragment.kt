@@ -187,8 +187,13 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
             } else {
                 state.medicalRenewalPayment?.let {
                     medicalRenewalPaymentUI = it
-                    if((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-2")
-                        showAlert(getString(R.string.already_paid)){
+                    if ((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-2")
+                        showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg) {
+                            navController().popBackStack()
+                            navController().navigate(R.id.homeFragment)
+                        }
+                    else if ((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-1")
+                        showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg) {
                             navController().popBackStack()
                             navController().navigate(R.id.homeFragment)
                         }
@@ -246,7 +251,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
         //order price780
         intent.putExtra(CowpayConstantKeys.Amount, newAmount.toString())
         //user data
-        intent.putExtra(CowpayConstantKeys.Description,  medicalRenewalPaymentUI.paymentItem?.name)
+        intent.putExtra(CowpayConstantKeys.Description, medicalRenewalPaymentUI.paymentItem?.name)
         intent.putExtra(CowpayConstantKeys.CustomerName, medicalRenewalUI.oldRefId)
         intent.putExtra(CowpayConstantKeys.CustomerMobile, PreferencesHelper(requireContext()).mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
