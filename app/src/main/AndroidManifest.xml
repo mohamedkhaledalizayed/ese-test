@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.neqabty">
@@ -13,17 +14,20 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+
     <application
-        android:name="com.neqabty.MyApp"
+        android:name=".MyApp"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/my_app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label"
         android:theme="@style/AppTheme.NoActionBar"
-        android:requestLegacyExternalStorage="true">
+        android:usesCleartextTraffic="true"
+        tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label">
+        <activity android:name=".presentation.ui.PdfCreatorScreen"></activity>
+        <activity android:name=".presentation.ui.PdfViewerScreen" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -39,28 +43,28 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_path"></meta-data>
+                android:resource="@xml/file_path" />
         </provider>
 
-        <service android:name="com.neqabty.presentation.util.MyFirebaseMessagingService">
+        <service android:name=".presentation.util.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-
         <activity
-            android:name="com.neqabty.MainActivity"
+            android:name=".MainActivity"
             android:configChanges="locale"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait"><!--TODO  android:screenOrientation="portrait"-->
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"> <!-- TODO  android:screenOrientation="portrait" -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -70,14 +74,11 @@
                     android:scheme="app" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.mastercard.gateway.android.sdk.Gateway3DSecureActivity"
             android:label="@string/gateway_3d_secure_authentication"
             android:screenOrientation="portrait" />
-        <activity android:name="com.neqabty.testing.SingleFragmentActivity"></activity>
-
-
+        <activity android:name=".testing.SingleFragmentActivity" />
     </application>
 
 </manifest>
