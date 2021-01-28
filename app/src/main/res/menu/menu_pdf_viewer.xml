@@ -4,12 +4,12 @@
     <item
         android:id="@+id/menuPrintPdf"
         android:icon="@drawable/ic_share"
-        android:title="Print"
+        android:title="طباعة"
         />
 
     <item
         android:id="@+id/menuSharePdf"
         android:icon="@drawable/ic_share"
-        android:title="Share"
+        android:title="طباعة"
         app:showAsAction="always" />
 </menu>

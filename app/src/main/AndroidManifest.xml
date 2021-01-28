@@ -26,7 +26,10 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label">
-        <activity android:name=".presentation.ui.PdfCreatorScreen" android:theme="@style/AppTheme.Pdf"></activity>
+        <activity
+            android:name=".presentation.ui.common.PdfCreatorScreen"
+            android:label="@string/upload_pdf"
+            android:theme="@style/AppTheme"></activity>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -73,15 +76,6 @@
                     android:scheme="app" />
             </intent-filter>
         </activity>
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.neqabty.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_provider_paths" />
-        </provider>
         <activity
             android:name="com.mastercard.gateway.android.sdk.Gateway3DSecureActivity"
             android:label="@string/gateway_3d_secure_authentication"
