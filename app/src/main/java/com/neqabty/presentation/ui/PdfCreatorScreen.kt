@@ -1,19 +1,26 @@
 package com.neqabty.presentation.ui
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
+import android.print.PrintAttributes
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.Gravity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
+import androidx.core.content.FileProvider
 import com.neqabty.R
+import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.tejpratapsingh.pdfcreator.activity.PDFCreatorActivity
+import com.tejpratapsingh.pdfcreator.activity.PDFViewerActivity
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil
 import com.tejpratapsingh.pdfcreator.views.PDFBody
 import com.tejpratapsingh.pdfcreator.views.PDFHeaderView
@@ -23,20 +30,24 @@ import com.tejpratapsingh.pdfcreator.views.basic.PDFImageView
 import com.tejpratapsingh.pdfcreator.views.basic.PDFLineSeparatorView
 import com.tejpratapsingh.pdfcreator.views.basic.PDFTextView
 import java.io.File
+import java.net.URLConnection
 import java.util.*
 import kotlin.collections.ArrayList
 
 class PdfCreatorScreen : PDFCreatorActivity()  {
 
+    private lateinit var data: MedicalRenewalUI
+    private lateinit var pdfFile: File
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (supportActionBar != null) {
-            supportActionBar!!.hide()
-        }
+        data = intent.getParcelableExtra("data")
+        Log.e("TEST", "${data.contact?.name}")
+        findViewById<Button>(R.id.buttonSendEmail).visibility = View.GONE
 
         createPDF("neqabty", object : PDFUtil.PDFUtilListener {
             override fun pdfGenerationSuccess(savedPDFFile: File) {
+                pdfFile = savedPDFFile
                 Toast.makeText(this@PdfCreatorScreen, "PDF Created", Toast.LENGTH_SHORT).show()
             }
 
@@ -90,7 +101,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         titleContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, titleContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         title.text = titleContent
         title.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 0, 20, 10);
+        ).setPadding(20, 0, 20, 5);
         title.view.gravity = Gravity.CENTER_VERTICAL
         title.view.setTypeface(title.view.typeface, Typeface.SANS_SERIF.style)
         horizontalTitle.addView(title)
@@ -112,7 +123,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         //Engineer Name
         val horizontalEngineerName = PDFHorizontalView(applicationContext)
         val name = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H1)
-        val nameContent = SpannableString("اسم المهندس: محمد احمد على")
+        val nameContent = SpannableString("اسم المهندس: ${data.contact?.name}")
         nameContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, nameContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         name.text = nameContent
         name.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
@@ -125,11 +136,11 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         //Engineer Number
         val horizontalEngineerNumber = PDFHorizontalView(applicationContext)
         val number = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H1)
-        val numberContent = SpannableString("رقم العضوية: 2549654")
+        val numberContent = SpannableString("رقم العضوية: ${data.oldRefId}")
         numberContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, numberContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         number.text = numberContent
         number.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 10, 20, 5);
+        ).setPadding(20, 8, 20, 5);
         number.view.gravity = Gravity.CENTER_VERTICAL
         number.view.setTypeface(number.view.typeface, Typeface.SANS_SERIF.style)
         horizontalEngineerNumber.addView(number)
@@ -142,43 +153,49 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         subscriptionContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, subscriptionContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         subscription.text = subscriptionContent
         subscription.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 10, 20, 5);
+        ).setPadding(20, 8, 20, 5);
         subscription.view.gravity = Gravity.CENTER_VERTICAL
         subscription.view.setTypeface(subscription.view.typeface, Typeface.SANS_SERIF.style)
         horizontalSubscription.addView(subscription)
         pdfBody.addView(horizontalSubscription)
 
-        val arr = ArrayList<Item>()
-        arr.add(Item("محمد خالد على زايد", "ابن / ابنه"))
-        arr.add(Item("محمد خالد على زايد", "ابن / ابنه"))
-        arr.add(Item("محمد خالد على زايد", "ابن / ابنه"))
-        arr.add(Item("محمد خالد على زايد", "ابن / ابنه"))
+        //Followers
+        val horizontalFollowers = PDFHorizontalView(applicationContext)
+        val followers = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H1)
+        val followersContent = SpannableString("التابعين:")
+        followersContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, followersContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        followers.text = followersContent
+        followers.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
+        ).setPadding(20, 8, 20, 10);
+        followers.view.gravity = Gravity.CENTER_VERTICAL
+        followers.view.setTypeface(followers.view.typeface, Typeface.SANS_SERIF.style)
+        horizontalFollowers.addView(followers)
+        pdfBody.addView(horizontalFollowers)
 
-        val tableHeaderTitles = arrayOf("الاسم", "الصلة")
+
+        val tableHeaderTitles = arrayOf("الاسم", "درجة القرابة")
 
         val lineSeparatorView2 =
                 PDFLineSeparatorView(applicationContext).setBackgroundColor(Color.WHITE)
         pdfBody.addView(lineSeparatorView2)
-        val pdfTableTitleView = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H1)
-        pdfTableTitleView.setText("التابعين:")
-        pdfBody.addView(pdfTableTitleView)
 
         val tableHeader = PDFTableView.PDFTableRowView(applicationContext)
         for (s in tableHeaderTitles) {
-            val pdfTextView = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.P)
+            val pdfTextView = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H1)
             pdfTextView.setText(s)
             tableHeader.addToRow(pdfTextView)
         }
 
         val tableRowView1 = PDFTableView.PDFTableRowView(applicationContext)
         val tableView = PDFTableView(applicationContext, tableHeader, tableRowView1)
-        for (item: Item in arr) {
+
+        for (item: MedicalRenewalUI.FollowerItem in data.followers!!) {
             val tableRowView = PDFTableView.PDFTableRowView(applicationContext)
-            val Id = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.SMALL)
-            Id.setText(item.relation)
+            val Id = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H2)
+            Id.setText(item.name)
             tableRowView.addToRow(Id)
-            val Name = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.P)
-            Name.setText(item.name)
+            val Name = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H2)
+            Name.setText(item.relationTypeName)
             tableRowView.addToRow(Name)
             tableView.addRow(tableRowView)
         }
@@ -202,5 +219,47 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
 //        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri)
 //
 //        startActivity(intentPdfViewer)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_pdf_viewer, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+            R.id.menuPrintPdf -> {
+                val fileToPrint: File? = pdfFile
+                if (fileToPrint == null || !fileToPrint.exists()) {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                }else{
+                    val printAttributeBuilder = PrintAttributes.Builder()
+                    printAttributeBuilder.setMediaSize(PrintAttributes.MediaSize.ISO_A4)
+                    printAttributeBuilder.setMinMargins(PrintAttributes.Margins.NO_MARGINS)
+                    PDFUtil.printPdf(this@PdfCreatorScreen, fileToPrint, printAttributeBuilder.build())
+                }
+            }
+            R.id.menuSharePdf -> {
+                val fileToShare: File? = pdfFile
+                if (fileToShare == null || !fileToShare.exists()) {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                }else{
+                    val intentShareFile = Intent(Intent.ACTION_SEND)
+                    val apkURI: Uri = FileProvider.getUriForFile(
+                            applicationContext,
+                            applicationContext
+                                    .packageName + ".provider", fileToShare)
+                    intentShareFile.setDataAndType(apkURI, URLConnection.guessContentTypeFromName(fileToShare.name))
+                    intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    intentShareFile.putExtra(Intent.EXTRA_STREAM,
+                            Uri.parse("file://" + fileToShare.absolutePath))
+                    startActivity(Intent.createChooser(intentShareFile, "Share File"))
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

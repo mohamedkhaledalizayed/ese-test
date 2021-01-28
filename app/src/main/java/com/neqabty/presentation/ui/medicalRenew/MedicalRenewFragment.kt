@@ -144,9 +144,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
 
         bUpload.setOnClickListener {
             var pdfIntent = Intent(context, PdfCreatorScreen::class.java)
-            pdfIntent.putExtra("name", medicalRenewalUI.contact?.name)
-            pdfIntent.putExtra("number", medicalRenewalUI.oldRefId)
-            pdfIntent.putExtra("followers", medicalRenewalUI.followers?.toTypedArray())
+            pdfIntent.putExtra("data", medicalRenewalUI)
             this.startActivity(pdfIntent)
         }
 //        edMobile.setText("01119850766")
