@@ -26,6 +26,7 @@ class SendMedicalRequest @Inject constructor(
         private const val PARAM_PROVIDER = "param:provider"
         private const val PARAM_NAME = "param:name"
         private const val PARAM_OLDID = "param:oldbenid"
+        private const val PARAM_DETAILS = "param:details"
         private const val PARAM_DOCS_COUNT = "param:docsNumber"
         private const val PARAM_DOC1 = "param:doc1"
         private const val PARAM_DOC2 = "param:doc2"
@@ -49,6 +50,7 @@ class SendMedicalRequest @Inject constructor(
         provider: Int,
         name: String,
         oldbenid: String,
+        details: String,
         docsNumber: Int,
         doc1: File?,
         doc2: File?,
@@ -71,6 +73,7 @@ class SendMedicalRequest @Inject constructor(
         data[PARAM_PROVIDER] = provider
         data[PARAM_NAME] = name
         data[PARAM_OLDID] = oldbenid
+        data[PARAM_DETAILS] = details
         data[PARAM_DOCS_COUNT] = docsNumber
         doc1?.let { data[PARAM_DOC1] = it }
         doc2?.let { data[PARAM_DOC2] = it }
@@ -96,11 +99,12 @@ class SendMedicalRequest @Inject constructor(
         val provider = data?.get(PARAM_PROVIDER) as Int
         val name = data?.get(PARAM_NAME) as String
         val oldbenid = data?.get(PARAM_OLDID) as String
+        val details = data?.get(PARAM_DETAILS) as String
         val doc1 = data?.get(PARAM_DOC1) as File?
         val doc2 = data?.get(PARAM_DOC2) as File?
         val doc3 = data?.get(PARAM_DOC3) as File?
         val doc4 = data?.get(PARAM_DOC4) as File?
         val doc5 = data?.get(PARAM_DOC5) as File?
-        return neqabtyRepository.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
+        return neqabtyRepository.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, details, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 }

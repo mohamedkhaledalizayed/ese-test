@@ -125,6 +125,7 @@ class ClaimingViewModel @Inject constructor(
         provider: Int,
         name: String,
         oldbenid: String,
+        details: String,
         docsNumber: Int,
         doc1: File?,
         doc2: File?,
@@ -133,7 +134,7 @@ class ClaimingViewModel @Inject constructor(
         doc5: File?
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, docsNumber, doc1, doc2, doc3, doc4, doc5)
+        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, details, docsNumber, doc1, doc2, doc3, doc4, doc5)
                 .subscribe(
                         { viewState.value = viewState.value?.copy(isLoading = false) },
                         { errorState.value = handleError(it) }

@@ -404,6 +404,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             provider: Int,
             name: String,
             oldbenid: String,
+            details: String,
             docsNumber: Int,
             doc1: File?,
             doc2: File?,
@@ -438,7 +439,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
         }
 
-        return api.sendMedicalRequest(MedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, docsNumber), file1, file2, file3, file4, file5).map { result ->
+        return api.sendMedicalRequest(MedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, details, docsNumber), file1, file2, file3, file4, file5).map { result ->
             result.data ?: Unit
         }
     }

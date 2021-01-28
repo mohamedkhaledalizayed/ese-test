@@ -167,7 +167,15 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
         builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
             if (medicalRenewalUI.followers?.size == 0) {
                 showAlert(getString(R.string.medical_subscription_renew_add_follower))
-            } else {
+            }else if(medicalRenewalUI.followers?.filter { it.isDeleted == false && it.relationType == "2" && it.gender == "F"}?.size!! > 4)
+                showAlert(getString(R.string.exceed_wives))
+            else if(medicalRenewalUI.followers?.filter { it.isDeleted == false && it.relationType == "2" && it.gender == "M"}?.size!! > 1)
+                showAlert(getString(R.string.exceed_husband))
+            else if(medicalRenewalUI.followers?.filter { it.isDeleted == false && it.relationType == "4" && it.gender == "F"}?.size!! > 1)
+                showAlert(getString(R.string.exceed_mother))
+            else if(medicalRenewalUI.followers?.filter { it.isDeleted == false && it.relationType == "4" && it.gender == "M"}?.size!! > 1)
+                showAlert(getString(R.string.exceed_father))
+            else {
                 updateRequested = true
                 medicalRenewUpdateViewModel.updateMedicalRenewalData(PreferencesHelper(requireContext()).mobile, medicalRenewalUI)
             }

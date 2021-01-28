@@ -153,6 +153,7 @@
     <string name="serviceProvider">مقدم الخدمة الطبية</string>
     <string name="serviceProviderName">اسم مقدم الخدمة</string>
     <string name="serviceProviderDetails">بيانات مقدم الخدمة</string>
+    <string name="request_reason">تفاصيل الطلب</string>
     <string name="attachPhotoDetails">بيانات الموافقات الطبية</string>
     <string name="addPhoto">اضافة المرفقات</string>
     <string name="send">إرسال</string>
@@ -313,6 +314,10 @@
     <string name="save_follower">حفظ بيانات التابع</string>
     <string name="edit_follower_photo">تعديل الصورة الشخصية</string>
     <string name="add_follower_photo">إضافة الصورة الشخصية</string>
+    <string name="exceed_father">لا يمكنك إضافة اكثر من والد</string>
+    <string name="exceed_mother">لا يمكنك إضافة اكثر من والدة</string>
+    <string name="exceed_wives">لا يمكنك إضافة اكثر من أربعة زوجات</string>
+    <string name="exceed_husband">لا يمكنك إضافة اكثر من زوج</string>
     <string name="remove_follower">حذف</string>
     <string name="remove_follower_confirmation">هل تريد إتمام عملية الحذف؟!</string>
     <string name="send_request_confirmation">هل انت متأكد انك تريد ارسال الطلب إلى المراجعة؟!</string>

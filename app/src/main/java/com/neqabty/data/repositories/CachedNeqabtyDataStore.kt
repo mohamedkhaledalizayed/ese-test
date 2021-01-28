@@ -183,6 +183,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
             provider: Int,
             name: String,
             oldbenid: String,
+            details: String,
             docsNumber: Int,
             doc1: File?,
             doc2: File?,

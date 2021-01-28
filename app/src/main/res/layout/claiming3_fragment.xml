@@ -88,6 +88,26 @@
                     android:inputType="number"
                     android:textSize="@dimen/text_size_medium" />
 
+                <TextView
+                    android:id="@+id/tvDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="@string/request_reason"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold" />
+
+
+                <EditText
+                    android:id="@+id/edDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:inputType="textLongMessage"
+                    android:maxLength="500"
+                    android:gravity="start|top"
+                    android:textSize="@dimen/text_size_medium" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPhotos"
                     android:layout_width="match_parent"

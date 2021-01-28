@@ -32,6 +32,8 @@ data class MedicalRequest(
     var name: String = "",
     @SerializedName("oldbenid")
     var oldbenid: String = "",
+    @SerializedName("request_details")
+    var details: String = "",
     @SerializedName("docs_num")
     var docsNumber: Int = 0
 ) : Request()
