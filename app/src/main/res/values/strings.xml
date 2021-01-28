@@ -488,4 +488,7 @@
 
     <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
     <string name="app_version">Version 1.0</string>
+    <string name="body_content">السادة / جهات العلاج المتعاقدة مع مشروع العلاج لنقابة المهندسين يرجى العلم بتجديد اشتراك 2021 للمهندس المدون بياناته و تابعيه لذا يرجى تقديم الخدمة الطبية لحين اصدار الكارنيه و يعد هذا الايصال بمثابة كارنيه المشروع لحين اصداره و سارى لمدة شهر من اصداره</string>
+    <string name="titleContent">اشتراك الرعاية الصحية</string>
+    <string name="upload_pdf">تحميل اخطار الدفع</string>
 </resources>

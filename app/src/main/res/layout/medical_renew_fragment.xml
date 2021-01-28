@@ -275,6 +275,22 @@
                     android:text="@string/medical_renew_update_title"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_medium" />
+
+                <Button
+                    android:id="@+id/bUpload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_vertical_large"
+                    android:layout_marginEnd="@dimen/margin_vertical_large"
+                    android:layout_marginBottom="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_blue"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/upload_pdf"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_medium" />
+
             </LinearLayout>
 
         </ScrollView>

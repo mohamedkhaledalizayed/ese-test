@@ -90,7 +90,7 @@ android {
     productFlavors {
         dev {
             dimension "mode"
-            minSdkVersion 19
+            minSdkVersion 21
             resConfigs "en", "xhdpi"
         }
 
@@ -131,6 +131,7 @@ jacoco {
 }
 
 dependencies {
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation deps.support.app_compat
     implementation deps.support.recyclerview
     implementation deps.support.cardview
@@ -178,7 +179,7 @@ dependencies {
     implementation files('libs/cowpaysdk.aar')
     implementation project(':wheel')
     implementation project(':mobilepaymentsdktest')
-
+    implementation 'com.github.tejpratap46:PDFCreatorAndroid:1.3'
     testImplementation deps.junit
     testImplementation deps.mock_web_server
     testImplementation(deps.arch_core.testing, {

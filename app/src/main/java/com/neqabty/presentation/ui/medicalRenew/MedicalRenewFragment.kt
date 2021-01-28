@@ -1,5 +1,6 @@
 package com.neqabty.presentation.ui.medicalRenew
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
+import com.neqabty.presentation.ui.PdfCreatorScreen
 import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -138,6 +140,10 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             else
                 navController().navigate(MedicalRenewFragmentDirections.openMedicalRenewDetailsFragment(if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE, edAddress.text.toString(), edMobile.text.toString(), medicalRenewalUI))
         }
+
+        bUpload.setOnClickListener {
+            this.startActivity(Intent(context, PdfCreatorScreen::class.java))
+        }
 //        edMobile.setText("01119850766")
 //        medicalRenewalUI.requestStatus = -1 // TODO TODOTODO TODOTODO TODOTODO TODOTODO TODOTODO TODO
         when (medicalRenewalUI.requestStatus) {
@@ -197,8 +203,9 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                 showNewMemberAlert()
             }
             3 -> {
-                tvSubscribtionStatus.setText(getString(R.string.medical_subscription_subscribed))
+                tvSubscribtionStatus.text = getString(R.string.medical_subscription_subscribed)
                 tvSubscribtionStatus.visibility = View.VISIBLE
+                bUpload.visibility = View.VISIBLE
                 bContinue.visibility = if (medicalRenewalPaymentUI.paymentItem?.amount == null || medicalRenewalPaymentUI.paymentItem?.amount == 0) View.GONE else View.VISIBLE
             }
             4 -> bContinue.visibility = View.GONE
