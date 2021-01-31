@@ -104,10 +104,14 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         val params = MedicalRenewAddFollowerDetailsFragmentArgs.fromBundle(arguments!!)
         relationsList = params.medicalRenewalUI.relations?.toMutableList()
         followerItem = params.followerItem
-        binding.followerItem = followerItem
-
+        binding.edName.setText(followerItem.name)
+        if(followerItem.isNew!!) {
+            binding.followerItem = followerItem
+        }
         edMobileNumber.setText(followerItem.mobile ?: params.medicalRenewalUI.contact!!.mobile)
-        setBirthDate()
+        if(followerItem.isNew!!) {
+            setBirthDate()
+        }
         renderRelations()
         renderGenders()
         updateEditPhotoTitle()
@@ -144,8 +148,10 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         this.photosAdapter = adapter
         binding.rvPhotos.adapter = adapter
 
-        setAvatar()
-        renderAttachments()
+        if(followerItem.isNew!!) {
+            setAvatar()
+            renderAttachments()
+        }
         bSave.setOnClickListener { navigateBackWithResult() }
     }
 
