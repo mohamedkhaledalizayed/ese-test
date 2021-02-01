@@ -140,7 +140,7 @@
     <string name="governorate">المحافظة</string>
     <string name="area">المنطقة</string>
     <string name="choose_area">برجاء اختيار مكان مقدم الخدمة</string>
-    <string name="subscription_rules">الدليل الطبيى للمشروع</string>
+    <string name="subscription_rules">الدليل الطبي للمشروع</string>
     <string name="service">الخدمات</string>
     <string name="degree">الدرجة العلمية</string>
     <string name="speciality">التخصص</string>
@@ -151,6 +151,7 @@
     <string name="doctorName">اسم الطبيب</string>
     <string name="serviceProviderType">نوع مقدم الخدمة</string>
     <string name="serviceProvider">مقدم الخدمة الطبية</string>
+    <string name="searchProviderName">البحث باسم مقدم الخدمة</string>
     <string name="serviceProviderName">اسم مقدم الخدمة</string>
     <string name="serviceProviderDetails">بيانات مقدم الخدمة</string>
     <string name="request_reason">تفاصيل الطلب</string>

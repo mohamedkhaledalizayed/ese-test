@@ -50,7 +50,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_small"
                     android:gravity="center"
-                    android:text="@{followerItem.name}"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium" />
 
@@ -72,7 +71,6 @@
                     android:gravity="start"
                     android:inputType="number"
                     android:maxLength="14"
-                    android:text="@{followerItem.nationalId}"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium" />
 
@@ -115,7 +113,6 @@
                     android:editable="false"
                     android:focusable="false"
                     android:gravity="center"
-                    android:text="@{followerItem.birthDate}"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium" />
 
@@ -137,7 +134,6 @@
                     android:gravity="start"
                     android:inputType="number"
                     android:maxLength="11"
-                    android:text="@{followerItem.mobile}"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium" />
 

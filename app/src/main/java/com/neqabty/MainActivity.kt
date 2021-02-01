@@ -174,15 +174,15 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 //                    }
 //                }
                 R.id.complaints_fragment -> {
-                    Toast.makeText(this, getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
 
-//                    if (PreferencesHelper(this).isRegistered)
-//                        navController.navigate(R.id.complaintsFragment)
-//                    else {
-//                        val bundle: Bundle = Bundle()
-//                        bundle.putInt("type", Constants.COMPLAINTS)
-//                        navController.navigate(R.id.mobileFragment, bundle)
-//                    }
+                    if (PreferencesHelper(this).isRegistered)
+                        navController.navigate(R.id.complaintsFragment)
+                    else {
+                        val bundle: Bundle = Bundle()
+                        bundle.putInt("type", Constants.COMPLAINTS)
+                        navController.navigate(R.id.mobileFragment, bundle)
+                    }
                 }
                 R.id.about_fragment -> {
                     navController.navigate(R.id.aboutFragment)

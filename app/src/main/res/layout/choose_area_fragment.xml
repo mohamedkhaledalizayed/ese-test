@@ -37,19 +37,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_horizontal_small"
-                android:text="@string/choose_area"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_medium" />
-
-            <TextView
                 android:id="@+id/tvServiceProviderName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_horizontal_small"
-                android:text="@string/serviceProviderName"
+                android:text="@string/searchProviderName"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_medium" />
 
@@ -61,6 +53,14 @@
                 android:inputType="text"
                 android:maxLength="30"
                 android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_medium" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_horizontal_small"
+                android:text="@string/choose_area"
+                android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/text_size_medium" />
 
             <TextView

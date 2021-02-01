@@ -71,15 +71,15 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
             }
         }
         bComplaints.setOnClickListener {
-            Toast.makeText(requireContext(), getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
+//            Toast.makeText(requireContext(), getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
 
-//            if (PreferencesHelper(requireContext()).isRegistered)
-//                navController().navigate(R.id.complaintsFragment)
-//            else {
-//                val bundle: Bundle = Bundle()
-//                bundle.putInt("type", Constants.COMPLAINTS)
-//                navController().navigate(R.id.mobileFragment, bundle)
-//            }
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(R.id.complaintsFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.COMPLAINTS)
+                navController().navigate(R.id.mobileFragment, bundle)
+            }
         }
 
     }

@@ -104,17 +104,23 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         val params = MedicalRenewAddFollowerDetailsFragmentArgs.fromBundle(arguments!!)
         relationsList = params.medicalRenewalUI.relations?.toMutableList()
         followerItem = params.followerItem
-        binding.edName.setText(followerItem.name)
-        if(followerItem.isNew!!) {
-            binding.followerItem = followerItem
-        }
-        edMobileNumber.setText(followerItem.mobile ?: params.medicalRenewalUI.contact!!.mobile)
-        if(followerItem.isNew!!) {
-            setBirthDate()
-        }
+        binding.followerItem = followerItem
+
+        setBirthDate()
         renderRelations()
         renderGenders()
         updateEditPhotoTitle()
+        if(followerItem.isEdited!! == false){
+            edName.setText(followerItem.name)
+            edMobileNumber.text = null
+            edNationalID.text = null
+            edBirthDate.text = null
+        }else{
+            edName.setText(followerItem.name)
+            edMobileNumber.setText(followerItem.mobile ?: params.medicalRenewalUI.contact!!.mobile)
+            edNationalID.setText(followerItem.nationalId)
+            edBirthDate.setText(followerItem.birthDate)
+        }
         edNationalID.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (p0.toString().length == 14)
@@ -148,7 +154,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         this.photosAdapter = adapter
         binding.rvPhotos.adapter = adapter
 
-        if(followerItem.isNew!!) {
+        if(followerItem.isEdited == true) {
             setAvatar()
             renderAttachments()
         }
