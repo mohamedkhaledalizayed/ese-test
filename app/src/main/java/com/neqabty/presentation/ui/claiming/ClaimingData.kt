@@ -1,5 +1,7 @@
 package com.neqabty.presentation.ui.claiming
 
+import com.neqabty.presentation.entities.MedicalRenewalUI
+
 class ClaimingData {
     companion object {
         var searchProviderName: String = ""
@@ -10,5 +12,6 @@ class ClaimingData {
         var governId: Int = 0
         var cardId: Int = 0
         var oldbenid: String = ""
+        var selectedFollower: MedicalRenewalUI.FollowerItem? = null
     }
 }

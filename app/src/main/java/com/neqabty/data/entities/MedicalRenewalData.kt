@@ -40,7 +40,9 @@ data class MedicalRenewalData(
             @field:SerializedName("BIRTHDATE")
             var birthDate: String? = "",
             @field:SerializedName("PicBase64")
-            var pic: String? = ""
+            var pic: String? = "",
+            @field:SerializedName("BenID")
+            var benID: String? = ""
     )
 
     data class FollowerItem(

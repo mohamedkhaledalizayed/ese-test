@@ -22,6 +22,7 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.GovernUI
+import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 
@@ -38,10 +39,12 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 
     lateinit var claimingViewModel: ClaimingViewModel
 
+    var medicalRenewalUI: MedicalRenewalUI? = MedicalRenewalUI()
     var governsResultList: List<GovernUI>? = mutableListOf()
     var areasResultList: List<AreaUI>? = mutableListOf()
     var governID: Int = 0
     var areaID: Int = 0
+    lateinit var selectedFollower: MedicalRenewalUI.FollowerItem
     private var isValid = false
     private var memberName = ""
 
@@ -102,7 +105,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                     llSuperProgressbar.visibility = View.VISIBLE
                     memberName = state.member!!.engineerName
                     isValid = true
-                    claimingViewModel.getAllContent1()
+                    claimingViewModel.getAllContent1(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
                     state.member = null
                 }
                 else -> {
@@ -112,16 +115,22 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             }
         }
 
-        if (state.governs != null && state.areas != null && isValid) {
+        if (state.medicalRenewalUI != null && state.governs != null && state.areas != null && isValid) {
             binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
+            state.medicalRenewalUI?.let {
+                medicalRenewalUI = it
+                medicalRenewalUI?.followers?.add(0, MedicalRenewalUI.FollowerItem(PreferencesHelper(requireContext()).name, id = medicalRenewalUI?.contact?.benID?.toInt()))
+            }
             state.governs?.let {
                 governsResultList = it
             }
             state.areas?.let {
                 areasResultList = it
             }
-            if (state.governs != null && state.areas != null)
+            if (state.medicalRenewalUI != null && state.governs != null && state.areas != null){
+                state.medicalRenewalUI = null
                 initializeViews()
+            }
         }
     }
 
@@ -139,6 +148,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                 ClaimingData.cardId = edCardNumber.text.toString().toInt()
                 ClaimingData.oldbenid = edCardNumber.text.toString()
                 ClaimingData.searchProviderName = edServiceProviderName.text.toString()
+                ClaimingData.selectedFollower = selectedFollower
                 pager.setCurrentItem(1, true)
             }
         }
@@ -147,6 +157,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 
     fun initializeSpinners() {
         renderGoverns()
+        renderFollowers()
     }
 
     //region
@@ -176,6 +187,18 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                 areaID = (parent.getItemAtPosition(position) as AreaUI).id
             }
         }
+    }
+
+    fun renderFollowers() {
+        binding.spFollower.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, medicalRenewalUI?.followers!!)
+        binding.spFollower.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                selectedFollower = parent.getItemAtPosition(position) as MedicalRenewalUI.FollowerItem
+                edCardNumber.setText(selectedFollower.id.toString())
+            }
+        }
+        binding.spFollower.setSelection(0)
     }
 
     private fun isDataValid(memberNumber: String, cardNumber: String, area: Any?, govern: Any?): Boolean {

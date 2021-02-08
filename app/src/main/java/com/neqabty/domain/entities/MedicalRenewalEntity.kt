@@ -19,7 +19,8 @@ data class MedicalRenewalEntity(
             var mobile: String? = "",
             var nationalId: String? = "",
             var birthDate: String? = "",
-            var pic: String? = ""
+            var pic: String? = "",
+            var benID: String? = ""
     )
 
     data class FollowerItem(

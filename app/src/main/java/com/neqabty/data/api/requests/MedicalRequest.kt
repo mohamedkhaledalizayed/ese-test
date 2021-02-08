@@ -34,6 +34,10 @@ data class MedicalRequest(
     var oldbenid: String = "",
     @SerializedName("request_details")
     var details: String = "",
+    @SerializedName("follower_name")
+    var followerName: String = "",
+    @SerializedName("follower_relationship")
+    var followerRelation: String = "",
     @SerializedName("docs_num")
     var docsNumber: Int = 0
 ) : Request()

@@ -102,7 +102,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
                 showPickPhotoAlert()
             else{
                 val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.governId, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, ClaimingData.oldbenid, binding.edDetails.text.toString(), photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.governId, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, ClaimingData.oldbenid, binding.edDetails.text.toString(), ClaimingData.selectedFollower?.name!!, ClaimingData.selectedFollower?.relationTypeName?:"عضو", photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             }
         }
 
@@ -126,7 +126,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.governId, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, ClaimingData.oldbenid, binding.edDetails.text.toString(), photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.governId, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, ClaimingData.oldbenid, binding.edDetails.text.toString(), ClaimingData.selectedFollower?.name!!, ClaimingData.selectedFollower?.relationTypeName!!, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)

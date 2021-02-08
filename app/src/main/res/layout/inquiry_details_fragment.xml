@@ -54,13 +54,14 @@
                     android:text="@{title}"
                     android:textSize="@dimen/text_size_large" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tvName"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
-<!--                    android:text="@{Html.fromHtml(@string/name_title(medicalRenewalPayment.engineerName))}"-->
-<!--                    android:textSize="@dimen/text_size_medium" />-->
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:visibility='@{(medicalRenewalPayment.paymentItem.engName == null || medicalRenewalPayment.paymentItem.engName == "")? View.GONE : View.VISIBLE}'
+                    android:text="@{Html.fromHtml(@string/name_title(medicalRenewalPayment.paymentItem.engName))}"
+                    android:textSize="@dimen/text_size_medium" />
 
                 <TextView
                     android:id="@+id/tvMemberNumber"

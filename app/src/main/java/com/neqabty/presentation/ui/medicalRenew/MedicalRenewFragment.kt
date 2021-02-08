@@ -144,6 +144,14 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
 
         bUpload.setOnClickListener {
             var pdfIntent = Intent(context, PdfCreatorScreen::class.java)
+//            medicalRenewalUI.followers!!.add(medicalRenewalUI.followers!![0])
+//            medicalRenewalUI.followers!!.add(medicalRenewalUI.followers!![0])
+//            medicalRenewalUI.followers!!.add(medicalRenewalUI.followers!![0])
+//            medicalRenewalUI.followers!!.add(medicalRenewalUI.followers!![0])
+//            medicalRenewalUI.followers!!.add(medicalRenewalUI.followers!![0])
+//            medicalRenewalUI.followers!!.add(medicalRenewalUI.followers!![0])
+//            medicalRenewalUI.followers!!.add(medicalRenewalUI.followers!![0])
+//            medicalRenewalUI.followers!!.add(medicalRenewalUI.followers!![0])
             pdfIntent.putExtra("data", medicalRenewalUI)
             this.startActivity(pdfIntent)
         }

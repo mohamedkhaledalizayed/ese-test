@@ -24,7 +24,8 @@ data class MedicalRenewalUI(
             var mobile: String? = "",
             var nationalId: String? = "",
             var birthDate: String? = "",
-            var pic: String? = ""
+            var pic: String? = "",
+            var benID: String? = ""
     ) : Parcelable
 
     @Parcelize
@@ -42,7 +43,11 @@ data class MedicalRenewalUI(
             var relationType: String? = null,
             var relationTypeName: String? = null,
             var gender: String? = "M"
-    ) : Parcelable
+    ) : Parcelable{
+        override fun toString(): String {
+            return name ?: ""
+        }
+    }
 
 
     @Parcelize

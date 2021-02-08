@@ -16,13 +16,15 @@ class ClaimingViewModel @Inject constructor(
     val getProvidersByType: GetProvidersByType,
     val getAllProvidersTypes: GetAllProvidersTypes,
     val sendMedicalRequest: SendMedicalRequest,
-    private val validateUserForClaiming: ValidateUserForClaiming
+    private val validateUserForClaiming: ValidateUserForClaiming,
+    private val getMedicalRenewalData: GetMedicalRenewalData
 ) : BaseViewModel() {
     private val areaEntityUIMapper = AreaEntityUIMapper()
     private val governEntityUIMapper = GovernEntityUIMapper()
     private val providerTypeEntityUIMapper = ProviderTypeEntityUIMapper()
     private val providerEntityUIMapper = ProviderEntityUIMapper()
     private val claimingValidationEntityUIMapper = ClaimingValidationEntityUIMapper()
+    private val medicalRenewalEntityUIMapper = MedicalRenewalEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<ClaimingViewState> = MutableLiveData()
@@ -31,8 +33,24 @@ class ClaimingViewModel @Inject constructor(
         viewState.value = ClaimingViewState(isLoading = true)
     }
 
-    fun getAllContent1() {
+    fun getAllContent1(mobileNumber: String, number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
+        val followersDisposable = getMedicalRenewalData.getMedicalRenewalData(mobileNumber, number)
+                .map {
+                    it.let {
+                        medicalRenewalEntityUIMapper.mapFrom(it)
+                    }
+                }.subscribe(
+                        {
+                            viewState.value = viewState.value?.copy(medicalRenewalUI = it)
+                            onContent1Received()
+                        },
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false)
+                            errorState.value = handleError(it)
+                        }
+                )
+
         val governsDisposable = getAllGoverns.observable()
                 .flatMap {
                     it.let {
@@ -58,6 +76,10 @@ class ClaimingViewModel @Inject constructor(
                         },
                         { errorState.value = handleError(it) }
                 )
+
+        viewState.value?.medicalRenewalUI?.let {
+            onContent1Received()
+        } ?: addDisposable(followersDisposable)
 
         viewState.value?.areas?.let {
             onContent1Received()
@@ -126,6 +148,8 @@ class ClaimingViewModel @Inject constructor(
         name: String,
         oldbenid: String,
         details: String,
+        followerName: String,
+        followerRelation: String,
         docsNumber: Int,
         doc1: File?,
         doc2: File?,
@@ -134,7 +158,7 @@ class ClaimingViewModel @Inject constructor(
         doc5: File?
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, details, docsNumber, doc1, doc2, doc3, doc4, doc5)
+        addDisposable(sendMedicalRequest.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, details, followerName, followerRelation, docsNumber, doc1, doc2, doc3, doc4, doc5)
                 .subscribe(
                         { viewState.value = viewState.value?.copy(isLoading = false) },
                         { errorState.value = handleError(it) }
@@ -166,8 +190,9 @@ class ClaimingViewModel @Inject constructor(
         viewState.value = newViewState
     }
 
+
     private fun onContent1Received() {
-        if (viewState.value?.governs != null && viewState.value?.areas != null)
+        if (viewState.value?.medicalRenewalUI != null && viewState.value?.governs != null && viewState.value?.areas != null)
             viewState.value = viewState.value?.copy(isLoading = false)
     }
 

@@ -129,7 +129,8 @@
     <string name="medicalRequest">تقديم الموافقات الطبية</string>
     <string name="syndicateNumber">رقم العضوية</string>
     <string name="member_name">اسم العضو</string>
-    <string name="cardNumber">رقم البطاقة الطبية</string>
+    <string name="beneficiary_name">اسم المستفيد</string>
+    <string name="cardNumber">رقم المنظومة العلاجية</string>
     <string name="selectDoctor">اختر الدكتور المعالج</string>
     <string name="addRequestImage">اضافة الموافقات الطبية</string>
     <string name="submit">ارسال</string>

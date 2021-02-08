@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="loading"
-            type="boolean" /></data>
+            type="boolean" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -49,10 +50,43 @@
                     android:textSize="@dimen/text_size_medium" />
 
 
+                <TextView
+                    android:id="@+id/tvBeneficiary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:gravity="start"
+                    android:text="@string/beneficiary_name"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spFollower"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/followers"
+                    android:textDirection="rtl"
+                    android:textSize="@dimen/text_size_medium" />
+
+
+                <TextView
+                    android:id="@+id/tvNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:gravity="start"
+                    android:text="@string/cardNumber"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/edCardNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:hint="@string/cardNumber"
                     android:inputType="number"
                     android:textColor="@android:color/black"
@@ -62,41 +96,41 @@
                     android:id="@+id/edServiceProviderName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
                     android:hint="@string/serviceProviderName"
                     android:inputType="text"
                     android:maxLength="30"
-                    android:layout_marginTop="@dimen/margin_vertical_small"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_size_medium" />
 
                 <Spinner
                     android:id="@+id/spGovern"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/governorate"
                     android:textDirection="rtl"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:textSize="@dimen/text_size_medium" />
 
                 <Spinner
                     android:id="@+id/spArea"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/area"
                     android:textDirection="rtl"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:textSize="@dimen/text_size_medium" />
 
                 <Button
                     android:id="@+id/bNext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/btn_green"
-                    android:gravity="center"
                     android:layout_margin="@dimen/margin_horizontal_normal"
+                    android:background="@drawable/btn_green"
+                    android:elevation="@dimen/elevation_level_one"
+                    android:gravity="center"
                     android:text="@string/next"
                     android:textColor="@android:color/white"
-                    android:elevation="@dimen/elevation_level_one"
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
         </ScrollView>

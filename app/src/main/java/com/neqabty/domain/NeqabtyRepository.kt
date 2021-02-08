@@ -54,6 +54,8 @@ interface NeqabtyRepository {
             name: String,
             oldbenid: String,
             details: String,
+            followerName: String,
+            followerRelation: String,
             docsNumber: Int,
             doc1: File?,
             doc2: File?,

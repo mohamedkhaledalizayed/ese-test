@@ -204,6 +204,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
             name: String,
             oldbenid: String,
             details: String,
+            followerName: String,
+            followerRelation: String,
             docsNumber: Int,
             doc1: File?,
             doc2: File?,
@@ -211,7 +213,7 @@ class NeqabtyRepositoryImpl @Inject constructor(
             doc4: File?,
             doc5: File?
     ): Observable<Unit> {
-        return remoteDataStore.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, details, docsNumber, doc1, doc2, doc3, doc4, doc5)
+        return remoteDataStore.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, details, followerName, followerRelation, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 
     override fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>> {

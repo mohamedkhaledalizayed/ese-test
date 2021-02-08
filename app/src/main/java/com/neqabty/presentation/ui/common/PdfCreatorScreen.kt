@@ -114,7 +114,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         bodyContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, bodyContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         body.text = bodyContent
         body.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F))
-                .setPadding(20, 8, 20, 10)
+                .setPadding(20, 5, 20, 10)
         body.view.gravity = Gravity.CENTER
         body.view.setTypeface(body.view.typeface, Typeface.SANS_SERIF.style)
         horizontalBody.addView(body)
@@ -127,7 +127,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         nameContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, nameContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         name.text = nameContent
         name.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 8, 20, 5)
+        ).setPadding(20, 5, 20, 5)
         name.view.gravity = Gravity.CENTER_VERTICAL
         name.view.setTypeface(name.view.typeface, Typeface.SANS_SERIF.style)
         horizontalEngineerName.addView(name)
@@ -140,7 +140,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         numberContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, numberContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         number.text = numberContent
         number.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 8, 20, 5);
+        ).setPadding(20, 5, 20, 5);
         number.view.gravity = Gravity.CENTER_VERTICAL
         number.view.setTypeface(number.view.typeface, Typeface.SANS_SERIF.style)
         horizontalEngineerNumber.addView(number)
@@ -153,11 +153,24 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         subscriptionContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, subscriptionContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         subscription.text = subscriptionContent
         subscription.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 8, 20, 5);
+        ).setPadding(20, 5, 20, 5);
         subscription.view.gravity = Gravity.CENTER_VERTICAL
         subscription.view.setTypeface(subscription.view.typeface, Typeface.SANS_SERIF.style)
         horizontalSubscription.addView(subscription)
         pdfBody.addView(horizontalSubscription)
+
+        //BenID
+        val horizontalBenID = PDFHorizontalView(applicationContext)
+        val benID = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
+        val benIDContent = SpannableString("رقم المنظومة العلاجية: ${data.contact?.benID}")
+        benIDContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, subscriptionContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        benID.text = benIDContent
+        benID.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
+        ).setPadding(20, 5, 20, 5);
+        benID.view.gravity = Gravity.CENTER_VERTICAL
+        benID.view.setTypeface(benID.view.typeface, Typeface.SANS_SERIF.style)
+        horizontalBenID.addView(benID)
+        pdfBody.addView(horizontalBenID)
 
         //Followers
         val horizontalFollowers = PDFHorizontalView(applicationContext)
@@ -166,14 +179,14 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         followersContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, followersContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         followers.text = followersContent
         followers.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 8, 20, 10);
+        ).setPadding(20, 5, 20, 10);
         followers.view.gravity = Gravity.CENTER_VERTICAL
         followers.view.setTypeface(followers.view.typeface, Typeface.SANS_SERIF.style)
         horizontalFollowers.addView(followers)
         pdfBody.addView(horizontalFollowers)
 
 
-        val tableHeaderTitles = arrayOf("الاسم", "درجة القرابة")
+        val tableHeaderTitles = arrayOf("رقم المنظومة العلاجية","الاسم", "درجة القرابة")
 
         val lineSeparatorView2 =
                 PDFLineSeparatorView(applicationContext).setBackgroundColor(Color.WHITE)
@@ -185,18 +198,22 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
             pdfTextView.setText(s)
             tableHeader.addToRow(pdfTextView)
         }
-
         val tableRowView1 = PDFTableView.PDFTableRowView(applicationContext)
         val tableView = PDFTableView(applicationContext, tableHeader, tableRowView1)
 
         for (item: MedicalRenewalUI.FollowerItem in data.followers!!) {
             val tableRowView = PDFTableView.PDFTableRowView(applicationContext)
+            val benID = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
+            benID.setText(item.id.toString())
+            tableRowView.addToRow(benID)
             val Id = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
             Id.setText(item.name)
             tableRowView.addToRow(Id)
             val Name = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
             Name.setText(item.relationTypeName)
             tableRowView.addToRow(Name)
+            tableRowView.view.gravity = Gravity.CENTER_HORIZONTAL
+
             tableView.addRow(tableRowView)
         }
         pdfBody.addView(tableView)

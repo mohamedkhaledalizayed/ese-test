@@ -19,7 +19,7 @@ object Constants {
     var DNS = if(BuildConfig.DEBUG) IP else "https://$PROD_IP"
 
     var COWPAY_MODE = if(BuildConfig.DEBUG) CowpayConstantKeys.SandBox else CowpayConstantKeys.Production
-    var CC_COMMISSION = .028
+    var CC_COMMISSION = .0288
     var FAWRY_COMMISSION = .01
     var MIN_COMMISSION = 6.0
     var CLAIMING = 1
