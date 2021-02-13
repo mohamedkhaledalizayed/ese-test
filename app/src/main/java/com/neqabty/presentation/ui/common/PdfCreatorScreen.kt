@@ -186,7 +186,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         pdfBody.addView(horizontalFollowers)
 
 
-        val tableHeaderTitles = arrayOf("رقم المنظومة العلاجية","الاسم", "درجة القرابة")
+        val tableHeaderTitles = arrayOf("رقم المنظومة العلاجية", "درجة القرابة","الاسم")
 
         val lineSeparatorView2 =
                 PDFLineSeparatorView(applicationContext).setBackgroundColor(Color.WHITE)
@@ -206,12 +206,12 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
             val benID = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
             benID.setText(item.id.toString())
             tableRowView.addToRow(benID)
-            val Id = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
-            Id.setText(item.name)
-            tableRowView.addToRow(Id)
             val Name = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
             Name.setText(item.relationTypeName)
             tableRowView.addToRow(Name)
+            val Id = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
+            Id.setText(item.name)
+            tableRowView.addToRow(Id)
             tableRowView.view.gravity = Gravity.CENTER_HORIZONTAL
 
             tableView.addRow(tableRowView)

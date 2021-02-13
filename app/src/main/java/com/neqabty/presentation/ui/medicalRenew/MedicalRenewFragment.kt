@@ -152,7 +152,14 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
 //            medicalRenewalUI.followers!!.add(medicalRenewalUI.followers!![0])
 //            medicalRenewalUI.followers!!.add(medicalRenewalUI.followers!![0])
 //            medicalRenewalUI.followers!!.add(medicalRenewalUI.followers!![0])
-            pdfIntent.putExtra("data", medicalRenewalUI)
+
+            val temp = medicalRenewalUI.deepClone(medicalRenewalUI)
+            temp?.contact?.pic = ""
+            for (item: MedicalRenewalUI.FollowerItem in temp?.followers!!) {
+                item.pic = ""
+                item.attachments = mutableListOf()
+            }
+            pdfIntent.putExtra("data", temp)
             this.startActivity(pdfIntent)
         }
 //        edMobile.setText("01119850766")

@@ -235,7 +235,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
         photosList.add(PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName,photoFileURI))
         val bitmap: Bitmap = BitmapFactory.decodeFile(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/" +PhotoFileName)
         val bytes = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, bytes)
         val bos = BufferedOutputStream(FileOutputStream(File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), PhotoFileName)))
         bos.write(bytes.toByteArray())
         bos.flush()

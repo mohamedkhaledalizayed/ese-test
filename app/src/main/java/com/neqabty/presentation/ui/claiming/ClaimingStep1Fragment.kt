@@ -118,7 +118,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         if (state.medicalRenewalUI != null && state.governs != null && state.areas != null && isValid) {
             binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
             state.medicalRenewalUI?.let {
-                medicalRenewalUI = it
+                medicalRenewalUI = it.deepClone(it)
                 medicalRenewalUI?.followers?.add(0, MedicalRenewalUI.FollowerItem(PreferencesHelper(requireContext()).name, id = medicalRenewalUI?.contact?.benID?.toInt()))
             }
             state.governs?.let {
@@ -128,7 +128,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
                 areasResultList = it
             }
             if (state.medicalRenewalUI != null && state.governs != null && state.areas != null){
-                state.medicalRenewalUI = null
+//                state.medicalRenewalUI = null
                 initializeViews()
             }
         }

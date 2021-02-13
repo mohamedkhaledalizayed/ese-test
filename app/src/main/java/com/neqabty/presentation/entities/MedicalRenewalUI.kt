@@ -1,5 +1,6 @@
 package com.neqabty.presentation.entities
 
+import android.os.Parcel
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
@@ -14,6 +15,19 @@ data class MedicalRenewalUI(
         var relations: List<RelationItem>? = null,
         var rejectionMsg: String? = ""
 ) : Parcelable {
+
+    fun <T : Parcelable> deepClone(objectToClone: T): T? {
+        var parcel: Parcel? = null
+        return try {
+            parcel = Parcel.obtain()
+            parcel.writeParcelable(objectToClone, 0)
+            parcel.setDataPosition(0)
+            parcel.readParcelable(objectToClone::class.java.classLoader)
+        } finally {
+            //it is important to recyle parcel and free up resources once done.
+            parcel?.recycle()
+        }
+    }
 
     @Parcelize
     data class ContactData(
