@@ -1,57 +1,46 @@
 package com.neqabty.presentation.ui.signup
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.entities.UserEntity
+import com.neqabty.domain.usecases.Login
 import com.neqabty.domain.usecases.SignupUser
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
-import com.neqabty.presentation.entities.UserUI
 import com.neqabty.presentation.mappers.UserEntityUIMapper
-
+import com.neqabty.presentation.util.PreferencesHelper
 import javax.inject.Inject
 
-class SignupViewModel @Inject constructor(private val signupUser: SignupUser) : BaseViewModel() {
+class SignupViewModel @Inject constructor(val signup: SignupUser) : BaseViewModel() {
 
     private val userEntityToUIMapper = UserEntityUIMapper()
-    lateinit var userEntity: UserEntity
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<SignupViewState> = MutableLiveData()
 
     init {
-        viewState.value = SignupViewState(isLoading = false)
+        viewState.value = SignupViewState()
     }
 
-    fun signup(
-        email: String,
-        fName: String,
-        lName: String,
-        mobile: String,
-        govId: String,
-        mainSyndicateId: String,
-        subSyndicateId: String,
-        password: String
+    fun registerUser(
+            userNumber: String,
+            mobile: String,
+            natID: String,
+            newFirebaseToken: String,
+            prefs: PreferencesHelper
     ) {
-        addDisposable(signupUser.signup(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)
+        viewState.value = viewState.value?.copy(isLoading = true)
+
+        addDisposable(signup.signup(userNumber, mobile, natID, newFirebaseToken, prefs.token)
                 .map {
                     it.let {
-                        userEntity = it
-                        userEntityToUIMapper.mapFrom(userEntity)
-                    } ?: run {
-                        throw Throwable("Something went wrong :(")
+                        userEntityToUIMapper.mapFrom(it)
                     }
                 }.subscribe(
-                        { onUserReceived(it) },
-                        { errorState.value = handleError(it) }
-                )
-        )
-    }
-
-    private fun onUserReceived(user: UserUI) {
-
-        val newViewState = viewState.value?.copy(
-                isLoading = false,
-                user = user)
-
-        viewState.value = newViewState
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = true, user = it)
+                        },
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = false)
+                            errorState.value = handleError(it)
+                        }
+                ))
     }
 }

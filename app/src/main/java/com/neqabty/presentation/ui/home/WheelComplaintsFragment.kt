@@ -57,9 +57,9 @@ class WheelComplaintsFragment : BaseFragment(), Injectable {
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(R.id.complaintsFragment)
             else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.COMPLAINTS)
-                navController().navigate(R.id.mobileFragment, bundle)
+                    val bundle: Bundle = Bundle()
+                    bundle.putInt("type", Constants.COMPLAINTS)
+                    navController().navigate(R.id.signupFragment, bundle)
             }
         }
 

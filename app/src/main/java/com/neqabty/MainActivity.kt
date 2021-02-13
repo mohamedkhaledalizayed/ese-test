@@ -96,6 +96,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             graph.startDestination = R.id.homeFragment
 //        else if (!PreferencesHelper(this).isIntroSkipped) // TODO
 //            graph.startDestination = R.id.introFragment
+        else if (PreferencesHelper(this).isForceLogout == true)
+            graph.startDestination = R.id.loginFragment
         else if (PreferencesHelper(this).mobile.isEmpty()) // TODO
             graph.startDestination = R.id.loginFragment
         else
@@ -128,28 +130,21 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.medicalRenewFragment)
                     else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", Constants.MEDICAL_RENEW)
-                        navController.navigate(R.id.mobileFragment, bundle)
+                            val bundle: Bundle = Bundle()
+                            bundle.putInt("type", Constants.MEDICAL_RENEW)
+                        navController.navigate(R.id.signupFragment, bundle)
                     }
                 }
                 R.id.claiming_fragment -> { // TODO
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.claimingFragment)
                     else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", Constants.CLAIMING)
-                        navController.navigate(R.id.mobileFragment, bundle)
+                            val bundle: Bundle = Bundle()
+                            bundle.putInt("type", Constants.CLAIMING)
+                        navController.navigate(R.id.signupFragment, bundle)
                     }
                 }
                 R.id.medical_fragment -> {
-//                    Thread(Runnable {
-//                        try {
-//                            FirebaseInstanceId.getInstance().deleteInstanceId()
-//                        } catch (e: IOException) {
-//                            e.printStackTrace()
-//                        }
-//                    }).start()
                     navController.navigate(R.id.chooseAreaFragment)
                 }
                 R.id.inquiry_fragment -> {
@@ -161,7 +156,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 //                    else {
 //                        val bundle: Bundle = Bundle()
 //                        bundle.putInt("type", Constants.RECORDS)
-//                        navController.navigate(R.id.mobileFragment, bundle)
+//                        navController.navigate(R.id.signupFragment, bundle)
 //                    }
 //                }
 //                R.id.update_data_fragment -> {
@@ -170,7 +165,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 //                    else {
 //                        val bundle: Bundle = Bundle()
 //                        bundle.putInt("type", Constants.UPDATE_DATA)
-//                        navController.navigate(R.id.mobileFragment, bundle)
+//                        navController.navigate(R.id.signupFragment, bundle)
 //                    }
 //                }
                 R.id.complaints_fragment -> {
@@ -179,9 +174,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                     if (PreferencesHelper(this).isRegistered)
                         navController.navigate(R.id.complaintsFragment)
                     else {
-                        val bundle: Bundle = Bundle()
-                        bundle.putInt("type", Constants.COMPLAINTS)
-                        navController.navigate(R.id.mobileFragment, bundle)
+                            val bundle: Bundle = Bundle()
+                            bundle.putInt("type", Constants.COMPLAINTS)
+                        navController.navigate(R.id.signupFragment, bundle)
                     }
                 }
                 R.id.about_fragment -> {
@@ -388,12 +383,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             Navigation.findNavController(this, R.id.container)
                     .navigate(R.id.openLoginFragment)
         }
-        (nav_view as NavigationView).getHeaderView(0).findViewById<Button>(R.id.bChangeNumber).setOnClickListener {
-            (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-
-            Navigation.findNavController(this, R.id.container)
-                    .navigate(R.id.openChangeNumberFragment)
-        }
 
         if (PreferencesHelper(this).name.isNotEmpty()) {
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
@@ -402,11 +391,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
 
         if (PreferencesHelper(this).user.isNotEmpty()) {
-            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.bChangeNumber).visibility = View.VISIBLE
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.VISIBLE
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
         } else {
-            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.bChangeNumber).visibility = View.INVISIBLE
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.GONE
         }
         (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, PreferencesHelper(this).mobile)))

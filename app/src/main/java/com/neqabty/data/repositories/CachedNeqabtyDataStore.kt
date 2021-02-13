@@ -261,16 +261,17 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
     }
 
     override fun signup(
-            email: String,
-            fName: String,
-            lName: String,
+            userNumber: String,
             mobile: String,
-            govId: String,
-            mainSyndicateId: String,
-            subSyndicateId: String,
-            password: String
+            natID: String,
+            newFirebaseToken: String,
+            oldFirebaseToken: String
     ): Observable<UserEntity> {
         return neqabtyCache.getUser()
+    }
+
+    override fun activateAccount(mobile: String, verificationCode: String, password: String): Observable<UserEntity> {
+        TODO("Not yet implemented")
     }
 
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {

@@ -56,31 +56,31 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(R.id.claimingFragment)
             else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.CLAIMING)
-                navController().navigate(R.id.mobileFragment, bundle)
+                    val bundle: Bundle = Bundle()
+                    bundle.putInt("type", Constants.CLAIMING)
+                    navController().navigate(R.id.signupFragment, bundle)
             }
         }
         bRenew.setOnClickListener {
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(R.id.medicalRenewFragment)
             else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.MEDICAL_RENEW)
-                navController().navigate(R.id.mobileFragment, bundle)
+                    val bundle: Bundle = Bundle()
+                    bundle.putInt("type", Constants.MEDICAL_RENEW)
+                    navController().navigate(R.id.signupFragment, bundle)
             }
         }
         bComplaints.setOnClickListener {
 //            Toast.makeText(requireContext(), getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
 
             if (PreferencesHelper(requireContext()).isRegistered)
-                navController().navigate(R.id.complaintsFragment)
+                    navController().navigate(R.id.complaintsFragment)
             else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.COMPLAINTS)
-                navController().navigate(R.id.mobileFragment, bundle)
+                    val bundle: Bundle = Bundle()
+                    bundle.putInt("type", Constants.COMPLAINTS)
+                navController().navigate(R.id.signupFragment, bundle)
+                }
             }
-        }
 
     }
 

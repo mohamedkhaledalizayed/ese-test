@@ -299,20 +299,21 @@ class NeqabtyRepositoryImpl @Inject constructor(
     }
 
     override fun signup(
-            email: String,
-            fName: String,
-            lName: String,
+            userNumber: String,
             mobile: String,
-            govId: String,
-            mainSyndicateId: String,
-            subSyndicateId: String,
-            password: String
+            natID: String,
+            newFirebaseToken: String,
+            oldFirebaseToken: String
     ): Observable<UserEntity> {
 
-        return remoteDataStore.signup(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)
-                .doOnNext { user ->
-                    saveUser(user)
-                }
+        return remoteDataStore.signup(userNumber, mobile, natID, newFirebaseToken, oldFirebaseToken)
+//                .doOnNext { user ->
+//                    saveUser(user)
+//                }
+    }
+
+    override fun activateAccount(mobile: String, verificationCode: String, password: String): Observable<UserEntity> {
+        return remoteDataStore.activateAccount(mobile, verificationCode, password)
     }
 
     override fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String): Observable<UserEntity> {

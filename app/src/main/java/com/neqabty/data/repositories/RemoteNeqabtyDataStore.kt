@@ -347,7 +347,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
 //            if (!user.data?.msg.isNullOrEmpty()) {
 //                Observable.just(MemberEntity(msg = user.data?.msg!!))
 //            } else
-                Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalData))
+            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalData))
         }
     }
 
@@ -560,16 +560,19 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     private val userDataEntityMapper = com.neqabty.data.mappers.UserDataEntityMapper()
 
     override fun signup(
-            email: String,
-            fName: String,
-            lName: String,
+            userNumber: String,
             mobile: String,
-            govId: String,
-            mainSyndicateId: String,
-            subSyndicateId: String,
-            password: String
+            natID: String,
+            newFirebaseToken: String,
+            oldFirebaseToken: String
     ): Observable<UserEntity> {
-        return api.signup(SignupRequest(email, fName, lName, mobile, govId, mainSyndicateId, subSyndicateId, password)).flatMap { userDataResponse ->
+        return api.signup(SignupRequest(userNumber, mobile, natID, newFirebaseToken, oldFirebaseToken)).flatMap { userDataResponse ->
+            Observable.just(userDataEntityMapper.mapFrom(userDataResponse.data!!))
+        }
+    }
+
+    override fun activateAccount(mobile: String, verificationCode: String, password: String): Observable<UserEntity> {
+        return api.activateAccount(ActivateAccountRequest(mobile, verificationCode, password)).flatMap { userDataResponse ->
             Observable.just(userDataEntityMapper.mapFrom(userDataResponse.data!!))
         }
     }

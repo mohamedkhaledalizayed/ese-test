@@ -15,6 +15,7 @@ import com.neqabty.R
 import com.neqabty.databinding.TripDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.ui.common.CustomImagePagerAdapter

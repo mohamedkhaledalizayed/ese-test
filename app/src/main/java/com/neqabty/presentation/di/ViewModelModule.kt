@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.neqabty.MainViewModel
 import com.neqabty.presentation.ui.about.AboutViewModel
-import com.neqabty.presentation.ui.changeNumber.ChangeNumberViewModel
+import com.neqabty.presentation.ui.activateAccount.ActivateAccountViewModel
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaViewModel
 import com.neqabty.presentation.ui.claiming.ClaimingViewModel
 import com.neqabty.presentation.ui.complaint.ComplaintViewModel
@@ -22,13 +22,12 @@ import com.neqabty.presentation.ui.medicalProviders.MedicalProvidersViewModel
 import com.neqabty.presentation.ui.medicalRenew.MedicalRenewViewModel
 import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewDetailsViewModel
 import com.neqabty.presentation.ui.medicalRenewUpdate.MedicalRenewUpdateViewModel
-import com.neqabty.presentation.ui.mobile.MobileViewModel
 import com.neqabty.presentation.ui.news.NewsViewModel
 import com.neqabty.presentation.ui.notificationDetails.NotificationDetailsViewModel
 import com.neqabty.presentation.ui.notifications.NotificationsViewModel
 import com.neqabty.presentation.ui.payment.PaymentViewModel
 import com.neqabty.presentation.ui.search.SearchViewModel
-import com.neqabty.presentation.ui.signup.SignupViewModel
+import com.neqabty.presentation.ui.oldsignup.SignupViewModel
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesViewModel
 import com.neqabty.presentation.ui.syndicates.SyndicatesViewModel
 import com.neqabty.presentation.ui.tripDetails.TripDetailsViewModel
@@ -53,7 +52,7 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(SignupViewModel::class)
-    abstract fun bindSignupViewModel(signupViewModel: SignupViewModel): ViewModel
+    abstract fun bindOldSignupViewModel(signupViewModel: SignupViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -62,13 +61,13 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ChangeNumberViewModel::class)
-    abstract fun bindChangeNumberViewModel(changeNumberViewModel: ChangeNumberViewModel): ViewModel
+    @ViewModelKey(ActivateAccountViewModel::class)
+    abstract fun bindActivateAccountViewModel(activateAccountViewModel: ActivateAccountViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(MobileViewModel::class)
-    abstract fun bindMobileViewModel(mobileViewModel: MobileViewModel): ViewModel
+    @ViewModelKey(com.neqabty.presentation.ui.signup.SignupViewModel::class)
+    abstract fun bindSignupViewModel(signupViewModel: com.neqabty.presentation.ui.signup.SignupViewModel): ViewModel
 
     @Binds
     @IntoMap

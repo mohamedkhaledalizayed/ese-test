@@ -2,11 +2,13 @@ package com.neqabty.presentation.util
 
 import android.content.Context
 import android.preference.PreferenceManager
+import com.neqabty.presentation.common.Constants
 
 class PreferencesHelper(context: Context) {
     companion object {
         const val DEVELOP_MODE = false
         private const val IS_INTRO_SKIPPED = "data.source.prefs.IS_INTRO_SKIPPED"
+        private const val IS_FORCE_LOGOUT = "data.source.prefs.IS_FORCE_LOGOUT"
         private const val IS_NOTIFICATIONS_ENABLED = "data.source.prefs.IS_NOTIFICATIONS_ENABLED"
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val SUB_SYNDICATE = "data.source.prefs.SUB_SYNDICATE"
@@ -27,6 +29,9 @@ class PreferencesHelper(context: Context) {
 
     var isIntroSkipped = preferences.getBoolean(IS_INTRO_SKIPPED, false)
         set(value) = preferences.edit().putBoolean(IS_INTRO_SKIPPED, value).apply()
+
+    var isForceLogout = preferences.getBoolean(IS_FORCE_LOGOUT, true)
+        set(value) = preferences.edit().putBoolean(IS_FORCE_LOGOUT, value).apply()
 
     var mainSyndicate = preferences.getInt(MAIN_SYNDICATE, 0)
         set(value) = preferences.edit().putInt(MAIN_SYNDICATE, value).apply()

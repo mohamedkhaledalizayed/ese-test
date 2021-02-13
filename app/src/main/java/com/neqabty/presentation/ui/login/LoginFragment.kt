@@ -83,13 +83,14 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
         state.user?.let {
             //TODO subscribe
             //TODO set coming data it.details!![0]
+            PreferencesHelper(requireContext()).isForceLogout = false
             PreferencesHelper(requireContext()).mobile = it.mobile
             PreferencesHelper(requireContext()).userType = it.type
             PreferencesHelper(requireContext()).jwt = it.jwt
             Constants.JWT = it.jwt ?: ""
             PreferencesHelper(requireContext()).mainSyndicate = 5
             PreferencesHelper(requireContext()).subSyndicate = 0
-            if (it.type.equals("client")) {
+            if (it.type.equals("verified")) {
                 showTwoButtonsAlert(message = getString(R.string.welcome_with_name_login, it.details!![0].name!!),
                         okCallback = {
                             PreferencesHelper(requireContext()).name = it.details!![0].name!!
@@ -103,7 +104,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
                             PreferencesHelper(requireContext()).user = it.details!![0].userNumber!!
                             PreferencesHelper(requireContext()).isRegistered = true
                             state.user = null
-                            navController().navigate(R.id.changeNumberFragment)
+                            navController().navigate(R.id.signupFragment)
                         })
             } else {
                 navController().navigate(LoginFragmentDirections.openHome())

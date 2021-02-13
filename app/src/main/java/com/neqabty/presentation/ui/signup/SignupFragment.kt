@@ -1,23 +1,32 @@
 package com.neqabty.presentation.ui.signup
 
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
+import android.app.Dialog
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.view.Window
+import androidx.appcompat.app.AlertDialog
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import com.neqabty.R
 import com.neqabty.databinding.SignupFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
+import com.neqabty.presentation.ui.trips.TripsData
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-
+import kotlinx.android.synthetic.main.signup_fragment.*
 import javax.inject.Inject
 
 class SignupFragment : BaseFragment(), Injectable {
@@ -29,12 +38,13 @@ class SignupFragment : BaseFragment(), Injectable {
     var binding by autoCleared<SignupFragmentBinding>()
 
     lateinit var signupViewModel: SignupViewModel
-//    private lateinit var viewPager: ViewPager
+    var type: Int? = 0
 
+    var newToken = ""
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -43,45 +53,191 @@ class SignupFragment : BaseFragment(), Injectable {
                 false,
                 dataBindingComponent
         )
-
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val params = SignupFragmentArgs.fromBundle(arguments!!)
+        type = params.type
+
         signupViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(SignupViewModel::class.java)
 
-//        initializeObservers()
+        signupViewModel.viewState.observe(this, Observer {
+            if (it != null) handleViewState(it)
+        })
+        signupViewModel.errorState.observe(this, Observer { error ->
+            showConnectionAlert(requireContext(), retryCallback = {
+                login()
+            }, cancelCallback = {
+                llSuperProgressbar.visibility = View.GONE
+                navController().navigateUp()
+            }, message = error?.message)
+        })
         initializeViews()
-//        signupViewModel.signup("m@m.m", "Mona", "Mohamed", "01119850766", "1", "1", "1", "123@pass")
-    }
-    private fun handleViewState(state: SignupViewState) {
-        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        state.user?.let {
-        }
     }
 
     fun initializeViews() {
-        val adapter = CustomFragmentPagerAdapter(requireFragmentManager())
-        adapter.addFragment(SignupStep1Fragment())
-        adapter.addFragment(SignupStep2Fragment())
-        adapter.addFragment(SignupStep3Fragment())
-        binding.viewpager.adapter = adapter
-        binding.viewpager.setSwipePagingEnabled(true) // TODO
-        binding.indicator.setViewPager(binding.viewpager)
+        newToken = PreferencesHelper(requireContext()).token
+        if (PreferencesHelper(requireContext()).mobile.isNotEmpty())
+            binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
 
-        binding.viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {}
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-            override fun onPageSelected(position: Int) {
-                binding.tvTitle.setText(Model.values()[position].titleResId)
+        if (!PreferencesHelper(requireContext()).user.equals("null"))
+            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
+
+        binding.bSend.setOnClickListener {
+            ensureLogin()
+        }
+
+        val vto = ivHint.getViewTreeObserver()
+        vto.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                ivHint.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                ivHint.layoutParams.width = ivHint.height
+                binding.ivHint.requestLayout()
+                binding.edMemberNumber.requestLayout()
             }
         })
+
+        ivHint.setOnClickListener {
+            showCardDialog()
+        }
     }
 
-//region
+    private fun handleViewState(state: SignupViewState) {
+        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
+        if (state.isSuccessful && state.user != null) {
+            activity?.invalidateOptionsMenu()
+            PreferencesHelper(requireContext()).token = newToken
+            PreferencesHelper(requireContext()).mobile = edMobile.text.toString()
+            PreferencesHelper(requireContext()).user = state.user?.details!![0].userNumber!!
+            PreferencesHelper(requireContext()).name = state.user?.details!![0].name!!
+            showTwoButtonsAlert(message = getString(R.string.welcome_with_name, state.user?.details!![0].name!!),
+                    okCallback = {
+                        state.user = null
 
+                        navController().navigate(SignupFragmentDirections.openActivateAccountFragment(type!!))
+//                        when (type) {
+//                            Constants.CLAIMING -> navController().navigate(
+//                                    SignupFragmentDirections.openClaiming()
+//                            )
+//
+//                            Constants.TRIPS -> navController().navigate(
+//                                    SignupFragmentDirections.openTripReservation(TripsData.tripItem!!)
+//                            )
+//
+//                            Constants.RECORDS -> navController().navigate(
+//                                    SignupFragmentDirections.openEngineeringRecords()
+//                            )
+//
+//                            Constants.UPDATE_DATA -> navController().navigate(
+//                                    SignupFragmentDirections.openUpdateDataVerification()
+//                            )
+//
+//                            Constants.COMPLAINTS -> navController().navigate(
+//                                    SignupFragmentDirections.openComplaints()
+//                            )
+//
+//                            Constants.CORONA -> navController().navigate(
+//                                    SignupFragmentDirections.openCorona()
+//                            )
+//
+//                            Constants.MEDICAL_RENEW -> navController().navigate(
+//                                    SignupFragmentDirections.openMedicalRenew()
+//                            )
+//                        }
+                    },
+                    cancelCallback = {
+                        state.user = null
+                        navController().popBackStack(R.id.homeFragment,false)
+                        navController().navigate(R.id.homeFragment)
+                    })
+        }
+    }
+
+    fun login() {
+        if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString(), binding.edNationalNumber.text.toString())) {
+            if (PreferencesHelper(requireContext()).token.isNotBlank())
+                signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
+            else {
+                FirebaseInstanceId.getInstance().instanceId
+                        .addOnCompleteListener(OnCompleteListener { task ->
+                            llSuperProgressbar.visibility = View.GONE
+                            if (!task.isSuccessful)
+                                showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
+                            else {
+                                newToken = task.result?.token!!
+                                signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
+                            }
+                        })
+            }
+        }
+    }
+
+    //region
+    private fun isDataValid(mobile: String, memberNumber: String, nationalNumber: String): Boolean {
+        return if (memberNumber.isBlank() || nationalNumber.length != 4) {
+            showAlert(getString(R.string.invalid_data))
+            false
+        } else if (memberNumber.length != 7) {
+            showAlert(getString(R.string.invalid_number))
+            false
+        } else if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
+            true
+        else {
+            showAlert(getString(R.string.invalid_mobile))
+            false
+        }
+    }
+
+    private fun showAlert(msg: String) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(msg)
+        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun showCardDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.getWindow()!!.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.getWindow()!!.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setContentView(layoutInflater.inflate(R.layout.image_item, null), ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.show()
+    }
+
+    private fun ensureLogin() {
+        builder = AlertDialog.Builder(requireContext())
+        builder?.setTitle(getString(R.string.alert_title))
+        builder?.setMessage(Html.fromHtml(getString(R.string.number_confirmation, edMemberNumber.text.toString()) + getString(R.string.member_number_confirmation)))
+        builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
+            dialog.dismiss()
+            login()
+        }
+        builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
+            dialog.dismiss()
+        }
+
+        var dialog = builder?.create()
+        dialog?.show()
+    }
+
+//    private fun hideKeyboard() {
+//        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.hideSoftInputFromWindow(activity?.window?.decorView?.rootView?.windowToken, 0)
+//    }
+//
+//    private fun showKeyboard() {
+//        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+//    }
 // endregion
 
     fun navController() = findNavController()

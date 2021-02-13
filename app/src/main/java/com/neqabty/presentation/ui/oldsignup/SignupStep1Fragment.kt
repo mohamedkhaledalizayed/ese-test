@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.signup
+package com.neqabty.presentation.ui.oldsignup
 
 import android.app.DatePickerDialog
 import androidx.lifecycle.ViewModelProvider

@@ -191,6 +191,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideActivateAccount(neqabtyRepository: NeqabtyRepository): ActivateAccount {
+        return ActivateAccount(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetAppVersion(neqabtyRepository: NeqabtyRepository): GetAppVersion {
         return GetAppVersion(ASyncTransformer(), neqabtyRepository)
     }

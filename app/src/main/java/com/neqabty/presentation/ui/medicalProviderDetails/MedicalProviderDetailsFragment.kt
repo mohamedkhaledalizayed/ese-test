@@ -112,9 +112,10 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(R.id.claimingFragment)
             else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.CLAIMING)
-                navController().navigate(R.id.mobileFragment, bundle)
+                    val bundle: Bundle = Bundle()
+                    bundle.putInt("type", Constants.CLAIMING)
+                    navController().navigate(R.id.signupFragment, bundle)
+
             }
         }
 

@@ -132,13 +132,15 @@ interface NeqabtyRepository {
 
     fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String): Observable<UserEntity>
     fun signup(
-            email: String,
-            fName: String,
-            lName: String,
+            userNumber: String,
             mobile: String,
-            govId: String,
-            mainSyndicateId: String,
-            subSyndicateId: String,
+            natID: String,
+            newFirebaseToken: String,
+            oldFirebaseToken: String
+    ): Observable<UserEntity>
+    fun activateAccount(
+            mobile: String,
+            verificationCode: String,
             password: String
     ): Observable<UserEntity>
 

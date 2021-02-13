@@ -4,27 +4,18 @@ import com.google.gson.annotations.SerializedName
 import com.neqabty.data.api.Request
 
 data class SignupRequest(
-    @SerializedName("email")
-    var email: String = "",
+        @SerializedName("user_number")
+        var userNumber: String = "",
 
-    @SerializedName("fname")
-    var fName: String = "",
+        @SerializedName("mobile")
+        var mobile: String = "",
 
-    @SerializedName("lname")
-    var lName: String = "",
+        @SerializedName("national_id")
+        var natID: String = "",
 
-    @SerializedName("mobile")
-    var mobile: String = "",
+        @SerializedName("firebase_token")
+        var newToken: String = "",
 
-    @SerializedName("governorate_id")
-    var governorateId: String = "",
-
-    @SerializedName("main_syndicate_id")
-    var mainSyndicateId: String = "",
-
-    @SerializedName("sub_syndicate_id")
-    var subSyndicateId: String = "",
-
-    @SerializedName("password")
-    var password: String = ""
+        @SerializedName("old_firebase_token")
+        var oldToken: String = ""
 ) : Request()

@@ -16,11 +16,11 @@ object Constants {
 
     var IP = "http://3.131.229.146:44392"
     var PROD_IP = "front.neqabty.com"
-    var DNS = if(BuildConfig.DEBUG) IP else "https://$PROD_IP"
+    var DNS = "https://$PROD_IP"
 
     var COWPAY_MODE = if(BuildConfig.DEBUG) CowpayConstantKeys.SandBox else CowpayConstantKeys.Production
     var CC_COMMISSION = .0288
-    var FAWRY_COMMISSION = .01
+    var FAWRY_COMMISSION = .0101
     var MIN_COMMISSION = 6.0
     var CLAIMING = 1
     var TRIPS = 2
@@ -38,4 +38,17 @@ object Constants {
     var PAYMENT_TYPE_TRIPS = "9991"
     var PAYMENT_TYPE_RECORDS = "9992"
     var PAYMENT_TYPE_MEDICAL_RENEW = "9993"
+
+    sealed class Mode {
+        class Visitor : Mode(){
+            override fun toString(): String {
+                return "visitor"
+            }
+        }
+        class Verified : Mode(){
+            override fun toString(): String {
+                return "verified"
+            }
+        }
+    }
 }

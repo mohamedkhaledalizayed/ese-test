@@ -18,7 +18,6 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import kotlinx.android.synthetic.main.mobile_fragment.*
 import javax.inject.Inject
 
 class EngineeringRecordsInquiryFragment : BaseFragment(), Injectable {

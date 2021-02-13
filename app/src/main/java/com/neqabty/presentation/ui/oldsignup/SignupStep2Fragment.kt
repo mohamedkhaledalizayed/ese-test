@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.signup
+package com.neqabty.presentation.ui.oldsignup
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders

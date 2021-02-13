@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.changeNumber
+package com.neqabty.presentation.ui.activateAccount
 
 import android.app.Dialog
 import android.os.Bundle
@@ -18,24 +18,26 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.neqabty.R
-import com.neqabty.databinding.ChangeNumberFragmentBinding
+import com.neqabty.databinding.ActivateAccountFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import kotlinx.android.synthetic.main.change_number_fragment.*
+import kotlinx.android.synthetic.main.activate_account_fragment.*
 import javax.inject.Inject
 
-class ChangeNumberFragment : BaseFragment(), Injectable {
+class ActivateAccountFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    var binding by autoCleared<ChangeNumberFragmentBinding>()
+    var binding by autoCleared<ActivateAccountFragmentBinding>()
 
-    lateinit var changeNumberViewModel: ChangeNumberViewModel
+    lateinit var activateAccountViewModel: ActivateAccountViewModel
     var type: Int? = 0
 
     var newToken = ""
@@ -46,7 +48,7 @@ class ChangeNumberFragment : BaseFragment(), Injectable {
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.change_number_fragment,
+                R.layout.activate_account_fragment,
                 container,
                 false,
                 dataBindingComponent
@@ -57,15 +59,18 @@ class ChangeNumberFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        changeNumberViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ChangeNumberViewModel::class.java)
+        val params = ActivateAccountFragmentArgs.fromBundle(arguments!!)
+        type = params.type
 
-        changeNumberViewModel.viewState.observe(this, Observer {
+        activateAccountViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(ActivateAccountViewModel::class.java)
+
+        activateAccountViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        changeNumberViewModel.errorState.observe(this, Observer { error ->
+        activateAccountViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
-                changeNumber()
+                activateAccount()
             }, cancelCallback = {
                 llSuperProgressbar.visibility = View.GONE
                 navController().navigateUp()
@@ -83,8 +88,8 @@ class ChangeNumberFragment : BaseFragment(), Injectable {
 //            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
 
         binding.bSend.setOnClickListener {
-            if(!binding.edMemberNumber.equals(PreferencesHelper(requireContext()).user))
-                ensureChangeNumber()
+            if (!binding.edMemberNumber.equals(PreferencesHelper(requireContext()).user))
+                ensureActivateAccount()
         }
 
         val vto = ivHint.getViewTreeObserver()
@@ -102,7 +107,7 @@ class ChangeNumberFragment : BaseFragment(), Injectable {
         }
     }
 
-    private fun handleViewState(state: ChangeNumberViewState) {
+    private fun handleViewState(state: ActivateAccountViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful && state.user != null) {
             activity?.invalidateOptionsMenu()
@@ -115,14 +120,43 @@ class ChangeNumberFragment : BaseFragment(), Injectable {
                     okCallback = {
                         state.user = null
                         navController().navigateUp()
-                    },cancelCallback = { state.user = null })
+                    }, cancelCallback = { state.user = null })
+            when (type) {
+                Constants.CLAIMING -> navController().navigate(
+                        ActivateAccountFragmentDirections.openClaiming()
+                )
+
+                Constants.TRIPS -> navController().navigate(
+                        ActivateAccountFragmentDirections.openTripReservation(TripsData.tripItem!!)
+                )
+
+                Constants.RECORDS -> navController().navigate(
+                        ActivateAccountFragmentDirections.openEngineeringRecords()
+                )
+
+                Constants.UPDATE_DATA -> navController().navigate(
+                        ActivateAccountFragmentDirections.openUpdateDataVerification()
+                )
+
+                Constants.COMPLAINTS -> navController().navigate(
+                        ActivateAccountFragmentDirections.openComplaints()
+                )
+
+                Constants.CORONA -> navController().navigate(
+                        ActivateAccountFragmentDirections.openCorona()
+                )
+
+                Constants.MEDICAL_RENEW -> navController().navigate(
+                        ActivateAccountFragmentDirections.openMedicalRenew()
+                )
+            }
         }
     }
 
-    fun changeNumber() {
+    fun activateAccount() {
         if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString())) {
             if (PreferencesHelper(requireContext()).token.isNotBlank())
-                changeNumberViewModel.changeNumber(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
+                activateAccountViewModel.activateAccount(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
             else {
                 FirebaseInstanceId.getInstance().instanceId
                         .addOnCompleteListener(OnCompleteListener { task ->
@@ -131,7 +165,7 @@ class ChangeNumberFragment : BaseFragment(), Injectable {
                                 showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
                             else {
                                 newToken = task.result?.token!!
-                                changeNumberViewModel.changeNumber(binding.edMobile.toString(), binding.edMemberNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
+                                activateAccountViewModel.activateAccount(binding.edMobile.toString(), binding.edMemberNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
                             }
                         })
             }
@@ -175,13 +209,13 @@ class ChangeNumberFragment : BaseFragment(), Injectable {
         dialog.show()
     }
 
-    private fun ensureChangeNumber() {
+    private fun ensureActivateAccount() {
         builder = AlertDialog.Builder(requireContext())
         builder?.setTitle(getString(R.string.alert_title))
         builder?.setMessage(Html.fromHtml(getString(R.string.number_confirmation, edMemberNumber.text.toString()) + getString(R.string.member_number_confirmation)))
         builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
             dialog.dismiss()
-            changeNumber()
+            activateAccount()
         }
         builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
             dialog.dismiss()

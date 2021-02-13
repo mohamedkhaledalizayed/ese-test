@@ -3,7 +3,7 @@ package com.neqabty.presentation.di
 import com.neqabty.presentation.ui.about.AboutFragment
 import com.neqabty.presentation.ui.aboutApp.AboutAppFragment
 import com.neqabty.presentation.ui.addCompanion.AddCompanionFragment
-import com.neqabty.presentation.ui.changeNumber.ChangeNumberFragment
+import com.neqabty.presentation.ui.activateAccount.ActivateAccountFragment
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaFragment
 import com.neqabty.presentation.ui.claiming.*
 import com.neqabty.presentation.ui.complaint.ComplaintFragment
@@ -26,20 +26,19 @@ import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewDetailsFragme
 import com.neqabty.presentation.ui.medicalRenewFollowerDetails.MedicalRenewAddFollowerDetailsFragment
 import com.neqabty.presentation.ui.medicalRenewFollowerDetails.MedicalRenewFollowerDetailsFragment
 import com.neqabty.presentation.ui.medicalRenewUpdate.MedicalRenewUpdateFragment
-import com.neqabty.presentation.ui.mobile.MobileFragment
 import com.neqabty.presentation.ui.news.NewsFragment
 import com.neqabty.presentation.ui.newsDetails.NewsDetailsFragment
 import com.neqabty.presentation.ui.notificationDetails.NotificationDetailsFragment
 import com.neqabty.presentation.ui.notifications.NotificationsFragment
 import com.neqabty.presentation.ui.notifications.NotificationsListFragment
+import com.neqabty.presentation.ui.oldsignup.SignupFragment
 import com.neqabty.presentation.ui.payment.PaymentFragment
 import com.neqabty.presentation.ui.phones.PhonesFragment
 import com.neqabty.presentation.ui.search.SearchFragment
 import com.neqabty.presentation.ui.settings.SettingsFragment
-import com.neqabty.presentation.ui.signup.SignupFragment
-import com.neqabty.presentation.ui.signup.SignupStep1Fragment
-import com.neqabty.presentation.ui.signup.SignupStep2Fragment
-import com.neqabty.presentation.ui.signup.SignupStep3Fragment
+import com.neqabty.presentation.ui.oldsignup.SignupStep1Fragment
+import com.neqabty.presentation.ui.oldsignup.SignupStep2Fragment
+import com.neqabty.presentation.ui.oldsignup.SignupStep3Fragment
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesFragment
 import com.neqabty.presentation.ui.syndicates.SyndicatesFragment
 import com.neqabty.presentation.ui.tripDetails.TripDetailsFragment
@@ -61,7 +60,7 @@ abstract class FragmentBuildersModule {
     abstract fun contributeLoginFragment(): LoginFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeSignupFragment(): SignupFragment
+    abstract fun contributeOldSignupFragment(): SignupFragment
 
     @ContributesAndroidInjector
     abstract fun contributeSignupStep1Fragment(): SignupStep1Fragment
@@ -73,10 +72,10 @@ abstract class FragmentBuildersModule {
     abstract fun contributeSignupStep3Fragment(): SignupStep3Fragment
 
     @ContributesAndroidInjector
-    abstract fun contributeMobileFragment(): MobileFragment
+    abstract fun contributeSignupFragment(): com.neqabty.presentation.ui.signup.SignupFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeChangeNumberFragment(): ChangeNumberFragment
+    abstract fun contributeActivateAccountFragment(): ActivateAccountFragment
 
     @ContributesAndroidInjector
     abstract fun contributeMedicalRenewFragment(): MedicalRenewFragment

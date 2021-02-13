@@ -57,9 +57,9 @@ class WheelSyndicateServicesFragment : BaseFragment(), Injectable {
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(R.id.updateDataVerificationFragment)
             else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.UPDATE_DATA)
-                navController().navigate(R.id.mobileFragment, bundle)
+                    val bundle: Bundle = Bundle()
+                    bundle.putInt("type", Constants.UPDATE_DATA)
+                    navController().navigate(R.id.signupFragment, bundle)
             }
         }
 

@@ -169,8 +169,11 @@ interface WebService {
     @POST("api/user/login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>
 
-    @POST("api/Auth/SignUp")
+    @POST("api/user/signup")
     fun signup(@Body signupRequest: SignupRequest): Observable<ApiResponse<UserData>>
+
+    @POST("api/user/activate")
+    fun activateAccount(@Body activateAccountRequest: ActivateAccountRequest): Observable<ApiResponse<UserData>>
 
     @GET("api/complaintServices")
     fun getComplaintTypes(): Observable<List<ComplaintTypeData>>
