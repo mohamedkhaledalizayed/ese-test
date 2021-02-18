@@ -73,7 +73,6 @@ class SignupFragment : BaseFragment(), Injectable {
                 login()
             }, cancelCallback = {
                 llSuperProgressbar.visibility = View.GONE
-                navController().navigateUp()
             }, message = error?.message)
         })
         initializeViews()
@@ -84,11 +83,8 @@ class SignupFragment : BaseFragment(), Injectable {
         if (PreferencesHelper(requireContext()).mobile.isNotEmpty())
             binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
 
-        if (!PreferencesHelper(requireContext()).user.equals("null"))
-            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
-
         binding.bSend.setOnClickListener {
-            ensureLogin()
+            login()
         }
 
         val vto = ivHint.getViewTreeObserver()
@@ -112,48 +108,10 @@ class SignupFragment : BaseFragment(), Injectable {
             activity?.invalidateOptionsMenu()
             PreferencesHelper(requireContext()).token = newToken
             PreferencesHelper(requireContext()).mobile = edMobile.text.toString()
-            PreferencesHelper(requireContext()).user = state.user?.details!![0].userNumber!!
-            PreferencesHelper(requireContext()).name = state.user?.details!![0].name!!
-            showTwoButtonsAlert(message = getString(R.string.welcome_with_name, state.user?.details!![0].name!!),
-                    okCallback = {
-                        state.user = null
-
-                        navController().navigate(SignupFragmentDirections.openActivateAccountFragment(type!!))
-//                        when (type) {
-//                            Constants.CLAIMING -> navController().navigate(
-//                                    SignupFragmentDirections.openClaiming()
-//                            )
-//
-//                            Constants.TRIPS -> navController().navigate(
-//                                    SignupFragmentDirections.openTripReservation(TripsData.tripItem!!)
-//                            )
-//
-//                            Constants.RECORDS -> navController().navigate(
-//                                    SignupFragmentDirections.openEngineeringRecords()
-//                            )
-//
-//                            Constants.UPDATE_DATA -> navController().navigate(
-//                                    SignupFragmentDirections.openUpdateDataVerification()
-//                            )
-//
-//                            Constants.COMPLAINTS -> navController().navigate(
-//                                    SignupFragmentDirections.openComplaints()
-//                            )
-//
-//                            Constants.CORONA -> navController().navigate(
-//                                    SignupFragmentDirections.openCorona()
-//                            )
-//
-//                            Constants.MEDICAL_RENEW -> navController().navigate(
-//                                    SignupFragmentDirections.openMedicalRenew()
-//                            )
-//                        }
-                    },
-                    cancelCallback = {
-                        state.user = null
-                        navController().popBackStack(R.id.homeFragment,false)
-                        navController().navigate(R.id.homeFragment)
-                    })
+//            PreferencesHelper(requireContext()).user = state.user?.details!![0].userNumber!!
+//            PreferencesHelper(requireContext()).name = state.user?.details!![0].name!!
+            state.user = null
+            navController().navigate(SignupFragmentDirections.openActivateAccountFragment(edNationalNumber.text.toString(), type!!))
         }
     }
 
@@ -192,18 +150,6 @@ class SignupFragment : BaseFragment(), Injectable {
         }
     }
 
-    private fun showAlert(msg: String) {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle(getString(R.string.alert_title))
-        builder.setMessage(msg)
-        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
-            dialog.dismiss()
-        }
-
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
     private fun showCardDialog() {
         val dialog = Dialog(requireContext())
         dialog.getWindow()!!.requestFeature(Window.FEATURE_NO_TITLE)
@@ -211,22 +157,6 @@ class SignupFragment : BaseFragment(), Injectable {
         dialog.setContentView(layoutInflater.inflate(R.layout.image_item, null), ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
         dialog.setCanceledOnTouchOutside(true)
         dialog.show()
-    }
-
-    private fun ensureLogin() {
-        builder = AlertDialog.Builder(requireContext())
-        builder?.setTitle(getString(R.string.alert_title))
-        builder?.setMessage(Html.fromHtml(getString(R.string.number_confirmation, edMemberNumber.text.toString()) + getString(R.string.member_number_confirmation)))
-        builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
-            dialog.dismiss()
-            login()
-        }
-        builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
-            dialog.dismiss()
-        }
-
-        var dialog = builder?.create()
-        dialog?.show()
     }
 
 //    private fun hideKeyboard() {

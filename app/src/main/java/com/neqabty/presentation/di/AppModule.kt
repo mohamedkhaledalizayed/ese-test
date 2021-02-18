@@ -185,8 +185,26 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideForgetPassword(neqabtyRepository: NeqabtyRepository): ForgetPassword {
+        return ForgetPassword(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideChangePassword(neqabtyRepository: NeqabtyRepository): ChangePassword {
+        return ChangePassword(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideSignupUser(neqabtyRepository: NeqabtyRepository): SignupUser {
         return SignupUser(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSendSMS(neqabtyRepository: NeqabtyRepository): SendSMS {
+        return SendSMS(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

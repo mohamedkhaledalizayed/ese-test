@@ -17,19 +17,21 @@ class Login @Inject constructor(
         private const val PARAM_USER_NUMBER = "param:userNumber"
         private const val PARAM_NEW_TOKEN = "param:newToken"
         private const val PARAM_OLD_TOKEN = "param:oldToken"
+        private const val PARAM_PASSWORD = "param:password"
         const val PARAM_ACTION_LOGIN = "login"
         const val PARAM_ACTION_UPGRADE = "upgradeToClient"
         const val PARAM_ACTION_CHANGE = "changeUserNumber"
         const val PARAM_ACTION_VERIFIED_LOGIN = "verifiedLogin"
     }
 
-    fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String): Observable<UserEntity> {
+    fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String, password: String): Observable<UserEntity> {
         val data = HashMap<String, String>()
         data[PARAM_ACTION_TYPE] = actionType
         data[PARAM_MOBILE] = mobile
         data[PARAM_USER_NUMBER] = userNumber
         data[PARAM_NEW_TOKEN] = newToken
         data[PARAM_OLD_TOKEN] = oldToken
+        data[PARAM_PASSWORD] = password
         return observable(data)
     }
 
@@ -39,6 +41,7 @@ class Login @Inject constructor(
         val userNumber = data?.get(PARAM_USER_NUMBER) as String
         val newToken = data?.get(PARAM_NEW_TOKEN) as String
         val oldToken = data?.get(PARAM_OLD_TOKEN) as String
-        return neqabtyRepository.login(actionType, mobile, userNumber, newToken, oldToken)
+        val password = data?.get(PARAM_PASSWORD) as String
+        return neqabtyRepository.login(actionType, mobile, userNumber, newToken, oldToken, password)
     }
 }

@@ -5,6 +5,7 @@ import com.neqabty.data.api.requests.*
 import com.neqabty.data.mappers.*
 import com.neqabty.domain.NeqabtyDataStore
 import com.neqabty.domain.entities.*
+import com.neqabty.domain.usecases.ChangePassword
 import com.neqabty.presentation.di.DI
 import io.reactivex.Observable
 import okhttp3.MediaType
@@ -99,7 +100,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
 
     private val verifyUserDataEntityMapper = VerifyUserDataEntityMapper()
     override fun verifyUser(userNumber: String, mobileNumber: String): Observable<VerifyUserDataEntity> {
-        return api.sendVerifySMS(SendSMSRequest(userNumber, mobileNumber)).map { result ->
+        return api.sendVerifySMS(SendSMSRequest(mobileNumber)).map { result ->
             verifyUserDataEntityMapper.mapFrom(result)
         }
     }
@@ -295,14 +296,14 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     private val medicalRenewalPaymentDataEntityMapper = MedicalRenewalPaymentDataEntityMapper()
 
     override fun inquireMedicalRenewalPayment(isInquire: Boolean, mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
-//        return if(isInquire) api.inquireHealthCare(userNumber).flatMap { renewalPaymentInfo ->
-//            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
-//        } else api.getMedicalRenewPaymentData(mobileNumber, userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
-//            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
-//        }
-        return api.getMedicalRenewPaymentData(mobileNumber, userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
+        return if(isInquire) api.inquireHealthCare(userNumber).flatMap { renewalPaymentInfo ->
+            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
+        } else api.getMedicalRenewPaymentData(mobileNumber, userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
             Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
         }
+//        return api.getMedicalRenewPaymentData(mobileNumber, userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
+//            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
+//        }
     }
 
     private val medicalRenewalEntityDataMapper = MedicalRenewalEntityDataMapper()
@@ -571,15 +572,33 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    override fun sendSMS(mobileNumber: String): Observable<Unit> {
+        return api.sendSMS(SendSMSRequest(mobileNumber)).map { smsResponse ->
+            smsResponse ?: Unit
+        }
+    }
+
     override fun activateAccount(mobile: String, verificationCode: String, password: String): Observable<UserEntity> {
         return api.activateAccount(ActivateAccountRequest(mobile, verificationCode, password)).flatMap { userDataResponse ->
             Observable.just(userDataEntityMapper.mapFrom(userDataResponse.data!!))
         }
     }
 
-    override fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String): Observable<UserEntity> {
-        return api.login(LoginRequest(actionType, mobile, userNumber, newToken, oldToken)).map { userData ->
+    override fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String, password: String): Observable<UserEntity> {
+        return api.login(LoginRequest(actionType, mobile, userNumber, newToken, oldToken, password)).map { userData ->
             userDataEntityMapper.mapFrom(userData.data!!)
+        }
+    }
+
+    override fun forgetPassword(mobile: String): Observable<String> {
+        return api.forgetPassword(ForgetPasswordRequest(mobile)).flatMap { response ->
+            Observable.just(response.arMsg)
+        }
+    }
+
+    override fun changePassword(mobile: String, currentPassword: String, newPassword: String): Observable<String> {
+        return api.changePassword(ChangePasswordRequest(mobile, currentPassword, newPassword)).flatMap { response ->
+            Observable.just(response.arMsg)
         }
     }
 }

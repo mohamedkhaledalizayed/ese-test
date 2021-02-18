@@ -1,14 +1,14 @@
 package com.neqabty.presentation.ui.activateAccount
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.Login
+import com.neqabty.domain.usecases.ActivateAccount
+import com.neqabty.domain.usecases.SendSMS
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.UserEntityUIMapper
-import com.neqabty.presentation.util.PreferencesHelper
 import javax.inject.Inject
 
-class ActivateAccountViewModel @Inject constructor(val login: Login) : BaseViewModel() {
+class ActivateAccountViewModel @Inject constructor(val sendSMS: SendSMS, val activateAccount: ActivateAccount) : BaseViewModel() {
 
     private val userEntityToUIMapper = UserEntityUIMapper()
 
@@ -19,15 +19,32 @@ class ActivateAccountViewModel @Inject constructor(val login: Login) : BaseViewM
         viewState.value = ActivateAccountViewState()
     }
 
-    fun activateAccount(
-            mobile: String,
-            userNumber: String,
-            token: String,
-            prefs: PreferencesHelper
+
+    fun sendSMS(
+            mobile: String
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
 
-        addDisposable(login.login(Login.PARAM_ACTION_CHANGE, mobile, userNumber, token, prefs.token)
+        addDisposable(sendSMS.sendSMS(mobile)
+                .subscribe(
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = true)
+                        },
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = false)
+                            errorState.value = handleError(it)
+                        }
+                ))
+    }
+
+    fun activateAccount(
+            mobile: String,
+            verificationCode: String,
+            password: String
+    ) {
+        viewState.value = viewState.value?.copy(isLoading = true)
+
+        addDisposable(activateAccount.activateAccount(mobile, verificationCode, password)
                 .map {
                     it.let {
                         userEntityToUIMapper.mapFrom(it)

@@ -34,7 +34,8 @@ data class MedicalRenewalEntity(
             var nationalId: String? = null,
             var relationType: String? = null,
             var relationTypeName: String? = null,
-            var gender: String? = null
+            var gender: String? = null,
+            var lastMedYear: String? = ""
     )
 
     data class RelationItem(

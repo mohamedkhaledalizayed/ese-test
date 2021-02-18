@@ -32,6 +32,7 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.ui.common.PhotosAdapter
+import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.ImageUtils.Companion.createImageFile
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -108,7 +109,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
 
         binding.bAddPhoto.setOnClickListener {
             if (photosList.size < 5)
-                grantCameraPermission()
+                addPhoto()
         }
 
         val adapter = PhotosAdapter(dataBindingComponent, appExecutors) { photo ->
@@ -260,7 +261,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(requireContext(), arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
             fo.close()
-            return PhotoUI(path, name,null)
+            return PhotoUI(path, name, Uri.parse(path + "/" + name))
         } catch (e1: IOException) {
             e1.printStackTrace()
         }

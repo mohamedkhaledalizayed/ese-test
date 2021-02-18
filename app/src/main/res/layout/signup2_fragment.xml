@@ -58,7 +58,7 @@
                     android:id="@+id/edMobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:textDirection="anyRtl"
                     android:inputType="number"
                     android:maxLength="5"
                     android:textSize="@dimen/text_size_medium" />

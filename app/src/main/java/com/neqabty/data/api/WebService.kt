@@ -169,8 +169,17 @@ interface WebService {
     @POST("api/user/login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>
 
+    @POST("api/user/password/forget")
+    fun forgetPassword(@Body forgetPasswordRequest: ForgetPasswordRequest): Observable<ApiResponse<Unit>>
+
+    @POST("api/user/password/change")
+    fun changePassword(@Body changePasswordRequest: ChangePasswordRequest): Observable<ApiResponse<String>>
+
     @POST("api/user/signup")
     fun signup(@Body signupRequest: SignupRequest): Observable<ApiResponse<UserData>>
+
+    @POST("api/user/sms/resend")
+    fun sendSMS(@Body sendSMSRequest: SendSMSRequest): Observable<Unit>
 
     @POST("api/user/activate")
     fun activateAccount(@Body activateAccountRequest: ActivateAccountRequest): Observable<ApiResponse<UserData>>

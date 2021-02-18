@@ -56,7 +56,8 @@ data class MedicalRenewalUI(
             var nationalId: String? = null,
             var relationType: String? = null,
             var relationTypeName: String? = null,
-            var gender: String? = "M"
+            var gender: String? = "M",
+            var lastMedYear: String? = ""
     ) : Parcelable{
         override fun toString(): String {
             return name ?: ""

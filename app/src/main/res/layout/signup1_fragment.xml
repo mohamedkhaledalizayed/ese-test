@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@mipmap/username_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-
+                    android:textDirection="anyRtl"
                     android:hint="@string/fullName"
                     android:inputType="text"
                     android:textSize="@dimen/text_size_medium" />
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@mipmap/phone_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-
+                    android:textDirection="anyRtl"
                     android:hint="@string/phoneNumber"
                     android:inputType="phone"
                     android:textSize="@dimen/text_size_medium" />
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@mipmap/email_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-
+                    android:textDirection="anyRtl"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:textSize="@dimen/text_size_medium" />
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@mipmap/password_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-
+                    android:textDirection="anyRtl"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:textSize="@dimen/text_size_medium" />
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@mipmap/password_ic"
                     android:drawablePadding="@dimen/margin_horizontal_small"
-
+                    android:textDirection="anyRtl"
                     android:hint="@string/confirmPassword"
                     android:inputType="textPassword"
                     android:textSize="@dimen/text_size_medium" />
@@ -96,7 +96,7 @@
                         android:layout_weight=".5"
                         android:drawableStart="@mipmap/age_ic"
                         android:drawablePadding="@dimen/margin_horizontal_small"
-
+                        android:textDirection="anyRtl"
                         android:hint="@string/age"
                         android:inputType="date"
                         android:textSize="@dimen/text_size_medium" />

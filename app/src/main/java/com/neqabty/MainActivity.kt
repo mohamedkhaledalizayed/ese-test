@@ -383,6 +383,12 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             Navigation.findNavController(this, R.id.container)
                     .navigate(R.id.openLoginFragment)
         }
+        (nav_view as NavigationView).getHeaderView(0).findViewById<Button>(R.id.bChangePassword).setOnClickListener {
+            (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            Navigation.findNavController(this, R.id.container)
+                    .navigate(R.id.openChangePasswordFragment)
+        }
 
         if (PreferencesHelper(this).name.isNotEmpty()) {
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
@@ -391,9 +397,11 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
 
         if (PreferencesHelper(this).user.isNotEmpty()) {
+            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.bChangePassword).visibility = View.VISIBLE
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.VISIBLE
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
         } else {
+            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.bChangePassword).visibility = View.INVISIBLE
             (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.GONE
         }
         (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, PreferencesHelper(this).mobile)))

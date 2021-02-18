@@ -155,6 +155,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
 
             val temp = medicalRenewalUI.deepClone(medicalRenewalUI)
             temp?.contact?.pic = ""
+            temp?.followers = temp?.followers?.filter {it.lastMedYear != null && it.lastMedYear!!.toInt() >= 2021}?.toMutableList()
             for (item: MedicalRenewalUI.FollowerItem in temp?.followers!!) {
                 item.pic = ""
                 item.attachments = mutableListOf()

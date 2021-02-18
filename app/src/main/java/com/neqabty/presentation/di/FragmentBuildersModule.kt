@@ -4,6 +4,7 @@ import com.neqabty.presentation.ui.about.AboutFragment
 import com.neqabty.presentation.ui.aboutApp.AboutAppFragment
 import com.neqabty.presentation.ui.addCompanion.AddCompanionFragment
 import com.neqabty.presentation.ui.activateAccount.ActivateAccountFragment
+import com.neqabty.presentation.ui.changePassword.ChangePasswordFragment
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaFragment
 import com.neqabty.presentation.ui.claiming.*
 import com.neqabty.presentation.ui.complaint.ComplaintFragment
@@ -16,6 +17,7 @@ import com.neqabty.presentation.ui.inquiry.InquiryFragment
 import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsFragment
 import com.neqabty.presentation.ui.intro.IntroFragment
 import com.neqabty.presentation.ui.login.LoginFragment
+import com.neqabty.presentation.ui.loginWithPassword.LoginWithPasswordFragment
 import com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragment
 import com.neqabty.presentation.ui.medicalMain.MedicalMainFragment
 import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsFragment
@@ -60,6 +62,9 @@ abstract class FragmentBuildersModule {
     abstract fun contributeLoginFragment(): LoginFragment
 
     @ContributesAndroidInjector
+    abstract fun contributeLoginWithPasswordFragment(): LoginWithPasswordFragment
+
+    @ContributesAndroidInjector
     abstract fun contributeOldSignupFragment(): SignupFragment
 
     @ContributesAndroidInjector
@@ -76,6 +81,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeActivateAccountFragment(): ActivateAccountFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeChangePasswordFragment(): ChangePasswordFragment
 
     @ContributesAndroidInjector
     abstract fun contributeMedicalRenewFragment(): MedicalRenewFragment

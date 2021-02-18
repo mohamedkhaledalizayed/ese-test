@@ -312,12 +312,24 @@ class NeqabtyRepositoryImpl @Inject constructor(
 //                }
     }
 
+    override fun sendSMS(mobileNumber: String): Observable<Unit> {
+        return remoteDataStore.sendSMS(mobileNumber)
+    }
+
     override fun activateAccount(mobile: String, verificationCode: String, password: String): Observable<UserEntity> {
         return remoteDataStore.activateAccount(mobile, verificationCode, password)
     }
 
-    override fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String): Observable<UserEntity> {
-        return remoteDataStore.login(actionType, mobile, userNumber, newToken, oldToken)
+    override fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String, password: String): Observable<UserEntity> {
+        return remoteDataStore.login(actionType, mobile, userNumber, newToken, oldToken, password)
+    }
+
+    override fun forgetPassword(mobile: String): Observable<String> {
+        return remoteDataStore.forgetPassword(mobile)
+    }
+
+    override fun changePassword(mobile: String, currentPassword: String, newPassword: String): Observable<String> {
+        return remoteDataStore.changePassword(mobile, currentPassword, newPassword)
     }
 
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {

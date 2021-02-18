@@ -97,7 +97,7 @@ open class BaseFragment : Fragment() {
             } catch (e: Exception) {
             }
         }
-        builder.setNegativeButton(getString(R.string.change_number_title)) { dialog, which ->
+        builder.setNegativeButton(getString(R.string.change_password_title)) { dialog, which ->
             try {
                 cancelCallback.invoke()
                 dialog?.dismiss()

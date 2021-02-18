@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.neqabty.MainViewModel
 import com.neqabty.presentation.ui.about.AboutViewModel
 import com.neqabty.presentation.ui.activateAccount.ActivateAccountViewModel
+import com.neqabty.presentation.ui.changePassword.ChangePasswordViewModel
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaViewModel
 import com.neqabty.presentation.ui.claiming.ClaimingViewModel
 import com.neqabty.presentation.ui.complaint.ComplaintViewModel
@@ -16,6 +17,7 @@ import com.neqabty.presentation.ui.home.HomeViewModel
 import com.neqabty.presentation.ui.inquiry.InquiryViewModel
 import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsViewModel
 import com.neqabty.presentation.ui.login.LoginViewModel
+import com.neqabty.presentation.ui.loginWithPassword.LoginWithPasswordViewModel
 import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsViewModel
 import com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsViewModel
 import com.neqabty.presentation.ui.medicalProviders.MedicalProvidersViewModel
@@ -51,6 +53,11 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(LoginWithPasswordViewModel::class)
+    abstract fun bindLoginWithPasswordViewModel(loginWithPasswordViewModel: LoginWithPasswordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(SignupViewModel::class)
     abstract fun bindOldSignupViewModel(signupViewModel: SignupViewModel): ViewModel
 
@@ -63,6 +70,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ActivateAccountViewModel::class)
     abstract fun bindActivateAccountViewModel(activateAccountViewModel: ActivateAccountViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChangePasswordViewModel::class)
+    abstract fun bindChangePasswordViewModel(changePasswordViewModel: ChangePasswordViewModel): ViewModel
 
     @Binds
     @IntoMap

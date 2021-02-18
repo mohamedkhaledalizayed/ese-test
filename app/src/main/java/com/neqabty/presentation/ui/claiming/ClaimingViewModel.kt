@@ -5,6 +5,7 @@ import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.ClaimingValidationUI
+import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.mappers.*
 
 import java.io.File
@@ -42,6 +43,7 @@ class ClaimingViewModel @Inject constructor(
                     }
                 }.subscribe(
                         {
+                            it.followers = it.followers?.filter {it.lastMedYear != null && it.lastMedYear!!.toInt() >= 2021}?.toMutableList()
                             viewState.value = viewState.value?.copy(medicalRenewalUI = it)
                             onContent1Received()
                         },

@@ -28,7 +28,7 @@ class MainViewModel @Inject constructor(val login: Login,
             prefs: PreferencesHelper
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(login.login(Login.PARAM_ACTION_LOGIN, mobile, userNumber, token, prefs.token)
+        addDisposable(login.login(Login.PARAM_ACTION_LOGIN, mobile, userNumber, token, prefs.token,"")
                 .map {
                     it.let {
                         userEntityToUIMapper.mapFrom(it)

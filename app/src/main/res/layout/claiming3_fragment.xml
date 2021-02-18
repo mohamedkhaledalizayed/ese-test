@@ -47,6 +47,7 @@
                     android:enabled="false"
                     android:hint="@string/syndicateNumber"
                     android:inputType="number"
+                    android:textDirection="anyRtl"
                     android:textSize="@dimen/text_size_medium" />
 
                 <TextView
@@ -66,6 +67,7 @@
                     android:enabled="false"
                     android:hint="@string/cardNumber"
                     android:inputType="number"
+                    android:textDirection="anyRtl"
                     android:textSize="@dimen/text_size_medium" />
 
                 <TextView
@@ -86,6 +88,7 @@
                     android:enabled="false"
                     android:hint="@string/syndicateNumber"
                     android:inputType="number"
+                    android:textDirection="anyRtl"
                     android:textSize="@dimen/text_size_medium" />
 
                 <TextView
@@ -105,6 +108,7 @@
                     android:layout_height="150dp"
                     android:inputType="textLongMessage"
                     android:maxLength="500"
+                    android:textDirection="anyRtl"
                     android:gravity="start|top"
                     android:textSize="@dimen/text_size_medium" />
 

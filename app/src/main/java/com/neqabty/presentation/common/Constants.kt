@@ -16,7 +16,7 @@ object Constants {
 
     var IP = "http://3.131.229.146:44392"
     var PROD_IP = "front.neqabty.com"
-    var DNS = "https://$PROD_IP"
+    var DNS = if(BuildConfig.DEBUG) IP else "https://$PROD_IP"
 
     var COWPAY_MODE = if(BuildConfig.DEBUG) CowpayConstantKeys.SandBox else CowpayConstantKeys.Production
     var CC_COMMISSION = .0288

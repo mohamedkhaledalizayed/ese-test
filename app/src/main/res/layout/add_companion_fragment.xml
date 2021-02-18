@@ -41,6 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_small"
                     android:gravity="center"
+                    android:textDirection="anyRtl"
                     android:textColor="@color/text_dark"
                     android:textSize="@dimen/text_size_medium"
                     app:layout_constraintTop_toBottomOf="@id/tvName" />

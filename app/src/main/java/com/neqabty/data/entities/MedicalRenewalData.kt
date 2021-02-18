@@ -67,7 +67,9 @@ data class MedicalRenewalData(
             @field:SerializedName("MedRelationTypeName")
             var relationTypeName: String? = "",
             @field:SerializedName("GENDER")
-            var gender: String? = null
+            var gender: String? = null,
+            @field:SerializedName("LastMedCareyear")
+            var lastMedYear: String? = ""
 
     )
 

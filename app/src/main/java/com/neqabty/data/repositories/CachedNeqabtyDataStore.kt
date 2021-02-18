@@ -256,8 +256,16 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         return neqabtyCache.saveTrips(trips)
     }
 
-    override fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String): Observable<UserEntity> {
+    override fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String, password: String): Observable<UserEntity> {
         return neqabtyCache.getUser()
+    }
+
+    override fun forgetPassword(mobile: String): Observable<String> {
+        TODO("Not yet implemented")
+    }
+
+    override fun changePassword(mobile: String, currentPassword: String, newPassword: String): Observable<String> {
+        TODO("Not yet implemented")
     }
 
     override fun signup(
@@ -268,6 +276,10 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
             oldFirebaseToken: String
     ): Observable<UserEntity> {
         return neqabtyCache.getUser()
+    }
+
+    override fun sendSMS(mobileNumber: String): Observable<Unit> {
+        TODO("Not yet implemented")
     }
 
     override fun activateAccount(mobile: String, verificationCode: String, password: String): Observable<UserEntity> {

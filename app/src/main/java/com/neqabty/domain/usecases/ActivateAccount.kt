@@ -17,7 +17,7 @@ class ActivateAccount @Inject constructor(
         private const val PARAM_PASSWORD = "param:password"
     }
 
-    fun signup(
+    fun activateAccount(
             mobile: String,
             verificationCode: String,
             password: String

@@ -69,12 +69,12 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
             if (it != null) handleViewState(it)
         })
         loginViewModel.errorState.observe(this, Observer { error ->
-            showConnectionAlert(requireContext(), retryCallback = {
-                login()
-            }, cancelCallback = {
+//            showConnectionAlert(requireContext(), retryCallback = {
+//                login()
+//            }, cancelCallback = {
                 llSuperProgressbar.visibility = View.GONE
-                navController().navigateUp()
-            }, message = error?.message)
+//            }, message = error?.message)
+            navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(edMobile.text.toString()))
         })
     }
 
@@ -83,30 +83,18 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
         state.user?.let {
             //TODO subscribe
             //TODO set coming data it.details!![0]
-            PreferencesHelper(requireContext()).isForceLogout = false
-            PreferencesHelper(requireContext()).mobile = it.mobile
-            PreferencesHelper(requireContext()).userType = it.type
-            PreferencesHelper(requireContext()).jwt = it.jwt
-            Constants.JWT = it.jwt ?: ""
-            PreferencesHelper(requireContext()).mainSyndicate = 5
-            PreferencesHelper(requireContext()).subSyndicate = 0
+//            it.type = "verified"
             if (it.type.equals("verified")) {
-                showTwoButtonsAlert(message = getString(R.string.welcome_with_name_login, it.details!![0].name!!),
-                        okCallback = {
-                            PreferencesHelper(requireContext()).name = it.details!![0].name!!
-                            PreferencesHelper(requireContext()).user = it.details!![0].userNumber!!
-                            PreferencesHelper(requireContext()).isRegistered = true
                             state.user = null
-                            navController().navigate(LoginFragmentDirections.openHome())
-                        },
-                        cancelCallback = {
-                            PreferencesHelper(requireContext()).name = it.details!![0].name!!
-                            PreferencesHelper(requireContext()).user = it.details!![0].userNumber!!
-                            PreferencesHelper(requireContext()).isRegistered = true
-                            state.user = null
-                            navController().navigate(R.id.signupFragment)
-                        })
-            } else {
+                            navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(it.mobile))
+            } else {// visitor
+                PreferencesHelper(requireContext()).mobile = it.mobile
+                PreferencesHelper(requireContext()).userType = it.type
+                PreferencesHelper(requireContext()).jwt = it.jwt
+                Constants.JWT = it.jwt ?: ""
+                PreferencesHelper(requireContext()).mainSyndicate = 5
+                PreferencesHelper(requireContext()).subSyndicate = 0
+                PreferencesHelper(requireContext()).isForceLogout = false
                 navController().navigate(LoginFragmentDirections.openHome())
             }
         }
@@ -115,7 +103,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
     fun initializeViews() {
         newToken = PreferencesHelper(requireContext()).token
         binding.bSend.setOnClickListener {
-            ensureLogin()
+            login()
         }
     }
 
@@ -147,35 +135,6 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
             false
         }
     }
-
-    private fun showAlert(msg: String) {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle(getString(R.string.alert_title))
-        builder.setMessage(msg)
-        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, which ->
-            dialog.dismiss()
-        }
-
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
-    private fun ensureLogin() {
-        builder = AlertDialog.Builder(requireContext())
-        builder?.setTitle(getString(R.string.alert_title))
-        builder?.setMessage(Html.fromHtml(getString(R.string.number_confirmation, edMobile.text.toString()) + getString(R.string.mobile_number_confirmation)))
-        builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
-            login()
-            dialog.dismiss()
-        }
-        builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
-            dialog.dismiss()
-        }
-
-        var dialog = builder?.create()
-        dialog?.show()
-    }
-
     override fun showOptionsMenu() {
     }
 // endregion

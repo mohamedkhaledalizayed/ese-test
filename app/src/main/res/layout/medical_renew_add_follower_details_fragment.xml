@@ -51,6 +51,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_small"
                     android:gravity="center"
                     android:textColor="@color/text_dark"
+                    android:textDirection="anyRtl"
                     android:textSize="@dimen/text_size_medium" />
 
                 <TextView
@@ -69,6 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_small"
                     android:gravity="start"
+                    android:textDirection="anyRtl"
                     android:inputType="number"
                     android:maxLength="14"
                     android:textColor="@color/text_dark"
@@ -110,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_small"
                     android:clickable="true"
+                    android:textDirection="anyRtl"
                     android:editable="false"
                     android:focusable="false"
                     android:gravity="center"
@@ -132,6 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_small"
                     android:gravity="start"
+                    android:textDirection="anyRtl"
                     android:inputType="number"
                     android:maxLength="11"
                     android:textColor="@color/text_dark"

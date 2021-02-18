@@ -16,5 +16,8 @@ data class LoginRequest(
         var newToken: String = "",
 
         @SerializedName("old_firebase_token")
-        var oldToken: String = ""
+        var oldToken: String = "",
+
+        @SerializedName("password")
+        var password: String = ""
 )

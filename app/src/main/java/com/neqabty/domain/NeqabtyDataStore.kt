@@ -123,7 +123,9 @@ interface NeqabtyDataStore {
             doc5: File?
     ): Observable<Unit>
 
-    fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String): Observable<UserEntity>
+    fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String, password: String=""): Observable<UserEntity>
+    fun forgetPassword(mobile: String): Observable<String>
+    fun changePassword(mobile: String, currentPassword: String, newPassword: String): Observable<String>
     fun signup(
             userNumber: String,
             mobile: String,
@@ -131,6 +133,7 @@ interface NeqabtyDataStore {
             newFirebaseToken: String,
             oldFirebaseToken: String
     ): Observable<UserEntity>
+    fun sendSMS(mobileNumber: String): Observable<Unit>
     fun activateAccount(
             mobile: String,
             verificationCode: String,

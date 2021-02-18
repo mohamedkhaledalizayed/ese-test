@@ -54,6 +54,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:maxLength="5"
+                    android:textDirection="anyRtl"
                     android:gravity="center"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:textColor="@color/colorPrimary"
