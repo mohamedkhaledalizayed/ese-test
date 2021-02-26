@@ -40,7 +40,10 @@
     <string name="gender">النوع</string>
     <string name="prev">السابق</string>
     <string name="next">التالي</string>
-    <string name="signup_title">إنشاء حساب</string>
+    <string name="signup_title">إنشاء حساب جديد</string>
+    <string name="signup_submit">إنشاء حساب</string>
+    <string name="signup_hint">هذا الرقم غير مسجل من قبل برجاء انشاء حساب حتى تتمكن من استخدام الخدمة</string>
+    <string name="activate_account_hint">تم انشاء الحساب بنجاح, سيتم ارسال رسالة نصية بكود التعريف وكلمة المرور برجاء تفعيل الحساب</string>
     <string name="personalDetails">البيانات الشخصية</string>
     <string name="confirm">تأكيد</string>
     <string name="welcome">مرحبا بكم</string>
@@ -110,7 +113,7 @@
     <string name="request_status">طلبكم تحت الدراسة</string>
     <string name="continue_btn">متابعة</string>
     <string name="skip_btn">تخطي</string>
-    <string name="loginHint">يمكنك الآن الدخول على التطبيق و الاستمتاع بخدمات نقابتك</string>
+    <string name="login_hint">يمكنك الآن الدخول على التطبيق و الاستمتاع بخدمات نقابتك</string>
     <string name="update_msg">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
     <string name="root_msg">هذا الجهاز غير متوافق مع الحد الادني من شروط الامان الخاصة بالتطبيق.</string>
 
@@ -244,7 +247,7 @@
     <string name="pick_photo">من فضلك أرفق صورة الطلب</string>
     <string name="pick_photos">من فضلك أرفق الصور المطلوبة</string>
     <string name="pick_photo_trips">من فضلك أرفق صور المستندات المطلوبة</string>
-    <string name="ok_btn">موافق</string>
+    <string name="ok_btn">تأكيد</string>
     <string name="cancel_btn">إلغاء</string>
 
     <string name="address_title">العنوان: </string>
@@ -504,4 +507,5 @@
     <string name="body_content">السادة / جهات العلاج المتعاقدة مع مشروع العلاج لنقابة المهندسين يرجى العلم بتجديد اشتراك 2021 للمهندس المدون بياناته و تابعيه لذا يرجى تقديم الخدمة الطبية لحين اصدار الكارنيه و يعد هذا الايصال بمثابة كارنيه المشروع لحين اصداره</string>
     <string name="titleContent">اشتراك الرعاية الصحية</string>
     <string name="upload_pdf">تحميل اخطار الدفع</string>
+    <string name="arabic_letters">غظضذ خثتشرقصجفعسنملةىكيطئءؤحزوهدبا أإلإآ</string>
 </resources>

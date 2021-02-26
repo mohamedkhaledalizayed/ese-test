@@ -91,13 +91,13 @@ open class BaseFragment : Fragment() {
         builder.setTitle(title)
         builder.setCancelable(false)
         builder.setMessage(Html.fromHtml(message))
-        builder.setPositiveButton(getString(R.string.alert_confirm_login)) { dialog, _ ->
+        builder.setPositiveButton(getString(R.string.confirm)) { dialog, _ ->
             try {
                 okCallback.invoke()
             } catch (e: Exception) {
             }
         }
-        builder.setNegativeButton(getString(R.string.change_password_title)) { dialog, which ->
+        builder.setNegativeButton(getString(R.string.cancel_btn)) { dialog, which ->
             try {
                 cancelCallback.invoke()
                 dialog?.dismiss()

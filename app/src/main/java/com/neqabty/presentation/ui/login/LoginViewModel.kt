@@ -23,19 +23,16 @@ class LoginViewModel @Inject constructor(val login: Login) : BaseViewModel() {
     }
 
     fun login(
-            mobile: String,
-            token: String,
-            prefs: PreferencesHelper
+            mobile: String
     ) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(login.login(Login.PARAM_ACTION_LOGIN, mobile, "", token, prefs.token,"")
+        addDisposable(login.login(Login.PARAM_ACTION_LOGIN, mobile, "", "", "","")
                 .map {
                     it.let {
                         userEntityToUIMapper.mapFrom(it)
                     }
                 }.subscribe(
                         {
-                            prefs.token = token
                             onUserReceived(it)
                         },
                         { errorState.value = handleError(it) }

@@ -131,8 +131,9 @@ interface NeqabtyRepository {
     ): Observable<Unit>
 
     fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String, password: String=""): Observable<UserEntity>
-    fun forgetPassword(mobile: String): Observable<String>
+    fun forgetPassword(mobile: String, userNumber: String): Observable<String>
     fun changePassword(mobile: String, currentPassword: String, newPassword: String): Observable<String>
+    fun setNewPassword(mobile: String, verificationCode: String, newPassword: String): Observable<String>
     fun signup(
             userNumber: String,
             mobile: String,

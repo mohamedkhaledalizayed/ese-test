@@ -12,6 +12,7 @@ import com.neqabty.presentation.ui.corona.CoronaFragment
 import com.neqabty.presentation.ui.engineeringRecordsDetails.EngineeringRecordsDetailsFragment
 import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryFragment
 import com.neqabty.presentation.ui.favorites.FavoritesFragment
+import com.neqabty.presentation.ui.forgetPassword.ForgetPasswordFragment
 import com.neqabty.presentation.ui.home.*
 import com.neqabty.presentation.ui.inquiry.InquiryFragment
 import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsFragment
@@ -84,6 +85,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeChangePasswordFragment(): ChangePasswordFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeForgetPasswordFragment(): ForgetPasswordFragment
 
     @ContributesAndroidInjector
     abstract fun contributeMedicalRenewFragment(): MedicalRenewFragment

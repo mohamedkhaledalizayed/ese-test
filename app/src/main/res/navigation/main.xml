@@ -55,6 +55,22 @@
         <action
             android:id="@+id/openHome"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/openForgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="com.neqabty.presentation.ui.forgetPassword.ForgetPasswordFragment"
+        android:label="@string/forgetPassword"
+        tools:layout="@layout/forget_password_fragment">
+        <argument
+            android:name="mobile"
+            app:argType="java.lang.String" />
+        <action
+            android:id="@+id/openChangePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
 
     <fragment
@@ -79,11 +95,14 @@
         android:label="@string/activate_account_title"
         tools:layout="@layout/activate_account_fragment">
         <argument
-            android:name="password"
-            app:argType="java.lang.String" />
-        <argument
             android:name="type"
             app:argType="java.lang.Integer" />
+        <argument
+            android:name="otp"
+            app:argType="java.lang.String" />
+        <argument
+            android:name="password"
+            app:argType="java.lang.String" />
         <action
             android:id="@+id/openMedicalRenew"
             app:destination="@id/medicalRenewFragment"
@@ -138,7 +157,18 @@
         android:id="@+id/changePasswordFragment"
         android:name="com.neqabty.presentation.ui.changePassword.ChangePasswordFragment"
         android:label="@string/change_password_title"
-        tools:layout="@layout/change_password_fragment" />
+        tools:layout="@layout/change_password_fragment">
+
+        <argument
+            android:name="isSetNew"
+            app:argType="java.lang.Boolean" />
+        <argument
+            android:name="mobile"
+            app:argType="java.lang.String" />
+        <argument
+            android:name="otp"
+            app:argType="java.lang.String" />
+    </fragment>
 
     <fragment
         android:id="@+id/medicalRenewFragment"

@@ -324,12 +324,16 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.login(actionType, mobile, userNumber, newToken, oldToken, password)
     }
 
-    override fun forgetPassword(mobile: String): Observable<String> {
-        return remoteDataStore.forgetPassword(mobile)
+    override fun forgetPassword(mobile: String, userNumber: String): Observable<String> {
+        return remoteDataStore.forgetPassword(mobile, userNumber)
     }
 
     override fun changePassword(mobile: String, currentPassword: String, newPassword: String): Observable<String> {
         return remoteDataStore.changePassword(mobile, currentPassword, newPassword)
+    }
+
+    override fun setNewPassword(mobile: String, verificationCode: String, newPassword: String): Observable<String> {
+        return remoteDataStore.setNewPassword(mobile, verificationCode, newPassword)
     }
 
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {

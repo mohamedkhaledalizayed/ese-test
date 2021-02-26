@@ -106,21 +106,11 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         followerItem = params.followerItem
         binding.followerItem = followerItem
 
+        edMobileNumber.setText(followerItem.mobile ?: params.medicalRenewalUI.contact!!.mobile)
         setBirthDate()
         renderRelations()
         renderGenders()
         updateEditPhotoTitle()
-        if(followerItem.isEdited!! == false){
-            edName.setText(followerItem.name)
-            edMobileNumber.text = null
-            edNationalID.text = null
-            edBirthDate.text = null
-        }else{
-            edName.setText(followerItem.name)
-            edMobileNumber.setText(followerItem.mobile ?: params.medicalRenewalUI.contact!!.mobile)
-            edNationalID.setText(followerItem.nationalId)
-            edBirthDate.setText(followerItem.birthDate)
-        }
         edNationalID.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if (p0.toString().length == 14)
@@ -154,10 +144,8 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
         this.photosAdapter = adapter
         binding.rvPhotos.adapter = adapter
 
-        if(followerItem.isEdited == true) {
             setAvatar()
             renderAttachments()
-        }
         bSave.setOnClickListener { navigateBackWithResult() }
     }
 
@@ -327,7 +315,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
 
 
     private fun isDataValid(nationalId: String, mobile: String): Boolean {
-        return if (!nationalId.matches(Regex("[0-9]*")) || (nationalId.trim().length != 14 && nationalId.trim().length != 0)) {
+        return if (!nationalId.matches(Regex("/(2|3)[0-9][0-9][0-1][0-9][0-3][0-9](01|02|03|04|11|12|13|14|15|16|17|18|19|21|22|23|24|25|26|27|28|29|31|32|33|34|35|88)\\d\\d\\d\\d\\d/")) || (nationalId.trim().length != 14 && nationalId.trim().length != 0)) {
             showAlert(getString(R.string.invalid_national_id))
             false
         } else if (!mobile.matches(Regex("[0-9]*")) || (mobile.trim().length != 11 && mobile.trim().length != 0)) {

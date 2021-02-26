@@ -175,6 +175,9 @@ interface WebService {
     @POST("api/user/password/change")
     fun changePassword(@Body changePasswordRequest: ChangePasswordRequest): Observable<ApiResponse<String>>
 
+    @POST("api/user/password/new")
+    fun setNewPassword(@Body setNewPasswordRequest: SetNewPasswordRequest): Observable<ApiResponse<String>>
+
     @POST("api/user/signup")
     fun signup(@Body signupRequest: SignupRequest): Observable<ApiResponse<UserData>>
 

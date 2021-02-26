@@ -13,6 +13,7 @@ import com.neqabty.presentation.ui.corona.CoronaViewModel
 import com.neqabty.presentation.ui.engineeringRecordsDetails.EngineeringRecordsDetailsViewModel
 import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryViewModel
 import com.neqabty.presentation.ui.favorites.FavoritesViewModel
+import com.neqabty.presentation.ui.forgetPassword.ForgetPasswordViewModel
 import com.neqabty.presentation.ui.home.HomeViewModel
 import com.neqabty.presentation.ui.inquiry.InquiryViewModel
 import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsViewModel
@@ -75,6 +76,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ChangePasswordViewModel::class)
     abstract fun bindChangePasswordViewModel(changePasswordViewModel: ChangePasswordViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ForgetPasswordViewModel::class)
+    abstract fun bindForgetPasswordViewModel(forgetPasswordViewModel: ForgetPasswordViewModel): ViewModel
 
     @Binds
     @IntoMap

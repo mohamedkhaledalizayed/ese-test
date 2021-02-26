@@ -1,5 +1,9 @@
 package com.neqabty.presentation.ui.activateAccount
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -10,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.ActivateAccountFragmentBinding
@@ -20,7 +25,7 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import kotlinx.android.synthetic.main.update_data_verification_fragment.*
+import kotlinx.android.synthetic.main.activate_account_fragment.*
 import javax.inject.Inject
 
 class ActivateAccountFragment : BaseFragment(), Injectable {
@@ -35,11 +40,12 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
     var type: Int? = 0
     var password: String = ""
 
-    var newToken = ""
     var verificationCode: String = ""
     private var counterTimeout: Long = 30000
     private var isTimerFinished = true
     lateinit var timer: CountDownTimer
+    var otp = ""
+    lateinit var receiver: BroadcastReceiver
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -60,6 +66,7 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
 
         val params = ActivateAccountFragmentArgs.fromBundle(arguments!!)
         type = params.type
+        otp = params.otp
         password = params.password
 
         activateAccountViewModel = ViewModelProviders.of(this, viewModelFactory)
@@ -75,11 +82,24 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.GONE
             }, message = error?.message)
         })
-        activateAccountViewModel.sendSMS(PreferencesHelper(requireContext()).mobile)
+//        activateAccountViewModel.sendSMS(PreferencesHelper(requireContext()).mobile)
+        receiver = object : BroadcastReceiver() {
+            override fun onReceive(contxt: Context?, intent: Intent?) {
+                if (intent?.action.equals("otp",true)) {
+                    val message = intent?.getStringExtra("message") ?: ""
+                    otp = message.substring(0, 4)
+                    password = message.substring(4, message.length)
+                    edOTP.setText(otp)
+                    edPassword.setText(password)
+                }
+            }
+        }
         initializeViews()
     }
 
     fun initializeViews() {
+        edOTP.setText(otp)
+        edPassword.setText(password)
         binding.bSend.setOnClickListener {
             if (binding.edOTP.text.toString().isNotEmpty() && binding.edOTP.text.toString().length == 4)
                 activateAccount()
@@ -99,10 +119,9 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
             startCountingDown()
         } else if (state.isSuccessful && state.user != null) {
             activity?.invalidateOptionsMenu()
-            PreferencesHelper(requireContext()).token = newToken
-            PreferencesHelper(requireContext()).user = state.user?.details!![0].userNumber!!
-            PreferencesHelper(requireContext()).name = state.user?.details!![0].name!!
-            PreferencesHelper(requireContext()).isRegistered = true
+           PreferencesHelper(requireContext()).user = state.user?.details!![0].userNumber!!
+           PreferencesHelper(requireContext()).name = state.user?.details!![0].name!!
+           PreferencesHelper(requireContext()).isRegistered = true
 //            showTwoButtonsAlert(message = getString(R.string.welcome_with_name, state.user?.details!![0].name!!),
 //                    okCallback = {
 //                        state.user = null
@@ -141,7 +160,7 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
     }
 
     fun activateAccount() {
-        activateAccountViewModel.activateAccount(PreferencesHelper(requireContext()).mobile, binding.edOTP.text.toString(), password)
+        activateAccountViewModel.activateAccount(PreferencesHelper(requireContext()).mobile, binding.edOTP.text.toString(), edPassword.text.toString())
     }
 
     //region
@@ -174,6 +193,15 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
         }
     }
 
+    override fun onResume() {
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(receiver, IntentFilter("otp"))
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(receiver)
+    }
 // endregion
 
     fun navController() = findNavController()

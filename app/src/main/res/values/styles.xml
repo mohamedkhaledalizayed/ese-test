@@ -10,12 +10,23 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/cairo_regular</item>
         <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
+        <item name="alertDialogTheme">@style/MyAlertDialogTheme</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+
+    <style name="MyAlertDialogTheme" parent="@android:style/Theme.Material.Light.Dialog.Alert">
+        <item name="android:textAppearanceSmall">@style/MyTextAppearance</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="MyTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/cairo_regular</item>
     </style>
 
     <style name="ActionButtonStyle" parent="Widget.AppCompat.ActionButton">

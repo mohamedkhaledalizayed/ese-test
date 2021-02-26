@@ -1,7 +1,6 @@
 package com.neqabty.presentation.ui.signup
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.Login
 import com.neqabty.domain.usecases.SignupUser
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -35,6 +34,7 @@ class SignupViewModel @Inject constructor(val signup: SignupUser) : BaseViewMode
                     }
                 }.subscribe(
                         {
+                            prefs.token = newFirebaseToken
                             viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = true, user = it)
                         },
                         {

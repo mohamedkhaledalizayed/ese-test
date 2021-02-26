@@ -590,14 +590,20 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
-    override fun forgetPassword(mobile: String): Observable<String> {
-        return api.forgetPassword(ForgetPasswordRequest(mobile)).flatMap { response ->
+    override fun forgetPassword(mobile: String, userNumber: String): Observable<String> {
+        return api.forgetPassword(ForgetPasswordRequest(mobile, userNumber)).flatMap { response ->
             Observable.just(response.arMsg)
         }
     }
 
     override fun changePassword(mobile: String, currentPassword: String, newPassword: String): Observable<String> {
         return api.changePassword(ChangePasswordRequest(mobile, currentPassword, newPassword)).flatMap { response ->
+            Observable.just(response.arMsg)
+        }
+    }
+
+    override fun setNewPassword(mobile: String, verificationCode: String, newPassword: String): Observable<String> {
+        return api.setNewPassword(SetNewPasswordRequest(mobile, verificationCode, newPassword)).flatMap { response ->
             Observable.just(response.arMsg)
         }
     }

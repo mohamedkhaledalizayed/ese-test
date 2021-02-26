@@ -1,11 +1,10 @@
-package com.neqabty.presentation.ui.changePassword
+package com.neqabty.presentation.ui.forgetPassword
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,27 +16,24 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
-import com.neqabty.databinding.ChangePasswordFragmentBinding
+import com.neqabty.databinding.ForgetPasswordFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import kotlinx.android.synthetic.main.change_password_fragment.*
+import kotlinx.android.synthetic.main.forget_password_fragment.*
 import javax.inject.Inject
 
-
-class ChangePasswordFragment : BaseFragment(), Injectable {
+class ForgetPasswordFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    var binding by autoCleared<ChangePasswordFragmentBinding>()
+    var binding by autoCleared<ForgetPasswordFragmentBinding>()
 
-    lateinit var changePasswordViewModel: ChangePasswordViewModel
+    lateinit var forgetPasswordViewModel: ForgetPasswordViewModel
 
-    var isSetNew = false
     var mobile = ""
     var otp = ""
     lateinit var receiver: BroadcastReceiver
@@ -48,7 +44,7 @@ class ChangePasswordFragment : BaseFragment(), Injectable {
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.change_password_fragment,
+                R.layout.forget_password_fragment,
                 container,
                 false,
                 dataBindingComponent
@@ -59,28 +55,25 @@ class ChangePasswordFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        changePasswordViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ChangePasswordViewModel::class.java)
+        forgetPasswordViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(ForgetPasswordViewModel::class.java)
 
-        changePasswordViewModel.viewState.observe(this, Observer {
+        forgetPasswordViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        changePasswordViewModel.errorState.observe(this, Observer { error ->
+        forgetPasswordViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
-                changePassword(isSetNew)
+                forgetPassword()
             }, cancelCallback = {
                 llSuperProgressbar.visibility = View.GONE
             }, message = error?.message)
         })
-        isSetNew = ChangePasswordFragmentArgs.fromBundle(requireArguments()).isSetNew
-        mobile = ChangePasswordFragmentArgs.fromBundle(requireArguments()).mobile
-        otp = ChangePasswordFragmentArgs.fromBundle(requireArguments()).otp
+        mobile = ForgetPasswordFragmentArgs.fromBundle(requireArguments()).mobile
         receiver = object : BroadcastReceiver() {
             override fun onReceive(contxt: Context?, intent: Intent?) {
                 if (intent?.action.equals("otp",true)) {
                     val message = intent?.getStringExtra("message") ?: ""
                     otp = message.substring(0, 4)
-                    edCurrentPassword.setText(otp)
                 }
             }
         }
@@ -89,42 +82,37 @@ class ChangePasswordFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        if(isSetNew == true) {
-            tvCurrentPassword.setText(getString(R.string.enter_verification_code))
-            edCurrentPassword.inputType = InputType.TYPE_CLASS_NUMBER
-            edCurrentPassword.setText(otp)
-        }
-
         binding.bSend.setOnClickListener {
-            if (binding.edCurrentPassword.text.toString().length < 4 || binding.edNewPassword.text.toString().length < 4 || binding.edConfirmNewPassword.text.toString().length < 4)
-                showAlert(getString(R.string.invalid_data))
-            else if (!binding.edNewPassword.text.toString().equals(binding.edConfirmNewPassword.text.toString()))
-                showAlert(getString(R.string.unmatched_password))
-            else
-                changePassword(isSetNew)
+            if (isDataValid(edMemberNumber.text.toString()))
+                forgetPassword()
         }
     }
 
-    private fun handleViewState(state: ChangePasswordViewState) {
+    private fun handleViewState(state: ForgetPasswordViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful) {
             showAlert(state.msg){
-                if(isSetNew == true)
-                    navController().navigate(R.id.loginFragment)
-                else
-                    navController().navigateUp()
+                navController().navigate(ForgetPasswordFragmentDirections.openChangePasswordFragment(true, mobile, otp))
             }
         }
     }
 
-    fun changePassword(isSetNew: Boolean) {
-        if(isSetNew == false)
-            changePasswordViewModel.changePassword(PreferencesHelper(requireContext()).mobile, binding.edCurrentPassword.text.toString(), edNewPassword.text.toString())
-        else
-            changePasswordViewModel.setNewPassword(mobile, binding.edCurrentPassword.text.toString(), edNewPassword.text.toString())
+    fun forgetPassword() {
+        forgetPasswordViewModel.forgetPassword(mobile, binding.edMemberNumber.text.toString())
     }
 
     //region
+    private fun isDataValid(memberNumber: String): Boolean {
+        return if (memberNumber.isBlank()) {
+            showAlert(getString(R.string.invalid_data))
+            false
+        } else if (memberNumber.length != 7) {
+            showAlert(getString(R.string.invalid_number))
+            false
+        } else {
+            true
+        }
+    }
     override fun onResume() {
         LocalBroadcastManager.getInstance(requireContext()).registerReceiver(receiver, IntentFilter("otp"))
         super.onResume()

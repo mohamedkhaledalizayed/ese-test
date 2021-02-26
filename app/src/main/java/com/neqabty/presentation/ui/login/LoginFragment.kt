@@ -1,19 +1,15 @@
 package com.neqabty.presentation.ui.login
 
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.iid.FirebaseInstanceId
 import com.neqabty.R
 import com.neqabty.databinding.LoginFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -36,7 +32,6 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
 
     lateinit var loginViewModel: LoginViewModel
 
-    var newToken = ""
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -69,11 +64,11 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
             if (it != null) handleViewState(it)
         })
         loginViewModel.errorState.observe(this, Observer { error ->
-//            showConnectionAlert(requireContext(), retryCallback = {
-//                login()
-//            }, cancelCallback = {
-                llSuperProgressbar.visibility = View.GONE
-//            }, message = error?.message)
+            showConnectionAlert(requireContext(), retryCallback = {
+                login()
+            }, cancelCallback = {
+            llSuperProgressbar.visibility = View.GONE
+            }, message = error?.message)
             navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(edMobile.text.toString()))
         })
     }
@@ -85,8 +80,8 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
             //TODO set coming data it.details!![0]
 //            it.type = "verified"
             if (it.type.equals("verified")) {
-                            state.user = null
-                            navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(it.mobile))
+                state.user = null
+                navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(edMobile.text.toString()))
             } else {// visitor
                 PreferencesHelper(requireContext()).mobile = it.mobile
                 PreferencesHelper(requireContext()).userType = it.type
@@ -101,7 +96,6 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
     }
 
     fun initializeViews() {
-        newToken = PreferencesHelper(requireContext()).token
         binding.bSend.setOnClickListener {
             login()
         }
@@ -109,20 +103,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
 
     fun login() {
         if (isDataValid(edMobile.text.toString())) {
-            if (PreferencesHelper(requireContext()).token.isNotBlank())
-                loginViewModel.login(edMobile.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()))
-            else {
-                FirebaseInstanceId.getInstance().instanceId
-                        .addOnCompleteListener(OnCompleteListener { task ->
-                            llSuperProgressbar.visibility = View.GONE
-                            if (!task.isSuccessful)
-                                showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
-                            else {
-                                newToken = task.result?.token!!
-                                loginViewModel.login(edMobile.text.toString(), newToken!!, PreferencesHelper(requireContext()))
-                            }
-                        })
-            }
+            loginViewModel.login(edMobile.text.toString())
         }
     }
 //region
@@ -135,6 +116,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
             false
         }
     }
+
     override fun showOptionsMenu() {
     }
 // endregion

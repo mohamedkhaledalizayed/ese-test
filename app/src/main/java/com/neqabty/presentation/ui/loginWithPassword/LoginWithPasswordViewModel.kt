@@ -1,7 +1,6 @@
 package com.neqabty.presentation.ui.loginWithPassword
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.ForgetPassword
 import com.neqabty.domain.usecases.Login
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -11,7 +10,7 @@ import com.neqabty.presentation.util.PreferencesHelper
 
 import javax.inject.Inject
 
-class LoginWithPasswordViewModel @Inject constructor(val login: Login, val forgetPassword: ForgetPassword) : BaseViewModel() {
+class LoginWithPasswordViewModel @Inject constructor(val login: Login) : BaseViewModel() {
 
     private val userEntityToUIMapper = UserEntityUIMapper()
 
@@ -52,21 +51,6 @@ class LoginWithPasswordViewModel @Inject constructor(val login: Login, val forge
                 user = user)
 
         viewState.value = newViewState
-    }
-
-
-    fun forgetPassword(
-            mobile: String
-    ) {
-        viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(forgetPassword.forgetPassword(mobile)
-                .subscribe(
-                        {
-                            viewState.value = viewState.value?.copy(isLoading = false, msg = it)
-                        },
-                        { errorState.value = handleError(it) }
-                )
-        )
     }
 
 }

@@ -6,26 +6,29 @@ import com.neqabty.domain.entities.UserEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class ForgetPassword @Inject constructor(
+class SetNewPassword @Inject constructor(
         transformer: Transformer<String>,
         private val neqabtyRepository: NeqabtyRepository
 ) : UseCase<String>(transformer) {
 
     companion object {
         private const val PARAM_MOBILE = "param:mobile"
-        private const val PARAM_USER_NUMBER = "param:userNumber"
+        private const val PARAM_VERIFICATION_CODE = "param:verificationCode"
+        private const val PARAM_NEW_PASSWORD = "param:newPassword"
     }
 
-    fun forgetPassword(mobile: String, userNumber: String): Observable<String> {
+    fun setNewPassword(mobile: String, verificationCode: String, newPassword: String): Observable<String> {
         val data = HashMap<String, String>()
         data[PARAM_MOBILE] = mobile
-        data[PARAM_USER_NUMBER] = userNumber
+        data[PARAM_VERIFICATION_CODE] = verificationCode
+        data[PARAM_NEW_PASSWORD] = newPassword
         return observable(data)
     }
 
     override fun createObservable(data: Map<String, Any>?): Observable<String> {
         val mobile = data?.get(PARAM_MOBILE) as String
-        val userNumber = data?.get(PARAM_USER_NUMBER) as String
-        return neqabtyRepository.forgetPassword(mobile, userNumber)
+        val verificationCode = data?.get(PARAM_VERIFICATION_CODE) as String
+        val newPassword = data?.get(PARAM_NEW_PASSWORD) as String
+        return neqabtyRepository.setNewPassword(mobile, verificationCode, newPassword)
     }
 }

@@ -1,8 +1,10 @@
 package com.neqabty
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -11,11 +13,11 @@ import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -53,6 +55,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     lateinit var newToken: String
 
     var isAlertShown = false
+
+    private val REQUEST_SMS = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
@@ -96,8 +100,12 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             graph.startDestination = R.id.homeFragment
 //        else if (!PreferencesHelper(this).isIntroSkipped) // TODO
 //            graph.startDestination = R.id.introFragment
-        else if (PreferencesHelper(this).isForceLogout == true)
+        else if (PreferencesHelper(this).isForceLogout == true){
             graph.startDestination = R.id.loginFragment
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                grantSMSPermission()
+            }
+        }
         else if (PreferencesHelper(this).mobile.isEmpty()) // TODO
             graph.startDestination = R.id.loginFragment
         else
@@ -248,7 +256,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                         newToken = task.result?.token!!
                         if (!newToken.equals(PreferencesHelper(this).token)) // Token has been changed
                         {
-                            if (PreferencesHelper(this).mobile.isNotBlank()) { // visitor or client
+                            if (PreferencesHelper(this).user.isNotBlank()) { // verified
                                 mainViewModel.login(PreferencesHelper(this).mobile, PreferencesHelper(this).user, newToken, PreferencesHelper(this))
                             }
                         }
@@ -386,8 +394,12 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         (nav_view as NavigationView).getHeaderView(0).findViewById<Button>(R.id.bChangePassword).setOnClickListener {
             (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
+            val bundle: Bundle = Bundle()
+            bundle.putBoolean("isSetNew", false)
+            bundle.putString("mobile", PreferencesHelper(this).mobile)
+            bundle.putString("otp", "")
             Navigation.findNavController(this, R.id.container)
-                    .navigate(R.id.openChangePasswordFragment)
+                    .navigate(R.id.openChangePasswordFragment, bundle)
         }
 
         if (PreferencesHelper(this).name.isNotEmpty()) {
@@ -435,12 +447,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 Navigation.findNavController(this, R.id.container)
                         .navigate(R.id.notificationsFragment)
             }
-//            R.id.logout_fragment -> {
-//                PreferencesHelper(this).isRegistered = false
-//                PreferencesHelper(this).user = ""
-//                PreferencesHelper(this).notificationsCount = 0
-//                invalidateOptionsMenu()
-//            }
             R.id.search_fragment -> {
                 Navigation.findNavController(this, R.id.container).navigate(R.id.searchFragment)
             }
@@ -486,6 +492,14 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     override fun onSaveInstanceState(@NonNull outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.clear()
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun grantSMSPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.RECEIVE_SMS), REQUEST_SMS)
+        }
     }
 //endregion//
 }

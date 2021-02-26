@@ -83,8 +83,8 @@ class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu
 
     private fun handleViewState(state: LoginWithPasswordViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        if(state.msg.length > 0){
-            showAlert(state.msg){
+        if (state.msg.length > 0) {
+            showAlert(state.msg) {
                 navController().navigateUp()
             }
             state.msg = ""
@@ -100,11 +100,11 @@ class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu
             PreferencesHelper(requireContext()).mainSyndicate = 5
             PreferencesHelper(requireContext()).subSyndicate = 0
 //                showTwoButtonsAlert(message = getString(R.string.welcome_with_name_login, it.details!![0].name!!)
-                PreferencesHelper(requireContext()).name = it.details!![0].name!!
-                PreferencesHelper(requireContext()).user = it.details!![0].userNumber!!
-                PreferencesHelper(requireContext()).isRegistered = true
-                state.user = null
-                navController().navigate(LoginWithPasswordFragmentDirections.openHome())
+            PreferencesHelper(requireContext()).name = it.details!![0].name!!
+            PreferencesHelper(requireContext()).user = it.details!![0].userNumber!!
+            PreferencesHelper(requireContext()).isRegistered = true
+            state.user = null
+            navController().navigate(LoginWithPasswordFragmentDirections.openHome())
         }
     }
 
@@ -113,16 +113,19 @@ class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu
         binding.bSend.setOnClickListener {
             login()
         }
-        binding.tvForgetPassword.setOnClickListener{
-            showAlert(Html.fromHtml(getString(R.string.number_confirmation, mobile + getString(R.string.mobile_number_confirmation))).toString(),okCallback = {
-                loginWithPasswordViewModel.forgetPassword(mobile)
+        binding.tvForgetPassword.setOnClickListener {
+            showTwoButtonsAlert(Html.fromHtml(getString(R.string.number_confirmation, mobile + "\n"+ getString(R.string.mobile_number_confirmation))).toString(),
+                    okCallback = {
+                        navController().navigate(LoginWithPasswordFragmentDirections.openForgetPasswordFragment(mobile))
+                    }, cancelCallback = {
+                navController().navigateUp()
             })
         }
     }
 
     fun login() {
-        if (PreferencesHelper(requireContext()).token.isNotBlank())
-            loginWithPasswordViewModel.login(mobile, PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()), edPassword.text.toString())
+        if (newToken.isNotBlank())
+            loginWithPasswordViewModel.login(mobile,newToken, PreferencesHelper(requireContext()), edPassword.text.toString())
         else {
             FirebaseInstanceId.getInstance().instanceId
                     .addOnCompleteListener(OnCompleteListener { task ->

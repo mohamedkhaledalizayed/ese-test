@@ -260,11 +260,15 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         return neqabtyCache.getUser()
     }
 
-    override fun forgetPassword(mobile: String): Observable<String> {
+    override fun forgetPassword(mobile: String, userNumber: String): Observable<String> {
         TODO("Not yet implemented")
     }
 
     override fun changePassword(mobile: String, currentPassword: String, newPassword: String): Observable<String> {
+        TODO("Not yet implemented")
+    }
+
+    override fun setNewPassword(mobile: String, verificationCode: String, newPassword: String): Observable<String> {
         TODO("Not yet implemented")
     }
 

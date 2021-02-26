@@ -73,7 +73,7 @@
                     android:inputType="number"
                     android:maxLength="11"
                     android:textDirection="anyRtl"
-                    android:text="01002227625"
+                    android:text="01555407132"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large" />
 
