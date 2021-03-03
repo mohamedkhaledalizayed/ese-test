@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
     private fun checkRoot() {
-        if (DeviceUtils().isDeviceRooted()) {
+        if (DeviceUtils().isDeviceRooted() || DeviceUtils().isEmulator()) {
             showAlertDialogAndExitApp(getString(R.string.root_msg));
         }
     }
