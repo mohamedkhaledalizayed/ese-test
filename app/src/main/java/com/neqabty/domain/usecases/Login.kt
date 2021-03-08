@@ -19,9 +19,8 @@ class Login @Inject constructor(
         private const val PARAM_OLD_TOKEN = "param:oldToken"
         private const val PARAM_PASSWORD = "param:password"
         const val PARAM_ACTION_LOGIN = "login"
-        const val PARAM_ACTION_UPGRADE = "upgradeToClient"
-        const val PARAM_ACTION_CHANGE = "changeUserNumber"
         const val PARAM_ACTION_VERIFIED_LOGIN = "verifiedLogin"
+        const val PARAM_ACTION_UPDATE_TOKEN = "updateFirebaseToken"
     }
 
     fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String, password: String): Observable<UserEntity> {

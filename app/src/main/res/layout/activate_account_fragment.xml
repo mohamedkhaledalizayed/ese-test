@@ -79,7 +79,6 @@
                     android:textDirection="anyRtl"
                     android:textColor="@color/dark_grey"
                     android:textSize="@dimen/text_size_large"
-                    android:text="01555407132"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvMobile" />
 

@@ -76,7 +76,6 @@
                     android:textDirection="anyRtl"
                     android:textColor="@color/dark_grey"
                     android:textSize="@dimen/text_size_large"
-                    android:text="01555407132"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvMobile" />
 
@@ -102,7 +101,6 @@
                     android:maxLength="7"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large"
-                    android:text="2606060"
                     app:layout_constraintEnd_toEndOf="@id/edMobile"
                     app:layout_constraintStart_toStartOf="@id/edMobile"
                     app:layout_constraintTop_toBottomOf="@id/tvMemberNumber" />
@@ -129,7 +127,6 @@
                     android:maxLength="4"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large"
-                    android:text="0491"
                     app:layout_constraintEnd_toEndOf="@id/edMobile"
                     app:layout_constraintStart_toStartOf="@id/edMobile"
                     app:layout_constraintTop_toBottomOf="@id/tvNationalNumber" />

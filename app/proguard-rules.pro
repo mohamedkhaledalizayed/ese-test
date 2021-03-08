@@ -24,4 +24,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 #-keep class com.google.** { *; }
+#-dontobfuscate
+#-keepattributes SourceFile ,LineNumberTable
 -keepnames class * extends android.os.Parcelable
+-keep class com.neqabty.data.entities.* { <fields>; }

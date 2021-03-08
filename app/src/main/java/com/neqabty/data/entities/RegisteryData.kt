@@ -1,10 +1,7 @@
 package com.neqabty.data.entities
-
-import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 import com.neqabty.data.api.Response
 
-@Entity(primaryKeys = ["registryDataID"])
 data class RegisteryData(
     @field:SerializedName("status_code")
     var statusCode: Int = 0,
