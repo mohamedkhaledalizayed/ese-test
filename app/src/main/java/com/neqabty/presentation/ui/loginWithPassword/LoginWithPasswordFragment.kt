@@ -74,6 +74,7 @@ class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu
         loginWithPasswordViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.GONE
+                edPassword.setText("")
             }, cancelCallback = {
                 llSuperProgressbar.visibility = View.GONE
                 navController().navigateUp()

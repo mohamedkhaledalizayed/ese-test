@@ -21,7 +21,7 @@
     <string name="phoneNumber">رقم الجوال</string>
     <string name="password">كلمة السر</string>
     <string name="forgetPassword"><u>نسيت كلمة السر</u></string>
-    <string name="login">دخول</string>
+    <string name="login">الدخول الي الحساب</string>
     <string name="activate_account_title">تفعيل الحساب</string>
     <string name="number_confirmation">الرقم الذي قمت بإدخاله <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]></string>
     <string name="member_number_confirmation">هل أنت متأكد من رقم العضوية؟!</string>
@@ -44,6 +44,7 @@
     <string name="signup_submit">إنشاء حساب</string>
     <string name="signup_hint">هذا الرقم غير مسجل من قبل برجاء انشاء حساب حتى تتمكن من استخدام الخدمة</string>
     <string name="activate_account_hint">تم انشاء الحساب بنجاح, سيتم ارسال رسالة نصية بكود التعريف وكلمة المرور برجاء تفعيل الحساب</string>
+    <string name="login_with_password_hint">هذا الرقم مسجل من قبل برجاء ادخال كلمة السر للدخول الي الحساب</string>
     <string name="personalDetails">البيانات الشخصية</string>
     <string name="confirm">تأكيد</string>
     <string name="welcome">مرحبا بكم</string>
@@ -128,6 +129,7 @@
 
     <string name="mobile_title">تسجيل دخول</string>
     <string name="enter_mobile">برجاء ادخال رقم الهاتف المحمول الخاص بك</string>
+    <string name="entered_mobile">رقم الهاتف الذي تم ادخاله</string>
     <string name="enter_verification_code">برجاء ادخال كود التفعيل</string>
     <string name="login_visitor_enter_mobile">برجاء ادخال رقم الهاتف المحمول لانشاء حسابك الخاص</string>
     <string name="choose_service">اختار الخدمة</string>
@@ -477,7 +479,7 @@
 
     <string name="complaint_title">استفسارات</string>
     <string name="complaint_section_title">شكاوى ومقترحات</string>
-    <string name="complaint_description">للاستفسارات نرجو الاتصال علي مركز خدمة العملاء (الكول سنتر) علي الرقم التالي <![CDATA[<font color="#1d1ad2">0235317300</font>]]></string>
+    <string name="complaint_description">للاستفسارات نرجو الاتصال علي مركز خدمة العملاء (الكول سنتر) علي الرقم التالي <![CDATA[<font color="#1d1ad2"><b>0235317300</b></font>]]></string>
     <string name="complaint_fill_data">املأ من فضلك ما يلي</string>
     <string name="complaint_type">نوع الشكوى</string>
     <string name="complaint_name">اسم مقدم الشكوى</string>

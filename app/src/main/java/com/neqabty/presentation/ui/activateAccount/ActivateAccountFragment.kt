@@ -90,7 +90,7 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
                     otp = message.substring(0, 4)
                     password = message.substring(4, message.length)
                     edOTP.setText(otp)
-                    edPassword.setText(password)
+//                    edPassword.setText(password)
                 }
             }
         }
@@ -99,7 +99,8 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
         edOTP.setText(otp)
-        edPassword.setText(password)
+//        edPassword.setText(password)
+        binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
         binding.bSend.setOnClickListener {
             if (binding.edOTP.text.toString().isNotEmpty() && binding.edOTP.text.toString().length == 4)
                 activateAccount()

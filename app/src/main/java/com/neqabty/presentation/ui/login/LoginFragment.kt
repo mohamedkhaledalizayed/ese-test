@@ -69,7 +69,6 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
             }, cancelCallback = {
             llSuperProgressbar.visibility = View.GONE
             }, message = error?.message)
-            navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(edMobile.text.toString()))
         })
     }
 
@@ -90,6 +89,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
                 PreferencesHelper(requireContext()).mainSyndicate = 5
                 PreferencesHelper(requireContext()).subSyndicate = 0
                 PreferencesHelper(requireContext()).isForceLogout = false
+                state.user = null
                 navController().navigate(LoginFragmentDirections.openHome())
             }
         }

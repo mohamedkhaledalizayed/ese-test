@@ -82,6 +82,7 @@ class ForgetPasswordFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
+        binding.edMobile.setText(mobile)
         binding.bSend.setOnClickListener {
             if (isDataValid(edMemberNumber.text.toString()))
                 forgetPassword()
@@ -91,6 +92,7 @@ class ForgetPasswordFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: ForgetPasswordViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful) {
+            state.isSuccessful = false
             showAlert(state.msg){
                 navController().navigate(ForgetPasswordFragmentDirections.openChangePasswordFragment(true, mobile, otp))
             }
