@@ -4,7 +4,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-allopen'
 apply plugin: 'androidx.navigation.safeargs'
-apply plugin: 'com.google.gms.google-services'
+if (getGradle().getStartParameter().getTaskRequests().toString().contains("Hms")) {
+    apply plugin: 'com.huawei.agconnect'
+} else {
+    apply plugin: 'com.google.gms.google-services'
+}
 apply plugin: 'kotlin-android-extensions'
 
 
@@ -68,8 +72,9 @@ android {
     }
     buildTypes {
         debug {
-            testCoverageEnabled !project.hasProperty('android.injected.invoked.from.ide')
+//            testCoverageEnabled !project.hasProperty('android.injected.invoked.from.ide')
             debuggable = true
+            signingConfig getLocalSigningConfig(secret)
         }
         release {
             minifyEnabled true
@@ -85,17 +90,29 @@ android {
             pseudoLocalesEnabled false
         }
     }
-    flavorDimensions "mode"
+    flavorDimensions "mode", "services"
 
     productFlavors {
-        dev {
+        tst {
             dimension "mode"
             minSdkVersion 24
             resConfigs "en", "hdpi"
+            buildConfigField "String", "URL", '"http://3.131.229.146:44392"'
         }
-
         prod {
             dimension "mode"
+            buildConfigField "String", "URL", '"http://3.131.229.146:44392"'
+        }
+
+        gms {
+            dimension "services"
+            buildConfigField "String", "SERVICE_USED", '"g"'
+            versionNameSuffix "-gms"
+        }
+        hms {
+            dimension "services"
+            buildConfigField "String", "SERVICE_USED", '"h"'
+            versionNameSuffix "-hms"
         }
     }
 
@@ -109,6 +126,8 @@ android {
     sourceSets {
         androidTest.java.srcDirs += "src/test-common/java"
         test.java.srcDirs += "src/test-common/java"
+        gms.java.srcDirs  = ['src/main/java','src/gms/java']
+        hms.java.srcDirs  = ['src/main/java','src/hms/java']
     }
     lintOptions {
         lintConfig rootProject.file('lint.xml')
@@ -160,9 +179,14 @@ dependencies {
 
     implementation deps.timber
 
-    implementation deps.firebase.core
-    implementation deps.firebase.messaging
-    implementation deps.firebase.jobdispatcher
+    gmsImplementation deps.firebase.core
+    gmsImplementation deps.firebase.messaging
+    gmsImplementation deps.firebase.jobdispatcher
+
+
+    hmsImplementation deps.hms.core
+    hmsImplementation deps.hms.hms_agcp
+    hmsImplementation deps.hms.hms_push
 
     implementation deps.viewpager.pager
     implementation deps.viewpager.indicator

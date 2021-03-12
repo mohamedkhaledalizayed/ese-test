@@ -1,5 +1,3 @@
-package com.neqabty.presentation.util
-
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -16,8 +14,9 @@ import com.google.firebase.messaging.RemoteMessage
 import com.neqabty.MainActivity
 import com.neqabty.R
 import com.neqabty.presentation.common.Constants
+import com.neqabty.presentation.util.PreferencesHelper
 
-class MyFirebaseMessagingService : FirebaseMessagingService() {
+class MyPushService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         sendNotification(remoteMessage)
     }
@@ -29,14 +28,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 
-    private fun scheduleJob() {
-        val dispatcher = FirebaseJobDispatcher(GooglePlayDriver(this))
-        val myJob = dispatcher.newJobBuilder()
-                .setService(MyJobService::class.java)
-                .setTag("my-job-tag")
-                .build()
-        dispatcher.schedule(myJob)
-    }
+//    private fun scheduleJob() {
+//        val dispatcher = FirebaseJobDispatcher(GooglePlayDriver(this))
+//        val myJob = dispatcher.newJobBuilder()
+//                .setService(MyJobService::class.java)
+//                .setTag("my-job-tag")
+//                .build()
+//        dispatcher.schedule(myJob)
+//    }
 
     private fun handleNow() {
     }
@@ -44,7 +43,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private fun sendRegistrationToServer(token: String) {
 //        PreferencesHelper(applicationContext).token = token!!
 //        PreferencesHelper(applicationContext).isRegistered = false
-        Constants.isFirebaseTokenUpdated.postValue(true)
+        Constants.isFirebaseTokenUpdated.postValue(token)
     }
 
     private fun sendNotification(remoteMessage: RemoteMessage?) {

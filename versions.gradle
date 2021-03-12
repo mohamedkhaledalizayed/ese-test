@@ -17,7 +17,7 @@ versions.dexmaker = "2.2.0"
 versions.constraint_layout = "1.0.2"
 versions.glide = "4.7.1"
 versions.timber = "4.5.1"
-versions.android_gradle_plugin = '4.1.2'
+versions.android_gradle_plugin = '4.0.1'
 versions.rxjava2 = "2.1.6"
 versions.rx_android = "2.0.1"
 versions.atsl_runner = "1.0.1"
@@ -32,6 +32,8 @@ versions.firebase_core = "16.0.3"
 versions.firebase_messaging = "17.3.0"
 versions.firebase_jobdispatcher = "0.8.5"
 versions.gms = "4.0.1"
+versions.hms = "1.4.1.300"
+versions.hms_push = "4.0.3.301"
 versions.pager = "1.0.1"
 versions.indicator = "0.2.0"
 versions.kotlinx = "0.2.0"
@@ -173,6 +175,13 @@ deps.viewpager = viewpager
 
 def gms = "com.google.gms:google-services:$versions.gms"
 deps.gms = gms
+
+
+def hms = [:]
+hms.core = "com.huawei.agconnect:agconnect-core:$versions.hms"
+hms.hms_agcp = "com.huawei.agconnect:agcp:$versions.hms"
+hms.hms_push = "com.huawei.hms:push:$versions.hms_push"
+deps.hms = hms
 
 def kotlinx = "org.jetbrains.kotlin:kotlin-android-extensions:$versions.kotlinx"
 deps.kotlinx = kotlinx

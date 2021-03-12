@@ -29,17 +29,13 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.FirebaseApp
-import com.google.firebase.iid.FirebaseInstanceId
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.util.*
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.main_activity.*
-import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 
@@ -68,15 +64,22 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
         setSupportActionBar(toolbar)
         getMinSupportedVersion()
-        getToken()
         setJWT()
         checkRoot()
         startActivities()
 
         Constants.isFirebaseTokenUpdated.observe(this, Observer {
-            if (it)
-                getToken()
+            if (it.isNotBlank()){
+                newToken = it
+                if (!newToken.equals(PreferencesHelper(this).token)) // Token has been changed
+                {
+                    if (PreferencesHelper(this).user.isNotBlank()) { // verified
+                        mainViewModel.login(PreferencesHelper(this).mobile, PreferencesHelper(this).user, newToken, PreferencesHelper(this))
+                    }
+                }
+            }
         })
+        PushNotificationsWrapper().getToken(this)
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
@@ -102,7 +105,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 //            graph.startDestination = R.id.introFragment
         else if (PreferencesHelper(this).isForceLogout == true){
             graph.startDestination = R.id.loginFragment
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && BuildConfig.SERVICE_USED.contains("g")) {
                 grantSMSPermission()
             }
         }
@@ -246,24 +249,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         Constants.JWT = PreferencesHelper(this).jwt ?: ""
     }
 
-    private fun getToken() { // TODO
-        FirebaseApp.initializeApp(this)
-        FirebaseInstanceId.getInstance().instanceId
-                .addOnCompleteListener(OnCompleteListener { task ->
-                    if (!task.isSuccessful)
-                        getToken()
-                    else {
-                        newToken = task.result?.token!!
-                        if (!newToken.equals(PreferencesHelper(this).token)) // Token has been changed
-                        {
-                            if (PreferencesHelper(this).user.isNotBlank()) { // verified
-                                mainViewModel.login(PreferencesHelper(this).mobile, PreferencesHelper(this).user, newToken, PreferencesHelper(this))
-                            }
-                        }
-                    }
-                })
-    }
-
 //region//
 
     private fun getMinSupportedVersion(){
@@ -377,13 +362,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             PreferencesHelper(this).jwt = ""
             PreferencesHelper(this).token = ""
             PreferencesHelper(this).notificationsCount = 0
-            Thread(Runnable {
-                try {
-                    FirebaseInstanceId.getInstance().deleteInstanceId()
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-            }).start()
+            PushNotificationsWrapper().deleteToken(this)
             invalidateOptionsMenu()
 
             (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)

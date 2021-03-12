@@ -18,8 +18,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.iid.FirebaseInstanceId
+import com.neqabty.presentation.util.PushNotificationsWrapper
+import com.neqabty.presentation.common.Constants
 import com.neqabty.R
 import com.neqabty.databinding.SignupFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -27,6 +27,7 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import com.neqabty.presentation.util.observeOnce
 import kotlinx.android.synthetic.main.signup_fragment.*
 import javax.inject.Inject
 
@@ -129,16 +130,14 @@ class SignupFragment : BaseFragment(), Injectable {
             if (newToken.isNotBlank())
                 signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(),newToken, PreferencesHelper(requireContext()))
             else {
-                FirebaseInstanceId.getInstance().instanceId
-                        .addOnCompleteListener(OnCompleteListener { task ->
-                            llSuperProgressbar.visibility = View.GONE
-                            if (!task.isSuccessful)
-                                showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
-                            else {
-                                newToken = task.result?.token!!
-                                signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
-                            }
-                        })
+                Constants.isFirebaseTokenUpdated.observeOnce(viewLifecycleOwner, Observer {
+                    if (it.isNotBlank()){
+                        newToken = it
+                        signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
+                    }else
+                        showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
+                })
+                PushNotificationsWrapper().getToken(requireContext())
             }
         }
     }

@@ -12,17 +12,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.iid.FirebaseInstanceId
 import com.neqabty.R
 import com.neqabty.databinding.LoginWithPasswordFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.util.HasHomeOptionsMenu
-import com.neqabty.presentation.util.PreferencesHelper
-import com.neqabty.presentation.util.autoCleared
+import com.neqabty.presentation.util.*
 import kotlinx.android.synthetic.main.login_with_password_fragment.*
 import javax.inject.Inject
 
@@ -128,16 +124,14 @@ class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu
         if (newToken.isNotBlank())
             loginWithPasswordViewModel.login(mobile,newToken, PreferencesHelper(requireContext()), edPassword.text.toString())
         else {
-            FirebaseInstanceId.getInstance().instanceId
-                    .addOnCompleteListener(OnCompleteListener { task ->
-                        llSuperProgressbar.visibility = View.GONE
-                        if (!task.isSuccessful)
-                            showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
-                        else {
-                            newToken = task.result?.token!!
-                            loginWithPasswordViewModel.login(mobile, newToken!!, PreferencesHelper(requireContext()), edPassword.text.toString())
-                        }
-                    })
+            Constants.isFirebaseTokenUpdated.observeOnce(viewLifecycleOwner, Observer {
+                if (it.isNotBlank()){
+                    newToken = it
+                    loginWithPasswordViewModel.login(mobile, newToken!!, PreferencesHelper(requireContext()), edPassword.text.toString())
+                }else
+                    showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
+            })
+            PushNotificationsWrapper().getToken(requireContext())
         }
     }
 //region

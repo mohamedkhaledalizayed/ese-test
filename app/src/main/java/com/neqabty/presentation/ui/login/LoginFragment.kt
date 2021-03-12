@@ -81,7 +81,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
             if (it.type.equals("verified")) {
                 state.user = null
                 navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(edMobile.text.toString()))
-            } else {// visitor
+            } else if(it.type.equals("visitor")){// visitor
                 PreferencesHelper(requireContext()).mobile = it.mobile
                 PreferencesHelper(requireContext()).userType = it.type
                 PreferencesHelper(requireContext()).jwt = it.jwt

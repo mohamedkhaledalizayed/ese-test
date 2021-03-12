@@ -28,3 +28,7 @@
 #-keepattributes SourceFile ,LineNumberTable
 -keepnames class * extends android.os.Parcelable
 -keep class com.neqabty.data.entities.* { <fields>; }
+
+-keep class com.huawei.hianalytics.*{*;}
+-keep class com.huawei.updatesdk.*{*;}
+-keep class com.huawei.hms.*{*;}

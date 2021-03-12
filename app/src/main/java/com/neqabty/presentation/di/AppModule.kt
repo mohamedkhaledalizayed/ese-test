@@ -54,7 +54,7 @@ class AppModule {
     fun provideOkHttpClient(httpLoggingInterceptor :HttpLoggingInterceptor): OkHttpClient {
         val certificatePinner : CertificatePinner = CertificatePinner.Builder()
                 .add(
-                        Constants.PROD_IP,
+                        BuildConfig.URL,
                         "sha256/Zi7WyG7/3sg3UCgKI7P8BcO8Lz/5zMHcPmyGZGAw4+c="
                 ).build()
 
