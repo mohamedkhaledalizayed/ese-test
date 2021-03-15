@@ -1,7 +1,6 @@
 package com.neqabty.presentation.ui.common
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
@@ -10,17 +9,12 @@ import android.print.PrintAttributes
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.Log
-import android.view.Gravity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.*
 import androidx.core.content.FileProvider
 import com.neqabty.R
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.tejpratapsingh.pdfcreator.activity.PDFCreatorActivity
-import com.tejpratapsingh.pdfcreator.activity.PDFViewerActivity
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil
 import com.tejpratapsingh.pdfcreator.views.PDFBody
 import com.tejpratapsingh.pdfcreator.views.PDFHeaderView
@@ -32,7 +26,7 @@ import com.tejpratapsingh.pdfcreator.views.basic.PDFTextView
 import java.io.File
 import java.net.URLConnection
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class PdfCreatorScreen : PDFCreatorActivity()  {
 
@@ -42,9 +36,6 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         super.onCreate(savedInstanceState)
 
         data = intent.getParcelableExtra("data")
-        Log.e("TEST", "${data.contact?.name}")
-        findViewById<Button>(R.id.buttonSendEmail).visibility = View.GONE
-
         createPDF("neqabty", object : PDFUtil.PDFUtilListener {
             override fun pdfGenerationSuccess(savedPDFFile: File) {
                 pdfFile = savedPDFFile
@@ -63,11 +54,22 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
 
         val horizontalView = PDFHorizontalView(applicationContext)
 
-        val pdfTextView = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.HEADER)
+        val pdfTextView = PDFTextView(applicationContext, 20f, false)
         val word = SpannableString("")
-        word.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, word.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        word.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                word.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         pdfTextView.text = word
-        pdfTextView.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F))
+        pdfTextView.setLayout(
+                LinearLayout.LayoutParams(
+                        0,
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        1F
+                )
+        )
         pdfTextView.view.gravity = Gravity.CENTER_VERTICAL
         pdfTextView.view.setTypeface(pdfTextView.view.typeface, Typeface.BOLD)
         horizontalView.addView(pdfTextView)
@@ -88,128 +90,247 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         return headerView
     }
 
-    data class Item(val relation: String, val name: String)
+    data class Item(val relation: String, val name: String, val number: String)
 
     override fun getBodyViews(): PDFBody {
         val pdfBody = PDFBody()
 
         //Title
         val horizontalTitle = PDFHorizontalView(applicationContext)
-        val title = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H2)
+        val title = PDFTextView(applicationContext, 20f, true)
         title.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
         val titleContent = SpannableString(getString(R.string.titleContent))
-        titleContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, titleContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        titleContent.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                titleContent.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         title.text = titleContent
-        title.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 0, 20, 5);
-        title.view.gravity = Gravity.CENTER_VERTICAL
-        title.view.setTypeface(title.view.typeface, Typeface.SANS_SERIF.style)
+        title.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)).setPadding(20, 2, 20, 5);
         horizontalTitle.addView(title)
         pdfBody.addView(horizontalTitle)
 
         //Body
         val horizontalBody = PDFHorizontalView(applicationContext)
-        val body = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
+        val body = PDFTextView(applicationContext, 14f, false)
+        body.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
         val bodyContent = SpannableString(getString(R.string.body_content))
-        bodyContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, bodyContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        bodyContent.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                bodyContent.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         body.text = bodyContent
         body.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F))
-                .setPadding(20, 5, 20, 10)
-        body.view.gravity = Gravity.CENTER
-        body.view.setTypeface(body.view.typeface, Typeface.SANS_SERIF.style)
+                .setPadding(20, 7, 20, 8)
         horizontalBody.addView(body)
         pdfBody.addView(horizontalBody)
 
+////////////////////////////////////اسم المهندس/////////////////////
+
         //Engineer Name
         val horizontalEngineerName = PDFHorizontalView(applicationContext)
-        val name = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
-        val nameContent = SpannableString("اسم المهندس: ${data.contact?.name}")
-        nameContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, nameContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        //Engineer Name Value
+        val nameValue = PDFTextView(applicationContext, 14f, false)
+        val nameContentValue = SpannableString(data.contact?.name)
+        nameContentValue.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                nameContentValue.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        nameValue.text = nameContentValue
+        nameValue.setLayout(
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
+        ).setPadding(20, 5, 0, 4)
+        horizontalEngineerName.addView(nameValue)
+
+        val name = PDFTextView(applicationContext, 14f, true)
+        val nameContent = SpannableString("اسم المهندس :")
+        nameContent.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                nameContent.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         name.text = nameContent
-        name.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 5, 20, 5)
-        name.view.gravity = Gravity.CENTER_VERTICAL
-        name.view.setTypeface(name.view.typeface, Typeface.SANS_SERIF.style)
+        name.setLayout(
+                LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        0F
+                )
+        ).setPadding(2, 5, 20, 4)
         horizontalEngineerName.addView(name)
         pdfBody.addView(horizontalEngineerName)
 
+
+
+        //////////////////////////
         //Engineer Number
         val horizontalEngineerNumber = PDFHorizontalView(applicationContext)
-        val number = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
-        val numberContent = SpannableString("رقم العضوية: ${data.oldRefId}")
-        numberContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, numberContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        val numberValue = PDFTextView(applicationContext, 14f, false)
+        val numberContentValue = SpannableString(data.oldRefId)
+        numberContentValue.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                numberContentValue.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        numberValue.text = numberContentValue
+        numberValue.setLayout(
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
+        ).setPadding(20, 5, 0, 4)
+        horizontalEngineerNumber.addView(numberValue)
+
+
+        val number = PDFTextView(applicationContext, 14f, true)
+        val numberContent = SpannableString("رقم العضوية : ")
+        numberContent.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                numberContent.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         number.text = numberContent
-        number.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 5, 20, 5);
-        number.view.gravity = Gravity.CENTER_VERTICAL
-        number.view.setTypeface(number.view.typeface, Typeface.SANS_SERIF.style)
+        number.setLayout(
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0F)
+        ).setPadding(2, 5, 20, 4)
         horizontalEngineerNumber.addView(number)
         pdfBody.addView(horizontalEngineerNumber)
 
+        ////////////رقم المنظومة العلاجية/////////////
+
+        val horizontalTreatmentNumber = PDFHorizontalView(applicationContext)
+
+        val treatmentNumber = PDFTextView(applicationContext, 14f, false)
+        val treatmentNumberContent = SpannableString(data.contact?.benID)
+        treatmentNumberContent.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                treatmentNumberContent.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        treatmentNumber.text = treatmentNumberContent
+        treatmentNumber.setLayout(
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
+        ).setPadding(20, 5, 0, 4)
+        horizontalTreatmentNumber.addView(treatmentNumber)
+
+
+        val treatmentNumberValue = PDFTextView(applicationContext, 14f, true)
+        val treatmentNumberContentValue = SpannableString("رقم المنظومة العلاجية : ")
+        treatmentNumberContentValue.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                treatmentNumberContentValue.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        treatmentNumberValue.text = treatmentNumberContentValue
+        treatmentNumberValue.setLayout(
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0F)
+        ).setPadding(2, 5, 20, 4)
+        horizontalTreatmentNumber.addView(treatmentNumberValue)
+        pdfBody.addView(horizontalTreatmentNumber)
+
+//////////////////////////////////////الاشتراك الحالى//////////////////////
+
         //Subscription
         val horizontalSubscription = PDFHorizontalView(applicationContext)
-        val subscription = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
-        val subscriptionContent = SpannableString("الاشتراك الحالي: 2021")
-        subscriptionContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, subscriptionContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        val subscriptionValue = PDFTextView(applicationContext, 14f, false)
+        val subscriptionContentValue = SpannableString("2021")
+        subscriptionContentValue.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                subscriptionContentValue.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        subscriptionValue.text = subscriptionContentValue
+        subscriptionValue.setLayout(
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
+        ).setPadding(20, 5, 0, 4)
+        horizontalSubscription.addView(subscriptionValue)
+
+
+        val subscription = PDFTextView(applicationContext, 14f, true)
+        val subscriptionContent = SpannableString("الاشتراك الحالي : ")
+        subscriptionContent.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                subscriptionContent.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         subscription.text = subscriptionContent
-        subscription.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 5, 20, 5);
-        subscription.view.gravity = Gravity.CENTER_VERTICAL
-        subscription.view.setTypeface(subscription.view.typeface, Typeface.SANS_SERIF.style)
+        subscription.setLayout(
+                LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        0F
+                )
+        ).setPadding(2, 5, 20, 4)
         horizontalSubscription.addView(subscription)
         pdfBody.addView(horizontalSubscription)
 
-        //BenID
-        val horizontalBenID = PDFHorizontalView(applicationContext)
-        val benID = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
-        val benIDContent = SpannableString("رقم المنظومة العلاجية: ${data.contact?.benID}")
-        benIDContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, subscriptionContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        benID.text = benIDContent
-        benID.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 5, 20, 5);
-        benID.view.gravity = Gravity.CENTER_VERTICAL
-        benID.view.setTypeface(benID.view.typeface, Typeface.SANS_SERIF.style)
-        horizontalBenID.addView(benID)
-        pdfBody.addView(horizontalBenID)
 
+        //////////////////////////////////
         //Followers
         val horizontalFollowers = PDFHorizontalView(applicationContext)
-        val followers = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
-        val followersContent = SpannableString("التابعين:")
-        followersContent.setSpan(ForegroundColorSpan(Color.DKGRAY), 0, followersContent.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        val followers = PDFTextView(applicationContext, 14f, true)
+        val followersContent = SpannableString("التابعين (1) :")
+        followersContent.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                followersContent.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         followers.text = followersContent
-        followers.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
-        ).setPadding(20, 5, 20, 10);
-        followers.view.gravity = Gravity.CENTER_VERTICAL
-        followers.view.setTypeface(followers.view.typeface, Typeface.SANS_SERIF.style)
+        followers.setLayout(
+                LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
+        ).setPadding(20, 5, 20, 5)
         horizontalFollowers.addView(followers)
         pdfBody.addView(horizontalFollowers)
 
 
-        val tableHeaderTitles = arrayOf("رقم المنظومة العلاجية", "درجة القرابة","الاسم")
-
-        val lineSeparatorView2 =
-                PDFLineSeparatorView(applicationContext).setBackgroundColor(Color.WHITE)
+        val tableHeaderTitles = arrayOf("رقم المنظومة العلاجية", "درجة القرابة", "الاسم")
+        val lineSeparatorView2 = PDFLineSeparatorView(applicationContext).setBackgroundColor(Color.WHITE)
         pdfBody.addView(lineSeparatorView2)
 
         val tableHeader = PDFTableView.PDFTableRowView(applicationContext)
         for (s in tableHeaderTitles) {
-            val pdfTextView = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
+            val pdfTextView = PDFTextView(applicationContext, 13f, true)
             pdfTextView.setText(s)
             tableHeader.addToRow(pdfTextView)
         }
+
+        var items: MutableList<Item> = mutableListOf()
+        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
+        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
+        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
+        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
+        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
+        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
+        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
+        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
+        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
+        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
+
         val tableRowView1 = PDFTableView.PDFTableRowView(applicationContext)
         val tableView = PDFTableView(applicationContext, tableHeader, tableRowView1)
 
         for (item: MedicalRenewalUI.FollowerItem in data.followers!!) {
             val tableRowView = PDFTableView.PDFTableRowView(applicationContext)
-            val benID = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
+            val benID = PDFTextView(applicationContext, 14f, false)
             benID.setText(item.id.toString())
             tableRowView.addToRow(benID)
-            val Name = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
+            val Name = PDFTextView(applicationContext, 14f, false)
             Name.setText(item.relationTypeName)
             tableRowView.addToRow(Name)
-            val Id = PDFTextView(applicationContext, PDFTextView.PDF_TEXT_SIZE.H3)
+            val Id = PDFTextView(applicationContext, 14f, false)
             Id.setText(item.name)
             tableRowView.addToRow(Id)
             tableRowView.view.gravity = Gravity.CENTER_HORIZONTAL
@@ -219,7 +340,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         pdfBody.addView(tableView)
 
         val imageView = PDFImageView(applicationContext)
-        val imageLayoutParam = LinearLayout.LayoutParams(200, 140, 0F)
+        val imageLayoutParam = LinearLayout.LayoutParams(150, 100, 0F)
         imageView.setImageScale(ImageView.ScaleType.CENTER_INSIDE)
         imageView.setImageResource(R.drawable.signature)
         imageLayoutParam.setMargins(0, 0, 10, 0)
@@ -229,14 +350,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         return pdfBody
     }
 
-    override fun onNextClicked(savedPDFFile: File?) {
-//        val pdfUri = Uri.fromFile(savedPDFFile)
-//
-//        val intentPdfViewer = Intent(this, PdfViewerScreen::class.java)
-//        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri)
-//
-//        startActivity(intentPdfViewer)
-    }
+    override fun onNextClicked(savedPDFFile: File?) {}
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_pdf_viewer, menu)
@@ -252,27 +366,38 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
                 val fileToPrint: File? = pdfFile
                 if (fileToPrint == null || !fileToPrint.exists()) {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
-                }else{
+                } else {
                     val printAttributeBuilder = PrintAttributes.Builder()
                     printAttributeBuilder.setMediaSize(PrintAttributes.MediaSize.ISO_A4)
                     printAttributeBuilder.setMinMargins(PrintAttributes.Margins.NO_MARGINS)
-                    PDFUtil.printPdf(this@PdfCreatorScreen, fileToPrint, printAttributeBuilder.build())
+                    PDFUtil.printPdf(
+                            this@PdfCreatorScreen,
+                            fileToPrint,
+                            printAttributeBuilder.build()
+                    )
                 }
             }
             R.id.menuSharePdf -> {
                 val fileToShare: File? = pdfFile
                 if (fileToShare == null || !fileToShare.exists()) {
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
-                }else{
+                } else {
                     val intentShareFile = Intent(Intent.ACTION_SEND)
                     val apkURI: Uri = FileProvider.getUriForFile(
                             applicationContext,
                             applicationContext
-                                    .packageName + ".fileprovider", fileToShare)
-                    intentShareFile.setDataAndType(apkURI, URLConnection.guessContentTypeFromName(fileToShare.name))
+                                    .packageName + ".fileprovider", fileToShare
+                    )
+                    intentShareFile.setDataAndType(
+                            apkURI, URLConnection.guessContentTypeFromName(
+                            fileToShare.name
+                    )
+                    )
                     intentShareFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    intentShareFile.putExtra(Intent.EXTRA_STREAM,
-                            Uri.parse("file://" + fileToShare.absolutePath))
+                    intentShareFile.putExtra(
+                            Intent.EXTRA_STREAM,
+                            Uri.parse("file://" + fileToShare.absolutePath)
+                    )
                     startActivity(Intent.createChooser(intentShareFile, "Share File"))
                 }
             }

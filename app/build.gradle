@@ -192,7 +192,6 @@ dependencies {
     implementation deps.viewpager.indicator
 
     implementation deps.multidex
-    implementation deps.pdf
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
     kapt deps.room.compiler
@@ -203,6 +202,7 @@ dependencies {
     implementation files('libs/cowpaysdk.aar')
     implementation project(':wheel')
     implementation project(':mobilepaymentsdktest')
+    implementation project(path: ':pdfcreator')
     testImplementation deps.junit
     testImplementation deps.mock_web_server
     testImplementation(deps.arch_core.testing, {
