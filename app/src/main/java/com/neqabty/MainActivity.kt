@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 //            graph.startDestination = R.id.introFragment
         else if (PreferencesHelper(this).isForceLogout == true){
             graph.startDestination = R.id.loginFragment
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && BuildConfig.SERVICE_USED.contains("g")) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 grantSMSPermission()
             }
         }

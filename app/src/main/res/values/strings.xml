@@ -246,6 +246,7 @@
     <string name="invalid_national_id">من فضلك ادخل رقم قومي صحيح</string>
     <string name="invalid_data">من فضلك أكمل ادخال البيانات</string>
     <string name="invalid_number">رقم العضوية غير صحيح</string>
+    <string name="invalid_password">من فضلك ادخل كلمة السر</string>
     <string name="pick_photo">من فضلك أرفق صورة الطلب</string>
     <string name="pick_photos">من فضلك أرفق الصور المطلوبة</string>
     <string name="pick_photo_trips">من فضلك أرفق صور المستندات المطلوبة</string>

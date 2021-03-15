@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.loginWithPassword
 
 import android.os.Bundle
 import android.text.Html
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu
 
     var newToken = ""
     var mobile = ""
+    var isPasswordVisible = true
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -108,7 +110,8 @@ class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu
     fun initializeViews() {
         newToken = PreferencesHelper(requireContext()).token
         binding.bSend.setOnClickListener {
-            login()
+            if(isDataValid(edPassword.text.toString()))
+                login()
         }
         binding.tvForgetPassword.setOnClickListener {
             showTwoButtonsAlert(Html.fromHtml(getString(R.string.number_confirmation, mobile + "\n"+ getString(R.string.mobile_number_confirmation))).toString(),
@@ -117,6 +120,17 @@ class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu
                     }, cancelCallback = {
                 navController().navigateUp()
             })
+        }
+        binding.ivVisibility.setOnClickListener {
+            if (isPasswordVisible) {
+                isPasswordVisible = false
+                binding.edPassword.transformationMethod = null
+                binding.ivVisibility.setImageResource(R.drawable.ic_visibile)
+            } else {
+                isPasswordVisible = true
+                binding.edPassword.transformationMethod = PasswordTransformationMethod()
+                binding.ivVisibility.setImageResource(R.drawable.ic_invisible)
+            }
         }
     }
 
@@ -136,11 +150,11 @@ class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu
     }
 //region
 
-    private fun isDataValid(mobile: String): Boolean {
-        return if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
+    private fun isDataValid(password: String): Boolean {
+        return if (!password.isNullOrBlank())
             true
         else {
-            showAlert(getString(R.string.invalid_mobile))
+            showAlert(getString(R.string.invalid_password))
             false
         }
     }

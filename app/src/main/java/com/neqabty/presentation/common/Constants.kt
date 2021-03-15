@@ -13,7 +13,7 @@ object Constants {
 
     var CALL_CENTER = "0235317300"
 
-    var DNS = if (BuildConfig.URL.contains("http")) BuildConfig.URL else "https://$(BuildConfig.URL)"
+    var DNS = if (BuildConfig.URL.contains("http")) BuildConfig.URL else "https://${BuildConfig.URL}"
 
     var COWPAY_MODE = if (BuildConfig.DEBUG) CowpayConstantKeys.SandBox else CowpayConstantKeys.Production
     var CC_COMMISSION = .0288

@@ -101,7 +101,7 @@ android {
         }
         prod {
             dimension "mode"
-            buildConfigField "String", "URL", '"http://3.131.229.146:44392"'
+            buildConfigField "String", "URL", '"front.neqabty.com"'
         }
 
         gms {
