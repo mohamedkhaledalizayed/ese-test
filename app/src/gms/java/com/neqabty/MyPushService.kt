@@ -1,3 +1,5 @@
+package com.neqabty
+
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -7,12 +9,8 @@ import android.os.Build
 import android.provider.Settings
 import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
-import com.firebase.jobdispatcher.FirebaseJobDispatcher
-import com.firebase.jobdispatcher.GooglePlayDriver
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.neqabty.MainActivity
-import com.neqabty.R
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.util.PreferencesHelper
 
