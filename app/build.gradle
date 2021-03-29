@@ -46,7 +46,7 @@ android {
         config {
             keyAlias 'neqabty'
             keyPassword secret
-            storeFile file('E:/Work/Android/Kotlin/NeQabty/keyStore.jks')
+            storeFile file('E:/workspace/NeQabty/keyStore.jks')
             storePassword secret
         }
     }
@@ -74,7 +74,11 @@ android {
         debug {
 //            testCoverageEnabled !project.hasProperty('android.injected.invoked.from.ide')
             debuggable = true
-            signingConfig getLocalSigningConfig(secret)
+//            signingConfig getLocalSigningConfig(secret)
+
+//            minifyEnabled true
+//            shrinkResources true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled true
@@ -183,9 +187,6 @@ dependencies {
     gmsImplementation deps.firebase.messaging
     gmsImplementation deps.firebase.jobdispatcher
 
-
-    hmsImplementation deps.hms.core
-    hmsImplementation deps.hms.hms_agcp
     hmsImplementation deps.hms.hms_push
 
     implementation deps.viewpager.pager

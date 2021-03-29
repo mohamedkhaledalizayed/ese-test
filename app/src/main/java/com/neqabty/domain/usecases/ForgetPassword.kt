@@ -14,18 +14,21 @@ class ForgetPassword @Inject constructor(
     companion object {
         private const val PARAM_MOBILE = "param:mobile"
         private const val PARAM_USER_NUMBER = "param:userNumber"
+        private const val PARAM_NAT_ID  = "param:natId"
     }
 
-    fun forgetPassword(mobile: String, userNumber: String): Observable<String> {
+    fun forgetPassword(mobile: String, userNumber: String, natId: String): Observable<String> {
         val data = HashMap<String, String>()
         data[PARAM_MOBILE] = mobile
         data[PARAM_USER_NUMBER] = userNumber
+        data[PARAM_NAT_ID] = natId
         return observable(data)
     }
 
     override fun createObservable(data: Map<String, Any>?): Observable<String> {
         val mobile = data?.get(PARAM_MOBILE) as String
         val userNumber = data?.get(PARAM_USER_NUMBER) as String
-        return neqabtyRepository.forgetPassword(mobile, userNumber)
+        val natId = data?.get(PARAM_NAT_ID) as String
+        return neqabtyRepository.forgetPassword(mobile, userNumber, natId)
     }
 }

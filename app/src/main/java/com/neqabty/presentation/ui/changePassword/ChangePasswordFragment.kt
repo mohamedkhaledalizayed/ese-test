@@ -74,7 +74,6 @@ class ChangePasswordFragment : BaseFragment(), Injectable {
         })
         isSetNew = ChangePasswordFragmentArgs.fromBundle(requireArguments()).isSetNew
         mobile = ChangePasswordFragmentArgs.fromBundle(requireArguments()).mobile
-        otp = ChangePasswordFragmentArgs.fromBundle(requireArguments()).otp
         receiver = object : BroadcastReceiver() {
             override fun onReceive(contxt: Context?, intent: Intent?) {
                 if (intent?.action.equals("otp",true)) {

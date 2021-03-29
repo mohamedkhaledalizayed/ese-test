@@ -1,10 +1,6 @@
 package com.neqabty.presentation.ui.signup
 
 import android.app.Dialog
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import com.neqabty.presentation.util.PushNotificationsWrapper
 import com.neqabty.presentation.common.Constants
@@ -25,6 +20,7 @@ import com.neqabty.databinding.SignupFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.presentation.util.observeOnce
@@ -43,9 +39,6 @@ class SignupFragment : BaseFragment(), Injectable {
     var type: Int? = 0
 
     var newToken = ""
-    var otp = ""
-    var password = ""
-    lateinit var receiver: BroadcastReceiver
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -76,16 +69,6 @@ class SignupFragment : BaseFragment(), Injectable {
         signupViewModel.errorState.observe(this, Observer { error ->
             showAlert(message = error?.message ?: "")
         })
-
-        receiver = object : BroadcastReceiver() {
-            override fun onReceive(contxt: Context?, intent: Intent?) {
-                if (intent?.action.equals("otp", true)) {
-                    val message = intent?.getStringExtra("message") ?: ""
-                    otp = message.substring(0, 4)
-                    password = message.substring(4, message.length)
-                }
-            }
-        }
         initializeViews()
     }
 
@@ -116,25 +99,31 @@ class SignupFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: SignupViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful && state.user != null) {
-            activity?.invalidateOptionsMenu()
             PreferencesHelper(requireContext()).mobile = edMobile.text.toString()
-//           PreferencesHelper(requireContext()).user = state.user?.details!![0].userNumber!!
-//           PreferencesHelper(requireContext()).name = state.user?.details!![0].name!!
+            PreferencesHelper(requireContext()).user = state.user?.details!![0].userNumber!!
+            PreferencesHelper(requireContext()).name = state.user?.details!![0].name!!
+            PreferencesHelper(requireContext()).isRegistered = true
+            activity?.invalidateOptionsMenu()
             state.user = null
-            navController().navigate(SignupFragmentDirections.openActivateAccountFragment(type!!, otp, password))
+            showTwoButtonsAlert(message = getString(R.string.welcome_with_name, PreferencesHelper(requireContext()).name)+"\n"+getString(R.string.welcome_with_password),
+                    okCallback = {
+                        navController().navigate(SignupFragmentDirections.openChangePasswordFragment(false, PreferencesHelper(requireContext()).mobile))
+                    }, cancelCallback = {
+                continueNavigation()
+            }, btnPositiveTitle = getString(R.string.change_password_title), btnNegativeTitle = getString(R.string.continue_btn))
         }
     }
 
     fun login() {
         if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString(), binding.edNationalNumber.text.toString())) {
             if (newToken.isNotBlank())
-                signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(),newToken, PreferencesHelper(requireContext()))
+                signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
             else {
                 Constants.isFirebaseTokenUpdated.observeOnce(viewLifecycleOwner, Observer {
-                    if (it.isNotBlank()){
+                    if (it.isNotBlank()) {
                         newToken = it
                         signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
-                    }else
+                    } else
                         showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
                 })
                 PushNotificationsWrapper().getToken(requireContext())
@@ -176,14 +165,37 @@ class SignupFragment : BaseFragment(), Injectable {
 //        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
 //    }
-    override fun onResume() {
-        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(receiver, IntentFilter("otp"))
-        super.onResume()
-    }
 
-    override fun onPause() {
-        super.onPause()
-        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(receiver)
+    private fun continueNavigation() {
+        when (type) {
+            Constants.CLAIMING -> navController().navigate(
+                    SignupFragmentDirections.openClaiming()
+            )
+
+            Constants.TRIPS -> navController().navigate(
+                    SignupFragmentDirections.openTripReservation(TripsData.tripItem!!)
+            )
+
+            Constants.RECORDS -> navController().navigate(
+                    SignupFragmentDirections.openEngineeringRecords()
+            )
+
+            Constants.UPDATE_DATA -> navController().navigate(
+                    SignupFragmentDirections.openUpdateDataVerification()
+            )
+
+            Constants.COMPLAINTS -> navController().navigate(
+                    SignupFragmentDirections.openComplaints()
+            )
+
+            Constants.CORONA -> navController().navigate(
+                    SignupFragmentDirections.openCorona()
+            )
+
+            Constants.MEDICAL_RENEW -> navController().navigate(
+                    SignupFragmentDirections.openMedicalRenew()
+            )
+        }
     }
 // endregion
 

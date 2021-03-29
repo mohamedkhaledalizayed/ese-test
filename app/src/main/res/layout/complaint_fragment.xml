@@ -101,6 +101,24 @@
                     android:textSize="@dimen/text_size_medium" />
 
                 <TextView
+                    android:id="@+id/tvSubTypes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/complaint_subtype"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <Spinner
+                    android:id="@+id/spSubTypes"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:hint="@string/complaint_subtype"
+                    android:textDirection="rtl"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

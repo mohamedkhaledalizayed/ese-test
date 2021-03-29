@@ -51,6 +51,10 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getComplaintTypes()
     }
 
+    override fun getComplaintSubTypes(id: String): Observable<List<ComplaintTypeEntity>> {
+        return remoteDataStore.getComplaintSubTypes(id)
+    }
+
     override fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity> {
         return remoteDataStore.getMedicalRenewalData(mobileNumber, userNumber)
     }
@@ -324,8 +328,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.login(actionType, mobile, userNumber, newToken, oldToken, password)
     }
 
-    override fun forgetPassword(mobile: String, userNumber: String): Observable<String> {
-        return remoteDataStore.forgetPassword(mobile, userNumber)
+    override fun forgetPassword(mobile: String, userNumber: String, natId: String): Observable<String> {
+        return remoteDataStore.forgetPassword(mobile, userNumber, natId)
     }
 
     override fun changePassword(mobile: String, currentPassword: String, newPassword: String): Observable<String> {

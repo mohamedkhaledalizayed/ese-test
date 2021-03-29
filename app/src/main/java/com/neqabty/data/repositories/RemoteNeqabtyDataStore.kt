@@ -91,6 +91,12 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    override fun getComplaintSubTypes(id: String): Observable<List<ComplaintTypeEntity>> {
+        return api.getComplaintSubTypes(ComplaintSubtypeRequest(id)).map { types ->
+            types.data?.map { complaintTypeDataEntityMapper.mapFrom(it) }
+        }
+    }
+
     private val inquireUpdateUserDataEntityMapper = InquireUpdateUserDataEntityMapper()
     override fun updateUserDataInquiry(userNumber: String): Observable<InquireUpdateUserDataEntity> {
         return api.updateUserDataInquiry(InquireUpdateUserDataRequest(userNumber)).flatMap { userDataResponse ->
@@ -590,8 +596,8 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
-    override fun forgetPassword(mobile: String, userNumber: String): Observable<String> {
-        return api.forgetPassword(ForgetPasswordRequest(mobile, userNumber)).flatMap { response ->
+    override fun forgetPassword(mobile: String, userNumber: String, natId: String): Observable<String> {
+        return api.forgetPassword(ForgetPasswordRequest(mobile, userNumber, natId)).flatMap { response ->
             Observable.just(response.arMsg)
         }
     }

@@ -43,12 +43,13 @@
     <string name="signup_title">إنشاء حساب جديد</string>
     <string name="signup_submit">إنشاء حساب</string>
     <string name="signup_hint">هذا الرقم غير مسجل من قبل برجاء انشاء حساب حتى تتمكن من استخدام الخدمة</string>
-    <string name="activate_account_hint">تم انشاء الحساب بنجاح, سيتم ارسال رسالة نصية بكود التعريف وكلمة المرور برجاء تفعيل الحساب</string>
+    <string name="activate_account_hint">تم انشاء الحساب بنجاح, سيتم ارسال رسالة نصية بكود التعريف وكلمة السر برجاء تفعيل الحساب</string>
     <string name="login_with_password_hint">هذا الرقم مسجل من قبل برجاء ادخال كلمة السر للدخول الي الحساب</string>
     <string name="personalDetails">البيانات الشخصية</string>
     <string name="confirm">تأكيد</string>
     <string name="welcome">مرحبا بكم</string>
     <string name="welcome_with_name">مرحباً  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]>تم تسجيل الدخول بنجاح</string>
+    <string name="welcome_with_password">كلمة السر الخاصة بك هي آخر 4 ارقام من الرقم القومي</string>
     <string name="welcome_with_name_login">هذا الرقم مسجل بإسم  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]>هل تريد تأكيد الدخول؟</string>
     <string name="welcome_to_neqabty">مرحبا بكم في تطبيق نقابة المهندسين المصرية - نقابتي</string>
     <string name="main">الرئيسية</string>
@@ -103,8 +104,8 @@
     <string name="viewPhoto">عرض الصورة</string>
     <string name="format">yyyy/MM/dd</string>
     <string name="mandatoryField">هذا الحقل مطلوب</string>
-    <string name="loginError">خطأ في اسم المستخدم أو كلمة المرور</string>
-    <string name="passwordMatchError">يجب أن تتطابق كلمة المرور و تأكيد كلمة المرور</string>
+    <string name="loginError">خطأ في اسم المستخدم أو كلمة السر</string>
+    <string name="passwordMatchError">يجب أن تتطابق كلمة السر و تأكيد كلمة السر</string>
     <string name="selectSubSyndicate">اختر النقابة</string>
     <string name="confirmation_sent">تم ارسال الرقم التأكيدي لرقم الجوال الخاص بك</string>
     <string name="enter_confirmation_code">من فضلك ادخل الرمز التأكيدي</string>
@@ -483,6 +484,7 @@
     <string name="complaint_description">للاستفسارات نرجو الاتصال علي مركز خدمة العملاء (الكول سنتر) علي الرقم التالي <![CDATA[<font color="#1d1ad2"><b>0235317300</b></font>]]></string>
     <string name="complaint_fill_data">املأ من فضلك ما يلي</string>
     <string name="complaint_type">نوع الشكوى</string>
+    <string name="complaint_subtype">تصنيف الشكوى</string>
     <string name="complaint_name">اسم مقدم الشكوى</string>
     <string name="complaint_mobile">هاتف مقدم الشكوى</string>
     <string name="complaint_body">موضوع الشكوى</string>

@@ -85,19 +85,21 @@ open class BaseFragment : Fragment() {
             message: String,
             title: String = getString(R.string.alert_title),
             okCallback: (() -> Unit) = { dialog?.dismiss() },
-            cancelCallback: (() -> Unit) = { dialog?.dismiss() }
+            cancelCallback: (() -> Unit) = { dialog?.dismiss()},
+            btnPositiveTitle: String= getString(R.string.confirm),
+            btnNegativeTitle: String = getString(R.string.cancel_btn)
     ) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)
         builder.setCancelable(false)
         builder.setMessage(Html.fromHtml(message))
-        builder.setPositiveButton(getString(R.string.confirm)) { dialog, _ ->
+        builder.setPositiveButton(btnPositiveTitle) { dialog, _ ->
             try {
                 okCallback.invoke()
             } catch (e: Exception) {
             }
         }
-        builder.setNegativeButton(getString(R.string.cancel_btn)) { dialog, which ->
+        builder.setNegativeButton(btnNegativeTitle) { dialog, which ->
             try {
                 cancelCallback.invoke()
                 dialog?.dismiss()

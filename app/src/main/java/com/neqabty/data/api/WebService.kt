@@ -169,7 +169,7 @@ interface WebService {
     @POST("api/user/login")
     fun login(@Body loginRequest: LoginRequest): Observable<ApiResponse<UserData>>
 
-    @POST("api/user/password/forget")
+    @POST("api/user/password/reset")
     fun forgetPassword(@Body forgetPasswordRequest: ForgetPasswordRequest): Observable<ApiResponse<Unit>>
 
     @POST("api/user/password/change")
@@ -189,6 +189,9 @@ interface WebService {
 
     @GET("api/complaintServices")
     fun getComplaintTypes(): Observable<List<ComplaintTypeData>>
+
+    @POST("api/v1/complaints/sub_categories ")
+    fun getComplaintSubTypes(@Body complaintSubtypeRequest: ComplaintSubtypeRequest): Observable<ApiResponse<List<ComplaintTypeData>>>
 
     @POST("api/complaints/request")
     fun sendComplaint(@Body complaintRequest: ComplaintRequest): Observable<ApiResponse<Unit>>

@@ -40,7 +40,9 @@ class ComplaintFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
 
     var complaintsTypesList: List<ComplaintTypeUI>? = mutableListOf()
+    var complaintsSubTypesList: List<ComplaintTypeUI>? = mutableListOf()
     var complaintsTypeID: Int = 0
+    var complaintsSubTypeID: Int = 0
     var isSubmitted: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -100,6 +102,9 @@ class ComplaintFragment : BaseFragment(), Injectable {
             state.types?.let {
                 complaintsTypesList = it
             }
+            state.subTypes?.let {
+                complaintsSubTypesList = it
+            }
             renderTypes()
         }
     }
@@ -111,9 +116,29 @@ class ComplaintFragment : BaseFragment(), Injectable {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 complaintsTypeID = (parent.getItemAtPosition(position) as ComplaintTypeUI).id
+                renderSubTypes()
             }
         }
         binding.spTypes.setSelection(0)
+    }
+
+    fun renderSubTypes() {
+        if(complaintsTypeID == 1){
+            binding.tvSubTypes.visibility = View.VISIBLE
+            binding.spSubTypes.visibility = View.VISIBLE
+        }else{
+            binding.tvSubTypes.visibility = View.GONE
+            binding.spSubTypes.visibility = View.GONE
+        }
+
+        binding.spSubTypes.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, complaintsSubTypesList!!)
+        binding.spSubTypes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                complaintsSubTypeID = (parent.getItemAtPosition(position) as ComplaintTypeUI).id
+            }
+        }
+        binding.spSubTypes.setSelection(0)
     }
 
     fun showSuccessAlert() {

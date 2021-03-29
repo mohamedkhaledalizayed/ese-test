@@ -6,5 +6,7 @@ data class ForgetPasswordRequest(
         @SerializedName("mobile")
         var mobile: String = "",
         @SerializedName("user_number")
-        var userNumber: String = ""
+        var userNumber: String = "",
+        @SerializedName("national_id")
+        var natId: String = ""
 )

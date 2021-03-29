@@ -437,6 +437,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetComplaintSubTypes(neqabtyRepository: NeqabtyRepository): GetComplaintSubTypes {
+        return GetComplaintSubTypes(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideCreateComplaint(neqabtyRepository: NeqabtyRepository): CreateComplaint {
         return CreateComplaint(ASyncTransformer(), neqabtyRepository)
     }

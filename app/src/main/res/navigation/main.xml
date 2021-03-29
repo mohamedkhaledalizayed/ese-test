@@ -97,12 +97,6 @@
         <argument
             android:name="type"
             app:argType="java.lang.Integer" />
-        <argument
-            android:name="otp"
-            app:argType="java.lang.String" />
-        <argument
-            android:name="password"
-            app:argType="java.lang.String" />
         <action
             android:id="@+id/openMedicalRenew"
             app:destination="@id/medicalRenewFragment"
@@ -151,6 +145,47 @@
         <action
             android:id="@+id/openActivateAccountFragment"
             app:destination="@id/activateAccountFragment" />
+        <action
+            android:id="@+id/openChangePasswordFragment"
+            app:destination="@id/changePasswordFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
+
+        <action
+            android:id="@+id/openMedicalRenew"
+            app:destination="@id/medicalRenewFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openClaiming"
+            app:destination="@id/claimingFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openTripReservation"
+            app:destination="@id/tripReservationFragment"
+            app:popUpTo="@id/tripDetailsFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openEngineeringRecords"
+            app:destination="@id/engineeringRecordsDetailsFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openUpdateDataVerification"
+            app:destination="@id/updateDataVerificationFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openComplaints"
+            app:destination="@id/complaintsFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openCorona"
+            app:destination="@id/coronaFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -164,9 +199,6 @@
             app:argType="java.lang.Boolean" />
         <argument
             android:name="mobile"
-            app:argType="java.lang.String" />
-        <argument
-            android:name="otp"
             app:argType="java.lang.String" />
     </fragment>
 

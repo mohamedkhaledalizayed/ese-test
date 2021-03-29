@@ -30,6 +30,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.util.*
 import dagger.android.AndroidInjector
@@ -105,9 +106,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 //            graph.startDestination = R.id.introFragment
         else if (PreferencesHelper(this).isForceLogout == true){
             graph.startDestination = R.id.loginFragment
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                grantSMSPermission()
-            }
         }
         else if (PreferencesHelper(this).mobile.isEmpty()) // TODO
             graph.startDestination = R.id.loginFragment
@@ -471,14 +469,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     override fun onSaveInstanceState(@NonNull outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.clear()
-    }
-
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun grantSMSPermission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(Manifest.permission.RECEIVE_SMS), REQUEST_SMS)
-        }
     }
 //endregion//
 }

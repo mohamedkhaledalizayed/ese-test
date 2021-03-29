@@ -16,10 +16,10 @@ class ForgetPasswordViewModel @Inject constructor(val forgetPassword: ForgetPass
     }
 
 
-    fun forgetPassword(mobile: String, userNumber: String) {
+    fun forgetPassword(mobile: String, userNumber: String, natId: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
 
-        addDisposable(forgetPassword.forgetPassword(mobile, userNumber)
+        addDisposable(forgetPassword.forgetPassword(mobile, userNumber, natId)
                 .subscribe(
                         {
                             viewState.value = viewState.value?.copy(isLoading = false, isSuccessful = true, msg = it)

@@ -1,6 +1,5 @@
 package com.neqabty.presentation.ui.activateAccount
 
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -14,7 +13,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.ActivateAccountFragmentBinding
@@ -41,11 +39,9 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
     var password: String = ""
 
     var verificationCode: String = ""
-    private var counterTimeout: Long = 30000
+    private var counterTimeout: Long = 120000
     private var isTimerFinished = true
     lateinit var timer: CountDownTimer
-    var otp = ""
-    lateinit var receiver: BroadcastReceiver
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -66,8 +62,6 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
 
         val params = ActivateAccountFragmentArgs.fromBundle(arguments!!)
         type = params.type
-        otp = params.otp
-        password = params.password
 
         activateAccountViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(ActivateAccountViewModel::class.java)
@@ -83,22 +77,10 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
             }, message = error?.message)
         })
 //        activateAccountViewModel.sendSMS(PreferencesHelper(requireContext()).mobile)
-        receiver = object : BroadcastReceiver() {
-            override fun onReceive(contxt: Context?, intent: Intent?) {
-                if (intent?.action.equals("otp",true)) {
-                    val message = intent?.getStringExtra("message") ?: ""
-                    otp = message.substring(0, 4)
-                    password = message.substring(4, message.length)
-                    edOTP.setText(otp)
-//                    edPassword.setText(password)
-                }
-            }
-        }
         initializeViews()
     }
 
     fun initializeViews() {
-        edOTP.setText(otp)
 //        edPassword.setText(password)
         binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
         binding.bSend.setOnClickListener {
@@ -192,16 +174,6 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
             tvResend.isEnabled = false
             tvResend.setTextColor(resources.getColor(R.color.gray_dark))
         }
-    }
-
-    override fun onResume() {
-        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(receiver, IntentFilter("otp"))
-        super.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(receiver)
     }
 // endregion
 

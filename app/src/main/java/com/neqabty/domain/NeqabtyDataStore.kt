@@ -124,7 +124,7 @@ interface NeqabtyDataStore {
     ): Observable<Unit>
 
     fun login(actionType: String, mobile: String, userNumber: String, newToken: String, oldToken: String, password: String=""): Observable<UserEntity>
-    fun forgetPassword(mobile: String, userNumber: String): Observable<String>
+    fun forgetPassword(mobile: String, userNumber: String, natId: String): Observable<String>
     fun changePassword(mobile: String, currentPassword: String, newPassword: String): Observable<String>
     fun setNewPassword(mobile: String, verificationCode: String, newPassword: String): Observable<String>
     fun signup(
@@ -142,6 +142,7 @@ interface NeqabtyDataStore {
     ): Observable<UserEntity>
 
     fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>>
+    fun getComplaintSubTypes(id: String): Observable<List<ComplaintTypeEntity>>
     fun createComplaint(name: String, phone: String, type: String, body: String, token: String, memberNumber: String): Observable<Unit>
     fun createCoronaRequest(
             userNumber: String,
