@@ -3,11 +3,12 @@ package com.neqabty.domain.usecases
 import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.common.Transformer
 import io.reactivex.Observable
+import java.io.File
 import javax.inject.Inject
 
 class CreateComplaint @Inject constructor(
-    transformer: Transformer<Unit>,
-    private val neqabtyRepository: NeqabtyRepository
+        transformer: Transformer<Unit>,
+        private val neqabtyRepository: NeqabtyRepository
 ) : UseCase<Unit>(transformer) {
 
     companion object {
@@ -18,10 +19,20 @@ class CreateComplaint @Inject constructor(
         private const val PARAM_DETAILS = "param:details"
         private const val PARAM_TOKEN = "param:token"
         private const val PARAM_MEMBER_NUMBER = "param:number"
+        private const val PARAM_DOCS_COUNT = "param:docsNumber"
+        private const val PARAM_DOC1 = "param:doc1"
+        private const val PARAM_DOC2 = "param:doc2"
+        private const val PARAM_DOC3 = "param:doc3"
+        private const val PARAM_DOC4 = "param:doc4"
     }
 
-    fun createComplaint(name: String, phone: String, catId: String, subCatId: String, body: String, token: String, memberNumber: String): Observable<Unit> {
-        val data = HashMap<String, String>()
+    fun createComplaint(name: String, phone: String, catId: String, subCatId: String, body: String, token: String, memberNumber: String,
+                        docsNumber: Int,
+                        doc1: File?,
+                        doc2: File?,
+                        doc3: File?,
+                        doc4: File?): Observable<Unit> {
+        val data = HashMap<String, Any>()
         data[PARAM_NAME] = name
         data[PARAM_MOBILE] = phone
         data[PARAM_CAT_ID] = catId
@@ -29,6 +40,11 @@ class CreateComplaint @Inject constructor(
         data[PARAM_DETAILS] = body
         data[PARAM_TOKEN] = token
         data[PARAM_MEMBER_NUMBER] = memberNumber
+        data[PARAM_DOCS_COUNT] = docsNumber
+        doc1?.let { data[PARAM_DOC1] = it }
+        doc2?.let { data[PARAM_DOC2] = it }
+        doc3?.let { data[PARAM_DOC3] = it }
+        doc4?.let { data[PARAM_DOC4] = it }
         return observable(data)
     }
 
@@ -40,6 +56,11 @@ class CreateComplaint @Inject constructor(
         val details = data?.get(PARAM_DETAILS) as String
         val token = data?.get(PARAM_TOKEN) as String
         val memberNumber = data?.get(PARAM_MEMBER_NUMBER) as String
-        return neqabtyRepository.createComplaint(name, phone, catId, subCatId, details, token, memberNumber)
+        val docsNumber = data?.get(PARAM_DOCS_COUNT) as Int
+        val doc1 = data?.get(PARAM_DOC1) as File?
+        val doc2 = data?.get(PARAM_DOC2) as File?
+        val doc3 = data?.get(PARAM_DOC3) as File?
+        val doc4 = data?.get(PARAM_DOC4) as File?
+        return neqabtyRepository.createComplaint(name, phone, catId, subCatId, details, token, memberNumber, docsNumber, doc1, doc2, doc3, doc4)
     }
 }

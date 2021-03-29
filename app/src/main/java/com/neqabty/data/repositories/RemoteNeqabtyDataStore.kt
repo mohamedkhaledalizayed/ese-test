@@ -78,9 +78,35 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             subCatId: String,
             body: String,
             token: String,
-            memberNumber: String
+            memberNumber: String,
+            docsNumber: Int,
+            doc1: File?,
+            doc2: File?,
+            doc3: File?,
+            doc4: File?
     ): Observable<Unit> {
-        return api.sendComplaint(ComplaintRequest(name, phone, catId, subCatId, body, token, memberNumber)).map { result ->
+        var file1: MultipartBody.Part? = null
+        var file2: MultipartBody.Part? = null
+        var file3: MultipartBody.Part? = null
+        var file4: MultipartBody.Part? = null
+
+        doc1?.let {
+            val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
+            file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
+        }
+        doc2?.let {
+            val doc2RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc2)
+            file2 = MultipartBody.Part.createFormData("doc2", doc2?.name, doc2RequestFile)
+        }
+        doc3?.let {
+            val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
+            file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
+        }
+        doc4?.let {
+            val doc4RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc4)
+            file4 = MultipartBody.Part.createFormData("doc4", doc4?.name, doc4RequestFile)
+        }
+        return api.sendComplaint(ComplaintRequest(name, phone, catId, subCatId, body, token, memberNumber, docsNumber), file1, file2, file3, file4).map { result ->
             result.data ?: Unit
         }
     }

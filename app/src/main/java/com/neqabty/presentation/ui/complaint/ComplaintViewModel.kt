@@ -7,6 +7,7 @@ import com.neqabty.domain.usecases.GetComplaintTypes
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.ComplaintTypeEntityUIMapper
+import java.io.File
 import javax.inject.Inject
 
 class ComplaintViewModel @Inject constructor(
@@ -64,9 +65,14 @@ class ComplaintViewModel @Inject constructor(
             viewState.value = viewState.value?.copy(isLoading = false)
     }
 
-    fun createComplaint(name: String, phone: String, catId: String, subCatId: String, body: String, token: String, memberNumber: String) {
+    fun createComplaint(name: String, phone: String, catId: String, subCatId: String, body: String, token: String, memberNumber: String,
+                        docsNumber: Int,
+                        doc1: File?,
+                        doc2: File?,
+                        doc3: File?,
+                        doc4: File?) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(createComplaint.createComplaint(name, phone, catId, subCatId, body, token, memberNumber)
+        addDisposable(createComplaint.createComplaint(name, phone, catId, subCatId, body, token, memberNumber, docsNumber, doc1, doc2, doc3, doc4)
                 .subscribe(
                         { viewState.value = viewState.value?.copy(isLoading = false, message = "success") },
                         { errorState.value = handleError(it) }

@@ -150,7 +150,12 @@ interface NeqabtyRepository {
 
     fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>>
     fun getComplaintSubTypes(id: String): Observable<List<ComplaintTypeEntity>>
-    fun createComplaint(name: String, phone: String, catId: String, subCatId: String, body: String, token: String, memberNumber: String): Observable<Unit>
+    fun createComplaint(name: String, phone: String, catId: String, subCatId: String, body: String, token: String, memberNumber: String,
+                        docsNumber: Int,
+                        doc1: File?,
+                        doc2: File?,
+                        doc3: File?,
+                        doc4: File?): Observable<Unit>
     fun createCoronaRequest(
             userNumber: String,
             phone: String,

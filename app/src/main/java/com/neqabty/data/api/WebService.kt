@@ -193,8 +193,14 @@ interface WebService {
     @POST("api/v1/complaints/sub_categories ")
     fun getComplaintSubTypes(@Body complaintSubtypeRequest: ComplaintSubtypeRequest): Observable<ApiResponse<List<ComplaintTypeData>>>
 
+    @Multipart
     @POST("api/complaints/request")
-    fun sendComplaint(@Body complaintRequest: ComplaintRequest): Observable<ApiResponse<Unit>>
+    fun sendComplaint(
+            @Part("json_request") complaintRequest: ComplaintRequest,
+            @Part doc1: MultipartBody.Part?,
+            @Part doc2: MultipartBody.Part?,
+            @Part doc3: MultipartBody.Part?,
+            @Part doc4: MultipartBody.Part?): Observable<ApiResponse<Unit>>
 
     @Multipart
     @POST("api/v1/RecieveCovid19Rquest")

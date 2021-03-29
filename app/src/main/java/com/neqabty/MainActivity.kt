@@ -30,7 +30,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.messaging.FirebaseMessaging
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.util.*
 import dagger.android.AndroidInjector

@@ -57,7 +57,12 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
             subCatId: String,
             body: String,
             token: String,
-            memberNumber: String
+            memberNumber: String,
+            docsNumber: Int,
+            doc1: File?,
+            doc2: File?,
+            doc3: File?,
+            doc4: File?
     ): Observable<Unit> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
