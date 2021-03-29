@@ -64,9 +64,9 @@ class ComplaintViewModel @Inject constructor(
             viewState.value = viewState.value?.copy(isLoading = false)
     }
 
-    fun createComplaint(name: String, phone: String, type: String, body: String, token: String, memberNumber: String) {
+    fun createComplaint(name: String, phone: String, catId: String, subCatId: String, body: String, token: String, memberNumber: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(createComplaint.createComplaint(name, phone, type, body, token, memberNumber)
+        addDisposable(createComplaint.createComplaint(name, phone, catId, subCatId, body, token, memberNumber)
                 .subscribe(
                         { viewState.value = viewState.value?.copy(isLoading = false, message = "success") },
                         { errorState.value = handleError(it) }

@@ -74,12 +74,13 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     override fun createComplaint(
             name: String,
             phone: String,
-            type: String,
+            catId: String,
+            subCatId: String,
             body: String,
             token: String,
             memberNumber: String
     ): Observable<Unit> {
-        return api.sendComplaint(ComplaintRequest(name, phone, type, body, token, memberNumber)).map { result ->
+        return api.sendComplaint(ComplaintRequest(name, phone, catId, subCatId, body, token, memberNumber)).map { result ->
             result.data ?: Unit
         }
     }

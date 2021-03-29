@@ -48,7 +48,7 @@
     <string name="personalDetails">البيانات الشخصية</string>
     <string name="confirm">تأكيد</string>
     <string name="welcome">مرحبا بكم</string>
-    <string name="welcome_with_name">مرحباً  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]>تم تسجيل الدخول بنجاح</string>
+    <string name="welcome_with_name">مرحباً  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]></string>
     <string name="welcome_with_password">كلمة السر الخاصة بك هي آخر 4 ارقام من الرقم القومي</string>
     <string name="welcome_with_name_login">هذا الرقم مسجل بإسم  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]>هل تريد تأكيد الدخول؟</string>
     <string name="welcome_to_neqabty">مرحبا بكم في تطبيق نقابة المهندسين المصرية - نقابتي</string>
@@ -137,7 +137,7 @@
     <string name="enter_member_number">ادخل رقم العضوية</string>
     <string name="login_member_enter_member_number">برجاء ادخال رقم العضوية الخاص بك لاستكمال بيانات الحساب</string>
     <string name="change_number_enter_member_number">برجاء ادخال رقم العضوية الصحيح الخاص بك لاستكمال بيانات الحساب</string>
-    <string name="national_id_digits">برجاء ادخال آخر 4 أرقام من الرقم القومي</string>
+    <string name="national_id_digits">برجاء ادخال كلمة السر الخاصة بالحساب  \n(وهي عبارة عن آخر 4 أرقام من الرقم القومي)</string>
     <string name="medicalRequest">تقديم الموافقات الطبية</string>
     <string name="syndicateNumber">رقم العضوية</string>
     <string name="member_name">اسم العضو</string>

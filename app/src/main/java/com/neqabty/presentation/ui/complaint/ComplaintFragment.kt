@@ -88,7 +88,7 @@ class ComplaintFragment : BaseFragment(), Injectable {
         binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
         binding.bSend.setOnClickListener {
             isSubmitted = true
-            complaintViewModel.createComplaint(edName.text.toString(), edMobile.text.toString(), complaintsTypeID.toString(), edBody.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()).user)
+            complaintViewModel.createComplaint(edName.text.toString(), edMobile.text.toString(), complaintsTypeID.toString(), complaintsSubTypeID.toString(), edBody.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()).user)
         }
     }
 

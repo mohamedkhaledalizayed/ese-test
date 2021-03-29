@@ -53,7 +53,8 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
     override fun createComplaint(
             name: String,
             phone: String,
-            type: String,
+            catId: String,
+            subCatId: String,
             body: String,
             token: String,
             memberNumber: String

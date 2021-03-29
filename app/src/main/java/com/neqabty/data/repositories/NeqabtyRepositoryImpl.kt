@@ -39,12 +39,13 @@ class NeqabtyRepositoryImpl @Inject constructor(
     override fun createComplaint(
             name: String,
             phone: String,
-            type: String,
+            catId: String,
+            subCatId: String,
             body: String,
             token: String,
             memberNumber: String
     ): Observable<Unit> {
-        return remoteDataStore.createComplaint(name, phone, type, body, token, memberNumber)
+        return remoteDataStore.createComplaint(name, phone, catId, subCatId, body, token, memberNumber)
     }
 
     override fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>> {

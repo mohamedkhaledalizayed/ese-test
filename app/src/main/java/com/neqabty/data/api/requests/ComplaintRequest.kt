@@ -8,8 +8,10 @@ data class ComplaintRequest(
     var name: String = "",
     @SerializedName("phone")
     var phone: String = "",
-    @SerializedName("complaint_type")
-    var type: String = "",
+    @SerializedName("cat_id")
+    var catId: String = "",
+    @SerializedName("sub_cat_id")
+    var subCatId: String = "",
     @SerializedName("details")
     var details: String = "",
     @SerializedName("mobile_token")
