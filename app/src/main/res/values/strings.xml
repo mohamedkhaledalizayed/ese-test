@@ -334,6 +334,7 @@
     <string name="remove_follower">حذف</string>
     <string name="remove_follower_confirmation">هل تريد إتمام عملية الحذف؟!</string>
     <string name="send_request_confirmation">هل انت متأكد انك تريد ارسال الطلب إلى المراجعة؟!</string>
+    <string name="medical_subscription_ended">برجاء العلم انه تم انتهاء تجديد مشروع الرعاية الصحية لعام 2021 </string>
     <string name="medical_subscribe_confirmation">هذا المهندس غير مسجل بخدمة الرعاية الصحية، هل تود الاشتراك في الخدمة ؟</string>
     <string name="medical_subscription_unsubscribed">هذا الرقم غير مقيد بالنقابة، برجاء الرجوع للنقابة لطلب العضوية</string>
     <string name="medical_subscription_suspended">هذه العضوية موقوفة برجاء الرجوع إلى النقابة</string>

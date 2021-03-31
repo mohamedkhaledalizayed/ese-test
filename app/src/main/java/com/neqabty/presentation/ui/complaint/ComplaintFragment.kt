@@ -185,6 +185,7 @@ class ComplaintFragment : BaseFragment(), Injectable {
         }else{
             binding.tvSubTypes.visibility = View.GONE
             binding.spSubTypes.visibility = View.GONE
+            complaintsSubTypeID = -1
         }
 
         binding.spSubTypes.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, complaintsSubTypesList!!)
