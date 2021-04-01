@@ -67,7 +67,7 @@ class PreferencesHelper(context: Context) {
         return mainSyndicate != 0
     }
 
-//    fun isUserRegistered():Boolean{
-//        return isRegistered
-//    }
+    fun clearAll():Unit{
+        return preferences.edit().clear().apply()
+    }
 }

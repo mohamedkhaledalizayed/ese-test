@@ -104,6 +104,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 //        else if (!PreferencesHelper(this).isIntroSkipped) // TODO
 //            graph.startDestination = R.id.introFragment
         else if (PreferencesHelper(this).isForceLogout == true){
+            PreferencesHelper(this).clearAll()
             graph.startDestination = R.id.loginFragment
         }
         else if (PreferencesHelper(this).mobile.isEmpty()) // TODO
