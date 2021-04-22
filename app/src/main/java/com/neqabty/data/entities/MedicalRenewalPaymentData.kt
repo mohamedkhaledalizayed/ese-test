@@ -9,7 +9,7 @@ data class MedicalRenewalPaymentData(
         @field:SerializedName("Id")
         var requestID: String = "",
         @field:SerializedName("Message")
-        var msg: String = "",
+        var msg: String? = "",
         @field:SerializedName("ReturnObject")
         var paymentItem: PaymentItem? = null
 ) : Response() {

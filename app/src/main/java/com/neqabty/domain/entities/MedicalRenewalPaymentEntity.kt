@@ -3,7 +3,7 @@ package com.neqabty.domain.entities
 data class MedicalRenewalPaymentEntity(
         var resultType: String = "",
         var requestID: String = "",
-        var msg: String = "",
+        var msg: String? = "",
         var paymentItem: PaymentItem? = null
 ) {
     data class PaymentItem(

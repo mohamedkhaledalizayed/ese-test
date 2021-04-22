@@ -125,7 +125,7 @@ interface WebService {
     @GET("api/ApiHealthCare/GetFollowersList")
     fun getMedicalRenewData(@Query("oldRefId") contactId: String, @Query("server") server: String = ""): Observable<MedicalRenewalData>
 
-    @GET("api/apiPaymentRequest/RenewalInquiryDetails")
+    @GET("api/apiPaymentRequest/HealthCareInquiryDetails")
     fun inquireHealthCare(@Query("OldrefID") oldRefId: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
 
     @POST("api/apiPaymentRequest/AddHealthCareRequest")
