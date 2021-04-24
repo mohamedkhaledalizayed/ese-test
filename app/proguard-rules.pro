@@ -26,6 +26,7 @@
 #-keep class com.google.** { *; }
 #-dontobfuscate
 #-keepattributes SourceFile ,LineNumberTable
+-keep class me.cowpay.model.* {*;}
 -keepnames class * extends android.os.Parcelable
 -keep class com.neqabty.data.entities.* { <fields>; }
 
