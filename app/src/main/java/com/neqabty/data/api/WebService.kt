@@ -107,13 +107,24 @@ interface WebService {
     @POST("api/v1/eseServices")
     fun getAllServices(@Body servicesRequest: ServicesRequest): Observable<ApiResponse<List<ServiceData>>>
 
-    @GET("api/v1/service")
+    @GET("api/apiPaymentRequest/RenewalInquiryDetails")
     fun paymentInquiry(
             @Query("mobile_number") mobileNumber: String,
-            @Query("oldRefID") userNumber: String,
+            @Query("OldrefID") oldrefID: String,
             @Query("serviceID") serviceID: Int,
             @Query("requestID") requestID: String,
-            @Query("amount") amount: String
+            @Query("amount") amount: String,
+            @Query("server") server: String = ""
+    ): Observable<MedicalRenewalPaymentData>
+
+    @POST("api/apiPaymentRequest/AddRenewalRequest")
+    fun addRenewalRequest(
+            @Query("mobile_number") mobileNumber: String,
+            @Query("oldrefid") oldRefID: String,
+            @Query("serviceID") serviceID: Int,
+            @Query("requestID") requestID: String,
+            @Query("amount") amount: String,
+            @Query("server") server: String = ""
     ): Observable<MedicalRenewalPaymentData>
 
     @POST("api/v1/encrypt")

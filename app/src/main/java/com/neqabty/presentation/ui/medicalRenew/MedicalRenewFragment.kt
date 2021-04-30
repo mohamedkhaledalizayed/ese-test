@@ -80,10 +80,10 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             }, message = error?.message)
         })
 
-//        showAlert(getString(R.string.medical_subscription_ended)){
+        showAlert(getString(R.string.medical_subscription_ended)){
             medicalRenewViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
             medicalRenewViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user, 1, "address", "mobile")
-//        }
+        }
     }
 
     private fun initializeViews() {
@@ -188,6 +188,9 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                     tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected) + "\n" + getString(R.string.medical_update_request_rejection_reason) + " " + medicalRenewalUI.rejectionMsg
             }
         }
+        bContinue.visibility = View.GONE
+        llDelivery.visibility = View.GONE
+        bEdit.visibility = View.GONE
     }
 
     private fun checkStatus() {

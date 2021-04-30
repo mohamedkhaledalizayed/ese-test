@@ -93,7 +93,6 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         medicalRenewalPayment = params.medicalRenewalPaymentUI
 
         initializeViews()
-//        inquiryDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
     }
 
     fun initializeViews() {
@@ -131,10 +130,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         bPay.setOnClickListener {
             llSuperProgressbar.visibility = View.VISIBLE
 //            createPayment()
-            if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-                cowPayPayment(true)
-            else
-                cowPayPayment(false)
+            inquiryDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
         }
     }
 
@@ -166,41 +162,49 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: InquiryDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
-            if (sendDecryptionKey) {
-                llSuperProgressbar.visibility = View.INVISIBLE
-                val paymentMethod = mechanismTypeButton.getText().toString()
-                if (paymentMethod == getString(R.string.payment_card)) {
-                    navController().navigate(
-                            InquiryDetailsFragmentDirections.openPayment(medicalRenewalPayment, paymentCreationResponse.OriginalSenderRequestNumber,
-                                    paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
-                    )
-                } else if (paymentMethod == getString(R.string.payment_channel) ||
-                        paymentMethod == getString(R.string.payment_wallet) ||
-                        paymentMethod == getString(R.string.payment_meeza)) {
-                    showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
-                        navController().popBackStack()
-                        navController().navigate(R.id.homeFragment)
-                    }
-//                    "senderRequestNumber" + response.OriginalSenderRequestNumber
-                }
-            } else {
-                state.medicalRenewalPayment?.let {
-//                    medicalRenewalPayment.paymentCreationRequest = it.paymentCreationRequest
-//                    // static set
-//                    memberItem.paymentCreationRequest?.sender?.id = "071"
-//                    memberItem.paymentCreationRequest?.serviceCode = "171"
-//                    memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode = "647"
-//                    memberItem.paymentCreationRequest?.senderRequestNumber = it.paymentCreationRequest?.senderRequestNumber!!
-//                    var intent = Intent(context, PaymentMethodsActivity::class.java)
-//                    intent.putExtra(CowpayConstantKeys.MerchantCode, "GHIu9nk25D5z")
-//                    intent.putExtra(
-//                            CowpayConstantKeys.MerchantHashKey,
-//                            "MerchantHashKey"
-//                    )
-                    initializeViews()
-                }
+            state.medicalRenewalPayment?.let {
+                medicalRenewalPayment = it
+                if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
+                    cowPayPayment(true)
+                else
+                    cowPayPayment(false)
             }
         }
+//            if (sendDecryptionKey) {
+//                llSuperProgressbar.visibility = View.INVISIBLE
+//                val paymentMethod = mechanismTypeButton.getText().toString()
+//                if (paymentMethod == getString(R.string.payment_card)) {
+//                    navController().navigate(
+//                            InquiryDetailsFragmentDirections.openPayment(medicalRenewalPayment, paymentCreationResponse.OriginalSenderRequestNumber,
+//                                    paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
+//                    )
+//                } else if (paymentMethod == getString(R.string.payment_channel) ||
+//                        paymentMethod == getString(R.string.payment_wallet) ||
+//                        paymentMethod == getString(R.string.payment_meeza)) {
+//                    showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
+//                        navController().popBackStack()
+//                        navController().navigate(R.id.homeFragment)
+//                    }
+////                    "senderRequestNumber" + response.OriginalSenderRequestNumber
+//                }
+//            } else {
+//                state.medicalRenewalPayment?.let {
+////                    medicalRenewalPayment.paymentCreationRequest = it.paymentCreationRequest
+////                    // static set
+////                    memberItem.paymentCreationRequest?.sender?.id = "071"
+////                    memberItem.paymentCreationRequest?.serviceCode = "171"
+////                    memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode = "647"
+////                    memberItem.paymentCreationRequest?.senderRequestNumber = it.paymentCreationRequest?.senderRequestNumber!!
+////                    var intent = Intent(context, PaymentMethodsActivity::class.java)
+////                    intent.putExtra(CowpayConstantKeys.MerchantCode, "GHIu9nk25D5z")
+////                    intent.putExtra(
+////                            CowpayConstantKeys.MerchantHashKey,
+////                            "MerchantHashKey"
+////                    )
+//                    initializeViews()
+//                }
+//            }
+//        }
     }
 
     //region
