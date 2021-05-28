@@ -21,6 +21,7 @@ import com.neqabty.R
 import com.neqabty.databinding.MedicalRenewUpdateFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.util.PreferencesHelper
@@ -28,6 +29,7 @@ import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.medical_renew_fragment.llContent
 import kotlinx.android.synthetic.main.medical_renew_fragment.rvFollowers
 import kotlinx.android.synthetic.main.medical_renew_update_fragment.*
+import kotlinx.android.synthetic.main.medical_renew_update_fragment.view.*
 import javax.inject.Inject
 
 class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
@@ -106,6 +108,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
             adapter.submitList(it.filter { it.isDeleted == false }.toMutableList())
         }
 
+        binding.root.bAddFollower.visibility = if (Constants.isHealthCareProjectEnabled) View.VISIBLE else View.GONE
         bAddFollower.setOnClickListener {
             isEdit = false
             goToEditFollower()

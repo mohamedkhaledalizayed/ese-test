@@ -1,5 +1,6 @@
 package com.neqabty
 
+import com.neqabty.presentation.entities.HealthCareProjectStatusUI
 import com.neqabty.presentation.entities.UserUI
 
 data class MainViewState(

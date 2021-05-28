@@ -4,10 +4,12 @@ import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.FollowerUpdateItemBinding
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 import kotlinx.android.synthetic.main.follower_update_item.view.*
@@ -54,7 +56,7 @@ class FollowersUpdateAdapter(
                 editCallback?.invoke(it)
             }
         }
-
+        binding.root.bClose.visibility = if (Constants.isHealthCareProjectEnabled) View.VISIBLE else View.GONE
         return binding
     }
 

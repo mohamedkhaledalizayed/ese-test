@@ -6,6 +6,7 @@ import java.io.File
 
 interface NeqabtyRepository {
     fun getAppVersion(): Observable<AppVersionEntity>
+    fun getHealthCareProjectStatus(): Observable<HealthCareProjectStatusEntity>
     fun getSyndicates(): Observable<List<SyndicateEntity>>
     fun geSyndicateById(id: String): Observable<SyndicateEntity>
     fun geSubSyndicatesById(id: String): Observable<List<SyndicateEntity>>

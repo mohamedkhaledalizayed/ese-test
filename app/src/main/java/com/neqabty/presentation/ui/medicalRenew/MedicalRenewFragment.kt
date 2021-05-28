@@ -1,5 +1,6 @@
 package com.neqabty.presentation.ui.medicalRenew
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -44,6 +45,11 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     lateinit var appExecutors: AppExecutors
     lateinit var medicalRenewalPaymentUI: MedicalRenewalPaymentUI
     lateinit var medicalRenewalUI: MedicalRenewalUI
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(Constants.healthCareProjectStatusMsg.isNotBlank()) Toast.makeText(requireContext(), Constants.healthCareProjectStatusMsg, Toast.LENGTH_LONG).show()
+    }
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -62,7 +68,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-//        PreferencesHelper(requireContext()).user = "3806206"
+//        PreferencesHelper(requireContext()).user = "2502813"
         medicalRenewViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(MedicalRenewViewModel::class.java)
 
@@ -80,10 +86,9 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             }, message = error?.message)
         })
 
-        showAlert(getString(R.string.medical_subscription_ended)){
-            medicalRenewViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
-            medicalRenewViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user, 1, "address", "mobile")
-        }
+        medicalRenewViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
+        medicalRenewViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user, 1, "address", "mobile")
+
     }
 
     private fun initializeViews() {
@@ -157,7 +162,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
 
             val temp = medicalRenewalUI.deepClone(medicalRenewalUI)
             temp?.contact?.pic = ""
-            temp?.followers = temp?.followers?.filter {it.lastMedYear != null && it.lastMedYear!!.toInt() >= 2021}?.toMutableList()
+            temp?.followers = temp?.followers?.filter { it.lastMedYear != null && it.lastMedYear!!.toInt() >= 2021 }?.toMutableList()
             for (item: MedicalRenewalUI.FollowerItem in temp?.followers!!) {
                 item.pic = ""
                 item.attachments = mutableListOf()
@@ -188,9 +193,10 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
                     tvRequestStatus.text = getString(R.string.medical_update_request_status_rejected) + "\n" + getString(R.string.medical_update_request_rejection_reason) + " " + medicalRenewalUI.rejectionMsg
             }
         }
-        bContinue.visibility = View.GONE
-        llDelivery.visibility = View.GONE
-        bEdit.visibility = View.GONE
+        if (!Constants.isHealthCareProjectEnabled) {
+            bContinue.visibility = View.GONE
+            llDelivery.visibility = View.GONE
+        }
     }
 
     private fun checkStatus() {
@@ -257,7 +263,7 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: MedicalRenewViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
-        if(state.medicalRenewalUI != null && state.medicalRenewalPayment != null){
+        if (state.medicalRenewalUI != null && state.medicalRenewalPayment != null) {
             llSuperProgressbar.visibility = View.GONE
 
             state.medicalRenewalUI?.oldRefId = PreferencesHelper(requireContext()).user

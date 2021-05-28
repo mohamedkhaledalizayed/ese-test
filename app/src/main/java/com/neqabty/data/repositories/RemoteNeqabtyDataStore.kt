@@ -318,6 +318,12 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         return unauthorizedApi.getAppVersion().map { version -> appVersionDataEntityMapper.mapFrom(version) }
     }
 
+    private val healthCareProjectStatusDataEntityMapper = HealthCareProjectStatusDataEntityMapper()
+
+    override fun getHealthCareProjectStatus(): Observable<HealthCareProjectStatusEntity> {
+        return unauthorizedApi.getHealthCareProjectStatus().map { result -> healthCareProjectStatusDataEntityMapper.mapFrom(result.data!!) }
+    }
+
     private val medicalRenewalDataEntityMapper = MedicalRenewalDataEntityMapper()
 
     override fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity> {

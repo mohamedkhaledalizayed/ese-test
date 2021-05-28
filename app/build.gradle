@@ -12,7 +12,7 @@ if (getGradle().getStartParameter().getTaskRequests().toString().contains("Hms")
 apply plugin: 'kotlin-android-extensions'
 
 
-def versionTemplate = "1.0.{label}"
+def versionTemplate = "{labelx}.{labely}.{labelz}"
 def serverBuild = System.getenv('NEQABTY_BUILDNUMBER')
 def secret = System.getenv('NEQABTY_SECRET')
 
@@ -26,7 +26,8 @@ def getLocalSigningConfig(String secret) {
 }
 
 String getVersionName(String versionTemplate, int serverBuild) {
-    return (versionTemplate).replace("{label}", Integer.toString(serverBuild))
+    println "lableeee"+(versionTemplate).replace("{labelx}", Integer.toString(serverBuild)[0]).replace("{labely}", Integer.toString(serverBuild)[1]).replace("{labelz}", Integer.toString(serverBuild)[2])
+    return (versionTemplate).replace("{labelx}", Integer.toString(serverBuild)[0]).replace("{labely}", Integer.toString(serverBuild)[1]).replace("{labelz}", Integer.toString(serverBuild)[2])
 }
 
 int getVersionCode(String serverBuild) {
@@ -182,7 +183,7 @@ dependencies {
     implementation deps.kotlin.stdlib
 
     implementation deps.timber
-
+    implementation deps.ccp
     gmsImplementation deps.firebase.core
     gmsImplementation deps.firebase.messaging
     gmsImplementation deps.firebase.jobdispatcher

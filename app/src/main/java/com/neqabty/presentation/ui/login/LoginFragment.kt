@@ -80,7 +80,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
 //            it.type = "verified"
             if (it.type.equals("verified")) {
                 state.user = null
-                navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(edMobile.text.toString()))
+                navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumber))
             } else if(it.type.equals("visitor")){// visitor
                 PreferencesHelper(requireContext()).mobile = it.mobile
                 PreferencesHelper(requireContext()).userType = it.type
@@ -99,23 +99,26 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
         binding.bSend.setOnClickListener {
             login()
         }
+        binding.ccp.registerCarrierNumberEditText(binding.edMobile)
     }
 
     fun login() {
-        if (isDataValid(edMobile.text.toString())) {
-            loginViewModel.login(edMobile.text.toString())
+        if (binding.ccp.isValidFullNumber) {
+            loginViewModel.login(if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumber)
+        }else{
+            showAlert(getString(R.string.invalid_mobile))
         }
     }
 //region
 
-    private fun isDataValid(mobile: String): Boolean {
-        return if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
-            true
-        else {
-            showAlert(getString(R.string.invalid_mobile))
-            false
-        }
-    }
+//    private fun isDataValid(mobile: String): Boolean {
+//        return if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
+//            true
+//        else {
+//            showAlert(getString(R.string.invalid_mobile))
+//            false
+//        }
+//    }
 
     override fun showOptionsMenu() {
     }

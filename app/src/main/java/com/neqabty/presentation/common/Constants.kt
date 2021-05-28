@@ -11,6 +11,9 @@ object Constants {
     var cowpayAuthToken: String = if (BuildConfig.DEBUG) cowpayAuthTokenTest else cowpayAuthTokenProd
     var isFirebaseTokenUpdated: MutableLiveData<String> = MutableLiveData("")
 
+    var isHealthCareProjectEnabled: Boolean = false
+    var healthCareProjectStatusMsg: String = ""
+
     var CALL_CENTER = "0235317300"
 
     var DNS = if (BuildConfig.URL.contains("http")) BuildConfig.URL else "https://${BuildConfig.URL}"

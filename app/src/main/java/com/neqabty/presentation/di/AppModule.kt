@@ -227,6 +227,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetHealthCareProjectStatus(neqabtyRepository: NeqabtyRepository): GetHealthCareProjectStatus {
+        return GetHealthCareProjectStatus(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetAllSyndicates(neqabtyRepository: NeqabtyRepository): GetAllSyndicates {
         return GetAllSyndicates(ASyncTransformer(), neqabtyRepository)
     }

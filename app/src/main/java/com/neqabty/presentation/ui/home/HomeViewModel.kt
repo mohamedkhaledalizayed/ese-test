@@ -1,12 +1,11 @@
 package com.neqabty.presentation.ui.home
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.GetAllNews
-import com.neqabty.domain.usecases.GetAllTrips
-import com.neqabty.domain.usecases.GetAppVersion
-import com.neqabty.domain.usecases.GetNotificationsCount
+import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.common.SingleLiveEvent
+import com.neqabty.presentation.mappers.HealthCareProjectStatusEntityUIMapper
 import com.neqabty.presentation.mappers.NewsEntityUIMapper
 import com.neqabty.presentation.mappers.TripsEntityUIMapper
 import javax.inject.Inject
@@ -15,11 +14,13 @@ class HomeViewModel @Inject constructor(
         private val getAllNews: GetAllNews,
         private val getAllTrips: GetAllTrips,
         private val getAppVersion: GetAppVersion,
-        private val getNotificationsCount: GetNotificationsCount
+        private val getNotificationsCount: GetNotificationsCount,
+        private val getHealthCareProjectStatus: GetHealthCareProjectStatus
 ) : BaseViewModel() {
 
     private val tripsEntityUIMapper = TripsEntityUIMapper()
     private val newsEntityUIMapper = NewsEntityUIMapper()
+    private val healthCareProjectStatusEntityUIMapper = HealthCareProjectStatusEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<HomeViewState> = MutableLiveData()
 
@@ -29,6 +30,7 @@ class HomeViewModel @Inject constructor(
 
     fun getContent(id: String, userNumber: String) {
         getAppVersion()
+        getHealthCareProjectStatus()
 //        getNews(id)
 //        getTrips(id)
         if (userNumber != "")
@@ -42,6 +44,30 @@ class HomeViewModel @Inject constructor(
                 .subscribe(
                         {
                             viewState.value = viewState.value?.copy(appVersion = it.appVersion.toInt())
+                            onContentReceived()
+                        },
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false)
+                            errorState.value = handleError(it)
+                        }
+                )
+        )
+    }
+
+
+    fun getHealthCareProjectStatus() {
+        viewState.value?.healthCareProjectStatusUI?.let {
+            onContentReceived()
+        } ?: addDisposable(getHealthCareProjectStatus.observable()
+                .map {
+                    it.let {
+                        healthCareProjectStatusEntityUIMapper.mapFrom(it)
+                    }
+                }.subscribe(
+                        {
+                            Constants.isHealthCareProjectEnabled = (it.status == 1)
+                            Constants.healthCareProjectStatusMsg = it.statusMsg
+                            viewState.value = viewState.value?.copy(healthCareProjectStatusUI = it)
                             onContentReceived()
                         },
                         {
@@ -115,7 +141,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun onContentReceived() {
-        if (viewState.value?.appVersion != null)// && viewState.value?.news != null && viewState.value?.trips != null)
+        if (viewState.value?.appVersion != null && viewState.value?.healthCareProjectStatusUI != null)// && viewState.value?.news != null && viewState.value?.trips != null)
             viewState.value = viewState.value?.copy(isLoading = false)
     }
 }
