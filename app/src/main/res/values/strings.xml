@@ -194,6 +194,8 @@
     <string name="engineering_records_title">تجديد سجل هندسي</string>
     <string name="update_data_title">تحديث البيانات</string>
     <string name="complaints_title">خدمة العملاء والشكاوى</string>
+    <string name="online_pharmacy_title">صيدلية أونلاين</string>
+    <string name="user_services">خدمات المستخدم</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">اتصل بنا</string>
