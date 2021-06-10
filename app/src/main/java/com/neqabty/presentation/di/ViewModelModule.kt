@@ -6,6 +6,7 @@ import com.neqabty.MainViewModel
 import com.neqabty.presentation.ui.about.AboutViewModel
 import com.neqabty.presentation.ui.activateAccount.ActivateAccountViewModel
 import com.neqabty.presentation.ui.changePassword.ChangePasswordViewModel
+import com.neqabty.presentation.ui.changeUserMobile.ChangeUserMobileViewModel
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaViewModel
 import com.neqabty.presentation.ui.claiming.ClaimingViewModel
 import com.neqabty.presentation.ui.complaint.ComplaintViewModel
@@ -28,11 +29,13 @@ import com.neqabty.presentation.ui.medicalRenewUpdate.MedicalRenewUpdateViewMode
 import com.neqabty.presentation.ui.news.NewsViewModel
 import com.neqabty.presentation.ui.notificationDetails.NotificationDetailsViewModel
 import com.neqabty.presentation.ui.notifications.NotificationsViewModel
+import com.neqabty.presentation.ui.oldsignup.SignupViewModel
+import com.neqabty.presentation.ui.onlinePharmacy.OnlinePharmacyViewModel
 import com.neqabty.presentation.ui.payment.PaymentViewModel
 import com.neqabty.presentation.ui.search.SearchViewModel
-import com.neqabty.presentation.ui.oldsignup.SignupViewModel
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesViewModel
 import com.neqabty.presentation.ui.syndicates.SyndicatesViewModel
+import com.neqabty.presentation.ui.trackShipment.TrackShipmentViewModel
 import com.neqabty.presentation.ui.tripDetails.TripDetailsViewModel
 import com.neqabty.presentation.ui.trips.TripsViewModel
 import com.neqabty.presentation.ui.tripsReservation.TripReservationViewModel
@@ -84,6 +87,16 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(TrackShipmentViewModel::class)
+    abstract fun bindTrackShipmentViewModel(trackShipmentViewModel: TrackShipmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChangeUserMobileViewModel::class)
+    abstract fun bindChangeUserMobileViewModel(changeUserMobileViewModel: ChangeUserMobileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(com.neqabty.presentation.ui.signup.SignupViewModel::class)
     abstract fun bindSignupViewModel(signupViewModel: com.neqabty.presentation.ui.signup.SignupViewModel): ViewModel
 
@@ -106,6 +119,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ClaimingViewModel::class)
     abstract fun bindClaimingViewModel(claimingViewModel: ClaimingViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OnlinePharmacyViewModel::class)
+    abstract fun bindOnlinePharmacyViewModel(onlinePharmacyViewModel: OnlinePharmacyViewModel): ViewModel
 
     @Binds
     @IntoMap

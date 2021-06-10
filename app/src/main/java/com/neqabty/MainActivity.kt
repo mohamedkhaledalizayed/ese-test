@@ -1,23 +1,21 @@
 package com.neqabty
 
-import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.view.*
 import android.widget.Button
+import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -25,12 +23,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.presentation.common.Constants
+import com.neqabty.presentation.common.ExpandableListAdapter
+import com.neqabty.presentation.entities.NavigationMenuItem
 import com.neqabty.presentation.util.*
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -53,6 +55,10 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     var isAlertShown = false
 
     private val REQUEST_SMS = 0
+
+    lateinit var mMenuAdapter: ExpandableListAdapter
+    lateinit var listDataHeader: MutableList<NavigationMenuItem>
+    lateinit var listDataChild: HashMap<NavigationMenuItem, List<NavigationMenuItem>>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
@@ -96,7 +102,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         val inflater = navHostFragment.navController.navInflater
         val graph = inflater.inflate(R.navigation.main)
-        val navController = Navigation.findNavController(this, R.id.container)
+        val navController = navController()
 //        graph.desetDefaultArguments(intent.extras)
 
         if (notificationId != null)
@@ -116,105 +122,31 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         supportFragmentManager.beginTransaction().setPrimaryNavigationFragment(navHostFragment)
                 .commit()
         NavigationUI.setupActionBarWithNavController(this, navController, (drawer_layout as DrawerLayout))
+
+        prepareNavigationMenuListData()
+        mMenuAdapter = ExpandableListAdapter(this, listDataHeader, listDataChild)
+        (nav_view as NavigationView).findViewById<ExpandableListView>(R.id.elvNavigationMenu).setAdapter(mMenuAdapter)
         (nav_view as NavigationView).setupWithNavController(navController)
         val appBarConfiguration =
                 AppBarConfiguration(setOf(R.id.homeFragment, R.id.syndicatesFragment), (drawer_layout as DrawerLayout))
         toolbar.setupWithNavController(navController, appBarConfiguration)
         // ////////////////////////////////
         (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        (nav_view as NavigationView).itemIconTintList = null
-        (nav_view as NavigationView).setNavigationItemSelectedListener {
-            (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            when (it.itemId) {
-                R.id.home_fragment -> {
-                    (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                }
-                R.id.news_fragment -> {
-                    navController.navigate(R.id.newsFragment)
-                }
-//                R.id.trips_fragment -> {
-//                    navController.navigate(R.id.tripsFragment)
-//                }
-                R.id.medical_renew_fragment -> { // TODO
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.medicalRenewFragment)
-                    else {
-                            val bundle: Bundle = Bundle()
-                            bundle.putInt("type", Constants.MEDICAL_RENEW)
-                        navController.navigate(R.id.signupFragment, bundle)
-                    }
-                }
-                R.id.claiming_fragment -> { // TODO
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.claimingFragment)
-                    else {
-                            val bundle: Bundle = Bundle()
-                            bundle.putInt("type", Constants.CLAIMING)
-                        navController.navigate(R.id.signupFragment, bundle)
-                    }
-                }
-                R.id.medical_fragment -> {
-                    navController.navigate(R.id.chooseAreaFragment)
-                }
-                R.id.inquiry_fragment -> {
-                    navController.navigate(R.id.inquiryFragment)
-                }
-//                R.id.engineering_records_fragment -> {
-//                    if (PreferencesHelper(this).isRegistered)
-//                        navController.navigate(R.id.engineeringRecordsDetailsFragment)
-//                    else {
-//                        val bundle: Bundle = Bundle()
-//                        bundle.putInt("type", Constants.RECORDS)
-//                        navController.navigate(R.id.signupFragment, bundle)
-//                    }
-//                }
-//                R.id.update_data_fragment -> {
-//                    if (PreferencesHelper(this).isRegistered)
-//                        navController.navigate(R.id.updateDataVerificationFragment)
-//                    else {
-//                        val bundle: Bundle = Bundle()
-//                        bundle.putInt("type", Constants.UPDATE_DATA)
-//                        navController.navigate(R.id.signupFragment, bundle)
-//                    }
-//                }
-                R.id.complaints_fragment -> {
-//                    Toast.makeText(this, getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
-
-                    if (PreferencesHelper(this).isRegistered)
-                        navController.navigate(R.id.complaintsFragment)
-                    else {
-                            val bundle: Bundle = Bundle()
-                            bundle.putInt("type", Constants.COMPLAINTS)
-                        navController.navigate(R.id.signupFragment, bundle)
-                    }
-                }
-                R.id.about_fragment -> {
-                    navController.navigate(R.id.aboutFragment)
-                }
-                R.id.about_app_fragment -> {
-                    navController.navigate(R.id.aboutAppFragment)
-                }
-                R.id.settings_fragment -> {
-                    navController.navigate(R.id.settingsFragment)
-                }
-                R.id.contactus_fragment -> {
-                    (nav_view as NavigationView).getHeaderView(0).findViewById<Button>(R.id.tvMobileNumber).call(Constants.CALL_CENTER, this)
-//                    val intent = Intent(Intent.ACTION_SENDTO)
-//                    val uriText = "mailto:" + Uri.encode("info@neqabty.com")
-//                    val uri = Uri.parse(uriText)
-//                    intent.setData(uri)
-//                    if (intent.resolveActivity(packageManager) != null)
-//                        startActivity(intent)
-                }
-//                R.id.aboutapp_fragment -> {
-//                }
-//                R.id.help_fragment -> {
-//                }
-//                R.id.logout_fragment -> {
-//                    PreferencesHelper(this).isRegistered = false
-//                    invalidateOptionsMenu()
-//                } // TODO
+        (nav_view as NavigationView).findViewById<ExpandableListView>(R.id.elvNavigationMenu).setOnGroupClickListener { parent, v, groupPosition, id ->
+            if(parent.expandableListAdapter.getChildrenCount(groupPosition) == 0) {
+                listDataHeader[groupPosition].callback.invoke()
+                (drawer_layout as DrawerLayout).closeDrawer(GravityCompat.START)
+            }else{
+                if(parent.isGroupExpanded(groupPosition))
+                    parent.collapseGroup(groupPosition)
+                else
+                    parent.expandGroup(groupPosition)
             }
+            true
+        }
+
+        (nav_view as NavigationView).findViewById<ExpandableListView>(R.id.elvNavigationMenu).setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
+            listDataChild[listDataHeader[groupPosition]]?.get(childPosition)?.callback?.invoke()
             (drawer_layout as DrawerLayout).closeDrawer(GravityCompat.START)
             true
         }
@@ -352,7 +284,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         var navigationView: NavigationView = (nav_view as NavigationView)
         var navMenu = navigationView.menu
 //        navMenu.findItem(R.id.logout_fragment)?.isVisible = PreferencesHelper(this).isRegistered
-        (nav_view as NavigationView).getHeaderView(0).findViewById<Button>(R.id.bLogout).setOnClickListener {
+        navigationView.getHeaderView(0).findViewById<Button>(R.id.bLogout).setOnClickListener {
             PreferencesHelper(this).isRegistered = false
             PreferencesHelper(this).user = ""
             PreferencesHelper(this).name = ""
@@ -368,39 +300,29 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             Navigation.findNavController(this, R.id.container)
                     .navigate(R.id.openLoginFragment)
         }
-        (nav_view as NavigationView).getHeaderView(0).findViewById<Button>(R.id.bChangePassword).setOnClickListener {
-            (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-
-            val bundle: Bundle = Bundle()
-            bundle.putBoolean("isSetNew", false)
-            bundle.putString("mobile", PreferencesHelper(this).mobile)
-            bundle.putString("otp", "")
-            Navigation.findNavController(this, R.id.container)
-                    .navigate(R.id.openChangePasswordFragment, bundle)
-        }
 
         if (PreferencesHelper(this).name.isNotEmpty()) {
-            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
-            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).setText(Html.fromHtml(getString(R.string.menu_memberName, PreferencesHelper(this).name)))
+            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
+            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).setText(Html.fromHtml(getString(R.string.menu_memberName, PreferencesHelper(this).name)))
         } else
-            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
+            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
 
         if (PreferencesHelper(this).user.isNotEmpty()) {
-            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.bChangePassword).visibility = View.VISIBLE
-            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.VISIBLE
-            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
+//            navigationView.getHeaderView(0).findViewById<TextView>(R.id.bChangePassword).visibility = View.VISIBLE
+            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.VISIBLE
+            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
         } else {
-            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.bChangePassword).visibility = View.INVISIBLE
-            (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.GONE
+//            navigationView.getHeaderView(0).findViewById<TextView>(R.id.bChangePassword).visibility = View.INVISIBLE
+            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.GONE
         }
-        (nav_view as NavigationView).getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, PreferencesHelper(this).mobile)))
+        navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, PreferencesHelper(this).mobile)))
 
-        (nav_view as NavigationView).getHeaderView(0).visibility = if (PreferencesHelper(this).mobile.isNotEmpty()) View.VISIBLE else View.GONE
+        navigationView.getHeaderView(0).visibility = if (PreferencesHelper(this).mobile.isNotEmpty()) View.VISIBLE else View.GONE
 
         if (!PreferencesHelper(this).mobile.isNotEmpty())
-            (nav_view as NavigationView).getChildAt(0).setPadding(0, 100, 0, 0)
+            navigationView.getChildAt(0).setPadding(0, 100, 0, 0)
         else
-            (nav_view as NavigationView).getChildAt(0).setPadding(0, 0, 0, 0)
+            navigationView.getChildAt(0).setPadding(0, 0, 0, 0)
 
         val tvBadge = notificationsItem?.actionView?.findViewById<TextView>(R.id.tvBadge)
         if (PreferencesHelper(this).notificationsCount == 0) tvBadge?.visibility = View.INVISIBLE
@@ -470,5 +392,169 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         super.onSaveInstanceState(outState)
         outState.clear()
     }
+
+    private fun prepareNavigationMenuListData() {
+        listDataHeader = mutableListOf<NavigationMenuItem>()
+        listDataChild = HashMap<NavigationMenuItem, List<NavigationMenuItem>>()
+        val homeItem = NavigationMenuItem(R.drawable.ic_menu_home, R.string.home_title, {
+            (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        })
+        listDataHeader.add(homeItem)
+
+        val newsItem = NavigationMenuItem(R.drawable.ic_menu_news, R.string.news_title, {
+            navController().navigate(R.id.newsFragment)
+        })
+        listDataHeader.add(newsItem)
+
+        val tripsItem = NavigationMenuItem(R.drawable.ic_menu_trips, R.string.trips_title, {
+            navController().navigate(R.id.tripsFragment)
+        })
+//        listDataHeader.add(tripsItem)
+
+        val medicalRenewItem = NavigationMenuItem(R.drawable.ic_menu_claiming, R.string.medical_renew_title, {
+            if (PreferencesHelper(this).isRegistered)
+                navController().navigate(R.id.medicalRenewFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_RENEW)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        listDataHeader.add(medicalRenewItem)
+
+        val medicalItem = NavigationMenuItem(R.drawable.ic_menu_medical, R.string.medical_title, {
+            navController().navigate(R.id.chooseAreaFragment)
+        })
+        listDataHeader.add(medicalItem)
+
+        val claimingItem = NavigationMenuItem(R.drawable.ic_menu_claiming, R.string.claiming_title, {
+            if (PreferencesHelper(this).isRegistered)
+                navController().navigate(R.id.claimingFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.CLAIMING)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        listDataHeader.add(claimingItem)
+
+        val pharmacyItem = NavigationMenuItem(R.drawable.ic_pharmacy_green, R.string.online_pharmacy_title, {
+            if (PreferencesHelper(this).isRegistered)
+                navController().navigate(R.id.onlinePharmacyFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.ONLINE_PHARMACY)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        listDataHeader.add(pharmacyItem)
+
+        val paymentsItem = NavigationMenuItem(R.drawable.ic_menu_payments, R.string.inquiry_title, {
+            navController().navigate(R.id.inquiryFragment)
+        })
+        listDataHeader.add(paymentsItem)
+
+        val engineeringRecordsItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.engineering_records_title, {
+            if (PreferencesHelper(this).isRegistered)
+                navController().navigate(R.id.engineeringRecordsDetailsFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.RECORDS)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+//        listDataHeader.add(engineeringRecordsItem)
+
+        val updateDataItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.update_data_title, {
+            if (PreferencesHelper(this).isRegistered)
+                navController().navigate(R.id.updateDataVerificationFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.UPDATE_DATA)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+//        listDataHeader.add(updateDataItem)
+
+        val complaintsItem = NavigationMenuItem(R.drawable.ic_menu_complaints, R.string.complaints_title, {
+            if (PreferencesHelper(this).isRegistered)
+                navController().navigate(R.id.complaintsFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.COMPLAINTS)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        listDataHeader.add(complaintsItem)
+
+        val userServicesItem = NavigationMenuItem(R.drawable.ic_menu_complaints, R.string.user_services_title, {
+
+        })
+        listDataHeader.add(userServicesItem)
+
+        val aboutItem = NavigationMenuItem(R.drawable.ic_menu_about_us, R.string.about_title, {
+            navController().navigate(R.id.aboutFragment)
+        })
+        listDataHeader.add(aboutItem)
+
+        val aboutappItem = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.aboutapp_title, {
+            navController().navigate(R.id.aboutAppFragment)
+        })
+        listDataHeader.add(aboutappItem)
+
+        val settingsItem = NavigationMenuItem(R.drawable.ic_menu_settings, R.string.settings_title,  {
+            navController().navigate(R.id.settingsFragment)
+        })
+        listDataHeader.add(settingsItem)
+
+        val contactusItem = NavigationMenuItem(R.drawable.ic_menu_contact_us, R.string.contactus_title, {
+            (nav_view as NavigationView).getHeaderView(0).findViewById<Button>(R.id.tvMobileNumber).call(Constants.CALL_CENTER, this)
+        })
+        listDataHeader.add(contactusItem)
+
+        // Adding child data
+        val userServicesList: MutableList<NavigationMenuItem> = mutableListOf()
+
+        val userServiceTrackShipment = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.track_shipment_title,  {
+            if (PreferencesHelper(this).isRegistered)
+                navController().navigate(R.id.trackShipmentFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.TRACK_SHIPMENT)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        userServicesList.add(userServiceTrackShipment)
+
+        val userServiceChangeUserMobile = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.change_user_mobile_title, {
+            if (PreferencesHelper(this).isRegistered)
+                navController().navigate(R.id.changeUserMobileFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.CHANGE_USER_MOBILE)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        userServicesList.add(userServiceChangeUserMobile)
+
+        val userServiceChangePassword = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.change_password_title, {
+            if (PreferencesHelper(this).isRegistered) {
+                val bundle: Bundle = Bundle()
+                bundle.putBoolean("isSetNew", false)
+                bundle.putString("mobile", PreferencesHelper(this).mobile)
+                bundle.putString("otp", "")
+                navController().navigate(R.id.openChangePasswordFragment, bundle)
+            }
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.CHANGE_PASSWORD)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        userServicesList.add(userServiceChangePassword)
+
+        listDataChild[userServicesItem] = userServicesList // Header, Child data
+    }
 //endregion//
+    fun navController() = Navigation.findNavController(this, R.id.container)
 }

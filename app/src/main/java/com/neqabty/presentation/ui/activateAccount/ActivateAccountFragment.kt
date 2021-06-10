@@ -1,8 +1,5 @@
 package com.neqabty.presentation.ui.activateAccount
 
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -137,6 +134,22 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
 
                 Constants.MEDICAL_RENEW -> navController().navigate(
                         ActivateAccountFragmentDirections.openMedicalRenew()
+                )
+
+                Constants.ONLINE_PHARMACY -> navController().navigate(
+                        ActivateAccountFragmentDirections.openOnlinePharmacy()
+                )
+
+                Constants.TRACK_SHIPMENT -> navController().navigate(
+                        ActivateAccountFragmentDirections.openTrackShipment()
+                )
+
+                Constants.CHANGE_USER_MOBILE -> navController().navigate(
+                        ActivateAccountFragmentDirections.openChangeUserMobile()
+                )
+
+                Constants.CHANGE_PASSWORD -> navController().navigate(
+                        ActivateAccountFragmentDirections.openChangePassword(false, PreferencesHelper(requireContext()).mobile)
                 )
             }
         }

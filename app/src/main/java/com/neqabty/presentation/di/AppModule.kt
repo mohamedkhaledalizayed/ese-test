@@ -203,6 +203,18 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideTrackShipment(neqabtyRepository: NeqabtyRepository): TrackShipment {
+        return TrackShipment(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideChangeUserMobile(neqabtyRepository: NeqabtyRepository): ChangeUserMobile {
+        return ChangeUserMobile(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideSignupUser(neqabtyRepository: NeqabtyRepository): SignupUser {
         return SignupUser(ASyncTransformer(), neqabtyRepository)
     }
@@ -337,6 +349,12 @@ class AppModule {
     @Provides
     fun provideSendMedicalRequest(neqabtyRepository: NeqabtyRepository): SendMedicalRequest {
         return SendMedicalRequest(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetOnlinePharmacyURL(neqabtyRepository: NeqabtyRepository): GetOnlinePharmacyURL {
+        return GetOnlinePharmacyURL(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

@@ -31,7 +31,6 @@
     <string name="skip">دخول كزائر</string>
     <string name="fullName">الاسم بالكامل</string>
     <string name="email">البريد الالكتروني</string>
-    <string name="change_password_title">تغيير كلمة السر</string>
     <string name="current_password">كلمة السر الحالية</string>
     <string name="new_password">كلمة السر الجديدة</string>
     <string name="confirmPassword">تأكيد كلمة السر</string>
@@ -138,6 +137,9 @@
     <string name="login_member_enter_member_number">برجاء ادخال رقم العضوية الخاص بك لاستكمال بيانات الحساب</string>
     <string name="change_number_enter_member_number">برجاء ادخال رقم العضوية الصحيح الخاص بك لاستكمال بيانات الحساب</string>
     <string name="national_id_digits">برجاء ادخال كلمة السر الخاصة بالحساب  \n(وهي عبارة عن آخر 4 أرقام من الرقم القومي)</string>
+    <string name="current_mobile_title">رقم الموبايل الحالي الخاص بك</string>
+    <string name="new_mobile_title">رقم الموبايل الجديد</string>
+    <string name="national_id_four_digits">برجاء ادخال آخر 4 أرقام من الرقم القومي</string>
     <string name="medicalRequest">تقديم الموافقات الطبية</string>
     <string name="syndicateNumber">رقم العضوية</string>
     <string name="member_name">اسم العضو</string>
@@ -194,8 +196,11 @@
     <string name="engineering_records_title">تجديد سجل هندسي</string>
     <string name="update_data_title">تحديث البيانات</string>
     <string name="complaints_title">خدمة العملاء والشكاوى</string>
-    <string name="online_pharmacy_title">صيدلية أونلاين</string>
-    <string name="user_services">خدمات المستخدم</string>
+    <string name="online_pharmacy_title">الصيدلية أون لاين</string>
+    <string name="user_services_title">خدمات المستخدم</string>
+    <string name="change_password_title">تغيير كلمة السر</string>
+    <string name="track_shipment_title">تتبع شحنتك</string>
+    <string name="change_user_mobile_title">تغيير رقم الموبايل</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">اتصل بنا</string>
@@ -270,6 +275,22 @@
 
     <string name="name_title">
     <![CDATA[<font color="#1d1ad2">الإسم: </font>]]>%s
+    </string>
+
+    <string name="shipment_date_title">
+    <![CDATA[<font color="#1d1ad2">التاريخ: </font>]]>%s
+    </string>
+
+    <string name="shipment_status_title">
+    <![CDATA[<font color="#1d1ad2">حالة الشحنة: </font>]]>%s
+    </string>
+
+    <string name="address_formatted_title">
+    <![CDATA[<font color="#1d1ad2">العنوان: </font>]]>%s
+    </string>
+
+    <string name="shipment_company_title">
+    <![CDATA[<font color="#1d1ad2">شركة الشحن: </font>]]>%s
     </string>
 
     <string name="user_number_title">

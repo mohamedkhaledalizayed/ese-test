@@ -109,7 +109,7 @@ class ChangePasswordFragment : BaseFragment(), Injectable {
         if (state.isSuccessful) {
             showAlert(state.msg){
                 if(isSetNew == true)
-                    navController().navigate(R.id.loginFragment)
+                    navController().navigate(R.id.openLoginFragment)
                 else
                     navController().navigateUp()
             }

@@ -5,7 +5,6 @@ import com.neqabty.data.api.requests.*
 import com.neqabty.data.mappers.*
 import com.neqabty.domain.NeqabtyDataStore
 import com.neqabty.domain.entities.*
-import com.neqabty.domain.usecases.ChangePassword
 import com.neqabty.presentation.di.DI
 import io.reactivex.Observable
 import okhttp3.MediaType
@@ -485,6 +484,14 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    private val onlinePharmacyURLDataEntityMapper = OnlinePharmacyURLDataEntityMapper()
+
+    override fun getOnlinePharmacyURL(userNumber: String): Observable<OnlinePharmacyEntity> {
+        return api.getOnlinePharmacyURL(OnlinePharmacyRequest(userNumber)).map { response ->
+            onlinePharmacyURLDataEntityMapper.mapFrom(response.data!!)
+        }
+    }
+
     private val providerTypeDataEntityMapper = ProviderTypeDataEntityMapper()
 
     override fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>> {
@@ -566,7 +573,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
-    private val newsDataEntityMapper = com.neqabty.data.mappers.NewsDataEntityMapper()
+    private val newsDataEntityMapper = NewsDataEntityMapper()
 
     override fun getNews(id: String): Observable<List<NewsEntity>> {
         return api.getAllNews(NewsRequest(id)).map { news ->
@@ -574,7 +581,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
-    private val tripsDataEntityMapper = com.neqabty.data.mappers.TripsDataEntityMapper()
+    private val tripsDataEntityMapper = TripsDataEntityMapper()
 
     override fun getTrips(id: String): Observable<List<TripEntity>> {
         return api.getAllTrips(TripsRequest(id)).map { trips ->
@@ -588,7 +595,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
-    private val syndicateDataEntityMapper = com.neqabty.data.mappers.SyndicateDataEntityMapper()
+    private val syndicateDataEntityMapper = SyndicateDataEntityMapper()
 
     override fun getSyndicates(): Observable<List<SyndicateEntity>> {
         return api.getAllSyndicates().map { results ->
@@ -596,7 +603,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
-    private val userDataEntityMapper = com.neqabty.data.mappers.UserDataEntityMapper()
+    private val userDataEntityMapper = UserDataEntityMapper()
 
     override fun signup(
             userNumber: String,
@@ -643,6 +650,23 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     override fun setNewPassword(mobile: String, verificationCode: String, newPassword: String): Observable<String> {
         return api.setNewPassword(SetNewPasswordRequest(mobile, verificationCode, newPassword)).flatMap { response ->
             Observable.just(response.arMsg)
+        }
+    }
+
+    private val trackShipmentDataEntityMapper = TrackShipmentDataEntityMapper()
+
+    override fun trackShipment(userNumber: String): Observable<List<TrackShipmentEntity>> {
+        return api.trackShipment(TrackShipmentRequest(userNumber)).map { response ->
+            response.data?.map { trackShipmentDataEntityMapper.mapFrom(it)}
+        }
+    }
+
+    private val changeUserMobileDataEntityMapper = ChangeUserMobileDataEntityMapper()
+
+    override fun changeUserMobile(userNumber: String, natID: String, newMobile: String, oldMobile: String): Observable<ChangeUserMobileEntity> {
+        return api.changeUserMobile(ChangeUserMobileRequest(userNumber, natID, newMobile, oldMobile)).map { response ->
+            response.data!!.msg = response.arMsg
+            changeUserMobileDataEntityMapper.mapFrom(response.data!!)
         }
     }
 }

@@ -81,7 +81,15 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
                 navController().navigate(R.id.signupFragment, bundle)
                 }
             }
-
+        bOnlinePharmacy.setOnClickListener{
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(R.id.onlinePharmacyFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.ONLINE_PHARMACY)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        }
     }
 
     //region

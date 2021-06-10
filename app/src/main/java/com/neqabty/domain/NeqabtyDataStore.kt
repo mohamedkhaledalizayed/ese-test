@@ -58,6 +58,7 @@ interface NeqabtyDataStore {
             doc5: File?
     ): Observable<Unit>
 
+    fun getOnlinePharmacyURL(userNumber: String): Observable<OnlinePharmacyEntity>
     fun bookTrip(
             mainSyndicateId: Int,
             userNumber: String,
@@ -128,6 +129,8 @@ interface NeqabtyDataStore {
     fun forgetPassword(mobile: String, userNumber: String, natId: String): Observable<String>
     fun changePassword(mobile: String, currentPassword: String, newPassword: String): Observable<String>
     fun setNewPassword(mobile: String, verificationCode: String, newPassword: String): Observable<String>
+    fun trackShipment(userNumber: String): Observable<List<TrackShipmentEntity>>
+    fun changeUserMobile(userNumber: String, natID: String, newMobile: String, oldMobile: String): Observable<ChangeUserMobileEntity>
     fun signup(
             userNumber: String,
             mobile: String,

@@ -10,7 +10,7 @@
         android:paddingTop="?attr/actionBarSize"
         android:paddingEnd="@dimen/margin_horizontal_normal"
         android:paddingBottom="@dimen/margin_horizontal_normal"
-        android:visibility="gone">
+        android:visibility="invisible">
 
 
         <TextView
@@ -70,19 +70,19 @@
             app:layout_constraintTop_toBottomOf="@id/tvMobileNumber" />
 
 
-        <Button
-            android:id="@+id/bChangePassword"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:elevation="@dimen/elevation_level_one"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            android:text="@string/change_password_title"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_medium"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/bLogout"
-            app:layout_constraintTop_toBottomOf="@id/tvMobileNumber" />
+<!--        <Button-->
+<!--            android:id="@+id/bChangePassword"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:elevation="@dimen/elevation_level_one"-->
+<!--            app:layout_constraintHorizontal_chainStyle="spread_inside"-->
+<!--            android:text="@string/change_password_title"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textSize="@dimen/text_size_medium"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toStartOf="@id/bLogout"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tvMobileNumber" />-->
 
         <!--<ImageView-->
         <!--android:id="@+id/imageView"-->

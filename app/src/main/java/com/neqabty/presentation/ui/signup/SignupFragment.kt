@@ -195,6 +195,22 @@ class SignupFragment : BaseFragment(), Injectable {
             Constants.MEDICAL_RENEW -> navController().navigate(
                     SignupFragmentDirections.openMedicalRenew()
             )
+
+            Constants.ONLINE_PHARMACY -> navController().navigate(
+                    SignupFragmentDirections.openOnlinePharmacy()
+            )
+
+            Constants.TRACK_SHIPMENT -> navController().navigate(
+                    SignupFragmentDirections.openTrackShipment()
+            )
+
+            Constants.CHANGE_USER_MOBILE -> navController().navigate(
+                    SignupFragmentDirections.openChangeUserMobile()
+            )
+
+            Constants.CHANGE_PASSWORD -> navController().navigate(
+                    SignupFragmentDirections.openChangePassword(false, PreferencesHelper(requireContext()).mobile)
+            )
         }
     }
 // endregion

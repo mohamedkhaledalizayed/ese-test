@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="loading"
+            type="boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_horizontal_large">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rounded_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_horizontal_normal"
+            android:layout_marginTop="@dimen/margin_vertical_normal"
+            android:paddingStart="@dimen/margin_horizontal_large"
+            android:paddingEnd="@dimen/margin_horizontal_large"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvCurrentMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/current_mobile_title"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <EditText
+                    android:id="@+id/edCurrentMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textDirection="anyRtl"
+                    android:enabled="false"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    android:id="@+id/tvNewMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/new_mobile_title"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edNewMobileNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/ccp"
+                        android:gravity="end"
+                        android:paddingEnd="@dimen/margin_horizontal_small"
+                        android:inputType="phone"
+                        android:maxLength="15"
+                        android:textColor="@color/black"
+                        android:textDirection="anyRtl"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/ccp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@color/transparent"
+                        android:onClick="onCountryPickerClick"
+                        app:ccp_areaCodeDetectedCountry="true"
+                        app:ccp_showFlag="false"
+                        app:ccp_padding="0dp"
+                        app:ccp_autoDetectCountry="true"
+                        app:ccp_textSize="@dimen/text_size_medium"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tvNationalNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/national_id_four_digits"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <EditText
+                    android:id="@+id/edNationalNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:textDirection="anyRtl"
+                    android:maxLength="4"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="@dimen/text_size_large" />
+
+                <Button
+                    android:id="@+id/bSend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_green"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_horizontal_small"
+                    android:text="@string/change_user_mobile_title"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_medium" />
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -210,6 +210,10 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun getOnlinePharmacyURL(userNumber: String): Observable<OnlinePharmacyEntity> {
+        TODO("Not yet implemented")
+    }
+
     override fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -283,6 +287,14 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
     }
 
     override fun setNewPassword(mobile: String, verificationCode: String, newPassword: String): Observable<String> {
+        TODO("Not yet implemented")
+    }
+
+    override fun trackShipment(userNumber: String): Observable<List<TrackShipmentEntity>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun changeUserMobile(userNumber: String, natID: String, newMobile: String, oldMobile: String): Observable<ChangeUserMobileEntity> {
         TODO("Not yet implemented")
     }
 

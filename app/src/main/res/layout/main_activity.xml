@@ -107,8 +107,26 @@
             app:elevation="2dp"
             app:headerLayout="@layout/navigation_header"
             app:insetForeground="@color/colorPrimaryDark"
-            app:itemIconTint="@color/colorPrimaryDark"
-            app:menu="@menu/drawer_view" />
+            app:itemIconTint="@color/colorPrimaryDark" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <include layout="@layout/navigation_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ExpandableListView
+                android:id="@+id/elvNavigationMenu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:choiceMode="singleChoice"
+                android:background="@android:color/white">
+            </ExpandableListView>
+            </LinearLayout>
+        </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </FrameLayout>

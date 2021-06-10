@@ -230,6 +230,10 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.sendMedicalRequest(mainSyndicateId, subSyndicateId, userNumber, email, phone, profession, degree, gov, area, doctor, providerType, provider, name, oldbenid, details, followerName, followerRelation, docsNumber, doc1, doc2, doc3, doc4, doc5)
     }
 
+    override fun getOnlinePharmacyURL(userNumber: String): Observable<OnlinePharmacyEntity> {
+        return remoteDataStore.getOnlinePharmacyURL(userNumber)
+    }
+
     override fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>> {
         return remoteDataStore.getAllProviderTypes(type)
     }
@@ -348,6 +352,14 @@ class NeqabtyRepositoryImpl @Inject constructor(
 
     override fun setNewPassword(mobile: String, verificationCode: String, newPassword: String): Observable<String> {
         return remoteDataStore.setNewPassword(mobile, verificationCode, newPassword)
+    }
+
+    override fun trackShipment(userNumber: String): Observable<List<TrackShipmentEntity>> {
+        return remoteDataStore.trackShipment(userNumber)
+    }
+
+    override fun changeUserMobile(userNumber: String, natID: String, newMobile: String, oldMobile: String): Observable<ChangeUserMobileEntity> {
+        return remoteDataStore.changeUserMobile(userNumber, natID, newMobile, oldMobile)
     }
 
     fun saveUser(userEntity: UserEntity): Observable<UserEntity> {

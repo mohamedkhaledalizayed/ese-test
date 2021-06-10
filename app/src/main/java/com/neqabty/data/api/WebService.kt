@@ -85,6 +85,11 @@ interface WebService {
             @Part doc5: MultipartBody.Part?
     ): Observable<ApiResponse<Unit>>
 
+    @POST("api/v1/vezeeta/offer")
+    fun getOnlinePharmacyURL(
+            @Body onlinePharmacyRequest: OnlinePharmacyRequest
+    ): Observable<ApiResponse<OnlinePharmacyData>>
+
     @Multipart
     @POST("/api/v2/trips/request")
     fun bookTrip(
@@ -191,6 +196,12 @@ interface WebService {
 
     @POST("api/user/password/new")
     fun setNewPassword(@Body setNewPasswordRequest: SetNewPasswordRequest): Observable<ApiResponse<String>>
+
+    @POST("api/v1/shipment/enquire")
+    fun trackShipment(@Body trackShipmentRequest: TrackShipmentRequest): Observable<ApiResponse<List<TrackShipmentData>>>
+
+    @POST("api/user/mobile/change")
+    fun changeUserMobile(@Body changeUserMobileRequest: ChangeUserMobileRequest): Observable<ApiResponse<ChangeUserMobileData>>
 
     @POST("api/user/signup")
     fun signup(@Body signupRequest: SignupRequest): Observable<ApiResponse<UserData>>

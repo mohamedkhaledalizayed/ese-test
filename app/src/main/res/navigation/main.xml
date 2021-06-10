@@ -108,6 +108,26 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
+            android:id="@+id/openOnlinePharmacy"
+            app:destination="@id/onlinePharmacyFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openTrackShipment"
+            app:destination="@id/trackShipmentFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openChangeUserMobile"
+            app:destination="@id/changeUserMobileFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openChangePassword"
+            app:destination="@id/changePasswordFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openTripReservation"
             app:destination="@id/tripReservationFragment"
             app:popUpTo="@id/tripDetailsFragment"
@@ -162,6 +182,26 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
+            android:id="@+id/openOnlinePharmacy"
+            app:destination="@id/onlinePharmacyFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openTrackShipment"
+            app:destination="@id/trackShipmentFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openChangeUserMobile"
+            app:destination="@id/changeUserMobileFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openChangePassword"
+            app:destination="@id/changePasswordFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openTripReservation"
             app:destination="@id/tripReservationFragment"
             app:popUpTo="@id/tripDetailsFragment"
@@ -201,6 +241,18 @@
             android:name="mobile"
             app:argType="java.lang.String" />
     </fragment>
+
+    <fragment
+        android:id="@+id/trackShipmentFragment"
+        android:name="com.neqabty.presentation.ui.trackShipment.TrackShipmentFragment"
+        android:label="@string/track_shipment_title"
+        tools:layout="@layout/track_shipment_fragment"/>
+
+    <fragment
+        android:id="@+id/changeUserMobileFragment"
+        android:name="com.neqabty.presentation.ui.changeUserMobile.ChangeUserMobileFragment"
+        android:label="@string/change_user_mobile_title"
+        tools:layout="@layout/change_user_mobile_fragment"/>
 
     <fragment
         android:id="@+id/medicalRenewFragment"
@@ -278,6 +330,13 @@
         android:name="com.neqabty.presentation.ui.claiming.ClaimingFragment"
         android:label="@string/medicalRequest"
         tools:layout="@layout/claiming_fragment" />
+
+
+    <fragment
+        android:id="@+id/onlinePharmacyFragment"
+        android:name="com.neqabty.presentation.ui.onlinePharmacy.OnlinePharmacyFragment"
+        android:label="@string/online_pharmacy_title"
+        tools:layout="@layout/online_pharmacy_fragment" />
 
     <fragment
         android:id="@+id/notificationsFragment"
