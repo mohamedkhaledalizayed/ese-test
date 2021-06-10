@@ -11,11 +11,8 @@ import retrofit2.http.*
  */
 interface WebService {
 
-    @GET("api/min-version")
-    fun getAppVersion(): Observable<AppVersionData>
-
-    @GET("api/v1/settings/medical_payment_status")
-    fun getHealthCareProjectStatus(): Observable<ApiResponse<HealthCareProjectStatusData>>
+    @GET("api/v1/settings/config")
+    fun getAppConfig(): Observable<ApiResponse<AppConfigData>>
 
     @GET("api/v1/SubSyndicate")
     fun getAllSyndicates(): Observable<List<SyndicateData>>

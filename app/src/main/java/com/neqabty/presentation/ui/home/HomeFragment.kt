@@ -101,12 +101,6 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
     private fun handleViewState(state: HomeViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
-        state.appVersion?.let {
-            if (BuildConfig.VERSION_CODE < it) {
-                if (!isAlertShown)
-                    showAlert()
-            }
-        }
         state.notificationsCount?.let {
             PreferencesHelper(requireContext()).notificationsCount = it
             activity?.invalidateOptionsMenu()

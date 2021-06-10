@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 .get(MainViewModel::class.java)
 
         setSupportActionBar(toolbar)
-        getMinSupportedVersion()
+        getAppConfig()
         setJWT()
         checkRoot()
         startActivities()
@@ -181,21 +181,19 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
 //region//
 
-    private fun getMinSupportedVersion(){
+    private fun getAppConfig(){
         mainViewModel.viewState.observe(this, Observer {
-            if (it != null) {
-                it.appVersion?.let {
-                    if (BuildConfig.VERSION_CODE < it) {
-                        if (!isAlertShown)
-                            showAlert()
-                    }
+            it.appConfigUI?.let {
+                if (BuildConfig.VERSION_CODE < it.appVersion.toInt()) {
+                    if (!isAlertShown)
+                        showAlert()
                 }
             }
         })
         mainViewModel.errorState.observe(this, Observer { error ->
-            mainViewModel.getAppVersion()
+            mainViewModel.getAppConfig()
         })
-        mainViewModel.getAppVersion()
+        mainViewModel.getAppConfig()
     }
 
     override fun onSupportNavigateUp(): Boolean {

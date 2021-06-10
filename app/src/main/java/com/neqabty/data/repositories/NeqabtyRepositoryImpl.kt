@@ -158,12 +158,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
                 doc10)
     }
 
-    override fun getAppVersion(): Observable<AppVersionEntity> {
-        return remoteDataStore.getAppVersion()
-    }
-
-    override fun getHealthCareProjectStatus(): Observable<HealthCareProjectStatusEntity> {
-        return remoteDataStore.getHealthCareProjectStatus()
+    override fun getAppConfig(): Observable<AppConfigEntity> {
+        return remoteDataStore.getAppConfig()
     }
 
     override fun getTripDetails(id: String): Observable<TripEntity> {

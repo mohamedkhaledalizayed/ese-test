@@ -233,14 +233,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideGetAppVersion(neqabtyRepository: NeqabtyRepository): GetAppVersion {
-        return GetAppVersion(ASyncTransformer(), neqabtyRepository)
-    }
-
-    @Singleton
-    @Provides
-    fun provideGetHealthCareProjectStatus(neqabtyRepository: NeqabtyRepository): GetHealthCareProjectStatus {
-        return GetHealthCareProjectStatus(ASyncTransformer(), neqabtyRepository)
+    fun provideGetAppConfig(neqabtyRepository: NeqabtyRepository): GetAppConfig {
+        return GetAppConfig(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
