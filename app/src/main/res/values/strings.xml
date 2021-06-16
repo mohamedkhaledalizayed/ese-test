@@ -19,8 +19,8 @@
     <string name="corona_item_description">اذا كنت أحد المصابين بالفيروس او أحد المتضررين برجاء ملي البيانات الخاصة بكم</string>
 
     <string name="phoneNumber">رقم الجوال</string>
-    <string name="password">كلمة السر</string>
-    <string name="forgetPassword"><u>نسيت كلمة السر</u></string>
+    <string name="password">كلمة المرور</string>
+    <string name="forgetPassword"><u>نسيت كلمة المرور</u></string>
     <string name="login">الدخول الي الحساب</string>
     <string name="activate_account_title">تفعيل الحساب</string>
     <string name="number_confirmation">الرقم الذي قمت بإدخاله <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]></string>
@@ -31,10 +31,10 @@
     <string name="skip">دخول كزائر</string>
     <string name="fullName">الاسم بالكامل</string>
     <string name="email">البريد الالكتروني</string>
-    <string name="current_password">كلمة السر الحالية</string>
-    <string name="new_password">كلمة السر الجديدة</string>
-    <string name="confirmPassword">تأكيد كلمة السر</string>
-    <string name="unmatched_password">كلمة السر غير مطابقة</string>
+    <string name="current_password">كلمة المرور الحالية</string>
+    <string name="new_password">كلمة المرور الجديدة</string>
+    <string name="confirmPassword">تأكيد كلمة المرور</string>
+    <string name="unmatched_password">كلمة المرور غير مطابقة</string>
     <string name="age">تاريخ الميلاد</string>
     <string name="gender">النوع</string>
     <string name="prev">السابق</string>
@@ -42,13 +42,13 @@
     <string name="signup_title">إنشاء حساب جديد</string>
     <string name="signup_submit">إنشاء حساب</string>
     <string name="signup_hint">هذا الرقم غير مسجل من قبل برجاء انشاء حساب حتى تتمكن من استخدام الخدمة</string>
-    <string name="activate_account_hint">تم انشاء الحساب بنجاح, سيتم ارسال رسالة نصية بكود التعريف وكلمة السر برجاء تفعيل الحساب</string>
-    <string name="login_with_password_hint">هذا الرقم مسجل من قبل برجاء ادخال كلمة السر للدخول الي الحساب</string>
+    <string name="activate_account_hint">تم انشاء الحساب بنجاح, سيتم ارسال رسالة نصية بكود التعريف وكلمة المرور برجاء تفعيل الحساب</string>
+    <string name="login_with_password_hint">هذا الرقم مسجل من قبل برجاء ادخال كلمة المرور للدخول الي الحساب</string>
     <string name="personalDetails">البيانات الشخصية</string>
     <string name="confirm">تأكيد</string>
     <string name="welcome">مرحبا بكم</string>
     <string name="welcome_with_name">مرحباً  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]></string>
-    <string name="welcome_with_password">كلمة السر الخاصة بك هي آخر 4 ارقام من الرقم القومي</string>
+    <string name="welcome_with_password">كلمة المرور الخاصة بك هي آخر 4 ارقام من الرقم القومي</string>
     <string name="welcome_with_name_login">هذا الرقم مسجل بإسم  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]>هل تريد تأكيد الدخول؟</string>
     <string name="welcome_to_neqabty">مرحبا بكم في تطبيق نقابة المهندسين المصرية - نقابتي</string>
     <string name="main">الرئيسية</string>
@@ -103,8 +103,8 @@
     <string name="viewPhoto">عرض الصورة</string>
     <string name="format">yyyy/MM/dd</string>
     <string name="mandatoryField">هذا الحقل مطلوب</string>
-    <string name="loginError">خطأ في اسم المستخدم أو كلمة السر</string>
-    <string name="passwordMatchError">يجب أن تتطابق كلمة السر و تأكيد كلمة السر</string>
+    <string name="loginError">خطأ في اسم المستخدم أو كلمة المرور</string>
+    <string name="passwordMatchError">يجب أن تتطابق كلمة المرور و تأكيد كلمة المرور</string>
     <string name="selectSubSyndicate">اختر النقابة</string>
     <string name="confirmation_sent">تم ارسال الرقم التأكيدي لرقم الجوال الخاص بك</string>
     <string name="enter_confirmation_code">من فضلك ادخل الرمز التأكيدي</string>
@@ -136,7 +136,7 @@
     <string name="enter_member_number">ادخل رقم العضوية</string>
     <string name="login_member_enter_member_number">برجاء ادخال رقم العضوية الخاص بك لاستكمال بيانات الحساب</string>
     <string name="change_number_enter_member_number">برجاء ادخال رقم العضوية الصحيح الخاص بك لاستكمال بيانات الحساب</string>
-    <string name="national_id_digits">برجاء ادخال كلمة السر الخاصة بالحساب  \n(وهي عبارة عن آخر 4 أرقام من الرقم القومي)</string>
+    <string name="national_id_digits">برجاء ادخال كلمة المرور الخاصة بالحساب  \n(وهي عبارة عن آخر 4 أرقام من الرقم القومي)</string>
     <string name="current_mobile_title">رقم الموبايل الحالي الخاص بك</string>
     <string name="new_mobile_title">رقم الموبايل الجديد</string>
     <string name="national_id_four_digits">برجاء ادخال آخر 4 أرقام من الرقم القومي</string>
@@ -198,15 +198,15 @@
     <string name="complaints_title">خدمة العملاء والشكاوى</string>
     <string name="online_pharmacy_title">الصيدلية أون لاين</string>
     <string name="user_services_title">خدمات المستخدم</string>
-    <string name="change_password_title">تغيير كلمة السر</string>
-    <string name="track_shipment_title">تتبع شحنتك</string>
+    <string name="change_password_title">تغيير كلمة المرور</string>
+    <string name="track_shipment_title">بيانات الشحن</string>
     <string name="change_user_mobile_title">تغيير رقم الموبايل</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">اتصل بنا</string>
     <string name="aboutapp_title">عن التطبيق</string>
     <string name="help_title">مساعدة</string>
-    <string name="logout_title">خروج</string>
+    <string name="logout_title">تسجيل خروج</string>
     <string name="notifications_title">الأشعارات</string>
     <string name="corona_title">بيانات المهندس</string>
 
@@ -254,7 +254,7 @@
     <string name="invalid_national_id">من فضلك ادخل رقم قومي صحيح</string>
     <string name="invalid_data">من فضلك أكمل ادخال البيانات</string>
     <string name="invalid_number">رقم العضوية غير صحيح</string>
-    <string name="invalid_password">من فضلك ادخل كلمة السر</string>
+    <string name="invalid_password">من فضلك ادخل كلمة المرور</string>
     <string name="pick_photo">من فضلك أرفق صورة الطلب</string>
     <string name="pick_photos">من فضلك أرفق الصور المطلوبة</string>
     <string name="pick_photo_trips">من فضلك أرفق صور المستندات المطلوبة</string>

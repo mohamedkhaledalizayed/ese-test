@@ -394,10 +394,11 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     private fun prepareNavigationMenuListData() {
         listDataHeader = mutableListOf<NavigationMenuItem>()
         listDataChild = HashMap<NavigationMenuItem, List<NavigationMenuItem>>()
-        val homeItem = NavigationMenuItem(R.drawable.ic_menu_home, R.string.home_title, {
-            (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+
+        val userServicesItem = NavigationMenuItem(R.drawable.ic_menu_complaints, R.string.user_services_title, {
+
         })
-        listDataHeader.add(homeItem)
+        listDataHeader.add(userServicesItem)
 
         val newsItem = NavigationMenuItem(R.drawable.ic_menu_news, R.string.news_title, {
             navController().navigate(R.id.newsFragment)
@@ -484,11 +485,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             }
         })
         listDataHeader.add(complaintsItem)
-
-        val userServicesItem = NavigationMenuItem(R.drawable.ic_menu_complaints, R.string.user_services_title, {
-
-        })
-        listDataHeader.add(userServicesItem)
 
         val aboutItem = NavigationMenuItem(R.drawable.ic_menu_about_us, R.string.about_title, {
             navController().navigate(R.id.aboutFragment)
