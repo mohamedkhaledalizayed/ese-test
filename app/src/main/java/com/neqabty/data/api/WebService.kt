@@ -114,7 +114,6 @@ interface WebService {
 
     @GET("api/apiPaymentRequest/RenewalInquiryDetails")
     fun paymentInquiry(
-            @Query("mobile_number") mobileNumber: String,
             @Query("OldrefID") oldrefID: String,
             @Query("serviceID") serviceID: Int,
             @Query("requestID") requestID: String,
@@ -124,7 +123,6 @@ interface WebService {
 
     @POST("api/apiPaymentRequest/AddRenewalRequest")
     fun addRenewalRequest(
-            @Query("mobile_number") mobileNumber: String,
             @Query("oldrefid") oldRefID: String,
             @Query("serviceID") serviceID: Int,
             @Query("requestID") requestID: String,
