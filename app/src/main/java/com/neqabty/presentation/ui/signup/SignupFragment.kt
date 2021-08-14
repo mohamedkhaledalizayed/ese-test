@@ -136,7 +136,7 @@ class SignupFragment : BaseFragment(), Injectable {
         return if (memberNumber.isBlank() || nationalNumber.length != 4) {
             showAlert(getString(R.string.invalid_data))
             false
-        } else if (memberNumber.length != 7) {
+        } else if (memberNumber.length != 7 && memberNumber.length != 8) {
             showAlert(getString(R.string.invalid_number))
             false
         } else if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))

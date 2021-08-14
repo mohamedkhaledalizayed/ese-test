@@ -60,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:maxLength="7"
+                    android:maxLength="8"
                     android:gravity="center"
                     android:textDirection="anyRtl"
                     android:textColor="@color/colorPrimary"

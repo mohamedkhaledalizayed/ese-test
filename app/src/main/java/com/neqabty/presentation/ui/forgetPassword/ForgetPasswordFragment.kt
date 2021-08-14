@@ -95,7 +95,7 @@ class ForgetPasswordFragment : BaseFragment(), Injectable {
         return if (memberNumber.isBlank() || nationalNumber.length != 4) {
             showAlert(getString(R.string.invalid_data))
             false
-        } else if (memberNumber.length != 7) {
+        } else if (memberNumber.length != 7 && memberNumber.length != 8) {
             showAlert(getString(R.string.invalid_number))
             false
         } else {

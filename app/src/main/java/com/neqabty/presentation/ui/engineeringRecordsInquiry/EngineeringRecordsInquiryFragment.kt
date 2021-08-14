@@ -95,7 +95,7 @@ class EngineeringRecordsInquiryFragment : BaseFragment(), Injectable {
         return if (number.isBlank()) {
             showAlert(getString(R.string.invalid_data))
             false
-        } else if (number.length != 7) {
+        } else if (number.length != 7 && number.length != 8) {
             showAlert(getString(R.string.invalid_number))
             false
         } else {
