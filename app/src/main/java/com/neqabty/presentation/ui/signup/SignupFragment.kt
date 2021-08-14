@@ -200,6 +200,10 @@ class SignupFragment : BaseFragment(), Injectable {
                     SignupFragmentDirections.openOnlinePharmacy()
             )
 
+            Constants.MEDICAL_LETTERS -> navController().navigate(
+                    SignupFragmentDirections.openMedicalLetters()
+            )
+
             Constants.TRACK_SHIPMENT -> navController().navigate(
                     SignupFragmentDirections.openTrackShipment()
             )

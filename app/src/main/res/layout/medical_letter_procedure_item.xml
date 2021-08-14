@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="letterProcedure"
+            type="com.neqabty.presentation.entities.MedicalLetterUI.LetterProcedureItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_horizontal_small"
+        android:elevation="@dimen/elevation_level_one"
+        android:padding="@dimen/margin_horizontal_small">
+
+        <View
+            android:id="@+id/lineView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/dark_grey"
+            android:layout_marginBottom="@dimen/margin_horizontal_small"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="0.6"
+            android:maxLines="2"
+            android:text="@{letterProcedure.letterProcedureName}"
+            android:textColor="@color/dark_green"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

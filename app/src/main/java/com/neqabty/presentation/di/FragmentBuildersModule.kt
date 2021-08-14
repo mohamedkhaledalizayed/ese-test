@@ -21,6 +21,7 @@ import com.neqabty.presentation.ui.intro.IntroFragment
 import com.neqabty.presentation.ui.login.LoginFragment
 import com.neqabty.presentation.ui.loginWithPassword.LoginWithPasswordFragment
 import com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragment
+import com.neqabty.presentation.ui.medicalLetters.MedicalLettersFragment
 import com.neqabty.presentation.ui.medicalMain.MedicalMainFragment
 import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsFragment
 import com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsFragment
@@ -97,6 +98,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeChangeUserMobileFragment(): ChangeUserMobileFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeMedicalLettersFragment(): MedicalLettersFragment
 
     @ContributesAndroidInjector
     abstract fun contributeMedicalRenewFragment(): MedicalRenewFragment

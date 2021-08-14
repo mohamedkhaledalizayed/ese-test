@@ -198,6 +198,7 @@
     <string name="complaints_title">خدمة العملاء والشكاوى</string>
     <string name="online_pharmacy_title">الصيدلية أون لاين</string>
     <string name="user_services_title">خدمات المستخدم</string>
+    <string name="medical_letters_title">الموافقات الطبية المصدره</string>
     <string name="change_password_title">تغيير كلمة المرور</string>
     <string name="track_shipment_title">بيانات الشحن</string>
     <string name="change_user_mobile_title">تغيير رقم الموبايل</string>
@@ -536,5 +537,7 @@
     <string name="body_content">السادة / جهات العلاج المتعاقدة مع مشروع العلاج لنقابة المهندسين يرجى العلم بتجديد اشتراك 2021 للمهندس المدون بياناته و تابعيه لذا يرجى تقديم الخدمة الطبية لحين اصدار الكارنيه و يعد هذا الايصال بمثابة كارنيه المشروع لحين اصداره</string>
     <string name="titleContent">اشتراك الرعاية الصحية</string>
     <string name="upload_pdf">تحميل اخطار الدفع</string>
+    <string name="medical_letter_creation_type_syndicate">(النقابة)</string>
+    <string name="medical_letter_creation_type_portal">(البورتال الطبي)</string>
     <string name="arabic_letters">غظضذ خثتشرقصجفعسنملةىكيطئءؤحزوهدبا أإلإآ</string>
 </resources>

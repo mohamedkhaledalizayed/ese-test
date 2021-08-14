@@ -20,6 +20,7 @@ import com.neqabty.presentation.ui.inquiry.InquiryViewModel
 import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsViewModel
 import com.neqabty.presentation.ui.login.LoginViewModel
 import com.neqabty.presentation.ui.loginWithPassword.LoginWithPasswordViewModel
+import com.neqabty.presentation.ui.medicalLetters.MedicalLettersViewModel
 import com.neqabty.presentation.ui.medicalProfessions.MedicalProfessionsViewModel
 import com.neqabty.presentation.ui.medicalProviderDetails.MedicalProviderDetailsViewModel
 import com.neqabty.presentation.ui.medicalProviders.MedicalProvidersViewModel
@@ -99,6 +100,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(com.neqabty.presentation.ui.signup.SignupViewModel::class)
     abstract fun bindSignupViewModel(signupViewModel: com.neqabty.presentation.ui.signup.SignupViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MedicalLettersViewModel::class)
+    abstract fun bindMedicalLettersViewModel(medicalLettersViewModel: MedicalLettersViewModel): ViewModel
 
     @Binds
     @IntoMap

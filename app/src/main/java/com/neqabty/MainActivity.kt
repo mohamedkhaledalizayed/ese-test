@@ -156,11 +156,13 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 supportActionBar?.apply {
                     setDisplayHomeAsUpEnabled(true)
                     setHomeAsUpIndicator(R.mipmap.menu_ic)
+                    (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 }
             else
                 supportActionBar?.apply {
                     setDisplayHomeAsUpEnabled(true)
                     setHomeAsUpIndicator(R.drawable.ic_up)
+                    (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                 }
         })
 
@@ -508,6 +510,17 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
         // Adding child data
         val userServicesList: MutableList<NavigationMenuItem> = mutableListOf()
+
+        val userServiceMedicalLetters = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.medical_letters_title,  {
+            if (PreferencesHelper(this).isRegistered)
+                navController().navigate(R.id.medicalLettersFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_LETTERS)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        userServicesList.add(userServiceMedicalLetters)
 
         val userServiceTrackShipment = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.track_shipment_title,  {
             if (PreferencesHelper(this).isRegistered)

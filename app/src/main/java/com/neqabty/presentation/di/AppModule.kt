@@ -395,6 +395,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetMedicalLetters(neqabtyRepository: NeqabtyRepository): GetMedicalLetters {
+        return GetMedicalLetters(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetMedicalRenewalData(neqabtyRepository: NeqabtyRepository): GetMedicalRenewalData {
         return GetMedicalRenewalData(ASyncTransformer(), neqabtyRepository)
     }

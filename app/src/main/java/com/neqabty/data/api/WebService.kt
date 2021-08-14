@@ -136,6 +136,16 @@ interface WebService {
     @POST("api/v1/service/response")
     fun sendDecryptionKey(@Body decryptionRequest: DecryptionRequest): Observable<ResponseWrapper<DecryptionData>>
 
+    @GET("api/api/ApiSPPCostCard/GetLetterListByMedBenId")
+    fun getMedicalLetters(
+            @Query("BenID") benID: String,
+            @Query("start") start: Int,
+            @Query("end") end: Int,
+            @Query("orderby") orderBy: String,
+            @Query("dir") dir: String,
+            @Query("server") server: String = ""
+    ): Observable<MedicalLetterData>
+
     @GET("api/ApiHealthCare/GetFollowersList")
     fun getMedicalRenewData(@Query("oldRefId") contactId: String, @Query("server") server: String = ""): Observable<MedicalRenewalData>
 

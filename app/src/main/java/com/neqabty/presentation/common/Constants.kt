@@ -33,7 +33,12 @@ object Constants {
     var TRACK_SHIPMENT = 9
     var CHANGE_USER_MOBILE = 10
     var CHANGE_PASSWORD = 11
+    var MEDICAL_LETTERS = 12
 
+    var AD_MEDICAL_RENEW = 1
+    var AD_TRIPS = 2
+    var AD_RECORDS = 3
+    var AD_COMPLAINTS = 4
 
     var DELIVERY_LOCATION_SYNDICATE = 1
     var DELIVERY_LOCATION_HOME = 2

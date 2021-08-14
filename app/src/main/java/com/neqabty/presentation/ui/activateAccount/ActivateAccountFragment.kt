@@ -140,6 +140,10 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
                         ActivateAccountFragmentDirections.openOnlinePharmacy()
                 )
 
+                Constants.MEDICAL_LETTERS -> navController().navigate(
+                        ActivateAccountFragmentDirections.openMedicalLetters()
+                )
+
                 Constants.TRACK_SHIPMENT -> navController().navigate(
                         ActivateAccountFragmentDirections.openTrackShipment()
                 )
