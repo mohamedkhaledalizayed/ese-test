@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.neqabty.MainViewModel
 import com.neqabty.presentation.ui.about.AboutViewModel
 import com.neqabty.presentation.ui.activateAccount.ActivateAccountViewModel
+import com.neqabty.presentation.ui.ads.AdsViewModel
 import com.neqabty.presentation.ui.changePassword.ChangePasswordViewModel
 import com.neqabty.presentation.ui.changeUserMobile.ChangeUserMobileViewModel
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaViewModel
@@ -105,6 +106,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MedicalLettersViewModel::class)
     abstract fun bindMedicalLettersViewModel(medicalLettersViewModel: MedicalLettersViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AdsViewModel::class)
+    abstract fun bindAdsViewModel(adsViewModel: AdsViewModel): ViewModel
 
     @Binds
     @IntoMap

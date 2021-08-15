@@ -23,6 +23,7 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
+import com.neqabty.presentation.ui.ads.AdsActivity
 import com.neqabty.presentation.ui.common.PdfCreatorScreen
 import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsAdapter
 import com.neqabty.presentation.util.PreferencesHelper
@@ -49,6 +50,10 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if(Constants.healthCareProjectStatusMsg.isNotBlank()) Toast.makeText(requireContext(), Constants.healthCareProjectStatusMsg, Toast.LENGTH_LONG).show()
+
+        val intent: Intent = Intent(activity, AdsActivity::class.java)
+        intent.putExtra("sectionID", Constants.AD_MEDICAL_RENEW)
+        startActivity(intent)
     }
     override fun onCreateView(
             inflater: LayoutInflater,

@@ -325,6 +325,14 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    private val adDataEntityMapper = AdDataEntityMapper()
+
+    override fun getAds(sectionId: Int): Observable<AdEntity> {
+        return api.getAds(AdsRequest(sectionId = sectionId)).flatMap { adItem ->
+            Observable.just(adDataEntityMapper.mapFrom(adItem.data!!))
+        }
+    }
+
     private val medicalRenewalDataEntityMapper = MedicalRenewalDataEntityMapper()
 
     override fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity> {

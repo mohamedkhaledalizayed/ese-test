@@ -30,6 +30,10 @@
             android:label="@string/upload_pdf"
             android:theme="@style/AppTheme"></activity>
 
+        <activity
+            android:name=".presentation.ui.ads.AdsActivity"
+            android:theme="@style/Theme.Transparent"></activity>
+
         <meta-data
             android:name="push_kit_auto_init_enabled"
             android:value="true" />

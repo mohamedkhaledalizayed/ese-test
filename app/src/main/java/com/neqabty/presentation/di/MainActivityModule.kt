@@ -1,6 +1,7 @@
 package com.neqabty.presentation.di
 
 import com.neqabty.MainActivity
+import com.neqabty.presentation.ui.ads.AdsActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,4 +11,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class MainActivityModule {
     @ContributesAndroidInjector(modules = [FragmentBuildersModule::class])
     abstract fun contributeMainActivity(): MainActivity
+
+    @ContributesAndroidInjector()
+    abstract fun contributeAdsActivity(): AdsActivity
 }

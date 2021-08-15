@@ -146,6 +146,9 @@ interface WebService {
             @Query("server") server: String = ""
     ): Observable<MedicalLetterData>
 
+    @POST("api/v1/adds")
+    fun getAds(@Body adsRequest: AdsRequest): Observable<ApiResponse<AdData>>
+
     @GET("api/ApiHealthCare/GetFollowersList")
     fun getMedicalRenewData(@Query("oldRefId") contactId: String, @Query("server") server: String = ""): Observable<MedicalRenewalData>
 

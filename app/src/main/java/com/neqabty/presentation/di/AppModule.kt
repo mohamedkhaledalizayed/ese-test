@@ -401,6 +401,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetAds(neqabtyRepository: NeqabtyRepository): GetAds {
+        return GetAds(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetMedicalRenewalData(neqabtyRepository: NeqabtyRepository): GetMedicalRenewalData {
         return GetMedicalRenewalData(ASyncTransformer(), neqabtyRepository)
     }
