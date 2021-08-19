@@ -59,7 +59,7 @@ class ChangeUserMobileFragment : BaseFragment(), Injectable {
         })
         changeUserMobileViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
-                changeUserMobileViewModel.changeUserMobile(PreferencesHelper(requireContext()).user, edNationalNumber.text.toString(), if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumber, PreferencesHelper(requireContext()).mobile)
+                changeUserMobileViewModel.changeUserMobile(PreferencesHelper(requireContext()).user, edNationalNumber.text.toString(), if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumberWithPlus, PreferencesHelper(requireContext()).mobile)
             }, cancelCallback = {
                 llSuperProgressbar.visibility = View.GONE
             }, message = error?.message)
@@ -78,7 +78,7 @@ class ChangeUserMobileFragment : BaseFragment(), Injectable {
             else if (!binding.ccp.isValidFullNumber)
                 showAlert(getString(R.string.invalid_mobile))
             else
-                changeUserMobileViewModel.changeUserMobile(PreferencesHelper(requireContext()).user, edNationalNumber.text.toString(), if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumber, PreferencesHelper(requireContext()).mobile)
+                changeUserMobileViewModel.changeUserMobile(PreferencesHelper(requireContext()).user, edNationalNumber.text.toString(), if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumberWithPlus, PreferencesHelper(requireContext()).mobile)
         }
     }
 

@@ -80,7 +80,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
 //            it.type = "verified"
             if (it.type.equals("verified")) {
                 state.user = null
-                navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumber))
+                navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumberWithPlus))
             } else if(it.type.equals("visitor")){// visitor
                 PreferencesHelper(requireContext()).mobile = it.mobile
                 PreferencesHelper(requireContext()).userType = it.type
@@ -104,7 +104,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
 
     fun login() {
         if (binding.ccp.isValidFullNumber) {
-            loginViewModel.login(if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumber)
+            loginViewModel.login(if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumberWithPlus)
         }else{
             showAlert(getString(R.string.invalid_mobile))
         }
