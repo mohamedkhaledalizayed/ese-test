@@ -21,7 +21,17 @@
         android:textSize="@dimen/text_size_medium"
         app:layout_constraintStart_toEndOf="@id/ivIcon"
         android:layout_marginStart="@dimen/margin_horizontal_normal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivArrow"
         app:layout_constraintTop_toTopOf="@id/ivIcon"
         app:layout_constraintBottom_toBottomOf="@id/ivIcon"/>
+
+    <ImageView
+        android:id="@+id/ivArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivIcon"
+        app:layout_constraintBottom_toBottomOf="@id/ivIcon"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

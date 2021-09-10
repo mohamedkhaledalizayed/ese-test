@@ -85,8 +85,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.VISIBLE
                 loadProviders()
             }, cancelCallback = {
-                navController().popBackStack()
-                navController().navigate(R.id.homeFragment)
+                dialog?.dismiss()
             }, message = error?.message)
         })
 

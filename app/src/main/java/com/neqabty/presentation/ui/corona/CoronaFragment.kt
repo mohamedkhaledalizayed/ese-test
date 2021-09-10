@@ -94,8 +94,7 @@ class CoronaFragment : BaseFragment(), Injectable {
 
                 coronaViewModel.getSyndicates()
             }, cancelCallback = {
-                navController().popBackStack()
-                navController().navigate(R.id.homeFragment)
+                dialog?.dismiss()
             }, message = error?.message)
         })
     }

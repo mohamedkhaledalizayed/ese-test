@@ -8,7 +8,6 @@ import java.util.*
 class Config {
     companion object {
         val LANGUAGE: String = "ar"
-        val API_KEY: String = "62517db39eef319ca9749d78ffa28fac9b54307fddc1c60dcb532a6514a7b5b1"
     }
 
     class ContextWrapper(base: Context) : android.content.ContextWrapper(base) {

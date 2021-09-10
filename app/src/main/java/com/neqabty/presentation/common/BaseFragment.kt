@@ -38,15 +38,15 @@ open class BaseFragment : Fragment() {
             message: String? = getString(R.string.error_msg)
     ) {
         builder = AlertDialog.Builder(context)
-        builder?.setTitle(getString(R.string.error))
+        builder?.setTitle(getString(R.string.alert_title))
         builder?.setMessage(message)
         builder?.setCancelable(false)
-        builder?.setPositiveButton(getString(R.string.no_connection_retry)) { dialog, which ->
-            try {
-                retryCallback.invoke()
-            } catch (e: Exception) {
-            }
-        }
+//        builder?.setPositiveButton(getString(R.string.no_connection_retry)) { dialog, which ->
+//            try {
+//                retryCallback.invoke()
+//            } catch (e: Exception) {
+//            }
+//        }
         builder?.setNegativeButton(getString(R.string.no_connection_cancel)) { dialog, which ->
             try {
                 cancelCallback.invoke()

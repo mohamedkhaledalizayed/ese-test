@@ -94,7 +94,7 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
                 else
                     updateDataDetailsViewModel.inquireUpdateUserData(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
-                navController().navigateUp()
+                dialog?.dismiss()
             }, message = error?.message)
         })
         updateDataDetailsViewModel.inquireUpdateUserData(PreferencesHelper(requireContext()).user)

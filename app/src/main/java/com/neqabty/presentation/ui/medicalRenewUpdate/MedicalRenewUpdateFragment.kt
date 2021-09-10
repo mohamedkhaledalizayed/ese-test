@@ -83,8 +83,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.VISIBLE
                 medicalRenewUpdateViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
-                navController().popBackStack()
-                navController().navigate(R.id.homeFragment)
+                dialog?.dismiss()
             }, message = error?.message)
         })
 

@@ -33,14 +33,14 @@ open class BaseViewModel : ViewModel() {
                     val errorObject = JSONObject(exception.response()!!.errorBody()?.string())
                     return Throwable(errorObject.getString("status_message_ar"))
                 } catch (e: Exception) {
-                    return Throwable("حدث خطأ بالإتصال")
+                    return Throwable("نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق")
                 }
             } else if (exception.code() == 401)
                 return Throwable("لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى")
             else if (exception.code() == 400)
                 return Throwable("لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى")
             else
-                return Throwable("نأسف لحدوث خطأ بالإتصال")
+                return Throwable("نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق")
         }catch(e :Exception){
 //            val exception = throwable as ConnectException
                 return Throwable("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")

@@ -143,7 +143,7 @@ class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu
                     newToken = it
                     loginWithPasswordViewModel.login(mobile, newToken!!, PreferencesHelper(requireContext()), edPassword.text.toString())
                 }else
-                    showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
+                    showAlert(getString(R.string.error_msg))
             })
             PushNotificationsWrapper().getToken(requireContext())
         }

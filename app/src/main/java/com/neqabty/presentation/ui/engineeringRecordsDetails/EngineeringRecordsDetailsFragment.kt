@@ -100,7 +100,7 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
 //                engineeringRecordsDetailsViewModel.requestEngineeringRecords(memberItem.fullName!! , memberItem.mobile!!, memberItem.registryTypeID!! , "5",memberItem.registryDataID!!,
 //                        memberItem.lastRenewYear!!,memberItem.regDataStatusID!!.toInt(), if(memberItem.isOwner) 1 else 0  , photosList.size , getPhoto(0))
             }, cancelCallback = {
-                navController().navigateUp()
+                dialog?.dismiss()
             }, message = error?.message)
         })
         engineeringRecordsDetailsViewModel.sendEngineeringRecordsInquiry(PreferencesHelper(requireContext()).user)

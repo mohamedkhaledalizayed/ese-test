@@ -100,8 +100,7 @@ class ComplaintFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.VISIBLE
                 complaintViewModel.getTypes()
             }, cancelCallback = {
-                navController().popBackStack()
-                navController().navigate(R.id.homeFragment)
+                dialog?.dismiss()
             }, message = error?.message)
         })
         complaintViewModel.getTypes()

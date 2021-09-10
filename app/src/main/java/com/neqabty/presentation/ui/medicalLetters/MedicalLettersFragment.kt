@@ -104,15 +104,26 @@ class MedicalLettersFragment : BaseFragment(), Injectable {
         llContent.visibility = if (state.isLoading) View.INVISIBLE else View.VISIBLE
 
         state.medicalLetterUI?.let {
-            adapter.submitList(it.letters)
-            adapter.notifyDataSetChanged()
+            if(it.letters?.size == 0 ) {
+                binding.tvNoDataFound.visibility = View.VISIBLE
+            } else {
+                binding.tvNoDataFound.visibility = View.GONE
+                adapter.submitList(it.letters)
+                adapter.notifyDataSetChanged()
+            }
             return
         }
 
         state.medicalRenewalUI?.let {
             medicalRenewalUI = it.deepClone(it)
-            medicalRenewalUI?.followers?.add(0, MedicalRenewalUI.FollowerItem(PreferencesHelper(requireContext()).name, id = medicalRenewalUI?.contact?.benID?.toInt()))
-            renderFollowers()
+            medicalRenewalUI?.followers = medicalRenewalUI?.followers?.filter { it.lastMedYear != null && it.lastMedYear!!.toInt() >= 2021 }?.toMutableList()
+            if(medicalRenewalUI?.healthCareStatus == 3) medicalRenewalUI?.followers?.add(0, MedicalRenewalUI.FollowerItem(PreferencesHelper(requireContext()).name, id = medicalRenewalUI?.contact?.benID?.toInt()))
+
+            if(medicalRenewalUI?.followers?.size == 0 ) {
+                showAlert(getString(R.string.no_data_found)){navController().navigateUp()}
+            } else {
+                renderFollowers()
+            }
         }
     }
 
@@ -139,7 +150,7 @@ class MedicalLettersFragment : BaseFragment(), Injectable {
                             if (!isLoading && (totalItemsCount - visibleItemsCount) <= (pastVisibleItem + threshold)) { // el data gt w el unseen items b2t <= el threshold
                                 pageNumber += 1
                                 isLoading = true
-                                loadMedicalLetters(1 + pageNumber*itemsPerPage , 1 + (pageNumber + 1) * itemsPerPage)
+                                loadMedicalLetters(1 + pageNumber*itemsPerPage , (pageNumber + 1) * itemsPerPage)
                             }
                         }
                     }
@@ -157,13 +168,22 @@ class MedicalLettersFragment : BaseFragment(), Injectable {
         binding.spFollower.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                binding.tvNoDataFound.visibility = View.GONE
                 selectedFollower = parent.getItemAtPosition(position) as MedicalRenewalUI.FollowerItem
+                resetPagination()
                 loadMedicalLetters(0, itemsPerPage)
             }
         }
         binding.spFollower.setSelection(0)
     }
 
+    private fun resetPagination(){
+        pageNumber = 0
+        pastVisibleItem = 0
+        visibleItemsCount = 0
+        totalItemsCount = 0
+        previousTotal = 0
+    }
 // endregion
 
     fun navController() = findNavController()

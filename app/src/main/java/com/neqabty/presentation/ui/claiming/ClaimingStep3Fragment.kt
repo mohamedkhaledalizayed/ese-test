@@ -129,8 +129,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
                 val prefs = PreferencesHelper(requireContext())
                 claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.governId, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, ClaimingData.oldbenid, binding.edDetails.text.toString(), ClaimingData.selectedFollower?.name!!, ClaimingData.selectedFollower?.relationTypeName!!, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             }, cancelCallback = {
-                navController().popBackStack()
-                navController().navigate(R.id.homeFragment)
+                dialog?.dismiss()
             }, message = error?.message)
         })
         llSuperProgressbar.visibility = View.INVISIBLE

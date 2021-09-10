@@ -124,7 +124,7 @@ class SignupFragment : BaseFragment(), Injectable {
                         newToken = it
                         signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
                     } else
-                        showAlert("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
+                        showAlert(getString(R.string.error_msg))
                 })
                 PushNotificationsWrapper().getToken(requireContext())
             }

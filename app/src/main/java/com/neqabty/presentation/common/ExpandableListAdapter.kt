@@ -59,8 +59,15 @@ class ExpandableListAdapter(var mContext: Context,
         }
         val lblListHeader = convertView?.findViewById(R.id.tvTitle) as TextView
         val headerIcon: ImageView = convertView.findViewById(R.id.ivIcon) as ImageView
+        val arrowIcon: ImageView = convertView.findViewById(R.id.ivArrow) as ImageView
         lblListHeader.setText(mContext.getString(headerTitle.nameResId))
         headerIcon.setImageResource(headerTitle.iconResId)
+        if(getChildrenCount(groupPosition) == 0) {
+            arrowIcon.visibility = View.GONE
+        }else{
+            arrowIcon.visibility = View.VISIBLE
+            if(isExpanded) arrowIcon.setImageResource(R.drawable.ic_arrow_down) else arrowIcon.setImageResource(R.drawable.ic_arrow)
+        }
         return convertView
     }
 

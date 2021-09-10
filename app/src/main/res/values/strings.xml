@@ -59,7 +59,7 @@
     <string name="aboutApp">عن التطبيق</string>
     <string name="loading">جاري التحميل</string>
     <string name="error">خطأ</string>
-    <string name="error_msg">نأسف لحدوث خطأ بالإتصال</string>
+    <string name="error_msg">نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق</string>
     <string name="sharee">مشاركة</string>
     <string name="news">الأخبار</string>
     <string name="trips">الرحلات</string>
@@ -198,7 +198,7 @@
     <string name="complaints_title">خدمة العملاء والشكاوى</string>
     <string name="online_pharmacy_title">الصيدلية أون لاين</string>
     <string name="user_services_title">خدمات المستخدم</string>
-    <string name="medical_letters_title">الموافقات الطبية المصدره</string>
+    <string name="medical_letters_title">الموافقات الطبية المصدرة</string>
     <string name="change_password_title">تغيير كلمة المرور</string>
     <string name="track_shipment_title">بيانات الشحن</string>
     <string name="change_user_mobile_title">تغيير رقم الموبايل</string>
@@ -248,7 +248,7 @@
     <string name="alert_confirm">تأكيد</string>
     <string name="alert_confirm_login">تأكيد الدخول</string>
     <string name="alert_change_number">تغيير الرقم</string>
-    <string name="no_connection_cancel">إلغاء</string>
+    <string name="no_connection_cancel">إغلاق</string>
     <string name="no_connection_retry">محاولة أخرى</string>
     <string name="go_to_payment">تجديد الإشتراك</string>
     <string name="invalid_mobile">من فضلك ادخل رقم موبايل صحيح</string>
@@ -465,6 +465,7 @@
     <string name="view_attachment">عرض ملف الموافقة</string>
     <string name="type">النوع</string>
     <string name="no_data_found">لا توجد بيانات</string>
+    <string name="no_letters_data_found">لا توجد موافقات طبية مصدرة</string>
     <string name="no_providers_found">لا توجد بيانات في هذا القسم</string>
     <string name="home_paragraph">في اطار تقديم خدمة متميزة ومتطورة لاعضاء نقابة المهندسين قامت النقابة العامه للمهندسين باتاحه خدمة ارسال الموافقات الطبية الكترونيا من خلال تطبيق نقابتي وذلك من خلال اتاحة امكانيه رفع المرفقات الخاصة بالموافقات الطبية ويمكن للعضو متابعة حالة الطلب من خلال خدمة الاشعارات التنبيهية.</string>
     <string name="records_add_photos">*السجل لمكتب هندسي\n

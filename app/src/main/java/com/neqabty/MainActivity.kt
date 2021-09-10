@@ -439,6 +439,17 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         })
         listDataHeader.add(claimingItem)
 
+        val medicalLettersItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.medical_letters_title, {
+            if (PreferencesHelper(this).isRegistered)
+                navController().navigate(R.id.medicalLettersFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_LETTERS)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        listDataHeader.add(medicalLettersItem)
+
         val pharmacyItem = NavigationMenuItem(R.drawable.ic_pharmacy_green, R.string.online_pharmacy_title, {
             if (PreferencesHelper(this).isRegistered)
                 navController().navigate(R.id.onlinePharmacyFragment)
@@ -510,17 +521,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
         // Adding child data
         val userServicesList: MutableList<NavigationMenuItem> = mutableListOf()
-
-        val userServiceMedicalLetters = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.medical_letters_title,  {
-            if (PreferencesHelper(this).isRegistered)
-                navController().navigate(R.id.medicalLettersFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.MEDICAL_LETTERS)
-                navController().navigate(R.id.signupFragment, bundle)
-            }
-        })
-        userServicesList.add(userServiceMedicalLetters)
 
         val userServiceTrackShipment = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.track_shipment_title,  {
             if (PreferencesHelper(this).isRegistered)

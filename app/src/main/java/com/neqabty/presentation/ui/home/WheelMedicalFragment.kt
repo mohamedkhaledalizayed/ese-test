@@ -90,6 +90,15 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
                 navController().navigate(R.id.signupFragment, bundle)
             }
         }
+        bMedicalLetters.setOnClickListener{
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(R.id.medicalLettersFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_LETTERS)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        }
     }
 
     //region

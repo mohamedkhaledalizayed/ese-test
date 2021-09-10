@@ -120,7 +120,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.VISIBLE
 //                tripReservationViewModel.paymentInquiry(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
-                navController().navigateUp()
+                dialog?.dismiss()
             }, message = error?.message)
         })
 //        tripReservationViewModel.paymentInquiry(PreferencesHelper(requireContext()).user)

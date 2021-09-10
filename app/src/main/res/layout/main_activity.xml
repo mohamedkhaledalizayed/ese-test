@@ -112,6 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:choiceMode="singleChoice"
+                android:groupIndicator="@null"
                 android:background="@android:color/white">
             </ExpandableListView>
             </LinearLayout>

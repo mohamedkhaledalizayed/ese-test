@@ -1,6 +1,7 @@
 package com.neqabty.data.api.requests
 
 import com.google.gson.annotations.SerializedName
+import com.neqabty.data.api.Request
 
 data class UpdateUserDataRequest(
     @SerializedName("OldRefID")
@@ -13,4 +14,4 @@ data class UpdateUserDataRequest(
     var mobile: String = "",
     @SerializedName("docs_num")
     var docsNumber: Int = 0
-)
+) : Request()
