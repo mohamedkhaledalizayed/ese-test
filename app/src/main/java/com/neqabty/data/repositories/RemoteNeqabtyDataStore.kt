@@ -392,9 +392,9 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     private val memberDataEntityMapper = MemberDataEntityMapper()
 
     override fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MedicalRenewalPaymentEntity> {
-        return if (isInquire) api.paymentInquiry(userNumber, serviceID, requestID, amount).flatMap { renewalData ->
+        return if (isInquire) api.paymentInquiry(mobileNumber, userNumber, serviceID, requestID, amount).flatMap { renewalData ->
             Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalData))
-        } else api.addRenewalRequest(userNumber, serviceID, requestID, amount).flatMap { renewalData ->
+        } else api.addRenewalRequest(mobileNumber, userNumber, serviceID, requestID, amount).flatMap { renewalData ->
             Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalData))
         }
     }

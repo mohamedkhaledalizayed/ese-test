@@ -51,9 +51,9 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         super.onAttach(context)
         if(Constants.healthCareProjectStatusMsg.isNotBlank()) Toast.makeText(requireContext(), Constants.healthCareProjectStatusMsg, Toast.LENGTH_LONG).show()
 
-        val intent: Intent = Intent(activity, AdsActivity::class.java)
-        intent.putExtra("sectionID", Constants.AD_MEDICAL_RENEW)
-        startActivity(intent)
+//        val intent: Intent = Intent(activity, AdsActivity::class.java)
+//        intent.putExtra("sectionID", Constants.AD_MEDICAL_RENEW)
+//        startActivity(intent)
     }
     override fun onCreateView(
             inflater: LayoutInflater,
