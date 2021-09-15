@@ -47,7 +47,7 @@ android {
         config {
             keyAlias 'neqabty'
             keyPassword secret
-            storeFile file('E:/workspace/NeQabty/keyStore.jks')
+            storeFile file('D:/Android/workspace/NeQabty/keyStore.jks')
             storePassword secret
         }
     }

@@ -186,6 +186,11 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     private fun getAppConfig(){
         mainViewModel.viewState.observe(this, Observer {
             it.appConfigUI?.let {
+                if(it.maintenanceStatus.status.toInt() != 0){
+                    showAlertDialogAndExitApp(it.maintenanceStatus.statusMsg)
+                    return@let
+                }
+
                 if (BuildConfig.VERSION_CODE < it.appVersion.toInt()) {
                     if (!isAlertShown)
                         showAlert()
@@ -373,6 +378,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             dialog.dismiss()
             finish()
         }
+
+        isAlertShown = true
         alertDialog.show()
     }
 

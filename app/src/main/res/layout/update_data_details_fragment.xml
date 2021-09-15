@@ -99,7 +99,6 @@
                         android:gravity="center"
                         android:textDirection="anyRtl"
                         android:inputType="number"
-                        android:maxLength="11"
                         android:text="@{userData.phone}"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/text_size_large"

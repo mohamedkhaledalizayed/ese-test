@@ -10,6 +10,7 @@ import androidx.annotation.CallSuper
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.neqabty.MainActivity
 import com.neqabty.R
 
 open class BaseFragment : Fragment() {
@@ -57,7 +58,7 @@ open class BaseFragment : Fragment() {
         if (dialog == null)
             dialog = builder?.create()
 
-        if (!dialog?.isShowing!!)
+        if (!dialog?.isShowing!! && !(requireActivity() as MainActivity).isAlertShown)
             dialog?.show()
     }
 
