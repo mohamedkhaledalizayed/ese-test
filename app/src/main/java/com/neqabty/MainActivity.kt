@@ -343,7 +343,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var currentFragment =
                 (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
         when (item?.itemId) {

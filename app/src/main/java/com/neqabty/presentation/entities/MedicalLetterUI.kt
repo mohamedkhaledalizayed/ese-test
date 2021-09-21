@@ -5,8 +5,9 @@ data class MedicalLetterUI(
     var letters: MutableList<LetterItem>? = null
 ) {
     data class LetterItem(
-        var letterTypeName: String = "",
-        var serviceProviderName: String = "",
+        var letterTypeName: String? = "",
+        var isActive: Boolean? = true,
+        var serviceProviderName: String? = "",
         var letterDate: String?,
         var letterStatusName: String?,
         var totalPrice: String?,

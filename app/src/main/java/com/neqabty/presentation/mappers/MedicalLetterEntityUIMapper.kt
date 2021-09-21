@@ -25,6 +25,7 @@ class MedicalLetterEntityUIMapper @Inject constructor() : Mapper<MedicalLetterEn
 
                 val letter = MedicalLetterUI.LetterItem(
                         letterTypeName = letterItem.letterTypeName,
+                        isActive = letterItem.isActive,
                         letterDate = new.toString(),
                         letterStatusName = letterItem.letterStatusName,
                         serviceProviderName = letterItem.serviceProviderName,

@@ -10,9 +10,11 @@ data class MedicalLetterData(
 ) {
     data class LetterItem(
         @field:SerializedName("LetterTypeName")
-        var letterTypeName: String = "",
+        var letterTypeName: String? = "",
+        @field:SerializedName("IsActive")
+        var isActive: Boolean? = true,
         @field:SerializedName("ServiceProviderName")
-        var serviceProviderName: String = "",
+        var serviceProviderName: String? = "",
         @field:SerializedName("LetterDate")
         var letterDate: String?,
         @field:SerializedName("LetterStatusName")

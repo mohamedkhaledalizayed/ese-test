@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/tvServiceProviderName"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lineSpacingMultiplier="0.8"
@@ -45,7 +45,24 @@
             android:text="@{letter.serviceProviderName}"
             android:textSize="@dimen/text_size_small"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvIsActive"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <TextView
+            android:id="@+id/tvIsActive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@{letter.isActive? @drawable/rounded_green_bg : @drawable/rounded_red_bg}"
+            android:padding="@dimen/margin_horizontal_small"
+            android:text="@{letter.isActive? @string/medical_letter_is_active : @string/medical_letter_is_cancelled}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="@id/tvServiceProviderName"
+            app:layout_constraintBottom_toBottomOf="@id/tvServiceProviderName" />
 
         <TextView
             android:id="@+id/tvDate"
@@ -81,6 +98,7 @@
             android:textSize="@dimen/text_size_small"
             android:textStyle="bold"
             android:gravity="center"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@id/rvLetterProcedures" />

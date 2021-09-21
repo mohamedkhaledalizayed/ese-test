@@ -540,5 +540,7 @@
     <string name="upload_pdf">تحميل اخطار الدفع</string>
     <string name="medical_letter_creation_type_syndicate">(النقابة)</string>
     <string name="medical_letter_creation_type_portal">(البورتال الطبي)</string>
+    <string name="medical_letter_is_active">مفعل</string>
+    <string name="medical_letter_is_cancelled">لاغي</string>
     <string name="arabic_letters">غظضذ خثتشرقصجفعسنملةىكيطئءؤحزوهدبا أإلإآ</string>
 </resources>

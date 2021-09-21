@@ -17,4 +17,10 @@
     <color name="colorAccent">#959692</color>
     <color name="light_blue">#00BCD4</color>
     <color name="blue">#092c8e</color>
+    <color name="dark_red">#d95757</color>
+    <color name="gray_dark">#475461</color>
+    <color name="platinum">#e6e7e8</color>
+    <color name="black">#000</color>
+    <color name="gray">#d6d4d4</color>
+    <color name="transparent">@android:color/transparent</color>
 </resources>

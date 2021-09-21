@@ -18,6 +18,7 @@ class MedicalLetterDataEntityMapper @Inject constructor() : Mapper<MedicalLetter
             var letters: List<MedicalLetterEntity.LetterItem> = it.map { letterItem ->
                 val letter = MedicalLetterEntity.LetterItem(
                         letterTypeName = letterItem.letterTypeName,
+                        isActive = letterItem.isActive,
                         letterDate = letterItem.letterDate,
                         letterStatusName = letterItem.letterStatusName,
                         serviceProviderName = letterItem.serviceProviderName,

@@ -35,7 +35,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        data = intent.getParcelableExtra("data")
+        data = intent.getParcelableExtra("data")!!
         createPDF("neqabty", object : PDFUtil.PDFUtilListener {
             override fun pdfGenerationSuccess(savedPDFFile: File) {
                 pdfFile = savedPDFFile
