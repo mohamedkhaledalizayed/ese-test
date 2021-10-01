@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.corona
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -29,6 +30,7 @@ import com.neqabty.R
 import com.neqabty.databinding.CoronaFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.entities.SyndicateUI
@@ -64,6 +66,12 @@ class CoronaFragment : BaseFragment(), Injectable {
     var selectedType: String = ""
     var selectedSyndicate: Int = 0
     //    var isSubmitted: Boolean = false
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        showAds(Constants.AD_COVID)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

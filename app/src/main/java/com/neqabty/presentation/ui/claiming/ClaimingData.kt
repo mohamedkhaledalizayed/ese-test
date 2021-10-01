@@ -1,6 +1,6 @@
 package com.neqabty.presentation.ui.claiming
 
-import com.neqabty.presentation.entities.MedicalRenewalUI
+import com.neqabty.presentation.entities.LiteFollowersListUI
 
 class ClaimingData {
     companion object {
@@ -12,6 +12,6 @@ class ClaimingData {
         var governId: Int = 0
         var cardId: Int = 0
         var oldbenid: String = ""
-        var selectedFollower: MedicalRenewalUI.FollowerItem? = null
+        var selectedFollower: LiteFollowersListUI? = null
     }
 }

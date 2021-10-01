@@ -15,6 +15,7 @@ import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsI
 import com.neqabty.presentation.ui.favorites.FavoritesFragment
 import com.neqabty.presentation.ui.forgetPassword.ForgetPasswordFragment
 import com.neqabty.presentation.ui.home.*
+import com.neqabty.presentation.ui.inquireMedicalLetters.InquireMedicalLettersFragment
 import com.neqabty.presentation.ui.inquiry.InquiryFragment
 import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsFragment
 import com.neqabty.presentation.ui.intro.IntroFragment
@@ -101,6 +102,9 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMedicalLettersFragment(): MedicalLettersFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeInquireMedicalLettersFragment(): InquireMedicalLettersFragment
 
     @ContributesAndroidInjector
     abstract fun contributeMedicalRenewFragment(): MedicalRenewFragment

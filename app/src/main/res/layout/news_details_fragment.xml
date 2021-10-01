@@ -124,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_horizontal_normal"
-                    android:text="@{newsItem.desc}"
+                    android:text="@{Html.fromHtml(newsItem.desc)}"
                     android:justificationMode="inter_word"
                     android:layout_marginStart="@dimen/margin_horizontal_normal"
                     android:textSize="@dimen/text_size_medium"

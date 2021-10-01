@@ -144,6 +144,8 @@
     <string name="syndicateNumber">رقم العضوية</string>
     <string name="member_name">اسم العضو</string>
     <string name="beneficiary_name">اسم المستفيد</string>
+    <string name="medical_letter_approval_number">رقم الموافقة</string>
+    <string name="inquire">استعلام</string>
     <string name="cardNumber">رقم المنظومة العلاجية</string>
     <string name="selectDoctor">اختر الدكتور المعالج</string>
     <string name="addRequestImage">اضافة الموافقات الطبية</string>
@@ -199,6 +201,7 @@
     <string name="online_pharmacy_title">الصيدلية أون لاين</string>
     <string name="user_services_title">خدمات المستخدم</string>
     <string name="medical_letters_title">الموافقات الطبية المصدرة</string>
+    <string name="medical_letters_inquiry_title">استعلام الموافقات الطبية المصدرة</string>
     <string name="change_password_title">تغيير كلمة المرور</string>
     <string name="track_shipment_title">بيانات الشحن</string>
     <string name="change_user_mobile_title">تغيير رقم الموبايل</string>
@@ -465,7 +468,7 @@
     <string name="view_attachment">عرض ملف الموافقة</string>
     <string name="type">النوع</string>
     <string name="no_data_found">لا توجد بيانات</string>
-    <string name="no_letters_data_found">لا توجد موافقات طبية مصدرة</string>
+    <string name="no_letters_data_found">لم يتم العثور على بيانات</string>
     <string name="no_providers_found">لا توجد بيانات في هذا القسم</string>
     <string name="home_paragraph">في اطار تقديم خدمة متميزة ومتطورة لاعضاء نقابة المهندسين قامت النقابة العامه للمهندسين باتاحه خدمة ارسال الموافقات الطبية الكترونيا من خلال تطبيق نقابتي وذلك من خلال اتاحة امكانيه رفع المرفقات الخاصة بالموافقات الطبية ويمكن للعضو متابعة حالة الطلب من خلال خدمة الاشعارات التنبيهية.</string>
     <string name="records_add_photos">*السجل لمكتب هندسي\n

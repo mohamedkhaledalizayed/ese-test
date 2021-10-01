@@ -79,7 +79,15 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("Not yet implemented")
     }
 
-    override fun getAds(sectionId: Int): Observable<AdEntity> {
+    override fun getMedicalLetterByID(id: String): Observable<MedicalLetterEntity.LetterItem> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getAds(sectionId: Int): Observable<List<AdEntity>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLiteFollowersListData(userNumber: String): Observable<List<LiteFollowersListEntity>> {
         TODO("Not yet implemented")
     }
 

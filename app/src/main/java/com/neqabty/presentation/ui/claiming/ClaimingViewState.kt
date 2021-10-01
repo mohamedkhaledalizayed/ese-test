@@ -9,5 +9,5 @@ data class ClaimingViewState(
     var providerTypes: List<ProviderTypeUI>? = null,
     var providers: List<ProviderUI>? = null,
     var member: ClaimingValidationUI? = null,
-    var medicalRenewalUI: MedicalRenewalUI? = null
+    var liteFollowersListUI: List<LiteFollowersListUI>? = null
 )

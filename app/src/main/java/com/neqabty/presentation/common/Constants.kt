@@ -2,6 +2,7 @@ package com.neqabty.presentation.common
 
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.BuildConfig
+import com.neqabty.presentation.entities.AdUI
 import me.cowpay.util.CowpayConstantKeys
 
 object Constants {
@@ -10,6 +11,7 @@ object Constants {
     var cowpayAuthTokenTest: String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQ1OGUwYzQxMGNhYzFiYTYzNmZlZmY5ODMwNDhkNGFjNDg3MWQ3M2Q3OTI2ZGQ4ZDFmYWYwM2IzYWY1YTYyM2Y0OWY1NWRmOWQ1MGNhYTFjIn0.eyJhdWQiOiIxIiwianRpIjoiZDU4ZTBjNDEwY2FjMWJhNjM2ZmVmZjk4MzA0OGQ0YWM0ODcxZDczZDc5MjZkZDhkMWZhZjAzYjNhZjVhNjIzZjQ5ZjU1ZGY5ZDUwY2FhMWMiLCJpYXQiOjE2MDY5MzA2MzUsIm5iZiI6MTYwNjkzMDYzNSwiZXhwIjoxNjM4NDY2NjM1LCJzdWIiOiIzODciLCJzY29wZXMiOltdfQ.PTyQdVixvfIJRcsMWdId7TrwOuGGPaNIor24XsHLExNMPcOemh1nmw6sRWgem9kb4xKB73Q3DWcRnudv44vhDw"
     var cowpayAuthToken: String = if (BuildConfig.DEBUG) cowpayAuthTokenTest else cowpayAuthTokenProd
     var isFirebaseTokenUpdated: MutableLiveData<String> = MutableLiveData("")
+    var adsList: MutableLiveData<List<AdUI>> = MutableLiveData()
 
     var isHealthCareProjectEnabled: Boolean = false
     var healthCareProjectStatusMsg: String = ""
@@ -34,11 +36,18 @@ object Constants {
     var CHANGE_USER_MOBILE = 10
     var CHANGE_PASSWORD = 11
     var MEDICAL_LETTERS = 12
+    var MEDICAL_LETTERS_INQUIRY = 13
 
     var AD_MEDICAL_RENEW = 1
     var AD_TRIPS = 2
     var AD_RECORDS = 3
     var AD_COMPLAINTS = 4
+    var AD_COVID = 5
+    var AD_HOME = 6
+    var AD_MEDICAL_DIRECTORY = 7
+    var AD_ONLINE_PHARMACY = 8
+    var AD_NEWS = 9
+    var AD_PAYMENTS = 10
 
     var DELIVERY_LOCATION_SYNDICATE = 1
     var DELIVERY_LOCATION_HOME = 2

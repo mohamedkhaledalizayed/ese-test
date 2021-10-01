@@ -23,4 +23,5 @@
     <color name="black">#000</color>
     <color name="gray">#d6d4d4</color>
     <color name="transparent">@android:color/transparent</color>
+    <color name="colorTransparentBlack">#E6000000</color>
 </resources>

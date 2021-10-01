@@ -325,11 +325,27 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    private val medicalLetterItemDataEntityMapper = MedicalLetterItemDataEntityMapper()
+
+    override fun getMedicalLetterByID(id: String): Observable<MedicalLetterEntity.LetterItem> {
+        return api.getMedicalLetterByID(id).flatMap { letterItemInfo ->
+            Observable.just(medicalLetterItemDataEntityMapper.mapFrom(letterItemInfo))
+        }
+    }
+
     private val adDataEntityMapper = AdDataEntityMapper()
 
-    override fun getAds(sectionId: Int): Observable<AdEntity> {
-        return api.getAds(AdsRequest(sectionId = sectionId)).flatMap { adItem ->
-            Observable.just(adDataEntityMapper.mapFrom(adItem.data!!))
+    override fun getAds(sectionId: Int): Observable<List<AdEntity>> {
+        return api.getAds(AdsRequest()).map { adsList ->
+            adsList.data?.map { adDataEntityMapper.mapFrom(it)}
+        }
+    }
+
+    private val liteFollowersListDataEntityMapper = LiteFollowersListDataEntityMapper()
+
+    override fun getLiteFollowersListData(userNumber: String): Observable<List<LiteFollowersListEntity>> {
+        return api.getLiteFollowersList(userNumber).map { follower ->
+            follower.map { liteFollowersListDataEntityMapper.mapFrom(it) }
         }
     }
 

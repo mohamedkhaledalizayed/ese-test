@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/margin_horizontal_large"
+        android:paddingTop="@dimen/margin_horizontal_large">
+
+        <LinearLayout
+            android:id="@+id/llContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_bg"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_horizontal_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvApprovalNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_vertical_small"
+                android:gravity="start"
+                android:text="@string/medical_letter_approval_number"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edApprovalNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="number"
+                android:textColor="@color/colorPrimary"
+                android:textDirection="anyRtl"
+                android:textSize="@dimen/text_size_large"
+                android:layout_marginTop="@dimen/margin_vertical_normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvNationalNumber" />
+
+            <Button
+                android:id="@+id/bInquire"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_vertical_large"
+                android:background="@drawable/btn_green"
+                android:gravity="center"
+                android:padding="@dimen/margin_horizontal_small"
+                android:text="@string/inquire"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edApprovalNumber" />
+
+
+            <TextView
+                android:id="@+id/tvNoDataFound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_horizontal_normal"
+                android:gravity="center"
+                android:text="@string/no_letters_data_found"
+                android:textSize="@dimen/text_size_medium"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/llResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <include
+                    android:id="@+id/clResult"
+                    layout="@layout/inquire_medical_letter_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_horizontal_normal" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

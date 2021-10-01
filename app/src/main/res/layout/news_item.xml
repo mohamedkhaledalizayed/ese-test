@@ -5,6 +5,7 @@
 
     <data>
 
+        <import type="android.text.Html" />
         <variable
             name="news"
             type="com.neqabty.presentation.entities.NewsUI" />
@@ -89,7 +90,7 @@
                 android:ellipsize="end"
                 android:lineSpacingMultiplier="0.8"
                 android:maxLines="2"
-                android:text="@{news.desc}"
+                android:text="@{Html.fromHtml(news.desc)}"
                 android:textSize="@dimen/text_size_small" />
 
         </LinearLayout>

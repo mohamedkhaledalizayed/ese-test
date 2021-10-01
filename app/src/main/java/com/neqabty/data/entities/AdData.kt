@@ -5,6 +5,6 @@ import com.neqabty.data.api.Response
 data class AdData(
     @field:SerializedName("img")
     var imgURL: String,
-    @field:SerializedName("s")
+    @field:SerializedName("add_section_id")
     var id: Int
 ) : Response()

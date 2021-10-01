@@ -1,19 +1,24 @@
 package com.neqabty.presentation.ui.medicalLetters
 
 import androidx.lifecycle.MutableLiveData
+import com.neqabty.domain.usecases.GetLiteFollowersListData
 import com.neqabty.domain.usecases.GetMedicalLetters
-import com.neqabty.domain.usecases.GetMedicalRenewalData
+import com.neqabty.domain.usecases.ValidateUserForClaiming
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
+import com.neqabty.presentation.entities.ClaimingValidationUI
+import com.neqabty.presentation.entities.LiteFollowersListUI
 import com.neqabty.presentation.entities.MedicalLetterUI
-import com.neqabty.presentation.entities.MedicalRenewalUI
+import com.neqabty.presentation.mappers.ClaimingValidationEntityUIMapper
+import com.neqabty.presentation.mappers.LiteFollowersListEntityUIMapper
 import com.neqabty.presentation.mappers.MedicalLetterEntityUIMapper
-import com.neqabty.presentation.mappers.MedicalRenewalEntityUIMapper
 import javax.inject.Inject
 
-class MedicalLettersViewModel @Inject constructor(private val getMedicalRenewalData: GetMedicalRenewalData, private val getMedicalLetters: GetMedicalLetters) : BaseViewModel() {
+class MedicalLettersViewModel @Inject constructor(private val validateUserForClaiming: ValidateUserForClaiming,
+                                                  private val getLiteFollowersListData: GetLiteFollowersListData, private val getMedicalLetters: GetMedicalLetters) : BaseViewModel() {
 
-    private val medicalRenewalEntityUIMapper = MedicalRenewalEntityUIMapper()
+    private val claimingValidationEntityUIMapper = ClaimingValidationEntityUIMapper()
+    private val liteFollowersListEntityUIMapper = LiteFollowersListEntityUIMapper()
     private val medicalLettersEntityUIMapper = MedicalLetterEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<MedicalLettersViewState> = MutableLiveData()
@@ -22,15 +27,43 @@ class MedicalLettersViewModel @Inject constructor(private val getMedicalRenewalD
         viewState.value = MedicalLettersViewState(isLoading = true)
     }
 
-    fun getMedicalRenewalData(mobileNumber: String, number: String) {
+
+    fun validateUser(number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(getMedicalRenewalData.getMedicalRenewalData(mobileNumber, number)
+        addDisposable(validateUserForClaiming.validateUser(number)
                 .map {
                     it.let {
-                        medicalRenewalEntityUIMapper.mapFrom(it)
+                        claimingValidationEntityUIMapper.mapFrom(it)
                     }
                 }.subscribe(
-                        { onMedicalRenewalDataReceived(it) },
+                        { onValidationReceived(it) },
+                        {
+                            viewState.value = viewState.value?.copy(isLoading = false)
+                            errorState.value = handleError(it)
+                        }
+                )
+        )
+    }
+
+    private fun onValidationReceived(member: ClaimingValidationUI) {
+        val newViewState = viewState.value?.copy(
+                isLoading = false,
+                member = member)
+        viewState.value = newViewState
+    }
+
+
+    fun getMedicalRenewalData(mobileNumber: String, number: String) {
+        viewState.value = viewState.value?.copy(isLoading = true)
+        addDisposable(getLiteFollowersListData.getLiteFollowersListData(number)
+                .flatMap {
+                    it.let {
+                        liteFollowersListEntityUIMapper.observable(it)
+                    }
+                }.subscribe(
+                        {
+                            onLiteFollowersListDataReceived(it)
+                        },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
                             errorState.value = handleError(it)
@@ -40,10 +73,10 @@ class MedicalLettersViewModel @Inject constructor(private val getMedicalRenewalD
     }
 
 
-    private fun onMedicalRenewalDataReceived(medicalRenewalData: MedicalRenewalUI) {
+    private fun onLiteFollowersListDataReceived(followersList: List<LiteFollowersListUI>) {
         val newViewState = viewState.value?.copy(
                 isLoading = true,
-                medicalRenewalUI = medicalRenewalData)
+                liteFollowersListUI = followersList)
         viewState.value = newViewState
     }
 

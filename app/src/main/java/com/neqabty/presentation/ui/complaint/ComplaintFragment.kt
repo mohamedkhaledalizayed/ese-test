@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.complaint
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -71,6 +72,12 @@ class ComplaintFragment : BaseFragment(), Injectable {
     var complaintsTypeID: Int = 0
     var complaintsSubTypeID: Int = 0
     var isSubmitted: Boolean = false
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        showAds(Constants.AD_COMPLAINTS)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -27,6 +27,7 @@ import com.neqabty.R
 import com.neqabty.databinding.OnlinePharmacyFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.common.MyWebViewClient
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
@@ -51,6 +52,12 @@ class OnlinePharmacyFragment : BaseFragment(), Injectable {
     private var mUploadMsgForAndroid5: ValueCallback<Array<Uri>>? = null
     private var mUploadMsg: ValueCallback<Uri>? = null
     private val FILECHOOSER_RESULTCODE = 1
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        showAds(Constants.AD_ONLINE_PHARMACY)
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,

@@ -8,6 +8,7 @@ if (getGradle().getStartParameter().getTaskRequests().toString().contains("Hms")
     apply plugin: 'com.huawei.agconnect'
 } else {
     apply plugin: 'com.google.gms.google-services'
+    apply plugin: 'com.google.firebase.crashlytics'
 }
 apply plugin: 'kotlin-android-extensions'
 
@@ -187,6 +188,9 @@ dependencies {
     gmsImplementation deps.firebase.core
     gmsImplementation deps.firebase.messaging
     gmsImplementation deps.firebase.jobdispatcher
+    gmsImplementation platform(deps.firebase.bom)
+    gmsImplementation deps.firebase.crashlytics
+    gmsImplementation deps.firebase.analytics
 
     hmsImplementation deps.hms.hms_push
 

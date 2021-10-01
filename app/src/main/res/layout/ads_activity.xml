@@ -4,8 +4,11 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clHolder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorTransparentBlack"
+        android:visibility="invisible">
 
     <ImageView
         android:id="@+id/ivImg"
@@ -21,10 +24,12 @@
         android:id="@+id/ivClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="@dimen/margin_horizontal_normal"
         android:layout_marginStart="@dimen/margin_vertical_normal"
         android:layout_marginTop="@dimen/margin_vertical_normal"
-        android:background="@color/colorWhite"
-        android:src="@drawable/ic_close"
+        android:background="@drawable/circle_background_grey"
+        android:src="@drawable/close_black_icon"
+        app:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

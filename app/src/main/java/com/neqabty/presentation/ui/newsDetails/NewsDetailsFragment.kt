@@ -3,6 +3,7 @@ package com.neqabty.presentation.ui.newsDetails
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,7 @@ class NewsDetailsFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
         binding.newsItem = newsItem
+        binding.tvDesc.movementMethod = LinkMovementMethod.getInstance()
     }
 
 //region

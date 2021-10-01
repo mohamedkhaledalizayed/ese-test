@@ -1,5 +1,6 @@
 package com.neqabty.presentation.ui.home
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -24,6 +25,7 @@ import com.neqabty.R
 import com.neqabty.databinding.HomeFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
 import com.neqabty.presentation.util.HasHomeOptionsMenu
@@ -49,6 +51,12 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
     lateinit var appExecutors: AppExecutors
 
     var isAlertShown = false
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        showAds(Constants.AD_HOME)
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,

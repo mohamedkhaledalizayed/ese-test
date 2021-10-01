@@ -9,6 +9,10 @@ data class MedicalLetterData(
     var letters: List<LetterItem>? = null
 ) {
     data class LetterItem(
+        @field:SerializedName("Id")
+        var id: String? = "",
+        @field:SerializedName("BENNAME")
+        var name: String? = "",
         @field:SerializedName("LetterTypeName")
         var letterTypeName: String? = "",
         @field:SerializedName("IsActive")

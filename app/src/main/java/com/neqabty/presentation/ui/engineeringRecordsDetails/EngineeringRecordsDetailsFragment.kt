@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.engineeringRecordsDetails
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -28,6 +29,7 @@ import com.neqabty.R
 import com.neqabty.databinding.EngineeringRecordsDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.entities.RegisteryUI
@@ -64,6 +66,12 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
     private var photosList: MutableList<PhotoUI> = mutableListOf<PhotoUI>()
 
     var selectedIndex = 0
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        showAds(Constants.AD_RECORDS)
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,

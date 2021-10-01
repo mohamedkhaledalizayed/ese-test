@@ -22,6 +22,7 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.GovernUI
+import com.neqabty.presentation.entities.LiteFollowersListUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -39,12 +40,12 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 
     lateinit var claimingViewModel: ClaimingViewModel
 
-    var medicalRenewalUI: MedicalRenewalUI? = MedicalRenewalUI()
+    var liteFollowersListUI: List<LiteFollowersListUI>? = listOf<LiteFollowersListUI>()
     var governsResultList: List<GovernUI>? = mutableListOf()
     var areasResultList: List<AreaUI>? = mutableListOf()
     var governID: Int = 0
     var areaID: Int = 0
-    lateinit var selectedFollower: MedicalRenewalUI.FollowerItem
+    lateinit var selectedFollower: LiteFollowersListUI
     private var isValid = false
     private var memberName = ""
 
@@ -115,11 +116,10 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             }
         }
 
-        if (state.medicalRenewalUI != null && state.governs != null && state.areas != null && isValid) {
+        if (state.liteFollowersListUI != null && state.governs != null && state.areas != null && isValid) {
             binding.svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
-            state.medicalRenewalUI?.let {
-                medicalRenewalUI = it.deepClone(it)
-                medicalRenewalUI?.followers?.add(0, MedicalRenewalUI.FollowerItem(PreferencesHelper(requireContext()).name, id = medicalRenewalUI?.contact?.benID?.toInt()))
+            state.liteFollowersListUI?.let {
+                liteFollowersListUI = it
             }
             state.governs?.let {
                 governsResultList = it
@@ -127,7 +127,7 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
             state.areas?.let {
                 areasResultList = it
             }
-            if (state.medicalRenewalUI != null && state.governs != null && state.areas != null){
+            if (state.liteFollowersListUI != null && state.governs != null && state.areas != null){
 //                state.medicalRenewalUI = null
                 initializeViews()
             }
@@ -190,11 +190,11 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
     }
 
     fun renderFollowers() {
-        binding.spFollower.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, medicalRenewalUI?.followers!!)
+        binding.spFollower.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, liteFollowersListUI!!)
         binding.spFollower.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                selectedFollower = parent.getItemAtPosition(position) as MedicalRenewalUI.FollowerItem
+                selectedFollower = parent.getItemAtPosition(position) as LiteFollowersListUI
                 edCardNumber.setText(selectedFollower.id.toString())
             }
         }

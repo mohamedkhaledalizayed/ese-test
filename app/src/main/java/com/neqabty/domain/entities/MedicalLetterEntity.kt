@@ -5,6 +5,8 @@ data class MedicalLetterEntity(
     var letters: List<LetterItem>? = null
 ) {
     data class LetterItem(
+        var id: String? = "",
+        var name: String? = "",
         var letterTypeName: String? = "",
         var isActive: Boolean? = true,
         var serviceProviderName: String? = "",

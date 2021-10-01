@@ -118,6 +118,11 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
+            android:id="@+id/openMedicalLettersInquiry"
+            app:destination="@id/medicalLettersInquiryFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openTrackShipment"
             app:destination="@id/trackShipmentFragment"
             app:popUpTo="@id/homeFragment"
@@ -197,6 +202,11 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
+            android:id="@+id/openMedicalLettersInquiry"
+            app:destination="@id/medicalLettersInquiryFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openTrackShipment"
             app:destination="@id/trackShipmentFragment"
             app:popUpTo="@id/homeFragment"
@@ -243,6 +253,13 @@
         android:name="com.neqabty.presentation.ui.medicalLetters.MedicalLettersFragment"
         android:label="@string/medical_letters_title"
         tools:layout="@layout/medical_letters_fragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicalLettersInquiryFragment"
+        android:name="com.neqabty.presentation.ui.inquireMedicalLetters.InquireMedicalLettersFragment"
+        android:label="@string/medical_letters_inquiry_title"
+        tools:layout="@layout/inquire_medical_letters_fragment">
     </fragment>
 
     <fragment

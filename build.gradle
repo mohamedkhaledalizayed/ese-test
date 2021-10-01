@@ -7,6 +7,7 @@ buildscript {
         classpath deps.kotlin.allopen
         classpath deps.navigation.safe_args_plugin
         classpath deps.gms
+        classpath deps.crashlytics
         classpath deps.hms.hms_agcp
         classpath deps.kotlinx
         // NOTE: Do not place your application dependencies here; they belong

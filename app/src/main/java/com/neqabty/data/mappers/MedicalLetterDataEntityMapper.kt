@@ -9,35 +9,12 @@ import javax.inject.Singleton
 @Singleton
 class MedicalLetterDataEntityMapper @Inject constructor() : Mapper<MedicalLetterData, MedicalLetterEntity>() {
 
+    val medicalLetterItemDataEntityMapper = MedicalLetterItemDataEntityMapper()
+
     override fun mapFrom(from: MedicalLetterData): MedicalLetterEntity {
-        val medicalLetterEntity = MedicalLetterEntity(
-                totalCount = from.totalCount
+        return MedicalLetterEntity(
+                totalCount = from.totalCount,
+                letters = from.letters?.map { letterItem -> medicalLetterItemDataEntityMapper.mapFrom(letterItem)}
         )
-
-        from.letters?.let {
-            var letters: List<MedicalLetterEntity.LetterItem> = it.map { letterItem ->
-                val letter = MedicalLetterEntity.LetterItem(
-                        letterTypeName = letterItem.letterTypeName,
-                        isActive = letterItem.isActive,
-                        letterDate = letterItem.letterDate,
-                        letterStatusName = letterItem.letterStatusName,
-                        serviceProviderName = letterItem.serviceProviderName,
-                        totalPrice = letterItem.totalPrice,
-                        creationType = letterItem.creationType
-                )
-
-                letterItem.letterProcedures?.let {
-                    var letterProcedures: List<MedicalLetterEntity.LetterProcedureItem> = it.map { procedureItem ->
-                        MedicalLetterEntity.LetterProcedureItem(letterProcedureName = procedureItem.letterProcedureName)
-                    }
-
-                letter.letterProcedures = letterProcedures
-                }
-
-                return@map letter
-            }
-            medicalLetterEntity.letters = letters
-        }
-        return medicalLetterEntity
     }
 }

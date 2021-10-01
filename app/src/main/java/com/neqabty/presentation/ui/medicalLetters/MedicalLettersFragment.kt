@@ -20,6 +20,7 @@ import com.neqabty.databinding.MedicalLettersFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.di.Injectable
+import com.neqabty.presentation.entities.LiteFollowersListUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -39,9 +40,9 @@ class MedicalLettersFragment : BaseFragment(), Injectable {
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    var medicalRenewalUI: MedicalRenewalUI? = MedicalRenewalUI()
+    var liteFollowersListUI: List<LiteFollowersListUI>? = listOf<LiteFollowersListUI>()
 
-    lateinit var selectedFollower: MedicalRenewalUI.FollowerItem
+    lateinit var selectedFollower: LiteFollowersListUI
 
     private var isLoading = true
     private var pageNumber = 0
@@ -90,13 +91,13 @@ class MedicalLettersFragment : BaseFragment(), Injectable {
         medicalLetterViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                medicalLetterViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
+                medicalLetterViewModel.validateUser(PreferencesHelper(requireContext()).user)
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
 
-        medicalLetterViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
+        medicalLetterViewModel.validateUser(PreferencesHelper(requireContext()).user)
     }
 
     private fun handleViewState(state: MedicalLettersViewState) {
@@ -114,17 +115,27 @@ class MedicalLettersFragment : BaseFragment(), Injectable {
             return
         }
 
-        state.medicalRenewalUI?.let {
-            medicalRenewalUI = it.deepClone(it)
-            medicalRenewalUI?.followers = medicalRenewalUI?.followers?.filter { it.lastMedYear != null && it.lastMedYear!!.toInt() >= 2021 }?.toMutableList()
-            if(medicalRenewalUI?.healthCareStatus == 3) medicalRenewalUI?.followers?.add(0, MedicalRenewalUI.FollowerItem(PreferencesHelper(requireContext()).name, id = medicalRenewalUI?.contact?.benID?.toInt()))
+        state.liteFollowersListUI?.let {
+            liteFollowersListUI = it
+            renderFollowers()
+            return
+        }
 
-            if(medicalRenewalUI?.followers?.size == 0 ) {
-                showAlert(getString(R.string.no_data_found)){navController().navigateUp()}
-            } else {
-                renderFollowers()
+        if (state.member != null) {
+            when (state.member?.code) {
+                0 -> {
+                    llSuperProgressbar.visibility = View.VISIBLE
+                    state.member = null
+                    medicalLetterViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
+                }
+                else -> {
+                    if (state.member?.message != null) showAlert(state.member?.message ?: getString(R.string.user_not_allowed)){navController().navigateUp()}
+                    state.member?.message = null
+                }
             }
         }
+
+
     }
 
     fun initializeViews() {
@@ -164,12 +175,12 @@ class MedicalLettersFragment : BaseFragment(), Injectable {
 //region
 
     fun renderFollowers() {
-        binding.spFollower.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, medicalRenewalUI?.followers!!)
+        binding.spFollower.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, liteFollowersListUI!!)
         binding.spFollower.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 binding.tvNoDataFound.visibility = View.GONE
-                selectedFollower = parent.getItemAtPosition(position) as MedicalRenewalUI.FollowerItem
+                selectedFollower = parent.getItemAtPosition(position) as LiteFollowersListUI
                 resetPagination()
                 loadMedicalLetters(0, itemsPerPage)
             }

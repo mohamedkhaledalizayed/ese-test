@@ -1,11 +1,15 @@
  package com.neqabty.presentation.ui.ads
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.presentation.entities.AdUI
@@ -27,33 +31,39 @@ import javax.inject.Inject
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    var sectionId: Int = 0
+    lateinit var adsList: ArrayList<AdUI>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ads_activity)
 
-        sectionId = intent.getIntExtra("sectionID" , 0)
+        adsList = intent.getParcelableArrayListExtra<AdUI>("adsList") as ArrayList<AdUI>
 
-        adsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(AdsViewModel::class.java)
-
-        adsViewModel.viewState.observe(this, Observer {
-            if (it != null) handleViewState(it)
-        })
-        adsViewModel.errorState.observe(this, Observer { error ->
-        })
-        adsViewModel.getAds(sectionId)
+        initializeViews()
+//        adsViewModel = ViewModelProviders.of(this, viewModelFactory)
+//                .get(AdsViewModel::class.java)
+//
+//        adsViewModel.viewState.observe(this, Observer {
+//            if (it != null) handleViewState(it)
+//        })
+//        adsViewModel.errorState.observe(this, Observer { error ->
+//            finish()
+//        })
+//        adsViewModel.getAds(sectionId)
     }
 
-    private fun handleViewState(state: AdsViewState) {
-        state.ad?.let {
-            initializeViews(it)
-        }
-    }
+    fun initializeViews() {
+        Glide.with(this).load(adsList[0].imgURL).listener(object : RequestListener<Drawable> {
+            override fun onLoadFailed(e: GlideException?, model: Any?, target: com.bumptech.glide.request.target.Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                initializeViews()
+                return false
+            }
 
-    fun initializeViews(ad: AdUI) {
-        Glide.with(this).load(ad.imgURL).into(ivImg)
+            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                clHolder.visibility = View.VISIBLE
+                return false
+            }
+        }).into(ivImg)
         ivClose.setOnClickListener {
             finish()
         }

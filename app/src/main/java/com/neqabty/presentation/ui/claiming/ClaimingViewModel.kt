@@ -5,7 +5,6 @@ import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.ClaimingValidationUI
-import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.mappers.*
 
 import java.io.File
@@ -18,14 +17,14 @@ class ClaimingViewModel @Inject constructor(
     val getAllProvidersTypes: GetAllProvidersTypes,
     val sendMedicalRequest: SendMedicalRequest,
     private val validateUserForClaiming: ValidateUserForClaiming,
-    private val getMedicalRenewalData: GetMedicalRenewalData
+    private val getLiteFollowersListData: GetLiteFollowersListData
 ) : BaseViewModel() {
     private val areaEntityUIMapper = AreaEntityUIMapper()
     private val governEntityUIMapper = GovernEntityUIMapper()
     private val providerTypeEntityUIMapper = ProviderTypeEntityUIMapper()
     private val providerEntityUIMapper = ProviderEntityUIMapper()
     private val claimingValidationEntityUIMapper = ClaimingValidationEntityUIMapper()
-    private val medicalRenewalEntityUIMapper = MedicalRenewalEntityUIMapper()
+    private val liteFollowersListEntityUIMapper = LiteFollowersListEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<ClaimingViewState> = MutableLiveData()
@@ -36,15 +35,14 @@ class ClaimingViewModel @Inject constructor(
 
     fun getAllContent1(mobileNumber: String, number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        val followersDisposable = getMedicalRenewalData.getMedicalRenewalData(mobileNumber, number)
-                .map {
+        val followersDisposable = getLiteFollowersListData.getLiteFollowersListData(number)
+                .flatMap {
                     it.let {
-                        medicalRenewalEntityUIMapper.mapFrom(it)
+                        liteFollowersListEntityUIMapper.observable(it)
                     }
                 }.subscribe(
                         {
-                            it.followers = it.followers?.filter {it.lastMedYear != null && it.lastMedYear!!.toInt() >= 2021}?.toMutableList()
-                            viewState.value = viewState.value?.copy(medicalRenewalUI = it)
+                            viewState.value = viewState.value?.copy(liteFollowersListUI = it)
                             onContent1Received()
                         },
                         {
@@ -79,7 +77,7 @@ class ClaimingViewModel @Inject constructor(
                         { errorState.value = handleError(it) }
                 )
 
-        viewState.value?.medicalRenewalUI?.let {
+        viewState.value?.liteFollowersListUI?.let {
             onContent1Received()
         } ?: addDisposable(followersDisposable)
 
@@ -194,7 +192,7 @@ class ClaimingViewModel @Inject constructor(
 
 
     private fun onContent1Received() {
-        if (viewState.value?.medicalRenewalUI != null && viewState.value?.governs != null && viewState.value?.areas != null)
+        if (viewState.value?.liteFollowersListUI != null && viewState.value?.governs != null && viewState.value?.areas != null)
             viewState.value = viewState.value?.copy(isLoading = false)
     }
 

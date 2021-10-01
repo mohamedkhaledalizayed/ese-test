@@ -1,5 +1,6 @@
 package com.neqabty.presentation.ui.trips
 
+import android.content.Context
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -15,6 +16,7 @@ import com.neqabty.R
 import com.neqabty.databinding.TripsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
@@ -34,6 +36,11 @@ class TripsFragment : BaseFragment(), Injectable {
 
     @Inject
     lateinit var appExecutors: AppExecutors
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        showAds(Constants.AD_TRIPS)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -401,8 +401,20 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetMedicalLetterByID(neqabtyRepository: NeqabtyRepository): GetMedicalLetterByID {
+        return GetMedicalLetterByID(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetAds(neqabtyRepository: NeqabtyRepository): GetAds {
         return GetAds(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetLiteFollowersListData(neqabtyRepository: NeqabtyRepository): GetLiteFollowersListData {
+        return GetLiteFollowersListData(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

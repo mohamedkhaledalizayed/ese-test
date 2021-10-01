@@ -1,5 +1,6 @@
 package com.neqabty.presentation.ui.chooseArea
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -42,6 +43,12 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
     var areasResultList: List<AreaUI>? = mutableListOf()
     var governID: Int = 0
     var areaID: Int = 0
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        showAds(Constants.AD_MEDICAL_DIRECTORY)
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,

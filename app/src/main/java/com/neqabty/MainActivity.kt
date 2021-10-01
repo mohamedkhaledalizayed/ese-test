@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         setJWT()
         checkRoot()
         startActivities()
+        loadAds()
 
         Constants.isFirebaseTokenUpdated.observe(this, Observer {
             if (it.isNotBlank()){
@@ -183,6 +184,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
 //region//
 
+    private fun loadAds(){
+        mainViewModel.getAds(Constants.AD_HOME)
+    }
     private fun getAppConfig(){
         mainViewModel.viewState.observe(this, Observer {
             it.appConfigUI?.let {
@@ -456,6 +460,17 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             }
         })
         listDataHeader.add(medicalLettersItem)
+
+        val medicalLettersInquiryItem = NavigationMenuItem(R.drawable.ic_menu_help, R.string.medical_letters_inquiry_title, {
+            if (PreferencesHelper(this).isRegistered)
+                navController().navigate(R.id.medicalLettersInquiryFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_LETTERS_INQUIRY)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        listDataHeader.add(medicalLettersInquiryItem)
 
         val pharmacyItem = NavigationMenuItem(R.drawable.ic_pharmacy_green, R.string.online_pharmacy_title, {
             if (PreferencesHelper(this).isRegistered)

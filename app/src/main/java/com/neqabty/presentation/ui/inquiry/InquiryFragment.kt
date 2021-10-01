@@ -1,5 +1,6 @@
 package com.neqabty.presentation.ui.inquiry
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.neqabty.R
 import com.neqabty.databinding.InquiryFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MemberUI
@@ -41,6 +43,12 @@ class InquiryFragment : BaseFragment(), Injectable {
     var servicesResultList: List<ServiceUI>? = mutableListOf()
     var serviceTypeID: Int = 0
     var serviceID: Int = 0
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        showAds(Constants.AD_PAYMENTS)
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,

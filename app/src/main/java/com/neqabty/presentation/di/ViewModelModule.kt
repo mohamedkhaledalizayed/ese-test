@@ -17,6 +17,7 @@ import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsI
 import com.neqabty.presentation.ui.favorites.FavoritesViewModel
 import com.neqabty.presentation.ui.forgetPassword.ForgetPasswordViewModel
 import com.neqabty.presentation.ui.home.HomeViewModel
+import com.neqabty.presentation.ui.inquireMedicalLetters.InquireMedicalLettersViewModel
 import com.neqabty.presentation.ui.inquiry.InquiryViewModel
 import com.neqabty.presentation.ui.inquiryDetails.InquiryDetailsViewModel
 import com.neqabty.presentation.ui.login.LoginViewModel
@@ -106,6 +107,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MedicalLettersViewModel::class)
     abstract fun bindMedicalLettersViewModel(medicalLettersViewModel: MedicalLettersViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InquireMedicalLettersViewModel::class)
+    abstract fun bindInquireMedicalLettersViewModel(medicalLettersViewModel: InquireMedicalLettersViewModel): ViewModel
 
     @Binds
     @IntoMap

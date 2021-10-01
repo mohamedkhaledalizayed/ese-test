@@ -35,6 +35,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tvApprovalNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="0.8"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:text="@{letter.id}"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvIsActive"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <TextView
             android:id="@+id/tvServiceProviderName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -46,7 +60,7 @@
             android:textSize="@dimen/text_size_small"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvIsActive"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+            app:layout_constraintTop_toBottomOf="@id/tvApprovalNumber" />
 
         <TextView
             android:id="@+id/tvIsActive"
@@ -98,7 +112,6 @@
             android:textSize="@dimen/text_size_small"
             android:textStyle="bold"
             android:gravity="center"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@id/rvLetterProcedures" />

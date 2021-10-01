@@ -31,6 +31,8 @@ versions.facebook = '[4,5)'
 versions.firebase_core = "16.0.3"
 versions.firebase_messaging = "17.3.0"
 versions.firebase_jobdispatcher = "0.8.5"
+versions.firebase_bom = "28.4.1"
+versions.crashlytics = "2.7.1"
 versions.gms = "4.0.1"
 versions.hms = "1.4.1.300"
 versions.hms_push = "5.1.1.301"
@@ -169,12 +171,18 @@ def firebase = [:]
 firebase.core = "com.google.firebase:firebase-core:$versions.firebase_core"
 firebase.messaging = "com.google.firebase:firebase-messaging:$versions.firebase_messaging"
 firebase.jobdispatcher = "com.firebase:firebase-jobdispatcher:$versions.firebase_jobdispatcher"
+firebase.bom = "com.google.firebase:firebase-bom:$versions.firebase_bom"
+firebase.crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
+firebase.analytics = "com.google.firebase:firebase-analytics-ktx"
 deps.firebase = firebase
 
 def viewpager = [:]
 viewpager.pager = "com.github.santalu:auto-viewpager:$versions.pager"
 viewpager.indicator = "com.romandanylyk:pageindicatorview:$versions.indicator"
 deps.viewpager = viewpager
+
+def crashlytics = "com.google.firebase:firebase-crashlytics-gradle:$versions.crashlytics"
+deps.crashlytics = crashlytics
 
 def gms = "com.google.gms:google-services:$versions.gms"
 deps.gms = gms
