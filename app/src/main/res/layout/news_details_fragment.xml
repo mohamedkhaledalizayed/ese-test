@@ -116,7 +116,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/text_size_large"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="@dimen/margin_horizontal_normal"
+                    android:layout_marginHorizontal="@dimen/margin_horizontal_normal"
                     app:layout_constraintTop_toBottomOf="@id/ivSource" />
 
                 <TextView
@@ -126,7 +126,7 @@
                     android:layout_marginTop="@dimen/margin_horizontal_normal"
                     android:text="@{Html.fromHtml(newsItem.desc)}"
                     android:justificationMode="inter_word"
-                    android:layout_marginStart="@dimen/margin_horizontal_normal"
+                    android:layout_marginHorizontal="@dimen/margin_horizontal_normal"
                     android:textSize="@dimen/text_size_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvTitle" />

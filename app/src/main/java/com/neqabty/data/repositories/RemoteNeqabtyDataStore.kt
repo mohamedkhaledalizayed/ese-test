@@ -2,6 +2,7 @@ package com.neqabty.data.repositories
 
 import com.neqabty.data.api.WebService
 import com.neqabty.data.api.requests.*
+import com.neqabty.data.entities.QuestionnaireVoteData
 import com.neqabty.data.mappers.*
 import com.neqabty.domain.NeqabtyDataStore
 import com.neqabty.domain.entities.*
@@ -18,57 +19,6 @@ import javax.inject.Singleton
 @Singleton
 
 class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private val api: WebService, @Named(DI.unAuthorized) private val unauthorizedApi: WebService) : NeqabtyDataStore {
-
-    override fun createCoronaRequest(
-            userNumber: String,
-            phone: String,
-            syndicateID: Int,
-            name: String,
-            type: String,
-            job: String,
-            work: String,
-            treatmentDestination: String,
-            treatmentDestinationAddress: String,
-            family: Int,
-            injury: String,
-            docsNumber: Int,
-            doc1: File?,
-            doc2: File?,
-            doc3: File?,
-            doc4: File?,
-            doc5: File?
-    ): Observable<Unit> {
-        var file1: MultipartBody.Part? = null
-        var file2: MultipartBody.Part? = null
-        var file3: MultipartBody.Part? = null
-        var file4: MultipartBody.Part? = null
-        var file5: MultipartBody.Part? = null
-
-        doc1?.let {
-            val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
-            file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
-        }
-        doc2?.let {
-            val doc2RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc2)
-            file2 = MultipartBody.Part.createFormData("doc2", doc2?.name, doc2RequestFile)
-        }
-        doc3?.let {
-            val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
-            file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
-        }
-        doc4?.let {
-            val doc4RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc4)
-            file4 = MultipartBody.Part.createFormData("doc4", doc4?.name, doc4RequestFile)
-        }
-        doc5?.let {
-            val doc5RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc5)
-            file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
-        }
-
-        return api.createCoronaRequest(CoronaRequest(userNumber, phone, syndicateID, name, type, job, work, treatmentDestination, treatmentDestinationAddress, family, injury, docsNumber), file1, file2, file3, file4, file5).map { result ->
-            result.data ?: Unit
-        }
-    }
 
     override fun createComplaint(
             name: String,
@@ -107,6 +57,20 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
         return api.sendComplaint(ComplaintRequest(name, phone, catId, subCatId, body, token, memberNumber, docsNumber), file1, file2, file3, file4).map { result ->
             result.data ?: Unit
+        }
+    }
+
+    private val questionnaireDataEntityMapper = QuestionnaireDataEntityMapper()
+    override fun getQuestionnaires(userNumber: String): Observable<QuestionnaireEntity> {
+        return api.getQuestionnaires(QuestionnaireRequest(userNumber)).flatMap { questionnaire ->
+            Observable.just(questionnaireDataEntityMapper.mapFrom(questionnaire.data!!))
+        }
+    }
+
+    private val questionnaireVoteDataEntityMapper = QuestionnaireVoteDataEntityMapper()
+    override fun voteQuestionnaire(userNumber: String, questionnaireId: Int, answerId: Int): Observable<QuestionnaireVoteEntity> {
+        return api.voteQuestionnaire(QuestionnaireVoteRequest(userNumber, questionnaireId,answerId)).flatMap { voteData ->
+            Observable.just(questionnaireVoteDataEntityMapper.mapFrom(voteData.data!!))
         }
     }
 

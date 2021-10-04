@@ -15,6 +15,7 @@ import com.neqabty.R
 import com.neqabty.databinding.WheelNewsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.news.NewsAdapter
 import com.neqabty.presentation.util.PreferencesHelper
@@ -87,6 +88,15 @@ class WheelNewsFragment : BaseFragment(), Injectable {
             bSeemore.visibility = View.VISIBLE
         }
 
+        binding.llQuestionnaire.setOnClickListener {
+            if (PreferencesHelper(requireContext()).isRegistered)
+                navController().navigate(R.id.questionnaireFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.QUESTIONNAIRE)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        }
         bSeemore.setOnClickListener { navController().navigate(R.id.newsFragment) }
 
     }

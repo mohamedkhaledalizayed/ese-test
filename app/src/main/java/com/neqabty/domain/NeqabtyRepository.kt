@@ -163,23 +163,12 @@ interface NeqabtyRepository {
                         doc2: File?,
                         doc3: File?,
                         doc4: File?): Observable<Unit>
-    fun createCoronaRequest(
+    fun getQuestionnaires(
+            userNumber: String
+    ): Observable<QuestionnaireEntity>
+    fun voteQuestionnaire(
             userNumber: String,
-            phone: String,
-            syndicateID: Int,
-            name: String,
-            type: String,
-            job: String,
-            work: String,
-            treatmentDestination: String,
-            treatmentDestinationAddress: String,
-            family: Int,
-            injury: String,
-            docsNumber: Int,
-            doc1: File?,
-            doc2: File?,
-            doc3: File?,
-            doc4: File?,
-            doc5: File?
-    ): Observable<Unit>
+            questionnaireId: Int,
+            answerId: Int
+    ): Observable<QuestionnaireVoteEntity>
 }

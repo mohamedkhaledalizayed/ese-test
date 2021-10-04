@@ -9,7 +9,7 @@ import com.neqabty.presentation.ui.changeUserMobile.ChangeUserMobileFragment
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaFragment
 import com.neqabty.presentation.ui.claiming.*
 import com.neqabty.presentation.ui.complaint.ComplaintFragment
-import com.neqabty.presentation.ui.corona.CoronaFragment
+import com.neqabty.presentation.ui.questionnaires.QuestionnaireFragment
 import com.neqabty.presentation.ui.engineeringRecordsDetails.EngineeringRecordsDetailsFragment
 import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryFragment
 import com.neqabty.presentation.ui.favorites.FavoritesFragment
@@ -269,5 +269,5 @@ abstract class FragmentBuildersModule {
     abstract fun contributeComplaintFragment(): ComplaintFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeCoronaFragment(): CoronaFragment
+    abstract fun contributeQuestionnaireFragment(): QuestionnaireFragment
 }

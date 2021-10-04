@@ -246,14 +246,9 @@ interface WebService {
             @Part doc3: MultipartBody.Part?,
             @Part doc4: MultipartBody.Part?): Observable<ApiResponse<Unit>>
 
-    @Multipart
-    @POST("api/v1/RecieveCovid19Rquest")
-    fun createCoronaRequest(
-            @Part("json_request") coronaRequest: CoronaRequest,
-            @Part doc1: MultipartBody.Part?,
-            @Part doc2: MultipartBody.Part?,
-            @Part doc3: MultipartBody.Part?,
-            @Part doc4: MultipartBody.Part?,
-            @Part doc5: MultipartBody.Part?
-    ): Observable<ApiResponse<Unit>>
+    @POST("api/v1/questionnaires")
+    fun getQuestionnaires(@Body questionnaireRequest: QuestionnaireRequest): Observable<ApiResponse<QuestionnaireData>>
+
+    @POST("api/v1/questionnaires/vote")
+    fun voteQuestionnaire(@Body questionnaireVoteRequest: QuestionnaireVoteRequest): Observable<ApiResponse<QuestionnaireVoteData>>
 }

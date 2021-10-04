@@ -184,8 +184,8 @@ class SignupFragment : BaseFragment(), Injectable {
                     SignupFragmentDirections.openComplaints()
             )
 
-            Constants.CORONA -> navController().navigate(
-                    SignupFragmentDirections.openCorona()
+            Constants.QUESTIONNAIRE -> navController().navigate(
+                    SignupFragmentDirections.openQuestionnaire()
             )
 
             Constants.MEDICAL_RENEW -> navController().navigate(

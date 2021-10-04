@@ -133,13 +133,13 @@ open class BaseFragment : Fragment() {
     }
 
     fun showAds(sectionID: Int){
-        if(Constants.adsList.value == null){
-            Constants.adsList.observe(this.requireActivity(), Observer {
-                openAdsActivity(sectionID)
-            })
-        }else{
+        Constants.adsList.value?.let {
             openAdsActivity(sectionID)
+            return
         }
+        Constants.adsList.observe(this.requireActivity(), Observer {
+            openAdsActivity(sectionID)
+        })
     }
 
 

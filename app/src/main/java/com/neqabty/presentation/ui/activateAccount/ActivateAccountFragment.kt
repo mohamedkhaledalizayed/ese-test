@@ -128,8 +128,8 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
                         ActivateAccountFragmentDirections.openComplaints()
                 )
 
-                Constants.CORONA -> navController().navigate(
-                        ActivateAccountFragmentDirections.openCorona()
+                Constants.QUESTIONNAIRE -> navController().navigate(
+                        ActivateAccountFragmentDirections.openQuestionnaire()
                 )
 
                 Constants.MEDICAL_RENEW -> navController().navigate(

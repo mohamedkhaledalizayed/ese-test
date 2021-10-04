@@ -14,27 +14,6 @@ class NeqabtyRepositoryImpl @Inject constructor(
         private val cachedDataStore: CachedNeqabtyDataStore,
         private val remoteDataStore: RemoteNeqabtyDataStore
 ) : NeqabtyRepository {
-    override fun createCoronaRequest(
-            userNumber: String,
-            phone: String,
-            syndicateID: Int,
-            name: String,
-            type: String,
-            job: String,
-            work: String,
-            treatmentDestination: String,
-            treatmentDestinationAddress: String,
-            family: Int,
-            injury: String,
-            docsNumber: Int,
-            doc1: File?,
-            doc2: File?,
-            doc3: File?,
-            doc4: File?,
-            doc5: File?
-    ): Observable<Unit> {
-        return remoteDataStore.createCoronaRequest(userNumber, phone, syndicateID, name, type, job, work, treatmentDestination, treatmentDestinationAddress, family, injury, docsNumber, doc1, doc2, doc3, doc4, doc5)
-    }
 
     override fun createComplaint(
             name: String,
@@ -51,6 +30,14 @@ class NeqabtyRepositoryImpl @Inject constructor(
             doc4: File?
     ): Observable<Unit> {
         return remoteDataStore.createComplaint(name, phone, catId, subCatId, body, token, memberNumber,docsNumber, doc1, doc2, doc3, doc4)
+    }
+
+    override fun getQuestionnaires(userNumber: String): Observable<QuestionnaireEntity> {
+        return remoteDataStore.getQuestionnaires(userNumber)
+    }
+
+    override fun voteQuestionnaire(userNumber: String, questionnaireId: Int, answerId: Int): Observable<QuestionnaireVoteEntity> {
+        return remoteDataStore.voteQuestionnaire(userNumber, questionnaireId, answerId)
     }
 
     override fun getComplaintTypes(): Observable<List<ComplaintTypeEntity>> {

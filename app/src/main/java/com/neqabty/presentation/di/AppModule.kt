@@ -491,8 +491,14 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideCreateCoronaRequest(neqabtyRepository: NeqabtyRepository): CreateCoronaRequest {
-        return CreateCoronaRequest(ASyncTransformer(), neqabtyRepository)
+    fun provideGetQuestionnaires(neqabtyRepository: NeqabtyRepository): GetQuestionnaires {
+        return GetQuestionnaires(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideVoteQuestionnaire(neqabtyRepository: NeqabtyRepository): VoteQuestionnaire {
+        return VoteQuestionnaire(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

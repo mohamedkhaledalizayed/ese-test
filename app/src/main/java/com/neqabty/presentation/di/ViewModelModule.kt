@@ -11,7 +11,7 @@ import com.neqabty.presentation.ui.changeUserMobile.ChangeUserMobileViewModel
 import com.neqabty.presentation.ui.chooseArea.ChooseAreaViewModel
 import com.neqabty.presentation.ui.claiming.ClaimingViewModel
 import com.neqabty.presentation.ui.complaint.ComplaintViewModel
-import com.neqabty.presentation.ui.corona.CoronaViewModel
+import com.neqabty.presentation.ui.questionnaires.QuestionnaireViewModel
 import com.neqabty.presentation.ui.engineeringRecordsDetails.EngineeringRecordsDetailsViewModel
 import com.neqabty.presentation.ui.engineeringRecordsInquiry.EngineeringRecordsInquiryViewModel
 import com.neqabty.presentation.ui.favorites.FavoritesViewModel
@@ -274,8 +274,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(CoronaViewModel::class)
-    abstract fun bindCoronaViewModel(coronaViewModel: CoronaViewModel): ViewModel
+    @ViewModelKey(QuestionnaireViewModel::class)
+    abstract fun bindQuestionnaireViewModel(questionnaireViewModel: QuestionnaireViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: NeqabtyViewModelFactory): ViewModelProvider.Factory

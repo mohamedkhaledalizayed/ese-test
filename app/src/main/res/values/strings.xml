@@ -212,7 +212,6 @@
     <string name="help_title">مساعدة</string>
     <string name="logout_title">تسجيل خروج</string>
     <string name="notifications_title">الأشعارات</string>
-    <string name="corona_title">بيانات المهندس</string>
 
     <string name="wheel_news">أخبارنا</string>
     <string name="wheel_trips">الرحلات</string>
@@ -520,20 +519,8 @@
     <string name="complaint_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
 
 
-    <string name="corona_desc">بيانات المهندسين المصابين أو المتضررين بفيروس كورونا</string>
-    <string name="corona_type_one">مصاب اصابة ايجابية</string>
-    <string name="corona_job">الوظيفة</string>
-    <string name="corona_work">جهة العمل</string>
-    <string name="corona_medication">جهة العلاج</string>
-    <string name="corona_quarantine">عنوان جهة العلاج العزل</string>
-    <string name="corona_imgs">إضافة صورة التحليل</string>
-
-    <string name="corona_type_two">متضرر</string>
-    <string name="corona_family">عدد افراد الأسرة</string>
-    <string name="corona_damage_type">نوع ووصف الضرر</string>
-    <string name="corona_docs">إضافة مستندات الحالة</string>
-
-    <string name="corona_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في أقرب وقت</string>
+    <string name="questionnaire_title">استطلاع رأي</string>
+    <string name="questionnaire_answered">لقد تمت الإجابة على هذا الاستطلاع من قبل</string>
 
 
     <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>

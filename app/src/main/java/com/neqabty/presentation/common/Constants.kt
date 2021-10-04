@@ -29,7 +29,7 @@ object Constants {
     var RECORDS = 3
     var UPDATE_DATA = 4
     var COMPLAINTS = 5
-    var CORONA = 6
+    var QUESTIONNAIRE = 6
     var MEDICAL_RENEW = 7
     var ONLINE_PHARMACY = 8
     var TRACK_SHIPMENT = 9
@@ -42,7 +42,7 @@ object Constants {
     var AD_TRIPS = 2
     var AD_RECORDS = 3
     var AD_COMPLAINTS = 4
-    var AD_COVID = 5
+    var AD_QUESTIONNAIRE = 5
     var AD_HOME = 6
     var AD_MEDICAL_DIRECTORY = 7
     var AD_ONLINE_PHARMACY = 8
