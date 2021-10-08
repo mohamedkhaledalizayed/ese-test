@@ -22,7 +22,9 @@ class QuestionnaireEntityUIMapper @Inject constructor() : Mapper<QuestionnaireEn
                 return@map QuestionnaireUI.Answer(
                         id = answerItem.id,
                         answer = answerItem.answer,
-                        answer_count = answerItem.answer_count
+                        answer_count = answerItem.answer_count!!,
+                        color = 0,
+                        total_count = questionnaireUI.total_votings
                 )
             }
             questionnaireUI.answers = answers

@@ -10,6 +10,8 @@ data class QuestionnaireUI(
     data class Answer(
             var id: Int = 0,
             var answer: String?,
-            var answer_count: Int?
+            var answer_count: Int = 0,
+            var total_count: Int,
+            var color: Int,
     )
 }

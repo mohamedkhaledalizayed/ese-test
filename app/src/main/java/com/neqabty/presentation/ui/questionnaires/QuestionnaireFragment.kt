@@ -10,12 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.github.mikephil.charting.animation.Easing
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.QuestionnaireFragmentBinding
@@ -116,10 +122,108 @@ class QuestionnaireFragment : BaseFragment(), Injectable {
             binding.llHolder.visibility = if (state.isLoading) View.GONE else View.VISIBLE
             questionnaireUI = state.questionnaire!!
             if(questionnaireUI.is_voted)
-                showAlert(getString(R.string.questionnaire_answered)){navController().navigateUp()}
+                showStatistics()
             else
                 initializeViews()
         }
+    }
+
+    private fun showStatistics(){
+        binding.svContent.visibility = View.GONE
+        binding.svResult.visibility = View.VISIBLE
+
+        binding.bDetails.setOnClickListener {
+            val fragmentManager = this@QuestionnaireFragment.fragmentManager
+            val questionnaireQuestionFragment = QuestionnaireQuestionFragment()
+            val bundle = Bundle()
+            bundle.putString("question", questionnaireUI.question)
+            questionnaireQuestionFragment.arguments = bundle
+            questionnaireQuestionFragment.setTargetFragment(this, 255)
+            questionnaireQuestionFragment.show(requireFragmentManager(), "question")
+        }
+
+        configurePieChart()
+        loadPieChartData(questionnaireUI.total_votings, questionnaireUI.answers!!)
+
+    }
+    private fun configurePieChart() {
+        binding.pcStatsChart.isDrawHoleEnabled = true
+        binding.pcStatsChart.isClickable = false
+        binding.pcStatsChart.setTouchEnabled(false)
+        binding.pcStatsChart.setUsePercentValues(false)
+        binding.pcStatsChart.setDrawEntryLabels(false)
+        binding.pcStatsChart.setDrawCenterText(false)
+        binding.pcStatsChart.setDrawRoundedSlices(false)
+        binding.pcStatsChart.setDrawMarkers(false)
+        binding.pcStatsChart.description.isEnabled = false
+
+        val l: Legend = binding.pcStatsChart.legend
+        l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+        l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+        l.orientation = Legend.LegendOrientation.VERTICAL
+        l.setDrawInside(false)
+        l.isEnabled = false
+        l.textSize = 20f
+    }
+
+    private fun loadPieChartData(totalCount: Int, answers: List<QuestionnaireUI.Answer>) {
+        val entries: ArrayList<PieEntry> = ArrayList()
+        var max = 0f
+        var highestCandidate = ""
+        for (item in answers) {
+            if ((item.answer_count!!.toFloat() / totalCount.toFloat()) > max) {
+                max = (item.answer_count!!.toFloat() / totalCount.toFloat())
+                highestCandidate = Math.round(max * 100).toString() + "%" + "\n" + item.answer
+            }
+            entries.add(
+                    PieEntry(
+                            (item.answer_count!!.toFloat() / totalCount.toFloat()),
+                            item.answer_count!!
+                    )
+            )
+        }
+        binding.tvResult.text = highestCandidate
+        binding.pcStatsChart.centerText = highestCandidate
+
+        val colors: ArrayList<Int> = ArrayList()
+        var colorIndex = 0
+
+        for (index in answers.indices){
+            var color = ContextCompat.getColor(requireContext(), R.color.stats_green)
+            when (colorIndex) {
+                0 -> {
+                    color = ContextCompat.getColor(requireContext(), R.color.stats_green)
+                    colorIndex++
+                }
+                1 -> {
+                    color = ContextCompat.getColor(requireContext(), R.color.stats_blue)
+                    colorIndex++
+                }
+                2 -> {
+                    color = ContextCompat.getColor(requireContext(), R.color.stats_orange)
+                    colorIndex++
+                }
+                3 -> {
+                    color = ContextCompat.getColor(requireContext(), R.color.stats_yellow)
+                    colorIndex = 0
+                }
+            }
+            colors.add(color)
+            answers.get(index).color = color
+        }
+
+        val dataSet = PieDataSet(entries, "results")
+        dataSet.colors = colors
+
+        val data = PieData(dataSet)
+        data.setDrawValues(false)
+        binding.pcStatsChart.data = data
+        binding.pcStatsChart.invalidate()
+        binding.pcStatsChart.animateY(1400, Easing.EaseInOutQuad)
+
+        binding.rvStats.adapter =
+                QuestionnaireStatsAdapter(dataBindingComponent , appExecutors){}
+        (binding.rvStats.adapter as QuestionnaireStatsAdapter).submitList(questionnaireUI.answers)
     }
 
     //region

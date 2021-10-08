@@ -44,6 +44,7 @@ import com.neqabty.presentation.ui.oldsignup.SignupStep3Fragment
 import com.neqabty.presentation.ui.onlinePharmacy.OnlinePharmacyFragment
 import com.neqabty.presentation.ui.payment.PaymentFragment
 import com.neqabty.presentation.ui.phones.PhonesFragment
+import com.neqabty.presentation.ui.questionnaires.QuestionnaireQuestionFragment
 import com.neqabty.presentation.ui.search.SearchFragment
 import com.neqabty.presentation.ui.settings.SettingsFragment
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesFragment
@@ -270,4 +271,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeQuestionnaireFragment(): QuestionnaireFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeQuestionnaireQuestionFragment(): QuestionnaireQuestionFragment
 }

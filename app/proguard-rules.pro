@@ -29,6 +29,7 @@
 -keep class me.cowpay.model.* {*;}
 -keepnames class * extends android.os.Parcelable
 -keep class com.neqabty.data.entities.* { <fields>; }
+-keep class com.neqabty.data.api.Request { <fields>; }
 
 -keep class com.huawei.hianalytics.*{*;}
 -keep class com.huawei.updatesdk.*{*;}

@@ -17,17 +17,18 @@
         android:shape="ring"
         app:cardCornerRadius="@dimen/round_radius"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardBackgroundColor="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="@dimen/margin_horizontal_small"
+        app:cardBackgroundColor="@color/green"
+        android:padding="@dimen/margin_horizontal_normal"
         android:elevation="@dimen/elevation_level_one">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/corona_gradient_bg"
-        android:padding="@dimen/margin_horizontal_normal">
+        android:padding="@dimen/margin_horizontal_normal"
+        android:background="@drawable/rounded_green_bg">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +39,8 @@
             app:layout_constraintStart_toEndOf="@id/llTitle"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="@dimen/margin_horizontal_small">
 
                 <ImageView
                     android:id="@+id/ivLogo"
@@ -47,8 +49,8 @@
                     android:adjustViewBounds="false"
                     android:cropToPadding="false"
                     android:scaleType="fitCenter"
-                    android:src="@android:drawable/stat_sys_warning"
-                    app:tint="@android:color/holo_red_dark"/>
+                    android:src="@drawable/poll"
+                    app:tint="@color/white"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
@@ -58,7 +60,7 @@
             android:layout_marginEnd="@dimen/margin_horizontal_small"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_weight="6"
             app:layout_constraintEnd_toStartOf="@id/clLogo"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -71,8 +73,8 @@
                 android:maxLines="2"
                 android:textDirection="anyRtl"
                 android:textStyle="bold"
-                android:text="@string/corona_item_title"
-                android:textColor="@color/red"
+                android:text="@string/questionnaire_title"
+                android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
 
             <TextView
@@ -82,9 +84,9 @@
                 android:ellipsize="end"
                 android:lineSpacingMultiplier="0.8"
                 android:maxLines="2"
-                android:textColor="@color/colorPrimary"
-                android:text="@string/corona_item_description"
-                android:textSize="@dimen/text_size_medium" />
+                android:textColor="@color/white"
+                android:text="@string/answer_questionnaire"
+                android:textSize="@dimen/text_size_small" />
 
         </LinearLayout>
 

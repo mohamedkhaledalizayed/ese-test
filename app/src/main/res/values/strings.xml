@@ -14,10 +14,6 @@
     <string name="intro_four">يمكنك متابعة كافة الأخبار والتنبيهات الخاصة بالنقابة أولاً بأول</string>
     <string name="intro_five">كما يمكنك التعرف علي جميع الرحلات المقدمة من النقابة مع إمكانية الحجز والسداد</string>
 
-
-    <string name="corona_item_title">COVID-19 هام للسادة المهندسين </string>
-    <string name="corona_item_description">اذا كنت أحد المصابين بالفيروس او أحد المتضررين برجاء ملي البيانات الخاصة بكم</string>
-
     <string name="phoneNumber">رقم الجوال</string>
     <string name="password">كلمة المرور</string>
     <string name="forgetPassword"><u>نسيت كلمة المرور</u></string>
@@ -263,6 +259,7 @@
     <string name="pick_photo_trips">من فضلك أرفق صور المستندات المطلوبة</string>
     <string name="ok_btn">تأكيد</string>
     <string name="cancel_btn">إلغاء</string>
+    <string name="close">إغلاق</string>
 
     <string name="address_title">العنوان: </string>
     <string name="address">العنوان</string>
@@ -520,7 +517,9 @@
 
 
     <string name="questionnaire_title">استطلاع رأي</string>
+    <string name="answer_questionnaire">للمشاركة في استطلاع الرأي قم بالضغط على الرسالة</string>
     <string name="questionnaire_answered">لقد تمت الإجابة على هذا الاستطلاع من قبل</string>
+    <string name="questionnaire_question">عرض السؤال</string>
 
 
     <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
