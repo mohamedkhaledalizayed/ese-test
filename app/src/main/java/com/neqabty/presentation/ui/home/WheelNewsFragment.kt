@@ -71,8 +71,9 @@ class WheelNewsFragment : BaseFragment(), Injectable {
         })
         homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
 
+        binding.clQuestionnaire.visibility = if(Constants.hasQuestionnaire.value == true) View.VISIBLE else View.GONE
         Constants.hasQuestionnaire.observe(this, Observer {
-            binding.llQuestionnaire.visibility = if(it) View.VISIBLE else View.GONE
+            binding.clQuestionnaire.visibility = if(it == true) View.VISIBLE else View.GONE
         })
     }
 
@@ -92,7 +93,7 @@ class WheelNewsFragment : BaseFragment(), Injectable {
             bSeemore.visibility = View.VISIBLE
         }
 
-        binding.llQuestionnaire.setOnClickListener {
+        binding.clQuestionnaire.setOnClickListener {
             if (PreferencesHelper(requireContext()).isRegistered)
                 navController().navigate(R.id.questionnaireFragment)
             else {

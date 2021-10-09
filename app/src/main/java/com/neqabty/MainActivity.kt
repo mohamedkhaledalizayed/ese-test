@@ -470,7 +470,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 navController().navigate(R.id.signupFragment, bundle)
             }
         })
-        listDataHeader.add(medicalLettersInquiryItem)
+//        listDataHeader.add(medicalLettersInquiryItem)
 
         val pharmacyItem = NavigationMenuItem(R.drawable.ic_pharmacy_green, R.string.online_pharmacy_title, {
             if (PreferencesHelper(this).isRegistered)
