@@ -13,7 +13,8 @@ class AppConfigDataEntityMapper @Inject constructor() : Mapper<AppConfigData, Ap
         return AppConfigEntity(
                 appVersion = from.appVersion,
                 healthCareStatus = AppConfigEntity.ConfigStatus(from.healthCareStatus.status, from.healthCareStatus.statusMsg),
-                maintenanceStatus = AppConfigEntity.ConfigStatus(from.maintenanceStatus.status, from.maintenanceStatus.statusMsg)
+                maintenanceStatus = AppConfigEntity.ConfigStatus(from.maintenanceStatus.status, from.maintenanceStatus.statusMsg),
+                hasQuestionnaire = from.hasQuestionnaire
         )
     }
 }

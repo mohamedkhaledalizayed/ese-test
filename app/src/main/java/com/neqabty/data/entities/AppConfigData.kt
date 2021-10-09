@@ -9,7 +9,9 @@ data class AppConfigData(
         @field:SerializedName("medicalPayment")
         var healthCareStatus: ConfigStatus,
         @field:SerializedName("maintenance")
-        var maintenanceStatus: ConfigStatus
+        var maintenanceStatus: ConfigStatus,
+        @field:SerializedName("questionnaires")
+        var hasQuestionnaire: Boolean = false
 ) : Response() {
 
     data class ConfigStatus(

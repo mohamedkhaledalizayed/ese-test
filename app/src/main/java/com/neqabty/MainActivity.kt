@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         setJWT()
         checkRoot()
         startActivities()
-        loadAds()
+//        loadAds()
 
         Constants.isFirebaseTokenUpdated.observe(this, Observer {
             if (it.isNotBlank()){

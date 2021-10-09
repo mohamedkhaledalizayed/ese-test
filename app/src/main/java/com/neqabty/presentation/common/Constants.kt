@@ -15,6 +15,7 @@ object Constants {
 
     var isHealthCareProjectEnabled: Boolean = false
     var healthCareProjectStatusMsg: String = ""
+    var hasQuestionnaire: MutableLiveData<Boolean> = MutableLiveData(false)
 
     var CALL_CENTER = "0235317300"
 

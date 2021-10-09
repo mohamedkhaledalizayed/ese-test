@@ -70,6 +70,10 @@ class WheelNewsFragment : BaseFragment(), Injectable {
             }, message = error?.message)
         })
         homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
+
+        Constants.hasQuestionnaire.observe(this, Observer {
+            binding.llQuestionnaire.visibility = if(it) View.VISIBLE else View.GONE
+        })
     }
 
     private fun handleViewState(state: HomeViewState) {

@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="@dimen/margin_horizontal_small"
-        app:cardBackgroundColor="@color/green"
+        app:cardBackgroundColor="@color/dark_green"
         android:padding="@dimen/margin_horizontal_normal"
         android:elevation="@dimen/elevation_level_one">
 
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_horizontal_normal"
-        android:background="@drawable/rounded_green_bg">
+        android:background="@drawable/rounded_dark_green_bg">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -84,6 +84,7 @@
                 android:ellipsize="end"
                 android:lineSpacingMultiplier="0.8"
                 android:maxLines="2"
+                android:visibility="visible"
                 android:textColor="@color/white"
                 android:text="@string/answer_questionnaire"
                 android:textSize="@dimen/text_size_small" />

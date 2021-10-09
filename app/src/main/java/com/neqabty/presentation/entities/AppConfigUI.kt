@@ -3,7 +3,8 @@ package com.neqabty.presentation.entities
 data class AppConfigUI(
         var appVersion: String,
         var healthCareStatus: ConfigStatus,
-        var maintenanceStatus: ConfigStatus
+        var maintenanceStatus: ConfigStatus,
+        var hasQuestionnaire: Boolean = false
 ) {
 
     data class ConfigStatus(
