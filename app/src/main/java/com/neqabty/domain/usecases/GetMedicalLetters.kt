@@ -17,15 +17,17 @@ class GetMedicalLetters @Inject constructor(
         private const val PARAM_END = "param:end"
         private const val PARAM_ORDER_BY = "param:orderBy"
         private const val PARAM_DIR = "param:dir"
+        private const val PARAM_MOBILE_NUMBER = "param:mobileNumber"
     }
 
-    fun getMedicalLetters(benID: String, start: Int, end: Int, orderBy: String, dir: String): Observable<MedicalLetterEntity> {
+    fun getMedicalLetters(benID: String, start: Int, end: Int, orderBy: String, dir: String, mobileNumber: String): Observable<MedicalLetterEntity> {
         val data = HashMap<String, Any>()
         data[PARAM_BEN_ID] = benID
         data[PARAM_START] = start
         data[PARAM_END] = end
         data[PARAM_ORDER_BY] = orderBy
         data[PARAM_DIR] = dir
+        data[PARAM_MOBILE_NUMBER] = mobileNumber
         return observable(data)
     }
 
@@ -35,6 +37,7 @@ class GetMedicalLetters @Inject constructor(
         val end = data?.get(PARAM_END) as Int
         val orderBy = data?.get(PARAM_ORDER_BY) as String
         val dir = data?.get(PARAM_DIR) as String
-        return neqabtyRepository.getMedicalLetters(benID, start,end,orderBy,dir)
+        val mobileNumber = data?.get(PARAM_MOBILE_NUMBER) as String
+        return neqabtyRepository.getMedicalLetters(mobileNumber, benID, start,end,orderBy,dir)
     }
 }

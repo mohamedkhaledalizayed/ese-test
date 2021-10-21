@@ -55,7 +55,7 @@ class MedicalLettersViewModel @Inject constructor(private val validateUserForCla
 
     fun getMedicalRenewalData(mobileNumber: String, number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(getLiteFollowersListData.getLiteFollowersListData(number)
+        addDisposable(getLiteFollowersListData.getLiteFollowersListData(number, mobileNumber)
                 .flatMap {
                     it.let {
                         liteFollowersListEntityUIMapper.observable(it)
@@ -80,9 +80,9 @@ class MedicalLettersViewModel @Inject constructor(private val validateUserForCla
         viewState.value = newViewState
     }
 
-    fun getMedicalLetters(benID: String, start: Int, end: Int, orderBy: String = "BenId", dir: String = "asc") {
+    fun getMedicalLetters(benID: String, start: Int, end: Int, orderBy: String = "BenId", dir: String = "asc", mobileNumber: String) {
         if(start == 0) viewState.value?.medicalLetterUI?.letters?.clear()
-        addDisposable(getMedicalLetters.getMedicalLetters(benID, start, end, orderBy, dir)
+        addDisposable(getMedicalLetters.getMedicalLetters(benID, start, end, orderBy, dir, mobileNumber)
                 .flatMap {
                     it.let {
                         medicalLettersEntityUIMapper.observable(it)

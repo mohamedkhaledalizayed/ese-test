@@ -48,20 +48,20 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getComplaintSubTypes(id)
     }
 
-    override fun getMedicalLetters(benID: String, start: Int, end: Int, orderBy: String, dir: String): Observable<MedicalLetterEntity> {
-        return remoteDataStore.getMedicalLetters(benID, start, end, orderBy, dir)
+    override fun getMedicalLetters(mobileNumber: String, benID: String, start: Int, end: Int, orderBy: String, dir: String): Observable<MedicalLetterEntity> {
+        return remoteDataStore.getMedicalLetters(mobileNumber, benID, start, end, orderBy, dir)
     }
 
-    override fun getMedicalLetterByID(id: String): Observable<MedicalLetterEntity.LetterItem> {
-        return remoteDataStore.getMedicalLetterByID(id)
+    override fun getMedicalLetterByID(id: String, mobileNumber: String): Observable<MedicalLetterEntity.LetterItem> {
+        return remoteDataStore.getMedicalLetterByID(id, mobileNumber)
     }
 
     override fun getAds(sectionId: Int): Observable<List<AdEntity>> {
         return remoteDataStore.getAds(sectionId)
     }
 
-    override fun getLiteFollowersListData(userNumber: String): Observable<List<LiteFollowersListEntity>> {
-        return remoteDataStore.getLiteFollowersListData(userNumber)
+    override fun getLiteFollowersListData(userNumber: String, mobileNumber: String): Observable<List<LiteFollowersListEntity>> {
+        return remoteDataStore.getLiteFollowersListData(userNumber, mobileNumber)
     }
 
     override fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity> {

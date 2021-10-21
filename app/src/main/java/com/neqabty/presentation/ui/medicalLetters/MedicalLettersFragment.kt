@@ -170,7 +170,7 @@ class MedicalLettersFragment : BaseFragment(), Injectable {
 
     fun loadMedicalLetters(start: Int = 0, end: Int = 0){
         llSuperProgressbar.visibility = View.VISIBLE
-        medicalLetterViewModel.getMedicalLetters(selectedFollower.id.toString(), start, end)
+        medicalLetterViewModel.getMedicalLetters(selectedFollower.id.toString(), start, end, mobileNumber = PreferencesHelper(requireContext()).mobile)
     }
 //region
 

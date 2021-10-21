@@ -283,16 +283,16 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
 
     private val medicalLetterDataEntityMapper = MedicalLetterDataEntityMapper()
 
-    override fun getMedicalLetters(benID: String, start: Int, end: Int, orderBy: String, dir: String): Observable<MedicalLetterEntity> {
-        return api.getMedicalLetters(benID, start, end, orderBy, dir).flatMap { letterInfo ->
+    override fun getMedicalLetters(mobileNumber: String, benID: String, start: Int, end: Int, orderBy: String, dir: String): Observable<MedicalLetterEntity> {
+        return api.getMedicalLetters(mobileNumber, benID, start, end, orderBy, dir).flatMap { letterInfo ->
             Observable.just(medicalLetterDataEntityMapper.mapFrom(letterInfo))
         }
     }
 
     private val medicalLetterItemDataEntityMapper = MedicalLetterItemDataEntityMapper()
 
-    override fun getMedicalLetterByID(id: String): Observable<MedicalLetterEntity.LetterItem> {
-        return api.getMedicalLetterByID(id).flatMap { letterItemInfo ->
+    override fun getMedicalLetterByID(id: String, mobileNumber: String): Observable<MedicalLetterEntity.LetterItem> {
+        return api.getMedicalLetterByID(id, mobileNumber).flatMap { letterItemInfo ->
             Observable.just(medicalLetterItemDataEntityMapper.mapFrom(letterItemInfo))
         }
     }
@@ -307,8 +307,8 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
 
     private val liteFollowersListDataEntityMapper = LiteFollowersListDataEntityMapper()
 
-    override fun getLiteFollowersListData(userNumber: String): Observable<List<LiteFollowersListEntity>> {
-        return api.getLiteFollowersList(userNumber).map { follower ->
+    override fun getLiteFollowersListData(mobileNumber: String, userNumber: String): Observable<List<LiteFollowersListEntity>> {
+        return api.getLiteFollowersList(mobileNumber, userNumber).map { follower ->
             follower.map { liteFollowersListDataEntityMapper.mapFrom(it) }
         }
     }
@@ -316,7 +316,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     private val medicalRenewalDataEntityMapper = MedicalRenewalDataEntityMapper()
 
     override fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity> {
-        return api.getMedicalRenewData(userNumber).flatMap { renewalInfo ->
+        return api.getMedicalRenewData(mobileNumber, userNumber).flatMap { renewalInfo ->
             Observable.just(medicalRenewalDataEntityMapper.mapFrom(renewalInfo))
         }
     }
@@ -324,7 +324,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     private val medicalRenewalPaymentDataEntityMapper = MedicalRenewalPaymentDataEntityMapper()
 
     override fun inquireMedicalRenewalPayment(isInquire: Boolean, mobileNumber: String, userNumber: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
-        return if(isInquire) api.inquireHealthCare(userNumber).flatMap { renewalPaymentInfo ->
+        return if(isInquire) api.inquireHealthCare(mobileNumber, userNumber).flatMap { renewalPaymentInfo ->
             Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
         } else api.getMedicalRenewPaymentData(mobileNumber, userNumber, locationType, address, mobile).flatMap { renewalPaymentInfo ->
             Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo))
