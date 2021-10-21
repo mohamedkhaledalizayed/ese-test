@@ -16,7 +16,7 @@ class GetMedicalLetterByID @Inject constructor(
         private const val PARAM_MOBILE_NUMBER = "param:mobileNumber"
     }
 
-    fun getMedicalLetterByID(id: String, mobileNumber: String): Observable<MedicalLetterEntity.LetterItem> {
+    fun getMedicalLetterByID(mobileNumber: String, id: String): Observable<MedicalLetterEntity.LetterItem> {
         val data = HashMap<String, Any>()
         data[PARAM_ID] = id
         data[PARAM_MOBILE_NUMBER] = mobileNumber
@@ -26,6 +26,6 @@ class GetMedicalLetterByID @Inject constructor(
     override fun createObservable(data: Map<String, Any>?): Observable<MedicalLetterEntity.LetterItem> {
         val id = data?.get(PARAM_ID) as String
         val mobileNumber = data?.get(PARAM_MOBILE_NUMBER) as String
-        return neqabtyRepository.getMedicalLetterByID(id, mobileNumber)
+        return neqabtyRepository.getMedicalLetterByID(mobileNumber, id)
     }
 }

@@ -55,7 +55,7 @@ class MedicalLettersViewModel @Inject constructor(private val validateUserForCla
 
     fun getMedicalRenewalData(mobileNumber: String, number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(getLiteFollowersListData.getLiteFollowersListData(number, mobileNumber)
+        addDisposable(getLiteFollowersListData.getLiteFollowersListData(mobileNumber, number)
                 .flatMap {
                     it.let {
                         liteFollowersListEntityUIMapper.observable(it)

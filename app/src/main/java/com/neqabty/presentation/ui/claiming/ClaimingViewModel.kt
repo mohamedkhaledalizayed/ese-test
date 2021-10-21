@@ -35,7 +35,7 @@ class ClaimingViewModel @Inject constructor(
 
     fun getAllContent1(mobileNumber: String, number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        val followersDisposable = getLiteFollowersListData.getLiteFollowersListData(number, mobileNumber)
+        val followersDisposable = getLiteFollowersListData.getLiteFollowersListData(mobileNumber, number)
                 .flatMap {
                     it.let {
                         liteFollowersListEntityUIMapper.observable(it)

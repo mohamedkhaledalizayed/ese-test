@@ -52,16 +52,16 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getMedicalLetters(mobileNumber, benID, start, end, orderBy, dir)
     }
 
-    override fun getMedicalLetterByID(id: String, mobileNumber: String): Observable<MedicalLetterEntity.LetterItem> {
-        return remoteDataStore.getMedicalLetterByID(id, mobileNumber)
+    override fun getMedicalLetterByID(mobileNumber: String, id: String): Observable<MedicalLetterEntity.LetterItem> {
+        return remoteDataStore.getMedicalLetterByID(mobileNumber, id)
     }
 
     override fun getAds(sectionId: Int): Observable<List<AdEntity>> {
         return remoteDataStore.getAds(sectionId)
     }
 
-    override fun getLiteFollowersListData(userNumber: String, mobileNumber: String): Observable<List<LiteFollowersListEntity>> {
-        return remoteDataStore.getLiteFollowersListData(userNumber, mobileNumber)
+    override fun getLiteFollowersListData(mobileNumber: String, userNumber: String): Observable<List<LiteFollowersListEntity>> {
+        return remoteDataStore.getLiteFollowersListData(mobileNumber, userNumber)
     }
 
     override fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity> {

@@ -16,7 +16,7 @@ class GetLiteFollowersListData @Inject constructor(
         private const val PARAM_MOBILE_NUMBER = "param:mobileNumber"
     }
 
-    fun getLiteFollowersListData(id: String, mobileNumber: String): Observable<List<LiteFollowersListEntity>> {
+    fun getLiteFollowersListData(mobileNumber: String, id: String): Observable<List<LiteFollowersListEntity>> {
         val data = HashMap<String, String>()
         data[PARAM_ID] = id
         data[PARAM_MOBILE_NUMBER] = mobileNumber
@@ -26,6 +26,6 @@ class GetLiteFollowersListData @Inject constructor(
     override fun createObservable(data: Map<String, Any>?): Observable<List<LiteFollowersListEntity>> {
         val id = data?.get(PARAM_ID) as String
         val mobileNumber = data?.get(PARAM_MOBILE_NUMBER) as String
-        return neqabtyRepository.getLiteFollowersListData(id, mobileNumber)
+        return neqabtyRepository.getLiteFollowersListData(mobileNumber, id)
     }
 }

@@ -18,8 +18,8 @@ class InquireMedicalLettersViewModel @Inject constructor(private val getMedicalL
 //        viewState.value = InquireMedicalLettersViewState(isLoading = false)
 //    }
 
-    fun getMedicalLetterByID(id: String, mobileNumber: String) {
-        addDisposable(getMedicalLetterByID.getMedicalLetterByID(id, mobileNumber)
+    fun getMedicalLetterByID(mobileNumber: String, id: String) {
+        addDisposable(getMedicalLetterByID.getMedicalLetterByID(mobileNumber, id)
                 .flatMap {
                     it.let {
                         medicalLetterItemEntityUIMapper.observable(it)
