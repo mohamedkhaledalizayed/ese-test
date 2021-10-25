@@ -1,9 +1,9 @@
 package com.neqabty.presentation.common
 
 import androidx.lifecycle.MutableLiveData
+import com.cowpay.cowpaysdk.sdk.CowpayEnviroment
 import com.neqabty.BuildConfig
 import com.neqabty.presentation.entities.AdUI
-import me.cowpay.util.CowpayConstantKeys
 
 object Constants {
     var JWT: String = ""
@@ -21,7 +21,9 @@ object Constants {
 
     var DNS = if (BuildConfig.URL.contains("http")) BuildConfig.URL else "https://${BuildConfig.URL}"
 
-    var COWPAY_MODE = if (BuildConfig.DEBUG) CowpayConstantKeys.SandBox else CowpayConstantKeys.Production
+    var COWPAY_MODE = if (BuildConfig.DEBUG) CowpayEnviroment.STAGING else CowpayEnviroment.PRODUCTION
+    var COWPAY_MERCHANT_CODE = "3GpZbdrsnOrT"
+    var COWPAY_MERCHANT_KEY = "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
     var CC_COMMISSION = .0288
     var FAWRY_COMMISSION = .0101
     var MIN_COMMISSION = 6.0

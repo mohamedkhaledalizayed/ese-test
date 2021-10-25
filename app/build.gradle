@@ -206,7 +206,7 @@ dependencies {
     kapt deps.binding.compiler
 
     implementation deps.mastercard
-    implementation files('libs/cowpaysdk.aar')
+    implementation deps.cowpay
     implementation project(':wheel')
     implementation project(':mobilepaymentsdktest')
     implementation project(path: ':pdfcreator')

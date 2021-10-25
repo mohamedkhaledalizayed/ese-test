@@ -1,7 +1,5 @@
 package com.neqabty.presentation.ui.inquiryDetails
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +11,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.cowpay.cowpaysdk.models.Card
+import com.cowpay.cowpaysdk.models.CashCollection
+import com.cowpay.cowpaysdk.models.Fawry
+import com.cowpay.cowpaysdk.sdk.CowpayCallback
+import com.cowpay.cowpaysdk.sdk.CowpaySDK
+import com.cowpay.cowpaysdk.sdk.CowpaySDKPaymentMethod
+import com.cowpay.cowpaysdk.sdk.model.PaymentInfo
 import com.efinance.mobilepaymentsdk.*
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -26,8 +31,7 @@ import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsA
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
-import me.cowpay.PaymentMethodsActivity
-import me.cowpay.util.CowpayConstantKeys
+import java.util.*
 import javax.inject.Inject
 
 class InquiryDetailsFragment : BaseFragment(), Injectable {
@@ -134,31 +138,6 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         }
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CowpayConstantKeys.PaymentMethodsActivityRequestCode && data != null && resultCode == Activity.RESULT_OK) {
-            var responseCode = data.extras!!.getInt(CowpayConstantKeys.ResponseCode, 0)
-
-            if (responseCode == CowpayConstantKeys.ErrorCode) {
-                showAlert(getString(R.string.payment_canceled)) {
-                    navController().popBackStack()
-                    navController().navigate(R.id.homeFragment)
-                }
-            } else if (responseCode == CowpayConstantKeys.SuccessCode) {
-                var responseMSG = data.extras!!.getString(CowpayConstantKeys.ResponseMessage)
-                var PaymentGatewayReferenceId =
-                        data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
-                responseMSG?.let {
-                    showAlert(if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(R.string.payment_successful) + PaymentGatewayReferenceId else getString(R.string.payment_reference) + PaymentGatewayReferenceId) {
-                        navController().popBackStack()
-                        navController().navigate(R.id.homeFragment)
-                    }
-                }
-            }
-        }
-    }
-
     private fun handleViewState(state: InquiryDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
@@ -210,47 +189,58 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
     //region
 
     fun cowPayPayment(isCredit: Boolean) {
-        var intent = Intent(context, PaymentMethodsActivity::class.java)
+        CowpaySDK.init(Constants.cowpayAuthToken, Constants.COWPAY_MERCHANT_CODE, Constants.COWPAY_MERCHANT_KEY , Constants.COWPAY_MODE)
 
-        var PaymentMethod = ArrayList<String>()
+        val payment = PaymentInfo(
+                merchantReferenceId = medicalRenewalPayment.paymentItem?.paymentRequestNumber!!,
+                customerMerchantProfileId = medicalRenewalPayment.paymentItem?.paymentRequestNumber!!,
+                amount = newAmount,
+                description = medicalRenewalPayment.paymentItem?.amount.toString(),
+                customerName = params.number,
+                customerEmail = "customer@customer.com",
+                customerMobile = PreferencesHelper(requireContext()).mobile)
+
+        var paymentMethods = emptyArray<CowpaySDKPaymentMethod>()
         if (isCredit)
-            PaymentMethod.add(CowpayConstantKeys.CreditCardMethod)
+            paymentMethods = arrayOf(CowpaySDKPaymentMethod.CARD)
         else
-            PaymentMethod.add(CowpayConstantKeys.FawryMethod)
-        intent.putExtra(CowpayConstantKeys.PaymentMethod, PaymentMethod)
+            paymentMethods = arrayOf(CowpaySDKPaymentMethod.FAWRY)
 
-        intent.putExtra(CowpayConstantKeys.AuthorizationToken, Constants.cowpayAuthToken)
+        CowpaySDK.setPaymentMethodAvailability(paymentMethods)
 
-        //set environment production or sandBox
-        //CowpayConstantKeys.Production or CowpayConstantKeys.SandBox
-        intent.putExtra(CowpayConstantKeys.PaymentEnvironment, Constants.COWPAY_MODE)
-        //set locale language
-        intent.putExtra(CowpayConstantKeys.Language, CowpayConstantKeys.ENGLISH)
-        // use pay with credit card
-        intent.putExtra(
-                CowpayConstantKeys.CreditCardMethodType,
-                CowpayConstantKeys.CreditCardMethodPay
-        )
+        CowpaySDK.launch(requireActivity() ,payment, object : CowpayCallback {
+            override fun successByFawry(fawry: Fawry) {
+                showAlert(getString(R.string.payment_reference) + fawry.paymentGatewayReferenceId) {
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+            }
 
-        intent.putExtra(CowpayConstantKeys.MerchantCode, "3GpZbdrsnOrT")
-        intent.putExtra(
-                CowpayConstantKeys.MerchantHashKey,
-                "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
-        )
-        //order id
-        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, medicalRenewalPayment.paymentItem?.paymentRequestNumber)
-        //order price780
-        intent.putExtra(CowpayConstantKeys.Amount, newAmount.toString())
-        //user data
-        intent.putExtra(CowpayConstantKeys.Description, medicalRenewalPayment.paymentItem?.amount.toString())
-        intent.putExtra(CowpayConstantKeys.CustomerName, params.number)
-        intent.putExtra(CowpayConstantKeys.CustomerMobile, PreferencesHelper(requireContext()).mobile)
-        intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
-        //user id
-        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, medicalRenewalPayment.paymentItem?.paymentRequestNumber)
+            override fun successByCreditCard(card: Card) {
+                showAlert(getString(R.string.payment_successful) + card.paymentGatewayReferenceId) {
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+            }
 
+            override fun successByCashCollection(cashCollection: CashCollection) {
+                // Successful payment using Cash Collection
+            }
 
-        startActivityForResult(intent, CowpayConstantKeys.PaymentMethodsActivityRequestCode)
+            override fun error(it: String) {
+                showAlert(getString(R.string.payment_canceled)) {
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+            }
+
+            override fun closeByUser() {
+                showAlert(getString(R.string.payment_canceled)) {
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+            }
+        })
     }
 
     fun createPayment() {
