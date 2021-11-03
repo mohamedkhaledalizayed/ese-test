@@ -1,12 +1,11 @@
 package com.neqabty.presentation.ui.newsDetails
 
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.NewsDetailsFragmentBinding
@@ -24,9 +23,9 @@ class NewsDetailsFragment : BaseFragment(), Injectable {
     lateinit var newsItem: NewsUI
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -50,7 +49,14 @@ class NewsDetailsFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
         binding.newsItem = newsItem
-        binding.tvDesc.movementMethod = LinkMovementMethod.getInstance()
+//        binding.tvDesc.movementMethod = LinkMovementMethod.getInstance()
+
+        binding.webView.settings.loadsImagesAutomatically = true
+        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+        binding.webView.loadData(newsItem.desc.toString(), "text/html; charset=utf-8", "UTF-8")
+        binding.webView.setOnTouchListener(View.OnTouchListener { _, _ -> true })
+
     }
 
 //region
