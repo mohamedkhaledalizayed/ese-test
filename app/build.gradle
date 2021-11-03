@@ -207,6 +207,7 @@ dependencies {
 
     implementation deps.mastercard
     implementation files('libs/cowpaysdk.aar')
+    implementation project(':features:ads')
     implementation project(':wheel')
     implementation project(':mobilepaymentsdktest')
     implementation project(path: ':pdfcreator')

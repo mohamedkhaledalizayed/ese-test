@@ -15,3 +15,4 @@
  */
 include ':mobilepaymentsdktest'
 include ':app', ':wheel', ':pdfcreator'
+include ':features:ads'
