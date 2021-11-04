@@ -10,6 +10,12 @@ data class AppConfigData(
         var healthCareStatus: ConfigStatus,
         @field:SerializedName("maintenance")
         var maintenanceStatus: ConfigStatus,
+        @field:SerializedName("edit_followers")
+        var editFollowersStatus: ConfigStatus,
+        @field:SerializedName("card_payment_commission")
+        var cardCommission: Double,
+        @field:SerializedName("fawry_payment_commission")
+        var fawryCommission: Double,
         @field:SerializedName("questionnaires")
         var hasQuestionnaire: Boolean = false
 ) : Response() {
@@ -18,6 +24,6 @@ data class AppConfigData(
             @field:SerializedName("status")
             var status: String,
             @field:SerializedName("status_message")
-            var statusMsg: String
+            var statusMsg: String? = ""
     )
 }

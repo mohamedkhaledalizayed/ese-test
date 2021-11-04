@@ -14,6 +14,9 @@ class AppConfigEntityUIMapper @Inject constructor() : Mapper<AppConfigEntity, Ap
                 appVersion = from.appVersion,
                 healthCareStatus = AppConfigUI.ConfigStatus(from.healthCareStatus.status, from.healthCareStatus.statusMsg),
                 maintenanceStatus = AppConfigUI.ConfigStatus(from.maintenanceStatus.status, from.maintenanceStatus.statusMsg),
+                editFollowersStatus = AppConfigUI.ConfigStatus(from.editFollowersStatus.status, from.editFollowersStatus.statusMsg),
+                cardCommission = from.cardCommission,
+                fawryCommission = from.fawryCommission,
                 hasQuestionnaire = from.hasQuestionnaire
         )
     }

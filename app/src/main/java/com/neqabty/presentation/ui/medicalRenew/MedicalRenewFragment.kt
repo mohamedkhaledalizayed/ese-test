@@ -200,6 +200,9 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
             bContinue.visibility = View.GONE
             llDelivery.visibility = View.GONE
         }
+
+        if(!Constants.isEditFollowersEnabled)
+            bEdit.visibility = View.GONE
     }
 
     private fun checkStatus() {
