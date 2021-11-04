@@ -17,7 +17,7 @@
         <ScrollView
             android:id="@+id/svContent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/rounded_bg">
@@ -25,7 +25,7 @@
             <LinearLayout
                 android:id="@+id/llHolder"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="@dimen/margin_horizontal_normal"
@@ -40,14 +40,11 @@
                     android:textColor="@color/green"
                     android:textSize="@dimen/text_size_medium" />
 
-                <TextView
-                    android:id="@+id/tvDesc"
+                <WebView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/margin_horizontal_normal"
-                    android:textSize="@dimen/text_size_medium"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/webView"
+                    />
 
                 <Button
                     android:id="@+id/bClose"

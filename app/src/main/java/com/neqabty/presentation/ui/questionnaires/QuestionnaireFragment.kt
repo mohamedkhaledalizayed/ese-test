@@ -90,8 +90,11 @@ class QuestionnaireFragment : BaseFragment(), Injectable {
     }
 
     private fun initializeViews() {
-        binding.tvDesc.movementMethod = LinkMovementMethod.getInstance()
-        binding.tvDesc.text = Html.fromHtml(questionnaireUI.question)
+//        binding.tvDesc.movementMethod = LinkMovementMethod.getInstance()
+//        binding.tvDesc.text = Html.fromHtml(questionnaireUI.question)
+
+        val justify = "<html><body style='text-align:justify;'>${questionnaireUI.question}</body></html>"
+        binding.webView.loadDataWithBaseURL(null, justify, "text/html; charset=utf-8", "UTF-8", null)
 
         for (i in questionnaireUI.answers!!.indices) {
             val radioButton = RadioButton(activity)

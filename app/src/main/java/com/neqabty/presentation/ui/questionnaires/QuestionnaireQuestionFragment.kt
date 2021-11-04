@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.questionnaires
 
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,8 +46,14 @@ class QuestionnaireQuestionFragment : DialogFragment(), Injectable {
     private fun initializeViews() {
         val bundle = this.arguments
         bundle?.let { question = it.getString("question")!! }
-        binding.tvDesc.text = Html.fromHtml(question)
-
+//        binding.tvDesc.text = Html.fromHtml(question)
+        binding.webView.settings.loadsImagesAutomatically = true
+        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+        val justify = "<html><body style='text-align:justify;'>$question</body></html>"
+        binding.webView.loadDataWithBaseURL(null, justify, "text/html; charset=utf-8", "UTF-8", null)
+        Log.e("eee", question)
+        binding.webView.setOnTouchListener(View.OnTouchListener { _, _ -> true })
         binding.bClose.setOnClickListener { this.dismiss() }
 
     }

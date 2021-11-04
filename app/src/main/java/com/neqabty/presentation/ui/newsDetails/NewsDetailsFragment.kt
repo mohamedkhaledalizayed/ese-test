@@ -1,6 +1,7 @@
 package com.neqabty.presentation.ui.newsDetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,8 +55,8 @@ class NewsDetailsFragment : BaseFragment(), Injectable {
         binding.webView.settings.loadsImagesAutomatically = true
         binding.webView.settings.javaScriptEnabled = true
         binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
-        binding.webView.loadData(newsItem.desc.toString(), "text/html; charset=utf-8", "UTF-8")
-        binding.webView.setOnTouchListener(View.OnTouchListener { _, _ -> true })
+        val justify = "<html><body style='text-align:justify;'>${newsItem.desc.toString()}</body></html>"
+        binding.webView.loadDataWithBaseURL(null, justify, "text/html; charset=utf-8", "UTF-8", null)
 
     }
 
