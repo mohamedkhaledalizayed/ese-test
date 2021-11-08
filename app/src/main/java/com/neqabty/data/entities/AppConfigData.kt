@@ -16,6 +16,8 @@ data class AppConfigData(
         var cardCommission: Double,
         @field:SerializedName("fawry_payment_commission")
         var fawryCommission: Double,
+        @field:SerializedName("min_commission")
+        var minCommission: Double,
         @field:SerializedName("questionnaires")
         var hasQuestionnaire: Boolean = false
 ) : Response() {

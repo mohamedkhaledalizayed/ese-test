@@ -12,52 +12,50 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_horizontal_normal">
 
-        <ScrollView
-            android:id="@+id/svContent"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/questionnaire_title"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_size_medium"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/rounded_bg">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/llHolder"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="@dimen/margin_horizontal_normal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/questionnaire_title"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/text_size_medium" />
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-                <WebView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/webView"
-                    />
 
-                <Button
-                    android:id="@+id/bClose"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_vertical_large"
-                    android:background="@drawable/btn_green"
-                    android:gravity="center"
-                    android:text="@string/close"
-                    android:layout_gravity="end"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium"/>
-            </LinearLayout>
-        </ScrollView>
+        <WebView
+            android:id="@+id/webView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/webView"
+            app:layout_constraintEnd_toEndOf="@id/webView"
+            android:layout_margin="@dimen/margin_horizontal_normal"
+            app:layout_constraintBottom_toTopOf="@id/bClose"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+
+        <Button
+            android:id="@+id/bClose"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_green"
+            android:gravity="center"
+            android:text="@string/close"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/webView2"
+            app:layout_constraintStart_toStartOf="@id/webView2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

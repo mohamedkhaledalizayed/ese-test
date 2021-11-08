@@ -65,6 +65,7 @@ class MainViewModel @Inject constructor(val login: Login,
                             Constants.editFollowersStatusMsg = it.editFollowersStatus.statusMsg
                             Constants.CC_COMMISSION = it.cardCommission
                             Constants.FAWRY_COMMISSION = it.fawryCommission
+                            Constants.MIN_COMMISSION = it.minCommission
                             Constants.hasQuestionnaire.value = it.hasQuestionnaire
                             viewState.value = viewState.value?.copy(appConfigUI = appConfigEntityUIMapper.mapFrom(it))
                             onConfigReceived()

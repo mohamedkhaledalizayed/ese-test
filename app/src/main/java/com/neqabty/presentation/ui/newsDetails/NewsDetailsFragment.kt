@@ -1,12 +1,11 @@
 package com.neqabty.presentation.ui.newsDetails
 
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.NewsDetailsFragmentBinding
@@ -50,12 +49,11 @@ class NewsDetailsFragment : BaseFragment(), Injectable {
 
     fun initializeViews() {
         binding.newsItem = newsItem
-//        binding.tvDesc.movementMethod = LinkMovementMethod.getInstance()
 
         binding.webView.settings.loadsImagesAutomatically = true
         binding.webView.settings.javaScriptEnabled = true
         binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
-        val justify = "<html><body style='text-align:justify;'>${newsItem.desc.toString()}</body></html>"
+        val justify = "<html><body style='direction:rtl;text-align:justify;'>${newsItem.desc.toString()}</body></html>"
         binding.webView.loadDataWithBaseURL(null, justify, "text/html; charset=utf-8", "UTF-8", null)
 
     }

@@ -2,8 +2,6 @@ package com.neqabty.presentation.ui.questionnaires
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Html
-import android.text.method.LinkMovementMethod
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -90,10 +88,11 @@ class QuestionnaireFragment : BaseFragment(), Injectable {
     }
 
     private fun initializeViews() {
-//        binding.tvDesc.movementMethod = LinkMovementMethod.getInstance()
-//        binding.tvDesc.text = Html.fromHtml(questionnaireUI.question)
 
-        val justify = "<html><body style='text-align:justify;'>${questionnaireUI.question}</body></html>"
+        binding.webView.settings.loadsImagesAutomatically = true
+        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+        val justify = "<html><body style='direction:rtl;text-align:justify;'>${questionnaireUI.question}</body></html>"
         binding.webView.loadDataWithBaseURL(null, justify, "text/html; charset=utf-8", "UTF-8", null)
 
         for (i in questionnaireUI.answers!!.indices) {
