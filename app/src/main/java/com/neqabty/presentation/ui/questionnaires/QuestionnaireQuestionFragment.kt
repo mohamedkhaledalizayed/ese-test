@@ -53,6 +53,8 @@ class QuestionnaireQuestionFragment : DialogFragment(), Injectable {
 
         binding.webView2.settings.loadsImagesAutomatically = true
         binding.webView2.settings.javaScriptEnabled = true
+        binding.webView2.isLongClickable = true
+        binding.webView2.setOnLongClickListener { return@setOnLongClickListener true }
         binding.webView2.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
         binding.webView2.loadDataWithBaseURL(null, justify, "text/html; charset=utf-8", "UTF-8", null)
 

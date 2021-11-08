@@ -184,11 +184,6 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         dialog.show()
     }
 
-    fun hideKeyboard() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.edNumber.windowToken, 0)
-    }
-
     // endregion
     fun navController() = findNavController()
 }

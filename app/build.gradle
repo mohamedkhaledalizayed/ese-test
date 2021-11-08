@@ -197,6 +197,8 @@ dependencies {
     implementation deps.viewpager.pager
     implementation deps.viewpager.indicator
     implementation deps.charts
+    implementation deps.dimens.sdp
+    implementation deps.dimens.ssp
 
     implementation deps.multidex
     kapt deps.dagger.android_support_compiler

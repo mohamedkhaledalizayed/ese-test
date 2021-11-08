@@ -91,6 +91,8 @@ class QuestionnaireFragment : BaseFragment(), Injectable {
 
         binding.webView.settings.loadsImagesAutomatically = true
         binding.webView.settings.javaScriptEnabled = true
+        binding.webView.isLongClickable = true
+        binding.webView.setOnLongClickListener { return@setOnLongClickListener true }
         binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
         val justify = "<html><body style='direction:rtl;text-align:justify;'>${questionnaireUI.question}</body></html>"
         binding.webView.loadDataWithBaseURL(null, justify, "text/html; charset=utf-8", "UTF-8", null)

@@ -35,10 +35,10 @@
             <ImageView
                 android:id="@+id/ivLogo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_150sdp"
                 android:adjustViewBounds="false"
                 android:cropToPadding="false"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 app:imageUrl="@{newsItem.img}" />
         </androidx.cardview.widget.CardView>
 

@@ -152,7 +152,8 @@ interface WebService {
     @GET("api/api/ApiRequest/Get")
     fun getMedicalLetterByID(
             @Query("mobile_number") mobileNumber: String,
-            @Query("id") benID: String,
+            @Query("oldRefId") userNumber: String,
+            @Query("id") id: String,
             @Query("server") server: String = ""
     ): Observable<MedicalLetterData.LetterItem>
 

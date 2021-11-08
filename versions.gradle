@@ -48,6 +48,7 @@ versions.ccp = "2.4.5"
 versions.cowpay = "1.1.3"
 versions.legacy_support = "1.0.0"
 versions.charts = "v3.1.0"
+versions.dimens = "1.0.6"
 
 def deps = [:]
 
@@ -224,6 +225,11 @@ deps.legacy_support = legacy_support
 
 def charts = "com.github.PhilJay:MPAndroidChart:$versions.charts"
 deps.charts = charts
+
+def dimens =  [:]
+dimens.sdp = "com.intuit.sdp:sdp-android:$versions.dimens"
+dimens.ssp = "com.intuit.ssp:ssp-android:$versions.dimens"
+deps.dimens = dimens
 
 ext.deps = deps
 
