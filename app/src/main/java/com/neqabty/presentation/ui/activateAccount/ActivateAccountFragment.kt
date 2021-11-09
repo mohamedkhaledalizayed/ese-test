@@ -73,13 +73,13 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.GONE
             }, message = error?.message)
         })
-//        activateAccountViewModel.sendSMS(PreferencesHelper(requireContext()).mobile)
+//        activateAccountViewModel.sendSMS(sharedPref.mobile)
         initializeViews()
     }
 
     fun initializeViews() {
 //        edPassword.setText(password)
-        binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
+        binding.edMobile.setText(sharedPref.mobile)
         binding.bSend.setOnClickListener {
             if (binding.edOTP.text.toString().isNotEmpty() && binding.edOTP.text.toString().length == 4)
                 activateAccount()
@@ -88,7 +88,7 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
         }
 
         tvResend.setOnClickListener {
-            activateAccountViewModel.sendSMS(PreferencesHelper(requireContext()).mobile)
+            activateAccountViewModel.sendSMS(sharedPref.mobile)
         }
         startCountingDown()
     }
@@ -99,9 +99,9 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
             startCountingDown()
         } else if (state.isSuccessful && state.user != null) {
             activity?.invalidateOptionsMenu()
-           PreferencesHelper(requireContext()).user = state.user?.details!![0].userNumber!!
-           PreferencesHelper(requireContext()).name = state.user?.details!![0].name!!
-           PreferencesHelper(requireContext()).isRegistered = true
+           sharedPref.user = state.user?.details!![0].userNumber!!
+           sharedPref.name = state.user?.details!![0].name!!
+           sharedPref.isRegistered = true
 //            showTwoButtonsAlert(message = getString(R.string.welcome_with_name, state.user?.details!![0].name!!),
 //                    okCallback = {
 //                        state.user = null
@@ -157,14 +157,14 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
                 )
 
                 Constants.CHANGE_PASSWORD -> navController().navigate(
-                        ActivateAccountFragmentDirections.openChangePassword(false, PreferencesHelper(requireContext()).mobile)
+                        ActivateAccountFragmentDirections.openChangePassword(false, sharedPref.mobile)
                 )
             }
         }
     }
 
     fun activateAccount() {
-        activateAccountViewModel.activateAccount(PreferencesHelper(requireContext()).mobile, binding.edOTP.text.toString(), edPassword.text.toString())
+        activateAccountViewModel.activateAccount(sharedPref.mobile, binding.edOTP.text.toString(), edPassword.text.toString())
     }
 
     //region

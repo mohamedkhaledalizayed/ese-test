@@ -89,7 +89,7 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
             }, message = error?.message)
         })
 
-        binding.edNumber.setText(PreferencesHelper(requireContext()).user)
+        binding.edNumber.setText(sharedPref.user)
         binding.edCardNumber.setText(ClaimingData.cardId.toString())
         binding.bPrev.setOnClickListener {
             pager.setCurrentItem(0, true)

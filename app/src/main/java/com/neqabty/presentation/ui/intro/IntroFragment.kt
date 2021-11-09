@@ -72,7 +72,7 @@ class IntroFragment : BaseFragment(), Injectable {
 //        })
 
         binding.bSkip.setOnClickListener {
-            PreferencesHelper(requireContext()).isIntroSkipped = true
+            sharedPref.isIntroSkipped = true
             navigateToNext()
         }
 
@@ -87,7 +87,7 @@ class IntroFragment : BaseFragment(), Injectable {
 //region
 
     fun navigateToNext() {
-        if (PreferencesHelper(requireContext()).mobile.isEmpty())
+        if (sharedPref.mobile.isEmpty())
             navController().navigate(R.id.openLoginFragment)
         else
             navController().navigate(R.id.openHomeFragment)

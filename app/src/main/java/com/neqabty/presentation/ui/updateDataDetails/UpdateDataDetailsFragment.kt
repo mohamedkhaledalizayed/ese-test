@@ -92,12 +92,12 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
                 if (photosList.size > 0)
                     submitRequest()
                 else
-                    updateDataDetailsViewModel.inquireUpdateUserData(PreferencesHelper(requireContext()).user)
+                    updateDataDetailsViewModel.inquireUpdateUserData(sharedPref.user)
             }, cancelCallback = {
                 dialog?.dismiss()
             }, message = error?.message)
         })
-        updateDataDetailsViewModel.inquireUpdateUserData(PreferencesHelper(requireContext()).user)
+        updateDataDetailsViewModel.inquireUpdateUserData(sharedPref.user)
     }
 
     private fun handleViewState(state: UpdateDataDetailsViewState) {

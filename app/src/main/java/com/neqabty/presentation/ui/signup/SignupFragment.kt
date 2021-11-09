@@ -73,9 +73,9 @@ class SignupFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        newToken = PreferencesHelper(requireContext()).token
-        if (PreferencesHelper(requireContext()).mobile.isNotEmpty())
-            binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
+        newToken = sharedPref.token
+        if (sharedPref.mobile.isNotEmpty())
+            binding.edMobile.setText(sharedPref.mobile)
 
         binding.bSend.setOnClickListener {
             login()
@@ -99,15 +99,15 @@ class SignupFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: SignupViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful && state.user != null) {
-            PreferencesHelper(requireContext()).mobile = edMobile.text.toString()
-            PreferencesHelper(requireContext()).user = state.user?.details!![0].userNumber!!
-            PreferencesHelper(requireContext()).name = state.user?.details!![0].name!!
-            PreferencesHelper(requireContext()).isRegistered = true
+            sharedPref.mobile = edMobile.text.toString()
+            sharedPref.user = state.user?.details!![0].userNumber!!
+            sharedPref.name = state.user?.details!![0].name!!
+            sharedPref.isRegistered = true
             activity?.invalidateOptionsMenu()
             state.user = null
-            showTwoButtonsAlert(message = getString(R.string.welcome_with_name, PreferencesHelper(requireContext()).name)+"\n"+getString(R.string.welcome_with_password),
+            showTwoButtonsAlert(message = getString(R.string.welcome_with_name, sharedPref.name)+"\n"+getString(R.string.welcome_with_password),
                     okCallback = {
-                        navController().navigate(SignupFragmentDirections.openChangePasswordFragment(false, PreferencesHelper(requireContext()).mobile))
+                        navController().navigate(SignupFragmentDirections.openChangePasswordFragment(false, sharedPref.mobile))
                     }, cancelCallback = {
                 continueNavigation()
             }, btnPositiveTitle = getString(R.string.change_password_title), btnNegativeTitle = getString(R.string.continue_btn))
@@ -117,12 +117,12 @@ class SignupFragment : BaseFragment(), Injectable {
     fun login() {
         if (isDataValid(binding.edMobile.text.toString(), binding.edMemberNumber.text.toString(), binding.edNationalNumber.text.toString())) {
             if (newToken.isNotBlank())
-                signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
+                signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(), newToken, sharedPref)
             else {
                 Constants.isFirebaseTokenUpdated.observeOnce(viewLifecycleOwner, Observer {
                     if (it.isNotBlank()) {
                         newToken = it
-                        signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(), newToken, PreferencesHelper(requireContext()))
+                        signupViewModel.registerUser(binding.edMemberNumber.text.toString(), binding.edMobile.text.toString(), binding.edNationalNumber.text.toString(), newToken, sharedPref)
                     } else
                         showAlert(getString(R.string.error_msg))
                 })
@@ -213,7 +213,7 @@ class SignupFragment : BaseFragment(), Injectable {
             )
 
             Constants.CHANGE_PASSWORD -> navController().navigate(
-                    SignupFragmentDirections.openChangePassword(false, PreferencesHelper(requireContext()).mobile)
+                    SignupFragmentDirections.openChangePassword(false, sharedPref.mobile)
             )
         }
     }

@@ -109,7 +109,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
         }
 
         bClaiming.setOnClickListener {
-            if (PreferencesHelper(requireContext()).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.claimingFragment)
             else {
                     val bundle: Bundle = Bundle()

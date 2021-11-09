@@ -59,14 +59,14 @@ class TrackShipmentFragment : BaseFragment(), Injectable {
         })
         trackShipmentViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
-                trackShipmentViewModel.trackShipment(PreferencesHelper(requireContext()).user)
+                trackShipmentViewModel.trackShipment(sharedPref.user)
             }, cancelCallback = {
                 navController().navigateUp()
                 llSuperProgressbar.visibility = View.GONE
             }, message = error?.message)
         })
 
-        trackShipmentViewModel.trackShipment(PreferencesHelper(requireContext()).user)
+        trackShipmentViewModel.trackShipment(sharedPref.user)
 //        trackShipmentViewModel.trackShipment("7007439")
 
     }

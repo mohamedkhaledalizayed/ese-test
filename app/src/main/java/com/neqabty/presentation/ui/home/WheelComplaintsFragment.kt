@@ -54,7 +54,7 @@ class WheelComplaintsFragment : BaseFragment(), Injectable {
         bGo.setOnClickListener {
 //            Toast.makeText(requireContext(), getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
 
-            if (PreferencesHelper(requireContext()).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.complaintsFragment)
             else {
                     val bundle: Bundle = Bundle()

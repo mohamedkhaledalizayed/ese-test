@@ -59,7 +59,7 @@ class ChangeUserMobileFragment : BaseFragment(), Injectable {
         })
         changeUserMobileViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
-                changeUserMobileViewModel.changeUserMobile(PreferencesHelper(requireContext()).user, edNationalNumber.text.toString(), if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumberWithPlus, PreferencesHelper(requireContext()).mobile)
+                changeUserMobileViewModel.changeUserMobile(sharedPref.user, edNationalNumber.text.toString(), if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumberWithPlus, sharedPref.mobile)
             }, cancelCallback = {
                 llSuperProgressbar.visibility = View.GONE
             }, message = error?.message)
@@ -69,7 +69,7 @@ class ChangeUserMobileFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        binding.edCurrentMobileNumber.setText(PreferencesHelper(requireContext()).mobile)
+        binding.edCurrentMobileNumber.setText(sharedPref.mobile)
         binding.ccp.registerCarrierNumberEditText(binding.edNewMobileNumber)
 
         binding.bSend.setOnClickListener {
@@ -78,14 +78,14 @@ class ChangeUserMobileFragment : BaseFragment(), Injectable {
             else if (!binding.ccp.isValidFullNumber)
                 showAlert(getString(R.string.invalid_mobile))
             else
-                changeUserMobileViewModel.changeUserMobile(PreferencesHelper(requireContext()).user, edNationalNumber.text.toString(), if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumberWithPlus, PreferencesHelper(requireContext()).mobile)
+                changeUserMobileViewModel.changeUserMobile(sharedPref.user, edNationalNumber.text.toString(), if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumberWithPlus, sharedPref.mobile)
         }
     }
 
     private fun handleViewState(state: ChangeUserMobileViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         state.changeUserMobileUI?.let {
-            PreferencesHelper(requireContext()).clearAll()
+            sharedPref.clearAll()
             navController().popBackStack()
             navController().navigate(R.id.openLoginFragment)
             Toast.makeText(requireContext(), it.msg, Toast.LENGTH_LONG).show()

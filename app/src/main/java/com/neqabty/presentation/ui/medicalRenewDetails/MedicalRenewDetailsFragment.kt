@@ -93,13 +93,13 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
         medicalRenewDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                medicalRenewDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
+                medicalRenewDetailsViewModel.paymentInquiry(sharedPref.mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
 //        initializeViews()
-        medicalRenewDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
+        medicalRenewDetailsViewModel.paymentInquiry(sharedPref.mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
     }
 
     fun initializeViews() {
@@ -253,7 +253,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
         //user data
         intent.putExtra(CowpayConstantKeys.Description, medicalRenewalPaymentUI.paymentItem?.amount.toString())
         intent.putExtra(CowpayConstantKeys.CustomerName, medicalRenewalUI.oldRefId)
-        intent.putExtra(CowpayConstantKeys.CustomerMobile, PreferencesHelper(requireContext()).mobile)
+        intent.putExtra(CowpayConstantKeys.CustomerMobile, sharedPref.mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
         //user id
         intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber)
@@ -296,13 +296,13 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Channel
 
                 paymentCreationRequest.PaymentMechanism.Channel.Email = "xxxx@xx.xx"
-                paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = PreferencesHelper(requireContext()).mobile
+                paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = sharedPref.mobile
             } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_wallet)) {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.MobileWallet
-                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = PreferencesHelper(requireContext()).mobile
+                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = sharedPref.mobile
             } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_meeza)) {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Meeza
-                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = PreferencesHelper(requireContext()).mobile
+                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = sharedPref.mobile
             }
 
 //            paymentCreationRequest.RequestExpiryDate = medicalRenewalPaymentUI.paymentCreationRequest?.requestExpiryDate
@@ -348,7 +348,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.INVISIBLE
                 showConnectionAlert(requireContext(), retryCallback = {
                     llContent.visibility = View.INVISIBLE
-                    medicalRenewDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
+                    medicalRenewDetailsViewModel.paymentInquiry(sharedPref.mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
                 }, cancelCallback = {
                     navController().navigateUp()
                 })

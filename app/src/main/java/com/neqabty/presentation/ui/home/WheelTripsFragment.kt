@@ -81,14 +81,14 @@ class WheelTripsFragment : BaseFragment(), Injectable {
         homeViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                homeViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())
+                homeViewModel.getTrips(sharedPref.mainSyndicate.toString())
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
             }, message = error?.message)
         })
         llSuperProgressbar.visibility = View.GONE
-//        homeViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())
+//        homeViewModel.getTrips(sharedPref.mainSyndicate.toString())
     }
 
     private fun handleViewState(state: HomeViewState) {

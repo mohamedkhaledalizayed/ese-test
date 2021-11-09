@@ -118,10 +118,10 @@ class ComplaintFragment : BaseFragment(), Injectable {
         binding.tvDescription.setOnClickListener {
             tvDescription.call(Constants.CALL_CENTER, requireContext())
         }
-        binding.edMobile.setText(PreferencesHelper(requireContext()).mobile)
+        binding.edMobile.setText(sharedPref.mobile)
         binding.bSend.setOnClickListener {
             isSubmitted = true
-            complaintViewModel.createComplaint(edName.text.toString(), edMobile.text.toString(), complaintsTypeID.toString(), complaintsSubTypeID.toString(), edBody.text.toString(), PreferencesHelper(requireContext()).token, PreferencesHelper(requireContext()).user,
+            complaintViewModel.createComplaint(edName.text.toString(), edMobile.text.toString(), complaintsTypeID.toString(), complaintsSubTypeID.toString(), edBody.text.toString(), sharedPref.token, sharedPref.user,
                     photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3))
         }
 

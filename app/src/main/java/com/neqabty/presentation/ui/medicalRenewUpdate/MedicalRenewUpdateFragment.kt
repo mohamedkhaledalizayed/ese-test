@@ -81,13 +81,13 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
         medicalRenewUpdateViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                medicalRenewUpdateViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
+                medicalRenewUpdateViewModel.getMedicalRenewalData(sharedPref.mobile, sharedPref.user)
             }, cancelCallback = {
                 dialog?.dismiss()
             }, message = error?.message)
         })
 
-        medicalRenewUpdateViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
+        medicalRenewUpdateViewModel.getMedicalRenewalData(sharedPref.mobile, sharedPref.user)
     }
 
     private fun initializeViews() {
@@ -131,7 +131,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
                     showSuccessAlert()
             }
         state.medicalRenewalUI?.let {
-            state.medicalRenewalUI?.oldRefId = PreferencesHelper(requireContext()).user
+            state.medicalRenewalUI?.oldRefId = sharedPref.user
 //            filteredFollowersList = state.medicalRenewalUI?.followers?.filter{ it.isDeleted == false }!!.toMutableList()
             medicalRenewalUI = state.medicalRenewalUI!!
             initializeViews()
@@ -179,7 +179,7 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
                 showAlert(getString(R.string.exceed_father))
             else {
                 updateRequested = true
-                medicalRenewUpdateViewModel.updateMedicalRenewalData(PreferencesHelper(requireContext()).mobile, medicalRenewalUI)
+                medicalRenewUpdateViewModel.updateMedicalRenewalData(sharedPref.mobile, medicalRenewalUI)
             }
             dialog.dismiss()
         }

@@ -2,6 +2,8 @@ package com.neqabty.presentation.di
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import androidx.room.Room
 import com.neqabty.BuildConfig
 import com.neqabty.MyApp
@@ -20,6 +22,7 @@ import com.neqabty.domain.NeqabtyRepository
 import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.ASyncTransformer
 import com.neqabty.presentation.common.Constants
+import com.neqabty.presentation.util.PreferencesHelper
 import dagger.Module
 import dagger.Provides
 import okhttp3.CertificatePinner
@@ -38,6 +41,19 @@ import javax.inject.Singleton
 class AppModule {
     @Provides
     fun provideContext(application: MyApp): Context = application.applicationContext
+
+
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(application: Application): SharedPreferences {
+        return PreferenceManager.getDefaultSharedPreferences(application)
+    }
+
+    @Singleton
+    @Provides
+    fun providePreferencesHelper(sharedPref: SharedPreferences): PreferencesHelper {
+        return PreferencesHelper(preferences = sharedPref)
+    }
 
 
     @Singleton
@@ -66,7 +82,7 @@ class AppModule {
                         val request = chain.request()
                         var newRequest = request.newBuilder()
                                 // .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlZ3lwdFxcYWhtZWQuZm91YWRnb21hYSIsImV4cCI6MTU3NDA4MjkyMCwiaWF0IjoxNTc0MDY0OTIwfQ.n8CvCPxVyJnoSHcfD9ePMS48Q3nFdN3Lvqmmdi3oy947X7g99i2Bk_sReyzkyGw9appwTeht1F-dlx7IzrrxEA")
-                                .header("Authorization", "Bearer " + Constants.JWT)
+                                .header("Authorization", "Bearer " + PreferencesHelper.instance.jwt)
                                 .header("Accept", "application/json")
                                 .removeHeader("Content-Type")
                                 .build()

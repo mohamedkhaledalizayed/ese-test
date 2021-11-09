@@ -90,7 +90,7 @@ class OnlinePharmacyFragment : BaseFragment(), Injectable {
             }, message = error?.message)
         })
 
-        onlinePharmacyViewModel.getURL(PreferencesHelper(requireContext()).user)
+        onlinePharmacyViewModel.getURL(sharedPref.user)
     }
 
     private fun handleViewState(state: OnlinePharmacyViewState) {
