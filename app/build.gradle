@@ -14,8 +14,8 @@ apply plugin: 'kotlin-android-extensions'
 
 
 def versionTemplate = "{labelx}.{labely}.{labelz}"
-def serverBuild = System.getenv('NEQABTY_BUILDNUMBER')
-def secret = System.getenv('NEQABTY_SECRET')
+def serverBuild = "147"
+def secret = "123@pass"
 
 
 def getLocalSigningConfig(String secret) {
@@ -48,7 +48,7 @@ android {
         config {
             keyAlias 'neqabty'
             keyPassword secret
-            storeFile file('D:/Android/workspace/NeQabty/keyStore.jks')
+            storeFile file('/Users/islamlotfy/StudioProjects/NeQabty/keyStore.jks')
             storePassword secret
         }
     }
@@ -201,7 +201,7 @@ dependencies {
     implementation deps.multidex
     kapt deps.dagger.android_support_compiler
     kapt deps.dagger.compiler
-    kapt deps.room.compiler
+    annotationProcessor(deps.room.compiler)
     kapt deps.lifecycle.compiler
     kapt deps.binding.compiler
 
