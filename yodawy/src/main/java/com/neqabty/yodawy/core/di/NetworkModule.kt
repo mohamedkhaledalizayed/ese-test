@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 class NetworkModule {
     @Provides
     fun providesBaseUrl(): String {
-        return "https://5e510330f2c0d300147c034c.mockapi.io/"
+        return "http://3.131.229.146:44392/api/v1/yodawy/"
     }
 
     @Provides

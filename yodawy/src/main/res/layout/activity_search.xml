@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".modules.SearchActivity">
+    tools:context=".modules.products.presentation.view.productscreen.SearchActivity">
 
     <include layout="@layout/search_custom_toolbar"
         android:id="@+id/search_custom_toolbar"/>
