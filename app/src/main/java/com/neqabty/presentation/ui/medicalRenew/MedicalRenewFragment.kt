@@ -10,9 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -20,7 +19,6 @@ import com.neqabty.databinding.MedicalRenewFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.ui.ads.AdsActivity
@@ -28,19 +26,18 @@ import com.neqabty.presentation.ui.common.PdfCreatorScreen
 import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_renew_fragment.*
 import javax.inject.Inject
 
-class MedicalRenewFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class MedicalRenewFragment : BaseFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     var binding by autoCleared<MedicalRenewFragmentBinding>()
     private var followersAdapter by autoCleared<FollowersAdapter>()
     private var medicalRenewPaymentItemsAdapter by autoCleared<MedicalRenewPaymentItemsAdapter>()
 
-    @Inject
-    lateinit var medicalRenewViewModel: MedicalRenewViewModel
+    private val medicalRenewViewModel: MedicalRenewViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -72,8 +69,6 @@ class MedicalRenewFragment : BaseFragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
 
 //        PreferencesHelper(requireContext()).user = "2502813"
-        medicalRenewViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(MedicalRenewViewModel::class.java)
 
         medicalRenewViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

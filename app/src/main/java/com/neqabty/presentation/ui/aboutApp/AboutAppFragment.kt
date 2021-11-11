@@ -6,21 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.AboutAppFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class AboutAppFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class AboutAppFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 

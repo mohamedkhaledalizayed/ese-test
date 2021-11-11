@@ -8,24 +8,22 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.UpdateDataVerificationFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.update_data_verification_fragment.*
 import javax.inject.Inject
 
-class UpdateDataVerificationFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class UpdateDataVerificationFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
@@ -37,7 +35,7 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
     private var counterTimeout: Long = 30000
     private var isTimerFinished = true
     lateinit var timer: CountDownTimer
-    lateinit var updateDataVerificationViewModel: UpdateDataVerificationViewModel
+    private val updateDataVerificationViewModel: UpdateDataVerificationViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -57,9 +55,6 @@ class UpdateDataVerificationFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        updateDataVerificationViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(UpdateDataVerificationViewModel::class.java)
 
         updateDataVerificationViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

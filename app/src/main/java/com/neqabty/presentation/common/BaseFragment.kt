@@ -16,7 +16,9 @@ import com.neqabty.MainActivity
 import com.neqabty.R
 import com.neqabty.presentation.entities.AdUI
 import com.neqabty.presentation.ui.ads.AdsActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 open class BaseFragment : Fragment() {
     var builder: AlertDialog.Builder? = null
     var dialog: AlertDialog? = null

@@ -6,8 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.NewsEntityUIMapper
 import com.neqabty.presentation.mappers.TripsEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class HomeViewModel @Inject constructor(
         private val getAllNews: GetAllNews,
         private val getAllTrips: GetAllTrips,

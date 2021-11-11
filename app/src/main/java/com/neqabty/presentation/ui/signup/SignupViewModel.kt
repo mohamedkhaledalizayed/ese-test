@@ -6,8 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.UserEntityUIMapper
 import com.neqabty.presentation.util.PreferencesHelper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class SignupViewModel @Inject constructor(val signup: SignupUser) : BaseViewModel() {
 
     private val userEntityToUIMapper = UserEntityUIMapper()

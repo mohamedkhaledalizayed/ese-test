@@ -5,8 +5,10 @@ import com.neqabty.domain.usecases.GetOnlinePharmacyURL
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.OnlinePharmacyURLEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class OnlinePharmacyViewModel @Inject constructor(
         private val getOnlinePharmacyURL: GetOnlinePharmacyURL) : BaseViewModel() {
 

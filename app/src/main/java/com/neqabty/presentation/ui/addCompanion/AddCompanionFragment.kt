@@ -2,7 +2,6 @@ package com.neqabty.presentation.ui.addCompanion
 
 import android.app.Activity
 import android.app.DatePickerDialog
-import androidx.lifecycle.ViewModelProvider
 import android.content.Intent
 import android.content.res.Resources
 import androidx.databinding.DataBindingComponent
@@ -19,16 +18,13 @@ import com.neqabty.R
 import com.neqabty.databinding.AddCompanionFragmentBinding
 import com.neqabty.domain.entities.PersonEntity
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.add_companion_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class AddCompanionFragment : DialogFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+class AddCompanionFragment : DialogFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 

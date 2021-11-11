@@ -18,9 +18,8 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -29,21 +28,19 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.common.MyWebViewClient
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
-class OnlinePharmacyFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class OnlinePharmacyFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<OnlinePharmacyFragmentBinding>()
 
-    lateinit var onlinePharmacyViewModel: OnlinePharmacyViewModel
+    private val onlinePharmacyViewModel: OnlinePharmacyViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -76,9 +73,6 @@ class OnlinePharmacyFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        onlinePharmacyViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(OnlinePharmacyViewModel::class.java)
-
         onlinePharmacyViewModel.viewState.observe(viewLifecycleOwner, Observer {
             if (it != null) handleViewState(it)
         })

@@ -6,9 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.mappers.TripsEntityUIMapper
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class TripDetailsViewModel @Inject constructor(private val getTripDetails: GetTripDetails) : BaseViewModel() {
 
     private val tripEntityUIMapper = TripsEntityUIMapper()

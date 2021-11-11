@@ -5,8 +5,10 @@ import com.neqabty.domain.usecases.ChangeUserMobile
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.ChangeUserMobileEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class ChangeUserMobileViewModel @Inject constructor(val changeUserMobile: ChangeUserMobile) : BaseViewModel() {
 
     val changeUserMobileEntityUIMapper = ChangeUserMobileEntityUIMapper()

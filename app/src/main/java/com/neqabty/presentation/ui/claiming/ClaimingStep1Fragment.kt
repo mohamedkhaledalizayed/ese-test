@@ -1,8 +1,6 @@
 package com.neqabty.presentation.ui.claiming
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -12,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.neqabty.R
@@ -19,26 +18,23 @@ import com.neqabty.databinding.Claiming1FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.GovernUI
 import com.neqabty.presentation.entities.LiteFollowersListUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.claiming1_fragment.*
-import javax.inject.Inject
 
-class ClaimingStep1Fragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class ClaimingStep1Fragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<Claiming1FragmentBinding>()
 
-    lateinit var claimingViewModel: ClaimingViewModel
+    private val claimingViewModel: ClaimingViewModel by viewModels()
 
     var liteFollowersListUI: List<LiteFollowersListUI>? = listOf<LiteFollowersListUI>()
     var governsResultList: List<GovernUI>? = mutableListOf()
@@ -68,8 +64,6 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ClaimingViewModel::class.java)
 
         claimingViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

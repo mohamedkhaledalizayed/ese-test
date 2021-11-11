@@ -4,8 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.ForgetPassword
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class ForgetPasswordViewModel @Inject constructor(val forgetPassword: ForgetPassword) : BaseViewModel() {
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()

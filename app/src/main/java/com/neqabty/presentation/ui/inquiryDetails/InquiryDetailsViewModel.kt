@@ -17,11 +17,13 @@ import com.neqabty.presentation.mappers.DecryptionEntityUIMapper
 import com.neqabty.presentation.mappers.EncryptionEntityUIMapper
 import com.neqabty.presentation.mappers.MedicalRenewalPaymentEntityUIMapper
 import com.neqabty.presentation.mappers.MemberEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Named
 
+@HiltViewModel
 class InquiryDetailsViewModel @Inject constructor(
     private val sendDecryptionKey: SendDecryptionKey,
     private val encryptData: EncryptData,

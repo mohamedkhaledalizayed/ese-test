@@ -5,8 +5,10 @@ import com.neqabty.domain.usecases.ChangePassword
 import com.neqabty.domain.usecases.SetNewPassword
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class ChangePasswordViewModel @Inject constructor(val changePassword: ChangePassword, val setNewPassword: SetNewPassword) : BaseViewModel() {
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()

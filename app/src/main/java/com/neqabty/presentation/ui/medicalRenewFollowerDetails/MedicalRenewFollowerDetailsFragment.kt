@@ -19,7 +19,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.neqabty.AppExecutors
@@ -27,10 +26,10 @@ import com.neqabty.R
 import com.neqabty.databinding.MedicalRenewFollowerDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_renew_follower_details_fragment.*
 import java.io.File
 import java.io.IOException
@@ -38,9 +37,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class MedicalRenewFollowerDetailsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class MedicalRenewFollowerDetailsFragment : BaseFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     var binding by autoCleared<MedicalRenewFollowerDetailsFragmentBinding>()
 

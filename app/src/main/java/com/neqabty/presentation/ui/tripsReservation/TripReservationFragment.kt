@@ -24,9 +24,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.neqabty.AppExecutors
@@ -35,7 +34,6 @@ import com.neqabty.databinding.TripReservationFragmentBinding
 import com.neqabty.domain.entities.PersonEntity
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.ui.addCompanion.AddCompanionFragment
@@ -44,22 +42,22 @@ import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_main_fragment.*
 import kotlinx.android.synthetic.main.trip_reservation_fragment.*
 import java.io.*
 import java.util.*
 import javax.inject.Inject
 
-class TripReservationFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class TripReservationFragment : BaseFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<TripReservationFragmentBinding>()
 
     lateinit var tripItem: TripUI
 
-    lateinit var tripReservationViewModel: TripReservationViewModel
+    private val tripReservationViewModel: TripReservationViewModel by viewModels()
 
     private var photosAdapter by autoCleared<PhotosAdapter>()
     private var companionsAdapter by autoCleared<CompanionsAdapter>()
@@ -108,9 +106,6 @@ class TripReservationFragment : BaseFragment(), Injectable {
 
         val params = TripReservationFragmentArgs.fromBundle(requireArguments())
         tripItem = params.tripItem
-
-        tripReservationViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(TripReservationViewModel::class.java)
 
         tripReservationViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)

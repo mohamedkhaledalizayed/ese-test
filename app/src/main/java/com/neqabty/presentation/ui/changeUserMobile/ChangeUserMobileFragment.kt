@@ -7,31 +7,27 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.ChangeUserMobileFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.change_user_mobile_fragment.*
 import kotlinx.android.synthetic.main.change_user_mobile_fragment.ccp
-import javax.inject.Inject
 
-
-class ChangeUserMobileFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class ChangeUserMobileFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<ChangeUserMobileFragmentBinding>()
 
-    lateinit var changeUserMobileViewModel: ChangeUserMobileViewModel
+    private val changeUserMobileViewModel: ChangeUserMobileViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -50,9 +46,6 @@ class ChangeUserMobileFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        changeUserMobileViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ChangeUserMobileViewModel::class.java)
 
         changeUserMobileViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

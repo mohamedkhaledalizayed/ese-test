@@ -1,8 +1,6 @@
 package com.neqabty.presentation.ui.syndicates
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
@@ -10,30 +8,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.SyndicatesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesFragment
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class SyndicatesFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class SyndicatesFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<SyndicatesFragmentBinding>()
     private var adapter by autoCleared<SyndicatesAdapter>()
 
-    lateinit var syndicatesViewModel: SyndicatesViewModel
+    private val syndicatesViewModel: SyndicatesViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -57,8 +54,6 @@ class SyndicatesFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        syndicatesViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(SyndicatesViewModel::class.java)
 
         initializeViews()
 

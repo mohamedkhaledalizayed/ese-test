@@ -9,8 +9,10 @@ import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.mappers.MedicalRenewalEntityUIMapper
 import com.neqabty.presentation.mappers.MedicalRenewalPaymentEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class MedicalRenewViewModel @Inject constructor(
         private val getMedicalRenewalData: GetMedicalRenewalData,
         private val paymentInquiry: MedicalRenewPaymentInquiry

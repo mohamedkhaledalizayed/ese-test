@@ -11,13 +11,14 @@ import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.PhonesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 
 import kotlinx.android.synthetic.main.subsyndicates_fragment.*
 import javax.inject.Inject
 
-class PhonesFragment : DialogFragment(), Injectable {
+@AndroidEntryPoint
+class PhonesFragment : DialogFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 

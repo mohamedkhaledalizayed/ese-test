@@ -10,9 +10,8 @@ import android.widget.RadioButton
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.efinance.mobilepaymentsdk.*
 import com.neqabty.AppExecutors
@@ -21,25 +20,24 @@ import com.neqabty.databinding.MedicalRenewDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_renew_details_fragment.*
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
 import javax.inject.Inject
 
-class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class MedicalRenewDetailsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     private var adapter by autoCleared<MedicalRenewPaymentItemsAdapter>()
 
-    lateinit var medicalRenewDetailsViewModel: MedicalRenewDetailsViewModel
+    private val medicalRenewDetailsViewModel: MedicalRenewDetailsViewModel by viewModels()
 
     var binding by autoCleared<MedicalRenewDetailsFragmentBinding>()
 
@@ -78,8 +76,6 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        medicalRenewDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(MedicalRenewDetailsViewModel::class.java)
 
         val params = MedicalRenewDetailsFragmentArgs.fromBundle(arguments!!)
         deliveryType = params.deliveryType

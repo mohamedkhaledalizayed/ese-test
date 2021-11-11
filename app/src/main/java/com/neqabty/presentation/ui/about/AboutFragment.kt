@@ -1,8 +1,6 @@
 package com.neqabty.presentation.ui.about
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
@@ -11,31 +9,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.AboutFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.presentation.util.openMap
 import com.neqabty.presentation.util.call
-
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.about_fragment.*
 import javax.inject.Inject
 
-class AboutFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class AboutFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<AboutFragmentBinding>()
 
-    lateinit var aboutViewModel: AboutViewModel
+    private val aboutViewModel: AboutViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -58,8 +55,6 @@ class AboutFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        aboutViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(AboutViewModel::class.java)
 
         aboutViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

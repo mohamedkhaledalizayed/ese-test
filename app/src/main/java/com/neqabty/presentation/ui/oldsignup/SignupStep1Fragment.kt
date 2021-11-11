@@ -1,8 +1,5 @@
 package com.neqabty.presentation.ui.oldsignup
 
-import android.app.DatePickerDialog
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -10,25 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.fragment.app.viewModels
 import com.neqabty.R
 import com.neqabty.databinding.Signup1FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.autoCleared
-
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import javax.inject.Inject
 
-class SignupStep1Fragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class SignupStep1Fragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<Signup1FragmentBinding>()
 
-    lateinit var signupViewModel: SignupViewModel
+    private val signupViewModel: SignupViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,8 +43,6 @@ class SignupStep1Fragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        signupViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(SignupViewModel::class.java)
 
 //        initializeObservers()
         initializeViews()
@@ -84,11 +77,11 @@ class SignupStep1Fragment : BaseFragment(), Injectable {
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
-        val datePickerDialog = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            val month = monthOfYear + 1
-            binding.edAge.setText("$dayOfMonth/$month/$year")
-        }, year, month, day)
-        datePickerDialog.show()
+//        val datePickerDialog = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+//            val month = monthOfYear + 1
+//            binding.edAge.setText("$dayOfMonth/$month/$year")
+//        }, year, month, day)
+//        datePickerDialog.show()
     }
 
 //region

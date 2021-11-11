@@ -1,6 +1,5 @@
 package com.neqabty.presentation.ui.home
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -15,14 +14,13 @@ import com.neqabty.databinding.WheelRetireesFragmentBinding
 import com.neqabty.databinding.WheelTrainingFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.wheel_payments_fragment.*
 import javax.inject.Inject
 
-class WheelTrainingFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class WheelTrainingFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 

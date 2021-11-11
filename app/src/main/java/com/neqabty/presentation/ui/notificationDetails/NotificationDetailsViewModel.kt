@@ -6,9 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.NotificationUI
 import com.neqabty.presentation.mappers.NotificationEntityUIMapper
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class NotificationDetailsViewModel @Inject constructor(private val getNotificationDetails: GetNotificationDetails) : BaseViewModel() {
 
     private val notificationEntityUIMapper = NotificationEntityUIMapper()

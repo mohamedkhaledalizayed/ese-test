@@ -22,6 +22,8 @@ import com.neqabty.presentation.common.ASyncTransformer
 import com.neqabty.presentation.common.Constants
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -34,8 +36,10 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
-@Module(includes = [ViewModelModule::class])
+@Module
+@InstallIn(SingletonComponent::class)
 class AppModule {
+
     @Provides
     fun provideContext(application: MyApp): Context = application.applicationContext
 

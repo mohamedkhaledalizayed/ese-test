@@ -15,9 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.BuildConfig
@@ -26,26 +25,24 @@ import com.neqabty.databinding.HomeFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
 import com.neqabty.presentation.util.HasHomeOptionsMenu
 import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
 
-
-class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeOptionsMenu {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class HomeFragment : BaseFragment(), OnBackPressedListener, HasHomeOptionsMenu {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<HomeFragmentBinding>()
 
-    lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -82,9 +79,6 @@ class HomeFragment : BaseFragment(), Injectable, OnBackPressedListener, HasHomeO
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        homeViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(HomeViewModel::class.java)
-
         homeViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })

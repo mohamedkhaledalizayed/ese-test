@@ -1,34 +1,31 @@
 package com.neqabty.presentation.ui.medicalProfessions
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.MedicalProfessionsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.autoCleared
-
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class MedicalProfessionsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class MedicalProfessionsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<MedicalProfessionsFragmentBinding>()
     private var adapter by autoCleared<MedicalProfessionsAdapter>()
-    lateinit var medicalProfessionsViewModel: MedicalProfessionsViewModel
+    private val medicalProfessionsViewModel: MedicalProfessionsViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -55,8 +52,6 @@ class MedicalProfessionsFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        medicalProfessionsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(MedicalProfessionsViewModel::class.java)
 
         val params = MedicalProfessionsFragmentArgs.fromBundle(arguments!!)
 //        title = params.title

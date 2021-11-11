@@ -22,10 +22,12 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.neqabty.R
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Used for testing fragments inside a fake activity.
  */
+@AndroidEntryPoint
 class SingleFragmentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -10,9 +10,11 @@ import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.mappers.ProviderEntityUIMapper
 import com.neqabty.presentation.mappers.ProviderUIEntityMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 import javax.inject.Inject
 
+@HiltViewModel
 class MedicalProviderDetailsViewModel @Inject constructor(
     private val addFavorite: AddFavorite,
     private val removeFavorite: RemoveFavorite,

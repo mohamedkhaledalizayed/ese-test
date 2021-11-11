@@ -1,14 +1,13 @@
 package com.neqabty.presentation.ui.tripDetails
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -16,25 +15,23 @@ import com.neqabty.databinding.TripDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.TripUI
 import com.neqabty.presentation.ui.common.CustomImagePagerAdapter
 import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class TripDetailsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class TripDetailsFragment : BaseFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<TripDetailsFragmentBinding>()
 
     var tripId: Int = 0
 
-    lateinit var tripDetailsViewModel: TripDetailsViewModel
+    private val tripDetailsViewModel: TripDetailsViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -60,9 +57,6 @@ class TripDetailsFragment : BaseFragment(), Injectable {
 
         val params = TripDetailsFragmentArgs.fromBundle(arguments!!)
         tripId = params.tripItem.id
-
-        tripDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(TripDetailsViewModel::class.java)
 
         tripDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

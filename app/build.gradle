@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-allopen'
 apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'dagger.hilt.android.plugin'
 if (getGradle().getStartParameter().getTaskRequests().toString().contains("Hms")) {
     apply plugin: 'com.huawei.agconnect'
 } else {
@@ -129,6 +130,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     sourceSets {
         androidTest.java.srcDirs += "src/test-common/java"
         test.java.srcDirs += "src/test-common/java"
@@ -177,9 +182,6 @@ dependencies {
     implementation deps.okhttp_logging_interceptor
     implementation deps.glide.runtime
 
-    implementation deps.dagger.runtime
-    implementation deps.dagger.android
-    implementation deps.dagger.android_support
     implementation deps.constraint_layout
     implementation deps.kotlin.stdlib
 
@@ -199,11 +201,16 @@ dependencies {
     implementation deps.charts
 
     implementation deps.multidex
-    kapt deps.dagger.android_support_compiler
-    kapt deps.dagger.compiler
     kapt deps.room.compiler
     kapt deps.lifecycle.compiler
     kapt deps.binding.compiler
+
+    implementation deps.hilt.runtime
+    kapt deps.hilt.compiler
+
+    // Activity KTX for viewModels()
+    implementation deps.activity_ktx
+    implementation deps.fragment_ktx
 
     implementation deps.mastercard
     implementation files('libs/cowpaysdk.aar')

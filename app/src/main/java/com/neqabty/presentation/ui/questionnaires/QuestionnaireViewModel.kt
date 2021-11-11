@@ -9,9 +9,11 @@ import com.neqabty.presentation.entities.QuestionnaireUI
 import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.mappers.QuestionnaireEntityUIMapper
 import com.neqabty.presentation.mappers.QuestionnaireVoteEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
 import javax.inject.Inject
 
+@HiltViewModel
 class QuestionnaireViewModel @Inject constructor(
         private val getQuestionnaires: GetQuestionnaires,
         private val voteQuestionnaire: VoteQuestionnaire

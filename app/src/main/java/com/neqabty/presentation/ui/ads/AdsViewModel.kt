@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetAds
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
-import com.neqabty.presentation.entities.AdUI
 import com.neqabty.presentation.mappers.AdEntityUIMapper
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class AdsViewModel @Inject constructor(private val getAds: GetAds) : BaseViewModel() {
 
     private val adEntityUIMapper = AdEntityUIMapper()

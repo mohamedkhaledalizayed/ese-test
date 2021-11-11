@@ -6,31 +6,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.InquireMedicalLettersFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalLetterUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_letters_fragment.*
 import javax.inject.Inject
 
-class InquireMedicalLettersFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class InquireMedicalLettersFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<InquireMedicalLettersFragmentBinding>()
 
-    lateinit var inquireMedicalLettersViewModel: InquireMedicalLettersViewModel
+    private val inquireMedicalLettersViewModel: InquireMedicalLettersViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -53,8 +51,6 @@ class InquireMedicalLettersFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inquireMedicalLettersViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(InquireMedicalLettersViewModel::class.java)
 
         inquireMedicalLettersViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

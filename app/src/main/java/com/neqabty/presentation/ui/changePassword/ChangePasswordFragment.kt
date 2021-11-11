@@ -11,31 +11,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.ChangePasswordFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.change_password_fragment.*
-import javax.inject.Inject
 
-
-class ChangePasswordFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class ChangePasswordFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<ChangePasswordFragmentBinding>()
 
-    lateinit var changePasswordViewModel: ChangePasswordViewModel
+    private val changePasswordViewModel: ChangePasswordViewModel by viewModels()
 
     var isSetNew = false
     var mobile = ""
@@ -58,9 +54,6 @@ class ChangePasswordFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        changePasswordViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ChangePasswordViewModel::class.java)
 
         changePasswordViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

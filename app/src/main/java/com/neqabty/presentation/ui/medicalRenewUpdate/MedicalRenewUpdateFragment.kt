@@ -12,9 +12,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentResultListener
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -22,25 +21,24 @@ import com.neqabty.databinding.MedicalRenewUpdateFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_renew_fragment.llContent
 import kotlinx.android.synthetic.main.medical_renew_fragment.rvFollowers
 import kotlinx.android.synthetic.main.medical_renew_update_fragment.*
 import kotlinx.android.synthetic.main.medical_renew_update_fragment.view.*
 import javax.inject.Inject
 
-class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class MedicalRenewUpdateFragment : BaseFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     var binding by autoCleared<MedicalRenewUpdateFragmentBinding>()
     private var adapter by autoCleared<FollowersUpdateAdapter>()
 
-    @Inject
-    lateinit var medicalRenewUpdateViewModel: MedicalRenewUpdateViewModel
+    private val medicalRenewUpdateViewModel: MedicalRenewUpdateViewModel by viewModels()
+
     var filteredFollowersList = mutableListOf<MedicalRenewalUI.FollowerItem>()
 
     lateinit var medicalRenewalUI: MedicalRenewalUI
@@ -71,9 +69,6 @@ class MedicalRenewUpdateFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        medicalRenewUpdateViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(MedicalRenewUpdateViewModel::class.java)
 
         medicalRenewUpdateViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

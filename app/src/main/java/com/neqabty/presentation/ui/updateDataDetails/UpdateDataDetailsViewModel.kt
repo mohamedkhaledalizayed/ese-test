@@ -8,10 +8,11 @@ import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.InquireUpdateUserDataUI
 import com.neqabty.presentation.entities.UpdateUserDataUI
 import com.neqabty.presentation.mappers.InquireUpdateUserDataEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
-
 import javax.inject.Inject
 
+@HiltViewModel
 class UpdateDataDetailsViewModel @Inject constructor(
     private val getUpdateUserDataInquiry: GetUpdateUserDataInquiry,
     private val updateUserData: UpdateUserData

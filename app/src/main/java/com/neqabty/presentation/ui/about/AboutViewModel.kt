@@ -6,9 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.mappers.SyndicateEntityUIMapper
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class AboutViewModel @Inject constructor(private val getSyndicate: GetSyndicate) : BaseViewModel() {
 
     private val syndicateEntityUIMapper = SyndicateEntityUIMapper()

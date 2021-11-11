@@ -9,28 +9,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.ForgetPasswordFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.forget_password_fragment.*
-import javax.inject.Inject
 
-class ForgetPasswordFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class ForgetPasswordFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<ForgetPasswordFragmentBinding>()
 
-    lateinit var forgetPasswordViewModel: ForgetPasswordViewModel
+    private val forgetPasswordViewModel: ForgetPasswordViewModel by viewModels()
 
     var mobile = ""
     override fun onCreateView(
@@ -50,10 +47,6 @@ class ForgetPasswordFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        forgetPasswordViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ForgetPasswordViewModel::class.java)
-
         forgetPasswordViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })

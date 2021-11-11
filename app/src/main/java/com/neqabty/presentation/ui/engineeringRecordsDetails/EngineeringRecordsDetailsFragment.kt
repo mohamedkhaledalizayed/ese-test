@@ -20,9 +20,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -30,27 +29,26 @@ import com.neqabty.databinding.EngineeringRecordsDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.entities.RegisteryUI
 import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.engineering_records_details_fragment.*
 import java.io.*
 import java.util.*
 import javax.inject.Inject
 
-class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class EngineeringRecordsDetailsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<EngineeringRecordsDetailsFragmentBinding>()
 //    private var adapter by autoCleared<PhotosAdapter>()
 
-    lateinit var engineeringRecordsDetailsViewModel: EngineeringRecordsDetailsViewModel
+    private val engineeringRecordsDetailsViewModel: EngineeringRecordsDetailsViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -91,10 +89,6 @@ class EngineeringRecordsDetailsFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        engineeringRecordsDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(EngineeringRecordsDetailsViewModel::class.java)
-
         engineeringRecordsDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })

@@ -6,10 +6,11 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.ClaimingValidationUI
 import com.neqabty.presentation.mappers.*
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
 import javax.inject.Inject
 
+@HiltViewModel
 class ClaimingViewModel @Inject constructor(
     val getAllGoverns: GetAllGoverns,
     val getAllAreas: GetAllAreas,

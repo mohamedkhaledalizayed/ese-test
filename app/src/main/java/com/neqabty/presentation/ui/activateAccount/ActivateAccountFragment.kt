@@ -7,31 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.ActivateAccountFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activate_account_fragment.*
-import javax.inject.Inject
 
-class ActivateAccountFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class ActivateAccountFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<ActivateAccountFragmentBinding>()
 
-    lateinit var activateAccountViewModel: ActivateAccountViewModel
+    private val activateAccountViewModel: ActivateAccountViewModel by viewModels()
     var type: Int? = 0
     var password: String = ""
 
@@ -59,9 +56,6 @@ class ActivateAccountFragment : BaseFragment(), Injectable {
 
         val params = ActivateAccountFragmentArgs.fromBundle(arguments!!)
         type = params.type
-
-        activateAccountViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ActivateAccountViewModel::class.java)
 
         activateAccountViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

@@ -1,7 +1,6 @@
 package com.neqabty.presentation.ui.claiming
 
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -14,21 +13,18 @@ import com.neqabty.R
 import com.neqabty.databinding.ClaimingFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 
-import javax.inject.Inject
-
-class ClaimingFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class ClaimingFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<ClaimingFragmentBinding>()
 
-    lateinit var claimingViewModel: ClaimingViewModel
+    private val claimingViewModel: ClaimingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,8 +44,6 @@ class ClaimingFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ClaimingViewModel::class.java)
         initializeViews()
     }
 

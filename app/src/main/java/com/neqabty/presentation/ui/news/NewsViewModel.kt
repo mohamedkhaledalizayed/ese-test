@@ -6,9 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.NewsUI
 import com.neqabty.presentation.mappers.NewsEntityUIMapper
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class NewsViewModel @Inject constructor(private val getAllNews: GetAllNews) : BaseViewModel() {
 
     private val newsEntityUIMapper = NewsEntityUIMapper()

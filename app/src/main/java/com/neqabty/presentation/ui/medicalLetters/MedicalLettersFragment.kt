@@ -8,9 +8,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,24 +18,23 @@ import com.neqabty.R
 import com.neqabty.databinding.MedicalLettersFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.LiteFollowersListUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_letters_fragment.*
 import javax.inject.Inject
 
-class MedicalLettersFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class MedicalLettersFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<MedicalLettersFragmentBinding>()
     private var adapter by autoCleared<MedicalLettersAdapter>()
 
-    lateinit var medicalLetterViewModel: MedicalLettersViewModel
+    private val medicalLetterViewModel: MedicalLettersViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -71,8 +69,6 @@ class MedicalLettersFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        medicalLetterViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(MedicalLettersViewModel::class.java)
 
 //        PreferencesHelper(requireContext()).user = "3608662"
         initializeViews()

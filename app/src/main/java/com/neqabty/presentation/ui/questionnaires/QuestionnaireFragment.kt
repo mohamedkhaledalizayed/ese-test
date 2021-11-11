@@ -13,9 +13,8 @@ import android.widget.RadioGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
@@ -28,20 +27,18 @@ import com.neqabty.databinding.QuestionnaireFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.QuestionnaireUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class QuestionnaireFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class QuestionnaireFragment : BaseFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     var binding by autoCleared<QuestionnaireFragmentBinding>()
 
-    @Inject
-    lateinit var questionnaireViewModel: QuestionnaireViewModel
+    private val questionnaireViewModel: QuestionnaireViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -69,9 +66,6 @@ class QuestionnaireFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        questionnaireViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(QuestionnaireViewModel::class.java)
 
         questionnaireViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)

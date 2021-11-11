@@ -1,14 +1,13 @@
 package com.neqabty.presentation.ui.medicalProviderDetails
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -16,27 +15,25 @@ import com.neqabty.databinding.MedicalProviderDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.ui.phones.PhonesAdapter
 import com.neqabty.presentation.ui.phones.PhonesFragment
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.presentation.util.openMap
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_provider_details_fragment.*
-
 import javax.inject.Inject
 
-class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class MedicalProviderDetailsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<MedicalProviderDetailsFragmentBinding>()
     lateinit var providerItem: ProviderUI
 
-    lateinit var medicalProviderDetailsViewModel: MedicalProviderDetailsViewModel
+    private val medicalProviderDetailsViewModel: MedicalProviderDetailsViewModel by viewModels()
     @Inject
     lateinit var appExecutors: AppExecutors
 
@@ -59,8 +56,6 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        medicalProviderDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(MedicalProviderDetailsViewModel::class.java)
 
         val params = MedicalProviderDetailsFragmentArgs.fromBundle(requireArguments())
         providerItem = params.medicalProviderItem

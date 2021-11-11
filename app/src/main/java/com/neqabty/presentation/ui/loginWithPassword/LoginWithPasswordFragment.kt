@@ -9,29 +9,26 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.LoginWithPasswordFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.login_with_password_fragment.*
-import javax.inject.Inject
 
-class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class LoginWithPasswordFragment : BaseFragment(), HasHomeOptionsMenu {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<LoginWithPasswordFragmentBinding>()
 
-    lateinit var loginWithPasswordViewModel: LoginWithPasswordViewModel
+    private val loginWithPasswordViewModel: LoginWithPasswordViewModel by viewModels()
 
     var newToken = ""
     var mobile = ""
@@ -57,8 +54,6 @@ class LoginWithPasswordFragment : BaseFragment(), Injectable, HasHomeOptionsMenu
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setToolbarTitle("")
-        loginWithPasswordViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(LoginWithPasswordViewModel::class.java)
 
         mobile = LoginWithPasswordFragmentArgs.fromBundle(requireArguments()).mobile
         initializeObservers()

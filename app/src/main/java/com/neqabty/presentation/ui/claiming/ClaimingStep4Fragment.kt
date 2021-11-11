@@ -1,7 +1,6 @@
 package com.neqabty.presentation.ui.claiming
 
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -13,20 +12,17 @@ import com.neqabty.R
 import com.neqabty.databinding.Claiming4FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 
-import javax.inject.Inject
-
-class ClaimingStep4Fragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class ClaimingStep4Fragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<Claiming4FragmentBinding>()
 
-    lateinit var claimingViewModel: ClaimingViewModel
+    private val claimingViewModel: ClaimingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,8 +42,6 @@ class ClaimingStep4Fragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ClaimingViewModel::class.java)
 
         initializeViews()
     }

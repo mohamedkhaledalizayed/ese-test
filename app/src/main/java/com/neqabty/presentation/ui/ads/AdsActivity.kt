@@ -3,8 +3,8 @@
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -13,20 +13,14 @@ import com.bumptech.glide.request.target.Target
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.presentation.entities.AdUI
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.ads_activity.*
 import javax.inject.Inject
 
- class AdsActivity : AppCompatActivity(), HasAndroidInjector {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+ @AndroidEntryPoint
+ class AdsActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
-
-    lateinit var adsViewModel: AdsViewModel
+    private val adsViewModel: AdsViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -40,9 +34,7 @@ import javax.inject.Inject
         adsList = intent.getParcelableArrayListExtra<AdUI>("adsList") as ArrayList<AdUI>
 
         initializeViews()
-//        adsViewModel = ViewModelProviders.of(this, viewModelFactory)
-//                .get(AdsViewModel::class.java)
-//
+
 //        adsViewModel.viewState.observe(this, Observer {
 //            if (it != null) handleViewState(it)
 //        })
@@ -68,9 +60,6 @@ import javax.inject.Inject
             finish()
         }
     }
-
-    //region
-    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
 // endregion
 }

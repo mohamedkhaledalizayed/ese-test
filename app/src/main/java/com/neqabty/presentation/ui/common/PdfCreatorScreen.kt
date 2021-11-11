@@ -23,11 +23,13 @@ import com.tejpratapsingh.pdfcreator.views.basic.PDFHorizontalView
 import com.tejpratapsingh.pdfcreator.views.basic.PDFImageView
 import com.tejpratapsingh.pdfcreator.views.basic.PDFLineSeparatorView
 import com.tejpratapsingh.pdfcreator.views.basic.PDFTextView
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.net.URLConnection
 import java.util.*
 
 
+@AndroidEntryPoint
 class PdfCreatorScreen : PDFCreatorActivity()  {
 
     private lateinit var data: MedicalRenewalUI
@@ -352,7 +354,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
 
     override fun onNextClicked(savedPDFFile: File?) {}
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_pdf_viewer, menu)
         return true
     }

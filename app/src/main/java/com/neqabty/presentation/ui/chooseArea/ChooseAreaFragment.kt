@@ -11,9 +11,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -21,20 +20,18 @@ import com.neqabty.databinding.ChooseAreaFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.GovernUI
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class ChooseAreaFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class ChooseAreaFragment : BaseFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     var binding by autoCleared<ChooseAreaFragmentBinding>()
 
-    @Inject
-    lateinit var chooseAreaViewModel: ChooseAreaViewModel
+    private val chooseAreaViewModel: ChooseAreaViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -66,9 +63,6 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        chooseAreaViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(chooseAreaViewModel::class.java)
 
         chooseAreaViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

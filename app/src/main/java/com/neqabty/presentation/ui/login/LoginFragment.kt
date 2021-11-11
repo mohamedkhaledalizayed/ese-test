@@ -6,31 +6,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.LoginFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.HasHomeOptionsMenu
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.login_fragment.*
-import javax.inject.Inject
 
-class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class LoginFragment : BaseFragment(), HasHomeOptionsMenu {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<LoginFragmentBinding>()
 
-    lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -52,8 +49,6 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setToolbarTitle("")
-        loginViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(LoginViewModel::class.java)
 
         initializeObservers()
         initializeViews()
