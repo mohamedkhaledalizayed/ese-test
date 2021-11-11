@@ -287,6 +287,18 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetMedicalDirectoryLookups(neqabtyRepository: NeqabtyRepository): GetMedicalDirectoryLookups {
+        return GetMedicalDirectoryLookups(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetMedicalDirectoryProviders(neqabtyRepository: NeqabtyRepository): GetMedicalDirectoryProviders {
+        return GetMedicalDirectoryProviders(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetAllDoctors(neqabtyRepository: NeqabtyRepository): GetAllDoctors {
         return GetAllDoctors(ASyncTransformer(), neqabtyRepository)
     }

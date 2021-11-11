@@ -1,21 +1,21 @@
 package com.neqabty.presentation.ui.medicalProviders
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.GetAllSpecializations
-import com.neqabty.domain.usecases.GetProvidersByType
+import com.neqabty.domain.usecases.GetMedicalDirectoryLookups
+import com.neqabty.domain.usecases.GetMedicalDirectoryProviders
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
+import com.neqabty.presentation.entities.MedicalDirectoryLookupsUI
+import com.neqabty.presentation.entities.MedicalDirectoryProviderUI
 import com.neqabty.presentation.entities.ProviderUI
-import com.neqabty.presentation.entities.SpecializationUI
-import com.neqabty.presentation.mappers.ProviderEntityUIMapper
-import com.neqabty.presentation.mappers.SpecializationEntityUIMapper
-
+import com.neqabty.presentation.mappers.MedicalDirectoryLookupsEntityUIMapper
+import com.neqabty.presentation.mappers.MedicalDirectoryProviderEntityUIMapper
 import javax.inject.Inject
 
-class MedicalProvidersViewModel @Inject constructor(private val getAllSpecializations: GetAllSpecializations, private val getProvidersByType: GetProvidersByType) : BaseViewModel() {
+class MedicalProvidersViewModel @Inject constructor(private val getAllSpecializations: GetMedicalDirectoryLookups, private val getProvidersByType: GetMedicalDirectoryProviders) : BaseViewModel() {
 
-    private val specializationEntityUIMapper = SpecializationEntityUIMapper()
-    private val providerEntityUIMapper = ProviderEntityUIMapper()
+    private val medicalDirectoryLookupsEntityUIMapper = MedicalDirectoryLookupsEntityUIMapper()
+    private val medicalDirectoryProviderEntityUIMapper = MedicalDirectoryProviderEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<MedicalProvidersViewState> = MutableLiveData()
 
@@ -23,16 +23,16 @@ class MedicalProvidersViewModel @Inject constructor(private val getAllSpecializa
         viewState.value = MedicalProvidersViewState()
     }
 
-    fun getMedicalProfessions(id: String, govID: String, areaID: String) {
-        viewState.value?.professions?.let {
+    fun getMedicalProfessions(mobileNumber: String) {
+        viewState.value?.specializations?.let {
             onProfessionsReceived(it)
-        } ?: addDisposable(getAllSpecializations.observable()
-                .flatMap {
+        } ?: addDisposable(getAllSpecializations.getLookups(mobileNumber)
+                .map {
                     it.let {
-                        specializationEntityUIMapper.observable(it)
+                        medicalDirectoryLookupsEntityUIMapper.mapFrom(it)
                     }
                 }.subscribe(
-                        { onProfessionsReceived(it) },
+                        { onProfessionsReceived(it.specializations?: mutableListOf()) },
                         {
                             viewState.value = viewState.value?.copy(isLoading = false)
                             errorState.value = handleError(it)
@@ -41,20 +41,27 @@ class MedicalProvidersViewModel @Inject constructor(private val getAllSpecializa
         )
     }
 
-    private fun onProfessionsReceived(professions: List<SpecializationUI>) {
+    private fun onProfessionsReceived(professions: List<MedicalDirectoryLookupsUI.DoctorSpecialization>) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
-                professions = professions)
+                specializations = professions)
         viewState.value = newViewState
     }
 
-    fun getMedicalProviders(id: String, name: String, govID: String, areaID: String, professionID: String?, degreeID: String?) {
+    fun getMedicalProviders(
+        mobileNumber: String,
+        providerTypeId: String,
+        govId: String,
+        areaId: String,
+        providerName: String,
+        specializationId: String
+    ) {
         viewState.value?.providers?.let {
             onProvidersReceived(it)
-        } ?: addDisposable(getProvidersByType.getProvidersByType(id, govID, areaID, name, professionID, degreeID)
+        } ?: addDisposable(getProvidersByType.getProviders(mobileNumber, providerTypeId, govId, areaId, providerName, specializationId)
                 .flatMap {
                     it.let {
-                        providerEntityUIMapper.observable(it)
+                        medicalDirectoryProviderEntityUIMapper.observable(it)
                     }
                 }.subscribe(
                         { onProvidersReceived(it) },
@@ -66,10 +73,27 @@ class MedicalProvidersViewModel @Inject constructor(private val getAllSpecializa
         )
     }
 
-    private fun onProvidersReceived(providers: List<ProviderUI>) {
+    private fun onProvidersReceived(providers: List<MedicalDirectoryProviderUI>) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
                 providers = providers)
         viewState.value = newViewState
+    }
+
+    fun mapProviders(providerUI: MedicalDirectoryProviderUI): ProviderUI {
+        return ProviderUI(
+            id = providerUI.id.toInt(),
+            name = providerUI.name,
+            address = providerUI.address,
+            phones = providerUI.phone,
+            emails = providerUI.email,
+            typeID = providerUI.typeId,
+            typeName = providerUI.typeName,
+            governId = "",
+            areaId = "",
+            createdAt = "",
+            createdBy = "",
+            updatedAt = "",
+            updatedBy = "")
     }
 }

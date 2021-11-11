@@ -511,6 +511,29 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    private val medicalDirectoryLookupsDataEntityMapper = MedicalDirectoryLookupsDataEntityMapper()
+
+    override fun getMedicalDirectoryLookups(mobileNumber: String): Observable<MedicalDirectoryLookupsEntity> {
+        return api.getMedicalDirectoryLookups(mobileNumber).map { lookups ->
+            medicalDirectoryLookupsDataEntityMapper.mapFrom(lookups)
+        }
+    }
+
+    private val medicalDirectoryProviderDataEntityMapper = MedicalDirectoryProviderDataEntityMapper()
+
+    override fun getMedicalDirectoryProviders(
+        mobileNumber: String,
+        providerTypeId: String,
+        govId: String,
+        areaId: String,
+        providerName: String,
+        specializationId: String
+    ): Observable<List<MedicalDirectoryProviderEntity>> {
+        return api.getMedicalDirectoryProviders(mobileNumber, providerTypeId, govId, areaId, providerName, specializationId).map { providers ->
+            providers.map { medicalDirectoryProviderDataEntityMapper.mapFrom(it) }
+        }
+    }
+
     private val doctorDataEntityMapper = DoctorDataEntityMapper()
 
     override fun getAllDoctors(): Observable<List<DoctorEntity>> {

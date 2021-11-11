@@ -72,13 +72,14 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 medicalProviderDetailsViewModel.isFavorite(providerItem)
-                medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeID!!)
+//                medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeId!!)
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
         medicalProviderDetailsViewModel.isFavorite(providerItem)
-        medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeID!!)
+//        medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeId!!)
+        initializeViews()
     }
 
     private fun handleViewState(state: MedicalProviderDetailsViewState) {
@@ -88,7 +89,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
         state.providerDetails?.let {
             binding.providerItem = it
         }
-        initializeViews(state)
+//        initializeViews(state)
 //        activity?.invalidateOptionsMenu()
         renderFav()
         binding.ivFav.setOnClickListener {
@@ -96,7 +97,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
         }
     }
 
-    private fun initializeViews(state: MedicalProviderDetailsViewState) {
+    private fun initializeViews() {
         val phoneNumbers = providerItem.phones?.replace(" ", "")?.replace("_x000D_\n", "-")?.replace("\r\n", "-")
                 ?.replace('\n', '-')?.replace('\r', '-')?.split("-")
 
@@ -105,7 +106,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
         binding.rvPhones.adapter = adapter
 
         bMap.setOnClickListener {
-            state.providerDetails?.address?.let { bMap.openMap(it, requireContext()) }
+            providerItem.address?.let { bMap.openMap(it, requireContext()) }
         }
 
         bClaiming.setOnClickListener {
@@ -122,6 +123,11 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
 //        tvPhone.setOnClickListener {
 //            openCallFragment(state.providerDetails?.phones!!)
 //        }
+
+        renderFav()
+        binding.ivFav.setOnClickListener {
+            toggleFav()
+        }
     }
 
     //region

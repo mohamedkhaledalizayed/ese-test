@@ -44,6 +44,21 @@ interface WebService {
     @POST("api/v2/trips")
     fun getTripDetails(@Body tripDetailsRequest: TripDetailsRequest): Observable<ApiResponse<TripData>>
 
+    @GET("api/Api/ApiSPPCostCard/GetLookUps")
+    fun getMedicalDirectoryLookups(
+        @Query("mobile_number") mobileNumber: String,
+        @Query("server") server: String = ""): Observable<MedicalDirectoryLookupsData>
+
+    @GET("api/Api/ApiSPPCostCard/GetBranchList")
+    fun getMedicalDirectoryProviders(
+        @Query("mobile_number") mobileNumber: String,
+        @Query("ServiceProviderTypeId") providerTypeId: String,
+        @Query("GovernorateId") govId: String,
+        @Query("PoliceStationId") areaId: String,
+        @Query("SearchValue") providerName: String,
+        @Query("MedicalSpecialityId") specializationId: String,
+        @Query("server") server: String = ""): Observable<List<MedicalDirectoryProviderData>>
+
     @GET("api/v2/medical/areas")
     fun getAllAreas(): Observable<ApiResponse<List<AreaData>>>
 

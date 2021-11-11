@@ -252,6 +252,21 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getProvidersByType(providerTypeId, govId, areaId, providerName, professionID, degreeID)
     }
 
+    override fun getMedicalDirectoryLookups(mobileNumber: String): Observable<MedicalDirectoryLookupsEntity> {
+        return remoteDataStore.getMedicalDirectoryLookups(mobileNumber)
+    }
+
+    override fun getMedicalDirectoryProviders(
+        mobileNumber: String,
+        providerTypeId: String,
+        govId: String,
+        areaId: String,
+        providerName: String,
+        specializationId: String
+    ): Observable<List<MedicalDirectoryProviderEntity>> {
+        return remoteDataStore.getMedicalDirectoryProviders(mobileNumber, providerTypeId, govId, areaId, providerName, specializationId)
+    }
+
     override fun getAllDoctors(): Observable<List<DoctorEntity>> {
         return remoteDataStore.getAllDoctors()
     }

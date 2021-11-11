@@ -34,7 +34,7 @@
                 android:background="@drawable/rounded_bg"
                 android:orientation="vertical"
                 android:padding="@dimen/margin_horizontal_normal"
-                android:visibility="invisible"
+                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 

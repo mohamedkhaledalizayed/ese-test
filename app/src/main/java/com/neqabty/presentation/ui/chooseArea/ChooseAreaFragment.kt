@@ -22,8 +22,8 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
-import com.neqabty.presentation.entities.AreaUI
-import com.neqabty.presentation.entities.GovernUI
+import com.neqabty.presentation.entities.MedicalDirectoryLookupsUI
+import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import javax.inject.Inject
 
@@ -39,8 +39,8 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    var governsResultList: List<GovernUI>? = mutableListOf()
-    var areasResultList: List<AreaUI>? = mutableListOf()
+    var governsResultList: List<MedicalDirectoryLookupsUI.Govern>? = mutableListOf()
+    var areasResultList: List<MedicalDirectoryLookupsUI.Area>? = mutableListOf()
     var governID: Int = 0
     var areaID: Int = 0
 
@@ -76,13 +76,13 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
         chooseAreaViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                chooseAreaViewModel.getAllContent1()
+                chooseAreaViewModel.getAllContent1(PreferencesHelper(requireContext()).mobile)
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
             }, message = error?.message)
         })
-        chooseAreaViewModel.getAllContent1()
+        chooseAreaViewModel.getAllContent1(PreferencesHelper(requireContext()).mobile)
         initializeViews()
     }
 
@@ -92,11 +92,6 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
             startActivity(subscriptionIntent)
         }
         binding.bNext.setOnClickListener {
-//                ClaimingData.areaId = (spArea.selectedItem as AreaUI).id
-//                ClaimingData.governId = (spGovern.selectedItem as GovernUI).id
-//            navController().navigate(
-//                    ChooseAreaFragmentDirections.openMedical(governID, areaID)
-//            )
             navController().navigate(
                     ChooseAreaFragmentDirections.openMedicalMain(binding.edServiceProviderName.text.toString(), governID, areaID)
             )
@@ -128,7 +123,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
         binding.spGovern.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                governID = (parent.getItemAtPosition(position) as GovernUI).id
+                governID = (parent.getItemAtPosition(position) as MedicalDirectoryLookupsUI.Govern).id
                 renderAreas()
             }
         }
@@ -136,7 +131,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
     }
 
     fun renderAreas() {
-        var filteredAreasList: List<AreaUI>? = mutableListOf()
+        var filteredAreasList: List<MedicalDirectoryLookupsUI.Area>? = mutableListOf()
 
         filteredAreasList = areasResultList?.filter {
             it.govId == governID
@@ -146,7 +141,7 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
         binding.spArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                areaID = (parent.getItemAtPosition(position) as AreaUI).id
+                areaID = (parent.getItemAtPosition(position) as MedicalDirectoryLookupsUI.Area).id
             }
         }
         binding.spArea.setSelection(0)

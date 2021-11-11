@@ -12,6 +12,8 @@ interface NeqabtyDataStore {
     fun getNews(id: String): Observable<List<NewsEntity>>
     fun getTrips(id: String): Observable<List<TripEntity>>
     fun getTripDetails(id: String): Observable<TripEntity>
+    fun getMedicalDirectoryLookups(mobileNumber: String): Observable<MedicalDirectoryLookupsEntity>
+    fun getMedicalDirectoryProviders(mobileNumber: String, providerTypeId: String, govId: String, areaId: String, providerName: String, specializationId: String): Observable<List<MedicalDirectoryProviderEntity>>
     fun getAllDoctors(): Observable<List<DoctorEntity>>
     fun getAllAreas(): Observable<List<AreaEntity>>
     fun getAllGoverns(): Observable<List<GovernEntity>>
