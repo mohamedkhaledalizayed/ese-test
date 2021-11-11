@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_item"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_alignParentStart="true"
+            android:id="@+id/location_icon"
+            android:src="@drawable/ic_baseline_location_on_24" />
+
+        <TextView
+            android:id="@+id/main_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toEndOf="@+id/location_icon"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="القاهرة, الشروق"
+            android:textColor="@color/color_black" />
+
+
+
+        <TextView
+            android:id="@+id/address_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location_icon"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_alignParentStart="true"
+            android:text="شارع محمد على, عمارة 13, شقة 5" />
+
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/address_details"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="#E1E1E1" />
+
+    </RelativeLayout>
+</layout>

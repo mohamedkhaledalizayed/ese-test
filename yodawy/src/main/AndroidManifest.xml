@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.neqabty.yodawy">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
+        android:name=".core.application.YodawyApplication"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".modules.CheckOutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.products.presentation.view.productscreen.ProductDetailsActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.No" />
+        <activity
+            android:name=".modules.products.presentation.view.productscreen.SearchActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.No" />
+        <activity
+            android:name=".modules.address.presentation.view.addaddressscreen.AddAddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.address.presentation.view.adressscreen.AddressesActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".modules.address.presentation.view.homescreen.HomeActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.No" />
+    </application>
+
+</manifest>
