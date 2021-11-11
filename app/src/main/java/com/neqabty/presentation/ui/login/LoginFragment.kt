@@ -1,5 +1,6 @@
 package com.neqabty.presentation.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.HasHomeOptionsMenu
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import com.neqabty.yodawy.modules.home.presentation.view.homescreen.HomeActivity
 import kotlinx.android.synthetic.main.login_fragment.*
 import javax.inject.Inject
 
@@ -98,6 +100,7 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
     fun initializeViews() {
         binding.bSend.setOnClickListener {
             login()
+            startActivity(Intent(requireContext(), HomeActivity::class.java))
         }
         binding.ccp.registerCarrierNumberEditText(binding.edMobile)
     }
