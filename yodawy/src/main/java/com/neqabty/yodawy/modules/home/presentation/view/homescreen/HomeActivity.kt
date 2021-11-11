@@ -3,8 +3,8 @@ package com.neqabty.yodawy.modules.home.presentation.view.homescreen
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import com.neqabty.yodawy.R
@@ -23,13 +23,7 @@ class HomeActivity : AppCompatActivity() {
 //        cart.setOnClickListener {  startActivity(Intent(this, CartScreen::class.java)) }
         setSupportActionBar(toolbar)
         supportActionBar?.elevation = 0.0f
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-        }
-        return super.onOptionsItemSelected(item)
+        toolbar.findViewById<ImageView>(R.id.back_btn).setOnClickListener { finish() }
     }
 
     fun findMedications(view: View) {startActivity(Intent(this, SearchActivity::class.java))}

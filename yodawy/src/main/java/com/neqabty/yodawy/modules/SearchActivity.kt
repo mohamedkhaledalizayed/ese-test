@@ -3,6 +3,7 @@ package com.neqabty.yodawy.modules
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
@@ -25,6 +26,7 @@ class SearchActivity : AppCompatActivity() {
                 startActivity(Intent(this@SearchActivity, ProductDetailsActivity::class.java))
             }
         }
+        toolbar.findViewById<ImageView>(R.id.back_btn).setOnClickListener { finish() }
         setDate()
     }
 
