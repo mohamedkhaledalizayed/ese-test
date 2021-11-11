@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@color/purple_200"
+    android:elevation="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_10sdp"
+        >
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/back_btn"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="Find Medications"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15ssp" />
+
+        <FrameLayout
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/cart"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/shopping_cart"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_8ssp"
+                android:id="@+id/notifications_numbers"
+                android:paddingStart="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_3sdp"
+                android:background="@drawable/badge_background"
+                android:textColor="#fff"
+                android:text="5"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_gravity="top|center"
+                />
+        </FrameLayout>
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/back_btn"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/search_bg"
+            android:drawableStart="@drawable/ic_search_black_24dp"
+            android:hint=" Pravotin"
+            android:padding="@dimen/_7sdp"
+            android:textColor="@color/color_black"
+            android:textColorHint="@color/color_black"
+            android:textSize="@dimen/_10ssp" />
+
+    </RelativeLayout>
+
+
+</androidx.appcompat.widget.Toolbar>

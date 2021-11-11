@@ -9,22 +9,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".modules.ProductDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.SearchActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.No" />
+        <activity
             android:name=".modules.AddAddressActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".modules.AddressesActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".modules.home.presentation.view.homescreen.HomeActivity"
-            android:theme="@style/AppTheme.No"
-            android:exported="false"/>
+            android:exported="false"
+            android:theme="@style/AppTheme.No" />
     </application>
 
 </manifest>

@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.modules.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +32,6 @@ class HomeActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun findMedications(view: View) {}
+    fun findMedications(view: View) {startActivity(Intent(this, SearchActivity::class.java))}
     fun orders(view: View) {}
 }
