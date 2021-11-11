@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.neqabty.yodawy">
+
     <application
+        android:name=".core.application.YodawyApplication"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".core.application.YodawyApplication"
-        android:theme="@style/Theme.Courses">
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".modules.home.presentation.view.homescreen.HomeActivity"
+            android:name=".modules.AddAddressActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".modules.AddressesActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <activity
+            android:name=".modules.home.presentation.view.homescreen.HomeActivity"
+            android:theme="@style/AppTheme.No"
+            android:exported="false"/>
     </application>
 
 </manifest>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".modules.AddAddressActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="@string/street"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/_12ssp" />
+
+        <EditText
+            android:id="@+id/street"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:hint="@string/add_street_name"
+            android:inputType="text"
+            android:padding="@dimen/_8sdp"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/purple_200"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="@string/building"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/_12ssp" />
+
+        <EditText
+            android:id="@+id/building"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:hint="@string/add_building_number"
+            android:inputType="text"
+            android:padding="@dimen/_8sdp"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/purple_200"
+            android:textSize="@dimen/_10ssp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="@string/floor"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <EditText
+                    android:id="@+id/building_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:hint="@string/add_floor_number"
+                    android:inputType="text"
+                    android:padding="@dimen/_8sdp"
+                    android:textColorHint="@color/gray"
+                    android:textColor="@color/purple_200"
+                    android:textSize="@dimen/_10ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="@string/apartment"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/_12ssp"/>
+
+                <EditText
+                    android:id="@+id/apartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:hint="@string/add_apartment_number"
+                    android:inputType="text"
+                    android:padding="@dimen/_8sdp"
+                    android:textColorHint="@color/gray"
+                    android:textColor="@color/purple_200"
+                    android:textSize="@dimen/_10ssp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="@string/nearest_landmark"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/_12ssp" />
+
+        <EditText
+            android:id="@+id/landmark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:hint="@string/add_bank_name_supermarket_hospital"
+            android:inputType="text"
+            android:padding="@dimen/_8sdp"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/purple_200"
+            android:textSize="@dimen/_10ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="@string/nickname"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/_12ssp" />
+
+        <EditText
+            android:id="@+id/nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:hint="@string/home_office_etc"
+            android:inputType="text"
+            android:padding="@dimen/_8sdp"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/purple_200"
+            android:textSize="@dimen/_10ssp" />
+
+        <Button
+            android:id="@+id/save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/add_address_btn_bg"
+            android:onClick="saveAddress"
+            android:text="@string/save_address"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp" />
+
+    </LinearLayout>
+
+</ScrollView>
