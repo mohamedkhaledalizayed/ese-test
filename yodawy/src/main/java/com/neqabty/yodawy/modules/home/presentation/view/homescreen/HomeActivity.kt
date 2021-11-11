@@ -4,10 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.modules.CartActivity
 import com.neqabty.yodawy.modules.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.elevation = 0.0f
         toolbar.findViewById<ImageView>(R.id.back_btn).setOnClickListener { finish() }
+        toolbar.findViewById<FrameLayout>(R.id.cart).setOnClickListener { startActivity(Intent(this, CartActivity::class.java)) }
     }
 
     fun findMedications(view: View) {startActivity(Intent(this, SearchActivity::class.java))}

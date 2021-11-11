@@ -3,6 +3,7 @@ package com.neqabty.yodawy.modules
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,8 @@ class SearchActivity : AppCompatActivity() {
             }
         }
         toolbar.findViewById<ImageView>(R.id.back_btn).setOnClickListener { finish() }
+        toolbar.findViewById<FrameLayout>(R.id.cart).setOnClickListener { startActivity(Intent(this, CartActivity::class.java)) }
+
         setDate()
     }
 

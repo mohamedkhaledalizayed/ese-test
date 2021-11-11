@@ -9,9 +9,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".modules.ProductDetailsActivity"
-            android:theme="@style/AppTheme.No"
+            android:name=".modules.CheckOutActivity"
             android:exported="false" />
+        <activity
+            android:name=".modules.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.ProductDetailsActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.No" />
         <activity
             android:name=".modules.SearchActivity"
             android:exported="false"
