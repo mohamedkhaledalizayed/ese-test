@@ -42,8 +42,6 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
         }
 
         if (item.status == 1){
-            viewHolder.binding.addItem.visibility = View.VISIBLE
-            viewHolder.binding.viewDetails.visibility = View.GONE
             viewHolder.binding.medicationStatus.setImageResource(R.drawable.check_mark)
             viewHolder.binding.status.visibility = View.GONE
             viewHolder.binding.deliveryTime.visibility = View.VISIBLE
@@ -62,17 +60,6 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
                 viewHolder.binding.deliveryTime.visibility = View.GONE
                 viewHolder.binding.status.text = "Out of Stock"
             }
-            viewHolder.binding.viewDetails.visibility = View.VISIBLE
-            viewHolder.binding.addItem.visibility = View.GONE
-        }
-
-        viewHolder.binding.addItem.setOnClickListener {
-            viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
-            viewHolder.binding.addItem.visibility = View.GONE
-        }
-
-        viewHolder.binding.viewDetails.setOnClickListener {
-            onItemClickListener?.setOnItemClickListener(item.status)
         }
 
         viewHolder.binding.layoutItem.setOnClickListener {
