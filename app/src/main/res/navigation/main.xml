@@ -365,12 +365,22 @@
         android:label="@string/medicalRequest"
         tools:layout="@layout/claiming_fragment" />
 
-
     <fragment
         android:id="@+id/onlinePharmacyFragment"
         android:name="com.neqabty.presentation.ui.onlinePharmacy.OnlinePharmacyFragment"
         android:label="@string/online_pharmacy_title"
-        tools:layout="@layout/online_pharmacy_fragment" />
+        tools:layout="@layout/online_pharmacy_fragment">
+
+        <action
+            android:id="@+id/openOnlinePharmacyVezeeta"
+            app:destination="@id/onlinePharmacyVezeetaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/onlinePharmacyVezeetaFragment"
+        android:name="com.neqabty.presentation.ui.onlinePharmacyVezeeta.OnlinePharmacyVezeetaFragment"
+        android:label="@string/online_pharmacy_title"
+        tools:layout="@layout/online_pharmacy_vezeeta_fragment"/>
 
     <fragment
         android:id="@+id/notificationsFragment"

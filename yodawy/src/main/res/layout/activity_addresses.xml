@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/layout_header"/>
 
     <com.vlonjatg.progressactivity.ProgressRelativeLayout
         android:id="@+id/progressActivity"
@@ -29,6 +30,7 @@
         app:layout_constraintTop_toBottomOf="parent"
         app:loadingBackgroundColor="#FFFFFF"
         app:loadingProgressBarColor="@color/purple_200">
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/address_recycler"

@@ -7,6 +7,7 @@ import android.content.Intent
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,9 +15,10 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 class NetworkModule {
     @Provides
     fun providesBaseUrl(): String {
@@ -24,6 +26,7 @@ class NetworkModule {
     }
 
     @Provides
+    @Named("yodawy")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -31,7 +34,9 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    @Named("yodawy")
+    fun provideOkHttpClient(
+        @Named("yodawy") loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(40, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
@@ -61,8 +66,9 @@ class NetworkModule {
     }
 
     @Provides
+    @Named("yodawy")
     fun provideRetrofitClient(
-        okHttpClient: OkHttpClient,
+        @Named("yodawy") okHttpClient: OkHttpClient,
         baseUrl: String,
         converterFactory: Converter.Factory
     ): Retrofit {
