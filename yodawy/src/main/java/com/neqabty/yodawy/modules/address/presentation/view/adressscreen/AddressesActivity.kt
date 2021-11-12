@@ -1,29 +1,32 @@
 package com.neqabty.yodawy.modules.address.presentation.view.adressscreen
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.utils.LocaleHelper
+import com.neqabty.yodawy.databinding.ActivityAddressesBinding
 import com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen.AddAddressActivity
+import com.neqabty.yodawy.modules.address.presentation.view.common.BaseActivity
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import com.vlonjatg.progressactivity.ProgressRelativeLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddressesActivity : AppCompatActivity() {
+class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
     private val addressViewModel: AddressViewModel by viewModels()
     private val mAdapter = AddressAdapter()
+
+    override fun getViewBinding() = ActivityAddressesBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_addresses)
+        setContentView(binding.root)
 
-//        supportActionBar!!.title = "العناوين"
+        setupToolbar(titleResId = R.string.addresses)
+
         addressViewModel.getUser("3608662","01090100670")
         findViewById<ProgressRelativeLayout>(R.id.progressActivity).showLoading()
         addressViewModel.user.observe(this){

@@ -1,34 +1,26 @@
 package com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.databinding.ActivityAddAddressBinding
 import com.neqabty.yodawy.modules.address.domain.params.AddAddressUseCaseParams
-import com.neqabty.yodawy.modules.address.presentation.view.adressscreen.AddressViewModel
-import com.vlonjatg.progressactivity.ProgressRelativeLayout
+import com.neqabty.yodawy.modules.address.presentation.view.common.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddAddressActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityAddAddressBinding
-
+class AddAddressActivity : BaseActivity<ActivityAddAddressBinding>() {
     private val addAddressViewModel: AddAddressViewModel by viewModels()
+
+override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_address)
+        setContentView(binding.root)
 
-
-
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = getString(R.string.add_new_address)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.back)
+        setupToolbar(titleResId = R.string.add_new_address)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
