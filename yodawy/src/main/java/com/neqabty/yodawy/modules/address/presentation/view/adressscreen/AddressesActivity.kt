@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.utils.LocaleHelper
 import com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen.AddAddressActivity
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,5 +37,10 @@ class AddressesActivity : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.add_address).setOnClickListener {
             startActivity(Intent(this@AddressesActivity, AddAddressActivity::class.java))
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        LocaleHelper().setLocale(this, "ar")
     }
 }

@@ -8,7 +8,7 @@ import retrofit2.http.POST
 
 interface UserApi {
     @POST("user")
-    suspend fun getUser(@Body body:GetUserRequestBody): Flow<Response<UserModel>>
+    suspend fun getUser(@Body body:GetUserRequestBody): Response<UserModel>
 
     @POST("address/addaddress")
     suspend fun addAddress(@Body body:AddAddressRequestBody): Flow<Response<AddressResponse>>

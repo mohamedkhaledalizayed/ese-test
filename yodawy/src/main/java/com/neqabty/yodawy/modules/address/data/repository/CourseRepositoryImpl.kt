@@ -1,5 +1,6 @@
 package com.neqabty.yodawy.modules.address.data.repository
 
+import android.util.Log
 import com.neqabty.yodawy.modules.address.data.model.AddAddressRequestBody
 import com.neqabty.yodawy.modules.address.data.model.GetUserRequestBody
 import com.neqabty.yodawy.modules.address.data.model.mappers.toUserEntity
@@ -14,6 +15,7 @@ import javax.inject.Inject
 
 class CourseRepositoryImpl @Inject constructor(private val userDS: UserDS) : CoursesRepository {
     override suspend fun getUser(params: GetUserUseCaseParams): Flow<UserEntity> {
+
         return userDS.getUser(GetUserRequestBody(params.mobileNumber, params.userNumber))
             .map { it.toUserEntity() }
     }
