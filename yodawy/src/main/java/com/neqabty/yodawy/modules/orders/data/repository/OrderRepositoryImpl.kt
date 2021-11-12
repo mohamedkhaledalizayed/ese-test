@@ -1,13 +1,12 @@
 package com.neqabty.yodawy.modules.orders.data.repository
 
-import com.neqabty.yodawy.modules.orders.data.model.Address
-import com.neqabty.yodawy.modules.orders.data.model.Item
+import com.neqabty.yodawy.modules.orders.domain.entity.PlaceOrderParam
 import com.neqabty.yodawy.modules.orders.data.model.OrderListRequestBody
-import com.neqabty.yodawy.modules.orders.data.model.OrderModel
+import com.neqabty.yodawy.modules.orders.data.model.mapper.toOrderEntity
+import com.neqabty.yodawy.modules.orders.data.model.request.ItemRequest
+import com.neqabty.yodawy.modules.orders.data.model.request.PlaceOrderRequestBody
 import com.neqabty.yodawy.modules.orders.data.source.OrdersDS
-import com.neqabty.yodawy.modules.orders.domain.entity.OrderAddressEntity
 import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
-import com.neqabty.yodawy.modules.orders.domain.entity.OrderItemEntity
 import com.neqabty.yodawy.modules.orders.domain.repository.OrderRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -32,7 +31,7 @@ class OrderRepositoryImpl @Inject constructor(private val ordersDS: OrdersDS) : 
         return ordersDS.placeOrder(
             PlaceOrderRequestBody(
                 placeOrderParam.addressId,
-                placeOrderParam.items.map { Item(it.id,it.quantity) },
+                placeOrderParam.itemParams.map { ItemRequest(it.id,it.quantity) },
                 placeOrderParam.mobile,
                 placeOrderParam.notes,
                 placeOrderParam.plan

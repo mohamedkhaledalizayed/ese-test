@@ -1,11 +1,11 @@
-package com.neqabty.yodawy.modules.order.data.model.mapper
+package com.neqabty.yodawy.modules.orders.data.model.mapper
 
-import com.neqabty.yodawy.modules.order.data.model.Address
-import com.neqabty.yodawy.modules.order.data.model.Item
-import com.neqabty.yodawy.modules.order.data.model.OrderModel
-import com.neqabty.yodawy.modules.order.domain.entity.OrderAddressEntity
-import com.neqabty.yodawy.modules.order.domain.entity.OrderEntity
-import com.neqabty.yodawy.modules.order.domain.entity.OrderItemEntity
+import com.neqabty.yodawy.modules.orders.data.model.Address
+import com.neqabty.yodawy.modules.orders.data.model.Item
+import com.neqabty.yodawy.modules.orders.data.model.OrderModel
+import com.neqabty.yodawy.modules.orders.domain.entity.OrderAddressEntity
+import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
+import com.neqabty.yodawy.modules.orders.domain.entity.OrderItemEntity
 
 
 fun OrderModel.toOrderEntity(): OrderEntity {
