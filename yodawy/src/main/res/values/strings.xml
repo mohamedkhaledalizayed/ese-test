@@ -38,4 +38,5 @@
     <string name="up_to_egp_10_00">Up to EGP 10.00</string>
     <string name="total">Total</string>
     <string name="order_is_canceled">Order is Canceled</string>
+    <string name="nickname_">تصنيف العقار</string>
 </resources>

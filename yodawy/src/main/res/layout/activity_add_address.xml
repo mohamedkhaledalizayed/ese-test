@@ -164,6 +164,27 @@
                     android:textColorHint="@color/gray"
                     android:textSize="@dimen/_10ssp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="@string/nickname_"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <EditText
+                    android:id="@+id/nickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:hint="منزل, مكتب..."
+                    android:inputType="text"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/purple_200"
+                    android:textColorHint="@color/gray"
+                    android:textSize="@dimen/_10ssp" />
+
 
                 <Button
                     android:id="@+id/save_btn"

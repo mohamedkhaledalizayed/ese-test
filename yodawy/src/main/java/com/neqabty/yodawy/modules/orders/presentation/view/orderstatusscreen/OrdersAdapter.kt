@@ -48,7 +48,7 @@ class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
         }
     }
 
-    override fun getItemCount() = 10
+    override fun getItemCount() = items.size
 
     fun submitList(newItems: List<OrderEntity>?) {
         newItems?.let {

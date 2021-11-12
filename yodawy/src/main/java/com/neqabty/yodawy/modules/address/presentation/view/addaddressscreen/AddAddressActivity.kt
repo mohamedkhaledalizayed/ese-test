@@ -1,5 +1,6 @@
 package com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -10,17 +11,24 @@ import com.neqabty.yodawy.databinding.ActivityAddAddressBinding
 import com.neqabty.yodawy.modules.address.domain.params.AddAddressUseCaseParams
 import com.neqabty.yodawy.core.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
+import dmax.dialog.SpotsDialog
 
 @AndroidEntryPoint
 class AddAddressActivity : BaseActivity<ActivityAddAddressBinding>() {
     private val addAddressViewModel: AddAddressViewModel by viewModels()
 
+    private lateinit var dialog: AlertDialog
 override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setupToolbar(titleResId = R.string.add_new_address)
+
+        dialog = SpotsDialog.Builder()
+            .setContext(this)
+            .setMessage("Please Wait...")
+            .build()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -56,14 +64,21 @@ override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater
             return
         }
 
+        if (binding.landmark.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, getString(R.string.nickname_), Toast.LENGTH_LONG).show()
+            return
+        }
+
+        dialog.show()
         addAddressViewModel.addAddress(AddAddressUseCaseParams("01090100670",
-            "home",
+            binding.nickname.text.toString(),
             binding.street.text.toString(),
             binding.floor.text.toString(),
             binding.building.text.toString(),
             binding.apartment.text.toString(),
             binding.landmark.text.toString()))
         addAddressViewModel.data.observe(this){
+            dialog.dismiss()
             finish()
         }
 
