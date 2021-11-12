@@ -32,7 +32,7 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
-        viewHolder.binding.mainAddress.text = item.address
+//        viewHolder.binding.mainAddress.text = item.address
         viewHolder.binding.layoutItem.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(position)
         }

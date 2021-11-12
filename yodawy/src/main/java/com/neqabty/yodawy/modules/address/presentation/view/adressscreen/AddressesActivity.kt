@@ -12,6 +12,7 @@ import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.utils.LocaleHelper
 import com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen.AddAddressActivity
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
+import com.vlonjatg.progressactivity.ProgressRelativeLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,9 +22,12 @@ class AddressesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addresses)
+
+        supportActionBar!!.title = "العناوين"
         addressViewModel.getUser("3608662","01090100670")
+        findViewById<ProgressRelativeLayout>(R.id.progressActivity).showLoading()
         addressViewModel.user.observe(this){
-            Log.e("user",it.yodawyId)
+            findViewById<ProgressRelativeLayout>(R.id.progressActivity).showContent()
             mAdapter.submitList(it.addresses)
         }
         findViewById<RecyclerView>(R.id.address_recycler).adapter = mAdapter
