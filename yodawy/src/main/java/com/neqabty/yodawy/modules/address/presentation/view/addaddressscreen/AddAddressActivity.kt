@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.neqabty.yodawy.R
@@ -22,10 +23,7 @@ class AddAddressActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_address)
-        addAddressViewModel.addAddress(AddAddressUseCaseParams("01090100670","home","mohamed","dd","dd","dd","dd"))
-        addAddressViewModel.data.observe(this){
-//            Log.e("ttt",it.data.message)
-        }
+
 
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -42,8 +40,40 @@ class AddAddressActivity : AppCompatActivity() {
 
     fun saveAddress(view: View) {
         if (binding.street.text.toString().isNullOrEmpty()){
-
+            Toast.makeText(this, getString(R.string.add_street_name), Toast.LENGTH_LONG).show()
+            return
         }
-        finish()
+
+        if (binding.building.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, getString(R.string.add_building_number), Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.floor.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, getString(R.string.add_floor_number), Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.apartment.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, getString(R.string.add_apartment_number), Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.landmark.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, getString(R.string.nearest_landmark), Toast.LENGTH_LONG).show()
+            return
+        }
+
+        addAddressViewModel.addAddress(AddAddressUseCaseParams("01090100670",
+            "home",
+            binding.street.text.toString(),
+            binding.floor.text.toString(),
+            binding.building.text.toString(),
+            binding.apartment.text.toString(),
+            binding.landmark.text.toString()))
+        addAddressViewModel.data.observe(this){
+            finish()
+        }
+
     }
 }
