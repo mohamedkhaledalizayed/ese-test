@@ -8,7 +8,9 @@ import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CartActivity : AppCompatActivity() {
     private var list: MutableList<Medication> = ArrayList<Medication>()
     private val mAdapter = CartAdapter()

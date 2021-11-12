@@ -32,7 +32,7 @@
             android:ellipsize="end"
             android:lines="1"
             android:text="@string/order_is_canceled"
-            android:textColor="@color/red"
+            android:textColor="@color/green"
             android:textSize="@dimen/_12ssp" />
 
         <ImageView
