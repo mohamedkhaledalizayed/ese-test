@@ -7,7 +7,7 @@ import com.neqabty.yodawy.modules.address.domain.params.AddAddressUseCaseParams
 import com.neqabty.yodawy.modules.address.domain.params.GetUserUseCaseParams
 import kotlinx.coroutines.flow.Flow
 
-interface CoursesRepository {
-    suspend fun getUser(params: GetUserUseCaseParams): Flow<UserEntity>
-    suspend fun addAddress(params: AddAddressUseCaseParams): Flow<String>
+interface UserRepository {
+    fun getUser(params: GetUserUseCaseParams): Flow<UserEntity>
+    fun addAddress(params: AddAddressUseCaseParams): Flow<String>
 }

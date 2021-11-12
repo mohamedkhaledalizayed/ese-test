@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ProductDS @Inject constructor(private val productApi: ProductApi) {
-    suspend fun searchProduct(keyWord: String): Flow<List<ProductModel>> {
+    fun searchProduct(keyWord: String): Flow<List<ProductModel>> {
         return flow {
             emit(productApi.searchProduct(keyWord).dataModel)
         }

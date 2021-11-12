@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetOrdersUseCase @Inject constructor(private val orderRepository: OrderRepository) {
-    suspend fun build(mobileNumber:String,pageSize:Int,pageNumber:Int): Flow<List<OrderEntity>> {
+    fun build(mobileNumber:String,pageSize:Int,pageNumber:Int): Flow<List<OrderEntity>> {
         return orderRepository.getOrder(mobileNumber = mobileNumber,pageSize =pageSize ,pageNumber =pageNumber )
     }
 }

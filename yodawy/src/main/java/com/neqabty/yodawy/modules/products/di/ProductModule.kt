@@ -1,8 +1,5 @@
 package com.neqabty.yodawy.modules.products.di
 
-import com.neqabty.yodawy.modules.address.data.api.UserApi
-import com.neqabty.yodawy.modules.address.data.repository.CourseRepositoryImpl
-import com.neqabty.yodawy.modules.address.domain.repository.CoursesRepository
 import com.neqabty.yodawy.modules.products.data.api.ProductApi
 import com.neqabty.yodawy.modules.products.data.repository.ProductRepositoryImpl
 import com.neqabty.yodawy.modules.products.domain.repository.ProductRepository

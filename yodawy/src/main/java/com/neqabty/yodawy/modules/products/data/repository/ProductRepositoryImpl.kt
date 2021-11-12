@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(private val productDS: ProductDS): ProductRepository{
-    override suspend fun searchProduct(keyWord: String): Flow<List<ProductEntity>> {
+    override fun searchProduct(keyWord: String): Flow<List<ProductEntity>> {
         return productDS.searchProduct(keyWord).map { it.map { it.toProductEntity() } }
     }
 
