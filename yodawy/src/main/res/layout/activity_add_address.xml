@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -141,32 +142,16 @@
             android:textColor="@color/purple_200"
             android:textSize="@dimen/_10ssp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            android:text="@string/nickname"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/_12ssp" />
 
-        <EditText
-            android:id="@+id/nickname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:hint="@string/home_office_etc"
-            android:inputType="text"
-            android:padding="@dimen/_8sdp"
-            android:textColorHint="@color/gray"
-            android:textColor="@color/purple_200"
-            android:textSize="@dimen/_10ssp" />
 
         <Button
             android:id="@+id/save_btn"
+            android:fontFamily="@font/droidkufi_bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10ssp"
+            android:layout_marginTop="@dimen/_30sdp"
             android:background="@drawable/add_address_btn_bg"
             android:onClick="saveAddress"
             android:text="@string/save_address"
@@ -176,3 +161,4 @@
     </LinearLayout>
 
 </ScrollView>
+</layout>

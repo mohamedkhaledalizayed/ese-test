@@ -2,6 +2,7 @@ package com.neqabty.yodawy.modules.address.presentation.view.adressscreen
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +36,12 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
 //        viewHolder.binding.mainAddress.text = item.address
         viewHolder.binding.layoutItem.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(position)
+        }
+
+        if (position == itemCount - 1){
+            viewHolder.binding.view.visibility = View.GONE
+        }else{
+            viewHolder.binding.view.visibility = View.VISIBLE
         }
     }
 

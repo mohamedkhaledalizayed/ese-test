@@ -1,6 +1,7 @@
 package com.neqabty.yodawy.modules.address.data.api
 
 import com.neqabty.yodawy.modules.address.data.model.*
+import com.neqabty.yodawy.modules.address.data.model.response.addaddress.AddAddressModel
 import com.neqabty.yodawy.modules.address.domain.entity.CourseEntity
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Body
@@ -11,5 +12,5 @@ interface UserApi {
     suspend fun getUser(@Body body:GetUserRequestBody): Response<UserModel>
 
     @POST("address/addaddress")
-    suspend fun addAddress(@Body body:AddAddressRequestBody): Flow<Response<AddressResponse>>
+    suspend fun addAddress(@Body body:AddAddressRequestBody): Response<AddAddressModel>
 }

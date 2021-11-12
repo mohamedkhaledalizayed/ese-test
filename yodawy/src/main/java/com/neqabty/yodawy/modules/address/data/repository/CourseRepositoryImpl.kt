@@ -1,9 +1,9 @@
 package com.neqabty.yodawy.modules.address.data.repository
 
-import android.util.Log
 import com.neqabty.yodawy.modules.address.data.model.AddAddressRequestBody
 import com.neqabty.yodawy.modules.address.data.model.GetUserRequestBody
 import com.neqabty.yodawy.modules.address.data.model.mappers.toUserEntity
+import com.neqabty.yodawy.modules.address.data.model.response.addaddress.AddAddressModel
 import com.neqabty.yodawy.modules.address.data.source.UserDS
 import com.neqabty.yodawy.modules.address.domain.entity.UserEntity
 import com.neqabty.yodawy.modules.address.domain.params.AddAddressUseCaseParams
@@ -20,7 +20,7 @@ class CourseRepositoryImpl @Inject constructor(private val userDS: UserDS) : Cou
             .map { it.toUserEntity() }
     }
 
-    override suspend fun addAddress(params: AddAddressUseCaseParams): Flow<String> {
+    override suspend fun addAddress(params: AddAddressUseCaseParams): Flow<AddAddressModel> {
         return userDS.addAddress(
             AddAddressRequestBody(
                 params.mobile,
@@ -31,7 +31,7 @@ class CourseRepositoryImpl @Inject constructor(private val userDS: UserDS) : Cou
                 params.apartment,
                 params.landmark
             )
-        ).map { it.id }
+        ).map { it }
     }
 }
 
