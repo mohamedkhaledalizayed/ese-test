@@ -2,14 +2,13 @@ package com.neqabty.presentation.ui.trips
 
 import android.content.Context
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -17,22 +16,20 @@ import com.neqabty.databinding.TripsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class TripsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class TripsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<TripsFragmentBinding>()
     private var adapter by autoCleared<com.neqabty.presentation.ui.home.TripsAdapter>()
 
-    lateinit var tripsViewModel: TripsViewModel
+    private val tripsViewModel: TripsViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -60,9 +57,6 @@ class TripsFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        tripsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(TripsViewModel::class.java)
-
         initializeViews()
 
         val adapter = com.neqabty.presentation.ui.home.TripsAdapter(dataBindingComponent, appExecutors) { trip ->

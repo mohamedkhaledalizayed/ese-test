@@ -11,32 +11,29 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.neqabty.R
 import com.neqabty.databinding.Claiming2FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ProviderTypeUI
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.claiming2_fragment.*
-import javax.inject.Inject
 
-class ClaimingStep2Fragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class ClaimingStep2Fragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<Claiming2FragmentBinding>()
 
-    lateinit var claimingViewModel: ClaimingViewModel
+    private val claimingViewModel: ClaimingViewModel by viewModels()
     var providersTypesResultList: MutableList<ProviderTypeUI>? = mutableListOf()
     var providersResultList: MutableList<ProviderUI>? = mutableListOf()
 
@@ -72,8 +69,6 @@ class ClaimingStep2Fragment : BaseFragment(), Injectable {
         hideKeyboard()
         providersTypesResultList?.clear()
         providersResultList?.clear()
-        claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ClaimingViewModel::class.java)
 
         claimingViewModel.viewState.value = claimingViewModel.viewState.value?.copy(providerTypes = null, providers = null)
 

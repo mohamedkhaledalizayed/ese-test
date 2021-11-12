@@ -1,8 +1,6 @@
 package com.neqabty.presentation.ui.home
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -12,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -20,26 +19,23 @@ import com.neqabty.databinding.WheelNewsFragmentBinding
 import com.neqabty.databinding.WheelTripsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.GovernUI
 import com.neqabty.presentation.ui.news.NewsAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-
-import kotlinx.android.synthetic.main.claiming1_fragment.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.wheel_news_fragment.*
 import javax.inject.Inject
 
-class WheelTripsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class WheelTripsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<WheelTripsFragmentBinding>()
 
-    lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels()
     private var tripsAdapter by autoCleared<TripsAdapter>()
 
     @Inject
@@ -72,9 +68,6 @@ class WheelTripsFragment : BaseFragment(), Injectable {
     }
 
     private fun initializeViews() {
-        homeViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(HomeViewModel::class.java)
-
         homeViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })

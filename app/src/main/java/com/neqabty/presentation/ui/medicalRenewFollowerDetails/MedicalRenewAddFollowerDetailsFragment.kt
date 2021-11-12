@@ -25,28 +25,26 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.MedicalRenewAddFollowerDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.ui.common.PhotosAdapter
 import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_renew_add_follower_details_fragment.*
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class MedicalRenewAddFollowerDetailsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class MedicalRenewAddFollowerDetailsFragment : BaseFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     var binding by autoCleared<MedicalRenewAddFollowerDetailsFragmentBinding>()
 

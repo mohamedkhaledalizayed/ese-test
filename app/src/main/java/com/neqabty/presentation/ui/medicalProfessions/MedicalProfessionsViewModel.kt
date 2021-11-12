@@ -6,9 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.SpecializationUI
 import com.neqabty.presentation.mappers.SpecializationEntityUIMapper
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class MedicalProfessionsViewModel @Inject constructor(private val getAllSpecializations: GetAllSpecializations) : BaseViewModel() {
 
     private val specializationEntityUIMapper = SpecializationEntityUIMapper()

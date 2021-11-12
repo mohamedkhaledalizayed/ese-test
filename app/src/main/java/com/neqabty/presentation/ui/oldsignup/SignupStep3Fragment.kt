@@ -1,7 +1,6 @@
 package com.neqabty.presentation.ui.oldsignup
 
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -13,20 +12,17 @@ import com.neqabty.R
 import com.neqabty.databinding.Signup3FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 
-import javax.inject.Inject
-
-class SignupStep3Fragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class SignupStep3Fragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<Signup3FragmentBinding>()
 
-    lateinit var signupViewModel: SignupViewModel
+    private val signupViewModel: SignupViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,8 +42,6 @@ class SignupStep3Fragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        signupViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(SignupViewModel::class.java)
 
         initializeViews()
     }

@@ -6,9 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.DegreeUI
 import com.neqabty.presentation.mappers.*
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class SearchViewModel @Inject constructor(
         val getAllGoverns: GetAllGoverns,
         val getAllAreas: GetAllAreas,

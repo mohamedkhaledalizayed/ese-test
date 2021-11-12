@@ -1,14 +1,15 @@
 package com.neqabty.presentation.common
 
 import androidx.lifecycle.ViewModel
-import com.neqabty.R
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import org.json.JSONObject
 import retrofit2.HttpException
-import java.net.ConnectException
+import javax.inject.Inject
 
-open class BaseViewModel : ViewModel() {
+@HiltViewModel
+open class BaseViewModel @Inject constructor(): ViewModel() {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

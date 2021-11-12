@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -34,21 +35,14 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.common.ExpandableListAdapter
 import com.neqabty.presentation.entities.NavigationMenuItem
 import com.neqabty.presentation.util.*
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.main_activity.*
 import java.util.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasAndroidInjector {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
-
-    lateinit var mainViewModel: MainViewModel
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
+    private val mainViewModel: MainViewModel by viewModels()
 
     lateinit var newToken: String
 
@@ -65,9 +59,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             customiseStatusbar()
         setContentView(R.layout.main_activity)
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-        mainViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(MainViewModel::class.java)
-
         setSupportActionBar(toolbar)
         getAppConfig()
         setJWT()
@@ -88,8 +79,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         })
         PushNotificationsWrapper().getToken(this)
     }
-
-    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
     private fun checkRoot() {
         if (DeviceUtils().isDeviceRooted()) {// || DeviceUtils().isEmulator()
@@ -268,7 +257,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         super.attachBaseContext(context)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         var inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
 

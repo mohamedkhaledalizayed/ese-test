@@ -5,8 +5,10 @@ import com.neqabty.domain.usecases.SendEngineeringRecordsInquiry
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.RegisteryEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class EngineeringRecordsInquiryViewModel @Inject constructor(
     val sendEngineeringRecordsInquiry: SendEngineeringRecordsInquiry
 ) : BaseViewModel() {

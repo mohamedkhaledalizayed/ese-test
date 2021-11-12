@@ -9,9 +9,8 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.Window
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.presentation.util.PushNotificationsWrapper
 import com.neqabty.presentation.common.Constants
@@ -19,23 +18,22 @@ import com.neqabty.R
 import com.neqabty.databinding.SignupFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.presentation.util.observeOnce
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.signup_fragment.*
-import javax.inject.Inject
 
-class SignupFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class SignupFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<SignupFragmentBinding>()
 
-    lateinit var signupViewModel: SignupViewModel
+    private val signupViewModel: SignupViewModel by viewModels()
+
     var type: Int? = 0
 
     var newToken = ""
@@ -59,9 +57,6 @@ class SignupFragment : BaseFragment(), Injectable {
 
         val params = SignupFragmentArgs.fromBundle(arguments!!)
         type = params.type
-
-        signupViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(SignupViewModel::class.java)
 
         signupViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

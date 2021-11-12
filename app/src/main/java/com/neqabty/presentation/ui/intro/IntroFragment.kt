@@ -1,6 +1,5 @@
 package com.neqabty.presentation.ui.intro
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -12,16 +11,13 @@ import com.neqabty.R
 import com.neqabty.databinding.IntroFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.common.CustomFragmentPagerAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import kotlinx.android.synthetic.main.intro_fragment.*
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class IntroFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class IntroFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 

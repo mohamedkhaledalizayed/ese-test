@@ -6,8 +6,10 @@ import com.neqabty.domain.usecases.SendSMS
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.UserEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class ActivateAccountViewModel @Inject constructor(val sendSMS: SendSMS, val activateAccount: ActivateAccount) : BaseViewModel() {
 
     private val userEntityToUIMapper = UserEntityUIMapper()

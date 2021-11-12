@@ -10,8 +10,10 @@ import com.neqabty.presentation.entities.MedicalRenewalUpdateUI
 import com.neqabty.presentation.mappers.MedicalRenewalEntityUIMapper
 import com.neqabty.presentation.mappers.MedicalRenewalUIEntityMapper
 import com.neqabty.presentation.mappers.MedicalRenewalUpdateEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class MedicalRenewUpdateViewModel @Inject constructor(
         private val getMedicalRenewalData: GetMedicalRenewalData,
         private val updateMedicalRenewalData: UpdateMedicalRenewalData

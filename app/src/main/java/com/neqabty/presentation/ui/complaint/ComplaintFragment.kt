@@ -10,8 +10,6 @@ import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
 import android.net.Uri
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -25,6 +23,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -32,7 +31,6 @@ import com.neqabty.databinding.ComplaintFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.ComplaintTypeUI
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.ui.common.PhotosAdapter
@@ -40,18 +38,17 @@ import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.presentation.util.call
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.complaint_fragment.*
 import java.io.*
 import javax.inject.Inject
 
-class ComplaintFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class ComplaintFragment : BaseFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     var binding by autoCleared<ComplaintFragmentBinding>()
 
-    @Inject
-    lateinit var complaintViewModel: ComplaintViewModel
+    private val complaintViewModel: ComplaintViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -95,10 +92,6 @@ class ComplaintFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        complaintViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ComplaintViewModel::class.java)
-
         complaintViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })

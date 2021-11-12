@@ -14,9 +14,10 @@ import com.neqabty.presentation.mappers.MedicalRenewalPaymentEntityUIMapper
 import com.neqabty.presentation.mappers.MemberEntityUIMapper
 import com.neqabty.presentation.mappers.ServiceEntityUIMapper
 import com.neqabty.presentation.mappers.ServiceTypeEntityUIMapper
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class InquiryViewModel @Inject constructor(
         private val getAllServiceTypes: GetAllServiceTypes,
         private val getAllServices: GetAllServices,

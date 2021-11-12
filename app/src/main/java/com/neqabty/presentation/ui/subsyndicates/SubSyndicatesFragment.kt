@@ -1,8 +1,6 @@
 package com.neqabty.presentation.ui.subsyndicates
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -10,29 +8,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.SubsyndicatesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.subsyndicates_fragment.*
 import javax.inject.Inject
 
-class SubSyndicatesFragment : DialogFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class SubSyndicatesFragment : DialogFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<SubsyndicatesFragmentBinding>()
     private var adapter by autoCleared<SubSyndicatesAdapter>()
 
-    lateinit var subSyndicatesViewModel: SubSyndicatesViewModel
+    private val subSyndicatesViewModel: SubSyndicatesViewModel by viewModels()
 
     lateinit var syndicate: SyndicateUI
 
@@ -57,8 +54,6 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        subSyndicatesViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(SubSyndicatesViewModel::class.java)
 
         val bundle = this.arguments
         bundle?.let { syndicate = it.getParcelable("syndicate")!! }

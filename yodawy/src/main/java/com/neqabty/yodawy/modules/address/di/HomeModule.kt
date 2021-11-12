@@ -9,13 +9,15 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import retrofit2.Retrofit
+import javax.inject.Named
 
 @Module
 @InstallIn(ViewModelComponent::class)
 abstract class HomeModule {
     companion object {
         @Provides
-        fun providesCourseApiService(retrofit: Retrofit) = retrofit.create(UserApi::class.java)
+        fun providesCourseApiService(
+            @Named("yodawy") retrofit: Retrofit) = retrofit.create(UserApi::class.java)
     }
     @Binds
     internal abstract fun bindsCoursesRepository(courseRepositoryImpl: CourseRepositoryImpl): CoursesRepository

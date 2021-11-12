@@ -532,4 +532,7 @@
     <string name="medical_letter_is_active">مفعل</string>
     <string name="medical_letter_is_cancelled">لاغي</string>
     <string name="arabic_letters">غظضذ خثتشرقصجفعسنملةىكيطئءؤحزوهدبا أإلإآ</string>
+
+    <string name="online_pharmacy_vezeeta">فيزيتا</string>
+    <string name="online_pharmacy_yodawy">يداوي</string>
 </resources>

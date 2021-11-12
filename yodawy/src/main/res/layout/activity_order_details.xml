@@ -5,4 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".modules.OrderDetailsActivity">
 
+    <include layout="@layout/layout_header"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

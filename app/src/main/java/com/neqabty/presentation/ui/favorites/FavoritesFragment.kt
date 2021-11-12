@@ -1,35 +1,32 @@
 package com.neqabty.presentation.ui.favorites
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.MedicalFavoritesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.autoCleared
-
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class FavoritesFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class FavoritesFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<MedicalFavoritesFragmentBinding>()
     private var adapter by autoCleared<FavoritesAdapter>()
 
-    lateinit var favoritesViewModel: FavoritesViewModel
+    private val favoritesViewModel: FavoritesViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -64,9 +61,6 @@ class FavoritesFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        favoritesViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(FavoritesViewModel::class.java)
-
         val adapter = FavoritesAdapter(dataBindingComponent, appExecutors, callback = { favoriteItem ->
             navController().navigate(
                     FavoritesFragmentDirections.providerDetails(favoriteItem)

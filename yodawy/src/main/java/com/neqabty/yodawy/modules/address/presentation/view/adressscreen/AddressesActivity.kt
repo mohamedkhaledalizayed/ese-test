@@ -23,7 +23,7 @@ class AddressesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addresses)
 
-        supportActionBar!!.title = "العناوين"
+//        supportActionBar!!.title = "العناوين"
         addressViewModel.getUser("3608662","01090100670")
         findViewById<ProgressRelativeLayout>(R.id.progressActivity).showLoading()
         addressViewModel.user.observe(this){

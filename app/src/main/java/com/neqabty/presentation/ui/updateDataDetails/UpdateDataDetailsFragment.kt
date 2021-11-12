@@ -19,29 +19,27 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.UpdateDataDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.InquireUpdateUserDataUI
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.update_data_details_fragment.*
 import java.io.*
 import java.util.*
 import javax.inject.Inject
 
-class UpdateDataDetailsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class UpdateDataDetailsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
@@ -59,7 +57,7 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
     private var PhotoFileName = ""
     lateinit var photoFileURI: Uri
     private var photosList: MutableList<PhotoUI> = mutableListOf<PhotoUI>()
-    lateinit var updateDataDetailsViewModel: UpdateDataDetailsViewModel
+    private val updateDataDetailsViewModel: UpdateDataDetailsViewModel by viewModels()
 
     var selectedIndex = 0
     override fun onCreateView(
@@ -80,9 +78,6 @@ class UpdateDataDetailsFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        updateDataDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(UpdateDataDetailsViewModel::class.java)
-
         updateDataDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })

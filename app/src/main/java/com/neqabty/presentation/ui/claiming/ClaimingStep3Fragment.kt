@@ -19,9 +19,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.neqabty.AppExecutors
@@ -29,19 +28,18 @@ import com.neqabty.R
 import com.neqabty.databinding.Claiming3FragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.ui.common.PhotosAdapter
 import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.ImageUtils.Companion.createImageFile
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.*
 import javax.inject.Inject
 
-class ClaimingStep3Fragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class ClaimingStep3Fragment : BaseFragment() {
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -51,7 +49,7 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
     var binding by autoCleared<Claiming3FragmentBinding>()
     private var adapter by autoCleared<PhotosAdapter>()
 
-    lateinit var claimingViewModel: ClaimingViewModel
+    private val claimingViewModel: ClaimingViewModel by viewModels()
 
     lateinit var pager: ViewPager
 
@@ -87,9 +85,6 @@ class ClaimingStep3Fragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        claimingViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(ClaimingViewModel::class.java)
-
         binding.edNumber.setText(PreferencesHelper(requireContext()).user)
         binding.edCardNumber.setText(ClaimingData.cardId.toString())
         binding.edProvider.setText(ClaimingData.providerName)

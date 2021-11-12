@@ -9,9 +9,8 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.efinance.mobilepaymentsdk.*
 import com.neqabty.AppExecutors
@@ -20,25 +19,24 @@ import com.neqabty.databinding.InquiryDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsAdapter
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
 import javax.inject.Inject
 
-class InquiryDetailsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class InquiryDetailsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     private var adapter by autoCleared<MedicalRenewPaymentItemsAdapter>()
 
-    lateinit var inquiryDetailsViewModel: InquiryDetailsViewModel
+    private val inquiryDetailsViewModel: InquiryDetailsViewModel by viewModels()
 
     var binding by autoCleared<InquiryDetailsFragmentBinding>()
 
@@ -74,8 +72,6 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inquiryDetailsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(InquiryDetailsViewModel::class.java)
 
         inquiryDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

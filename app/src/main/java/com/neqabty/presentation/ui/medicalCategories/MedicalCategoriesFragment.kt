@@ -12,13 +12,13 @@ import com.neqabty.R
 import com.neqabty.databinding.MedicalCategoriesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.HasMedicalOptionsMenu
 import com.neqabty.presentation.util.autoCleared
-
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class MedicalCategoriesFragment : BaseFragment(), HasMedicalOptionsMenu, Injectable {
+@AndroidEntryPoint
+class MedicalCategoriesFragment : BaseFragment(), HasMedicalOptionsMenu {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 

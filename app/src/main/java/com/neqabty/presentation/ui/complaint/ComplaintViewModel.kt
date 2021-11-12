@@ -7,9 +7,11 @@ import com.neqabty.domain.usecases.GetComplaintTypes
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.ComplaintTypeEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
 import javax.inject.Inject
 
+@HiltViewModel
 class ComplaintViewModel @Inject constructor(
         val getComplaintTypes: GetComplaintTypes,
         val getComplaintSubTypes: GetComplaintSubTypes,

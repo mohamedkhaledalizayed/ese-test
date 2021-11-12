@@ -12,11 +12,12 @@ import com.neqabty.R
 import com.neqabty.databinding.NewsDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.NewsUI
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 
-class NewsDetailsFragment : BaseFragment(), Injectable {
+@AndroidEntryPoint
+class NewsDetailsFragment : BaseFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<NewsDetailsFragmentBinding>()

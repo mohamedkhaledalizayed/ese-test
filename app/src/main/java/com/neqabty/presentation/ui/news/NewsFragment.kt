@@ -2,14 +2,13 @@ package com.neqabty.presentation.ui.news
 
 import android.content.Context
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -17,22 +16,20 @@ import com.neqabty.databinding.NewsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class NewsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class NewsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<NewsFragmentBinding>()
     private var adapter by autoCleared<NewsAdapter>()
 
-    lateinit var newsViewModel: NewsViewModel
+    private val newsViewModel: NewsViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -61,8 +58,6 @@ class NewsFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        newsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(NewsViewModel::class.java)
 
         initializeViews()
 

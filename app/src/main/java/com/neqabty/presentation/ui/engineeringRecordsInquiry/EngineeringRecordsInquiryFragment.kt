@@ -1,8 +1,6 @@
 package com.neqabty.presentation.ui.engineeringRecordsInquiry
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -10,26 +8,24 @@ import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.EngineeringRecordsInquiryFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class EngineeringRecordsInquiryFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class EngineeringRecordsInquiryFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<EngineeringRecordsInquiryFragmentBinding>()
 
-    lateinit var engineeringRecordsInquiryViewModel: EngineeringRecordsInquiryViewModel
-
+    private val engineeringRecordsInquiryViewModel: EngineeringRecordsInquiryViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,10 +43,6 @@ class EngineeringRecordsInquiryFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        engineeringRecordsInquiryViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(EngineeringRecordsInquiryViewModel::class.java)
-
         engineeringRecordsInquiryViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })

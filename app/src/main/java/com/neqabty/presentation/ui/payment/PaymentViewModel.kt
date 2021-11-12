@@ -9,11 +9,13 @@ import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.di.DI
 import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.mappers.SyndicateEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Named
 
+@HiltViewModel
 class PaymentViewModel @Inject constructor(
         private val getTransactionHash: GetTransactionHash) : BaseViewModel() {
 

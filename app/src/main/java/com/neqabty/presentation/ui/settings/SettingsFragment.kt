@@ -1,6 +1,5 @@
 package com.neqabty.presentation.ui.settings
 
-import androidx.lifecycle.ViewModelProvider
 import android.content.Intent
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
@@ -18,14 +17,13 @@ import com.neqabty.R
 import com.neqabty.databinding.SettingsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class SettingsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class SettingsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 

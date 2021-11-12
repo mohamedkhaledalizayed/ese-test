@@ -1,36 +1,34 @@
 package com.neqabty.presentation.ui.notifications
 
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.NotificationsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.notifications_fragment.*
 import javax.inject.Inject
 
-class NotificationsFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class NotificationsFragment : BaseFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<NotificationsFragmentBinding>()
 
     private var adapter by autoCleared<NotificationsAdapter>()
 
-    lateinit var notificationsViewModel: NotificationsViewModel
+    private val notificationsViewModel: NotificationsViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -52,10 +50,6 @@ class NotificationsFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        notificationsViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(NotificationsViewModel::class.java)
-
         val adapter = NotificationsAdapter(dataBindingComponent, appExecutors) { notificationItem ->
             navController().navigate(
                     NotificationsFragmentDirections.notificationDetails(notificationItem.id.toString(), notificationItem.notificationTypeID.toString())

@@ -12,10 +12,11 @@ import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.QuestionnaireQuestionFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 
-class QuestionnaireQuestionFragment : DialogFragment(), Injectable {
+@AndroidEntryPoint
+class QuestionnaireQuestionFragment : DialogFragment() {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
     var binding by autoCleared<QuestionnaireQuestionFragmentBinding>()
 

@@ -12,8 +12,10 @@ import com.neqabty.presentation.entities.MedicalLetterUI
 import com.neqabty.presentation.mappers.ClaimingValidationEntityUIMapper
 import com.neqabty.presentation.mappers.LiteFollowersListEntityUIMapper
 import com.neqabty.presentation.mappers.MedicalLetterEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class MedicalLettersViewModel @Inject constructor(private val validateUserForClaiming: ValidateUserForClaiming,
                                                   private val getLiteFollowersListData: GetLiteFollowersListData, private val getMedicalLetters: GetMedicalLetters) : BaseViewModel() {
 

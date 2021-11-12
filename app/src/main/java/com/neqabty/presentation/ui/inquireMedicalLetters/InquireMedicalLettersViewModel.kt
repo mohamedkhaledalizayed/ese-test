@@ -6,8 +6,10 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.MedicalLetterUI
 import com.neqabty.presentation.mappers.MedicalLetterItemEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class InquireMedicalLettersViewModel @Inject constructor(private val getMedicalLetterByID: GetMedicalLetterByID) : BaseViewModel() {
 
     private val medicalLetterItemEntityUIMapper = MedicalLetterItemEntityUIMapper()

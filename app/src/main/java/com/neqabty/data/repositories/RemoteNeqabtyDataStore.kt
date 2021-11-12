@@ -8,7 +8,7 @@ import com.neqabty.domain.NeqabtyDataStore
 import com.neqabty.domain.entities.*
 import com.neqabty.presentation.di.DI
 import io.reactivex.Observable
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
@@ -40,19 +40,19 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         var file4: MultipartBody.Part? = null
 
         doc1?.let {
-            val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
+            val doc1RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc1)
             file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
         }
         doc2?.let {
-            val doc2RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc2)
+            val doc2RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc2)
             file2 = MultipartBody.Part.createFormData("doc2", doc2?.name, doc2RequestFile)
         }
         doc3?.let {
-            val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
+            val doc3RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc3)
             file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
         }
         doc4?.let {
-            val doc4RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc4)
+            val doc4RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc4)
             file4 = MultipartBody.Part.createFormData("doc4", doc4?.name, doc4RequestFile)
         }
         return api.sendComplaint(ComplaintRequest(name, phone, catId, subCatId, body, token, memberNumber, docsNumber), file1, file2, file3, file4).map { result ->
@@ -118,15 +118,15 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         var file3: MultipartBody.Part? = null
 
         doc1?.let {
-            val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
+            val doc1RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc1)
             file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
         }
         doc2?.let {
-            val doc2RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc2)
+            val doc2RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc2)
             file2 = MultipartBody.Part.createFormData("doc2", doc2?.name, doc2RequestFile)
         }
         doc3?.let {
-            val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
+            val doc3RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc3)
             file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
         }
 
@@ -167,23 +167,23 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         var file5: MultipartBody.Part? = null
 
         doc1?.let {
-            val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
+            val doc1RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc1)
             file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
         }
         doc2?.let {
-            val doc2RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc2)
+            val doc2RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc2)
             file2 = MultipartBody.Part.createFormData("doc2", doc2?.name, doc2RequestFile)
         }
         doc3?.let {
-            val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
+            val doc3RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc3)
             file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
         }
         doc4?.let {
-            val doc4RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc4)
+            val doc4RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc4)
             file4 = MultipartBody.Part.createFormData("doc4", doc4?.name, doc4RequestFile)
         }
         doc5?.let {
-            val doc5RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc5)
+            val doc5RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc5)
             file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
         }
         return api.engineeringRecordsRequest(EngineeringRecordsRequest(name, phone, typeId, mainSyndicate, userNumber, lastRenewYear, statusID, isOwner, docsNumber), file1, file2, file3, file4, file5).map { result ->
@@ -230,43 +230,43 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         var personsRequestsList: List<PersonRequest> = personsList.map { personEntity -> PersonRequest(personEntity.name, personEntity.relationship, personEntity.birthDate, personEntity.ageOnTrip) }
 
         doc1?.let {
-            val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
+            val doc1RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc1)
             file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
         }
         doc2?.let {
-            val doc2RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc2)
+            val doc2RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc2)
             file2 = MultipartBody.Part.createFormData("doc2", doc2?.name, doc2RequestFile)
         }
         doc3?.let {
-            val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
+            val doc3RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc3)
             file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
         }
         doc4?.let {
-            val doc4RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc4)
+            val doc4RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc4)
             file4 = MultipartBody.Part.createFormData("doc4", doc4?.name, doc4RequestFile)
         }
         doc5?.let {
-            val doc5RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc5)
+            val doc5RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc5)
             file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
         }
         doc6?.let {
-            val doc6RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc6)
+            val doc6RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc6)
             file6 = MultipartBody.Part.createFormData("doc6", doc6?.name, doc6RequestFile)
         }
         doc7?.let {
-            val doc7RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc7)
+            val doc7RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc7)
             file7 = MultipartBody.Part.createFormData("doc7", doc7?.name, doc7RequestFile)
         }
         doc8?.let {
-            val doc8RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc8)
+            val doc8RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc8)
             file8 = MultipartBody.Part.createFormData("doc8", doc8?.name, doc8RequestFile)
         }
         doc9?.let {
-            val doc9RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc9)
+            val doc9RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc9)
             file9 = MultipartBody.Part.createFormData("doc9", doc9?.name, doc9RequestFile)
         }
         doc10?.let {
-            val doc10RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc10)
+            val doc10RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc10)
             file10 = MultipartBody.Part.createFormData("doc10", doc10?.name, doc10RequestFile)
         }
 
@@ -449,23 +449,23 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         var file5: MultipartBody.Part? = null
 
         doc1?.let {
-            val doc1RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc1)
+            val doc1RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc1)
             file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
         }
         doc2?.let {
-            val doc2RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc2)
+            val doc2RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc2)
             file2 = MultipartBody.Part.createFormData("doc2", doc2?.name, doc2RequestFile)
         }
         doc3?.let {
-            val doc3RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc3)
+            val doc3RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc3)
             file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
         }
         doc4?.let {
-            val doc4RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc4)
+            val doc4RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc4)
             file4 = MultipartBody.Part.createFormData("doc4", doc4?.name, doc4RequestFile)
         }
         doc5?.let {
-            val doc5RequestFile = RequestBody.create(MediaType.parse("multipart/form-data"), doc5)
+            val doc5RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc5)
             file5 = MultipartBody.Part.createFormData("doc5", doc5?.name, doc5RequestFile)
         }
 

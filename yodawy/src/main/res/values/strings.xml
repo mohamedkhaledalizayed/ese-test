@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Yodawy</string>
+    <string name="my_app_name" translatable="false">Yodawy</string>
     <string name="add_new_address">إضافة عنوان</string>
     <string name="street">الشارع</string>
     <string name="add_street_name">ادخل اسم الشارع</string>

@@ -13,8 +13,10 @@ import com.neqabty.presentation.mappers.AdEntityUIMapper
 import com.neqabty.presentation.mappers.AppConfigEntityUIMapper
 import com.neqabty.presentation.mappers.UserEntityUIMapper
 import com.neqabty.presentation.util.PreferencesHelper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(val login: Login,
                                         private val getAppConfig: GetAppConfig,
                                         private val getAds: GetAds) : BaseViewModel() {

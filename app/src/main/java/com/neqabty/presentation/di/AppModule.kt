@@ -22,6 +22,8 @@ import com.neqabty.presentation.common.ASyncTransformer
 import com.neqabty.presentation.common.Constants
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -34,8 +36,10 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
-@Module(includes = [ViewModelModule::class])
+@Module
+@InstallIn(SingletonComponent::class)
 class AppModule {
+
     @Provides
     fun provideContext(application: MyApp): Context = application.applicationContext
 
@@ -52,11 +56,11 @@ class AppModule {
     @Provides
     @Named(DI.authorized)
     fun provideOkHttpClient(httpLoggingInterceptor :HttpLoggingInterceptor): OkHttpClient {
-        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-                .add(
-                        BuildConfig.URL,
-                        "sha256/Zi7WyG7/3sg3UCgKI7P8BcO8Lz/5zMHcPmyGZGAw4+c="
-                ).build()
+//        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+//                .add(
+//                        BuildConfig.URL,
+//                        "sha256/Zi7WyG7/3sg3UCgKI7P8BcO8Lz/5zMHcPmyGZGAw4+c="
+//                ).build()
 
         return OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.MINUTES)
@@ -76,7 +80,7 @@ class AppModule {
                     }
                 })
                 .addInterceptor(httpLoggingInterceptor) // TODO Interceptor
-                .certificatePinner(certificatePinner)
+//                .certificatePinner(certificatePinner)
                 .build()
     }
 

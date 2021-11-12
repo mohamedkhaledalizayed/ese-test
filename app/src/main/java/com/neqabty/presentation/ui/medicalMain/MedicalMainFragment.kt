@@ -9,7 +9,6 @@ import android.widget.TableLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.neqabty.AppExecutors
@@ -17,18 +16,16 @@ import com.neqabty.R
 import com.neqabty.databinding.MedicalMainFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.ui.medicalCategories.MedicalCategoriesFragmentArgs
 import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.presentation.util.HasMedicalOptionsMenu
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_main_fragment.*
 import javax.inject.Inject
 
-
-class MedicalMainFragment : BaseFragment(), HasMedicalOptionsMenu, Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class MedicalMainFragment : BaseFragment(), HasMedicalOptionsMenu {
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<MedicalMainFragmentBinding>()

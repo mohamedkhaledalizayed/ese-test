@@ -10,34 +10,31 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.InquiryFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.entities.ServiceTypeUI
 import com.neqabty.presentation.entities.ServiceUI
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.inquiry_fragment.*
-import javax.inject.Inject
 
-class InquiryFragment : BaseFragment(), Injectable {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+@AndroidEntryPoint
+class InquiryFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     var binding by autoCleared<InquiryFragmentBinding>()
 
-    lateinit var inquiryViewModel: InquiryViewModel
+    private val inquiryViewModel: InquiryViewModel by viewModels()
 
     var serviceTypesResultList: List<ServiceTypeUI>? = mutableListOf()
     var servicesResultList: List<ServiceUI>? = mutableListOf()
@@ -66,9 +63,6 @@ class InquiryFragment : BaseFragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        inquiryViewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(InquiryViewModel::class.java)
-
         inquiryViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })

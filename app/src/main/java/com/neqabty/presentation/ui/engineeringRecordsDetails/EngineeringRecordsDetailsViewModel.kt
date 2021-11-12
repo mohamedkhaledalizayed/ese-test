@@ -6,10 +6,11 @@ import com.neqabty.domain.usecases.SendEngineeringRecordsRequest
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.mappers.RegisteryEntityUIMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
-
 import javax.inject.Inject
 
+@HiltViewModel
 class EngineeringRecordsDetailsViewModel @Inject constructor(
     val sendEngineeringRecordsInquiry: SendEngineeringRecordsInquiry,
     val sendEngineeringRecordsRequest: SendEngineeringRecordsRequest
