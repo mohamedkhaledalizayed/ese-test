@@ -7,11 +7,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.databinding.AddressLayoutItemBinding
+import com.neqabty.yodawy.modules.address.domain.entity.AddressEntity
 
 
 class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
 
-    private val items: MutableList<String> = ArrayList()
+    private val items: MutableList<AddressEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -30,15 +31,16 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
+        val item = items[position]
+        viewHolder.binding.mainAddress.text = item.address
         viewHolder.binding.layoutItem.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(position)
         }
     }
 
-    override fun getItemCount() = 3
+    override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<String>?) {
+    fun submitList(newItems: List<AddressEntity>?) {
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()
