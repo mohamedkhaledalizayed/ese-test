@@ -8,5 +8,5 @@ import retrofit2.http.POST
 
 interface ProductApi {
     @POST("search/products")
-    suspend fun searchProduct(@Body keyWord: String): Flow<Response<List<ProductModel>>>
+    suspend fun searchProduct(@Body keyWord: String): Response<List<ProductModel>>
 }

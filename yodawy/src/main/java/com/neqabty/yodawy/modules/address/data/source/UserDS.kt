@@ -18,7 +18,7 @@ class UserDS @Inject constructor(private val userApi: UserApi) {
         return flow { emit(userApi.getUser(body).dataModel) }
     }
 
-    suspend fun addAddress(body: AddAddressRequestBody): Flow<AddAddressModel>{
+    suspend fun addAddress(body: AddAddressRequestBody): Flow<AddressResponse>{
         return flow { emit(userApi.addAddress(body).dataModel) }
     }
 }

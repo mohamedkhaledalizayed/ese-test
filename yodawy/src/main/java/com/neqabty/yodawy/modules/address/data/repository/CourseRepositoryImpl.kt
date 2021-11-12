@@ -1,6 +1,7 @@
 package com.neqabty.yodawy.modules.address.data.repository
 
 import com.neqabty.yodawy.modules.address.data.model.AddAddressRequestBody
+import com.neqabty.yodawy.modules.address.data.model.AddressResponse
 import com.neqabty.yodawy.modules.address.data.model.GetUserRequestBody
 import com.neqabty.yodawy.modules.address.data.model.mappers.toUserEntity
 import com.neqabty.yodawy.modules.address.data.model.response.addaddress.AddAddressModel
@@ -20,7 +21,7 @@ class CourseRepositoryImpl @Inject constructor(private val userDS: UserDS) : Cou
             .map { it.toUserEntity() }
     }
 
-    override suspend fun addAddress(params: AddAddressUseCaseParams): Flow<AddAddressModel> {
+    override suspend fun addAddress(params: AddAddressUseCaseParams): Flow<String> {
         return userDS.addAddress(
             AddAddressRequestBody(
                 params.mobile,
@@ -31,7 +32,7 @@ class CourseRepositoryImpl @Inject constructor(private val userDS: UserDS) : Cou
                 params.apartment,
                 params.landmark
             )
-        ).map { it }
+        ).map { it.id }
     }
 }
 

@@ -9,5 +9,5 @@ import retrofit2.http.POST
 
 interface OrderApi {
     @POST("order/list")
-    suspend fun getOrdersList(@Body orderListRequestBody: OrderListRequestBody): Flow<Response<OrderListResponse>>
+    suspend fun getOrdersList(@Body orderListRequestBody: OrderListRequestBody): Response<OrderListResponse>
 }
