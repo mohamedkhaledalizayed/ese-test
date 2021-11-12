@@ -124,4 +124,6 @@ dependencies {
     //Image Picker
     implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
 
+    //View State
+    implementation 'com.github.vlonjatg:progress-activity:2.0.5'
 }
