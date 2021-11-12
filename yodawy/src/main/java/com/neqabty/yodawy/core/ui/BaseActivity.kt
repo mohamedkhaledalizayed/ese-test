@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules.address.presentation.view.common
+package com.neqabty.yodawy.core.ui
 
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo

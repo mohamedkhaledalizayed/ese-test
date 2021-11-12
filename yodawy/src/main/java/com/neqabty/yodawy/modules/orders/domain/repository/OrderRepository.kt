@@ -1,6 +1,6 @@
-package com.neqabty.yodawy.modules.order.domain.repository
+package com.neqabty.yodawy.modules.orders.domain.repository
 
-import com.neqabty.yodawy.modules.order.domain.entity.OrderEntity
+import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
 import kotlinx.coroutines.flow.Flow
 
 interface OrderRepository {

@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.databinding.ActivityAddAddressBinding
 import com.neqabty.yodawy.modules.address.domain.params.AddAddressUseCaseParams
-import com.neqabty.yodawy.modules.address.presentation.view.common.BaseActivity
+import com.neqabty.yodawy.core.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

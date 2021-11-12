@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules.order.domain.entity
+package com.neqabty.yodawy.modules.orders.domain.entity
 
 data class OrderAddressEntity(
     val address: String,

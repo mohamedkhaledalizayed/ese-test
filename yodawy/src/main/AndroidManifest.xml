@@ -17,7 +17,7 @@
             android:name=".modules.OrderDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.OrdersActivity"
+            android:name=".modules.orders.presentation.view.orderstatusscreen.OrdersActivity"
             android:exported="false" />
         <activity
             android:name=".modules.CheckOutActivity"

@@ -1,7 +1,7 @@
-package com.neqabty.yodawy.modules.order.domain.interactors
+package com.neqabty.yodawy.modules.orders.domain.interactors
 
-import com.neqabty.yodawy.modules.order.domain.entity.OrderEntity
-import com.neqabty.yodawy.modules.order.domain.repository.OrderRepository
+import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
+import com.neqabty.yodawy.modules.orders.domain.repository.OrderRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
