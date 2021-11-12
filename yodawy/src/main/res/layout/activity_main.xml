@@ -52,6 +52,7 @@
             android:gravity="center"
             android:background="@drawable/order_bg"
             android:padding="@dimen/_15sdp"
+            android:onClick="uploadImage"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:orientation="vertical">

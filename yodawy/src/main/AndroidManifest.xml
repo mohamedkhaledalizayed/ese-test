@@ -3,6 +3,7 @@
     package="com.neqabty.yodawy">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".core.application.YodawyApplication"
         android:allowBackup="true"
@@ -11,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".modules.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.OrdersActivity"
+            android:exported="false" />
         <activity
             android:name=".modules.CheckOutActivity"
             android:exported="false" />

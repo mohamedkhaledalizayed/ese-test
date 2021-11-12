@@ -120,4 +120,8 @@ dependencies {
 
     //carbon
     implementation 'tk.zielony:carbon:0.16.0.1'
+
+    //Image Picker
+    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
+
 }
