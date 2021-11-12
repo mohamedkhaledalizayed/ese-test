@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules.order.data.model
+package com.neqabty.yodawy.modules.orders.data.model
 
 import com.google.gson.annotations.SerializedName
 

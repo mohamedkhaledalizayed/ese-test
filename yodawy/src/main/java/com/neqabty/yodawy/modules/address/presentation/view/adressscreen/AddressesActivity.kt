@@ -9,7 +9,7 @@ import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.utils.LocaleHelper
 import com.neqabty.yodawy.databinding.ActivityAddressesBinding
 import com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen.AddAddressActivity
-import com.neqabty.yodawy.modules.address.presentation.view.common.BaseActivity
+import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import com.vlonjatg.progressactivity.ProgressRelativeLayout
 import dagger.hilt.android.AndroidEntryPoint

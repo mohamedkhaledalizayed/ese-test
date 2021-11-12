@@ -14,7 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.modules.CartActivity
-import com.neqabty.yodawy.modules.OrdersActivity
+import com.neqabty.yodawy.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
 import com.neqabty.yodawy.modules.products.presentation.view.productscreen.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 

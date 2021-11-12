@@ -1,11 +1,11 @@
-package com.neqabty.yodawy.modules.order.data.api
+package com.neqabty.yodawy.modules.orders.data.api
 
 import com.neqabty.yodawy.modules.address.data.model.AddressResponse
 import com.neqabty.yodawy.modules.address.data.model.Response
-import com.neqabty.yodawy.modules.order.data.model.OrderListRequestBody
-import com.neqabty.yodawy.modules.order.data.model.OrderListResponse
-import com.neqabty.yodawy.modules.order.data.model.PlaceOrderResponse
-import com.neqabty.yodawy.modules.order.data.model.request.PlaceOrderRequestBody
+import com.neqabty.yodawy.modules.orders.data.model.OrderListRequestBody
+import com.neqabty.yodawy.modules.orders.data.model.OrderListResponse
+import com.neqabty.yodawy.modules.orders.data.model.PlaceOrderResponse
+import com.neqabty.yodawy.modules.orders.data.model.request.PlaceOrderRequestBody
 import kotlinx.coroutines.flow.Flow
 import retrofit2.http.Body
 import retrofit2.http.POST

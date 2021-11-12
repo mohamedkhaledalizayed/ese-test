@@ -1,6 +1,5 @@
 package com.neqabty.yodawy.modules.address.presentation.view.adressscreen
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +8,8 @@ import com.neqabty.yodawy.modules.address.domain.interactors.GetUserUseCase
 import com.neqabty.yodawy.modules.address.domain.params.GetUserUseCaseParams
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules.order.domain.entity
+package com.neqabty.yodawy.modules.orders.domain.entity
 
 
 data class OrderEntity(
@@ -13,5 +13,5 @@ data class OrderEntity(
     val orderNumber: String,
     val orderPrice: Int,
     val pharmacy: String,
-    val prescriptionImages: Any
+    val prescriptionImages: Any?
 )
