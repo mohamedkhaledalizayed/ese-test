@@ -38,7 +38,7 @@ class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
         viewHolder.binding.orderStatus.text = item.currentStatus
         viewHolder.binding.orderDate.text = item.creationDate
         viewHolder.binding.orderDetails.text = item.orderNumber
-        viewHolder.binding.total.text = item.orderPrice.toString()
+        viewHolder.binding.total.text = "${item.orderPrice} جنيه"
 
 
         if (position == itemCount - 1){

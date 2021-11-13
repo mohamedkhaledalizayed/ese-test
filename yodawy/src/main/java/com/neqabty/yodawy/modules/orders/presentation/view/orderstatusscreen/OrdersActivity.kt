@@ -24,8 +24,10 @@ class OrdersActivity : BaseActivity<ActivityOrdersBinding>() {
 
         setupToolbar(titleResId = R.string.orders_history)
 
+        binding.progressActivity.showLoading()
         ordersViewModel.getOrders("01090100670", 10, 0)
         ordersViewModel.orders.observe(this){
+            binding.progressActivity.showContent()
             findViewById<RecyclerView>(R.id.orders_recycler).adapter = mAdapter
             mAdapter.submitList(it)
         }
