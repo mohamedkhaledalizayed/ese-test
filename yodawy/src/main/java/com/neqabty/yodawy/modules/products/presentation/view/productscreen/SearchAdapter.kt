@@ -8,14 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.databinding.MedicationLayoutItemBinding
-import com.neqabty.yodawy.modules.Medication
-import com.neqabty.yodawy.modules.products.data.model.search.Data
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 
 
-class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
-    private val items: MutableList<Data> = ArrayList()
+    private val items: MutableList<ProductEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -27,7 +25,12 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
         }
 
         val binding: MedicationLayoutItemBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.medication_layout_item, parent, false)
+            DataBindingUtil.inflate(
+                layoutInflater!!,
+                R.layout.medication_layout_item,
+                parent,
+                false
+            )
 
         return ViewHolder(
             binding
@@ -37,9 +40,9 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
-        if (position == itemCount - 1){
+        if (position == itemCount - 1) {
             viewHolder.binding.view.visibility = View.GONE
-        }else{
+        } else {
             viewHolder.binding.view.visibility = View.VISIBLE
         }
 
@@ -76,7 +79,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<Data>?) {
+    fun submitList(newItems: List<ProductEntity>?) {
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()
@@ -90,7 +93,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: Data)
+        fun setOnItemClickListener(item: ProductEntity)
     }
 
     class ViewHolder(val binding: MedicationLayoutItemBinding) :

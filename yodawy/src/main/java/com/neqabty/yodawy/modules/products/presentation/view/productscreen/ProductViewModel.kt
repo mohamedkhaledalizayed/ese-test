@@ -18,13 +18,13 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductViewModel @Inject constructor(private val searchProductUseCase: SearchProductUseCase) :
     ViewModel() {
-    val data = MutableLiveData<List<ProductEntity>>()
+    val products = MutableLiveData<List<ProductEntity>>()
     val errorMessage = MutableStateFlow("")
     fun search(keyWord: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 searchProductUseCase.build(keyWord).collect {
-                    data.postValue(it)
+                    products.postValue(it)
                 }
             } catch (e:Throwable){
                 errorMessage.emit(e.toString())
