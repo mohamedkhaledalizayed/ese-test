@@ -31,6 +31,7 @@
         <ImageView
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
+            android:layout_gravity="center"
             android:src="@drawable/motorbike" />
 
         <TextView
@@ -66,6 +67,7 @@
         <ImageView
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
+            android:layout_gravity="center"
             android:src="@drawable/cash" />
 
         <TextView
@@ -73,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_weight="1"
-            android:text="Cash"
+            android:text="نقدى"
             android:textColor="@color/color_black"
             android:textSize="@dimen/_12ssp" />
 
@@ -81,7 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="Change"
+            android:text="تغير"
             android:textColor="@color/green"
             android:textSize="@dimen/_12ssp" />
     </LinearLayout>
@@ -97,6 +99,7 @@
         <ImageView
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
+            android:layout_gravity="center"
             android:src="@drawable/discount" />
 
         <TextView
@@ -104,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_weight="1"
-            android:text="Add Promo Code"
+            android:text="ادخل كود الخصم"
             android:textColor="@color/color_black"
             android:textSize="@dimen/_10ssp"
             android:textStyle="bold" />

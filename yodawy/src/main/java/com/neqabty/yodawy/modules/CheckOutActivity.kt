@@ -11,9 +11,9 @@ class CheckOutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check_out)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Checkout"
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.back)
+//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar!!.title = "Checkout"
+//        supportActionBar?.setHomeAsUpIndicator(R.drawable.back)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
