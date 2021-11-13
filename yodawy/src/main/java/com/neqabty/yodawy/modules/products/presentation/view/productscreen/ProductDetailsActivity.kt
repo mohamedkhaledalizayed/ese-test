@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.ui.BaseActivity
@@ -29,7 +30,8 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
         val productItem = intent.extras?.getParcelable<Data>("product")!!
 
         binding.add.setOnClickListener {
-
+            Toast.makeText(this, "تمت الاضافة بنجاح", Toast.LENGTH_LONG).show()
+            finish()
         }
 
 

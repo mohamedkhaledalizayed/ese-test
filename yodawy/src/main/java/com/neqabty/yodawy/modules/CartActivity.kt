@@ -37,11 +37,11 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun setDate(){
-        var medication = Medication("name", 1, "image")
+        var medication = Medication("name", 1, "image", 1)
         list.add(medication)
-        medication = Medication("name", 1, "image")
+        medication = Medication("name", 1, "image", 1)
         list.add(medication)
-        medication = Medication("name", 2, "image")
+        medication = Medication("name", 2, "image", 1)
         list.add(medication)
         mAdapter.submitList(list)
     }

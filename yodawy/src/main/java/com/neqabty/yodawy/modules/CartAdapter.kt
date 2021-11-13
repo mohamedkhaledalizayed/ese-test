@@ -40,6 +40,18 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
             viewHolder.binding.view.visibility = View.VISIBLE
         }
 
+        viewHolder.binding.increase.setOnClickListener {
+            item.quantity = item.quantity + 1
+            viewHolder.binding.quantity.text = "${item.quantity}"
+        }
+
+        viewHolder.binding.decrease.setOnClickListener {
+            if (item.quantity > 0){
+                item.quantity = item.quantity - 1
+                viewHolder.binding.quantity.text = "${item.quantity}"
+            }
+        }
+
     }
 
     override fun getItemCount() = items.size
