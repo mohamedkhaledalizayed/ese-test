@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.utils.LocaleHelper
 import com.neqabty.yodawy.databinding.ActivityAddressesBinding
 import com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen.AddAddressActivity
@@ -30,13 +31,15 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
         addressViewModel.getUser("3608662","01090100670")
         findViewById<ProgressRelativeLayout>(R.id.progressActivity).showLoading()
         addressViewModel.user.observe(this){
+            Constants.yodawyId = it.yodawyId
             findViewById<ProgressRelativeLayout>(R.id.progressActivity).showContent()
             mAdapter.submitList(it.addresses)
         }
         findViewById<RecyclerView>(R.id.address_recycler).adapter = mAdapter
         mAdapter.onItemClickListener = object :
             AddressAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(id: Int) {
+            override fun setOnItemClickListener(id: String) {
+                Constants.selectedAddressId = id
                 startActivity(Intent(this@AddressesActivity, HomeActivity::class.java))
             }
         }

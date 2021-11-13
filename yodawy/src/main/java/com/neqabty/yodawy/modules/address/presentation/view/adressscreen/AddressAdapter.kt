@@ -36,7 +36,7 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
         viewHolder.binding.mainAddress.text = item.addressName
         viewHolder.binding.addressDetails.text = "شارع ${item.address}, مبنى رقم ${item.buildingNumber}, رقم الطابق ${item.floor}, شقة رقم ${item.apt}"
         viewHolder.binding.layoutItem.setOnClickListener {
-            onItemClickListener?.setOnItemClickListener(position)
+            onItemClickListener?.setOnItemClickListener(item.adressId)
         }
 
         if (position == itemCount - 1){
@@ -61,7 +61,7 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    interface OnItemClickListener { fun setOnItemClickListener(itemId: Int) }
+    interface OnItemClickListener { fun setOnItemClickListener(itemId: String) }
 
     class ViewHolder(val binding: AddressLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root)
