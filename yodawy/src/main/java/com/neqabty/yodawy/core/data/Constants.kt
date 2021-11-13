@@ -8,5 +8,5 @@ object Constants {
     var userNumber: String = ""
     var mobileNumber: String = ""
     var jwt: String = ""
-    var cartItems= mutableListOf<ProductEntity>()
+    var cartItems= mutableListOf<Pair<ProductEntity,Int>>()
 }

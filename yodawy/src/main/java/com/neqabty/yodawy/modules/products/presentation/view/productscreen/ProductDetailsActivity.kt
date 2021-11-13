@@ -21,7 +21,7 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
 
         setupToolbar(title = productItem.name)
         binding.add.setOnClickListener {
-            Constants.cartItems.add(productItem)
+            Constants.cartItems.addOrIncrement(productItem)
             Toast.makeText(this, "تمت الاضافة بنجاح", Toast.LENGTH_LONG).show()
             finish()
         }
@@ -49,4 +49,17 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
     }
 
 
+}
+
+fun MutableList<Pair<ProductEntity,Int>>.addOrIncrement(productItem: ProductEntity) {
+    var index=-1
+    this.mapIndexed{ ind, productEntity ->
+        if(productEntity.first.id == productItem.id){
+            Pair(productEntity.first,productEntity.second+1)
+            index = ind
+        }else
+            productEntity
+    }
+    if(index == -1)
+        this.add(Pair(productItem,1))
 }
