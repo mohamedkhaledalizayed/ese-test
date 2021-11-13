@@ -97,16 +97,6 @@ class SearchActivity : AppCompatActivity() {
 //        setDate()
     }
 
-    fun saveToCart(){
-        for (item in Constants.itemRequests){
-            if (item.id.equals("")){
-                item.quantity = 2
-            }else{
-                Constants.itemRequests.add(CartItems("2", "name", "details", 10f, "image", 2))
-            }
-        }
-    }
-
 
     private fun setDate(){
         var medication = Medication("name", 1, "image")
