@@ -13,6 +13,7 @@ import com.neqabty.yodawy.R
 import com.neqabty.yodawy.modules.CartActivity
 import com.neqabty.yodawy.modules.Medication
 import com.neqabty.yodawy.modules.address.presentation.view.adressscreen.AddressViewModel
+import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 import com.vlonjatg.progressactivity.ProgressRelativeLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,17 +35,20 @@ class SearchActivity : AppCompatActivity() {
         productViewModel.search("panadol")
         productViewModel.data.observe(this){
             Log.e("gfgh", it[0].name)
+            mAdapter.submitList(it)
         }
         mAdapter.onItemClickListener = object :
             SearchAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(id: Int) {
-                startActivity(Intent(this@SearchActivity, ProductDetailsActivity::class.java))
+            override fun setOnItemClickListener(item: ProductEntity) {
+                val intent: Intent = Intent(this@SearchActivity, ProductDetailsActivity::class.java)
+                intent.putExtra("product", item)
+                startActivity(intent)
             }
         }
         toolbar.findViewById<ImageView>(R.id.back_btn).setOnClickListener { finish() }
         toolbar.findViewById<FrameLayout>(R.id.cart).setOnClickListener { startActivity(Intent(this, CartActivity::class.java)) }
 
-        setDate()
+//        setDate()
     }
 
 
@@ -75,6 +79,5 @@ class SearchActivity : AppCompatActivity() {
         list.add(medication)
         medication = Medication("name", 1, "image")
         list.add(medication)
-        mAdapter.submitList(list)
     }
 }

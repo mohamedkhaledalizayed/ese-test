@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.modules.CartActivity
+import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 
 class ProductDetailsActivity : AppCompatActivity() {
 
@@ -22,5 +23,6 @@ class ProductDetailsActivity : AppCompatActivity() {
         toolbar.findViewById<ImageView>(R.id.back_btn).setOnClickListener { finish() }
         toolbar.findViewById<FrameLayout>(R.id.cart).setOnClickListener { startActivity(Intent(this, CartActivity::class.java)) }
 
+        val productItem = intent.extras?.getParcelable<ProductEntity>("product")!!
     }
 }

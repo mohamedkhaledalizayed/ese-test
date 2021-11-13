@@ -9,7 +9,7 @@ data class ProductModel(
     @SerializedName("id")
     val id: String,
     @SerializedName("image")
-    val image: Any,
+    val image: String,
     @SerializedName("isLimitedAvailability")
     val isLimitedAvailability: Boolean,
     @SerializedName("isMedication")
