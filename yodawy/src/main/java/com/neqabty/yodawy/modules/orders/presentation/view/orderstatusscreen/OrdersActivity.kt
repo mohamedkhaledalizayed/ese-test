@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.databinding.ActivityOrdersBinding
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.modules.OrderDetailsActivity
@@ -25,7 +26,7 @@ class OrdersActivity : BaseActivity<ActivityOrdersBinding>() {
         setupToolbar(titleResId = R.string.orders_history)
 
         binding.progressActivity.showLoading()
-        ordersViewModel.getOrders("01090100670", 10, 0)
+        ordersViewModel.getOrders(Constants.mobileNumber, 10, 0)
         ordersViewModel.orders.observe(this){
             binding.progressActivity.showContent()
             findViewById<RecyclerView>(R.id.orders_recycler).adapter = mAdapter

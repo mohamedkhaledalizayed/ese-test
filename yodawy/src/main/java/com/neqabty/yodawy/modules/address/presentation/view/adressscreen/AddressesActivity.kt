@@ -28,7 +28,11 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
 
         setupToolbar(titleResId = R.string.addresses)
 
-        addressViewModel.getUser("3608662","01090100670")
+        Constants.userNumber = intent.extras!!.getString("user_number", "")
+        Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
+        Constants.jwt = intent.extras!!.getString("jwt", "")
+
+        addressViewModel.getUser(Constants.userNumber, Constants.mobileNumber)
         findViewById<ProgressRelativeLayout>(R.id.progressActivity).showLoading()
         addressViewModel.user.observe(this){
             Constants.yodawyId = it.yodawyId

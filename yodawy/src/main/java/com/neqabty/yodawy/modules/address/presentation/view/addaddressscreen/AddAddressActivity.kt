@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.databinding.ActivityAddAddressBinding
 import com.neqabty.yodawy.modules.address.domain.params.AddAddressUseCaseParams
 import com.neqabty.yodawy.core.ui.BaseActivity
@@ -70,7 +71,8 @@ override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater
         }
 
         dialog.show()
-        addAddressViewModel.addAddress(AddAddressUseCaseParams("01090100670",
+        addAddressViewModel.addAddress(AddAddressUseCaseParams(
+            Constants.mobileNumber,
             binding.nickname.text.toString(),
             binding.street.text.toString(),
             binding.floor.text.toString(),

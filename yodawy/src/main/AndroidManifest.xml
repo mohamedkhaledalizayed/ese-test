@@ -39,13 +39,7 @@
         </activity>
         <activity
             android:name=".modules.address.presentation.view.adressscreen.AddressesActivity"
-            android:exported="true">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
         <activity
             android:name=".modules.address.presentation.view.homescreen.HomeActivity"
