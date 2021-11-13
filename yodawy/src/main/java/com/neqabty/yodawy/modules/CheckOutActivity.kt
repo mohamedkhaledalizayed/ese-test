@@ -19,6 +19,9 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.place_order)
+        placeOrderViewModel.placeOrderResult.observe(this){
+
+        }
     }
 
     fun confirmOrder(view: View) {

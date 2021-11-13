@@ -45,7 +45,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
 //        list.add(medication)
 //        medication = Medication("name", 2, "image", 1)
 //        list.add(medication)
-        mAdapter.submitList(Constants.cartItems)
+        mAdapter.submitList(Constants.cartItems.map { it.first })
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {
