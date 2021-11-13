@@ -3,6 +3,7 @@ package com.neqabty.yodawy.modules.products.presentation.view.productscreen
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.activity.viewModels
@@ -16,6 +17,7 @@ import com.neqabty.yodawy.modules.CartActivity
 import com.neqabty.yodawy.modules.Medication
 import com.neqabty.yodawy.modules.products.data.model.search.Data
 import com.neqabty.yodawy.modules.products.data.model.search.SearchResponse
+import com.vlonjatg.progressactivity.ProgressRelativeLayout
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,7 +28,6 @@ import retrofit2.http.POST
 
 @AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
-    private var list: MutableList<Medication> = ArrayList<Medication>()
     private val mAdapter = SearchAdapter()
     private lateinit var toolbar: Toolbar
     private val productViewModel: ProductViewModel by viewModels()
@@ -40,33 +41,8 @@ class SearchActivity : AppCompatActivity() {
         supportActionBar?.elevation = 0.0f
         findViewById<RecyclerView>(R.id.recycler_view).adapter = mAdapter
 
-//        productViewModel.search("panadol")
-//        productViewModel.data.observe(this){
-//            Log.e("gfgh", "it[0].name")
-////            mAdapter.submitList(it)
-//        }
-
 
         viewModel = ViewModelProviders.of(this).get(PhoneViewModel::class.java)
-        viewModel!!.sendToken("panadol")?.observe(this,
-            Observer<ViewState<SearchResponse>> { viewState ->
-                when (viewState.status) {
-                    ViewState.Status.LOADING -> {
-                    }
-                    ViewState.Status.SUCCESS -> {
-                        mAdapter.submitList(viewState.data?.data)
-                    }
-                    ViewState.Status.ERROR -> {
-                    }
-
-                }
-            })
-
-
-
-
-
-
 
         mAdapter.onItemClickListener = object :
             SearchAdapter.OnItemClickListener {
@@ -79,6 +55,28 @@ class SearchActivity : AppCompatActivity() {
         toolbar.findViewById<ImageView>(R.id.back_btn).setOnClickListener { finish() }
         toolbar.findViewById<FrameLayout>(R.id.cart)
             .setOnClickListener { startActivity(Intent(this, CartActivity::class.java)) }
+
+        toolbar.findViewById<ImageView>(R.id.search_btn)
+            .setOnClickListener {
+                findViewById<ProgressRelativeLayout>(R.id.progressActivity).showLoading()
+                viewModel!!.sendToken(toolbar.findViewById<EditText>(R.id.et_search).text.toString())?.observe(this,
+                    Observer<ViewState<SearchResponse>> { viewState ->
+                        when (viewState.status) {
+                            ViewState.Status.LOADING -> {
+
+                            }
+                            ViewState.Status.SUCCESS -> {
+                                findViewById<ProgressRelativeLayout>(R.id.progressActivity).showContent()
+                                mAdapter.clear()
+                                mAdapter.submitList(viewState.data?.data)
+                            }
+                            ViewState.Status.ERROR -> {
+
+                            }
+
+                        }
+                    })
+            }
 
     }
 
