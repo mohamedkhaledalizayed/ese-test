@@ -25,6 +25,10 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
         binding.root.findViewById<Toolbar>(R.id.toolbar)?.setNavigationOnClickListener{onBackPressed()}
     }
 
+    override fun onResume() {
+        super.onResume()
+        invalidateOptionsMenu()
+    }
 
     protected fun hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

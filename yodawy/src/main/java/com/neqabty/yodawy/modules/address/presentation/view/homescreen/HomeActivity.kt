@@ -6,10 +6,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.databinding.ActivityHomeBinding
 import com.neqabty.yodawy.modules.CartActivity
@@ -60,6 +62,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         cartItem.actionView.setOnClickListener{
             startActivity(Intent(this, CartActivity::class.java))
         }
+        cartItem.actionView.findViewById<TextView>(R.id.tv_count).visibility = if(Constants.cartItems.size == 0) View.INVISIBLE else View.VISIBLE
+        cartItem.actionView.findViewById<TextView>(R.id.tv_count).text = Constants.cartItems.size.toString()
         return super.onCreateOptionsMenu(menu)
     }
 }

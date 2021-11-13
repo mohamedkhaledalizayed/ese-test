@@ -3,11 +3,14 @@ package com.neqabty.yodawy.modules.products.presentation.view.productscreen
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.*
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.databinding.ActivitySearchBinding
 import com.neqabty.yodawy.modules.CartActivity
@@ -56,6 +59,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         cartItem.actionView.setOnClickListener{
             startActivity(Intent(this, CartActivity::class.java))
         }
+        cartItem.actionView.findViewById<TextView>(R.id.tv_count).visibility = if(Constants.cartItems.size == 0) View.INVISIBLE else View.VISIBLE
+        cartItem.actionView.findViewById<TextView>(R.id.tv_count).text = Constants.cartItems.size.toString()
         return super.onCreateOptionsMenu(menu)
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.databinding.ActivityProductDetailsBinding
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
@@ -20,6 +21,7 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
 
         setupToolbar(title = productItem.name)
         binding.add.setOnClickListener {
+            Constants.cartItems.add(productItem)
             Toast.makeText(this, "تمت الاضافة بنجاح", Toast.LENGTH_LONG).show()
             finish()
         }

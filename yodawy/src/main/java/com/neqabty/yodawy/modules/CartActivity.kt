@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.databinding.ActivityCartBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,28 +39,28 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
     }
 
     private fun setDate(){
-        var medication = Medication("name", 1, "image", 1)
-        list.add(medication)
-        medication = Medication("name", 1, "image", 1)
-        list.add(medication)
-        medication = Medication("name", 2, "image", 1)
-        list.add(medication)
-        mAdapter.submitList(list)
+//        var medication = Medication("name", 1, "image", 1)
+//        list.add(medication)
+//        medication = Medication("name", 1, "image", 1)
+//        list.add(medication)
+//        medication = Medication("name", 2, "image", 1)
+//        list.add(medication)
+        mAdapter.submitList(Constants.cartItems)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.add_note_menu,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-        }else if (item.itemId == R.id.add_note){
-
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        menuInflater.inflate(R.menu.add_note_menu,menu)
+//        return super.onCreateOptionsMenu(menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if (item.itemId == android.R.id.home) {
+//            finish()
+//        }else if (item.itemId == R.id.add_note){
+//
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     fun checkOut(view: View) {
         startActivity(Intent(this, CheckOutActivity::class.java))

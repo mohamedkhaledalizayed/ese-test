@@ -8,11 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.databinding.CartLayoutItemBinding
+import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 
 
 class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
-    private val items: MutableList<Medication> = ArrayList()
+    private val items: MutableList<ProductEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -40,23 +41,26 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
             viewHolder.binding.view.visibility = View.VISIBLE
         }
 
-        viewHolder.binding.increase.setOnClickListener {
-            item.quantity = item.quantity + 1
-            viewHolder.binding.quantity.text = "${item.quantity}"
-        }
-
-        viewHolder.binding.decrease.setOnClickListener {
-            if (item.quantity > 0){
-                item.quantity = item.quantity - 1
-                viewHolder.binding.quantity.text = "${item.quantity}"
-            }
-        }
+        viewHolder.binding.status.text = if(item.isLimitedAvailability) "Low Stock" else ""
+        viewHolder.binding.medicationTitle.text = item.name
+        viewHolder.binding.medicationPrice.text = item.regularPrice.toString()
+//        viewHolder.binding.increase.setOnClickListener {
+//            item.quantity = item.quantity + 1
+//            viewHolder.binding.quantity.text = "${item.quantity}"
+//        }
+//
+//        viewHolder.binding.decrease.setOnClickListener {
+//            if (item.quantity > 0){
+//                item.quantity = item.quantity - 1
+//                viewHolder.binding.quantity.text = "${item.quantity}"
+//            }
+//        }
 
     }
 
     override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<Medication>?) {
+    fun submitList(newItems: List<ProductEntity>?) {
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()
