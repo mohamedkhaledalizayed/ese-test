@@ -34,7 +34,7 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
         viewHolder.binding.mainAddress.text = item.addressName
-        viewHolder.binding.addressDetails.text = item.address
+        viewHolder.binding.addressDetails.text = "شارع ${item.address}, مبنى رقم ${item.buildingNumber}, رقم الطابق ${item.floor}, شقة رقم ${item.apt}"
         viewHolder.binding.layoutItem.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(position)
         }

@@ -1,22 +1,16 @@
 package com.neqabty.yodawy.modules.products.presentation.view.productscreen
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import com.neqabty.yodawy.R
-import com.neqabty.yodawy.core.data.CartItems
-import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.ui.BaseActivity
-import com.neqabty.yodawy.databinding.ActivityAddAddressBinding
 import com.neqabty.yodawy.databinding.ActivityProductDetailsBinding
 import com.neqabty.yodawy.modules.CartActivity
 import com.neqabty.yodawy.modules.products.data.model.search.Data
-import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 
 class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
 

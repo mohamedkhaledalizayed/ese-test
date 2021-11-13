@@ -4,8 +4,7 @@ import android.app.Application
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.neqabty.yodawy.modules.products.data.api.ProductApi
-import com.neqabty.yodawy.modules.products.presentation.view.productscreen.ServiceApi
+import com.neqabty.yodawy.modules.products.presentation.view.productscreen.SearchActivity
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -20,7 +19,7 @@ class RetrofitModule private constructor(private val context: Application) {
     private lateinit var gson: Gson
     private lateinit var okHttpClient: OkHttpClient
     private lateinit var retrofit: Retrofit
-    private lateinit var service: ServiceApi
+    private lateinit var service: SearchActivity.ServiceApi
 
     private fun provideCache() {
         val cacheSize = (10 * 1024 * 1024).toLong()
@@ -71,7 +70,7 @@ class RetrofitModule private constructor(private val context: Application) {
     }
 
     private fun provideService() {
-        service = retrofit.create(ServiceApi::class.java)
+        service = retrofit.create(SearchActivity.ServiceApi::class.java)
     }
 
     companion object {
@@ -82,7 +81,7 @@ class RetrofitModule private constructor(private val context: Application) {
         }
     }
 
-    fun getService(): ServiceApi {
+    fun getService(): SearchActivity.ServiceApi {
         return service
     }
 
