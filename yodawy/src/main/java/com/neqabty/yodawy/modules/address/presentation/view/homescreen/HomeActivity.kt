@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -53,14 +52,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
         }
     }
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        var inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_home, menu)
 
-        val cartItem = menu?.findItem(R.id.menu_item_cart)
-        cartItem.setOnMenuItemClickListener{
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_cart, menu)
+
+        val cartItem = menu.findItem(R.id.menu_item_cart)
+        cartItem.actionView.setOnClickListener{
             startActivity(Intent(this, CartActivity::class.java))
-            return@setOnMenuItemClickListener true
         }
         return super.onCreateOptionsMenu(menu)
     }
