@@ -21,11 +21,11 @@ class CartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cart)
 
 
-        photoAdapter = PhotosAdapter(this)
-        findViewById<RecyclerView>(R.id.photos_recycler).adapter = photoAdapter
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Your Cart"
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.back)
+//        photoAdapter = PhotosAdapter(this)
+//        findViewById<RecyclerView>(R.id.photos_recycler).adapter = photoAdapter
+//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar!!.title = "Your Cart"
+//        supportActionBar?.setHomeAsUpIndicator(R.drawable.back)
         findViewById<RecyclerView>(R.id.cart_recycler).adapter = mAdapter
         mAdapter.onItemClickListener = object :
             CartAdapter.OnItemClickListener {

@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.databinding.MedicationLayoutItemBinding
 import com.neqabty.yodawy.modules.Medication
+import com.neqabty.yodawy.modules.products.data.model.search.Data
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 
 
 class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
-    private val items: MutableList<ProductEntity> = ArrayList()
+    private val items: MutableList<Data> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -43,10 +44,11 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
         }
 
         when {
-            item.active -> {
-                viewHolder.binding.medicationStatus.setImageResource(R.drawable.check_mark)
-                viewHolder.binding.status.visibility = View.GONE
-                viewHolder.binding.deliveryTime.visibility = View.VISIBLE
+            item.outOfStock -> {
+                viewHolder.binding.status.setBackgroundResource(R.color.address_btn_bg)
+                viewHolder.binding.medicationStatus.visibility = View.INVISIBLE
+                viewHolder.binding.deliveryTime.visibility = View.GONE
+                viewHolder.binding.status.text = "Out of Stock"
             }
             item.isLimitedAvailability -> {
                 viewHolder.binding.medicationStatus.visibility = View.VISIBLE
@@ -57,12 +59,15 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
                 viewHolder.binding.deliveryTime.text = "May not be available"
             }
             else -> {
-                viewHolder.binding.status.setBackgroundResource(R.color.address_btn_bg)
-                viewHolder.binding.medicationStatus.visibility = View.INVISIBLE
-                viewHolder.binding.deliveryTime.visibility = View.GONE
-                viewHolder.binding.status.text = "Out of Stock"
+                viewHolder.binding.medicationStatus.setImageResource(R.drawable.check_mark)
+                viewHolder.binding.status.visibility = View.GONE
+                viewHolder.binding.deliveryTime.visibility = View.VISIBLE
             }
         }
+
+        viewHolder.binding.medicationTitle.text = item.name
+        viewHolder.binding.medicationPrice.text = "EGP ${item.salePrice.toString()}"
+
 
         viewHolder.binding.layoutItem.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)
@@ -71,7 +76,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<ProductEntity>?) {
+    fun submitList(newItems: List<Data>?) {
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()
@@ -85,7 +90,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: ProductEntity)
+            fun setOnItemClickListener(item: Data)
     }
 
     class ViewHolder(val binding: MedicationLayoutItemBinding) :

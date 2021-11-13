@@ -11,5 +11,5 @@ import retrofit2.http.POST
 interface ProductApi {
     @FormUrlEncoded
     @POST("search/products")
-    suspend fun searchProduct(@Field("search_term") keyWord: String): Response<List<ProductModel>>
+    suspend fun searchProduct(@Field("search_term")keyWord: String): Response<List<ProductModel>>
 }

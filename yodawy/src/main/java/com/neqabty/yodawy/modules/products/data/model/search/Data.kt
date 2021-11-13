@@ -1,15 +1,18 @@
-package com.neqabty.yodawy.modules.products.data.model
+package com.neqabty.yodawy.modules.products.data.model.search
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-data class ProductModel(
+@Parcelize
+data class Data(
     @SerializedName("active")
     val active: Boolean,
     @SerializedName("id")
     val id: String,
     @SerializedName("image")
-    val image: String,
+    val image: String?,
     @SerializedName("isLimitedAvailability")
     val isLimitedAvailability: Boolean,
     @SerializedName("isMedication")
@@ -22,4 +25,4 @@ data class ProductModel(
     val regularPrice: Float,
     @SerializedName("salePrice")
     val salePrice: Float
-)
+): Parcelable

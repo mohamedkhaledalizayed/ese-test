@@ -52,9 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/medication_title"
             android:layout_marginStart="@dimen/_10sdp"
-            android:textSize="@dimen/_10ssp"
             android:layout_toEndOf="@+id/frameLayout"
-            android:text="14 Sachets" />
+            android:text="14 Sachets"
+            android:textSize="@dimen/_10ssp" />
 
         <TextView
             android:id="@+id/medication_price"

@@ -12,6 +12,6 @@ data class ProductEntity(
     val isMedication: Boolean,
     val name: String,
     val outOfStock: Boolean,
-    val regularPrice: Int,
-    val salePrice: Int
+    val regularPrice: Float,
+    val salePrice: Float
 ): Parcelable
