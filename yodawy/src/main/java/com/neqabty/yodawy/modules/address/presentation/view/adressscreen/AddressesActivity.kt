@@ -35,6 +35,10 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
         addressViewModel.getUser(Constants.userNumber, Constants.mobileNumber)
         findViewById<ProgressRelativeLayout>(R.id.progressActivity).showLoading()
         addressViewModel.user.observe(this){
+
+            if (it.addresses.isEmpty()){
+                findViewById<ProgressRelativeLayout>(R.id.progressActivity).showEmpty(R.drawable.ic_undraw_empty_xct9, "لا يوجد عناوين", "برجاء إضافة عنوان")
+            }
             Constants.yodawyId = it.yodawyId
             findViewById<ProgressRelativeLayout>(R.id.progressActivity).showContent()
             mAdapter.submitList(it.addresses)
