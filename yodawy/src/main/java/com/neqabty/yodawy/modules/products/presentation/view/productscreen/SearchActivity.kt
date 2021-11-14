@@ -56,11 +56,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         menuInflater.inflate(R.menu.menu_cart, menu)
 
         val cartItem = menu.findItem(R.id.menu_item_cart)
-        cartItem.actionView.setOnClickListener{
-            startActivity(Intent(this, CartActivity::class.java))
-        }
-        cartItem.actionView.findViewById<TextView>(R.id.tv_count).visibility = if(Constants.cartItems.size == 0) View.INVISIBLE else View.VISIBLE
-        cartItem.actionView.findViewById<TextView>(R.id.tv_count).text = Constants.cartItems.size.toString()
+        updateCartOptionsMenu(cartItem)
+
         return super.onCreateOptionsMenu(menu)
     }
 }

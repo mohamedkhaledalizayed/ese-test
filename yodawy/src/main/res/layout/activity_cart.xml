@@ -69,6 +69,7 @@
                             android:layout_margin="@dimen/_10sdp"
                             android:text="@string/_6_photos_added"
                             android:textAlignment="center"
+                            android:visibility="gone"
                             android:textSize="@dimen/_10ssp" />
 
                         <androidx.recyclerview.widget.RecyclerView

@@ -69,7 +69,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
             binding.view.visibility = View.GONE
         } else {
             photoAdapter.submitList(imageList)
-            binding.numberImage.text = " تم تحميل ${imageList.size - 1} صور"
+//            binding.numberImage.text = " تم تحميل ${imageList.size - 1} صور"
         }
     }
 
