@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.utils.AppUtils
 import com.neqabty.yodawy.databinding.OrderLayoutItemBinding
 import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
@@ -36,7 +40,7 @@ class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
         viewHolder.binding.orderStatus.text = item.currentStatus
-        viewHolder.binding.orderDate.text = item.creationDate
+        viewHolder.binding.orderDate.text = AppUtils().dateFormat(item.creationDate)
         viewHolder.binding.orderDetails.text = item.orderNumber
         viewHolder.binding.total.text = "${item.orderPrice} جنيه"
 
