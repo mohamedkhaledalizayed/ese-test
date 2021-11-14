@@ -69,7 +69,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         builder.setMessage("message")// TODO mona please add suitable arabic message
         builder.setCancelable(false)
         builder.setPositiveButton("موافق") { dialog, which ->
-        cartItems.clear()
+            cartItems.clear()
+            invalidateOptionsMenu()
             selectImage()
             dialog.dismiss()
         }
@@ -85,9 +86,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         when (resultCode) {
             Activity.RESULT_OK -> {
                 val uri: Uri = data?.data!!
-                if (imageList.isEmpty()) {
-                    imageList.add(0, Uri.EMPTY)
-                }
                 imageList.add(uri)
             }
             ImagePicker.RESULT_ERROR -> {

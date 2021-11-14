@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/iv_cart"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
         android:layout_gravity="center"
         android:src="@drawable/shopping_cart" />
 
@@ -24,5 +24,5 @@
         android:text="5"
         android:visibility="invisible"
         android:textColor="#fff"
-        android:textSize="@dimen/_8ssp" />
+        android:textSize="@dimen/_7ssp" />
 </FrameLayout>

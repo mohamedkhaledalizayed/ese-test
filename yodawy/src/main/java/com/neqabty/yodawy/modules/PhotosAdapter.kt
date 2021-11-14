@@ -36,14 +36,9 @@ class PhotosAdapter (private val context: Context) : RecyclerView.Adapter<Photos
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        if (position == 0){
-            viewHolder.binding.imageView.setImageResource(R.drawable.camera)
-            viewHolder.binding.deleteImage.visibility = View.GONE
-            viewHolder.binding.root.setOnClickListener { onItemClickListener?.setOnItemClickListener(0) }
-        }else{
-            viewHolder.binding.imageView.setImageURI(items[position])
-            viewHolder.binding.deleteImage.visibility = View.VISIBLE
-        }
+        viewHolder.binding.imageView.setImageURI(items[position])
+        viewHolder.binding.deleteImage.visibility = View.VISIBLE
+
 
         viewHolder.binding.deleteImage.setOnClickListener { onItemClickListener?.setOnItemClickListener(position) }
     }
@@ -51,6 +46,7 @@ class PhotosAdapter (private val context: Context) : RecyclerView.Adapter<Photos
     override fun getItemCount() = items.size
 
     fun submitList(newItems: List<Uri>?) {
+        clear()
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()

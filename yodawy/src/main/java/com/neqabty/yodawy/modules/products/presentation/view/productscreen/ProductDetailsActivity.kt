@@ -90,7 +90,6 @@ fun MutableList<Pair<ProductEntity, Int>>.addOrIncrement(productItem: ProductEnt
     var index = -1
     this.mapIndexed { ind, productEntity ->//TODO fix this
         if (productEntity.first.id == productItem.id) {
-            Pair(productEntity.first, productEntity.second + 1)
             cartItems[ind].first.quantity += 1
             index = ind
         } else

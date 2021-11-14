@@ -37,24 +37,12 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
         photoAdapter.onItemClickListener = object :
             PhotosAdapter.OnItemClickListener {
             override fun setOnItemClickListener(id: Int) {
-                if (id == 0) {
-                    addNewImage()
-                } else {
-                    imageList.removeAt(id)
-                    if (imageList.size == 1){
-                        imageList.clear()
-                        checkImages()
-                    }
-                    photoAdapter.clear()
-                    photoAdapter.submitList(imageList)
-                }
+                imageList.removeAt(id)
+                updateView()
             }
         }
 
-        checkImages()
-        if (cartItems.isNotEmpty()){
-            binding.checkout.visibility = View.VISIBLE
-        }
+        updateView()
         binding.cartRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             CartAdapter.OnItemClickListener {
@@ -63,22 +51,38 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
             }
 
             override fun notifyUi() {
-                if (cartItems.isEmpty()){
-                    binding.checkout.visibility = View.GONE
-                }
+                updateView()
             }
         }
         mAdapter.submitList(cartItems)
+
+        binding.ivAddPhoto.setOnClickListener {
+            addNewImage()
+        }
     }
 
-    private fun checkImages() {
+    private fun updateView() {
+        /////Images recyclerView
+        if(cartItems.isEmpty())
+            binding.hsvPhotos.visibility = View.VISIBLE
+        else
+            binding.hsvPhotos.visibility = View.GONE
+
         if (imageList.isEmpty()) {
             binding.numberImage.visibility = View.GONE
-            binding.photosRecycler.visibility = View.GONE
             binding.view.visibility = View.GONE
         } else {
-            photoAdapter.submitList(imageList)
+            binding.view.visibility = View.VISIBLE
 //            binding.numberImage.text = " تم تحميل ${imageList.size - 1} صور"
+        }
+        photoAdapter.submitList(imageList)
+
+
+        ///// checkout btn
+        if (cartItems.isEmpty() && imageList.isEmpty()){
+            binding.checkout.visibility = View.GONE
+        }else{
+            binding.checkout.visibility = View.VISIBLE
         }
     }
 
@@ -87,12 +91,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
         when (resultCode) {
             Activity.RESULT_OK -> {
                 val uri: Uri = data?.data!!
-                if (imageList.isEmpty()){
-                    imageList.add(0, Uri.EMPTY)
-                }
                 imageList.add(uri)
-                photoAdapter.clear()
-                photoAdapter.submitList(imageList)
             }
             ImagePicker.RESULT_ERROR -> {
                 Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
@@ -101,6 +100,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
                 Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
             }
         }
+        updateView()
     }
 
     private fun addNewImage() {
@@ -110,21 +110,6 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
             .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
             .start()
     }
-
-
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        menuInflater.inflate(R.menu.add_note_menu,menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if (item.itemId == android.R.id.home) {
-//            finish()
-//        }else if (item.itemId == R.id.add_note){
-//
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 
     fun checkOut(view: View) {
         startActivity(Intent(this, CheckOutActivity::class.java))
