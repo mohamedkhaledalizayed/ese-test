@@ -11,7 +11,7 @@ data class OrderEntity(
     val items: List<OrderItemEntity>,
     val notes: String,
     val orderNumber: String,
-    val orderPrice: Int,
+    val orderPrice: Double,
     val pharmacy: String,
     val prescriptionImages: Any?
 )

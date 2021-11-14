@@ -13,9 +13,9 @@ data class Item(
     @SerializedName("Channel")
     val channel: Any,
     @SerializedName("CoveragePercentage")
-    val coveragePercentage: Int,
+    val coveragePercentage: Double,
     @SerializedName("CoverageValue")
-    val coverageValue: Int,
+    val coverageValue: Double,
     @SerializedName("DeliveryTimeValue")
     val deliveryTimeValue: Int,
     @SerializedName("Drug")
@@ -27,15 +27,15 @@ data class Item(
     @SerializedName("DrugName")
     val drugName: String,
     @SerializedName("DrugTotal")
-    val drugTotal: Int,
+    val drugTotal: Double,
     @SerializedName("DrugTotalAfterCoverage")
-    val drugTotalAfterCoverage: Int,
+    val drugTotalAfterCoverage: Double,
     @SerializedName("MaximumQuantityPerUser")
     val maximumQuantityPerUser: Int,
     @SerializedName("Price")
-    val price: Int,
+    val price: Double,
     @SerializedName("PriceBeforeSale")
-    val priceBeforeSale: Int,
+    val priceBeforeSale: Double,
     @SerializedName("ProductType")
     val productType: String,
     @SerializedName("Quantity")

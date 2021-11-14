@@ -23,7 +23,7 @@ data class OrderModel(
     @SerializedName("OrderNumber")
     val orderNumber: String,
     @SerializedName("OrderPrice")
-    val orderPrice: Int,
+    val orderPrice: Double,
     @SerializedName("Pharmacy")
     val pharmacy: String,
     @SerializedName("PrescriptionImages")
