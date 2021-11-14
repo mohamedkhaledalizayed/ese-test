@@ -8,6 +8,8 @@ import android.view.View
 import androidx.activity.viewModels
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
+import com.neqabty.yodawy.core.data.Constants.cartItems
+import com.neqabty.yodawy.core.data.Constants.yodawyId
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivityCheckOutBinding
@@ -20,6 +22,7 @@ import dmax.dialog.SpotsDialog
 class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
     private val placeOrderViewModel:PlaceOrderViewModel by viewModels()
     private lateinit var dialog: AlertDialog
+    var total: Float = 0.0f
     override fun getViewBinding() = ActivityCheckOutBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +43,7 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
                     Status.SUCCESS -> {
                         dialog.dismiss()
                         if (resource.data!!){
-                            Constants.cartItems.clear()
+                            cartItems.clear()
                             finish()
                         }
                     }
@@ -50,10 +53,17 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
                 }
             }
         }
+
+
+        for (item in cartItems){
+            total += (item.first.salePrice * item.first.quantity)
+        }
+
+        binding.totalValue.text = "$total"
     }
 
     fun confirmOrder(view: View) {
-        placeOrderViewModel.placeOrder(Constants.selectedAddressId,Constants.mobileNumber,"notes","plan",Constants.cartItems.map {
+        placeOrderViewModel.placeOrder(Constants.selectedAddressId,Constants.mobileNumber,"notes", yodawyId, cartItems.map {
             ItemParam(it.first.id,it.first.quantity)
         })
     }
