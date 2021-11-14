@@ -36,11 +36,28 @@
                 tools:context=".ProductDetailsScreen">
 
 
-                <ImageView
-                    android:id="@+id/medication_image"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_150sdp"
-                    android:src="@drawable/pravotin" />
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/medication_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_150sdp"
+                        android:src="@drawable/pravotin" />
+
+                    <androidx.core.widget.ContentLoadingProgressBar
+                        android:id="@+id/image_progress"
+                        style="?android:attr/progressBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="visible"
+                        android:indeterminate="true"
+                        android:theme="@style/AppTheme.Progressbar"
+                        />
+
+                </FrameLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -78,7 +95,7 @@
                         android:layout_width="@dimen/_14sdp"
                         android:layout_height="@dimen/_14sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
                         android:src="@drawable/check_mark" />
 
                     <TextView
@@ -87,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_marginTop="@dimen/_3sdp"
-                        android:text="Delivery within 60 minutes"
+                        android:text="@string/delivery_within_60_minutes"
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/_12ssp" />
 
@@ -99,7 +116,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="#EFEFEF"
                     android:padding="@dimen/_10sdp"
-                    android:text="Product Details"
+                    android:text="@string/product_details"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/_12ssp" />
 
@@ -164,7 +181,8 @@
                     android:layout_margin="@dimen/_10sdp"
                     android:background="@drawable/add_address_btn_bg"
                     android:padding="@dimen/_8sdp"
-                    android:text="ADD TO CART"
+                    android:fontFamily="@font/droidkufi_bold"
+                    android:text="إضافة المنتج"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_10ssp" />
             </LinearLayout>

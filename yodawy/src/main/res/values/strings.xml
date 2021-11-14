@@ -41,4 +41,5 @@
     <string name="total">المبلغ الاجمالي</string>
     <string name="order_is_canceled">Order is Canceled</string>
     <string name="nickname_">تصنيف العقار</string>
+    <string name="product_details">تفاصيل المنتج</string>
 </resources>

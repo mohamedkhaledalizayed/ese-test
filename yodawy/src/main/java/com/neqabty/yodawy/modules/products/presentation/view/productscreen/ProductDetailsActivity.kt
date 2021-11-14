@@ -11,6 +11,8 @@ import com.neqabty.yodawy.core.data.Constants.imageList
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.databinding.ActivityProductDetailsBinding
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 
 class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
 
@@ -27,12 +29,23 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
             if (imageList.isNotEmpty()){
                 showAlert()
             }else{
-                Constants.cartItems.addOrIncrement(productItem)
+                cartItems.addOrIncrement(productItem)
                 Toast.makeText(this, "تمت الاضافة بنجاح", Toast.LENGTH_LONG).show()
                 finish()
             }
         }
 
+        Picasso.get()
+            .load(productItem.image)
+            .into(binding.medicationImage, object : Callback {
+                override fun onSuccess() {
+                    binding.imageProgress.hide()
+                }
+
+                override fun onError(e: Exception?) {
+                    binding.imageProgress.hide()
+                }
+            })
 
         binding.medicationTitle.text = productItem.name
         binding.medicationPrice.text = "EGP ${productItem.salePrice.toString()}"
