@@ -2,6 +2,9 @@ package com.neqabty.yodawy.modules.address.presentation.view.adressscreen
 
 import android.content.Intent
 import android.os.Bundle
+import com.neqabty.yodawy.core.utils.Status.ERROR
+import com.neqabty.yodawy.core.utils.Status.LOADING
+import com.neqabty.yodawy.core.utils.Status.SUCCESS
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -33,15 +36,31 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
         Constants.jwt = intent.extras!!.getString("jwt", "")
 
         addressViewModel.getUser(Constants.userNumber, Constants.mobileNumber)
-        findViewById<ProgressRelativeLayout>(R.id.progressActivity).showLoading()
+
         addressViewModel.user.observe(this){
 
-            if (it.addresses.isEmpty()){
-                findViewById<ProgressRelativeLayout>(R.id.progressActivity).showEmpty(R.drawable.ic_undraw_empty_xct9, "لا يوجد عناوين", "برجاء إضافة عنوان")
+            it?.let { resource ->
+                when (resource.status) {
+                    LOADING -> {
+                        findViewById<ProgressRelativeLayout>(R.id.progressActivity).showLoading()
+                    }
+                    SUCCESS -> {
+                        if (resource.data?.addresses!!.isEmpty()){
+                            findViewById<ProgressRelativeLayout>(R.id.progressActivity).showEmpty(R.drawable.ic_undraw_empty_xct9, "لا يوجد عناوين", "برجاء إضافة عنوان")
+                        }else{
+                            Constants.yodawyId = resource.data.yodawyId
+                            findViewById<ProgressRelativeLayout>(R.id.progressActivity).showContent()
+                            mAdapter.submitList(resource.data.addresses)
+                        }
+                    }
+                    ERROR -> {
+                        findViewById<ProgressRelativeLayout>(R.id.progressActivity).showEmpty(R.drawable.ic_undraw_access_denied_6w73, "خطا", resource.message)
+                    }
+                }
             }
-            Constants.yodawyId = it.yodawyId
-            findViewById<ProgressRelativeLayout>(R.id.progressActivity).showContent()
-            mAdapter.submitList(it.addresses)
+
+
+
         }
         findViewById<RecyclerView>(R.id.address_recycler).adapter = mAdapter
         mAdapter.onItemClickListener = object :
