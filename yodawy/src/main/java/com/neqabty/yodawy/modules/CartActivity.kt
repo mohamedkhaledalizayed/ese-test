@@ -64,6 +64,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
 
     fun checkOut(view: View) {
         startActivity(Intent(this, CheckOutActivity::class.java))
+        finish()
     }
 
 }

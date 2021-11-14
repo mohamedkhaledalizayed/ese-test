@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class PlaceOrderUseCase @Inject constructor(private val orderRepository: OrderRepository) {
-     fun build(placeOrderParam: PlaceOrderParam): Flow<String> {
+     fun build(placeOrderParam: PlaceOrderParam): Flow<Boolean> {
          return orderRepository.placeOrder(placeOrderParam = placeOrderParam)
      }
 }

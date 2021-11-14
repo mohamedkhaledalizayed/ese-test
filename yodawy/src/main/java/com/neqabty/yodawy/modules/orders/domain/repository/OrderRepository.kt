@@ -11,5 +11,5 @@ interface OrderRepository {
         pageSize: Int
     ): Flow<List<OrderEntity>>
 
-    fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<String>
+    fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<Boolean>
 }

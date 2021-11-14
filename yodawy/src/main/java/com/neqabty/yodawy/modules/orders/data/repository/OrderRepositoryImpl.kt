@@ -27,7 +27,7 @@ class OrderRepositoryImpl @Inject constructor(private val ordersDS: OrdersDS) : 
         ).map { it.orders.map { it.toOrderEntity() } }
     }
 
-    override fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<String> {
+    override fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<Boolean> {
         return ordersDS.placeOrder(
             PlaceOrderRequestBody(
                 placeOrderParam.addressId,
@@ -36,6 +36,6 @@ class OrderRepositoryImpl @Inject constructor(private val ordersDS: OrdersDS) : 
                 placeOrderParam.notes,
                 placeOrderParam.plan
             )
-        ).map { it.id }
+        ).map { it.isSuccess }
     }
 }

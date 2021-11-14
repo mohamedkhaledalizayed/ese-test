@@ -3,6 +3,7 @@ package com.neqabty.yodawy.modules.address.presentation.view.adressscreen
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.neqabty.yodawy.core.utils.AppUtils
 import com.neqabty.yodawy.core.utils.Resource
 import com.neqabty.yodawy.modules.address.domain.entity.UserEntity
 import com.neqabty.yodawy.modules.address.domain.interactors.GetUserUseCase
@@ -33,35 +34,8 @@ class AddressViewModel @Inject constructor(private val getUserUseCase: GetUserUs
                     user.postValue(Resource.success(data = it))
                 }
             } catch (exception:Throwable){
-                user.postValue(Resource.error(data = null, message = handleError(exception)))
+                user.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
             }
-        }
-    }
-
-    private fun handleError(throwable: Throwable): String {
-        return if (throwable is HttpException) {
-            when (throwable.code()) {
-                400 -> {
-                    "Wrong Username or Password"
-                }
-                401 -> {
-                    "401"
-                }
-                403 -> {
-                    "You should login"
-                }
-                404 -> {
-                    "Not Found"
-                }
-                500 -> {
-                    "Something went wrong"
-                }
-                else -> {
-                    throwable.message!!
-                }
-            }
-        } else {
-            throwable.message!!
         }
     }
 }
