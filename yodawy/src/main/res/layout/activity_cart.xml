@@ -62,29 +62,30 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <!--                    <TextView-->
-                        <!--                        android:layout_width="wrap_content"-->
-                        <!--                        android:layout_height="wrap_content"-->
-                        <!--                        android:textAlignment="center"-->
-                        <!--                        android:text="@string/_6_photos_added"-->
-                        <!--                        android:layout_margin="@dimen/_10sdp"-->
-                        <!--                        android:textSize="@dimen/_10ssp"/>-->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/number_image"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:text="@string/_6_photos_added"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/_10ssp" />
 
-                        <!--                    <androidx.recyclerview.widget.RecyclerView-->
-                        <!--                        android:id="@+id/photos_recycler"-->
-                        <!--                        android:layout_width="match_parent"-->
-                        <!--                        android:orientation="horizontal"-->
-                        <!--                        android:layout_height="wrap_content"-->
-                        <!--                        android:paddingStart="@dimen/_10sdp"-->
-                        <!--                        android:paddingEnd="@dimen/_5sdp"-->
-                        <!--                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>-->
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/photos_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_5sdp"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-                        <!--                    <View-->
-                        <!--                        android:id="@+id/view"-->
-                        <!--                        android:layout_width="match_parent"-->
-                        <!--                        android:layout_height="1dp"-->
-                        <!--                        android:layout_marginTop="@dimen/_10sdp"-->
-                        <!--                        android:background="#E1E1E1" />-->
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="#E1E1E1" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/cart_recycler"
