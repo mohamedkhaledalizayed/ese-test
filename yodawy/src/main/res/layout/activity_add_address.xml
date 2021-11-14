@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main_content"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <include
             android:id="@+id/layout_header"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_width="match_parent"
             layout="@layout/layout_header" />
 
-        <View
-            android:id="@+id/view_dummy"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            app:layout_constraintBottom_toBottomOf="@id/layout_header"
-            app:layout_constraintTop_toTopOf="@id/layout_header" />
 
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/view_dummy">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -191,8 +183,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_90sdp"
                     android:layout_marginEnd="@dimen/_10ssp"
+                    android:layout_marginBottom="@dimen/_100sdp"
                     android:background="@drawable/add_address_btn_bg"
                     android:fontFamily="@font/droidkufi_bold"
                     android:onClick="saveAddress"
@@ -203,5 +196,5 @@
             </LinearLayout>
 
         </ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>
