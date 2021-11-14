@@ -10,6 +10,8 @@ import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.databinding.CartLayoutItemBinding
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 
 
 class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
@@ -47,6 +49,17 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
         viewHolder.binding.quantity.text = "${item.first.quantity}"
         viewHolder.binding.medicationPrice.text = "${item.first.regularPrice * item.first.quantity}"
 
+        Picasso.get()
+            .load(item.first.image)
+            .into(viewHolder.binding.medicationImage, object : Callback {
+                override fun onSuccess() {
+                    viewHolder.binding.imageProgress.hide()
+                }
+
+                override fun onError(e: Exception?) {
+                    viewHolder.binding.imageProgress.hide()
+                }
+            })
 
         //increase
         viewHolder.binding.increase.setOnClickListener {
