@@ -12,6 +12,7 @@ import androidx.lifecycle.*
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.ui.BaseActivity
+import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivitySearchBinding
 import com.neqabty.yodawy.modules.CartActivity
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
@@ -41,13 +42,32 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
         binding.llHolder.findViewById<ImageView>(R.id.search_btn).setOnClickListener {
             hideKeyboard()
-            findViewById<ProgressRelativeLayout>(R.id.progressActivity).showLoading()
             productViewModel.search(binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString())
-            productViewModel.products.observe(this) {
-                findViewById<ProgressRelativeLayout>(R.id.progressActivity).showContent()
-                mAdapter.clear()
-                mAdapter.submitList(it)
+        }
+
+        //observe
+        productViewModel.products.observe(this) {
+
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        binding.progressActivity.showLoading()
+                    }
+                    Status.SUCCESS -> {
+                        if (resource.data!!.isEmpty()){
+                            binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "فارغ", "لا يوجد نتائج البحث")
+                        }else{
+                            binding.progressActivity.showContent()
+                            mAdapter.clear()
+                            mAdapter.submitList(resource.data)
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "خطا", resource.message)
+                    }
+                }
             }
+
         }
 
     }

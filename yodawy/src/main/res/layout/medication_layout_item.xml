@@ -85,7 +85,7 @@
             android:layout_below="@+id/medication_price"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:layout_toEndOf="@+id/frameLayout"
             android:src="@drawable/check_mark" />
 
