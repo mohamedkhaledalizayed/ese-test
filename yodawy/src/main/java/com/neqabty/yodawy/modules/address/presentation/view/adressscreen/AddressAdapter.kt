@@ -49,6 +49,7 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
     override fun getItemCount() = items.size
 
     fun submitList(newItems: List<AddressEntity>?) {
+        clear()
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()

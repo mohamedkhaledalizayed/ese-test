@@ -31,10 +31,6 @@ class OrdersViewModel @Inject constructor(private val getOrdersUseCase: GetOrder
         }
     }
 
-    fun clearData(){
-        orders.postValue(Resource.loading(data = null))
-    }
-
     private fun handleError(throwable: Throwable): String {
         return if (throwable is HttpException) {
             when (throwable.code()) {

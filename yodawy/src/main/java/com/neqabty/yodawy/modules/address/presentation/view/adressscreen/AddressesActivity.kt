@@ -30,7 +30,7 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
 
         Constants.userNumber = intent.extras!!.getString("user_number", "")
         Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
-//        Constants.jwt = intent.extras!!.getString("jwt", "")
+        Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
 
 
         addressViewModel.user.observe(this){
@@ -72,8 +72,6 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
 
     override fun onResume() {
         super.onResume()
-        mAdapter.clear()
-        addressViewModel.clearData()
         addressViewModel.getUser(Constants.userNumber, Constants.mobileNumber)
     }
 

@@ -38,10 +38,6 @@ class AddressViewModel @Inject constructor(private val getUserUseCase: GetUserUs
         }
     }
 
-    fun clearData(){
-        user.postValue(Resource.loading(data = null))
-    }
-
     private fun handleError(throwable: Throwable): String {
         return if (throwable is HttpException) {
             when (throwable.code()) {
