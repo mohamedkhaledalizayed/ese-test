@@ -98,6 +98,7 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
     }
 
     private fun initializeViews() {
+        binding.providerItem = providerItem
         val phoneNumbers = providerItem.phones?.replace(" ", "")?.replace("_x000D_\n", "-")?.replace("\r\n", "-")
                 ?.replace('\n', '-')?.replace('\r', '-')?.split("-")
 
@@ -106,7 +107,17 @@ class MedicalProviderDetailsFragment : BaseFragment(), Injectable {
         binding.rvPhones.adapter = adapter
 
         bMap.setOnClickListener {
-            providerItem.address?.let { bMap.openMap(it, requireContext()) }
+            bMap.openMap(providerItem.address!!, requireContext())
+        }
+
+        if(providerItem.phones.isNullOrBlank()){
+            binding.tvPhoneTitle.visibility = View.GONE
+            binding.rvPhones.visibility = View.GONE
+        }
+
+        if(providerItem.address.isNullOrBlank()){
+            binding.tvAddressTitle.visibility = View.GONE
+            binding.bMap.visibility = View.GONE
         }
 
         bClaiming.setOnClickListener {
