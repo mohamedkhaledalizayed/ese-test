@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class ProductEntity(
     val active: Boolean,
     val id: String,
-    val image: String,
+    val image: String?,
     val isLimitedAvailability: Boolean,
     val isMedication: Boolean,
     val name: String,

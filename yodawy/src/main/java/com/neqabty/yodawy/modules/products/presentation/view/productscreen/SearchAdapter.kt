@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.databinding.MedicationLayoutItemBinding
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
@@ -45,6 +47,18 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
         } else {
             viewHolder.binding.view.visibility = View.VISIBLE
         }
+
+        Picasso.get()
+            .load(item.image)
+            .into(viewHolder.binding.medicationImage, object : Callback {
+                override fun onSuccess() {
+                    viewHolder.binding.imageProgress.hide()
+                }
+
+                override fun onError(e: Exception?) {
+                    viewHolder.binding.imageProgress.hide()
+                }
+            })
 
         when {
             item.outOfStock -> {

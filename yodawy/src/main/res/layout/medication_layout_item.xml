@@ -20,7 +20,7 @@
                 android:id="@+id/medication_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/unnamed" />
             <TextView
                 android:layout_width="wrap_content"
@@ -32,6 +32,17 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:paddingStart="@dimen/_5sdp"
                 android:paddingEnd="@dimen/_5sdp" />
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/image_progress"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                android:indeterminate="true"
+                android:theme="@style/AppTheme.Progressbar"
+                />
         </FrameLayout>
 
         <TextView
@@ -86,7 +97,7 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_3sdp"
             android:layout_toEndOf="@+id/medication_status"
-            android:text="Delivery within 60 minutes"
+            android:text="@string/delivery_within_60_minutes"
             android:textColor="@color/color_black"
             android:textSize="@dimen/_10ssp" />
 
