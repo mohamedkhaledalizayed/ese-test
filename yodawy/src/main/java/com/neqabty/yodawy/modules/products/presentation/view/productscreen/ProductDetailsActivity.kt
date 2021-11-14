@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
+import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.core.data.Constants.imageList
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.databinding.ActivityProductDetailsBinding
@@ -74,9 +75,10 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
 
 fun MutableList<Pair<ProductEntity, Int>>.addOrIncrement(productItem: ProductEntity) {
     var index = -1
-    this.mapIndexed { ind, productEntity ->
+    this.mapIndexed { ind, productEntity ->//TODO fix this
         if (productEntity.first.id == productItem.id) {
             Pair(productEntity.first, productEntity.second + 1)
+            cartItems[ind].first.quantity += 1
             index = ind
         } else
             productEntity

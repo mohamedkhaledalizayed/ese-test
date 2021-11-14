@@ -13,5 +13,6 @@ data class ProductEntity(
     val name: String,
     val outOfStock: Boolean,
     val regularPrice: Float,
-    val salePrice: Float
+    val salePrice: Float,
+    var quantity: Int = 1
 ): Parcelable

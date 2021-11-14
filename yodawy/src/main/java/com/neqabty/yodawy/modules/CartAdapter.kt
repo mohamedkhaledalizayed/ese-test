@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.databinding.CartLayoutItemBinding
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 
 
 class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
-    private val items: MutableList<ProductEntity> = ArrayList()
+    private val items: MutableList<Pair<ProductEntity,Int>> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -41,26 +42,39 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
             viewHolder.binding.view.visibility = View.VISIBLE
         }
 
-        viewHolder.binding.status.text = if(item.isLimitedAvailability) "Low Stock" else ""
-        viewHolder.binding.medicationTitle.text = item.name
-        viewHolder.binding.medicationPrice.text = item.regularPrice.toString()
-//        viewHolder.binding.increase.setOnClickListener {
-//            item.quantity = item.quantity + 1
-//            viewHolder.binding.quantity.text = "${item.quantity}"
-//        }
-//
-//        viewHolder.binding.decrease.setOnClickListener {
-//            if (item.quantity > 0){
-//                item.quantity = item.quantity - 1
-//                viewHolder.binding.quantity.text = "${item.quantity}"
-//            }
-//        }
+        viewHolder.binding.status.text = if(item.first.isLimitedAvailability) "Low Stock" else ""
+        viewHolder.binding.medicationTitle.text = item.first.name
+        viewHolder.binding.quantity.text = "${item.first.quantity}"
+        viewHolder.binding.medicationPrice.text = "${item.first.regularPrice * item.first.quantity}"
+
+
+        //increase
+        viewHolder.binding.increase.setOnClickListener {
+            item.first.quantity = item.first.quantity + 1
+            viewHolder.binding.quantity.text = "${item.first.quantity}"
+            viewHolder.binding.medicationPrice.text = "${item.first.regularPrice * item.first.quantity}"
+        }
+
+        //decrease
+        viewHolder.binding.decrease.setOnClickListener {
+            if (item.first.quantity > 1){
+                item.first.quantity = item.first.quantity - 1
+                viewHolder.binding.quantity.text = "${item.first.quantity}"
+                viewHolder.binding.medicationPrice.text = "${item.first.regularPrice * item.first.quantity}"
+            }else{
+                //remove this item
+                cartItems.removeAt(position)
+                clear()
+                submitList(cartItems)
+                onItemClickListener?.notifyUi()
+            }
+        }
 
     }
 
     override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<ProductEntity>?) {
+    fun submitList(newItems: List<Pair<ProductEntity,Int>>?) {
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()
@@ -75,6 +89,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
             fun setOnItemClickListener(itemId: Int)
+            fun notifyUi()
     }
 
     class ViewHolder(val binding: CartLayoutItemBinding) :

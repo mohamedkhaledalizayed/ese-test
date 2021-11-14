@@ -54,7 +54,7 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
 
     fun confirmOrder(view: View) {
         placeOrderViewModel.placeOrder(Constants.selectedAddressId,Constants.mobileNumber,"notes","plan",Constants.cartItems.map {
-            ItemParam(it.first.id,it.second)
+            ItemParam(it.first.id,it.first.quantity)
         })
     }
 

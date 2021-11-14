@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
+import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.core.data.Constants.imageList
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.databinding.ActivityCartBinding
@@ -51,15 +52,23 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
         }
 
         checkImages()
-
+        if (cartItems.isNotEmpty()){
+            binding.checkout.visibility = View.VISIBLE
+        }
         binding.cartRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             CartAdapter.OnItemClickListener {
             override fun setOnItemClickListener(id: Int) {
 
             }
+
+            override fun notifyUi() {
+                if (cartItems.isEmpty()){
+                    binding.checkout.visibility = View.GONE
+                }
+            }
         }
-        mAdapter.submitList(Constants.cartItems.map { it.first })
+        mAdapter.submitList(cartItems)
     }
 
     private fun checkImages() {

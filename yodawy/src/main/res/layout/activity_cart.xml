@@ -117,6 +117,7 @@
                 android:layout_height="@dimen/_36sdp"
                 android:layout_margin="@dimen/_10sdp"
                 android:layout_weight="0"
+                android:visibility="gone"
                 android:background="@drawable/add_address_btn_bg"
                 android:onClick="checkOut"
                 android:text="@string/go_to_checkout"

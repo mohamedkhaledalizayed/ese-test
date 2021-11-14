@@ -78,7 +78,6 @@
             android:layout_toEndOf="@+id/frameLayout"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_below="@+id/medication_price"
-            android:visibility="invisible"
             android:background="@drawable/rounded_circle_bg">
 
             <TextView
