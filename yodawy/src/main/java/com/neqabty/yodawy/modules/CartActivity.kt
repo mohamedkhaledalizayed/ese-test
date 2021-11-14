@@ -43,6 +43,9 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
                     imageList.removeAt(id)
                     if (imageList.size == 1){
                         imageList.clear()
+                        binding.checkout.visibility = View.GONE
+                        binding.deliveryTime.visibility = View.GONE
+                        binding.pricesPolicy.visibility = View.GONE
                         checkImages()
                     }
                     photoAdapter.clear()
@@ -52,9 +55,15 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
         }
 
         checkImages()
-        if (cartItems.isNotEmpty()){
+
+        if (cartItems.isNotEmpty() || imageList.isNotEmpty()){
             binding.checkout.visibility = View.VISIBLE
+        }else{
+            binding.checkout.visibility = View.GONE
+            binding.deliveryTime.visibility = View.GONE
+            binding.pricesPolicy.visibility = View.GONE
         }
+
         binding.cartRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             CartAdapter.OnItemClickListener {
@@ -65,6 +74,8 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
             override fun notifyUi() {
                 if (cartItems.isEmpty()){
                     binding.checkout.visibility = View.GONE
+                    binding.deliveryTime.visibility = View.GONE
+                    binding.pricesPolicy.visibility = View.GONE
                 }
             }
         }
@@ -78,7 +89,6 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
             binding.view.visibility = View.GONE
         } else {
             photoAdapter.submitList(imageList)
-//            binding.numberImage.text = " تم تحميل ${imageList.size - 1} صور"
         }
     }
 
