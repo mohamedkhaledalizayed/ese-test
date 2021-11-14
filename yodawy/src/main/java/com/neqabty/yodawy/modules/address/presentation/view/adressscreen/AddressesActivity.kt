@@ -42,7 +42,7 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
                     }
                     SUCCESS -> {
                         if (resource.data?.addresses!!.isEmpty()){
-                            binding.progressActivity.showEmpty(R.drawable.ic_undraw_empty_xct9, "لا يوجد عناوين", "برجاء إضافة عنوان")
+                            binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "لا يوجد عناوين", "برجاء إضافة عنوان")
                         }else{
                             Constants.yodawyId = resource.data.yodawyId
                             binding.progressActivity.showContent()
@@ -50,7 +50,7 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
                         }
                     }
                     ERROR -> {
-                        binding.progressActivity.showEmpty(R.drawable.ic_undraw_access_denied_6w73, "خطا", resource.message)
+                        binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "خطا", resource.message)
                     }
                 }
             }

@@ -39,10 +39,10 @@ class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
-        viewHolder.binding.orderStatus.text = item.currentStatus
-        viewHolder.binding.orderDate.text = AppUtils().dateFormat(item.creationDate)
-        viewHolder.binding.orderDetails.text = item.orderNumber
-        viewHolder.binding.total.text = "${item.orderPrice} جنيه"
+        viewHolder.binding.orderStatus.text = "حالة الطلب: ${item.currentStatus}"
+        viewHolder.binding.orderDate.text = "تاريخ الطلب: ${AppUtils().dateFormat(item.creationDate)}"
+        viewHolder.binding.orderDetails.text = "رقم الطلب: ${item.orderNumber}"
+        viewHolder.binding.total.text = "السعر: ${item.orderPrice} جنيه"
 
 
         if (position == itemCount - 1){
