@@ -32,32 +32,5 @@ class OrdersViewModel @Inject constructor(private val getOrdersUseCase: GetOrder
             }
         }
     }
-
-    private fun handleError(throwable: Throwable): String {
-        return if (throwable is HttpException) {
-            when (throwable.code()) {
-                400 -> {
-                    "Wrong Username or Password"
-                }
-                401 -> {
-                    "401"
-                }
-                403 -> {
-                    "You should login"
-                }
-                404 -> {
-                    "Not Found"
-                }
-                500 -> {
-                    "Something went wrong"
-                }
-                else -> {
-                    throwable.message!!
-                }
-            }
-        } else {
-            throwable.message!!
-        }
-    }
 }
 
