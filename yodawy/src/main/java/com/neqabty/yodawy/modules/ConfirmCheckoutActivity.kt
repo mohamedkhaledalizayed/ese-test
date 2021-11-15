@@ -1,7 +1,7 @@
 package com.neqabty.yodawy.modules
 
 import android.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -11,8 +11,8 @@ import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.data.Constants.selectedAddress
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.Status
-import com.neqabty.yodawy.databinding.ActivityCheckOutBinding
 import com.neqabty.yodawy.databinding.ActivityConfirmCheckoutBinding
+import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import com.neqabty.yodawy.modules.orders.domain.entity.ItemParam
 import com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen.PlaceOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,6 +56,15 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
                         if (resource.data!!){
                             Constants.cartItems.clear()
                             Toast.makeText(this, getString(R.string.order_is_placed), Toast.LENGTH_LONG).show()
+
+                            val bundle = Bundle()
+                            bundle.putString("user_number", Constants.userNumber)
+                            bundle.putString("mobile_number", Constants.mobileNumber)
+                            bundle.putString("jwt", Constants.jwt)
+                            val intent = Intent(this, HomeActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            intent.putExtras(bundle)
+                            startActivity(intent)
                             finish()
                         }
                     }
