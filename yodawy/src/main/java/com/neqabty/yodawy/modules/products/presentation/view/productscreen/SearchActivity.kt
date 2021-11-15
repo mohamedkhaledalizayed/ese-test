@@ -72,6 +72,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (!binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString().isNullOrEmpty()){
+            productViewModel.search(binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString())
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_cart, menu)
 

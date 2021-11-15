@@ -185,6 +185,56 @@
                     android:text="إضافة المنتج"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_10ssp" />
+
+                <LinearLayout
+                    android:id="@+id/increase_decrease"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    android:weightSum="10"
+                    android:visibility="gone"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/add_address_btn_bg"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/decrease"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:src="@drawable/minus"
+                        android:layout_gravity="center"
+                         />
+
+                    <TextView
+                        android:id="@+id/quantity"
+                        android:layout_width="0dp"
+                        android:layout_weight="6"
+                        android:layout_height="match_parent"
+                        android:background="@color/green"
+                        android:gravity="center"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="1"
+                        android:textSize="@dimen/_12ssp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/increase"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:src="@drawable/plus_icon"
+                        android:layout_gravity="center" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </ScrollView>

@@ -34,6 +34,35 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
                 finish()
             }
         }
+        var index = 0
+         cartItems.mapIndexed{ ind, item ->
+            if (item.first.id == productItem.id){
+                index = ind
+                binding.increaseDecrease.visibility = View.VISIBLE
+                binding.add.visibility = View.GONE
+                binding.quantity.text = "${item.first.quantity}"
+            }
+        }
+
+        binding.increase.setOnClickListener {
+            cartItems[index].first.quantity += 1
+            binding.quantity.text = "${cartItems[index].first.quantity}"
+        }
+
+        binding.decrease.setOnClickListener {
+
+            if (cartItems[index].first.quantity > 1){
+                cartItems[index].first.quantity -= 1
+                binding.quantity.text = "${cartItems[index].first.quantity}"
+            }else{
+                //remove this from list
+                cartItems.removeAt(index)
+                binding.increaseDecrease.visibility = View.GONE
+                binding.add.visibility = View.VISIBLE
+                Toast.makeText(this, "تم مسح المنتج", Toast.LENGTH_LONG).show()
+            }
+
+        }
 
         Picasso.get()
             .load(productItem.image)
