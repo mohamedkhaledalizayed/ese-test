@@ -48,4 +48,6 @@
     <string name="alert_title">تنبيه</string>
     <string name="alert_cancel">إلغاء</string>
     <string name="alert_ok">موافق</string>
+    <string name="cart_empty">عربة التسوق فارغة</string>
+    <string name="expoler_yodawy">اكتشف يوداوى و ابداء التسوق</string>
 </resources>
