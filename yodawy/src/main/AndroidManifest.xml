@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".modules.ConfirmCheckoutActivity"
+            android:exported="false" />
+        <activity
             android:name=".modules.OrderDetailsActivity"
             android:exported="false" />
         <activity
@@ -32,12 +35,10 @@
             android:exported="false" />
         <activity
             android:name=".modules.address.presentation.view.addaddressscreen.AddAddressActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".modules.address.presentation.view.adressscreen.AddressesActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".modules.address.presentation.view.homescreen.HomeActivity"
             android:exported="false" />
