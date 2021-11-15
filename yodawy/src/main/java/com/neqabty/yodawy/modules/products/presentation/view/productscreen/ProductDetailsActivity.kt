@@ -1,11 +1,9 @@
 package com.neqabty.yodawy.modules.products.presentation.view.productscreen
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.neqabty.yodawy.R
-import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.core.data.Constants.imageList
 import com.neqabty.yodawy.core.ui.BaseActivity
@@ -27,11 +25,12 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
         setupToolbar(title = productItem.name)
         binding.add.setOnClickListener {
             if (imageList.isNotEmpty()){
-                showAlert()
+                showClearCartConfirmationAlert(okCallback = {
+                    imageList.clear()
+                    cartItems.addOrIncrement(productItem)
+                })
             }else{
                 cartItems.addOrIncrement(productItem)
-                Toast.makeText(this, "تمت الاضافة بنجاح", Toast.LENGTH_LONG).show()
-                finish()
             }
         }
         var index = 0
@@ -96,23 +95,6 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
             }
         }
     }
-
-    private fun showAlert() {
-
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("تنبيه")
-        builder.setMessage("message")// TODO mona please add suitable arabic message
-        builder.setCancelable(false)
-        builder.setPositiveButton("موافق") { dialog, which ->
-            imageList.clear()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton("غير موافق") { dialog, which ->
-            dialog.dismiss()
-        }
-        builder.show()
-    }
-
 }
 
 fun MutableList<Pair<ProductEntity, Int>>.addOrIncrement(productItem: ProductEntity) {

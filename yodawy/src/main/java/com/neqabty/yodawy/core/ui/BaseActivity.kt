@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
@@ -55,6 +56,25 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
     private fun getCartCounter(): String{
         return Math.max(Constants.cartItems.size, Constants.imageList.size).toString()
     }
+
+    //region Alerts//
+    protected fun showClearCartConfirmationAlert(okCallback: () -> Unit = {}, cancelCallback: () -> Unit = {}) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(getString(R.string.will_clear_cart))
+        builder.setCancelable(false)
+        builder.setPositiveButton(getString(R.string.alert_ok)) { dialog, which ->
+            okCallback.invoke()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton(getString(R.string.alert_cancel)) { dialog, which ->
+            cancelCallback.invoke()
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+    //endregion
+
     //region toolbar//
     @SuppressLint("ResourceAsColor")
     fun setupToolbar(titleResId: Int, showUp: Boolean = true, show: Boolean = true) {

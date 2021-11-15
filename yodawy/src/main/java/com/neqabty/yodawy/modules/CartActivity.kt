@@ -1,22 +1,14 @@
 package com.neqabty.yodawy.modules
 
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
-import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.yodawy.R
-import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.core.data.Constants.imageList
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.databinding.ActivityCartBinding
+import com.neqabty.yodawy.modules.address.presentation.view.adressscreen.AddressesActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,7 +34,6 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
             }
         }
 
-        updateView()
         binding.cartRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             CartAdapter.OnItemClickListener {
@@ -54,66 +45,34 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
                 updateView()
             }
         }
-        mAdapter.submitList(cartItems)
 
-        binding.ivAddPhoto.setOnClickListener {
-            addNewImage()
-        }
-    }
-
-    private fun updateView() {
-        /////Images recyclerView
-        if(cartItems.isEmpty())
-            binding.hsvPhotos.visibility = View.VISIBLE
-        else
-            binding.hsvPhotos.visibility = View.GONE
-
-        if (imageList.isEmpty()) {
-            binding.numberImage.visibility = View.GONE
-            binding.view.visibility = View.GONE
-        } else {
-            binding.view.visibility = View.VISIBLE
-//            binding.numberImage.text = " تم تحميل ${imageList.size - 1} صور"
-        }
-        photoAdapter.submitList(imageList)
-
-
-        ///// checkout btn
-        if (cartItems.isEmpty() && imageList.isEmpty()){
-            binding.checkout.visibility = View.GONE
-        }else{
-            binding.checkout.visibility = View.VISIBLE
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (resultCode) {
-            Activity.RESULT_OK -> {
-                val uri: Uri = data?.data!!
-                imageList.add(uri)
-            }
-            ImagePicker.RESULT_ERROR -> {
-                Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-            }
-            else -> {
-                Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
-            }
-        }
         updateView()
     }
 
-    private fun addNewImage() {
-        ImagePicker.with(this)
-            .crop()	    			//Crop image(Optional), Check Customization for more option
-            .compress(1024)			//Final image size will be less than 1 MB(Optional)
-            .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
-            .start()
+    private fun updateView() {
+        ///// checkout btn and Empty view
+        if (cartItems.isEmpty() && imageList.isEmpty()){
+            binding.clEmptyCart.visibility = View.VISIBLE
+            binding.checkout.visibility = View.GONE
+        }else{
+            binding.clEmptyCart.visibility = View.GONE
+            binding.checkout.visibility = View.VISIBLE
+        }
+
+        /////Images recyclerView
+        if (imageList.isNotEmpty()) {
+            binding.llImagesHolder.visibility = View.VISIBLE
+            photoAdapter.submitList(imageList)
+        }
+
+        /////Products recyclerView
+        if(cartItems.isNotEmpty()) {
+            mAdapter.submitList(cartItems)
+        }
     }
 
     fun checkOut(view: View) {
-        startActivity(Intent(this, CheckOutActivity::class.java))
-        finish()
+        startActivity(Intent(this, AddressesActivity::class.java))
     }
 
 }

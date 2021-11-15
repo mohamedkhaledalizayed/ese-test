@@ -3,8 +3,8 @@ package com.neqabty.yodawy.modules
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
@@ -34,6 +34,8 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
             .setMessage("Please Wait...")
             .build()
 
+        binding.tvAddress.text = Constants.selectedAddress.addressName
+
         placeOrderViewModel.placeOrderResult.observe(this){
             it?.let { resource ->
                 when (resource.status) {
@@ -44,6 +46,7 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
                         dialog.dismiss()
                         if (resource.data!!){
                             cartItems.clear()
+                            Toast.makeText(this, getString(R.string.order_is_placed), Toast.LENGTH_LONG).show()
                             finish()
                         }
                     }
@@ -63,14 +66,8 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
     }
 
     fun confirmOrder(view: View) {
-        placeOrderViewModel.placeOrder(Constants.selectedAddressId,Constants.mobileNumber,"notes", yodawyId, cartItems.map {
+        placeOrderViewModel.placeOrder(Constants.selectedAddress.adressId,Constants.mobileNumber,"notes", yodawyId, cartItems.map {
             ItemParam(it.first.id,it.first.quantity)
         })
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        startActivity(Intent(this, CartActivity::class.java))
-        finish()
     }
 }

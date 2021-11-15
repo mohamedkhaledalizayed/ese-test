@@ -33,6 +33,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.orders_history)
+
+        Constants.userNumber = intent.extras!!.getString("user_number", "")
+        Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
+        Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
     }
 
     fun findMedications(view: View) {
@@ -45,7 +49,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     fun uploadImage(view: View) {
         if (cartItems.isNotEmpty()){
-            showAlert()
+            showClearCartConfirmationAlert(okCallback = {
+                cartItems.clear()
+                invalidateOptionsMenu()
+                selectImage()
+            })
         }else{
            selectImage()
         }
@@ -60,25 +68,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
                 1080
             )    //Final image resolution will be less than 1080 x 1080(Optional)
             .start()
-    }
-
-    private fun showAlert() {
-
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("تنبيه")
-        builder.setMessage("message")// TODO mona please add suitable arabic message
-        builder.setCancelable(false)
-        builder.setPositiveButton("موافق") { dialog, which ->
-            cartItems.clear()
-            invalidateOptionsMenu()
-            selectImage()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton("غير موافق") { dialog, which ->
-            dialog.dismiss()
-        }
-        builder.show()
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -8,11 +8,11 @@ import com.neqabty.yodawy.core.utils.Status.SUCCESS
 import androidx.activity.viewModels
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
-import com.neqabty.yodawy.core.utils.LocaleHelper
 import com.neqabty.yodawy.databinding.ActivityAddressesBinding
 import com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen.AddAddressActivity
 import com.neqabty.yodawy.core.ui.BaseActivity
-import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
+import com.neqabty.yodawy.modules.CheckOutActivity
+import com.neqabty.yodawy.modules.address.domain.entity.AddressEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,10 +27,6 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
         setContentView(binding.root)
 
         setupToolbar(titleResId = R.string.addresses)
-
-        Constants.userNumber = intent.extras!!.getString("user_number", "")
-        Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
-        Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
 
 
         addressViewModel.user.observe(this){
@@ -59,9 +55,10 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
         binding.addressRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             AddressAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(id: String) {
-                Constants.selectedAddressId = id
-                startActivity(Intent(this@AddressesActivity, HomeActivity::class.java))
+            override fun setOnItemClickListener(addressItem: AddressEntity) {
+                Constants.selectedAddress = addressItem
+
+                startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
             }
         }
 
@@ -73,10 +70,5 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
     override fun onResume() {
         super.onResume()
         addressViewModel.getUser(Constants.userNumber, Constants.mobileNumber)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        LocaleHelper().setLocale(this, "ar")
     }
 }

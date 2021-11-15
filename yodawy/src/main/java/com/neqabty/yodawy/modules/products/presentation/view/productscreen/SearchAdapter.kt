@@ -15,7 +15,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+class SearchAdapter(val invalidateMenuCallback: () -> Unit) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     private val items: MutableList<ProductEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
@@ -96,7 +96,9 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
         viewHolder.binding.addItem.setOnClickListener {
             viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
             viewHolder.binding.addItem.visibility = View.GONE
+            //TODO confirm to clear cart
             cartItems.addOrIncrement(item)
+            invalidateMenuCallback.invoke()
         }
 
         viewHolder.binding.viewDetails.setOnClickListener {
@@ -124,6 +126,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
                     viewHolder.binding.quantity.text = "${cartItems[ind].first.quantity}"
                 }
             }
+            invalidateMenuCallback.invoke()
         }
 
 //        //decrease
@@ -146,9 +149,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
                     }
                 }
             }
-
-
-
+            invalidateMenuCallback.invoke()
         }
     }
 

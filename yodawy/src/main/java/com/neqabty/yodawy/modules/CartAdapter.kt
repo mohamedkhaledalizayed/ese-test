@@ -77,7 +77,6 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
             }else{
                 //remove this item
                 cartItems.removeAt(position)
-                clear()
                 submitList(cartItems)
                 onItemClickListener?.notifyUi()
             }
@@ -88,6 +87,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     override fun getItemCount() = items.size
 
     fun submitList(newItems: List<Pair<ProductEntity,Int>>?) {
+        clear()
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()

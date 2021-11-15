@@ -17,7 +17,7 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
-import com.neqabty.yodawy.modules.address.presentation.view.adressscreen.AddressesActivity
+import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -62,7 +62,7 @@ class OnlinePharmacyFragment : BaseFragment() {
             bundle.putString("user_number", PreferencesHelper(requireContext()).user)
             bundle.putString("mobile_number", PreferencesHelper(requireContext()).mobile)
             bundle.putString("jwt", PreferencesHelper(requireContext()).jwt)
-            val intent = Intent(requireContext(), AddressesActivity::class.java)
+            val intent = Intent(requireContext(), HomeActivity::class.java)
             intent.putExtras(bundle)
             startActivity(intent)
         }

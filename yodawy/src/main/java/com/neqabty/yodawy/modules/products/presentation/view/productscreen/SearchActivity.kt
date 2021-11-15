@@ -22,13 +22,17 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     private val productViewModel: ProductViewModel by viewModels()
-    private val mAdapter = SearchAdapter()
+    lateinit var mAdapter: SearchAdapter
     override fun getViewBinding() = ActivitySearchBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.search)
+
+        mAdapter = SearchAdapter {
+            invalidateOptionsMenu()
+        }
 
         binding.recyclerView.adapter = mAdapter
         mAdapter.onItemClickListener = object :
