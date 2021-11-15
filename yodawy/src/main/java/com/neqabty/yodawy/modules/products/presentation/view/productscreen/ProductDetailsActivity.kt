@@ -24,15 +24,14 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
         setupToolbar(title = productItem.name)
 
         // render add btn || + - btn
-        cartItems.mapIndexed { ind, product ->
-            if (product.first.id == productItem.id) {
-                binding.increaseDecrease.visibility = View.VISIBLE
-                binding.add.visibility = View.GONE
-            } else {
-                binding.increaseDecrease.visibility = View.VISIBLE
-                binding.add.visibility = View.GONE
-            }
+        if (cartItems.find { it.first.id == productItem.id } != null) {
+            binding.increaseDecrease.visibility = View.VISIBLE
+            binding.add.visibility = View.GONE
+        } else {
+            binding.increaseDecrease.visibility = View.GONE
+            binding.add.visibility = View.VISIBLE
         }
+
 
         binding.add.setOnClickListener {
             if (imageList.isNotEmpty()){
