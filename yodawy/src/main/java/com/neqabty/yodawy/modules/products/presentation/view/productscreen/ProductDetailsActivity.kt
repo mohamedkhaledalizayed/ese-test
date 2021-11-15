@@ -2,7 +2,6 @@ package com.neqabty.yodawy.modules.products.presentation.view.productscreen
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.core.data.Constants.imageList
@@ -23,6 +22,18 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
         val productItem = intent.extras?.getParcelable<ProductEntity>("product")!!
 
         setupToolbar(title = productItem.name)
+
+        // render add btn || + - btn
+        cartItems.mapIndexed { ind, product ->
+            if (product.first.id == productItem.id) {
+                binding.increaseDecrease.visibility = View.VISIBLE
+                binding.add.visibility = View.GONE
+            } else {
+                binding.increaseDecrease.visibility = View.VISIBLE
+                binding.add.visibility = View.GONE
+            }
+        }
+
         binding.add.setOnClickListener {
             if (imageList.isNotEmpty()){
                 showClearCartConfirmationAlert(okCallback = {
@@ -32,7 +43,7 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
             }else{
                 addToCart(productItem)
             }
-            }
+        }
 
         binding.increase.setOnClickListener {
             val index = getIndexInProductsPair(productItem)
@@ -50,7 +61,6 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
                 cartItems.removeAt(index)
                 binding.increaseDecrease.visibility = View.GONE
                 binding.add.visibility = View.VISIBLE
-                Toast.makeText(this, "تم مسح المنتج", Toast.LENGTH_LONG).show()
             }
 
         }
