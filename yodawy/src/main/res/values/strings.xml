@@ -50,4 +50,8 @@
     <string name="alert_ok">موافق</string>
     <string name="cart_empty">عربة التسوق فارغة</string>
     <string name="expoler_yodawy">اكتشف يوداوى و ابداء التسوق</string>
+    <string name="cash">نقدى</string>
+    <string name="order_number">رقم الطلب</string>
+    <string name="order_date">تاريخ الطلب</string>
+    <string name="address">العنوان</string>
 </resources>
