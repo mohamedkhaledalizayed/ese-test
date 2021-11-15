@@ -27,29 +27,21 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
             if (imageList.isNotEmpty()){
                 showClearCartConfirmationAlert(okCallback = {
                     imageList.clear()
-                    cartItems.addOrIncrement(productItem)
+                    addToCart(productItem)
                 })
             }else{
-                cartItems.addOrIncrement(productItem)
+                addToCart(productItem)
             }
-        }
-        var index = 0
-         cartItems.mapIndexed{ ind, item ->
-            if (item.first.id == productItem.id){
-                index = ind
-                binding.increaseDecrease.visibility = View.VISIBLE
-                binding.add.visibility = View.GONE
-                binding.quantity.text = "${item.first.quantity}"
             }
-        }
 
         binding.increase.setOnClickListener {
+            val index = getIndexInProductsPair(productItem)
             cartItems[index].first.quantity += 1
             binding.quantity.text = "${cartItems[index].first.quantity}"
         }
 
         binding.decrease.setOnClickListener {
-
+            val index = getIndexInProductsPair(productItem)
             if (cartItems[index].first.quantity > 1){
                 cartItems[index].first.quantity -= 1
                 binding.quantity.text = "${cartItems[index].first.quantity}"
@@ -94,6 +86,25 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
 
             }
         }
+    }
+
+    private fun addToCart(productItem: ProductEntity){
+        cartItems.addOrIncrement(productItem)
+        binding.increaseDecrease.visibility = View.VISIBLE
+        binding.add.visibility = View.GONE
+    }
+
+    private fun getIndexInProductsPair(productItem: ProductEntity): Int{
+        var index = 0
+        cartItems.mapIndexed{ ind, item ->
+            if (item.first.id == productItem.id){
+                index = ind
+                binding.increaseDecrease.visibility = View.VISIBLE
+                binding.add.visibility = View.GONE
+                binding.quantity.text = "${item.first.quantity}"
+            }
+        }
+        return index
     }
 }
 
