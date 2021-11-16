@@ -197,7 +197,7 @@
                         android:layout_below="@+id/subtotal_value"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:text="@string/up_to_egp_10_00"
+                        android:text="@string/for_free"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_12ssp" />
 

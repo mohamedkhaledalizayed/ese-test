@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -44,9 +45,15 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             }
         }
 
-        binding.llHolder.findViewById<ImageView>(R.id.search_btn).setOnClickListener {
-            hideKeyboard()
-            productViewModel.search(binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString())
+        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                search()
+            }
+            true
+        }
+
+        binding.searchBtn.setOnClickListener {
+            search()
         }
 
         //observe
@@ -74,6 +81,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
         }
 
+    }
+
+    private fun search(){
+        hideKeyboard()
+        productViewModel.search(binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString())
     }
 
     override fun onResume() {

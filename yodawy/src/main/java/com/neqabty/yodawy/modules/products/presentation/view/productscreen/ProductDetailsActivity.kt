@@ -2,6 +2,7 @@ package com.neqabty.yodawy.modules.products.presentation.view.productscreen
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.core.data.Constants.imageList
@@ -34,13 +35,10 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
 
 
         binding.add.setOnClickListener {
-            if (imageList.isNotEmpty()){
-                showClearCartConfirmationAlert(okCallback = {
-                    imageList.clear()
-                    addToCart(productItem)
-                })
+            if(productItem.isLimitedAvailability){
+                showLimitedAvailabilityAlert(okCallback = {addBtnLogic(productItem)})
             }else{
-                addToCart(productItem)
+                addBtnLogic(productItem)
             }
         }
 
@@ -97,6 +95,17 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
         }
     }
 
+    private fun addBtnLogic(productItem: ProductEntity){
+        if (imageList.isNotEmpty()){
+            showClearCartConfirmationAlert(okCallback = {
+                imageList.clear()
+                addToCart(productItem)
+            })
+        }else{
+            addToCart(productItem)
+        }
+    }
+
     private fun addToCart(productItem: ProductEntity){
         cartItems.addOrIncrement(productItem)
         binding.increaseDecrease.visibility = View.VISIBLE
@@ -114,6 +123,23 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
             }
         }
         return index
+    }
+
+
+    private fun showLimitedAvailabilityAlert(okCallback: () -> Unit = {}, cancelCallback: () -> Unit = {}) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(getString(R.string.low_stock_alert))
+        builder.setCancelable(false)
+        builder.setPositiveButton(getString(R.string.alert_ok)) { dialog, which ->
+            okCallback.invoke()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton(getString(R.string.alert_cancel)) { dialog, which ->
+            cancelCallback.invoke()
+            dialog.dismiss()
+        }
+        builder.show()
     }
 }
 
