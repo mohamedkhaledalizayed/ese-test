@@ -11,13 +11,8 @@
         android:name="com.neqabty.courses.core.application.CoursesApplication"
         android:theme="@style/Theme.Courses">
         <activity
-            android:name="com.neqabty.courses.home.presentation.view.homescreen.HomeActivity"
+            android:name="com.neqabty.courses.home.presentation.view.homescreen.CourseHomeActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
