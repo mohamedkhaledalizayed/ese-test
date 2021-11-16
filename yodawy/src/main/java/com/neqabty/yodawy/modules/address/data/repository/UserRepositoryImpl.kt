@@ -28,6 +28,8 @@ class UserRepositoryImpl @Inject constructor(private val userDS: UserDS) : UserR
                 params.floor,
                 params.building,
                 params.apartment,
+                params.lat,
+                params.long,
                 params.landmark
             )
         ).map { it.id }

@@ -12,6 +12,7 @@ import com.neqabty.yodawy.databinding.ActivityAddressesBinding
 import com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen.AddAddressActivity
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.modules.CheckOutActivity
+import com.neqabty.yodawy.modules.SelectLocationActivity
 import com.neqabty.yodawy.modules.address.domain.entity.AddressEntity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,7 +64,7 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
         }
 
         binding.addAddress.setOnClickListener {
-            startActivity(Intent(this@AddressesActivity, AddAddressActivity::class.java))
+            startActivity(Intent(this@AddressesActivity, SelectLocationActivity::class.java))
         }
     }
 

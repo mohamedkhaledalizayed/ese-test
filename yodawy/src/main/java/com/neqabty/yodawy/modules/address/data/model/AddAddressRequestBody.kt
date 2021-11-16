@@ -15,6 +15,10 @@ data class AddAddressRequestBody(
     val building:String,
     @SerializedName("Apartment")
     val apartment:String,
+    @SerializedName("lat")
+    val lat: Double,
+    @SerializedName("long")
+    val long: Double,
     @SerializedName("Landmark")
     val landmark:String
 )

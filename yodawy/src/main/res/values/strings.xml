@@ -43,6 +43,7 @@
     <string name="order_is_canceled">Order is Canceled</string>
     <string name="order_is_placed">لقد تم تأكيد طلبك بنجاح</string>
     <string name="nickname_">تصنيف العقار</string>
+    <string name="location">من فضلك حدد موقعك</string>
     <string name="product_details">تفاصيل المنتج</string>
     <string name="will_clear_cart">سيتم مسح محتويات عربة التسوق</string>
     <string name="alert_title">تنبيه</string>
@@ -54,4 +55,7 @@
     <string name="order_number">رقم الطلب</string>
     <string name="order_date">تاريخ الطلب</string>
     <string name="address">العنوان</string>
+    <string name="api_key">AIzaSyCuN7-pcKEzjwp02AkK-lNlhhjcGnCkm_M</string>
+    <string name="select_location">تحديد</string>
+
 </resources>

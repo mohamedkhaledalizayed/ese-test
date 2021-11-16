@@ -5,6 +5,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <application
         android:name=".core.application.YodawyApplication"
         android:allowBackup="true"
@@ -12,6 +16,9 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".modules.SelectLocationActivity"
+            android:exported="false" />
         <activity
             android:name=".modules.ConfirmCheckoutActivity"
             android:exported="false" />
@@ -35,13 +42,21 @@
             android:exported="false" />
         <activity
             android:name=".modules.address.presentation.view.addaddressscreen.AddAddressActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".modules.address.presentation.view.adressscreen.AddressesActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".modules.address.presentation.view.homescreen.HomeActivity"
             android:exported="false" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/api_key" />
     </application>
 
 </manifest>

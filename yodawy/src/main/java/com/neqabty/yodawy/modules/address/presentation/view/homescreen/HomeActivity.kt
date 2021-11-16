@@ -36,7 +36,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
         Constants.userNumber = intent.extras!!.getString("user_number", "")
         Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
-        Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
+//        Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
     }
 
     fun findMedications(view: View) {
