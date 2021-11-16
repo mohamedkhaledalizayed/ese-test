@@ -113,7 +113,7 @@ override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater
     override fun onMapReady(googleMap: GoogleMap) {
         val sydney = LatLng(latitude, longitude)
         googleMap.addMarker(MarkerOptions().position(sydney))
-        googleMap.uiSettings.isScrollGesturesEnabled = false;
+        googleMap.uiSettings.isScrollGesturesEnabled = false
         googleMap.uiSettings.setAllGesturesEnabled(false)
 
         // For zooming automatically to the location of the marker

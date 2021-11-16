@@ -29,7 +29,7 @@
     <string name="delivery_time_depends_on_availability">Delivery time depends on availability</string>
     <string name="_6_photos_added">6 photos added</string>
     <string name="prices_may_vary_across_pharmacies">Prices may vary across pharmacies</string>
-    <string name="go_to_checkout">GO TO CHECKOUT</string>
+    <string name="go_to_checkout">تاكيد الطلب</string>
     <string name="add_note">Add Note</string>
     <string name="place_order">إضافة طلب</string>
     <string name="delivery_time">وقت التوصيل</string>
