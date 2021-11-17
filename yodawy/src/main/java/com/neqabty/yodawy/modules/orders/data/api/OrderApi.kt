@@ -29,5 +29,5 @@ interface OrderApi {
         @Url url: String = YODAWY_URL,
         @Part("order") order: RequestBody,
         @Part images: ArrayList<MultipartBody.Part>
-    ): Response<PlaceOrderResponse>
+    ): PlaceOrderResponse
 }

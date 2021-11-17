@@ -20,6 +20,7 @@ import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.FileUtils
 import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivityCheckOutBinding
+import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import com.neqabty.yodawy.modules.orders.data.model.request.OrderRequest
 import com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen.PlacePrescriptionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,13 +57,20 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
                     }
                     Status.SUCCESS -> {
                         dialog.dismiss()
-                        Log.e("ggg", "$resource")
+                        imageList.clear()
+                        val bundle = Bundle()
+                        bundle.putString("user_number", Constants.userNumber)
+                        bundle.putString("mobile_number", Constants.mobileNumber)
+                        bundle.putString("jwt", Constants.jwt)
+                        val intent = Intent(this, HomeActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        intent.putExtras(bundle)
+                        startActivity(intent)
                         finish()
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
-                        Log.e("error", "${resource.message}")
                     }
                 }
             }

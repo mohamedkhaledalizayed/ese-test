@@ -26,7 +26,7 @@ class OrdersDS @Inject constructor(private val orderApi: OrderApi) {
 
     fun placePrescription(order: RequestBody, images: ArrayList<MultipartBody.Part>): Flow<PlaceOrderResponse>{
         return flow {
-            emit(orderApi.placePrescription(order = order, images = images).dataModel)
+            emit(orderApi.placePrescription(order = order, images = images))
         }
     }
 }
