@@ -41,8 +41,5 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
         }else{
             binding.photosRecycler.visibility = View.GONE
         }
-
-
-        Log.e("jj", "${order.creationDate}")
     }
 }

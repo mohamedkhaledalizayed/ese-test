@@ -71,6 +71,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                             binding.progressActivity.showContent()
                             mAdapter.clear()
                             mAdapter.submitList(resource.data)
+                            binding.recyclerView.scrollToPosition(0)
                         }
                     }
                     Status.ERROR -> {
