@@ -110,6 +110,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) : RecyclerView.Adapt
             if (product.first.id == item.id){
                 viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
                 viewHolder.binding.addItem.visibility = View.GONE
+                viewHolder.binding.viewDetails.visibility = View.GONE
                 viewHolder.binding.quantity.text = "${cartItems[ind].first.quantity}"
             }
         }
@@ -141,10 +142,10 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) : RecyclerView.Adapt
                         //remove this item
                         cartItems.removeAt(ind)
                         viewHolder.binding.increaseDecrease.visibility = View.GONE
-                        if (item.active){
-                            viewHolder.binding.addItem.visibility = View.VISIBLE
-                        }else{
+                        if (item.isLimitedAvailability){
                             viewHolder.binding.viewDetails.visibility = View.VISIBLE
+                        }else{
+                            viewHolder.binding.addItem.visibility = View.VISIBLE
                         }
                     }
                 }
