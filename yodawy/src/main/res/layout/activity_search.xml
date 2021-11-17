@@ -79,18 +79,18 @@
             app:emptyTitleTextColor="@color/black"
             app:emptyTitleTextSize="@dimen/_5ssp"
             app:errorBackgroundColor="#FFFFFF"
-            app:errorButtonBackgroundColor="@color/purple_200"
+            app:errorButtonBackgroundColor="@color/colorPrimary"
             app:errorButtonTextColor="#FFF"
             app:errorImageHeight="@dimen/_200sdp"
             app:errorImageWidth="@dimen/_200sdp"
-            app:errorTitleTextColor="@color/purple_200"
+            app:errorTitleTextColor="@color/colorPrimary"
             app:errorTitleTextSize="@dimen/_5ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_holder"
             app:loadingBackgroundColor="#FFFFFF"
-            app:loadingProgressBarColor="@color/purple_200">
+            app:loadingProgressBarColor="@color/colorPrimary">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"

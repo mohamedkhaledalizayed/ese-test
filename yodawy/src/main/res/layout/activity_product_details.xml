@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:text="EGP 85.00"
-                    android:textColor="@color/purple_200"
+                    android:textColor="@color/colorPrimary"
                     android:textStyle="bold" />
 
                 <LinearLayout

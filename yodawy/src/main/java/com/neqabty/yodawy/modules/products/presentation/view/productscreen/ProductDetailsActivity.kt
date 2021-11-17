@@ -41,7 +41,7 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
                 addBtnLogic(productItem)
             }
         }
-
+        getIndexInProductsPair(productItem)
         binding.increase.setOnClickListener {
             val index = getIndexInProductsPair(productItem)
             cartItems[index].first.quantity += 1
