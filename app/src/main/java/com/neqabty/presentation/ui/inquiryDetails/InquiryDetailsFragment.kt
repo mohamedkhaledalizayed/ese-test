@@ -3,6 +3,7 @@ package com.neqabty.presentation.ui.inquiryDetails
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,11 +24,10 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.di.Injectable
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsAdapter
+import com.neqabty.presentation.util.CryptoHelp
 import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
-import me.cowpay.PaymentMethodsActivity
-import me.cowpay.util.CowpayConstantKeys
 import javax.inject.Inject
 
 class InquiryDetailsFragment : BaseFragment(), Injectable {
@@ -129,45 +129,24 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
         bPay.setOnClickListener {
             llSuperProgressbar.visibility = View.VISIBLE
-//            createPayment()
             inquiryDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
-        }
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CowpayConstantKeys.PaymentMethodsActivityRequestCode && data != null && resultCode == Activity.RESULT_OK) {
-            var responseCode = data.extras!!.getInt(CowpayConstantKeys.ResponseCode, 0)
-
-            if (responseCode == CowpayConstantKeys.ErrorCode) {
-                showAlert(getString(R.string.payment_canceled)) {
-                    navController().popBackStack()
-                    navController().navigate(R.id.homeFragment)
-                }
-            } else if (responseCode == CowpayConstantKeys.SuccessCode) {
-                var responseMSG = data.extras!!.getString(CowpayConstantKeys.ResponseMessage)
-                var PaymentGatewayReferenceId =
-                        data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
-                responseMSG?.let {
-                    showAlert(if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(R.string.payment_successful) + PaymentGatewayReferenceId else getString(R.string.payment_reference) + PaymentGatewayReferenceId) {
-                        navController().popBackStack()
-                        navController().navigate(R.id.homeFragment)
-                    }
-                }
-            }
         }
     }
 
     private fun handleViewState(state: InquiryDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
+            if(state.encryptionData != null){
+                completePaymentCreation(state.encryptionData!!.encryption)
+                return
+            }
+
             state.medicalRenewalPayment?.let {
                 medicalRenewalPayment = it
                 if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-                    cowPayPayment(true)
+                    createPayment(true)
                 else
-                    cowPayPayment(false)
+                    createPayment(false)
             }
         }
 //            if (sendDecryptionKey) {
@@ -209,76 +188,32 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
     //region
 
-    fun cowPayPayment(isCredit: Boolean) {
-        var intent = Intent(context, PaymentMethodsActivity::class.java)
-
-        var PaymentMethod = ArrayList<String>()
-        if (isCredit)
-            PaymentMethod.add(CowpayConstantKeys.CreditCardMethod)
-        else
-            PaymentMethod.add(CowpayConstantKeys.FawryMethod)
-        intent.putExtra(CowpayConstantKeys.PaymentMethod, PaymentMethod)
-
-        intent.putExtra(CowpayConstantKeys.AuthorizationToken, Constants.cowpayAuthToken)
-
-        //set environment production or sandBox
-        //CowpayConstantKeys.Production or CowpayConstantKeys.SandBox
-        intent.putExtra(CowpayConstantKeys.PaymentEnvironment, Constants.COWPAY_MODE)
-        //set locale language
-        intent.putExtra(CowpayConstantKeys.Language, CowpayConstantKeys.ENGLISH)
-        // use pay with credit card
-        intent.putExtra(
-                CowpayConstantKeys.CreditCardMethodType,
-                CowpayConstantKeys.CreditCardMethodPay
-        )
-
-        intent.putExtra(CowpayConstantKeys.MerchantCode, "3GpZbdrsnOrT")
-        intent.putExtra(
-                CowpayConstantKeys.MerchantHashKey,
-                "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
-        )
-        //order id
-        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, medicalRenewalPayment.paymentItem?.paymentRequestNumber)
-        //order price780
-        intent.putExtra(CowpayConstantKeys.Amount, newAmount.toString())
-        //user data
-        intent.putExtra(CowpayConstantKeys.Description, medicalRenewalPayment.paymentItem?.amount.toString())
-        intent.putExtra(CowpayConstantKeys.CustomerName, params.number)
-        intent.putExtra(CowpayConstantKeys.CustomerMobile, PreferencesHelper(requireContext()).mobile)
-        intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
-        //user id
-        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, medicalRenewalPayment.paymentItem?.paymentRequestNumber)
-
-
-        startActivityForResult(intent, CowpayConstantKeys.PaymentMethodsActivityRequestCode)
-    }
-
-    fun createPayment() {
+    fun createPayment(isCredit: Boolean) {
         try {
 
             paymentGateway = PaymentGateway(activity, "1234")
             paymentCreationRequest = PaymentCreationRequest()
 
 //            paymentCreationRequest.Sender.Id = memberItem.paymentCreationRequest?.sender?.id
-            paymentCreationRequest.Sender.Id = "071"
+            paymentCreationRequest.Sender.Id = "01001"
 //            paymentCreationRequest.Sender.Name = memberItem.paymentCreationRequest?.sender?.name
             paymentCreationRequest.Sender.Name = "MSAD"
             paymentCreationRequest.Sender.Password = "1234"
             paymentCreationRequest.Description = "Test"
 //            paymentCreationRequest.SenderInvoiceNumber = memberItem.paymentCreationRequest?.senderRequestNumber
-            paymentCreationRequest.SenderInvoiceNumber = medicalRenewalPayment.requestID
+            paymentCreationRequest.SenderInvoiceNumber = medicalRenewalPayment.paymentItem?.paymentRequestNumber
             paymentCreationRequest.AdditionalInfo = "Test"
 
 //            paymentCreationRequest.SenderRequestNumber = memberItem.paymentCreationRequest?.senderRequestNumber + "032110010100"
-            paymentCreationRequest.SenderRequestNumber = medicalRenewalPayment.requestID
+            paymentCreationRequest.SenderRequestNumber = medicalRenewalPayment.paymentItem?.paymentRequestNumber
 //            paymentCreationRequest.ServiceCode = memberItem.paymentCreationRequest?.serviceCode
-            paymentCreationRequest.ServiceCode = "171"
+            paymentCreationRequest.ServiceCode = "010011"
 
             val settlementAmount = PaymentCreationRequest.SettlementAmount()
 
             settlementAmount.Amount = medicalRenewalPayment.paymentItem?.amount?.toDouble()!!
 //            settlementAmount.SettlementAccountCode = memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode!!.toInt()
-            settlementAmount.SettlementAccountCode = 647
+            settlementAmount.SettlementAccountCode = 500
             settlementAmount.Description = "Test"
 
             paymentCreationRequest.SettlementAmounts.add(settlementAmount)
@@ -288,90 +223,78 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
             mechanismTypeButton = binding.root.findViewById(rgPaymentMechanismType.getCheckedRadioButtonId())
 
-            if (mechanismTypeButton.getText().toString() == getString(R.string.payment_card)) {
+            if (isCredit) {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Card
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
+            } else{
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Channel
 
                 paymentCreationRequest.PaymentMechanism.Channel.Email = "xxxx@xx.xx"
                 paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = PreferencesHelper(requireContext()).mobile
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_wallet)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.MobileWallet
-                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = PreferencesHelper(requireContext()).mobile
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_meeza)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Meeza
-                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = PreferencesHelper(requireContext()).mobile
             }
+//            else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_wallet)) {
+//                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.MobileWallet
+//                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = PreferencesHelper(requireContext()).mobile
+//            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_meeza)) {
+//                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Meeza
+//                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = PreferencesHelper(requireContext()).mobile
+//            }
 
 //            paymentCreationRequest.RequestExpiryDate = memberItem.paymentCreationRequest?.requestExpiryDate
-            paymentCreationRequest.RequestExpiryDate = "2020-12-09"
+            paymentCreationRequest.RequestExpiryDate = "2021-12-09"
 
-            paymentCreationRequest.UserUniqueIdentifier = medicalRenewalPayment.requestID
+            paymentCreationRequest.UserUniqueIdentifier = medicalRenewalPayment.paymentItem?.paymentRequestNumber
 //            paymentCreationRequest.UserUniqueIdentifier = "12346743298546"
 
 //            val publicKey = memberItem.paymentCreationRequest?.publicKey
             val publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0MAVRsQax/cxZwZcfp+s0mzZtFGNRpuRLnyKUosdnlHn2JC1FSHpnmsON1Mp/SY+GR/Wk1kO2QGNNdszikPgAnN5/fcX6JPIkzSHCMLqPxUNqaCfn0eaLrwgsc1SCwlm+f8c+CseG3OeR+sUdq52PHf7edpjC60V4bNo/gEVRLV+VsvBde8jhet6Z/wRrKL5K1MQH0ByYn9upf96myRiTOSvocuBVHnlb2O+tapLVrNq7dMNXCHHB7IuNCFvP0f0QILeDW5CxebcsTItzxLLurKtA1lTWv+Ao9oqexy1BJzMytpS+BAz9kNzmt/g7RcdbXd0MxFotvoHjl2jwE1wLwIDAQAB"
 
-//            inquiryDetailsViewModel.encryptData(paymentCreationRequest.Sender.Name, paymentCreationRequest.Sender.Password, paymentCreationRequest.serialize())
-            paymentCreationRequest.serialize()
+//            val signature: String = CryptoHelp.signData(paymentCreationRequest.serialize(), requireContext())
 
+            inquiryDetailsViewModel.encryptData(paymentCreationRequest.Sender.Name, paymentCreationRequest.Sender.Password, paymentCreationRequest.serialize())
+//            paymentCreationRequest.serialize()
+
+        } catch (ex: Exception) {
+            Log.i("Error", ex.message.toString())
+        }
+    }
+
+    private fun completePaymentCreation(encryptedData: String) {
+        try {
+            val publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0MAVRsQax/cxZwZcfp+s0mzZtFGNRpuRLnyKUosdnlHn2JC1FSHpnmsON1Mp/SY+GR/Wk1kO2QGNNdszikPgAnN5/fcX6JPIkzSHCMLqPxUNqaCfn0eaLrwgsc1SCwlm+f8c+CseG3OeR+sUdq52PHf7edpjC60V4bNo/gEVRLV+VsvBde8jhet6Z/wRrKL5K1MQH0ByYn9upf96myRiTOSvocuBVHnlb2O+tapLVrNq7dMNXCHHB7IuNCFvP0f0QILeDW5CxebcsTItzxLLurKtA1lTWv+Ao9oqexy1BJzMytpS+BAz9kNzmt/g7RcdbXd0MxFotvoHjl2jwE1wLwIDAQAB"
+ //            var signature = paymentCreationRequest.serialize()
+ //            Log.d("NEQBTY", signature)
+
+ //            val signature = "qf9Qo2fZ792GyoDiXik6eAQ6fadqHaib+yaBTBp4PGj1xf6KlVn3pP822D8VyADm+OEvuPVtLc3nvutiTEDZgo4oeJnUIwXveAzQUV6RM9oyMfOu78Kj9NcD3wMW1Jb6hwAKfHQ/tLsY7oJYIhXmh1x2INU9am6K6JrD468ToBNhWU6Df9SlJsMezZWMLrG0Z4bElqTsIVcpATiu8rJ4lGHMl+qC4AX+2pAViz31TPXGREdYsQpLDHbnBXaVvLLY8fKNyOjDaskxEoeJikPdzkAmBn1HDmzwWhb9GyYRsGJw4wm1szIXrMIRvgGYIarsVwxL7uaSWs/yrjHUFhT8AQ=="
             val successCallback: ((response: PaymentCreationResponse) -> Unit) = { response ->
                 sendDecryptionKey = true
                 paymentCreationResponse = response
 
-//                if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
-//
-//                    offlineSetPaid(response.OriginalSenderRequestNumber)
-//                } else {
-//                    llSuperProgressbar.visibility = View.INVISIBLE
-//                    val paymentMethod = mechanismTypeButton.getText().toString()
-//                    if (paymentMethod == getString(R.string.payment_card)) {
-//                        navController().navigate(
-//                                MedicalRenewDetailsFragmentDirections.openPayment(MemberUI(), paymentCreationResponse.OriginalSenderRequestNumber,
-//                                        paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
-//                        )
-//                    } else if (paymentMethod == getString(R.string.payment_channel) ||
-//                            paymentMethod == getString(R.string.payment_wallet) ||
-//                            paymentMethod == getString(R.string.payment_meeza)) {
-//                        showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
-//                            navController().popBackStack()
-//                            navController().navigate(R.id.homeFragment)
-//                        }
-////                    "senderRequestNumber" + response.OriginalSenderRequestNumber
-//                    }
-//                }
-                inquiryDetailsViewModel.sendDecryptionKey(response.OriginalSenderRequestNumber, response.RequestDecryptionKey)
+                inquiryDetailsViewModel.sendDecryptionKey(
+                    response.OriginalSenderRequestNumber,
+                    response.RequestDecryptionKey
+                )
             }
 
             val failureCallback = {
                 llSuperProgressbar.visibility = View.INVISIBLE
                 showConnectionAlert(requireContext(), retryCallback = {
                     llContent.visibility = View.INVISIBLE
-                    inquiryDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
+                    inquiryDetailsViewModel.paymentInquiry(
+                        PreferencesHelper(requireContext()).mobile,
+                        params.number,
+                        params.serviceID,
+                        medicalRenewalPayment.requestID,
+                        medicalRenewalPayment.paymentItem?.amount.toString()
+                    )
                 }, cancelCallback = {
                     navController().navigateUp()
                 })
             }
-
-            paymentGateway.CreatePayment(paymentCreationRequest, "", publicKey, MobilePaymentCreationCallback(successCallback, failureCallback))
+            paymentGateway.CreatePayment(paymentCreationRequest, encryptedData, publicKey, MobilePaymentCreationCallback(successCallback, failureCallback))
         } catch (ex: Exception) {
-//            Log.i("Error", ex.message)
+            Log.i("Error", ex.message.toString())
         }
     }
-
-//    private fun completePaymentCreation(encryptedData: String) {
-//        try {
-//            val publicKey = memberItem.paymentCreationRequest?.publicKey
-// //            var signature = paymentCreationRequest.serialize()
-// //            Log.d("NEQBTY", signature)
-//
-// //            val signature = "qf9Qo2fZ792GyoDiXik6eAQ6fadqHaib+yaBTBp4PGj1xf6KlVn3pP822D8VyADm+OEvuPVtLc3nvutiTEDZgo4oeJnUIwXveAzQUV6RM9oyMfOu78Kj9NcD3wMW1Jb6hwAKfHQ/tLsY7oJYIhXmh1x2INU9am6K6JrD468ToBNhWU6Df9SlJsMezZWMLrG0Z4bElqTsIVcpATiu8rJ4lGHMl+qC4AX+2pAViz31TPXGREdYsQpLDHbnBXaVvLLY8fKNyOjDaskxEoeJikPdzkAmBn1HDmzwWhb9GyYRsGJw4wm1szIXrMIRvgGYIarsVwxL7uaSWs/yrjHUFhT8AQ=="
-//
-//            paymentGateway.CreatePayment(paymentCreationRequest, encryptedData, publicKey, MobilePaymentCreationCallback(requireContext(), mechanismTypeButton.getText().toString(), navController()))
-//        } catch (ex: Exception) {
-////            Log.i("Error", ex.message)
-//        }
-//    }
     // endregion
 
     // region callback
@@ -384,21 +307,9 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         }
 
         override fun onError(paymentException: PaymentException) {
-//            Log.e("NEQABTY", paymentException.details.message)
+            Log.e("NEQABTY", paymentException.details.message.toString())
             failureCallback.invoke()
         }
-    }
-
-//    private fun generateRequestNumber(): String {
-//        val random = Random()
-//        val requestNumber = random.nextInt(999999999)
-//
-//        return requestNumber.toString()
-//    }
-
-    fun offlineSetPaid(originalSenderRequestNumber: String) {
-
-//        inquiryDetailsViewModel.setPaid(originalSenderRequestNumber)
     }
 
     private fun calculateCommission(isCredit: Boolean) {
