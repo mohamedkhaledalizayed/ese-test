@@ -67,10 +67,10 @@ class MedicalMainFragment : BaseFragment(), HasMedicalOptionsMenu, Injectable {
 
     fun initializeViews() {
 
-        val categoriesNameList = mutableListOf<String>(getString(R.string.artificial_limbs), getString(R.string.optics), getString(R.string.others), getString(R.string.laboratories),
+        val categoriesNameList = mutableListOf<String>(getString(R.string.pathology_labs), getString(R.string.artificial_limbs), getString(R.string.optics), getString(R.string.others), getString(R.string.laboratories),
                 getString(R.string.scan_centers), getString(R.string.pharmacies), getString(R.string.doctors)
                 , getString(R.string.hospitals))
-        val categoriesIDList = mutableListOf<Int>(2027, 2028, 18, 4, 3, 16, 2, 1)
+        val categoriesIDList = mutableListOf<Int>(17, 2027, 2028, 18, 4, 3, 16, 2, 1)
 
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[0]))
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[1]))
@@ -80,17 +80,19 @@ class MedicalMainFragment : BaseFragment(), HasMedicalOptionsMenu, Injectable {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[5]))
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[6]))
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[7]))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(categoriesNameList[8]))
 
         val headerView: View = LayoutInflater.from(context).inflate(R.layout.tab_medical_item, null, false)
 
-        binding.tabLayout.getTabAt(0)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clArtificialLimbs))
-        binding.tabLayout.getTabAt(1)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clOptics))
-        binding.tabLayout.getTabAt(2)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clOthers))
-        binding.tabLayout.getTabAt(3)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clLabs))
-        binding.tabLayout.getTabAt(4)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clScans))
-        binding.tabLayout.getTabAt(5)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clPharmacies))
-        binding.tabLayout.getTabAt(6)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clDoctors))
-        binding.tabLayout.getTabAt(7)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clHospitals))
+        binding.tabLayout.getTabAt(0)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clPathologyLabs))
+        binding.tabLayout.getTabAt(1)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clArtificialLimbs))
+        binding.tabLayout.getTabAt(2)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clOptics))
+        binding.tabLayout.getTabAt(3)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clOthers))
+        binding.tabLayout.getTabAt(4)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clLabs))
+        binding.tabLayout.getTabAt(5)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clScans))
+        binding.tabLayout.getTabAt(6)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clPharmacies))
+        binding.tabLayout.getTabAt(7)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clDoctors))
+        binding.tabLayout.getTabAt(8)?.setCustomView(headerView.findViewById<ConstraintLayout>(R.id.clHospitals))
 
         tabLayout.requestLayout()
 
@@ -123,9 +125,9 @@ class MedicalMainFragment : BaseFragment(), HasMedicalOptionsMenu, Injectable {
             }
         })
 
-        val tab = binding.tabLayout.getTabAt(7)
+        val tab = binding.tabLayout.getTabAt(8)
         tab?.select()
-        viewpager.currentItem = 7
+        viewpager.currentItem = 8
 
 
 //        val adapter = CustomFragmentPagerAdapter(childFragmentManager)

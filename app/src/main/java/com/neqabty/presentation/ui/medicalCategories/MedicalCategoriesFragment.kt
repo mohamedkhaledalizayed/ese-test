@@ -64,6 +64,7 @@ class MedicalCategoriesFragment : BaseFragment(), HasMedicalOptionsMenu, Injecta
         categoriesList.add(MedicalCategoryUI(18, getString(R.string.others), R.mipmap.med_serv_ic)) // 2027 2028
         categoriesList.add(MedicalCategoryUI(2028, getString(R.string.optics), R.mipmap.optics)) // 2028
         categoriesList.add(MedicalCategoryUI(2027, getString(R.string.artificial_limbs), R.mipmap.artificial_limbs_ic)) // 2027 2028
+        categoriesList.add(MedicalCategoryUI(17, getString(R.string.pathology_labs), R.mipmap.lab_ic))
 
         adapter = MedicalCategoriesAdapter(dataBindingComponent, appExecutors) { category ->
             when (category.id) {
