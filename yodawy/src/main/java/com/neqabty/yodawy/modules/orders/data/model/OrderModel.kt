@@ -27,5 +27,5 @@ data class OrderModel(
     @SerializedName("Pharmacy")
     val pharmacy: String,
     @SerializedName("PrescriptionImages")
-    val prescriptionImages: Any
+    val prescriptionImages: List<String>?
 )

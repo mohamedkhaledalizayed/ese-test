@@ -1,14 +1,18 @@
 package com.neqabty.yodawy.modules.orders.domain.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class OrderItemEntity(
-    val actualWoocommerceProductId: Any?,
-    val alternativesSKUs: Any?,
+    val actualWoocommerceProductId: String?,
+    val alternativesSKUs: String?,
     val available: Boolean,
-    val channel: Any?,
+    val channel: String?,
     val coveragePercentage: Double?,
     val coverageValue: Double?,
     val deliveryTimeValue: Int?,
-    val drug: Any?,
+    val drug: String?,
     val drugDosageFormId: Int?,
     val drugId: String?,
     val drugName: String?,
@@ -20,9 +24,9 @@ data class OrderItemEntity(
     val productType: String?,
     val quantity: Int?,
     val selectedUnit: Int?,
-    val variationSKU: Any?,
+    val variationSKU: String?,
     val wasLimited: Boolean,
-    val woocommerceOrderAttributes: Any?,
-    val woocommerceProductId: Any?,
+    val woocommerceOrderAttributes: String?,
+    val woocommerceProductId: String?,
     val yodawyDeal: Boolean
-)
+): Parcelable

@@ -58,5 +58,6 @@
     <string name="address">العنوان</string>
     <string name="api_key">AIzaSyCuN7-pcKEzjwp02AkK-lNlhhjcGnCkm_M</string>
     <string name="select_location">تحديد</string>
+    <string name="order_details">تفاصيل الطلب</string>
 
 </resources>

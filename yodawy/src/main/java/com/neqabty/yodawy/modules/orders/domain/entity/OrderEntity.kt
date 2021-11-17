@@ -1,6 +1,9 @@
 package com.neqabty.yodawy.modules.orders.domain.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class OrderEntity(
     val address: OrderAddressEntity,
     val cancellationReasons: List<String>,
@@ -13,5 +16,5 @@ data class OrderEntity(
     val orderNumber: String,
     val orderPrice: Double,
     val pharmacy: String,
-    val prescriptionImages: Any?
-)
+    val prescriptionImageEntities: List<String>?
+): Parcelable

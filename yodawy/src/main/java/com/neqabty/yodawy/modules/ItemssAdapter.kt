@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules.orders.presentation.view.orderstatusscreen
+package com.neqabty.yodawy.modules
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,17 +7,18 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
-import com.neqabty.yodawy.core.utils.AppUtils
-import com.neqabty.yodawy.databinding.OrderLayoutItemBinding
-import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
+import com.neqabty.yodawy.core.data.Constants.cartItems
+import com.neqabty.yodawy.databinding.CartLayoutItemBinding
+import com.neqabty.yodawy.databinding.ProductLayoutItemBinding
+import com.neqabty.yodawy.modules.orders.domain.entity.OrderItemEntity
+import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 
 
-class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
+class ItemssAdapter: RecyclerView.Adapter<ItemssAdapter.ViewHolder>() {
 
-    private val items: MutableList<OrderEntity> = ArrayList()
+    private val items: MutableList<OrderItemEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -28,8 +29,8 @@ class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
-        val binding: OrderLayoutItemBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.order_layout_item, parent, false)
+        val binding: ProductLayoutItemBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.product_layout_item, parent, false)
 
         return ViewHolder(
             binding
@@ -39,26 +40,22 @@ class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
-        viewHolder.binding.orderStatus.text = "حالة الطلب: ${item.currentStatus}"
-        viewHolder.binding.orderDate.text = "تاريخ الطلب: ${AppUtils().dateFormat(item.creationDate)}"
-        viewHolder.binding.orderDetails.text = "رقم الطلب: ${item.orderNumber}"
-        viewHolder.binding.total.text = "السعر: ${item.orderPrice} جنيه"
-
-
         if (position == itemCount - 1){
             viewHolder.binding.view.visibility = View.GONE
         }else{
             viewHolder.binding.view.visibility = View.VISIBLE
         }
 
-        viewHolder.binding.layoutItem.setOnClickListener {
-            onItemClickListener?.setOnItemClickListener(item)
-        }
+        viewHolder.binding.medicationTitle.text = item.drugName
+        viewHolder.binding.medicationQuantity.text = "العدد : ${item.quantity}"
+        viewHolder.binding.medicationPrice.text = "${item.price} جنيه"
+
     }
 
     override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<OrderEntity>?) {
+    fun submitList(newItems: List<OrderItemEntity>) {
+        clear()
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()
@@ -72,9 +69,9 @@ class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: OrderEntity)
+        fun setOnItemClickListener(itemId: Int)
     }
 
-    class ViewHolder(val binding: OrderLayoutItemBinding) :
+    class ViewHolder(val binding: ProductLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

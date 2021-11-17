@@ -12,6 +12,8 @@ import com.neqabty.yodawy.databinding.ActivityOrdersBinding
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.modules.OrderDetailsActivity
+import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
+import com.neqabty.yodawy.modules.products.presentation.view.productscreen.ProductDetailsActivity
 import com.vlonjatg.progressactivity.ProgressRelativeLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -66,8 +68,10 @@ class OrdersActivity : BaseActivity<ActivityOrdersBinding>() {
         binding.ordersRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             OrdersAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(id: Int) {
-                startActivity(Intent(this@OrdersActivity, OrderDetailsActivity::class.java))
+            override fun setOnItemClickListener(order: OrderEntity) {
+                val intent: Intent = Intent(this@OrdersActivity, OrderDetailsActivity::class.java)
+                intent.putExtra("order", order)
+                startActivity(intent)
             }
         }
 

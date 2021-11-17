@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 data class Item(
     @SerializedName("ActualWoocommerceProductId")
-    val actualWoocommerceProductId: Any,
+    val actualWoocommerceProductId: String?,
     @SerializedName("AlternativesSKUs")
-    val alternativesSKUs: Any,
+    val alternativesSKUs: String?,
     @SerializedName("Available")
     val available: Boolean,
     @SerializedName("Channel")
-    val channel: Any,
+    val channel: String?,
     @SerializedName("CoveragePercentage")
     val coveragePercentage: Double,
     @SerializedName("CoverageValue")
@@ -19,7 +19,7 @@ data class Item(
     @SerializedName("DeliveryTimeValue")
     val deliveryTimeValue: Int,
     @SerializedName("Drug")
-    val drug: Any,
+    val drug: String?,
     @SerializedName("DrugDosageFormId")
     val drugDosageFormId: Int,
     @SerializedName("DrugId")
@@ -37,19 +37,19 @@ data class Item(
     @SerializedName("PriceBeforeSale")
     val priceBeforeSale: Double,
     @SerializedName("ProductType")
-    val productType: String,
+    val productType: String?,
     @SerializedName("Quantity")
     val quantity: Int,
     @SerializedName("SelectedUnit")
     val selectedUnit: Int,
     @SerializedName("VariationSKU")
-    val variationSKU: Any,
+    val variationSKU: String?,
     @SerializedName("WasLimited")
     val wasLimited: Boolean,
     @SerializedName("WoocommerceOrderAttributes")
-    val woocommerceOrderAttributes: Any,
+    val woocommerceOrderAttributes: String?,
     @SerializedName("WoocommerceProductId")
-    val woocommerceProductId: Any,
+    val woocommerceProductId: String?,
     @SerializedName("YodawyDeal")
     val yodawyDeal: Boolean
 )

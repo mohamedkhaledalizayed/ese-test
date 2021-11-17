@@ -3,9 +3,11 @@ package com.neqabty.yodawy.modules.orders.data.model.mapper
 import com.neqabty.yodawy.modules.orders.data.model.Address
 import com.neqabty.yodawy.modules.orders.data.model.Item
 import com.neqabty.yodawy.modules.orders.data.model.OrderModel
+import com.neqabty.yodawy.modules.orders.data.model.PrescriptionImages
 import com.neqabty.yodawy.modules.orders.domain.entity.OrderAddressEntity
 import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
 import com.neqabty.yodawy.modules.orders.domain.entity.OrderItemEntity
+import com.neqabty.yodawy.modules.orders.domain.entity.PrescriptionImagesEntity
 
 
 fun OrderModel.toOrderEntity(): OrderEntity {
@@ -55,3 +57,4 @@ private fun List<Item>.toOderItemsEntity(): List<OrderItemEntity> {
 private fun Address.toOrderAddressEntity(): OrderAddressEntity {
     return OrderAddressEntity(address, addressName, id)
 }
+
