@@ -60,6 +60,7 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
                 Constants.selectedAddress = addressItem
 
                 startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
+                finish()
             }
         }
 

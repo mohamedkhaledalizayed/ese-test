@@ -41,36 +41,52 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_7sdp"
-                    android:text="@string/selected_address"
+                    android:text="@string/address"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/_12ssp" />
 
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_white_bg"
-                    android:orientation="horizontal"
                     android:padding="@dimen/_10sdp">
 
                     <ImageView
+                        android:id="@+id/location_icon"
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_baseline_location_on_24"
-                        app:tint="@color/black"/>
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/ic_baseline_location_on_24" />
 
                     <TextView
-                        android:id="@+id/tv_address"
+                        android:id="@+id/address_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:text="@string/delivery_within_60_minutes"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_toEndOf="@+id/location_icon"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/droidkufi_bold"
+                        android:lines="1"
+                        android:text="القاهرة, الشروق"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_10ssp" />
 
-                </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/address_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/location_icon"
+                        android:layout_alignStart="@+id/address_type"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/droidkufi_regular"
+                        android:text="شارع محمد على, عمارة 13, شقة 5"
+                        android:textSize="@dimen/_10ssp" />
+
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -10,6 +10,8 @@ import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
 import com.neqabty.yodawy.modules.orders.domain.repository.OrderRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class OrderRepositoryImpl @Inject constructor(private val ordersDS: OrdersDS) : OrderRepository {
@@ -36,6 +38,14 @@ class OrderRepositoryImpl @Inject constructor(private val ordersDS: OrdersDS) : 
                 placeOrderParam.notes,
                 placeOrderParam.plan
             )
+        ).map { it.isSuccess }
+    }
+
+
+    override fun placePrescription(order: RequestBody, images: ArrayList<MultipartBody.Part>): Flow<Boolean> {
+        return ordersDS.placePrescription(
+            order,
+            images
         ).map { it.isSuccess }
     }
 }

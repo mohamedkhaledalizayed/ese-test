@@ -40,17 +40,24 @@ class NetworkModule {
         okHttpClient.readTimeout(40, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
             .addInterceptor(Interceptor { chain ->
+
+
                 val request = chain.request()
+                val response = chain.proceed(request)
+                if (request.header("No-Authentication") != null) {
+                    return@Interceptor response
+                }else{
+                    var newRequest = request.newBuilder()
 
-                var newRequest = request.newBuilder()
+                        .header("Authorization", "Bearer " + Constants.jwt)
+                        .header("Accept", "application/json")
+                        .build()
 
-                    .header("Authorization", "Bearer " + Constants.jwt)
-                    .header("Accept", "application/json")
-                    .build()
+                    var newResponse = chain.proceed(newRequest)
 
-                var newResponse = chain.proceed(newRequest)
+                    return@Interceptor newResponse
+                }
 
-                newResponse
             })
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.build()
