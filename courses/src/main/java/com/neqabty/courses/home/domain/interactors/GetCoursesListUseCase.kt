@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetCoursesListUseCase @Inject constructor(private val coursesRepository: CoursesRepository) {
-    suspend fun build(): Flow<List<CourseEntity>> {
+    fun build(): Flow<List<CourseEntity>> {
         return coursesRepository.getCoursesList()
     }
 }

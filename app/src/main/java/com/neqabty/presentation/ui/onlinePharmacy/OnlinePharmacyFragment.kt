@@ -16,8 +16,8 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.util.autoCleared
-import com.neqabty.yodawy.modules.address.presentation.view.adressscreen.AddressesActivity
-import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
+//import com.neqabty.yodawy.modules.address.presentation.view.adressscreen.AddressesActivity
+//import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -57,7 +57,7 @@ class OnlinePharmacyFragment : BaseFragment() {
 
     private fun initializeViews(){
         binding.clVezeeta.setOnClickListener { navController().navigate(OnlinePharmacyFragmentDirections.openOnlinePharmacyVezeeta()) }
-        binding.clYodawy.setOnClickListener { startActivity(Intent(requireContext(), AddressesActivity::class.java)) }
+//        binding.clYodawy.setOnClickListener { startActivity(Intent(requireContext(), AddressesActivity::class.java)) }
     }
 
 //region

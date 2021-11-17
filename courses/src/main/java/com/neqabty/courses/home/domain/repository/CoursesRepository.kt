@@ -4,5 +4,5 @@ import com.neqabty.courses.home.domain.entity.CourseEntity
 import kotlinx.coroutines.flow.Flow
 
 interface CoursesRepository {
-    suspend fun getCoursesList(): Flow<List<CourseEntity>>
+    fun getCoursesList(): Flow<List<CourseEntity>>
 }

@@ -18,7 +18,7 @@ class NetworkModule {
     @Provides
     @Named("course")
     fun providesBaseUrl(): String {
-        return "https://5e510330f2c0d300147c034c.mockapi.io/"
+        return "https://courses.ese.et3.co/api/"
     }
 
     @Provides

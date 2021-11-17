@@ -218,7 +218,6 @@ dependencies {
     implementation project(':wheel')
     implementation project(':mobilepaymentsdktest')
     implementation project(path: ':pdfcreator')
-    implementation project(':yodawy')
     implementation project(':courses')
     testImplementation deps.junit
     testImplementation deps.mock_web_server

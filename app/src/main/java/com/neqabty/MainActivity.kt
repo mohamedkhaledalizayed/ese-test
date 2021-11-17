@@ -31,6 +31,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import com.neqabty.courses.home.presentation.view.homescreen.CourseHomeActivity
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.common.ExpandableListAdapter
 import com.neqabty.presentation.entities.NavigationMenuItem
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             customiseStatusbar()
+        startActivity(Intent(this,CourseHomeActivity::class.java))
         setContentView(R.layout.main_activity)
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         setSupportActionBar(toolbar)
@@ -388,10 +390,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSaveInstanceState(@NonNull outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.clear()
-    }
+//    override fun onSaveInstanceState(@NonNull outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        outState.clear()
+//    }
 
     private fun prepareNavigationMenuListData() {
         listDataHeader = mutableListOf<NavigationMenuItem>()

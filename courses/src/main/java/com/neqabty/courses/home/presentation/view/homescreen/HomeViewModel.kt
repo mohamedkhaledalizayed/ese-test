@@ -17,8 +17,12 @@ class HomeViewModel @Inject constructor(private val getCoursesListUseCase: GetCo
     val courses = MutableLiveData<List<CourseEntity>>()
     fun getCourses() {
         viewModelScope.launch(Dispatchers.IO) {
-            getCoursesListUseCase.build().collect {
-                courses.postValue(it)
+            try {
+                getCoursesListUseCase.build().collect {
+                    courses.postValue(it)
+                }
+            } catch (e: Throwable) {
+
             }
         }
     }
