@@ -94,11 +94,14 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) : RecyclerView.Adapt
         viewHolder.binding.medicationPrice.text = "EGP ${item.salePrice.toString()}"
 
         viewHolder.binding.addItem.setOnClickListener {
-            viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
-            viewHolder.binding.addItem.visibility = View.GONE
-            //TODO confirm to clear cart
-            cartItems.addOrIncrement(item)
-            invalidateMenuCallback.invoke()
+            if (Constants.imageList.isEmpty()){
+                viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
+                viewHolder.binding.addItem.visibility = View.GONE
+                //TODO confirm to clear cart
+                cartItems.addOrIncrement(item)
+                invalidateMenuCallback.invoke()
+            }
+            onItemClickListener?.setOnAddItemClickListener()
         }
 
         viewHolder.binding.viewDetails.setOnClickListener {
@@ -171,6 +174,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) : RecyclerView.Adapt
 
     interface OnItemClickListener {
         fun setOnItemClickListener(item: ProductEntity)
+        fun setOnAddItemClickListener()
     }
 
     class ViewHolder(val binding: MedicationLayoutItemBinding) :
