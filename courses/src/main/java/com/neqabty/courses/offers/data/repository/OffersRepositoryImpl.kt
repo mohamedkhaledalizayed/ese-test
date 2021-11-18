@@ -12,4 +12,8 @@ class OffersRepositoryImpl @Inject constructor(private val offersDS: OffersDS): 
     override fun getOffers(): Flow<List<OfferEntity>> {
         return offersDS.getOffers().map { it.map { it.toOfferEntity() } }
     }
+
+    override fun getCourseOffers(courseId:Int):Flow<List<OfferEntity>>{
+        return offersDS.getCourseOffers(courseId).map { it.map { it.toOfferEntity()} }
+    }
 }

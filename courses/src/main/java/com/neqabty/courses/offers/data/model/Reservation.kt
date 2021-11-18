@@ -11,7 +11,7 @@ data class Reservation(
     @SerializedName("offer")
     val offer: Int,
     @SerializedName("payment_status")
-    val paymentStatus: Any,
+    val paymentStatus: Any? = null,
     @SerializedName("queue_number")
     val queueNumber: Int,
     @SerializedName("status")

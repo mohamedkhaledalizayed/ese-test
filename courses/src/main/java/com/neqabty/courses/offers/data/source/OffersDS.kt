@@ -9,7 +9,13 @@ import javax.inject.Inject
 class OffersDS @Inject constructor(private val offersApi: OffersApi) {
     fun getOffers(): Flow<List<OfferModel>>{
         return flow {
-            emit(offersApi.getOffers())
+            emit(offersApi.getOffers().offers)
+        }
+    }
+
+    fun getCourseOffers(courseId:Int): Flow<List<OfferModel>>{
+        return flow {
+            emit(offersApi.getCourseOffers("json",courseId).offers)
         }
     }
 }
