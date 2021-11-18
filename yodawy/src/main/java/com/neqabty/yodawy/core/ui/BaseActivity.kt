@@ -16,6 +16,7 @@ import androidx.viewbinding.ViewBinding
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.modules.CartActivity
+import com.neqabty.yodawy.modules.products.presentation.view.productscreen.getChildrenCounter
 
 abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
 
@@ -54,7 +55,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
     }
 
     private fun getCartCounter(): String{
-        return Math.max(Constants.cartItems.size, Constants.imageList.size).toString()
+        return Math.max(Constants.cartItems.getChildrenCounter(), Constants.imageList.size).toString()
     }
 
     //region Alerts//

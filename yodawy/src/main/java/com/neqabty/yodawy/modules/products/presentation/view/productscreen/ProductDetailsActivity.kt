@@ -155,3 +155,12 @@ fun MutableList<Pair<ProductEntity, Int>>.addOrIncrement(productItem: ProductEnt
     if (index == -1)
         this.add(Pair(productItem, 1))
 }
+
+
+fun MutableList<Pair<ProductEntity, Int>>.getChildrenCounter(): Int {
+    var count = 0
+    this.forEach {
+            productPair: Pair<ProductEntity, Int> -> count += productPair.first.quantity
+    }
+    return count
+}
