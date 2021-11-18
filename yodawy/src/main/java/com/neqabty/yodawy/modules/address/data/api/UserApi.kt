@@ -12,5 +12,5 @@ interface UserApi {
     suspend fun getUser(@Body body:GetUserRequestBody): Response<UserModel>
 
     @POST("address/addaddress")
-    suspend fun addAddress(@Body body:AddAddressRequestBody): Response<AddAddressModel>
+    suspend fun addAddress(@Body body:AddAddressRequestBody): Response<AddressResponse>
 }

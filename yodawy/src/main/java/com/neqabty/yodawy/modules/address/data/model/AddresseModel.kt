@@ -18,6 +18,8 @@ data class AddresseModel(
     val geoLocationModel: GeoLocationModel,
     @SerializedName("Id")
     val id: String,
+    @SerializedName("signature")
+    val signature: String,
     @SerializedName("Landmark")
     val landmark: String
 )

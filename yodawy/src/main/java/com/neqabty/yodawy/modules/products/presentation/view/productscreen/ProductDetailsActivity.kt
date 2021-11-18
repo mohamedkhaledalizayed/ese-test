@@ -1,26 +1,166 @@
 package com.neqabty.yodawy.modules.products.presentation.view.productscreen
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.FrameLayout
-import android.widget.ImageView
-import androidx.appcompat.widget.Toolbar
+import android.view.View
+import androidx.appcompat.app.AlertDialog
 import com.neqabty.yodawy.R
-import com.neqabty.yodawy.modules.CartActivity
+import com.neqabty.yodawy.core.data.Constants.cartItems
+import com.neqabty.yodawy.core.data.Constants.imageList
+import com.neqabty.yodawy.core.ui.BaseActivity
+import com.neqabty.yodawy.databinding.ActivityProductDetailsBinding
+import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 
-class ProductDetailsActivity : AppCompatActivity() {
+class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
 
-    private lateinit var toolbar: Toolbar
+    override fun getViewBinding() = ActivityProductDetailsBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product_details)
+        setContentView(binding.root)
 
-        toolbar = findViewById<Toolbar>(R.id.product_custom_toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.elevation = 0.0f
-        toolbar.findViewById<ImageView>(R.id.back_btn).setOnClickListener { finish() }
-        toolbar.findViewById<FrameLayout>(R.id.cart).setOnClickListener { startActivity(Intent(this, CartActivity::class.java)) }
+        val productItem = intent.extras?.getParcelable<ProductEntity>("product")!!
 
+        setupToolbar(title = productItem.name)
+
+        // render add btn || + - btn
+        if (cartItems.find { it.first.id == productItem.id } != null) {
+            binding.increaseDecrease.visibility = View.VISIBLE
+            binding.add.visibility = View.GONE
+        } else {
+            binding.increaseDecrease.visibility = View.GONE
+            binding.add.visibility = View.VISIBLE
+        }
+
+
+        binding.add.setOnClickListener {
+            if(productItem.isLimitedAvailability){
+                showLimitedAvailabilityAlert(okCallback = {addBtnLogic(productItem)})
+            }else{
+                addBtnLogic(productItem)
+            }
+        }
+        getIndexInProductsPair(productItem)
+        binding.increase.setOnClickListener {
+            val index = getIndexInProductsPair(productItem)
+            cartItems[index].first.quantity += 1
+            binding.quantity.text = "${cartItems[index].first.quantity}"
+        }
+
+        binding.decrease.setOnClickListener {
+            val index = getIndexInProductsPair(productItem)
+            if (cartItems[index].first.quantity > 1){
+                cartItems[index].first.quantity -= 1
+                binding.quantity.text = "${cartItems[index].first.quantity}"
+            }else{
+                //remove this from list
+                cartItems.removeAt(index)
+                binding.increaseDecrease.visibility = View.GONE
+                binding.add.visibility = View.VISIBLE
+            }
+
+        }
+
+        Picasso.get()
+            .load(productItem.image)
+            .into(binding.medicationImage, object : Callback {
+                override fun onSuccess() {
+                    binding.imageProgress.hide()
+                }
+
+                override fun onError(e: Exception?) {
+                    binding.imageProgress.hide()
+                }
+            })
+
+        binding.medicationTitle.text = productItem.name
+        binding.medicationPrice.text = "EGP ${productItem.salePrice.toString()}"
+
+        when {
+            productItem.outOfStock -> {
+                binding.medicationStatus.visibility = View.INVISIBLE
+                binding.deliveryTime.visibility = View.GONE
+                binding.add.text = "Out of Stock"
+                binding.add.setBackgroundColor(resources.getColor(R.color.gray))
+                binding.add.isEnabled = false
+            }
+            productItem.isLimitedAvailability -> {
+                binding.medicationStatus.setImageResource(R.drawable.exclamation)
+                binding.deliveryTime.text = "May not be available"
+            }
+            else -> {
+
+            }
+        }
     }
+
+    private fun addBtnLogic(productItem: ProductEntity){
+        if (imageList.isNotEmpty()){
+            showClearCartConfirmationAlert(okCallback = {
+                imageList.clear()
+                addToCart(productItem)
+            })
+        }else{
+            addToCart(productItem)
+        }
+    }
+
+    private fun addToCart(productItem: ProductEntity){
+        cartItems.addOrIncrement(productItem)
+        binding.increaseDecrease.visibility = View.VISIBLE
+        binding.add.visibility = View.GONE
+    }
+
+    private fun getIndexInProductsPair(productItem: ProductEntity): Int{
+        var index = 0
+        cartItems.mapIndexed{ ind, item ->
+            if (item.first.id == productItem.id){
+                index = ind
+                binding.increaseDecrease.visibility = View.VISIBLE
+                binding.add.visibility = View.GONE
+                binding.quantity.text = "${item.first.quantity}"
+            }
+        }
+        return index
+    }
+
+
+    private fun showLimitedAvailabilityAlert(okCallback: () -> Unit = {}, cancelCallback: () -> Unit = {}) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(getString(R.string.low_stock_alert))
+        builder.setCancelable(false)
+        builder.setPositiveButton(getString(R.string.alert_ok)) { dialog, which ->
+            okCallback.invoke()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton(getString(R.string.alert_cancel)) { dialog, which ->
+            cancelCallback.invoke()
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+}
+
+fun MutableList<Pair<ProductEntity, Int>>.addOrIncrement(productItem: ProductEntity) {
+    var index = -1
+    this.mapIndexed { ind, productEntity ->//TODO fix this
+        if (productEntity.first.id == productItem.id) {
+            cartItems[ind].first.quantity += 1
+            index = ind
+        } else
+            productEntity
+    }
+    if (index == -1)
+        this.add(Pair(productItem, 1))
+}
+
+
+fun MutableList<Pair<ProductEntity, Int>>.getChildrenCounter(): Int {
+    var count = 0
+    this.forEach {
+            productPair: Pair<ProductEntity, Int> -> count += productPair.first.quantity
+    }
+    return count
 }

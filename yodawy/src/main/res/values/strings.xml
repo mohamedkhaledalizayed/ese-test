@@ -1,6 +1,8 @@
 <resources>
-    <string name="my_app_name" translatable="false">Yodawy</string>
+    <string name="my_app_name" translatable="false">يداوي</string>
     <string name="add_new_address">إضافة عنوان</string>
+    <string name="selected_address">العنوان</string>
+    <string name="addresses">اختار عنوان</string>
     <string name="street">الشارع</string>
     <string name="add_street_name">ادخل اسم الشارع</string>
     <string name="building">المبنى</string>
@@ -14,27 +16,48 @@
     <string name="nickname">Nickname</string>
     <string name="home_office_etc">Home, Office, etc.</string>
     <string name="save_address">حفظ</string>
-    <string name="order_via_n_prescription">Order via \n Prescription</string>
-    <string name="find_n_medications">Find \n Medications</string>
-    <string name="your_orders">Your Orders</string>
+    <string name="order_via_n_prescription">الطلب \n بالروشتة</string>
+    <string name="find_n_medications">ابحث عن \n دواء</string>
+    <string name="orders_history">طلباتك</string>
+    <string name="cart">عربة التسوق</string>
+    <string name="search">ابحث</string>
     <string name="low_stock">Low Stock</string>
+    <string name="low_stock_alert">ربما يكون هذا المنتج متوفراً للتوصيل في وقت قريب</string>
     <string name="pravotin_100mg_sach_g_medication_name">PRAVOTIN (100MG SACH) G. medication name</string>
     <string name="_14_sachets">14 Sachets</string>
     <string name="egp_85_00">EGP 85.00</string>
-    <string name="delivery_within_60_minutes">Delivery within 60 minutes</string>
+    <string name="delivery_within_60_minutes">التوصيل خلال 60 دقيقة</string>
     <string name="delivery_time_depends_on_availability">Delivery time depends on availability</string>
     <string name="_6_photos_added">6 photos added</string>
     <string name="prices_may_vary_across_pharmacies">Prices may vary across pharmacies</string>
-    <string name="go_to_checkout">GO TO CHECKOUT</string>
+    <string name="go_to_checkout">تاكيد الطلب</string>
     <string name="add_note">Add Note</string>
-    <string name="place_order">PLACE ORDER</string>
-    <string name="delivery_time">Delivery Time</string>
-    <string name="payment">Payment</string>
+    <string name="place_order">إضافة طلب</string>
+    <string name="delivery_time">وقت التوصيل</string>
+    <string name="payment">الدفع</string>
     <string name="subtotal">Subtotal</string>
     <string name="to_be_confirmed">To be confirmed</string>
-    <string name="add">Add</string>
-    <string name="delivery_fees">Delivery Fees</string>
-    <string name="up_to_egp_10_00">Up to EGP 10.00</string>
-    <string name="total">Total</string>
+    <string name="add">إضافة</string>
+    <string name="delivery_fees">مصاريف التوصيل</string>
+    <string name="for_free">مجاناً</string>
+    <string name="total">المبلغ الاجمالي</string>
     <string name="order_is_canceled">Order is Canceled</string>
+    <string name="order_is_placed">لقد تم تأكيد طلبك بنجاح</string>
+    <string name="nickname_">تصنيف العقار</string>
+    <string name="location">من فضلك حدد موقعك</string>
+    <string name="product_details">تفاصيل المنتج</string>
+    <string name="will_clear_cart">سيتم مسح محتويات عربة التسوق</string>
+    <string name="alert_title">تنبيه</string>
+    <string name="alert_cancel">إلغاء</string>
+    <string name="alert_ok">موافق</string>
+    <string name="cart_empty">عربة التسوق فارغة</string>
+    <string name="expoler_yodawy">اكتشف يداوى و ابدأ التسوق</string>
+    <string name="cash">نقدى</string>
+    <string name="order_number">رقم الطلب</string>
+    <string name="order_date">تاريخ الطلب</string>
+    <string name="address">العنوان</string>
+    <string name="api_key">AIzaSyCuN7-pcKEzjwp02AkK-lNlhhjcGnCkm_M</string>
+    <string name="select_location">تحديد</string>
+    <string name="order_details">تفاصيل الطلب</string>
+
 </resources>
