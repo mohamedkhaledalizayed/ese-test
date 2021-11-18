@@ -72,11 +72,11 @@ class AppModule {
     @Provides
     @Named(DI.authorized)
     fun provideOkHttpClient(httpLoggingInterceptor :HttpLoggingInterceptor): OkHttpClient {
-//        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-//                .add(
-//                        BuildConfig.URL,
-//                        "sha256/Zi7WyG7/3sg3UCgKI7P8BcO8Lz/5zMHcPmyGZGAw4+c="
-//                ).build()
+        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+                .add(
+                        BuildConfig.URL,
+                        "sha256/Zi7WyG7/3sg3UCgKI7P8BcO8Lz/5zMHcPmyGZGAw4+c="
+                ).build()
 
         return OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.MINUTES)
@@ -96,7 +96,7 @@ class AppModule {
                     }
                 })
                 .addInterceptor(httpLoggingInterceptor) // TODO Interceptor
-//                .certificatePinner(certificatePinner)
+                .certificatePinner(certificatePinner)
                 .build()
     }
 
