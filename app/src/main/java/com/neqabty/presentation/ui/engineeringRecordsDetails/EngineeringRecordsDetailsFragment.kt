@@ -32,7 +32,6 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.entities.RegisteryUI
 import com.neqabty.presentation.util.ImageUtils
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.engineering_records_details_fragment.*

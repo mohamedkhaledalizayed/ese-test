@@ -24,7 +24,6 @@ import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.ui.ads.AdsActivity
 import com.neqabty.presentation.ui.common.PdfCreatorScreen
 import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsAdapter
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_renew_fragment.*

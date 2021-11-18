@@ -22,7 +22,6 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.entities.AreaUI
 import com.neqabty.presentation.entities.GovernUI
 import com.neqabty.presentation.ui.news.NewsAdapter
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.wheel_news_fragment.*

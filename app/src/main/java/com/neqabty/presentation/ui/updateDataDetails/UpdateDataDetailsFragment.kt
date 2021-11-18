@@ -30,7 +30,6 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.entities.InquireUpdateUserDataUI
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.util.ImageUtils
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.update_data_details_fragment.*

@@ -17,7 +17,6 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.entities.SyndicateUI
 import com.neqabty.presentation.ui.subsyndicates.SubSyndicatesFragment
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

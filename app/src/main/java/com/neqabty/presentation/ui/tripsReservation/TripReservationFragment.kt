@@ -40,7 +40,6 @@ import com.neqabty.presentation.ui.addCompanion.AddCompanionFragment
 import com.neqabty.presentation.ui.common.PhotosAdapter
 import com.neqabty.presentation.util.DisplayMetrics
 import com.neqabty.presentation.util.ImageUtils
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_main_fragment.*

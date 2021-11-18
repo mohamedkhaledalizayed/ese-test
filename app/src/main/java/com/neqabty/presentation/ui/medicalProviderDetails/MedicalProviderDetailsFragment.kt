@@ -18,7 +18,6 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.entities.ProviderUI
 import com.neqabty.presentation.ui.phones.PhonesAdapter
 import com.neqabty.presentation.ui.phones.PhonesFragment
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.presentation.util.openMap
 import dagger.hilt.android.AndroidEntryPoint

@@ -19,11 +19,13 @@ import com.neqabty.databinding.AddCompanionFragmentBinding
 import com.neqabty.domain.entities.PersonEntity
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.util.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.add_companion_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class AddCompanionFragment : DialogFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)

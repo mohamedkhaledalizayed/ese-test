@@ -49,7 +49,7 @@ android {
         config {
             keyAlias 'neqabty'
             keyPassword secret
-            storeFile file('D:/Work/Mobile/Neqabty/NeQabty/keyStore.jks')
+            storeFile file('D:/Android/workspace/NeQabty/keyStore.jks')
             storePassword secret
         }
     }
@@ -216,7 +216,6 @@ dependencies {
 
     implementation deps.mastercard
     implementation files('libs/cowpaysdk.aar')
-    implementation project(':features:ads')
     implementation project(':wheel')
     implementation project(':mobilepaymentsdktest')
     implementation project(path: ':pdfcreator')

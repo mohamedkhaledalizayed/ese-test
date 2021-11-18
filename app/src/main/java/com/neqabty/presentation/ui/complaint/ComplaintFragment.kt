@@ -35,7 +35,6 @@ import com.neqabty.presentation.entities.ComplaintTypeUI
 import com.neqabty.presentation.entities.PhotoUI
 import com.neqabty.presentation.ui.common.PhotosAdapter
 import com.neqabty.presentation.util.ImageUtils
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.presentation.util.call
 import dagger.hilt.android.AndroidEntryPoint
