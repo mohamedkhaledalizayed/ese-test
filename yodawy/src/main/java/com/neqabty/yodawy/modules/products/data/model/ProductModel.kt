@@ -9,7 +9,7 @@ data class ProductModel(
     @SerializedName("id")
     val id: String,
     @SerializedName("image")
-    val image: Any,
+    val image: String?,
     @SerializedName("isLimitedAvailability")
     val isLimitedAvailability: Boolean,
     @SerializedName("isMedication")
@@ -19,7 +19,7 @@ data class ProductModel(
     @SerializedName("outOfStock")
     val outOfStock: Boolean,
     @SerializedName("regularPrice")
-    val regularPrice: Int,
+    val regularPrice: Float,
     @SerializedName("salePrice")
-    val salePrice: Int
+    val salePrice: Float
 )

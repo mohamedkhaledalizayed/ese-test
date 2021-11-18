@@ -33,9 +33,10 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
-//        viewHolder.binding.mainAddress.text = item.address
+        viewHolder.binding.mainAddress.text = item.addressName
+        viewHolder.binding.addressDetails.text = "شارع ${item.address}, مبنى رقم ${item.buildingNumber}, رقم الطابق ${item.floor}, شقة رقم ${item.apt}"
         viewHolder.binding.layoutItem.setOnClickListener {
-            onItemClickListener?.setOnItemClickListener(position)
+            onItemClickListener?.setOnItemClickListener(item)
         }
 
         if (position == itemCount - 1){
@@ -48,6 +49,7 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
     override fun getItemCount() = items.size
 
     fun submitList(newItems: List<AddressEntity>?) {
+        clear()
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()
@@ -60,7 +62,7 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    interface OnItemClickListener { fun setOnItemClickListener(itemId: Int) }
+    interface OnItemClickListener { fun setOnItemClickListener(addressItem: AddressEntity) }
 
     class ViewHolder(val binding: AddressLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root)

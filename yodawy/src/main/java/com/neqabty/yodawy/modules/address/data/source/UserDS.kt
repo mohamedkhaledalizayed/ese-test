@@ -14,11 +14,11 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class UserDS @Inject constructor(private val userApi: UserApi) {
-    suspend fun getUser(body: GetUserRequestBody): Flow<UserModel> {
+    fun getUser(body: GetUserRequestBody): Flow<UserModel> {
         return flow { emit(userApi.getUser(body).dataModel) }
     }
 
-    suspend fun addAddress(body: AddAddressRequestBody): Flow<AddAddressModel>{
+    fun addAddress(body: AddAddressRequestBody): Flow<AddressResponse>{
         return flow { emit(userApi.addAddress(body).dataModel) }
     }
 }

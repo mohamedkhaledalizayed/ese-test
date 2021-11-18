@@ -25,6 +25,7 @@ private fun AddresseModel.toAddressEntity(): AddressEntity {
         longitude = this.geoLocationModel.longitude,
         latitude = this.geoLocationModel.latitude,
         landmark = this.landmark,
+        signature = this.signature,
         adressId = this.id
     )
 }

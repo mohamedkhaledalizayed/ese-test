@@ -1,50 +1,76 @@
 package com.neqabty.yodawy.modules.address.presentation.view.adressscreen
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
+import com.neqabty.yodawy.core.utils.Status.ERROR
+import com.neqabty.yodawy.core.utils.Status.LOADING
+import com.neqabty.yodawy.core.utils.Status.SUCCESS
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.neqabty.yodawy.R
-import com.neqabty.yodawy.core.utils.LocaleHelper
+import com.neqabty.yodawy.core.data.Constants
+import com.neqabty.yodawy.databinding.ActivityAddressesBinding
 import com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen.AddAddressActivity
-import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
-import com.vlonjatg.progressactivity.ProgressRelativeLayout
+import com.neqabty.yodawy.core.ui.BaseActivity
+import com.neqabty.yodawy.modules.CheckOutActivity
+import com.neqabty.yodawy.modules.SelectLocationActivity
+import com.neqabty.yodawy.modules.address.domain.entity.AddressEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddressesActivity : AppCompatActivity() {
+class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
     private val addressViewModel: AddressViewModel by viewModels()
     private val mAdapter = AddressAdapter()
+
+    override fun getViewBinding() = ActivityAddressesBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_addresses)
+        setContentView(binding.root)
 
-//        supportActionBar!!.title = "العناوين"
-        addressViewModel.getUser("3608662","01090100670")
-        findViewById<ProgressRelativeLayout>(R.id.progressActivity).showLoading()
+        setupToolbar(titleResId = R.string.addresses)
+
+
         addressViewModel.user.observe(this){
-            findViewById<ProgressRelativeLayout>(R.id.progressActivity).showContent()
-            mAdapter.submitList(it.addresses)
+
+            it?.let { resource ->
+                when (resource.status) {
+                    LOADING -> {
+                        binding.progressActivity.showLoading()
+                    }
+                    SUCCESS -> {
+                        if (resource.data?.addresses!!.isEmpty()){
+                            binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "لا يوجد عناوين", "برجاء إضافة عنوان")
+                        }else{
+                            Constants.yodawyId = resource.data.yodawyId
+                            binding.progressActivity.showContent()
+                            mAdapter.submitList(resource.data.addresses)
+                        }
+                    }
+                    ERROR -> {
+                        binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "خطا", resource.message)
+                    }
+                }
+            }
+
         }
-        findViewById<RecyclerView>(R.id.address_recycler).adapter = mAdapter
+        binding.addressRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             AddressAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(id: Int) {
-                startActivity(Intent(this@AddressesActivity, HomeActivity::class.java))
+            override fun setOnItemClickListener(addressItem: AddressEntity) {
+                Constants.selectedAddress = addressItem
+
+                startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
+                finish()
             }
         }
 
-        findViewById<FloatingActionButton>(R.id.add_address).setOnClickListener {
-            startActivity(Intent(this@AddressesActivity, AddAddressActivity::class.java))
+        binding.addAddress.setOnClickListener {
+            startActivity(Intent(this@AddressesActivity, SelectLocationActivity::class.java))
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        LocaleHelper().setLocale(this, "ar")
+    override fun onResume() {
+        super.onResume()
+        addressViewModel.getUser(Constants.userNumber, Constants.mobileNumber)
     }
 }

@@ -9,5 +9,6 @@ data class AddressEntity(
     val latitude: Double,
     val longitude: Double,
     val adressId: String,
+    val signature: String,
     val landmark: String
 )

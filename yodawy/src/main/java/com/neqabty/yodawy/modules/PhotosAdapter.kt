@@ -2,17 +2,20 @@ package com.neqabty.yodawy.modules
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.databinding.PhotoLayoutItemBinding
 
 
 class PhotosAdapter (private val context: Context) : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
 
-    private val items: MutableList<Medication> = ArrayList()
+    private val items: MutableList<Uri> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -33,12 +36,17 @@ class PhotosAdapter (private val context: Context) : RecyclerView.Adapter<Photos
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        viewHolder.binding.imageView.setImageURI(items[position])
+        viewHolder.binding.deleteImage.visibility = View.VISIBLE
 
+
+        viewHolder.binding.deleteImage.setOnClickListener { onItemClickListener?.setOnItemClickListener(position) }
     }
 
-    override fun getItemCount() = 5
+    override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<Medication>?) {
+    fun submitList(newItems: List<Uri>?) {
+        clear()
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()

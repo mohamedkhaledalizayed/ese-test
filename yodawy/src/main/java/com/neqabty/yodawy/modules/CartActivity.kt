@@ -1,65 +1,78 @@
 package com.neqabty.yodawy.modules
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants.cartItems
+import com.neqabty.yodawy.core.data.Constants.imageList
+import com.neqabty.yodawy.core.ui.BaseActivity
+import com.neqabty.yodawy.databinding.ActivityCartBinding
+import com.neqabty.yodawy.modules.address.presentation.view.adressscreen.AddressesActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-class CartActivity : AppCompatActivity() {
-    private var list: MutableList<Medication> = ArrayList<Medication>()
+@AndroidEntryPoint
+class CartActivity : BaseActivity<ActivityCartBinding>() {
+
+    override fun getViewBinding() = ActivityCartBinding.inflate(layoutInflater)
     private val mAdapter = CartAdapter()
     private lateinit var photoAdapter: PhotosAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cart)
+        setContentView(binding.root)
 
+        setupToolbar(titleResId = R.string.cart)
 
         photoAdapter = PhotosAdapter(this)
-        findViewById<RecyclerView>(R.id.photos_recycler).adapter = photoAdapter
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Your Cart"
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.back)
-        findViewById<RecyclerView>(R.id.cart_recycler).adapter = mAdapter
+        binding.photosRecycler.adapter = photoAdapter
+        photoAdapter.onItemClickListener = object :
+            PhotosAdapter.OnItemClickListener {
+            override fun setOnItemClickListener(id: Int) {
+                imageList.removeAt(id)
+                updateView()
+            }
+        }
+
+        binding.cartRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             CartAdapter.OnItemClickListener {
             override fun setOnItemClickListener(id: Int) {
 
             }
+
+            override fun notifyUi() {
+                updateView()
+            }
         }
-        setDate()
+
+        updateView()
     }
 
-    private fun setDate(){
-        var medication = Medication("name", 1, "image")
-        list.add(medication)
-        medication = Medication("name", 1, "image")
-        list.add(medication)
-        medication = Medication("name", 2, "image")
-        list.add(medication)
-        mAdapter.submitList(list)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.add_note_menu,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-        }else if (item.itemId == R.id.add_note){
-
+    private fun updateView() {
+        ///// checkout btn and Empty view
+        if (cartItems.isEmpty() && imageList.isEmpty()){
+            binding.clEmptyCart.visibility = View.VISIBLE
+            binding.checkout.visibility = View.GONE
+        }else{
+            binding.clEmptyCart.visibility = View.GONE
+            binding.checkout.visibility = View.VISIBLE
         }
-        return super.onOptionsItemSelected(item)
+
+        /////Images recyclerView
+        if (imageList.isNotEmpty()) {
+            binding.llImagesHolder.visibility = View.VISIBLE
+            photoAdapter.submitList(imageList)
+        }
+
+        /////Products recyclerView
+        if(cartItems.isNotEmpty()) {
+            mAdapter.submitList(cartItems)
+        }
     }
 
     fun checkOut(view: View) {
-        startActivity(Intent(this, CheckOutActivity::class.java))
+        startActivity(Intent(this, AddressesActivity::class.java))
     }
 
 }
