@@ -16,8 +16,14 @@ import com.neqabty.MainActivity
 import com.neqabty.R
 import com.neqabty.presentation.entities.AdUI
 import com.neqabty.presentation.ui.ads.AdsActivity
+import com.neqabty.presentation.util.PreferencesHelper
+import javax.inject.Inject
 
 open class BaseFragment : Fragment() {
+
+    @Inject
+    lateinit var sharedPref: PreferencesHelper
+
     var builder: AlertDialog.Builder? = null
     var dialog: AlertDialog? = null
     lateinit var llSuperProgressbar: LinearLayout

@@ -1,11 +1,20 @@
 package com.neqabty.presentation.util
 
-import android.content.Context
-import android.preference.PreferenceManager
-import com.neqabty.presentation.common.Constants
+import android.content.SharedPreferences
+import javax.inject.Inject
 
-class PreferencesHelper(context: Context) {
+class PreferencesHelper @Inject constructor(
+    private val preferences: SharedPreferences
+) {
+
+    init {
+        instance = this
+    }
+
     companion object {
+        @get:Synchronized
+        lateinit var instance: PreferencesHelper
+
         const val DEVELOP_MODE = false
         private const val IS_INTRO_SKIPPED = "data.source.prefs.IS_INTRO_SKIPPED"
         private const val IS_FORCE_LOGOUT = "data.source.prefs.IS_FORCE_SIGNOUT"
@@ -22,45 +31,56 @@ class PreferencesHelper(context: Context) {
         private const val USER_TYPE = "data.source.prefs.USER_TYPE"
     }
 
-    private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-
-    var isNotificationsEnabled = preferences.getBoolean(IS_NOTIFICATIONS_ENABLED, true)
+    var isNotificationsEnabled
+        get() = preferences.getBoolean(IS_NOTIFICATIONS_ENABLED, true)
         set(value) = preferences.edit().putBoolean(IS_NOTIFICATIONS_ENABLED, value).apply()
 
-    var isIntroSkipped = preferences.getBoolean(IS_INTRO_SKIPPED, false)
+    var isIntroSkipped
+        get() = preferences.getBoolean(IS_INTRO_SKIPPED, false)
         set(value) = preferences.edit().putBoolean(IS_INTRO_SKIPPED, value).apply()
 
-    var isForceLogout = preferences.getBoolean(IS_FORCE_LOGOUT, true)
+    var isForceLogout
+        get() = preferences.getBoolean(IS_FORCE_LOGOUT, true)
         set(value) = preferences.edit().putBoolean(IS_FORCE_LOGOUT, value).apply()
 
-    var mainSyndicate = preferences.getInt(MAIN_SYNDICATE, 0)
+    var mainSyndicate
+        get() = preferences.getInt(MAIN_SYNDICATE, 0)
         set(value) = preferences.edit().putInt(MAIN_SYNDICATE, value).apply()
 
-    var subSyndicate = preferences.getInt(SUB_SYNDICATE, 0)
+    var subSyndicate
+        get() = preferences.getInt(SUB_SYNDICATE, 0)
         set(value) = preferences.edit().putInt(SUB_SYNDICATE, value).apply()
 
-    var mobile = preferences.getString(MOBILE, "")!!
+    var mobile
+        get() = preferences.getString(MOBILE, "")!!
         set(value) = preferences.edit().putString(MOBILE, value).apply()
 
-    var token = preferences.getString(TOKEN, "")!!
+    var token
+        get() = preferences.getString(TOKEN, "")!!
         set(value) = preferences.edit().putString(TOKEN, value).apply()
 
-    var jwt = preferences.getString(JWT, "")
+    var jwt
+        get() = preferences.getString(JWT, "")
         set(value) = preferences.edit().putString(JWT, value).apply()
 
-    var isRegistered = preferences.getBoolean(IS_REGISTERED, false)
+    var isRegistered
+        get() = preferences.getBoolean(IS_REGISTERED, false)
         set(value) = preferences.edit().putBoolean(IS_REGISTERED, value).apply()
 
-    var user = preferences.getString(USER, "")!!
+    var user
+        get() = preferences.getString(USER, "")!!
         set(value) = preferences.edit().putString(USER, value).apply()
 
-    var name = preferences.getString(NAME, "")!!
+    var name
+        get() = preferences.getString(NAME, "")!!
         set(value) = preferences.edit().putString(NAME, value).apply()
 
-    var notificationsCount = preferences.getInt(NOTIFICATION_COUNT, 0)
+    var notificationsCount
+        get() = preferences.getInt(NOTIFICATION_COUNT, 0)
         set(value) = preferences.edit().putInt(NOTIFICATION_COUNT, value).apply()
 
-    var userType = preferences.getString(USER_TYPE, "")
+    var userType
+        get() = preferences.getString(USER_TYPE, "")
         set(value) = preferences.edit().putString(USER_TYPE, value).apply()
 
     fun isSyndicateChosen(): Boolean {

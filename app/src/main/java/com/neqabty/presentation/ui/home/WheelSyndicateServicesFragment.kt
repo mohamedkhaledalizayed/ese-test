@@ -54,7 +54,7 @@ class WheelSyndicateServicesFragment : BaseFragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
 
         bGo.setOnClickListener {
-            if (PreferencesHelper(requireContext()).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.updateDataVerificationFragment)
             else {
                     val bundle: Bundle = Bundle()

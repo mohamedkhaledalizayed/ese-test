@@ -77,13 +77,13 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         claimingViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                claimingViewModel.validateUser(PreferencesHelper(requireContext()).user)
+                claimingViewModel.validateUser(sharedPref.user)
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
             }, message = error?.message)
         })
-        claimingViewModel.validateUser(PreferencesHelper(requireContext()).user)
+        claimingViewModel.validateUser(sharedPref.user)
     }
 
     private fun handleViewState(state: ClaimingViewState) {
@@ -102,11 +102,10 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
         if (state.member != null && !isValid) {
             when (state.member?.code) {
                 0 -> {
-                    val prefs = PreferencesHelper(requireContext())
                     llSuperProgressbar.visibility = View.VISIBLE
                     memberName = state.member!!.engineerName
                     isValid = true
-                    claimingViewModel.getAllContent1(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
+                    claimingViewModel.getAllContent1(sharedPref.mobile, sharedPref.user)
                     state.member = null
                 }
                 else -> {
@@ -135,8 +134,8 @@ class ClaimingStep1Fragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        if (PreferencesHelper(requireContext()).user.isNotEmpty()) {
-            binding.edNumber.setText(PreferencesHelper(requireContext()).user)
+        if (sharedPref.user.isNotEmpty()) {
+            binding.edNumber.setText(sharedPref.user)
             binding.edNumber.isEnabled = false
             binding.edName.setText(memberName)
             binding.edName.isEnabled = false

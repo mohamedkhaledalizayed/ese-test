@@ -83,7 +83,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         inquiryDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                inquiryDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
+                inquiryDetailsViewModel.paymentInquiry(sharedPref.mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
@@ -130,7 +130,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         bPay.setOnClickListener {
             llSuperProgressbar.visibility = View.VISIBLE
 //            createPayment()
-            inquiryDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
+            inquiryDetailsViewModel.paymentInquiry(sharedPref.mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
         }
     }
 
@@ -244,7 +244,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
         //user data
         intent.putExtra(CowpayConstantKeys.Description, medicalRenewalPayment.paymentItem?.amount.toString())
         intent.putExtra(CowpayConstantKeys.CustomerName, params.number)
-        intent.putExtra(CowpayConstantKeys.CustomerMobile, PreferencesHelper(requireContext()).mobile)
+        intent.putExtra(CowpayConstantKeys.CustomerMobile, sharedPref.mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
         //user id
         intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, medicalRenewalPayment.paymentItem?.paymentRequestNumber)
@@ -294,13 +294,13 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Channel
 
                 paymentCreationRequest.PaymentMechanism.Channel.Email = "xxxx@xx.xx"
-                paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = PreferencesHelper(requireContext()).mobile
+                paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = sharedPref.mobile
             } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_wallet)) {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.MobileWallet
-                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = PreferencesHelper(requireContext()).mobile
+                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = sharedPref.mobile
             } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_meeza)) {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Meeza
-                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = PreferencesHelper(requireContext()).mobile
+                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = sharedPref.mobile
             }
 
 //            paymentCreationRequest.RequestExpiryDate = memberItem.paymentCreationRequest?.requestExpiryDate
@@ -347,7 +347,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.INVISIBLE
                 showConnectionAlert(requireContext(), retryCallback = {
                     llContent.visibility = View.INVISIBLE
-                    inquiryDetailsViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
+                    inquiryDetailsViewModel.paymentInquiry(sharedPref.mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
                 }, cancelCallback = {
                     navController().navigateUp()
                 })

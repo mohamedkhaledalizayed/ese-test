@@ -53,7 +53,7 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
 
         bMedical.setOnClickListener { navController().navigate(R.id.chooseAreaFragment) }
         bClaiming.setOnClickListener {
-            if (PreferencesHelper(requireContext()).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.claimingFragment)
             else {
                     val bundle: Bundle = Bundle()
@@ -62,7 +62,7 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
             }
         }
         bRenew.setOnClickListener {
-            if (PreferencesHelper(requireContext()).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.medicalRenewFragment)
             else {
                     val bundle: Bundle = Bundle()
@@ -73,7 +73,7 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
         bComplaints.setOnClickListener {
 //            Toast.makeText(requireContext(), getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
 
-            if (PreferencesHelper(requireContext()).isRegistered)
+            if (sharedPref.isRegistered)
                     navController().navigate(R.id.complaintsFragment)
             else {
                     val bundle: Bundle = Bundle()
@@ -82,7 +82,7 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
                 }
             }
         bOnlinePharmacy.setOnClickListener{
-            if (PreferencesHelper(requireContext()).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.onlinePharmacyFragment)
             else {
                 val bundle: Bundle = Bundle()
@@ -91,7 +91,7 @@ class WheelMedicalFragment : BaseFragment(), Injectable {
             }
         }
         bMedicalLetters.setOnClickListener{
-            if (PreferencesHelper(requireContext()).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.medicalLettersFragment)
             else {
                 val bundle: Bundle = Bundle()

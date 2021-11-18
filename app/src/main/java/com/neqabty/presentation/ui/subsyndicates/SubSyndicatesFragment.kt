@@ -25,6 +25,9 @@ import javax.inject.Inject
 
 class SubSyndicatesFragment : DialogFragment(), Injectable {
     @Inject
+    lateinit var sharedPref: PreferencesHelper
+
+    @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
@@ -66,8 +69,8 @@ class SubSyndicatesFragment : DialogFragment(), Injectable {
         initializeViews()
 
         val adapter = com.neqabty.presentation.ui.subsyndicates.SubSyndicatesAdapter(dataBindingComponent, appExecutors) { subSyndicate ->
-            PreferencesHelper(requireContext()).mainSyndicate = syndicate.id
-            PreferencesHelper(requireContext()).subSyndicate = subSyndicate.id
+            sharedPref.mainSyndicate = syndicate.id
+            sharedPref.subSyndicate = subSyndicate.id
             targetFragment?.onActivityResult(targetRequestCode, 200, null)
             this@SubSyndicatesFragment.dismiss()
         }

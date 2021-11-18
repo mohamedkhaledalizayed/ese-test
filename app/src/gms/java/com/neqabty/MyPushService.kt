@@ -15,13 +15,14 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.util.PreferencesHelper
 
 class MyPushService : FirebaseMessagingService() {
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         sendNotification(remoteMessage)
     }
 
     override fun onNewToken(token: String) {
         token?.let {
-            if(!token.equals(PreferencesHelper(applicationContext).token))
+            if(!token.equals(PreferencesHelper.instance.token))
                 sendRegistrationToServer(token)
         }
     }

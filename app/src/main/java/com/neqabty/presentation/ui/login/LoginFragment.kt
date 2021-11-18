@@ -82,13 +82,12 @@ class LoginFragment : BaseFragment(), Injectable, HasHomeOptionsMenu {
                 state.user = null
                 navController().navigate(LoginFragmentDirections.openLoginWithPasswordFragment(if(ccp.selectedCountryNameCode.equals("EG", true)) ccp.fullNumber.removeRange(0,1) else ccp.fullNumberWithPlus))
             } else if(it.type.equals("visitor")){// visitor
-                PreferencesHelper(requireContext()).mobile = it.mobile
-                PreferencesHelper(requireContext()).userType = it.type
-                PreferencesHelper(requireContext()).jwt = it.jwt
-                Constants.JWT = it.jwt ?: ""
-                PreferencesHelper(requireContext()).mainSyndicate = 5
-                PreferencesHelper(requireContext()).subSyndicate = 0
-                PreferencesHelper(requireContext()).isForceLogout = false
+                sharedPref.mobile = it.mobile
+                sharedPref.userType = it.type
+                sharedPref.jwt = it.jwt
+                sharedPref.mainSyndicate = 5
+                sharedPref.subSyndicate = 0
+                sharedPref.isForceLogout = false
                 state.user = null
                 navController().navigate(LoginFragmentDirections.openHome())
             }

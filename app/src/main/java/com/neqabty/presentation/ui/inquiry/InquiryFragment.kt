@@ -84,14 +84,14 @@ class InquiryFragment : BaseFragment(), Injectable {
     }
 
     fun initializeViews() {
-        if (!PreferencesHelper(requireContext()).user.isNullOrEmpty())
-            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
+        if (!sharedPref.user.isNullOrEmpty())
+            binding.edMemberNumber.setText(sharedPref.user)
 
         renderServices()
         llContent.visibility = View.VISIBLE
         bSend.setOnClickListener {
             if (isDataValid(binding.edMemberNumber.text.toString())) {
-                inquiryViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, binding.edMemberNumber.text.toString(), serviceID.toString())
+                inquiryViewModel.paymentInquiry(sharedPref.mobile, binding.edMemberNumber.text.toString(), serviceID.toString())
             }
         }
     }

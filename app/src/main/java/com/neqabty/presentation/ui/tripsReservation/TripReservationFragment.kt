@@ -118,12 +118,12 @@ class TripReservationFragment : BaseFragment(), Injectable {
         tripReservationViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-//                tripReservationViewModel.paymentInquiry(PreferencesHelper(requireContext()).user)
+//                tripReservationViewModel.paymentInquiry(sharedPref.user)
             }, cancelCallback = {
                 dialog?.dismiss()
             }, message = error?.message)
         })
-//        tripReservationViewModel.paymentInquiry(PreferencesHelper(requireContext()).user)
+//        tripReservationViewModel.paymentInquiry(sharedPref.user)
         initializeViews()
     }
 
@@ -188,8 +188,7 @@ class TripReservationFragment : BaseFragment(), Injectable {
         binding.bConfirmReservation.setOnClickListener {
             if (photosList.size > 0) {
                 reservationRequested = true
-                val prefs = PreferencesHelper(requireContext())
-                tripReservationViewModel.bookTrip(prefs.mainSyndicate, PreferencesHelper(requireContext()).user, prefs.mobile, tripItem.regiments?.get(0)?.tripId!!, regiment.regimentId, regiment.toString() , roomID.toString(), spChildren.selectedItem.toString().toInt(), spChild1.selectedItem?.toString() + "," + spChild2.selectedItem?.toString() + "," + spChild3.selectedItem?.toString(), PreferencesHelper(requireContext()).name, companionsList.toList(), photosList.size, companionsList.size,
+                tripReservationViewModel.bookTrip(sharedPref.mainSyndicate, sharedPref.user, sharedPref.mobile, tripItem.regiments?.get(0)?.tripId!!, regiment.regimentId, regiment.toString() , roomID.toString(), spChildren.selectedItem.toString().toInt(), spChild1.selectedItem?.toString() + "," + spChild2.selectedItem?.toString() + "," + spChild3.selectedItem?.toString(), sharedPref.name, companionsList.toList(), photosList.size, companionsList.size,
                         getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3),
                         getPhoto(4), getPhoto(5), getPhoto(6), getPhoto(7),
                         getPhoto(8), getPhoto(9))

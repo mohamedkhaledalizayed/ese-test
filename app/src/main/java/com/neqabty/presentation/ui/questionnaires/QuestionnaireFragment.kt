@@ -78,13 +78,13 @@ class QuestionnaireFragment : BaseFragment(), Injectable {
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
 
-                questionnaireViewModel.getQuestionnaire(PreferencesHelper(requireContext()).user)
+                questionnaireViewModel.getQuestionnaire(sharedPref.user)
             }, cancelCallback = {
                 dialog?.dismiss()
             }, message = error?.message)
         })
 
-        questionnaireViewModel.getQuestionnaire(PreferencesHelper(requireContext()).user)
+        questionnaireViewModel.getQuestionnaire(sharedPref.user)
     }
 
     private fun initializeViews() {
@@ -112,7 +112,7 @@ class QuestionnaireFragment : BaseFragment(), Injectable {
         }
 
         binding.bSubmit.setOnClickListener {
-            questionnaireViewModel.voteQuestionnaire(PreferencesHelper(requireContext()).user, questionnaireUI.id!!.toInt(), binding.rgAnswers.checkedRadioButtonId)
+            questionnaireViewModel.voteQuestionnaire(sharedPref.user, questionnaireUI.id!!.toInt(), binding.rgAnswers.checkedRadioButtonId)
         }
     }
 

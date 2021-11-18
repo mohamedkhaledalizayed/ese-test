@@ -91,7 +91,7 @@ class InquireMedicalLettersFragment : BaseFragment(), Injectable {
             else {
                 llSuperProgressbar.visibility = View.VISIBLE
                 binding.tvNoDataFound.visibility = View.GONE
-                inquireMedicalLettersViewModel.getMedicalLetterByID(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user, binding.edApprovalNumber.text.toString())
+                inquireMedicalLettersViewModel.getMedicalLetterByID(sharedPref.mobile, sharedPref.user, binding.edApprovalNumber.text.toString())
             }
         }
     }

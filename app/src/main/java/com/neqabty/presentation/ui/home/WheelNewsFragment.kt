@@ -63,13 +63,13 @@ class WheelNewsFragment : BaseFragment(), Injectable {
         homeViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
+                homeViewModel.getNews(sharedPref.mainSyndicate.toString())
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
             }, message = error?.message)
         })
-        homeViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
+        homeViewModel.getNews(sharedPref.mainSyndicate.toString())
 
         binding.clQuestionnaire.visibility = if(Constants.hasQuestionnaire.value == true) View.VISIBLE else View.GONE
         Constants.hasQuestionnaire.observe(this, Observer {
@@ -94,7 +94,7 @@ class WheelNewsFragment : BaseFragment(), Injectable {
         }
 
         binding.clQuestionnaire.setOnClickListener {
-            if (PreferencesHelper(requireContext()).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.questionnaireFragment)
             else {
                 val bundle: Bundle = Bundle()
