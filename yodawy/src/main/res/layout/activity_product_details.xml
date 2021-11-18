@@ -116,6 +116,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="#EFEFEF"
                     android:padding="@dimen/_10sdp"
+                    android:visibility="gone"
                     android:text="@string/product_details"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/_12ssp" />
@@ -126,12 +127,14 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="Description"
+                    android:visibility="gone"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/_12ssp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="ANALGESIC, ANTIPYRETIC"
@@ -144,6 +147,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="Form"
+                    android:visibility="gone"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/_12ssp" />
 
@@ -152,6 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:visibility="gone"
                     android:text="2 Tablets / 2 STRIPS"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_10ssp" />
@@ -162,6 +167,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="Type"
+                    android:visibility="gone"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/_12ssp" />
 
@@ -171,6 +177,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="Local"
+                    android:visibility="gone"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_10ssp" />
 
@@ -178,7 +185,9 @@
                     android:id="@+id/add"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_36sdp"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
                     android:background="@drawable/add_address_btn_bg"
                     android:padding="@dimen/_8sdp"
                     android:fontFamily="@font/droidkufi_bold"
@@ -192,7 +201,9 @@
                     android:layout_height="@dimen/_36sdp"
                     android:weightSum="10"
                     android:visibility="gone"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
                     android:background="@drawable/add_address_btn_bg"
                     android:orientation="horizontal">
 
