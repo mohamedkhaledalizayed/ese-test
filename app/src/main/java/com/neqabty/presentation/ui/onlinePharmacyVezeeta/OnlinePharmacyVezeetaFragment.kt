@@ -81,7 +81,7 @@ class OnlinePharmacyVezeetaFragment : BaseFragment() {
             }, message = error?.message)
         })
 
-        onlinePharmacyVezeetaViewModel.getURL(PreferencesHelper(requireContext()).user)
+        onlinePharmacyVezeetaViewModel.getURL(sharedPref.user)
     }
 
     private fun handleViewState(state: OnlinePharmacyVezeetaViewState) {

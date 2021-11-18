@@ -42,6 +42,10 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var sharedPref: PreferencesHelper
+
     private val mainViewModel: MainViewModel by viewModels()
 
     lateinit var newToken: String
