@@ -97,9 +97,9 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
                 llSuperProgressbar.visibility = View.VISIBLE
 
                 if (categoryId == 2)
-                    medicalProvidersViewModel.getMedicalProfessions(PreferencesHelper(requireContext()).mobile)
+                    medicalProvidersViewModel.getMedicalProfessions(sharedPref.mobile)
                 else
-                    medicalProvidersViewModel.getMedicalProviders(PreferencesHelper(requireContext()).mobile, categoryId.toString(), governID.toString(), areaID.toString(), name, "")
+                    medicalProvidersViewModel.getMedicalProviders(sharedPref.mobile, categoryId.toString(), governID.toString(), areaID.toString(), name, "")
 
             }, cancelCallback = {
                 navController().navigateUp()
@@ -107,9 +107,9 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         })
 
         if (categoryId == 2)
-            medicalProvidersViewModel.getMedicalProfessions(PreferencesHelper(requireContext()).mobile)
+            medicalProvidersViewModel.getMedicalProfessions(sharedPref.mobile)
         else
-            medicalProvidersViewModel.getMedicalProviders(PreferencesHelper(requireContext()).mobile, categoryId.toString(), governID.toString(), areaID.toString(),name,  "")
+            medicalProvidersViewModel.getMedicalProviders(sharedPref.mobile, categoryId.toString(), governID.toString(), areaID.toString(),name,  "")
     }
 
     private fun handleViewState(state: MedicalProvidersViewState) {
@@ -141,11 +141,11 @@ class MedicalProvidersFragment : BaseFragment(), Injectable {
         spSpecialization.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                medicalProvidersViewModel.getMedicalProviders(PreferencesHelper(requireContext()).mobile, categoryId.toString(), governID.toString(), areaID.toString(), name, (parent.getItemAtPosition(position) as MedicalDirectoryLookupsUI.DoctorSpecialization).id.toString())
+                medicalProvidersViewModel.getMedicalProviders(sharedPref.mobile, categoryId.toString(), governID.toString(), areaID.toString(), name, (parent.getItemAtPosition(position) as MedicalDirectoryLookupsUI.DoctorSpecialization).id.toString())
             }
         }
         spSpecialization.setSelection(0)
-        medicalProvidersViewModel.getMedicalProviders(PreferencesHelper(requireContext()).mobile, categoryId.toString(), governID.toString(), areaID.toString(), name, specializations[0].id.toString())
+        medicalProvidersViewModel.getMedicalProviders(sharedPref.mobile, categoryId.toString(), governID.toString(), areaID.toString(), name, specializations[0].id.toString())
     }
 
 //region

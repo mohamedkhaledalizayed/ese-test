@@ -76,13 +76,13 @@ class ChooseAreaFragment : BaseFragment(), Injectable {
         chooseAreaViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                chooseAreaViewModel.getAllContent1(PreferencesHelper(requireContext()).mobile)
+                chooseAreaViewModel.getAllContent1(sharedPref.mobile)
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
             }, message = error?.message)
         })
-        chooseAreaViewModel.getAllContent1(PreferencesHelper(requireContext()).mobile)
+        chooseAreaViewModel.getAllContent1(sharedPref.mobile)
         initializeViews()
     }
 
