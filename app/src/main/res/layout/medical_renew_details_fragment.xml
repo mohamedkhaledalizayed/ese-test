@@ -23,7 +23,7 @@
         android:orientation="vertical"
         android:padding="@dimen/margin_horizontal_large">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/svContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -182,6 +182,6 @@
                     android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </layout>

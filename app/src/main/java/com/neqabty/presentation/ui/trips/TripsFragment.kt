@@ -72,13 +72,13 @@ class TripsFragment : BaseFragment() {
         tripsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                tripsViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())
+                tripsViewModel.getTrips(sharedPref.mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
 
-        tripsViewModel.getTrips(PreferencesHelper(requireContext()).mainSyndicate.toString())
+        tripsViewModel.getTrips(sharedPref.mainSyndicate.toString())
     }
 
     private fun handleViewState(state: TripsViewState) {

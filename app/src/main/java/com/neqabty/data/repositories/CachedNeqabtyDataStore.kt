@@ -66,7 +66,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("Not yet implemented")
     }
 
-    override fun getMedicalLetterByID(id: String, mobileNumber: String): Observable<MedicalLetterEntity.LetterItem> {
+    override fun getMedicalLetterByID(mobileNumber: String, userNumber: String, id: String): Observable<MedicalLetterEntity.LetterItem> {
         TODO("Not yet implemented")
     }
 
@@ -219,6 +219,21 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
 
     override fun getProviderDetails(id: String, type: String): Observable<ProviderEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getMedicalDirectoryLookups(mobileNumber: String): Observable<MedicalDirectoryLookupsEntity> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getMedicalDirectoryProviders(
+        mobileNumber: String,
+        providerType: String,
+        govId: String,
+        areaId: String,
+        providerName: String,
+        specializationId: String
+    ): Observable<List<MedicalDirectoryProviderEntity>> {
+        TODO("Not yet implemented")
     }
 
     override fun getAllDoctors(): Observable<List<DoctorEntity>> {

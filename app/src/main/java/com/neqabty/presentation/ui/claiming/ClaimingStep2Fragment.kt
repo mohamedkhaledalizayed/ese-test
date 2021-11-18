@@ -84,7 +84,7 @@ class ClaimingStep2Fragment : BaseFragment() {
             }, message = error?.message)
         })
 
-        binding.edNumber.setText(PreferencesHelper(requireContext()).user)
+        binding.edNumber.setText(sharedPref.user)
         binding.edCardNumber.setText(ClaimingData.cardId.toString())
         binding.bPrev.setOnClickListener {
             pager.setCurrentItem(0, true)
@@ -177,11 +177,6 @@ class ClaimingStep2Fragment : BaseFragment() {
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
-    }
-
-    fun hideKeyboard() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.edNumber.windowToken, 0)
     }
 
     // endregion

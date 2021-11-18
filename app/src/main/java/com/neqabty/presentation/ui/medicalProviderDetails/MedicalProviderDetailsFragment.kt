@@ -67,13 +67,14 @@ class MedicalProviderDetailsFragment : BaseFragment() {
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 medicalProviderDetailsViewModel.isFavorite(providerItem)
-                medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeID!!)
+//                medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeId!!)
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
         medicalProviderDetailsViewModel.isFavorite(providerItem)
-        medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeID!!)
+//        medicalProviderDetailsViewModel.getProviderDetails(providerItem.id.toString(), providerItem.typeId!!)
+        initializeViews()
     }
 
     private fun handleViewState(state: MedicalProviderDetailsViewState) {
@@ -83,7 +84,7 @@ class MedicalProviderDetailsFragment : BaseFragment() {
         state.providerDetails?.let {
             binding.providerItem = it
         }
-        initializeViews(state)
+//        initializeViews(state)
 //        activity?.invalidateOptionsMenu()
         renderFav()
         binding.ivFav.setOnClickListener {
@@ -91,7 +92,8 @@ class MedicalProviderDetailsFragment : BaseFragment() {
         }
     }
 
-    private fun initializeViews(state: MedicalProviderDetailsViewState) {
+    private fun initializeViews() {
+        binding.providerItem = providerItem
         val phoneNumbers = providerItem.phones?.replace(" ", "")?.replace("_x000D_\n", "-")?.replace("\r\n", "-")
                 ?.replace('\n', '-')?.replace('\r', '-')?.split("-")
 
@@ -100,11 +102,21 @@ class MedicalProviderDetailsFragment : BaseFragment() {
         binding.rvPhones.adapter = adapter
 
         bMap.setOnClickListener {
-            state.providerDetails?.address?.let { bMap.openMap(it, requireContext()) }
+            bMap.openMap(providerItem.address!!, requireContext())
+        }
+
+        if(providerItem.phones.isNullOrBlank()){
+            binding.tvPhoneTitle.visibility = View.GONE
+            binding.rvPhones.visibility = View.GONE
+        }
+
+        if(providerItem.address.isNullOrBlank()){
+            binding.tvAddressTitle.visibility = View.GONE
+            binding.bMap.visibility = View.GONE
         }
 
         bClaiming.setOnClickListener {
-            if (PreferencesHelper(requireContext()).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.claimingFragment)
             else {
                     val bundle: Bundle = Bundle()
@@ -117,6 +129,11 @@ class MedicalProviderDetailsFragment : BaseFragment() {
 //        tvPhone.setOnClickListener {
 //            openCallFragment(state.providerDetails?.phones!!)
 //        }
+
+        renderFav()
+        binding.ivFav.setOnClickListener {
+            toggleFav()
+        }
     }
 
     //region

@@ -17,6 +17,53 @@
         android:orientation="horizontal">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPathologyLabs"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivBgPathologyLabs"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_tab_bg"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivImagePathologyLabs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_horizontal_normal"
+                android:background="@drawable/tab_circle_green_bg"
+                android:padding="@dimen/margin_vertical_normal"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_labs_green"
+                app:tint="@color/selector_tab_category_color"
+                app:layout_constraintBottom_toTopOf="@id/tv_pageTextPathologyLabs"
+                app:layout_constraintEnd_toEndOf="@id/ivBgPathologyLabs"
+                app:layout_constraintStart_toStartOf="@id/ivBgPathologyLabs"
+                app:layout_constraintTop_toTopOf="@id/ivBgPathologyLabs" />
+
+            <TextView
+                android:id="@+id/tv_pageTextPathologyLabs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:textColor="@color/selector_tab_category_color"
+                android:text="@string/pathology_labs"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/ivBgPathologyLabs"
+                app:layout_constraintEnd_toEndOf="@id/ivBgPathologyLabs"
+                app:layout_constraintStart_toStartOf="@id/ivBgPathologyLabs"
+                app:layout_constraintTop_toBottomOf="@id/ivImagePathologyLabs"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clArtificialLimbs"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">

@@ -3,7 +3,6 @@ package com.neqabty.presentation.ui.newsDetails
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +24,9 @@ class NewsDetailsFragment : BaseFragment() {
     lateinit var newsItem: NewsUI
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -51,7 +50,15 @@ class NewsDetailsFragment : BaseFragment() {
 
     fun initializeViews() {
         binding.newsItem = newsItem
-        binding.tvDesc.movementMethod = LinkMovementMethod.getInstance()
+
+        binding.webView.settings.loadsImagesAutomatically = true
+        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.isLongClickable = true
+        binding.webView.setOnLongClickListener { return@setOnLongClickListener true }
+        binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+        val justify = "<html><body style='direction:rtl;text-align:justify;'>${newsItem.desc.toString()}</body></html>"
+        binding.webView.loadDataWithBaseURL(null, justify, "text/html; charset=utf-8", "UTF-8", null)
+
     }
 
 //region

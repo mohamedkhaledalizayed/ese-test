@@ -12,6 +12,8 @@ interface NeqabtyRepository {
     fun getNews(id: String): Observable<List<NewsEntity>>
     fun getTrips(id: String): Observable<List<TripEntity>>
     fun getTripDetails(id: String): Observable<TripEntity>
+    fun getMedicalDirectoryLookups(mobileNumber: String): Observable<MedicalDirectoryLookupsEntity>
+    fun getMedicalDirectoryProviders(mobileNumber: String, providerTypeId: String, govId: String, areaId: String, providerName: String, specializationId: String): Observable<List<MedicalDirectoryProviderEntity>>
     fun getAllDoctors(): Observable<List<DoctorEntity>>
     fun getAllAreas(): Observable<List<AreaEntity>>
     fun getAllGoverns(): Observable<List<GovernEntity>>
@@ -97,7 +99,7 @@ interface NeqabtyRepository {
     fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
     fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity>
     fun getMedicalLetters(mobileNumber: String, benID: String, start: Int, end: Int, orderBy: String, dir: String): Observable<MedicalLetterEntity>
-    fun getMedicalLetterByID(mobileNumber: String, id: String): Observable<MedicalLetterEntity.LetterItem>
+    fun getMedicalLetterByID(mobileNumber: String, userNumber: String, id: String): Observable<MedicalLetterEntity.LetterItem>
     fun getAds(sectionId: Int): Observable<List<AdEntity>>
     fun getLiteFollowersListData(mobileNumber: String, userNumber: String): Observable<List<LiteFollowersListEntity>>
     fun getMedicalRenewalData(mobileNumber: String, userNumber: String): Observable<MedicalRenewalEntity>

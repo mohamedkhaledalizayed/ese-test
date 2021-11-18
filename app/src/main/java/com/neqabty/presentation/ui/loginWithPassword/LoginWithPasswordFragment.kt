@@ -86,24 +86,23 @@ class LoginWithPasswordFragment : BaseFragment(), HasHomeOptionsMenu {
         state.user?.let {
             //TODO subscribe
             //TODO set coming data it.details!![0]
-            PreferencesHelper(requireContext()).isForceLogout = false
-            PreferencesHelper(requireContext()).mobile = it.mobile
-            PreferencesHelper(requireContext()).userType = it.type
-            PreferencesHelper(requireContext()).jwt = it.jwt
-            Constants.JWT = it.jwt ?: ""
-            PreferencesHelper(requireContext()).mainSyndicate = 5
-            PreferencesHelper(requireContext()).subSyndicate = 0
+            sharedPref.isForceLogout = false
+            sharedPref.mobile = it.mobile
+            sharedPref.userType = it.type
+            sharedPref.jwt = it.jwt
+            sharedPref.mainSyndicate = 5
+            sharedPref.subSyndicate = 0
 //                showTwoButtonsAlert(message = getString(R.string.welcome_with_name_login, it.details!![0].name!!)
-            PreferencesHelper(requireContext()).name = it.details!![0].name!!
-            PreferencesHelper(requireContext()).user = it.details!![0].userNumber!!
-            PreferencesHelper(requireContext()).isRegistered = true
+            sharedPref.name = it.details!![0].name!!
+            sharedPref.user = it.details!![0].userNumber!!
+            sharedPref.isRegistered = true
             state.user = null
             navController().navigate(LoginWithPasswordFragmentDirections.openHome())
         }
     }
 
     fun initializeViews() {
-        newToken = PreferencesHelper(requireContext()).token
+        newToken = sharedPref.token
         binding.bSend.setOnClickListener {
             if(isDataValid(edPassword.text.toString()))
                 login()
@@ -131,12 +130,12 @@ class LoginWithPasswordFragment : BaseFragment(), HasHomeOptionsMenu {
 
     fun login() {
         if (newToken.isNotBlank())
-            loginWithPasswordViewModel.login(mobile,newToken, PreferencesHelper(requireContext()), edPassword.text.toString())
+            loginWithPasswordViewModel.login(mobile,newToken, sharedPref, edPassword.text.toString())
         else {
             Constants.isFirebaseTokenUpdated.observeOnce(viewLifecycleOwner, Observer {
                 if (it.isNotBlank()){
                     newToken = it
-                    loginWithPasswordViewModel.login(mobile, newToken!!, PreferencesHelper(requireContext()), edPassword.text.toString())
+                    loginWithPasswordViewModel.login(mobile, newToken!!, sharedPref, edPassword.text.toString())
                 }else
                     showAlert(getString(R.string.error_msg))
             })

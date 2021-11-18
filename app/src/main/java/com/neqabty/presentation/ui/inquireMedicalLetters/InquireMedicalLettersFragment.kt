@@ -81,12 +81,13 @@ class InquireMedicalLettersFragment : BaseFragment() {
 
     fun initializeViews() {
         binding.bInquire.setOnClickListener{
+            hideKeyboard()
             if(binding.edApprovalNumber.text.isNullOrBlank())
                 showAlert(message = getString(R.string.invalid_data))
             else {
                 llSuperProgressbar.visibility = View.VISIBLE
                 binding.tvNoDataFound.visibility = View.GONE
-                inquireMedicalLettersViewModel.getMedicalLetterByID(PreferencesHelper(requireContext()).mobile, binding.edApprovalNumber.text.toString())
+                inquireMedicalLettersViewModel.getMedicalLetterByID(sharedPref.mobile, sharedPref.user, binding.edApprovalNumber.text.toString())
             }
         }
     }

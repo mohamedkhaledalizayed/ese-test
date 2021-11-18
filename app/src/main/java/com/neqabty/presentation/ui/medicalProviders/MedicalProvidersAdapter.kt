@@ -1,29 +1,29 @@
 package com.neqabty.presentation.ui.medicalProviders
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.MedicalProviderItemBinding
-import com.neqabty.presentation.entities.ProviderUI
+import com.neqabty.presentation.entities.MedicalDirectoryProviderUI
 import com.neqabty.ui.presentation.common.DataBoundListAdapter
 import com.neqabty.ui.presentation.common.DataBoundViewHolder
 
 class MedicalProvidersAdapter(
     private val dataBindingComponent: DataBindingComponent,
     appExecutors: AppExecutors,
-    private val callback: ((ProviderUI) -> Unit)?
-) : DataBoundListAdapter<ProviderUI, MedicalProviderItemBinding>(
+    private val callback: ((MedicalDirectoryProviderUI) -> Unit)?
+) : DataBoundListAdapter<MedicalDirectoryProviderUI, MedicalProviderItemBinding>(
         appExecutors = appExecutors,
-        diffCallback = object : DiffUtil.ItemCallback<ProviderUI>() {
-            override fun areItemsTheSame(oldItem: ProviderUI, newItem: ProviderUI): Boolean {
+        diffCallback = object : DiffUtil.ItemCallback<MedicalDirectoryProviderUI>() {
+            override fun areItemsTheSame(oldItem: MedicalDirectoryProviderUI, newItem: MedicalDirectoryProviderUI): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: ProviderUI, newItem: ProviderUI): Boolean {
+            override fun areContentsTheSame(oldItem: MedicalDirectoryProviderUI, newItem: MedicalDirectoryProviderUI): Boolean {
                 return oldItem.name == newItem.name
             }
         }
@@ -46,7 +46,7 @@ class MedicalProvidersAdapter(
         return binding
     }
 
-    override fun bind(binding: MedicalProviderItemBinding, item: ProviderUI) {
+    override fun bind(binding: MedicalProviderItemBinding, item: MedicalDirectoryProviderUI) {
         binding.provider = item
     }
 

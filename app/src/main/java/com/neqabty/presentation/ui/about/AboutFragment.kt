@@ -62,12 +62,12 @@ class AboutFragment : BaseFragment() {
         aboutViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate.toString())
+                aboutViewModel.getSyndicate(sharedPref.mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
-        aboutViewModel.getSyndicate(PreferencesHelper(requireContext()).mainSyndicate.toString())
+        aboutViewModel.getSyndicate(sharedPref.mainSyndicate.toString())
     }
 
     private fun handleViewState(state: AboutViewState) {

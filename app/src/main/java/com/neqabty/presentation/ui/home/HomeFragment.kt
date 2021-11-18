@@ -85,13 +85,13 @@ class HomeFragment : BaseFragment(), OnBackPressedListener, HasHomeOptionsMenu {
         homeViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(requireContext()).user)
+                homeViewModel.getContent(sharedPref.mainSyndicate.toString(), sharedPref.user)
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
 
-        homeViewModel.getContent(PreferencesHelper(requireContext()).mainSyndicate.toString(), PreferencesHelper(requireContext()).user)
+        homeViewModel.getContent(sharedPref.mainSyndicate.toString(), sharedPref.user)
 
         initializeViews()
     }
@@ -104,7 +104,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener, HasHomeOptionsMenu {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
         state.notificationsCount?.let {
-            PreferencesHelper(requireContext()).notificationsCount = it
+            sharedPref.notificationsCount = it
             activity?.invalidateOptionsMenu()
         }
     }

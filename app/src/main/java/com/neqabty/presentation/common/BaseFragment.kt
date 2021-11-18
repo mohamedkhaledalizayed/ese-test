@@ -17,9 +17,15 @@ import com.neqabty.R
 import com.neqabty.presentation.entities.AdUI
 import com.neqabty.presentation.ui.ads.AdsActivity
 import dagger.hilt.android.AndroidEntryPoint
+import com.neqabty.presentation.util.PreferencesHelper
+import javax.inject.Inject
 
 @AndroidEntryPoint
 open class BaseFragment : Fragment() {
+
+    @Inject
+    lateinit var sharedPref: PreferencesHelper
+
     var builder: AlertDialog.Builder? = null
     var dialog: AlertDialog? = null
     lateinit var llSuperProgressbar: LinearLayout
@@ -129,7 +135,7 @@ open class BaseFragment : Fragment() {
         hideKeyboard()
     }
 
-    private fun hideKeyboard() {
+    fun hideKeyboard() {
         val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(activity?.window?.decorView?.rootView?.windowToken, 0)
     }

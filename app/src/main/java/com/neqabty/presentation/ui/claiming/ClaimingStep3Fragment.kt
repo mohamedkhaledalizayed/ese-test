@@ -85,7 +85,7 @@ class ClaimingStep3Fragment : BaseFragment() {
     }
 
     fun initializeViews() {
-        binding.edNumber.setText(PreferencesHelper(requireContext()).user)
+        binding.edNumber.setText(sharedPref.user)
         binding.edCardNumber.setText(ClaimingData.cardId.toString())
         binding.edProvider.setText(ClaimingData.providerName)
         binding.bPrev.setOnClickListener {
@@ -97,8 +97,7 @@ class ClaimingStep3Fragment : BaseFragment() {
             else if (photosList.size == 0)
                 showPickPhotoAlert()
             else{
-                val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.governId, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, ClaimingData.oldbenid, binding.edDetails.text.toString(), ClaimingData.selectedFollower?.name!!, ClaimingData.selectedFollower?.relationTypeName?:"عضو", photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(sharedPref.mainSyndicate, sharedPref.subSyndicate, sharedPref.user, "email", sharedPref.mobile, 0, 0, ClaimingData.governId, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, ClaimingData.oldbenid, binding.edDetails.text.toString(), ClaimingData.selectedFollower?.name!!, ClaimingData.selectedFollower?.relationTypeName?:"عضو", photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             }
         }
 
@@ -121,8 +120,7 @@ class ClaimingStep3Fragment : BaseFragment() {
         claimingViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                val prefs = PreferencesHelper(requireContext())
-                claimingViewModel.sendMedicalRequest(prefs.mainSyndicate, prefs.subSyndicate, PreferencesHelper(requireContext()).user, "email", prefs.mobile, 0, 0, ClaimingData.governId, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, ClaimingData.oldbenid, binding.edDetails.text.toString(), ClaimingData.selectedFollower?.name!!, ClaimingData.selectedFollower?.relationTypeName!!, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
+                claimingViewModel.sendMedicalRequest(sharedPref.mainSyndicate, sharedPref.subSyndicate, sharedPref.user, "email", sharedPref.mobile, 0, 0, ClaimingData.governId, ClaimingData.areaId, 0, ClaimingData.providerTypeId, ClaimingData.providerId, ClaimingData.providerName, ClaimingData.oldbenid, binding.edDetails.text.toString(), ClaimingData.selectedFollower?.name!!, ClaimingData.selectedFollower?.relationTypeName!!, photosList.size, getPhoto(0), getPhoto(1), getPhoto(2), getPhoto(3), getPhoto(4))
             }, cancelCallback = {
                 dialog?.dismiss()
             }, message = error?.message)

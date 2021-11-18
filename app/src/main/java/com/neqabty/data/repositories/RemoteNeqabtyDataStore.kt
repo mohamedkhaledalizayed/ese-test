@@ -291,8 +291,8 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
 
     private val medicalLetterItemDataEntityMapper = MedicalLetterItemDataEntityMapper()
 
-    override fun getMedicalLetterByID(mobileNumber: String, id: String): Observable<MedicalLetterEntity.LetterItem> {
-        return api.getMedicalLetterByID(mobileNumber, id).flatMap { letterItemInfo ->
+    override fun getMedicalLetterByID(mobileNumber: String, userNumber: String, id: String): Observable<MedicalLetterEntity.LetterItem> {
+        return api.getMedicalLetterByID(mobileNumber, userNumber, id).flatMap { letterItemInfo ->
             Observable.just(medicalLetterItemDataEntityMapper.mapFrom(letterItemInfo))
         }
     }
@@ -508,6 +508,29 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     ): Observable<List<ProviderEntity>> {
         return api.getProvidersById(ProviderRequest(providerTypeId, govId, areaId, providerName, professionID, degreeID)).map { providers ->
             providers.data?.map { providerDataEntityMapper.mapFrom(it) }
+        }
+    }
+
+    private val medicalDirectoryLookupsDataEntityMapper = MedicalDirectoryLookupsDataEntityMapper()
+
+    override fun getMedicalDirectoryLookups(mobileNumber: String): Observable<MedicalDirectoryLookupsEntity> {
+        return api.getMedicalDirectoryLookups(mobileNumber).map { lookups ->
+            medicalDirectoryLookupsDataEntityMapper.mapFrom(lookups)
+        }
+    }
+
+    private val medicalDirectoryProviderDataEntityMapper = MedicalDirectoryProviderDataEntityMapper()
+
+    override fun getMedicalDirectoryProviders(
+        mobileNumber: String,
+        providerTypeId: String,
+        govId: String,
+        areaId: String,
+        providerName: String,
+        specializationId: String
+    ): Observable<List<MedicalDirectoryProviderEntity>> {
+        return api.getMedicalDirectoryProviders(mobileNumber, providerTypeId, govId, areaId, providerName, specializationId).map { providers ->
+            providers.map { medicalDirectoryProviderDataEntityMapper.mapFrom(it) }
         }
     }
 

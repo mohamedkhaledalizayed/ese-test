@@ -118,7 +118,7 @@ class NotificationsFragment : BaseFragment() {
     fun loadNotifications(typeID: Int) {
         llSuperProgressbar.visibility = View.VISIBLE
         binding.tvError.visibility = View.GONE
-        notificationsViewModel.getNotifications(typeID, 0, PreferencesHelper(requireContext()).user)
+        notificationsViewModel.getNotifications(typeID, 0, sharedPref.user)
     }
 
     //region

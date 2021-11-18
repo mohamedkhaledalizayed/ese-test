@@ -2,8 +2,6 @@ package com.neqabty.presentation.ui.questionnaires
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Html
-import android.text.method.LinkMovementMethod
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -74,18 +72,24 @@ class QuestionnaireFragment : BaseFragment() {
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
 
-                questionnaireViewModel.getQuestionnaire(PreferencesHelper(requireContext()).user)
+                questionnaireViewModel.getQuestionnaire(sharedPref.user)
             }, cancelCallback = {
                 dialog?.dismiss()
             }, message = error?.message)
         })
 
-        questionnaireViewModel.getQuestionnaire(PreferencesHelper(requireContext()).user)
+        questionnaireViewModel.getQuestionnaire(sharedPref.user)
     }
 
     private fun initializeViews() {
-        binding.tvDesc.movementMethod = LinkMovementMethod.getInstance()
-        binding.tvDesc.text = Html.fromHtml(questionnaireUI.question)
+
+        binding.webView.settings.loadsImagesAutomatically = true
+        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.isLongClickable = true
+        binding.webView.setOnLongClickListener { return@setOnLongClickListener true }
+        binding.webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
+        val justify = "<html><body style='direction:rtl;text-align:justify;'>${questionnaireUI.question}</body></html>"
+        binding.webView.loadDataWithBaseURL(null, justify, "text/html; charset=utf-8", "UTF-8", null)
 
         for (i in questionnaireUI.answers!!.indices) {
             val radioButton = RadioButton(activity)
@@ -102,7 +106,7 @@ class QuestionnaireFragment : BaseFragment() {
         }
 
         binding.bSubmit.setOnClickListener {
-            questionnaireViewModel.voteQuestionnaire(PreferencesHelper(requireContext()).user, questionnaireUI.id!!.toInt(), binding.rgAnswers.checkedRadioButtonId)
+            questionnaireViewModel.voteQuestionnaire(sharedPref.user, questionnaireUI.id!!.toInt(), binding.rgAnswers.checkedRadioButtonId)
         }
     }
 

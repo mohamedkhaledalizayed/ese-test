@@ -111,7 +111,7 @@ class ChangePasswordFragment : BaseFragment() {
 
     fun changePassword(isSetNew: Boolean) {
         if(isSetNew == false)
-            changePasswordViewModel.changePassword(PreferencesHelper(requireContext()).mobile, binding.edCurrentPassword.text.toString(), edNewPassword.text.toString())
+            changePasswordViewModel.changePassword(sharedPref.mobile, binding.edCurrentPassword.text.toString(), edNewPassword.text.toString())
         else
             changePasswordViewModel.setNewPassword(mobile, binding.edCurrentPassword.text.toString(), edNewPassword.text.toString())
     }

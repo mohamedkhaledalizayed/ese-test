@@ -58,12 +58,12 @@ class EngineeringRecordsInquiryFragment : BaseFragment() {
     }
 
     fun initializeViews() {
-        if (!PreferencesHelper(requireContext()).user.equals("null"))
-            binding.edMemberNumber.setText(PreferencesHelper(requireContext()).user)
+        if (!sharedPref.user.equals("null"))
+            binding.edMemberNumber.setText(sharedPref.user)
 
         binding.bSend.setOnClickListener {
             if (isDataValid(binding.edMemberNumber.text.toString())) {
-                PreferencesHelper(requireContext()).user = binding.edMemberNumber.text.toString()
+                sharedPref.user = binding.edMemberNumber.text.toString()
                 engineeringRecordsInquiryViewModel.sendEngineeringRecordsInquiry(binding.edMemberNumber.text.toString())
             }
         }

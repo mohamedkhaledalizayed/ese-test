@@ -100,7 +100,7 @@ class TripDetailsFragment : BaseFragment() {
         binding.bViewRegiments.visibility = if(tripItem.counter!! > 0) View.VISIBLE else View.INVISIBLE
         binding.bViewRegiments.setOnClickListener {
             TripsData.tripItem = tripItem
-            if (PreferencesHelper(requireContext()).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(TripDetailsFragmentDirections.openTripReservation(tripItem))
             else
                 navController().navigate(TripDetailsFragmentDirections.openLogin(2))

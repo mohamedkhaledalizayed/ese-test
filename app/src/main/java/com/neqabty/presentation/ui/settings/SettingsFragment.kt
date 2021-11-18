@@ -54,8 +54,8 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun initializeViews() {
-        PreferencesHelper(requireContext()).isNotificationsEnabled = NotificationManagerCompat.from(context!!).areNotificationsEnabled()
-        binding.switchNotifications.isChecked = PreferencesHelper(requireContext()).isNotificationsEnabled
+        sharedPref.isNotificationsEnabled = NotificationManagerCompat.from(context!!).areNotificationsEnabled()
+        binding.switchNotifications.isChecked = sharedPref.isNotificationsEnabled
         binding.switchNotifications.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
 
@@ -77,8 +77,8 @@ class SettingsFragment : BaseFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0) {
-                PreferencesHelper(requireContext()).isNotificationsEnabled = NotificationManagerCompat.from(context!!).areNotificationsEnabled()
-                binding.switchNotifications.isChecked = PreferencesHelper(requireContext()).isNotificationsEnabled
+                sharedPref.isNotificationsEnabled = NotificationManagerCompat.from(context!!).areNotificationsEnabled()
+                binding.switchNotifications.isChecked = sharedPref.isNotificationsEnabled
         }
     }
 

@@ -78,7 +78,7 @@ class UpdateDataVerificationFragment : BaseFragment() {
     }
 
     private fun verifyUser() {
-        updateDataVerificationViewModel.verifyUser(PreferencesHelper(requireContext()).user, PreferencesHelper(requireContext()).mobile)
+        updateDataVerificationViewModel.verifyUser(sharedPref.user, sharedPref.mobile)
     }
 
     private fun handleViewState(state: UpdateDataVerificationViewState) {

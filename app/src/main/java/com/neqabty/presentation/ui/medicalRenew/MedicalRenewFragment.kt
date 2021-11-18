@@ -68,7 +68,7 @@ class MedicalRenewFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-//        PreferencesHelper(requireContext()).user = "2502813"
+//        sharedPref.user = "2502813"
 
         medicalRenewViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
@@ -76,16 +76,16 @@ class MedicalRenewFragment : BaseFragment() {
         medicalRenewViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                medicalRenewViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
-                medicalRenewViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user, 1, "address", "mobile")
+                medicalRenewViewModel.getMedicalRenewalData(sharedPref.mobile, sharedPref.user)
+                medicalRenewViewModel.paymentInquiry(sharedPref.mobile, sharedPref.user, 1, "address", "mobile")
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
             }, message = error?.message)
         })
 
-        medicalRenewViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
-        medicalRenewViewModel.paymentInquiry(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user, 1, "address", "mobile")
+        medicalRenewViewModel.getMedicalRenewalData(sharedPref.mobile, sharedPref.user)
+        medicalRenewViewModel.paymentInquiry(sharedPref.mobile, sharedPref.user, 1, "address", "mobile")
 
     }
 
@@ -195,6 +195,9 @@ class MedicalRenewFragment : BaseFragment() {
             bContinue.visibility = View.GONE
             llDelivery.visibility = View.GONE
         }
+
+        if(!Constants.isEditFollowersEnabled)
+            bEdit.visibility = View.GONE
     }
 
     private fun checkStatus() {
@@ -264,7 +267,7 @@ class MedicalRenewFragment : BaseFragment() {
         if (state.medicalRenewalUI != null && state.medicalRenewalPayment != null) {
             llSuperProgressbar.visibility = View.GONE
 
-            state.medicalRenewalUI?.oldRefId = PreferencesHelper(requireContext()).user
+            state.medicalRenewalUI?.oldRefId = sharedPref.user
             medicalRenewalUI = state.medicalRenewalUI!!
             medicalRenewalPaymentUI = state.medicalRenewalPayment as MedicalRenewalPaymentUI
             checkStatus()

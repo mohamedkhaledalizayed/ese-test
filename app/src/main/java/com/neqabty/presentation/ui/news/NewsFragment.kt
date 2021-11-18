@@ -75,13 +75,13 @@ class NewsFragment : BaseFragment() {
         newsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                newsViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
+                newsViewModel.getNews(sharedPref.mainSyndicate.toString())
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
 
-        newsViewModel.getNews(PreferencesHelper(requireContext()).mainSyndicate.toString())
+        newsViewModel.getNews(sharedPref.mainSyndicate.toString())
     }
 
     private fun handleViewState(state: NewsViewState) {

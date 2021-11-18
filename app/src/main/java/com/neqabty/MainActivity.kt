@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity() {
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         setSupportActionBar(toolbar)
         getAppConfig()
-        setJWT()
         checkRoot()
         startActivities()
 //        loadAds()
@@ -69,10 +68,10 @@ class MainActivity : AppCompatActivity() {
         Constants.isFirebaseTokenUpdated.observe(this, Observer {
             if (it.isNotBlank()){
                 newToken = it
-                if (!newToken.equals(PreferencesHelper(this).token)) // Token has been changed
+                if (!newToken.equals(sharedPref.token)) // Token has been changed
                 {
-                    if (PreferencesHelper(this).user.isNotBlank()) { // verified
-                        mainViewModel.login(PreferencesHelper(this).mobile, PreferencesHelper(this).user, newToken, PreferencesHelper(this))
+                    if (sharedPref.user.isNotBlank()) { // verified
+                        mainViewModel.login(sharedPref.mobile, sharedPref.user, newToken, sharedPref)
                     }
                 }
             }
@@ -97,13 +96,13 @@ class MainActivity : AppCompatActivity() {
 
         if (notificationId != null)
             graph.startDestination = R.id.homeFragment
-//        else if (!PreferencesHelper(this).isIntroSkipped) // TODO
+//        else if (!sharedPref.isIntroSkipped) // TODO
 //            graph.startDestination = R.id.introFragment
-        else if (PreferencesHelper(this).isForceLogout == true){
-            PreferencesHelper(this).clearAll()
+        else if (sharedPref.isForceLogout == true){
+            sharedPref.clearAll()
             graph.startDestination = R.id.loginFragment
         }
-        else if (PreferencesHelper(this).mobile.isEmpty()) // TODO
+        else if (sharedPref.mobile.isEmpty()) // TODO
             graph.startDestination = R.id.loginFragment
         else
             graph.startDestination = R.id.homeFragment
@@ -165,10 +164,6 @@ class MainActivity : AppCompatActivity() {
             Navigation.findNavController(this, R.id.container)
                     .navigate(R.id.notificationDetailsFragment, args)
         }
-    }
-
-    private fun setJWT(){
-        Constants.JWT = PreferencesHelper(this).jwt ?: ""
     }
 
 //region//
@@ -269,9 +264,9 @@ class MainActivity : AppCompatActivity() {
         var currentFragment =
                 (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
         notificationsItem?.isVisible = currentFragment is HasHomeOptionsMenu &&
-                PreferencesHelper(this).isRegistered // && PreferencesHelper(this).notificationsCount != 0
+                sharedPref.isRegistered // && sharedPref.notificationsCount != 0
 //        logoutItem?.isVisible = currentFragment is HasHomeOptionsMenu &&
-//                PreferencesHelper(this).isRegistered
+//                sharedPref.isRegistered
         ivHeaderLogo?.visibility = if (currentFragment is HasHomeOptionsMenu) View.VISIBLE else View.GONE
         favoritesItem?.isVisible = currentFragment is HasMedicalOptionsMenu // || currentFragment is HasFavoriteOptionsMenu
 //        searchItem?.isVisible = currentFragment is HasMedicalOptionsMenu//TODO
@@ -281,15 +276,15 @@ class MainActivity : AppCompatActivity() {
 
         var navigationView: NavigationView = (nav_view as NavigationView)
         var navMenu = navigationView.menu
-//        navMenu.findItem(R.id.logout_fragment)?.isVisible = PreferencesHelper(this).isRegistered
+//        navMenu.findItem(R.id.logout_fragment)?.isVisible = sharedPref.isRegistered
         navigationView.getHeaderView(0).findViewById<Button>(R.id.bLogout).setOnClickListener {
-            PreferencesHelper(this).isRegistered = false
-            PreferencesHelper(this).user = ""
-            PreferencesHelper(this).name = ""
-            PreferencesHelper(this).mobile = ""
-            PreferencesHelper(this).jwt = ""
-            PreferencesHelper(this).token = ""
-            PreferencesHelper(this).notificationsCount = 0
+            sharedPref.isRegistered = false
+            sharedPref.user = ""
+            sharedPref.name = ""
+            sharedPref.mobile = ""
+            sharedPref.jwt = ""
+            sharedPref.token = ""
+            sharedPref.notificationsCount = 0
             PushNotificationsWrapper().deleteToken(this)
             invalidateOptionsMenu()
 
@@ -299,34 +294,34 @@ class MainActivity : AppCompatActivity() {
                     .navigate(R.id.openLoginFragment)
         }
 
-        if (PreferencesHelper(this).name.isNotEmpty()) {
+        if (sharedPref.name.isNotEmpty()) {
             navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
-            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).setText(Html.fromHtml(getString(R.string.menu_memberName, PreferencesHelper(this).name)))
+            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).setText(Html.fromHtml(getString(R.string.menu_memberName, sharedPref.name)))
         } else
             navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
 
-        if (PreferencesHelper(this).user.isNotEmpty()) {
+        if (sharedPref.user.isNotEmpty()) {
 //            navigationView.getHeaderView(0).findViewById<TextView>(R.id.bChangePassword).visibility = View.VISIBLE
             navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.VISIBLE
-            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, PreferencesHelper(this).user)))
+            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).setText(Html.fromHtml(getString(R.string.menu_syndicateNumber, sharedPref.user)))
         } else {
 //            navigationView.getHeaderView(0).findViewById<TextView>(R.id.bChangePassword).visibility = View.INVISIBLE
             navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.GONE
         }
-        navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, PreferencesHelper(this).mobile)))
+        navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, sharedPref.mobile)))
 
-        navigationView.getHeaderView(0).visibility = if (PreferencesHelper(this).mobile.isNotEmpty()) View.VISIBLE else View.GONE
+        navigationView.getHeaderView(0).visibility = if (sharedPref.mobile.isNotEmpty()) View.VISIBLE else View.GONE
 
-        if (!PreferencesHelper(this).mobile.isNotEmpty())
+        if (!sharedPref.mobile.isNotEmpty())
             navigationView.getChildAt(0).setPadding(0, 100, 0, 0)
         else
             navigationView.getChildAt(0).setPadding(0, 0, 0, 0)
 
         val tvBadge = notificationsItem?.actionView?.findViewById<TextView>(R.id.tvBadge)
-        if (PreferencesHelper(this).notificationsCount == 0) tvBadge?.visibility = View.INVISIBLE
+        if (sharedPref.notificationsCount == 0) tvBadge?.visibility = View.INVISIBLE
         else {
             tvBadge?.visibility = View.VISIBLE
-            tvBadge?.setText(PreferencesHelper(this).notificationsCount.toString())
+            tvBadge?.setText(sharedPref.notificationsCount.toString())
         }
         val ivNotification = notificationsItem?.actionView?.findViewById<ImageView>(R.id.ivNotification)
         ivNotification?.setOnClickListener {
@@ -413,7 +408,7 @@ class MainActivity : AppCompatActivity() {
 //        listDataHeader.add(tripsItem)
 
         val medicalRenewItem = NavigationMenuItem(R.drawable.ic_menu_claiming, R.string.medical_renew_title, {
-            if (PreferencesHelper(this).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.medicalRenewFragment)
             else {
                 val bundle: Bundle = Bundle()
@@ -429,7 +424,7 @@ class MainActivity : AppCompatActivity() {
         listDataHeader.add(medicalItem)
 
         val claimingItem = NavigationMenuItem(R.drawable.ic_menu_claiming, R.string.claiming_title, {
-            if (PreferencesHelper(this).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.claimingFragment)
             else {
                 val bundle: Bundle = Bundle()
@@ -440,7 +435,7 @@ class MainActivity : AppCompatActivity() {
         listDataHeader.add(claimingItem)
 
         val medicalLettersItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.medical_letters_title, {
-            if (PreferencesHelper(this).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.medicalLettersFragment)
             else {
                 val bundle: Bundle = Bundle()
@@ -451,7 +446,7 @@ class MainActivity : AppCompatActivity() {
         listDataHeader.add(medicalLettersItem)
 
         val medicalLettersInquiryItem = NavigationMenuItem(R.drawable.ic_menu_help, R.string.medical_letters_inquiry_title, {
-            if (PreferencesHelper(this).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.medicalLettersInquiryFragment)
             else {
                 val bundle: Bundle = Bundle()
@@ -459,10 +454,10 @@ class MainActivity : AppCompatActivity() {
                 navController().navigate(R.id.signupFragment, bundle)
             }
         })
-//        listDataHeader.add(medicalLettersInquiryItem)
+        listDataHeader.add(medicalLettersInquiryItem)
 
         val pharmacyItem = NavigationMenuItem(R.drawable.ic_pharmacy_green, R.string.online_pharmacy_title, {
-            if (PreferencesHelper(this).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.onlinePharmacyFragment)
             else {
                 val bundle: Bundle = Bundle()
@@ -478,7 +473,7 @@ class MainActivity : AppCompatActivity() {
         listDataHeader.add(paymentsItem)
 
         val engineeringRecordsItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.engineering_records_title, {
-            if (PreferencesHelper(this).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.engineeringRecordsDetailsFragment)
             else {
                 val bundle: Bundle = Bundle()
@@ -489,7 +484,7 @@ class MainActivity : AppCompatActivity() {
 //        listDataHeader.add(engineeringRecordsItem)
 
         val updateDataItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.update_data_title, {
-            if (PreferencesHelper(this).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.updateDataVerificationFragment)
             else {
                 val bundle: Bundle = Bundle()
@@ -500,7 +495,7 @@ class MainActivity : AppCompatActivity() {
 //        listDataHeader.add(updateDataItem)
 
         val complaintsItem = NavigationMenuItem(R.drawable.ic_menu_complaints, R.string.complaints_title, {
-            if (PreferencesHelper(this).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.complaintsFragment)
             else {
                 val bundle: Bundle = Bundle()
@@ -534,7 +529,7 @@ class MainActivity : AppCompatActivity() {
         val userServicesList: MutableList<NavigationMenuItem> = mutableListOf()
 
         val userServiceTrackShipment = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.track_shipment_title,  {
-            if (PreferencesHelper(this).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.trackShipmentFragment)
             else {
                 val bundle: Bundle = Bundle()
@@ -545,7 +540,7 @@ class MainActivity : AppCompatActivity() {
         userServicesList.add(userServiceTrackShipment)
 
         val userServiceChangeUserMobile = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.change_user_mobile_title, {
-            if (PreferencesHelper(this).isRegistered)
+            if (sharedPref.isRegistered)
                 navController().navigate(R.id.changeUserMobileFragment)
             else {
                 val bundle: Bundle = Bundle()
@@ -556,10 +551,10 @@ class MainActivity : AppCompatActivity() {
         userServicesList.add(userServiceChangeUserMobile)
 
         val userServiceChangePassword = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.change_password_title, {
-            if (PreferencesHelper(this).isRegistered) {
+            if (sharedPref.isRegistered) {
                 val bundle: Bundle = Bundle()
                 bundle.putBoolean("isSetNew", false)
-                bundle.putString("mobile", PreferencesHelper(this).mobile)
+                bundle.putString("mobile", sharedPref.mobile)
                 bundle.putString("otp", "")
                 navController().navigate(R.id.openChangePasswordFragment, bundle)
             }

@@ -16,7 +16,7 @@ import com.neqabty.R
 import com.neqabty.databinding.MedicalProvidersFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.entities.SpecializationUI
+import com.neqabty.presentation.entities.MedicalDirectoryLookupsUI
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_providers_fragment.*
@@ -42,7 +42,7 @@ class MedicalProvidersFragment : BaseFragment() {
 
     var categoryId: Int = 0
     var title: String = ""
-    var specializations = mutableListOf<SpecializationUI>()
+    var specializations = mutableListOf<MedicalDirectoryLookupsUI.DoctorSpecialization>()
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -75,10 +75,10 @@ class MedicalProvidersFragment : BaseFragment() {
 //        }
 
         val adapter = MedicalProvidersAdapter(dataBindingComponent, appExecutors) { provider ->
-            provider.typeID = categoryId.toString()
+            provider.typeId = categoryId.toString()
             provider.typeName = title
             navController().navigate(
-                    MedicalProvidersFragmentDirections.openProviderDetails(provider)
+                    MedicalProvidersFragmentDirections.openProviderDetails(medicalProvidersViewModel.mapProviders(provider))
             )
         }
         this.adapter = adapter
@@ -92,9 +92,9 @@ class MedicalProvidersFragment : BaseFragment() {
                 llSuperProgressbar.visibility = View.VISIBLE
 
                 if (categoryId == 2)
-                    medicalProvidersViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())
+                    medicalProvidersViewModel.getMedicalProfessions(sharedPref.mobile)
                 else
-                    medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), name, governID.toString(), areaID.toString(), "", degreeID)
+                    medicalProvidersViewModel.getMedicalProviders(sharedPref.mobile, categoryId.toString(), governID.toString(), areaID.toString(), name, "")
 
             }, cancelCallback = {
                 navController().navigateUp()
@@ -102,9 +102,9 @@ class MedicalProvidersFragment : BaseFragment() {
         })
 
         if (categoryId == 2)
-            medicalProvidersViewModel.getMedicalProfessions(categoryId.toString(), governID.toString(), areaID.toString())
+            medicalProvidersViewModel.getMedicalProfessions(sharedPref.mobile)
         else
-            medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), name, governID.toString(), areaID.toString(), "", degreeID)
+            medicalProvidersViewModel.getMedicalProviders(sharedPref.mobile, categoryId.toString(), governID.toString(), areaID.toString(),name,  "")
     }
 
     private fun handleViewState(state: MedicalProvidersViewState) {
@@ -124,9 +124,9 @@ class MedicalProvidersFragment : BaseFragment() {
             state.providers = null
             return
         }
-        state.professions?.let {
+        state.specializations?.let {
             specializations = it.toMutableList()
-            state.professions = null
+            state.specializations = null
             spSpecialization.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, specializations)
             initializeViews()
         }
@@ -136,11 +136,11 @@ class MedicalProvidersFragment : BaseFragment() {
         spSpecialization.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), name, governID.toString(), areaID.toString(), (parent.getItemAtPosition(position) as SpecializationUI).id.toString(), degreeID)
+                medicalProvidersViewModel.getMedicalProviders(sharedPref.mobile, categoryId.toString(), governID.toString(), areaID.toString(), name, (parent.getItemAtPosition(position) as MedicalDirectoryLookupsUI.DoctorSpecialization).id.toString())
             }
         }
         spSpecialization.setSelection(0)
-        medicalProvidersViewModel.getMedicalProviders(categoryId.toString(), name, governID.toString(), areaID.toString(), specializations[0].id.toString(), degreeID)
+        medicalProvidersViewModel.getMedicalProviders(sharedPref.mobile, categoryId.toString(), governID.toString(), areaID.toString(), name, specializations[0].id.toString())
     }
 
 //region

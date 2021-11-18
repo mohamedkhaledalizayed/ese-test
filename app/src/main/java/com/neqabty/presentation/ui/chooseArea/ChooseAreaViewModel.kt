@@ -1,19 +1,16 @@
 package com.neqabty.presentation.ui.chooseArea
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.GetAllAreas
-import com.neqabty.domain.usecases.GetAllGoverns
+import com.neqabty.domain.usecases.GetMedicalDirectoryLookups
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
-import com.neqabty.presentation.mappers.AreaEntityUIMapper
-import com.neqabty.presentation.mappers.GovernEntityUIMapper
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.neqabty.presentation.mappers.MedicalDirectoryLookupsEntityUIMapper
 import javax.inject.Inject
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 @HiltViewModel
-class ChooseAreaViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, val getAllAreas: GetAllAreas) : BaseViewModel() {
-    private val areaEntityUIMapper = AreaEntityUIMapper()
-    private val governEntityUIMapper = GovernEntityUIMapper()
+class ChooseAreaViewModel @Inject constructor(val getMedicalDirectoryLookups: GetMedicalDirectoryLookups) : BaseViewModel() {
+    private val medicalDirectoryLookupsEntityUIMapper = MedicalDirectoryLookupsEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<ChooseAreaViewState> = MutableLiveData()
@@ -22,37 +19,20 @@ class ChooseAreaViewModel @Inject constructor(val getAllGoverns: GetAllGoverns, 
         viewState.value = ChooseAreaViewState(isLoading = true)
     }
 
-    fun getAllContent1() {
+    fun getAllContent1(mobileNumber: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        val governsDisposable = getAllGoverns.observable()
-                .flatMap {
+        val governsDisposable = getMedicalDirectoryLookups.getLookups(mobileNumber)
+                .map {
                     it.let {
-                        governEntityUIMapper.observable(it)
+                        medicalDirectoryLookupsEntityUIMapper.mapFrom(it)
                     }
                 }.subscribe(
                         {
-                            viewState.value = viewState.value?.copy(governs = it)
+                            viewState.value = viewState.value?.copy(governs = it.governs, areas = it.areas)
                             onContent1Received()
                         },
                         { errorState.value = handleError(it) }
                 )
-
-        val areasDisposable = getAllAreas.observable()
-                .flatMap {
-                    it.let {
-                        areaEntityUIMapper.observable(it)
-                    }
-                }.subscribe(
-                        {
-                            viewState.value = viewState.value?.copy(areas = it)
-                            onContent1Received()
-                        },
-                        { errorState.value = handleError(it) }
-                )
-
-        viewState.value?.areas?.let {
-            onContent1Received()
-        } ?: addDisposable(areasDisposable)
 
         viewState.value?.governs?.let {
             onContent1Received()

@@ -70,7 +70,7 @@ class MedicalLettersFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-//        PreferencesHelper(requireContext()).user = "3608662"
+//        sharedPref.user = "3608662"
         initializeViews()
 
         val adapter = MedicalLettersAdapter(dataBindingComponent, appExecutors) { letterItem ->
@@ -87,13 +87,13 @@ class MedicalLettersFragment : BaseFragment() {
         medicalLetterViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                medicalLetterViewModel.validateUser(PreferencesHelper(requireContext()).user)
+                medicalLetterViewModel.validateUser(sharedPref.user)
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
 
-        medicalLetterViewModel.validateUser(PreferencesHelper(requireContext()).user)
+        medicalLetterViewModel.validateUser(sharedPref.user)
     }
 
     private fun handleViewState(state: MedicalLettersViewState) {
@@ -122,7 +122,7 @@ class MedicalLettersFragment : BaseFragment() {
                 0 -> {
                     llSuperProgressbar.visibility = View.VISIBLE
                     state.member = null
-                    medicalLetterViewModel.getMedicalRenewalData(PreferencesHelper(requireContext()).mobile, PreferencesHelper(requireContext()).user)
+                    medicalLetterViewModel.getMedicalRenewalData(sharedPref.mobile, sharedPref.user)
                 }
                 else -> {
                     if (state.member?.message != null) showAlert(state.member?.message ?: getString(R.string.user_not_allowed)){navController().navigateUp()}
@@ -166,7 +166,7 @@ class MedicalLettersFragment : BaseFragment() {
 
     fun loadMedicalLetters(start: Int = 0, end: Int = 0){
         llSuperProgressbar.visibility = View.VISIBLE
-        medicalLetterViewModel.getMedicalLetters(selectedFollower.id.toString(), start, end, mobileNumber = PreferencesHelper(requireContext()).mobile)
+        medicalLetterViewModel.getMedicalLetters(selectedFollower.id.toString(), start, end, mobileNumber = sharedPref.mobile)
     }
 //region
 
