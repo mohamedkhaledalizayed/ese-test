@@ -1,8 +1,7 @@
-package com.neqabty.yodawy.modules
+package com.neqabty.yodawy.modules.orders.presentation.view.orderdetailscreen
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.neqabty.yodawy.R
@@ -11,8 +10,6 @@ import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.AppUtils
 import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivityOrderDetailsBinding
-import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
-import com.neqabty.yodawy.modules.orders.presentation.view.orderstatusscreen.OrdersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 

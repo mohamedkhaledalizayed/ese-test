@@ -6,15 +6,12 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
-import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.data.Constants.mobileNumber
 import com.neqabty.yodawy.databinding.ActivityOrdersBinding
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.Status
-import com.neqabty.yodawy.modules.OrderDetailsActivity
+import com.neqabty.yodawy.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
-import com.neqabty.yodawy.modules.products.presentation.view.productscreen.ProductDetailsActivity
-import com.vlonjatg.progressactivity.ProgressRelativeLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

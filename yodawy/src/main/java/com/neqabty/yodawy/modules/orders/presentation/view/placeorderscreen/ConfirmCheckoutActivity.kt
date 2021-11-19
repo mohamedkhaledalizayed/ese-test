@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules
+package com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -14,7 +14,6 @@ import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivityConfirmCheckoutBinding
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import com.neqabty.yodawy.modules.orders.domain.entity.ItemParam
-import com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen.PlaceOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 

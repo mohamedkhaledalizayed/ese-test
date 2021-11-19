@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen
+package com.neqabty.yodawy.modules.orders.presentation.view.placeprescriptionscreen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

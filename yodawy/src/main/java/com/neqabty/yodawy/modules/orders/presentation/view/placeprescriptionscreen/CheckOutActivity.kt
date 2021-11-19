@@ -1,10 +1,9 @@
-package com.neqabty.yodawy.modules
+package com.neqabty.yodawy.modules.orders.presentation.view.placeprescriptionscreen
 
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -20,9 +19,9 @@ import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.FileUtils
 import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivityCheckOutBinding
+import com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen.ConfirmCheckoutActivity
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import com.neqabty.yodawy.modules.orders.data.model.request.OrderRequest
-import com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen.PlacePrescriptionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

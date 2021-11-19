@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules
+package com.neqabty.yodawy.modules.orders.presentation.view.orderdetailscreen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
