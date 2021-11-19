@@ -70,7 +70,7 @@ class OrdersActivity : BaseActivity<ActivityOrdersBinding>() {
             OrdersAdapter.OnItemClickListener {
             override fun setOnItemClickListener(order: OrderEntity) {
                 val intent: Intent = Intent(this@OrdersActivity, OrderDetailsActivity::class.java)
-                intent.putExtra("order", order)
+                intent.putExtra("orderId", order.id)
                 startActivity(intent)
             }
         }

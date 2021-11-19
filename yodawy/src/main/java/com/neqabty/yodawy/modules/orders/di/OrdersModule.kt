@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules.address.di
+package com.neqabty.yodawy.modules.orders.di
 
 import com.neqabty.yodawy.modules.orders.data.api.OrderApi
 import com.neqabty.yodawy.modules.orders.data.repository.OrderRepositoryImpl

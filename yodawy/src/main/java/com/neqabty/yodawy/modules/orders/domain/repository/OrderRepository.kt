@@ -13,6 +13,11 @@ interface OrderRepository {
         pageSize: Int
     ): Flow<List<OrderEntity>>
 
+    fun getSpecificOrder(
+        mobileNumber: String,
+        orderId: String
+    ): Flow<OrderEntity>
+
     fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<Boolean>
     fun placePrescription(order: RequestBody, images: ArrayList<MultipartBody.Part>): Flow<Boolean>
 }

@@ -5,6 +5,7 @@ import com.neqabty.yodawy.modules.orders.data.model.OrderListRequestBody
 import com.neqabty.yodawy.modules.orders.data.model.mapper.toOrderEntity
 import com.neqabty.yodawy.modules.orders.data.model.request.ItemRequest
 import com.neqabty.yodawy.modules.orders.data.model.request.PlaceOrderRequestBody
+import com.neqabty.yodawy.modules.orders.data.model.request.order.OrderRequestBody
 import com.neqabty.yodawy.modules.orders.data.source.OrdersDS
 import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
 import com.neqabty.yodawy.modules.orders.domain.repository.OrderRepository
@@ -27,6 +28,15 @@ class OrderRepositoryImpl @Inject constructor(private val ordersDS: OrdersDS) : 
                 pageSize = pageSize
             )
         ).map { it.orders.map { it.toOrderEntity() } }
+    }
+
+    override fun getSpecificOrder(mobileNumber: String, orderId: String): Flow<OrderEntity> {
+        return ordersDS.getOrder(
+            OrderRequestBody(
+                mobile = mobileNumber,
+                orderId = orderId
+            )
+        ).map { it.toOrderEntity() }
     }
 
     override fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<Boolean> {
