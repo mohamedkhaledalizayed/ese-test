@@ -6,53 +6,53 @@ import com.neqabty.courses.offers.domain.entity.*
 
 fun OfferModel.toOfferEntity(): OfferEntity {
     return OfferEntity(
-        address,
+        address ?: "",
         appointments.map { it.toAppointmentEntity() },
-        contact,
+        contact ?: "",
         course.toCourseEntity(),
-        endDate,
-        fullyBooked,
+        endDate ?: "",
+        fullyBooked ?: false,
         id,
-        isAvailable,
-        maxNumOfTrainees,
-        numOfTrainees,
+        isAvailable ?: true,
+        maxNumOfTrainees ?: 0,
+        numOfTrainees ?: 0,
         pricing.map { it.toPricingEntity() },
         reservations.map { it.toReservationEntity() },
-        startDate,
-        title
+        startDate ?: "",
+        title ?: ""
     )
 }
 
 
 fun Appointment.toAppointmentEntity(): AppointmentEntity {
-    return AppointmentEntity(day, id, offer, timeFrom, timeTo)
+    return AppointmentEntity(day ?: 0, id, offer ?: 0, timeFrom ?: "", timeTo ?: "")
 }
 
 fun Pricing.toPricingEntity(): PricingEntitty {
     return PricingEntitty(
-        id, offer, price,
-        StudentCategoryEntity(studentCategory.code, studentCategory.name)
+        id, offer ?: 0, price ?: "",
+        StudentCategoryEntity(studentCategory.code ?: "", studentCategory.name ?: "")
     )
 }
 
 fun Reservation.toReservationEntity(): ReservationEntity {
     return ReservationEntity(
-        cost,
+        cost ?: "",
         id,
-        offer,
+        offer ?: 0,
         paymentStatus,
-        queueNumber,
-        status,
-        student.toStudentEntity()
+        queueNumber ?: 0,
+        status ?: "",
+        student?.toStudentEntity() ?: StudentEntity("", 0, 0, StudentCategoryEntity("", ""))
     )
 
 }
 
 fun Student.toStudentEntity(): StudentEntity {
     return StudentEntity(
-        fullName,
+        fullName ?: "",
         id,
-        membershipId,
-        StudentCategoryEntity(stdCategory.code, stdCategory.name)
+        membershipId ?: 0,
+        StudentCategoryEntity(stdCategory.code ?: "", stdCategory.name ?: "")
     )
 }

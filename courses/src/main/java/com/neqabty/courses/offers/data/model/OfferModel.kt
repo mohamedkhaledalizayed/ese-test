@@ -6,33 +6,33 @@ import com.neqabty.courses.home.data.model.CourseModel
 
 data class OfferModel(
     @SerializedName("address")
-    val address: String,
+    val address: String?,
     @SerializedName("appointments")
-    val appointments: List<Appointment>,
+    val appointments: List<Appointment> = listOf(),
     @SerializedName("contact")
-    val contact: String,
+    val contact: String?,
     @SerializedName("course")
     val course: CourseModel,
     @SerializedName("end_date")
-    val endDate: String,
+    val endDate: String?,
     @SerializedName("fully_booked")
-    val fullyBooked: Boolean,
+    val fullyBooked: Boolean?,
     @SerializedName("id")
     val id: Int,
     @SerializedName("is_available")
-    val isAvailable: Boolean,
+    val isAvailable: Boolean?,
     @SerializedName("links")
     val links: Links,
     @SerializedName("max_num_of_trainees")
-    val maxNumOfTrainees: Int,
+    val maxNumOfTrainees: Int?,
     @SerializedName("num_of_trainees")
-    val numOfTrainees: Int,
+    val numOfTrainees: Int?,
     @SerializedName("pricing")
-    val pricing: List<Pricing>,
+    val pricing: List<Pricing> = listOf(),
     @SerializedName("reservations")
-    val reservations: List<Reservation>,
+    val reservations: List<Reservation> = listOf(),
     @SerializedName("start_date")
-    val startDate: String,
+    val startDate: String?,
     @SerializedName("title")
-    val title: String
+    val title: String?
 )

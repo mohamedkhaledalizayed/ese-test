@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class Links(
     @SerializedName("appointments")
-    val appointments: String,
+    val appointments: String?,
     @SerializedName("pricing")
-    val pricing: String,
+    val pricing: String?,
     @SerializedName("reservations")
-    val reservations: String
+    val reservations: String?
 )

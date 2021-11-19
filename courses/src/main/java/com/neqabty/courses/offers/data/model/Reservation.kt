@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName
 
 data class Reservation(
     @SerializedName("cost")
-    val cost: String,
+    val cost: String?,
     @SerializedName("id")
     val id: Int,
     @SerializedName("offer")
-    val offer: Int,
+    val offer: Int?,
     @SerializedName("payment_status")
-    val paymentStatus: Any? = null,
+    val paymentStatus: Any? ,
     @SerializedName("queue_number")
-    val queueNumber: Int,
+    val queueNumber: Int?,
     @SerializedName("status")
-    val status: String,
+    val status: String?,
     @SerializedName("student")
-    val student: Student
+    val student: Student?
 )

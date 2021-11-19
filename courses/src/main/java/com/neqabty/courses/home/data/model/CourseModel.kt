@@ -7,13 +7,13 @@ data class CourseModel(
     @SerializedName("id")
     val id: Int,
     @SerializedName("image")
-    val image: String?=null,
+    val image: String?,
     @SerializedName("num_of_sessions")
-    val numOfSessions: Int,
+    val numOfSessions: Int?,
     @SerializedName("prerequisites")
-    val prerequisites: Any? = null,
+    val prerequisites: Any?,
     @SerializedName("syllabus")
-    val syllabus: String,
+    val syllabus: String?,
     @SerializedName("title")
-    val title: String
+    val title: String?
 )

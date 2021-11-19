@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class UserLinks(
     @SerializedName("user")
-    val user: String
+    val user: String?
 )
