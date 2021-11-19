@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.fragment.app.FragmentTransaction
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants.mobileNumber
 import com.neqabty.yodawy.core.ui.BaseActivity
@@ -20,6 +21,7 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
     private val mAdapter = ItemssAdapter()
     private lateinit var prescriptionsAdapter: PrescriptionsAdapter
     private lateinit var dialog: AlertDialog
+    private var prescriptionsImages: MutableList<String> = ArrayList()
     override fun getViewBinding() = ActivityOrderDetailsBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,7 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
             .setContext(this)
             .setMessage("Please Wait...")
             .build()
+        prescriptionsAdapter = PrescriptionsAdapter(this)
         orderViewModel.getSpecificOrder(mobileNumber, "$orderId")
 
         orderViewModel.order.observe(this){
@@ -55,7 +58,7 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
 
 
                         if (resource.data.prescriptionImageEntities!!.isNotEmpty()){
-                            prescriptionsAdapter = PrescriptionsAdapter(this)
+                            prescriptionsImages.addAll(resource.data.prescriptionImageEntities)
                             binding.photosRecycler.adapter = prescriptionsAdapter
                             prescriptionsAdapter.submitList(resource.data.prescriptionImageEntities)
                         }else{
@@ -66,6 +69,16 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
                         dialog.dismiss()
                     }
                 }
+            }
+
+        }
+
+        prescriptionsAdapter.onItemClickListener = object :
+            PrescriptionsAdapter.OnItemClickListener {
+            override fun setOnItemClickListener(position: Int) {
+                val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                val newFragment = SlideshowDialogFragment.newInstance(prescriptionsImages, position)
+                newFragment.show(ft, "slideshow")
             }
 
         }
