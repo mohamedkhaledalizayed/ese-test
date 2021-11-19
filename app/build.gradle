@@ -15,8 +15,8 @@ apply plugin: 'kotlin-android-extensions'
 
 
 def versionTemplate = "{labelx}.{labely}.{labelz}"
-def serverBuild = System.getenv('NEQABTY_BUILDNUMBER')
-def secret = System.getenv('NEQABTY_SECRET')
+def serverBuild = System.getenv('NEQABTY_BUILDNUMBER') ?: ${NEQABTY_BUILDNUMBER}
+def secret = System.getenv('NEQABTY_SECRET') ?: ${NEQABTY_SECRET}
 
 
 def getLocalSigningConfig(String secret) {
@@ -49,7 +49,7 @@ android {
         config {
             keyAlias 'neqabty'
             keyPassword secret
-            storeFile file('D:/Work/Mobile/Neqabty/NeQabty/keyStore.jks')
+            storeFile file('/Users/islamlotfy/StudioProjects/Neqabty/NeQabty/keyStore.jks')
             storePassword secret
         }
     }
@@ -220,7 +220,8 @@ dependencies {
     implementation project(':wheel')
     implementation project(':mobilepaymentsdktest')
     implementation project(path: ':pdfcreator')
-    implementation project(':yodawy')
+//    implementation project(':yodawy')
+    implementation project(':trips')
     testImplementation deps.junit
     testImplementation deps.mock_web_server
     testImplementation(deps.arch_core.testing, {

@@ -16,4 +16,5 @@
 include ':mobilepaymentsdktest'
 include ':app', ':wheel', ':pdfcreator'
 include ':features:ads'
-include ':yodawy'
+//include ':yodawy'
+include ':trips'

@@ -35,6 +35,7 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.common.ExpandableListAdapter
 import com.neqabty.presentation.entities.NavigationMenuItem
 import com.neqabty.presentation.util.*
+import com.neqabty.trips.modules.home.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.main_activity.*
 import java.util.*
@@ -68,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         checkRoot()
         startActivities()
 //        loadAds()
+        startActivity(Intent(this,HomeActivity::class.java))
 
         Constants.isFirebaseTokenUpdated.observe(this, Observer {
             if (it.isNotBlank()){
