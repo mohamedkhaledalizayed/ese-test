@@ -1,6 +1,7 @@
 package com.neqabty.yodawy.modules.products.presentation.view.productscreen
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,8 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 
-class SearchAdapter(val invalidateMenuCallback: () -> Unit) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
+    RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     private val items: MutableList<ProductEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
@@ -94,7 +96,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) : RecyclerView.Adapt
         viewHolder.binding.medicationPrice.text = "EGP ${item.salePrice.toString()}"
 
         viewHolder.binding.addItem.setOnClickListener {
-            if (Constants.imageList.isEmpty()){
+            if (Constants.imageList.isEmpty()) {
                 viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
                 viewHolder.binding.addItem.visibility = View.GONE
                 //TODO confirm to clear cart
@@ -109,12 +111,12 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) : RecyclerView.Adapt
         }
 
         //show saved items
-        cartItems.mapIndexed{ ind, product ->
-            if (product.first.id == item.id){
+        cartItems.mapIndexed { ind, product ->
+            if (product.first.id == item.id) {
                 viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
                 viewHolder.binding.addItem.visibility = View.GONE
                 viewHolder.binding.viewDetails.visibility = View.GONE
-                viewHolder.binding.quantity.text = "${cartItems[ind].first.quantity}"
+                viewHolder.binding.quantity.text = "${cartItems[ind].second}"
             }
         }
 
@@ -124,35 +126,51 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) : RecyclerView.Adapt
 
         //increase
         viewHolder.binding.increase.setOnClickListener {
-            cartItems.mapIndexed{ ind, product ->
-                if (product.first.id == item.id){
-                    cartItems[ind].first.quantity = cartItems[ind].first.quantity + 1
-                    viewHolder.binding.quantity.text = "${cartItems[ind].first.quantity}"
-                }
-            }
+
+//            cartItems.mapIndexed{ ind, product ->
+//                if (product.first.id == item.id){
+//                    cartItems[ind].first.quantity = cartItems[ind].first.quantity + 1
+//                    cartItems[ind] = cartItems[ind].copy(second = cartItems[ind].second+1 )
+//                    Log.e("quantity: ", cartItems[ind].toString())
+//
+//                }
+//            }
+            val index = cartItems.addOrIncrement(item)
+            viewHolder.binding.quantity.text = "${cartItems[index].second}"
             invalidateMenuCallback.invoke()
         }
 
 //        //decrease
         viewHolder.binding.decrease.setOnClickListener {
-
-            cartItems.mapIndexed{ ind, product ->
-                if (product.first.id == item.id){
-                    if (cartItems[ind].first.quantity > 1){
-                        cartItems[ind].first.quantity = cartItems[ind].first.quantity - 1
-                        viewHolder.binding.quantity.text = "${cartItems[ind].first.quantity}"
-                    }else{
-                        //remove this item
-                        cartItems.removeAt(ind)
-                        viewHolder.binding.increaseDecrease.visibility = View.GONE
-                        if (item.isLimitedAvailability){
-                            viewHolder.binding.viewDetails.visibility = View.VISIBLE
-                        }else{
-                            viewHolder.binding.addItem.visibility = View.VISIBLE
-                        }
-                    }
+            val index = cartItems.removeOrDecrement(item)
+            if(index==-1){
+                viewHolder.binding.increaseDecrease.visibility = View.GONE
+                if (item.isLimitedAvailability) {
+                    viewHolder.binding.viewDetails.visibility = View.VISIBLE
+                } else {
+                    viewHolder.binding.addItem.visibility = View.VISIBLE
                 }
+            }else{
+                viewHolder.binding.quantity.text = "${cartItems[index].second}"
+
             }
+//            cartItems.mapIndexed { ind, product ->
+//                if (product.first.id == item.id) {
+//                    if (cartItems[ind].first.quantity > 1) {
+//                        cartItems[ind].first.quantity = cartItems[ind].first.quantity - 1
+//                        viewHolder.binding.quantity.text = "${cartItems[ind].first.quantity}"
+//                    } else {
+//                        //remove this item
+//                        cartItems.removeAt(ind)
+//                        viewHolder.binding.increaseDecrease.visibility = View.GONE
+//                        if (item.isLimitedAvailability) {
+//                            viewHolder.binding.viewDetails.visibility = View.VISIBLE
+//                        } else {
+//                            viewHolder.binding.addItem.visibility = View.VISIBLE
+//                        }
+//                    }
+//                }
+//            }
             invalidateMenuCallback.invoke()
         }
     }
