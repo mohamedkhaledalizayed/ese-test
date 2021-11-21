@@ -17,7 +17,7 @@ abstract class OrdersModule {
     companion object {
         @Provides
         fun providesCourseApiService(
-            @Named("yodawy") retrofit: Retrofit) = retrofit.create(OrderApi::class.java)
+            @Named("Prescriptions") retrofit: Retrofit) = retrofit.create(OrderApi::class.java)
     }
     @Binds
     internal abstract fun bindsOrderRepository(orderRepositoryImpl: OrderRepositoryImpl): OrderRepository
