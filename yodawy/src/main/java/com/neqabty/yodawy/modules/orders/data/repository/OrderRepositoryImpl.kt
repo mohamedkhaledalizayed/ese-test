@@ -39,7 +39,7 @@ class OrderRepositoryImpl @Inject constructor(private val ordersDS: OrdersDS) : 
         ).map { it.toOrderEntity() }
     }
 
-    override fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<Boolean> {
+    override fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<String> {
         return ordersDS.placeOrder(
             PlaceOrderRequestBody(
                 placeOrderParam.addressId,
@@ -48,14 +48,14 @@ class OrderRepositoryImpl @Inject constructor(private val ordersDS: OrdersDS) : 
                 placeOrderParam.notes,
                 placeOrderParam.plan
             )
-        ).map { it.isSuccess }
+        ).map { it.id }
     }
 
 
-    override fun placePrescription(order: RequestBody, images: ArrayList<MultipartBody.Part>): Flow<Boolean> {
+    override fun placePrescription(order: RequestBody, images: ArrayList<MultipartBody.Part>): Flow<String> {
         return ordersDS.placePrescription(
             order,
             images
-        ).map { it.isSuccess }
+        ).map { it.id }
     }
 }

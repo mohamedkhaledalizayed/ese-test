@@ -1,16 +1,21 @@
 package com.neqabty.yodawy.modules.orders.presentation.view.orderdetailscreen
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentTransaction
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants
+import com.neqabty.yodawy.core.data.Constants.jwt
 import com.neqabty.yodawy.core.data.Constants.mobileNumber
+import com.neqabty.yodawy.core.data.Constants.userNumber
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.AppUtils
 import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivityOrderDetailsBinding
+import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -21,6 +26,7 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
     private val mAdapter = ItemssAdapter()
     private lateinit var prescriptionsAdapter: PrescriptionsAdapter
     private lateinit var dialog: AlertDialog
+    private var navigation = false
     private var prescriptionsImages: MutableList<String> = ArrayList()
     override fun getViewBinding() = ActivityOrderDetailsBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +35,7 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
         setupToolbar(titleResId = R.string.order_details)
 
         val orderId = intent.getStringExtra("orderId")
+        navigation = intent.getBooleanExtra("navigation", false)
         dialog = SpotsDialog.Builder()
             .setContext(this)
             .setMessage("Please Wait...")
@@ -83,5 +90,22 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
 
         }
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (navigation){
+            val bundle = Bundle()
+            bundle.putString("user_number", userNumber)
+            bundle.putString("mobile_number", mobileNumber)
+            bundle.putString("jwt", jwt)
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.putExtras(bundle)
+            startActivity(intent)
+            finish()
+        }else{
+            finish()
+        }
     }
 }

@@ -22,6 +22,7 @@ import com.neqabty.yodawy.databinding.ActivityCheckOutBinding
 import com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen.ConfirmCheckoutActivity
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import com.neqabty.yodawy.modules.orders.data.model.request.OrderRequest
+import com.neqabty.yodawy.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -61,7 +62,9 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
                         bundle.putString("user_number", Constants.userNumber)
                         bundle.putString("mobile_number", Constants.mobileNumber)
                         bundle.putString("jwt", Constants.jwt)
-                        val intent = Intent(this, HomeActivity::class.java)
+                        bundle.putString("orderId", resource.data)
+                        bundle.putBoolean("navigation", true)
+                        val intent = Intent(this, OrderDetailsActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         intent.putExtras(bundle)
                         startActivity(intent)

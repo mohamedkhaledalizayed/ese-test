@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PlacePrescriptionViewModel @Inject constructor(private val placePrescriptionUseCase: PlacePrescriptionUseCase) :
     ViewModel() {
-    val placeImagesResult = MutableLiveData<Resource<Boolean>>()
+    val placeImagesResult = MutableLiveData<Resource<String>>()
     fun placePrescriptionImages(
         order: RequestBody,
         images: ArrayList<MultipartBody.Part>
