@@ -534,5 +534,9 @@
     <string name="arabic_letters">غظضذ خثتشرقصجفعسنملةىكيطئءؤحزوهدبا أإلإآ</string>
 
     <string name="online_pharmacy_vezeeta">فيزيتا</string>
+    <string name="online_pharmacy_vezeeta_fees">فيزيتا
+تغطي القاهرة والاسكندرية بخدمة توصل ١٠ جنية</string>
     <string name="online_pharmacy_yodawy">يداوي</string>
+    <string name="online_pharmacy_yodawy_fees">يداوي
+تغطي جميع انحاء الجمهورية بخدمة توصيل مجانية</string>
 </resources>

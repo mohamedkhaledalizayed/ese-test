@@ -18,6 +18,6 @@ interface OrderRepository {
         orderId: String
     ): Flow<OrderEntity>
 
-    fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<Boolean>
-    fun placePrescription(order: RequestBody, images: ArrayList<MultipartBody.Part>): Flow<Boolean>
+    fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<String>
+    fun placePrescription(order: RequestBody, images: ArrayList<MultipartBody.Part>): Flow<String>
 }

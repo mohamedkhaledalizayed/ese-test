@@ -17,19 +17,19 @@ import javax.inject.Inject
 class OrdersDS @Inject constructor(private val orderApi: OrderApi) {
     fun getOrderList(orderListRequestBody: OrderListRequestBody): Flow<OrderListResponse> {
         return flow {
-            emit(orderApi.getOrdersList(orderListRequestBody).dataModel)
+            emit(orderApi.getOrdersList(orderListRequestBody = orderListRequestBody).dataModel)
         }
     }
 
    fun getOrder(orderRequestBody: OrderRequestBody): Flow<OrderModel> {
         return flow {
-            emit(orderApi.getOrder(orderRequestBody).dataModel)
+            emit(orderApi.getOrder(orderRequestBody = orderRequestBody).dataModel)
         }
     }
 
     fun placeOrder(placeOrderRequestBody: PlaceOrderRequestBody): Flow<PlaceOrderResponse>{
         return flow {
-            emit(orderApi.placeOrder(placeOrderRequestBody).dataModel)
+            emit(orderApi.placeOrder(placeOrderRequestBody = placeOrderRequestBody).dataModel)
         }
     }
 

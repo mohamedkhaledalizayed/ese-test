@@ -41,24 +41,29 @@ class NetworkModule {
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
             .addInterceptor(Interceptor { chain ->
 
-
                 val request = chain.request()
-                val response = chain.proceed(request)
-                if (request.header("No-Authentication") != null) {
-                    return@Interceptor response
-                }else{
-                    var newRequest = request.newBuilder()
+                var newRequest = request.newBuilder()
+                    .header("Authorization", "Bearer " + Constants.jwt)
+                    .header("Accept", "application/json")
+                    .build()
 
-                        .header("Authorization", "Bearer " + Constants.jwt)
-                        .header("Accept", "application/json")
-                        .build()
-
-                    var newResponse = chain.proceed(newRequest)
-
-                    return@Interceptor newResponse
-                }
+                chain.proceed(newRequest)
 
             })
+        okHttpClient.addInterceptor(loggingInterceptor)
+        okHttpClient.build()
+        return okHttpClient.build()
+    }
+
+    @Provides
+    @Named("Prescriptions")
+    fun provideOkHttpClientPrescriptions(
+        @Named("yodawy") loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+        val okHttpClient = OkHttpClient().newBuilder()
+        okHttpClient.callTimeout(40, TimeUnit.SECONDS)
+        okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
+        okHttpClient.readTimeout(40, TimeUnit.SECONDS)
+        okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.build()
         return okHttpClient.build()
@@ -73,6 +78,20 @@ class NetworkModule {
     @Named("yodawy")
     fun provideRetrofitClient(
         @Named("yodawy") okHttpClient: OkHttpClient,
+        baseUrl: String,
+        converterFactory: Converter.Factory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(okHttpClient)
+            .addConverterFactory(converterFactory)
+            .build()
+    }
+
+    @Provides
+    @Named("Prescriptions")
+    fun provideRetrofitClientPrescriptions(
+        @Named("Prescriptions") okHttpClient: OkHttpClient,
         baseUrl: String,
         converterFactory: Converter.Factory
     ): Retrofit {

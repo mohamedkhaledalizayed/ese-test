@@ -7,7 +7,7 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 
 class PlacePrescriptionUseCase @Inject constructor(private val orderRepository: OrderRepository) {
-     fun build(order: RequestBody, images: ArrayList<MultipartBody.Part>): Flow<Boolean> {
+     fun build(order: RequestBody, images: ArrayList<MultipartBody.Part>): Flow<String> {
          return orderRepository.placePrescription(order, images)
      }
 }
