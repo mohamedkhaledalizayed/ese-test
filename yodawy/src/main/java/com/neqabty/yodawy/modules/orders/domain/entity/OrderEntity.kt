@@ -15,6 +15,6 @@ data class OrderEntity(
     val notes: String,
     val orderNumber: String,
     val orderPrice: Double,
-    val pharmacy: String,
+    val pharmacy: String?,
     val prescriptionImageEntities: List<String>?
 ): Parcelable
