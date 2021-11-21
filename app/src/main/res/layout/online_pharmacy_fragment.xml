@@ -40,10 +40,22 @@
                 android:gravity="center"
                 android:text="@string/online_pharmacy_vezeeta"
                 android:textColor="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_vezeeta_fees"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ivVezeeta" />
+
+            <TextView
+                android:id="@+id/tv_vezeeta_fees"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/online_pharmacy_vezeeta_fees"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvVezeeta" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -60,12 +72,11 @@
             <ImageView
                 android:id="@+id/ivYodawy"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="100dp"
                 android:background="@drawable/rounded_bg_stroke"
                 android:padding="@dimen/margin_horizontal_small"
                 android:scaleType="fitCenter"
                 android:src="@drawable/yodawy"
-                app:layout_constraintBottom_toTopOf="@id/tvYodawy"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,7 +87,20 @@
                 android:paddingVertical="@dimen/margin_vertical_normal"
                 android:gravity="center"
                 android:text="@string/online_pharmacy_yodawy"
+                app:layout_constraintTop_toBottomOf="@+id/ivYodawy"
                 android:textColor="@color/colorPrimary"
+                app:layout_constraintBottom_toTopOf="@+id/tvYodawy_fees"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvYodawy_fees"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/online_pharmacy_yodawy_fees"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@+id/tvYodawy"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
