@@ -45,7 +45,7 @@ class ProductsAdapter: RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
 
         viewHolder.binding.status.text = if(item.first.isLimitedAvailability) "Low Stock" else ""
         viewHolder.binding.medicationTitle.text = item.first.name
-        viewHolder.binding.medicationQuantity.text = "العدد : ${item.first.quantity}"
+        viewHolder.binding.medicationQuantity.text = "العدد : ${item.second}"
         viewHolder.binding.medicationPrice.text = "${item.first.regularPrice} جنيه"
 
         Picasso.get()

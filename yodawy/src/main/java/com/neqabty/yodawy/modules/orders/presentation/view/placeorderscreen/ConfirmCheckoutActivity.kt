@@ -76,7 +76,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
 
 
         for (item in Constants.cartItems){
-            total += (item.first.salePrice * item.first.quantity)
+            total += (item.first.salePrice * item.second)
         }
         binding.totalValue.text = "$total جنيه"
         binding.totalPayment.text = "$total جنيه"
@@ -85,7 +85,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
     fun confirmOrder(view: View) {
         placeOrderViewModel.placeOrder(selectedAddress.adressId,Constants.mobileNumber,"notes",
             Constants.yodawyId, Constants.cartItems.map {
-            ItemParam(it.first.id,it.first.quantity)
+            ItemParam(it.first.id,it.second)
         })
     }
 }

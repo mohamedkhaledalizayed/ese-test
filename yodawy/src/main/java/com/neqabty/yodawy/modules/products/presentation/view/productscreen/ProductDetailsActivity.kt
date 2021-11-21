@@ -157,14 +157,15 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
 
 fun MutableList<Pair<ProductEntity, Int>>.addOrIncrement(productItem: ProductEntity):Int {
     var index = -1
-
-    this.mapIndexed { ind, productEntity ->//TODO fix this
-        if (productEntity.first.id == productItem.id) {
-//            cartItems[ind].first.quantity += 1
-            cartItems[ind] = cartItems[ind].copy(second = cartItems[ind].second + 1)
-            index = ind
-        } else
-            productEntity
+    var iterator = 0
+    val iterable = this.iterator()
+    while (iterable.hasNext()){
+        val it = iterable.next()
+        if(it.first.id == productItem.id){
+            this[iterator] = it.copy(second = it.second+1)
+            index =iterator
+        }
+        iterator+=1
     }
     if (index == -1) {
         this.add(Pair(productItem, 1))
@@ -175,17 +176,17 @@ fun MutableList<Pair<ProductEntity, Int>>.addOrIncrement(productItem: ProductEnt
 
 fun MutableList<Pair<ProductEntity, Int>>.removeOrDecrement(productItem: ProductEntity) :Int{
     var index = -1
-
-    this.mapIndexed { ind, productEntity ->//TODO fix this
-        if (productEntity.first.id == productItem.id) {
-            if (cartItems[ind].second > 1) {
-                cartItems[ind] = cartItems[ind].copy(second = cartItems[ind].second - 1)
-                index = ind
-            }
-            else
-                cartItems.removeAt(ind)
-        } else
-            productEntity
+    var iterator = 0
+    val iterable = this.iterator()
+    while (iterable.hasNext()){
+        val it = iterable.next()
+        if(it.first.id == productItem.id && it.second > 1){
+            this[iterator] = it.copy(second = it.second-1)
+            index =iterator
+        }else if(it.first.id == productItem.id && it.second == 1){
+            iterable.remove()
+        }
+        iterator+=1
     }
     return index
 }
@@ -194,7 +195,10 @@ fun MutableList<Pair<ProductEntity, Int>>.removeOrDecrement(productItem: Product
 fun MutableList<Pair<ProductEntity, Int>>.getChildrenCounter(): Int {
     var count = 0
     this.forEach { productPair: Pair<ProductEntity, Int> ->
-        count += productPair.first.quantity
+        count += productPair.second
     }
     return count
+}
+inline fun <T> List<T>.forEachIterable(block: (T) -> Unit) {
+    with(iterator()) { forEach { block(it) } }
 }
