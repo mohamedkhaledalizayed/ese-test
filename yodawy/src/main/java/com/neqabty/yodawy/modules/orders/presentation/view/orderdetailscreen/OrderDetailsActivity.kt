@@ -38,7 +38,7 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
         navigation = intent.getBooleanExtra("navigation", false)
         dialog = SpotsDialog.Builder()
             .setContext(this)
-            .setMessage("Please Wait...")
+            .setMessage(getString(R.string.please_wait))
             .build()
         prescriptionsAdapter = PrescriptionsAdapter(this)
         orderViewModel.getSpecificOrder(mobileNumber, "$orderId")

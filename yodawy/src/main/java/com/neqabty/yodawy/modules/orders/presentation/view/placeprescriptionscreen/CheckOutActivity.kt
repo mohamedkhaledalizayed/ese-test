@@ -46,7 +46,7 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
 
         dialog = SpotsDialog.Builder()
             .setContext(this)
-            .setMessage("Please Wait...")
+            .setMessage(getString(R.string.please_wait))
             .build()
 
         placePrescriptionViewModel.placeImagesResult.observe(this){

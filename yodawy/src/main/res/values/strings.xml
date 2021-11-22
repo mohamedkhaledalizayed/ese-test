@@ -59,5 +59,6 @@
     <string name="api_key">AIzaSyBOZv4riqvG1mthHKFZ5jUkdvLMzin4Bns</string>
     <string name="select_location">تحديد</string>
     <string name="order_details">تفاصيل الطلب</string>
+    <string name="please_wait">من فضلك انتظر</string>
 
 </resources>

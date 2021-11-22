@@ -31,7 +31,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
         setupToolbar(titleResId = R.string.place_order)
         dialog = SpotsDialog.Builder()
             .setContext(this)
-            .setMessage("Please Wait...")
+            .setMessage(getString(R.string.please_wait))
             .build()
 
         binding.productsRecycler.adapter = mAdapter
