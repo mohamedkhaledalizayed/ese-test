@@ -62,6 +62,8 @@ class InquiryFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        showBannerAd(Constants.AD_PAYMENTS, binding.ivBanner)
+
         inquiryViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })

@@ -2,10 +2,12 @@ package com.neqabty.presentation.common
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Html
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AlertDialog
@@ -14,10 +16,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.neqabty.MainActivity
 import com.neqabty.R
+import com.neqabty.presentation.binding.FragmentBindingAdapters
 import com.neqabty.presentation.entities.AdUI
 import com.neqabty.presentation.ui.ads.AdsActivity
-import dagger.hilt.android.AndroidEntryPoint
 import com.neqabty.presentation.util.PreferencesHelper
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -45,10 +48,10 @@ open class BaseFragment : Fragment() {
     }
 
     fun showConnectionAlert(
-            context: Context,
-            retryCallback: (() -> Unit),
-            cancelCallback: (() -> Unit),
-            message: String? = getString(R.string.error_msg)
+        context: Context,
+        retryCallback: (() -> Unit),
+        cancelCallback: (() -> Unit),
+        message: String? = getString(R.string.error_msg)
     ) {
         builder = AlertDialog.Builder(context)
         builder?.setTitle(getString(R.string.alert_title))
@@ -75,9 +78,9 @@ open class BaseFragment : Fragment() {
     }
 
     fun showAlert(
-            message: String,
-            title: String = getString(R.string.alert_title),
-            okCallback: (() -> Unit) = { dialog?.dismiss() }
+        message: String,
+        title: String = getString(R.string.alert_title),
+        okCallback: (() -> Unit) = { dialog?.dismiss() }
     ) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)
@@ -95,12 +98,12 @@ open class BaseFragment : Fragment() {
 
 
     fun showTwoButtonsAlert(
-            message: String,
-            title: String = getString(R.string.alert_title),
-            okCallback: (() -> Unit) = { dialog?.dismiss() },
-            cancelCallback: (() -> Unit) = { dialog?.dismiss()},
-            btnPositiveTitle: String= getString(R.string.confirm),
-            btnNegativeTitle: String = getString(R.string.cancel_btn)
+        message: String,
+        title: String = getString(R.string.alert_title),
+        okCallback: (() -> Unit) = { dialog?.dismiss() },
+        cancelCallback: (() -> Unit) = { dialog?.dismiss() },
+        btnPositiveTitle: String = getString(R.string.confirm),
+        btnNegativeTitle: String = getString(R.string.cancel_btn)
     ) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)
@@ -140,7 +143,7 @@ open class BaseFragment : Fragment() {
         imm.hideSoftInputFromWindow(activity?.window?.decorView?.rootView?.windowToken, 0)
     }
 
-    fun showAds(sectionID: Int){
+    fun showAds(sectionID: Int) {
         Constants.adsList.value?.let {
             openAdsActivity(sectionID)
             return
@@ -151,12 +154,38 @@ open class BaseFragment : Fragment() {
     }
 
 
-    private fun openAdsActivity(sectionID: Int){
-        val adsList = Constants.adsList.value?.filter { it.id == sectionID}
-        if(adsList!!.isNotEmpty()) {
+    private fun openAdsActivity(sectionID: Int) {
+        val adsList = Constants.adsList.value?.filter { it.id == sectionID && it.type.equals("Full Screen", true) }
+        if (adsList?.isNotEmpty() == true) {
             val intent = Intent(activity, AdsActivity::class.java)
             intent.putParcelableArrayListExtra("adsList", adsList as ArrayList<AdUI>)
             startActivity(intent)
+        }
+    }
+
+    protected fun showBannerAd(sectionID: Int, imageView: ImageView) {
+        Constants.adsList.value?.let {
+            loadBannerAd(sectionID, imageView)
+            return
+        }
+        Constants.adsList.observe(this.requireActivity(), Observer {
+            loadBannerAd(sectionID, imageView)
+        })
+    }
+
+    private fun loadBannerAd(sectionID: Int, imageView: ImageView) {
+        val adsList = Constants.adsList.value?.filter { it.id == sectionID && it.type.equals("Banner", true) }
+        if (adsList?.isNotEmpty() == true) {
+            FragmentBindingAdapters(this).bindImageURL(imageView, adsList[0].imgURL)
+            if (adsList[0].url.isNotBlank()) {
+                imageView.setOnClickListener {
+                    var url = adsList[0].url
+                    if (!url.startsWith("https://") && !url.startsWith("http://")){
+                        url = "http://" + url;
+                    }
+                    startActivity(Intent( Intent.ACTION_VIEW, Uri.parse(url)))
+                }
+            }
         }
     }
 }

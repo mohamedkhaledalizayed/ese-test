@@ -56,6 +56,7 @@ class OnlinePharmacyFragment : BaseFragment() {
     }
 
     private fun initializeViews(){
+        showBannerAd(Constants.AD_ONLINE_PHARMACY, binding.ivBanner)
         binding.clVezeeta.setOnClickListener { navController().navigate(OnlinePharmacyFragmentDirections.openOnlinePharmacyVezeeta()) }
         binding.clYodawy.setOnClickListener {
             val bundle = Bundle()

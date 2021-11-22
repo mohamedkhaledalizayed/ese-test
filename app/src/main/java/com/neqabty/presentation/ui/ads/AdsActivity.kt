@@ -1,6 +1,8 @@
  package com.neqabty.presentation.ui.ads
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -56,6 +58,17 @@ import javax.inject.Inject
                 return false
             }
         }).into(ivImg)
+
+        if (adsList[0].url.isNotBlank()) {
+            ivImg.setOnClickListener {
+                var url = adsList[0].url
+                if (!url.startsWith("https://") && !url.startsWith("http://")){
+                    url = "http://" + url;
+                }
+                startActivity(Intent( Intent.ACTION_VIEW, Uri.parse(url)))
+            }
+        }
+
         ivClose.setOnClickListener {
             finish()
         }

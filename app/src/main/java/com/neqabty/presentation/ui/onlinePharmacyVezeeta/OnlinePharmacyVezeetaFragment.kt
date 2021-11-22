@@ -46,11 +46,6 @@ class OnlinePharmacyVezeetaFragment : BaseFragment() {
     private var mUploadMsg: ValueCallback<Uri>? = null
     private val FILECHOOSER_RESULTCODE = 1
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        showAds(Constants.AD_ONLINE_PHARMACY)
-    }
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,

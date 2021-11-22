@@ -51,6 +51,7 @@ class WheelNewsFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        showBannerAd(Constants.AD_HOME, binding.ivBanner)
 
         homeViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)

@@ -12,7 +12,9 @@ class AdDataEntityMapper @Inject constructor() : Mapper<AdData, AdEntity>() {
     override fun mapFrom(from: AdData): AdEntity {
         return AdEntity(
             imgURL = from.imgURL,
-            id = from.id
+            id = from.id,
+            type = from.type,
+            url = from.url ?: ""
         )
     }
 }

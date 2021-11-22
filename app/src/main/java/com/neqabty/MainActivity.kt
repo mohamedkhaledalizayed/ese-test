@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         getAppConfig()
         checkRoot()
         startActivities()
-//        loadAds()
+        loadAds()
 
         Constants.isFirebaseTokenUpdated.observe(this, Observer {
             if (it.isNotBlank()){

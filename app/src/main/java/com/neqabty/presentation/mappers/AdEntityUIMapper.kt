@@ -12,7 +12,9 @@ class AdEntityUIMapper @Inject constructor() : Mapper<AdEntity, AdUI>() {
     override fun mapFrom(from: AdEntity): AdUI {
         return AdUI(
                 imgURL = from.imgURL,
-                id = from.id
+                id = from.id,
+                type = from.type,
+                url = from.url
         )
     }
 }

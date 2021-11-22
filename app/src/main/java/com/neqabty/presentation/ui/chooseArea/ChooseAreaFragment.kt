@@ -64,6 +64,7 @@ class ChooseAreaFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        showBannerAd(Constants.AD_MEDICAL_DIRECTORY, binding.ivBanner)
 
         chooseAreaViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
