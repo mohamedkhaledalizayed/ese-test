@@ -47,7 +47,7 @@ data class Item(
     @SerializedName("WasLimited")
     val wasLimited: Boolean,
     @SerializedName("WoocommerceOrderAttributes")
-    val woocommerceOrderAttributes: String?,
+    val woocommerceOrderAttributes: List<Any>?,
     @SerializedName("WoocommerceProductId")
     val woocommerceProductId: String?,
     @SerializedName("YodawyDeal")

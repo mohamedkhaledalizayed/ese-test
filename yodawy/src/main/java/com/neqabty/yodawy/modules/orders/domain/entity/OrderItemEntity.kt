@@ -1,9 +1,6 @@
 package com.neqabty.yodawy.modules.orders.domain.entity
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 data class OrderItemEntity(
     val actualWoocommerceProductId: String?,
     val alternativesSKUs: String?,
@@ -26,7 +23,7 @@ data class OrderItemEntity(
     val selectedUnit: Int?,
     val variationSKU: String?,
     val wasLimited: Boolean,
-    val woocommerceOrderAttributes: String?,
+    val woocommerceOrderAttributes: List<Any>?,
     val woocommerceProductId: String?,
     val yodawyDeal: Boolean
-): Parcelable
+)
