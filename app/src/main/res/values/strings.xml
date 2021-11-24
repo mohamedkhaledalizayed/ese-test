@@ -356,9 +356,9 @@
     <string name="exceed_wives">لا يمكنك إضافة اكثر من أربعة زوجات</string>
     <string name="exceed_husband">لا يمكنك إضافة اكثر من زوج</string>
     <string name="remove_follower">حذف</string>
-    <string name="remove_follower_confirmation">هل تريد إتمام عملية الحذف؟!</string>
+    <string name="remove_follower_reason">سبب الحذف</string>
+    <string name="remove_follower_attachments">من فضلك أضف المستندات التي تؤكد سبب الحذف</string>
     <string name="send_request_confirmation">هل انت متأكد انك تريد ارسال الطلب إلى المراجعة؟!</string>
-    <string name="medical_subscription_ended">برجاء العلم انه تم انتهاء تجديد مشروع الرعاية الصحية لعام 2021 </string>
     <string name="medical_subscribe_confirmation">هذا المهندس غير مسجل بخدمة الرعاية الصحية، هل تود الاشتراك في الخدمة ؟</string>
     <string name="medical_subscription_unsubscribed">هذا الرقم غير مقيد بالنقابة، برجاء الرجوع للنقابة لطلب العضوية</string>
     <string name="medical_subscription_suspended">هذه العضوية موقوفة برجاء الرجوع إلى النقابة</string>
@@ -525,7 +525,7 @@
 
     <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
     <string name="app_version">Version 1.0</string>
-    <string name="body_content">السادة / جهات العلاج المتعاقدة مع مشروع العلاج لنقابة المهندسين يرجى العلم بتجديد اشتراك 2021 للمهندس المدون بياناته و تابعيه لذا يرجى تقديم الخدمة الطبية لحين اصدار الكارنيه و يعد هذا الايصال بمثابة كارنيه المشروع لحين اصداره</string>
+    <string name="body_content">السادة / جهات العلاج المتعاقدة مع مشروع العلاج لنقابة المهندسين يرجى العلم بتجديد اشتراك %s للمهندس المدون بياناته و تابعيه لذا يرجى تقديم الخدمة الطبية لحين اصدار الكارنيه و يعد هذا الايصال بمثابة كارنيه المشروع لحين اصداره</string>
     <string name="titleContent">اشتراك الرعاية الصحية</string>
     <string name="upload_pdf">تحميل اخطار الدفع</string>
     <string name="medical_letter_creation_type_syndicate">(النقابة)</string>

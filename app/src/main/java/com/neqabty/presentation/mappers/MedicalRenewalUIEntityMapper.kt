@@ -17,8 +17,9 @@ class MedicalRenewalUIEntityMapper @Inject constructor() : Mapper<MedicalRenewal
                 requestStatus = from.requestStatus,
                 relations = from.relations?.map { return@map  MedicalRenewalEntity.RelationItem(id = it.id, name = it.name) },
                 rejectionMsg = from.rejectionMsg,
+                currentMedYear = from.currentMedYear,
                 contact = from.contact?.let { return@let MedicalRenewalEntity.ContactData(name = it.name, syndicateName = it.syndicateName, isDead = it.isDead, address = it.address, mobile = it.mobile) },
-                followers = from.followers?.map { return@map MedicalRenewalEntity.FollowerItem(name = it.name, id = it.id, isDeleted = it.isDeleted, birthDate = it.birthDate, pic = it.pic, attachments = it.attachments, mobile = it.mobile, nationalId = it.nationalId, relationType = it.relationType, relationTypeName = it.relationTypeName, gender = it.gender) }?.toMutableList()
+                followers = from.followers?.map { return@map MedicalRenewalEntity.FollowerItem(name = it.name, id = it.id, isDeleted = it.isDeleted, modificationReason = it.modificationReason, birthDate = it.birthDate, pic = it.pic, attachments = it.attachments, mobile = it.mobile, nationalId = it.nationalId, relationType = it.relationType, relationTypeName = it.relationTypeName, gender = it.gender) }?.toMutableList()
         )
     }
 }

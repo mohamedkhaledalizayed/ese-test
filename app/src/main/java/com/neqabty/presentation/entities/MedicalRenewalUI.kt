@@ -13,7 +13,8 @@ data class MedicalRenewalUI(
         var contact: ContactData? = null,
         var followers: MutableList<FollowerItem>? = null,
         var relations: List<RelationItem>? = null,
-        var rejectionMsg: String? = ""
+        var rejectionMsg: String? = "",
+        var currentMedYear: String? = ""
 ) : Parcelable {
 
     fun <T : Parcelable> deepClone(objectToClone: T): T? {
@@ -47,6 +48,7 @@ data class MedicalRenewalUI(
             var name: String? = "",
             var id: Int? = 0,
             var isDeleted: Boolean? = false,
+            var modificationReason: String? = "",
             var birthDate: String? = "",
             var pic: String? = "",
             var attachments: MutableList<String>? = mutableListOf(),

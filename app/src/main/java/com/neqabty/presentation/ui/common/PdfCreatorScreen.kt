@@ -117,7 +117,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         val horizontalBody = PDFHorizontalView(applicationContext)
         val body = PDFTextView(applicationContext, 14f, false)
         body.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
-        val bodyContent = SpannableString(getString(R.string.body_content))
+        val bodyContent = SpannableString(getString(R.string.body_content, data.currentMedYear))
         bodyContent.setSpan(
                 ForegroundColorSpan(Color.DKGRAY),
                 0,
@@ -245,7 +245,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         val horizontalSubscription = PDFHorizontalView(applicationContext)
 
         val subscriptionValue = PDFTextView(applicationContext, 14f, false)
-        val subscriptionContentValue = SpannableString("2021")
+        val subscriptionContentValue = SpannableString(data.currentMedYear)
         subscriptionContentValue.setSpan(
                 ForegroundColorSpan(Color.DKGRAY),
                 0,
@@ -283,7 +283,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         //Followers
         val horizontalFollowers = PDFHorizontalView(applicationContext)
         val followers = PDFTextView(applicationContext, 14f, true)
-        val followersContent = SpannableString("التابعين (1) :")
+        val followersContent = SpannableString("التابعين (" + data.followers?.size + ") :")
         followersContent.setSpan(
                 ForegroundColorSpan(Color.DKGRAY),
                 0,

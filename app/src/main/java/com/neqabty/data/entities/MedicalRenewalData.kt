@@ -19,7 +19,9 @@ data class MedicalRenewalData(
         @field:SerializedName("RelationTypeList")
         var relations: List<RelationItem>? = null,
         @field:SerializedName("RejectedDescreptionMessage")
-        var rejectionMsg: String? = ""
+        var rejectionMsg: String? = "",
+        @field:SerializedName("currentMedYear")
+        var currentMedYear: String? = ""
 ) : Response() {
 
     data class ContactData(
@@ -50,6 +52,8 @@ data class MedicalRenewalData(
             var id: Int? = 0,
             @field:SerializedName("ISDELETED")
             var isDeleted: Boolean? = false,
+            @field:SerializedName("ModificationReason")
+            var modificationReason: String? = "",
             @field:SerializedName("BIRTHDATE")
             var birthDate: String? = "",
             @field:SerializedName("PicBase64")

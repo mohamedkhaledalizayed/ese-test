@@ -134,26 +134,29 @@ class MedicalRenewUpdateFragment : BaseFragment() {
 
     //region
     private fun removeFollower(follower: MedicalRenewalUI.FollowerItem) {
-        selectedFollower = follower
-        builder = AlertDialog.Builder(requireContext())
-        builder?.setTitle(getString(R.string.alert_title))
-        builder?.setMessage(getString(R.string.remove_follower_confirmation))
-        builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
-            medicalRenewalUI.followers?.find { it.id == selectedFollower.id }?.isDeleted = true
-            medicalRenewalUI.followers?.find { it.id == selectedFollower.id }?.isEdited = false
+        parentFragmentManager.setFragmentResultListener("bundle", this, FragmentResultListener { key, result ->
+            val deletedFollower =
+                result.getParcelable<MedicalRenewalUI.FollowerItem>("followerItem")!!
+            medicalRenewalUI.followers?.find { it.id == deletedFollower.id }?.isDeleted = true
+            medicalRenewalUI.followers?.find { it.id == deletedFollower.id }?.isEdited = false
+            medicalRenewalUI.followers?.find { it.id == deletedFollower.id }?.modificationReason = deletedFollower.modificationReason
+            medicalRenewalUI.followers?.find { it.id == deletedFollower.id }?.attachments = deletedFollower.attachments
             adapter.submitList(medicalRenewalUI.followers?.filter { it.isDeleted == false })
             adapter.notifyDataSetChanged()
             rvFollowers.adapter = adapter
 
             updateFollowersTitleVisibility()
             updateSubmitBtnState()
-        }
-        builder?.setNegativeButton(getString(R.string.alert_no)) { dialog, which ->
-            dialog.dismiss()
-        }
+        })
 
-        var dialog = builder?.create()
-        dialog?.show()
+        selectedFollower = follower
+        if(selectedFollower.isNew == true) {
+            medicalRenewalUI.followers?.removeAll { it.id == selectedFollower.id }
+            updateFollowersTitleVisibility()
+            updateSubmitBtnState()
+        }
+        else
+            navController().navigate(MedicalRenewUpdateFragmentDirections.openMedicalRenewRemoveFollowerDetailsFragment(selectedFollower))
     }
 
     private fun sendRequestConfirmation() {

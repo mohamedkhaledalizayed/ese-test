@@ -159,7 +159,7 @@ class MedicalRenewFragment : BaseFragment() {
 
             val temp = medicalRenewalUI.deepClone(medicalRenewalUI)
             temp?.contact?.pic = ""
-            temp?.followers = temp?.followers?.filter { it.lastMedYear != null && it.lastMedYear!!.toInt() >= 2021 }?.toMutableList()
+            temp?.followers = temp?.followers?.filter { it.lastMedYear != null && it.lastMedYear!!.toInt() >= temp.currentMedYear!!.toInt() }?.toMutableList()
             for (item: MedicalRenewalUI.FollowerItem in temp?.followers!!) {
                 item.pic = ""
                 item.attachments = mutableListOf()

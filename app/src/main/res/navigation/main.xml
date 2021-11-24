@@ -334,6 +334,9 @@
         <action
             android:id="@+id/openMedicalRenewAddFollowerDetailsFragment"
             app:destination="@id/medicalRenewAddFollowerDetailsFragment" />
+        <action
+            android:id="@+id/openMedicalRenewRemoveFollowerDetailsFragment"
+            app:destination="@id/medicalRenewRemoveFollowerDetailsFragment" />
     </fragment>
 
     <fragment
@@ -357,6 +360,16 @@
         <argument
             android:name="medicalRenewalUI"
             app:argType="com.neqabty.presentation.entities.MedicalRenewalUI" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicalRenewRemoveFollowerDetailsFragment"
+        android:name="com.neqabty.presentation.ui.medicalRenewFollowerDetails.MedicalRenewRemoveFollowerDetailsFragment"
+        android:label="@string/medical_renew_update_title"
+        tools:layout="@layout/medical_renew_remove_follower_fragment">
+        <argument
+            android:name="followerItem"
+            app:argType="com.neqabty.presentation.entities.MedicalRenewalUI$FollowerItem" />
     </fragment>
 
     <fragment

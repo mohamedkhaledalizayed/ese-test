@@ -8,7 +8,8 @@ data class MedicalRenewalEntity(
         var contact: ContactData? = null,
         var followers: List<FollowerItem>? = null,
         var relations: List<RelationItem>? = null,
-        var rejectionMsg: String? = ""
+        var rejectionMsg: String? = "",
+        var currentMedYear: String? = ""
 ) {
 
     data class ContactData(
@@ -27,6 +28,7 @@ data class MedicalRenewalEntity(
             var name: String? = "",
             var id: Int? = 0,
             var isDeleted: Boolean? = false,
+            var modificationReason: String? = "",
             var birthDate: String? = "",
             var pic: String? = "",
             var attachments: MutableList<String>? = mutableListOf(),
