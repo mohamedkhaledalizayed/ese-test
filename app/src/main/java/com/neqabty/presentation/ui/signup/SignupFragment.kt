@@ -94,6 +94,7 @@ class SignupFragment : BaseFragment() {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (state.isSuccessful && state.user != null) {
             sharedPref.mobile = edMobile.text.toString()
+            sharedPref.jwt = state?.user?.jwt
             sharedPref.user = state.user?.details!![0].userNumber!!
             sharedPref.name = state.user?.details!![0].name!!
             sharedPref.isRegistered = true

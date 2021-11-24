@@ -75,7 +75,7 @@ class AppModule {
         val certificatePinner : CertificatePinner = CertificatePinner.Builder()
                 .add(
                         BuildConfig.URL,
-                        "sha256/Zi7WyG7/3sg3UCgKI7P8BcO8Lz/5zMHcPmyGZGAw4+c="
+                    "sha256/hgx3/z5ENRCVF9jDSHk8GwocaQsEFYAW8ON1eGs2qUc="
                 ).build()
 
         return OkHttpClient.Builder()

@@ -21,6 +21,8 @@
         android:textSize="@dimen/text_size_medium"
         app:layout_constraintStart_toEndOf="@id/ivIcon"
         android:layout_marginStart="@dimen/margin_horizontal_normal"
+        android:maxLines="1"
+        android:ellipsize="end"
         app:layout_constraintEnd_toStartOf="@id/ivArrow"
         app:layout_constraintTop_toTopOf="@id/ivIcon"
         app:layout_constraintBottom_toBottomOf="@id/ivIcon"/>
