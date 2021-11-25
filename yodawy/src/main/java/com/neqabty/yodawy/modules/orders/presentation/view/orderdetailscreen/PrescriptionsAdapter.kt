@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.utils.replaceText
 import com.neqabty.yodawy.databinding.PrescriptionLayoutItemBinding
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -36,7 +37,7 @@ class PrescriptionsAdapter (private val context: Context) : RecyclerView.Adapter
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         Picasso.get()
-            .load(items[position].replace("\\", "/"))
+            .load(items[position].replaceText())
             .into(viewHolder.binding.imageView, object : Callback {
                 override fun onSuccess() {
                     viewHolder.binding.imageProgress.hide()
