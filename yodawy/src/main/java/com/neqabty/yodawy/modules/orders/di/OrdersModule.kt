@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules.address.di
+package com.neqabty.yodawy.modules.orders.di
 
 import com.neqabty.yodawy.modules.orders.data.api.OrderApi
 import com.neqabty.yodawy.modules.orders.data.repository.OrderRepositoryImpl
@@ -17,7 +17,7 @@ abstract class OrdersModule {
     companion object {
         @Provides
         fun providesCourseApiService(
-            @Named("yodawy") retrofit: Retrofit) = retrofit.create(OrderApi::class.java)
+            @Named("Prescriptions") retrofit: Retrofit) = retrofit.create(OrderApi::class.java)
     }
     @Binds
     internal abstract fun bindsOrderRepository(orderRepositoryImpl: OrderRepositoryImpl): OrderRepository

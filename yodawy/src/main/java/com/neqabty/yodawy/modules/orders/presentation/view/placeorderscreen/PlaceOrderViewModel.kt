@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PlaceOrderViewModel @Inject constructor(private val placeOrderUseCase: PlaceOrderUseCase) :
     ViewModel() {
-    val placeOrderResult = MutableLiveData<Resource<Boolean>>()
+    val placeOrderResult = MutableLiveData<Resource<String>>()
     fun placeOrder(
         adressId: String,
         mobileNumber: String,

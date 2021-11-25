@@ -9,9 +9,11 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.*
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
+import com.neqabty.yodawy.core.data.Constants.imageList
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivitySearchBinding
@@ -42,6 +44,12 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 val intent: Intent = Intent(this@SearchActivity, ProductDetailsActivity::class.java)
                 intent.putExtra("product", item)
                 startActivity(intent)
+            }
+
+            override fun setOnAddItemClickListener() {
+                if (imageList.isNotEmpty()){
+                    showClearCartConfirmationAlert()
+                }
             }
         }
 
@@ -82,6 +90,21 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
         }
 
+    }
+
+    private fun showClearCartConfirmationAlert() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.alert_title))
+        builder.setMessage(getString(R.string.will_clear_cart))
+        builder.setCancelable(false)
+        builder.setPositiveButton(getString(R.string.alert_ok)) { dialog, which ->
+            imageList.clear()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton(getString(R.string.alert_cancel)) { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
     }
 
     private fun search(){
