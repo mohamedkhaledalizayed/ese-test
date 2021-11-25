@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules
+package com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -14,7 +14,7 @@ import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivityConfirmCheckoutBinding
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import com.neqabty.yodawy.modules.orders.domain.entity.ItemParam
-import com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen.PlaceOrderViewModel
+import com.neqabty.yodawy.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -31,7 +31,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
         setupToolbar(titleResId = R.string.place_order)
         dialog = SpotsDialog.Builder()
             .setContext(this)
-            .setMessage("Please Wait...")
+            .setMessage(getString(R.string.please_wait))
             .build()
 
         binding.productsRecycler.adapter = mAdapter
@@ -53,7 +53,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
                     }
                     Status.SUCCESS -> {
                         dialog.dismiss()
-                        if (resource.data!!){
+                        if (!resource.data!!.isNullOrEmpty()){
                             Constants.cartItems.clear()
                             Toast.makeText(this, getString(R.string.order_is_placed), Toast.LENGTH_LONG).show()
 
@@ -61,7 +61,9 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
                             bundle.putString("user_number", Constants.userNumber)
                             bundle.putString("mobile_number", Constants.mobileNumber)
                             bundle.putString("jwt", Constants.jwt)
-                            val intent = Intent(this, HomeActivity::class.java)
+                            bundle.putString("orderId", resource.data)
+                            bundle.putBoolean("navigation", true)
+                            val intent = Intent(this, OrderDetailsActivity::class.java)
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             intent.putExtras(bundle)
                             startActivity(intent)
@@ -77,7 +79,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
 
 
         for (item in Constants.cartItems){
-            total += (item.first.salePrice * item.first.quantity)
+            total += (item.first.salePrice * item.second)
         }
         binding.totalValue.text = "$total جنيه"
         binding.totalPayment.text = "$total جنيه"
@@ -86,7 +88,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
     fun confirmOrder(view: View) {
         placeOrderViewModel.placeOrder(selectedAddress.adressId,Constants.mobileNumber,"notes",
             Constants.yodawyId, Constants.cartItems.map {
-            ItemParam(it.first.id,it.first.quantity)
+            ItemParam(it.first.id,it.second)
         })
     }
 }

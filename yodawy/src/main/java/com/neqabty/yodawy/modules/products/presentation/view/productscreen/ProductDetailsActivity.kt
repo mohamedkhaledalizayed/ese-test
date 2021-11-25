@@ -1,6 +1,7 @@
 package com.neqabty.yodawy.modules.products.presentation.view.productscreen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.neqabty.yodawy.R
@@ -35,29 +36,37 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
 
 
         binding.add.setOnClickListener {
-            if(productItem.isLimitedAvailability){
-                showLimitedAvailabilityAlert(okCallback = {addBtnLogic(productItem)})
-            }else{
+            if (productItem.isLimitedAvailability) {
+                showLimitedAvailabilityAlert(okCallback = { addBtnLogic(productItem) })
+            } else {
                 addBtnLogic(productItem)
             }
         }
         getIndexInProductsPair(productItem)
         binding.increase.setOnClickListener {
-            val index = getIndexInProductsPair(productItem)
-            cartItems[index].first.quantity += 1
-            binding.quantity.text = "${cartItems[index].first.quantity}"
+//            val index = getIndexInProductsPair(productItem)
+//            cartItems[index].first.quantity += 1
+            val index = cartItems.addOrIncrement(productItem)
+            binding.quantity.text = "${cartItems[index].second}"
         }
 
         binding.decrease.setOnClickListener {
-            val index = getIndexInProductsPair(productItem)
-            if (cartItems[index].first.quantity > 1){
-                cartItems[index].first.quantity -= 1
-                binding.quantity.text = "${cartItems[index].first.quantity}"
-            }else{
-                //remove this from list
-                cartItems.removeAt(index)
+////            val index = getIndexInProductsPair(productItem)
+//            if (cartItems[index].first.quantity > 1) {
+//                cartItems[index].first.quantity -= 1
+//                binding.quantity.text = "${cartItems[index].first.quantity}"
+//            } else {
+//                //remove this from list
+//                cartItems.removeAt(index)
+//                binding.increaseDecrease.visibility = View.GONE
+//                binding.add.visibility = View.VISIBLE
+//            }
+            val index = cartItems.removeOrDecrement(productItem)
+            if(index==-1){
                 binding.increaseDecrease.visibility = View.GONE
                 binding.add.visibility = View.VISIBLE
+            }else{
+                binding.quantity.text = "${cartItems[index].second}"
             }
 
         }
@@ -95,38 +104,41 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
         }
     }
 
-    private fun addBtnLogic(productItem: ProductEntity){
-        if (imageList.isNotEmpty()){
+    private fun addBtnLogic(productItem: ProductEntity) {
+        if (imageList.isNotEmpty()) {
             showClearCartConfirmationAlert(okCallback = {
                 imageList.clear()
                 addToCart(productItem)
             })
-        }else{
+        } else {
             addToCart(productItem)
         }
     }
 
-    private fun addToCart(productItem: ProductEntity){
+    private fun addToCart(productItem: ProductEntity) {
         cartItems.addOrIncrement(productItem)
         binding.increaseDecrease.visibility = View.VISIBLE
         binding.add.visibility = View.GONE
     }
 
-    private fun getIndexInProductsPair(productItem: ProductEntity): Int{
+    private fun getIndexInProductsPair(productItem: ProductEntity): Int {
         var index = 0
-        cartItems.mapIndexed{ ind, item ->
-            if (item.first.id == productItem.id){
+        cartItems.mapIndexed { ind, item ->
+            if (item.first.id == productItem.id) {
                 index = ind
                 binding.increaseDecrease.visibility = View.VISIBLE
                 binding.add.visibility = View.GONE
-                binding.quantity.text = "${item.first.quantity}"
+                binding.quantity.text = "${item.second}"
             }
         }
         return index
     }
 
 
-    private fun showLimitedAvailabilityAlert(okCallback: () -> Unit = {}, cancelCallback: () -> Unit = {}) {
+    private fun showLimitedAvailabilityAlert(
+        okCallback: () -> Unit = {},
+        cancelCallback: () -> Unit = {}
+    ) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(getString(R.string.alert_title))
         builder.setMessage(getString(R.string.low_stock_alert))
@@ -143,24 +155,50 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
     }
 }
 
-fun MutableList<Pair<ProductEntity, Int>>.addOrIncrement(productItem: ProductEntity) {
+fun MutableList<Pair<ProductEntity, Int>>.addOrIncrement(productItem: ProductEntity):Int {
     var index = -1
-    this.mapIndexed { ind, productEntity ->//TODO fix this
-        if (productEntity.first.id == productItem.id) {
-            cartItems[ind].first.quantity += 1
-            index = ind
-        } else
-            productEntity
+    var iterator = 0
+    val iterable = this.iterator()
+    while (iterable.hasNext()){
+        val it = iterable.next()
+        if(it.first.id == productItem.id){
+            this[iterator] = it.copy(second = it.second+1)
+            index =iterator
+        }
+        iterator+=1
     }
-    if (index == -1)
+    if (index == -1) {
         this.add(Pair(productItem, 1))
+        index = this.size - 1
+    }
+    return index
+}
+
+fun MutableList<Pair<ProductEntity, Int>>.removeOrDecrement(productItem: ProductEntity) :Int{
+    var index = -1
+    var iterator = 0
+    val iterable = this.iterator()
+    while (iterable.hasNext()){
+        val it = iterable.next()
+        if(it.first.id == productItem.id && it.second > 1){
+            this[iterator] = it.copy(second = it.second-1)
+            index =iterator
+        }else if(it.first.id == productItem.id && it.second == 1){
+            iterable.remove()
+        }
+        iterator+=1
+    }
+    return index
 }
 
 
 fun MutableList<Pair<ProductEntity, Int>>.getChildrenCounter(): Int {
     var count = 0
-    this.forEach {
-            productPair: Pair<ProductEntity, Int> -> count += productPair.first.quantity
+    this.forEach { productPair: Pair<ProductEntity, Int> ->
+        count += productPair.second
     }
     return count
+}
+inline fun <T> List<T>.forEachIterable(block: (T) -> Unit) {
+    with(iterator()) { forEach { block(it) } }
 }

@@ -37,20 +37,19 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val item = items[position]
         if (position == itemCount - 1){
             viewHolder.binding.view.visibility = View.GONE
         }else{
             viewHolder.binding.view.visibility = View.VISIBLE
         }
 
-        viewHolder.binding.status.text = if(item.first.isLimitedAvailability) "Low Stock" else ""
-        viewHolder.binding.medicationTitle.text = item.first.name
-        viewHolder.binding.quantity.text = "${item.first.quantity}"
-        viewHolder.binding.medicationPrice.text = "${item.first.regularPrice * item.first.quantity}"
+        viewHolder.binding.status.text = if(items[position].first.isLimitedAvailability) "Low Stock" else ""
+        viewHolder.binding.medicationTitle.text = items[position].first.name
+        viewHolder.binding.quantity.text = "${items[position].second}"
+        viewHolder.binding.medicationPrice.text = "${items[position].first.regularPrice * items[position].second}"
 
         Picasso.get()
-            .load(item.first.image)
+            .load(items[position].first.image)
             .into(viewHolder.binding.medicationImage, object : Callback {
                 override fun onSuccess() {
                     viewHolder.binding.imageProgress.hide()
@@ -63,17 +62,17 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
         //increase
         viewHolder.binding.increase.setOnClickListener {
-            item.first.quantity = item.first.quantity + 1
-            viewHolder.binding.quantity.text = "${item.first.quantity}"
-            viewHolder.binding.medicationPrice.text = "${item.first.regularPrice * item.first.quantity}"
+            items[position] = items[position].copy(second = items[position].second + 1)
+            viewHolder.binding.quantity.text = "${items[position].second}"
+            viewHolder.binding.medicationPrice.text = "${items[position].first.regularPrice * items[position].second}"
         }
 
         //decrease
         viewHolder.binding.decrease.setOnClickListener {
-            if (item.first.quantity > 1){
-                item.first.quantity = item.first.quantity - 1
-                viewHolder.binding.quantity.text = "${item.first.quantity}"
-                viewHolder.binding.medicationPrice.text = "${item.first.regularPrice * item.first.quantity}"
+            if (items[position].second > 1){
+                items[position] = items[position].copy(second = items[position].second - 1)
+                viewHolder.binding.quantity.text = "${items[position].second}"
+                viewHolder.binding.medicationPrice.text = "${items[position].first.regularPrice * items[position].second}"
             }else{
                 //remove this item
                 cartItems.removeAt(position)

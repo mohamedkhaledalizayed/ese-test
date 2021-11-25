@@ -1,10 +1,9 @@
-package com.neqabty.yodawy.modules
+package com.neqabty.yodawy.modules.orders.presentation.view.placeprescriptionscreen
 
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -20,9 +19,10 @@ import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.FileUtils
 import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivityCheckOutBinding
+import com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen.ConfirmCheckoutActivity
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import com.neqabty.yodawy.modules.orders.data.model.request.OrderRequest
-import com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen.PlacePrescriptionViewModel
+import com.neqabty.yodawy.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -46,7 +46,7 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
 
         dialog = SpotsDialog.Builder()
             .setContext(this)
-            .setMessage("Please Wait...")
+            .setMessage(getString(R.string.please_wait))
             .build()
 
         placePrescriptionViewModel.placeImagesResult.observe(this){
@@ -62,7 +62,9 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
                         bundle.putString("user_number", Constants.userNumber)
                         bundle.putString("mobile_number", Constants.mobileNumber)
                         bundle.putString("jwt", Constants.jwt)
-                        val intent = Intent(this, HomeActivity::class.java)
+                        bundle.putString("orderId", resource.data)
+                        bundle.putBoolean("navigation", true)
+                        val intent = Intent(this, OrderDetailsActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         intent.putExtras(bundle)
                         startActivity(intent)
@@ -80,7 +82,7 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
             binding.totalValue.text = "To be confirmed"
         }else{
             for (item in cartItems){
-                total += (item.first.salePrice * item.first.quantity)
+                total += (item.first.salePrice * item.second)
             }
             binding.totalValue.text = "$total"
         }

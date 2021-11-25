@@ -1,25 +1,25 @@
-package com.neqabty.yodawy.modules.orders.data.model
+package com.neqabty.yodawy.modules.orders.data.model.response.order
 
 
 import com.google.gson.annotations.SerializedName
 
 data class Item(
     @SerializedName("ActualWoocommerceProductId")
-    val actualWoocommerceProductId: String?,
+    val actualWoocommerceProductId: Any,
     @SerializedName("AlternativesSKUs")
-    val alternativesSKUs: String?,
+    val alternativesSKUs: Any,
     @SerializedName("Available")
     val available: Boolean,
     @SerializedName("Channel")
-    val channel: String?,
+    val channel: Any,
     @SerializedName("CoveragePercentage")
-    val coveragePercentage: Double,
+    val coveragePercentage: Int,
     @SerializedName("CoverageValue")
-    val coverageValue: Double,
+    val coverageValue: Int,
     @SerializedName("DeliveryTimeValue")
     val deliveryTimeValue: Int,
     @SerializedName("Drug")
-    val drug: String?,
+    val drug: Any,
     @SerializedName("DrugDosageFormId")
     val drugDosageFormId: Int,
     @SerializedName("DrugId")
@@ -27,29 +27,29 @@ data class Item(
     @SerializedName("DrugName")
     val drugName: String,
     @SerializedName("DrugTotal")
-    val drugTotal: Double,
+    val drugTotal: Int,
     @SerializedName("DrugTotalAfterCoverage")
-    val drugTotalAfterCoverage: Double,
+    val drugTotalAfterCoverage: Int,
     @SerializedName("MaximumQuantityPerUser")
     val maximumQuantityPerUser: Int,
     @SerializedName("Price")
-    val price: Double,
+    val price: Int,
     @SerializedName("PriceBeforeSale")
-    val priceBeforeSale: Double,
+    val priceBeforeSale: Int,
     @SerializedName("ProductType")
-    val productType: String?,
+    val productType: String,
     @SerializedName("Quantity")
     val quantity: Int,
     @SerializedName("SelectedUnit")
     val selectedUnit: Int,
     @SerializedName("VariationSKU")
-    val variationSKU: String?,
+    val variationSKU: Any,
     @SerializedName("WasLimited")
     val wasLimited: Boolean,
     @SerializedName("WoocommerceOrderAttributes")
-    val woocommerceOrderAttributes: List<Any>?,
+    val woocommerceOrderAttributes: Any,
     @SerializedName("WoocommerceProductId")
-    val woocommerceProductId: String?,
+    val woocommerceProductId: Int,
     @SerializedName("YodawyDeal")
     val yodawyDeal: Boolean
 )

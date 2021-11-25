@@ -9,9 +9,8 @@ import androidx.activity.viewModels
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.databinding.ActivityAddressesBinding
-import com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen.AddAddressActivity
 import com.neqabty.yodawy.core.ui.BaseActivity
-import com.neqabty.yodawy.modules.CheckOutActivity
+import com.neqabty.yodawy.modules.orders.presentation.view.placeprescriptionscreen.CheckOutActivity
 import com.neqabty.yodawy.modules.SelectLocationActivity
 import com.neqabty.yodawy.modules.address.domain.entity.AddressEntity
 import dagger.hilt.android.AndroidEntryPoint

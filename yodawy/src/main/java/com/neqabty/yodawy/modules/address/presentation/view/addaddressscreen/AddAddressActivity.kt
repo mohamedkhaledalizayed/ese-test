@@ -42,7 +42,7 @@ override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater
         longitude = intent.getDoubleExtra(LONGITUDE, 0.0)
         dialog = SpotsDialog.Builder()
             .setContext(this)
-            .setMessage("Please Wait...")
+            .setMessage(getString(R.string.please_wait))
             .build()
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?

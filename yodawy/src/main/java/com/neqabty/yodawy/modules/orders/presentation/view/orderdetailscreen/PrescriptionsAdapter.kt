@@ -1,17 +1,12 @@
-package com.neqabty.yodawy.modules
+package com.neqabty.yodawy.modules.orders.presentation.view.orderdetailscreen
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
-import com.neqabty.yodawy.core.data.Constants.cartItems
-import com.neqabty.yodawy.databinding.PhotoLayoutItemBinding
 import com.neqabty.yodawy.databinding.PrescriptionLayoutItemBinding
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso

@@ -5,6 +5,7 @@ import com.neqabty.yodawy.modules.orders.data.model.OrderListRequestBody
 import com.neqabty.yodawy.modules.orders.data.model.mapper.toOrderEntity
 import com.neqabty.yodawy.modules.orders.data.model.request.ItemRequest
 import com.neqabty.yodawy.modules.orders.data.model.request.PlaceOrderRequestBody
+import com.neqabty.yodawy.modules.orders.data.model.request.order.OrderRequestBody
 import com.neqabty.yodawy.modules.orders.data.source.OrdersDS
 import com.neqabty.yodawy.modules.orders.domain.entity.OrderEntity
 import com.neqabty.yodawy.modules.orders.domain.repository.OrderRepository
@@ -29,7 +30,16 @@ class OrderRepositoryImpl @Inject constructor(private val ordersDS: OrdersDS) : 
         ).map { it.orders.map { it.toOrderEntity() } }
     }
 
-    override fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<Boolean> {
+    override fun getSpecificOrder(mobileNumber: String, orderId: String): Flow<OrderEntity> {
+        return ordersDS.getOrder(
+            OrderRequestBody(
+                mobile = mobileNumber,
+                orderId = orderId
+            )
+        ).map { it.toOrderEntity() }
+    }
+
+    override fun placeOrder(placeOrderParam: PlaceOrderParam): Flow<String> {
         return ordersDS.placeOrder(
             PlaceOrderRequestBody(
                 placeOrderParam.addressId,
@@ -38,14 +48,14 @@ class OrderRepositoryImpl @Inject constructor(private val ordersDS: OrdersDS) : 
                 placeOrderParam.notes,
                 placeOrderParam.plan
             )
-        ).map { it.isSuccess }
+        ).map { it.id }
     }
 
 
-    override fun placePrescription(order: RequestBody, images: ArrayList<MultipartBody.Part>): Flow<Boolean> {
+    override fun placePrescription(order: RequestBody, images: ArrayList<MultipartBody.Part>): Flow<String> {
         return ordersDS.placePrescription(
             order,
             images
-        ).map { it.isSuccess }
+        ).map { it.id }
     }
 }

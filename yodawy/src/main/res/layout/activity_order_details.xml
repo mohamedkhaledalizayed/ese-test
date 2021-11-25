@@ -34,7 +34,7 @@
                 android:background="#F4F7F8"
                 android:orientation="vertical"
                 android:padding="@dimen/_10sdp"
-                tools:context=".modules.OrderDetailsActivity">
+                tools:context=".modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -59,7 +59,6 @@
                         android:ellipsize="end"
                         android:fontFamily="@font/droidkufi_bold"
                         android:lines="1"
-                        android:text="القاهرة, الشروق"
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/_10ssp" />
 
@@ -72,7 +71,6 @@
                         android:layout_alignParentStart="true"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/droidkufi_regular"
-                        android:text="شارع محمد على, عمارة 13, شقة 5"
                         android:textSize="@dimen/_10ssp" />
 
                 </RelativeLayout>
@@ -156,7 +154,6 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_3sdp"
-                        android:text="125.00 جنيه"
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/_12ssp" />
 
@@ -174,6 +171,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:background="@drawable/rounded_white_bg"
                     android:padding="@dimen/_10sdp">
 
@@ -192,7 +190,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:text="Y5456789754"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_12ssp" />
 
@@ -215,7 +212,6 @@
                         android:layout_below="@+id/order_number_value"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:text="2 - 10 - 2021"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_12ssp" />
 
@@ -226,7 +222,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:background="@color/white"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
@@ -245,32 +241,10 @@
                     android:background="@drawable/rounded_white_bg"
                     android:padding="@dimen/_10sdp">
 
-
-                    <TextView
-                        android:id="@+id/sub_total"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:text="@string/subtotal"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/_12ssp" />
-
-
-                    <TextView
-                        android:id="@+id/subtotal_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="@string/to_be_confirmed"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/_12ssp" />
-
-
                     <TextView
                         android:id="@+id/delivery"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/sub_total"
                         android:layout_alignParentStart="true"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/delivery_fees"
@@ -281,13 +255,11 @@
                         android:id="@+id/delivery_fees"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/subtotal_value"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/for_free"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_12ssp" />
-
 
                     <TextView
                         android:id="@+id/total"
@@ -300,7 +272,6 @@
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/_12ssp" />
 
-
                     <TextView
                         android:id="@+id/total_value"
                         android:layout_width="wrap_content"
@@ -308,7 +279,7 @@
                         android:layout_below="@+id/delivery_fees"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:text="@string/to_be_confirmed"
+                        android:text=""
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/_12ssp" />
 

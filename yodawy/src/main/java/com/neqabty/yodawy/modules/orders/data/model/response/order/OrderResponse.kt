@@ -1,9 +1,9 @@
-package com.neqabty.yodawy.modules.orders.data.model
+package com.neqabty.yodawy.modules.orders.data.model.response.order
 
 
 import com.google.gson.annotations.SerializedName
 
-data class OrderModel(
+data class OrderResponse(
     @SerializedName("Address")
     val address: Address,
     @SerializedName("CancellationReasons")
@@ -23,9 +23,9 @@ data class OrderModel(
     @SerializedName("OrderNumber")
     val orderNumber: String,
     @SerializedName("OrderPrice")
-    val orderPrice: Double,
+    val orderPrice: Int,
     @SerializedName("Pharmacy")
-    val pharmacy: String?,
+    val pharmacy: String,
     @SerializedName("PrescriptionImages")
-    val prescriptionImages: List<String>?
+    val prescriptionImages: List<Any>
 )
