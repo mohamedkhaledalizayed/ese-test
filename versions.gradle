@@ -50,6 +50,9 @@ versions.ccp = "2.4.5"
 versions.cowpay = "1.1.3"
 versions.legacy_support = "1.0.0"
 versions.charts = "v3.1.0"
+versions.activity_ktx = "1.4.0"
+versions.fragment_ktx = "1.3.6"
+versions.dimens = "1.0.6"
 
 def deps = [:]
 
@@ -104,6 +107,13 @@ dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
 dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
 
 deps.dagger = dagger
+
+def hilt = [:]
+hilt.plugin = "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
+hilt.runtime = "com.google.dagger:hilt-android:$versions.hilt"
+hilt.compiler = "com.google.dagger:hilt-compiler:$versions.hilt"
+
+deps.hilt = hilt
 
 def espresso = [:]
 espresso.core = "com.android.support.test.espresso:espresso-core:$versions.espresso"
@@ -226,6 +236,17 @@ deps.legacy_support = legacy_support
 
 def charts = "com.github.PhilJay:MPAndroidChart:$versions.charts"
 deps.charts = charts
+
+def activity_ktx = "androidx.activity:activity-ktx:$versions.activity_ktx"
+deps.activity_ktx = activity_ktx
+
+def fragment_ktx = "androidx.fragment:fragment-ktx:$versions.fragment_ktx"
+deps.fragment_ktx = fragment_ktx
+
+def dimens =  [:]
+dimens.sdp = "com.intuit.sdp:sdp-android:$versions.dimens"
+dimens.ssp = "com.intuit.ssp:ssp-android:$versions.dimens"
+deps.dimens = dimens
 
 ext.deps = deps
 

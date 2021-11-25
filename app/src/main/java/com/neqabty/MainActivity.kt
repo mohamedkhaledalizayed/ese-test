@@ -268,7 +268,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         super.attachBaseContext(context)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         var inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
 

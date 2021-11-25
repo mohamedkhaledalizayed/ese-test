@@ -129,6 +129,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     sourceSets {
         androidTest.java.srcDirs += "src/test-common/java"
         test.java.srcDirs += "src/test-common/java"
@@ -197,6 +201,8 @@ dependencies {
     implementation deps.viewpager.pager
     implementation deps.viewpager.indicator
     implementation deps.charts
+    implementation deps.dimens.sdp
+    implementation deps.dimens.ssp
 
     implementation deps.multidex
     kapt deps.dagger.android_support_compiler
@@ -204,6 +210,10 @@ dependencies {
     kapt deps.room.compiler
     kapt deps.lifecycle.compiler
     kapt deps.binding.compiler
+
+    // Activity KTX for viewModels()
+    implementation deps.activity_ktx
+    implementation deps.fragment_ktx
 
     implementation deps.mastercard
     implementation deps.cowpay

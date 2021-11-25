@@ -352,7 +352,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
 
     override fun onNextClicked(savedPDFFile: File?) {}
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_pdf_viewer, menu)
         return true
     }
