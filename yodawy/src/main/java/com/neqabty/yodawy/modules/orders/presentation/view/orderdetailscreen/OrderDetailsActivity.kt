@@ -56,6 +56,22 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
                         binding.orderNumberValue.text = resource.data?.orderNumber
                         binding.dateValue.text = AppUtils().dateFormat(resource.data?.creationDate!!)
                         binding.totalPayment.text = "${resource.data?.orderPrice} جنيه"
+
+                        when (resource.data.currentStatus) {
+                            "New" -> {
+                                binding.orderStatusValue.text = "لقد تم تنفيذ طلبك بنجاح"
+                                binding.orderStatusValue.setTextColor(resources.getColor(R.color.black))
+                            }
+                            "Dispatched" -> {
+                                binding.orderStatusValue.text = "لقد تم تسليم هذا الطلب"
+                                binding.orderStatusValue.setTextColor(resources.getColor(R.color.green))
+                            }
+                            else -> {
+                                binding.orderStatusValue.text = "تم الغاء هذا الطلب"
+                                binding.orderStatusValue.setTextColor(resources.getColor(R.color.red))
+                            }
+                        }
+
                         if (resource.data.items.isNotEmpty()){
                             binding.productsRecycler.adapter = mAdapter
                             mAdapter.submitList(resource.data.items)
