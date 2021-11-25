@@ -32,7 +32,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(titleResId = R.string.orders_history)
+        setupToolbar(titleResId = R.string.yodawy_home_title)
 
         Constants.userNumber = intent.extras!!.getString("user_number", "")
         Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")

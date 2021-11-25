@@ -14,6 +14,7 @@
     <color name="alpha_light_grey">#9AF5F3F3</color>
     <color name="text_dark">#0b2031</color>
     <color name="yellow">#FFBA00</color>
+    <color name="light_yellow">#D8CAA6</color>
     <color name="colorAccent">#959692</color>
     <color name="light_blue">#00BCD4</color>
     <color name="blue">#092c8e</color>

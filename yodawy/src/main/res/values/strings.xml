@@ -18,7 +18,8 @@
     <string name="save_address">حفظ</string>
     <string name="order_via_n_prescription">الطلب \n بالروشتة</string>
     <string name="find_n_medications">ابحث عن \n دواء</string>
-    <string name="orders_history">طلباتك</string>
+    <string name="yodawy_home_title">يداوي</string>
+    <string name="orders_history">طلباتي</string>
     <string name="cart">عربة التسوق</string>
     <string name="search">ابحث</string>
     <string name="low_stock">Low Stock</string>

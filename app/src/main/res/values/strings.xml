@@ -179,7 +179,7 @@
 
 
     <string name="syndicates_title">اختر النقابة المفضلة</string>
-    <string name="menu_memberName">اسم العضو:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
+    <string name="menu_memberName">الاسم:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="menu_syndicateNumber">رقم العضوية:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="menu_phoneNumber">رقم الموبايل:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="home_title">الرئيسية</string>

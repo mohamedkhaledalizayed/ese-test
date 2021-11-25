@@ -58,7 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:text="@{letter.name}"
                 android:textSize="@dimen/text_size_small"
                 app:layout_constraintBottom_toBottomOf="@id/tvIsActive"
@@ -93,7 +93,7 @@
 
         <TextView
             android:id="@+id/tvServiceProviderName"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lineSpacingMultiplier="0.8"
