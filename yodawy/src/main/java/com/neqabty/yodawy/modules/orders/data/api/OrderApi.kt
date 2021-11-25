@@ -19,29 +19,20 @@ import retrofit2.http.*
 interface OrderApi {
     @POST("order/list")
     suspend fun getOrdersList(
-        @Header("Authorization") jwt: String = "Bearer " + Constants.jwt,
-        @Header("Accept") Accept: String = "application/json",
         @Body orderListRequestBody: OrderListRequestBody): Response<OrderListResponse>
 
     @POST("order/show")
     suspend fun getOrder(
-        @Header("Authorization") jwt: String = "Bearer " + Constants.jwt,
-        @Header("Accept") Accept: String = "application/json",
         @Body orderRequestBody: OrderRequestBody): Response<OrderModel>
 
     @POST("order/item")
     suspend fun placeOrder(
-        @Header("Authorization") jwt: String = "Bearer " + Constants.jwt,
-        @Header("Accept") Accept: String = "application/json",
         @Body placeOrderRequestBody: PlaceOrderRequestBody): Response<PlaceOrderResponse>
 
     @Multipart
-    @POST
-    @Headers("No-Authentication: true")
+    @POST(YODAWY_URL)
     suspend fun placePrescription(
         @Header("X-Yodawy-Signature") signature: String = selectedAddress.signature,
-        @Header("Authorization") token: String = FIXED_TOKEN,
-        @Url url: String = YODAWY_URL,
         @Part("order") order: RequestBody,
         @Part images: ArrayList<MultipartBody.Part>
     ): PlaceOrderResponse

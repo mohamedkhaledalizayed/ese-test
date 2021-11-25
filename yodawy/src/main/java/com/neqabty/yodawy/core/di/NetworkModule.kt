@@ -7,6 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -33,37 +34,31 @@ class NetworkModule {
     @Provides
     @Named("yodawy")
     fun provideOkHttpClient(
-        @Named("yodawy") loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+        @Named("yodawy") loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(40, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
         okHttpClient.readTimeout(40, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
-            .addInterceptor(Interceptor { chain ->
-
+        okHttpClient.addInterceptor(object : Interceptor {
+            override fun intercept(chain: Interceptor.Chain): Response {
                 val request = chain.request()
-                var newRequest = request.newBuilder()
-                    .header("Authorization", "Bearer " + Constants.jwt)
-                    .header("Accept", "application/json")
-                    .build()
-
-                chain.proceed(newRequest)
-
-            })
-        okHttpClient.addInterceptor(loggingInterceptor)
-        okHttpClient.build()
-        return okHttpClient.build()
-    }
-
-    @Provides
-    @Named("Prescriptions")
-    fun provideOkHttpClientPrescriptions(
-        @Named("yodawy") loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        val okHttpClient = OkHttpClient().newBuilder()
-        okHttpClient.callTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.readTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
+                if (request.header("X-Yodawy-Signature") != null) {
+                    var newRequest = request.newBuilder()
+                        .header("Authorization", Constants.FIXED_TOKEN)
+                        .build()
+                    var newResponse = chain.proceed(newRequest)
+                    return newResponse
+                } else {
+                    var newRequest = request.newBuilder()
+                        .header("Authorization", "Bearer " + Constants.jwt)
+                        .build()
+                    var newResponse = chain.proceed(newRequest)
+                    return newResponse
+                }
+            }
+        })
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.build()
         return okHttpClient.build()
@@ -78,20 +73,6 @@ class NetworkModule {
     @Named("yodawy")
     fun provideRetrofitClient(
         @Named("yodawy") okHttpClient: OkHttpClient,
-        baseUrl: String,
-        converterFactory: Converter.Factory
-    ): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .client(okHttpClient)
-            .addConverterFactory(converterFactory)
-            .build()
-    }
-
-    @Provides
-    @Named("Prescriptions")
-    fun provideRetrofitClientPrescriptions(
-        @Named("Prescriptions") okHttpClient: OkHttpClient,
         baseUrl: String,
         converterFactory: Converter.Factory
     ): Retrofit {
