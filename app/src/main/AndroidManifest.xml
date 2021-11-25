@@ -69,7 +69,8 @@
             android:name=".MainActivity"
             android:configChanges="locale"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"> <!-- TODO  android:screenOrientation="portrait" -->
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true"> <!-- TODO  android:screenOrientation="portrait" -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
