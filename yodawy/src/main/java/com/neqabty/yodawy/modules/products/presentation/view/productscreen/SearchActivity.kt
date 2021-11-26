@@ -46,9 +46,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 startActivity(intent)
             }
 
-            override fun setOnAddItemClickListener() {
+            override fun setOnAddItemClickListener(confirmClearCartCallback: () -> Unit) {
                 if (imageList.isNotEmpty()){
-                    showClearCartConfirmationAlert()
+                    showClearCartConfirmationAlert(okCallback = {
+                        imageList.clear()
+                        invalidateOptionsMenu()
+                        confirmClearCartCallback.invoke()
+                    })
                 }
             }
         }
@@ -90,21 +94,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
         }
 
-    }
-
-    private fun showClearCartConfirmationAlert() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.alert_title))
-        builder.setMessage(getString(R.string.will_clear_cart))
-        builder.setCancelable(false)
-        builder.setPositiveButton(getString(R.string.alert_ok)) { dialog, which ->
-            imageList.clear()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton(getString(R.string.alert_cancel)) { dialog, which ->
-            dialog.dismiss()
-        }
-        builder.show()
     }
 
     private fun search(){

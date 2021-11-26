@@ -98,13 +98,9 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
 
         viewHolder.binding.addItem.setOnClickListener {
             if (Constants.imageList.isEmpty()) {
-                viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
-                viewHolder.binding.addItem.visibility = View.GONE
-                //TODO confirm to clear cart
-                cartItems.addOrIncrement(item)
-                invalidateMenuCallback.invoke()
+                addToCart(viewHolder, item)
             }
-            onItemClickListener?.setOnAddItemClickListener()
+            onItemClickListener?.setOnAddItemClickListener({addToCart(viewHolder, item)})
         }
 
         viewHolder.binding.viewDetails.setOnClickListener {
@@ -193,9 +189,15 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
 
     interface OnItemClickListener {
         fun setOnItemClickListener(item: ProductEntity)
-        fun setOnAddItemClickListener()
+        fun setOnAddItemClickListener(confirmClearCartCallback: () -> Unit)
     }
 
+    fun addToCart(viewHolder: ViewHolder, item: ProductEntity){
+        viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
+        viewHolder.binding.addItem.visibility = View.GONE
+        cartItems.addOrIncrement(item)
+        invalidateMenuCallback.invoke()
+    }
     class ViewHolder(val binding: MedicationLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }
