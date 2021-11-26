@@ -15,7 +15,6 @@ import com.neqabty.databinding.OnlinePharmacyFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,9 +58,9 @@ class OnlinePharmacyFragment : BaseFragment() {
         binding.clVezeeta.setOnClickListener { navController().navigate(OnlinePharmacyFragmentDirections.openOnlinePharmacyVezeeta()) }
         binding.clYodawy.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("user_number", PreferencesHelper(requireContext()).user)
-            bundle.putString("mobile_number", PreferencesHelper(requireContext()).mobile)
-            bundle.putString("jwt", PreferencesHelper(requireContext()).jwt)
+            bundle.putString("user_number", sharedPref.user)
+            bundle.putString("mobile_number", sharedPref.mobile)
+            bundle.putString("jwt", sharedPref.jwt)
             val intent = Intent(requireContext(), HomeActivity::class.java)
             intent.putExtras(bundle)
             startActivity(intent)

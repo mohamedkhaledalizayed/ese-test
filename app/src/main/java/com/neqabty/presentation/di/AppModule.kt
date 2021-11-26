@@ -75,26 +75,26 @@ class AppModule {
 //        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
 //                .add(
 //                        BuildConfig.URL,
-//                        "sha256/Zi7WyG7/3sg3UCgKI7P8BcO8Lz/5zMHcPmyGZGAw4+c="
+//                    "sha256/hgx3/z5ENRCVF9jDSHk8GwocaQsEFYAW8ON1eGs2qUc="
 //                ).build()
 
         return OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.MINUTES)
                 .readTimeout(5, TimeUnit.MINUTES)
-                .addInterceptor(object : Interceptor {
-                    override fun intercept(chain: Interceptor.Chain): Response {
-                        val request = chain.request()
+            .addInterceptor(object : Interceptor {
+                override fun intercept(chain: Interceptor.Chain): Response {
+                    val request = chain.request()
                         var newRequest = request.newBuilder()
                                 // .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlZ3lwdFxcYWhtZWQuZm91YWRnb21hYSIsImV4cCI6MTU3NDA4MjkyMCwiaWF0IjoxNTc0MDY0OTIwfQ.n8CvCPxVyJnoSHcfD9ePMS48Q3nFdN3Lvqmmdi3oy947X7g99i2Bk_sReyzkyGw9appwTeht1F-dlx7IzrrxEA")
                                 .header("Authorization", "Bearer " + PreferencesHelper.instance.jwt)
                                 .header("Accept", "application/json")
                                 .removeHeader("Content-Type")
-                                .build()
+                            .build()
 
                         var newResponse = chain.proceed(newRequest)
                         return newResponse
                     }
-                })
+            })
                 .addInterceptor(httpLoggingInterceptor) // TODO Interceptor
 //                .certificatePinner(certificatePinner)
                 .build()
