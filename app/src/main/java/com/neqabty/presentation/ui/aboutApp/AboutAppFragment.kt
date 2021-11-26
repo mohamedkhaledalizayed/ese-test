@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
+import com.neqabty.BuildConfig
 import com.neqabty.R
 import com.neqabty.databinding.AboutAppFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -45,6 +46,7 @@ class AboutAppFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        binding.tvVersion.text = getString(R.string.app_version, BuildConfig.VERSION_NAME.substring(0,5))
     }
 
     fun initializeViews(syndicate: SyndicateUI) {
