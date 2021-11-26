@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.data.Constants.cartItems
+import com.neqabty.yodawy.core.utils.replaceText
 import com.neqabty.yodawy.databinding.MedicationLayoutItemBinding
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 import com.squareup.picasso.Callback
@@ -53,7 +54,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
         }
 
         Picasso.get()
-            .load(item.image)
+            .load(item.image?.replaceText())
             .into(viewHolder.binding.medicationImage, object : Callback {
                 override fun onSuccess() {
                     viewHolder.binding.imageProgress.hide()

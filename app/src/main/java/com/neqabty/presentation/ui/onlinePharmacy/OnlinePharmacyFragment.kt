@@ -15,7 +15,6 @@ import com.neqabty.databinding.OnlinePharmacyFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.util.PreferencesHelper
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint

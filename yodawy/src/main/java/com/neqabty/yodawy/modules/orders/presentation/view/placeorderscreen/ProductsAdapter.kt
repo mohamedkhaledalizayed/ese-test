@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.utils.replaceText
 import com.neqabty.yodawy.databinding.ProductLayoutItemBinding
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 import com.squareup.picasso.Callback
@@ -49,7 +50,7 @@ class ProductsAdapter: RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
         viewHolder.binding.medicationPrice.text = "${item.first.regularPrice} جنيه"
 
         Picasso.get()
-            .load(item.first.image)
+            .load(item.first.image?.replaceText())
             .into(viewHolder.binding.medicationImage, object : Callback {
                 override fun onSuccess() {
                     viewHolder.binding.imageProgress.hide()
