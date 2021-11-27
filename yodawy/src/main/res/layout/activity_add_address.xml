@@ -68,7 +68,7 @@
                     android:inputType="text"
                     android:padding="@dimen/_8sdp"
                     android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/gray"
+                    android:textColorHint="@color/gray_yodawy"
                     android:textSize="@dimen/_10ssp" />
 
                 <TextView
@@ -89,7 +89,7 @@
                     android:inputType="text"
                     android:padding="@dimen/_8sdp"
                     android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/gray"
+                    android:textColorHint="@color/gray_yodawy"
                     android:textSize="@dimen/_10ssp" />
 
                 <LinearLayout
@@ -123,7 +123,7 @@
                             android:inputType="text"
                             android:padding="@dimen/_8sdp"
                             android:textColor="@color/colorPrimary"
-                            android:textColorHint="@color/gray"
+                            android:textColorHint="@color/gray_yodawy"
                             android:textSize="@dimen/_10ssp" />
 
                     </LinearLayout>
@@ -152,7 +152,7 @@
                             android:inputType="text"
                             android:padding="@dimen/_8sdp"
                             android:textColor="@color/colorPrimary"
-                            android:textColorHint="@color/gray"
+                            android:textColorHint="@color/gray_yodawy"
                             android:textSize="@dimen/_10ssp" />
 
                     </LinearLayout>
@@ -177,7 +177,7 @@
                     android:inputType="text"
                     android:padding="@dimen/_8sdp"
                     android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/gray"
+                    android:textColorHint="@color/gray_yodawy"
                     android:textSize="@dimen/_10ssp" />
 
                 <TextView
@@ -198,7 +198,7 @@
                     android:inputType="text"
                     android:padding="@dimen/_8sdp"
                     android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/gray"
+                    android:textColorHint="@color/gray_yodawy"
                     android:textSize="@dimen/_10ssp" />
 
 

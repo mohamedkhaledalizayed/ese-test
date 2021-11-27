@@ -2,6 +2,8 @@ package com.neqabty.yodawy.modules.products.presentation.view.productscreen
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -88,6 +90,31 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 }
             }
 
+        }
+
+        binding.etSearch.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (count == 0){
+                    binding.searchBtn.visibility = View.VISIBLE
+                    binding.closeBtn.visibility = View.GONE
+                }else{
+                    binding.closeBtn.visibility = View.VISIBLE
+                    binding.searchBtn.visibility = View.GONE
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
+
+        binding.closeBtn.setOnClickListener {
+            binding.etSearch.setText("")
         }
 
     }
