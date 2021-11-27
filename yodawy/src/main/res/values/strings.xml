@@ -16,8 +16,8 @@
     <string name="nickname">Nickname</string>
     <string name="home_office_etc">Home, Office, etc.</string>
     <string name="save_address">حفظ</string>
-    <string name="order_via_n_prescription">الطلب \n بالروشتة</string>
-    <string name="find_n_medications">ابحث عن \n دواء</string>
+    <string name="order_via_n_prescription">الطلب بالروشتة</string>
+    <string name="find_n_medications">ابحث عن دواء</string>
     <string name="orders_history">طلباتك</string>
     <string name="cart">عربة التسوق</string>
     <string name="search">ابحث</string>
