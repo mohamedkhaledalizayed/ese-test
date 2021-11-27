@@ -92,7 +92,7 @@
                     <ImageView
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
-                        android:src="@drawable/order" />
+                        android:src="@drawable/prescription" />
 
                     <TextView
                         android:layout_width="@dimen/_100sdp"
