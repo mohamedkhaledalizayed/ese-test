@@ -1,109 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data></data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="@dimen/margin_horizontal_large"
         android:background="@color/white">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clVezeeta"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/margin_horizontal_large"
-            app:layout_constraintEnd_toStartOf="@id/clYodawy"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/ivVezeeta"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/rounded_bg_stroke"
-                android:padding="@dimen/margin_horizontal_small"
-                android:scaleType="fitCenter"
-                android:src="@drawable/vezeeta"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvVezeeta"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/margin_vertical_normal"
-                android:gravity="center"
-                android:text="@string/online_pharmacy_vezeeta"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintBottom_toTopOf="@+id/tv_vezeeta_fees"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivVezeeta" />
-
-            <TextView
-                android:id="@+id/tv_vezeeta_fees"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/online_pharmacy_vezeeta_fees"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvVezeeta" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clYodawy"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:paddingHorizontal="@dimen/margin_horizontal_large"
-            app:layout_constraintBottom_toBottomOf="@id/clVezeeta"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pharmacy_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/clVezeeta"
-            app:layout_constraintTop_toTopOf="@id/clVezeeta">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/pharmacy_item" />
 
-            <ImageView
-                android:id="@+id/ivYodawy"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/rounded_bg_stroke"
-                android:padding="@dimen/margin_horizontal_small"
-                android:scaleType="fitCenter"
-                android:src="@drawable/yodawy"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvYodawy"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/margin_vertical_normal"
-                android:gravity="center"
-                android:text="@string/online_pharmacy_yodawy"
-                app:layout_constraintTop_toBottomOf="@+id/ivYodawy"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintBottom_toTopOf="@+id/tvYodawy_fees"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/tvYodawy_fees"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/online_pharmacy_yodawy_fees"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintTop_toBottomOf="@+id/tvYodawy"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
