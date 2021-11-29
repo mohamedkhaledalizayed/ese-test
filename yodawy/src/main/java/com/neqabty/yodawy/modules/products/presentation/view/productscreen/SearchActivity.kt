@@ -124,6 +124,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     }
 
     private fun search(){
+        if (binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString().isBlank()){
+            return
+        }
         hideKeyboard()
         productViewModel.search(binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString())
     }

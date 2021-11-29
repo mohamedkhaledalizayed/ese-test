@@ -37,7 +37,7 @@
     <string name="delivery_time">وقت التوصيل</string>
     <string name="payment">الدفع</string>
     <string name="subtotal">Subtotal</string>
-    <string name="to_be_confirmed">To be confirmed</string>
+    <string name="to_be_confirmed">يحدد عند التوصيل</string>
     <string name="add">إضافة</string>
     <string name="delivery_fees">مصاريف التوصيل</string>
     <string name="for_free">مجاناً</string>

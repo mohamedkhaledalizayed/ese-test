@@ -57,32 +57,32 @@ override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater
     }
 
     fun saveAddress(view: View) {
-        if (binding.street.text.toString().isNullOrEmpty()){
+        if (binding.street.text.toString().isBlank()){
             Toast.makeText(this, getString(R.string.add_street_name), Toast.LENGTH_LONG).show()
             return
         }
 
-        if (binding.building.text.toString().isNullOrEmpty()){
+        if (binding.building.text.toString().isBlank()){
             Toast.makeText(this, getString(R.string.add_building_number), Toast.LENGTH_LONG).show()
             return
         }
 
-        if (binding.floor.text.toString().isNullOrEmpty()){
+        if (binding.floor.text.toString().isBlank()){
             Toast.makeText(this, getString(R.string.add_floor_number), Toast.LENGTH_LONG).show()
             return
         }
 
-        if (binding.apartment.text.toString().isNullOrEmpty()){
+        if (binding.apartment.text.toString().isBlank()){
             Toast.makeText(this, getString(R.string.add_apartment_number), Toast.LENGTH_LONG).show()
             return
         }
 
-        if (binding.landmark.text.toString().isNullOrEmpty()){
+        if (binding.landmark.text.toString().isBlank()){
             Toast.makeText(this, getString(R.string.nearest_landmark), Toast.LENGTH_LONG).show()
             return
         }
 
-        if (binding.landmark.text.toString().isNullOrEmpty()){
+        if (binding.landmark.text.toString().isBlank()){
             Toast.makeText(this, getString(R.string.nickname_), Toast.LENGTH_LONG).show()
             return
         }
