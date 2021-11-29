@@ -56,14 +56,29 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/search_btn"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="0.8"
-                android:padding="@dimen/_9sdp"
-                android:src="@drawable/ic_search_black_24dp" />
+                >
+
+                <ImageView
+                    android:id="@+id/search_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_9sdp"
+                    android:src="@drawable/ic_search_black_24dp" />
+
+                <ImageView
+                    android:id="@+id/close_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_9sdp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_baseline_close_24" />
+
+            </FrameLayout>
 
         </LinearLayout>
 
