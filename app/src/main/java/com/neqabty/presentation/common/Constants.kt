@@ -3,6 +3,7 @@ package com.neqabty.presentation.common
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.BuildConfig
 import com.neqabty.presentation.entities.AdUI
+import com.neqabty.presentation.entities.AppConfigUI
 import me.cowpay.util.CowpayConstantKeys
 
 object Constants {
@@ -18,12 +19,19 @@ object Constants {
     var editFollowersStatusMsg: String = ""
     var hasQuestionnaire: MutableLiveData<Boolean> = MutableLiveData(false)
 
+    lateinit var YODAWY_CONFIG: AppConfigUI.YodawyStatus
     var CALL_CENTER = "0235317300"
 
     var DNS = if (BuildConfig.URL.contains("http")) BuildConfig.URL else "https://${BuildConfig.URL}"
 
+    var OPAY_PAYMENT_CALLBACK_URL = BuildConfig.URL + "/api/v1/transactions/opay-callback"
+    var OPAY_MERCHANT_ID = "281821112534441"
+    var OPAY_MERCHANT_NAME = "neQabty"
+    var OPAY_PUBLIC_KEY = "OPAYPUB16378484944900.9175634117495468"
     var COWPAY_MODE = if (BuildConfig.DEBUG) CowpayConstantKeys.SandBox else CowpayConstantKeys.Production
+    var OPAY_MODE = BuildConfig.DEBUG
     var CC_COMMISSION = .0288
+    var POS_COMMISSION = .0101
     var FAWRY_COMMISSION = .0101
     var MIN_COMMISSION = 6.0
     var CLAIMING = 1
@@ -71,5 +79,11 @@ object Constants {
                 return "verified"
             }
         }
+    }
+
+    enum class PaymentOption {
+        OpayCredit,
+        OpayPOS,
+        Fawry
     }
 }

@@ -159,6 +159,23 @@
                         android:visibility="gone" />
 
                     <RadioButton
+                        android:id="@+id/rb_fawry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_fawry"
+                        android:textSize="@dimen/text_size_medium"
+                        android:buttonTint="@color/dark_green" />
+
+                    <ImageView
+                        android:id="@+id/ivFawry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/pos"
+                        android:layout_gravity="center_horizontal"
+                        android:visibility="gone" />
+
+                    <RadioButton
                         android:id="@+id/rb_mobileWallet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

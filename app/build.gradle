@@ -215,7 +215,8 @@ dependencies {
     implementation deps.fragment_ktx
 
     implementation deps.mastercard
-    implementation files('libs/cowpaysdk.aar')
+    implementation(name: 'cashier-sdk-1.0.6', ext: 'aar')
+    implementation(name: 'cowpaysdk', ext: 'aar')
     implementation project(':wheel')
     implementation project(':mobilepaymentsdktest')
     implementation project(path: ':pdfcreator')

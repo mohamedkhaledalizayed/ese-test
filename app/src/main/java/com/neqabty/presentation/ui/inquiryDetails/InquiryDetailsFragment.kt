@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.efinance.mobilepaymentsdk.*
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.InquiryDetailsFragmentBinding
@@ -26,6 +26,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
+import team.opay.business.cashier.sdk.api.PayInput
+import team.opay.business.cashier.sdk.api.PaymentStatus
+import team.opay.business.cashier.sdk.api.Status
+import team.opay.business.cashier.sdk.api.WebJsResponse
+import team.opay.business.cashier.sdk.pay.PaymentTask
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -43,8 +48,6 @@ class InquiryDetailsFragment : BaseFragment() {
     lateinit var appExecutors: AppExecutors
     lateinit var medicalRenewalPayment: MedicalRenewalPaymentUI
 
-    lateinit var paymentGateway: PaymentGateway
-    lateinit var paymentCreationRequest: PaymentCreationRequest
     lateinit var mechanismTypeButton: RadioButton
 
     lateinit var params: InquiryDetailsFragmentArgs
@@ -52,7 +55,6 @@ class InquiryDetailsFragment : BaseFragment() {
     var title = ""
     var commission: Double = 0.0
     var newAmount: Double = 0.0
-    lateinit var paymentCreationResponse: PaymentCreationResponse
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -100,7 +102,7 @@ class InquiryDetailsFragment : BaseFragment() {
         title = params.title
         binding.number = params.number
 
-        calculateCommission(true)
+        calculateCommission(Constants.PaymentOption.OpayCredit)
         medicalRenewalPayment?.let {
             binding.medicalRenewalPayment = it
         }
@@ -109,15 +111,25 @@ class InquiryDetailsFragment : BaseFragment() {
 
         rb_card.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
-                calculateCommission(true)
+                calculateCommission(Constants.PaymentOption.OpayCredit)
                 ivCard.visibility = View.VISIBLE
                 ivChannels.visibility = View.GONE
+                ivFawry.visibility = View.GONE
             }
         }
         rb_channel.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
-                calculateCommission(false)
+                calculateCommission(Constants.PaymentOption.OpayPOS)
                 ivChannels.visibility = View.VISIBLE
+                ivCard.visibility = View.GONE
+                ivFawry.visibility = View.GONE
+            }
+        }
+        rb_fawry.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                calculateCommission(Constants.PaymentOption.Fawry)
+                ivFawry.visibility = View.VISIBLE
+                ivChannels.visibility = View.GONE
                 ivCard.visibility = View.GONE
             }
         }
@@ -132,6 +144,12 @@ class InquiryDetailsFragment : BaseFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PaymentTask.REQUEST_PAYMENT){
+            if (resultCode == PaymentTask.RESULT_PAYMENT){
+                val response = data?.getSerializableExtra(PaymentTask.RESPONSE_DATA) as WebJsResponse?
+                handlePaymentResponse(response)
+            }
+        }
         if (requestCode == CowpayConstantKeys.PaymentMethodsActivityRequestCode && data != null && resultCode == Activity.RESULT_OK) {
             var responseCode = data.extras!!.getInt(CowpayConstantKeys.ResponseCode, 0)
 
@@ -160,49 +178,46 @@ class InquiryDetailsFragment : BaseFragment() {
             state.medicalRenewalPayment?.let {
                 medicalRenewalPayment = it
                 if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-                    cowPayPayment(true)
+                    oPayPayment(true)
+                else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
+                    oPayPayment(false)
                 else
                     cowPayPayment(false)
             }
         }
-//            if (sendDecryptionKey) {
-//                llSuperProgressbar.visibility = View.INVISIBLE
-//                val paymentMethod = mechanismTypeButton.getText().toString()
-//                if (paymentMethod == getString(R.string.payment_card)) {
-//                    navController().navigate(
-//                            InquiryDetailsFragmentDirections.openPayment(medicalRenewalPayment, paymentCreationResponse.OriginalSenderRequestNumber,
-//                                    paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
-//                    )
-//                } else if (paymentMethod == getString(R.string.payment_channel) ||
-//                        paymentMethod == getString(R.string.payment_wallet) ||
-//                        paymentMethod == getString(R.string.payment_meeza)) {
-//                    showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
-//                        navController().popBackStack()
-//                        navController().navigate(R.id.homeFragment)
-//                    }
-////                    "senderRequestNumber" + response.OriginalSenderRequestNumber
-//                }
-//            } else {
-//                state.medicalRenewalPayment?.let {
-////                    medicalRenewalPayment.paymentCreationRequest = it.paymentCreationRequest
-////                    // static set
-////                    memberItem.paymentCreationRequest?.sender?.id = "071"
-////                    memberItem.paymentCreationRequest?.serviceCode = "171"
-////                    memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode = "647"
-////                    memberItem.paymentCreationRequest?.senderRequestNumber = it.paymentCreationRequest?.senderRequestNumber!!
-////                    var intent = Intent(context, PaymentMethodsActivity::class.java)
-////                    intent.putExtra(CowpayConstantKeys.MerchantCode, "GHIu9nk25D5z")
-////                    intent.putExtra(
-////                            CowpayConstantKeys.MerchantHashKey,
-////                            "MerchantHashKey"
-////                    )
-//                    initializeViews()
-//                }
-//            }
-//        }
     }
 
     //region
+
+    fun oPayPayment(isCredit: Boolean) {
+        val paymentType = if(isCredit) "BankCard" else "ReferenceCode"
+        PaymentTask.sandBox = Constants.OPAY_MODE
+        val payInput = PayInput(
+            publickey = Constants.OPAY_PUBLIC_KEY,
+            merchantId = Constants.OPAY_MERCHANT_ID,
+            merchantName = Constants.OPAY_MERCHANT_NAME,
+            reference = medicalRenewalPayment.paymentItem?.paymentRequestNumber!!,
+            countryCode = "EG", // uppercase
+            currency = "EGP", // uppercase
+            payAmount = (medicalRenewalPayment.paymentItem?.amount?.toLong() ?: 0) * 100,
+            productName = "Annual subscription renewal",
+            productDescription = "",
+            callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
+            userClientIP = "110.246.160.183",
+            expireAt = 30,
+            paymentType = paymentType // optional
+        )
+
+        PaymentTask(this).createOrder(payInput, callback = { status, response ->
+            when (status) {
+                Status.ERROR -> { // error
+                    Toast.makeText(requireContext(), response.message,
+                        Toast.LENGTH_SHORT).show()
+                } else -> {
+            }
+            }
+        })
+    }
 
     fun cowPayPayment(isCredit: Boolean) {
         var intent = Intent(context, PaymentMethodsActivity::class.java)
@@ -248,159 +263,12 @@ class InquiryDetailsFragment : BaseFragment() {
         startActivityForResult(intent, CowpayConstantKeys.PaymentMethodsActivityRequestCode)
     }
 
-    fun createPayment() {
-        try {
-
-            paymentGateway = PaymentGateway(activity, "1234")
-            paymentCreationRequest = PaymentCreationRequest()
-
-//            paymentCreationRequest.Sender.Id = memberItem.paymentCreationRequest?.sender?.id
-            paymentCreationRequest.Sender.Id = "071"
-//            paymentCreationRequest.Sender.Name = memberItem.paymentCreationRequest?.sender?.name
-            paymentCreationRequest.Sender.Name = "MSAD"
-            paymentCreationRequest.Sender.Password = "1234"
-            paymentCreationRequest.Description = "Test"
-//            paymentCreationRequest.SenderInvoiceNumber = memberItem.paymentCreationRequest?.senderRequestNumber
-            paymentCreationRequest.SenderInvoiceNumber = medicalRenewalPayment.requestID
-            paymentCreationRequest.AdditionalInfo = "Test"
-
-//            paymentCreationRequest.SenderRequestNumber = memberItem.paymentCreationRequest?.senderRequestNumber + "032110010100"
-            paymentCreationRequest.SenderRequestNumber = medicalRenewalPayment.requestID
-//            paymentCreationRequest.ServiceCode = memberItem.paymentCreationRequest?.serviceCode
-            paymentCreationRequest.ServiceCode = "171"
-
-            val settlementAmount = PaymentCreationRequest.SettlementAmount()
-
-            settlementAmount.Amount = medicalRenewalPayment.paymentItem?.amount?.toDouble()!!
-//            settlementAmount.SettlementAccountCode = memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode!!.toInt()
-            settlementAmount.SettlementAccountCode = 647
-            settlementAmount.Description = "Test"
-
-            paymentCreationRequest.SettlementAmounts.add(settlementAmount)
-
-//            paymentCreationRequest.Currency = memberItem.paymentCreationRequest?.currency
-            paymentCreationRequest.Currency = "818"
-
-            mechanismTypeButton = binding.root.findViewById(rgPaymentMechanismType.getCheckedRadioButtonId())
-
-            if (mechanismTypeButton.getText().toString() == getString(R.string.payment_card)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Card
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Channel
-
-                paymentCreationRequest.PaymentMechanism.Channel.Email = "xxxx@xx.xx"
-                paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = sharedPref.mobile
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_wallet)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.MobileWallet
-                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = sharedPref.mobile
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_meeza)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Meeza
-                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = sharedPref.mobile
-            }
-
-//            paymentCreationRequest.RequestExpiryDate = memberItem.paymentCreationRequest?.requestExpiryDate
-            paymentCreationRequest.RequestExpiryDate = "2020-12-09"
-
-            paymentCreationRequest.UserUniqueIdentifier = medicalRenewalPayment.requestID
-//            paymentCreationRequest.UserUniqueIdentifier = "12346743298546"
-
-//            val publicKey = memberItem.paymentCreationRequest?.publicKey
-            val publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0MAVRsQax/cxZwZcfp+s0mzZtFGNRpuRLnyKUosdnlHn2JC1FSHpnmsON1Mp/SY+GR/Wk1kO2QGNNdszikPgAnN5/fcX6JPIkzSHCMLqPxUNqaCfn0eaLrwgsc1SCwlm+f8c+CseG3OeR+sUdq52PHf7edpjC60V4bNo/gEVRLV+VsvBde8jhet6Z/wRrKL5K1MQH0ByYn9upf96myRiTOSvocuBVHnlb2O+tapLVrNq7dMNXCHHB7IuNCFvP0f0QILeDW5CxebcsTItzxLLurKtA1lTWv+Ao9oqexy1BJzMytpS+BAz9kNzmt/g7RcdbXd0MxFotvoHjl2jwE1wLwIDAQAB"
-
-//            inquiryDetailsViewModel.encryptData(paymentCreationRequest.Sender.Name, paymentCreationRequest.Sender.Password, paymentCreationRequest.serialize())
-            paymentCreationRequest.serialize()
-
-            val successCallback: ((response: PaymentCreationResponse) -> Unit) = { response ->
-                sendDecryptionKey = true
-                paymentCreationResponse = response
-
-//                if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
-//
-//                    offlineSetPaid(response.OriginalSenderRequestNumber)
-//                } else {
-//                    llSuperProgressbar.visibility = View.INVISIBLE
-//                    val paymentMethod = mechanismTypeButton.getText().toString()
-//                    if (paymentMethod == getString(R.string.payment_card)) {
-//                        navController().navigate(
-//                                MedicalRenewDetailsFragmentDirections.openPayment(MemberUI(), paymentCreationResponse.OriginalSenderRequestNumber,
-//                                        paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
-//                        )
-//                    } else if (paymentMethod == getString(R.string.payment_channel) ||
-//                            paymentMethod == getString(R.string.payment_wallet) ||
-//                            paymentMethod == getString(R.string.payment_meeza)) {
-//                        showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
-//                            navController().popBackStack()
-//                            navController().navigate(R.id.homeFragment)
-//                        }
-////                    "senderRequestNumber" + response.OriginalSenderRequestNumber
-//                    }
-//                }
-                inquiryDetailsViewModel.sendDecryptionKey(response.OriginalSenderRequestNumber, response.RequestDecryptionKey)
-            }
-
-            val failureCallback = {
-                llSuperProgressbar.visibility = View.INVISIBLE
-                showConnectionAlert(requireContext(), retryCallback = {
-                    llContent.visibility = View.INVISIBLE
-                    inquiryDetailsViewModel.paymentInquiry(sharedPref.mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
-                }, cancelCallback = {
-                    navController().navigateUp()
-                })
-            }
-
-            paymentGateway.CreatePayment(paymentCreationRequest, "", publicKey, MobilePaymentCreationCallback(successCallback, failureCallback))
-        } catch (ex: Exception) {
-//            Log.i("Error", ex.message)
-        }
-    }
-
-//    private fun completePaymentCreation(encryptedData: String) {
-//        try {
-//            val publicKey = memberItem.paymentCreationRequest?.publicKey
-// //            var signature = paymentCreationRequest.serialize()
-// //            Log.d("NEQBTY", signature)
-//
-// //            val signature = "qf9Qo2fZ792GyoDiXik6eAQ6fadqHaib+yaBTBp4PGj1xf6KlVn3pP822D8VyADm+OEvuPVtLc3nvutiTEDZgo4oeJnUIwXveAzQUV6RM9oyMfOu78Kj9NcD3wMW1Jb6hwAKfHQ/tLsY7oJYIhXmh1x2INU9am6K6JrD468ToBNhWU6Df9SlJsMezZWMLrG0Z4bElqTsIVcpATiu8rJ4lGHMl+qC4AX+2pAViz31TPXGREdYsQpLDHbnBXaVvLLY8fKNyOjDaskxEoeJikPdzkAmBn1HDmzwWhb9GyYRsGJw4wm1szIXrMIRvgGYIarsVwxL7uaSWs/yrjHUFhT8AQ=="
-//
-//            paymentGateway.CreatePayment(paymentCreationRequest, encryptedData, publicKey, MobilePaymentCreationCallback(requireContext(), mechanismTypeButton.getText().toString(), navController()))
-//        } catch (ex: Exception) {
-////            Log.i("Error", ex.message)
-//        }
-//    }
-    // endregion
-
-    // region callback
-    class MobilePaymentCreationCallback(
-            private val successCallback: ((response: PaymentCreationResponse) -> Unit),
-            private val failureCallback: (() -> Unit)
-    ) : PaymentCreationCallback {
-        override fun onSuccess(response: PaymentCreationResponse) {
-            successCallback.invoke(response)
-        }
-
-        override fun onError(paymentException: PaymentException) {
-//            Log.e("NEQABTY", paymentException.details.message)
-            failureCallback.invoke()
-        }
-    }
-
-//    private fun generateRequestNumber(): String {
-//        val random = Random()
-//        val requestNumber = random.nextInt(999999999)
-//
-//        return requestNumber.toString()
-//    }
-
-    fun offlineSetPaid(originalSenderRequestNumber: String) {
-
-//        inquiryDetailsViewModel.setPaid(originalSenderRequestNumber)
-    }
-
-    private fun calculateCommission(isCredit: Boolean) {
-        if (isCredit) {
-            commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
-        } else {
-            commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
+    //region
+    private fun calculateCommission(paymentOption: Constants.PaymentOption) {
+        when (paymentOption) {
+            Constants.PaymentOption.OpayCredit -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
+            Constants.PaymentOption.OpayPOS -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
+            Constants.PaymentOption.Fawry -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
         }
         commission = Math.round(commission * 10.0) / 10.0
         newAmount = (medicalRenewalPayment.paymentItem?.amount ?: 0) + commission
@@ -418,6 +286,36 @@ class InquiryDetailsFragment : BaseFragment() {
             }
         }
     }
+
+    private fun handlePaymentResponse(response: WebJsResponse?) {
+        when (response?.orderStatus) {
+            PaymentStatus.INITIAL -> {
+            }
+            PaymentStatus.PENDING -> {
+            }
+            PaymentStatus.SUCCESS -> {
+                showAlert(
+                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(
+                        R.string.payment_successful
+                    ) + response.orderNo
+                    else getString(R.string.payment_reference) + response.referenceCode
+                ) {
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+            }
+            PaymentStatus.FAIL -> {
+                showAlert(getString(R.string.payment_canceled)) {
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+            }
+            PaymentStatus.CLOSE -> {
+            }
+        }
+    }
+
+
     //endregion
 
     fun navController() = findNavController()

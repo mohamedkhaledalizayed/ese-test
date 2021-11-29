@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.efinance.mobilepaymentsdk.*
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.MedicalRenewDetailsFragmentBinding
@@ -24,9 +24,24 @@ import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.medical_renew_details_fragment.*
+import kotlinx.android.synthetic.main.inquiry_details_fragment.*
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.bPay
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.ivCard
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.ivChannels
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.ivFawry
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.llContent
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.rb_card
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.rb_channel
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.rb_fawry
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.rgPaymentMechanismType
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.rvDetails
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
+import team.opay.business.cashier.sdk.api.PayInput
+import team.opay.business.cashier.sdk.api.PaymentStatus
+import team.opay.business.cashier.sdk.api.Status
+import team.opay.business.cashier.sdk.api.WebJsResponse
+import team.opay.business.cashier.sdk.pay.PaymentTask
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -44,8 +59,6 @@ class MedicalRenewDetailsFragment : BaseFragment() {
     lateinit var appExecutors: AppExecutors
     lateinit var medicalRenewalPaymentUI: MedicalRenewalPaymentUI
 
-    lateinit var paymentGateway: PaymentGateway
-    lateinit var paymentCreationRequest: PaymentCreationRequest
     lateinit var mechanismTypeButton: RadioButton
 
     var sendDecryptionKey = false
@@ -56,7 +69,6 @@ class MedicalRenewDetailsFragment : BaseFragment() {
 
     var commission: Double = 0.0
     var newAmount: Double = 0.0
-    lateinit var paymentCreationResponse: PaymentCreationResponse
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -102,7 +114,7 @@ class MedicalRenewDetailsFragment : BaseFragment() {
         val adapter = MedicalRenewPaymentItemsAdapter(dataBindingComponent, appExecutors) { }
         this.adapter = adapter
 
-        calculateCommission(true)
+        calculateCommission(Constants.PaymentOption.OpayCredit)
 //        medicalRenewalPaymentUI.paymentItem = MedicalRenewalPaymentUI.PaymentItem(paymentRequestNumber = "111",amount = 555,name = "mona",paymentDetailsItems = null)
         medicalRenewalPaymentUI?.let {
             binding.medicalRenewalPayment = it
@@ -112,17 +124,29 @@ class MedicalRenewDetailsFragment : BaseFragment() {
 
         binding.rvDetails.adapter = adapter
 
+
+
         rb_card.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
-                calculateCommission(true)
+                calculateCommission(Constants.PaymentOption.OpayCredit)
                 ivCard.visibility = View.VISIBLE
                 ivChannels.visibility = View.GONE
+                ivFawry.visibility = View.GONE
             }
         }
         rb_channel.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
-                calculateCommission(false)
+                calculateCommission(Constants.PaymentOption.OpayPOS)
                 ivChannels.visibility = View.VISIBLE
+                ivCard.visibility = View.GONE
+                ivFawry.visibility = View.GONE
+            }
+        }
+        rb_fawry.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                calculateCommission(Constants.PaymentOption.Fawry)
+                ivFawry.visibility = View.VISIBLE
+                ivChannels.visibility = View.GONE
                 ivCard.visibility = View.GONE
             }
         }
@@ -136,6 +160,12 @@ class MedicalRenewDetailsFragment : BaseFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PaymentTask.REQUEST_PAYMENT){
+            if (resultCode == PaymentTask.RESULT_PAYMENT){
+                val response = data?.getSerializableExtra(PaymentTask.RESPONSE_DATA) as WebJsResponse?
+                handlePaymentResponse(response)
+            }
+        }
         if (requestCode == CowpayConstantKeys.PaymentMethodsActivityRequestCode && data != null && resultCode == Activity.RESULT_OK) {
             var responseCode = data.extras!!.getInt(CowpayConstantKeys.ResponseCode, 0)
 
@@ -162,56 +192,55 @@ class MedicalRenewDetailsFragment : BaseFragment() {
     private fun handleViewState(state: MedicalRenewDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
-            if (sendDecryptionKey) {
-                llSuperProgressbar.visibility = View.INVISIBLE
-                val paymentMethod = mechanismTypeButton.getText().toString()
-                if (paymentMethod == getString(R.string.payment_card)) {
-//                    navController().navigate(
-//                            MedicalRenewDetailsFragmentDirections.openPayment(medicalRenewalPaymentUI, paymentCreationResponse.OriginalSenderRequestNumber,
-//                                    paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
-//                    )
-                } else if (paymentMethod == getString(R.string.payment_channel) ||
-                        paymentMethod == getString(R.string.payment_wallet) ||
-                        paymentMethod == getString(R.string.payment_meeza)) {
-//                    showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
-//                        navController().popBackStack()
-//                        navController().navigate(R.id.homeFragment)
-//                    }
-//                    "senderRequestNumber" + response.OriginalSenderRequestNumber
-                }
-            } else {
-                state.medicalRenewalPayment?.let {
-                    medicalRenewalPaymentUI = it
-                    if ((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-2")
-                        showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg) {
-                            navController().popBackStack()
-                            navController().navigate(R.id.homeFragment)
-                        }
-                    else if ((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-1")
-                        showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg) {
-                            navController().popBackStack()
-                            navController().navigate(R.id.homeFragment)
-                        }
-                    else
-                        initializeViews()
-//                    memberItem.paymentCreationRequest = it.paymentCreationRequest
-//                    // static set
-//                    memberItem.paymentCreationRequest?.sender?.id = "071"
-//                    memberItem.paymentCreationRequest?.serviceCode = "171"
-//                    memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode = "647"
-//                    memberItem.paymentCreationRequest?.senderRequestNumber = it.paymentCreationRequest?.senderRequestNumber!!
-//                    var intent = Intent(context, PaymentMethodsActivity::class.java)
-//                    intent.putExtra(CowpayConstantKeys.MerchantCode, "GHIu9nk25D5z")
-//                    intent.putExtra(
-//                            CowpayConstantKeys.MerchantHashKey,
-//                            "MerchantHashKey"
-//                    )
-                }
+            state.medicalRenewalPayment?.let {
+                medicalRenewalPaymentUI = it
+                if ((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-2")
+                    showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg) {
+                        navController().popBackStack()
+                        navController().navigate(R.id.homeFragment)
+                    }
+                else if ((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-1")
+                    showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg) {
+                        navController().popBackStack()
+                        navController().navigate(R.id.homeFragment)
+                    }
+                else
+                    initializeViews()
             }
         }
     }
 
     //region
+
+    fun oPayPayment(isCredit: Boolean) {
+        val paymentType = if(isCredit) "BankCard" else "ReferenceCode"
+        PaymentTask.sandBox = Constants.OPAY_MODE
+        val payInput = PayInput(
+            publickey = Constants.OPAY_PUBLIC_KEY,
+            merchantId = Constants.OPAY_MERCHANT_ID,
+            merchantName = Constants.OPAY_MERCHANT_NAME,
+            reference = medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber!!,
+            countryCode = "EG", // uppercase
+            currency = "EGP", // uppercase
+            payAmount = (medicalRenewalPaymentUI.paymentItem?.amount?.toLong() ?: 0) * 100,
+            productName = "Medical subscription renewal",
+            productDescription = "",
+            callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
+            userClientIP = "110.246.160.183",
+            expireAt = 30,
+            paymentType = paymentType // optional
+        )
+
+        PaymentTask(this).createOrder(payInput, callback = { status, response ->
+            when (status) {
+                Status.ERROR -> { // error
+                    Toast.makeText(requireContext(), response.message,
+                        Toast.LENGTH_SHORT).show()
+                } else -> {
+            }
+            }
+        })
+    }
 
     fun cowPayPayment(isCredit: Boolean) {
         var intent = Intent(context, PaymentMethodsActivity::class.java)
@@ -257,131 +286,11 @@ class MedicalRenewDetailsFragment : BaseFragment() {
         startActivityForResult(intent, CowpayConstantKeys.PaymentMethodsActivityRequestCode)
     }
 
-    fun createPayment() {
-        try {
-
-            paymentGateway = PaymentGateway(activity, "1234")
-            paymentCreationRequest = PaymentCreationRequest()
-
-            paymentCreationRequest.Sender.Id = "071"
-            paymentCreationRequest.Sender.Name = "MSAD"
-            paymentCreationRequest.Sender.Password = "1234"
-            paymentCreationRequest.Description = "Test"
-            paymentCreationRequest.SenderInvoiceNumber = medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber.toString()
-            paymentCreationRequest.AdditionalInfo = "Test"
-
-            paymentCreationRequest.SenderRequestNumber = medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber.toString()
-            paymentCreationRequest.ServiceCode = "171"
-
-            val settlementAmount = PaymentCreationRequest.SettlementAmount()
-
-            settlementAmount.Amount = medicalRenewalPaymentUI.paymentItem?.amount!!.toDouble()
-            settlementAmount.SettlementAccountCode = 647
-            settlementAmount.Description = "Test"
-
-            paymentCreationRequest.SettlementAmounts.add(settlementAmount)
-
-            paymentCreationRequest.Currency = "818"
-
-            mechanismTypeButton = binding.root.findViewById(rgPaymentMechanismType.getCheckedRadioButtonId())
-
-            if (mechanismTypeButton.getText().toString() == getString(R.string.payment_card)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Card
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Channel
-
-                paymentCreationRequest.PaymentMechanism.Channel.Email = "xxxx@xx.xx"
-                paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = sharedPref.mobile
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_wallet)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.MobileWallet
-                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = sharedPref.mobile
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_meeza)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Meeza
-                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = sharedPref.mobile
-            }
-
-//            paymentCreationRequest.RequestExpiryDate = medicalRenewalPaymentUI.paymentCreationRequest?.requestExpiryDate
-            paymentCreationRequest.RequestExpiryDate = "2020-12-06"
-
-            paymentCreationRequest.UserUniqueIdentifier = "12346743298546"
-
-            val publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0MAVRsQax/cxZwZcfp+s0mzZtFGNRpuRLnyKUosdnlHn2JC1FSHpnmsON1Mp/SY+GR/Wk1kO2QGNNdszikPgAnN5/fcX6JPIkzSHCMLqPxUNqaCfn0eaLrwgsc1SCwlm+f8c+CseG3OeR+sUdq52PHf7edpjC60V4bNo/gEVRLV+VsvBde8jhet6Z/wRrKL5K1MQH0ByYn9upf96myRiTOSvocuBVHnlb2O+tapLVrNq7dMNXCHHB7IuNCFvP0f0QILeDW5CxebcsTItzxLLurKtA1lTWv+Ao9oqexy1BJzMytpS+BAz9kNzmt/g7RcdbXd0MxFotvoHjl2jwE1wLwIDAQAB"
-
-
-//            medicalRenewDetailsViewModel.encryptData(paymentCreationRequest.Sender.Name, paymentCreationRequest.Sender.Password, paymentCreationRequest.serialize())
-            paymentCreationRequest.serialize()
-
-            val successCallback: ((response: PaymentCreationResponse) -> Unit) = { response ->
-                sendDecryptionKey = true
-                paymentCreationResponse = response
-
-//                if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
-//
-////                    offlineSetPaid()
-//                } else {
-//                    llSuperProgressbar.visibility = View.INVISIBLE
-//                    val paymentMethod = mechanismTypeButton.getText().toString()
-//                    if (paymentMethod == getString(R.string.payment_card)) {
-//                        navController().navigate(
-//                                MedicalRenewDetailsFragmentDirections.openPayment(MemberUI(), paymentCreationResponse.OriginalSenderRequestNumber,
-//                                        paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
-//                        )
-//                    } else if (paymentMethod == getString(R.string.payment_channel) ||
-//                            paymentMethod == getString(R.string.payment_wallet) ||
-//                            paymentMethod == getString(R.string.payment_meeza)) {
-//                        showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
-//                            navController().popBackStack()
-//                            navController().navigate(R.id.homeFragment)
-//                        }
-////                    "senderRequestNumber" + response.OriginalSenderRequestNumber
-//                    }
-//                }
-                medicalRenewDetailsViewModel.sendDecryptionKey(response.OriginalSenderRequestNumber, response.RequestDecryptionKey)
-            }
-
-            val failureCallback = {
-                llSuperProgressbar.visibility = View.INVISIBLE
-                showConnectionAlert(requireContext(), retryCallback = {
-                    llContent.visibility = View.INVISIBLE
-                    medicalRenewDetailsViewModel.paymentInquiry(sharedPref.mobile, medicalRenewalUI.oldRefId!!, deliveryType, address, mobile)
-                }, cancelCallback = {
-                    navController().navigateUp()
-                })
-            }
-
-            paymentGateway.CreatePayment(paymentCreationRequest, "", publicKey, MobilePaymentCreationCallback(successCallback, failureCallback))
-        } catch (ex: Exception) {
-//            Log.i("Error", ex.message)
-        }
-    }
-
-    // endregion
-
-    // region callback
-    class MobilePaymentCreationCallback(
-            private val successCallback: ((response: PaymentCreationResponse) -> Unit),
-            private val failureCallback: (() -> Unit)
-    ) : PaymentCreationCallback {
-        override fun onSuccess(response: PaymentCreationResponse) {
-            successCallback.invoke(response)
-        }
-
-        override fun onError(paymentException: PaymentException) {
-//            Log.e("NEQABTY", paymentException.details.message)
-            failureCallback.invoke()
-        }
-    }
-
-//    fun offlineSetPaid() {
-//
-////        medicalRenewDetailsViewModel.setPaid(medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber!!)
-//    }
-
-    private fun calculateCommission(isCredit: Boolean) {
-        if (isCredit) {
-            commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
-        } else {
-            commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
+    private fun calculateCommission(paymentOption: Constants.PaymentOption) {
+        when (paymentOption) {
+            Constants.PaymentOption.OpayCredit -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
+            Constants.PaymentOption.OpayPOS -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
+            Constants.PaymentOption.Fawry -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
         }
         commission = Math.round(commission * 10.0) / 10.0
         newAmount = (medicalRenewalPaymentUI.paymentItem?.amount ?: 0) + commission
@@ -407,7 +316,9 @@ class MedicalRenewDetailsFragment : BaseFragment() {
         builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
             llSuperProgressbar.visibility = View.VISIBLE
             if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-                cowPayPayment(true)
+                oPayPayment(true)
+            else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
+                oPayPayment(false)
             else
                 cowPayPayment(false)
             dialog.dismiss()
@@ -418,6 +329,34 @@ class MedicalRenewDetailsFragment : BaseFragment() {
 
         var dialog = builder?.create()
         dialog?.show()
+    }
+
+    private fun handlePaymentResponse(response: WebJsResponse?) {
+        when (response?.orderStatus) {
+            PaymentStatus.INITIAL -> {
+            }
+            PaymentStatus.PENDING -> {
+            }
+            PaymentStatus.SUCCESS -> {
+                showAlert(
+                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(
+                        R.string.payment_successful
+                    ) + response.orderNo
+                    else getString(R.string.payment_reference) + response.referenceCode
+                ) {
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+            }
+            PaymentStatus.FAIL -> {
+                showAlert(getString(R.string.payment_canceled)) {
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+            }
+            PaymentStatus.CLOSE -> {
+            }
+        }
     }
 
     //endregion

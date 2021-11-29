@@ -30,8 +30,9 @@ interface OrderApi {
         @Body placeOrderRequestBody: PlaceOrderRequestBody): Response<PlaceOrderResponse>
 
     @Multipart
-    @POST(YODAWY_URL)
+    @POST
     suspend fun placePrescription(
+        @Url url: String = YODAWY_URL + "order/PlacePrivateImageOrder",
         @Header("X-Yodawy-Signature") signature: String = selectedAddress.signature,
         @Part("order") order: RequestBody,
         @Part images: ArrayList<MultipartBody.Part>

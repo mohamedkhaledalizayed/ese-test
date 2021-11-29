@@ -383,6 +383,7 @@
     <string name="payment_method">طريقة الدفع:</string>
     <string name="payment_card">بطاقات بنكية</string>
     <string name="payment_channel">قنوات دفع</string>
+    <string name="payment_fawry">فوري</string>
     <string name="payment_wallet">محافظ إلكترونية</string>
     <string name="payment_meeza">ميزة</string>
     <string name="payment_reference">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك \n

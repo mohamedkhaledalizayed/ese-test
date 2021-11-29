@@ -8,11 +8,18 @@ data class AppConfigEntity(
     var cardCommission: Double,
     var fawryCommission: Double,
     var minCommission: Double,
-    var hasQuestionnaire: Boolean = false
+    var hasQuestionnaire: Boolean = false,
+    var yodawyConfig: YodawyStatus
 ) {
 
     data class ConfigStatus(
-            var status: String,
-            var statusMsg: String
+        var status: String,
+        var statusMsg: String
+    )
+
+    data class YodawyStatus(
+        var status: Boolean,
+        var url: String,
+        var publicKey: String
     )
 }

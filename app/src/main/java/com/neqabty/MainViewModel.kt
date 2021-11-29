@@ -8,6 +8,7 @@ import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.entities.AdUI
+import com.neqabty.presentation.entities.AppConfigUI
 import com.neqabty.presentation.entities.UserUI
 import com.neqabty.presentation.mappers.AdEntityUIMapper
 import com.neqabty.presentation.mappers.AppConfigEntityUIMapper
@@ -66,9 +67,11 @@ class MainViewModel @Inject constructor(val login: Login,
                             Constants.isEditFollowersEnabled = (it.editFollowersStatus.status.toInt() == 1)
                             Constants.editFollowersStatusMsg = it.editFollowersStatus.statusMsg
                             Constants.CC_COMMISSION = it.cardCommission / 100
+                            Constants.POS_COMMISSION = it.fawryCommission / 100
                             Constants.FAWRY_COMMISSION = it.fawryCommission / 100
                             Constants.MIN_COMMISSION = it.minCommission
                             Constants.hasQuestionnaire.value = it.hasQuestionnaire
+                            Constants.YODAWY_CONFIG = AppConfigUI.YodawyStatus(it.yodawyConfig.status, it.yodawyConfig.url, it.yodawyConfig.publicKey)
                             viewState.value = viewState.value?.copy(appConfigUI = appConfigEntityUIMapper.mapFrom(it))
                             onConfigReceived()
                         },
