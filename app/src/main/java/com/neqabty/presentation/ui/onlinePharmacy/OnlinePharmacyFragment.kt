@@ -66,7 +66,6 @@ class OnlinePharmacyFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initializeViews()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,9 +82,9 @@ class OnlinePharmacyFragment : BaseFragment() {
             override fun setOnItemClickListener(id: Int) {
                 if (id == 0){
                     val bundle = Bundle()
-                    bundle.putString("user_number", PreferencesHelper(requireContext()).user)
-                    bundle.putString("mobile_number", PreferencesHelper(requireContext()).mobile)
-                    bundle.putString("jwt", PreferencesHelper(requireContext()).jwt)
+                    bundle.putString("user_number", sharedPref.user)
+                    bundle.putString("mobile_number", sharedPref.mobile)
+                    bundle.putString("jwt", sharedPref.jwt)
                     val intent = Intent(requireContext(), HomeActivity::class.java)
                     intent.putExtras(bundle)
                     startActivity(intent)
