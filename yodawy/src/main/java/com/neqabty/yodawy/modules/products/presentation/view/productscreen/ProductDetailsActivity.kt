@@ -1,7 +1,6 @@
 package com.neqabty.yodawy.modules.products.presentation.view.productscreen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.neqabty.yodawy.R
@@ -91,7 +90,7 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
                 binding.medicationStatus.visibility = View.INVISIBLE
                 binding.deliveryTime.visibility = View.GONE
                 binding.add.text = "Out of Stock"
-                binding.add.setBackgroundColor(resources.getColor(R.color.gray))
+                binding.add.setBackgroundColor(resources.getColor(R.color.gray_yodawy))
                 binding.add.isEnabled = false
             }
             productItem.isLimitedAvailability -> {

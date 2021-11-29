@@ -224,7 +224,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:text="@string/order_number"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_12ssp" />
 
 
@@ -233,7 +233,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:textColor="@color/gray"
                         android:textSize="@dimen/_12ssp" />
 
 
@@ -243,6 +242,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/order_number"
                         android:layout_alignParentStart="true"
+                        android:textColor="@color/black"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/order_date"
                         android:textSize="@dimen/_12ssp" />
@@ -255,7 +255,6 @@
                         android:layout_below="@+id/order_number_value"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:textColor="@color/gray"
                         android:textSize="@dimen/_12ssp" />
 
                 </RelativeLayout>
@@ -301,7 +300,6 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/for_free"
-                        android:textColor="@color/gray"
                         android:textSize="@dimen/_12ssp" />
 
                     <TextView

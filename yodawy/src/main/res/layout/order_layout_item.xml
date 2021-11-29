@@ -67,7 +67,6 @@
             android:ellipsize="end"
             android:lines="1"
             android:text="2 items: PANADOL EXTRA, PANADOL"
-            android:textColor="@color/gray"
             />
 
         <TextView
@@ -79,7 +78,6 @@
             android:layout_marginTop="@dimen/_3sdp"
             android:layout_toEndOf="@+id/order_image"
             android:text="Total: To be confirmed"
-            android:textColor="@color/gray"
             android:textSize="@dimen/_10ssp" />
 
 
