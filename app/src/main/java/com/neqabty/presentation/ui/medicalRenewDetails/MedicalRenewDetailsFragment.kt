@@ -223,7 +223,7 @@ class MedicalRenewDetailsFragment : BaseFragment() {
             countryCode = "EG", // uppercase
             currency = "EGP", // uppercase
             payAmount = (medicalRenewalPaymentUI.paymentItem?.amount?.toLong() ?: 0) * 100,
-            productName = "Medical subscription renewal",
+            productName = "healthCareSubscription",
             productDescription = "",
             callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
             userClientIP = "110.246.160.183",
@@ -355,6 +355,10 @@ class MedicalRenewDetailsFragment : BaseFragment() {
                 }
             }
             PaymentStatus.CLOSE -> {
+                showAlert(getString(R.string.payment_canceled)) {
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
             }
         }
     }

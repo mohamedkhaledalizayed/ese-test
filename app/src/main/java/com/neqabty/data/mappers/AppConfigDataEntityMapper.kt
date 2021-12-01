@@ -16,6 +16,7 @@ class AppConfigDataEntityMapper @Inject constructor() : Mapper<AppConfigData, Ap
                 maintenanceStatus = AppConfigEntity.ConfigStatus(from.maintenanceStatus.status, from.maintenanceStatus.statusMsg?: ""),
                 editFollowersStatus = AppConfigEntity.ConfigStatus(from.editFollowersStatus.status, from.editFollowersStatus.statusMsg?: ""),
                 cardCommission = from.cardCommission,
+                posCommission = from.posCommission,
                 fawryCommission = from.fawryCommission,
                 minCommission = from.minCommission,
                 hasQuestionnaire = from.hasQuestionnaire,

@@ -12,8 +12,10 @@ data class AppConfigData(
         var maintenanceStatus: ConfigStatus,
         @field:SerializedName("edit_followers")
         var editFollowersStatus: ConfigStatus,
-        @field:SerializedName("card_payment_commission")
+        @field:SerializedName("opayBankCard_commission")
         var cardCommission: Double,
+        @field:SerializedName("opayRefrenceCode_commission")
+        var posCommission: Double,
         @field:SerializedName("fawry_payment_commission")
         var fawryCommission: Double,
         @field:SerializedName("min_commission")

@@ -67,7 +67,7 @@ class MainViewModel @Inject constructor(val login: Login,
                             Constants.isEditFollowersEnabled = (it.editFollowersStatus.status.toInt() == 1)
                             Constants.editFollowersStatusMsg = it.editFollowersStatus.statusMsg
                             Constants.CC_COMMISSION = it.cardCommission / 100
-                            Constants.POS_COMMISSION = it.fawryCommission / 100
+                            Constants.POS_COMMISSION = it.posCommission / 100
                             Constants.FAWRY_COMMISSION = it.fawryCommission / 100
                             Constants.MIN_COMMISSION = it.minCommission
                             Constants.hasQuestionnaire.value = it.hasQuestionnaire

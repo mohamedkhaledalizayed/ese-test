@@ -6,6 +6,7 @@ data class AppConfigUI(
         var maintenanceStatus: ConfigStatus,
         var editFollowersStatus: ConfigStatus,
         var cardCommission: Double,
+        var posCommission: Double,
         var fawryCommission: Double,
         var minCommission: Double,
         var hasQuestionnaire: Boolean = false,

@@ -200,7 +200,7 @@ class InquiryDetailsFragment : BaseFragment() {
             countryCode = "EG", // uppercase
             currency = "EGP", // uppercase
             payAmount = (medicalRenewalPayment.paymentItem?.amount?.toLong() ?: 0) * 100,
-            productName = "Annual subscription renewal",
+            productName = "annualSubscription",
             productDescription = "",
             callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
             userClientIP = "110.246.160.183",
@@ -311,6 +311,10 @@ class InquiryDetailsFragment : BaseFragment() {
                 }
             }
             PaymentStatus.CLOSE -> {
+                showAlert(getString(R.string.payment_canceled)) {
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
             }
         }
     }
