@@ -62,5 +62,6 @@
     <string name="order_details">تفاصيل الطلب</string>
     <string name="please_wait">من فضلك انتظر</string>
     <string name="order_status">حالة الطلب</string>
+    <string name="terms">تطبق نسبه التحمل علي الفاتوره</string>
 
 </resources>
