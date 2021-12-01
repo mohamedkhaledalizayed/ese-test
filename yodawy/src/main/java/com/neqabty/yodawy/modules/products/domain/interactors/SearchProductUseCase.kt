@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SearchProductUseCase @Inject constructor(private val productRepository: ProductRepository) {
-    fun build(params:String):Flow<List<ProductEntity>>{
-        return productRepository.searchProduct(params)
+    fun build(params:String, pageNumber: String):Flow<List<ProductEntity>>{
+        return productRepository.searchProduct(params, pageNumber)
     }
 }

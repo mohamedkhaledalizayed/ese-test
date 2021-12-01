@@ -22,11 +22,11 @@ class ProductViewModel @Inject constructor(private val searchProductUseCase: Sea
     ViewModel() {
     val products = MutableLiveData<Resource<List<ProductEntity>>>()
     val errorMessage = MutableStateFlow("")
-    fun search(keyWord: String) {
+    fun search(keyWord: String, pageNumber: String) {
         viewModelScope.launch(Dispatchers.IO) {
             products.postValue(Resource.loading(data = null))
             try {
-                searchProductUseCase.build(keyWord).collect {
+                searchProductUseCase.build(keyWord, pageNumber).collect {
                     products.postValue(Resource.success(data = it))
                 }
             } catch (exception:Throwable){

@@ -13,10 +13,13 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.data.Constants.imageList
 import com.neqabty.yodawy.core.ui.BaseActivity
+import com.neqabty.yodawy.core.utils.Resource
 import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivitySearchBinding
 import com.neqabty.yodawy.modules.CartActivity
@@ -28,6 +31,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     private val productViewModel: ProductViewModel by viewModels()
     lateinit var mAdapter: SearchAdapter
+    private var pageNumber = 0
+    private var isLoading = true
+    private var pastVisibleItem: Int = 0
+    var visibleItemsCount: Int = 0
+    var totalItemsCount: Int = 0
+    var previousTotal = 0
+    private var threshold = 2
+    lateinit var mLayoutManager: LinearLayoutManager
     override fun getViewBinding() = ActivitySearchBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +50,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             invalidateOptionsMenu()
         }
 
+        mLayoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = mLayoutManager
         binding.recyclerView.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             SearchAdapter.OnItemClickListener {
@@ -83,9 +96,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                             binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "فارغ", "لا يوجد نتائج البحث")
                         }else{
                             binding.progressActivity.showContent()
-                            mAdapter.clear()
                             mAdapter.submitList(resource.data)
-                            binding.recyclerView.scrollToPosition(0)
+//                            binding.recyclerView.scrollToPosition(0)
                         }
                     }
                     Status.ERROR -> {
@@ -121,6 +133,31 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             binding.etSearch.setText("")
         }
 
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                visibleItemsCount = mLayoutManager.childCount
+                totalItemsCount = mLayoutManager.itemCount
+                pastVisibleItem = mLayoutManager.findFirstVisibleItemPosition()
+
+                if (dy > 0) {
+                    if (isLoading) {
+                        if (totalItemsCount > previousTotal) { // da el stopping condition, el condition da 3shan a turn on el isloading lma el items tzed m3na kda en fe data gt tany
+                            isLoading = false
+                            previousTotal = totalItemsCount
+                        }
+                    }
+
+                    if (!isLoading && (totalItemsCount - visibleItemsCount) <= (pastVisibleItem + threshold)) { // el data gt w el unseen items b2t <= el threshold
+                        pageNumber += 1
+                        isLoading = true
+                        loadMoreData()
+                    }
+                }
+            }
+        })
+
     }
 
     private fun search(){
@@ -128,14 +165,18 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             return
         }
         hideKeyboard()
-        productViewModel.search(binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString())
+        loadMoreData()
     }
 
     override fun onResume() {
         super.onResume()
-        if (!binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString().isNullOrEmpty()){
-            productViewModel.search(binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString())
+        if (binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString().isNotBlank()){
+            mAdapter.notifyDataSetChanged()
         }
+    }
+
+    private fun loadMoreData() {
+        productViewModel.search(binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString(), "$pageNumber")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

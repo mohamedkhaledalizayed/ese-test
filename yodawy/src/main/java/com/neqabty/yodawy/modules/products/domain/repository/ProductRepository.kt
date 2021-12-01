@@ -4,5 +4,5 @@ import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
-    fun searchProduct(keyWord:String): Flow<List<ProductEntity>>
+    fun searchProduct(keyWord:String, pageNumber: String): Flow<List<ProductEntity>>
 }
