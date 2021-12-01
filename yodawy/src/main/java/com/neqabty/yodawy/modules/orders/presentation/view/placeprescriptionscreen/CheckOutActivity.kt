@@ -13,6 +13,7 @@ import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.core.data.Constants.imageList
+import com.neqabty.yodawy.core.data.Constants.plan
 import com.neqabty.yodawy.core.data.Constants.selectedAddress
 import com.neqabty.yodawy.core.data.Constants.yodawyId
 import com.neqabty.yodawy.core.ui.BaseActivity
@@ -126,7 +127,7 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
                     yodawyId = yodawyId,
                     plan = "A"
                 ))
-            val order: RequestBody = createPartFromString("{\"AddressId\":\"${selectedAddress.adressId}\",\"Notes\":\"Order Note\",\"YodawyId\":\"$yodawyId\",\"Plan\":\"A\"}")
+            val order: RequestBody = createPartFromString("{\"AddressId\":\"${selectedAddress.adressId}\",\"Notes\":\"Order Note\",\"YodawyId\":\"$yodawyId\",\"Plan\":\"$plan\"}")
             placePrescriptionViewModel.placePrescriptionImages(order = order, images = multipartList)
         }else{
             startActivity(Intent(this, ConfirmCheckoutActivity::class.java))

@@ -41,6 +41,7 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
                             binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "لا يوجد عناوين", "برجاء إضافة عنوان")
                         }else{
                             Constants.yodawyId = resource.data.yodawyId
+                            Constants.plan = resource.data.plan
                             binding.progressActivity.showContent()
                             mAdapter.submitList(resource.data.addresses)
                         }

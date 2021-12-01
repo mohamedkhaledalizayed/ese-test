@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
+import com.neqabty.yodawy.core.data.Constants.plan
 import com.neqabty.yodawy.core.data.Constants.selectedAddress
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.Status
@@ -87,7 +88,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
 
     fun confirmOrder(view: View) {
         placeOrderViewModel.placeOrder(selectedAddress.adressId,Constants.mobileNumber,"notes",
-            Constants.yodawyId, Constants.cartItems.map {
+            plan, Constants.cartItems.map {
             ItemParam(it.first.id,it.second)
         })
     }
