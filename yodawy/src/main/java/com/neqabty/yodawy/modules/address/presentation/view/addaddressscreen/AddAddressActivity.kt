@@ -21,6 +21,7 @@ import com.neqabty.yodawy.core.data.Constants.LATITUDE
 import com.neqabty.yodawy.databinding.ActivityAddAddressBinding
 import com.neqabty.yodawy.modules.address.domain.params.AddAddressUseCaseParams
 import com.neqabty.yodawy.core.ui.BaseActivity
+import com.neqabty.yodawy.core.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -92,7 +93,7 @@ override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater
             return
         }
 
-        dialog.show()
+
         addAddressViewModel.addAddress(AddAddressUseCaseParams(
             Constants.mobileNumber,
             binding.nickname.text.toString(),
@@ -104,8 +105,23 @@ override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater
             longitude,
             binding.landmark.text.toString()))
         addAddressViewModel.data.observe(this){
-            dialog.dismiss()
-            finish()
+
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        dialog.show()
+                    }
+                    Status.SUCCESS -> {
+                        dialog.dismiss()
+                        if (!resource.data.isNullOrEmpty()){
+                            finish()
+                        }
+                    }
+                    Status.ERROR -> {
+                        dialog.dismiss()
+                    }
+                }
+            }
         }
 
     }

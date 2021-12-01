@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.neqabty.yodawy.core.utils.AppUtils
+import com.neqabty.yodawy.core.utils.Resource
 import com.neqabty.yodawy.modules.address.data.model.AddressResponse
 import com.neqabty.yodawy.modules.address.data.model.response.addaddress.AddAddressModel
 import com.neqabty.yodawy.modules.address.domain.entity.AddressEntity
@@ -21,16 +23,16 @@ import javax.inject.Inject
 @HiltViewModel
 class AddAddressViewModel @Inject constructor(private val addAddressUseCase: AddAddressUseCase) :
     ViewModel() {
-    val data = MutableLiveData<String>()
-    val errorMessage = MutableStateFlow("")
+    val data = MutableLiveData<Resource<String>>()
     fun addAddress(params: AddAddressUseCaseParams) {
         viewModelScope.launch(Dispatchers.IO) {
+            data.postValue(Resource.loading(data = null))
             try {
                 addAddressUseCase.build(params).collect {
-                    data.postValue(it)
+                    data.postValue(Resource.success(data = it))
                 }
-            } catch (e:Throwable){
-                errorMessage.emit(e.toString())
+            } catch (exception:Throwable){
+                data.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
             }
         }
     }
