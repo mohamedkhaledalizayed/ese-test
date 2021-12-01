@@ -83,7 +83,7 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
             })
 
         binding.medicationTitle.text = productItem.name
-        binding.medicationPrice.text = "EGP ${productItem.salePrice.toString()}"
+        binding.medicationPrice.text = "EGP ${productItem.regularPrice.toString()}"
 
         when {
             productItem.outOfStock -> {

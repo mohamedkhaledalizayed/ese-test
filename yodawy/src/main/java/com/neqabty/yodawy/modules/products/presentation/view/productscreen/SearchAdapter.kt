@@ -94,7 +94,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
         }
 
         viewHolder.binding.medicationTitle.text = item.name
-        viewHolder.binding.medicationPrice.text = "EGP ${item.salePrice.toString()}"
+        viewHolder.binding.medicationPrice.text = "EGP ${item.regularPrice.toString()}"
 
         viewHolder.binding.addItem.setOnClickListener {
             if (Constants.imageList.isEmpty()) {

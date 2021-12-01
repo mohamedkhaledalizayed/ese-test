@@ -80,7 +80,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
 
 
         for (item in Constants.cartItems){
-            total += (item.first.salePrice * item.second)
+            total += (item.first.regularPrice * item.second)
         }
         binding.totalValue.text = "$total جنيه"
         binding.totalPayment.text = "$total جنيه"

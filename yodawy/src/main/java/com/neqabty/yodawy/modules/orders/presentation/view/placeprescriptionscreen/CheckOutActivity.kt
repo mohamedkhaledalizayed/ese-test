@@ -83,7 +83,7 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
             binding.totalValue.text = "To be confirmed"
         }else{
             for (item in cartItems){
-                total += (item.first.salePrice * item.second)
+                total += (item.first.regularPrice * item.second)
             }
             binding.totalValue.text = "$total"
         }
