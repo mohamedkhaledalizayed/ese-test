@@ -1,6 +1,7 @@
 package com.neqabty.trips.modules.home.presentation.view.homescreen
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.neqabty.trips.R
 import com.neqabty.trips.core.ui.BaseActivity
@@ -13,6 +14,10 @@ class HomeActivity : BaseActivity<ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        homeViewModel.getCities()
+        homeViewModel.cities.observe(this){
+            Log.e("Cities: ",it.toString())
+        }
     }
 
     override fun getViewBinding(): ActivityMainBinding {

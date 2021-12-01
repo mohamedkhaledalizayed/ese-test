@@ -1,10 +1,14 @@
 package com.neqabty.trips.core.di
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -31,14 +35,25 @@ class NetworkModule {
 
     @Provides
     @Named("trips")
-    fun provideOkHttpClient(    @Named("trips")
-                                loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideOkHttpClient(
+        @Named("trips")
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(40, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
         okHttpClient.readTimeout(40, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
         okHttpClient.addInterceptor(loggingInterceptor)
+        okHttpClient.addInterceptor(Interceptor { chain ->
+            val request = chain.request()
+            var newRequest = request.newBuilder()
+                .header("Accept", "application/json")
+                .removeHeader("Content-Type")
+                .build()
+            var newResponse = chain.proceed(newRequest)
+            newResponse
+        })
         okHttpClient.build()
         return okHttpClient.build()
     }
@@ -46,7 +61,10 @@ class NetworkModule {
     @Provides
     @Named("trips")
     fun provideConverterFactory(): Converter.Factory {
-        return GsonConverterFactory.create()
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+        return GsonConverterFactory.create(gson)
     }
 
     @Provides

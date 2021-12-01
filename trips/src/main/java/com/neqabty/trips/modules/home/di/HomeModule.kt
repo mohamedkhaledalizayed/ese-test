@@ -1,8 +1,8 @@
 package com.neqabty.trips.modules.home.di
 
-import com.neqabty.trips.modules.home.data.api.TripsApi
-import com.neqabty.trips.modules.home.data.repository.TripsRepositoryImpl
-import com.neqabty.trips.modules.home.domain.repository.TripsRepository
+import com.neqabty.trips.modules.home.data.api.CitiesApi
+import com.neqabty.trips.modules.home.data.repository.CitiesRepositoryImpl
+import com.neqabty.trips.modules.home.domain.repository.CitiesRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -16,8 +16,8 @@ import javax.inject.Named
 abstract class HomeModule {
     companion object {
         @Provides
-        fun provideTripsApi(@Named("trips")retrofit: Retrofit) = retrofit.create(TripsApi::class.java)
+        fun provideTripsApi(@Named("trips")retrofit: Retrofit) = retrofit.create(CitiesApi::class.java)
     }
     @Binds
-    internal abstract fun bindsTripsRepository(tripsRepositoryImpl: TripsRepositoryImpl): TripsRepository
+    internal abstract fun bindsCitiesRepository(citiesRepositoryImpl: CitiesRepositoryImpl): CitiesRepository
 }
