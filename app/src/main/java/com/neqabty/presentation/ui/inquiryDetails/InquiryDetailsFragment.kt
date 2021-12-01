@@ -199,12 +199,12 @@ class InquiryDetailsFragment : BaseFragment() {
             reference = medicalRenewalPayment.paymentItem?.paymentRequestNumber!!,
             countryCode = "EG", // uppercase
             currency = "EGP", // uppercase
-            payAmount = (medicalRenewalPayment.paymentItem?.amount?.toLong() ?: 0) * 100,
+            payAmount = (newAmount * 100).toLong(),
             productName = "annualSubscription",
             productDescription = "",
             callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
             userClientIP = "110.246.160.183",
-            expireAt = 30,
+            expireAt = if(isCredit) 30 else 2880,
             paymentType = paymentType // optional
         )
 

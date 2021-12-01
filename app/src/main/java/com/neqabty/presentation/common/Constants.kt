@@ -24,7 +24,7 @@ object Constants {
 
     var DNS = if (BuildConfig.URL.contains("http")) BuildConfig.URL else "https://${BuildConfig.URL}"
 
-    var OPAY_PAYMENT_CALLBACK_URL = DNS + "/api/v1/transactions/opay/callback"
+    var OPAY_PAYMENT_CALLBACK_URL = (if (BuildConfig.DEBUG) "http://backend.neqabty.com:44392" else DNS) + "/api/v1/transactions/opay/callback"
     var OPAY_MERCHANT_ID = "281821112534441"
     var OPAY_MERCHANT_NAME = "neQabty"
     var OPAY_PUBLIC_KEY = "OPAYPUB16378484944900.9175634117495468"
