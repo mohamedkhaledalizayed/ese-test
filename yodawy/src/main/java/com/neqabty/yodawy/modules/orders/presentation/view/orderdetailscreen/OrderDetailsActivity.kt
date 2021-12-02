@@ -80,7 +80,7 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
                         }
 
 
-                        if (resource.data.prescriptionImageEntities!!.isNotEmpty()){
+                        if (!resource.data.prescriptionImageEntities.isNullOrEmpty()){
                             prescriptionsImages.addAll(resource.data.prescriptionImageEntities)
                             binding.photosRecycler.adapter = prescriptionsAdapter
                             prescriptionsAdapter.submitList(resource.data.prescriptionImageEntities)
