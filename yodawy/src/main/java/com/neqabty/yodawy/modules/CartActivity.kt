@@ -44,9 +44,24 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
             override fun notifyUi() {
                 updateView()
             }
+
+            override fun updateTotal() {
+                checkTotal()
+            }
         }
 
         updateView()
+        checkTotal()
+    }
+
+    private fun checkTotal(){
+        var total = 0.0
+        if (cartItems.size > 0){
+            for (item in cartItems){
+                total += (item.first.regularPrice * item.second)
+            }
+            binding.checkout.text = getString(R.string.go_to_checkout) + "  $total"
+        }
     }
 
     private fun updateView() {

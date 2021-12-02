@@ -10,6 +10,8 @@ import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.databinding.CartLayoutItemBinding
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
+import com.neqabty.yodawy.modules.products.presentation.view.productscreen.addOrIncrement
+import com.neqabty.yodawy.modules.products.presentation.view.productscreen.removeOrDecrement
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -37,6 +39,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val item = items.map { it.first }[position]
         if (position == itemCount - 1){
             viewHolder.binding.view.visibility = View.GONE
         }else{
@@ -62,14 +65,18 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
         //increase
         viewHolder.binding.increase.setOnClickListener {
-            items[position] = items[position].copy(second = items[position].second + 1)
-            viewHolder.binding.quantity.text = "${items[position].second}"
-            viewHolder.binding.medicationPrice.text = "${items[position].first.regularPrice * items[position].second}"
+            val index = cartItems.addOrIncrement(item)
+            items[position] = items[position].copy(second = items[index].second + 1)
+            viewHolder.binding.quantity.text = "${items[index].second}"
+            viewHolder.binding.medicationPrice.text = "${items[index].first.regularPrice * items[index].second}"
+            onItemClickListener?.updateTotal()
         }
 
         //decrease
         viewHolder.binding.decrease.setOnClickListener {
+
             if (items[position].second > 1){
+                cartItems.removeOrDecrement(item)
                 items[position] = items[position].copy(second = items[position].second - 1)
                 viewHolder.binding.quantity.text = "${items[position].second}"
                 viewHolder.binding.medicationPrice.text = "${items[position].first.regularPrice * items[position].second}"
@@ -79,6 +86,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
                 submitList(cartItems)
                 onItemClickListener?.notifyUi()
             }
+            onItemClickListener?.updateTotal()
         }
 
     }
@@ -102,6 +110,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     interface OnItemClickListener {
             fun setOnItemClickListener(itemId: Int)
             fun notifyUi()
+            fun updateTotal()
     }
 
     class ViewHolder(val binding: CartLayoutItemBinding) :
