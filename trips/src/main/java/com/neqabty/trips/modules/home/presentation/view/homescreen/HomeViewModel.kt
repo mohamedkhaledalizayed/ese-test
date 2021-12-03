@@ -1,8 +1,10 @@
 package com.neqabty.trips.modules.home.presentation.view.homescreen
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.neqabty.trips.modules.destinations.domain.interactors.GetDestinationsUseCase
 import com.neqabty.trips.modules.home.domain.entity.CityEntity
 import com.neqabty.trips.modules.home.domain.interactors.GetCitiesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,13 +14,23 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val getCitiesUseCase: GetCitiesUseCase) :
-    ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val getCitiesUseCase: GetCitiesUseCase,
+    private val getDestinationsUseCase: GetDestinationsUseCase
+) : ViewModel() {
     val cities = MutableLiveData<List<CityEntity>>()
     fun getCities() {
         viewModelScope.launch(Dispatchers.IO) {
             getCitiesUseCase.build().collect {
                 cities.postValue(it)
+            }
+        }
+    }
+
+    fun getDestinations() {
+        viewModelScope.launch(Dispatchers.IO) {
+            getDestinationsUseCase.build().collect {
+                Log.e("destiations: ", it.size.toString())
             }
         }
     }

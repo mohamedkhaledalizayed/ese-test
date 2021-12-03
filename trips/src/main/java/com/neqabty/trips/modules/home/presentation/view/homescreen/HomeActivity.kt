@@ -15,6 +15,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         homeViewModel.getCities()
+        homeViewModel.getDestinations()
         homeViewModel.cities.observe(this){
             Log.e("Cities: ",it.toString())
         }
