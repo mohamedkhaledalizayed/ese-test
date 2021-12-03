@@ -410,66 +410,10 @@ class MainActivity : AppCompatActivity() {
             navController().navigate(R.id.tripsFragment)
         })
 //        listDataHeader.add(tripsItem)
+        val medicalServicesItem = NavigationMenuItem(R.drawable.ic_menu_medical, R.string.medical_services_title, {
 
-        val medicalRenewItem = NavigationMenuItem(R.drawable.ic_menu_claiming, R.string.medical_renew_title, {
-            if (sharedPref.isRegistered)
-                navController().navigate(R.id.medicalRenewFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.MEDICAL_RENEW)
-                navController().navigate(R.id.signupFragment, bundle)
-            }
         })
-        listDataHeader.add(medicalRenewItem)
-
-        val medicalItem = NavigationMenuItem(R.drawable.ic_menu_medical, R.string.medical_title, {
-            navController().navigate(R.id.chooseAreaFragment)
-        })
-        listDataHeader.add(medicalItem)
-
-        val claimingItem = NavigationMenuItem(R.drawable.ic_menu_claiming, R.string.claiming_title, {
-            if (sharedPref.isRegistered)
-                navController().navigate(R.id.claimingFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.CLAIMING)
-                navController().navigate(R.id.signupFragment, bundle)
-            }
-        })
-        listDataHeader.add(claimingItem)
-
-        val medicalLettersItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.medical_letters_title, {
-            if (sharedPref.isRegistered)
-                navController().navigate(R.id.medicalLettersFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.MEDICAL_LETTERS)
-                navController().navigate(R.id.signupFragment, bundle)
-            }
-        })
-        listDataHeader.add(medicalLettersItem)
-
-        val medicalLettersInquiryItem = NavigationMenuItem(R.drawable.ic_menu_help, R.string.medical_letters_inquiry_title, {
-            if (sharedPref.isRegistered)
-                navController().navigate(R.id.medicalLettersInquiryFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.MEDICAL_LETTERS_INQUIRY)
-                navController().navigate(R.id.signupFragment, bundle)
-            }
-        })
-        listDataHeader.add(medicalLettersInquiryItem)
-
-        val pharmacyItem = NavigationMenuItem(R.drawable.ic_pharmacy_green, R.string.online_pharmacy_title, {
-            if (sharedPref.isRegistered)
-                navController().navigate(R.id.onlinePharmacyFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.ONLINE_PHARMACY)
-                navController().navigate(R.id.signupFragment, bundle)
-            }
-        })
-        listDataHeader.add(pharmacyItem)
+        listDataHeader.add(medicalServicesItem)
 
         val paymentsItem = NavigationMenuItem(R.drawable.ic_menu_payments, R.string.inquiry_title, {
             navController().navigate(R.id.inquiryFragment)
@@ -529,7 +473,7 @@ class MainActivity : AppCompatActivity() {
         })
         listDataHeader.add(contactusItem)
 
-        // Adding child data
+        // Adding userServicesList child data
         val userServicesList: MutableList<NavigationMenuItem> = mutableListOf()
 
         val userServiceTrackShipment = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.track_shipment_title,  {
@@ -571,6 +515,90 @@ class MainActivity : AppCompatActivity() {
         userServicesList.add(userServiceChangePassword)
 
         listDataChild[userServicesItem] = userServicesList // Header, Child data
+
+
+
+        // Adding medicalServicesList child data
+        val medicalServicesList: MutableList<NavigationMenuItem> = mutableListOf()
+
+        val medicalRenewItem = NavigationMenuItem(R.drawable.ic_menu_claiming, R.string.medical_renew_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.medicalRenewFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_RENEW)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        medicalServicesList.add(medicalRenewItem)
+
+        val medicalItem = NavigationMenuItem(R.drawable.ic_menu_medical, R.string.medical_title, {
+            navController().navigate(R.id.chooseAreaFragment)
+        })
+        medicalServicesList.add(medicalItem)
+
+        val claimingItem = NavigationMenuItem(R.drawable.ic_menu_claiming, R.string.claiming_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.claimingFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.CLAIMING)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        medicalServicesList.add(claimingItem)
+
+        val medicalLettersItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.medical_letters_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.medicalLettersFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_LETTERS)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        medicalServicesList.add(medicalLettersItem)
+
+        val medicalLettersInquiryItem = NavigationMenuItem(R.drawable.ic_menu_help, R.string.medical_letters_inquiry_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.medicalLettersInquiryFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_LETTERS_INQUIRY)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        medicalServicesList.add(medicalLettersInquiryItem)
+
+        val pharmacyItem = NavigationMenuItem(R.drawable.ic_pharmacy_green, R.string.online_pharmacy_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.onlinePharmacyFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.ONLINE_PHARMACY)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        medicalServicesList.add(pharmacyItem)
+
+        val doctorsReservationItem = NavigationMenuItem(R.drawable.ic_menu_medical, R.string.doctors_reservation_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.doctorsReservationFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.DOCTORS_RESERVATION)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+
+        listDataChild[medicalServicesItem] = medicalServicesList // Header, Child data
+
+        mainViewModel.viewState.observe(this, Observer {
+            it.appConfigUI?.let {
+                if(it.vezeetaConfig.status)
+                    if(!medicalServicesList.contains(doctorsReservationItem)) medicalServicesList.add(doctorsReservationItem)
+            }
+        })
     }
 //endregion//
     fun navController() = Navigation.findNavController(this, R.id.container)

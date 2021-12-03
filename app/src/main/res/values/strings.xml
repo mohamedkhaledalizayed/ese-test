@@ -185,6 +185,7 @@
     <string name="home_title">الرئيسية</string>
     <string name="news_title">الأخبار</string>
     <string name="trips_title">الرحلات</string>
+    <string name="medical_services_title">الرعاية الصحية</string>
     <string name="medical_renew_title">اشتراك الرعاية الصحية</string>
     <string name="save_edits">تأكيد بيانات التابعين</string>
     <string name="continue_payment">اتمام عملية الدفع</string>
@@ -196,6 +197,7 @@
     <string name="update_data_title">تحديث البيانات</string>
     <string name="complaints_title">خدمة العملاء والشكاوى</string>
     <string name="online_pharmacy_title">الصيدلية أون لاين</string>
+    <string name="doctors_reservation_title">حجز الأطباء</string>
     <string name="user_services_title">خدمات المستخدم</string>
     <string name="medical_letters_title">الموافقات الطبية المصدرة</string>
     <string name="medical_letters_inquiry_title">استعلام الموافقات الطبية المصدرة</string>

@@ -213,6 +213,10 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("Not yet implemented")
     }
 
+    override fun getDoctorsReservationData(mobileNumber: String): Observable<DoctorsReservationEntity> {
+        TODO("Not yet implemented")
+    }
+
     override fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }

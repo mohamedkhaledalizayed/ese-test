@@ -385,6 +385,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetDoctorsReservationData(neqabtyRepository: NeqabtyRepository): GetDoctorsReservationData {
+        return GetDoctorsReservationData(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideBookTrip(neqabtyRepository: NeqabtyRepository): BookTrip {
         return BookTrip(ASyncTransformer(), neqabtyRepository)
     }

@@ -113,6 +113,11 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
+            android:id="@+id/openDoctorsReservation"
+            app:destination="@id/doctorsReservationFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openMedicalLetters"
             app:destination="@id/medicalLettersFragment"
             app:popUpTo="@id/homeFragment"
@@ -194,6 +199,11 @@
         <action
             android:id="@+id/openOnlinePharmacy"
             app:destination="@id/onlinePharmacyFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openDoctorsReservation"
+            app:destination="@id/doctorsReservationFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
@@ -388,6 +398,12 @@
             android:id="@+id/openOnlinePharmacyVezeeta"
             app:destination="@id/onlinePharmacyVezeetaFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/doctorsReservationFragment"
+        android:name="com.neqabty.presentation.ui.doctorsReservation.DoctorsReservationFragment"
+        android:label="@string/doctors_reservation_title"
+        tools:layout="@layout/doctors_reservation_fragment"/>
 
     <fragment
         android:id="@+id/onlinePharmacyVezeetaFragment"

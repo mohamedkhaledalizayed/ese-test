@@ -99,8 +99,13 @@ interface WebService {
 
     @POST("api/v1/vezeeta/offer")
     fun getOnlinePharmacyURL(
-            @Body onlinePharmacyRequest: OnlinePharmacyRequest
+        @Body onlinePharmacyRequest: OnlinePharmacyRequest
     ): Observable<ApiResponse<OnlinePharmacyData>>
+
+    @POST("api/v1/vezeeta/getAuthCode")
+    fun getDoctorsReservationData(
+        @Body doctorsReservationRequest: DoctorsReservationRequest
+    ): Observable<ApiResponse<DoctorsReservationData>>
 
     @Multipart
     @POST("/api/v2/trips/request")

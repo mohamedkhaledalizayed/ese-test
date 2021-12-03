@@ -191,6 +191,10 @@ class SignupFragment : BaseFragment() {
                     SignupFragmentDirections.openOnlinePharmacy()
             )
 
+            Constants.DOCTORS_RESERVATION -> navController().navigate(
+                    SignupFragmentDirections.openDoctorsReservation()
+            )
+
             Constants.MEDICAL_LETTERS -> navController().navigate(
                     SignupFragmentDirections.openMedicalLetters()
             )

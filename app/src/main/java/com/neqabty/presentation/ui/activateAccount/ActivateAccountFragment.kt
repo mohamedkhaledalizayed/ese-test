@@ -133,6 +133,10 @@ class ActivateAccountFragment : BaseFragment() {
                         ActivateAccountFragmentDirections.openOnlinePharmacy()
                 )
 
+                Constants.DOCTORS_RESERVATION -> navController().navigate(
+                    ActivateAccountFragmentDirections.openDoctorsReservation()
+                )
+
                 Constants.MEDICAL_LETTERS -> navController().navigate(
                         ActivateAccountFragmentDirections.openMedicalLetters()
                 )

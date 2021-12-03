@@ -23,7 +23,9 @@ data class AppConfigData(
         @field:SerializedName("questionnaires")
         var hasQuestionnaire: Boolean = false,
         @field:SerializedName("yodawy")
-        var yodawyConfig: YodawyStatus
+        var yodawyConfig: YodawyStatus,
+        @field:SerializedName("vezeeta_doctors")
+        var vezeetaConfig: VezeetaStatus
 ) : Response() {
 
         data class ConfigStatus(
@@ -41,5 +43,12 @@ data class AppConfigData(
                 var url: String,
                 @field:SerializedName("publicKey")
                 var publicKey: String
+        )
+
+        data class VezeetaStatus(
+                @field:SerializedName("status")
+                var status: Boolean,
+                @field:SerializedName("url")
+                var url: String
         )
 }

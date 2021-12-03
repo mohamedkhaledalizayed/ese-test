@@ -10,7 +10,8 @@ data class AppConfigEntity(
     var fawryCommission: Double,
     var minCommission: Double,
     var hasQuestionnaire: Boolean = false,
-    var yodawyConfig: YodawyStatus
+    var yodawyConfig: YodawyStatus,
+    var vezeetaConfig: VezeetaStatus
 ) {
 
     data class ConfigStatus(
@@ -22,5 +23,10 @@ data class AppConfigEntity(
         var status: Boolean,
         var url: String,
         var publicKey: String
+    )
+
+    data class VezeetaStatus(
+        var status: Boolean,
+        var url: String
     )
 }

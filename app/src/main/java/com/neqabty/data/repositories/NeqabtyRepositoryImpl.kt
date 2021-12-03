@@ -233,6 +233,10 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getOnlinePharmacyURL(userNumber)
     }
 
+    override fun getDoctorsReservationData(mobileNumber: String): Observable<DoctorsReservationEntity> {
+        return remoteDataStore.getDoctorsReservationData(mobileNumber)
+    }
+
     override fun getAllProviderTypes(type: String): Observable<List<ProviderTypeEntitiy>> {
         return remoteDataStore.getAllProviderTypes(type)
     }

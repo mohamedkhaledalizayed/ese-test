@@ -67,6 +67,7 @@ interface NeqabtyRepository {
     ): Observable<Unit>
 
     fun getOnlinePharmacyURL(userNumber: String): Observable<OnlinePharmacyEntity>
+    fun getDoctorsReservationData(mobileNumber: String): Observable<DoctorsReservationEntity>
     fun bookTrip(
             mainSyndicateId: Int,
             userNumber: String,

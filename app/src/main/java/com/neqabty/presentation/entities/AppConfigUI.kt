@@ -1,5 +1,6 @@
 package com.neqabty.presentation.entities
 
+
 data class AppConfigUI(
         var appVersion: String,
         var healthCareStatus: ConfigStatus,
@@ -10,7 +11,8 @@ data class AppConfigUI(
         var fawryCommission: Double,
         var minCommission: Double,
         var hasQuestionnaire: Boolean = false,
-        var yodawyConfig: YodawyStatus
+        var yodawyConfig: YodawyStatus,
+        var vezeetaConfig: VezeetaStatus
 ) {
 
         data class ConfigStatus(
@@ -22,5 +24,10 @@ data class AppConfigUI(
                 var status: Boolean,
                 var url: String,
                 var publicKey: String
+        )
+
+        data class VezeetaStatus(
+                var status: Boolean,
+                var url: String
         )
 }

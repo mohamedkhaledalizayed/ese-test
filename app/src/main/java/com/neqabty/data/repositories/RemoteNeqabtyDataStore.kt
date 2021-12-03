@@ -2,7 +2,6 @@ package com.neqabty.data.repositories
 
 import com.neqabty.data.api.WebService
 import com.neqabty.data.api.requests.*
-import com.neqabty.data.entities.QuestionnaireVoteData
 import com.neqabty.data.mappers.*
 import com.neqabty.domain.NeqabtyDataStore
 import com.neqabty.domain.entities.*
@@ -479,6 +478,14 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     override fun getOnlinePharmacyURL(userNumber: String): Observable<OnlinePharmacyEntity> {
         return api.getOnlinePharmacyURL(OnlinePharmacyRequest(userNumber)).map { response ->
             onlinePharmacyURLDataEntityMapper.mapFrom(response.data!!)
+        }
+    }
+
+    private val doctorsReservationDataEntityMapper = DoctorsReservationDataEntityMapper()
+
+    override fun getDoctorsReservationData(mobileNumber: String): Observable<DoctorsReservationEntity> {
+        return api.getDoctorsReservationData(DoctorsReservationRequest(mobileNumber)).map { response ->
+            doctorsReservationDataEntityMapper.mapFrom(response.data!!)
         }
     }
 

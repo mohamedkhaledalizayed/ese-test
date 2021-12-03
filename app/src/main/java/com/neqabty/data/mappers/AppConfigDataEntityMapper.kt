@@ -20,7 +20,8 @@ class AppConfigDataEntityMapper @Inject constructor() : Mapper<AppConfigData, Ap
                 fawryCommission = from.fawryCommission,
                 minCommission = from.minCommission,
                 hasQuestionnaire = from.hasQuestionnaire,
-                yodawyConfig = AppConfigEntity.YodawyStatus(from.yodawyConfig.status, from.yodawyConfig.url, from.yodawyConfig.publicKey)
+                yodawyConfig = AppConfigEntity.YodawyStatus(from.yodawyConfig.status, from.yodawyConfig.url, from.yodawyConfig.publicKey),
+                vezeetaConfig = AppConfigEntity.VezeetaStatus(from.vezeetaConfig.status, from.vezeetaConfig.url)
         )
     }
 }
