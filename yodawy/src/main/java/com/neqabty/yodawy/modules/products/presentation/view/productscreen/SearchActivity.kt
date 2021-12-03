@@ -164,6 +164,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         if (binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString().isBlank()){
             return
         }
+        pageNumber = 0
+        isLoading = true
+        pastVisibleItem = 0
+        visibleItemsCount = 0
+        totalItemsCount = 0
+        previousTotal = 0
+        mAdapter.clear()
         hideKeyboard()
         loadMoreData()
     }
