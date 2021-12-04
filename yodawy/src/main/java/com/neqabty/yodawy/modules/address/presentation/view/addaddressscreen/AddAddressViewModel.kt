@@ -13,6 +13,7 @@ import com.neqabty.yodawy.modules.address.domain.entity.UserEntity
 import com.neqabty.yodawy.modules.address.domain.interactors.AddAddressUseCase
 import com.neqabty.yodawy.modules.address.domain.interactors.GetUserUseCase
 import com.neqabty.yodawy.modules.address.domain.params.AddAddressUseCaseParams
+import com.neqabty.yodawy.modules.address.domain.params.EditAddressUseCaseParams
 import com.neqabty.yodawy.modules.address.domain.params.GetUserUseCaseParams
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +34,20 @@ class AddAddressViewModel @Inject constructor(private val addAddressUseCase: Add
                 }
             } catch (exception:Throwable){
                 data.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+            }
+        }
+    }
+
+    val editData = MutableLiveData<Resource<String>>()
+    fun editAddress(params: EditAddressUseCaseParams) {
+        viewModelScope.launch(Dispatchers.IO) {
+            editData.postValue(Resource.loading(data = null))
+            try {
+                addAddressUseCase.buildEditAddress(params).collect {
+                    editData.postValue(Resource.success(data = it))
+                }
+            } catch (exception:Throwable){
+                editData.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
             }
         }
     }

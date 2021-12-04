@@ -8,7 +8,7 @@ data class AddAddressUseCaseParams(
     val floor: String,
     val building: String,
     val apartment: String,
-    val lat: Double,
-    val long: Double,
+    val lat: String,
+    val long: String,
     val landmark: String
 )

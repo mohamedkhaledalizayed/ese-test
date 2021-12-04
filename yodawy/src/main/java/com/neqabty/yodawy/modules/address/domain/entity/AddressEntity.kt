@@ -1,5 +1,9 @@
 package com.neqabty.yodawy.modules.address.domain.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class AddressEntity(
     val address: String,
     val addressName: String,
@@ -11,4 +15,4 @@ data class AddressEntity(
     val adressId: String,
     val signature: String,
     val landmark: String
-)
+): Parcelable

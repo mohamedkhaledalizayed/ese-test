@@ -2,7 +2,9 @@ package com.neqabty.yodawy.modules.address.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class AddAddressRequestBody(
+data class EditAddressRequestBody(
+    @SerializedName("address_id")
+    val address_id:String,
     @SerializedName("mobile")
     val mobile:String,
     @SerializedName("AddressAlias")
@@ -16,9 +18,9 @@ data class AddAddressRequestBody(
     @SerializedName("Apartment")
     val apartment:String,
     @SerializedName("lat")
-    val lat: String,
+    val lat: Double,
     @SerializedName("long")
-    val long: String,
+    val long: Double,
     @SerializedName("Landmark")
     val landmark:String
 )

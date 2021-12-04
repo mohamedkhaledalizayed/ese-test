@@ -13,6 +13,8 @@ import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.modules.orders.presentation.view.placeprescriptionscreen.CheckOutActivity
 import com.neqabty.yodawy.modules.SelectLocationActivity
 import com.neqabty.yodawy.modules.address.domain.entity.AddressEntity
+import com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen.AddAddressActivity
+import com.neqabty.yodawy.modules.products.presentation.view.productscreen.ProductDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,9 +60,14 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
             AddressAdapter.OnItemClickListener {
             override fun setOnItemClickListener(addressItem: AddressEntity) {
                 Constants.selectedAddress = addressItem
-
                 startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
                 finish()
+            }
+
+            override fun setOnEditClickListener(addressItem: AddressEntity) {
+                val intent: Intent = Intent(this@AddressesActivity, AddAddressActivity::class.java)
+                intent.putExtra("address", addressItem)
+                startActivity(intent)
             }
         }
 

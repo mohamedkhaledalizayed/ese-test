@@ -1,6 +1,7 @@
 package com.neqabty.yodawy.modules.address.presentation.view.addaddressscreen
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -22,6 +23,10 @@ import com.neqabty.yodawy.databinding.ActivityAddAddressBinding
 import com.neqabty.yodawy.modules.address.domain.params.AddAddressUseCaseParams
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.Status
+import com.neqabty.yodawy.modules.SelectLocationActivity
+import com.neqabty.yodawy.modules.address.domain.entity.AddressEntity
+import com.neqabty.yodawy.modules.address.domain.params.EditAddressUseCaseParams
+import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -29,8 +34,9 @@ import dmax.dialog.SpotsDialog
 class AddAddressActivity : BaseActivity<ActivityAddAddressBinding>(), OnMapReadyCallback {
     private val addAddressViewModel: AddAddressViewModel by viewModels()
 
-    private var latitude = 0.0
-    private var longitude = 0.0
+    private var latitude: Double? = 0.0
+    private var longitude: Double? = 0.0
+    private var address: AddressEntity? = null
     private lateinit var dialog: AlertDialog
 override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +47,26 @@ override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater
 
         latitude = intent.getDoubleExtra(LATITUDE, 0.0)
         longitude = intent.getDoubleExtra(LONGITUDE, 0.0)
+        address = intent.extras?.getParcelable<AddressEntity>("address")
+
+
+        binding.editLocation.setOnClickListener {
+            val intent: Intent = Intent(this, SelectLocationActivity::class.java)
+            intent.putExtra("isEditable", true)
+            startActivityForResult(intent, 201)
+        }
+        if (!address?.address.isNullOrEmpty()){
+            binding.street.setText(address?.address)
+            binding.building.setText(address?.buildingNumber)
+            binding.apartment.setText(address?.apt)
+            binding.floor.setText(address?.floor)
+            binding.landmark.setText(address?.landmark)
+            binding.nickname.setText(address?.addressName)
+            latitude = address?.latitude
+            longitude = address?.longitude
+            binding.saveBtn.text = "تعديل"
+        }
+
         dialog = SpotsDialog.Builder()
             .setContext(this)
             .setMessage(getString(R.string.please_wait))
@@ -93,41 +119,79 @@ override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater
             return
         }
 
+        if (!address?.address.isNullOrEmpty()){
+            addAddressViewModel.editAddress(
+                EditAddressUseCaseParams(address?.adressId!!,
+                Constants.mobileNumber,
+                binding.nickname.text.toString(),
+                binding.street.text.toString(),
+                binding.floor.text.toString(),
+                binding.building.text.toString(),
+                binding.apartment.text.toString(),
+                longitude!!,
+                latitude!!,
+                binding.landmark.text.toString())
+            )
+            addAddressViewModel.editData.observe(this){
 
-        addAddressViewModel.addAddress(AddAddressUseCaseParams(
-            Constants.mobileNumber,
-            binding.nickname.text.toString(),
-            binding.street.text.toString(),
-            binding.floor.text.toString(),
-            binding.building.text.toString(),
-            binding.apartment.text.toString(),
-            latitude,
-            longitude,
-            binding.landmark.text.toString()))
-        addAddressViewModel.data.observe(this){
-
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> {
-                        dialog.show()
-                    }
-                    Status.SUCCESS -> {
-                        dialog.dismiss()
-                        if (!resource.data.isNullOrEmpty()){
-                            finish()
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.LOADING -> {
+                            dialog.show()
+                        }
+                        Status.SUCCESS -> {
+                            dialog.dismiss()
+                            if (!resource.data.isNullOrEmpty()){
+                                finish()
+                            }
+                        }
+                        Status.ERROR -> {
+                            dialog.dismiss()
                         }
                     }
-                    Status.ERROR -> {
-                        dialog.dismiss()
+                }
+            }
+        }else {
+
+            addAddressViewModel.addAddress(
+                AddAddressUseCaseParams(
+                    Constants.mobileNumber,
+                    binding.nickname.text.toString(),
+                    binding.street.text.toString(),
+                    binding.floor.text.toString(),
+                    binding.building.text.toString(),
+                    binding.apartment.text.toString(),
+                    "$latitude",
+                    "$longitude",
+                    binding.landmark.text.toString()
+                )
+            )
+            addAddressViewModel.data.observe(this) {
+
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.LOADING -> {
+                            dialog.show()
+                        }
+                        Status.SUCCESS -> {
+                            dialog.dismiss()
+                            if (!resource.data.isNullOrEmpty()) {
+                                finish()
+                            }
+                        }
+                        Status.ERROR -> {
+                            dialog.dismiss()
+                        }
                     }
                 }
             }
         }
-
     }
 
+    lateinit var map: GoogleMap
     override fun onMapReady(googleMap: GoogleMap) {
-        val sydney = LatLng(latitude, longitude)
+        map = googleMap
+        val sydney = LatLng(latitude!!, longitude!!)
         googleMap.addMarker(MarkerOptions().position(sydney))
         googleMap.uiSettings.isScrollGesturesEnabled = false
         googleMap.uiSettings.setAllGesturesEnabled(false)
@@ -136,5 +200,14 @@ override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater
         val cameraPosition =
             CameraPosition.Builder().target(sydney).zoom(12f).build()
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 201 && resultCode == RESULT_OK && data != null) {
+            latitude = data.getDoubleExtra(LATITUDE, 0.0)
+            longitude = data.getDoubleExtra(LONGITUDE, 0.0)
+            onMapReady(map)
+        }
     }
 }

@@ -39,6 +39,10 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
             onItemClickListener?.setOnItemClickListener(item)
         }
 
+        viewHolder.binding.edit.setOnClickListener {
+            onItemClickListener?.setOnEditClickListener(item)
+        }
+
         if (position == itemCount - 1){
             viewHolder.binding.view.visibility = View.GONE
         }else{
@@ -62,7 +66,10 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    interface OnItemClickListener { fun setOnItemClickListener(addressItem: AddressEntity) }
+    interface OnItemClickListener {
+        fun setOnItemClickListener(addressItem: AddressEntity)
+        fun setOnEditClickListener(addressItem: AddressEntity)
+    }
 
     class ViewHolder(val binding: AddressLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root)

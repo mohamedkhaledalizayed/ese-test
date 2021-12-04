@@ -1,5 +1,6 @@
 package com.neqabty.yodawy.modules
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,10 +21,12 @@ class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private var latitude = 30.062768087142633
     private var longitude = 31.245639547705647
+    private var isEditable = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_location)
 
+        isEditable = intent.getBooleanExtra("isEditable", false)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
     }
@@ -46,11 +49,19 @@ class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     fun selectLocation(view: View?) {
-        val intent = Intent(this, AddAddressActivity::class.java)
-        intent.putExtra(LATITUDE, latitude)
-        intent.putExtra(LONGITUDE, longitude)
-        startActivity(intent)
-        finish()
+        if (isEditable){
+            val intent = Intent()
+            intent.putExtra(LATITUDE, latitude)
+            intent.putExtra(LONGITUDE, longitude)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }else{
+            val intent = Intent(this, AddAddressActivity::class.java)
+            intent.putExtra(LATITUDE, latitude)
+            intent.putExtra(LONGITUDE, longitude)
+            startActivity(intent)
+            finish()
+        }
     }
 
 }
