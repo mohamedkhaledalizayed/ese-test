@@ -78,6 +78,7 @@ class ExpandableListAdapter(var mContext: Context,
             val infalInflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = infalInflater.inflate(R.layout.navigation_menu_item, null)
         }
+        convertView?.rootView?.setBackgroundResource(R.color.sub_menu_bg)
         val txtListChild = convertView?.findViewById(R.id.tvTitle) as TextView
         val childIcon: ImageView = convertView.findViewById(R.id.ivIcon) as ImageView
         txtListChild.text = childText
