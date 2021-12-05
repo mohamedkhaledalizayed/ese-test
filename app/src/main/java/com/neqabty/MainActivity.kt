@@ -401,11 +401,6 @@ class MainActivity : AppCompatActivity() {
         })
         listDataHeader.add(userServicesItem)
 
-        val newsItem = NavigationMenuItem(R.drawable.ic_menu_news, R.string.news_title, {
-            navController().navigate(R.id.newsFragment)
-        })
-        listDataHeader.add(newsItem)
-
         val tripsItem = NavigationMenuItem(R.drawable.ic_menu_trips, R.string.trips_title, {
             navController().navigate(R.id.tripsFragment)
         })
@@ -414,6 +409,11 @@ class MainActivity : AppCompatActivity() {
 
         })
         listDataHeader.add(medicalServicesItem)
+
+        val newsItem = NavigationMenuItem(R.drawable.ic_menu_news, R.string.news_title, {
+            navController().navigate(R.id.newsFragment)
+        })
+        listDataHeader.add(newsItem)
 
         val paymentsItem = NavigationMenuItem(R.drawable.ic_menu_payments, R.string.inquiry_title, {
             navController().navigate(R.id.inquiryFragment)

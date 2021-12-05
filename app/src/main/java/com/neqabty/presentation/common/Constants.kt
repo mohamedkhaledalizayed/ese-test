@@ -26,9 +26,9 @@ object Constants {
     var DNS = if (BuildConfig.URL.contains("http")) BuildConfig.URL else "https://${BuildConfig.URL}"
 
     var OPAY_PAYMENT_CALLBACK_URL = (if (BuildConfig.DEBUG) "http://backend.neqabty.com:44392" else DNS) + "/api/v1/transactions/opay/callback"
-    var OPAY_MERCHANT_ID = "281821112534441"
-    var OPAY_MERCHANT_NAME = "neQabty"
-    var OPAY_PUBLIC_KEY = "OPAYPUB16378484944900.9175634117495468"
+    var OPAY_MERCHANT_ID = if (BuildConfig.DEBUG) "281821120532113" else "281821120144533"
+    var OPAY_MERCHANT_NAME = if (BuildConfig.DEBUG) "neQabty TEST" else "neQabty"
+    var OPAY_PUBLIC_KEY = if (BuildConfig.DEBUG) "OPAYPUB16386946354660.48619730311207143" else "OPAYPUB16383585551500.36105494805860716"
     var COWPAY_MODE = if (BuildConfig.DEBUG) CowpayConstantKeys.SandBox else CowpayConstantKeys.Production
     var OPAY_MODE = BuildConfig.DEBUG
     var CC_COMMISSION = .0288
