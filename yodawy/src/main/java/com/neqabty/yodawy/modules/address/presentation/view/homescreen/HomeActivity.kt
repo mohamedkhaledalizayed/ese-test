@@ -34,11 +34,14 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.yodawy_home_title)
 
+
         Constants.userNumber = intent.extras!!.getString("user_number", "")
         Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
         Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
         Constants.FIXED_TOKEN = intent.extras!!.getString("fixed_token", Constants.FIXED_TOKEN)
         Constants.YODAWY_URL = intent.extras!!.getString("url", Constants.YODAWY_URL)
+
+        homeViewModel.getUser(Constants.userNumber, Constants.mobileNumber)
     }
 
     fun findMedications(view: View) {
