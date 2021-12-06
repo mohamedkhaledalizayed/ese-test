@@ -43,7 +43,7 @@
                     android:layout_marginBottom="@dimen/_7sdp"
                     android:text="@string/order_status"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_12sdp" />
 
 
                 <LinearLayout
@@ -66,7 +66,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
                 </LinearLayout>
 
@@ -77,7 +77,7 @@
                     android:layout_marginBottom="@dimen/_7sdp"
                     android:text="@string/address"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                         android:fontFamily="@font/droidkufi_bold"
                         android:lines="1"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/_10ssp" />
+                        android:textSize="@dimen/_10sdp" />
 
 
                     <TextView
@@ -114,7 +114,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/droidkufi_regular"
-                        android:textSize="@dimen/_10ssp" />
+                        android:textSize="@dimen/_10sdp" />
 
                 </RelativeLayout>
 
@@ -125,7 +125,7 @@
                     android:layout_marginBottom="@dimen/_7sdp"
                     android:text="@string/delivery_time"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textSize="@dimen/_12sdp" />
 
 
                 <LinearLayout
@@ -149,7 +149,7 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:text="@string/delivery_within_60_minutes"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
                 </LinearLayout>
 
@@ -180,7 +180,7 @@
                         android:layout_toEndOf="@+id/cash_icon"
                         android:text="@string/cash"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <View
                         android:layout_width="@dimen/_1sdp"
@@ -198,7 +198,7 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_3sdp"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <ImageView
                         android:id="@+id/payment_icon"
@@ -225,7 +225,7 @@
                         android:layout_alignParentStart="true"
                         android:text="@string/order_number"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
 
                     <TextView
@@ -233,7 +233,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
 
                     <TextView
@@ -245,7 +245,7 @@
                         android:textColor="@color/black"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/order_date"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
 
                     <TextView
@@ -255,7 +255,7 @@
                         android:layout_below="@+id/order_number_value"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
                 </RelativeLayout>
 
@@ -290,7 +290,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/delivery_fees"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
 
                     <TextView
@@ -300,7 +300,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/for_free"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <TextView
                         android:id="@+id/total"
@@ -311,7 +311,7 @@
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/total"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <TextView
                         android:id="@+id/total_value"
@@ -322,7 +322,7 @@
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text=""
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
 
 
                 </RelativeLayout>

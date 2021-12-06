@@ -33,7 +33,7 @@
             android:lines="1"
             android:text="@string/order_is_canceled"
             android:textColor="@color/green"
-            android:textSize="@dimen/_12ssp" />
+            android:textSize="@dimen/_12sdp" />
 
         <ImageView
             android:layout_width="@dimen/_15sdp"
@@ -53,7 +53,7 @@
             android:layout_toEndOf="@+id/order_image"
             android:text="10 Nov 2021 01:45 AM"
             android:textColor="@color/black"
-            android:textSize="@dimen/_10ssp" />
+            android:textSize="@dimen/_10sdp" />
 
         <TextView
             android:id="@+id/order_details"
@@ -78,7 +78,7 @@
             android:layout_marginTop="@dimen/_3sdp"
             android:layout_toEndOf="@+id/order_image"
             android:text="Total: To be confirmed"
-            android:textSize="@dimen/_10ssp" />
+            android:textSize="@dimen/_10sdp" />
 
 
         <View

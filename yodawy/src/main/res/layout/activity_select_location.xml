@@ -33,7 +33,7 @@
         android:onClick="selectLocation"
         android:text="@string/select_location"
         android:textColor="#fff"
-        android:textSize="@dimen/_12ssp"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold" />
 
 </RelativeLayout>

@@ -65,7 +65,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_toEndOf="@+id/frameLayout"
             android:text="@string/_14_sachets"
-            android:textSize="@dimen/_10ssp"
+            android:textSize="@dimen/_10sdp"
             android:visibility="invisible" />
 
         <TextView

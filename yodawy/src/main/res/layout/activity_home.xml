@@ -68,7 +68,7 @@
                             android:textAlignment="center"
                             android:padding="@dimen/_5sdp"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_12ssp" />
+                            android:textSize="@dimen/_12sdp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -103,7 +103,7 @@
                         android:padding="@dimen/_5sdp"
                         android:background="@drawable/homae_items_bg"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
                 </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -149,7 +149,7 @@
                         android:background="@drawable/homae_items_bg"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12sdp" />
                 </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
