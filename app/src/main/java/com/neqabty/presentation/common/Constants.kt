@@ -20,7 +20,7 @@ object Constants {
     var hasQuestionnaire: MutableLiveData<Boolean> = MutableLiveData(false)
 
     lateinit var YODAWY_CONFIG: AppConfigUI.YodawyStatus
-    lateinit var VEZEETA_CONFIG: AppConfigUI.VezeetaStatus
+    var VEZEETA_CONFIG: MutableLiveData<AppConfigUI.VezeetaStatus> = MutableLiveData()
     var CALL_CENTER = "0235317300"
 
     var DNS = if (BuildConfig.URL.contains("http")) BuildConfig.URL else "https://${BuildConfig.URL}"

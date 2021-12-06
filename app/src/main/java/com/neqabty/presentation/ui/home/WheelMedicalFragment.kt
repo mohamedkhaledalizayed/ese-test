@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -48,37 +49,37 @@ class WheelMedicalFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        bMedical.setOnClickListener { navController().navigate(R.id.chooseAreaFragment) }
-        bClaiming.setOnClickListener {
+        ibDirectory.setOnClickListener { navController().navigate(R.id.chooseAreaFragment) }
+        ibClaiming.setOnClickListener {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.claimingFragment)
             else {
-                    val bundle: Bundle = Bundle()
-                    bundle.putInt("type", Constants.CLAIMING)
-                    navController().navigate(R.id.signupFragment, bundle)
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.CLAIMING)
+                navController().navigate(R.id.signupFragment, bundle)
             }
         }
-        bRenew.setOnClickListener {
+        ibRenew.setOnClickListener {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.medicalRenewFragment)
             else {
-                    val bundle: Bundle = Bundle()
-                    bundle.putInt("type", Constants.MEDICAL_RENEW)
-                    navController().navigate(R.id.signupFragment, bundle)
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_RENEW)
+                navController().navigate(R.id.signupFragment, bundle)
             }
         }
-        bComplaints.setOnClickListener {
+        ibComplaints.setOnClickListener {
 //            Toast.makeText(requireContext(), getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
 
             if (sharedPref.isRegistered)
-                    navController().navigate(R.id.complaintsFragment)
+                navController().navigate(R.id.complaintsFragment)
             else {
-                    val bundle: Bundle = Bundle()
-                    bundle.putInt("type", Constants.COMPLAINTS)
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.COMPLAINTS)
                 navController().navigate(R.id.signupFragment, bundle)
-                }
             }
-        bOnlinePharmacy.setOnClickListener{
+        }
+        ibOnlinePharmacy.setOnClickListener {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.onlinePharmacyFragment)
             else {
@@ -87,7 +88,7 @@ class WheelMedicalFragment : BaseFragment() {
                 navController().navigate(R.id.signupFragment, bundle)
             }
         }
-        bMedicalLetters.setOnClickListener{
+        ibMedicalLetters.setOnClickListener {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.medicalLettersFragment)
             else {
@@ -96,6 +97,28 @@ class WheelMedicalFragment : BaseFragment() {
                 navController().navigate(R.id.signupFragment, bundle)
             }
         }
+        ibDoctorsReservation.setOnClickListener {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.doctorsReservationFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.DOCTORS_RESERVATION)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        }
+
+        setupDoctorsReservation()
+    }
+
+    fun setupDoctorsReservation() {
+        Constants.VEZEETA_CONFIG?.value?.let {
+            ibDoctorsReservation.visibility = if (it.status) View.VISIBLE else View.GONE
+            return
+        }
+        Constants.VEZEETA_CONFIG?.observe(viewLifecycleOwner, Observer {
+            if (it.status)
+                ibDoctorsReservation.visibility = View.VISIBLE
+        })
     }
 
     //region

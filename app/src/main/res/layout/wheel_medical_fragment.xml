@@ -15,106 +15,107 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/margin_horizontal_large">
 
-            <Button
-                android:id="@+id/bRenew"
+            <ImageButton
+                android:id="@+id/ibRenew"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_horizontal_extra_large"
-                android:layout_marginEnd="@dimen/margin_horizontal_extra_large"
-                android:layout_marginBottom="@dimen/margin_vertical_normal"
-                android:background="@drawable/btn_green"
-                android:text="@string/medical_renew_title"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_medium"
-                app:layout_constraintBottom_toTopOf="@id/bMedical"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginStart="@dimen/margin_horizontal_normal"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_horizontal_small"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_medical_renew"
+                app:layout_constraintEnd_toStartOf="@id/ibDirectory"
+                app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/bMedical"
+            <ImageButton
+                android:id="@+id/ibDirectory"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_horizontal_extra_large"
-                android:layout_marginEnd="@dimen/margin_horizontal_extra_large"
-                android:layout_marginBottom="@dimen/margin_vertical_normal"
-                android:background="@drawable/btn_blue"
-                android:text="@string/wheel_enter_medical"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_medium"
-                app:layout_constraintBottom_toTopOf="@id/bClaiming"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginEnd="@dimen/margin_horizontal_normal"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_horizontal_small"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_medical_directory"
+                app:layout_constraintBottom_toBottomOf="@id/ibRenew"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bRenew" />
+                app:layout_constraintStart_toEndOf="@id/ibRenew"
+                app:layout_constraintTop_toTopOf="@id/ibRenew" />
 
-            <Button
-                android:id="@+id/bClaiming"
+            <ImageButton
+                android:id="@+id/ibClaiming"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_horizontal_extra_large"
-                android:layout_marginEnd="@dimen/margin_horizontal_extra_large"
-                android:layout_marginBottom="@dimen/margin_vertical_normal"
-                android:background="@drawable/btn_green"
-                android:text="@string/wheel_enter_claiming"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_medium"
-                app:layout_constraintBottom_toTopOf="@id/bOnlinePharmacy"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginStart="@dimen/margin_horizontal_normal"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_horizontal_small"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_medical_claiming"
+                app:layout_constraintEnd_toStartOf="@id/ibMedicalLetters"
+                app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bMedical" />
+                app:layout_constraintTop_toBottomOf="@id/ibRenew" />
 
-
-            <Button
-                android:id="@+id/bOnlinePharmacy"
+            <ImageButton
+                android:id="@+id/ibMedicalLetters"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_horizontal_extra_large"
-                android:layout_marginEnd="@dimen/margin_horizontal_extra_large"
-                android:layout_marginBottom="@dimen/margin_vertical_normal"
-                android:background="@drawable/btn_blue"
-                android:text="@string/online_pharmacy_title"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_medium"
-                app:layout_constraintBottom_toTopOf="@id/bComplaints"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginEnd="@dimen/margin_horizontal_normal"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_horizontal_small"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_medical_letters"
+                app:layout_constraintBottom_toBottomOf="@id/ibClaiming"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bClaiming" />
+                app:layout_constraintStart_toEndOf="@id/ibClaiming"
+                app:layout_constraintTop_toTopOf="@id/ibClaiming" />
 
-
-            <Button
-                android:id="@+id/bComplaints"
+            <ImageButton
+                android:id="@+id/ibOnlinePharmacy"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_horizontal_extra_large"
-                android:layout_marginEnd="@dimen/margin_horizontal_extra_large"
-                android:layout_marginBottom="@dimen/margin_vertical_normal"
-                android:background="@drawable/btn_green"
-                android:text="@string/complaints_title"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_medium"
-                app:layout_constraintBottom_toTopOf="@id/bMedicalLetters"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginStart="@dimen/margin_horizontal_normal"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_horizontal_small"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_online_pharmacy"
+                app:layout_constraintEnd_toStartOf="@id/ibComplaints"
+                app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bOnlinePharmacy" />
+                app:layout_constraintTop_toBottomOf="@id/ibClaiming" />
 
-
-            <Button
-                android:id="@+id/bMedicalLetters"
+            <ImageButton
+                android:id="@+id/ibComplaints"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_horizontal_extra_large"
-                android:layout_marginEnd="@dimen/margin_horizontal_extra_large"
-                android:background="@drawable/btn_blue"
-                android:text="@string/medical_letters_title"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_medium"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginEnd="@dimen/margin_horizontal_normal"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_horizontal_small"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_medical_complaints"
+                app:layout_constraintBottom_toBottomOf="@id/ibOnlinePharmacy"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ibOnlinePharmacy"
+                app:layout_constraintTop_toTopOf="@id/ibOnlinePharmacy" />
+
+            <ImageButton
+                android:id="@+id/ibDoctorsReservation"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginStart="@dimen/margin_horizontal_normal"
+                android:background="@color/transparent"
+                android:padding="@dimen/margin_horizontal_small"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_doctors_reservations"
+                app:layout_constraintEnd_toEndOf="@id/ibOnlinePharmacy"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bComplaints" />
+                app:layout_constraintTop_toBottomOf="@id/ibOnlinePharmacy"
+                android:visibility="gone"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

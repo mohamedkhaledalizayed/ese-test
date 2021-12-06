@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.inquiryDetails
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -113,14 +114,14 @@ class InquiryDetailsFragment : BaseFragment() {
             if (b) {
                 calculateCommission(Constants.PaymentOption.OpayCredit)
                 ivCard.visibility = View.VISIBLE
-                ivChannels.visibility = View.GONE
+                llChannels.visibility = View.GONE
                 ivFawry.visibility = View.GONE
             }
         }
         rb_channel.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 calculateCommission(Constants.PaymentOption.OpayPOS)
-                ivChannels.visibility = View.VISIBLE
+                llChannels.visibility = View.VISIBLE
                 ivCard.visibility = View.GONE
                 ivFawry.visibility = View.GONE
             }
@@ -129,9 +130,13 @@ class InquiryDetailsFragment : BaseFragment() {
             if (b) {
                 calculateCommission(Constants.PaymentOption.Fawry)
                 ivFawry.visibility = View.VISIBLE
-                ivChannels.visibility = View.GONE
+                llChannels.visibility = View.GONE
                 ivCard.visibility = View.GONE
             }
+        }
+
+        tvChannels.setOnClickListener{
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://cashier.opaycheckout.com/map")))
         }
 
         bPay.setOnClickListener {
@@ -201,7 +206,7 @@ class InquiryDetailsFragment : BaseFragment() {
             currency = "EGP", // uppercase
             payAmount = (newAmount * 100).toLong(),
             productName = "annualSubscription",
-            productDescription = "",
+            productDescription = "android_" + medicalRenewalPayment.paymentItem?.amount,
             callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
             userClientIP = "110.246.160.183",
             expireAt = if(isCredit) 30 else 2880,

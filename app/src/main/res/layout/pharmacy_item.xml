@@ -86,7 +86,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                             android:layout_height="wrap_content"
                             android:textColor="@color/green"
                             android:layout_marginTop="10dp"
-                            android:textSize="14sp"
+                            android:textSize="@dimen/text_size_large"
                             android:textStyle="bold" />
 
                         <TextView
@@ -95,7 +95,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:textColor="@color/gray_dark"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/text_size_medium" />
 
                         <Button
                             android:layout_width="120dp"
@@ -106,7 +106,7 @@ too. layout_gravity="center_horizontal" is a lot simpler.
                             android:background="@drawable/get_service_bg"
                             android:text="الحصول على الخدمة"
                             android:textColor="@color/white"
-                            android:textSize="10sp" />
+                            android:textSize="@dimen/text_size_small" />
                     </LinearLayout>
 
                 </RelativeLayout>

@@ -103,6 +103,7 @@
                     android:text="@string/payment_method"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold"
                     android:visibility="visible" />
 
                 <RadioGroup
@@ -123,13 +124,13 @@
                         android:buttonTint="@color/dark_green"
                         android:checked="true"
                         android:text="@string/payment_card"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="@dimen/text_size_small" />
 
                     <ImageView
                         android:id="@+id/ivCard"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scaleType="fitXY"
+                        android:layout_height="@dimen/_100sdp"
+                        android:scaleType="fitCenter"
                         android:src="@drawable/visa" />
 
                     <RadioButton
@@ -138,31 +139,44 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/dark_green"
                         android:text="@string/payment_channel"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="@dimen/text_size_small" />
 
-                    <ImageView
-                        android:id="@+id/ivChannels"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/llChannels"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:scaleType="fitXY"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/pos"
-                        android:visibility="gone" />
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_100sdp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/opay"/>
+
+                        <TextView
+                            android:id="@+id/tvChannels"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_small"
+                            android:gravity="center"
+                            android:text="@{Html.fromHtml(@string/payment_store_locator)}"/>
+                    </LinearLayout>
 
                     <RadioButton
                         android:id="@+id/rb_fawry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/payment_fawry"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="@dimen/text_size_small"
                         android:buttonTint="@color/dark_green" />
 
                     <ImageView
                         android:id="@+id/ivFawry"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/pos"
+                        android:layout_height="@dimen/_100sdp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/fawry"
                         android:layout_gravity="center_horizontal"
                         android:visibility="gone" />
 
@@ -172,7 +186,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/dark_green"
                         android:text="@string/payment_wallet"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="@dimen/text_size_small"
                         android:visibility="gone" />
 
                     <RadioButton
@@ -181,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/dark_green"
                         android:text="@string/payment_meeza"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="@dimen/text_size_small"
                         android:visibility="gone" />
 
                 </RadioGroup>

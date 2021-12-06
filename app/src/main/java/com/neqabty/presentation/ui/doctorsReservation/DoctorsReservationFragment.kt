@@ -81,7 +81,7 @@ class DoctorsReservationFragment : BaseFragment() {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
         state.authCode?.let {
-            startWebView(Constants.VEZEETA_CONFIG.url + it)
+            startWebView(Constants.VEZEETA_CONFIG.value?.url + it)
         }
     }
 
