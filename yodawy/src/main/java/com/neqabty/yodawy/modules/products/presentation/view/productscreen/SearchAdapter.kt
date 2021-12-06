@@ -54,7 +54,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
         }
 
         Picasso.get()
-            .load(item.image?.replaceText())
+            .load(item.image?.replaceText()).placeholder(R.drawable.drug_placeholder)
             .into(viewHolder.binding.medicationImage, object : Callback {
                 override fun onSuccess() {
                     viewHolder.binding.imageProgress.hide()

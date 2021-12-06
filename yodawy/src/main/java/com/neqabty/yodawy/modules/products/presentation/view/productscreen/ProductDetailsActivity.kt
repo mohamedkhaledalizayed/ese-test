@@ -71,7 +71,7 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
         }
 
         Picasso.get()
-            .load(productItem.image)
+            .load(productItem.image).placeholder(R.drawable.drug_placeholder)
             .into(binding.medicationImage, object : Callback {
                 override fun onSuccess() {
                     binding.imageProgress.hide()

@@ -40,7 +40,7 @@ class ItemssAdapter: RecyclerView.Adapter<ItemssAdapter.ViewHolder>() {
         }else{
             viewHolder.binding.view.visibility = View.VISIBLE
         }
-
+        viewHolder.binding.imageProgress.visibility = View.GONE
         viewHolder.binding.medicationTitle.text = item.drugName
         viewHolder.binding.medicationQuantity.text = "العدد : ${item.quantity}"
         viewHolder.binding.medicationPrice.text = "${item.price} جنيه"

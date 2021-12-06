@@ -52,7 +52,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
         viewHolder.binding.medicationPrice.text = "${items[position].first.regularPrice * items[position].second}"
 
         Picasso.get()
-            .load(items[position].first.image)
+            .load(items[position].first.image).placeholder(R.drawable.drug_placeholder)
             .into(viewHolder.binding.medicationImage, object : Callback {
                 override fun onSuccess() {
                     viewHolder.binding.imageProgress.hide()

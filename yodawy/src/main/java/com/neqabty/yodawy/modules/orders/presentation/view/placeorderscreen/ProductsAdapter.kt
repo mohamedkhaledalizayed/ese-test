@@ -50,7 +50,7 @@ class ProductsAdapter: RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
         viewHolder.binding.medicationPrice.text = "${item.first.regularPrice} جنيه"
 
         Picasso.get()
-            .load(item.first.image?.replaceText())
+            .load(item.first.image?.replaceText()).placeholder(R.drawable.drug_placeholder)
             .into(viewHolder.binding.medicationImage, object : Callback {
                 override fun onSuccess() {
                     viewHolder.binding.imageProgress.hide()

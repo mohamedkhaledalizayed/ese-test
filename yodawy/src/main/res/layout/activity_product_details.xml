@@ -44,7 +44,7 @@
                         android:id="@+id/medication_image"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_150sdp"
-                        android:src="@drawable/pravotin" />
+                        android:src="@drawable/drug_placeholder" />
 
                     <androidx.core.widget.ContentLoadingProgressBar
                         android:id="@+id/image_progress"
