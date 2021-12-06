@@ -46,7 +46,7 @@ class NetworkModule {
                 val request = chain.request()
                 if (request.header("X-Yodawy-Signature") != null) {
                     var newRequest = request.newBuilder()
-                        .header("Authorization", "Bearer" + Constants.FIXED_TOKEN)
+                        .header("Authorization", "Bearer " + Constants.FIXED_TOKEN)
                         .build()
                     var newResponse = chain.proceed(newRequest)
                     return newResponse
