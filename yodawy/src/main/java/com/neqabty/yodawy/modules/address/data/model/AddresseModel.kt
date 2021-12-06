@@ -1,8 +1,11 @@
 package com.neqabty.yodawy.modules.address.data.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class AddresseModel(
     @SerializedName("Address")
     val address: String,
@@ -22,4 +25,4 @@ data class AddresseModel(
     val signature: String,
     @SerializedName("Landmark")
     val landmark: String
-)
+): Parcelable

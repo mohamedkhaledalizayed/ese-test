@@ -1,5 +1,6 @@
 package com.neqabty.yodawy.core.di
 
+import com.neqabty.yodawy.BuildConfig
 import com.neqabty.yodawy.core.data.Constants
 import dagger.Module
 import dagger.Provides
@@ -27,7 +28,7 @@ class NetworkModule {
     @Named("yodawy")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        interceptor.level = if(BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else  HttpLoggingInterceptor.Level.NONE
         return interceptor
     }
 
