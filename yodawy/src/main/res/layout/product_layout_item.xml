@@ -54,6 +54,8 @@
             android:layout_toEndOf="@+id/frameLayout"
             android:ellipsize="end"
             android:lines="1"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold"
             android:text="@string/pravotin_100mg_sach_g_medication_name"
             android:textColor="@color/color_black" />
 
@@ -77,6 +79,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_toEndOf="@+id/frameLayout"
             android:text="@string/egp_85_00"
+            android:textSize="@dimen/_10sdp"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
@@ -89,6 +92,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_toEndOf="@+id/frameLayout"
             android:text="5 x"
+            android:textSize="@dimen/_10sdp"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 

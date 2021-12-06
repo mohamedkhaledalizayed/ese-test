@@ -28,6 +28,8 @@
                 android:text="Out of Stock"
                 android:background="@color/address_btn_bg"
                 android:id="@+id/status"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
                 android:textColor="@color/white"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:paddingStart="@dimen/_5sdp"
@@ -55,7 +57,9 @@
             android:ellipsize="end"
             android:lines="1"
             android:text="PRAVOTIN (100MG SACH) G. medication name"
-            android:textColor="@color/color_black" />
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/medication_price"
@@ -65,6 +69,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_toEndOf="@+id/frameLayout"
             android:text="EGP 85.00"
+            android:textSize="@dimen/_10sdp"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
@@ -107,12 +112,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_4sdp"
-                android:textStyle="bold"
                 android:id="@+id/decrease"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
                 android:text="-"/>
 
             <TextView
@@ -129,6 +135,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:gravity="center"
+                android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:text="1"/>
@@ -142,6 +149,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
                 android:text="+"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -157,6 +166,8 @@
             android:background="@drawable/view_btn_bg"
             android:padding="@dimen/_4sdp"
             android:text="VIEW"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold"
             android:visibility="gone"
             android:textAlignment="center"
             android:textColor="@color/white" />
@@ -172,6 +183,8 @@
             android:background="@drawable/add_btn_bg"
             android:padding="@dimen/_4sdp"
             android:text="ADD"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold"
             android:textAlignment="center"
             android:textColor="@color/white" />
 

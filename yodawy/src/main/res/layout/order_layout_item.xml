@@ -66,6 +66,8 @@
             android:layout_toEndOf="@+id/order_image"
             android:ellipsize="end"
             android:lines="1"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold"
             android:text="2 items: PANADOL EXTRA, PANADOL"
             />
 
