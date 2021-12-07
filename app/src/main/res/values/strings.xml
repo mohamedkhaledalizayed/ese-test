@@ -371,7 +371,7 @@
     <string name="already_paid">تم تأكيد إشتراك هذا المشروع من قبل</string>
     <string name="retiree">حالة المهندس معاش وليس له اشتراك سنوي</string>
     <string name="edit_follower">تعديل</string>
-    <string name="confirm_proceed_to_payment_msg">برجاء العلم انه في حالة اختيار الدفع بكود فوري لن تتمكن من تعديل التابعين مره اخري حتي اتمام الدفع</string>
+    <string name="confirm_proceed_to_payment_msg">برجاء العلم انك لن تتمكن من تعديل التابعين مره اخرى حتي اتمام الدفع</string>
     <string name="confirm_followers_edit_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم قريباً</string>
     <string name="medical_update_request_status_processing">طلبكم ما زال تحت الدراسة</string>
     <string name="medical_update_request_status_approved">لقد تم قبول الطلب وبرجاء الاستمرار لاتمام عمليه الدفع</string>
