@@ -213,7 +213,9 @@ class InquiryDetailsFragment : BaseFragment() {
             paymentType = paymentType // optional
         )
 
+        llSuperProgressbar.visibility = View.VISIBLE
         PaymentTask(this).createOrder(payInput, callback = { status, response ->
+            llSuperProgressbar.visibility = View.GONE
             when (status) {
                 Status.ERROR -> { // error
                     Toast.makeText(requireContext(), response.message,
@@ -297,6 +299,11 @@ class InquiryDetailsFragment : BaseFragment() {
             PaymentStatus.INITIAL -> {
             }
             PaymentStatus.PENDING -> {
+                if (response.eventName.equals("clickResultOKBtn") && rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
+                    showAlert(getString(R.string.payment_reference_without_code)) {
+                        navController().popBackStack()
+                        navController().navigate(R.id.homeFragment)
+                    }
             }
             PaymentStatus.SUCCESS -> {
                 showAlert(
