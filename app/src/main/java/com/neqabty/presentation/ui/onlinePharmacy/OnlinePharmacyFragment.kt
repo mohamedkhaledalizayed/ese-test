@@ -80,6 +80,8 @@ class OnlinePharmacyFragment : BaseFragment() {
                     bundle.putString("mobile_number", sharedPref.mobile)
                     bundle.putString("jwt", sharedPref.jwt)
                     bundle.putString("fixed_token", Constants.YODAWY_CONFIG.publicKey)
+                    bundle.putBoolean("total_amount", Constants.YODAWY_CONFIG.totalAmount)
+                    bundle.putString("delivery_sentence", Constants.YODAWY_CONFIG.deliverySentence)
                     bundle.putString("url", Constants.YODAWY_CONFIG.url)
                     val intent = Intent(requireContext(), HomeActivity::class.java)
                     intent.putExtras(bundle)

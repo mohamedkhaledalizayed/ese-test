@@ -22,7 +22,9 @@ data class AppConfigEntity(
     data class YodawyStatus(
         var status: Boolean,
         var url: String,
-        var publicKey: String
+        var publicKey: String,
+        var totalAmount: Boolean,
+        var deliverySentence: String
     )
 
     data class VezeetaStatus(

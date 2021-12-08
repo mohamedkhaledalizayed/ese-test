@@ -71,7 +71,7 @@ class MainViewModel @Inject constructor(val login: Login,
                             Constants.FAWRY_COMMISSION = it.fawryCommission / 100
                             Constants.MIN_COMMISSION = it.minCommission
                             Constants.hasQuestionnaire.value = it.hasQuestionnaire
-                            Constants.YODAWY_CONFIG = AppConfigUI.YodawyStatus(it.yodawyConfig.status, it.yodawyConfig.url, it.yodawyConfig.publicKey)
+                            Constants.YODAWY_CONFIG = AppConfigUI.YodawyStatus(it.yodawyConfig.status, it.yodawyConfig.url, it.yodawyConfig.publicKey, it.yodawyConfig.totalAmount, it.yodawyConfig.deliverySentence)
                             Constants.VEZEETA_CONFIG.value = AppConfigUI.VezeetaStatus(it.vezeetaConfig.status, it.vezeetaConfig.url)
                             viewState.value = viewState.value?.copy(appConfigUI = appConfigEntityUIMapper.mapFrom(it))
                             onConfigReceived()

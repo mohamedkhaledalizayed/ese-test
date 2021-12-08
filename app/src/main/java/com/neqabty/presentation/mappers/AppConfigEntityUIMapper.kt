@@ -20,7 +20,7 @@ class AppConfigEntityUIMapper @Inject constructor() : Mapper<AppConfigEntity, Ap
                 fawryCommission = from.fawryCommission,
                 minCommission = from.minCommission,
                 hasQuestionnaire = from.hasQuestionnaire,
-                yodawyConfig = AppConfigUI.YodawyStatus(from.yodawyConfig.status, from.yodawyConfig.url, from.yodawyConfig.publicKey),
+                yodawyConfig = AppConfigUI.YodawyStatus(from.yodawyConfig.status, from.yodawyConfig.url, from.yodawyConfig.publicKey, from.yodawyConfig.totalAmount, from.yodawyConfig.deliverySentence),
                 vezeetaConfig = AppConfigUI.VezeetaStatus(from.vezeetaConfig.status, from.vezeetaConfig.url)
         )
     }

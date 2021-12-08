@@ -42,7 +42,11 @@ data class AppConfigData(
                 @field:SerializedName("url")
                 var url: String,
                 @field:SerializedName("publicKey")
-                var publicKey: String
+                var publicKey: String,
+                @field:SerializedName("total_amount")
+                var totalAmount: Boolean,
+                @field:SerializedName("delivery_sentence")
+                var deliverySentence: String
         )
 
         data class VezeetaStatus(
