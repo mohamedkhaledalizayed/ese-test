@@ -1,8 +1,11 @@
 package com.neqabty.yodawy.modules.orders.data.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Item(
     @SerializedName("ActualWoocommerceProductId")
     val actualWoocommerceProductId: String?,
@@ -46,10 +49,8 @@ data class Item(
     val variationSKU: String?,
     @SerializedName("WasLimited")
     val wasLimited: Boolean,
-    @SerializedName("WoocommerceOrderAttributes")
-    val woocommerceOrderAttributes: List<Any>?,
     @SerializedName("WoocommerceProductId")
     val woocommerceProductId: String?,
     @SerializedName("YodawyDeal")
     val yodawyDeal: Boolean
-)
+): Parcelable

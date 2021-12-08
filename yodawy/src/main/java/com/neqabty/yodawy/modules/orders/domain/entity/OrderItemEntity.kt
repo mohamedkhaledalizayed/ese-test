@@ -23,7 +23,6 @@ data class OrderItemEntity(
     val selectedUnit: Int?,
     val variationSKU: String?,
     val wasLimited: Boolean,
-    val woocommerceOrderAttributes: List<Any>?,
     val woocommerceProductId: String?,
     val yodawyDeal: Boolean
 )

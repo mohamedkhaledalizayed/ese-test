@@ -47,7 +47,6 @@ private fun List<Item>.toOderItemsEntity(): List<OrderItemEntity> {
             selectedUnit = it.selectedUnit,
             variationSKU = it.variationSKU,
             wasLimited = it.wasLimited,
-            woocommerceOrderAttributes = it.woocommerceOrderAttributes,
             woocommerceProductId = it.woocommerceProductId,
             yodawyDeal = it.yodawyDeal
         )
