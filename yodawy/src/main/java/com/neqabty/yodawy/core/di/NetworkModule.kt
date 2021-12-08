@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -21,7 +22,7 @@ import javax.inject.Named
 class NetworkModule {
     @Provides
     fun providesBaseUrl(): String {
-        return "http://3.131.229.146:44392/api/v1/yodawy/"
+        return "https://front.neqabty.com/api/v1/yodawy/"
     }
 
     @Provides
@@ -37,6 +38,16 @@ class NetworkModule {
     fun provideOkHttpClient(
         @Named("yodawy") loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
+        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+            .add(
+                "front.neqabty.com",
+                "sha256/hgx3/z5ENRCVF9jDSHk8GwocaQsEFYAW8ON1eGs2qUc="
+            )
+            .add(
+                "*.neqabty.com",
+                "sha256/nt7kxSg6amgrDYO0JQOM+d3Q+G0fgFtBdx76ppVzIS4="
+            ).build()
+
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(40, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
@@ -61,6 +72,7 @@ class NetworkModule {
             }
         })
         okHttpClient.addInterceptor(loggingInterceptor)
+        okHttpClient.certificatePinner(certificatePinner)
         okHttpClient.build()
         return okHttpClient.build()
     }

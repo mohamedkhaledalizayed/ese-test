@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="@dimen/margin_horizontal_small"
+                android:layout_marginHorizontal="@dimen/margin_horizontal_small"
                 android:elevation="@dimen/elevation_level_one"
                 android:shape="ring"
                 app:cardCornerRadius="@dimen/round_radius"
