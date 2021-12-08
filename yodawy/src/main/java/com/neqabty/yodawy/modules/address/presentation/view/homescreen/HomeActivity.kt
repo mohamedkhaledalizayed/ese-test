@@ -18,22 +18,28 @@ import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.core.data.Constants.imageList
 import com.neqabty.yodawy.core.ui.BaseActivity
+import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivityHomeBinding
 import com.neqabty.yodawy.modules.CartActivity
 import com.neqabty.yodawy.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
 import com.neqabty.yodawy.modules.products.presentation.view.productscreen.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
+import dmax.dialog.SpotsDialog
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     private val homeViewModel: HomeViewModel by viewModels()
     override fun getViewBinding() = ActivityHomeBinding.inflate(layoutInflater)
+    private lateinit var dialog: android.app.AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.yodawy_home_title)
-
+        dialog = SpotsDialog.Builder()
+            .setContext(this)
+            .setMessage(getString(R.string.please_wait))
+            .build()
 
         Constants.userNumber = intent.extras!!.getString("user_number", "")
         Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
@@ -42,6 +48,24 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         Constants.YODAWY_URL = intent.extras!!.getString("url", Constants.YODAWY_URL)
 
         homeViewModel.getUser(Constants.userNumber, Constants.mobileNumber)
+
+        homeViewModel.user.observe(this){
+
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        dialog.show()
+                    }
+                    Status.SUCCESS -> {
+                        dialog.dismiss()
+                    }
+                    Status.ERROR -> {
+                        dialog.dismiss()
+                    }
+                }
+            }
+
+        }
     }
 
     fun findMedications(view: View) {
