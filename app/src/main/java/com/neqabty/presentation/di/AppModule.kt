@@ -74,12 +74,12 @@ class AppModule {
     fun provideOkHttpClient(httpLoggingInterceptor :HttpLoggingInterceptor): OkHttpClient {
         val certificatePinner : CertificatePinner = CertificatePinner.Builder()
                 .add(
-                        BuildConfig.URL,
+                    BuildConfig.URL,
                     "sha256/hgx3/z5ENRCVF9jDSHk8GwocaQsEFYAW8ON1eGs2qUc="
                 )
                 .add(
-                        BuildConfig.URL,
-                    "SHA256/nt7kxSg6amgrDYO0JQOM+d3Q+G0fgFtBdx76ppVzIS4="
+                    "*.neqabty.com",
+                    "sha256/nt7kxSg6amgrDYO0JQOM+d3Q+G0fgFtBdx76ppVzIS4="
                 ).build()
 
         return OkHttpClient.Builder()
