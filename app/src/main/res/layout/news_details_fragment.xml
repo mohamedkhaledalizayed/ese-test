@@ -13,49 +13,50 @@
             type="com.neqabty.presentation.entities.NewsUI" />
     </data>
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/svContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:paddingStart="@dimen/margin_horizontal_large"
         android:paddingEnd="@dimen/margin_horizontal_large"
-        >
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/clLogo"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/margin_horizontal_small"
-            android:elevation="@dimen/elevation_level_one"
-            android:shape="ring"
-            app:cardCornerRadius="@dimen/round_radius">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/ivLogo"
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvImage"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp"
-                android:adjustViewBounds="false"
-                android:cropToPadding="false"
-                android:scaleType="fitXY"
-                app:imageUrl="@{newsItem.img}" />
-        </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/margin_horizontal_small"
+                android:elevation="@dimen/elevation_level_one"
+                android:shape="ring"
+                app:cardCornerRadius="@dimen/round_radius"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <ScrollView
-            android:id="@+id/svContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/clLogo"
-            app:layout_constraintTop_toTopOf="parent">
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="false"
+                    android:scaleType="fitXY"
+                    app:imageUrl="@{newsItem.img}" />
+            </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/margin_vertical_small"
+                app:layout_constraintTop_toBottomOf="@id/cvImage">
 
                 <ImageView
                     android:id="@+id/ivClock"
@@ -64,9 +65,9 @@
                     android:layout_marginStart="@dimen/margin_horizontal_normal"
                     android:layout_marginTop="@dimen/margin_horizontal_normal"
                     android:src="@drawable/ic_clock"
-                    app:tint="@color/dark_grey"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/dark_grey" />
 
                 <TextView
                     android:id="@+id/tvDate"
@@ -90,9 +91,9 @@
                     android:layout_marginStart="@dimen/margin_horizontal_normal"
                     android:layout_marginTop="@dimen/margin_horizontal_normal"
                     android:src="@drawable/ic_source"
-                    app:tint="@color/dark_grey"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivClock" />
+                    app:layout_constraintTop_toBottomOf="@id/ivClock"
+                    app:tint="@color/dark_grey" />
 
                 <TextView
                     android:id="@+id/tvSource"
@@ -112,36 +113,34 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_horizontal_normal"
                     android:layout_marginTop="@dimen/margin_horizontal_large"
-                    android:text="@{newsItem.title}"
                     android:justificationMode="inter_word"
+                    android:text="@{newsItem.title}"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/text_size_large"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginHorizontal="@dimen/margin_horizontal_normal"
                     app:layout_constraintTop_toBottomOf="@id/ivSource" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tvDesc"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/margin_horizontal_normal"-->
-<!--                    android:text="@{Html.fromHtml(newsItem.desc)}"-->
-<!--                    android:layout_marginHorizontal="@dimen/margin_horizontal_normal"-->
-<!--                    android:textSize="@dimen/text_size_medium"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tvTitle" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvDesc"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/margin_horizontal_normal"-->
+                <!--                    android:text="@{Html.fromHtml(newsItem.desc)}"-->
+                <!--                    android:layout_marginHorizontal="@dimen/margin_horizontal_normal"-->
+                <!--                    android:textSize="@dimen/text_size_medium"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/tvTitle" />-->
 
                 <WebView
                     android:id="@+id/webView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvTitle"/>
+                    app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
-
-    </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
