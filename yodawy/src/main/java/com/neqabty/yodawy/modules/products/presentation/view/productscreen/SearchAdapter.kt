@@ -54,7 +54,13 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
             viewHolder.binding.view.visibility = View.VISIBLE
         }
 
-        viewHolder.binding.deliveryTime.text = delivery_sentence
+        if (delivery_sentence.isNotBlank()){
+            viewHolder.binding.deliveryTime.text = delivery_sentence
+        }else{
+            viewHolder.binding.medicationStatus.visibility = View.INVISIBLE
+            viewHolder.binding.deliveryTime.visibility = View.INVISIBLE
+        }
+
         Picasso.get()
             .load(item.image?.replaceText()).placeholder(R.drawable.drug_placeholder)
             .into(viewHolder.binding.medicationImage, object : Callback {

@@ -25,5 +25,5 @@ object Constants {
     var YODAWY_URL = ""
     var plan = ""
     var total_amount = false
-    var delivery_sentence = "خدمة توصيل ٦٠ دقيقة من يداوي"
+    var delivery_sentence = ""
 }
