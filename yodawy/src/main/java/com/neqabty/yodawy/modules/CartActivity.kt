@@ -6,10 +6,12 @@ import android.view.View
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.core.data.Constants.imageList
+import com.neqabty.yodawy.core.data.Constants.total_amount
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.databinding.ActivityCartBinding
 import com.neqabty.yodawy.modules.address.presentation.view.adressscreen.AddressesActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -61,7 +63,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
             for (item in cartItems){
                 total += (item.first.regularPrice * item.second)
             }
-            binding.checkout.text = getString(R.string.go_to_checkout) + "  ${total.roundToInt()}"
+            binding.total.text = getString(R.string.total_amount) + "  ${DecimalFormat("##.#").format(total)}"
         }
     }
 
@@ -70,9 +72,13 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
         if (cartItems.isEmpty() && imageList.isEmpty()){
             binding.clEmptyCart.visibility = View.VISIBLE
             binding.checkout.visibility = View.GONE
+            binding.total.visibility = View.GONE
         }else{
             binding.clEmptyCart.visibility = View.GONE
             binding.checkout.visibility = View.VISIBLE
+            if (total_amount){
+                binding.total.visibility = View.VISIBLE
+            }
         }
 
         /////Images recyclerView

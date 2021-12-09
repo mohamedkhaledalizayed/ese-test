@@ -51,6 +51,11 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
             binding.deliveryTime.visibility = View.GONE
         }
 
+        if (!Constants.total_amount){
+            binding.view.visibility = View.GONE
+            binding.totalPayment.visibility = View.GONE
+            binding.paymentIcon.visibility = View.GONE
+        }
         binding.addressType.text = selectedAddress.addressName
         binding.addressDetails.text = "شارع ${selectedAddress.address}, مبنى رقم ${selectedAddress.buildingNumber}, رقم الطابق ${selectedAddress.floor}, شقة رقم ${selectedAddress.apt}"
         placeOrderViewModel.placeOrderResult.observe(this){
