@@ -11,6 +11,7 @@ import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.databinding.ActivityCartBinding
 import com.neqabty.yodawy.modules.address.presentation.view.adressscreen.AddressesActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -62,7 +63,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
             for (item in cartItems){
                 total += (item.first.regularPrice * item.second)
             }
-            binding.total.text = getString(R.string.total_amount) + "  ${total.roundToInt()}"
+            binding.total.text = getString(R.string.total_amount) + "  ${DecimalFormat("##.#").format(total)}"
         }
     }
 
