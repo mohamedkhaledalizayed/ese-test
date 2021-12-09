@@ -5,6 +5,9 @@ import com.neqabty.yodawy.modules.address.domain.entity.AddressEntity
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 
 object Constants {
+
+    const val DEV_SERVER = "http://3.131.229.146:44392/api/v1/yodawy/"
+    const val PRO_SERVER = "https://front.neqabty.com/api/v1/yodawy/"
     var yodawyId: String = ""
     lateinit var selectedAddress: AddressEntity
     var userNumber: String = ""
@@ -21,4 +24,6 @@ object Constants {
     var FIXED_TOKEN = "Basic 3f023e9dbcf1c467f19e8d8b4b546c02264bd207803927971e3b0b36e705b3d0"
     var YODAWY_URL = ""
     var plan = ""
+    var total_amount = false
+    var delivery_sentence = "خدمة توصيل ٦٠ دقيقة من يداوي"
 }

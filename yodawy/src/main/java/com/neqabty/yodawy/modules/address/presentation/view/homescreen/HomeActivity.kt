@@ -46,6 +46,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
         Constants.FIXED_TOKEN = intent.extras!!.getString("fixed_token", Constants.FIXED_TOKEN)
         Constants.YODAWY_URL = intent.extras!!.getString("url", Constants.YODAWY_URL)
+        Constants.total_amount = intent.extras!!.getBoolean("total_amount", Constants.total_amount)
+        Constants.delivery_sentence = intent.extras!!.getString("delivery_sentence", Constants.delivery_sentence)
 
         homeViewModel.getUser(Constants.userNumber, Constants.mobileNumber)
 
