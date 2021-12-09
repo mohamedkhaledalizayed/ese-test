@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.data.Constants.cartItems
+import com.neqabty.yodawy.core.data.Constants.delivery_sentence
 import com.neqabty.yodawy.core.utils.replaceText
 import com.neqabty.yodawy.databinding.MedicationLayoutItemBinding
 import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
@@ -53,6 +54,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
             viewHolder.binding.view.visibility = View.VISIBLE
         }
 
+        viewHolder.binding.deliveryTime.text = delivery_sentence
         Picasso.get()
             .load(item.image?.replaceText()).placeholder(R.drawable.drug_placeholder)
             .into(viewHolder.binding.medicationImage, object : Callback {

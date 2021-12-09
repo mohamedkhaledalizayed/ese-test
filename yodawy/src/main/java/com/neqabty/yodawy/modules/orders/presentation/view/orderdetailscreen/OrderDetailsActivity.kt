@@ -42,7 +42,7 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
             .build()
         prescriptionsAdapter = PrescriptionsAdapter(this)
         orderViewModel.getSpecificOrder(mobileNumber, "$orderId")
-
+        binding.tvDelivery.text = Constants.delivery_sentence
         orderViewModel.order.observe(this){
             it?.let { resource ->
                 when (resource.status) {

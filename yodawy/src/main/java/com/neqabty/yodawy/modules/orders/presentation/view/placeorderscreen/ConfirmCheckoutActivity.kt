@@ -43,7 +43,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
 
             }
         }
-
+        binding.tvDelivery.text = Constants.delivery_sentence
         binding.addressType.text = selectedAddress.addressName
         binding.addressDetails.text = "شارع ${selectedAddress.address}, مبنى رقم ${selectedAddress.buildingNumber}, رقم الطابق ${selectedAddress.floor}, شقة رقم ${selectedAddress.apt}"
         placeOrderViewModel.placeOrderResult.observe(this){
