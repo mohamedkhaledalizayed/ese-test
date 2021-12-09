@@ -26,7 +26,7 @@ class MyPushService : HmsMessageService() {
         // Obtain a token.
         // Check whether the token is empty.
         token?.let {
-            if (!token.equals(PreferencesHelper(applicationContext).token))
+            if (!token.equals(PreferencesHelper.instance.token))
                 sendRegistrationToServer(token)
         }
     }
