@@ -15,7 +15,7 @@
         android:label="@string/my_app_name"
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="false">
         <activity
             android:name=".modules.SelectLocationActivity"
             android:exported="false" />
