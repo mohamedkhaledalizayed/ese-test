@@ -35,7 +35,6 @@ public class RecyclerPdfViewerAdapter extends RecyclerView.Adapter<RecyclerPdfVi
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerPdfViewerAdapter.ViewHolderPdfPage holder, int position) {
-        Log.d(TAG, "onBindViewHolder: rendering: " + position);
         Bitmap currentImage = pdfPagesImage.get(position);
 
         holder.imageView.setImageBitmap(currentImage);

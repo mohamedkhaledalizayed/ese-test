@@ -877,7 +877,7 @@ public class CursorWheelLayout extends ViewGroup {
                 return;
             }
             if (angle > 360) {
-                Log.w(TAG, "scrollIntoSlots:" + angle + " > 360, may be something wrong with calculate angle onLayout");
+//                Log.w(TAG, "scrollIntoSlots:" + angle + " > 360, may be something wrong with calculate angle onLayout");
             }
             double diff = Math.abs(mSelectedAngle - angle);
             diff = diff >= 180 ? 360 - diff : diff;

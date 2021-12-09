@@ -117,7 +117,7 @@ public class FileManager {
             } catch (IOException e) {
                 // Unable to create file, likely because external storage is
                 // not currently mounted.
-                Log.e("ExternalStorage", "Error writing thumbnail");
+//                Log.e("ExternalStorage", "Error writing thumbnail");
                 throw e;
             }
         }
@@ -194,7 +194,7 @@ public class FileManager {
      */
     public File[] listExternalStoragePrivateFile(Context context) {
         String path = context.getExternalFilesDir(null) + "";
-        Log.d("Files", "Path: " + path);
+//        Log.d("Files", "Path: " + path);
         File directory = new File(path);
         return directory.listFiles();
     }
@@ -301,8 +301,8 @@ public class FileManager {
             return null;
         }
         String[] fileNameParts = sourceFile.getName().split("\\.");
-        Log.d("AddNewDocumentActivity", "fileNameParts.length: " + fileNameParts.length);
-        Log.d("AddNewDocumentActivity", "getFileExtension: " + fileNameParts[fileNameParts.length - 1]);
+//        Log.d("AddNewDocumentActivity", "fileNameParts.length: " + fileNameParts.length);
+//        Log.d("AddNewDocumentActivity", "getFileExtension: " + fileNameParts[fileNameParts.length - 1]);
         return fileNameParts[fileNameParts.length - 1];
     }
 
@@ -449,7 +449,7 @@ public class FileManager {
         } catch (IOException e) {
             // Unable to create file, likely because external storage is
             // not currently mounted.
-            Log.e("ExternalStorage", "Error writing " + fileToSave, e);
+//            Log.e("ExternalStorage", "Error writing " + fileToSave, e);
             throw new IOException("Error writing " + fileToSave + ", Exception: " + e.getMessage());
         }
 
@@ -464,7 +464,7 @@ public class FileManager {
             } catch (IOException e) {
                 // Unable to create file, likely because external storage is
                 // not currently mounted.
-                Log.e("ExternalStorage", "Error writing thumbnail");
+//                Log.e("ExternalStorage", "Error writing thumbnail");
                 throw e;
             }
         }

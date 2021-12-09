@@ -88,7 +88,7 @@ public class PDFUtil {
             new GeneratePDFAsync(contentViews, filePath, listener).execute();
         } else {
             // Before Kitkat
-            Log.e(TAG, "Generate PDF is not available for your android version.");
+//            Log.e(TAG, "Generate PDF is not available for your android version.");
             listener.pdfGenerationFailure(
                     new APINotSupportedException("Generate PDF is not available for your android version."));
         }

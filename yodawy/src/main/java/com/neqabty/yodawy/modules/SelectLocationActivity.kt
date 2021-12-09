@@ -36,10 +36,10 @@ class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(latitude, longitude)
         googleMap.setOnCameraIdleListener(GoogleMap.OnCameraIdleListener {
             val midLatLng = googleMap.cameraPosition.target
-            Log.e(
-                "location",
-                midLatLng.latitude.toString() + " " + midLatLng.longitude
-            )
+//            Log.e(
+//                "location",
+//                midLatLng.latitude.toString() + " " + midLatLng.longitude
+//            )
             latitude = midLatLng.latitude
             longitude = midLatLng.longitude
         })
