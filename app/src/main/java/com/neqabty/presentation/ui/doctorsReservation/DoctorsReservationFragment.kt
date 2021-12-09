@@ -24,12 +24,13 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.common.MyWebViewClient
+import com.neqabty.presentation.util.OnBackPressedListener
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DoctorsReservationFragment : BaseFragment() {
+class DoctorsReservationFragment : BaseFragment(), OnBackPressedListener {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
@@ -95,6 +96,11 @@ class DoctorsReservationFragment : BaseFragment() {
                     val intent = Intent(Intent.ACTION_DIAL, Uri.parse(url))
                     startActivity(intent)
                     view.reload()
+                    return true
+                }
+                if (url.startsWith("https://maps.google")) {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    startActivity(intent)
                     return true
                 }
                 view.loadUrl(url)
@@ -176,6 +182,13 @@ class DoctorsReservationFragment : BaseFragment() {
         }
     }
 
+    override fun onBackPressed() {
+        if (binding.webview.canGoBack()) {
+            binding.webview.goBack()
+        } else {
+            navController().navigateUp()
+        }
+    }
     // endregion
     fun navController() = findNavController()
 }

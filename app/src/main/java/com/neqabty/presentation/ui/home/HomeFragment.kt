@@ -166,6 +166,7 @@ class HomeFragment : BaseFragment(), OnBackPressedListener, HasHomeOptionsMenu {
     }
 
     override fun onBackPressed() {
+        activity?.finishAffinity()
     }
 
     override fun showOptionsMenu() {

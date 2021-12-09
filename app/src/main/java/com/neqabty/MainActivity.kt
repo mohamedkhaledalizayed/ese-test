@@ -209,7 +209,7 @@ class MainActivity : AppCompatActivity() {
             var currentFragment =
                     (supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment).childFragmentManager.fragments[0]
             if (currentFragment is OnBackPressedListener)
-                finishAffinity()
+                currentFragment.onBackPressed()
             else
                 super.onBackPressed()
         }
