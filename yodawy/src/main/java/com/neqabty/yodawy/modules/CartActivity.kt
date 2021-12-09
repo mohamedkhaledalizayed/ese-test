@@ -10,6 +10,7 @@ import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.databinding.ActivityCartBinding
 import com.neqabty.yodawy.modules.address.presentation.view.adressscreen.AddressesActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class CartActivity : BaseActivity<ActivityCartBinding>() {
@@ -60,7 +61,7 @@ class CartActivity : BaseActivity<ActivityCartBinding>() {
             for (item in cartItems){
                 total += (item.first.regularPrice * item.second)
             }
-            binding.checkout.text = getString(R.string.go_to_checkout) + "  $total"
+            binding.checkout.text = getString(R.string.go_to_checkout) + "  ${total.roundToInt()}"
         }
     }
 
