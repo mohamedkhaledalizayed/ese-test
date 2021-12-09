@@ -22,7 +22,7 @@ import javax.inject.Named
 class NetworkModule {
     @Provides
     fun providesBaseUrl(): String {
-        return "https://front.neqabty.com/api/v1/yodawy/"
+        return if(BuildConfig.DEBUG) Constants.DEV_SERVER else Constants.PRO_SERVER
     }
 
     @Provides
