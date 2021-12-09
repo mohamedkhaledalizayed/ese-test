@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
+import com.neqabty.yodawy.core.data.Constants.delivery_sentence
 import com.neqabty.yodawy.core.data.Constants.plan
 import com.neqabty.yodawy.core.data.Constants.selectedAddress
 import com.neqabty.yodawy.core.ui.BaseActivity
@@ -43,7 +44,13 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
 
             }
         }
-        binding.tvDelivery.text = Constants.delivery_sentence
+        if (delivery_sentence.isNotBlank()){
+            binding.tvDelivery.text = delivery_sentence
+        }else{
+            binding.deliveryTimeContainer.visibility = View.GONE
+            binding.deliveryTime.visibility = View.GONE
+        }
+
         binding.addressType.text = selectedAddress.addressName
         binding.addressDetails.text = "شارع ${selectedAddress.address}, مبنى رقم ${selectedAddress.buildingNumber}, رقم الطابق ${selectedAddress.floor}, شقة رقم ${selectedAddress.apt}"
         placeOrderViewModel.placeOrderResult.observe(this){

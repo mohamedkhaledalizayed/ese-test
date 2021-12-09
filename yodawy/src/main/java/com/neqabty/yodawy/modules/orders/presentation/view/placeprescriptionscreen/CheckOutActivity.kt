@@ -50,7 +50,12 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        binding.tvDelivery.text = Constants.delivery_sentence
+        if (Constants.delivery_sentence.isNotBlank()){
+            binding.tvDelivery.text = Constants.delivery_sentence
+        }else{
+            binding.deliveryTimeContainer.visibility = View.GONE
+            binding.deliveryTime.visibility = View.GONE
+        }
         placePrescriptionViewModel.placeImagesResult.observe(this){
             it?.let { resource ->
                 when (resource.status) {
