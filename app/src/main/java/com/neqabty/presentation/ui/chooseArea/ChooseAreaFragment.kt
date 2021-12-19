@@ -127,12 +127,13 @@ class ChooseAreaFragment : BaseFragment() {
     }
 
     fun renderAreas() {
-        var filteredAreasList: List<MedicalDirectoryLookupsUI.Area>? = mutableListOf()
+        var filteredAreasList: MutableList<MedicalDirectoryLookupsUI.Area>? = mutableListOf()
 
         filteredAreasList = areasResultList?.filter {
             it.govId == governID
-        }
+        } as MutableList<MedicalDirectoryLookupsUI.Area>?
 
+        filteredAreasList?.add(0, MedicalDirectoryLookupsUI.Area(-1, getString(R.string.all_areas), -1))
         binding.spArea.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, filteredAreasList!!)
         binding.spArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}

@@ -153,6 +153,7 @@
     <string name="favorites">المفضلة</string>
     <string name="governorate">المحافظة</string>
     <string name="area">المنطقة</string>
+    <string name="all_areas">كل المناطق</string>
     <string name="choose_area">برجاء اختيار مكان مقدم الخدمة</string>
     <string name="subscription_rules">الدليل الطبي للمشروع</string>
     <string name="service">الخدمات</string>
@@ -366,7 +367,7 @@
     <string name="medical_subscription_suspended">هذه العضوية موقوفة برجاء الرجوع إلى النقابة</string>
     <string name="medical_subscription_renew_syndicate_membership">لم يجدد اشتراك النقابة، يجب تجديد الاشتراك عن العام الحالي حتى تتمكن من تجديد اشتراك الرعاية الصحية</string>
     <string name="medical_subscription_renew_incomplete_data">بيانات المهندس غير مكتمله برجاء الرجوع الي النقابة او الاتصال علي مركز خدمة العملاء</string>
-    <string name="medical_subscription_subscribed">لقد تم السداد بالفعل</string>
+    <string name="medical_subscription_subscribed">لقد تم السداد بالفعل لسنة </string>
     <string name="medical_subscription_renew_add_follower">يرجى اضافة التابعين للإستمرار</string>
     <string name="already_paid">تم تأكيد إشتراك هذا المشروع من قبل</string>
     <string name="retiree">حالة المهندس معاش وليس له اشتراك سنوي</string>

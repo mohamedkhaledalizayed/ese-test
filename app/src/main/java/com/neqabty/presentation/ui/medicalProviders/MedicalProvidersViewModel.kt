@@ -60,7 +60,7 @@ class MedicalProvidersViewModel @Inject constructor(private val getAllSpecializa
     ) {
         viewState.value?.providers?.let {
             onProvidersReceived(it)
-        } ?: addDisposable(getProvidersByType.getProviders(mobileNumber, providerTypeId, govId, areaId, providerName, specializationId)
+        } ?: addDisposable(getProvidersByType.getProviders(mobileNumber, providerTypeId, govId, if(areaId.equals("-1")) "" else areaId, providerName, specializationId)
                 .flatMap {
                     it.let {
                         medicalDirectoryProviderEntityUIMapper.observable(it)
