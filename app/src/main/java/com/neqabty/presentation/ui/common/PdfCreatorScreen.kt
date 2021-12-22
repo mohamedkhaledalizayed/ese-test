@@ -295,7 +295,9 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
                 LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)
         ).setPadding(20, 5, 20, 5)
         horizontalFollowers.addView(followers)
-        pdfBody.addView(horizontalFollowers)
+        if (data.followers!!.isNotEmpty()){
+            pdfBody.addView(horizontalFollowers)
+        }
 
 
         val tableHeaderTitles = arrayOf("رقم المنظومة العلاجية", "درجة القرابة", "الاسم")
@@ -339,7 +341,9 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
 
             tableView.addRow(tableRowView)
         }
-        pdfBody.addView(tableView)
+        if (data.followers!!.isNotEmpty()){
+            pdfBody.addView(tableView)
+        }
 
         val imageView = PDFImageView(applicationContext)
         val imageLayoutParam = LinearLayout.LayoutParams(150, 100, 0F)
