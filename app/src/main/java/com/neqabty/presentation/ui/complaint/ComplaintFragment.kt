@@ -91,6 +91,8 @@ class ComplaintFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        showBannerAd(Constants.AD_COMPLAINTS, binding.ivBanner)
+
         complaintViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
