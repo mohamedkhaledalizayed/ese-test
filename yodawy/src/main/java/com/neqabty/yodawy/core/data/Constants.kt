@@ -21,7 +21,7 @@ object Constants {
     const val LONGITUDE = "longitude"
 
 
-    var FIXED_TOKEN = "Basic 3f023e9dbcf1c467f19e8d8b4b546c02264bd207803927971e3b0b36e705b3d0"
+    var FIXED_TOKEN = "Basic 0a28380667a905d52b63ee9e17882b8b9c275b80a1ac5a668688b1ce041e55ba"
     var YODAWY_URL = ""
     var plan = ""
     var total_amount = false
