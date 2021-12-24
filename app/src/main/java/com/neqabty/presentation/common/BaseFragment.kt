@@ -174,7 +174,7 @@ open class BaseFragment : Fragment() {
     }
 
     private fun loadBannerAd(sectionID: Int, imageView: ImageView) {
-        val adsList = Constants.adsList.value?.filter { it.id == sectionID && it.type.equals("Banner", true) }
+        val adsList = Constants.adsList.value?.filter { it.id == sectionID && it.type.contains("Banner", true) }
         if (adsList?.isNotEmpty() == true) {
             FragmentBindingAdapters(this).bindImageURL(imageView, adsList[0].imgURL)
             if (adsList[0].url.isNotBlank()) {
