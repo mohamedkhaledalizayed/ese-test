@@ -81,7 +81,7 @@ class InquiryDetailsFragment : BaseFragment() {
         inquiryDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                inquiryDetailsViewModel.paymentInquiry(sharedPref.mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
+                paymentInquiry()
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
@@ -109,6 +109,23 @@ class InquiryDetailsFragment : BaseFragment() {
         }
 
         binding.rvDetails.adapter = adapter
+
+        rb_home.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                edAddress.visibility = View.VISIBLE
+                edMobile.visibility = View.VISIBLE
+            }
+        }
+        rb_mainSyndicate.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                edAddress.visibility = View.GONE
+            }
+        }
+        rb_syndicate.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                edAddress.visibility = View.GONE
+            }
+        }
 
         rb_card.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
@@ -140,9 +157,14 @@ class InquiryDetailsFragment : BaseFragment() {
         }
 
         bPay.setOnClickListener {
+            if ((rb_home.isChecked && edAddress.text.toString().isBlank())) {
+                showAlert(getString(R.string.invalid_data))
+                return@setOnClickListener
+            }else if (!isDataValid(edMobile.text.toString()))
+                return@setOnClickListener
             llSuperProgressbar.visibility = View.VISIBLE
 //            createPayment()
-            inquiryDetailsViewModel.paymentInquiry(sharedPref.mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString())
+            paymentInquiry()
         }
     }
 
@@ -331,6 +353,18 @@ class InquiryDetailsFragment : BaseFragment() {
         }
     }
 
+    private fun isDataValid(mobile: String): Boolean {
+        return if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
+            true
+        else {
+            showAlert(getString(R.string.invalid_mobile))
+            false
+        }
+    }
+
+    fun paymentInquiry(){
+        inquiryDetailsViewModel.paymentInquiry(sharedPref.mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString(), if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE, edAddress.text.toString(), edMobile.text.toString())
+    }
 
     //endregion
 

@@ -149,6 +149,9 @@ interface WebService {
             @Query("serviceID") serviceID: Int,
             @Query("requestID") requestID: String,
             @Query("amount") amount: String,
+            @Query("deliveryLocation") locationType: Int,
+            @Query("deliveryAddress") address: String,
+            @Query("deliveryPhone") mobile: String,
             @Query("server") server: String = ""
     ): Observable<MedicalRenewalPaymentData>
 

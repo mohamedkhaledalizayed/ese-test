@@ -177,8 +177,8 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getAllServiceTypes()
     }
 
-    override fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String): Observable<MedicalRenewalPaymentEntity> {
-        return remoteDataStore.inquirePayment(isInquire, mobileNumber, userNumber, serviceID, requestID, amount)
+    override fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
+        return remoteDataStore.inquirePayment(isInquire, mobileNumber, userNumber, serviceID, requestID, amount, locationType, address, mobile)
     }
 
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {

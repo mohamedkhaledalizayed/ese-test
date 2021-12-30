@@ -485,7 +485,7 @@ class MainActivity : AppCompatActivity() {
                 navController().navigate(R.id.signupFragment, bundle)
             }
         })
-        userServicesList.add(userServiceTrackShipment)
+//        userServicesList.add(userServiceTrackShipment)
 
         val userServiceChangeUserMobile = NavigationMenuItem(R.drawable.ic_menu_about_app, R.string.change_user_mobile_title, {
             if (sharedPref.isRegistered)
