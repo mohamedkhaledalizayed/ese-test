@@ -85,14 +85,14 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
             }
         }
 
-//        if (imageList.isNotEmpty()){
-//            binding.totalValue.text = getString(R.string.to_be_confirmed)
-//        }else{
-//            for (item in cartItems){
-//                total += (item.first.regularPrice * item.second)
-//            }
-//            binding.totalValue.text = "$total"
-//        }
+        if (imageList.isNotEmpty()){
+            binding.totalValue.text = getString(R.string.to_be_confirmed)
+        }else{
+            for (item in cartItems){
+                total += (item.first.regularPrice * item.second)
+            }
+            binding.totalValue.text = "$total جنيه"
+        }
 
     }
     @NonNull

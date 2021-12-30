@@ -216,7 +216,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/delivery_fees"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="6dp"
                         android:text="@string/to_be_confirmed"
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/_12sdp" />

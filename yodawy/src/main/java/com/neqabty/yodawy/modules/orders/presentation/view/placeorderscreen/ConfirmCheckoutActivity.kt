@@ -95,6 +95,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
             total += (item.first.regularPrice * item.second)
         }
         binding.totalPayment.text = "$total جنيه"
+        binding.totalValue.text = "$total جنيه"
     }
 
     fun confirmOrder(view: View) {

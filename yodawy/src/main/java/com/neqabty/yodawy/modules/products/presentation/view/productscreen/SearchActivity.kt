@@ -92,7 +92,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                         binding.progressActivity.showLoading()
                     }
                     Status.SUCCESS -> {
-                        if (resource.data!!.isEmpty()){
+                        if (resource.data!!.isEmpty() && mAdapter.itemCount == 0){
                             binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "فارغ", "لا يوجد نتائج البحث")
                         }else{
                             binding.progressActivity.showContent()
