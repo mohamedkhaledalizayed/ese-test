@@ -112,8 +112,8 @@ class HomeFragment : BaseFragment(), OnBackPressedListener, HasHomeOptionsMenu {
         (((activity as AppCompatActivity).drawer_layout) as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
 
         val adapter = CustomFragmentPagerAdapter(childFragmentManager)
-        adapter.addFragment(WheelMedicalFragment())
         adapter.addFragment(WheelNewsFragment())
+        adapter.addFragment(WheelMedicalFragment())
         adapter.addFragment(WheelTripsFragment())
         adapter.addFragment(WheelEmploymentFragment())
         adapter.addFragment(WheelSyndicateServicesFragment())
@@ -126,11 +126,11 @@ class HomeFragment : BaseFragment(), OnBackPressedListener, HasHomeOptionsMenu {
         binding.viewpager.setSwipePagingEnabled(false)
         binding.viewpager.offscreenPageLimit = 8
 
-        val sectionsList = mutableListOf<String>(getString(R.string.wheel_medical),getString(R.string.wheel_news), getString(R.string.wheel_trips),
+        val sectionsList = mutableListOf<String>(getString(R.string.wheel_news),getString(R.string.wheel_medical), getString(R.string.wheel_trips),
                 getString(R.string.wheel_employment), getString(R.string.wheel_syndicate_services), getString(R.string.wheel_training), getString(R.string.wheel_retirees),
                 getString(R.string.wheel_customer_service), getString(R.string.wheel_complaints), getString(R.string.wheel_payment))
 
-        val iconsList = mutableListOf<Int>( R.drawable.ic_wheel_medical_approval,R.drawable.ic_wheel_news, R.drawable.ic_wheel_trip, R.drawable.ic_wheel_employment,
+        val iconsList = mutableListOf<Int>( R.drawable.ic_wheel_news,R.drawable.ic_wheel_medical_approval, R.drawable.ic_wheel_trip, R.drawable.ic_wheel_employment,
                 R.drawable.ic_wheel_syndicate_services, R.drawable.ic_wheel_training, R.drawable.ic_wheel_retirees,
                 R.drawable.ic_wheel_customer_service, R.drawable.ic_wheel_complaints, R.drawable.ic_wheel_payments)
 
