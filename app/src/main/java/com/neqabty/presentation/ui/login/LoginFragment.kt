@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.hbb20.CountryCodePicker
 import com.neqabty.R
 import com.neqabty.databinding.LoginFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -93,6 +94,30 @@ class LoginFragment : BaseFragment(), HasHomeOptionsMenu {
             login()
         }
         binding.ccp.registerCarrierNumberEditText(binding.edMobile)
+        binding.ccp.setCustomDialogTextProvider(object :
+            CountryCodePicker.CustomDialogTextProvider {
+            override fun getCCPDialogTitle(
+                language: CountryCodePicker.Language?,
+                defaultTitle: String?
+            ): String {
+                return "Country / Region"
+            }
+
+            override fun getCCPDialogSearchHintText(
+                language: CountryCodePicker.Language?,
+                defaultSearchHintText: String?
+            ): String {
+                return "Country / Region"
+            }
+
+            override fun getCCPDialogNoResultACK(
+                language: CountryCodePicker.Language?,
+                defaultNoResultACK: String?
+            ): String {
+                return "No Country / Region"
+            }
+
+        })
     }
 
     fun login() {

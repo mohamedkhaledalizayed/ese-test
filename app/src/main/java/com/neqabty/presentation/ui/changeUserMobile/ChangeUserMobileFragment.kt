@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.hbb20.CountryCodePicker
 import com.neqabty.R
 import com.neqabty.databinding.ChangeUserMobileFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -63,6 +64,31 @@ class ChangeUserMobileFragment : BaseFragment() {
     fun initializeViews() {
         binding.edCurrentMobileNumber.setText(sharedPref.mobile)
         binding.ccp.registerCarrierNumberEditText(binding.edNewMobileNumber)
+
+        binding.ccp.setCustomDialogTextProvider(object :
+            CountryCodePicker.CustomDialogTextProvider {
+            override fun getCCPDialogTitle(
+                language: CountryCodePicker.Language?,
+                defaultTitle: String?
+            ): String {
+                return "Country / Region"
+            }
+
+            override fun getCCPDialogSearchHintText(
+                language: CountryCodePicker.Language?,
+                defaultSearchHintText: String?
+            ): String {
+                return "Country / Region"
+            }
+
+            override fun getCCPDialogNoResultACK(
+                language: CountryCodePicker.Language?,
+                defaultNoResultACK: String?
+            ): String {
+                return "No Country / Region"
+            }
+
+        })
 
         binding.bSend.setOnClickListener {
             if (binding.edNationalNumber.text.toString().length < 4)
