@@ -49,7 +49,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
         viewHolder.binding.status.text = if(items[position].first.isLimitedAvailability) "Low Stock" else ""
         viewHolder.binding.medicationTitle.text = items[position].first.name
         viewHolder.binding.quantity.text = "${items[position].second}"
-        viewHolder.binding.medicationPrice.text = "${items[position].first.regularPrice * items[position].second}"
+        viewHolder.binding.medicationPrice.text = "${items[position].first.regularPrice}"
 
         Picasso.get()
             .load(items[position].first.image).placeholder(R.drawable.drug_placeholder)
@@ -68,7 +68,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
             val index = cartItems.addOrIncrement(item)
             items[position] = items[position].copy(second = items[index].second + 1)
             viewHolder.binding.quantity.text = "${items[index].second}"
-            viewHolder.binding.medicationPrice.text = "${items[index].first.regularPrice * items[index].second}"
+            viewHolder.binding.medicationPrice.text = "${items[index].first.regularPrice}"
             onItemClickListener?.updateTotal()
         }
 
@@ -79,7 +79,7 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
                 cartItems.removeOrDecrement(item)
                 items[position] = items[position].copy(second = items[position].second - 1)
                 viewHolder.binding.quantity.text = "${items[position].second}"
-                viewHolder.binding.medicationPrice.text = "${items[position].first.regularPrice * items[position].second}"
+                viewHolder.binding.medicationPrice.text = "${items[position].first.regularPrice}"
             }else{
                 //remove this item
                 cartItems.removeAt(position)
