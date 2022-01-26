@@ -15,8 +15,8 @@ apply plugin: 'kotlin-android-extensions'
 
 
 def versionTemplate = "{labelx}.{labely}.{labelz}"
-def serverBuild = System.getenv('NEQABTY_BUILDNUMBER')
-def secret = System.getenv('NEQABTY_SECRET')
+def serverBuild = System.getenv('NEQABTY_BUILDNUMBER') ?: "147"
+def secret = System.getenv('NEQABTY_SECRET') ?: "123@pass"
 
 
 def getLocalSigningConfig(String secret) {
@@ -49,7 +49,7 @@ android {
         config {
             keyAlias 'neqabty'
             keyPassword secret
-            storeFile file('D:/Work/Mobile/Neqabty/NeQabty/keyStore.jks')
+            storeFile file('/Users/islamlotfy/StudioProjects/NeQabty/keyStore.jks')
             storePassword secret
         }
     }
