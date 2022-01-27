@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SuperNeqabtyMainViewModel @Inject constructor(
+class SuperNeqabtySplashViewModel @Inject constructor(
     private val getAllAdsUseCase: GetAllAdsUseCase,
     private val getSyndicateAds: GetSyndicateAds
 ) : ViewModel() {
