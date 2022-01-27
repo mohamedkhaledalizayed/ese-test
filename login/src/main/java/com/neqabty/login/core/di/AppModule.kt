@@ -1,4 +1,4 @@
-package com.example.courses.core.di
+package com.neqabty.login.core.di
 
 import dagger.Module
 import dagger.Provides

@@ -1,33 +1,54 @@
-package com.example.courses.core.di
+package com.neqabty.login.core.di
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     @Provides
+    @Named("login")
     fun providesBaseUrl(): String {
-        return "https://5e510330f2c0d300147c034c.mockapi.io/"
+        return "https://neqabty.et3.co/"
     }
 
     @Provides
+    @Named("login")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor
     }
+    private val interceptor = Interceptor {
+        var original = it.request()
+        val originalHttpUrl = original.url
+        val url = originalHttpUrl
+            .newBuilder()
+            .build()
+        val requestBuilder = original.newBuilder().url(url)
+        requestBuilder.addHeader("Content-Type", "application/json")
+        requestBuilder.addHeader("Accept","application/json")
+        original = requestBuilder.build()
 
+        it.proceed(original)
+
+    }
     @Provides
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    @Named("login")
+    fun provideOkHttpClient(
+        @Named("login")
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(40, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
@@ -35,18 +56,24 @@ class NetworkModule {
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.build()
+        okHttpClient.addInterceptor(interceptor)
         return okHttpClient.build()
     }
 
     @Provides
+    @Named("login")
     fun provideConverterFactory(): Converter.Factory {
         return GsonConverterFactory.create()
     }
 
     @Provides
+    @Named("login")
     fun provideRetrofitClient(
+        @Named("login")
         okHttpClient: OkHttpClient,
+        @Named("login")
         baseUrl: String,
+        @Named("login")
         converterFactory: Converter.Factory
     ): Retrofit {
         return Retrofit.Builder()

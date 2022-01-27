@@ -1,25 +1,27 @@
-package com.example.courses.modules.home.di
+package com.neqabty.login.modules.home.di
 
-import androidx.lifecycle.ViewModel
-import com.example.courses.modules.home.data.api.CourseApi
-import com.example.courses.modules.home.data.repository.CourseRepositoryImpl
-import com.example.courses.modules.home.data.source.CourseDS
-import com.example.courses.modules.home.domain.repository.CoursesRepository
+import com.neqabty.login.modules.home.data.api.SyndicateApi
+import com.neqabty.login.modules.home.data.repository.SyndicateRepositoryImpl
+import com.neqabty.login.modules.home.domain.repository.SyndicateRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.components.ViewModelComponent
 import retrofit2.Retrofit
+import javax.inject.Named
 
 @Module
 @InstallIn(ViewModelComponent::class)
 abstract class HomeModule {
     companion object {
         @Provides
-        fun providesCourseApiService(retrofit: Retrofit) = retrofit.create(CourseApi::class.java)
+        fun providesSyndicateApiService(
+            @Named("login")
+            retrofit: Retrofit
+        ) = retrofit.create(SyndicateApi::class.java)
     }
+
     @Binds
-    internal abstract fun bindsCoursesRepository(courseRepositoryImpl: CourseRepositoryImpl): CoursesRepository
+    internal abstract fun bindsCoursesRepository(syndicateRepositoryImpl: SyndicateRepositoryImpl): SyndicateRepository
 }

@@ -109,5 +109,5 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 
     implementation project(':ads')
-
+    implementation project(':login')
 }

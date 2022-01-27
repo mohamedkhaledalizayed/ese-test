@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.core.utils
+package com.neqabty.login.core.utils
 
 enum class Status {
     SUCCESS,

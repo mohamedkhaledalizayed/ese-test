@@ -1,8 +1,8 @@
-package com.neqabty.yodawy.core.utils
+package com.neqabty.login.core.utils
 
-import com.neqabty.yodawy.core.utils.Status.ERROR
-import com.neqabty.yodawy.core.utils.Status.LOADING
-import com.neqabty.yodawy.core.utils.Status.SUCCESS
+import com.neqabty.login.core.utils.Status.ERROR
+import com.neqabty.login.core.utils.Status.LOADING
+import com.neqabty.login.core.utils.Status.SUCCESS
 
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
