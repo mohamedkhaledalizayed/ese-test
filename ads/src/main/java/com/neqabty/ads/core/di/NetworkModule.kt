@@ -56,6 +56,7 @@ class NetworkModule {
         val requestBuilder = original.newBuilder().url(url)
         requestBuilder.addHeader("Content-Type", "application/json")
         requestBuilder.addHeader("Accept", "application/json")
+        original = requestBuilder.build()
         it.proceed(original)
     }
 

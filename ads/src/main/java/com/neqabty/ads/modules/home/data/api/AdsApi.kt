@@ -8,6 +8,6 @@ interface AdsApi {
     @GET("api/ads")
     suspend fun getAllAds(): AdsResponse
 
-    @GET("api/ads/?format=json")
+    @GET("api/ads/")
     suspend fun getSyndicateAd(@Query("filter{entity}") syndicateId: Int): AdsResponse
 }
