@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.neqabty.login.R
+import com.neqabty.news.modules.home.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -22,9 +23,9 @@ class LoginActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val spin: Spinner = findViewById<View>(R.id.all_syndicates) as Spinner
         spin.onItemSelectedListener = this
 
-        syndicatesViewModel.syndicates.observe(this){
-            Toast.makeText(applicationContext,it[0].name,Toast.LENGTH_SHORT).show()
-            if (it.isNotEmpty()){
+        syndicatesViewModel.syndicates.observe(this) {
+            Toast.makeText(applicationContext, it[0].name, Toast.LENGTH_SHORT).show()
+            if (it.isNotEmpty()) {
                 spin.visibility = View.VISIBLE
                 spin.adapter = CustomAdapter(this, it)
             }
@@ -32,9 +33,13 @@ class LoginActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     fun onCountryPickerClick(view: View) {
-        startActivity(Intent(this,LoginActivity::class.java))
+        startActivity(Intent(this, HomeActivity::class.java))
     }
-    fun send(view: View) {syndicatesViewModel.getSyndicates()}
+
+    fun send(view: View) {
+        syndicatesViewModel.getSyndicates()
+    }
+
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
     }
