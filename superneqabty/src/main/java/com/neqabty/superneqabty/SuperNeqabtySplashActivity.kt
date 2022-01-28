@@ -6,7 +6,7 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.neqabty.news.modules.home.presentation.view.homescreen.HomeActivity
+import com.neqabty.login.modules.home.presentation.view.homescreen.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +21,7 @@ class SuperNeqabtySplashActivity : AppCompatActivity() {
             Toast.makeText(applicationContext,it[0].title,Toast.LENGTH_SHORT).show()
         }
         Handler().postDelayed(Runnable {
-            val mainIntent = Intent(this@SuperNeqabtySplashActivity, HomeActivity::class.java)
+            val mainIntent = Intent(this@SuperNeqabtySplashActivity, LoginActivity::class.java)
             startActivity(mainIntent)
             finish()
         }, SPLASH_DISPLAY_LENGTH)

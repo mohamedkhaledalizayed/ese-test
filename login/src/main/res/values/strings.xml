@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Courses</string>
+    <string name="welcome_to_neqabty">مرحبا بكم في تطبيق نقابة المهندسين المصرية - نقابتي</string>
+    <string name="experimental_version">(نسخة تجريبية)</string>
+    <string name="login_visitor_enter_mobile">برجاء ادخال رقم الهاتف المحمول لانشاء حسابك الخاص</string>
+    <string name="send">إرسال</string>
+</resources>
