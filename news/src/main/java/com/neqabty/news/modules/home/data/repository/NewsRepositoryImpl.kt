@@ -8,10 +8,16 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class NewsRepositoryImpl @Inject constructor(private val newsDS: NewsDS): NewsRepository {
+class NewsRepositoryImpl @Inject constructor(private val newsDS: NewsDS) : NewsRepository {
     override fun getNews(): Flow<List<NewsEntity>> {
         return flow {
             emit(newsDS.getNews().map { it.toNewsEntity() })
+        }
+    }
+
+    override fun getSyndicateNews(syndicateId: Int): Flow<List<NewsEntity>> {
+        return flow {
+            emit(newsDS.getSyndicateNews(syndicateId).map { it.toNewsEntity() })
         }
     }
 }

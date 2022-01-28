@@ -13,9 +13,10 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        homeViewModel.getNews()
+        homeViewModel.getSyndicateNews(5)
         homeViewModel.news.observe(this){
             Toast.makeText(applicationContext,it[0].source,Toast.LENGTH_SHORT).show()
         }
+
     }
 }
