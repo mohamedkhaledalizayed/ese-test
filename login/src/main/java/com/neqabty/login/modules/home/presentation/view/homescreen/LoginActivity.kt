@@ -1,5 +1,6 @@
 package com.neqabty.login.modules.home.presentation.view.homescreen
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -30,7 +31,9 @@ class LoginActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    fun onCountryPickerClick(view: View) {}
+    fun onCountryPickerClick(view: View) {
+        startActivity(Intent(this,LoginActivity::class.java))
+    }
     fun send(view: View) {syndicatesViewModel.getSyndicates()}
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
