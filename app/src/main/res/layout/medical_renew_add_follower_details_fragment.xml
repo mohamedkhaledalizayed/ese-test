@@ -34,27 +34,127 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvName"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:text="@string/fullName"
-                    android:textColor="@color/text_dark"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold" />
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/edName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_small"
-                    android:gravity="center"
-                    android:digits="@string/arabic_letters"
-                    android:text="@{followerItem.name}"
-                    android:textColor="@color/text_dark"
-                    android:textDirection="anyRtl"
-                    android:textSize="@dimen/text_size_medium" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/guideline"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
+
+                    <TextView
+                        android:id="@+id/tvName1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/firstName"
+                        android:textColor="@color/text_dark"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/guideline"/>
+
+                    <TextView
+                        android:id="@+id/tvName2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/secondName"
+                        android:textColor="@color/text_dark"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/guideline"/>
+
+                    <TextView
+                        android:id="@+id/tvName3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/thirdName"
+                        android:textColor="@color/text_dark"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/guideline"
+                        app:layout_constraintTop_toBottomOf="@id/edName1"/>
+
+                    <TextView
+                        android:id="@+id/tvName4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/fourthName"
+                        android:textColor="@color/text_dark"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/guideline"
+                        app:layout_constraintTop_toBottomOf="@id/edName1"/>
+
+                    <EditText
+                        android:id="@+id/edName1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_small"
+                        android:digits="@string/arabic_letters"
+                        android:gravity="center"
+                        android:text="@{followerItem.name1}"
+                        android:textColor="@color/text_dark"
+                        android:textDirection="anyRtl"
+                        android:textSize="@dimen/text_size_medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/guideline"
+                        app:layout_constraintTop_toBottomOf="@id/tvName1"/>
+
+                    <EditText
+                        android:id="@+id/edName2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_small"
+                        android:digits="@string/arabic_letters"
+                        android:gravity="center"
+                        android:text="@{followerItem.name2}"
+                        android:textColor="@color/text_dark"
+                        android:textDirection="anyRtl"
+                        android:textSize="@dimen/text_size_medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/edName1"
+                        app:layout_constraintTop_toBottomOf="@id/tvName1"/>
+
+                    <EditText
+                        android:id="@+id/edName3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_small"
+                        android:digits="@string/arabic_letters"
+                        android:gravity="center"
+                        android:text="@{followerItem.name3}"
+                        android:textColor="@color/text_dark"
+                        android:textDirection="anyRtl"
+                        android:textSize="@dimen/text_size_medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/guideline"
+                        app:layout_constraintTop_toBottomOf="@id/tvName3"/>
+
+                    <EditText
+                        android:id="@+id/edName4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_small"
+                        android:digits="@string/arabic_letters"
+                        android:gravity="center"
+                        android:text="@{followerItem.name4}"
+                        android:textColor="@color/text_dark"
+                        android:textDirection="anyRtl"
+                        android:textSize="@dimen/text_size_medium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/edName1"
+                        app:layout_constraintTop_toBottomOf="@id/tvName3"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/tvNationalID"

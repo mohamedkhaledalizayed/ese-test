@@ -48,6 +48,14 @@ data class MedicalRenewalData(
     data class FollowerItem(
             @field:SerializedName("BENNAME")
             var name: String? = "",
+            @field:SerializedName("BENNAME1")
+            var name1: String? = "",
+            @field:SerializedName("BENNAME2")
+            var name2: String? = "",
+            @field:SerializedName("BENNAME3")
+            var name3: String? = "",
+            @field:SerializedName("BENNAME4")
+            var name4: String? = "",
             @field:SerializedName("BenID")
             var id: Int? = 0,
             @field:SerializedName("ISDELETED")

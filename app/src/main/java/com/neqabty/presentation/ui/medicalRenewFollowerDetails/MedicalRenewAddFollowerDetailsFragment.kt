@@ -322,7 +322,7 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment() {
         } else if (mobile.trim().length >= 3 && !mobile.substring(0, 3).equals("012") && !mobile.substring(0, 3).equals("010") && !mobile.substring(0, 3).equals("011") && !mobile.substring(0, 3).equals("015")) {
                 showAlert(getString(R.string.invalid_mobile))
                 false
-        } else if (followerItem.name.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || photosList.size == 0 || (followerItem.pic.isNullOrBlank())) {
+        } else if (followerItem.name.isNullOrBlank() || followerItem.name1.isNullOrBlank() || followerItem.name2.isNullOrBlank() || followerItem.name3.isNullOrBlank() || followerItem.name4.isNullOrBlank() || followerItem.birthDate.isNullOrBlank() || photosList.size == 0 || (followerItem.pic.isNullOrBlank())) {
             showAlert(getString(R.string.invalid_data))
             false
         } else
@@ -454,7 +454,11 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment() {
         val intent = Intent()
         val bundle = Bundle()
 //        followerItem.isNew = true
-        followerItem.name = binding.edName.text.toString()
+        followerItem.name = binding.edName1.text.toString() + " " + binding.edName2.text.toString() + " " + binding.edName3.text.toString() + " " + binding.edName4.text.toString()
+        followerItem.name1 = binding.edName1.text.toString()
+        followerItem.name2 = binding.edName2.text.toString()
+        followerItem.name3 = binding.edName3.text.toString()
+        followerItem.name4 = binding.edName4.text.toString()
         followerItem.birthDate = if (binding.edBirthDate.text.toString().length == 0 || binding.edBirthDate.text.toString().contains("00:00")) binding.edBirthDate.text.toString() else binding.edBirthDate.text.toString() + "T00:00:00"
         followerItem.gender = when (selectedGender) {
             genderList!![0] -> "M"

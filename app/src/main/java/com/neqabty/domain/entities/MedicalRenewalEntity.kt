@@ -26,6 +26,10 @@ data class MedicalRenewalEntity(
 
     data class FollowerItem(
             var name: String? = "",
+            var name1: String? = "",
+            var name2: String? = "",
+            var name3: String? = "",
+            var name4: String? = "",
             var id: Int? = 0,
             var isDeleted: Boolean? = false,
             var modificationReason: String? = "",

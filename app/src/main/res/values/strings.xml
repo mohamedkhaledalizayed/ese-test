@@ -26,6 +26,10 @@
     <string name="register"><u>لا يوجد حساب  تسجيل</u></string>
     <string name="skip">دخول كزائر</string>
     <string name="fullName">الاسم بالكامل</string>
+    <string name="firstName">الاسم الأول</string>
+    <string name="secondName">الاسم الثاني</string>
+    <string name="thirdName">الاسم الثالث</string>
+    <string name="fourthName">الاسم الرابع</string>
     <string name="email">البريد الالكتروني</string>
     <string name="current_password">كلمة المرور الحالية</string>
     <string name="new_password">كلمة المرور الجديدة</string>
@@ -533,7 +537,7 @@
 
     <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
     <string name="app_version">Version %s</string>
-    <string name="body_content">السادة / جهات العلاج المتعاقدة مع مشروع العلاج لنقابة المهندسين يرجى العلم بتجديد اشتراك %s للمهندس المدون بياناته و تابعيه لذا يرجى تقديم الخدمة الطبية, ويعد هذا الايصال بمثابه كارنيه المشروع لعام ٢٠٢٢.</string>
+    <string name="body_content">السادة / جهات العلاج المتعاقدة مع مشروع العلاج لنقابة المهندسين يرجى العلم بتجديد اشتراك %s للمهندس المدون بياناته و تابعيه لذا يرجى تقديم الخدمة الطبية, ويعد هذا الايصال بمثابة كارنيه المشروع لعام %s.</string>
     <string name="titleContent">اشتراك الرعاية الصحية</string>
     <string name="upload_pdf">تحميل اخطار الدفع</string>
     <string name="medical_letter_creation_type_syndicate">(النقابة)</string>

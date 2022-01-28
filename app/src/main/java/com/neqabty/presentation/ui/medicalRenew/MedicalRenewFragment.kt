@@ -286,13 +286,7 @@ class MedicalRenewFragment : BaseFragment() {
     }
 
     private fun isEngineerDataValid(): Boolean {
-        return if (medicalRenewalUI.contact?.syndicateName.isNullOrEmpty()) {//medicalRenewalUI.contact?.pic.isNullOrEmpty() ||
-            showAlert(getString(R.string.medical_subscription_renew_incomplete_data)) {
-                navController().popBackStack()
-                navController().navigate(R.id.homeFragment)
-            }
-            false
-        } else if (!medicalRenewalUI.contact?.mobile.isNullOrEmpty() && !medicalRenewalUI.contact?.address.isNullOrEmpty() && !medicalRenewalUI.contact?.name.isNullOrEmpty() && !medicalRenewalUI.contact?.nationalId.isNullOrEmpty() && !medicalRenewalUI.contact?.birthDate.isNullOrEmpty())
+        return if (!medicalRenewalUI.contact?.mobile.isNullOrEmpty() && !medicalRenewalUI.contact?.address.isNullOrEmpty() && !medicalRenewalUI.contact?.name.isNullOrEmpty() && !medicalRenewalUI.contact?.nationalId.isNullOrEmpty() && !medicalRenewalUI.contact?.birthDate.isNullOrEmpty())
             true
         else {
             Toast.makeText(requireContext(), getString(R.string.medical_subscription_renew_incomplete_data), Toast.LENGTH_SHORT).show()

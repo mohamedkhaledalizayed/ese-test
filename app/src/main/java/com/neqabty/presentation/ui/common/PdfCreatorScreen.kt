@@ -117,7 +117,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         val horizontalBody = PDFHorizontalView(applicationContext)
         val body = PDFTextView(applicationContext, 14f, false)
         body.view.textAlignment = View.TEXT_ALIGNMENT_CENTER
-        val bodyContent = SpannableString(getString(R.string.body_content, data.currentMedYear))
+        val bodyContent = SpannableString(getString(R.string.body_content, data.currentMedYear, data.currentMedYear))
         bodyContent.setSpan(
                 ForegroundColorSpan(Color.DKGRAY),
                 0,
