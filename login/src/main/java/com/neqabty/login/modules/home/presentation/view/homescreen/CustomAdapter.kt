@@ -12,7 +12,7 @@ import com.neqabty.login.modules.home.domain.entity.SyndicateEntity
 import com.squareup.picasso.Picasso
 
 
-class CustomAdapter(var context: Context, var syndicatesList: List<SyndicateEntity>) :
+class CustomAdapter(var context: Context, var syndicatesList: MutableList<SyndicateEntity>) :
     BaseAdapter() {
     private var inflter: LayoutInflater? =null
 

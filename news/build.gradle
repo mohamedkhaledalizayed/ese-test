@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 ext {
     //Basic configurations
@@ -104,4 +107,15 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+    //size
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //Silder
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+    implementation project(':ads')
 }

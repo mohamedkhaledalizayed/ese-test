@@ -8,8 +8,7 @@
         android:id="@+id/imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:padding="5dp"
-        android:src="@drawable/eg" />
+        android:padding="5dp" />
 
     <TextView
         android:id="@+id/textView"

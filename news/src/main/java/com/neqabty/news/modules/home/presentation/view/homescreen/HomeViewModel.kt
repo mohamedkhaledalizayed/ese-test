@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.neqabty.ads.modules.home.domain.entity.AdEntity
+import com.neqabty.ads.modules.home.domain.interactors.GetAllAdsUseCase
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.news.modules.home.domain.interactors.GetNewsUseCase
 import com.neqabty.news.modules.home.domain.interactors.GetSyndicateNewsUseCase
@@ -16,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase,
+    private val getAllAdsUseCase: GetAllAdsUseCase,
     private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase
 ) :
     ViewModel() {
@@ -37,6 +40,19 @@ class HomeViewModel @Inject constructor(
             try {
                 getSyndicateNewsUseCase.build(syndicateId).collect {
                     news.postValue(it)
+                }
+            } catch (e: Throwable) {
+                Log.e("", e.toString())
+            }
+        }
+    }
+
+    val ads = MutableLiveData<List<AdEntity>>()
+    fun getAds() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                getAllAdsUseCase.build().collect {
+                    ads.postValue(it)
                 }
             } catch (e: Throwable) {
                 Log.e("", e.toString())
