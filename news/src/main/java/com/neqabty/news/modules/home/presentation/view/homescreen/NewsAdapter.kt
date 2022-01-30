@@ -52,6 +52,9 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
         viewHolder.binding.newsTitle.text = item.headline
         viewHolder.binding.newsDate.text = item.createdAt
 
+        viewHolder.binding.newsImage.setOnClickListener {
+            onItemClickListener?.setOnItemClickListener(item)
+        }
     }
 
     override fun getItemCount() = items.size
@@ -71,7 +74,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(itemId: Int)
+            fun setOnItemClickListener(item: NewsEntity)
     }
 
     class ViewHolder(val binding: NewsLayoutItemBinding) :

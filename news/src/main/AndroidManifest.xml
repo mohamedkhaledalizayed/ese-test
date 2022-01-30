@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.neqabty.news">
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
+            android:name=".modules.home.presentation.view.newsdetails.NewsDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".modules.home.presentation.view.homescreen.HomeActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"
+            android:theme="@style/NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,9 @@
 package com.neqabty.news.modules.home.domain.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class NewsEntity(
     val author: Int = 0,
     val content: String = "",
@@ -11,4 +15,4 @@ data class NewsEntity(
     val type: String = "",
     val updatedAt: String = "",
     val url: String? = ""
-)
+): Parcelable
