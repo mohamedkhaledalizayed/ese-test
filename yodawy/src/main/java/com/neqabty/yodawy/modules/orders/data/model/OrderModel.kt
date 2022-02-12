@@ -27,6 +27,8 @@ data class OrderModel(
     val orderNumber: String,
     @SerializedName("OrderPrice")
     val orderPrice: Double,
+    @SerializedName("PriceBeforeDiscount")
+    val priceBeforeDiscount: Double,
     @SerializedName("Pharmacy")
     val pharmacy: String?,
     @SerializedName("PrescriptionImages")

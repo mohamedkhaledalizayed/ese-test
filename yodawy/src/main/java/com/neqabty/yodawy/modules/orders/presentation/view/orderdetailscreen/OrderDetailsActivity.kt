@@ -63,7 +63,8 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
                         binding.orderNumberValue.text = resource.data?.orderNumber
                         binding.dateValue.text = AppUtils().dateFormat(resource.data?.creationDate!!)
                         binding.totalPayment.text = "${resource.data?.orderPrice} جنيه"
-                        binding.totalValue.text = "${resource.data?.orderPrice} جنيه"
+                        binding.totalValue.text = "${resource.data?.priceBeforeDiscount} جنيه"
+                        binding.totalAfterValue.text = "${resource.data?.orderPrice} جنيه"
 
                         when (resource.data.currentStatus) {
                             "New" -> {

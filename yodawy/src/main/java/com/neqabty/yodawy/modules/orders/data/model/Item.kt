@@ -49,6 +49,8 @@ data class Item(
     val variationSKU: String?,
     @SerializedName("WasLimited")
     val wasLimited: Boolean,
+    @SerializedName("Removed")
+    val removed: Boolean,
     @SerializedName("WoocommerceProductId")
     val woocommerceProductId: String?,
     @SerializedName("YodawyDeal")

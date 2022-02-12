@@ -19,7 +19,7 @@ fun OrderModel.toOrderEntity(): OrderEntity {
         deliveryFees,
         id,
         items.toOderItemsEntity(),
-        notes, orderNumber, orderPrice, pharmacy, prescriptionImages
+        notes, orderNumber, orderPrice,priceBeforeDiscount, pharmacy, prescriptionImages
     )
 }
 
@@ -47,6 +47,7 @@ private fun List<Item>.toOderItemsEntity(): List<OrderItemEntity> {
             selectedUnit = it.selectedUnit,
             variationSKU = it.variationSKU,
             wasLimited = it.wasLimited,
+            removed =it.removed,
             woocommerceProductId = it.woocommerceProductId,
             yodawyDeal = it.yodawyDeal
         )

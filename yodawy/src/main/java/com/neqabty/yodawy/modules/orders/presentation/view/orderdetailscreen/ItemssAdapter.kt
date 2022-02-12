@@ -45,6 +45,12 @@ class ItemssAdapter: RecyclerView.Adapter<ItemssAdapter.ViewHolder>() {
         viewHolder.binding.medicationQuantity.text = "العدد : ${item.quantity}"
         viewHolder.binding.medicationPrice.text = "${item.price} جنيه"
 
+        if (item.removed){
+            viewHolder.binding.status.visibility = View.VISIBLE
+            viewHolder.binding.status.text = "محذوف"
+        }else{
+            viewHolder.binding.view.visibility = View.GONE
+        }
     }
 
     override fun getItemCount() = items.size
