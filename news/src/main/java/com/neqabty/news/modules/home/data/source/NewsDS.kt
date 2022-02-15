@@ -9,7 +9,11 @@ class NewsDS @Inject constructor(private val newsApi: NewsApi) {
         return newsApi.getNews().news
     }
 
-    suspend fun getSyndicateNews(syndicateId:Int):List<News>{
+    suspend fun getSyndicateNews(syndicateId: Int): List<News> {
         return newsApi.getSyndicateNews(syndicateId = syndicateId).news
+    }
+
+    suspend fun getNewsDetails(newsId: Int): News {
+        return newsApi.getNewsDetails(newsId).news.first()
     }
 }

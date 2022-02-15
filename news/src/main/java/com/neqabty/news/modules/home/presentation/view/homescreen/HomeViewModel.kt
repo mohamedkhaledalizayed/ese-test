@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.ads.modules.home.domain.entity.AdEntity
 import com.neqabty.ads.modules.home.domain.interactors.GetAllAdsUseCase
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
+import com.neqabty.news.modules.home.domain.interactors.GetNewsDetailsUseCase
 import com.neqabty.news.modules.home.domain.interactors.GetNewsUseCase
 import com.neqabty.news.modules.home.domain.interactors.GetSyndicateNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,9 +20,9 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase,
     private val getAllAdsUseCase: GetAllAdsUseCase,
-    private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase
-) :
-    ViewModel() {
+    private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase,
+    private val getNewsDetailsUseCase: GetNewsDetailsUseCase
+) : ViewModel() {
     val news = MutableLiveData<List<NewsEntity>>()
     fun getNews() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -53,6 +54,19 @@ class HomeViewModel @Inject constructor(
             try {
                 getAllAdsUseCase.build().collect {
                     ads.postValue(it)
+                }
+            } catch (e: Throwable) {
+                Log.e("", e.toString())
+            }
+        }
+    }
+
+    val newsDetails = MutableLiveData<NewsEntity>()
+    fun getNewsDetails(newsId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                getNewsDetailsUseCase.build(newsId).collect {
+                    newsDetails.postValue(it)
                 }
             } catch (e: Throwable) {
                 Log.e("", e.toString())
