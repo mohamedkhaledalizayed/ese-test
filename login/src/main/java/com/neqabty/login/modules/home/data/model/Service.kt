@@ -9,7 +9,7 @@ data class Service(
     @SerializedName("created_at")
     val createdAt: String = "",
     @SerializedName("domain")
-    val domain: String = "",
+    val domain: String? = null,
     @SerializedName("id")
     val id: Int = 0,
     @SerializedName("links")

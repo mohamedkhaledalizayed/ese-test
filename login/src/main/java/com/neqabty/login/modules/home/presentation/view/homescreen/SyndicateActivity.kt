@@ -14,12 +14,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class SyndicateActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private val syndicatesViewModel: SyndicatesViewModel by viewModels()
     private var list: MutableList<SyndicateEntity> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_syndicate)
 
         val spin: Spinner = findViewById<View>(R.id.all_syndicates) as Spinner
         spin.onItemSelectedListener = this

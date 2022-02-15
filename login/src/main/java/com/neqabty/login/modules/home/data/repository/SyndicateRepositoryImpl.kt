@@ -41,7 +41,7 @@ fun Service.toServiceEntity(): ServiceEntity {
     return ServiceEntity(
         code,
         createdAt,
-        domain,
+        domain ?: "",
         id,
         links = links.toLinksXEntity(),
         name,

@@ -13,7 +13,7 @@ data class Ad(
     @SerializedName("image")
     val image: String = "",
     @SerializedName("title")
-    val title: String = "",
+    val title: String? = null,
     @SerializedName("type")
     val type: String = "",
     @SerializedName("updated_at")
