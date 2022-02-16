@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SuperNeqabtySplashActivity : AppCompatActivity() {
-    private val SPLASH_DISPLAY_LENGTH: Long = 3000L
+    private val SPLASH_DISPLAY_LENGTH: Long = 5000L
     private val viewModel: SuperNeqabtySplashViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
