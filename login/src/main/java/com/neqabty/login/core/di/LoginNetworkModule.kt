@@ -19,7 +19,7 @@ class LoginNetworkModule {
     @Provides
     @Named("login")
     fun providesBaseUrl(): String {
-        return "https://neqabty.et3.co/"
+        return "https://neqabty.et3.co/api/"
     }
 
     @Provides
@@ -39,9 +39,7 @@ class LoginNetworkModule {
         requestBuilder.addHeader("Content-Type", "application/json")
         requestBuilder.addHeader("Accept","application/json")
         original = requestBuilder.build()
-
         it.proceed(original)
-
     }
     @Provides
     @Named("login")
@@ -55,7 +53,6 @@ class LoginNetworkModule {
         okHttpClient.readTimeout(40, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
         okHttpClient.addInterceptor(loggingInterceptor)
-        okHttpClient.build()
         okHttpClient.addInterceptor(interceptor)
         return okHttpClient.build()
     }
