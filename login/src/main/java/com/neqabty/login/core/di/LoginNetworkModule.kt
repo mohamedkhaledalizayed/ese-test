@@ -1,4 +1,4 @@
-package com.neqabty.superneqabty.core.di
+package com.neqabty.login.core.di
 
 import dagger.Module
 import dagger.Provides
@@ -15,15 +15,15 @@ import javax.inject.Named
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+class LoginNetworkModule {
     @Provides
-    @Named("syndicate")
+    @Named("login")
     fun providesBaseUrl(): String {
         return "https://neqabty.et3.co/"
     }
 
     @Provides
-    @Named("syndicate")
+    @Named("login")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -44,9 +44,9 @@ class NetworkModule {
 
     }
     @Provides
-    @Named("syndicate")
+    @Named("login")
     fun provideOkHttpClient(
-        @Named("syndicate")
+        @Named("login")
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
@@ -61,19 +61,19 @@ class NetworkModule {
     }
 
     @Provides
-    @Named("syndicate")
+    @Named("login")
     fun provideConverterFactory(): Converter.Factory {
         return GsonConverterFactory.create()
     }
 
     @Provides
-    @Named("syndicate")
+    @Named("login")
     fun provideRetrofitClient(
-        @Named("syndicate")
+        @Named("login")
         okHttpClient: OkHttpClient,
-        @Named("syndicate")
+        @Named("login")
         baseUrl: String,
-        @Named("syndicate")
+        @Named("login")
         converterFactory: Converter.Factory
     ): Retrofit {
         return Retrofit.Builder()
