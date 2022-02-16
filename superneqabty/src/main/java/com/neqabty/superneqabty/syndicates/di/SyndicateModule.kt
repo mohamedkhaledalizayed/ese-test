@@ -13,7 +13,7 @@ import javax.inject.Named
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class HomeModule {
+abstract class SyndicateModule {
     companion object {
         @Provides
         fun providesSyndicateApiService(

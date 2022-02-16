@@ -25,6 +25,12 @@
             android:name=".syndicates.presentation.view.homescreen.SyndicateActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".home.view.homescreen.HomeActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".home.view.newsdetails.NewsDetailsActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
