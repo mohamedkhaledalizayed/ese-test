@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -17,6 +18,7 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.ads.modules.home.domain.entity.AdEntity
+import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.home.view.newsdetails.NewsDetailsActivity
@@ -40,6 +42,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toolbar = findViewById<Toolbar>(R.id.toolbar)
 
         drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+
+        findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.login).setOnClickListener {
+            val intent = Intent(this@HomeActivity, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
         val toggle = ActionBarDrawerToggle(
             this,
