@@ -2,25 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_200sdp"
-    android:gravity="center"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/user_photo"
-        android:src="@drawable/error"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_100sdp"
-        android:layout_marginTop="@dimen/_30sdp"
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="مرحبا"
+        android:textSize="@dimen/_12ssp"
+        android:layout_margin="@dimen/_10sdp"
+        android:textColor="#000"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text=""
+        android:id="@+id/login"
+        android:text="تسجيل الدخول"
+        android:textSize="@dimen/_12ssp"
+        android:layout_margin="@dimen/_10sdp"
         android:textColor="#000"
-        android:layout_marginTop="@dimen/_10sdp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:id="@+id/change_syndicate"
+        android:text="تغيير النقابة"
+        android:textSize="@dimen/_12ssp"
+        android:layout_margin="@dimen/_10sdp"
+        android:textColor="#000"
         />
 
     <View
