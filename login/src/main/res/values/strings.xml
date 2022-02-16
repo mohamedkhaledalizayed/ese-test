@@ -4,4 +4,6 @@
     <string name="experimental_version">(نسخة تجريبية)</string>
     <string name="login_visitor_enter_mobile">برجاء ادخال رقم الهاتف المحمول لانشاء حسابك الخاص</string>
     <string name="send">إرسال</string>
+    <string name="main">الجهات الرئيسية</string>
+    <string name="neqabty">نقابتي هو منصة تفاعلية تهدف الي تقديم خدمات الرعاية الصحية لنقابة المهندسين المصرية بطريقة مميكنة مدعمة بوسائل مختلفة للدفع الالكتروني لتسيهل الحصول علي الخدمات ومتابعة مدفوعاتهم باقل وقت ومجهود</string>
 </resources>

@@ -30,6 +30,6 @@ class NewsRepositoryImpl @Inject constructor(private val newsDS: NewsDS) : NewsR
 
 private fun News.toNewsEntity(): NewsEntity {
     return NewsEntity(
-        author, content, createdAt, headline, id, image, source, type, updatedAt, url
+        author.id, author.entityCode, content, createdAt, headline, id, image, source, type, updatedAt, url
     )
 }
