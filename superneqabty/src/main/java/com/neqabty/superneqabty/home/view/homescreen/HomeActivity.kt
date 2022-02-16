@@ -2,9 +2,11 @@ package com.neqabty.superneqabty.home.view.homescreen
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -39,6 +41,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         toolbar = findViewById<Toolbar>(R.id.toolbar)
 
         drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
@@ -58,7 +62,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer.addDrawerListener(toggle)
         toggle.syncState()
-        toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp)
+        toolbar.setNavigationIcon(R.drawable.menu_ic)
         homeViewModel.getSyndicateNews(intent.getIntExtra("id", -1))
         homeViewModel.news.observe(this){
             mAdapter.submitList(it)

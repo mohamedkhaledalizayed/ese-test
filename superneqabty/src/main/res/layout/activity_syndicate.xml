@@ -25,7 +25,8 @@
         android:text="@string/neqabty"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main" />
+        app:layout_constraintTop_toBottomOf="@+id/main"
+        android:justificationMode="inter_word" />
 
     <GridView
         android:id="@+id/gridView"
@@ -33,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
         android:horizontalSpacing="@dimen/_5sdp"
-        android:numColumns="2"
+        android:numColumns="3"
         android:padding="@dimen/_5sdp"
         android:scrollbars="none"
         android:verticalSpacing="@dimen/_5sdp"

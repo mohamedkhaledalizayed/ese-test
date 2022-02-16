@@ -11,8 +11,11 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/purple_200"
-        android:elevation="4dp"/>
+        android:background="@color/colorPrimary"
+        app:title="@string/home_title"
+        app:titleTextColor="@color/white"
+        android:elevation="4dp"
+        app:navigationIcon="@drawable/menu_ic" />
 
     <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/image_slider"
