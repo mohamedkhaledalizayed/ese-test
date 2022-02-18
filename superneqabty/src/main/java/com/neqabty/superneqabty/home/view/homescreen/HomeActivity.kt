@@ -47,7 +47,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
 
-        findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.login).setOnClickListener {
+        findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bLogin).setOnClickListener {
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
             startActivity(intent)
         }

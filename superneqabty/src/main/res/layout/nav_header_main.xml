@@ -1,48 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_200sdp"
-    android:orientation="vertical"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="مرحبا"
-        android:textSize="@dimen/_12ssp"
-        android:layout_margin="@dimen/_10sdp"
-        android:textColor="#000"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:id="@+id/login"
-        android:text="تسجيل الدخول"
-        android:textSize="@dimen/_12ssp"
-        android:layout_margin="@dimen/_10sdp"
-        android:textColor="#000"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:id="@+id/change_syndicate"
-        android:text="تغيير النقابة"
-        android:textSize="@dimen/_12ssp"
-        android:layout_margin="@dimen/_10sdp"
-        android:textColor="#000"
-        />
-
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="#ccc"/>
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="?attr/actionBarSize"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp">
 
-</LinearLayout>
+
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="@string/welcome"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvMemberName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
+
+        <TextView
+            android:id="@+id/tvMemberNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="HELLO"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMemberName" />
+
+        <TextView
+            android:id="@+id/tvMobileNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="HELLO"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMemberNumber" />
+
+
+        <Button
+            android:id="@+id/bLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="@string/login_title"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMobileNumber" />
+
+
+        <Button
+            android:id="@+id/bChangeSyndicate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="@string/change_syndicate"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMobileNumber" />
+
+
+        <!--        <Button-->
+        <!--            android:id="@+id/bChangePassword"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@android:color/transparent"-->
+        <!--            android:elevation="@dimen/elevation_level_one"-->
+        <!--            app:layout_constraintHorizontal_chainStyle="spread_inside"-->
+        <!--            android:text="@string/change_password_title"-->
+        <!--            android:textColor="@android:color/white"-->
+        <!--            android:textSize="@dimen/text_size_medium"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintEnd_toStartOf="@id/bLogout"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/tvMobileNumber" />-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/imageView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="@dimen/margin_horizontal_small"-->
+        <!--android:layout_margin="@dimen/margin_horizontal_normal"-->
+        <!--android:adjustViewBounds="false"-->
+        <!--android:cropToPadding="true"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:src="@mipmap/username_ic"-->
+        <!--android:elevation="@dimen/elevation_level_one"-->
+        <!--android:background="@drawable/rounded_bg"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

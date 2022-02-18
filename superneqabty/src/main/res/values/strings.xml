@@ -1,7 +1,18 @@
 <resources>
     <string name="app_name">Mega Neqabty</string>
     <string name="home_title">الرئيسية</string>
+    <string name="news_title">الأخبار</string>
+    <string name="payments_title">المدفوعات</string>
+    <string name="about_title">عن النقابة</string>
+    <string name="settings_title">الإعدادات</string>
+    <string name="contactus_title">اتصل بنا</string>
+    <string name="aboutapp_title">عن التطبيق</string>
+    <string name="help_title">مساعدة</string>
     <string name="main">الجهات الرئيسية</string>
+    <string name="welcome">مرحباً</string>
+    <string name="logout_title">تسجيل خروج</string>
+    <string name="login_title">تسجيل الدخول</string>
+    <string name="change_syndicate">تغيير النقابة</string>
     <string name="neqabty">نقابتي هو منصة تفاعلية تهدف الي تقديم خدمات الرعاية الصحية لنقابة المهندسين المصرية بطريقة مميكنة مدعمة بوسائل مختلفة للدفع الالكتروني لتسهيل الحصول علي الخدمات ومتابعة مدفوعاتهم باقل وقت ومجهود</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

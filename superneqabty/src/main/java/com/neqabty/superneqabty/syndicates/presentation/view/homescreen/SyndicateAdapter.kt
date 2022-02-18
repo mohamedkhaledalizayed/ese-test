@@ -9,6 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.databinding.SyndicateItemBinding
@@ -23,7 +24,7 @@ class SyndicateAdapter: BaseAdapter() {
     private var layoutInflater: LayoutInflater? = null
     private lateinit var image: ImageView
     private lateinit var title: TextView
-    private lateinit var itemLayout: CardView
+    private lateinit var itemLayout: ConstraintLayout
 
     override fun getCount(): Int {
         return mList.size
