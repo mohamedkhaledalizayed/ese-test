@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class UserModel(
     @SerializedName("email")
-    val email: String = "",
+    val email: String? = "",
     @SerializedName("fullname")
     val fullname: String = "",
     @SerializedName("id")
     val id: Int = 0,
     @SerializedName("image")
-    val image: String = "",
+    val image: String? = "",
     @SerializedName("mobile")
     val mobile: String = "",
     @SerializedName("national_id")
