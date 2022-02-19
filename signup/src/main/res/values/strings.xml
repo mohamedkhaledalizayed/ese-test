@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Courses</string>
+    <string name="signup">تسجيل إشتراك</string>
+
 </resources>

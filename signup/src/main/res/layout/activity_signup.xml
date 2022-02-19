@@ -9,13 +9,29 @@
     android:background="#FFF"
     tools:context=".modules.home.presentation.view.homescreen.SignupActivity">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        app:title="@string/signup"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white"
+        style="@style/ToolbarTheme"/>
+
     <ScrollView
         android:id="@+id/sc_view_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
+        android:layout_height="0dp"
         android:background="@color/white"
-        >
+        android:scrollbars="none"
+        android:padding="@dimen/_15sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_view_container"
@@ -25,14 +41,6 @@
             android:padding="@dimen/_30sdp"
             android:focusableInTouchMode="true">
 
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.05" />
-
             <ImageView
                 android:id="@+id/iv_logo"
                 android:layout_width="@dimen/_170sdp"
@@ -40,7 +48,7 @@
                 android:scaleType="fitCenter"
                 android:transitionName="logo"
                 android:src="@drawable/image_1"
-                app:layout_constraintTop_toBottomOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 />

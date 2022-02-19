@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SuperNeqabtySplashActivity : AppCompatActivity() {
-    private val SPLASH_DISPLAY_LENGTH: Long = 3000L
+    private val SPLASH_DISPLAY_LENGTH: Long = 30L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_super_neqabty_main)

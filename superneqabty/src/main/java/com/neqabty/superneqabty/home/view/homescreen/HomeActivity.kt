@@ -24,6 +24,7 @@ import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivit
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.home.view.newsdetails.NewsDetailsActivity
+import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -50,6 +51,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bLogin).setOnClickListener {
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
             startActivity(intent)
+        }
+
+        findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bChangeSyndicate).setOnClickListener {
+            val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
+            startActivity(intent)
+            finishAffinity()
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -89,7 +96,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
                 intent.putExtra("news", item)
                 startActivity(intent)
-                finish()
             }
         }
 

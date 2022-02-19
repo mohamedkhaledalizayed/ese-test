@@ -25,7 +25,19 @@
         app:iss_title_background="@android:color/holo_red_light"
         app:iss_auto_cycle="true"
         app:iss_period="3000"
+        android:layout_margin="@dimen/_15sdp"
+        app:iss_corner_radius="20"
         app:iss_delay="0"/>
+
+    <TextView
+        android:id="@+id/tv_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:text="@string/news_title"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/news_recycler"

@@ -56,6 +56,7 @@ class SyndicateActivity : AppCompatActivity() {
                 val intent = Intent(this@SyndicateActivity, HomeActivity::class.java)
                 intent.putExtra("id", id)
                 startActivity(intent)
+                finishAffinity()
             }
         }
     }

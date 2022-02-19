@@ -14,7 +14,9 @@
         android:text="@string/main"
         android:id="@+id/main"
         android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
         android:layout_marginTop="@dimen/_10sdp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

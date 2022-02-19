@@ -7,7 +7,7 @@
     <string name="main">الجهات الرئيسية</string>
     <string name="neqabty">نقابتي هو منصة تفاعلية تهدف الي تقديم خدمات الرعاية الصحية لنقابة المهندسين المصرية بطريقة مميكنة مدعمة بوسائل مختلفة للدفع الالكتروني لتسيهل الحصول علي الخدمات ومتابعة مدفوعاتهم باقل وقت ومجهود</string>
     <string name="signup">تسجيل إشتراك</string>
-    <string name="login">الدخول</string>
+    <string name="login">تسجيل الدخول</string>
     <string name="password">كلمة المرور</string>
     <string name="phone">رقم الموبايل</string>
 </resources>

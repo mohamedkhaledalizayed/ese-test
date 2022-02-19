@@ -1,11 +1,13 @@
 package com.neqabty.signup.modules.home.presentation.view.homescreen
 
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.widget.Toolbar
 import com.neqabty.signup.R
 import com.neqabty.signup.core.utils.Status
 import com.neqabty.signup.modules.home.domain.entity.SignupParams
@@ -14,10 +16,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SignupActivity : AppCompatActivity() {
     private val signupViewModel: SignupViewModel by viewModels()
+    private lateinit var toolbar: Toolbar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
+        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         signupViewModel.user.observe(this){
 
