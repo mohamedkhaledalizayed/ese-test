@@ -12,6 +12,7 @@ data class ProductEntity(
     val isMedication: Boolean,
     val name: String,
     val outOfStock: Boolean,
+    val isImported: Boolean,
     val regularPrice: Float,
     val salePrice: Float,
     var quantity: Int = 1

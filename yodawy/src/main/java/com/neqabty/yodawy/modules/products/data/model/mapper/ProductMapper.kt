@@ -5,6 +5,6 @@ import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
 
 fun ProductModel.toProductEntity(): ProductEntity {
     return ProductEntity(
-        active, id, image, isLimitedAvailability, isMedication, name, outOfStock, regularPrice, salePrice
+        active, id, image, isLimitedAvailability, isMedication, name, outOfStock, isImported, regularPrice, salePrice
     )
 }

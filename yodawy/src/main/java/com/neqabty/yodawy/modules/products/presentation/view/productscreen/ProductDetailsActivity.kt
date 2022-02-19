@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.neqabty.yodawy.R
+import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.data.Constants.cartItems
 import com.neqabty.yodawy.core.data.Constants.imageList
 import com.neqabty.yodawy.core.ui.BaseActivity
@@ -33,6 +34,15 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
             binding.add.visibility = View.VISIBLE
         }
 
+        if (productItem.isImported){
+            binding.type.text = "مستورد"
+        }
+
+        if (Constants.delivery_sentence.isNotBlank()){
+            binding.deliveryTime.text = Constants.delivery_sentence
+        }else{
+            binding.deliveryTimeContainer.visibility = View.GONE
+        }
 
         binding.add.setOnClickListener {
             if (productItem.isLimitedAvailability) {

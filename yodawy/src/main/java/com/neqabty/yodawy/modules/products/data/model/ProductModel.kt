@@ -18,6 +18,8 @@ data class ProductModel(
     val name: String,
     @SerializedName("outOfStock")
     val outOfStock: Boolean,
+    @SerializedName("isImported")
+    val isImported: Boolean,
     @SerializedName("regularPrice")
     val regularPrice: Float,
     @SerializedName("salePrice")
