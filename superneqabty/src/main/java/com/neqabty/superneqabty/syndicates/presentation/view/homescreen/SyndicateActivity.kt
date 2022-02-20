@@ -8,8 +8,10 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.utils.Status
+import com.neqabty.superneqabty.databinding.ActivitySyndicateBinding
 import com.neqabty.superneqabty.home.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,10 +20,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class SyndicateActivity : AppCompatActivity() {
     private val syndicatesViewModel: SyndicatesViewModel by viewModels()
     private val mainAdapter = SyndicateAdapter()
-
+    private lateinit var binding: ActivitySyndicateBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_syndicate)
+        binding = ActivitySyndicateBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
 
         syndicatesViewModel.getSyndicates()
@@ -30,19 +34,19 @@ class SyndicateActivity : AppCompatActivity() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
-                        findViewById<ProgressBar>(R.id.progress_circular).visibility = View.VISIBLE
+                        binding.progressCircular.visibility = View.VISIBLE
                     }
                     Status.SUCCESS -> {
-                        findViewById<ProgressBar>(R.id.progress_circular).visibility = View.GONE
+                        binding.progressCircular.visibility = View.GONE
                         if (resource.data!!.isNotEmpty()){
-                            findViewById<GridView>(R.id.gridView).adapter = mainAdapter
+                            binding.gridView.adapter = mainAdapter
                             mainAdapter.submitList(resource.data)
                         }else{
                             Toast.makeText(this, "Empty", Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {
-                        findViewById<ProgressBar>(R.id.progress_circular).visibility = View.GONE
+                        binding.progressCircular.visibility = View.GONE
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
