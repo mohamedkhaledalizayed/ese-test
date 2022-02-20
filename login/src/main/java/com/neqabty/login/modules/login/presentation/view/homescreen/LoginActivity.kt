@@ -17,7 +17,6 @@ import com.neqabty.login.databinding.ActivityLoginBinding
 import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
@@ -39,7 +38,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             .build()
 
 
-        if (sharedPreferences.getBoolean(Constants.USERSTATUS, false)){
+        if (sharedPreferences.mobile.isNotEmpty()){
             Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
         }
         loginViewModel.user.observe(this)  {

@@ -1,5 +1,6 @@
 package com.neqabty.signup.modules.home.presentation.view.homescreen
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -11,11 +12,9 @@ import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.home.domain.entity.SignupParams
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignupActivity : BaseActivity<ActivitySignupBinding>() {
-    private lateinit var binding: ActivitySignupBinding
     private lateinit var dialog: AlertDialog
     private val signupViewModel: SignupViewModel by viewModels()
 

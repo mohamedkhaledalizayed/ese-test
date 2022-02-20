@@ -3,12 +3,10 @@
 
     <item
         android:id="@+id/news"
-        android:icon="@drawable/error"
         android:title="@string/news_title" />
 
     <item
         android:id="@+id/payment"
-        android:icon="@drawable/error"
         android:title="@string/payments_title" />
 
 <!--    <item-->
