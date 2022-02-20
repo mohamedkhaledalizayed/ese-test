@@ -10,11 +10,13 @@ import com.neqabty.signup.core.utils.Status
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.home.domain.entity.SignupParams
 import dagger.hilt.android.AndroidEntryPoint
+import dmax.dialog.SpotsDialog
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignupActivity : BaseActivity<ActivitySignupBinding>() {
-
+    private lateinit var binding: ActivitySignupBinding
+    private lateinit var dialog: AlertDialog
     private val signupViewModel: SignupViewModel by viewModels()
 
     override fun getViewBinding() = ActivitySignupBinding.inflate(layoutInflater)
@@ -23,6 +25,11 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.signup)
+
+        dialog = SpotsDialog.Builder()
+            .setContext(this)
+            .setMessage("من فضلك انتظر...")
+            .build()
 
         if (sharedPreferences.mobile.isNotEmpty()){
             Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
@@ -33,8 +40,10 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
+                        dialog.show()
                     }
                     Status.SUCCESS -> {
+                        dialog.dismiss()
                         if (resource.data!!.nationalId.isNotEmpty()){
                             sharedPreferences.mobile = resource.data!!.mobile
                         }else{
@@ -42,6 +51,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                         }
                     }
                     Status.ERROR -> {
+                        dialog.dismiss()
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }

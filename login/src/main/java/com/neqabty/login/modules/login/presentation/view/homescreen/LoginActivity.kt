@@ -1,5 +1,6 @@
 package com.neqabty.login.modules.login.presentation.view.homescreen
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
@@ -15,9 +16,12 @@ import com.neqabty.login.core.utils.Status
 import com.neqabty.login.databinding.ActivityLoginBinding
 import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
+import dmax.dialog.SpotsDialog
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
+    private lateinit var dialog: AlertDialog
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var toolbar: Toolbar
     private var isHidden = true
@@ -29,7 +33,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.login)
 
-        if (sharedPreferences.mobile.isNotEmpty()){
+        dialog = SpotsDialog.Builder()
+            .setContext(this)
+            .setMessage("من فضلك انتظر...")
+            .build()
+
+
+        if (sharedPreferences.getBoolean(Constants.USERSTATUS, false)){
             Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
         }
         loginViewModel.user.observe(this)  {
@@ -37,8 +47,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
+                        dialog.show()
                     }
                     Status.SUCCESS -> {
+                        dialog.dismiss()
                         if (resource.data!!.nationalId.isNotEmpty()){
                             sharedPreferences.mobile = resource.data!!.mobile
                             finish()
@@ -47,6 +59,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         }
                     }
                     Status.ERROR -> {
+                        dialog.dismiss()
                         Log.e("ik", resource.message.toString())
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
