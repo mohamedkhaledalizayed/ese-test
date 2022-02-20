@@ -1,51 +1,35 @@
 package com.neqabty.login.modules.login.presentation.view.homescreen
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.content.pm.ActivityInfo
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.GridView
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
 import com.neqabty.login.R
+import com.neqabty.login.core.ui.BaseActivity
+import com.neqabty.login.core.utils.ParcelClickListenerExtra
 import com.neqabty.login.core.utils.Status
 import com.neqabty.login.databinding.ActivityLoginBinding
-import com.neqabty.news.modules.home.presentation.view.homescreen.HomeActivity
-import com.neqabty.signup.core.data.Constants
-import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
+class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var toolbar: Toolbar
     private var isHidden = true
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
+
+    override fun getViewBinding() = ActivityLoginBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+        setupToolbar(titleResId = R.string.login)
 
-        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        toolbar = binding.toolbar
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
-        if (sharedPreferences.getBoolean(Constants.USERSTATUS, false)){
+        if (sharedPreferences.mobile.isNotEmpty()){
             Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
         }
         loginViewModel.user.observe(this)  {
@@ -56,7 +40,8 @@ class LoginActivity : AppCompatActivity() {
                     }
                     Status.SUCCESS -> {
                         if (resource.data!!.nationalId.isNotEmpty()){
-                            sharedPreferences.edit().putBoolean(Constants.USERSTATUS, true).commit()
+                            sharedPreferences.mobile = resource.data!!.mobile
+                            finish()
                         }else{
                             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
                         }
@@ -99,6 +84,9 @@ class LoginActivity : AppCompatActivity() {
             binding.etPassword.text.toString())
     }
     fun signUp(view: View) {
-        startActivity(Intent(this, SignupActivity::class.java))
+//        (intent.getSerializableExtra("listener")!! as Runnable).run()
+
+                val intent = Intent(this@LoginActivity, SignupActivity::class.java)
+                startActivity(intent)
     }
 }

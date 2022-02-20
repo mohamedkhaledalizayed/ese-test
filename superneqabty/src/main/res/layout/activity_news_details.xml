@@ -8,18 +8,9 @@
     android:orientation="horizontal"
     tools:context=".home.view.newsdetails.NewsDetailsActivity">
 
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/ToolbarTheme"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"
-        android:minHeight="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title=""
-        app:titleTextColor="@color/white" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"

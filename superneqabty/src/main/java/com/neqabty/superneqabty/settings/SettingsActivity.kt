@@ -28,7 +28,8 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        toolbar = findViewById<Toolbar>(R.id.toolbar)
+
+        setupToolbar(titleResId = R.string.settings_title)
     }
 
 

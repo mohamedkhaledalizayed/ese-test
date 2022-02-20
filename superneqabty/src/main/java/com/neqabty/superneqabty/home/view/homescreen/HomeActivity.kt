@@ -16,7 +16,9 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.ads.modules.home.domain.entity.AdEntity
+import com.neqabty.login.core.utils.ParcelClickListenerExtra
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
+import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.aboutapp.AboutAppActivity
 import com.neqabty.superneqabty.core.ui.BaseActivity
@@ -26,6 +28,7 @@ import com.neqabty.superneqabty.home.view.newsdetails.NewsDetailsActivity
 import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -44,15 +47,25 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setupToolbar(titleResId = R.string.home_title)
         toolbar = findViewById<Toolbar>(R.id.toolbar)
 
         drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
 
-        if(sharedPreferences.mobile.isNotEmpty())
+         if(sharedPreferences.mobile.isNotEmpty())
             findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bLogin).setText(R.string.logout_title)
+
+        val r = object: Runnable, Serializable {
+            override fun run() :  Unit {
+                println("Hallo")
+//                val intent = Intent(this@HomeActivity, SignupActivity::class.java)
+//                startActivity(intent)
+            }
+        }
 
         findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bLogin).setOnClickListener {
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
+            intent.putExtra("listener", r)
             startActivity(intent)
         }
 

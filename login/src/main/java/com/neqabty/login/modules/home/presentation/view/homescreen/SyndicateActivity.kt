@@ -6,7 +6,6 @@ import android.widget.GridView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.neqabty.login.R
-import com.neqabty.news.modules.home.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -27,14 +26,5 @@ class SyndicateActivity : AppCompatActivity() {
 
         }
 
-        mainAdapter.onItemClickListener = object :
-            SyndicateAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(id: Int) {
-                val intent = Intent(this@SyndicateActivity, HomeActivity::class.java)
-                intent.putExtra("id", id)
-                startActivity(intent)
-                finish()
-            }
-        }
     }
 }

@@ -7,17 +7,9 @@
     android:layout_height="match_parent"
     android:background="@color/splash_bg">
 
-    <androidx.appcompat.widget.Toolbar
+    <include
         android:id="@+id/toolbar"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        app:title="@string/home_title"
-        app:titleTextColor="@color/white"
-        android:elevation="4dp"
-        app:navigationIcon="@drawable/menu_ic"
-        style="@style/ToolbarTheme" />
+        layout="@layout/toolbar" />
 
     <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/image_slider"

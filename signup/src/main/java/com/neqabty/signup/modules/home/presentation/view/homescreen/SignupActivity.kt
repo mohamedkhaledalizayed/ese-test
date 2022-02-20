@@ -1,16 +1,11 @@
 package com.neqabty.signup.modules.home.presentation.view.homescreen
 
-import android.content.SharedPreferences
-import android.content.pm.ActivityInfo
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.widget.Toolbar
 import com.neqabty.signup.R
-import com.neqabty.signup.core.data.Constants
+import com.neqabty.signup.core.ui.BaseActivity
 import com.neqabty.signup.core.utils.Status
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.home.domain.entity.SignupParams
@@ -18,27 +13,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SignupActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySignupBinding
+class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
     private val signupViewModel: SignupViewModel by viewModels()
-    private lateinit var toolbar: Toolbar
+
+    override fun getViewBinding() = ActivitySignupBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySignupBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+        setupToolbar(titleResId = R.string.signup)
 
-        if (sharedPreferences.getBoolean(Constants.USERSTATUS, false)){
+        if (sharedPreferences.mobile.isNotEmpty()){
             Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
         }
-        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        toolbar = binding.toolbar
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         signupViewModel.user.observe(this){
 
@@ -48,7 +36,7 @@ class SignupActivity : AppCompatActivity() {
                     }
                     Status.SUCCESS -> {
                         if (resource.data!!.nationalId.isNotEmpty()){
-                            sharedPreferences.edit().putBoolean(Constants.USERSTATUS, true).commit()
+                            sharedPreferences.mobile = resource.data!!.mobile
                         }else{
                             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
                         }

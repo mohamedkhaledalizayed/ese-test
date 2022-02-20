@@ -7,22 +7,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
+        <include
             android:id="@+id/toolbar"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:minHeight="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:title="@string/settings_title"
-            app:titleTextColor="@color/white"
-            android:elevation="4dp"
-            style="@style/ToolbarTheme" />
+            layout="@layout/toolbar" />
 
         <ScrollView
             android:id="@+id/svContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/rounded_bg"
+            android:background="@color/white"
             android:padding="@dimen/_15sdp"
             android:scrollbars="none">
 

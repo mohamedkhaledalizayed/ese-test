@@ -20,10 +20,10 @@ class NewsDetailsActivity : AppCompatActivity() {
 
         val newsItem = intent.extras?.getParcelable<NewsEntity>("news")!!
 
-        toolbar = binding.toolbar
-        setSupportActionBar(toolbar)
-        toolbar.title = newsItem.headline
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+//        toolbar = binding.toolbar
+//        setSupportActionBar(toolbar)
+//        toolbar.title = newsItem.headline
+//        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         Picasso.get().load(newsItem.image).into(binding.newsImage)
         binding.newsTitle.text = newsItem.headline

@@ -1,4 +1,4 @@
-package com.neqabty.superneqabty.core.ui
+package com.neqabty.signup.core.ui
 
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
@@ -8,8 +8,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
-import com.neqabty.superneqabty.R
-import com.neqabty.superneqabty.core.utils.PreferencesHelper
+import com.neqabty.signup.R
+import com.neqabty.signup.core.utils.PreferencesHelper
 import javax.inject.Inject
 
 //

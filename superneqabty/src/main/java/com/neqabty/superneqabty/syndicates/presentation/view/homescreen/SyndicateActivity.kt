@@ -27,7 +27,6 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
-        sharedPreferences.mainSyndicate = -1
 
         syndicatesViewModel.getSyndicates()
         syndicatesViewModel.syndicates.observe(this) {

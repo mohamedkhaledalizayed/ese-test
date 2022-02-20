@@ -7,28 +7,23 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.neqabty.superneqabty.R
+import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.databinding.ActivityAboutAppBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AboutAppActivity : AppCompatActivity() {
+class AboutAppActivity : BaseActivity<ActivityAboutAppBinding>() {
     
     private lateinit var toolbar: Toolbar
-    private lateinit var binding: ActivityAboutAppBinding
 
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
-    
+    override fun getViewBinding() = ActivityAboutAppBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAboutAppBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+        setupToolbar(titleResId = R.string.aboutapp_title)
 
-        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        toolbar = findViewById<Toolbar>(R.id.toolbar)
     }
 
 

@@ -31,9 +31,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
     viewBinding {
         enabled = true
     }
+}
+configurations {
+    compile.exclude group: 'com.neqabty.login.core.ui', module: 'BaseActivity'
+    compile.exclude group: 'com.neqabty.signup.core.utils', module: 'PreferencesHelper'
 }
 ext {
     //Basic configurations
