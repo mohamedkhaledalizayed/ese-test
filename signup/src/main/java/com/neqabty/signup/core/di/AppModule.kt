@@ -14,9 +14,4 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-    @Provides
-    fun provideSharedPreferences(application: Application): SharedPreferences {
-        return com.securepreferences.SecurePreferences(application, ENCRYPT_KEY, PREFS_FILE)
-    }
-
 }

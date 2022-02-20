@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationManagerCompat
 import com.neqabty.signup.core.data.Constants
 import com.neqabty.superneqabty.R
+import com.neqabty.superneqabty.core.utils.PreferencesHelper
 import com.neqabty.superneqabty.databinding.ActivitySettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -23,8 +24,9 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
     private lateinit var binding: ActivitySettingsBinding
 
+
     @Inject
-    lateinit var sharedPreferences: SharedPreferences
+    lateinit var sharedPreferences: PreferencesHelper
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +48,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun initializeViews() {
         val status = NotificationManagerCompat.from(this).areNotificationsEnabled()
-        sharedPreferences.edit().putBoolean(Constants.NOTIFICATIONSSTATUS, status).commit() 
+        sharedPreferences.isNotificationsEnabled = status
         binding.switchNotifications.isChecked = status
         binding.switchNotifications.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
@@ -70,7 +72,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0) {
             val status = NotificationManagerCompat.from(this).areNotificationsEnabled()
-            sharedPreferences.edit().putBoolean(Constants.NOTIFICATIONSSTATUS, status).commit()
+            sharedPreferences.isNotificationsEnabled
             binding.switchNotifications.isChecked = status
         }
     }

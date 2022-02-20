@@ -25,6 +25,7 @@ import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivit
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.aboutapp.AboutAppActivity
+import com.neqabty.superneqabty.core.utils.PreferencesHelper
 import com.neqabty.superneqabty.databinding.ActivityMainBinding
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.home.view.newsdetails.NewsDetailsActivity
@@ -33,6 +34,7 @@ import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.Syndicat
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
@@ -44,6 +46,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val mAdapter = NewsAdapter()
     private val imageList = ArrayList<SlideModel>()
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -120,9 +123,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
                 startActivity(intent)
             }
-            R.id.about_fragment -> {
-
-            }
+//            R.id.about_fragment -> {
+//
+//            }
             R.id.about_app_fragment -> {
                 val intent = Intent(this@HomeActivity, AboutAppActivity::class.java)
                 startActivity(intent)

@@ -11,9 +11,9 @@
         android:icon="@drawable/error"
         android:title="@string/payments_title" />
 
-    <item
-        android:id="@+id/about_fragment"
-        android:title="@string/about_title" />
+<!--    <item-->
+<!--        android:id="@+id/about_fragment"-->
+<!--        android:title="@string/about_title" />-->
 
     <item
         android:id="@+id/about_app_fragment"
