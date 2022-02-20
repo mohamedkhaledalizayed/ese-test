@@ -19,16 +19,12 @@
         app:navigationIcon="@drawable/menu_ic"
         style="@style/ToolbarTheme" />
 
-    <com.denzcoskun.imageslider.ImageSlider
-        android:id="@+id/image_slider"
+    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+        android:id="@+id/carousel"
         android:layout_width="match_parent"
+        app:carouselType="BLOCK"
         android:layout_height="@dimen/_150sdp"
-        app:iss_title_background="@android:color/holo_red_light"
-        app:iss_auto_cycle="true"
-        app:iss_period="3000"
-        android:layout_margin="@dimen/_15sdp"
-        app:iss_corner_radius="20"
-        app:iss_delay="0"/>
+        android:layout_margin="@dimen/_15sdp"/>
 
     <TextView
         android:id="@+id/tv_news"

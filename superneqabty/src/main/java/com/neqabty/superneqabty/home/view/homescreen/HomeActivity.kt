@@ -5,14 +5,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.denzcoskun.imageslider.ImageSlider
-import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.ads.modules.home.domain.entity.AdEntity
@@ -26,7 +25,9 @@ import com.neqabty.superneqabty.home.view.newsdetails.NewsDetailsActivity
 import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
+import org.imaginativeworld.whynotimagecarousel.ImageCarousel
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
@@ -36,7 +37,8 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
     private lateinit var toolbar: Toolbar
     private val homeViewModel: HomeViewModel by viewModels()
     private val mAdapter = NewsAdapter()
-    private val imageList = ArrayList<SlideModel>()
+    private val listAds = ArrayList<AdEntity>()
+    val list = mutableListOf<CarouselItem>()
 
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
@@ -47,6 +49,8 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
         toolbar = findViewById<Toolbar>(R.id.toolbar)
 
         drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val carousel: ImageCarousel = findViewById(R.id.carousel)
+        carousel.registerLifecycle(lifecycle)
 
         if(sharedPreferences.mobile.isNotEmpty())
             findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bLogin).setText(R.string.logout_title)
@@ -80,18 +84,32 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
 
         homeViewModel.getAds()
         homeViewModel.ads.observe(this){
-
+            listAds.addAll(it)
                 for (data: AdEntity in it) {
-                    imageList.add(
-                        SlideModel(
-                            data.image,
-                            ScaleTypes.FIT
+                    list.add(
+                        CarouselItem(
+                            imageUrl = data.image,
+                            caption = data.title
                         )
                     )
                 }
 
-                findViewById<ImageSlider>(R.id.image_slider).setImageList(imageList)
+            carousel.setData(list)
         }
+
+        carousel.carouselListener = object : CarouselListener {
+
+
+            override fun onClick(position: Int, carouselItem: CarouselItem) {
+                Toast.makeText(this@HomeActivity, "${listAds[position].id}", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onLongClick(position: Int, dataObject: CarouselItem) {
+                // ...
+            }
+
+        }
+
         findViewById<RecyclerView>(R.id.news_recycler).adapter = mAdapter
         mAdapter.onItemClickListener = object :
             NewsAdapter.OnItemClickListener {

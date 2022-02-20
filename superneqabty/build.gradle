@@ -50,7 +50,7 @@ ext {
     constraintlayout = '2.1.1'
     recyclerview = '1.2.1'
     cardview = '1.0.0'
-    material = '1.4.0'
+    material = '1.5.0'
     swiperefreshlayout = '1.1.0'
     //Test
     junitVersion = '4.13.2'
@@ -112,10 +112,13 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
-//picasso
+    //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
-    //Silder
-    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+
+    // Circle Indicator (To fix the xml preview "Missing classes" error)
+    implementation 'me.relex:circleindicator:2.1.6'
+
+    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.6'
     implementation project(':ads')
     implementation project(':login')
     implementation project(':signup')
