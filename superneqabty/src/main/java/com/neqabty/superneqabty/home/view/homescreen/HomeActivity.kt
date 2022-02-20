@@ -3,6 +3,7 @@ package com.neqabty.superneqabty.home.view.homescreen
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -23,9 +24,11 @@ import com.neqabty.ads.modules.home.domain.entity.AdEntity
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.superneqabty.R
+import com.neqabty.superneqabty.aboutapp.AboutAppActivity
 import com.neqabty.superneqabty.databinding.ActivityMainBinding
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.home.view.newsdetails.NewsDetailsActivity
+import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -103,15 +106,35 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
             }
         }
-
+        findViewById<NavigationView>(R.id.nav_view).setNavigationItemSelectedListener(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+            R.id.news -> {
+                val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.payment -> {
+                val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.about_fragment -> {
 
-            R.id.logout -> {
-
+            }
+            R.id.about_app_fragment -> {
+                val intent = Intent(this@HomeActivity, AboutAppActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.settings_fragment -> {
+                val intent = Intent(this@HomeActivity, SettingsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.contactus_fragment -> {
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:0235317300")
+                startActivity(intent)
             }
         }
 

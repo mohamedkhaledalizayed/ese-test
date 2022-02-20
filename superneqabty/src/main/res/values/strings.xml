@@ -8,6 +8,9 @@
     <string name="contactus_title">اتصل بنا</string>
     <string name="aboutapp_title">عن التطبيق</string>
     <string name="help_title">مساعدة</string>
+    <string name="notifications_settings">الإشعارات</string>
+    <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
+    <string name="app_version">Version %s</string>
     <string name="main">الجهات الرئيسية</string>
     <string name="welcome">مرحباً</string>
     <string name="logout_title">تسجيل خروج</string>

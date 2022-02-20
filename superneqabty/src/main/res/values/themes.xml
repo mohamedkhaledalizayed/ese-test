@@ -31,4 +31,9 @@
         <item name="android:fontFamily">@font/cairo_regular</item>
         <item name="android:forceDarkAllowed">false</item>
     </style>
+
+
+    <style name="ToolbarTheme" parent="Theme.NoActionBar">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
 </resources>

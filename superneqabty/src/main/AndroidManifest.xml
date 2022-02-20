@@ -31,6 +31,12 @@
         <activity
             android:name=".home.view.newsdetails.NewsDetailsActivity"
             android:exported="false" />
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".aboutapp.AboutAppActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

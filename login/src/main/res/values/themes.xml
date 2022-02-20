@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.NoActionBar" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
@@ -28,10 +28,13 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/cairo_regular</item>
         <item name="android:forceDarkAllowed">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
 
 
     <style name="ToolbarTheme" parent="Theme.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item>
         <item name="colorControlNormal">@color/white</item>
     </style>
 </resources>

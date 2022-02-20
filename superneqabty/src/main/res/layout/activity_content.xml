@@ -16,7 +16,8 @@
         app:title="@string/home_title"
         app:titleTextColor="@color/white"
         android:elevation="4dp"
-        app:navigationIcon="@drawable/menu_ic" />
+        app:navigationIcon="@drawable/menu_ic"
+        style="@style/ToolbarTheme" />
 
     <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/image_slider"
