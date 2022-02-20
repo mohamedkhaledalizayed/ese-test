@@ -16,10 +16,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import com.neqabty.login.R
-import com.neqabty.login.core.data.Constants
 import com.neqabty.login.core.utils.Status
 import com.neqabty.login.databinding.ActivityLoginBinding
 import com.neqabty.news.modules.home.presentation.view.homescreen.HomeActivity
+import com.neqabty.signup.core.data.Constants
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
