@@ -1,15 +1,10 @@
 package com.neqabty.superneqabty.home.view.homescreen
 
-import android.app.AlertDialog
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -22,10 +17,9 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.ads.modules.home.domain.entity.AdEntity
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
-import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.aboutapp.AboutAppActivity
-import com.neqabty.superneqabty.core.utils.PreferencesHelper
+import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.databinding.ActivityMainBinding
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.home.view.newsdetails.NewsDetailsActivity
@@ -33,31 +27,29 @@ import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawer: DrawerLayout
     private lateinit var toolbar: Toolbar
     private val homeViewModel: HomeViewModel by viewModels()
     private val mAdapter = NewsAdapter()
     private val imageList = ArrayList<SlideModel>()
-    private lateinit var binding: ActivityMainBinding
+
+    override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         toolbar = findViewById<Toolbar>(R.id.toolbar)
 
         drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+
+        if(sharedPreferences.mobile.isNotEmpty())
+            findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bLogin).setText(R.string.logout_title)
 
         findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bLogin).setOnClickListener {
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)

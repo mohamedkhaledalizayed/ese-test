@@ -13,29 +13,21 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationManagerCompat
 import com.neqabty.signup.core.data.Constants
 import com.neqabty.superneqabty.R
+import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.PreferencesHelper
 import com.neqabty.superneqabty.databinding.ActivitySettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     
     private lateinit var toolbar: Toolbar
-    private lateinit var binding: ActivitySettingsBinding
+    override fun getViewBinding() = ActivitySettingsBinding.inflate(layoutInflater)
 
-
-    @Inject
-    lateinit var sharedPreferences: PreferencesHelper
-    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingsBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
-
-        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         toolbar = findViewById<Toolbar>(R.id.toolbar)
     }
 

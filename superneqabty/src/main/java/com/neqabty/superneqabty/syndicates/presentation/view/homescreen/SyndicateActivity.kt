@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.superneqabty.R
+import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Status
 import com.neqabty.superneqabty.databinding.ActivitySyndicateBinding
 import com.neqabty.superneqabty.home.view.homescreen.HomeActivity
@@ -17,16 +18,16 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class SyndicateActivity : AppCompatActivity() {
+class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
     private val syndicatesViewModel: SyndicatesViewModel by viewModels()
     private val mainAdapter = SyndicateAdapter()
-    private lateinit var binding: ActivitySyndicateBinding
+
+    override fun getViewBinding() = ActivitySyndicateBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySyndicateBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
+        sharedPreferences.mainSyndicate = -1
 
         syndicatesViewModel.getSyndicates()
         syndicatesViewModel.syndicates.observe(this) {
@@ -59,6 +60,7 @@ class SyndicateActivity : AppCompatActivity() {
             override fun setOnItemClickListener(id: Int) {
                 val intent = Intent(this@SyndicateActivity, HomeActivity::class.java)
                 intent.putExtra("id", id)
+                sharedPreferences.mainSyndicate = id
                 startActivity(intent)
                 finishAffinity()
             }

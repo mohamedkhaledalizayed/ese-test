@@ -27,7 +27,7 @@ class PreferencesHelper @Inject constructor(
         set(value) = preferences.edit().putBoolean(IS_NOTIFICATIONS_ENABLED, value).apply()
 
     var mainSyndicate
-        get() = preferences.getInt(MAIN_SYNDICATE, 0)
+        get() = preferences.getInt(MAIN_SYNDICATE, -1)
         set(value) = preferences.edit().putInt(MAIN_SYNDICATE, value).apply()
 
     var mobile
