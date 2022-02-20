@@ -21,7 +21,9 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.ads.modules.home.domain.entity.AdEntity
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
+import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.superneqabty.R
+import com.neqabty.superneqabty.databinding.ActivityMainBinding
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.home.view.newsdetails.NewsDetailsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
@@ -38,9 +40,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val homeViewModel: HomeViewModel by viewModels()
     private val mAdapter = NewsAdapter()
     private val imageList = ArrayList<SlideModel>()
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
