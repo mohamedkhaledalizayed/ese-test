@@ -1,5 +1,6 @@
 package com.neqabty.login.modules.login.presentation.view.homescreen
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
@@ -23,10 +24,12 @@ import com.neqabty.signup.core.data.Constants
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
+import dmax.dialog.SpotsDialog
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
+    private lateinit var dialog: AlertDialog
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var toolbar: Toolbar
@@ -38,6 +41,11 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        dialog = SpotsDialog.Builder()
+            .setContext(this)
+            .setMessage("من فضلك انتظر...")
+            .build()
 
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -53,8 +61,10 @@ class LoginActivity : AppCompatActivity() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
+                        dialog.show()
                     }
                     Status.SUCCESS -> {
+                        dialog.dismiss()
                         if (resource.data!!.nationalId.isNotEmpty()){
                             sharedPreferences.edit().putBoolean(Constants.USERSTATUS, true).commit()
                         }else{
@@ -62,6 +72,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                     Status.ERROR -> {
+                        dialog.dismiss()
                         Log.e("ik", resource.message.toString())
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }

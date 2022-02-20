@@ -1,5 +1,6 @@
 package com.neqabty.signup.modules.home.presentation.view.homescreen
 
+import android.app.AlertDialog
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
@@ -15,12 +16,13 @@ import com.neqabty.signup.core.utils.Status
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.home.domain.entity.SignupParams
 import dagger.hilt.android.AndroidEntryPoint
+import dmax.dialog.SpotsDialog
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
-
+    private lateinit var dialog: AlertDialog
     @Inject
     lateinit var sharedPreferences: SharedPreferences
     private val signupViewModel: SignupViewModel by viewModels()
@@ -30,6 +32,11 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        dialog = SpotsDialog.Builder()
+            .setContext(this)
+            .setMessage("من فضلك انتظر...")
+            .build()
 
         if (sharedPreferences.getBoolean(Constants.USERSTATUS, false)){
             Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
@@ -45,8 +52,10 @@ class SignupActivity : AppCompatActivity() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
+                        dialog.show()
                     }
                     Status.SUCCESS -> {
+                        dialog.dismiss()
                         if (resource.data!!.nationalId.isNotEmpty()){
                             sharedPreferences.edit().putBoolean(Constants.USERSTATUS, true).commit()
                         }else{
@@ -54,6 +63,7 @@ class SignupActivity : AppCompatActivity() {
                         }
                     }
                     Status.ERROR -> {
+                        dialog.dismiss()
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
