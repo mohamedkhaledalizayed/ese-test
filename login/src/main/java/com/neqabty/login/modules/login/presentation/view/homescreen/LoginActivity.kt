@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -15,21 +16,27 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import com.neqabty.login.R
 import com.neqabty.login.core.utils.Status
+import com.neqabty.login.databinding.ActivityLoginBinding
 import com.neqabty.news.modules.home.presentation.view.homescreen.HomeActivity
+import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var toolbar: Toolbar
+    private var isHidden = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -57,10 +64,32 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun showHidePassword(view: View) {}
+    fun showHidePassword(view: View) {
+        if (isHidden) {
+            isHidden = false
+            binding.etPassword.transformationMethod = null
+            binding.showHide.setImageResource(R.drawable.ic_baseline_visibility_24)
+        } else {
+            isHidden = true
+            binding.etPassword.transformationMethod = PasswordTransformationMethod()
+            binding.showHide.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+        }
+    }
+
     fun login(view: View) {
-        loginViewModel.login(findViewById<EditText>(R.id.et_username).text.toString(),
-            findViewById<EditText>(R.id.et_password).text.toString())
+
+        if (binding.etUsername.text.toString().isEmpty()){
+            Toast.makeText(this, "من فضلك ادخل رقم الموبايل", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etPassword.text.toString().isEmpty()){
+            Toast.makeText(this, "من فضلك ادخل كلمة المرور", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        loginViewModel.login(binding.etUsername.text.toString(),
+            binding.etPassword.text.toString())
     }
     fun signUp(view: View) {
         startActivity(Intent(this, SignupActivity::class.java))
