@@ -1,6 +1,7 @@
 package com.neqabty.login.modules.login.presentation.view.homescreen
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,12 +16,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import com.neqabty.login.R
+import com.neqabty.login.core.data.Constants
 import com.neqabty.login.core.utils.Status
 import com.neqabty.login.databinding.ActivityLoginBinding
 import com.neqabty.news.modules.home.presentation.view.homescreen.HomeActivity
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -28,6 +31,8 @@ class LoginActivity : AppCompatActivity() {
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var toolbar: Toolbar
     private var isHidden = true
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -40,7 +45,9 @@ class LoginActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-
+        if (sharedPreferences.getBoolean(Constants.USERSTATUS, false)){
+            Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
+        }
         loginViewModel.user.observe(this)  {
 
             it?.let { resource ->
@@ -49,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                     Status.SUCCESS -> {
                         if (resource.data!!.nationalId.isNotEmpty()){
-
+                            sharedPreferences.edit().putBoolean(Constants.USERSTATUS, true).commit()
                         }else{
                             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
                         }

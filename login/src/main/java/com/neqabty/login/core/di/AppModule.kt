@@ -1,5 +1,9 @@
 package com.neqabty.login.core.di
 
+import android.app.Application
+import android.content.SharedPreferences
+import com.neqabty.login.core.data.Constants.ENCRYPT_KEY
+import com.neqabty.login.core.data.Constants.PREFS_FILE
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,5 +20,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
+    @Provides
+    fun provideSharedPreferences(application: Application): SharedPreferences {
+        return com.securepreferences.SecurePreferences(application, ENCRYPT_KEY, PREFS_FILE)
+    }
 
 }

@@ -120,6 +120,9 @@ dependencies {
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    // Preferences
+    implementation 'com.scottyab:secure-preferences-lib:0.1.7'
+
     implementation project(':news')
     implementation project(':signup')
 
