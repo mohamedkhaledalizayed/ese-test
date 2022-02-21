@@ -15,13 +15,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.ads.modules.home.domain.entity.AdEntity
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
+import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.aboutapp.AboutAppActivity
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.databinding.ActivityMainBinding
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
-import com.neqabty.superneqabty.home.view.newsdetails.NewsDetailsActivity
 import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
