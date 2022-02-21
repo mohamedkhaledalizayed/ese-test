@@ -1,21 +1,24 @@
 package com.neqabty.news.modules.home.presentation.view.newsdetails
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.neqabty.news.R
+import com.neqabty.news.core.ui.BaseActivity
+import com.neqabty.news.databinding.ActivityNewsDetailsBinding
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
+import com.squareup.picasso.Picasso
 
-class NewsDetailsActivity : AppCompatActivity() {
+class NewsDetailsActivity : BaseActivity<ActivityNewsDetailsBinding>() {
+
+    override fun getViewBinding() = ActivityNewsDetailsBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_news_details)
+        setContentView(binding.root)
+
 
         val newsItem = intent.extras?.getParcelable<NewsEntity>("news")!!
-
-        findViewById<TextView>(R.id.news_title).text = newsItem.headline
-        findViewById<TextView>(R.id.content).text = newsItem.content
-        findViewById<TextView>(R.id.news_date).text = newsItem.createdAt
+        setupToolbar( title = newsItem.headline)
+        Picasso.get().load(newsItem.image).into(binding.newsImage)
+        binding.newsTitle.text = newsItem.headline
+        binding.content.text = newsItem.content
+        binding.newsDate.text = newsItem.createdAt
     }
 }
