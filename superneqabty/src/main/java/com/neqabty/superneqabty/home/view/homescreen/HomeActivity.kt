@@ -11,7 +11,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.ads.modules.home.domain.entity.AdEntity
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
@@ -25,7 +24,6 @@ import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.Serializable
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
@@ -48,35 +46,28 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
         setContentView(binding.root)
 
         setupToolbar(titleResId = R.string.home_title)
-        toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar = binding.contentActivity.toolbar.toolbar
 
-        drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+        drawer = binding.drawerLayout
         val carousel: ImageCarousel = findViewById(R.id.carousel)
         carousel.registerLifecycle(lifecycle)
 
-         if(sharedPreferences.mobile.isNotEmpty())
-            findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bLogin).setText(R.string.logout_title)
-
-        val r = object: Runnable, Serializable {
-            override fun run() :  Unit {
-                println("Hallo")
-//                val intent = Intent(this@HomeActivity, SignupActivity::class.java)
-//                startActivity(intent)
-            }
-        }
-        findViewById<TextView>(R.id.tv_news_all).setOnClickListener {
+        binding.contentActivity.tvNewsAll.setOnClickListener {
             val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
-            intent.putExtra("id", 5)
+            intent.putExtra("id", sharedPreferences.mainSyndicate)
             startActivity(intent)
         }
 
-        findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bLogin).setOnClickListener {
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin).setOnClickListener {
+            if(sharedPreferences.mobile.isNotEmpty()){
+                sharedPreferences.name = ""
+                sharedPreferences.mobile = ""
+            }
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
-            intent.putExtra("listener", r)
             startActivity(intent)
         }
 
-        findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bChangeSyndicate).setOnClickListener {
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bChangeSyndicate).setOnClickListener {
             val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
             startActivity(intent)
             finishAffinity()
@@ -93,7 +84,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
         drawer.addDrawerListener(toggle)
         toggle.syncState()
         toolbar.setNavigationIcon(R.drawable.menu_ic)
-        homeViewModel.getSyndicateNews(intent.getIntExtra("id", -1))
+        homeViewModel.getSyndicateNews(sharedPreferences.mainSyndicate)
         homeViewModel.news.observe(this){
             mAdapter.submitList(it)
         }
@@ -114,30 +105,33 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
         }
 
         carousel.carouselListener = object : CarouselListener {
-
-
             override fun onClick(position: Int, carouselItem: CarouselItem) {
                 Toast.makeText(this@HomeActivity, "${listAds[position].id}", Toast.LENGTH_LONG).show()
             }
-
             override fun onLongClick(position: Int, dataObject: CarouselItem) {
-                // ...
             }
-
         }
 
-        findViewById<RecyclerView>(R.id.news_recycler).adapter = mAdapter
+        binding.contentActivity.newsRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             NewsAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: NewsEntity) {
                 val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
-                intent.putExtra("news", item)
+                intent.putExtra("id", item.id)
                 startActivity(intent)
             }
         }
-        findViewById<NavigationView>(R.id.nav_view).setNavigationItemSelectedListener(this)
+        binding.navView.setNavigationItemSelectedListener(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(sharedPreferences.mobile.isNotEmpty()){
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin).setText(R.string.logout_title)
+        }else{
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin).setText(R.string.login_title)
+        }
+    }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
