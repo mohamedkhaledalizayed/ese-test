@@ -18,15 +18,30 @@
         android:layout_height="@dimen/_150sdp"
         android:layout_margin="@dimen/_15sdp"/>
 
-    <TextView
-        android:id="@+id/tv_news"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        android:text="@string/news_title"
-        android:textSize="@dimen/_13ssp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary" />
+        android:layout_margin="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/tv_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/news_title"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/tv_news_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/more"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorPrimary" />
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/news_recycler"

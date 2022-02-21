@@ -64,7 +64,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
 //                startActivity(intent)
             }
         }
-        findViewById<TextView>(R.id.tv_news).setOnClickListener {
+        findViewById<TextView>(R.id.tv_news_all).setOnClickListener {
             val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
             intent.putExtra("id", 5)
             startActivity(intent)

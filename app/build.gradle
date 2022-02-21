@@ -49,7 +49,7 @@ android {
         config {
             keyAlias 'neqabty'
             keyPassword secret
-            storeFile file('/Users/islamlotfy/StudioProjects/NeQabty/keyStore.jks')
+            storeFile file('D:/Work/Mobile/Neqabty/NeQabty/keyStore.jks')
             storePassword secret
         }
     }
