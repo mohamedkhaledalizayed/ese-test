@@ -147,7 +147,8 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
 
         when (item.itemId) {
             R.id.news -> {
-                val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
+                val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
+                intent.putExtra("id", sharedPreferences.mainSyndicate)
                 startActivity(intent)
             }
             R.id.payment -> {

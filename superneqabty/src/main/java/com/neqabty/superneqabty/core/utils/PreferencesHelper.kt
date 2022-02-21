@@ -20,6 +20,7 @@ class PreferencesHelper @Inject constructor(
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val NAME = "data.source.prefs.NAME"
         private const val MOBILE = "data.source.prefs.MOBILE"
+        private const val CODE = "data.source.prefs.CODE"
     }
 
     var isNotificationsEnabled
@@ -37,6 +38,10 @@ class PreferencesHelper @Inject constructor(
     var name
         get() = preferences.getString(NAME, "")!!
         set(value) = preferences.edit().putString(NAME, value).apply()
+
+    var code
+        get() = preferences.getString(CODE, "")!!
+        set(value) = preferences.edit().putString(CODE, value).apply()
 
     fun isSyndicateChosen(): Boolean {
         return mainSyndicate != 0
