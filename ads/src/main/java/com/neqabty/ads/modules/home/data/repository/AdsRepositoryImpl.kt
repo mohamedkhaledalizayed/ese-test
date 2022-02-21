@@ -25,7 +25,7 @@ class AdsRepositoryImpl @Inject constructor(private val adsDS: AdsDS): AdsReposi
 
 fun Ad.toAdEntity(): AdEntity {
     return AdEntity(
-        createdAt, entity, id, image, title ?: "", type, updatedAt, url?:""
+        createdAt, entity, id, newsId, image, title ?: "", type, updatedAt, url?:""
     )
 }
 

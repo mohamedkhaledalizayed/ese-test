@@ -27,7 +27,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
-import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavigationItemSelectedListener {
@@ -106,6 +105,18 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
 
         carousel.carouselListener = object : CarouselListener {
             override fun onClick(position: Int, carouselItem: CarouselItem) {
+                if (listAds[position].type == "internal"){
+                    val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
+                    intent.putExtra("id", listAds[position].newsId)
+                    startActivity(intent)
+                }else{
+                    if (listAds[position].url.isEmpty()){
+                        return
+                    }
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(listAds[position].url)
+                    startActivity(intent)
+                }
                 Toast.makeText(this@HomeActivity, "${listAds[position].id}", Toast.LENGTH_LONG).show()
             }
             override fun onLongClick(position: Int, dataObject: CarouselItem) {

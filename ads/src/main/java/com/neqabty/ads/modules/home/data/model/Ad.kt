@@ -10,6 +10,8 @@ data class Ad(
     val entity: Int = 0,
     @SerializedName("id")
     val id: Int = 0,
+    @SerializedName("news_id")
+    val newsId: Int = 0,
     @SerializedName("image")
     val image: String = "",
     @SerializedName("title")
