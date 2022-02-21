@@ -16,8 +16,8 @@
             android:id="@+id/tvWelcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:text="@string/welcome"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,39 +27,28 @@
             android:id="@+id/tvMemberName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
-
-        <TextView
-            android:id="@+id/tvMemberNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:text="HELLO"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/_13ssp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvMemberName" />
 
         <TextView
             android:id="@+id/tvMobileNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:text="HELLO"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/_13ssp"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvMemberNumber" />
+            app:layout_constraintTop_toBottomOf="@id/tvMemberName" />
 
 
         <Button
             android:id="@+id/bLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@android:color/transparent"
             android:text="@string/login_title"
             android:textColor="@android:color/white"
@@ -72,6 +61,7 @@
             android:id="@+id/bChangeSyndicate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@android:color/transparent"
             android:text="@string/change_syndicate"
             android:textColor="@android:color/white"

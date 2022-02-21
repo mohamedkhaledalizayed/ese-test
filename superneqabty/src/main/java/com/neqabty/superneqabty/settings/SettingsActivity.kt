@@ -1,23 +1,17 @@
 package com.neqabty.superneqabty.settings
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationManagerCompat
-import com.neqabty.signup.core.data.Constants
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.ui.BaseActivity
-import com.neqabty.superneqabty.core.utils.PreferencesHelper
 import com.neqabty.superneqabty.databinding.ActivitySettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {

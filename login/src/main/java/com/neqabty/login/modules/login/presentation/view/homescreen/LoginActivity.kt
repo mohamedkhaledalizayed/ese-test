@@ -52,6 +52,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         dialog.dismiss()
                         if (resource.data!!.nationalId.isNotEmpty()){
                             sharedPreferences.mobile = resource.data!!.mobile
+                            sharedPreferences.name = resource.data!!.fullname
                             finish()
                         }else{
                             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()

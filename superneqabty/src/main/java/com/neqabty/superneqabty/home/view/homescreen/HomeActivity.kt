@@ -3,7 +3,9 @@ package com.neqabty.superneqabty.home.view.homescreen
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Html
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -61,6 +63,8 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
             if(sharedPreferences.mobile.isNotEmpty()){
                 sharedPreferences.name = ""
                 sharedPreferences.mobile = ""
+                onResume()
+                return@setOnClickListener
             }
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
             startActivity(intent)
@@ -138,8 +142,14 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
     override fun onResume() {
         super.onResume()
         if(sharedPreferences.mobile.isNotEmpty()){
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).text = Html.fromHtml(getString(R.string.menu_memberName, sharedPreferences.name))
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).visibility = View.VISIBLE
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).text = Html.fromHtml(getString(R.string.menu_mobileNumber, sharedPreferences.mobile))
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin).setText(R.string.logout_title)
         }else{
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).visibility = View.GONE
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin).setText(R.string.login_title)
         }
     }

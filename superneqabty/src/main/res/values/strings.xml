@@ -12,7 +12,9 @@
     <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
     <string name="app_version">Version %s</string>
     <string name="main">الجهات الرئيسية</string>
-    <string name="welcome">مرحباً</string>
+    <string name="welcome">مرحباً بك في نقابتي</string>
+    <string name="menu_memberName">اسم العضو:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
+    <string name="menu_mobileNumber">رقم الموبايل:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="logout_title">تسجيل خروج</string>
     <string name="login_title">تسجيل الدخول</string>
     <string name="change_syndicate">تغيير النقابة</string>
