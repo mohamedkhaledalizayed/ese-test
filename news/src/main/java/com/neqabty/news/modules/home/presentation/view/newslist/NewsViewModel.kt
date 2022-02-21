@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.ads.modules.home.domain.entity.AdEntity
 import com.neqabty.ads.modules.home.domain.interactors.GetAllAdsUseCase
+import com.neqabty.news.core.utils.AppUtils
+import com.neqabty.news.core.utils.Resource
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.news.modules.home.domain.interactors.GetNewsDetailsUseCase
 import com.neqabty.news.modules.home.domain.interactors.GetNewsUseCase
@@ -23,52 +25,17 @@ class NewsViewModel @Inject constructor(
     private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase,
     private val getNewsDetailsUseCase: GetNewsDetailsUseCase
 ) : ViewModel() {
-    val news = MutableLiveData<List<NewsEntity>>()
-    fun getNews() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                getNewsUseCase.build().collect {
-                    news.postValue(it)
-                }
-            } catch (e: Throwable) {
-                Log.e("", e.toString())
-            }
-        }
-    }
+    val news = MutableLiveData<Resource<List<NewsEntity>>>()
 
     fun getSyndicateNews(syndicateId: Int) {
+        news.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 getSyndicateNewsUseCase.build(syndicateId).collect {
-                    news.postValue(it)
+                    news.postValue(Resource.success(data = it))
                 }
             } catch (e: Throwable) {
-                Log.e("", e.toString())
-            }
-        }
-    }
-
-    val ads = MutableLiveData<List<AdEntity>>()
-    fun getAds() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                getAllAdsUseCase.build().collect {
-                    ads.postValue(it)
-                }
-            } catch (e: Throwable) {
-                Log.e("", e.toString())
-            }
-        }
-    }
-
-    val newsDetails = MutableLiveData<NewsEntity>()
-    fun getNewsDetails(newsId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                getNewsDetailsUseCase.build(newsId).collect {
-                    newsDetails.postValue(it)
-                }
-            } catch (e: Throwable) {
+                news.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
                 Log.e("", e.toString())
             }
         }

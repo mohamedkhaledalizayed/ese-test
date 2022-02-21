@@ -3,26 +3,52 @@ package com.neqabty.news.modules.home.presentation.view.newslist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.news.core.ui.BaseActivity
+import com.neqabty.news.core.utils.Status
+import com.neqabty.news.databinding.ActivityNewsDetailsBinding
 import com.neqabty.news.databinding.ActivityNewsListBinding
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NewsListActivity : AppCompatActivity() {
+class NewsListActivity : BaseActivity<ActivityNewsListBinding>() {
 
     private val homeViewModel: NewsViewModel by viewModels()
-    private lateinit var binding: ActivityNewsListBinding
     private val mAdapter = NewsAdapter()
+    override fun getViewBinding() = ActivityNewsListBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityNewsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupToolbar( title = "الاخبار")
         homeViewModel.getSyndicateNews(intent.getIntExtra("id", -1))
         homeViewModel.news.observe(this){
-            mAdapter.submitList(it)
+
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        if (resource.data!!.isNotEmpty()){
+                            mAdapter.submitList(resource.data)
+                        }else{
+                            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
         }
 
         binding.newsRecycler.adapter = mAdapter
