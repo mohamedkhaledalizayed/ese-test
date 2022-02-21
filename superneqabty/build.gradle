@@ -122,4 +122,5 @@ dependencies {
     implementation project(':ads')
     implementation project(':login')
     implementation project(':signup')
+    implementation project(':news')
 }

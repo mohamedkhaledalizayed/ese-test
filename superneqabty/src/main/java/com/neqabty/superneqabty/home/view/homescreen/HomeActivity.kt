@@ -14,9 +14,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.ads.modules.home.domain.entity.AdEntity
-import com.neqabty.login.core.utils.ParcelClickListenerExtra
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
-import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
+import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.aboutapp.AboutAppActivity
 import com.neqabty.superneqabty.core.ui.BaseActivity
@@ -27,7 +26,6 @@ import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.Serializable
-import java.util.*
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
@@ -65,6 +63,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
 //                val intent = Intent(this@HomeActivity, SignupActivity::class.java)
 //                startActivity(intent)
             }
+        }
+        findViewById<TextView>(R.id.tv_news).setOnClickListener {
+            val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
+            intent.putExtra("id", 5)
+            startActivity(intent)
         }
 
         findViewById<NavigationView>(R.id.nav_view).getHeaderView(0).findViewById<TextView>(R.id.bLogin).setOnClickListener {

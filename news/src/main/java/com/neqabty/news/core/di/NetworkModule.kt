@@ -17,13 +17,13 @@ import javax.inject.Named
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     @Provides
-    @Named("news")
+    @Named("newsModule")
     fun providesBaseUrl(): String {
         return "https://news.et3.co/"
     }
 
     @Provides
-    @Named("news")
+    @Named("newsModule")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -31,9 +31,9 @@ class NetworkModule {
     }
 
     @Provides
-    @Named("news")
+    @Named("newsModule")
     fun provideOkHttpClient(
-        @Named("news")loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+        @Named("newsModule")loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(40, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
@@ -46,7 +46,7 @@ class NetworkModule {
     }
 
     @Provides
-    @Named("news")
+    @Named("newsModule")
     fun provideConverterFactory(): Converter.Factory {
         return GsonConverterFactory.create()
     }
@@ -64,13 +64,13 @@ class NetworkModule {
 
     }
     @Provides
-    @Named("news")
+    @Named("newsModule")
     fun provideRetrofitClient(
-        @Named("news")
+        @Named("newsModule")
         okHttpClient: OkHttpClient,
-        @Named("news")
+        @Named("newsModule")
         baseUrl: String,
-        @Named("news")
+        @Named("newsModule")
         converterFactory: Converter.Factory
     ): Retrofit {
         return Retrofit.Builder()

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.news.R
-import com.neqabty.news.databinding.NewsLayoutItemBinding
+import com.neqabty.news.databinding.NewsItemBinding
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -25,8 +25,8 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
-        val binding: NewsLayoutItemBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.news_layout_item, parent, false)
+        val binding: NewsItemBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.news_item, parent, false)
 
         return ViewHolder(
             binding
@@ -77,6 +77,6 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
             fun setOnItemClickListener(item: NewsEntity)
     }
 
-    class ViewHolder(val binding: NewsLayoutItemBinding) :
+    class ViewHolder(val binding: NewsItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }
