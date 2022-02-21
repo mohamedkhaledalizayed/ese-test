@@ -6,8 +6,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.neqabty.news.databinding.ActivityNewsListBinding
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
-import com.neqabty.news.modules.home.presentation.view.NewsAdapter
-import com.neqabty.news.modules.home.presentation.view.NewsViewModel
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +30,7 @@ class NewsListActivity : AppCompatActivity() {
             NewsAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: NewsEntity) {
                 val intent = Intent(this@NewsListActivity, NewsDetailsActivity::class.java)
-                intent.putExtra("news", item)
+                intent.putExtra("id", item.id)
                 startActivity(intent)
             }
         }

@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.core.utils
+package com.neqabty.news.core.utils
 
 enum class Status {
     SUCCESS,

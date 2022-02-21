@@ -1,4 +1,4 @@
-package com.neqabty.news.modules.home.presentation.view
+package com.neqabty.news.modules.home.presentation.view.newslist
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

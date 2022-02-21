@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.core.utils
+package com.neqabty.news.core.utils
 
 import android.content.Context
 import android.content.res.Configuration

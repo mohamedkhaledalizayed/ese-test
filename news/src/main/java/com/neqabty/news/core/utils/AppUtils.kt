@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.core.utils
+package com.neqabty.news.core.utils
 
 import android.annotation.SuppressLint
 import retrofit2.HttpException
