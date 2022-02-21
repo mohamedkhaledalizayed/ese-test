@@ -14,7 +14,6 @@ import com.neqabty.login.core.ui.BaseActivity
 import com.neqabty.login.core.utils.ParcelClickListenerExtra
 import com.neqabty.login.core.utils.Status
 import com.neqabty.login.databinding.ActivityLoginBinding
-import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -98,8 +97,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
     fun signUp(view: View) {
 //        (intent.getSerializableExtra("listener")!! as Runnable).run()
-
-                val intent = Intent(this@LoginActivity, SignupActivity::class.java)
-                startActivity(intent)
+        startActivity(intent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT))
+//                val intent = Intent(this@LoginActivity, SignupActivity::class.java)
+//                startActivity(intent)
     }
 }

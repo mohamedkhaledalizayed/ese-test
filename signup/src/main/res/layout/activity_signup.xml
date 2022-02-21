@@ -10,17 +10,9 @@
     tools:context=".modules.home.presentation.view.homescreen.SignupActivity">
 
 
-    <androidx.appcompat.widget.Toolbar
+    <include
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"
-        android:minHeight="?attr/actionBarSize"
-        app:title="@string/signup"
-        app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white"
-        style="@style/ToolbarTheme"/>
+        layout="@layout/toolbar" />
 
     <ScrollView
         android:id="@+id/sc_view_container"

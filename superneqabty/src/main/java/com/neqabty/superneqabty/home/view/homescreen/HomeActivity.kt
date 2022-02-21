@@ -18,6 +18,7 @@ import com.neqabty.ads.modules.home.domain.entity.AdEntity
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
+import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.aboutapp.AboutAppActivity
 import com.neqabty.superneqabty.core.ui.BaseActivity
@@ -67,6 +68,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
                 return@setOnClickListener
             }
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
+            intent.putExtra(Intent.EXTRA_INTENT, Intent(this@HomeActivity, SignupActivity::class.java))
             startActivity(intent)
         }
 
