@@ -1,4 +1,4 @@
-package com.neqabty.news.modules.home.presentation.view.homescreen
+package com.neqabty.news.modules.home.presentation.view
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class NewsViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase,
     private val getAllAdsUseCase: GetAllAdsUseCase,
     private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase,
