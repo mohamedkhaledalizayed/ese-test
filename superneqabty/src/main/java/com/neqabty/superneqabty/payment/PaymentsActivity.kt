@@ -12,6 +12,7 @@ import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivit
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Status
 import com.neqabty.superneqabty.databinding.ActivityPaymentsBinding
+import com.neqabty.superneqabty.paymentdetails.PaymentDetailsActivity
 import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.domain.entity.ServiceEntity
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,16 +84,21 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
 
         if (requireRegistration){
             if (sharedPreferences.mobile.isNotEmpty()){
-                //go to receipt
+                paymentDetails()
             }else{
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.putExtra("flag", true)
                 startActivity(intent)
             }
         }else{
-        //go to receipt
+            paymentDetails()
         }
+    }
 
-
+    private fun paymentDetails(){
+        val intent = Intent(this, PaymentDetailsActivity::class.java)
+        intent.putExtra("code", serviceId)
+        intent.putExtra("number", binding.membershipId.text.toString())
+        startActivity(intent)
     }
 }

@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
+            android:name=".paymentdetails.PaymentDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".payment.PaymentsActivity"
             android:exported="false" />
         <activity
@@ -29,7 +32,7 @@
         </activity>
         <activity
             android:name=".syndicates.presentation.view.homescreen.SyndicateActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".home.view.homescreen.HomeActivity"
             android:exported="true" />
