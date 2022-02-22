@@ -7,10 +7,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Constants
 import com.neqabty.superneqabty.databinding.ActivityPaymentDetailsBinding
+import com.neqabty.superneqabty.home.domain.entity.NewsEntity
+import com.neqabty.superneqabty.home.view.homescreen.NewsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
@@ -23,6 +26,7 @@ import team.opay.business.cashier.sdk.pay.PaymentTask
 @AndroidEntryPoint
 class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
+    private val mAdapter = ItemsAdapter()
     private val paymentDetailsViewModel: PaymentDetailsViewModel by viewModels()
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +35,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
         setupToolbar(titleResId = R.string.payments)
 
+        binding.rvDetails.adapter = mAdapter
         paymentDetailsViewModel.getPaymentDetails("s0005","2718")
         paymentDetailsViewModel.payment.observe(this){
 
@@ -40,7 +45,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
                     }
                     com.neqabty.superneqabty.core.utils.Status.SUCCESS -> {
-
+                        binding.tvService.text = resource.data?.service?.name
+                        binding.tvName.text = resource.data?.member?.account?.fullname
+                        binding.tvMemberNumber.text = ""
+                        binding.tvAmount.text = resource.data?.receipt?.totalPrice.toString()
+                        mAdapter.submitList(resource.data?.receipt?.details)
                     }
                     com.neqabty.superneqabty.core.utils.Status.ERROR -> {
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
@@ -74,6 +83,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         binding.tvChannels.setOnClickListener{
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://cashier.opaycheckout.com/map")))
         }
+
     }
 
 

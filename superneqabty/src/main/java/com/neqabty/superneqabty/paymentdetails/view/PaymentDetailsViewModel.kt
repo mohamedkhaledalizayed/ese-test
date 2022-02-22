@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.superneqabty.core.utils.AppUtils
 import com.neqabty.superneqabty.core.utils.Resource
 import com.neqabty.superneqabty.paymentdetails.data.model.Receipt
+import com.neqabty.superneqabty.paymentdetails.data.model.ReceiptResponse
 import com.neqabty.superneqabty.paymentdetails.domain.interactors.GetPaymentDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PaymentDetailsViewModel @Inject constructor(private val getPaymentDetailsUseCase: GetPaymentDetailsUseCase) :
     ViewModel() {
-    val payment = MutableLiveData<Resource<Receipt>>()
+    val payment = MutableLiveData<Resource<ReceiptResponse>>()
     fun getPaymentDetails(id: String, number: String) {
         payment.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
