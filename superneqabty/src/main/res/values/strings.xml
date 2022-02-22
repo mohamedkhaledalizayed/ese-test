@@ -42,4 +42,6 @@
     <string name="alert_title">تنبيه</string>
     <string name="ok_btn">تأكيد</string>
     <string name="cancel_btn">إلغاء</string>
+    <string name="membership_id">رقم العضوية</string>
+    <string name="next">التالى</string>
 </resources>

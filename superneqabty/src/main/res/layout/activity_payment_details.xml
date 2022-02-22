@@ -11,9 +11,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/_15sdp"
-        tools:context=".paymentdetails.PaymentDetailsActivity">
+        tools:context=".paymentdetails.view.PaymentDetailsActivity">
 
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/svContent"
@@ -22,7 +27,7 @@
             android:background="@drawable/rounded_bg"
             android:padding="@dimen/_15sdp"
             android:scrollbars="none"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <LinearLayout
                 android:id="@+id/llContent"

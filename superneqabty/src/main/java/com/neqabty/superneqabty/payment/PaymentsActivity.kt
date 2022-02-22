@@ -2,7 +2,6 @@ package com.neqabty.superneqabty.payment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -12,8 +11,7 @@ import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivit
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Status
 import com.neqabty.superneqabty.databinding.ActivityPaymentsBinding
-import com.neqabty.superneqabty.paymentdetails.PaymentDetailsActivity
-import com.neqabty.superneqabty.settings.SettingsActivity
+import com.neqabty.superneqabty.paymentdetails.view.PaymentDetailsActivity
 import com.neqabty.superneqabty.syndicates.domain.entity.ServiceEntity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -87,7 +85,6 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
                 paymentDetails()
             }else{
                 val intent = Intent(this, LoginActivity::class.java)
-                intent.putExtra("flag", true)
                 startActivity(intent)
             }
         }else{

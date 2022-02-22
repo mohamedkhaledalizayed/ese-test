@@ -1,16 +1,17 @@
-package com.neqabty.superneqabty.paymentdetails
+package com.neqabty.superneqabty.paymentdetails.view
 
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Constants
 import com.neqabty.superneqabty.databinding.ActivityPaymentDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
 import team.opay.business.cashier.sdk.api.PayInput
@@ -19,14 +20,35 @@ import team.opay.business.cashier.sdk.api.Status
 import team.opay.business.cashier.sdk.api.WebJsResponse
 import team.opay.business.cashier.sdk.pay.PaymentTask
 
+@AndroidEntryPoint
 class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
+    private val paymentDetailsViewModel: PaymentDetailsViewModel by viewModels()
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        
 
+        setupToolbar(titleResId = R.string.payments)
+
+        paymentDetailsViewModel.getPaymentDetails("s0005","2718")
+        paymentDetailsViewModel.payment.observe(this){
+
+            it?.let { resource ->
+                when (resource.status) {
+                    com.neqabty.superneqabty.core.utils.Status.LOADING -> {
+
+                    }
+                    com.neqabty.superneqabty.core.utils.Status.SUCCESS -> {
+
+                    }
+                    com.neqabty.superneqabty.core.utils.Status.ERROR -> {
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+        }
         binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 binding.ivCard.visibility = View.VISIBLE
