@@ -59,6 +59,7 @@
             android:textSize="@dimen/_10ssp"
             android:textStyle="italic"
             android:inputType="number"
+            android:text="2718"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

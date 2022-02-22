@@ -36,22 +36,24 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         setupToolbar(titleResId = R.string.payments)
 
         binding.rvDetails.adapter = mAdapter
-        paymentDetailsViewModel.getPaymentDetails("s0005","2718")
+        paymentDetailsViewModel.getPaymentDetails(intent.getStringExtra("code")!!, intent.getStringExtra("number")!!)
         paymentDetailsViewModel.payment.observe(this){
 
             it?.let { resource ->
                 when (resource.status) {
                     com.neqabty.superneqabty.core.utils.Status.LOADING -> {
-
+                        binding.progressCircular.visibility = View.VISIBLE
                     }
                     com.neqabty.superneqabty.core.utils.Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
                         binding.tvService.text = resource.data?.service?.name
-                        binding.tvName.text = resource.data?.member?.account?.fullname
-                        binding.tvMemberNumber.text = ""
-                        binding.tvAmount.text = resource.data?.receipt?.totalPrice.toString()
+                        binding.tvName.text = "الاسم : ${resource.data?.member?.account?.fullname}"
+                        binding.tvMemberNumber.text = "رقم العضوية : ${intent.getStringExtra("number")!!}"
+                        binding.tvAmount.text = "الاجمالى : ${resource.data?.receipt?.totalPrice.toString()}"
                         mAdapter.submitList(resource.data?.receipt?.details)
                     }
                     com.neqabty.superneqabty.core.utils.Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
