@@ -22,6 +22,7 @@ import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivi
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.aboutapp.AboutAppActivity
 import com.neqabty.superneqabty.core.ui.BaseActivity
+import com.neqabty.superneqabty.core.utils.Constants
 import com.neqabty.superneqabty.databinding.ActivityMainBinding
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.payment.PaymentsActivity
@@ -181,7 +182,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
             }
             R.id.contactus_fragment -> {
                 val intent = Intent(Intent.ACTION_DIAL)
-                intent.data = Uri.parse("tel:0235317300")
+                intent.data = Uri.parse("tel:${Constants.CALL_CENTER}")
                 startActivity(intent)
             }
         }
