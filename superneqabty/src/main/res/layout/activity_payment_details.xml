@@ -14,117 +14,180 @@
         android:padding="@dimen/_15sdp"
         tools:context=".paymentdetails.PaymentDetailsActivity">
 
-        <LinearLayout
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/svContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:background="@drawable/rounded_bg"
+            android:padding="@dimen/_15sdp"
+            android:scrollbars="none"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tvPaymentMethod"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:text="@string/payment_method"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_13ssp"
-                android:textStyle="bold"
-                android:visibility="visible" />
-
-            <RadioGroup
-                android:id="@+id/rgPaymentMechanismType"
+            <LinearLayout
+                android:id="@+id/llContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/rb_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:buttonTint="@color/dark_green"
-                    android:checked="true"
-                    android:text="@string/payment_card"
-                    android:textSize="@dimen/_10ssp" />
-
-                <ImageView
-                    android:id="@+id/ivCard"
+                <TextView
+                    android:id="@+id/tvService"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_100sdp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/visa" />
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_15ssp" />
 
-                <RadioButton
-                    android:id="@+id/rb_channel"
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textSize="@dimen/_13ssp" />
+
+                <TextView
+                    android:id="@+id/tvMemberNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textSize="@dimen/_13ssp" />
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvRequestID"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@{Html.fromHtml(@string/expiration_date_title(memberItem.billDate))}"-->
+                <!--                    android:textSize="@dimen/_13ssp" />-->
+
+                <TextView
+                    android:id="@+id/tvAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textSize="@dimen/_13ssp" />
+
+
+                <TextView
+                    android:id="@+id/tvDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="@color/dark_green"
-                    android:text="@string/payment_channel"
-                    android:textSize="@dimen/_10ssp" />
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/details"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_13ssp" />
 
-                <LinearLayout
-                    android:id="@+id/llChannels"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="LinearLayoutManager" />
+
+                <TextView
+                    android:id="@+id/tvPaymentMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/payment_method"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <RadioGroup
+                    android:id="@+id/rgPaymentMechanismType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/rb_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:buttonTint="@color/dark_green"
+                        android:checked="true"
+                        android:text="@string/payment_card"
+                        android:textSize="@dimen/_10ssp" />
 
                     <ImageView
+                        android:id="@+id/ivCard"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_100sdp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/opay" />
+                        android:src="@drawable/visa" />
 
-                    <TextView
-                        android:id="@+id/tvChannels"
+                    <RadioButton
+                        android:id="@+id/rb_channel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/dark_green"
+                        android:text="@string/payment_channel"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <LinearLayout
+                        android:id="@+id/llChannels"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@{Html.fromHtml(@string/payment_store_locator)}"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_100sdp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/opay" />
+
+                        <TextView
+                            android:id="@+id/tvChannels"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@{Html.fromHtml(@string/payment_store_locator)}"
+                            android:textSize="@dimen/_10ssp" />
+                    </LinearLayout>
+
+                    <RadioButton
+                        android:id="@+id/rb_fawry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/dark_green"
+                        android:text="@string/payment_fawry"
                         android:textSize="@dimen/_10ssp" />
-                </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/rb_fawry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/dark_green"
-                    android:text="@string/payment_fawry"
-                    android:textSize="@dimen/_10ssp" />
+                    <ImageView
+                        android:id="@+id/ivFawry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/fawry"
+                        android:visibility="gone" />
 
-                <ImageView
-                    android:id="@+id/ivFawry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_100sdp"
-                    android:layout_gravity="center_horizontal"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/fawry"
-                    android:visibility="gone" />
+                    <RadioButton
+                        android:id="@+id/rb_mobileWallet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/dark_green"
+                        android:text="@string/payment_wallet"
+                        android:textSize="@dimen/_10ssp"
+                        android:visibility="gone" />
 
-                <RadioButton
-                    android:id="@+id/rb_mobileWallet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/dark_green"
-                    android:text="@string/payment_wallet"
-                    android:textSize="@dimen/_10ssp"
-                    android:visibility="gone" />
+                    <RadioButton
+                        android:id="@+id/rb_meeza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/dark_green"
+                        android:text="@string/payment_meeza"
+                        android:textSize="@dimen/_10ssp"
+                        android:visibility="gone" />
 
-                <RadioButton
-                    android:id="@+id/rb_meeza"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/dark_green"
-                    android:text="@string/payment_meeza"
-                    android:textSize="@dimen/_10ssp"
-                    android:visibility="gone" />
+                </RadioGroup>
 
-            </RadioGroup>
-
-        </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

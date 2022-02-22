@@ -22,6 +22,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="more">المزيد...</string>
+    <string name="details">التفاصيل:</string>
     <string name="payment_method">طريقة الدفع:</string>
     <string name="payment_card">بطاقات بنكية ( فيزا ماستر كارد ميزة)</string>
     <string name="payment_channel">منافذ الدفع Opay</string>
