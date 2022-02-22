@@ -39,6 +39,9 @@ allprojects {
         maven { url 'https://jitpack.io' }
         maven { url 'https://developer.huawei.com/repo/' }
         mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 

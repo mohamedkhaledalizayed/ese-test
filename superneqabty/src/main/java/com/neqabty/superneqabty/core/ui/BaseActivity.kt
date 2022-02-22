@@ -1,6 +1,7 @@
 package com.neqabty.superneqabty.core.ui
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
@@ -19,6 +20,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     lateinit var sharedPreferences: PreferencesHelper
     lateinit var binding: B
     abstract fun getViewBinding(): B
+    var dialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,4 +65,26 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         }
     }
     //endregion//
+
+    //region Alerts//
+
+    fun showAlert(
+        message: String,
+        title: String = getString(R.string.alert_title),
+        okCallback: (() -> Unit) = { dialog?.dismiss() }
+    ) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(title)
+        builder.setCancelable(false)
+        builder.setMessage(message)
+        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
+            try {
+                okCallback.invoke()
+            } catch (e: Exception) {
+            }
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+    //endregion
 }

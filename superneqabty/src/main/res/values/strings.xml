@@ -22,4 +22,23 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="more">المزيد...</string>
+    <string name="payment_method">طريقة الدفع:</string>
+    <string name="payment_card">بطاقات بنكية ( فيزا ماستر كارد ميزة)</string>
+    <string name="payment_channel">منافذ الدفع Opay</string>
+    <string name="payment_store_locator">لمعرفة اقرب منافذ الدفع المحيطة بك
+        <![CDATA[<font color="#41941b"><u> اضغط هنا</u></font>]]>
+    </string>
+    <string name="payment_fawry">منافذ الدفع فوري</string>
+    <string name="payment_wallet">محافظ إلكترونية</string>
+    <string name="payment_meeza">ميزة</string>
+    <string name="payment_reference">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك \n
+        كود الدفع:</string>
+    <string name="payment_reference_without_code">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك</string>
+    <string name="payment_canceled">لقد تم الغاء عملية الدفع</string>
+    <string name="payment_successful">تمت عملية الدفع بنجاح \n
+رقم العملية </string>
+
+    <string name="alert_title">تنبيه</string>
+    <string name="ok_btn">تأكيد</string>
+    <string name="cancel_btn">إلغاء</string>
 </resources>
