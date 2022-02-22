@@ -4,6 +4,7 @@
     package="com.neqabty.superneqabty">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".core.application.SuperNeqabtyApp"
         android:allowBackup="true"
@@ -11,11 +12,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.NoActionBar"
+        android:usesCleartextTraffic="true"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
-    <activity
-            android:name="com.neqabty.superneqabty.splash.SuperNeqabtySplashActivity"
+        <activity
+            android:name=".payment.PaymentsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".splash.SuperNeqabtySplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,17 +29,16 @@
         </activity>
         <activity
             android:name=".syndicates.presentation.view.homescreen.SyndicateActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".home.view.homescreen.HomeActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".settings.SettingsActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".aboutapp.AboutAppActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

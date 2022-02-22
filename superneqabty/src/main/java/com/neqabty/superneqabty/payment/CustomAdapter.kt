@@ -1,4 +1,4 @@
-package com.neqabty.superneqabty.syndicates.presentation.view.homescreen
+package com.neqabty.superneqabty.payment
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,11 +8,12 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.neqabty.superneqabty.R
+import com.neqabty.superneqabty.syndicates.domain.entity.ServiceEntity
 import com.neqabty.superneqabty.syndicates.domain.entity.SyndicateEntity
 import com.squareup.picasso.Picasso
 
 
-class CustomAdapter(var context: Context, var syndicatesList: MutableList<SyndicateEntity>) :
+class CustomAdapter(var context: Context, var syndicatesList: MutableList<ServiceEntity>) :
     BaseAdapter() {
     private var inflter: LayoutInflater? =null
 
@@ -20,7 +21,7 @@ class CustomAdapter(var context: Context, var syndicatesList: MutableList<Syndic
         return syndicatesList.size
     }
 
-    override fun getItem(i: Int): SyndicateEntity {
+    override fun getItem(i: Int): ServiceEntity {
         return syndicatesList[i]
     }
 
@@ -35,12 +36,9 @@ class CustomAdapter(var context: Context, var syndicatesList: MutableList<Syndic
         }
         var view: View = inflter!!.inflate(R.layout.spinner_item, null)
 
-        val icon = view.findViewById<View>(R.id.imageView) as ImageView
         val names = view.findViewById<View>(R.id.textView) as TextView
         names.text = syndicatesList[i].name
-        if (syndicatesList[i].image.isNotEmpty()){
-            Picasso.get().load(syndicatesList[i].image).into(icon)
-        }
+
         return view
     }
 

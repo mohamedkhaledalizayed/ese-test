@@ -24,6 +24,7 @@ import com.neqabty.superneqabty.aboutapp.AboutAppActivity
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.databinding.ActivityMainBinding
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
+import com.neqabty.superneqabty.payment.PaymentsActivity
 import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -164,7 +165,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
                 startActivity(intent)
             }
             R.id.payment -> {
-                val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
+                val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                 startActivity(intent)
             }
 //            R.id.about_fragment -> {
