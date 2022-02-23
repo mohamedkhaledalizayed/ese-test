@@ -103,7 +103,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
                     list.add(
                         CarouselItem(
                             imageUrl = data.image,
-                            caption = data.title
+                            caption = ""
                         )
                     )
                 }

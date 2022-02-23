@@ -16,7 +16,8 @@
         android:layout_width="match_parent"
         app:carouselType="BLOCK"
         android:layout_height="@dimen/_150sdp"
-        android:layout_margin="@dimen/_15sdp"/>
+        android:layout_margin="@dimen/_15sdp"
+        app:showNavigationButtons="false"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
