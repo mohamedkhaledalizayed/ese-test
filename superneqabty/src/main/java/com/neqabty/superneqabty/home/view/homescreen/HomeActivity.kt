@@ -28,13 +28,16 @@ import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.payment.PaymentsActivity
 import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
+import com.valify.valify_ekyc.sdk.ValifyConfig
+import com.valify.valify_ekyc.sdk.ValifyFactory
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 @AndroidEntryPoint
-class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : BaseActivity<ActivityMainBinding>(),
+    NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var drawer: DrawerLayout
     private lateinit var toolbar: Toolbar
@@ -63,22 +66,26 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
         }
 
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin).setOnClickListener {
-            if(sharedPreferences.mobile.isNotEmpty()){
+            if (sharedPreferences.mobile.isNotEmpty()) {
                 sharedPreferences.name = ""
                 sharedPreferences.mobile = ""
                 onResume()
                 return@setOnClickListener
             }
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
-            intent.putExtra(Intent.EXTRA_INTENT, Intent(this@HomeActivity, SignupActivity::class.java))
+            intent.putExtra(
+                Intent.EXTRA_INTENT,
+                Intent(this@HomeActivity, SignupActivity::class.java)
+            )
             startActivity(intent)
         }
 
-        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bChangeSyndicate).setOnClickListener {
-            val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
-            startActivity(intent)
-            finishAffinity()
-        }
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bChangeSyndicate)
+            .setOnClickListener {
+                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
+                startActivity(intent)
+                finishAffinity()
+            }
 
         val toggle = ActionBarDrawerToggle(
             this,
@@ -92,41 +99,43 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
         toggle.syncState()
         toolbar.setNavigationIcon(R.drawable.menu_ic)
         homeViewModel.getSyndicateNews(sharedPreferences.mainSyndicate)
-        homeViewModel.news.observe(this){
+        homeViewModel.news.observe(this) {
             mAdapter.submitList(it)
         }
 
         homeViewModel.getAds()
-        homeViewModel.ads.observe(this){
+        homeViewModel.ads.observe(this) {
             listAds.addAll(it)
-                for (data: AdEntity in it) {
-                    list.add(
-                        CarouselItem(
-                            imageUrl = data.image,
-                            caption = ""
-                        )
+            for (data: AdEntity in it) {
+                list.add(
+                    CarouselItem(
+                        imageUrl = data.image,
+                        caption = ""
                     )
-                }
+                )
+            }
 
             carousel.setData(list)
         }
 
         carousel.carouselListener = object : CarouselListener {
             override fun onClick(position: Int, carouselItem: CarouselItem) {
-                if (listAds[position].type == "internal"){
+                if (listAds[position].type == "internal") {
                     val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
                     intent.putExtra("id", listAds[position].newsId)
                     startActivity(intent)
-                }else{
-                    if (listAds[position].url.isEmpty()){
+                } else {
+                    if (listAds[position].url.isEmpty()) {
                         return
                     }
                     val intent = Intent(Intent.ACTION_VIEW)
                     intent.data = Uri.parse(listAds[position].url)
                     startActivity(intent)
                 }
-                Toast.makeText(this@HomeActivity, "${listAds[position].id}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@HomeActivity, "${listAds[position].id}", Toast.LENGTH_LONG)
+                    .show()
             }
+
             override fun onLongClick(position: Int, dataObject: CarouselItem) {
             }
         }
@@ -145,18 +154,27 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
 
     override fun onResume() {
         super.onResume()
-        if(sharedPreferences.mobile.isNotEmpty()){
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).text = Html.fromHtml(getString(R.string.menu_memberName, sharedPreferences.name))
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).visibility = View.VISIBLE
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).text = Html.fromHtml(getString(R.string.menu_mobileNumber, sharedPreferences.mobile))
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin).setText(R.string.logout_title)
-        }else{
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).visibility = View.GONE
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin).setText(R.string.login_title)
+        if (sharedPreferences.mobile.isNotEmpty()) {
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
+                View.VISIBLE
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).text =
+                Html.fromHtml(getString(R.string.menu_memberName, sharedPreferences.name))
+            binding.navView.getHeaderView(0)
+                .findViewById<TextView>(R.id.tvMobileNumber).visibility = View.VISIBLE
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).text =
+                Html.fromHtml(getString(R.string.menu_mobileNumber, sharedPreferences.mobile))
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin)
+                .setText(R.string.logout_title)
+        } else {
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
+                View.GONE
+            binding.navView.getHeaderView(0)
+                .findViewById<TextView>(R.id.tvMobileNumber).visibility = View.GONE
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin)
+                .setText(R.string.login_title)
         }
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
@@ -168,6 +186,9 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
             R.id.payment -> {
                 val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                 startActivity(intent)
+            }
+            R.id.valify -> {
+                openVlaify()
             }
 //            R.id.about_fragment -> {
 //
@@ -189,5 +210,19 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(), NavigationView.OnNavig
 
         drawer.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun openVlaify() {
+        val valifyClient = ValifyFactory(applicationContext).client
+        val valifyBuilder = ValifyConfig.Builder()
+        valifyBuilder.setBaseUrl("https://valifystage.com/")
+        valifyBuilder.setAccessToken("Bearer JICufpNPL8YqmeShfOMuCLiaxXTzAA")
+        valifyBuilder.setBundleKey("ec52910b725f4c169f85001a62ff8d01")
+        valifyBuilder.setLanguage("ar")
+        try {
+            valifyClient.startActivityForResult(this,1,valifyBuilder.build())
+        }catch (e:Throwable){
+
+        }
     }
 }

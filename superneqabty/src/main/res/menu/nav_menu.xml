@@ -9,6 +9,9 @@
         android:id="@+id/payment"
         android:title="@string/payments_title" />
 
+    <item
+        android:id="@+id/valify"
+        android:title="@string/id_valify"/>
 <!--    <item-->
 <!--        android:id="@+id/about_fragment"-->
 <!--        android:title="@string/about_title" />-->
