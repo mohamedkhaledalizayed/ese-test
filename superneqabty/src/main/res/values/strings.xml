@@ -18,6 +18,7 @@
     <string name="logout_title">تسجيل خروج</string>
     <string name="login_title">تسجيل الدخول</string>
     <string name="change_syndicate">تغيير النقابة</string>
+    <string name="neqabty_mega">نقابتي</string>
     <string name="neqabty">نقابتي هو منصة تفاعلية تهدف الي تقديم خدمات الرعاية الصحية لنقابة المهندسين المصرية بطريقة مميكنة مدعمة بوسائل مختلفة للدفع الالكتروني لتسهيل الحصول علي الخدمات ومتابعة مدفوعاتهم باقل وقت ومجهود</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

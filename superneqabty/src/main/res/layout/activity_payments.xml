@@ -10,6 +10,27 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:src="@drawable/logo"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/neqabty_mega"
+        android:id="@+id/neqabty"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
     <FrameLayout
         android:id="@+id/spinner_container"
         android:layout_width="match_parent"
@@ -18,7 +39,7 @@
         android:background="@drawable/spinner_brder_white"
         android:padding="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/neqabty"
         app:layout_constraintStart_toStartOf="parent">
 
         <Spinner

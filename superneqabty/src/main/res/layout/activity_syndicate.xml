@@ -8,6 +8,28 @@
     android:background="@color/splash_bg"
     tools:context=".syndicates.presentation.view.homescreen.SyndicateActivity">
 
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:src="@drawable/logo"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/neqabty_mega"
+        android:id="@+id/neqabty"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,10 +37,10 @@
         android:id="@+id/main"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/neqabty" />
 
     <TextView
         android:id="@+id/textView2"
