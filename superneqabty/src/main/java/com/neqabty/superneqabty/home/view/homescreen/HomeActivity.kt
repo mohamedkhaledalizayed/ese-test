@@ -84,7 +84,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             .setOnClickListener {
                 val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
                 startActivity(intent)
-                finishAffinity()
             }
 
         val toggle = ActionBarDrawerToggle(
