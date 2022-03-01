@@ -67,10 +67,9 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         }
 
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin).setOnClickListener {
+            drawer.close()
             if (sharedPreferences.mobile.isNotEmpty()) {
-                sharedPreferences.name = ""
-                sharedPreferences.mobile = ""
-                onResume()
+                logout("هل تريد تسجيل خروج!")
                 return@setOnClickListener
             }
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
@@ -150,6 +149,29 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
         binding.navView.setNavigationItemSelectedListener(this)
+    }
+
+    private fun logout(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            sharedPreferences.name = ""
+            sharedPreferences.mobile = ""
+            onResume()
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
     }
 
     override fun onResume() {
