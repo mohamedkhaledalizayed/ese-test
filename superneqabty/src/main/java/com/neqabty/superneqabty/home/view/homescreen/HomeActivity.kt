@@ -1,5 +1,6 @@
 package com.neqabty.superneqabty.home.view.homescreen
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -223,5 +224,30 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         }catch (e:Throwable){
 
         }
+    }
+
+    override fun onBackPressed() {
+        showAlertDialog("هل تريد الخروج من التطبيق!")
+    }
+
+    private fun showAlertDialog(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            finish()
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
     }
 }
