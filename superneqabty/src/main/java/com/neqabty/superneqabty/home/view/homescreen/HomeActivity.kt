@@ -31,8 +31,11 @@ import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.payment.PaymentsActivity
 import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
+import com.valify.valify_ekyc.sdk.Valify
+import com.valify.valify_ekyc.sdk.Valify.ValifyResultListener
 import com.valify.valify_ekyc.sdk.ValifyConfig
 import com.valify.valify_ekyc.sdk.ValifyFactory
+import com.valify.valify_ekyc.viewmodel.ValifyData
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
@@ -51,7 +54,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     private val mAdapter = NewsAdapter()
     private val listAds = ArrayList<AdEntity>()
     val list = mutableListOf<CarouselItem>()
-
+    lateinit var valifyClient: Valify
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,6 +92,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             .setOnClickListener {
                 val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
                 startActivity(intent)
+                finishAffinity()
             }
 
         val toggle = ActionBarDrawerToggle(
@@ -154,6 +158,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
         binding.navView.setNavigationItemSelectedListener(this)
+        valifyClient = ValifyFactory(applicationContext).client
     }
 
     private fun logout(message: String) {
@@ -240,11 +245,10 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     private fun openVlaify() {
-        val valifyClient = ValifyFactory(applicationContext).client
         val valifyBuilder = ValifyConfig.Builder()
         valifyBuilder.setBaseUrl("https://valifystage.com/")
-        valifyBuilder.setAccessToken("Bearer JICufpNPL8YqmeShfOMuCLiaxXTzAA")
-        valifyBuilder.setBundleKey("ec52910b725f4c169f85001a62ff8d01")
+        valifyBuilder.setAccessToken("r8UiQ3y30RiLZM9RE1xZyHHtIb6jb3")
+        valifyBuilder.setBundleKey("13415658ea504635a05aaab8465e5005")
         valifyBuilder.setLanguage("ar")
         try {
             valifyClient.startActivityForResult(this,1,valifyBuilder.build())
@@ -290,5 +294,31 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        valifyClient.handleActivityResult(resultCode, data, object : ValifyResultListener {
+            override fun onSuccess(
+                valifyToken: String, valifyData: ValifyData
+            ) {
+                Log.d("neqabty", "s")
+            }
+
+            override fun onExit(
+                valifyToken: String, step: String,
+                valifyData: ValifyData
+            ) {
+                Log.d("neqabty", "s")
+            }
+
+            override fun onError(
+                valifyToken: String, errorCode: Int,
+                step: String, valifyData: ValifyData
+            ) {
+                Log.d("neqabty", "s")
+            }
+        })
     }
 }

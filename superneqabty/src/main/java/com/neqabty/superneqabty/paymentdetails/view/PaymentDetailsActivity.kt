@@ -87,6 +87,14 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://cashier.opaycheckout.com/map")))
         }
 
+        binding.btnNext.setOnClickListener{
+            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
+                oPayPayment(true)
+            else if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
+                oPayPayment(false)
+            else
+                cowPayPayment(false)
+        }
     }
 
 
@@ -164,18 +172,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             }
         }
     }
-
-
-    private fun handleViewState() {
-//        llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-            oPayPayment(true)
-        else if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-            oPayPayment(false)
-        else
-            cowPayPayment(false)
-    }
-
 
     fun oPayPayment(isCredit: Boolean) {
         val paymentType = if(isCredit) "BankCard" else "ReferenceCode"

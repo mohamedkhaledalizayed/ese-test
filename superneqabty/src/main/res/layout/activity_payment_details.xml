@@ -194,6 +194,18 @@
 
                 </RadioGroup>
 
+
+                <Button
+                    android:id="@+id/btn_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/next"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_10ssp"
+                    android:background="@color/colorPrimary"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    />
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
