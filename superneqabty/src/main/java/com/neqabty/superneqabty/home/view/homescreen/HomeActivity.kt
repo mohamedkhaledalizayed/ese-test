@@ -5,6 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -35,6 +37,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityMainBinding>(),
@@ -271,5 +276,19 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         }
         alertDialog.show()
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.change_syndicate) {
+
+        } else if (item.itemId == R.id.auth) {
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
