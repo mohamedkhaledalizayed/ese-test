@@ -46,6 +46,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                     }
                     com.neqabty.superneqabty.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
+                        binding.llContent.visibility = View.VISIBLE
                         binding.tvService.text = resource.data?.service?.name
                         binding.tvName.text = "الاسم : ${resource.data?.member?.account?.fullname}"
                         binding.tvMemberNumber.text = "رقم العضوية : ${intent.getStringExtra("number")!!}"
