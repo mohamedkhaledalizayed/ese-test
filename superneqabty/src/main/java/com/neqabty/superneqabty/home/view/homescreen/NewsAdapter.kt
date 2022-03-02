@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.superneqabty.R
+import com.neqabty.superneqabty.core.utils.AppUtils
 import com.neqabty.superneqabty.databinding.NewsLayoutItemBinding
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.squareup.picasso.Callback
@@ -50,7 +51,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
             })
 
         viewHolder.binding.newsTitle.text = item.headline
-        viewHolder.binding.newsDate.text = item.createdAt
+        viewHolder.binding.newsDate.text = AppUtils().dateFormat(item.createdAt)
 
         viewHolder.binding.newsImage.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)
