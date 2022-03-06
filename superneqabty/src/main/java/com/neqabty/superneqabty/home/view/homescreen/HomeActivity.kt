@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -36,7 +35,7 @@ import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityMainBinding>(),
@@ -58,6 +57,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         setupToolbar(titleResId = R.string.home_title)
         toolbar = binding.contentActivity.toolbar.toolbar
 
+        toolbar.overflowIcon = getDrawable(R.drawable.ic_baseline_more_vert_24)
         drawer = binding.drawerLayout
         val carousel: ImageCarousel = findViewById(R.id.carousel)
         carousel.registerLifecycle(lifecycle)
@@ -67,27 +67,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             intent.putExtra("id", sharedPreferences.mainSyndicate)
             startActivity(intent)
         }
-
-        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin).setOnClickListener {
-            drawer.close()
-            if (sharedPreferences.mobile.isNotEmpty()) {
-                logout("هل تريد تسجيل خروج!")
-                return@setOnClickListener
-            }
-            val intent = Intent(this@HomeActivity, LoginActivity::class.java)
-            intent.putExtra(
-                Intent.EXTRA_INTENT,
-                Intent(this@HomeActivity, SignupActivity::class.java)
-            )
-            startActivity(intent)
-        }
-
-        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bChangeSyndicate)
-            .setOnClickListener {
-                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
-                startActivity(intent)
-                finishAffinity()
-            }
 
         val toggle = ActionBarDrawerToggle(
             this,
@@ -189,15 +168,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 .findViewById<TextView>(R.id.tvMobileNumber).visibility = View.VISIBLE
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).text =
                 Html.fromHtml(getString(R.string.menu_mobileNumber, sharedPreferences.mobile))
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin)
-                .setText(R.string.logout_title)
         } else {
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
                 View.GONE
             binding.navView.getHeaderView(0)
                 .findViewById<TextView>(R.id.tvMobileNumber).visibility = View.GONE
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bLogin)
-                .setText(R.string.login_title)
         }
     }
 
@@ -283,13 +258,33 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.change_syndicate) {
-
+            val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
+            startActivity(intent)
+            finishAffinity()
         } else if (item.itemId == R.id.auth) {
-
+            if (sharedPreferences.mobile.isNotEmpty()) {
+                logout("هل تريد تسجيل خروج!")
+                return true
+            }
+            val intent = Intent(this@HomeActivity, LoginActivity::class.java)
+            intent.putExtra(
+                Intent.EXTRA_INTENT,
+                Intent(this@HomeActivity, SignupActivity::class.java)
+            )
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        val item = menu.findItem(R.id.auth)
+        if (sharedPreferences.mobile.isNotEmpty()) {
+            item.title = getString(R.string.logout_title)
+        }else{
+            item.title = getString(R.string.login_title)
+        }
+        return super.onPrepareOptionsMenu(menu)
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
