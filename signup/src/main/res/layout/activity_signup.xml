@@ -103,40 +103,10 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/licence_number_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/national_id_container"
-                android:background="@drawable/edit_text"
-                android:layout_marginTop="@dimen/_10sdp"
-                >
-
-                <EditText
-                    android:id="@+id/licence_number"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="الترخيص"
-                    android:padding="@dimen/_10sdp"
-                    android:textAlignment="textStart"
-                    android:textColor="#748A9D"
-                    android:textColorHint="#748A9D"
-                    android:textSize="@dimen/_10ssp"
-                    android:inputType="number"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/phone_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/licence_number_container"
+                app:layout_constraintTop_toBottomOf="@id/national_id_container"
                 android:background="@drawable/edit_text"
                 android:layout_marginTop="@dimen/_10sdp"
                 >
@@ -161,42 +131,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/password_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/phone_container"
-                android:background="@drawable/edit_text"
-                android:layout_marginTop="@dimen/_10sdp"
-                >
-
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="كلمة المرور"
-                    android:padding="@dimen/_10sdp"
-                    android:textAlignment="textStart"
-                    android:textColor="#748A9D"
-                    android:textColorHint="#748A9D"
-                    android:textSize="@dimen/_10ssp"
-                    android:textStyle="italic"
-                    android:inputType="textPassword"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_35sdp"
-                app:layout_constraintTop_toBottomOf="@id/password_container"
-                app:layout_constraintStart_toStartOf="@id/password_container"
-                app:layout_constraintEnd_toEndOf="@id/password_container"
+                app:layout_constraintTop_toBottomOf="@id/phone_container"
+                app:layout_constraintStart_toStartOf="@id/phone_container"
+                app:layout_constraintEnd_toEndOf="@id/phone_container"
                 android:text="تسجيل إشتراك"
                 android:onClick="signUp"
                 android:textColor="@android:color/white"

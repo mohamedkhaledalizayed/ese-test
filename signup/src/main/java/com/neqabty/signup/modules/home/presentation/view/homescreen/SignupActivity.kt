@@ -75,11 +75,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             return
         }
 
-        if (binding.licenceNumber.text.toString().isEmpty()){
-            Toast.makeText(this, "من فضلك ادخل رقم الترخيص", Toast.LENGTH_LONG).show()
-            return
-        }
-
         if (binding.phone.text.toString().isEmpty()){
             Toast.makeText(this, "من فضلك ادخل رقم الموبايل", Toast.LENGTH_LONG).show()
             return
@@ -89,24 +84,14 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             Toast.makeText(this, "من فضلك ادخل رقم الموبايل صحيح", Toast.LENGTH_LONG).show()
             return
         }
-
-        if (binding.password.text.toString().isEmpty()){
-            Toast.makeText(this, "من فضلك ادخل كلمة المرور", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (binding.password.text.toString().length < 6){
-            Toast.makeText(this, "من فضلك كلمة المرور لا تقل عن 6 ارقام و حروف", Toast.LENGTH_LONG).show()
-            return
-        }
         signupViewModel.signup(
             SignupParams(
                 entityCode = "e0005",
-                licenceNumber = binding.licenceNumber.text.toString(),
+                licenceNumber = "",
                 membershipId = binding.membershipId.text.toString(),
                 mobile = binding.phone.text.toString(),
                 nationalId = binding.nationalId.text.toString(),
-                password = binding.password.text.toString()
+                password = ""
             )
         )
     }
