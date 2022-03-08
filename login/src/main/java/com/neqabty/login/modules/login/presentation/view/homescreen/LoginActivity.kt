@@ -13,9 +13,11 @@ import com.neqabty.login.R
 import com.neqabty.login.core.ui.BaseActivity
 import com.neqabty.login.core.utils.ParcelClickListenerExtra
 import com.neqabty.login.core.utils.Status
+import com.neqabty.login.core.utils.isMobileValid
 import com.neqabty.login.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
+import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
@@ -89,6 +91,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         if (binding.etPassword.text.toString().isEmpty()){
             Toast.makeText(this, "من فضلك ادخل كلمة المرور", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etPassword.text.toString().length < 6){
+            Toast.makeText(this, "من فضلك ادخل كلمة مرور قوية", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if(!binding.etUsername.text.toString().isMobileValid()) {
+            Toast.makeText(this, "من فضلك ادخل رقم صحيح", Toast.LENGTH_LONG).show()
             return
         }
 

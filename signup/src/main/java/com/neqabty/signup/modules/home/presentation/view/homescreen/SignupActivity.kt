@@ -8,10 +8,13 @@ import androidx.activity.viewModels
 import com.neqabty.signup.R
 import com.neqabty.signup.core.ui.BaseActivity
 import com.neqabty.signup.core.utils.Status
+import com.neqabty.signup.core.utils.isMobileValid
+import com.neqabty.signup.core.utils.isNationalIdValid
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.home.domain.entity.SignupParams
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
+import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class SignupActivity : BaseActivity<ActivitySignupBinding>() {
@@ -70,7 +73,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             return
         }
 
-        if (binding.nationalId.text.toString().length < 14){
+        if (binding.nationalId.text.toString().isNationalIdValid()){
             Toast.makeText(this, "من فضلك ادخل الرقم القومى صحيح", Toast.LENGTH_LONG).show()
             return
         }
@@ -80,10 +83,11 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             return
         }
 
-        if (binding.phone.text.toString().length < 11){
-            Toast.makeText(this, "من فضلك ادخل رقم الموبايل صحيح", Toast.LENGTH_LONG).show()
+        if(!binding.phone.text.toString().isMobileValid()) {
+            Toast.makeText(this, "من فضلك ادخل رقم صحيح", Toast.LENGTH_LONG).show()
             return
         }
+
         signupViewModel.signup(
             SignupParams(
                 entityCode = "e0005",
@@ -95,4 +99,5 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             )
         )
     }
+
 }
