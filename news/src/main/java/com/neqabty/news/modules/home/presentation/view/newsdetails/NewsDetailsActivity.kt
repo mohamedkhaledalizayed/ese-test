@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.news.R
 import com.neqabty.news.core.ui.BaseActivity
 import com.neqabty.news.core.utils.Status
 import com.neqabty.news.databinding.ActivityNewsDetailsBinding
@@ -19,6 +20,7 @@ class NewsDetailsActivity : BaseActivity<ActivityNewsDetailsBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setupToolbar( titleResId = R.string.news)
         val newsId = intent.getIntExtra("id", -1)
 
         newsDetailsViewModel.getNewsDetails(newsId)
@@ -32,7 +34,6 @@ class NewsDetailsActivity : BaseActivity<ActivityNewsDetailsBinding>() {
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data != null){
-                            setupToolbar( title = resource.data.headline)
                             Picasso.get().load(resource.data.image).into(binding.newsImage)
                             binding.newsTitle.text = resource.data.headline
                             binding.content.text = resource.data.content
