@@ -68,6 +68,7 @@
                     android:textStyle="italic"
                     android:inputType="phone"
                     android:text="01111111112"
+                    android:maxLength="11"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"

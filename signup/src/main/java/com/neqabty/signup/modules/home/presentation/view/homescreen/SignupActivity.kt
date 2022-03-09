@@ -73,7 +73,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             return
         }
 
-        if (binding.nationalId.text.toString().isNationalIdValid()){
+        if (!binding.nationalId.text.toString().isNationalIdValid()){
             Toast.makeText(this, "من فضلك ادخل الرقم القومى صحيح", Toast.LENGTH_LONG).show()
             return
         }
