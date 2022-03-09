@@ -39,7 +39,7 @@ class NewsListActivity : BaseActivity<ActivityNewsListBinding>() {
                         if (resource.data!!.isNotEmpty()){
                             mAdapter.submitList(resource.data)
                         }else{
-                            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "لا يوجد اخبار", Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {
