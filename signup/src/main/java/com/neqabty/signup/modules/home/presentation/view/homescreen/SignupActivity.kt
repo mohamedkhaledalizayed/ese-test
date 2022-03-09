@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.text.isDigitsOnly
 import com.neqabty.signup.R
 import com.neqabty.signup.core.ui.BaseActivity
 import com.neqabty.signup.core.utils.Status
@@ -33,9 +34,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             .setMessage("من فضلك انتظر...")
             .build()
 
-        if (sharedPreferences.mobile.isNotEmpty()){
-            Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
-        }
 
         signupViewModel.user.observe(this){
 
@@ -47,9 +45,11 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                     Status.SUCCESS -> {
                         dialog.dismiss()
                         if (resource.data!!.nationalId.isNotEmpty()){
-                            sharedPreferences.mobile = resource.data!!.mobile
+                            sharedPreferences.mobile = resource.data.mobile
+                            sharedPreferences.name = resource.data.fullname
+                            finish()
                         }else{
-                            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "حدث خطاء", Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {
@@ -68,15 +68,15 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             return
         }
 
-        if (binding.nationalId.text.toString().isEmpty()){
+        if (binding.nationalId.text.toString().isEmpty() || !binding.nationalId.text.isDigitsOnly()){
             Toast.makeText(this, "من فضلك ادخل الرقم القومى", Toast.LENGTH_LONG).show()
             return
         }
 
-        if (!binding.nationalId.text.toString().isNationalIdValid()){
-            Toast.makeText(this, "من فضلك ادخل الرقم القومى صحيح", Toast.LENGTH_LONG).show()
-            return
-        }
+//        if (!binding.nationalId.text.toString().isNationalIdValid()){
+//            Toast.makeText(this, "من فضلك ادخل الرقم القومى صحيح", Toast.LENGTH_LONG).show()
+//            return
+//        }
 
         if (binding.phone.text.toString().isEmpty()){
             Toast.makeText(this, "من فضلك ادخل رقم الموبايل", Toast.LENGTH_LONG).show()
@@ -90,12 +90,10 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
         signupViewModel.signup(
             SignupParams(
-                entityCode = "e0005",
-                licenceNumber = "",
+                entityCode = intent.getStringExtra("code")!!,
                 membershipId = binding.membershipId.text.toString(),
                 mobile = binding.phone.text.toString(),
-                nationalId = binding.nationalId.text.toString(),
-                password = ""
+                last4_national_id = binding.nationalId.text.toString()
             )
         )
     }

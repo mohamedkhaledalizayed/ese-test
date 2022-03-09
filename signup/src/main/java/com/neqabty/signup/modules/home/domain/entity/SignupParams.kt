@@ -4,9 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class SignupParams(
     val entityCode: String = "",
-    val licenceNumber: String = "",
     val membershipId: String = "",
     val mobile: String = "",
-    val nationalId: String = "",
-    val password: String = ""
+    val last4_national_id: String = "",
 )

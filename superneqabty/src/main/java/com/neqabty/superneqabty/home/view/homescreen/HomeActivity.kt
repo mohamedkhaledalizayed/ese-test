@@ -267,6 +267,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 return true
             }
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
+            intent.putExtra("code", sharedPreferences.code)
             intent.putExtra(
                 Intent.EXTRA_INTENT,
                 Intent(this@HomeActivity, SignupActivity::class.java)

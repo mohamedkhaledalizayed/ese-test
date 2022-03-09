@@ -17,5 +17,5 @@ class SignupRepositoryImpl @Inject constructor(private val signupDS: SignupDS) :
 }
 
 private fun SignupParams.toSignupBody(): SignupBody {
-    return SignupBody(entityCode, licenceNumber, membershipId, mobile, nationalId, password)
+    return SignupBody(entityCode, membershipId, mobile, last4_national_id)
 }

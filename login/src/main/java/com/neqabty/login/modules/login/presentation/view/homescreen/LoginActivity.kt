@@ -109,7 +109,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
     fun signUp(view: View) {
 //        (intent.getSerializableExtra("listener")!! as Runnable).run()
-        startActivity(intent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT))
+        startActivity(intent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT)?.putExtra("code", intent.getStringExtra("code")))
+        finish()
 //                val intent = Intent(this@LoginActivity, SignupActivity::class.java)
 //                startActivity(intent)
     }
