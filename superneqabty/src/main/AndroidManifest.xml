@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar"
         android:usesCleartextTraffic="true"
-        tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
+        android:networkSecurityConfig="@xml/network_security"
+        tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic,android:networkSecurityConfig">
         <activity
             android:name=".paymentdetails.view.PaymentDetailsActivity"
             android:exported="false" />

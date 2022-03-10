@@ -21,11 +21,6 @@ class NewsRepositoryImpl @Inject constructor(private val newsDS: NewsDS) : NewsR
         }
     }
 
-    override fun getNewsDetails(newsId: Int): Flow<NewsEntity> {
-        return flow {
-            emit(newsDS.getNewsDetails(newsId).toNewsEntity())
-        }
-    }
 }
 
 private fun News.toNewsEntity(): NewsEntity {
