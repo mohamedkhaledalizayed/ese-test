@@ -137,6 +137,19 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         }
         binding.navView.setNavigationItemSelectedListener(this)
         valifyClient = ValifyFactory(applicationContext).client
+
+        homeViewModel.token.observe(this) {
+            val valifyBuilder = ValifyConfig.Builder()
+            valifyBuilder.setBaseUrl("https://valifystage.com/")
+            valifyBuilder.setAccessToken(it.data.accessToken)
+            valifyBuilder.setBundleKey("13415658ea504635a05aaab8465e5005")
+            valifyBuilder.setLanguage("ar")
+            try {
+                valifyClient.startActivityForResult(this,1,valifyBuilder.build())
+            }catch (e:Throwable){
+
+            }
+        }
     }
 
     private fun logout(message: String) {
@@ -221,18 +234,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     private fun openVlaify() {
 
         homeViewModel.getToken()
-        homeViewModel.token.observe(this) {
-            val valifyBuilder = ValifyConfig.Builder()
-            valifyBuilder.setBaseUrl("https://valifystage.com/")
-            valifyBuilder.setAccessToken(it.data.accessToken)
-            valifyBuilder.setBundleKey("13415658ea504635a05aaab8465e5005")
-            valifyBuilder.setLanguage("ar")
-            try {
-                valifyClient.startActivityForResult(this,1,valifyBuilder.build())
-            }catch (e:Throwable){
 
-            }
-        }
     }
 
     override fun onBackPressed() {
@@ -302,21 +304,21 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             override fun onSuccess(
                 valifyToken: String, valifyData: ValifyData
             ) {
-                Log.d("neqabty", "s")
+                Log.e("neqabty", "onSuccess")
             }
 
             override fun onExit(
                 valifyToken: String, step: String,
                 valifyData: ValifyData
             ) {
-                Log.d("neqabty", "s")
+                Log.e("neqabty", "onExit")
             }
 
             override fun onError(
                 valifyToken: String, errorCode: Int,
                 step: String, valifyData: ValifyData
             ) {
-                Log.d("neqabty", "s")
+                Log.e("neqabty", "onError")
             }
         })
     }
