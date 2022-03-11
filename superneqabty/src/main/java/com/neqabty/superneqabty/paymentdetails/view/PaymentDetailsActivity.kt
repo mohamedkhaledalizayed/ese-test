@@ -50,7 +50,8 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         binding.tvService.text = resource.data?.service?.name
 //                        binding.tvName.text = "الاسم : ${resource.data?.member?.account?.fullname}"
                         binding.tvMemberNumber.text = "رقم العضوية : ${intent.getStringExtra("number")!!}"
-                        binding.tvAmount.text = "الاجمالى : ${resource.data?.receipt?.totalPrice.toString()}"
+                        val total = paymentDetailsViewModel.payment.value?.data?.receipt?.card_total_price.toString()
+                        binding.tvAmount.text = "الاجمالى : ${total}"
                         mAdapter.submitList(resource.data?.receipt?.details)
                     }
                     com.neqabty.superneqabty.core.utils.Status.ERROR -> {
@@ -63,23 +64,29 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         }
         binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
+                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.card_total_price.toString()
                 binding.ivCard.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
                 binding.ivFawry.visibility = View.GONE
+                binding.tvAmount.text = "الاجمالى : ${total}"
             }
         }
         binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
+                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.outlet_total_price.toString()
                 binding.llChannels.visibility = View.VISIBLE
                 binding.ivCard.visibility = View.GONE
                 binding.ivFawry.visibility = View.GONE
+                binding.tvAmount.text = "الاجمالى : ${total}"
             }
         }
         binding.rbFawry.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
+                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.outlet_total_price.toString()
                 binding.ivFawry.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
                 binding.ivCard.visibility = View.GONE
+                binding.tvAmount.text = "الاجمالى : ${total}"
             }
         }
 

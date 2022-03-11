@@ -104,11 +104,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             carousel.setData(list)
         }
 
-        homeViewModel.getToken()
-        homeViewModel.token.observe(this) {
-            Log.e("Token", it.data.accessToken)
-        }
-
         carousel.carouselListener = object : CarouselListener {
             override fun onClick(position: Int, carouselItem: CarouselItem) {
                 if (listAds[position].type == "internal") {
@@ -224,15 +219,19 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     private fun openVlaify() {
-        val valifyBuilder = ValifyConfig.Builder()
-        valifyBuilder.setBaseUrl("https://valifystage.com/")
-        valifyBuilder.setAccessToken("r8UiQ3y30RiLZM9RE1xZyHHtIb6jb3")
-        valifyBuilder.setBundleKey("13415658ea504635a05aaab8465e5005")
-        valifyBuilder.setLanguage("ar")
-        try {
-            valifyClient.startActivityForResult(this,1,valifyBuilder.build())
-        }catch (e:Throwable){
 
+        homeViewModel.getToken()
+        homeViewModel.token.observe(this) {
+            val valifyBuilder = ValifyConfig.Builder()
+            valifyBuilder.setBaseUrl("https://valifystage.com/")
+            valifyBuilder.setAccessToken(it.data.accessToken)
+            valifyBuilder.setBundleKey("13415658ea504635a05aaab8465e5005")
+            valifyBuilder.setLanguage("ar")
+            try {
+                valifyClient.startActivityForResult(this,1,valifyBuilder.build())
+            }catch (e:Throwable){
+
+            }
         }
     }
 
