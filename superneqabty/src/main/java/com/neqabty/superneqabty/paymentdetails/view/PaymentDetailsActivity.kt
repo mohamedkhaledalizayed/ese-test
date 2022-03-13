@@ -14,6 +14,7 @@ import com.neqabty.superneqabty.core.utils.Constants
 import com.neqabty.superneqabty.databinding.ActivityPaymentDetailsBinding
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.home.view.homescreen.NewsAdapter
+import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
 import dagger.hilt.android.AndroidEntryPoint
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
@@ -28,6 +29,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
     private val mAdapter = ItemsAdapter()
     private val paymentDetailsViewModel: PaymentDetailsViewModel by viewModels()
+    private var paymentMethod = "card"
+    private var serviceCode = ""
+    private var number = ""
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +40,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         setupToolbar(titleResId = R.string.payments)
 
         binding.rvDetails.adapter = mAdapter
-        paymentDetailsViewModel.getPaymentDetails(intent.getStringExtra("code")!!, intent.getStringExtra("number")!!)
+        serviceCode = intent.getStringExtra("code")!!
+        number = intent.getStringExtra("number")!!
+        paymentDetailsViewModel.getPaymentDetails(serviceCode, number)
         paymentDetailsViewModel.payment.observe(this){
 
             it?.let { resource ->
@@ -62,8 +68,30 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             }
 
         }
+
+        paymentDetailsViewModel.paymentInfo.observe(this){
+
+            it?.let { resource ->
+                when (resource.status) {
+                    com.neqabty.superneqabty.core.utils.Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    com.neqabty.superneqabty.core.utils.Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        Toast.makeText(this, "Test", Toast.LENGTH_LONG).show()
+                    }
+                    com.neqabty.superneqabty.core.utils.Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+        }
+
         binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
+                paymentMethod = "card"
                 val total = paymentDetailsViewModel.payment.value?.data?.receipt?.card_total_price.toString()
                 binding.ivCard.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
@@ -73,6 +101,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         }
         binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
+                paymentMethod = "card"
                 val total = paymentDetailsViewModel.payment.value?.data?.receipt?.outlet_total_price.toString()
                 binding.llChannels.visibility = View.VISIBLE
                 binding.ivCard.visibility = View.GONE
@@ -82,6 +111,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         }
         binding.rbFawry.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
+                paymentMethod = "fawry"
                 val total = paymentDetailsViewModel.payment.value?.data?.receipt?.outlet_total_price.toString()
                 binding.ivFawry.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
@@ -95,15 +125,16 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         }
 
         binding.btnNext.setOnClickListener{
-            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-                oPayPayment(true)
-            else if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-                oPayPayment(false)
-            else
-                cowPayPayment(false)
+//            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
+//                oPayPayment(true)
+//            else if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
+//                oPayPayment(false)
+//            else
+//                cowPayPayment(false)
+
+            paymentDetailsViewModel.getPaymentInfo(PaymentBody(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = "185", itemId = number.toInt()))
         }
     }
-
 
     fun cowPayPayment(isCredit: Boolean) {
         var intent = Intent(this, PaymentMethodsActivity::class.java)
