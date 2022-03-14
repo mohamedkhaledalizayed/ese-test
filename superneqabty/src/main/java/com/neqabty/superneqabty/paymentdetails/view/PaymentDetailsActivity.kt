@@ -1,19 +1,19 @@
 package com.neqabty.superneqabty.paymentdetails.view
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Constants
 import com.neqabty.superneqabty.databinding.ActivityPaymentDetailsBinding
-import com.neqabty.superneqabty.home.domain.entity.NewsEntity
-import com.neqabty.superneqabty.home.view.homescreen.NewsAdapter
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
 import dagger.hilt.android.AndroidEntryPoint
 import me.cowpay.PaymentMethodsActivity
@@ -23,6 +23,7 @@ import team.opay.business.cashier.sdk.api.PaymentStatus
 import team.opay.business.cashier.sdk.api.Status
 import team.opay.business.cashier.sdk.api.WebJsResponse
 import team.opay.business.cashier.sdk.pay.PaymentTask
+
 
 @AndroidEntryPoint
 class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
@@ -78,7 +79,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                     }
                     com.neqabty.superneqabty.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
-                        Toast.makeText(this, "Test", Toast.LENGTH_LONG).show()
+                        if (resource.data?.payment?.transaction?.paymentGatewayReferenceId.isNullOrEmpty()){
+                            Toast.makeText(this, "حدث خطاء", Toast.LENGTH_LONG).show()
+                        }else{
+                            showAlertDialog("Message Here", resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
+                        }
                     }
                     com.neqabty.superneqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
@@ -134,6 +139,28 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
             paymentDetailsViewModel.getPaymentInfo(PaymentBody(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = "185", itemId = number.toInt()))
         }
+    }
+
+    private fun showAlertDialog(message: String, paymentGatewayReferenceId: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "نسخ"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            copyText(paymentGatewayReferenceId)
+        }
+        alertDialog.show()
+
+    }
+
+    private fun copyText(paymentGatewayReferenceId: String) {
+        val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", paymentGatewayReferenceId)
+        clipboard.setPrimaryClip(clip)
     }
 
     fun cowPayPayment(isCredit: Boolean) {
