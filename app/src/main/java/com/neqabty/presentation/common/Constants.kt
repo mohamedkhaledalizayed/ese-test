@@ -86,6 +86,7 @@ object Constants {
     enum class PaymentOption {
         OpayCredit,
         OpayPOS,
-        Fawry
+        Fawry,
+        MobileWallet
     }
 }

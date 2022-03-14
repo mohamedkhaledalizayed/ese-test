@@ -27,10 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
-import team.opay.business.cashier.sdk.api.PayInput
-import team.opay.business.cashier.sdk.api.PaymentStatus
-import team.opay.business.cashier.sdk.api.Status
-import team.opay.business.cashier.sdk.api.WebJsResponse
+import team.opay.business.cashier.sdk.api.*
 import team.opay.business.cashier.sdk.pay.PaymentTask
 import javax.inject.Inject
 
@@ -151,6 +148,14 @@ class InquiryDetailsFragment : BaseFragment() {
                 ivCard.visibility = View.GONE
             }
         }
+        rb_mobileWallet.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                calculateCommission(Constants.PaymentOption.Fawry)
+                ivFawry.visibility = View.GONE
+                llChannels.visibility = View.GONE
+                ivCard.visibility = View.GONE
+            }
+        }
 
         tvChannels.setOnClickListener{
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://cashier.opaycheckout.com/map")))
@@ -205,9 +210,11 @@ class InquiryDetailsFragment : BaseFragment() {
             state.medicalRenewalPayment?.let {
                 medicalRenewalPayment = it
                 if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-                    oPayPayment(true)
+                    oPayPayment(Constants.PaymentOption.OpayCredit)
                 else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-                    oPayPayment(false)
+                    oPayPayment(Constants.PaymentOption.OpayPOS)
+                else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
+                    oPayPayment(Constants.PaymentOption.MobileWallet)
                 else
                     cowPayPayment(false)
             }
@@ -216,23 +223,30 @@ class InquiryDetailsFragment : BaseFragment() {
 
     //region
 
-    fun oPayPayment(isCredit: Boolean) {
-        val paymentType = if(isCredit) "BankCard" else "ReferenceCode"
+    fun oPayPayment(paymentOption: Constants.PaymentOption) {
+        val paymentType = when(paymentOption) {
+            Constants.PaymentOption.OpayCredit -> "BankCard"
+            Constants.PaymentOption.OpayPOS -> "ReferenceCode"
+            Constants.PaymentOption.MobileWallet -> "MWALLET"
+            else -> ""
+        }
         PaymentTask.sandBox = Constants.OPAY_MODE
+        val userInfo = UserInfo(medicalRenewalPayment.paymentItem?.amount.toString(), binding.number, sharedPref.mobile, medicalRenewalPayment.paymentItem?.engName)
         val payInput = PayInput(
             publickey = Constants.OPAY_PUBLIC_KEY,
             merchantId = Constants.OPAY_MERCHANT_ID,
             merchantName = Constants.OPAY_MERCHANT_NAME,
             reference = medicalRenewalPayment.paymentItem?.paymentRequestNumber!!,
             countryCode = "EG", // uppercase
-            currency = "EGP", // uppercase
             payAmount = (newAmount * 100).toLong(),
+            currency = "EGP", // uppercase
             productName = "annualSubscription",
-            productDescription = "android_" + medicalRenewalPayment.paymentItem?.amount,
+            productDescription = "android",
             callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
+            paymentType = paymentType, // optional
+            expireAt = if(paymentOption == Constants.PaymentOption.OpayCredit) 30 else 2880,
             userClientIP = "110.246.160.183",
-            expireAt = if(isCredit) 30 else 2880,
-            paymentType = paymentType // optional
+            userInfo = userInfo
         )
 
         llSuperProgressbar.visibility = View.VISIBLE
@@ -329,7 +343,7 @@ class InquiryDetailsFragment : BaseFragment() {
             }
             PaymentStatus.SUCCESS -> {
                 showAlert(
-                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(
+                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
                         R.string.payment_successful
                     ) + response.orderNo
                     else getString(R.string.payment_reference) + response.referenceCode

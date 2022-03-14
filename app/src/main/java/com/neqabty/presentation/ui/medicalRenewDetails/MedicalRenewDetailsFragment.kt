@@ -25,22 +25,10 @@ import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.inquiry_details_fragment.*
-import kotlinx.android.synthetic.main.medical_renew_details_fragment.bPay
-import kotlinx.android.synthetic.main.medical_renew_details_fragment.ivCard
-import kotlinx.android.synthetic.main.medical_renew_details_fragment.ivFawry
-import kotlinx.android.synthetic.main.medical_renew_details_fragment.llContent
-import kotlinx.android.synthetic.main.medical_renew_details_fragment.rb_card
-import kotlinx.android.synthetic.main.medical_renew_details_fragment.rb_channel
-import kotlinx.android.synthetic.main.medical_renew_details_fragment.rb_fawry
-import kotlinx.android.synthetic.main.medical_renew_details_fragment.rgPaymentMechanismType
-import kotlinx.android.synthetic.main.medical_renew_details_fragment.rvDetails
+import kotlinx.android.synthetic.main.medical_renew_details_fragment.*
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
-import team.opay.business.cashier.sdk.api.PayInput
-import team.opay.business.cashier.sdk.api.PaymentStatus
-import team.opay.business.cashier.sdk.api.Status
-import team.opay.business.cashier.sdk.api.WebJsResponse
+import team.opay.business.cashier.sdk.api.*
 import team.opay.business.cashier.sdk.pay.PaymentTask
 import javax.inject.Inject
 
@@ -150,6 +138,14 @@ class MedicalRenewDetailsFragment : BaseFragment() {
                 ivCard.visibility = View.GONE
             }
         }
+        rb_mobileWallet.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                calculateCommission(Constants.PaymentOption.Fawry)
+                ivFawry.visibility = View.GONE
+                llChannels.visibility = View.GONE
+                ivCard.visibility = View.GONE
+            }
+        }
 
         tvChannels.setOnClickListener{
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://cashier.opaycheckout.com/map")))
@@ -216,23 +212,30 @@ class MedicalRenewDetailsFragment : BaseFragment() {
 
     //region
 
-    fun oPayPayment(isCredit: Boolean) {
-        val paymentType = if(isCredit) "BankCard" else "ReferenceCode"
+    fun oPayPayment(paymentOption: Constants.PaymentOption) {
+        val paymentType = when(paymentOption) {
+            Constants.PaymentOption.OpayCredit -> "BankCard"
+            Constants.PaymentOption.OpayPOS -> "ReferenceCode"
+            Constants.PaymentOption.MobileWallet -> "MWALLET"
+            else -> ""
+        }
         PaymentTask.sandBox = Constants.OPAY_MODE
+        val userInfo = UserInfo(medicalRenewalPaymentUI.paymentItem?.amount.toString(), sharedPref.user, sharedPref.mobile, sharedPref.name)
         val payInput = PayInput(
             publickey = Constants.OPAY_PUBLIC_KEY,
             merchantId = Constants.OPAY_MERCHANT_ID,
             merchantName = Constants.OPAY_MERCHANT_NAME,
             reference = medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber!!,
             countryCode = "EG", // uppercase
-            currency = "EGP", // uppercase
             payAmount = (newAmount * 100).toLong(),
+            currency = "EGP", // uppercase
             productName = "healthCareSubscription",
-            productDescription = "android_" + medicalRenewalPaymentUI.paymentItem?.amount,
+            productDescription = "android",
             callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
+            paymentType = paymentType, // optional
+            expireAt = if(paymentOption == Constants.PaymentOption.OpayCredit) 30 else 2880,
             userClientIP = "110.246.160.183",
-            expireAt = if(isCredit) 30 else 2880,
-            paymentType = paymentType // optional
+            userInfo = userInfo
         )
 
         llSuperProgressbar.visibility = View.VISIBLE
@@ -322,9 +325,11 @@ class MedicalRenewDetailsFragment : BaseFragment() {
         builder?.setPositiveButton(getString(R.string.alert_confirm)) { dialog, which ->
             llSuperProgressbar.visibility = View.VISIBLE
             if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-                oPayPayment(true)
+                oPayPayment(Constants.PaymentOption.OpayCredit)
             else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-                oPayPayment(false)
+                oPayPayment(Constants.PaymentOption.OpayPOS)
+            else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
+                oPayPayment(Constants.PaymentOption.MobileWallet)
             else
                 cowPayPayment(false)
             dialog.dismiss()
@@ -350,7 +355,7 @@ class MedicalRenewDetailsFragment : BaseFragment() {
             }
             PaymentStatus.SUCCESS -> {
                 showAlert(
-                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(
+                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
                         R.string.payment_successful
                     ) + response.orderNo
                     else getString(R.string.payment_reference) + response.referenceCode
