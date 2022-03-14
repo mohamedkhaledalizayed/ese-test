@@ -305,6 +305,9 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 valifyToken: String, valifyData: ValifyData
             ) {
                 Log.e("neqabty", "onSuccess")
+                val firstName = valifyData.ocrProcess.nationalIdData.firstName
+                val fullName = valifyData.ocrProcess.nationalIdData.fullName
+                val gender = valifyData.ocrProcess.nationalIdData.gender
             }
 
             override fun onExit(
