@@ -29,7 +29,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{Html.fromHtml(@string/type_title(notification.notificationType))}"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:typeface="@{notification.isRead}" />
@@ -44,7 +44,7 @@
             android:maxLines="1"
             android:layout_marginTop="@dimen/margin_horizontal_small"
             android:text="@{Html.fromHtml(@string/provider_title(notification.title,notification.name))}"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             android:typeface="@{notification.isRead}"
             android:visibility='@{(notification.name == null || notification.name == "") ? View.GONE : View.VISIBLE}' />
 
@@ -69,7 +69,7 @@
             android:layout_marginStart="@dimen/margin_horizontal_small"
             app:layout_constraintBottom_toBottomOf="@id/ivClock"
             android:text="@{notification.date +' '+  notification.time}"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             android:typeface="@{notification.isRead}" />
 
         <TextView
@@ -88,7 +88,7 @@
             android:padding="@dimen/margin_horizontal_small"
             android:layout_marginEnd="@dimen/margin_horizontal_small"
             android:layout_marginTop="@dimen/margin_horizontal_small"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             android:typeface="@{notification.isRead}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

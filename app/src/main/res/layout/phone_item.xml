@@ -35,7 +35,7 @@
             android:layout_marginStart="@dimen/margin_horizontal_normal"
             android:textColor="@color/text_dark"
             android:gravity="right"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="?textSizeLarge"
             android:textDirection="anyRtl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

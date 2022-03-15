@@ -52,7 +52,7 @@
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
                     android:text="@{title}"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="?textSizeLarge" />
 
                 <TextView
                     android:id="@+id/tvName"
@@ -61,7 +61,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:visibility='@{(medicalRenewalPayment.paymentItem.engName == null || medicalRenewalPayment.paymentItem.engName == "")? View.GONE : View.VISIBLE}'
                     android:text="@{Html.fromHtml(@string/name_title(medicalRenewalPayment.paymentItem.engName))}"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <TextView
                     android:id="@+id/tvMemberNumber"
@@ -69,14 +69,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@{Html.fromHtml(@string/user_number_title(number))}"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <!--                <TextView-->
                 <!--                    android:id="@+id/tvRequestID"-->
                 <!--                    android:layout_width="match_parent"-->
                 <!--                    android:layout_height="wrap_content"-->
                 <!--                    android:text="@{Html.fromHtml(@string/expiration_date_title(memberItem.billDate))}"-->
-                <!--                    android:textSize="@dimen/text_size_medium" />-->
+                <!--                    android:textSize="?textSizeMedium" />-->
 
                 <TextView
                     android:id="@+id/tvAmount"
@@ -84,7 +84,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:layout_height="wrap_content"
                     android:text="@{Html.fromHtml(@string/amount_title(newAmount.toString()))}"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
 
                 <TextView
@@ -95,7 +95,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:textColor="@color/colorPrimary"
                     android:visibility='@{(medicalRenewalPayment.paymentItem.paymentDetailsItems == null || medicalRenewalPayment.paymentItem.paymentDetailsItems.size() == 0)? View.GONE : View.VISIBLE}'
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvDetails"
@@ -118,7 +118,7 @@
                         android:textColor="@color/colorPrimary"
                         android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@string/delivery_info_title"
-                        android:textSize="@dimen/text_size_large" />
+                        android:textSize="?textSizeLarge" />
 
                     <TextView
                         android:id="@+id/tvMobileNumber"
@@ -127,7 +127,7 @@
                         android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@string/delivery_mobile_title"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         android:visibility="gone" />
 
 
@@ -138,7 +138,7 @@
                         android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@string/delivery_mobile_hint"
                         android:textColor="@color/text_dark"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         android:visibility="gone" />
 
 
@@ -149,7 +149,7 @@
                         android:layout_marginTop="@dimen/margin_vertical_small"
                         android:text="@string/delivery_method"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         android:visibility="gone" />
 
                     <TextView
@@ -159,7 +159,7 @@
                         android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@string/delivery_method_hint"
                         android:textColor="@color/text_dark"
-                        android:textSize="@dimen/text_size_small"
+                        android:textSize="?textSizeSmall"
                         android:visibility="visible" />
 
                     <RadioGroup
@@ -181,7 +181,7 @@
                             android:buttonTint="@color/dark_green"
                             android:checked="true"
                             android:text="@string/home_delivery"
-                            android:textSize="@dimen/text_size_medium" />
+                            android:textSize="?textSizeMedium" />
 
 
                         <com.neqabty.presentation.util.ClearableEditText
@@ -193,7 +193,7 @@
                             android:hint="@string/address"
                             android:inputType="text"
                             android:textColor="@color/dark_grey"
-                            android:textSize="@dimen/text_size_medium" />
+                            android:textSize="?textSizeMedium" />
 
                         <EditText
                             android:id="@+id/edMobile"
@@ -205,7 +205,7 @@
                             android:maxLength="11"
                             android:textDirection="anyRtl"
                             android:textColor="@color/dark_grey"
-                            android:textSize="@dimen/text_size_medium"
+                            android:textSize="?textSizeMedium"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tvMobile" />
 
@@ -216,7 +216,7 @@
                             android:buttonTint="@color/dark_green"
                             android:checked="false"
                             android:text="@string/main_syndicate_delivery"
-                            android:textSize="@dimen/text_size_medium"
+                            android:textSize="?textSizeMedium"
                             android:visibility="gone" />
 
 
@@ -227,7 +227,7 @@
                             android:buttonTint="@color/dark_green"
                             android:checked="false"
                             android:text="@string/syndicate_delivery"
-                            android:textSize="@dimen/text_size_medium"
+                            android:textSize="?textSizeMedium"
                             android:visibility="gone" />
                     </RadioGroup>
                 </LinearLayout>
@@ -241,7 +241,7 @@
                     android:visibility="visible"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="?textSizeLarge" />
 
                 <RadioGroup
                     android:id="@+id/rgPaymentMechanismType"
@@ -260,7 +260,7 @@
                         android:layout_marginEnd="20dp"
                         android:checked="true"
                         android:text="@string/payment_card"
-                        android:textSize="@dimen/text_size_small"
+                        android:textSize="?textSizeSmall"
                         android:buttonTint="@color/dark_green" />
 
                     <ImageView
@@ -275,7 +275,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/payment_channel"
-                        android:textSize="@dimen/text_size_small"
+                        android:textSize="?textSizeSmall"
                         android:buttonTint="@color/dark_green" />
 
                     <LinearLayout
@@ -295,7 +295,7 @@
                             android:id="@+id/tvChannels"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/text_size_small"
+                            android:textSize="?textSizeSmall"
                             android:gravity="center"
                             android:text="@{Html.fromHtml(@string/payment_store_locator)}"/>
                     </LinearLayout>
@@ -305,7 +305,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/payment_fawry"
-                        android:textSize="@dimen/text_size_small"
+                        android:textSize="?textSizeSmall"
                         android:buttonTint="@color/dark_green" />
 
                     <ImageView
@@ -322,7 +322,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/payment_wallet"
-                        android:textSize="@dimen/text_size_small"
+                        android:textSize="?textSizeSmall"
                         android:buttonTint="@color/dark_green"/>
 
                     <RadioButton
@@ -330,7 +330,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/payment_meeza"
-                        android:textSize="@dimen/text_size_small"
+                        android:textSize="?textSizeSmall"
                         android:visibility="gone"
                         android:buttonTint="@color/dark_green" />
 
@@ -347,7 +347,7 @@
                     android:text="@string/pay"
                     android:visibility='@{(medicalRenewalPayment.paymentItem.amount == null ||medicalRenewalPayment.paymentItem.amount == 0 || medicalRenewalPayment.paymentItem.paymentDetailsItems.size() == 0)? View.GONE : View.VISIBLE}'
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

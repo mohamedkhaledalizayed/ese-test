@@ -65,7 +65,7 @@
                     android:maxLines="2"
                     android:text="@{tripItem.title}"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large"
+                    android:textSize="?textSizeLarge"
                     android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@id/indicator" />
 
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/trip_price"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/tvPrice"
                     app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@{Html.fromHtml(@string/currency(tripItem.price))}"
                     android:textColor="@color/dark_green"
-                    android:textSize="@dimen/text_size_large"
+                    android:textSize="?textSizeLarge"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -119,7 +119,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/trip_desc"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/text_size_medium"
+                            android:textSize="?textSizeMedium"
                             android:textStyle="bold" />
 
                         <TextView
@@ -129,7 +129,7 @@
                             android:lineSpacingMultiplier="0.8"
                             android:text="@{tripItem.desc}"
                             android:textColor="@color/dark_grey"
-                            android:textSize="@dimen/text_size_medium" />
+                            android:textSize="?textSizeMedium" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -160,7 +160,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/about_hotel"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/text_size_medium"
+                            android:textSize="?textSizeMedium"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent" />
 
@@ -172,7 +172,7 @@
                             android:lineSpacingMultiplier="0.8"
                             android:text="@{tripItem.place.details}"
                             android:textColor="@color/dark_grey"
-                            android:textSize="@dimen/text_size_medium"
+                            android:textSize="?textSizeMedium"
                             app:layout_constraintStart_toStartOf="parent" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -188,7 +188,7 @@
                     android:gravity="center"
                     android:text="@string/view_regiments"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cvAbout" />

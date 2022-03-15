@@ -33,7 +33,7 @@
                 android:maxLines="1"
                 android:text="@{profession.profession}"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_medium" />
+                android:textSize="?textSizeMedium" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

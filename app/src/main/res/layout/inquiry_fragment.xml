@@ -57,7 +57,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:text="@string/choose_service"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <Spinner
                     android:id="@+id/spServiceTypes"
@@ -67,7 +67,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_large"
                     android:hint="@string/governorate"
                     android:textDirection="rtl"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <Spinner
                     android:id="@+id/spService"
@@ -77,7 +77,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_large"
                     android:hint="@string/governorate"
                     android:textDirection="rtl"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:text="@string/enter_member_number"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edMemberNumber"
@@ -98,7 +98,7 @@
                     android:textDirection="anyRtl"
                     android:maxLength="8"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="?textSizeLarge" />
 
                 <Button
                     android:id="@+id/bSend"
@@ -109,7 +109,7 @@
                     android:gravity="center"
                     android:text="@string/pay"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
             </LinearLayout>
         </ScrollView>

@@ -20,7 +20,7 @@
             android:layout_marginBottom="@dimen/margin_vertical_normal"
             android:text="@string/welcome"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="?textSizeLarge"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_vertical_normal"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
 
@@ -41,7 +41,7 @@
             android:layout_marginBottom="@dimen/margin_vertical_normal"
             android:text="HELLO"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvMemberName" />
 
@@ -52,7 +52,7 @@
             android:layout_marginBottom="@dimen/margin_vertical_normal"
             android:text="HELLO"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvMemberNumber" />
 
@@ -65,7 +65,7 @@
             android:elevation="@dimen/elevation_level_one"
             android:text="@string/logout_title"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             android:layout_marginBottom="@dimen/margin_horizontal_normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvMobileNumber" />
@@ -80,7 +80,7 @@
 <!--            app:layout_constraintHorizontal_chainStyle="spread_inside"-->
 <!--            android:text="@string/change_password_title"-->
 <!--            android:textColor="@android:color/white"-->
-<!--            android:textSize="@dimen/text_size_medium"-->
+<!--            android:textSize="?textSizeMedium"-->
 <!--            app:layout_constraintStart_toStartOf="parent"-->
 <!--            app:layout_constraintEnd_toStartOf="@id/bLogout"-->
 <!--            app:layout_constraintTop_toBottomOf="@id/tvMobileNumber" />-->

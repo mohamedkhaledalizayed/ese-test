@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/enter_member_number"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edMemberNumber"
@@ -47,7 +47,7 @@
                     android:textDirection="anyRtl"
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="?textSizeLarge" />
 
                 <Button
                     android:id="@+id/bSend"
@@ -59,7 +59,7 @@
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/send"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
             </LinearLayout>
         </ScrollView>

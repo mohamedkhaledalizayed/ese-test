@@ -216,6 +216,10 @@
     <string name="help_title">مساعدة</string>
     <string name="logout_title">تسجيل خروج</string>
     <string name="notifications_title">الأشعارات</string>
+    <string name="font_size">حجم الخط</string>
+    <string name="font_size_small">صغير</string>
+    <string name="font_size_medium">متوسط</string>
+    <string name="font_size_large">كبير</string>
 
     <string name="wheel_news">أخبارنا</string>
     <string name="wheel_trips">الرحلات</string>

@@ -25,14 +25,14 @@
                 android:hint="@string/speciality"
                 android:visibility="gone"
                 android:textDirection="rtl"
-                android:textSize="@dimen/text_size_medium"/>
+                android:textSize="?textSizeMedium"/>
 
             <TextView
                 android:id="@+id/tvNoDataFound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:textSize="@dimen/text_size_medium"
+                android:textSize="?textSizeMedium"
                 android:layout_margin="@dimen/margin_horizontal_normal"
                 android:text="@string/no_providers_found"
                 android:visibility="gone"/>

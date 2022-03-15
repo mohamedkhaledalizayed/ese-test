@@ -38,7 +38,7 @@
                     android:gravity="start"
                     android:text="@string/syndicateNumber"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:textStyle="bold" />
 
                 <EditText
@@ -49,7 +49,7 @@
                     android:hint="@string/syndicateNumber"
                     android:inputType="number"
                     android:textDirection="anyRtl"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <TextView
                     android:id="@+id/tvCardNumber"
@@ -58,7 +58,7 @@
                     android:gravity="start"
                     android:text="@string/cardNumber"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:textStyle="bold" />
 
                 <EditText
@@ -69,7 +69,7 @@
                     android:hint="@string/cardNumber"
                     android:inputType="number"
                     android:textDirection="anyRtl"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <Spinner
                     android:id="@+id/spProviderType"
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/serviceProviderType"
                     android:textDirection="rtl"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <Spinner
                     android:id="@+id/spProvider"
@@ -88,7 +88,7 @@
                     android:clickable="false"
                     android:hint="@string/serviceProvider"
                     android:textDirection="rtl"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -107,7 +107,7 @@
                         android:layout_margin="@dimen/margin_horizontal_normal"
                         android:text="@string/prev"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <Button
                         android:id="@+id/bNext"
@@ -120,7 +120,7 @@
                         android:layout_margin="@dimen/margin_horizontal_normal"
                         android:text="@string/next"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

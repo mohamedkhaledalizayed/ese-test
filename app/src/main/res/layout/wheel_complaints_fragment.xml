@@ -49,7 +49,7 @@
                     android:gravity="center"
                     android:text="@string/wheel_complaints_content"
                     android:textColor="@color/text_dark"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ivLogo" />
@@ -65,7 +65,7 @@
             android:background="@drawable/btn_green"
             android:text="@string/wheel_enter_service"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

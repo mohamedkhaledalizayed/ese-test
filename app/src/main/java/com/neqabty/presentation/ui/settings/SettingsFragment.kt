@@ -1,8 +1,6 @@
 package com.neqabty.presentation.ui.settings
 
 import android.content.Intent
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -10,7 +8,11 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.core.app.NotificationManagerCompat
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
@@ -71,6 +73,43 @@ class SettingsFragment : BaseFragment() {
                 startActivityForResult(intent, 0)
             }
         })
+
+        binding.seekbar.progress = when(sharedPref.fontSize){
+            "small" -> 1
+            "large" -> 3
+            else -> 2
+        }
+
+        binding.seekbar.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                when(p1){
+                    1 -> {
+                        sharedPref.fontSize = "small"
+                        requireActivity().setTheme(R.style.AppTheme_NoActionBar_SmallText)
+                    }
+                    3 -> {
+                        sharedPref.fontSize = "large"
+                        requireActivity().setTheme(R.style.AppTheme_NoActionBar_LargeText)
+                    }
+                    else -> {
+                        sharedPref.fontSize = "medium"
+                        requireActivity().setTheme(R.style.AppTheme_NoActionBar)
+                    }
+                }
+                navController().navigate(R.id.settingsFragment, arguments,
+                    NavOptions.Builder()
+                        .setPopUpTo(R.id.settingsFragment, true)
+                        .build()
+                )
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+            }
+        })
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

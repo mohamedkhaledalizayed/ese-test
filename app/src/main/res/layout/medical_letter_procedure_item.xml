@@ -34,7 +34,7 @@
             android:maxLines="2"
             android:text="@{letterProcedure.letterProcedureName}"
             android:textColor="@color/dark_green"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="?textSizeSmall"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lineView" />
     </androidx.constraintlayout.widget.ConstraintLayout>

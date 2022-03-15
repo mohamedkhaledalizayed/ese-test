@@ -29,6 +29,7 @@ class PreferencesHelper @Inject constructor(
         private const val IS_REGISTERED = "data.source.prefs.IS_REGISTERED"
         private const val NOTIFICATION_COUNT = "data.source.prefs.NOTIFICATION_COUNT"
         private const val USER_TYPE = "data.source.prefs.USER_TYPE"
+        private const val FONT_SIZE = "data.source.prefs.FONT_SIZE"
     }
 
     var isNotificationsEnabled
@@ -82,6 +83,10 @@ class PreferencesHelper @Inject constructor(
     var userType
         get() = preferences.getString(USER_TYPE, "")
         set(value) = preferences.edit().putString(USER_TYPE, value).apply()
+
+    var fontSize
+        get() = preferences.getString(FONT_SIZE, "medium")
+        set(value) = preferences.edit().putString(FONT_SIZE, value).apply()
 
     fun isSyndicateChosen(): Boolean {
         return mainSyndicate != 0

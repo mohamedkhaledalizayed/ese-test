@@ -21,7 +21,7 @@
             android:layout_marginStart="@dimen/margin_horizontal_large"
             android:text="@string/wheel_news"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="?textSizeLarge"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:text="@string/wheel_news"
             android:textColor="@color/blue"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="?textSizeLarge"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

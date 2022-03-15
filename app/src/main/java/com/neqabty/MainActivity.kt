@@ -61,6 +61,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             customiseStatusbar()
+
+        setTheme(when(sharedPref.fontSize) {
+            "small" -> R.style.AppTheme_NoActionBar_SmallText
+            "large" -> R.style.AppTheme_NoActionBar_LargeText
+            else -> R.style.AppTheme_NoActionBar
+        })
+
         setContentView(R.layout.main_activity)
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         setSupportActionBar(toolbar)

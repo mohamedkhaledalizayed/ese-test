@@ -60,7 +60,7 @@
                         android:maxLines="1"
                         android:text="@{trip.price}"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
                         android:maxLines="2"
                         android:text="@{trip.title}"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/tvPrice"
                         app:layout_constraintStart_toStartOf="parent" />

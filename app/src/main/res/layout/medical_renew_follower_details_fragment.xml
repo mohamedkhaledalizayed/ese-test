@@ -39,7 +39,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/fullName"
                     android:textColor="@color/text_dark"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -54,7 +54,7 @@
                     android:enabled="false"
                     android:text="@{followerItem.name}"
                     android:textColor="@color/text_dark"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     app:layout_constraintTop_toBottomOf="@id/tvName" />
 
                 <TextView
@@ -64,7 +64,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/birth_date"
                     android:textColor="@color/text_dark"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/spRelationDegree" />
@@ -82,7 +82,7 @@
                     android:gravity="center"
                     android:text="@{followerItem.birthDate}"
                     android:textColor="@color/text_dark"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     app:layout_constraintTop_toBottomOf="@id/tvBirthDate" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -109,7 +109,7 @@
                     android:gravity="center"
                     android:text="@string/edit_follower_photo"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <Button
                     android:id="@+id/bSave"
@@ -121,7 +121,7 @@
                     android:gravity="center"
                     android:text="@string/save_follower"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
             </LinearLayout>
 

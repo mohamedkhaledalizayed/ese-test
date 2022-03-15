@@ -36,14 +36,14 @@
 
                     android:text="@string/confirmation_sent"
                     android:gravity="center"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <TextView
                     android:id="@+id/tvMobile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
 
                 <TextView
@@ -52,7 +52,7 @@
 
                     android:text="@string/enter_confirmation_code"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edMobile"
@@ -61,7 +61,7 @@
                     android:textDirection="anyRtl"
                     android:inputType="number"
                     android:maxLength="5"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <Button
                     android:id="@+id/bConfirm"
@@ -74,7 +74,7 @@
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/confirm"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
 
                 <TextView
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
 
                     android:text="@string/resend_code"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
             </LinearLayout>
         </ScrollView>

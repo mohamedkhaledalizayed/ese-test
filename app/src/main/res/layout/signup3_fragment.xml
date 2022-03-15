@@ -48,7 +48,7 @@
 
                     android:text="@string/congratulations"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
 
                 <TextView
@@ -57,7 +57,7 @@
 
                     android:text="@string/login_hint"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_small" />
+                    android:textSize="?textSizeSmall" />
 
 
                 <Button
@@ -70,7 +70,7 @@
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/login"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

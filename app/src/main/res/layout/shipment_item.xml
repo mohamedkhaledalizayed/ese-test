@@ -28,14 +28,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{Html.fromHtml(@string/shipment_date_title(trackShipmentUI.date))}"
-            android:textSize="@dimen/text_size_medium" />
+            android:textSize="?textSizeMedium" />
 
         <TextView
             android:id="@+id/tvProviderName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{Html.fromHtml(@string/shipment_company_title(trackShipmentUI.shipmentProvider ,trackShipmentUI.shipmentProvider))}"
-            android:textSize="@dimen/text_size_medium" />
+            android:textSize="?textSizeMedium" />
 
         <TextView
             android:id="@+id/tvName"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_horizontal_normal"
             android:text="@{Html.fromHtml(@string/name_title(trackShipmentUI.name,trackShipmentUI.name))}"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             android:visibility='@{(trackShipmentUI.name == null || trackShipmentUI.name == "") ? View.GONE : View.VISIBLE}' />
 
         <TextView
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_horizontal_normal"
             android:text="@{Html.fromHtml(@string/shipment_status_title(trackShipmentUI.status))}"
-            android:textSize="@dimen/text_size_medium" />
+            android:textSize="?textSizeMedium" />
 
         <TextView
             android:id="@+id/tvAddress"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_horizontal_normal"
             android:text="@{Html.fromHtml(@string/address_formatted_title(trackShipmentUI.address))}"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             android:visibility='@{(trackShipmentUI.address == null || trackShipmentUI.address.equals("0") || trackShipmentUI.address.equals(""))? View.GONE : View.VISIBLE}' />
 
     </LinearLayout>

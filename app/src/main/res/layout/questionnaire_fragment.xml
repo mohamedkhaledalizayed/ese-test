@@ -41,14 +41,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/questionnaire_title"
                     android:textColor="@color/green"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
 <!--                <TextView-->
 <!--                    android:id="@+id/tvDesc"-->
 <!--                    android:layout_width="match_parent"-->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:padding="@dimen/margin_horizontal_normal"-->
-<!--                    android:textSize="@dimen/text_size_medium"-->
+<!--                    android:textSize="?textSizeMedium"-->
 <!--                    app:layout_constraintStart_toStartOf="parent"-->
 <!--                    app:layout_constraintTop_toBottomOf="@id/tvTitle" />-->
 
@@ -76,7 +76,7 @@
                     android:gravity="center"
                     android:text="@string/submit"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
             </LinearLayout>
         </ScrollView>
 
@@ -102,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/questionnaire_answered"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,7 +115,7 @@
                     android:gravity="center"
                     android:text="@string/questionnaire_question"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvResults" />
@@ -144,7 +144,7 @@
                     android:id="@+id/tvResult"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:textStyle="bold"
                     android:textColor="@color/stats_green"
                     android:gravity="center"

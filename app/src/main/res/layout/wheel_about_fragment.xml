@@ -36,7 +36,7 @@
             android:layout_marginStart="@dimen/margin_horizontal_normal"
             android:layout_marginEnd="@dimen/margin_horizontal_normal"
             android:text="@string/wheel_payments_content"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivLogo" />

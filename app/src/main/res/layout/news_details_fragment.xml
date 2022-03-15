@@ -78,7 +78,7 @@
                     android:maxLines="1"
                     android:text="@{newsItem.date}"
                     android:textColor="@color/text_dark"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     app:layout_constraintBottom_toBottomOf="@id/ivClock"
                     app:layout_constraintStart_toEndOf="@id/ivClock"
                     app:layout_constraintTop_toTopOf="@id/ivClock" />
@@ -103,7 +103,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="@{Html.fromHtml(@string/source(newsItem.source))}"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:visibility='@{newsItem.source.equals("") ? View.GONE : View.VISIBLE}'
                     app:layout_constraintBottom_toBottomOf="@id/ivSource"
                     app:layout_constraintStart_toEndOf="@id/ivSource"
@@ -118,7 +118,7 @@
                     android:justificationMode="inter_word"
                     android:text="@{newsItem.title}"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/text_size_large"
+                    android:textSize="?textSizeLarge"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ivSource" />
 
@@ -129,7 +129,7 @@
                 <!--                    android:layout_marginTop="@dimen/margin_horizontal_normal"-->
                 <!--                    android:text="@{Html.fromHtml(newsItem.desc)}"-->
                 <!--                    android:layout_marginHorizontal="@dimen/margin_horizontal_normal"-->
-                <!--                    android:textSize="@dimen/text_size_medium"-->
+                <!--                    android:textSize="?textSizeMedium"-->
                 <!--                    app:layout_constraintStart_toStartOf="parent"-->
                 <!--                    app:layout_constraintTop_toBottomOf="@id/tvTitle" />-->
 

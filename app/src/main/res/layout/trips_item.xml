@@ -65,7 +65,7 @@
                 android:maxLines="2"
                 android:text="@{trip.title}"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_medium" />
+                android:textSize="?textSizeMedium" />
 
             <TextView
                 android:id="@+id/tvNotes"
@@ -75,7 +75,7 @@
                 android:lineSpacingMultiplier="0.8"
                 android:maxLines="2"
                 android:text="@{trip.notes}"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="?textSizeSmall" />
 
         </LinearLayout>
 
@@ -89,7 +89,7 @@
             android:maxLines="1"
             android:text="@{String.format(@string/currency, trip.price)}"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="?textSizeLarge"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

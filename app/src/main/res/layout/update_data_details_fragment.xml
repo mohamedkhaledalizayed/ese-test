@@ -41,7 +41,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{Html.fromHtml(@string/name_title(userData.fullName))}"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@{Html.fromHtml(@string/user_number_title(userData.oldRefID))}"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvName" />
 
@@ -61,7 +61,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_vertical_normal"
                         android:text="@{Html.fromHtml(@string/national_id_title)}"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvMemberNumber" />
 
@@ -77,7 +77,7 @@
                         android:enabled="false"
                         android:text="@{userData.nationalID}"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvNationalID" />
 
@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_vertical_large"
                         android:text="@{Html.fromHtml(@string/enter_mobile_title)}"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/edNationalID" />
 
@@ -101,7 +101,7 @@
                         android:inputType="number"
                         android:text="@{userData.phone}"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvMobile" />
 
@@ -112,7 +112,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_vertical_large"
                         android:text="@{Html.fromHtml(@string/update_data_add_photos)}"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         android:textColor="@color/text_dark"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +128,7 @@
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_add"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_1"
                         app:layout_constraintTop_toBottomOf="@id/tvAddPhoto" />
@@ -138,7 +138,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/update_data_add_photos_1"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         app:layout_constraintBottom_toBottomOf="@id/ibAddPhoto_1"
                         app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_1"
                         app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +156,7 @@
                         android:src="@drawable/ic_add"
                         android:text="@string/update_data_add_photo"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_2"
                         app:layout_constraintTop_toBottomOf="@id/ibAddPhoto_1" />
@@ -166,7 +166,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/update_data_add_photos_2"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         app:layout_constraintBottom_toBottomOf="@id/ibAddPhoto_2"
                         app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_2"
                         app:layout_constraintStart_toStartOf="parent"
@@ -184,7 +184,7 @@
                         android:src="@drawable/ic_add"
                         android:text="@string/update_data_add_photo"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvAddPhoto_3"
                         app:layout_constraintTop_toBottomOf="@id/ibAddPhoto_2" />
@@ -194,7 +194,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/update_data_add_photos_3"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         app:layout_constraintBottom_toBottomOf="@id/ibAddPhoto_3"
                         app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_3"
                         app:layout_constraintStart_toStartOf="parent"
@@ -222,7 +222,7 @@
                         android:padding="@dimen/margin_horizontal_small"
                         android:text="@string/update_data_title"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/ibAddPhoto_3" />

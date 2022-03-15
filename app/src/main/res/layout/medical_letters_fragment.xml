@@ -38,7 +38,7 @@
                         android:gravity="start"
                         android:text="@string/beneficiary_name"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         android:textStyle="bold" />
 
                     <Spinner
@@ -48,14 +48,14 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/followers"
                         android:textDirection="rtl"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <TextView
                         android:id="@+id/tvNoDataFound"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         android:layout_margin="@dimen/margin_horizontal_normal"
                         android:text="@string/no_letters_data_found"
                         android:visibility="gone"/>

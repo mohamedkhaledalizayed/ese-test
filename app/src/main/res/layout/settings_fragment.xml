@@ -25,14 +25,66 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <com.neqabty.presentation.ui.common.CustomSwitch
                     android:id="@+id/switchNotifications"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/notifications_settings"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="?textSizeLarge" />
+
+
+                <TextView
+                    android:id="@+id/tvFontSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:text="@string/font_size"
+                    android:textColor="@color/black"
+                    android:textSize="?textSizeLarge" />
+
+                <SeekBar
+                    android:id="@+id/seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="3"
+                    android:min="1"
+                    android:progressTint="@color/colorPrimary"
+                    android:thumbTint="@color/colorPrimary" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/font_size_small"
+                        android:textColor="@color/black"
+                        android:gravity="start"
+                        android:textSize="?textSizeSmall" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/font_size_medium"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:textSize="?textSizeMedium" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/font_size_large"
+                        android:textColor="@color/black"
+                        android:gravity="end"
+                        android:textSize="?textSizeLarge" />
+                </LinearLayout>
             </LinearLayout>
 
         </ScrollView>

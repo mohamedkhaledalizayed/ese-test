@@ -29,7 +29,7 @@
             android:maxLines="1"
             android:text="@{letter.letterTypeName + ' ' + ((letter.creationType == 1)? @string/medical_letter_creation_type_syndicate : @string/medical_letter_creation_type_portal) }"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="?textSizeSmall"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{letter.letterDate}"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="?textSizeSmall"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
@@ -60,7 +60,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@{letter.name}"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="?textSizeSmall"
                 app:layout_constraintBottom_toBottomOf="@id/tvIsActive"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tvIsActive"
@@ -76,7 +76,7 @@
                 android:padding="@dimen/margin_horizontal_small"
                 android:text="@{letter.isActive? @string/medical_letter_is_active : @string/medical_letter_is_cancelled}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="?textSizeSmall"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +99,7 @@
             android:lineSpacingMultiplier="0.8"
             android:maxLines="1"
             android:text="@{letter.serviceProviderName}"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="?textSizeSmall"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/clDetails" />

@@ -39,7 +39,7 @@
             android:layout_marginBottom="@dimen/margin_vertical_normal"
             android:gravity="center"
             android:padding="@dimen/margin_horizontal_normal"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="?textSizeLarge"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

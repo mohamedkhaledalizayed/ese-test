@@ -24,7 +24,7 @@
             android:gravity="center"
             android:layout_marginBottom="@dimen/margin_horizontal_small"
             android:textColor="@color/selector_tab_room_color"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             android:textStyle="bold"/>
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="@color/selector_tab_room_color"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             android:textStyle="bold"/>
 </LinearLayout>
 

@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/current_mobile_title"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edCurrentMobileNumber"
@@ -57,7 +57,7 @@
                     android:textDirection="anyRtl"
                     android:enabled="false"
                     android:textColor="@color/dark_grey"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="?textSizeLarge" />
 
                 <TextView
                     android:id="@+id/tvNewMobileNumber"
@@ -66,7 +66,7 @@
                     android:gravity="center"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/new_mobile_title"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                         android:maxLength="15"
                         android:textColor="@color/black"
                         android:textDirection="anyRtl"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <com.hbb20.CountryCodePicker
                         android:id="@+id/ccp"
@@ -110,7 +110,7 @@
                     android:gravity="center"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/national_id_four_digits"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edNationalNumber"
@@ -121,7 +121,7 @@
                     android:textDirection="anyRtl"
                     android:maxLength="4"
                     android:textColor="@color/dark_grey"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="?textSizeLarge" />
 
                 <Button
                     android:id="@+id/bSend"
@@ -133,7 +133,7 @@
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/change_user_mobile_title"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
             </LinearLayout>
         </ScrollView>

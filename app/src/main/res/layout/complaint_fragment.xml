@@ -40,7 +40,7 @@
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:text="@string/complaint_title"-->
 <!--                    android:textColor="@color/colorPrimary"-->
-<!--                    android:textSize="@dimen/text_size_large"-->
+<!--                    android:textSize="?textSizeLarge"-->
 <!--                    android:textStyle="bold" />-->
 
 
@@ -63,7 +63,7 @@
                     android:textColor="@color/colorPrimary"
                     android:gravity="center"
                     android:text="@{Html.fromHtml(@string/complaint_description)}"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:textStyle="bold" />
 
 
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/complaint_section_title"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large"
+                    android:textSize="?textSizeLarge"
                     android:textStyle="bold" />
 
                 <TextView
@@ -82,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/complaint_mobile"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edMobile"
@@ -93,7 +93,7 @@
                     android:textDirection="anyRtl"
                     android:gravity="center"
                     android:inputType="number"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <TextView
                     android:id="@+id/tvTypes"
@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_large"
                     android:text="@string/complaint_type"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <Spinner
                     android:id="@+id/spTypes"
@@ -111,7 +111,7 @@
                     android:layout_margin="@dimen/margin_horizontal_small"
                     android:hint="@string/complaint_type"
                     android:textDirection="rtl"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <TextView
                     android:id="@+id/tvSubTypes"
@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_large"
                     android:text="@string/complaint_subtype"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <Spinner
                     android:id="@+id/spSubTypes"
@@ -129,7 +129,7 @@
                     android:layout_margin="@dimen/margin_horizontal_small"
                     android:hint="@string/complaint_subtype"
                     android:textDirection="rtl"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <TextView
                     android:id="@+id/tvName"
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_large"
                     android:text="@string/complaint_name"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edName"
@@ -148,7 +148,7 @@
                     android:textDirection="anyRtl"
                     android:inputType="text"
                     android:maxLength="140"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <TextView
                     android:id="@+id/tvBody"
@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical_large"
                     android:text="@string/complaint_body"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edBody"
@@ -166,7 +166,7 @@
                     android:inputType="text"
                     android:textDirection="anyRtl"
                     android:maxLines="4"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvPhotos"
@@ -190,7 +190,7 @@
                     android:layout_marginEnd="@dimen/margin_horizontal_normal"
                     android:text="@string/addPhoto"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
                 <Button
                     android:id="@+id/bSend"
                     android:layout_width="match_parent"
@@ -201,7 +201,7 @@
                     android:gravity="center"
                     android:text="@string/send"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

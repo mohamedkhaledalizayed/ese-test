@@ -45,7 +45,7 @@
                     android:maxLines="1"
                     android:text="@{String.format(@string/date_from, regiment.dateFrom)}"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <TextView
                     android:id="@+id/tvDateTo"
@@ -58,7 +58,7 @@
                     android:maxLines="1"
                     android:text="@{String.format(@string/date_to, regiment.dateTo)}"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
             </LinearLayout>
 
             <LinearLayout
@@ -85,7 +85,7 @@
                         android:lineSpacingMultiplier="0.8"
                         android:maxLines="1"
                         android:text="@string/one_person"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <TextView
                         android:id="@+id/tvOnePrice"
@@ -97,7 +97,7 @@
                         android:maxLines="1"
                         android:text="@{String.format(@string/currency, regiment.hotelOnePerson)}"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -121,7 +121,7 @@
                         android:lineSpacingMultiplier="0.8"
                         android:maxLines="1"
                         android:text="@string/two_persons"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <TextView
                         android:id="@+id/tvTwoPrice"
@@ -133,7 +133,7 @@
                         android:maxLines="1"
                         android:text="@{String.format(@string/currency, regiment.hotelTwoPerson)}"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -155,7 +155,7 @@
                         android:lineSpacingMultiplier="0.8"
                         android:maxLines="1"
                         android:text="@string/three_persons"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <TextView
                         android:id="@+id/tvThreePrice"
@@ -167,7 +167,7 @@
                         android:maxLines="1"
                         android:text="@{String.format(@string/currency, regiment.hotelThreePerson)}"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -190,7 +190,7 @@
                         android:lineSpacingMultiplier="0.8"
                         android:maxLines="1"
                         android:text="@string/view_price"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <TextView
                         android:id="@+id/tvViewPrice"
@@ -202,7 +202,7 @@
                         android:maxLines="1"
                         android:text="@{String.format(@string/currency, regiment.viewPrice)}"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -225,7 +225,7 @@
                         android:lineSpacingMultiplier="0.8"
                         android:maxLines="1"
                         android:text="@string/side_price"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <TextView
                         android:id="@+id/tvSidePrice"
@@ -237,7 +237,7 @@
                         android:maxLines="1"
                         android:text="@{String.format(@string/currency, regiment.sidePrice)}"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
@@ -259,7 +259,7 @@
                         android:lineSpacingMultiplier="0.8"
                         android:maxLines="1"
                         android:text="@string/one_room"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <TextView
                         android:id="@+id/tvOneRoomPrice"
@@ -271,7 +271,7 @@
                         android:maxLines="1"
                         android:text="@{String.format(@string/currency, regiment.oneRoom)}"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
@@ -293,7 +293,7 @@
                         android:lineSpacingMultiplier="0.8"
                         android:maxLines="1"
                         android:text="@string/two_rooms"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <TextView
                         android:id="@+id/tvTwoRoomsPrice"
@@ -305,7 +305,7 @@
                         android:maxLines="1"
                         android:text="@{String.format(@string/currency, regiment.twoRooms)}"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
@@ -327,7 +327,7 @@
                         android:lineSpacingMultiplier="0.8"
                         android:maxLines="1"
                         android:text="@string/studio"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <TextView
                         android:id="@+id/tvStudioPrice"
@@ -339,7 +339,7 @@
                         android:maxLines="1"
                         android:text="@{String.format(@string/currency, regiment.studio)}"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
@@ -355,7 +355,7 @@
             android:maxLines="1"
             android:text="@{String.format(@string/currency, regiment.price)}"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="?textSizeLarge"
             android:textStyle="bold"
             android:visibility="@{regiment.price == 0 ?  View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"

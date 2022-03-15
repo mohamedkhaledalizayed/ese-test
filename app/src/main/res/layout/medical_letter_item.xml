@@ -29,7 +29,7 @@
             android:maxLines="1"
             android:text="@{letter.letterTypeName + ' ' + ((letter.creationType == 1)? @string/medical_letter_creation_type_syndicate : @string/medical_letter_creation_type_portal) }"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="?textSizeSmall"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
             android:maxLines="1"
             android:textStyle="bold"
             android:text="@{letter.id}"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="?textSizeSmall"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvIsActive"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -57,7 +57,7 @@
             android:maxLines="1"
             android:textStyle="bold"
             android:text="@{letter.serviceProviderName}"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="?textSizeSmall"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvIsActive"
             app:layout_constraintTop_toBottomOf="@id/tvApprovalNumber" />
@@ -70,7 +70,7 @@
             android:padding="@dimen/margin_horizontal_small"
             android:text="@{letter.isActive? @string/medical_letter_is_active : @string/medical_letter_is_cancelled}"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="?textSizeSmall"
             android:textStyle="bold"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +85,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{letter.letterDate}"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="?textSizeSmall"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvServiceProviderName" />
 
@@ -109,7 +109,7 @@
             android:padding="@dimen/margin_horizontal_small"
             android:text="@{Html.fromHtml(@string/currency(letter.totalPrice))}"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_small"
+            android:textSize="?textSizeSmall"
             android:textStyle="bold"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"

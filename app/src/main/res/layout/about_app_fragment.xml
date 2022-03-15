@@ -22,7 +22,7 @@
                 android:gravity="center"
                 android:text="@string/developed_by"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/text_size_large"
+                android:textSize="?textSizeLarge"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
                 android:gravity="center"
                 android:text="@string/app_version"
                 android:textColor="@color/dark_green"
-                android:textSize="@dimen/text_size_large"
+                android:textSize="?textSizeLarge"
                 android:layout_marginTop="@dimen/margin_vertical_large"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"

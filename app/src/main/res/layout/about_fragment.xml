@@ -74,7 +74,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@{syndicate.descAr}"
                     android:textColor="@color/text_dark"
-                    android:textSize="@dimen/text_size_large"
+                    android:textSize="?textSizeLarge"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ivLogo" />
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/address"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/bMap"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
                     android:paddingEnd="@dimen/margin_horizontal_large"
                     android:text="@string/location_on_map"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_small"
+                    android:textSize="?textSizeSmall"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvName" />
 
@@ -115,7 +115,7 @@
                     android:ellipsize="end"
                     android:text="@{syndicate.address}"
                     android:textColor="@color/dark_grey"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bMap" />
 
@@ -126,7 +126,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/phone"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvAddress" />
@@ -163,7 +163,7 @@
                         android:text="@{syndicate.phone}"
                         android:textColor="@color/text_dark"
                         android:textDirection="anyRtl"
-                        android:textSize="@dimen/text_size_large"
+                        android:textSize="?textSizeLarge"
                         app:layout_constraintEnd_toStartOf="@id/ivPhone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -177,7 +177,7 @@
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/email"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_medium"
+                    android:textSize="?textSizeMedium"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/clPhone" />
@@ -202,7 +202,7 @@
                         android:ellipsize="end"
                         android:text="@{syndicate.email}"
                         android:textColor="@color/dark_grey"
-                        android:textSize="@dimen/text_size_medium"
+                        android:textSize="?textSizeMedium"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

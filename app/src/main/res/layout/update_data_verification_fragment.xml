@@ -46,7 +46,7 @@
                     android:textColor="@color/text_dark"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:text="@string/enter_verification_code"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="?textSizeLarge" />
 
                 <EditText
                     android:id="@+id/edVerificationNumber"
@@ -58,7 +58,7 @@
                     android:gravity="center"
                     android:layout_marginTop="@dimen/margin_vertical_normal"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textSize="?textSizeLarge" />
 
 
                 <Button
@@ -71,7 +71,7 @@
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/send"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
 
                 <TextView
@@ -83,7 +83,7 @@
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@{String.format(@string/resend_code,counter)}"
                     android:textColor="@color/gray_dark"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
             </LinearLayout>
         </ScrollView>

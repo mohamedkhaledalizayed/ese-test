@@ -21,7 +21,7 @@
             android:padding="@dimen/margin_horizontal_normal"
             android:textColor="@color/colorPrimary"
             android:text="@{subSyndicate.descAr}"
-            android:textSize="@dimen/text_size_medium"
+            android:textSize="?textSizeMedium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

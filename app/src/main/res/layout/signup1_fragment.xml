@@ -38,7 +38,7 @@
                     android:textDirection="anyRtl"
                     android:hint="@string/fullName"
                     android:inputType="text"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edMobile"
@@ -49,7 +49,7 @@
                     android:textDirection="anyRtl"
                     android:hint="@string/phoneNumber"
                     android:inputType="phone"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edEmail"
@@ -60,7 +60,7 @@
                     android:textDirection="anyRtl"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edPassword"
@@ -71,7 +71,7 @@
                     android:textDirection="anyRtl"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <EditText
                     android:id="@+id/edPasswordConfirmation"
@@ -82,7 +82,7 @@
                     android:textDirection="anyRtl"
                     android:hint="@string/confirmPassword"
                     android:inputType="textPassword"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -99,7 +99,7 @@
                         android:textDirection="anyRtl"
                         android:hint="@string/age"
                         android:inputType="date"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
 
                     <Spinner
                         android:id="@+id/spGender"
@@ -111,7 +111,7 @@
                         android:textDirection="rtl"
                         android:padding="0dp"
                         style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="?textSizeMedium" />
                 </LinearLayout>
 
                 <Button
@@ -124,7 +124,7 @@
                     android:padding="@dimen/margin_horizontal_small"
                     android:text="@string/next"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="?textSizeMedium" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

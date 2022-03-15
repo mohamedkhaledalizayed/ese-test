@@ -42,7 +42,7 @@
                 android:layout_marginTop="@dimen/margin_vertical_normal"
                 android:text="@{category.name}"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_medium" />
+                android:textSize="?textSizeMedium" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

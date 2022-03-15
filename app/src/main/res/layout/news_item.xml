@@ -72,7 +72,7 @@
                 android:maxLines="2"
                 android:text="@{news.title}"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/text_size_medium" />
+                android:textSize="?textSizeMedium" />
 
 <!--            <TextView-->
 <!--                android:id="@+id/tvDate"-->
@@ -81,7 +81,7 @@
 <!--                android:ellipsize="end"-->
 <!--                android:maxLines="1"-->
 <!--                android:text="@{news.date}"-->
-<!--                android:textSize="@dimen/text_size_small" />-->
+<!--                android:textSize="?textSizeSmall" />-->
 
             <TextView
                 android:id="@+id/tvDesc"
@@ -91,7 +91,7 @@
                 android:lineSpacingMultiplier="0.8"
                 android:maxLines="2"
                 android:text="@{Html.fromHtml(news.desc)}"
-                android:textSize="@dimen/text_size_small" />
+                android:textSize="?textSizeSmall" />
 
         </LinearLayout>
         <ImageButton
