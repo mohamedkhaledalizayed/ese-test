@@ -128,4 +128,5 @@ dependencies {
     implementation(name: 'cowpaysdk', ext: 'aar')
 
     implementation 'com.valify:ValifyEKYC:2.2.0'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
 }

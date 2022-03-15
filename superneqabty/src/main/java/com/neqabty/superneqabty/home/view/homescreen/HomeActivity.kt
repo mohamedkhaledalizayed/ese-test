@@ -31,11 +31,13 @@ import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.payment.PaymentsActivity
 import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
+import com.squareup.picasso.Picasso
 import com.valify.valify_ekyc.sdk.Valify
 import com.valify.valify_ekyc.sdk.ValifyConfig
 import com.valify.valify_ekyc.sdk.ValifyFactory
 import com.valify.valify_ekyc.viewmodel.ValifyData
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
@@ -186,6 +188,9 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 .findViewById<TextView>(R.id.tvMobileNumber).visibility = View.VISIBLE
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).text =
                 Html.fromHtml(getString(R.string.menu_mobileNumber, sharedPreferences.mobile))
+            if (!sharedPreferences.image.isNullOrEmpty()){
+                Picasso.get().load(sharedPreferences.image).into(binding.navView.getHeaderView(0).findViewById<CircleImageView>(R.id.image))
+            }
         } else {
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
                 View.GONE

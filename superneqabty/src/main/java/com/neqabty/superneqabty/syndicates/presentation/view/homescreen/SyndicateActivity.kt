@@ -56,11 +56,12 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
 
         mainAdapter.onItemClickListener = object :
             SyndicateAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(id: Int, code: String) {
+            override fun setOnItemClickListener(id: Int, code: String, image: String) {
                 val intent = Intent(this@SyndicateActivity, HomeActivity::class.java)
                 intent.putExtra("id", id)
                 sharedPreferences.mainSyndicate = id
                 sharedPreferences.code = code
+                sharedPreferences.image = image
                 startActivity(intent)
                 finishAffinity()
             }
