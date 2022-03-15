@@ -403,7 +403,18 @@
         android:id="@+id/doctorsReservationFragment"
         android:name="com.neqabty.presentation.ui.doctorsReservation.DoctorsReservationFragment"
         android:label="@string/doctors_reservation_title"
-        tools:layout="@layout/doctors_reservation_fragment"/>
+        tools:layout="@layout/doctors_reservation_fragment">
+
+        <action
+            android:id="@+id/openDoctorsReservationVezeeta"
+            app:destination="@id/doctorsReservationVezeetaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/doctorsReservationVezeetaFragment"
+        android:name="com.neqabty.presentation.ui.doctorsReservationVezeeta.DoctorsReservationVezeetaFragment"
+        android:label="@string/doctors_reservation_title"
+        tools:layout="@layout/doctors_reservation_vezeeta_fragment"/>
 
     <fragment
         android:id="@+id/onlinePharmacyVezeetaFragment"

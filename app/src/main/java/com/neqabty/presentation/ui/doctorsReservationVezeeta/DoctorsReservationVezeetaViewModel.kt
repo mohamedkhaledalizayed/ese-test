@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.doctorsReservation
+package com.neqabty.presentation.ui.doctorsReservationVezeeta
 
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetDoctorsReservationData
@@ -9,15 +9,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DoctorsReservationViewModel @Inject constructor(
+class DoctorsReservationVezeetaViewModel @Inject constructor(
         private val getDoctorsReservationData: GetDoctorsReservationData) : BaseViewModel() {
 
     private val doctorsReservationEntityUIMapper = DoctorsReservationEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
-    var viewState: MutableLiveData<DoctorsReservationViewState> = MutableLiveData()
+    var viewState: MutableLiveData<DoctorsReservationVezeetaViewState> = MutableLiveData()
 
     init {
-        viewState.value = DoctorsReservationViewState()
+        viewState.value = DoctorsReservationVezeetaViewState()
     }
 
     fun getAuthCode(mobileNumber: String) {
