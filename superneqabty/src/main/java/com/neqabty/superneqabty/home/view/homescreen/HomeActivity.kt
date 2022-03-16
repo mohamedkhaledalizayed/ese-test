@@ -26,6 +26,7 @@ import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.aboutapp.AboutAppActivity
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Constants
+import com.neqabty.superneqabty.core.utils.Status
 import com.neqabty.superneqabty.databinding.ActivityMainBinding
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.payment.PaymentsActivity
@@ -38,6 +39,7 @@ import com.valify.valify_ekyc.sdk.ValifyFactory
 import com.valify.valify_ekyc.viewmodel.ValifyData
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
+import dmax.dialog.SpotsDialog
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
@@ -47,7 +49,7 @@ import java.util.*
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityMainBinding>(),
     NavigationView.OnNavigationItemSelectedListener {
-
+    private lateinit var loading: AlertDialog
     private lateinit var drawer: DrawerLayout
     private lateinit var toolbar: Toolbar
     private val homeViewModel: HomeViewModel by viewModels()
@@ -63,6 +65,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
         setupToolbar(titleResId = R.string.home_title)
         toolbar = binding.contentActivity.toolbar.toolbar
+
+        loading = SpotsDialog.Builder()
+            .setContext(this)
+            .setMessage("من فضلك انتظر...")
+            .build()
 
         toolbar.overflowIcon = getDrawable(R.drawable.ic_baseline_more_vert_24)
         drawer = binding.drawerLayout
@@ -152,6 +159,31 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
             }
         }
+
+        //Verify User
+        homeViewModel.user.observe(this) {
+
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        loading.show()
+                    }
+                    Status.SUCCESS -> {
+                        loading.dismiss()
+                        if (resource.data?.status!!){
+                            Toast.makeText(this, resource.data.data.message, Toast.LENGTH_LONG).show()
+                        }else{
+                            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    Status.ERROR -> {
+                        loading.dismiss()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+        }
     }
 
     private fun logout(message: String) {
@@ -178,6 +210,12 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     override fun onResume() {
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.syndicate_name).text =
+            "${sharedPreferences.syndicateName}"
+        if (!sharedPreferences.image.isNullOrEmpty()){
+            Picasso.get().load(sharedPreferences.image).into(binding.navView.getHeaderView(0).findViewById<CircleImageView>(R.id.image))
+        }
+
         super.onResume()
         if (sharedPreferences.mobile.isNotEmpty()) {
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
@@ -188,11 +226,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 .findViewById<TextView>(R.id.tvMobileNumber).visibility = View.VISIBLE
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).text =
                 Html.fromHtml(getString(R.string.menu_mobileNumber, sharedPreferences.mobile))
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.syndicate_name).text =
-                "${sharedPreferences.syndicateName}"
-            if (!sharedPreferences.image.isNullOrEmpty()){
-                Picasso.get().load(sharedPreferences.image).into(binding.navView.getHeaderView(0).findViewById<CircleImageView>(R.id.image))
-            }
+
         } else {
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
                 View.GONE
@@ -239,8 +273,17 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     private fun openVlaify() {
-
-        homeViewModel.getToken()
+        if (sharedPreferences.mobile.isNotEmpty()) {
+            homeViewModel.getToken()
+        }else{
+            val intent = Intent(this@HomeActivity, LoginActivity::class.java)
+            intent.putExtra("code", sharedPreferences.code)
+            intent.putExtra(
+                Intent.EXTRA_INTENT,
+                Intent(this@HomeActivity, SignupActivity::class.java)
+            )
+            startActivity(intent)
+        }
 
     }
 
@@ -312,9 +355,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 valifyToken: String, valifyData: ValifyData
             ) {
                 Log.e("neqabty", "onSuccess")
-                val firstName = valifyData.ocrProcess.nationalIdData.firstName
-                val fullName = valifyData.ocrProcess.nationalIdData.fullName
-                val gender = valifyData.ocrProcess.nationalIdData.gender
+                verifyUser(valifyData)
             }
 
             override fun onExit(
@@ -331,5 +372,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 Log.e("neqabty", "onError")
             }
         })
+    }
+
+    private fun verifyUser(valifyData: ValifyData){
+        val firstName = valifyData.ocrProcess.nationalIdData.firstName
+        val fullName = valifyData.ocrProcess.nationalIdData.fullName
+        val gender = valifyData.ocrProcess.nationalIdData.gender
     }
 }

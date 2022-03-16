@@ -7,8 +7,8 @@ import com.neqabty.superneqabty.home.domain.repository.ValifyRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetTokenUseCase @Inject constructor(private val repository: ValifyRepository) {
-    fun build(): Flow<GetToken> {
-        return repository.getToken()
+class VerifyUserUseCase @Inject constructor(private val repository: ValifyRepository) {
+    fun build(verifyUserBody: VerifyUserBody): Flow<VerifyUserResponse> {
+        return repository.verifyUser(verifyUserBody)
     }
 }
