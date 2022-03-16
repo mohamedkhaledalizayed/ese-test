@@ -22,6 +22,7 @@ class PreferencesHelper @Inject constructor(
         private const val MOBILE = "data.source.prefs.MOBILE"
         private const val CODE = "data.source.prefs.CODE"
         private const val SYNDICATE_IMAGE = "data.source.prefs.IMAGE"
+        private const val SYNDICATE_NAME = "data.source.prefs.SYNDICATE_NAME"
     }
 
     var isNotificationsEnabled
@@ -47,6 +48,10 @@ class PreferencesHelper @Inject constructor(
     var image
         get() = preferences.getString(SYNDICATE_IMAGE, "")!!
         set(value) = preferences.edit().putString(SYNDICATE_IMAGE, value).apply()
+
+    var syndicateName
+        get() = preferences.getString(SYNDICATE_NAME, "")!!
+        set(value) = preferences.edit().putString(SYNDICATE_NAME, value).apply()
 
     fun isSyndicateChosen(): Boolean {
         return mainSyndicate != 0

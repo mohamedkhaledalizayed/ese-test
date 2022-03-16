@@ -14,6 +14,7 @@ import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Status
 import com.neqabty.superneqabty.databinding.ActivitySyndicateBinding
 import com.neqabty.superneqabty.home.view.homescreen.HomeActivity
+import com.neqabty.superneqabty.syndicates.domain.entity.SyndicateEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -56,12 +57,13 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
 
         mainAdapter.onItemClickListener = object :
             SyndicateAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(id: Int, code: String, image: String) {
+            override fun setOnItemClickListener(item: SyndicateEntity) {
                 val intent = Intent(this@SyndicateActivity, HomeActivity::class.java)
-                intent.putExtra("id", id)
-                sharedPreferences.mainSyndicate = id
-                sharedPreferences.code = code
-                sharedPreferences.image = image
+                intent.putExtra("id", item.id)
+                sharedPreferences.mainSyndicate = item.id
+                sharedPreferences.code = item.code
+                sharedPreferences.image = item.image
+                sharedPreferences.syndicateName = item.name
                 startActivity(intent)
                 finishAffinity()
             }

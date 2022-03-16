@@ -188,6 +188,8 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 .findViewById<TextView>(R.id.tvMobileNumber).visibility = View.VISIBLE
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).text =
                 Html.fromHtml(getString(R.string.menu_mobileNumber, sharedPreferences.mobile))
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.syndicate_name).text =
+                "${sharedPreferences.syndicateName}"
             if (!sharedPreferences.image.isNullOrEmpty()){
                 Picasso.get().load(sharedPreferences.image).into(binding.navView.getHeaderView(0).findViewById<CircleImageView>(R.id.image))
             }
