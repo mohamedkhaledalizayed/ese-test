@@ -26,7 +26,6 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
     override fun getViewBinding() = ActivitySyndicateBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(binding.root)
 
         syndicatesViewModel.getSyndicates()

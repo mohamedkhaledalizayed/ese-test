@@ -1,8 +1,8 @@
-package com.neqabty.superneqabty.home.di
+package com.neqabty.valify.modules.home.di
 
-import com.neqabty.superneqabty.home.data.api.ValifyApi
-import com.neqabty.superneqabty.home.data.repository.ValifyRepositoryImpl
-import com.neqabty.superneqabty.home.domain.repository.ValifyRepository
+import com.neqabty.valify.modules.home.data.api.ValifyApi
+import com.neqabty.valify.modules.home.data.repository.ValifyRepositoryImpl
+import com.neqabty.valify.modules.home.domain.repository.ValifyRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -13,11 +13,14 @@ import javax.inject.Named
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class ValifyModule {
+abstract class HomeModule {
     companion object {
         @Provides
-        fun providesValifyApiService(@Named("valify")retrofit: Retrofit) = retrofit.create(ValifyApi::class.java)
+        fun providesValifyApiService(
+            @Named("valify") retrofit: Retrofit
+        ) = retrofit.create(ValifyApi::class.java)
     }
+
     @Binds
     internal abstract fun bindsValifyRepository(valifyRepositoryImpl: ValifyRepositoryImpl): ValifyRepository
 }

@@ -32,6 +32,7 @@ import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.payment.PaymentsActivity
 import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
+import com.neqabty.valify.modules.home.presentation.view.homescreen.HomeActivity
 import com.squareup.picasso.Picasso
 import com.valify.valify_ekyc.sdk.Valify
 import com.valify.valify_ekyc.sdk.ValifyConfig
@@ -161,29 +162,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         }
 
         //Verify User
-        homeViewModel.user.observe(this) {
 
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> {
-                        loading.show()
-                    }
-                    Status.SUCCESS -> {
-                        loading.dismiss()
-                        if (resource.data?.status!!){
-                            Toast.makeText(this, resource.data.data.message, Toast.LENGTH_LONG).show()
-                        }else{
-                            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
-                        }
-                    }
-                    Status.ERROR -> {
-                        loading.dismiss()
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
-
-        }
     }
 
     private fun logout(message: String) {
@@ -274,7 +253,8 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
     private fun openVlaify() {
         if (sharedPreferences.mobile.isNotEmpty()) {
-            homeViewModel.getToken()
+//            homeViewModel.getToken()
+            startActivity(Intent(this,HomeActivity::class.java))
         }else{
             val intent = Intent(this@HomeActivity, LoginActivity::class.java)
             intent.putExtra("code", sharedPreferences.code)

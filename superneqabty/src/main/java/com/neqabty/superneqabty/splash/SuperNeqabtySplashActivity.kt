@@ -26,7 +26,9 @@ class SuperNeqabtySplashActivity : BaseActivity<ActivitySuperNeqabtyMainBinding>
 
         Handler().postDelayed(Runnable {
             val mainIntent = Intent(this@SuperNeqabtySplashActivity, if(sharedPreferences.mainSyndicate == -1) SyndicateActivity::class.java else HomeActivity::class.java)
-            startActivity(mainIntent)
+//            startActivity(mainIntent)
+            startActivity(Intent(this,com.neqabty.valify.modules.home.presentation.view.homescreen.HomeActivity::class.java))
+
             finish()
         }, SPLASH_DISPLAY_LENGTH)
     }
