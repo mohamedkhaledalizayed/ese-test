@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Transaction(
     @SerializedName("account")
-    val account: Int,
+    val account: Any,
     @SerializedName("cashier_url")
     val cashierUrl: Any,
     @SerializedName("created_at")
@@ -25,7 +25,7 @@ data class Transaction(
     @SerializedName("gateway_ps_txt")
     val gatewayPsTxt: String,
     @SerializedName("gateway_reference_id")
-    val gatewayReferenceId: String,
+    val gatewayReferenceId: Any,
     @SerializedName("id")
     val id: String,
     @SerializedName("item_id")
@@ -35,7 +35,7 @@ data class Transaction(
     @SerializedName("net_amount")
     val netAmount: String,
     @SerializedName("payment_gateway_reference_id")
-    val paymentGatewayReferenceId: String,
+    val paymentGatewayReferenceId: String?,
     @SerializedName("payment_method")
     val paymentMethod: Int,
     @SerializedName("payment_request_number")

@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 data class Payment(
     @SerializedName("account")
-    val account: Int,
+    val account: Any,
     @SerializedName("amount")
     val amount: String,
     @SerializedName("callback_fail_url")
-    val callbackFailUrl: String,
+    val callbackFailUrl: Any,
     @SerializedName("callback_success_url")
-    val callbackSuccessUrl: String,
+    val callbackSuccessUrl: Any,
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("id")
@@ -19,7 +19,7 @@ data class Payment(
     @SerializedName("item_id")
     val itemId: Int,
     @SerializedName("message")
-    val message: String,
+    val message: Any,
     @SerializedName("mobile")
     val mobile: Any,
     @SerializedName("payment_method")
@@ -29,7 +29,7 @@ data class Payment(
     @SerializedName("service_code")
     val serviceCode: String,
     @SerializedName("status")
-    val status: Boolean,
+    val status: Any,
     @SerializedName("transaction")
     val transaction: Transaction,
     @SerializedName("updated_at")

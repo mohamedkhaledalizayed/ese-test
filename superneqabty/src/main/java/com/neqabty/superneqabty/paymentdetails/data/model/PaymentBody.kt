@@ -12,9 +12,5 @@ class PaymentBody (
     @SerializedName("amount")
     val amount: String = "",
     @SerializedName("item_id")
-    val itemId: Int = 0,
-    @SerializedName("callback_success_url")
-    val callback_success_url: String = "http://ex.com",
-    @SerializedName("callback_fail_url")
-    val callback_fail_url: String = "http://ex.com"
+    val itemId: Int = 0
 )

@@ -80,9 +80,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                     com.neqabty.superneqabty.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data?.payment?.transaction?.paymentGatewayReferenceId.isNullOrEmpty()){
-                            Toast.makeText(this, "حدث خطاء", Toast.LENGTH_LONG).show()
+                            val paymentObject = resource.data?.mobilePaymentPayload
                         }else{
-                            showAlertDialog("Message Here", resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
+                            showAlertDialog( resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
                         }
                     }
                     com.neqabty.superneqabty.core.utils.Status.ERROR -> {
@@ -141,11 +141,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         }
     }
 
-    private fun showAlertDialog(message: String, paymentGatewayReferenceId: String) {
+    private fun showAlertDialog(paymentGatewayReferenceId: String) {
 
         val alertDialog = AlertDialog.Builder(this).create()
         alertDialog.setTitle("تنبيه")
-        alertDialog.setMessage(message)
+        alertDialog.setMessage(getString(R.string.payment_reference) + " $paymentGatewayReferenceId")
         alertDialog.setCancelable(true)
         alertDialog.setButton(
             AlertDialog.BUTTON_POSITIVE, "نسخ"
