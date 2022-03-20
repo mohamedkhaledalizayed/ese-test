@@ -2,6 +2,5 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">3.131.229.146</domain>
-        <domain includeSubdomains="true">test.boniantech.com</domain>
     </domain-config>
 </network-security-config>

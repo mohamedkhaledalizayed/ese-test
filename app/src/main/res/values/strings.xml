@@ -189,6 +189,7 @@
     <string name="menu_phoneNumber">رقم الموبايل:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="home_title">الرئيسية</string>
     <string name="news_title">الأخبار</string>
+    <string name="valify_title">تحديد هوية المستخدم</string>
     <string name="trips_title">الرحلات</string>
     <string name="medical_services_title">الرعاية الصحية</string>
     <string name="medical_renew_title">اشتراك الرعاية الصحية</string>

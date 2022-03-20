@@ -35,6 +35,7 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.common.ExpandableListAdapter
 import com.neqabty.presentation.entities.NavigationMenuItem
 import com.neqabty.presentation.util.*
+import com.neqabty.valify.modules.home.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.main_activity.*
 import java.util.*
@@ -416,6 +417,11 @@ class MainActivity : AppCompatActivity() {
 
         })
         listDataHeader.add(medicalServicesItem)
+
+        val valifyItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.valify_title, {
+            startActivity(Intent(this, HomeActivity::class.java))
+        })
+        listDataHeader.add(valifyItem)
 
         val newsItem = NavigationMenuItem(R.drawable.ic_menu_news, R.string.news_title, {
             navController().navigate(R.id.newsFragment)
