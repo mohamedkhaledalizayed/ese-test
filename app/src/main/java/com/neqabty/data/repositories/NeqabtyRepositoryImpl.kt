@@ -330,6 +330,10 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getSyndicates()
     }
 
+    override fun getSyndicateBranches(): Observable<List<SyndicateBranchEntity>> {
+        return remoteDataStore.getSyndicateBranches()
+    }
+
     fun saveSyndicates(syndicatesList: List<SyndicateEntity>): Observable<List<SyndicateEntity>> {
         return cachedDataStore.saveSyndicates(syndicatesList)
     }

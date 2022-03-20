@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+        <variable
+            name="branch"
+            type="com.neqabty.presentation.entities.SyndicateBranchUI" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_horizontal_small"
+        android:background="@drawable/bg"
+        android:elevation="@dimen/elevation_level_one"
+        android:padding="@dimen/margin_horizontal_normal">
+
+        <LinearLayout
+            android:id="@+id/llTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_horizontal_small"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@id/ibGo"
+            app:layout_constraintHorizontal_weight="2.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="0.6"
+                android:maxLines="2"
+                android:text="@{branch.name}"
+                android:textColor="@color/colorPrimary"
+                android:textSize="?textSizeMedium" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvDate"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:ellipsize="end"-->
+<!--                android:maxLines="1"-->
+<!--                android:text="@{news.date}"-->
+<!--                android:textSize="?textSizeSmall" />-->
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lineSpacingMultiplier="0.8"
+                android:maxLines="2"
+                android:textSize="?textSizeSmall" />
+
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/ibGo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_arrow"
+            android:layout_marginStart="@dimen/margin_horizontal_small"
+            android:layout_marginEnd="@dimen/margin_horizontal_small"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_weight=".35"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

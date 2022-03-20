@@ -9,6 +9,7 @@ interface NeqabtyRepository {
     fun getSyndicates(): Observable<List<SyndicateEntity>>
     fun geSyndicateById(id: String): Observable<SyndicateEntity>
     fun geSubSyndicatesById(id: String): Observable<List<SyndicateEntity>>
+    fun getSyndicateBranches(): Observable<List<SyndicateBranchEntity>>
     fun getNews(id: String): Observable<List<NewsEntity>>
     fun getTrips(id: String): Observable<List<TripEntity>>
     fun getTripDetails(id: String): Observable<TripEntity>
