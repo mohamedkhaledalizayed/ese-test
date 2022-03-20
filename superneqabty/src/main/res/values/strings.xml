@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Mega Neqabty</string>
+    <string name="home_title">الرئيسية</string>
+    <string name="news_title">الأخبار</string>
+    <string name="payments_title">المدفوعات</string>
+    <string name="about_title">عن النقابة</string>
+    <string name="settings_title">الإعدادات</string>
+    <string name="contactus_title">اتصل بنا</string>
+    <string name="aboutapp_title">عن التطبيق</string>
+    <string name="help_title">مساعدة</string>
+    <string name="notifications_settings">الإشعارات</string>
+    <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
+    <string name="app_version">Version %s</string>
+    <string name="main">الجهات الرئيسية</string>
+    <string name="welcome">مرحباً بك في نقابتي</string>
+    <string name="menu_memberName">اسم العضو:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
+    <string name="menu_mobileNumber">رقم الموبايل:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
+    <string name="logout_title">تسجيل خروج</string>
+    <string name="login_title">تسجيل الدخول</string>
+    <string name="change_syndicate">تغيير النقابة</string>
+    <string name="neqabty_mega">نقابتي</string>
+    <string name="neqabty">نقابتي هو منصة تفاعلية تهدف الي تقديم خدمات الرعاية الصحية لنقابة المهندسين المصرية بطريقة مميكنة مدعمة بوسائل مختلفة للدفع الالكتروني لتسهيل الحصول علي الخدمات ومتابعة مدفوعاتهم باقل وقت ومجهود</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="more">المزيد...</string>
+    <string name="details">التفاصيل:</string>
+    <string name="payment_method">طريقة الدفع:</string>
+    <string name="payment_card">بطاقات بنكية ( فيزا ماستر كارد ميزة)</string>
+    <string name="payment_channel">منافذ الدفع Opay</string>
+    <string name="payment_store_locator">لمعرفة اقرب منافذ الدفع المحيطة بك
+        <![CDATA[<font color="#41941b"><u> اضغط هنا</u></font>]]>
+    </string>
+    <string name="payment_fawry">منافذ الدفع فوري</string>
+    <string name="payment_wallet">محافظ إلكترونية</string>
+    <string name="payment_meeza">ميزة</string>
+    <string name="payment_reference">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك \n
+        كود الدفع:</string>
+    <string name="payment_reference_without_code">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك</string>
+    <string name="payment_canceled">لقد تم الغاء عملية الدفع</string>
+    <string name="payment_successful">تمت عملية الدفع بنجاح \n
+رقم العملية </string>
+
+    <string name="alert_title">تنبيه</string>
+    <string name="ok_btn">تأكيد</string>
+    <string name="cancel_btn">إلغاء</string>
+    <string name="membership_id">رقم العضوية</string>
+    <string name="next">التالى</string>
+    <string name="service">الخدمة</string>
+    <string name="id_valify">تحديد الهوية</string>
+    <string name="services">الخدمات</string>
+    <string name="trips">الرحلات</string>
+    <string name="healthcare">الرعاية الصحية</string>
+    <string name="mashat">المعاشات</string>
+    <string name="all_trips">رحلاتنا</string>
+    <string name="courses">الدورات التدريبية</string>
+</resources>

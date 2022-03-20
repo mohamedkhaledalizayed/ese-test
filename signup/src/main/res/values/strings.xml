@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Courses</string>
+    <string name="signup">تسجيل إشتراك</string>
+    <string name="membership_id">رقم العضوية</string>
+    <string name="national_id">اخر 4 ارقام من الرقم القومى</string>
+    <string name="phone">الموبايل</string>
+</resources>

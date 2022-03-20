@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_250sdp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo"
+            app:civ_border_width="@dimen/_3sdp"
+            app:civ_border_color="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/welcome"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image" />
+
+        <TextView
+            android:id="@+id/syndicate_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image" />
+
+        <TextView
+            android:id="@+id/tvMemberName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
+
+        <TextView
+            android:id="@+id/tvMobileNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMemberName" />
+
+
+
+        <!--        <Button-->
+        <!--            android:id="@+id/bChangePassword"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@android:color/transparent"-->
+        <!--            android:elevation="@dimen/elevation_level_one"-->
+        <!--            app:layout_constraintHorizontal_chainStyle="spread_inside"-->
+        <!--            android:text="@string/change_password_title"-->
+        <!--            android:textColor="@android:color/white"-->
+        <!--            android:textSize="@dimen/text_size_medium"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintEnd_toStartOf="@id/bLogout"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/tvMobileNumber" />-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/imageView"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="@dimen/margin_horizontal_small"-->
+        <!--android:layout_margin="@dimen/margin_horizontal_normal"-->
+        <!--android:adjustViewBounds="false"-->
+        <!--android:cropToPadding="true"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:src="@mipmap/username_ic"-->
+        <!--android:elevation="@dimen/elevation_level_one"-->
+        <!--android:background="@drawable/rounded_bg"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    </LinearLayout>
+</layout>

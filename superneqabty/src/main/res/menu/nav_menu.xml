@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/news"
+        android:title="@string/news_title" />
+
+    <item
+        android:id="@+id/payment"
+        android:title="@string/payments_title" />
+
+    <item
+        android:id="@+id/valify"
+        android:title="@string/id_valify"/>
+<!--    <item-->
+<!--        android:id="@+id/about_fragment"-->
+<!--        android:title="@string/about_title" />-->
+
+    <item
+        android:id="@+id/about_app_fragment"
+        android:title="@string/aboutapp_title" />
+
+    <item
+        android:id="@+id/settings_fragment"
+        android:title="@string/settings_title" />
+
+    <item
+        android:id="@+id/contactus_fragment"
+        android:title="@string/contactus_title" />
+</menu>
