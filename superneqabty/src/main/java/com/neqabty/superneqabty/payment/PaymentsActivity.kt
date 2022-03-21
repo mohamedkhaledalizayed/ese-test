@@ -71,12 +71,12 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
 
     private fun submit() {
         if (binding.membershipId.text.isEmpty()){
-            Toast.makeText(this, "ادخل رقم العضوية", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(com.neqabty.superneqabty.R.string.enter_mermber_ship_id), Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.spServices.selectedItemPosition == 0){
-            Toast.makeText(this, "إختر الخدمة اولا", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(com.neqabty.superneqabty.R.string.select_service), Toast.LENGTH_LONG).show()
             return
         }
 

@@ -7,6 +7,7 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.superneqabty.BuildConfig
+import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Status
 import com.neqabty.superneqabty.databinding.ActivitySuperNeqabtyMainBinding
@@ -30,7 +31,7 @@ class SuperNeqabtySplashActivity : BaseActivity<ActivitySuperNeqabtyMainBinding>
 
         loading = SpotsDialog.Builder()
             .setContext(this)
-            .setMessage("من فضلك انتظر...")
+            .setMessage(getString(R.string.please_wait))
             .build()
 
         splashViewModel.appConfig()
@@ -50,7 +51,7 @@ class SuperNeqabtySplashActivity : BaseActivity<ActivitySuperNeqabtyMainBinding>
                                 finish()
                             }, SPLASH_DISPLAY_LENGTH)
                         }else{
-                            Toast.makeText(this, "يوجد اصدار جديد", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, getString(R.string.new_update), Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {

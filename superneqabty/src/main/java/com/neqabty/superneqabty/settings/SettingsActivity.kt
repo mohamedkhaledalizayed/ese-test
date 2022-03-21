@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
     
-    private lateinit var toolbar: Toolbar
     override fun getViewBinding() = ActivitySettingsBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {

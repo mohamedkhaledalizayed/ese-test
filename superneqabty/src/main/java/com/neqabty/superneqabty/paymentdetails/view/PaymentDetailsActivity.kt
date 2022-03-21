@@ -144,7 +144,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
     private fun showAlertDialog(paymentGatewayReferenceId: String) {
 
         val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle("تنبيه")
+        alertDialog.setTitle(getString(R.string.alert))
         alertDialog.setMessage(getString(R.string.payment_reference) + " $paymentGatewayReferenceId")
         alertDialog.setCancelable(true)
         alertDialog.setButton(

@@ -43,7 +43,7 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
                             binding.gridView.adapter = mainAdapter
                             mainAdapter.submitList(resource.data)
                         }else{
-                            Toast.makeText(this, "Empty", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, getString(R.string.no_syndicates), Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {

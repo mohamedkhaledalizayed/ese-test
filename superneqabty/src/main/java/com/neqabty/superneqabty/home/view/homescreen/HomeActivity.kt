@@ -68,7 +68,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
         loading = SpotsDialog.Builder()
             .setContext(this)
-            .setMessage("من فضلك انتظر...")
+            .setMessage(getString(R.string.please_wait))
             .build()
 
         toolbar.overflowIcon = getDrawable(R.drawable.ic_baseline_more_vert_24)
