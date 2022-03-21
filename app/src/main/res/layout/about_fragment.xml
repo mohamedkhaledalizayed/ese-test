@@ -69,6 +69,18 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tvMainsyndicate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/mainsyndicate_title"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="?textSizeMedium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+
+                <TextView
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -78,7 +90,7 @@
                     android:textSize="?textSizeLarge"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+                    app:layout_constraintTop_toBottomOf="@id/tvMainsyndicate" />
 
 
                 <TextView
@@ -209,14 +221,23 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+                <TextView
+                    android:id="@+id/tvSubsyndicates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"                    android:text="@string/subsyndicates_title"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="?textSizeMedium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/clEmail" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvBranches"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/clEmail"
+                    app:layout_constraintTop_toBottomOf="@id/tvSubsyndicates"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="@dimen/margin_horizontal_small"
-                    android:layout_marginEnd="@dimen/margin_horizontal_small"
                     android:layout_marginBottom="@dimen/margin_horizontal_small"
                     app:layoutManager="LinearLayoutManager"
                     tools:listitem="@layout/syndicate_branch_item" />

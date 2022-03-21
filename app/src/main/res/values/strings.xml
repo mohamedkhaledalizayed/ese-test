@@ -279,6 +279,8 @@
     <string name="phone_title">التليفون: </string>
     <string name="phone">التليفون</string>
     <string name="email_title">البريد الالكتروني: </string>
+    <string name="subsyndicates_title">النقابات الفرعية</string>
+    <string name="mainsyndicate_title">النقابة العامة</string>
     <string name="address_content">
         <![CDATA[<font color="#0b2031"><u>%s</u></font>]]>
     </string>
