@@ -23,7 +23,7 @@
             android:name=".payment.PaymentsActivity"
             android:exported="false" />
         <activity
-            android:name=".splash.SuperNeqabtySplashActivity"
+            android:name=".splash.view.SuperNeqabtySplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
