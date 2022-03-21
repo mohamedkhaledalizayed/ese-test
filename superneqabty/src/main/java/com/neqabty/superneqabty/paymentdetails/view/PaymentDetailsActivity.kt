@@ -148,7 +148,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         alertDialog.setMessage(getString(R.string.payment_reference) + " $paymentGatewayReferenceId")
         alertDialog.setCancelable(true)
         alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, "نسخ"
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.copy_text)
         ) { dialog, _ ->
             dialog.dismiss()
             copyText(paymentGatewayReferenceId)
