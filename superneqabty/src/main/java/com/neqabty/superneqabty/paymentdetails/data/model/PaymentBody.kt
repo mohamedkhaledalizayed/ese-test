@@ -3,6 +3,11 @@ package com.neqabty.superneqabty.paymentdetails.data.model
 import com.google.gson.annotations.SerializedName
 
 class PaymentBody (
+    @SerializedName("payment")
+    val payment: PaymentBodyObject
+)
+
+class PaymentBodyObject(
     @SerializedName("service_code")
     val serviceCode: String = "",
     @SerializedName("payment_method")

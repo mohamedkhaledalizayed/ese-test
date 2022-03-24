@@ -15,6 +15,7 @@ import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Constants
 import com.neqabty.superneqabty.databinding.ActivityPaymentDetailsBinding
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
+import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBodyObject
 import dagger.hilt.android.AndroidEntryPoint
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
@@ -137,7 +138,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 //            else
 //                cowPayPayment(false)
 
-            paymentDetailsViewModel.getPaymentInfo(PaymentBody(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = "185", itemId = number.toInt()))
+            paymentDetailsViewModel.getPaymentInfo(PaymentBody(PaymentBodyObject(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = "185", itemId = number.toInt())))
         }
     }
 
