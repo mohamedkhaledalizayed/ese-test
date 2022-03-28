@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Mega Neqabty</string>
+    <string name="app_name">Neqabty</string>
     <string name="home_title">الرئيسية</string>
     <string name="news_title">الأخبار</string>
     <string name="payments_title">المدفوعات</string>
@@ -60,5 +60,5 @@
     <string name="enter_mermber_ship_id">ادخل رقم العضوية</string>
     <string name="select_service">إختر الخدمة اولا</string>
     <string name="please_wait">من فضلك انتظر...</string>
-    <string name="new_update">يوجد اصدار جديد</string>
+    <string name="new_update">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
 </resources>
