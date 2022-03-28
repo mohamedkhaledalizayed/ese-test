@@ -11,7 +11,8 @@
 
     <item
         android:id="@+id/valify"
-        android:title="@string/id_valify"/>
+        android:title="@string/id_valify"
+        android:visible="false"/>
 <!--    <item-->
 <!--        android:id="@+id/about_fragment"-->
 <!--        android:title="@string/about_title" />-->

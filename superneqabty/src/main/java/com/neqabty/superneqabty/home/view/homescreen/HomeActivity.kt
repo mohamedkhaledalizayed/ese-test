@@ -184,6 +184,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             }
 
         }
+
+        binding.contentActivity.ivSubscription.setOnClickListener {
+            val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun logout(message: String) {
