@@ -62,4 +62,5 @@
     <string name="please_wait">من فضلك انتظر...</string>
     <string name="service_unavailable">  سيتم تغعيل الخدمة قريباً</string>
     <string name="new_update">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
+    <string name="other_services">خدمات أخرى</string>
 </resources>

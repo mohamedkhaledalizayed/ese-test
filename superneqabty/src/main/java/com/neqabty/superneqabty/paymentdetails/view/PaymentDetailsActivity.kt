@@ -7,6 +7,7 @@ import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -14,9 +15,12 @@ import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Constants
 import com.neqabty.superneqabty.databinding.ActivityPaymentDetailsBinding
+import com.neqabty.superneqabty.home.view.homescreen.HomeActivity
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBodyObject
 import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
+import com.neqabty.superneqabty.syndicates.domain.entity.SyndicateEntity
+import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
@@ -31,10 +35,12 @@ import team.opay.business.cashier.sdk.pay.PaymentTask
 class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
     private val mAdapter = ItemsAdapter()
+    private val featuresAdapter = FeaturesAdapter()
     private val paymentDetailsViewModel: PaymentDetailsViewModel by viewModels()
     private var paymentMethod = "card"
     private var serviceCode = ""
     private var number = ""
+    private var listOfFeatures: ArrayList<Int> = ArrayList()
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +49,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         setupToolbar(titleResId = R.string.payments)
 
         binding.rvDetails.adapter = mAdapter
+        binding.rvFeatures.adapter = featuresAdapter
         serviceCode = intent.getStringExtra("code")!!
         number = intent.getStringExtra("number")!!
         paymentDetailsViewModel.getPaymentDetails(serviceCode, number)
@@ -62,6 +69,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         val total = paymentDetailsViewModel.payment.value?.data?.receipt?.cardTotalPrice.toString()
                         binding.tvAmount.text = "الاجمالى : ${total}"
                         mAdapter.submitList(resource.data?.receipt?.details)
+                        featuresAdapter.submitList(resource.data?.service?.features)
                     }
                     com.neqabty.superneqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
@@ -96,6 +104,18 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
+            }
+
+        }
+
+        featuresAdapter.onItemClickListener = object :
+            FeaturesAdapter.OnItemClickListener {
+            override fun setOnItemCheckedListener(id: Int) {
+                listOfFeatures.add(id)
+            }
+
+            override fun setOnItemUnCheckedListener(id: Int) {
+                listOfFeatures.remove(id)
             }
 
         }
@@ -143,7 +163,8 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 //            else
 //                cowPayPayment(false)
 
-            paymentDetailsViewModel.getPaymentInfo(PaymentBody(PaymentBodyObject(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = "185", itemId = number.toInt())))
+            Log.e("lkgh", "$listOfFeatures")
+            paymentDetailsViewModel.getPaymentInfo(PaymentBody(PaymentBodyObject(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = "185", itemId = number.toInt(), service_features = listOfFeatures)))
         }
     }
 
