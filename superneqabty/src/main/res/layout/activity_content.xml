@@ -54,6 +54,55 @@
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
                         android:elevation="@dimen/_4sdp"
+                        app:cardCornerRadius="@dimen/_4sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            >
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_60sdp"
+                                android:scaleType="center"
+                                android:src="@drawable/subscription_model"
+                                android:id="@+id/iv_subscription"
+                                />
+
+                            <TextView
+                                android:fontFamily="@font/cairo_regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_12ssp"
+                                android:id="@+id/subscription_model_title"
+                                android:textColor="@color/black"
+                                android:text="@string/subscription_model"
+                                android:textAlignment="center"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_5sdp"/>
+
+                            <TextView
+                                android:fontFamily="@font/cairo_regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_8ssp"
+                                android:textColor="@color/lightRed"
+                                android:text="@string/service_unavailable"
+                                android:textAlignment="center"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:visibility="invisible"/>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/_4sdp"
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         app:cardCornerRadius="@dimen/_4sdp">
@@ -86,6 +135,16 @@
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:layout_marginTop="@dimen/_5sdp"/>
+
+                            <TextView
+                                android:fontFamily="@font/cairo_regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_8ssp"
+                                android:textColor="@color/lightRed"
+                                android:text="@string/service_unavailable"
+                                android:textAlignment="center"
+                                android:layout_margin="@dimen/_5sdp"/>
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -127,6 +186,16 @@
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:layout_marginTop="@dimen/_5sdp"/>
 
+                            <TextView
+                                android:fontFamily="@font/cairo_regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_8ssp"
+                                android:textColor="@color/lightRed"
+                                android:text="@string/service_unavailable"
+                                android:textAlignment="center"
+                                android:layout_margin="@dimen/_5sdp"/>
+
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -166,47 +235,18 @@
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:layout_marginTop="@dimen/_5sdp"/>
 
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="wrap_content"
-                        android:elevation="@dimen/_4sdp"
-                        app:cardCornerRadius="@dimen/_4sdp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            >
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_60sdp"
-                                android:scaleType="center"
-                                android:src="@drawable/subscription_model"
-                                android:id="@+id/iv_subscription"
-                                />
-
                             <TextView
                                 android:fontFamily="@font/cairo_regular"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_12ssp"
-                                android:id="@+id/subscription_model_title"
-                                android:textColor="@color/black"
-                                android:text="@string/subscription_model"
+                                android:textSize="@dimen/_8ssp"
+                                android:textColor="@color/lightRed"
+                                android:text="@string/service_unavailable"
                                 android:textAlignment="center"
-                                android:layout_marginBottom="@dimen/_5sdp"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:layout_marginTop="@dimen/_5sdp"/>
+                                android:layout_margin="@dimen/_5sdp"/>
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
-
                 </LinearLayout>
 
             </HorizontalScrollView>
@@ -249,7 +289,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp">
+                android:layout_margin="@dimen/_10sdp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_trips"
@@ -274,7 +315,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp">
+                android:layout_margin="@dimen/_10sdp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_courses"
