@@ -16,6 +16,7 @@ import com.neqabty.superneqabty.core.utils.Constants
 import com.neqabty.superneqabty.databinding.ActivityPaymentDetailsBinding
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBodyObject
+import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
 import dagger.hilt.android.AndroidEntryPoint
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
@@ -81,7 +82,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                     com.neqabty.superneqabty.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data?.payment?.transaction?.paymentGatewayReferenceId.isNullOrEmpty()){
-                            val paymentObject = resource.data?.mobilePaymentPayload
+                            val paymentObject = resource.data as PaymentResponse
+                            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
+                                oPayPayment(paymentObject, true)
+                            else if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
+                                oPayPayment(paymentObject, false)
                         }else{
                             showAlertDialog( resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
                         }
@@ -239,22 +244,22 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         }
     }
 
-    fun oPayPayment(isCredit: Boolean) {
+    fun oPayPayment(paymentResponse: PaymentResponse, isCredit: Boolean) {
         val paymentType = if(isCredit) "BankCard" else "ReferenceCode"
         PaymentTask.sandBox = Constants.OPAY_MODE
         val payInput = PayInput(
-            publickey = Constants.OPAY_PUBLIC_KEY,
-            merchantId = Constants.OPAY_MERCHANT_ID,
-            merchantName = Constants.OPAY_MERCHANT_NAME,
-            reference = "anroid_1",
-            countryCode = "EG", // uppercase
-            currency = "EGP", // uppercase
-            payAmount = (10 * 100).toLong(),
-            productName = "annualSubscription",
-            productDescription = "android_" + 9,
-            callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
+            publickey = paymentResponse.mobilePaymentPayload.publickey,
+            merchantId = paymentResponse.mobilePaymentPayload.merchantId,
+            merchantName = paymentResponse.mobilePaymentPayload.merchantName,
+            reference = paymentResponse.mobilePaymentPayload.reference,
+            countryCode = paymentResponse.mobilePaymentPayload.countryCode, // uppercase
+            currency = paymentResponse.mobilePaymentPayload.currency, // uppercase
+            payAmount = (paymentResponse.mobilePaymentPayload.payAmount.toDouble() * 100).toLong(),
+            productName = binding.tvService.text.toString(),
+            productDescription = binding.tvService.text.toString(),
+            callbackUrl = paymentResponse.mobilePaymentPayload.callbackUrl,
             userClientIP = "110.246.160.183",
-            expireAt = if(isCredit) 30 else 2880,
+            expireAt = paymentResponse.mobilePaymentPayload.expireAt,
             paymentType = paymentType // optional
         )
 

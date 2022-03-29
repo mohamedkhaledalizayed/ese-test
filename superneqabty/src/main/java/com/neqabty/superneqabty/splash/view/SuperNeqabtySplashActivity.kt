@@ -2,6 +2,7 @@ package com.neqabty.superneqabty.splash.view
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
@@ -44,14 +45,14 @@ class SuperNeqabtySplashActivity : BaseActivity<ActivitySuperNeqabtyMainBinding>
                     }
                     Status.SUCCESS -> {
                         loading.dismiss()
-                        if (resource.data!!.apiConfigurations[0].androidVersion == "158"){
+                        if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= BuildConfig.VERSION_CODE){
                             Handler().postDelayed(Runnable {
                                 val mainIntent = Intent(this@SuperNeqabtySplashActivity, if(sharedPreferences.mainSyndicate == -1) SyndicateActivity::class.java else HomeActivity::class.java)
                                 startActivity(mainIntent)
                                 finish()
                             }, SPLASH_DISPLAY_LENGTH)
                         }else{
-                            Toast.makeText(this, getString(R.string.new_update), Toast.LENGTH_LONG).show()
+                            showUpdateAppAlertDialog()
                         }
                     }
                     Status.ERROR -> {
@@ -62,5 +63,37 @@ class SuperNeqabtySplashActivity : BaseActivity<ActivitySuperNeqabtyMainBinding>
             }
 
         }
+    }
+
+
+    private fun showUpdateAppAlertDialog() {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(getString(R.string.new_update))
+        alertDialog.setCancelable(false)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.ok_btn)
+        ) { dialog, _ ->
+            val appPackageName = this.packageName
+            try {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=$appPackageName")
+                    )
+                )
+            } catch (anfe: android.content.ActivityNotFoundException) {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                    )
+                )
+            }
+            showUpdateAppAlertDialog()
+        }
+        alertDialog.show()
+
     }
 }
