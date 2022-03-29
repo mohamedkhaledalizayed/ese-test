@@ -6,12 +6,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.superneqabty.R
-import com.neqabty.superneqabty.databinding.NewsLayoutItemBinding
 import com.neqabty.superneqabty.databinding.ServiceLayoutItemBinding
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
-import com.neqabty.superneqabty.paymentdetails.data.model.Detail
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 
 
 class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {

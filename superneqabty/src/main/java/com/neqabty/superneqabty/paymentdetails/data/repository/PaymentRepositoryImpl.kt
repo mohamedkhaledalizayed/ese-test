@@ -2,7 +2,7 @@ package com.neqabty.superneqabty.paymentdetails.data.repository
 
 
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
-import com.neqabty.superneqabty.paymentdetails.data.model.ReceiptResponse
+import com.neqabty.superneqabty.paymentdetails.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
 import com.neqabty.superneqabty.paymentdetails.data.source.PaymentDS
 import com.neqabty.superneqabty.paymentdetails.domain.repository.PaymentRepository

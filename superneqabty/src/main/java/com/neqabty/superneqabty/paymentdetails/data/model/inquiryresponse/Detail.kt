@@ -1,4 +1,4 @@
-package com.neqabty.superneqabty.paymentdetails.data.model
+package com.neqabty.superneqabty.paymentdetails.data.model.inquiryresponse
 
 
 import com.google.gson.annotations.SerializedName

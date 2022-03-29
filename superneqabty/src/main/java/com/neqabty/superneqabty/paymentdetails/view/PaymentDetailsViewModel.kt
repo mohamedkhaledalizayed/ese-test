@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.superneqabty.core.utils.AppUtils
 import com.neqabty.superneqabty.core.utils.Resource
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
-import com.neqabty.superneqabty.paymentdetails.data.model.ReceiptResponse
+import com.neqabty.superneqabty.paymentdetails.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
 import com.neqabty.superneqabty.paymentdetails.domain.interactors.GetPaymentDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

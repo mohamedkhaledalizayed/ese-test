@@ -1,7 +1,7 @@
 package com.neqabty.superneqabty.paymentdetails.data.api
 
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
-import com.neqabty.superneqabty.paymentdetails.data.model.ReceiptResponse
+import com.neqabty.superneqabty.paymentdetails.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
 import retrofit2.http.Body
 import retrofit2.http.GET

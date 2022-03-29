@@ -2,7 +2,7 @@ package com.neqabty.superneqabty.paymentdetails.data.source
 
 import com.neqabty.superneqabty.paymentdetails.data.api.PaymentApi
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
-import com.neqabty.superneqabty.paymentdetails.data.model.ReceiptResponse
+import com.neqabty.superneqabty.paymentdetails.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
 import javax.inject.Inject
 

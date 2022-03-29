@@ -57,9 +57,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         binding.llContent.visibility = View.VISIBLE
                         binding.tvService.text = resource.data?.service?.name
-//                        binding.tvName.text = "الاسم : ${resource.data?.member?.account?.fullname}"
+                        binding.tvName.text = "الاسم : ${resource.data?.member?.name}"
                         binding.tvMemberNumber.text = "رقم العضوية : ${intent.getStringExtra("number")!!}"
-                        val total = paymentDetailsViewModel.payment.value?.data?.receipt?.card_total_price.toString()
+                        val total = paymentDetailsViewModel.payment.value?.data?.receipt?.cardTotalPrice.toString()
                         binding.tvAmount.text = "الاجمالى : ${total}"
                         mAdapter.submitList(resource.data?.receipt?.details)
                     }
@@ -103,7 +103,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 paymentMethod = "card"
-                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.card_total_price.toString()
+                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.cardTotalPrice.toString()
                 binding.ivCard.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
                 binding.ivFawry.visibility = View.GONE
@@ -113,7 +113,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 paymentMethod = "card"
-                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.outlet_total_price.toString()
+                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.outletTotalPrice.toString()
                 binding.llChannels.visibility = View.VISIBLE
                 binding.ivCard.visibility = View.GONE
                 binding.ivFawry.visibility = View.GONE
@@ -123,7 +123,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         binding.rbFawry.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 paymentMethod = "fawry"
-                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.outlet_total_price.toString()
+                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.outletTotalPrice.toString()
                 binding.ivFawry.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
                 binding.ivCard.visibility = View.GONE
