@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
 
-    <style name="Theme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
@@ -16,6 +16,25 @@
         <item name="android:fontFamily">@font/cairo_regular</item>
         <item name="android:forceDarkAllowed">false</item>
         <item name="android:windowBackground">@color/white</item>
+    </style>
+
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="textSizeLarge">@dimen/_11sdp</item>
+        <item name="textSizeMedium">@dimen/_9sdp</item>
+        <item name="textSizeSmall">@dimen/_7sdp</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.LargeText" parent="AppTheme.NoActionBar">
+        <item name="textSizeLarge">@dimen/_15sdp</item>
+        <item name="textSizeMedium">@dimen/_13sdp</item>
+        <item name="textSizeSmall">@dimen/_11sdp</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.SmallText" parent="AppTheme.NoActionBar">
+        <item name="textSizeLarge">@dimen/_11sdp</item>
+        <item name="textSizeMedium">@dimen/_9sdp</item>
+        <item name="textSizeSmall">@dimen/_7sdp</item>
     </style>
 
 

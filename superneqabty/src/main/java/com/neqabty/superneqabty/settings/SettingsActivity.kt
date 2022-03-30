@@ -6,11 +6,12 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
-import androidx.appcompat.widget.Toolbar
+import android.widget.SeekBar
 import androidx.core.app.NotificationManagerCompat
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.databinding.ActivitySettingsBinding
+import com.neqabty.superneqabty.home.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,6 +53,38 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
                 startActivityForResult(intent, 0)
             }
         })
+
+        binding.seekbar.progress = when(sharedPreferences.fontSize){
+            "small" -> 1
+            "large" -> 3
+            else -> 2
+        }
+
+        binding.seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                when (p1) {
+                    1 -> {
+                        sharedPreferences.fontSize = "small"
+                    }
+                    3 -> {
+                        sharedPreferences.fontSize = "large"
+                    }
+                    else -> {
+                        sharedPreferences.fontSize = "medium"
+                    }
+                }
+                setTheme(getAppTheme())
+                startActivity(Intent(this@SettingsActivity, HomeActivity::class.java))
+                finishAffinity()
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+            }
+        })
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

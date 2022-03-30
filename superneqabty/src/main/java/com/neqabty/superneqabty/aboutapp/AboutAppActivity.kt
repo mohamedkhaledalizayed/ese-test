@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.neqabty.superneqabty.BuildConfig
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.databinding.ActivityAboutAppBinding
@@ -34,6 +35,7 @@ class AboutAppActivity : BaseActivity<ActivityAboutAppBinding>() {
 
 
     private fun initializeViews() {
+        binding.tvVersion.text = getString(R.string.app_version, BuildConfig.VERSION_NAME)
     }
 
 }

@@ -32,7 +32,7 @@
             android:textStyle="bold"
             android:textAlignment="center"
             android:lines="2"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="?textSizeMedium"
             android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="@id/image"
             app:layout_constraintStart_toStartOf="@id/image"

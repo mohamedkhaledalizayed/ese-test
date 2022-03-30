@@ -23,6 +23,7 @@ class PreferencesHelper @Inject constructor(
         private const val CODE = "data.source.prefs.CODE"
         private const val SYNDICATE_IMAGE = "data.source.prefs.IMAGE"
         private const val SYNDICATE_NAME = "data.source.prefs.SYNDICATE_NAME"
+        private const val FONT_SIZE = "data.source.prefs.FONT_SIZE"
     }
 
     var isNotificationsEnabled
@@ -52,6 +53,10 @@ class PreferencesHelper @Inject constructor(
     var syndicateName
         get() = preferences.getString(SYNDICATE_NAME, "")!!
         set(value) = preferences.edit().putString(SYNDICATE_NAME, value).apply()
+
+    var fontSize
+        get() = preferences.getString(FONT_SIZE, "medium")
+        set(value) = preferences.edit().putString(FONT_SIZE, value).apply()
 
     fun isSyndicateChosen(): Boolean {
         return mainSyndicate != 0

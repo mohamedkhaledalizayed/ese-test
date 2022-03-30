@@ -24,6 +24,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(getAppTheme())
         binding = getViewBinding()
         setSupportActionBar(binding.root.findViewById(R.id.toolbar))
         binding.root.findViewById<Toolbar>(R.id.toolbar)
@@ -44,6 +45,13 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         imm.hideSoftInputFromWindow(window?.decorView?.rootView?.windowToken, 0)
     }
 
+    fun getAppTheme() :Int{
+        return when(sharedPreferences.fontSize) {
+            "small" -> R.style.AppTheme_NoActionBar_SmallText
+            "large" -> R.style.AppTheme_NoActionBar_LargeText
+            else -> R.style.AppTheme_NoActionBar
+        }
+    }
     //region Alerts//
     //endregion
 

@@ -75,7 +75,7 @@
                                 android:fontFamily="@font/cairo_regular"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_12ssp"
+                                android:textSize="?textSizeLarge"
                                 android:id="@+id/subscription_model_title"
                                 android:textColor="@color/black"
                                 android:text="@string/subscription_model"
@@ -89,7 +89,7 @@
                                 android:fontFamily="@font/cairo_regular"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_8ssp"
+                                android:textSize="?textSizeSmall"
                                 android:textColor="@color/lightRed"
                                 android:text="@string/service_unavailable"
                                 android:textAlignment="center"
@@ -126,7 +126,7 @@
                                 android:fontFamily="@font/cairo_regular"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_12ssp"
+                                android:textSize="?textSizeLarge"
                                 android:id="@+id/elder_people_title"
                                 android:textColor="@color/black"
                                 android:text="@string/mashat"
@@ -140,7 +140,7 @@
                                 android:fontFamily="@font/cairo_regular"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_8ssp"
+                                android:textSize="?textSizeSmall"
                                 android:textColor="@color/lightRed"
                                 android:text="@string/service_unavailable"
                                 android:textAlignment="center"
@@ -176,7 +176,7 @@
                                 android:fontFamily="@font/cairo_regular"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_12ssp"
+                                android:textSize="?textSizeLarge"
                                 android:id="@+id/healthcare_title"
                                 android:textColor="@color/black"
                                 android:text="@string/healthcare"
@@ -190,7 +190,7 @@
                                 android:fontFamily="@font/cairo_regular"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_8ssp"
+                                android:textSize="?textSizeSmall"
                                 android:textColor="@color/lightRed"
                                 android:text="@string/service_unavailable"
                                 android:textAlignment="center"
@@ -225,7 +225,7 @@
                                 android:fontFamily="@font/cairo_regular"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_12ssp"
+                                android:textSize="?textSizeLarge"
                                 android:id="@+id/travels_title"
                                 android:textColor="@color/black"
                                 android:text="@string/trips"
@@ -239,7 +239,7 @@
                                 android:fontFamily="@font/cairo_regular"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/_8ssp"
+                                android:textSize="?textSizeSmall"
                                 android:textColor="@color/lightRed"
                                 android:text="@string/service_unavailable"
                                 android:textAlignment="center"
@@ -262,7 +262,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/news_title"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="?textSizeLarge"
                     android:textStyle="bold" />
 
                 <TextView
@@ -272,7 +272,7 @@
                     android:layout_alignParentEnd="true"
                     android:text="@string/more"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="?textSizeLarge"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -298,7 +298,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/all_trips"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="?textSizeLarge"
                     android:textStyle="bold" />
 
                 <TextView
@@ -308,7 +308,7 @@
                     android:layout_alignParentEnd="true"
                     android:text="@string/more"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="?textSizeLarge"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -324,7 +324,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/courses"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="?textSizeLarge"
                     android:textStyle="bold" />
 
                 <TextView
@@ -334,7 +334,7 @@
                     android:layout_alignParentEnd="true"
                     android:text="@string/more"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_13ssp"
+                    android:textSize="?textSizeLarge"
                     android:textStyle="bold" />
             </RelativeLayout>
 

@@ -9,6 +9,10 @@
     <string name="aboutapp_title">عن التطبيق</string>
     <string name="help_title">مساعدة</string>
     <string name="notifications_settings">الإشعارات</string>
+    <string name="font_size">حجم الخط</string>
+    <string name="font_size_small">صغير</string>
+    <string name="font_size_medium">متوسط</string>
+    <string name="font_size_large">كبير</string>
     <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
     <string name="app_version">Version %s</string>
     <string name="main">الجهات الرئيسية</string>
