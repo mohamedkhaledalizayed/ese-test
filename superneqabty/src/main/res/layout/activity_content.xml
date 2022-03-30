@@ -41,7 +41,7 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:scrollbars="none">
 
                 <LinearLayout
@@ -54,6 +54,7 @@
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
                         android:elevation="@dimen/_4sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
                         app:cardCornerRadius="@dimen/_4sdp">
 
                         <LinearLayout
@@ -104,7 +105,7 @@
                         android:layout_height="wrap_content"
                         android:elevation="@dimen/_4sdp"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
                         app:cardCornerRadius="@dimen/_4sdp">
 
                         <LinearLayout
@@ -203,7 +204,7 @@
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
                         android:elevation="@dimen/_4sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
                         app:cardCornerRadius="@dimen/_4sdp">
 
                         <LinearLayout
