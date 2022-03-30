@@ -66,10 +66,14 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         binding.tvService.text = resource.data?.service?.name
                         binding.tvName.text = "الاسم : ${resource.data?.member?.name}"
                         binding.tvMemberNumber.text = "رقم العضوية : ${intent.getStringExtra("number")!!}"
-                        val total = paymentDetailsViewModel.payment.value?.data?.receipt?.cardTotalPrice.toString()
-                        binding.tvAmount.text = "الاجمالى : ${total}"
-                        mAdapter.submitList(resource.data?.receipt?.details)
-                        featuresAdapter.submitList(resource.data?.service?.features)
+                        if (resource.data?.receipt == null){
+                            showDialog()
+                        }else{
+                            val total = paymentDetailsViewModel.payment.value?.data?.receipt?.cardTotalPrice.toString()
+                            binding.tvAmount.text = "الاجمالى : $total"
+                            mAdapter.submitList(resource.data.receipt.details)
+                            featuresAdapter.submitList(resource.data.service.features)
+                        }
                     }
                     com.neqabty.superneqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
@@ -163,9 +167,23 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 //            else
 //                cowPayPayment(false)
 
-            Log.e("lkgh", "$listOfFeatures")
             paymentDetailsViewModel.getPaymentInfo(PaymentBody(PaymentBodyObject(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = "185", itemId = number.toInt(), service_features = listOfFeatures)))
         }
+    }
+
+    private fun showDialog() {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage("لا توجد اي فواتير مستحقه للسداد في الوقت الحالي")
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافقة"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
     }
 
     private fun showAlertDialog(paymentGatewayReferenceId: String) {
