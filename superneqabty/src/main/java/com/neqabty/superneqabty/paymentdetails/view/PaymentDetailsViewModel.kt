@@ -14,6 +14,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,7 +29,7 @@ class PaymentDetailsViewModel @Inject constructor(private val getPaymentDetailsU
                     payment.postValue(Resource.success(data = it))
                 }
             }catch (exception:Throwable){
-                payment.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+                payment.postValue(Resource.error(data = null, message = handleError(exception)))
             }
         }
     }
@@ -58,6 +59,33 @@ class PaymentDetailsViewModel @Inject constructor(private val getPaymentDetailsU
             }catch (exception:Throwable){
                 paymentMethods.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
             }
+        }
+    }
+
+    private fun handleError(throwable: Throwable): String {
+        return if (throwable is HttpException) {
+            when (throwable.code()) {
+                400 -> {
+                    "الرجاء تجديد ترخيص الوزارة"
+                }
+                401 -> {
+                    "لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى"
+                }
+                403 -> {
+                    "لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى"
+                }
+                404 -> {
+                    "هذا العضو غير موجود فى قاعدة البيانات"
+                }
+                500 -> {
+                    "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
+                }
+                else -> {
+                    throwable.message!!
+                }
+            }
+        } else {
+            throwable.message!!
         }
     }
 }
