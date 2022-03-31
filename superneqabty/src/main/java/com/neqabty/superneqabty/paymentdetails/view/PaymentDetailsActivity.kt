@@ -128,6 +128,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         }
                     }
                     com.neqabty.superneqabty.core.utils.Status.ERROR -> {
+                        binding.btnNext.visibility = View.VISIBLE
                         binding.progressCircular.visibility = View.GONE
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
@@ -190,7 +191,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 //                oPayPayment(false)
 //            else
 //                cowPayPayment(false)
-
+            binding.btnNext.visibility = View.GONE
             paymentDetailsViewModel.getPaymentInfo(PaymentBody(PaymentBodyObject(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = "185", itemId = number.toInt(), service_features = listOfFeatures)))
         }
     }
