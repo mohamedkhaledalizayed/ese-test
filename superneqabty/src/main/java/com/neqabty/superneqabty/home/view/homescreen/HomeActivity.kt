@@ -54,6 +54,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     private lateinit var toolbar: Toolbar
     private val homeViewModel: HomeViewModel by viewModels()
     private val mAdapter = NewsAdapter()
+    private val syndicatesAdapter = NewsAdapter()
     private val listAds = ArrayList<AdEntity>()
     val list = mutableListOf<CarouselItem>()
     lateinit var valifyClient: Valify
@@ -79,6 +80,14 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.contentActivity.tvNewsAll.setOnClickListener {
             val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
             intent.putExtra("id", sharedPreferences.mainSyndicate)
+            intent.putExtra("type", Constants.GENERAL_NEWS)
+            startActivity(intent)
+        }
+
+        binding.contentActivity.tvSyndicateNewsAll.setOnClickListener {
+            val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
+            intent.putExtra("id", sharedPreferences.mainSyndicate)
+            intent.putExtra("type", Constants.SYNDICATE_NEWS)
             startActivity(intent)
         }
 
@@ -93,11 +102,83 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         drawer.addDrawerListener(toggle)
         toggle.syncState()
         toolbar.setNavigationIcon(R.drawable.menu_ic)
-        homeViewModel.getSyndicateNews(sharedPreferences.mainSyndicate)
-        homeViewModel.news.observe(this) {
-            mAdapter.submitList(it)
+
+        //Get General News
+        homeViewModel.getAllNews()
+        homeViewModel.allNews.observe(this) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        loading.show()
+                    }
+                    Status.SUCCESS -> {
+                        loading.dismiss()
+                        if (resource.data!!.isEmpty()){
+                            binding.contentActivity.allNewsContainer.visibility = View.GONE
+                            binding.contentActivity.newsRecycler.visibility = View.GONE
+                        }else{
+                            mAdapter.submitList(resource.data)
+                        }
+                    }
+                    Status.ERROR -> {
+                        loading.dismiss()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
         }
 
+        binding.contentActivity.newsRecycler.adapter = mAdapter
+        mAdapter.onItemClickListener = object :
+            NewsAdapter.OnItemClickListener {
+            override fun setOnItemClickListener(item: NewsEntity) {
+                val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
+                intent.putExtra("id", item.id)
+                startActivity(intent)
+            }
+        }
+        //End of General News
+
+
+
+        //Start of Syndicates News
+        homeViewModel.getSyndicateNews(sharedPreferences.mainSyndicate)
+        homeViewModel.syndicatesNews.observe(this) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        loading.show()
+                    }
+                    Status.SUCCESS -> {
+                        loading.dismiss()
+                        if (resource.data!!.isEmpty()){
+                            binding.contentActivity.syndicatesNewsContainer.visibility = View.GONE
+                            binding.contentActivity.syndicateNewsRecycler.visibility = View.GONE
+                        }else{
+                            syndicatesAdapter.submitList(resource.data)
+                        }
+                    }
+                    Status.ERROR -> {
+                        loading.dismiss()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+
+        binding.contentActivity.syndicateNewsRecycler.adapter = syndicatesAdapter
+        syndicatesAdapter.onItemClickListener = object :
+            NewsAdapter.OnItemClickListener {
+            override fun setOnItemClickListener(item: NewsEntity) {
+                val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
+                intent.putExtra("id", item.id)
+                startActivity(intent)
+            }
+        }
+        //End of Syndicates News
+
+        //Start of Ads
         homeViewModel.getAds()
         homeViewModel.ads.observe(this) {
             listAds.addAll(it)
@@ -134,19 +215,12 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             override fun onLongClick(position: Int, dataObject: CarouselItem) {
             }
         }
+        //End of Ads
 
-        binding.contentActivity.newsRecycler.adapter = mAdapter
-        mAdapter.onItemClickListener = object :
-            NewsAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(item: NewsEntity) {
-                val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
-                intent.putExtra("id", item.id)
-                startActivity(intent)
-            }
-        }
         binding.navView.setNavigationItemSelectedListener(this)
         valifyClient = ValifyFactory(applicationContext).client
 
+        //Get Token
         homeViewModel.token.observe(this) {
             val valifyBuilder = ValifyConfig.Builder()
             valifyBuilder.setBaseUrl("https://valifystage.com/")

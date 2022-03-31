@@ -10,6 +10,8 @@ object Constants {
 
 
     var CALL_CENTER = "0235317300"
+    var GENERAL_NEWS = 1
+    var SYNDICATE_NEWS = 2
 
 //    var DNS = if (BuildConfig.URL.contains("http")) BuildConfig.URL else "https://${BuildConfig.URL}"
 

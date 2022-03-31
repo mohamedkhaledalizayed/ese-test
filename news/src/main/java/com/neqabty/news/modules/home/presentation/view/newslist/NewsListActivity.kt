@@ -25,8 +25,14 @@ class NewsListActivity : BaseActivity<ActivityNewsListBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar( title = "الاخبار")
-        homeViewModel.getSyndicateNews(intent.getIntExtra("id", -1))
+
+        if (intent.getIntExtra("type", 0) == 1){
+            setupToolbar( title = "الاخبار")
+            homeViewModel.getAllNews()
+        }else{
+            setupToolbar( title = "أخبار نقابتى")
+            homeViewModel.getSyndicateNews(intent.getIntExtra("id", -1))
+        }
         homeViewModel.news.observe(this){
 
             it?.let { resource ->
