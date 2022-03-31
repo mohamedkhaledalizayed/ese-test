@@ -96,7 +96,14 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                     }
                     com.neqabty.superneqabty.core.utils.Status.SUCCESS -> {
                         if (resource.data?.paymentMethods!!.isNotEmpty()){
-                            addPaymentMethods(resource.data.paymentMethods)
+                            if(resource.data.paymentMethods.filter { it.name.equals("card") }.get(0).isActive)
+                                binding.rbCard.visibility = View.VISIBLE
+                            if(resource.data.paymentMethods.filter { it.name.equals("code") }.get(0).isActive)
+                                binding.rbChannel.visibility = View.VISIBLE
+                            if(resource.data.paymentMethods.filter { it.name.equals("fawry") }.get(0).isActive)
+                                binding.rbFawry.visibility = View.VISIBLE
+                            if(resource.data.paymentMethods.filter { it.name.equals("wallet") }.get(0).isActive)
+                                binding.rbMobileWallet.visibility = View.VISIBLE
                         }
                     }
                     com.neqabty.superneqabty.core.utils.Status.ERROR -> {
@@ -128,7 +135,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         }
                     }
                     com.neqabty.superneqabty.core.utils.Status.ERROR -> {
-                        binding.btnNext.visibility = View.VISIBLE
+                        binding.btnNext.isEnabled = true
                         binding.progressCircular.visibility = View.GONE
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
@@ -191,31 +198,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 //                oPayPayment(false)
 //            else
 //                cowPayPayment(false)
-            binding.btnNext.visibility = View.GONE
+            binding.btnNext.isEnabled = false
             paymentDetailsViewModel.getPaymentInfo(PaymentBody(PaymentBodyObject(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = "185", itemId = number.toInt(), service_features = listOfFeatures)))
         }
     }
 
-    private fun addPaymentMethods(paymentMethods: List<PaymentMethod>) {
-        for (item: PaymentMethod in paymentMethods){
-            if (item.isActive){
-                val payment = RadioButton(this)
-                payment.text = item.displayName
-                val params = RadioGroup.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-                params.setMargins(0, 15, 0, 15)
-                payment.layoutParams = params
-
-                payment.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_green))
-                payment.setOnClickListener {
-
-                }
-                binding.paymentMethods.addView(payment)
-            }
-        }
-    }
     private fun showDialog() {
 
         val alertDialog = AlertDialog.Builder(this).create()
@@ -397,4 +384,8 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.btnNext.isEnabled = true
+    }
 }

@@ -189,6 +189,18 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
             startActivity(intent)
         }
+
+        binding.contentActivity.elderPeople.setOnClickListener {
+            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
+        }
+
+        binding.contentActivity.healthcareImage.setOnClickListener {
+            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
+        }
+
+        binding.contentActivity.travelsImage.setOnClickListener {
+            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun logout(message: String) {

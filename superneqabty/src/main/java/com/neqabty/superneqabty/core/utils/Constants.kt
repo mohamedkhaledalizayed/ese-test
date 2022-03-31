@@ -9,7 +9,7 @@ object Constants {
     var cowpayAuthToken: String = if (BuildConfig.DEBUG) cowpayAuthTokenTest else cowpayAuthTokenProd
 
 
-    var CALL_CENTER = "0235317300"
+    var CALL_CENTER = "0237376868"
 
 //    var DNS = if (BuildConfig.URL.contains("http")) BuildConfig.URL else "https://${BuildConfig.URL}"
 

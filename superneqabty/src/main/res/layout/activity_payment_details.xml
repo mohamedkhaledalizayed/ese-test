@@ -133,7 +133,8 @@
                         android:buttonTint="@color/dark_green"
                         android:checked="true"
                         android:text="@string/payment_card"
-                        android:textSize="?textSizeMedium" />
+                        android:textSize="?textSizeMedium"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/ivCard"
@@ -148,7 +149,8 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/dark_green"
                         android:text="@string/payment_channel"
-                        android:textSize="?textSizeMedium" />
+                        android:textSize="?textSizeMedium"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:id="@+id/llChannels"
@@ -178,7 +180,8 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/dark_green"
                         android:text="@string/payment_fawry"
-                        android:textSize="?textSizeMedium" />
+                        android:textSize="?textSizeMedium"
+                        android:visibility="gone" />
 
                     <ImageView
                         android:id="@+id/ivFawry"
@@ -208,24 +211,6 @@
                         android:visibility="gone" />
 
                 </RadioGroup>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:text="@string/payment_method"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
-                    android:visibility="visible" />
-
-                <RadioGroup
-                    android:id="@+id/payment_methods"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="vertical" />
 
                 <Button
                     android:id="@+id/btn_next"
