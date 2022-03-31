@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
@@ -58,6 +59,18 @@ class MainActivity : AppCompatActivity() {
     lateinit var mMenuAdapter: ExpandableListAdapter
     lateinit var listDataHeader: MutableList<NavigationMenuItem>
     lateinit var listDataChild: HashMap<NavigationMenuItem, List<NavigationMenuItem>>
+
+
+    var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // There are no request codes
+                val data: Intent? = result.data
+                sharedPref.isVerified = data?.extras?.getBoolean("isVerified") ?: false
+                invalidateOptionsMenu()
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
@@ -320,6 +333,11 @@ class MainActivity : AppCompatActivity() {
 //            navigationView.getHeaderView(0).findViewById<TextView>(R.id.bChangePassword).visibility = View.INVISIBLE
             navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.GONE
         }
+        if (sharedPref.isVerified)
+            navigationView.getHeaderView(0).findViewById<ImageView>(R.id.ivIsVerified).visibility = View.VISIBLE
+        else
+            navigationView.getHeaderView(0).findViewById<ImageView>(R.id.ivIsVerified).visibility = View.GONE
+
         navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).setText(Html.fromHtml(getString(R.string.menu_phoneNumber, sharedPref.mobile)))
 
         navigationView.getHeaderView(0).visibility = if (sharedPref.mobile.isNotEmpty()) View.VISIBLE else View.GONE
@@ -418,9 +436,20 @@ class MainActivity : AppCompatActivity() {
         })
         listDataHeader.add(medicalServicesItem)
 
-        val valifyItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.valify_title, {
-            startActivity(Intent(this, HomeActivity::class.java))
-        })
+        val valifyItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.valify_title) {
+            if (sharedPref.isRegistered) {
+                val bundle: Bundle = Bundle()
+                bundle.putString("mobile", sharedPref.mobile)
+                bundle.putString("userNumber", sharedPref.user)
+                var intent = Intent(this, HomeActivity::class.java)
+                intent.putExtras(bundle)
+                resultLauncher.launch(intent)
+            } else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.VALIFY)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        }
         listDataHeader.add(valifyItem)
 
         val newsItem = NavigationMenuItem(R.drawable.ic_menu_news, R.string.news_title, {

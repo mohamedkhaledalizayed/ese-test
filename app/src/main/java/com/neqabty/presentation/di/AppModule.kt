@@ -72,15 +72,15 @@ class AppModule {
     @Provides
     @Named(DI.authorized)
     fun provideOkHttpClient(httpLoggingInterceptor :HttpLoggingInterceptor): OkHttpClient {
-        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-                .add(
-                    BuildConfig.URL,
-                    "sha256/hgx3/z5ENRCVF9jDSHk8GwocaQsEFYAW8ON1eGs2qUc="
-                )
-                .add(
-                    "*.neqabty.com",
-                    "sha256/nt7kxSg6amgrDYO0JQOM+d3Q+G0fgFtBdx76ppVzIS4="
-                ).build()
+//        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+//                .add(
+//                    BuildConfig.URL,
+//                    "sha256/hgx3/z5ENRCVF9jDSHk8GwocaQsEFYAW8ON1eGs2qUc="
+//                )
+//                .add(
+//                    "*.neqabty.com",
+//                    "sha256/nt7kxSg6amgrDYO0JQOM+d3Q+G0fgFtBdx76ppVzIS4="
+//                ).build()
 
         return OkHttpClient.Builder()
                 .connectTimeout(5, TimeUnit.MINUTES)
@@ -100,7 +100,7 @@ class AppModule {
                     }
             })
                 .addInterceptor(httpLoggingInterceptor) // TODO Interceptor
-                .certificatePinner(certificatePinner)
+//                .certificatePinner(certificatePinner)
                 .build()
     }
 

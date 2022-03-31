@@ -26,6 +26,7 @@ class PreferencesHelper @Inject constructor(
         private const val MOBILE = "data.source.prefs.MOBILE"
         private const val TOKEN = "data.source.prefs.TOKEN"
         private const val JWT = "data.source.prefs.JWT"
+        private const val IS_VERIFIED = "data.source.prefs.IS_VERIFIED"
         private const val IS_REGISTERED = "data.source.prefs.IS_REGISTERED"
         private const val NOTIFICATION_COUNT = "data.source.prefs.NOTIFICATION_COUNT"
         private const val USER_TYPE = "data.source.prefs.USER_TYPE"
@@ -63,6 +64,10 @@ class PreferencesHelper @Inject constructor(
     var jwt
         get() = preferences.getString(JWT, "")
         set(value) = preferences.edit().putString(JWT, value).apply()
+
+    var isVerified
+        get() = preferences.getBoolean(IS_VERIFIED, false)
+        set(value) = preferences.edit().putBoolean(IS_VERIFIED, value).apply()
 
     var isRegistered
         get() = preferences.getBoolean(IS_REGISTERED, false)

@@ -90,6 +90,7 @@ class LoginWithPasswordFragment : BaseFragment(), HasHomeOptionsMenu {
             sharedPref.mobile = it.mobile
             sharedPref.userType = it.type
             sharedPref.jwt = it.jwt
+            sharedPref.isVerified = it.isVerified ?: false
             sharedPref.mainSyndicate = 5
             sharedPref.subSyndicate = 0
 //                showTwoButtonsAlert(message = getString(R.string.welcome_with_name_login, it.details!![0].name!!)

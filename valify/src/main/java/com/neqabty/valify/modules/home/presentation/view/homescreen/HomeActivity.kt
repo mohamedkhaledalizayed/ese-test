@@ -1,11 +1,12 @@
 package com.neqabty.valify.modules.home.presentation.view.homescreen
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.neqabty.valify.R
 import com.neqabty.valify.modules.home.data.model.VerifyUserBody
 import com.valify.valify_ekyc.sdk.Valify
@@ -18,17 +19,31 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     lateinit var valifyClient: Valify
     private val homeViewModel: HomeViewModel by viewModels()
+    var mobile = ""
+    var userNumber = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         valifyClient = ValifyFactory(applicationContext).client
-        homeViewModel.getToken()
-        observeOnValifyToken()
-        observeOnVerifyUser()
+
+        mobile = intent.extras?.getString("mobile", "")!!
+        userNumber = intent.extras?.getString("userNumber", "")!!
+        findViewById<Button>(R.id.bStart).setOnClickListener{
+            homeViewModel.getToken()
+            observeOnValifyToken()
+            observeOnVerifyUser()
+        }
     }
 
     private fun observeOnVerifyUser() {
         homeViewModel.user.observe(this) {
+            Toast.makeText(this, "تم تأكيد الهوية بنجاح", Toast.LENGTH_LONG).show()
+            val bundle: Bundle = Bundle()
+            bundle.putBoolean("isVerified", true)
+            val intent = Intent()
+            intent.putExtras(bundle)
+            setResult(-1, intent)
+            finish()
         }
     }
 
@@ -77,6 +92,7 @@ class HomeActivity : AppCompatActivity() {
         val firstName = valifyData.ocrProcess.nationalIdData.firstName
         val fullName = valifyData.ocrProcess.nationalIdData.fullName
         val gender = valifyData.ocrProcess.nationalIdData.gender
-        homeViewModel.verifyUser(VerifyUserBody())
+        val address = valifyData.ocrProcess.nationalIdData.area
+        homeViewModel.verifyUser(VerifyUserBody(mobile = mobile, user_number = userNumber, user_name = fullName, address = address))
     }
 }

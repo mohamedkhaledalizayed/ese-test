@@ -5,11 +5,13 @@ import com.neqabty.data.api.Response
 
 data class UserData(
         @field:SerializedName("mobile")
-        var mobile: String = "",
+        var mobile: String? = "",
         @field:SerializedName("type")
         var type: String? = "",
         @field:SerializedName("jwt_token")
         var jwt: String? = "",
+        @field:SerializedName("verified")
+        var isVerified: Boolean?,
         @field:SerializedName("details")
         var details: List<UserDetails>? = null
 ) : Response() {

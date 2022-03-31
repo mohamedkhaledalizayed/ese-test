@@ -11,9 +11,10 @@ class UserDataEntityMapper @Inject constructor() : Mapper<UserData, UserEntity>(
 
     override fun mapFrom(from: UserData): UserEntity {
         val userEntity = UserEntity(
-                mobile = from.mobile,
+                mobile = from.mobile ?: "",
                 type = from.type,
                 jwt = from.jwt,
+                isVerified = from.isVerified,
                 details = from.details?.map { userDetails ->
                     return@map UserEntity.UserDetails(userDetails.name, userDetails.userNumber)
                 }

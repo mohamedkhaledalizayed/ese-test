@@ -1,6 +1,7 @@
 package com.neqabty.presentation.ui.signup
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.presentation.util.observeOnce
+import com.neqabty.valify.modules.home.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.signup_fragment.*
 
@@ -214,6 +216,15 @@ class SignupFragment : BaseFragment() {
             Constants.CHANGE_PASSWORD -> navController().navigate(
                     SignupFragmentDirections.openChangePassword(false, sharedPref.mobile)
             )
+
+            Constants.VALIFY -> {
+                val bundle: Bundle = Bundle()
+                bundle.putString("mobile", sharedPref.mobile)
+                bundle.putString("userNumber", sharedPref.user)
+                var intent = Intent(activity, HomeActivity::class.java)
+                intent.putExtras(bundle)
+                startActivity(intent)
+            }
         }
     }
 // endregion

@@ -1,5 +1,6 @@
 package com.neqabty.presentation.ui.activateAccount
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.ui.trips.TripsData
 import com.neqabty.presentation.util.autoCleared
+import com.neqabty.valify.modules.home.presentation.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activate_account_fragment.*
 
@@ -156,6 +158,15 @@ class ActivateAccountFragment : BaseFragment() {
                 Constants.CHANGE_PASSWORD -> navController().navigate(
                         ActivateAccountFragmentDirections.openChangePassword(false, sharedPref.mobile)
                 )
+
+                Constants.VALIFY -> {
+                    val bundle: Bundle = Bundle()
+                    bundle.putString("mobile", sharedPref.mobile)
+                    bundle.putString("userNumber", sharedPref.user)
+                    var intent = Intent(activity, HomeActivity::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                }
             }
         }
     }

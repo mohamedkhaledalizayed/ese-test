@@ -14,6 +14,7 @@ class UserEntityUIMapper @Inject constructor() : Mapper<UserEntity, UserUI>() {
                 mobile = from.mobile,
                 type = from.type,
                 jwt = from.jwt,
+                isVerified = from.isVerified,
                 details = from.details?.map {userDetails ->
                     return@map UserUI.UserDetails(userDetails.name, userDetails.userNumber)
                 }

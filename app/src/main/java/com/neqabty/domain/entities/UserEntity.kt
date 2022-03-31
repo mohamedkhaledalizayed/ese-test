@@ -4,6 +4,7 @@ data class UserEntity(
         var mobile: String = "",
         var type: String?,
         var jwt: String? = "",
+        var isVerified: Boolean?,
         var details: List<UserDetails>?
 ) {
     data class UserDetails(
