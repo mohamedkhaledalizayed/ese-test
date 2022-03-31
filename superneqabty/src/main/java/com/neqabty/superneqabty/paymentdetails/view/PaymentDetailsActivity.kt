@@ -5,22 +5,24 @@ import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Constants
 import com.neqabty.superneqabty.databinding.ActivityPaymentDetailsBinding
-import com.neqabty.superneqabty.home.view.homescreen.HomeActivity
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBodyObject
 import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
-import com.neqabty.superneqabty.syndicates.domain.entity.SyndicateEntity
-import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateAdapter
+import com.neqabty.superneqabty.paymentdetails.data.model.paymentmethods.PaymentMethod
 import dagger.hilt.android.AndroidEntryPoint
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
@@ -73,6 +75,28 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             binding.tvAmount.text = "الاجمالى : $total"
                             mAdapter.submitList(resource.data.receipt.details)
                             featuresAdapter.submitList(resource.data.service.features)
+                        }
+                    }
+                    com.neqabty.superneqabty.core.utils.Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+        }
+
+        paymentDetailsViewModel.getPaymentMethods()
+        paymentDetailsViewModel.paymentMethods.observe(this){
+
+            it?.let { resource ->
+                when (resource.status) {
+                    com.neqabty.superneqabty.core.utils.Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    com.neqabty.superneqabty.core.utils.Status.SUCCESS -> {
+                        if (resource.data?.paymentMethods!!.isNotEmpty()){
+                            addPaymentMethods(resource.data.paymentMethods)
                         }
                     }
                     com.neqabty.superneqabty.core.utils.Status.ERROR -> {
@@ -171,6 +195,26 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         }
     }
 
+    private fun addPaymentMethods(paymentMethods: List<PaymentMethod>) {
+        for (item: PaymentMethod in paymentMethods){
+            if (item.isActive){
+                val payment = RadioButton(this)
+                payment.text = item.displayName
+                val params = RadioGroup.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+                params.setMargins(0, 15, 0, 15)
+                payment.layoutParams = params
+
+                payment.buttonTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.dark_green))
+                payment.setOnClickListener {
+
+                }
+                binding.paymentMethods.addView(payment)
+            }
+        }
+    }
     private fun showDialog() {
 
         val alertDialog = AlertDialog.Builder(this).create()
