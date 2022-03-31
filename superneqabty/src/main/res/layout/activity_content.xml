@@ -212,6 +212,7 @@
             </HorizontalScrollView>
 
             <RelativeLayout
+                android:id="@+id/all_news_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp">
@@ -238,6 +239,42 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/news_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
+
+            <RelativeLayout
+                android:id="@+id/syndicates_news_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp">
+
+                <TextView
+                    android:id="@+id/tv_syndicate_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/neqabty_news"
+                    android:textColor="@color/black"
+                    android:textSize="?textSizeLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_syndicate_news_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/more"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeLarge"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/syndicate_news_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/_5sdp"

@@ -67,4 +67,5 @@
     <string name="service_unavailable">  سيتم تفعيل الخدمة قريباً</string>
     <string name="new_update">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
     <string name="other_services">خدمات أخرى</string>
+    <string name="neqabty_news">أخبار نقابتى</string>
 </resources>

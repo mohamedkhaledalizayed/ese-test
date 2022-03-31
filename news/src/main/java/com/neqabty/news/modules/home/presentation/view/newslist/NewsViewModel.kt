@@ -25,7 +25,20 @@ class NewsViewModel @Inject constructor(
     private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase,
     private val getNewsDetailsUseCase: GetNewsDetailsUseCase
 ) : ViewModel() {
+
     val news = MutableLiveData<Resource<List<NewsEntity>>>()
+    fun getAllNews() {
+        news.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                getNewsUseCase.build().collect {
+                    news.postValue(Resource.success(data = it))
+                }
+            } catch (e: Throwable) {
+                news.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            }
+        }
+    }
 
     fun getSyndicateNews(syndicateId: Int) {
         news.postValue(Resource.loading(data = null))
@@ -36,7 +49,6 @@ class NewsViewModel @Inject constructor(
                 }
             } catch (e: Throwable) {
                 news.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
-                Log.e("", e.toString())
             }
         }
     }

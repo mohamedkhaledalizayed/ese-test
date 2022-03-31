@@ -30,8 +30,8 @@ class HomeViewModel @Inject constructor(
     private val getTokenUseCase: GetTokenUseCase,
     private val verifyUserUseCase: VerifyUserUseCase
 ) : ViewModel() {
+
     val token = MutableLiveData<GetToken>()
-    val news = MutableLiveData<List<NewsEntity>>()
     fun getToken() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -58,14 +58,32 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+
+    val allNews = MutableLiveData<Resource<List<NewsEntity>>>()
+    fun getAllNews() {
+        allNews.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                getNewsUseCase.build().collect {
+                    allNews.postValue(Resource.success(data = it))
+                }
+            } catch (e: Throwable) {
+                allNews.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            }
+        }
+    }
+
+    val syndicatesNews = MutableLiveData<Resource<List<NewsEntity>>>()
     fun getSyndicateNews(syndicateId: Int) {
+        syndicatesNews.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 getSyndicateNewsUseCase.build(syndicateId).collect {
-                    news.postValue(it)
+                    syndicatesNews.postValue(Resource.success(data = it))
                 }
             } catch (e: Throwable) {
-                Log.e("", e.toString())
+                syndicatesNews.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
         }
     }
