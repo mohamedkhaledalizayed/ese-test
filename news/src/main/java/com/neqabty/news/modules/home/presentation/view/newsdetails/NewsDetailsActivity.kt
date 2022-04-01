@@ -1,5 +1,6 @@
 package com.neqabty.news.modules.home.presentation.view.newsdetails
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,6 +11,8 @@ import com.neqabty.news.core.utils.Status
 import com.neqabty.news.databinding.ActivityNewsDetailsBinding
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class NewsDetailsActivity : BaseActivity<ActivityNewsDetailsBinding>() {
@@ -36,8 +39,9 @@ class NewsDetailsActivity : BaseActivity<ActivityNewsDetailsBinding>() {
                         if (resource.data != null){
                             Picasso.get().load(resource.data.image).into(binding.newsImage)
                             binding.newsTitle.text = resource.data.headline
+                            binding.newsSource.text = "المصدر : ${resource.data.source}"
                             binding.content.text = resource.data.content
-                            binding.newsDate.text = resource.data.createdAt
+                            binding.newsDate.text = dateFormat(resource.data.createdAt.split(".")[0])
                         }else{
                             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
                         }
@@ -51,5 +55,15 @@ class NewsDetailsActivity : BaseActivity<ActivityNewsDetailsBinding>() {
 
         }
 
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    fun dateFormat(date: String): String{
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val newDate: Date = format.parse(date)
+        val arabicFormat = SimpleDateFormat("dd MMM yyy - hh:mm a", Locale("ar"))
+
+        return arabicFormat.format(newDate.time)
     }
 }

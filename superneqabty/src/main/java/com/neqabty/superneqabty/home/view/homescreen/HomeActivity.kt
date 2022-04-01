@@ -208,8 +208,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                     intent.data = Uri.parse(listAds[position].url)
                     startActivity(intent)
                 }
-                Toast.makeText(this@HomeActivity, "${listAds[position].id}", Toast.LENGTH_LONG)
-                    .show()
             }
 
             override fun onLongClick(position: Int, dataObject: CarouselItem) {
@@ -332,6 +330,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             R.id.news -> {
                 val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
                 intent.putExtra("id", sharedPreferences.mainSyndicate)
+                intent.putExtra("type", Constants.SYNDICATE_NEWS)
                 startActivity(intent)
             }
             R.id.payment -> {

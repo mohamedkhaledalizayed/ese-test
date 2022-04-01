@@ -2,6 +2,7 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/item_layout"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_160sdp"

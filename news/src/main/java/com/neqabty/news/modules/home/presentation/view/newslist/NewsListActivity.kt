@@ -26,7 +26,7 @@ class NewsListActivity : BaseActivity<ActivityNewsListBinding>() {
         setContentView(binding.root)
 
 
-        if (intent.getIntExtra("type", 0) == 1){
+        if (intent.getIntExtra("id", -1) == -1 || intent.getIntExtra("type", -1) == 1){
             setupToolbar( title = "الاخبار")
             homeViewModel.getAllNews()
         }else{

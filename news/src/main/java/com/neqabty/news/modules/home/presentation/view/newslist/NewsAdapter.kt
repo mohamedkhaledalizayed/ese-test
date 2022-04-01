@@ -6,10 +6,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.news.R
+import com.neqabty.news.core.utils.AppUtils
 import com.neqabty.news.databinding.NewsItemBinding
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
@@ -50,11 +54,21 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
             })
 
         viewHolder.binding.newsTitle.text = item.headline
-        viewHolder.binding.newsDate.text = item.createdAt
+        viewHolder.binding.newsDate.text = dateFormat(item.createdAt.split(".")[0])
 
-        viewHolder.binding.newsImage.setOnClickListener {
+        viewHolder.binding.itemLayout.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)
         }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    fun dateFormat(date: String): String{
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val newDate: Date = format.parse(date)
+        val arabicFormat = SimpleDateFormat("dd MMM yyy - hh:mm a", Locale("ar"))
+
+        return arabicFormat.format(newDate.time)
     }
 
     override fun getItemCount() = items.size
