@@ -42,6 +42,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
     private var paymentMethod = "card"
     private var serviceCode = ""
     private var number = ""
+    private var totalAmount = ""
     private var listOfFeatures: ArrayList<Int> = ArrayList()
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +73,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             showDialog()
                         }else{
                             val total = paymentDetailsViewModel.payment.value?.data?.receipt?.cardTotalPrice.toString()
+                            totalAmount = paymentDetailsViewModel.payment.value?.data?.receipt?.totalPrice.toString()
                             binding.tvAmount.text = "الاجمالى : $total"
                             mAdapter.submitList(resource.data.receipt.details)
                             featuresAdapter.submitList(resource.data.service.features)
@@ -199,7 +201,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 //            else
 //                cowPayPayment(false)
             binding.btnNext.isEnabled = false
-            paymentDetailsViewModel.getPaymentInfo(PaymentBody(PaymentBodyObject(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = "185", itemId = number.toInt(), service_features = listOfFeatures)))
+            paymentDetailsViewModel.getPaymentInfo(PaymentBody(PaymentBodyObject(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = totalAmount, itemId = number.toInt(), service_features = listOfFeatures)))
         }
     }
 
