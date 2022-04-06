@@ -68,7 +68,7 @@ class HomeActivity : AppCompatActivity() {
             override fun onSuccess(
                 valifyToken: String, valifyData: ValifyData
             ) {
-                Log.e("neqabty", "onSuccess")
+                Toast.makeText(this@HomeActivity, "نجحت  عملية التحقق", Toast.LENGTH_LONG).show()
                 verifyUser(valifyData)
             }
 
@@ -77,12 +77,18 @@ class HomeActivity : AppCompatActivity() {
                 valifyData: ValifyData
             ) {
                 Log.e("neqabty", "onExit")
+                Toast.makeText(this@HomeActivity, "فشلت عملية التحقق", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@HomeActivity, valifyData.ocrProcess.transactionIdFront, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@HomeActivity, valifyData.ocrProcess.transactionIdBack, Toast.LENGTH_LONG).show()
             }
 
             override fun onError(
                 valifyToken: String, errorCode: Int,
                 step: String, valifyData: ValifyData
             ) {
+                Toast.makeText(this@HomeActivity, "فشلت عملية التحقق", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@HomeActivity, valifyData.ocrProcess.transactionIdFront, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@HomeActivity, valifyData.ocrProcess.transactionIdBack, Toast.LENGTH_LONG).show()
                 Log.e("neqabty", "onError")
             }
         })
@@ -93,6 +99,7 @@ class HomeActivity : AppCompatActivity() {
         val fullName = valifyData.ocrProcess.nationalIdData.fullName
         val gender = valifyData.ocrProcess.nationalIdData.gender
         val address = valifyData.ocrProcess.nationalIdData.area
-        homeViewModel.verifyUser(VerifyUserBody(mobile = mobile, user_number = userNumber, user_name = fullName, address = address))
+        val nationalID = valifyData.ocrProcess.nationalIdData.frontNid
+        homeViewModel.verifyUser(VerifyUserBody(mobile = mobile, user_number = userNumber, user_name = fullName, address = address, national_id= nationalID))
     }
 }

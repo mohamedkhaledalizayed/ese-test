@@ -10,5 +10,7 @@ class VerifyUserBody (
     @SerializedName("user_name")
     val user_name: String = "android",
     @SerializedName("address")
-    val address: String = ""
+    val address: String = "",
+    @SerializedName("national_id")
+    val national_id: String = ""
     )
