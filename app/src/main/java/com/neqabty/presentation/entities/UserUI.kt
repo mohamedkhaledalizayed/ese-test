@@ -3,6 +3,8 @@ package com.neqabty.presentation.entities
 data class UserUI(
         var mobile: String = "",
         var type: String?,
+        var syndicate: String?,
+        var section: String?,
         var jwt: String? = "",
         var details: List<UserDetails>?
 ) {

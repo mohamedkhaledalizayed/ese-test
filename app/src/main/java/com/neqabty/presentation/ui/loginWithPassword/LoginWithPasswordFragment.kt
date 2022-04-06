@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.messaging.FirebaseMessaging
 import com.neqabty.R
 import com.neqabty.databinding.LoginWithPasswordFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -96,6 +97,8 @@ class LoginWithPasswordFragment : BaseFragment(), HasHomeOptionsMenu {
             sharedPref.name = it.details!![0].name!!
             sharedPref.user = it.details!![0].userNumber!!
             sharedPref.isRegistered = true
+            FirebaseMessaging.getInstance().subscribeToTopic(it.section!!)
+            FirebaseMessaging.getInstance().subscribeToTopic(it.syndicate!!)
             state.user = null
             navController().navigate(LoginWithPasswordFragmentDirections.openHome())
         }

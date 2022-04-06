@@ -13,6 +13,8 @@ class UserEntityUIMapper @Inject constructor() : Mapper<UserEntity, UserUI>() {
         val userUI = UserUI(
                 mobile = from.mobile,
                 type = from.type,
+                syndicate = from.syndicate,
+                section = from.section,
                 jwt = from.jwt,
                 details = from.details?.map {userDetails ->
                     return@map UserUI.UserDetails(userDetails.name, userDetails.userNumber)

@@ -42,7 +42,7 @@ data class Item(
     @SerializedName("ProductType")
     val productType: String?,
     @SerializedName("Quantity")
-    val quantity: Float,
+    val quantity: String,
     @SerializedName("SelectedUnit")
     val selectedUnit: Int,
     @SerializedName("VariationSKU")

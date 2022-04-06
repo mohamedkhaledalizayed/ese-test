@@ -8,6 +8,10 @@ data class UserData(
         var mobile: String = "",
         @field:SerializedName("type")
         var type: String? = "",
+        @field:SerializedName("syndicate")
+        var syndicate: String? = "",
+        @field:SerializedName("section")
+        var section: String? = "",
         @field:SerializedName("jwt_token")
         var jwt: String? = "",
         @field:SerializedName("details")

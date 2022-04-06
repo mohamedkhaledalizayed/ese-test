@@ -3,6 +3,8 @@ package com.neqabty.domain.entities
 data class UserEntity(
         var mobile: String = "",
         var type: String?,
+        var syndicate: String?,
+        var section: String?,
         var jwt: String? = "",
         var details: List<UserDetails>?
 ) {

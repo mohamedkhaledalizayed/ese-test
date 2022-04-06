@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.messaging.FirebaseMessaging
 import com.neqabty.presentation.util.PushNotificationsWrapper
 import com.neqabty.presentation.common.Constants
 import com.neqabty.R
@@ -98,6 +99,8 @@ class SignupFragment : BaseFragment() {
             sharedPref.user = state.user?.details!![0].userNumber!!
             sharedPref.name = state.user?.details!![0].name!!
             sharedPref.isRegistered = true
+            FirebaseMessaging.getInstance().subscribeToTopic(state.user?.section!!)
+            FirebaseMessaging.getInstance().subscribeToTopic(state.user?.syndicate!!)
             activity?.invalidateOptionsMenu()
             state.user = null
             showTwoButtonsAlert(message = getString(R.string.welcome_with_name, sharedPref.name)+"\n"+getString(R.string.welcome_with_password),

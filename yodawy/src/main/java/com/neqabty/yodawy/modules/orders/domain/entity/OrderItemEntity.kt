@@ -19,7 +19,7 @@ data class OrderItemEntity(
     val price: Double?,
     val priceBeforeSale: Double?,
     val productType: String?,
-    val quantity: Float?,
+    val quantity: String?,
     val selectedUnit: Int?,
     val variationSKU: String?,
     val wasLimited: Boolean,
