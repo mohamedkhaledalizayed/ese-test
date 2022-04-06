@@ -4,7 +4,9 @@
     package="com.neqabty.superneqabty">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <queries>
+        <package android:name="com.neqabty" />
+    </queries>
     <application
         android:name=".core.application.SuperNeqabtyApp"
         android:allowBackup="true"

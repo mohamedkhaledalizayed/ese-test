@@ -1,14 +1,11 @@
 package com.neqabty.superneqabty.syndicates.presentation.view.homescreen
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.GridView
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Status
@@ -58,14 +55,30 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
         mainAdapter.onItemClickListener = object :
             SyndicateAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: SyndicateEntity) {
-                val intent = Intent(this@SyndicateActivity, HomeActivity::class.java)
-                intent.putExtra("id", item.id)
-                sharedPreferences.mainSyndicate = item.id
-                sharedPreferences.code = item.code
-                sharedPreferences.image = item.image
-                sharedPreferences.syndicateName = item.name
-                startActivity(intent)
-                finishAffinity()
+
+                if (item.code == "e006"){
+                    val launchIntent = packageManager.getLaunchIntentForPackage("com.neqabty")
+                    if (launchIntent == null){
+                        startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("market://details?id=com.neqabty")
+                            )
+                        )
+                    }else{
+                        startActivity(launchIntent)
+                    }
+                }else{
+                    val intent = Intent(this@SyndicateActivity, HomeActivity::class.java)
+                    intent.putExtra("id", item.id)
+                    sharedPreferences.mainSyndicate = item.id
+                    sharedPreferences.code = item.code
+                    sharedPreferences.image = item.image
+                    sharedPreferences.syndicateName = item.name
+                    startActivity(intent)
+                    finishAffinity()
+                }
+
             }
         }
     }
