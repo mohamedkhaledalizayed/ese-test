@@ -17,7 +17,7 @@ class PreferencesHelper @Inject constructor(
 
         const val DEVELOP_MODE = false
         private const val IS_INTRO_SKIPPED = "data.source.prefs.IS_INTRO_SKIPPED"
-        private const val IS_FORCE_LOGOUT = "data.source.prefs.IS_FORCE_SIGNOUT"
+        private const val IS_FORCE_LOGOUT = "data.source.prefs.IS_FORCE_SIGNIN"
         private const val IS_NOTIFICATIONS_ENABLED = "data.source.prefs.IS_NOTIFICATIONS_ENABLED"
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val SUB_SYNDICATE = "data.source.prefs.SUB_SYNDICATE"
