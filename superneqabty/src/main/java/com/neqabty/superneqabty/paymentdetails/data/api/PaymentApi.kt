@@ -11,7 +11,7 @@ import retrofit2.http.Path
 
 interface PaymentApi {
 
-    @GET("api/payments/v1/inquiry/{id}/{number}")
+    @GET("api/payments/v2/inquiry/{id}/{number}")
     suspend fun getPaymentDetails(@Path("id") id: String, @Path("number") number: String): ReceiptResponse
 
     @POST("api/payments")

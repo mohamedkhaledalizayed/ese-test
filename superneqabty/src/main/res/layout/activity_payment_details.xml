@@ -83,11 +83,180 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="?textSizeLarge" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvDetails"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layoutManager="LinearLayoutManager" />
+                    android:id="@+id/card_layout"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_1sdp"
+                    android:layout_marginEnd="@dimen/_1sdp"
+                    android:elevation="@dimen/_4sdp"
+                    app:cardCornerRadius="@dimen/_4sdp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_8sdp">
+
+
+                        <TextView
+                            android:id="@+id/last_fee_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/last_fee_year"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/last_fee_year_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/_50sdp"
+                            app:layout_constraintStart_toEndOf="@+id/last_fee_year"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/current_fee_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/current_fee_year"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/last_fee_year"
+                            />
+
+                        <TextView
+                            android:id="@+id/current_fee_year_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            app:layout_constraintStart_toEndOf="@+id/current_fee_year"
+                            app:layout_constraintTop_toBottomOf="@id/last_fee_year_value" />
+
+                        <TextView
+                            android:id="@+id/card_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/card_price"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/current_fee_year"
+                             />
+
+                        <TextView
+                            android:id="@+id/card_price_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="140dp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/_42sdp"
+                            app:layout_constraintStart_toEndOf="@id/card_price"
+                            app:layout_constraintTop_toBottomOf="@id/current_fee_year_value"
+                             />
+
+                        <TextView
+                            android:id="@+id/late_subscriptions"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/late_subscriptions"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/card_price"
+                             />
+
+                        <TextView
+                            android:id="@+id/late_subscriptions_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="140dp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/_24sdp"
+                            app:layout_constraintStart_toEndOf="@id/late_subscriptions"
+                            app:layout_constraintTop_toBottomOf="@id/card_price_value"
+                             />
+
+                        <TextView
+                            android:id="@+id/delay_fine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/delay_fine"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/late_subscriptions"
+                             />
+
+                        <TextView
+                            android:id="@+id/delay_fine_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="140dp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/_47sdp"
+                            app:layout_constraintStart_toEndOf="@id/delay_fine"
+                            app:layout_constraintTop_toBottomOf="@id/late_subscriptions_value"
+                             />
+
+                        <TextView
+                            android:id="@+id/total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/total_pric"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/delay_fine"
+                             />
+
+                        <TextView
+                            android:id="@+id/total_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="140dp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            android:layout_marginStart="@dimen/_58sdp"
+                            app:layout_constraintStart_toEndOf="@id/total"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/delay_fine_value"
+                             />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
 
                 <TextView
                     android:id="@+id/tvFeatures"

@@ -68,4 +68,10 @@
     <string name="new_update">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
     <string name="other_services">خدمات أخرى</string>
     <string name="neqabty_news">أخبار نقابتى</string>
+    <string name="last_fee_year">أخر إشتراك</string>
+    <string name="current_fee_year">الأشتراك الحالى</string>
+    <string name="card_price">قيمة الكارت</string>
+    <string name="late_subscriptions">إشتراكات متاخرة</string>
+    <string name="delay_fine">غرامة تاخير</string>
+    <string name="total_pric">الاجمالي</string>
 </resources>

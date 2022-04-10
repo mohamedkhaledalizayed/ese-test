@@ -36,7 +36,6 @@ import team.opay.business.cashier.sdk.pay.PaymentTask
 @AndroidEntryPoint
 class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
-    private val mAdapter = ItemsAdapter()
     private val featuresAdapter = FeaturesAdapter()
     private val paymentDetailsViewModel: PaymentDetailsViewModel by viewModels()
     private var paymentMethod = "card"
@@ -51,7 +50,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
         setupToolbar(titleResId = R.string.payments)
 
-        binding.rvDetails.adapter = mAdapter
         binding.rvFeatures.adapter = featuresAdapter
         serviceCode = intent.getStringExtra("code")!!
         number = intent.getStringExtra("number")!!
@@ -70,12 +68,19 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         binding.tvName.text = "الاسم : ${resource.data?.member?.name}"
                         binding.tvMemberNumber.text = "رقم العضوية : ${intent.getStringExtra("number")!!}"
                         if (resource.data?.receipt == null){
+                            binding.cardLayout.visibility = View.GONE
+                            binding.tvDetails.visibility = View.GONE
                             showDialog()
                         }else{
                             val total = paymentDetailsViewModel.payment.value?.data?.receipt?.cardTotalPrice.toString()
-                            totalAmount = paymentDetailsViewModel.payment.value?.data?.receipt?.totalPrice.toString()
+                            totalAmount = paymentDetailsViewModel.payment.value?.data?.receipt?.details?.totalPrice.toString()
                             binding.tvAmount.text = "الاجمالى : $total"
-                            mAdapter.submitList(resource.data.receipt.details)
+                            binding.lastFeeYearValue.text = "${resource.data.receipt.details.lastFeeYear} "
+                            binding.currentFeeYearValue.text = "${resource.data.receipt.details.currentFeeYear} ج.م "
+                            binding.cardPriceValue.text = "${resource.data.receipt.details.cardPrice} ج.م "
+                            binding.lateSubscriptionsValue.text = "${resource.data.receipt.details.lateSubscriptions} ج.م "
+                            binding.delayFineValue.text = "${resource.data.receipt.details.delayFine} ج.م "
+                            binding.totalValue.text = "${resource.data.receipt.details.totalPrice} ج.م "
                             featuresAdapter.submitList(resource.data.service.features)
                         }
                     }
@@ -171,7 +176,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 paymentMethod = "card"
-                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.outletTotalPrice.toString()
+                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.codeTotalPrice.toString()
                 binding.llChannels.visibility = View.VISIBLE
                 binding.ivCard.visibility = View.GONE
                 binding.ivFawry.visibility = View.GONE
@@ -181,7 +186,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         binding.rbFawry.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 paymentMethod = "fawry"
-                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.outletTotalPrice.toString()
+                val total = paymentDetailsViewModel.payment.value?.data?.receipt?.codeTotalPrice.toString()
                 binding.ivFawry.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
                 binding.ivCard.visibility = View.GONE

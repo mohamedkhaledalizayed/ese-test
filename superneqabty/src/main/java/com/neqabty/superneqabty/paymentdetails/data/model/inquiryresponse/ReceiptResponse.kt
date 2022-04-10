@@ -9,5 +9,7 @@ data class ReceiptResponse(
     @SerializedName("receipt")
     val receipt: Receipt,
     @SerializedName("service")
-    val service: Service
+    val service: Service,
+    @SerializedName("title")
+    val title: String
 )

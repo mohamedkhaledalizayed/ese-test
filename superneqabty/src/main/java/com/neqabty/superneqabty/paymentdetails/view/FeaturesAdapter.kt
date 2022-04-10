@@ -7,8 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.databinding.FeatureLayoutItemBinding
-import com.neqabty.superneqabty.databinding.ServiceLayoutItemBinding
-import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.paymentdetails.data.model.inquiryresponse.Feature
 
 

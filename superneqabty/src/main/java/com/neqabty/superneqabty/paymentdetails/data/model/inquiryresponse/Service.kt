@@ -9,17 +9,19 @@ data class Service(
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("domain")
-    val domain: String,
+    val domain: Any,
     @SerializedName("features")
     val features: List<Feature>,
     @SerializedName("id")
     val id: Int,
+    @SerializedName("is_active")
+    val isActive: Boolean,
     @SerializedName("links")
     val links: Links,
     @SerializedName("name")
     val name: String,
-    @SerializedName("price")
-    val price: String,
+    @SerializedName("require_cysr")
+    val requireCysr: Boolean,
     @SerializedName("require_registration")
     val requireRegistration: Boolean,
     @SerializedName("type")

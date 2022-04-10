@@ -17,88 +17,150 @@
 
 
             <TextView
-                android:id="@+id/service"
+                android:id="@+id/last_fee_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/service"
+                android:text="أخر إشتراك"
                 android:textColor="@color/black"
                 android:textSize="?textSizeLarge"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/service_value"
+                app:layout_constraintEnd_toStartOf="@+id/last_fee_year_value"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/service_value"
+                android:id="@+id/last_fee_year_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="اشتراك سنة 2022	"
+                android:layout_marginEnd="@dimen/_100sdp"
                 android:textColor="@color/black"
                 android:textSize="?textSizeLarge"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.6"
+                android:layout_marginStart="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/count"
+                android:id="@+id/current_fee_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="العدد"
+                android:text="الأشتراك الحالى"
                 android:textColor="@color/black"
                 android:textSize="?textSizeLarge"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/service"
+                app:layout_constraintTop_toBottomOf="@id/last_fee_year"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/count_value"
+                android:id="@+id/current_fee_year_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_100sdp"
                 android:text="1"
                 android:textColor="@color/black"
                 android:textSize="?textSizeLarge"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/count"
-                app:layout_constraintTop_toBottomOf="@id/service_value" />
+                app:layout_constraintTop_toBottomOf="@id/last_fee_year_value" />
 
             <TextView
-                android:id="@+id/price"
+                android:id="@+id/card_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="السعر"
+                android:text="قيمة الكارت"
                 android:textColor="@color/black"
                 android:textSize="?textSizeLarge"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/price_value"
+                app:layout_constraintEnd_toStartOf="@+id/card_price_value"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/count"
-                app:layout_constraintVertical_bias="0.132" />
+                app:layout_constraintTop_toBottomOf="@id/current_fee_year"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/price_value"
+                android:id="@+id/card_price_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginEnd="140dp"
+                android:layout_marginEnd="@dimen/_100sdp"
                 android:text="ج.م.‏ 60.00"
                 android:textColor="@color/black"
                 android:textSize="?textSizeLarge"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/count_value"
+                app:layout_constraintTop_toBottomOf="@id/current_fee_year_value"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/late_subscriptions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="إشتراكات متاخرة"
+                android:textColor="@color/black"
+                android:textSize="?textSizeLarge"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/card_price_value"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_price"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/late_subscriptions_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_100sdp"
+                android:text="ج.م.‏ 60.00"
+                android:textColor="@color/black"
+                android:textSize="?textSizeLarge"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_price_value"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/delay_fine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="إشتراكات متاخرة"
+                android:textColor="@color/black"
+                android:textSize="?textSizeLarge"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/late_subscriptions_value"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/late_subscriptions"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/delay_fine_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_100sdp"
+                android:text="ج.م.‏ 60.00"
+                android:textColor="@color/black"
+                android:textSize="?textSizeLarge"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/late_subscriptions_value"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -111,10 +173,10 @@
                 android:textSize="?textSizeLarge"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/total_value"
+                app:layout_constraintEnd_toStartOf="@+id/delay_fine_value"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/price"
+                app:layout_constraintTop_toBottomOf="@id/delay_fine"
                 app:layout_constraintVertical_bias="0.8" />
 
             <TextView
@@ -122,14 +184,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginEnd="140dp"
+                android:layout_marginEnd="@dimen/_100sdp"
                 android:text="ج.م.‏ 60.00"
                 android:textColor="@color/black"
                 android:textSize="?textSizeLarge"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/price_value"
+                app:layout_constraintTop_toBottomOf="@id/delay_fine_value"
                 app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

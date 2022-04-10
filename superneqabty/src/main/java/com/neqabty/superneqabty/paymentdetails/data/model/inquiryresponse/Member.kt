@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName
 data class Member(
     @SerializedName("account")
     val account: Any,
+    @SerializedName("blocked")
+    val blocked: Any,
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("entity")
@@ -16,8 +18,6 @@ data class Member(
     val lastFeeYear: Int,
     @SerializedName("license_end_date")
     val licenseEndDate: String,
-    @SerializedName("license_number")
-    val licenseNumber: Int,
     @SerializedName("membership_id")
     val membershipId: Int,
     @SerializedName("name")
