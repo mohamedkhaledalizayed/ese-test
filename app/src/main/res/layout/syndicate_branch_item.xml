@@ -6,6 +6,7 @@
     <data>
 
         <import type="android.text.Html" />
+
         <variable
             name="branch"
             type="com.neqabty.presentation.entities.SyndicateBranchUI" />
@@ -25,38 +26,85 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lineSpacingMultiplier="0.6"
-            android:maxLines="2"
+            android:lines="2"
             android:text="@{branch.name}"
             android:textColor="@color/colorPrimary"
             android:textSize="?textSizeMedium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/ivAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:src="@drawable/ic_baseline_location_on_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:tint="@color/green" />
+
         <TextView
             android:id="@+id/tvAddress"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lineSpacingMultiplier="0.6"
-            android:maxLines="2"
+            android:lines="2"
             android:text="@{branch.address}"
             android:textColor="@color/dark_grey"
             android:textSize="?textSizeMedium"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivAddress"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <ImageView
+            android:id="@+id/ivPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:src="@drawable/ic_phone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAddress"
+            app:tint="@color/green" />
 
         <TextView
             android:id="@+id/tvPhone"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lineSpacingMultiplier="0.8"
-            android:maxLines="2"
+            android:lines="2"
+            android:gravity="right"
             android:text="@{branch.phone}"
             android:textColor="@color/dark_grey"
             android:textSize="?textSizeSmall"
-            app:layout_constraintTop_toBottomOf="@id/tvAddress"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPhone"
+            app:layout_constraintTop_toBottomOf="@id/tvAddress" />
+
+        <ImageView
+            android:id="@+id/ivEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:src="@drawable/ic_mail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPhone"
+            app:tint="@color/green" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="0.8"
+            android:lines="2"
+            android:gravity="right"
+            android:textColor="@color/dark_grey"
+            android:textSize="?textSizeSmall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivEmail"
+            app:layout_constraintTop_toBottomOf="@id/tvPhone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

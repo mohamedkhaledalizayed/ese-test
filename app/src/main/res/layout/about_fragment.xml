@@ -80,163 +80,180 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:text="@{syndicate.descAr}"
-                    android:textColor="@color/text_dark"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvMainsyndicate" />
+                <include
+                    android:id="@+id/layout_main"
+                    layout="@layout/syndicate_branch_item"
+                    app:layout_constraintTop_toBottomOf="@id/tvMainsyndicate"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/tvName"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+<!--                    android:text="@{syndicate.descAr}"-->
+<!--                    android:textColor="@color/text_dark"-->
+<!--                    android:textSize="?textSizeLarge"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tvMainsyndicate" />-->
 
 
-                <TextView
-                    android:id="@+id/tvAddressTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/address"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="?textSizeMedium"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@id/bMap"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/bMap" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvAddressTitle"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/address"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:textSize="?textSizeMedium"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/bMap"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/bMap" />-->
 
-                <Button
-                    android:id="@+id/bMap"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:background="@drawable/btn_green"
-                    android:paddingStart="@dimen/margin_horizontal_large"
-                    android:paddingEnd="@dimen/margin_horizontal_large"
-                    android:text="@string/location_on_map"
-                    android:textColor="@android:color/white"
-                    android:textSize="?textSizeSmall"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvName" />
+<!--                <Button-->
+<!--                    android:id="@+id/bMap"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+<!--                    android:background="@drawable/btn_green"-->
+<!--                    android:paddingStart="@dimen/margin_horizontal_large"-->
+<!--                    android:paddingEnd="@dimen/margin_horizontal_large"-->
+<!--                    android:text="@string/location_on_map"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    android:textSize="?textSizeSmall"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tvName" />-->
 
-                <TextView
-                    android:id="@+id/tvAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_horizontal_normal"
-                    android:layout_marginTop="@dimen/margin_horizontal_small"
-                    android:ellipsize="end"
-                    android:text="@{syndicate.address}"
-                    android:textColor="@color/dark_grey"
-                    android:textSize="?textSizeMedium"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bMap" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvAddress"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="@dimen/margin_horizontal_normal"-->
+<!--                    android:layout_marginTop="@dimen/margin_horizontal_small"-->
+<!--                    android:ellipsize="end"-->
+<!--                    android:text="@{syndicate.address}"-->
+<!--                    android:textColor="@color/dark_grey"-->
+<!--                    android:textSize="?textSizeMedium"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/bMap" />-->
 
-                <TextView
-                    android:id="@+id/tvPhoneTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:text="@string/phone"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="?textSizeMedium"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvAddress" />
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_horizontal_normal"
-                    android:background="@drawable/rounded_bg"
-                    android:elevation="@dimen/elevation_level_one"
-                    android:padding="@dimen/margin_horizontal_normal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvPhoneTitle">
+<!--                <TextView-->
+<!--                    android:id="@+id/tvPhoneTitle"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+<!--                    android:text="@string/phone"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:textSize="?textSizeMedium"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tvAddress" />-->
 
 
-                    <ImageView
-                        android:id="@+id/ivPhone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/circle_view_color_primary_dark"
-                        android:padding="@dimen/margin_horizontal_normal"
-                        android:src="@drawable/ic_phone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvPhone"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_horizontal_normal"
-                        android:gravity="right"
-                        android:text="@{syndicate.phone}"
-                        android:textColor="@color/text_dark"
-                        android:textDirection="anyRtl"
-                        android:textSize="?textSizeLarge"
-                        app:layout_constraintEnd_toStartOf="@id/ivPhone"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:id="@+id/tvEmailTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_normal"
-                    android:text="@string/email"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="?textSizeMedium"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/clPhone" />
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/clPhone"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_horizontal_normal"-->
+<!--                    android:background="@drawable/rounded_bg"-->
+<!--                    android:elevation="@dimen/elevation_level_one"-->
+<!--                    android:padding="@dimen/margin_horizontal_normal"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tvPhoneTitle">-->
 
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/clEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_bg"
-                    android:elevation="@dimen/elevation_level_one"
-                    android:padding="@dimen/margin_horizontal_normal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="@dimen/margin_horizontal_normal"
-                    app:layout_constraintTop_toBottomOf="@id/tvEmailTitle">
+<!--                    <ImageView-->
+<!--                        android:id="@+id/ivPhone"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@drawable/circle_view_color_primary_dark"-->
+<!--                        android:padding="@dimen/margin_horizontal_normal"-->
+<!--                        android:src="@drawable/ic_phone"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <TextView
-                        android:id="@+id/tvEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_horizontal_normal"
-                        android:ellipsize="end"
-                        android:text="@{syndicate.email}"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="?textSizeMedium"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvPhone"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="@dimen/margin_horizontal_normal"-->
+<!--                        android:gravity="right"-->
+<!--                        android:text="@{syndicate.phone}"-->
+<!--                        android:textColor="@color/text_dark"-->
+<!--                        android:textDirection="anyRtl"-->
+<!--                        android:textSize="?textSizeLarge"-->
+<!--                        app:layout_constraintEnd_toStartOf="@id/ivPhone"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvEmailTitle"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/margin_vertical_normal"-->
+<!--                    android:text="@string/email"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:textSize="?textSizeMedium"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/clPhone" />-->
+
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/clEmail"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/rounded_bg"-->
+<!--                    android:elevation="@dimen/elevation_level_one"-->
+<!--                    android:padding="@dimen/margin_horizontal_normal"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    android:layout_marginTop="@dimen/margin_horizontal_normal"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/tvEmailTitle">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvEmail"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="@dimen/margin_horizontal_normal"-->
+<!--                        android:ellipsize="end"-->
+<!--                        android:text="@{syndicate.email}"-->
+<!--                        android:textColor="@color/dark_grey"-->
+<!--                        android:textSize="?textSizeMedium"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
                 <TextView
                     android:id="@+id/tvSubsyndicates"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_large"                    android:text="@string/subsyndicates_title"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/subsyndicates_title"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="?textSizeMedium"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/clEmail" />
+                    app:layout_constraintTop_toBottomOf="@id/layout_main" />
+
+                <Spinner
+                    android:id="@+id/spGoverns"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:hint="@string/complaint_type"
+                    android:textDirection="rtl"
+                    android:textSize="?textSizeMedium"
+                    app:layout_constraintTop_toBottomOf="@id/tvSubsyndicates"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvBranches"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tvSubsyndicates"
+                    app:layout_constraintTop_toBottomOf="@id/spGoverns"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginBottom="@dimen/margin_horizontal_small"
                     app:layoutManager="LinearLayoutManager"
