@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">Courses</string>
+    <string name="app_name">تحديد هوية المستخدم</string>
+    <string name="introduction">استخدام خاصية تحديد هوية المستخدم يمكنك من الوصول لخدمات ......</string>
+    <string name="start">ابدأ</string>
+    <string name="success">تم تحديد هوية المستخدم بنجاح</string>
+    <string name="error">فشل تحديد هوية المستخدم برجاء المحاولة ثانيةً</string>
+    <string name="name_title">
+    <![CDATA[<font color="#1d1ad2">الإسم: </font>]]>%s
+    </string>
+    <string name="national_id_title">
+    <![CDATA[<font color="#1d1ad2">الرقم القومي: </font>]]>%s
+    </string>
+    <string name="address_title">
+    <![CDATA[<font color="#1d1ad2">العنوان: </font>]]>%s
+    </string>
+    <string name="job_title">
+    <![CDATA[<font color="#1d1ad2">الوظيفة: </font>]]>%s
+    </string>
 </resources>
