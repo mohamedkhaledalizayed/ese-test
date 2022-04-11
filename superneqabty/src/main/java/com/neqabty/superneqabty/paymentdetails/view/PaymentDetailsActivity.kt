@@ -70,11 +70,15 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         if (resource.data?.receipt == null){
                             binding.cardLayout.visibility = View.GONE
                             binding.tvDetails.visibility = View.GONE
+                            binding.tvFeatures.visibility = View.GONE
+                            binding.tvPaymentMethod.visibility = View.GONE
+                            binding.rgPaymentMechanismType.visibility = View.GONE
+                            binding.btnNext.visibility = View.GONE
                             showDialog()
                         }else{
                             val total = paymentDetailsViewModel.payment.value?.data?.receipt?.cardTotalPrice.toString()
                             totalAmount = paymentDetailsViewModel.payment.value?.data?.receipt?.details?.totalPrice.toString()
-                            binding.tvAmount.text = "الاجمالى : $total"
+                            binding.tvAmount.text = "الاجمالى بعد الضريبة : $total"
                             binding.lastFeeYearValue.text = "${resource.data.receipt.details.lastFeeYear} "
                             binding.currentFeeYearValue.text = "${resource.data.receipt.details.currentFeeYear} ج.م "
                             binding.cardPriceValue.text = "${resource.data.receipt.details.cardPrice} ج.م "
@@ -170,7 +174,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                 binding.ivCard.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
                 binding.ivFawry.visibility = View.GONE
-                binding.tvAmount.text = "الاجمالى : ${total}"
+                binding.tvAmount.text = "الاجمالى بعد الضريبة : $total"
             }
         }
         binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
@@ -180,7 +184,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                 binding.llChannels.visibility = View.VISIBLE
                 binding.ivCard.visibility = View.GONE
                 binding.ivFawry.visibility = View.GONE
-                binding.tvAmount.text = "الاجمالى : ${total}"
+                binding.tvAmount.text = "الاجمالى بعد الضريبة : $total"
             }
         }
         binding.rbFawry.setOnCheckedChangeListener { compoundButton, b ->
@@ -190,7 +194,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                 binding.ivFawry.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
                 binding.ivCard.visibility = View.GONE
-                binding.tvAmount.text = "الاجمالى : ${total}"
+                binding.tvAmount.text = "الاجمالى بعد الضريبة : $total"
             }
         }
 
@@ -220,6 +224,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             AlertDialog.BUTTON_POSITIVE, "موافقة"
         ) { dialog, _ ->
             dialog.dismiss()
+            finish()
         }
         alertDialog.show()
 
@@ -372,6 +377,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                     ) + response.orderNo
                     else getString(R.string.payment_reference) + response.referenceCode
                 ) {
+                    finish()
 //                    navController().popBackStack()
 //                    navController().navigate(R.id.homeFragment)
                 }
