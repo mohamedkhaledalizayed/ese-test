@@ -49,7 +49,6 @@ class MedicalRenewFollowerDetailsFragment : BaseFragment() {
     lateinit var followerItem: MedicalRenewalUI.FollowerItem
 
     private val REQUEST_CAMERA = 0
-    private val SELECT_FILE = 1
 
     private var captureImage = false
     private var photoFileName = ""
@@ -102,14 +101,6 @@ class MedicalRenewFollowerDetailsFragment : BaseFragment() {
         }
         pictureDialog.show()
     }
-
-    private fun galleryIntent() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT //
-        startActivityForResult(Intent.createChooser(intent, getString(R.string.select_file)), SELECT_FILE)
-    }
-
 
     fun grantCameraPermission() {
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {

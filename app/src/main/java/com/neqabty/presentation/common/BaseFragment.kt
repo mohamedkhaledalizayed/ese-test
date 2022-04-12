@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Html
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -29,6 +30,7 @@ open class BaseFragment : Fragment() {
     @Inject
     lateinit var sharedPref: PreferencesHelper
 
+    val SELECT_FILE = 1
     var builder: AlertDialog.Builder? = null
     var dialog: AlertDialog? = null
     lateinit var llSuperProgressbar: LinearLayout
@@ -187,5 +189,10 @@ open class BaseFragment : Fragment() {
                 }
             }
         }
+    }
+
+    fun galleryIntent() {
+        val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(i, SELECT_FILE)
     }
 }

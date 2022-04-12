@@ -62,7 +62,6 @@ class TripReservationFragment : BaseFragment() {
     private var companionsAdapter by autoCleared<CompanionsAdapter>()
 
     private val REQUEST_CAMERA = 0
-    private val SELECT_FILE = 1
     private val ADD_COMPANION = 2
 
     private var captureImage = false
@@ -408,13 +407,6 @@ class TripReservationFragment : BaseFragment() {
             }
         }
         pictureDialog.show()
-    }
-
-    private fun galleryIntent() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT //
-        startActivityForResult(Intent.createChooser(intent, getString(R.string.select_file)), SELECT_FILE)
     }
 
     private fun cameraIntent() {
