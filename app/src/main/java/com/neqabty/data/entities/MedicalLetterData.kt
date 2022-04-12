@@ -34,4 +34,9 @@ data class MedicalLetterData(
         @field:SerializedName("LetterProcedureName")
         var letterProcedureName: String?
     )
+
+    data class LetterItemWrapper(
+        @field:SerializedName("Letter")
+        var letter: LetterItem? = null
+    )
 }

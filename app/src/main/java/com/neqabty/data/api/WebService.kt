@@ -178,7 +178,7 @@ interface WebService {
             @Query("oldRefId") userNumber: String,
             @Query("id") id: String,
             @Query("server") server: String = ""
-    ): Observable<MedicalLetterData.LetterItem>
+    ): Observable<MedicalLetterData.LetterItemWrapper>
 
     @POST("api/v1/adds")
     fun getAds(@Body adsRequest: AdsRequest): Observable<ApiResponse<List<AdData>>>
