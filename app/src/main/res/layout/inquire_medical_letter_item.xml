@@ -104,5 +104,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/clDetails" />
 
+        <Button
+            android:id="@+id/bDownloadReport"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_vertical_large"
+            android:background="@drawable/btn_green"
+            android:gravity="center"
+            android:text="@string/medical_letter_download_report"
+            android:textColor="@color/white"
+            android:textSize="?textSizeSmall"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/tvServiceProviderName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

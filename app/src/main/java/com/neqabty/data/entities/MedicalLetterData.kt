@@ -27,6 +27,7 @@ data class MedicalLetterData(
         var totalPrice: String?,
         @field:SerializedName("CreationType")
         var creationType: Int?,
+        var report: String?,
         @field:SerializedName("LetterProcedureList")
         var letterProcedures: List<LetterProcedureItem>? = null
     )
@@ -37,6 +38,8 @@ data class MedicalLetterData(
 
     data class LetterItemWrapper(
         @field:SerializedName("Letter")
-        var letter: LetterItem? = null
+        var letter: LetterItem? = null,
+        @field:SerializedName("LetterReport")
+        var report: String? = null
     )
 }

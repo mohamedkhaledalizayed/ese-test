@@ -14,6 +14,7 @@ data class MedicalLetterEntity(
         var letterStatusName: String?,
         var totalPrice: String?,
         var creationType: Int?,
+        var report: String?,
         var letterProcedures: List<LetterProcedureItem>? = null
     )
     data class LetterProcedureItem(

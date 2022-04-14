@@ -172,7 +172,7 @@ interface WebService {
             @Query("server") server: String = ""
     ): Observable<MedicalLetterData>
 
-    @GET("api/api/ApiRequest/Get")
+    @GET("api/api/ApiRequest/GetWithReport")
     fun getMedicalLetterByID(
             @Query("mobile_number") mobileNumber: String,
             @Query("oldRefId") userNumber: String,

@@ -548,6 +548,7 @@
     <string name="medical_letter_creation_type_portal">(البورتال الطبي)</string>
     <string name="medical_letter_is_active">مفعل</string>
     <string name="medical_letter_is_cancelled">لاغي</string>
+    <string name="medical_letter_download_report">تحميل استمارة التحويل</string>
     <string name="arabic_letters">غظضذ خثتشرقصجفعسنملةىكيطئءؤحزوهدبا أإلإآ</string>
 
     <string name="online_pharmacy_vezeeta">فيزيتا</string>
