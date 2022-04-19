@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.neqabty.R
 import com.neqabty.databinding.OnlinePharmacyFragmentBinding
@@ -65,6 +66,7 @@ class OnlinePharmacyFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        llSuperProgressbar.visibility = View.VISIBLE
         // RecyclerView Init
         pharmacyAdapter = PharmacyAdapter(requireContext())
         binding.pharmacyRecycler.adapter = pharmacyAdapter
@@ -79,10 +81,10 @@ class OnlinePharmacyFragment : BaseFragment() {
                     bundle.putString("user_number", sharedPref.user)
                     bundle.putString("mobile_number", sharedPref.mobile)
                     bundle.putString("jwt", sharedPref.jwt)
-                    bundle.putString("fixed_token", Constants.YODAWY_CONFIG.publicKey)
-                    bundle.putBoolean("total_amount", Constants.YODAWY_CONFIG.totalAmount)
-                    bundle.putString("delivery_sentence", Constants.YODAWY_CONFIG.deliverySentence)
-                    bundle.putString("url", Constants.YODAWY_CONFIG.url)
+                    bundle.putString("fixed_token", Constants.YODAWY_CONFIG.value?.publicKey)
+                    bundle.putBoolean("total_amount", Constants.YODAWY_CONFIG.value?.totalAmount ?: false)
+                    bundle.putString("delivery_sentence", Constants.YODAWY_CONFIG.value?.deliverySentence)
+                    bundle.putString("url", Constants.YODAWY_CONFIG.value?.url)
                     val intent = Intent(requireContext(), HomeActivity::class.java)
                     intent.putExtras(bundle)
                     startActivity(intent)
@@ -93,8 +95,7 @@ class OnlinePharmacyFragment : BaseFragment() {
         }
         listOfPharmacies.clear()
         listOfPharmacies.add(Pharmacy(R.drawable.vezeeta, getString(R.string.vezeeta_title), getString(R.string.vezeeta_details)))
-        if(Constants.YODAWY_CONFIG.status) listOfPharmacies.add(Pharmacy(R.drawable.yodawy, getString(R.string.yodawy_title), getString(R.string.yodawy_details)))
-
+        setupYodawy()
 
         pharmacyAdapter.submitList(listOfPharmacies)
     }
@@ -109,6 +110,32 @@ class OnlinePharmacyFragment : BaseFragment() {
     }
 
 //region
+    private fun setupYodawy() {
+        Constants.YODAWY_CONFIG.value?.let {
+            if (Constants.YODAWY_CONFIG.value?.status == true)
+                listOfPharmacies.add( Pharmacy(
+                    R.drawable.yodawy,
+                    getString(R.string.yodawy_title),
+                    getString(R.string.yodawy_details)
+                )
+            )
+
+            llSuperProgressbar.visibility = View.GONE
+            return
+        }
+
+        Constants.YODAWY_CONFIG.observe(viewLifecycleOwner, Observer {
+            if (Constants.YODAWY_CONFIG.value?.status == true)
+                listOfPharmacies.add( Pharmacy(
+                    R.drawable.yodawy,
+                    getString(R.string.yodawy_title),
+                    getString(R.string.yodawy_details)
+                )
+            )
+            llSuperProgressbar.visibility = View.GONE
+            pharmacyAdapter.submitList(listOfPharmacies)
+        })
+    }
 // endregion
     fun navController() = findNavController()
 }

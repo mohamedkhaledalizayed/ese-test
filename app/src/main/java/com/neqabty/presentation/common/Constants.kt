@@ -19,7 +19,7 @@ object Constants {
     var editFollowersStatusMsg: String = ""
     var hasQuestionnaire: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    lateinit var YODAWY_CONFIG: AppConfigUI.YodawyStatus
+    var YODAWY_CONFIG: MutableLiveData<AppConfigUI.YodawyStatus> = MutableLiveData()
     var VEZEETA_CONFIG: MutableLiveData<AppConfigUI.VezeetaStatus> = MutableLiveData()
     var CALL_CENTER = "0235317300"
 
