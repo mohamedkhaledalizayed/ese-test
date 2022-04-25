@@ -137,10 +137,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data?.payment?.transaction?.paymentGatewayReferenceId.isNullOrEmpty()){
                             val paymentObject = resource.data as PaymentResponse
-                            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-                                oPayPayment(paymentObject, true)
-                            else if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-                                oPayPayment(paymentObject, false)
+                            oPayPayment(paymentObject, true)
                         }else{
                             showAlertDialog( resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
                         }
@@ -179,7 +176,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         }
         binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
-                paymentMethod = "card"
+                paymentMethod = "code"
                 val total = paymentDetailsViewModel.payment.value?.data?.receipt?.codeTotalPrice.toString()
                 binding.llChannels.visibility = View.VISIBLE
                 binding.ivCard.visibility = View.GONE

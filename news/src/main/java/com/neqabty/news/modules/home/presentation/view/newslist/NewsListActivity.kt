@@ -27,10 +27,10 @@ class NewsListActivity : BaseActivity<ActivityNewsListBinding>() {
 
 
         if (intent.getIntExtra("id", -1) == -1 || intent.getIntExtra("type", -1) == 1){
-            setupToolbar( title = "الاخبار")
+            setupToolbar( title = "الاخبار العامة")
             homeViewModel.getAllNews()
         }else{
-            setupToolbar( title = "أخبار نقابتى")
+            setupToolbar( title = "أخبار النقابة")
             homeViewModel.getSyndicateNews(intent.getIntExtra("id", -1))
         }
         homeViewModel.news.observe(this){

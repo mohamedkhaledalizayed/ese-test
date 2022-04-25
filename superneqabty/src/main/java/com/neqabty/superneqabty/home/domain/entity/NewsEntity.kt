@@ -11,7 +11,7 @@ data class NewsEntity(
     val createdAt: String = "",
     val headline: String = "",
     val id: Int = 0,
-    val image: String = "",
+    val image: String? = "",
     val source: String = "",
     val type: String = "",
     val updatedAt: String = "",

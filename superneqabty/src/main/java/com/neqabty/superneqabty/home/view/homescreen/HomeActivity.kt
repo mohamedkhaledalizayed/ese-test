@@ -262,10 +262,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             startActivity(intent)
         }
 
-        binding.contentActivity.elderPeople.setOnClickListener {
-            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
-        }
-
         binding.contentActivity.healthcareImage.setOnClickListener {
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
         }
@@ -352,9 +348,20 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 startActivity(intent)
             }
             R.id.contactus_fragment -> {
-                val intent = Intent(Intent.ACTION_DIAL)
-                intent.data = Uri.parse("tel:${Constants.CALL_CENTER}")
-                startActivity(intent)
+
+                try {
+                    val emailIntent = Intent(Intent.ACTION_SEND)
+                    emailIntent.data = Uri.parse("mailto:")
+                    emailIntent.type = "text/plain"
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("gts@neqabty.com"))
+                    startActivity(emailIntent)
+                } catch (e: java.lang.Exception) {
+                    e.printStackTrace()
+                }
+
+//                val intent = Intent(Intent.ACTION_DIAL)
+//                intent.data = Uri.parse("tel:${Constants.CALL_CENTER}")
+//                startActivity(intent)
             }
         }
 

@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Neqabty</string>
     <string name="home_title">الرئيسية</string>
-    <string name="news_title">الأخبار</string>
+    <string name="news_title">الأخبار العامة</string>
     <string name="payments_title">المدفوعات</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
-    <string name="contactus_title">اتصل بنا</string>
+    <string name="contactus_title">تواصل معنا</string>
     <string name="aboutapp_title">عن التطبيق</string>
     <string name="help_title">مساعدة</string>
     <string name="notifications_settings">الإشعارات</string>
@@ -67,7 +67,7 @@
     <string name="service_unavailable">  سيتم تفعيل الخدمة قريباً</string>
     <string name="new_update">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
     <string name="other_services">خدمات أخرى</string>
-    <string name="neqabty_news">أخبار نقابتى</string>
+    <string name="neqabty_news">أخبار النقابة</string>
     <string name="last_fee_year">أخر إشتراك</string>
     <string name="current_fee_year">الأشتراك الحالى</string>
     <string name="card_price">قيمة الكارت</string>

@@ -15,7 +15,7 @@ data class News(
     @SerializedName("id")
     val id: Int = 0,
     @SerializedName("image")
-    val image: String = "",
+    val image: String? = "",
     @SerializedName("source")
     val source: String = "",
     @SerializedName("type")
