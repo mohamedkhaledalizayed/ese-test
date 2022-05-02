@@ -173,7 +173,7 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getAllServices(typeID)
     }
 
-    override fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>> {
+    override fun getAllServiceTypes(): Observable<ServiceTypeEntity> {
         return remoteDataStore.getAllServiceTypes()
     }
 

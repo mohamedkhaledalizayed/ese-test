@@ -35,8 +35,8 @@ class InquiryFragment : BaseFragment() {
 
     private val inquiryViewModel: InquiryViewModel by viewModels()
 
-    var serviceTypesResultList: List<ServiceTypeUI>? = mutableListOf()
-    var servicesResultList: List<ServiceUI>? = mutableListOf()
+    var serviceTypesResultList: List<ServiceTypeUI.ServiceType>? = mutableListOf()
+    var servicesResultList: List<ServiceTypeUI.Service>? = mutableListOf()
     var serviceTypeID: Int = 0
     var serviceID: Int = 0
 
@@ -94,14 +94,11 @@ class InquiryFragment : BaseFragment() {
     private fun handleViewState(state: InquiryViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         activity?.invalidateOptionsMenu()
-        if (state.services != null) {
-            servicesResultList = state.services
-            initializeViews()
-            state.services = null
-            return
-        } else if (llContent.visibility == View.INVISIBLE && state.serviceTypes != null) {
+        if (llContent.visibility == View.INVISIBLE && state.serviceTypes != null) {
             serviceTypesResultList = state.serviceTypes
+            servicesResultList = state.services
             renderServiceTypes()
+            initializeViews()
             state.serviceTypes = null
             return
         } else if (!state.isLoading && state.medicalRenewalPayment != null) {
@@ -126,13 +123,13 @@ class InquiryFragment : BaseFragment() {
         binding.spServiceTypes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                serviceTypeID = (parent.getItemAtPosition(position) as ServiceTypeUI).id
-                llSuperProgressbar.visibility = View.VISIBLE
-                inquiryViewModel.getAllServices(serviceTypeID)
+                serviceTypeID = (parent.getItemAtPosition(position) as ServiceTypeUI.ServiceType).id
+                servicesResultList = inquiryViewModel.viewState.value?.services?.filter { it.groupID == serviceTypeID }
+                renderServices()
             }
         }
         binding.spServiceTypes.setSelection(0)
-        inquiryViewModel.getAllServices((spServiceTypes.selectedItem as ServiceTypeUI).id)
+//        inquiryViewModel.getAllServices((spServiceTypes.selectedItem as ServiceTypeUI.ServiceType).id)
     }
 
     fun renderServices() {
@@ -140,7 +137,7 @@ class InquiryFragment : BaseFragment() {
         binding.spService.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                serviceID = (parent.getItemAtPosition(position) as ServiceUI).id
+                serviceID = (parent.getItemAtPosition(position) as ServiceTypeUI.Service).id
             }
         }
         binding.spService.setSelection(0)

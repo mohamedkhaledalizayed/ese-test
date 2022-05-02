@@ -126,13 +126,13 @@ interface WebService {
     @POST("api/v1/transactions/generate-hash")
     fun getTransactionHash(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
-    @GET("api/v1/eseServicesTypes")
-    fun getAllServiceTypes(): Observable<ApiResponse<List<ServiceTypeData>>>
+    @POST("api/v1/ese-services")
+    fun getAllServiceTypes(@Body servicesRequest: ServicesRequest): Observable<ApiResponse<ServiceTypeData>>
 
     @POST("api/v1/eseServices")
     fun getAllServices(@Body servicesRequest: ServicesRequest): Observable<ApiResponse<List<ServiceData>>>
 
-    @GET("api/apiPaymentRequest/RenewalInquiryDetails")
+    @GET("api/apiPaymentRequest/AddServiceRequest")
     fun paymentInquiry(
             @Query("mobile_number") mobileNumber: String,
             @Query("OldrefID") oldrefID: String,
@@ -142,7 +142,7 @@ interface WebService {
             @Query("server") server: String = ""
     ): Observable<MedicalRenewalPaymentData>
 
-    @POST("api/apiPaymentRequest/AddRenewalRequest")
+    @POST("api/Api/AddServiceRequest")
     fun addRenewalRequest(
             @Query("mobile_number") mobileNumber: String,
             @Query("oldrefid") oldRefID: String,
