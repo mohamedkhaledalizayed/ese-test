@@ -594,6 +594,14 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    private val syndicateBranchDataEntityMapper = SyndicateBranchDataEntityMapper()
+
+    override fun getSyndicateBranches(): Observable<List<SyndicateBranchEntity>> {
+        return api.getSyndicateBranches().map { branches ->
+            branches.map { syndicateBranchDataEntityMapper.mapFrom(it) }
+        }
+    }
+
     private val newsDataEntityMapper = NewsDataEntityMapper()
 
     override fun getNews(id: String): Observable<List<NewsEntity>> {

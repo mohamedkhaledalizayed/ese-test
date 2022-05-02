@@ -299,6 +299,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetAllSyndicateBranches(neqabtyRepository: NeqabtyRepository): GetAllSyndicateBranches {
+        return GetAllSyndicateBranches(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetAllAreas(neqabtyRepository: NeqabtyRepository): GetAllAreas {
         return GetAllAreas(ASyncTransformer(), neqabtyRepository)
     }

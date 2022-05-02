@@ -264,6 +264,10 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun getSyndicateBranches(): Observable<List<SyndicateBranchEntity>> {
+        TODO("Not yet implemented")
+    }
+
     override fun getNews(id: String): Observable<List<NewsEntity>> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }

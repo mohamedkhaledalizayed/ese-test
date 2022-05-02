@@ -23,6 +23,9 @@ interface WebService {
     @POST("api/v2/Syndicates/Sub/All/byMain")
     fun getSubSyndicatesById(@Body subSyndicateRequest: SubSyndicateRequest): Observable<ApiResponse<List<SyndicateData>>>
 
+    @GET("api/Api/ApiSPPCostCard/GetSyndicateBranches")
+    fun getSyndicateBranches(@Query("server") server: String = ""): Observable<List<SyndicateBranchData>>
+
     @POST("api/v1/countnotification")
     fun getNotificationsCount(@Body notificationRequest: NotificationRequest): Observable<NotificationsCountData>
 
