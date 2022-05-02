@@ -10,6 +10,7 @@ data class AppConfigEntity(
     var fawryCommission: Double,
     var minCommission: Double,
     var hasQuestionnaire: Boolean = false,
+    var isSyndicatesListEnabled: Boolean = false,
     var yodawyConfig: YodawyStatus,
     var vezeetaConfig: VezeetaStatus
 ) {

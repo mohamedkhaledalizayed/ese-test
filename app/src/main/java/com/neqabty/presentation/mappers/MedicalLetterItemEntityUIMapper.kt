@@ -21,8 +21,7 @@ class MedicalLetterItemEntityUIMapper @Inject constructor() : Mapper<MedicalLett
                 letterStatusName = from.letterStatusName,
                 serviceProviderName = from.serviceProviderName,
                 totalPrice = from.totalPrice,
-                creationType = from.creationType,
-                report = from.report
+                creationType = from.creationType
         )
         from.letterDate?.let {
             val myFormat = "yyyy-MM-dd'T'HH:mm:ss" // In which you need put here

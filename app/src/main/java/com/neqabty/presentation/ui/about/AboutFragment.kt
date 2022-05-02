@@ -18,6 +18,7 @@ import com.neqabty.R
 import com.neqabty.databinding.AboutFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.entities.SyndicateBranchUI
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.presentation.util.call
@@ -101,6 +102,16 @@ class AboutFragment : BaseFragment() {
         binding.layoutMain.tvEmail.setOnClickListener {
             state.syndicate?.email?.let { sendEmail(it) }
         }
+
+        binding.tvSubsyndicates.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+        binding.spGoverns.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+        binding.rvBranches.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+
+        Constants.isSyndicatesListEnabled.observe(this, Observer {
+            binding.tvSubsyndicates.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+            binding.spGoverns.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+            binding.rvBranches.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+        })
     }
 
     //region

@@ -15,7 +15,6 @@ data class MedicalLetterUI(
         var totalPrice: String?,
         var creationType: Int?,
         var creationTypeName: String = "",
-        var report: String?,
         var letterProcedures: List<LetterProcedureItem>? = null
     )
     data class LetterProcedureItem(

@@ -18,6 +18,7 @@ object Constants {
     var isEditFollowersEnabled: Boolean = false
     var editFollowersStatusMsg: String = ""
     var hasQuestionnaire: MutableLiveData<Boolean> = MutableLiveData(false)
+    var isSyndicatesListEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
 
     var YODAWY_CONFIG: MutableLiveData<AppConfigUI.YodawyStatus> = MutableLiveData()
     var VEZEETA_CONFIG: MutableLiveData<AppConfigUI.VezeetaStatus> = MutableLiveData()

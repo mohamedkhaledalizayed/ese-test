@@ -22,6 +22,8 @@ data class AppConfigData(
         var minCommission: Double,
         @field:SerializedName("questionnaires")
         var hasQuestionnaire: Boolean = false,
+        @field:SerializedName("syndicates_list")
+        var isSyndicatesListEnabled: Boolean = false,
         @field:SerializedName("yodawy")
         var yodawyConfig: YodawyStatus,
         @field:SerializedName("vezeeta_doctors")

@@ -186,7 +186,8 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="@color/dark_green"
                         android:text="@string/payment_wallet"
-                        android:textSize="?textSizeSmall" />
+                        android:textSize="?textSizeSmall"
+                        android:visibility="gone" />
 
                     <RadioButton
                         android:id="@+id/rb_meeza"
