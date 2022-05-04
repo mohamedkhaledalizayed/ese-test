@@ -356,15 +356,15 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     private val serviceDataEntityMapper = ServiceDataEntityMapper()
 
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {
-        return api.getAllServices(ServicesRequest("7006864")).map { services ->
+        return api.getAllServices(ServicesRequest("")).map { services ->
             services.data?.map { serviceDataEntityMapper.mapFrom(it) }
         }
     }
 
     private val serviceTypeDataEntityMapper = ServiceTypeDataEntityMapper()
 
-    override fun getAllServiceTypes(): Observable<ServiceTypeEntity> {
-        return api.getAllServiceTypes(ServicesRequest("7006864")).map { serviceTypes ->
+    override fun getAllServiceTypes(userNumber: String): Observable<ServiceTypeEntity> {
+        return api.getAllServiceTypes(ServicesRequest(userNumber)).map { serviceTypes ->
             serviceTypeDataEntityMapper.mapFrom(serviceTypes.data!!)
         }
     }

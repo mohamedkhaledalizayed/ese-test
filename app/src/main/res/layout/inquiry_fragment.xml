@@ -86,7 +86,8 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:text="@string/enter_member_number"
-                    android:textSize="?textSizeMedium" />
+                    android:textSize="?textSizeMedium"
+                    android:visibility="gone"/>
 
                 <EditText
                     android:id="@+id/edMemberNumber"
@@ -98,7 +99,8 @@
                     android:textDirection="anyRtl"
                     android:maxLength="8"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="?textSizeLarge" />
+                    android:textSize="?textSizeLarge"
+                    android:visibility="gone"/>
 
                 <Button
                     android:id="@+id/bSend"

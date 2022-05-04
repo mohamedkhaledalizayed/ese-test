@@ -25,7 +25,7 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getAllServiceTypes(): Observable<ServiceTypeEntity> {
+    override fun getAllServiceTypes(userNumber: String): Observable<ServiceTypeEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 

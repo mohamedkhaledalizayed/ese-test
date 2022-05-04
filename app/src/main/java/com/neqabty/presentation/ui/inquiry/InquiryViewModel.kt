@@ -35,8 +35,8 @@ class InquiryViewModel @Inject constructor(
         viewState.value = InquiryViewState()
     }
 
-    fun getAllServiceTypes() {
-        getAllServiceTypes.observable()
+    fun getAllServiceTypes(userNumber: String) {
+        getAllServiceTypes.getAllServiceTypes(userNumber)
                 .flatMap {
                     it.let {
                         serviceTypeEntityUIMapper.observable(it)

@@ -5,5 +5,5 @@ import com.neqabty.data.api.Request
 
 data class ServicesRequest(
     @SerializedName("user_number")
-    var typeID: String = ""
+    var userNumber: String = ""
 ) : Request()

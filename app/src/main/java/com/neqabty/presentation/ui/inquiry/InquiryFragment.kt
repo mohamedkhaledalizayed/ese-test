@@ -70,12 +70,12 @@ class InquiryFragment : BaseFragment() {
         inquiryViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                inquiryViewModel.getAllServiceTypes()
+                inquiryViewModel.getAllServiceTypes(sharedPref.user)
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
-        inquiryViewModel.getAllServiceTypes()
+        inquiryViewModel.getAllServiceTypes(sharedPref.user)
     }
 
     fun initializeViews() {
@@ -85,9 +85,9 @@ class InquiryFragment : BaseFragment() {
         renderServices()
         llContent.visibility = View.VISIBLE
         bSend.setOnClickListener {
-            if (isDataValid(binding.edMemberNumber.text.toString())) {
+//            if (isDataValid(binding.edMemberNumber.text.toString())) {
                 inquiryViewModel.paymentInquiry(sharedPref.mobile, binding.edMemberNumber.text.toString(), serviceID.toString())
-            }
+//            }
         }
     }
 
