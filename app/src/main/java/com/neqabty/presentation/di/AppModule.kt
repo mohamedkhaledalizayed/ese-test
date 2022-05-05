@@ -503,6 +503,18 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetCommitteesLookups(neqabtyRepository: NeqabtyRepository): GetCommitteesLookups {
+        return GetCommitteesLookups(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSendCommitteesRequest(neqabtyRepository: NeqabtyRepository): SendCommitteesRequest {
+        return SendCommitteesRequest(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun providePaymentInquiry(neqabtyRepository: NeqabtyRepository): PaymentInquiry {
         return PaymentInquiry(ASyncTransformer(), neqabtyRepository)
     }

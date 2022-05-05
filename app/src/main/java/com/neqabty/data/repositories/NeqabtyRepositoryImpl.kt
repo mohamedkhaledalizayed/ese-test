@@ -169,6 +169,33 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getTripDetails(id)
     }
 
+    override fun getCommitteesLookups(): Observable<CommitteesLookupEntity> {
+        return  remoteDataStore.getCommitteesLookups()
+    }
+
+    override fun sendCommitteesRequest(
+        name: String,
+        userNumber: String,
+        mobile: String,
+        nationalId: String,
+        address: String,
+        university: String,
+        degree: String,
+        maritalStatus: String,
+        committeesIds: List<Int>,
+        sectionId: Int,
+        syndicateId: Int,
+        section: String,
+        currentJob: String,
+        details: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
+    ): Observable<String> {
+        return remoteDataStore.sendCommitteesRequest(name, userNumber, mobile, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, section, currentJob, details, docsNumber, doc1, doc2, doc3)
+    }
+
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {
         return remoteDataStore.getAllServices(typeID)
     }

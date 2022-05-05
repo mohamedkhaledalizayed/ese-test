@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="loading"
+            type="boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_horizontal_large">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/llHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_horizontal_normal"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvDescription"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:textColor="@color/colorPrimary"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:text="@{Html.fromHtml(@string/complaint_description)}"-->
+                <!--                    android:textSize="?textSizeMedium"-->
+                <!--                    android:textStyle="bold" />-->
+
+
+                <TextView
+                    android:id="@+id/tvHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/committees_hint"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/committees_name"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <EditText
+                    android:id="@+id/edName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:maxLength="140"
+                    android:textDirection="anyRtl"
+                    android:textSize="?textSizeMedium" />
+
+                <TextView
+                    android:id="@+id/tvMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/committees_mobile"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <EditText
+                    android:id="@+id/edMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:textDirection="anyRtl"
+                    android:textSize="?textSizeMedium" />
+
+                <TextView
+                    android:id="@+id/tvNationalID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@string/committees_national_id"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <EditText
+                    android:id="@+id/edNationalID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="14"
+                    android:textColor="@color/text_dark"
+                    android:textDirection="anyRtl"
+                    android:textSize="?textSizeMedium" />
+
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/committees_address"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <EditText
+                    android:id="@+id/edAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:maxLength="140"
+                    android:textDirection="anyRtl"
+                    android:textSize="?textSizeMedium" />
+
+
+                <TextView
+                    android:id="@+id/tvJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/committees_job"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <EditText
+                    android:id="@+id/edJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:maxLength="140"
+                    android:textDirection="anyRtl"
+                    android:textSize="?textSizeMedium" />
+
+
+                <TextView
+                    android:id="@+id/tvJobDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/committees_job_details"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <EditText
+                    android:id="@+id/edJobDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:maxLength="140"
+                    android:textDirection="anyRtl"
+                    android:textSize="?textSizeMedium" />
+
+
+                <TextView
+                    android:id="@+id/tvUni"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/committees_uni"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <EditText
+                    android:id="@+id/edUni"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:maxLength="140"
+                    android:textDirection="anyRtl"
+                    android:textSize="?textSizeMedium" />
+
+                <TextView
+                    android:id="@+id/tvDegrees"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/committees_degree"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <Spinner
+                    android:id="@+id/spDegrees"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:hint="@string/committees_degree"
+                    android:textDirection="rtl"
+                    android:textSize="?textSizeMedium" />
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/committees_status"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <Spinner
+                    android:id="@+id/spStatus"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:hint="@string/committees_status"
+                    android:textDirection="rtl"
+                    android:textSize="?textSizeMedium" />
+
+                <TextView
+                    android:id="@+id/tvCommittees"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/committees_committee"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <com.neqabty.presentation.common.MultiSelectionSpinner
+                    android:id="@+id/spCommittees"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:hint="@string/committees_committee"
+                    android:spinnerMode="dialog"
+                    android:textDirection="rtl"
+                    android:textSize="?textSizeMedium" />
+
+                <TextView
+                    android:id="@+id/tvSections"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/committees_section"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <Spinner
+                    android:id="@+id/spSections"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:hint="@string/committees_section"
+                    android:textDirection="rtl"
+                    android:textSize="?textSizeMedium" />
+
+                <TextView
+                    android:id="@+id/tvSyndicates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/committees_syndicate"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <Spinner
+                    android:id="@+id/spSyndicates"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:hint="@string/committees_syndicate"
+                    android:textDirection="rtl"
+                    android:textSize="?textSizeMedium" />
+
+
+                <TextView
+                    android:id="@+id/tvAddPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@{Html.fromHtml(@string/committees_add_photos_0)}"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeLarge"
+                    android:textStyle="bold" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/ibAddPhoto_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginEnd="@dimen/margin_horizontal_normal"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_add"
+                        android:text="@string/update_data_add_photo"
+                        android:textColor="@android:color/white"
+                        android:textSize="?textSizeMedium"
+                        app:layout_constraintBottom_toBottomOf="@id/tvAddPhoto_1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvAddPhoto_1"
+                        app:layout_constraintTop_toTopOf="@id/tvAddPhoto_1" />
+
+                    <TextView
+                        android:id="@+id/tvAddPhoto_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_small"
+                        android:text="@string/committees_add_photos_1"
+                        android:textSize="?textSizeMedium"
+                        app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <ImageButton
+                        android:id="@+id/ibAddPhoto_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginEnd="@dimen/margin_horizontal_normal"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_add"
+                        android:text="@string/update_data_add_photo"
+                        android:textColor="@android:color/white"
+                        android:textSize="?textSizeMedium"
+                        app:layout_constraintBottom_toBottomOf="@id/tvAddPhoto_2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvAddPhoto_2"
+                        app:layout_constraintTop_toTopOf="@id/tvAddPhoto_2" />
+
+                    <TextView
+                        android:id="@+id/tvAddPhoto_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/committees_add_photos_2"
+                        android:textSize="?textSizeMedium"
+                        app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvAddPhoto_1" />
+
+
+                    <ImageButton
+                        android:id="@+id/ibAddPhoto_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/margin_horizontal_normal"
+                        android:layout_marginEnd="@dimen/margin_horizontal_normal"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_add"
+                        android:text="@string/update_data_add_photo"
+                        android:textColor="@android:color/white"
+                        android:textSize="?textSizeMedium"
+                        app:layout_constraintBottom_toBottomOf="@id/tvAddPhoto_3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvAddPhoto_3"
+                        app:layout_constraintTop_toTopOf="@id/tvAddPhoto_3" />
+
+                    <TextView
+                        android:id="@+id/tvAddPhoto_3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/committees_add_photos_3"
+                        android:textSize="?textSizeMedium"
+                        app:layout_constraintEnd_toStartOf="@id/ibAddPhoto_3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvAddPhoto_2" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Button
+                    android:id="@+id/bSend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_normal"
+                    android:background="@drawable/btn_blue"
+                    android:elevation="@dimen/elevation_level_one"
+                    android:gravity="center"
+                    android:text="@string/send"
+                    android:textColor="@android:color/white"
+                    android:textSize="?textSizeMedium" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -95,6 +95,27 @@ interface NeqabtyRepository {
             doc10: File?
     ): Observable<Unit>
 
+    fun getCommitteesLookups(): Observable<CommitteesLookupEntity>
+    fun sendCommitteesRequest(
+        name: String,
+        userNumber: String,
+        mobile: String,
+        nationalId: String,
+        address: String,
+        university: String,
+        degree: String,
+        maritalStatus: String,
+        committeesIds:  List<Int>,
+        sectionId: Int,
+        syndicateId: Int,
+        section: String,
+        currentJob: String,
+        details: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
+    ): Observable<String>
     fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>>
     fun getAllServices(typeID: Int): Observable<List<ServiceEntity>>
     fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity>

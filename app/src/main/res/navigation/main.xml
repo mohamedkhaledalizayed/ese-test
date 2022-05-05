@@ -158,6 +158,11 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
+            android:id="@+id/openCommittees"
+            app:destination="@id/committeesFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openComplaints"
             app:destination="@id/complaintsFragment"
             app:popUpTo="@id/homeFragment"
@@ -244,6 +249,11 @@
         <action
             android:id="@+id/openUpdateDataVerification"
             app:destination="@id/updateDataVerificationFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openCommittees"
+            app:destination="@id/committeesFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
@@ -781,6 +791,11 @@
             android:id="@+id/openPayment"
             app:destination="@id/paymentFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/committeesFragment"
+        android:name="com.neqabty.presentation.ui.committees.CommitteesFragment"
+        android:label="@string/committees_title"
+        tools:layout="@layout/committees_fragment" />
     <fragment
         android:id="@+id/complaintsFragment"
         android:name="com.neqabty.presentation.ui.complaint.ComplaintFragment"

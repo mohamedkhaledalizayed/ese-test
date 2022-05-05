@@ -129,6 +129,18 @@ interface WebService {
     @POST("api/v1/transactions/generate-hash")
     fun getTransactionHash(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
+    @GET("api/v1/committees/lookups")
+    fun getCommitteesLookups(): Observable<ApiResponse<CommitteesLookupData>>
+
+    @Multipart
+    @POST("api/v1/committees/register")
+    fun sendCommitteesRequest(
+        @Part("json_request") committeesRequest: CommitteesRequest,
+        @Part doc1: MultipartBody.Part?,
+        @Part doc2: MultipartBody.Part?,
+        @Part doc3: MultipartBody.Part?
+    ): Observable<ApiResponse<String>>
+
     @GET("api/v1/eseServicesTypes")
     fun getAllServiceTypes(): Observable<ApiResponse<List<ServiceTypeData>>>
 

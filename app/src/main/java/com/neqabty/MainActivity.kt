@@ -427,6 +427,17 @@ class MainActivity : AppCompatActivity() {
         })
         listDataHeader.add(paymentsItem)
 
+        val committeesItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.committees_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.committeesFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.COMMITTEES)
+                navController().navigate(R.id.committeesFragment, bundle)
+            }
+        })
+        listDataHeader.add(committeesItem)
+
         val engineeringRecordsItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.engineering_records_title, {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.engineeringRecordsDetailsFragment)

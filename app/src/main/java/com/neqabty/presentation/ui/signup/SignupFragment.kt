@@ -217,6 +217,10 @@ class SignupFragment : BaseFragment() {
             Constants.CHANGE_PASSWORD -> navController().navigate(
                     SignupFragmentDirections.openChangePassword(false, sharedPref.mobile)
             )
+
+            Constants.COMMITTEES -> navController().navigate(
+                SignupFragmentDirections.openCommittees()
+            )
         }
     }
 // endregion
