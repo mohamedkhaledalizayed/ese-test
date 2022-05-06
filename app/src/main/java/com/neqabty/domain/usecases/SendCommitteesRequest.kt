@@ -15,6 +15,7 @@ class SendCommitteesRequest @Inject constructor(
         private const val PARAM_NAME = "param:name"
         private const val PARAM_USER_NUMBER = "param:userNumber"
         private const val PARAM_MOBILE = "param:mobile"
+        private const val PARAM_EMAIL = "param:email"
         private const val PARAM_NATIONAL_ID = "param:nationalId"
         private const val PARAM_ADDRESS = "param:address"
         private const val PARAM_UNI = "param:university"
@@ -23,6 +24,7 @@ class SendCommitteesRequest @Inject constructor(
         private const val PARAM_COMMITTEES = "param:committeesIds"
         private const val PARAM_SECTION_ID = "param:sectionId"
         private const val PARAM_SYNDICATE_ID = "param:syndicateId"
+        private const val PARAM_DEPARTMENT = "param:department"
         private const val PARAM_SECTION = "param:section"
         private const val PARAM_JOB = "param:currentJob"
         private const val PARAM_DETAILS = "param:details"
@@ -38,6 +40,7 @@ class SendCommitteesRequest @Inject constructor(
         name: String,
         user_number: String,
         mobile: String,
+        email: String,
         nationalId: String,
         address: String,
         university: String,
@@ -46,6 +49,7 @@ class SendCommitteesRequest @Inject constructor(
         committeesIds: List<Int>,
         sectionId: Int,
         syndicateId: Int,
+        department: String,
         section: String,
         currentJob: String,
         details: String,
@@ -58,6 +62,7 @@ class SendCommitteesRequest @Inject constructor(
         data[PARAM_NAME] = name
         data[PARAM_USER_NUMBER] = user_number
         data[PARAM_MOBILE] = mobile
+        data[PARAM_EMAIL] = email
         data[PARAM_NATIONAL_ID] = nationalId
         data[PARAM_ADDRESS] = address
         data[PARAM_UNI] = university
@@ -66,6 +71,7 @@ class SendCommitteesRequest @Inject constructor(
         data[PARAM_COMMITTEES] = committeesIds
         data[PARAM_SECTION_ID] = sectionId
         data[PARAM_SYNDICATE_ID] = syndicateId
+        data[PARAM_DEPARTMENT] = department
         data[PARAM_SECTION] = section
         data[PARAM_JOB] = currentJob
         data[PARAM_DETAILS] = details
@@ -80,6 +86,7 @@ class SendCommitteesRequest @Inject constructor(
         val name = data?.get(PARAM_NAME) as String
         val userNumber = data?.get(PARAM_USER_NUMBER) as String
         val mobile = data?.get(PARAM_MOBILE) as String
+        val email = data?.get(PARAM_EMAIL) as String
         val nationalId = data?.get(PARAM_NATIONAL_ID) as String
         val address = data?.get(PARAM_ADDRESS) as String
         val university = data?.get(PARAM_UNI) as String
@@ -88,6 +95,7 @@ class SendCommitteesRequest @Inject constructor(
         val committeesIds = data?.get(PARAM_COMMITTEES) as List<Int>
         val sectionId = data?.get(PARAM_SECTION_ID) as Int
         val syndicateId = data?.get(PARAM_SYNDICATE_ID) as Int
+        val department = data?.get(PARAM_DEPARTMENT) as String
         val section = data?.get(PARAM_SECTION) as String
         val currentJob = data?.get(PARAM_JOB) as String
         val details = data?.get(PARAM_DETAILS) as String
@@ -95,6 +103,6 @@ class SendCommitteesRequest @Inject constructor(
         val doc1 = data?.get(PARAM_DOC1) as File?
         val doc2 = data?.get(PARAM_DOC2) as File?
         val doc3 = data?.get(PARAM_DOC3) as File?
-        return neqabtyRepository.sendCommitteesRequest(name, userNumber, mobile, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, section, currentJob, details, docsNumber, doc1, doc2, doc3)
+        return neqabtyRepository.sendCommitteesRequest(name, userNumber, mobile, email, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, department, section, currentJob, details, docsNumber, doc1, doc2, doc3)
     }
 }

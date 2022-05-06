@@ -264,6 +264,7 @@
     <string name="go_to_payment">تجديد الإشتراك</string>
     <string name="invalid_mobile">من فضلك ادخل رقم موبايل صحيح</string>
     <string name="invalid_national_id">من فضلك ادخل رقم قومي صحيح</string>
+    <string name="invalid_email">من فضلك ادخل بريد الكتروني صحيح</string>
     <string name="invalid_data">من فضلك أكمل ادخال البيانات</string>
     <string name="invalid_number">رقم العضوية غير صحيح</string>
     <string name="invalid_password">من فضلك ادخل كلمة المرور</string>
@@ -535,27 +536,27 @@
     <string name="complaint_body">موضوع الشكوى</string>
     <string name="complaint_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
 
-    <string name="committees_degree">الدرجة</string>
+    <string name="committees_degree">اخر مؤهل دراسي</string>
     <string name="committees_status">الحالة الإجتماعية</string>
-    <string name="committees_committee">اللجنة</string>
-    <string name="committees_section">الشعبة</string>
-    <string name="committees_syndicate">النقابة</string>
-    <string name="committees_hint">الانضمام الى لجان النقابة العامة للمهندسين
-للسادة المهندسين راغبي الانضمام الى العمل العام بنقابة المهندسين المصرية كأعضاء باللجان النقابية
-    </string>
+    <string name="committees_committee">اللجان المراد الانضام اليها</string>
+    <string name="committees_section">شعبة المهندس</string>
+    <string name="committees_syndicate">نقابة المهندس الفرعية</string>
+    <string name="committees_hint">الانضمام الى لجان النقابة العامة للمهندسين</string>
     <string name="committees_name">الإسم</string>
     <string name="committees_mobile">رقم الموبايل</string>
+    <string name="committees_email">البريد الالكتروني</string>
     <string name="committees_national_id">الرقم القومي</string>
-    <string name="committees_address">العنوان</string>
-    <string name="committees_job">الوظيفة</string>
-    <string name="committees_job_details">تفاصيل الوظيفة</string>
+    <string name="committees_address">محل الاقامة</string>
+    <string name="committees_job">العمل الحالي</string>
+    <string name="committees_job_details">مختصر عن السيرة الذاتية والعمل العام والنقابي والطلابي</string>
     <string name="committees_uni">الجامعة</string>
+    <string name="committees_department">القسم(التخصص)</string>
     <string name="committees_max_three">من فضلك اختر ثلاثة لجان بحد أقصى</string>
 
     <string name="committees_add_photos_0">
     <![CDATA[<font color="#1d1ad2"> برجاء رفع المرفقات التالية: </font>]]>
     </string>
-    <string name="committees_add_photos_1">∎ السيرة الذاتية</string>
+    <string name="committees_add_photos_1">∎ السيرة الذاتية PDF</string>
     <string name="committees_add_photos_2">∎ كارنيه العضوية</string>
     <string name="committees_add_photos_3">∎ الصورة الشخصية</string>
 

@@ -33,6 +33,7 @@ import com.neqabty.presentation.common.MultiSelectionSpinner
 import com.neqabty.presentation.common.SpinnerModel
 import com.neqabty.presentation.entities.CommitteesLookupUI
 import com.neqabty.presentation.entities.PhotoUI
+import com.neqabty.presentation.util.FileUtils
 import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,6 +53,7 @@ class CommitteesFragment : BaseFragment() {
 
 
     private val REQUEST_CAMERA = 0
+    private val REQUEST_PDF = 12
 
     private var PhotoFileName = ""
     lateinit var photoFileURI: Uri
@@ -109,7 +111,9 @@ class CommitteesFragment : BaseFragment() {
                 showPickPhotoAlert()
             } else if (!binding.edNationalID.text.toString().matches(Regex("(2|3)[0-9][0-9][0-1][0-9][0-3][0-9](01|02|03|04|05|11|12|13|14|15|16|17|18|19|21|22|23|24|25|26|27|28|29|31|32|33|34|35|88)\\d\\d\\d\\d\\d"))) {
                 showAlert(getString(R.string.invalid_national_id))
-            } else if (binding.edAddress.text.isBlank() || binding.edJob.text.isBlank() || binding.edJobDetails.text.isBlank() || binding.edUni.text.isBlank()){
+            } else if (!binding.edEmail.text.toString().matches(android.util.Patterns.EMAIL_ADDRESS.toRegex())) {
+                showAlert(getString(R.string.invalid_email))
+            } else if (binding.edAddress.text.isBlank() || binding.edJob.text.isBlank() || binding.edJobDetails.text.isBlank() || binding.edUni.text.isBlank() || binding.edDepartment.text.isBlank()){
                 showAlert(getString(R.string.invalid_data))
             } else if (committeeIDs.size > 3 || committeeIDs.isEmpty()){
                 showAlert(getString(R.string.committees_max_three))
@@ -119,6 +123,7 @@ class CommitteesFragment : BaseFragment() {
                     binding.edName.text.toString(),
                     sharedPref.user,
                     binding.edMobile.text.toString(),
+                    binding.edEmail.text.toString(),
                     binding.edNationalID.text.toString(),
                     binding.edAddress.text.toString(),
                     binding.edUni.text.toString(),
@@ -127,11 +132,12 @@ class CommitteesFragment : BaseFragment() {
                     committeeIDs,
                     sectionID,
                     syndicateID,
+                    binding.edDepartment.text.toString(),
                     binding.spSections.selectedItem.toString(),
                     binding.edJob.text.toString(),
                     binding.edJobDetails.text.toString(),
                     photosList.size,
-                    getPhoto(0),
+                    FileUtils.getFile(context, photosList.get(0).uri),
                     getPhoto(1),
                     getPhoto(2)
                 )
@@ -144,7 +150,12 @@ class CommitteesFragment : BaseFragment() {
 
         binding.ibAddPhoto1.setOnClickListener {
             selectedIndex = 0
-            addPhoto()
+
+            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MANAGE_EXTERNAL_STORAGE), REQUEST_PDF)
+            } else {
+                addPDF()
+            }
         }
         binding.ibAddPhoto2.setOnClickListener {
             selectedIndex = 1
@@ -165,6 +176,13 @@ class CommitteesFragment : BaseFragment() {
             binding.llHolder.visibility = if (state.isLoading) View.GONE else View.VISIBLE
             renderLookups(state.lookups!!)
         }
+    }
+
+    private fun addPDF() {
+        val pdfIntent = Intent(Intent.ACTION_GET_CONTENT)
+        pdfIntent.type = "application/pdf"
+        pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
+        startActivityForResult(pdfIntent, REQUEST_PDF)
     }
 
     private fun addPhoto() {
@@ -188,6 +206,8 @@ class CommitteesFragment : BaseFragment() {
                 onSelectFromGalleryResult(data!!)
             else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult()
+            else if (requestCode == REQUEST_PDF)
+                onPickPDFResult(data!!)
         }
     }
 
@@ -322,6 +342,17 @@ class CommitteesFragment : BaseFragment() {
         bos.write(bytes.toByteArray())
         bos.flush()
         bos.close()
+        updateIcons()
+    }
+
+    private fun onPickPDFResult(data: Intent){
+        val uri = data.data
+        val uriString = uri.toString()
+        val myFile = File(uriString)
+        val path = myFile.absolutePath
+
+        val photoUI = PhotoUI(myFile.absolutePath, myFile.name, uri)
+        addToPhotos(photoUI)
         updateIcons()
     }
 

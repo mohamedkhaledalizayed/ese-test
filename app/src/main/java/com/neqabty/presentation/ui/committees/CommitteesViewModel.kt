@@ -51,6 +51,7 @@ class CommitteesViewModel @Inject constructor(
         name: String,
         userNumber: String,
         mobile: String,
+        email: String,
         nationalId: String,
         address: String,
         university: String,
@@ -59,6 +60,7 @@ class CommitteesViewModel @Inject constructor(
         committeesIds: List<Int>,
         sectionId: Int,
         syndicateId: Int,
+        department: String,
         section: String,
         currentJob: String,
         details: String,
@@ -67,7 +69,7 @@ class CommitteesViewModel @Inject constructor(
         doc2: File?,
         doc3: File?) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(sendCommitteesRequest.sendCommitteesRequest(name, userNumber, mobile, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, section, currentJob, details, docsNumber, doc1, doc2, doc3)
+        addDisposable(sendCommitteesRequest.sendCommitteesRequest(name, userNumber, mobile, email, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, department, section, currentJob, details, docsNumber, doc1, doc2, doc3)
             .subscribe(
                 {
                     viewState.value = viewState.value?.copy(isLoading = false, message = it)

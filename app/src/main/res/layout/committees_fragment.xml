@@ -95,6 +95,23 @@
                     android:inputType="number"
                     android:textDirection="anyRtl"
                     android:textSize="?textSizeMedium" />
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/committees_email"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <EditText
+                    android:id="@+id/edEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:gravity="center"
+                    android:inputType="textEmailAddress"
+                    android:textDirection="anyRtl"
+                    android:textSize="?textSizeMedium" />
 
                 <TextView
                     android:id="@+id/tvNationalID"
@@ -176,7 +193,7 @@
                     android:layout_margin="@dimen/margin_horizontal_small"
                     android:gravity="center"
                     android:inputType="text"
-                    android:maxLength="140"
+                    android:maxLength="4000"
                     android:textDirection="anyRtl"
                     android:textSize="?textSizeMedium" />
 
@@ -192,6 +209,26 @@
 
                 <EditText
                     android:id="@+id/edUni"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:maxLength="140"
+                    android:textDirection="anyRtl"
+                    android:textSize="?textSizeMedium" />
+
+                <TextView
+                    android:id="@+id/tvDepartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_large"
+                    android:text="@string/committees_department"
+                    android:textColor="@color/text_dark"
+                    android:textSize="?textSizeMedium" />
+
+                <EditText
+                    android:id="@+id/edDepartment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_horizontal_small"
@@ -296,7 +333,6 @@
                     android:hint="@string/committees_syndicate"
                     android:textDirection="rtl"
                     android:textSize="?textSizeMedium" />
-
 
                 <TextView
                     android:id="@+id/tvAddPhoto"

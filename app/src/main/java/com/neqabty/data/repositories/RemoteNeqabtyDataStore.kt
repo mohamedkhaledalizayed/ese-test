@@ -364,6 +364,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         name: String,
         userNumber: String,
         mobile: String,
+        email: String,
         nationalId: String,
         address: String,
         university: String,
@@ -372,6 +373,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         committeesIds: List<Int>,
         sectionId: Int,
         syndicateId: Int,
+        department: String,
         section: String,
         currentJob: String,
         details: String,
@@ -398,7 +400,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
         }
 
-            return api.sendCommitteesRequest(CommitteesRequest(name, userNumber, mobile, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, section, currentJob, details, docsNumber), file1, file2, file3).map { result ->
+            return api.sendCommitteesRequest(CommitteesRequest(name, userNumber, mobile, email, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, department, section, currentJob, details, docsNumber), file1, file2, file3).map { result ->
             result.data ?: ""
         }
     }

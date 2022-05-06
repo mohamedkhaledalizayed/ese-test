@@ -91,8 +91,9 @@ interface NeqabtyDataStore {
     fun getCommitteesLookups(): Observable<CommitteesLookupEntity>
     fun sendCommitteesRequest(
         name: String,
-        user_number: String,
+        userNumber: String,
         mobile: String,
+        email: String,
         nationalId: String,
         address: String,
         university: String,
@@ -101,6 +102,7 @@ interface NeqabtyDataStore {
         committeesIds:  List<Int>,
         sectionId: Int,
         syndicateId: Int,
+        department: String,
         section: String,
         currentJob: String,
         details: String,

@@ -177,6 +177,7 @@ class NeqabtyRepositoryImpl @Inject constructor(
         name: String,
         userNumber: String,
         mobile: String,
+        email: String,
         nationalId: String,
         address: String,
         university: String,
@@ -185,6 +186,7 @@ class NeqabtyRepositoryImpl @Inject constructor(
         committeesIds: List<Int>,
         sectionId: Int,
         syndicateId: Int,
+        department: String,
         section: String,
         currentJob: String,
         details: String,
@@ -193,7 +195,7 @@ class NeqabtyRepositoryImpl @Inject constructor(
         doc2: File?,
         doc3: File?
     ): Observable<String> {
-        return remoteDataStore.sendCommitteesRequest(name, userNumber, mobile, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, section, currentJob, details, docsNumber, doc1, doc2, doc3)
+        return remoteDataStore.sendCommitteesRequest(name, userNumber, mobile, email, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, department, section, currentJob, details, docsNumber, doc1, doc2, doc3)
     }
 
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {

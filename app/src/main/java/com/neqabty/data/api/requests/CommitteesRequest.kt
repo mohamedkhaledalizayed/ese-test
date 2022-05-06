@@ -10,6 +10,8 @@ data class CommitteesRequest(
     var user_number: String = "",
     @SerializedName("mobile")
     var mobile: String = "",
+    @SerializedName("email")
+    var email: String = "",
     @SerializedName("national_id")
     var nationalId: String = "",
     @SerializedName("address")
@@ -26,6 +28,8 @@ data class CommitteesRequest(
     var sectionId: Int = 0,
     @SerializedName("syndicate_id")
     var syndicateId: Int = 0,
+    @SerializedName("department")
+    var department: String = "",
     @SerializedName("section")
     var section: String = "",
     @SerializedName("current_job")
