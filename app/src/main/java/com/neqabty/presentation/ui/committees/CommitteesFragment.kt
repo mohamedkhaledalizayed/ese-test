@@ -33,11 +33,11 @@ import com.neqabty.presentation.common.MultiSelectionSpinner
 import com.neqabty.presentation.common.SpinnerModel
 import com.neqabty.presentation.entities.CommitteesLookupUI
 import com.neqabty.presentation.entities.PhotoUI
-import com.neqabty.presentation.util.FileUtils
 import com.neqabty.presentation.util.ImageUtils
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.*
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -56,7 +56,9 @@ class CommitteesFragment : BaseFragment() {
     private val REQUEST_PDF = 12
 
     private var PhotoFileName = ""
+    private var PDFFileName = ""
     lateinit var photoFileURI: Uri
+    lateinit var pdfFileURI: Uri
     private var captureImage = false
 
     private var photosList: MutableList<PhotoUI> = mutableListOf<PhotoUI>()
@@ -137,7 +139,7 @@ class CommitteesFragment : BaseFragment() {
                     binding.edJob.text.toString(),
                     binding.edJobDetails.text.toString(),
                     photosList.size,
-                    FileUtils.getFile(context, photosList.get(0).uri),
+                    getPhoto(0),
                     getPhoto(1),
                     getPhoto(2)
                 )
@@ -179,10 +181,31 @@ class CommitteesFragment : BaseFragment() {
     }
 
     private fun addPDF() {
-        val pdfIntent = Intent(Intent.ACTION_GET_CONTENT)
-        pdfIntent.type = "application/pdf"
-        pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
-        startActivityForResult(pdfIntent, REQUEST_PDF)
+            val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(Date())
+            val storageDir: File = requireContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!
+            val file = File.createTempFile(
+                "PDF_${timeStamp}_", /* prefix */
+                ".pdf", /* suffix */
+                storageDir /* directory */
+            )
+
+        file?.also {
+            val pdfURI: Uri = FileProvider.getUriForFile(
+                requireContext(),
+                "com.neqabty.fileprovider",
+                it
+            )
+            PDFFileName = file.name
+            pdfFileURI = pdfURI
+        }
+
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "application/pdf"
+            putExtra(MediaStore.EXTRA_OUTPUT, pdfFileURI)
+        }
+
+        startActivityForResult(intent, REQUEST_PDF)
     }
 
     private fun addPhoto() {
@@ -346,13 +369,14 @@ class CommitteesFragment : BaseFragment() {
     }
 
     private fun onPickPDFResult(data: Intent){
-        val uri = data.data
-        val uriString = uri.toString()
-        val myFile = File(uriString)
-        val path = myFile.absolutePath
-
-        val photoUI = PhotoUI(myFile.absolutePath, myFile.name, uri)
+        val photoUI = PhotoUI(requireContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString(), PDFFileName, pdfFileURI)
         addToPhotos(photoUI)
+        val inputStream = requireContext().contentResolver.openInputStream(data.data!!)
+        inputStream.use { input ->
+            getPhoto(0)!!.outputStream().use { output ->
+                input!!.copyTo(output)
+            }
+        }
         updateIcons()
     }
 
