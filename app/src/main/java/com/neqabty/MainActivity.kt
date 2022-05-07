@@ -436,7 +436,6 @@ class MainActivity : AppCompatActivity() {
                 navController().navigate(R.id.committeesFragment, bundle)
             }
         })
-        listDataHeader.add(committeesItem)
 
         val engineeringRecordsItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.engineering_records_title, {
             if (sharedPref.isRegistered)
@@ -615,6 +614,10 @@ class MainActivity : AppCompatActivity() {
             it.appConfigUI?.let {
                 if(it.vezeetaConfig.status)
                     if(!medicalServicesList.contains(doctorsReservationItem)) medicalServicesList.add(doctorsReservationItem)
+                if(it.committeesStatus) {
+                    if (!listDataHeader.contains(committeesItem)) listDataHeader.add(4, committeesItem)
+                    mMenuAdapter.notifyDataSetChanged()
+                }
             }
         })
     }

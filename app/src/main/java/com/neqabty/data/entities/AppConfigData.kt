@@ -27,7 +27,9 @@ data class AppConfigData(
         @field:SerializedName("yodawy")
         var yodawyConfig: YodawyStatus,
         @field:SerializedName("vezeeta_doctors")
-        var vezeetaConfig: VezeetaStatus
+        var vezeetaConfig: VezeetaStatus,
+        @field:SerializedName("committees")
+        var committeesStatus: Boolean = false
 ) : Response() {
 
         data class ConfigStatus(

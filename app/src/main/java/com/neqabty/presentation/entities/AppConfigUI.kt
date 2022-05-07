@@ -13,7 +13,8 @@ data class AppConfigUI(
         var hasQuestionnaire: Boolean = false,
         var isSyndicatesListEnabled: Boolean = false,
         var yodawyConfig: YodawyStatus,
-        var vezeetaConfig: VezeetaStatus
+        var vezeetaConfig: VezeetaStatus,
+        var committeesStatus: Boolean
 ) {
 
         data class ConfigStatus(

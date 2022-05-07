@@ -74,6 +74,7 @@ class MainViewModel @Inject constructor(val login: Login,
                             Constants.isSyndicatesListEnabled.postValue(it.isSyndicatesListEnabled)
                             Constants.YODAWY_CONFIG.postValue(AppConfigUI.YodawyStatus(it.yodawyConfig.status, it.yodawyConfig.url, it.yodawyConfig.publicKey, it.yodawyConfig.totalAmount, it.yodawyConfig.deliverySentence))
                             Constants.VEZEETA_CONFIG.postValue(AppConfigUI.VezeetaStatus(it.vezeetaConfig.status, it.vezeetaConfig.url))
+                            Constants.isCommitteesEnabled.postValue(it.committeesStatus)
                             viewState.postValue(viewState.value?.copy(appConfigUI = appConfigEntityUIMapper.mapFrom(it)))
                             onConfigReceived()
                         },
