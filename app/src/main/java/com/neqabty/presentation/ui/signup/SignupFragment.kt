@@ -98,6 +98,10 @@ class SignupFragment : BaseFragment() {
             sharedPref.jwt = state?.user?.jwt
             sharedPref.user = state.user?.details!![0].userNumber!!
             sharedPref.name = state.user?.details!![0].name!!
+            sharedPref.userSection = state.user?.section!!
+            sharedPref.userSyndicate = state.user?.syndicate!!
+            sharedPref.userSectionID = state.user?.sectionID!!
+            sharedPref.userSyndicateID = state.user?.syndicateID!!
             sharedPref.isRegistered = true
             FirebaseMessaging.getInstance().subscribeToTopic(state.user?.section!!)
             FirebaseMessaging.getInstance().subscribeToTopic(state.user?.syndicate!!)

@@ -15,6 +15,8 @@ class UserEntityUIMapper @Inject constructor() : Mapper<UserEntity, UserUI>() {
                 type = from.type,
                 syndicate = from.syndicate,
                 section = from.section,
+                syndicateID = from.syndicateID,
+                sectionID = from.sectionID,
                 jwt = from.jwt,
                 details = from.details?.map {userDetails ->
                     return@map UserUI.UserDetails(userDetails.name, userDetails.userNumber)

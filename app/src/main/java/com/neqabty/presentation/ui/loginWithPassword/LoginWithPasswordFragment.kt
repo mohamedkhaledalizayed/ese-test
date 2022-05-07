@@ -96,6 +96,10 @@ class LoginWithPasswordFragment : BaseFragment(), HasHomeOptionsMenu {
 //                showTwoButtonsAlert(message = getString(R.string.welcome_with_name_login, it.details!![0].name!!)
             sharedPref.name = it.details!![0].name!!
             sharedPref.user = it.details!![0].userNumber!!
+            sharedPref.userSection = it.section!!
+            sharedPref.userSyndicate = it.syndicate!!
+            sharedPref.userSectionID = it.sectionID!!
+            sharedPref.userSyndicateID = it.syndicateID!!
             sharedPref.isRegistered = true
             FirebaseMessaging.getInstance().subscribeToTopic(it.section!!)
             FirebaseMessaging.getInstance().subscribeToTopic(it.syndicate!!)

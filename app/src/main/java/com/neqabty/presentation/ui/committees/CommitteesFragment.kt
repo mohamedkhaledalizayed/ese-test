@@ -68,8 +68,6 @@ class CommitteesFragment : BaseFragment() {
     var degree: String = ""
     var status: String = ""
     var committeeIDs: List<Int> = listOf()
-    var sectionID: Int = 0
-    var syndicateID: Int = 0
     var isSubmitted: Boolean = false
 
     override fun onCreateView(
@@ -132,10 +130,10 @@ class CommitteesFragment : BaseFragment() {
                     binding.spDegrees.selectedItem.toString(),
                     binding.spStatus.selectedItem.toString(),
                     committeeIDs,
-                    sectionID,
-                    syndicateID,
+                    sharedPref.userSectionID!!,
+                    sharedPref.userSyndicateID!!,
                     binding.edDepartment.text.toString(),
-                    binding.spSections.selectedItem.toString(),
+                    sharedPref.userSection!!,
                     binding.edJob.text.toString(),
                     binding.edJobDetails.text.toString(),
                     photosList.size,
@@ -244,8 +242,6 @@ class CommitteesFragment : BaseFragment() {
         renderDegrees(lookups.degreesList)
         renderStatus(lookups.maritalStatusList)
         renderCommittees(lookups.committeesList)
-        renderSections(lookups.sectionsList)
-        renderSyndicates(lookups.syndicatesList)
     }
 
     fun renderDegrees(degrees: List<String>) {
@@ -281,30 +277,6 @@ class CommitteesFragment : BaseFragment() {
         })
         binding.spCommittees.setSelection(0)
     }
-
-    fun renderSections(sections: List<CommitteesLookupUI.SectionItem>) {
-        binding.spSections.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, sections)
-        binding.spSections.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                sectionID = (parent.getItemAtPosition(position) as CommitteesLookupUI.SectionItem).id
-            }
-        }
-        binding.spSections.setSelection(0)
-    }
-
-    fun renderSyndicates(syndicates: List<CommitteesLookupUI.SyndicateItem>) {
-        binding.spSyndicates.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, syndicates)
-        binding.spSyndicates.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                syndicateID = (parent.getItemAtPosition(position) as CommitteesLookupUI.SyndicateItem).id
-            }
-        }
-        binding.spSyndicates.setSelection(0)
-    }
-
-
 
     private fun cameraIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->

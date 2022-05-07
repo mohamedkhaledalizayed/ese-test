@@ -297,44 +297,6 @@
                     android:textSize="?textSizeMedium" />
 
                 <TextView
-                    android:id="@+id/tvSections"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_large"
-                    android:text="@string/committees_section"
-                    android:textColor="@color/text_dark"
-                    android:textSize="?textSizeMedium" />
-
-                <Spinner
-                    android:id="@+id/spSections"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_horizontal_small"
-                    android:hint="@string/committees_section"
-                    android:textDirection="rtl"
-                    android:textSize="?textSizeMedium" />
-
-                <TextView
-                    android:id="@+id/tvSyndicates"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical_large"
-                    android:text="@string/committees_syndicate"
-                    android:textColor="@color/text_dark"
-                    android:textSize="?textSizeMedium" />
-
-                <Spinner
-                    android:id="@+id/spSyndicates"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_horizontal_small"
-                    android:hint="@string/committees_syndicate"
-                    android:textDirection="rtl"
-                    android:textSize="?textSizeMedium" />
-
-                <TextView
                     android:id="@+id/tvAddPhoto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

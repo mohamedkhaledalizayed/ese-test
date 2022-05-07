@@ -30,6 +30,10 @@ class PreferencesHelper @Inject constructor(
         private const val NOTIFICATION_COUNT = "data.source.prefs.NOTIFICATION_COUNT"
         private const val USER_TYPE = "data.source.prefs.USER_TYPE"
         private const val FONT_SIZE = "data.source.prefs.FONT_SIZE"
+        private const val USER_SYNDICATE = "data.source.prefs.USER_SYNDICATE"
+        private const val USER_SECTION = "data.source.prefs.USER_SECTION"
+        private const val USER_SYNDICATE_ID = "data.source.prefs.USER_SYNDICATE_ID"
+        private const val USER_SECTION_ID = "data.source.prefs.USER_SECTION_ID"
     }
 
     var isNotificationsEnabled
@@ -87,6 +91,22 @@ class PreferencesHelper @Inject constructor(
     var fontSize
         get() = preferences.getString(FONT_SIZE, "medium")
         set(value) = preferences.edit().putString(FONT_SIZE, value).apply()
+
+    var userSyndicate
+        get() = preferences.getString(USER_SYNDICATE, "")
+        set(value) = preferences.edit().putString(USER_SYNDICATE, value).apply()
+
+    var userSection
+        get() = preferences.getString(USER_SECTION, "")
+        set(value) = preferences.edit().putString(USER_SECTION, value).apply()
+
+    var userSyndicateID
+        get() = preferences.getInt(USER_SYNDICATE_ID, -1)
+        set(value) = preferences.edit().putInt(USER_SYNDICATE_ID, value).apply()
+
+    var userSectionID
+        get() = preferences.getInt(USER_SECTION_ID, -1)
+        set(value) = preferences.edit().putInt(USER_SECTION_ID, value).apply()
 
     fun isSyndicateChosen(): Boolean {
         return mainSyndicate != 0
