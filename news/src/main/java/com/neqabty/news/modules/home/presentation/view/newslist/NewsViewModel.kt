@@ -40,7 +40,7 @@ class NewsViewModel @Inject constructor(
         }
     }
 
-    fun getSyndicateNews(syndicateId: Int) {
+    fun getSyndicateNews(syndicateId: String) {
         news.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {

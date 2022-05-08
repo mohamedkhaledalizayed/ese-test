@@ -75,7 +75,7 @@ class HomeViewModel @Inject constructor(
     }
 
     val syndicatesNews = MutableLiveData<Resource<List<NewsEntity>>>()
-    fun getSyndicateNews(syndicateId: Int) {
+    fun getSyndicateNews(syndicateId: String) {
         syndicatesNews.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {

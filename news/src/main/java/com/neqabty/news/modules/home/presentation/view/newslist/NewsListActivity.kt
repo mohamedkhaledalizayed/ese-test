@@ -3,6 +3,7 @@ package com.neqabty.news.modules.home.presentation.view.newslist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -26,13 +27,14 @@ class NewsListActivity : BaseActivity<ActivityNewsListBinding>() {
         setContentView(binding.root)
 
 
-        if (intent.getIntExtra("id", -1) == -1 || intent.getIntExtra("type", -1) == 1){
+        if (intent.getStringExtra("id") == null || intent.getIntExtra("type", -1) == 1){
             setupToolbar( title = "الاخبار العامة")
             homeViewModel.getAllNews()
         }else{
             setupToolbar( title = "أخبار النقابة")
-            homeViewModel.getSyndicateNews(intent.getIntExtra("id", -1))
+            homeViewModel.getSyndicateNews("${intent.getStringExtra("id")}")
         }
+
         homeViewModel.news.observe(this){
 
             it?.let { resource ->

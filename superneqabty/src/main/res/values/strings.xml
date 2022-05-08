@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Neqabty</string>
     <string name="home_title">الرئيسية</string>
-    <string name="news_title">الأخبار العامة</string>
+    <string name="news_title">أخبار النقابة</string>
+    <string name="general_news">الاخبار العامة</string>
     <string name="payments_title">المدفوعات</string>
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>

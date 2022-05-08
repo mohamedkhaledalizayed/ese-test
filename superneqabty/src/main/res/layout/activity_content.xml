@@ -182,7 +182,7 @@
                     android:id="@+id/tv_news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/news_title"
+                    android:text="@string/general_news"
                     android:textColor="@color/black"
                     android:textSize="?textSizeLarge"
                     android:textStyle="bold" />

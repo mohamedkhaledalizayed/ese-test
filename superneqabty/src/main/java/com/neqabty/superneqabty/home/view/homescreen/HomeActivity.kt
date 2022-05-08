@@ -79,14 +79,14 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
         binding.contentActivity.tvNewsAll.setOnClickListener {
             val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
-            intent.putExtra("id", sharedPreferences.mainSyndicate)
+            intent.putExtra("id", sharedPreferences.code)
             intent.putExtra("type", Constants.GENERAL_NEWS)
             startActivity(intent)
         }
 
         binding.contentActivity.tvSyndicateNewsAll.setOnClickListener {
             val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
-            intent.putExtra("id", sharedPreferences.mainSyndicate)
+            intent.putExtra("id", sharedPreferences.code)
             intent.putExtra("type", Constants.SYNDICATE_NEWS)
             startActivity(intent)
         }
@@ -143,7 +143,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
 
         //Start of Syndicates News
-        homeViewModel.getSyndicateNews(sharedPreferences.mainSyndicate)
+        homeViewModel.getSyndicateNews("${sharedPreferences.code}")
         homeViewModel.syndicatesNews.observe(this) {
             it?.let { resource ->
                 when (resource.status) {
@@ -325,7 +325,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         when (item.itemId) {
             R.id.news -> {
                 val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
-                intent.putExtra("id", sharedPreferences.mainSyndicate)
+                intent.putExtra("id", sharedPreferences.code)
                 intent.putExtra("type", Constants.SYNDICATE_NEWS)
                 startActivity(intent)
             }

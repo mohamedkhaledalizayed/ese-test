@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
     fun getNews(): Flow<List<NewsEntity>>
-    fun getSyndicateNews(syndicateId:Int): Flow<List<NewsEntity>>
+    fun getSyndicateNews(syndicateId:String): Flow<List<NewsEntity>>
 }

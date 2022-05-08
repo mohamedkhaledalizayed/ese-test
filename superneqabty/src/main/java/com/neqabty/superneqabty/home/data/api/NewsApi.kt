@@ -10,7 +10,7 @@ interface NewsApi {
     suspend fun getNews(): NewsResponse
 
     @GET("api/news")
-    suspend fun getSyndicateNews(@Query("filter{author}") syndicateId: Int): NewsResponse
+    suspend fun getSyndicateNews(@Query("filter{author.entity_code}") syndicateId: String): NewsResponse
 
     @GET("api/news/{newsId}")
     suspend fun getNewsDetails(@Path("newsId") newsId: Int): NewsResponse

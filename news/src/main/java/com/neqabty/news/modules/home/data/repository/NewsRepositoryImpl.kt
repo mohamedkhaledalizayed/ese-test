@@ -15,7 +15,7 @@ class NewsRepositoryImpl @Inject constructor(private val newsDS: NewsDS) : NewsR
         }
     }
 
-    override fun getSyndicateNews(syndicateId: Int): Flow<List<NewsEntity>> {
+    override fun getSyndicateNews(syndicateId: String): Flow<List<NewsEntity>> {
         return flow {
             emit(newsDS.getSyndicateNews(syndicateId).map { it.toNewsEntity() })
         }

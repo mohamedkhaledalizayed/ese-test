@@ -5,16 +5,12 @@ import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import com.neqabty.superneqabty.R
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Constants
@@ -22,14 +18,10 @@ import com.neqabty.superneqabty.databinding.ActivityPaymentDetailsBinding
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBodyObject
 import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
-import com.neqabty.superneqabty.paymentdetails.data.model.paymentmethods.PaymentMethod
 import dagger.hilt.android.AndroidEntryPoint
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
-import team.opay.business.cashier.sdk.api.PayInput
-import team.opay.business.cashier.sdk.api.PaymentStatus
-import team.opay.business.cashier.sdk.api.Status
-import team.opay.business.cashier.sdk.api.WebJsResponse
+import team.opay.business.cashier.sdk.api.*
 import team.opay.business.cashier.sdk.pay.PaymentTask
 
 
@@ -325,6 +317,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
     }
 
     fun oPayPayment(paymentResponse: PaymentResponse, isCredit: Boolean) {
+        publicKey = paymentResponse.mobilePaymentPayload.publickey
+        merchantId = paymentResponse.mobilePaymentPayload.merchantId
+        referenceCode = paymentResponse.mobilePaymentPayload.reference
         val paymentType = if(isCredit) "BankCard" else "ReferenceCode"
         PaymentTask.sandBox = Constants.OPAY_MODE
         val payInput = PayInput(
@@ -356,6 +351,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         })
     }
 
+    var publicKey = ""
+    var merchantId = ""
+    var referenceCode = ""
     private fun handlePaymentResponse(response: WebJsResponse?) {
         when (response?.orderStatus) {
             PaymentStatus.INITIAL -> {
@@ -368,13 +366,49 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                     }
             }
             PaymentStatus.SUCCESS -> {
+                Log.e("orderStatus","${response.orderStatus}")
+                Log.e("eventName","${response.eventName}")
+                Log.e("orderNo","${response.orderNo}")
+                Log.e("referenceCode","${response.referenceCode}")
+                Log.e("merchantId","${response.merchantId}")
+
+
+
+                Log.e("publicKey","$publicKey")
+                Log.e("merchantId","$merchantId")
+                Log.e("referenceCode","$referenceCode")
+
+                val input = CashierStatusInput(
+                    privateKey = publicKey,
+                    merchantId = merchantId,
+                    reference = referenceCode,
+                    countryCode = "EG"
+                )
+
+
+                PaymentTask(this).getCashierStatus(input, callback = { status, response ->
+                    when (status) {
+                        Status.SUCCESS -> {
+                            val data = response.data as OrderInfo
+                            Log.e("amount", "${data.amount}")
+                            // data
+                        }
+                        Status.ERROR -> {
+                            Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                        }
+                    }
+                })
+
                 showAlert(
                     if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(
                         R.string.payment_successful
                     ) + response.orderNo
                     else getString(R.string.payment_reference) + response.referenceCode
                 ) {
-                    finish()
+
+//                    finish()
 //                    navController().popBackStack()
 //                    navController().navigate(R.id.homeFragment)
                 }
