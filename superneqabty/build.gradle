@@ -124,7 +124,7 @@ dependencies {
     implementation project(':signup')
     implementation project(':news')
 
-    implementation(name: 'cashier-sdk-1.0.6', ext: 'aar')
+    implementation(name: 'cashier-sdk-1.0.8', ext: 'aar')
     implementation(name: 'cowpaysdk', ext: 'aar')
 
     implementation 'com.valify:ValifyEKYC:2.2.0'
