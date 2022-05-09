@@ -552,6 +552,7 @@
     <string name="committees_uni">الجامعة</string>
     <string name="committees_department">القسم(التخصص)</string>
     <string name="committees_max_three">من فضلك اختر ثلاثة لجان بحد أقصى</string>
+    <string name="committees_attach_photos">من فضلك أرفق الصورة الشخصية</string>
 
     <string name="committees_add_photos_0">
     <![CDATA[<font color="#1d1ad2"> برجاء رفع المرفقات التالية: </font>]]>

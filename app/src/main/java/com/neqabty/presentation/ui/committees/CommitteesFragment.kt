@@ -107,7 +107,7 @@ class CommitteesFragment : BaseFragment() {
         binding.edName.setText(sharedPref.name)
         binding.edMobile.setText(sharedPref.mobile)
         binding.bSend.setOnClickListener {
-            if (photosList[0].name == null || photosList[1].name == null || photosList[2].name == null) {
+            if (photosList[2].name == null) {
                 showPickPhotoAlert()
             } else if (!binding.edNationalID.text.toString().matches(Regex("(2|3)[0-9][0-9][0-1][0-9][0-3][0-9](01|02|03|04|05|11|12|13|14|15|16|17|18|19|21|22|23|24|25|26|27|28|29|31|32|33|34|35|88)\\d\\d\\d\\d\\d"))) {
                 showAlert(getString(R.string.invalid_national_id))
@@ -379,7 +379,13 @@ class CommitteesFragment : BaseFragment() {
     fun getPhoto(index: Int): File? {
         if (photosList.size > index) {
             var photoUI: PhotoUI? = photosList.get(index)
-            photoUI?.let { return File(photoUI.path, photoUI.name) } ?: null
+            photoUI?.let {
+                return try {
+                    File(photoUI.path, photoUI.name)
+                } catch (e: Exception) {
+                    null
+                }
+            }
         }
         return null
     }
@@ -400,7 +406,7 @@ class CommitteesFragment : BaseFragment() {
     private fun showPickPhotoAlert() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.alert_title))
-        builder.setMessage(getString(R.string.pick_photos))
+        builder.setMessage(getString(R.string.committees_attach_photos))
         builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
             dialog.dismiss()
         }
