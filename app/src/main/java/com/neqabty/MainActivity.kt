@@ -433,7 +433,7 @@ class MainActivity : AppCompatActivity() {
             else {
                 val bundle: Bundle = Bundle()
                 bundle.putInt("type", Constants.COMMITTEES)
-                navController().navigate(R.id.committeesFragment, bundle)
+                navController().navigate(R.id.signupFragment, bundle)
             }
         })
 
