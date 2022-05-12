@@ -8,6 +8,7 @@ import com.neqabty.superneqabty.core.utils.Resource
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
 import com.neqabty.superneqabty.paymentdetails.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
+import com.neqabty.superneqabty.paymentdetails.data.model.paymentdetails.PaymentDetails
 import com.neqabty.superneqabty.paymentdetails.data.model.paymentmethods.PaymentMethodsResponse
 import com.neqabty.superneqabty.paymentdetails.domain.interactors.GetPaymentDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -58,6 +59,20 @@ class PaymentDetailsViewModel @Inject constructor(private val getPaymentDetailsU
                 }
             }catch (exception:Throwable){
                 paymentMethods.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+            }
+        }
+    }
+
+    val paymentDetails = MutableLiveData<Resource<PaymentDetails>>()
+    fun getPaymentDetails(referenceCode: String) {
+        paymentDetails.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                getPaymentDetailsUseCase.build(referenceCode).collect {
+                    paymentDetails.postValue(Resource.success(data = it))
+                }
+            }catch (exception:Throwable){
+                paymentDetails.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.neqabty.superneqabty.paymentdetails.view
+package com.neqabty.superneqabty.paymentdetails.view.paymentdetails
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

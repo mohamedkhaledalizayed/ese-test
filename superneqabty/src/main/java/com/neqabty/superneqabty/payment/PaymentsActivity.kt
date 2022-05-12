@@ -11,7 +11,8 @@ import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivit
 import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Status
 import com.neqabty.superneqabty.databinding.ActivityPaymentsBinding
-import com.neqabty.superneqabty.paymentdetails.view.PaymentDetailsActivity
+import com.neqabty.superneqabty.paymentdetails.view.paymentdetails.PaymentDetailsActivity
+import com.neqabty.superneqabty.paymentdetails.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.superneqabty.syndicates.domain.entity.ServiceEntity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +28,9 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        val intent = Intent(this, PaymentStatusActivity::class.java)
+        intent.putExtra("referenceCode", "76fc1e7a-89ee-46e5-b1d7-64acd4a97d49")
+        startActivity(intent)
         setupToolbar(titleResId = R.string.payments)
         paymentViewModel.getSyndicates()
         paymentViewModel.syndicates.observe(this) {

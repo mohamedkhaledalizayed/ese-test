@@ -4,6 +4,7 @@ package com.neqabty.superneqabty.paymentdetails.domain.interactors
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
 import com.neqabty.superneqabty.paymentdetails.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
+import com.neqabty.superneqabty.paymentdetails.data.model.paymentdetails.PaymentDetails
 import com.neqabty.superneqabty.paymentdetails.data.model.paymentmethods.PaymentMethodsResponse
 import com.neqabty.superneqabty.paymentdetails.domain.repository.PaymentRepository
 import kotlinx.coroutines.flow.Flow
@@ -20,5 +21,9 @@ class GetPaymentDetailsUseCase @Inject constructor(private val repository: Payme
 
     fun build(): Flow<PaymentMethodsResponse> {
         return repository.getPaymentMethods()
+    }
+
+    fun build(referenceCode: String): Flow<PaymentDetails> {
+        return repository.getPaymentDetails(referenceCode)
     }
 }

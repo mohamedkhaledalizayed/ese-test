@@ -4,6 +4,7 @@ import com.neqabty.superneqabty.paymentdetails.data.api.PaymentApi
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
 import com.neqabty.superneqabty.paymentdetails.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
+import com.neqabty.superneqabty.paymentdetails.data.model.paymentdetails.PaymentDetails
 import com.neqabty.superneqabty.paymentdetails.data.model.paymentmethods.PaymentMethodsResponse
 import javax.inject.Inject
 
@@ -19,6 +20,10 @@ class PaymentDS @Inject constructor(private val paymentApi: PaymentApi) {
 
     suspend fun getPaymentMethods(): PaymentMethodsResponse {
         return paymentApi.getPaymentMethods()
+    }
+
+    suspend fun getPaymentDetails(referenceCode: String): PaymentDetails {
+        return paymentApi.getPaymentDetails(referenceCode)
     }
 
 }

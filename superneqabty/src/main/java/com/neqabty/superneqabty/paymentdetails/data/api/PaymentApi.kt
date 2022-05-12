@@ -3,6 +3,7 @@ package com.neqabty.superneqabty.paymentdetails.data.api
 import com.neqabty.superneqabty.paymentdetails.data.model.PaymentBody
 import com.neqabty.superneqabty.paymentdetails.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.superneqabty.paymentdetails.data.model.payment.PaymentResponse
+import com.neqabty.superneqabty.paymentdetails.data.model.paymentdetails.PaymentDetails
 import com.neqabty.superneqabty.paymentdetails.data.model.paymentmethods.PaymentMethodsResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -19,5 +20,8 @@ interface PaymentApi {
 
     @GET("api/payment_methods")
     suspend fun getPaymentMethods(): PaymentMethodsResponse
+
+    @GET("api/transactions/get/{transaction_id}")
+    suspend fun getPaymentDetails(@Path("transaction_id") transaction_id: String): PaymentDetails
 
 }
