@@ -518,6 +518,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetProfile(neqabtyRepository: NeqabtyRepository): GetProfile {
+        return GetProfile(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun providePaymentInquiry(neqabtyRepository: NeqabtyRepository): PaymentInquiry {
         return PaymentInquiry(ASyncTransformer(), neqabtyRepository)
     }

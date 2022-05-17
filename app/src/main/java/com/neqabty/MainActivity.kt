@@ -427,6 +427,17 @@ class MainActivity : AppCompatActivity() {
         })
         listDataHeader.add(paymentsItem)
 
+        val profileItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.profile_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.profileFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.PROFILE)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        listDataHeader.add(profileItem)
+
         val committeesItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.committees_title, {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.committeesFragment)

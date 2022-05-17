@@ -157,6 +157,10 @@ class ActivateAccountFragment : BaseFragment() {
                         ActivateAccountFragmentDirections.openChangePassword(false, sharedPref.mobile)
                 )
 
+                Constants.PROFILE -> navController().navigate(
+                    ActivateAccountFragmentDirections.openProfile()
+                )
+
                 Constants.COMMITTEES -> navController().navigate(
                     ActivateAccountFragmentDirections.openCommittees()
                 )

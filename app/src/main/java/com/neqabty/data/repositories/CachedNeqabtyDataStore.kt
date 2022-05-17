@@ -58,6 +58,10 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("Not yet implemented")
     }
 
+    override fun getProfile(mobile: String, userNumber: String): Observable<ProfileEntity> {
+        TODO("Not yet implemented")
+    }
+
     override fun createComplaint(
             name: String,
             phone: String,

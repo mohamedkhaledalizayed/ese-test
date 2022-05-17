@@ -405,6 +405,14 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    private val profileDataEntityMapper = ProfileDataEntityMapper()
+
+    override fun getProfile(mobile: String, userNumber: String): Observable<ProfileEntity> {
+        return api.getProfile(ProfileRequest(mobile, userNumber)).map { profile ->
+            profileDataEntityMapper.mapFrom(profile.data!!)
+        }
+    }
+
     private val serviceDataEntityMapper = ServiceDataEntityMapper()
 
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {

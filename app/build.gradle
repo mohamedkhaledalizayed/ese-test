@@ -154,6 +154,9 @@ android {
             option("-Xmaxerrs", 500)
         }
     }
+    configurations {
+        all*.exclude module: 'androidsvg' // This removes all other versions of `support-v4` if gets duplicated from all the artifacts.
+    }
 }
 
 jacoco {
@@ -161,6 +164,9 @@ jacoco {
 }
 
 dependencies {
+
+    implementation 'com.caverock:androidsvg-aar:1.4'
+
     implementation deps.support.app_compat
     implementation deps.support.recyclerview
     implementation deps.support.cardview

@@ -198,6 +198,10 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.sendCommitteesRequest(name, userNumber, mobile, email, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, department, section, currentJob, details, docsNumber, doc1, doc2, doc3)
     }
 
+    override fun getProfile(mobile: String, userNumber: String): Observable<ProfileEntity> {
+        return remoteDataStore.getProfile(mobile, userNumber)
+    }
+
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {
         return remoteDataStore.getAllServices(typeID)
     }

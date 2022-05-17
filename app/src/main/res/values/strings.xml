@@ -198,6 +198,7 @@
     <string name="claiming_title">الموافقات الطبية</string>
     <string name="medical_title">الدليل الطبي</string>
     <string name="inquiry_title">المدفوعات</string>
+    <string name="profile_title">هويتك الإلكترونية</string>
     <string name="committees_title">اللجان</string>
     <string name="engineering_records_title">تجديد سجل هندسي</string>
     <string name="update_data_title">تحديث البيانات</string>
@@ -535,6 +536,13 @@
     <string name="complaint_mobile">هاتف مقدم الشكوى</string>
     <string name="complaint_body">موضوع الشكوى</string>
     <string name="complaint_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
+
+    <string name="club_invitations">التذاكر المتاحة</string>
+    <string name="mobile">رقم الموبايل</string>
+    <string name="member_number">رقم العضوية</string>
+    <string name="subsyndicate">النقابة الفرعية</string>
+    <string name="section">الشعبة</string>
+
 
     <string name="committees_degree">اخر مؤهل دراسي</string>
     <string name="committees_status">الحالة الإجتماعية</string>

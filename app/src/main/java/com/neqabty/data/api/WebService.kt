@@ -141,6 +141,9 @@ interface WebService {
         @Part doc3: MultipartBody.Part?
     ): Observable<ApiResponse<String>>
 
+    @POST("api/v1/club/profile")
+    fun getProfile(@Body profileRequest: ProfileRequest): Observable<ApiResponse<ProfileData>>
+
     @GET("api/v1/eseServicesTypes")
     fun getAllServiceTypes(): Observable<ApiResponse<List<ServiceTypeData>>>
 
