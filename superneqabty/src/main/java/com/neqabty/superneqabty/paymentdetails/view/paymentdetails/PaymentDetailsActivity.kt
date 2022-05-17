@@ -195,12 +195,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         }
 
         binding.btnNext.setOnClickListener{
-//            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-//                oPayPayment(true)
-//            else if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-//                oPayPayment(false)
-//            else
-//                cowPayPayment(false)
             binding.btnNext.isEnabled = false
             paymentDetailsViewModel.getPaymentInfo(PaymentBody(PaymentBodyObject(serviceCode = serviceCode, paymentMethod = paymentMethod, amount = totalAmount, itemId = number.toInt(), service_features = listOfFeatures)))
         }
@@ -366,11 +360,17 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             }
             PaymentStatus.SUCCESS -> {
 
-                Log.e("referenceCode",referenceCode )
-                val intent = Intent(this, PaymentStatusActivity::class.java)
-                intent.putExtra("referenceCode", referenceCode)
-                startActivity(intent)
-                finish()
+                if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card){
+                    val intent = Intent(this, PaymentStatusActivity::class.java)
+                    intent.putExtra("referenceCode", referenceCode)
+                    startActivity(intent)
+                    finish()
+                }else{
+                    showAlert(getString(R.string.payment_reference) + response.referenceCode) {
+                        finish()
+                    }
+                }
+
                 //TODO  Ask Mona About This
 //                showAlert(
 //                    if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(

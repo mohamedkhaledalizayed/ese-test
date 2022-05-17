@@ -28,9 +28,9 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val intent = Intent(this, PaymentStatusActivity::class.java)
-        intent.putExtra("referenceCode", "76fc1e7a-89ee-46e5-b1d7-64acd4a97d49")
-        startActivity(intent)
+//        val intent = Intent(this, PaymentStatusActivity::class.java)
+//        intent.putExtra("referenceCode", "76fc1e7a-89ee-46e5-b1d7-64acd4a97d49")
+//        startActivity(intent)
         setupToolbar(titleResId = R.string.payments)
         paymentViewModel.getSyndicates()
         paymentViewModel.syndicates.observe(this) {

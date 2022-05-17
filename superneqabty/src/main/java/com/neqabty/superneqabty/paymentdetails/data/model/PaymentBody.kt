@@ -16,7 +16,7 @@ class PaymentBodyObject(
     val paymentSource: String = "android",
     @SerializedName("amount")
     val amount: String = "",
-    @SerializedName("item_id")
+    @SerializedName("membership_id")
     val itemId: Int = 0,
     @SerializedName("service_features")
     val service_features: ArrayList<Int> = ArrayList()
