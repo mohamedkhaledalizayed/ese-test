@@ -7,4 +7,5 @@ data class SignupParams(
     val membershipId: String = "",
     val mobile: String = "",
     val last4_national_id: String = "",
+    val email: String = "",
 )

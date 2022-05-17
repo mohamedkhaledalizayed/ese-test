@@ -73,11 +73,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             return
         }
 
-//        if (!binding.nationalId.text.toString().isNationalIdValid()){
-//            Toast.makeText(this, "من فضلك ادخل الرقم القومى صحيح", Toast.LENGTH_LONG).show()
-//            return
-//        }
-
         if (binding.phone.text.toString().isEmpty()){
             Toast.makeText(this, "من فضلك ادخل رقم الموبايل", Toast.LENGTH_LONG).show()
             return
@@ -88,12 +83,18 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             return
         }
 
+        if (binding.email.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, "من فضلك ادخل البريد الالكترونى", Toast.LENGTH_LONG).show()
+            return
+        }
+
         signupViewModel.signup(
             SignupParams(
                 entityCode = intent.getStringExtra("code")!!,
                 membershipId = binding.membershipId.text.toString(),
                 mobile = binding.phone.text.toString(),
-                last4_national_id = binding.nationalId.text.toString()
+                last4_national_id = binding.nationalId.text.toString(),
+                email = binding.email.text.toString()
             )
         )
     }

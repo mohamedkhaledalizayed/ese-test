@@ -4,4 +4,5 @@
     <string name="membership_id">رقم العضوية</string>
     <string name="national_id">اخر 4 ارقام من الرقم القومى</string>
     <string name="phone">الموبايل</string>
+    <string name="email">البريد الالكترونى</string>
 </resources>
