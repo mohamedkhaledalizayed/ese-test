@@ -164,9 +164,6 @@ jacoco {
 }
 
 dependencies {
-
-    implementation 'com.caverock:androidsvg-aar:1.4'
-
     implementation deps.support.app_compat
     implementation deps.support.recyclerview
     implementation deps.support.cardview
@@ -219,6 +216,8 @@ dependencies {
     // Activity KTX for viewModels()
     implementation deps.activity_ktx
     implementation deps.fragment_ktx
+
+    implementation deps.androidsvg
 
     implementation deps.mastercard
     implementation(name: 'cashier-sdk-1.0.8', ext: 'aar')
