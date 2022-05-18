@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             android:src="@drawable/ic_location_small"
+            android:layout_marginTop="@dimen/margin_horizontal_small"
             app:layout_constraintTop_toTopOf="@id/tvAddress"/>
 
         <TextView
@@ -71,7 +72,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/margin_horizontal_small"
             android:background="@color/grey"
-            app:layout_constraintTop_toBottomOf="@id/tvAddress" />
+            app:layout_constraintTop_toBottomOf="@id/tvPhone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
