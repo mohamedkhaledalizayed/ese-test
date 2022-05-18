@@ -85,9 +85,9 @@
                     style="@style/Base.Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
                     android:hint="@string/serviceProvider"
                     android:textDirection="rtl"
+                    android:spinnerMode="dialog"
                     android:textSize="?textSizeMedium" />
 
                 <LinearLayout
