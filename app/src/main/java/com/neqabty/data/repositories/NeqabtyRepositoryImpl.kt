@@ -169,6 +169,10 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getTripDetails(id)
     }
 
+    override fun getPaymentHistory(userNumber: String): Observable<List<PaymentHistoryEntity>> {
+        return remoteDataStore.getPaymentHistory(userNumber)
+    }
+
     override fun getCommitteesLookups(): Observable<CommitteesLookupEntity> {
         return  remoteDataStore.getCommitteesLookups()
     }

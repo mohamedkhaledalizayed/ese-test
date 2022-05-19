@@ -29,6 +29,10 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun getPaymentHistory(userNumber: String): Observable<List<PaymentHistoryEntity>> {
+        TODO("Not yet implemented")
+    }
+
     override fun getCommitteesLookups(): Observable<CommitteesLookupEntity> {
         TODO("Not yet implemented")
     }

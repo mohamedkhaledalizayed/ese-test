@@ -427,6 +427,17 @@ class MainActivity : AppCompatActivity() {
         })
         listDataHeader.add(paymentsItem)
 
+        val paymentsHistoryItem = NavigationMenuItem(R.drawable.ic_menu_payments, R.string.payments_history_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.paymentsHistoryFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.PAYMENTS_HISTORY)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        listDataHeader.add(paymentsHistoryItem)
+
         val committeesItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.committees_title, {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.committeesFragment)
@@ -615,7 +626,7 @@ class MainActivity : AppCompatActivity() {
                 if(it.vezeetaConfig.status)
                     if(!medicalServicesList.contains(doctorsReservationItem)) medicalServicesList.add(doctorsReservationItem)
                 if(it.committeesStatus) {
-                    if (!listDataHeader.contains(committeesItem)) listDataHeader.add(4, committeesItem)
+                    if (!listDataHeader.contains(committeesItem)) listDataHeader.add(5, committeesItem)
                     mMenuAdapter.notifyDataSetChanged()
                 }
             }

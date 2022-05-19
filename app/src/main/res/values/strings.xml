@@ -199,6 +199,7 @@
     <string name="medical_title">الدليل الطبي</string>
     <string name="inquiry_title">المدفوعات</string>
     <string name="committees_title">اللجان</string>
+    <string name="payments_history_title">سجل المدفوعات</string>
     <string name="engineering_records_title">تجديد سجل هندسي</string>
     <string name="update_data_title">تحديث البيانات</string>
     <string name="complaints_title">خدمة العملاء والشكاوى</string>
@@ -560,6 +561,13 @@
     <string name="committees_add_photos_1">∎ السيرة الذاتية PDF</string>
     <string name="committees_add_photos_2">∎ كارنيه العضوية</string>
     <string name="committees_add_photos_3">∎ الصورة الشخصية</string>
+
+
+    <string name="reference"> رقم العملية </string>
+    <string name="code">كود الدفع </string>
+    <string name="amount">المبلغ </string>
+    <string name="gateway">طريقة الدفع </string>
+    <string name="status">الحالة </string>
 
     <string name="questionnaire_title">استطلاع رأي</string>
     <string name="answer_questionnaire">للمشاركة في استطلاع الرأي قم بالضغط على الرسالة</string>

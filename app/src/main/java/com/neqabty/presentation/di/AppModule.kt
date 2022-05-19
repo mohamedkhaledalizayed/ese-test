@@ -506,6 +506,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetPaymentHistory(neqabtyRepository: NeqabtyRepository): GetPaymentHistory {
+        return GetPaymentHistory(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetCommitteesLookups(neqabtyRepository: NeqabtyRepository): GetCommitteesLookups {
         return GetCommitteesLookups(ASyncTransformer(), neqabtyRepository)
     }

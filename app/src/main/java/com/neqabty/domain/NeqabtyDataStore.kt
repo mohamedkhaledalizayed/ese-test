@@ -88,6 +88,7 @@ interface NeqabtyDataStore {
             doc10: File?
     ): Observable<Unit>
 
+    fun getPaymentHistory(userNumber: String): Observable<List<PaymentHistoryEntity>>
     fun getCommitteesLookups(): Observable<CommitteesLookupEntity>
     fun sendCommitteesRequest(
         name: String,

@@ -160,6 +160,10 @@ class ActivateAccountFragment : BaseFragment() {
                 Constants.COMMITTEES -> navController().navigate(
                     ActivateAccountFragmentDirections.openCommittees()
                 )
+
+                Constants.PAYMENTS_HISTORY -> navController().navigate(
+                    ActivateAccountFragmentDirections.openPaymentsHistory()
+                )
             }
         }
     }

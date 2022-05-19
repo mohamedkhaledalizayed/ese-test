@@ -129,6 +129,9 @@ interface WebService {
     @POST("api/v1/transactions/generate-hash")
     fun getTransactionHash(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
+    @POST("api/v1/user/payment-history")
+    fun getPaymentsHistory(@Body paymentsHistoryRequest: PaymentsHistoryRequest): Observable<ApiResponse<List<PaymentHistoryData>>>
+
     @GET("api/v1/committees/lookups")
     fun getCommitteesLookups(): Observable<ApiResponse<CommitteesLookupData>>
 

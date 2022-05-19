@@ -352,6 +352,14 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    private val paymentHistoryDataEntityMapper = PaymentHistoryDataEntityMapper()
+
+    override fun getPaymentHistory(userNumber: String): Observable<List<PaymentHistoryEntity>> {
+        return api.getPaymentsHistory(PaymentsHistoryRequest(userNumber)).map { result ->
+            result.data!!.map { paymentHistoryDataEntityMapper.mapFrom(it) }
+        }
+    }
+
     private val committeesLookupsDataEntityMapper = CommitteesLookupsDataEntityMapper()
 
     override fun getCommitteesLookups(): Observable<CommitteesLookupEntity> {
