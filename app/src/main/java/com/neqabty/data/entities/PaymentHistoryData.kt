@@ -11,6 +11,10 @@ data class PaymentHistoryData(
     var amount: String,
     @field:SerializedName("status")
     var status: String,
+    @field:SerializedName("product")
+    var product: String?,
     @field:SerializedName("getway")
-    var gateway: String
+    var gateway: String,
+    @field:SerializedName("created_at")
+    var createdAt: String
 )

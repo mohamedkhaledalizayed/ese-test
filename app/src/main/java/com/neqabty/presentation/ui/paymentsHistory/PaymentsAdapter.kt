@@ -1,6 +1,8 @@
 package com.neqabty.presentation.ui.paymentsHistory
 
+import android.text.Html
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
@@ -41,10 +43,13 @@ class PaymentsAdapter(
     }
 
     override fun bind(binding: PaymentsHistoryItemBinding, item: PaymentHistoryUI) {
-        (binding.root.context.getString(R.string.amount) + item.amount).also { binding.tvAmount.text = it }
-        (binding.root.context.getString(R.string.reference) + item.reference).also { binding.tvReference.text = it }
-        (binding.root.context.getString(R.string.code) + item.code).also { binding.tvCode.text = it }
-        (binding.root.context.getString(R.string.status) + item.status).also { binding.tvStatus.text = it }
-        (binding.root.context.getString(R.string.gateway) + item.gateway).also { binding.tvGateway.text = it }
+        binding.tvName.text = Html.fromHtml(binding.root.context.getString(R.string.payment_history_name, item.product))
+        binding.tvAmount.text = Html.fromHtml(binding.root.context.getString(R.string.payment_history_amount, item.amount))
+        binding.tvDate.text = Html.fromHtml(binding.root.context.getString(R.string.payment_history_date, item.createdAt))
+        binding.tvReference.text = Html.fromHtml(binding.root.context.getString(R.string.payment_history_reference, item.reference))
+        binding.tvStatus.text = Html.fromHtml(binding.root.context.getString(R.string.payment_history_status, item.status))
+        binding.tvGateway.text = Html.fromHtml(binding.root.context.getString(R.string.payment_history_gateway, item.gateway))
+        binding.tvCode.text = Html.fromHtml(binding.root.context.getString(R.string.payment_history_code, item.code))
+        binding.tvCode.visibility = if(item.code.isNotEmpty()) View.VISIBLE else View.GONE
     }
 }

@@ -5,5 +5,7 @@ data class PaymentHistoryUI(
     var code: String,
     var amount: String,
     var status: String,
-    var gateway: String
+    var product: String,
+    var gateway: String,
+    var createdAt: String
 )

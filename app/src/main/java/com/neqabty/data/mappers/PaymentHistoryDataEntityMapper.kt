@@ -15,7 +15,9 @@ class PaymentHistoryDataEntityMapper @Inject constructor() : Mapper<PaymentHisto
             code = from.code ?: "",
             amount = from.amount,
             status = from.status,
-            gateway = from.gateway
+            product = from.product ?: "",
+            gateway = from.gateway,
+            createdAt = from.createdAt
         )
     }
 }

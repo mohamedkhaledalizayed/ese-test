@@ -562,12 +562,13 @@
     <string name="committees_add_photos_2">∎ كارنيه العضوية</string>
     <string name="committees_add_photos_3">∎ الصورة الشخصية</string>
 
-
-    <string name="reference"> رقم العملية </string>
-    <string name="code">كود الدفع </string>
-    <string name="amount">المبلغ </string>
-    <string name="gateway">طريقة الدفع </string>
-    <string name="status">الحالة </string>
+    <string name="payment_history_name"> <![CDATA[<font color="#41941b"><b>اسم الخدمة: </b></font>]]> <![CDATA[<font color="#000000"><b>%s</b></font>]]></string>
+    <string name="payment_history_amount"> <![CDATA[<font color="#475461"><b>المبلغ المسدد: </b></font>]]> %s</string>
+    <string name="payment_history_date"> <![CDATA[<font color="#475461"><b>التاريخ: </b></font>]]> %s</string>
+    <string name="payment_history_reference"> <![CDATA[<font color="#475461"><b>رقم العمليه: </b></font>]]> %s</string>
+    <string name="payment_history_status"> <![CDATA[<font color="#475461"><b>الحالة: </b></font>]]> %s</string>
+    <string name="payment_history_gateway"> <![CDATA[<font color="#475461"><b>طريقة الدفع: </b></font>]]> %s</string>
+    <string name="payment_history_code"> <![CDATA[<font color="#475461"><b>كود الدفع: </b></font>]]> %s</string>
 
     <string name="questionnaire_title">استطلاع رأي</string>
     <string name="answer_questionnaire">للمشاركة في استطلاع الرأي قم بالضغط على الرسالة</string>
