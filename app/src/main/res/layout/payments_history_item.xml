@@ -33,6 +33,7 @@
                 android:id="@+id/tvAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_vertical_small"
                 android:textColor="@color/gray_dark"
                 android:textSize="?textSizeSmall" />
 
@@ -40,6 +41,7 @@
                 android:id="@+id/tvDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_vertical_small"
                 android:textColor="@color/gray_dark"
                 android:textSize="?textSizeSmall" />
 
@@ -47,6 +49,7 @@
                 android:id="@+id/tvStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_vertical_small"
                 android:textColor="@color/gray_dark"
                 android:textSize="?textSizeSmall" />
 
@@ -54,6 +57,7 @@
                 android:id="@+id/tvReference"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_vertical_small"
                 android:textColor="@color/gray_dark"
                 android:textSize="?textSizeSmall" />
 
@@ -61,6 +65,7 @@
                 android:id="@+id/tvGateway"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_vertical_small"
                 android:textColor="@color/gray_dark"
                 android:textSize="?textSizeSmall" />
 
@@ -68,6 +73,7 @@
                 android:id="@+id/tvCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_vertical_small"
                 android:textColor="@color/gray_dark"
                 android:textSize="?textSizeSmall" />
 
