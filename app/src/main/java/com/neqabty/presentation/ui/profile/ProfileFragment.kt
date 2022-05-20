@@ -71,6 +71,8 @@ class ProfileFragment : BaseFragment() {
             binding.ivQR.loadSVG(state.profile!!.code!!)
             binding.ivEngPhoto.loadString(state.profile!!.image!!)
 
+            sharedPref.photo = state.profile!!.image ?: ""
+
             binding.tvName.text = state.profile!!.name!!
             binding.tvMobile.text = sharedPref.mobile
             binding.tvNumber.text = sharedPref.user

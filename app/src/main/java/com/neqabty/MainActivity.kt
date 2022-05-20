@@ -295,6 +295,7 @@ class MainActivity : AppCompatActivity() {
             sharedPref.mobile = ""
             sharedPref.jwt = ""
             sharedPref.token = ""
+            sharedPref.photo = ""
             sharedPref.notificationsCount = 0
             PushNotificationsWrapper().deleteToken(this)
             invalidateOptionsMenu()
@@ -308,9 +309,28 @@ class MainActivity : AppCompatActivity() {
         if (sharedPref.name.isNotEmpty()) {
             navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.VISIBLE
             navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).setText(Html.fromHtml(getString(R.string.menu_memberName, sharedPref.name)))
-        } else
-            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
 
+            //Profile Photo
+            navigationView.getHeaderView(0).findViewById<ImageView>(R.id.ivPP).visibility = View.VISIBLE
+            if(sharedPref.photo.isNotEmpty())
+                navigationView.getHeaderView(0).findViewById<ImageView>(R.id.ivPP)
+                .loadString(sharedPref.photo)
+
+            navigationView.getHeaderView(0).findViewById<ImageView>(R.id.ivPP).setOnClickListener{
+                Navigation.findNavController(this, R.id.container)
+                    .navigate(R.id.profileFragment)
+            }
+
+            navigationView.getHeaderView(0).findViewById<Button>(R.id.bProfile).visibility = View.VISIBLE
+            navigationView.getHeaderView(0).findViewById<Button>(R.id.bProfile).setOnClickListener{
+                Navigation.findNavController(this, R.id.container)
+                    .navigate(R.id.profileFragment)
+            }
+        } else {
+            navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility = View.GONE
+            navigationView.getHeaderView(0).findViewById<ImageView>(R.id.ivPP).visibility = View.GONE
+            navigationView.getHeaderView(0).findViewById<Button>(R.id.bProfile).visibility = View.GONE
+        }
         if (sharedPref.user.isNotEmpty()) {
 //            navigationView.getHeaderView(0).findViewById<TextView>(R.id.bChangePassword).visibility = View.VISIBLE
             navigationView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberNumber).visibility = View.VISIBLE
@@ -426,17 +446,6 @@ class MainActivity : AppCompatActivity() {
             navController().navigate(R.id.inquiryFragment)
         })
         listDataHeader.add(paymentsItem)
-
-        val profileItem = NavigationMenuItem(R.drawable.ic_menu_update_data, R.string.profile_title, {
-            if (sharedPref.isRegistered)
-                navController().navigate(R.id.profileFragment)
-            else {
-                val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.PROFILE)
-                navController().navigate(R.id.signupFragment, bundle)
-            }
-        })
-        listDataHeader.add(profileItem)
 
         val committeesItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.committees_title, {
             if (sharedPref.isRegistered)

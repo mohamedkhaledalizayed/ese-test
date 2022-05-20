@@ -12,17 +12,39 @@
         android:paddingBottom="@dimen/margin_horizontal_normal"
         android:visibility="invisible">
 
-
-        <TextView
-            android:id="@+id/tvWelcome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_vertical_normal"
-            android:text="@string/welcome"
-            android:textColor="@android:color/white"
-            android:textSize="?textSizeLarge"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivPP"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginHorizontal="@dimen/margin_vertical_large"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:src="@mipmap/profile_2_ic_2"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="4dp"
+            android:padding="@dimen/margin_horizontal_small"/>
+
+        <Button
+            android:id="@+id/bProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:layout_marginTop="@dimen/margin_vertical_small"
+            android:padding="@dimen/margin_horizontal_small"
+            android:background="@drawable/btn_green"
+            android:text="@string/open_profile"
+            android:textColor="@android:color/white"
+            android:textSize="?textSizeSmall"
+            android:layout_marginBottom="@dimen/margin_horizontal_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivPP" />
 
         <TextView
             android:id="@+id/tvMemberName"
@@ -32,7 +54,7 @@
             android:textColor="@android:color/white"
             android:textSize="?textSizeMedium"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
+            app:layout_constraintTop_toBottomOf="@id/bProfile" />
 
         <TextView
             android:id="@+id/tvMemberNumber"

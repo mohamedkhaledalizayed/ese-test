@@ -21,6 +21,7 @@ class PreferencesHelper @Inject constructor(
         private const val IS_NOTIFICATIONS_ENABLED = "data.source.prefs.IS_NOTIFICATIONS_ENABLED"
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val SUB_SYNDICATE = "data.source.prefs.SUB_SYNDICATE"
+        private const val PP = "data.source.prefs.PP"
         private const val USER = "data.source.prefs.USER"
         private const val NAME = "data.source.prefs.NAME"
         private const val MOBILE = "data.source.prefs.MOBILE"
@@ -71,6 +72,10 @@ class PreferencesHelper @Inject constructor(
     var isRegistered
         get() = preferences.getBoolean(IS_REGISTERED, false)
         set(value) = preferences.edit().putBoolean(IS_REGISTERED, value).apply()
+
+    var photo
+        get() = preferences.getString(PP, "")!!
+        set(value) = preferences.edit().putString(PP, value).apply()
 
     var user
         get() = preferences.getString(USER, "")!!

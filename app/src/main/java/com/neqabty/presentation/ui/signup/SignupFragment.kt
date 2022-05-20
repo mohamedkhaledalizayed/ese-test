@@ -222,10 +222,6 @@ class SignupFragment : BaseFragment() {
                     SignupFragmentDirections.openChangePassword(false, sharedPref.mobile)
             )
 
-            Constants.PROFILE -> navController().navigate(
-                SignupFragmentDirections.openProfile()
-            )
-
             Constants.COMMITTEES -> navController().navigate(
                 SignupFragmentDirections.openCommittees()
             )
