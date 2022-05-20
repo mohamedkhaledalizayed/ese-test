@@ -20,6 +20,7 @@ object Constants {
     var hasQuestionnaire: MutableLiveData<Boolean> = MutableLiveData(false)
     var isSyndicatesListEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
     var isCommitteesEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
+    var isClubEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
 
     var YODAWY_CONFIG: MutableLiveData<AppConfigUI.YodawyStatus> = MutableLiveData()
     var VEZEETA_CONFIG: MutableLiveData<AppConfigUI.VezeetaStatus> = MutableLiveData()

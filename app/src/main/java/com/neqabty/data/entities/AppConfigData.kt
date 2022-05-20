@@ -29,7 +29,9 @@ data class AppConfigData(
         @field:SerializedName("vezeeta_doctors")
         var vezeetaConfig: VezeetaStatus,
         @field:SerializedName("committees")
-        var committeesStatus: Boolean = false
+        var committeesStatus: Boolean = false,
+        @field:SerializedName("club")
+        var clubStatus: Boolean = false
 ) : Response() {
 
         data class ConfigStatus(

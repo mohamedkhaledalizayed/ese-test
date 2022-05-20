@@ -13,7 +13,8 @@ data class AppConfigEntity(
     var isSyndicatesListEnabled: Boolean = false,
     var yodawyConfig: YodawyStatus,
     var vezeetaConfig: VezeetaStatus,
-    var committeesStatus: Boolean
+    var committeesStatus: Boolean,
+    var clubStatus: Boolean
 ) {
 
     data class ConfigStatus(

@@ -23,7 +23,8 @@ class AppConfigDataEntityMapper @Inject constructor() : Mapper<AppConfigData, Ap
                 isSyndicatesListEnabled = from.isSyndicatesListEnabled,
                 yodawyConfig = AppConfigEntity.YodawyStatus(from.yodawyConfig.status, from.yodawyConfig.url, from.yodawyConfig.publicKey, from.yodawyConfig.totalAmount, from.yodawyConfig.deliverySentence),
                 vezeetaConfig = AppConfigEntity.VezeetaStatus(from.vezeetaConfig.status, from.vezeetaConfig.url),
-                committeesStatus = from.committeesStatus
+                committeesStatus = from.committeesStatus,
+                clubStatus = from.clubStatus
         )
     }
 }

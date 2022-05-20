@@ -13,6 +13,7 @@ import com.neqabty.R
 import com.neqabty.databinding.ProfileFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
+import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.util.autoCleared
 import com.neqabty.presentation.util.loadSVG
 import com.neqabty.presentation.util.loadString
@@ -76,11 +77,31 @@ class ProfileFragment : BaseFragment() {
             binding.tvSyndicate.text = state.profile!!.syndicate!!
             binding.tvSection.text = state.profile!!.section!!
             state.profile!!.invitations.toString().also { binding.tvInvitations.text = it }
+            setupClub()
             return
         }
     }
 
 //region
+    private fun setupClub() {
+        Constants.isClubEnabled.value?.let {
+            if (it) {
+                binding.tvInvitationsTitle.visibility = View.VISIBLE
+                binding.tvInvitations.visibility = View.VISIBLE
+                binding.lineView5.visibility = View.VISIBLE
+                return
+            }
+        }
+
+        Constants.isClubEnabled.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.tvInvitationsTitle.visibility = View.VISIBLE
+                binding.tvInvitations.visibility = View.VISIBLE
+                binding.lineView5.visibility = View.VISIBLE
+                return@Observer
+            }
+        })
+    }
 // endregion
     fun navController() = findNavController()
 }
