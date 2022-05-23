@@ -292,18 +292,19 @@ class MedicalRenewDetailsFragment : BaseFragment(), Injectable {
 
             if (mechanismTypeButton.getText().toString() == getString(R.string.payment_card)) {
                 paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Card
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Channel
-
-                paymentCreationRequest.PaymentMechanism.Channel.Email = "xxxx@xx.xx"
-                paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = PreferencesHelper(requireContext()).mobile
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_wallet)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.MobileWallet
-                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = PreferencesHelper(requireContext()).mobile
-            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_meeza)) {
-                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Meeza
-                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = PreferencesHelper(requireContext()).mobile
             }
+//            else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_channel)) {
+//                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Channel
+//
+//                paymentCreationRequest.PaymentMechanism.Channel.Email = "xxxx@xx.xx"
+//                paymentCreationRequest.PaymentMechanism.Channel.MobileNumber = PreferencesHelper(requireContext()).mobile
+//            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_wallet)) {
+//                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.MobileWallet
+//                paymentCreationRequest.PaymentMechanism.MobileWallet.MobileNumber = PreferencesHelper(requireContext()).mobile
+//            } else if (mechanismTypeButton.getText().toString() == getString(R.string.payment_meeza)) {
+//                paymentCreationRequest.PaymentMechanism.Type = PaymentCreationRequest.PaymentMechanismType.Meeza
+//                paymentCreationRequest.PaymentMechanism.Meeza.Tahweel.MobileNumber = PreferencesHelper(requireContext()).mobile
+//            }
 
 //            paymentCreationRequest.RequestExpiryDate = medicalRenewalPaymentUI.paymentCreationRequest?.requestExpiryDate
             paymentCreationRequest.RequestExpiryDate = "2020-12-06"

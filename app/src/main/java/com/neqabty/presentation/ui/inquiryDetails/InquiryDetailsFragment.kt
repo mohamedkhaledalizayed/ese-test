@@ -136,6 +136,11 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
     private fun handleViewState(state: InquiryDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
+            if(state.decryptionData != null){
+                completePaymentCreation(state.encryptionData!!.encryption)
+                return
+            }
+
             if(state.encryptionData != null){
                 completePaymentCreation(state.encryptionData!!.encryption)
                 return
@@ -195,7 +200,7 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
             paymentCreationRequest = PaymentCreationRequest()
 
 //            paymentCreationRequest.Sender.Id = memberItem.paymentCreationRequest?.sender?.id
-            paymentCreationRequest.Sender.Id = "01001"
+            paymentCreationRequest.Sender.Id = "071"
 //            paymentCreationRequest.Sender.Name = memberItem.paymentCreationRequest?.sender?.name
             paymentCreationRequest.Sender.Name = "MSAD"
             paymentCreationRequest.Sender.Password = "1234"
@@ -207,13 +212,13 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 //            paymentCreationRequest.SenderRequestNumber = memberItem.paymentCreationRequest?.senderRequestNumber + "032110010100"
             paymentCreationRequest.SenderRequestNumber = medicalRenewalPayment.paymentItem?.paymentRequestNumber
 //            paymentCreationRequest.ServiceCode = memberItem.paymentCreationRequest?.serviceCode
-            paymentCreationRequest.ServiceCode = "010011"
+            paymentCreationRequest.ServiceCode = "171"
 
             val settlementAmount = PaymentCreationRequest.SettlementAmount()
 
             settlementAmount.Amount = medicalRenewalPayment.paymentItem?.amount?.toDouble()!!
 //            settlementAmount.SettlementAccountCode = memberItem.paymentCreationRequest?.settlementAmounts?.settlementAccountCode!!.toInt()
-            settlementAmount.SettlementAccountCode = 500
+            settlementAmount.SettlementAccountCode = 647
             settlementAmount.Description = "Test"
 
             paymentCreationRequest.SettlementAmounts.add(settlementAmount)
@@ -249,8 +254,8 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
             val publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0MAVRsQax/cxZwZcfp+s0mzZtFGNRpuRLnyKUosdnlHn2JC1FSHpnmsON1Mp/SY+GR/Wk1kO2QGNNdszikPgAnN5/fcX6JPIkzSHCMLqPxUNqaCfn0eaLrwgsc1SCwlm+f8c+CseG3OeR+sUdq52PHf7edpjC60V4bNo/gEVRLV+VsvBde8jhet6Z/wRrKL5K1MQH0ByYn9upf96myRiTOSvocuBVHnlb2O+tapLVrNq7dMNXCHHB7IuNCFvP0f0QILeDW5CxebcsTItzxLLurKtA1lTWv+Ao9oqexy1BJzMytpS+BAz9kNzmt/g7RcdbXd0MxFotvoHjl2jwE1wLwIDAQAB"
 
 //            val signature: String = CryptoHelp.signData(paymentCreationRequest.serialize(), requireContext())
-
-            inquiryDetailsViewModel.encryptData(paymentCreationRequest.Sender.Name, paymentCreationRequest.Sender.Password, paymentCreationRequest.serialize())
+            completePaymentCreation("")
+//            inquiryDetailsViewModel.encryptData(paymentCreationRequest.Sender.Name, paymentCreationRequest.Sender.Password, paymentCreationRequest.serialize())
 //            paymentCreationRequest.serialize()
 
         } catch (ex: Exception) {
@@ -266,13 +271,30 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
 
  //            val signature = "qf9Qo2fZ792GyoDiXik6eAQ6fadqHaib+yaBTBp4PGj1xf6KlVn3pP822D8VyADm+OEvuPVtLc3nvutiTEDZgo4oeJnUIwXveAzQUV6RM9oyMfOu78Kj9NcD3wMW1Jb6hwAKfHQ/tLsY7oJYIhXmh1x2INU9am6K6JrD468ToBNhWU6Df9SlJsMezZWMLrG0Z4bElqTsIVcpATiu8rJ4lGHMl+qC4AX+2pAViz31TPXGREdYsQpLDHbnBXaVvLLY8fKNyOjDaskxEoeJikPdzkAmBn1HDmzwWhb9GyYRsGJw4wm1szIXrMIRvgGYIarsVwxL7uaSWs/yrjHUFhT8AQ=="
             val successCallback: ((response: PaymentCreationResponse) -> Unit) = { response ->
-                sendDecryptionKey = true
+//                sendDecryptionKey = true
                 paymentCreationResponse = response
+//
+//                inquiryDetailsViewModel.sendDecryptionKey(
+//                    response.OriginalSenderRequestNumber,
+//                    response.RequestDecryptionKey
+//                )
 
-                inquiryDetailsViewModel.sendDecryptionKey(
-                    response.OriginalSenderRequestNumber,
-                    response.RequestDecryptionKey
-                )
+                llSuperProgressbar.visibility = View.INVISIBLE
+                val paymentMethod = mechanismTypeButton.getText().toString()
+                if (paymentMethod == getString(R.string.payment_card)) {
+                    navController().navigate(
+                        InquiryDetailsFragmentDirections.openPayment(medicalRenewalPayment, paymentCreationResponse.OriginalSenderRequestNumber,
+                            paymentCreationResponse.CardRequestNumber, paymentCreationResponse.SessionId, paymentCreationResponse.TotalAuthorizationAmount.toString())
+                    )
+                } else if (paymentMethod == getString(R.string.payment_channel) ||
+                    paymentMethod == getString(R.string.payment_wallet) ||
+                    paymentMethod == getString(R.string.payment_meeza)) {
+                    showAlert(getString(R.string.payment_reference) + "  " + paymentCreationResponse.CardRequestNumber) {
+                        navController().popBackStack()
+                        navController().navigate(R.id.homeFragment)
+                    }
+//                    "senderRequestNumber" + response.OriginalSenderRequestNumber
+                }
             }
 
             val failureCallback = {
@@ -288,9 +310,10 @@ class InquiryDetailsFragment : BaseFragment(), Injectable {
                     )
                 }, cancelCallback = {
                     navController().navigateUp()
-                })
+                }, message = "failure")
             }
-            paymentGateway.CreatePayment(paymentCreationRequest, encryptedData, publicKey, MobilePaymentCreationCallback(successCallback, failureCallback))
+            paymentCreationRequest.serialize()
+            paymentGateway.CreatePayment(paymentCreationRequest, "", publicKey, MobilePaymentCreationCallback(successCallback, failureCallback))
         } catch (ex: Exception) {
             Log.i("Error", ex.message.toString())
         }

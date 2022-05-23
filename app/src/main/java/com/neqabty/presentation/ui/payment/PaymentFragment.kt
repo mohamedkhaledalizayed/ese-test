@@ -222,7 +222,7 @@ class PaymentFragment : BaseFragment(), Injectable {
     ) : PaymentConfirmationCallback {
 
         override fun onSuccess(response: PaymentConfirmationResponse) {
-//            Log.i("NEQABTY", "Request Completed Successfully")
+            Log.i("NEQABTY", "Request Completed Successfully")
             successCallback.invoke(response)
         }
 
