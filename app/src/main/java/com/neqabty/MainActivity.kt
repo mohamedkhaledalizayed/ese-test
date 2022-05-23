@@ -315,6 +315,8 @@ class MainActivity : AppCompatActivity() {
             if(sharedPref.photo.isNotEmpty())
                 navigationView.getHeaderView(0).findViewById<ImageView>(R.id.ivPP)
                 .loadString(sharedPref.photo)
+            else
+                navigationView.getHeaderView(0).findViewById<ImageView>(R.id.ivPP).setImageResource(R.mipmap.profile_2_ic_2)
 
             navigationView.getHeaderView(0).findViewById<ImageView>(R.id.ivPP).setOnClickListener{
                 Navigation.findNavController(this, R.id.container)
