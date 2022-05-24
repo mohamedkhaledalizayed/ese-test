@@ -141,6 +141,11 @@ interface WebService {
         @Part doc3: MultipartBody.Part?
     ): Observable<ApiResponse<String>>
 
+    @POST("api/v1/medical-refund/request")
+    fun sendRefundRequest(
+        @Body refundRequest: RefundRequest
+    ): Observable<ApiResponse<RefundData>>
+
     @GET("api/v1/eseServicesTypes")
     fun getAllServiceTypes(): Observable<ApiResponse<List<ServiceTypeData>>>
 

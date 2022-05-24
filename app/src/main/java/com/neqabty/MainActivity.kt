@@ -437,6 +437,17 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        val refundItem = NavigationMenuItem(R.drawable.ic_menu_payments, R.string.refund_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.refundFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.REFUND)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        listDataHeader.add(refundItem)
+
         val engineeringRecordsItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.engineering_records_title, {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.engineeringRecordsDetailsFragment)
