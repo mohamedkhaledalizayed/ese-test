@@ -8,6 +8,5 @@ data class RefundViewState(
     var areas: List<AreaUI>? = null,
     var governs: List<GovernUI>? = null,
     var providerTypes: List<ProviderTypeUI>? = null,
-    var providers: List<ProviderUI>? = null,
-    var refundUI: RefundUI? = null
+    var providers: List<ProviderUI>? = null
 )

@@ -15,8 +15,7 @@ class RefundViewModel @Inject constructor(
     val getAllGoverns: GetAllGoverns,
     val getAllAreas: GetAllAreas,
     val getProvidersByType: GetProvidersByType,
-    val getAllProvidersTypes: GetAllProvidersTypes,
-    val sendRefundRequest: SendRefundRequest
+    val getAllProvidersTypes: GetAllProvidersTypes
 ) : BaseViewModel() {
     private val liteFollowersListEntityUIMapper = LiteFollowersListEntityUIMapper()
     private val areaEntityUIMapper = AreaEntityUIMapper()
@@ -138,30 +137,5 @@ class RefundViewModel @Inject constructor(
     private fun onProvidersReceived() {
         if (viewState.value?.providers != null)
             viewState.value = viewState.value?.copy(isLoading = false)
-    }
-
-    fun sendRefundRequest(
-        name: String,
-        mobile: String,
-        userNumber: String,
-        benId: String,
-        description: String,
-        branchProfileId: String,
-        mobileToken: String,
-        serviceProviderId: String,
-        letterTypeId: String,
-        attachments: List<AttachmentEntity>) {
-        viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(sendRefundRequest.sendRefundRequest(name, mobile, userNumber, benId, description, branchProfileId, mobileToken, serviceProviderId, letterTypeId, attachments)
-            .map {
-                refundEntityUIMapper.mapFrom(it)
-            }
-            .subscribe(
-                {
-                    viewState.value = viewState.value?.copy(isLoading = false, refundUI = it)
-                },
-                { errorState.value = handleError(it) }
-            )
-        )
     }
 }

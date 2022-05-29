@@ -810,7 +810,22 @@
         android:id="@+id/refundFragment"
         android:name="com.neqabty.presentation.ui.refund.RefundFragment"
         android:label="@string/refund_title"
-        tools:layout="@layout/refund_fragment" />
+        tools:layout="@layout/refund_fragment">
+
+        <action
+            android:id="@+id/openRefundRequest"
+            app:destination="@id/refundRequestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/refundRequestFragment"
+        android:name="com.neqabty.presentation.ui.refundRequest.RefundRequestFragment"
+        android:label="@string/refund_title"
+        tools:layout="@layout/refund_request_fragment">
+
+        <argument
+            android:name="refundRequest"
+            app:argType="com.neqabty.presentation.ui.refund.RefundRequest" />
+    </fragment>
     <fragment
         android:id="@+id/complaintsFragment"
         android:name="com.neqabty.presentation.ui.complaint.ComplaintFragment"
