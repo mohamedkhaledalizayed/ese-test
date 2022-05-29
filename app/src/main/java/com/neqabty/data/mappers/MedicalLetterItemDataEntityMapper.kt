@@ -19,7 +19,8 @@ class MedicalLetterItemDataEntityMapper @Inject constructor() : Mapper<MedicalLe
                 letterStatusName = from.letterStatusName,
                 serviceProviderName = from.serviceProviderName,
                 totalPrice = from.totalPrice,
-                creationType = from.creationType
+                creationType = from.creationType,
+                report = from.report
         )
         from.letterProcedures?.let {
             var letterProcedures: List<MedicalLetterEntity.LetterProcedureItem> = it.map { procedureItem ->
