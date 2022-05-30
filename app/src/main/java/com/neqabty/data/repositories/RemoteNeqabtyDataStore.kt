@@ -293,7 +293,11 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     override fun getMedicalLetterByID(mobileNumber: String, userNumber: String, id: String): Observable<MedicalLetterEntity.LetterItem> {
         return api.getMedicalLetterByID(mobileNumber, userNumber, id).flatMap { letterItemInfo ->
             letterItemInfo.report?.let { letterItemInfo.letter?.report = it }
-            Observable.just(medicalLetterItemDataEntityMapper.mapFrom(letterItemInfo.letter!!))
+            if(letterItemInfo.letter != null){
+                Observable.just(medicalLetterItemDataEntityMapper.mapFrom(letterItemInfo.letter!!))
+            }else
+                Observable.just(MedicalLetterEntity.LetterItem())
+
         }
     }
 

@@ -35,6 +35,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tvApprovalNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="0.8"
+            android:maxLines="1"
+            android:textStyle="bold"
+            android:text="@{letter.id}"
+            android:textSize="?textSizeSmall"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <TextView
             android:id="@+id/tvDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +55,7 @@
             android:text="@{letter.letterDate}"
             android:textSize="?textSizeSmall"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+            app:layout_constraintTop_toBottomOf="@id/tvApprovalNumber" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clDetails"
