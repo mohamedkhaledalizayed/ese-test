@@ -160,6 +160,11 @@ class ActivateAccountFragment : BaseFragment() {
                 Constants.COMMITTEES -> navController().navigate(
                     ActivateAccountFragmentDirections.openCommittees()
                 )
+
+                Constants.MEDICAL_PROCEDURES_INQUIRY -> navController().navigate(
+                    ActivateAccountFragmentDirections.openMedicalProceduresInquiry()
+                )
+
             }
         }
     }

@@ -1,13 +1,14 @@
 package com.neqabty.data.entities
 
 import com.google.gson.annotations.SerializedName
+import com.neqabty.data.api.Response
 
 data class MedicalLetterData(
     @field:SerializedName("TotalCount")
     var totalCount: Int = 0,
     @field:SerializedName("LetterList")
     var letters: List<LetterItem>? = null
-) {
+) : Response() {
     data class LetterItem(
         @field:SerializedName("Id")
         var id: String? = "",

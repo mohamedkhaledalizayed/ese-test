@@ -52,6 +52,7 @@ object Constants {
     var MEDICAL_LETTERS_INQUIRY = 13
     var DOCTORS_RESERVATION = 14
     var COMMITTEES = 15
+    var MEDICAL_PROCEDURES_INQUIRY = 17
 
     var AD_MEDICAL_RENEW = 1
     var AD_TRIPS = 2

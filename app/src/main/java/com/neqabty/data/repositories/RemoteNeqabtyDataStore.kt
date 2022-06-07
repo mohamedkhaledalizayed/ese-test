@@ -352,6 +352,35 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    private val medicalProceduresInquiryLookupsDataEntityMapper = MedicalProceduresInquiryLookupsDataEntityMapper()
+
+    override fun getMedicalProceduresInquiryLookups(mobileNumber: String): Observable<MedicalProceduresInquiryLookupsEntity> {
+        return api.getMedicalProceduresInquiryLookups(mobileNumber).map { data ->
+            medicalProceduresInquiryLookupsDataEntityMapper.mapFrom(data)
+        }
+    }
+
+    private val medicalProceduresDataEntityMapper = MedicalProceduresDataEntityMapper()
+
+    override fun getMedicalProcedures(mobileNumber: String, categoryId: String): Observable<List<MedicalProcedureEntity>> {
+        return api.getMedicalProcedures(mobileNumber, categoryId).map { data ->
+            data.map { medicalProceduresDataEntityMapper.mapFrom(it)}
+        }
+    }
+
+    private val medicalBranchProceduresDataEntityMapper = MedicalBranchProceduresDataEntityMapper()
+
+    override fun getMedicalBranchProcedures(
+        mobileNumber: String,
+        procedureId: String,
+        relationTypeId: String,
+        areaId: String
+    ): Observable<List<MedicalBranchProcedureEntity>> {
+        return api.getMedicalBranchProcedures(mobileNumber, procedureId, relationTypeId, areaId).map { data ->
+            data.map { medicalBranchProceduresDataEntityMapper.mapFrom(it)}
+        }
+    }
+
     private val committeesLookupsDataEntityMapper = CommitteesLookupsDataEntityMapper()
 
     override fun getCommitteesLookups(): Observable<CommitteesLookupEntity> {

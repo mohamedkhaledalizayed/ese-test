@@ -506,6 +506,24 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideGetMedicalProceduresInquiryLookups(neqabtyRepository: NeqabtyRepository): GetMedicalProceduresInquiryLookups {
+        return GetMedicalProceduresInquiryLookups(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetMedicalProceduresByCategory(neqabtyRepository: NeqabtyRepository): GetMedicalProceduresByCategory {
+        return GetMedicalProceduresByCategory(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetMedicalBranchProcedures(neqabtyRepository: NeqabtyRepository): GetMedicalBranchProcedures {
+        return GetMedicalBranchProcedures(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetCommitteesLookups(neqabtyRepository: NeqabtyRepository): GetCommitteesLookups {
         return GetCommitteesLookups(ASyncTransformer(), neqabtyRepository)
     }

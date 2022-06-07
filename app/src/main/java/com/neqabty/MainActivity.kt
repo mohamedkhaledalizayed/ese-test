@@ -587,6 +587,17 @@ class MainActivity : AppCompatActivity() {
         })
         medicalServicesList.add(medicalLettersInquiryItem)
 
+        val medicalProceduresInquiryItem = NavigationMenuItem(R.drawable.ic_menu_help, R.string.medical_procedures_inquiry_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.medicalProceduresInquiryFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_PROCEDURES_INQUIRY)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        medicalServicesList.add(medicalProceduresInquiryItem)
+
         val pharmacyItem = NavigationMenuItem(R.drawable.ic_pharmacy_green, R.string.online_pharmacy_title, {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.onlinePharmacyFragment)

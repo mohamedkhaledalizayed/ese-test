@@ -1,6 +1,7 @@
 package com.neqabty.data.entities
 
 import com.google.gson.annotations.SerializedName
+import com.neqabty.data.api.Response
 
 data class QuestionnaireData(
         @field:SerializedName("id")
@@ -13,7 +14,7 @@ data class QuestionnaireData(
         var total_votings: Int = 0,
         @field:SerializedName("answers")
         var answers: List<Answer>? = null
-) {
+) : Response() {
     data class Answer(
             @field:SerializedName("id")
             var id: Int = 0,
