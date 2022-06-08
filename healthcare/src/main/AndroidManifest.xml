@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar">
         <activity
+            android:name=".modules.wallet.presentation.WalletActivity"
+            android:exported="false" />
+        <activity
             android:name=".modules.home.presentation.view.homescreen.HomeActivity"
             android:exported="true">
             <intent-filter>

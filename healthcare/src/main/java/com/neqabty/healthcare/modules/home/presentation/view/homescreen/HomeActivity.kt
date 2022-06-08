@@ -3,10 +3,10 @@ package com.neqabty.healthcare.modules.home.presentation.view.homescreen
 
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -19,6 +19,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
+import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -48,6 +49,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         drawer.addDrawerListener(toggle)
         toggle.syncState()
         toolbar.setNavigationIcon(R.drawable.ic_menu)
+        binding.navView.setNavigationItemSelectedListener(this)
         binding.homeContent.ourNewsRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             OurNewsAdapter.OnItemClickListener {
@@ -73,7 +75,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
     }
 
 
-    fun aboutDetails() {
+    private fun aboutDetails() {
         val fm: FragmentManager = supportFragmentManager
         val dialog = AboutFragment()
         dialog.show(fm, "")
@@ -84,17 +86,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-//            R.id.news -> {
-//                val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
-//                intent.putExtra("id", sharedPreferences.code)
-//                intent.putExtra("type", Constants.SYNDICATE_NEWS)
-//                startActivity(intent)
-//            }
-//            R.id.payment -> {
-//                val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
-//                startActivity(intent)
-//            }
-
+            R.id.wallet -> {
+                val intent = Intent(this@HomeActivity, WalletActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         drawer.closeDrawer(GravityCompat.START)

@@ -11,4 +11,8 @@
     <string name="more_news">المزيد من الأخبار</string>
     <string name="our_news">أخبارنا</string>
     <string name="sehe_program">ما هي برامج نقابتي \nصحة مستدامة</string>
+    <string name="add_balance">شحن المحفظة</string>
+    <string name="balance">رصيد المحفظة</string>
+    <string name="add_code">إضافة كود</string>
+    <string name="points">نقط المكافآت</string>
 </resources>
