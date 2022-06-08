@@ -2,4 +2,13 @@
     <string name="app_name">healthcare</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="register_now">سجل الأن</string>
+    <string name="seha">نقابتى صحة مستدامة</string>
+    <string name="info">الاستفادة من الأسعار\n التعاقدية المخفضة</string>
+    <string name="start_now">البدء الآن</string>
+    <string name="about_seha">ما هي نقابتي صحة\nمستدامة</string>
+    <string name="more_details">معرفة المزيد</string>
+    <string name="more_news">المزيد من الأخبار</string>
+    <string name="our_news">أخبارنا</string>
+    <string name="sehe_program">ما هي برامج نقابتي \nصحة مستدامة</string>
 </resources>

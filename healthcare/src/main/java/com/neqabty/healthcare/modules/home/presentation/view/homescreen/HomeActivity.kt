@@ -32,7 +32,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(title = "المحفظة")
+        setupToolbar(title = "الرئيسية")
         toolbar = binding.homeContent.customToolbar.toolbar
 
         drawer = binding.drawerLayout
@@ -57,6 +57,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         }
 
         mAdapter.submitList(mutableListOf())
+
+        binding.homeContent.startNow.setOnClickListener {  }
+
+        binding.homeContent.aboutSehaNeqbty.setOnClickListener { aboutDetails() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -69,7 +73,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
     }
 
 
-    fun aboutDetails(view: View) {
+    fun aboutDetails() {
         val fm: FragmentManager = supportFragmentManager
         val dialog = AboutFragment()
         dialog.show(fm, "")
