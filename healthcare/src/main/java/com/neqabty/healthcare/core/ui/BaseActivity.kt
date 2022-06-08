@@ -26,7 +26,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
         binding = getViewBinding()
         setSupportActionBar(binding.root.findViewById(R.id.toolbar))
         binding.root.findViewById<Toolbar>(R.id.toolbar)?.setNavigationOnClickListener{onBackPressed()}
-        window.setBackgroundDrawableResource(R.color.colorPrimaryDark)
+        window.setBackgroundDrawableResource(R.color.white)
         binding.root.fitsSystemWindows = true
     }
 

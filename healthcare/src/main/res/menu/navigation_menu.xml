@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/menu_home">
+        <item
+            android:id="@+id/home"
+            android:title="الرئيسية"
+            android:icon="@drawable/home"/>
+    </group>
+
+    <group android:id="@+id/menu_syndicate">
+        <item
+            android:id="@+id/syndicate"
+            android:title="نقابة المرشدين السياحين"
+            android:icon="@drawable/guide"/>
+    </group>
+
+    <group android:id="@+id/menu_wallet">
+        <item
+            android:id="@+id/wallet"
+            android:title="المحفظة"
+            android:icon="@drawable/wallet"/>
+    </group>
+
+    <group android:id="@+id/menu_settings">
+        <item
+            android:id="@+id/settings"
+            android:title="إعدادات الحساب"
+            android:icon="@drawable/settings"/>
+    </group>
+
+    <group android:id="@+id/menu_logout">
+        <item
+            android:id="@+id/logout"
+            android:title="تسجيل الخروج"
+            android:icon="@drawable/logout"/>
+    </group>
+
+</menu>
