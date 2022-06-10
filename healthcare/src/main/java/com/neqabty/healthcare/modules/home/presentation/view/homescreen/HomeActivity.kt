@@ -5,6 +5,7 @@ package com.neqabty.healthcare.modules.home.presentation.view.homescreen
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -33,6 +34,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
     private val homeViewModel: HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_hc_home)
+        homeViewModel.getProviders()
+        homeViewModel.providers.observe(this){
+            Log.d("medicalProviders",it.size.toString())
+        }
         setContentView(binding.root)
         setupToolbar(title = "الرئيسية")
         toolbar = binding.homeContent.customToolbar.toolbar

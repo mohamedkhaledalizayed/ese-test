@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.core.di
 
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +19,7 @@ class NetworkModule {
     @Provides
     @Named("healthcare")
     fun providesBaseUrl(): String {
-        return "https://5e510330f2c0d300147c034c.mockapi.io/"
+        return "http://3.131.229.146:7777/medical/public/api/v1/"
     }
 
     @Provides
@@ -46,7 +47,8 @@ class NetworkModule {
     @Provides
     @Named("healthcare")
     fun provideConverterFactory(): Converter.Factory {
-        return GsonConverterFactory.create()
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+        return GsonConverterFactory.create(gson)
     }
 
     @Provides
