@@ -19,7 +19,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
-import com.neqabty.healthcare.modules.search.presentation.search.SearchActivity
+import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import dagger.hilt.android.AndroidEntryPoint
 

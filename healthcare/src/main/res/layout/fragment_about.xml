@@ -26,7 +26,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ما هي نقابتي صحة مستدامة "
+        android:text="@string/about_seha_"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/_10sdp"
         android:gravity="center"
@@ -37,7 +37,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="نقابتي صحة مستدامة هي شبكة طبية متخصصة متوفرة لدي العديد من الجهات العلاجية ذات التخصصات المختلفة والمنتشرة في جميع المحافظات في جميع انحاء الجمهورية والتي تشمل المستشفيات والمراكز الطبية، معامل التحاليل، مراكز الاشعة، مراكز العلاج الطبيعي والأجهزة التعويضية. نقابتي صحة مستدامة توفر لعملائها نسب خصم تتراوح ما بين ٥٠٪ الى ٧٠٪ لدي كافة الجهات العلاجية. بالإضافة الى توافر خدمات الصيدلية اونلاين بنسب خصم تصل الي ٢٠٪ على الادوية المحلية والمستوردة وخدمات الاستشارات الطبية اونلاين وذلك من خلال التطبيق “نقابتي” و تأمين طبي شامل يصل الى 50 الف ج يغطى تكاليف العمليات و العلاج داخل المستشفيات و تأمين ضد الحوادث يصل الى 125 الف ج ."
+        android:text="@string/about_seha_details"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"

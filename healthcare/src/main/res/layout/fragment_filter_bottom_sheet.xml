@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/_2sdp"
+    android:layout_margin="@dimen/_10sdp"
+    android:orientation="vertical"
+    android:padding="@dimen/_16sdp"
+    android:layoutDirection="rtl"
+    android:background="@drawable/bg_rounded">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/government_"
+        android:textStyle="bold"
+        android:textSize="@dimen/_10ssp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textColor="@color/black"/>
+
+    <FrameLayout
+        android:id="@+id/spinner_government_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/edit_text_bg"
+        android:padding="@dimen/_8sdp"
+       >
+
+        <Spinner
+            android:id="@+id/sp_government"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:entries="@array/governments"
+            android:popupBackground="@color/splash_bg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/city_"
+        android:textStyle="bold"
+        android:textSize="@dimen/_10ssp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="@color/black"/>
+
+    <FrameLayout
+        android:id="@+id/spinner_city_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/edit_text_bg"
+        android:padding="@dimen/_8sdp"
+        >
+
+        <Spinner
+            android:id="@+id/sp_cities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:entries="@array/cities"
+            android:popupBackground="@color/splash_bg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/filter_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:text="@string/filter"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        android:background="@drawable/select_btn_bg"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_30sdp"
+        />
+
+</LinearLayout>

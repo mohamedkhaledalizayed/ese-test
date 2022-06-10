@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".modules.wallet.presentation.WalletActivity">
 
     <include
@@ -111,10 +112,10 @@
                 android:id="@+id/balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/balance"
                 android:textColor="@color/black"
-                android:textStyle="bold"
                 android:textSize="@dimen/_10ssp"
-                android:text="@string/balance"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/balance_value"

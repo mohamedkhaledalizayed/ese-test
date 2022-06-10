@@ -11,7 +11,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar">
         <activity
-            android:name=".modules.search.presentation.search.SearchActivity"
+            android:name=".modules.offers.presentation.view.payment.PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.offers.presentation.view.takeoffer.TakeOfferActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.offers.presentation.view.cashback.CashBackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.offers.presentation.view.offers.OffersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.search.presentation.view.searchresult.SearchResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.search.presentation.view.search.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".modules.wallet.presentation.WalletActivity"
