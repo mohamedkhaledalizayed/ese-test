@@ -34,7 +34,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
     private val homeViewModel: HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hc_home)
+        setContentView(R.layout.activity_home)
         homeViewModel.getProviders()
         homeViewModel.providers.observe(this){
             Log.d("medicalProviders",it.size.toString())
