@@ -74,6 +74,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
             fun setOnItemClickListener(item: String)
+            fun setOnRegisterClickListener(item: String)
     }
 
     class ViewHolder(val binding: PackageItemLayoutBinding) :

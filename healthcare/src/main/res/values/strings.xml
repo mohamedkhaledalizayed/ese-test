@@ -65,4 +65,30 @@
         <item>التجمع</item>
         <item>اكتوبر</item>
     </array>
+
+    <array name="relations">
+        <item>درجة القرابة</item>
+        <item>الابن</item>
+        <item>الابنه</item>
+        <item>الزوج</item>
+        <item>الزوجة</item>
+    </array>
+
+    <string name="registration">تسجيل إشتراك</string>
+    <string name="add_image">إرفاق صورة البطاقة الشخصية</string>
+    <string name="national_id_">الرقم القومى</string>
+    <string name="job">الوظيفة</string>
+    <string name="address">العنوان</string>
+    <string name="birth_date">تاريخ الميلاد</string>
+    <string name="phone">رقم الهاتف</string>
+    <string name="fullname">الاسم بالكامل</string>
+    <string name="client_info">بيانات العميل الشخصية</string>
+    <string name="account_info">بيانات الحساب</string>
+    <string name="followers_info">بيانات التابعين</string>
+    <string name="add">أضف</string>
+    <string name="add_new_member">إضافة فرد جديد</string>
+    <string name="email">البريد الالكترونى</string>
+    <string name="password_">كلمة السر</string>
+    <string name="confirm_password">تاكيد كلمة السر</string>
+    <string name="cash_back_service">خدمة الكاش باك</string>
 </resources>

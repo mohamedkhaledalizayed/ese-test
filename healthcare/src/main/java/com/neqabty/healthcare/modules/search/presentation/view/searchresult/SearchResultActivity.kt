@@ -31,6 +31,9 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
 
+        binding.governmentClose.setOnClickListener { binding.governmentContainer.visibility = View.GONE }
+        binding.cityClose.setOnClickListener { binding.cityContainer.visibility = View.GONE }
+
     }
 
     override fun onFilterClicked(government: String, city: String) {
