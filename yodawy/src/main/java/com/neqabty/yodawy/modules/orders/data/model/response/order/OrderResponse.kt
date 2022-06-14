@@ -18,8 +18,6 @@ data class OrderResponse(
     val id: String,
     @SerializedName("Items")
     val items: List<Item>,
-    @SerializedName("Notes")
-    val notes: String,
     @SerializedName("OrderNumber")
     val orderNumber: String,
     @SerializedName("OrderPrice")

@@ -10,8 +10,6 @@ data class PlaceOrderRequestBody(
     val itemRequests: List<ItemRequest>,
     @SerializedName("mobile")
     val mobile: String,
-    @SerializedName("Notes")
-    val notes: String,
     @SerializedName("Plan")
     val plan: String
 )

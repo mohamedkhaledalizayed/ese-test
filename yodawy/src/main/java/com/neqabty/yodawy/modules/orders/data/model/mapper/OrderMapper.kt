@@ -19,7 +19,7 @@ fun OrderModel.toOrderEntity(): OrderEntity {
         deliveryFees,
         id,
         items.toOderItemsEntity(),
-        notes, orderNumber, orderPrice,priceBeforeDiscount, pharmacy, prescriptionImages
+        orderNumber, orderPrice,priceBeforeDiscount, pharmacy, prescriptionImages
     )
 }
 

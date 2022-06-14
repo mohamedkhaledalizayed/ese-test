@@ -1,6 +1,7 @@
 package com.neqabty.presentation.ui.medicalLetters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
@@ -37,11 +38,11 @@ class MedicalLettersAdapter(
                         false,
                         dataBindingComponent
                 )
-        binding.root.setOnClickListener {
-            binding.letter?.let {
-                callback?.invoke(it)
-            }
-        }
+//        binding.root.setOnClickListener {
+//            binding.letter?.let {
+//                callback?.invoke(it)
+//            }
+//        }
         binding.rvLetterProcedures.adapter = MedicalLetterProceduresAdapter(dataBindingComponent, appExecutors, {})
         return binding
     }
@@ -49,5 +50,9 @@ class MedicalLettersAdapter(
     override fun bind(binding: MedicalLetterItemBinding, item: MedicalLetterUI.LetterItem) {
         binding.letter = item
         (binding.rvLetterProcedures.adapter as MedicalLetterProceduresAdapter).submitList(item.letterProcedures)
+        binding.tvDownload.visibility = if(item.isActive == true) View.VISIBLE else View.GONE
+        binding.tvDownload.setOnClickListener{
+            callback?.invoke(item)
+        }
     }
 }

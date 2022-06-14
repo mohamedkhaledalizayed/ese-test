@@ -99,7 +99,7 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
     }
 
     fun confirmOrder(view: View) {
-        placeOrderViewModel.placeOrder(selectedAddress.adressId,Constants.mobileNumber,"notes",
+        placeOrderViewModel.placeOrder(selectedAddress.adressId,Constants.mobileNumber,
             plan, Constants.cartItems.map {
             ItemParam(it.first.id,it.second)
         })

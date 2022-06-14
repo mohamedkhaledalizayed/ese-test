@@ -80,7 +80,7 @@ class DoctorsReservationFragment : BaseFragment() {
             }
         }
         listOfDoctors.clear()
-        listOfDoctors.add(Pharmacy(R.drawable.vezeeta, getString(R.string.vezeeta_title), getString(R.string.vezeeta_details)))
+        listOfDoctors.add(Pharmacy(R.drawable.vezeeta, getString(R.string.vezeeta_title), getString(R.string.vezeeta_doctors_details)))
 
         pharmacyAdapter.submitList(listOfDoctors)
     }

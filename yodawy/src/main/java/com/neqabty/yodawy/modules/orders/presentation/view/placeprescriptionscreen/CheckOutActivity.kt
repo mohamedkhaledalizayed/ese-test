@@ -129,7 +129,6 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
             val json: String = gson.toJson(
                 OrderRequest(
                     addressId = selectedAddress.adressId,
-                    notes = "Order Note",
                     yodawyId = yodawyId,
                     plan = "A"
                 ))
