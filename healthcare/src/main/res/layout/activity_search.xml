@@ -52,7 +52,7 @@
                     android:drawablePadding="@dimen/_10sdp"
                     android:imeOptions="actionSearch"
                     android:drawableStart="@drawable/ic_search"
-                    android:hint="البحث"
+                    android:hint="@string/search"
                     android:background="@drawable/edit_text_bg"
                     android:layout_marginTop="@dimen/_10sdp"
                     />

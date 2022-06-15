@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/_9sdp"
         android:drawableStart="@drawable/ic_search"
-        android:hint="البحث"
+        android:hint="@string/search"
         android:lines="1"
         android:drawablePadding="@dimen/_10sdp"
         android:inputType="text"
