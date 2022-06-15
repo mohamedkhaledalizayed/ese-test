@@ -19,7 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custom_toolbar"
-        android:padding="@dimen/_10sdp"
         android:background="@color/background"
         android:scrollbars="none">
 
@@ -31,6 +30,7 @@
                 android:id="@+id/home_image_details"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_165sdp"
+                android:layout_margin="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -95,130 +95,41 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="@string/seha"
                 android:textSize="@dimen/_12ssp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:textColor="#272a3f"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textStyle="bold"/>
 
-
-            <HorizontalScrollView
-                android:id="@+id/about_section"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/about_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/text_seha"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:scrollbars="none">
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="@dimen/_10sdp">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="@dimen/_200sdp"
-                        android:layout_height="@dimen/_95sdp"
-                        android:elevation="@dimen/_4sdp"
-                        android:layout_marginBottom="@dimen/_1sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        app:cardCornerRadius="@dimen/_4sdp">
-
-                        <RelativeLayout
-                            android:id="@+id/about_seha_neqbty"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/about_neqabty_bg"
-                            >
-
-                            <ImageView
-                                android:id="@+id/about_icon"
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_margin="@dimen/_10sdp"
-                                android:src="@drawable/ic_about" />
-
-                            <TextView
-                                android:id="@+id/about_seha"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_10sdp"
-                                android:layout_toEndOf="@+id/about_icon"
-                                android:text="@string/about_seha"
-                                android:textColor="#4c5980"
-                                android:textSize="@dimen/_12ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/about_seha"
-                                android:layout_marginTop="@dimen/_10sdp"
-                                android:layout_toEndOf="@+id/about_icon"
-                                android:text="@string/more_details"
-                                android:textColor="#1792dc"
-                                android:textSize="@dimen/_12ssp"
-                                android:textStyle="bold" />
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="@dimen/_200sdp"
-                        android:layout_height="@dimen/_95sdp"
-                        android:elevation="@dimen/_4sdp"
-                        android:layout_marginBottom="@dimen/_1sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        app:cardCornerRadius="@dimen/_4sdp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/about_neqabty_bg"
-                            >
-
-                            <ImageView
-                                android:id="@+id/about_icon1"
-                                android:layout_width="@dimen/_40sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:layout_marginTop="@dimen/_10sdp"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:layout_marginBottom="@dimen/_10sdp"
-                                android:src="@drawable/ic_about" />
-
-                            <TextView
-                                android:id="@+id/about_seha1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_10sdp"
-                                android:layout_toEndOf="@+id/about_icon1"
-                                android:text="@string/sehe_program"
-                                android:textColor="#4c5980"
-                                android:textSize="@dimen/_12ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_toEndOf="@+id/about_icon1"
-                                android:layout_below="@+id/about_seha1"
-                                android:text="@string/more_details"
-                                android:textStyle="bold"
-                                android:textSize="@dimen/_12ssp"
-                                android:textColor="#1792dc"
-                                android:layout_marginTop="@dimen/_10sdp"
-                                />
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
-
-
-                </LinearLayout>
-
-            </HorizontalScrollView>
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:minHeight="@dimen/_100sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/about_recycler"
+                app:layout_constraintBottom_toBottomOf="@id/about_recycler"
+                />
 
             <RelativeLayout
-                app:layout_constraintTop_toBottomOf="@+id/about_section"
+                app:layout_constraintTop_toBottomOf="@+id/about_recycler"
                 android:id="@+id/news_container"
+                android:layout_margin="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -251,7 +162,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/_10sdp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 />
 

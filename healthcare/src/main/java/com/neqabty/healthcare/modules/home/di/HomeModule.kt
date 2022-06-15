@@ -1,8 +1,8 @@
 package com.neqabty.healthcare.modules.home.di
 
-import com.neqabty.healthcare.modules.home.data.api.HealthCareApi
-import com.neqabty.healthcare.modules.home.data.repository.HealthCareRepositoryImpl
-import com.neqabty.healthcare.modules.home.domain.repository.HealthCareRepository
+import com.neqabty.healthcare.modules.home.data.api.HomeApi
+import com.neqabty.healthcare.modules.home.data.repository.HomeRepositoryImpl
+import com.neqabty.healthcare.modules.home.domain.repository.HomeRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -16,12 +16,12 @@ import javax.inject.Named
 abstract class HomeModule {
     companion object {
         @Provides
-        fun providesCourseApiService(
+        fun providesHomeApi(
             @Named("healthcare")
             retrofit: Retrofit
-        ) = retrofit.create(HealthCareApi::class.java)
+        ) = retrofit.create(HomeApi::class.java)
     }
 
     @Binds
-    internal abstract fun bindsCoursesRepository(healthCareRepositoryImpl: HealthCareRepositoryImpl): HealthCareRepository
+    internal abstract fun bindsHomeRepository(homeRepositoryImpl: HomeRepositoryImpl): HomeRepository
 }

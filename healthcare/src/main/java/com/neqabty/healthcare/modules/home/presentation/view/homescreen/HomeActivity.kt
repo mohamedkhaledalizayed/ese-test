@@ -5,9 +5,9 @@ package com.neqabty.healthcare.modules.home.presentation.view.homescreen
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
@@ -28,6 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavigationItemSelectedListener {
 
     private val mAdapter = OurNewsAdapter()
+    private val aboutAdapter = AboutAdapter()
     private lateinit var toolbar: Toolbar
     private lateinit var drawer: DrawerLayout
     override fun getViewBinding() = ActivityHomeBinding.inflate(layoutInflater)
@@ -35,10 +37,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        homeViewModel.getProviders()
-        homeViewModel.providers.observe(this){
-            Log.d("medicalProviders",it.size.toString())
-        }
+
         setContentView(binding.root)
         setupToolbar(title = "الرئيسية")
         toolbar = binding.homeContent.customToolbar.toolbar
@@ -67,9 +66,34 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
 
         mAdapter.submitList(mutableListOf())
 
+        binding.homeContent.aboutRecycler.adapter = aboutAdapter
+        aboutAdapter.onItemClickListener = object :
+            AboutAdapter.OnItemClickListener {
+            override fun setOnItemClickListener(item: String) {
+                aboutDetails(item)
+            }
+        }
+
         binding.homeContent.startNow.setOnClickListener { startActivity(Intent(this, SearchActivity::class.java)) }
 
-        binding.homeContent.aboutSehaNeqbty.setOnClickListener { aboutDetails() }
+        homeViewModel.getAboutList()
+        homeViewModel.aboutList.observe(this){
+
+            it.let { resource ->
+                when(resource.status){
+                    Status.LOADING ->{
+                        binding.homeContent.progressCircular.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS ->{
+                        binding.homeContent.progressCircular.visibility = View.GONE
+                        aboutAdapter.submitList(resource.data)
+                    }
+                    Status.ERROR ->{
+                        binding.homeContent.progressCircular.visibility = View.GONE
+                    }
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -77,12 +101,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
-    }
-
-
-    private fun aboutDetails() {
+    private fun aboutDetails(details: String) {
         val fm: FragmentManager = supportFragmentManager
         val dialog = AboutFragment()
         dialog.show(fm, "")
