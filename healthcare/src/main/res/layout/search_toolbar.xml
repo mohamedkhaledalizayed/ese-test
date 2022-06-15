@@ -35,11 +35,16 @@
         android:background="@drawable/edit_text"/>
 
     <EditText
+        android:id="@+id/search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="@dimen/_9sdp"
         android:drawableStart="@drawable/ic_search"
-        android:hint="  البحث"
+        android:hint="البحث"
+        android:lines="1"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:drawablePadding="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,7 +3,11 @@ package com.neqabty.healthcare.modules.search.presentation.view.searchresult
 
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
@@ -65,6 +69,18 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
 
         binding.cityClose.setOnClickListener { binding.cityContainer.visibility = View.GONE }
 
+        binding.searchToolbar.search.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if(binding.searchToolbar.search.text.toString().isNotEmpty()){
+                        return true
+                    }else{
+                        Toast.makeText(this@SearchResultActivity, "من فضلك ادخل كلمة البحث", Toast.LENGTH_LONG).show()
+                    }
+                }
+                return false
+            }
+        })
     }
 
     override fun onFilterClicked(government: String, city: String) {

@@ -49,9 +49,10 @@
                     android:padding="@dimen/_9sdp"
                     android:inputType="text"
                     android:lines="1"
+                    android:drawablePadding="@dimen/_10sdp"
                     android:imeOptions="actionSearch"
                     android:drawableStart="@drawable/ic_search"
-                    android:hint="  البحث"
+                    android:hint="البحث"
                     android:background="@drawable/edit_text_bg"
                     android:layout_marginTop="@dimen/_10sdp"
                     />

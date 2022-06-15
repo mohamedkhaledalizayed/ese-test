@@ -5,9 +5,13 @@ package com.neqabty.healthcare.modules.home.presentation.view.homescreen
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -22,6 +26,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
+import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -94,6 +99,20 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
                 }
             }
         }
+
+        binding.homeContent.customToolbar.search.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if(binding.homeContent.customToolbar.search.text.toString().isNotEmpty()){
+                        startActivity(Intent(this@HomeActivity, SearchResultActivity::class.java))
+                        return true
+                    }else{
+                        Toast.makeText(this@HomeActivity, "من فضلك ادخل كلمة البحث", Toast.LENGTH_LONG).show()
+                    }
+                }
+                return false
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
