@@ -3,15 +3,12 @@ package com.neqabty.healthcare.modules.search.presentation.view.searchresult
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySearchResultBinding
-import com.neqabty.healthcare.modules.home.presentation.view.homescreen.HomeViewModel
 import com.neqabty.healthcare.modules.search.presentation.view.filter.FilterBottomSheet
-import com.neqabty.healthcare.modules.search.presentation.view.search.PackagesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -61,7 +58,11 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
             }
         }
 
-        binding.governmentClose.setOnClickListener { binding.governmentContainer.visibility = View.GONE }
+        binding.governmentClose.setOnClickListener {
+            binding.governmentContainer.visibility = View.GONE
+            binding.cityContainer.visibility = View.GONE
+        }
+
         binding.cityClose.setOnClickListener { binding.cityContainer.visibility = View.GONE }
 
     }
