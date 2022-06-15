@@ -36,7 +36,7 @@ class AboutAdapter: RecyclerView.Adapter<AboutAdapter.ViewHolder>() {
         viewHolder.binding.aboutSeha.text = items[position].key
 
         viewHolder.binding.itemLayout.setOnClickListener {
-            onItemClickListener?.setOnItemClickListener(items[position].value)
+            onItemClickListener?.setOnItemClickListener(items[position].key, items[position].value)
         }
     }
 
@@ -57,7 +57,7 @@ class AboutAdapter: RecyclerView.Adapter<AboutAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: String)
+            fun setOnItemClickListener(title: String, content: String)
     }
 
     class ViewHolder(val binding: AboutItemBinding) :

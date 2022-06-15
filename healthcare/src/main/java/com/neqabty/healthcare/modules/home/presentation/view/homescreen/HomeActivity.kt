@@ -69,8 +69,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         binding.homeContent.aboutRecycler.adapter = aboutAdapter
         aboutAdapter.onItemClickListener = object :
             AboutAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(item: String) {
-                aboutDetails(item)
+            override fun setOnItemClickListener(title: String, content: String) {
+                aboutDetails(title, content)
             }
         }
 
@@ -101,9 +101,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         return true
     }
 
-    private fun aboutDetails(details: String) {
+    private fun aboutDetails(title: String, content: String) {
         val fm: FragmentManager = supportFragmentManager
-        val dialog = AboutFragment()
+        val dialog = AboutFragment.newInstance(title, content)
         dialog.show(fm, "")
         dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
 

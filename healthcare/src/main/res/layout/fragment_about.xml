@@ -24,6 +24,7 @@
         android:layout_marginEnd="@dimen/_30sdp"/>
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/about_seha_"
@@ -35,6 +36,7 @@
 
 
     <TextView
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/about_seha_details"
