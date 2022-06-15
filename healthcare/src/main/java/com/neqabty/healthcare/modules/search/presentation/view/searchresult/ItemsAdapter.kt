@@ -7,12 +7,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.SearchItemBinding
+import com.neqabty.healthcare.modules.search.domain.entity.MedicalProviderEntity
+import com.squareup.picasso.Picasso
 import kotlin.collections.ArrayList
 
 
 class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
-    private val items: MutableList<String> = ArrayList()
+    private val items: MutableList<MedicalProviderEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -33,12 +35,19 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val item = items[position]
 
+        if (!item.image.isNullOrEmpty()){
+            Picasso.get().load(item.image).placeholder(R.drawable.user).into(viewHolder.binding.itemImage)
+        }
+
+        viewHolder.binding.itemName.text = item.name
+        viewHolder.binding.government.text = "${item.governorateEntity.governorateAr}, ${item.areaEntity.areaName}"
     }
 
-    override fun getItemCount() = 12
+    override fun getItemCount() = items.size
 
-    fun submitList(newItems: MutableList<String>?) {
+    fun submitList(newItems: MutableList<MedicalProviderEntity>?) {
         clear()
         newItems?.let {
             items.addAll(it)
