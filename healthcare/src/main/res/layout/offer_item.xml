@@ -26,7 +26,6 @@
                 android:id="@+id/discount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="٪٤٠"
                 android:layout_gravity="center"
                 android:textSize="@dimen/_14ssp"
                 android:textColor="@color/white"
@@ -39,7 +38,6 @@
             android:id="@+id/discount_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="الحصول علي كاش باك بقيمه ٢٥٠ جنيةك بقيمه ٢٥٠ جنية"
             android:textStyle="bold"
             android:ellipsize="end"
             android:textColor="@color/black"
@@ -88,9 +86,9 @@
             android:layout_marginStart="@dimen/_10sdp"/>
 
         <TextView
+            android:id="@+id/expiry_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="تنتهي هذا الشهر"
             android:textSize="@dimen/_10ssp"
             android:textColor="#de0000"
             android:layout_marginTop="@dimen/_12sdp"

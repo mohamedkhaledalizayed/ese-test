@@ -24,4 +24,16 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:minHeight="@dimen/_100sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/offers_recycler"
+        app:layout_constraintBottom_toBottomOf="@id/offers_recycler"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

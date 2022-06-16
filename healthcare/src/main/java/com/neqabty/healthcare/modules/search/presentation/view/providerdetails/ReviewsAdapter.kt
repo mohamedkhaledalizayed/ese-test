@@ -2,16 +2,12 @@ package com.neqabty.healthcare.modules.search.presentation.view.providerdetails
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.databinding.PackageItemLayoutBinding
 import com.neqabty.healthcare.databinding.ReviewItemBinding
 import com.neqabty.healthcare.modules.search.presentation.model.search.PackageInfo
-import com.squareup.picasso.Picasso
 import kotlin.collections.ArrayList
 
 
