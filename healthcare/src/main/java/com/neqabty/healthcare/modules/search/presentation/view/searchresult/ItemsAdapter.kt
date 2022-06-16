@@ -43,6 +43,8 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
         viewHolder.binding.itemName.text = item.name
         viewHolder.binding.government.text = "${item.governorateEntity.governorateAr}, ${item.areaEntity.areaName}"
+
+        viewHolder.binding.itemLayout.setOnClickListener { onItemClickListener?.setOnItemClickListener(item) }
     }
 
     override fun getItemCount() = items.size
@@ -62,7 +64,7 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: String)
+            fun setOnItemClickListener(item: MedicalProviderEntity)
     }
 
     class ViewHolder(val binding: SearchItemBinding) :

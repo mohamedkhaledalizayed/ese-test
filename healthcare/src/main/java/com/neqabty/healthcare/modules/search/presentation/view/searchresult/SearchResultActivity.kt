@@ -2,6 +2,7 @@ package com.neqabty.healthcare.modules.search.presentation.view.searchresult
 
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -12,7 +13,9 @@ import androidx.activity.viewModels
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySearchResultBinding
+import com.neqabty.healthcare.modules.search.domain.entity.MedicalProviderEntity
 import com.neqabty.healthcare.modules.search.presentation.view.filter.FilterBottomSheet
+import com.neqabty.healthcare.modules.search.presentation.view.providerdetails.ProviderDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,8 +34,10 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
         binding.itemsRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             ItemsAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(item: String) {
-
+            override fun setOnItemClickListener(item: MedicalProviderEntity) {
+                val intent = Intent(this@SearchResultActivity, ProviderDetailsActivity::class.java)
+                intent.putExtra("name", item.name)
+                startActivity(intent)
             }
         }
 

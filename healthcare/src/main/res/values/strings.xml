@@ -92,4 +92,5 @@
     <string name="confirm_password">تاكيد كلمة السر</string>
     <string name="cash_back_service">خدمة الكاش باك</string>
     <string name="search">البحث</string>
+    <string name="add_review">اضف تقييم</string>
 </resources>

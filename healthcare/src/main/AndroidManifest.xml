@@ -16,6 +16,9 @@
         android:theme="@style/Theme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".modules.search.presentation.view.providerdetails.ProviderDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".modules.register.presentation.RegistrationActivity"
             android:exported="false" />
         <activity

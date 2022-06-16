@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@drawable/review_bg">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_image"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/picture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="شادي حسن"
+            android:textStyle="bold"
+            android:lines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@+id/user_image"
+            app:layout_constraintBottom_toBottomOf="@id/user_image"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintStart_toEndOf="@+id/user_image"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/_10sdp"/>
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="دكتور محترم جدا وجيد في التشخيص والمتابعة. لوريم إيبسوم هو ببساطة نص شكلي "
+            android:textSize="@dimen/_8ssp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="@dimen/_3sdp"
+            app:layout_constraintTop_toBottomOf="@+id/user_image"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
