@@ -1,96 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/_2sdp"
     android:layout_margin="@dimen/_10sdp"
     android:orientation="vertical"
     android:padding="@dimen/_16sdp"
+    android:id="@+id/main_container"
     android:layoutDirection="rtl"
+    android:minHeight="@dimen/_400sdp"
     android:background="@drawable/bg_rounded">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/government_"
-        android:textStyle="bold"
-        android:textSize="@dimen/_10ssp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:textColor="@color/black"/>
-
-    <FrameLayout
-        android:id="@+id/spinner_government_container"
+    <LinearLayout
+        android:id="@+id/filter_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/edit_text_bg"
-        android:padding="@dimen/_8sdp"
-       >
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/sp_government"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:entries="@array/governments"
-            android:popupBackground="@color/splash_bg" />
-
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
-    </FrameLayout>
+            android:text="@string/government_"
+            android:textStyle="bold"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginTop="@dimen/_30sdp"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/city_"
-        android:textStyle="bold"
-        android:textSize="@dimen/_10ssp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:textColor="@color/black"/>
-
-    <FrameLayout
-        android:id="@+id/spinner_city_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/edit_text_bg"
-        android:padding="@dimen/_8sdp"
-        >
-
-        <Spinner
-            android:id="@+id/sp_cities"
+        <FrameLayout
+            android:id="@+id/spinner_government_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
-            android:entries="@array/cities"
-            android:popupBackground="@color/splash_bg" />
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/edit_text_bg"
+            android:padding="@dimen/_8sdp"
+            >
 
-        <ImageView
+            <Spinner
+                android:id="@+id/sp_government"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:entries="@array/governments"
+                android:popupBackground="@color/splash_bg" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        </FrameLayout>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
-    </FrameLayout>
+            android:text="@string/profission"
+            android:textStyle="bold"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
 
+        <FrameLayout
+            android:id="@+id/spinner_spe_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/edit_text_bg"
+            android:padding="@dimen/_8sdp"
+            >
 
-    <TextView
-        android:id="@+id/filter_btn"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
-        android:text="@string/filter"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"
-        android:background="@drawable/select_btn_bg"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_marginBottom="@dimen/_30sdp"
+            <Spinner
+                android:id="@+id/sp_spe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:entries="@array/cities"
+                android:popupBackground="@color/splash_bg" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/provider_type"
+            android:textStyle="bold"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+
+        <FrameLayout
+            android:id="@+id/spinner_type_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/edit_text_bg"
+            android:padding="@dimen/_8sdp"
+            >
+
+            <Spinner
+                android:id="@+id/sp_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:entries="@array/cities"
+                android:popupBackground="@color/splash_bg" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/filter_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:text="@string/filter"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:background="@drawable/select_btn_bg"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

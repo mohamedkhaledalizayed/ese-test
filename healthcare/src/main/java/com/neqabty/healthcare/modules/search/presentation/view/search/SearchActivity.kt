@@ -46,7 +46,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     if(binding.search.text.toString().isNotEmpty()){
-                        startActivity(Intent(this@SearchActivity, SearchResultActivity::class.java))
+                        startActivity(Intent(this@SearchActivity, SearchResultActivity::class.java)
+                            .putExtra("name", binding.search.text.toString()))
                         return true
                     }else{
                         Toast.makeText(this@SearchActivity, "من فضلك ادخل كلمة البحث", Toast.LENGTH_LONG).show()

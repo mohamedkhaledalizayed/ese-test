@@ -7,14 +7,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.SearchItemBinding
-import com.neqabty.healthcare.modules.search.domain.entity.MedicalProviderEntity
+import com.neqabty.healthcare.modules.search.domain.entity.search.ProvidersEntity
 import com.squareup.picasso.Picasso
 import kotlin.collections.ArrayList
 
 
 class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
-    private val items: MutableList<MedicalProviderEntity> = ArrayList()
+    private val items: MutableList<ProvidersEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -42,14 +42,14 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
         }
 
         viewHolder.binding.itemName.text = item.name
-        viewHolder.binding.government.text = "${item.governorateEntity.governorateAr}, ${item.areaEntity.areaName}"
+        viewHolder.binding.government.text = "${item.governorate.governorateAr}, ${item.area?.areaName}"
 
         viewHolder.binding.itemLayout.setOnClickListener { onItemClickListener?.setOnItemClickListener(item) }
     }
 
     override fun getItemCount() = items.size
 
-    fun submitList(newItems: MutableList<MedicalProviderEntity>?) {
+    fun submitList(newItems: MutableList<ProvidersEntity>?) {
         clear()
         newItems?.let {
             items.addAll(it)
@@ -64,7 +64,7 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: MedicalProviderEntity)
+            fun setOnItemClickListener(item: ProvidersEntity)
     }
 
     class ViewHolder(val binding: SearchItemBinding) :

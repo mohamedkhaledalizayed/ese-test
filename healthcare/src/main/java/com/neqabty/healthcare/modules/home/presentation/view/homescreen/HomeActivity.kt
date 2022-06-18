@@ -104,7 +104,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     if(binding.homeContent.customToolbar.search.text.toString().isNotEmpty()){
-                        startActivity(Intent(this@HomeActivity, SearchResultActivity::class.java))
+                        startActivity(Intent(this@HomeActivity, SearchResultActivity::class.java)
+                            .putExtra("name", binding.homeContent.customToolbar.search.text.toString()))
                         return true
                     }else{
                         Toast.makeText(this@HomeActivity, "من فضلك ادخل كلمة البحث", Toast.LENGTH_LONG).show()
