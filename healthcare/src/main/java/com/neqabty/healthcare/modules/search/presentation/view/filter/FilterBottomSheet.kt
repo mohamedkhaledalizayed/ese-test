@@ -90,14 +90,14 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
 
                 when (resource.status) {
                     Status.LOADING -> {
-                        dialog.findViewById<ProgressBar>(R.id.progress_circular)?.visibility =
+                        binding.progressCircular.visibility =
                             View.VISIBLE
                     }
                     Status.SUCCESS -> {
                         filtersData = resource.data
-                        dialog.findViewById<ProgressBar>(R.id.progress_circular)?.visibility =
+                        binding.progressCircular.visibility =
                             View.GONE
-                        dialog.findViewById<LinearLayout>(R.id.filter_container)?.visibility =
+                        binding.progressCircular.visibility =
                             View.VISIBLE
                         governorateAdapter.submitList(
                             resource.data?.governorates!!.toMutableList()
@@ -113,7 +113,7 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
                         binding.spType.setSelection(selectedProviders)
                     }
                     Status.ERROR -> {
-                        dialog.findViewById<ProgressBar>(R.id.progress_circular)?.visibility =
+                        binding.progressCircular.visibility =
                             View.GONE
                     }
                 }
