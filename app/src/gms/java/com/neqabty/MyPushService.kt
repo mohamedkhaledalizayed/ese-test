@@ -22,8 +22,7 @@ class MyPushService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         token?.let {
-            if(!token.equals(PreferencesHelper.instance.token))
-                sendRegistrationToServer(token)
+            sendRegistrationToServer(token)
         }
     }
 
