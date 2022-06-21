@@ -1,9 +1,7 @@
 package com.neqabty.courses.home.presentation.view.homescreen
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.example.courses.R
 import com.example.courses.databinding.ActivityMainBinding
 import com.neqabty.courses.core.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
