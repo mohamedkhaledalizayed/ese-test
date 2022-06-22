@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.modules.register.presentation.model
+package com.neqabty.healthcare.modules.subscribtions.presentation.view.model
 
 import android.net.Uri
 

@@ -1,8 +1,6 @@
 package com.neqabty.healthcare.modules.search.presentation.view.search
 
 
-
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
@@ -12,9 +10,9 @@ import android.widget.Toast
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivitySearchBinding
 import com.neqabty.healthcare.modules.offers.presentation.view.offers.OffersActivity
-import com.neqabty.healthcare.modules.register.presentation.RegistrationActivity
 import com.neqabty.healthcare.modules.search.presentation.model.search.PackageInfo
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
+import com.neqabty.healthcare.modules.subscribtions.presentation.view.SubscriptionActivity
 
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
@@ -31,12 +29,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         prepareData()
         mAdapter.onItemClickListener = object :
             PackagesAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(item: String) {
-                startActivity(Intent(this@SearchActivity, RegistrationActivity::class.java))
-            }
-
             override fun setOnRegisterClickListener(item: String) {
-                startActivity(Intent(this@SearchActivity, RegistrationActivity::class.java))
+                startActivity(Intent(this@SearchActivity, SubscriptionActivity::class.java))
             }
         }
 

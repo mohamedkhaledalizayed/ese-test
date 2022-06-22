@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.modules.register.presentation
+package com.neqabty.healthcare.modules.subscribtions.presentation.view
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.FollowerItemLayoutBinding
-import com.neqabty.healthcare.modules.register.presentation.model.Follower
+import com.neqabty.healthcare.modules.subscribtions.presentation.view.model.Follower
 import kotlin.collections.ArrayList
 
 

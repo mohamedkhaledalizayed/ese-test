@@ -51,7 +51,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         }
 
         viewHolder.binding.btnSelect.setOnClickListener {
-            onItemClickListener?.setOnItemClickListener("")
+            onItemClickListener?.setOnRegisterClickListener("")
         }
 
     }
@@ -73,7 +73,6 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: String)
             fun setOnRegisterClickListener(item: String)
     }
 
