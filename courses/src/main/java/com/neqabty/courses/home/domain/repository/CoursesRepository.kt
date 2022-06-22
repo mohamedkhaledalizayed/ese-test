@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CoursesRepository {
     fun getCoursesList(): Flow<List<CourseEntity>>
+    fun getCourseDetails(id: String): Flow<List<CourseEntity>>
 }

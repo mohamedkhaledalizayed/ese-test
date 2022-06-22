@@ -8,7 +8,12 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetCoursesListUseCase @Inject constructor(private val coursesRepository: CoursesRepository) {
+
     fun build(): Flow<List<CourseEntity>> {
         return coursesRepository.getCoursesList()
+    }
+
+    fun build(id: String): Flow<List<CourseEntity>> {
+        return coursesRepository.getCourseDetails(id)
     }
 }

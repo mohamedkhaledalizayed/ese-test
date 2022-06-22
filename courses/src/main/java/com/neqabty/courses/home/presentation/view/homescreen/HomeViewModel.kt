@@ -17,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val getCoursesListUseCase: GetCoursesListUseCase) :
     ViewModel() {
+
     val courses = MutableLiveData<Resource<List<CourseEntity>>>()
     fun getCourses() {
         courses.postValue(Resource.loading(data = null))
@@ -27,6 +28,20 @@ class HomeViewModel @Inject constructor(private val getCoursesListUseCase: GetCo
                 }
             } catch (e: Throwable) {
                 courses.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            }
+        }
+    }
+
+    val courseDetails = MutableLiveData<Resource<List<CourseEntity>>>()
+    fun getCourseDetails(id: String) {
+        courseDetails.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                getCoursesListUseCase.build(id).collect {
+                    courseDetails.postValue(Resource.success(data = it))
+                }
+            } catch (e: Throwable) {
+                courseDetails.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
         }
     }

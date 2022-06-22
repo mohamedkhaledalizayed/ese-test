@@ -12,5 +12,5 @@
     <color name="background">#f0f5f7</color>
     <color name="red">#f44336</color>
     <color name="green">#13cb73</color>
-    <color name="gghh">#13cb73</color>
+    <color name="grey_font">#ff9e9e9e</color>
 </resources>

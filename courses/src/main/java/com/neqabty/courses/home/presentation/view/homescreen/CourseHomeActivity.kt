@@ -1,5 +1,6 @@
 package com.neqabty.courses.home.presentation.view.homescreen
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -11,6 +12,7 @@ import com.example.courses.databinding.ActivityMainBinding
 import com.neqabty.courses.core.ui.BaseActivity
 import com.neqabty.courses.core.utils.Status
 import com.neqabty.courses.home.domain.entity.CourseEntity
+import com.neqabty.courses.home.presentation.view.coursedetails.CourseDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,7 +31,7 @@ class CourseHomeActivity : BaseActivity<ActivityMainBinding>() {
         mAdapter.onItemClickListener = object :
             CoursesAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: CourseEntity) {
-
+                startActivity(Intent(this@CourseHomeActivity, CourseDetailsActivity::class.java).putExtra("courseId", item.id))
             }
         }
 
