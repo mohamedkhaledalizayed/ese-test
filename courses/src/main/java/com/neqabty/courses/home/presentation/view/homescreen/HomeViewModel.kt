@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.courses.core.utils.AppUtils
 import com.neqabty.courses.core.utils.Resource
-import com.neqabty.courses.home.data.model.courses.Course
+import com.neqabty.courses.home.domain.entity.CourseEntity
 import com.neqabty.courses.home.domain.interactors.GetCoursesListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val getCoursesListUseCase: GetCoursesListUseCase) :
     ViewModel() {
-    val courses = MutableLiveData<Resource<List<Course>>>()
+    val courses = MutableLiveData<Resource<List<CourseEntity>>>()
     fun getCourses() {
         courses.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {

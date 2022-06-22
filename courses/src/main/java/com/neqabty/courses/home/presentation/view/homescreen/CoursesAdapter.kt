@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.courses.R
 import com.example.courses.databinding.CourseItemBinding
 import com.neqabty.courses.home.data.model.courses.Course
+import com.neqabty.courses.home.domain.entity.CourseEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlin.collections.ArrayList
@@ -15,7 +16,7 @@ import kotlin.collections.ArrayList
 
 class CoursesAdapter: RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
 
-    private val items: MutableList<Course> = ArrayList()
+    private val items: MutableList<CourseEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -54,13 +55,13 @@ class CoursesAdapter: RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
         viewHolder.binding.courseSessions.text = "${item.numOfSessions} Sessions"
 
         viewHolder.binding.itemLayout.setOnClickListener {
-//            onItemClickListener?.setOnItemClickListener(item)
+            onItemClickListener?.setOnItemClickListener(item)
         }
     }
 
     override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<Course>?) {
+    fun submitList(newItems: List<CourseEntity>?) {
         clear()
         newItems?.let {
             items.addAll(it)
@@ -75,7 +76,7 @@ class CoursesAdapter: RecyclerView.Adapter<CoursesAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: String)
+            fun setOnItemClickListener(item: CourseEntity)
     }
 
     class ViewHolder(val binding: CourseItemBinding) :

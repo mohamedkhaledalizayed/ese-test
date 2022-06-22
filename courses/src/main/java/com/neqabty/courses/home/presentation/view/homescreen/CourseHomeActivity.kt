@@ -2,11 +2,15 @@ package com.neqabty.courses.home.presentation.view.homescreen
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import com.example.courses.R
 import com.example.courses.databinding.ActivityMainBinding
 import com.neqabty.courses.core.ui.BaseActivity
 import com.neqabty.courses.core.utils.Status
+import com.neqabty.courses.home.domain.entity.CourseEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +28,7 @@ class CourseHomeActivity : BaseActivity<ActivityMainBinding>() {
         binding.coursesRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             CoursesAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(item: String) {
+            override fun setOnItemClickListener(item: CourseEntity) {
 
             }
         }
@@ -51,9 +55,18 @@ class CourseHomeActivity : BaseActivity<ActivityMainBinding>() {
                 }
             }
         }
-
-
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.filter_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return super.onOptionsItemSelected(item)
+    }
+
 
 
 }
