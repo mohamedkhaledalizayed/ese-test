@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.modules.search.domain.interactors
 
 import com.neqabty.healthcare.modules.search.data.model.SearchBody
+import com.neqabty.healthcare.modules.search.data.model.packages.PackageModel
 import com.neqabty.healthcare.modules.search.domain.entity.MedicalProviderEntity
 import com.neqabty.healthcare.modules.search.domain.entity.search.ProvidersEntity
 import com.neqabty.healthcare.modules.search.domain.repository.SearchRepository
@@ -21,5 +22,9 @@ class GetMedicalProviderstUseCase @Inject constructor(private val searchReposito
 
     fun getFilters(): Flow<FiltersUi> {
         return searchRepository.getFilters().map { it.toFiltersUi() }
+    }
+
+    fun getPackages(): Flow<List<PackageModel>> {
+        return searchRepository.getPackages()
     }
 }

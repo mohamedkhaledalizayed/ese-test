@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.PackageItemLayoutBinding
+import com.neqabty.healthcare.modules.search.data.model.packages.PackageModel
 import com.neqabty.healthcare.modules.search.presentation.model.search.PackageInfo
 import com.squareup.picasso.Picasso
 import kotlin.collections.ArrayList
@@ -16,7 +17,7 @@ import kotlin.collections.ArrayList
 
 class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
-    private val items: MutableList<PackageInfo> = ArrayList()
+    private val items: MutableList<PackageModel> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -38,8 +39,12 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-
-        viewHolder.binding.packageName.text = items[position].name
+        val item = items[position]
+        viewHolder.binding.packageName.text = item.name ?: ""
+        viewHolder.binding.insuranceDetails.text = item.insuranceAmount ?: ""
+        viewHolder.binding.requiredDataDetails.text = item.neddedInfo ?: ""
+        viewHolder.binding.targetPeopleDetails.text = item.targetGroups ?: ""
+        viewHolder.binding.infoDetails.text = item.description ?: ""
         viewHolder.binding.moreDetails.setOnClickListener {
             if (viewHolder.binding.packageDescription.isVisible){
                 viewHolder.binding.packageDescription.visibility = View.GONE
@@ -58,7 +63,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
     override fun getItemCount() = items.size
 
-    fun submitList(newItems: MutableList<PackageInfo>?) {
+    fun submitList(newItems: MutableList<PackageModel>?) {
         clear()
         newItems?.let {
             items.addAll(it)

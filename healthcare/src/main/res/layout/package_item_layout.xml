@@ -148,38 +148,15 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/black"/>
 
-            <LinearLayout
+            <TextView
                 android:id="@+id/required_data_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/required_data"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="صورة البطاقة الشخصية او شهادة الميلاد ."
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="بيان الامراض السابقة عن التامين ."
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="فترة الانتظار 30 يوم لكافة العمليات, 280 للولادة, من بدء التامين للسنة الاولى, ولا تسرى عند التجديد . "
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black"/>
-
-            </LinearLayout>
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="صورة البطاقة الشخصية او شهادة الميلاد ."
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/black"/>
 
             <View
                 android:id="@+id/view4"
@@ -235,30 +212,15 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/black"/>
 
-            <LinearLayout
+            <TextView
                 android:id="@+id/info_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/info"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="جميع الوثائق محددة المزايا و محددة القيمة. يجوز للعميل الواحد شراء أكثر من وثيقة لنفس نوع التامين, بحد أقصى لنوع التامين الواحد 100.000 جنيه للعميل الواحد."
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="كافة الاسعار شاملة الدمغات و رسوم الإصدار. مدة التامين سنة واحدة لكل وثيقة. كافة الوثا~ق يتم إصدارها إاليكترونيا و إرسالها برسالة نصية على تليفون العميل."
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/black"/>
-
-            </LinearLayout>
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="جميع الوثائق محددة المزايا و محددة القيمة. يجوز للعميل الواحد شراء أكثر من وثيقة لنفس نوع التامين, بحد أقصى لنوع التامين الواحد 100.000 جنيه للعميل الواحد."
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/black"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

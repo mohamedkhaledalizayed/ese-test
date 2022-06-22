@@ -4,20 +4,32 @@ package com.neqabty.healthcare.modules.search.presentation.view.search
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySearchBinding
 import com.neqabty.healthcare.modules.offers.presentation.view.offers.OffersActivity
+import com.neqabty.healthcare.modules.search.presentation.model.filters.ItemUi
 import com.neqabty.healthcare.modules.search.presentation.model.search.PackageInfo
+import com.neqabty.healthcare.modules.search.presentation.view.filter.FiltersViewModel
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
+import com.neqabty.healthcare.modules.search.presentation.view.searchresult.selectedGovernorate
+import com.neqabty.healthcare.modules.search.presentation.view.searchresult.selectedProfession
+import com.neqabty.healthcare.modules.search.presentation.view.searchresult.selectedProviders
 import com.neqabty.healthcare.modules.subscribtions.presentation.view.SubscriptionActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
 
+    private val filtersViewModel: FiltersViewModel by viewModels()
     private val mAdapter = PackagesAdapter()
     override fun getViewBinding() = ActivitySearchBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +43,26 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             PackagesAdapter.OnItemClickListener {
             override fun setOnRegisterClickListener(item: String) {
                 startActivity(Intent(this@SearchActivity, SubscriptionActivity::class.java))
+            }
+        }
+
+        filtersViewModel.getPackages()
+        filtersViewModel.packages.observe(this) {
+            it.let { resource ->
+
+                when (resource.status) {
+                    Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        mAdapter.submitList(resource.data?.toMutableList())
+                    }
+                    Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                    }
+                }
+
             }
         }
 
@@ -58,6 +90,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         list.add(PackageInfo("الباقة الذهبية"))
         list.add(PackageInfo("الباقة البلاتينية"))
 
-        mAdapter.submitList(list.toMutableList())
+//        mAdapter.submitList(list.toMutableList())
     }
 }

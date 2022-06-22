@@ -6,6 +6,7 @@ package com.neqabty.healthcare.modules.search.data.repository
 import com.neqabty.healthcare.modules.search.data.model.SearchBody
 import com.neqabty.healthcare.modules.search.data.model.mappers.toFiltersEntity
 import com.neqabty.healthcare.modules.search.data.model.mappers.toMedicalProviderEntity
+import com.neqabty.healthcare.modules.search.data.model.packages.PackageModel
 import com.neqabty.healthcare.modules.search.data.source.SearchDS
 import com.neqabty.healthcare.modules.search.domain.entity.MedicalProviderEntity
 import com.neqabty.healthcare.modules.search.domain.entity.filter.FiltersEntity
@@ -33,6 +34,12 @@ class SearchRepositoryImpl @Inject constructor(private val searchDS: SearchDS) :
     override fun getFilters(): Flow<FiltersEntity> {
         return flow {
             emit(searchDS.getFilters().toFiltersEntity())
+        }
+    }
+
+    override fun getPackages(): Flow<List<PackageModel>> {
+        return flow {
+            emit(searchDS.getPackages())
         }
     }
 }

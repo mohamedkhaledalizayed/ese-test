@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.healthcare.modules.search.data.model.packages.PackageModel
 import com.neqabty.healthcare.modules.search.domain.interactors.GetMedicalProviderstUseCase
 import com.neqabty.healthcare.modules.search.presentation.model.filters.FiltersUi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FiltersViewModel @Inject constructor(private val getMedicalProviderstUseCase: GetMedicalProviderstUseCase) :
     ViewModel() {
+
     val filters = MutableLiveData<Resource<FiltersUi>>()
     fun getFilters() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -28,6 +30,20 @@ class FiltersViewModel @Inject constructor(private val getMedicalProviderstUseCa
                 }
             }catch (e:Throwable){
                 filters.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            }
+        }
+    }
+
+    val packages = MutableLiveData<Resource<List<PackageModel>>>()
+    fun getPackages() {
+        viewModelScope.launch(Dispatchers.IO) {
+            packages.postValue(Resource.loading(data = null))
+            try {
+                getMedicalProviderstUseCase.getPackages().collect {
+                    packages.postValue(Resource.success(data = it))
+                }
+            }catch (e:Throwable){
+                packages.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
         }
     }
