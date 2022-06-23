@@ -97,7 +97,7 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
                         filtersData = resource.data
                         binding.progressCircular.visibility =
                             View.GONE
-                        binding.progressCircular.visibility =
+                        binding.filterContainer.visibility =
                             View.VISIBLE
                         governorateAdapter.submitList(
                             resource.data?.governorates!!.toMutableList()
