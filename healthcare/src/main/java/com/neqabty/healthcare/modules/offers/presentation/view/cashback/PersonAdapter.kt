@@ -35,13 +35,7 @@ class PersonAdapter: RecyclerView.Adapter<PersonAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-        if (position % 3 == 0){
-            viewHolder.binding.statusImage.setImageResource(R.drawable.ic_cancel)
-            viewHolder.binding.statusText.text = "لم يتم التسجيل"
-        }else{
-            viewHolder.binding.statusImage.setImageResource(R.drawable.ic_success_icon_green)
-            viewHolder.binding.statusText.text = "تم تسجيل الاشتراك بنجاح"
-        }
+
     }
 
     override fun getItemCount() = 12

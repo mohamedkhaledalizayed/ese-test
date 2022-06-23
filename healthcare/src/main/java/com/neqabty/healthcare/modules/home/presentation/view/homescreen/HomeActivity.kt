@@ -28,6 +28,7 @@ import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
+//import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -79,6 +80,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             }
         }
 
+        binding.homeContent.newsContainer.setOnClickListener {
+//            val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
+//            intent.putExtra("type", 1)
+//            startActivity(intent)
+        }
+
         binding.homeContent.startNow.setOnClickListener { startActivity(Intent(this, SearchActivity::class.java)) }
 
         homeViewModel.getAboutList()
@@ -99,21 +106,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
                 }
             }
         }
-
-        binding.homeContent.customToolbar.search.setOnEditorActionListener(object : TextView.OnEditorActionListener {
-            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    if(binding.homeContent.customToolbar.search.text.toString().isNotEmpty()){
-                        startActivity(Intent(this@HomeActivity, SearchResultActivity::class.java)
-                            .putExtra("name", binding.homeContent.customToolbar.search.text.toString()))
-                        return true
-                    }else{
-                        Toast.makeText(this@HomeActivity, "من فضلك ادخل كلمة البحث", Toast.LENGTH_LONG).show()
-                    }
-                }
-                return false
-            }
-        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

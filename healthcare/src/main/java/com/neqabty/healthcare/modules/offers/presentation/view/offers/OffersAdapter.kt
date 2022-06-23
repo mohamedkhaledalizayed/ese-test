@@ -37,8 +37,8 @@ class OffersAdapter: RecyclerView.Adapter<OffersAdapter.ViewHolder>() {
         viewHolder.binding.discountName.text = item.title
         viewHolder.binding.expiryDate.text = "تنتهي ${item.expiryDate}"
         viewHolder.binding.discount.text = "${item.percentage}%"
-        viewHolder.binding.discountName.setOnClickListener { onItemClickListener?.setOnTakeClickListener("") }
-        viewHolder.binding.useIt.setOnClickListener { onItemClickListener?.setOnCashBackClickListener("") }
+//        viewHolder.binding.discountName.setOnClickListener { onItemClickListener?.setOnTakeClickListener("") }
+//        viewHolder.binding.useIt.setOnClickListener { onItemClickListener?.setOnCashBackClickListener("") }
     }
 
     override fun getItemCount() = items.size

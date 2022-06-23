@@ -15,25 +15,11 @@
         android:fitsSystemWindows="true"
         android:minHeight="?attr/actionBarSize"
         app:contentInsetEnd="0dp"
+        android:layout_marginBottom="@dimen/_20sdp"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_up"
         app:titleTextColor="@color/white" />
-
-    <EditText
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_9sdp"
-        android:drawableStart="@drawable/ic_search"
-        android:hint="@string/search"
-        android:lines="1"
-        android:drawablePadding="@dimen/_10sdp"
-        android:inputType="text"
-        android:imeOptions="actionSearch"
-        android:background="@drawable/edit_text"
-        android:layout_margin="@dimen/_12sdp"
-        />
 
 </LinearLayout>
