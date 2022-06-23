@@ -28,6 +28,7 @@ import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
+import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 //import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -81,9 +82,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         }
 
         binding.homeContent.newsContainer.setOnClickListener {
-//            val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
-//            intent.putExtra("type", 1)
-//            startActivity(intent)
+            val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
+            intent.putExtra("type", 1)
+            startActivity(intent)
         }
 
         binding.homeContent.startNow.setOnClickListener { startActivity(Intent(this, SearchActivity::class.java)) }

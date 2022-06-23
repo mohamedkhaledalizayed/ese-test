@@ -14,8 +14,7 @@ import javax.inject.Inject
 //
 abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
-    @Inject
-    lateinit var sharedPreferences: PreferencesHelper
+
     lateinit var binding: B
     abstract fun getViewBinding(): B
 
