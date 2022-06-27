@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.util.Log
+import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
 import com.neqabty.healthcare.modules.subscribtions.data.model.SubscribePostBodyRequest
 import com.neqabty.healthcare.modules.subscribtions.data.source.SubscriptionSource
 import com.neqabty.healthcare.modules.subscribtions.domain.repository.SubscriptionRepository
@@ -27,7 +28,8 @@ class SubscriptionRepositoryImpl @Inject constructor(private val subscriptionSou
         referralNumber: String,
         personalImage: String,
         fronIdImage: String,
-        backIdImage: String
+        backIdImage: String,
+        followers: List<Followers>
     ): Flow<Boolean> {
 //        val p = personalImage.toBase64()
         val sub = SubscribePostBodyRequest(
@@ -39,11 +41,12 @@ class SubscriptionRepositoryImpl @Inject constructor(private val subscriptionSou
             mobile = mobile,
             nationalId = nationalId,
             packageId = packageId,
-            referralNumber = referralNumber,
+            referralNumber = null,
             syndicateId = syndicateId,
             personalImage = personalImage,
             frontIdImage = fronIdImage,
-            backIdImage = backIdImage
+            backIdImage = backIdImage,
+            followers = followers
         )
         return flow {
             emit(

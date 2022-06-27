@@ -14,7 +14,7 @@ data class SubscribePostBodyRequest(
     val email: String = "",
     @SerializedName("front_id_image")
     val frontIdImage: String = "",
-    @SerializedName("full_name")
+    @SerializedName("name")
     val fullName: String = "",
     @SerializedName("job")
     val job: String = "",
@@ -27,7 +27,20 @@ data class SubscribePostBodyRequest(
     @SerializedName("personal_image")
     val personalImage: String = "",
     @SerializedName("referral_number")
-    val referralNumber: String = "",
+    val referralNumber: String? = "",
+    @SerializedName("followers")
+    val followers: List<Followers> = mutableListOf(),
     @SerializedName("syndicate_id")
     val syndicateId: Int = 0
+)
+
+data class Followers(
+    @SerializedName("name")
+    val name: String = "",
+    @SerializedName("national_id")
+    val national_id: String = "",
+    @SerializedName("relation_type")
+    val relation_type: Int = 0,
+    @SerializedName("image")
+    val image: String = "",
 )

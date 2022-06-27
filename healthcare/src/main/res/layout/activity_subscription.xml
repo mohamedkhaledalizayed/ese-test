@@ -164,7 +164,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp"
                         android:textStyle="bold"
-                        android:inputType="text"
+                        android:inputType="date"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -268,7 +268,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/edit_text"
                     android:padding="@dimen/_9sdp"
-                    android:onClick="addImage"
+                    android:onClick="addNationalIdFrontImage"
                     app:layout_constraintTop_toBottomOf="@id/cl_national_id">
 
                     <TextView
@@ -281,6 +281,34 @@
 
                     <ImageView
                         android:id="@+id/add_image"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/ic_baseline_attach_file_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_photo_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edit_text"
+                    android:padding="@dimen/_9sdp"
+                    android:onClick="addNationalIdBackImage"
+                    app:layout_constraintTop_toBottomOf="@id/cl_photo">
+
+                    <TextView
+                        android:id="@+id/add_image_text_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/add_image_back"/>
+
+                    <ImageView
+                        android:id="@+id/add_image_back"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:src="@drawable/ic_baseline_attach_file_24"
@@ -588,7 +616,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp"
                         android:textStyle="bold"
-                        android:inputType="text"
+                        android:inputType="textEmailAddress"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -611,42 +639,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="@string/password_"
+                        android:hint="@string/invitation_code"
                         android:padding="@dimen/_10sdp"
                         android:textAlignment="viewStart"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp"
                         android:textStyle="bold"
-                        android:inputType="textPassword"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_confirm_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/edit_text"
-                    app:layout_constraintTop_toBottomOf="@id/cl_password">
-
-                    <EditText
-                        android:id="@+id/et_confirm_password"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="@string/confirm_password"
-                        android:padding="@dimen/_10sdp"
-                        android:textAlignment="viewStart"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold"
-                        android:inputType="textPassword"
+                        android:inputType="number"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

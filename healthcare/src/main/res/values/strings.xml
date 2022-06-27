@@ -75,7 +75,8 @@
     </array>
 
     <string name="registration">تسجيل إشتراك</string>
-    <string name="add_image">إرفاق صورة البطاقة الشخصية</string>
+    <string name="add_image">إرفاق صورة البطاقة الامامية</string>
+    <string name="add_image_back">إرفاق صورة البطاقة الخلفية</string>
     <string name="national_id_">الرقم القومى</string>
     <string name="job">الوظيفة</string>
     <string name="address">العنوان</string>
@@ -95,4 +96,5 @@
     <string name="add_review">اضف تقييم</string>
     <string name="profission">التخصص</string>
     <string name="provider_type">نوع مقدم الخدمة</string>
+    <string name="invitation_code">كود الدعوة</string>
 </resources>

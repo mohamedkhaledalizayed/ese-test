@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.modules.subscribtions.domain.usecases
 
+import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
 import com.neqabty.healthcare.modules.subscribtions.domain.repository.SubscriptionRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -18,7 +19,8 @@ class AddSubscriptionUseCase @Inject constructor(private val subscriptionReposit
         referralNumber: String,
         personalImage: String,
         fronIdImage: String,
-        backIdImage: String
+        backIdImage: String,
+        followers: List<Followers>
     ): Flow<Boolean> {
         val p = personalImage
         return subscriptionRepository.addSubscription(
@@ -34,7 +36,8 @@ class AddSubscriptionUseCase @Inject constructor(private val subscriptionReposit
             referralNumber,
             personalImage,
             fronIdImage,
-            backIdImage
+            backIdImage,
+            followers
         )
     }
 }

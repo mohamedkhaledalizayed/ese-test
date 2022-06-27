@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.modules.subscribtions.domain.repository
 
+import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
 import kotlinx.coroutines.flow.Flow
 import java.net.URI
 
@@ -17,6 +18,7 @@ interface SubscriptionRepository {
         referralNumber: String,
         personalImage: String,
         fronIdImage: String,
-        backIdImage: String
+        backIdImage: String,
+        followers: List<Followers>
     ): Flow<Boolean>
 }

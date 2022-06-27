@@ -8,13 +8,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.FollowerItemLayoutBinding
+import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
 import com.neqabty.healthcare.modules.subscribtions.presentation.view.model.Follower
 import kotlin.collections.ArrayList
 
 
 class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
 
-    private val items: MutableList<Follower> = ArrayList()
+    private val items: MutableList<Followers> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -38,9 +39,9 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
         val follower = items[position]
 
         viewHolder.binding.followerName.text = follower.name
-        viewHolder.binding.nationalId.text = follower.nationalId
-        viewHolder.binding.relation.text = follower.relation
-        viewHolder.binding.followerImage.setImageURI(follower.image)
+        viewHolder.binding.nationalId.text = follower.national_id
+        viewHolder.binding.relation.text = follower.relation_type.toString()
+//        viewHolder.binding.followerImage.setImageURI(follower.image)
         if (position == itemCount - 1){
             viewHolder.binding.view.visibility = View.GONE
         }
@@ -48,7 +49,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
 
     override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<Follower>) {
+    fun submitList(newItems: List<Followers>) {
         clear()
         newItems.let {
             items.addAll(it)
