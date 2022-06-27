@@ -1,7 +1,6 @@
 package com.neqabty.yodawy.modules.orders.data.api
 
-import com.neqabty.yodawy.core.data.Constants
-import com.neqabty.yodawy.core.data.Constants.FIXED_TOKEN
+
 import com.neqabty.yodawy.core.data.Constants.YODAWY_URL
 import com.neqabty.yodawy.core.data.Constants.selectedAddress
 import com.neqabty.yodawy.modules.address.data.model.Response
@@ -33,7 +32,7 @@ interface OrderApi {
     @POST
     suspend fun placePrescription(
         @Url url: String = YODAWY_URL + "order/PlacePrivateImageOrder",
-        @Header("X-Yodawy-Signature") signature: String = selectedAddress.signature,
+        @Header("X-Yodawy-Signature") signature: String = "${selectedAddress?.signature}",
         @Part("order") order: RequestBody,
         @Part images: ArrayList<MultipartBody.Part>
     ): PlaceOrderResponse

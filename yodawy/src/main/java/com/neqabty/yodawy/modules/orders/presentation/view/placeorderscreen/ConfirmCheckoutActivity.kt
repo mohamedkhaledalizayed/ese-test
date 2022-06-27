@@ -14,7 +14,6 @@ import com.neqabty.yodawy.core.data.Constants.selectedAddress
 import com.neqabty.yodawy.core.ui.BaseActivity
 import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivityConfirmCheckoutBinding
-import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
 import com.neqabty.yodawy.modules.orders.domain.entity.ItemParam
 import com.neqabty.yodawy.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,8 +55,11 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
             binding.totalPayment.visibility = View.GONE
             binding.paymentIcon.visibility = View.GONE
         }
-        binding.addressType.text = selectedAddress.addressName
-        binding.addressDetails.text = "شارع ${selectedAddress.address}, مبنى رقم ${selectedAddress.buildingNumber}, رقم الطابق ${selectedAddress.floor}, شقة رقم ${selectedAddress.apt}"
+
+        if (selectedAddress != null){
+            binding.addressType.text = selectedAddress?.addressName
+            binding.addressDetails.text = "شارع ${selectedAddress?.address}, مبنى رقم ${selectedAddress?.buildingNumber}, رقم الطابق ${selectedAddress?.floor}, شقة رقم ${selectedAddress?.apt}"
+        }
         placeOrderViewModel.placeOrderResult.observe(this){
             it?.let { resource ->
                 when (resource.status) {
@@ -99,7 +101,11 @@ class ConfirmCheckoutActivity : BaseActivity<ActivityConfirmCheckoutBinding>() {
     }
 
     fun confirmOrder(view: View) {
-        placeOrderViewModel.placeOrder(selectedAddress.adressId,Constants.mobileNumber,
+        if (selectedAddress == null){
+            Toast.makeText(this, "من فضلك اختر عنوان اولا.", Toast.LENGTH_LONG).show()
+            return
+        }
+        placeOrderViewModel.placeOrder(selectedAddress!!.adressId,Constants.mobileNumber,
             plan, Constants.cartItems.map {
             ItemParam(it.first.id,it.second)
         })

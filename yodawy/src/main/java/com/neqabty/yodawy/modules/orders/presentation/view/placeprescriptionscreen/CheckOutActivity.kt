@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.NonNull
-import com.google.gson.Gson
 import com.neqabty.yodawy.R
 import com.neqabty.yodawy.core.data.Constants
 import com.neqabty.yodawy.core.data.Constants.cartItems
@@ -21,8 +20,6 @@ import com.neqabty.yodawy.core.utils.FileUtils
 import com.neqabty.yodawy.core.utils.Status
 import com.neqabty.yodawy.databinding.ActivityCheckOutBinding
 import com.neqabty.yodawy.modules.orders.presentation.view.placeorderscreen.ConfirmCheckoutActivity
-import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
-import com.neqabty.yodawy.modules.orders.data.model.request.OrderRequest
 import com.neqabty.yodawy.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
@@ -42,9 +39,11 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
         setupToolbar(titleResId = R.string.place_order)
 
 
-        binding.addressType.text = selectedAddress.addressName
-        binding.addressDetails.text = "شارع ${selectedAddress.address}, مبنى رقم ${selectedAddress.buildingNumber}, رقم الطابق ${selectedAddress.floor}, شقة رقم ${selectedAddress.apt}"
+        if (selectedAddress != null){
+            binding.addressType.text = selectedAddress?.addressName
+            binding.addressDetails.text = "شارع ${selectedAddress?.address}, مبنى رقم ${selectedAddress?.buildingNumber}, رقم الطابق ${selectedAddress?.floor}, شقة رقم ${selectedAddress?.apt}"
 
+        }
         dialog = SpotsDialog.Builder()
             .setContext(this)
             .setMessage(getString(R.string.please_wait))
@@ -116,6 +115,10 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
 
     fun confirmOrder(view: View) {
 
+        if (selectedAddress == null){
+            Toast.makeText(this, "من فضلك اختر عنوان اولا.", Toast.LENGTH_LONG).show()
+            return
+        }
 
         if (imageList.isNotEmpty()){
             val multipartList = ArrayList<MultipartBody.Part>()
@@ -125,14 +128,7 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
                 multipartList.add(parts)
             }
 
-            val gson = Gson()
-            val json: String = gson.toJson(
-                OrderRequest(
-                    addressId = selectedAddress.adressId,
-                    yodawyId = yodawyId,
-                    plan = "A"
-                ))
-            val order: RequestBody = createPartFromString("{\"AddressId\":\"${selectedAddress.adressId}\",\"Notes\":\"Order Note\",\"YodawyId\":\"$yodawyId\",\"Plan\":\"$plan\"}")
+            val order: RequestBody = createPartFromString("{\"AddressId\":\"${selectedAddress?.adressId}\",\"Notes\":\"Order Note\",\"YodawyId\":\"$yodawyId\",\"Plan\":\"$plan\"}")
             placePrescriptionViewModel.placePrescriptionImages(order = order, images = multipartList)
         }else{
             startActivity(Intent(this, ConfirmCheckoutActivity::class.java))
