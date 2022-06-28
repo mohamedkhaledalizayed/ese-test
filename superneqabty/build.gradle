@@ -118,7 +118,6 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.6'
 
     implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.6'
-    implementation project(':ads')
     implementation project(':login')
     implementation project(':signup')
     implementation project(':news')
@@ -126,7 +125,6 @@ dependencies {
     implementation(name: 'cashier-sdk-1.0.8', ext: 'aar')
     implementation(name: 'cowpaysdk', ext: 'aar')
 
-    implementation 'com.valify:ValifyEKYC:2.2.0'
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
 

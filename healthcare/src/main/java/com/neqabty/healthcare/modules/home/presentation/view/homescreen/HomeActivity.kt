@@ -28,7 +28,9 @@ import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
+import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
+import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 //import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,12 +69,38 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         binding.homeContent.ourNewsRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             OurNewsAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(item: String) {
-
+            override fun setOnItemClickListener(item: NewsEntity) {
+                val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
+                intent.putExtra("id", item.id)
+                startActivity(intent)
             }
         }
 
-        mAdapter.submitList(mutableListOf())
+        //Get General News
+        homeViewModel.getAllNews()
+        homeViewModel.allNews.observe(this) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+//                        loading.show()
+                    }
+                    Status.SUCCESS -> {
+//                        loading.dismiss()
+                        if (resource.data!!.isEmpty()){
+                            binding.homeContent.newsContainer.visibility = View.GONE
+                            binding.homeContent.ourNewsRecycler.visibility = View.GONE
+                        }else{
+                            mAdapter.submitList(resource.data)
+                        }
+                    }
+                    Status.ERROR -> {
+//                        loading.dismiss()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+        }
 
         binding.homeContent.aboutRecycler.adapter = aboutAdapter
         aboutAdapter.onItemClickListener = object :

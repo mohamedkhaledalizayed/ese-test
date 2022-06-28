@@ -76,7 +76,7 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
                     sharedPreferences.image = item.image
                     sharedPreferences.syndicateName = item.name
                     startActivity(intent)
-                    finishAffinity()
+                    finish()
                 }
 
             }

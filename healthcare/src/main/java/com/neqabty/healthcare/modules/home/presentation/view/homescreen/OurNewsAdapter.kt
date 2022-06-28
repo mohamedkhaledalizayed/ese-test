@@ -7,12 +7,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.OurNewsItemBinding
-
+import com.neqabty.superneqabty.core.utils.AppUtils
+import com.neqabty.superneqabty.home.domain.entity.NewsEntity
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 
 
 class OurNewsAdapter: RecyclerView.Adapter<OurNewsAdapter.ViewHolder>() {
 
-    private val items: MutableList<String> = ArrayList()
+    private val items: MutableList<NewsEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -33,12 +36,30 @@ class OurNewsAdapter: RecyclerView.Adapter<OurNewsAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val item = items[position]
+        Picasso.get()
+            .load(item.image)
+            .into(viewHolder.binding.newsImage, object : Callback {
+                override fun onSuccess() {
+//                    viewHolder.binding.imageProgress.hide()
+                }
 
+                override fun onError(e: Exception?) {
+//                    viewHolder.binding.imageProgress.hide()
+                }
+            })
+
+        viewHolder.binding.newsTitle.text = item.headline
+        viewHolder.binding.newsDate.text = AppUtils().dateFormat(item.createdAt)
+
+        viewHolder.binding.itemLayout.setOnClickListener {
+            onItemClickListener?.setOnItemClickListener(item)
+        }
     }
 
-    override fun getItemCount() = 10
+    override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<String>?) {
+    fun submitList(newItems: List<NewsEntity>?) {
         clear()
         newItems?.let {
             items.addAll(it)
@@ -53,7 +74,7 @@ class OurNewsAdapter: RecyclerView.Adapter<OurNewsAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: String)
+            fun setOnItemClickListener(item: NewsEntity)
     }
 
     class ViewHolder(val binding: OurNewsItemBinding) :

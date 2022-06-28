@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -17,7 +16,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-import com.neqabty.ads.modules.home.domain.entity.AdEntity
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
@@ -28,15 +26,12 @@ import com.neqabty.superneqabty.core.ui.BaseActivity
 import com.neqabty.superneqabty.core.utils.Constants
 import com.neqabty.superneqabty.core.utils.Status
 import com.neqabty.superneqabty.databinding.ActivityMainBinding
+import com.neqabty.superneqabty.home.domain.entity.AdEntity
 import com.neqabty.superneqabty.home.domain.entity.NewsEntity
 import com.neqabty.superneqabty.payment.PaymentsActivity
 import com.neqabty.superneqabty.settings.SettingsActivity
 import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.squareup.picasso.Picasso
-import com.valify.valify_ekyc.sdk.Valify
-import com.valify.valify_ekyc.sdk.ValifyConfig
-import com.valify.valify_ekyc.sdk.ValifyFactory
-import com.valify.valify_ekyc.viewmodel.ValifyData
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 import dmax.dialog.SpotsDialog
@@ -57,7 +52,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     private val syndicatesAdapter = NewsAdapter()
     private val listAds = ArrayList<AdEntity>()
     val list = mutableListOf<CarouselItem>()
-    lateinit var valifyClient: Valify
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -216,46 +210,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         //End of Ads
 
         binding.navView.setNavigationItemSelectedListener(this)
-        valifyClient = ValifyFactory(applicationContext).client
-
-        //Get Token
-        homeViewModel.token.observe(this) {
-            val valifyBuilder = ValifyConfig.Builder()
-            valifyBuilder.setBaseUrl("https://valifystage.com/")
-            valifyBuilder.setAccessToken(it.data.accessToken)
-            valifyBuilder.setBundleKey("13415658ea504635a05aaab8465e5005")
-            valifyBuilder.setLanguage("ar")
-            try {
-                valifyClient.startActivityForResult(this,1,valifyBuilder.build())
-            }catch (e:Throwable){
-
-            }
-        }
-
-        //Verify User
-        homeViewModel.user.observe(this) {
-
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> {
-                        loading.show()
-                    }
-                    Status.SUCCESS -> {
-                        loading.dismiss()
-                        if (resource.data?.status!!){
-                            Toast.makeText(this, resource.data.data.message, Toast.LENGTH_LONG).show()
-                        }else{
-                            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
-                        }
-                    }
-                    Status.ERROR -> {
-                        loading.dismiss()
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
-
-        }
 
         binding.contentActivity.ivSubscription.setOnClickListener {
             val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
@@ -333,12 +287,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                 startActivity(intent)
             }
-            R.id.valify -> {
-                openVlaify()
-            }
-//            R.id.about_fragment -> {
-//
-//            }
             R.id.about_app_fragment -> {
                 val intent = Intent(this@HomeActivity, AboutAppActivity::class.java)
                 startActivity(intent)
@@ -367,21 +315,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
         drawer.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    private fun openVlaify() {
-        if (sharedPreferences.mobile.isNotEmpty()) {
-            homeViewModel.getToken()
-        }else{
-            val intent = Intent(this@HomeActivity, LoginActivity::class.java)
-            intent.putExtra("code", sharedPreferences.code)
-            intent.putExtra(
-                Intent.EXTRA_INTENT,
-                Intent(this@HomeActivity, SignupActivity::class.java)
-            )
-            startActivity(intent)
-        }
-
     }
 
     override fun onBackPressed() {
@@ -443,37 +376,5 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             item.title = getString(R.string.login_title)
         }
         return super.onPrepareOptionsMenu(menu)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        valifyClient.handleActivityResult(resultCode, data, object : Valify.ValifyResultListener {
-            override fun onSuccess(
-                valifyToken: String, valifyData: ValifyData
-            ) {
-                Log.e("neqabty", "onSuccess")
-                verifyUser(valifyData)
-            }
-
-            override fun onExit(
-                valifyToken: String, step: String,
-                valifyData: ValifyData
-            ) {
-                Log.e("neqabty", "onExit")
-            }
-
-            override fun onError(
-                valifyToken: String, errorCode: Int,
-                step: String, valifyData: ValifyData
-            ) {
-                Log.e("neqabty", "onError")
-            }
-        })
-    }
-
-    private fun verifyUser(valifyData: ValifyData){
-        val firstName = valifyData.ocrProcess.nationalIdData.firstName
-        val fullName = valifyData.ocrProcess.nationalIdData.fullName
-        val gender = valifyData.ocrProcess.nationalIdData.gender
     }
 }
