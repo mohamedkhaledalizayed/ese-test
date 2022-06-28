@@ -5,12 +5,9 @@ package com.neqabty.healthcare.modules.home.presentation.view.homescreen
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -26,13 +23,11 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
-import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
-import com.neqabty.superneqabty.home.domain.entity.NewsEntity
-import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
-//import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
+import com.neqabty.meganeqabty.home.domain.entity.NewsEntity
+import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,19 +1,19 @@
-package com.neqabty.healthcare.modules.home.presentation.view.homescreen
+package com.neqabty.meganeqabty.home.view.homescreen
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.neqabty.healthcare.R
-import com.neqabty.healthcare.databinding.OurNewsItemBinding
+import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.core.utils.AppUtils
+import com.neqabty.meganeqabty.databinding.NewsLayoutItemBinding
 import com.neqabty.meganeqabty.home.domain.entity.NewsEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 
-class OurNewsAdapter: RecyclerView.Adapter<OurNewsAdapter.ViewHolder>() {
+class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
     private val items: MutableList<NewsEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
@@ -26,8 +26,8 @@ class OurNewsAdapter: RecyclerView.Adapter<OurNewsAdapter.ViewHolder>() {
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
-        val binding: OurNewsItemBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.our_news_item, parent, false)
+        val binding: NewsLayoutItemBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.news_layout_item, parent, false)
 
         return ViewHolder(
             binding
@@ -36,6 +36,7 @@ class OurNewsAdapter: RecyclerView.Adapter<OurNewsAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+
         val item = items[position]
         Picasso.get()
             .load(item.image)
@@ -77,6 +78,6 @@ class OurNewsAdapter: RecyclerView.Adapter<OurNewsAdapter.ViewHolder>() {
             fun setOnItemClickListener(item: NewsEntity)
     }
 
-    class ViewHolder(val binding: OurNewsItemBinding) :
+    class ViewHolder(val binding: NewsLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

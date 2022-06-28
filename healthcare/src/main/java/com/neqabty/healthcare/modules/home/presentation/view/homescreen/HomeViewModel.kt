@@ -8,9 +8,9 @@ import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.modules.home.domain.entity.about.AboutEntity
 import com.neqabty.healthcare.modules.home.domain.interactors.GetHomeUseCase
-import com.neqabty.superneqabty.home.domain.entity.NewsEntity
-import com.neqabty.superneqabty.home.domain.interactors.GetNewsUseCase
-import com.neqabty.superneqabty.home.domain.interactors.GetSyndicateNewsUseCase
+import com.neqabty.meganeqabty.home.domain.entity.NewsEntity
+import com.neqabty.meganeqabty.home.domain.interactors.GetNewsUseCase
+import com.neqabty.meganeqabty.home.domain.interactors.GetSyndicateNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -47,7 +47,7 @@ class HomeViewModel @Inject constructor(private val getHomeUseCase: GetHomeUseCa
                 }
             } catch (e: Throwable) {
                 allNews.postValue(
-                    Resource.error(data = null, message = com.neqabty.superneqabty.core.utils.AppUtils()
+                    Resource.error(data = null, message = com.neqabty.meganeqabty.core.utils.AppUtils()
                         .handleError(e)))
             }
         }
@@ -63,7 +63,7 @@ class HomeViewModel @Inject constructor(private val getHomeUseCase: GetHomeUseCa
                 }
             } catch (e: Throwable) {
                 syndicatesNews.postValue(
-                    Resource.error(data = null, message = com.neqabty.superneqabty.core.utils.AppUtils()
+                    Resource.error(data = null, message = com.neqabty.meganeqabty.core.utils.AppUtils()
                         .handleError(e)))
             }
         }

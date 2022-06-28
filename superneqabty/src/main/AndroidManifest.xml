@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.neqabty.superneqabty">
+    package="com.neqabty.meganeqabty">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -23,19 +23,19 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic,android:networkSecurityConfig">
         <activity
-            android:name=".profile.view.ProfileActivity"
+            android:name="com.neqabty.meganeqabty.profile.view.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".paymentdetails.view.paymentstatus.PaymentStatusActivity"
+            android:name="com.neqabty.meganeqabty.paymentdetails.view.paymentstatus.PaymentStatusActivity"
             android:exported="false" />
         <activity
-            android:name=".paymentdetails.view.paymentdetails.PaymentDetailsActivity"
+            android:name="com.neqabty.meganeqabty.paymentdetails.view.paymentdetails.PaymentDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".payment.PaymentsActivity"
+            android:name="com.neqabty.meganeqabty.payment.PaymentsActivity"
             android:exported="false" />
         <activity
-            android:name=".splash.view.SuperNeqabtySplashActivity"
+            android:name="com.neqabty.meganeqabty.splash.view.SuperNeqabtySplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,26 +44,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".syndicates.presentation.view.homescreen.SyndicateActivity"
+            android:name="com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity"
             android:exported="true" />
         <activity
-            android:name=".home.view.homescreen.HomeActivity"
+            android:name="com.neqabty.meganeqabty.home.view.homescreen.HomeActivity"
             android:exported="true" />
         <activity
-            android:name=".settings.SettingsActivity"
+            android:name="com.neqabty.meganeqabty.settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".aboutapp.AboutAppActivity"
+            android:name="com.neqabty.meganeqabty.aboutapp.AboutAppActivity"
             android:exported="false" />
         <activity
-            android:name=".paymentdetails.view.PdfCreatorScreen"
+            android:name="com.neqabty.meganeqabty.paymentdetails.view.PdfCreatorScreen"
             android:exported="false"
             android:label="تحميل اخطار الدفع"
             android:theme="@style/AppTheme.ActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.neqabty.superneqabty.fileprovider"
+            android:authorities="com.neqabty.meganeqabty.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

@@ -37,7 +37,7 @@
                     app:layout_constraintTop_toTopOf="@id/switchNotifications" />
 
 
-                <com.neqabty.superneqabty.core.ui.CustomSwitch
+                <com.neqabty.meganeqabty.core.ui.CustomSwitch
                     android:id="@+id/switchNotifications"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
