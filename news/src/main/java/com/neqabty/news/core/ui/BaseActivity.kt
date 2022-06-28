@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
 import com.neqabty.news.R
-import com.neqabty.news.core.utils.PreferencesHelper
-import javax.inject.Inject
 
 //
 abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {

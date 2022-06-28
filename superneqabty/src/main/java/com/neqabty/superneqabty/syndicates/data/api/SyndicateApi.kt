@@ -6,5 +6,5 @@ import retrofit2.http.Query
 
 interface SyndicateApi {
     @GET("api/entities/")
-    suspend fun getSyndicates(@Query("filter{type.name}") syndicate: String): SyndicateResponse
+    suspend fun getSyndicates(): SyndicateResponse
 }

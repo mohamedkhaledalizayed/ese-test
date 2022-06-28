@@ -23,13 +23,10 @@ fun SyndicateModel.toSyndicateEntity(): SyndicateEntity {
         createdAt,
         id,
         image ?: "",
-        links = links.toLinksEntity(),
         name,
         registrationNotes ?:"",
-        requirements = requirements.map { it.toRequirementEntity() },
-        services = services.map { it.toServiceEntity() },
-        type = type.toTypeEntity(),
-        updatedAt
+        updatedAt,
+        type
     )
 }
 

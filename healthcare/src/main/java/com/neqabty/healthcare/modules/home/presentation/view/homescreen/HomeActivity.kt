@@ -29,6 +29,7 @@ import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActi
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
+import com.neqabty.superneqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 //import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -127,6 +128,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         when (item.itemId) {
             R.id.wallet -> {
                 val intent = Intent(this@HomeActivity, WalletActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.syndicate -> {
+                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
                 startActivity(intent)
             }
         }

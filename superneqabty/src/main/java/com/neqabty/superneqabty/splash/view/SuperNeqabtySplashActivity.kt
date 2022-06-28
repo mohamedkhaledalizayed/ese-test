@@ -45,7 +45,7 @@ class SuperNeqabtySplashActivity : BaseActivity<ActivitySuperNeqabtyMainBinding>
                     }
                     Status.SUCCESS -> {
                         loading.dismiss()
-                        if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= BuildConfig.VERSION_CODE){
+                        if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= 160){
                             Handler().postDelayed(Runnable {
                                 val mainIntent = Intent(this@SuperNeqabtySplashActivity, if(sharedPreferences.mainSyndicate == -1) SyndicateActivity::class.java else HomeActivity::class.java)
                                 startActivity(mainIntent)

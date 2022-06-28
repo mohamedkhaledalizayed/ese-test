@@ -41,8 +41,8 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
                     }
                     Status.SUCCESS -> {
                         val result = it.data?.filter { s -> s.code == sharedPreferences.code }
-                        listOfServices.addAll(result!![0].services)
-                        listOfServices.add(0, ServiceEntity(name = "إختر الخدمة"))
+//                        listOfServices.addAll(result!![0].services)
+//                        listOfServices.add(0, ServiceEntity(name = "إختر الخدمة"))
 
                         mAdapter = CustomAdapter(this, listOfServices.toMutableList())
                         binding.spServices.adapter = mAdapter

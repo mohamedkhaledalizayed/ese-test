@@ -25,7 +25,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase,
-    private val getAllAdsUseCase: GetAllAdsUseCase,
+//    private val getAllAdsUseCase: GetAllAdsUseCase,
     private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase,
     private val getTokenUseCase: GetTokenUseCase,
     private val verifyUserUseCase: VerifyUserUseCase
@@ -90,14 +90,14 @@ class HomeViewModel @Inject constructor(
 
     val ads = MutableLiveData<List<AdEntity>>()
     fun getAds() {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                getAllAdsUseCase.build().collect {
-                    ads.postValue(it)
-                }
-            } catch (e: Throwable) {
-                Log.e("", e.toString())
-            }
-        }
+//        viewModelScope.launch(Dispatchers.IO) {
+//            try {
+//                getAllAdsUseCase.build().collect {
+//                    ads.postValue(it)
+//                }
+//            } catch (e: Throwable) {
+//                Log.e("", e.toString())
+//            }
+//        }
     }
 }

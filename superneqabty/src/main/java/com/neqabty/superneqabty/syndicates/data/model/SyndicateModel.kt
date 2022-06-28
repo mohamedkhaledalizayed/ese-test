@@ -12,18 +12,12 @@ data class SyndicateModel(
     val id: Int = 0,
     @SerializedName("image")
     val image: String? = "",
-    @SerializedName("links")
-    val links: Links = Links(),
     @SerializedName("name")
     val name: String = "",
     @SerializedName("registration_notes")
     val registrationNotes: String? = "",
-    @SerializedName("requirements")
-    val requirements: List<Requirement> = listOf(),
-    @SerializedName("services")
-    val services: List<Service> = listOf(),
-    @SerializedName("type")
-    val type: Type = Type(),
     @SerializedName("updated_at")
-    val updatedAt: String = ""
+    val updatedAt: String = "",
+    @SerializedName("type")
+    val type: Int = 0
 )

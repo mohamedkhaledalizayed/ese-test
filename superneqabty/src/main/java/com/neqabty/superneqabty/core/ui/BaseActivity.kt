@@ -12,6 +12,7 @@ import androidx.viewbinding.ViewBinding
 import com.neqabty.login.core.utils.PreferencesHelper
 import com.neqabty.superneqabty.R
 import javax.inject.Inject
+import javax.inject.Named
 
 //
 abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {

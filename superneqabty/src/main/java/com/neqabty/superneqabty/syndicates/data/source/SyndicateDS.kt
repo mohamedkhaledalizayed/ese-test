@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class SyndicateDS @Inject constructor(private val syndicateApi: SyndicateApi) {
     suspend fun getSyndicates(): List<SyndicateModel> {
-        return syndicateApi.getSyndicates("syndicate").syndicateModels
+        return syndicateApi.getSyndicates().syndicateModels
     }
 }
