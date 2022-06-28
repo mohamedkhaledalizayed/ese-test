@@ -66,12 +66,21 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
                 when (resource.status) {
                     Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                        binding.screenContainer.visibility = View.GONE
                     }
                     Status.SUCCESS -> {
-                        Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
+                        binding.progressCircular.visibility = View.GONE
+                        binding.screenContainer.visibility = View.VISIBLE
+                        if (resource.data!!){
+                            finish()
+                            Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
+                        }
                         Log.e("SUCCESS", "${resource.data}")
                     }
                     Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                        binding.screenContainer.visibility = View.VISIBLE
                         Log.e("ERROR", resource.message.toString())
                     }
                 }
@@ -217,6 +226,21 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
     fun registerUser(view: View) {
 
+        if (userImageUri == null){
+            Toast.makeText(this, "من فضلك اختر الصورة الشخصية اولا.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (nationalIdFrontUri == null){
+            Toast.makeText(this, "من فضلك اختر صورة البطاقة الامامية اولا.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (nationalIdBackUri == null){
+            Toast.makeText(this, "من فضلك اختر صورة البطاقة الخلفية اولا.", Toast.LENGTH_LONG).show()
+            return
+        }
+
         if (binding.etName.text.toString().isNullOrEmpty()){
             Toast.makeText(this, "من فضلك ادخل الاسم اولا.", Toast.LENGTH_LONG).show()
             return
@@ -253,16 +277,16 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         }
 
         subscriptionViewModel.addSubscription(
-            name = "Amr Mohamed",
-            email = "amro_dev@live.com",
-            birthDate = "1987-11-14",
-            address = "shebeen",
-            job = "Engineer",
-            mobile = "01000765578",
-            nationalId = "28711140400075",
+            name = binding.etName.text.toString(),
+            email = binding.etEmail.text.toString(),
+            birthDate = binding.etBirthDate.text.toString(),
+            address = binding.etAddress.text.toString(),
+            job = binding.etJob.text.toString(),
+            mobile = binding.etPhone.text.toString(),
+            nationalId = binding.etNationalId.text.toString(),
             syndicateId = 1,
             packageId = "efd2dde7-51ea-40ef-95b1-663d8b310754",
-            referralNumber = "12",
+            referralNumber = "",
             fronIdImage = getRealPath(nationalIdFrontUri!!)!!.toBase64(),
             backIdImage = getRealPath(nationalIdBackUri!!)!!.toBase64(),
             personalImage = getRealPath(userImageUri!!)!!.toBase64(),
