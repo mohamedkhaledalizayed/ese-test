@@ -128,7 +128,7 @@ class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
                 multipartList.add(parts)
             }
 
-            val order: RequestBody = createPartFromString("{\"AddressId\":\"${selectedAddress?.adressId}\",\"Notes\":\"Order Note\",\"YodawyId\":\"$yodawyId\",\"Plan\":\"$plan\"}")
+            val order: RequestBody = createPartFromString("{\"AddressId\":\"${selectedAddress?.adressId}\",\"YodawyId\":\"$yodawyId\",\"Plan\":\"$plan\"}")
             placePrescriptionViewModel.placePrescriptionImages(order = order, images = multipartList)
         }else{
             startActivity(Intent(this, ConfirmCheckoutActivity::class.java))
