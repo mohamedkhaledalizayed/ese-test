@@ -10,6 +10,10 @@ import javax.inject.Inject
 
 class ProfileUseCase @Inject constructor(private val profileRepository: ProfileRepository) {
 
+    fun build(token: String): Flow<String>{
+        return profileRepository.getUserProfile(token)
+    }
+
     fun build(token: String, mobile: String, address: String, year: Int, photo: MultipartBody.Part?): Flow<String>{
         return profileRepository.uploadMembershipCard(token, mobile, address, year, photo)
     }

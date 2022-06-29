@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 
 interface ProfileRepository {
+    fun getUserProfile(token: String): Flow<String>
     fun uploadMembershipCard(token: String, mobile: String, address: String, year: Int, photo: MultipartBody.Part?): Flow<String>
     fun uploadMinistryLicense(token: String, license: MultipartBody.Part?): Flow<MinistryLicenseEntity>
 }

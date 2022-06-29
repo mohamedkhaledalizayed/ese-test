@@ -10,6 +10,10 @@ interface ProfileApi {
 
     @Multipart
     @POST("api/membership_card_requests")
+    suspend fun getUserProfile(@Header("Authorization") token: String): String
+
+    @Multipart
+    @POST("api/membership_card_requests")
     suspend fun uploadMembershipCard(@Header("Authorization") token: String,
                                      @Part("mobile") mobile: String,
                                      @Part("address") address: String,

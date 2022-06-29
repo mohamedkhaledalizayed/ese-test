@@ -7,6 +7,10 @@ import javax.inject.Inject
 
 class ProfileDS @Inject constructor(private val profileApi: ProfileApi) {
 
+    suspend fun getUserProfile(token: String): String{
+        return profileApi.getUserProfile(token)
+    }
+
     suspend fun uploadMembershipCard(token: String, mobile: String, address: String, year: Int, photo: MultipartBody.Part?): String{
         return profileApi.uploadMembershipCard(token, mobile, address, year, photo).message
     }

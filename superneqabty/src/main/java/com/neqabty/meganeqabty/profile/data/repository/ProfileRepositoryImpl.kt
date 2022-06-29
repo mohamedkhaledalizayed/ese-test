@@ -12,6 +12,12 @@ import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS): ProfileRepository {
 
+    override fun getUserProfile(token: String): Flow<String> {
+        return flow {
+            emit(profileDS.getUserProfile(token))
+        }
+    }
+
     override fun uploadMembershipCard(token: String, mobile: String, address: String, year: Int, photo: MultipartBody.Part?): Flow<String> {
         return flow {
             emit(profileDS.uploadMembershipCard(token, mobile, address, year, photo))
