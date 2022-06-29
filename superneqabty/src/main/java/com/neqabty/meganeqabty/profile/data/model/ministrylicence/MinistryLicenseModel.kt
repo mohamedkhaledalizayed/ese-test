@@ -12,7 +12,7 @@ data class MinistryLicenseModel(
     val license: String,
     @SerializedName("member")
     val member: MemberData,
-    @SerializedName("status")
+    @SerializedName("statusMessage")
     val status: String,
     @SerializedName("updated_at")
     val updatedAt: String

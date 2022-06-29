@@ -2,7 +2,6 @@ package com.neqabty.meganeqabty.profile.view.profile
 
 import android.content.Intent
 import android.os.Bundle
-import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.databinding.ActivityProfileBinding
 import com.neqabty.meganeqabty.profile.view.update.UpdateInfoActivity

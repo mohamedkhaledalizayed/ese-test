@@ -26,6 +26,9 @@
             android:name=".profile.view.profile.ProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".profile.view.update.UpdateInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".payment.view.paymentstatus.PaymentStatusActivity"
             android:exported="false" />
         <activity
