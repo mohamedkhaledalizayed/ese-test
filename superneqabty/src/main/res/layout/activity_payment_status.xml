@@ -239,6 +239,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:textColor="@color/black"
+                        android:lines="1"
                         android:textSize="?textSizeLarge"
                         android:layout_marginStart="@dimen/_27sdp"
                         app:layout_constraintStart_toEndOf="@+id/service_name"

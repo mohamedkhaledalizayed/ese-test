@@ -5,8 +5,11 @@ data class SyndicateEntity(
     val createdAt: String = "",
     val id: Int = 0,
     val image: String = "",
+    val links: LinksEntity = LinksEntity(),
     val name: String = "",
     val registrationNotes: String = "",
-    val updatedAt: String = "",
-    val type: Int = 0
+    val requirements: List<RequirementEntity> = listOf(),
+    val services: List<ServiceEntity> = listOf(),
+    val type: TypeEntity = TypeEntity(),
+    val updatedAt: String = ""
 )

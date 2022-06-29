@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -29,6 +28,7 @@ import com.neqabty.meganeqabty.databinding.ActivityMainBinding
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
 import com.neqabty.meganeqabty.home.domain.entity.NewsEntity
 import com.neqabty.meganeqabty.payment.view.selectservice.PaymentsActivity
+import com.neqabty.meganeqabty.profile.view.profile.ProfileActivity
 import com.neqabty.meganeqabty.settings.SettingsActivity
 import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.squareup.picasso.Picasso
@@ -216,6 +216,10 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             startActivity(intent)
         }
 
+        binding.contentActivity.medicalNetwork.setOnClickListener {
+            finish()
+        }
+
         binding.contentActivity.healthcareImage.setOnClickListener {
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
         }
@@ -223,6 +227,21 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.contentActivity.travelsImage.setOnClickListener {
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
         }
+
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.logout).setOnClickListener {
+            if (sharedPreferences.mobile.isNotEmpty()) {
+                logout("هل تريد تسجيل خروج!")
+            }else{
+                val intent = Intent(this@HomeActivity, LoginActivity::class.java)
+                intent.putExtra("code", sharedPreferences.code)
+                intent.putExtra(
+                    Intent.EXTRA_INTENT,
+                    Intent(this@HomeActivity, SignupActivity::class.java)
+                )
+                startActivity(intent)
+            }
+        }
+
     }
 
     private fun logout(message: String) {
@@ -237,7 +256,9 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             dialog.dismiss()
             sharedPreferences.name = ""
             sharedPreferences.mobile = ""
+            sharedPreferences.userImage = ""
             onResume()
+            drawer.close()
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, "لا"
@@ -252,7 +273,9 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.syndicate_name).text =
             "${sharedPreferences.syndicateName}"
         if (!sharedPreferences.image.isNullOrEmpty()){
-            Picasso.get().load(sharedPreferences.image).into(binding.navView.getHeaderView(0).findViewById<CircleImageView>(R.id.image))
+            Picasso.get().load(sharedPreferences.image).placeholder(R.drawable.logo).into(binding.navView.getHeaderView(0).findViewById<CircleImageView>(R.id.image))
+        }else{
+            Picasso.get().load(R.drawable.logo).into(binding.navView.getHeaderView(0).findViewById<CircleImageView>(R.id.image))
         }
 
         super.onResume()
@@ -265,18 +288,30 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 .findViewById<TextView>(R.id.tvMobileNumber).visibility = View.VISIBLE
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).text =
                 Html.fromHtml(getString(R.string.menu_mobileNumber, sharedPreferences.mobile))
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.logout).text =
+                Html.fromHtml(getString(R.string.logout_title))
 
         } else {
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
                 View.GONE
             binding.navView.getHeaderView(0)
                 .findViewById<TextView>(R.id.tvMobileNumber).visibility = View.GONE
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.logout).text =
+                Html.fromHtml(getString(R.string.login_title))
         }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+            R.id.profile -> {
+                if (sharedPreferences.mobile.isNotEmpty()){
+                    val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(this, "برجاء تسجيل الدخول اولا.", Toast.LENGTH_LONG).show()
+                }
+            }
             R.id.news -> {
                 val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
                 intent.putExtra("id", sharedPreferences.code)
@@ -294,6 +329,12 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             R.id.settings_fragment -> {
                 val intent = Intent(this@HomeActivity, SettingsActivity::class.java)
                 startActivity(intent)
+            }
+
+            R.id.change_syndicate -> {
+                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
+                startActivity(intent)
+                finishAffinity()
             }
             R.id.contactus_fragment -> {
 
@@ -340,41 +381,5 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         }
         alertDialog.show()
 
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.change_syndicate) {
-            val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
-            startActivity(intent)
-            finishAffinity()
-        } else if (item.itemId == R.id.auth) {
-            if (sharedPreferences.mobile.isNotEmpty()) {
-                logout("هل تريد تسجيل خروج!")
-                return true
-            }
-            val intent = Intent(this@HomeActivity, LoginActivity::class.java)
-            intent.putExtra("code", sharedPreferences.code)
-            intent.putExtra(
-                Intent.EXTRA_INTENT,
-                Intent(this@HomeActivity, SignupActivity::class.java)
-            )
-            startActivity(intent)
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
-        val item = menu.findItem(R.id.auth)
-        if (sharedPreferences.mobile.isNotEmpty()) {
-            item.title = getString(R.string.logout_title)
-        }else{
-            item.title = getString(R.string.login_title)
-        }
-        return super.onPrepareOptionsMenu(menu)
     }
 }

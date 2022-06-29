@@ -1,6 +1,6 @@
 package com.neqabty.login.modules.login.data.repository
 
-import com.neqabty.login.modules.login.data.model.UserModel
+import com.neqabty.login.modules.login.data.model.LoginResponse
 import com.neqabty.login.modules.login.data.source.AuthDS
 import com.neqabty.login.modules.login.domain.entity.UserEntity
 import com.neqabty.login.modules.login.domain.repository.AuthRepository
@@ -13,9 +13,15 @@ class AuthRepositoryImpl @Inject constructor(private val authDS: AuthDS) : AuthR
         return flow { emit(authDS.login(mobile, password).toUserEntity()) }
     }
 
-    private fun UserModel.toUserEntity(): UserEntity {
+    private fun LoginResponse.toUserEntity(): UserEntity {
         return UserEntity(
-            email, fullname, id, image, mobile, nationalId, password
+            user.name,
+            key,
+            user.account.email,
+            user.account.fullname ,
+            user.account.image,
+            user.account.mobile,
+            user.account.nationalId
         )
     }
 }

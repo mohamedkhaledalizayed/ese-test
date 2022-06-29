@@ -19,11 +19,15 @@ class PreferencesHelper @Inject constructor(
         private const val IS_NOTIFICATIONS_ENABLED = "data.source.prefs.IS_NOTIFICATIONS_ENABLED"
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val NAME = "data.source.prefs.NAME"
+        private const val TOKEN = "data.source.prefs.TOKEN"
         private const val MOBILE = "data.source.prefs.MOBILE"
         private const val CODE = "data.source.prefs.CODE"
+        private const val USER_IMAGE = "data.source.prefs.USER_IMAGE"
         private const val SYNDICATE_IMAGE = "data.source.prefs.IMAGE"
         private const val SYNDICATE_NAME = "data.source.prefs.SYNDICATE_NAME"
         private const val FONT_SIZE = "data.source.prefs.FONT_SIZE"
+        private const val NATIONAL_ID = "data.source.prefs.NATIONAL_ID"
+        private const val MEMBERSHIP_ID = "data.source.prefs.MEMBERSHIP_ID"
     }
 
     var isNotificationsEnabled
@@ -34,9 +38,17 @@ class PreferencesHelper @Inject constructor(
         get() = preferences.getInt(MAIN_SYNDICATE, -1)
         set(value) = preferences.edit().putInt(MAIN_SYNDICATE, value).apply()
 
+    var token
+        get() = preferences.getString(TOKEN, "")!!
+        set(value) = preferences.edit().putString(TOKEN, value).apply()
+
     var mobile
         get() = preferences.getString(MOBILE, "")!!
         set(value) = preferences.edit().putString(MOBILE, value).apply()
+
+    var nationalId
+        get() = preferences.getString(NATIONAL_ID, "")!!
+        set(value) = preferences.edit().putString(NATIONAL_ID, value).apply()
 
     var name
         get() = preferences.getString(NAME, "")!!
@@ -49,6 +61,10 @@ class PreferencesHelper @Inject constructor(
     var image
         get() = preferences.getString(SYNDICATE_IMAGE, "")!!
         set(value) = preferences.edit().putString(SYNDICATE_IMAGE, value).apply()
+
+    var userImage
+        get() = preferences.getString(USER_IMAGE, "")!!
+        set(value) = preferences.edit().putString(USER_IMAGE, value).apply()
 
     var syndicateName
         get() = preferences.getString(SYNDICATE_NAME, "")!!

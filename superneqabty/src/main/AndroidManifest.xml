@@ -23,7 +23,7 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic,android:networkSecurityConfig">
         <activity
-            android:name="com.neqabty.meganeqabty.profile.view.ProfileActivity"
+            android:name=".profile.view.profile.ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".payment.view.paymentstatus.PaymentStatusActivity"

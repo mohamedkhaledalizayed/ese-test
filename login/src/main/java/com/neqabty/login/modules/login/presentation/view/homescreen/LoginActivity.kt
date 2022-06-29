@@ -40,7 +40,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
 
         if (sharedPreferences.mobile.isNotEmpty()){
-            Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
+            Log.e("login", "True")
         }
         loginViewModel.user.observe(this)  {
 
@@ -52,8 +52,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     Status.SUCCESS -> {
                         dialog.dismiss()
                         if (resource.data!!.nationalId.isNotEmpty()){
-                            sharedPreferences.mobile = resource.data!!.mobile
-                            sharedPreferences.name = resource.data!!.fullname
+                            sharedPreferences.token = resource.data.token
+                            sharedPreferences.mobile = resource.data.mobile
+                            sharedPreferences.name = resource.data.fullname
+                            sharedPreferences.nationalId = resource.data.nationalId
+                            sharedPreferences.userImage = "${resource.data.image}"
                             finish()
                         }else{
                             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
@@ -61,7 +64,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
-                        Log.e("ik", resource.message.toString())
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
@@ -94,10 +96,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             return
         }
 
-        if (binding.etPassword.text.toString().length < 6){
-            Toast.makeText(this, "من فضلك ادخل كلمة مرور قوية", Toast.LENGTH_LONG).show()
-            return
-        }
+//        if (binding.etPassword.text.toString().length < 6){
+//            Toast.makeText(this, "من فضلك ادخل كلمة مرور قوية", Toast.LENGTH_LONG).show()
+//            return
+//        }
 
         if(!binding.etUsername.text.toString().isMobileValid()) {
             Toast.makeText(this, "من فضلك ادخل رقم صحيح", Toast.LENGTH_LONG).show()

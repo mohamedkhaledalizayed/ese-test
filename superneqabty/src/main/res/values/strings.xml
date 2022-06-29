@@ -90,4 +90,16 @@
     <string name="net_amount">المبلغ الصافى :</string>
     <string name="total_fees">الرسوم الكلية :</string>
     <string name="pdf">تحميل الفاتورة Pdf</string>
+    <string name="profile">الملف الشخصى</string>
+    <string name="user_name">الاسم</string>
+    <string name="membership">رقم العضوية</string>
+    <string name="nationalid">الرقم القومى</string>
+    <string name="update_info">تحديث البيانات</string>
+    <string name="add_member">إضافة عضو</string>
+    <string name="cardrenewal">طلب تجديد كارنية العضوية.</string>
+    <string name="address">عنوان التوصيل</string>
+    <string name="year">السنة</string>
+    <string name="personal_photo">صورة شخصية</string>
+    <string name="send_order">إرسال الطلب</string>
+    <string name="ministry_license">طلب تجديد ترخيص الوزارة.</string>
 </resources>

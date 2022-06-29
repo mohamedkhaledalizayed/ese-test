@@ -1,20 +1,23 @@
 package com.neqabty.login.modules.login.data.model
 
+
 import com.google.gson.annotations.SerializedName
 
 data class UserModel(
-    @SerializedName("email")
-    val email: String? = "",
-    @SerializedName("fullname")
-    val fullname: String = "",
-    @SerializedName("id")
-    val id: Int = 0,
-    @SerializedName("image")
-    val image: String? = "",
-    @SerializedName("mobile")
-    val mobile: String = "",
+    @SerializedName("account")
+    val account: Account,
+    @SerializedName("entity")
+    val entity: Entity,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("membership_id")
+    val membershipId: String,
+    @SerializedName("last_fee_year")
+    val last_fee_year: String,
     @SerializedName("national_id")
-    val nationalId: String = "",
-    @SerializedName("password")
-    val password: String = ""
+    val national_id: String,
+    @SerializedName("license_end_date")
+    val license_end_date: String,
+    @SerializedName("blocked")
+    val blocked: Boolean?
 )
