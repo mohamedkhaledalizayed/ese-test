@@ -26,13 +26,13 @@
             android:name="com.neqabty.meganeqabty.profile.view.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.meganeqabty.paymentdetails.view.paymentstatus.PaymentStatusActivity"
+            android:name=".payment.view.paymentstatus.PaymentStatusActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.meganeqabty.paymentdetails.view.paymentdetails.PaymentDetailsActivity"
+            android:name=".payment.view.paymentdetails.PaymentDetailsActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.meganeqabty.payment.PaymentsActivity"
+            android:name=".payment.view.selectservice.PaymentsActivity"
             android:exported="false" />
         <activity
             android:name="com.neqabty.meganeqabty.splash.view.SuperNeqabtySplashActivity"
@@ -56,7 +56,7 @@
             android:name="com.neqabty.meganeqabty.aboutapp.AboutAppActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.meganeqabty.paymentdetails.view.PdfCreatorScreen"
+            android:name=".payment.view.paymentstatus.PdfCreatorScreen"
             android:exported="false"
             android:label="تحميل اخطار الدفع"
             android:theme="@style/AppTheme.ActionBar" />

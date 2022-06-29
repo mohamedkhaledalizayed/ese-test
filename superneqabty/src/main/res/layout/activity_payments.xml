@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".payment.PaymentsActivity">
+    android:background="@color/white"
+    tools:context=".payment.view.selectservice.PaymentsActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -53,7 +54,37 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="center|end"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/spinner_action_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/spinner_brder_white"
+        android:padding="@dimen/_5sdp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_container"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Spinner
+            android:id="@+id/sp_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:paddingEnd="10dp"
+            android:popupBackground="@color/splash_bg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|end"
             android:contentDescription="@null"
             android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
     </FrameLayout>
@@ -62,9 +93,11 @@
         android:id="@+id/membership_id_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/spinner_container"
+        app:layout_constraintTop_toBottomOf="@id/spinner_action_container"
         android:background="@drawable/edit_text"
-        android:layout_margin="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         >
 
         <EditText
@@ -77,7 +110,7 @@
             android:textAlignment="textStart"
             android:textColor="#748A9D"
             android:textColorHint="#748A9D"
-            android:textSize="?textSizeMedium"
+            android:textSize="@dimen/_10ssp"
             android:textStyle="italic"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -97,7 +130,7 @@
         app:layout_constraintEnd_toEndOf="@id/membership_id_container"
         android:text="@string/next"
         android:textColor="@android:color/white"
-        android:textSize="?textSizeMedium"
+        android:textSize="@dimen/_12ssp"
         android:background="@drawable/signup_btn_bg"
         android:layout_marginTop="@dimen/_30sdp"
         />
