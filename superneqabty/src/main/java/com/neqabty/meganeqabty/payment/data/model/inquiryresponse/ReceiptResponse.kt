@@ -7,7 +7,7 @@ data class ReceiptResponse(
     @SerializedName("member")
     val member: Member,
     @SerializedName("receipt")
-    val receipt: Receipt,
+    val receipt: Receipt?,
     @SerializedName("service")
     val service: Service,
     @SerializedName("title")

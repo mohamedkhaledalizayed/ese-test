@@ -70,7 +70,7 @@ class PaymentRepositoryImpl @Inject constructor(private val paymentDS: PaymentDS
 fun ReceiptResponse.toReceiptDataEntity(): ReceiptDataEntity{
     return ReceiptDataEntity(
         member = member.toMemberEntity(),
-        receipt = receipt.toReceiptEntity(),
+        receipt = receipt?.toReceiptEntity(),
         service = service.toServiceEntity(),
         title = title
     )

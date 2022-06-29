@@ -131,4 +131,6 @@ dependencies {
     implementation project(':superneqabty')
     implementation project(':login')
     implementation project(':news')
+    implementation project(':signup')
+
 }

@@ -190,7 +190,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         val alertDialog = AlertDialog.Builder(this).create()
         alertDialog.setTitle(getString(R.string.alert))
         alertDialog.setMessage("لا توجد اي فواتير مستحقه للسداد في الوقت الحالي")
-        alertDialog.setCancelable(true)
+        alertDialog.setCancelable(false)
         alertDialog.setButton(
             AlertDialog.BUTTON_POSITIVE, "موافقة"
         ) { dialog, _ ->
