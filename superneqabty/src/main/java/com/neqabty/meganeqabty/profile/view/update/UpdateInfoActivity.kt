@@ -218,10 +218,10 @@ class UpdateInfoActivity : BaseActivity<ActivityUpdateInfoBinding>() {
     private fun getImage(){
         val intent = Intent()
         intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT;
+        intent.action = Intent.ACTION_PICK
         startActivityForResult(
             Intent.createChooser(intent,
-                "Select Picture"), REQUEST_CODE);
+                "Select Picture"), REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

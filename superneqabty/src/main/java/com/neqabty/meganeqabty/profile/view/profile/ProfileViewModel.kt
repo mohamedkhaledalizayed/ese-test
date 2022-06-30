@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.meganeqabty.core.utils.Resource
 import com.neqabty.meganeqabty.profile.domain.entity.MinistryLicenseEntity
+import com.neqabty.meganeqabty.profile.domain.entity.profile.ProfileEntity
 import com.neqabty.meganeqabty.profile.domain.interactors.ProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -17,8 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(private val profileUseCase: ProfileUseCase): ViewModel() {
 
-    val user = MutableLiveData<Resource<String>>()
-    fun getUserProfile(token:String, mobile: String, address: String, year: Int, photo: MultipartBody.Part?) {
+    val user = MutableLiveData<Resource<ProfileEntity>>()
+    fun getUserProfile(token:String) {
         user.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {

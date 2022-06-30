@@ -3,6 +3,7 @@ package com.neqabty.meganeqabty.profile.domain.interactors
 
 
 import com.neqabty.meganeqabty.profile.domain.entity.MinistryLicenseEntity
+import com.neqabty.meganeqabty.profile.domain.entity.profile.ProfileEntity
 import com.neqabty.meganeqabty.profile.domain.repository.ProfileRepository
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
@@ -10,7 +11,7 @@ import javax.inject.Inject
 
 class ProfileUseCase @Inject constructor(private val profileRepository: ProfileRepository) {
 
-    fun build(token: String): Flow<String>{
+    fun build(token: String): Flow<ProfileEntity>{
         return profileRepository.getUserProfile(token)
     }
 

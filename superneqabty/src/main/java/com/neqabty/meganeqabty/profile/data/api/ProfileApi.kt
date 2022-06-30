@@ -3,14 +3,14 @@ package com.neqabty.meganeqabty.profile.data.api
 
 import com.neqabty.meganeqabty.profile.data.model.cardrequest.CardRequestModel
 import com.neqabty.meganeqabty.profile.data.model.ministrylicence.MinistryLicenseModel
+import com.neqabty.meganeqabty.profile.data.model.profile.ProfileModel
 import okhttp3.MultipartBody
 import retrofit2.http.*
 
 interface ProfileApi {
 
-    @Multipart
-    @POST("api/membership_card_requests")
-    suspend fun getUserProfile(@Header("Authorization") token: String): String
+    @GET("api/accounts/profile")
+    suspend fun getUserProfile(@Header("Authorization") token: String): ProfileModel
 
     @Multipart
     @POST("api/membership_card_requests")

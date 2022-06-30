@@ -26,23 +26,27 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
 
         setupToolbar(title = "الصفحة الشخصية")
 
-        binding.name.text = sharedPreferences.name
-        binding.mobile.text = sharedPreferences.mobile
-        binding.membershipNumber.text = ""
-        binding.nationalId.text = sharedPreferences.nationalId
-
+        profileViewModel.getUserProfile("Token ${sharedPreferences.token}")
         profileViewModel.user.observe(this) {
 
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
                     }
                     Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        binding.layoutContainer.visibility = View.VISIBLE
 
-
+                        binding.name.text = resource.data?.name
+                        binding.mobile.text = resource.data?.account?.mobile
+                        binding.membershipNumber.text = resource.data?.membershipId.toString()
+                        binding.nationalId.text = resource.data?.nationalId.toString()
+                        binding.email.text = resource.data?.account?.email
+                        binding.syndicate.text = resource.data?.entity?.name
                     }
                     Status.ERROR -> {
-
+                        binding.progressCircular.visibility = View.GONE
 
                     }
                 }
