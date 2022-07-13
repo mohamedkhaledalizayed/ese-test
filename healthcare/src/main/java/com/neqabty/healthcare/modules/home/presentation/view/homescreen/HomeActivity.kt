@@ -23,6 +23,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
+import com.neqabty.healthcare.modules.suggestions.presentation.SuggestionsActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
@@ -155,6 +156,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             }
             R.id.syndicate -> {
                 val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.suggestions -> {
+                val intent = Intent(this@HomeActivity, SuggestionsActivity::class.java)
                 startActivity(intent)
             }
         }

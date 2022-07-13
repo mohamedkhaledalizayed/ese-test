@@ -74,6 +74,14 @@
         <item>الزوجة</item>
     </array>
 
+    <array name="complaints">
+        <item>نوع الشكوي</item>
+        <item>نوع 1</item>
+        <item>نوع 2</item>
+        <item>نوع 3</item>
+        <item>نوع 4</item>
+    </array>
+
     <string name="registration">تسجيل إشتراك</string>
     <string name="add_image">إرفاق صورة البطاقة الامامية</string>
     <string name="add_image_back">إرفاق صورة البطاقة الخلفية</string>
@@ -97,4 +105,6 @@
     <string name="profission">التخصص</string>
     <string name="provider_type">نوع مقدم الخدمة</string>
     <string name="invitation_code">كود الدعوة</string>
+    <string name="send">إرسال</string>
+    <string name="content">محتوي الشكوي</string>
 </resources>

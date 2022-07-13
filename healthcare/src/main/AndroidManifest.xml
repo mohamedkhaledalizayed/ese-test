@@ -4,9 +4,9 @@
     package="com.neqabty.healthcare">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".core.application.HealthCareApplication"
@@ -18,6 +18,9 @@
         android:theme="@style/Theme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
+        <activity
+            android:name=".modules.suggestions.presentation.SuggestionsActivity"
+            android:exported="false" />
         <activity
             android:name=".modules.search.presentation.view.providerdetails.ProviderDetailsActivity"
             android:exported="false" />
