@@ -12,19 +12,19 @@ import retrofit2.http.*
 interface PaymentApi {
 
     @GET("api/services/")
-    suspend fun getServices(@Query("code") entity: String): ServicesListModel
+    suspend fun getServices(@Query("filter{entity.code}") entity: String): ServicesListModel
 
     @GET("api/service_actions/")
-    suspend fun getServiceActions(@Query("code") service: String): ServiceActionsModel
+    suspend fun getServiceActions(@Query("filter{service.code}") service: String, @Header("Authorization") token: String): ServiceActionsModel
 
     @GET("api/payments/v2/inquiry/{id}/{code}/{number}")
-    suspend fun getPaymentDetails(@Path("id") id: String,@Path("code") code: String, @Path("number") number: String): ReceiptResponse
+    suspend fun getPaymentDetails(@Path("id") id: String, @Header("Authorization") token: String,@Path("code") code: String, @Path("number") number: String): ReceiptResponse
 
     @POST("api/payments")
     suspend fun payment(@Body paymentBody: PaymentBody): PaymentResponse
 
     @GET("api/payment_methods")
-    suspend fun getPaymentMethods(): PaymentMethodsResponse
+    suspend fun getPaymentMethods(@Header("Authorization") token: String): PaymentMethodsResponse
 
     @GET("api/transactions/get/{transaction_id}")
     suspend fun getPaymentStatus(@Path("transaction_id") transaction_id: String): PaymentStatusModel

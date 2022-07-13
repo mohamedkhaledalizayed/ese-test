@@ -5,7 +5,7 @@ data class AdEntity(
     val entity: Int = 0,
     val id: Int = 0,
     val newsId: Int = 0,
-    val image: String = "",
+    val image: String? = "",
     val title: String = "",
     val type: String = "",
     val updatedAt: String = "",
