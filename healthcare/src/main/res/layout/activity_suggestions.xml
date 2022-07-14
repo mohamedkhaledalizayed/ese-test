@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".modules.search.presentation.view.search.SearchActivity">
+    tools:context=".modules.suggestions.presentation.SuggestionsActivity">
 
     <include
         android:id="@+id/toolbar"

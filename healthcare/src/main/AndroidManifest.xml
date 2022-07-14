@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
+            android:name=".modules.profile.presentation.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".modules.suggestions.presentation.SuggestionsActivity"
             android:exported="false" />
         <activity

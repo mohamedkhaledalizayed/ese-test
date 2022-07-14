@@ -22,6 +22,7 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
+import com.neqabty.healthcare.modules.profile.presentation.ProfileActivity
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.modules.suggestions.presentation.SuggestionsActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
@@ -150,6 +151,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+            R.id.profile -> {
+                val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
+                startActivity(intent)
+            }
             R.id.wallet -> {
                 val intent = Intent(this@HomeActivity, WalletActivity::class.java)
                 startActivity(intent)
