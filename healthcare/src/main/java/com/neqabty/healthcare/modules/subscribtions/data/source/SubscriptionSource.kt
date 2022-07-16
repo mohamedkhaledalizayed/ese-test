@@ -2,9 +2,15 @@ package com.neqabty.healthcare.modules.subscribtions.data.source
 
 import com.neqabty.healthcare.modules.subscribtions.data.api.SubscriptionApi
 import com.neqabty.healthcare.modules.subscribtions.data.model.SubscribePostBodyRequest
+import com.neqabty.healthcare.modules.subscribtions.data.model.relationstypes.Relation
+import com.neqabty.healthcare.modules.subscribtions.data.model.relationstypes.RelationsTypesModel
 import javax.inject.Inject
 
 class SubscriptionSource @Inject constructor(private val subscriptionApi: SubscriptionApi) {
+
+    suspend fun getRelations(): List<Relation>{
+        return subscriptionApi.getRelations().data.relations
+    }
     suspend fun addSubscription(subscribePostBodyRequest: SubscribePostBodyRequest): Boolean {
         val p = subscribePostBodyRequest.personalImage.length
 

@@ -3,10 +3,11 @@ package com.neqabty.healthcare.modules.subscribtions.data.repository
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
-import android.util.Log
 import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
 import com.neqabty.healthcare.modules.subscribtions.data.model.SubscribePostBodyRequest
+import com.neqabty.healthcare.modules.subscribtions.data.model.relationstypes.Relation
 import com.neqabty.healthcare.modules.subscribtions.data.source.SubscriptionSource
+import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.modules.subscribtions.domain.repository.SubscriptionRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -15,6 +16,12 @@ import javax.inject.Inject
 
 class SubscriptionRepositoryImpl @Inject constructor(private val subscriptionSource: SubscriptionSource) :
     SubscriptionRepository {
+    override fun getRelations(): Flow<List<RelationEntity>> {
+        return flow {
+            emit(subscriptionSource.getRelations().map { it.toRelationEntity() })
+        }
+    }
+
     override fun addSubscription(
         name: String,
         birthDate: String,
@@ -56,6 +63,13 @@ class SubscriptionRepositoryImpl @Inject constructor(private val subscriptionSou
             )
         }
     }
+}
+
+private fun Relation.toRelationEntity(): RelationEntity{
+    return RelationEntity(
+        id = id,
+        relation = relation
+    )
 }
 
 private fun String.toBase64(): String {

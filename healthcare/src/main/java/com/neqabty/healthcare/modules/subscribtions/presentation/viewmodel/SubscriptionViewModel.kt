@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
+import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.modules.subscribtions.domain.usecases.AddSubscriptionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +17,20 @@ import kotlinx.coroutines.flow.collect
 @HiltViewModel
 class SubscriptionViewModel @Inject constructor(private val addSubscriptionUseCase: AddSubscriptionUseCase) :
     ViewModel() {
+
+    val relations = MutableLiveData<Resource<List<RelationEntity>>>()
+    fun getRelations(){
+        viewModelScope.launch(Dispatchers.IO){
+            relations.postValue(Resource.loading(data = null))
+            try {
+                addSubscriptionUseCase.build().collect {
+                    relations.postValue(Resource.success(data = it))
+                }
+            }catch (e: Throwable){
+                relations.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            }
+        }
+    }
 
     val providers = MutableLiveData<Resource<Boolean>>()
     fun addSubscription(

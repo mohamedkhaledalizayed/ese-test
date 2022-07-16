@@ -1,10 +1,13 @@
 package com.neqabty.healthcare.modules.subscribtions.domain.repository
 
 import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
+import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.RelationEntity
 import kotlinx.coroutines.flow.Flow
 import java.net.URI
 
 interface SubscriptionRepository {
+
+    fun getRelations(): Flow<List<RelationEntity>>
     fun addSubscription(
         name: String,
         birthDate: String,

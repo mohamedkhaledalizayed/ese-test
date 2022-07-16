@@ -22,6 +22,7 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
 import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
+import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.modules.subscribtions.presentation.viewmodel.SubscriptionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
@@ -37,6 +38,9 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private var nationalIdFrontUri: Uri? = null
     private var nationalIdBackUri: Uri? = null
     private var followerUri: Uri? = null
+    private val relationsAdapter = RelationsAdapter()
+    private var relationsList: List<RelationEntity>? = null
+    private var relationTypeId  = 0
     override fun getViewBinding() = ActivitySubscriptionBinding.inflate(layoutInflater)
     private val subscriptionViewModel: SubscriptionViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +48,38 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         setContentView(binding.root)
         setupToolbar(title = "تسجيل إشتراك")
 
+        binding.spRelations.adapter = relationsAdapter
+        binding.spRelations.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                if (relationsList != null && i != 0) {
+                    relationTypeId = relationsList?.get(i - 1)!!.id
+                }
+            }
 
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
+
+        subscriptionViewModel.getRelations()
+        subscriptionViewModel.relations.observe(this){
+            it.let { resource ->
+                when(resource.status){
+                    Status.LOADING -> {
+
+                    }
+                    Status.SUCCESS -> {
+                        if (resource.data!!.isNotEmpty()){
+                            relationsList = resource.data
+                            relationsAdapter.submitList(
+                                resource.data.toMutableList()
+                                    .also { list -> list.add(0, RelationEntity(0, "درجة القرابة")) })
+                        }
+                    }
+                    Status.ERROR -> {
+
+                    }
+                }
+            }
+        }
         mAdapter.onItemClickListener = object :
             FollowerAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: String) {
@@ -121,7 +156,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             name = binding.etFullName.text.toString(),
             image = getRealPath(followerUri!!)!!.toBase64(),
             national_id = binding.etNational.text.toString(),
-            relation_type = 0
+            relation_type = relationTypeId
         )
 
         listFollower.add(follower)
@@ -129,6 +164,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         mAdapter.submitList(listFollower)
 
         followerUri = null
+        relationTypeId = 0
         binding.etFullName.setText("")
         binding.etNational.setText("")
         binding.spRelations.setSelection(0)

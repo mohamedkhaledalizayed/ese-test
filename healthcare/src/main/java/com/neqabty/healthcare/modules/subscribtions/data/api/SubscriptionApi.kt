@@ -1,8 +1,10 @@
 package com.neqabty.healthcare.modules.subscribtions.data.api
 
 import com.neqabty.healthcare.modules.subscribtions.data.model.SubscribePostBodyRequest
+import com.neqabty.healthcare.modules.subscribtions.data.model.relationstypes.RelationsTypesModel
 import com.neqabty.healthcare.modules.subscribtions.data.model.subscription.SubscriptionModel
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
@@ -11,4 +13,8 @@ interface SubscriptionApi {
     suspend fun addSubscription(
         @Header("Authorization") token: String,
         @Body subscribePostBodyRequest: SubscribePostBodyRequest): SubscriptionModel
+
+    @GET("general-Lockups")
+    suspend fun getRelations(): RelationsTypesModel
+
 }
