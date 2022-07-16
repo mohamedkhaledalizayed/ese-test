@@ -12,9 +12,11 @@
         layout="@layout/toolbar" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/layout_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
@@ -40,6 +42,7 @@
                     android:src="@drawable/user" />
 
                 <TextView
+                    android:id="@+id/full_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -49,6 +52,7 @@
                     android:textSize="@dimen/_12ssp" />
 
                 <TextView
+                    android:id="@+id/mobile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -134,7 +138,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/mobile"
+                        android:id="@+id/email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -143,8 +147,7 @@
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:text="Shady.abduallah@neqabty.com"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_12ssp"
-                        />
+                        android:textSize="@dimen/_12ssp" />
 
                 </RelativeLayout>
 
@@ -173,7 +176,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/membership_number"
+                        android:id="@+id/birth_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -200,7 +203,6 @@
                     android:padding="@dimen/_5sdp">
 
                     <TextView
-                        android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
@@ -213,7 +215,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/national_id"
+                        android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -251,7 +253,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/syndicate"
+                        android:id="@+id/job"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -290,7 +292,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
-                        android:id="@+id/email"
+                        android:id="@+id/national_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -400,6 +402,7 @@
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:id="@+id/phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -408,8 +411,7 @@
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:text="٠١١١٢٢٩٠١٨١"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_12ssp"
-                        />
+                        android:textSize="@dimen/_12ssp" />
 
                 </RelativeLayout>
 
