@@ -39,13 +39,7 @@
             android:exported="false" />
         <activity
             android:name="com.neqabty.meganeqabty.splash.view.SuperNeqabtySplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"/>
         <activity
             android:name="com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity"
             android:exported="true" />

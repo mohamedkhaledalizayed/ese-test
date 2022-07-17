@@ -3,6 +3,7 @@ package com.neqabty.healthcare.modules.home.presentation.view.homescreen
 
 
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -29,6 +30,7 @@ import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.meganeqabty.home.domain.entity.NewsEntity
+import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
 import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -160,16 +162,74 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
                 startActivity(intent)
             }
             R.id.syndicate -> {
-                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
+                val intent = Intent(this@HomeActivity, HomeActivity::class.java)
+                intent.putExtra("id", 1)
+                sharedPreferences.mainSyndicate = 1
+                sharedPreferences.code = "e01"
+                sharedPreferences.image = "https://neqabty.et3.co/media/Entities/e0005.png"
+                sharedPreferences.syndicateName = "النقابة العامة للمرشدين السياحيين"
                 startActivity(intent)
             }
             R.id.suggestions -> {
                 val intent = Intent(this@HomeActivity, SuggestionsActivity::class.java)
                 startActivity(intent)
             }
+            R.id.logout -> {
+                logout("هل تريد تسجيل خروج!")
+            }
         }
 
         drawer.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun logout(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            sharedPreferences.name = ""
+            sharedPreferences.mobile = ""
+            sharedPreferences.userImage = ""
+            onResume()
+            drawer.close()
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
+    override fun onBackPressed() {
+        showAlertDialog("هل تريد الخروج من التطبيق!")
+    }
+
+    private fun showAlertDialog(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            finish()
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
     }
 }

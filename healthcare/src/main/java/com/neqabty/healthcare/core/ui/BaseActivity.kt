@@ -13,12 +13,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
 import com.neqabty.healthcare.R
+import com.neqabty.login.core.utils.PreferencesHelper
+import javax.inject.Inject
 
 abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
 
     lateinit var binding: B
     abstract fun getViewBinding(): B
 
+    @Inject
+    lateinit var sharedPreferences: PreferencesHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL

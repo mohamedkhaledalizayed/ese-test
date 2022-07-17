@@ -359,7 +359,8 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     override fun onBackPressed() {
-        showAlertDialog("هل تريد الخروج من التطبيق!")
+//        showAlertDialog("هل تريد الخروج من التطبيق!")
+        finish()
     }
 
     private fun showAlertDialog(message: String) {
