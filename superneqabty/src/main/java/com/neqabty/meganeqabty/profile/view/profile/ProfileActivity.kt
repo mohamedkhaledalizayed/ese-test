@@ -3,22 +3,18 @@ package com.neqabty.meganeqabty.profile.view.profile
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
-import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.core.utils.Status
-import com.neqabty.meganeqabty.databinding.ActivityProfileBinding
+import com.neqabty.meganeqabty.databinding.ActivityProfileMegaBinding
 import com.neqabty.meganeqabty.profile.view.update.UpdateInfoActivity
-import com.neqabty.meganeqabty.profile.view.update.UpdateProfileViewModel
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
+class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
     private val profileViewModel: ProfileViewModel by viewModels()
-    override fun getViewBinding() = ActivityProfileBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivityProfileMegaBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
