@@ -88,7 +88,6 @@
                 android:id="@+id/type_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:background="@drawable/select_btn_bg"
                 android:gravity="center"
@@ -107,6 +106,37 @@
 
                 <TextView
                     android:id="@+id/type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/degrees_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:background="@drawable/select_btn_bg"
+                android:gravity="center"
+                android:minWidth="@dimen/_65sdp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/government_container"
+                app:layout_constraintTop_toBottomOf="@+id/search_toolbar">
+
+                <ImageView
+                    android:id="@+id/degrees_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_icon_remove" />
+
+                <TextView
+                    android:id="@+id/degrees"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"

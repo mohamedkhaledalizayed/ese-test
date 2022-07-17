@@ -9,5 +9,7 @@ data class FiltersModel(
     @SerializedName("professions")
     val professions: List<Profession>,
     @SerializedName("providerTypes")
-    val providerTypes: List<ProviderType>
+    val providerTypes: List<ProviderType>,
+    @SerializedName("degrees")
+    val degrees: List<Degree>
 )

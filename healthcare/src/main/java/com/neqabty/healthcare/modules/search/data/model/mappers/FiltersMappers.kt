@@ -1,19 +1,14 @@
 package com.neqabty.healthcare.modules.search.data.model.mappers
 
-import com.neqabty.healthcare.modules.search.data.model.filter.Governorate
-import com.neqabty.healthcare.modules.search.data.model.filter.Profession
-import com.neqabty.healthcare.modules.search.data.model.filter.FiltersModel
-import com.neqabty.healthcare.modules.search.data.model.filter.ProviderType
-import com.neqabty.healthcare.modules.search.domain.entity.filter.GovernorateEntity
-import com.neqabty.healthcare.modules.search.domain.entity.filter.ProfessionEntity
-import com.neqabty.healthcare.modules.search.domain.entity.filter.FiltersEntity
-import com.neqabty.healthcare.modules.search.domain.entity.filter.ProviderTypeEntity
+import com.neqabty.healthcare.modules.search.data.model.filter.*
+import com.neqabty.healthcare.modules.search.domain.entity.filter.*
 
 fun FiltersModel.toFiltersEntity(): FiltersEntity {
     return FiltersEntity(
         governorates = governorates.map { it.toGovEntity() },
         professions = professions.map { it.toProEntity() },
-        providerTypes = providerTypes.map { it.toProviderTypeEntity() }
+        providerTypes = providerTypes.map { it.toProviderTypeEntity() },
+        degrees = degrees.map { it.toDegreeEntity() }
     )
 }
 
@@ -35,5 +30,12 @@ private fun ProviderType.toProviderTypeEntity(): ProviderTypeEntity {
     return ProviderTypeEntity(
         id = id,
         name = providerTypeAr
+    )
+}
+
+private fun Degree.toDegreeEntity(): DegreeEntity{
+    return DegreeEntity(
+        degreeName = degreeName,
+        id = id
     )
 }

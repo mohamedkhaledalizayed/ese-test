@@ -23,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 var selectedGovernorate = 0
 var selectedProfession = 0
 var selectedProviders = 0
+var selectedDegree = 0
 
 @AndroidEntryPoint
 class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFilterListener {
@@ -31,6 +32,7 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
     private var serviceProviderTypeId = ""
     private var name = ""
     private var professionId = ""
+    private var degree = ""
     private val mAdapter = ItemsAdapter()
     private val searchViewModel: SearchViewModel by viewModels()
     override fun getViewBinding() = ActivitySearchResultBinding.inflate(layoutInflater)
@@ -96,7 +98,12 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
             selectedProviders = 0
             search()
         }
-
+        binding.degreesClose.setOnClickListener {
+            binding.degreesContainer.visibility = View.GONE
+            degree = ""
+            selectedDegree = 0
+            search()
+        }
         binding.searchToolbar.search.setOnEditorActionListener(object :
             TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
@@ -151,7 +158,7 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
         }
     }
 
-    override fun onFilterClicked(government: ItemUi?, profession: ItemUi?, providerType: ItemUi?) {
+    override fun onFilterClicked(government: ItemUi?, profession: ItemUi?, providerType: ItemUi?, degrees: ItemUi?) {
         government?.let {
             binding.governmentContainer.visibility = View.VISIBLE
             governorateId = it.id.toString()
@@ -174,6 +181,14 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
             binding.type.text = it.name
         } ?: run {
             binding.typeContainer.visibility = View.GONE
+        }
+
+        degrees?.let {
+            binding.degreesContainer.visibility = View.VISIBLE
+            degree = it.id.toString()
+            binding.degrees.text = it.name
+        } ?: run {
+            binding.degreesContainer.visibility = View.GONE
         }
         search()
 

@@ -16,7 +16,6 @@
         android:id="@+id/filter_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical">
@@ -122,6 +121,41 @@
                 android:contentDescription="@null"
                 android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
         </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/degree"
+            android:textStyle="bold"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+
+        <FrameLayout
+            android:id="@+id/spinner_degree_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/edit_text_bg"
+            android:padding="@dimen/_8sdp"
+            >
+
+            <Spinner
+                android:id="@+id/sp_degree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:entries="@array/cities"
+                android:popupBackground="@color/splash_bg" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        </FrameLayout>
+
 
         <TextView
             android:id="@+id/filter_btn"

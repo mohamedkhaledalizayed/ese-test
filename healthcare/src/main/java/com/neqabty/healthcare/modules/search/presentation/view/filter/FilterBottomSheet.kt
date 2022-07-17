@@ -13,10 +13,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.FragmentFilterBottomSheetBinding
 import com.neqabty.healthcare.modules.search.presentation.model.filters.FiltersUi
 import com.neqabty.healthcare.modules.search.presentation.model.filters.ItemUi
-import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
-import com.neqabty.healthcare.modules.search.presentation.view.searchresult.selectedGovernorate
-import com.neqabty.healthcare.modules.search.presentation.view.searchresult.selectedProfession
-import com.neqabty.healthcare.modules.search.presentation.view.searchresult.selectedProviders
+import com.neqabty.healthcare.modules.search.presentation.view.searchresult.*
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -27,10 +24,12 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
     private val governorateAdapter = CustomAdapter()
     private val professionAdapter = CustomAdapter()
     private val providerTypesAdapter = CustomAdapter()
+    private val degreeAdapter = CustomAdapter()
 
     private var governorate: ItemUi? = null
     private var serviceProviderType: ItemUi? = null
     private var profession: ItemUi? = null
+    private var degree: ItemUi? = null
 
     private var filtersData: FiltersUi? = null
 
@@ -84,6 +83,18 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
 
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
         }
+
+        binding.spDegree.adapter = degreeAdapter
+        binding.spDegree.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                if (filtersData != null && i != 0) {
+                    degree = filtersData?.degrees?.get(i - 1)
+                    selectedDegree = i
+                }
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
         filtersViewModel.getFilters()
         filtersViewModel.filters.observe(this) {
             it.let { resource ->
@@ -108,9 +119,13 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
                         providerTypesAdapter.submitList(
                             resource.data.providerTypes.toMutableList()
                                 .also { list -> list.add(0, ItemUi(0, "اختر نوع مقدم الخدمة")) })
+                        degreeAdapter.submitList(
+                            resource.data.degrees.toMutableList()
+                                .also { list -> list.add(0, ItemUi(0, "اختر الدرجة العلمية")) })
                         binding.spGovernment.setSelection(selectedGovernorate)
                         binding.spSpe.setSelection(selectedProfession)
                         binding.spType.setSelection(selectedProviders)
+                        binding.spDegree.setSelection(selectedDegree)
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility =
@@ -123,7 +138,7 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
 
         binding.filterBtn.setOnClickListener {
             val searchActivity = activity as SearchResultActivity
-            searchActivity.onFilterClicked(governorate, profession, serviceProviderType)
+            searchActivity.onFilterClicked(governorate, profession, serviceProviderType, degree)
             dismiss()
         }
 
