@@ -1,8 +1,6 @@
 package com.neqabty.healthcare.modules.home.presentation.view.homescreen
 
 
-
-
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -31,7 +29,6 @@ import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsAc
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.meganeqabty.home.domain.entity.NewsEntity
 import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
-import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
