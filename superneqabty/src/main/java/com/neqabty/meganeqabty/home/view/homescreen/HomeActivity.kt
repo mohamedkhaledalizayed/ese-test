@@ -334,7 +334,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             R.id.change_syndicate -> {
                 val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
                 startActivity(intent)
-                finishAffinity()
+                finish()
             }
             R.id.contactus_fragment -> {
 
