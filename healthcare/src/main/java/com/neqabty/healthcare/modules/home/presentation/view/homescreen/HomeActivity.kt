@@ -27,8 +27,8 @@ import com.neqabty.healthcare.modules.suggestions.presentation.SuggestionsActivi
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
-import com.neqabty.meganeqabty.home.domain.entity.NewsEntity
 import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
+import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

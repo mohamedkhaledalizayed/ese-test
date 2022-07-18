@@ -8,9 +8,9 @@ import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.modules.home.domain.entity.about.AboutEntity
 import com.neqabty.healthcare.modules.home.domain.interactors.GetHomeUseCase
-import com.neqabty.meganeqabty.home.domain.entity.NewsEntity
-import com.neqabty.meganeqabty.home.domain.interactors.GetNewsUseCase
-import com.neqabty.meganeqabty.home.domain.interactors.GetSyndicateNewsUseCase
+import com.neqabty.news.modules.home.domain.entity.NewsEntity
+import com.neqabty.news.modules.home.domain.interactors.GetNewsUseCase
+import com.neqabty.news.modules.home.domain.interactors.GetSyndicateNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect

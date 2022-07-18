@@ -26,11 +26,11 @@ import com.neqabty.meganeqabty.core.utils.Constants
 import com.neqabty.meganeqabty.core.utils.Status
 import com.neqabty.meganeqabty.databinding.ActivityMainBinding
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
-import com.neqabty.meganeqabty.home.domain.entity.NewsEntity
 import com.neqabty.meganeqabty.payment.view.selectservice.PaymentsActivity
 import com.neqabty.meganeqabty.profile.view.profile.ProfileActivity
 import com.neqabty.meganeqabty.settings.SettingsActivity
 import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
+import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.core.utils.AppUtils
 import com.neqabty.meganeqabty.databinding.NewsLayoutItemBinding
-import com.neqabty.meganeqabty.home.domain.entity.NewsEntity
+import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
