@@ -1,12 +1,14 @@
 package com.neqabty.meganeqabty.payment.data.model
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 class PaymentBody (
     @SerializedName("payment")
     val payment: PaymentBodyObject
 )
 
+@Keep
 class PaymentBodyObject(
     @SerializedName("service_code")
     val serviceCode: String = "",

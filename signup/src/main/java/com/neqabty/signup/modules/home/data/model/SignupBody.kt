@@ -1,8 +1,9 @@
 package com.neqabty.signup.modules.home.data.model
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class SignupBody(
     @SerializedName("entity_code")
     val entityCode: String = "",

@@ -1,7 +1,8 @@
 package com.neqabty.signup.modules.home.data.model
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class UserModel(
     @SerializedName("email")
     val email: String? = null,
