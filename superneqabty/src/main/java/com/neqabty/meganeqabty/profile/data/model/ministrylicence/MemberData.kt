@@ -1,8 +1,9 @@
 package com.neqabty.meganeqabty.profile.data.model.ministrylicence
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class MemberData(
     @SerializedName("account")
     val account: Int,

@@ -1,7 +1,8 @@
 package com.neqabty.healthcare.modules.search.data.model
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class MedicalProvidersResponse(
     @SerializedName("current_page")
     val currentPage: Int = 0,

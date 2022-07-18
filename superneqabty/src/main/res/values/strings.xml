@@ -102,4 +102,6 @@
     <string name="personal_photo">صورة شخصية</string>
     <string name="send_order">إرسال الطلب</string>
     <string name="ministry_license">طلب تجديد ترخيص الوزارة.</string>
+    <string name="agree">موافق</string>
+    <string name="rooted">هذا الجهاز غير أمن لا يمكنك إستخدام هذا التطبيق.</string>
 </resources>

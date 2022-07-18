@@ -1,8 +1,9 @@
 package com.neqabty.meganeqabty.home.data.model
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class Ad(
     @SerializedName("created_at")
     val createdAt: String = "",

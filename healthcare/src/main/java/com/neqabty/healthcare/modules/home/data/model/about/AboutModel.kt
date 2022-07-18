@@ -1,8 +1,9 @@
 package com.neqabty.healthcare.modules.home.data.model.about
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class AboutModel(
     @SerializedName("created_at")
     val createdAt: String,

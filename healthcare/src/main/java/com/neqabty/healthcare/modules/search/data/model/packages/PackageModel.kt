@@ -1,8 +1,9 @@
 package com.neqabty.healthcare.modules.search.data.model.packages
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class PackageModel(
     @SerializedName("description")
     val description: String,

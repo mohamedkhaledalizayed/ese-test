@@ -1,8 +1,10 @@
 package com.neqabty.news.modules.home.data.model
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class News(
     @SerializedName("author")
     val author: Author ,

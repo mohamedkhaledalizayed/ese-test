@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import com.neqabty.meganeqabty.BuildConfig
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.core.ui.BaseActivity
+import com.neqabty.meganeqabty.core.utils.DeviceUtils
 import com.neqabty.meganeqabty.core.utils.Status
 import com.neqabty.meganeqabty.databinding.ActivitySuperNeqabtyMainBinding
 import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
@@ -34,7 +35,11 @@ class SuperNeqabtySplashActivity : BaseActivity<ActivitySuperNeqabtyMainBinding>
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        splashViewModel.appConfig()
+        if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()){
+            showAlertDialogAndExitApp(getString(R.string.rooted))
+        }else{
+            splashViewModel.appConfig()
+        }
         splashViewModel.appConfig.observe(this) {
 
             it?.let { resource ->
@@ -94,5 +99,21 @@ class SuperNeqabtySplashActivity : BaseActivity<ActivitySuperNeqabtyMainBinding>
         }
         alertDialog.show()
 
+    }
+
+    private fun showAlertDialogAndExitApp(message: String) {
+
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(false)
+        alertDialog.setButton(
+            androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL, getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            finishAffinity()
+        }
+
+        alertDialog.show()
     }
 }

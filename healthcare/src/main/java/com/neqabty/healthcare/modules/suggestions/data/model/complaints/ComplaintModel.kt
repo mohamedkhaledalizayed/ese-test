@@ -1,8 +1,9 @@
 package com.neqabty.healthcare.modules.suggestions.data.model.complaints
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class ComplaintModel(
     @SerializedName("data")
     val `data`: Data,

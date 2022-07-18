@@ -1,8 +1,9 @@
 package com.neqabty.meganeqabty.syndicates.data.model
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class Type(
     @SerializedName("created_at")
     val createdAt: String = "",

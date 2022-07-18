@@ -1,9 +1,10 @@
 package com.neqabty.healthcare.modules.search.data.model
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import java.util.*
-
+@Keep
 data class MedicalProviderModel(
     @SerializedName("added_by")
     val addedBy: String? = null,

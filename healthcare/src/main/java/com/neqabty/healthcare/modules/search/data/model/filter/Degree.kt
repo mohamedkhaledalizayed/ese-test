@@ -1,8 +1,9 @@
 package com.neqabty.healthcare.modules.search.data.model.filter
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class Degree(
     @SerializedName("created_at")
     val createdAt: Any,

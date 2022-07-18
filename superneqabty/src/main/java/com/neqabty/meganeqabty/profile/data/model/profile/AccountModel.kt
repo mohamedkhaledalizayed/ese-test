@@ -1,8 +1,9 @@
 package com.neqabty.meganeqabty.profile.data.model.profile
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class AccountModel(
     @SerializedName("email")
     val email: String,

@@ -1,8 +1,9 @@
 package com.neqabty.healthcare.modules.subscribtions.data.model.subscription
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class SubscriptionModel(
     @SerializedName("data")
     val `data`: Data,
