@@ -138,7 +138,7 @@ dependencies {
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
     implementation 'de.hdodenhof:circleimageview:3.0.1'
-
+    implementation 'com.github.d-max:spots-dialog:1.1@aar'
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
