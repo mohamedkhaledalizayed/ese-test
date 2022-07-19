@@ -3,6 +3,7 @@ package com.neqabty.healthcare.modules.home.presentation.view.homescreen
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -25,12 +26,17 @@ import com.neqabty.healthcare.modules.profile.presentation.ProfileActivity
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.modules.suggestions.presentation.SuggestionsActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
+import com.neqabty.meganeqabty.home.domain.entity.AdEntity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
 import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import dagger.hilt.android.AndroidEntryPoint
+import org.imaginativeworld.whynotimagecarousel.ImageCarousel
+import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import java.util.ArrayList
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavigationItemSelectedListener {
@@ -39,6 +45,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
     private val aboutAdapter = AboutAdapter()
     private lateinit var toolbar: Toolbar
     private lateinit var drawer: DrawerLayout
+    private val listAds = ArrayList<AdEntity>()
+    val list = mutableListOf<CarouselItem>()
     override fun getViewBinding() = ActivityHomeBinding.inflate(layoutInflater)
     private val homeViewModel: HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,6 +141,61 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
                 }
             }
         }
+        val carousel: ImageCarousel = findViewById(R.id.carousel)
+        carousel.registerLifecycle(lifecycle)
+
+        //Start of Ads
+        homeViewModel.getAds()
+        homeViewModel.ads.observe(this) {
+            it.let {resource ->
+
+            when(resource.status){
+                Status.LOADING ->{
+                    binding.homeContent.progressCircularAds.visibility = View.VISIBLE
+                }
+                Status.SUCCESS ->{
+                    binding.homeContent.progressCircularAds.visibility = View.GONE
+                    if (resource.data!!.isNotEmpty()){
+                        listAds.addAll(resource.data)
+                        for (data: AdEntity in resource.data) {
+                            list.add(
+                                CarouselItem(
+                                    imageUrl = data.image,
+                                    caption = ""
+                                )
+                            )
+                        }
+
+                        carousel.setData(list)
+                    }
+                }
+                Status.ERROR ->{
+                    binding.homeContent.progressCircularAds.visibility = View.GONE
+                }
+            }
+            }
+        }
+
+        carousel.carouselListener = object : CarouselListener {
+            override fun onClick(position: Int, carouselItem: CarouselItem) {
+                if (listAds[position].type == "internal") {
+                    val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
+                    intent.putExtra("id", listAds[position].newsId)
+                    startActivity(intent)
+                } else {
+                    if (listAds[position].url.isEmpty()) {
+                        return
+                    }
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse(listAds[position].url)
+                    startActivity(intent)
+                }
+            }
+
+            override fun onLongClick(position: Int, dataObject: CarouselItem) {
+            }
+        }
+        //End of Ads
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

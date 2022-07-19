@@ -26,6 +26,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                android:id="@+id/carousel"
+                android:layout_width="match_parent"
+                app:carouselType="BLOCK"
+                app:autoPlay="true"
+                app:autoPlayDelay="3000"
+                app:infiniteCarousel="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_margin="@dimen/_10sdp"
+                app:showNavigationButtons="false"/>
+
+            <ProgressBar
+                android:id="@+id/progress_circular_ads"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/_100sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/carousel"
+                app:layout_constraintStart_toStartOf="@id/carousel"
+                app:layout_constraintTop_toTopOf="@+id/carousel"
+                app:layout_constraintBottom_toBottomOf="@id/carousel"
+                />
+
             <LinearLayout
                 android:id="@+id/home_image_details"
                 android:layout_width="match_parent"
@@ -33,7 +59,7 @@
                 android:layout_margin="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/carousel"
                 android:background="@drawable/home_bg"
                 android:orientation="vertical">
 

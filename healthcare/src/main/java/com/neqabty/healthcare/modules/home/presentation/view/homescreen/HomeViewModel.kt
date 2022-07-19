@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.modules.home.presentation.view.homescreen
 
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,20 +9,19 @@ import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.modules.home.domain.entity.about.AboutEntity
 import com.neqabty.healthcare.modules.home.domain.interactors.GetHomeUseCase
+import com.neqabty.meganeqabty.home.domain.entity.AdEntity
+import com.neqabty.meganeqabty.home.domain.interactors.GetAllAdsUseCase
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.news.modules.home.domain.interactors.GetNewsUseCase
-import com.neqabty.news.modules.home.domain.interactors.GetSyndicateNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val getHomeUseCase: GetHomeUseCase,
                                         private val getNewsUseCase: GetNewsUseCase,
-                                        private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase
-) :
+                                        private val getAllAdsUseCase: GetAllAdsUseCase) :
     ViewModel() {
     val aboutList = MutableLiveData<Resource<List<AboutEntity>>>()
     fun getAboutList() {
@@ -53,18 +53,16 @@ class HomeViewModel @Inject constructor(private val getHomeUseCase: GetHomeUseCa
         }
     }
 
-    val syndicatesNews = MutableLiveData<Resource<List<NewsEntity>>>()
-    fun getSyndicateNews(syndicateId: String) {
-        syndicatesNews.postValue(Resource.loading(data = null))
+    val ads = MutableLiveData<Resource<List<AdEntity>>>()
+    fun getAds() {
         viewModelScope.launch(Dispatchers.IO) {
+            ads.postValue(Resource.loading(data = null))
             try {
-                getSyndicateNewsUseCase.build(syndicateId).collect {
-                    syndicatesNews.postValue(Resource.success(data = it))
+                getAllAdsUseCase.build().collect {
+                    ads.postValue(Resource.success(data = it))
                 }
             } catch (e: Throwable) {
-                syndicatesNews.postValue(
-                    Resource.error(data = null, message = com.neqabty.meganeqabty.core.utils.AppUtils()
-                        .handleError(e)))
+                ads.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
         }
     }
