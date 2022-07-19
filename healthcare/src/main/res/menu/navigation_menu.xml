@@ -15,35 +15,35 @@
     <group android:id="@+id/menu_syndicate">
         <item
             android:id="@+id/syndicate"
-            android:title="نقابة المرشدين السياحين"
+            android:title="@string/syndicates"
             android:icon="@drawable/guide"/>
     </group>
 
     <group android:id="@+id/menu_wallet">
         <item
             android:id="@+id/wallet"
-            android:title="المحفظة"
+            android:title="@string/rewards"
             android:icon="@drawable/wallet"/>
     </group>
 
     <group android:id="@+id/menu_suggestions">
         <item
             android:id="@+id/suggestions"
-            android:title="الشكاوي والمقترحات"
+            android:title="@string/suggestions"
             android:icon="@drawable/suggestion"/>
     </group>
 
     <group android:id="@+id/menu_settings">
         <item
             android:id="@+id/settings"
-            android:title="إعدادات الحساب"
+            android:title="@string/settings"
             android:icon="@drawable/settings"/>
     </group>
 
     <group android:id="@+id/menu_logout">
         <item
             android:id="@+id/logout"
-            android:title="تسجيل الخروج"
+            android:title="@string/logout"
             android:icon="@drawable/logout"/>
     </group>
 

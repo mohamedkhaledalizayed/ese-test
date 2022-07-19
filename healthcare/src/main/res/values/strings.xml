@@ -34,7 +34,7 @@
     <string name="brain">مخ واعصاب</string>
     <string name="heart">قلب و اوعيه \nدموية</string>
     <string name="discount_offers">الخصومات والعروض</string>
-    <string name="discount_det">عند اشتراكك من خلال نقابتك و دعوتك لأكثر من ٨ أشخاص ستحصل علي خصومات نقدية</string>
+    <string name="discount_det">تعرف على أحدث العروض و الخصومات المقدمة من مقدمى الخدمات العلاجية.</string>
     <string name="know_more">معرفة المزيد</string>
     <string name="near_from_you">بالقرب منك</string>
     <string name="recommended">يوصي لك</string>
@@ -109,4 +109,10 @@
     <string name="content">محتوي الشكوي</string>
     <string name="change">تغيير</string>
     <string name="degree">الدرجة العلمية</string>
+    <string name="syndicates">النقابات</string>
+    <string name="rewards">برنامج المكافات</string>
+    <string name="suggestions">الشكاوي والمقترحات</string>
+    <string name="settings">إعدادات الحساب</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="search_result">نتائج البحث</string>
 </resources>

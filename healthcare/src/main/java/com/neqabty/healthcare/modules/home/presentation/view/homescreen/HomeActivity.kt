@@ -28,6 +28,7 @@ import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
+import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -159,12 +160,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
                 startActivity(intent)
             }
             R.id.syndicate -> {
-                val intent = Intent(this@HomeActivity, HomeActivity::class.java)
-                intent.putExtra("id", 1)
-                sharedPreferences.mainSyndicate = 1
-                sharedPreferences.code = "e01"
-                sharedPreferences.image = "https://neqabty.et3.co/media/Entities/e0005.png"
-                sharedPreferences.syndicateName = "النقابة العامة للمرشدين السياحيين"
+                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
                 startActivity(intent)
             }
             R.id.suggestions -> {

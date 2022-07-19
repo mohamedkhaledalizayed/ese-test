@@ -58,7 +58,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(titleResId = R.string.home_title)
+        setupToolbar(title = "${sharedPreferences.syndicateName}")
         toolbar = binding.contentActivity.toolbar.toolbar
 
         loading = SpotsDialog.Builder()

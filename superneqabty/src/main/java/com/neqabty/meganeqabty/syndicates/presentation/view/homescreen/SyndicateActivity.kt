@@ -56,7 +56,7 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
             SyndicateAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: SyndicateEntity) {
 
-                if (item.code == "e006"){
+                if (item.code == "e03"){
                     val launchIntent = packageManager.getLaunchIntentForPackage("com.neqabty")
                     if (launchIntent == null){
                         startActivity(
