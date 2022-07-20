@@ -212,8 +212,12 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.navView.setNavigationItemSelectedListener(this)
 
         binding.contentActivity.ivSubscription.setOnClickListener {
-            val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
-            startActivity(intent)
+            if (sharedPreferences.mobile.isNotEmpty()){
+                val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
+                startActivity(intent)
+            }else{
+                askForLogin("برجاء تسجيل الدخول اولا.")
+            }
         }
 
         binding.contentActivity.medicalNetwork.setOnClickListener {
@@ -309,7 +313,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                     val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
                     startActivity(intent)
                 }else{
-                    Toast.makeText(this, "برجاء تسجيل الدخول اولا.", Toast.LENGTH_LONG).show()
+                    askForLogin("برجاء تسجيل الدخول اولا.")
                 }
             }
             R.id.news -> {
@@ -319,8 +323,12 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 startActivity(intent)
             }
             R.id.payment -> {
-                val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
-                startActivity(intent)
+                if (sharedPreferences.mobile.isNotEmpty()){
+                    val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    askForLogin("برجاء تسجيل الدخول اولا.")
+                }
             }
             R.id.about_app_fragment -> {
                 val intent = Intent(this@HomeActivity, AboutAppActivity::class.java)
@@ -363,7 +371,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         finish()
     }
 
-    private fun showAlertDialog(message: String) {
+    private fun askForLogin(message: String) {
 
         val alertDialog = AlertDialog.Builder(this).create()
         alertDialog.setTitle("تنبيه")
@@ -373,7 +381,13 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, "موافق"
         ) { dialog, _ ->
             dialog.dismiss()
-            finish()
+            val intent = Intent(this@HomeActivity, LoginActivity::class.java)
+            intent.putExtra("code", sharedPreferences.code)
+            intent.putExtra(
+                Intent.EXTRA_INTENT,
+                Intent(this@HomeActivity, SignupActivity::class.java)
+            )
+            startActivity(intent)
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, "لا"

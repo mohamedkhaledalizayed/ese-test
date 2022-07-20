@@ -12,7 +12,7 @@
         android:layout_height="@dimen/_70sdp"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_40sdp"
-        android:src="@drawable/user"
+        android:src="@drawable/logo"
         app:civ_border_color="@color/white"
         app:civ_border_width="@dimen/_3sdp" />
 
@@ -23,7 +23,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="12dp"
-        android:text="محمد خالد"
+        android:text="مرحبا بك فى نقابتى"
         android:textColor="@android:color/black"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,12 +31,11 @@
         app:layout_constraintTop_toBottomOf="@+id/image" />
 
     <TextView
-        android:id="@+id/tvMemberName"
+        android:id="@+id/phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="01113595439"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold" />

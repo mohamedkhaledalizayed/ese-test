@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -25,6 +26,7 @@ import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.profile.presentation.ProfileActivity
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.modules.suggestions.presentation.SuggestionsActivity
+import com.neqabty.healthcare.modules.verifyphone.view.VerifyPhoneActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
@@ -198,6 +200,17 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         //End of Ads
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (sharedPreferences.isPhoneVerified){
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.phone).text =
+                "${sharedPreferences.phoneVerified}"
+        }else{
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.phone).text =
+                ""
+        }
+    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.notification_menu, menu)
         return true
@@ -249,11 +262,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             AlertDialog.BUTTON_POSITIVE, "موافق"
         ) { dialog, _ ->
             dialog.dismiss()
-            sharedPreferences.name = ""
-            sharedPreferences.mobile = ""
-            sharedPreferences.userImage = ""
-            onResume()
+            sharedPreferences.isPhoneVerified = false
+            sharedPreferences.phoneVerified = ""
             drawer.close()
+            val intent = Intent(this@HomeActivity, VerifyPhoneActivity::class.java)
+            startActivity(intent)
+            finish()
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, "لا"

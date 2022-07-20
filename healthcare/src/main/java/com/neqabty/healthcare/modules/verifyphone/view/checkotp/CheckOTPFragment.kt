@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,8 @@ class CheckOTPFragment : Fragment() {
     private val updateUIReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent?) {
             if (intent != null){
-                val code = intent.getStringExtra("code")!!.toList()
+                val code = intent.getStringExtra("code")!!.trim().toList()
+                Log.e("trttr", code.toString())
                 binding.code1.setText(code[0].toString())
                 binding.code2.setText(code[1].toString())
                 binding.code3.setText(code[2].toString())
@@ -53,42 +55,52 @@ class CheckOTPFragment : Fragment() {
         requireContext().registerReceiver(updateUIReceiver, filter)
     }
 
+    override fun onStop() {
+        super.onStop()
+        requireContext().unregisterReceiver(updateUIReceiver)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentCheckOTPBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         changeFocus()
 
         binding.enterPhone.text = "برجاء إدخال الكود الذى تم إرساله الى رقم الهاتف :  \n  $phoneNumber"
         binding.btnConfirm.setOnClickListener {
-            if (binding.code1.text.isNullOrEmpty()){
+            if (binding.code1.text.toString().isNullOrEmpty()){
                 Toast.makeText(requireContext(), "من فضلك ادخل الكود اولا.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            if (binding.code2.text.isNullOrEmpty()){
+            if (binding.code2.text.toString().isNullOrEmpty()){
                 Toast.makeText(requireContext(), "من فضلك ادخل الكود اولا.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            if (binding.code3.text.isNullOrEmpty()){
+            if (binding.code3.text.toString().isNullOrEmpty()){
                 Toast.makeText(requireContext(), "من فضلك ادخل الكود اولا.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            if (binding.code4.text.isNullOrEmpty()){
+            if (binding.code4.text.toString().isNullOrEmpty()){
                 Toast.makeText(requireContext(), "من فضلك ادخل الكود اولا.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            if (binding.code5.text.isNullOrEmpty()){
+            if (binding.code5.text.toString().isNullOrEmpty()){
                 Toast.makeText(requireContext(), "من فضلك ادخل الكود اولا.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
             val activity = requireActivity() as VerifyPhoneActivity
             activity.onCheckClicked("${binding.code1.text}${binding.code2.text}${binding.code3.text}${binding.code4.text}${binding.code5.text}")
         }
-        return binding.root
-    }
 
+    }
     private fun changeFocus() {
         binding.code1.requestFocus()
         binding.code1.isCursorVisible = true
@@ -100,7 +112,6 @@ class CheckOTPFragment : Fragment() {
                 if (editable.length == 1) {
                     binding.code1.clearFocus()
                     binding.code2.requestFocus()
-                    requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
                     binding.code2.isCursorVisible = true
                 } else if (editable.isEmpty()) {
                     binding.code1.requestFocus()
