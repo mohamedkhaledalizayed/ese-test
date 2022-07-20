@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ComplaintRepository {
 
-    fun addComplaint(complaintBody: ComplaintBody): Flow<Boolean>
+    fun addComplaint(complaintBody: ComplaintBody): Flow<String>
     fun getComplaintsCategories(): Flow<List<CategoryEntity>>
 
 }

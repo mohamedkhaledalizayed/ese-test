@@ -14,7 +14,7 @@ import javax.inject.Inject
 class ComplaintRepositoryImpl @Inject constructor(private val complaintSource: ComplaintSource) :
     ComplaintRepository {
 
-    override fun addComplaint(complaintBody: ComplaintBody): Flow<Boolean> {
+    override fun addComplaint(complaintBody: ComplaintBody): Flow<String> {
         return flow {
             emit(
                 complaintSource.addComplaint(

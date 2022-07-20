@@ -25,8 +25,9 @@
             android:layout_margin="@dimen/_10sdp"
             android:background="@drawable/search_bg"
             android:orientation="vertical"
+            android:visibility="gone"
             android:padding="@dimen/_20sdp"
-            android:visibility="gone">
+            >
 
             <ImageView
                 android:layout_width="match_parent"
@@ -34,99 +35,123 @@
                 android:src="@drawable/ic_suggestions"
                 android:text="@string/search_in" />
 
-            <EditText
-                android:id="@+id/name"
+            <TextView
+                android:id="@+id/status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="لقد تم تسجيل طلبكم بنجاح
+رقم الشكوي / المقترح "
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:id="@+id/layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/edit_text_bg"
-                android:hint="@string/user_name"
-                android:inputType="text"
-                android:lines="1"
-                android:padding="@dimen/_9sdp" />
+                android:visibility="gone"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/edit_text_bg"
-                android:hint="@string/phone"
-                android:inputType="phone"
-                android:padding="@dimen/_9sdp" />
-
-            <FrameLayout
-                android:id="@+id/spinner_government_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/edit_text_bg"
-                android:padding="@dimen/_8sdp">
-
-                <Spinner
-                    android:id="@+id/sp_category"
+                <EditText
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#fff"
-                    android:entries="@array/complaints"
-                    android:popupBackground="@color/splash_bg" />
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edit_text_bg"
+                    android:hint="@string/user_name"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:padding="@dimen/_9sdp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end|center"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
-            </FrameLayout>
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edit_text_bg"
+                    android:hint="@string/phone"
+                    android:inputType="phone"
+                    android:padding="@dimen/_9sdp" />
 
-            <EditText
-                android:id="@+id/content"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_120sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/edit_text_bg"
-                android:hint="@string/content"
-                android:inputType="textMultiLine"
-                android:padding="@dimen/_9sdp" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_photo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/edit_text"
-                android:padding="@dimen/_9sdp"
-                app:layout_constraintTop_toBottomOf="@id/cl_national_id">
-
-                <TextView
-                    android:id="@+id/add_image_text"
-                    android:layout_width="wrap_content"
+                <FrameLayout
+                    android:id="@+id/spinner_government_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="إرفاق صورة"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edit_text_bg"
+                    android:padding="@dimen/_8sdp">
 
-                <ImageView
-                    android:id="@+id/add_image"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/ic_baseline_attach_file_24"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <Spinner
+                        android:id="@+id/sp_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#fff"
+                        android:entries="@array/complaints"
+                        android:popupBackground="@color/splash_bg" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+                </FrameLayout>
 
+                <EditText
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_120sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edit_text_bg"
+                    android:hint="@string/content"
+                    android:inputType="textMultiLine"
+                    android:padding="@dimen/_9sdp" />
 
-            <Button
-                android:id="@+id/send_btn"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/select_btn_bg"
-                android:text="@string/send"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edit_text"
+                    android:padding="@dimen/_9sdp"
+                    app:layout_constraintTop_toBottomOf="@id/cl_national_id">
+
+                    <TextView
+                        android:id="@+id/add_image_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="إرفاق صورة"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/add_image"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/ic_baseline_attach_file_24"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Button
+                    android:id="@+id/send_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/select_btn_bg"
+                    android:text="@string/send"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

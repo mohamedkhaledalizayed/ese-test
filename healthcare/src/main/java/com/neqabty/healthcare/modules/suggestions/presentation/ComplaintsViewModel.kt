@@ -18,7 +18,7 @@ import javax.inject.Inject
 class ComplaintsViewModel @Inject constructor(private val addComplaintUseCase: AddComplaintUseCase) :
     ViewModel() {
 
-    val complaintStatus = MutableLiveData<Resource<Boolean>>()
+    val complaintStatus = MutableLiveData<Resource<String>>()
     fun addComplaint(complaintBody: ComplaintBody) {
         viewModelScope.launch(Dispatchers.IO) {
             complaintStatus.postValue(Resource.loading(data = null))

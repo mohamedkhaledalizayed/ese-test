@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class AddComplaintUseCase @Inject constructor(private val complaintRepository: ComplaintRepository) {
 
-    fun build(complaintBody: ComplaintBody): Flow<Boolean> {
+    fun build(complaintBody: ComplaintBody): Flow<String> {
         return complaintRepository.addComplaint(complaintBody)
     }
 
