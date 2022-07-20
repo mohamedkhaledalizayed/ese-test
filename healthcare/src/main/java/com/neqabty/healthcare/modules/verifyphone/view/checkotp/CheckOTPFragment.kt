@@ -36,7 +36,8 @@ class CheckOTPFragment : Fragment() {
     private val updateUIReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent?) {
             if (intent != null){
-                val code = intent.getStringExtra("code")!!.trim().toList()
+                val code = intent.getStringExtra("code")!!.split(":")[1].trim().toList()
+                Log.e("ertyui", code.toString())
                 binding.code1.setText(code[0].toString())
                 binding.code2.setText(code[1].toString())
                 binding.code3.setText(code[2].toString())
@@ -50,7 +51,7 @@ class CheckOTPFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         val filter = IntentFilter()
-        filter.addAction("service.to.activity.transfer")
+        filter.addAction("service.to.activity")
         requireContext().registerReceiver(updateUIReceiver, filter)
     }
 
