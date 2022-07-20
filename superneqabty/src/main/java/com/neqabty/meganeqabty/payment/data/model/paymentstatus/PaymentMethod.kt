@@ -1,11 +1,10 @@
 package com.neqabty.meganeqabty.payment.data.model.paymentstatus
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-
+@Keep
 data class PaymentMethod(
-    @SerializedName("callback_url")
-    val callbackUrl: String,
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("display_name")

@@ -16,6 +16,7 @@ import com.neqabty.meganeqabty.payment.domain.entity.serviceactions.ServiceActio
 import com.neqabty.meganeqabty.payment.domain.entity.services.ServicesListEntity
 import com.neqabty.meganeqabty.payment.view.PaymentViewModel
 import com.neqabty.meganeqabty.payment.view.paymentdetails.PaymentDetailsActivity
+import com.neqabty.meganeqabty.payment.view.paymentstatus.PaymentStatusActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,7 +35,7 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 //        val intent = Intent(this, PaymentStatusActivity::class.java)
-//        intent.putExtra("referenceCode", "76fc1e7a-89ee-46e5-b1d7-64acd4a97d49")
+//        intent.putExtra("referenceCode", "d1d9bf1e-8963-4f01-8692-b928e213e24d")
 //        startActivity(intent)
         setupToolbar(titleResId = R.string.payments)
         paymentViewModel.getServices(sharedPreferences.code)

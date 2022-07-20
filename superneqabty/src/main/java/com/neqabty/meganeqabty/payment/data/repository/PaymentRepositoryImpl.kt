@@ -162,13 +162,13 @@ fun PaymentStatusModel.toPaymentStatusEntity(): PaymentStatusEntity {
         entityPaymentStatus = entityPaymentStatus,
         gatewayReferenceId = gatewayReferenceId,
         id = id,
-        itemId = itemId,
+        itemId = membershipId,
         mobile = mobile,
         netAmount = netAmount,
-        serviceAction = serviceAction,
+        serviceAction = serviceAction.name,
         totalAmount = totalAmount,
         totalFees = totalFees,
-        member_name = member_name,
+        member_name = memberName,
         createdAt = createdAt
     )
 }

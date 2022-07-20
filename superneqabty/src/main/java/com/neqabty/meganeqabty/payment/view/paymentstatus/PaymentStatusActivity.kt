@@ -3,6 +3,7 @@ package com.neqabty.meganeqabty.payment.view.paymentstatus
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -63,6 +64,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                     com.neqabty.meganeqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                        Log.e("test", resource.message.toString())
                     }
                 }
             }
