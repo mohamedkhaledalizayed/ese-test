@@ -28,6 +28,8 @@ class PreferencesHelper @Inject constructor(
         private const val FONT_SIZE = "data.source.prefs.FONT_SIZE"
         private const val NATIONAL_ID = "data.source.prefs.NATIONAL_ID"
         private const val MEMBERSHIP_ID = "data.source.prefs.MEMBERSHIP_ID"
+        private const val IS_PHONE_VERIFIED = "data.source.prefs.IS_PHONE_VERIFIED"
+        private const val PHONE_VERIFIED = "data.source.prefs.PHONE_VERIFIED"
     }
 
     var isNotificationsEnabled
@@ -73,6 +75,14 @@ class PreferencesHelper @Inject constructor(
     var fontSize
         get() = preferences.getString(FONT_SIZE, "medium")
         set(value) = preferences.edit().putString(FONT_SIZE, value).apply()
+
+    var isPhoneVerified
+        get() = preferences.getBoolean(IS_PHONE_VERIFIED, false)
+        set(value) = preferences.edit().putBoolean(IS_PHONE_VERIFIED, value).apply()
+
+    var phoneVerified
+        get() = preferences.getString(PHONE_VERIFIED, "")!!
+        set(value) = preferences.edit().putString(PHONE_VERIFIED, value).apply()
 
     fun isSyndicateChosen(): Boolean {
         return mainSyndicate != 0

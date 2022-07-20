@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySplashBinding
 import com.neqabty.healthcare.modules.home.presentation.view.homescreen.HomeActivity
+import com.neqabty.healthcare.modules.verifyphone.view.VerifyPhoneActivity
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.core.utils.DeviceUtils
@@ -37,9 +38,15 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         }else{
 //            splashViewModel.appConfig()
             Handler().postDelayed(Runnable {
-                val mainIntent = Intent(this@SplashActivity, HomeActivity::class.java)
-                startActivity(mainIntent)
-                finish()
+                if (sharedPreferences.isPhoneVerified){
+                    val mainIntent = Intent(this@SplashActivity, HomeActivity::class.java)
+                    startActivity(mainIntent)
+                    finish()
+                }else{
+                    val mainIntent = Intent(this@SplashActivity, VerifyPhoneActivity::class.java)
+                    startActivity(mainIntent)
+                    finish()
+                }
             }, SPLASH_DISPLAY_LENGTH)
         }
         splashViewModel.appConfig.observe(this) {
