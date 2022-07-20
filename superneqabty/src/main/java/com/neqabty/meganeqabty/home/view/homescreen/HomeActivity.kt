@@ -191,16 +191,17 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         carousel.carouselListener = object : CarouselListener {
             override fun onClick(position: Int, carouselItem: CarouselItem) {
                 if (listAds[position].type == "internal") {
-                    val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
-                    intent.putExtra("id", listAds[position].newsId)
-                    startActivity(intent)
-                } else {
-                    if (listAds[position].url.isEmpty()) {
-                        return
+                    if (listAds[position].newsId != null){
+                        val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
+                        intent.putExtra("id", listAds[position].newsId)
+                        startActivity(intent)
                     }
-                    val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(listAds[position].url)
-                    startActivity(intent)
+                } else {
+                    if (listAds[position].url.isNotEmpty()) {
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.data = Uri.parse(listAds[position].url)
+                        startActivity(intent)
+                    }
                 }
             }
 
