@@ -121,4 +121,5 @@ dependencies {
     implementation 'com.scottyab:secure-preferences-lib:0.1.7'
 
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    implementation project(':login')
 }

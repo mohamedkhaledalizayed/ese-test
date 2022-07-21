@@ -21,7 +21,7 @@ import dmax.dialog.SpotsDialog
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     private lateinit var loading: AlertDialog
-    private val SPLASH_DISPLAY_LENGTH: Long = 3000L
+    private val SPLASH_DISPLAY_LENGTH: Long = 2000L
     private val splashViewModel: SplashViewModel by viewModels()
     override fun getViewBinding() = ActivitySplashBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,18 +36,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()){
             showAlertDialogAndExitApp(getString(R.string.rooted))
         }else{
-//            splashViewModel.appConfig()
-            Handler().postDelayed(Runnable {
-                if (sharedPreferences.isPhoneVerified){
-                    val mainIntent = Intent(this@SplashActivity, HomeActivity::class.java)
-                    startActivity(mainIntent)
-                    finish()
-                }else{
-                    val mainIntent = Intent(this@SplashActivity, VerifyPhoneActivity::class.java)
-                    startActivity(mainIntent)
-                    finish()
-                }
-            }, SPLASH_DISPLAY_LENGTH)
+            splashViewModel.appConfig()
         }
         splashViewModel.appConfig.observe(this) {
 
@@ -60,9 +49,15 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                         loading.dismiss()
                         if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= 160){
                             Handler().postDelayed(Runnable {
-                                val mainIntent = Intent(this@SplashActivity, HomeActivity::class.java)
-                                startActivity(mainIntent)
-                                finish()
+                                if (sharedPreferences.isPhoneVerified){
+                                    val mainIntent = Intent(this@SplashActivity, HomeActivity::class.java)
+                                    startActivity(mainIntent)
+                                    finish()
+                                }else{
+                                    val mainIntent = Intent(this@SplashActivity, VerifyPhoneActivity::class.java)
+                                    startActivity(mainIntent)
+                                    finish()
+                                }
                             }, SPLASH_DISPLAY_LENGTH)
                         }else{
                             showUpdateAppAlertDialog()

@@ -39,6 +39,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             .build()
 
 
+        binding.etUsername.setText(sharedPreferences.phoneVerified)
+        binding.etUsername.isEnabled = false
         if (sharedPreferences.mobile.isNotEmpty()){
             Log.e("login", "True")
         }

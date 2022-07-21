@@ -52,6 +52,10 @@ class PreferencesHelper @Inject constructor(
         get() = preferences.getString(NATIONAL_ID, "")!!
         set(value) = preferences.edit().putString(NATIONAL_ID, value).apply()
 
+    var membershipId
+        get() = preferences.getString(MEMBERSHIP_ID, "")!!
+        set(value) = preferences.edit().putString(MEMBERSHIP_ID, value).apply()
+
     var name
         get() = preferences.getString(NAME, "")!!
         set(value) = preferences.edit().putString(NAME, value).apply()

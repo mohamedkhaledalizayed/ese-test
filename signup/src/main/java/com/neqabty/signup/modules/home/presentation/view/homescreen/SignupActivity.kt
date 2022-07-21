@@ -35,6 +35,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             .build()
 
 
+        binding.phone.setText(sharedPreferences.phoneVerified)
+        binding.phone.isEnabled = false
         signupViewModel.user.observe(this){
 
             it?.let { resource ->
@@ -47,6 +49,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                         if (resource.data!!.nationalId.isNotEmpty()){
                             sharedPreferences.mobile = resource.data.mobile
                             sharedPreferences.name = resource.data.fullname
+                            sharedPreferences.nationalId = resource.data.nationalId
                             finish()
                         }else{
                             Toast.makeText(this, "حدث خطاء", Toast.LENGTH_LONG).show()
