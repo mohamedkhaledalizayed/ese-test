@@ -45,6 +45,7 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
 
 
 
+        binding.phone.setText(sharedPreferences.phoneVerified)
         complaintsViewModel.getComplaintsCategories()
         complaintsViewModel.categories.observe(this){
             it.let { resource ->

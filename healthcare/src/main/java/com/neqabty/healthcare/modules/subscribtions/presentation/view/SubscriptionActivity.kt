@@ -2,6 +2,7 @@ package com.neqabty.healthcare.modules.subscribtions.presentation.view
 
 
 import android.Manifest
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -26,6 +27,7 @@ import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.Rela
 import com.neqabty.healthcare.modules.subscribtions.presentation.viewmodel.SubscriptionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -41,6 +43,8 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private val relationsAdapter = RelationsAdapter()
     private var relationsList: List<RelationEntity>? = null
     private var relationTypeId  = 0
+    private lateinit var datePicker: DatePickerDialog
+    private lateinit var calendar: Calendar
     override fun getViewBinding() = ActivitySubscriptionBinding.inflate(layoutInflater)
     private val subscriptionViewModel: SubscriptionViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +63,20 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
         }
 
+        calendar = Calendar.getInstance()
+        binding.etPhone.setText(sharedPreferences.phoneVerified)
+        binding.etPhone.isEnabled = false
+
+        binding.selectDate.setOnClickListener {
+            datePicker = DatePickerDialog(this@SubscriptionActivity,
+                { _, year, monthOfYear, dayOfMonth ->
+                    binding.etBirthDate.setText("$dayOfMonth - ${monthOfYear + 1} - $year")
+                },
+                calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)
+            )
+
+            datePicker.show()
+        }
         subscriptionViewModel.getRelations()
         subscriptionViewModel.relations.observe(this){
             it.let { resource ->

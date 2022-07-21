@@ -55,6 +55,16 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
             }
         }
 
+        viewHolder.binding.moreIcon.setOnClickListener {
+            if (viewHolder.binding.packageDescription.isVisible){
+                viewHolder.binding.packageDescription.visibility = View.GONE
+                Picasso.get().load(R.drawable.ic_baseline_keyboard_arrow_down_24).placeholder(R.drawable.ic_baseline_keyboard_arrow_down_24).into(viewHolder.binding.moreIcon)
+            }else{
+                viewHolder.binding.packageDescription.visibility = View.VISIBLE
+                Picasso.get().load(R.drawable.ic_baseline_keyboard_arrow_up_24).placeholder(R.drawable.ic_baseline_keyboard_arrow_up_24).into(viewHolder.binding.moreIcon)
+            }
+        }
+
         viewHolder.binding.btnSelect.setOnClickListener {
             onItemClickListener?.setOnRegisterClickListener("")
         }

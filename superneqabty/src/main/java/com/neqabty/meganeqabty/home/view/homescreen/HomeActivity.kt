@@ -217,12 +217,8 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                 startActivity(intent)
             }else{
-                askForLogin("برجاء تسجيل الدخول اولا.")
+                askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
             }
-        }
-
-        binding.contentActivity.medicalNetwork.setOnClickListener {
-            finish()
         }
 
         binding.contentActivity.healthcareImage.setOnClickListener {
