@@ -69,15 +69,41 @@
                     android:lines="1"
                     android:padding="@dimen/_9sdp" />
 
-                <EditText
-                    android:id="@+id/phone"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/edit_text_bg"
-                    android:hint="@string/phone"
-                    android:inputType="phone"
-                    android:padding="@dimen/_9sdp" />
+                    app:layout_constraintTop_toBottomOf="@id/view2">
+
+                    <EditText
+                        android:id="@+id/phone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/phone"
+                        android:inputType="phone"
+                        android:padding="@dimen/_10sdp"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <ImageView
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:src="@drawable/verified"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginEnd="@dimen/_5sdp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <FrameLayout
                     android:id="@+id/spinner_government_container"

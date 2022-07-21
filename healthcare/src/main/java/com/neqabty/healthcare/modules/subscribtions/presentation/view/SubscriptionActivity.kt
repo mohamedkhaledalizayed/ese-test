@@ -66,6 +66,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         calendar = Calendar.getInstance()
         binding.etPhone.setText(sharedPreferences.phoneVerified)
         binding.etPhone.isEnabled = false
+        binding.etBirthDate.isEnabled = false
 
         binding.selectDate.setOnClickListener {
             datePicker = DatePickerDialog(this@SubscriptionActivity,
@@ -151,22 +152,22 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     fun addNewFollower(view: View) {
 
         if (followerUri == null){
-            Toast.makeText(this, "من فضلك اختر صورة اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "من فضلك اختر صورة.", Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.etFullName.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الاسم اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "من فضلك ادخل الاسم.", Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.etNational.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الرقم القومى اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "من فضلك ادخل الرقم القومى.", Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.spRelations.selectedItemPosition == 0){
-            Toast.makeText(this, "من فضلك اختر درجة القرابة اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "من فضلك اختر درجة القرابة.", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -281,54 +282,60 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     fun registerUser(view: View) {
 
         if (userImageUri == null){
-            Toast.makeText(this, "من فضلك اختر الصورة الشخصية اولا.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (nationalIdFrontUri == null){
-            Toast.makeText(this, "من فضلك اختر صورة البطاقة الامامية اولا.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (nationalIdBackUri == null){
-            Toast.makeText(this, "من فضلك اختر صورة البطاقة الخلفية اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "من فضلك اختر الصورة الشخصية.", Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.etName.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الاسم اولا.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (binding.etPhone.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الهاتف اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "من فضلك ادخل الاسم.", Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.etBirthDate.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل تاريخ الميلاد اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "من فضلك ادخل تاريخ الميلاد.", Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.etAddress.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل العنوان اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "من فضلك ادخل العنوان.", Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.etJob.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الوظيفة اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "من فضلك ادخل الوظيفة.", Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.etNationalId.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الرقم القومى اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "من فضلك ادخل الرقم القومى.", Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.etEmail.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل البريد الالكترونى اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "من فضلك ادخل البريد الالكترونى.", Toast.LENGTH_LONG).show()
             return
         }
+
+        if (nationalIdFrontUri == null){
+            Toast.makeText(this, "من فضلك اختر صورة البطاقة الامامية.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (nationalIdBackUri == null){
+            Toast.makeText(this, "من فضلك اختر صورة البطاقة الخلفية.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etPhone.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, "من فضلك ادخل الهاتف.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+
+
+
+
+
 
         subscriptionViewModel.addSubscription(
             name = binding.etName.text.toString(),
