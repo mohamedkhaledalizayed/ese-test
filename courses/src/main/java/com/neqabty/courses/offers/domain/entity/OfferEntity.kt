@@ -6,7 +6,6 @@ data class OfferEntity(
     val address: String,
     val appointmentEntities: List<AppointmentEntity>,
     val contact: String,
-    val course: CourseEntity,
     val endDate: String,
     val fullyBooked: Boolean,
     val id: Int,

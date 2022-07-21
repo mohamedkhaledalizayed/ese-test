@@ -9,7 +9,6 @@ fun OfferModel.toOfferEntity(): OfferEntity {
         address ?: "",
         appointments.map { it.toAppointmentEntity() },
         contact ?: "",
-        course.toCourseEntity(),
         endDate ?: "",
         fullyBooked ?: false,
         id,

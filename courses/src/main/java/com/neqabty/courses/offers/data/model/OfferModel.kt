@@ -2,7 +2,7 @@ package com.neqabty.courses.offers.data.model
 
 
 import com.google.gson.annotations.SerializedName
-import com.neqabty.courses.home.data.model.CourseModel
+import com.neqabty.courses.home.data.model.courses.CourseModel
 
 data class OfferModel(
     @SerializedName("address")

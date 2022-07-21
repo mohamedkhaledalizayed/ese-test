@@ -1,11 +1,14 @@
 package com.neqabty.courses.home.data.api
 
-import com.neqabty.courses.home.data.model.CourseModel
-import com.neqabty.courses.home.domain.entity.CourseEntity
-import kotlinx.coroutines.flow.Flow
+import com.neqabty.courses.home.data.model.courses.CourseModel
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface CourseApi {
+
     @GET("courses")
-    suspend fun getCourse(): List<CourseModel>
+    suspend fun getCourse(): CourseModel
+
+    @GET("courses")
+    suspend fun getCourseDetails(@Query("filter{id}") id: String): CourseModel
 }
