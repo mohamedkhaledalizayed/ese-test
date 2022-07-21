@@ -37,7 +37,6 @@ class CheckOTPFragment : Fragment() {
         override fun onReceive(context: Context, intent: Intent?) {
             if (intent != null){
                 val code = intent.getStringExtra("code")!!.split(":")[1].trim().toList()
-                Log.e("ertyui", code.toString())
                 binding.code1.setText(code[0].toString())
                 binding.code2.setText(code[1].toString())
                 binding.code3.setText(code[2].toString())

@@ -17,7 +17,7 @@ abstract class AppConfigModule {
     companion object {
         @Provides
         fun providesAppConfigApiService(
-            @Named("healthcare")
+            @Named("syndicate")
             retrofit: Retrofit
         ) = retrofit.create(AppConfigApi::class.java)
     }

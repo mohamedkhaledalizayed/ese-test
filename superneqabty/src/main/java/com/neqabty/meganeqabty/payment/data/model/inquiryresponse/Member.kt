@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class Member(
     @SerializedName("account")
-    val account: String,
+    val account: String?,
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("entity")
@@ -20,7 +20,7 @@ data class Member(
     @SerializedName("membership_id")
     val membershipId: Int,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("national_id")
     val nationalId: Long,
     @SerializedName("updated_at")

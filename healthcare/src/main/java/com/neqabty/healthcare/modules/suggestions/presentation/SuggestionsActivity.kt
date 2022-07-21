@@ -9,15 +9,14 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.util.Base64
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySuggestionsBinding
@@ -36,12 +35,13 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
     private val complaintsViewModel: ComplaintsViewModel by viewModels()
     private val categoriesAdapter = CategoriesAdapter()
     private var categoryId = 0
+    private val listImagesUri: ArrayList<ImageInfo> = ArrayList()
+    private val mAdapter = ImagesAdapter()
     override fun getViewBinding() = ActivitySuggestionsBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(title = "الشكاوي والمقترحات")
-
 
 
 
@@ -100,6 +100,10 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
         }
 
         binding.addImage.setOnClickListener {
+            if (listImagesUri.size == 3){
+                Toast.makeText(this, "لا يمكن إضافة اكثر من 3 صور.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             checkPermissionsAndOpenFilePicker()
         }
 
@@ -137,8 +141,8 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
             return
         }
 
-        if (imageUri != null){
-            imagesList?.add(getRealPath(imageUri!!)!!.toBase64())
+        for (image in listImagesUri){
+            imagesList?.add(getRealPath(image.image)!!.toBase64())
         }
 
         val complaintBody = ComplaintBody(
@@ -183,12 +187,24 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && data != null) {
 
-            if (REQUEST_CODE == 235){
+            if (REQUEST_CODE == requestCode){
                 imageUri = data.data
-                binding.addImage.setImageResource(R.drawable.success)
-                binding.addImageText.text = "تم إرفاق الصورة بنجاح."
+                listImagesUri.add(ImageInfo(imageUri!!, imageUri?.getName()))
+                binding.addImageText.text = "إضافة صورة أخرى."
+                binding.imagesRecycler.visibility = View.VISIBLE
+                binding.imagesRecycler.adapter = mAdapter
+                mAdapter.submitList(listImagesUri)
             }
         }
+    }
+
+    private fun Uri.getName(): String {
+        val returnCursor = contentResolver.query(this, null, null, null, null)
+        val nameIndex = returnCursor?.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+        returnCursor?.moveToFirst()
+        val fileName = returnCursor?.getString(nameIndex!!)
+        returnCursor?.close()
+        return fileName!!
     }
 
     private fun String.toBase64(): String {
@@ -196,8 +212,7 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
         val bitmap = BitmapFactory.decodeFile(this)
         bitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream)
         val imageBytes = byteArrayOutputStream.toByteArray()
-        val imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT)
-        return imageString
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
 
     private fun getRealPath(uri: Uri): String?{
