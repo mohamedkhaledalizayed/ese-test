@@ -1,7 +1,11 @@
 package com.neqabty.courses.home.presentation.view.coursedetails
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.courses.R
@@ -16,6 +20,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.neqabty.courses.core.ui.BaseActivity
 import com.neqabty.courses.core.utils.Status
 import com.neqabty.courses.home.presentation.view.homescreen.HomeViewModel
+import com.neqabty.courses.offers.domain.entity.OfferEntity
+import com.neqabty.courses.offers.presentation.view.COURSEID
+import com.neqabty.courses.offers.presentation.view.OffersActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,10 +57,13 @@ class CourseDetailsActivity : BaseActivity<ActivityCourseDetailsBinding>(), OnMa
                         if (resource.data != null){
                             binding.layoutContainer.visibility = View.VISIBLE
                             Picasso.get().load(resource.data[0].image).into(binding.courseImage)
-                            binding.courseTitle.text = resource.data[0].title
-                            binding.content.text = resource.data[0].syllabus
-                            binding.prerequisites.text = resource.data[0].prerequisites
-                            binding.whatWeWillLearnValue.text = resource.data[0].syllabus
+                            binding.courseTitle.setHtmlText(resource.data[0].title)
+                            binding.content.setHtmlText( resource.data[0].syllabus)
+                            binding.prerequisites.setHtmlText(resource.data[0].prerequisites.toString())
+                            binding.whatWeWillLearnValue.setHtmlText(resource.data[0].syllabus)
+                            binding.offerBtn.setOnClickListener {
+                                startActivity(Intent(this,OffersActivity::class.java).putExtra(COURSEID,resource.data[0].id))
+                            }
                         }else{
                             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
                         }
@@ -79,4 +89,12 @@ class CourseDetailsActivity : BaseActivity<ActivityCourseDetailsBinding>(), OnMa
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
+}
+
+fun TextView.setHtmlText(htmlText: String) {
+    this.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(htmlText, Html.FROM_HTML_MODE_COMPACT)
+    } else {
+        Html.fromHtml(htmlText)
+    }
 }

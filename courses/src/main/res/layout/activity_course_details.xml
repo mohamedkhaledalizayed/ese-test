@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.neqabty.courses.home.presentation.view.coursedetails.CourseDetailsActivity">
 
-
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
@@ -14,16 +13,15 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:scrollbars="none">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            >
+            android:visibility="visible">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/course_info"
@@ -36,10 +34,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:padding="@dimen/_10sdp">
 
                     <TextView
@@ -47,71 +44,91 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
                         android:id="@+id/course_image"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_140sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        app:layout_constraintTop_toBottomOf="@id/course_title" />
 
                     <TextView
                         android:id="@+id/course_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:text="200 جنيه" />
+                        android:text="200 جنيه"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/course_image" />
+                    <Button
+                        android:id="@+id/offerBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_bg"
+                        android:text="العروض"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/course_price"
+                        app:layout_constraintBottom_toBottomOf="@id/course_price"/>
 
                     <TextView
                         android:id="@+id/content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:scrollbars="vertical" />
+                        android:scrollbars="vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/offerBtn"
+                        tools:text="wel;jfhwpfkwhflwiukfhwpf;llzmfopo/lwujfemeiwoilfjwfp;owifoemoiwlfewnfpkefyhnpw;udwotufertfueyhgieghdiuyfgovr3v[hidkuyvghfdkujvbghdvieygvibjhgfiuekhrg" />
 
                     <View
+                        android:id="@+id/separator"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@color/grey_font" />
+                        android:background="@color/grey_font"
+                        app:layout_constraintTop_toBottomOf="@id/content" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/prerequisites_icon"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/icon_bg"
+                        android:src="@drawable/ic_baseline_play_arrow_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/separator" />
 
-                        <ImageView
-                            android:id="@+id/prerequisites_icon"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:background="@drawable/icon_bg"
-                            android:src="@drawable/ic_baseline_play_arrow_24" />
+                    <TextView
+                        android:id="@+id/prerequisites_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="المتطلبات الأساسية :"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/prerequisites_icon"
+                        app:layout_constraintStart_toEndOf="@id/prerequisites_icon"
+                        app:layout_constraintTop_toTopOf="@id/prerequisites_icon" />
 
-                        <TextView
-                            android:id="@+id/prerequisites_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_toEndOf="@+id/prerequisites_icon"
-                            android:text="المتطلبات الأساسية :"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/prerequisites"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textColor="@color/grey_font"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/prerequisites_icon" />
 
-                        <TextView
-                            android:id="@+id/prerequisites"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/prerequisites_icon"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:textColor="@color/grey_font"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -126,61 +143,56 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_info">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:padding="@dimen/_10sdp">
 
+                    <ImageView
+                        android:id="@+id/what_we_will_learn_icon"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/icon_bg"
+                        android:src="@drawable/ic_baseline_play_arrow_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/what_we_will_learn_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="ماذا ستتعلم :"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/what_we_will_learn_icon"
+                        app:layout_constraintStart_toEndOf="@id/what_we_will_learn_icon"
+                        app:layout_constraintTop_toTopOf="@id/what_we_will_learn_icon" />
+
+                    <TextView
+                        android:id="@+id/what_we_will_learn_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textColor="@color/grey_font"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/what_we_will_learn_icon" />
+
+                    <Button
+                        android:id="@+id/exchange_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:background="@drawable/btn_bg"
+                        android:text="احجز الآن"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/what_we_will_learn_value" />
 
-                        <ImageView
-                            android:id="@+id/what_we_will_learn_icon"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:background="@drawable/icon_bg"
-                            android:src="@drawable/ic_baseline_play_arrow_24" />
-
-                        <TextView
-                            android:id="@+id/what_we_will_learn_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_toEndOf="@+id/what_we_will_learn_icon"
-                            android:text="ماذا ستتعلم :"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/what_we_will_learn_value"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/what_we_will_learn_icon"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:textColor="@color/grey_font"
-                            android:textStyle="bold" />
-
-                        <Button
-                            android:id="@+id/exchange_btn"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_below="@+id/what_we_will_learn_value"
-                            android:layout_margin="@dimen/_10sdp"
-                            android:background="@drawable/btn_bg"
-                            android:text="احجز الآن"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_12ssp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -196,68 +208,62 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/what_we_will_learn">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
                     android:padding="@dimen/_10sdp">
 
+                    <ImageView
+                        android:id="@+id/address_icon"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/icon_bg"
+                        android:padding="@dimen/_2sdp"
+                        android:src="@drawable/ic_baseline_location_on_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <RelativeLayout
+                    <TextView
+                        android:id="@+id/address_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="العنوان :"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/address_icon"
+                        app:layout_constraintStart_toEndOf="@id/address_icon"
+                        app:layout_constraintTop_toTopOf="@id/address_icon" />
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="شارع شهاب، جزيرة ميت عقبة، حي العجوزة، الجيزة."
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/address_text" />
+
+                    <FrameLayout
+                        android:id="@+id/frameLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/_140sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/course_details_bg"
+                        app:layout_constraintTop_toBottomOf="@id/address">
 
-                        <ImageView
-                            android:id="@+id/address_icon"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:background="@drawable/icon_bg"
-                            android:padding="@dimen/_2sdp"
-                            android:src="@drawable/ic_baseline_location_on_24" />
-
-                        <TextView
-                            android:id="@+id/address_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_toEndOf="@+id/address_icon"
-                            android:text="العنوان :"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_toEndOf="@+id/address_text"
-                            android:text="شارع شهاب، جزيرة ميت عقبة، حي العجوزة، الجيزة."
-                            android:textColor="@color/black"
-                             />
-
-
-                        <FrameLayout
-                            android:id="@+id/frameLayout"
+                        <fragment
+                            android:id="@+id/map"
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_140sdp"
-                            android:layout_below="@+id/address"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:background="@drawable/course_details_bg">
+                            android:layout_height="match_parent" />
 
-                            <fragment
-                                android:id="@+id/map"
-                                android:name="com.google.android.gms.maps.SupportMapFragment"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+                    </FrameLayout>
 
-                        </FrameLayout>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.cardview.widget.CardView>
