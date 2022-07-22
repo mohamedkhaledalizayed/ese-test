@@ -11,6 +11,7 @@ import com.neqabty.signup.core.ui.BaseActivity
 import com.neqabty.signup.core.utils.Status
 import com.neqabty.signup.core.utils.isMobileValid
 import com.neqabty.signup.core.utils.isNationalIdValid
+import com.neqabty.signup.core.utils.isValidEmail
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.home.domain.entity.SignupParams
 import dagger.hilt.android.AndroidEntryPoint
@@ -71,8 +72,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             return
         }
 
-        if (binding.nationalId.text.toString().isEmpty() || !binding.nationalId.text.isDigitsOnly()){
-            Toast.makeText(this, "من فضلك ادخل الرقم القومى", Toast.LENGTH_LONG).show()
+        if (binding.nationalId.text.toString().isEmpty() || !binding.nationalId.text.isDigitsOnly() || binding.nationalId.text.toString().length < 4){
+            Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -88,6 +89,11 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
         if (binding.email.text.toString().isNullOrEmpty()){
             Toast.makeText(this, "من فضلك ادخل البريد الالكترونى", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (!binding.email.text.toString().isValidEmail()){
+            Toast.makeText(this, "من فضلك ادخل البريد الالكترونى بشكل صحيح.", Toast.LENGTH_LONG).show()
             return
         }
 

@@ -15,3 +15,7 @@ fun String.isNationalIdValid(): Boolean {
     }
     return false
 }
+
+var emailPattern: String = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
+
+fun String.isValidEmail() = Pattern.compile(emailPattern, Pattern.CASE_INSENSITIVE).matcher(this).matches()

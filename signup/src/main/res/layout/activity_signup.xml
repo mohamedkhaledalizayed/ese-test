@@ -92,7 +92,7 @@
                     android:padding="@dimen/_10sdp"
                     android:textAlignment="textStart"
                     android:textColor="#748A9D"
-                    android:maxLength="14"
+                    android:maxLength="4"
                     android:textColorHint="#748A9D"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="italic"

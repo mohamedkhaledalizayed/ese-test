@@ -25,6 +25,8 @@ import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
 import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
 import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.modules.subscribtions.presentation.viewmodel.SubscriptionViewModel
+import com.neqabty.signup.core.utils.isNationalIdValid
+import com.neqabty.signup.core.utils.isValidEmail
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -163,6 +165,16 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
         if (binding.etNational.text.toString().isNullOrEmpty()){
             Toast.makeText(this, "من فضلك ادخل الرقم القومى.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etNational.text.toString().isNationalIdValid()){
+            Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etNationalId.text.toString().length < 14){
+            Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -311,8 +323,23 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
+        if (binding.etNationalId.text.toString().isNationalIdValid()){
+            Toast.makeText(this, "من فضلك ادخل رقم صحيح.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etNationalId.text.toString().length < 14){
+            Toast.makeText(this, "من فضلك ادخل رقم صحيح.", Toast.LENGTH_LONG).show()
+            return
+        }
+
         if (binding.etEmail.text.toString().isNullOrEmpty()){
             Toast.makeText(this, "من فضلك ادخل البريد الالكترونى.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (!binding.etEmail.text.toString().isValidEmail()){
+            Toast.makeText(this, "من فضلك ادخل البريد الالكترونى بشكل صحيح.", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -330,12 +357,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             Toast.makeText(this, "من فضلك ادخل الهاتف.", Toast.LENGTH_LONG).show()
             return
         }
-
-
-
-
-
-
 
         subscriptionViewModel.addSubscription(
             name = binding.etName.text.toString(),
