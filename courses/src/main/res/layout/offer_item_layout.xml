@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_12sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AutoCad"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/startDateIcon"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleTV"
+            android:src="@drawable/ic_calendar"/>
+
+        <TextView
+            android:id="@+id/startDateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text=" :تاريخ البدء"
+            app:layout_constraintStart_toEndOf="@id/startDateIcon"
+            app:layout_constraintTop_toTopOf="@id/startDateIcon"/>
+
+        <TextView
+            android:id="@+id/startDateValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toEndOf="@id/startDateTitle"
+            app:layout_constraintTop_toTopOf="@id/startDateTitle"
+            app:layout_constraintBottom_toBottomOf="@id/startDateTitle"
+            android:text="١٢-٢٢-١٢٣١"
+            />
+        <ImageView
+            android:id="@+id/endDateIcon"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            app:layout_constraintEnd_toStartOf="@id/endDateTitle"
+            app:layout_constraintTop_toTopOf="@id/startDateIcon"
+            android:src="@drawable/ic_calendar"/>
+
+        <TextView
+            android:id="@+id/endDateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text=" :تاريخ الانتهاء"
+            app:layout_constraintEnd_toStartOf="@id/endDateValue"
+            app:layout_constraintTop_toTopOf="@id/endDateIcon"/>
+
+        <TextView
+            android:id="@+id/endDateValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/endDateTitle"
+            app:layout_constraintBottom_toBottomOf="@id/endDateTitle"
+            android:text="١٢-٢٢-١٢٣١"
+            />
+        <View
+            android:id="@+id/separator1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/grey_font"
+            app:layout_constraintTop_toBottomOf="@id/startDateIcon" />
+
+        <ImageView
+            android:id="@+id/contactIcon"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/separator1"
+            android:src="@drawable/ic_phone"/>
+
+        <TextView
+            android:id="@+id/contactTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text=" للتواصل"
+            app:layout_constraintStart_toEndOf="@id/contactIcon"
+            app:layout_constraintTop_toTopOf="@id/contactIcon"/>
+
+        <TextView
+            android:id="@+id/contactValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toEndOf="@id/contactTitle"
+            app:layout_constraintTop_toTopOf="@id/contactTitle"
+            app:layout_constraintBottom_toBottomOf="@id/contactTitle"
+            android:text="١٢-٢٢-١٢٣١"
+            />
+        <ImageView
+            android:id="@+id/peopleIcon"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            app:layout_constraintEnd_toStartOf="@id/peopleTitle"
+            app:layout_constraintTop_toTopOf="@id/contactIcon"
+            android:src="@drawable/ic_people"/>
+
+        <TextView
+            android:id="@+id/peopleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:text=" :تاريخ الانتهاء"
+            app:layout_constraintEnd_toStartOf="@id/peopleValue"
+            app:layout_constraintTop_toTopOf="@id/peopleIcon"/>
+
+        <TextView
+            android:id="@+id/peopleValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/peopleTitle"
+            app:layout_constraintBottom_toBottomOf="@id/peopleTitle"
+            android:text="١٢-٢٢-١٢٣١"
+            />
+        <View
+            android:id="@+id/separator2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/grey_font"
+            app:layout_constraintTop_toBottomOf="@id/peopleIcon" />
+
+        <TextView
+            android:id="@+id/datesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/separator2"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="المواعيد"/>
+        <TextView
+            android:id="@+id/datesValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@id/separator2"
+            app:layout_constraintStart_toEndOf="@id/datesTitle"
+            android:text="الاثنين ، الخميس "/>
+        <Button
+            android:id="@+id/exchange_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/btn_bg"
+            android:text="احجز الآن"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/datesTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
