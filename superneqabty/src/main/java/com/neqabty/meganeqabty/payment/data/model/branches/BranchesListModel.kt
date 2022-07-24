@@ -1,12 +1,12 @@
-package com.neqabty.meganeqabty.profile.data.model.profile
+package com.neqabty.meganeqabty.payment.data.model.branches
 
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 @Keep
-data class ProfileModel(
+data class BranchesListModel(
     @SerializedName("data")
-    val `data`: UserData,
+    val `data`: Data,
     @SerializedName("message")
     val message: String,
     @SerializedName("status")

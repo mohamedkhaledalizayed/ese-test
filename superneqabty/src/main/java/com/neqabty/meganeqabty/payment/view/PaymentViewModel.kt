@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.meganeqabty.core.utils.AppUtils
 import com.neqabty.meganeqabty.core.utils.Resource
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
+import com.neqabty.meganeqabty.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.meganeqabty.payment.domain.entity.inquiryresponse.ReceiptDataEntity
 import com.neqabty.meganeqabty.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.meganeqabty.payment.domain.entity.paymentmethods.PaymentMethodEntity
@@ -25,11 +26,11 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
     ViewModel() {
 
     val services = MutableLiveData<Resource<List<ServicesListEntity>>>()
-    fun getServices(code: String) {
+    fun getServices() {
         services.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                paymentUseCase.getServices(code).collect {
+                paymentUseCase.getServices().collect {
                     services.postValue(Resource.success(data = it))
                 }
             }catch (exception:Throwable){
@@ -104,6 +105,21 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
                 }
             }catch (exception:Throwable){
                 paymentStatus.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+            }
+        }
+    }
+
+
+    val branches = MutableLiveData<Resource<List<BranchesEntity>>>()
+    fun getBranches() {
+        branches.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                paymentUseCase.getBranches().collect {
+                    branches.postValue(Resource.success(data = it))
+                }
+            }catch (exception:Throwable){
+                branches.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
             }
         }
     }

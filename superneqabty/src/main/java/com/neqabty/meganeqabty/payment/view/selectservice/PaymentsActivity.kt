@@ -38,7 +38,7 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
 //        intent.putExtra("referenceCode", "d1d9bf1e-8963-4f01-8692-b928e213e24d")
 //        startActivity(intent)
         setupToolbar(titleResId = R.string.payments)
-        paymentViewModel.getServices(sharedPreferences.code)
+        paymentViewModel.getServices()
         paymentViewModel.services.observe(this) {
 
             it?.let { resource ->

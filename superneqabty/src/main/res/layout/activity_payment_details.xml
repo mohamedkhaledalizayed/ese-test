@@ -27,15 +27,15 @@
             android:background="@drawable/rounded_bg"
             android:padding="@dimen/_15sdp"
             android:scrollbars="none"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <LinearLayout
                 android:id="@+id/llContent"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tvService"
@@ -57,8 +57,8 @@
                     android:id="@+id/tvMemberNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:layout_marginTop="@dimen/_15sdp"
+                    android:textColor="@color/black"
                     android:textSize="?textSizeLarge" />
 
                 <!--                <TextView-->
@@ -79,11 +79,11 @@
                     android:textSize="?textSizeLarge" />
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/card_layout"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_1sdp"
                     android:elevation="@dimen/_4sdp"
                     app:cardCornerRadius="@dimen/_4sdp">
@@ -109,10 +109,10 @@
                             android:id="@+id/last_fee_year_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_50sdp"
                             android:textColor="@color/black"
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
-                            android:layout_marginStart="@dimen/_50sdp"
                             app:layout_constraintStart_toEndOf="@+id/last_fee_year"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -126,18 +126,17 @@
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/last_fee_year"
-                            />
+                            app:layout_constraintTop_toBottomOf="@id/last_fee_year" />
 
                         <TextView
                             android:id="@+id/current_fee_year_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:textColor="@color/black"
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
-                            android:layout_marginStart="@dimen/_30sdp"
                             app:layout_constraintStart_toEndOf="@+id/current_fee_year"
                             app:layout_constraintTop_toBottomOf="@id/last_fee_year_value" />
 
@@ -151,22 +150,20 @@
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/current_fee_year"
-                             />
+                            app:layout_constraintTop_toBottomOf="@id/current_fee_year" />
 
                         <TextView
                             android:id="@+id/card_price_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_42sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="140dp"
                             android:textColor="@color/black"
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
-                            android:layout_marginStart="@dimen/_42sdp"
                             app:layout_constraintStart_toEndOf="@id/card_price"
-                            app:layout_constraintTop_toBottomOf="@id/current_fee_year_value"
-                             />
+                            app:layout_constraintTop_toBottomOf="@id/current_fee_year_value" />
 
                         <TextView
                             android:id="@+id/late_subscriptions"
@@ -178,22 +175,20 @@
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/card_price"
-                             />
+                            app:layout_constraintTop_toBottomOf="@id/card_price" />
 
                         <TextView
                             android:id="@+id/late_subscriptions_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_24sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="140dp"
                             android:textColor="@color/black"
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
-                            android:layout_marginStart="@dimen/_24sdp"
                             app:layout_constraintStart_toEndOf="@id/late_subscriptions"
-                            app:layout_constraintTop_toBottomOf="@id/card_price_value"
-                             />
+                            app:layout_constraintTop_toBottomOf="@id/card_price_value" />
 
                         <TextView
                             android:id="@+id/delay_fine"
@@ -205,32 +200,30 @@
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/late_subscriptions"
-                             />
+                            app:layout_constraintTop_toBottomOf="@id/late_subscriptions" />
 
                         <TextView
                             android:id="@+id/delay_fine_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_47sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="140dp"
                             android:textColor="@color/black"
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
-                            android:layout_marginStart="@dimen/_47sdp"
                             app:layout_constraintStart_toEndOf="@id/delay_fine"
-                            app:layout_constraintTop_toBottomOf="@id/late_subscriptions_value"
-                             />
+                            app:layout_constraintTop_toBottomOf="@id/late_subscriptions_value" />
 
                         <View
                             android:id="@+id/view"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            android:background="@color/gray3"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
-                            app:layout_constraintTop_toBottomOf="@id/delay_fine"/>
+                            android:background="@color/gray3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/delay_fine" />
 
                         <TextView
                             android:id="@+id/total"
@@ -242,41 +235,23 @@
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/view"
-                             />
+                            app:layout_constraintTop_toBottomOf="@id/view" />
 
                         <TextView
                             android:id="@+id/total_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_58sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="140dp"
                             android:textColor="@color/colorPrimary"
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
-                            android:layout_marginStart="@dimen/_58sdp"
-                            app:layout_constraintStart_toEndOf="@id/total"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/view"
-                             />
+                            app:layout_constraintStart_toEndOf="@id/total"
+                            app:layout_constraintTop_toBottomOf="@id/view" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
-
-
-                <TextView
-                    android:id="@+id/tvFeatures"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:text="@string/other_services"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_13ssp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvFeatures"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="LinearLayoutManager" />
 
                 <TextView
                     android:id="@+id/tvPaymentMethod"
@@ -390,21 +365,107 @@
                     android:id="@+id/tvAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:textSize="?textSizeLarge" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDeliveryMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/delivery_method"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeLarge"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <RadioGroup
+                    android:id="@+id/rgDeliveryMethods"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rb_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:buttonTint="@color/dark_green"
+                        android:checked="true"
+                        android:text="@string/to_home"
+                        android:textSize="?textSizeMedium"
+                         />
+
+                    <EditText
+                        android:id="@+id/address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_10sdp"
+                        android:hint="@string/address"
+                        android:textSize="@dimen/_10ssp"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:background="@drawable/edit_text"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_branches"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:buttonTint="@color/dark_green"
+                        android:text="@string/from_branches"
+                        android:textSize="?textSizeMedium"
+                         />
+
+                    <FrameLayout
+                        android:id="@+id/spinner_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:background="@drawable/spinner_brder_white"
+                        android:padding="@dimen/_5sdp"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/neqabty"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <Spinner
+                            android:id="@+id/sp_branches"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#fff"
+                            android:paddingEnd="10dp"
+                            android:popupBackground="@color/splash_bg" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|end"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+                    </FrameLayout>
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tvAmountAfterDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeLarge"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btn_next"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:background="@color/colorPrimary"
                     android:text="@string/next"
                     android:textColor="@android:color/white"
-                    android:textSize="?textSizeLarge"
-                    android:background="@color/colorPrimary"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    />
+                    android:textSize="?textSizeLarge" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

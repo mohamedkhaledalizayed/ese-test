@@ -204,9 +204,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
     override fun onResume() {
         super.onResume()
 
-        if (sharedPreferences.isPhoneVerified){
+        if (sharedPreferences.mobile.isNotEmpty()){
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.phone).text =
-                "${sharedPreferences.phoneVerified}"
+                "${sharedPreferences.mobile}"
         }else{
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.phone).text =
                 ""
@@ -263,8 +263,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             AlertDialog.BUTTON_POSITIVE, "موافق"
         ) { dialog, _ ->
             dialog.dismiss()
+            sharedPreferences.mobile = ""
             sharedPreferences.isPhoneVerified = false
-            sharedPreferences.phoneVerified = ""
+            sharedPreferences.code = ""
             drawer.close()
             val intent = Intent(this@HomeActivity, VerifyPhoneActivity::class.java)
             startActivity(intent)

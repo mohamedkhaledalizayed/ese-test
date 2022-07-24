@@ -4,15 +4,17 @@ package com.neqabty.login.modules.login.data.model
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 @Keep
-data class Account(
+data class UserData(
     @SerializedName("email")
-    val email: String?,
+    val email: String,
     @SerializedName("entity")
-    val entity: String?,
+    val entity: EntityModel,
     @SerializedName("fullname")
     val fullname: String,
     @SerializedName("groups")
     val groups: List<Any>,
+    @SerializedName("id")
+    val id: Int,
     @SerializedName("image")
     val image: String?,
     @SerializedName("is_superuser")

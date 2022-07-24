@@ -213,7 +213,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.navView.setNavigationItemSelectedListener(this)
 
         binding.contentActivity.ivSubscription.setOnClickListener {
-            if (sharedPreferences.mobile.isNotEmpty()){
+            if (sharedPreferences.isPhoneVerified){
                 val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                 startActivity(intent)
             }else{
@@ -228,46 +228,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.contentActivity.travelsImage.setOnClickListener {
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
         }
-
-        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.logout).setOnClickListener {
-            if (sharedPreferences.mobile.isNotEmpty()) {
-                logout("هل تريد تسجيل خروج!")
-            }else{
-                val intent = Intent(this@HomeActivity, LoginActivity::class.java)
-                intent.putExtra("code", sharedPreferences.code)
-                intent.putExtra(
-                    Intent.EXTRA_INTENT,
-                    Intent(this@HomeActivity, SignupActivity::class.java)
-                )
-                startActivity(intent)
-            }
-        }
-
-    }
-
-    private fun logout(message: String) {
-
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle("تنبيه")
-        alertDialog.setMessage(message)
-        alertDialog.setCancelable(true)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, "موافق"
-        ) { dialog, _ ->
-            dialog.dismiss()
-            sharedPreferences.name = ""
-            sharedPreferences.mobile = ""
-            sharedPreferences.userImage = ""
-            onResume()
-            drawer.close()
-        }
-        alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, "لا"
-        ) { dialog, _ ->
-            dialog.dismiss()
-        }
-        alertDialog.show()
-
     }
 
     override fun onResume() {
@@ -280,7 +240,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         }
 
         super.onResume()
-        if (sharedPreferences.mobile.isNotEmpty()) {
+        if (sharedPreferences.isPhoneVerified) {
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
                 View.VISIBLE
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).text =
@@ -289,16 +249,12 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 .findViewById<TextView>(R.id.tvMobileNumber).visibility = View.VISIBLE
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMobileNumber).text =
                 Html.fromHtml(getString(R.string.menu_mobileNumber, sharedPreferences.mobile))
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.logout).text =
-                Html.fromHtml(getString(R.string.logout_title))
 
         } else {
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
                 View.GONE
             binding.navView.getHeaderView(0)
                 .findViewById<TextView>(R.id.tvMobileNumber).visibility = View.GONE
-            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.logout).text =
-                Html.fromHtml(getString(R.string.login_title))
         }
     }
 

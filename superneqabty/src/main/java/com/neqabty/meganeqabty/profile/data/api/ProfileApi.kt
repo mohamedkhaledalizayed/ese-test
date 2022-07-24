@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface ProfileApi {
 
     @GET("api/accounts/profile")
-    suspend fun getUserProfile(@Header("Authorization") token: String): ProfileModel
+    suspend fun getUserProfile(@Header("Authorization") token: String, @Query("special-format") platform: String = "android"): ProfileModel
 
     @Multipart
     @POST("api/membership_card_requests")

@@ -2,12 +2,12 @@ package com.neqabty.meganeqabty.profile.data.repository
 
 
 import com.neqabty.meganeqabty.profile.data.model.ministrylicence.MinistryLicenseModel
-import com.neqabty.meganeqabty.profile.data.model.profile.AccountModel
-import com.neqabty.meganeqabty.profile.data.model.profile.EntityModel
+import com.neqabty.meganeqabty.profile.data.model.profile.EntityBody
 import com.neqabty.meganeqabty.profile.data.model.profile.ProfileModel
+import com.neqabty.meganeqabty.profile.data.model.profile.UserData
 import com.neqabty.meganeqabty.profile.data.source.ProfileDS
 import com.neqabty.meganeqabty.profile.domain.entity.MinistryLicenseEntity
-import com.neqabty.meganeqabty.profile.domain.entity.profile.Account
+import com.neqabty.meganeqabty.profile.domain.entity.profile.Data
 import com.neqabty.meganeqabty.profile.domain.entity.profile.Entity
 import com.neqabty.meganeqabty.profile.domain.entity.profile.ProfileEntity
 import com.neqabty.meganeqabty.profile.domain.repository.ProfileRepository
@@ -49,21 +49,17 @@ private fun MinistryLicenseModel.toMinistryLicenseEntity(): MinistryLicenseEntit
 
 private fun ProfileModel.toProfileEntity(): ProfileEntity{
     return ProfileEntity(
-        account = account.toAccount(),
-        entity = entity.toEntity(),
-        id = id,
-        lastFeeYear = lastFeeYear,
-        licenseEndDate = licenseEndDate,
-        membershipId = membershipId,
-        name = name,
-        nationalId = nationalId
+        data = data.toData(),
+        message = message,
+        status = status
     )
 }
 
-private fun AccountModel.toAccount(): Account{
-    return Account(
+private fun UserData.toData(): Data{
+    return Data(
         email = email,
-        fullname = fullname,
+        entity = entity.toEntity(),
+        fullName = fullname,
         id = id,
         image = image,
         mobile = mobile,
@@ -71,7 +67,7 @@ private fun AccountModel.toAccount(): Account{
     )
 }
 
-private fun EntityModel.toEntity(): Entity{
+private fun EntityBody.toEntity(): Entity {
     return Entity(
         code = code,
         id = id,

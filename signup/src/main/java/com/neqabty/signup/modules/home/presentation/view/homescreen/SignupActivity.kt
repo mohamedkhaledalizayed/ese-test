@@ -36,8 +36,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             .build()
 
 
-        binding.phone.setText(sharedPreferences.phoneVerified)
-        binding.phone.isEnabled = false
+        binding.phone.setText(sharedPreferences.mobile)
         signupViewModel.user.observe(this){
 
             it?.let { resource ->
@@ -48,6 +47,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                     Status.SUCCESS -> {
                         dialog.dismiss()
                         if (resource.data!!.nationalId.isNotEmpty()){
+                            sharedPreferences.isPhoneVerified = true
                             sharedPreferences.mobile = resource.data.mobile
                             sharedPreferences.name = resource.data.fullname
                             sharedPreferences.nationalId = resource.data.nationalId

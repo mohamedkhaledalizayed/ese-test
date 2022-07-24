@@ -2,6 +2,8 @@ package com.neqabty.meganeqabty.payment.data.repository
 
 
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
+import com.neqabty.meganeqabty.payment.data.model.branches.EntityBranche
+import com.neqabty.meganeqabty.payment.data.model.branches.EntityModel
 import com.neqabty.meganeqabty.payment.data.model.inquiryresponse.*
 import com.neqabty.meganeqabty.payment.data.model.payment.MobilePaymentPayload
 import com.neqabty.meganeqabty.payment.data.model.payment.PaymentModel
@@ -12,6 +14,8 @@ import com.neqabty.meganeqabty.payment.data.model.paymentstatus.PaymentStatusMod
 import com.neqabty.meganeqabty.payment.data.model.services.*
 import com.neqabty.meganeqabty.payment.data.model.servicesaction.ServiceAction
 import com.neqabty.meganeqabty.payment.data.source.PaymentDS
+import com.neqabty.meganeqabty.payment.domain.entity.branches.BranchesEntity
+import com.neqabty.meganeqabty.payment.domain.entity.branches.Entity
 import com.neqabty.meganeqabty.payment.domain.entity.inquiryresponse.*
 import com.neqabty.meganeqabty.payment.domain.entity.payment.MobilePaymentPayloadEntity
 import com.neqabty.meganeqabty.payment.domain.entity.payment.Payment
@@ -29,9 +33,9 @@ import javax.inject.Inject
 class PaymentRepositoryImpl @Inject constructor(private val paymentDS: PaymentDS) :
     PaymentRepository {
 
-    override fun getServices(code: String): Flow<List<ServicesListEntity>> {
+    override fun getServices(): Flow<List<ServicesListEntity>> {
         return flow {
-            emit(paymentDS.getServices(code).map { it.toServicesListEntity() })
+            emit(paymentDS.getServices().map { it.toServicesListEntity() })
         }
     }
 
@@ -65,8 +69,31 @@ class PaymentRepositoryImpl @Inject constructor(private val paymentDS: PaymentDS
         }
     }
 
+    override fun getBranches(): Flow<List<BranchesEntity>> {
+        return flow {
+            emit(paymentDS.getBranches().map { it.toBranchesEntity() })
+        }
+    }
+
 }
 
+private fun EntityBranche.toBranchesEntity():BranchesEntity{
+    return BranchesEntity(
+        entity = entity.toEntity(),
+        address = address,
+        city = city
+    )
+}
+
+private fun EntityModel.toEntity(): Entity{
+    return Entity(
+        code = code,
+        id = id,
+        image = image,
+        name = name,
+
+    )
+}
 fun ReceiptResponse.toReceiptDataEntity(): ReceiptDataEntity{
     return ReceiptDataEntity(
         member = member.toMemberEntity(),

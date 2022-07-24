@@ -1,4 +1,5 @@
-package com.neqabty.meganeqabty.profile.domain.entity.profile
+package com.neqabty.login.modules.login.domain.entity
+
 
 
 data class Entity(

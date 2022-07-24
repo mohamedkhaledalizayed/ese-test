@@ -49,7 +49,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                         loading.dismiss()
                         if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= 160){
                             Handler().postDelayed(Runnable {
-                                if (sharedPreferences.isPhoneVerified){
+                                if (sharedPreferences.mobile.isNotEmpty()){
                                     val mainIntent = Intent(this@SplashActivity, HomeActivity::class.java)
                                     startActivity(mainIntent)
                                     finish()

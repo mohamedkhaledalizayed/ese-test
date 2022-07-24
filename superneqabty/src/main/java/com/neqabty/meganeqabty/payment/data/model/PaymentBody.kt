@@ -20,6 +20,10 @@ class PaymentBodyObject(
     val paymentSource: String = "android",
     @SerializedName("amount")
     val amount: String = "",
+    @SerializedName("address")
+    val address: String = "",
+    @SerializedName("delivery_method")
+    val deliveryMethod: Int = 0,
     @SerializedName("membership_id")
-    val itemId: Int = 0
+    val membershipId: Int = 0
 )

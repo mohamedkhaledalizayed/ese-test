@@ -4,11 +4,11 @@ package com.neqabty.meganeqabty.profile.data.model.profile
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 @Keep
-data class AccountModel(
+data class UserData(
     @SerializedName("email")
     val email: String,
     @SerializedName("entity")
-    val entity: Any,
+    val entity: EntityBody,
     @SerializedName("fullname")
     val fullname: String,
     @SerializedName("groups")
@@ -22,7 +22,5 @@ data class AccountModel(
     @SerializedName("mobile")
     val mobile: String,
     @SerializedName("national_id")
-    val nationalId: String,
-    @SerializedName("notifications")
-    val notifications: List<Any>
+    val nationalId: String
 )

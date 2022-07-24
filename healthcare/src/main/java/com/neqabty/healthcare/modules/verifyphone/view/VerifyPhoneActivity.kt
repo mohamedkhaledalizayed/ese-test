@@ -101,8 +101,11 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
     }
 
     override fun onSendClicked(phone: String) {
-        phoneNumber = phone
-        checkForSmsReceivePermissions()
+        sharedPreferences.mobile = phone
+        val intent = Intent(this@VerifyPhoneActivity, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
+//        checkForSmsReceivePermissions()
     }
 
     override fun onCheckClicked(otp: String) {

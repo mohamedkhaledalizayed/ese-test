@@ -71,22 +71,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvMemberName" />
 
-
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:background="@android:color/transparent"
-            android:elevation="@dimen/_5sdp"
-            android:text="@string/logout_title"
-            android:textColor="@android:color/white"
-            android:textSize="?textSizeMedium"
-            android:textStyle="bold"
-            android:layout_gravity="end"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvMobileNumber" />
-
     </LinearLayout>
 </layout>

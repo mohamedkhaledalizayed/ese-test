@@ -39,8 +39,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             .build()
 
 
-        binding.etUsername.setText(sharedPreferences.phoneVerified)
-        binding.etUsername.isEnabled = false
+        binding.etUsername.setText(sharedPreferences.mobile)
         if (sharedPreferences.mobile.isNotEmpty()){
             Log.e("login", "True")
         }
@@ -53,12 +52,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                     Status.SUCCESS -> {
                         dialog.dismiss()
-                        if (resource.data!!.nationalId.isNotEmpty()){
+                        if (resource.data!!.user.nationalId.isNotEmpty()){
+                            sharedPreferences.isPhoneVerified = true
                             sharedPreferences.token = resource.data.token
-                            sharedPreferences.mobile = resource.data.mobile
-                            sharedPreferences.name = resource.data.fullname
-                            sharedPreferences.nationalId = resource.data.nationalId
-                            sharedPreferences.userImage = "${resource.data.image}"
+                            sharedPreferences.mobile = resource.data.user.mobile
+                            sharedPreferences.name = resource.data.user.fullName
+                            sharedPreferences.nationalId = resource.data.user.nationalId
+                            sharedPreferences.userImage = "${resource.data.user.image}"
                             finish()
                         }else{
                             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
@@ -66,7 +66,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }

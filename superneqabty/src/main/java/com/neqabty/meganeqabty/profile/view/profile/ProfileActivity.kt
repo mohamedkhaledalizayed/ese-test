@@ -2,6 +2,7 @@ package com.neqabty.meganeqabty.profile.view.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.neqabty.meganeqabty.core.ui.BaseActivity
@@ -34,16 +35,16 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         binding.layoutContainer.visibility = View.VISIBLE
 
-                        binding.name.text = resource.data?.name
-                        binding.mobile.text = resource.data?.account?.mobile
-                        binding.membershipNumber.text = resource.data?.membershipId.toString()
-                        binding.nationalId.text = resource.data?.nationalId.toString()
-                        binding.email.text = resource.data?.account?.email
-                        binding.syndicate.text = resource.data?.entity?.name
+                        binding.name.text = resource.data?.data?.fullName
+                        binding.mobile.text = resource.data?.data?.mobile
+                        binding.membershipNumber.text = ""
+                        binding.nationalId.text = resource.data?.data?.nationalId.toString()
+                        binding.email.text = resource.data?.data?.email
+                        binding.syndicate.text = resource.data?.data?.entity?.name
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
-
+                        Log.e("dfghj", resource.message.toString())
                     }
                 }
             }

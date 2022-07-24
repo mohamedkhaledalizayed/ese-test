@@ -2,6 +2,7 @@ package com.neqabty.meganeqabty.payment.domain.interactors
 
 
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
+import com.neqabty.meganeqabty.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.meganeqabty.payment.domain.entity.inquiryresponse.ReceiptDataEntity
 import com.neqabty.meganeqabty.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.meganeqabty.payment.domain.entity.paymentmethods.PaymentMethodEntity
@@ -13,8 +14,8 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class PaymentUseCase @Inject constructor(private val repository: PaymentRepository) {
-    fun getServices(code: String): Flow<List<ServicesListEntity>> {
-        return repository.getServices(code)
+    fun getServices(): Flow<List<ServicesListEntity>> {
+        return repository.getServices()
     }
 
     fun getServiceActions(code: String): Flow<List<ServiceActionsEntity>> {
@@ -35,5 +36,9 @@ class PaymentUseCase @Inject constructor(private val repository: PaymentReposito
 
     fun build(referenceCode: String): Flow<PaymentStatusEntity> {
         return repository.getPaymentStatus(referenceCode)
+    }
+
+    fun getBranches(): Flow<List<BranchesEntity>> {
+        return repository.getBranches()
     }
 }

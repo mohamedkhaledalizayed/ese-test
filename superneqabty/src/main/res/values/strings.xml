@@ -30,6 +30,7 @@
     <string name="more">المزيد...</string>
     <string name="details">التفاصيل:</string>
     <string name="payment_method">طريقة الدفع:</string>
+    <string name="delivery_method">طريقة التوصيل :</string>
     <string name="payment_card">بطاقات بنكية ( فيزا ماستر كارد ميزة)</string>
     <string name="payment_channel">منافذ الدفع Opay</string>
     <string name="payment_store_locator">لمعرفة اقرب منافذ الدفع المحيطة بك
@@ -104,4 +105,7 @@
     <string name="ministry_license">طلب تجديد ترخيص الوزارة.</string>
     <string name="agree">موافق</string>
     <string name="rooted">هذا الجهاز غير أمن لا يمكنك إستخدام هذا التطبيق.</string>
+    <string name="from_branches">استلام من نقابة فرعية</string>
+    <string name="to_home">شحن منزلى</string>
+
 </resources>

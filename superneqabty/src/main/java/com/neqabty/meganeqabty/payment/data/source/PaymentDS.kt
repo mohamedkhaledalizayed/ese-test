@@ -3,6 +3,7 @@ package com.neqabty.meganeqabty.payment.data.source
 import com.neqabty.login.core.utils.PreferencesHelper
 import com.neqabty.meganeqabty.payment.data.api.PaymentApi
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
+import com.neqabty.meganeqabty.payment.data.model.branches.EntityBranche
 import com.neqabty.meganeqabty.payment.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.meganeqabty.payment.data.model.payment.PaymentResponse
 import com.neqabty.meganeqabty.payment.data.model.paymentmethods.PaymentMethodModel
@@ -13,8 +14,8 @@ import javax.inject.Inject
 
 class PaymentDS @Inject constructor(private val paymentApi: PaymentApi, private val sharedPreferences: PreferencesHelper) {
 
-    suspend fun getServices(code: String): List<ServiceModel> {
-        return paymentApi.getServices(code).services
+    suspend fun getServices(): List<ServiceModel> {
+        return paymentApi.getServices(sharedPreferences.code).services
     }
 
     suspend fun getServiceActions(code: String): List<ServiceAction> {
@@ -26,7 +27,7 @@ class PaymentDS @Inject constructor(private val paymentApi: PaymentApi, private 
     }
 
     suspend fun payment(paymentBody: PaymentBody): PaymentResponse {
-        return paymentApi.payment(paymentBody)
+        return paymentApi.payment(paymentBody, token =  "Token ${sharedPreferences.token}")
     }
 
     suspend fun getPaymentMethods(): List<PaymentMethodModel> {
@@ -35,6 +36,10 @@ class PaymentDS @Inject constructor(private val paymentApi: PaymentApi, private 
 
     suspend fun getPaymentStatus(referenceCode: String): PaymentStatusModel {
         return paymentApi.getPaymentStatus(referenceCode)
+    }
+
+    suspend fun getBranches(): List<EntityBranche> {
+        return paymentApi.getBranches(code = sharedPreferences.code).data.entityBranches
     }
 
 }
