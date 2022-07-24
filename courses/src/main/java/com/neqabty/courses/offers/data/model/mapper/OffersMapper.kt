@@ -1,57 +1,141 @@
 package com.neqabty.courses.offers.data.model.mapper
 
-import com.neqabty.courses.home.data.model.mappers.toCourseEntity
 import com.neqabty.courses.offers.data.model.*
 import com.neqabty.courses.offers.domain.entity.*
+import com.neqabty.courses.offers.domain.entity.Entity
 
 fun OfferModel.toOfferEntity(): OfferEntity {
     return OfferEntity(
-        address ?: "",
-        appointments.map { it.toAppointmentEntity() },
-        contact ?: "",
-        endDate ?: "",
-        fullyBooked ?: false,
-        id,
-        isAvailable ?: true,
-        maxNumOfTrainees ?: 0,
-        numOfTrainees ?: 0,
-        pricing.map { it.toPricingEntity() },
-        reservations.map { it.toReservationEntity() },
-        startDate ?: "",
-        title ?: ""
+        address = address,
+        appointmentEntities = appointments.map { it.toAppointementEntity() },
+        authorEntity = author.toAuthorEntity(),
+        contact = contact,
+        courseInOfferEntity = courseInOffer.toCourseOfferEntity(),
+        endDate = endDate,
+        fullyBooked = fullyBooked,
+        groupNumber = groupNumber,
+        id = id,
+        isAvailable = isAvailable,
+        maxNumOfTrainees = maxNumOfTrainees,
+        numOfTrainees = numOfTrainees,
+        pricingEntities = pricings.map { it.toPricingEntity() },
+        reservationEntities = reservations.map { it.toReservatioEntity() },
+        startDate = startDate,
+        title = title
     )
 }
 
-
-fun Appointment.toAppointmentEntity(): AppointmentEntity {
-    return AppointmentEntity(day ?: 0, id, offer ?: 0, timeFrom ?: "", timeTo ?: "")
-}
-
-fun Pricing.toPricingEntity(): PricingEntitty {
-    return PricingEntitty(
-        id, offer ?: 0, price ?: "",
-        StudentCategoryEntity(studentCategory.code ?: "", studentCategory.name ?: "")
-    )
-}
-
-fun Reservation.toReservationEntity(): ReservationEntity {
+private fun Reservation.toReservatioEntity(): ReservationEntity {
     return ReservationEntity(
-        cost ?: "",
-        id,
-        offer ?: 0,
-        paymentStatus,
-        queueNumber ?: 0,
-        status ?: "",
-        student?.toStudentEntity() ?: StudentEntity("", 0, 0, StudentCategoryEntity("", ""))
+        cashUrl = cashUrl,
+        createdAt = createdAt,
+        id = id,
+        offerInReservationEntity = offersInReservation.toOfferInReservationEntity(),
+        paymentStatus = paymentStatus,
+        queueNumber = queueNumber,
+        status = status,
+        studentEntity = student.toStudentEntity(),
+        transactionId = transactionId,
+        updatedAt = updatedAt
     )
-
 }
 
-fun Student.toStudentEntity(): StudentEntity {
+private fun Student.toStudentEntity(): StudentEntity {
     return StudentEntity(
-        fullName ?: "",
-        id,
-        membershipId ?: 0,
-        StudentCategoryEntity(stdCategory.code ?: "", stdCategory.name ?: "")
+        createdAt = createdAt,
+        department = department,
+        email = email,
+        graduateYear = graduateYear,
+        id = id,
+        identityCard = identityCard?:"",
+        mobile = mobile,
+        name = name,
+        nequabtyId = nequabtyId?:"",
+        stdCategory = stdCategory,
+        studentStatus = studentStatus,
+        university = university,
+        updatedAt = updatedAt
+    )
+}
+
+private fun OffersInReservation.toOfferInReservationEntity(): OfferInReservationEntity {
+    return OfferInReservationEntity(
+        address = address,
+        author = author,
+        contact = contact,
+        course = course,
+        createdAt = createdAt,
+        endDate = endDate,
+        groupNumber = groupNumber,
+        id = id,
+        isAvailable = isAvailable,
+        isConfirmable = isConfirmable,
+        maxNumOfTrainees = maxNumOfTrainees,
+        startDate = startDate,
+        title = title,
+        updatedAt = updatedAt
+    )
+}
+
+private fun Pricing.toPricingEntity(): PricingEntity {
+    return PricingEntity(
+        id = id,
+        offer = offer,
+        price = price,
+        serviceActionCode = serviceActionCode,
+        serviceCode = serviceCode,
+        studentCategoryEntity = studentCategory.toEntity()
+    )
+}
+
+private fun StudentCategory.toEntity(): StudentCategoryEntity {
+    return StudentCategoryEntity(
+        code = code,
+        createdAt = createdAt,
+        name = name,
+        updatedAt = updatedAt
+    )
+}
+
+private fun CourseInOffer.toCourseOfferEntity(): CourseInOfferEntity {
+    return CourseInOfferEntity(
+        id = id,
+        image = image,
+        labEntity = lab.toLabEntity(),
+        numOfSessions = numOfSessions,
+        prerequisites = prerequisites,
+        syllabus = syllabus,
+        title = title
+    )
+}
+
+private fun Lab.toLabEntity(): LabEntity {
+    return LabEntity(
+        entity = Entity(entity.code,entity.name),
+        id = id,
+        image = image,
+        name = name
+    )
+}
+
+private fun Author.toAuthorEntity(): AuthorEntity {
+    return AuthorEntity(
+        email = email?:"",
+        entityCode = entityCode,
+        firstName = firstName,
+        id = id,
+        image = image?:"",
+        lastName = lastName,
+        mobile = mobile
+    )
+}
+
+private fun Appointment.toAppointementEntity(): AppointmentEntity {
+    return AppointmentEntity(
+        day = day,
+        id = id,
+        offer = offer,
+        timeFrom = timeFrom,
+        timeTo = timeTo
     )
 }

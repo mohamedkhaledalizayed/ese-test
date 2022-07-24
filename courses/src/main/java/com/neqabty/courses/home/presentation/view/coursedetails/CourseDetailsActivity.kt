@@ -20,7 +20,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.neqabty.courses.core.ui.BaseActivity
 import com.neqabty.courses.core.utils.Status
 import com.neqabty.courses.home.presentation.view.homescreen.HomeViewModel
-import com.neqabty.courses.offers.domain.entity.OfferEntity
 import com.neqabty.courses.offers.presentation.view.COURSEID
 import com.neqabty.courses.offers.presentation.view.OffersActivity
 import com.squareup.picasso.Picasso

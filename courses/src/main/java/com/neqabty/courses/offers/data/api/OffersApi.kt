@@ -1,6 +1,5 @@
 package com.neqabty.courses.offers.data.api
 
-import com.neqabty.courses.offers.data.model.OfferModel
 import com.neqabty.courses.offers.data.model.OffersResponse
 import retrofit2.http.GET
 import retrofit2.http.Query

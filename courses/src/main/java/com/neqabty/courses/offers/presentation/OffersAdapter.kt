@@ -1,7 +1,6 @@
 package com.neqabty.courses.offers.presentation
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.courses.databinding.OfferItemLayoutBinding
@@ -15,7 +14,6 @@ class OffersAdapter(private var offersList:List<OfferEntity> = listOf()) : Recyc
             binding.endDateValue.text = offer.endDate
             binding.contactValue.text = offer.contact
             binding.peopleValue.text = offer.numOfTrainees.toString()
-            binding.datesValue.text = offer.appointmentEntities.toString()
         }
     }
     fun submitList(offers:List<OfferEntity>){

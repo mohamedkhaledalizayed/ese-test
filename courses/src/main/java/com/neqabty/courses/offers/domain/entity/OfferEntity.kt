@@ -1,19 +1,20 @@
 package com.neqabty.courses.offers.domain.entity
 
-import com.neqabty.courses.home.domain.entity.CourseEntity
-
 data class OfferEntity(
-    val address: String,
-    val appointmentEntities: List<AppointmentEntity>,
-    val contact: String,
-    val endDate: String,
-    val fullyBooked: Boolean,
-    val id: Int,
-    val isAvailable: Boolean,
-    val maxNumOfTrainees: Int,
-    val numOfTrainees: Int,
-    val pricingEntitty: List<PricingEntitty>,
-    val reservationEntities: List<ReservationEntity>,
-    val startDate: String,
-    val title: String
+    val address: String = "",
+    val appointmentEntities: List<AppointmentEntity> = listOf(),
+    val authorEntity: AuthorEntity = AuthorEntity(),
+    val contact: String = "",
+    val courseInOfferEntity: CourseInOfferEntity = CourseInOfferEntity(),
+    val endDate: String = "",
+    val fullyBooked: Boolean = false,
+    val groupNumber: String = "",
+    val id: Int = 0,
+    val isAvailable: Boolean = false,
+    val maxNumOfTrainees: Int = 0,
+    val numOfTrainees: Int = 0,
+    val pricingEntities: List<PricingEntity> = listOf(),
+    val reservationEntities: List<ReservationEntity> = listOf(),
+    val startDate: String = "",
+    val title: String = ""
 )
