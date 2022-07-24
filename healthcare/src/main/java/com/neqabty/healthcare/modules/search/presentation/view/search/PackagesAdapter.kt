@@ -1,6 +1,8 @@
 package com.neqabty.healthcare.modules.search.presentation.view.search
 
 import android.annotation.SuppressLint
+import android.os.Build
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,15 +11,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.PackageItemLayoutBinding
-import com.neqabty.healthcare.modules.search.data.model.packages.PackageModel
-import com.neqabty.healthcare.modules.search.presentation.model.search.PackageInfo
+import com.neqabty.healthcare.modules.search.domain.entity.packages.DetailEntity
+import com.neqabty.healthcare.modules.search.domain.entity.packages.PackagesEntity
 import com.squareup.picasso.Picasso
 import kotlin.collections.ArrayList
 
 
 class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
-    private val items: MutableList<PackageModel> = ArrayList()
+    private val items: MutableList<PackagesEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -40,11 +42,25 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         val item = items[position]
-        viewHolder.binding.packageName.text = item.name ?: ""
+        viewHolder.binding.packageName.text = item.name
         viewHolder.binding.insuranceDetails.text = item.insuranceAmount ?: ""
         viewHolder.binding.requiredDataDetails.text = item.neddedInfo ?: ""
         viewHolder.binding.targetPeopleDetails.text = item.targetGroups ?: ""
-        viewHolder.binding.infoDetails.text = item.description ?: ""
+        viewHolder.binding.infoDetails.text = item.description
+        viewHolder.binding.packagePrice.text = "${item.price} جنية - للفرد"
+
+        var details = ""
+        for (item: DetailEntity in item.details){
+            details = "$details ${item.title}: ${item.description}. \n"
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            viewHolder.binding.detailsValue.text = Html.fromHtml(details, Html.FROM_HTML_MODE_COMPACT);
+        } else {
+            viewHolder.binding.detailsValue.text = Html.fromHtml(details);
+        }
+
+        viewHolder.binding.detailsValue.text = details
         viewHolder.binding.moreDetails.setOnClickListener {
             if (viewHolder.binding.packageDescription.isVisible){
                 viewHolder.binding.packageDescription.visibility = View.GONE
@@ -73,7 +89,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
     override fun getItemCount() = items.size
 
-    fun submitList(newItems: MutableList<PackageModel>?) {
+    fun submitList(newItems: MutableList<PackagesEntity>?) {
         clear()
         newItems?.let {
             items.addAll(it)

@@ -2,6 +2,7 @@ package com.neqabty.healthcare.modules.profile.presentation
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.neqabty.healthcare.core.ui.BaseActivity
@@ -37,23 +38,23 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                     binding.progressCircular.visibility = View.GONE
                     if (resource.data!!.status){
                         binding.layoutContainer.visibility = View.VISIBLE
-                        binding.fullName.text = "${resource.data.data.name}"
-                        binding.name.text = "${resource.data.data.name}"
-                        binding.email.text = "${resource.data.data.email}"
-                        binding.mobile.text = "${resource.data.data.mobile}"
-                        binding.phone.text = "${resource.data.data.mobile}"
+                        binding.fullName.text = "${resource.data.data.client.name}"
+                        binding.name.text = "${resource.data.data.client.name}"
+                        binding.email.text = "${resource.data.data.client.email}"
+                        binding.mobile.text = "${resource.data.data.client.mobile}"
+                        binding.phone.text = "${resource.data.data.client.mobile}"
                         binding.birthDate.text = ""
-                        binding.address.text = "${resource.data.data.address}"
-                        binding.job.text = "${resource.data.data.job}"
-                        binding.nationalId.text = "${resource.data.data.nationalId}"
-                        mAdapter.submitList(resource.data.data.followers)
+                        binding.address.text = "${resource.data.data.client.address}"
+                        binding.job.text = "${resource.data.data.client.job}"
+                        binding.nationalId.text = "${resource.data.data.client.nationalId}"
+                        mAdapter.submitList(resource.data.data.subscribedPackages[0].packages.followers)
                     }
                 }
                 Status.ERROR ->{
                     binding.progressCircular.visibility = View.GONE
+                    Log.e("jhfdsasdf", resource.message.toString())
                 }
             }
-
 
             }
         }

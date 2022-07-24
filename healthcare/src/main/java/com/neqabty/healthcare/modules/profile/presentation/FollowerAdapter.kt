@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.FollowerItemLayoutBinding
 import com.neqabty.healthcare.modules.profile.domain.entity.profile.FollowerEntity
-import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
-import com.neqabty.healthcare.modules.subscribtions.presentation.view.model.Follower
 import kotlin.collections.ArrayList
 
 

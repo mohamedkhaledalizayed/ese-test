@@ -3,6 +3,7 @@ package com.neqabty.healthcare.modules.search.presentation.view.search
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -46,7 +47,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             }
         }
 
-        filtersViewModel.getPackages()
+        filtersViewModel.getPackages(sharedPreferences.code)
         filtersViewModel.packages.observe(this) {
             it.let { resource ->
 
@@ -60,6 +61,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
+                        Log.e("dfghjk", resource.message.toString())
                     }
                 }
 

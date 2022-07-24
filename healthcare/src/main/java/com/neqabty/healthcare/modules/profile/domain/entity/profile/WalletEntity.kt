@@ -2,7 +2,7 @@ package com.neqabty.healthcare.modules.profile.domain.entity.profile
 
 
 
-data class Wallet(
+data class WalletEntity(
     val invitations: Int,
     val total: Int
 )

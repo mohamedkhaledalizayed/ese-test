@@ -47,7 +47,6 @@
                 android:padding="@dimen/_6sdp"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_12ssp"
-                android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                  />
@@ -212,6 +211,35 @@
                 android:textSize="@dimen/_11ssp"
                 android:textColor="@color/black"/>
 
+            <View
+                android:id="@+id/view6"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/info_details"
+                android:background="@color/gray"/>
+
+            <TextView
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view6"
+                android:text="التفاصيل"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/details_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/details"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/black"/>
+
             <Button
                 android:id="@+id/btn_select"
                 android:layout_width="match_parent"
@@ -222,7 +250,7 @@
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/info_details"
+                app:layout_constraintTop_toBottomOf="@id/details_value"
                 app:layout_constraintEnd_toEndOf="parent"
                 />
 

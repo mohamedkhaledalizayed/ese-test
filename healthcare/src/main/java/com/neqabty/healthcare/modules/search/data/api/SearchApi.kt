@@ -9,6 +9,7 @@ import com.neqabty.healthcare.modules.search.data.model.search.ProvidersResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface SearchApi {
 
@@ -22,6 +23,6 @@ interface SearchApi {
     suspend fun getFilters(): FiltersListModel
 
     @GET("packages")
-    suspend fun getPackages(): PackagesListModel
+    suspend fun getPackages(@Query("entity_code") code: String): PackagesListModel
 
 }

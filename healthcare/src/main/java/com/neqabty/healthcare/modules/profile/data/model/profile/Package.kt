@@ -13,6 +13,8 @@ data class Package(
     val descriptionAr: String,
     @SerializedName("description_en")
     val descriptionEn: Any,
+    @SerializedName("followers")
+    val followers: List<Follower>,
     @SerializedName("hint")
     val hint: String,
     @SerializedName("id")
@@ -29,6 +31,8 @@ data class Package(
     val neddedInfo: Any,
     @SerializedName("recommended")
     val recommended: Boolean,
+    @SerializedName("service_action_code")
+    val serviceActionCode: String,
     @SerializedName("service_code")
     val serviceCode: String,
     @SerializedName("short_description")

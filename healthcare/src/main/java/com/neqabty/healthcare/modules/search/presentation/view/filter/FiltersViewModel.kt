@@ -7,12 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
-import com.neqabty.healthcare.modules.search.data.model.packages.PackageModel
+import com.neqabty.healthcare.modules.search.domain.entity.packages.PackagesEntity
 import com.neqabty.healthcare.modules.search.domain.interactors.GetMedicalProviderstUseCase
 import com.neqabty.healthcare.modules.search.presentation.model.filters.FiltersUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,12 +33,12 @@ class FiltersViewModel @Inject constructor(private val getMedicalProviderstUseCa
         }
     }
 
-    val packages = MutableLiveData<Resource<List<PackageModel>>>()
-    fun getPackages() {
+    val packages = MutableLiveData<Resource<List<PackagesEntity>>>()
+    fun getPackages(code: String) {
         viewModelScope.launch(Dispatchers.IO) {
             packages.postValue(Resource.loading(data = null))
             try {
-                getMedicalProviderstUseCase.getPackages().collect {
+                getMedicalProviderstUseCase.getPackages(code).collect {
                     packages.postValue(Resource.success(data = it))
                 }
             }catch (e:Throwable){

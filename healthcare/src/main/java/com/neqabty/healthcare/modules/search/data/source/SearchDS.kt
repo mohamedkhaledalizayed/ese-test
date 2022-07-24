@@ -22,7 +22,7 @@ class SearchDS @Inject constructor(private val searchApi: SearchApi) {
         return searchApi.getFilters().data
     }
 
-    suspend fun getPackages(): List<PackageModel> {
-        return searchApi.getPackages().data
+    suspend fun getPackages(code: String): List<PackageModel> {
+        return searchApi.getPackages(code).data
     }
 }

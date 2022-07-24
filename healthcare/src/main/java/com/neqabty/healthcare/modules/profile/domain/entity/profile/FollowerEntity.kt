@@ -8,6 +8,6 @@ data class FollowerEntity(
     val image: String,
     val nationalId: String,
     val qrCode: String,
-    val relationType: Int,
-    val subscriberId: String
-    )
+    val relation: RelationEntity,
+    val relationType: Int
+)

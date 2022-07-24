@@ -9,7 +9,6 @@ import com.neqabty.healthcare.modules.profile.domain.entity.profile.ProfileEntit
 import com.neqabty.healthcare.modules.profile.domain.usecases.GetProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

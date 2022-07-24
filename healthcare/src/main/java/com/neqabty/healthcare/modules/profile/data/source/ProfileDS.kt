@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class ProfileDS @Inject constructor(private val profileApi: ProfileApi) {
 
-    suspend fun getProfile(phone: String): ProfileModel{
+    suspend fun getProfile(phone: String): ProfileModel {
         return profileApi.getProfile(phone)
     }
 
