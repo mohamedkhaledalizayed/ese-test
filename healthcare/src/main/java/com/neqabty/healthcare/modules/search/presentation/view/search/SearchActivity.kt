@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySearchBinding
@@ -42,12 +43,18 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         prepareData()
         mAdapter.onItemClickListener = object :
             PackagesAdapter.OnItemClickListener {
-            override fun setOnRegisterClickListener(item: String) {
-                startActivity(Intent(this@SearchActivity, SubscriptionActivity::class.java))
+            override fun setOnRegisterClickListener(serviceActionCode: String) {
+                val intent = Intent(this@SearchActivity, SubscriptionActivity::class.java)
+                intent.putExtra("serviceActionCode", serviceActionCode )
+                startActivity(intent)
             }
         }
 
-        filtersViewModel.getPackages(sharedPreferences.code)
+        if (sharedPreferences.code.isNullOrEmpty()){
+            filtersViewModel.getPackages(Constants.NEQABTY_CODE)
+        }else{
+            filtersViewModel.getPackages(sharedPreferences.code)
+        }
         filtersViewModel.packages.observe(this) {
             it.let { resource ->
 

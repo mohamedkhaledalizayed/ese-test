@@ -86,7 +86,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         }
 
         viewHolder.binding.btnSelect.setOnClickListener {
-            onItemClickListener?.setOnRegisterClickListener("")
+            onItemClickListener?.setOnRegisterClickListener(item.serviceActionCode)
         }
 
     }
@@ -108,7 +108,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnRegisterClickListener(item: String)
+            fun setOnRegisterClickListener(serviceActionCode: String)
     }
 
     class ViewHolder(val binding: PackageItemLayoutBinding) :

@@ -3,7 +3,6 @@ package com.neqabty.healthcare.modules.subscribtions.data.repository
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
-import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
 import com.neqabty.healthcare.modules.subscribtions.data.model.SubscribePostBodyRequest
 import com.neqabty.healthcare.modules.subscribtions.data.model.relationstypes.Relation
 import com.neqabty.healthcare.modules.subscribtions.data.source.SubscriptionSource
@@ -23,43 +22,11 @@ class SubscriptionRepositoryImpl @Inject constructor(private val subscriptionSou
     }
 
     override fun addSubscription(
-        name: String,
-        birthDate: String,
-        email: String,
-        address: String,
-        job: String,
-        mobile: String,
-        nationalId: String,
-        syndicateId: Int,
-        packageId: String,
-        referralNumber: String,
-        personalImage: String,
-        fronIdImage: String,
-        backIdImage: String,
-        followers: List<Followers>
+        subscribePostBodyRequest: SubscribePostBodyRequest
     ): Flow<Boolean> {
-//        val p = personalImage.toBase64()
-        val sub = SubscribePostBodyRequest(
-            address = address,
-            birthDate = birthDate,
-            email = email,
-            fullName = name,
-            job = job,
-            mobile = mobile,
-            nationalId = nationalId,
-            packageId = packageId,
-            referralNumber = null,
-            syndicateId = syndicateId,
-            personalImage = personalImage,
-            frontIdImage = fronIdImage,
-            backIdImage = backIdImage,
-            followers = followers
-        )
         return flow {
             emit(
-                subscriptionSource.addSubscription(
-                    sub
-                )
+                subscriptionSource.addSubscription(subscribePostBodyRequest)
             )
         }
     }

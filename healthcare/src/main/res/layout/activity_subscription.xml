@@ -520,6 +520,62 @@
                                 android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
                         </FrameLayout>
 
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cl_follower_photo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/edit_text"
+                            android:onClick="addFollowerNationalIdFrontImage"
+                            android:padding="@dimen/_9sdp"
+                            app:layout_constraintTop_toBottomOf="@id/spinner_container">
+
+                            <TextView
+                                android:id="@+id/follower_add_image_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/add_image"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/follower_add_image"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:src="@drawable/ic_baseline_attach_file_24"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cl_follower_photo_back"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/edit_text"
+                            android:onClick="addFollowerNationalIdBackImage"
+                            android:padding="@dimen/_9sdp"
+                            app:layout_constraintTop_toBottomOf="@id/cl_follower_photo">
+
+                            <TextView
+                                android:id="@+id/follower_add_image_text_back"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/add_image_back"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/follower_add_image_back"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:src="@drawable/ic_baseline_attach_file_24"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
                         <Button
                             android:id="@+id/btn_add"
                             android:layout_width="match_parent"
@@ -533,7 +589,7 @@
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/spinner_container" />
+                            app:layout_constraintTop_toBottomOf="@id/cl_follower_photo_back" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -644,12 +700,12 @@
                         app:layout_constraintTop_toBottomOf="@id/cl_phone">
 
                         <EditText
-                            android:id="@+id/et_password"
+                            android:id="@+id/et_referral_number"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:hint="@string/invitation_code"
-                            android:inputType="number"
+                            android:inputType="phone"
                             android:padding="@dimen/_10sdp"
                             android:textAlignment="viewStart"
                             android:textColor="@color/black"

@@ -19,12 +19,16 @@ import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
 import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
+import com.neqabty.healthcare.modules.subscribtions.data.model.SubscribePostBodyRequest
 import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.modules.subscribtions.presentation.viewmodel.SubscriptionViewModel
+import com.neqabty.meganeqabty.payment.view.paymentdetails.PaymentDetailsActivity
+import com.neqabty.signup.core.utils.isMobileValid
 import com.neqabty.signup.core.utils.isNationalIdValid
 import com.neqabty.signup.core.utils.isValidEmail
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,6 +45,8 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private var userImageUri: Uri? = null
     private var nationalIdFrontUri: Uri? = null
     private var nationalIdBackUri: Uri? = null
+    private var followerNationalIdFrontUri: Uri? = null
+    private var followerNationalIdBackUri: Uri? = null
     private var followerUri: Uri? = null
     private val relationsAdapter = RelationsAdapter()
     private var relationsList: List<RelationEntity>? = null
@@ -49,16 +55,19 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private lateinit var calendar: Calendar
     override fun getViewBinding() = ActivitySubscriptionBinding.inflate(layoutInflater)
     private val subscriptionViewModel: SubscriptionViewModel by viewModels()
+    private var serviceActionCode: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(title = "تسجيل إشتراك")
 
+        serviceActionCode = intent.getStringExtra("serviceActionCode")
         binding.spRelations.adapter = relationsAdapter
         binding.spRelations.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 if (relationsList != null && i != 0) {
                     relationTypeId = relationsList?.get(i - 1)!!.id
+                    relation = relationsList?.get(i - 1)!!.relation
                 }
             }
 
@@ -70,28 +79,36 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         binding.etBirthDate.isEnabled = false
 
         binding.selectDate.setOnClickListener {
-            datePicker = DatePickerDialog(this@SubscriptionActivity,
+            datePicker = DatePickerDialog(
+                this@SubscriptionActivity,
                 { _, year, monthOfYear, dayOfMonth ->
-                    binding.etBirthDate.setText("$dayOfMonth - ${monthOfYear + 1} - $year")
+                    binding.etBirthDate.setText("$year-${monthOfYear + 1}-$dayOfMonth")
                 },
-                calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
             )
 
             datePicker.show()
         }
         subscriptionViewModel.getRelations()
-        subscriptionViewModel.relations.observe(this){
+        subscriptionViewModel.relations.observe(this) {
             it.let { resource ->
-                when(resource.status){
+                when (resource.status) {
                     Status.LOADING -> {
 
                     }
                     Status.SUCCESS -> {
-                        if (resource.data!!.isNotEmpty()){
+                        if (resource.data!!.isNotEmpty()) {
                             relationsList = resource.data
                             relationsAdapter.submitList(
                                 resource.data.toMutableList()
-                                    .also { list -> list.add(0, RelationEntity(0, "درجة القرابة")) })
+                                    .also { list ->
+                                        list.add(
+                                            0,
+                                            RelationEntity(0, "درجة القرابة")
+                                        )
+                                    })
                         }
                     }
                     Status.ERROR -> {
@@ -107,13 +124,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             }
         }
 
-        binding.spRelations.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
-                relation = binding.spRelations.getItemAtPosition(i).toString()
-            }
-
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-        }
 
         subscriptionViewModel.providers.observe(this) {
 
@@ -128,15 +138,17 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         binding.screenContainer.visibility = View.VISIBLE
                         if (resource.data!!){
-                            finish()
-                            Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "تم الأشتراك بنجاح.", Toast.LENGTH_LONG).show()
+//                            val intent = Intent(this, PaymentDetailsActivity::class.java)
+//                            startActivity(intent)
+//                            finish()
+                        }else{
+                            Toast.makeText(this, "حدث خطا ما, برجاء مراجعة البيانات مرة أخرى.", Toast.LENGTH_LONG).show()
                         }
-                        Log.e("SUCCESS", "${resource.data}")
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
                         binding.screenContainer.visibility = View.VISIBLE
-                        Log.e("ERROR", resource.message.toString())
                     }
                 }
 
@@ -167,26 +179,40 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
-        if (binding.etNational.text.toString().isNationalIdValid()){
+        if (!binding.etNational.text.toString().isNationalIdValid()){
             Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
             return
         }
 
-        if (binding.etNationalId.text.toString().length < 14){
+        if (binding.etNational.text.toString().length < 14){
             Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
             return
         }
 
-        if (binding.spRelations.selectedItemPosition == 0){
+        if (binding.spRelations.selectedItemPosition == 0 || relationTypeId == 0){
             Toast.makeText(this, "من فضلك اختر درجة القرابة.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (followerNationalIdFrontUri == null){
+            Toast.makeText(this, "من فضلك اختر صورة البطاقة الامامية.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (followerNationalIdBackUri == null){
+            Toast.makeText(this, "من فضلك اختر صورة البطاقة الخلفية.", Toast.LENGTH_LONG).show()
             return
         }
 
         val follower = Followers(
             name = binding.etFullName.text.toString(),
-            image = getRealPath(followerUri!!)!!.toBase64(),
+            relation = relation,
+            imageUri = followerUri!!,
             national_id = binding.etNational.text.toString(),
-            relation_type = relationTypeId
+            relation_type = relationTypeId,
+            image = getRealPath(followerUri!!)!!.toBase64(),
+            frontIdImage = getRealPath(followerNationalIdFrontUri!!)!!.toBase64(),
+            backIdImage = getRealPath(followerNationalIdBackUri!!)!!.toBase64()
         )
 
         listFollower.add(follower)
@@ -194,12 +220,17 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         mAdapter.submitList(listFollower)
 
         followerUri = null
-        relationTypeId = 0
+        followerNationalIdFrontUri = null
+        followerNationalIdBackUri = null
         binding.etFullName.setText("")
         binding.etNational.setText("")
         binding.spRelations.setSelection(0)
         binding.followerImage.setImageResource(R.drawable.user)
         binding.followerInfo.visibility = View.GONE
+        binding.followerAddImage.setImageResource(R.drawable.ic_baseline_attach_file_24)
+        binding.followerAddImageText.text = "إرفاق صورة البطاقة الامامية"
+        binding.followerAddImageBack.setImageResource(R.drawable.ic_baseline_attach_file_24)
+        binding.followerAddImageTextBack.text = "إرفاق صورة البطاقة الخلفية"
         binding.addFollower.visibility = View.VISIBLE
         binding.addFollowerText.visibility = View.VISIBLE
         binding.followersRecycler.visibility = View.VISIBLE
@@ -266,6 +297,16 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                     followerUri = data.data
                     binding.followerImage.setImageURI(followerUri)
                 }
+                1005 -> {
+                    followerNationalIdFrontUri = data.data
+                    binding.followerAddImage.setImageResource(R.drawable.success)
+                    binding.followerAddImageText.text = "تم إرفاق الصورة بنجاح."
+                }
+                1006 -> {
+                    followerNationalIdBackUri = data.data
+                    binding.followerAddImageBack.setImageResource(R.drawable.success)
+                    binding.followerAddImageTextBack.text = "تم إرفاق الصورة بنجاح."
+                }
             }
         }
     }
@@ -287,6 +328,16 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
     fun addFollowerImage(view: View) {
         REQUEST_CODE = 1004
+        checkPermissionsAndOpenFilePicker()
+    }
+
+    fun addFollowerNationalIdFrontImage(view: View) {
+        REQUEST_CODE = 1005
+        checkPermissionsAndOpenFilePicker()
+    }
+
+    fun addFollowerNationalIdBackImage(view: View) {
+        REQUEST_CODE = 1006
         checkPermissionsAndOpenFilePicker()
     }
 
@@ -322,7 +373,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
-        if (binding.etNationalId.text.toString().isNationalIdValid()){
+        if (!binding.etNationalId.text.toString().isNationalIdValid()){
             Toast.makeText(this, "من فضلك ادخل رقم صحيح.", Toast.LENGTH_LONG).show()
             return
         }
@@ -357,7 +408,12 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
-        subscriptionViewModel.addSubscription(
+        if (!binding.etReferralNumber.text.toString().isNullOrEmpty() && !binding.etReferralNumber.text.toString().isMobileValid()){
+            Toast.makeText(this, "من فضلك ادخل رقم صحيح.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        val sub = SubscribePostBodyRequest(
             name = binding.etName.text.toString(),
             email = binding.etEmail.text.toString(),
             birthDate = binding.etBirthDate.text.toString(),
@@ -365,14 +421,16 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             job = binding.etJob.text.toString(),
             mobile = binding.etPhone.text.toString(),
             nationalId = binding.etNationalId.text.toString(),
-            syndicateId = 1,
-            packageId = "efd2dde7-51ea-40ef-95b1-663d8b310754",
-            referralNumber = "",
-            fronIdImage = getRealPath(nationalIdFrontUri!!)!!.toBase64(),
-            backIdImage = getRealPath(nationalIdBackUri!!)!!.toBase64(),
+            entityCode = Constants.NEQABTY_CODE,
+            serviceActionCode = "$serviceActionCode",
+            referralNumber = binding.etReferralNumber.text.toString(),
             personalImage = getRealPath(userImageUri!!)!!.toBase64(),
+            frontIdImage = getRealPath(nationalIdFrontUri!!)!!.toBase64(),
+            backIdImage = getRealPath(nationalIdBackUri!!)!!.toBase64(),
             followers = listFollower
         )
+
+        subscriptionViewModel.addSubscription(sub)
     }
 
     private fun getRealPath(uri: Uri): String?{
@@ -386,4 +444,5 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         }
         return null
     }
+
 }

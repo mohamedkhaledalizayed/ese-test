@@ -40,6 +40,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
     private val branchesAdapter = BranchesAdapter()
     private var deliveryMethod = 1
     private var address = ""
+    private var entityBranch = 0
     private var branchesList: List<BranchesEntity>? = null
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -136,7 +137,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         binding.spBranches.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 if (branchesList != null && i != 0) {
-                    address = branchesList?.get(i - 1)!!.address
+                    entityBranch = branchesList?.get(i - 1)!!.entity!!.id
                 }
             }
 
@@ -269,10 +270,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                     return@setOnClickListener
                 }
 
-                if (address.isNullOrEmpty()){
-                    Toast.makeText(this, "من فضلك ادخل العنوان", Toast.LENGTH_LONG).show()
-                    return@setOnClickListener
+                if (deliveryMethod == 2){
+                    address = ""
                 }
+
+
                 binding.btnNext.isEnabled = false
                 paymentViewModel.getPaymentInfo(
                     PaymentBody(
@@ -283,6 +285,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             amount = totalAmount,
                             membershipId = number.toInt(),
                             address = address,
+                            entityBranch = entityBranch,
                             deliveryMethod = deliveryMethod
                         )
                     )

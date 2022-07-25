@@ -22,6 +22,8 @@ class PaymentBodyObject(
     val amount: String = "",
     @SerializedName("address")
     val address: String = "",
+    @SerializedName("entity_branch")
+    val entityBranch: Int = 0,
     @SerializedName("delivery_method")
     val deliveryMethod: Int = 0,
     @SerializedName("membership_id")
