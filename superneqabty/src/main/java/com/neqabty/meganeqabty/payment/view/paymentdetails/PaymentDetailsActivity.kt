@@ -36,11 +36,13 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
     private var serviceCode = ""
     private var serviceActionCode = ""
     private var number = ""
-    private var totalAmount = ""
+    private var totalAmount = 0
+    private var deliveryFees = 0
+    private var paymentFees = 0
     private val branchesAdapter = BranchesAdapter()
     private var deliveryMethod = 1
     private var address = ""
-    private var entityBranch = 0
+    private var entityBranch = 1
     private var branchesList: List<BranchesEntity>? = null
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,11 +77,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             binding.btnNext.visibility = View.GONE
                             showDialog()
                         } else {
-                            val total =
-                                paymentViewModel.payment.value?.data?.receipt?.cardTotalPrice.toString()
-                            totalAmount =
-                                paymentViewModel.payment.value?.data?.receipt?.details?.totalPrice.toString()
-                            binding.tvAmount.text = "الاجمالى بعد الضريبة : $total"
+                            totalAmount = resource.data.receipt.details.totalPrice.toInt()
+                            paymentFees = resource.data.receipt.cardFees.toInt()
+                            deliveryFees = resource.data.deliveryMethodsEntity[0].price.toDouble().toInt()
+                            updateTotal()
                             binding.lastFeeYearValue.text =
                                 "${resource.data.receipt.details.lastFeeYear} "
                             binding.currentFeeYearValue.text =
@@ -178,13 +179,18 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             binding.spinnerContainer.visibility = View.GONE
             binding.address.visibility = View.VISIBLE
             binding.spBranches.setSelection(0)
+            deliveryFees = paymentViewModel.payment.value?.data!!.deliveryMethodsEntity[0].price.toDouble().toInt()
+            updateTotal()
         }
 
         binding.rbBranches.setOnClickListener {
             deliveryMethod = 2
             binding.address.visibility = View.GONE
             binding.spinnerContainer.visibility = View.VISIBLE
+            deliveryFees = paymentViewModel.payment.value?.data!!.deliveryMethodsEntity[1].price.toDouble().toInt()
+            updateTotal()
         }
+
             paymentViewModel.paymentInfo.observe(this) {
 
                 it?.let { resource ->
@@ -215,34 +221,31 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
                 if (b) {
                     paymentMethod = "card"
-                    val total =
-                        paymentViewModel.payment.value?.data?.receipt?.cardTotalPrice.toString()
+                    paymentFees = paymentViewModel.payment.value?.data?.receipt?.cardFees!!.toInt()
                     binding.ivCard.visibility = View.VISIBLE
                     binding.llChannels.visibility = View.GONE
                     binding.ivFawry.visibility = View.GONE
-                    binding.tvAmount.text = "الاجمالى بعد الضريبة : $total"
+                    updateTotal()
                 }
             }
             binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
                 if (b) {
                     paymentMethod = "code"
-                    val total =
-                        paymentViewModel.payment.value?.data?.receipt?.codeTotalPrice.toString()
+                    paymentFees = paymentViewModel.payment.value?.data?.receipt?.codeFees!!.toInt()
                     binding.llChannels.visibility = View.VISIBLE
                     binding.ivCard.visibility = View.GONE
                     binding.ivFawry.visibility = View.GONE
-                    binding.tvAmount.text = "الاجمالى بعد الضريبة : $total"
+                    updateTotal()
                 }
             }
             binding.rbFawry.setOnCheckedChangeListener { compoundButton, b ->
                 if (b) {
                     paymentMethod = "fawry"
-                    val total =
-                        paymentViewModel.payment.value?.data?.receipt?.codeTotalPrice.toString()
+                    paymentFees = paymentViewModel.payment.value?.data?.receipt?.codeFees!!.toInt()
                     binding.ivFawry.visibility = View.VISIBLE
                     binding.llChannels.visibility = View.GONE
                     binding.ivCard.visibility = View.GONE
-                    binding.tvAmount.text = "الاجمالى بعد الضريبة : $total"
+                    updateTotal()
                 }
             }
 
@@ -282,7 +285,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             serviceCode = serviceCode,
                             serviceActionCode = serviceActionCode,
                             paymentMethod = paymentMethod,
-                            amount = totalAmount,
+                            amount = "${totalAmount + paymentFees + deliveryFees}",
                             membershipId = number.toInt(),
                             address = address,
                             entityBranch = entityBranch,
@@ -292,6 +295,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                 )
             }
         }
+
+    private fun updateTotal(){
+        binding.tvAmount.text = "الاجمالى بعد الضريبة : ${totalAmount + paymentFees}"
+        binding.tvAmountAfterDelivery.text =  "الاجمالى بعد التوصيل : ${totalAmount + paymentFees + deliveryFees}"
+    }
 
         private fun showDialog() {
 

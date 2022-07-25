@@ -99,7 +99,18 @@ fun ReceiptResponse.toReceiptDataEntity(): ReceiptDataEntity{
         member = member.toMemberEntity(),
         receipt = receipt?.toReceiptEntity(),
         service = service.toServiceEntity(),
+        deliveryMethodsEntity = deliveryMethods.map { it.toDeliveryMethodsEntity() },
         title = title
+    )
+}
+
+private fun DeliveryMethod.toDeliveryMethodsEntity(): DeliveryMethodsEntity{
+    return DeliveryMethodsEntity(
+        createdAt = createdAt,
+        id = id,
+        method = method,
+        price = price,
+        updatedAt = updatedAt
     )
 }
 

@@ -23,7 +23,6 @@ import java.util.regex.Pattern
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private lateinit var dialog: AlertDialog
     private val loginViewModel: LoginViewModel by viewModels()
-    private lateinit var toolbar: Toolbar
     private var isHidden = true
 
     override fun getViewBinding() = ActivityLoginBinding.inflate(layoutInflater)
@@ -52,16 +51,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                     Status.SUCCESS -> {
                         dialog.dismiss()
-                        if (resource.data!!.user.nationalId.isNotEmpty()){
+                        if (resource.data!!.user.account.nationalId.isNotEmpty()){
                             sharedPreferences.isPhoneVerified = true
                             sharedPreferences.token = resource.data.token
-                            sharedPreferences.mobile = resource.data.user.mobile
-                            sharedPreferences.name = resource.data.user.fullName
-                            sharedPreferences.nationalId = resource.data.user.nationalId
-                            sharedPreferences.userImage = "${resource.data.user.image}"
+                            sharedPreferences.mobile = resource.data.user.account.mobile
+                            sharedPreferences.name = resource.data.user.account.fullName
+                            sharedPreferences.nationalId = resource.data.user.account.nationalId
+                            sharedPreferences.userImage = "${resource.data.user.account.image}"
                             finish()
                         }else{
-                            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "حدث خطا", Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {
