@@ -139,9 +139,12 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                         binding.screenContainer.visibility = View.VISIBLE
                         if (resource.data!!){
                             Toast.makeText(this, "تم الأشتراك بنجاح.", Toast.LENGTH_LONG).show()
-//                            val intent = Intent(this, PaymentDetailsActivity::class.java)
-//                            startActivity(intent)
-//                            finish()
+                            val intent = Intent(this, PaymentDetailsActivity::class.java)
+                            intent.putExtra("code", "s002")
+                            intent.putExtra("service_action_code", "a03")
+                            intent.putExtra("number", "8000")
+                            startActivity(intent)
+                            finish()
                         }else{
                             Toast.makeText(this, "حدث خطا ما, برجاء مراجعة البيانات مرة أخرى.", Toast.LENGTH_LONG).show()
                         }

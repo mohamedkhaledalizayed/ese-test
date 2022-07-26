@@ -26,5 +26,5 @@ data class Follower(
     @SerializedName("updated_at")
     val updatedAt: String,
     @SerializedName("user_number")
-    val userNumber: Any
+    val userNumber: String
 )

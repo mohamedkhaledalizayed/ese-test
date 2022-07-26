@@ -8,6 +8,5 @@ data class PackageEntity(
     val hint: String,
     val id: String,
     val nameAr: String,
-    val serviceActionCode: String,
     val shortDescription: String,
 )

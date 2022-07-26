@@ -22,19 +22,17 @@ data class Package(
     @SerializedName("insurance_amount")
     val insuranceAmount: Any,
     @SerializedName("insurance_company_id")
-    val insuranceCompanyId: Int,
+    val insuranceCompanyId: Any,
     @SerializedName("name_ar")
     val nameAr: String,
     @SerializedName("name_en")
     val nameEn: Any,
     @SerializedName("nedded_info")
     val neddedInfo: Any,
+    @SerializedName("paid")
+    val paid: Boolean,
     @SerializedName("recommended")
     val recommended: Boolean,
-    @SerializedName("service_action_code")
-    val serviceActionCode: String,
-    @SerializedName("service_code")
-    val serviceCode: String,
     @SerializedName("short_description")
     val shortDescription: String,
     @SerializedName("target_groups")

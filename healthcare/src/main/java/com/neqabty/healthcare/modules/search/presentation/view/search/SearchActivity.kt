@@ -24,6 +24,7 @@ import com.neqabty.healthcare.modules.search.presentation.view.searchresult.sele
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.selectedProfession
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.selectedProviders
 import com.neqabty.healthcare.modules.subscribtions.presentation.view.SubscriptionActivity
+import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -40,13 +41,17 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         setupToolbar(title = "نقابتي صحة مستدامة")
 
         binding.packagesRecycler.adapter = mAdapter
-        prepareData()
         mAdapter.onItemClickListener = object :
             PackagesAdapter.OnItemClickListener {
             override fun setOnRegisterClickListener(serviceActionCode: String) {
-                val intent = Intent(this@SearchActivity, SubscriptionActivity::class.java)
-                intent.putExtra("serviceActionCode", serviceActionCode )
-                startActivity(intent)
+                if (sharedPreferences.isPhoneVerified){
+                    val intent = Intent(this@SearchActivity, SubscriptionActivity::class.java)
+                    intent.putExtra("serviceActionCode", serviceActionCode )
+                    startActivity(intent)
+                }else{
+                    val intent = Intent(this@SearchActivity, LoginActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
 
@@ -68,7 +73,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
-                        Log.e("dfghjk", resource.message.toString())
                     }
                 }
 
@@ -91,14 +95,5 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 return false
             }
         })
-    }
-
-    private fun prepareData(){
-        val list = mutableListOf<PackageInfo>()
-        list.add(PackageInfo("الباقة الفضية"))
-        list.add(PackageInfo("الباقة الذهبية"))
-        list.add(PackageInfo("الباقة البلاتينية"))
-
-//        mAdapter.submitList(list.toMutableList())
     }
 }

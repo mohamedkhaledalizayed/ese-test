@@ -7,10 +7,8 @@ import com.google.gson.annotations.SerializedName
 data class Data(
     @SerializedName("client")
     val client: Client,
-    @SerializedName("paid")
-    val paid: Boolean,
-    @SerializedName("subscribed_packages")
-    val subscribedPackages: List<SubscribedPackage>,
+    @SerializedName("subscribed")
+    val subscribed: List<Subscribed>,
     @SerializedName("wallet")
     val wallet: Wallet
 )

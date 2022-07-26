@@ -21,6 +21,7 @@ import com.neqabty.meganeqabty.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.meganeqabty.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.meganeqabty.payment.view.PaymentViewModel
 import com.neqabty.meganeqabty.payment.view.paymentstatus.PaymentStatusActivity
+import com.neqabty.meganeqabty.profile.view.update.UpdateInfoActivity
 import dagger.hilt.android.AndroidEntryPoint
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
@@ -64,11 +65,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                     }
                     com.neqabty.meganeqabty.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
-                        binding.llContent.visibility = View.VISIBLE
-                        binding.tvService.text = resource.data?.service?.name
-                        binding.tvName.text = "الاسم : ${resource.data?.member?.name}"
-                        binding.tvMemberNumber.text =
-                            "رقم العضوية : ${intent.getStringExtra("number")!!}"
+
                         if (resource.data?.receipt == null) {
                             binding.cardLayout.visibility = View.GONE
                             binding.tvDetails.visibility = View.GONE
@@ -77,6 +74,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             binding.btnNext.visibility = View.GONE
                             showDialog()
                         } else {
+                            binding.llContent.visibility = View.VISIBLE
+                            binding.tvService.text = resource.data.service.name
+                            binding.tvName.text = "الاسم : ${resource.data.member.name}"
+                            binding.tvMemberNumber.text =
+                                "رقم العضوية : ${intent.getStringExtra("number")!!}"
                             totalAmount = resource.data.receipt.details.totalPrice.toInt()
                             paymentFees = resource.data.receipt.cardFees.toInt()
                             deliveryFees = resource.data.deliveryMethodsEntity[0].price.toDouble().toInt()
@@ -97,7 +99,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                     }
                     com.neqabty.meganeqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                        if (resource.message.toString() == "400"){
+                            showAlertDialog()
+                        }
                     }
                 }
             }
@@ -296,9 +300,34 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             }
         }
 
+    private fun showAlertDialog() {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage("نأسف لعدم اتمام السداد وذلك بسبب انتهاء صلاحية ترخيص الوزارة الخاص بكم برجاء التجديد حتى يتم استكمال عملية السداد")
+        alertDialog.setCancelable(false)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافقة"
+        ) { dialog, _ ->
+            val intent = Intent(this, UpdateInfoActivity::class.java)
+            startActivity(intent)
+            dialog.dismiss()
+            finish()
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            finish()
+        }
+        alertDialog.show()
+
+    }
+
+
     private fun updateTotal(){
-        binding.tvAmount.text = "الاجمالى بعد الضريبة : ${totalAmount + paymentFees}"
-        binding.tvAmountAfterDelivery.text =  "الاجمالى بعد التوصيل : ${totalAmount + paymentFees + deliveryFees}"
+        binding.tvAmount.text = "الاجمالى بعد ضريبة الدفع : ${totalAmount + paymentFees}"
+        binding.tvAmountAfterDelivery.text =  "الاجمالى بعد ضريبة التوصيل : ${totalAmount + paymentFees + deliveryFees}"
     }
 
         private fun showDialog() {

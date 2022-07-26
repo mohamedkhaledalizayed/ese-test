@@ -128,7 +128,7 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
         return if (throwable is HttpException) {
             when (throwable.code()) {
                 400 -> {
-                    "الرجاء تجديد ترخيص الوزارة"
+                    "400"
                 }
                 401 -> {
                     "لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى"

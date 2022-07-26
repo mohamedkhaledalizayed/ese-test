@@ -41,7 +41,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
 
         viewHolder.binding.followerName.text = follower.fullName
         viewHolder.binding.nationalId.text = follower.nationalId
-        viewHolder.binding.relation.text = follower.relationType.toString()
+        viewHolder.binding.relation.text = follower.relation.relation
         if (!follower.image.isNullOrEmpty()){
             val decodedString: ByteArray = Base64.decode(follower.image, Base64.DEFAULT)
             val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)

@@ -25,6 +25,8 @@ data class Client(
     val personalImage: String,
     @SerializedName("qr_code")
     val qrCode: String,
+    @SerializedName("subscribed_package")
+    val subscribedPackage: Boolean,
     @SerializedName("syndicate_id")
     val syndicateId: Int,
     @SerializedName("updated_at")

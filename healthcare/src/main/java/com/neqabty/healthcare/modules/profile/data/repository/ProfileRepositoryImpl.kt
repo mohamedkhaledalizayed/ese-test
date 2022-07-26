@@ -1,7 +1,6 @@
 package com.neqabty.healthcare.modules.profile.data.repository
 
 import com.neqabty.healthcare.modules.profile.data.model.profile.*
-import com.neqabty.healthcare.modules.profile.data.model.profile.Wallet
 import com.neqabty.healthcare.modules.profile.data.source.ProfileDS
 import com.neqabty.healthcare.modules.profile.domain.entity.profile.*
 import com.neqabty.healthcare.modules.profile.domain.repository.ProfileRepository
@@ -30,8 +29,7 @@ private fun ProfileModel.toProfileEntity(): ProfileEntity{
 private fun Data.toDataEntity(): DataEntity{
     return DataEntity(
         client = client.toClientEntity(),
-        paid = paid,
-        subscribedPackages = subscribedPackages.map { it.toSubscribedPackageEntity() },
+        subscribedPackages = subscribed.map { it.toSubscribedPackageEntity() },
         wallet = wallet.toWalletEntity()
     )
 }
@@ -51,7 +49,7 @@ private fun Client.toClientEntity(): ClientEntity{
     )
 }
 
-private fun SubscribedPackage.toSubscribedPackageEntity(): SubscribedPackageEntity{
+private fun Subscribed.toSubscribedPackageEntity(): SubscribedPackageEntity{
     return SubscribedPackageEntity(
         packages = packages.toPackageEntity()
     )
@@ -64,7 +62,6 @@ private fun Package.toPackageEntity(): PackageEntity{
         hint = hint,
         id = id,
         nameAr = nameAr,
-        serviceActionCode = serviceActionCode,
         shortDescription = shortDescription
     )
 }
