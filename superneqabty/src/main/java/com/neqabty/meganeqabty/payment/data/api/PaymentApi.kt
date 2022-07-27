@@ -8,7 +8,6 @@ import com.neqabty.meganeqabty.payment.data.model.paymentmethods.PaymentMethodsR
 import com.neqabty.meganeqabty.payment.data.model.paymentstatus.PaymentStatusModel
 import com.neqabty.meganeqabty.payment.data.model.services.ServicesListModel
 import com.neqabty.meganeqabty.payment.data.model.servicesaction.ServiceActionsModel
-import com.neqabty.meganeqabty.profile.data.model.profile.ProfileModel
 import retrofit2.http.*
 
 interface PaymentApi {

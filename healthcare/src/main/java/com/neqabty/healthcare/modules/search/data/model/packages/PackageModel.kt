@@ -25,7 +25,7 @@ data class PackageModel(
     @SerializedName("nedded_info")
     val neddedInfo: String?,
     @SerializedName("price")
-    val price: Int,
+    val price: Double,
     @SerializedName("recommended")
     val recommended: Boolean,
     @SerializedName("service_action_code")

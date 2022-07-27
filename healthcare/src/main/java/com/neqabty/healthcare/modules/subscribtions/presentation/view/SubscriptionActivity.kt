@@ -11,7 +11,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -23,11 +22,11 @@ import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
+import com.neqabty.healthcare.modules.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
 import com.neqabty.healthcare.modules.subscribtions.data.model.SubscribePostBodyRequest
 import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.modules.subscribtions.presentation.viewmodel.SubscriptionViewModel
-import com.neqabty.meganeqabty.payment.view.paymentdetails.PaymentDetailsActivity
 import com.neqabty.signup.core.utils.isMobileValid
 import com.neqabty.signup.core.utils.isNationalIdValid
 import com.neqabty.signup.core.utils.isValidEmail
@@ -55,12 +54,18 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private lateinit var calendar: Calendar
     override fun getViewBinding() = ActivitySubscriptionBinding.inflate(layoutInflater)
     private val subscriptionViewModel: SubscriptionViewModel by viewModels()
+    private var name: String? = ""
+    private var price: Double? = 0.0
+    private var serviceCode: String? = ""
     private var serviceActionCode: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(title = "تسجيل إشتراك")
 
+        name = intent.getStringExtra("name")
+        price = intent.getDoubleExtra("price", 0.0)
+        serviceCode = intent.getStringExtra("serviceCode")
         serviceActionCode = intent.getStringExtra("serviceActionCode")
         binding.spRelations.adapter = relationsAdapter
         binding.spRelations.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -139,10 +144,11 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                         binding.screenContainer.visibility = View.VISIBLE
                         if (resource.data!!){
                             Toast.makeText(this, "تم الأشتراك بنجاح.", Toast.LENGTH_LONG).show()
-                            val intent = Intent(this, PaymentDetailsActivity::class.java)
-                            intent.putExtra("code", "s002")
-                            intent.putExtra("service_action_code", "a03")
-                            intent.putExtra("number", "8000")
+                            val intent = Intent(this, SehaPaymentActivity::class.java)
+                            intent.putExtra("name", name)
+                            intent.putExtra("price", price)
+                            intent.putExtra("serviceCode", serviceCode)
+                            intent.putExtra("serviceActionCode", serviceActionCode)
                             startActivity(intent)
                             finish()
                         }else{

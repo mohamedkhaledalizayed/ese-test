@@ -39,31 +39,30 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                     com.neqabty.meganeqabty.core.utils.Status.SUCCESS -> {
                         binding.layoutContainer.visibility = View.VISIBLE
                         binding.progressCircular.visibility = View.GONE
-                        if (resource.data?.entityPaymentStatus!!){
-                            binding.nameValue.text = "${resource.data.member_name}"
-                            binding.membershipNumberValue.text = "${resource.data.itemId}"
-                            if (!resource.data.mobile.isNullOrEmpty()){
-                                binding.phoneValue.text = "${resource.data.mobile}"
+                        if (!resource.data?.id.isNullOrEmpty()){
+                            binding.nameValue.text = "${resource.data?.member_name}"
+                            binding.membershipNumberValue.text = "${resource.data?.itemId}"
+                            if (!resource.data?.mobile.isNullOrEmpty()){
+                                binding.phoneValue.text = "${resource.data?.mobile}"
                             }
-                            binding.syndicateValue.text = "${resource.data.entity}"
-                            binding.serviceNameValue.text = "${resource.data.serviceAction}"
-                            binding.receiptNumberValue.text = "${resource.data.gatewayReferenceId}"
-                            binding.receiptDateValue.text = AppUtils().dateFormat(resource.data.createdAt)
-                            binding.priceValue.text = "${resource.data.netAmount} جنيه "
-                            binding.feesValue.text = "${resource.data.totalFees}  جنيه"
-                            binding.totalValue.text = "${resource.data.totalAmount}  جنيه"
+                            binding.syndicateValue.text = "${resource.data?.entity}"
+                            binding.serviceNameValue.text = "${resource.data?.serviceAction}"
+                            binding.receiptNumberValue.text = "${resource.data?.gatewayReferenceId}"
+                            binding.receiptDateValue.text = AppUtils().dateFormat(resource.data!!.createdAt)
+                            binding.priceValue.text = "${resource.data?.netAmount} جنيه "
+                            binding.feesValue.text = "${resource.data?.totalFees}  جنيه"
+                            binding.totalValue.text = "${resource.data?.totalAmount}  جنيه"
 
                         }else{
                             binding.receiptLayout.visibility = View.GONE
                             Picasso.get().load(R.drawable.cancel).into(binding.statusImage)
-                            binding.statusText.text = "عملية فاشلة"
+                            binding.statusText.text = "عملية فاشلة."
                             binding.statusText.setTextColor(resources.getColor(R.color.cgred))
-                            binding.statusDetails.text = "لم يتم دفع الفاتورةز"
+                            binding.statusDetails.text = "لم يتم دفع الفاتورة."
                         }
                     }
                     com.neqabty.meganeqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                         Log.e("test", resource.message.toString())
                     }
                 }

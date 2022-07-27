@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class PaymentStatusModel(
     @SerializedName("account")
-    val account: Any,
+    val account: Account,
     @SerializedName("cashier_url")
     val cashierUrl: Any,
     @SerializedName("created_at")
@@ -16,25 +16,25 @@ data class PaymentStatusModel(
     @SerializedName("entity_fees")
     val entityFees: String,
     @SerializedName("entity_payment_status")
-    val entityPaymentStatus: Boolean,
+    val entityPaymentStatus: Boolean?,
     @SerializedName("entity_ps_txt")
     val entityPsTxt: String,
     @SerializedName("gateway_fees")
     val gatewayFees: String,
     @SerializedName("gateway_payment_status")
-    val gatewayPaymentStatus: Boolean,
+    val gatewayPaymentStatus: Boolean?,
     @SerializedName("gateway_ps_txt")
-    val gatewayPsTxt: String,
+    val gatewayPsTxt: String?,
     @SerializedName("gateway_reference_id")
-    val gatewayReferenceId: String,
+    val gatewayReferenceId: String?,
     @SerializedName("id")
     val id: String,
     @SerializedName("member_name")
-    val memberName: String,
+    val memberName: Any,
     @SerializedName("membership_id")
-    val membershipId: Int,
+    val membershipId: Int?,
     @SerializedName("mobile")
-    val mobile: String?,
+    val mobile: Any,
     @SerializedName("net_amount")
     val netAmount: String,
     @SerializedName("payment_gateway_reference_id")

@@ -150,5 +150,6 @@ dependencies {
     implementation project(':login')
     implementation project(':news')
     implementation project(':signup')
-
+    implementation(name: 'cashier-sdk-1.0.8', ext: 'aar')
+    implementation(name: 'cowpaysdk', ext: 'aar')
 }

@@ -16,6 +16,7 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySearchBinding
 import com.neqabty.healthcare.modules.offers.presentation.view.offers.OffersActivity
+import com.neqabty.healthcare.modules.search.domain.entity.packages.PackagesEntity
 import com.neqabty.healthcare.modules.search.presentation.model.filters.ItemUi
 import com.neqabty.healthcare.modules.search.presentation.model.search.PackageInfo
 import com.neqabty.healthcare.modules.search.presentation.view.filter.FiltersViewModel
@@ -43,10 +44,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         binding.packagesRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             PackagesAdapter.OnItemClickListener {
-            override fun setOnRegisterClickListener(serviceActionCode: String) {
+            override fun setOnRegisterClickListener(item: PackagesEntity) {
                 if (sharedPreferences.isPhoneVerified){
                     val intent = Intent(this@SearchActivity, SubscriptionActivity::class.java)
-                    intent.putExtra("serviceActionCode", serviceActionCode )
+                    intent.putExtra("name", item.name )
+                    intent.putExtra("price", item.price )
+                    intent.putExtra("serviceCode", item.serviceCode )
+                    intent.putExtra("serviceActionCode", item.serviceActionCode )
                     startActivity(intent)
                 }else{
                     val intent = Intent(this@SearchActivity, LoginActivity::class.java)

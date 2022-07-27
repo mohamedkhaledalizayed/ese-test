@@ -11,7 +11,7 @@ data class PackagesEntity(
     val id: String,
     val maxFollower: Int,
     val name: String,
-    val price: Int,
+    val price: Double,
     val recommended: Boolean,
     val serviceActionCode: String,
     val serviceCode: String,
