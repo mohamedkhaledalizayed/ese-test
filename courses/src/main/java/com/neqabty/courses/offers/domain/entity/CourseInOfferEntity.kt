@@ -1,5 +1,9 @@
 package com.neqabty.courses.offers.domain.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class CourseInOfferEntity(
     val id: Int = 0,
     val image: String = "",
@@ -8,4 +12,4 @@ data class CourseInOfferEntity(
     val prerequisites: String = "",
     val syllabus: String = "",
     val title: String = ""
-)
+) : Parcelable

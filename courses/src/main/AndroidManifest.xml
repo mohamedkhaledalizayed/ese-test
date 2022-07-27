@@ -18,6 +18,9 @@
         android:theme="@style/Theme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name="com.neqabty.courses.offers.presentation.view.OfferDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name="com.neqabty.courses.offers.presentation.view.OffersActivity"
             android:exported="false" />
         <activity

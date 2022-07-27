@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_10sdp"
+    tools:context="com.neqabty.courses.offers.presentation.view.OfferDetailsActivity">
+
+    <TextView
+        android:id="@+id/titleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AutoCad"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/startDateIcon"
+        android:layout_width="@dimen/_22sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTV" />
+
+    <TextView
+        android:id="@+id/startDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:text=" :تاريخ البدء"
+        app:layout_constraintStart_toEndOf="@id/startDateIcon"
+        app:layout_constraintTop_toTopOf="@id/startDateIcon" />
+
+    <TextView
+        android:id="@+id/startDateValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:text="١٢-٢٢-١٢٣١"
+        app:layout_constraintBottom_toBottomOf="@id/startDateTitle"
+        app:layout_constraintStart_toEndOf="@id/startDateTitle"
+        app:layout_constraintTop_toTopOf="@id/startDateTitle" />
+
+    <ImageView
+        android:id="@+id/endDateIcon"
+        android:layout_width="@dimen/_22sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/startDateIcon" />
+
+    <TextView
+        android:id="@+id/endDateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:text=" :تاريخ الانتهاء"
+        app:layout_constraintBottom_toBottomOf="@id/endDateIcon"
+        app:layout_constraintStart_toEndOf="@id/endDateIcon"
+        app:layout_constraintTop_toTopOf="@id/endDateIcon" />
+
+    <TextView
+        android:id="@+id/endDateValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:text="١٢-٢٢-١٢٣١"
+        app:layout_constraintBottom_toBottomOf="@id/endDateTitle"
+        app:layout_constraintStart_toEndOf="@id/endDateTitle"
+        app:layout_constraintTop_toTopOf="@id/endDateTitle" />
+
+    <View
+        android:id="@+id/separator1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@color/grey_font"
+        app:layout_constraintTop_toBottomOf="@id/endDateIcon" />
+
+    <ImageView
+        android:id="@+id/contactIcon"
+        android:layout_width="@dimen/_22sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:src="@drawable/ic_phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/separator1" />
+
+    <TextView
+        android:id="@+id/contactTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:text=" للتواصل"
+        app:layout_constraintStart_toEndOf="@id/contactIcon"
+        app:layout_constraintTop_toTopOf="@id/contactIcon" />
+
+    <TextView
+        android:id="@+id/contactValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:text="١٢-٢٢-١٢٣١"
+        app:layout_constraintBottom_toBottomOf="@id/contactTitle"
+        app:layout_constraintStart_toEndOf="@id/contactTitle"
+        app:layout_constraintTop_toTopOf="@id/contactTitle" />
+
+    <ImageView
+        android:id="@+id/peopleIcon"
+        android:layout_width="@dimen/_22sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:src="@drawable/ic_people"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contactIcon" />
+
+    <TextView
+        android:id="@+id/peopleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:text="عدد المشاركين: "
+        app:layout_constraintStart_toEndOf="@id/peopleIcon"
+        app:layout_constraintTop_toTopOf="@id/peopleIcon" />
+
+    <TextView
+        android:id="@+id/peopleValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:text="١٢-٢٢-١٢٣١"
+        app:layout_constraintBottom_toBottomOf="@id/peopleTitle"
+        app:layout_constraintStart_toEndOf="@id/peopleTitle"
+        app:layout_constraintTop_toTopOf="@id/peopleTitle" />
+
+    <TextView
+        android:id="@+id/datesTitleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="المواعيد"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/peopleIcon" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/datesRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/pricingRv"
+        app:layout_constraintTop_toBottomOf="@id/datesTitleTv"
+        tools:listitem="@layout/dates_item_layout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pricingRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/datesRv"
+        tools:listitem="@layout/pricing_item_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

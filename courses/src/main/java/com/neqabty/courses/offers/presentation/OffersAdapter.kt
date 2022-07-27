@@ -6,14 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.courses.databinding.OfferItemLayoutBinding
 import com.neqabty.courses.offers.domain.entity.OfferEntity
 
-class OffersAdapter(private var offersList:List<OfferEntity> = listOf()) : RecyclerView.Adapter<OffersAdapter.ViewHolder>() {
-    class ViewHolder(private val binding: OfferItemLayoutBinding):RecyclerView.ViewHolder(binding.root){
+class OffersAdapter(private var offersList:List<OfferEntity> = listOf(),private val onClick:(offer:OfferEntity)->Unit) : RecyclerView.Adapter<OffersAdapter.ViewHolder>() {
+    inner class ViewHolder(private val binding: OfferItemLayoutBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(offer:OfferEntity){
             binding.titleTV.text = offer.title
             binding.startDateValue.text = offer.startDate
             binding.endDateValue.text = offer.endDate
             binding.contactValue.text = offer.contact
             binding.peopleValue.text = offer.numOfTrainees.toString()
+            binding.root.setOnClickListener {
+                onClick(offer)
+            }
         }
     }
     fun submitList(offers:List<OfferEntity>){

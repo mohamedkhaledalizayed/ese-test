@@ -1,5 +1,6 @@
 package com.neqabty.courses.offers.presentation.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -21,7 +22,9 @@ class OffersActivity : AppCompatActivity() {
         setContentView(binding.root)
         val courseId = intent.getIntExtra(COURSEID, -1)
         viewModel.getCoursesOffers(courseId)
-        val adapter = OffersAdapter()
+        val adapter = OffersAdapter(){
+            startActivity(Intent(this,OfferDetailsActivity::class.java).putExtra(OFFERDETAILS,it))
+        }
         binding.offersRv.adapter = adapter
         viewModel.offers.observe(this){
             adapter.submitList(it)

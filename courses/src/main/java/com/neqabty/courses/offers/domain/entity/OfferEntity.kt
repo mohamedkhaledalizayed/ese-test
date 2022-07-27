@@ -1,5 +1,9 @@
 package com.neqabty.courses.offers.domain.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class OfferEntity(
     val address: String = "",
     val appointmentEntities: List<AppointmentEntity> = listOf(),
@@ -17,4 +21,4 @@ data class OfferEntity(
     val reservationEntities: List<ReservationEntity> = listOf(),
     val startDate: String = "",
     val title: String = ""
-)
+) : Parcelable
