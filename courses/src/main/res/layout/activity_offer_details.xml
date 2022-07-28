@@ -151,6 +151,7 @@
         android:id="@+id/datesRv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_6sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/pricingRv"
         app:layout_constraintTop_toBottomOf="@id/datesTitleTv"
