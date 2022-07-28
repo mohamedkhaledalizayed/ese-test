@@ -9,9 +9,9 @@ import com.neqabty.courses.offers.domain.entity.AppointmentEntity
 class OfferDatesAdapter constructor(private var dates : List<AppointmentEntity> = listOf()):RecyclerView.Adapter<OfferDatesAdapter.ViewHolder>() {
     class ViewHolder(private val binding:DatesItemLayoutBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(date:AppointmentEntity){
-            binding.dayTitleTv.text = date.day.toString()
-            binding.fromTimeTv.text = date.timeFrom
-            binding.toTimeTv.text = date.timeTo
+            binding.priceTv.text = "Saturday"
+            binding.studentTypeTv.text = date.timeFrom
+            binding.endTime.text = date.timeTo
         }
     }
     fun submitList(list:List<AppointmentEntity>){
@@ -19,7 +19,9 @@ class OfferDatesAdapter constructor(private var dates : List<AppointmentEntity> 
         notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(DatesItemLayoutBinding.inflate(LayoutInflater.from(parent.context)))
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = DatesItemLayoutBinding.inflate(layoutInflater,parent,false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

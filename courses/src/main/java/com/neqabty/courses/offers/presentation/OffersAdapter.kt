@@ -25,7 +25,7 @@ class OffersAdapter(private var offersList:List<OfferEntity> = listOf(),private 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val itemBinding = OfferItemLayoutBinding.inflate(layoutInflater)
+        val itemBinding = OfferItemLayoutBinding.inflate(layoutInflater,parent,false)
         return ViewHolder(itemBinding)
     }
 

@@ -19,7 +19,7 @@ class OfferPricingAdapter constructor(private var pricing : List<PricingEntity> 
         notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(PricingItemLayoutBinding.inflate(LayoutInflater.from(parent.context)))
+        return ViewHolder(PricingItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
