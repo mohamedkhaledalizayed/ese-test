@@ -5,28 +5,28 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityVerifyPhoneBinding
 import com.neqabty.healthcare.modules.home.presentation.view.homescreen.HomeActivity
 import com.neqabty.healthcare.modules.verifyphone.data.model.CheckOTPBody
+import com.neqabty.healthcare.modules.verifyphone.data.model.CheckPhoneBody
 import com.neqabty.healthcare.modules.verifyphone.data.model.SendOTPBody
-import com.neqabty.healthcare.modules.verifyphone.view.checkotp.CheckOTPFragment
-import com.neqabty.healthcare.modules.verifyphone.view.sendotp.SendOTPFragment
+import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
+import com.neqabty.signup.core.utils.isMobileValid
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
 
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
 @AndroidEntryPoint
-class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyPhoneListener {
+class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>() {
     override fun getViewBinding() = ActivityVerifyPhoneBinding.inflate(layoutInflater)
     private lateinit var loading: AlertDialog
     private var phoneNumber = ""
@@ -40,16 +40,22 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        val fragment: Fragment = SendOTPFragment()
 
-        val fm: FragmentManager = supportFragmentManager
-        val transaction: FragmentTransaction = fm.beginTransaction()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        binding.btnSend.setOnClickListener {
+            if (binding.phone.text.isNullOrEmpty()){
+                Toast.makeText(this, "من فضلك ادخل رقم الهاتف اولا.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            if (!binding.phone.text.toString().isMobileValid()){
+                Toast.makeText(this, "من فضلك ادخل رقم صحيح.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
+            verifyPhoneViewModel.checkAccount(CheckPhoneBody(mobile = binding.phone.text.toString()))
 
-        verifyPhoneViewModel.otp.observe(this){
+        }
+
+        verifyPhoneViewModel.accountStatus.observe(this){
             it.let { resource ->
                 when(resource.status){
                     Status.LOADING ->{
@@ -57,25 +63,28 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
                     }
                     Status.SUCCESS ->{
                         loading.hide()
-                        openFragment()
+                        if (resource.data == "Found"){
+                            val intent = Intent(this, LoginActivity::class.java)
+                            intent.putExtra("phone", binding.phone.text.toString())
+                            startActivity(intent)
+                            finish()
+                        }
                     }
                     Status.ERROR ->{
                         loading.hide()
+                        if (resource.message.toString() == "404"){
+                            val intent = Intent(this, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+
                     }
                 }
             }
         }
     }
 
-    private fun openFragment() {
-        val fragment = CheckOTPFragment.newInstance(phoneNumber)
-        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-            .setTransition( FragmentTransaction.TRANSIT_FRAGMENT_OPEN )
 
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
 
     private fun checkForSmsReceivePermissions() {
         if (ContextCompat.checkSelfPermission(
@@ -100,15 +109,8 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
         }
     }
 
-    override fun onSendClicked(phone: String) {
-        sharedPreferences.mobile = phone
-        val intent = Intent(this@VerifyPhoneActivity, HomeActivity::class.java)
-        startActivity(intent)
-        finish()
-//        checkForSmsReceivePermissions()
-    }
 
-    override fun onCheckClicked(otp: String) {
+    fun onCheckClicked(otp: String) {
         verifyPhoneViewModel.checkOTP(CheckOTPBody(otp = otp.toInt(), phoneNumber = phoneNumber))
 
 

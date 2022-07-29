@@ -15,7 +15,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
@@ -328,12 +327,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, "موافق"
         ) { dialog, _ ->
             dialog.dismiss()
-            val intent = Intent(this@HomeActivity, LoginActivity::class.java)
-            intent.putExtra("code", sharedPreferences.code)
-            intent.putExtra(
-                Intent.EXTRA_INTENT,
-                Intent(this@HomeActivity, SignupActivity::class.java)
-            )
+            val intent = Intent(this@HomeActivity, SignupActivity::class.java)
             startActivity(intent)
         }
         alertDialog.setButton(

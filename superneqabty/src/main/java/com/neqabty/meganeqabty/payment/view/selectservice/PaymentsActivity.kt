@@ -2,13 +2,11 @@ package com.neqabty.meganeqabty.payment.view.selectservice
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.login.R
-import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
 import com.neqabty.meganeqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.core.utils.Status
 import com.neqabty.meganeqabty.databinding.ActivityPaymentsBinding
@@ -16,7 +14,7 @@ import com.neqabty.meganeqabty.payment.domain.entity.serviceactions.ServiceActio
 import com.neqabty.meganeqabty.payment.domain.entity.services.ServicesListEntity
 import com.neqabty.meganeqabty.payment.view.PaymentViewModel
 import com.neqabty.meganeqabty.payment.view.paymentdetails.PaymentDetailsActivity
-import com.neqabty.meganeqabty.payment.view.paymentstatus.PaymentStatusActivity
+import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -127,10 +125,10 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
         }
 
         if (requireRegistration){
-            if (sharedPreferences.mobile.isNotEmpty()){
+            if (sharedPreferences.isPhoneVerified){
                 paymentDetails()
             }else{
-                val intent = Intent(this, LoginActivity::class.java)
+                val intent = Intent(this, SignupActivity::class.java)
                 startActivity(intent)
             }
         }else{

@@ -39,7 +39,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/image_1"
                 android:transitionName="logo"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_50sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_50sdp"
                 android:layout_marginEnd="@dimen/_35sdp"
                 android:background="@drawable/edit_text"
                 app:layout_constraintTop_toBottomOf="@id/iv_logo">
@@ -176,20 +176,6 @@
                 app:layout_constraintEnd_toEndOf="@id/cl_password"
                 app:layout_constraintStart_toStartOf="@id/cl_password"
                 app:layout_constraintTop_toBottomOf="@id/cl_password" />
-
-            <Button
-                android:id="@+id/btn_signup"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/sign_up_btn_bg"
-                android:onClick="signUp"
-                android:text="@string/signup"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/btn_login"
-                app:layout_constraintStart_toStartOf="@id/btn_login"
-                app:layout_constraintTop_toBottomOf="@id/btn_login" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

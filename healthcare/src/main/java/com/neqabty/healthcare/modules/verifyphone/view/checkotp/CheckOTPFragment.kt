@@ -95,8 +95,6 @@ class CheckOTPFragment : Fragment() {
                 Toast.makeText(requireContext(), "من فضلك ادخل الكود اولا.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            val activity = requireActivity() as VerifyPhoneActivity
-            activity.onCheckClicked("${binding.code1.text}${binding.code2.text}${binding.code3.text}${binding.code4.text}${binding.code5.text}")
         }
 
     }

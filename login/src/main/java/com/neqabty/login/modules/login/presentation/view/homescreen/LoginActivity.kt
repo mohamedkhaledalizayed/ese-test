@@ -38,10 +38,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             .build()
 
 
-        binding.etUsername.setText(sharedPreferences.mobile)
-        if (sharedPreferences.mobile.isNotEmpty()){
-            Log.e("login", "True")
-        }
+        binding.etUsername.setText(intent.getStringExtra("phone").toString())
+        binding.etUsername.isEnabled = false
         loginViewModel.user.observe(this)  {
 
             it?.let { resource ->
@@ -96,11 +94,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             return
         }
 
-//        if (binding.etPassword.text.toString().length < 6){
-//            Toast.makeText(this, "من فضلك ادخل كلمة مرور قوية", Toast.LENGTH_LONG).show()
-//            return
-//        }
-
         if(!binding.etUsername.text.toString().isMobileValid()) {
             Toast.makeText(this, "من فضلك ادخل رقم صحيح", Toast.LENGTH_LONG).show()
             return
@@ -108,12 +101,5 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         loginViewModel.login(binding.etUsername.text.toString(),
             binding.etPassword.text.toString())
-    }
-    fun signUp(view: View) {
-//        (intent.getSerializableExtra("listener")!! as Runnable).run()
-        startActivity(intent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT)?.putExtra("code", intent.getStringExtra("code")))
-        finish()
-//                val intent = Intent(this@LoginActivity, SignupActivity::class.java)
-//                startActivity(intent)
     }
 }
