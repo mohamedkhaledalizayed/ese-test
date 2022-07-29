@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.modules.search.presentation.view.search
 
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,7 @@ import com.neqabty.healthcare.modules.search.presentation.view.searchresult.sele
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.selectedProviders
 import com.neqabty.healthcare.modules.subscribtions.presentation.view.SubscriptionActivity
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
+import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -53,8 +55,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                     intent.putExtra("serviceActionCode", item.serviceActionCode )
                     startActivity(intent)
                 }else{
-                    val intent = Intent(this@SearchActivity, LoginActivity::class.java)
-                    startActivity(intent)
+                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
                 }
             }
         }
@@ -100,4 +101,27 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             }
         })
     }
+
+    private fun askForLogin(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
 }

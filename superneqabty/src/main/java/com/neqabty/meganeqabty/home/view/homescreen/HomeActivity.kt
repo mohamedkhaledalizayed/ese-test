@@ -213,7 +213,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.navView.setNavigationItemSelectedListener(this)
 
         binding.contentActivity.ivSubscription.setOnClickListener {
-            if (sharedPreferences.isPhoneVerified){
+            if (sharedPreferences.isSyndicateMember){
                 val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                 startActivity(intent)
             }else{
@@ -262,11 +262,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
         when (item.itemId) {
             R.id.profile -> {
-                if (sharedPreferences.mobile.isNotEmpty()){
+                if (sharedPreferences.isSyndicateMember){
                     val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
                     startActivity(intent)
                 }else{
-                    askForLogin("برجاء تسجيل الدخول اولا.")
+                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
                 }
             }
             R.id.news -> {
@@ -276,11 +276,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 startActivity(intent)
             }
             R.id.payment -> {
-                if (sharedPreferences.mobile.isNotEmpty()){
+                if (sharedPreferences.isSyndicateMember){
                     val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                     startActivity(intent)
                 }else{
-                    askForLogin("برجاء تسجيل الدخول اولا.")
+                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
                 }
             }
             R.id.about_app_fragment -> {
@@ -298,7 +298,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 finish()
             }
             R.id.contactus_fragment -> {
-
                 try {
                     val emailIntent = Intent(Intent.ACTION_SEND)
                     emailIntent.data = Uri.parse("mailto:")
@@ -308,10 +307,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
                 }
-
-//                val intent = Intent(Intent.ACTION_DIAL)
-//                intent.data = Uri.parse("tel:${Constants.CALL_CENTER}")
-//                startActivity(intent)
             }
         }
 
@@ -320,7 +315,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     override fun onBackPressed() {
-//        showAlertDialog("هل تريد الخروج من التطبيق!")
         finish()
     }
 

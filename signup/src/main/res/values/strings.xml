@@ -2,7 +2,11 @@
     <string name="app_name">Courses</string>
     <string name="signup">تسجيل إشتراك</string>
     <string name="membership_id">رقم العضوية</string>
-    <string name="national_id">اخر 4 ارقام من الرقم القومى</string>
+    <string name="national_id">الرقم القومى</string>
     <string name="phone">الموبايل</string>
     <string name="email">البريد الالكترونى</string>
+    <string name="syndicate_member">عضو نقابة</string>
+    <string name="neqabty_member">لست عضو نقابة</string>
+    <string name="full_name">الأسم بالكامل</string>
+    <string name="password">كلمة المرور</string>
 </resources>

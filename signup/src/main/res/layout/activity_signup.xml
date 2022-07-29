@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="#FFF"
+    android:background="@color/white"
     tools:context=".modules.home.presentation.view.homescreen.SignupActivity">
 
 
@@ -24,92 +24,30 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/cl_view_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="@dimen/_20sdp"
-            android:focusableInTouchMode="true">
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/iv_logo"
                 android:layout_width="@dimen/_170sdp"
                 android:layout_height="@dimen/_100sdp"
                 android:scaleType="fitCenter"
+                android:layout_gravity="center"
                 android:transitionName="logo"
                 android:src="@drawable/image_1"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/membership_id_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/iv_logo"
-                android:background="@drawable/edit_text"
-                android:layout_marginTop="@dimen/_30sdp"
-                >
-
-                <EditText
-                    android:id="@+id/membership_id"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/membership_id"
-                    android:padding="@dimen/_10sdp"
-                    android:textAlignment="textStart"
-                    android:textColor="#748A9D"
-                    android:textColorHint="#748A9D"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="italic"
-                    android:inputType="number"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/national_id_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/membership_id_container"
-                android:background="@drawable/edit_text"
-                android:layout_marginTop="@dimen/_10sdp"
-                >
-
-                <EditText
-                    android:id="@+id/national_id"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/national_id"
-                    android:inputType="number"
-                    android:padding="@dimen/_10sdp"
-                    android:textAlignment="textStart"
-                    android:textColor="#748A9D"
-                    android:maxLength="4"
-                    android:textColorHint="#748A9D"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/phone_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/national_id_container"
                 android:background="@drawable/edit_text"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_30sdp"
                 >
 
                 <EditText
@@ -120,10 +58,9 @@
                     android:hint="@string/phone"
                     android:padding="@dimen/_10sdp"
                     android:textAlignment="viewStart"
-                    android:textColor="#748A9D"
+                    android:textColor="@color/black"
                     android:textColorHint="#748A9D"
                     android:textSize="@dimen/_12ssp"
-                    android:textStyle="italic"
                     android:maxLength="11"
                     android:inputType="phone"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -137,7 +74,6 @@
                 android:id="@+id/email_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/phone_container"
                 android:background="@drawable/edit_text"
                 android:layout_marginTop="@dimen/_10sdp"
                 >
@@ -150,10 +86,9 @@
                     android:hint="@string/email"
                     android:padding="@dimen/_10sdp"
                     android:textAlignment="viewStart"
-                    android:textColor="#748A9D"
+                    android:textColor="@color/black"
                     android:textColorHint="#748A9D"
                     android:textSize="@dimen/_12ssp"
-                    android:textStyle="italic"
                     android:inputType="textEmailAddress"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -162,13 +97,170 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/national_id_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+                <EditText
+                    android:id="@+id/national_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/national_id"
+                    android:inputType="number"
+                    android:padding="@dimen/_10sdp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:maxLength="14"
+                    android:textColorHint="#748A9D"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RadioGroup
+                android:id="@+id/check_member"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/syndicate_member"
+                    android:checked="true"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:id="@+id/syndicate_member"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/neqabty_member"
+                    android:id="@+id/neqabty_member"/>
+
+            </RadioGroup>
+
+            <FrameLayout
+                android:id="@+id/spinner_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text"
+                android:padding="@dimen/_6sdp">
+
+                <Spinner
+                    android:id="@+id/sp_syndicates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:popupBackground="@color/white" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/membership_id_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+                <EditText
+                    android:id="@+id/membership_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/membership_id"
+                    android:padding="@dimen/_10sdp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textColorHint="#748A9D"
+                    android:textSize="@dimen/_12ssp"
+                    android:inputType="number"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/full_name_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:background="@drawable/edit_text"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+                <EditText
+                    android:id="@+id/full_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/full_name"
+                    android:padding="@dimen/_10sdp"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/black"
+                    android:textColorHint="#748A9D"
+                    android:textSize="@dimen/_12ssp"
+                    android:inputType="text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/password_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:background="@drawable/edit_text"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/password"
+                    android:padding="@dimen/_10sdp"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black"
+                    android:textColorHint="#748A9D"
+                    android:textSize="@dimen/_12ssp"
+                    android:inputType="textPassword"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
             <Button
-                android:id="@+id/btn_login"
-                android:layout_width="0dp"
+                android:id="@+id/btn_signup"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
-                app:layout_constraintTop_toBottomOf="@id/email_container"
-                app:layout_constraintStart_toStartOf="@id/phone_container"
-                app:layout_constraintEnd_toEndOf="@id/phone_container"
                 android:text="@string/signup"
                 android:onClick="signUp"
                 android:textColor="@android:color/white"
@@ -178,7 +270,7 @@
                 android:layout_marginTop="@dimen/_30sdp"
                 />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,6 +30,7 @@ class PreferencesHelper @Inject constructor(
         private const val MEMBERSHIP_ID = "data.source.prefs.MEMBERSHIP_ID"
         private const val IS_PHONE_VERIFIED = "data.source.prefs.IS_PHONE_VERIFIED"
         private const val PHONE_VERIFIED = "data.source.prefs.PHONE_VERIFIED"
+        private const val IS_SYNDICATE_MEMBER = "data.source.prefs.IS_SYNDICATE_MEMBER"
     }
 
     var isNotificationsEnabled
@@ -87,6 +88,11 @@ class PreferencesHelper @Inject constructor(
     var phoneVerified
         get() = preferences.getString(PHONE_VERIFIED, "")!!
         set(value) = preferences.edit().putString(PHONE_VERIFIED, value).apply()
+
+    var isSyndicateMember
+        get() = preferences.getBoolean(IS_SYNDICATE_MEMBER, false)
+        set(value) = preferences.edit().putBoolean(IS_SYNDICATE_MEMBER, value).apply()
+
 
     fun isSyndicateChosen(): Boolean {
         return mainSyndicate != 0

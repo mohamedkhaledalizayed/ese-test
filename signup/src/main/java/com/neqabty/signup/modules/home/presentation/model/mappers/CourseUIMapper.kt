@@ -4,5 +4,5 @@ import com.neqabty.signup.modules.home.domain.entity.UserEntity
 import com.neqabty.signup.modules.home.presentation.model.UserUIModel
 
 fun UserEntity.toUserUIModel(): UserUIModel {
-    return UserUIModel(email, fullname, id, image, mobile, nationalId)
+    return UserUIModel(email, fullname, id, image, mobile, nationalId, entityName, entityCode)
 }
