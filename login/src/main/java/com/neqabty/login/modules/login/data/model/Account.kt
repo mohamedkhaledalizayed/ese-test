@@ -10,7 +10,7 @@ data class Account(
     @SerializedName("entity")
     val entity: EntityModel,
     @SerializedName("fullname")
-    val fullname: String,
+    val fullname: String?,
     @SerializedName("groups")
     val groups: List<Any>,
     @SerializedName("id")

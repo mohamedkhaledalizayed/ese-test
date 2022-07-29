@@ -67,12 +67,12 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>() {
                             val intent = Intent(this, LoginActivity::class.java)
                             intent.putExtra("phone", binding.phone.text.toString())
                             startActivity(intent)
-                            finish()
                         }
                     }
                     Status.ERROR ->{
                         loading.hide()
                         if (resource.message.toString() == "404"){
+                            sharedPreferences.mobile = binding.phone.text.toString()
                             val intent = Intent(this, HomeActivity::class.java)
                             startActivity(intent)
                             finish()
@@ -81,6 +81,15 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>() {
                     }
                 }
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (sharedPreferences.isPhoneVerified){
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

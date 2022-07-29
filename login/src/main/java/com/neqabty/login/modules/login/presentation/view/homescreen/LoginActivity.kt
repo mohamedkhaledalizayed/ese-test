@@ -30,7 +30,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
-        setupToolbar(titleResId = R.string.login)
+        setupToolbar(titleResId = R.string.login, showUp = false)
 
         dialog = SpotsDialog.Builder()
             .setContext(this)
@@ -51,9 +51,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         dialog.dismiss()
                         if (resource.data!!.user.account.nationalId.isNotEmpty()){
                             sharedPreferences.isPhoneVerified = true
+                            //TODO We need to check your type here
                             sharedPreferences.token = resource.data.token
-                            sharedPreferences.mobile = resource.data.user.account.mobile
-                            sharedPreferences.name = resource.data.user.account.fullName
+                            sharedPreferences.mobile = binding.etUsername.text.toString()
+                            sharedPreferences.name = resource.data.user.account.fullName ?: ""
                             sharedPreferences.nationalId = resource.data.user.account.nationalId
                             sharedPreferences.userImage = "${resource.data.user.account.image}"
                             finish()
@@ -63,6 +64,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
+                        Log.e("test", resource.message.toString())
                     }
                 }
             }
@@ -84,18 +86,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     fun login(view: View) {
 
-        if (binding.etUsername.text.toString().isEmpty()){
-            Toast.makeText(this, "من فضلك ادخل رقم الموبايل", Toast.LENGTH_LONG).show()
-            return
-        }
-
         if (binding.etPassword.text.toString().isEmpty()){
             Toast.makeText(this, "من فضلك ادخل كلمة المرور", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if(!binding.etUsername.text.toString().isMobileValid()) {
-            Toast.makeText(this, "من فضلك ادخل رقم صحيح", Toast.LENGTH_LONG).show()
             return
         }
 
