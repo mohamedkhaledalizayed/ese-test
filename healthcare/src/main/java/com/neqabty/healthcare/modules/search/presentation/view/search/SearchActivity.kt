@@ -19,7 +19,7 @@ import com.neqabty.healthcare.modules.search.domain.entity.packages.PackagesEnti
 import com.neqabty.healthcare.modules.search.presentation.view.filter.FiltersViewModel
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.modules.subscribtions.presentation.view.SubscriptionActivity
-import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
+import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -104,7 +104,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             AlertDialog.BUTTON_POSITIVE, "موافق"
         ) { dialog, _ ->
             dialog.dismiss()
-            val intent = Intent(this, SignupActivity::class.java)
+            val intent = Intent(this, VerifyPhoneActivity::class.java)
             startActivity(intent)
         }
         alertDialog.setButton(

@@ -17,7 +17,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
-import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.aboutapp.AboutAppActivity
 import com.neqabty.meganeqabty.core.ui.BaseActivity
@@ -30,6 +29,7 @@ import com.neqabty.meganeqabty.profile.view.profile.ProfileActivity
 import com.neqabty.meganeqabty.settings.SettingsActivity
 import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
+import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
@@ -50,7 +50,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     private val mAdapter = NewsAdapter()
     private val syndicatesAdapter = NewsAdapter()
     private val listAds = ArrayList<AdEntity>()
-    val list = mutableListOf<CarouselItem>()
+    private val list = mutableListOf<CarouselItem>()
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -327,7 +327,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, "موافق"
         ) { dialog, _ ->
             dialog.dismiss()
-            val intent = Intent(this@HomeActivity, SignupActivity::class.java)
+            val intent = Intent(this@HomeActivity, VerifyPhoneActivity::class.java)
             startActivity(intent)
         }
         alertDialog.setButton(

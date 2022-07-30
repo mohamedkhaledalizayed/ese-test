@@ -25,7 +25,7 @@
             android:name=".modules.payment.view.SehaPaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.verifyphone.view.VerifyPhoneActivity"
+            android:name=".modules.checkaccountstatus.view.CheckAccountActivity"
             android:exported="false" />
         <activity
             android:name=".modules.splash.view.SplashActivity"
@@ -72,14 +72,6 @@
         <activity
             android:name=".modules.home.presentation.view.homescreen.HomeActivity"
             android:exported="false" />
-
-        <receiver
-            android:name=".modules.verifyphone.view.SmsListener"
-            android:exported="true">
-            <intent-filter android:priority="1000">
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

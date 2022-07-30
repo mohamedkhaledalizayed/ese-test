@@ -22,16 +22,15 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
+import com.neqabty.healthcare.modules.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.profile.presentation.ProfileActivity
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.modules.suggestions.presentation.SuggestionsActivity
-import com.neqabty.healthcare.modules.verifyphone.view.VerifyPhoneActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
-import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
 import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import dagger.hilt.android.AndroidEntryPoint
@@ -267,7 +266,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             sharedPreferences.isPhoneVerified = false
             sharedPreferences.code = ""
             drawer.close()
-            val intent = Intent(this@HomeActivity, VerifyPhoneActivity::class.java)
+            val intent = Intent(this@HomeActivity, CheckAccountActivity::class.java)
             startActivity(intent)
             finish()
         }

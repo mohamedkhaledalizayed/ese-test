@@ -75,6 +75,8 @@ ext {
     okhttpVersion = '5.0.0-alpha.2'
 }
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
     //android ui
     implementation "androidx.recyclerview:recyclerview:$recyclerview"
     implementation "androidx.appcompat:appcompat:$appcompat"

@@ -10,7 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar">
         <activity
-            android:name=".modules.home.presentation.view.homescreen.SignupActivity"
-            android:exported="true"/>
+            android:name=".modules.verifyphonenumber.view.VerifyPhoneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.signup.presentation.view.homescreen.SignupActivity"
+            android:exported="true" />
+
+        <receiver
+            android:name="com.neqabty.signup.modules.verifyphonenumber.view.SmsListener"
+            android:exported="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
     </application>
+
 </manifest>

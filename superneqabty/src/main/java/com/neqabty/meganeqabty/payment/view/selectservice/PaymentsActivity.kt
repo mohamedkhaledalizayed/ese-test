@@ -14,7 +14,7 @@ import com.neqabty.meganeqabty.payment.domain.entity.serviceactions.ServiceActio
 import com.neqabty.meganeqabty.payment.domain.entity.services.ServicesListEntity
 import com.neqabty.meganeqabty.payment.view.PaymentViewModel
 import com.neqabty.meganeqabty.payment.view.paymentdetails.PaymentDetailsActivity
-import com.neqabty.signup.modules.home.presentation.view.homescreen.SignupActivity
+import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -128,7 +128,7 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
             if (sharedPreferences.isPhoneVerified){
                 paymentDetails()
             }else{
-                val intent = Intent(this, SignupActivity::class.java)
+                val intent = Intent(this, VerifyPhoneActivity::class.java)
                 startActivity(intent)
             }
         }else{
