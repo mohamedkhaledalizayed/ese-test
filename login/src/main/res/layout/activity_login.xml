@@ -132,7 +132,6 @@
                     android:textColor="#748A9D"
                     android:textColorHint="#748A9D"
                     android:textSize="@dimen/_12ssp"
-                    android:textStyle="italic"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/show_hide"
                     app:layout_constraintStart_toEndOf="@id/seperator22"

@@ -26,7 +26,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
 
         binding.followersRecycler.adapter = mAdapter
 
-        profileViewModel.getProfile("+201111111150")
+        profileViewModel.getProfile(sharedPreferences.mobile)
         profileViewModel.userData.observe(this){
             it.let { resource ->
 

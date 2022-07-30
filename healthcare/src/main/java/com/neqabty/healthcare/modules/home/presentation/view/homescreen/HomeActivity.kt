@@ -33,6 +33,7 @@ import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsAc
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
+import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
@@ -228,20 +229,32 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
 
         when (item.itemId) {
             R.id.profile -> {
-                val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
-                startActivity(intent)
+                if (sharedPreferences.isPhoneVerified){
+                    val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
+                }
             }
             R.id.wallet -> {
-                val intent = Intent(this@HomeActivity, WalletActivity::class.java)
-                startActivity(intent)
+                if (sharedPreferences.isPhoneVerified){
+                    val intent = Intent(this@HomeActivity, WalletActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
+                }
             }
             R.id.syndicate -> {
                 val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
                 startActivity(intent)
             }
             R.id.suggestions -> {
-                val intent = Intent(this@HomeActivity, SuggestionsActivity::class.java)
-                startActivity(intent)
+                if (sharedPreferences.isPhoneVerified){
+                    val intent = Intent(this@HomeActivity, SuggestionsActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
+                }
             }
             R.id.logout -> {
                 logout("هل تريد تسجيل خروج!")
@@ -265,6 +278,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             sharedPreferences.mobile = ""
             sharedPreferences.isPhoneVerified = false
             sharedPreferences.code = ""
+            sharedPreferences.clearAll()
             drawer.close()
             val intent = Intent(this@HomeActivity, CheckAccountActivity::class.java)
             startActivity(intent)
@@ -281,6 +295,28 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
 
     override fun onBackPressed() {
         showAlertDialog("هل تريد الخروج من التطبيق!")
+    }
+
+    private fun askForLogin(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            val intent = Intent(this, VerifyPhoneActivity::class.java)
+            startActivity(intent)
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
     }
 
     private fun showAlertDialog(message: String) {

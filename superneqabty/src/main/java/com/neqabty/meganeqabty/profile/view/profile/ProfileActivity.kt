@@ -44,7 +44,6 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
-                        Log.e("dfghj", resource.message.toString())
                     }
                 }
             }
