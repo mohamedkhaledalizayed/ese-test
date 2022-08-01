@@ -29,7 +29,7 @@ import team.opay.business.cashier.sdk.api.*
 class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
     private var paymentMethod = "card"
     private var totalAmount = 0
-    private var paymentFees = 6
+    private var paymentFees = 10
     private var deliveryFees = 20
     private var serviceCode = ""
     private var serviceActionCode = ""
@@ -47,6 +47,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
         serviceActionCode = intent.getStringExtra("serviceActionCode")!!
         binding.tvPackageName.text = "اسم الباقة : ${intent.getStringExtra("name")}"
         binding.tvPackagePrice.text = "سعر الباقة : $totalAmount"
+        updateTotal()
         paymentViewModel.getPaymentMethods()
         paymentViewModel.paymentMethods.observe(this) { it ->
 
@@ -63,8 +64,8 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
                                 binding.rbCard.visibility = View.VISIBLE
                             if (resource.data.filter { it.name == "code" }[0].isActive)
                                 binding.rbChannel.visibility = View.VISIBLE
-                            if (resource.data.filter { it.name == "wallet" }[0].isActive)
-                                binding.rbMobileWallet.visibility = View.VISIBLE
+//                            if (resource.data.filter { it.name == "wallet" }[0].isActive)
+//                                binding.rbMobileWallet.visibility = View.VISIBLE
                         }
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
@@ -106,31 +107,25 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
         binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 paymentMethod = "card"
-//                paymentFees = paymentViewModel.payment.value?.data?.receipt?.cardFees!!.toInt()
                 binding.ivCard.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
                 binding.ivFawry.visibility = View.GONE
-                updateTotal()
             }
         }
         binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 paymentMethod = "code"
-//                paymentFees = paymentViewModel.payment.value?.data?.receipt?.codeFees!!.toInt()
                 binding.llChannels.visibility = View.VISIBLE
                 binding.ivCard.visibility = View.GONE
                 binding.ivFawry.visibility = View.GONE
-                updateTotal()
             }
         }
         binding.rbFawry.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 paymentMethod = "fawry"
-//                paymentFees = paymentViewModel.payment.value?.data?.receipt?.codeFees!!.toInt()
                 binding.ivFawry.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
                 binding.ivCard.visibility = View.GONE
-                updateTotal()
             }
         }
 
@@ -168,8 +163,8 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
     }
 
     private fun updateTotal(){
-        binding.tvAmount.text = "الاجمالى بعد ضريبة الدفع : ${totalAmount + paymentFees}"
-        binding.tvAmountAfterDelivery.text =  "الاجمالى بعد ضريبة التوصيل : ${totalAmount + paymentFees + deliveryFees}"
+        binding.tvAmount.text = "الاجمالى بعد الرسوم البنكية والاداريه : ${totalAmount + paymentFees}"
+        binding.tvAmountAfterDelivery.text =  "الاجمالى بعد رسوم الشحن والتوصيل : ${totalAmount + paymentFees + deliveryFees}"
     }
 
     var referenceCode = ""

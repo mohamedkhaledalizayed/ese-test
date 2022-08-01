@@ -59,17 +59,15 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
                             val intent = Intent(this, LoginActivity::class.java)
                             intent.putExtra("phone", binding.phone.text.toString())
                             startActivity(intent)
-                        }
-                    }
-                    Status.ERROR ->{
-                        loading.hide()
-                        if (resource.message.toString() == "404"){
+                        }else{
                             sharedPreferences.mobile = binding.phone.text.toString()
                             val intent = Intent(this, HomeActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
-
+                    }
+                    Status.ERROR ->{
+                        loading.hide()
                     }
                 }
             }

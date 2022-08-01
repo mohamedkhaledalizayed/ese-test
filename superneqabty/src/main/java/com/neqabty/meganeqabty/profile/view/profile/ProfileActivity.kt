@@ -35,15 +35,16 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         binding.layoutContainer.visibility = View.VISIBLE
 
-                        binding.name.text = resource.data?.data?.fullName
+                        binding.name.text = resource.data?.data?.fullName ?: ""
                         binding.mobile.text = resource.data?.data?.mobile
                         binding.membershipNumber.text = ""
                         binding.nationalId.text = resource.data?.data?.nationalId.toString()
-                        binding.email.text = resource.data?.data?.email
+                        binding.email.text = resource.data?.data?.email ?: ""
                         binding.syndicate.text = resource.data?.data?.entity?.name
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
+                        Log.e("jhfdsasdf", resource.message.toString())
                     }
                 }
             }

@@ -1,8 +1,9 @@
 package com.neqabty.meganeqabty.profile.data.model.profile
 
 
-import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
+
 @Keep
 data class EntityBody(
     @SerializedName("code")
@@ -10,5 +11,7 @@ data class EntityBody(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
-    val name: String
+    val name: String,
+    @SerializedName("type")
+    val type: String
 )

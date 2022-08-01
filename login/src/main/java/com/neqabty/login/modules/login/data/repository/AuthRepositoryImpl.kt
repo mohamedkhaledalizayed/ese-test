@@ -48,6 +48,8 @@ private fun EntityModel.toEntity(): Entity {
     return Entity(
         code = code,
         id = id,
-        name = name
+        name = name,
+        type = type
+
     )
 }

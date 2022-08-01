@@ -41,7 +41,6 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                         binding.fullName.text = "${resource.data.data.client.name}"
                         binding.name.text = "${resource.data.data.client.name}"
                         binding.email.text = "${resource.data.data.client.email}"
-                        binding.mobile.text = "${resource.data.data.client.mobile}"
                         binding.phone.text = "${resource.data.data.client.mobile}"
                         binding.birthDate.text = ""
                         binding.address.text = "${resource.data.data.client.address}"
@@ -52,7 +51,6 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                 }
                 Status.ERROR ->{
                     binding.progressCircular.visibility = View.GONE
-                    Log.e("jhfdsasdf", resource.message.toString())
                 }
             }
 

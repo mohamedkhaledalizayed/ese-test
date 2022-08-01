@@ -51,7 +51,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         dialog.dismiss()
                         if (resource.data!!.user.account.nationalId.isNotEmpty()){
                             sharedPreferences.isPhoneVerified = true
-                            //TODO We need to check your type here
+                            sharedPreferences.isSyndicateMember = resource.data.user.account.entity.type == "syndicate"
                             sharedPreferences.token = resource.data.token
                             sharedPreferences.mobile = binding.etUsername.text.toString()
                             sharedPreferences.name = resource.data.user.account.fullName ?: ""
@@ -64,7 +64,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
-                        Log.e("test", resource.message.toString())
                     }
                 }
             }
@@ -85,7 +84,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     fun login(view: View) {
-
+        hideKeyboard()
         if (binding.etPassword.text.toString().isEmpty()){
             Toast.makeText(this, "من فضلك ادخل كلمة المرور", Toast.LENGTH_LONG).show()
             return

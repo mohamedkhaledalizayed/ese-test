@@ -1,26 +1,45 @@
 package com.neqabty.meganeqabty.profile.data.model.profile
 
 
-import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
+
 @Keep
 data class UserData(
-    @SerializedName("email")
-    val email: String,
+    @SerializedName("account")
+    val account: Account,
+    @SerializedName("address")
+    val address: Any,
+    @SerializedName("amount_due")
+    val amountDue: String,
+    @SerializedName("birth_date")
+    val birthDate: Any,
+    @SerializedName("blocked")
+    val blocked: Any,
+    @SerializedName("division")
+    val division: Any,
+    @SerializedName("employer")
+    val employer: Any,
     @SerializedName("entity")
     val entity: EntityBody,
-    @SerializedName("fullname")
-    val fullname: String,
-    @SerializedName("groups")
-    val groups: List<Any>,
+    @SerializedName("entity_branch")
+    val entityBranch: Any,
+    @SerializedName("graduation_year")
+    val graduationYear: Any,
     @SerializedName("id")
     val id: Int,
-    @SerializedName("image")
-    val image: String?,
-    @SerializedName("is_superuser")
-    val isSuperuser: Boolean,
-    @SerializedName("mobile")
-    val mobile: String,
+    @SerializedName("last_fee_year")
+    val lastFeeYear: Int,
+    @SerializedName("license_end_date")
+    val licenseEndDate: String,
+    @SerializedName("membership_id")
+    val membershipId: Int,
+    @SerializedName("name")
+    val name: Any,
     @SerializedName("national_id")
-    val nationalId: String
+    val nationalId: Long,
+    @SerializedName("registration_date")
+    val registrationDate: Any,
+    @SerializedName("serial_number")
+    val serialNumber: Any
 )

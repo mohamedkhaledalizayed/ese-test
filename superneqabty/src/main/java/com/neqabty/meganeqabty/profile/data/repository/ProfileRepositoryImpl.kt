@@ -57,12 +57,12 @@ private fun ProfileModel.toProfileEntity(): ProfileEntity{
 
 private fun UserData.toData(): Data{
     return Data(
-        email = email,
+        email = account.email,
         entity = entity.toEntity(),
-        fullName = fullname,
+        fullName = account.fullname,
         id = id,
-        image = image,
-        mobile = mobile,
+        image = account.image,
+        mobile = account.mobile,
         nationalId = nationalId
     )
 }

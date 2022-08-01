@@ -51,14 +51,12 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp" />
 
-                <TextView
-                    android:id="@+id/mobile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/qr_code"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_gravity="center"
-                    android:text="٠١١١٢٢٩٠١٨١"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_12ssp" />
+                     />
 
 
             </LinearLayout>
