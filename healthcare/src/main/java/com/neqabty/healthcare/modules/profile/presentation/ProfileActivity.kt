@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.healthcare.core.utils.loadSVG
 import com.neqabty.healthcare.databinding.ActivityProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,6 +48,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                         binding.job.text = "${resource.data.data.client.job}"
                         binding.nationalId.text = "${resource.data.data.client.nationalId}"
                         mAdapter.submitList(resource.data.data.subscribedPackages[0].packages.followers)
+                        binding.qrCode.loadSVG(resource.data.data.client.qrCode)
                     }
                 }
                 Status.ERROR ->{

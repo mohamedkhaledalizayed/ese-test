@@ -14,7 +14,6 @@ import com.neqabty.meganeqabty.payment.domain.entity.serviceactions.ServiceActio
 import com.neqabty.meganeqabty.payment.domain.entity.services.ServicesListEntity
 import com.neqabty.meganeqabty.payment.view.PaymentViewModel
 import com.neqabty.meganeqabty.payment.view.paymentdetails.PaymentDetailsActivity
-import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +23,6 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
     private var listOfActions: ArrayList<ServiceActionsEntity> = ArrayList()
     private var serviceId = ""
     private var actionId = ""
-    private var requireRegistration = false
     private lateinit var mServicesAdapter: ServicesAdapter
     private lateinit var mActionsAdapter: ServiceActionsAdapter
     private val paymentViewModel: PaymentViewModel by viewModels()
@@ -91,7 +89,6 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 if (i != 0) {
                     serviceId = listOfServices[i].code
-//                    requireRegistration = listOfServices[i].requireRegistration
                     paymentViewModel.getServiceActions(listOfServices[i].code)
                 }
             }
@@ -103,7 +100,6 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 if (listOfActions.size != 0) {
                     actionId = listOfActions[i].code
-//                    requireRegistration = listOfActions[i].requireRegistration
                 }else{
                     Toast.makeText(this@PaymentsActivity, "من فضلك إختر الخدمة اولا.", Toast.LENGTH_LONG).show()
                 }
@@ -124,16 +120,7 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
             return
         }
 
-        if (requireRegistration){
-            if (sharedPreferences.isPhoneVerified){
-                paymentDetails()
-            }else{
-                val intent = Intent(this, VerifyPhoneActivity::class.java)
-                startActivity(intent)
-            }
-        }else{
-            paymentDetails()
-        }
+        paymentDetails()
     }
 
     private fun paymentDetails(){

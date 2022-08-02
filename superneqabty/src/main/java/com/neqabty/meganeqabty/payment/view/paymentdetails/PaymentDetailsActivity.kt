@@ -76,7 +76,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         } else {
                             binding.llContent.visibility = View.VISIBLE
                             binding.tvService.text = resource.data.service.name
-                            binding.tvName.text = "الاسم : ${resource.data.member.name}"
+                            binding.tvName.text = "الاسم : ${resource.data.member.name ?: ""}"
                             binding.tvMemberNumber.text =
                                 "رقم العضوية : ${intent.getStringExtra("number")!!}"
                             totalAmount = resource.data.receipt.details.totalPrice.toInt()
@@ -125,8 +125,8 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             //TODO Check this before publishing
 //                            if(resource.data.filter { it.name == "fawry" }[0].isActive)
 //                                binding.rbFawry.visibility = View.VISIBLE
-                            if (resource.data.filter { it.name == "wallet" }[0].isActive)
-                                binding.rbMobileWallet.visibility = View.VISIBLE
+//                            if (resource.data.filter { it.name == "wallet" }[0].isActive)
+//                                binding.rbMobileWallet.visibility = View.VISIBLE
                         }
                     }
                     com.neqabty.meganeqabty.core.utils.Status.ERROR -> {
