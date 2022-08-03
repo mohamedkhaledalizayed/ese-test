@@ -35,7 +35,7 @@ data class NotificationData(
     @field:SerializedName("regiment")
     var regiment: String?,
     @field:SerializedName("approval_ammount_cost")
-    var cost: Int?,
+    var cost: Double?,
     @field:SerializedName("housing_type")
     var housingType: String?,
     @field:SerializedName("num_child")

@@ -107,7 +107,7 @@ class MedicalRenewDetailsFragment : BaseFragment() {
         medicalRenewalPaymentUI?.let {
             binding.medicalRenewalPayment = it
 
-            bPay.visibility = if (it.paymentItem?.amount == null || it.paymentItem?.amount == 0) View.GONE else View.VISIBLE
+            bPay.visibility = if (it.paymentItem?.amount == null || it.paymentItem?.amount == 0.0) View.GONE else View.VISIBLE
         }
 
         binding.rvDetails.adapter = adapter
@@ -302,7 +302,7 @@ class MedicalRenewDetailsFragment : BaseFragment() {
             Constants.PaymentOption.Fawry -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
         }
         commission = Math.round(commission * 10.0) / 10.0
-        newAmount = (medicalRenewalPaymentUI.paymentItem?.amount ?: 0) + commission
+        newAmount = (medicalRenewalPaymentUI.paymentItem?.amount ?: 0.0) + commission
         binding.newAmount = newAmount
         updateCommissionInList()
     }
