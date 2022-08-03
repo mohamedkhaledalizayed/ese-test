@@ -1,5 +1,8 @@
 package com.neqabty.recruitment.core.app
 
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class Recruitment {
+@HiltAndroidApp
+class Recruitment: Application() {
 }

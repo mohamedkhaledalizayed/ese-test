@@ -1,12 +1,19 @@
 package com.neqabty.recruitment.modules.home.view
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.neqabty.recruitment.R
 
-class HomeActivity : AppCompatActivity() {
+import android.os.Bundle
+import androidx.activity.viewModels
+import com.neqabty.recruitment.core.ui.BaseActivity
+import com.neqabty.recruitment.databinding.ActivityHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class HomeActivity : BaseActivity<ActivityHomeBinding>() {
+
+    override fun getViewBinding() = ActivityHomeBinding.inflate(layoutInflater)
+    private val homeViewModel: HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(binding.root)
     }
 }
