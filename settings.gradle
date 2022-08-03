@@ -16,3 +16,4 @@
 include ':mobilepaymentsdktest'
 include ':app', ':wheel', ':pdfcreator'
 include ':yodawy'
+include ':recruitment'
