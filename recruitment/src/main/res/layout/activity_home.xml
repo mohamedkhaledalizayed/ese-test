@@ -1,18 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".modules.home.view.HomeActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+   <include layout="@layout/toolbar"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       android:id="@+id/custom_toolbar"/>
 
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/custom_toolbar"
+       android:background="@color/background"
+       android:scrollbars="none">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+         <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+             android:id="@+id/carousel"
+             android:layout_width="match_parent"
+             app:carouselType="BLOCK"
+             app:autoPlay="true"
+             app:autoPlayDelay="3000"
+             app:infiniteCarousel="true"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             android:layout_height="@dimen/_150sdp"
+             android:layout_margin="@dimen/_10sdp"
+             app:showNavigationButtons="false"/>
+
+         <ProgressBar
+             android:id="@+id/progress_circular_ads"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:minHeight="@dimen/_100sdp"
+             android:visibility="gone"
+             app:layout_constraintEnd_toEndOf="@id/carousel"
+             app:layout_constraintStart_toStartOf="@id/carousel"
+             app:layout_constraintTop_toTopOf="@+id/carousel"
+             app:layout_constraintBottom_toBottomOf="@id/carousel"
+             />
+
+
+         <TextView
+             android:id="@+id/news"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             app:layout_constraintTop_toBottomOf="@+id/carousel"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             android:text="news"
+             android:textSize="@dimen/_12ssp"
+             android:layout_marginStart="@dimen/_10sdp"
+             android:layout_marginEnd="@dimen/_10sdp"
+             android:textColor="#272a3f"
+             android:layout_marginTop="@dimen/_10sdp"
+             android:textStyle="bold"/>
+
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/news_recycler"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             app:layout_constraintTop_toBottomOf="@+id/news"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             android:layout_marginTop="@dimen/_10sdp"
+             android:layout_marginStart="@dimen/_10sdp"
+             android:orientation="horizontal"
+             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+             />
+
+         <ProgressBar
+             android:id="@+id/progress_circular"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:visibility="gone"
+             android:minHeight="@dimen/_100sdp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="@+id/about_recycler"
+             app:layout_constraintBottom_toBottomOf="@id/about_recycler"
+             />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+   </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

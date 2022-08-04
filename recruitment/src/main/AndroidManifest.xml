@@ -2,13 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.neqabty.recruitment">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
+        android:name=".core.app.Recruitment"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NeQabty">
+        android:theme="@style/Theme.NoActionBar">
         <activity
             android:name=".modules.home.view.HomeActivity"
             android:exported="true">
