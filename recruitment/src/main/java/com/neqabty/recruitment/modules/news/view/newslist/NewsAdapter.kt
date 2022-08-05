@@ -1,4 +1,4 @@
-package com.neqabty.recruitment.modules.home.view
+package com.neqabty.recruitment.modules.news.view.newslist
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.recruitment.R
 import com.neqabty.recruitment.core.utils.AppUtils
 import com.neqabty.recruitment.databinding.NewsItemBinding
-import com.neqabty.recruitment.modules.home.domain.entity.news.NewsEntity
-import com.squareup.picasso.Callback
+import com.neqabty.recruitment.modules.news.domain.entity.NewsEntity
 import com.squareup.picasso.Picasso
 
 
@@ -39,15 +38,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
         val item = items[position]
         Picasso.get()
             .load(item.imageFile)
-            .into(viewHolder.binding.newsImage, object : Callback {
-                override fun onSuccess() {
-//                    viewHolder.binding.imageProgress.hide()
-                }
-
-                override fun onError(e: Exception?) {
-//                    viewHolder.binding.imageProgress.hide()
-                }
-            })
+            .into(viewHolder.binding.newsImage)
 
         viewHolder.binding.newsTitle.text = item.title
         viewHolder.binding.newsDate.text = AppUtils().dateFormat(item.date)

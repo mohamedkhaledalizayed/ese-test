@@ -1,4 +1,4 @@
-package com.neqabty.recruitment.modules.home.domain.entity.news
+package com.neqabty.recruitment.modules.news.domain.entity
 
 
 

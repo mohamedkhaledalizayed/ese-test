@@ -2,6 +2,7 @@ package com.neqabty.recruitment.modules.home.view
 
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,7 +11,10 @@ import com.neqabty.recruitment.core.ui.BaseActivity
 import com.neqabty.recruitment.core.utils.Status
 import com.neqabty.recruitment.databinding.ActivityHomeBinding
 import com.neqabty.recruitment.modules.home.domain.entity.ads.AdEntity
-import com.neqabty.recruitment.modules.home.domain.entity.news.NewsEntity
+import com.neqabty.recruitment.modules.news.domain.entity.NewsEntity
+import com.neqabty.recruitment.modules.news.view.newsDetails.NewsDetailsActivity
+import com.neqabty.recruitment.modules.news.view.newslist.NewsAdapter
+import com.neqabty.recruitment.modules.news.view.newslist.NewsListActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
@@ -90,8 +94,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         mAdapter.onItemClickListener = object :
             NewsAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: NewsEntity) {
-
+                val intent = Intent(this@HomeActivity, NewsDetailsActivity::class.java)
+                intent.putExtra("id", item.id)
+                startActivity(intent)
             }
+        }
+
+        binding.news.setOnClickListener {
+            val intent = Intent(this@HomeActivity, NewsListActivity::class.java)
+            startActivity(intent)
         }
 
     }

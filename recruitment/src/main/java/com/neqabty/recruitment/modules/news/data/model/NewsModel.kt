@@ -1,4 +1,4 @@
-package com.neqabty.recruitment.modules.home.data.model.news
+package com.neqabty.recruitment.modules.news.data.model
 
 
 import com.google.gson.annotations.SerializedName
