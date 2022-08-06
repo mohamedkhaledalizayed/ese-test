@@ -13,6 +13,7 @@ import com.neqabty.courses.core.ui.BaseActivity
 import com.neqabty.courses.core.utils.Status
 import com.neqabty.courses.home.domain.entity.CourseEntity
 import com.neqabty.courses.home.presentation.view.coursedetails.CourseDetailsActivity
+import com.neqabty.courses.offers.presentation.view.OffersActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,13 +32,21 @@ class CourseHomeActivity : BaseActivity<ActivityMainBinding>() {
         mAdapter.onItemClickListener = object :
             CoursesAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: CourseEntity) {
-                startActivity(Intent(this@CourseHomeActivity, CourseDetailsActivity::class.java).putExtra("courseId", item.id))
+                startActivity(
+                    Intent(
+                        this@CourseHomeActivity,
+                        CourseDetailsActivity::class.java
+                    ).putExtra("courseId", item.id)
+                )
             }
         }
 
+        binding.offersFabBtn.setOnClickListener {
+            startActivity(Intent(this, OffersActivity::class.java))
+        }
         homeViewModel.getCourses()
 
-        homeViewModel.courses.observe(this){
+        homeViewModel.courses.observe(this) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
@@ -45,9 +54,9 @@ class CourseHomeActivity : BaseActivity<ActivityMainBinding>() {
                     }
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
-                        if (resource.data!!.isNotEmpty()){
+                        if (resource.data!!.isNotEmpty()) {
                             mAdapter.submitList(resource.data)
-                        }else{
+                        } else {
                             binding.noCoursesLayout.visibility = View.VISIBLE
                         }
                     }
@@ -68,7 +77,6 @@ class CourseHomeActivity : BaseActivity<ActivityMainBinding>() {
 
         return super.onOptionsItemSelected(item)
     }
-
 
 
 }

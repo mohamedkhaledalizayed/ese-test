@@ -17,13 +17,15 @@ class OfferDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
         val offer = intent.getParcelableExtra(OFFERDETAILS) as OfferEntity?
         offer?.let {
-            binding.titleTV.text = offer.title
-            binding.startDateValue.text = offer.startDate
-            binding.endDateValue.text = offer.endDate
-            binding.contactValue.text = offer.contact
-            binding.peopleValue.text = offer.numOfTrainees.toString()
-            binding.datesRv.adapter = OfferDatesAdapter(offer.appointmentEntities)
-            binding.pricingRv.adapter = OfferPricingAdapter(offer.pricingEntities)
+            binding.titleTV.text = it.title
+            binding.startDateValue.text = it.startDate
+            binding.endDateValue.text = it.endDate
+            binding.contactValue.text = it.contact
+            binding.peopleValue.text = it.numOfTrainees.toString()
+            binding.datesRv.adapter = OfferDatesAdapter(it.appointmentEntities)
+            binding.pricingRv.adapter = OfferPricingAdapter(it.pricingEntities) { index ->
+                ReservationDialog(this, it, index).show()
+            }
         }
     }
 }

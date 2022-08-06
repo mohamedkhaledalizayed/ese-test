@@ -52,6 +52,7 @@
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
                 android:maxLines="1"
+                android:minWidth="@dimen/_80sdp"
                 app:layout_constraintWidth_default="wrap"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
