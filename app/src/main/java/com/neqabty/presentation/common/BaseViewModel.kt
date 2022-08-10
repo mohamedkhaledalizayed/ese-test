@@ -1,6 +1,8 @@
 package com.neqabty.presentation.common
 
 import androidx.lifecycle.ViewModel
+import com.neqabty.MyApp
+import com.neqabty.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -34,17 +36,17 @@ open class BaseViewModel @Inject constructor(): ViewModel() {
                     val errorObject = JSONObject(exception.response()!!.errorBody()?.string())
                     return Throwable(errorObject.getString("status_message_ar"))
                 } catch (e: Exception) {
-                    return Throwable("نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق")
+                    return Throwable(MyApp.appResources.getString(R.string.error_msg))
                 }
             } else if (exception.code() == 401)
-                return Throwable("لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى")
+                return Throwable(MyApp.appResources.getString(R.string.authentication_error))
             else if (exception.code() == 400)
-                return Throwable("لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى")
+                return Throwable(MyApp.appResources.getString(R.string.authentication_error))
             else
-                return Throwable("نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق")
+                return Throwable(MyApp.appResources.getString(R.string.error_msg))
         }catch(e :Exception){
 //            val exception = throwable as ConnectException
-                return Throwable("من فضلك تحقق من الإتصال بالإنترنت وحاول مجدداً")
+            return Throwable(MyApp.appResources.getString(R.string.no_connection_msg))
         }
     }
 }

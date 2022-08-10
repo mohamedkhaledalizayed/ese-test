@@ -51,16 +51,10 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment() {
     @Inject
     lateinit var appExecutors: AppExecutors
     val myCalendar = Calendar.getInstance()
-    var genderList: MutableList<String>? = mutableListOf("ذكر", "انثى")
+    var genderList: MutableList<String>? = mutableListOf(getString(R.string.male), getString(R.string.female))
     var relationsList: MutableList<MedicalRenewalUI.RelationItem>? = mutableListOf()
 
-    //    var relationsList: MutableList<String>? = mutableListOf("زوجة", "والد", "والدة", "ابناء اقل من ١٦ سنة", "ابناء بعد سن ١٨ سنة", "ابناء بعد سن ٢٥ سنة")
-    var hintsList: MutableList<String>? = mutableListOf("- برجاء إرفاق صورة قسيمة الزواج او صورة بطاقة الرقم القومي",
-            "-  أبناء اقل من ١٦ سنة برجاء إرفاق شهادة الميلاد\n" +
-                    "- أبناء بعد ١٨ سنة برجاء إرفاق صورة بطاقة الرقم القومي\n" +
-                    "- أبناء بعد ٢٥ سنة برجاء إرفاق صورة بطاقة الرقم القومي وما يفيد انه طالب",
-            "- لإضافة الوالدة برجاء إرفاق صورة شهادة ميلاد المهندس والبطاقة الشخصية للوالدة\n" +
-                    " - لإضافة الوالد برجاء إرفاق صورة البطاقة الشخصية للوالد")
+    var hintsList: MutableList<String>? = mutableListOf("")
     var selectedRelationID = ""
     var selectedRelationName = ""
 

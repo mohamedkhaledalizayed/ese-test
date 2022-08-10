@@ -61,7 +61,7 @@
     <string name="error">خطأ</string>
     <string name="error_msg">نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق</string>
     <string name="sharee">مشاركة</string>
-    <string name="news">news</string>
+    <string name="news">الأخبار</string>
     <string name="trips">الرحلات</string>
     <string name="currency">%s ج</string>
     <string name="date_from">من: %s</string>
@@ -176,7 +176,7 @@
     <string name="request_reason">تفاصيل الطلب</string>
     <string name="attachPhotoDetails">بيانات الموافقات الطبية</string>
     <string name="addPhoto">اضافة المرفقات</string>
-    <string name="send">send</string>
+    <string name="send">إرسال</string>
     <string name="select">اكمل بإستخدام..</string>
     <string name="gallery">المعرض</string>
     <string name="camera">الكاميرا</string>
@@ -189,7 +189,7 @@
     <string name="menu_syndicateNumber">رقم العضوية:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="menu_phoneNumber">رقم الموبايل:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="home_title">الرئيسية</string>
-    <string name="news_title">news</string>
+    <string name="news_title">الأخبار</string>
     <string name="trips_title">الرحلات</string>
     <string name="medical_services_title">الرعاية الصحية</string>
     <string name="medical_renew_title">اشتراك الرعاية الصحية</string>
@@ -224,7 +224,7 @@
     <string name="font_size_medium">متوسط</string>
     <string name="font_size_large">كبير</string>
 
-    <string name="wheel_news">news</string>
+    <string name="wheel_news">أخبارنا</string>
     <string name="wheel_trips">الرحلات</string>
     <string name="wheel_payment">المدفوعات</string>
     <string name="wheel_employment">مزاولة المهنة</string>

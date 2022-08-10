@@ -12,6 +12,7 @@ import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.widget.*
 import androidx.core.content.FileProvider
+import com.neqabty.MyApp
 import com.neqabty.R
 import com.neqabty.presentation.entities.MedicalRenewalUI
 import com.tejpratapsingh.pdfcreator.activity.PDFCreatorActivity
@@ -130,8 +131,6 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         horizontalBody.addView(body)
         pdfBody.addView(horizontalBody)
 
-////////////////////////////////////اسم المهندس/////////////////////
-
         //Engineer Name
         val horizontalEngineerName = PDFHorizontalView(applicationContext)
 
@@ -151,7 +150,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         horizontalEngineerName.addView(nameValue)
 
         val name = PDFTextView(applicationContext, 14f, true)
-        val nameContent = SpannableString("اسم المهندس :")
+        val nameContent = SpannableString(MyApp.appResources.getString(R.string.pdf_report_eng_name))
         nameContent.setSpan(
                 ForegroundColorSpan(Color.DKGRAY),
                 0,
@@ -191,7 +190,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
 
 
         val number = PDFTextView(applicationContext, 14f, true)
-        val numberContent = SpannableString("رقم العضوية : ")
+        val numberContent = SpannableString(MyApp.appResources.getString(R.string.pdf_report_eng_number))
         numberContent.setSpan(
                 ForegroundColorSpan(Color.DKGRAY),
                 0,
@@ -205,7 +204,8 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         horizontalEngineerNumber.addView(number)
         pdfBody.addView(horizontalEngineerNumber)
 
-        ////////////رقم المنظومة العلاجية/////////////
+        //////////////////////////
+        //Healthcare Number
 
         val horizontalTreatmentNumber = PDFHorizontalView(applicationContext)
 
@@ -225,7 +225,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
 
 
         val treatmentNumberValue = PDFTextView(applicationContext, 14f, true)
-        val treatmentNumberContentValue = SpannableString("رقم المنظومة العلاجية : ")
+        val treatmentNumberContentValue = SpannableString(MyApp.appResources.getString(R.string.pdf_report_healthcare_number))
         treatmentNumberContentValue.setSpan(
                 ForegroundColorSpan(Color.DKGRAY),
                 0,
@@ -239,7 +239,6 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         horizontalTreatmentNumber.addView(treatmentNumberValue)
         pdfBody.addView(horizontalTreatmentNumber)
 
-//////////////////////////////////////الاشتراك الحالى//////////////////////
 
         //Subscription
         val horizontalSubscription = PDFHorizontalView(applicationContext)
@@ -260,7 +259,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
 
 
         val subscription = PDFTextView(applicationContext, 14f, true)
-        val subscriptionContent = SpannableString("الاشتراك الحالي : ")
+        val subscriptionContent = SpannableString(MyApp.appResources.getString(R.string.pdf_report_current_subscription))
         subscriptionContent.setSpan(
                 ForegroundColorSpan(Color.DKGRAY),
                 0,
@@ -283,7 +282,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         //Followers
         val horizontalFollowers = PDFHorizontalView(applicationContext)
         val followers = PDFTextView(applicationContext, 14f, true)
-        val followersContent = SpannableString("التابعين (" + data.followers?.size + ") :")
+        val followersContent = SpannableString(MyApp.appResources.getString(R.string.pdf_report_followers) + data.followers?.size + MyApp.appResources.getString(R.string.pdf_report_followers_end))
         followersContent.setSpan(
                 ForegroundColorSpan(Color.DKGRAY),
                 0,
@@ -300,7 +299,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         }
 
 
-        val tableHeaderTitles = arrayOf("رقم المنظومة العلاجية", "درجة القرابة", "الاسم")
+        val tableHeaderTitles = arrayOf(MyApp.appResources.getString(R.string.pdf_report_table_healthcare_number), MyApp.appResources.getString(R.string.pdf_report_table_relation), MyApp.appResources.getString(R.string.pdf_report_table_name))
         val lineSeparatorView2 = PDFLineSeparatorView(applicationContext).setBackgroundColor(Color.WHITE)
         pdfBody.addView(lineSeparatorView2)
 
@@ -310,18 +309,6 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
             pdfTextView.setText(s)
             tableHeader.addToRow(pdfTextView)
         }
-
-        var items: MutableList<Item> = mutableListOf()
-        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
-        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
-        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
-        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
-        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
-        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
-        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
-        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
-        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
-        items.add(Item("الزوج/الزوجة", "ناهد عبد العظيم", "2797772"))
 
         val tableRowView1 = PDFTableView.PDFTableRowView(applicationContext)
         val tableView = PDFTableView(applicationContext, tableHeader, tableRowView1)

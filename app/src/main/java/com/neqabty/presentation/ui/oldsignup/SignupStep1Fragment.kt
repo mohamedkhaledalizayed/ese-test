@@ -58,7 +58,7 @@ class SignupStep1Fragment : BaseFragment() {
 
     fun initializeViews() {
         binding.edAge.setOnClickListener { handleAge() }
-        val genders = mutableListOf<String>("النوع", "ذكر", "أنثى")
+        val genders = mutableListOf<String>(getString(R.string.gender), getString(R.string.male), getString(R.string.female))
         binding.spGender.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, genders)
 
 //        mySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

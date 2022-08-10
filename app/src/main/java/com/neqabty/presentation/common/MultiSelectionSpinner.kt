@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.neqabty.MyApp
 import com.neqabty.R
 import com.neqabty.presentation.common.SpinnerModel
 import java.util.*
@@ -181,7 +182,7 @@ class MultiSelectionSpinner : AppCompatSpinner, DialogInterface.OnMultiChoiceCli
             sb.append(hint)
         }
         return if (TYPE != 0 && selectedItems.size > 1) {
-            SpinnerModel(name = "اختيار متعدد")
+            SpinnerModel(name = MyApp.appResources.getString(R.string.multi_selection))
         } else {
             SpinnerModel(name = sb.toString())
         }
