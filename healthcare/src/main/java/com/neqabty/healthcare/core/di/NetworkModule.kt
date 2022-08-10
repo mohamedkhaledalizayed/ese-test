@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.core.di
 
 import com.google.gson.GsonBuilder
+import com.neqabty.healthcare.core.data.Constants.BASE_URL_DEV
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +20,7 @@ class NetworkModule {
     @Provides
     @Named("healthcare")
     fun providesBaseUrl(): String {
-        return "http://3.131.229.146:7777/medical/public/api/v1/"
+        return BASE_URL_DEV
     }
 
     @Provides
