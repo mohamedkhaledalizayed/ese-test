@@ -27,6 +27,7 @@ import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
+import com.neqabty.MyApp
 import com.neqabty.R
 import com.neqabty.databinding.MedicalRenewAddFollowerDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
@@ -51,10 +52,12 @@ class MedicalRenewAddFollowerDetailsFragment : BaseFragment() {
     @Inject
     lateinit var appExecutors: AppExecutors
     val myCalendar = Calendar.getInstance()
-    var genderList: MutableList<String>? = mutableListOf(getString(R.string.male), getString(R.string.female))
+    var genderList: MutableList<String>? = mutableListOf(MyApp.appResources.getString(R.string.male), MyApp.appResources.getString(R.string.female))
     var relationsList: MutableList<MedicalRenewalUI.RelationItem>? = mutableListOf()
 
-    var hintsList: MutableList<String>? = mutableListOf("")
+    var hintsList: MutableList<String>? = mutableListOf(MyApp.appResources.getString(R.string.attachments_hint_partner),
+        MyApp.appResources.getString(R.string.attachments_hint_children),
+        MyApp.appResources.getString(R.string.attachments_hint_parents))
     var selectedRelationID = ""
     var selectedRelationName = ""
 

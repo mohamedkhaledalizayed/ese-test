@@ -8,452 +8,452 @@
     <string name="unknown_error">unknown error</string>
 
 
-    <string name="intro_one">كل خدمات نقابة المهندسين الآن متاحه بين يديك من خلال تطبيق نقابتي</string>
-    <string name="intro_two">يمكنك الآن سداد كل اشتراكاتك من خلال خدمة الدفع الالكتروني </string>
-    <string name="intro_three">يمكنك الآن الحصول علي كل  خدماتك وموافقاتك الطبية من خلال تطبيق نقابتي</string>
-    <string name="intro_four">يمكنك متابعة كافة الأخبار والتنبيهات الخاصة بالنقابة أولاً بأول</string>
-    <string name="intro_five">كما يمكنك التعرف علي جميع الرحلات المقدمة من النقابة مع إمكانية الحجز والسداد</string>
+    <string name="intro_one">All the services of the Syndicate of Engineers are now available in your hands through the application of my neQabty</string>
+    <string name="intro_two">You can now pay all your subscriptions through the electronic payment service </string>
+    <string name="intro_three">You can now Have all your medical services and approvals through the neQabty app</string>
+    <string name="intro_four">You can follow up on all the news and alerts of the Syndicate first hand</string>
+    <string name="intro_five">You can also get acquainted with all the trips provided by the union with the possibility of booking and payment</string>
 
-    <string name="phoneNumber">رقم الجوال</string>
-    <string name="password">كلمة المرور</string>
-    <string name="forgetPassword"><u>نسيت كلمة المرور</u></string>
-    <string name="login">الدخول الي الحساب</string>
-    <string name="activate_account_title">تفعيل الحساب</string>
-    <string name="number_confirmation">الرقم الذي قمت بإدخاله <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]></string>
-    <string name="member_number_confirmation">هل أنت متأكد من رقم العضوية؟!</string>
-    <string name="mobile_number_confirmation">هل أنت متأكد من رقم الموبايل؟!</string>
-    <string name="experimental_version">(نسخة تجريبية)</string>
-    <string name="register"><u>لا يوجد حساب  تسجيل</u></string>
-    <string name="skip">دخول كزائر</string>
-    <string name="fullName">الاسم بالكامل</string>
-    <string name="firstName">الاسم الأول</string>
-    <string name="secondName">الاسم الثاني</string>
-    <string name="thirdName">الاسم الثالث</string>
-    <string name="fourthName">الاسم الرابع</string>
-    <string name="email">البريد الالكتروني</string>
-    <string name="current_password">كلمة المرور الحالية</string>
-    <string name="new_password">كلمة المرور الجديدة</string>
-    <string name="confirmPassword">تأكيد كلمة المرور</string>
-    <string name="unmatched_password">كلمة المرور غير مطابقة</string>
-    <string name="age">تاريخ الميلاد</string>
-    <string name="gender">النوع</string>
-    <string name="prev">السابق</string>
-    <string name="next">التالي</string>
-    <string name="signup_title">إنشاء حساب جديد</string>
-    <string name="signup_submit">إنشاء حساب</string>
-    <string name="signup_hint">هذا الرقم غير مسجل من قبل برجاء انشاء حساب حتى تتمكن من استخدام الخدمة</string>
-    <string name="activate_account_hint">تم انشاء الحساب بنجاح, سيتم ارسال رسالة نصية بكود التعريف وكلمة المرور برجاء تفعيل الحساب</string>
-    <string name="login_with_password_hint">هذا الرقم مسجل من قبل برجاء ادخال كلمة المرور للدخول الي الحساب</string>
-    <string name="personalDetails">البيانات الشخصية</string>
-    <string name="confirm">تأكيد</string>
-    <string name="welcome">مرحبا بكم</string>
-    <string name="welcome_with_name">مرحباً  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]></string>
-    <string name="welcome_with_password">كلمة المرور الخاصة بك هي آخر 4 ارقام من الرقم القومي</string>
-    <string name="welcome_with_name_login">هذا الرقم مسجل بإسم  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]>هل تريد تأكيد الدخول؟</string>
-    <string name="welcome_to_neqabty">مرحبا بكم في تطبيق نقابة المهندسين المصرية - نقابتي</string>
-    <string name="main">الرئيسية</string>
-    <string name="aboutNeqaba">عن النقابة</string>
-    <string name="settings">الاعدادات</string>
-    <string name="callus">اتصل بنا</string>
-    <string name="help">مساعدة</string>
-    <string name="aboutApp">عن التطبيق</string>
-    <string name="loading">جاري التحميل</string>
-    <string name="error">خطأ</string>
-    <string name="error_msg">نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق</string>
-    <string name="sharee">مشاركة</string>
-    <string name="news">news</string>
-    <string name="trips">الرحلات</string>
-    <string name="currency">%s ج</string>
-    <string name="date_from">من: %s</string>
-    <string name="date_to">إلى: %s</string>
-    <string name="one_person">فردي</string>
-    <string name="two_persons">ثنائي</string>
-    <string name="three_persons">ثلاثي</string>
-    <string name="view_price">أمامي</string>
-    <string name="side_price">جانبي</string>
-    <string name="one_room">غرفة</string>
-    <string name="two_rooms">غرفتين</string>
-    <string name="studio">استوديو</string>
-    <string name="regiments">الأفواج</string>
-    <string name="regiment">الفوج</string>
-    <string name="children">الأطفال</string>
-    <string name="child_one">عمر الطفل الأول</string>
-    <string name="child_two">عمر الطفل الثاني</string>
-    <string name="child_three">عمر الطفل الثالث</string>
-    <string name="trip_type">نوع الرحلة</string>
-    <string name="room_type">نوع الغرفة</string>
-    <string name="trip_desc">وصف الرحلة</string>
-    <string name="trip_price">سعر الرحلة</string>
-    <string name="about_hotel">عن الفندق</string>
-    <string name="reserve">حجز</string>
-    <string name="choose_regiment">اختر الميعاد</string>
-    <string name="view_regiments">عرض الأفواج والمواعيد</string>
-    <string name="confirm_reservation">تأكيد الحجز</string>
-    <string name="attach_photo">إضافة صورة</string>
-    <string name="attach_companion_title">إضافة المرافقين</string>
-    <string name="attach_companion">إضافة مرافق</string>
-    <string name="attach_title">اضافة المرفقات</string>
-    <string name="attach_hint">أضف صوره كارت العضويه - شهادات الميلاد - البطاقه الشخصيه</string>
-    <string name="relation_degree">درجة القرابة</string>
-    <string name="age_on_trip">العمر وقت الرحلة</string>
-    <string name="birth_date">تاريخ الميلاد</string>
-    <string name="thanks">شكراً</string>
-    <string name="confirm_reservation_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
-    <string name="addProfileImage">اضافة صورة البروفايل</string>
-    <string name="viewPhoto">عرض الصورة</string>
+    <string name="phoneNumber">Mobile Number</string>
+    <string name="password">Password</string>
+    <string name="forgetPassword"><u>Forget Password</u></string>
+    <string name="login">Login to the account</string>
+    <string name="activate_account_title">account activation</string>
+    <string name="number_confirmation">The number you entered <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]></string>
+    <string name="member_number_confirmation">Are you sure about your membership number?!</string>
+    <string name="mobile_number_confirmation">Are you sure about your Phone number?!</string>
+    <string name="experimental_version">(Beta Version)</string>
+    <string name="register"><u>No registration account</u></string>
+    <string name="skip">Log in as a visitor</string>
+    <string name="fullName">Full Name</string>
+    <string name="firstName">First Name</string>
+    <string name="secondName">second Name</string>
+    <string name="thirdName">Third Name</string>
+    <string name="fourthName">Forth Name</string>
+    <string name="email">Email</string>
+    <string name="current_password">current password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirmPassword">confirm Password</string>
+    <string name="unmatched_password">unmatched password</string>
+    <string name="age">Birth Date</string>
+    <string name="gender">Gender</string>
+    <string name="prev">Prev</string>
+    <string name="next">Next</string>
+    <string name="signup_title">Creat New Account</string>
+    <string name="signup_submit">Create account</string>
+    <string name="signup_hint">This number is not registered before. Please create an account to be able to use the service</string>
+    <string name="activate_account_hint">The account has been created successfully, a text message with the identification code and password will be sent. Please activate the account</string>
+    <string name="login_with_password_hint">This number is already registered. Please enter the password to log into the account</string>
+    <string name="personalDetails">Personal Information</string>
+    <string name="confirm">confirm</string>
+    <string name="welcome">welcome</string>
+    <string name="welcome_with_name">welcome  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]></string>
+    <string name="welcome_with_password">Your password is the last 4 digits of the national number</string>
+    <string name="welcome_with_name_login">This number is registered under  <![CDATA[<font color="#0b2031"><b>%s </b><br></font>]]>هل تريد تأكيد الدخول؟</string>
+    <string name="welcome_to_neqabty">Welcome to the Egyptian Syndicate of Engineers application - neQabty</string>
+    <string name="main">Main</string>
+    <string name="aboutNeqaba">About the Syndicate</string>
+    <string name="settings">settings</string>
+    <string name="callus">Call Us</string>
+    <string name="help">Help</string>
+    <string name="aboutApp">About App</string>
+    <string name="loading">Loading</string>
+    <string name="error">Error</string>
+    <string name="error_msg">Sorry, an error occurred.. Please try again later</string>
+    <string name="sharee">Share</string>
+    <string name="news">News</string>
+    <string name="trips">Trips</string>
+    <string name="currency">%s l.e</string>
+    <string name="date_from">From: %s</string>
+    <string name="date_to">To: %s</string>
+    <string name="one_person">One Person</string>
+    <string name="two_persons">Tow Persons</string>
+    <string name="three_persons">Three Persons</string>
+    <string name="view_price">front</string>
+    <string name="side_price">Side</string>
+    <string name="one_room">Roon</string>
+    <string name="two_rooms">Two Rooms</string>
+    <string name="studio">studio</string>
+    <string name="regiments">regiments</string>
+    <string name="regiment">regiment</string>
+    <string name="children">children</string>
+    <string name="child_one">First Child Age</string>
+    <string name="child_two">Second Child Age</string>
+    <string name="child_three">Third Child Age</string>
+    <string name="trip_type">Trip Type</string>
+    <string name="room_type">Room Type</string>
+    <string name="trip_desc">Trip Description</string>
+    <string name="trip_price">Trip Price</string>
+    <string name="about_hotel">About Hotel</string>
+    <string name="reserve">Reserve</string>
+    <string name="choose_regiment">Choose Time</string>
+    <string name="view_regiments">view regiments</string>
+    <string name="confirm_reservation">confirm reservation</string>
+    <string name="attach_photo">Upload Photo</string>
+    <string name="attach_companion_title">Add companion title</string>
+    <string name="attach_companion">Add Companion</string>
+    <string name="attach_title">Upload Files</string>
+    <string name="attach_hint">Upload a picture of the membership card - birth certificates - personal card</string>
+    <string name="relation_degree">Relationship Degree</string>
+    <string name="age_on_trip">Age At Trip Time</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="thanks">Thanks</string>
+    <string name="confirm_reservation_msg">Your request has been registered and we will respond to you within the day</string>
+    <string name="addProfileImage">Add Profile Image</string>
+    <string name="viewPhoto">View Photo</string>
     <string name="format">yyyy/MM/dd</string>
-    <string name="mandatoryField">هذا الحقل مطلوب</string>
-    <string name="loginError">خطأ في اسم المستخدم أو كلمة المرور</string>
-    <string name="passwordMatchError">يجب أن تتطابق كلمة المرور و تأكيد كلمة المرور</string>
-    <string name="selectSubSyndicate">اختر النقابة</string>
-    <string name="confirmation_sent">تم ارسال الرقم التأكيدي لرقم الجوال الخاص بك</string>
-    <string name="enter_confirmation_code">من فضلك ادخل الرمز التأكيدي</string>
-    <string name="resend_code"> لم يصلني الرمز التأكيدي ....اعادة ارسال %s</string>
-    <string name="congratulations">تم التسجيل بنجاح</string>
-    <string name="request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
-    <string name="request_status">طلبكم تحت الدراسة</string>
-    <string name="continue_btn">متابعة</string>
-    <string name="skip_btn">تخطي</string>
-    <string name="login_hint">يمكنك الآن الدخول على التطبيق و الاستمتاع بخدمات نقابتك</string>
-    <string name="update_msg">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
-    <string name="root_msg">هذا الجهاز غير متوافق مع الحد الادني من شروط الامان الخاصة بالتطبيق.</string>
+    <string name="mandatoryField">Required</string>
+    <string name="loginError">Wrong UserName or Password</string>
+    <string name="passwordMatchError">Password did not match</string>
+    <string name="selectSubSyndicate">Select Syndicate</string>
+    <string name="confirmation_sent">Confirmation Code Had Been Sent To Your Phone</string>
+    <string name="enter_confirmation_code">Please Enter The Confirmation Code</string>
+    <string name="resend_code"> Resend Code %s</string>
+    <string name="congratulations">successfully registered</string>
+    <string name="request_sent">Your request has been registered and we will respond to you within the day</string>
+    <string name="request_status">Your request is under consideration</string>
+    <string name="continue_btn">Continue</string>
+    <string name="skip_btn">Skip</string>
+    <string name="login_hint">You can now login to the application and enjoy the services of your syndicate</string>
+    <string name="update_msg">Please update the app to the latest version to be able to use it.</string>
+    <string name="root_msg">This device does not compatible with the minimum safety requirements for the application.</string>
 
-    <string name="doctors">أطباء</string>
-    <string name="hospitals">مستشفيات</string>
-    <string name="scan_centers">مراكز أشعة</string>
-    <string name="pharmacies">صيدليات</string>
-    <string name="others">خدمات أخرى</string>
-    <string name="optics">بصريات</string>
-    <string name="artificial_limbs">أجهزة تعويضية</string>
-    <string name="pathology_labs">تحاليل الباثولوجي</string>
-    <string name="laboratories">معامل التحاليل</string>
+    <string name="doctors">Doctors</string>
+    <string name="hospitals">Hospitals</string>
+    <string name="scan_centers">Scan Centers</string>
+    <string name="pharmacies">Pharmacy</string>
+    <string name="others">Other Services</string>
+    <string name="optics">Optics</string>
+    <string name="artificial_limbs">Artificial Limbs</string>
+    <string name="pathology_labs">Pathology Labs</string>
+    <string name="laboratories">Laboratories</string>
 
-    <string name="mobile_title">تسجيل دخول</string>
-    <string name="enter_mobile">برجاء ادخال رقم الهاتف المحمول الخاص بك</string>
-    <string name="entered_mobile">رقم الهاتف الذي تم ادخاله</string>
-    <string name="enter_verification_code">برجاء ادخال كود التفعيل</string>
-    <string name="login_visitor_enter_mobile">برجاء ادخال رقم الهاتف المحمول لانشاء حسابك الخاص</string>
-    <string name="choose_service">اختار الخدمة</string>
-    <string name="enter_member_number">ادخل رقم العضوية</string>
-    <string name="login_member_enter_member_number">برجاء ادخال رقم العضوية الخاص بك لاستكمال بيانات الحساب</string>
-    <string name="change_number_enter_member_number">برجاء ادخال رقم العضوية الصحيح الخاص بك لاستكمال بيانات الحساب</string>
-    <string name="national_id_digits">برجاء ادخال كلمة المرور الخاصة بالحساب  \n(وهي عبارة عن آخر 4 أرقام من الرقم القومي)</string>
-    <string name="current_mobile_title">رقم الموبايل الحالي الخاص بك</string>
-    <string name="new_mobile_title">رقم الموبايل الجديد</string>
-    <string name="national_id_four_digits">برجاء ادخال آخر 4 أرقام من الرقم القومي</string>
-    <string name="medicalRequest">تقديم الموافقات الطبية</string>
-    <string name="syndicateNumber">رقم العضوية</string>
-    <string name="member_name">اسم العضو</string>
-    <string name="beneficiary_name">اسم المستفيد</string>
-    <string name="medical_letter_approval_number">رقم الموافقة</string>
-    <string name="inquire">استعلام</string>
-    <string name="cardNumber">رقم المنظومة العلاجية</string>
-    <string name="selectDoctor">اختر الدكتور المعالج</string>
-    <string name="addRequestImage">اضافة الموافقات الطبية</string>
-    <string name="submit">ارسال</string>
-    <string name="medicalDirectory">الدليل الطبي</string>
-    <string name="search">بحث</string>
-    <string name="services">الخدمات</string>
-    <string name="favorites">المفضلة</string>
-    <string name="governorate">المحافظة</string>
-    <string name="area">المنطقة</string>
-    <string name="all_areas">كل المناطق</string>
-    <string name="choose_area">برجاء اختيار مكان مقدم الخدمة</string>
-    <string name="subscription_rules">الدليل الطبي للمشروع</string>
-    <string name="service">الخدمات</string>
-    <string name="degree">الدرجة العلمية</string>
-    <string name="speciality">التخصص</string>
-    <string name="all">الكل</string>
-    <string name="areaDetails">اختيار المنطقة</string>
-    <string name="doctorDetails">بيانات الطبيب المعالج</string>
-    <string name="doctor">الطبيب المعالج</string>
-    <string name="doctorName">اسم الطبيب</string>
-    <string name="serviceProviderType">نوع مقدم الخدمة</string>
-    <string name="serviceProvider">مقدم الخدمة الطبية</string>
-    <string name="searchProviderName">البحث باسم مقدم الخدمة</string>
-    <string name="serviceProviderName">اسم مقدم الخدمة</string>
-    <string name="serviceProviderDetails">بيانات مقدم الخدمة</string>
-    <string name="request_reason">تفاصيل الطلب</string>
-    <string name="attachPhotoDetails">بيانات الموافقات الطبية</string>
-    <string name="addPhoto">اضافة المرفقات</string>
+    <string name="mobile_title">sign in</string>
+    <string name="enter_mobile">Please Enter Your Phone Number</string>
+    <string name="entered_mobile">The phone number entered</string>
+    <string name="enter_verification_code">Please Enter your Varification Code</string>
+    <string name="login_visitor_enter_mobile">Please Enter Your Phone Number To Create The Account</string>
+    <string name="choose_service">Select Service</string>
+    <string name="enter_member_number">Enter Your Membership Number</string>
+    <string name="login_member_enter_member_number">Please enter your membership number to complete the account information</string>
+    <string name="change_number_enter_member_number">Please enter your correct membership number to complete the account information</string>
+    <string name="national_id_digits">Please Enter Your Password  \n(It is the last 4 digits of the national number)</string>
+    <string name="current_mobile_title">Please Enter Your Phone Number</string>
+    <string name="new_mobile_title">New Phone Number</string>
+    <string name="national_id_four_digits">Please Enter Last 4 Digits Of Your National Number</string>
+    <string name="medicalRequest">Submit medical approvals</string>
+    <string name="syndicateNumber">Membership Number</string>
+    <string name="member_name">Name</string>
+    <string name="beneficiary_name">Beneficiary Name</string>
+    <string name="medical_letter_approval_number">Medical Approval Serial</string>
+    <string name="inquire">Inquire</string>
+    <string name="cardNumber">Medical Card Number</string>
+    <string name="selectDoctor">Select Doctor</string>
+    <string name="addRequestImage">Get Medical Approval</string>
+    <string name="submit">Submit</string>
+    <string name="medicalDirectory">Medical Directory</string>
+    <string name="search">search</string>
+    <string name="services">services</string>
+    <string name="favorites">favorites</string>
+    <string name="governorate">governorate</string>
+    <string name="area">area</string>
+    <string name="all_areas">all areas</string>
+    <string name="choose_area">choose area</string>
+    <string name="subscription_rules">medical Project guide</string>
+    <string name="service">service</string>
+    <string name="degree">degree</string>
+    <string name="speciality">speciality</string>
+    <string name="all">All</string>
+    <string name="areaDetails">Choose Area</string>
+    <string name="doctorDetails">Doctor Info</string>
+    <string name="doctor">Doctor</string>
+    <string name="doctorName">Doctor Name</string>
+    <string name="serviceProviderType">service Provider Type</string>
+    <string name="serviceProvider">service Provider</string>
+    <string name="searchProviderName">Search with service Provider Name</string>
+    <string name="serviceProviderName">service Provider Name</string>
+    <string name="serviceProviderDetails">service Provider Details</string>
+    <string name="request_reason">Request Details</string>
+    <string name="attachPhotoDetails">Medical Approval Details</string>
+    <string name="addPhoto">Upload Files</string>
     <string name="send">send</string>
-    <string name="select">اكمل بإستخدام..</string>
-    <string name="gallery">المعرض</string>
-    <string name="camera">الكاميرا</string>
-    <string name="select_file">اختار صورة</string>
+    <string name="select">Select..</string>
+    <string name="gallery">gallery</string>
+    <string name="camera">camera</string>
+    <string name="select_file">Upload Photo</string>
 
 
-    <string name="syndicates_title">اختر النقابة المفضلة</string>
-    <string name="open_profile">مشاهدة الملف الشخصي</string>
-    <string name="menu_memberName">الاسم:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
-    <string name="menu_syndicateNumber">رقم العضوية:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
-    <string name="menu_phoneNumber">رقم الموبايل:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
-    <string name="home_title">الرئيسية</string>
-    <string name="news_title">news</string>
-    <string name="trips_title">الرحلات</string>
-    <string name="medical_services_title">الرعاية الصحية</string>
-    <string name="medical_renew_title">اشتراك الرعاية الصحية</string>
-    <string name="save_edits">تأكيد بيانات التابعين</string>
-    <string name="continue_payment">اتمام عملية الدفع</string>
-    <string name="medical_renew_update_title">تعديل / اضافة / حذف تابعين</string>
-    <string name="claiming_title">الموافقات الطبية</string>
-    <string name="medical_title">الدليل الطبي</string>
-    <string name="inquiry_title">المدفوعات</string>
-    <string name="profile_title">هويتك الإلكترونية</string>
-    <string name="committees_title">اللجان</string>
-    <string name="engineering_records_title">تجديد سجل هندسي</string>
-    <string name="update_data_title">تحديث البيانات</string>
-    <string name="complaints_title">خدمة العملاء والشكاوى</string>
-    <string name="online_pharmacy_title">الصيدلية أون لاين</string>
-    <string name="doctors_reservation_title">حجز الأطباء</string>
-    <string name="user_services_title">خدمات المستخدم</string>
-    <string name="medical_letters_title">الموافقات الطبية المصدرة</string>
-    <string name="medical_letters_inquiry_title">استعلام الموافقات الطبية المصدرة</string>
-    <string name="change_password_title">تغيير كلمة المرور</string>
-    <string name="track_shipment_title">بيانات الشحن</string>
-    <string name="change_user_mobile_title">تغيير رقم الموبايل</string>
-    <string name="about_title">عن النقابة</string>
-    <string name="settings_title">الإعدادات</string>
-    <string name="contactus_title">اتصل بنا</string>
-    <string name="aboutapp_title">عن التطبيق</string>
-    <string name="help_title">مساعدة</string>
-    <string name="logout_title">تسجيل خروج</string>
-    <string name="notifications_title">الأشعارات</string>
-    <string name="font_size">حجم الخط</string>
-    <string name="font_size_small">صغير</string>
-    <string name="font_size_medium">متوسط</string>
-    <string name="font_size_large">كبير</string>
+    <string name="syndicates_title">Select Syndicate</string>
+    <string name="open_profile">View Profile</string>
+    <string name="menu_memberName">Name:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
+    <string name="menu_syndicateNumber">syndicateNumber:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
+    <string name="menu_phoneNumber">phoneNumber:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
+    <string name="home_title">Home Page</string>
+    <string name="news_title">News</string>
+    <string name="trips_title">Trips</string>
+    <string name="medical_services_title">medical services</string>
+    <string name="medical_renew_title">medical services Supscription</string>
+    <string name="save_edits">Save Edits</string>
+    <string name="continue_payment">complete the payment process</string>
+    <string name="medical_renew_update_title">Edit/Add/Delete affiliates</string>
+    <string name="claiming_title">Medical Aprovall</string>
+    <string name="medical_title">Medical Guide</string>
+    <string name="inquiry_title">Payment</string>
+    <string name="profile_title">e-identity</string>
+    <string name="committees_title">Committees</string>
+    <string name="engineering_records_title">Engineering record renewal</string>
+    <string name="update_data_title">Update Data</string>
+    <string name="complaints_title">Customer Service and Complaints</string>
+    <string name="online_pharmacy_title">Online Pharmacy</string>
+    <string name="doctors_reservation_title">doctors reservation</string>
+    <string name="user_services_title">USER SERVICES</string>
+    <string name="medical_letters_title">Medical approvals</string>
+    <string name="medical_letters_inquiry_title">Medical approvals status</string>
+    <string name="change_password_title">Change Password</string>
+    <string name="track_shipment_title">Shipment Info</string>
+    <string name="change_user_mobile_title">Change Phone Number</string>
+    <string name="about_title">About Syndicate</string>
+    <string name="settings_title">Settings</string>
+    <string name="contactus_title">Call Us</string>
+    <string name="aboutapp_title">About App</string>
+    <string name="help_title">Help</string>
+    <string name="logout_title">Sign Out</string>
+    <string name="notifications_title">Notifications</string>
+    <string name="font_size">Font Size</string>
+    <string name="font_size_small">small</string>
+    <string name="font_size_medium">Medium</string>
+    <string name="font_size_large">Larg</string>
 
-    <string name="wheel_news">news</string>
-    <string name="wheel_trips">الرحلات</string>
-    <string name="wheel_payment">المدفوعات</string>
-    <string name="wheel_employment">مزاولة المهنة</string>
-    <string name="wheel_retirees">المعاشات</string>
-    <string name="wheel_training">تدريب وتوظيف</string>
-    <string name="wheel_customer_service">خدمة العملاء</string>
-    <string name="wheel_complaints">استفسارات وشكاوى</string>
-    <string name="wheel_syndicate_services">خدمات نقابية</string>
-    <string name="wheel_medical">الرعاية الصحية</string>
+    <string name="wheel_news">News</string>
+    <string name="wheel_trips">Trips</string>
+    <string name="wheel_payment">Payment</string>
+    <string name="wheel_employment">Employment</string>
+    <string name="wheel_retirees">Pension</string>
+    <string name="wheel_training">Training and Employment</string>
+    <string name="wheel_customer_service">customers service</string>
+    <string name="wheel_complaints">Inquiries and Complaints</string>
+    <string name="wheel_syndicate_services">syndicate services</string>
+    <string name="wheel_medical">Healthcare</string>
 
 
-    <string name="wheel_seemore">شاهد المزيد</string>
-    <string name="wheel_enter_service">الدخول على الخدمة</string>
-    <string name="wheel_enter_medical">الدليل الطبي</string>
-    <string name="wheel_enter_claiming">الموافقات الطبية</string>
-    <string name="wheel_enter_records">ارسل طلب تجديد سجل هندسى</string>
-    <string name="wheel_enter_update_data">ارسل طلب تحديث بيانات</string>
-    <!--    <string name="wheel_payments_content">وقتكم محل تقديرنا- متاح الآن أكثر من ٧٠ خدمة  مدفوعات الكترونية عن (بُعد)، ستضاف المزيد من الخدمات الأخرى قريبا.</string>-->
-    <string name="wheel_payments_content">وقتكم محل تقديرنا- متاح الآن تجديد إشتراك الرعاية الصحية الكترونياً عن (بُعد)، ستضاف المزيد من الخدمات الأخرى قريبا.</string>
-    <string name="wheel_medical_content">صحتكم محل اهتمامنا- يمكنك من هذه الخدمة تقديم ومتابعة واستلام جميع طلباتك الطبية بسهولة، كما يمكنك الاطلاع علي الدليل الطبي لمعرفة أماكن توافر الخدمات الطبية الأقرب إليك بواسطة جوجل ماب.</string>
-    <string name="wheel_retirees_content">خدمتكم شرف لنا - يمكنك معرفة المزيد عن خدمات المعاشات قريبا.</string>
-    <string name="wheel_trips_content">سيتم إتاحة عرض وحجز الرحلات قريبا.</string>
-    <string name="wheel_training_content">التدريب المنتهي بالتوظيف هو شعارنا - يمكنك معرفة المزيد عن خدمات التدريب والتوظيف قريبا.</string>
-    <string name="wheel_complaints_content">آراءكم  محل اهتمامنا  - يمكنك الآن التواصل مع النقابة من خلال مقترحاتك وشكواك   ومتابعتها من خلال خدمة الإشعارات.</string>
-    <string name="wheel_employment_content">خدمتكم شرف لنا- يستطيع المهندس الاستشاري  والمكاتب الاستشارية    تجديد سجلاتهم الهندسية من خلال هذه الخدمة الميسرة، مع خدمات أخري لمزاولة المهنة ستضاف قرييا.</string>
-    <string name="wheel_syndicate_services_content">خدمتكم شرف لنا- تستطيع الآن من خلال هذه الخدمة تحديث جميع بياناتك لدي النقابة لحظياً  لسهولة التواصل وسرعة الحصول على الخدمة ، مع عديد من الخدمات العامة  ستضاف قريبا.</string>
-    <string name="wheel_customer_service_content">خدمة الرد على استفساراتكم  هي أولوياتنا -  ستفعل خدمات خدمة العملاء قريباً.</string>
-    <string name="closed_complaints">برجاء العلم ان خدمة تلقي الشكاوى والمقترحات غير متاحه الان من خلال التطبيق وستفعل بتاريخ 1 فبراير ٢٠٢١</string>
+    <string name="wheel_seemore">See More</string>
+    <string name="wheel_enter_service">Entering the service</string>
+    <string name="wheel_enter_medical">Medical Guide</string>
+    <string name="wheel_enter_claiming">Medical Approval</string>
+    <string name="wheel_enter_records">Submit an engineering record renewal request</string>
+    <string name="wheel_enter_update_data">Submit a data update request</string>
+    <!--    <string name="wheel_payments_content">We appreciat Your Time - more than 70 electronic payments services are now available (remotely), more other services will be added soon.</string>-->
+    <string name="wheel_payments_content">We appreciat Your Time - the healthcare subscription renewal is now available online (remotely), more other services will be added soon.</string>
+    <string name="wheel_medical_content">Your health is our concern - with this service, you can easily submit, follow up and receive all your medical requests. You can also view the medical guide to find out where medical services are available closest to you via Google Map.</string>
+    <string name="wheel_retirees_content">It is an honor to serve you - you can find out more about pension services soon.</string>
+    <string name="wheel_trips_content">Trips viewing and reservations will be available soon.</string>
+    <string name="wheel_training_content">Employment training is our motto - you can learn more about our training and employment services soon.</string>
+    <string name="wheel_complaints_content">Your opinions are of interest to us - you can now communicate with Your Syndicate through your suggestions and complaints and follow it up through the notifications service.</string>
+    <string name="wheel_employment_content">Your service is an honor for us - the consulting engineers and consulting offices can renew their engineering records through this easy service, with other services to practice the profession that will be added in villages.</string>
+    <string name="wheel_syndicate_services_content">Your service is an honor for us - you can now, through this service, update all your data with the Syndicate in real time for ease of communication and speed of obtaining the service, with many public services to be added soon.</string>
+    <string name="wheel_customer_service_content">Answering your inquiries is our priority - Customer Service Services will do soon.</string>
+    <string name="closed_complaints">Please note that the service to receive complaints and suggestions is not available now through the application and will be activated on February 1, 2021</string>
 
-    <string name="alert_title">تنبيه</string>
-    <string name="no_connection_msg">من فضلك تحقق من إتصالك بالإنترنت</string>
-    <string name="alert_no">لا</string>
-    <string name="alert_yes">نعم</string>
-    <string name="alert_confirm">تأكيد</string>
-    <string name="alert_confirm_login">تأكيد الدخول</string>
-    <string name="alert_change_number">تغيير الرقم</string>
-    <string name="no_connection_cancel">إغلاق</string>
-    <string name="no_connection_retry">محاولة أخرى</string>
-    <string name="go_to_payment">تجديد الإشتراك</string>
-    <string name="invalid_mobile">من فضلك ادخل رقم موبايل صحيح</string>
-    <string name="invalid_national_id">من فضلك ادخل رقم قومي صحيح</string>
-    <string name="invalid_email">من فضلك ادخل بريد الكتروني صحيح</string>
-    <string name="invalid_data">من فضلك أكمل ادخال البيانات</string>
-    <string name="invalid_number">رقم العضوية غير صحيح</string>
-    <string name="invalid_password">من فضلك ادخل كلمة المرور</string>
-    <string name="pick_photo">من فضلك أرفق صورة الطلب</string>
-    <string name="pick_photos">من فضلك أرفق الصور المطلوبة</string>
-    <string name="pick_photo_trips">من فضلك أرفق صور المستندات المطلوبة</string>
-    <string name="ok_btn">تأكيد</string>
-    <string name="cancel_btn">إلغاء</string>
-    <string name="close">إغلاق</string>
+    <string name="alert_title">Alert</string>
+    <string name="no_connection_msg">Check Your Internet Connection</string>
+    <string name="alert_no">No</string>
+    <string name="alert_yes">Yes</string>
+    <string name="alert_confirm">Confirm</string>
+    <string name="alert_confirm_login">Confirm Login</string>
+    <string name="alert_change_number">Change Number</string>
+    <string name="no_connection_cancel">Cancel</string>
+    <string name="no_connection_retry">Retry</string>
+    <string name="go_to_payment">Subscription renewal</string>
+    <string name="invalid_mobile">Please Enter The Correct Number</string>
+    <string name="invalid_national_id">Please enter a valid national number</string>
+    <string name="invalid_email">Please enter a valid email</string>
+    <string name="invalid_data">Please complete data entry</string>
+    <string name="invalid_number">Invalid membership number</string>
+    <string name="invalid_password">Please Enter Your Password</string>
+    <string name="pick_photo">Please attach a picture of the request</string>
+    <string name="pick_photos">Please attach the required photos</string>
+    <string name="pick_photo_trips">Please Upload Attachment</string>
+    <string name="ok_btn">Ok</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="close">Close</string>
 
-    <string name="address_title">العنوان: </string>
-    <string name="address">العنوان</string>
-    <string name="location_on_map">الموقع على الخريطة</string>
-    <string name="phone_title">التليفون: </string>
-    <string name="phone">التليفون</string>
-    <string name="email_title">البريد الالكتروني: </string>
-    <string name="subsyndicates_title">النقابات الفرعية</string>
-    <string name="mainsyndicate_title">النقابة العامة</string>
+    <string name="address_title">Address: </string>
+    <string name="address">Address</string>
+    <string name="location_on_map">Location On Map</string>
+    <string name="phone_title">Phone: </string>
+    <string name="phone">Phone</string>
+    <string name="email_title">Email: </string>
+    <string name="subsyndicates_title">Sub-unions</string>
+    <string name="mainsyndicate_title">General Syndicate</string>
     <string name="address_content">
         <![CDATA[<font color="#0b2031"><u>%s</u></font>]]>
     </string>
 
-    <string name="notifications_settings">الإشعارات</string>
+    <string name="notifications_settings">notifications</string>
 
     <string name="name_title">
-    <![CDATA[<font color="#1d1ad2">الإسم: </font>]]>%s
+    <![CDATA[<font color="#1d1ad2">Name: </font>]]>%s
     </string>
 
     <string name="shipment_date_title">
-    <![CDATA[<font color="#1d1ad2">التاريخ: </font>]]>%s
+    <![CDATA[<font color="#1d1ad2">Date: </font>]]>%s
     </string>
 
     <string name="shipment_status_title">
-    <![CDATA[<font color="#1d1ad2">حالة الشحنة: </font>]]>%s
+    <![CDATA[<font color="#1d1ad2">Shipment Status: </font>]]>%s
     </string>
 
     <string name="address_formatted_title">
-    <![CDATA[<font color="#1d1ad2">العنوان: </font>]]>%s
+    <![CDATA[<font color="#1d1ad2">Adsress: </font>]]>%s
     </string>
 
     <string name="shipment_company_title">
-    <![CDATA[<font color="#1d1ad2">شركة الشحن: </font>]]>%s
+    <![CDATA[<font color="#1d1ad2">Shipping company: </font>]]>%s
     </string>
 
     <string name="user_number_title">
-    <![CDATA[<font color="#1d1ad2">رقم العضوية: </font>]]>%s
+    <![CDATA[<font color="#1d1ad2">Membership number: </font>]]>%s
     </string>
 
     <string name="national_id_title">
-        <![CDATA[<font color="#1d1ad2">الرقم القومي: </font>]]>
+        <![CDATA[<font color="#1d1ad2">National id: </font>]]>
     </string>
-    <string name="national_id">الرقم القومي</string>
+    <string name="national_id">National id</string>
 
     <string name="enter_mobile_title">
-            <![CDATA[<font color="#1d1ad2">ادخل رقم الموبايل الخاص بك: </font>]]>
+            <![CDATA[<font color="#1d1ad2">Please Enter Your Phone Number: </font>]]>
     </string>
 
     <string name="record_type_title">
-    <![CDATA[<font color="#1d1ad2">نوع السجل: </font>]]>%s
+    <![CDATA[<font color="#1d1ad2">record type: </font>]]>%s
     </string>
 
     <string name="expiration_date_title">
-    <![CDATA[<font color="#1d1ad2">التاريخ: </font>]]>%s
+    <![CDATA[<font color="#1d1ad2">date: </font>]]>%s
     </string>
 
     <string name="last_renewal_date_title">
-    <![CDATA[<font color="#1d1ad2">تاريخ آخر تجديد: </font>]]>%s
+    <![CDATA[<font color="#1d1ad2">last renewal date: </font>]]>%s
     </string>
 
     <string name="amount_title">
-    <![CDATA[<font color="#1d1ad2">القيمة: </font>]]>%s
-        جنيه
+    <![CDATA[<font color="#1d1ad2">Amount: </font>]]>%s
+        Pound
     </string>
 
     <string name="current_amount_title">
-    <![CDATA[<font color="#1d1ad2">قيمة الفاتورة الحالية: </font>]]>%s
-        جنيه
+    <![CDATA[<font color="#1d1ad2">Current invoice value: </font>]]>%s
+        Pound
     </string>
 
-    <string name="pay">دفع</string>
-    <string name="basic_info_title">البيانات الاساسية</string>
-    <string name="delivery_info_title">بيانات التوصيل والاستلام</string>
-    <string name="delivery_method">طريقة التوصيل</string>
-    <string name="delivery_method_hint">التوصيل مقتصر علي المنازل لتلافي التجمعات وفقا لاجراءات التباعد الإجتماعي</string>
+    <string name="pay">Pay</string>
+    <string name="basic_info_title">Basic Info</string>
+    <string name="delivery_info_title">delivery info</string>
+    <string name="delivery_method">delivery method</string>
+    <string name="delivery_method_hint">Delivery is limited to homes to avoid gatherings in accordance with social distancing measures</string>
     <string name="delivery_mobile_title">رقم الموبايل</string>
-    <string name="delivery_mobile_hint">رقم الهاتف الذي سيتم التواصل عليه عند الاستلام</string>
-    <string name="home_delivery">توصيل للمنزل
-        (قيمة التوصيل :١٥ جنيه سيتم تحصيلها عند الاستلام)</string>
-    <string name="main_syndicate_delivery">إستلام من النقابة العامة
-    (بدون مصاريف توصيل )</string>
-    <string name="syndicate_delivery">إستلام من النقابة الفرعية
-    (بدون مصاريف توصيل )</string>
+    <string name="delivery_mobile_hint">The phone number to be contacted upon receiving</string>
+    <string name="home_delivery">home delivery
+        (Delivery value: 15 EGP, to be collected upon receipt)</string>
+    <string name="main_syndicate_delivery">Receipt from the Main Syndicate
+    (No delivery charges )</string>
+    <string name="syndicate_delivery">Receipt from the sub syndicate
+    (No delivery charges )</string>
 
     <string name="subSyndicate_delivery">
-    <![CDATA[<font color="#1d1ad2">النقابة الفرعية التابع لها المهندس: </font>]]>%s
+    <![CDATA[<font color="#1d1ad2">The engineer’s subsidiary union: </font>]]>%s
     </string>
-    <string name="followers">التابعين:</string>
-    <string name="add_follower">اضافة تابع جديد</string>
-    <string name="save_follower">حفظ بيانات التابع</string>
-    <string name="edit_follower_photo">تعديل الصورة الشخصية</string>
-    <string name="add_follower_photo">إضافة الصورة الشخصية</string>
-    <string name="exceed_father">لا يمكنك إضافة اكثر من والد</string>
-    <string name="exceed_mother">لا يمكنك إضافة اكثر من والدة</string>
-    <string name="exceed_wives">لا يمكنك إضافة اكثر من أربعة زوجات</string>
-    <string name="exceed_husband">لا يمكنك إضافة اكثر من زوج</string>
-    <string name="remove_follower">حذف</string>
-    <string name="remove_follower_reason">سبب الحذف</string>
-    <string name="remove_follower_attachments">من فضلك أضف المستندات التي تؤكد سبب الحذف</string>
-    <string name="send_request_confirmation">هل انت متأكد انك تريد ارسال الطلب إلى المراجعة؟!</string>
-    <string name="medical_subscribe_confirmation">هذا المهندس غير مسجل بخدمة الرعاية الصحية، هل تود الاشتراك في الخدمة ؟</string>
-    <string name="medical_subscription_unsubscribed">هذا الرقم غير مقيد بالنقابة، برجاء الرجوع للنقابة لطلب العضوية</string>
-    <string name="medical_subscription_suspended">هذه العضوية موقوفة برجاء الرجوع إلى النقابة</string>
-    <string name="medical_subscription_renew_syndicate_membership">لم يجدد اشتراك النقابة، يجب تجديد الاشتراك عن العام الحالي حتى تتمكن من تجديد اشتراك الرعاية الصحية</string>
-    <string name="medical_subscription_renew_incomplete_data">بيانات المهندس غير مكتمله برجاء الرجوع الي النقابة او الاتصال علي مركز خدمة العملاء</string>
-    <string name="medical_subscription_subscribed">لقد تم السداد بالفعل لسنة </string>
-    <string name="medical_subscription_renew_add_follower">يرجى اضافة التابعين للإستمرار</string>
-    <string name="already_paid">تم تأكيد إشتراك هذا المشروع من قبل</string>
-    <string name="retiree">حالة المهندس معاش وليس له اشتراك سنوي</string>
-    <string name="edit_follower">تعديل</string>
-    <string name="confirm_proceed_to_payment_msg">برجاء العلم انك لن تتمكن من تعديل التابعين مره اخرى حتي اتمام الدفع</string>
-    <string name="confirm_followers_edit_msg">لقد تم تسجيل طلبكم وسيتم الرد عليكم قريباً</string>
-    <string name="medical_update_request_status_processing">طلبكم ما زال تحت الدراسة</string>
-    <string name="medical_update_request_status_approved">لقد تم قبول الطلب وبرجاء الاستمرار لاتمام عمليه الدفع</string>
-    <string name="medical_update_request_status_rejected">لقد تم رفض طلبكم.</string>
-    <string name="medical_update_request_rejection_reason">سبب الرفض: </string>
-    <string name="medical_subscription_status_pending">لقد تم تاكيد الطلب وفي انتظار السداد في أحد منافذ الدفع باستخدام كود الدفع</string>
+    <string name="followers">Followers:</string>
+    <string name="add_follower">Add Follower</string>
+    <string name="save_follower">Save Follower Data</string>
+    <string name="edit_follower_photo">Edit profile Image</string>
+    <string name="add_follower_photo">Add Image</string>
+    <string name="exceed_father">You can only add one father</string>
+    <string name="exceed_mother">You can only add one mother</string>
+    <string name="exceed_wives">You Can’t Add More Than 4 wives</string>
+    <string name="exceed_husband">You Can not add more than 1 husband</string>
+    <string name="remove_follower">delete</string>
+    <string name="remove_follower_reason">Reason for deletion</string>
+    <string name="remove_follower_attachments">Please add documents that confirm the reason for deletion</string>
+    <string name="send_request_confirmation">Are you sure you want to submit the request for review?!</string>
+    <string name="medical_subscribe_confirmation">This engineer is not registered with the healthcare service. Would you like to subscribe to the service ؟</string>
+    <string name="medical_subscription_unsubscribed">This number is not restricted to the syndicate, please refer to the syndicate to request membership</string>
+    <string name="medical_subscription_suspended">This membership has been suspended, please Contact with the syndicate</string>
+    <string name="medical_subscription_renew_syndicate_membership">The syndicate’s subscription has not been renewed, the subscription must be renewed for the current year in order to be able to renew the healthcare subscription</string>
+    <string name="medical_subscription_renew_incomplete_data">The engineer’s data is incomplete, please refer to the Syndicate and contact the customer service center</string>
+    <string name="medical_subscription_subscribed">Payment has already been made for a year </string>
+    <string name="medical_subscription_renew_add_follower">Please add followers to continue</string>
+    <string name="already_paid">Participation in this project has already been confirmed</string>
+    <string name="retiree">The engineer’s condition is a pension and does not have an annual subscription</string>
+    <string name="edit_follower">edit</string>
+    <string name="confirm_proceed_to_payment_msg">Please notice that you will not be able to modify the affiliates again until the payment is completed</string>
+    <string name="confirm_followers_edit_msg">Your request has been registered and you will be answered shortly</string>
+    <string name="medical_update_request_status_processing">Your request is still under consideration</string>
+    <string name="medical_update_request_status_approved">The request has been accepted, please continue to complete the payment process</string>
+    <string name="medical_update_request_status_rejected">Your request has been rejected.</string>
+    <string name="medical_update_request_rejection_reason">Reason for rejection: </string>
+    <string name="medical_subscription_status_pending">The order has been confirmed and is waiting for payment at a payment outlet using the payment code</string>
     <string name="follower_item"><![CDATA[<font><b>%s: </b></font>]]>%s</string>
-    <string name="inquiry">المدفوعات</string>
-    <string name="details">التفاصيل:</string>
-    <string name="commission">مصروفات ادارية بنكية</string>
-    <string name="payment_method">طريقة الدفع:</string>
-    <string name="payment_card">بطاقات بنكية ( فيزا ماستر كارد ميزة)</string>
-    <string name="payment_channel">منافذ الدفع Opay</string>
-    <string name="payment_store_locator">لمعرفة اقرب منافذ الدفع المحيطة بك
-        <![CDATA[<font color="#41941b"><u> اضغط هنا</u></font>]]>
+    <string name="inquiry">Payments</string>
+    <string name="details">اdetails:</string>
+    <string name="commission">Bank administration expenses</string>
+    <string name="payment_method">Payment way:</string>
+    <string name="payment_card">Bank cards (Visa, MasterCard, Meza)</string>
+    <string name="payment_channel">Payment Channel Opay</string>
+    <string name="payment_store_locator">Find out the nearest payment outlets around you
+        <![CDATA[<font color="#41941b"><u>Press Here</u></font>]]>
     </string>
-    <string name="payment_fawry">منافذ الدفع فوري</string>
-    <string name="payment_wallet">محافظ إلكترونية</string>
-    <string name="payment_meeza">ميزة</string>
-    <string name="payment_reference">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك \n
-        كود الدفع:</string>
-    <string name="payment_reference_without_code">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك</string>
-    <string name="payment_canceled">لقد تم الغاء عملية الدفع</string>
-    <string name="payment_successful">تمت عملية الدفع بنجاح \n
-رقم العملية </string>
-    <string name="medical_card_delivery">\nسيتم تسليم الكروت في خلال 15 يوم من تاريخ الاشتراك</string>
-    <string name="name_on_card">إسم صاحب الكارت</string>
-    <string name="card_number">رقم الكارت</string>
-    <string name="card_expiry_year">تاريخ سنة الإنتهاء</string>
-    <string name="card_expiry_month">تاريخ شهر الإنتهاء</string>
-    <string name="card_expiry_date">تاريخ الإنتهاء</string>
-    <string name="month">شهر</string>
-    <string name="year">سنة</string>
+    <string name="payment_fawry">payment channel Fawry</string>
+    <string name="payment_wallet">e-wallet</string>
+    <string name="payment_meeza">meeza</string>
+    <string name="payment_reference">You can now pay from the nearest payment outlet until the renewal of the subscription is confirmed \n
+        Payment Code:</string>
+    <string name="payment_reference_without_code">You can now pay from the nearest payment outlet until the subscription renewal is confirmed</string>
+    <string name="payment_canceled">Your payment has been cancelled</string>
+    <string name="payment_successful">Payment has been completed successfully \n
+Transaction Number </string>
+    <string name="medical_card_delivery">\nCards will be delivered within 15 days from the date of subscription</string>
+    <string name="name_on_card">Card holder’s name</string>
+    <string name="card_number">Card Number</string>
+    <string name="card_expiry_year">Expiry Year</string>
+    <string name="card_expiry_month">Expiry Month</string>
+    <string name="card_expiry_date">Expiry date</string>
+    <string name="month">Month</string>
+    <string name="year">year</string>
     <string name="card_cvv">CVV</string>
-    <string name="token">الرمز</string>
-    <string name="save_card_info">حفظ بيانات البطاقة؟</string>
+    <string name="token">otp</string>
+    <string name="save_card_info">save card info?</string>
 
     <string name="date_title">
-    <![CDATA[<font color="#0b2031">تاريخ الطلب: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">Request date: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="type_title">
-    <![CDATA[<font color="#0b2031">نوع الطلب: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">request type: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="date">
-    <![CDATA[<font color="#0b2031">التاريخ: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">date: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="time">
-    <![CDATA[<font color="#0b2031">الوقت: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">time: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="source">
-    <![CDATA[<font color="#0b2031">المصدر: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">source: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="doctor_title">
-    <![CDATA[<font color="#0b2031">الطبيب: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">Doctor: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="trip_title">
-    <![CDATA[<font color="#0b2031">الرحلة: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">trip: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="regiment_title">
-    <![CDATA[<font color="#0b2031">الفوج: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">regiment: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="provider_title">
@@ -461,179 +461,185 @@
     </string>
 
     <string name="status_title">
-    <![CDATA[<font color="#0b2031">حالة الطلب: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">Request Status: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="approval_title">
-    <![CDATA[<font color="#0b2031">رقم الموافقة: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">Approval serial: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="comment">
-    <![CDATA[<font color="#0b2031">تعليق: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">comment: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="cost">
-    <![CDATA[<font color="#0b2031">التكلفة: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">cost: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="child_num_title">
-    <![CDATA[<font color="#0b2031">عدد الأطفال: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">children number: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
     <string name="housing_type_title">
-    <![CDATA[<font color="#0b2031">نوع الغرفة: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">housing type: </font><font color="#1d1ad2">%s</font>]]>
     </string>
 
-    <string name="view_attachment">عرض ملف الموافقة</string>
-    <string name="type">النوع</string>
-    <string name="no_data_found">لا توجد بيانات</string>
-    <string name="no_letters_data_found">لم يتم العثور على بيانات</string>
-    <string name="no_providers_found">لا توجد بيانات في هذا القسم</string>
-    <string name="home_paragraph">في اطار تقديم خدمة متميزة ومتطورة لاعضاء نقابة المهندسين قامت النقابة العامه للمهندسين باتاحه خدمة ارسال الموافقات الطبية الكترونيا من خلال تطبيق نقابتي وذلك من خلال اتاحة امكانيه رفع المرفقات الخاصة بالموافقات الطبية ويمكن للعضو متابعة حالة الطلب من خلال خدمة الاشعارات التنبيهية.</string>
-    <string name="records_add_photos">*السجل لمكتب هندسي\n
-        برجاء رفع المرفقات التالية:\n
-        - الصفحة المقيد بها بيانات المهندس والسجل الهندسي\n
-        - الصفحة التي تحتوي علي اخر ختم تجديد\n
-        - اخر صفحة من صفحات السجل الهندسي</string>
+    <string name="view_attachment">View approval file</string>
+    <string name="type">type</string>
+    <string name="no_data_found">no data found</string>
+    <string name="no_letters_data_found">No data was found</string>
+    <string name="no_providers_found">no data in this section</string>
+    <string name="home_paragraph">In the context of providing a distinguished and advanced service to the members of the Syndicate of Engineers, the General Syndicate of Engineers has made available the service of sending medical approvals electronically through the application of My Syndicate, by providing the ability to upload attachments for medical approvals, and the member can follow up on the status of the request through the alert notification service.</string>
+    <string name="records_add_photos">*Register for engineering office\n
+        Please upload the following attachments:\n
+        - The page in which the engineer’s data and engineering record are registered\n
+        - The page containing the last renewal stamp\n
+        - The last page of the engineering log</string>
 
     <string name="records_add_photos_0">
-    <![CDATA[<font color="#1d1ad2"> برجاء رفع المرفقات التالية: </font>]]>
+    <![CDATA[<font color="#1d1ad2"> Please upload the following attachments: </font>]]>
     </string>
 
     <string name="records_title">
-    <![CDATA[<font color="#1d1ad2"> بيانات السجل الهندسي </font>]]>
+    <![CDATA[<font color="#1d1ad2"> Engineering log data </font>]]>
     </string>
 
-    <string name="records_add_photos_1">∎ صفحة السجل المقيد بها بيانات السجل الهندسي</string>
+    <string name="records_add_photos_1">∎ The record page where the engineering record data are entered</string>
 
-    <string name="records_add_photos_2">∎ صفحة السجل التي تحتوي علي اخر ختم تجديد</string>
+    <string name="records_add_photos_2">∎ The page of the record that contains the last renewal stamp</string>
 
-    <string name="records_add_photos_3">∎ اخر صفحات السجل الهندسي مقيد بها أعمال</string>
+    <string name="records_add_photos_3">∎ The last pages of the engineering record are restricted to works</string>
 
-    <string name="records_add_photos_4">∎ صورة وجه بطاقة الرقم القومي</string>
+    <string name="records_add_photos_4">∎ Photo of the face of the national ID card</string>
 
-    <string name="records_add_photos_5">∎ صورة ظهر بطاقة الرقم القومي</string>
+    <string name="records_add_photos_5">∎ Photo of the back of the national ID card</string>
 
     <string name="bullet">∎ </string>
     <string name="update_data_add_photos">
-            <![CDATA[<font color="#1d1ad2"> برجاء رفع المرفقات التالية: </font>]]>
+            <![CDATA[<font color="#1d1ad2"> Please upload the following attachments: </font>]]>
     </string>
-    <string name="update_data_add_photos_1">- صورة وجه البطاقة</string>
-    <string name="update_data_add_photos_2">- صورة ظهر البطاقة</string>
-    <string name="update_data_add_photos_3">- صورة كارنيه العضوية</string>
+    <string name="update_data_add_photos_1">- face of the national ID card</string>
+    <string name="update_data_add_photos_2">- back of the national ID card</string>
+    <string name="update_data_add_photos_3">- membership card image</string>
 
-    <string name="update_data_add_photo">إضافة صورة</string>
-    <string name="user_not_allowed">التجديد لهذا العضو غير مسموح</string>
-    <string name="wrong_verification_code">كود التأكيد غير مطابق</string>
-    <string name="records_request_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
+    <string name="update_data_add_photo">add photo</string>
+    <string name="user_not_allowed">Renewal for this member is not allowed</string>
+    <string name="wrong_verification_code">verification code</string>
+    <string name="records_request_sent">Your request has been registered and we will respond to you within the day</string>
 
-    <string name="complaint_title">استفسارات</string>
-    <string name="complaint_section_title">شكاوى ومقترحات</string>
-    <string name="complaint_description">للاستفسارات نرجو الاتصال علي مركز خدمة العملاء (الكول سنتر) علي الرقم التالي <![CDATA[<font color="#1d1ad2"><b>0235317300</b></font>]]></string>
-    <string name="complaint_fill_data">املأ من فضلك ما يلي</string>
-    <string name="complaint_type">نوع الشكوى</string>
-    <string name="complaint_subtype">تصنيف الشكوى</string>
-    <string name="complaint_name">اسم مقدم الشكوى</string>
-    <string name="complaint_mobile">هاتف مقدم الشكوى</string>
-    <string name="complaint_body">موضوع الشكوى</string>
-    <string name="complaint_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
+    <string name="complaint_title">Inquiries</string>
+    <string name="complaint_section_title">Complaints and suggestions</string>
+    <string name="complaint_description">For inquiries, please contact the customer service center (call center) on the following number <![CDATA[<font color="#1d1ad2"><b>0235317300</b></font>]]></string>
+    <string name="complaint_fill_data">Please fill out the following</string>
+    <string name="complaint_type">complaint type</string>
+    <string name="complaint_subtype">complaint subtype</string>
+    <string name="complaint_name">Complainant’s name</string>
+    <string name="complaint_mobile">Complainant’s phone</string>
+    <string name="complaint_body">Complaint subject</string>
+    <string name="complaint_sent">Your request has been registered and we will respond to you within the day</string>
 
-    <string name="club_invitations">التذاكر المتاحة</string>
-    <string name="mobile">رقم الموبايل</string>
-    <string name="member_number">رقم العضوية</string>
-    <string name="subsyndicate">النقابة الفرعية</string>
-    <string name="section">الشعبة</string>
+    <string name="club_invitations">Available tickets</string>
+    <string name="mobile">Mobile No.</string>
+    <string name="member_number">Membership No.</string>
+    <string name="subsyndicate">subsyndicate</string>
+    <string name="section">section</string>
 
 
-    <string name="committees_degree">اخر مؤهل دراسي</string>
-    <string name="committees_status">الحالة الإجتماعية</string>
-    <string name="committees_committee">اللجان المراد الانضام اليها</string>
-    <string name="committees_section">شعبة المهندس</string>
-    <string name="committees_syndicate">نقابة المهندس الفرعية</string>
-    <string name="committees_hint">الانضمام الى لجان النقابة العامة للمهندسين</string>
-    <string name="committees_name">الإسم</string>
-    <string name="committees_mobile">رقم الموبايل</string>
-    <string name="committees_email">البريد الالكتروني</string>
-    <string name="committees_national_id">الرقم القومي</string>
-    <string name="committees_address">محل الاقامة</string>
-    <string name="committees_job">العمل الحالي</string>
-    <string name="committees_job_details">مختصر عن السيرة الذاتية والعمل العام والنقابي والطلابي</string>
-    <string name="committees_uni">الجامعة</string>
-    <string name="committees_department">القسم(التخصص)</string>
-    <string name="committees_max_three">من فضلك اختر ثلاثة لجان بحد أقصى</string>
-    <string name="committees_attach_photos">من فضلك أرفق الصورة الشخصية</string>
+    <string name="committees_degree">Last qualification</string>
+    <string name="committees_status">Marital status</string>
+    <string name="committees_committee">Committees to join</string>
+    <string name="committees_section">Engineer Division</string>
+    <string name="committees_syndicate">Engineers’ Sub Syndicate</string>
+    <string name="committees_hint">Join the committees of the General Syndicate of Engineers</string>
+    <string name="committees_name">Name</string>
+    <string name="committees_mobile">Mobile No.</string>
+    <string name="committees_email">email</string>
+    <string name="committees_national_id">national id</string>
+    <string name="committees_address">address</string>
+    <string name="committees_job">current job</string>
+    <string name="committees_job_details">Brief biography, general work, union and student work</string>
+    <string name="committees_uni">university</string>
+    <string name="committees_department">Department (specialty)</string>
+    <string name="committees_max_three">Please select a maximum of three committees</string>
+    <string name="committees_attach_photos">Please attach your profile picture</string>
 
     <string name="committees_add_photos_0">
-    <![CDATA[<font color="#1d1ad2"> برجاء رفع المرفقات التالية: </font>]]>
+    <![CDATA[<font color="#1d1ad2">Please upload the following attachments: </font>]]>
     </string>
-    <string name="committees_add_photos_1">∎ السيرة الذاتية PDF</string>
-    <string name="committees_add_photos_2">∎ كارنيه العضوية</string>
-    <string name="committees_add_photos_3">∎ الصورة الشخصية</string>
+    <string name="committees_add_photos_1">∎ CV PDF</string>
+    <string name="committees_add_photos_2">∎ membership card</string>
+    <string name="committees_add_photos_3">∎ profile picture</string>
 
-    <string name="questionnaire_title">استطلاع رأي</string>
-    <string name="answer_questionnaire">للمشاركة في استطلاع الرأي قم بالضغط على الرسالة</string>
-    <string name="questionnaire_answered">لقد تمت الإجابة على هذا الاستطلاع من قبل</string>
-    <string name="questionnaire_question">عرض السؤال</string>
+    <string name="questionnaire_title">Poll</string>
+    <string name="answer_questionnaire">To participate in the opinion poll, click on the message</string>
+    <string name="questionnaire_answered">This poll has already been answered!</string>
+    <string name="questionnaire_question">View question</string>
 
 
-    <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
+    <string name="developed_by">developed by neQabty</string>
     <string name="app_version">Version %s</string>
-    <string name="body_content">السادة / جهات العلاج المتعاقدة مع مشروع العلاج لنقابة المهندسين يرجى العلم بتجديد اشتراك %s للمهندس المدون بياناته و تابعيه لذا يرجى تقديم الخدمة الطبية, ويعد هذا الايصال بمثابة كارنيه المشروع لعام %s.</string>
-    <string name="titleContent">اشتراك الرعاية الصحية</string>
-    <string name="upload_pdf">تحميل اخطار الدفع</string>
-    <string name="medical_letter_creation_type_syndicate">(النقابة)</string>
-    <string name="medical_letter_creation_type_portal">(البورتال الطبي)</string>
-    <string name="medical_letter_is_active">مفعل</string>
-    <string name="medical_letter_is_cancelled">لاغي</string>
-    <string name="medical_letter_download_report">تحميل استمارة التحويل</string>
+    <string name="body_content">Gentlemen / medical providers contracting with the medical project, the Syndicate of Engineers, please be aware of the renewal of subscription %s للمهندس المدون بياناته و تابعيه لذا يرجى تقديم الخدمة الطبية, ويعد هذا الايصال بمثابة كارنيه المشروع لعام %s.</string>
+    <string name="titleContent">Healthcare subscription</string>
+    <string name="upload_pdf">Download the payment receipt</string>
+    <string name="medical_letter_creation_type_syndicate">(Syndicate)</string>
+    <string name="medical_letter_creation_type_portal">(medical portal)</string>
+    <string name="medical_letter_is_active">active</string>
+    <string name="medical_letter_is_cancelled">cancelled</string>
+    <string name="medical_letter_download_report">download medical approval</string>
     <string name="arabic_letters">غظضذ خثتشرقصجفعسنملةىكيطئءؤحزوهدبا أإلإآ</string>
 
-    <string name="online_pharmacy_vezeeta">فيزيتا</string>
-    <string name="online_pharmacy_vezeeta_fees">تغطي القاهرة والاسكندرية بخدمة توصيل ١٠ جنية</string>
-    <string name="online_pharmacy_yodawy">يداوي</string>
-    <string name="online_pharmacy_yodawy_fees">تغطي جميع انحاء الجمهورية بخدمة توصيل مجانية</string>
-    <string name="yodawy_title">تفاصيل خدمة يداوي</string>
-    <string name="yodawy_details">١- تغطي الخدمة جميع محافظات الجمهورية
-        \n٢- خدمة توصيل مجانية
+    <string name="online_pharmacy_vezeeta">vezeeta</string>
+    <string name="online_pharmacy_vezeeta_fees">Covering Cairo and Alexandria with a delivery service of 10 EGP</string>
+    <string name="online_pharmacy_yodawy">yodawy</string>
+    <string name="online_pharmacy_yodawy_fees">Covering all over the republic free delivery service</string>
+    <string name="yodawy_title">yodawy Service Details</string>
+    <string name="yodawy_details">1- The service covers all the governorates of the Republic
+        \n2- Free delivery service
         \n
-٣- نسب مساهمة لمشتركي الرعاية الصحية 20٪ علي الادوية المحلية
-و 10٪ علي الادوية المستوردة
+3- Contribution rates for health care subscribers 20% on local medicines and 10% on imported medicines
         \n
-٤- نسب مساهمة لغير مشتركي الرعاية الصحية 10٪ علي الادوية
-المحلية و 5% علي الادوية المستوردة
+4- Contribution rates for non-health care subscribers: 10% on local medicines and 5% on imported medicines
     </string>
-    <string name="vezeeta_title">تفاصيل خدمة فيزيتا</string>
+    <string name="vezeeta_title">Vezeeta service details</string>
     <string name="vezeeta_details">
-        ١- تغطي الخدمة محفاظات القاهرة والاسكندرية
+        1- The service covers the governorates of Cairo and Alexandria
         \n
-٢- خدمة توصيل ١٠ جنية
+2- Delivery service 10 EGP
         \n
-٣- نسب مساهمة لمشتركي الرعاية الصحية 20٪ علي الادوية المحلية
- و 10٪ علي الادوية المستوردة
+3- Contribution rates for health care subscribers 20% on local medicines and 10% on imported medicines
         \n
-٤- نسب مساهمة لغير مشتركي الرعاية الصحية 10٪ علي الادوية
-المحلية و 5% علي الادوية المستوردة
+4- Contribution rates for non-health care subscribers: 10% on local medicines and 5% on imported medicines
     </string>
-    <string name="vezeeta_doctors_details">يمكنك الآن حجز الاطباء الغير متعاقدين مع النقابة باسعار خاصة للمهندسين عن طريق شبكة اطباء فيزيتا</string>
-    <string name="authentication_error">لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى</string>
-    <string name="male">ذكر</string>
-    <string name="female">أنثى</string>
-    <string name="relation_child">طفل</string>
-    <string name="relation_mother">والدة</string>
-    <string name="relation_father">والد</string>
-    <string name="relation_son">ابن / ابنة</string>
-    <string name="relation_wife">زوجة</string>
-    <string name="relation_member">مهندس/عضو</string>
-    <string name="select_all">اختيار متعدد</string>
-    <string name="multi_selection">اختار الكل</string>
-    <string name="pdf_report_eng_name">اسم المهندس : </string>
-    <string name="pdf_report_eng_number">رقم العضوية : </string>
-    <string name="pdf_report_healthcare_number">رقم المنظومة العلاجية : </string>
-    <string name="pdf_report_current_subscription">الاشتراك الحالي : </string>
-    <string name="pdf_report_followers">التابعين (</string>
-    <string name="pdf_report_followers_end">) :</string>
-    <string name="pdf_report_table_name">الاسم</string>
-    <string name="pdf_report_table_relation">درجة القرابة</string>
-    <string name="pdf_report_table_healthcare_number">رقم المنظومة العلاجية</string>
+    <string name="vezeeta_doctors_details">You can now book doctors who are not contracted with the Syndicate at special prices for engineers through Vezeeta Doctors Network</string>
+    <string name="authentication_error">You are already logged in, please logout and login again</string>
+    <string name="male">male</string>
+    <string name="female">female</string>
+    <string name="relation_child">child</string>
+    <string name="relation_mother">mother</string>
+    <string name="relation_father">father</string>
+    <string name="relation_son">son/ daughter</string>
+    <string name="relation_wife">wife</string>
+    <string name="relation_member">engineer/ member</string>
+    <string name="select_all">select all</string>
+    <string name="multi_selection">multiple selections</string>
+    <string name="pdf_report_eng_name">Engineer name : </string>
+    <string name="pdf_report_eng_number">Membership number : </string>
+    <string name="pdf_report_healthcare_number">Medical Card Number : </string>
+    <string name="pdf_report_current_subscription">Current subscription year : </string>
+    <string name="pdf_report_followers">followers (</string>
+    <string name="pdf_report_followers_end">) : </string>
+    <string name="pdf_report_table_name">Name</string>
+    <string name="pdf_report_table_relation">Relation type</string>
+    <string name="pdf_report_table_healthcare_number">Medical Card Number</string>
+    <string name="attachments_hint_partner">- Please attach a copy of the marriage certificate or a copy of the national ID card</string>
+    <string name="attachments_hint_children">-  Children under 16 years old, please attach a birth certificate
+        \n
+    - Children after 18 years, please attach a copy of the national ID card
+    \n
+    - Children after 25 years, please attach a copy of the national ID card and proof that he is a student
+    </string>
+    <string name="attachments_hint_parents">- To add the mother, please attach a copy of the engineer’s birth certificate and the mother’s ID card
+        \n
+    - To add the father, please attach a photo of the father’s ID card</string>
 
 </resources>

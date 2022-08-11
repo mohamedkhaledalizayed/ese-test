@@ -393,7 +393,7 @@
     <string name="medical_update_request_status_rejected">لقد تم رفض طلبكم.</string>
     <string name="medical_update_request_rejection_reason">سبب الرفض: </string>
     <string name="medical_subscription_status_pending">لقد تم تاكيد الطلب وفي انتظار السداد في أحد منافذ الدفع باستخدام كود الدفع</string>
-    <string name="follower_item"><![CDATA[<font><b>%s: </b></font>]]>%s</string>
+    <string name="follower_item"><![CDATA[<font><b>%1$s: </b></font>]]>%2$s</string>
     <string name="inquiry">المدفوعات</string>
     <string name="details">التفاصيل:</string>
     <string name="commission">مصروفات ادارية بنكية</string>
@@ -457,7 +457,7 @@
     </string>
 
     <string name="provider_title">
-    <![CDATA[<font color="#0b2031">%s: </font><font color="#1d1ad2">%s</font>]]>
+    <![CDATA[<font color="#0b2031">%1$s: </font><font color="#1d1ad2">%2$s</font>]]>
     </string>
 
     <string name="status_title">
@@ -624,8 +624,8 @@
     <string name="relation_son">ابن / ابنة</string>
     <string name="relation_wife">زوجة</string>
     <string name="relation_member">مهندس/عضو</string>
-    <string name="select_all">اختيار متعدد</string>
-    <string name="multi_selection">اختار الكل</string>
+    <string name="select_all">اختار الكل</string>
+    <string name="multi_selection">اختيار متعدد</string>
     <string name="pdf_report_eng_name">اسم المهندس : </string>
     <string name="pdf_report_eng_number">رقم العضوية : </string>
     <string name="pdf_report_healthcare_number">رقم المنظومة العلاجية : </string>
@@ -635,5 +635,16 @@
     <string name="pdf_report_table_name">الاسم</string>
     <string name="pdf_report_table_relation">درجة القرابة</string>
     <string name="pdf_report_table_healthcare_number">رقم المنظومة العلاجية</string>
+    <string name="attachments_hint_partner">- برجاء إرفاق صورة قسيمة الزواج او صورة بطاقة الرقم القومي</string>
+    <string name="attachments_hint_children">-  أبناء اقل من ١٦ سنة برجاء إرفاق شهادة الميلاد
+        \n
+- أبناء بعد ١٨ سنة برجاء إرفاق صورة بطاقة الرقم القومي
+        \n
+- أبناء بعد ٢٥ سنة برجاء إرفاق صورة بطاقة الرقم القومي وما يفيد انه طالب
+    </string>
+    <string name="attachments_hint_parents">- لإضافة الوالدة برجاء إرفاق صورة شهادة ميلاد المهندس والبطاقة الشخصية للوالدة
+    \n
+     - لإضافة الوالد برجاء إرفاق صورة البطاقة الشخصية للوالد
+    </string>
 
 </resources>

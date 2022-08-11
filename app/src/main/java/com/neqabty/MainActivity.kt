@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LOCALE
         setSupportActionBar(toolbar)
         getAppConfig()
-//        checkRoot()
+        checkRoot()
         startActivities()
         loadAds()
 
@@ -289,26 +289,21 @@ class MainActivity : AppCompatActivity() {
         var navMenu = navigationView.menu
 //        navMenu.findItem(R.id.logout_fragment)?.isVisible = sharedPref.isRegistered
         navigationView.getHeaderView(0).findViewById<Button>(R.id.bLogout).setOnClickListener {
-            Config.LANGUAGE = "ar"
-            recreate()
-//            attachBaseContext(Config.ContextWrapper.wrap(baseContext, Locale("ar")))
-//            MyApp.appResources.configuration.setLocale(Locale("ar"))
-//            baseContext.createConfigurationContext(configuration)
-//            sharedPref.isRegistered = false
-//            sharedPref.user = ""
-//            sharedPref.name = ""
-//            sharedPref.mobile = ""
-//            sharedPref.jwt = ""
-//            sharedPref.token = ""
-//            sharedPref.photo = ""
-//            sharedPref.notificationsCount = 0
-//            PushNotificationsWrapper().deleteToken(this)
-//            invalidateOptionsMenu()
-//
-//            (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-//
-//            Navigation.findNavController(this, R.id.container)
-//                    .navigate(R.id.openLoginFragment)
+            sharedPref.isRegistered = false
+            sharedPref.user = ""
+            sharedPref.name = ""
+            sharedPref.mobile = ""
+            sharedPref.jwt = ""
+            sharedPref.token = ""
+            sharedPref.photo = ""
+            sharedPref.notificationsCount = 0
+            PushNotificationsWrapper().deleteToken(this)
+            invalidateOptionsMenu()
+
+            (drawer_layout as DrawerLayout).setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
+            Navigation.findNavController(this, R.id.container)
+                    .navigate(R.id.openLoginFragment)
         }
 
         if (sharedPref.name.isNotEmpty()) {
