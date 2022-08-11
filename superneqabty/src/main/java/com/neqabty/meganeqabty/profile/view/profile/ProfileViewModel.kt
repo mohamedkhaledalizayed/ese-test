@@ -3,7 +3,7 @@ package com.neqabty.meganeqabty.profile.view.profile
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.meganeqabty.core.utils.Resource
+import com.neqabty.core.utils.Resource
 import com.neqabty.meganeqabty.profile.domain.entity.profile.ProfileEntity
 import com.neqabty.meganeqabty.profile.domain.interactors.ProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

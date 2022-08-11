@@ -17,8 +17,8 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySuggestionsBinding
 import com.neqabty.healthcare.modules.suggestions.data.model.ComplaintBody
 import com.neqabty.healthcare.modules.suggestions.domain.entity.CategoryEntity
@@ -61,7 +61,7 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
                             binding.layout.visibility = View.VISIBLE
                             categoriesList = resource.data
                             categoriesAdapter.submitList(
-                                resource.data.toMutableList()
+                                resource.data!!.toMutableList()
                                     .also { list -> list.add(0, CategoryEntity(0, "اختر الفئة", "")) })
                         }
                     }

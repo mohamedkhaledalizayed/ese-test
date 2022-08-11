@@ -5,11 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.R
-import com.neqabty.meganeqabty.core.ui.BaseActivity
-import com.neqabty.meganeqabty.core.utils.AppUtils
+import com.neqabty.core.utils.AppUtils
 import com.neqabty.meganeqabty.databinding.ActivityPaymentStatusBinding
 import com.neqabty.meganeqabty.payment.view.PaymentViewModel
 import com.squareup.picasso.Picasso
@@ -33,10 +32,10 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
 
             it?.let { resource ->
                 when (resource.status) {
-                    com.neqabty.meganeqabty.core.utils.Status.LOADING -> {
+                    com.neqabty.core.utils.Status.LOADING -> {
                         binding.progressCircular.visibility = View.VISIBLE
                     }
-                    com.neqabty.meganeqabty.core.utils.Status.SUCCESS -> {
+                    com.neqabty.core.utils.Status.SUCCESS -> {
                         binding.layoutContainer.visibility = View.VISIBLE
                         binding.progressCircular.visibility = View.GONE
                         if (!resource.data?.id.isNullOrEmpty()){
@@ -61,7 +60,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                             binding.statusDetails.text = "لم يتم دفع الفاتورة."
                         }
                     }
-                    com.neqabty.meganeqabty.core.utils.Status.ERROR -> {
+                    com.neqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
                         Log.e("test", resource.message.toString())
                     }

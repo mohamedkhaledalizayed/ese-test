@@ -18,9 +18,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
+import com.neqabty.core.ui.BaseActivity
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.modules.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
@@ -158,8 +158,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
                 Status.SUCCESS ->{
                     binding.homeContent.progressCircularAds.visibility = View.GONE
                     if (resource.data!!.isNotEmpty()){
-                        listAds.addAll(resource.data)
-                        for (data: AdEntity in resource.data) {
+                        listAds.addAll(resource.data!!)
+                        for (data: AdEntity in resource.data!!) {
                             list.add(
                                 CarouselItem(
                                     imageUrl = data.image,
@@ -238,8 +238,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             }
             R.id.wallet -> {
                 if (sharedPreferences.isPhoneVerified){
-                    val intent = Intent(this@HomeActivity, WalletActivity::class.java)
-                    startActivity(intent)
+                    comingSoon("سوف يتم توفير هذه الخدمة قريبا.")
+//                    val intent = Intent(this@HomeActivity, WalletActivity::class.java)
+//                    startActivity(intent)
                 }else{
                     askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
                 }
@@ -333,6 +334,21 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
+    private fun comingSoon(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
         ) { dialog, _ ->
             dialog.dismiss()
         }

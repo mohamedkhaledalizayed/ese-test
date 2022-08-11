@@ -7,11 +7,11 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.text.isDigitsOnly
+import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.Status
+import com.neqabty.core.utils.isMobileValid
 import com.neqabty.signup.R
-import com.neqabty.signup.core.ui.BaseActivity
-import com.neqabty.signup.core.utils.Status
-import com.neqabty.signup.core.utils.isMobileValid
-import com.neqabty.signup.core.utils.isValidEmail
+import com.neqabty.core.utils.isValidEmail
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.signup.data.model.NeqabtySignupBody
 import com.neqabty.signup.modules.signup.domain.entity.SignupParams
@@ -90,9 +90,9 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                             sharedPreferences.isPhoneVerified = true
                             sharedPreferences.isSyndicateMember = true
                             sharedPreferences.mobile = binding.phone.text.toString()
-                            sharedPreferences.name = resource.data.fullname ?: ""
-                            sharedPreferences.nationalId = resource.data.nationalId
-                            sharedPreferences.code = resource.data.entityCode
+                            sharedPreferences.name = resource.data!!.fullname ?: ""
+                            sharedPreferences.nationalId = resource.data!!.nationalId
+                            sharedPreferences.code = resource.data!!.entityCode
                             finish()
                         }else{
                             Toast.makeText(this, "حدث خطاء", Toast.LENGTH_LONG).show()
@@ -118,9 +118,9 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                         if (resource.data!!.nationalId.isNotEmpty()){
                             sharedPreferences.isPhoneVerified = true
                             sharedPreferences.mobile = binding.phone.text.toString()
-                            sharedPreferences.name = resource.data.fullname ?: ""
-                            sharedPreferences.nationalId = resource.data.nationalId
-                            sharedPreferences.code = resource.data.entityCode
+                            sharedPreferences.name = resource.data!!.fullname ?: ""
+                            sharedPreferences.nationalId = resource.data!!.nationalId
+                            sharedPreferences.code = resource.data!!.entityCode
                             finish()
                         }else{
                             Toast.makeText(this, "حدث خطاء", Toast.LENGTH_LONG).show()
@@ -147,7 +147,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                         if (resource.data!!.isNotEmpty()){
                             syndicateListEntity = resource.data
                             mSyndicatesAdapter.submitList(
-                                resource.data.toMutableList()
+                                resource.data!!.toMutableList()
                                     .also { list -> list.add(0, SyndicateListEntity("",0,"", "اختر النقابة")) })
                         }else{
                             Toast.makeText(this, "لا يوجد نقابات", Toast.LENGTH_LONG).show()

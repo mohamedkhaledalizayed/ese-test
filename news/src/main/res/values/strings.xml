@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Courses</string>
-    <string name="news">الأخبار</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="news">News</string>
+    <string name="no_news">No News</string>>
 </resources>

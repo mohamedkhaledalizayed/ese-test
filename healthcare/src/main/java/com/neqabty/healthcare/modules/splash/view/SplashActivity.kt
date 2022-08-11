@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySplashBinding
 import com.neqabty.healthcare.modules.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.modules.home.presentation.view.homescreen.HomeActivity
 import com.neqabty.meganeqabty.R
-import com.neqabty.meganeqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.core.utils.DeviceUtils
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog

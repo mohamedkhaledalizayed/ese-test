@@ -8,8 +8,8 @@ import android.provider.Settings
 import android.view.View
 import android.widget.SeekBar
 import androidx.core.app.NotificationManagerCompat
+import com.neqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.R
-import com.neqabty.meganeqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.databinding.ActivitySettingsBinding
 import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint

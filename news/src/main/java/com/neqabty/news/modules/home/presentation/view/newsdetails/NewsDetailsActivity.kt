@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.Status
 import com.neqabty.news.R
-import com.neqabty.news.core.ui.BaseActivity
-import com.neqabty.news.core.utils.Status
 import com.neqabty.news.databinding.ActivityNewsDetailsBinding
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,11 +37,11 @@ class NewsDetailsActivity : BaseActivity<ActivityNewsDetailsBinding>() {
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data != null){
-                            Picasso.get().load(resource.data.image).into(binding.newsImage)
-                            binding.newsTitle.text = resource.data.headline
-                            binding.newsSource.text = "المصدر : ${resource.data.source}"
-                            binding.content.text = resource.data.content
-                            binding.newsDate.text = dateFormat(resource.data.createdAt.split(".")[0])
+                            Picasso.get().load(resource.data!!.image).into(binding.newsImage)
+                            binding.newsTitle.text = resource.data!!.headline
+                            binding.newsSource.text = "المصدر : ${resource.data!!.source}"
+                            binding.content.text = resource.data!!.content
+                            binding.newsDate.text = dateFormat(resource.data!!.createdAt.split(".")[0])
                         }else{
                             Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
                         }

@@ -4,13 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.core.utils.AppUtils
-import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.healthcare.modules.splash.data.model.AppConfig
 import com.neqabty.healthcare.modules.splash.domain.interactors.AppConfigUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

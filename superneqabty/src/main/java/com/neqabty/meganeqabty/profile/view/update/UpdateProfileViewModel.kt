@@ -3,11 +3,10 @@ package com.neqabty.meganeqabty.profile.view.update
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.meganeqabty.core.utils.Resource
+import com.neqabty.core.utils.Resource
 import com.neqabty.meganeqabty.profile.domain.entity.MinistryLicenseEntity
 import com.neqabty.meganeqabty.profile.domain.interactors.ProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody

@@ -1,14 +1,6 @@
 <resources>
-    <string name="app_name">Courses</string>
-    <string name="welcome_to_neqabty">مرحبا بكم في تطبيق نقابة المهندسين المصرية - نقابتي</string>
-    <string name="experimental_version">(نسخة تجريبية)</string>
-    <string name="login_visitor_enter_mobile">برجاء ادخال رقم الهاتف المحمول لانشاء حسابك الخاص</string>
-    <string name="send">إرسال</string>
-    <string name="main">الجهات الرئيسية</string>
-    <string name="neqabty">نقابتي هو منصة تفاعلية تهدف الي تقديم خدمات الرعاية الصحية لنقابة المهندسين المصرية بطريقة مميكنة مدعمة بوسائل مختلفة للدفع الالكتروني لتسيهل الحصول علي الخدمات ومتابعة مدفوعاتهم باقل وقت ومجهود</string>
-    <string name="signup">تسجيل إشتراك</string>
-    <string name="login">تسجيل الدخول</string>
-    <string name="password">كلمة المرور</string>
-    <string name="phone">رقم الموبايل</string>
-    <string name="payments">المدفوعات</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="enter_password">Please Enter Password</string>
 </resources>

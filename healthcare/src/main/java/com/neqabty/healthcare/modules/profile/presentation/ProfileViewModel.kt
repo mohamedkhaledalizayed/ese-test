@@ -3,8 +3,8 @@ package com.neqabty.healthcare.modules.profile.presentation
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.core.utils.AppUtils
-import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.healthcare.modules.profile.domain.entity.profile.ProfileEntity
 import com.neqabty.healthcare.modules.profile.domain.usecases.GetProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

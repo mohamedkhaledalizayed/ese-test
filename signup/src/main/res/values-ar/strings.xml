@@ -1,0 +1,15 @@
+<resources>
+    <string name="signup">تسجيل إشتراك</string>
+    <string name="membership_id">رقم العضوية</string>
+    <string name="national_id">الرقم القومى</string>
+    <string name="phone">الموبايل</string>
+    <string name="email">البريد الالكترونى</string>
+    <string name="syndicate_member">عضو نقابة</string>
+    <string name="neqabty_member">لست عضو نقابة</string>
+    <string name="full_name">الأسم بالكامل</string>
+    <string name="password">كلمة المرور</string>
+    <string name="please_wait">من فضلك انتظر...</string>
+    <string name="confirm">تاكيد</string>
+    <string name="neqabty">نقابتى</string>
+    <string name="enter_num">برجاء إدخال رقم الهاتف المحمول لإنشاء \n حسابك الخاص</string>
+</resources>

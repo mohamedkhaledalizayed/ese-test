@@ -6,9 +6,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.Status
 import com.neqabty.login.R
-import com.neqabty.meganeqabty.core.ui.BaseActivity
-import com.neqabty.meganeqabty.core.utils.Status
 import com.neqabty.meganeqabty.databinding.ActivityPaymentsBinding
 import com.neqabty.meganeqabty.payment.domain.entity.serviceactions.ServiceActionsEntity
 import com.neqabty.meganeqabty.payment.domain.entity.services.ServicesListEntity
@@ -33,7 +33,7 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
 //        val intent = Intent(this, PaymentStatusActivity::class.java)
 //        intent.putExtra("referenceCode", "d1d9bf1e-8963-4f01-8692-b928e213e24d")
 //        startActivity(intent)
-        setupToolbar(titleResId = R.string.payments)
+        setupToolbar(title = "المدفوعات")
         paymentViewModel.getServices()
         paymentViewModel.services.observe(this) {
 

@@ -1,23 +1,17 @@
 package com.neqabty.login.modules.login.presentation.view.homescreen
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.widget.Toolbar
+import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.Status
 import com.neqabty.login.R
-import com.neqabty.login.core.ui.BaseActivity
-import com.neqabty.login.core.utils.ParcelClickListenerExtra
-import com.neqabty.login.core.utils.Status
-import com.neqabty.login.core.utils.isMobileValid
 import com.neqabty.login.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
-import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
@@ -34,7 +28,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         dialog = SpotsDialog.Builder()
             .setContext(this)
-            .setMessage("من فضلك انتظر...")
+            .setMessage(resources.getString(R.string.please_wait))
             .build()
 
 
@@ -51,12 +45,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         dialog.dismiss()
                         if (resource.data!!.user.account.nationalId.isNotEmpty()){
                             sharedPreferences.isPhoneVerified = true
-                            sharedPreferences.isSyndicateMember = resource.data.user.account.entity.type == "syndicate"
-                            sharedPreferences.token = resource.data.token
+                            sharedPreferences.isSyndicateMember = resource.data!!.user.account.entity.type == "syndicate"
+                            sharedPreferences.token = resource.data!!.token
                             sharedPreferences.mobile = binding.etUsername.text.toString()
-                            sharedPreferences.name = resource.data.user.account.fullName ?: ""
-                            sharedPreferences.nationalId = resource.data.user.account.nationalId
-                            sharedPreferences.userImage = "${resource.data.user.account.image}"
+                            sharedPreferences.name = resource.data!!.user.account.fullName ?: ""
+                            sharedPreferences.nationalId = resource.data!!.user.account.nationalId
+                            sharedPreferences.userImage = "${resource.data!!.user.account.image}"
                             finish()
                         }else{
                             Toast.makeText(this, "حدث خطا", Toast.LENGTH_LONG).show()
@@ -86,7 +80,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     fun login(view: View) {
         hideKeyboard()
         if (binding.etPassword.text.toString().isEmpty()){
-            Toast.makeText(this, "من فضلك ادخل كلمة المرور", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, resources.getString(R.string.enter_password), Toast.LENGTH_LONG).show()
             return
         }
 

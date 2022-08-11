@@ -4,13 +4,12 @@ package com.neqabty.healthcare.modules.offers.presentation.view.offers
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.core.utils.AppUtils
-import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.healthcare.modules.offers.domain.entity.offers.OffersEntity
 import com.neqabty.healthcare.modules.offers.domain.interactors.GetOffersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

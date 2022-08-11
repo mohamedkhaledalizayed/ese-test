@@ -1,19 +1,16 @@
 package com.neqabty.news.modules.home.presentation.view.newslist
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.neqabty.news.core.ui.BaseActivity
-import com.neqabty.news.core.utils.Status
-import com.neqabty.news.databinding.ActivityNewsDetailsBinding
+import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.Status
+import com.neqabty.news.R
 import com.neqabty.news.databinding.ActivityNewsListBinding
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,10 +25,10 @@ class NewsListActivity : BaseActivity<ActivityNewsListBinding>() {
 
 
         if (intent.getStringExtra("id") == null || intent.getIntExtra("type", -1) == 1){
-            setupToolbar( title = "الاخبار العامة")
+            setupToolbar( titleResId = R.string.general_news)
             homeViewModel.getAllNews()
         }else{
-            setupToolbar( title = "أخبار النقابة")
+            setupToolbar( titleResId = R.string.news_title)
             homeViewModel.getSyndicateNews("${intent.getStringExtra("id")}")
         }
 

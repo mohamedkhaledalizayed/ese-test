@@ -1,13 +1,15 @@
 <resources>
-    <string name="app_name">Courses</string>
-    <string name="signup">تسجيل إشتراك</string>
-    <string name="membership_id">رقم العضوية</string>
-    <string name="national_id">الرقم القومى</string>
-    <string name="phone">الموبايل</string>
-    <string name="email">البريد الالكترونى</string>
+    <string name="signup">Sign Up</string>
+    <string name="membership_id">Membership Id</string>
+    <string name="national_id">National Id</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
     <string name="syndicate_member">عضو نقابة</string>
     <string name="neqabty_member">لست عضو نقابة</string>
-    <string name="full_name">الأسم بالكامل</string>
-    <string name="password">كلمة المرور</string>
-    <string name="please_wait">من فضلك انتظر...</string>
+    <string name="full_name">Full Name</string>
+    <string name="password">Password</string>
+    <string name="please_wait">Please Wait...</string>
+    <string name="confirm">Confirm</string>
+    <string name="neqabty">Neqabty</string>
+    <string name="enter_num">برجاء إدخال رقم الهاتف المحمول لإنشاء \n حسابك الخاص</string>
 </resources>

@@ -3,8 +3,8 @@ package com.neqabty.healthcare.modules.payment.view
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.core.utils.AppUtils
-import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
 import com.neqabty.meganeqabty.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.meganeqabty.payment.domain.entity.inquiryresponse.ReceiptDataEntity

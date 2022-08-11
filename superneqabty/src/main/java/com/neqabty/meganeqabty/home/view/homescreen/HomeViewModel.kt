@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.meganeqabty.core.utils.AppUtils
-import com.neqabty.meganeqabty.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
 import com.neqabty.meganeqabty.home.domain.interactors.GetAllAdsUseCase
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
@@ -13,7 +13,6 @@ import com.neqabty.news.modules.home.domain.interactors.GetNewsUseCase
 import com.neqabty.news.modules.home.domain.interactors.GetSyndicateNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

@@ -3,8 +3,8 @@ package com.neqabty.signup.modules.signup.presentation.view.homescreen
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.signup.core.utils.AppUtils
-import com.neqabty.signup.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.signup.modules.signup.data.model.NeqabtySignupBody
 import com.neqabty.signup.modules.signup.domain.entity.SignupParams
 import com.neqabty.signup.modules.signup.domain.entity.syndicate.SyndicateListEntity

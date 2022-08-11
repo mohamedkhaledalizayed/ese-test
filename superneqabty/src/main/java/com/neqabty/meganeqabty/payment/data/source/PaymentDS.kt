@@ -1,6 +1,6 @@
 package com.neqabty.meganeqabty.payment.data.source
 
-import com.neqabty.login.core.utils.PreferencesHelper
+import com.neqabty.core.data.PreferencesHelper
 import com.neqabty.meganeqabty.payment.data.api.PaymentApi
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
 import com.neqabty.meganeqabty.payment.data.model.branches.EntityBranche

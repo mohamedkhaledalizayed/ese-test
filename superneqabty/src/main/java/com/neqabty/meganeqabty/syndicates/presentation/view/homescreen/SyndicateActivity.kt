@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.Status
 import com.neqabty.meganeqabty.R
-import com.neqabty.meganeqabty.core.ui.BaseActivity
-import com.neqabty.meganeqabty.core.utils.Status
 import com.neqabty.meganeqabty.databinding.ActivitySyndicateBinding
 import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
 import com.neqabty.meganeqabty.syndicates.domain.entity.SyndicateEntity

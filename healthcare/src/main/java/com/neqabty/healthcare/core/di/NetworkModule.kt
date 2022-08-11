@@ -1,7 +1,7 @@
 package com.neqabty.healthcare.core.di
 
 import com.google.gson.GsonBuilder
-import com.neqabty.healthcare.core.data.Constants.BASE_URL_DEV
+import com.neqabty.core.data.Constants.BASE_URL_DEV
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -3,8 +3,8 @@ package com.neqabty.signup.modules.verifyphonenumber.view
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.signup.core.utils.AppUtils
-import com.neqabty.signup.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.signup.modules.verifyphonenumber.data.model.CheckOTPBody
 import com.neqabty.signup.modules.verifyphonenumber.data.model.SendOTPBody
 import com.neqabty.signup.modules.verifyphonenumber.domain.entity.sendotp.OTPEntity

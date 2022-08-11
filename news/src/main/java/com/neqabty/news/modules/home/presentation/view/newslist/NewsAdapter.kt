@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.news.R
-import com.neqabty.news.core.utils.AppUtils
 import com.neqabty.news.databinding.NewsItemBinding
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.squareup.picasso.Callback

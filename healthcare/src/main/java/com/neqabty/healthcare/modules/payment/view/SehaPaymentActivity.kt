@@ -10,9 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivitySehaPaymentBinding
 import com.neqabty.meganeqabty.core.utils.Constants
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
@@ -24,7 +22,8 @@ import me.cowpay.util.CowpayConstantKeys
 import team.opay.business.cashier.sdk.api.PayInput
 import team.opay.business.cashier.sdk.pay.PaymentTask
 import team.opay.business.cashier.sdk.api.*
-
+import androidx.activity.viewModels
+import com.neqabty.core.ui.BaseActivity
 @AndroidEntryPoint
 class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
     private var paymentMethod = "card"
@@ -40,7 +39,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(titleResId = R.string.payments)
+        setupToolbar(title = "المدفوعات")
 
         totalAmount = intent.getDoubleExtra("price", 0.0).toInt()
         serviceCode = intent.getStringExtra("serviceCode")!!
@@ -53,22 +52,22 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
 
             it?.let { resource ->
                 when (resource.status) {
-                    com.neqabty.healthcare.core.utils.Status.LOADING -> {
+                    com.neqabty.core.utils.Status.LOADING -> {
                         binding.progressCircular.visibility = View.VISIBLE
                     }
-                    com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
+                    com.neqabty.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         binding.llContent.visibility = View.VISIBLE
                         if (resource.data!!.isNotEmpty()) {
-                            if (resource.data.filter { it.name == "card" }[0].isActive)
+                            if (resource.data!!.filter { it.name == "card" }[0].isActive)
                                 binding.rbCard.visibility = View.VISIBLE
-                            if (resource.data.filter { it.name == "code" }[0].isActive)
+                            if (resource.data!!.filter { it.name == "code" }[0].isActive)
                                 binding.rbChannel.visibility = View.VISIBLE
 //                            if (resource.data.filter { it.name == "wallet" }[0].isActive)
 //                                binding.rbMobileWallet.visibility = View.VISIBLE
                         }
                     }
-                    com.neqabty.healthcare.core.utils.Status.ERROR -> {
+                    com.neqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
@@ -81,10 +80,10 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
 
             it?.let { resource ->
                 when (resource.status) {
-                    com.neqabty.healthcare.core.utils.Status.LOADING -> {
+                    com.neqabty.core.utils.Status.LOADING -> {
                         binding.progressCircular.visibility = View.VISIBLE
                     }
-                    com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
+                    com.neqabty.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data?.payment?.transaction?.paymentGatewayReferenceId.isNullOrEmpty()) {
                             val paymentObject = resource.data as PaymentEntity
@@ -93,7 +92,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
                             showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
                         }
                     }
-                    com.neqabty.healthcare.core.utils.Status.ERROR -> {
+                    com.neqabty.core.utils.Status.ERROR -> {
                         binding.btnNext.isEnabled = true
                         binding.progressCircular.visibility = View.GONE
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()

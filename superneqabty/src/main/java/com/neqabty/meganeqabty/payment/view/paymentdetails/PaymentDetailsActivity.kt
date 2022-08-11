@@ -11,8 +11,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.R
-import com.neqabty.meganeqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.core.utils.Constants
 import com.neqabty.meganeqabty.databinding.ActivityPaymentDetailsBinding
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
@@ -50,7 +50,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(titleResId = R.string.payments)
+        setupToolbar(title = "المدفوعات")
 
         serviceCode = intent.getStringExtra("code")!!
         serviceActionCode = intent.getStringExtra("service_action_code")!!
@@ -60,13 +60,13 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
             it?.let { resource ->
                 when (resource.status) {
-                    com.neqabty.meganeqabty.core.utils.Status.LOADING -> {
+                    com.neqabty.core.utils.Status.LOADING -> {
                         binding.progressCircular.visibility = View.VISIBLE
                     }
-                    com.neqabty.meganeqabty.core.utils.Status.SUCCESS -> {
+                    com.neqabty.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
 
-                        if (resource.data?.receipt == null) {
+                        if (resource.data!!.receipt == null) {
                             binding.cardLayout.visibility = View.GONE
                             binding.tvDetails.visibility = View.GONE
                             binding.tvPaymentMethod.visibility = View.GONE
@@ -75,29 +75,29 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             showDialog()
                         } else {
                             binding.llContent.visibility = View.VISIBLE
-                            binding.tvService.text = resource.data.service.name
-                            binding.tvName.text = "الاسم : ${resource.data.member.name ?: ""}"
+                            binding.tvService.text = resource.data!!.service.name
+                            binding.tvName.text = "الاسم : ${resource.data!!.member.name ?: ""}"
                             binding.tvMemberNumber.text =
                                 "رقم العضوية : ${intent.getStringExtra("number")!!}"
-                            totalAmount = resource.data.receipt.details.totalPrice.toInt()
-                            paymentFees = resource.data.receipt.cardFees.toInt()
-                            deliveryFees = resource.data.deliveryMethodsEntity[0].price.toDouble().toInt()
+                            totalAmount = resource.data!!.receipt!!.details.totalPrice.toInt()
+                            paymentFees = resource.data!!.receipt!!.cardFees.toInt()
+                            deliveryFees = resource.data!!.deliveryMethodsEntity[0].price.toDouble().toInt()
                             updateTotal()
                             binding.lastFeeYearValue.text =
-                                "${resource.data.receipt.details.lastFeeYear} "
+                                "${resource.data!!.receipt?.details?.lastFeeYear} "
                             binding.currentFeeYearValue.text =
-                                "${resource.data.receipt.details.currentFeeYear} ج.م "
+                                "${resource.data!!.receipt?.details?.currentFeeYear} ج.م "
                             binding.cardPriceValue.text =
-                                "${resource.data.receipt.details.cardPrice} ج.م "
+                                "${resource.data!!.receipt?.details?.cardPrice} ج.م "
                             binding.lateSubscriptionsValue.text =
-                                "${resource.data.receipt.details.lateSubscriptions} ج.م "
+                                "${resource.data!!.receipt?.details?.lateSubscriptions} ج.م "
                             binding.delayFineValue.text =
-                                "${resource.data.receipt.details.delayFine} ج.م "
+                                "${resource.data!!.receipt?.details?.delayFine} ج.م "
                             binding.totalValue.text =
-                                "${resource.data.receipt.details.totalPrice} ج.م "
+                                "${resource.data!!.receipt?.details?.totalPrice} ج.م "
                         }
                     }
-                    com.neqabty.meganeqabty.core.utils.Status.ERROR -> {
+                    com.neqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.message.toString() == "400"){
                             showAlertDialog()
@@ -113,14 +113,14 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
             it?.let { resource ->
                 when (resource.status) {
-                    com.neqabty.meganeqabty.core.utils.Status.LOADING -> {
+                    com.neqabty.core.utils.Status.LOADING -> {
                         binding.progressCircular.visibility = View.VISIBLE
                     }
-                    com.neqabty.meganeqabty.core.utils.Status.SUCCESS -> {
+                    com.neqabty.core.utils.Status.SUCCESS -> {
                         if (resource.data!!.isNotEmpty()) {
-                            if (resource.data.filter { it.name == "card" }[0].isActive)
+                            if (resource.data!!.filter { it.name == "card" }[0].isActive)
                                 binding.rbCard.visibility = View.VISIBLE
-                            if (resource.data.filter { it.name == "code" }[0].isActive)
+                            if (resource.data!!.filter { it.name == "code" }[0].isActive)
                                 binding.rbChannel.visibility = View.VISIBLE
                             //TODO Check this before publishing
 //                            if(resource.data.filter { it.name == "fawry" }[0].isActive)
@@ -129,7 +129,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 //                                binding.rbMobileWallet.visibility = View.VISIBLE
                         }
                     }
-                    com.neqabty.meganeqabty.core.utils.Status.ERROR -> {
+                    com.neqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
@@ -153,10 +153,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         paymentViewModel.branches.observe(this) {
             it?.let { resource ->
                 when (resource.status) {
-                    com.neqabty.meganeqabty.core.utils.Status.LOADING -> {
+                    com.neqabty.core.utils.Status.LOADING -> {
                         binding.progressCircular.visibility = View.VISIBLE
                     }
-                    com.neqabty.meganeqabty.core.utils.Status.SUCCESS -> {
+                    com.neqabty.core.utils.Status.SUCCESS -> {
                         branchesList = resource.data
                         branchesAdapter.submitList(
                             resource.data!!.toMutableList()
@@ -171,7 +171,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                                     )
                                 })
                     }
-                    com.neqabty.meganeqabty.core.utils.Status.ERROR -> {
+                    com.neqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
                     }
                 }
@@ -199,10 +199,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
                 it?.let { resource ->
                     when (resource.status) {
-                        com.neqabty.meganeqabty.core.utils.Status.LOADING -> {
+                        com.neqabty.core.utils.Status.LOADING -> {
                             binding.progressCircular.visibility = View.VISIBLE
                         }
-                        com.neqabty.meganeqabty.core.utils.Status.SUCCESS -> {
+                        com.neqabty.core.utils.Status.SUCCESS -> {
                             binding.progressCircular.visibility = View.GONE
                             if (resource.data?.payment?.transaction?.paymentGatewayReferenceId.isNullOrEmpty()) {
                                 val paymentObject = resource.data as PaymentEntity
@@ -211,7 +211,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                                 showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
                             }
                         }
-                        com.neqabty.meganeqabty.core.utils.Status.ERROR -> {
+                        com.neqabty.core.utils.Status.ERROR -> {
                             binding.btnNext.isEnabled = true
                             binding.progressCircular.visibility = View.GONE
                             Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Core</string>
+    <string name="alert_title">تنبيه</string>
+    <string name="ok_btn">تأكيد</string>
+    <string name="cancel_btn">إلغاء</string>
+
+
+    <string name="please_wait">Please Wait...</string>
+    <string name="news_title">أخبار النقابة</string>
+    <string name="general_news">الاخبار العامة</string>
+
+</resources>

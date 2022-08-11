@@ -1,12 +1,11 @@
 package com.neqabty.healthcare.modules.home.presentation.view.homescreen
 
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.core.utils.AppUtils
-import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.healthcare.modules.home.domain.entity.about.AboutEntity
 import com.neqabty.healthcare.modules.home.domain.interactors.GetHomeUseCase
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
@@ -47,7 +46,7 @@ class HomeViewModel @Inject constructor(private val getHomeUseCase: GetHomeUseCa
                 }
             } catch (e: Throwable) {
                 allNews.postValue(
-                    Resource.error(data = null, message = com.neqabty.meganeqabty.core.utils.AppUtils()
+                    Resource.error(data = null, message = com.neqabty.core.utils.AppUtils()
                         .handleError(e)))
             }
         }

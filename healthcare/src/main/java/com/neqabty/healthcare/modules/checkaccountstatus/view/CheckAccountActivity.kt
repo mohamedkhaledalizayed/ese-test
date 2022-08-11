@@ -5,14 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.core.ui.BaseActivity
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityCheckAccountBinding
 import com.neqabty.healthcare.modules.home.presentation.view.homescreen.HomeActivity
 import com.neqabty.healthcare.modules.checkaccountstatus.data.model.CheckPhoneBody
+import com.neqabty.core.utils.isMobileValid
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
-import com.neqabty.signup.core.utils.isMobileValid
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 

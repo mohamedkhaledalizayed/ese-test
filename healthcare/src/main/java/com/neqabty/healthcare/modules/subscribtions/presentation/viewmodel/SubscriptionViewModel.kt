@@ -3,8 +3,8 @@ package com.neqabty.healthcare.modules.subscribtions.presentation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.core.utils.AppUtils
-import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.healthcare.modules.subscribtions.data.model.SubscribePostBodyRequest
 import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.modules.subscribtions.domain.usecases.AddSubscriptionUseCase

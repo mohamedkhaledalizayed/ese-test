@@ -5,8 +5,8 @@ package com.neqabty.healthcare.modules.search.presentation.view.filter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.core.utils.AppUtils
-import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.healthcare.modules.search.domain.entity.packages.PackagesEntity
 import com.neqabty.healthcare.modules.search.domain.interactors.GetMedicalProviderstUseCase
 import com.neqabty.healthcare.modules.search.presentation.model.filters.FiltersUi

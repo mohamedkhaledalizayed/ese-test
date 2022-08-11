@@ -3,9 +3,11 @@ package com.neqabty.healthcare.modules.search.presentation.view.providerdetails
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityProviderDetailsBinding
+import com.neqabty.core.ui.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
 
     private val mAdapter = ReviewsAdapter()

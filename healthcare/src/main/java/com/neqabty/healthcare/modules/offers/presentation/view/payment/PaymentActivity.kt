@@ -2,9 +2,8 @@ package com.neqabty.healthcare.modules.offers.presentation.view.payment
 
 
 import android.os.Bundle
-import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityPaymentBinding
-
+import com.neqabty.core.ui.BaseActivity
 
 class PaymentActivity : BaseActivity<ActivityPaymentBinding>() {
 

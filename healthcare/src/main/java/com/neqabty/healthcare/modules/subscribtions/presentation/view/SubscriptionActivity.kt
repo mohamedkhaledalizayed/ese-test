@@ -14,26 +14,25 @@ import android.util.Base64
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.core.data.Constants
-import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.core.data.Constants
+import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
 import com.neqabty.healthcare.modules.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
 import com.neqabty.healthcare.modules.subscribtions.data.model.SubscribePostBodyRequest
 import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.modules.subscribtions.presentation.viewmodel.SubscriptionViewModel
-import com.neqabty.signup.core.utils.isMobileValid
-import com.neqabty.signup.core.utils.isNationalIdValid
-import com.neqabty.signup.core.utils.isValidEmail
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.util.*
-
+import androidx.activity.viewModels
+import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.isMobileValid
+import com.neqabty.core.utils.isNationalIdValid
+import com.neqabty.core.utils.isValidEmail
 
 @AndroidEntryPoint
 class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
@@ -107,7 +106,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                         if (resource.data!!.isNotEmpty()) {
                             relationsList = resource.data
                             relationsAdapter.submitList(
-                                resource.data.toMutableList()
+                                resource.data!!.toMutableList()
                                     .also { list ->
                                         list.add(
                                             0,

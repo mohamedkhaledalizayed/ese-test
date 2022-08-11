@@ -3,7 +3,7 @@ package com.neqabty.healthcare.modules.checkaccountstatus.view
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.core.utils.Resource
 import com.neqabty.healthcare.modules.checkaccountstatus.data.model.CheckPhoneBody
 import com.neqabty.healthcare.modules.checkaccountstatus.domain.usecases.CheckAccountUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

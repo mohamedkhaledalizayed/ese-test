@@ -6,9 +6,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityCashBackBinding
-
+import com.neqabty.core.ui.BaseActivity
 
 class CashBackActivity : BaseActivity<ActivityCashBackBinding>(){
 

@@ -4,14 +4,13 @@ package com.neqabty.healthcare.modules.offers.presentation.view.offers
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
-import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityOffersBinding
 import com.neqabty.healthcare.modules.offers.presentation.view.cashback.CashBackActivity
 import com.neqabty.healthcare.modules.offers.presentation.view.takeoffer.TakeOfferActivity
 import dagger.hilt.android.AndroidEntryPoint
-
+import androidx.activity.viewModels
+import com.neqabty.core.ui.BaseActivity
 
 @AndroidEntryPoint
 class OffersActivity : BaseActivity<ActivityOffersBinding>() {

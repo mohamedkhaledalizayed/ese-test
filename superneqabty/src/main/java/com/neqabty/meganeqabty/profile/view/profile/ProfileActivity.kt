@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import com.neqabty.meganeqabty.core.ui.BaseActivity
-import com.neqabty.meganeqabty.core.utils.Status
+import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.Status
 import com.neqabty.meganeqabty.databinding.ActivityProfileMegaBinding
 import com.neqabty.meganeqabty.profile.view.update.UpdateInfoActivity
 import dagger.hilt.android.AndroidEntryPoint

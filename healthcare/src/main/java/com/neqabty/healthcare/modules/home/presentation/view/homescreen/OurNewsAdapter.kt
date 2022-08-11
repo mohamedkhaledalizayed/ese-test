@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.OurNewsItemBinding
-import com.neqabty.meganeqabty.core.utils.AppUtils
+import com.neqabty.core.utils.AppUtils
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso

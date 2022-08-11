@@ -5,14 +5,13 @@ package com.neqabty.healthcare.modules.search.presentation.view.searchresult
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.core.utils.AppUtils
-import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.healthcare.modules.search.data.model.SearchBody
 import com.neqabty.healthcare.modules.search.domain.entity.search.ProvidersEntity
 import com.neqabty.healthcare.modules.search.domain.interactors.GetMedicalProviderstUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

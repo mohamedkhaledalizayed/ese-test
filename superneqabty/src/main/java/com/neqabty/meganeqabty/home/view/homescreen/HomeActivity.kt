@@ -15,13 +15,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.Status
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.aboutapp.AboutAppActivity
-import com.neqabty.meganeqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.core.utils.Constants
-import com.neqabty.meganeqabty.core.utils.Status
 import com.neqabty.meganeqabty.databinding.ActivityMainBinding
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
 import com.neqabty.meganeqabty.payment.view.selectservice.PaymentsActivity
@@ -88,8 +88,8 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             this,
             drawer,
             toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
+            R.string.app_name,
+            R.string.app_name
         )
 
         drawer.addDrawerListener(toggle)

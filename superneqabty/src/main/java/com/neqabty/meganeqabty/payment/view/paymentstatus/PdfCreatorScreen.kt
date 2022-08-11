@@ -18,7 +18,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.neqabty.meganeqabty.R
-import com.neqabty.meganeqabty.core.utils.AppUtils
+import com.neqabty.core.utils.AppUtils
 import com.neqabty.meganeqabty.payment.domain.entity.paymentstatus.PaymentStatusEntity
 import com.tejpratapsingh.pdfcreator.activity.PDFCreatorActivity
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil

@@ -9,19 +9,17 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
-import com.neqabty.healthcare.core.data.Constants
-import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.core.data.Constants
+import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySearchBinding
 import com.neqabty.healthcare.modules.offers.presentation.view.offers.OffersActivity
 import com.neqabty.healthcare.modules.search.domain.entity.packages.PackagesEntity
 import com.neqabty.healthcare.modules.search.presentation.view.filter.FiltersViewModel
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
-import com.neqabty.healthcare.modules.subscribtions.presentation.view.SubscriptionActivity
 import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import dagger.hilt.android.AndroidEntryPoint
-
+import androidx.activity.viewModels
+import com.neqabty.core.ui.BaseActivity
 
 @AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
@@ -50,7 +48,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 //                }else{
 //                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
 //                }
-                comingSoon("سوف يتم تفعيل هذه الخدمة قريبا.")
+                comingSoon("سوف يتم توفير هذه الخدمة قريبا.")
             }
         }
 

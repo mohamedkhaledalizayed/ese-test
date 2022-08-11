@@ -9,9 +9,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import androidx.activity.viewModels
-import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySearchResultBinding
 import com.neqabty.healthcare.modules.search.data.model.SearchBody
 import com.neqabty.healthcare.modules.search.domain.entity.search.ProvidersEntity
@@ -19,7 +17,8 @@ import com.neqabty.healthcare.modules.search.presentation.model.filters.ItemUi
 import com.neqabty.healthcare.modules.search.presentation.view.filter.FilterBottomSheet
 import com.neqabty.healthcare.modules.search.presentation.view.providerdetails.ProviderDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
-
+import androidx.activity.viewModels
+import com.neqabty.core.ui.BaseActivity
 var selectedGovernorate = 0
 var selectedProfession = 0
 var selectedProviders = 0

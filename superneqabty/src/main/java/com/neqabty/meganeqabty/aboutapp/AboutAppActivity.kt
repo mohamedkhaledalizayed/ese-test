@@ -2,8 +2,8 @@ package com.neqabty.meganeqabty.aboutapp
 
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
+import com.neqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.R
-import com.neqabty.meganeqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.databinding.ActivityAboutAppBinding
 import dagger.hilt.android.AndroidEntryPoint
 

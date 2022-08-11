@@ -3,8 +3,8 @@ package com.neqabty.login.modules.login.presentation.view.homescreen
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.login.core.utils.AppUtils
-import com.neqabty.login.core.utils.Resource
+import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.Resource
 import com.neqabty.login.modules.login.domain.entity.UserEntity
 import com.neqabty.login.modules.login.domain.interactors.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
