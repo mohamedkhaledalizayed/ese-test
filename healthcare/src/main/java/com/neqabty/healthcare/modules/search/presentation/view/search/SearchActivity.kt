@@ -39,16 +39,18 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         mAdapter.onItemClickListener = object :
             PackagesAdapter.OnItemClickListener {
             override fun setOnRegisterClickListener(item: PackagesEntity) {
-                if (sharedPreferences.isPhoneVerified){
-                    val intent = Intent(this@SearchActivity, SubscriptionActivity::class.java)
-                    intent.putExtra("name", item.name )
-                    intent.putExtra("price", item.price )
-                    intent.putExtra("serviceCode", item.serviceCode )
-                    intent.putExtra("serviceActionCode", item.serviceActionCode )
-                    startActivity(intent)
-                }else{
-                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
-                }
+
+//                if (sharedPreferences.isPhoneVerified){
+//                    val intent = Intent(this@SearchActivity, SubscriptionActivity::class.java)
+//                    intent.putExtra("name", item.name )
+//                    intent.putExtra("price", item.price )
+//                    intent.putExtra("serviceCode", item.serviceCode )
+//                    intent.putExtra("serviceActionCode", item.serviceActionCode )
+//                    startActivity(intent)
+//                }else{
+//                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
+//                }
+                comingSoon("سوف يتم تفعيل هذه الخدمة قريبا.")
             }
         }
 
@@ -109,6 +111,21 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
+    private fun comingSoon(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
         ) { dialog, _ ->
             dialog.dismiss()
         }
