@@ -50,7 +50,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(title = "المدفوعات")
+        setupToolbar(titleResId = R.string.payments)
 
         serviceCode = intent.getStringExtra("code")!!
         serviceActionCode = intent.getStringExtra("service_action_code")!!

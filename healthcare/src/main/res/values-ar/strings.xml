@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">NeQabty</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="register_now">سجل الأن</string>
     <string name="seha">نقابتى صحة مستدامة</string>
     <string name="info">الاستفادة من الأسعار\n التعاقدية المخفضة</string>
@@ -48,37 +46,6 @@
     <string name="use_it_now">استخدامه الآن</string>
     <string name="term_">تطبق الشروط والاحكام</string>
 
-    <array name="governments">
-        <item>اختر المحافظة</item>
-        <item>القاهره</item>
-        <item>الجيزة</item>
-        <item>الفيوم</item>
-        <item>أسيوط</item>
-    </array>
-
-    <array name="cities">
-        <item>اختر المدينة</item>
-        <item>الهرم</item>
-        <item>فيصل</item>
-        <item>التجمع</item>
-        <item>اكتوبر</item>
-    </array>
-
-    <array name="relations">
-        <item>درجة القرابة</item>
-        <item>الابن</item>
-        <item>الابنه</item>
-        <item>الزوج</item>
-        <item>الزوجة</item>
-    </array>
-
-    <array name="complaints">
-        <item>إختر الفئة</item>
-        <item>نوع 1</item>
-        <item>نوع 2</item>
-        <item>نوع 3</item>
-        <item>نوع 4</item>
-    </array>
 
     <string name="registration">تسجيل إشتراك</string>
     <string name="add_image">إرفاق صورة البطاقة الامامية</string>

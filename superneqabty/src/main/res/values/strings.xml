@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Neqabty</string>
     <string name="home_title">Home</string>
-    <string name="news_title">أخبار النقابة</string>
-    <string name="general_news">الاخبار العامة</string>
-    <string name="payments_title">المدفوعات</string>
-    <string name="about_title">عن النقابة</string>
-    <string name="settings_title">الإعدادات</string>
-    <string name="contactus_title">تواصل معنا</string>
+    <string name="news_title">Syndicate News</string>
+    <string name="general_news">General News</string>
+    <string name="payments_title">Payments</string>
+    <string name="about_title">About Syndicate</string>
+    <string name="settings_title">Settings</string>
+    <string name="contactus_title">Contact Us</string>
     <string name="aboutapp_title">About App</string>
     <string name="help_title">Help</string>
     <string name="notifications_settings">Notifications</string>
@@ -47,7 +47,9 @@
     <string name="alert_title">Alert</string>
     <string name="ok_btn">Ok</string>
     <string name="cancel_btn">Cancel</string>
+    <string name="no_btn">No</string>
     <string name="membership_id">Membership Id</string>
+    <string name="not_found">عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.</string>
     <string name="next">Next</string>
     <string name="service">Service</string>
     <string name="services">خدمات النقابة</string>
@@ -103,5 +105,6 @@
     <string name="rooted">هذا الجهاز غير أمن لا يمكنك إستخدام هذا التطبيق.</string>
     <string name="from_branches">استلام من نقابة فرعية</string>
     <string name="to_home">شحن منزلى</string>
-
+    <string name="unsuccessfull_payment">عملية فاشلة.</string>
+    <string name="un_paid">لم يتم دفع الفاتورة.</string>
 </resources>

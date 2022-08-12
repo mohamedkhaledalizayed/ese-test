@@ -65,8 +65,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             this,
             drawer,
             toolbar,
-            R.string.navigation_drawer_open,
-            R.string.navigation_drawer_close
+            R.string.app_name,
+            R.string.app_name
         )
 
         drawer.addDrawerListener(toggle)

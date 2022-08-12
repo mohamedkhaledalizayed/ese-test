@@ -25,7 +25,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(title = "الفاتورة")
+        setupToolbar(titleResId = R.string.receipt)
 
         paymentViewModel.getPaymentStatus(intent.getStringExtra("referenceCode")!!)
         paymentViewModel.paymentStatus.observe(this){
@@ -55,14 +55,13 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                         }else{
                             binding.receiptLayout.visibility = View.GONE
                             Picasso.get().load(R.drawable.cancel).into(binding.statusImage)
-                            binding.statusText.text = "عملية فاشلة."
+                            binding.statusText.text = resources.getString(R.string.unsuccessfull_payment)
                             binding.statusText.setTextColor(resources.getColor(R.color.cgred))
-                            binding.statusDetails.text = "لم يتم دفع الفاتورة."
+                            binding.statusDetails.text = resources.getString(R.string.un_paid)
                         }
                     }
                     com.neqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
-                        Log.e("test", resource.message.toString())
                     }
                 }
             }

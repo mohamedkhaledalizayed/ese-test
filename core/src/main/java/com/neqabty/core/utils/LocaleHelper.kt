@@ -14,31 +14,11 @@ class LocaleHelper {
         Locale.setDefault(locale)
 
 
-        if (Build.VERSION.SDK_INT >= 19) {
-
-            val resources = context?.resources
-
-            val configuration = resources?.configuration
-
-            val displayMetrics = resources?.displayMetrics
-
-            configuration?.setLocale(locale)
-
-            resources?.updateConfiguration(configuration, displayMetrics)
-
-        } else {
-            val config = Configuration()
-
-            config.locale = locale
-
-            context?.resources?.updateConfiguration(
-                config,
-
-                context.resources.displayMetrics
-            )
-
-        }
-
+        val resources = context?.resources
+        val configuration = resources?.configuration
+        val displayMetrics = resources?.displayMetrics
+        configuration?.setLocale(locale)
+        resources?.updateConfiguration(configuration, displayMetrics)
 
     }
 }

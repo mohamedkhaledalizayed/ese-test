@@ -25,8 +25,6 @@
     <string name="change_syndicate">نقابات اخري</string>
     <string name="neqabty_mega">نقابتي</string>
     <string name="neqabty">تطبيق نقابتي هو منصة تفاعلية تهدف الي ميكنة الخدمات النقابية للاعضاء مدعومة باحدث تقنيات التكنولوجيا المالية والذكاء الصناعي لتسهيل الحصول علي الخدمات النقابية بأقل وقت ومجهود</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="more">المزيد...</string>
     <string name="details">التفاصيل:</string>
     <string name="payment_method">طريقة الدفع:</string>
@@ -49,10 +47,11 @@
     <string name="alert_title">تنبيه</string>
     <string name="ok_btn">تأكيد</string>
     <string name="cancel_btn">إلغاء</string>
+    <string name="no_btn">لا</string>
     <string name="membership_id">رقم العضوية</string>
     <string name="next">التالى</string>
     <string name="service">الخدمة</string>
-    <string name="id_valify">تحديد الهوية</string>
+    <string name="not_found">عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.</string>
     <string name="services">خدمات النقابة</string>
     <string name="trips">الرحلات</string>
     <string name="subscription_model">تجديد الاشتراك</string>
@@ -107,5 +106,7 @@
     <string name="rooted">هذا الجهاز غير أمن لا يمكنك إستخدام هذا التطبيق.</string>
     <string name="from_branches">استلام من نقابة فرعية</string>
     <string name="to_home">شحن منزلى</string>
+    <string name="unsuccessfull_payment">عملية فاشلة.</string>
+    <string name="un_paid">لم يتم دفع الفاتورة.</string>
 
 </resources>

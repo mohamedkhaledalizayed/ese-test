@@ -216,7 +216,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                 startActivity(intent)
             }else{
-                askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
+                askForLogin(resources.getString(R.string.not_found))
             }
         }
 
@@ -265,7 +265,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                     val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
                     startActivity(intent)
                 }else{
-                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
+                    askForLogin(resources.getString(R.string.not_found))
                 }
             }
             R.id.news -> {
@@ -279,7 +279,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                     val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                     startActivity(intent)
                 }else{
-                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
+                    askForLogin(resources.getString(R.string.not_found))
                 }
             }
             R.id.about_app_fragment -> {
@@ -320,18 +320,18 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     private fun askForLogin(message: String) {
 
         val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle("تنبيه")
+        alertDialog.setTitle(resources.getString(R.string.alert))
         alertDialog.setMessage(message)
         alertDialog.setCancelable(true)
         alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, "موافق"
+            AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.ok_btn)
         ) { dialog, _ ->
             dialog.dismiss()
             val intent = Intent(this@HomeActivity, VerifyPhoneActivity::class.java)
             startActivity(intent)
         }
         alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, "لا"
+            AlertDialog.BUTTON_NEGATIVE, resources.getString(R.string.no_btn)
         ) { dialog, _ ->
             dialog.dismiss()
         }

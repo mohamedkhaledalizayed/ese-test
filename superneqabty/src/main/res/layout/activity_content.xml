@@ -41,21 +41,20 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_margin="@dimen/_10sdp"
                 android:scrollbars="none">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="@dimen/_10sdp">
+                    >
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="wrap_content"
                         android:elevation="@dimen/_4sdp"
                         android:layout_marginBottom="@dimen/_1sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
                         app:cardCornerRadius="@dimen/_4sdp">
 
                         <LinearLayout
