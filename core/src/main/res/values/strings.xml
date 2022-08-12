@@ -10,5 +10,6 @@
     <string name="news_title">أخبار النقابة</string>
     <string name="general_news">الاخبار العامة</string>
     <string name="payments">Payments</string>
-
+    <string name="sel_service">Select Service</string>
+    <string name="language">Language</string>
 </resources>

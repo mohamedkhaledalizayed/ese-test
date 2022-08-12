@@ -33,7 +33,7 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
 //        val intent = Intent(this, PaymentStatusActivity::class.java)
 //        intent.putExtra("referenceCode", "d1d9bf1e-8963-4f01-8692-b928e213e24d")
 //        startActivity(intent)
-        setupToolbar(title = "المدفوعات")
+        setupToolbar(titleResId = R.string.payments)
         paymentViewModel.getServices()
         paymentViewModel.services.observe(this) {
 
@@ -43,7 +43,7 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
                     }
                     Status.SUCCESS -> {
                         listOfServices.addAll(resource.data!!)
-                        listOfServices.add(0, ServicesListEntity(name = "إختر الخدمة"))
+                        listOfServices.add(0, ServicesListEntity(name = resources.getString(R.string.sel_service)))
 
                         mServicesAdapter = ServicesAdapter(this, listOfServices.toMutableList())
                         binding.spServices.adapter = mServicesAdapter
@@ -67,7 +67,7 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
                         listOfActions.clear()
                         binding.spinnerActionContainer.visibility = View.VISIBLE
                         listOfActions.addAll(resource.data!!)
-                        listOfActions.add(0, ServiceActionsEntity(name = "إختر الخدمة"))
+                        listOfActions.add(0, ServiceActionsEntity(name = resources.getString(R.string.sel_service)))
 
                         mActionsAdapter = ServiceActionsAdapter(this, listOfActions.toMutableList())
                         binding.spActions.adapter = mActionsAdapter
@@ -101,7 +101,7 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
                 if (listOfActions.size != 0) {
                     actionId = listOfActions[i].code
                 }else{
-                    Toast.makeText(this@PaymentsActivity, "من فضلك إختر الخدمة اولا.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@PaymentsActivity, resources.getString(R.string.sel_service), Toast.LENGTH_LONG).show()
                 }
             }
 

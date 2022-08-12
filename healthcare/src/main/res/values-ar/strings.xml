@@ -81,4 +81,6 @@
     <string name="logout">تسجيل الخروج</string>
     <string name="search_result">نتائج البحث</string>
     <string name="confirm">تاكيد</string>
+    <string name="soon_more_details">قريبا المزيد من التفاصيل</string>
+
 </resources>

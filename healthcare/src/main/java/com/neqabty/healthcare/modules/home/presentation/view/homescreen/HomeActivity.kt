@@ -26,6 +26,7 @@ import com.neqabty.healthcare.modules.checkaccountstatus.view.CheckAccountActivi
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.profile.presentation.ProfileActivity
 import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
+import com.neqabty.healthcare.modules.settings.view.SettingsScreen
 import com.neqabty.healthcare.modules.suggestions.presentation.SuggestionsActivity
 import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
@@ -123,7 +124,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             startActivity(intent)
         }
 
-        binding.homeContent.startNow.setOnClickListener { startActivity(Intent(this, SearchActivity::class.java)) }
+        binding.homeContent.startNow.setOnClickListener {
+//            startActivity(Intent(this, SearchActivity::class.java))
+            comingSoon("سوف يتم توفير هذه الخدمة قريبا.")
+        }
 
         homeViewModel.getAboutList()
         homeViewModel.aboutList.observe(this){
@@ -247,6 +251,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             }
             R.id.syndicate -> {
                 val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.settings -> {
+                val intent = Intent(this@HomeActivity, SettingsScreen::class.java)
                 startActivity(intent)
             }
             R.id.suggestions -> {

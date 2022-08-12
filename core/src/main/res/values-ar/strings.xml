@@ -6,8 +6,10 @@
     <string name="cancel_btn">إلغاء</string>
 
 
-    <string name="please_wait">Please Wait...</string>
+    <string name="please_wait">من فضلك انتظر...</string>
     <string name="news_title">أخبار النقابة</string>
     <string name="general_news">الاخبار العامة</string>
     <string name="payments">المدفوعات</string>
+    <string name="sel_service">إختر الخدمة</string>
+    <string name="language">اللغة</string>
 </resources>

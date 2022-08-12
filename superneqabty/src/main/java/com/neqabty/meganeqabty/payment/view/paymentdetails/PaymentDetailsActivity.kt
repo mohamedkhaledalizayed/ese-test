@@ -76,25 +76,27 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         } else {
                             binding.llContent.visibility = View.VISIBLE
                             binding.tvService.text = resource.data!!.service.name
-                            binding.tvName.text = "الاسم : ${resource.data!!.member.name ?: ""}"
+                            binding.tvName.text =
+                                resources.getString(R.string.member_name, resource.data!!.member.name ?: "")
                             binding.tvMemberNumber.text =
-                                "رقم العضوية : ${intent.getStringExtra("number")!!}"
+                                resources.getString(R.string.member_id, intent.getStringExtra("number")!!)
+
                             totalAmount = resource.data!!.receipt!!.details.totalPrice.toInt()
                             paymentFees = resource.data!!.receipt!!.cardFees.toInt()
                             deliveryFees = resource.data!!.deliveryMethodsEntity[0].price.toDouble().toInt()
                             updateTotal()
                             binding.lastFeeYearValue.text =
-                                "${resource.data!!.receipt?.details?.lastFeeYear} "
+                                resource.data!!.receipt?.details?.lastFeeYear.toString()
                             binding.currentFeeYearValue.text =
-                                "${resource.data!!.receipt?.details?.currentFeeYear} ج.م "
+                                resources.getString(R.string.egp, resource.data!!.receipt?.details?.currentFeeYear.toString())
                             binding.cardPriceValue.text =
-                                "${resource.data!!.receipt?.details?.cardPrice} ج.م "
+                                resources.getString(R.string.egp, resource.data!!.receipt?.details?.cardPrice.toString())
                             binding.lateSubscriptionsValue.text =
-                                "${resource.data!!.receipt?.details?.lateSubscriptions} ج.م "
+                                resources.getString(R.string.egp, resource.data!!.receipt?.details?.lateSubscriptions.toString())
                             binding.delayFineValue.text =
-                                "${resource.data!!.receipt?.details?.delayFine} ج.م "
+                                resources.getString(R.string.egp, resource.data!!.receipt?.details?.delayFine.toString())
                             binding.totalValue.text =
-                                "${resource.data!!.receipt?.details?.totalPrice} ج.م "
+                                resources.getString(R.string.egp, resource.data!!.receipt?.details?.totalPrice.toString())
                         }
                     }
                     com.neqabty.core.utils.Status.ERROR -> {
@@ -164,7 +166,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                                     list.add(
                                         0,
                                         BranchesEntity(
-                                            address = "اختر الفرع",
+                                            address = resources.getString(R.string.select_branch),
                                             entity = null,
                                             city = ""
                                         )
@@ -268,12 +270,12 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                 }
 
                 if (deliveryMethod == 1 && address.isEmpty()){
-                    Toast.makeText(this, "من فضلك ادخل العنوان", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, resources.getString(R.string.enter_add), Toast.LENGTH_LONG).show()
                     return@setOnClickListener
                 }
 
                 if (deliveryMethod == 2 && binding.spBranches.selectedItemPosition == 0){
-                    Toast.makeText(this, "من فضلك اختر العنوان", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, resources.getString(R.string.select_branch), Toast.LENGTH_LONG).show()
                     return@setOnClickListener
                 }
 
@@ -307,7 +309,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         alertDialog.setMessage("نأسف لعدم اتمام السداد وذلك بسبب انتهاء صلاحية ترخيص الوزارة الخاص بكم برجاء التجديد حتى يتم استكمال عملية السداد")
         alertDialog.setCancelable(false)
         alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, "موافقة"
+            AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.agree)
         ) { dialog, _ ->
             val intent = Intent(this, UpdateInfoActivity::class.java)
             startActivity(intent)
@@ -315,7 +317,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             finish()
         }
         alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, "لا"
+            AlertDialog.BUTTON_NEGATIVE, resources.getString(R.string.no_btn)
         ) { dialog, _ ->
             dialog.dismiss()
             finish()
@@ -326,8 +328,8 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
 
     private fun updateTotal(){
-        binding.tvAmount.text = "الاجمالى بعد ضريبة الدفع : ${totalAmount + paymentFees}"
-        binding.tvAmountAfterDelivery.text =  "الاجمالى بعد ضريبة التوصيل : ${totalAmount + paymentFees + deliveryFees}"
+        binding.tvAmount.text = resources.getString(R.string.total_after_pay_fees, (totalAmount + paymentFees).toString())
+        binding.tvAmountAfterDelivery.text =  resources.getString(R.string.total_after_delivery_fees, (totalAmount + paymentFees + deliveryFees).toString())
     }
 
         private fun showDialog() {
@@ -337,7 +339,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             alertDialog.setMessage("لا توجد اي فواتير مستحقه للسداد في الوقت الحالي")
             alertDialog.setCancelable(false)
             alertDialog.setButton(
-                AlertDialog.BUTTON_POSITIVE, "موافقة"
+                AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.agree)
             ) { dialog, _ ->
                 dialog.dismiss()
                 finish()
@@ -369,49 +371,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             clipboard.setPrimaryClip(clip)
         }
 
-        fun cowPayPayment(isCredit: Boolean) {
-            var intent = Intent(this, PaymentMethodsActivity::class.java)
-
-            var PaymentMethod = ArrayList<String>()
-            if (isCredit)
-                PaymentMethod.add(CowpayConstantKeys.CreditCardMethod)
-            else
-                PaymentMethod.add(CowpayConstantKeys.FawryMethod)
-            intent.putExtra(CowpayConstantKeys.PaymentMethod, PaymentMethod)
-
-            intent.putExtra(CowpayConstantKeys.AuthorizationToken, Constants.cowpayAuthToken)
-
-            //set environment production or sandBox
-            //CowpayConstantKeys.Production or CowpayConstantKeys.SandBox
-            intent.putExtra(CowpayConstantKeys.PaymentEnvironment, Constants.COWPAY_MODE)
-            //set locale language
-            intent.putExtra(CowpayConstantKeys.Language, CowpayConstantKeys.ENGLISH)
-            // use pay with credit card
-            intent.putExtra(
-                CowpayConstantKeys.CreditCardMethodType,
-                CowpayConstantKeys.CreditCardMethodPay
-            )
-
-            intent.putExtra(CowpayConstantKeys.MerchantCode, "3GpZbdrsnOrT")
-            intent.putExtra(
-                CowpayConstantKeys.MerchantHashKey,
-                "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
-            )
-            //order id
-            intent.putExtra(CowpayConstantKeys.MerchantReferenceId, "anroid_1")
-            //order price780
-            intent.putExtra(CowpayConstantKeys.Amount, "10")
-            //user data
-            intent.putExtra(CowpayConstantKeys.Description, "9")
-            intent.putExtra(CowpayConstantKeys.CustomerName, sharedPreferences.name)
-            intent.putExtra(CowpayConstantKeys.CustomerMobile, sharedPreferences.mobile)
-            intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
-            //user id
-            intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, "anroid_1")
-
-
-            startActivityForResult(intent, CowpayConstantKeys.PaymentMethodsActivityRequestCode)
-        }
 
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

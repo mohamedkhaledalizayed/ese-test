@@ -47,7 +47,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         viewHolder.binding.requiredDataDetails.text = item.neddedInfo ?: ""
         viewHolder.binding.targetPeopleDetails.text = item.targetGroups ?: ""
         viewHolder.binding.infoDetails.text = item.description
-        viewHolder.binding.packagePrice.text = "${item.price} جنية - للفرد"
+        viewHolder.binding.packagePrice.text = "${item.price}"
 
         var details = ""
         for (item: DetailEntity in item.details){

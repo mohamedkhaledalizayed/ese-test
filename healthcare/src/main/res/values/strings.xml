@@ -78,4 +78,6 @@
     <string name="logout">Logout</string>
     <string name="search_result">Search Result</string>
     <string name="confirm">Confirm</string>
+    <string name="soon_more_details">Soon More Details</string>
+
 </resources>

@@ -28,6 +28,7 @@ class PreferencesHelper @Inject constructor(
         private const val FONT_SIZE = "data.source.prefs.FONT_SIZE"
         private const val NATIONAL_ID = "data.source.prefs.NATIONAL_ID"
         private const val MEMBERSHIP_ID = "data.source.prefs.MEMBERSHIP_ID"
+        private const val LANGUAGE = "data.source.prefs.LANGUAGE"
         private const val IS_PHONE_VERIFIED = "data.source.prefs.IS_PHONE_VERIFIED"
         private const val PHONE_VERIFIED = "data.source.prefs.PHONE_VERIFIED"
         private const val IS_SYNDICATE_MEMBER = "data.source.prefs.IS_SYNDICATE_MEMBER"
@@ -56,6 +57,10 @@ class PreferencesHelper @Inject constructor(
     var membershipId
         get() = preferences.getString(MEMBERSHIP_ID, "")!!
         set(value) = preferences.edit().putString(MEMBERSHIP_ID, value).apply()
+
+    var language
+        get() = preferences.getString(LANGUAGE, "ar")!!
+        set(value) = preferences.edit().putString(LANGUAGE, value).apply()
 
     var name
         get() = preferences.getString(NAME, "")!!

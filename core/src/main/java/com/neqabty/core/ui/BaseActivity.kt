@@ -97,6 +97,6 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        LocaleHelper().setLocale(this,"en")
+        LocaleHelper().setLocale(this,sharedPreferences.language)
     }
 }

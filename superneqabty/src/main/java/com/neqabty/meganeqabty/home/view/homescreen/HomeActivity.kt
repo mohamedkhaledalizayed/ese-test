@@ -94,7 +94,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
         drawer.addDrawerListener(toggle)
         toggle.syncState()
-        toolbar.setNavigationIcon(R.drawable.menu_ic)
+        toolbar.setNavigationIcon(R.drawable.ic_menu)
 
         //Get General News
         homeViewModel.getAllNews()
