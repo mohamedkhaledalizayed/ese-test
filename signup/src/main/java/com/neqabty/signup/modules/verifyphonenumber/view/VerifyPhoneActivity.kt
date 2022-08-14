@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -124,9 +125,14 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
                     }
                     Status.ERROR ->{
                         loading.hide()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 }

@@ -1,6 +1,6 @@
 package com.neqabty.healthcare.modules.splash.view
 
-import android.util.Log
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,7 +27,6 @@ class SplashViewModel @Inject constructor(
                 }
             } catch (e: Throwable) {
                 appConfig.postValue(Resource.error(data = null, AppUtils().handleError(e)))
-                Log.e("", e.toString())
             }
         }
     }

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
+import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.databinding.ActivityProfileMegaBinding
 import com.neqabty.meganeqabty.profile.view.update.UpdateInfoActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +22,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
         setContentView(binding.root)
 
-        setupToolbar(title = "الصفحة الشخصية")
+        setupToolbar(titleResId = R.string.profile)
 
         profileViewModel.getUserProfile("Token ${sharedPreferences.token}")
         profileViewModel.user.observe(this) {

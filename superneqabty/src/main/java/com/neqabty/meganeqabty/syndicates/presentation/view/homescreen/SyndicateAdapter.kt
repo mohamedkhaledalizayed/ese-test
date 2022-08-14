@@ -53,7 +53,7 @@ class SyndicateAdapter: BaseAdapter() {
         title = convertView.findViewById(R.id.title)
 
         itemLayout.setOnClickListener {
-            onItemClickListener?.setOnItemClickListener(item)
+            onItemClickListener?.setOnItemClickListener(position, item)
         }
 
         title.text = item.name
@@ -79,6 +79,6 @@ class SyndicateAdapter: BaseAdapter() {
     }
 
     interface OnItemClickListener {
-        fun setOnItemClickListener(item: SyndicateEntity)
+        fun setOnItemClickListener(position: Int, item: SyndicateEntity)
     }
 }

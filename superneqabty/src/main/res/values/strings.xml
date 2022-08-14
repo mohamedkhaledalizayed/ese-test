@@ -14,35 +14,35 @@
     <string name="font_size_small">Small</string>
     <string name="font_size_medium">Medium</string>
     <string name="font_size_large">Large</string>
-    <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
+    <string name="developed_by">Implemented by Neqabty</string>
     <string name="app_version">Version %s</string>
-    <string name="main">الجهات الرئيسية</string>
-    <string name="welcome">مرحباً بك في نقابتي</string>
+    <string name="main">Main Actors</string>
+    <string name="welcome">Welcome to Neqabty</string>
     <string name="menu_memberName">Member Name:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="menu_mobileNumber">Phone Number:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
     <string name="logout_title">Logout</string>
     <string name="login_title">Login</string>
     <string name="change_syndicate">Other Syndicates</string>
     <string name="neqabty_mega">Neqabty</string>
-    <string name="neqabty">تطبيق نقابتي هو منصة تفاعلية تهدف الي ميكنة الخدمات النقابية للاعضاء مدعومة باحدث تقنيات التكنولوجيا المالية والذكاء الصناعي لتسهيل الحصول علي الخدمات النقابية بأقل وقت ومجهود</string>
+    <string name="neqabty">NeQabty application is an interactive platform that aims to automate union services for members supported by the latest financial technology and artificial intelligence techniques to facilitate obtaining union services with minimal time and effort.</string>
     <string name="more">More...</string>
     <string name="details">Details:</string>
     <string name="payment_method">Payment Method:</string>
     <string name="delivery_method">Delivery Method :</string>
-    <string name="payment_card">بطاقات بنكية ( فيزا ماستر كارد ميزة)</string>
-    <string name="payment_channel">منافذ الدفع Opay</string>
-    <string name="payment_store_locator">لمعرفة اقرب منافذ الدفع المحيطة بك
-        <![CDATA[<font color="#41941b"><u> اضغط هنا</u></font>]]>
+    <string name="payment_card">Bank cards (Visa MasterCard meeza)</string>
+    <string name="payment_channel">Opay payment outlets</string>
+    <string name="payment_store_locator">To know the nearest payment outlets around you
+        <![CDATA[<font color="#41941b"><u> Click Here</u></font>]]>
     </string>
-    <string name="payment_fawry">منافذ الدفع فوري</string>
-    <string name="payment_wallet">محافظ إلكترونية</string>
-    <string name="payment_meeza">ميزة</string>
-    <string name="payment_reference">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك \n
-        كود الدفع:</string>
-    <string name="payment_reference_without_code">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك</string>
-    <string name="payment_canceled">لقد تم الغاء عملية الدفع</string>
-    <string name="payment_successful">تمت عملية الدفع بنجاح \n
-رقم العملية </string>
+    <string name="payment_fawry">Fawry payment outlets</string>
+    <string name="payment_wallet">Electronic Wallets</string>
+    <string name="payment_meeza">Meeza</string>
+    <string name="payment_reference">You can now pay from the nearest payment outlet until the subscription renewal is confirmed
+        Payment code:</string>
+    <string name="payment_reference_without_code">You can now pay from the nearest payment outlet until the subscription renewal is confirmed</string>
+    <string name="payment_canceled">Payment has been cancelled</string>
+    <string name="payment_successful">Payment completed successfully\n
+Operation No.</string>
 
     <string name="alert_title">Alert</string>
     <string name="ok_btn">Ok</string>
@@ -57,17 +57,17 @@
     <string name="subscription_model">Subscription</string>
     <string name="healthcare">Health Care</string>
     <string name="mashat">المعاشات</string>
-    <string name="all_trips">رحلاتنا</string>
+    <string name="all_trips">Trips</string>
     <string name="courses">Courses</string>
     <string name="copy_text">Copy</string>
-    <string name="no_syndicates">لا يوجد نقابات</string>
+    <string name="no_syndicates">There are no syndicate</string>
     <string name="alert">Alert</string>
-    <string name="enter_mermber_ship_id">ادخل رقم العضوية</string>
-    <string name="select_service">إختر الخدمة اولا</string>
-    <string name="service_unavailable">  سيتم تفعيل الخدمة قريباً</string>
-    <string name="new_update">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
-    <string name="other_services">خدمات أخرى</string>
-    <string name="neqabty_news">أخبار النقابة</string>
+    <string name="enter_mermber_ship_id">Enter the membership number</string>
+    <string name="select_service">Select service</string>
+    <string name="service_unavailable">  The service will be activated soon</string>
+    <string name="new_update">Please update the app to the latest version to be able to use the app.</string>
+    <string name="other_services">Other services</string>
+    <string name="neqabty_news">Syndicate news</string>
     <string name="last_fee_year">Last Subscription</string>
     <string name="current_fee_year">Current Subscription</string>
     <string name="card_price">Card Price</string>

@@ -35,11 +35,11 @@ class CheckOTPFragment : Fragment() {
         override fun onReceive(context: Context, intent: Intent?) {
             if (intent != null) {
                 val code = intent.getStringExtra("code")!!.split(":")[1].trim().toList()
-                binding.code1.setText(code[0].toString())
-                binding.code2.setText(code[1].toString())
+                binding.code5.setText(code[0].toString())
+                binding.code4.setText(code[1].toString())
                 binding.code3.setText(code[2].toString())
-                binding.code4.setText(code[3].toString())
-                binding.code5.setText(code[4].toString())
+                binding.code2.setText(code[3].toString())
+                binding.code1.setText(code[4].toString())
             }
         }
 
@@ -101,58 +101,30 @@ class CheckOTPFragment : Fragment() {
 
             val activity = requireActivity() as VerifyPhoneActivity
             activity.onCheckClicked(
-                    binding.code1.text.toString() +
-                        binding.code2.text.toString() +
-                        binding.code3.text.toString() +
+                    binding.code5.text.toString() +
                         binding.code4.text.toString() +
-                        binding.code5.text.toString()
+                        binding.code3.text.toString() +
+                        binding.code2.text.toString() +
+                        binding.code1.text.toString()
             )
         }
 
     }
 
     private fun changeFocus() {
-        binding.code1.requestFocus()
-        binding.code1.isCursorVisible = true
+        binding.code5.requestFocus()
+        binding.code5.isCursorVisible = true
 
-        binding.code1.addTextChangedListener(object : TextWatcher {
+        binding.code5.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun afterTextChanged(editable: Editable) {
                 if (editable.length == 1) {
-                    binding.code1.clearFocus()
-                    binding.code2.requestFocus()
-                    binding.code2.isCursorVisible = true
-                } else if (editable.isEmpty()) {
-                    binding.code1.requestFocus()
-                }
-            }
-        })
-
-        binding.code2.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun afterTextChanged(editable: Editable) {
-                if (editable.length == 1) {
-                    binding.code2.clearFocus()
-                    binding.code3.requestFocus()
-                    binding.code3.isCursorVisible = true
-                } else if (editable.isEmpty()) {
-                    binding.code2.requestFocus()
-                }
-            }
-        })
-
-        binding.code3.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun afterTextChanged(editable: Editable) {
-                if (editable.length == 1) {
-                    binding.code3.clearFocus()
+                    binding.code5.clearFocus()
                     binding.code4.requestFocus()
                     binding.code4.isCursorVisible = true
                 } else if (editable.isEmpty()) {
-                    binding.code3.requestFocus()
+                    binding.code5.requestFocus()
                 }
             }
         })
@@ -163,25 +135,53 @@ class CheckOTPFragment : Fragment() {
             override fun afterTextChanged(editable: Editable) {
                 if (editable.length == 1) {
                     binding.code4.clearFocus()
-                    binding.code5.requestFocus()
-                    binding.code5.isCursorVisible = true
+                    binding.code3.requestFocus()
+                    binding.code3.isCursorVisible = true
                 } else if (editable.isEmpty()) {
                     binding.code4.requestFocus()
                 }
             }
         })
 
-        binding.code5.addTextChangedListener(object : TextWatcher {
+        binding.code3.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun afterTextChanged(editable: Editable) {
                 if (editable.length == 1) {
-                    binding.code5.requestFocus()
-                    binding.code5.isCursorVisible = false
+                    binding.code3.clearFocus()
+                    binding.code2.requestFocus()
+                    binding.code2.isCursorVisible = true
+                } else if (editable.isEmpty()) {
+                    binding.code3.requestFocus()
+                }
+            }
+        })
+
+        binding.code2.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun afterTextChanged(editable: Editable) {
+                if (editable.length == 1) {
+                    binding.code2.clearFocus()
+                    binding.code1.requestFocus()
+                    binding.code1.isCursorVisible = true
+                } else if (editable.isEmpty()) {
+                    binding.code2.requestFocus()
+                }
+            }
+        })
+
+        binding.code1.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun afterTextChanged(editable: Editable) {
+                if (editable.length == 1) {
+                    binding.code1.requestFocus()
+                    binding.code1.isCursorVisible = false
                     KeyboardUtils.hideKeyboard(requireActivity())
 
                 } else if (editable.isEmpty()) {
-                    binding.code5.requestFocus()
+                    binding.code1.requestFocus()
                 }
             }
         })

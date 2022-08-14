@@ -18,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
+import com.neqabty.core.data.Constants
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.core.utils.Status
@@ -286,8 +287,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             dialog.dismiss()
             sharedPreferences.mobile = ""
             sharedPreferences.isPhoneVerified = false
+            sharedPreferences.isSyndicateMember = false
             sharedPreferences.code = ""
-            sharedPreferences.clearAll()
+            sharedPreferences.token = ""
             drawer.close()
             val intent = Intent(this@HomeActivity, CheckAccountActivity::class.java)
             startActivity(intent)
@@ -316,6 +318,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             AlertDialog.BUTTON_POSITIVE, "موافق"
         ) { dialog, _ ->
             dialog.dismiss()
+            Constants.isSyndicateMember = false
+            Constants.selectedSyndicateCode = ""
+            Constants.selectedSyndicatePosition = 0
             val intent = Intent(this, VerifyPhoneActivity::class.java)
             startActivity(intent)
         }

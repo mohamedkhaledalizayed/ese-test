@@ -7,6 +7,10 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.text.isDigitsOnly
+import com.neqabty.core.data.Constants
+import com.neqabty.core.data.Constants.isSyndicateMember
+import com.neqabty.core.data.Constants.selectedSyndicateCode
+import com.neqabty.core.data.Constants.selectedSyndicatePosition
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
 import com.neqabty.core.utils.isMobileValid
@@ -26,7 +30,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     private val mSyndicatesAdapter = SyndicatesAdapter()
     private var syndicateListEntity: List<SyndicateListEntity>? = null
     private var syndicateCode = ""
-    private var isSyndicateMember = true
     override fun getViewBinding() = ActivitySignupBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,9 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             .setMessage("من فضلك انتظر...")
             .build()
 
+        if (isSyndicateMember){
+            binding.checkMember.visibility = View.GONE
+        }
 
         binding.phone.setText(intent.getStringExtra("phoneNumber"))
         binding.phone.isEnabled = false
@@ -100,6 +106,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -149,6 +156,10 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                             mSyndicatesAdapter.submitList(
                                 resource.data!!.toMutableList()
                                     .also { list -> list.add(0, SyndicateListEntity("",0,"", "اختر النقابة")) })
+                            if (isSyndicateMember){
+                                binding.spSyndicates.setSelection(selectedSyndicatePosition)
+                                syndicateCode = selectedSyndicateCode
+                            }
                         }else{
                             Toast.makeText(this, "لا يوجد نقابات", Toast.LENGTH_LONG).show()
                         }

@@ -3,9 +3,16 @@ package com.neqabty.meganeqabty.syndicates.presentation.view.homescreen
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.core.data.Constants
+import com.neqabty.core.data.Constants.ESE_CODE
+import com.neqabty.core.data.Constants.NEQABTY_CODE
+import com.neqabty.core.data.Constants.isSyndicateMember
+import com.neqabty.core.data.Constants.selectedSyndicateCode
+import com.neqabty.core.data.Constants.selectedSyndicatePosition
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
 import com.neqabty.meganeqabty.R
@@ -54,9 +61,8 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
 
         mainAdapter.onItemClickListener = object :
             SyndicateAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(item: SyndicateEntity) {
-
-                if (item.code == "e03"){
+            override fun setOnItemClickListener(position: Int, item: SyndicateEntity) {
+                if (item.code == ESE_CODE){
                     val launchIntent = packageManager.getLaunchIntentForPackage("com.neqabty")
                     if (launchIntent == null){
                         startActivity(
@@ -69,6 +75,16 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
                         startActivity(launchIntent)
                     }
                 }else{
+                    if (item.code == NEQABTY_CODE){
+                        isSyndicateMember = false
+                        selectedSyndicateCode = ""
+                        selectedSyndicatePosition = 0
+                    }else{
+                        isSyndicateMember = true
+                        selectedSyndicateCode = item.code
+                        selectedSyndicatePosition = position + 1
+                    }
+
                     val intent = Intent(this@SyndicateActivity, HomeActivity::class.java)
                     intent.putExtra("id", item.id)
                     sharedPreferences.mainSyndicate = item.id

@@ -80,6 +80,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
+                                android:layout_alignParentEnd="true"
                                 android:layout_marginEnd="@dimen/_5sdp"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/_12ssp"
@@ -117,6 +118,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
+                                android:layout_alignParentEnd="true"
                                 android:layout_marginEnd="@dimen/_5sdp"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/_12ssp"
@@ -154,6 +156,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
+                                android:layout_alignParentEnd="true"
                                 android:layout_marginEnd="@dimen/_5sdp"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/_12ssp"
@@ -192,6 +195,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
                                 android:textStyle="bold"
+                                android:layout_alignParentEnd="true"
                                 android:layout_marginEnd="@dimen/_5sdp"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/_12ssp" />
@@ -229,6 +233,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
                                 android:textStyle="bold"
+                                android:layout_alignParentEnd="true"
                                 android:layout_marginEnd="@dimen/_5sdp"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/_12ssp" />
@@ -266,6 +271,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
                                 android:textStyle="bold"
+                                android:layout_alignParentEnd="true"
                                 android:layout_marginEnd="@dimen/_5sdp"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/_12ssp" />

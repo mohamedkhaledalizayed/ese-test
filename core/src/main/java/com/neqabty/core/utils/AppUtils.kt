@@ -36,7 +36,7 @@ class AppUtils {
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
                 }
                 else -> {
-                    throwable.message!!
+                    "No Internet Connection"
                 }
             }
         } else {

@@ -58,6 +58,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }

@@ -10,6 +10,6 @@
     <string name="password">كلمة المرور</string>
     <string name="please_wait">من فضلك انتظر...</string>
     <string name="confirm">تاكيد</string>
-    <string name="neqabty">نقابتى</string>
+    <string name="neqabty_auth">نقابتى</string>
     <string name="enter_num">برجاء إدخال رقم الهاتف المحمول لإنشاء \n حسابك الخاص</string>
 </resources>

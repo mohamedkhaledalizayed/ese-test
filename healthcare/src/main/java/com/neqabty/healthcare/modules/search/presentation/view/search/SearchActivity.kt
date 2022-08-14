@@ -20,6 +20,7 @@ import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
+import com.neqabty.healthcare.modules.subscribtions.presentation.view.SubscriptionActivity
 
 @AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
@@ -104,6 +105,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             AlertDialog.BUTTON_POSITIVE, "موافق"
         ) { dialog, _ ->
             dialog.dismiss()
+            Constants.isSyndicateMember = false
+            Constants.selectedSyndicateCode = ""
+            Constants.selectedSyndicatePosition = 0
             val intent = Intent(this, VerifyPhoneActivity::class.java)
             startActivity(intent)
         }
