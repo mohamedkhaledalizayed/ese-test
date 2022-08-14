@@ -12,4 +12,6 @@
     <string name="payments">Payments</string>
     <string name="sel_service">Select Service</string>
     <string name="language">Language</string>
+    <string name="delivery_fees">رسوم التوصيل</string>
+    <string name="bank_fees">الرسوم الادارية</string>
 </resources>

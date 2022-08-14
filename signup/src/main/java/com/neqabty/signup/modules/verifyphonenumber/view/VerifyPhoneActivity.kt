@@ -39,7 +39,7 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        val fragment: Fragment = SendOTPFragment()
+        val fragment: Fragment = SendOTPFragment.newInstance(sharedPreferences.mobile)
 
         val fm: FragmentManager = supportFragmentManager
         val transaction: FragmentTransaction = fm.beginTransaction()

@@ -1,5 +1,6 @@
 package com.neqabty.meganeqabty.payment.view.paymentdetails
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ClipData
@@ -46,6 +47,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
     private var entityBranch = 1
     private var branchesList: List<BranchesEntity>? = null
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -87,16 +89,16 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             updateTotal()
                             binding.lastFeeYearValue.text =
                                 resource.data!!.receipt?.details?.lastFeeYear.toString()
-                            binding.currentFeeYearValue.text =
-                                resources.getString(R.string.egp, resource.data!!.receipt?.details?.currentFeeYear.toString())
-                            binding.cardPriceValue.text =
-                                resources.getString(R.string.egp, resource.data!!.receipt?.details?.cardPrice.toString())
-                            binding.lateSubscriptionsValue.text =
-                                resources.getString(R.string.egp, resource.data!!.receipt?.details?.lateSubscriptions.toString())
-                            binding.delayFineValue.text =
-                                resources.getString(R.string.egp, resource.data!!.receipt?.details?.delayFine.toString())
-                            binding.totalValue.text =
-                                resources.getString(R.string.egp, resource.data!!.receipt?.details?.totalPrice.toString())
+                            binding.currentFeeYearValue.text = resource.data!!.receipt?.details?.currentFeeYear.toString() +
+                               "  " + resources.getString(R.string.egp)
+                            binding.cardPriceValue.text = resource.data!!.receipt?.details?.cardPrice.toString() +
+                                    "  " + resources.getString(R.string.egp)
+                            binding.lateSubscriptionsValue.text = resource.data!!.receipt?.details?.lateSubscriptions.toString() +
+                            "  " + resources.getString(R.string.egp)
+                            binding.delayFineValue.text = resource.data!!.receipt?.details?.delayFine.toString() +
+                                    "  " + resources.getString(R.string.egp)
+                            binding.totalValue.text = resource.data!!.receipt?.details?.totalPrice.toString() +
+                                    "  " + resources.getString(R.string.egp)
                         }
                     }
                     com.neqabty.core.utils.Status.ERROR -> {
@@ -328,8 +330,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
 
     private fun updateTotal(){
-        binding.tvAmount.text = resources.getString(R.string.total_after_pay_fees, (totalAmount + paymentFees).toString())
-        binding.tvAmountAfterDelivery.text =  resources.getString(R.string.total_after_delivery_fees, (totalAmount + paymentFees + deliveryFees).toString())
+        binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
+        binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
+        binding.totValue.text = "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
     }
 
         private fun showDialog() {
