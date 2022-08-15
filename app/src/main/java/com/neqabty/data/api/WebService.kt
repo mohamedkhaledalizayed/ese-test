@@ -144,6 +144,11 @@ interface WebService {
     @POST("api/v1/club/profile")
     fun getProfile(@Body profileRequest: ProfileRequest): Observable<ApiResponse<ProfileData>>
 
+    @POST("api/v1/medical-refund/request")
+    fun sendRefundRequest(
+        @Body refundRequest: RefundRequest
+    ): Observable<ApiResponse<RefundData>>
+
     @GET("api/v1/eseServicesTypes")
     fun getAllServiceTypes(): Observable<ApiResponse<List<ServiceTypeData>>>
 

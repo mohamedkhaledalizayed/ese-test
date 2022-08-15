@@ -418,6 +418,25 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    private val refundDataEntityMapper = RefundDataEntityMapper()
+
+    override fun sendRefundRequest(
+        name: String,
+        mobile: String,
+        userNumber: String,
+        benId: String,
+        description: String,
+        branchProfileId: String,
+        mobileToken: String,
+        serviceProviderId: String,
+        letterTypeId: String,
+        attachments: List<AttachmentEntity>
+    ): Observable<RefundEntity> {
+        return api.sendRefundRequest(RefundRequest(name, userNumber, mobile, benId, description, branchProfileId, mobileToken, serviceProviderId, letterTypeId, attachments.map { attachment -> RefundRequest.AttachmentItem(attachment.fileName, attachment.fileBase64) })).map { response ->
+            refundDataEntityMapper.mapFrom(response.data!!)
+        }
+    }
+
     private val serviceDataEntityMapper = ServiceDataEntityMapper()
 
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {

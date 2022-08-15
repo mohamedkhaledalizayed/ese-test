@@ -202,6 +202,21 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getProfile(mobile, userNumber)
     }
 
+    override fun sendRefundRequest(
+        name: String,
+        mobile: String,
+        userNumber: String,
+        benId: String,
+        description: String,
+        branchProfileId: String,
+        mobileToken: String,
+        serviceProviderId: String,
+        letterTypeId: String,
+        attachments: List<AttachmentEntity>
+    ): Observable<RefundEntity> {
+        return remoteDataStore.sendRefundRequest(name, mobile, userNumber, benId, description, branchProfileId, mobileToken, serviceProviderId, letterTypeId, attachments)
+    }
+
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {
         return remoteDataStore.getAllServices(typeID)
     }

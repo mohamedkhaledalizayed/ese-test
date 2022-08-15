@@ -163,6 +163,11 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
+            android:id="@+id/openRefund"
+            app:destination="@id/refundFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openComplaints"
             app:destination="@id/complaintsFragment"
             app:popUpTo="@id/homeFragment"
@@ -254,6 +259,11 @@
         <action
             android:id="@+id/openCommittees"
             app:destination="@id/committeesFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openRefund"
+            app:destination="@id/refundFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
@@ -801,6 +811,26 @@
         android:name="com.neqabty.presentation.ui.committees.CommitteesFragment"
         android:label="@string/committees_title"
         tools:layout="@layout/committees_fragment" />
+    <fragment
+        android:id="@+id/refundFragment"
+        android:name="com.neqabty.presentation.ui.refund.RefundFragment"
+        android:label="@string/refund_title"
+        tools:layout="@layout/refund_fragment">
+
+        <action
+            android:id="@+id/openRefundRequest"
+            app:destination="@id/refundRequestFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/refundRequestFragment"
+        android:name="com.neqabty.presentation.ui.refundRequest.RefundRequestFragment"
+        android:label="@string/refund_title"
+        tools:layout="@layout/refund_request_fragment">
+
+        <argument
+            android:name="refundRequest"
+            app:argType="com.neqabty.presentation.ui.refund.RefundRequest" />
+    </fragment>
     <fragment
         android:id="@+id/complaintsFragment"
         android:name="com.neqabty.presentation.ui.complaint.ComplaintFragment"

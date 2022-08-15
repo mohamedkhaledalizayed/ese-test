@@ -225,6 +225,10 @@ class SignupFragment : BaseFragment() {
             Constants.COMMITTEES -> navController().navigate(
                 SignupFragmentDirections.openCommittees()
             )
+
+            Constants.REFUND -> navController().navigate(
+                SignupFragmentDirections.openRefund()
+            )
         }
     }
 // endregion

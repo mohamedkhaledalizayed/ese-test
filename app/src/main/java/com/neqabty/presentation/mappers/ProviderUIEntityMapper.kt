@@ -23,7 +23,9 @@ class ProviderUIEntityMapper @Inject constructor() : Mapper<ProviderUI, Provider
                 emails = from.emails,
                 phones = from.phones,
                 typeID = from.typeID,
-                typeName = from.typeName
+                typeName = from.typeName,
+                providerId = from.providerId,
+                branchProfileId = from.branchProfileId
         )
     }
 }

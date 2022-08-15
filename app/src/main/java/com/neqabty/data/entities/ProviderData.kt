@@ -31,5 +31,9 @@ data class ProviderData(
     @field:SerializedName("provider_type_id")
     var typeID: String?,
     @field:SerializedName("provider_type_name")
-    var typeName: String?
+    var typeName: String?,
+    @SerializedName("provider_id")
+    var providerId: String = "",
+    @SerializedName("profile_id")
+    var branchProfileId: String = ""
 ) : Response()

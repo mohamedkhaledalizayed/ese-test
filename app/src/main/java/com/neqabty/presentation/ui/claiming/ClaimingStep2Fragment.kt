@@ -108,7 +108,7 @@ class ClaimingStep2Fragment : BaseFragment() {
         state.providers?.let {
             if (it.isEmpty()) {
                 providersResultList?.clear()
-                providersResultList!!.add(ProviderUI(0, getString(R.string.no_data_found), "", "", "", "", "", "", "", "", "", "", ""))
+                providersResultList!!.add(ProviderUI(0, getString(R.string.no_data_found), "", "", "", "", "", "", "", "", "", "", "","",""))
             } else
                 providersResultList = it.toMutableList()
         }

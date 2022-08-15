@@ -160,6 +160,10 @@ class ActivateAccountFragment : BaseFragment() {
                 Constants.COMMITTEES -> navController().navigate(
                     ActivateAccountFragmentDirections.openCommittees()
                 )
+
+                Constants.REFUND -> navController().navigate(
+                    ActivateAccountFragmentDirections.openRefund()
+                )
             }
         }
     }

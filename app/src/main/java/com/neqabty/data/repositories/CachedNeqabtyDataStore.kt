@@ -62,6 +62,21 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("Not yet implemented")
     }
 
+    override fun sendRefundRequest(
+        name: String,
+        mobile: String,
+        userNumber: String,
+        benId: String,
+        description: String,
+        branchProfileId: String,
+        mobileToken: String,
+        serviceProviderId: String,
+        letterTypeId: String,
+        attachments: List<AttachmentEntity>
+    ): Observable<RefundEntity> {
+        TODO("Not yet implemented")
+    }
+
     override fun createComplaint(
             name: String,
             phone: String,

@@ -524,6 +524,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideSendRefundRequest(neqabtyRepository: NeqabtyRepository): SendRefundRequest {
+        return SendRefundRequest(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun providePaymentInquiry(neqabtyRepository: NeqabtyRepository): PaymentInquiry {
         return PaymentInquiry(ASyncTransformer(), neqabtyRepository)
     }

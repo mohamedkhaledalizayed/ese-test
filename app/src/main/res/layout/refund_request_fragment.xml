@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loading"
+            type="boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/margin_horizontal_large"
+            android:paddingEnd="@dimen/margin_horizontal_large"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/rounded_bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_horizontal_small">
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvNumber"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="start"-->
+<!--                    android:text="@string/syndicateNumber"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:textSize="?textSizeMedium"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/edNumber"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:enabled="false"-->
+<!--                    android:hint="@string/syndicateNumber"-->
+<!--                    android:inputType="number"-->
+<!--                    android:textDirection="anyRtl"-->
+<!--                    android:textSize="?textSizeMedium" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvCardNumber"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="start"-->
+<!--                    android:text="@string/cardNumber"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:textSize="?textSizeMedium"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/edCardNumber"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:enabled="false"-->
+<!--                    android:hint="@string/cardNumber"-->
+<!--                    android:inputType="number"-->
+<!--                    android:textDirection="anyRtl"-->
+<!--                    android:textSize="?textSizeMedium" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tvProvider"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="start"-->
+<!--                    android:text="@string/serviceProvider"-->
+<!--                    android:textColor="@color/colorPrimary"-->
+<!--                    android:textSize="?textSizeMedium"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/edProvider"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:enabled="false"-->
+<!--                    android:hint="@string/syndicateNumber"-->
+<!--                    android:inputType="number"-->
+<!--                    android:textDirection="anyRtl"-->
+<!--                    android:textSize="?textSizeMedium" />-->
+
+                <TextView
+                    android:id="@+id/tvDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="@dimen/margin_vertical_small"
+                    android:text="@string/request_reason"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeMedium"
+                    android:textStyle="bold" />
+
+
+                <EditText
+                    android:id="@+id/edDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:inputType="textLongMessage"
+                    android:maxLength="500"
+                    android:textDirection="anyRtl"
+                    android:gravity="start|top"
+                    android:textSize="?textSizeMedium" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPhotos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_horizontal_small"
+                    android:orientation="horizontal"
+                    app:layoutManager="LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:listitem="@layout/photo_item" />
+
+                <Button
+                    android:id="@+id/bAddPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_green"
+                    android:elevation="@dimen/elevation_level_one"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/margin_horizontal_normal"
+                    android:layout_marginEnd="@dimen/margin_horizontal_normal"
+                    android:text="@string/addPhoto"
+                    android:textColor="@android:color/white"
+                    android:textSize="?textSizeMedium" />
+
+                    <Button
+                        android:id="@+id/bSend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_green"
+                        android:elevation="@dimen/elevation_level_one"
+                        android:gravity="center"
+                        android:layout_margin="@dimen/margin_horizontal_normal"
+                        android:text="@string/send"
+                        android:textColor="@android:color/white"
+                        android:textSize="?textSizeMedium" />
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

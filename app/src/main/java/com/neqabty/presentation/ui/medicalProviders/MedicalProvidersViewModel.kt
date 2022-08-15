@@ -91,6 +91,8 @@ class MedicalProvidersViewModel @Inject constructor(private val getAllSpecializa
             emails = providerUI.email,
             typeID = providerUI.typeId,
             typeName = providerUI.typeName,
+            providerId = "",
+            branchProfileId = "",
             governId = "",
             areaId = "",
             createdAt = "",

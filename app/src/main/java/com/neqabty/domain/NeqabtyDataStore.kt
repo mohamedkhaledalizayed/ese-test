@@ -112,6 +112,18 @@ interface NeqabtyDataStore {
         doc3: File?
     ): Observable<String>
     fun getProfile(mobile: String, userNumber: String): Observable<ProfileEntity>
+    fun sendRefundRequest(
+        name: String,
+        mobile: String,
+        userNumber: String,
+        benId: String,
+        description: String,
+        branchProfileId: String,
+        mobileToken: String,
+        serviceProviderId: String,
+        letterTypeId: String,
+        attachments: List<AttachmentEntity>
+    ): Observable<RefundEntity>
     fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>>
     fun getAllServices(typeID: Int): Observable<List<ServiceEntity>>
     fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity>
