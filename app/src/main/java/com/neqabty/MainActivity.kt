@@ -72,7 +72,8 @@ class MainActivity : AppCompatActivity() {
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         setSupportActionBar(toolbar)
         getAppConfig()
-        checkRoot()
+        if (!BuildConfig.DEBUG)
+            checkRoot()
         startActivities()
         loadAds()
 
