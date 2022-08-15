@@ -226,6 +226,10 @@ class SignupFragment : BaseFragment() {
                 SignupFragmentDirections.openCommittees()
             )
 
+            Constants.MEDICAL_PROCEDURES_INQUIRY -> navController().navigate(
+                SignupFragmentDirections.openMedicalProceduresInquiry()
+            )
+
             Constants.REFUND -> navController().navigate(
                 SignupFragmentDirections.openRefund()
             )

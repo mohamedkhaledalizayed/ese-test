@@ -169,6 +169,23 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getTripDetails(id)
     }
 
+    override fun getMedicalProceduresInquiryLookups(mobileNumber: String): Observable<MedicalProceduresInquiryLookupsEntity> {
+        return remoteDataStore.getMedicalProceduresInquiryLookups(mobileNumber)
+    }
+
+    override fun getMedicalProcedures(mobileNumber: String, categoryId: String): Observable<List<MedicalProcedureEntity>> {
+        return remoteDataStore.getMedicalProcedures(mobileNumber, categoryId)
+    }
+
+    override fun getMedicalBranchProcedures(
+        mobileNumber: String,
+        procedureId: String,
+        relationTypeId: String,
+        areaId: String
+    ): Observable<List<MedicalBranchProcedureEntity>> {
+        return remoteDataStore.getMedicalBranchProcedures(mobileNumber, procedureId, relationTypeId, areaId)
+    }
+
     override fun getCommitteesLookups(): Observable<CommitteesLookupEntity> {
         return  remoteDataStore.getCommitteesLookups()
     }

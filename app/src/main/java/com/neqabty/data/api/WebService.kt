@@ -129,6 +129,19 @@ interface WebService {
     @POST("api/v1/transactions/generate-hash")
     fun getTransactionHash(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
+    @GET("api/Api/ApiSPPCostCard/GetMedicalProcedureLookUps")
+    fun getMedicalProceduresInquiryLookups(@Query("mobile_number") mobileNumber: String, @Query("server") server: String = ""): Observable<MedicalProceduresInquiryLookupsData>
+
+    @GET("api/Api/ApiSPPCostCard/GetMedicalProcedureList")
+    fun getMedicalProcedures(@Query("mobile_number") mobileNumber: String, @Query("categoryId") categoryId: String, @Query("server") server: String = ""): Observable<List<MedicalProcedureData>>
+
+    @GET("api/Api/ApiSPPCostCard/GetBranchProcedureList")
+    fun getMedicalBranchProcedures(@Query("mobile_number") mobileNumber: String,
+                                   @Query("procedureId") procedureId: String,
+                                   @Query("relationTypeId") relationTypeId: String,
+                                   @Query("policeStationId") areaId: String,
+                                   @Query("server") server: String = ""): Observable<List<MedicalBranchProcedureData>>
+
     @GET("api/v1/committees/lookups")
     fun getCommitteesLookups(): Observable<ApiResponse<CommitteesLookupData>>
 

@@ -158,6 +158,11 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
+            android:id="@+id/openMedicalProceduresInquiry"
+            app:destination="@id/medicalProceduresInquiryFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
             android:id="@+id/openCommittees"
             app:destination="@id/committeesFragment"
             app:popUpTo="@id/homeFragment"
@@ -254,6 +259,11 @@
         <action
             android:id="@+id/openUpdateDataVerification"
             app:destination="@id/updateDataVerificationFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openMedicalProceduresInquiry"
+            app:destination="@id/medicalProceduresInquiryFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
         <action
@@ -800,6 +810,48 @@
         <action
             android:id="@+id/openPayment"
             app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicalProceduresInquiryFragment"
+        android:name="com.neqabty.presentation.ui.medicalProceduresInquiry.MedicalProceduresInquiryFragment"
+        android:label="@string/medical_procedures_inquiry_title"
+        tools:layout="@layout/medical_procedures_inquiry_fragment" >
+        <action
+            android:id="@+id/openMedicalProceduresInquiryCont"
+            app:destination="@id/medicalProceduresInquiryContFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicalProceduresInquiryContFragment"
+        android:name="com.neqabty.presentation.ui.medicalProceduresInquiryCont.MedicalProceduresInquiryContFragment"
+        android:label="@string/medical_procedures_inquiry_title"
+        tools:layout="@layout/medical_procedures_inquiry_cont_fragment" >
+        <argument
+            android:name="relationTypeId"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="areaID"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="data"
+            app:argType="com.neqabty.presentation.entities.MedicalProceduresInquiryLookupsUI" />
+        <action
+            android:id="@+id/openMedicalProceduresInquiryResult"
+            app:destination="@id/medicalProceduresInquiryResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicalProceduresInquiryResultFragment"
+        android:name="com.neqabty.presentation.ui.medicalProceduresInquiryResult.MedicalProceduresInquiryResultFragment"
+        android:label="@string/medical_procedures_inquiry_title"
+        tools:layout="@layout/medical_procedures_result_fragment" >
+        <argument
+            android:name="procedureId"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="relationTypeId"
+            app:argType="java.lang.Integer" />
+        <argument
+            android:name="areaID"
+            app:argType="java.lang.Integer" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

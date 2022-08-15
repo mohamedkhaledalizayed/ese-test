@@ -88,6 +88,9 @@ interface NeqabtyDataStore {
             doc10: File?
     ): Observable<Unit>
 
+    fun getMedicalProceduresInquiryLookups(mobileNumber: String): Observable<MedicalProceduresInquiryLookupsEntity>
+    fun getMedicalProcedures(mobileNumber: String, categoryId: String): Observable<List<MedicalProcedureEntity>>
+    fun getMedicalBranchProcedures(mobileNumber: String, procedureId: String, relationTypeId: String, areaId: String): Observable<List<MedicalBranchProcedureEntity>>
     fun getCommitteesLookups(): Observable<CommitteesLookupEntity>
     fun sendCommitteesRequest(
         name: String,

@@ -200,6 +200,7 @@
     <string name="medical_title">الدليل الطبي</string>
     <string name="inquiry_title">المدفوعات</string>
     <string name="profile_title">هويتك الإلكترونية</string>
+    <string name="medical_procedures_inquiry_title">الاستعلامات الطبية</string>
     <string name="committees_title">اللجان</string>
     <string name="refund_title">طلبات الاسترداد</string>
     <string name="engineering_records_title">تجديد سجل هندسي</string>
@@ -570,6 +571,11 @@
     <string name="committees_add_photos_1">∎ السيرة الذاتية PDF</string>
     <string name="committees_add_photos_2">∎ كارنيه العضوية</string>
     <string name="committees_add_photos_3">∎ الصورة الشخصية</string>
+
+    <string name="medical_procedures_beneficiary">علاقة المستفيد</string>
+    <string name="medical_procedures_category">نوع الخدمة</string>
+    <string name="medical_procedures_subcategory">تصنيف الخدمة</string>
+    <string name="medical_procedures_name">الخدمة</string>
 
     <string name="questionnaire_title">استطلاع رأي</string>
     <string name="answer_questionnaire">للمشاركة في استطلاع الرأي قم بالضغط على الرسالة</string>

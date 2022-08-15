@@ -161,9 +161,14 @@ class ActivateAccountFragment : BaseFragment() {
                     ActivateAccountFragmentDirections.openCommittees()
                 )
 
+                Constants.MEDICAL_PROCEDURES_INQUIRY -> navController().navigate(
+                    ActivateAccountFragmentDirections.openMedicalProceduresInquiry()
+                )
+
                 Constants.REFUND -> navController().navigate(
                     ActivateAccountFragmentDirections.openRefund()
                 )
+
             }
         }
     }
