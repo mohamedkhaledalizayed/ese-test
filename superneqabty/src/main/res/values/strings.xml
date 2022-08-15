@@ -119,4 +119,6 @@ Operation No.</string>
 
     <string name="select_branch">Select Branch</string>
     <string name="enter_add">Please Enter Address</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="dont_have_syndicate">لمعرفة المزيد عن باقات نقاباتي صحة مستدامة اضغط هنا .. نقابتي نقابة من ليس له نقابة.</string>
 </resources>

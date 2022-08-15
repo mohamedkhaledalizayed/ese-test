@@ -75,6 +75,10 @@
         <activity
             android:name=".modules.home.presentation.view.homescreen.HomeActivity"
             android:exported="false" />
+        <activity
+            android:name=".modules.syndicates.presentation.view.homescreen.SyndicateActivity"
+            android:theme="@style/Theme.NoActionBar"
+            android:exported="false" />
     </application>
 
 </manifest>

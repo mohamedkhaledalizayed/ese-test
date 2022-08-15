@@ -26,14 +26,12 @@ import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.modules.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.profile.presentation.ProfileActivity
-import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.modules.settings.view.SettingsScreen
 import com.neqabty.healthcare.modules.suggestions.presentation.SuggestionsActivity
-import com.neqabty.healthcare.modules.wallet.presentation.WalletActivity
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
-import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
+import com.neqabty.healthcare.modules.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -250,10 +248,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
                     askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
                 }
             }
-            R.id.syndicate -> {
-                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
-                startActivity(intent)
-            }
+//            R.id.syndicate -> {
+//                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
+//                startActivity(intent)
+//            }
             R.id.settings -> {
                 val intent = Intent(this@HomeActivity, SettingsScreen::class.java)
                 startActivity(intent)
@@ -304,10 +302,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
 
     }
 
-    override fun onBackPressed() {
-        showAlertDialog("هل تريد الخروج من التطبيق!")
-    }
-
     private fun askForLogin(message: String) {
 
         val alertDialog = AlertDialog.Builder(this).create()
@@ -323,27 +317,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             Constants.selectedSyndicatePosition = 0
             val intent = Intent(this, VerifyPhoneActivity::class.java)
             startActivity(intent)
-        }
-        alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, "لا"
-        ) { dialog, _ ->
-            dialog.dismiss()
-        }
-        alertDialog.show()
-
-    }
-
-    private fun showAlertDialog(message: String) {
-
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle("تنبيه")
-        alertDialog.setMessage(message)
-        alertDialog.setCancelable(true)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, "موافق"
-        ) { dialog, _ ->
-            dialog.dismiss()
-            finish()
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, "لا"

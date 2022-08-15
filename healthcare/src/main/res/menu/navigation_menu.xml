@@ -12,12 +12,12 @@
             android:icon="@drawable/ic_man"/>
     </group>
 
-    <group android:id="@+id/menu_syndicate">
-        <item
-            android:id="@+id/syndicate"
-            android:title="@string/syndicates"
-            android:icon="@drawable/guide"/>
-    </group>
+<!--    <group android:id="@+id/menu_syndicate">-->
+<!--        <item-->
+<!--            android:id="@+id/syndicate"-->
+<!--            android:title="@string/syndicates"-->
+<!--            android:icon="@drawable/guide"/>-->
+<!--    </group>-->
 
     <group android:id="@+id/menu_wallet">
         <item

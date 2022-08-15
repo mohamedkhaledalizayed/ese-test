@@ -38,9 +38,6 @@
             android:name=".payment.view.selectservice.PaymentsActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity"
-            android:exported="true" />
-        <activity
             android:name="com.neqabty.meganeqabty.home.view.homescreen.HomeActivity"
             android:exported="true" />
         <activity

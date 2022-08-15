@@ -12,6 +12,7 @@ import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySplashBinding
 import com.neqabty.healthcare.modules.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.modules.home.presentation.view.homescreen.HomeActivity
+import com.neqabty.healthcare.modules.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.core.utils.DeviceUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +51,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                         if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= 160){
                             Handler().postDelayed(Runnable {
                                 if (sharedPreferences.mobile.isNotEmpty()){
-                                    val mainIntent = Intent(this@SplashActivity, HomeActivity::class.java)
+                                    val mainIntent = Intent(this@SplashActivity, SyndicateActivity::class.java)
                                     startActivity(mainIntent)
                                     finish()
                                 }else{

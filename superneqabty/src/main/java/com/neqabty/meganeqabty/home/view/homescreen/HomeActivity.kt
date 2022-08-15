@@ -27,7 +27,6 @@ import com.neqabty.meganeqabty.home.domain.entity.AdEntity
 import com.neqabty.meganeqabty.payment.view.selectservice.PaymentsActivity
 import com.neqabty.meganeqabty.profile.view.profile.ProfileActivity
 import com.neqabty.meganeqabty.settings.SettingsActivity
-import com.neqabty.meganeqabty.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import com.squareup.picasso.Picasso
@@ -291,11 +290,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 startActivity(intent)
             }
 
-            R.id.change_syndicate -> {
-                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+//            R.id.change_syndicate -> {
+//                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//            }
             R.id.contactus_fragment -> {
                 try {
                     val emailIntent = Intent(Intent.ACTION_SEND)

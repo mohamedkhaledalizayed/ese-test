@@ -9,10 +9,10 @@ import com.neqabty.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityCheckAccountBinding
-import com.neqabty.healthcare.modules.home.presentation.view.homescreen.HomeActivity
 import com.neqabty.healthcare.modules.checkaccountstatus.data.model.CheckPhoneBody
 import com.neqabty.core.utils.isMobileValid
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
+import com.neqabty.healthcare.modules.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -61,7 +61,7 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
                             startActivity(intent)
                         }else{
                             sharedPreferences.mobile = binding.phone.text.toString()
-                            val intent = Intent(this, HomeActivity::class.java)
+                            val intent = Intent(this, SyndicateActivity::class.java)
                             startActivity(intent)
                             finish()
                         }
@@ -77,7 +77,7 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
     override fun onResume() {
         super.onResume()
         if (sharedPreferences.isPhoneVerified){
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, SyndicateActivity::class.java)
             startActivity(intent)
             finish()
         }
