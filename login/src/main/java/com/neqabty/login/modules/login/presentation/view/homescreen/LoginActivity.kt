@@ -47,6 +47,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             sharedPreferences.isPhoneVerified = true
                             sharedPreferences.isSyndicateMember = resource.data!!.user.account.entity.type == "syndicate"
                             sharedPreferences.token = resource.data!!.token
+                            sharedPreferences.code = resource.data!!.user.account.entity.code
+                            sharedPreferences.syndicateName = resource.data!!.user.account.entity.name
                             sharedPreferences.mobile = binding.etUsername.text.toString()
                             sharedPreferences.name = resource.data!!.user.account.fullName ?: ""
                             sharedPreferences.nationalId = resource.data!!.user.account.nationalId

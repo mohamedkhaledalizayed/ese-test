@@ -211,7 +211,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.navView.setNavigationItemSelectedListener(this)
 
         binding.contentActivity.ivSubscription.setOnClickListener {
-            if (sharedPreferences.isSyndicateMember){
+            if (sharedPreferences.isPhoneVerified){
                 val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                 startActivity(intent)
             }else{
@@ -260,7 +260,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
         when (item.itemId) {
             R.id.profile -> {
-                if (sharedPreferences.isSyndicateMember){
+                if (sharedPreferences.isPhoneVerified){
                     val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
                     startActivity(intent)
                 }else{
@@ -274,7 +274,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 startActivity(intent)
             }
             R.id.payment -> {
-                if (sharedPreferences.isSyndicateMember){
+                if (sharedPreferences.isPhoneVerified){
                     val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                     startActivity(intent)
                 }else{
@@ -306,14 +306,69 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                     e.printStackTrace()
                 }
             }
+            R.id.logout -> {
+                logout("هل تريد تسجيل خروج!")
+            }
         }
 
         drawer.closeDrawer(GravityCompat.START)
         return true
     }
 
+
+    private fun logout(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            sharedPreferences.mobile = ""
+            sharedPreferences.isPhoneVerified = false
+            sharedPreferences.isSyndicateMember = false
+            sharedPreferences.code = ""
+            sharedPreferences.token = ""
+            sharedPreferences.mainSyndicate = 0
+            sharedPreferences.image = ""
+            sharedPreferences.syndicateName = ""
+            drawer.close()
+            finish()
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
     override fun onBackPressed() {
-        finish()
+        closeApp("هل تريد الخروج!")
+    }
+
+    private fun closeApp(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            finishAffinity()
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
     }
 
     private fun askForLogin(message: String) {

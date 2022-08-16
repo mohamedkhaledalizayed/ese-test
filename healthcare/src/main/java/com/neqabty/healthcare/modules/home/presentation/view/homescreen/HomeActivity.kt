@@ -248,10 +248,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
                     askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
                 }
             }
-//            R.id.syndicate -> {
+            R.id.syndicate -> {
 //                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
 //                startActivity(intent)
-//            }
+//                finish()
+            }
             R.id.settings -> {
                 val intent = Intent(this@HomeActivity, SettingsScreen::class.java)
                 startActivity(intent)
@@ -288,6 +289,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             sharedPreferences.isSyndicateMember = false
             sharedPreferences.code = ""
             sharedPreferences.token = ""
+            sharedPreferences.mainSyndicate = 0
+            sharedPreferences.image = ""
+            sharedPreferences.syndicateName = ""
             drawer.close()
             val intent = Intent(this@HomeActivity, CheckAccountActivity::class.java)
             startActivity(intent)
@@ -335,6 +339,31 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         alertDialog.setCancelable(true)
         alertDialog.setButton(
             AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
+    override fun onBackPressed() {
+        closeApp("هل تريد الخروج!")
+    }
+
+    private fun closeApp(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            finishAffinity()
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, "لا"
         ) { dialog, _ ->
             dialog.dismiss()
         }

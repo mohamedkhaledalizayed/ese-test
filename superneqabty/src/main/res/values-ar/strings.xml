@@ -122,4 +122,5 @@
     <string name="enter_add">من فضلك ادخل العنوان</string>
     <string name="dismiss">تخطى</string>
     <string name="dont_have_syndicate">لمعرفة المزيد عن باقات نقاباتي صحة مستدامة اضغط هنا .. نقابتي نقابة من ليس له نقابة.</string>
+    <string name="logout_">تسجيل خروج</string>
 </resources>

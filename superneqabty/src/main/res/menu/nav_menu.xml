@@ -43,6 +43,13 @@
             android:icon="@drawable/ic_bullhorn"/>
     </group>
 
+    <group android:id="@+id/menu_logout">
+        <item
+            android:id="@+id/logout"
+            android:title="@string/logout_"
+            android:icon="@drawable/logout"/>
+    </group>
+
 <!--    <group android:id="@+id/syndicate">-->
 <!--        <item-->
 <!--            android:id="@+id/change_syndicate"-->

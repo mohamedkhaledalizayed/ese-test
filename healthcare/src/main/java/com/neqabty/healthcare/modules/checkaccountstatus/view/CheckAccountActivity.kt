@@ -11,6 +11,7 @@ import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityCheckAccountBinding
 import com.neqabty.healthcare.modules.checkaccountstatus.data.model.CheckPhoneBody
 import com.neqabty.core.utils.isMobileValid
+import com.neqabty.healthcare.modules.home.presentation.view.homescreen.HomeActivity
 import com.neqabty.login.modules.login.presentation.view.homescreen.LoginActivity
 import com.neqabty.healthcare.modules.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -77,9 +78,14 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
     override fun onResume() {
         super.onResume()
         if (sharedPreferences.isPhoneVerified){
-            val intent = Intent(this, SyndicateActivity::class.java)
-            startActivity(intent)
-            finish()
+            if (sharedPreferences.isSyndicateMember){
+                val mainIntent = Intent(this@CheckAccountActivity, com.neqabty.meganeqabty.home.view.homescreen.HomeActivity::class.java)
+                startActivity(mainIntent)
+                finish()
+            }else{
+                val mainIntent = Intent(this@CheckAccountActivity, HomeActivity::class.java)
+                startActivity(mainIntent)
+            }
         }
     }
 }

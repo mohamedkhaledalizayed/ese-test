@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.LinearLayout
@@ -94,7 +93,9 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
                         sharedPreferences.code = item.code
                         sharedPreferences.image = item.image
                         sharedPreferences.syndicateName = item.name
+                        sharedPreferences.isSyndicateMember = false
                         startActivity(intent)
+                        finish()
                     }else{
                         isSyndicateMember = true
                         selectedSyndicateCode = item.code
@@ -106,7 +107,9 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
                         sharedPreferences.code = item.code
                         sharedPreferences.image = item.image
                         sharedPreferences.syndicateName = item.name
+                        sharedPreferences.isSyndicateMember = true
                         startActivity(intent)
+                        finish()
                     }
 
                 }

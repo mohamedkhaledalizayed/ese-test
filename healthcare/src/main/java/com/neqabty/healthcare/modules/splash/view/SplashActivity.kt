@@ -34,11 +34,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()){
-            showAlertDialogAndExitApp(getString(R.string.rooted))
-        }else{
-            splashViewModel.appConfig()
-        }
+
         splashViewModel.appConfig.observe(this) {
 
             it?.let { resource ->
@@ -51,9 +47,14 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                         if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= 160){
                             Handler().postDelayed(Runnable {
                                 if (sharedPreferences.mobile.isNotEmpty()){
-                                    val mainIntent = Intent(this@SplashActivity, SyndicateActivity::class.java)
-                                    startActivity(mainIntent)
-                                    finish()
+                                    if (sharedPreferences.isSyndicateMember){
+                                        val mainIntent = Intent(this@SplashActivity, com.neqabty.meganeqabty.home.view.homescreen.HomeActivity::class.java)
+                                        startActivity(mainIntent)
+                                    }else{
+                                        val mainIntent = Intent(this@SplashActivity, HomeActivity::class.java)
+                                        startActivity(mainIntent)
+                                        finish()
+                                    }
                                 }else{
                                     val mainIntent = Intent(this@SplashActivity, CheckAccountActivity::class.java)
                                     startActivity(mainIntent)
@@ -120,5 +121,14 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         }
 
         alertDialog.show()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()){
+            showAlertDialogAndExitApp(getString(R.string.rooted))
+        }else{
+            splashViewModel.appConfig()
+        }
     }
 }
