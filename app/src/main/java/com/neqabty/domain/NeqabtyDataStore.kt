@@ -127,7 +127,7 @@ interface NeqabtyDataStore {
         letterTypeId: String,
         attachments: List<AttachmentEntity>
     ): Observable<RefundEntity>
-    fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>>
+    fun getAllServiceTypes(userNumber: String): Observable<ServiceTypeEntity>
     fun getAllServices(typeID: Int): Observable<List<ServiceEntity>>
     fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity>
     fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>

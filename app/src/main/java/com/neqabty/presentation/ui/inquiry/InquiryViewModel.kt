@@ -35,10 +35,8 @@ class InquiryViewModel @Inject constructor(
         viewState.value = InquiryViewState()
     }
 
-    fun getAllServiceTypes() {
-        viewState.value?.serviceTypes?.let {
-            onServiceTypesReceived(it)
-        } ?: getAllServiceTypes.observable()
+    fun getAllServiceTypes(userNumber: String) {
+        getAllServiceTypes.getAllServiceTypes(userNumber)
                 .flatMap {
                     it.let {
                         serviceTypeEntityUIMapper.observable(it)
@@ -59,7 +57,7 @@ class InquiryViewModel @Inject constructor(
                     }
                 }.subscribe(
                         {
-                            onServicesReceived(it)
+//                            onServicesReceived(it.)
                         },
                         { errorState.value = handleError(it) }
                 )
@@ -84,14 +82,15 @@ class InquiryViewModel @Inject constructor(
         )
     }
 
-    private fun onServiceTypesReceived(serviceTypes: List<ServiceTypeUI>) {
+    private fun onServiceTypesReceived(serviceTypes: ServiceTypeUI) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
-                serviceTypes = serviceTypes)
+                serviceTypes = serviceTypes.typesList,
+                services = serviceTypes.servicesList)
         viewState.value = newViewState
     }
 
-    private fun onServicesReceived(services: List<ServiceUI>) {
+    private fun onServicesReceived(services: List<ServiceTypeUI.Service>) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
                 services = services)

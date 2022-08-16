@@ -1,10 +1,8 @@
 package com.neqabty.presentation.mappers
 
 import com.neqabty.domain.common.Mapper
-import com.neqabty.domain.entities.ServiceEntity
 import com.neqabty.domain.entities.ServiceTypeEntity
 import com.neqabty.presentation.entities.ServiceTypeUI
-import com.neqabty.presentation.entities.ServiceUI
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -12,9 +10,23 @@ import javax.inject.Singleton
 class ServiceTypeEntityUIMapper @Inject constructor() : Mapper<ServiceTypeEntity, ServiceTypeUI>() {
 
     override fun mapFrom(from: ServiceTypeEntity): ServiceTypeUI {
-        return ServiceTypeUI(
-                id = from.id,
-                type = from.type
-        )
+        val serviceTypeUI = ServiceTypeUI(null,null)
+
+        from.typesList?.let{
+            var types: List<ServiceTypeUI.ServiceType> = it.map { type ->
+                return@map ServiceTypeUI.ServiceType(id = type.id, type = type.type)
+            }
+            serviceTypeUI.typesList = types
+        }
+
+
+        from.servicesList?.let{
+            var services: List<ServiceTypeUI.Service> = it.map { service ->
+                return@map ServiceTypeUI.Service(id = service.id, groupID = service.groupID, name = service.name, price = service.price)
+            }
+            serviceTypeUI.servicesList = services
+        }
+
+        return serviceTypeUI
     }
 }

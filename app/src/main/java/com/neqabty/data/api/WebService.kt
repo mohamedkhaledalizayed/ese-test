@@ -162,8 +162,8 @@ interface WebService {
         @Body refundRequest: RefundRequest
     ): Observable<ApiResponse<RefundData>>
 
-    @GET("api/v1/eseServicesTypes")
-    fun getAllServiceTypes(): Observable<ApiResponse<List<ServiceTypeData>>>
+    @POST("api/v1/ese-services")
+    fun getAllServiceTypes(@Body servicesRequest: ServicesRequest): Observable<ApiResponse<ServiceTypeData>>
 
     @POST("api/v1/eseServices")
     fun getAllServices(@Body servicesRequest: ServicesRequest): Observable<ApiResponse<List<ServiceData>>>
@@ -178,10 +178,10 @@ interface WebService {
             @Query("server") server: String = ""
     ): Observable<MedicalRenewalPaymentData>
 
-    @POST("api/apiPaymentRequest/AddRenewalRequest")
+    @POST("api/Api/ApiRequest/AddServiceRequest")
     fun addRenewalRequest(
             @Query("mobile_number") mobileNumber: String,
-            @Query("oldrefid") oldRefID: String,
+            @Query("oldRefId") oldRefID: String,
             @Query("serviceID") serviceID: Int,
             @Query("requestID") requestID: String,
             @Query("amount") amount: String,
