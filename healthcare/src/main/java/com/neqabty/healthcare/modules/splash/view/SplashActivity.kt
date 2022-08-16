@@ -46,7 +46,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                         loading.dismiss()
                         if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= 160){
                             Handler().postDelayed(Runnable {
-                                if (sharedPreferences.mobile.isNotEmpty()){
+                                if (sharedPreferences.isPhoneVerified){
                                     if (sharedPreferences.isSyndicateMember){
                                         val mainIntent = Intent(this@SplashActivity, com.neqabty.meganeqabty.home.view.homescreen.HomeActivity::class.java)
                                         startActivity(mainIntent)
@@ -56,9 +56,14 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                                         finish()
                                     }
                                 }else{
-                                    val mainIntent = Intent(this@SplashActivity, CheckAccountActivity::class.java)
-                                    startActivity(mainIntent)
-                                    finish()
+                                    if (sharedPreferences.mobile.isEmpty()){
+                                        val mainIntent = Intent(this@SplashActivity, CheckAccountActivity::class.java)
+                                        startActivity(mainIntent)
+                                        finish()
+                                    }else{
+                                        val mainIntent = Intent(this@SplashActivity, SyndicateActivity::class.java)
+                                        startActivity(mainIntent)
+                                    }
                                 }
                             }, SPLASH_DISPLAY_LENGTH)
                         }else{

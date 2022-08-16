@@ -20,7 +20,7 @@ class VerifyPhoneRepositoryImpl @Inject constructor(private val sendOTPSource: S
         }
     }
 
-    override fun checkOTP(checkOTPBody: CheckOTPBody): Flow<Boolean> {
+    override fun checkOTP(checkOTPBody: CheckOTPBody): Flow<String> {
         return flow {
             emit(sendOTPSource.checkOTP(checkOTPBody))
         }

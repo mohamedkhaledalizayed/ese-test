@@ -39,6 +39,13 @@ class UpdateInfoActivity : BaseActivity<ActivityUpdateInfoBinding>() {
 
         setupToolbar(title = "تحديث البيانات")
 
+        if (intent.getIntExtra("key", 0) == 100){
+            binding.cardContainer.visibility = View.VISIBLE
+            binding.licenceContainer.visibility = View.GONE
+        }else{
+            binding.licenceContainer.visibility = View.VISIBLE
+            binding.cardContainer.visibility = View.GONE
+        }
         profileViewModel.membershipCard.observe(this) {
 
             it?.let { resource ->

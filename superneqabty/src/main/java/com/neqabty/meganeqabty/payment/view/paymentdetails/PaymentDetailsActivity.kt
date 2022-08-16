@@ -314,6 +314,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.agree)
         ) { dialog, _ ->
             val intent = Intent(this, UpdateInfoActivity::class.java)
+            intent.putExtra("key", 100)
             startActivity(intent)
             dialog.dismiss()
             finish()

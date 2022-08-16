@@ -26,25 +26,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:cardCornerRadius="@dimen/_7sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                    >
-
                     <LinearLayout
                         android:id="@+id/linearLayout"
+                        android:layout_margin="@dimen/_10sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_white_bg"
+                        android:background="@drawable/edit_text_bg"
                         android:orientation="vertical">
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -279,23 +266,118 @@
                         </RelativeLayout>
 
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
-                <Button
-                    android:id="@+id/btn_update"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:background="@drawable/login_btn_bg"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:text="@string/update_info"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_10ssp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    app:layout_constraintEnd_toEndOf="@id/cv_container"
-                    app:layout_constraintStart_toStartOf="@id/cv_container"
-                    app:layout_constraintTop_toBottomOf="@id/cv_container" />
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_bg"
+                    android:padding="@dimen/_10sdp"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        android:text="@string/cardrenewal"/>
+
+                    <TextView
+                        android:id="@+id/mobile_number"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"/>
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"/>
+
+                    <TextView
+                        android:id="@+id/year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"/>
+
+                    <TextView
+                        android:id="@+id/message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"/>
+
+                    <LinearLayout
+                        android:id="@+id/card_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/sign_up_btn_bg"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cardrenewal"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_bg"
+                    android:padding="@dimen/_10sdp"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        android:text="@string/ministry_license"/>
+
+                    <TextView
+                        android:id="@+id/licence_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"/>
+
+                    <LinearLayout
+                        android:id="@+id/licence_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/sign_up_btn_bg"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ministry_license"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>

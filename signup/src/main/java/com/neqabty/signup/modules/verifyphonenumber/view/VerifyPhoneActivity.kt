@@ -116,9 +116,10 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
                     }
                     Status.SUCCESS ->{
                         loading.hide()
-                        if (resource.data!!){
+                        if (resource.data!!.isNotEmpty()){
                             val intent = Intent(this@VerifyPhoneActivity, SignupActivity::class.java)
                             intent.putExtra("phoneNumber", phoneNumber)
+                            intent.putExtra("token", resource.data)
                             startActivity(intent)
                             finish()
                         }

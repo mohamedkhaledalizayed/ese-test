@@ -13,8 +13,8 @@ class SendOTPSource @Inject constructor(private val verifyPhoneApi: VerifyPhoneA
         return verifyPhoneApi.sendOTP(sendOTPBody)
     }
 
-    suspend fun checkOTP(checkOTPBody: CheckOTPBody): Boolean{
-        return verifyPhoneApi.checkOTP(checkOTPBody).status
+    suspend fun checkOTP(checkOTPBody: CheckOTPBody): String{
+        return verifyPhoneApi.checkOTP(checkOTPBody).token
     }
 
 }

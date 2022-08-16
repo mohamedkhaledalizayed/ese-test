@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 class SignupDS @Inject constructor(private val signupApi: SignupApi) {
 
-    suspend fun signup(signupBody: SignupBody): UserModel {
-        return signupApi.syndicateMember(signupBody)
+    suspend fun signup(token: String, signupBody: SignupBody): UserModel {
+        return signupApi.syndicateMember(token, signupBody)
     }
 
     suspend fun signUpNeqabtyMember(body: NeqabtySignupBody): NeqabtyMemberModel {

@@ -33,7 +33,7 @@ class VerifyPhoneViewModel @Inject constructor(private val verifyPhoneUseCase: V
         }
     }
 
-    val otpStatus = MutableLiveData<Resource<Boolean>>()
+    val otpStatus = MutableLiveData<Resource<String>>()
     fun checkOTP(checkOTPBody: CheckOTPBody){
         viewModelScope.launch(Dispatchers.IO){
             otpStatus.postValue(Resource.loading(data = null))

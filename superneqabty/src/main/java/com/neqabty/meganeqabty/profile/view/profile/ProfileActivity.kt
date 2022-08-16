@@ -1,8 +1,9 @@
 package com.neqabty.meganeqabty.profile.view.profile
 
+
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
@@ -15,8 +16,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
+    private var licenceStatus = false
     private val profileViewModel: ProfileViewModel by viewModels()
     override fun getViewBinding() = ActivityProfileMegaBinding.inflate(layoutInflater)
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -24,7 +27,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
         setupToolbar(titleResId = R.string.profile)
 
-        profileViewModel.getUserProfile("Token ${sharedPreferences.token}")
+
         profileViewModel.user.observe(this) {
 
             it?.let { resource ->
@@ -45,7 +48,6 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
-                        Log.e("jhfdsasdf", resource.message.toString())
                     }
                 }
             }
@@ -53,10 +55,91 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
         }
 
-        binding.btnUpdate.setOnClickListener {
+
+        profileViewModel.cardStatus.observe(this) {
+
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        binding.mobileNumber.text = resources.getString(R.string.phone_number) +
+                                " ${resource.data?.mobile}"
+                        binding.address.text = resources.getString(R.string.address_) +
+                                " ${resource.data?.address}"
+                        binding.year.text = resources.getString(R.string.year_) +
+                                " ${resource.data?.year}"
+                        binding.message.text = resources.getString(R.string.order_status) +
+                                " ${resource.data?.statusMessage}"
+                        if (resource.data?.statusCode == 3){
+                            binding.cardBtn.visibility = View.VISIBLE
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                        if (resource.message == "404"){
+                            binding.mobileNumber.visibility = View.GONE
+                            binding.address.visibility = View.GONE
+                            binding.year.visibility = View.GONE
+                            binding.cardBtn.visibility = View.VISIBLE
+                            binding.message.text = "لم يتم العثور على طلب تجديد كارنيه العضوية"
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+
+        profileViewModel.licenceStatus.observe(this) {
+
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        binding.licenceMessage.text = resources.getString(R.string.order_status) +
+                                " ${resource.data?.statusMessage}"
+                        if (resource.data?.statusCode == 3){
+                            binding.licenceBtn.visibility = View.VISIBLE
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                        if (resource.message == "404"){
+                            binding.licenceBtn.visibility = View.VISIBLE
+                            binding.message.text = "لم يتم العثور على طلب تجديد ترخيص الوزارة"
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+        binding.cardBtn.setOnClickListener {
             val intent = Intent(this, UpdateInfoActivity::class.java)
+            intent.putExtra("key", 100)
             startActivity(intent)
         }
+
+        binding.licenceBtn.setOnClickListener {
+            val intent = Intent(this, UpdateInfoActivity::class.java)
+            intent.putExtra("key", 200)
+            startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        profileViewModel.getUserProfile("Token ${sharedPreferences.token}")
+        profileViewModel.membershipCardStatus()
+        profileViewModel.getLicenseStatus()
     }
 
 }

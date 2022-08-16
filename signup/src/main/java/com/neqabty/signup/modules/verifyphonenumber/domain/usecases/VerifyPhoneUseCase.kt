@@ -15,7 +15,7 @@ class VerifyPhoneUseCase @Inject constructor(private val verifyPhoneRepository: 
         return verifyPhoneRepository.sendOTP(sendOTPBody)
     }
 
-    fun build(checkOTPBody: CheckOTPBody): Flow<Boolean>{
+    fun build(checkOTPBody: CheckOTPBody): Flow<String>{
         return verifyPhoneRepository.checkOTP(checkOTPBody)
     }
 }

@@ -1,12 +1,16 @@
 package com.neqabty.meganeqabty.profile.data.repository
 
 
+import com.neqabty.meganeqabty.profile.data.model.licencestatus.LicenceStatusModel
+import com.neqabty.meganeqabty.profile.data.model.membershipcardstatus.MemberShipCardStatus
 import com.neqabty.meganeqabty.profile.data.model.ministrylicence.MinistryLicenseModel
 import com.neqabty.meganeqabty.profile.data.model.profile.EntityBody
 import com.neqabty.meganeqabty.profile.data.model.profile.ProfileModel
 import com.neqabty.meganeqabty.profile.data.model.profile.UserData
 import com.neqabty.meganeqabty.profile.data.source.ProfileDS
 import com.neqabty.meganeqabty.profile.domain.entity.MinistryLicenseEntity
+import com.neqabty.meganeqabty.profile.domain.entity.licencestatus.LicenceStatusEntity
+import com.neqabty.meganeqabty.profile.domain.entity.membershipcardstatus.CardStatusEntity
 import com.neqabty.meganeqabty.profile.domain.entity.profile.Data
 import com.neqabty.meganeqabty.profile.domain.entity.profile.Entity
 import com.neqabty.meganeqabty.profile.domain.entity.profile.ProfileEntity
@@ -21,6 +25,18 @@ class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS
     override fun getUserProfile(token: String): Flow<ProfileEntity> {
         return flow {
             emit(profileDS.getUserProfile(token).toProfileEntity())
+        }
+    }
+
+    override fun membershipCardStatus(): Flow<CardStatusEntity> {
+        return flow {
+            emit(profileDS.membershipCardStatus().toCardStatusEntity())
+        }
+    }
+
+    override fun licenseStatus(): Flow<LicenceStatusEntity> {
+        return flow {
+            emit(profileDS.licenseStatus().toLicenceStatusEntity())
         }
     }
 
@@ -72,5 +88,28 @@ private fun EntityBody.toEntity(): Entity {
         code = code,
         id = id,
         name = name
+    )
+}
+
+private fun MemberShipCardStatus.toCardStatusEntity(): CardStatusEntity{
+    return CardStatusEntity(
+        syndicateName = member.entity,
+        address = address,
+        mobile = mobile,
+        statusCode = statusCode,
+        statusMessage = statusMessage,
+        photo = photo,
+        year = cardYear.toString(),
+        delivered = delivered
+    )
+}
+
+private fun LicenceStatusModel.toLicenceStatusEntity(): LicenceStatusEntity{
+    return LicenceStatusEntity(
+        syndicateName = member.entity,
+        statusCode = statusCode,
+        statusMessage = statusMessage,
+        photo = license,
+        delivered = delivered
     )
 }

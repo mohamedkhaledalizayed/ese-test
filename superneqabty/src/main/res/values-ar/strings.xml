@@ -82,6 +82,7 @@
     <string name="name">الاسم :</string>
     <string name="membership_number">رقم العضوية :</string>
     <string name="phone_number">رقم الهاتف :</string>
+    <string name="phone_number_">رقم الهاتف :</string>
     <string name="receipt_info">بيانات الفاتورة</string>
     <string name="syndicate">النقابة :</string>
     <string name="service_name">اسم الخدمة :</string>
@@ -98,7 +99,10 @@
     <string name="add_member">إضافة عضو</string>
     <string name="cardrenewal">طلب تجديد كارنية العضوية.</string>
     <string name="address">عنوان التوصيل</string>
+    <string name="address_">العنوان :</string>
     <string name="year">السنة</string>
+    <string name="year_">السنة :</string>
+    <string name="order_status">حالة الطلب :</string>
     <string name="personal_photo">صورة شخصية</string>
     <string name="send_order">إرسال الطلب</string>
     <string name="ministry_license">طلب تجديد ترخيص الوزارة.</string>

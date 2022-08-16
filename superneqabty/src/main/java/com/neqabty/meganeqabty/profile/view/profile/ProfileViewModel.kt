@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.core.utils.Resource
+import com.neqabty.meganeqabty.profile.domain.entity.licencestatus.LicenceStatusEntity
+import com.neqabty.meganeqabty.profile.domain.entity.membershipcardstatus.CardStatusEntity
 import com.neqabty.meganeqabty.profile.domain.entity.profile.ProfileEntity
 import com.neqabty.meganeqabty.profile.domain.interactors.ProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,6 +31,34 @@ class ProfileViewModel @Inject constructor(private val profileUseCase: ProfileUs
         }
     }
 
+    val cardStatus = MutableLiveData<Resource<CardStatusEntity>>()
+    fun membershipCardStatus() {
+        cardStatus.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                profileUseCase.build().collect {
+                    cardStatus.postValue(Resource.success(data = it))
+                }
+            }catch (exception:Throwable){
+                cardStatus.postValue(Resource.error(data = null, message = handleError(exception)))
+            }
+        }
+    }
+
+    val licenceStatus = MutableLiveData<Resource<LicenceStatusEntity>>()
+    fun getLicenseStatus() {
+        licenceStatus.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                profileUseCase.licenseStatus().collect {
+                    licenceStatus.postValue(Resource.success(data = it))
+                }
+            }catch (exception:Throwable){
+                licenceStatus.postValue(Resource.error(data = null, message = handleError(exception)))
+            }
+        }
+    }
+
     private fun handleError(throwable: Throwable): String {
         return if (throwable is HttpException) {
             when (throwable.code()) {
@@ -42,7 +72,7 @@ class ProfileViewModel @Inject constructor(private val profileUseCase: ProfileUs
                     "لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى"
                 }
                 404 -> {
-                    "هذا العضو غير موجود فى قاعدة البيانات"
+                    "404"
                 }
                 500 -> {
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"

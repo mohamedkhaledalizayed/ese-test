@@ -30,6 +30,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     private val mSyndicatesAdapter = SyndicatesAdapter()
     private var syndicateListEntity: List<SyndicateListEntity>? = null
     private var syndicateCode = ""
+    private var token = ""
     override fun getViewBinding() = ActivitySignupBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.signup)
 
+        token = "${intent.getStringExtra("token")}"
         dialog = SpotsDialog.Builder()
             .setContext(this)
             .setMessage("من فضلك انتظر...")
@@ -159,6 +161,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                             if (isSyndicateMember){
                                 binding.spSyndicates.setSelection(selectedSyndicatePosition)
                                 syndicateCode = selectedSyndicateCode
+                            }else{
+                                isSyndicateMember = true
                             }
                         }else{
                             Toast.makeText(this, "لا يوجد نقابات", Toast.LENGTH_LONG).show()
@@ -212,11 +216,10 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 return
             }
 
-            signupViewModel.signup(
+            signupViewModel.signup(token,
                 SignupParams(
                     entityCode = syndicateCode,
                     membershipId = binding.membershipId.text.toString(),
-                    mobile = binding.phone.text.toString(),
                     national_id = binding.nationalId.text.toString(),
                     email = binding.email.text.toString()
                 )

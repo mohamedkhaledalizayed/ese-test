@@ -5,14 +5,12 @@ import com.neqabty.signup.modules.signup.data.model.SignupBody
 import com.neqabty.signup.modules.signup.data.model.neqabtymember.NeqabtyMemberModel
 import com.neqabty.signup.modules.signup.data.model.syndicatemember.UserModel
 import com.neqabty.signup.modules.signup.data.model.syndicates.SyndicateListModel
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface SignupApi {
 
-    @POST("accounts/signup")
-    suspend fun syndicateMember(@Body signupBody: SignupBody): UserModel
+    @PUT("members/updateMember")
+    suspend fun syndicateMember(@Header("Authorization") token: String,  @Body signupBody: SignupBody): UserModel
 
     @POST("accounts/general_signup")
     suspend fun signUpNeqabtyMember(@Body neqabtySignupBody: NeqabtySignupBody): NeqabtyMemberModel

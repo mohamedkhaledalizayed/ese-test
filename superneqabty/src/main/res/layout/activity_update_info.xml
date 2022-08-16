@@ -27,12 +27,13 @@
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_container"
+                    android:id="@+id/card_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:clickable="true"
                     app:cardCornerRadius="@dimen/_7sdp"
                     >
@@ -222,6 +223,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/licence_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
