@@ -119,6 +119,7 @@ class InquiryFragment : BaseFragment() {
     }
 
     fun renderServiceTypes() {
+        serviceTypesResultList = serviceTypesResultList?.filter { it.id == 4 || it.id == 6 }
         binding.spServiceTypes.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, serviceTypesResultList!!)
         binding.spServiceTypes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -133,6 +134,7 @@ class InquiryFragment : BaseFragment() {
     }
 
     fun renderServices() {
+        servicesResultList = servicesResultList?.filter { it.id == 1086 || it.id == 3090 || it.id == 6534 }
         binding.spService.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, servicesResultList!!)
         binding.spService.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}

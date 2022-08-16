@@ -142,7 +142,7 @@ interface WebService {
             @Query("server") server: String = ""
     ): Observable<MedicalRenewalPaymentData>
 
-    @POST("api/Api/AddServiceRequest")
+    @POST("api/Api/ApiRequest/AddServiceRequest")
     fun addRenewalRequest(
             @Query("mobile_number") mobileNumber: String,
             @Query("oldRefId") oldRefID: String,
