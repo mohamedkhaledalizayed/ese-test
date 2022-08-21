@@ -9,8 +9,8 @@ import retrofit2.http.*
 
 interface SignupApi {
 
-    @PUT("members/updateMember")
-    suspend fun syndicateMember(@Header("Authorization") token: String,  @Body signupBody: SignupBody): UserModel
+    @POST("accounts/signup")
+    suspend fun syndicateMember(@Body signupBody: SignupBody): UserModel
 
     @POST("accounts/general_signup")
     suspend fun signUpNeqabtyMember(@Body neqabtySignupBody: NeqabtySignupBody): NeqabtyMemberModel

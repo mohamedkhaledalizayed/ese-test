@@ -8,6 +8,7 @@ import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -23,8 +24,8 @@ import com.neqabty.meganeqabty.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.meganeqabty.payment.view.PaymentViewModel
 import com.neqabty.meganeqabty.payment.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.meganeqabty.profile.view.update.UpdateInfoActivity
+import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import dagger.hilt.android.AndroidEntryPoint
-import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
 import team.opay.business.cashier.sdk.api.*
 import team.opay.business.cashier.sdk.pay.PaymentTask
@@ -37,7 +38,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
     private var paymentMethod = "card"
     private var serviceCode = ""
     private var serviceActionCode = ""
-    private var number = ""
     private var totalAmount = 0
     private var deliveryFees = 0
     private var paymentFees = 0
@@ -47,6 +47,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
     private var entityBranch = 1
     private var branchesList: List<BranchesEntity>? = null
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,8 +57,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
         serviceCode = intent.getStringExtra("code")!!
         serviceActionCode = intent.getStringExtra("service_action_code")!!
-        number = intent.getStringExtra("number")!!
-        paymentViewModel.getPaymentDetails(serviceCode, serviceActionCode, number)
+        paymentViewModel.getPaymentDetails(serviceCode, serviceActionCode, sharedPreferences.membershipId)
         paymentViewModel.payment.observe(this) {
 
             it?.let { resource ->
@@ -79,32 +79,46 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             binding.llContent.visibility = View.VISIBLE
                             binding.tvService.text = resource.data!!.service.name
                             binding.tvName.text =
-                                resources.getString(R.string.member_name, resource.data!!.member.name ?: "")
+                                resources.getString(
+                                    R.string.member_name,
+                                    resource.data!!.member.name ?: ""
+                                )
                             binding.tvMemberNumber.text =
-                                resources.getString(R.string.member_id, intent.getStringExtra("number")!!)
+                                resources.getString(
+                                    R.string.member_id,
+                                    sharedPreferences.membershipId
+                                )
 
                             totalAmount = resource.data!!.receipt!!.details.totalPrice.toInt()
                             paymentFees = resource.data!!.receipt!!.cardFees.toInt()
-                            deliveryFees = resource.data!!.deliveryMethodsEntity[0].price.toDouble().toInt()
+                            deliveryFees =
+                                resource.data!!.deliveryMethodsEntity[0].price.toDouble().toInt()
                             updateTotal()
                             binding.lastFeeYearValue.text =
                                 resource.data!!.receipt?.details?.lastFeeYear.toString()
-                            binding.currentFeeYearValue.text = resource.data!!.receipt?.details?.currentFeeYear.toString() +
-                               "  " + resources.getString(R.string.egp)
-                            binding.cardPriceValue.text = resource.data!!.receipt?.details?.cardPrice.toString() +
-                                    "  " + resources.getString(R.string.egp)
-                            binding.lateSubscriptionsValue.text = resource.data!!.receipt?.details?.lateSubscriptions.toString() +
-                            "  " + resources.getString(R.string.egp)
-                            binding.delayFineValue.text = resource.data!!.receipt?.details?.delayFine.toString() +
-                                    "  " + resources.getString(R.string.egp)
-                            binding.totalValue.text = resource.data!!.receipt?.details?.totalPrice.toString() +
-                                    "  " + resources.getString(R.string.egp)
+                            binding.currentFeeYearValue.text =
+                                resource.data!!.receipt?.details?.currentFeeYear.toString() +
+                                        "  " + resources.getString(R.string.egp)
+                            binding.cardPriceValue.text =
+                                resource.data!!.receipt?.details?.cardPrice.toString() +
+                                        "  " + resources.getString(R.string.egp)
+                            binding.lateSubscriptionsValue.text =
+                                resource.data!!.receipt?.details?.lateSubscriptions.toString() +
+                                        "  " + resources.getString(R.string.egp)
+                            binding.delayFineValue.text =
+                                resource.data!!.receipt?.details?.delayFine.toString() +
+                                        "  " + resources.getString(R.string.egp)
+                            binding.totalValue.text =
+                                resource.data!!.receipt?.details?.totalPrice.toString() +
+                                        "  " + resources.getString(R.string.egp)
                         }
                     }
                     com.neqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
-                        if (resource.message.toString() == "400"){
-                            showAlertDialog()
+                        if (resource.message.toString() == "400") {
+                            showAlertDialogLicence(getString(R.string.update_license))
+                        }else if (resource.message.toString() == "409") {
+                            showAlertDialogLicence("الرجاء تجديد ترخيص الوزارة لسنة 2023")
                         }
                     }
                 }
@@ -126,16 +140,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                                 binding.rbCard.visibility = View.VISIBLE
                             if (resource.data!!.filter { it.name == "code" }[0].isActive)
                                 binding.rbChannel.visibility = View.VISIBLE
-                            //TODO Check this before publishing
-//                            if(resource.data.filter { it.name == "fawry" }[0].isActive)
-//                                binding.rbFawry.visibility = View.VISIBLE
-//                            if (resource.data.filter { it.name == "wallet" }[0].isActive)
-//                                binding.rbMobileWallet.visibility = View.VISIBLE
                         }
                     }
                     com.neqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -168,9 +176,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                                     list.add(
                                         0,
                                         BranchesEntity(
-                                            address = resources.getString(R.string.select_branch),
+                                            address = "",
                                             entity = null,
-                                            city = ""
+                                            city = resources.getString(R.string.select_branch)
                                         )
                                     )
                                 })
@@ -187,7 +195,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             binding.spinnerContainer.visibility = View.GONE
             binding.address.visibility = View.VISIBLE
             binding.spBranches.setSelection(0)
-            deliveryFees = paymentViewModel.payment.value?.data!!.deliveryMethodsEntity[0].price.toDouble().toInt()
+            deliveryFees =
+                paymentViewModel.payment.value?.data!!.deliveryMethodsEntity[0].price.toDouble()
+                    .toInt()
             updateTotal()
         }
 
@@ -195,97 +205,81 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             deliveryMethod = 2
             binding.address.visibility = View.GONE
             binding.spinnerContainer.visibility = View.VISIBLE
-            deliveryFees = paymentViewModel.payment.value?.data!!.deliveryMethodsEntity[1].price.toDouble().toInt()
+            deliveryFees =
+                paymentViewModel.payment.value?.data!!.deliveryMethodsEntity[1].price.toDouble()
+                    .toInt()
             updateTotal()
         }
 
-            paymentViewModel.paymentInfo.observe(this) {
+        paymentViewModel.paymentInfo.observe(this) {
 
-                it?.let { resource ->
-                    when (resource.status) {
-                        com.neqabty.core.utils.Status.LOADING -> {
-                            binding.progressCircular.visibility = View.VISIBLE
-                        }
-                        com.neqabty.core.utils.Status.SUCCESS -> {
-                            binding.progressCircular.visibility = View.GONE
-                            if (resource.data?.payment?.transaction?.paymentGatewayReferenceId.isNullOrEmpty()) {
-                                val paymentObject = resource.data as PaymentEntity
-                                oPayPayment(paymentObject, true)
-                            } else {
-                                showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
-                            }
-                        }
-                        com.neqabty.core.utils.Status.ERROR -> {
-                            binding.btnNext.isEnabled = true
-                            binding.progressCircular.visibility = View.GONE
-                            Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+            it?.let { resource ->
+                when (resource.status) {
+                    com.neqabty.core.utils.Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    com.neqabty.core.utils.Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        if (resource.data?.payment?.paymentMethod == "card") {
+                            val paymentObject = resource.data as PaymentEntity
+                            oPayPayment(paymentObject, true)
+                        } else {
+                            showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
                         }
                     }
-                }
-
-            }
-
-
-            binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
-                if (b) {
-                    paymentMethod = "card"
-                    paymentFees = paymentViewModel.payment.value?.data?.receipt?.cardFees!!.toInt()
-                    binding.ivCard.visibility = View.VISIBLE
-                    binding.llChannels.visibility = View.GONE
-                    binding.ivFawry.visibility = View.GONE
-                    updateTotal()
-                }
-            }
-            binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
-                if (b) {
-                    paymentMethod = "code"
-                    paymentFees = paymentViewModel.payment.value?.data?.receipt?.codeFees!!.toInt()
-                    binding.llChannels.visibility = View.VISIBLE
-                    binding.ivCard.visibility = View.GONE
-                    binding.ivFawry.visibility = View.GONE
-                    updateTotal()
-                }
-            }
-            binding.rbFawry.setOnCheckedChangeListener { compoundButton, b ->
-                if (b) {
-                    paymentMethod = "fawry"
-                    paymentFees = paymentViewModel.payment.value?.data?.receipt?.codeFees!!.toInt()
-                    binding.ivFawry.visibility = View.VISIBLE
-                    binding.llChannels.visibility = View.GONE
-                    binding.ivCard.visibility = View.GONE
-                    updateTotal()
+                    com.neqabty.core.utils.Status.ERROR -> {
+                        binding.btnNext.isEnabled = true
+                        binding.progressCircular.visibility = View.GONE
+                    }
                 }
             }
 
-            binding.tvChannels.setOnClickListener {
-                startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://cashier.opaycheckout.com/map")
-                    )
-                )
+        }
+
+        binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                paymentMethod = "card"
+                paymentFees = paymentViewModel.payment.value?.data?.receipt?.cardFees!!.toInt()
+                binding.ivCard.visibility = View.VISIBLE
+                binding.llChannels.visibility = View.GONE
+                updateTotal()
+            }
+        }
+
+        binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                paymentMethod = "code"
+                paymentFees = paymentViewModel.payment.value?.data?.receipt?.codeFees!!.toInt()
+                binding.llChannels.visibility = View.VISIBLE
+                binding.ivCard.visibility = View.GONE
+                updateTotal()
+            }
+        }
+
+        binding.btnNext.setOnClickListener {
+
+            if (deliveryMethod == 1) {
+                address = binding.address.text.toString()
             }
 
-            binding.btnNext.setOnClickListener {
-                if (deliveryMethod == 1){
-                    address = binding.address.text.toString()
-                }
+            if (deliveryMethod == 1 && address.isEmpty()) {
+                Toast.makeText(this, resources.getString(R.string.enter_add), Toast.LENGTH_LONG)
+                    .show()
+                return@setOnClickListener
+            }
 
-                if (deliveryMethod == 1 && address.isEmpty()){
-                    Toast.makeText(this, resources.getString(R.string.enter_add), Toast.LENGTH_LONG).show()
-                    return@setOnClickListener
-                }
+            if (deliveryMethod == 2 && binding.spBranches.selectedItemPosition == 0) {
+                Toast.makeText(this, resources.getString(R.string.select_branch), Toast.LENGTH_LONG)
+                    .show()
+                return@setOnClickListener
+            }
 
-                if (deliveryMethod == 2 && binding.spBranches.selectedItemPosition == 0){
-                    Toast.makeText(this, resources.getString(R.string.select_branch), Toast.LENGTH_LONG).show()
-                    return@setOnClickListener
-                }
-
-                if (deliveryMethod == 2){
-                    address = ""
-                }
+            if (deliveryMethod == 2) {
+                address = ""
+            }
 
 
+            if (sharedPreferences.isPhoneVerified) {
                 binding.btnNext.isEnabled = false
                 paymentViewModel.getPaymentInfo(
                     PaymentBody(
@@ -294,21 +288,42 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             serviceActionCode = serviceActionCode,
                             paymentMethod = paymentMethod,
                             amount = "${totalAmount + paymentFees + deliveryFees}",
-                            membershipId = number.toInt(),
+                            membershipId = sharedPreferences.membershipId.toInt(),
                             address = address,
                             entityBranch = entityBranch,
                             deliveryMethod = deliveryMethod
                         )
                     )
                 )
+            } else {
+                verifyPhone()
             }
-        }
 
-    private fun showAlertDialog() {
+        }
+    }
+
+    private fun verifyPhone() {
 
         val alertDialog = AlertDialog.Builder(this).create()
         alertDialog.setTitle(getString(R.string.alert))
-        alertDialog.setMessage("نأسف لعدم اتمام السداد وذلك بسبب انتهاء صلاحية ترخيص الوزارة الخاص بكم برجاء التجديد حتى يتم استكمال عملية السداد")
+        alertDialog.setMessage(resources.getString(R.string.confirm_phone))
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            val intent = Intent(this, VerifyPhoneActivity::class.java)
+            startActivity(intent)
+        }
+        alertDialog.show()
+
+    }
+
+    private fun showAlertDialogLicence(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(message)
         alertDialog.setCancelable(false)
         alertDialog.setButton(
             AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.agree)
@@ -329,180 +344,132 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
 
     }
 
-
-    private fun updateTotal(){
+    private fun updateTotal() {
         binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
         binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
-        binding.totValue.text = "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
+        binding.totValue.text =
+            "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
     }
 
-        private fun showDialog() {
+    private fun showDialog() {
 
-            val alertDialog = AlertDialog.Builder(this).create()
-            alertDialog.setTitle(getString(R.string.alert))
-            alertDialog.setMessage("لا توجد اي فواتير مستحقه للسداد في الوقت الحالي")
-            alertDialog.setCancelable(false)
-            alertDialog.setButton(
-                AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.agree)
-            ) { dialog, _ ->
-                dialog.dismiss()
-                finish()
-            }
-            alertDialog.show()
-
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(resources.getString(R.string.no_reciept))
+        alertDialog.setCancelable(false)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            finish()
         }
+        alertDialog.show()
 
-        private fun showAlertDialog(paymentGatewayReferenceId: String) {
+    }
 
-            val alertDialog = AlertDialog.Builder(this).create()
-            alertDialog.setTitle(getString(R.string.alert))
-            alertDialog.setMessage(getString(R.string.payment_reference) + " $paymentGatewayReferenceId")
-            alertDialog.setCancelable(true)
-            alertDialog.setButton(
-                AlertDialog.BUTTON_POSITIVE, getString(R.string.copy_text)
-            ) { dialog, _ ->
-                dialog.dismiss()
-                copyText(paymentGatewayReferenceId)
-            }
-            alertDialog.show()
+    private fun showAlertDialog(paymentGatewayReferenceId: String) {
 
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(getString(R.string.payment_reference) + " $paymentGatewayReferenceId")
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.copy_text)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            copyText(paymentGatewayReferenceId)
         }
+        alertDialog.show()
 
-        private fun copyText(paymentGatewayReferenceId: String) {
-            val clipboard: ClipboardManager =
-                getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-            val clip = ClipData.newPlainText("label", paymentGatewayReferenceId)
-            clipboard.setPrimaryClip(clip)
-        }
+    }
+
+    private fun copyText(paymentGatewayReferenceId: String) {
+        val clipboard: ClipboardManager =
+            getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", paymentGatewayReferenceId)
+        clipboard.setPrimaryClip(clip)
+    }
 
 
-
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
-            if (requestCode == PaymentTask.REQUEST_PAYMENT) {
-                if (resultCode == PaymentTask.RESULT_PAYMENT) {
-                    val response =
-                        data?.getSerializableExtra(PaymentTask.RESPONSE_DATA) as WebJsResponse?
-                    handlePaymentResponse(response)
-                }
-            }
-            if (requestCode == CowpayConstantKeys.PaymentMethodsActivityRequestCode && data != null && resultCode == Activity.RESULT_OK) {
-                var responseCode = data.extras!!.getInt(CowpayConstantKeys.ResponseCode, 0)
-
-                if (responseCode == CowpayConstantKeys.ErrorCode) {
-                    showAlert(getString(R.string.payment_canceled)) {
-//                    navController().popBackStack()
-//                    navController().navigate(R.id.homeFragment)
-                    }
-                } else if (responseCode == CowpayConstantKeys.SuccessCode) {
-                    var responseMSG = data.extras!!.getString(CowpayConstantKeys.ResponseMessage)
-                    var PaymentGatewayReferenceId =
-                        data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
-                    responseMSG?.let {
-                        showAlert(
-                            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(
-                                R.string.payment_successful
-                            ) + PaymentGatewayReferenceId else getString(R.string.payment_reference) + PaymentGatewayReferenceId
-                        ) {
-//                        navController().popBackStack()
-//                        navController().navigate(R.id.homeFragment)
-                        }
-                    }
-                }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PaymentTask.REQUEST_PAYMENT) {
+            if (resultCode == PaymentTask.RESULT_PAYMENT) {
+                val response =
+                    data?.getSerializableExtra(PaymentTask.RESPONSE_DATA) as WebJsResponse?
+                handlePaymentResponse(response)
             }
         }
+    }
 
-        private fun oPayPayment(paymentEntity: PaymentEntity, isCredit: Boolean) {
-            referenceCode = paymentEntity.mobilePaymentPayload.reference
-            val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
-            PaymentTask.sandBox = Constants.OPAY_MODE
-            val payInput = PayInput(
-                publickey = paymentEntity.mobilePaymentPayload.publickey,
-                merchantId = paymentEntity.mobilePaymentPayload.merchantId,
-                merchantName = paymentEntity.mobilePaymentPayload.merchantName,
-                reference = paymentEntity.mobilePaymentPayload.reference,
-                countryCode = paymentEntity.mobilePaymentPayload.countryCode, // uppercase
-                currency = paymentEntity.mobilePaymentPayload.currency, // uppercase
-                payAmount = (paymentEntity.mobilePaymentPayload.payAmount.toDouble() * 100).toLong(),
-                productName = binding.tvService.text.toString(),
-                productDescription = binding.tvService.text.toString(),
-                callbackUrl = paymentEntity.mobilePaymentPayload.callbackUrl,
-                userClientIP = "110.246.160.183",
-                expireAt = paymentEntity.mobilePaymentPayload.expireAt,
-                paymentType = paymentType // optional
-            )
+    private fun oPayPayment(paymentEntity: PaymentEntity, isCredit: Boolean) {
+        referenceCode = paymentEntity.mobilePaymentPayload!!.reference
+        val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
+        PaymentTask.sandBox = false
+        val payInput = PayInput(
+            publickey = paymentEntity.mobilePaymentPayload.publickey,
+            merchantId = paymentEntity.mobilePaymentPayload.merchantId,
+            merchantName = paymentEntity.mobilePaymentPayload.merchantName,
+            reference = paymentEntity.mobilePaymentPayload.reference,
+            countryCode = paymentEntity.mobilePaymentPayload.countryCode, // uppercase
+            currency = paymentEntity.mobilePaymentPayload.currency, // uppercase
+            payAmount = (paymentEntity.mobilePaymentPayload.payAmount.toDouble() * 100).toLong(),
+            productName = binding.tvService.text.toString(),
+            productDescription = binding.tvService.text.toString(),
+            callbackUrl = paymentEntity.mobilePaymentPayload.callbackUrl,
+            userClientIP = "110.246.160.183",
+            expireAt = paymentEntity.mobilePaymentPayload.expireAt,
+            paymentType = paymentType // optional
+        )
 
-//        llSuperProgressbar.visibility = View.VISIBLE
-            PaymentTask(this).createOrder(payInput, callback = { status, response ->
-//            llSuperProgressbar.visibility = View.GONE
-                when (status) {
-                    Status.ERROR -> { // error
-                        Toast.makeText(
-                            this, response.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                    else -> {
-                    }
+        PaymentTask(this).createOrder(payInput, callback = { status, response ->
+            when (status) {
+                Status.ERROR -> {
+                    Toast.makeText(
+                        this, response.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-            })
-        }
-
-        var referenceCode = ""
-        private fun handlePaymentResponse(response: WebJsResponse?) {
-            when (response?.orderStatus) {
-                PaymentStatus.INITIAL -> {
+                else -> {
                 }
-                PaymentStatus.PENDING -> {
-                    if (response.eventName.equals("clickResultOKBtn") && binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-                        showAlert(getString(R.string.payment_reference_without_code)) {
-//                        navController().popBackStack()
-//                        navController().navigate(R.id.homeFragment)
-                        }
-                }
-                PaymentStatus.SUCCESS -> {
+            }
+        })
+    }
 
-                    if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) {
-                        val intent = Intent(this, PaymentStatusActivity::class.java)
-                        intent.putExtra("referenceCode", referenceCode)
-                        startActivity(intent)
+    var referenceCode = ""
+    private fun handlePaymentResponse(response: WebJsResponse?) {
+        binding.btnNext.isEnabled = true
+        when (response?.orderStatus) {
+            PaymentStatus.INITIAL -> {
+            }
+            PaymentStatus.PENDING -> {
+                if (response.eventName.equals("clickResultOKBtn") && binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
+                    showAlert(getString(R.string.payment_reference_without_code)) {}
+            }
+            PaymentStatus.SUCCESS -> {
+
+                if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) {
+                    val intent = Intent(this, PaymentStatusActivity::class.java)
+                    intent.putExtra("referenceCode", referenceCode)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    showAlert(getString(R.string.payment_reference) + response.referenceCode) {
                         finish()
-                    } else {
-                        showAlert(getString(R.string.payment_reference) + response.referenceCode) {
-                            finish()
-                        }
-                    }
-
-                    //TODO  Ask Mona About This
-//                showAlert(
-//                    if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(
-//                        R.string.payment_successful
-//                    ) + response.orderNo
-//                    else getString(R.string.payment_reference) + response.referenceCode
-//                ) {
-//
-//                    finish()
-////                    navController().popBackStack()
-////                    navController().navigate(R.id.homeFragment)
-//                }
-                }
-                PaymentStatus.FAIL -> {
-                    showAlert(getString(R.string.payment_canceled)) {
-//                    navController().popBackStack()
-//                    navController().navigate(R.id.homeFragment)
-                    }
-                }
-                PaymentStatus.CLOSE -> {
-                    showAlert(getString(R.string.payment_canceled)) {
-//                    navController().popBackStack()
-//                    navController().navigate(R.id.homeFragment)
                     }
                 }
             }
-        }
-
-        override fun onResume() {
-            super.onResume()
-            binding.btnNext.isEnabled = true
+            PaymentStatus.FAIL -> {
+                showAlert(getString(R.string.payment_canceled)) {}
+            }
+            PaymentStatus.CLOSE -> {
+                showAlert(getString(R.string.payment_canceled)) {}
+            }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        binding.btnNext.isEnabled = true
+    }
+}

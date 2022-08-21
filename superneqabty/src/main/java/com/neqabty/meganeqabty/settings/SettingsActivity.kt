@@ -24,8 +24,33 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
         setContentView(binding.root)
 
         setupToolbar(titleResId = R.string.settings_title)
+        if (sharedPreferences.language == "ar"){
+            binding.toggleGroup.check(R.id.btn_arabic)
+            binding.language.text = "اللغة"
+        }else{
+            binding.toggleGroup.check(R.id.btn_english)
+            binding.language.text = "Language"
+        }
+        binding.btnArabic.setOnClickListener {
+            sharedPreferences.language = "ar"
+            binding.toggleGroup.check(R.id.btn_arabic)
+            finish()
+            startActivity(Intent(this, SettingsActivity::class.java))
+
+        }
+
+        binding.btnEnglish.setOnClickListener {
+            sharedPreferences.language = "en"
+            binding.toggleGroup.check(R.id.btn_english)
+            finish()
+            startActivity(Intent(this, SettingsActivity::class.java))
+
+        }
     }
 
+    override fun onBackPressed() {
+        finish()
+    }
 
     override fun onResume() {
         super.onResume()

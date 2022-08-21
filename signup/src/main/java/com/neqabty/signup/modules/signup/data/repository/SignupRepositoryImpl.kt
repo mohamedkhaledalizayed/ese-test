@@ -15,8 +15,8 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class SignupRepositoryImpl @Inject constructor(private val signupDS: SignupDS) : SignupRepository {
-    override fun signup(token: String, signupParams: SignupParams): Flow<UserEntity> {
-        return flow { emit(signupDS.signup(token, signupParams.toSignupBody()).toUserEntity()) }
+    override fun signup(signupParams: SignupParams): Flow<UserEntity> {
+        return flow { emit(signupDS.signup(signupParams.toSignupBody()).toUserEntity()) }
     }
 
     override fun signUpNeqabtyMember(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity> {
@@ -40,9 +40,24 @@ private fun EntityModel.toSyndicateListEntity(): SyndicateListEntity{
 }
 
 fun NeqabtyMemberModel.toUserEntity(): UserEntity {
-    return UserEntity(email ?: "", fullname, id, image ?: "", mobile, nationalId, entity.name, entity.code)
+    return return UserEntity(
+        email = email ?: "",
+        token = "token.key",
+        fullname = fullname,
+        id = id,
+        image = image ?: "",
+        mobile = mobile,
+        nationalId = nationalId,
+        entityName = entity.name,
+        entityImage = "entity.imageUrl",
+        entityCode = entity.code)
 }
 
 private fun SignupParams.toSignupBody(): SignupBody {
-    return SignupBody(entityCode, email, membershipId, national_id)
+    return SignupBody(
+        entityCode = entityCode,
+        email = email,
+        membershipId = membershipId,
+        mobile = mobile,
+        nationalId = national_id)
 }

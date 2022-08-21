@@ -153,7 +153,7 @@ fun Service.toServiceEntity(): ServiceEntity {
 
 fun PaymentResponse.toPaymentEntity(): PaymentEntity{
     return PaymentEntity(
-        mobilePaymentPayload = mobilePaymentPayload.toMobilePaymentPayloadEntity(),
+        mobilePaymentPayload = mobilePaymentPayload?.toMobilePaymentPayloadEntity(),
         payment = payment.toPayment()
     )
 }
@@ -162,7 +162,7 @@ fun PaymentModel.toPayment():Payment{
     return Payment(
         amount = amount,
         id = id,
-        itemId = itemId,
+        itemId = membershipId,
         paymentMethod = paymentMethod,
         paymentSource = paymentSource,
         serviceCode = serviceCode,

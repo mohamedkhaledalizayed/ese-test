@@ -1,8 +1,9 @@
 package com.neqabty.meganeqabty.payment.data.model.payment
 
 
-import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
+
 @Keep
 data class MobilePaymentPayload(
     @SerializedName("callbackUrl")

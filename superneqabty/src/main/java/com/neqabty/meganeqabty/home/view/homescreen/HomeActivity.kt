@@ -1,10 +1,12 @@
 package com.neqabty.meganeqabty.home.view.homescreen
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -17,8 +19,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
-import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
-import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.aboutapp.AboutAppActivity
 import com.neqabty.meganeqabty.core.utils.Constants
@@ -28,7 +28,9 @@ import com.neqabty.meganeqabty.payment.view.selectservice.PaymentsActivity
 import com.neqabty.meganeqabty.profile.view.profile.ProfileActivity
 import com.neqabty.meganeqabty.settings.SettingsActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
-import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
+import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
+import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
+import com.neqabty.signup.modules.signup.presentation.view.homescreen.SignupActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
@@ -90,6 +92,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             R.string.app_name,
             R.string.app_name
         )
+
 
         drawer.addDrawerListener(toggle)
         toggle.syncState()
@@ -211,7 +214,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.navView.setNavigationItemSelectedListener(this)
 
         binding.contentActivity.ivSubscription.setOnClickListener {
-            if (sharedPreferences.isPhoneVerified){
+            if (sharedPreferences.isAuthenticated){
                 val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                 startActivity(intent)
             }else{
@@ -228,6 +231,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         }
     }
 
+    @SuppressLint("CutPasteId")
     override fun onResume() {
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.syndicate_name).text =
             "${sharedPreferences.syndicateName}"
@@ -238,7 +242,12 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         }
 
         super.onResume()
-        if (sharedPreferences.isPhoneVerified) {
+        if (sharedPreferences.isAuthenticated) {
+            val menu: Menu = binding.navView.menu
+
+            val logout: MenuItem = menu.findItem(R.id.logout)
+            logout.title = resources.getString(R.string.logout_title)
+
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
                 View.VISIBLE
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).text =
@@ -260,7 +269,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
         when (item.itemId) {
             R.id.profile -> {
-                if (sharedPreferences.isPhoneVerified){
+                if (sharedPreferences.isAuthenticated){
                     val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
                     startActivity(intent)
                 }else{
@@ -274,7 +283,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 startActivity(intent)
             }
             R.id.payment -> {
-                if (sharedPreferences.isPhoneVerified){
+                if (sharedPreferences.isAuthenticated){
                     val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                     startActivity(intent)
                 }else{
@@ -288,13 +297,9 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             R.id.settings_fragment -> {
                 val intent = Intent(this@HomeActivity, SettingsActivity::class.java)
                 startActivity(intent)
+                finish()
             }
 
-//            R.id.change_syndicate -> {
-//                val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//            }
             R.id.contactus_fragment -> {
                 try {
                     val emailIntent = Intent(Intent.ACTION_SEND)
@@ -307,7 +312,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 }
             }
             R.id.logout -> {
-                logout("هل تريد تسجيل خروج!")
+                logout(getString(R.string.log_out))
             }
         }
 
@@ -319,15 +324,16 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     private fun logout(message: String) {
 
         val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle("تنبيه")
+        alertDialog.setTitle(getString(R.string.alert))
         alertDialog.setMessage(message)
         alertDialog.setCancelable(true)
         alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, "موافق"
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
             sharedPreferences.mobile = ""
             sharedPreferences.isPhoneVerified = false
+            sharedPreferences.isAuthenticated = false
             sharedPreferences.isSyndicateMember = false
             sharedPreferences.code = ""
             sharedPreferences.token = ""
@@ -338,7 +344,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             finish()
         }
         alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, "لا"
+            AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)
         ) { dialog, _ ->
             dialog.dismiss()
         }
@@ -347,23 +353,23 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     override fun onBackPressed() {
-        closeApp("هل تريد الخروج!")
+        closeApp(getString(R.string.close_app))
     }
 
     private fun closeApp(message: String) {
 
         val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle("تنبيه")
+        alertDialog.setTitle(getString(R.string.alert))
         alertDialog.setMessage(message)
         alertDialog.setCancelable(true)
         alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, "موافق"
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
             finishAffinity()
         }
         alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, "لا"
+            AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)
         ) { dialog, _ ->
             dialog.dismiss()
         }
@@ -381,7 +387,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.ok_btn)
         ) { dialog, _ ->
             dialog.dismiss()
-            val intent = Intent(this@HomeActivity, VerifyPhoneActivity::class.java)
+            val intent = Intent(this@HomeActivity, SignupActivity::class.java)
             startActivity(intent)
         }
         alertDialog.setButton(

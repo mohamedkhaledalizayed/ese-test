@@ -39,8 +39,7 @@
                 android:id="@+id/status_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="لقد تم تسجيل طلبكم بنجاح
-رقم الشكوي / المقترح "
+                android:text="@string/done_"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -143,7 +142,7 @@
                         android:id="@+id/add_image_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="إرفاق صورة"
+                        android:text="@string/attach_image"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 

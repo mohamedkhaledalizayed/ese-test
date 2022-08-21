@@ -1,8 +1,9 @@
 package com.neqabty.login.modules.login.data.model
 
 
-import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
+
 @Keep
 data class Account(
     @SerializedName("email")
@@ -10,7 +11,7 @@ data class Account(
     @SerializedName("entity")
     val entity: EntityModel,
     @SerializedName("fullname")
-    val fullname: String?,
+    val fullname: String,
     @SerializedName("groups")
     val groups: List<Any>,
     @SerializedName("id")
@@ -19,6 +20,8 @@ data class Account(
     val image: String?,
     @SerializedName("is_superuser")
     val isSuperuser: Boolean,
+    @SerializedName("verifed_account")
+    val verifiedAccount: Boolean,
     @SerializedName("mobile")
     val mobile: String,
     @SerializedName("national_id")

@@ -21,11 +21,11 @@ import javax.inject.Inject
 class SignupViewModel @Inject constructor(private val signupUseCase: SignupUseCase) :
     ViewModel() {
     val user = MutableLiveData<Resource<UserUIModel>>()
-    fun signup(token: String, data: SignupParams) {
+    fun signup(data: SignupParams) {
         user.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                signupUseCase.build(token, data).collect {
+                signupUseCase.build(data).collect {
                     user.postValue(Resource.success(data = it.toUserUIModel()))
                 }
             } catch (e: Throwable) {

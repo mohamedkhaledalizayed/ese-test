@@ -39,11 +39,11 @@ class NewsDetailsActivity : BaseActivity<ActivityNewsDetailsBinding>() {
                         if (resource.data != null){
                             Picasso.get().load(resource.data!!.image).into(binding.newsImage)
                             binding.newsTitle.text = resource.data!!.headline
-                            binding.newsSource.text = "المصدر : ${resource.data!!.source}"
+                            binding.newsSource.text = "${getString(R.string.source)} ${resource.data!!.source}"
                             binding.content.text = resource.data!!.content
                             binding.newsDate.text = dateFormat(resource.data!!.createdAt.split(".")[0])
                         }else{
-                            Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {

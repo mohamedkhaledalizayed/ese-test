@@ -307,42 +307,6 @@
                             android:textSize="?textSizeMedium" />
                     </LinearLayout>
 
-                    <RadioButton
-                        android:id="@+id/rb_fawry"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/dark_green"
-                        android:text="@string/payment_fawry"
-                        android:textSize="?textSizeMedium"
-                        android:visibility="gone" />
-
-                    <ImageView
-                        android:id="@+id/ivFawry"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_50sdp"
-                        android:layout_gravity="center_horizontal"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/fawry"
-                        android:visibility="gone" />
-
-                    <RadioButton
-                        android:id="@+id/rb_mobileWallet"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/dark_green"
-                        android:text="@string/payment_wallet"
-                        android:textSize="?textSizeMedium"
-                        android:visibility="gone" />
-
-                    <RadioButton
-                        android:id="@+id/rb_meeza"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/dark_green"
-                        android:text="@string/payment_meeza"
-                        android:textSize="?textSizeMedium"
-                        android:visibility="gone" />
-
                 </RadioGroup>
 
                 <TextView

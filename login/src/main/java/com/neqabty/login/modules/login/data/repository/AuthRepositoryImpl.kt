@@ -26,6 +26,7 @@ private fun UserModel.toUserEntity(): UserEntity {
 
 private fun UserData.toUser(): User {
     return User(
+        membershipId = membershipId.toString(),
         account = account.toAccountEntity()
     )
 }
@@ -36,6 +37,7 @@ private fun Account.toAccountEntity(): AccountEntity {
         entity = entity.toEntity(),
         fullName = fullname,
         id = id,
+        verifiedAccount = verifiedAccount,
         image = image,
         mobile = mobile,
         nationalId = nationalId
@@ -43,13 +45,13 @@ private fun Account.toAccountEntity(): AccountEntity {
 }
 
 
-
 private fun EntityModel.toEntity(): Entity {
     return Entity(
         code = code,
         id = id,
         name = name,
-        type = type
+        type = type,
+        image = imageUrl
 
     )
 }

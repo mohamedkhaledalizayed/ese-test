@@ -11,5 +11,25 @@
     <string name="please_wait">Please Wait...</string>
     <string name="confirm">Confirm</string>
     <string name="neqabty_auth">Neqabty</string>
-    <string name="enter_num">Please enter your mobile phone number to create your own account\n</string>
+    <string name="enter_num">Please enter your mobile phone number to confirm your own account\n</string>
+    <string name="alert">Alert</string>
+    <string name="no_btn">No</string>
+    <string name="confirm_message">Your account has been successfully created, knowing that your password is the last 4 digits of your national number.</string>
+    <string name="something_wrong">Something Wrong</string>
+    <string name="there_is_no_syndicates">There are no syndicates</string>
+    <string name="select_syndicates">Select Syndicate</string>
+    <string name="enter_phone">Please enter phone number</string>
+    <string name="enter_correct_phone">Please enter correct phone number</string>
+    <string name="enter_email">Please enter email</string>
+    <string name="enter_correct_email">Please enter correct email.</string>
+    <string name="enter_national_id">Please enter national id</string>
+    <string name="enter_membership_id">Please enter membership id</string>
+    <string name="enter_name">Please enter name</string>
+    <string name="enter_password">Please enter password</string>
+    <string name="phone_confirmed">The phone number has been confirmed successfully.</string>
+    <string name="enter_code">Please enter the code that was sent to the phone number:</string>
+    <string name="enter_code_">Please enter the code.</string>
+    <string name="enter_corect_phone">Please enter a valid phone number.</string>
+
+
 </resources>

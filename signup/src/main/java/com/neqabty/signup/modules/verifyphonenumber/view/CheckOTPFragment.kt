@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.neqabty.signup.R
 import com.neqabty.signup.databinding.FragmentCheckOTPBinding
 
 
@@ -71,30 +72,30 @@ class CheckOTPFragment : Fragment() {
         changeFocus()
 
         binding.enterPhone.text =
-            "برجاء إدخال الكود الذى تم إرساله الى رقم الهاتف :  \n  $phoneNumber"
+            "${getString(R.string.enter_code)} \n $phoneNumber"
         binding.btnConfirm.setOnClickListener {
             if (binding.code1.text.toString().isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "من فضلك ادخل الكود اولا.", Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(), getString(R.string.enter_code_), Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
             }
             if (binding.code2.text.toString().isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "من فضلك ادخل الكود اولا.", Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(), getString(R.string.enter_code_), Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
             }
             if (binding.code3.text.toString().isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "من فضلك ادخل الكود اولا.", Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(), getString(R.string.enter_code_), Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
             }
             if (binding.code4.text.toString().isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "من فضلك ادخل الكود اولا.", Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(), getString(R.string.enter_code_), Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
             }
             if (binding.code5.text.toString().isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "من فضلك ادخل الكود اولا.", Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(), getString(R.string.enter_code_), Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
             }

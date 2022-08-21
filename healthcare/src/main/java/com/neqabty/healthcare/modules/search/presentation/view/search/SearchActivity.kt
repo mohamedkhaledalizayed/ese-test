@@ -16,11 +16,10 @@ import com.neqabty.healthcare.modules.offers.presentation.view.offers.OffersActi
 import com.neqabty.healthcare.modules.search.domain.entity.packages.PackagesEntity
 import com.neqabty.healthcare.modules.search.presentation.view.filter.FiltersViewModel
 import com.neqabty.healthcare.modules.search.presentation.view.searchresult.SearchResultActivity
-import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
-import com.neqabty.healthcare.modules.subscribtions.presentation.view.SubscriptionActivity
+import com.neqabty.signup.modules.signup.presentation.view.homescreen.SignupActivity
 
 @AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
@@ -108,7 +107,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             Constants.isSyndicateMember = false
             Constants.selectedSyndicateCode = ""
             Constants.selectedSyndicatePosition = 0
-            val intent = Intent(this, VerifyPhoneActivity::class.java)
+            val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
         alertDialog.setButton(

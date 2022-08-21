@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.neqabty.core.utils.isMobileValid
+import com.neqabty.signup.R
 import com.neqabty.signup.databinding.FragmentCheckOTPBinding
 import com.neqabty.signup.databinding.FragmentSendOTPBinding
 
@@ -39,12 +40,12 @@ class SendOTPFragment : Fragment() {
         binding.btnSend.setOnClickListener {
 
             if (binding.phone.text.toString().isNullOrEmpty()){
-                Toast.makeText(requireContext(), "من فضلك ادخل رقم الهاتف.", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getString(R.string.enter_phone), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
             if (!binding.phone.text.toString().isMobileValid()){
-                Toast.makeText(requireContext(), "من فضلك ادخل رقم الهاتف صحيح.", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getString(R.string.enter_correct_phone), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 

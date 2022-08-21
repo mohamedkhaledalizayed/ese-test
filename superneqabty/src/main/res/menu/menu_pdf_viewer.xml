@@ -5,12 +5,12 @@
     <item
         android:id="@+id/menuSharePdf"
         android:icon="@drawable/ic_share"
-        android:title="مشاركة" />
+        android:title="@string/share" />
 
     <item
         android:id="@+id/menuPrintPdf"
         android:icon="@drawable/ic_baseline_get_app_24"
-        android:title="طباعة"
+        android:title="@string/print"
         app:showAsAction="always"
         />
 

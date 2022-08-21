@@ -9,5 +9,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface VerifyPhoneRepository {
     fun sendOTP(sendOTPBody: SendOTPBody): Flow<OTPEntity>
-    fun checkOTP(checkOTPBody: CheckOTPBody): Flow<String>
+    fun checkOTP(checkOTPBody: CheckOTPBody): Flow<Boolean>
 }

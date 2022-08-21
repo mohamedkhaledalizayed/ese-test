@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 data class CheckOTPModel(
     @SerializedName("status")
     val status: Boolean,
-    @SerializedName("token")
-    val token: String
+    @SerializedName("verified")
+    val verified: Boolean
 )

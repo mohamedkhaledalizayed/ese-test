@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Neqabty</string>
+    <string name="app_name">نقابتى</string>
     <string name="home_title">الرئيسية</string>
     <string name="news_title">أخبار النقابة</string>
     <string name="general_news">الاخبار العامة</string>
@@ -15,7 +15,7 @@
     <string name="font_size_medium">متوسط</string>
     <string name="font_size_large">كبير</string>
     <string name="developed_by">تم التنفيذ بواسطة نقابتي</string>
-    <string name="app_version">Version %s</string>
+    <string name="app_version">الاصدار %s</string>
     <string name="main">الجهات الرئيسية</string>
     <string name="welcome">مرحباً بك في نقابتي</string>
     <string name="menu_memberName">اسم العضو:  <![CDATA[<font color="#00BCD4">%s</font>]]></string>
@@ -65,7 +65,7 @@
     <string name="enter_mermber_ship_id">ادخل رقم العضوية</string>
     <string name="select_service">إختر الخدمة اولا</string>
     <string name="please_wait">من فضلك انتظر...</string>
-    <string name="service_unavailable">  سيتم تفعيل الخدمة قريباً</string>
+    <string name="service_unavailable">سيتم تفعيل الخدمة قريباً</string>
     <string name="new_update">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
     <string name="other_services">خدمات أخرى</string>
     <string name="neqabty_news">أخبار النقابة</string>
@@ -105,7 +105,7 @@
     <string name="order_status">حالة الطلب :</string>
     <string name="personal_photo">صورة شخصية</string>
     <string name="send_order">إرسال الطلب</string>
-    <string name="ministry_license">طلب تجديد ترخيص الوزارة.</string>
+    <string name="ministry_license">تحديث صورة ترخيص الوزارة.</string>
     <string name="agree">موافق</string>
     <string name="rooted">هذا الجهاز غير أمن لا يمكنك إستخدام هذا التطبيق.</string>
     <string name="from_branches">استلام من نقابة فرعية</string>
@@ -122,9 +122,29 @@
     <string name="total_after_delivery_fees"> الاجمالى بعد ضريبة التوصيل :  %s</string>
 
 
-    <string name="select_branch">اختر الفرع</string>
+    <string name="select_branch">إختر النقابة الفرعية</string>
     <string name="enter_add">من فضلك ادخل العنوان</string>
     <string name="dismiss">تخطى</string>
     <string name="dont_have_syndicate">لمعرفة المزيد عن باقات نقاباتي صحة مستدامة اضغط هنا .. نقابتي نقابة من ليس له نقابة.</string>
-    <string name="logout_">تسجيل خروج</string>
+    <string name="logout_">تغيير رقم الهاتف</string>
+    <string name="syndicate_">النقابة</string>
+    <string name="confirm_phone">برجاء تاكيد رقم الموبايل قبل الدفع</string>
+    <string name="no_reciept">لا توجد اي فواتير مستحقه للسداد في الوقت الحالي</string>
+    <string name="update_license">يؤسفنا أن السداد لم يكتمل بسبب انتهاء ترخيص وزارتك. الرجاء التجديد حتى اكتمال عملية الدفع</string>
+    <string name="update_data">تحديث البيانات</string>
+    <string name="order_sent">تم إرسال الطلب بنجاح.</string>
+    <string name="order_not_sent">حدث خطاء أثناء إرسال الطلب.</string>
+    <string name="select_personal_pic">من فضلك اختر صورة شخصية.</string>
+    <string name="select_phone_num">من فضلك ادخل رقم الموبايل.</string>
+    <string name="select_year">من فضلك ادخل السنة.</string>
+    <string name="select_licence_pic">من فضلك اختر صورة الترخيص.</string>
+    <string name="image_uploaded">تم تحميل الصورة بنجاح.</string>
+    <string name="card_request_not_found">لم يتم العثور على طلب تجديد كارنيه العضوية.</string>
+    <string name="licence_not_found">لم يتم العثور على طلب تجديد ترخيص الوزارة.</string>
+    <string name="log_out">هل تريد تسجيل خروج!</string>
+    <string name="close_app">هل تريد الخروج!</string>
+    <string name="share">مشاركة</string>
+    <string name="print">طباعة</string>
+
+
 </resources>

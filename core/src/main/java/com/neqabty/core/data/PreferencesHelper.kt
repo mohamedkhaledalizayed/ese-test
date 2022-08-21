@@ -30,6 +30,7 @@ class PreferencesHelper @Inject constructor(
         private const val MEMBERSHIP_ID = "data.source.prefs.MEMBERSHIP_ID"
         private const val LANGUAGE = "data.source.prefs.LANGUAGE"
         private const val IS_PHONE_VERIFIED = "data.source.prefs.IS_PHONE_VERIFIED"
+        private const val IS_AUTHENTICATED = "data.source.prefs.IS_AUTHENTICATED"
         private const val IS_SYNDICATE_MEMBER = "data.source.prefs.IS_SYNDICATE_MEMBER"
     }
 
@@ -93,7 +94,11 @@ class PreferencesHelper @Inject constructor(
         get() = preferences.getBoolean(IS_SYNDICATE_MEMBER, false)
         set(value) = preferences.edit().putBoolean(IS_SYNDICATE_MEMBER, value).apply()
 
-    fun clearAll():Unit{
+    var isAuthenticated
+        get() = preferences.getBoolean(IS_AUTHENTICATED, false)
+        set(value) = preferences.edit().putBoolean(IS_AUTHENTICATED, value).apply()
+
+    fun clearAll(): Unit {
         return preferences.edit().clear().apply()
     }
 }

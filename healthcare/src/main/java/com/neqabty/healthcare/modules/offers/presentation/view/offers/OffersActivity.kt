@@ -11,6 +11,7 @@ import com.neqabty.healthcare.modules.offers.presentation.view.takeoffer.TakeOff
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
+import com.neqabty.healthcare.R
 
 @AndroidEntryPoint
 class OffersActivity : BaseActivity<ActivityOffersBinding>() {
@@ -22,7 +23,7 @@ class OffersActivity : BaseActivity<ActivityOffersBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(title = "الخصومات والعروض")
+        setupToolbar(titleResId = R.string.offers)
 
 
         binding.offersRecycler.adapter = mAdapter

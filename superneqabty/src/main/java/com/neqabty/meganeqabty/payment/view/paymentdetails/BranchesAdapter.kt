@@ -38,7 +38,7 @@ class BranchesAdapter() : BaseAdapter() {
         val item = listItems[position]
 
         val names = view.findViewById<View>(R.id.textView) as TextView
-        names.text = item.address
+        names.text = item.city
 
         return view
     }

@@ -4,6 +4,7 @@ package com.neqabty.healthcare.modules.wallet.presentation
 
 import android.os.Bundle
 import com.neqabty.core.ui.BaseActivity
+import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivityWalletBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,6 +15,6 @@ class WalletActivity : BaseActivity<ActivityWalletBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(title = "المحفظة")
+        setupToolbar(titleResId = R.string.wallet)
     }
 }

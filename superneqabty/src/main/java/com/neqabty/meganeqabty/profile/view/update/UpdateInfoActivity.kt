@@ -37,7 +37,7 @@ class UpdateInfoActivity : BaseActivity<ActivityUpdateInfoBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(title = "تحديث البيانات")
+        setupToolbar(titleResId = R.string.update_data)
 
         if (intent.getIntExtra("key", 0) == 100){
             binding.cardContainer.visibility = View.VISIBLE
@@ -60,9 +60,9 @@ class UpdateInfoActivity : BaseActivity<ActivityUpdateInfoBinding>() {
                         binding.messageText.visibility = View.VISIBLE
                         imageUrl = null
 
-                        Toast.makeText(this, "تم إرسال الطلب بنجاح.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, resources.getString(R.string.order_sent), Toast.LENGTH_LONG).show()
                         Picasso.get().load(R.drawable.success).into(binding.statusImage)
-                        binding.messageText.text = "تم إرسال الطلب بنجاح."
+                        binding.messageText.text = resources.getString(R.string.order_sent)
 
                     }
                     Status.ERROR -> {
@@ -71,9 +71,9 @@ class UpdateInfoActivity : BaseActivity<ActivityUpdateInfoBinding>() {
                         binding.statusImage.visibility = View.VISIBLE
                         binding.messageText.visibility = View.VISIBLE
                         Picasso.get().load(R.drawable.cancel).into(binding.statusImage)
-                        binding.messageText.text = "حدث خطاء أثناء إرسال الطلب."
+                        binding.messageText.text = resources.getString(R.string.order_not_sent)
                         imageUrl = null
-                        Toast.makeText(this, "حدث خطاء أثناء إرسال الطلب.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, resources.getString(R.string.order_not_sent), Toast.LENGTH_LONG).show()
 
                     }
                 }
@@ -98,7 +98,7 @@ class UpdateInfoActivity : BaseActivity<ActivityUpdateInfoBinding>() {
                         imageUrl = null
 
                         Picasso.get().load(R.drawable.success).into(binding.status)
-                        binding.message.text = "تم إرسال الطلب بنجاح."
+                        binding.message.text = resources.getString(R.string.order_sent)
 
                     }
                     Status.ERROR -> {
@@ -107,7 +107,7 @@ class UpdateInfoActivity : BaseActivity<ActivityUpdateInfoBinding>() {
                         binding.status.visibility = View.VISIBLE
                         binding.message.visibility = View.VISIBLE
                         Picasso.get().load(R.drawable.cancel).into(binding.status)
-                        binding.message.text = "حدث خطاء أثناء إرسال الطلب."
+                        binding.message.text = resources.getString(R.string.order_not_sent)
                         binding.sendOrder.isEnabled = false
                         imageUrl = null
                     }
@@ -180,12 +180,12 @@ class UpdateInfoActivity : BaseActivity<ActivityUpdateInfoBinding>() {
 
     fun ministryLicenseOrder(view: View) {
         if (imageType == MEMBERSHIP_CARD){
-            Toast.makeText(this, "من فضلك اختر صورة الترخيص.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.select_licence_pic), Toast.LENGTH_LONG).show()
             return
         }
 
         if (imageUrl == null){
-            Toast.makeText(this, "من فضلك اختر صورة الترخيص.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.select_licence_pic), Toast.LENGTH_LONG).show()
             return
         }
 
@@ -237,7 +237,7 @@ class UpdateInfoActivity : BaseActivity<ActivityUpdateInfoBinding>() {
             if (imageType == MINISTRY_LICENSE){
                 binding.image.setImageURI(imageUrl)
             }else{
-                binding.personalImage.text = "تم تحميل الصورة بنجاح."
+                binding.personalImage.text = getString(R.string.image_uploaded)
                 Picasso.get().load(R.drawable.success).into(binding.icon)
             }
         }

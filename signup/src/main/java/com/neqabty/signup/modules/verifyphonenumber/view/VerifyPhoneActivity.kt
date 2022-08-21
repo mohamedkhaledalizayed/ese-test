@@ -116,12 +116,9 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
                     }
                     Status.SUCCESS ->{
                         loading.hide()
-                        if (resource.data!!.isNotEmpty()){
-                            val intent = Intent(this@VerifyPhoneActivity, SignupActivity::class.java)
-                            intent.putExtra("phoneNumber", phoneNumber)
-                            intent.putExtra("token", resource.data)
-                            startActivity(intent)
-                            finish()
+                        if (resource.data!!){
+                            sharedPreferences.isPhoneVerified = true
+                            phoneVerified()
                         }
                     }
                     Status.ERROR ->{
@@ -131,6 +128,22 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
                 }
             }
         }
+    }
+
+    private fun phoneVerified() {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(getString(R.string.phone_confirmed))
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.ok_btn)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            finish()
+        }
+        alertDialog.show()
+
     }
 
     override fun onBackPressed() {

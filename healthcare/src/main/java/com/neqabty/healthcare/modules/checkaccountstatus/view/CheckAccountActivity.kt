@@ -36,11 +36,11 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
 
         binding.btnSend.setOnClickListener {
             if (binding.phone.text.isNullOrEmpty()){
-                Toast.makeText(this, "من فضلك ادخل رقم الهاتف اولا.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.enter_phone), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
             if (!binding.phone.text.toString().isMobileValid()){
-                Toast.makeText(this, "من فضلك ادخل رقم صحيح.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.enter_corect_phone), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
@@ -77,7 +77,7 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
 
     override fun onResume() {
         super.onResume()
-        if (sharedPreferences.isPhoneVerified){
+        if (sharedPreferences.mobile.isNotEmpty()){
             if (sharedPreferences.isSyndicateMember){
                 val mainIntent = Intent(this@CheckAccountActivity, com.neqabty.meganeqabty.home.view.homescreen.HomeActivity::class.java)
                 startActivity(mainIntent)
@@ -85,7 +85,12 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
             }else{
                 val mainIntent = Intent(this@CheckAccountActivity, HomeActivity::class.java)
                 startActivity(mainIntent)
+                finish()
             }
         }
+    }
+
+    override fun onBackPressed() {
+        finishAffinity()
     }
 }

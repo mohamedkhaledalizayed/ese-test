@@ -73,6 +73,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                                 " ${resource.data?.year}"
                         binding.message.text = resources.getString(R.string.order_status) +
                                 " ${resource.data?.statusMessage}"
+                        binding.cardBtn.visibility = View.GONE
                         if (resource.data?.statusCode == 3){
                             binding.cardBtn.visibility = View.VISIBLE
                         }
@@ -84,7 +85,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                             binding.address.visibility = View.GONE
                             binding.year.visibility = View.GONE
                             binding.cardBtn.visibility = View.VISIBLE
-                            binding.message.text = "لم يتم العثور على طلب تجديد كارنيه العضوية"
+                            binding.message.text = getString(R.string.card_request_not_found)
                         }
                     }
                 }
@@ -105,6 +106,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         binding.licenceMessage.text = resources.getString(R.string.order_status) +
                                 " ${resource.data?.statusMessage}"
+                        binding.licenceBtn.visibility = View.GONE
                         if (resource.data?.statusCode == 3){
                             binding.licenceBtn.visibility = View.VISIBLE
                         }
@@ -113,7 +115,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.message == "404"){
                             binding.licenceBtn.visibility = View.VISIBLE
-                            binding.message.text = "لم يتم العثور على طلب تجديد ترخيص الوزارة"
+                            binding.licenceMessage.text = getString(R.string.licence_not_found)
                         }
                     }
                 }

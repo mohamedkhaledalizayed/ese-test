@@ -111,7 +111,6 @@
             android:textColor="#748A9D"
             android:textColorHint="#748A9D"
             android:textSize="@dimen/_10ssp"
-            android:textStyle="italic"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

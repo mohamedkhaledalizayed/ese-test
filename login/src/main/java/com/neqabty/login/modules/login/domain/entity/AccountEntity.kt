@@ -9,5 +9,6 @@ data class AccountEntity(
     val id: Int,
     val image: String?,
     val mobile: String,
+    val verifiedAccount: Boolean,
     val nationalId: String
 )

@@ -44,18 +44,21 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     Status.SUCCESS -> {
                         dialog.dismiss()
                         if (resource.data!!.user.account.nationalId.isNotEmpty()){
-                            sharedPreferences.isPhoneVerified = true
+                            sharedPreferences.isPhoneVerified = resource.data!!.user.account.verifiedAccount
                             sharedPreferences.isSyndicateMember = resource.data!!.user.account.entity.type == "syndicate"
+                            sharedPreferences.isAuthenticated = true
                             sharedPreferences.token = resource.data!!.token
                             sharedPreferences.code = resource.data!!.user.account.entity.code
+                            sharedPreferences.image = resource.data!!.user.account.entity.image
                             sharedPreferences.syndicateName = resource.data!!.user.account.entity.name
                             sharedPreferences.mobile = binding.etUsername.text.toString()
                             sharedPreferences.name = resource.data!!.user.account.fullName ?: ""
                             sharedPreferences.nationalId = resource.data!!.user.account.nationalId
+                            sharedPreferences.membershipId = resource.data!!.user.membershipId
                             sharedPreferences.userImage = "${resource.data!!.user.account.image}"
                             finish()
                         }else{
-                            Toast.makeText(this, "حدث خطا", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {

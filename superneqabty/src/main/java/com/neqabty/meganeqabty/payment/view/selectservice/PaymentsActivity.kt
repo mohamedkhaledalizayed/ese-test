@@ -31,9 +31,12 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 //        val intent = Intent(this, PaymentStatusActivity::class.java)
-//        intent.putExtra("referenceCode", "d1d9bf1e-8963-4f01-8692-b928e213e24d")
+//        intent.putExtra("referenceCode", "b3d7a491-6b14-4bad-bf2b-b282fc547199")
 //        startActivity(intent)
         setupToolbar(titleResId = R.string.payments)
+
+        binding.membershipId.setText(sharedPreferences.membershipId)
+        binding.membershipId.isEnabled = false
         paymentViewModel.getServices()
         paymentViewModel.services.observe(this) {
 
@@ -127,7 +130,6 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
         val intent = Intent(this, PaymentDetailsActivity::class.java)
         intent.putExtra("code", serviceId)
         intent.putExtra("service_action_code", actionId)
-        intent.putExtra("number", binding.membershipId.text.toString())
         startActivity(intent)
     }
 }

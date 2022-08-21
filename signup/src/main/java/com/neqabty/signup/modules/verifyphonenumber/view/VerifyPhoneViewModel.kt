@@ -33,7 +33,7 @@ class VerifyPhoneViewModel @Inject constructor(private val verifyPhoneUseCase: V
         }
     }
 
-    val otpStatus = MutableLiveData<Resource<String>>()
+    val otpStatus = MutableLiveData<Resource<Boolean>>()
     fun checkOTP(checkOTPBody: CheckOTPBody){
         viewModelScope.launch(Dispatchers.IO){
             otpStatus.postValue(Resource.loading(data = null))
@@ -51,6 +51,9 @@ class VerifyPhoneViewModel @Inject constructor(private val verifyPhoneUseCase: V
     fun handleError(throwable: Throwable): String {
         return if (throwable is HttpException) {
             when (throwable.code()) {
+                226 -> {
+                    "هذا الرقم مفعل من قبل برجاء تسجيل الدخول مرة اخرى."
+                }
                 400 -> {
                     "خطاء فى كود التحقق"
                 }

@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name">NeQabty</string>
 
-    <string name="alert_title">تنبيه</string>
-    <string name="ok_btn">تأكيد</string>
-    <string name="cancel_btn">إلغاء</string>
+    <string name="alert_title">Alert</string>
+    <string name="ok_btn">Confirm</string>
+    <string name="cancel_btn">Cancel</string>
 
 
     <string name="please_wait">Please Wait...</string>
-    <string name="news_title">أخبار النقابة</string>
-    <string name="general_news">الاخبار العامة</string>
+    <string name="news_title">Syndicate News</string>
+    <string name="general_news">General News</string>
     <string name="payments">Payments</string>
     <string name="sel_service">Select Service</string>
     <string name="language">Language</string>
-    <string name="delivery_fees">رسوم التوصيل</string>
-    <string name="bank_fees">الرسوم الادارية</string>
+    <string name="delivery_fees">Delivery Fees</string>
+    <string name="bank_fees">Bank Fees</string>
 </resources>

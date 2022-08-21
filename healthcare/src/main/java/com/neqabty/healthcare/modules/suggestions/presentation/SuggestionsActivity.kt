@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
+import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivitySuggestionsBinding
 import com.neqabty.healthcare.modules.suggestions.data.model.ComplaintBody
 import com.neqabty.healthcare.modules.suggestions.domain.entity.CategoryEntity
@@ -41,7 +42,7 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(title = "الشكاوي والمقترحات")
+        setupToolbar(titleResId = R.string.suggestions)
 
 
 
@@ -62,7 +63,7 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
                             categoriesList = resource.data
                             categoriesAdapter.submitList(
                                 resource.data!!.toMutableList()
-                                    .also { list -> list.add(0, CategoryEntity(0, "اختر الفئة", "")) })
+                                    .also { list -> list.add(0, CategoryEntity(0, getString(R.string.category), "")) })
                         }
                     }
                     Status.ERROR -> {
@@ -85,7 +86,7 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
                         if (!resource.data!!.isNullOrEmpty()){
                             binding.layout.visibility = View.GONE
                             binding.statusText.visibility = View.VISIBLE
-                            binding.statusText.text = "لقد تم تسجيل طلبكم بنجاح رقم الشكوي / المقترح ${resource.data}"
+                            binding.statusText.text = "${getString(R.string.done_)} ${resource.data}"
                         }
                     }
                     Status.ERROR -> {
@@ -102,7 +103,7 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
 
         binding.addImage.setOnClickListener {
             if (listImagesUri.size == 3){
-                Toast.makeText(this, "لا يمكن إضافة اكثر من 3 صور.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.no_more), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
             checkPermissionsAndOpenFilePicker()
@@ -123,22 +124,22 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
     private fun addComplaint() {
 
         if (binding.name.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الاسم اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.please_enter_name), Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.phone.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل رقم الهاتف اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.enter_phone), Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.content.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل محتوي الشكوي اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.content_), Toast.LENGTH_LONG).show()
             return
         }
 
         if (binding.spCategory.selectedItemPosition == 0){
-            Toast.makeText(this, "من فضلك إختر الفئة اولا.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.select_category), Toast.LENGTH_LONG).show()
             return
         }
 
@@ -191,7 +192,7 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
             if (REQUEST_CODE == requestCode){
                 imageUri = data.data
                 listImagesUri.add(ImageInfo(imageUri!!, imageUri?.getName()))
-                binding.addImageText.text = "إضافة صورة أخرى."
+                binding.addImageText.text = getString(R.string.add_image)
                 binding.imagesRecycler.visibility = View.VISIBLE
                 binding.imagesRecycler.adapter = mAdapter
                 mAdapter.submitList(listImagesUri)

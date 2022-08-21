@@ -93,7 +93,6 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
                         sharedPreferences.code = item.code
                         sharedPreferences.image = item.image
                         sharedPreferences.syndicateName = item.name
-                        sharedPreferences.isSyndicateMember = false
                         startActivity(intent)
                         finish()
                     }else{
@@ -107,7 +106,6 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
                         sharedPreferences.code = item.code
                         sharedPreferences.image = item.image
                         sharedPreferences.syndicateName = item.name
-                        sharedPreferences.isSyndicateMember = true
                         startActivity(intent)
                         finish()
                     }
@@ -164,23 +162,23 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
 
 
     override fun onBackPressed() {
-        showAlertDialog("هل تريد الخروج من التطبيق!")
+        showAlertDialog(getString(R.string.close_app))
     }
 
     private fun showAlertDialog(message: String) {
 
         val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle("تنبيه")
+        alertDialog.setTitle(getString(R.string.alert))
         alertDialog.setMessage(message)
         alertDialog.setCancelable(true)
         alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, "موافق"
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
-            finish()
+            finishAffinity()
         }
         alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, "لا"
+            AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)
         ) { dialog, _ ->
             dialog.dismiss()
         }

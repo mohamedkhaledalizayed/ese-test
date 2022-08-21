@@ -103,7 +103,7 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
                     paymentStatus.postValue(Resource.success(data = it))
                 }
             }catch (exception:Throwable){
-                paymentStatus.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+                paymentStatus.postValue(Resource.error(data = null, message = handleError(exception)))
             }
         }
     }
@@ -136,7 +136,10 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
                     "لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى"
                 }
                 404 -> {
-                    "هذا العضو غير موجود فى قاعدة البيانات"
+                    "404"
+                }
+                409 -> {
+                    "409"
                 }
                 500 -> {
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"

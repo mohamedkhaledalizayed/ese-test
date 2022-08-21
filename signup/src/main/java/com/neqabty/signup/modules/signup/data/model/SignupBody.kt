@@ -11,6 +11,8 @@ data class SignupBody(
     val email: String = "",
     @SerializedName("membership_id")
     val membershipId: String = "",
+    @SerializedName("mobile")
+    val mobile: String = "",
     @SerializedName("national_id")
     val nationalId: String = ""
 )

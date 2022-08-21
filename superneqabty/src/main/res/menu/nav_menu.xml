@@ -50,10 +50,4 @@
             android:icon="@drawable/logout"/>
     </group>
 
-<!--    <group android:id="@+id/syndicate">-->
-<!--        <item-->
-<!--            android:id="@+id/change_syndicate"-->
-<!--            android:title="@string/change_syndicate"-->
-<!--            android:icon="@drawable/gear"/>-->
-<!--    </group>-->
 </menu>

@@ -32,7 +32,7 @@
     <group android:id="@+id/menu_settings">
         <item
             android:id="@+id/settings"
-            android:title="@string/language"
+            android:title="@string/setting"
             android:icon="@drawable/settings"/>
     </group>
 

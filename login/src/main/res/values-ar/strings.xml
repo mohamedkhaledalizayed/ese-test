@@ -3,5 +3,7 @@
     <string name="password">كلمة المرور</string>
     <string name="phone">رقم الموبايل</string>
     <string name="enter_password">من فضلك ادخل كلمة المرور</string>
+    <string name="something_wrong">حدث خطاء</string>
+
 
 </resources>

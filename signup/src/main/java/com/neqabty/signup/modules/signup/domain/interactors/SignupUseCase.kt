@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 class SignupUseCase @Inject constructor(private val signupRepository: SignupRepository) {
 
-    fun build(token: String, signupParams: SignupParams): Flow<UserEntity> {
-        return signupRepository.signup(token, signupParams)
+    fun build(signupParams: SignupParams): Flow<UserEntity> {
+        return signupRepository.signup(signupParams)
     }
 
     fun build(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity> {

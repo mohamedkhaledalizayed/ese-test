@@ -1,16 +1,19 @@
 package com.neqabty.meganeqabty.payment.data.model.payment
 
 
-import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
+
 @Keep
 data class Transaction(
     @SerializedName("account")
-    val account: Any,
+    val account: Int,
     @SerializedName("cashier_url")
     val cashierUrl: Any,
     @SerializedName("created_at")
     val createdAt: String,
+    @SerializedName("delivery")
+    val delivery: Any,
     @SerializedName("entity")
     val entity: Int,
     @SerializedName("entity_fees")
@@ -29,8 +32,10 @@ data class Transaction(
     val gatewayReferenceId: Any,
     @SerializedName("id")
     val id: String,
-    @SerializedName("item_id")
-    val itemId: Int,
+    @SerializedName("member_name")
+    val memberName: Any,
+    @SerializedName("membership_id")
+    val membershipId: Int,
     @SerializedName("mobile")
     val mobile: Any,
     @SerializedName("net_amount")
@@ -39,8 +44,6 @@ data class Transaction(
     val paymentGatewayReferenceId: String?,
     @SerializedName("payment_method")
     val paymentMethod: Int,
-    @SerializedName("payment_request_number")
-    val paymentRequestNumber: String,
     @SerializedName("payment_source")
     val paymentSource: String,
     @SerializedName("portal_owner_fees")
@@ -49,6 +52,8 @@ data class Transaction(
     val providerFees: String,
     @SerializedName("service_action")
     val serviceAction: String,
+    @SerializedName("shipping_fees")
+    val shippingFees: String,
     @SerializedName("total_amount")
     val totalAmount: String,
     @SerializedName("total_fees")

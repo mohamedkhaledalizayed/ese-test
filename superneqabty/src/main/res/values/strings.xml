@@ -49,7 +49,7 @@ Operation No.</string>
     <string name="cancel_btn">Cancel</string>
     <string name="no_btn">No</string>
     <string name="membership_id">Membership Id</string>
-    <string name="not_found">عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.</string>
+    <string name="not_found">Sorry, this number is not registered in the syndicate, please log in.</string>
     <string name="next">Next</string>
     <string name="service">Service</string>
     <string name="services">Services</string>
@@ -116,7 +116,7 @@ Operation No.</string>
 
     <string name="member_name">Name : %s</string>
     <string name="member_id">Membership Id : %s</string>
-    <string name="egp"> %s EGP</string>
+    <string name="egp"> EGP</string>
     <string name="total_after_pay_fees"> Total after payment fees :  %s EGP</string>
     <string name="total_after_delivery_fees"> Total after delivery fees :  %s EGP</string>
 
@@ -124,6 +124,26 @@ Operation No.</string>
     <string name="select_branch">Select Branch</string>
     <string name="enter_add">Please Enter Address</string>
     <string name="dismiss">Dismiss</string>
-    <string name="dont_have_syndicate">لمعرفة المزيد عن باقات نقاباتي صحة مستدامة اضغط هنا .. نقابتي نقابة من ليس له نقابة.</string>
-    <string name="logout_">Logout</string>
+    <string name="dont_have_syndicate">To learn more about my Syndicate Packages for Sustainable Health, click here.. My Syndicate is the Syndicate of those who do not have a Syndicate.</string>
+    <string name="logout_">Change Phone</string>
+    <string name="syndicate_">Syndicate</string>
+    <string name="confirm_phone">Please confirm phone number before payment</string>
+    <string name="no_reciept">There are no invoices due for payment at this time</string>
+    <string name="update_license">We regret that the payment has not been completed due to the expiration of your Ministry\'s license. Please renew until the payment process is completed</string>
+    <string name="update_data">Update Data</string>
+    <string name="order_sent">The request has been sent successfully.</string>
+    <string name="order_not_sent">An error occurred while sending the request.</string>
+    <string name="select_personal_pic">Please choose a profile picture.</string>
+    <string name="select_phone_num">Please enter the mobile number.</string>
+    <string name="select_year">Please enter the year.</string>
+    <string name="select_licence_pic">Please select a license image.</string>
+    <string name="image_uploaded">The image has been uploaded successfully.</string>
+    <string name="card_request_not_found">No membership card renewal application was found.</string>
+    <string name="licence_not_found">The Ministry\'s license renewal application was not found.</string>
+    <string name="log_out">Do you want to log out!</string>
+    <string name="close_app">Do you want to Exit!</string>
+    <string name="share">Share</string>
+    <string name="print">Print</string>
+
+
 </resources>

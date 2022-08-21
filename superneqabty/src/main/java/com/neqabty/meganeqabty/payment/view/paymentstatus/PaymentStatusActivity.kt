@@ -3,12 +3,13 @@ package com.neqabty.meganeqabty.payment.view.paymentstatus
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.R
 import com.neqabty.core.utils.AppUtils
+import com.neqabty.core.utils.LocaleHelper
 import com.neqabty.meganeqabty.databinding.ActivityPaymentStatusBinding
 import com.neqabty.meganeqabty.payment.view.PaymentViewModel
 import com.squareup.picasso.Picasso
@@ -39,7 +40,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                         binding.layoutContainer.visibility = View.VISIBLE
                         binding.progressCircular.visibility = View.GONE
                         if (!resource.data?.id.isNullOrEmpty()){
-                            binding.nameValue.text = "${resource.data?.member_name}"
+                            binding.nameValue.text = resource.data?.member_name?: resource.data?.mobile
                             binding.membershipNumberValue.text = "${resource.data?.itemId}"
                             if (!resource.data?.mobile.isNullOrEmpty()){
                                 binding.phoneValue.text = "${resource.data?.mobile}"
@@ -48,9 +49,9 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                             binding.serviceNameValue.text = "${resource.data?.serviceAction}"
                             binding.receiptNumberValue.text = "${resource.data?.gatewayReferenceId}"
                             binding.receiptDateValue.text = AppUtils().dateFormat(resource.data!!.createdAt)
-                            binding.priceValue.text = "${resource.data?.netAmount} جنيه "
-                            binding.feesValue.text = "${resource.data?.totalFees}  جنيه"
-                            binding.totalValue.text = "${resource.data?.totalAmount}  جنيه"
+                            binding.priceValue.text = "${resource.data?.netAmount}  ${getString(R.string.egp)} "
+                            binding.feesValue.text = "${resource.data?.totalFees}   ${getString(R.string.egp)}"
+                            binding.totalValue.text = "${resource.data?.totalAmount}   ${getString(R.string.egp)}"
 
                         }else{
                             binding.receiptLayout.visibility = View.GONE
@@ -62,6 +63,9 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                     }
                     com.neqabty.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
+                        if (resource.message == "404"){
+                            Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
             }
@@ -73,6 +77,11 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
             pdfIntent.putExtra("data", paymentViewModel.paymentStatus.value?.data)
             startActivity(pdfIntent)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        LocaleHelper().setLocale(this,sharedPreferences.language)
     }
 
 }

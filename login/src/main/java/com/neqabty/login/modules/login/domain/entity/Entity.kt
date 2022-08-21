@@ -6,6 +6,7 @@ data class Entity(
     val code: String,
     val id: Int,
     val name: String,
-    val type: String
+    val type: String,
+    val image: String
 
 )

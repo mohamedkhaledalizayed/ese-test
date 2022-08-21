@@ -162,8 +162,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:paddingEnd="@dimen/_10sdp"
-                    android:paddingStart="@dimen/_10sdp"
                     android:popupBackground="@color/white" />
 
                 <ImageView

@@ -78,9 +78,34 @@
     <string name="rewards">برنامج المكافات</string>
     <string name="suggestions">الشكاوي والمقترحات</string>
     <string name="settings">إعدادات الحساب</string>
-    <string name="logout">تسجيل الخروج</string>
+    <string name="setting">الإعدادات</string>
+    <string name="logout">تغيير رقم الهاتف</string>
     <string name="search_result">نتائج البحث</string>
     <string name="confirm">تاكيد</string>
     <string name="soon_more_details">قريبا المزيد من التفاصيل</string>
+    <string name="enter_corect_phone">من فضلك ادخل رقم الهاتف صحيح.</string>
+    <string name="enter_phone">من فضلك ادخل رقم الهاتف</string>
+
+
+    <string name="home_title">صحة مستدامة</string>
+
+
+    <string name="comming">سوف يتم توفير هذه الخدمة قريبا.</string>
+    <string name="not_found">عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.</string>
+    <string name="log_out">هل تريد تسجيل خروج!</string>
+    <string name="exit">هل تريد الخروج!</string>
+    <string name="offers">الخصومات والعروض</string>
+
+    <string name="category">اختر الفئة</string>
+    <string name="done_">لقد تم تسجيل طلبكم بنجاح رقم الشكوي / المقترح </string>
+    <string name="no_more">لا يمكن إضافة اكثر من 3 صور.</string>
+    <string name="please_enter_name">من فضلك ادخل الاسم.</string>
+    <string name="content_">من فضلك ادخل محتوي الشكوي.</string>
+    <string name="select_category">من فضلك إختر الفئة.</string>
+    <string name="add_image_">إضافة صورة أخرى.</string>
+    <string name="attach_image">إرفاق صورة</string>
+    <string name="close">هل تريد الخروج من التطبيق!</string>
+    <string name="wallet">المحفظة</string>
+
 
 </resources>

@@ -7,7 +7,7 @@ import com.neqabty.signup.modules.signup.domain.entity.syndicate.SyndicateListEn
 import kotlinx.coroutines.flow.Flow
 
 interface SignupRepository {
-    fun signup(token: String, signupParams: SignupParams): Flow<UserEntity>
+    fun signup(signupParams: SignupParams): Flow<UserEntity>
     fun signUpNeqabtyMember(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity>
     fun  getSyndicates():  Flow<List<SyndicateListEntity>>
 }

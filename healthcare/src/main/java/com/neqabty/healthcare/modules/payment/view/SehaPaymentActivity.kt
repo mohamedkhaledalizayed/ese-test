@@ -168,22 +168,22 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
 
     var referenceCode = ""
     private fun oPayPayment(paymentEntity: PaymentEntity, isCredit: Boolean) {
-        referenceCode = paymentEntity.mobilePaymentPayload.reference
+        referenceCode = paymentEntity.mobilePaymentPayload!!.reference
         val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
         PaymentTask.sandBox = Constants.OPAY_MODE
         val payInput = PayInput(
-            publickey = paymentEntity.mobilePaymentPayload.publickey,
-            merchantId = paymentEntity.mobilePaymentPayload.merchantId,
-            merchantName = paymentEntity.mobilePaymentPayload.merchantName,
-            reference = paymentEntity.mobilePaymentPayload.reference,
-            countryCode = paymentEntity.mobilePaymentPayload.countryCode, // uppercase
-            currency = paymentEntity.mobilePaymentPayload.currency, // uppercase
-            payAmount = (paymentEntity.mobilePaymentPayload.payAmount.toDouble() * 100).toLong(),
+            publickey = paymentEntity.mobilePaymentPayload!!.publickey,
+            merchantId = paymentEntity.mobilePaymentPayload!!.merchantId,
+            merchantName = paymentEntity.mobilePaymentPayload!!.merchantName,
+            reference = paymentEntity.mobilePaymentPayload!!.reference,
+            countryCode = paymentEntity.mobilePaymentPayload!!.countryCode, // uppercase
+            currency = paymentEntity.mobilePaymentPayload!!.currency, // uppercase
+            payAmount = (paymentEntity.mobilePaymentPayload!!.payAmount.toDouble() * 100).toLong(),
             productName = binding.tvPackageName.text.toString(),
             productDescription = binding.tvPackageName.text.toString(),
-            callbackUrl = paymentEntity.mobilePaymentPayload.callbackUrl,
+            callbackUrl = paymentEntity.mobilePaymentPayload!!.callbackUrl,
             userClientIP = "110.246.160.183",
-            expireAt = paymentEntity.mobilePaymentPayload.expireAt,
+            expireAt = paymentEntity.mobilePaymentPayload!!.expireAt,
             paymentType = paymentType // optional
         )
 
