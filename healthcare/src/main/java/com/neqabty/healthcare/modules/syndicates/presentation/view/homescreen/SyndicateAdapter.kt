@@ -9,9 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.meganeqabty.R
-import com.neqabty.meganeqabty.databinding.SyndicateItemBinding
 import com.neqabty.healthcare.modules.syndicates.domain.entity.SyndicateEntity
 import com.squareup.picasso.Picasso
 
@@ -62,8 +60,6 @@ class SyndicateAdapter: BaseAdapter() {
         }
         return convertView
     }
-
-    class MyViewHolder(val binding: SyndicateItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     fun submitList(list: List<SyndicateEntity>?) {
         list?.let {

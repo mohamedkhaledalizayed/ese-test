@@ -18,9 +18,9 @@ import com.neqabty.core.data.Constants.selectedSyndicateCode
 import com.neqabty.core.data.Constants.selectedSyndicatePosition
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
+import com.neqabty.healthcare.databinding.ActivitySyndicateBinding
 import com.neqabty.healthcare.modules.syndicates.domain.entity.SyndicateEntity
 import com.neqabty.meganeqabty.R
-import com.neqabty.meganeqabty.databinding.ActivitySyndicateBinding
 import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.effet.RippleEffect

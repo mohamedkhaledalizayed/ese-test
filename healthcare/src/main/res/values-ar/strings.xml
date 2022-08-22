@@ -85,6 +85,7 @@
     <string name="soon_more_details">قريبا المزيد من التفاصيل</string>
     <string name="enter_corect_phone">من فضلك ادخل رقم الهاتف صحيح.</string>
     <string name="enter_phone">من فضلك ادخل رقم الهاتف</string>
+    <string name="please_wait">من فضلك انتظر...</string>
 
 
     <string name="home_title">صحة مستدامة</string>
@@ -106,6 +107,7 @@
     <string name="attach_image">إرفاق صورة</string>
     <string name="close">هل تريد الخروج من التطبيق!</string>
     <string name="wallet">المحفظة</string>
+    <string name="welcome">مرحبا بك فى نقابتى</string>
 
 
 </resources>

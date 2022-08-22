@@ -7,7 +7,7 @@
     android:background="@color/background"
     tools:context=".modules.offers.presentation.view.takeoffer.TakeOfferActivity">
 
-    <include layout="@layout/toolbar"
+    <include layout="@layout/healthcare_toolbar"
         android:id="@+id/toolbar"/>
 
     <LinearLayout

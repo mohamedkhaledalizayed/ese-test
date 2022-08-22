@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+        layout="@layout/healthcare_toolbar" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/layout_container"

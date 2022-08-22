@@ -39,7 +39,7 @@ android {
             testCoverageEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-            debuggable = true
+            debuggable = false
             jniDebuggable false
             renderscriptDebuggable false
             pseudoLocalesEnabled false
@@ -57,6 +57,10 @@ android {
     }
     dataBinding {
         enabled = true
+    }
+    lint {
+        baseline = file("lint-baseline.xml")
+
     }
 }
 ext {

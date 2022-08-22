@@ -81,6 +81,8 @@
     <string name="confirm">Confirm</string>
     <string name="soon_more_details">Soon More Details</string>
     <string name="enter_corect_phone">Please enter a valid phone number.</string>
+    <string name="enter_phone">Please enter phone</string>
+    <string name="please_wait">Please Wait...</string>
 
     <string name="home_title">sustainable health</string>
 
@@ -101,4 +103,5 @@
     <string name="attach_image">Attach a photo</string>
     <string name="close">Do you want to exit the application!</string>
     <string name="wallet">Wallet</string>
+    <string name="welcome">Welcome to Neqabty</string>
 </resources>

@@ -10,7 +10,7 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar" />
+            layout="@layout/mega_toolbar" />
 
         <ScrollView
             android:id="@+id/layout_container"

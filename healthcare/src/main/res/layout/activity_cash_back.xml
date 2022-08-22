@@ -7,7 +7,7 @@
     android:background="@color/background"
     tools:context=".modules.offers.presentation.view.cashback.CashBackActivity">
 
-    <include layout="@layout/toolbar"
+    <include layout="@layout/healthcare_toolbar"
         android:id="@+id/toolbar"/>
 
     <androidx.core.widget.NestedScrollView
