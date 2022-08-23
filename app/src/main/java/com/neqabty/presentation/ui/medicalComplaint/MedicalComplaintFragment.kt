@@ -17,6 +17,7 @@ import com.neqabty.databinding.MedicalComplaintFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.entities.*
+import com.neqabty.presentation.ui.medicalComplaintRequest.MedicalComplaintRequest
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.*
@@ -78,6 +79,10 @@ class MedicalComplaintFragment : BaseFragment() {
 
     private fun initializeViews() {
         initializeSpinners()
+        binding.bNext.setOnClickListener{
+            navController().navigate(MedicalComplaintFragmentDirections.openMedicalComplaintsRequest(MedicalComplaintRequest(sharedPref.name, sharedPref.mobile, sharedPref.user, binding.edCardNumber.text.toString(),
+            "", (binding.spProvider.selectedItem as ProviderUI).branchProfileId!!, (binding.spProvider.selectedItem as ProviderUI).providerId!!, "4", listOf())))
+        }
     }
 
     private fun handleViewState(state: MedicalComplaintViewState) {
