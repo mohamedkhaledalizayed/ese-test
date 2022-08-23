@@ -293,8 +293,8 @@ interface WebService {
 
     @POST("api/api/ApiRequest/AddRequest")
     fun sendMedicalComplaintRequest(
-        @Body medicalComplaintRequest: MedicalComplaintRequest,
         @Query("mobile_number") mobileNumber: String,
+        @Body medicalComplaintRequest: MedicalComplaintRequest,
         @Query("server") server: String = ""
     ): Observable<MedicalComplaintData>
 

@@ -560,6 +560,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideSendMedicalComplaint(neqabtyRepository: NeqabtyRepository): SendMedicalComplaint {
+        return SendMedicalComplaint(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetQuestionnaires(neqabtyRepository: NeqabtyRepository): GetQuestionnaires {
         return GetQuestionnaires(ASyncTransformer(), neqabtyRepository)
     }

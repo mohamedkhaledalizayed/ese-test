@@ -16,8 +16,6 @@ data class MedicalComplaintRequest(
         var description: String = "",
         @SerializedName("branchProfileId")
         var branchProfileId: String = "",
-        @SerializedName("mobile_token")
-        var mobileToken: String = "",
         @SerializedName("serviceProviderId")
         var serviceProviderId: String = "",
         @SerializedName("letterTypeId")

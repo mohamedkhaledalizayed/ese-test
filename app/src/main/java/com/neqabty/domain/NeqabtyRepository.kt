@@ -191,6 +191,17 @@ interface NeqabtyRepository {
                         doc2: File?,
                         doc3: File?,
                         doc4: File?): Observable<Unit>
+    fun sendMedicalComplaint(
+        name: String,
+        mobile: String,
+        userNumber: String,
+        benId: String,
+        description: String,
+        branchProfileId: String,
+        serviceProviderId: String,
+        letterTypeId: String,
+        attachments: List<AttachmentEntity>
+    ): Observable<MedicalComplaintEntity>
     fun getQuestionnaires(
             userNumber: String
     ): Observable<QuestionnaireEntity>

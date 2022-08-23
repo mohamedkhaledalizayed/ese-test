@@ -87,8 +87,7 @@ class MedicalComplaintRequestFragment : BaseFragment() {
         refundViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                refundViewModel.sendMedicalComplaintRequest(sharedPref.name, sharedPref.mobile, sharedPref.user, refundData.benId, refundData.description, refundData.branchProfileId,
-                    sharedPref.token ,refundData.serviceProviderId, refundData.letterTypeId, attachments)
+                refundViewModel.sendMedicalComplaintRequest(sharedPref.name, sharedPref.mobile, sharedPref.user, refundData.benId, refundData.description, refundData.branchProfileId,refundData.serviceProviderId, refundData.letterTypeId, attachments)
             }, cancelCallback = {
                 dialog?.dismiss()
             }, message = error?.message)
@@ -99,14 +98,13 @@ class MedicalComplaintRequestFragment : BaseFragment() {
     private fun initializeViews() {
         refundData = MedicalComplaintRequestFragmentArgs.fromBundle(requireArguments()).medicalComplaintRequest
         binding.bSend.setOnClickListener {
-            if (edDetails.text.toString().isNullOrBlank())
+            if (binding.edDetails.text.toString().isNullOrBlank())
                 showInvalidDataAlert()
             else if (photosList.size == 0)
                 showPickPhotoAlert()
             else{
                 attachments = photosList.map { item -> AttachmentEntity(item.name!!, Base64.encodeToString(getPhoto(photosList.indexOf(item))!!.readBytes(), Base64.NO_WRAP)) }
-                refundViewModel.sendMedicalComplaintRequest(sharedPref.name, sharedPref.mobile, sharedPref.user, refundData.benId, edDetails.text.toString(), refundData.branchProfileId,
-                    sharedPref.token ,refundData.serviceProviderId, refundData.letterTypeId, attachments)
+                refundViewModel.sendMedicalComplaintRequest(sharedPref.name, sharedPref.mobile, sharedPref.user, refundData.benId, binding.edDetails.text.toString(), refundData.branchProfileId, refundData.serviceProviderId, refundData.letterTypeId, attachments)
             }
         }
 
@@ -126,7 +124,7 @@ class MedicalComplaintRequestFragment : BaseFragment() {
 
     private fun handleViewState(state: MedicalComplaintRequestViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        if (!state.isLoading && state.refundUI != null)
+        if (!state.isLoading && state.medicalComplaintRequestUI != null)
             showSuccessAlert()
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

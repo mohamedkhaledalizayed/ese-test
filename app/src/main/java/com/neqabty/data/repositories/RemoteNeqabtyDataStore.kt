@@ -59,6 +59,22 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    private val medicalComplaintDataEntityMapper = MedicalComplaintDataEntityMapper()
+    override fun sendMedicalComplaint(
+        name: String,
+        mobile: String,
+        userNumber: String,
+        benId: String,
+        description: String,
+        branchProfileId: String,
+        serviceProviderId: String,
+        letterTypeId: String,
+        attachments: List<AttachmentEntity>
+    ): Observable<MedicalComplaintEntity> {
+        return api.sendMedicalComplaintRequest(mobile, MedicalComplaintRequest(name, userNumber, mobile, benId, description, branchProfileId, serviceProviderId, letterTypeId, attachments.map { attachment -> MedicalComplaintRequest.AttachmentItem(attachment.fileName, attachment.fileBase64) })).map { response ->
+            medicalComplaintDataEntityMapper.mapFrom(response)
+        }
+    }
     private val questionnaireDataEntityMapper = QuestionnaireDataEntityMapper()
     override fun getQuestionnaires(userNumber: String): Observable<QuestionnaireEntity> {
         return api.getQuestionnaires(QuestionnaireRequest(userNumber)).flatMap { questionnaire ->

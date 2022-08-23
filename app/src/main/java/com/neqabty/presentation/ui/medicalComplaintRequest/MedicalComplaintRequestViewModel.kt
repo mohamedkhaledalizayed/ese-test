@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MedicalComplaintRequestViewModel @Inject constructor(
-    val sendMedicalComplaintRequest: SendMedicalComplaintRequest
+    val sendMedicalComplaint: SendMedicalComplaint
 ) : BaseViewModel() {
     private val medicalComplaintEntityUIMapper = MedicalComplaintEntityUIMapper()
 
@@ -30,18 +30,17 @@ class MedicalComplaintRequestViewModel @Inject constructor(
         benId: String,
         description: String,
         branchProfileId: String,
-        mobileToken: String,
         serviceProviderId: String,
         letterTypeId: String,
         attachments: List<AttachmentEntity>) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(sendMedicalComplaintRequest.sendMedicalComplaintRequest(name, mobile, userNumber, benId, description, branchProfileId, mobileToken, serviceProviderId, letterTypeId, attachments)
+        addDisposable(sendMedicalComplaint.sendMedicalComplaint(name, mobile, userNumber, benId, description, branchProfileId, serviceProviderId, letterTypeId, attachments)
             .map {
                 medicalComplaintEntityUIMapper.mapFrom(it)
             }
             .subscribe(
                 {
-                    viewState.value = viewState.value?.copy(isLoading = false, medicalComplaintUI = it)
+                    viewState.value = viewState.value?.copy(isLoading = false, medicalComplaintRequestUI = it)
                 },
                 { errorState.value = handleError(it) }
             )
