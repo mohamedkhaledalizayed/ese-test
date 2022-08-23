@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-include ':mobilepaymentsdktest'
-include ':wheel', ':pdfcreator'
-include ':features:ads'
-include ':yodawy'
+include ':pdfcreator'
 include ':superneqabty'
 include ':news'
 include ':login'
