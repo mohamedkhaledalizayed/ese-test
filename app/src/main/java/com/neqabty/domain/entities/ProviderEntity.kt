@@ -13,5 +13,7 @@ data class ProviderEntity(
     var createdAt: String?,
     var updatedAt: String?,
     var typeID: String?,
-    var typeName: String?
+    var typeName: String?,
+    var providerId: String?,
+    var branchProfileId: String?
 )

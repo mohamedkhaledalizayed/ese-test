@@ -225,6 +225,10 @@ class SignupFragment : BaseFragment() {
             Constants.COMMITTEES -> navController().navigate(
                 SignupFragmentDirections.openCommittees()
             )
+
+            Constants.MEDICAL_COMPLAINTS -> navController().navigate(
+                SignupFragmentDirections.openMedicalComplaints()
+            )
         }
     }
 // endregion

@@ -538,6 +538,8 @@
     <string name="complaint_body">موضوع الشكوى</string>
     <string name="complaint_sent">لقد تم تسجيل طلبكم وسيتم الرد عليكم في خلال اليوم</string>
 
+    <string name="medical_complaint_title">الاستفسارات الطبية</string>
+
     <string name="club_invitations">التذاكر المتاحة</string>
     <string name="mobile">رقم الموبايل</string>
     <string name="member_number">رقم العضوية</string>

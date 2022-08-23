@@ -16,10 +16,14 @@ data class ProviderUI(
     var createdAt: String?,
     var updatedAt: String?,
     var typeID: String?,
-    var typeName: String?
+    var typeName: String?,
+    var providerId: String?,
+    var branchProfileId: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
+            parcel.readString(),
+            parcel.readString(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -52,6 +56,8 @@ data class ProviderUI(
         parcel.writeString(updatedAt)
         parcel.writeString(typeID)
         parcel.writeString(typeName)
+        parcel.writeString(providerId)
+        parcel.writeString(branchProfileId)
     }
 
     override fun describeContents(): Int {

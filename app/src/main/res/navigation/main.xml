@@ -172,6 +172,11 @@
             app:destination="@id/questionnaireFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openMedicalComplaints"
+            app:destination="@id/medicalComplaintsFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -264,6 +269,11 @@
         <action
             android:id="@+id/openQuestionnaire"
             app:destination="@id/questionnaireFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openMedicalComplaints"
+            app:destination="@id/medicalComplaintsFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -806,6 +816,26 @@
         android:name="com.neqabty.presentation.ui.complaint.ComplaintFragment"
         android:label="@string/complaints_title"
         tools:layout="@layout/complaint_fragment" />
+    <fragment
+        android:id="@+id/medicalComplaintsFragment"
+        android:name="com.neqabty.presentation.ui.medicalComplaint.MedicalComplaintFragment"
+        android:label="@string/medical_complaint_title"
+        tools:layout="@layout/medical_complaint_fragment">
+
+    <action
+        android:id="@+id/openMedicalComplaintsRequest"
+        app:destination="@id/medicalComplaintsRequestFragment" />
+    </fragment>
+    <fragment
+    android:id="@+id/medicalComplaintsRequestFragment"
+    android:name="com.neqabty.presentation.ui.medicalComplaintRequest.MedicalComplaintRequestFragment"
+    android:label="@string/medical_complaint_title"
+    tools:layout="@layout/medical_complaint_request_fragment">
+
+    <argument
+        android:name="medicalComplaintRequest"
+        app:argType="com.neqabty.presentation.ui.medicalComplaintRequest.MedicalComplaintRequest" />
+    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.neqabty.presentation.ui.about.AboutFragment"

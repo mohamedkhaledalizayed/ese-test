@@ -620,6 +620,17 @@ class MainActivity : AppCompatActivity() {
         })
         medicalServicesList.add(pharmacyItem)
 
+        val medicalComplaintsItem = NavigationMenuItem(R.drawable.ic_menu_complaints, R.string.medical_complaint_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.medicalComplaintsFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.MEDICAL_COMPLAINTS)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        medicalServicesList.add(medicalComplaintsItem)
+
         val doctorsReservationItem = NavigationMenuItem(R.drawable.ic_menu_medical, R.string.doctors_reservation_title, {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.doctorsReservationFragment)
