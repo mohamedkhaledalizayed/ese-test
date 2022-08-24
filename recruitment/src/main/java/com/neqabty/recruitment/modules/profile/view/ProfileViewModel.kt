@@ -3,6 +3,7 @@ package com.neqabty.recruitment.modules.profile.view
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.annotations.SerializedName
 import com.neqabty.recruitment.core.utils.AppUtils
 import com.neqabty.recruitment.core.utils.Resource
 import com.neqabty.recruitment.modules.profile.domain.entity.area.AreaEntity
@@ -323,6 +324,21 @@ class ProfileViewModel @Inject constructor(private val profileUseCase: ProfileUs
                 }
             }catch (t: Throwable){
                 language.postValue(Resource.error(data = null, message = AppUtils().handleError(t)))
+            }
+        }
+    }
+
+    val engineerLanguage = MutableLiveData<Resource<String>>()
+    fun addEngineerLanguage(engineer: Int, language: Int, level: String){
+        viewModelScope.launch(Dispatchers.IO){
+            engineerLanguage.postValue(Resource.loading(data = null))
+
+            try {
+                profileUseCase.addEngineerLanguage(engineer, language, level).collect{
+                    engineerLanguage.postValue(Resource.success(data = it))
+                }
+            }catch (t: Throwable){
+                engineerLanguage.postValue(Resource.error(data = null, message = AppUtils().handleError(t)))
             }
         }
     }

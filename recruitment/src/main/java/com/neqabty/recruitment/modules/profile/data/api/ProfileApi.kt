@@ -3,6 +3,9 @@ package com.neqabty.recruitment.modules.profile.data.api
 import com.neqabty.recruitment.modules.profile.data.model.*
 import com.neqabty.recruitment.modules.profile.data.model.addarea.AddAreaModel
 import com.neqabty.recruitment.modules.profile.data.model.addcourse.AddCourseModel
+import com.neqabty.recruitment.modules.profile.data.model.addengineerexperience.EngineerExperienceModel
+import com.neqabty.recruitment.modules.profile.data.model.addengineerlanguage.AddEngineerLanguageModel
+import com.neqabty.recruitment.modules.profile.data.model.addengineerskills.AddEngineerSkillsModel
 import com.neqabty.recruitment.modules.profile.data.model.addlanguage.AddLanguageModel
 import com.neqabty.recruitment.modules.profile.data.model.addskills.AddSkillsModel
 import com.neqabty.recruitment.modules.profile.data.model.adduniversity.AddUniversityModel
@@ -95,4 +98,13 @@ interface ProfileApi {
 
     @POST("templatefields/languages")
     suspend fun addLanguage(@Body languageBody: LanguageBody): AddLanguageModel
+
+    @POST("engineer/engineer_languages")
+    suspend fun addEngineerLanguage(@Body engineerLanguageBody: EngineerLanguageBody): AddEngineerLanguageModel
+
+    @POST("engineer/engineer_skills")
+    suspend fun addEngineerSkills(@Body engineerSkillsBody: EngineerSkillsBody): AddEngineerSkillsModel
+
+    @POST("engineer/experience")
+    suspend fun addEngineerExperience(@Body engineerExperienceBody: EngineerExperienceBody): EngineerExperienceModel
 }

@@ -107,4 +107,16 @@ class ProfileDS @Inject constructor(private val profileApi: ProfileApi) {
         return profileApi.addLanguage(languageBody).language.name
     }
 
+    suspend fun addEngineerLanguage(engineerLanguageBody: EngineerLanguageBody): String {
+        return profileApi.addEngineerLanguage(engineerLanguageBody).engineerlanguage.engineer
+    }
+
+    suspend fun addEngineerSkills(engineerSkillsBody: EngineerSkillsBody): String {
+        return profileApi.addEngineerSkills(engineerSkillsBody).engineerskill.engineer
+    }
+
+    suspend fun addEngineerExperience(engineerExperienceBody: EngineerExperienceBody): String {
+        return profileApi.addEngineerExperience(engineerExperienceBody).experiences[0].engineer
+    }
+
 }

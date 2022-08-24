@@ -1,6 +1,8 @@
 package com.neqabty.recruitment.modules.profile.domain.usecase
 
 
+
+import com.neqabty.recruitment.modules.profile.data.model.EngineerExperienceBody
 import com.neqabty.recruitment.modules.profile.domain.entity.area.AreaEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.company.CompanyEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.country.CountryEntity
@@ -103,6 +105,18 @@ class ProfileUseCase @Inject constructor(private val profileRepository: ProfileR
 
     fun addLanguage(name: String): Flow<String> {
         return profileRepository.addLanguage(name)
+    }
+
+    fun addEngineerLanguage(engineer: Int, language: Int, level: String): Flow<String> {
+        return profileRepository.addEngineerLanguage(engineer, language, level)
+    }
+
+    fun addEngineerSkills(engineer: Int, skill: Int): Flow<String> {
+        return profileRepository.addEngineerSkills(engineer, skill)
+    }
+
+    fun addEngineerExperience(engineerExperienceBody: EngineerExperienceBody): Flow<String> {
+        return profileRepository.addEngineerExperience(engineerExperienceBody)
     }
 
 }

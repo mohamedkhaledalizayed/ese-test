@@ -1,5 +1,8 @@
 package com.neqabty.recruitment.modules.profile.domain.repository
 
+import com.neqabty.recruitment.modules.profile.data.model.EngineerExperienceBody
+import com.neqabty.recruitment.modules.profile.data.model.EngineerLanguageBody
+import com.neqabty.recruitment.modules.profile.data.model.EngineerSkillsBody
 import com.neqabty.recruitment.modules.profile.domain.entity.area.AreaEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.company.CompanyEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.country.CountryEntity
@@ -38,4 +41,7 @@ interface ProfileRepository {
     fun addUniversity(name: String): Flow<String>
     fun addArea(name: String): Flow<String>
     fun addLanguage(name: String): Flow<String>
+    fun addEngineerLanguage(engineer: Int, language: Int, level: String): Flow<String>
+    fun addEngineerSkills(engineer: Int, skill: Int): Flow<String>
+    fun addEngineerExperience(engineerExperienceBody: EngineerExperienceBody): Flow<String>
 }

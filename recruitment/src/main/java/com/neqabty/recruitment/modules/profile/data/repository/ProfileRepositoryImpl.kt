@@ -160,6 +160,24 @@ class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS
             emit(profileDS.addLanguage(LanguageBody(Language(name))))
         }
     }
+
+    override fun addEngineerLanguage(engineer: Int, language: Int, level: String): Flow<String> {
+        return flow {
+            emit(profileDS.addEngineerLanguage(EngineerLanguageBody(EngineerLanguage(engineer, language, level))))
+        }
+    }
+
+    override fun addEngineerSkills(engineer: Int, skill: Int): Flow<String> {
+        return flow {
+            emit(profileDS.addEngineerSkills(EngineerSkillsBody(Engineerskill(engineer, skill))))
+        }
+    }
+
+    override fun addEngineerExperience(engineerExperienceBody: EngineerExperienceBody): Flow<String> {
+        return flow {
+            emit(profileDS.addEngineerExperience(engineerExperienceBody))
+        }
+    }
 }
 
 private fun CountryModel.toCountryEntity(): CountryEntity{
