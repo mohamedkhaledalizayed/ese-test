@@ -43,6 +43,13 @@
             android:icon="@drawable/ic_bullhorn"/>
     </group>
 
+    <group android:id="@+id/suggestions_">
+        <item
+            android:id="@+id/suggestions"
+            android:title="@string/suggestions"
+            android:icon="@drawable/ic_bullhorn"/>
+    </group>
+
     <group android:id="@+id/menu_logout">
         <item
             android:id="@+id/logout"

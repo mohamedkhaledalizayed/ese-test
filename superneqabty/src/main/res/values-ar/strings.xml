@@ -7,6 +7,7 @@
     <string name="about_title">عن النقابة</string>
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">تواصل معنا</string>
+    <string name="suggestions">الشكاوي والمقترحات</string>
     <string name="aboutapp_title">عن التطبيق</string>
     <string name="help_title">مساعدة</string>
     <string name="notifications_settings">الإشعارات</string>
@@ -145,6 +146,8 @@
     <string name="close_app">هل تريد الخروج!</string>
     <string name="share">مشاركة</string>
     <string name="print">طباعة</string>
+    <string name="your_message">رسالتك</string>
+    <string name="send_suggestion">إرسال</string>
 
 
 </resources>

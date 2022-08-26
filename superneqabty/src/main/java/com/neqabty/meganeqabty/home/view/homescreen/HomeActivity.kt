@@ -16,15 +16,20 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.aboutapp.AboutAppActivity
+import com.neqabty.meganeqabty.complains.view.ComplainsActivity
 import com.neqabty.meganeqabty.core.utils.Constants
 import com.neqabty.meganeqabty.databinding.ActivityMainBinding
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
+import com.neqabty.meganeqabty.payment.domain.entity.services.ServicesListEntity
 import com.neqabty.meganeqabty.payment.view.selectservice.PaymentsActivity
+import com.neqabty.meganeqabty.payment.view.selectservice.ServicesAdapter
 import com.neqabty.meganeqabty.profile.view.profile.ProfileActivity
 import com.neqabty.meganeqabty.settings.SettingsActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
@@ -43,7 +48,7 @@ import java.util.*
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityMainBinding>(),
-    NavigationView.OnNavigationItemSelectedListener {
+    NavigationView.OnNavigationItemSelectedListener, IOnSendClickListener {
     private lateinit var loading: AlertDialog
     private lateinit var drawer: DrawerLayout
     private lateinit var toolbar: Toolbar
@@ -229,6 +234,21 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.contentActivity.travelsImage.setOnClickListener {
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
         }
+
+        homeViewModel.complains.observe(this){
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                    }
+                    Status.SUCCESS -> {
+                        Toast.makeText(this, "تم إرسال طلبك بنجاح.", Toast.LENGTH_LONG).show()
+                    }
+                    Status.ERROR -> {
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
     }
 
     @SuppressLint("CutPasteId")
@@ -299,6 +319,18 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 startActivity(intent)
                 finish()
             }
+            R.id.suggestions -> {
+                val fm: FragmentManager = supportFragmentManager
+                if (sharedPreferences.isAuthenticated){
+                    val dialog = SuggestionDialog.newInstance(sharedPreferences.mobile, sharedPreferences.email)
+                    dialog.show(fm, "")
+                    dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
+                }else{
+                    val dialog = SuggestionDialog()
+                    dialog.show(fm, "")
+                    dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
+                }
+            }
 
             R.id.contactus_fragment -> {
                 try {
@@ -320,6 +352,18 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         return true
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.complain_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.suggestions){
+            val intent = Intent(this, ComplainsActivity::class.java)
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun logout(message: String) {
 
@@ -397,5 +441,9 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         }
         alertDialog.show()
 
+    }
+
+    override fun onClick(mobile: String, email: String, message: String) {
+        homeViewModel.addComplain(mobile, email, message)
     }
 }

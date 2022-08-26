@@ -76,18 +76,6 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
         transaction.commit()
     }
 
-    private fun checkForSmsReceivePermissions() {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                "android.permission.RECEIVE_SMS"
-            ) === PackageManager.PERMISSION_GRANTED
-        ) {
-            verifyPhoneViewModel.sendOTP(SendOTPBody(phoneNumber = phoneNumber))
-        } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECEIVE_SMS), 43391)
-        }
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -101,7 +89,7 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
 
     override fun onSendClicked(phone: String) {
         phoneNumber = phone
-        checkForSmsReceivePermissions()
+        verifyPhoneViewModel.sendOTP(SendOTPBody(phoneNumber = phoneNumber))
     }
 
     override fun onCheckClicked(otp: String) {

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.core.utils.AppUtils
 import com.neqabty.core.utils.Resource
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
-import com.neqabty.meganeqabty.home.domain.interactors.GetAllAdsUseCase
+import com.neqabty.meganeqabty.home.domain.interactors.HomeUseCase
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.news.modules.home.domain.interactors.GetNewsUseCase
 import com.neqabty.news.modules.home.domain.interactors.GetSyndicateNewsUseCase
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase,
-    private val getAllAdsUseCase: GetAllAdsUseCase,
+    private val homeUseCase: HomeUseCase,
     private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase
 ) : ViewModel() {
 
@@ -55,11 +55,25 @@ class HomeViewModel @Inject constructor(
     fun getAds() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                getAllAdsUseCase.build().collect {
+                homeUseCase.build().collect {
                     ads.postValue(it)
                 }
             } catch (e: Throwable) {
                 Log.e("", e.toString())
+            }
+        }
+    }
+
+    val complains = MutableLiveData<Resource<String>>()
+    fun addComplain(mobile: String, email: String, message: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            complains.postValue(Resource.loading(data = null))
+            try {
+                homeUseCase.addComplain(mobile, email, message).collect {
+                    complains.postValue(Resource.success(it))
+                }
+            } catch (e: Throwable) {
+                complains.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
         }
     }

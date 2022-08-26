@@ -32,31 +32,31 @@ class CheckOTPFragment : Fragment() {
         }
     }
 
-    private val updateUIReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent?) {
-            if (intent != null) {
-                val code = intent.getStringExtra("code")!!.split(":")[1].trim().toList()
-                binding.code5.setText(code[0].toString())
-                binding.code4.setText(code[1].toString())
-                binding.code3.setText(code[2].toString())
-                binding.code2.setText(code[3].toString())
-                binding.code1.setText(code[4].toString())
-            }
-        }
+//    private val updateUIReceiver = object : BroadcastReceiver() {
+//        override fun onReceive(context: Context, intent: Intent?) {
+//            if (intent != null) {
+//                val code = intent.getStringExtra("code")!!.split(":")[1].trim().toList()
+//                binding.code5.setText(code[0].toString())
+//                binding.code4.setText(code[1].toString())
+//                binding.code3.setText(code[2].toString())
+//                binding.code2.setText(code[3].toString())
+//                binding.code1.setText(code[4].toString())
+//            }
+//        }
+//
+//    }
 
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        val filter = IntentFilter()
+//        filter.addAction("service.to.activity")
+//        requireContext().registerReceiver(updateUIReceiver, filter)
+//    }
 
-    override fun onResume() {
-        super.onResume()
-        val filter = IntentFilter()
-        filter.addAction("service.to.activity")
-        requireContext().registerReceiver(updateUIReceiver, filter)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        requireContext().unregisterReceiver(updateUIReceiver)
-    }
+//    override fun onStop() {
+//        super.onStop()
+//        requireContext().unregisterReceiver(updateUIReceiver)
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

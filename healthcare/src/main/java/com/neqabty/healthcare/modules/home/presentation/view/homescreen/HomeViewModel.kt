@@ -9,7 +9,7 @@ import com.neqabty.core.utils.Resource
 import com.neqabty.healthcare.modules.home.domain.entity.about.AboutEntity
 import com.neqabty.healthcare.modules.home.domain.interactors.GetHomeUseCase
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
-import com.neqabty.meganeqabty.home.domain.interactors.GetAllAdsUseCase
+import com.neqabty.meganeqabty.home.domain.interactors.HomeUseCase
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.news.modules.home.domain.interactors.GetNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val getHomeUseCase: GetHomeUseCase,
                                         private val getNewsUseCase: GetNewsUseCase,
-                                        private val getAllAdsUseCase: GetAllAdsUseCase) :
+                                        private val getAllAdsUseCase: HomeUseCase) :
     ViewModel() {
     val aboutList = MutableLiveData<Resource<List<AboutEntity>>>()
     fun getAboutList() {

@@ -48,7 +48,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             sharedPreferences.isSyndicateMember = resource.data!!.user.account.entity.type == "syndicate"
                             sharedPreferences.isAuthenticated = true
                             sharedPreferences.token = resource.data!!.token
+                            sharedPreferences.email = resource.data!!.user.account.email
                             sharedPreferences.code = resource.data!!.user.account.entity.code
+                            sharedPreferences.mainSyndicate = resource.data!!.user.account.entity.id
                             sharedPreferences.image = resource.data!!.user.account.entity.image
                             sharedPreferences.syndicateName = resource.data!!.user.account.entity.name
                             sharedPreferences.mobile = binding.etUsername.text.toString()

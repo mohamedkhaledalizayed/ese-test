@@ -2,9 +2,10 @@ package com.neqabty.meganeqabty.home.di
 
 
 
-import com.neqabty.meganeqabty.home.data.api.AdsApi
-import com.neqabty.meganeqabty.home.data.repository.AdsRepositoryImpl
-import com.neqabty.meganeqabty.home.domain.repository.AdsRepository
+
+import com.neqabty.meganeqabty.home.data.api.HomeApi
+import com.neqabty.meganeqabty.home.data.repository.HomeRepositoryImpl
+import com.neqabty.meganeqabty.home.domain.repository.HomeRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -18,12 +19,12 @@ import javax.inject.Named
 abstract class AdsModule {
     companion object {
         @Provides
-        fun providesAdsApiService(
+        fun providesHomeApiService(
             @Named("ads")
             retrofit: Retrofit
-        ) = retrofit.create(AdsApi::class.java)
+        ) = retrofit.create(HomeApi::class.java)
     }
 
     @Binds
-    internal abstract fun bindsAdsRepository(adsRepositoryImpl: AdsRepositoryImpl): AdsRepository
+    internal abstract fun bindsHomeRepository(homeRepositoryImpl: HomeRepositoryImpl): HomeRepository
 }

@@ -21,6 +21,7 @@ class PreferencesHelper @Inject constructor(
         private const val NAME = "data.source.prefs.NAME"
         private const val TOKEN = "data.source.prefs.TOKEN"
         private const val MOBILE = "data.source.prefs.MOBILE"
+        private const val EMAIL = "data.source.prefs.EMAIL"
         private const val CODE = "data.source.prefs.CODE"
         private const val USER_IMAGE = "data.source.prefs.USER_IMAGE"
         private const val SYNDICATE_IMAGE = "data.source.prefs.IMAGE"
@@ -49,6 +50,10 @@ class PreferencesHelper @Inject constructor(
     var mobile
         get() = preferences.getString(MOBILE, "")!!
         set(value) = preferences.edit().putString(MOBILE, value).apply()
+
+    var email
+        get() = preferences.getString(EMAIL, "")!!
+        set(value) = preferences.edit().putString(EMAIL, value).apply()
 
     var nationalId
         get() = preferences.getString(NATIONAL_ID, "")!!

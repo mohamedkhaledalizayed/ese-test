@@ -1,4 +1,4 @@
-package com.neqabty.meganeqabty.home.data.model
+package com.neqabty.meganeqabty.home.data.model.ads
 
 
 import androidx.annotation.Keep

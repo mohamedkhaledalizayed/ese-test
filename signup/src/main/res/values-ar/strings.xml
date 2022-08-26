@@ -21,6 +21,7 @@
     <string name="enter_phone">من فضلك ادخل رقم الموبايل</string>
     <string name="enter_correct_phone">من فضلك ادخل رقم صحيح</string>
     <string name="enter_email">من فضلك ادخل البريد الالكترونى</string>
+    <string name="enter_message">من فضلك ادخل رسالتك</string>
     <string name="enter_correct_email">من فضلك ادخل البريد الالكترونى بشكل صحيح.</string>
     <string name="enter_national_id">من فضلك ادخل الرقم القومى بشكل صحيح.</string>
     <string name="enter_membership_id">من فضلك ادخل رقم العضوية.</string>

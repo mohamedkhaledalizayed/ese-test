@@ -7,6 +7,7 @@
     <string name="about_title">About Syndicate</string>
     <string name="settings_title">Settings</string>
     <string name="contactus_title">Contact Us</string>
+    <string name="suggestions">Suggestions</string>
     <string name="aboutapp_title">About App</string>
     <string name="help_title">Help</string>
     <string name="notifications_settings">Notifications</string>
@@ -144,6 +145,9 @@ Operation No.</string>
     <string name="close_app">Do you want to Exit!</string>
     <string name="share">Share</string>
     <string name="print">Print</string>
+    <string name="your_message">Your Message</string>
+    <string name="send_suggestion">Send</string>
+    <string name="enter_message">Please enter your message</string>
 
 
 </resources>
