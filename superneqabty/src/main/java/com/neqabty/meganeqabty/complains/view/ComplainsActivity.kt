@@ -16,6 +16,7 @@ class ComplainsActivity : BaseActivity<ActivityComplainsBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        complainsViewModel.getAllComplains()
         complainsViewModel.complainStatus.observe(this){
             resource ->
 

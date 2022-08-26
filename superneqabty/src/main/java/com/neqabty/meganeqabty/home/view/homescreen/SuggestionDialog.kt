@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.neqabty.core.utils.isMobileValid
+import com.neqabty.core.utils.isValidEmail
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.databinding.SuggestionDialogBinding
 
@@ -45,26 +47,40 @@ class SuggestionDialog : DialogFragment() {
         }
         binding.addSuggestion.setOnClickListener {
 
-            when {
-                binding.mobile.text.toString().isEmpty() -> {
-                    Toast.makeText(context, getString(R.string.enter_phone), Toast.LENGTH_LONG).show()
-                }
-                binding.email.text.toString().isEmpty() -> {
-                    Toast.makeText(context, getString(R.string.enter_email), Toast.LENGTH_LONG).show()
-                }
-                binding.comment.text.toString().isEmpty() -> {
-                    Toast.makeText(context, getString(R.string.enter_message), Toast.LENGTH_LONG).show()
-                }
-                else -> {
-                    val activity = activity as HomeActivity
+            if(binding.mobile.text.toString().isEmpty()) {
+                Toast.makeText(context, getString(R.string.enter_phone), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            if(!binding.mobile.text.toString().isMobileValid()) {
+                Toast.makeText(requireContext(), getString(R.string.enter_correct_phone), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            if(binding.email.text.toString().isEmpty()) {
+                Toast.makeText(context, getString(R.string.enter_email), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            if (!binding.email.text.toString().isValidEmail()){
+                Toast.makeText(context, getString(R.string.enter_correct_email), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            if(binding.comment.text.toString().isEmpty()) {
+                Toast.makeText(context, getString(R.string.enter_message), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            val activity = activity as HomeActivity
                     activity.onClick(
                         mobile = binding.mobile.text.toString(),
                         email = binding.email.text.toString(),
                         message = binding.comment.text.toString()
                     )
                     dismiss()
-                }
-            }
+
+
         }
     }
 
