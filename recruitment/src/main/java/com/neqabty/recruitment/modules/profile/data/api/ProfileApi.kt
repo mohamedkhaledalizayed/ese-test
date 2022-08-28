@@ -3,6 +3,7 @@ package com.neqabty.recruitment.modules.profile.data.api
 import com.neqabty.recruitment.modules.profile.data.model.*
 import com.neqabty.recruitment.modules.profile.data.model.addarea.AddAreaModel
 import com.neqabty.recruitment.modules.profile.data.model.addcourse.AddCourseModel
+import com.neqabty.recruitment.modules.profile.data.model.addengineercourse.AddEngineerCourseModel
 import com.neqabty.recruitment.modules.profile.data.model.addengineerexperience.EngineerExperienceModel
 import com.neqabty.recruitment.modules.profile.data.model.addengineerlanguage.AddEngineerLanguageModel
 import com.neqabty.recruitment.modules.profile.data.model.addengineerskills.AddEngineerSkillsModel
@@ -14,7 +15,12 @@ import com.neqabty.recruitment.modules.profile.data.model.companies.CompaniesMod
 import com.neqabty.recruitment.modules.profile.data.model.country.CountryModelList
 import com.neqabty.recruitment.modules.profile.data.model.cources.CoursesModelList
 import com.neqabty.recruitment.modules.profile.data.model.department.DepartmentModelList
+import com.neqabty.recruitment.modules.profile.data.model.engineercourses.EngineerCoursesModel
 import com.neqabty.recruitment.modules.profile.data.model.engineerdata.EngineerDataModel
+import com.neqabty.recruitment.modules.profile.data.model.engineerdata.EngineerModel
+import com.neqabty.recruitment.modules.profile.data.model.engineerexperiences.EngineerExperiencesModel
+import com.neqabty.recruitment.modules.profile.data.model.engineerlanguages.EngineerLanguagesModel
+import com.neqabty.recruitment.modules.profile.data.model.engineerskills.EngineerSkillsModel
 import com.neqabty.recruitment.modules.profile.data.model.governement.GovernmentListModel
 import com.neqabty.recruitment.modules.profile.data.model.grades.GradesModelList
 import com.neqabty.recruitment.modules.profile.data.model.industries.IndustriesModelList
@@ -24,11 +30,64 @@ import com.neqabty.recruitment.modules.profile.data.model.militarystatus.Militae
 import com.neqabty.recruitment.modules.profile.data.model.nationalities.NationalitiesModelList
 import com.neqabty.recruitment.modules.profile.data.model.skills.SkillsModelList
 import com.neqabty.recruitment.modules.profile.data.model.universities.UniversityLisModel
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ProfileApi {
+
+    //Engineer
+
+    @GET("engineer/engineers")
+    suspend fun getEngineerData(): EngineerDataModel
+
+    @PATCH("engineer/engineers/{id}")
+    suspend fun updateEngineerData(@Path("id") id: String, @Body engineerBody: EngineerBody): EngineerModel
+
+    //Engineer Courses
+
+    @GET("engineer/engineer_courses")
+    suspend fun getEngineerCourses(@Query("filter{engineer}") engineer: Int): EngineerCoursesModel
+
+    @POST("engineer/engineer_courses")
+    suspend fun addEngineerCourse(@Body engineerCourseBody: EngineerCourseBody): AddEngineerCourseModel
+
+    @DELETE("engineer/engineer_courses/{id}")
+    suspend fun deleteEngineerCourse(@Path("id") id: String): String
+
+    //Engineer Language
+
+    @GET("engineer/engineer_languages")
+    suspend fun getEngineerLanguages(@Query("filter{engineer}") id: String): EngineerLanguagesModel
+
+    @POST("engineer/engineer_languages")
+    suspend fun addEngineerLanguage(@Body engineerLanguageBody: EngineerLanguageBody): AddEngineerLanguageModel
+
+    @DELETE("engineer/engineer_languages/{id}")
+    suspend fun deleteEngineerLanguage(@Path("id") id: String): String
+
+    //Engineer Experiences
+
+    @GET("engineer/experience")
+    suspend fun getEngineerExperience(@Query("filter{engineer}") id: String): EngineerExperiencesModel
+
+    @POST("engineer/experience")
+    suspend fun addEngineerExperience(@Body engineerExperienceBody: EngineerExperienceBody): EngineerExperienceModel
+
+    @DELETE("engineer/experience/{id}")
+    suspend fun deleteEngineerExperience(@Path("id") id: String): String
+
+    //Engineer Skills
+
+    @POST("engineer/engineer_skills")
+    suspend fun getEngineerSkills(@Query("filter{engineer}") id: String): EngineerSkillsModel
+
+    @POST("engineer/engineer_skills")
+    suspend fun addEngineerSkills(@Body engineerSkillsBody: EngineerSkillsBody): AddEngineerSkillsModel
+
+    @POST("engineer/engineer_skills/{id}")
+    suspend fun deleteEngineerSkills(@Path("id") id: String): String
+
+
+
 
     @GET("templatefields/cities")
     suspend fun getCountries(): CountryModelList
@@ -72,8 +131,6 @@ interface ProfileApi {
     @GET("company/companies")
     suspend fun getCompanies(): CompaniesModelList
 
-    @GET("engineer/engineers")
-    suspend fun getEngineerData(): EngineerDataModel
 
 
 
@@ -99,12 +156,4 @@ interface ProfileApi {
     @POST("templatefields/languages")
     suspend fun addLanguage(@Body languageBody: LanguageBody): AddLanguageModel
 
-    @POST("engineer/engineer_languages")
-    suspend fun addEngineerLanguage(@Body engineerLanguageBody: EngineerLanguageBody): AddEngineerLanguageModel
-
-    @POST("engineer/engineer_skills")
-    suspend fun addEngineerSkills(@Body engineerSkillsBody: EngineerSkillsBody): AddEngineerSkillsModel
-
-    @POST("engineer/experience")
-    suspend fun addEngineerExperience(@Body engineerExperienceBody: EngineerExperienceBody): EngineerExperienceModel
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.annotations.SerializedName
 import com.neqabty.recruitment.core.utils.AppUtils
 import com.neqabty.recruitment.core.utils.Resource
+import com.neqabty.recruitment.modules.profile.data.model.EngineerBody
 import com.neqabty.recruitment.modules.profile.domain.entity.area.AreaEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.company.CompanyEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.country.CountryEntity
@@ -245,6 +246,20 @@ class ProfileViewModel @Inject constructor(private val profileUseCase: ProfileUs
 
             try {
                 profileUseCase.getEngineerData().collect(){
+                    engineer.postValue(Resource.success(data = it))
+                }
+            }catch (t: Throwable){
+                engineer.postValue(Resource.error(data = null, message = AppUtils().handleError(t)))
+            }
+        }
+    }
+
+    fun updateEngineerData(id: String, engineerBody: EngineerBody){
+        viewModelScope.launch(Dispatchers.IO){
+            engineer.postValue(Resource.loading(data = null))
+
+            try {
+                profileUseCase.updateEngineerData(id, engineerBody).collect(){
                     engineer.postValue(Resource.success(data = it))
                 }
             }catch (t: Throwable){

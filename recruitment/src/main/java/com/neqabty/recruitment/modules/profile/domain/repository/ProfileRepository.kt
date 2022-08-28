@@ -1,5 +1,6 @@
 package com.neqabty.recruitment.modules.profile.domain.repository
 
+import com.neqabty.recruitment.modules.profile.data.model.EngineerBody
 import com.neqabty.recruitment.modules.profile.data.model.EngineerExperienceBody
 import com.neqabty.recruitment.modules.profile.data.model.EngineerLanguageBody
 import com.neqabty.recruitment.modules.profile.data.model.EngineerSkillsBody
@@ -36,6 +37,7 @@ interface ProfileRepository {
     fun getMaritalStatus(): Flow<List<MaritalStatusEntity>>
     fun getIndustries(): Flow<List<IndustryEntity>>
     fun getEngineerData(): Flow<EngineerEntity>
+    fun updateEngineerData(id: String, engineerBody: EngineerBody): Flow<EngineerEntity>
     fun addCourse(name: String): Flow<String>
     fun addSkills(name: String, type: String): Flow<String>
     fun addUniversity(name: String): Flow<String>

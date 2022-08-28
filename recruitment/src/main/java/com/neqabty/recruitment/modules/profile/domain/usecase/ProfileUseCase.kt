@@ -2,6 +2,7 @@ package com.neqabty.recruitment.modules.profile.domain.usecase
 
 
 
+import com.neqabty.recruitment.modules.profile.data.model.EngineerBody
 import com.neqabty.recruitment.modules.profile.data.model.EngineerExperienceBody
 import com.neqabty.recruitment.modules.profile.domain.entity.area.AreaEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.company.CompanyEntity
@@ -82,6 +83,10 @@ class ProfileUseCase @Inject constructor(private val profileRepository: ProfileR
 
     fun getEngineerData(): Flow<EngineerEntity> {
         return profileRepository.getEngineerData()
+    }
+
+    fun updateEngineerData(id: String, engineerBody: EngineerBody): Flow<EngineerEntity> {
+        return profileRepository.updateEngineerData(id, engineerBody)
     }
 
 

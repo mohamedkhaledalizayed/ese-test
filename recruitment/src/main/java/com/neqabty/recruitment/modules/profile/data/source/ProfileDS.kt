@@ -82,6 +82,10 @@ class ProfileDS @Inject constructor(private val profileApi: ProfileApi) {
         return profileApi.getEngineerData().engineers[0]
     }
 
+    suspend fun updateEngineerData(id: String, engineerBody: EngineerBody): EngineerModel {
+        return profileApi.updateEngineerData(id, engineerBody)
+    }
+
 
 
 

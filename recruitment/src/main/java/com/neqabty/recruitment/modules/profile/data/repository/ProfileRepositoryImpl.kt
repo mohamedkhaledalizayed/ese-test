@@ -131,6 +131,12 @@ class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS
         }
     }
 
+    override fun updateEngineerData(id: String, engineerBody: EngineerBody): Flow<EngineerEntity> {
+        return flow {
+            profileDS.updateEngineerData(id, engineerBody)
+        }
+    }
+
     override fun addCourse(name: String): Flow<String> {
         return flow {
             emit(profileDS.addCourse(CourseBody(Course(name))))
