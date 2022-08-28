@@ -8,6 +8,7 @@
     <string name="settings_title">Settings</string>
     <string name="contactus_title">Contact Us</string>
     <string name="suggestions">Suggestions</string>
+    <string name="complains">Complains</string>
     <string name="aboutapp_title">About App</string>
     <string name="help_title">Help</string>
     <string name="notifications_settings">Notifications</string>
@@ -44,7 +45,7 @@
     <string name="payment_canceled">Payment has been cancelled</string>
     <string name="payment_successful">Payment completed successfully\n
 Operation No.</string>
-
+    <string name="syndicates">Syndicates</string>
     <string name="alert_title">Alert</string>
     <string name="ok_btn">Ok</string>
     <string name="cancel_btn">Cancel</string>

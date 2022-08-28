@@ -14,12 +14,24 @@ class HomeDS @Inject constructor(private val homeApi: HomeApi, private val prefe
     }
 
     suspend fun addComplain(mobile: String, email: String, message: String): String {
-        return homeApi.addComplain(ComplainBody(
-            message = message,
-            entity = preferencesHelper.mainSyndicate,
-            mobile = mobile,
-            email =  email)
-        ).message
+        if (preferencesHelper.isAuthenticated){
+            return homeApi.addComplainAuth(
+                token = "Token ${preferencesHelper.token}",
+                ComplainBody(
+                    message = message,
+                    entity = preferencesHelper.mainSyndicate,
+                    mobile = mobile,
+                    email =  email)
+            ).message
+        }else{
+            return homeApi.addComplain(
+                ComplainBody(
+                    message = message,
+                    entity = preferencesHelper.mainSyndicate,
+                    mobile = mobile,
+                    email =  email)
+            ).message
+        }
     }
 
 }

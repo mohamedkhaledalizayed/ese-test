@@ -268,6 +268,9 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             val logout: MenuItem = menu.findItem(R.id.logout)
             logout.title = resources.getString(R.string.logout_title)
 
+//            val syndicate: MenuItem = menu.findItem(R.id.syndicate)
+//            syndicate.isVisible = false
+
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
                 View.VISIBLE
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).text =
@@ -344,8 +347,24 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 }
             }
             R.id.logout -> {
-                logout(getString(R.string.log_out))
+                if (sharedPreferences.isAuthenticated) {
+                    logout(getString(R.string.log_out))
+                }else{
+                    sharedPreferences.mobile = ""
+                    sharedPreferences.isPhoneVerified = false
+                    sharedPreferences.isAuthenticated = false
+                    sharedPreferences.isSyndicateMember = false
+                    sharedPreferences.code = ""
+                    sharedPreferences.token = ""
+                    sharedPreferences.mainSyndicate = 0
+                    sharedPreferences.image = ""
+                    sharedPreferences.syndicateName = ""
+                    finish()
+                }
             }
+//            R.id.syndicate -> {
+//                    finish()
+//            }
         }
 
         drawer.closeDrawer(GravityCompat.START)
@@ -359,8 +378,12 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.suggestions){
-            val intent = Intent(this, ComplainsActivity::class.java)
-            startActivity(intent)
+            if (sharedPreferences.isAuthenticated) {
+                val intent = Intent(this, ComplainsActivity::class.java)
+                startActivity(intent)
+            }else{
+                askForLogin(resources.getString(R.string.not_found))
+            }
         }
         return super.onOptionsItemSelected(item)
     }

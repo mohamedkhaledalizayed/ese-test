@@ -218,7 +218,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         if (sharedPreferences.isAuthenticated){
             val menu: Menu = binding.navView.menu
 
-            val logout: MenuItem = menu.findItem(com.neqabty.meganeqabty.R.id.logout)
+            val logout: MenuItem = menu.findItem(R.id.logout)
             logout.title = resources.getString(com.neqabty.meganeqabty.R.string.logout_title)
         }
     }
@@ -273,7 +273,23 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
                 }
             }
             R.id.logout -> {
-                logout(getString(R.string.log_out))
+                if (sharedPreferences.isAuthenticated) {
+                    logout(getString(R.string.log_out))
+                }else{
+                    sharedPreferences.mobile = ""
+                    sharedPreferences.isPhoneVerified = false
+                    sharedPreferences.isAuthenticated = false
+                    sharedPreferences.isSyndicateMember = false
+                    sharedPreferences.code = ""
+                    sharedPreferences.token = ""
+                    sharedPreferences.mainSyndicate = 0
+                    sharedPreferences.image = ""
+                    sharedPreferences.syndicateName = ""
+                    drawer.close()
+                    val intent = Intent(this@HomeActivity, CheckAccountActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
             }
         }
 

@@ -8,6 +8,7 @@
     <string name="settings_title">الإعدادات</string>
     <string name="contactus_title">تواصل معنا</string>
     <string name="suggestions">الشكاوي والمقترحات</string>
+    <string name="complains">الشكاوي</string>
     <string name="aboutapp_title">عن التطبيق</string>
     <string name="help_title">مساعدة</string>
     <string name="notifications_settings">الإشعارات</string>
@@ -44,7 +45,7 @@
     <string name="payment_canceled">لقد تم الغاء عملية الدفع</string>
     <string name="payment_successful">تمت عملية الدفع بنجاح \n
 رقم العملية </string>
-
+    <string name="syndicates">النقابات</string>
     <string name="alert_title">تنبيه</string>
     <string name="ok_btn">تأكيد</string>
     <string name="cancel_btn">إلغاء</string>
