@@ -23,16 +23,55 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsAdapter
 import com.neqabty.presentation.util.autoCleared
+import com.payment.paymentsdk.PaymentSdkActivity.Companion.startCardPayment
+import com.payment.paymentsdk.PaymentSdkConfigBuilder
+import com.payment.paymentsdk.integrationmodels.*
+import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
-import team.opay.business.cashier.sdk.api.*
-import team.opay.business.cashier.sdk.pay.PaymentTask
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class InquiryDetailsFragment : BaseFragment() {
+class InquiryDetailsFragment : BaseFragment() , CallbackPaymentInterface {
+
+    val profileId = "PROFILE_ID"
+    val serverKey = "SERVER_KEY"
+    val clientKey = "CLIENT_KEY"
+    val locale = PaymentSdkLanguageCode.EN
+    val screenTitle = "Test SDK"
+    val cartId = "123456"
+    val cartDesc = "cart description"
+    val currency = "EGP"
+    val amount = 20.0
+
+    val tokeniseType = PaymentSdkTokenise.NONE // tokenise is off
+
+    val transType = PaymentSdkTransactionType.SALE
+
+
+    val tokenFormat =  PaymentSdkTokenFormat.Hex32Format()
+
+    val billingData = PaymentSdkBillingDetails(
+        "City",
+        "2 digit iso Country code",
+        "email1@domain.com",
+        "name ",
+        "phone", "state",
+        "address street", "zip"
+    )
+
+    val shippingData = PaymentSdkShippingDetails(
+        "City",
+        "2 digit iso Country code",
+        "email1@domain.com",
+        "name ",
+        "phone", "state",
+        "address street", "zip"
+    )
+
+    private lateinit var configData: PaymentSdkConfigurationDetails
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
@@ -169,19 +208,21 @@ class InquiryDetailsFragment : BaseFragment() {
                 return@setOnClickListener
             llSuperProgressbar.visibility = View.VISIBLE
 //            createPayment()
-            paymentInquiry()
+//            paymentInquiry()
+            startCardPayment(activity!!, configData, callback=this)
+
         }
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PaymentTask.REQUEST_PAYMENT){
-            if (resultCode == PaymentTask.RESULT_PAYMENT){
-                val response = data?.getSerializableExtra(PaymentTask.RESPONSE_DATA) as WebJsResponse?
-                handlePaymentResponse(response)
-            }
-        }
+//        if (requestCode == PaymentTask.REQUEST_PAYMENT){
+//            if (resultCode == PaymentTask.RESULT_PAYMENT){
+//                val response = data?.getSerializableExtra(PaymentTask.RESPONSE_DATA) as WebJsResponse?
+//                handlePaymentResponse(response)
+//            }
+//        }
         if (requestCode == CowpayConstantKeys.PaymentMethodsActivityRequestCode && data != null && resultCode == Activity.RESULT_OK) {
             var responseCode = data.extras!!.getInt(CowpayConstantKeys.ResponseCode, 0)
 
@@ -217,6 +258,22 @@ class InquiryDetailsFragment : BaseFragment() {
                     oPayPayment(Constants.PaymentOption.MobileWallet)
                 else
                     cowPayPayment(false)
+
+
+                configData = PaymentSdkConfigBuilder(profileId, serverKey, clientKey, amount ?: 0.0, currency)
+                    .setCartDescription(cartDesc)
+                    .setLanguageCode(locale)
+                    .setBillingData(billingData)
+                    .setMerchantCountryCode("AE") // ISO alpha 2
+                    .setShippingData(shippingData)
+                    .setCartId(medicalRenewalPayment.paymentItem?.paymentRequestNumber!!)
+                    .setTransactionType(transType)
+                    .showBillingInfo(false)
+                    .showShippingInfo(true)
+                    .forceShippingInfo(true)
+                    .setScreenTitle(screenTitle)
+                    .build()
+
             }
         }
     }
@@ -230,36 +287,36 @@ class InquiryDetailsFragment : BaseFragment() {
             Constants.PaymentOption.MobileWallet -> "MWALLET"
             else -> ""
         }
-        PaymentTask.sandBox = Constants.OPAY_MODE
-        val userInfo = UserInfo(medicalRenewalPayment.paymentItem?.amount.toString(), binding.number, sharedPref.mobile, medicalRenewalPayment.paymentItem?.engName)
-        val payInput = PayInput(
-            publickey = Constants.OPAY_PUBLIC_KEY,
-            merchantId = Constants.OPAY_MERCHANT_ID,
-            merchantName = Constants.OPAY_MERCHANT_NAME,
-            reference = medicalRenewalPayment.paymentItem?.paymentRequestNumber!!,
-            countryCode = "EG", // uppercase
-            payAmount = (newAmount * 100).toLong(),
-            currency = "EGP", // uppercase
-            productName = "annualSubscription",
-            productDescription = "android",
-            callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
-            paymentType = paymentType, // optional
-            expireAt = if(paymentOption == Constants.PaymentOption.OpayCredit) 30 else 2880,
-            userClientIP = "110.246.160.183",
-            userInfo = userInfo
-        )
-
-        llSuperProgressbar.visibility = View.VISIBLE
-        PaymentTask(this).createOrder(payInput, callback = { status, response ->
-            llSuperProgressbar.visibility = View.GONE
-            when (status) {
-                Status.ERROR -> { // error
-                    Toast.makeText(requireContext(), response.message,
-                        Toast.LENGTH_SHORT).show()
-                } else -> {
-            }
-            }
-        })
+//        PaymentTask.sandBox = Constants.OPAY_MODE
+//        val userInfo = UserInfo(medicalRenewalPayment.paymentItem?.amount.toString(), binding.number, sharedPref.mobile, medicalRenewalPayment.paymentItem?.engName)
+//        val payInput = PayInput(
+//            publickey = Constants.OPAY_PUBLIC_KEY,
+//            merchantId = Constants.OPAY_MERCHANT_ID,
+//            merchantName = Constants.OPAY_MERCHANT_NAME,
+//            reference = medicalRenewalPayment.paymentItem?.paymentRequestNumber!!,
+//            countryCode = "EG", // uppercase
+//            payAmount = (newAmount * 100).toLong(),
+//            currency = "EGP", // uppercase
+//            productName = "annualSubscription",
+//            productDescription = "android",
+//            callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
+//            paymentType = paymentType, // optional
+//            expireAt = if(paymentOption == Constants.PaymentOption.OpayCredit) 30 else 2880,
+//            userClientIP = "110.246.160.183",
+//            userInfo = userInfo
+//        )
+//
+//        llSuperProgressbar.visibility = View.VISIBLE
+//        PaymentTask(this).createOrder(payInput, callback = { status, response ->
+//            llSuperProgressbar.visibility = View.GONE
+//            when (status) {
+//                Status.ERROR -> { // error
+//                    Toast.makeText(requireContext(), response.message,
+//                        Toast.LENGTH_SHORT).show()
+//                } else -> {
+//            }
+//            }
+//        })
     }
 
     fun cowPayPayment(isCredit: Boolean) {
@@ -330,42 +387,42 @@ class InquiryDetailsFragment : BaseFragment() {
         }
     }
 
-    private fun handlePaymentResponse(response: WebJsResponse?) {
-        when (response?.orderStatus) {
-            PaymentStatus.INITIAL -> {
-            }
-            PaymentStatus.PENDING -> {
-                if (response.eventName.equals("clickResultOKBtn") && rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-                    showAlert(getString(R.string.payment_reference_without_code)) {
-                        navController().popBackStack()
-                        navController().navigate(R.id.homeFragment)
-                    }
-            }
-            PaymentStatus.SUCCESS -> {
-                showAlert(
-                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
-                        R.string.payment_successful
-                    ) + response.orderNo
-                    else getString(R.string.payment_reference) + response.referenceCode
-                ) {
-                    navController().popBackStack()
-                    navController().navigate(R.id.homeFragment)
-                }
-            }
-            PaymentStatus.FAIL -> {
-                showAlert(getString(R.string.payment_canceled)) {
-                    navController().popBackStack()
-                    navController().navigate(R.id.homeFragment)
-                }
-            }
-            PaymentStatus.CLOSE -> {
-                showAlert(getString(R.string.payment_canceled)) {
-                    navController().popBackStack()
-                    navController().navigate(R.id.homeFragment)
-                }
-            }
-        }
-    }
+//    private fun handlePaymentResponse(response: WebJsResponse?) {
+//        when (response?.orderStatus) {
+//            PaymentStatus.INITIAL -> {
+//            }
+//            PaymentStatus.PENDING -> {
+//                if (response.eventName.equals("clickResultOKBtn") && rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
+//                    showAlert(getString(R.string.payment_reference_without_code)) {
+//                        navController().popBackStack()
+//                        navController().navigate(R.id.homeFragment)
+//                    }
+//            }
+//            PaymentStatus.SUCCESS -> {
+//                showAlert(
+//                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
+//                        R.string.payment_successful
+//                    ) + response.orderNo
+//                    else getString(R.string.payment_reference) + response.referenceCode
+//                ) {
+//                    navController().popBackStack()
+//                    navController().navigate(R.id.homeFragment)
+//                }
+//            }
+//            PaymentStatus.FAIL -> {
+//                showAlert(getString(R.string.payment_canceled)) {
+//                    navController().popBackStack()
+//                    navController().navigate(R.id.homeFragment)
+//                }
+//            }
+//            PaymentStatus.CLOSE -> {
+//                showAlert(getString(R.string.payment_canceled)) {
+//                    navController().popBackStack()
+//                    navController().navigate(R.id.homeFragment)
+//                }
+//            }
+//        }
+//    }
 
     private fun isDataValid(mobile: String): Boolean {
         return if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
@@ -383,4 +440,15 @@ class InquiryDetailsFragment : BaseFragment() {
     //endregion
 
     fun navController() = findNavController()
+    override fun onError(error: PaymentSdkError) {
+        Toast.makeText(requireContext(), "${error.msg}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
+        Toast.makeText(requireContext(), "${paymentSdkTransactionDetails.paymentResult?.responseMessage}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPaymentCancel() {
+        Toast.makeText(requireContext(), "Cancelled", Toast.LENGTH_SHORT).show()
+    }
 }

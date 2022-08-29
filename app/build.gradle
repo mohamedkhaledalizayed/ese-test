@@ -218,9 +218,9 @@ dependencies {
     implementation deps.fragment_ktx
 
     implementation deps.androidsvg
+    api deps.paytabs
 
     implementation deps.mastercard
-    implementation(name: 'cashier-sdk-1.0.8', ext: 'aar')
     implementation(name: 'cowpaysdk', ext: 'aar')
     implementation project(':wheel')
     implementation project(':mobilepaymentsdktest')
