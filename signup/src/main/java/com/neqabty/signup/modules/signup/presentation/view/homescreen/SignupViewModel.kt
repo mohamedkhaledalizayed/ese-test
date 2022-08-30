@@ -36,14 +36,14 @@ class SignupViewModel @Inject constructor(private val signupUseCase: SignupUseCa
 
     val neqabtyMember = MutableLiveData<Resource<UserUIModel>>()
     fun signupNeqabtyMember(data: NeqabtySignupBody) {
-        user.postValue(Resource.loading(data = null))
+        neqabtyMember.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 signupUseCase.build(data).collect {
-                    user.postValue(Resource.success(data = it.toUserUIModel()))
+                    neqabtyMember.postValue(Resource.success(data = it.toUserUIModel()))
                 }
             } catch (e: Throwable) {
-                user.postValue(Resource.error(data = null, message = handleError(e)))
+                neqabtyMember.postValue(Resource.error(data = null, message = handleError(e)))
             }
         }
     }
