@@ -233,6 +233,10 @@ class SignupFragment : BaseFragment() {
             Constants.REFUND -> navController().navigate(
                 SignupFragmentDirections.openRefund()
             )
+
+            Constants.MEDICAL_COMPLAINTS -> navController().navigate(
+                SignupFragmentDirections.openMedicalComplaints()
+            )
         }
     }
 // endregion

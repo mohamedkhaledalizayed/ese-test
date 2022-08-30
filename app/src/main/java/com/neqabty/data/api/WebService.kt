@@ -308,6 +308,14 @@ interface WebService {
             @Part doc3: MultipartBody.Part?,
             @Part doc4: MultipartBody.Part?): Observable<ApiResponse<Unit>>
 
+
+    @POST("api/api/ApiRequest/AddRequest")
+    fun sendMedicalComplaintRequest(
+        @Query("mobile_number") mobileNumber: String,
+        @Body medicalComplaintRequest: MedicalComplaintRequest,
+        @Query("server") server: String = ""
+    ): Observable<MedicalComplaintData>
+
     @POST("api/v1/questionnaires")
     fun getQuestionnaires(@Body questionnaireRequest: QuestionnaireRequest): Observable<ApiResponse<QuestionnaireData>>
 

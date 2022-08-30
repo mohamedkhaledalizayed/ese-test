@@ -32,6 +32,20 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.createComplaint(name, phone, catId, subCatId, body, token, memberNumber,docsNumber, doc1, doc2, doc3, doc4)
     }
 
+    override fun sendMedicalComplaint(
+        name: String,
+        mobile: String,
+        userNumber: String,
+        benId: String,
+        description: String,
+        branchProfileId: String,
+        serviceProviderId: String,
+        letterTypeId: String,
+        attachments: List<AttachmentEntity>
+    ): Observable<MedicalComplaintEntity> {
+        return remoteDataStore.sendMedicalComplaint(name, mobile, userNumber, benId, description, branchProfileId, serviceProviderId, letterTypeId, attachments)
+    }
+
     override fun getQuestionnaires(userNumber: String): Observable<QuestionnaireEntity> {
         return remoteDataStore.getQuestionnaires(userNumber)
     }

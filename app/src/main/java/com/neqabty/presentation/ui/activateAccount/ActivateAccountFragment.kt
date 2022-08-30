@@ -169,6 +169,10 @@ class ActivateAccountFragment : BaseFragment() {
                     ActivateAccountFragmentDirections.openRefund()
                 )
 
+
+                Constants.MEDICAL_COMPLAINTS -> navController().navigate(
+                    ActivateAccountFragmentDirections.openMedicalComplaints()
+                )
             }
         }
     }

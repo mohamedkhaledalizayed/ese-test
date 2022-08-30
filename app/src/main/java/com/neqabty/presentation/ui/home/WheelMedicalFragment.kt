@@ -72,10 +72,10 @@ class WheelMedicalFragment : BaseFragment() {
 //            Toast.makeText(requireContext(), getString(R.string.closed_complaints), Toast.LENGTH_SHORT).show()
 
             if (sharedPref.isRegistered)
-                navController().navigate(R.id.complaintsFragment)
+                navController().navigate(R.id.medicalComplaintsFragment)
             else {
                 val bundle: Bundle = Bundle()
-                bundle.putInt("type", Constants.COMPLAINTS)
+                bundle.putInt("type", Constants.MEDICAL_COMPLAINTS)
                 navController().navigate(R.id.signupFragment, bundle)
             }
         }

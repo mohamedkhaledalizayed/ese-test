@@ -55,6 +55,7 @@ object Constants {
     var COMMITTEES = 15
     var REFUND = 16
     var MEDICAL_PROCEDURES_INQUIRY = 17
+    var MEDICAL_COMPLAINTS = 18
 
     var AD_MEDICAL_RENEW = 1
     var AD_TRIPS = 2
