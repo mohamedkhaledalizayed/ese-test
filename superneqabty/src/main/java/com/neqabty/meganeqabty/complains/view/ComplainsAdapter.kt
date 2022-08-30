@@ -1,6 +1,7 @@
 package com.neqabty.meganeqabty.complains.view
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -37,8 +38,17 @@ class ComplainsAdapter: RecyclerView.Adapter<ComplainsAdapter.ViewHolder>() {
 
         val item = items[position]
         viewHolder.binding.complain.text = item.message
-        viewHolder.binding.answer.text = item.answer ?: "لم يتم الرد"
+        viewHolder.binding.answer.text = item.answer ?: ""
         viewHolder.binding.date.text = dateFormat(item.createdAt.split(".")[0])
+        if (item.answer.isNullOrEmpty()){
+            viewHolder.binding.statusText.text = "الطلب قيد الانتظار"
+            viewHolder.binding.statusText.setTextColor(Color.argb(100, 255, 180, 40))
+            viewHolder.binding.statusImage.setImageResource(R.color.orange)
+        }else{
+            viewHolder.binding.statusText.text = "تم الرد علي الطلب"
+            viewHolder.binding.statusText.setTextColor(Color.argb(100, 0, 167, 87))
+            viewHolder.binding.statusImage.setImageResource(R.color.green)
+        }
     }
 
     override fun getItemCount() = items.size
