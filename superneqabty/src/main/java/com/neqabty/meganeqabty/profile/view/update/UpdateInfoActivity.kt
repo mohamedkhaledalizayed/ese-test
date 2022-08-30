@@ -39,7 +39,7 @@ class UpdateInfoActivity : BaseActivity<ActivityUpdateInfoBinding>() {
 
         setupToolbar(titleResId = R.string.update_data)
 
-        if (intent.getIntExtra("key", 0) == 100){
+        if (intent.getIntExtra("key", 0) == 200){
             binding.cardContainer.visibility = View.VISIBLE
             binding.licenceContainer.visibility = View.GONE
         }else{

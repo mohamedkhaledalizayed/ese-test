@@ -126,13 +126,13 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
         binding.cardBtn.setOnClickListener {
             val intent = Intent(this, UpdateInfoActivity::class.java)
-            intent.putExtra("key", 100)
+            intent.putExtra("key", 200)
             startActivity(intent)
         }
 
         binding.licenceBtn.setOnClickListener {
             val intent = Intent(this, UpdateInfoActivity::class.java)
-            intent.putExtra("key", 200)
+            intent.putExtra("key", 100)
             startActivity(intent)
         }
     }
