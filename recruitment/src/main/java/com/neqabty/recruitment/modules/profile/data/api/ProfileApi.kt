@@ -1,5 +1,6 @@
 package com.neqabty.recruitment.modules.profile.data.api
 
+import com.neqabty.recruitment.modules.personalinfo.data.model.EngineerBody
 import com.neqabty.recruitment.modules.profile.data.model.*
 import com.neqabty.recruitment.modules.profile.data.model.addarea.AddAreaModel
 import com.neqabty.recruitment.modules.profile.data.model.addcourse.AddCourseModel
@@ -16,8 +17,8 @@ import com.neqabty.recruitment.modules.profile.data.model.country.CountryModelLi
 import com.neqabty.recruitment.modules.profile.data.model.cources.CoursesModelList
 import com.neqabty.recruitment.modules.profile.data.model.department.DepartmentModelList
 import com.neqabty.recruitment.modules.profile.data.model.engineercourses.EngineerCoursesModel
-import com.neqabty.recruitment.modules.profile.data.model.engineerdata.EngineerDataModel
-import com.neqabty.recruitment.modules.profile.data.model.engineerdata.EngineerModel
+import com.neqabty.recruitment.modules.personalinfo.data.model.engineerdata.EngineerDataModel
+import com.neqabty.recruitment.modules.personalinfo.data.model.engineerdata.EngineerModel
 import com.neqabty.recruitment.modules.profile.data.model.engineerexperiences.EngineerExperiencesModel
 import com.neqabty.recruitment.modules.profile.data.model.engineerlanguages.EngineerLanguagesModel
 import com.neqabty.recruitment.modules.profile.data.model.engineerskills.EngineerSkillsModel
@@ -33,14 +34,6 @@ import com.neqabty.recruitment.modules.profile.data.model.universities.Universit
 import retrofit2.http.*
 
 interface ProfileApi {
-
-    //Engineer
-
-    @GET("engineer/engineers")
-    suspend fun getEngineerData(): EngineerDataModel
-
-    @PATCH("engineer/engineers/{id}")
-    suspend fun updateEngineerData(@Path("id") id: String, @Body engineerBody: EngineerBody): EngineerModel
 
     //Engineer Courses
 

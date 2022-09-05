@@ -239,21 +239,21 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
             }
         }
 
-        profileViewModel.engineer.observe(this){
-            it.let { resource ->
-                when (resource.status){
-                    Status.LOADING-> {
-
-                    }
-                    Status.SUCCESS -> {
-
-                    }
-                    Status.ERROR ->{
-
-                    }
-                }
-            }
-        }
+//        profileViewModel.engineer.observe(this){
+////            it.let { resource ->
+////                when (resource.status){
+////                    Status.LOADING-> {
+////
+////                    }
+////                    Status.SUCCESS -> {
+////
+////                    }
+////                    Status.ERROR ->{
+////
+////                    }
+////                }
+////            }
+//        }
     }
 
 }

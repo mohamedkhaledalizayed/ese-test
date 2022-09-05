@@ -1,5 +1,6 @@
 package com.neqabty.recruitment.modules.profile.data.source
 
+import com.neqabty.recruitment.modules.personalinfo.data.model.EngineerBody
 import com.neqabty.recruitment.modules.profile.data.api.ProfileApi
 import com.neqabty.recruitment.modules.profile.data.model.*
 import com.neqabty.recruitment.modules.profile.data.model.area.AreaModel
@@ -7,8 +8,7 @@ import com.neqabty.recruitment.modules.profile.data.model.companies.CompanyModel
 import com.neqabty.recruitment.modules.profile.data.model.country.CountryModel
 import com.neqabty.recruitment.modules.profile.data.model.cources.CourseModel
 import com.neqabty.recruitment.modules.profile.data.model.department.DepartmentModel
-import com.neqabty.recruitment.modules.profile.data.model.engineerdata.EngineerDataModel
-import com.neqabty.recruitment.modules.profile.data.model.engineerdata.EngineerModel
+import com.neqabty.recruitment.modules.personalinfo.data.model.engineerdata.EngineerModel
 import com.neqabty.recruitment.modules.profile.data.model.governement.GovernorateModel
 import com.neqabty.recruitment.modules.profile.data.model.grades.GradeModel
 import com.neqabty.recruitment.modules.profile.data.model.industries.IndustryModel
@@ -78,13 +78,7 @@ class ProfileDS @Inject constructor(private val profileApi: ProfileApi) {
         return profileApi.getIndustries().industries
     }
 
-    suspend fun getEngineerData(): EngineerModel {
-        return profileApi.getEngineerData().engineers[0]
-    }
 
-    suspend fun updateEngineerData(id: String, engineerBody: EngineerBody): EngineerModel {
-        return profileApi.updateEngineerData(id, engineerBody)
-    }
 
 
 

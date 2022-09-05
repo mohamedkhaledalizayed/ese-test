@@ -3,16 +3,14 @@ package com.neqabty.recruitment.modules.profile.view
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.annotations.SerializedName
 import com.neqabty.recruitment.core.utils.AppUtils
 import com.neqabty.recruitment.core.utils.Resource
-import com.neqabty.recruitment.modules.profile.data.model.EngineerBody
+import com.neqabty.recruitment.modules.personalinfo.data.model.EngineerBody
 import com.neqabty.recruitment.modules.profile.domain.entity.area.AreaEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.company.CompanyEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.country.CountryEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.courses.CourseEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.department.DepartmentEntity
-import com.neqabty.recruitment.modules.profile.domain.entity.engineerdata.EngineerEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.governement.GovernmentEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.grades.GradeEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.industries.IndustryEntity
@@ -239,34 +237,7 @@ class ProfileViewModel @Inject constructor(private val profileUseCase: ProfileUs
         }
     }
 
-    val engineer = MutableLiveData<Resource<EngineerEntity>>()
-    fun getEngineerData(){
-        viewModelScope.launch(Dispatchers.IO){
-            engineer.postValue(Resource.loading(data = null))
 
-            try {
-                profileUseCase.getEngineerData().collect(){
-                    engineer.postValue(Resource.success(data = it))
-                }
-            }catch (t: Throwable){
-                engineer.postValue(Resource.error(data = null, message = AppUtils().handleError(t)))
-            }
-        }
-    }
-
-    fun updateEngineerData(id: String, engineerBody: EngineerBody){
-        viewModelScope.launch(Dispatchers.IO){
-            engineer.postValue(Resource.loading(data = null))
-
-            try {
-                profileUseCase.updateEngineerData(id, engineerBody).collect(){
-                    engineer.postValue(Resource.success(data = it))
-                }
-            }catch (t: Throwable){
-                engineer.postValue(Resource.error(data = null, message = AppUtils().handleError(t)))
-            }
-        }
-    }
 
     val course = MutableLiveData<Resource<String>>()
     fun getEngineerData(name: String){

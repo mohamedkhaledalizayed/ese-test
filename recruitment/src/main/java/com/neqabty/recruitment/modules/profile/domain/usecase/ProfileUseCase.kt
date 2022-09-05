@@ -2,14 +2,13 @@ package com.neqabty.recruitment.modules.profile.domain.usecase
 
 
 
-import com.neqabty.recruitment.modules.profile.data.model.EngineerBody
+
 import com.neqabty.recruitment.modules.profile.data.model.EngineerExperienceBody
 import com.neqabty.recruitment.modules.profile.domain.entity.area.AreaEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.company.CompanyEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.country.CountryEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.courses.CourseEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.department.DepartmentEntity
-import com.neqabty.recruitment.modules.profile.domain.entity.engineerdata.EngineerEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.governement.GovernmentEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.grades.GradeEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.industries.IndustryEntity
@@ -81,13 +80,6 @@ class ProfileUseCase @Inject constructor(private val profileRepository: ProfileR
         return profileRepository.getIndustries()
     }
 
-    fun getEngineerData(): Flow<EngineerEntity> {
-        return profileRepository.getEngineerData()
-    }
-
-    fun updateEngineerData(id: String, engineerBody: EngineerBody): Flow<EngineerEntity> {
-        return profileRepository.updateEngineerData(id, engineerBody)
-    }
 
 
 

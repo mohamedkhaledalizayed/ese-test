@@ -6,8 +6,6 @@ import com.neqabty.recruitment.modules.profile.data.model.companies.CompanyModel
 import com.neqabty.recruitment.modules.profile.data.model.country.CountryModel
 import com.neqabty.recruitment.modules.profile.data.model.cources.CourseModel
 import com.neqabty.recruitment.modules.profile.data.model.department.DepartmentModel
-import com.neqabty.recruitment.modules.profile.data.model.engineerdata.CityModel
-import com.neqabty.recruitment.modules.profile.data.model.engineerdata.EngineerModel
 import com.neqabty.recruitment.modules.profile.data.model.governement.GovernorateModel
 import com.neqabty.recruitment.modules.profile.data.model.grades.GradeModel
 import com.neqabty.recruitment.modules.profile.data.model.industries.IndustryModel
@@ -18,14 +16,11 @@ import com.neqabty.recruitment.modules.profile.data.model.nationalities.National
 import com.neqabty.recruitment.modules.profile.data.model.skills.SkillModel
 import com.neqabty.recruitment.modules.profile.data.model.universities.UniversityModel
 import com.neqabty.recruitment.modules.profile.data.source.ProfileDS
-import com.neqabty.recruitment.modules.profile.domain.*
 import com.neqabty.recruitment.modules.profile.domain.entity.area.AreaEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.company.CompanyEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.country.CountryEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.courses.CourseEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.department.DepartmentEntity
-import com.neqabty.recruitment.modules.profile.domain.entity.engineerdata.CityEntity
-import com.neqabty.recruitment.modules.profile.domain.entity.engineerdata.EngineerEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.governement.GovernmentEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.grades.GradeEntity
 import com.neqabty.recruitment.modules.profile.domain.entity.industries.IndustryEntity
@@ -125,17 +120,6 @@ class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS
         }
     }
 
-    override fun getEngineerData(): Flow<EngineerEntity> {
-        return flow {
-            emit(profileDS.getEngineerData().toEngineerEntity())
-        }
-    }
-
-    override fun updateEngineerData(id: String, engineerBody: EngineerBody): Flow<EngineerEntity> {
-        return flow {
-            profileDS.updateEngineerData(id, engineerBody)
-        }
-    }
 
     override fun addCourse(name: String): Flow<String> {
         return flow {
@@ -296,45 +280,5 @@ private fun IndustryModel.toIndustryEntity(): IndustryEntity{
     )
 }
 
-private fun EngineerModel.toEngineerEntity(): EngineerEntity{
-    return EngineerEntity(
-        address = address,
-        city = city.toCityEntity(),
-        courses = courses.map { it.toCourse() },
-        dateOfBirth = dateOfBirth,
-        department = department.toDepartment(),
-        educations = educations.map { it.toEducationEntity() },
-        email = email,
-        experiences = experiences.map { it.toExperienceEntity() },
-        gender = gender,
-        governorate = governorate.toGovernment(),
-        grade =grade,
-        graduationYear = graduationYear,
-        languages = languages.map { it.toLanguage() },
-        linkedInLink = linkedInLink,
-        maritalStatus =  maritalStatus.toMaritalStatus(),
-        membershipId = membershipId,
-        membershipIdFile = membershipIdFile,
-        militaryFile = militaryFile,
-        militaryStatus = militaryStatus.toMilitaryStatus(),
-        mobile = mobile,
-        name = name,
-        nationalId = nationalId,
-        nationalIdFile = nationalIdFile,
-        nationality = nationality.toNationality(),
-        phone = phone,
-        skills = skills.map { it.toSkills() },
-        university = university.toUniversity(),
-        workingStatus = workingStatus,
-        yearsOfExperience = yearsOfExperience,
-        zone = zone.toArea()
-    )
-}
 
-private fun CityModel.toCityEntity(): CityEntity{
-    return CityEntity(
-        id = id,
-        name = name
-    )
-}
 

@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="personal_info">البيانات الشخصية</string>
+    <string name="qualifications">المؤهل الدراسي</string>
+    <string name="courses">الدورات التدريبية</string>
+    <string name="experience">الخبرات السابقة</string>
+    <string name="skills">المهارات</string>
+    <string name="languages">اللغات</string>
+    <string name="engineer_name">اسم المهندس</string>
+    <string name="membership_id">رقم العضوية</string>
+    <string name="national_id">الرقم القومي</string>
+    <string name="another_phone">رقم تليفون آخر</string>
+    <string name="email">البريد الإلكترونى</string>
+    <string name="linkedin">رابط بروفايل لينكدإن</string>
+    <string name="area">المنطقة</string>
+    <string name="card">كارنية النقابة</string>
+    <string name="national_id_image">صورة الرقم القومى</string>
+    <string name="contact_info">بيانات التواصل</string>
+    <string name="address">العنوان</string>
+    <string name="work">بيانات العمل</string>
+    <string name="work_experience">سنوات الخبرة</string>
+    <string name="studying">الدراسة</string>
+    <string name="graduation">سنة التخرج</string>
+    <string name="phone">رقم الموبايل</string>
+    <string name="military_text">شهادة الجيش</string>
+    <string name="birthdate">تاريخ الميلاد</string>
+
+    <array name="gender">
+        <item>إختر النوع</item>
+        <item>ذكر</item>
+        <item>أنثى</item>
+    </array>
 </resources>
