@@ -22,6 +22,8 @@ data class ComplainsModel(
     val message: String,
     @SerializedName("mobile")
     val mobile: String,
+    @SerializedName("receipt_id")
+    val receiptId: String,
     @SerializedName("updated_at")
     val updatedAt: String
 )

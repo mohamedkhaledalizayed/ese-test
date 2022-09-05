@@ -7,7 +7,7 @@ import retrofit2.http.Header
 
 interface ComplainApi {
 
-    @GET("api/accounts/get_account_complains")
+    @GET("accounts/get_account_complains")
     suspend fun getAllComplains(@Header("Authorization") token: String): ComplainsListModel
 
 }

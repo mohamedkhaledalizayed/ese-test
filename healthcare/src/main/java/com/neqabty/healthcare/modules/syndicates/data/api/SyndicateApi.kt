@@ -4,6 +4,6 @@ import com.neqabty.healthcare.modules.syndicates.data.model.SyndicateResponse
 import retrofit2.http.GET
 
 interface SyndicateApi {
-    @GET("api/entities/")
+    @GET("entities/")
     suspend fun getSyndicates(): SyndicateResponse
 }

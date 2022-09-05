@@ -1,5 +1,7 @@
 package com.neqabty.meganeqabty.core.di
 
+
+import com.neqabty.core.data.Constants.BASE_URL_STAGING_SYNDICATE
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +21,7 @@ class NetworkModule {
     @Provides
     @Named("syndicate")
     fun providesBaseUrl(): String {
-        return "https://neqabty.et3.co/"
+        return BASE_URL_STAGING_SYNDICATE
     }
 
     @Provides

@@ -11,13 +11,13 @@ import retrofit2.http.POST
 
 interface HomeApi {
 
-    @GET("api/announcments")
+    @GET("announcments")
     suspend fun getAllAds(): AdsResponse
 
-    @POST("api/complains")
+    @POST("complains")
     suspend fun addComplain(@Body complainBody: ComplainBody): ComplainsModel
 
-    @POST("api/complains")
+    @POST("complains")
     suspend fun addComplainAuth(@Header("Authorization") token: String, @Body complainBody: ComplainBody): ComplainsModel
 
 }

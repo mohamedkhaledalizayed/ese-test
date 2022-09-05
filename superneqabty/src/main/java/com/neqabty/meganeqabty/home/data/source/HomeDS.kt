@@ -22,7 +22,7 @@ class HomeDS @Inject constructor(private val homeApi: HomeApi, private val prefe
                     entity = preferencesHelper.mainSyndicate,
                     mobile = mobile,
                     email =  email)
-            ).message
+            ).receiptId
         }else{
             return homeApi.addComplain(
                 ComplainBody(
@@ -30,7 +30,7 @@ class HomeDS @Inject constructor(private val homeApi: HomeApi, private val prefe
                     entity = preferencesHelper.mainSyndicate,
                     mobile = mobile,
                     email =  email)
-            ).message
+            ).receiptId
         }
     }
 

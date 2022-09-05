@@ -11,17 +11,17 @@ import retrofit2.http.*
 
 interface ProfileApi {
 
-    @GET("api/accounts/profile")
+    @GET("accounts/profile")
     suspend fun getUserProfile(@Header("Authorization") token: String, @Query("special-format") platform: String = "android"): ProfileModel
 
-    @GET("api/membership_card_requests/check_request_status")
+    @GET("membership_card_requests/check_request_status")
     suspend fun membershipCardStatus(@Header("Authorization") token: String) : MemberShipCardStatus
 
-    @GET("api/license_requests/check_request_status")
+    @GET("license_requests/check_request_status")
     suspend fun licenseStatus(@Header("Authorization") token: String) : LicenceStatusModel
 
     @Multipart
-    @POST("api/membership_card_requests")
+    @POST("membership_card_requests")
     suspend fun uploadMembershipCard(@Header("Authorization") token: String,
                                      @Part("mobile") mobile: String,
                                      @Part("address") address: String,
@@ -30,7 +30,7 @@ interface ProfileApi {
     ): CardRequestModel
 
     @Multipart
-    @POST("api/license_requests")
+    @POST("license_requests")
     suspend fun uploadMinistryLicense(@Header("Authorization") token: String, @Part license: MultipartBody.Part?): MinistryLicenseModel
 
 }

@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 interface CheckAccountApi {
 
-    @POST("api/accounts/enquiry")
+    @POST("accounts/enquiry")
     suspend fun checkAccount(@Body checkPhoneBody: CheckPhoneBody): CheckPhoneModel
 
 }

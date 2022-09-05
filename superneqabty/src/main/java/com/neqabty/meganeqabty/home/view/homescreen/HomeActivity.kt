@@ -24,6 +24,7 @@ import com.neqabty.core.utils.Status
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.aboutapp.AboutAppActivity
 import com.neqabty.meganeqabty.complains.view.ComplainsActivity
+import com.neqabty.meganeqabty.contactus.ContactUsActivity
 import com.neqabty.meganeqabty.core.utils.Constants
 import com.neqabty.meganeqabty.databinding.ActivityMainBinding
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
@@ -241,7 +242,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                     Status.LOADING -> {
                     }
                     Status.SUCCESS -> {
-                        Toast.makeText(this, "تم إرسال طلبك بنجاح.", Toast.LENGTH_LONG).show()
+                        showTicketNumber(resource.data)
                     }
                     Status.ERROR -> {
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
@@ -249,6 +250,20 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 }
             }
         }
+    }
+
+    private fun showTicketNumber(data: String?) {
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage("تم إرسال طلبك بنجاح رقم الشكوى/المقترح$data")
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
     }
 
     @SuppressLint("CutPasteId")
@@ -336,15 +351,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             }
 
             R.id.contactus_fragment -> {
-                try {
-                    val emailIntent = Intent(Intent.ACTION_SEND)
-                    emailIntent.data = Uri.parse("mailto:")
-                    emailIntent.type = "text/plain"
-                    emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("gts@neqabty.com"))
-                    startActivity(emailIntent)
-                } catch (e: java.lang.Exception) {
-                    e.printStackTrace()
-                }
+                startActivity(Intent(this, ContactUsActivity::class.java))
             }
             R.id.logout -> {
                 if (sharedPreferences.isAuthenticated) {

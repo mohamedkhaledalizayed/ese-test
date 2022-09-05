@@ -32,6 +32,7 @@ import com.neqabty.meganeqabty.home.domain.entity.AdEntity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.healthcare.modules.syndicates.presentation.view.homescreen.SyndicateActivity
+import com.neqabty.meganeqabty.contactus.ContactUsActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.signup.modules.signup.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -262,6 +263,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             }
             R.id.settings -> {
                 val intent = Intent(this@HomeActivity, SettingsScreen::class.java)
+                startActivity(intent)
+            }
+            R.id.contactus_fragment -> {
+                val intent = Intent(this@HomeActivity, ContactUsActivity::class.java)
+                intent.putExtra("key", 101)
                 startActivity(intent)
             }
             R.id.suggestions -> {

@@ -1,5 +1,6 @@
 package com.neqabty.signup.core.di
 
+import com.neqabty.core.data.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +20,7 @@ class NetworkModule {
     @Provides
     @Named("signup")
     fun providesBaseUrl(): String {
-        return "https://neqabty.et3.co/api/"
+        return Constants.BASE_URL_STAGING_SYNDICATE
     }
 
     @Provides

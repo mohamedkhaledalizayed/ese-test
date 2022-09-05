@@ -29,6 +29,13 @@
             android:icon="@drawable/suggestion"/>
     </group>
 
+    <group android:id="@+id/contactus">
+        <item
+            android:id="@+id/contactus_fragment"
+            android:title="@string/contactus_title"
+            android:icon="@drawable/ic_bullhorn"/>
+    </group>
+
     <group android:id="@+id/menu_settings">
         <item
             android:id="@+id/settings"

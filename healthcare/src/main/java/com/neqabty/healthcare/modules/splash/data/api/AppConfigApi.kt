@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 
 interface AppConfigApi {
-    @GET("api/api_configurations")
+    @GET("api_configurations")
     suspend fun appConfig(): AppConfig
 }
