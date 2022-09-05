@@ -94,8 +94,6 @@ class MedicalProvidersViewModel @Inject constructor(private val getAllSpecializa
             providerId = "",
             branchProfileId = "",
             governId = "",
-            providerId = "",
-            branchProfileId = "",
             areaId = "",
             createdAt = "",
             createdBy = "",
