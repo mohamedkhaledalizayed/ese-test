@@ -427,6 +427,17 @@ class MainActivity : AppCompatActivity() {
         })
         listDataHeader.add(paymentsItem)
 
+        val syndicateServicesItem = NavigationMenuItem(R.drawable.ic_menu_payments, R.string.syndicate_services_title, {
+            if (sharedPref.isRegistered)
+                navController().navigate(R.id.syndicateServicesFragment)
+            else {
+                val bundle: Bundle = Bundle()
+                bundle.putInt("type", Constants.SYNDICATE_SERVICES)
+                navController().navigate(R.id.signupFragment, bundle)
+            }
+        })
+        listDataHeader.add(syndicateServicesItem)
+
         val engineeringRecordsItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.engineering_records_title, {
             if (sharedPref.isRegistered)
                 navController().navigate(R.id.engineeringRecordsDetailsFragment)

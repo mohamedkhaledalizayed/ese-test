@@ -156,6 +156,10 @@ class ActivateAccountFragment : BaseFragment() {
                 Constants.CHANGE_PASSWORD -> navController().navigate(
                         ActivateAccountFragmentDirections.openChangePassword(false, sharedPref.mobile)
                 )
+
+                Constants.SYNDICATE_SERVICES -> navController().navigate(
+                        ActivateAccountFragmentDirections.openSyndicateServices()
+                )
             }
         }
     }

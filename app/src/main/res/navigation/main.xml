@@ -167,6 +167,11 @@
             app:destination="@id/questionnaireFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openSyndicateServices"
+            app:destination="@id/syndicateServicesFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -254,6 +259,11 @@
         <action
             android:id="@+id/openQuestionnaire"
             app:destination="@id/questionnaireFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/openSyndicateServices"
+            app:destination="@id/syndicateServicesFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false" />
     </fragment>
@@ -780,6 +790,15 @@
         <action
             android:id="@+id/openPayment"
             app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/syndicateServicesFragment"
+        android:name="com.neqabty.presentation.ui.syndicateServices.SyndicateServicesFragment"
+        android:label="@string/syndicate_services_title"
+        tools:layout="@layout/syndicate_services_fragment">
+        <action
+            android:id="@+id/openInquiryDetails"
+            app:destination="@id/inquiryDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/complaintsFragment"

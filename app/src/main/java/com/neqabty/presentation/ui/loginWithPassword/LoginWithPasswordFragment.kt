@@ -132,18 +132,18 @@ class LoginWithPasswordFragment : BaseFragment(), HasHomeOptionsMenu {
     }
 
     fun login() {
-        if (newToken.isNotBlank())
+//        if (newToken.isNotBlank())
             loginWithPasswordViewModel.login(mobile,newToken, sharedPref, edPassword.text.toString())
-        else {
-            Constants.isFirebaseTokenUpdated.observeOnce(viewLifecycleOwner, Observer {
-                if (it.isNotBlank()){
-                    newToken = it
-                    loginWithPasswordViewModel.login(mobile, newToken!!, sharedPref, edPassword.text.toString())
-                }else
-                    showAlert(getString(R.string.error_msg))
-            })
-            PushNotificationsWrapper().getToken(requireContext())
-        }
+//        else {
+//            Constants.isFirebaseTokenUpdated.observeOnce(viewLifecycleOwner, Observer {
+//                if (it.isNotBlank()){
+//                    newToken = it
+//                    loginWithPasswordViewModel.login(mobile, newToken!!, sharedPref, edPassword.text.toString())
+//                }else
+//                    showAlert(getString(R.string.error_msg))
+//            })
+//            PushNotificationsWrapper().getToken(requireContext())
+//        }
     }
 //region
 
