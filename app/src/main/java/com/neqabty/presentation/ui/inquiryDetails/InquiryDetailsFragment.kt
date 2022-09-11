@@ -36,15 +36,14 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class InquiryDetailsFragment : BaseFragment() , CallbackPaymentInterface {
 
-    val profileId = "PROFILE_ID"
-    val serverKey = "SERVER_KEY"
-    val clientKey = "CLIENT_KEY"
+    val profileId = "paytabs TEST"
+    val serverKey = "SKJN6BDTKH-JG26L9WRDL-DNMN2ZZ9RN"
+    val clientKey = "C7KMVN-NV2B6T-MGBPVR-2G72KG"
     val locale = PaymentSdkLanguageCode.EN
     val screenTitle = "Test SDK"
     val cartId = "123456"
     val cartDesc = "cart description"
     val currency = "EGP"
-    val amount = 20.0
 
     val tokeniseType = PaymentSdkTokenise.NONE // tokenise is off
 
@@ -53,23 +52,6 @@ class InquiryDetailsFragment : BaseFragment() , CallbackPaymentInterface {
 
     val tokenFormat =  PaymentSdkTokenFormat.Hex32Format()
 
-    val billingData = PaymentSdkBillingDetails(
-        "City",
-        "2 digit iso Country code",
-        "email1@domain.com",
-        "name ",
-        "phone", "state",
-        "address street", "zip"
-    )
-
-    val shippingData = PaymentSdkShippingDetails(
-        "City",
-        "2 digit iso Country code",
-        "email1@domain.com",
-        "name ",
-        "phone", "state",
-        "address street", "zip"
-    )
 
     private lateinit var configData: PaymentSdkConfigurationDetails
 
@@ -209,6 +191,38 @@ class InquiryDetailsFragment : BaseFragment() , CallbackPaymentInterface {
             llSuperProgressbar.visibility = View.VISIBLE
 //            createPayment()
 //            paymentInquiry()
+
+            val billingData = PaymentSdkBillingDetails(
+                "City",
+                "EG",
+                "monawhab@gmail.com",
+                "mona ",
+                "01111111111", "Giza",
+                "October", "132"
+            )
+
+            val shippingData = PaymentSdkShippingDetails(
+                "Giza",
+                "EG",
+                "monawhab@gmail.com",
+                "October",
+                "01111111111", "Egypt",
+                "October gardens", "021"
+            )
+
+            configData = PaymentSdkConfigBuilder(profileId, serverKey, clientKey, newAmount ?: 0.0, currency)
+                .setCartDescription(cartDesc)
+                .setLanguageCode(locale)
+                .setBillingData(billingData)
+                .setMerchantCountryCode("EG") // ISO alpha 2
+                .setShippingData(shippingData)
+                .setCartId("1234")
+                .setTransactionType(transType)
+                .showBillingInfo(true)
+                .showShippingInfo(true)
+                .forceShippingInfo(true)
+                .setScreenTitle(screenTitle)
+                .build()
             startCardPayment(activity!!, configData, callback=this)
 
         }
@@ -250,29 +264,16 @@ class InquiryDetailsFragment : BaseFragment() , CallbackPaymentInterface {
         if (!state.isLoading) {
             state.medicalRenewalPayment?.let {
                 medicalRenewalPayment = it
-                if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-                    oPayPayment(Constants.PaymentOption.OpayCredit)
-                else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-                    oPayPayment(Constants.PaymentOption.OpayPOS)
-                else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
-                    oPayPayment(Constants.PaymentOption.MobileWallet)
-                else
-                    cowPayPayment(false)
+//                if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
+//                    oPayPayment(Constants.PaymentOption.OpayCredit)
+//                else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
+//                    oPayPayment(Constants.PaymentOption.OpayPOS)
+//                else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
+//                    oPayPayment(Constants.PaymentOption.MobileWallet)
+//                else
+//                    cowPayPayment(false)
 
 
-                configData = PaymentSdkConfigBuilder(profileId, serverKey, clientKey, amount ?: 0.0, currency)
-                    .setCartDescription(cartDesc)
-                    .setLanguageCode(locale)
-                    .setBillingData(billingData)
-                    .setMerchantCountryCode("AE") // ISO alpha 2
-                    .setShippingData(shippingData)
-                    .setCartId(medicalRenewalPayment.paymentItem?.paymentRequestNumber!!)
-                    .setTransactionType(transType)
-                    .showBillingInfo(false)
-                    .showShippingInfo(true)
-                    .forceShippingInfo(true)
-                    .setScreenTitle(screenTitle)
-                    .build()
 
             }
         }
