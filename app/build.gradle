@@ -218,7 +218,7 @@ dependencies {
     implementation deps.fragment_ktx
 
     implementation deps.androidsvg
-    api deps.paytabs
+    implementation deps.paytabs
 
     implementation deps.mastercard
     implementation(name: 'cowpaysdk', ext: 'aar')
