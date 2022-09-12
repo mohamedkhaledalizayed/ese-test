@@ -2,13 +2,26 @@ package com.neqabty.core.data
 
 
 object Constants {
+
     //Seha
     const val BASE_URL_DEV = "https://seha.neqabty.com/public/api/v1/"
     const val BASE_URL_PRO = "https://seha.neqabty.com/public/api/v1/"
 
     //Syndicates
     const val BASE_URL_DEV_SYNDICATE = "https://neqabty.et3.co/api/"
-    const val BASE_URL_STAGING_SYNDICATE = "https://staging-community.neqabty.com/api/"
+    private const val BASE_URL_STAGING_SYNDICATE = "https://staging-community.neqabty.com/api/"
+
+    //News
+    const val BASE_URL_DEV_NEWS = "https://news.et3.co/api/"
+    const val BASE_URL_STAGING_NEWS = "https://staging-news.neqabty.com/api/"
+
+    //OTP
+    const val BASE_URL_DEV_OTP = "https://neqabty.et3.co/"
+    const val BASE_URL_STAGING_OTP = "https://staging-community.neqabty.com/"
+
+    //Main
+    const val BASE_URL_Main = BASE_URL_STAGING_SYNDICATE
+
     const val NEQABTY_CODE = "e00"
     const val ESE_CODE = "e03"
     var isSyndicateMember = false

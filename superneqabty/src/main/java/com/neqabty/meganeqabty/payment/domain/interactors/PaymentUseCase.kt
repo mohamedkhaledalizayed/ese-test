@@ -2,6 +2,8 @@ package com.neqabty.meganeqabty.payment.domain.interactors
 
 
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
+import com.neqabty.meganeqabty.payment.data.model.PaymentHomeBody
+import com.neqabty.meganeqabty.payment.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.meganeqabty.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.meganeqabty.payment.domain.entity.inquiryresponse.ReceiptDataEntity
 import com.neqabty.meganeqabty.payment.domain.entity.payment.PaymentEntity
@@ -11,6 +13,7 @@ import com.neqabty.meganeqabty.payment.domain.entity.serviceactions.ServiceActio
 import com.neqabty.meganeqabty.payment.domain.entity.services.ServicesListEntity
 import com.neqabty.meganeqabty.payment.domain.repository.PaymentRepository
 import kotlinx.coroutines.flow.Flow
+import retrofit2.Response
 import javax.inject.Inject
 
 class PaymentUseCase @Inject constructor(private val repository: PaymentRepository) {
@@ -22,12 +25,16 @@ class PaymentUseCase @Inject constructor(private val repository: PaymentReposito
         return repository.getServiceActions(code)
     }
 
-    fun build(id: String, code: String, number: String): Flow<ReceiptDataEntity> {
+    fun build(id: String, code: String, number: String): Flow<Response<ReceiptResponse>> {
         return repository.getPaymentDetails(id, code, number)
     }
 
     fun build(paymentBody: PaymentBody): Flow<PaymentEntity> {
         return repository.payment(paymentBody)
+    }
+
+    fun build(paymentHomeBody: PaymentHomeBody): Flow<PaymentEntity> {
+        return repository.paymentHome(paymentHomeBody)
     }
 
     fun build(): Flow<List<PaymentMethodEntity>> {

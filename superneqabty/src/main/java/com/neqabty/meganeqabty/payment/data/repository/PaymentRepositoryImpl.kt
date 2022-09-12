@@ -2,6 +2,7 @@ package com.neqabty.meganeqabty.payment.data.repository
 
 
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
+import com.neqabty.meganeqabty.payment.data.model.PaymentHomeBody
 import com.neqabty.meganeqabty.payment.data.model.branches.EntityBranche
 import com.neqabty.meganeqabty.payment.data.model.branches.EntityModel
 import com.neqabty.meganeqabty.payment.data.model.inquiryresponse.*
@@ -28,6 +29,7 @@ import com.neqabty.meganeqabty.payment.domain.entity.services.*
 import com.neqabty.meganeqabty.payment.domain.repository.PaymentRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import retrofit2.Response
 import javax.inject.Inject
 
 class PaymentRepositoryImpl @Inject constructor(private val paymentDS: PaymentDS) :
@@ -45,9 +47,9 @@ class PaymentRepositoryImpl @Inject constructor(private val paymentDS: PaymentDS
         }
     }
 
-    override fun getPaymentDetails(id: String, code: String, number: String): Flow<ReceiptDataEntity> {
+    override fun getPaymentDetails(id: String, code: String, number: String): Flow<Response<ReceiptResponse>> {
         return flow {
-            emit(paymentDS.getPaymentDetails(id, code, number).toReceiptDataEntity())
+            emit(paymentDS.getPaymentDetails(id, code, number))
         }
     }
 
@@ -60,6 +62,12 @@ class PaymentRepositoryImpl @Inject constructor(private val paymentDS: PaymentDS
     override fun payment(paymentBody: PaymentBody): Flow<PaymentEntity> {
         return flow {
             emit(paymentDS.payment(paymentBody).toPaymentEntity())
+        }
+    }
+
+    override fun paymentHome(paymentHomeBody: PaymentHomeBody): Flow<PaymentEntity> {
+        return flow {
+            emit(paymentDS.payment(paymentHomeBody).toPaymentEntity())
         }
     }
 

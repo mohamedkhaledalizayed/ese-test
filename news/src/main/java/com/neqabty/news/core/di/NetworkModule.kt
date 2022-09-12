@@ -1,5 +1,6 @@
 package com.neqabty.news.core.di
 
+import com.neqabty.core.data.Constants.BASE_URL_STAGING_NEWS
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +20,7 @@ class NetworkModule {
     @Provides
     @Named("newsModule")
     fun providesBaseUrl(): String {
-        return "https://news.et3.co/"
+        return BASE_URL_STAGING_NEWS
     }
 
     @Provides

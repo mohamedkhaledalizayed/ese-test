@@ -52,7 +52,7 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
                         if (resource.data!!.isNotEmpty()){
                             binding.gridView.adapter = mainAdapter
                             mainAdapter.submitList(resource.data)
-                            startSpotlight()
+//                            startSpotlight()
                         }else{
                             Toast.makeText(this, getString(R.string.no_syndicates), Toast.LENGTH_LONG).show()
                         }

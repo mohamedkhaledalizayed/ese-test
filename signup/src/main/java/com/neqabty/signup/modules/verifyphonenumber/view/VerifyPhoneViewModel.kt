@@ -28,7 +28,7 @@ class VerifyPhoneViewModel @Inject constructor(private val verifyPhoneUseCase: V
                     otp.postValue(Resource.success(data = it))
                 }
             }catch (e: Throwable){
-                otp.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+                otp.postValue(Resource.error(data = null, message = handleError(e)))
             }
         }
     }

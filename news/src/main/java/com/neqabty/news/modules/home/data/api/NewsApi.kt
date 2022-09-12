@@ -6,13 +6,13 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface NewsApi {
-    @GET("api/news")
+    @GET("news")
     suspend fun getNews(@Query("filter{author.entity_code}") syndicateId: String): NewsResponse
 
-    @GET("api/news")
+    @GET("news")
     suspend fun getSyndicateNews(@Query("filter{author.entity_code}") syndicateId: String): NewsResponse
 
-    @GET("api/news")
+    @GET("news")
     suspend fun getNewsDetails(@Query("filter{id}") newsId: Int): NewsResponse
 
 }

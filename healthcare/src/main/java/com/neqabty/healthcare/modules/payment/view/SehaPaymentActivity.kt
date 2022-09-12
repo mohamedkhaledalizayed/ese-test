@@ -153,7 +153,6 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
                         serviceCode = serviceCode,
                         serviceActionCode = serviceActionCode,
                         paymentMethod = paymentMethod,
-                        amount = "${totalAmount + paymentFees + deliveryFees}",
                         address = address
                     )
                 )

@@ -20,7 +20,7 @@ class AdsNetworkModule {
     @Named("ads")
     @Provides
     fun providesBaseUrl(): String {
-        return Constants.BASE_URL_STAGING_SYNDICATE
+        return Constants.BASE_URL_Main
     }
 
     @Named("ads")

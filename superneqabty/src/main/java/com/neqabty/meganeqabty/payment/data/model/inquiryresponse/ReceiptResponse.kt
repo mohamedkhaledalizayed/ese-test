@@ -14,5 +14,7 @@ data class ReceiptResponse(
     @SerializedName("title")
     val title: String,
     @SerializedName("delivery_methods")
-    val deliveryMethods: List<DeliveryMethod>
+    val deliveryMethods: List<DeliveryMethod>,
+    @SerializedName("methods_obj")
+    val methodsObj: MethodsObj
 )

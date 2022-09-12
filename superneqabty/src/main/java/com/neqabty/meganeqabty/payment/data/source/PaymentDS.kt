@@ -3,6 +3,7 @@ package com.neqabty.meganeqabty.payment.data.source
 import com.neqabty.core.data.PreferencesHelper
 import com.neqabty.meganeqabty.payment.data.api.PaymentApi
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
+import com.neqabty.meganeqabty.payment.data.model.PaymentHomeBody
 import com.neqabty.meganeqabty.payment.data.model.branches.EntityBranche
 import com.neqabty.meganeqabty.payment.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.meganeqabty.payment.data.model.payment.PaymentResponse
@@ -10,6 +11,7 @@ import com.neqabty.meganeqabty.payment.data.model.paymentmethods.PaymentMethodMo
 import com.neqabty.meganeqabty.payment.data.model.paymentstatus.PaymentStatusModel
 import com.neqabty.meganeqabty.payment.data.model.services.ServiceModel
 import com.neqabty.meganeqabty.payment.data.model.servicesaction.ServiceAction
+import retrofit2.Response
 import javax.inject.Inject
 
 class PaymentDS @Inject constructor(private val paymentApi: PaymentApi, private val sharedPreferences: PreferencesHelper) {
@@ -22,12 +24,16 @@ class PaymentDS @Inject constructor(private val paymentApi: PaymentApi, private 
         return paymentApi.getServiceActions(code, "Token ${sharedPreferences.token}").serviceActions
     }
 
-    suspend fun getPaymentDetails(id: String,code: String, number: String): ReceiptResponse {
+    suspend fun getPaymentDetails(id: String,code: String, number: String): Response<ReceiptResponse> {
         return paymentApi.getPaymentDetails(id = id, code = code, number = number, token =  "Token ${sharedPreferences.token}")
     }
 
     suspend fun payment(paymentBody: PaymentBody): PaymentResponse {
         return paymentApi.payment(paymentBody, token =  "Token ${sharedPreferences.token}")
+    }
+
+    suspend fun payment(paymentHomeBody: PaymentHomeBody): PaymentResponse {
+        return paymentApi.paymentHome(paymentHomeBody, token =  "Token ${sharedPreferences.token}")
     }
 
     suspend fun getPaymentMethods(): List<PaymentMethodModel> {

@@ -52,19 +52,7 @@ class SehaPaymentViewModel @Inject constructor(private val paymentUseCase: Payme
         }
     }
 
-    val payment = MutableLiveData<Resource<ReceiptDataEntity>>()
-    fun getPaymentDetails(id: String, code: String, number: String) {
-        payment.postValue(Resource.loading(data = null))
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                paymentUseCase.build(id, code, number).collect {
-                    payment.postValue(Resource.success(data = it))
-                }
-            }catch (exception:Throwable){
-                payment.postValue(Resource.error(data = null, message = handleError(exception)))
-            }
-        }
-    }
+
 
     val paymentInfo = MutableLiveData<Resource<PaymentEntity>>()
     fun getPaymentInfo(paymentBody: PaymentBody) {

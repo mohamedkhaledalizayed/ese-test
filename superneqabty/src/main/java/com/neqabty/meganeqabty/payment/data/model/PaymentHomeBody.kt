@@ -3,13 +3,13 @@ package com.neqabty.meganeqabty.payment.data.model
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 @Keep
-class PaymentBody (
+class PaymentHomeBody (
     @SerializedName("payment")
-    val payment: PaymentBodyObject
+    val payment: PaymentHomeBodyObject
 )
 
 @Keep
-class PaymentBodyObject(
+class PaymentHomeBodyObject(
     @SerializedName("service_code")
     val serviceCode: String = "",
     @SerializedName("service_action_code")
@@ -20,8 +20,6 @@ class PaymentBodyObject(
     val paymentSource: String = "android",
     @SerializedName("address")
     val address: String = "",
-    @SerializedName("entity_branch")
-    val entityBranch: Int = 1,
     @SerializedName("delivery_method")
     val deliveryMethod: Int = 1,
     @SerializedName("membership_id")

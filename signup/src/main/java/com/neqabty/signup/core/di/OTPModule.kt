@@ -1,7 +1,7 @@
-package com.neqabty.meganeqabty.core.di
+package com.neqabty.signup.core.di
 
 
-import com.neqabty.core.data.Constants
+import com.neqabty.core.data.Constants.BASE_URL_STAGING_OTP
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,15 +17,15 @@ import javax.inject.Named
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+class OTPModule {
     @Provides
-    @Named("syndicate")
+    @Named("otp")
     fun providesBaseUrl(): String {
-        return Constants.BASE_URL_Main
+        return BASE_URL_STAGING_OTP
     }
 
     @Provides
-    @Named("syndicate")
+    @Named("otp")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -46,9 +46,9 @@ class NetworkModule {
 
     }
     @Provides
-    @Named("syndicate")
+    @Named("otp")
     fun provideOkHttpClient(
-        @Named("syndicate")
+        @Named("otp")
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
@@ -63,19 +63,19 @@ class NetworkModule {
     }
 
     @Provides
-    @Named("syndicate")
+    @Named("otp")
     fun provideConverterFactory(): Converter.Factory {
         return GsonConverterFactory.create()
     }
 
     @Provides
-    @Named("syndicate")
+    @Named("otp")
     fun provideRetrofitClient(
-        @Named("syndicate")
+        @Named("otp")
         okHttpClient: OkHttpClient,
-        @Named("syndicate")
+        @Named("otp")
         baseUrl: String,
-        @Named("syndicate")
+        @Named("otp")
         converterFactory: Converter.Factory
     ): Retrofit {
         return Retrofit.Builder()

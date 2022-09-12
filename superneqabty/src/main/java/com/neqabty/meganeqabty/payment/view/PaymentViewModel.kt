@@ -1,13 +1,17 @@
 package com.neqabty.meganeqabty.payment.view
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.neqabty.core.utils.AppUtils
 import com.neqabty.core.utils.Resource
+import com.neqabty.meganeqabty.payment.data.model.ErrorBody
 import com.neqabty.meganeqabty.payment.data.model.PaymentBody
+import com.neqabty.meganeqabty.payment.data.model.PaymentHomeBody
+import com.neqabty.meganeqabty.payment.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.meganeqabty.payment.domain.entity.branches.BranchesEntity
-import com.neqabty.meganeqabty.payment.domain.entity.inquiryresponse.ReceiptDataEntity
 import com.neqabty.meganeqabty.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.meganeqabty.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import com.neqabty.meganeqabty.payment.domain.entity.paymentstatus.PaymentStatusEntity
@@ -17,6 +21,7 @@ import com.neqabty.meganeqabty.payment.domain.interactors.PaymentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -52,15 +57,22 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
         }
     }
 
-    val payment = MutableLiveData<Resource<ReceiptDataEntity>>()
+    val payment = MutableLiveData<Resource<ReceiptResponse>>()
     fun getPaymentDetails(id: String, code: String, number: String) {
         payment.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 paymentUseCase.build(id, code, number).collect {
-                    payment.postValue(Resource.success(data = it))
+                    if (it.isSuccessful){
+                        payment.postValue(Resource.success(data = it.body()!!))
+                    }else{
+                        val jObjError = JSONObject(it.errorBody()!!.string()).toString()
+
+                        payment.postValue(Resource.error(data = null, message = "3ak # $jObjError"))
+                    }
+
                 }
-            }catch (exception:Throwable){
+            }catch (exception: Exception){
                 payment.postValue(Resource.error(data = null, message = handleError(exception)))
             }
         }
@@ -72,6 +84,19 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 paymentUseCase.build(paymentBody).collect {
+                    paymentInfo.postValue(Resource.success(data = it))
+                }
+            }catch (exception:Throwable){
+                paymentInfo.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+            }
+        }
+    }
+
+    fun getPaymentHomeInfo(paymentHomeBody: PaymentHomeBody) {
+        paymentInfo.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                paymentUseCase.build(paymentHomeBody).collect {
                     paymentInfo.postValue(Resource.success(data = it))
                 }
             }catch (exception:Throwable){
@@ -149,7 +174,7 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
                 }
             }
         } else {
-            throwable.message!!
+            ""
         }
     }
 }
