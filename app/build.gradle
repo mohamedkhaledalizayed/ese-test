@@ -156,6 +156,10 @@ android {
     }
     configurations {
         all*.exclude module: 'androidsvg' // This removes all other versions of `support-v4` if gets duplicated from all the artifacts.
+
+        resolutionStrategy {
+            exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+        }
     }
 }
 

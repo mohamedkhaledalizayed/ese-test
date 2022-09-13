@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -36,7 +37,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class InquiryDetailsFragment : BaseFragment() , CallbackPaymentInterface {
 
-    val profileId = "paytabs TEST"
+    val profileId = "103411"
     val serverKey = "SKJN6BDTKH-JG26L9WRDL-DNMN2ZZ9RN"
     val clientKey = "C7KMVN-NV2B6T-MGBPVR-2G72KG"
     val locale = PaymentSdkLanguageCode.EN
@@ -210,20 +211,23 @@ class InquiryDetailsFragment : BaseFragment() , CallbackPaymentInterface {
                 "October gardens", "021"
             )
 
-            configData = PaymentSdkConfigBuilder(profileId, serverKey, clientKey, newAmount ?: 0.0, currency)
-                .setCartDescription(cartDesc)
-                .setLanguageCode(locale)
-                .setBillingData(billingData)
-                .setMerchantCountryCode("EG") // ISO alpha 2
-                .setShippingData(shippingData)
-                .setCartId("1234")
-                .setTransactionType(transType)
-                .showBillingInfo(true)
-                .showShippingInfo(true)
-                .forceShippingInfo(true)
-                .setScreenTitle(screenTitle)
-                .build()
-            startCardPayment(activity!!, configData, callback=this)
+//            configData = PaymentSdkConfigBuilder(profileId, serverKey, clientKey, newAmount ?: 0.0, currency)
+//                .setCartDescription(cartDesc)
+//                .setLanguageCode(locale)
+//                .setBillingData(billingData)
+//                .setMerchantCountryCode("EG") // ISO alpha 2
+//                .setShippingData(shippingData)
+//                .setCartId("1234")
+//                .setTransactionType(transType)
+//                .showBillingInfo(true)
+//                .showShippingInfo(true)
+//                .forceShippingInfo(true)
+//                .setScreenTitle(screenTitle)
+//                .build()
+
+
+            val configData = generatePaytabsConfigurationDetails()
+            startCardPayment(requireActivity(), configData, callback=this)
 
         }
     }
@@ -442,6 +446,60 @@ class InquiryDetailsFragment : BaseFragment() , CallbackPaymentInterface {
     //endregion
 
     fun navController() = findNavController()
+
+    private fun generatePaytabsConfigurationDetails(selectedApm: PaymentSdkApms? = null): PaymentSdkConfigurationDetails {
+        val profileId = "103411"
+        val serverKey = "SKJN6BDTKH-JG26L9WRDL-DNMN2ZZ9RN"
+        val clientKey = "C7KMVN-NV2B6T-MGBPVR-2G72KG"
+        val locale = PaymentSdkLanguageCode.EN /*Or PaymentSdkLanguageCode.AR*/
+        val transactionTitle = "Test SDK"
+        val orderId = "12345676"
+        val cartDesc = "Cart description"
+        val currency = "EGP"
+        val amount = 20.0
+        val merchantCountryCode = "EG"
+        val billingData = PaymentSdkBillingDetails(
+            "City",
+            "eg",
+            "email1@domain.com",
+            "name name",
+            "+966568595106", "121321",
+            "address street", "12345"
+        )
+        val shippingData = PaymentSdkShippingDetails(
+            "City",
+            "eg",
+            "test@test.com",
+            "name1 last1",
+            "+966568595106", "3510",
+            "street2", "12345"
+        )
+        val configData = PaymentSdkConfigBuilder(
+            profileId,
+            serverKey,
+            clientKey, amount, currency
+        )
+            .setCartDescription(cartDesc)
+            .setLanguageCode(locale)
+            .setMerchantIcon(ContextCompat.getDrawable(requireContext(), R.drawable.payment_sdk_adcb_logo))
+            .setBillingData(billingData)
+            .setMerchantCountryCode(merchantCountryCode)
+            .setTransactionType(PaymentSdkTransactionType.SALE)
+            .setTransactionClass(PaymentSdkTransactionClass.ECOM)
+            .setShippingData(shippingData)
+            .setTokenise(PaymentSdkTokenise.USER_MANDATORY) //Check other tokenizing types in PaymentSdkTokenise
+            .setCartId(orderId)
+            .showBillingInfo(true)
+            .showShippingInfo(false)
+            .forceShippingInfo(false)
+            .setScreenTitle(transactionTitle)
+
+        if (selectedApm != null)
+            configData.setAlternativePaymentMethods(listOf(selectedApm))
+        /*Check PaymentSdkApms for more payment options*/
+
+        return configData.build()
+    }
     override fun onError(error: PaymentSdkError) {
         Toast.makeText(requireContext(), "${error.msg}", Toast.LENGTH_SHORT).show()
     }
