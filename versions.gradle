@@ -54,7 +54,7 @@ versions.activity_ktx = "1.4.0"
 versions.fragment_ktx = "1.3.6"
 versions.dimens = "1.0.6"
 versions.androidsvg = "1.4"
-versions.paytabs = "6.1.8"
+versions.paytabs = "6.2.12"
 
 def deps = [:]
 
