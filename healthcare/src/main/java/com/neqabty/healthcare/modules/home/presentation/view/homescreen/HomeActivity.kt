@@ -26,6 +26,7 @@ import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.modules.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.modules.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.modules.profile.presentation.ProfileActivity
+import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.modules.settings.view.SettingsScreen
 import com.neqabty.healthcare.modules.suggestions.presentation.SuggestionsActivity
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
@@ -125,8 +126,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         }
 
         binding.homeContent.startNow.setOnClickListener {
-//            startActivity(Intent(this, SearchActivity::class.java))
-            comingSoon(getString(R.string.comming))
+            startActivity(Intent(this, SearchActivity::class.java))
+//            comingSoon(getString(R.string.comming))
         }
 
         homeViewModel.getAboutList()

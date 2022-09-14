@@ -24,6 +24,13 @@ import team.opay.business.cashier.sdk.pay.PaymentTask
 import team.opay.business.cashier.sdk.api.*
 import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
+import com.neqabty.healthcare.modules.payment.data.model.Payment
+import com.neqabty.healthcare.modules.payment.data.model.SehaPaymentBody
+import com.neqabty.healthcare.modules.payment.domain.entity.SehaPaymentEntity
+import com.neqabty.meganeqabty.payment.data.model.PaymentHomeBody
+import com.neqabty.meganeqabty.payment.data.model.PaymentHomeBodyObject
+import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
+
 @AndroidEntryPoint
 class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
     private var paymentMethod = "card"
@@ -63,8 +70,6 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
                                 binding.rbCard.visibility = View.VISIBLE
                             if (resource.data!!.filter { it.name == "code" }[0].isActive)
                                 binding.rbChannel.visibility = View.VISIBLE
-//                            if (resource.data.filter { it.name == "wallet" }[0].isActive)
-//                                binding.rbMobileWallet.visibility = View.VISIBLE
                         }
                     }
                     com.neqabty.core.utils.Status.ERROR -> {
@@ -86,7 +91,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
                     com.neqabty.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data?.payment?.transaction?.paymentGatewayReferenceId.isNullOrEmpty()) {
-                            val paymentObject = resource.data as PaymentEntity
+                            val paymentObject = resource.data as SehaPaymentEntity
                             oPayPayment(paymentObject, true)
                         } else {
                             showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
@@ -139,50 +144,74 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
 
         binding.btnNext.setOnClickListener {
 
-            address = binding.address.text.toString()
+            if (sharedPreferences.isPhoneVerified) {
+                address = binding.address.text.toString()
 
-            if (address.isEmpty()){
-                Toast.makeText(this, "من فضلك ادخل العنوان", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
+                if (address.isEmpty()){
+                    Toast.makeText(this, "من فضلك ادخل العنوان", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
 
-            binding.btnNext.isEnabled = false
-            paymentViewModel.getPaymentInfo(
-                PaymentBody(
-                    PaymentBodyObject(
-                        serviceCode = serviceCode,
-                        serviceActionCode = serviceActionCode,
-                        paymentMethod = paymentMethod,
-                        address = address
+                binding.btnNext.isEnabled = false
+                paymentViewModel.getPaymentInfo(
+                    SehaPaymentBody(
+                        Payment(
+                            serviceCode = "P3848",
+                            serviceActionCode = "heaLrK",
+                            mobile = "01113595666",
+                            paymentMethod = "card",
+                            paymentSource = "android",
+                            transactionType = "payment"
+                        )
                     )
                 )
-            )
+            }else{
+                verifyPhone()
+            }
+
         }
+    }
+
+    private fun verifyPhone() {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(com.neqabty.meganeqabty.R.string.alert))
+        alertDialog.setMessage(resources.getString(com.neqabty.meganeqabty.R.string.confirm_phone))
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, resources.getString(com.neqabty.meganeqabty.R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            val intent = Intent(this, VerifyPhoneActivity::class.java)
+            startActivity(intent)
+        }
+        alertDialog.show()
+
     }
 
     private fun updateTotal(){
         binding.tvAmount.text = "الاجمالى بعد الرسوم البنكية والاداريه : ${totalAmount + paymentFees}"
-        binding.tvAmountAfterDelivery.text =  "الاجمالى بعد رسوم الشحن والتوصيل : ${totalAmount + paymentFees + deliveryFees}"
+//        binding.tvAmountAfterDelivery.text =  "الاجمالى بعد رسوم الشحن والتوصيل : ${totalAmount + paymentFees + deliveryFees}"
     }
 
     var referenceCode = ""
-    private fun oPayPayment(paymentEntity: PaymentEntity, isCredit: Boolean) {
+    private fun oPayPayment(paymentEntity: SehaPaymentEntity, isCredit: Boolean) {
         referenceCode = paymentEntity.mobilePaymentPayload!!.reference
         val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
         PaymentTask.sandBox = Constants.OPAY_MODE
         val payInput = PayInput(
-            publickey = paymentEntity.mobilePaymentPayload!!.publickey,
-            merchantId = paymentEntity.mobilePaymentPayload!!.merchantId,
-            merchantName = paymentEntity.mobilePaymentPayload!!.merchantName,
-            reference = paymentEntity.mobilePaymentPayload!!.reference,
-            countryCode = paymentEntity.mobilePaymentPayload!!.countryCode, // uppercase
-            currency = paymentEntity.mobilePaymentPayload!!.currency, // uppercase
-            payAmount = (paymentEntity.mobilePaymentPayload!!.payAmount.toDouble() * 100).toLong(),
+            publickey = paymentEntity.mobilePaymentPayload.publickey,
+            merchantId = paymentEntity.mobilePaymentPayload.merchantId,
+            merchantName = paymentEntity.mobilePaymentPayload.merchantName,
+            reference = paymentEntity.mobilePaymentPayload.reference,
+            countryCode = paymentEntity.mobilePaymentPayload.countryCode, // uppercase
+            currency = paymentEntity.mobilePaymentPayload.currency, // uppercase
+            payAmount = (paymentEntity.mobilePaymentPayload.payAmount.toDouble() * 100).toLong(),
             productName = binding.tvPackageName.text.toString(),
             productDescription = binding.tvPackageName.text.toString(),
-            callbackUrl = paymentEntity.mobilePaymentPayload!!.callbackUrl,
+            callbackUrl = paymentEntity.mobilePaymentPayload.callbackUrl,
             userClientIP = "110.246.160.183",
-            expireAt = paymentEntity.mobilePaymentPayload!!.expireAt,
+            expireAt = paymentEntity.mobilePaymentPayload.expireAt,
             paymentType = paymentType // optional
         )
 

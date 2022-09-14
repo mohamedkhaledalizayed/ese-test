@@ -19,6 +19,8 @@ import com.neqabty.healthcare.modules.search.presentation.view.searchresult.Sear
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
+import com.neqabty.healthcare.modules.payment.view.SehaPaymentActivity
+import com.neqabty.healthcare.modules.subscribtions.presentation.view.SubscriptionActivity
 import com.neqabty.signup.modules.signup.presentation.view.homescreen.SignupActivity
 
 @AndroidEntryPoint
@@ -38,17 +40,17 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             PackagesAdapter.OnItemClickListener {
             override fun setOnRegisterClickListener(item: PackagesEntity) {
 
-//                if (sharedPreferences.isPhoneVerified){
-//                    val intent = Intent(this@SearchActivity, SubscriptionActivity::class.java)
-//                    intent.putExtra("name", item.name )
-//                    intent.putExtra("price", item.price )
-//                    intent.putExtra("serviceCode", item.serviceCode )
-//                    intent.putExtra("serviceActionCode", item.serviceActionCode )
-//                    startActivity(intent)
-//                }else{
-//                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
-//                }
-                comingSoon("سوف يتم توفير هذه الخدمة قريبا.")
+                if (sharedPreferences.isAuthenticated){
+                    val intent = Intent(this@SearchActivity, SehaPaymentActivity::class.java)
+                    intent.putExtra("name", item.name )
+                    intent.putExtra("price", item.price )
+                    intent.putExtra("serviceCode", item.serviceCode )
+                    intent.putExtra("serviceActionCode", item.serviceActionCode )
+                    startActivity(intent)
+                }else{
+                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
+                }
+//                comingSoon("سوف يتم توفير هذه الخدمة قريبا.")
             }
         }
 

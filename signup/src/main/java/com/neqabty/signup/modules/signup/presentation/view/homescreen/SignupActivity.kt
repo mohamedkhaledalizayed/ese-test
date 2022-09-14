@@ -130,10 +130,14 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                         dialog.dismiss()
                         if (resource.data!!.nationalId.isNotEmpty()){
                             sharedPreferences.isAuthenticated = true
+                            sharedPreferences.token = resource.data!!.token
                             sharedPreferences.mobile = binding.phone.text.toString()
                             sharedPreferences.name = resource.data!!.fullname ?: ""
                             sharedPreferences.nationalId = resource.data!!.nationalId
                             sharedPreferences.code = resource.data!!.entityCode
+                            sharedPreferences.email = binding.email.text.toString()
+                            sharedPreferences.syndicateName = resource.data!!.entityName
+                            sharedPreferences.image = resource.data!!.entityImage
                             finish()
                         }else{
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
@@ -260,7 +264,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             signupViewModel.signupNeqabtyMember(
                 NeqabtySignupBody(
                     email = binding.email.text.toString(),
-                    fullname = binding.membershipId.text.toString(),
+                    fullname = binding.fullName.text.toString(),
                     mobile = binding.phone.text.toString(),
                     nationalId = binding.nationalId.text.toString(),
                     password = binding.password.text.toString()
