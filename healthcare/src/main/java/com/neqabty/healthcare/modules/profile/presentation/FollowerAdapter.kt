@@ -40,23 +40,23 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-//        val follower = items[position]
-//
-//
-//        viewHolder.binding.followerName.text = follower.fullName
-//        viewHolder.binding.nationalId.text = follower.nationalId
-//        viewHolder.binding.relation.text = follower.relation.relation
-//        if (!follower.image.isNullOrEmpty()){
-//            val decodedString: ByteArray = Base64.decode(follower.image, Base64.DEFAULT)
-//            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-//            viewHolder.binding.followerImage.setImageBitmap(decodedByte)
-//        }
-//        if (position == itemCount - 1){
-//            viewHolder.binding.view.visibility = View.GONE
-//        }
+        val follower = items[position]
+
+
+        viewHolder.binding.followerName.text = follower.fullName
+        viewHolder.binding.nationalId.text = follower.nationalId
+        viewHolder.binding.relation.text = follower.relation.relation
+        if (!follower.image.isNullOrEmpty()){
+            val decodedString: ByteArray = Base64.decode(follower.image, Base64.DEFAULT)
+            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            viewHolder.binding.followerImage.setImageBitmap(decodedByte)
+        }
+        if (position == itemCount - 1){
+            viewHolder.binding.view.visibility = View.GONE
+        }
     }
 
-    override fun getItemCount() = 2
+    override fun getItemCount() = items.size
 
     fun submitList(newItems: List<FollowerEntity>) {
         clear()

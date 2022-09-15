@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -56,6 +57,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private var name: String? = ""
     private var price: Double? = 0.0
     private var serviceCode: String? = ""
+    private var maxFollowers: Int = 0
     private var serviceActionCode: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +67,12 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         name = intent.getStringExtra("name")
         price = intent.getDoubleExtra("price", 0.0)
         serviceCode = intent.getStringExtra("serviceCode")
+        maxFollowers = intent.getIntExtra("maxFollowers", 0)
         serviceActionCode = intent.getStringExtra("serviceActionCode")
         binding.spRelations.adapter = relationsAdapter
+        if (maxFollowers == 0){
+            binding.followersInfo.visibility = View.GONE
+        }
         binding.spRelations.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 if (relationsList != null && i != 0) {
@@ -165,6 +171,10 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     }
 
     fun addFollower(view: View) {
+        if (listFollower.size >= maxFollowers){
+            Toast.makeText(this, "لا يمكن إضافة أكثر من $maxFollowers تابعين ", Toast.LENGTH_LONG).show()
+            return
+        }
         binding.addFollower.visibility = View.GONE
         binding.addFollowerText.visibility = View.GONE
         binding.followerInfo.visibility = View.VISIBLE

@@ -45,6 +45,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                     intent.putExtra("name", item.name )
                     intent.putExtra("price", item.price )
                     intent.putExtra("serviceCode", item.serviceCode )
+                    intent.putExtra("maxFollowers", item.maxFollower )
                     intent.putExtra("serviceActionCode", item.serviceActionCode )
                     startActivity(intent)
                 }else{
