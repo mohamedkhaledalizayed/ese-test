@@ -51,7 +51,7 @@ class InquiryDetailsFragment : BaseFragment() {
     var sendDecryptionKey = false
     var title = ""
 //    var commission: Double = 0.0
-    var newAmount: Double = 0.0
+    var newAmount: Float = 0.0F
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -311,9 +311,9 @@ class InquiryDetailsFragment : BaseFragment() {
     //region
     private fun calculateCommission(paymentOption: Constants.PaymentOption) {
         when (paymentOption) {
-            Constants.PaymentOption.OpayCredit -> newAmount = renewalPayment.amounts?.get(1)?.cardAmount?.toDouble()!!
-            Constants.PaymentOption.OpayPOS -> newAmount = renewalPayment.amounts?.get(1)?.posAmount?.toDouble()!!
-            Constants.PaymentOption.Fawry -> newAmount = renewalPayment.amounts?.get(0)?.posAmount?.toDouble()!!
+            Constants.PaymentOption.OpayCredit -> newAmount = renewalPayment.amounts?.get(1)?.cardAmount!!
+            Constants.PaymentOption.OpayPOS -> newAmount = renewalPayment.amounts?.get(1)?.posAmount!!
+            Constants.PaymentOption.Fawry -> newAmount = renewalPayment.amounts?.get(0)?.posAmount!!
             else -> {}
         }
         binding.newAmount = newAmount

@@ -11,7 +11,7 @@
 
         <variable
             name="newAmount"
-            type="java.lang.Double" />
+            type="java.lang.Float" />
         <variable
             name="medicalRenewalPayment"
             type="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
