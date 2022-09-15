@@ -204,15 +204,15 @@ class MedicalRenewDetailsFragment : BaseFragment() {
     private fun handleViewState(state: MedicalRenewDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
-            state.medicalRenewalPayment?.let {
+            state.paymentRequestUI?.let {
                 medicalRenewalPaymentUI = it
-                if ((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-2")
-                    showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg) {
+                if ((state.paymentRequestUI as MedicalRenewalPaymentUI).resultType == "-2")
+                    showAlert((state.paymentRequestUI as MedicalRenewalPaymentUI).msg) {
                         navController().popBackStack()
                         navController().navigate(R.id.homeFragment)
                     }
-                else if ((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-1")
-                    showAlert((state.medicalRenewalPayment as MedicalRenewalPaymentUI).msg) {
+                else if ((state.paymentRequestUI as MedicalRenewalPaymentUI).resultType == "-1")
+                    showAlert((state.paymentRequestUI as MedicalRenewalPaymentUI).msg) {
                         navController().popBackStack()
                         navController().navigate(R.id.homeFragment)
                     }

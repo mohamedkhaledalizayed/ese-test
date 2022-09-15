@@ -7,9 +7,9 @@ data class PaymentRequestData(
     @field:SerializedName("amount")
     var amount: Double? = 0.0,
     @field:SerializedName("details")
-    var details: List<AmountItem>? = null
+    var details: List<DetailsItem>? = null
 ) : Response() {
-    data class AmountItem(
+    data class DetailsItem(
         @field:SerializedName("name")
         var name: String? = "",
         @field:SerializedName("TotalPrice")

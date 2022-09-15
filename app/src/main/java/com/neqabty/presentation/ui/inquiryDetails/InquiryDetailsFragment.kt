@@ -77,7 +77,7 @@ class InquiryDetailsFragment : BaseFragment() {
         inquiryDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                paymentInquiry()
+                addRenewalRequest()
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
@@ -171,7 +171,7 @@ class InquiryDetailsFragment : BaseFragment() {
                 return@setOnClickListener
             llSuperProgressbar.visibility = View.VISIBLE
 //            createPayment()
-            paymentInquiry()
+            addRenewalRequest()
         }
     }
 
@@ -209,7 +209,7 @@ class InquiryDetailsFragment : BaseFragment() {
     private fun handleViewState(state: InquiryDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
-            state.renewalPayment?.let {
+            state.paymentRequestUI?.let {
                 renewalPayment = it
                 if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
                     oPayPayment(Constants.PaymentOption.OpayCredit)
@@ -385,8 +385,8 @@ class InquiryDetailsFragment : BaseFragment() {
         }
     }
 
-    fun paymentInquiry(){
-        inquiryDetailsViewModel.paymentInquiry(sharedPref.mobile, params.number, renewalPayment.paymentItem?.engName ?: "", params.serviceID,
+    fun addRenewalRequest(){
+        inquiryDetailsViewModel.addRenewalRequest(sharedPref.mobile, params.number, renewalPayment.paymentItem?.engName ?: "", params.serviceID,
             if (rb_card.isChecked) "card" else "pos",
             if (rb_card.isChecked) 2 else if (rb_channel.isChecked) 2 else 1,
             if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE,

@@ -63,9 +63,9 @@ class InquiryViewModel @Inject constructor(
                 )
     }
 
-    fun paymentInquiry(mobileNumber: String, number: String, serviceID: Int) {
+    fun paymentInquiry(number: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(paymentInquiry.paymentInquiry(true, mobileNumber, number, "", serviceID, "", -1, -1, "", "")
+        addDisposable(paymentInquiry.paymentInquiry(number)
                 .map {
                     it.let {
                         renewalPaymentEntityUIMapper.mapFrom(it)

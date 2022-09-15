@@ -85,7 +85,7 @@ class InquiryFragment : BaseFragment() {
         llContent.visibility = View.VISIBLE
         bSend.setOnClickListener {
             if (isDataValid(binding.edMemberNumber.text.toString())) {
-                inquiryViewModel.paymentInquiry(sharedPref.mobile, binding.edMemberNumber.text.toString(), serviceID)
+                inquiryViewModel.paymentInquiry(binding.edMemberNumber.text.toString())
             }
         }
     }

@@ -57,7 +57,7 @@ class SyndicateServicesViewModel @Inject constructor(
 
     fun paymentSyndicateServices(mobileNumber: String, number: String, serviceID: Int) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(paymentInquiry.paymentInquiry(true, mobileNumber, number, "", serviceID, "", 1, -1, "", "")
+        addDisposable(paymentInquiry.paymentInquiry(number)
             .map {
                 it.let {
                     renewalPaymentEntityUIMapper.mapFrom(it)

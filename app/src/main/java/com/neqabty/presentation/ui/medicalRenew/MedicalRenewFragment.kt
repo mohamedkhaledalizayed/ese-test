@@ -76,7 +76,7 @@ class MedicalRenewFragment : BaseFragment() {
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 medicalRenewViewModel.getMedicalRenewalData(sharedPref.mobile, sharedPref.user)
-                medicalRenewViewModel.paymentInquiry(sharedPref.mobile, sharedPref.user)
+                medicalRenewViewModel.paymentInquiry(sharedPref.user)
             }, cancelCallback = {
                 navController().popBackStack()
                 navController().navigate(R.id.homeFragment)
@@ -84,7 +84,7 @@ class MedicalRenewFragment : BaseFragment() {
         })
 
         medicalRenewViewModel.getMedicalRenewalData(sharedPref.mobile, sharedPref.user)
-        medicalRenewViewModel.paymentInquiry(sharedPref.mobile, sharedPref.user)
+        medicalRenewViewModel.paymentInquiry(sharedPref.user)
 
     }
 

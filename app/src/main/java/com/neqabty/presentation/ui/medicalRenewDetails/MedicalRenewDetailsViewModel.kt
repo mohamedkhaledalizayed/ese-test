@@ -2,11 +2,8 @@ package com.neqabty.presentation.ui.medicalRenewDetails
 
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.data.api.WebService
-import com.neqabty.data.api.requests.SyndicateRequest
-import com.neqabty.data.repositories.RemoteNeqabtyDataStore
-import com.neqabty.domain.NeqabtyRepository
+import com.neqabty.domain.usecases.AddMedicalRenewalRequest
 import com.neqabty.domain.usecases.EncryptData
-import com.neqabty.domain.usecases.MedicalRenewPaymentInquiry
 import com.neqabty.domain.usecases.SendDecryptionKey
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
@@ -14,25 +11,23 @@ import com.neqabty.presentation.di.DI
 import com.neqabty.presentation.entities.DecryptionUI
 import com.neqabty.presentation.entities.EncryptionUI
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
+import com.neqabty.presentation.entities.PaymentRequestUI
 import com.neqabty.presentation.mappers.DecryptionEntityUIMapper
 import com.neqabty.presentation.mappers.EncryptionEntityUIMapper
-import com.neqabty.presentation.mappers.MedicalRenewalPaymentEntityUIMapper
+import com.neqabty.presentation.mappers.PaymentRequestEntityUIMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Named
 
 @HiltViewModel
 class MedicalRenewDetailsViewModel @Inject constructor(
-        private val sendDecryptionKey: SendDecryptionKey,
-        private val encryptData: EncryptData,
-        private val paymentInquiry: MedicalRenewPaymentInquiry,
-        @Named(DI.authorized) private val api: WebService
+    private val sendDecryptionKey: SendDecryptionKey,
+    private val encryptData: EncryptData,
+    private val addMedicalRenewalRequest: AddMedicalRenewalRequest,
+    @Named(DI.authorized) private val api: WebService
 ) : BaseViewModel() {
 
-    private val medicalRenewalPaymentEntityUIMapper = MedicalRenewalPaymentEntityUIMapper()
+    private val paymentRequestEntityUIMapper = PaymentRequestEntityUIMapper()
     private val encryptionEntityUIMapper = EncryptionEntityUIMapper()
     private val decryptionEntityUIMapper = DecryptionEntityUIMapper()
 
@@ -86,10 +81,10 @@ class MedicalRenewDetailsViewModel @Inject constructor(
 
     fun paymentInquiry(mobileNumber: String, number: String, name: String, serviceID: Int, paymentType: String, paymentGatewayId: Int, deliveryType: Int, address: String, mobile: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(paymentInquiry.paymentInquiry(false, mobileNumber, number, name, serviceID, paymentType, paymentGatewayId, deliveryType, address, mobile)
+        addDisposable(addMedicalRenewalRequest.addMedicalRenewalRequest(mobileNumber, number, name, serviceID, paymentType, paymentGatewayId, deliveryType, address, mobile)
                 .map {
                     it.let {
-                        medicalRenewalPaymentEntityUIMapper.mapFrom(it)
+                        paymentRequestEntityUIMapper.mapFrom(it)
                     }
                 }.subscribe(
                         { onInquiryReceived(it) },
@@ -115,10 +110,10 @@ class MedicalRenewDetailsViewModel @Inject constructor(
         viewState.value = newViewState
     }
 
-    private fun onInquiryReceived(medicalRenewalPayment: MedicalRenewalPaymentUI) {
+    private fun onInquiryReceived(paymentRequestUI: PaymentRequestUI) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
-                medicalRenewalPayment = medicalRenewalPayment)
+                paymentRequestUI = paymentRequestUI)
         viewState.value = newViewState
     }
 }

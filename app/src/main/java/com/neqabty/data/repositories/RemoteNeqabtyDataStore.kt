@@ -323,11 +323,39 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
 
     private val medicalRenewalPaymentDataEntityMapper = MedicalRenewalPaymentDataEntityMapper()
 
-    override fun inquireMedicalRenewalPayment(isInquire: Boolean, mobileNumber: String, userNumber: String, userName: String, serviceID: Int, paymentType: String, paymentGatewayId: Int, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
-        return if(isInquire) api.inquireHealthCare(MedicalInquiryRequest(userNumber)).flatMap { renewalPaymentInfo ->
-            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo.data!!))
-        } else api.getMedicalRenewPaymentData(AddMedicalRenewalRequest(userNumber, userName, mobileNumber, locationType, address, mobile, serviceID, paymentType, paymentGatewayId)).flatMap { renewalPaymentInfo ->
-            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalPaymentInfo.data!!))
+    override fun inquireMedicalRenewalPayment(userNumber: String): Observable<MedicalRenewalPaymentEntity> {
+        return api.inquireHealthCare(MedicalInquiryRequest(userNumber)).flatMap { renewalData ->
+            Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalData.data!!))
+        }
+    }
+
+    private val paymentRequestDataEntityMapper = PaymentRequestDataEntityMapper()
+
+    override fun addMedicalRenewalRequest(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        return api.getMedicalRenewPaymentData(
+            AddMedicalRenewalRequest(
+                userNumber,
+                userName,
+                mobileNumber,
+                locationType,
+                address,
+                mobile,
+                serviceID,
+                paymentType,
+                paymentGatewayId
+            )
+        ).flatMap { renewalPaymentInfo ->
+            Observable.just(paymentRequestDataEntityMapper.mapFrom(renewalPaymentInfo.data!!))
         }
     }
 
@@ -376,14 +404,39 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
 
     private val renewalPaymentDataEntityMapper = RenewalPaymentDataEntityMapper()
 
-    override fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, userName: String, serviceID: Int, paymentType: String, paymentGatewayId: Int, locationType: Int, address: String, mobile: String): Observable<RenewalPaymentEntity> {
-        return if (isInquire) api.paymentInquiry(InquiryRequest(userNumber)).flatMap { renewalData ->
-            Observable.just(renewalPaymentDataEntityMapper.mapFrom(renewalData.data!!))
-        } else
-        return api.addRenewalRequest(AddInquiryRequest(userNumber, userName, mobileNumber, locationType, address, mobile, serviceID, paymentType, paymentGatewayId)).flatMap { renewalData ->
+    override fun inquirePayment(userNumber: String): Observable<RenewalPaymentEntity> {
+        return api.paymentInquiry(InquiryRequest(userNumber)).flatMap { renewalData ->
             Observable.just(renewalPaymentDataEntityMapper.mapFrom(renewalData.data!!))
         }
     }
+
+        override fun addRenewalRequest(
+            mobileNumber: String,
+            userNumber: String,
+            userName: String,
+            serviceID: Int,
+            paymentType: String,
+            paymentGatewayId: Int,
+            locationType: Int,
+            address: String,
+            mobile: String
+        ): Observable<PaymentRequestEntity> {
+            return api.addRenewalRequest(
+                AddInquiryRequest(
+                    userNumber,
+                    userName,
+                    mobileNumber,
+                    locationType,
+                    address,
+                    mobile,
+                    serviceID,
+                    paymentType,
+                    paymentGatewayId
+                )
+            ).flatMap { renewalData ->
+                Observable.just(paymentRequestDataEntityMapper.mapFrom(renewalData.data!!))
+            }
+        }
 
     private val encryptionDataEntityMapper = EncryptionDataEntityMapper()
 
