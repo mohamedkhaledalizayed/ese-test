@@ -66,9 +66,9 @@ object Constants {
     var DELIVERY_LOCATION_HOME = 2
     var DELIVERY_LOCATION_MAIN_SYNDICATE = 3
 
-    var PAYMENT_TYPE_TRIPS = "9991"
-    var PAYMENT_TYPE_RECORDS = "9992"
-    var PAYMENT_TYPE_MEDICAL_RENEW = "9993"
+    var PAYMENT_TYPE_TRIPS = 9991
+    var PAYMENT_TYPE_RECORDS = 9992
+    var PAYMENT_TYPE_MEDICAL_RENEW = 9993
 
     sealed class Mode {
         class Visitor : Mode() {

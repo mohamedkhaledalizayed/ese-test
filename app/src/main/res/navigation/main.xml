@@ -781,11 +781,11 @@
 
 
         <argument
-            android:name="medicalRenewalPaymentUI"
-            app:argType="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
+            android:name="renewalPaymentUI"
+            app:argType="com.neqabty.presentation.entities.RenewalPaymentUI" />
         <argument
             android:name="serviceID"
-            app:argType="java.lang.String" />
+            app:argType="java.lang.Integer" />
 
         <action
             android:id="@+id/openPayment"

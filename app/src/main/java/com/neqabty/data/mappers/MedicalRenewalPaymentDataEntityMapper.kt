@@ -14,6 +14,14 @@ class MedicalRenewalPaymentDataEntityMapper @Inject constructor() : Mapper<Medic
                 resultType = from.resultType,
                 requestID = from.requestID,
                 msg = from.msg,
+                amounts = from.amounts?.map { it ->
+                    MedicalRenewalPaymentEntity.AmountItem(
+                        name = it.name,
+                        id = it.id,
+                        cardAmount = it.cardAmount,
+                        posAmount = it.posAmount
+                    )
+                },
                 paymentItem = from.paymentItem?.let { return@let MedicalRenewalPaymentEntity.PaymentItem(paymentRequestNumber = it.paymentRequestNumber, amount = it.amount, name = it.name, engName = it.engName, engNumber = it.engNumber, paymentDetailsItems = it.paymentDetailsItems?.map { item -> MedicalRenewalPaymentEntity.PaymentDetailsItem(item.name, item.totalAmount) }) }
         )
     }

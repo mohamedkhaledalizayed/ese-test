@@ -16,7 +16,7 @@ class SyndicateServicesViewModel @Inject constructor(
     private val paymentInquiry: PaymentInquiry
 ) : BaseViewModel() {
 
-    private val medicalRenewalPaymentEntityUIMapper = MedicalRenewalPaymentEntityUIMapper()
+    private val renewalPaymentEntityUIMapper = RenewalPaymentEntityUIMapper()
     private val serviceEntityUIMapper = ServiceEntityUIMapper()
     private val serviceTypeEntityUIMapper = SyndicateServicesEntityUIMapper()
 
@@ -55,12 +55,12 @@ class SyndicateServicesViewModel @Inject constructor(
             )
     }
 
-    fun paymentSyndicateServices(mobileNumber: String, number: String, serviceID: String) {
+    fun paymentSyndicateServices(mobileNumber: String, number: String, serviceID: Int) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(paymentInquiry.paymentInquiry(true, mobileNumber, number, serviceID, "", "", -1, "", "")
+        addDisposable(paymentInquiry.paymentInquiry(true, mobileNumber, number, "", serviceID, "", 1, -1, "", "")
             .map {
                 it.let {
-                    medicalRenewalPaymentEntityUIMapper.mapFrom(it)
+                    renewalPaymentEntityUIMapper.mapFrom(it)
                 }
             }.subscribe(
                 {
@@ -89,10 +89,10 @@ class SyndicateServicesViewModel @Inject constructor(
         viewState.value = newViewState
     }
 
-    private fun onSyndicateServicesReceived(medicalRenewalPayment: MedicalRenewalPaymentUI) {
+    private fun onSyndicateServicesReceived(renewalPayment: RenewalPaymentUI) {
         val newViewState = viewState.value?.copy(
             isLoading = false,
-            medicalRenewalPayment = medicalRenewalPayment)
+            renewalPayment = renewalPayment)
         viewState.value = newViewState
     }
 }
