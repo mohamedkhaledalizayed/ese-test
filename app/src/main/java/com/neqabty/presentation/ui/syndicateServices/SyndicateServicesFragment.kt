@@ -19,7 +19,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
-import com.neqabty.presentation.entities.ServiceTypeUI
+import com.neqabty.presentation.entities.SyndicateServicesUI
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.inquiry_details_fragment.llContent
@@ -32,11 +32,11 @@ class SyndicateServicesFragment : BaseFragment() {
 
     var binding by autoCleared<SyndicateServicesFragmentBinding>()
 
-    private val inquiryViewModel: SyndicateServicesViewModel by viewModels()
+    private val syndicateServicesViewModel: SyndicateServicesViewModel by viewModels()
 
-    var serviceTypesResultList: List<ServiceTypeUI.ServiceType>? = mutableListOf()
-    var servicesResultList: List<ServiceTypeUI.Service>? = mutableListOf()
-    var serviceTypeID: Int = 0
+    var syndicateServicesResultList: List<SyndicateServicesUI.ServiceType>? = mutableListOf()
+    var servicesResultList: List<SyndicateServicesUI.Service>? = mutableListOf()
+    var syndicateServicesID: Int = 0
     var serviceID: Int = 0
 
     override fun onAttach(context: Context) {
@@ -63,18 +63,18 @@ class SyndicateServicesFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         showBannerAd(Constants.AD_PAYMENTS, binding.ivBanner)
 
-        inquiryViewModel.viewState.observe(this.requireActivity(), Observer {
+        syndicateServicesViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
         })
-        inquiryViewModel.errorState.observe(this, Observer { error ->
+        syndicateServicesViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                inquiryViewModel.getAllServiceTypes(sharedPref.user)
+                syndicateServicesViewModel.getSyndicateServices(sharedPref.user)
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
-        inquiryViewModel.getAllServiceTypes(sharedPref.user)
+        syndicateServicesViewModel.getSyndicateServices(sharedPref.user)
     }
 
     fun initializeViews() {
@@ -85,7 +85,7 @@ class SyndicateServicesFragment : BaseFragment() {
         llContent.visibility = View.VISIBLE
         bSend.setOnClickListener {
 //            if (isDataValid(binding.edMemberNumber.text.toString())) {
-            inquiryViewModel.paymentSyndicateServices(sharedPref.mobile, binding.edMemberNumber.text.toString(), serviceID.toString())
+            syndicateServicesViewModel.paymentSyndicateServices(sharedPref.mobile, binding.edMemberNumber.text.toString(), serviceID.toString())
 //            }
         }
     }
@@ -94,9 +94,9 @@ class SyndicateServicesFragment : BaseFragment() {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         activity?.invalidateOptionsMenu()
         if (llContent.visibility == View.INVISIBLE && state.serviceTypes != null) {
-            serviceTypesResultList = state.serviceTypes
+            syndicateServicesResultList = state.serviceTypes
             servicesResultList = state.services
-            renderServiceTypes()
+            renderSyndicateServices()
             initializeViews()
             state.serviceTypes = null
             return
@@ -117,19 +117,19 @@ class SyndicateServicesFragment : BaseFragment() {
         }
     }
 
-    fun renderServiceTypes() {
-        serviceTypesResultList = serviceTypesResultList?.filter { it.id == 4 || it.id == 6 }
-        binding.spServiceTypes.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, serviceTypesResultList!!)
-        binding.spServiceTypes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+    fun renderSyndicateServices() {
+        syndicateServicesResultList = syndicateServicesResultList?.filter { it.id == 4 || it.id == 6 }
+        binding.spSyndicateServices.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, syndicateServicesResultList!!)
+        binding.spSyndicateServices.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                serviceTypeID = (parent.getItemAtPosition(position) as ServiceTypeUI.ServiceType).id
-                servicesResultList = inquiryViewModel.viewState.value?.services?.filter { it.groupID == serviceTypeID }
+                syndicateServicesID = (parent.getItemAtPosition(position) as SyndicateServicesUI.ServiceType).id
+                servicesResultList = syndicateServicesViewModel.viewState.value?.services?.filter { it.groupID == syndicateServicesID }
                 renderServices()
             }
         }
-        binding.spServiceTypes.setSelection(0)
-//        inquiryViewModel.getAllServices((spServiceTypes.selectedItem as ServiceTypeUI.ServiceType).id)
+        binding.spSyndicateServices.setSelection(0)
+//        inquiryViewModel.getAllServices((spSyndicateServices.selectedItem as SyndicateServicesUI.SyndicateServices).id)
     }
 
     fun renderServices() {
@@ -138,7 +138,7 @@ class SyndicateServicesFragment : BaseFragment() {
         binding.spService.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                serviceID = (parent.getItemAtPosition(position) as ServiceTypeUI.Service).id
+                serviceID = (parent.getItemAtPosition(position) as SyndicateServicesUI.Service).id
             }
         }
         binding.spService.setSelection(0)

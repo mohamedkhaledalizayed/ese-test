@@ -127,12 +127,15 @@ interface WebService {
     fun getTransactionHash(@Body validationRequest: ValidationRequest): Observable<MemberData>
 
     @POST("api/v1/ese-services")
-    fun getAllServiceTypes(@Body servicesRequest: ServicesRequest): Observable<ApiResponse<ServiceTypeData>>
+    fun getSyndicateServices(@Body servicesRequest: SyndicateServicesRequest): Observable<ApiResponse<SyndicateServicesData>>
+
+    @GET("api/v1/eseServicesTypes")
+    fun getAllServiceTypes(): Observable<ApiResponse<List<ServiceTypeData>>>
 
     @POST("api/v1/eseServices")
     fun getAllServices(@Body servicesRequest: ServicesRequest): Observable<ApiResponse<List<ServiceData>>>
 
-    @GET("api/apiPaymentRequest/RenewalInquiryDetails")
+    @GET("api/payment/renewal-inquiry")
     fun paymentInquiry(
             @Query("mobile_number") mobileNumber: String,
             @Query("OldrefID") oldrefID: String,
@@ -142,7 +145,7 @@ interface WebService {
             @Query("server") server: String = ""
     ): Observable<MedicalRenewalPaymentData>
 
-    @POST("api/Api/ApiRequest/AddServiceRequest")
+    @POST("api/payment/renewal-request")
     fun addRenewalRequest(
             @Query("mobile_number") mobileNumber: String,
             @Query("oldRefId") oldRefID: String,
@@ -189,10 +192,10 @@ interface WebService {
     @GET("api/ApiHealthCare/GetFollowersList")
     fun getMedicalRenewData(@Query("mobile_number") mobileNumber: String, @Query("oldRefId") contactId: String, @Query("server") server: String = ""): Observable<MedicalRenewalData>
 
-    @GET("api/apiPaymentRequest/HealthCareInquiryDetails")
+    @GET("api/payment/healthcare-inquiry")
     fun inquireHealthCare(@Query("mobile_number") mobileNumber: String, @Query("OldrefID") oldRefId: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
 
-    @POST("api/apiPaymentRequest/AddHealthCareRequest")
+    @POST("api/payment/healthcare-request")
     fun getMedicalRenewPaymentData(@Query("mobile_number") mobileNumber: String, @Query("oldRefId") contactId: String, @Query("deliveryLocation") locationType: Int, @Query("deliveryAddress") address: String, @Query("deliveryPhone") mobile: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
 
     @POST("api/ApiHealthCare/MedBeneficiaryFollowersUpdate")

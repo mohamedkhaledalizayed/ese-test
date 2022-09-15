@@ -356,16 +356,24 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     private val serviceDataEntityMapper = ServiceDataEntityMapper()
 
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {
-        return api.getAllServices(ServicesRequest("")).map { services ->
+        return api.getAllServices(ServicesRequest(typeID)).map { services ->
             services.data?.map { serviceDataEntityMapper.mapFrom(it) }
         }
     }
 
     private val serviceTypeDataEntityMapper = ServiceTypeDataEntityMapper()
 
-    override fun getAllServiceTypes(userNumber: String): Observable<ServiceTypeEntity> {
-        return api.getAllServiceTypes(ServicesRequest(userNumber)).map { serviceTypes ->
-            serviceTypeDataEntityMapper.mapFrom(serviceTypes.data!!)
+    override fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>> {
+        return api.getAllServiceTypes().map { serviceTypes ->
+            serviceTypes.data?.map { serviceTypeDataEntityMapper.mapFrom(it) }
+        }
+    }
+
+    private val syndicateServicesDataEntityMapper = SyndicateServicesDataEntityMapper()
+
+    override fun getSyndicateServices(userNumber: String): Observable<SyndicateServicesEntity> {
+        return api.getSyndicateServices(SyndicateServicesRequest(userNumber)).map { serviceTypes ->
+            syndicateServicesDataEntityMapper.mapFrom(serviceTypes.data!!)
         }
     }
 

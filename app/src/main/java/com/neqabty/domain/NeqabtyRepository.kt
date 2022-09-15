@@ -94,8 +94,9 @@ interface NeqabtyRepository {
             doc10: File?
     ): Observable<Unit>
 
-    fun getAllServiceTypes(userNumber: String): Observable<ServiceTypeEntity>
+    fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>>
     fun getAllServices(typeID: Int): Observable<List<ServiceEntity>>
+    fun getSyndicateServices(userNumber: String): Observable<SyndicateServicesEntity>
     fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity>
     fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
     fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity>

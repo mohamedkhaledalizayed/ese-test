@@ -7,7 +7,7 @@ import com.neqabty.presentation.entities.ServiceUI
 
 data class InquiryViewState(
     var isLoading: Boolean = true,
-    var serviceTypes: List<ServiceTypeUI.ServiceType>? = null,
-    var services: List<ServiceTypeUI.Service>? = null,
+    var serviceTypes: List<ServiceTypeUI>? = null,
+    var services: List<ServiceUI>? = null,
     var medicalRenewalPayment: MedicalRenewalPaymentUI? = null
 )

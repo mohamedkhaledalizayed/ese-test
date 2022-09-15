@@ -11,14 +11,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SyndicateServicesViewModel @Inject constructor(
-    private val getAllServiceTypes: GetAllServiceTypes,
+    private val getSyndicateServices: GetSyndicateServices,
     private val getAllServices: GetAllServices,
     private val paymentInquiry: PaymentInquiry
 ) : BaseViewModel() {
 
     private val medicalRenewalPaymentEntityUIMapper = MedicalRenewalPaymentEntityUIMapper()
     private val serviceEntityUIMapper = ServiceEntityUIMapper()
-    private val serviceTypeEntityUIMapper = ServiceTypeEntityUIMapper()
+    private val serviceTypeEntityUIMapper = SyndicateServicesEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<SyndicateServicesViewState> = MutableLiveData()
@@ -27,15 +27,15 @@ class SyndicateServicesViewModel @Inject constructor(
         viewState.value = SyndicateServicesViewState()
     }
 
-    fun getAllServiceTypes(userNumber: String) {
-        getAllServiceTypes.getAllServiceTypes(userNumber)
+    fun getSyndicateServices(userNumber: String) {
+        getSyndicateServices.getSyndicateServices(userNumber)
             .flatMap {
                 it.let {
                     serviceTypeEntityUIMapper.observable(it)
                 }
             }.subscribe(
                 {
-                    onServiceTypesReceived(it)
+                    onSyndicateServicessReceived(it)
                 },
                 { errorState.value = handleError(it) }
             )
@@ -74,7 +74,7 @@ class SyndicateServicesViewModel @Inject constructor(
         )
     }
 
-    private fun onServiceTypesReceived(serviceTypes: ServiceTypeUI) {
+    private fun onSyndicateServicessReceived(serviceTypes: SyndicateServicesUI) {
         val newViewState = viewState.value?.copy(
             isLoading = false,
             serviceTypes = serviceTypes.typesList,
@@ -82,7 +82,7 @@ class SyndicateServicesViewModel @Inject constructor(
         viewState.value = newViewState
     }
 
-    private fun onServicesReceived(services: List<ServiceTypeUI.Service>) {
+    private fun onServicesReceived(services: List<SyndicateServicesUI.Service>) {
         val newViewState = viewState.value?.copy(
             isLoading = false,
             services = services)

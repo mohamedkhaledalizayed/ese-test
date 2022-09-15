@@ -35,8 +35,8 @@ class InquiryFragment : BaseFragment() {
 
     private val inquiryViewModel: InquiryViewModel by viewModels()
 
-    var serviceTypesResultList: List<ServiceTypeUI.ServiceType>? = mutableListOf()
-    var servicesResultList: List<ServiceTypeUI.Service>? = mutableListOf()
+    var serviceTypesResultList: List<ServiceTypeUI>? = mutableListOf()
+    var servicesResultList: List<ServiceUI>? = mutableListOf()
     var serviceTypeID: Int = 0
     var serviceID: Int = 0
 
@@ -70,12 +70,12 @@ class InquiryFragment : BaseFragment() {
         inquiryViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                inquiryViewModel.getAllServiceTypes(sharedPref.user)
+                inquiryViewModel.getAllServiceTypes()
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
-        inquiryViewModel.getAllServiceTypes(sharedPref.user)
+        inquiryViewModel.getAllServiceTypes()
     }
 
     fun initializeViews() {
@@ -85,20 +85,23 @@ class InquiryFragment : BaseFragment() {
         renderServices()
         llContent.visibility = View.VISIBLE
         bSend.setOnClickListener {
-//            if (isDataValid(binding.edMemberNumber.text.toString())) {
+            if (isDataValid(binding.edMemberNumber.text.toString())) {
                 inquiryViewModel.paymentInquiry(sharedPref.mobile, binding.edMemberNumber.text.toString(), serviceID.toString())
-//            }
+            }
         }
     }
 
     private fun handleViewState(state: InquiryViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         activity?.invalidateOptionsMenu()
-        if (llContent.visibility == View.INVISIBLE && state.serviceTypes != null) {
-            serviceTypesResultList = state.serviceTypes
+        if (state.services != null) {
             servicesResultList = state.services
-            renderServiceTypes()
             initializeViews()
+            state.services = null
+            return
+        } else if (llContent.visibility == View.INVISIBLE && state.serviceTypes != null) {
+            serviceTypesResultList = state.serviceTypes
+            renderServiceTypes()
             state.serviceTypes = null
             return
         } else if (!state.isLoading && state.medicalRenewalPayment != null) {
@@ -119,27 +122,25 @@ class InquiryFragment : BaseFragment() {
     }
 
     fun renderServiceTypes() {
-        serviceTypesResultList = serviceTypesResultList?.filter { it.id == 4 || it.id == 6 }
         binding.spServiceTypes.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, serviceTypesResultList!!)
         binding.spServiceTypes.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                serviceTypeID = (parent.getItemAtPosition(position) as ServiceTypeUI.ServiceType).id
-                servicesResultList = inquiryViewModel.viewState.value?.services?.filter { it.groupID == serviceTypeID }
-                renderServices()
+                serviceTypeID = (parent.getItemAtPosition(position) as ServiceTypeUI).id
+                llSuperProgressbar.visibility = View.VISIBLE
+                inquiryViewModel.getAllServices(serviceTypeID)
             }
         }
         binding.spServiceTypes.setSelection(0)
-//        inquiryViewModel.getAllServices((spServiceTypes.selectedItem as ServiceTypeUI.ServiceType).id)
+        inquiryViewModel.getAllServices((spServiceTypes.selectedItem as ServiceTypeUI).id)
     }
 
     fun renderServices() {
-        servicesResultList = servicesResultList?.filter { it.id == 1086 || it.id == 3090 || it.id == 6534 }
         binding.spService.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, servicesResultList!!)
         binding.spService.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                serviceID = (parent.getItemAtPosition(position) as ServiceTypeUI.Service).id
+                serviceID = (parent.getItemAtPosition(position) as ServiceUI).id
             }
         }
         binding.spService.setSelection(0)
