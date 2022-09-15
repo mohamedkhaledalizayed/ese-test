@@ -335,7 +335,6 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         tools:itemCount="5"
                         tools:listitem="@layout/follower_item_layout"
-                        android:background="@drawable/followers_bg"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

@@ -17,9 +17,9 @@ import com.neqabty.healthcare.modules.profile.domain.entity.profile.SubscribedPa
 import kotlin.collections.ArrayList
 
 
-class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
+class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
-    private val items: MutableList<FollowerEntity> = ArrayList()
+    private val items: MutableList<SubscribedPackageEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -30,8 +30,8 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
-        val binding: FollowerItemLayoutBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.follower_item_layout, parent, false)
+        val binding: PackageLayoutBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.package_layout, parent, false)
 
         return ViewHolder(
             binding
@@ -40,9 +40,13 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-//        val follower = items[position]
-//
-//
+        val follower = items[position]
+
+        viewHolder.binding.packageName.text = follower.packages.nameAr
+        val mAdapter = FollowerAdapter()
+        viewHolder.binding.followersRecycler.adapter = mAdapter
+
+        mAdapter.submitList(follower.packages.followers)
 //        viewHolder.binding.followerName.text = follower.fullName
 //        viewHolder.binding.nationalId.text = follower.nationalId
 //        viewHolder.binding.relation.text = follower.relation.relation
@@ -56,9 +60,9 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
 //        }
     }
 
-    override fun getItemCount() = 2
+    override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<FollowerEntity>) {
+    fun submitList(newItems: List<SubscribedPackageEntity>) {
         clear()
         newItems.let {
             items.addAll(it)
@@ -76,6 +80,6 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
             fun setOnItemClickListener(item: String)
     }
 
-    class ViewHolder(val binding: FollowerItemLayoutBinding) :
+    class ViewHolder(val binding: PackageLayoutBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

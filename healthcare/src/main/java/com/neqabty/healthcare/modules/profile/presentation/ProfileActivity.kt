@@ -14,7 +14,7 @@ import com.neqabty.core.utils.loadSVG
 class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
 
 
-    private val mAdapter = FollowerAdapter()
+    private val mAdapter = PackagesAdapter()
     private val profileViewModel: ProfileViewModel by viewModels()
     override fun getViewBinding() = ActivityProfileBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                         binding.address.text = "${resource.data?.data?.client?.address}"
                         binding.job.text = "${resource.data?.data?.client?.job}"
                         binding.nationalId.text = "${resource.data?.data?.client?.nationalId}"
-                        mAdapter.submitList(resource.data!!.data.subscribedPackages[0].packages.followers)
+                        mAdapter.submitList(resource.data!!.data.subscribedPackages)
                         binding.qrCode.loadSVG(resource.data!!.data.client.qrCode)
                     }
                 }

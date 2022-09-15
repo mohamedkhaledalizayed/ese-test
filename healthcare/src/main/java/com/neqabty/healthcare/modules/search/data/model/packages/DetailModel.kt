@@ -8,8 +8,6 @@ data class DetailModel(
     val cardId: String,
     @SerializedName("created_at")
     val createdAt: String,
-    @SerializedName("deleted_at")
-    val deletedAt: Any,
     @SerializedName("description")
     val description: String,
     @SerializedName("id")
