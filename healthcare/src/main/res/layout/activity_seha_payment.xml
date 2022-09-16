@@ -170,51 +170,11 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvDeliveryMethod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:text="@string/delivery_method"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
-                    android:visibility="visible" />
-
-                <RadioGroup
-                    android:id="@+id/rgDeliveryMethods"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <RadioButton
-                        android:id="@+id/rb_home"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:buttonTint="@color/dark_green"
-                        android:checked="true"
-                        android:text="@string/to_home"
-                        android:textSize="?textSizeLarge"
-                        />
-
-                    <EditText
-                        android:id="@+id/address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_10sdp"
-                        android:hint="@string/address"
-                        android:textSize="@dimen/_10ssp"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:background="@drawable/edit_text"/>
-
-                </RadioGroup>
-
-                <TextView
                     android:id="@+id/tvAmountAfterDelivery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:text="سيتم سداد رسوم الشحن عند الاستلام"
+                    android:text="@string/price_delivery"
                     android:textColor="@color/colorPrimary"
                     android:textSize="?textSizeLarge"
                     android:textStyle="bold" />

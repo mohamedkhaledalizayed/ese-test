@@ -41,7 +41,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             override fun setOnRegisterClickListener(item: PackagesEntity) {
 
                 if (sharedPreferences.isAuthenticated){
-                    val intent = Intent(this@SearchActivity, SubscriptionActivity::class.java)
+                    val intent = Intent(this@SearchActivity, SehaPaymentActivity::class.java)
                     intent.putExtra("name", item.name )
                     intent.putExtra("price", item.price )
                     intent.putExtra("serviceCode", item.serviceCode )

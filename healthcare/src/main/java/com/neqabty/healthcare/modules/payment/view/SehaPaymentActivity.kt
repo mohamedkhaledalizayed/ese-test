@@ -36,10 +36,8 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
     private var paymentMethod = "card"
     private var totalAmount = 0
     private var paymentFees = 10
-    private var deliveryFees = 20
     private var serviceCode = ""
     private var serviceActionCode = ""
-    private var address = ""
     private val paymentViewModel: SehaPaymentViewModel by viewModels()
     override fun getViewBinding() = ActivitySehaPaymentBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -145,21 +143,15 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
         binding.btnNext.setOnClickListener {
 
             if (sharedPreferences.isPhoneVerified) {
-                address = binding.address.text.toString()
-
-                if (address.isEmpty()){
-                    Toast.makeText(this, "من فضلك ادخل العنوان", Toast.LENGTH_LONG).show()
-                    return@setOnClickListener
-                }
 
                 binding.btnNext.isEnabled = false
                 paymentViewModel.getPaymentInfo(
                     SehaPaymentBody(
                         Payment(
-                            serviceCode = "P3848",
-                            serviceActionCode = "heaLrK",
-                            mobile = "01113595666",
-                            paymentMethod = "card",
+                            serviceCode = serviceCode,
+                            serviceActionCode = serviceActionCode,
+                            mobile = sharedPreferences.mobile,
+                            paymentMethod = paymentMethod,
                             paymentSource = "android",
                             transactionType = "payment"
                         )
@@ -191,7 +183,6 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
 
     private fun updateTotal(){
         binding.tvAmount.text = "الاجمالى بعد الرسوم البنكية والاداريه : ${totalAmount + paymentFees}"
-//        binding.tvAmountAfterDelivery.text =  "الاجمالى بعد رسوم الشحن والتوصيل : ${totalAmount + paymentFees + deliveryFees}"
     }
 
     var referenceCode = ""

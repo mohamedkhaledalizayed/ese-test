@@ -108,6 +108,7 @@
     <string name="close">هل تريد الخروج من التطبيق!</string>
     <string name="wallet">المحفظة</string>
     <string name="welcome">مرحبا بك فى نقابتى</string>
+    <string name="price_delivery">سيتم سداد رسوم الشحن عند الاستلام</string>
 
 
 </resources>
