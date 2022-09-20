@@ -1,19 +1,27 @@
 package com.neqabty.healthcare.modules.profile.presentation
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.neqabty.core.data.Constants
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.FollowerItemLayoutBinding
 import com.neqabty.healthcare.databinding.PackageItemLayoutBinding
 import com.neqabty.healthcare.databinding.PackageLayoutBinding
+import com.neqabty.healthcare.modules.home.presentation.view.homescreen.HomeActivity
 import com.neqabty.healthcare.modules.profile.domain.entity.profile.FollowerEntity
 import com.neqabty.healthcare.modules.profile.domain.entity.profile.SubscribedPackageEntity
+import com.neqabty.healthcare.modules.syndicates.domain.entity.SyndicateEntity
+import com.neqabty.healthcare.modules.syndicates.presentation.view.homescreen.SyndicateAdapter
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -42,22 +50,38 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val follower = items[position]
 
-        viewHolder.binding.packageName.text = follower.packages.nameAr
+        viewHolder.binding.packageName.text = "أنت مشترك علي ${follower.packages.nameAr}"
+        viewHolder.binding.selectedPackage.text = follower.packages.nameAr
+        viewHolder.binding.date.text = dateFormat(follower.packages.createdAt.split(".")[0])
         val mAdapter = FollowerAdapter()
         viewHolder.binding.followersRecycler.adapter = mAdapter
 
         mAdapter.submitList(follower.packages.followers)
-//        viewHolder.binding.followerName.text = follower.fullName
-//        viewHolder.binding.nationalId.text = follower.nationalId
-//        viewHolder.binding.relation.text = follower.relation.relation
-//        if (!follower.image.isNullOrEmpty()){
-//            val decodedString: ByteArray = Base64.decode(follower.image, Base64.DEFAULT)
-//            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-//            viewHolder.binding.followerImage.setImageBitmap(decodedByte)
-//        }
-//        if (position == itemCount - 1){
-//            viewHolder.binding.view.visibility = View.GONE
-//        }
+
+        mAdapter.onItemClickListener = object :
+            FollowerAdapter.OnItemClickListener {
+            override fun setOnItemClickListener(id: String) {
+                onItemClickListener?.setOnDeleteItemClickListener(id)
+            }
+        }
+
+        viewHolder.binding.addFollower.setOnClickListener {
+            onItemClickListener?.setOnAddItemClickListener(follower.packages.id)
+        }
+
+        viewHolder.binding.addFollowerText.setOnClickListener {
+            onItemClickListener?.setOnAddItemClickListener(follower.packages.id)
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+    fun dateFormat(date: String): String{
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val newDate: Date = format.parse(date)
+        val arabicFormat = SimpleDateFormat("dd MMM yyy - hh:mm a", Locale("ar"))
+
+        return arabicFormat.format(newDate.time)
     }
 
     override fun getItemCount() = items.size
@@ -77,7 +101,8 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: String)
+            fun setOnDeleteItemClickListener(id: String)
+            fun setOnAddItemClickListener(id: String)
     }
 
     class ViewHolder(val binding: PackageLayoutBinding) :

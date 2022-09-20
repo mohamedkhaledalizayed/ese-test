@@ -3,8 +3,10 @@ package com.neqabty.healthcare.modules.checkaccountstatus.view
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.hbb20.CountryCodePicker
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.core.utils.Status
@@ -33,20 +35,28 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-
+        binding.ccp.registerCarrierNumberEditText(binding.phone)
         binding.btnSend.setOnClickListener {
             if (binding.phone.text.isNullOrEmpty()){
                 Toast.makeText(this, getString(R.string.enter_phone), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            if (!binding.phone.text.toString().isMobileValid()){
-                Toast.makeText(this, getString(R.string.enter_corect_phone), Toast.LENGTH_LONG).show()
-                return@setOnClickListener
+//            if (!binding.phone.text.toString().isMobileValid()){
+//                Toast.makeText(this, getString(R.string.enter_corect_phone), Toast.LENGTH_LONG).show()
+//                return@setOnClickListener
+//            }
+
+            if (binding.ccp.isValidFullNumber) {
+                checkAccountViewModel.checkAccount(CheckPhoneBody(mobile = binding.ccp.fullNumberWithPlus))
+            }else{
+                Toast.makeText(this, "Not Valid Number", Toast.LENGTH_LONG).show()
             }
 
-            checkAccountViewModel.checkAccount(CheckPhoneBody(mobile = binding.phone.text.toString()))
+            Log.e("test", binding.ccp.fullNumberWithPlus)
+
 
         }
+
 
         checkAccountViewModel.accountStatus.observe(this){
             it.let { resource ->
@@ -58,10 +68,10 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
                         loading.hide()
                         if (resource.data == "Found"){
                             val intent = Intent(this, LoginActivity::class.java)
-                            intent.putExtra("phone", binding.phone.text.toString())
+                            intent.putExtra("phone", binding.ccp.fullNumberWithPlus)
                             startActivity(intent)
                         }else{
-                            sharedPreferences.mobile = binding.phone.text.toString()
+                            sharedPreferences.mobile = binding.ccp.fullNumberWithPlus
                             val intent = Intent(this, SyndicateActivity::class.java)
                             startActivity(intent)
                             finish()

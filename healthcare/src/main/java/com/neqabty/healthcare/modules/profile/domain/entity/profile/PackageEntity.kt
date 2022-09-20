@@ -9,4 +9,5 @@ data class PackageEntity(
     val id: String,
     val nameAr: String,
     val shortDescription: String,
+    val createdAt: String
 )

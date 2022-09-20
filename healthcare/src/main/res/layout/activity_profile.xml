@@ -311,8 +311,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
-                    android:padding="@dimen/_10sdp"
-                    android:background="@drawable/search_bg"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/client_info">
@@ -332,34 +330,12 @@
                         android:id="@+id/followers_recycler"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
                         tools:itemCount="5"
-                        tools:listitem="@layout/follower_item_layout"
+                        tools:listitem="@layout/package_layout"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/followers_info_title" />
-
-
-                    <ImageView
-                        android:id="@+id/add_follower"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:src="@drawable/ic_baseline_add_circle_outline_24"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/followers_recycler" />
-
-                    <TextView
-                        android:id="@+id/add_follower_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="@string/add_new_member"
-                        android:textColor="@color/colorPrimary"
-                        app:layout_constraintStart_toEndOf="@+id/add_follower"
-                        app:layout_constraintTop_toBottomOf="@+id/followers_recycler" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

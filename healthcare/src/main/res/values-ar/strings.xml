@@ -58,7 +58,7 @@
     <string name="fullname">الاسم بالكامل</string>
     <string name="client_info">بيانات العميل الشخصية</string>
     <string name="account_info">بيانات الحساب</string>
-    <string name="followers_info">بيانات التابعين</string>
+    <string name="followers_info">الأشتراكات والتابعين</string>
     <string name="add">أضف</string>
     <string name="add_new_member">إضافة فرد جديد</string>
     <string name="email">البريد الالكترونى</string>

@@ -62,7 +62,8 @@ private fun Package.toPackageEntity(): PackageEntity{
         hint = hint,
         id = id,
         nameAr = nameAr,
-        shortDescription = shortDescription
+        shortDescription = shortDescription,
+        createdAt = createdAt
     )
 }
 

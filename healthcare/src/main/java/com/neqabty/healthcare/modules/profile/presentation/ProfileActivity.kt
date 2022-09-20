@@ -3,6 +3,7 @@ package com.neqabty.healthcare.modules.profile.presentation
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +58,16 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
             }
         }
 
+        mAdapter.onItemClickListener = object :
+            PackagesAdapter.OnItemClickListener {
+            override fun setOnDeleteItemClickListener(id: String) {
+                Toast.makeText(this@ProfileActivity, "Deleted", Toast.LENGTH_LONG).show()
+            }
+
+            override fun setOnAddItemClickListener(id: String) {
+                Toast.makeText(this@ProfileActivity, "Added", Toast.LENGTH_LONG).show()
+            }
+        }
 
     }
 }

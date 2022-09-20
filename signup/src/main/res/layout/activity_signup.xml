@@ -61,7 +61,6 @@
                     android:textColor="@color/black"
                     android:textColorHint="#748A9D"
                     android:textSize="@dimen/_12ssp"
-                    android:maxLength="11"
                     android:inputType="phone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -42,9 +42,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
         viewHolder.binding.nationalId.text = follower.national_id
         viewHolder.binding.relation.text = follower.relation
         viewHolder.binding.followerImage.setImageURI(follower.imageUri)
-        if (position == itemCount - 1){
-            viewHolder.binding.view.visibility = View.GONE
-        }
+
     }
 
     override fun getItemCount() = items.size

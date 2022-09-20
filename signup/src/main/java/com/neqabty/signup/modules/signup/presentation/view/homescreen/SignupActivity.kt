@@ -49,6 +49,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         }
 
         binding.phone.setText(sharedPreferences.mobile)
+        binding.phone.isEnabled = false
         binding.spSyndicates.adapter = mSyndicatesAdapter
         binding.spSyndicates.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
@@ -208,10 +209,10 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             return
         }
 
-        if(!binding.phone.text.toString().isMobileValid()) {
-            Toast.makeText(this, resources.getString(R.string.enter_correct_phone), Toast.LENGTH_LONG).show()
-            return
-        }
+//        if(!binding.phone.text.toString().isMobileValid()) {
+//            Toast.makeText(this, resources.getString(R.string.enter_correct_phone), Toast.LENGTH_LONG).show()
+//            return
+//        }
 
         if (binding.email.text.toString().isNullOrEmpty()){
             Toast.makeText(this, resources.getString(R.string.enter_email), Toast.LENGTH_LONG).show()

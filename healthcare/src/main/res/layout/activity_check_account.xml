@@ -38,28 +38,53 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-    <EditText
-        android:id="@+id/phone"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_9sdp"
-        android:inputType="phone"
-        android:maxLength="11"
-        android:layout_margin="@dimen/_20sdp"
-        android:drawablePadding="@dimen/_10sdp"
-        android:drawableStart="@drawable/ic_baseline_phone_android_24"
-        android:hint="@string/phone"
-        android:background="@drawable/edit_text_bg"
-        android:layout_marginTop="@dimen/_10sdp"
-        />
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:background="@drawable/edit_text">
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/phone"
+            android:padding="@dimen/_10sdp"
+            android:textAlignment="viewStart"
+            android:textColor="#748A9D"
+            android:textColorHint="#748A9D"
+            android:textSize="@dimen/_12ssp"
+            android:inputType="phone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ccp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:ccp_autoDetectCountry="true"
+            app:ccp_defaultLanguage="ARABIC"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:ccp_countryPreference="EG,SA,AE,KW,QA,BH"  />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <Button
         android:id="@+id/btn_send"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_margin="@dimen/_16sdp"
         android:background="@drawable/select_btn_bg"
         android:text="@string/send"
         android:textColor="@android:color/white"

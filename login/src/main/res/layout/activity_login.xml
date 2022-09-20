@@ -48,9 +48,9 @@
                 android:id="@+id/cl_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginTop="@dimen/_50sdp"
-                android:layout_marginEnd="@dimen/_35sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
                 android:background="@drawable/edit_text"
                 app:layout_constraintTop_toBottomOf="@id/iv_logo">
 
@@ -72,6 +72,7 @@
                     app:layout_constraintStart_toEndOf="@id/seperator"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
+
 
                 <View
                     android:id="@+id/seperator"
@@ -100,9 +101,9 @@
                 android:id="@+id/cl_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_35sdp"
+                android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_35sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
                 android:background="@drawable/edit_text"
                 app:layout_constraintTop_toBottomOf="@id/cl_username">
 

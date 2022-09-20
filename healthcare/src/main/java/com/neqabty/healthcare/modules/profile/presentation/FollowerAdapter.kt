@@ -51,8 +51,9 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
             val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
             viewHolder.binding.followerImage.setImageBitmap(decodedByte)
         }
-        if (position == itemCount - 1){
-            viewHolder.binding.view.visibility = View.GONE
+
+        viewHolder.binding.delete.setOnClickListener {
+            onItemClickListener?.setOnItemClickListener(follower.id.toString())
         }
     }
 
@@ -73,7 +74,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: String)
+            fun setOnItemClickListener(id: String)
     }
 
     class ViewHolder(val binding: FollowerItemLayoutBinding) :

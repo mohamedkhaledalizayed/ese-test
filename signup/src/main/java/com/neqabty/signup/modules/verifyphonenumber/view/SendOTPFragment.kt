@@ -37,6 +37,7 @@ class SendOTPFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.phone.setText(phoneNumber.toString())
+        binding.phone.isEnabled = false
         binding.btnSend.setOnClickListener {
 
             if (binding.phone.text.toString().isNullOrEmpty()){
@@ -44,10 +45,10 @@ class SendOTPFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (!binding.phone.text.toString().isMobileValid()){
-                Toast.makeText(requireContext(), getString(R.string.enter_correct_phone), Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
+//            if (!binding.phone.text.toString().isMobileValid()){
+//                Toast.makeText(requireContext(), getString(R.string.enter_correct_phone), Toast.LENGTH_LONG).show()
+//                return@setOnClickListener
+//            }
 
             val activity = requireActivity() as VerifyPhoneActivity
             activity.onSendClicked(binding.phone.text.toString())

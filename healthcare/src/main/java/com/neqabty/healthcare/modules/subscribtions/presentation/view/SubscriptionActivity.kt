@@ -86,6 +86,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
         calendar = Calendar.getInstance()
         binding.etPhone.setText(sharedPreferences.mobile)
+        binding.etPhone.isEnabled = false
         binding.etBirthDate.isEnabled = false
 
         binding.selectDate.setOnClickListener {
