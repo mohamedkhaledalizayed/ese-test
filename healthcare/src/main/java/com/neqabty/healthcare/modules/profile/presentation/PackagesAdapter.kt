@@ -60,8 +60,8 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
         mAdapter.onItemClickListener = object :
             FollowerAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(id: String) {
-                onItemClickListener?.setOnDeleteItemClickListener(id)
+            override fun setOnItemClickListener(subscriberId: String, followerId: Int) {
+                onItemClickListener?.setOnDeleteItemClickListener(subscriberId, followerId)
             }
         }
 
@@ -101,7 +101,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnDeleteItemClickListener(id: String)
+            fun setOnDeleteItemClickListener(subscriberId: String, followerId: Int)
             fun setOnAddItemClickListener(id: String)
     }
 

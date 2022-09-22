@@ -9,5 +9,6 @@ data class FollowerEntity(
     val nationalId: String,
     val qrCode: String,
     val relation: RelationEntity,
+    val subscriberId: String,
     val relationType: Int
 )

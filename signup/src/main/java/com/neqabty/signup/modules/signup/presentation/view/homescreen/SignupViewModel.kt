@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.core.utils.AppUtils
 import com.neqabty.core.utils.Resource
 import com.neqabty.signup.modules.signup.data.model.NeqabtySignupBody
+import com.neqabty.signup.modules.signup.data.model.syndicatemember.UserModel
 import com.neqabty.signup.modules.signup.domain.entity.SignupParams
 import com.neqabty.signup.modules.signup.domain.entity.syndicate.SyndicateListEntity
 import com.neqabty.signup.modules.signup.domain.interactors.SignupUseCase
@@ -14,19 +15,26 @@ import com.neqabty.signup.modules.signup.presentation.model.mappers.toUserUIMode
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.HttpException
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class SignupViewModel @Inject constructor(private val signupUseCase: SignupUseCase) :
     ViewModel() {
-    val user = MutableLiveData<Resource<UserUIModel>>()
+    val user = MutableLiveData<Resource<UserModel>>()
     fun signup(data: SignupParams) {
         user.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 signupUseCase.build(data).collect {
-                    user.postValue(Resource.success(data = it.toUserUIModel()))
+                    if (it.isSuccessful){
+                        user.postValue(Resource.success(data = it.body()!!))
+                    }else{
+                        val jObjError = JSONObject(it.errorBody()!!.string()).toString()
+                        user.postValue(Resource.error(data = null, message = jObjError))
+                    }
                 }
             } catch (e: Throwable) {
                 user.postValue(Resource.error(data = null, message = handleError(e)))

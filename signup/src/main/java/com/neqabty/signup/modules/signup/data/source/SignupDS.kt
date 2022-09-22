@@ -6,11 +6,12 @@ import com.neqabty.signup.modules.signup.data.model.SignupBody
 import com.neqabty.signup.modules.signup.data.model.neqabtymember.NeqabtyMemberModel
 import com.neqabty.signup.modules.signup.data.model.syndicatemember.UserModel
 import com.neqabty.signup.modules.signup.data.model.syndicates.EntityModel
+import retrofit2.Response
 import javax.inject.Inject
 
 class SignupDS @Inject constructor(private val signupApi: SignupApi) {
 
-    suspend fun signup(signupBody: SignupBody): UserModel {
+    suspend fun signup(signupBody: SignupBody): Response<UserModel> {
         return signupApi.syndicateMember(signupBody)
     }
 

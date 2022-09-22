@@ -1,8 +1,12 @@
 package com.neqabty.healthcare.modules.profile.data.repository
 
+import com.neqabty.healthcare.modules.profile.data.model.AddFollowerBody
+import com.neqabty.healthcare.modules.profile.data.model.DeleteFollowerBody
 import com.neqabty.healthcare.modules.profile.data.model.profile.*
+import com.neqabty.healthcare.modules.profile.data.model.relationstypes.RelationModel
 import com.neqabty.healthcare.modules.profile.data.source.ProfileDS
 import com.neqabty.healthcare.modules.profile.domain.entity.profile.*
+import com.neqabty.healthcare.modules.profile.domain.entity.relations.RelationEntityList
 import com.neqabty.healthcare.modules.profile.domain.repository.ProfileRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -13,6 +17,24 @@ class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS
     override fun getProfile(phone: String): Flow<ProfileEntity> {
         return flow {
             emit(profileDS.getProfile(phone).toProfileEntity())
+        }
+    }
+
+    override fun getRelations(): Flow<List<RelationEntityList>> {
+        return flow {
+            emit(profileDS.getRelations().map { it.toRelationEntityList() })
+        }
+    }
+
+    override fun addFollower(addFollowerBody: AddFollowerBody): Flow<String> {
+        return flow {
+            emit(profileDS.addFollower(addFollowerBody))
+        }
+    }
+
+    override fun deleteFollower(followerId: Int, subscriberId: String): Flow<Boolean> {
+        return flow {
+            emit(profileDS.deleteFollower(DeleteFollowerBody(followerId, subscriberId)))
         }
     }
 
@@ -75,6 +97,7 @@ private fun Follower.toFollowerEntity(): FollowerEntity{
         nationalId = nationalId,
         qrCode = qrCode,
         relation = relation.toRelationEntity(),
+        subscriberId = subscriberId,
         relationType = relationType
     )
 }
@@ -92,5 +115,12 @@ private fun Wallet.toWalletEntity(): WalletEntity{
     return WalletEntity(
         invitations = invitations,
         total = total
+    )
+}
+
+private fun RelationModel.toRelationEntityList(): RelationEntityList {
+    return RelationEntityList(
+        id = id,
+        relation = relation
     )
 }

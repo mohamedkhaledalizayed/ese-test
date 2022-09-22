@@ -4,6 +4,7 @@ import com.neqabty.signup.modules.signup.data.model.NeqabtySignupBody
 import com.neqabty.signup.modules.signup.data.model.SignupBody
 import com.neqabty.signup.modules.signup.data.model.mappers.toUserEntity
 import com.neqabty.signup.modules.signup.data.model.neqabtymember.NeqabtyMemberModel
+import com.neqabty.signup.modules.signup.data.model.syndicatemember.UserModel
 import com.neqabty.signup.modules.signup.data.model.syndicates.EntityModel
 import com.neqabty.signup.modules.signup.data.source.SignupDS
 import com.neqabty.signup.modules.signup.domain.entity.SignupParams
@@ -12,11 +13,12 @@ import com.neqabty.signup.modules.signup.domain.entity.syndicate.SyndicateListEn
 import com.neqabty.signup.modules.signup.domain.repository.SignupRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import retrofit2.Response
 import javax.inject.Inject
 
 class SignupRepositoryImpl @Inject constructor(private val signupDS: SignupDS) : SignupRepository {
-    override fun signup(signupParams: SignupParams): Flow<UserEntity> {
-        return flow { emit(signupDS.signup(signupParams.toSignupBody()).toUserEntity()) }
+    override fun signup(signupParams: SignupParams): Flow<Response<UserModel>> {
+        return flow { emit(signupDS.signup(signupParams.toSignupBody())) }
     }
 
     override fun signUpNeqabtyMember(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity> {
@@ -42,14 +44,14 @@ private fun EntityModel.toSyndicateListEntity(): SyndicateListEntity{
 fun NeqabtyMemberModel.toUserEntity(): UserEntity {
     return return UserEntity(
         email = email ?: "",
-        token = "token.key",
+        token = token.key,
         fullname = fullname,
         id = id,
         image = image ?: "",
         mobile = mobile,
         nationalId = nationalId,
         entityName = entity.name,
-        entityImage = "entity.imageUrl",
+        entityImage = entity.imageUrl,
         entityCode = entity.code)
 }
 

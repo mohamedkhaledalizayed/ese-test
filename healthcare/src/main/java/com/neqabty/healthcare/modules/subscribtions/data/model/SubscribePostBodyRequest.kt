@@ -17,6 +17,8 @@ data class SubscribePostBodyRequest(
     val job: String = "",
     @SerializedName("mobile")
     val mobile: String = "",
+    @SerializedName("delivery_phone")
+    val deliveryPhone: String = "",
     @SerializedName("national_id")
     val nationalId: String = "",
     @SerializedName("entity_code")

@@ -34,6 +34,7 @@ import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.isMobileValid
 import com.neqabty.core.utils.isNationalIdValid
 import com.neqabty.core.utils.isValidEmail
+import com.neqabty.healthcare.modules.checkaccountstatus.data.model.CheckPhoneBody
 
 @AndroidEntryPoint
 class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
@@ -64,11 +65,20 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         setContentView(binding.root)
         setupToolbar(title = "تسجيل إشتراك")
 
+        binding.ccp.registerCarrierNumberEditText(binding.deliveryPhone)
         name = intent.getStringExtra("name")
         price = intent.getDoubleExtra("price", 0.0)
         serviceCode = intent.getStringExtra("serviceCode")
         maxFollowers = intent.getIntExtra("maxFollowers", 0)
         serviceActionCode = intent.getStringExtra("serviceActionCode")
+
+//        val intent = Intent(this, SehaPaymentActivity::class.java)
+//        intent.putExtra("name", name)
+//        intent.putExtra("price", price)
+//        intent.putExtra("serviceCode", serviceCode)
+//        intent.putExtra("serviceActionCode", serviceActionCode)
+//        startActivity(intent)
+//        finish()
         binding.spRelations.adapter = relationsAdapter
         if (maxFollowers == 0){
             binding.followersInfo.visibility = View.GONE
@@ -377,6 +387,11 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
+        if (!binding.ccp.isValidFullNumber) {
+            Toast.makeText(this, "Not Valid Number", Toast.LENGTH_LONG).show()
+            return
+        }
+
         if (binding.etAddress.text.toString().isNullOrEmpty()){
             Toast.makeText(this, "من فضلك ادخل العنوان.", Toast.LENGTH_LONG).show()
             return
@@ -436,6 +451,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             name = binding.etName.text.toString(),
             email = binding.etEmail.text.toString(),
             birthDate = binding.etBirthDate.text.toString(),
+            deliveryPhone = binding.ccp.fullNumberWithPlus,
             address = binding.etAddress.text.toString(),
             job = binding.etJob.text.toString(),
             mobile = binding.etPhone.text.toString(),

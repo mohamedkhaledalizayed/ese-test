@@ -8,11 +8,13 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.text.isDigitsOnly
+import com.google.gson.Gson
 import com.neqabty.core.data.Constants
 import com.neqabty.core.data.Constants.isSyndicateMember
 import com.neqabty.core.data.Constants.selectedSyndicateCode
 import com.neqabty.core.data.Constants.selectedSyndicatePosition
 import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.ErrorBody
 import com.neqabty.core.utils.Status
 import com.neqabty.core.utils.isMobileValid
 import com.neqabty.signup.R
@@ -98,14 +100,14 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                             sharedPreferences.isSyndicateMember = true
                             sharedPreferences.isAuthenticated = true
                             sharedPreferences.mobile = binding.phone.text.toString()
-                            sharedPreferences.token = resource.data!!.token
+                            sharedPreferences.token = resource.data!!.token.key
                             sharedPreferences.email = binding.email.text.toString()
                             sharedPreferences.name = resource.data!!.fullname ?: ""
                             sharedPreferences.nationalId = resource.data!!.nationalId
                             sharedPreferences.membershipId = binding.membershipId.text.toString()
-                            sharedPreferences.code = resource.data!!.entityCode
-                            sharedPreferences.syndicateName = resource.data!!.entityName
-                            sharedPreferences.image = resource.data!!.entityImage
+                            sharedPreferences.code = resource.data!!.entity.code
+                            sharedPreferences.syndicateName = resource.data!!.entity.name
+                            sharedPreferences.image = resource.data!!.entity.imageUrl
                             confirmMessage(resources.getString(R.string.confirm_message))
                         }else{
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
@@ -113,7 +115,9 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                        val error = Gson().fromJson(resource.message.toString(), ErrorBody::class.java)
+
+                        Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
                     }
                 }
             }

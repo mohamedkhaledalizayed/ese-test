@@ -122,7 +122,6 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_birth_date"
                         android:layout_width="match_parent"
@@ -163,12 +162,52 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_delivery_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:layout_constraintTop_toBottomOf="@id/cl_birth_date"
+                        android:background="@drawable/edit_text">
+
+                        <EditText
+                            android:id="@+id/delivery_phone"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="@string/phone"
+                            android:padding="@dimen/_10sdp"
+                            android:textAlignment="viewStart"
+                            android:textColor="#748A9D"
+                            android:textColorHint="#748A9D"
+                            android:textSize="@dimen/_12ssp"
+                            android:inputType="phone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ccp"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
+
+                        <com.hbb20.CountryCodePicker
+                            android:id="@+id/ccp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:ccp_autoDetectCountry="true"
+                            app:ccp_defaultLanguage="ARABIC"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:ccp_countryPreference="EG,SA,AE,KW,QA,BH"  />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:background="@drawable/edit_text"
-                        app:layout_constraintTop_toBottomOf="@id/cl_birth_date">
+                        app:layout_constraintTop_toBottomOf="@id/cl_delivery_phone">
 
                         <EditText
                             android:id="@+id/et_address"

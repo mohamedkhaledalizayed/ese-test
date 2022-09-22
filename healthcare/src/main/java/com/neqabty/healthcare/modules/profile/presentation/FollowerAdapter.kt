@@ -53,7 +53,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
         }
 
         viewHolder.binding.delete.setOnClickListener {
-            onItemClickListener?.setOnItemClickListener(follower.id.toString())
+            onItemClickListener?.setOnItemClickListener(follower.subscriberId, follower.id)
         }
     }
 
@@ -74,7 +74,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(id: String)
+            fun setOnItemClickListener(subscriberId: String, followerId: Int)
     }
 
     class ViewHolder(val binding: FollowerItemLayoutBinding) :

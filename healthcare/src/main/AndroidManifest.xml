@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
         android:name=".core.application.HealthCareApplication"
         android:allowBackup="true"
@@ -18,6 +17,9 @@
         android:theme="@style/Theme.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
+        <activity
+            android:name=".modules.profile.presentation.AddFollowerActivity"
+            android:exported="false" />
         <activity
             android:name=".modules.settings.view.SettingsScreen"
             android:exported="false" />
@@ -74,8 +76,8 @@
             android:exported="false" />
         <activity
             android:name=".modules.syndicates.presentation.view.homescreen.SyndicateActivity"
-            android:theme="@style/Theme.NoActionBar"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar" />
     </application>
 
 </manifest>
