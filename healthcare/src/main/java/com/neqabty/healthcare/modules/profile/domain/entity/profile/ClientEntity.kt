@@ -12,5 +12,6 @@ data class ClientEntity(
     val nationalId: String,
     val personalImage: String,
     val qrCode: String,
+    val birthDate: String,
     val syndicateId: Int
 )

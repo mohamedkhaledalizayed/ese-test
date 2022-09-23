@@ -140,7 +140,7 @@ dependencies {
     implementation project(':core')
     implementation project(':news')
     implementation project(':signup')
-    implementation(name: 'cashier-sdk-1.0.8', ext: 'aar')
+    implementation(name: 'cashier-sdk-1.1.2', ext: 'aar')
     implementation(name: 'cowpaysdk', ext: 'aar')
 
     implementation 'com.caverock:androidsvg-aar:1.4'

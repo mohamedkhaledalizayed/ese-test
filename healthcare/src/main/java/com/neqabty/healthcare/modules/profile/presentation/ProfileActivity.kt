@@ -44,7 +44,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                         binding.name.text = "${resource.data?.data?.client?.name}"
                         binding.email.text = "${resource.data?.data?.client?.email}"
                         binding.phone.text = "${resource.data?.data?.client?.mobile}"
-                        binding.birthDate.text = ""
+                        binding.birthDate.text = "${resource.data?.data?.client?.birthDate}"
                         binding.address.text = "${resource.data?.data?.client?.address}"
                         binding.job.text = "${resource.data?.data?.client?.job}"
                         binding.nationalId.text = "${resource.data?.data?.client?.nationalId}"
@@ -66,7 +66,11 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                 profileViewModel.deleteFollower(followerId, subscriberId)
             }
 
-            override fun setOnAddItemClickListener(id: String) {
+            override fun setOnAddItemClickListener(id: String, isMaxFollower: Boolean) {
+                if (isMaxFollower){
+                    Toast.makeText(this@ProfileActivity, "لقد وصلت الى الحد الاقصى فى إضافة التابعين", Toast.LENGTH_LONG).show()
+                    return
+                }
                 addFollower()
             }
         }
@@ -80,7 +84,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                     }
                     Status.SUCCESS ->{
                         if (resource.data!!){
-                            mAdapter.notifyDataSetChanged()
+                            profileViewModel.getProfile(sharedPreferences.mobile)
                             Toast.makeText(this@ProfileActivity, "تم حذف التابع بنجاح.", Toast.LENGTH_LONG).show()
                         }else{
                             Toast.makeText(this@ProfileActivity, "لم يتم حذف التابع.", Toast.LENGTH_LONG).show()

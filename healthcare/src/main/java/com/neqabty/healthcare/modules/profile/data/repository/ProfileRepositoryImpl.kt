@@ -67,6 +67,7 @@ private fun Client.toClientEntity(): ClientEntity{
         nationalId = nationalId,
         personalImage = personalImage,
         qrCode = qrCode,
+        birthDate = birthDate,
         syndicateId = syndicateId
     )
 }
@@ -84,6 +85,7 @@ private fun Package.toPackageEntity(): PackageEntity{
         hint = hint,
         id = id,
         nameAr = nameAr,
+        maxFollower = maxFollower,
         shortDescription = shortDescription,
         createdAt = createdAt
     )

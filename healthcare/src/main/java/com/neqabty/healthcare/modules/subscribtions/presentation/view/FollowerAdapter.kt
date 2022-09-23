@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.databinding.FollowerItemBinding
 import com.neqabty.healthcare.databinding.FollowerItemLayoutBinding
 import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
 import com.neqabty.healthcare.modules.subscribtions.presentation.view.model.Follower
@@ -26,8 +27,8 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
-        val binding: FollowerItemLayoutBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.follower_item_layout, parent, false)
+        val binding: FollowerItemBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.follower_item, parent, false)
 
         return ViewHolder(
             binding
@@ -43,6 +44,9 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
         viewHolder.binding.relation.text = follower.relation
         viewHolder.binding.followerImage.setImageURI(follower.imageUri)
 
+        if (position == (items.size - 1)){
+            viewHolder.binding.view.visibility == View.GONE
+        }
     }
 
     override fun getItemCount() = items.size
@@ -65,6 +69,6 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
             fun setOnItemClickListener(item: String)
     }
 
-    class ViewHolder(val binding: FollowerItemLayoutBinding) :
+    class ViewHolder(val binding: FollowerItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

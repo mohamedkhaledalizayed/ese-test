@@ -35,6 +35,8 @@ data class Package(
     val recommended: Boolean,
     @SerializedName("short_description")
     val shortDescription: String,
+    @SerializedName("max_follower")
+    val maxFollower: Int,
     @SerializedName("target_groups")
     val targetGroups: Any,
     @SerializedName("updated_at")
