@@ -72,6 +72,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                     com.neqabty.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
 
+                        if (resource.data?.receipt == null){
+                            showDialog(getString(R.string.no_reciept))
+                        }else{
                             binding.llContent.visibility = View.VISIBLE
                             binding.tvService.text = resource.data!!.service.name
                             binding.tvName.text =
@@ -85,18 +88,18 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                                     sharedPreferences.membershipId
                                 )
 
-                        totalAmount = resource.data!!.receipt!!.details.totalPrice.toInt()
-                        deliveryMethodHomeId = resource.data!!.methodsObj.homeMethodId
-                        deliveryMethodBranchId = resource.data!!.methodsObj.branchMethodId
+                            totalAmount = resource.data!!.receipt!!.details.totalPrice.toInt()
+                            deliveryMethodHomeId = resource.data!!.methodsObj.homeMethodId
+                            deliveryMethodBranchId = resource.data!!.methodsObj.branchMethodId
 
-                        deliveryMethodHomePrice = resource.data!!.methodsObj.homeMethodPrice.toFloat().toInt()
-                        deliveryMethodBranchPrice = resource.data!!.methodsObj.branchMethodPrice.toFloat().toInt()
+                            deliveryMethodHomePrice = resource.data!!.methodsObj.homeMethodPrice.toFloat().toInt()
+                            deliveryMethodBranchPrice = resource.data!!.methodsObj.branchMethodPrice.toFloat().toInt()
 
 
-                        paymentFees = resource.data!!.receipt!!.cardFees.toInt()
-                        deliveryMethod = deliveryMethodHomeId
-                        deliveryFees = deliveryMethodHomePrice
-                        updateTotal()
+                            paymentFees = resource.data!!.receipt!!.cardFees.toInt()
+                            deliveryMethod = deliveryMethodHomeId
+                            deliveryFees = deliveryMethodHomePrice
+                            updateTotal()
                             binding.lastFeeYearValue.text =
                                 resource.data!!.receipt?.details?.lastFeeYear.toString()
                             binding.currentFeeYearValue.text =
@@ -114,6 +117,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                             binding.totalValue.text =
                                 resource.data!!.receipt?.details?.totalPrice.toString() +
                                         "  " + resources.getString(R.string.egp)
+                        }
 
                     }
                     com.neqabty.core.utils.Status.ERROR -> {

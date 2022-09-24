@@ -8,5 +8,6 @@ data class Data(
     val id: Int,
     val image: String?,
     val mobile: String,
+    val membershipId: Int,
     val nationalId: Long
 )

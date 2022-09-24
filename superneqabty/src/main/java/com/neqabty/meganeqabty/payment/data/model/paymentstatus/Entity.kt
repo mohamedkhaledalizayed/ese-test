@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName
 data class Entity(
     @SerializedName("code")
     val code: String,
+    @SerializedName("image_url")
+    val imageUrl: String,
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")

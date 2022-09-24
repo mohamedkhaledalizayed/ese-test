@@ -41,7 +41,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
                         binding.name.text = resource.data?.data?.fullName ?: ""
                         binding.mobile.text = resource.data?.data?.mobile
-                        binding.membershipNumber.text = ""
+                        binding.membershipNumber.text = resource.data?.data?.membershipId.toString()
                         binding.nationalId.text = resource.data?.data?.nationalId.toString()
                         binding.email.text = resource.data?.data?.email ?: ""
                         binding.syndicate.text = resource.data?.data?.entity?.name

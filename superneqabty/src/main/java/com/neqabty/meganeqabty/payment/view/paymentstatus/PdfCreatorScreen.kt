@@ -20,6 +20,7 @@ import androidx.core.content.FileProvider
 import com.neqabty.meganeqabty.R
 import com.neqabty.core.utils.AppUtils
 import com.neqabty.meganeqabty.payment.domain.entity.paymentstatus.PaymentStatusEntity
+import com.squareup.picasso.Picasso
 import com.tejpratapsingh.pdfcreator.activity.PDFCreatorActivity
 import com.tejpratapsingh.pdfcreator.utils.PDFUtil
 import com.tejpratapsingh.pdfcreator.views.PDFBody
@@ -81,7 +82,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         val imageView = PDFImageView(applicationContext)
         val imageLayoutParam = LinearLayout.LayoutParams(120, 90, 0F)
         imageView.setImageScale(ImageView.ScaleType.CENTER_INSIDE)
-        imageView.setImageResource(R.drawable.eg)
+        Picasso.get().load(data.imageUrl).into(imageView.view)
         imageLayoutParam.setMargins(0, 0, 10, 0)
         imageView.setLayout(imageLayoutParam)
         horizontalView.addView(imageView)

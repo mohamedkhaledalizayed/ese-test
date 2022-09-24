@@ -79,6 +79,7 @@ private fun UserData.toData(): Data{
         id = id,
         image = account.image,
         mobile = account.mobile,
+        membershipId = membershipId,
         nationalId = nationalId
     )
 }

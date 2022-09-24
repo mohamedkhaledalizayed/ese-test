@@ -52,10 +52,10 @@ class SuggestionDialog : DialogFragment() {
                 return@setOnClickListener
             }
 
-            if(!binding.mobile.text.toString().isMobileValid()) {
-                Toast.makeText(requireContext(), getString(R.string.enter_correct_phone), Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
+//            if(!binding.mobile.text.toString().isMobileValid()) {
+//                Toast.makeText(requireContext(), getString(R.string.enter_correct_phone), Toast.LENGTH_LONG).show()
+//                return@setOnClickListener
+//            }
 
             if(binding.email.text.toString().isEmpty()) {
                 Toast.makeText(context, getString(R.string.enter_email), Toast.LENGTH_LONG).show()

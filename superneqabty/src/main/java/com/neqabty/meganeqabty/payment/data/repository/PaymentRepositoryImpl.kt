@@ -214,6 +214,7 @@ fun PaymentStatusModel.toPaymentStatusEntity(): PaymentStatusEntity {
         serviceAction = serviceAction.name,
         totalAmount = totalAmount,
         totalFees = totalFees,
+        imageUrl = account.entity.imageUrl,
         member_name = account.fullname,
         createdAt = createdAt
     )

@@ -17,5 +17,6 @@ data class PaymentStatusEntity(
     val totalAmount: String,
     val totalFees: String,
     val member_name: String?,
+    val imageUrl: String,
     val createdAt: String
 ): Parcelable
