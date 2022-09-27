@@ -11,8 +11,9 @@ class PaymentRequestEntityUIMapper @Inject constructor() : Mapper<PaymentRequest
 
     override fun mapFrom(from: PaymentRequestEntity): PaymentRequestUI {
         return PaymentRequestUI(
+                netAmount = from.netAmount,
                 amount = from.amount,
-                details = from.details?.map { PaymentRequestUI.DetailsItem(name = it.name, totalPrice = it.totalPrice) }
+                refId = from.refId
         )
     }
 }

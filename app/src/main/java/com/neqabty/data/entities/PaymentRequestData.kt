@@ -4,15 +4,10 @@ import com.google.gson.annotations.SerializedName
 import com.neqabty.data.api.Response
 
 data class PaymentRequestData(
+    @field:SerializedName("net_amount")
+    var netAmount: Double? = 0.0,
     @field:SerializedName("amount")
     var amount: Double? = 0.0,
-    @field:SerializedName("details")
-    var details: List<DetailsItem>? = null
-) : Response() {
-    data class DetailsItem(
-        @field:SerializedName("name")
-        var name: String? = "",
-        @field:SerializedName("TotalPrice")
-        var totalPrice: Double?
-    )
-}
+    @field:SerializedName("ese_refrence_id")
+    var refId: String
+) : Response()

@@ -11,8 +11,8 @@ class PaymentRequestDataEntityMapper @Inject constructor() : Mapper<PaymentReque
 
     override fun mapFrom(from: PaymentRequestData): PaymentRequestEntity {
         return PaymentRequestEntity(
-                amount = from.amount,
-                details = from.details?.map { PaymentRequestEntity.DetailsItem(name = it.name, totalPrice = it.totalPrice) }
-        )
-    }
+            netAmount = from.netAmount,
+            amount = from.amount,
+            refId = from.refId
+        ) }
 }

@@ -20,6 +20,7 @@ import com.neqabty.databinding.InquiryDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
+import com.neqabty.presentation.entities.PaymentRequestUI
 import com.neqabty.presentation.entities.RenewalPaymentUI
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,6 +45,7 @@ class InquiryDetailsFragment : BaseFragment() {
     @Inject
     lateinit var appExecutors: AppExecutors
     lateinit var renewalPayment: RenewalPaymentUI
+    lateinit var paymentRequestUI: PaymentRequestUI
 
     lateinit var mechanismTypeButton: RadioButton
 
@@ -210,7 +212,7 @@ class InquiryDetailsFragment : BaseFragment() {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
             state.paymentRequestUI?.let {
-                renewalPayment = it
+                paymentRequestUI = it
                 if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
                     oPayPayment(Constants.PaymentOption.OpayCredit)
                 else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
@@ -233,14 +235,14 @@ class InquiryDetailsFragment : BaseFragment() {
             else -> ""
         }
         PaymentTask.sandBox = Constants.OPAY_MODE
-        val userInfo = UserInfo(renewalPayment.paymentItem?.amount.toString(), binding.number, sharedPref.mobile, renewalPayment.paymentItem?.engName)
+        val userInfo = UserInfo(paymentRequestUI.netAmount.toString(), binding.number, sharedPref.mobile, renewalPayment.paymentItem?.engName)
         val payInput = PayInput(
             publickey = Constants.OPAY_PUBLIC_KEY,
             merchantId = Constants.OPAY_MERCHANT_ID,
             merchantName = Constants.OPAY_MERCHANT_NAME,
-            reference = renewalPayment.paymentItem?.paymentRequestNumber!!,
+            reference = paymentRequestUI.refId,
             countryCode = "EG", // uppercase
-            payAmount = (newAmount * 100).toLong(),
+            payAmount = (paymentRequestUI.amount?.times(100))?.toLong()!!,
             currency = "EGP", // uppercase
             productName = "annualSubscription",
             productDescription = "android",
@@ -293,16 +295,16 @@ class InquiryDetailsFragment : BaseFragment() {
                 "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
         )
         //order id
-        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, renewalPayment.paymentItem?.paymentRequestNumber)
+        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, paymentRequestUI.refId)
         //order price780
-        intent.putExtra(CowpayConstantKeys.Amount, newAmount.toString())
+        intent.putExtra(CowpayConstantKeys.Amount, paymentRequestUI.amount.toString())
         //user data
-        intent.putExtra(CowpayConstantKeys.Description, renewalPayment.paymentItem?.amount.toString())
+        intent.putExtra(CowpayConstantKeys.Description, paymentRequestUI.netAmount.toString())
         intent.putExtra(CowpayConstantKeys.CustomerName, params.number)
         intent.putExtra(CowpayConstantKeys.CustomerMobile, sharedPref.mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
         //user id
-        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, renewalPayment.paymentItem?.paymentRequestNumber)
+        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, paymentRequestUI.refId)
 
 
         startActivityForResult(intent, CowpayConstantKeys.PaymentMethodsActivityRequestCode)

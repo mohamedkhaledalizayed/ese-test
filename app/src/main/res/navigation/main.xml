@@ -336,8 +336,8 @@
             android:name="mobile"
             app:argType="java.lang.String" />
         <argument
-            android:name="medicalRenewalUI"
-            app:argType="com.neqabty.presentation.entities.MedicalRenewalUI" />
+            android:name="medicalRenewalPaymentUI"
+            app:argType="com.neqabty.presentation.entities.MedicalRenewalPaymentUI" />
         <action
             android:id="@+id/openPayment"
             app:destination="@id/paymentFragment" />
