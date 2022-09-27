@@ -11,6 +11,7 @@
         <item name="android:fontFamily">@font/cairo_regular</item>
         <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
         <item name="alertDialogTheme">@style/MyAlertDialogTheme</item>
+        <item name="colorSurface">@color/white</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -74,4 +75,8 @@
         <item name="colorControlNormal">@color/white</item>
     </style>
 
+    <style name="roundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

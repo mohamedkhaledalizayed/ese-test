@@ -45,7 +45,6 @@ class OrderRepositoryImpl @Inject constructor(private val ordersDS: OrdersDS) : 
                 placeOrderParam.addressId,
                 placeOrderParam.itemParams.map { ItemRequest(it.id,it.quantity) },
                 placeOrderParam.mobile,
-                placeOrderParam.notes,
                 placeOrderParam.plan
             )
         ).map { it.id }

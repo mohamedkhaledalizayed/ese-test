@@ -144,7 +144,7 @@ class ClaimingStep2Fragment : BaseFragment() {
     }
 
     fun renderProviders() {
-        binding.spProvider.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, providersResultList!!)
+        binding.spProvider.adapter = ProvidersSpinnerAdapter(requireContext(), providersResultList!!)
         binding.spProvider.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

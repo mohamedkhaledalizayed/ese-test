@@ -19,7 +19,7 @@ data class MedicalRenewalPaymentData(
         @field:SerializedName("PaymentRequestNumber")
         var paymentRequestNumber: String? = "",
         @field:SerializedName("Value")
-        var amount: Int?,
+        var amount: Double?,
         @field:SerializedName("PaymentRequestName")
         var name: String?,
         @field:SerializedName("EngineerName")

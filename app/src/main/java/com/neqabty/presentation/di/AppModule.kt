@@ -72,36 +72,39 @@ class AppModule {
     @Provides
     @Named(DI.authorized)
     fun provideOkHttpClient(httpLoggingInterceptor :HttpLoggingInterceptor): OkHttpClient {
-//        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-//                .add(
-//                    BuildConfig.URL,
-//                    "sha256/hgx3/z5ENRCVF9jDSHk8GwocaQsEFYAW8ON1eGs2qUc="
-//                )
-//                .add(
-//                    "*.neqabty.com",
-//                    "sha256/nt7kxSg6amgrDYO0JQOM+d3Q+G0fgFtBdx76ppVzIS4="
-//                ).build()
-
-        return OkHttpClient.Builder()
-                .connectTimeout(5, TimeUnit.MINUTES)
-                .readTimeout(5, TimeUnit.MINUTES)
+        var okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.MINUTES)
+            .readTimeout(5, TimeUnit.MINUTES)
             .addInterceptor(object : Interceptor {
                 override fun intercept(chain: Interceptor.Chain): Response {
                     val request = chain.request()
-                        var newRequest = request.newBuilder()
-                                // .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlZ3lwdFxcYWhtZWQuZm91YWRnb21hYSIsImV4cCI6MTU3NDA4MjkyMCwiaWF0IjoxNTc0MDY0OTIwfQ.n8CvCPxVyJnoSHcfD9ePMS48Q3nFdN3Lvqmmdi3oy947X7g99i2Bk_sReyzkyGw9appwTeht1F-dlx7IzrrxEA")
-                                .header("Authorization", "Bearer " + PreferencesHelper.instance.jwt)
-                                .header("Accept", "application/json")
-                                .removeHeader("Content-Type")
-                            .build()
+                    var newRequest = request.newBuilder()
+                        // .header("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlZ3lwdFxcYWhtZWQuZm91YWRnb21hYSIsImV4cCI6MTU3NDA4MjkyMCwiaWF0IjoxNTc0MDY0OTIwfQ.n8CvCPxVyJnoSHcfD9ePMS48Q3nFdN3Lvqmmdi3oy947X7g99i2Bk_sReyzkyGw9appwTeht1F-dlx7IzrrxEA")
+                        .header("Authorization", "Bearer " + PreferencesHelper.instance.jwt)
+                        .header("Accept", "application/json")
+                        .removeHeader("Content-Type")
+                        .build()
 
-                        var newResponse = chain.proceed(newRequest)
-                        return newResponse
-                    }
+                    var newResponse = chain.proceed(newRequest)
+                    return newResponse
+                }
             })
-                .addInterceptor(httpLoggingInterceptor) // TODO Interceptor
-//                .certificatePinner(certificatePinner)
-                .build()
+            .addInterceptor(httpLoggingInterceptor) // TODO Interceptor
+
+        if(!BuildConfig.DEBUG) {val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+            .add(
+                BuildConfig.URL,
+                "sha256/hgx3/z5ENRCVF9jDSHk8GwocaQsEFYAW8ON1eGs2qUc="
+            )
+            .add(
+                "*.neqabty.com",
+                "sha256/nt7kxSg6amgrDYO0JQOM+d3Q+G0fgFtBdx76ppVzIS4="
+            ).build()
+
+            okHttpClient.certificatePinner(certificatePinner)
+        }
+
+        return okHttpClient.build()
     }
 
     @Singleton
@@ -295,6 +298,12 @@ class AppModule {
     @Provides
     fun provideGetSubSyndicates(neqabtyRepository: NeqabtyRepository): GetSubSyndicates {
         return GetSubSyndicates(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetAllSyndicateBranches(neqabtyRepository: NeqabtyRepository): GetAllSyndicateBranches {
+        return GetAllSyndicateBranches(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton
@@ -505,6 +514,24 @@ class AppModule {
     @Provides
     fun provideGetSyndicateServices(neqabtyRepository: NeqabtyRepository): GetSyndicateServices {
         return GetSyndicateServices(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetCommitteesLookups(neqabtyRepository: NeqabtyRepository): GetCommitteesLookups {
+        return GetCommitteesLookups(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSendCommitteesRequest(neqabtyRepository: NeqabtyRepository): SendCommitteesRequest {
+        return SendCommitteesRequest(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetProfile(neqabtyRepository: NeqabtyRepository): GetProfile {
+        return GetProfile(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

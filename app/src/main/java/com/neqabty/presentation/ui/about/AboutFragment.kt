@@ -1,25 +1,28 @@
 package com.neqabty.presentation.ui.about
 
-import androidx.lifecycle.Observer
 import android.content.Intent
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.databinding.DataBindingComponent
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
 import com.neqabty.databinding.AboutFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.entities.SyndicateUI
+import com.neqabty.presentation.common.Constants
+import com.neqabty.presentation.entities.SyndicateBranchUI
 import com.neqabty.presentation.util.autoCleared
-import com.neqabty.presentation.util.openMap
 import com.neqabty.presentation.util.call
+import com.neqabty.presentation.util.openMap
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.about_fragment.*
 import javax.inject.Inject
@@ -55,6 +58,8 @@ class AboutFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        binding.rvBranches.adapter = BranchesAdapter(dataBindingComponent, appExecutors) {}
+
         aboutViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
@@ -62,36 +67,51 @@ class AboutFragment : BaseFragment() {
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
                 aboutViewModel.getSyndicate(sharedPref.mainSyndicate.toString())
+                aboutViewModel.getSyndicateBranches()
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
         aboutViewModel.getSyndicate(sharedPref.mainSyndicate.toString())
+        aboutViewModel.getSyndicateBranches()
     }
 
     private fun handleViewState(state: AboutViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
-        state.syndicate?.let {
+        if(state.syndicate != null && state.branches != null){
             svContent.visibility = if (state.isLoading) View.GONE else View.VISIBLE
-            initializeViews(it)
-//            var tempSyndicate = it.copy()
-//            tempSyndicate.address = getString(R.string.address_title) + " " + it.address
-//            tempSyndicate.phone = getString(R.string.phone_title) + " " + it.phone
-//            tempSyndicate.email = getString(R.string.email_title) + " " + it.email
-            binding.syndicate = it
+            binding.syndicate = state.syndicate
+            renderGoverns(state.branches!!)
+            initializeViews(state)
         }
     }
 
-    fun initializeViews(syndicate: SyndicateUI) {
-        bMap.setOnClickListener {
-            syndicate.address?.let { tvAddress.openMap(it, requireContext()) }
+    fun initializeViews(state: AboutViewState) {
+        binding.layoutMain.tvTitle.text = getString(R.string.mainsyndicate_title)
+        binding.layoutMain.tvAddress.text = state.syndicate?.address
+        binding.layoutMain.tvAddress.setOnClickListener {
+            state.syndicate?.address?.let { binding.layoutMain.tvAddress.openMap(it, requireContext()) }
         }
-        clPhone.setOnClickListener {
-            syndicate.phone?.let { tvPhone.call(it, requireContext()) }
+
+        binding.layoutMain.tvPhone.text = state.syndicate?.phone
+        binding.layoutMain.tvPhone.setOnClickListener {
+            state.syndicate?.phone?.let { binding.layoutMain.tvPhone.call(it, requireContext()) }
         }
-        clEmail.setOnClickListener {
-            syndicate.email?.let { sendEmail(it) }
+
+        binding.layoutMain.tvEmail.text = state.syndicate?.email
+        binding.layoutMain.tvEmail.setOnClickListener {
+            state.syndicate?.email?.let { sendEmail(it) }
         }
+
+        binding.tvSubsyndicates.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+        binding.spGoverns.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+        binding.rvBranches.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+
+        Constants.isSyndicatesListEnabled.observe(this, Observer {
+            binding.tvSubsyndicates.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+            binding.spGoverns.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+            binding.rvBranches.visibility = if (Constants.isSyndicatesListEnabled.value == true) View.VISIBLE else View.GONE
+        })
     }
 
     //region
@@ -104,6 +124,20 @@ class AboutFragment : BaseFragment() {
         if (intent.resolveActivity(requireContext().packageManager) != null)
             startActivity(intent)
     }
+
+    fun renderGoverns(branches: List<SyndicateBranchUI>) {
+        binding.spGoverns.adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, branches)
+        binding.spGoverns.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val branchesList = branches.filter { it.id == (parent.getItemAtPosition(position) as SyndicateBranchUI).id }
+                (binding.rvBranches.adapter as BranchesAdapter).submitList(branchesList)
+                (binding.rvBranches.adapter as BranchesAdapter).notifyDataSetChanged()
+            }
+        }
+        binding.spGoverns.setSelection(0)
+    }
+    
 // endregion
 
     fun navController() = findNavController()

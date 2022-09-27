@@ -183,6 +183,39 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.getTripDetails(id)
     }
 
+    override fun getCommitteesLookups(): Observable<CommitteesLookupEntity> {
+        return  remoteDataStore.getCommitteesLookups()
+    }
+
+    override fun sendCommitteesRequest(
+        name: String,
+        userNumber: String,
+        mobile: String,
+        email: String,
+        nationalId: String,
+        address: String,
+        university: String,
+        degree: String,
+        maritalStatus: String,
+        committeesIds: List<Int>,
+        sectionId: Int,
+        syndicateId: Int,
+        department: String,
+        section: String,
+        currentJob: String,
+        details: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
+    ): Observable<String> {
+        return remoteDataStore.sendCommitteesRequest(name, userNumber, mobile, email, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, department, section, currentJob, details, docsNumber, doc1, doc2, doc3)
+    }
+
+    override fun getProfile(mobile: String, userNumber: String): Observable<ProfileEntity> {
+        return remoteDataStore.getProfile(mobile, userNumber)
+    }
+
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {
         return remoteDataStore.getAllServices(typeID)
     }
@@ -360,6 +393,10 @@ class NeqabtyRepositoryImpl @Inject constructor(
     override fun getSyndicates(): Observable<List<SyndicateEntity>> {
 
         return remoteDataStore.getSyndicates()
+    }
+
+    override fun getSyndicateBranches(): Observable<List<SyndicateBranchEntity>> {
+        return remoteDataStore.getSyndicateBranches()
     }
 
     fun saveSyndicates(syndicatesList: List<SyndicateEntity>): Observable<List<SyndicateEntity>> {

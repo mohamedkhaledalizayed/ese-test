@@ -2,12 +2,17 @@ package com.neqabty.presentation.util
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.PictureDrawable
 import android.net.Uri
+import android.util.Base64
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
+import com.caverock.androidsvg.SVG
 
 fun View.openMap(address: String, context: Context) {
     try {
@@ -34,4 +39,19 @@ fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observ
             removeObserver(this)
         }
     })
+}
+
+fun ImageView.loadSVG(svg: String) {
+    val trimmedSVG = svg.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\n", "").replace('\"', '"')
+    val svg = SVG.getFromString(trimmedSVG)
+    val drawable = PictureDrawable(svg.renderToPicture())
+
+    Glide.with(this)
+        .load(drawable)
+        .into(this)
+}
+
+fun ImageView.loadString(img: String){
+    val byteArray = android.util.Base64.decode(img, Base64.NO_WRAP)
+    this.setImageBitmap(ImageUtils.getBitmapFromByteArray(byteArray!!))
 }

@@ -23,6 +23,9 @@ interface WebService {
     @POST("api/v2/Syndicates/Sub/All/byMain")
     fun getSubSyndicatesById(@Body subSyndicateRequest: SubSyndicateRequest): Observable<ApiResponse<List<SyndicateData>>>
 
+    @GET("api/Api/ApiSPPCostCard/GetSyndicateBranches")
+    fun getSyndicateBranches(@Query("server") server: String = ""): Observable<List<SyndicateBranchData>>
+
     @POST("api/v1/countnotification")
     fun getNotificationsCount(@Body notificationRequest: NotificationRequest): Observable<NotificationsCountData>
 
@@ -125,6 +128,21 @@ interface WebService {
 
     @POST("api/v1/transactions/generate-hash")
     fun getTransactionHash(@Body validationRequest: ValidationRequest): Observable<MemberData>
+
+    @GET("api/v1/committees/lookups")
+    fun getCommitteesLookups(): Observable<ApiResponse<CommitteesLookupData>>
+
+    @Multipart
+    @POST("api/v1/committees/register")
+    fun sendCommitteesRequest(
+        @Part("json_request") committeesRequest: CommitteesRequest,
+        @Part doc1: MultipartBody.Part?,
+        @Part doc2: MultipartBody.Part?,
+        @Part doc3: MultipartBody.Part?
+    ): Observable<ApiResponse<String>>
+
+    @POST("api/v1/club/profile")
+    fun getProfile(@Body profileRequest: ProfileRequest): Observable<ApiResponse<ProfileData>>
 
     @POST("api/v1/ese-services")
     fun getSyndicateServices(@Body servicesRequest: SyndicateServicesRequest): Observable<ApiResponse<SyndicateServicesData>>

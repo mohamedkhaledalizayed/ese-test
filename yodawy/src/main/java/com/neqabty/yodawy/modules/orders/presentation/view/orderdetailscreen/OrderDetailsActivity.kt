@@ -108,6 +108,9 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
         prescriptionsAdapter.onItemClickListener = object :
             PrescriptionsAdapter.OnItemClickListener {
             override fun setOnItemClickListener(position: Int) {
+                if (prescriptionsImages.isEmpty()){
+                    return
+                }
                 val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
                 val newFragment = SlideshowDialogFragment.newInstance(prescriptionsImages, position)
                 newFragment.show(ft, "slideshow")

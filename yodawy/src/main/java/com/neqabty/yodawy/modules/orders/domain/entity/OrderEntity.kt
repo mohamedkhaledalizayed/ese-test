@@ -9,7 +9,6 @@ data class OrderEntity(
     val deliveryFees: Int,
     val id: String,
     val items: List<OrderItemEntity>,
-    val notes: String,
     val orderNumber: String,
     val orderPrice: Double,
     val priceBeforeDiscount: Double,

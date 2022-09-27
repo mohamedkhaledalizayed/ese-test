@@ -23,7 +23,6 @@ class PlaceOrderViewModel @Inject constructor(private val placeOrderUseCase: Pla
     fun placeOrder(
         adressId: String,
         mobileNumber: String,
-        notes: String,
         plan: String,
         items: List<ItemParam>
     ) {
@@ -33,7 +32,6 @@ class PlaceOrderViewModel @Inject constructor(private val placeOrderUseCase: Pla
                 placeOrderUseCase.build(
                     PlaceOrderParam(addressId = adressId,
                         mobile = mobileNumber,
-                        notes = notes,
                         plan = plan,
                         itemParams = items)
                 ).collect {

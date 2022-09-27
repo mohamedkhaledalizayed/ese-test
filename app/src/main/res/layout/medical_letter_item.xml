@@ -116,6 +116,23 @@
             app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@id/rvLetterProcedures" />
 
+        <TextView
+            android:id="@+id/tvDownload"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_green"
+            android:layout_marginTop="@dimen/margin_vertical_small"
+            android:layout_marginEnd="@dimen/margin_horizontal_normal"
+            android:padding="@dimen/margin_horizontal_small"
+            android:text="@string/medical_letter_download_report"
+            android:textColor="@color/white"
+            android:textSize="?textSizeSmall"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/rvLetterProcedures" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"

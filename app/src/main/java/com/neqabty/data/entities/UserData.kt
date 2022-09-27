@@ -12,6 +12,10 @@ data class UserData(
         var syndicate: String? = "",
         @field:SerializedName("section")
         var section: String? = "",
+        @field:SerializedName("syndicate_id")
+        var syndicateID: Int = 0,
+        @field:SerializedName("section_id")
+        var sectionID: Int = 0,
         @field:SerializedName("jwt_token")
         var jwt: String? = "",
         @field:SerializedName("details")

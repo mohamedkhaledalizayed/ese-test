@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -23,6 +24,10 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.entities.PaymentRequestUI
 import com.neqabty.presentation.entities.RenewalPaymentUI
 import com.neqabty.presentation.util.autoCleared
+import com.payment.paymentsdk.PaymentSdkActivity.Companion.startCardPayment
+import com.payment.paymentsdk.PaymentSdkConfigBuilder
+import com.payment.paymentsdk.integrationmodels.*
+import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.inquiry_details_fragment.*
 import me.cowpay.PaymentMethodsActivity
@@ -32,7 +37,7 @@ import team.opay.business.cashier.sdk.pay.PaymentTask
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class InquiryDetailsFragment : BaseFragment() {
+class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
@@ -221,6 +226,17 @@ class InquiryDetailsFragment : BaseFragment() {
                     oPayPayment(Constants.PaymentOption.MobileWallet)
                 else
                     cowPayPayment(false)
+            state.medicalRenewalPayment?.let {
+                medicalRenewalPayment = it
+                when (rgPaymentMechanismType.checkedRadioButtonId) {
+                    R.id.rb_card -> {
+                        val configData = generatePaytabsConfigurationDetails()
+                        startCardPayment(requireActivity(), configData, callback = this)
+                    }
+                    R.id.rb_channel -> oPayPayment(Constants.PaymentOption.OpayPOS)
+                    R.id.rb_mobileWallet -> oPayPayment(Constants.PaymentOption.MobileWallet)
+                    else -> cowPayPayment(false)
+                }
             }
         }
     }
@@ -317,7 +333,13 @@ class InquiryDetailsFragment : BaseFragment() {
             Constants.PaymentOption.OpayPOS -> newAmount = renewalPayment.amounts?.get(1)?.posAmount!!
             Constants.PaymentOption.Fawry -> newAmount = renewalPayment.amounts?.get(0)?.posAmount!!
             else -> {}
+            Constants.PaymentOption.OpayCredit -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
+            Constants.PaymentOption.OpayPOS -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
+            Constants.PaymentOption.Fawry -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
+            else -> {}
         }
+        commission = Math.round(commission * 10.0) / 10.0
+        newAmount = (medicalRenewalPayment.paymentItem?.amount ?: 0.0) + commission
         binding.newAmount = newAmount
 //        when (paymentOption) {
 //            Constants.PaymentOption.OpayCredit -> commission = if (renewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) renewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
@@ -396,6 +418,90 @@ class InquiryDetailsFragment : BaseFragment() {
         )
     }
 
+    private fun generatePaytabsConfigurationDetails(selectedApm: PaymentSdkApms? = null): PaymentSdkConfigurationDetails {
+        val profileId = "103411"
+        val serverKey = "SKJN6BDTKH-JG26L9WRDL-DNMN2ZZ9RN"
+        val clientKey = "C7KMVN-NV2B6T-MGBPVR-2G72KG"
+        val locale = PaymentSdkLanguageCode.EN /*Or PaymentSdkLanguageCode.AR*/
+        val currency = "EGP"
+        val merchantCountryCode = "EG"
+
+        val billingData = PaymentSdkBillingDetails(
+            "Giza",
+            "eg",
+            "customer@customer.com",
+            "",
+            sharedPref.mobile, "Egypt",
+            binding.edAddress.text.toString(), "132"
+        )
+
+        val shippingData = PaymentSdkShippingDetails(
+            "Giza",
+            "eg",
+            "customer@customer.com",
+            params.number,
+            sharedPref.mobile, "Egypt",
+            binding.edAddress.text.toString(), "132"
+        )
+
+        val configData = PaymentSdkConfigBuilder(
+            profileId,
+            serverKey,
+            clientKey,
+            newAmount,
+            currency
+        )
+            .setCartDescription(medicalRenewalPayment.paymentItem?.amount.toString())
+            .setLanguageCode(locale)
+            .setMerchantIcon(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.payment_sdk_adcb_logo
+                )
+            )
+            .setBillingData(billingData)
+            .setMerchantCountryCode(merchantCountryCode)
+            .setTransactionType(PaymentSdkTransactionType.SALE)
+            .setTransactionClass(PaymentSdkTransactionClass.ECOM)
+            .setShippingData(shippingData)
+            .setTokenise(PaymentSdkTokenise.USER_MANDATORY) //Check other tokenizing types in PaymentSdkTokenise
+            .setCartId(medicalRenewalPayment.paymentItem?.paymentRequestNumber)
+            .showBillingInfo(false)
+            .showShippingInfo(false)
+            .forceShippingInfo(false)
+            .setScreenTitle(params.title)
+
+        if (selectedApm != null)
+            configData.setAlternativePaymentMethods(listOf(selectedApm))
+
+        return configData.build()
+    }
+
+    override fun onError(error: PaymentSdkError) {
+        showAlert(getString(R.string.payment_canceled)) {
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
+    }
+
+    override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
+        showAlert(
+            if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
+                R.string.payment_successful
+            ) + paymentSdkTransactionDetails.paymentResult?.responseCode
+            else getString(R.string.payment_reference) + paymentSdkTransactionDetails.paymentResult?.responseCode
+        ) {
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
+    }
+
+    override fun onPaymentCancel() {
+        showAlert(getString(R.string.payment_canceled)) {
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
+        }
+    }
     //endregion
 
     fun navController() = findNavController()

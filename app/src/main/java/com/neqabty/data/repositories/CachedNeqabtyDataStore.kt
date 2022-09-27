@@ -33,6 +33,39 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun getCommitteesLookups(): Observable<CommitteesLookupEntity> {
+        TODO("Not yet implemented")
+    }
+
+    override fun sendCommitteesRequest(
+        name: String,
+        userNumber: String,
+        mobile: String,
+        email: String,
+        nationalId: String,
+        address: String,
+        university: String,
+        degree: String,
+        maritalStatus: String,
+        committeesIds: List<Int>,
+        sectionId: Int,
+        syndicateId: Int,
+        department: String,
+        section: String,
+        currentJob: String,
+        details: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
+    ): Observable<String> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getProfile(mobile: String, userNumber: String): Observable<ProfileEntity> {
+        TODO("Not yet implemented")
+    }
+
     override fun createComplaint(
             name: String,
             phone: String,
@@ -294,6 +327,10 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
 
     override fun geSyndicateById(id: String): Observable<SyndicateEntity> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getSyndicateBranches(): Observable<List<SyndicateBranchEntity>> {
+        TODO("Not yet implemented")
     }
 
     override fun getNews(id: String): Observable<List<NewsEntity>> {

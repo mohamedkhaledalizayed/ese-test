@@ -27,6 +27,7 @@
 #-dontobfuscate
 #-keepattributes SourceFile ,LineNumberTable
 -keep class me.cowpay.model.* {*;}
+-keep class com.payment.paymentsdk.* {*;}
 -keepnames class * extends android.os.Parcelable
 -keep class com.neqabty.data.entities.* { <fields>; }
 -keep class com.neqabty.data.api.Request { <fields>; }

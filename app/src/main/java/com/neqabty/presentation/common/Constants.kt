@@ -18,6 +18,9 @@ object Constants {
     var isEditFollowersEnabled: Boolean = false
     var editFollowersStatusMsg: String = ""
     var hasQuestionnaire: MutableLiveData<Boolean> = MutableLiveData(false)
+    var isSyndicatesListEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
+    var isCommitteesEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
+    var isClubEnabled: MutableLiveData<Boolean> = MutableLiveData(false)
 
     var YODAWY_CONFIG: MutableLiveData<AppConfigUI.YodawyStatus> = MutableLiveData()
     var VEZEETA_CONFIG: MutableLiveData<AppConfigUI.VezeetaStatus> = MutableLiveData()
@@ -49,6 +52,7 @@ object Constants {
     var MEDICAL_LETTERS = 12
     var MEDICAL_LETTERS_INQUIRY = 13
     var DOCTORS_RESERVATION = 14
+    var COMMITTEES = 15
     var SYNDICATE_SERVICES = 18
 
     var AD_MEDICAL_RENEW = 1

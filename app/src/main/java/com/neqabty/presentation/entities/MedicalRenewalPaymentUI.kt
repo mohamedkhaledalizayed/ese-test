@@ -14,7 +14,7 @@ data class MedicalRenewalPaymentUI(
     @Parcelize
     data class PaymentItem(
         var paymentRequestNumber: String? = "",
-        var amount: Int?,
+        var amount: Double?,
         var name: String?,
         var engName: String?,
         var engNumber: String?,

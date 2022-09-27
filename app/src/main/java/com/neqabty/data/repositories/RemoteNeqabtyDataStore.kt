@@ -293,7 +293,11 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     override fun getMedicalLetterByID(mobileNumber: String, userNumber: String, id: String): Observable<MedicalLetterEntity.LetterItem> {
         return api.getMedicalLetterByID(mobileNumber, userNumber, id).flatMap { letterItemInfo ->
             letterItemInfo.report?.let { letterItemInfo.letter?.report = it }
-            Observable.just(medicalLetterItemDataEntityMapper.mapFrom(letterItemInfo.letter!!))
+            if(letterItemInfo.letter != null){
+                Observable.just(medicalLetterItemDataEntityMapper.mapFrom(letterItemInfo.letter!!))
+            }else
+                Observable.just(MedicalLetterEntity.LetterItem())
+
         }
     }
 
@@ -375,6 +379,67 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             user.data?.message = user.arMsg
 //            user.data?.engineer?.code = user.data?.code!!
             Observable.just(claimingValidationDataEntityMapper.mapFrom(user.data!!))
+        }
+    }
+
+    private val committeesLookupsDataEntityMapper = CommitteesLookupsDataEntityMapper()
+
+    override fun getCommitteesLookups(): Observable<CommitteesLookupEntity> {
+        return api.getCommitteesLookups().flatMap { lookups ->
+            Observable.just(committeesLookupsDataEntityMapper.mapFrom(lookups.data!!))
+        }
+    }
+
+    override fun sendCommitteesRequest(
+        name: String,
+        userNumber: String,
+        mobile: String,
+        email: String,
+        nationalId: String,
+        address: String,
+        university: String,
+        degree: String,
+        maritalStatus: String,
+        committeesIds: List<Int>,
+        sectionId: Int,
+        syndicateId: Int,
+        department: String,
+        section: String,
+        currentJob: String,
+        details: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
+    ): Observable<String> {
+
+        var file1: MultipartBody.Part? = null
+        var file2: MultipartBody.Part? = null
+        var file3: MultipartBody.Part? = null
+
+        doc1?.let {
+            val doc1RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc1)
+            file1 = MultipartBody.Part.createFormData("doc1", doc1?.name, doc1RequestFile)
+        }
+        doc2?.let {
+            val doc2RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc2)
+            file2 = MultipartBody.Part.createFormData("doc2", doc2?.name, doc2RequestFile)
+        }
+        doc3?.let {
+            val doc3RequestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), doc3)
+            file3 = MultipartBody.Part.createFormData("doc3", doc3?.name, doc3RequestFile)
+        }
+
+            return api.sendCommitteesRequest(CommitteesRequest(name, userNumber, mobile, email, nationalId, address, university, degree, maritalStatus, committeesIds, sectionId, syndicateId, department, section, currentJob, details, docsNumber), file1, file2, file3).map { result ->
+            result.data ?: ""
+        }
+    }
+
+    private val profileDataEntityMapper = ProfileDataEntityMapper()
+
+    override fun getProfile(mobile: String, userNumber: String): Observable<ProfileEntity> {
+        return api.getProfile(ProfileRequest(mobile, userNumber)).map { profile ->
+            profileDataEntityMapper.mapFrom(profile.data!!)
         }
     }
 
@@ -650,6 +715,14 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
     override fun geSyndicateById(id: String): Observable<SyndicateEntity> {
         return api.getSyndicateById(SyndicateRequest(id)).flatMap { syndicate ->
             Observable.just(syndicateDataEntityMapper.mapFrom(syndicate.data!!))
+        }
+    }
+
+    private val syndicateBranchDataEntityMapper = SyndicateBranchDataEntityMapper()
+
+    override fun getSyndicateBranches(): Observable<List<SyndicateBranchEntity>> {
+        return api.getSyndicateBranches().map { branches ->
+            branches.map { syndicateBranchDataEntityMapper.mapFrom(it) }
         }
     }
 

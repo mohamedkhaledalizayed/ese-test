@@ -10,11 +10,11 @@ data class MedicalLetterEntity(
         var letterTypeName: String? = "",
         var isActive: Boolean? = true,
         var serviceProviderName: String? = "",
-        var letterDate: String?,
-        var letterStatusName: String?,
-        var totalPrice: String?,
-        var creationType: Int?,
-        var report: String?,
+        var letterDate: String? = null,
+        var letterStatusName: String? = "",
+        var totalPrice: String? = "",
+        var creationType: Int? = 0,
+        var report: String? = "",
         var letterProcedures: List<LetterProcedureItem>? = null
     )
     data class LetterProcedureItem(

@@ -2,6 +2,7 @@ package com.neqabty.presentation.ui.medicalLetters
 
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.GetLiteFollowersListData
+import com.neqabty.domain.usecases.GetMedicalLetterByID
 import com.neqabty.domain.usecases.GetMedicalLetters
 import com.neqabty.domain.usecases.ValidateUserForClaiming
 import com.neqabty.presentation.common.BaseViewModel
@@ -12,16 +13,20 @@ import com.neqabty.presentation.entities.MedicalLetterUI
 import com.neqabty.presentation.mappers.ClaimingValidationEntityUIMapper
 import com.neqabty.presentation.mappers.LiteFollowersListEntityUIMapper
 import com.neqabty.presentation.mappers.MedicalLetterEntityUIMapper
+import com.neqabty.presentation.mappers.MedicalLetterItemEntityUIMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MedicalLettersViewModel @Inject constructor(private val validateUserForClaiming: ValidateUserForClaiming,
-                                                  private val getLiteFollowersListData: GetLiteFollowersListData, private val getMedicalLetters: GetMedicalLetters) : BaseViewModel() {
+                                                  private val getLiteFollowersListData: GetLiteFollowersListData,
+                                                  private val getMedicalLetters: GetMedicalLetters,
+                                                  private val getMedicalLetterByID: GetMedicalLetterByID) : BaseViewModel() {
 
     private val claimingValidationEntityUIMapper = ClaimingValidationEntityUIMapper()
     private val liteFollowersListEntityUIMapper = LiteFollowersListEntityUIMapper()
     private val medicalLettersEntityUIMapper = MedicalLetterEntityUIMapper()
+    private val medicalLetterItemEntityUIMapper = MedicalLetterItemEntityUIMapper()
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<MedicalLettersViewState> = MutableLiveData()
 
@@ -110,5 +115,23 @@ class MedicalLettersViewModel @Inject constructor(private val validateUserForCla
                 isLoading = false,
                 medicalLetterUI = medicalLetter)
         viewState.value = newViewState
+    }
+
+    fun getPDF(mobileNumber: String, userNumber: String, id: String) {
+        addDisposable(getMedicalLetterByID.getMedicalLetterByID(mobileNumber, userNumber, id)
+            .flatMap {
+                it.let {
+                    medicalLetterItemEntityUIMapper.observable(it)
+                }
+            }.subscribe(
+                {
+                    viewState.value = viewState.value?.copy(isLoading = false, pdf = it.report)
+                },
+                {
+                    viewState.value = viewState.value?.copy(isLoading = false)
+                    errorState.value = handleError(it)
+                }
+            )
+        )
     }
 }

@@ -20,8 +20,11 @@ class AppConfigEntityUIMapper @Inject constructor() : Mapper<AppConfigEntity, Ap
                 fawryCommission = from.fawryCommission,
                 minCommission = from.minCommission,
                 hasQuestionnaire = from.hasQuestionnaire,
+                isSyndicatesListEnabled = from.isSyndicatesListEnabled,
                 yodawyConfig = AppConfigUI.YodawyStatus(from.yodawyConfig.status, from.yodawyConfig.url, from.yodawyConfig.publicKey, from.yodawyConfig.totalAmount, from.yodawyConfig.deliverySentence),
-                vezeetaConfig = AppConfigUI.VezeetaStatus(from.vezeetaConfig.status, from.vezeetaConfig.url)
+                vezeetaConfig = AppConfigUI.VezeetaStatus(from.vezeetaConfig.status, from.vezeetaConfig.url),
+                committeesStatus = from.committeesStatus,
+                clubStatus = from.clubStatus
         )
     }
 }

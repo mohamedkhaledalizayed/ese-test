@@ -239,8 +239,8 @@ class MedicalRenewFragment : BaseFragment() {
                 tvSubscribtionStatus.text = getString(R.string.medical_subscription_subscribed) + " " + medicalRenewalUI.currentMedYear
                 tvSubscribtionStatus.visibility = View.VISIBLE
                 bUpload.visibility = View.VISIBLE
-                bContinue.visibility = if (medicalRenewalPaymentUI.paymentItem?.amount == null || medicalRenewalPaymentUI.paymentItem?.amount == 0) View.GONE else View.VISIBLE
-                llDelivery.visibility = if (medicalRenewalPaymentUI.paymentItem?.amount == null || medicalRenewalPaymentUI.paymentItem?.amount == 0) View.GONE else View.VISIBLE
+                bContinue.visibility = if (medicalRenewalPaymentUI.paymentItem?.amount == null || medicalRenewalPaymentUI.paymentItem?.amount == 0.0) View.GONE else View.VISIBLE
+                llDelivery.visibility = if (medicalRenewalPaymentUI.paymentItem?.amount == null || medicalRenewalPaymentUI.paymentItem?.amount == 0.0) View.GONE else View.VISIBLE
             }
             4 -> {
                 bContinue.visibility = View.GONE

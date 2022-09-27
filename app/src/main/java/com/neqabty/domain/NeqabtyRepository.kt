@@ -9,6 +9,7 @@ interface NeqabtyRepository {
     fun getSyndicates(): Observable<List<SyndicateEntity>>
     fun geSyndicateById(id: String): Observable<SyndicateEntity>
     fun geSubSyndicatesById(id: String): Observable<List<SyndicateEntity>>
+    fun getSyndicateBranches(): Observable<List<SyndicateBranchEntity>>
     fun getNews(id: String): Observable<List<NewsEntity>>
     fun getTrips(id: String): Observable<List<TripEntity>>
     fun getTripDetails(id: String): Observable<TripEntity>
@@ -94,6 +95,30 @@ interface NeqabtyRepository {
             doc10: File?
     ): Observable<Unit>
 
+    fun getCommitteesLookups(): Observable<CommitteesLookupEntity>
+    fun sendCommitteesRequest(
+        name: String,
+        userNumber: String,
+        mobile: String,
+        email: String,
+        nationalId: String,
+        address: String,
+        university: String,
+        degree: String,
+        maritalStatus: String,
+        committeesIds:  List<Int>,
+        sectionId: Int,
+        syndicateId: Int,
+        department: String,
+        section: String,
+        currentJob: String,
+        details: String,
+        docsNumber: Int,
+        doc1: File?,
+        doc2: File?,
+        doc3: File?
+    ): Observable<String>
+    fun getProfile(mobile: String, userNumber: String): Observable<ProfileEntity>
     fun getAllServiceTypes(): Observable<List<ServiceTypeEntity>>
     fun getAllServices(typeID: Int): Observable<List<ServiceEntity>>
     fun getSyndicateServices(userNumber: String): Observable<SyndicateServicesEntity>

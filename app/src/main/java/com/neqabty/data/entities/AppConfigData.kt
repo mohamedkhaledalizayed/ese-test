@@ -22,10 +22,16 @@ data class AppConfigData(
         var minCommission: Double,
         @field:SerializedName("questionnaires")
         var hasQuestionnaire: Boolean = false,
+        @field:SerializedName("syndicates_list")
+        var isSyndicatesListEnabled: Boolean = false,
         @field:SerializedName("yodawy")
         var yodawyConfig: YodawyStatus,
         @field:SerializedName("vezeeta_doctors")
-        var vezeetaConfig: VezeetaStatus
+        var vezeetaConfig: VezeetaStatus,
+        @field:SerializedName("committees")
+        var committeesStatus: Boolean = false,
+        @field:SerializedName("club")
+        var clubStatus: Boolean = false
 ) : Response() {
 
         data class ConfigStatus(

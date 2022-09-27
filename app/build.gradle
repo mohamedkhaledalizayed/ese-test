@@ -154,6 +154,13 @@ android {
             option("-Xmaxerrs", 500)
         }
     }
+    configurations {
+        all*.exclude module: 'androidsvg' // This removes all other versions of `support-v4` if gets duplicated from all the artifacts.
+
+        resolutionStrategy {
+            exclude group: "org.jetbrains.kotlinx", module: "kotlinx-coroutines-debug"
+        }
+    }
 }
 
 jacoco {
@@ -213,6 +220,9 @@ dependencies {
     // Activity KTX for viewModels()
     implementation deps.activity_ktx
     implementation deps.fragment_ktx
+
+    implementation deps.androidsvg
+    implementation deps.paytabs
 
     implementation deps.mastercard
     implementation(name: 'cashier-sdk-1.0.8', ext: 'aar')
