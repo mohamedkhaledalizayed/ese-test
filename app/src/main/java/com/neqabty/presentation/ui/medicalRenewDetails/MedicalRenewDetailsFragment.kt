@@ -73,7 +73,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
     lateinit var mobile: String
 //    lateinit var medicalRenewalUI: MedicalRenewalUI
 
-    var commission: Double = 0.0
+//    var commission: Double = 0.0
     var newAmount: Float = 0.0F
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -322,23 +322,8 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             Constants.PaymentOption.OpayPOS -> newAmount = medicalRenewalPaymentUI.amounts?.get(1)?.posAmount!!
             Constants.PaymentOption.Fawry -> newAmount = medicalRenewalPaymentUI.amounts?.get(0)?.posAmount!!
             else -> {}
-            Constants.PaymentOption.OpayCredit -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
-            Constants.PaymentOption.OpayPOS -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
-            Constants.PaymentOption.Fawry -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
-            else -> {}
         }
-        commission = Math.round(commission * 10.0) / 10.0
-        newAmount = (medicalRenewalPaymentUI.paymentItem?.amount ?: 0.0) + commission
         binding.newAmount = newAmount
-//        when (paymentOption) {
-//            Constants.PaymentOption.OpayCredit -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
-//            Constants.PaymentOption.OpayPOS -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
-//            Constants.PaymentOption.Fawry -> commission = if (medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
-//        }
-//        commission = Math.round(commission * 10.0) / 10.0
-//        newAmount = (medicalRenewalPaymentUI.paymentItem?.amount ?: 0) + commission
-//        binding.newAmount = newAmount
-//        updateCommissionInList()
     }
 
 //    private fun updateCommissionInList() {
@@ -452,10 +437,10 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             profileId,
             serverKey,
             clientKey,
-            newAmount,
+            paymentRequestUI.amount!!,
             currency
         )
-            .setCartDescription(medicalRenewalPaymentUI.paymentItem?.amount.toString())
+            .setCartDescription(paymentRequestUI.netAmount.toString())
             .setLanguageCode(locale)
             .setMerchantIcon(
                 ContextCompat.getDrawable(
@@ -469,7 +454,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             .setTransactionClass(PaymentSdkTransactionClass.ECOM)
             .setShippingData(shippingData)
             .setTokenise(PaymentSdkTokenise.USER_MANDATORY) //Check other tokenizing types in PaymentSdkTokenise
-            .setCartId(medicalRenewalPaymentUI.paymentItem?.paymentRequestNumber)
+            .setCartId(paymentRequestUI.refId)
             .showBillingInfo(false)
             .showShippingInfo(false)
             .forceShippingInfo(false)

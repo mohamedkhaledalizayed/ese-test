@@ -218,16 +218,6 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
         if (!state.isLoading) {
             state.paymentRequestUI?.let {
                 paymentRequestUI = it
-                if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
-                    oPayPayment(Constants.PaymentOption.OpayCredit)
-                else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-                    oPayPayment(Constants.PaymentOption.OpayPOS)
-                else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
-                    oPayPayment(Constants.PaymentOption.MobileWallet)
-                else
-                    cowPayPayment(false)
-            state.medicalRenewalPayment?.let {
-                medicalRenewalPayment = it
                 when (rgPaymentMechanismType.checkedRadioButtonId) {
                     R.id.rb_card -> {
                         val configData = generatePaytabsConfigurationDetails()
@@ -333,23 +323,8 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             Constants.PaymentOption.OpayPOS -> newAmount = renewalPayment.amounts?.get(1)?.posAmount!!
             Constants.PaymentOption.Fawry -> newAmount = renewalPayment.amounts?.get(0)?.posAmount!!
             else -> {}
-            Constants.PaymentOption.OpayCredit -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
-            Constants.PaymentOption.OpayPOS -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
-            Constants.PaymentOption.Fawry -> commission = if (medicalRenewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) medicalRenewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
-            else -> {}
         }
-        commission = Math.round(commission * 10.0) / 10.0
-        newAmount = (medicalRenewalPayment.paymentItem?.amount ?: 0.0) + commission
         binding.newAmount = newAmount
-//        when (paymentOption) {
-//            Constants.PaymentOption.OpayCredit -> commission = if (renewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) renewalPayment.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
-//            Constants.PaymentOption.OpayPOS -> commission = if (renewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) renewalPayment.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
-//            Constants.PaymentOption.Fawry -> commission = if (renewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) renewalPayment.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
-//        }
-//        commission = Math.round(commission * 10.0) / 10.0
-//        newAmount = (renewalPayment.paymentItem?.amount ?: 0) + commission
-//        binding.newAmount = newAmount
-//        updateCommissionInList()
     }
 
 //    private fun updateCommissionInList() {
@@ -448,10 +423,10 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             profileId,
             serverKey,
             clientKey,
-            newAmount,
+            paymentRequestUI.amount!!,
             currency
         )
-            .setCartDescription(medicalRenewalPayment.paymentItem?.amount.toString())
+            .setCartDescription(paymentRequestUI.netAmount!!.toString())
             .setLanguageCode(locale)
             .setMerchantIcon(
                 ContextCompat.getDrawable(
@@ -465,7 +440,7 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             .setTransactionClass(PaymentSdkTransactionClass.ECOM)
             .setShippingData(shippingData)
             .setTokenise(PaymentSdkTokenise.USER_MANDATORY) //Check other tokenizing types in PaymentSdkTokenise
-            .setCartId(medicalRenewalPayment.paymentItem?.paymentRequestNumber)
+            .setCartId(paymentRequestUI.refId)
             .showBillingInfo(false)
             .showShippingInfo(false)
             .forceShippingInfo(false)
