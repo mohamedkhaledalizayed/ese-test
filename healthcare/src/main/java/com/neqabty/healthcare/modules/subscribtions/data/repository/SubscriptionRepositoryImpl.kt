@@ -5,8 +5,10 @@ import android.graphics.BitmapFactory
 import android.util.Base64
 import com.neqabty.healthcare.modules.subscribtions.data.model.SubscribePostBodyRequest
 import com.neqabty.healthcare.modules.subscribtions.data.model.relationstypes.Relation
+import com.neqabty.healthcare.modules.subscribtions.data.model.subscription.SubscriptionModel
 import com.neqabty.healthcare.modules.subscribtions.data.source.SubscriptionSource
 import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.RelationEntity
+import com.neqabty.healthcare.modules.subscribtions.domain.entity.subscribtions.SubscriptionEntity
 import com.neqabty.healthcare.modules.subscribtions.domain.repository.SubscriptionRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -23,13 +25,20 @@ class SubscriptionRepositoryImpl @Inject constructor(private val subscriptionSou
 
     override fun addSubscription(
         subscribePostBodyRequest: SubscribePostBodyRequest
-    ): Flow<Boolean> {
+    ): Flow<SubscriptionEntity> {
         return flow {
             emit(
-                subscriptionSource.addSubscription(subscribePostBodyRequest)
+                subscriptionSource.addSubscription(subscribePostBodyRequest).toSubscriptionEntity()
             )
         }
     }
+}
+
+private fun SubscriptionModel.toSubscriptionEntity(): SubscriptionEntity{
+    return SubscriptionEntity(
+        status = status,
+        message = message
+    )
 }
 
 private fun Relation.toRelationEntity(): RelationEntity{

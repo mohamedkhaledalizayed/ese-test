@@ -158,7 +158,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         binding.screenContainer.visibility = View.VISIBLE
-                        if (resource.data!!){
+                        if (resource.data!!.status){
                             Toast.makeText(this, "تم الأشتراك بنجاح.", Toast.LENGTH_LONG).show()
                             val intent = Intent(this, SehaPaymentActivity::class.java)
                             intent.putExtra("name", name)
@@ -168,7 +168,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                             startActivity(intent)
                             finish()
                         }else{
-                            Toast.makeText(this, "حدث خطا ما, برجاء مراجعة البيانات مرة أخرى.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, resource.data!!.message, Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {

@@ -7,6 +7,7 @@ import com.neqabty.core.utils.AppUtils
 import com.neqabty.core.utils.Resource
 import com.neqabty.healthcare.modules.subscribtions.data.model.SubscribePostBodyRequest
 import com.neqabty.healthcare.modules.subscribtions.domain.entity.relations.RelationEntity
+import com.neqabty.healthcare.modules.subscribtions.domain.entity.subscribtions.SubscriptionEntity
 import com.neqabty.healthcare.modules.subscribtions.domain.usecases.AddSubscriptionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +32,7 @@ class SubscriptionViewModel @Inject constructor(private val addSubscriptionUseCa
         }
     }
 
-    val providers = MutableLiveData<Resource<Boolean>>()
+    val providers = MutableLiveData<Resource<SubscriptionEntity>>()
     fun addSubscription(subscribePostBodyRequest: SubscribePostBodyRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             providers.postValue(Resource.loading(data = null))
