@@ -67,10 +67,10 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
             }
 
             override fun setOnAddItemClickListener(id: String, isMaxFollower: Boolean) {
-                if (isMaxFollower){
-                    Toast.makeText(this@ProfileActivity, "لقد وصلت الى الحد الاقصى فى إضافة التابعين", Toast.LENGTH_LONG).show()
-                    return
-                }
+//                if (isMaxFollower){
+//                    Toast.makeText(this@ProfileActivity, "لقد وصلت الى الحد الاقصى فى إضافة التابعين", Toast.LENGTH_LONG).show()
+//                    return
+//                }
                 addFollower()
             }
         }

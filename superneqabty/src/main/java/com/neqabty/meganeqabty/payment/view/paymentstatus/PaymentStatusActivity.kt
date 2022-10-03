@@ -3,6 +3,7 @@ package com.neqabty.meganeqabty.payment.view.paymentstatus
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -28,7 +29,10 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
 
         setupToolbar(titleResId = R.string.receipt)
 
-        paymentViewModel.getPaymentStatus(intent.getStringExtra("referenceCode")!!)
+        Handler().postDelayed(Runnable {
+            paymentViewModel.getPaymentStatus(intent.getStringExtra("referenceCode")!!)
+        }, 2000)
+
         paymentViewModel.paymentStatus.observe(this){
 
             it?.let { resource ->
@@ -47,7 +51,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                             }
                             binding.syndicateValue.text = "${resource.data?.entity}"
                             binding.serviceNameValue.text = "${resource.data?.serviceAction}"
-                            binding.receiptNumberValue.text = "${resource.data?.gatewayReferenceId}"
+                            binding.receiptNumberValue.text = resource.data?.gatewayReferenceId ?: ""
                             binding.receiptDateValue.text = AppUtils().dateFormat(resource.data!!.createdAt)
                             binding.priceValue.text = "${resource.data?.netAmount}  ${getString(R.string.egp)} "
                             binding.feesValue.text = "${resource.data?.totalFees}   ${getString(R.string.egp)}"

@@ -10,19 +10,18 @@
         android:background="@drawable/package_bg"
         xmlns:tools="http://schemas.android.com/tools">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
             android:layout_margin="1dp"
-            android:background="@drawable/package_title_bg"
-            android:orientation="vertical">
+            android:background="@drawable/package_title_bg">
 
             <TextView
                 android:id="@+id/package_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/address"
+                android:layout_margin="@dimen/_10sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
@@ -33,10 +32,26 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/package_name"
                 android:text="@string/address"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
-        </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="لم يتم الدفع"
+                android:id="@+id/paid"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10ssp"
+                android:background="@drawable/package_not_paid_bg"/>
+
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/followers_recycler"

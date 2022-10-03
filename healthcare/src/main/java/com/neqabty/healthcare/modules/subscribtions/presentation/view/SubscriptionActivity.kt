@@ -45,8 +45,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private var userImageUri: Uri? = null
     private var nationalIdFrontUri: Uri? = null
     private var nationalIdBackUri: Uri? = null
-    private var followerNationalIdFrontUri: Uri? = null
-    private var followerNationalIdBackUri: Uri? = null
     private var followerUri: Uri? = null
     private val relationsAdapter = RelationsAdapter()
     private var relationsList: List<RelationEntity>? = null
@@ -223,25 +221,13 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
-        if (followerNationalIdFrontUri == null){
-            Toast.makeText(this, "من فضلك اختر صورة البطاقة الامامية.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (followerNationalIdBackUri == null){
-            Toast.makeText(this, "من فضلك اختر صورة البطاقة الخلفية.", Toast.LENGTH_LONG).show()
-            return
-        }
-
         val follower = Followers(
             name = binding.etFullName.text.toString(),
             relation = relation,
             imageUri = followerUri!!,
             national_id = binding.etNational.text.toString(),
             relation_type = relationTypeId,
-            image = getRealPath(followerUri!!)!!.toBase64(),
-            frontIdImage = getRealPath(followerNationalIdFrontUri!!)!!.toBase64(),
-            backIdImage = getRealPath(followerNationalIdBackUri!!)!!.toBase64()
+            image = getRealPath(followerUri!!)!!.toBase64()
         )
 
         listFollower.add(follower)
@@ -249,17 +235,11 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         mAdapter.submitList(listFollower)
 
         followerUri = null
-        followerNationalIdFrontUri = null
-        followerNationalIdBackUri = null
         binding.etFullName.setText("")
         binding.etNational.setText("")
         binding.spRelations.setSelection(0)
         binding.followerImage.setImageResource(R.drawable.user)
         binding.followerInfo.visibility = View.GONE
-        binding.followerAddImage.setImageResource(R.drawable.ic_baseline_attach_file_24)
-        binding.followerAddImageText.text = "إرفاق صورة البطاقة الامامية"
-        binding.followerAddImageBack.setImageResource(R.drawable.ic_baseline_attach_file_24)
-        binding.followerAddImageTextBack.text = "إرفاق صورة البطاقة الخلفية"
         binding.addFollower.visibility = View.VISIBLE
         binding.addFollowerText.visibility = View.VISIBLE
         binding.followersRecycler.visibility = View.VISIBLE
@@ -326,16 +306,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                     followerUri = data.data
                     binding.followerImage.setImageURI(followerUri)
                 }
-                1005 -> {
-                    followerNationalIdFrontUri = data.data
-                    binding.followerAddImage.setImageResource(R.drawable.success)
-                    binding.followerAddImageText.text = "تم إرفاق الصورة بنجاح."
-                }
-                1006 -> {
-                    followerNationalIdBackUri = data.data
-                    binding.followerAddImageBack.setImageResource(R.drawable.success)
-                    binding.followerAddImageTextBack.text = "تم إرفاق الصورة بنجاح."
-                }
             }
         }
     }
@@ -357,16 +327,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
     fun addFollowerImage(view: View) {
         REQUEST_CODE = 1004
-        checkPermissionsAndOpenFilePicker()
-    }
-
-    fun addFollowerNationalIdFrontImage(view: View) {
-        REQUEST_CODE = 1005
-        checkPermissionsAndOpenFilePicker()
-    }
-
-    fun addFollowerNationalIdBackImage(view: View) {
-        REQUEST_CODE = 1006
         checkPermissionsAndOpenFilePicker()
     }
 

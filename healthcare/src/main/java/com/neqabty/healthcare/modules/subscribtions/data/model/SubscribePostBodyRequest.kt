@@ -47,9 +47,5 @@ data class Followers(
     @SerializedName("relation_type")
     val relation_type: Int = 0,
     @SerializedName("image")
-    val image: String = "",
-    @SerializedName("front_id_image")
-    val frontIdImage: String = "",
-    @SerializedName("back_id_image")
-    val backIdImage: String = ""
+    val image: String = ""
 )

@@ -11,7 +11,7 @@ data class Follower(
     @SerializedName("name")
     val name: String,
     @SerializedName("national_id")
-    val nationalId: Int,
+    val nationalId: String,
     @SerializedName("relation_type")
     val relationType: Int
 )

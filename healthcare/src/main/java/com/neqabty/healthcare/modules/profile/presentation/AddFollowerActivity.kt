@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
+import com.neqabty.core.utils.isNationalIdValid
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivityAddFollowerBinding
 import com.neqabty.healthcare.modules.profile.data.model.AddFollowerBody
@@ -32,8 +33,6 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
 
     private var REQUEST_CODE = 0
     private var followerUri: Uri? = null
-    private var nationalIdFrontUri: Uri? = null
-    private var nationalIdBackUri: Uri? = null
     private var relationTypeId  = 0
     private lateinit var relation: String
     private var relationsList: List<RelationEntityList>? = null
@@ -43,7 +42,7 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(title = "إضافة تابع جديد")
+        setupToolbar(titleResId = R.string.add_new_member)
 
         binding.spRelations.adapter = relationsAdapter
 
@@ -109,39 +108,61 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
 
         val follower = Follower(
             image = getRealPath(followerUri!!)!!.toBase64(),
-            name = "",
-            nationalId = 0,
-            relationType = 0
+            name = binding.etFullName.text.toString(),
+            nationalId = binding.etNational.text.toString(),
+            relationType = relationTypeId
         )
 
         val list = mutableListOf<Follower>()
         list.add(follower)
         profileViewModel.addFollower(
             AddFollowerBody(
-            packageId = "",
-            subscriberId = "",
+            packageId = "65fc722a-9d6d-4949-9231-7000e175f191",
+            subscriberId = "f2732f86-2160-429c-86d5-e2d8ca38aa96",
             followers = list
         )
         )
-    }
-
-    private fun deleteFollower(){
-        profileViewModel.deleteFollower(2, "")
     }
 
     fun addFollowerImage(view: View) {
         REQUEST_CODE = 1004
         checkPermissionsAndOpenFilePicker()
     }
-    fun addFollowerNationalIdFrontImage(view: View) {
-        REQUEST_CODE = 1005
-        checkPermissionsAndOpenFilePicker()
+    fun addNewFollower(view: View) {
+
+
+        if (followerUri == null){
+            Toast.makeText(this, "من فضلك اختر صورة.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etFullName.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, "من فضلك ادخل الاسم.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etNational.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, "من فضلك ادخل الرقم القومى.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (!binding.etNational.text.toString().isNationalIdValid()){
+            Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etNational.text.toString().length < 14){
+            Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.spRelations.selectedItemPosition == 0 || relationTypeId == 0){
+            Toast.makeText(this, "من فضلك اختر درجة القرابة.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        addFollower()
     }
-    fun addFollowerNationalIdBackImage(view: View) {
-        REQUEST_CODE = 1006
-        checkPermissionsAndOpenFilePicker()
-    }
-    fun addNewFollower(view: View) {}
 
     private fun getRealPath(uri: Uri): String?{
         val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
@@ -199,16 +220,6 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
                 1004 -> {
                     followerUri = data.data
                     binding.followerImage.setImageURI(followerUri)
-                }
-                1005 -> {
-                    nationalIdFrontUri = data.data
-                    binding.followerAddImage.setImageResource(R.drawable.success)
-                    binding.followerAddImageText.text = "تم إرفاق الصورة بنجاح."
-                }
-                1006 -> {
-                    nationalIdBackUri = data.data
-                    binding.followerAddImageBack.setImageResource(R.drawable.success)
-                    binding.followerAddImageTextBack.text = "تم إرفاق الصورة بنجاح."
                 }
             }
         }
