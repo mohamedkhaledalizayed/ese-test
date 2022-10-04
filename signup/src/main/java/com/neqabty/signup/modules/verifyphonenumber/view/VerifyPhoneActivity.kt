@@ -7,8 +7,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -16,7 +14,6 @@ import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
 import com.neqabty.signup.R
 import com.neqabty.signup.databinding.ActivityVerifyPhoneBinding
-import com.neqabty.signup.modules.signup.presentation.view.homescreen.SignupActivity
 import com.neqabty.signup.modules.verifyphonenumber.data.model.CheckOTPBody
 import com.neqabty.signup.modules.verifyphonenumber.data.model.SendOTPBody
 import dagger.hilt.android.AndroidEntryPoint

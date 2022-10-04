@@ -1,11 +1,11 @@
-package com.neqabty.login.modules.login.data.model
+package com.neqabty.signup.modules.servicessyndicate.data.model.signup
 
 
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
 
 @Keep
-data class EntityModel(
+data class Entity(
     @SerializedName("code")
     val code: String,
     @SerializedName("id")

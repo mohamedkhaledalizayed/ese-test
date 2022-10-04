@@ -35,6 +35,7 @@ import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.healthcare.modules.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.meganeqabty.contactus.ContactUsActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
+import com.neqabty.signup.modules.servicessyndicate.view.ServicesSignupActivity
 import com.neqabty.signup.modules.signup.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
@@ -350,8 +351,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             Constants.isSyndicateMember = false
             Constants.selectedSyndicateCode = ""
             Constants.selectedSyndicatePosition = 0
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
+            if (sharedPreferences.code == Constants.SERVICES_SYNDICATE_CODE){
+                val intent = Intent(this, ServicesSignupActivity::class.java)
+                startActivity(intent)
+            }else{
+                val intent = Intent(this, SignupActivity::class.java)
+                startActivity(intent)
+            }
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)

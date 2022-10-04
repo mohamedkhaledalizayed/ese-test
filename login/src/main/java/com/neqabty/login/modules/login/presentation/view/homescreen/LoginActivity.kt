@@ -3,6 +3,7 @@ package com.neqabty.login.modules.login.presentation.view.homescreen
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -51,7 +52,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             sharedPreferences.email = resource.data!!.user.account.email
                             sharedPreferences.code = resource.data!!.user.account.entity.code
                             sharedPreferences.mainSyndicate = resource.data!!.user.account.entity.id
-                            sharedPreferences.image = resource.data!!.user.account.entity.image
+                            sharedPreferences.image = resource.data!!.user.account.entity.image ?: ""
                             sharedPreferences.syndicateName = resource.data!!.user.account.entity.name
                             sharedPreferences.mobile = binding.etUsername.text.toString()
                             sharedPreferences.name = resource.data!!.user.account.fullName ?: ""
@@ -60,6 +61,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             sharedPreferences.userImage = "${resource.data!!.user.account.image}"
                             finish()
                         }else{
+                            Log.e("trt", resource.message.toString())
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
                         }
                     }

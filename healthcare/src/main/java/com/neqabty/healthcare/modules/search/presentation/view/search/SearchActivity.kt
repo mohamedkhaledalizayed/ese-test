@@ -21,6 +21,7 @@ import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.healthcare.modules.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.modules.subscribtions.presentation.view.SubscriptionActivity
+import com.neqabty.signup.modules.servicessyndicate.view.ServicesSignupActivity
 import com.neqabty.signup.modules.signup.presentation.view.homescreen.SignupActivity
 
 @AndroidEntryPoint
@@ -110,8 +111,13 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             Constants.isSyndicateMember = false
             Constants.selectedSyndicateCode = ""
             Constants.selectedSyndicatePosition = 0
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
+            if (sharedPreferences.code == Constants.SERVICES_SYNDICATE_CODE){
+                val intent = Intent(this, ServicesSignupActivity::class.java)
+                startActivity(intent)
+            }else {
+                val intent = Intent(this, SignupActivity::class.java)
+                startActivity(intent)
+            }
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, "لا"

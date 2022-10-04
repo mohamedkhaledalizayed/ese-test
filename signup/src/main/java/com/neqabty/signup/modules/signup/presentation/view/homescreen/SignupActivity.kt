@@ -107,7 +107,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                             sharedPreferences.membershipId = binding.membershipId.text.toString()
                             sharedPreferences.code = resource.data!!.entity.code
                             sharedPreferences.syndicateName = resource.data!!.entity.name
-                            sharedPreferences.image = resource.data!!.entity.imageUrl
+                            sharedPreferences.image = resource.data!!.entity.imageUrl ?: ""
                             confirmMessage(resources.getString(R.string.confirm_message))
                         }else{
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
@@ -142,7 +142,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                             sharedPreferences.code = resource.data!!.entityCode
                             sharedPreferences.email = binding.email.text.toString()
                             sharedPreferences.syndicateName = resource.data!!.entityName
-                            sharedPreferences.image = resource.data!!.entityImage
+                            sharedPreferences.image = resource.data!!.entityImage ?: ""
                             finish()
                         }else{
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()

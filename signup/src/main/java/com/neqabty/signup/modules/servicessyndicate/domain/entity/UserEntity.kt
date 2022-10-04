@@ -1,4 +1,4 @@
-package com.neqabty.signup.modules.signup.domain.entity
+package com.neqabty.signup.modules.servicessyndicate.domain.entity
 
 
 data class UserEntity(
@@ -10,6 +10,6 @@ data class UserEntity(
     val mobile: String = "",
     val nationalId: String = "",
     val entityName: String = "",
-    val entityImage: String? = "",
+    val entityImage: String = "",
     val entityCode: String = ""
 )

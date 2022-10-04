@@ -36,6 +36,7 @@ import com.neqabty.meganeqabty.settings.SettingsActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsActivity
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
+import com.neqabty.signup.modules.servicessyndicate.view.ServicesSignupActivity
 import com.neqabty.signup.modules.signup.presentation.view.homescreen.SignupActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -461,8 +462,13 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.ok_btn)
         ) { dialog, _ ->
             dialog.dismiss()
-            val intent = Intent(this@HomeActivity, SignupActivity::class.java)
-            startActivity(intent)
+            if (sharedPreferences.code == com.neqabty.core.data.Constants.SERVICES_SYNDICATE_CODE){
+                val intent = Intent(this, ServicesSignupActivity::class.java)
+                startActivity(intent)
+            }else {
+                val intent = Intent(this@HomeActivity, SignupActivity::class.java)
+                startActivity(intent)
+            }
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, resources.getString(R.string.no_btn)

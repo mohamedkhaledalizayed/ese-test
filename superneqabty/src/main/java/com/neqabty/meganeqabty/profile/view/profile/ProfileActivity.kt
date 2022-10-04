@@ -41,7 +41,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
                         binding.name.text = resource.data?.data?.fullName ?: ""
                         binding.mobile.text = resource.data?.data?.mobile
-                        binding.membershipNumber.text = resource.data?.data?.membershipId.toString()
+//                        binding.membershipNumber.text = resource.data?.data?.membershipId.toString()
                         binding.nationalId.text = resource.data?.data?.nationalId.toString()
                         binding.email.text = resource.data?.data?.email ?: ""
                         binding.syndicate.text = resource.data?.data?.entity?.name
@@ -140,8 +140,8 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
     override fun onResume() {
         super.onResume()
         profileViewModel.getUserProfile("Token ${sharedPreferences.token}")
-        profileViewModel.membershipCardStatus()
-        profileViewModel.getLicenseStatus()
+//        profileViewModel.membershipCardStatus()
+//        profileViewModel.getLicenseStatus()
     }
 
 }

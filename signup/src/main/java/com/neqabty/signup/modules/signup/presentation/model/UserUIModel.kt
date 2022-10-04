@@ -10,6 +10,6 @@ data class UserUIModel(
     val mobile: String = "",
     val nationalId: String = "",
     val entityName: String = "",
-    val entityImage: String = "",
+    val entityImage: String? = "",
     val entityCode: String = ""
 )

@@ -27,6 +27,7 @@ object Constants {
 
     const val NEQABTY_CODE = "e00"
     const val ESE_CODE = "e03"
+    const val SERVICES_SYNDICATE_CODE = "e09"
     var isSyndicateMember = false
     var selectedSyndicateCode = ""
     var selectedSyndicatePosition = 0
