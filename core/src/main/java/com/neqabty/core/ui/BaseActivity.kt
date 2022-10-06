@@ -2,7 +2,9 @@ package com.neqabty.core.ui
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
 import android.content.pm.ActivityInfo
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -94,6 +96,12 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         dialog.show()
     }
     //endregion
+
+    fun verifyAvailableNetwork():Boolean{
+        val connectivityManager=getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo=connectivityManager.activeNetworkInfo
+        return  networkInfo!=null && networkInfo.isConnected
+    }
 
     override fun onStart() {
         super.onStart()

@@ -33,6 +33,7 @@
                 android:layout_margin="@dimen/_10sdp"
                 android:background="@drawable/search_bg"
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:padding="@dimen/_16sdp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -67,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:visibility="gone"
                 android:background="@drawable/search_bg"
                 android:orientation="vertical">
 

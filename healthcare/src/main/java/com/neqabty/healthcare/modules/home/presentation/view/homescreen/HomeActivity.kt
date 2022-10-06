@@ -242,6 +242,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
         when (item.itemId) {
             R.id.profile -> {
                 if (sharedPreferences.isAuthenticated){
+                    val intent = Intent(this@HomeActivity, com.neqabty.meganeqabty.profile.view.profile.ProfileActivity::class.java)
+                    intent.putExtra("healthcare", true)
+                    startActivity(intent)
+                }else{
+                    askForLogin(getString(R.string.not_found))
+                }
+            }
+            R.id.packages -> {
+                if (sharedPreferences.isAuthenticated){
                     val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
                     startActivity(intent)
                 }else{

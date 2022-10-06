@@ -1,4 +1,4 @@
-<resources>
+<resources translatable="false">
 
     <string name="register_now">سجل الأن</string>
     <string name="seha">نقابتى صحة مستدامة</string>
@@ -45,7 +45,8 @@
     <string name="cont">متابعة</string>
     <string name="use_it_now">استخدامه الآن</string>
     <string name="term_">تطبق الشروط والاحكام</string>
-
+    <string name="internet_message">لا يوجد اتصال بالانترنت برجاء التحقق من الاتصال بالانترنت.</string>
+    <string name="internet_title">لا يوجد اتصال</string>
 
     <string name="registration">تسجيل إشتراك</string>
     <string name="add_image">إرفاق صورة البطاقة الامامية</string>

@@ -140,8 +140,13 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
     override fun onResume() {
         super.onResume()
         profileViewModel.getUserProfile("Token ${sharedPreferences.token}")
-        profileViewModel.membershipCardStatus()
-        profileViewModel.getLicenseStatus()
+        if (!intent.getBooleanExtra("healthcare", false)){
+            profileViewModel.membershipCardStatus()
+            profileViewModel.getLicenseStatus()
+        }else{
+            binding.updateLicence.visibility = View.GONE
+            binding.cardRequest.visibility = View.GONE
+        }
     }
 
 }

@@ -116,7 +116,8 @@
     <string name="unsuccessfull_payment">عملية فاشلة.</string>
     <string name="un_paid">لم يتم دفع الفاتورة.</string>
     <string name="sel_service">إختر الخدمة</string>
-
+    <string name="internet_message">لا يوجد اتصال بالانترنت برجاء التحقق من الاتصال بالانترنت.</string>
+    <string name="internet_title">لا يوجد اتصال</string>
 
     <string name="member_name">الاسم : %s</string>
     <string name="member_id">رقم العضوية : %s</string>

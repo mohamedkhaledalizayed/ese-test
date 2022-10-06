@@ -132,7 +132,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()){
             showAlertDialogAndExitApp(getString(R.string.rooted))
         }else{
-            splashViewModel.appConfig()
+            if (!verifyAvailableNetwork()){
+                showAlert(getString(R.string.internet_message), getString(R.string.internet_title)) { finish() }
+            }else{
+                splashViewModel.appConfig()
+            }
         }
     }
 }

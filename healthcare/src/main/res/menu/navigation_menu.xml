@@ -8,6 +8,13 @@
             android:icon="@drawable/ic_man"/>
     </group>
 
+    <group android:id="@+id/menu_package">
+        <item
+            android:id="@+id/packages"
+            android:title="الباقات"
+            android:icon="@drawable/ic_man"/>
+    </group>
+
     <group android:id="@+id/menu_syndicate">
         <item
             android:id="@+id/syndicate"

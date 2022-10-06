@@ -19,7 +19,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.neqabty.healthcare.R
 import com.neqabty.core.data.Constants
-import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
 import com.neqabty.healthcare.modules.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.modules.subscribtions.data.model.Followers
@@ -31,9 +30,7 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
-import com.neqabty.core.utils.isMobileValid
-import com.neqabty.core.utils.isNationalIdValid
-import com.neqabty.core.utils.isValidEmail
+import com.neqabty.core.utils.*
 import com.neqabty.healthcare.modules.checkaccountstatus.data.model.CheckPhoneBody
 
 @AndroidEntryPoint
@@ -70,6 +67,12 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         maxFollowers = intent.getIntExtra("maxFollowers", 0)
         serviceActionCode = intent.getStringExtra("serviceActionCode")
 
+        binding.etName.setText(sharedPreferences.name)
+        binding.etName.isEnabled = false
+        binding.etNationalId.setText(sharedPreferences.nationalId)
+        binding.etNationalId.isEnabled = false
+        binding.etEmail.setText(sharedPreferences.email)
+        binding.etEmail.isEnabled = false
 //        val intent = Intent(this, SehaPaymentActivity::class.java)
 //        intent.putExtra("name", name)
 //        intent.putExtra("price", price)
@@ -342,26 +345,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
-        if (binding.etBirthDate.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل تاريخ الميلاد.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (!binding.ccp.isValidFullNumber) {
-            Toast.makeText(this, "Not Valid Number", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (binding.etAddress.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل العنوان.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (binding.etJob.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الوظيفة.", Toast.LENGTH_LONG).show()
-            return
-        }
-
         if (binding.etNationalId.text.toString().isNullOrEmpty()){
             Toast.makeText(this, "من فضلك ادخل الرقم القومى.", Toast.LENGTH_LONG).show()
             return
@@ -384,6 +367,26 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
         if (!binding.etEmail.text.toString().isValidEmail()){
             Toast.makeText(this, "من فضلك ادخل البريد الالكترونى بشكل صحيح.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etBirthDate.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, "من فضلك ادخل تاريخ الميلاد.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (!binding.ccp.isValidFullNumber) {
+            Toast.makeText(this, "Not Valid Number", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etAddress.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, "من فضلك ادخل العنوان.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.etJob.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, "من فضلك ادخل الوظيفة.", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -438,6 +441,11 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return yourRealPath
         }
         return null
+    }
+
+    override fun onStart() {
+        LocaleHelper().setLocale(this, "ar")
+        super.onStart()
     }
 
 }
