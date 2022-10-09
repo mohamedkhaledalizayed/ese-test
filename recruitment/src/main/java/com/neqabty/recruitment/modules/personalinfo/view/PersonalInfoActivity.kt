@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
 
-    private val mAdapter = CustomAdapter()
     private val personalInfoViewModel: PersonalInfoViewModel by viewModels()
     override fun getViewBinding() = ActivityPersonalInfoBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +44,7 @@ class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
             }
         }
 
-        binding.spMarital.adapter = mAdapter
+
         binding.spGovernment.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
 //                if (filtersData != null && i != 0) {
@@ -56,6 +55,7 @@ class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
 
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
         }
+
         personalInfoViewModel.getMaritalStatus()
         personalInfoViewModel.maritalStatus.observe(this){
             it.let {
@@ -66,6 +66,74 @@ class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
 
                     }
                     Status.SUCCESS -> {
+                        val mAdapter = CustomAdapter()
+                        binding.spMarital.adapter = mAdapter
+                        mAdapter.submitList(resource.data?.toMutableList())
+                    }
+                    Status.ERROR -> {
+                        Log.e("ERROR", resource.message.toString())
+                    }
+                }
+
+            }
+        }
+
+        personalInfoViewModel.getNationalities()
+        personalInfoViewModel.nationalities.observe(this){
+            it.let {
+                resource ->
+
+                when(resource.status){
+                    Status.LOADING -> {
+
+                    }
+                    Status.SUCCESS -> {
+                        val mAdapter = CustomAdapter()
+                        binding.spNationality.adapter = mAdapter
+                        mAdapter.submitList(resource.data?.toMutableList())
+                    }
+                    Status.ERROR -> {
+                        Log.e("ERROR", resource.message.toString())
+                    }
+                }
+
+            }
+        }
+
+        personalInfoViewModel.getCountries()
+        personalInfoViewModel.countries.observe(this){
+            it.let {
+                resource ->
+
+                when(resource.status){
+                    Status.LOADING -> {
+
+                    }
+                    Status.SUCCESS -> {
+                        val mAdapter = CustomAdapter()
+                        binding.spCountry.adapter = mAdapter
+                        mAdapter.submitList(resource.data?.toMutableList())
+                    }
+                    Status.ERROR -> {
+                        Log.e("ERROR", resource.message.toString())
+                    }
+                }
+
+            }
+        }
+
+        personalInfoViewModel.getGovernorates()
+        personalInfoViewModel.governorates.observe(this){
+            it.let {
+                resource ->
+
+                when(resource.status){
+                    Status.LOADING -> {
+
+                    }
+                    Status.SUCCESS -> {
+                        val mAdapter = CustomAdapter()
+                        binding.spGovernment.adapter = mAdapter
                         mAdapter.submitList(resource.data?.toMutableList())
                     }
                     Status.ERROR -> {

@@ -12,6 +12,7 @@ import com.neqabty.recruitment.modules.personalinfo.data.model.industries.Indust
 import com.neqabty.recruitment.modules.personalinfo.data.model.maritalstatus.MaritalStatusModel
 import com.neqabty.recruitment.modules.personalinfo.data.model.militarystatus.MilitaryStatusModel
 import com.neqabty.recruitment.modules.personalinfo.data.model.nationalities.NationalityModel
+import com.neqabty.recruitment.modules.personalinfo.data.model.universities.UniversityModel
 import com.neqabty.recruitment.modules.personalinfo.domain.entity.engineerdata.CityEntity
 import com.neqabty.recruitment.modules.personalinfo.domain.entity.engineerdata.EngineerEntity
 import com.neqabty.recruitment.modules.personalinfo.domain.repository.PersonalInfoRepository
@@ -24,6 +25,7 @@ import com.neqabty.recruitment.modules.personalinfo.domain.entity.maritalstatus.
 import com.neqabty.recruitment.modules.personalinfo.domain.entity.militarystatus.MilitaryStatusEntity
 import com.neqabty.recruitment.modules.personalinfo.domain.entity.nationalities.NationalityEntity
 import com.neqabty.recruitment.modules.personalinfo.domain.entity.skills.SkillsEntity
+import com.neqabty.recruitment.modules.personalinfo.domain.entity.university.UniversityEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -43,6 +45,30 @@ class PersonalInfoRepositoryImpl @Inject constructor(private val personalInfoDS:
         }
     }
 
+    override fun getNationalities(): Flow<List<NationalityEntity>> {
+        return flow {
+            emit(personalInfoDS.getNationalities().map { it.toNationalityEntity() })
+        }
+    }
+
+    override fun getCountries(): Flow<List<CountryEntity>> {
+        return flow {
+            emit(personalInfoDS.getCountries().map { it.toCountryEntity() })
+        }
+    }
+
+    override fun getGovernorates(): Flow<List<GovernmentEntity>> {
+        return flow {
+            emit(personalInfoDS.getGovernorates().map { it.toGovernmentEntity() })
+        }
+    }
+
+    override fun getUniversities(): Flow<List<UniversityEntity>> {
+        return flow {
+            emit(personalInfoDS.getUniversities().map { it.toUniversityEntity() })
+        }
+    }
+
     override fun updateEngineerData(id: String, engineerBody: EngineerBody): Flow<EngineerEntity> {
         return flow {
             personalInfoDS.updateEngineerData(id, engineerBody)
@@ -54,7 +80,7 @@ class PersonalInfoRepositoryImpl @Inject constructor(private val personalInfoDS:
 private fun EngineerModel.toEngineerEntity(): EngineerEntity{
     return EngineerEntity(
         address = address,
-        city = city.toCityEntity(),
+//        city = city.toCityEntity(),
         courses = courses.map { it.toCourse() },
         dateOfBirth = dateOfBirth,
         department = department.toDepartment(),
@@ -157,12 +183,12 @@ private fun GovernorateModel.toGovernmentEntity(): GovernmentEntity {
 //    )
 //}
 //
-//private fun UniversityModel.toUniversityEntity(): UniversityEntity {
-//    return UniversityEntity(
-//        id = id,
-//        name = name
-//    )
-//}
+private fun UniversityModel.toUniversityEntity(): UniversityEntity {
+    return UniversityEntity(
+        id = id,
+        name = name
+    )
+}
 //
 //private fun DepartmentModel.toDepartmentEntity(): DepartmentEntity {
 //    return DepartmentEntity(

@@ -9,9 +9,7 @@ data class ExperienceModel(
     @SerializedName("company_name")
     val companyName: String,
     @SerializedName("end_date")
-    val endDate: Any,
-    @SerializedName("engineer")
-    val engineer: EngineerX,
+    val endDate: String?,
     @SerializedName("id")
     val id: Int,
     @SerializedName("job_description")

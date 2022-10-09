@@ -4,7 +4,7 @@ package com.neqabty.recruitment.modules.personalinfo.domain.entity.engineerdata
 
 data class EngineerEntity(
     val address: String,
-    val city: CityEntity,
+//    val city: CityEntity,
     val courses: List<CourseEntity>,
     val dateOfBirth: String,
     val department: DepartmentEntity,
@@ -13,7 +13,7 @@ data class EngineerEntity(
     val experiences: List<ExperienceEntity>,
     val gender: String,
     val governorate: GovernorateEntity,
-    val grade: Any,
+    val grade: String?,
     val graduationYear: Int,
     val languages: List<LanguageEntity>,
     val linkedInLink: String,

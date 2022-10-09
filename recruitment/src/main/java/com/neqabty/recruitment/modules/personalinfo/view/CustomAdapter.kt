@@ -7,11 +7,12 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.neqabty.recruitment.R
 import com.neqabty.recruitment.modules.personalinfo.domain.entity.maritalstatus.MaritalStatusEntity
+import com.neqabty.recruitment.modules.personalinfo.view.model.ItemUi
 
 
 class CustomAdapter() : BaseAdapter() {
 
-    private var listItems: MutableList<MaritalStatusEntity> = ArrayList()
+    private var listItems: MutableList<ItemUi> = ArrayList()
     var onItemClickListener: OnItemClickListener? = null
     private var inflter: LayoutInflater? =null
 
@@ -46,7 +47,7 @@ class CustomAdapter() : BaseAdapter() {
         fun setOnItemClickListener(item: String)
     }
 
-    fun submitList(newItems: MutableList<MaritalStatusEntity>?) {
+    fun submitList(newItems: MutableList<ItemUi>?) {
         listItems.clear()
         newItems?.let {
             listItems.addAll(it)

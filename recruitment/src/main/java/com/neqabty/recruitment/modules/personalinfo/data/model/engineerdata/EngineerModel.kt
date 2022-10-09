@@ -8,8 +8,8 @@ import androidx.annotation.Keep
 data class EngineerModel(
     @SerializedName("address")
     val address: String,
-    @SerializedName("city")
-    val city: CityModel,
+//    @SerializedName("city")
+//    val city: CityModel,
     @SerializedName("courses")
     val courses: List<CourseModel>,
     @SerializedName("date_of_birth")
@@ -27,7 +27,7 @@ data class EngineerModel(
     @SerializedName("governorate")
     val governorate: GovernorateModel,
     @SerializedName("grade")
-    val grade: Any,
+    val grade: String?,
     @SerializedName("graduation_year")
     val graduationYear: Int,
     @SerializedName("languages")
