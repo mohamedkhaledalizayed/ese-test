@@ -450,7 +450,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             )
             .setBillingData(billingData)
             .setMerchantCountryCode(merchantCountryCode)
-            .setTransactionType(PaymentSdkTransactionType.SALE)
+            .setTransactionType(PaymentSdkTransactionType.AUTH)
             .setTransactionClass(PaymentSdkTransactionClass.ECOM)
             .setShippingData(shippingData)
             .setTokenise(PaymentSdkTokenise.USER_MANDATORY) //Check other tokenizing types in PaymentSdkTokenise
