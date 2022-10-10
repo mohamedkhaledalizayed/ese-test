@@ -17,6 +17,6 @@ interface SignupApi {
     suspend fun signUpNeqabtyMember(@Body neqabtySignupBody: NeqabtySignupBody): NeqabtyMemberModel
 
     @GET("entities?special-format=android")
-    suspend fun getSyndicates(): SyndicateListModel
+    suspend fun getSyndicates(@Query("filter{type.name}") type: String = "syndicate"): SyndicateListModel
 
 }

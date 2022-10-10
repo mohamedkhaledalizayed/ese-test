@@ -4,7 +4,8 @@
     <string name="alert_title">تنبيه</string>
     <string name="ok_btn">تأكيد</string>
     <string name="cancel_btn">إلغاء</string>
-
+    <string name="internet_message">لا يوجد اتصال بالانترنت برجاء التحقق من الاتصال بالانترنت.</string>
+    <string name="internet_title">لا يوجد اتصال</string>
 
     <string name="please_wait">من فضلك انتظر...</string>
     <string name="news_title">أخبار النقابة</string>

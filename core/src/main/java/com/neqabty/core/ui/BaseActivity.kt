@@ -97,7 +97,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     }
     //endregion
 
-    fun verifyAvailableNetwork():Boolean{
+    private fun verifyAvailableNetwork():Boolean{
         val connectivityManager=getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo=connectivityManager.activeNetworkInfo
         return  networkInfo!=null && networkInfo.isConnected
@@ -105,6 +105,9 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        if (!verifyAvailableNetwork()){
+            showAlert(getString(R.string.internet_message), getString(R.string.internet_title)) { finish() }
+        }
         LocaleHelper().setLocale(this,"ar")
     }
 }

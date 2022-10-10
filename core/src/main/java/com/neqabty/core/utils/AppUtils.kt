@@ -40,7 +40,7 @@ class AppUtils {
                 }
             }
         } else {
-            throwable.message!!
+            "No Internet Connection"
         }
     }
 }

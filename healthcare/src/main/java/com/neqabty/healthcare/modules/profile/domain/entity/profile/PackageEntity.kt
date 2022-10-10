@@ -4,6 +4,7 @@ package com.neqabty.healthcare.modules.profile.domain.entity.profile
 
 data class PackageEntity(
     val descriptionAr: String,
+    val subscriberId: String,
     val followers: List<FollowerEntity>,
     val hint: String,
     val id: String,

@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName
 data class Package(
     @SerializedName("created_at")
     val createdAt: String,
+    @SerializedName("subscriber_id")
+    val subscriberId: String,
     @SerializedName("deleted_at")
     val deletedAt: Any,
     @SerializedName("description_ar")

@@ -12,7 +12,7 @@
         <item
             android:id="@+id/packages"
             android:title="الباقات"
-            android:icon="@drawable/ic_man"/>
+            android:icon="@drawable/delivered"/>
     </group>
 
     <group android:id="@+id/menu_syndicate">
