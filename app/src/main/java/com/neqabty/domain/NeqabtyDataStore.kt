@@ -92,6 +92,7 @@ interface NeqabtyDataStore {
     fun getSyndicateServices(userNumber: String): Observable<SyndicateServicesEntity>
     fun inquirePayment(userNumber: String): Observable<RenewalPaymentEntity>
     fun addRenewalRequest(mobileNumber: String, userNumber: String, userName: String, serviceID: Int, paymentType: String, paymentGatewayId: Int, locationType: Int, address: String, mobile: String): Observable<PaymentRequestEntity>
+    fun addSyndicateServicesPaymentRequest(mobileNumber: String, userNumber: String, userName: String, serviceID: Int, countryID: Int, paymentType: String, paymentGatewayId: Int, locationType: Int, address: String, mobile: String): Observable<PaymentRequestEntity>
     fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity>
     fun sendDecryptionKey(requestNumber: String, decryptionKey: String): Observable<DecryptionEntity>
     fun getMedicalLetters(mobileNumber: String, benID: String, start: Int, end: Int, orderBy: String, dir: String): Observable<MedicalLetterEntity>

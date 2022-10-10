@@ -213,6 +213,21 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("Not yet implemented")
     }
 
+    override fun addSyndicateServicesPaymentRequest(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        countryID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        TODO("Not yet implemented")
+    }
+
     override fun sendMedicalRequest(
             mainSyndicateId: Int,
             subSyndicateId: Int,

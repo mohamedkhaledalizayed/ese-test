@@ -438,6 +438,36 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             }
         }
 
+    override fun addSyndicateServicesPaymentRequest(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        countryID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        return api.addSyndicateServicesPaymentRequest(
+            SyndicateServicesPaymentRequest(
+                userNumber,
+                userName,
+                mobileNumber,
+                locationType,
+                address,
+                mobile,
+                serviceID,
+                countryID,
+                paymentType,
+                paymentGatewayId
+            )
+        ).flatMap { renewalData ->
+            Observable.just(paymentRequestDataEntityMapper.mapFrom(renewalData.data!!))
+        }
+    }
+
     private val encryptionDataEntityMapper = EncryptionDataEntityMapper()
 
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {

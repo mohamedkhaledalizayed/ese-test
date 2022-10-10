@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.syndicateServices
+package com.neqabty.presentation.ui.syndicateServicesDetails
 
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.domain.usecases.*
@@ -10,7 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SyndicateServicesViewModel @Inject constructor(
+class SyndicateServicesDetailsViewModel @Inject constructor(
     private val getSyndicateServices: GetSyndicateServices,
     private val getAllServices: GetAllServices,
     private val paymentInquiry: PaymentInquiry
@@ -21,10 +21,10 @@ class SyndicateServicesViewModel @Inject constructor(
     private val serviceTypeEntityUIMapper = SyndicateServicesEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
-    var viewState: MutableLiveData<SyndicateServicesViewState> = MutableLiveData()
+    var viewState: MutableLiveData<SyndicateServicesDetailsViewState> = MutableLiveData()
 
     init {
-        viewState.value = SyndicateServicesViewState()
+        viewState.value = SyndicateServicesDetailsViewState()
     }
 
     fun getSyndicateServices(userNumber: String) {

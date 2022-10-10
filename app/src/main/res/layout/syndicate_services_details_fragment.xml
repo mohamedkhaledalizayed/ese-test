@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+        <import type="android.view.View"/>
+
+        <variable
+            name="title"
+            type="java.lang.String" />
+
+        <variable
+            name="name"
+            type="java.lang.String" />
+
+        <variable
+            name="number"
+            type="java.lang.String" />
+
+        <variable
+            name="newAmount"
+            type="java.lang.Float" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_horizontal_large">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/svContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_horizontal_normal"
+            android:background="@drawable/rounded_bg"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvService"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@{title}"
+                    android:textSize="?textSizeLarge" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@{Html.fromHtml(@string/name_title(name))}"
+                    android:textSize="?textSizeMedium" />
+
+                <TextView
+                    android:id="@+id/tvMemberNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:text="@{Html.fromHtml(@string/user_number_title(number))}"
+                    android:textSize="?textSizeMedium" />
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tvRequestID"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@{Html.fromHtml(@string/expiration_date_title(memberItem.billDate))}"-->
+                <!--                    android:textSize="?textSizeMedium" />-->
+
+                <TextView
+                    android:id="@+id/tvAmount"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:layout_height="wrap_content"
+                    android:text="@{Html.fromHtml(@string/amount_title(newAmount.toString()))}"
+                    android:textSize="?textSizeMedium" />
+
+                <LinearLayout
+                    android:id="@+id/llDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/margin_vertical_normal">
+
+                    <TextView
+                        android:id="@+id/tvDeliveryInfoTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/delivery_info_title"
+                        android:textSize="?textSizeLarge" />
+
+                    <TextView
+                        android:id="@+id/tvMobileNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/delivery_mobile_title"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="?textSizeMedium"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:id="@+id/tvMobileNumberHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/delivery_mobile_hint"
+                        android:textColor="@color/text_dark"
+                        android:textSize="?textSizeMedium"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:id="@+id/tvDeliveryMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_small"
+                        android:text="@string/delivery_method"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="?textSizeMedium"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvDeliveryMethodHint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/delivery_method_hint"
+                        android:textColor="@color/text_dark"
+                        android:textSize="?textSizeSmall"
+                        android:visibility="visible" />
+
+                    <RadioGroup
+                        android:id="@+id/rgDeliveryMechanismType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <RadioButton
+                            android:id="@+id/rb_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:buttonTint="@color/dark_green"
+                            android:checked="true"
+                            android:text="@string/home_delivery"
+                            android:textSize="?textSizeMedium" />
+
+
+                        <com.neqabty.presentation.util.ClearableEditText
+                            android:id="@+id/edAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_vertical_normal"
+                            android:enabled="true"
+                            android:hint="@string/address"
+                            android:inputType="text"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="?textSizeMedium" />
+
+                        <EditText
+                            android:id="@+id/edMobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_vertical_normal"
+                            android:hint="@string/delivery_mobile_title"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:textDirection="anyRtl"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="?textSizeMedium"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvMobile" />
+
+                        <RadioButton
+                            android:id="@+id/rb_mainSyndicate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/dark_green"
+                            android:checked="false"
+                            android:text="@string/main_syndicate_delivery"
+                            android:textSize="?textSizeMedium"
+                            android:visibility="gone" />
+
+
+                        <RadioButton
+                            android:id="@+id/rb_syndicate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/dark_green"
+                            android:checked="false"
+                            android:text="@string/syndicate_delivery"
+                            android:textSize="?textSizeMedium"
+                            android:visibility="gone" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvPaymentMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payment_method"
+                    android:layout_marginTop="@dimen/margin_vertical_normal"
+                    android:visibility="visible"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="?textSizeLarge" />
+
+                <RadioGroup
+                    android:id="@+id/rgPaymentMechanismType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/rb_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:checked="true"
+                        android:text="@string/payment_card"
+                        android:textSize="?textSizeSmall"
+                        android:buttonTint="@color/dark_green" />
+
+                    <ImageView
+                        android:id="@+id/ivCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_100sdp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/visa" />
+
+                    <RadioButton
+                        android:id="@+id/rb_channel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_channel"
+                        android:textSize="?textSizeSmall"
+                        android:buttonTint="@color/dark_green" />
+
+                    <LinearLayout
+                        android:id="@+id/llChannels"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_100sdp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/opay"/>
+
+                        <TextView
+                            android:id="@+id/tvChannels"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="?textSizeSmall"
+                            android:gravity="center"
+                            android:text="@{Html.fromHtml(@string/payment_store_locator)}"/>
+                    </LinearLayout>
+
+                    <RadioButton
+                        android:id="@+id/rb_fawry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_fawry"
+                        android:textSize="?textSizeSmall"
+                        android:buttonTint="@color/dark_green" />
+
+                    <ImageView
+                        android:id="@+id/ivFawry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_100sdp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/fawry"
+                        android:layout_gravity="center_horizontal"
+                        android:visibility="gone" />
+
+                    <RadioButton
+                        android:id="@+id/rb_mobileWallet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_wallet"
+                        android:textSize="?textSizeSmall"
+                        android:buttonTint="@color/dark_green"
+                        android:visibility="gone" />
+
+                    <RadioButton
+                        android:id="@+id/rb_meeza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/payment_meeza"
+                        android:textSize="?textSizeSmall"
+                        android:visibility="gone"
+                        android:buttonTint="@color/dark_green" />
+
+                </RadioGroup>
+
+                <Button
+                    android:id="@+id/bPay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_vertical_large"
+                    android:background="@drawable/btn_green"
+                    android:gravity="center"
+                    android:text="@string/pay"
+                    android:textColor="@android:color/white"
+                    android:textSize="?textSizeMedium" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</layout>
