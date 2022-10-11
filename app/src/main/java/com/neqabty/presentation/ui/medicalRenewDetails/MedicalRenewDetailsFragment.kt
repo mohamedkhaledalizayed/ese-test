@@ -241,7 +241,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             else -> ""
         }
         PaymentTask.sandBox = Constants.OPAY_MODE
-        val userInfo = UserInfo(paymentRequestUI.netAmount.toString(), sharedPref.user, sharedPref.mobile, sharedPref.name)
+        val userInfo = UserInfo(paymentRequestUI.amount.toString(), sharedPref.user, sharedPref.mobile, sharedPref.name)
         val payInput = PayInput(
             publickey = Constants.OPAY_PUBLIC_KEY,
             merchantId = Constants.OPAY_MERCHANT_ID,
@@ -305,7 +305,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
         //order price780
         intent.putExtra(CowpayConstantKeys.Amount, paymentRequestUI.amount.toString())
         //user data
-        intent.putExtra(CowpayConstantKeys.Description, paymentRequestUI.netAmount.toString())
+        intent.putExtra(CowpayConstantKeys.Description, paymentRequestUI.amount.toString())
         intent.putExtra(CowpayConstantKeys.CustomerName, sharedPref.user)
         intent.putExtra(CowpayConstantKeys.CustomerMobile, sharedPref.mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
@@ -440,7 +440,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             paymentRequestUI.amount!!,
             currency
         )
-            .setCartDescription(paymentRequestUI.netAmount.toString())
+            .setCartDescription(paymentRequestUI.amount.toString())
             .setLanguageCode(locale)
             .setMerchantIcon(
                 ContextCompat.getDrawable(
