@@ -235,7 +235,7 @@ class InquiryDetailsFragment : BaseFragment() {
             else -> ""
         }
         PaymentTask.sandBox = Constants.OPAY_MODE
-        val userInfo = UserInfo(paymentRequestUI.netAmount.toString(), binding.number, sharedPref.mobile, renewalPayment.paymentItem?.engName)
+        val userInfo = UserInfo(paymentRequestUI.amount.toString(), binding.number, sharedPref.mobile, renewalPayment.paymentItem?.engName)
         val payInput = PayInput(
             publickey = Constants.OPAY_PUBLIC_KEY,
             merchantId = Constants.OPAY_MERCHANT_ID,
@@ -299,7 +299,7 @@ class InquiryDetailsFragment : BaseFragment() {
         //order price780
         intent.putExtra(CowpayConstantKeys.Amount, paymentRequestUI.amount.toString())
         //user data
-        intent.putExtra(CowpayConstantKeys.Description, paymentRequestUI.netAmount.toString())
+        intent.putExtra(CowpayConstantKeys.Description, paymentRequestUI.amount.toString())
         intent.putExtra(CowpayConstantKeys.CustomerName, params.number)
         intent.putExtra(CowpayConstantKeys.CustomerMobile, sharedPref.mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
