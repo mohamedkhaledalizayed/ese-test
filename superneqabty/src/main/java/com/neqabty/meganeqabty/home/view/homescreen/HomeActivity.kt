@@ -1,6 +1,7 @@
 package com.neqabty.meganeqabty.home.view.homescreen
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
@@ -19,6 +20,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
+import com.neqabty.core.data.Constants.MEGA_HOME
+import com.neqabty.core.data.Constants.SEHA_HOME
+import com.neqabty.core.data.Constants.from
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
 import com.neqabty.meganeqabty.R
@@ -28,9 +32,7 @@ import com.neqabty.meganeqabty.contactus.ContactUsActivity
 import com.neqabty.meganeqabty.core.utils.Constants
 import com.neqabty.meganeqabty.databinding.ActivityMainBinding
 import com.neqabty.meganeqabty.home.domain.entity.AdEntity
-import com.neqabty.meganeqabty.payment.domain.entity.services.ServicesListEntity
 import com.neqabty.meganeqabty.payment.view.selectservice.PaymentsActivity
-import com.neqabty.meganeqabty.payment.view.selectservice.ServicesAdapter
 import com.neqabty.meganeqabty.profile.view.profile.ProfileActivity
 import com.neqabty.meganeqabty.settings.SettingsActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
@@ -220,7 +222,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.navView.setNavigationItemSelectedListener(this)
 
         binding.contentActivity.ivSubscription.setOnClickListener {
-            if (sharedPreferences.isAuthenticated){
+            if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
                 val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                 startActivity(intent)
             }else{
@@ -277,7 +279,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
         }
 
         super.onResume()
-        if (sharedPreferences.isAuthenticated) {
+        if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember) {
             val menu: Menu = binding.navView.menu
 
             val logout: MenuItem = menu.findItem(R.id.logout)
@@ -307,9 +309,17 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
         when (item.itemId) {
             R.id.profile -> {
-                if (sharedPreferences.isAuthenticated){
+                if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
                     val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
                     startActivity(intent)
+                }else{
+                    askForLogin(resources.getString(R.string.not_found))
+                }
+            }
+            R.id.packages -> {
+                if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
+                    from = MEGA_HOME
+                    finish()
                 }else{
                     askForLogin(resources.getString(R.string.not_found))
                 }
@@ -321,7 +331,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 startActivity(intent)
             }
             R.id.payment -> {
-                if (sharedPreferences.isAuthenticated){
+                if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
                     val intent = Intent(this@HomeActivity, PaymentsActivity::class.java)
                     startActivity(intent)
                 }else{
@@ -339,7 +349,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             }
             R.id.suggestions -> {
                 val fm: FragmentManager = supportFragmentManager
-                if (sharedPreferences.isAuthenticated){
+                if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
                     val dialog = SuggestionDialog.newInstance(sharedPreferences.mobile, sharedPreferences.email)
                     dialog.show(fm, "")
                     dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
@@ -354,19 +364,24 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                 startActivity(Intent(this, ContactUsActivity::class.java))
             }
             R.id.logout -> {
-                if (sharedPreferences.isAuthenticated) {
+                if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember) {
                     logout(getString(R.string.log_out))
                 }else{
-                    sharedPreferences.mobile = ""
-                    sharedPreferences.isPhoneVerified = false
-                    sharedPreferences.isAuthenticated = false
-                    sharedPreferences.isSyndicateMember = false
-                    sharedPreferences.code = ""
-                    sharedPreferences.token = ""
-                    sharedPreferences.mainSyndicate = 0
-                    sharedPreferences.image = ""
-                    sharedPreferences.syndicateName = ""
-                    finish()
+                    if (from != SEHA_HOME){
+                        sharedPreferences.mobile = ""
+                        sharedPreferences.isPhoneVerified = false
+                        sharedPreferences.isAuthenticated = false
+                        sharedPreferences.isSyndicateMember = false
+                        sharedPreferences.code = ""
+                        sharedPreferences.token = ""
+                        sharedPreferences.mainSyndicate = 0
+                        sharedPreferences.image = ""
+                        sharedPreferences.syndicateName = ""
+                        sharedPreferences.membershipId = ""
+                        finish()
+                    }else{
+                        Toast.makeText(this@HomeActivity, "عفوا لا يمكن تغيير الرقم و انت غير مشترك بالنقابة.", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
 //            R.id.syndicate -> {
@@ -385,7 +400,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.suggestions){
-            if (sharedPreferences.isAuthenticated) {
+            if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember) {
                 val intent = Intent(this, ComplainsActivity::class.java)
                 startActivity(intent)
             }else{
@@ -414,7 +429,9 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             sharedPreferences.mainSyndicate = 0
             sharedPreferences.image = ""
             sharedPreferences.syndicateName = ""
+            sharedPreferences.membershipId = ""
             drawer.close()
+            from = 0
             finish()
         }
         alertDialog.setButton(
@@ -427,7 +444,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     override fun onBackPressed() {
-        closeApp(getString(R.string.close_app))
+        if (from == SEHA_HOME){
+            finish()
+        }else{
+            closeApp(getString(R.string.close_app))
+        }
     }
 
     private fun closeApp(message: String) {
@@ -440,6 +461,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
+            from = 0
             finishAffinity()
         }
         alertDialog.setButton(

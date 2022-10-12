@@ -33,7 +33,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(title = "نقابتي صحة مستدامة")
+        setupToolbar(title = "صحة مستدامة")
 
         binding.packagesRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :

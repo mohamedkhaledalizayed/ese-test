@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.modules.profile.presentation
 
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -11,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.loadSVG
-import com.neqabty.healthcare.modules.profile.data.model.AddFollowerBody
+import com.neqabty.healthcare.R
 
 @AndroidEntryPoint
 class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
@@ -28,13 +29,14 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
 
         binding.followersRecycler.adapter = mAdapter
 
-        profileViewModel.getProfile(sharedPreferences.mobile)
+
         profileViewModel.userData.observe(this){
             it.let { resource ->
 
             when(resource.status){
                 Status.LOADING ->  {
                     binding.progressCircular.visibility = View.VISIBLE
+                    binding.layoutContainer.visibility = View.GONE
                 }
                 Status.SUCCESS -> {
                     binding.progressCircular.visibility = View.GONE
@@ -63,15 +65,15 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
         mAdapter.onItemClickListener = object :
             PackagesAdapter.OnItemClickListener {
             override fun setOnDeleteItemClickListener(subscriberId: String, followerId: Int) {
-                profileViewModel.deleteFollower(followerId, subscriberId)
+                deleteFollower("هل تريد حذف هذا التابع !", followerId, subscriberId)
             }
 
-            override fun setOnAddItemClickListener(id: String, isMaxFollower: Boolean) {
+            override fun setOnAddItemClickListener(packageId: String, subscriberId: String, isMaxFollower: Boolean) {
                 if (isMaxFollower){
                     Toast.makeText(this@ProfileActivity, "لقد وصلت الى الحد الاقصى فى إضافة التابعين", Toast.LENGTH_LONG).show()
                     return
                 }
-                addFollower()
+                addFollower(packageId, subscriberId)
             }
         }
 
@@ -80,17 +82,20 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
 
                 when(resource.status){
                     Status.LOADING ->{
-
+                        binding.progressCircular.visibility = View.VISIBLE
                     }
                     Status.SUCCESS ->{
+                        binding.progressCircular.visibility = View.GONE
                         if (resource.data!!){
                             profileViewModel.getProfile(sharedPreferences.mobile)
                             Toast.makeText(this@ProfileActivity, "تم حذف التابع بنجاح.", Toast.LENGTH_LONG).show()
+                            onResume()
                         }else{
                             Toast.makeText(this@ProfileActivity, "لم يتم حذف التابع.", Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR ->{
+                        binding.progressCircular.visibility = View.GONE
                         Toast.makeText(this@ProfileActivity, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
@@ -100,8 +105,36 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
 
     }
 
-    private fun addFollower(){
+    private fun deleteFollower(message: String, followerId: Int, subscriberId: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
+        ) { dialog, _ ->
+            profileViewModel.deleteFollower(followerId, subscriberId)
+            dialog.dismiss()
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        profileViewModel.getProfile(sharedPreferences.mobile)
+    }
+
+    private fun addFollower(packageId: String, subscriberId: String) {
         val intent = Intent(this, AddFollowerActivity::class.java)
+        intent.putExtra("packageId", packageId)
+        intent.putExtra("subscriberId", subscriberId)
         startActivity(intent)
     }
 

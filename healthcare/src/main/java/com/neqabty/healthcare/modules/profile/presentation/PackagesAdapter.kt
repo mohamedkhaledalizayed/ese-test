@@ -67,17 +67,17 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
         viewHolder.binding.addFollower.setOnClickListener {
             if (follower.packages.maxFollower == itemCount){
-                onItemClickListener?.setOnAddItemClickListener(follower.packages.id, true)
+                onItemClickListener?.setOnAddItemClickListener(follower.packages.id, follower.packages.subscriberId, true)
             }else{
-                onItemClickListener?.setOnAddItemClickListener(follower.packages.id, false)
+                onItemClickListener?.setOnAddItemClickListener(follower.packages.id, follower.packages.subscriberId, false)
             }
         }
 
         viewHolder.binding.addFollowerText.setOnClickListener {
             if (follower.packages.maxFollower == follower.packages.followers.size){
-                onItemClickListener?.setOnAddItemClickListener(follower.packages.id, true)
+                onItemClickListener?.setOnAddItemClickListener(follower.packages.id, follower.packages.subscriberId,true)
             }else{
-                onItemClickListener?.setOnAddItemClickListener(follower.packages.id, false)
+                onItemClickListener?.setOnAddItemClickListener(follower.packages.id, follower.packages.subscriberId, false)
             }
         }
     }
@@ -110,7 +110,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
             fun setOnDeleteItemClickListener(subscriberId: String, followerId: Int)
-            fun setOnAddItemClickListener(id: String, IsMaxFollower: Boolean)
+            fun setOnAddItemClickListener(packageId: String, subscriberId: String, IsMaxFollower: Boolean)
     }
 
     class ViewHolder(val binding: PackageLayoutBinding) :

@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -62,9 +63,11 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
             it.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
-
+                        binding.progressCircular.visibility = View.VISIBLE
                     }
                     Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        binding.container.visibility = View.VISIBLE
                         if (resource.data!!.isNotEmpty()) {
                             relationsList = resource.data
                             relationsAdapter.submitList(
@@ -78,7 +81,7 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
                         }
                     }
                     Status.ERROR -> {
-
+                        binding.progressCircular.visibility = View.GONE
                     }
                 }
             }
@@ -89,13 +92,24 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
 
                 when(resource.status){
                     Status.LOADING ->{
-
+                        binding.container.visibility = View.GONE
+                        binding.progressCircular.visibility = View.VISIBLE
                     }
                     Status.SUCCESS ->{
+                        binding.progressCircular.visibility = View.GONE
+                        binding.container.visibility = View.VISIBLE
 
+                        if (resource.data!!.status){
+                            Toast.makeText(this@AddFollowerActivity, "تم إضافة التابع بنجاح.", Toast.LENGTH_LONG).show()
+                            finish()
+                        }else{
+                            Toast.makeText(this@AddFollowerActivity, resource.data!!.message, Toast.LENGTH_LONG).show()
+                        }
                     }
                     Status.ERROR ->{
-
+                        binding.progressCircular.visibility = View.GONE
+                        binding.container.visibility = View.VISIBLE
+                        Toast.makeText(this@AddFollowerActivity, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
 
@@ -117,8 +131,8 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
         list.add(follower)
         profileViewModel.addFollower(
             AddFollowerBody(
-            packageId = "65fc722a-9d6d-4949-9231-7000e175f191",
-            subscriberId = "f2732f86-2160-429c-86d5-e2d8ca38aa96",
+            packageId = intent.getStringExtra("packageId")!!,
+            subscriberId = intent.getStringExtra("subscriberId")!!,
             followers = list
         )
         )

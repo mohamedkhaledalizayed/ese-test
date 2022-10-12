@@ -19,6 +19,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.core.data.Constants
+import com.neqabty.core.data.Constants.MEGA_HOME
+import com.neqabty.core.data.Constants.SEHA_HOME
+import com.neqabty.core.data.Constants.from
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.core.utils.Status
@@ -34,6 +37,7 @@ import com.neqabty.news.modules.home.presentation.view.newsdetails.NewsDetailsAc
 import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import com.neqabty.healthcare.modules.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.meganeqabty.contactus.ContactUsActivity
+import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
 import com.neqabty.news.modules.home.domain.entity.NewsEntity
 import com.neqabty.signup.modules.signup.presentation.view.homescreen.SignupActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -267,9 +271,9 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
                 }
             }
             R.id.syndicate -> {
+                from = SEHA_HOME
                 val intent = Intent(this@HomeActivity, SyndicateActivity::class.java)
                 startActivity(intent)
-                finish()
             }
             R.id.settings -> {
                 val intent = Intent(this@HomeActivity, SettingsScreen::class.java)
@@ -333,6 +337,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             sharedPreferences.image = ""
             sharedPreferences.syndicateName = ""
             drawer.close()
+            from = 0
             val intent = Intent(this@HomeActivity, CheckAccountActivity::class.java)
             startActivity(intent)
             finish()
@@ -387,7 +392,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
     }
 
     override fun onBackPressed() {
-        closeApp(getString(R.string.exit))
+        if (from == MEGA_HOME){
+            val intent = Intent(this@HomeActivity, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }else{
+            closeApp(getString(R.string.exit))
+        }
     }
 
     private fun closeApp(message: String) {
@@ -400,6 +411,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavig
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
+            from = 0
             finishAffinity()
         }
         alertDialog.setButton(

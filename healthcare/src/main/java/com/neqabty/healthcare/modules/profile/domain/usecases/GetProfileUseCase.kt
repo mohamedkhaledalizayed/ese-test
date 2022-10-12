@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.modules.profile.domain.usecases
 
 import com.neqabty.healthcare.modules.profile.data.model.AddFollowerBody
+import com.neqabty.healthcare.modules.profile.domain.entity.addfollower.AddFollowerEntity
 import com.neqabty.healthcare.modules.profile.domain.entity.profile.ProfileEntity
 import com.neqabty.healthcare.modules.profile.domain.entity.relations.RelationEntityList
 import com.neqabty.healthcare.modules.profile.domain.repository.ProfileRepository
@@ -17,7 +18,7 @@ class GetProfileUseCase @Inject constructor(private val profileRepository: Profi
         return profileRepository.getRelations()
     }
 
-    fun build(addFollowerBody: AddFollowerBody): Flow<String>{
+    fun build(addFollowerBody: AddFollowerBody): Flow<AddFollowerEntity>{
         return profileRepository.addFollower(addFollowerBody)
     }
 

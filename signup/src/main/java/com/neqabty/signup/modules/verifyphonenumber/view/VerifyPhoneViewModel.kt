@@ -33,6 +33,21 @@ class VerifyPhoneViewModel @Inject constructor(private val verifyPhoneUseCase: V
         }
     }
 
+//    val reCAPTCHA = MutableLiveData<Resource<String>>()
+//    fun checkReCAPTCHA(token: String){
+//        viewModelScope.launch(Dispatchers.IO){
+//            otp.postValue(Resource.loading(data = null))
+//
+//            try {
+//                verifyPhoneUseCase.build(token).collect(){
+//                    otp.postValue(Resource.success(data = it))
+//                }
+//            }catch (e: Throwable){
+//                otp.postValue(Resource.error(data = null, message = handleError(e)))
+//            }
+//        }
+//    }
+
     val otpStatus = MutableLiveData<Resource<Boolean>>()
     fun checkOTP(checkOTPBody: CheckOTPBody){
         viewModelScope.launch(Dispatchers.IO){

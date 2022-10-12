@@ -125,4 +125,7 @@ dependencies {
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
     implementation project(':login')
     implementation project(':core')
+
+    implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
+
 }

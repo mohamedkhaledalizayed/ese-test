@@ -3,6 +3,7 @@ package com.neqabty.healthcare.modules.profile.data.source
 import com.neqabty.healthcare.modules.profile.data.api.ProfileApi
 import com.neqabty.healthcare.modules.profile.data.model.AddFollowerBody
 import com.neqabty.healthcare.modules.profile.data.model.DeleteFollowerBody
+import com.neqabty.healthcare.modules.profile.data.model.addfollower.AddFollowerModel
 import com.neqabty.healthcare.modules.profile.data.model.profile.ProfileModel
 import com.neqabty.healthcare.modules.profile.data.model.relationstypes.RelationModel
 import javax.inject.Inject
@@ -17,7 +18,7 @@ class ProfileDS @Inject constructor(private val profileApi: ProfileApi) {
         return profileApi.getRelations().data.relations
     }
 
-    suspend fun addFollower(addFollowerBody: AddFollowerBody): String {
+    suspend fun addFollower(addFollowerBody: AddFollowerBody): AddFollowerModel {
         return profileApi.addFollower(addFollowerBody)
     }
 

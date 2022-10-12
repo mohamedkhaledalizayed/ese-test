@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.core.utils.AppUtils
 import com.neqabty.core.utils.Resource
 import com.neqabty.healthcare.modules.profile.data.model.AddFollowerBody
+import com.neqabty.healthcare.modules.profile.domain.entity.addfollower.AddFollowerEntity
 import com.neqabty.healthcare.modules.profile.domain.entity.profile.ProfileEntity
 import com.neqabty.healthcare.modules.profile.domain.entity.relations.RelationEntityList
 import com.neqabty.healthcare.modules.profile.domain.usecases.GetProfileUseCase
@@ -47,7 +48,7 @@ class ProfileViewModel @Inject constructor(private val getProfileUseCase: GetPro
         }
     }
 
-    val addFollower = MutableLiveData<Resource<String>>()
+    val addFollower = MutableLiveData<Resource<AddFollowerEntity>>()
 
     fun addFollower(addFollowerBody: AddFollowerBody){
         viewModelScope.launch(Dispatchers.IO){

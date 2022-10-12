@@ -293,7 +293,8 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             when (REQUEST_CODE) {
                 1001 -> {
                     userImageUri = data.data
-                    binding.userPicture.setImageURI(userImageUri)
+                    binding.addPersonalPhoto.setImageResource(R.drawable.success)
+                    binding.personalPhotoText.text = "تم إرفاق الصورة بنجاح."
                 }
                 1002 -> {
                     nationalIdFrontUri = data.data

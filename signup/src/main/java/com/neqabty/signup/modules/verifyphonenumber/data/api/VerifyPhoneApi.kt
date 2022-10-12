@@ -16,4 +16,7 @@ interface VerifyPhoneApi {
     @POST("get_otp_token")
     suspend fun checkOTP(@Body checkOTPBody: CheckOTPBody): CheckOTPModel
 
+//    @POST("get_otp_token")
+//    suspend fun checkOTP(@Body checkOTPBody: CheckOTPBody): CheckOTPModel
+
 }

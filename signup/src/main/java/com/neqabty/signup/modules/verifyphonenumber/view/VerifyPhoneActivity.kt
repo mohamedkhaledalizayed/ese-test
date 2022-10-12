@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
@@ -90,6 +91,10 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
     override fun onSendClicked(phone: String) {
         phoneNumber = phone
         verifyPhoneViewModel.sendOTP(SendOTPBody(phoneNumber = phoneNumber))
+    }
+
+    override fun onReSendClicked(token: String) {
+        Log.e("token", token)
     }
 
     override fun onCheckClicked(otp: String) {

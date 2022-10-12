@@ -9,14 +9,21 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.CommonStatusCodes
+import com.google.android.gms.safetynet.SafetyNet
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.neqabty.signup.R
 import com.neqabty.signup.databinding.FragmentCheckOTPBinding
+import java.util.concurrent.Executor
 
 
 private const val ARG_PARAM1 = "param1"
@@ -68,9 +75,35 @@ class CheckOTPFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val activity = requireActivity() as VerifyPhoneActivity
         changeFocus()
 
+        binding.btnResend.setOnClickListener {
+            SafetyNet.getClient(requireContext()).verifyWithRecaptcha("6LdMpG8iAAAAADh3CAK6KXanR8ZuT6F0x6t3XxSM")
+                .addOnSuccessListener(requireActivity(), OnSuccessListener { response ->
+                    // Indicates communication with reCAPTCHA service was
+                    // successful.
+                    val userResponseToken = response.tokenResult
+                    if (response.tokenResult?.isNotEmpty() == true) {
+                        // Validate the user response token using the
+                        // reCAPTCHA siteverify API.
+                        activity.onReSendClicked(response.tokenResult!!)
+                    }
+                    Log.e("Error", "true")
+
+                })
+                .addOnFailureListener(requireActivity(), OnFailureListener { e ->
+                    if (e is ApiException) {
+                        // An error occurred when communicating with the
+                        // reCAPTCHA service. Refer to the status code to
+                        // handle the error appropriately.
+                        Log.d("TAG", "Error: ${CommonStatusCodes.getStatusCodeString(e.statusCode)}")
+                    } else {
+                        // A different, unknown type of error occurred.
+                        Log.d("TAG", "Error: ${e.message}")
+                    }
+                })
+        }
         binding.enterPhone.text =
             "${getString(R.string.enter_code)} \n $phoneNumber"
         binding.btnConfirm.setOnClickListener {
@@ -100,7 +133,7 @@ class CheckOTPFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val activity = requireActivity() as VerifyPhoneActivity
+
             activity.onCheckClicked(
                     binding.code5.text.toString() +
                         binding.code4.text.toString() +

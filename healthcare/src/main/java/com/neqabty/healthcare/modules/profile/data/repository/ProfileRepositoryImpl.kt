@@ -2,9 +2,11 @@ package com.neqabty.healthcare.modules.profile.data.repository
 
 import com.neqabty.healthcare.modules.profile.data.model.AddFollowerBody
 import com.neqabty.healthcare.modules.profile.data.model.DeleteFollowerBody
+import com.neqabty.healthcare.modules.profile.data.model.addfollower.AddFollowerModel
 import com.neqabty.healthcare.modules.profile.data.model.profile.*
 import com.neqabty.healthcare.modules.profile.data.model.relationstypes.RelationModel
 import com.neqabty.healthcare.modules.profile.data.source.ProfileDS
+import com.neqabty.healthcare.modules.profile.domain.entity.addfollower.AddFollowerEntity
 import com.neqabty.healthcare.modules.profile.domain.entity.profile.*
 import com.neqabty.healthcare.modules.profile.domain.entity.relations.RelationEntityList
 import com.neqabty.healthcare.modules.profile.domain.repository.ProfileRepository
@@ -26,9 +28,9 @@ class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS
         }
     }
 
-    override fun addFollower(addFollowerBody: AddFollowerBody): Flow<String> {
+    override fun addFollower(addFollowerBody: AddFollowerBody): Flow<AddFollowerEntity> {
         return flow {
-            emit(profileDS.addFollower(addFollowerBody))
+            emit(profileDS.addFollower(addFollowerBody).toAddFollowerEntity())
         }
     }
 
@@ -38,6 +40,14 @@ class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS
         }
     }
 
+}
+
+private fun AddFollowerModel.toAddFollowerEntity(): AddFollowerEntity{
+    return AddFollowerEntity(
+        data = data,
+        message = message,
+        status = status
+    )
 }
 
 private fun ProfileModel.toProfileEntity(): ProfileEntity{

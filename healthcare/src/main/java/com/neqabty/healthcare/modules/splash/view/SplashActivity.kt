@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.modules.splash.view
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
@@ -7,14 +8,19 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.core.data.Constants.MEGA_HOME
+import com.neqabty.core.data.Constants.from
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySplashBinding
 import com.neqabty.healthcare.modules.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.modules.home.presentation.view.homescreen.HomeActivity
+import com.neqabty.healthcare.modules.profile.presentation.ProfileActivity
 import com.neqabty.healthcare.modules.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.meganeqabty.R
+import com.neqabty.meganeqabty.core.utils.Constants
 import com.neqabty.meganeqabty.core.utils.DeviceUtils
+import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -127,12 +133,19 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         alertDialog.show()
     }
 
+
     override fun onResume() {
         super.onResume()
-        if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()){
-            showAlertDialogAndExitApp(getString(R.string.rooted))
+        if (from == MEGA_HOME){
+            val intent = Intent(this@SplashActivity, HomeActivity::class.java)
+            intent.putExtra("from", MEGA_HOME)
+            startActivity(intent)
         }else{
-            splashViewModel.appConfig()
+            if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()){
+                showAlertDialogAndExitApp(getString(R.string.rooted))
+            }else{
+                splashViewModel.appConfig()
+            }
         }
     }
 }
