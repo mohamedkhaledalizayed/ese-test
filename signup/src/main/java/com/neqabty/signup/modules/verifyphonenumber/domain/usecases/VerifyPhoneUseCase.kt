@@ -15,11 +15,11 @@ class VerifyPhoneUseCase @Inject constructor(private val verifyPhoneRepository: 
         return verifyPhoneRepository.sendOTP(sendOTPBody)
     }
 
-//    fun build(token: String): Flow<String>{
-//        return verifyPhoneRepository.sendOTP(token)
-//    }
-
     fun build(checkOTPBody: CheckOTPBody): Flow<Boolean>{
         return verifyPhoneRepository.checkOTP(checkOTPBody)
+    }
+
+    fun build(token: String): Flow<Boolean>{
+        return verifyPhoneRepository.verifyRecaptcha(token)
     }
 }

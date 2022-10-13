@@ -29,7 +29,7 @@ data class PackageModel(
     @SerializedName("recommended")
     val recommended: Boolean,
     @SerializedName("service_action_code")
-    val serviceActionCode: String,
+    val serviceActionCode: String?,
     @SerializedName("service_code")
     val serviceCode: String,
     @SerializedName("short_description")

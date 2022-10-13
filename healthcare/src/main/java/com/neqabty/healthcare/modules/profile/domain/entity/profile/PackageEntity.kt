@@ -11,5 +11,6 @@ data class PackageEntity(
     val nameAr: String,
     val shortDescription: String,
     val maxFollower: Int,
+    val paid: Boolean,
     val createdAt: String
 )

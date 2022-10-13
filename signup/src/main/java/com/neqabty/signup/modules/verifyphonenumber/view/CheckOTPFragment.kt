@@ -79,30 +79,7 @@ class CheckOTPFragment : Fragment() {
         changeFocus()
 
         binding.btnResend.setOnClickListener {
-            SafetyNet.getClient(requireContext()).verifyWithRecaptcha("6LdMpG8iAAAAADh3CAK6KXanR8ZuT6F0x6t3XxSM")
-                .addOnSuccessListener(requireActivity(), OnSuccessListener { response ->
-                    // Indicates communication with reCAPTCHA service was
-                    // successful.
-                    val userResponseToken = response.tokenResult
-                    if (response.tokenResult?.isNotEmpty() == true) {
-                        // Validate the user response token using the
-                        // reCAPTCHA siteverify API.
-                        activity.onReSendClicked(response.tokenResult!!)
-                    }
-                    Log.e("Error", "true")
-
-                })
-                .addOnFailureListener(requireActivity(), OnFailureListener { e ->
-                    if (e is ApiException) {
-                        // An error occurred when communicating with the
-                        // reCAPTCHA service. Refer to the status code to
-                        // handle the error appropriately.
-                        Log.d("TAG", "Error: ${CommonStatusCodes.getStatusCodeString(e.statusCode)}")
-                    } else {
-                        // A different, unknown type of error occurred.
-                        Log.d("TAG", "Error: ${e.message}")
-                    }
-                })
+            activity.onReSendClicked()
         }
         binding.enterPhone.text =
             "${getString(R.string.enter_code)} \n $phoneNumber"

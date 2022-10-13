@@ -13,7 +13,7 @@ data class PackagesEntity(
     val name: String,
     val price: Double,
     val recommended: Boolean,
-    val serviceActionCode: String,
+    val serviceActionCode: String?,
     val serviceCode: String,
     val shortDescription: String?,
     val insuranceAmount: String?,

@@ -40,6 +40,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             PackagesAdapter.OnItemClickListener {
             override fun setOnRegisterClickListener(item: PackagesEntity) {
 
+                if (item.serviceActionCode == null){
+                    Toast.makeText(this@SearchActivity, "دث خطا", Toast.LENGTH_LONG).show()
+                    return
+                }
                 if (sharedPreferences.isAuthenticated){
                     val intent = Intent(this@SearchActivity, SubscriptionActivity::class.java)
                     intent.putExtra("name", item.name )

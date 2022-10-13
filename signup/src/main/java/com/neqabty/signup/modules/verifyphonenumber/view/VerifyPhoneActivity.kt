@@ -1,29 +1,29 @@
 package com.neqabty.signup.modules.verifyphonenumber.view
 
-import android.Manifest
 import android.app.AlertDialog
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.CommonStatusCodes
+import com.google.android.gms.safetynet.SafetyNet
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.Status
 import com.neqabty.signup.R
 import com.neqabty.signup.databinding.ActivityVerifyPhoneBinding
-import com.neqabty.signup.modules.signup.presentation.view.homescreen.SignupActivity
 import com.neqabty.signup.modules.verifyphonenumber.data.model.CheckOTPBody
 import com.neqabty.signup.modules.verifyphonenumber.data.model.SendOTPBody
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
 
+var isVerified = false
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
 @AndroidEntryPoint
 class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyPhoneListener {
@@ -93,8 +93,47 @@ class VerifyPhoneActivity : BaseActivity<ActivityVerifyPhoneBinding>(), IVerifyP
         verifyPhoneViewModel.sendOTP(SendOTPBody(phoneNumber = phoneNumber))
     }
 
-    override fun onReSendClicked(token: String) {
-        Log.e("token", token)
+    override fun onReSendClicked() {
+//        Log.e("token", token)
+//
+//        verifyPhoneViewModel.verifyRecaptcha(token)
+//
+//        verifyPhoneViewModel.recaptcha.observe(this){
+//            it.let { resource ->
+//                when(resource.status){
+//                    Status.LOADING ->{
+//                        loading.show()
+//                    }
+//                    Status.SUCCESS ->{
+//                        loading.hide()
+//                        isVerified = true
+//                    }
+//                    Status.ERROR ->{
+//                        loading.hide()
+//                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+//                    }
+//                }
+//            }
+//        }
+
+        if (isVerified){
+            onSendClicked(phoneNumber)
+        }else{
+            SafetyNet.getClient(this).verifyWithRecaptcha("6LdMpG8iAAAAADh3CAK6KXanR8ZuT6F0x6t3XxSM")
+                .addOnSuccessListener(this, OnSuccessListener { response ->
+                    if (!response.tokenResult?.isNullOrEmpty()!!) {
+                        isVerified = true
+                    }
+                })
+                .addOnFailureListener(this, OnFailureListener { e ->
+                    if (e is ApiException) {
+                        Log.d("TAG", "Error: ${CommonStatusCodes.getStatusCodeString(e.statusCode)}")
+                    } else {
+                        Log.d("TAG", "Error: ${e.message}")
+                    }
+                })
+        }
+
     }
 
     override fun onCheckClicked(otp: String) {

@@ -56,7 +56,14 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         val mAdapter = FollowerAdapter()
         viewHolder.binding.followersRecycler.adapter = mAdapter
 
+        if (follower.packages.paid){
+            viewHolder.binding.paid.visibility = View.GONE
+        }else{
+            viewHolder.binding.paid.visibility = View.VISIBLE
+        }
+
         mAdapter.submitList(follower.packages.followers)
+
 
         mAdapter.onItemClickListener = object :
             FollowerAdapter.OnItemClickListener {

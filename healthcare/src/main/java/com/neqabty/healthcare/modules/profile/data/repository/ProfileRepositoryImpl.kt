@@ -98,6 +98,7 @@ private fun Package.toPackageEntity(): PackageEntity{
         nameAr = nameAr,
         maxFollower = maxFollower,
         shortDescription = shortDescription,
+        paid = paid,
         createdAt = createdAt
     )
 }
