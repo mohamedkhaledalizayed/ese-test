@@ -19,8 +19,10 @@ import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MemberUI
 import com.neqabty.presentation.entities.NotificationUI
+import com.neqabty.presentation.util.PDFUtils
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class NotificationDetailsFragment : BaseFragment() {
@@ -73,8 +75,7 @@ class NotificationDetailsFragment : BaseFragment() {
     fun initializeViews(notificationItem: NotificationUI) {
         binding.notificationItem = notificationItem
         binding.bViewAttachment.setOnClickListener {
-            val attachmentIntent = Intent(Intent.ACTION_VIEW, Uri.parse(notificationItem.approvalImage))
-            startActivity(attachmentIntent)
+            notificationDetailsViewModel.getAttachment(sharedPref.mobile, sharedPref.user, notificationItem.id.toString())
         }
         binding.bPay.setOnClickListener {
             navController().navigate(
@@ -86,6 +87,10 @@ class NotificationDetailsFragment : BaseFragment() {
     private fun handleViewState(state: NotificationDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         binding.llContainer.visibility = if (state.isLoading) View.GONE else View.VISIBLE
+        state.pdf?.let{
+            PDFUtils.openPDF(requireContext(), Base64.getDecoder().decode(it))
+            return
+        }
         state.notification?.let {
             initializeViews(it)
         }

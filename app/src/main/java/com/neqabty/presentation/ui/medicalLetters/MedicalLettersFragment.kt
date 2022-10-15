@@ -27,6 +27,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.entities.LiteFollowersListUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
+import com.neqabty.presentation.util.PDFUtils.Companion.openPDF
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_letters_fragment.*
@@ -60,8 +61,6 @@ class MedicalLettersFragment : BaseFragment() {
     var previousTotal = 0
     private var threshold = 2
     lateinit var mLayoutManager: LinearLayoutManager
-    lateinit var uri: Uri
-    lateinit var file: File
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -111,8 +110,7 @@ class MedicalLettersFragment : BaseFragment() {
         llContent.visibility = if (state.isLoading) View.INVISIBLE else View.VISIBLE
 
         state.pdf?.let {
-            savePDF(Base64.getDecoder().decode(it))
-            openPDF()
+            openPDF(requireContext(), Base64.getDecoder().decode(it))
             state.pdf = null
             return
         }
@@ -207,43 +205,6 @@ class MedicalLettersFragment : BaseFragment() {
         visibleItemsCount = 0
         totalItemsCount = 0
         previousTotal = 0
-    }
-
-    private fun savePDF(bytes: ByteArray){
-        try {
-            val fileName = "استمارة تحويل.pdf"
-            val storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.path
-            file = File("$storageDir/$fileName")
-            var os = FileOutputStream(file)
-            os.write(bytes)
-            os.close()
-
-            uri = FileProvider.getUriForFile(
-                requireContext(),
-                "com.neqabty.fileprovider",
-                file
-            )
-        } catch (e: ActivityNotFoundException) {
-            println("*************************NO PDF**************************")
-        }
-    }
-
-    private fun openPDF(){
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.setDataAndType(uri, "application/pdf")
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        val resInfoList: List<ResolveInfo> = requireActivity().getPackageManager()
-            .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-
-        for (resolveInfo in resInfoList) {
-            val packageName = resolveInfo.activityInfo.packageName
-            requireActivity().grantUriPermission(
-                packageName,
-                uri,
-                Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
-            )
-        }
-        startActivity(intent)
     }
 // endregion
 
