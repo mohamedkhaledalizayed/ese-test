@@ -12,13 +12,8 @@ import android.view.View
 import android.widget.Toast
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivitySehaPaymentBinding
-import com.neqabty.meganeqabty.core.utils.Constants
-import com.neqabty.meganeqabty.payment.data.model.PaymentBody
-import com.neqabty.meganeqabty.payment.data.model.PaymentBodyObject
-import com.neqabty.meganeqabty.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.meganeqabty.payment.view.paymentstatus.PaymentStatusActivity
 import dagger.hilt.android.AndroidEntryPoint
-import me.cowpay.util.CowpayConstantKeys
 import team.opay.business.cashier.sdk.api.PayInput
 import team.opay.business.cashier.sdk.pay.PaymentTask
 import team.opay.business.cashier.sdk.api.*
@@ -27,8 +22,6 @@ import com.neqabty.core.ui.BaseActivity
 import com.neqabty.healthcare.modules.payment.data.model.Payment
 import com.neqabty.healthcare.modules.payment.data.model.SehaPaymentBody
 import com.neqabty.healthcare.modules.payment.domain.entity.SehaPaymentEntity
-import com.neqabty.meganeqabty.payment.data.model.PaymentHomeBody
-import com.neqabty.meganeqabty.payment.data.model.PaymentHomeBodyObject
 import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 
 @AndroidEntryPoint
@@ -227,24 +220,6 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
                 val response =
                     data?.getSerializableExtra(PaymentTask.RESPONSE_DATA) as WebJsResponse?
                 handlePaymentResponse(response)
-            }
-        }
-        if (requestCode == CowpayConstantKeys.PaymentMethodsActivityRequestCode && data != null && resultCode == Activity.RESULT_OK) {
-            var responseCode = data.extras!!.getInt(CowpayConstantKeys.ResponseCode, 0)
-
-            if (responseCode == CowpayConstantKeys.ErrorCode) {
-                showAlert(getString(R.string.payment_canceled))
-            } else if (responseCode == CowpayConstantKeys.SuccessCode) {
-                var responseMSG = data.extras!!.getString(CowpayConstantKeys.ResponseMessage)
-                var PaymentGatewayReferenceId =
-                    data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
-                responseMSG?.let {
-                    showAlert(
-                        if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(
-                            R.string.payment_successful
-                        ) + PaymentGatewayReferenceId else getString(R.string.payment_reference) + PaymentGatewayReferenceId
-                    )
-                }
             }
         }
     }

@@ -10,4 +10,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#00a757</color>
     <color name="orange">#fdb32b</color>
+
+    <color name="gray2">#ebebeb</color>
+    <color name="gray3">#cacacc</color>
+    <color name="cgred">#e03639</color>
 </resources>
