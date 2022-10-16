@@ -52,7 +52,12 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
         viewHolder.binding.packageName.text = "أنت مشترك علي ${follower.packages.nameAr}"
         viewHolder.binding.selectedPackage.text = follower.packages.nameAr
-        viewHolder.binding.date.text = dateFormat(follower.packages.createdAt.split(".")[0])
+        if (follower.packages.expiryDate != null){
+            viewHolder.binding.date.text = "تاريخ الصلاحية : ${follower.packages.expiryDate}"
+        }else{
+            viewHolder.binding.date.text = ""
+        }
+
         val mAdapter = FollowerAdapter()
         viewHolder.binding.followersRecycler.adapter = mAdapter
 
@@ -64,6 +69,12 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
         mAdapter.submitList(follower.packages.followers)
 
+        viewHolder.binding.paid.setOnClickListener {
+            if (follower.packages.serviceActionCode.isNullOrEmpty()){
+                return@setOnClickListener
+            }
+            onItemClickListener?.setOnPayClickListener(follower.packages.nameAr, follower.packages.packagePrice, follower.packages.serviceCode, follower.packages.serviceActionCode)
+        }
 
         mAdapter.onItemClickListener = object :
             FollowerAdapter.OnItemClickListener {
@@ -73,15 +84,15 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         }
 
         viewHolder.binding.addFollower.setOnClickListener {
-            if (follower.packages.maxFollower == itemCount){
-                onItemClickListener?.setOnAddItemClickListener(follower.packages.id, follower.packages.subscriberId, true)
+            if (follower.packages.followers.size >= follower.packages.maxFollower){
+                onItemClickListener?.setOnAddItemClickListener(follower.packages.id, follower.packages.subscriberId,true)
             }else{
                 onItemClickListener?.setOnAddItemClickListener(follower.packages.id, follower.packages.subscriberId, false)
             }
         }
 
         viewHolder.binding.addFollowerText.setOnClickListener {
-            if (follower.packages.maxFollower == follower.packages.followers.size){
+            if (follower.packages.followers.size >= follower.packages.maxFollower){
                 onItemClickListener?.setOnAddItemClickListener(follower.packages.id, follower.packages.subscriberId,true)
             }else{
                 onItemClickListener?.setOnAddItemClickListener(follower.packages.id, follower.packages.subscriberId, false)
@@ -118,6 +129,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
     interface OnItemClickListener {
             fun setOnDeleteItemClickListener(subscriberId: String, followerId: Int)
             fun setOnAddItemClickListener(packageId: String, subscriberId: String, IsMaxFollower: Boolean)
+            fun setOnPayClickListener(name: String, price: String, serviceCode: String, serviceActionCode: String)
     }
 
     class ViewHolder(val binding: PackageLayoutBinding) :

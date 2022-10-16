@@ -31,7 +31,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
 
         Handler().postDelayed(Runnable {
             paymentViewModel.getPaymentStatus(intent.getStringExtra("referenceCode")!!)
-        }, 2000)
+        }, 9000)
 
         paymentViewModel.paymentStatus.observe(this){
 
@@ -45,7 +45,13 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         if (!resource.data?.id.isNullOrEmpty()){
                             binding.nameValue.text = resource.data?.member_name?: resource.data?.mobile
-                            binding.membershipNumberValue.text = "${resource.data?.itemId}"
+
+                            if (resource.data?.itemId != null){
+                                binding.membershipNumberValue.text = "${resource.data?.itemId}"
+                            }else{
+                                binding.membershipNumber.visibility = View.GONE
+                                binding.membershipNumberValue.visibility = View.GONE
+                            }
                             if (!resource.data?.mobile.isNullOrEmpty()){
                                 binding.phoneValue.text = "${resource.data?.mobile}"
                             }

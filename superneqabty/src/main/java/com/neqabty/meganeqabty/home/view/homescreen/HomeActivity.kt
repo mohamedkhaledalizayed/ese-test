@@ -20,6 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
+import com.neqabty.core.data.Constants.FROM_MEGA_HOME_PACKAGES
 import com.neqabty.core.data.Constants.MEGA_HOME
 import com.neqabty.core.data.Constants.SEHA_HOME
 import com.neqabty.core.data.Constants.from
@@ -316,9 +317,13 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
                     askForLogin(resources.getString(R.string.not_found))
                 }
             }
+            R.id.seha -> {
+                from = MEGA_HOME
+                finish()
+            }
             R.id.packages -> {
                 if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
-                    from = MEGA_HOME
+                    from = FROM_MEGA_HOME_PACKAGES
                     finish()
                 }else{
                     askForLogin(resources.getString(R.string.not_found))

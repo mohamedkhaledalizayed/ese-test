@@ -1,7 +1,6 @@
 package com.neqabty.meganeqabty.core.utils
 
 import com.neqabty.meganeqabty.BuildConfig
-import me.cowpay.util.CowpayConstantKeys
 
 object Constants {
     var cowpayAuthTokenProd: String = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjhlNzRkZWI2MDQzZDVhZjUzYTMyNTY4YmRhOWM3MmVmNGFjYmFlMjQ5YThmMzA3ZWNkZGVjOTk4ZmM5M2MyODdlODUxYTk1YzIwODk2MzU0In0.eyJhdWQiOiIzIiwianRpIjoiOGU3NGRlYjYwNDNkNWFmNTNhMzI1NjhiZGE5YzcyZWY0YWNiYWUyNDlhOGYzMDdlY2RkZWM5OThmYzkzYzI4N2U4NTFhOTVjMjA4OTYzNTQiLCJpYXQiOjE2MDczNTI1MTcsIm5iZiI6MTYwNzM1MjUxNywiZXhwIjoxNjM4ODg4NTE3LCJzdWIiOiIzODUiLCJzY29wZXMiOltdfQ.Ix26ZW685ouEDylyxOAvZkMJvWEue7BhjJugBd1LBF4Gm2rxIsG3ec3qVlZDRLneK3RzdSrUF-p4qiTU9aWOZg"
@@ -19,7 +18,6 @@ object Constants {
     var OPAY_MERCHANT_ID = if (BuildConfig.DEBUG) "281821120532113" else "281821120144533"
     var OPAY_MERCHANT_NAME = if (BuildConfig.DEBUG) "neQabty TEST" else "neQabty"
     var OPAY_PUBLIC_KEY = if (BuildConfig.DEBUG) "OPAYPUB16386946354660.48619730311207143" else "OPAYPUB16383585551500.36105494805860716"
-    var COWPAY_MODE = if (BuildConfig.DEBUG) CowpayConstantKeys.SandBox else CowpayConstantKeys.Production
     var OPAY_MODE = BuildConfig.DEBUG
     var CC_COMMISSION = .0288
     var POS_COMMISSION = .0101

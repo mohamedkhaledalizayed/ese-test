@@ -19,8 +19,10 @@ import com.neqabty.healthcare.modules.search.presentation.view.searchresult.Sear
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
 import com.neqabty.core.ui.BaseActivity
+import com.neqabty.healthcare.R
 import com.neqabty.healthcare.modules.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.modules.subscribtions.presentation.view.SubscriptionActivity
+import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
 import com.neqabty.signup.modules.signup.presentation.view.homescreen.SignupActivity
 
 @AndroidEntryPoint
@@ -124,6 +126,16 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         }
         alertDialog.show()
 
+    }
+
+    override fun onBackPressed() {
+        if (Constants.from == Constants.MEGA_HOME){
+            val intent = Intent(this@SearchActivity, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }else{
+            finish()
+        }
     }
 
     private fun comingSoon(message: String) {

@@ -1,7 +1,6 @@
 package com.neqabty.healthcare.modules.profile.domain.entity.profile
 
 
-
 data class PackageEntity(
     val descriptionAr: String,
     val subscriberId: String,
@@ -10,6 +9,10 @@ data class PackageEntity(
     val id: String,
     val nameAr: String,
     val shortDescription: String,
+    val serviceCode: String,
+    val serviceActionCode: String?,
+    val packagePrice: String,
+    val expiryDate: String?,
     val maxFollower: Int,
     val paid: Boolean,
     val createdAt: String

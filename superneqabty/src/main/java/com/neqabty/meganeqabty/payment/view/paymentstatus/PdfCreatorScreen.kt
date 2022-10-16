@@ -173,44 +173,46 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
 
         //////////////////////////
         //Engineer Number
-        val horizontalEngineerNumber = PDFHorizontalView(applicationContext)
+        if (data.itemId != null){
+            val horizontalEngineerNumber = PDFHorizontalView(applicationContext)
 
-        val numberValue = PDFTextView(applicationContext, 14f, false)
-        val numberContentValue = SpannableString("${data.itemId}")
-        numberContentValue.setSpan(
-            ForegroundColorSpan(Color.DKGRAY),
-            0,
-            numberContentValue.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        numberValue.text = numberContentValue
-        numberValue.setLayout(
-            LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
-        ).setPadding(20, 5, 0, 4)
-        horizontalEngineerNumber.addView(numberValue)
+            val numberValue = PDFTextView(applicationContext, 14f, false)
+            val numberContentValue = SpannableString("${data.itemId}")
+            numberContentValue.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                numberContentValue.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            numberValue.text = numberContentValue
+            numberValue.setLayout(
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
+            ).setPadding(20, 5, 0, 4)
+            horizontalEngineerNumber.addView(numberValue)
 
 
-        val number = PDFTextView(applicationContext, 14f, true)
-        val numberContent = SpannableString("رقم العضوية : ")
-        numberContent.setSpan(
-            ForegroundColorSpan(Color.DKGRAY),
-            0,
-            numberContent.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        number.text = numberContent
-        number.setLayout(
-            LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0F)
-        ).setPadding(2, 5, 20, 4)
-        horizontalEngineerNumber.addView(number)
-        pdfBody.addView(horizontalEngineerNumber)
+            val number = PDFTextView(applicationContext, 14f, true)
+            val numberContent = SpannableString("رقم العضوية : ")
+            numberContent.setSpan(
+                ForegroundColorSpan(Color.DKGRAY),
+                0,
+                numberContent.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            number.text = numberContent
+            number.setLayout(
+                LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0F)
+            ).setPadding(2, 5, 20, 4)
+            horizontalEngineerNumber.addView(number)
+            pdfBody.addView(horizontalEngineerNumber)
+        }
 
         ////////////رقم المنظومة العلاجية/////////////
 
         val horizontalTreatmentNumber = PDFHorizontalView(applicationContext)
 
         val treatmentNumber = PDFTextView(applicationContext, 14f, false)
-        val treatmentNumberContent = SpannableString("${data.mobile}")
+        val treatmentNumberContent = SpannableString(data.mobile ?: "")
         treatmentNumberContent.setSpan(
             ForegroundColorSpan(Color.DKGRAY),
             0,
@@ -335,7 +337,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         val horizontalReceiptNumber = PDFHorizontalView(applicationContext)
 
         val receiptNumber = PDFTextView(applicationContext, 14f, true)
-        val receiptNumberContent = SpannableString("${data.gatewayReferenceId}")
+        val receiptNumberContent = SpannableString(data.gatewayReferenceId ?: "")
         receiptNumberContent.setSpan(
             ForegroundColorSpan(Color.DKGRAY),
             0,

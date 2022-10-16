@@ -8,10 +8,17 @@
             android:icon="@drawable/ic_man"/>
     </group>
 
+    <group android:id="@+id/menu_seha">
+        <item
+            android:id="@+id/seha"
+            android:title="صحة مستدامة"
+            android:icon="@drawable/delivered"/>
+    </group>
+
     <group android:id="@+id/menu_packages">
         <item
             android:id="@+id/packages"
-            android:title="صحة مستدامة"
+            android:title="باقاتى"
             android:icon="@drawable/delivered"/>
     </group>
 

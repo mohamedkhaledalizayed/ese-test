@@ -4,15 +4,19 @@ package com.neqabty.healthcare.modules.profile.presentation
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.neqabty.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+import com.neqabty.core.data.Constants
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.core.utils.loadSVG
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.modules.payment.view.SehaPaymentActivity
+import com.neqabty.meganeqabty.home.view.homescreen.HomeActivity
 
 @AndroidEntryPoint
 class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
@@ -42,20 +46,15 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                     binding.progressCircular.visibility = View.GONE
                     if (resource.data!!.status){
                         binding.layoutContainer.visibility = View.VISIBLE
-                        binding.fullName.text = "${resource.data?.data?.client?.name}"
-                        binding.name.text = "${resource.data?.data?.client?.name}"
-                        binding.email.text = "${resource.data?.data?.client?.email}"
-                        binding.phone.text = "${resource.data?.data?.client?.mobile}"
-                        binding.birthDate.text = "${resource.data?.data?.client?.birthDate}"
-                        binding.address.text = "${resource.data?.data?.client?.address}"
-                        binding.job.text = "${resource.data?.data?.client?.job}"
-                        binding.nationalId.text = "${resource.data?.data?.client?.nationalId}"
-                        mAdapter.submitList(resource.data!!.data.subscribedPackages)
-                        binding.qrCode.loadSVG(resource.data!!.data.client.qrCode)
+                        mAdapter.submitList(resource.data!!.data!!.subscribedPackages)
+//                        binding.qrCode.loadSVG(resource.data!!.data.client.qrCode)
+                    }else{
+                        binding.noPackagesLayout.visibility = View.VISIBLE
                     }
                 }
                 Status.ERROR ->{
                     binding.progressCircular.visibility = View.GONE
+                    Log.e("tesr", resource.message.toString())
                 }
             }
 
@@ -74,6 +73,16 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                     return
                 }
                 addFollower(packageId, subscriberId)
+            }
+
+            override fun setOnPayClickListener(name: String, price: String, serviceCode: String, serviceActionCode: String) {
+                val intent = Intent(this@ProfileActivity, SehaPaymentActivity::class.java)
+                Log.e("price", price)
+                intent.putExtra("name", name)
+                intent.putExtra("price", price.toDouble())
+                intent.putExtra("serviceCode", serviceCode)
+                intent.putExtra("serviceActionCode", serviceActionCode)
+                startActivity(intent)
             }
         }
 
@@ -136,6 +145,16 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
         intent.putExtra("packageId", packageId)
         intent.putExtra("subscriberId", subscriberId)
         startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        if (Constants.from == Constants.FROM_MEGA_HOME_PACKAGES){
+            val intent = Intent(this@ProfileActivity, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }else{
+            finish()
+        }
     }
 
 }

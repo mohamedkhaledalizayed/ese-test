@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
-    private var licenceStatus = false
     private val profileViewModel: ProfileViewModel by viewModels()
     override fun getViewBinding() = ActivityProfileMegaBinding.inflate(layoutInflater)
     @SuppressLint("SetTextI18n")
@@ -41,6 +40,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
                         binding.name.text = resource.data?.data?.fullName ?: ""
                         binding.mobile.text = resource.data?.data?.mobile
+                        binding.phone.text = resource.data?.data?.mobile
                         binding.membershipNumber.text = resource.data?.data?.membershipId.toString()
                         binding.nationalId.text = resource.data?.data?.nationalId.toString()
                         binding.email.text = resource.data?.data?.email ?: ""
@@ -146,6 +146,8 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
         }else{
             binding.updateLicence.visibility = View.GONE
             binding.cardRequest.visibility = View.GONE
+            binding.membershipIdLayout.visibility = View.GONE
+            binding.view.visibility = View.GONE
         }
     }
 

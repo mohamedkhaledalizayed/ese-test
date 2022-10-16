@@ -52,7 +52,7 @@ private fun AddFollowerModel.toAddFollowerEntity(): AddFollowerEntity{
 
 private fun ProfileModel.toProfileEntity(): ProfileEntity{
     return ProfileEntity(
-        data = data.toDataEntity(),
+        data = data?.toDataEntity(),
         message = message,
         status = status
     )
@@ -98,6 +98,10 @@ private fun Package.toPackageEntity(): PackageEntity{
         nameAr = nameAr,
         maxFollower = maxFollower,
         shortDescription = shortDescription,
+        serviceCode = serviceCode,
+        serviceActionCode = serviceActionCode,
+        expiryDate = expiryDate,
+        packagePrice = packagePrice,
         paid = paid,
         createdAt = createdAt
     )

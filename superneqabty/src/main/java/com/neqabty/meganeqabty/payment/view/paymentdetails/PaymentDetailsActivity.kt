@@ -26,7 +26,6 @@ import com.neqabty.meganeqabty.payment.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.meganeqabty.profile.view.update.UpdateInfoActivity
 import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
 import dagger.hilt.android.AndroidEntryPoint
-import me.cowpay.util.CowpayConstantKeys
 import team.opay.business.cashier.sdk.api.*
 import team.opay.business.cashier.sdk.pay.PaymentTask
 
@@ -434,7 +433,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
     private fun oPayPayment(paymentEntity: PaymentEntity, isCredit: Boolean) {
         referenceCode = paymentEntity.mobilePaymentPayload!!.reference
         val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
-        PaymentTask.sandBox = true
+        PaymentTask.sandBox = false
         val payInput = PayInput(
             publickey = paymentEntity.mobilePaymentPayload.publickey,
             merchantId = paymentEntity.mobilePaymentPayload.merchantId,

@@ -33,7 +33,11 @@ class ComplainsActivity : BaseActivity<ActivityComplainsBinding>() {
                     }
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
-                        mAdapter.submitList(resource.data?.toMutableList())
+                        if (resource.data.isNullOrEmpty()){
+                            binding.noComplainsLayout.visibility = View.VISIBLE
+                        }else{
+                            mAdapter.submitList(resource.data?.toMutableList())
+                        }
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE

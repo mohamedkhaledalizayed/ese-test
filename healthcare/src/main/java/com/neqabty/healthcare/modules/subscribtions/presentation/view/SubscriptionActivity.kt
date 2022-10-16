@@ -346,28 +346,8 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
-        if (binding.etNationalId.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الرقم القومى.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (!binding.etNationalId.text.toString().isNationalIdValid()){
-            Toast.makeText(this, "من فضلك ادخل رقم صحيح.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (binding.etNationalId.text.toString().length < 14){
-            Toast.makeText(this, "من فضلك ادخل رقم صحيح.", Toast.LENGTH_LONG).show()
-            return
-        }
-
         if (binding.etEmail.text.toString().isNullOrEmpty()){
             Toast.makeText(this, "من فضلك ادخل البريد الالكترونى.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (!binding.etEmail.text.toString().isValidEmail()){
-            Toast.makeText(this, "من فضلك ادخل البريد الالكترونى بشكل صحيح.", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -406,10 +386,10 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
-        if (!binding.etReferralNumber.text.toString().isNullOrEmpty() && !binding.etReferralNumber.text.toString().isMobileValid()){
-            Toast.makeText(this, "من فضلك ادخل رقم صحيح.", Toast.LENGTH_LONG).show()
-            return
-        }
+//        if (!binding.etReferralNumber.text.toString().isNullOrEmpty() && !binding.etReferralNumber.text.toString().isMobileValid()){
+//            Toast.makeText(this, "من فضلك ادخل رقم صحيح.", Toast.LENGTH_LONG).show()
+//            return
+//        }
 
         val sub = SubscribePostBodyRequest(
             name = binding.etName.text.toString(),

@@ -189,7 +189,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
     private fun oPayPayment(paymentEntity: SehaPaymentEntity, isCredit: Boolean) {
         referenceCode = paymentEntity.mobilePaymentPayload!!.reference
         val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
-        PaymentTask.sandBox = true
+        PaymentTask.sandBox = false
         val payInput = PayInput(
             publickey = paymentEntity.mobilePaymentPayload.publickey,
             merchantId = paymentEntity.mobilePaymentPayload.merchantId,

@@ -23,7 +23,7 @@ object Constants {
     const val BASE_URL_PRO_OTP = "https://community.neqabty.com/"
 
     //Main
-    const val BASE_URL_Main = BASE_URL_STAGING_SYNDICATE
+    const val BASE_URL_Main = BASE_URL_PRO_SYNDICATE
 
     const val NEQABTY_CODE = "e00"
     const val ESE_CODE = "e03"
@@ -49,4 +49,5 @@ object Constants {
     var from = 0
     const val MEGA_HOME = 30
     const val SEHA_HOME = 40
+    const val FROM_MEGA_HOME_PACKAGES = 50
 }

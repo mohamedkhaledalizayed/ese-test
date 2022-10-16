@@ -43,9 +43,6 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
         val item = items[position]
         viewHolder.binding.packageName.text = item.name
-        viewHolder.binding.insuranceDetails.text = item.insuranceAmount ?: ""
-        viewHolder.binding.requiredDataDetails.text = item.neddedInfo ?: ""
-        viewHolder.binding.targetPeopleDetails.text = item.targetGroups ?: ""
         viewHolder.binding.infoDetails.text = item.description
         viewHolder.binding.packagePrice.text = "${item.price}"
 
@@ -57,14 +54,6 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         val justify = "<html><body style='direction:rtl;text-align:justify;'>${details}</body></html>"
         viewHolder.binding.detailsValue.loadDataWithBaseURL(null, justify, "text/html; charset=utf-8", "UTF-8", null)
 
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            viewHolder.binding.detailsValue.text = Html.fromHtml(details, Html.FROM_HTML_MODE_COMPACT);
-//        } else {
-//            viewHolder.binding.detailsValue.text = Html.fromHtml(details);
-//        }
-//
-//        viewHolder.binding.detailsValue.text = details
         viewHolder.binding.moreDetails.setOnClickListener {
             if (viewHolder.binding.packageDescription.isVisible){
                 viewHolder.binding.packageDescription.visibility = View.GONE

@@ -1,6 +1,5 @@
 package com.neqabty.healthcare.modules.splash.view
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
@@ -8,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.core.data.Constants.FROM_MEGA_HOME_PACKAGES
 import com.neqabty.core.data.Constants.MEGA_HOME
 import com.neqabty.core.data.Constants.from
 import com.neqabty.core.ui.BaseActivity
@@ -16,11 +16,10 @@ import com.neqabty.healthcare.databinding.ActivitySplashBinding
 import com.neqabty.healthcare.modules.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.modules.home.presentation.view.homescreen.HomeActivity
 import com.neqabty.healthcare.modules.profile.presentation.ProfileActivity
+import com.neqabty.healthcare.modules.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.modules.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.meganeqabty.R
-import com.neqabty.meganeqabty.core.utils.Constants
 import com.neqabty.meganeqabty.core.utils.DeviceUtils
-import com.neqabty.news.modules.home.presentation.view.newslist.NewsListActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -50,7 +49,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                     }
                     Status.SUCCESS -> {
                         loading.dismiss()
-                        if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= 170){
+                        if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= 180){
                             Handler().postDelayed(Runnable {
                                 if (sharedPreferences.isAuthenticated){
                                     if (sharedPreferences.isSyndicateMember){
@@ -137,8 +136,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     override fun onResume() {
         super.onResume()
         if (from == MEGA_HOME){
-            val intent = Intent(this@SplashActivity, HomeActivity::class.java)
-            intent.putExtra("from", MEGA_HOME)
+            val intent = Intent(this@SplashActivity, SearchActivity::class.java)
+            startActivity(intent)
+        }else if (from == FROM_MEGA_HOME_PACKAGES){
+            val intent = Intent(this@SplashActivity, ProfileActivity::class.java)
             startActivity(intent)
         }else{
             if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()){

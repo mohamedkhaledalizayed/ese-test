@@ -37,6 +37,14 @@ data class Package(
     val recommended: Boolean,
     @SerializedName("short_description")
     val shortDescription: String,
+    @SerializedName("service_code")
+    val serviceCode: String,
+    @SerializedName("service_action_code")
+    val serviceActionCode: String?,
+    @SerializedName("package_price")
+    val packagePrice: String,
+    @SerializedName("expiry_date")
+    val expiryDate: String?,
     @SerializedName("max_follower")
     val maxFollower: Int,
     @SerializedName("target_groups")
