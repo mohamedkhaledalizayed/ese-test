@@ -1,24 +1,20 @@
 package com.neqabty.presentation.ui.syndicateServicesDetails
 
 import androidx.lifecycle.MutableLiveData
-import com.neqabty.domain.usecases.*
+import com.neqabty.domain.usecases.AddSyndicateServicesPaymentRequest
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
-import com.neqabty.presentation.entities.*
-import com.neqabty.presentation.mappers.*
+import com.neqabty.presentation.entities.SyndicateServicesPaymentRequestUI
+import com.neqabty.presentation.mappers.SyndicateServicesPaymentRequestEntityUIMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class SyndicateServicesDetailsViewModel @Inject constructor(
-    private val getSyndicateServices: GetSyndicateServices,
-    private val getAllServices: GetAllServices,
-    private val paymentInquiry: PaymentInquiry
+    private val addSyndicateServicesRequest: AddSyndicateServicesPaymentRequest
 ) : BaseViewModel() {
 
-    private val renewalPaymentEntityUIMapper = RenewalPaymentEntityUIMapper()
-    private val serviceEntityUIMapper = ServiceEntityUIMapper()
-    private val serviceTypeEntityUIMapper = SyndicateServicesEntityUIMapper()
+    private val syndicateServicesPaymentRequestEntityUIMapper = SyndicateServicesPaymentRequestEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<SyndicateServicesDetailsViewState> = MutableLiveData()
@@ -27,44 +23,18 @@ class SyndicateServicesDetailsViewModel @Inject constructor(
         viewState.value = SyndicateServicesDetailsViewState()
     }
 
-    fun getSyndicateServices(userNumber: String) {
-        getSyndicateServices.getSyndicateServices(userNumber)
-            .flatMap {
-                it.let {
-                    serviceTypeEntityUIMapper.observable(it)
-                }
-            }.subscribe(
-                {
-                    onSyndicateServicesReceived(it)
-                },
-                { errorState.value = handleError(it) }
-            )
-    }
 
-    fun getAllServices(typeID :Int) {
-        getAllServices.getAllServices(typeID)
-            .flatMap {
-                it.let {
-                    serviceEntityUIMapper.observable(it)
-                }
-            }.subscribe(
-                {
-//                            onServicesReceived(it.)
-                },
-                { errorState.value = handleError(it) }
-            )
-    }
 
-    fun paymentSyndicateServices(mobileNumber: String, number: String, serviceID: Int) {
+    fun addSyndicateServicesPaymentRequest(mobileNumber: String, userNumber: String, userName: String, serviceID: Int, countryID: Int, paymentType: String, paymentGatewayId: Int, locationType: Int, address: String, mobile: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(paymentInquiry.paymentInquiry(number)
+        addDisposable(addSyndicateServicesRequest.addSyndicateServicesPaymentRequest(mobileNumber, userNumber, userName, serviceID, countryID, paymentType, paymentGatewayId, locationType, address, mobile)
             .map {
                 it.let {
-                    renewalPaymentEntityUIMapper.mapFrom(it)
+                    syndicateServicesPaymentRequestEntityUIMapper.mapFrom(it)
                 }
             }.subscribe(
                 {
-                    onSyndicateServicesReceived(it)
+                    onSyndicateServicesPaymentReceived(it)
                 },
                 {
                     viewState.value = viewState.value?.copy(isLoading = false)
@@ -74,25 +44,10 @@ class SyndicateServicesDetailsViewModel @Inject constructor(
         )
     }
 
-    private fun onSyndicateServicesReceived(serviceTypes: SyndicateServicesUI) {
+    private fun onSyndicateServicesPaymentReceived(syndicateServicesPaymentRequestUI: SyndicateServicesPaymentRequestUI) {
         val newViewState = viewState.value?.copy(
             isLoading = false,
-            serviceTypes = serviceTypes.typesList,
-            services = serviceTypes.servicesList)
-        viewState.value = newViewState
-    }
-
-    private fun onServicesReceived(services: List<SyndicateServicesUI.Service>) {
-        val newViewState = viewState.value?.copy(
-            isLoading = false,
-            services = services)
-        viewState.value = newViewState
-    }
-
-    private fun onSyndicateServicesReceived(renewalPayment: RenewalPaymentUI) {
-        val newViewState = viewState.value?.copy(
-            isLoading = false,
-            renewalPayment = renewalPayment)
+            syndicateServicesPaymentRequestUI = syndicateServicesPaymentRequestUI)
         viewState.value = newViewState
     }
 }

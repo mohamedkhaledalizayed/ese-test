@@ -438,6 +438,38 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             }
         }
 
+    private val syndicateServicesPaymentDataEntityMapper = SyndicateServicesPaymentDataEntityMapper()
+
+    override fun inquireSyndicateServicesPayment(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        countryID: Int,
+        paymentType: String,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<SyndicateServicesPaymentEntity> {
+        return api.inquireSyndicateServicesPayment(
+            SyndicateServicesInquiryRequest(
+                userNumber,
+                userName,
+                mobileNumber,
+                locationType,
+                address,
+                mobile,
+                serviceID,
+                countryID,
+                paymentType
+            )
+        ).flatMap { renewalData ->
+            Observable.just(syndicateServicesPaymentDataEntityMapper.mapFrom(renewalData.data!!))
+        }
+    }
+
+    private val syndicateServicesPaymentRequestDataEntityMapper = SyndicateServicesPaymentRequestDataEntityMapper()
+
     override fun addSyndicateServicesPaymentRequest(
         mobileNumber: String,
         userNumber: String,
@@ -449,7 +481,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         locationType: Int,
         address: String,
         mobile: String
-    ): Observable<PaymentRequestEntity> {
+    ): Observable<SyndicateServicesPaymentRequestEntity> {
         return api.addSyndicateServicesPaymentRequest(
             SyndicateServicesPaymentRequest(
                 userNumber,
@@ -464,7 +496,7 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
                 paymentGatewayId
             )
         ).flatMap { renewalData ->
-            Observable.just(paymentRequestDataEntityMapper.mapFrom(renewalData.data!!))
+            Observable.just(syndicateServicesPaymentRequestDataEntityMapper.mapFrom(renewalData.data!!))
         }
     }
 

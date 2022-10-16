@@ -146,9 +146,14 @@ interface WebService {
     ): Observable<ApiResponse<PaymentRequestData>>
 
     @POST("api/payment/init")
+    fun inquireSyndicateServicesPayment(
+        @Body syndicateServicesInquiryRequest: SyndicateServicesInquiryRequest
+    ): Observable<ApiResponse<SyndicateServicesPaymentData>>
+
+    @POST("api/payment/init")
     fun addSyndicateServicesPaymentRequest(
         @Body syndicateServicesPaymentRequest: SyndicateServicesPaymentRequest
-    ): Observable<ApiResponse<PaymentRequestData>>
+    ): Observable<ApiResponse<SyndicateServicesPaymentRequestData>>
 
     @POST("api/v1/encrypt")
     fun paymentEncryption(@Body encryptionRequest: EncryptionRequest): Observable<EncryptionData>

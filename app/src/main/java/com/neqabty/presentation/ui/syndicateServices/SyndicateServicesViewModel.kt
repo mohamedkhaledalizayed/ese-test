@@ -13,12 +13,12 @@ import javax.inject.Inject
 class SyndicateServicesViewModel @Inject constructor(
     private val getSyndicateServices: GetSyndicateServices,
     private val getAllServices: GetAllServices,
-    private val paymentInquiry: PaymentInquiry
+    private val inquireSyndicateServicesPayment: InquireSyndicateServicesPayment
 ) : BaseViewModel() {
 
-    private val renewalPaymentEntityUIMapper = RenewalPaymentEntityUIMapper()
     private val serviceEntityUIMapper = ServiceEntityUIMapper()
     private val serviceTypeEntityUIMapper = SyndicateServicesEntityUIMapper()
+    private val syndicateServicesPaymentEntityUIMapper = SyndicateServicesPaymentEntityUIMapper()
 
     var errorState: SingleLiveEvent<Throwable> = SingleLiveEvent()
     var viewState: MutableLiveData<SyndicateServicesViewState> = MutableLiveData()
@@ -55,16 +55,16 @@ class SyndicateServicesViewModel @Inject constructor(
             )
     }
 
-    fun paymentSyndicateServices(mobileNumber: String, number: String, serviceID: Int) {
+    fun inquireSyndicateServicesPayment(mobileNumber: String, userNumber: String, userName: String, serviceID: Int, countryID: Int, paymentType: String, locationType: Int, address: String, mobile: String) {
         viewState.value = viewState.value?.copy(isLoading = true)
-        addDisposable(paymentInquiry.paymentInquiry(number)
+        addDisposable(inquireSyndicateServicesPayment.inquireSyndicateServicesPayment(mobileNumber, userNumber, userName, serviceID, countryID, paymentType, locationType, address, mobile)
             .map {
                 it.let {
-                    renewalPaymentEntityUIMapper.mapFrom(it)
+                    syndicateServicesPaymentEntityUIMapper.mapFrom(it)
                 }
             }.subscribe(
                 {
-                    onSyndicateServicesReceived(it)
+                    onSyndicateServicesPaymentReceived(it)
                 },
                 {
                     viewState.value = viewState.value?.copy(isLoading = false)
@@ -82,17 +82,10 @@ class SyndicateServicesViewModel @Inject constructor(
         viewState.value = newViewState
     }
 
-    private fun onServicesReceived(services: List<SyndicateServicesUI.Service>) {
+    private fun onSyndicateServicesPaymentReceived(syndicateServicesPaymentUI: SyndicateServicesPaymentUI) {
         val newViewState = viewState.value?.copy(
             isLoading = false,
-            services = services)
-        viewState.value = newViewState
-    }
-
-    private fun onSyndicateServicesReceived(renewalPayment: RenewalPaymentUI) {
-        val newViewState = viewState.value?.copy(
-            isLoading = false,
-            renewalPayment = renewalPayment)
+            syndicateServicesPaymentUI = syndicateServicesPaymentUI)
         viewState.value = newViewState
     }
 }

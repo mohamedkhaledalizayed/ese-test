@@ -816,6 +816,10 @@
         <argument
             android:name="amount"
             app:argType="java.lang.String" />
+
+        <argument
+            android:name="syndicateServicesPaymentUI"
+            app:argType="com.neqabty.presentation.entities.SyndicateServicesPaymentUI" />
     </fragment>
     <fragment
         android:id="@+id/complaintsFragment"

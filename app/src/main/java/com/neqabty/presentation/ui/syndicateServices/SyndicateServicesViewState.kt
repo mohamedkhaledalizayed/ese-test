@@ -6,5 +6,5 @@ data class SyndicateServicesViewState(
     var isLoading: Boolean = true,
     var serviceTypes: List<SyndicateServicesUI.ServiceType>? = null,
     var services: List<SyndicateServicesUI.Service>? = null,
-    var renewalPayment: RenewalPaymentUI? = null
+    var syndicateServicesPaymentUI: SyndicateServicesPaymentUI? = null
 )

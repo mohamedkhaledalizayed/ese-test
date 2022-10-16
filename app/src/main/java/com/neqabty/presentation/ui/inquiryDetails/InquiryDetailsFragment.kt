@@ -86,7 +86,6 @@ class InquiryDetailsFragment : BaseFragment() {
         })
 
         params = InquiryDetailsFragmentArgs.fromBundle(arguments!!)
-        renewalPayment = params.renewalPaymentUI
 
         initializeViews()
     }
