@@ -1,6 +1,5 @@
 package com.neqabty.presentation.ui.syndicateServices
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,13 +16,12 @@ import com.neqabty.R
 import com.neqabty.databinding.SyndicateServicesFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
-import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.entities.RenewalPaymentUI
+import com.neqabty.presentation.entities.SyndicateServicesPaymentUI
 import com.neqabty.presentation.entities.SyndicateServicesUI
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.inquiry_details_fragment.llContent
-import kotlinx.android.synthetic.main.inquiry_fragment.*
+import kotlinx.android.synthetic.main.syndicate_services_fragment.*
 
 @AndroidEntryPoint
 class SyndicateServicesFragment : BaseFragment() {
@@ -38,11 +36,6 @@ class SyndicateServicesFragment : BaseFragment() {
     var servicesResultList: List<SyndicateServicesUI.Service>? = mutableListOf()
     var syndicateServicesID: Int = 0
     var serviceID: Int = 0
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        showAds(Constants.AD_PAYMENTS)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +54,6 @@ class SyndicateServicesFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        showBannerAd(Constants.AD_PAYMENTS, binding.ivBanner)
 
         syndicateServicesViewModel.viewState.observe(this.requireActivity(), Observer {
             if (it != null) handleViewState(it)
@@ -84,34 +76,25 @@ class SyndicateServicesFragment : BaseFragment() {
         renderServices()
         llContent.visibility = View.VISIBLE
         bSend.setOnClickListener {
-            syndicateServicesViewModel.paymentSyndicateServices(sharedPref.mobile, binding.edMemberNumber.text.toString(), serviceID)
+            syndicateServicesViewModel.inquireSyndicateServicesPayment(sharedPref.mobile, sharedPref.user, sharedPref.name, (binding.spService.selectedItem as SyndicateServicesUI.Service).id, -1, "type", -1, "address", "01111111111")
         }
     }
 
     private fun handleViewState(state: SyndicateServicesViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         activity?.invalidateOptionsMenu()
-        if (llContent.visibility == View.INVISIBLE && state.serviceTypes != null) {
+        if(state.syndicateServicesPaymentUI != null){
+            navController().navigate(
+                SyndicateServicesFragmentDirections.openSyndicateServicesDetails(spService.selectedItem.toString(), serviceID, (spService.selectedItem as SyndicateServicesUI.Service).price!!, state.syndicateServicesPaymentUI as SyndicateServicesPaymentUI)
+            )
+            return
+        }else if (llContent.visibility == View.INVISIBLE && state.serviceTypes != null) {
             syndicateServicesResultList = state.serviceTypes
             servicesResultList = state.services
             renderSyndicateServices()
             initializeViews()
             state.serviceTypes = null
             return
-        } else if (!state.isLoading && state.renewalPayment != null) {
-            if((state.renewalPayment as RenewalPaymentUI).resultType == "-2")
-                showAlert((state.renewalPayment as RenewalPaymentUI).msg)
-            else if((state.renewalPayment as RenewalPaymentUI).resultType == "-1")
-                showAlert((state.renewalPayment as RenewalPaymentUI).msg)
-            else if((state.renewalPayment as RenewalPaymentUI).resultType == "-3")
-                showAlert((state.renewalPayment as RenewalPaymentUI).msg)
-            else if((state.renewalPayment as RenewalPaymentUI).paymentItem != null)
-                navController().navigate(
-                    SyndicateServicesFragmentDirections.openInquiryDetails(edMemberNumber.text.toString(),0, spService.selectedItem.toString(), state.renewalPayment as RenewalPaymentUI, serviceID)
-                )
-            else
-                showAlert(getString(R.string.error_msg))
-            state.renewalPayment = null
         }
     }
 

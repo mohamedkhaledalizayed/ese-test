@@ -807,8 +807,29 @@
         android:label="@string/syndicate_services_title"
         tools:layout="@layout/syndicate_services_fragment">
         <action
-            android:id="@+id/openInquiryDetails"
-            app:destination="@id/inquiryDetailsFragment" />
+            android:id="@+id/openSyndicateServicesDetails"
+            app:destination="@id/syndicateServicesDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/syndicateServicesDetailsFragment"
+        android:name="com.neqabty.presentation.ui.syndicateServicesDetails.SyndicateServicesDetailsFragment"
+        android:label="@string/syndicate_services_title"
+        tools:layout="@layout/syndicate_services_fragment">
+        <argument
+            android:name="title"
+            app:argType="java.lang.String" />
+
+        <argument
+            android:name="serviceID"
+            app:argType="java.lang.Integer" />
+
+        <argument
+            android:name="amount"
+            app:argType="java.lang.String" />
+
+        <argument
+            android:name="syndicateServicesPaymentUI"
+            app:argType="com.neqabty.presentation.entities.SyndicateServicesPaymentUI" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

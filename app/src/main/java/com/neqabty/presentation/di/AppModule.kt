@@ -518,6 +518,18 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideInquireSyndicateServicesPayment(neqabtyRepository: NeqabtyRepository): InquireSyndicateServicesPayment {
+        return InquireSyndicateServicesPayment(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAddSyndicateServicesPaymentRequest(neqabtyRepository: NeqabtyRepository): AddSyndicateServicesPaymentRequest {
+        return AddSyndicateServicesPaymentRequest(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGetCommitteesLookups(neqabtyRepository: NeqabtyRepository): GetCommitteesLookups {
         return GetCommitteesLookups(ASyncTransformer(), neqabtyRepository)
     }

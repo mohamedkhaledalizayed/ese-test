@@ -246,6 +246,35 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.addRenewalRequest(mobileNumber, userNumber, userName, 1, paymentType, paymentGatewayId, locationType, address, mobile)
     }
 
+    override fun inquireSyndicateServicesPayment(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        countryID: Int,
+        paymentType: String,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<SyndicateServicesPaymentEntity> {
+        return remoteDataStore.inquireSyndicateServicesPayment(mobileNumber, userNumber, userName, serviceID, countryID, paymentType, locationType, address, mobile)
+    }
+
+    override fun addSyndicateServicesPaymentRequest(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        countryID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<SyndicateServicesPaymentRequestEntity> {
+        return remoteDataStore.addSyndicateServicesPaymentRequest(mobileNumber, userNumber, userName, serviceID, countryID, paymentType, paymentGatewayId, locationType, address, mobile)
+    }
+
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {
         return remoteDataStore.encrypt(userName, password, description)
     }

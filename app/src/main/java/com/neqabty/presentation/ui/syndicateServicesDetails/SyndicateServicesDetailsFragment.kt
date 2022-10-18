@@ -1,4 +1,4 @@
-package com.neqabty.presentation.ui.inquiryDetails
+package com.neqabty.presentation.ui.syndicateServicesDetails
 
 import android.app.Activity
 import android.content.Intent
@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -17,19 +16,15 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.neqabty.AppExecutors
 import com.neqabty.R
-import com.neqabty.databinding.InquiryDetailsFragmentBinding
+import com.neqabty.databinding.SyndicateServicesDetailsFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
-import com.neqabty.presentation.entities.PaymentRequestUI
-import com.neqabty.presentation.entities.RenewalPaymentUI
+import com.neqabty.presentation.entities.SyndicateServicesPaymentRequestUI
+import com.neqabty.presentation.entities.SyndicateServicesPaymentUI
 import com.neqabty.presentation.util.autoCleared
-import com.payment.paymentsdk.PaymentSdkActivity.Companion.startCardPayment
-import com.payment.paymentsdk.PaymentSdkConfigBuilder
-import com.payment.paymentsdk.integrationmodels.*
-import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.inquiry_details_fragment.*
+import kotlinx.android.synthetic.main.syndicate_services_details_fragment.*
 import me.cowpay.PaymentMethodsActivity
 import me.cowpay.util.CowpayConstantKeys
 import team.opay.business.cashier.sdk.api.*
@@ -37,39 +32,41 @@ import team.opay.business.cashier.sdk.pay.PaymentTask
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
+class SyndicateServicesDetailsFragment : BaseFragment() {
 
     var dataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
-    private var adapter by autoCleared<RenewPaymentItemsAdapter>()
+    private var adapter by autoCleared<SyndicateServicesPaymentItemsAdapter>()
 
-    private val inquiryDetailsViewModel: InquiryDetailsViewModel by viewModels()
+    private val syndicateServicesDetailsViewModel: SyndicateServicesDetailsViewModel by viewModels()
 
-    var binding by autoCleared<InquiryDetailsFragmentBinding>()
+    var binding by autoCleared<SyndicateServicesDetailsFragmentBinding>()
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    lateinit var renewalPayment: RenewalPaymentUI
-    lateinit var paymentRequestUI: PaymentRequestUI
+    lateinit var syndicateServicesPaymentUI: SyndicateServicesPaymentUI
+    lateinit var syndicateServicesPaymentRequestUI: SyndicateServicesPaymentRequestUI
 
     lateinit var mechanismTypeButton: RadioButton
 
-    lateinit var params: InquiryDetailsFragmentArgs
+    lateinit var params: SyndicateServicesDetailsFragmentArgs
     var sendDecryptionKey = false
     var title = ""
-//    var commission: Double = 0.0
+
+    //    var commission: Double = 0.0
     var newAmount: Float = 0.0F
+
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.inquiry_details_fragment,
-                container,
-                false,
-                dataBindingComponent
+            inflater,
+            R.layout.syndicate_services_details_fragment,
+            container,
+            false,
+            dataBindingComponent
         )
 
         return binding.root
@@ -78,39 +75,40 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        inquiryDetailsViewModel.viewState.observe(this, Observer {
+        syndicateServicesDetailsViewModel.viewState.observe(this, Observer {
             if (it != null) handleViewState(it)
         })
-        inquiryDetailsViewModel.errorState.observe(this, Observer { error ->
+        syndicateServicesDetailsViewModel.errorState.observe(this, Observer { error ->
             showConnectionAlert(requireContext(), retryCallback = {
                 llSuperProgressbar.visibility = View.VISIBLE
-                addRenewalRequest()
+                addSyndicateServicesPaymentRequest()
             }, cancelCallback = {
                 navController().navigateUp()
             }, message = error?.message)
         })
 
-        params = InquiryDetailsFragmentArgs.fromBundle(arguments!!)
+        params = SyndicateServicesDetailsFragmentArgs.fromBundle(arguments!!)
 
         initializeViews()
     }
 
     fun initializeViews() {
         llContent.visibility = View.VISIBLE
-        val adapter = RenewPaymentItemsAdapter(dataBindingComponent, appExecutors) { }
+        val adapter = SyndicateServicesPaymentItemsAdapter(dataBindingComponent, appExecutors) { }
         this.adapter = adapter
 
-        renewalPayment = params.renewalPaymentUI
+        syndicateServicesPaymentUI = params.syndicateServicesPaymentUI
         binding.title = params.title
-        title = params.title
-        binding.number = params.number
+        binding.name = sharedPref.name
+        binding.number = sharedPref.user
+//        binding.newAmount = sharedPref.user
 
         calculateCommission(Constants.PaymentOption.OpayCredit)
-        renewalPayment?.let {
-            binding.renewalPayment = it
+        syndicateServicesPaymentUI?.let {
+            binding.syndicateServicesPaymentUI = it
         }
 
-        renewalPayment.paymentItem?.paymentDetailsItems?.let {
+        syndicateServicesPaymentUI.paymentItem?.paymentDetailsItems?.let {
             adapter.submitList(it)
             binding.rvDetails.adapter = adapter
         }
@@ -165,28 +163,34 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             }
         }
 
-        tvChannels.setOnClickListener{
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://cashier.opaycheckout.com/map")))
+        tvChannels.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://cashier.opaycheckout.com/map")
+                )
+            )
         }
 
         bPay.setOnClickListener {
             if ((rb_home.isChecked && edAddress.text.toString().isBlank())) {
                 showAlert(getString(R.string.invalid_data))
                 return@setOnClickListener
-            }else if (!isDataValid(edMobile.text.toString()))
+            } else if (!isDataValid(edMobile.text.toString()))
                 return@setOnClickListener
             llSuperProgressbar.visibility = View.VISIBLE
 //            createPayment()
-            addRenewalRequest()
+            addSyndicateServicesPaymentRequest()
         }
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PaymentTask.REQUEST_PAYMENT){
-            if (resultCode == PaymentTask.RESULT_PAYMENT){
-                val response = data?.getSerializableExtra(PaymentTask.RESPONSE_DATA) as WebJsResponse?
+        if (requestCode == PaymentTask.REQUEST_PAYMENT) {
+            if (resultCode == PaymentTask.RESULT_PAYMENT) {
+                val response =
+                    data?.getSerializableExtra(PaymentTask.RESPONSE_DATA) as WebJsResponse?
                 handlePaymentResponse(response)
             }
         }
@@ -201,9 +205,13 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             } else if (responseCode == CowpayConstantKeys.SuccessCode) {
                 var responseMSG = data.extras!!.getString(CowpayConstantKeys.ResponseMessage)
                 var PaymentGatewayReferenceId =
-                        data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
+                    data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
                 responseMSG?.let {
-                    showAlert(if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(R.string.payment_successful) + PaymentGatewayReferenceId else getString(R.string.payment_reference) + PaymentGatewayReferenceId) {
+                    showAlert(
+                        if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(
+                            R.string.payment_successful
+                        ) + PaymentGatewayReferenceId else getString(R.string.payment_reference) + PaymentGatewayReferenceId
+                    ) {
                         navController().popBackStack()
                         navController().navigate(R.id.homeFragment)
                     }
@@ -212,20 +220,19 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
         }
     }
 
-    private fun handleViewState(state: InquiryDetailsViewState) {
+    private fun handleViewState(state: SyndicateServicesDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
-            state.paymentRequestUI?.let {
-                paymentRequestUI = it
-                when (rgPaymentMechanismType.checkedRadioButtonId) {
-                    R.id.rb_card -> {
-                        val configData = generatePaytabsConfigurationDetails()
-                        startCardPayment(requireActivity(), configData, callback = this)
-                    }
-                    R.id.rb_channel -> oPayPayment(Constants.PaymentOption.OpayPOS)
-                    R.id.rb_mobileWallet -> oPayPayment(Constants.PaymentOption.MobileWallet)
-                    else -> cowPayPayment(false)
-                }
+            state.syndicateServicesPaymentRequestUI?.let {
+                syndicateServicesPaymentRequestUI = it
+                if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
+                    oPayPayment(Constants.PaymentOption.OpayCredit)
+                else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
+                    oPayPayment(Constants.PaymentOption.OpayPOS)
+                else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
+                    oPayPayment(Constants.PaymentOption.MobileWallet)
+                else
+                    cowPayPayment(false)
             }
         }
     }
@@ -233,27 +240,32 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
     //region
 
     fun oPayPayment(paymentOption: Constants.PaymentOption) {
-        val paymentType = when(paymentOption) {
+        val paymentType = when (paymentOption) {
             Constants.PaymentOption.OpayCredit -> "BankCard"
             Constants.PaymentOption.OpayPOS -> "ReferenceCode"
             Constants.PaymentOption.MobileWallet -> "MWALLET"
             else -> ""
         }
         PaymentTask.sandBox = Constants.OPAY_MODE
-        val userInfo = UserInfo(paymentRequestUI.amount.toString(), binding.number, sharedPref.mobile, renewalPayment.paymentItem?.engName)
+        val userInfo = UserInfo(
+            syndicateServicesPaymentRequestUI.amount.toString(),
+            binding.number,
+            sharedPref.mobile,
+            syndicateServicesPaymentUI.paymentItem?.engName
+        )
         val payInput = PayInput(
             publickey = Constants.OPAY_PUBLIC_KEY,
             merchantId = Constants.OPAY_MERCHANT_ID,
             merchantName = Constants.OPAY_MERCHANT_NAME,
-            reference = paymentRequestUI.refId,
+            reference = syndicateServicesPaymentRequestUI.refId,
             countryCode = "EG", // uppercase
-            payAmount = (paymentRequestUI.amount?.times(100))?.toLong()!!,
+            payAmount = (syndicateServicesPaymentRequestUI.amount?.times(100))?.toLong()!!,
             currency = "EGP", // uppercase
             productName = "annualSubscription",
             productDescription = "android",
             callbackUrl = Constants.OPAY_PAYMENT_CALLBACK_URL,
             paymentType = paymentType, // optional
-            expireAt = if(paymentOption == Constants.PaymentOption.OpayCredit) 30 else 2880,
+            expireAt = if (paymentOption == Constants.PaymentOption.OpayCredit) 30 else 2880,
             userClientIP = "110.246.160.183",
             userInfo = userInfo
         )
@@ -263,10 +275,13 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             llSuperProgressbar.visibility = View.GONE
             when (status) {
                 Status.ERROR -> { // error
-                    Toast.makeText(requireContext(), response.message,
-                        Toast.LENGTH_SHORT).show()
-                } else -> {
-            }
+                    Toast.makeText(
+                        requireContext(), response.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                }
             }
         })
     }
@@ -290,26 +305,26 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
         intent.putExtra(CowpayConstantKeys.Language, CowpayConstantKeys.ENGLISH)
         // use pay with credit card
         intent.putExtra(
-                CowpayConstantKeys.CreditCardMethodType,
-                CowpayConstantKeys.CreditCardMethodPay
+            CowpayConstantKeys.CreditCardMethodType,
+            CowpayConstantKeys.CreditCardMethodPay
         )
 
         intent.putExtra(CowpayConstantKeys.MerchantCode, "3GpZbdrsnOrT")
         intent.putExtra(
-                CowpayConstantKeys.MerchantHashKey,
-                "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
+            CowpayConstantKeys.MerchantHashKey,
+            "\$2y\$10$" + "gqYaIfeqefxI162R6NipSucIwvhO9pbksOf0.OP76CVMZEYBPQlha"
         )
         //order id
-        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, paymentRequestUI.refId)
+        intent.putExtra(CowpayConstantKeys.MerchantReferenceId, syndicateServicesPaymentRequestUI.refId)
         //order price780
-        intent.putExtra(CowpayConstantKeys.Amount, paymentRequestUI.amount.toString())
+        intent.putExtra(CowpayConstantKeys.Amount, syndicateServicesPaymentRequestUI.amount.toString())
         //user data
-        intent.putExtra(CowpayConstantKeys.Description, paymentRequestUI.amount.toString())
-        intent.putExtra(CowpayConstantKeys.CustomerName, params.number)
+        intent.putExtra(CowpayConstantKeys.Description, syndicateServicesPaymentRequestUI.amount.toString())
+        intent.putExtra(CowpayConstantKeys.CustomerName, sharedPref.user)
         intent.putExtra(CowpayConstantKeys.CustomerMobile, sharedPref.mobile)
         intent.putExtra(CowpayConstantKeys.CustomerEmail, "customer@customer.com")
         //user id
-        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, paymentRequestUI.refId)
+        intent.putExtra(CowpayConstantKeys.CustomerMerchantProfileId, syndicateServicesPaymentRequestUI.refId)
 
 
         startActivityForResult(intent, CowpayConstantKeys.PaymentMethodsActivityRequestCode)
@@ -318,16 +333,27 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
     //region
     private fun calculateCommission(paymentOption: Constants.PaymentOption) {
         when (paymentOption) {
-            Constants.PaymentOption.OpayCredit -> newAmount = renewalPayment.amounts?.get(1)?.cardAmount!!
-            Constants.PaymentOption.OpayPOS -> newAmount = renewalPayment.amounts?.get(1)?.posAmount!!
-            Constants.PaymentOption.Fawry -> newAmount = renewalPayment.amounts?.get(0)?.posAmount!!
+            Constants.PaymentOption.OpayCredit -> newAmount =
+                syndicateServicesPaymentUI.amounts?.get(1)?.cardAmount!!
+            Constants.PaymentOption.OpayPOS -> newAmount =
+                syndicateServicesPaymentUI.amounts?.get(1)?.posAmount!!
+            Constants.PaymentOption.Fawry -> newAmount = syndicateServicesPaymentUI.amounts?.get(0)?.posAmount!!
             else -> {}
         }
         binding.newAmount = newAmount
+//        when (paymentOption) {
+//            Constants.PaymentOption.OpayCredit -> commission = if (syndicateServicesPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION)!! > Constants.MIN_COMMISSION) syndicateServicesPaymentUI.paymentItem?.amount?.times(Constants.CC_COMMISSION) as Double else Constants.MIN_COMMISSION
+//            Constants.PaymentOption.OpayPOS -> commission = if (syndicateServicesPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION)!! > Constants.MIN_COMMISSION) syndicateServicesPaymentUI.paymentItem?.amount?.times(Constants.POS_COMMISSION) as Double else Constants.MIN_COMMISSION
+//            Constants.PaymentOption.Fawry -> commission = if (syndicateServicesPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION)!! > Constants.MIN_COMMISSION) syndicateServicesPaymentUI.paymentItem?.amount?.times(Constants.FAWRY_COMMISSION) as Double else Constants.MIN_COMMISSION
+//        }
+//        commission = Math.round(commission * 10.0) / 10.0
+//        newAmount = (syndicateServicesPaymentUI.paymentItem?.amount ?: 0) + commission
+//        binding.newAmount = newAmount
+//        updateCommissionInList()
     }
 
 //    private fun updateCommissionInList() {
-//        renewalPayment.paymentItem?.paymentDetailsItems?.let {
+//        syndicateServicesPaymentUI.paymentItem?.paymentDetailsItems?.let {
 //            it.let {
 //                val tmp = it.toMutableList()
 //                tmp.add(RenewalPaymentUI.PaymentDetailsItem(getString(R.string.commission), commission.toString()))
@@ -375,7 +401,12 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
     }
 
     private fun isDataValid(mobile: String): Boolean {
-        return if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(0, 3).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3).equals("011") || mobile.substring(0, 3).equals("015")))
+        return if (mobile.matches(Regex("[0-9]*")) && mobile.trim().length == 11 && (mobile.substring(
+                0,
+                3
+            ).equals("012") || mobile.substring(0, 3).equals("010") || mobile.substring(0, 3)
+                .equals("011") || mobile.substring(0, 3).equals("015"))
+        )
             true
         else {
             showAlert(getString(R.string.invalid_mobile))
@@ -383,99 +414,21 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
         }
     }
 
-    fun addRenewalRequest(){
-        inquiryDetailsViewModel.addRenewalRequest(sharedPref.mobile, params.number, renewalPayment.paymentItem?.engName ?: "", params.serviceID,
+    fun addSyndicateServicesPaymentRequest() {
+        syndicateServicesDetailsViewModel.addSyndicateServicesPaymentRequest(
+            sharedPref.mobile,
+            sharedPref.user,
+            sharedPref.name,
+            params.serviceID,
+            -1,
             if (rb_card.isChecked) "card" else "pos",
             if (rb_card.isChecked) 2 else if (rb_channel.isChecked) 2 else 1,
             if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE,
-            edAddress.text.toString(), edMobile.text.toString()
+            edAddress.text.toString(),
+            edMobile.text.toString()
         )
     }
 
-    private fun generatePaytabsConfigurationDetails(selectedApm: PaymentSdkApms? = null): PaymentSdkConfigurationDetails {
-        val profileId = "103411"
-        val serverKey = "SKJN6BDTKH-JG26L9WRDL-DNMN2ZZ9RN"
-        val clientKey = "C7KMVN-NV2B6T-MGBPVR-2G72KG"
-        val locale = PaymentSdkLanguageCode.EN /*Or PaymentSdkLanguageCode.AR*/
-        val currency = "EGP"
-        val merchantCountryCode = "EG"
-
-        val billingData = PaymentSdkBillingDetails(
-            "Giza",
-            "eg",
-            "customer@customer.com",
-            "",
-            sharedPref.mobile, "Egypt",
-            binding.edAddress.text.toString(), "132"
-        )
-
-        val shippingData = PaymentSdkShippingDetails(
-            "Giza",
-            "eg",
-            "customer@customer.com",
-            params.number,
-            sharedPref.mobile, "Egypt",
-            binding.edAddress.text.toString(), "132"
-        )
-
-        val configData = PaymentSdkConfigBuilder(
-            profileId,
-            serverKey,
-            clientKey,
-            paymentRequestUI.amount!!,
-            currency
-        )
-            .setCartDescription(paymentRequestUI.amount!!.toString())
-            .setLanguageCode(locale)
-            .setMerchantIcon(
-                ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.payment_sdk_adcb_logo
-                )
-            )
-            .setBillingData(billingData)
-            .setMerchantCountryCode(merchantCountryCode)
-            .setTransactionType(PaymentSdkTransactionType.AUTH)
-            .setTransactionClass(PaymentSdkTransactionClass.ECOM)
-            .setShippingData(shippingData)
-            .setTokenise(PaymentSdkTokenise.USER_MANDATORY) //Check other tokenizing types in PaymentSdkTokenise
-            .setCartId(paymentRequestUI.refId)
-            .showBillingInfo(false)
-            .showShippingInfo(false)
-            .forceShippingInfo(false)
-            .setScreenTitle(params.title)
-
-        if (selectedApm != null)
-            configData.setAlternativePaymentMethods(listOf(selectedApm))
-
-        return configData.build()
-    }
-
-    override fun onError(error: PaymentSdkError) {
-        showAlert(getString(R.string.payment_canceled)) {
-            navController().popBackStack()
-            navController().navigate(R.id.homeFragment)
-        }
-    }
-
-    override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
-        showAlert(
-            if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
-                R.string.payment_successful
-            ) + paymentSdkTransactionDetails.paymentResult?.responseCode
-            else getString(R.string.payment_reference) + paymentSdkTransactionDetails.paymentResult?.responseCode
-        ) {
-            navController().popBackStack()
-            navController().navigate(R.id.homeFragment)
-        }
-    }
-
-    override fun onPaymentCancel() {
-        showAlert(getString(R.string.payment_canceled)) {
-            navController().popBackStack()
-            navController().navigate(R.id.homeFragment)
-        }
-    }
     //endregion
 
     fun navController() = findNavController()
