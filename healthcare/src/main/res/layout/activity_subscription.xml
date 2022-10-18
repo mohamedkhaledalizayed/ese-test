@@ -209,7 +209,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:hint="رقم التوصيل"
+                            android:hint="@string/delivery_phone"
                             android:padding="@dimen/_10sdp"
                             android:textAlignment="viewStart"
                             android:textColor="#748A9D"
@@ -308,7 +308,7 @@
                             android:id="@+id/personal_photo_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="إرفاق صورة شخصية"
+                            android:text="@string/attach_personal"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

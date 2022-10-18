@@ -17,8 +17,8 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class SignupRepositoryImpl @Inject constructor(private val signupDS: SignupDS) : SignupRepository {
-    override fun signup(signupParams: SignupParams): Flow<Response<UserModel>> {
-        return flow { emit(signupDS.signup(signupParams.toSignupBody())) }
+    override fun signup(signupParams: Any): Flow<Response<UserModel>> {
+        return flow { emit(signupDS.signup(signupParams)) }
     }
 
     override fun signUpNeqabtyMember(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity> {

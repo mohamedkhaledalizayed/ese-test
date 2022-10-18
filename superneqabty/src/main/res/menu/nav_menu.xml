@@ -11,14 +11,14 @@
     <group android:id="@+id/menu_seha">
         <item
             android:id="@+id/seha"
-            android:title="صحة مستدامة"
+            android:title="@string/seha"
             android:icon="@drawable/delivered"/>
     </group>
 
     <group android:id="@+id/menu_packages">
         <item
             android:id="@+id/packages"
-            android:title="باقاتى"
+            android:title="@string/packa"
             android:icon="@drawable/delivered"/>
     </group>
 

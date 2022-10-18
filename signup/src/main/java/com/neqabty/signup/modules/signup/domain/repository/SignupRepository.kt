@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 interface SignupRepository {
-    fun signup(signupParams: SignupParams): Flow<Response<UserModel>>
+    fun signup(signupParams: Any): Flow<Response<UserModel>>
     fun signUpNeqabtyMember(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity>
     fun  getSyndicates():  Flow<List<SyndicateListEntity>>
 }

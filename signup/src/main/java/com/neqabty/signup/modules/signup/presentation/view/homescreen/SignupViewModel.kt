@@ -24,7 +24,7 @@ import javax.inject.Inject
 class SignupViewModel @Inject constructor(private val signupUseCase: SignupUseCase) :
     ViewModel() {
     val user = MutableLiveData<Resource<UserModel>>()
-    fun signup(data: SignupParams) {
+    fun signup(data: Any) {
         user.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {

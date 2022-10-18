@@ -10,5 +10,5 @@ data class AccountEntity(
     val image: String?,
     val mobile: String,
     val verifiedAccount: Boolean,
-    val nationalId: String
+    val nationalId: String?
 )

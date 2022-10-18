@@ -37,6 +37,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        LocaleHelper().setLocale(this, sharedPreferences.language)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         invalidateOptionsMenu()
     }
@@ -108,6 +109,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         if (!verifyAvailableNetwork()){
             showAlert(getString(R.string.internet_message), getString(R.string.internet_title)) { finish() }
         }
-        LocaleHelper().setLocale(this,"ar")
+        LocaleHelper().setLocale(this, sharedPreferences.language)
     }
+
 }

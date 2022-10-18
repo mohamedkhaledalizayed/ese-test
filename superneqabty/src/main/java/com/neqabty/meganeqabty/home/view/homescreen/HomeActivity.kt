@@ -25,6 +25,7 @@ import com.neqabty.core.data.Constants.MEGA_HOME
 import com.neqabty.core.data.Constants.SEHA_HOME
 import com.neqabty.core.data.Constants.from
 import com.neqabty.core.ui.BaseActivity
+import com.neqabty.core.utils.LocaleHelper
 import com.neqabty.core.utils.Status
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.aboutapp.AboutAppActivity
@@ -271,6 +272,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(),
 
     @SuppressLint("CutPasteId")
     override fun onResume() {
+        LocaleHelper().setLocale(this, sharedPreferences.language)
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.syndicate_name).text =
             "${sharedPreferences.syndicateName}"
         if (!sharedPreferences.image.isNullOrEmpty()){

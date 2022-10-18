@@ -23,10 +23,12 @@ object Constants {
     const val BASE_URL_PRO_OTP = "https://community.neqabty.com/"
 
     //Main
-    const val BASE_URL_Main = BASE_URL_PRO_SYNDICATE
+    const val BASE_URL_Main = BASE_URL_STAGING_SYNDICATE
+    const val SANDBOX = true
 
     const val NEQABTY_CODE = "e00"
     const val ESE_CODE = "e03"
+    const val TOGAREEN_CODE = "e06"
     var isSyndicateMember = false
     var selectedSyndicateCode = ""
     var selectedSyndicatePosition = 0

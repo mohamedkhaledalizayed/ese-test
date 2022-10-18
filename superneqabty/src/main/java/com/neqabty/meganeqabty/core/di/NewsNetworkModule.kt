@@ -48,7 +48,7 @@ class NewsNetworkModule {
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
         okHttpClient.readTimeout(40, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
-//        okHttpClient.certificatePinner(certificatePinner)
+        okHttpClient.certificatePinner(certificatePinner)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.addInterceptor(interceptor)
         okHttpClient.build()

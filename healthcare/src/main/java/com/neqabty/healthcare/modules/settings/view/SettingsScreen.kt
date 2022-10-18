@@ -23,28 +23,28 @@ class SettingsScreen : BaseActivity<ScreenSettingsBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(titleResId = com.neqabty.meganeqabty.R.string.settings_title)
-//        if (sharedPreferences.language == "ar"){
-//            binding.toggleGroup.check(R.id.btn_arabic)
-//            binding.language.text = "اللغة"
-//        }else{
-//            binding.toggleGroup.check(R.id.btn_english)
-//            binding.language.text = "Language"
-//        }
-//        binding.btnArabic.setOnClickListener {
-//            sharedPreferences.language = "ar"
-//            binding.toggleGroup.check(R.id.btn_arabic)
-//            finish()
-//            startActivity(Intent(this, SettingsScreen::class.java))
-//
-//        }
-//
-//        binding.btnEnglish.setOnClickListener {
-//            sharedPreferences.language = "en"
-//            binding.toggleGroup.check(R.id.btn_english)
-//            finish()
-//            startActivity(Intent(this, SettingsScreen::class.java))
-//
-//        }
+        if (sharedPreferences.language == "ar"){
+            binding.toggleGroup.check(R.id.btn_arabic)
+            binding.language.text = "اللغة"
+        }else{
+            binding.toggleGroup.check(R.id.btn_english)
+            binding.language.text = "Language"
+        }
+        binding.btnArabic.setOnClickListener {
+            sharedPreferences.language = "ar"
+            binding.toggleGroup.check(R.id.btn_arabic)
+            finish()
+            startActivity(Intent(this, SettingsScreen::class.java))
+
+        }
+
+        binding.btnEnglish.setOnClickListener {
+            sharedPreferences.language = "en"
+            binding.toggleGroup.check(R.id.btn_english)
+            finish()
+            startActivity(Intent(this, SettingsScreen::class.java))
+
+        }
     }
 
     override fun onBackPressed() {

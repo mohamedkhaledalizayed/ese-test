@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
@@ -35,11 +36,18 @@ class NetworkModule {
     @Named("healthcare")
     fun provideOkHttpClient(    @Named("healthcare")
                                 loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+
+        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+            .add(
+                "seha.neqabty.com",
+                "sha256/2ZkyETsE1/HOHPaAzvyDe2caoMFT0Q3NMp78+nODjwE="
+            ).build()
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(60, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(60, TimeUnit.SECONDS)
         okHttpClient.readTimeout(60, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(60, TimeUnit.SECONDS)
+        okHttpClient.certificatePinner(certificatePinner)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.build()
         return okHttpClient.build()

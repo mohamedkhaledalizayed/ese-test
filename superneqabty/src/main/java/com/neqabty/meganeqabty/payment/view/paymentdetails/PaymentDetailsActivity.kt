@@ -14,6 +14,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.gson.Gson
+import com.neqabty.core.data.Constants.SANDBOX
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.meganeqabty.R
 import com.neqabty.meganeqabty.core.utils.Constants
@@ -433,7 +434,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
     private fun oPayPayment(paymentEntity: PaymentEntity, isCredit: Boolean) {
         referenceCode = paymentEntity.mobilePaymentPayload!!.reference
         val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
-        PaymentTask.sandBox = false
+        PaymentTask.sandBox = SANDBOX
         val payInput = PayInput(
             publickey = paymentEntity.mobilePaymentPayload.publickey,
             merchantId = paymentEntity.mobilePaymentPayload.merchantId,

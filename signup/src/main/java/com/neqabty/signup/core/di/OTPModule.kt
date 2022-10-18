@@ -1,7 +1,7 @@
 package com.neqabty.signup.core.di
 
 
-import com.neqabty.core.data.Constants.BASE_URL_PRO_OTP
+import com.neqabty.core.data.Constants.BASE_URL_STAGING_OTP
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +22,7 @@ class OTPModule {
     @Provides
     @Named("otp")
     fun providesBaseUrl(): String {
-        return BASE_URL_PRO_OTP
+        return BASE_URL_STAGING_OTP
     }
 
     @Provides
@@ -63,7 +63,7 @@ class OTPModule {
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
         okHttpClient.readTimeout(40, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
-//        okHttpClient.certificatePinner(certificatePinner)
+        okHttpClient.certificatePinner(certificatePinner)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.build()
         okHttpClient.addInterceptor(interceptor)

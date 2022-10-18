@@ -1,9 +1,10 @@
 <resources>
-    <string name="login">تسجيل الدخول</string>
-    <string name="password">كلمة المرور</string>
-    <string name="phone">رقم الموبايل</string>
-    <string name="enter_password">من فضلك ادخل كلمة المرور</string>
-    <string name="something_wrong">حدث خطاء</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="enter_password">Please Enter Password</string>
+    <string name="something_wrong">Something Wrong</string>
+
 
 
 </resources>

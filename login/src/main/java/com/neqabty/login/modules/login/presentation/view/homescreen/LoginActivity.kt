@@ -43,7 +43,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                     Status.SUCCESS -> {
                         dialog.dismiss()
-                        if (resource.data!!.user.account.nationalId.isNotEmpty()){
+                        if (resource.data!!.user.account.mobile.isNotEmpty()){
                             sharedPreferences.isPhoneVerified = resource.data!!.user.account.verifiedAccount
                             sharedPreferences.isSyndicateMember = resource.data!!.user.account.entity.type == "syndicate"
                             sharedPreferences.isAuthenticated = true
@@ -51,11 +51,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             sharedPreferences.email = resource.data!!.user.account.email
                             sharedPreferences.code = resource.data!!.user.account.entity.code
                             sharedPreferences.mainSyndicate = resource.data!!.user.account.entity.id
-                            sharedPreferences.image = resource.data!!.user.account.entity.image
+                            sharedPreferences.image = resource.data!!.user.account.entity.image ?: ""
                             sharedPreferences.syndicateName = resource.data!!.user.account.entity.name
                             sharedPreferences.mobile = binding.etUsername.text.toString()
                             sharedPreferences.name = resource.data!!.user.account.fullName ?: ""
-                            sharedPreferences.nationalId = resource.data!!.user.account.nationalId
+                            sharedPreferences.nationalId = resource.data!!.user.account.nationalId ?: ""
                             sharedPreferences.membershipId = resource.data!!.user.membershipId
                             sharedPreferences.userImage = "${resource.data!!.user.account.image}"
                             finish()

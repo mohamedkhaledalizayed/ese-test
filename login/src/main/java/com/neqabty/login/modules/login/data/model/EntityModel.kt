@@ -11,7 +11,7 @@ data class EntityModel(
     @SerializedName("id")
     val id: Int,
     @SerializedName("image_url")
-    val imageUrl: String,
+    val imageUrl: String?,
     @SerializedName("name")
     val name: String,
     @SerializedName("type")

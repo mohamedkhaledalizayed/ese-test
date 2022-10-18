@@ -1,10 +1,11 @@
 package com.neqabty.news.core.di
 
-import com.neqabty.core.data.Constants.BASE_URL_PRO_NEWS
+import com.neqabty.core.data.Constants.BASE_URL_STAGING_NEWS
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -20,7 +21,7 @@ class NetworkModule {
     @Provides
     @Named("newsModule")
     fun providesBaseUrl(): String {
-        return BASE_URL_PRO_NEWS
+        return BASE_URL_STAGING_NEWS
     }
 
     @Provides
@@ -35,11 +36,18 @@ class NetworkModule {
     @Named("newsModule")
     fun provideOkHttpClient(
         @Named("newsModule")loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+
+        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+            .add(
+                "neqabty.com",
+                "sha256/nt7kxSg6amgrDYO0JQOM+d3Q+G0fgFtBdx76ppVzIS4="
+            ).build()
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(40, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
         okHttpClient.readTimeout(40, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
+        okHttpClient.certificatePinner(certificatePinner)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.addInterceptor(interceptor)
         okHttpClient.build()

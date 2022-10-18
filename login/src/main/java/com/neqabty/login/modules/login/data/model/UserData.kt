@@ -37,7 +37,7 @@ data class UserData(
     @SerializedName("name")
     val name: Any,
     @SerializedName("national_id")
-    val nationalId: Long,
+    val nationalId: String?,
     @SerializedName("registration_date")
     val registrationDate: Any,
     @SerializedName("serial_number")

@@ -35,7 +35,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(title = "صحة مستدامة")
+        setupToolbar(titleResId = R.string.seha)
 
         binding.packagesRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
@@ -43,7 +43,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             override fun setOnRegisterClickListener(item: PackagesEntity) {
 
                 if (item.serviceActionCode == null){
-                    Toast.makeText(this@SearchActivity, "دث خطا", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SearchActivity, "حدث خطا", Toast.LENGTH_LONG).show()
                     return
                 }
                 if (sharedPreferences.isAuthenticated){

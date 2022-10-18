@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class SignupUseCase @Inject constructor(private val signupRepository: SignupRepository) {
 
-    fun build(signupParams: SignupParams): Flow<Response<UserModel>> {
+    fun build(signupParams: Any): Flow<Response<UserModel>> {
         return signupRepository.signup(signupParams)
     }
 

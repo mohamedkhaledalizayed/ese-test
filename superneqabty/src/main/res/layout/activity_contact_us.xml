@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/contact_title_bg"
             android:padding="@dimen/_10sdp"
-            android:text="موقعنا علي الخريطة"
+            android:text="@string/our_location"
             android:textColor="@color/black"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold" />
@@ -76,11 +76,10 @@
                 android:id="@+id/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="التليفون"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_toEndOf="@+id/call_icon"
-                android:layout_marginStart="@dimen/_10sdp"
-                />
+                android:text="@string/telephone" />
 
             <TextView
                 android:id="@+id/phone_number"
@@ -113,11 +112,10 @@
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="البريد الإلكتروني"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_toEndOf="@+id/email_icon"
-                android:layout_marginStart="@dimen/_10sdp"
-                />
+                android:text="@string/email" />
 
             <TextView
                 android:id="@+id/email_address"

@@ -58,7 +58,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(title = "تسجيل إشتراك")
+        setupToolbar(titleResId = R.string.subscription)
 
         binding.ccp.registerCarrierNumberEditText(binding.deliveryPhone)
         name = intent.getStringExtra("name")
@@ -69,8 +69,11 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
         binding.etName.setText(sharedPreferences.name)
         binding.etName.isEnabled = false
-        binding.etNationalId.setText(sharedPreferences.nationalId)
-        binding.etNationalId.isEnabled = false
+        if (!sharedPreferences.nationalId.isNullOrEmpty()){
+            binding.etNationalId.setText(sharedPreferences.nationalId)
+            binding.etNationalId.isEnabled = false
+        }
+
         binding.etEmail.setText(sharedPreferences.email)
         binding.etEmail.isEnabled = false
 //        val intent = Intent(this, SehaPaymentActivity::class.java)

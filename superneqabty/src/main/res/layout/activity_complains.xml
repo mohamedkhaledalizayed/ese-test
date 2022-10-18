@@ -64,7 +64,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image"
-            android:text="لا يوجد اى شكاوى او مقترحات."
+            android:text="@string/no_complains"
             android:textColor="@color/black"
             android:textSize="@dimen/_12ssp"
             android:layout_marginTop="@dimen/_10sdp"/>

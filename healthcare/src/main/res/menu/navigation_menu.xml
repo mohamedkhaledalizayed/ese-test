@@ -11,7 +11,7 @@
     <group android:id="@+id/menu_package">
         <item
             android:id="@+id/packages"
-            android:title="الباقات"
+            android:title="@string/packa"
             android:icon="@drawable/delivered"/>
     </group>
 

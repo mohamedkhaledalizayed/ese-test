@@ -18,6 +18,7 @@ import team.opay.business.cashier.sdk.api.PayInput
 import team.opay.business.cashier.sdk.pay.PaymentTask
 import team.opay.business.cashier.sdk.api.*
 import androidx.activity.viewModels
+import com.neqabty.core.data.Constants.SANDBOX
 import com.neqabty.core.ui.BaseActivity
 import com.neqabty.healthcare.modules.payment.data.model.Payment
 import com.neqabty.healthcare.modules.payment.data.model.SehaPaymentBody
@@ -37,7 +38,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(title = "المدفوعات")
+        setupToolbar(titleResId = R.string.payments_title)
 
         totalAmount = intent.getDoubleExtra("price", 0.0).toInt()
         serviceCode = intent.getStringExtra("serviceCode")!!
@@ -182,7 +183,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>() {
     private fun oPayPayment(paymentEntity: SehaPaymentEntity, isCredit: Boolean) {
         referenceCode = paymentEntity.mobilePaymentPayload!!.reference
         val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
-        PaymentTask.sandBox = false
+        PaymentTask.sandBox = SANDBOX
         val payInput = PayInput(
             publickey = paymentEntity.mobilePaymentPayload.publickey,
             merchantId = paymentEntity.mobilePaymentPayload.merchantId,

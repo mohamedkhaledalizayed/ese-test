@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.core.text.isDigitsOnly
 import com.google.gson.Gson
 import com.neqabty.core.data.Constants
+import com.neqabty.core.data.Constants.TOGAREEN_CODE
 import com.neqabty.core.data.Constants.isSyndicateMember
 import com.neqabty.core.data.Constants.selectedSyndicateCode
 import com.neqabty.core.data.Constants.selectedSyndicatePosition
@@ -21,6 +22,7 @@ import com.neqabty.signup.R
 import com.neqabty.core.utils.isValidEmail
 import com.neqabty.signup.databinding.ActivitySignupBinding
 import com.neqabty.signup.modules.signup.data.model.NeqabtySignupBody
+import com.neqabty.signup.modules.signup.data.model.SignupTogareenBody
 import com.neqabty.signup.modules.signup.domain.entity.SignupParams
 import com.neqabty.signup.modules.signup.domain.entity.syndicate.SyndicateListEntity
 import com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity
@@ -50,6 +52,11 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             binding.checkMember.visibility = View.GONE
         }
 
+        if (selectedSyndicateCode == TOGAREEN_CODE){
+            binding.nationalIdContainer.visibility = View.GONE
+            binding.serialNumberContainer.visibility = View.VISIBLE
+        }
+
         binding.phone.setText(sharedPreferences.mobile)
         binding.phone.isEnabled = false
         binding.spSyndicates.adapter = mSyndicatesAdapter
@@ -57,6 +64,13 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 if (syndicateListEntity != null && i != 0) {
                     syndicateCode = syndicateListEntity?.get(i - 1)!!.code
+                    if (syndicateCode == TOGAREEN_CODE){
+                        binding.nationalIdContainer.visibility = View.GONE
+                        binding.serialNumberContainer.visibility = View.VISIBLE
+                    }else{
+                        binding.nationalIdContainer.visibility = View.VISIBLE
+                        binding.serialNumberContainer.visibility = View.GONE
+                    }
                 }
             }
 
@@ -96,18 +110,18 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                     }
                     Status.SUCCESS -> {
                         dialog.dismiss()
-                        if (resource.data!!.nationalId.isNotEmpty()){
+                        if (resource.data!!.mobile.isNotEmpty()){
                             sharedPreferences.isSyndicateMember = true
                             sharedPreferences.isAuthenticated = true
                             sharedPreferences.mobile = binding.phone.text.toString()
                             sharedPreferences.token = resource.data!!.token.key
                             sharedPreferences.email = binding.email.text.toString()
                             sharedPreferences.name = resource.data!!.fullname ?: ""
-                            sharedPreferences.nationalId = resource.data!!.nationalId
+                            sharedPreferences.nationalId = resource.data!!.nationalId ?: ""
                             sharedPreferences.membershipId = binding.membershipId.text.toString()
                             sharedPreferences.code = resource.data!!.entity.code
                             sharedPreferences.syndicateName = resource.data!!.entity.name
-                            sharedPreferences.image = resource.data!!.entity.imageUrl
+                            sharedPreferences.image = resource.data!!.entity.imageUrl ?: ""
                             confirmMessage(resources.getString(R.string.confirm_message))
                         }else{
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
@@ -133,16 +147,16 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                     }
                     Status.SUCCESS -> {
                         dialog.dismiss()
-                        if (resource.data!!.nationalId.isNotEmpty()){
+                        if (resource.data!!.mobile.isNotEmpty()){
                             sharedPreferences.isAuthenticated = true
                             sharedPreferences.token = resource.data!!.token
                             sharedPreferences.mobile = binding.phone.text.toString()
                             sharedPreferences.name = resource.data!!.fullname ?: ""
-                            sharedPreferences.nationalId = resource.data!!.nationalId
+                            sharedPreferences.nationalId = resource.data!!.nationalId ?: ""
                             sharedPreferences.code = resource.data!!.entityCode
                             sharedPreferences.email = binding.email.text.toString()
                             sharedPreferences.syndicateName = resource.data!!.entityName
-                            sharedPreferences.image = resource.data!!.entityImage
+                            sharedPreferences.image = resource.data!!.entityImage ?: ""
                             finish()
                         }else{
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
@@ -228,11 +242,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             return
         }
 
-        if (binding.nationalId.text.toString().isEmpty() || !binding.nationalId.text.isDigitsOnly() || binding.nationalId.text.toString().length < 14){
-            Toast.makeText(this, resources.getString(R.string.enter_national_id), Toast.LENGTH_LONG).show()
-            return
-        }
-
         if (isSyndicateMember){
 
             if (binding.spSyndicates.selectedItemPosition == 0){
@@ -245,15 +254,36 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 return
             }
 
-            signupViewModel.signup(
-                SignupParams(
-                    entityCode = syndicateCode,
-                    membershipId = binding.membershipId.text.toString(),
-                    mobile = binding.phone.text.toString(),
-                    national_id = binding.nationalId.text.toString(),
-                    email = binding.email.text.toString()
+            if (syndicateCode == TOGAREEN_CODE){
+                if (binding.serialNumber.text.toString().isEmpty()){
+                    Toast.makeText(this, "Enter Serial Number.", Toast.LENGTH_LONG).show()
+                    return
+                }
+                signupViewModel.signup(
+                    SignupTogareenBody(
+                        entityCode = syndicateCode,
+                        membershipId = binding.membershipId.text.toString(),
+                        mobile = binding.phone.text.toString(),
+                        serialNumber = binding.serialNumber.text.toString(),
+                        email = binding.email.text.toString()
+                    )
                 )
-            )
+            }else{
+                if (binding.nationalId.text.toString().isEmpty() || !binding.nationalId.text.isDigitsOnly() || binding.nationalId.text.toString().length < 14){
+                    Toast.makeText(this, resources.getString(R.string.enter_national_id), Toast.LENGTH_LONG).show()
+                    return
+                }
+
+                signupViewModel.signup(
+                    SignupParams(
+                        entityCode = syndicateCode,
+                        membershipId = binding.membershipId.text.toString(),
+                        mobile = binding.phone.text.toString(),
+                        national_id = binding.nationalId.text.toString(),
+                        email = binding.email.text.toString()
+                    )
+                )
+            }
         }else{
 
             if (binding.fullName.text.toString().isEmpty()){

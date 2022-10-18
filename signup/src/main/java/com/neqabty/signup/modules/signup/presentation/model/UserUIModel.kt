@@ -8,8 +8,8 @@ data class UserUIModel(
     val id: Int = 0,
     val image: String?,
     val mobile: String = "",
-    val nationalId: String = "",
+    val nationalId: String? = "",
     val entityName: String = "",
-    val entityImage: String = "",
+    val entityImage: String? = "",
     val entityCode: String = ""
 )

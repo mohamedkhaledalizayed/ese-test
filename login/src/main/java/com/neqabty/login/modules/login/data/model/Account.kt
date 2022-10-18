@@ -25,5 +25,5 @@ data class Account(
     @SerializedName("mobile")
     val mobile: String,
     @SerializedName("national_id")
-    val nationalId: String
+    val nationalId: String?
 )

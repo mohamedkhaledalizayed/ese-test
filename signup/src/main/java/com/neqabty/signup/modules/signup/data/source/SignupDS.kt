@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class SignupDS @Inject constructor(private val signupApi: SignupApi) {
 
-    suspend fun signup(signupBody: SignupBody): Response<UserModel> {
+    suspend fun signup(signupBody: Any): Response<UserModel> {
         return signupApi.syndicateMember(signupBody)
     }
 

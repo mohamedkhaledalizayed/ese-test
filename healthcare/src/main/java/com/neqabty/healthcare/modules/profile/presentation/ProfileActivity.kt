@@ -28,7 +28,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(title = "الباقات")
+        setupToolbar(titleResId = R.string.packa)
 
 
         binding.followersRecycler.adapter = mAdapter

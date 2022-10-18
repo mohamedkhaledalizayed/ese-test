@@ -23,7 +23,7 @@ data class UserModel(
     @SerializedName("mobile")
     val mobile: String,
     @SerializedName("national_id")
-    val nationalId: String,
+    val nationalId: String?,
     @SerializedName("token")
     val token: Token
 )

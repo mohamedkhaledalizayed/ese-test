@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface SignupApi {
 
     @POST("accounts/signup")
-    suspend fun syndicateMember(@Body signupBody: SignupBody): Response<UserModel>
+    suspend fun syndicateMember(@Body signupBody: Any): Response<UserModel>
 
     @POST("accounts/general_signup")
     suspend fun signUpNeqabtyMember(@Body neqabtySignupBody: NeqabtySignupBody): NeqabtyMemberModel

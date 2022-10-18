@@ -31,7 +31,7 @@ class ContactUsActivity : BaseActivity<ActivityContactUsBinding>(), OnMapReadyCa
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(title = "اتصل بنا")
+        setupToolbar(titleResId = R.string.contactus_title)
 
         if (intent.getIntExtra("key", 0) == 101){
             latitude = Constants.NEQABTY_LAT
