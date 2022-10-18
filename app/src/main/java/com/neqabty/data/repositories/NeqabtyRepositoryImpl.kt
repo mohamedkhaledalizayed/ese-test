@@ -275,6 +275,10 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.addSyndicateServicesPaymentRequest(mobileNumber, userNumber, userName, serviceID, countryID, paymentType, paymentGatewayId, locationType, address, mobile)
     }
 
+    override fun createFawryTransaction(refrenceId: String): Observable<FawryTransactionEntity> {
+        return remoteDataStore.createFawryTransaction(refrenceId)
+    }
+
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {
         return remoteDataStore.encrypt(userName, password, description)
     }

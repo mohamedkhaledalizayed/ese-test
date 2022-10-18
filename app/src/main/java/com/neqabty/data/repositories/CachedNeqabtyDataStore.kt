@@ -21,6 +21,10 @@ class CachedNeqabtyDataStore @Inject constructor(private val neqabtyCache: Neqab
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun createFawryTransaction(refrenceId: String): Observable<FawryTransactionEntity> {
+        TODO("Not yet implemented")
+    }
+
     override fun getAllServices(typeID: Int): Observable<List<ServiceEntity>> {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }

@@ -210,6 +210,13 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
     private fun handleViewState(state: MedicalRenewDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
+            state.fawryTransactionUI?.let{
+                showAlert(getString(R.string.payment_reference) + it.referenceNumber){
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+                return
+            }
             state.paymentRequestUI?.let {
                 paymentRequestUI = it
 
@@ -350,7 +357,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
                 }
                 R.id.rb_channel -> oPayPayment(Constants.PaymentOption.OpayPOS)
                 R.id.rb_mobileWallet -> oPayPayment(Constants.PaymentOption.MobileWallet)
-                else -> cowPayPayment(false)
+                else -> medicalRenewDetailsViewModel.createFawryTransaction(paymentRequestUI.refId) //cowPayPayment(false)
             }
             dialog.dismiss()
         }

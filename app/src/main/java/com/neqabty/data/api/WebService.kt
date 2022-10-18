@@ -173,6 +173,11 @@ interface WebService {
         @Body syndicateServicesPaymentRequest: SyndicateServicesPaymentRequest
     ): Observable<ApiResponse<SyndicateServicesPaymentRequestData>>
 
+    @POST("api/v1/transactions/fawry/create-transaction")
+    fun createFawryTransaction(
+        @Body fawryTransactionRequest: FawryTransactionRequest
+    ): Observable<ApiResponse<FawryTransactionData>>
+
     @POST("api/v1/encrypt")
     fun paymentEncryption(@Body encryptionRequest: EncryptionRequest): Observable<EncryptionData>
 

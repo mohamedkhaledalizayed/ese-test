@@ -565,6 +565,14 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
         }
     }
 
+    private val fawryTransactionDataEntityMapper = FawryTransactionDataEntityMapper()
+
+    override fun createFawryTransaction(refrenceId: String): Observable<FawryTransactionEntity> {
+        return api.createFawryTransaction(FawryTransactionRequest(refrenceId)).flatMap { transactionData ->
+            Observable.just(fawryTransactionDataEntityMapper.mapFrom(transactionData.data!!))
+        }
+    }
+
     private val encryptionDataEntityMapper = EncryptionDataEntityMapper()
 
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {

@@ -468,7 +468,7 @@ class MainActivity : AppCompatActivity() {
                 navController().navigate(R.id.signupFragment, bundle)
             }
         })
-        listDataHeader.add(syndicateServicesItem)
+//        listDataHeader.add(syndicateServicesItem)
 
         val engineeringRecordsItem = NavigationMenuItem(R.drawable.ic_menu_records, R.string.engineering_records_title, {
             if (sharedPref.isRegistered)

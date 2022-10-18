@@ -560,6 +560,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideCreateFawryTransaction(neqabtyRepository: NeqabtyRepository): CreateFawryTransaction {
+        return CreateFawryTransaction(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideEncryptData(neqabtyRepository: NeqabtyRepository): EncryptData {
         return EncryptData(ASyncTransformer(), neqabtyRepository)
     }
