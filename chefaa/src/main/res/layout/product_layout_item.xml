@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_115sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        >
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:id="@+id/medication_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/low_stock"
+                android:background="@color/red"
+                android:id="@+id/status"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp" />
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/image_progress"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                android:indeterminate="true"
+                android:theme="@style/AppTheme.Progressbar"
+                />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/medication_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_toEndOf="@+id/frameLayout"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@string/pravotin_100mg_sach_g_medication_name"
+            android:textColor="@color/color_black" />
+
+
+        <TextView
+            android:id="@+id/sachets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medication_title"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toEndOf="@+id/frameLayout"
+            android:text="@string/_14_sachets"
+            android:textSize="@dimen/_10ssp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/medication_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sachets"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toEndOf="@+id/frameLayout"
+            android:text="@string/egp_85_00"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/medication_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medication_price"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toEndOf="@+id/frameLayout"
+            android:text="5 x"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/frameLayout"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="#E1E1E1" />
+
+    </RelativeLayout>
+</layout>
