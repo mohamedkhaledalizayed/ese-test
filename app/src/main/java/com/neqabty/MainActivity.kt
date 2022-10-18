@@ -645,4 +645,14 @@ class MainActivity : AppCompatActivity() {
     }
 //endregion//
     fun navController() = Navigation.findNavController(this, R.id.container)
+
+    override fun onPause() {
+        super.onPause()
+        llBlank.visibility = View.VISIBLE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        llBlank.visibility = View.GONE
+    }
 }
