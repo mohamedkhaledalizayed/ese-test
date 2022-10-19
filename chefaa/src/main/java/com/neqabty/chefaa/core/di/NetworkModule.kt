@@ -19,11 +19,11 @@ import javax.inject.Named
 class NetworkModule {
     @Provides
     fun providesBaseUrl(): String {
-        return "http://3.131.229.146:44392/api/v1/yodawy/"
+        return "http://3.131.229.146:44382/api/v1/chefaa/"
     }
 
     @Provides
-    @Named("yodawy")
+    @Named("chefaa")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -31,9 +31,9 @@ class NetworkModule {
     }
 
     @Provides
-    @Named("yodawy")
+    @Named("chefaa")
     fun provideOkHttpClient(
-        @Named("yodawy") loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+        @Named("chefaa") loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(40, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
@@ -43,7 +43,7 @@ class NetworkModule {
 
                 val request = chain.request()
                 var newRequest = request.newBuilder()
-                    .header("Authorization", "Bearer " + Constants.jwt)
+//                    .header("Authorization", "Bearer " + Constants.jwt)
                     .header("Accept", "application/json")
                     .build()
 
@@ -56,28 +56,14 @@ class NetworkModule {
     }
 
     @Provides
-    @Named("Prescriptions")
-    fun provideOkHttpClientPrescriptions(
-        @Named("yodawy") loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        val okHttpClient = OkHttpClient().newBuilder()
-        okHttpClient.callTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.readTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.addInterceptor(loggingInterceptor)
-        okHttpClient.build()
-        return okHttpClient.build()
-    }
-
-    @Provides
     fun provideConverterFactory(): Converter.Factory {
         return GsonConverterFactory.create()
     }
 
     @Provides
-    @Named("yodawy")
+    @Named("chefaa")
     fun provideRetrofitClient(
-        @Named("yodawy") okHttpClient: OkHttpClient,
+        @Named("chefaa") okHttpClient: OkHttpClient,
         baseUrl: String,
         converterFactory: Converter.Factory
     ): Retrofit {
@@ -89,9 +75,9 @@ class NetworkModule {
     }
 
     @Provides
-    @Named("Prescriptions")
+    @Named("chefaa")
     fun provideRetrofitClientPrescriptions(
-        @Named("Prescriptions") okHttpClient: OkHttpClient,
+        @Named("chefaa") okHttpClient: OkHttpClient,
         baseUrl: String,
         converterFactory: Converter.Factory
     ): Retrofit {

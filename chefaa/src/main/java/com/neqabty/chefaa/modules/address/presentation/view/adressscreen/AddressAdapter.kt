@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.databinding.AddressLayoutItemBinding
-import com.neqabty.chefaa.modules.address.domain.entity.AddressEntity
+import com.neqabty.chefaa.modules.address.domain.entities.AddressEntity
 
 
 class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
@@ -33,8 +33,8 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
-        viewHolder.binding.mainAddress.text = item.addressName
-        viewHolder.binding.addressDetails.text = "شارع ${item.address}, مبنى رقم ${item.buildingNumber}, رقم الطابق ${item.floor}, شقة رقم ${item.apt}"
+        viewHolder.binding.mainAddress.text = item.title
+        viewHolder.binding.addressDetails.text = "شارع ${item.address}, مبنى رقم ${item.buildingNo}, رقم الطابق ${item.floorNo}, شقة رقم ${item.apartmentNo}"
         viewHolder.binding.layoutItem.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)
         }

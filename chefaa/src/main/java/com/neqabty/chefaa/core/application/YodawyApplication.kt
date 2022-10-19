@@ -1,7 +1,7 @@
 package com.neqabty.chefaa.core.application
 
 import android.app.Application
-import com.neqabty.yodawy.core.utils.LocaleHelper
+import com.neqabty.chefaa.core.utils.LocaleHelper
 import dagger.hilt.android.HiltAndroidApp
 
 class ChefaaApplication : Application() {

@@ -19,7 +19,6 @@ import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.data.Constants.LONGITUDE
 import com.neqabty.chefaa.core.data.Constants.LATITUDE
 import com.neqabty.chefaa.databinding.ActivityAddAddressBinding
-import com.neqabty.chefaa.modules.address.domain.params.AddAddressUseCaseParams
 import com.neqabty.chefaa.core.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
@@ -93,16 +92,16 @@ override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater
         }
 
         dialog.show()
-        addAddressViewModel.addAddress(AddAddressUseCaseParams(
-            Constants.mobileNumber,
-            binding.nickname.text.toString(),
-            binding.street.text.toString(),
-            binding.floor.text.toString(),
-            binding.building.text.toString(),
-            binding.apartment.text.toString(),
-            latitude,
-            longitude,
-            binding.landmark.text.toString()))
+        addAddressViewModel.addAddress(
+            phone = Constants.mobileNumber,
+            title = binding.nickname.text.toString(),
+            streetName= binding.street.text.toString(),
+            floor = binding.floor.text.toString().toInt(),
+            buildingNo = binding.building.text.toString().toInt(),
+            apartment = binding.apartment.text.toString().toInt(),
+            lat = latitude.toString() ,
+            long = longitude.toString(),
+            landMark =binding.landmark.text.toString())
         addAddressViewModel.data.observe(this){
             dialog.dismiss()
             finish()

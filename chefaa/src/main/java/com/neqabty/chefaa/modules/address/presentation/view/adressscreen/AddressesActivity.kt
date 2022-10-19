@@ -10,9 +10,9 @@ import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.databinding.ActivityAddressesBinding
 import com.neqabty.chefaa.core.ui.BaseActivity
-import com.neqabty.yodawy.modules.orders.presentation.view.placeprescriptionscreen.CheckOutActivity
+//import com.neqabty.chefaa.modules.orders.presentation.view.placeprescriptionscreen.CheckOutActivity
 import com.neqabty.chefaa.modules.SelectLocationActivity
-import com.neqabty.chefaa.modules.address.domain.entity.AddressEntity
+import com.neqabty.chefaa.modules.address.domain.entities.AddressEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,12 +37,11 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
                         binding.progressActivity.showLoading()
                     }
                     SUCCESS -> {
-                        if (resource.data?.addresses!!.isEmpty()){
+                        if (resource.data!!.isEmpty()){
                             binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "لا يوجد عناوين", "برجاء إضافة عنوان")
                         }else{
-                            Constants.yodawyId = resource.data.yodawyId
                             binding.progressActivity.showContent()
-                            mAdapter.submitList(resource.data.addresses)
+                            mAdapter.submitList(resource.data)
                         }
                     }
                     ERROR -> {
@@ -58,7 +57,7 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
             override fun setOnItemClickListener(addressItem: AddressEntity) {
                 Constants.selectedAddress = addressItem
 
-                startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
+//                startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
                 finish()
             }
         }

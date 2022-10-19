@@ -15,7 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.github.chrisbanes.photoview.PhotoViewAttacher;
-import com.neqabty.yodawy.R;
+import com.neqabty.chefaa.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.neqabty.yodawy.modules.orders.presentation.view.orderdetailscreen
+package com.neqabty.chefaa.modules.orders.presentation.view.orderdetailscreen
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.neqabty.yodawy.R
-import com.neqabty.yodawy.core.utils.replaceText
-import com.neqabty.yodawy.databinding.PrescriptionLayoutItemBinding
+import com.neqabty.chefaa.R
+import com.neqabty.chefaa.core.utils.replaceText
+import com.neqabty.chefaa.databinding.PrescriptionLayoutItemBinding
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 

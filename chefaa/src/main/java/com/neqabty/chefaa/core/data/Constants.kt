@@ -1,15 +1,15 @@
 package com.neqabty.chefaa.core.data
 
 import android.net.Uri
-import com.neqabty.yodawy.modules.address.domain.entity.AddressEntity
-import com.neqabty.yodawy.modules.products.domain.entity.ProductEntity
+import com.neqabty.chefaa.modules.address.domain.entities.AddressEntity
+//import com.neqabty.chefaa.modules.products.domain.entity.ProductEntity
 
 object Constants {
     var yodawyId: String = ""
     lateinit var selectedAddress: AddressEntity
     var userNumber: String = ""
     var mobileNumber: String = ""
-    var cartItems= mutableListOf<Pair<ProductEntity,Int>>()
+//    var cartItems= mutableListOf<Pair<ProductEntity,Int>>()
     var imageList= mutableListOf<Uri>()
 
 
