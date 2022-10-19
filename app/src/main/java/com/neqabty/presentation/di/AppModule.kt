@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.room.Room
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.neqabty.BuildConfig
 import com.neqabty.MyApp
 import com.neqabty.data.api.WebService
@@ -50,7 +52,18 @@ class AppModule {
     @Singleton
     @Provides
     fun provideSharedPreferences(application: Application): SharedPreferences {
-        return PreferenceManager.getDefaultSharedPreferences(application)
+//        return PreferenceManager.getDefaultSharedPreferences(application)
+        val sharedPrefsFile: String = Constants.SHARED_PREFERENCES_NAME
+        val keyGenParameterSpec = MasterKeys.AES256_GCM_SPEC
+        val mainKeyAlias = MasterKeys.getOrCreate(keyGenParameterSpec)
+        val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
+            sharedPrefsFile,
+            mainKeyAlias,
+            application,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+        return sharedPreferences
     }
 
     @Singleton
