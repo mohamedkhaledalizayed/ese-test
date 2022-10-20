@@ -37,4 +37,29 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="colorControlNormal">@color/white</item>
     </style>
+
+
+    <style name="AppTheme.ActionBar" parent="Theme.MaterialComponents.Light">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorPrimaryLight</item>
+        <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="textSizeLarge">@dimen/_11sdp</item>
+        <item name="textSizeMedium">@dimen/_9sdp</item>
+        <item name="textSizeSmall">@dimen/_7sdp</item>
+    </style>
+
+
 </resources>

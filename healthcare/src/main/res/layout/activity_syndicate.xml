@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/_10sdp"
     android:background="@color/splash_bg"
-    tools:context="com.neqabty.healthcare.modules.syndicates.presentation.view.homescreen.SyndicateActivity">
+    tools:context=".commen.syndicates.presentation.view.homescreen.SyndicateActivity">
 
 
     <ImageView

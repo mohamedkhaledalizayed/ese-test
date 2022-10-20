@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layoutDirection="rtl"
-    tools:context=".modules.home.presentation.view.about.AboutFragment">
+    tools:context=".sustainablehealth.home.presentation.view.about.AboutFragment">
 
     <ImageView
         android:id="@+id/close"

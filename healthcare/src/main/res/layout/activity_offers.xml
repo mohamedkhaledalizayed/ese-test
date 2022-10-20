@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".modules.offers.presentation.view.offers.OffersActivity">
+    tools:context=".sustainablehealth.offers.presentation.view.offers.OffersActivity">
 
     <include
         android:id="@+id/toolbar"

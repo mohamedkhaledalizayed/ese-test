@@ -14,9 +14,4 @@
  * limitations under the License.
  */
 include ':pdfcreator'
-include ':superneqabty'
-include ':news'
-include ':login'
-include ':signup'
 include ':healthcare'
-include ':core'

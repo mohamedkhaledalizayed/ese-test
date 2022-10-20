@@ -154,7 +154,7 @@
                 <!--                    android:textColor="@color/colorPrimary"-->
                 <!--                    android:textSize="@dimen/text_size_large" />-->
 
-                <com.neqabty.presentation.ui.common.CustomSwitch
+                <com.neqabty.healthcare.core.ui.CustomSwitch
                     android:id="@+id/switchSaveData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

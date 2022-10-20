@@ -3,7 +3,7 @@ package com.neqabty.healthcare.core.di
 import android.app.Application
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import com.neqabty.core.data.PreferencesHelper
+import com.neqabty.healthcare.core.data.PreferencesHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

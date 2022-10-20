@@ -1,0 +1,10 @@
+package com.neqabty.healthcare.mega.payment.data.model.branches
+
+
+import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
+@Keep
+data class Data(
+    @SerializedName("entity_branches")
+    val entityBranches: List<EntityBranche>
+)
