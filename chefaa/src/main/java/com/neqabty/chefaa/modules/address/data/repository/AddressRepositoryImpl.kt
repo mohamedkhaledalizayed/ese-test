@@ -8,7 +8,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class AddressRepositoryImpl @Inject constructor(private val addressDS: AddressDS): AddressRepository {
+class AddressRepositoryImpl @Inject constructor(private val addressDS: AddressDS) :
+    AddressRepository {
     override fun getAllUserAddress(userPhone: String): Flow<List<AddressEntity>> {
         return flow {
             emit(addressDS.getAllUserAddress(userPhone).map { it.toAddressEntity() })
@@ -27,7 +28,19 @@ class AddressRepositoryImpl @Inject constructor(private val addressDS: AddressDS
         title: String
     ): Flow<AddressEntity> {
         return flow {
-            emit(addressDS.addUserAddress(apartment, buildingNo, floor, landMark, lat, long, phone, streetName, title).toAddressEntity())
+            emit(
+                addressDS.addUserAddress(
+                    apartment,
+                    buildingNo,
+                    floor,
+                    landMark,
+                    lat,
+                    long,
+                    phone,
+                    streetName,
+                    title
+                ).toAddressEntity()
+            )
         }
     }
 
@@ -44,11 +57,38 @@ class AddressRepositoryImpl @Inject constructor(private val addressDS: AddressDS
         addressId: Int
     ): Flow<Int> {
         return flow {
-            emit(addressDS.updateUserAddress(apartment, buildingNo, floor, landMark, lat, long, phone, streetName, title, addressId))
+            emit(
+                addressDS.updateUserAddress(
+                    apartment,
+                    buildingNo,
+                    floor,
+                    landMark,
+                    lat,
+                    long,
+                    phone,
+                    streetName,
+                    title,
+                    addressId
+                )
+            )
         }
     }
 }
 
 fun AddressModel.toAddressEntity(): AddressEntity {
-    return AddressEntity(address, apartmentNo, areaAr, areaEn, buildingNo, cityAr, cityEn, floorNo, id, landmark, latitude, longitude, title)
+    return AddressEntity(
+        address ?: "",
+        apartmentNo ?: "",
+        areaAr ?: "",
+        areaEn ?: "",
+        buildingNo ?: "",
+        cityAr ?: "",
+        cityEn ?: "",
+        floorNo ?: "",
+        id,
+        landmark ?: "",
+        latitude ?: 0.0,
+        longitude ?: 0.0,
+        title ?: ""
+    )
 }

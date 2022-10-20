@@ -20,7 +20,7 @@ package com.neqabty.chefaa.modules.orders.presentation.view.placeprescriptionscr
 //import com.neqabty.chefaa.core.utils.Status
 //import com.neqabty.chefaa.databinding.ActivityCheckOutBinding
 //import com.neqabty.chefaa.modules.orders.presentation.view.placeorderscreen.ConfirmCheckoutActivity
-//import com.neqabty.chefaa.modules.address.presentation.view.homescreen.HomeActivity
+//import com.neqabty.chefaa.modules.home.presentation.homescreen.HomeActivity
 //import com.neqabty.chefaa.modules.orders.data.model.request.OrderRequest
 //import com.neqabty.chefaa.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 //import dagger.hilt.android.AndroidEntryPoint

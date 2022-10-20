@@ -26,6 +26,10 @@ class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        Constants.userNumber = intent.extras!!.getString("user_number", "")
+        Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
+        Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
+
         setupToolbar(titleResId = R.string.addresses)
 
 

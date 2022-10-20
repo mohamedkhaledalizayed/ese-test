@@ -12,7 +12,7 @@ package com.neqabty.chefaa.modules.orders.presentation.view.placeorderscreen
 //import com.neqabty.chefaa.core.ui.BaseActivity
 //import com.neqabty.chefaa.core.utils.Status
 //import com.neqabty.chefaa.databinding.ActivityConfirmCheckoutBinding
-//import com.neqabty.chefaa.modules.address.presentation.view.homescreen.HomeActivity
+//import com.neqabty.chefaa.modules.home.presentation.homescreen.HomeActivity
 //import com.neqabty.chefaa.modules.orders.domain.entity.ItemParam
 //import com.neqabty.chefaa.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 //import dagger.hilt.android.AndroidEntryPoint

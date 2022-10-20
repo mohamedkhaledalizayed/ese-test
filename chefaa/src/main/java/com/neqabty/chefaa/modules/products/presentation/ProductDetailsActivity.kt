@@ -1,4 +1,4 @@
-package com.neqabty.chefaa.modules.products.presentation.view.productscreen
+package com.neqabty.chefaa.modules.products.presentation
 //
 //import android.os.Bundle
 //import android.view.View

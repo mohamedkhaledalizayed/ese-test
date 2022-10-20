@@ -6,7 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".modules.address.presentation.view.homescreen.HomeActivity">
+        tools:context=".modules.home.presentation.homescreen.ChefaaHomeActivity">
 
         <include
             android:id="@+id/layout_header"

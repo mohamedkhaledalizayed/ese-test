@@ -30,17 +30,17 @@
 <!--        <activity-->
 <!--            android:name=".modules.products.presentation.view.productscreen.ProductDetailsActivity"-->
 <!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".modules.products.presentation.view.productscreen.SearchActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".modules.products.presentation.SearchActivity"
+            android:exported="false" />
         <activity
             android:name=".modules.address.presentation.view.addaddressscreen.AddAddressActivity"
             android:exported="false" />
         <activity
             android:name=".modules.address.presentation.view.adressscreen.AddressesActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".modules.address.presentation.view.homescreen.HomeActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".modules.home.presentation.homescreen.ChefaaHomeActivity"
+            android:exported="false" />
     </application>
 </manifest>

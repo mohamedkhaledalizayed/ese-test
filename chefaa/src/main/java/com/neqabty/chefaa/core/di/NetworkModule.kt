@@ -18,6 +18,7 @@ import javax.inject.Named
 @InstallIn(ViewModelComponent::class)
 class NetworkModule {
     @Provides
+    @Named("chefaa")
     fun providesBaseUrl(): String {
         return "http://3.131.229.146:44382/api/v1/chefaa/"
     }
@@ -56,6 +57,7 @@ class NetworkModule {
     }
 
     @Provides
+    @Named("chefaa")
     fun provideConverterFactory(): Converter.Factory {
         return GsonConverterFactory.create()
     }
@@ -64,8 +66,8 @@ class NetworkModule {
     @Named("chefaa")
     fun provideRetrofitClient(
         @Named("chefaa") okHttpClient: OkHttpClient,
-        baseUrl: String,
-        converterFactory: Converter.Factory
+        @Named("chefaa") baseUrl: String,
+        @Named("chefaa") converterFactory: Converter.Factory
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -73,18 +75,18 @@ class NetworkModule {
             .addConverterFactory(converterFactory)
             .build()
     }
-
-    @Provides
-    @Named("chefaa")
-    fun provideRetrofitClientPrescriptions(
-        @Named("chefaa") okHttpClient: OkHttpClient,
-        baseUrl: String,
-        converterFactory: Converter.Factory
-    ): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .client(okHttpClient)
-            .addConverterFactory(converterFactory)
-            .build()
-    }
+//
+//    @Provides
+//    @Named("chefaa")
+//    fun provideRetrofitClientPrescriptions(
+//        @Named("chefaa") okHttpClient: OkHttpClient,
+//        baseUrl: String,
+//        converterFactory: Converter.Factory
+//    ): Retrofit {
+//        return Retrofit.Builder()
+//            .baseUrl(baseUrl)
+//            .client(okHttpClient)
+//            .addConverterFactory(converterFactory)
+//            .build()
+//    }
 }

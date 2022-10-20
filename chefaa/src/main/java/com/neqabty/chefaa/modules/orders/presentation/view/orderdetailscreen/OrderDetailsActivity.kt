@@ -15,7 +15,7 @@ package com.neqabty.chefaa.modules.orders.presentation.view.orderdetailscreen
 //import com.neqabty.chefaa.core.utils.AppUtils
 //import com.neqabty.chefaa.core.utils.Status
 //import com.neqabty.chefaa.databinding.ActivityOrderDetailsBinding
-//import com.neqabty.chefaa.modules.address.presentation.view.homescreen.HomeActivity
+//import com.neqabty.chefaa.modules.home.presentation.homescreen.HomeActivity
 //import dagger.hilt.android.AndroidEntryPoint
 //import dmax.dialog.SpotsDialog
 //

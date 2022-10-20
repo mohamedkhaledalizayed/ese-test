@@ -30,7 +30,7 @@ class AddAddressActivity : BaseActivity<ActivityAddAddressBinding>(), OnMapReady
     private var latitude = 0.0
     private var longitude = 0.0
     private lateinit var dialog: AlertDialog
-override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
