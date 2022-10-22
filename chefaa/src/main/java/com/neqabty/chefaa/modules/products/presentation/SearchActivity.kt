@@ -42,9 +42,9 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         mAdapter.onItemClickListener = object :
             SearchAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: ProductEntity) {
-//                val intent: Intent = Intent(this@SearchActivity, ProductDetailsActivity::class.java)
-//                intent.putExtra("product", item)
-//                startActivity(intent)
+                val intent: Intent = Intent(this@SearchActivity, ProductDetailsActivity::class.java)
+                intent.putExtra("product", item)
+                startActivity(intent)
             }
 
             override fun setOnAddItemClickListener() {

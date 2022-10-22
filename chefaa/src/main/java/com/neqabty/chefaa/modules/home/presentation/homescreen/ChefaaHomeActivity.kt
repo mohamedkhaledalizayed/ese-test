@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
+import com.neqabty.chefaa.core.data.Constants.cartItems
 //import com.neqabty.chefaa.core.data.Constants.cartItems
 import com.neqabty.chefaa.core.data.Constants.imageList
 import com.neqabty.chefaa.core.ui.BaseActivity
@@ -64,15 +65,15 @@ class ChefaaHomeActivity : BaseActivity<ActivityHomeBinding>() {
     }
 
     fun uploadImage(view: View) {
-//        if (cartItems.isNotEmpty()){
-//            showClearCartConfirmationAlert(okCallback = {
-//                cartItems.clear()
-//                invalidateOptionsMenu()
-//                selectImage()
-//            })
-//        }else{
-//           selectImage()
-//        }
+        if (cartItems.isNotEmpty()){
+            showClearCartConfirmationAlert(okCallback = {
+                cartItems.clear()
+                invalidateOptionsMenu()
+                selectImage()
+            })
+        }else{
+           selectImage()
+        }
     }
 
     private fun selectImage(){

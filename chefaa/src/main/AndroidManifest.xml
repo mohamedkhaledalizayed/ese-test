@@ -24,12 +24,12 @@
 <!--        <activity-->
 <!--            android:name=".modules.orders.presentation.view.placeprescriptionscreen.CheckOutActivity"-->
 <!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".modules.CartActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".modules.products.presentation.view.productscreen.ProductDetailsActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".modules.CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.products.presentation.ProductDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".modules.products.presentation.SearchActivity"
             android:exported="false" />
