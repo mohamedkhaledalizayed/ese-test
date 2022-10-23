@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="personal_info">البيانات الشخصية</string>
-    <string name="qualifications">المؤهل الدراسي</string>
+    <string name="qualifications">المؤهلات الدراسية</string>
     <string name="courses">الدورات التدريبية</string>
     <string name="experience">الخبرات السابقة</string>
     <string name="skills">المهارات</string>
-    <string name="languages">اللغات</string>
+    <string name="languages">لغات المهندس</string>
     <string name="engineer_name">اسم المهندس</string>
     <string name="membership_id">رقم العضوية</string>
     <string name="national_id">الرقم القومي</string>
@@ -30,4 +30,25 @@
         <item>ذكر</item>
         <item>أنثى</item>
     </array>
+    <array name="work_out_egypt">
+        <item>هل ترغب فى العمل خارج مصر؟</item>
+        <item>نعم</item>
+        <item>لا</item>
+    </array>
+    <array name="work_out_egypt_before">
+        <item>هل سبق لك العمل بالخارج؟</item>
+        <item>نعم</item>
+        <item>لا</item>
+    </array>
+    <array name="have_car">
+        <item>هل تمتلك سيارة؟</item>
+        <item>نعم</item>
+        <item>لا</item>
+    </array>
+    <array name="have_licence">
+        <item>هل تمتلك رخصة قيادة؟</item>
+        <item>نعم</item>
+        <item>لا</item>
+    </array>
+
 </resources>

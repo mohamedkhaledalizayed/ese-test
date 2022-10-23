@@ -14,6 +14,18 @@
         android:theme="@style/Theme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".modules.specialneeds.view.SpecialNeedsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.qualifications.view.QualificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.work.view.WorkActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.address.view.AddressActivity"
+            android:exported="false" />
+        <activity
             android:name=".modules.personalinfo.view.PersonalInfoActivity"
             android:exported="false" />
         <activity

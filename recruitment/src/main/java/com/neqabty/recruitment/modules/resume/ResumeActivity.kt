@@ -5,7 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import com.neqabty.recruitment.core.ui.BaseActivity
 import com.neqabty.recruitment.databinding.ActivityResumeBinding
+import com.neqabty.recruitment.modules.address.view.AddressActivity
 import com.neqabty.recruitment.modules.personalinfo.view.PersonalInfoActivity
+import com.neqabty.recruitment.modules.qualifications.view.QualificationsActivity
+import com.neqabty.recruitment.modules.specialneeds.view.SpecialNeedsActivity
+import com.neqabty.recruitment.modules.work.view.WorkActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +24,21 @@ class ResumeActivity : BaseActivity<ActivityResumeBinding>() {
 
         binding.personalInfo.setOnClickListener {
             startActivity(Intent(this, PersonalInfoActivity::class.java))
+        }
+        binding.addressContainer.setOnClickListener {
+            startActivity(Intent(this, AddressActivity::class.java))
+        }
+        binding.workContainer.setOnClickListener {
+            startActivity(Intent(this, WorkActivity::class.java))
+        }
+        binding.qualifications.setOnClickListener {
+            startActivity(Intent(this, QualificationsActivity::class.java))
+        }
+        binding.qualifications.setOnClickListener {
+            startActivity(Intent(this, QualificationsActivity::class.java))
+        }
+        binding.specialNeedsContainer.setOnClickListener {
+            startActivity(Intent(this, SpecialNeedsActivity::class.java))
         }
     }
 }
