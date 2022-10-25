@@ -5,16 +5,25 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
+import com.google.gson.Gson
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.commen.profile.data.model.UpdatePasswordBody
+import com.neqabty.healthcare.commen.profile.view.changepassword.ChangePasswordDialog
+import com.neqabty.healthcare.commen.profile.view.model.PasswordError
 import com.neqabty.healthcare.databinding.ActivityProfileMegaBinding
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
+import com.neqabty.healthcare.core.utils.ErrorBody
+import com.neqabty.healthcare.mega.home.view.SuggestionDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
+class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>(), IOnUpdateClickListener {
 
     private val profileViewModel: ProfileViewModel by viewModels()
     override fun getViewBinding() = ActivityProfileMegaBinding.inflate(layoutInflater)
@@ -124,6 +133,30 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
         }
 
+
+        profileViewModel.password.observe(this) {
+
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        Toast.makeText(this, it.data, Toast.LENGTH_LONG).show()
+                    }
+                    Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                        val error = Gson().fromJson(resource.message.toString(), PasswordError::class.java)
+
+                        Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+
+        }
+
         binding.cardBtn.setOnClickListener {
             val intent = Intent(this, UpdateInfoActivity::class.java)
             intent.putExtra("key", 200)
@@ -134,6 +167,13 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
             val intent = Intent(this, UpdateInfoActivity::class.java)
             intent.putExtra("key", 100)
             startActivity(intent)
+        }
+
+        binding.changePassword.setOnClickListener {
+            val fm: FragmentManager = supportFragmentManager
+            val dialog = ChangePasswordDialog()
+            dialog.show(fm, "")
+            dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
         }
     }
 
@@ -149,6 +189,10 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
             binding.membershipIdLayout.visibility = View.GONE
             binding.view.visibility = View.GONE
         }
+    }
+
+    override fun onClick(oldPassword: String, newPassword: String) {
+        profileViewModel.updatePassword(UpdatePasswordBody(oldPassword = oldPassword, newPassword = newPassword))
     }
 
 }

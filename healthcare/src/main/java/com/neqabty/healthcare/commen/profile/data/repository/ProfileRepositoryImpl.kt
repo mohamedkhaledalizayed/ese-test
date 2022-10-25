@@ -1,12 +1,14 @@
 package com.neqabty.healthcare.commen.profile.data.repository
 
 
+import com.neqabty.healthcare.commen.profile.data.model.UpdatePasswordBody
 import com.neqabty.healthcare.commen.profile.data.model.licencestatus.LicenceStatusModel
 import com.neqabty.healthcare.commen.profile.data.model.membershipcardstatus.MemberShipCardStatus
 import com.neqabty.healthcare.commen.profile.data.model.ministrylicence.MinistryLicenseModel
 import com.neqabty.healthcare.commen.profile.data.model.profile.EntityBody
 import com.neqabty.healthcare.commen.profile.data.model.profile.ProfileModel
 import com.neqabty.healthcare.commen.profile.data.model.profile.UserData
+import com.neqabty.healthcare.commen.profile.data.model.updatepaswword.UpdatePasswordModel
 import com.neqabty.healthcare.commen.profile.data.source.ProfileDS
 import com.neqabty.healthcare.commen.profile.domain.entity.MinistryLicenseEntity
 import com.neqabty.healthcare.commen.profile.domain.entity.licencestatus.LicenceStatusEntity
@@ -18,6 +20,7 @@ import com.neqabty.healthcare.commen.profile.domain.repository.ProfileRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
+import retrofit2.Response
 import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS): ProfileRepository {
@@ -49,6 +52,12 @@ class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS
     override fun uploadMinistryLicense(token: String, license: MultipartBody.Part?): Flow<MinistryLicenseEntity> {
         return flow {
             emit(profileDS.uploadMinistryLicense(token, license).toMinistryLicenseEntity())
+        }
+    }
+
+    override fun updatePassword(body: UpdatePasswordBody): Flow<Response<UpdatePasswordModel>> {
+        return flow {
+            emit(profileDS.updatePassword(body))
         }
     }
 

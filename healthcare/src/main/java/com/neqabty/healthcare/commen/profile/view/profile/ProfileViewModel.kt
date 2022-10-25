@@ -3,6 +3,7 @@ package com.neqabty.healthcare.commen.profile.view.profile
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.neqabty.healthcare.commen.profile.data.model.UpdatePasswordBody
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.commen.profile.domain.entity.licencestatus.LicenceStatusEntity
 import com.neqabty.healthcare.commen.profile.domain.entity.membershipcardstatus.CardStatusEntity
@@ -11,6 +12,7 @@ import com.neqabty.healthcare.commen.profile.domain.interactors.ProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -55,6 +57,25 @@ class ProfileViewModel @Inject constructor(private val profileUseCase: ProfileUs
                 }
             }catch (exception:Throwable){
                 licenceStatus.postValue(Resource.error(data = null, message = handleError(exception)))
+            }
+        }
+    }
+
+    val password = MutableLiveData<Resource<String>>()
+    fun updatePassword(body: UpdatePasswordBody) {
+        password.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                profileUseCase.build(body).collect {
+                    if (it.isSuccessful){
+                        password.postValue(Resource.success(data = it.body()!!.message))
+                    }else{
+                        val jObjError = JSONObject(it.errorBody()!!.string()).toString()
+                        password.postValue(Resource.error(data = null, message = jObjError))
+                    }
+                }
+            }catch (exception:Throwable){
+                password.postValue(Resource.error(data = null, message = handleError(exception)))
             }
         }
     }

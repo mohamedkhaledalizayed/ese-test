@@ -103,7 +103,7 @@
             android:name=".mega.payment.view.selectservice.PaymentsActivity"
             android:exported="false" />
         <activity
-            android:name=".mega.home.view.homescreen.MegaHomeActivity"
+            android:name=".mega.home.view.MegaHomeActivity"
             android:exported="true" />
         <activity
             android:name="com.neqabty.healthcare.commen.settings.SettingsActivity"

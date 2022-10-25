@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.mega.home.view.homescreen
+package com.neqabty.healthcare.mega.home.view
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -114,9 +114,6 @@
     <string name="attach_personal">Attach Personal Photo</string>
 
 
-
-
-
     <string name="internet_message">لا يوجد اتصال بالانترنت برجاء التحقق من الاتصال بالانترنت.</string>
     <string name="internet_title">لا يوجد اتصال</string>
 
@@ -126,30 +123,16 @@
     <string name="bank_fees">Bank Fees</string>
 
 
-
-
     <string name="news">News</string>
     <string name="no_news">No News</string>>
     <string name="error">Something Error</string>>
     <string name="source">Source : </string>>
 
 
-
-
-
-
-
-
-
-
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="enter_password">Please Enter Password</string>
     <string name="something_wrong">Something Wrong</string>
-
-
-
-
 
 
     <string name="app_name">Neqabty</string>
@@ -302,14 +285,6 @@ Operation No.</string>
     <string name="no_complains">There is no complains or suggestions</string>
 
 
-
-
-
-
-
-
-
-
     <string name="signup">Sign Up</string>
     <string name="national_id">National Id</string>
     <string name="syndicate_member">Syndicate Member</string>
@@ -330,5 +305,10 @@ Operation No.</string>
     <string name="enter_code">Please enter the code that was sent to the phone number:</string>
     <string name="enter_code_">Please enter the code.</string>
     <string name="serial_number">Serial Number</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="change_password">Change Password</string>
 
 </resources>

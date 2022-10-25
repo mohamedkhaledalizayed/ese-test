@@ -11,7 +11,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivitySettingsBinding
-import com.neqabty.healthcare.mega.home.view.homescreen.MegaHomeActivity
+import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
 import com.neqabty.healthcare.commen.splash.view.SplashActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import dagger.hilt.android.AndroidEntryPoint

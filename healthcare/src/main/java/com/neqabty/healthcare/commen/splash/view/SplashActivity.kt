@@ -55,7 +55,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                                     if (sharedPreferences.isSyndicateMember) {
                                         val mainIntent = Intent(
                                             this@SplashActivity,
-                                            com.neqabty.healthcare.mega.home.view.homescreen.MegaHomeActivity::class.java
+                                            com.neqabty.healthcare.mega.home.view.MegaHomeActivity::class.java
                                         )
                                         startActivity(mainIntent)
                                         finish()

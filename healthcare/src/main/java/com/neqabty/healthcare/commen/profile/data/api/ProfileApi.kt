@@ -1,12 +1,15 @@
 package com.neqabty.healthcare.commen.profile.data.api
 
 
+import com.neqabty.healthcare.commen.profile.data.model.UpdatePasswordBody
 import com.neqabty.healthcare.commen.profile.data.model.cardrequest.CardRequestModel
 import com.neqabty.healthcare.commen.profile.data.model.licencestatus.LicenceStatusModel
 import com.neqabty.healthcare.commen.profile.data.model.membershipcardstatus.MemberShipCardStatus
 import com.neqabty.healthcare.commen.profile.data.model.ministrylicence.MinistryLicenseModel
 import com.neqabty.healthcare.commen.profile.data.model.profile.ProfileModel
+import com.neqabty.healthcare.commen.profile.data.model.updatepaswword.UpdatePasswordModel
 import okhttp3.MultipartBody
+import retrofit2.Response
 import retrofit2.http.*
 
 interface ProfileApi {
@@ -32,5 +35,8 @@ interface ProfileApi {
     @Multipart
     @POST("license_requests")
     suspend fun uploadMinistryLicense(@Header("Authorization") token: String, @Part license: MultipartBody.Part?): MinistryLicenseModel
+
+    @POST("accounts/change_password")
+    suspend fun updatePassword(@Header("Authorization") token: String, @Body body: UpdatePasswordBody): Response<UpdatePasswordModel>
 
 }

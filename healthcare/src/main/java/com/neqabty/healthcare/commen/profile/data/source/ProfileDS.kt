@@ -3,11 +3,14 @@ package com.neqabty.healthcare.commen.profile.data.source
 
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.commen.profile.data.api.ProfileApi
+import com.neqabty.healthcare.commen.profile.data.model.UpdatePasswordBody
 import com.neqabty.healthcare.commen.profile.data.model.licencestatus.LicenceStatusModel
 import com.neqabty.healthcare.commen.profile.data.model.membershipcardstatus.MemberShipCardStatus
 import com.neqabty.healthcare.commen.profile.data.model.ministrylicence.MinistryLicenseModel
 import com.neqabty.healthcare.commen.profile.data.model.profile.ProfileModel
+import com.neqabty.healthcare.commen.profile.data.model.updatepaswword.UpdatePasswordModel
 import okhttp3.MultipartBody
+import retrofit2.Response
 import javax.inject.Inject
 
 class ProfileDS @Inject constructor(private val profileApi: ProfileApi, private val preferencesHelper: PreferencesHelper) {
@@ -30,6 +33,10 @@ class ProfileDS @Inject constructor(private val profileApi: ProfileApi, private 
 
     suspend fun uploadMinistryLicense(token: String, license: MultipartBody.Part?): MinistryLicenseModel{
         return profileApi.uploadMinistryLicense(token, license)
+    }
+
+    suspend fun updatePassword(body: UpdatePasswordBody): Response<UpdatePasswordModel> {
+        return profileApi.updatePassword("Token ${preferencesHelper.token}", body)
     }
 
 }

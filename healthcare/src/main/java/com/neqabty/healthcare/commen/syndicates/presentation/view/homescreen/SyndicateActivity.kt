@@ -19,7 +19,7 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivitySyndicateBinding
-import com.neqabty.healthcare.mega.home.view.homescreen.MegaHomeActivity
+import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
 import com.neqabty.healthcare.commen.syndicates.domain.entity.SyndicateEntity
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.effet.RippleEffect

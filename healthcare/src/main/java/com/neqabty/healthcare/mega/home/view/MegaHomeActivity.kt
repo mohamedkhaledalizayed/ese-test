@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.mega.home.view.homescreen
+package com.neqabty.healthcare.mega.home.view
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
