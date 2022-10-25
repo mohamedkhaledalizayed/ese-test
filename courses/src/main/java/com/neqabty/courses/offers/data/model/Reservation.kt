@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Reservation(
     @SerializedName("cash_url")
-    val cashUrl: String = "",
+    val cashUrl: String? = "",
     @SerializedName("created_at")
     val createdAt: String = "",
     @SerializedName("id")

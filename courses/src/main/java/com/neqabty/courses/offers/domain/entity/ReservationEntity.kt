@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ReservationEntity(
-    val cashUrl: String = "",
+    val cashUrl: String? = "",
     val createdAt: String = "",
     val id: Int = 0,
     val offerInReservationEntity: OfferInReservationEntity = OfferInReservationEntity(),
