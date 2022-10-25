@@ -393,7 +393,7 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
     fun addRenewalRequest(){
         inquiryDetailsViewModel.addRenewalRequest(sharedPref.mobile, params.number, renewalPayment.paymentItem?.engName ?: "", params.serviceID,
             if (rb_card.isChecked) "card" else "pos",
-            if (rb_card.isChecked) 2 else if (rb_channel.isChecked) 2 else 1,
+            if (rb_card.isChecked) 3 else if (rb_channel.isChecked) 2 else 4,
             if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE,
             edAddress.text.toString(), edMobile.text.toString()
         )

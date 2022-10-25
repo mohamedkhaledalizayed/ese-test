@@ -409,7 +409,7 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
     fun paymentInquiry(){
         medicalRenewDetailsViewModel.paymentInquiry(sharedPref.mobile, sharedPref.user, sharedPref.name, 1,
             if (rb_card.isChecked) "card" else "pos",
-            if (rb_card.isChecked) 2 else if (rb_channel.isChecked) 2 else 1,
+            if (rb_card.isChecked) 3 else if (rb_channel.isChecked) 2 else 4,
             deliveryType, address, mobile
         )
     }

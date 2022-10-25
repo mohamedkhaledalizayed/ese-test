@@ -243,7 +243,7 @@ class NeqabtyRepositoryImpl @Inject constructor(
         address: String,
         mobile: String
     ): Observable<PaymentRequestEntity> {
-        return remoteDataStore.addRenewalRequest(mobileNumber, userNumber, userName, 1, paymentType, paymentGatewayId, locationType, address, mobile)
+        return remoteDataStore.addRenewalRequest(mobileNumber, userNumber, userName, serviceID, paymentType, paymentGatewayId, locationType, address, mobile)
     }
 
     override fun inquireSyndicateServicesPayment(
