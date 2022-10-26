@@ -299,10 +299,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_8sdp"
+                        android:textSize="@dimen/_10ssp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:background="@drawable/edit_text_bg"
                         android:inputType="phone"
                         android:hint="رقم الهاتف"
+                        android:textAlignment="viewStart"
                         app:layout_constraintTop_toBottomOf="@id/requirements_icon_text"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>
@@ -316,21 +318,52 @@
                         android:background="@drawable/edit_text_bg"
                         android:inputType="textMultiLine"
                         android:hint="ملاحظات"
+                        android:textSize="@dimen/_10ssp"
                         app:layout_constraintTop_toBottomOf="@id/phone"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>
 
+                    <RelativeLayout
+                        android:id="@+id/upload_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_text_bg"
+                        app:layout_constraintTop_toBottomOf="@id/notes"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_10sdp"
+                        >
+
+                        <TextView
+                            android:id="@+id/image_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="إرفاق صورة"
+                            android:layout_alignParentStart="true"
+                            android:textSize="@dimen/_12ssp"
+                            />
+
+                        <ImageView
+                            android:id="@+id/image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/ic_baseline_file_upload_24"
+                            />
+
+
+                    </RelativeLayout>
                     <TextView
-                        android:id="@+id/image"
+                        android:id="@+id/note"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_10sdp"
-                        android:text="إرفاق صورة"
+                        android:text="@string/note"
+                        android:textColor="@color/black"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/edit_text_bg"
-                        android:textSize="@dimen/_12ssp"
-                        android:drawableEnd="@drawable/ic_baseline_file_upload_24"
-                        app:layout_constraintTop_toBottomOf="@id/notes"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintTop_toBottomOf="@id/upload_image"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -345,7 +378,7 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12ssp"
                         android:textStyle="bold"
-                        app:layout_constraintTop_toBottomOf="@id/image" />
+                        app:layout_constraintTop_toBottomOf="@id/note" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

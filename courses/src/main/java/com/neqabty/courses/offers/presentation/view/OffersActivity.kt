@@ -23,7 +23,7 @@ class OffersActivity : BaseActivity<ActivityOffersBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(title = "الدورات التدريبية")
+        setupToolbar(title = "العروض")
         val courseId = intent.getIntExtra(COURSEID, -1)
         viewModel.getCoursesOffers(courseId)
         val adapter = OffersAdapter(){

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Courses</string>
     <string name="api_key">AIzaSyBOZv4riqvG1mthHKFZ5jUkdvLMzin4Bns</string>
+    <string name="note">
+        ملحوظة برجاء إرفاق : \n
+        صورة كارنية العضوية فى حالة اذا كنت مهندس نقابى \n
+        صورة شهادة التخرج فى حالة اذا كنت مهندس عام \n
+        صورة كارنية الكلية فى حالة اذا كنت طالب جامعى \n
+    </string>
 </resources>
