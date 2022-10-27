@@ -136,6 +136,7 @@ private fun Appointment.toAppointementEntity(): AppointmentEntity {
         id = id,
         offer = offer,
         timeFrom = timeFrom,
+        dayName = dayName,
         timeTo = timeTo
     )
 }

@@ -12,6 +12,8 @@ data class Appointment(
     val offer: Int = 0,
     @SerializedName("time_from")
     val timeFrom: String = "",
+    @SerializedName("day_name")
+    val dayName: String = "",
     @SerializedName("time_to")
     val timeTo: String = ""
 )

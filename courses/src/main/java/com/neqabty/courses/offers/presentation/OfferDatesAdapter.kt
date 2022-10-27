@@ -9,7 +9,7 @@ import com.neqabty.courses.offers.domain.entity.AppointmentEntity
 class OfferDatesAdapter constructor(private var dates : List<AppointmentEntity> = listOf()):RecyclerView.Adapter<OfferDatesAdapter.ViewHolder>() {
     class ViewHolder(private val binding:DatesItemLayoutBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(date:AppointmentEntity){
-            binding.priceTv.text = "Saturday"
+            binding.priceTv.text = date.dayName
             binding.studentTypeTv.text = date.timeFrom
             binding.endTime.text = date.timeTo
         }

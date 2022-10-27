@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingHorizontal="@dimen/_6sdp"
-    android:layout_margin="@dimen/_8sdp">
+    android:layout_marginBottom="@dimen/_10sdp">
 
     <TextView
         android:id="@+id/priceTv"
@@ -17,7 +17,7 @@
         android:padding="@dimen/_4sdp"
         android:paddingVertical="@dimen/_8sdp"
         android:textColor="@color/black"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,10 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/_8sdp"
-        android:background="@color/colorPrimaryLight"
         android:padding="@dimen/_4sdp"
         android:textColor="@color/black"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="@dimen/_12ssp"
         android:layout_marginEnd="@dimen/_22sdp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/endTime"
@@ -46,10 +45,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/_8sdp"
-        android:background="@color/colorPrimaryLight"
         android:padding="@dimen/_4sdp"
         android:textColor="@color/black"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         tools:text="20:00 am"
         app:layout_constraintEnd_toEndOf="parent"

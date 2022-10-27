@@ -14,7 +14,7 @@ class OfferPricingAdapter constructor(
     inner class ViewHolder(private val binding: PricingItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(price: PricingEntity,index:Int) {
-            binding.priceTv.text = price.price
+            binding.priceTv.text = "${price.price} جنيه"
             binding.studentTypeTv.text = price.studentCategoryEntity.name
             binding.bookBtn.setOnClickListener {
                 onBtnClicked(index)

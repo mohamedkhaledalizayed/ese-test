@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.courses.R
 import com.example.courses.databinding.CourseItemBinding
-import com.neqabty.courses.home.data.model.courses.Course
 import com.neqabty.courses.home.domain.entity.CourseEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso

@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item android:id="@+id/filter"
         android:title="تنقية"
         android:icon="@drawable/ic_icon_filter"
         app:showAsAction="always"/>
+
+    <item android:id="@+id/offers"
+        android:title="العروض"
+        android:icon="@drawable/ic_icon_filter"
+        />
+
+    <item android:id="@+id/reservations"
+        android:title="الحجوزات"
+        android:icon="@drawable/ic_icon_filter"
+        />
 </menu>

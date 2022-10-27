@@ -13,6 +13,6 @@ data class ReservationEntity(
     val queueNumber: Int = 0,
     val status: String = "",
     val studentEntity: StudentEntity = StudentEntity(),
-    val transactionId: String = "",
+    val transactionId: String? = "",
     val updatedAt: String = ""
 ) : Parcelable

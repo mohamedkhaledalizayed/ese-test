@@ -2,81 +2,100 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/_6sdp"
-    android:layout_marginEnd="@dimen/_12sdp">
+    android:layout_width="@dimen/_160sdp"
+    android:layout_height="@dimen/_180sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    >
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/_8sdp"
-        app:cardBackgroundColor="@color/gray"
-        app:cardElevation="@dimen/_12sdp"
+        app:cardCornerRadius="@dimen/_6sdp"
+        app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minWidth="@dimen/_88sdp"
-            android:padding="@dimen/_8sdp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/priceTv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_8sdp"
-                android:background="@drawable/course_details_bg"
-                android:padding="@dimen/_4sdp"
-                android:paddingVertical="@dimen/_8sdp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+            <FrameLayout
+                android:id="@+id/offer_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/studentTypeTv"
-                tools:text="1200 EGP" />
-
-            <TextView
-                android:id="@+id/studentTypeTv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_8sdp"
-                android:background="@color/colorPrimaryLight"
-                android:padding="@dimen/_4sdp"
-                android:paddingVertical="@dimen/_8sdp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold"
-                android:maxLines="1"
-                android:minWidth="@dimen/_80sdp"
-                app:layout_constraintWidth_default="wrap"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/priceTv"
-                app:layout_constraintBottom_toTopOf="@id/bookBtn"
-                tools:text="12:00 am" />
+                app:layout_constraintEnd_toEndOf="parent">
 
-            <Button
-                android:id="@+id/bookBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/_8sdp"
-                android:background="@drawable/btn_bg"
-                android:text="احجز الآن"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold"
-                android:singleLine="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/studentTypeTv"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/offer_bg"
+                    android:scaleType="centerCrop"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#B38BC34A"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_10sdp">
+
+                    <TextView
+                        android:id="@+id/priceTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:textAlignment="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="1200 EGP" />
+
+                    <TextView
+                        android:id="@+id/studentTypeTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/priceTv"
+                        app:layout_constraintBottom_toTopOf="@id/bookBtn"
+                        tools:text="12:00 am" />
+
+                    <Button
+                        android:id="@+id/bookBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/course_details_bg"
+                        android:singleLine="true"
+                        android:text="احجز الآن"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+
+                        android:theme="@style/Theme.AppCompat.DayNight"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </FrameLayout>
+
+
+
+        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
 

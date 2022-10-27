@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="عفوا لا يوجد كورسات"
+            android:text="@string/no_courses"
             android:textColor="@color/black"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,10 +74,10 @@
         android:id="@+id/offersFabBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="@dimen/_22sdp"
-        android:text="العروض"
+        android:layout_margin="@dimen/_16sdp"
+        android:text="@string/offers"
         android:textAlignment="center"
-        android:textSize="@dimen/_14ssp"
-        android:textColor="@color/black"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/white"
         android:textStyle="bold"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

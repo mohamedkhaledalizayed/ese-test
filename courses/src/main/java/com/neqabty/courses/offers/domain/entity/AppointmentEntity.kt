@@ -9,5 +9,6 @@ data class AppointmentEntity(
     val id: Int = 0,
     val offer: Int = 0,
     val timeFrom: String = "",
+    val dayName: String = "",
     val timeTo: String = ""
 ) : Parcelable

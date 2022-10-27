@@ -2,9 +2,21 @@
     <string name="app_name">Courses</string>
     <string name="api_key">AIzaSyBOZv4riqvG1mthHKFZ5jUkdvLMzin4Bns</string>
     <string name="note">
-        ملحوظة برجاء إرفاق : \n
-        صورة كارنية العضوية فى حالة اذا كنت مهندس نقابى \n
-        صورة شهادة التخرج فى حالة اذا كنت مهندس عام \n
-        صورة كارنية الكلية فى حالة اذا كنت طالب جامعى \n
+        ملحوظة برجاء إرفاق : \n-
+        صورة كارنية العضوية فى حالة اذا كنت مهندس نقابى. \n-
+        صورة شهادة التخرج فى حالة اذا كنت مهندس عام. \n-
+        صورة كارنية الكلية فى حالة اذا كنت طالب جامعى. \n
     </string>
+    <string name="reservation">احجز الآن</string>
+    <string name="upload_image">إرفاق صورة</string>
+    <string name="notes_title">ملاحظات</string>
+    <string name="phone">رقم الهاتف</string>
+    <string name="dates">المواعيد</string>
+    <string name="address">العنوان</string>
+    <string name="members">عدد المشاركين</string>
+    <string name="contact">للتواصل</string>
+    <string name="end_date">تاريخ الانتهاء</string>
+    <string name="start_date">تاريخ البدء</string>
+    <string name="no_courses">عفوا لا يوجد كورسات</string>
+    <string name="offers">العروض</string>
 </resources>

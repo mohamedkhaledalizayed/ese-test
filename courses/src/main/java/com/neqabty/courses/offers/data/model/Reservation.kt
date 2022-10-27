@@ -21,7 +21,7 @@ data class Reservation(
     @SerializedName("student")
     val student: Student = Student(),
     @SerializedName("transaction_id")
-    val transactionId: String = "",
+    val transactionId: String? = "",
     @SerializedName("updated_at")
     val updatedAt: String = ""
 )

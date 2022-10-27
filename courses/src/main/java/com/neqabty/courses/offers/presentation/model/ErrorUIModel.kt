@@ -1,4 +1,4 @@
-package com.neqabty.courses.home.presentation.model
+package com.neqabty.courses.offers.presentation.model
 
 
 import com.google.gson.annotations.SerializedName

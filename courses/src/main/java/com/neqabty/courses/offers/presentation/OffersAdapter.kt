@@ -14,6 +14,7 @@ class OffersAdapter(private var offersList:List<OfferEntity> = listOf(),private 
             binding.endDateValue.text = offer.endDate
             binding.contactValue.text = offer.contact
             binding.peopleValue.text = offer.numOfTrainees.toString()
+            binding.addressValue.text = offer.address
             binding.root.setOnClickListener {
                 onClick(offer)
             }
