@@ -193,7 +193,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="@string/for_free"
-                        android:textColor="@color/gray_yodawy"
+                        android:textColor="@color/gray"
                         android:textSize="@dimen/_12ssp" />
 
 

@@ -8,13 +8,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.chefaa.R
-import com.neqabty.chefaa.core.data.Constants
-import com.neqabty.chefaa.core.data.Constants.cartItems
-//import com.neqabty.chefaa.core.data.Constants.cartItems
+import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.core.utils.replaceText
 import com.neqabty.chefaa.databinding.MedicationLayoutItemBinding
 import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
-//import com.neqabty.chefaa.modules.products.domain.entity.ProductEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -71,14 +68,11 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
         viewHolder.binding.medicationPrice.text = "EGP ${item.price.toString()}"
 
         viewHolder.binding.addItem.setOnClickListener {
-            if (Constants.imageList.isEmpty()) {
                 viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
                 viewHolder.binding.addItem.visibility = View.GONE
                 //TODO confirm to clear cart
-                cartItems.addOrIncrement(item)
+                cart.productList.addOrIncrement(item)
                 invalidateMenuCallback.invoke()
-            }
-            onItemClickListener?.setOnAddItemClickListener()
         }
 
         viewHolder.binding.viewDetails.setOnClickListener {
@@ -86,12 +80,12 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
         }
 
         //show saved items
-        cartItems.mapIndexed { ind, product ->
-            if (product.first.id == item.id) {
+        cart.productList.mapIndexed { ind, product ->
+            if (product.productId == item.id) {
                 viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
                 viewHolder.binding.addItem.visibility = View.GONE
                 viewHolder.binding.viewDetails.visibility = View.GONE
-                viewHolder.binding.quantity.text = "${cartItems[ind].second}"
+                viewHolder.binding.quantity.text = "${cart.productList[ind].quantity}"
             }
         }
 
@@ -101,19 +95,19 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
 
         //increase
         viewHolder.binding.increase.setOnClickListener {
-            val index = cartItems.addOrIncrement(item)
-            viewHolder.binding.quantity.text = "${cartItems[index].second}"
+            val index = cart.productList.addOrIncrement(item)
+            viewHolder.binding.quantity.text = "${cart.productList[index].quantity}"
             invalidateMenuCallback.invoke()
         }
 
 //        //decrease
         viewHolder.binding.decrease.setOnClickListener {
-            val index = cartItems.removeOrDecrement(item)
+            val index = cart.productList.removeOrDecrement(item)
             if (index == -1) {
                 viewHolder.binding.increaseDecrease.visibility = View.GONE
                 viewHolder.binding.addItem.visibility = View.VISIBLE
             } else {
-                viewHolder.binding.quantity.text = "${cartItems[index].second}"
+                viewHolder.binding.quantity.text = "${cart.productList[index].quantity}"
             }
             invalidateMenuCallback.invoke()
         }
@@ -136,7 +130,6 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
 
     interface OnItemClickListener {
         fun setOnItemClickListener(item: ProductEntity)
-        fun setOnAddItemClickListener()
     }
 
     class ViewHolder(val binding: MedicationLayoutItemBinding) :

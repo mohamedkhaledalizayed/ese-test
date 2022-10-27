@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.neqabty.chefaa">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".core.application.ChefaaApplication"
         android:allowBackup="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".modules.orders.presentation.orderbynote.OrderByNoteActivity"
+            android:exported="false" />
         <activity
             android:name=".modules.SelectLocationActivity"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".modules.orders.presentation.view.placeorderscreen.ConfirmCheckoutActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".modules.orders.presentation.view.orderstatusscreen.OrdersActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".modules.orders.presentation.view.placeprescriptionscreen.CheckOutActivity"-->
-<!--            android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".modules.orders.presentation.view.placeorderscreen.ConfirmCheckoutActivity" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".modules.orders.presentation.view.orderstatusscreen.OrdersActivity" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".modules.orders.presentation.view.placeprescriptionscreen.CheckOutActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".modules.CartActivity"
             android:exported="false" />
@@ -43,4 +46,5 @@
             android:name=".modules.home.presentation.homescreen.ChefaaHomeActivity"
             android:exported="false" />
     </application>
+
 </manifest>

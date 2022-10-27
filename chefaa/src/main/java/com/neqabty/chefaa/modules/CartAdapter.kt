@@ -8,19 +8,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.chefaa.R
-import com.neqabty.chefaa.core.data.Constants.cartItems
+import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.databinding.CartLayoutItemBinding
-import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 
-class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
-    private val items: MutableList<Pair<ProductEntity,Int>> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
-    var onItemClickListener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, i: Int): ViewHolder {
 
@@ -38,19 +35,20 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        if (position == itemCount - 1){
+        if (position == itemCount - 1) {
             viewHolder.binding.view.visibility = View.GONE
-        }else{
+        } else {
             viewHolder.binding.view.visibility = View.VISIBLE
         }
 
         viewHolder.binding.status.visibility = GONE
-        viewHolder.binding.medicationTitle.text = items[position].first.titleEn
-        viewHolder.binding.quantity.text = "${items[position].second}"
-        viewHolder.binding.medicationPrice.text = "${items[position].first.price * items[position].second}"
+        viewHolder.binding.medicationTitle.text = cart.productList[position].productEntity?.titleEn
+        viewHolder.binding.quantity.text = "${cart.productList[position].quantity}"
+        viewHolder.binding.medicationPrice.text =
+            "${cart.productList[position].productEntity?.price?.times(cart.productList[position].quantity)}"
 
         Picasso.get()
-            .load(items[position].first.image)
+            .load(cart.productList[position].productEntity?.image)
             .into(viewHolder.binding.medicationImage, object : Callback {
                 override fun onSuccess() {
                     viewHolder.binding.imageProgress.hide()
@@ -63,47 +61,42 @@ class CartAdapter: RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
         //increase
         viewHolder.binding.increase.setOnClickListener {
-            items[position] = items[position].copy(second = items[position].second + 1)
-            viewHolder.binding.quantity.text = "${items[position].second}"
-            viewHolder.binding.medicationPrice.text = "${items[position].first.price * items[position].second}"
+            cart.productList[position] =
+                cart.productList[position].copy(quantity = cart.productList[position].quantity + 1)
+            viewHolder.binding.quantity.text = "${cart.productList[position].quantity}"
+            viewHolder.binding.medicationPrice.text = "${
+                cart.productList[position].productEntity?.price?.times(
+                    cart.productList[position].quantity
+                )
+            }"
         }
 
         //decrease
         viewHolder.binding.decrease.setOnClickListener {
-            if (items[position].second > 1){
-                items[position] = items[position].copy(second = items[position].second - 1)
-                viewHolder.binding.quantity.text = "${items[position].second}"
-                viewHolder.binding.medicationPrice.text = "${items[position].first.price * items[position].second}"
-            }else{
+            if (cart.productList[position].quantity > 1) {
+                cart.productList[position] =
+                    cart.productList[position].copy(quantity = cart.productList[position].quantity - 1)
+                viewHolder.binding.quantity.text = "${cart.productList[position].quantity}"
+                viewHolder.binding.medicationPrice.text = "${
+                    cart.productList[position].productEntity?.price?.times(
+                        cart.productList[position].quantity
+                    )
+                }"
+            } else {
                 //remove this item
-                cartItems.removeAt(position)
-                submitList(cartItems)
-                onItemClickListener?.notifyUi()
+                cart.productList.removeAt(position)
+                submitList()
             }
         }
 
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = cart.productList.size
 
-    fun submitList(newItems: List<Pair<ProductEntity,Int>>?) {
-        clear()
-        newItems?.let {
-            items.addAll(it)
-            notifyDataSetChanged()
-        }
-    }
-
-    @Suppress("unused")
-    fun clear() {
-        items.clear()
+    fun submitList() {
         notifyDataSetChanged()
     }
 
-    interface OnItemClickListener {
-            fun setOnItemClickListener(itemId: Int)
-            fun notifyUi()
-    }
 
     class ViewHolder(val binding: CartLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root)

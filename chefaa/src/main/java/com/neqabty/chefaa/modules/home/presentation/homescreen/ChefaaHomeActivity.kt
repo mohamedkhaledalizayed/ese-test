@@ -15,11 +15,12 @@ import androidx.appcompat.app.AlertDialog
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
-import com.neqabty.chefaa.core.data.Constants.cartItems
-//import com.neqabty.chefaa.core.data.Constants.cartItems
-import com.neqabty.chefaa.core.data.Constants.imageList
+import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.core.ui.BaseActivity
-import com.neqabty.chefaa.databinding.ActivityHomeBinding
+import com.neqabty.chefaa.databinding.ChefaaActivityHomeBinding
+import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
+import com.neqabty.chefaa.modules.orders.presentation.orderbynote.OrderByNoteActivity
+import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
 import com.neqabty.chefaa.modules.products.presentation.SearchActivity
 //import com.neqabty.chefaa.modules.CartActivity
 //import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
@@ -28,9 +29,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
 @AndroidEntryPoint
-class ChefaaHomeActivity : BaseActivity<ActivityHomeBinding>() {
+class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
     private val homeViewModel: HomeViewModel by viewModels()
-    override fun getViewBinding() = ActivityHomeBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ChefaaActivityHomeBinding.inflate(layoutInflater)
     private lateinit var dialog: android.app.AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,13 +48,13 @@ class ChefaaHomeActivity : BaseActivity<ActivityHomeBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        homeViewModel.userRegistered.observe(this){
-            if (it){
+        homeViewModel.userRegistered.observe(this) {
+            if (it) {
                 dialog.dismiss()
             }
         }
 
-        homeViewModel.registerUser(Constants.mobileNumber,Constants.userNumber,"+20")
+        homeViewModel.registerUser(Constants.mobileNumber, Constants.userNumber, "+20")
     }
 
     fun findMedications(view: View) {
@@ -65,18 +66,14 @@ class ChefaaHomeActivity : BaseActivity<ActivityHomeBinding>() {
     }
 
     fun uploadImage(view: View) {
-        if (cartItems.isNotEmpty()){
-            showClearCartConfirmationAlert(okCallback = {
-                cartItems.clear()
-                invalidateOptionsMenu()
-                selectImage()
-            })
-        }else{
-           selectImage()
-        }
+        selectImage()
     }
 
-    private fun selectImage(){
+    fun orderByNote(view: View){
+        startActivity(Intent(this,OrderByNoteActivity::class.java))
+    }
+
+    private fun selectImage() {
         ImagePicker.with(this)
             .crop()                    //Crop image(Optional), Check Customization for more option
             .compress(1024)            //Final image size will be less than 1 MB(Optional)
@@ -92,7 +89,17 @@ class ChefaaHomeActivity : BaseActivity<ActivityHomeBinding>() {
         when (resultCode) {
             Activity.RESULT_OK -> {
                 val uri: Uri = data?.data!!
-                imageList.add(uri)
+                cart.imageList.add(
+                    OrderItemsEntity(
+                        image = uri.path!!,
+                        quantity = 1,
+                        type = Constants.ITEMTYPES.IMAGE.name,
+                        note = "",
+                        productId = -1,
+                        productEntity = null,
+                        imageUri = uri
+                    )
+                )
             }
             ImagePicker.RESULT_ERROR -> {
                 Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()

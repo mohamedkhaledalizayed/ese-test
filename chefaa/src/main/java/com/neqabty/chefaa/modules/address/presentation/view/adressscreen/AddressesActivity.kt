@@ -8,7 +8,7 @@ import com.neqabty.chefaa.core.utils.Status.SUCCESS
 import androidx.activity.viewModels
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
-import com.neqabty.chefaa.databinding.ActivityAddressesBinding
+import com.neqabty.chefaa.databinding.CehfaaActivityAddressesBinding
 import com.neqabty.chefaa.core.ui.BaseActivity
 //import com.neqabty.chefaa.modules.orders.presentation.view.placeprescriptionscreen.CheckOutActivity
 import com.neqabty.chefaa.modules.SelectLocationActivity
@@ -16,11 +16,11 @@ import com.neqabty.chefaa.modules.address.domain.entities.AddressEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddressesActivity : BaseActivity<ActivityAddressesBinding>() {
+class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>() {
     private val addressViewModel: AddressViewModel by viewModels()
     private val mAdapter = AddressAdapter()
 
-    override fun getViewBinding() = ActivityAddressesBinding.inflate(layoutInflater)
+    override fun getViewBinding() = CehfaaActivityAddressesBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

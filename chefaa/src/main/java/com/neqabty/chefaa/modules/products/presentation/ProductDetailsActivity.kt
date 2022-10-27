@@ -2,12 +2,11 @@ package com.neqabty.chefaa.modules.products.presentation
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
-import com.neqabty.chefaa.R
-import com.neqabty.chefaa.core.data.Constants.cartItems
-import com.neqabty.chefaa.core.data.Constants.imageList
+import com.neqabty.chefaa.core.data.Constants
+import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.databinding.ActivityProductDetailsBinding
+import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -25,7 +24,7 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
         setupToolbar(title = productItem.titleEn)
 
         // render add btn || + - btn
-        if (cartItems.find { it.first.id == productItem.id } != null) {
+        if (cart.productList.find { it.productId == productItem.id } != null) {
             binding.increaseDecrease.visibility = View.VISIBLE
             binding.add.visibility = View.GONE
         } else {
@@ -39,17 +38,17 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
         }
         getIndexInProductsPair(productItem)
         binding.increase.setOnClickListener {
-            val index = cartItems.addOrIncrement(productItem)
-            binding.quantity.text = "${cartItems[index].second}"
+            val index = cart.productList.addOrIncrement(productItem)
+            binding.quantity.text = "${cart.productList[index].quantity}"
         }
 
         binding.decrease.setOnClickListener {
-            val index = cartItems.removeOrDecrement(productItem)
-            if(index==-1){
+            val index = cart.productList.removeOrDecrement(productItem)
+            if (index == -1) {
                 binding.increaseDecrease.visibility = View.GONE
                 binding.add.visibility = View.VISIBLE
-            }else{
-                binding.quantity.text = "${cartItems[index].second}"
+            } else {
+                binding.quantity.text = "${cart.productList[index].quantity}"
             }
         }
 
@@ -71,101 +70,66 @@ class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
     }
 
     private fun addBtnLogic(productItem: ProductEntity) {
-        if (imageList.isNotEmpty()) {
-            showClearCartConfirmationAlert(okCallback = {
-                imageList.clear()
-                addToCart(productItem)
-            })
-        } else {
-            addToCart(productItem)
-        }
+        addToCart(productItem)
     }
 
     private fun addToCart(productItem: ProductEntity) {
-        cartItems.addOrIncrement(productItem)
+        cart.productList.addOrIncrement(productItem)
         binding.increaseDecrease.visibility = View.VISIBLE
         binding.add.visibility = View.GONE
     }
 
     private fun getIndexInProductsPair(productItem: ProductEntity): Int {
         var index = 0
-        cartItems.mapIndexed { ind, item ->
-            if (item.first.id == productItem.id) {
+        cart.productList.mapIndexed { ind, item ->
+            if (item.productId == productItem.id) {
                 index = ind
                 binding.increaseDecrease.visibility = View.VISIBLE
                 binding.add.visibility = View.GONE
-                binding.quantity.text = "${item.second}"
+                binding.quantity.text = "${item.quantity}"
             }
         }
         return index
     }
 
-
-    private fun showLimitedAvailabilityAlert(
-        okCallback: () -> Unit = {},
-        cancelCallback: () -> Unit = {}
-    ) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.alert_title))
-        builder.setMessage(getString(R.string.low_stock_alert))
-        builder.setCancelable(false)
-        builder.setPositiveButton(getString(R.string.alert_ok)) { dialog, which ->
-            okCallback.invoke()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton(getString(R.string.alert_cancel)) { dialog, which ->
-            cancelCallback.invoke()
-            dialog.dismiss()
-        }
-        builder.show()
-    }
 }
 
-fun MutableList<Pair<ProductEntity, Int>>.addOrIncrement(productItem: ProductEntity): Int {
+
+fun MutableList<OrderItemsEntity>.addOrIncrement(productItem: ProductEntity): Int {
     var index = -1
-    var iterator = 0
-    val iterable = this.iterator()
-    while (iterable.hasNext()) {
-        val it = iterable.next()
-        if (it.first.id == productItem.id) {
-            this[iterator] = it.copy(second = it.second + 1)
-            index = iterator
+    cart.productList.mapIndexed { ind, it ->
+        if (it.productId == productItem.id) {
+            cart.productList[ind] = it.copy(quantity = it.quantity + 1)
+            index = ind
         }
-        iterator += 1
     }
     if (index == -1) {
-        this.add(Pair(productItem, 1))
-        index = this.size - 1
+        cart.productList.add(
+            OrderItemsEntity(
+                type = Constants.ITEMTYPES.PRODUCT.name,
+                quantity = 1,
+                image = "",
+                note = "",
+                productId = productItem.id,
+                productEntity = productItem,
+                imageUri = null
+            )
+        )
     }
     return index
 }
 
-fun MutableList<Pair<ProductEntity, Int>>.removeOrDecrement(productItem: ProductEntity): Int {
+fun MutableList<OrderItemsEntity>.removeOrDecrement(productItem: ProductEntity): Int {
     var index = -1
-    var iterator = 0
-    val iterable = this.iterator()
-    while (iterable.hasNext()) {
-        val it = iterable.next()
-        if (it.first.id == productItem.id && it.second > 1) {
-            this[iterator] = it.copy(second = it.second - 1)
-            index = iterator
-        } else if (it.first.id == productItem.id && it.second == 1) {
-            iterable.remove()
+    cart.productList.mapIndexed { ind, orderItemsEntity ->
+        if (orderItemsEntity.productId == productItem.id) {
+            cart.productList[ind] = orderItemsEntity.copy(quantity = orderItemsEntity.quantity - 1)
+            index = ind
         }
-        iterator += 1
+    }
+    if (cart.productList[index].quantity == 0){
+        cart.productList.removeAt(index)
+        index = -1
     }
     return index
-}
-
-
-fun MutableList<Pair<ProductEntity, Int>>.getChildrenCounter(): Int {
-    var count = 0
-    this.forEach { productPair: Pair<ProductEntity, Int> ->
-        count += productPair.second
-    }
-    return count
-}
-
-inline fun <T> List<T>.forEachIterable(block: (T) -> Unit) {
-    with(iterator()) { forEach { block(it) } }
 }

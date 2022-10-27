@@ -18,19 +18,19 @@ import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.data.Constants.LONGITUDE
 import com.neqabty.chefaa.core.data.Constants.LATITUDE
-import com.neqabty.chefaa.databinding.ActivityAddAddressBinding
+import com.neqabty.chefaa.databinding.CehfaaActivityAddAddressBinding
 import com.neqabty.chefaa.core.ui.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
 @AndroidEntryPoint
-class AddAddressActivity : BaseActivity<ActivityAddAddressBinding>(), OnMapReadyCallback {
+class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMapReadyCallback {
     private val addAddressViewModel: AddAddressViewModel by viewModels()
 
     private var latitude = 0.0
     private var longitude = 0.0
     private lateinit var dialog: AlertDialog
-    override fun getViewBinding() = ActivityAddAddressBinding.inflate(layoutInflater)
+    override fun getViewBinding() = CehfaaActivityAddAddressBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

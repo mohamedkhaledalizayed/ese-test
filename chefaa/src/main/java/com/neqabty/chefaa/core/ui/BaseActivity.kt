@@ -16,7 +16,6 @@ import androidx.viewbinding.ViewBinding
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.modules.CartActivity
-import com.neqabty.chefaa.modules.products.presentation.getChildrenCounter
 
 
 abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
@@ -50,14 +49,13 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
             startActivity(Intent(this, CartActivity::class.java))
         }
         cartMenuItem.actionView.findViewById<TextView>(R.id.tv_count).visibility =
-            if (Constants.cartItems.size == 0 && Constants.imageList.size == 0) View.INVISIBLE else View.VISIBLE
+            if (Constants.cart.size == 0 ) View.INVISIBLE else View.VISIBLE
         cartMenuItem.actionView.findViewById<TextView>(R.id.tv_count).text =
             getCartCounter()
     }
 
     private fun getCartCounter(): String{
-        return Math.max(Constants.cartItems.getChildrenCounter(), Constants.imageList.size).toString()
-//        return ""
+        return Constants.cart.getChildrenCounter().toString()
     }
 
     //region Alerts//
