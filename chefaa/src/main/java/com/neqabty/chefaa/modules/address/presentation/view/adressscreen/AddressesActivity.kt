@@ -10,9 +10,10 @@ import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.databinding.CehfaaActivityAddressesBinding
 import com.neqabty.chefaa.core.ui.BaseActivity
-//import com.neqabty.chefaa.modules.orders.presentation.view.placeprescriptionscreen.CheckOutActivity
+//import com.neqabty.chefaa.modules.orders.presentation.placeprescriptionscreen.CheckOutActivity
 import com.neqabty.chefaa.modules.SelectLocationActivity
 import com.neqabty.chefaa.modules.address.domain.entities.AddressEntity
+//import com.neqabty.chefaa.modules.orders.presentation.placeprescriptionscreen.CheckOutActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

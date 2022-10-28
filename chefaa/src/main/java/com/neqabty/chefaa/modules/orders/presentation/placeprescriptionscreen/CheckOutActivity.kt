@@ -1,4 +1,4 @@
-package com.neqabty.chefaa.modules.orders.presentation.view.placeprescriptionscreen
+package com.neqabty.chefaa.modules.orders.presentation.placeprescriptionscreen
 //
 //import android.app.AlertDialog
 //import android.content.Intent
@@ -11,16 +11,12 @@ package com.neqabty.chefaa.modules.orders.presentation.view.placeprescriptionscr
 //import com.google.gson.Gson
 //import com.neqabty.chefaa.R
 //import com.neqabty.chefaa.core.data.Constants
-//import com.neqabty.chefaa.core.data.Constants.cartItems
-//import com.neqabty.chefaa.core.data.Constants.imageList
 //import com.neqabty.chefaa.core.data.Constants.selectedAddress
 //import com.neqabty.chefaa.core.data.Constants.yodawyId
 //import com.neqabty.chefaa.core.ui.BaseActivity
 //import com.neqabty.chefaa.core.utils.FileUtils
 //import com.neqabty.chefaa.core.utils.Status
-//import com.neqabty.chefaa.databinding.ActivityCheckOutBinding
-//import com.neqabty.chefaa.modules.orders.presentation.view.placeorderscreen.ConfirmCheckoutActivity
-//import com.neqabty.chefaa.modules.home.presentation.homescreen.HomeActivity
+//import com.neqabty.chefaa.databinding.CehfaaActivityCheckOutBinding
 //import com.neqabty.chefaa.modules.orders.data.model.request.OrderRequest
 //import com.neqabty.chefaa.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 //import dagger.hilt.android.AndroidEntryPoint
@@ -30,19 +26,18 @@ package com.neqabty.chefaa.modules.orders.presentation.view.placeprescriptionscr
 //import okhttp3.RequestBody
 //
 //@AndroidEntryPoint
-//class CheckOutActivity : BaseActivity<ActivityCheckOutBinding>() {
-//    private val placePrescriptionViewModel: PlacePrescriptionViewModel by viewModels()
+//class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
+//    private val placePrescriptionViewModel: PlaceOrderViewModel by viewModels()
 //    var total: Float = 0.0f
 //    private lateinit var dialog: AlertDialog
-//    override fun getViewBinding() = ActivityCheckOutBinding.inflate(layoutInflater)
+//    override fun getViewBinding() = CehfaaActivityCheckOutBinding.inflate(layoutInflater)
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //        setContentView(binding.root)
 //        setupToolbar(titleResId = R.string.place_order)
 //
 //
-//        binding.addressType.text = selectedAddress.addressName
-//        binding.addressDetails.text = "شارع ${selectedAddress.address}, مبنى رقم ${selectedAddress.buildingNumber}, رقم الطابق ${selectedAddress.floor}, شقة رقم ${selectedAddress.apt}"
+//        binding.addressDetails.text = "شارع ${selectedAddress.address}, مبنى رقم ${selectedAddress.buildingNo}, رقم الطابق ${selectedAddress.floorNo}, شقة رقم ${selectedAddress.apartmentNo}"
 //
 //        dialog = SpotsDialog.Builder()
 //            .setContext(this)

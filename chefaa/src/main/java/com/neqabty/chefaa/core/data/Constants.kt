@@ -49,4 +49,12 @@ data class Cart(
             return count + 1
         return count
     }
+
+    fun getOrderItems(): List<OrderItemsEntity> {
+        val items = mutableListOf<OrderItemsEntity>()
+        note?.let { items.add(it) }
+        items.addAll(productList)
+        items.addAll(imageList)
+        return items
+    }
 }
