@@ -326,23 +326,30 @@ class MedicalRenewDetailsFragment : BaseFragment(), CallbackPaymentInterface {
     private fun calculateCommission(paymentOption: Constants.PaymentOption) {
         when (paymentOption) {
             Constants.PaymentOption.OpayCredit -> newAmount = medicalRenewalPaymentUI.amounts?.get(1)?.cardAmount!!
-            Constants.PaymentOption.OpayPOS -> newAmount = medicalRenewalPaymentUI.amounts?.get(1)?.posAmount!!
-            Constants.PaymentOption.Fawry -> newAmount = medicalRenewalPaymentUI.amounts?.get(0)?.posAmount!!
+            Constants.PaymentOption.OpayPOS -> newAmount = medicalRenewalPaymentUI.amounts?.get(0)?.posAmount!!
+            Constants.PaymentOption.Fawry -> newAmount = medicalRenewalPaymentUI.amounts?.get(2)?.posAmount!!
             else -> {}
         }
         binding.newAmount = newAmount
+        updateCommissionInList(paymentOption)
     }
 
-//    private fun updateCommissionInList() {
-//        medicalRenewalPaymentUI.paymentItem?.paymentDetailsItems?.let {
-//            it.let {
-//                val tmp = it.toMutableList()
-//                tmp.add(MedicalRenewalPaymentUI.PaymentDetailsItem(getString(R.string.commission), commission.toString()))
-//                adapter.submitList(tmp)
-//                rvDetails.adapter = adapter
-//            }
-//        }
-//    }
+    private fun updateCommissionInList(paymentOption: Constants.PaymentOption) {
+        medicalRenewalPaymentUI.paymentItem?.paymentDetailsItems?.let {
+            it.let {
+                val tmp = it.toMutableList()
+                val commission = when (paymentOption) {
+                    Constants.PaymentOption.OpayCredit -> medicalRenewalPaymentUI.amounts?.get(1)?.cardFee!!
+                    Constants.PaymentOption.OpayPOS -> medicalRenewalPaymentUI.amounts?.get(0)?.posFee!!
+                    Constants.PaymentOption.Fawry -> medicalRenewalPaymentUI.amounts?.get(2)?.posFee!!
+                    else -> {}
+                }
+                tmp.add(MedicalRenewalPaymentUI.PaymentDetailsItem(getString(R.string.commission), commission.toString()))
+                adapter.submitList(tmp)
+                rvDetails.adapter = adapter
+            }
+        }
+    }
 
     private fun proceedToPaymentConfirmation() {
         builder = AlertDialog.Builder(requireContext())

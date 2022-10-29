@@ -45,6 +45,10 @@ data class MedicalRenewalPaymentData(
         @field:SerializedName("card_amount")
         var cardAmount: Float?,
         @field:SerializedName("pos_amount")
-        var posAmount: Float?
+        var posAmount: Float?,
+        @field:SerializedName("card_fee")
+        var cardFee: Float?,
+        @field:SerializedName("pos_fee")
+        var posFee: Float?
     )
 }

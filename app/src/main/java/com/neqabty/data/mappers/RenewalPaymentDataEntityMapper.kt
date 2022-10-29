@@ -20,7 +20,9 @@ class RenewalPaymentDataEntityMapper @Inject constructor() :
                     name = it.name,
                     id = it.id,
                     cardAmount = it.cardAmount,
-                    posAmount = it.posAmount
+                    posAmount = it.posAmount,
+                    cardFee = it.cardFee,
+                    posFee = it.posFee
                 )
             },
             paymentItem = from.paymentItem?.let {

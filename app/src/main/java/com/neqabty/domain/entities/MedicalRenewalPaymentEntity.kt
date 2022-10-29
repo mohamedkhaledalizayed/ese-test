@@ -1,7 +1,5 @@
 package com.neqabty.domain.entities
 
-import com.google.gson.annotations.SerializedName
-
 data class MedicalRenewalPaymentEntity(
     var resultType: String = "",
     var requestID: String = "",
@@ -24,13 +22,11 @@ data class MedicalRenewalPaymentEntity(
     )
 
     data class AmountItem(
-        @field:SerializedName("name")
         var name: String? = "",
-        @field:SerializedName("getway_id")
         var id: Int,
-        @field:SerializedName("card_amount")
         var cardAmount: Float?,
-        @field:SerializedName("pos_amount")
-        var posAmount: Float?
+        var posAmount: Float?,
+        var cardFee: Float?,
+        var posFee: Float?
     )
 }

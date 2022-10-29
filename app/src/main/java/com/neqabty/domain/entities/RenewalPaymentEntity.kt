@@ -25,6 +25,8 @@ data class RenewalPaymentEntity(
         var name: String? = "",
         var id: Int,
         var cardAmount: Float?,
-        var posAmount: Float?
+        var posAmount: Float?,
+        var cardFee: Float?,
+        var posFee: Float?
     )
 }

@@ -105,7 +105,6 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
         title = params.title
         binding.number = params.number
 
-        calculateCommission(Constants.PaymentOption.OpayCredit)
         renewalPayment?.let {
             binding.renewalPayment = it
         }
@@ -114,6 +113,8 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             adapter.submitList(it)
             binding.rvDetails.adapter = adapter
         }
+
+        calculateCommission(Constants.PaymentOption.OpayCredit)
 
         rb_home.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
@@ -326,23 +327,30 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
     private fun calculateCommission(paymentOption: Constants.PaymentOption) {
         when (paymentOption) {
             Constants.PaymentOption.OpayCredit -> newAmount = renewalPayment.amounts?.get(1)?.cardAmount!!
-            Constants.PaymentOption.OpayPOS -> newAmount = renewalPayment.amounts?.get(1)?.posAmount!!
-            Constants.PaymentOption.Fawry -> newAmount = renewalPayment.amounts?.get(0)?.posAmount!!
+            Constants.PaymentOption.OpayPOS -> newAmount = renewalPayment.amounts?.get(0)?.posAmount!!
+            Constants.PaymentOption.Fawry -> newAmount = renewalPayment.amounts?.get(2)?.posAmount!!
             else -> {}
         }
         binding.newAmount = newAmount
+        updateCommissionInList(paymentOption)
     }
 
-//    private fun updateCommissionInList() {
-//        renewalPayment.paymentItem?.paymentDetailsItems?.let {
-//            it.let {
-//                val tmp = it.toMutableList()
-//                tmp.add(RenewalPaymentUI.PaymentDetailsItem(getString(R.string.commission), commission.toString()))
-//                adapter.submitList(tmp)
-//                rvDetails.adapter = adapter
-//            }
-//        }
-//    }
+    private fun updateCommissionInList(paymentOption: Constants.PaymentOption) {
+        renewalPayment.paymentItem?.paymentDetailsItems?.let {
+            it.let {
+                val tmp = it.toMutableList()
+                val commission = when (paymentOption) {
+                    Constants.PaymentOption.OpayCredit -> renewalPayment.amounts?.get(1)?.cardFee!!
+                    Constants.PaymentOption.OpayPOS -> renewalPayment.amounts?.get(0)?.posFee!!
+                    Constants.PaymentOption.Fawry -> renewalPayment.amounts?.get(2)?.posFee!!
+                    else -> {}
+                }
+                tmp.add(RenewalPaymentUI.PaymentDetailsItem(getString(R.string.commission), commission.toString()))
+                adapter.submitList(tmp)
+                rvDetails.adapter = adapter
+            }
+        }
+    }
 
     private fun handlePaymentResponse(response: WebJsResponse?) {
         when (response?.orderStatus) {
