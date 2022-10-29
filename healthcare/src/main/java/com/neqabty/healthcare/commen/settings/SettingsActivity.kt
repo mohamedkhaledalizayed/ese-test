@@ -52,10 +52,6 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
         }
     }
 
-    override fun onBackPressed() {
-        finish()
-    }
-
     override fun onResume() {
         super.onResume()
         initializeViews()

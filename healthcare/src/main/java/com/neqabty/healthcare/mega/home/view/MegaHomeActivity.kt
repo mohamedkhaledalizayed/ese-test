@@ -324,7 +324,6 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             R.id.settings_fragment -> {
                 val intent = Intent(this@MegaHomeActivity, SettingsActivity::class.java)
                 startActivity(intent)
-                finish()
             }
             R.id.suggestions -> {
                 val fm: FragmentManager = supportFragmentManager

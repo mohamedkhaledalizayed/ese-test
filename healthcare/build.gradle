@@ -72,7 +72,7 @@ ext {
     corektxVersion = '1.6.0'
     //androidx
     appcompat = '1.4.2'
-    constraintlayout='2.1.1'
+    constraintlayout='2.1.4'
     recyclerview='1.2.1'
     cardview='1.0.0'
     material= '1.6.1'
@@ -145,7 +145,6 @@ dependencies {
     implementation 'com.hbb20:ccp:2.4.7'
 
 
-    implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation project(path: ':pdfcreator')
 
@@ -171,7 +170,5 @@ dependencies {
 
     // Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.6'
-
-    implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
 
 }

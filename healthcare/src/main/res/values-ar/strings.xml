@@ -339,5 +339,6 @@
     <string name="old_password">كلمة السر الحالية</string>
     <string name="new_password">كلمة سر جديدة</string>
     <string name="change_password">تغيير</string>
+    <string name="resend">إرسال الكود</string>
 
 </resources>

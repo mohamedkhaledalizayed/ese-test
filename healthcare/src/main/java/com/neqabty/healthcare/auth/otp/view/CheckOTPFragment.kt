@@ -3,6 +3,7 @@ package com.neqabty.healthcare.auth.otp.view
 
 import android.app.Activity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -67,6 +68,17 @@ class CheckOTPFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val activity = requireActivity() as VerifyPhoneActivity
         changeFocus()
+
+        val timer = object: CountDownTimer(90000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                binding.resendText.text = "إمكانية طلب كود التحقق مرة اخرى بعد : ${ millisUntilFinished / 1000} ثانية."
+            }
+
+            override fun onFinish() {
+                binding.btnResend.isEnabled = true
+            }
+        }
+        timer.start()
 
         binding.btnResend.setOnClickListener {
             activity.onReSendClicked()
