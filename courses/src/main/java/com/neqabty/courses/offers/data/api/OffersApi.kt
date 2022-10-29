@@ -1,6 +1,8 @@
 package com.neqabty.courses.offers.data.api
 
 import com.neqabty.courses.offers.data.model.OffersResponse
+import com.neqabty.courses.offers.data.model.RescheduleRequestBody
+import com.neqabty.courses.offers.data.model.reschedulerequest.RescheduleRequestModel
 import com.neqabty.courses.offers.data.model.reservation.ReservationModel
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -24,4 +26,7 @@ interface OffersApi {
         @Part("student_mobile") student_mobile: String,
         @Part("notes") notes: String,
         @Part("offer") offer: String): Response<ReservationModel>
+
+    @POST("offer_reschedule_requests")
+    suspend fun rescheduleRequests(@Body rescheduleRequestBody: RescheduleRequestBody): RescheduleRequestModel
 }

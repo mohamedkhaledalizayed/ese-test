@@ -1,5 +1,6 @@
 package com.neqabty.courses.offers.data.repository
 
+import com.neqabty.courses.offers.data.model.RescheduleRequestBody
 import com.neqabty.courses.offers.data.model.mapper.toOfferEntity
 import com.neqabty.courses.offers.data.model.reservation.ReservationModel
 import com.neqabty.courses.offers.data.source.OffersDS
@@ -31,5 +32,9 @@ class OffersRepositoryImpl @Inject constructor(private val offersDS: OffersDS): 
         return flow {
             emit(offersDS.reservations(mobile, image, studentMobile, notes, offer))
         }
+    }
+
+    override fun rescheduleRequests(rescheduleRequestBody: RescheduleRequestBody): Flow<String> {
+        return offersDS.rescheduleRequests(rescheduleRequestBody)
     }
 }

@@ -19,4 +19,9 @@
     <string name="start_date">تاريخ البدء</string>
     <string name="no_courses">عفوا لا يوجد كورسات</string>
     <string name="offers">العروض</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="change_date">قم بطلب تغيير ميعاد الكورس انه سيتم الرد من خلال الموظف المختص في حاله توافر مواعيد.</string>
+    <string name="send">إرسال الطلب</string>
+    <string name="pay">دفع</string>
 </resources>

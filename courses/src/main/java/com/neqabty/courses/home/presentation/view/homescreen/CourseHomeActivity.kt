@@ -3,6 +3,7 @@ package com.neqabty.courses.home.presentation.view.homescreen
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import com.example.courses.R
@@ -12,6 +13,7 @@ import com.neqabty.courses.core.utils.Status
 import com.neqabty.courses.home.domain.entity.CourseEntity
 import com.neqabty.courses.home.presentation.view.coursedetails.CourseDetailsActivity
 import com.neqabty.courses.offers.presentation.view.OffersActivity
+import com.neqabty.courses.reservations.presentation.view.ReservationsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -69,6 +71,13 @@ class CourseHomeActivity : BaseActivity<ActivityMainBinding>() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.courses_home_menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.reservations){
+            startActivity(Intent(this, ReservationsActivity::class.java))
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

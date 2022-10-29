@@ -20,6 +20,9 @@
         android:theme="@style/Theme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name="com.neqabty.courses.reservations.presentation.view.ReservationDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name="com.neqabty.courses.reservations.presentation.view.ReservationsActivity"
             android:exported="false" />
         <activity

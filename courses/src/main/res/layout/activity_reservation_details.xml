@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neqabty.courses.offers.presentation.view.OfferDetailsActivity">
+    tools:context="com.neqabty.courses.reservations.presentation.view.ReservationDetailsActivity">
 
 
     <include
@@ -156,7 +156,7 @@
                             android:textStyle="bold"
                             android:letterSpacing="0.1"
                             android:layout_marginEnd="@dimen/_10sdp"
-                             />
+                            />
 
 
 
@@ -319,119 +319,6 @@
                         android:textAlignment="center"
                         />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/datesRv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/dates_item_layout" />
-
-                    <Button
-                        android:id="@+id/change_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="طلب تبديل ميعاد"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:background="@drawable/btn_bg"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@color/gray"/>
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <EditText
-                            android:id="@+id/phone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/_10sdp"
-                            android:textSize="@dimen/_10ssp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:background="@drawable/edit_text_bg"
-                            android:inputType="phone"
-                            android:hint="@string/phone"
-                            android:textAlignment="viewStart"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
-
-                        <EditText
-                            android:id="@+id/notes"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_80sdp"
-                            android:padding="@dimen/_8sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:background="@drawable/edit_text_bg"
-                            android:inputType="textMultiLine"
-                            android:hint="@string/notes_title"
-                            android:textSize="@dimen/_10ssp"
-                            app:layout_constraintTop_toBottomOf="@id/phone"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
-
-                        <RelativeLayout
-                            android:id="@+id/upload_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edit_text_bg"
-                            app:layout_constraintTop_toBottomOf="@id/notes"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:padding="@dimen/_10sdp"
-                            >
-
-                            <TextView
-                                android:id="@+id/image_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/upload_image"
-                                android:layout_alignParentStart="true"
-                                android:textSize="@dimen/_12ssp"
-                                />
-
-                            <ImageView
-                                android:id="@+id/image"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:src="@drawable/ic_baseline_file_upload_24"
-                                />
-
-
-                        </RelativeLayout>
-                        <TextView
-                            android:id="@+id/note"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/_10sdp"
-                            android:text="@string/note"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:textSize="@dimen/_10ssp"
-                            app:layout_constraintTop_toBottomOf="@id/upload_image"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"/>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/pricingRv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/pricing_item_layout" />
 
 
                 </LinearLayout>
@@ -441,7 +328,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/available_date"
-                    android:text="@string/reservation"
+                    android:text="@string/pay"
                     android:padding="@dimen/_10sdp"
                     android:gravity="center"
                     android:textColor="@color/white"

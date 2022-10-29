@@ -11,6 +11,8 @@ import androidx.activity.viewModels
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.example.courses.R
 import com.example.courses.databinding.ActivityOfferDetailsBinding
 import com.google.gson.Gson
@@ -18,6 +20,8 @@ import com.neqabty.courses.core.data.Constants.OFFERDETAILS
 import com.neqabty.courses.core.ui.BaseActivity
 import com.neqabty.courses.core.utils.FileUtils
 import com.neqabty.courses.core.utils.Status
+import com.neqabty.courses.offers.data.model.CourseOfferReschedule
+import com.neqabty.courses.offers.data.model.RescheduleRequestBody
 import com.neqabty.courses.offers.presentation.model.ErrorUIModel
 import com.neqabty.courses.offers.domain.entity.OfferEntity
 import com.neqabty.courses.offers.presentation.OfferDatesAdapter
@@ -31,7 +35,7 @@ import okhttp3.RequestBody
 
 
 @AndroidEntryPoint
-class OfferDetailsActivity : BaseActivity<ActivityOfferDetailsBinding>() {
+class OfferDetailsActivity : BaseActivity<ActivityOfferDetailsBinding>(), IOnSendClicked {
 
     private val offersViewModel: OffersViewModel by viewModels()
 
@@ -78,6 +82,28 @@ class OfferDetailsActivity : BaseActivity<ActivityOfferDetailsBinding>() {
             }
         }
 
+        offersViewModel.requestStatus.observe(this){
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        if (resource.data != null){
+                            Toast.makeText(this, "تم إرسال طلبك بنجاح.", Toast.LENGTH_LONG).show()
+                        }else{
+                            Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                        Toast.makeText(this@OfferDetailsActivity, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+
         binding.bookCourseBtn.setOnClickListener {
 
             if (binding.phone.text.toString().isNullOrEmpty()){
@@ -103,6 +129,12 @@ class OfferDetailsActivity : BaseActivity<ActivityOfferDetailsBinding>() {
 
         binding.uploadImage.setOnClickListener {
             checkPermissionsAndOpenFilePicker()
+        }
+        binding.changeDate.setOnClickListener {
+            val fm: FragmentManager = supportFragmentManager
+            val dialog = ChangeDateDialog()
+            dialog.show(fm, "")
+            dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
         }
     }
 
@@ -169,5 +201,13 @@ class OfferDetailsActivity : BaseActivity<ActivityOfferDetailsBinding>() {
             binding.imageText.setTextColor(resources.getColor(R.color.black))
             binding.imageText.text = "تم إرفاق الصورة بنجاح."
         }
+    }
+
+    override fun onClick(note: String) {
+        offersViewModel.rescheduleRequest(RescheduleRequestBody(CourseOfferReschedule(
+            note = note,
+            offer = 2,
+            studentMobile = "+201022162466"
+        )))
     }
 }
