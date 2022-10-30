@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_90sdp"
+            android:id="@+id/noteTv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/photosRv"
+            android:background="@color/gray"
+            android:layout_margin="@dimen/_8sdp"
+            android:textColor="@color/black"
+            android:padding="@dimen/_12sdp"
+            android:scrollbars="vertical"
+            android:text="common_goosdece;frner;gkfnelgrkebghlejgrmberlgjhbrewglembwgelwgrhmb lweghbmnwlegmnbewlhgmbewgrl.mewbglwegrhmnwbegreo;gjne;gjneg ekj.gbneljkgrbenglejkrgbegrlkje.bgrmelgk.j,ebmgle_play_services_enable_button"
+            android:textSize="@dimen/_16sdp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photosRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/noteTv"
+            tools:listitem="@layout/photo_layout_item" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/_6sdp"
+            app:layout_constraintTop_toBottomOf="@id/photosRv"
+            app:layout_constraintBottom_toTopOf="@id/productRv"
+            android:background="#E1E1E1" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/productRv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/checkout"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            tools:itemCount="12"
+            tools:listitem="@layout/cart_layout_item" />
+
+        <Button
+            android:id="@+id/checkout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_weight="0"
+            android:background="@drawable/add_address_btn_bg"
+            android:onClick="checkOut"
+            android:text="@string/go_to_checkout"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>

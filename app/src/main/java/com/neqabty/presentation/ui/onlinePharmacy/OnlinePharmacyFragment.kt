@@ -6,20 +6,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.neqabty.R
 import com.neqabty.databinding.OnlinePharmacyFragmentBinding
 import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.util.autoCleared
-import com.neqabty.yodawy.modules.PhotosAdapter
 import com.neqabty.yodawy.modules.address.presentation.view.homescreen.HomeActivity
+import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 var animationPlaybackSpeed: Double = 0.8
@@ -88,14 +86,23 @@ class OnlinePharmacyFragment : BaseFragment() {
                     val intent = Intent(requireContext(), HomeActivity::class.java)
                     intent.putExtras(bundle)
                     startActivity(intent)
-                }else{
+                }else if (id==1){
                     navController().navigate(OnlinePharmacyFragmentDirections.openOnlinePharmacyVezeeta())
+                }else{
+                    val bundle = Bundle()
+                    bundle.putString("user_number", PreferencesHelper(requireContext()).user)
+                    bundle.putString("mobile_number", PreferencesHelper(requireContext()).mobile)
+                    bundle.putString("jwt", PreferencesHelper(requireContext()).jwt)
+                    val intent = Intent(requireContext(),  ChefaaHomeActivity::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
                 }
             }
         }
         listOfPharmacies.clear()
         listOfPharmacies.add(Pharmacy(R.drawable.yodawy, getString(R.string.yodawy_title), getString(R.string.yodawy_details)))
         listOfPharmacies.add(Pharmacy(R.drawable.vezeeta, getString(R.string.vezeeta_title), getString(R.string.vezeeta_details)))
+        listOfPharmacies.add(Pharmacy((R.drawable.pharmacy_bg),getString(R.string.chefaa_title),getString(R.string.yodawy_details)))
 
 
         pharmacyAdapter.submitList(listOfPharmacies)

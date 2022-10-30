@@ -221,6 +221,7 @@ dependencies {
     implementation project(':mobilepaymentsdktest')
     implementation project(path: ':pdfcreator')
     implementation project(':yodawy')
+    implementation project(':chefaa')
     testImplementation deps.junit
     testImplementation deps.mock_web_server
     testImplementation(deps.arch_core.testing, {
