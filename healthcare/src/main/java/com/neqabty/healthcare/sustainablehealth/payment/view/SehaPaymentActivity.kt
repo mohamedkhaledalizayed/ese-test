@@ -19,7 +19,7 @@ import androidx.activity.viewModels
 import com.neqabty.healthcare.core.data.Constants.SANDBOX
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
-import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
+import com.neqabty.healthcare.sustainablehealth.receipt.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.Payment
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaPaymentEntity

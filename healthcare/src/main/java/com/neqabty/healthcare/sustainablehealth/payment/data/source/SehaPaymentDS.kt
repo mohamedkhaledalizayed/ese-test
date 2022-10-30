@@ -1,7 +1,7 @@
 package com.neqabty.healthcare.sustainablehealth.payment.data.source
 
 import com.neqabty.healthcare.core.data.PreferencesHelper
-import com.neqabty.healthcare.mega.payment.data.model.paymentmethods.PaymentMethodModel
+import com.neqabty.healthcare.sustainablehealth.receipt.data.model.paymentmethods.PaymentMethodModel
 import com.neqabty.healthcare.sustainablehealth.payment.data.api.PaymentApi
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaPaymentResponse

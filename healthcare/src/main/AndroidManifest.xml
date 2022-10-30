@@ -29,10 +29,10 @@
             android:name=".sustainablehealth.payment.view.SehaPaymentActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity"
+            android:name="com.neqabty.healthcare.sustainablehealth.checkaccountstatus.view.CheckAccountActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.healthcare.commen.splash.view.SplashActivity"
+            android:name="com.neqabty.healthcare.sustainablehealth.splash.view.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,42 +77,28 @@
             android:name=".sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity"
-            android:exported="false"
-            android:theme="@style/Theme.NoActionBar" />
-
-        <activity
-            android:name="com.neqabty.healthcare.commen.contactus.ContactUsActivity"
+            android:name="com.neqabty.healthcare.sustainablehealth.contactus.ContactUsActivity"
             android:exported="false" />
         <activity
-            android:name=".mega.complains.view.ComplainsActivity"
+            android:name="com.neqabty.healthcare.sustainablehealth.profile.view.profile.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity"
+            android:name="com.neqabty.healthcare.sustainablehealth.receipt.view.paymentstatus.PaymentStatusActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity"
+            android:name="com.neqabty.healthcare.sustainablehealth.receipt.view.paymentdetails.PaymentDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".mega.payment.view.paymentstatus.PaymentStatusActivity"
+            android:name="com.neqabty.healthcare.sustainablehealth.receipt.view.selectservice.PaymentsActivity"
             android:exported="false" />
         <activity
-            android:name=".mega.payment.view.paymentdetails.PaymentDetailsActivity"
+            android:name="com.neqabty.healthcare.sustainablehealth.settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".mega.payment.view.selectservice.PaymentsActivity"
+            android:name="com.neqabty.healthcare.sustainablehealth.aboutapp.AboutAppActivity"
             android:exported="false" />
         <activity
-            android:name=".mega.home.view.MegaHomeActivity"
-            android:exported="true" />
-        <activity
-            android:name="com.neqabty.healthcare.commen.settings.SettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.neqabty.healthcare.commen.aboutapp.AboutAppActivity"
-            android:exported="false" />
-        <activity
-            android:name=".mega.payment.view.paymentstatus.PdfCreatorScreen"
+            android:name="com.neqabty.healthcare.sustainablehealth.receipt.view.paymentstatus.PdfCreatorScreen"
             android:exported="false"
             android:label="تحميل اخطار الدفع"
             android:theme="@style/AppTheme.ActionBar" />

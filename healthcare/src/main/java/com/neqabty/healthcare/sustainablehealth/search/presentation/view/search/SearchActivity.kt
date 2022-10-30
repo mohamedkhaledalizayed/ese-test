@@ -112,9 +112,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
             AlertDialog.BUTTON_POSITIVE, "موافق"
         ) { dialog, _ ->
             dialog.dismiss()
-            Constants.isSyndicateMember = false
-            Constants.selectedSyndicateCode = ""
-            Constants.selectedSyndicatePosition = 0
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }

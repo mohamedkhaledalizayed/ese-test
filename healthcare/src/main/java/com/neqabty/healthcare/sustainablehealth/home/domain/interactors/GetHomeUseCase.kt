@@ -9,4 +9,5 @@ class GetHomeUseCase @Inject constructor(private val homeRepository: HomeReposit
     fun build(): Flow<List<AboutEntity>> {
         return homeRepository.getAboutList()
     }
+
 }

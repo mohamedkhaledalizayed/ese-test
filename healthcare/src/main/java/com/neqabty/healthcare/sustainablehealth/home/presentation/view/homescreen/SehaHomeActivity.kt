@@ -23,18 +23,17 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
-import com.neqabty.healthcare.commen.contactus.ContactUsActivity
-import com.neqabty.healthcare.mega.home.domain.entity.AdEntity
+import com.neqabty.healthcare.sustainablehealth.contactus.ContactUsActivity
+import com.neqabty.healthcare.sustainablehealth.home.domain.entity.AdEntity
 import com.neqabty.healthcare.news.domain.entity.NewsEntity
 import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity
 import com.neqabty.healthcare.news.view.newslist.NewsListActivity
-import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
-import com.neqabty.healthcare.commen.settings.SettingsActivity
+import com.neqabty.healthcare.sustainablehealth.checkaccountstatus.view.CheckAccountActivity
+import com.neqabty.healthcare.sustainablehealth.settings.SettingsActivity
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.search.SearchActivity
 import com.neqabty.healthcare.sustainablehealth.suggestions.presentation.SuggestionsActivity
-import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
@@ -218,7 +217,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         when (item.itemId) {
             R.id.profile -> {
                 if (sharedPreferences.isAuthenticated){
-                    val intent = Intent(this@SehaHomeActivity, com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity::class.java)
+                    val intent = Intent(this@SehaHomeActivity, com.neqabty.healthcare.sustainablehealth.profile.view.profile.ProfileActivity::class.java)
                     intent.putExtra("healthcare", true)
                     startActivity(intent)
                 }else{
@@ -242,17 +241,12 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                     askForLogin(getString(R.string.not_found))
                 }
             }
-            R.id.syndicate -> {
-                val intent = Intent(this@SehaHomeActivity, SyndicateActivity::class.java)
-                startActivity(intent)
-            }
             R.id.settings -> {
                 val intent = Intent(this@SehaHomeActivity, SettingsActivity::class.java)
                 startActivity(intent)
             }
             R.id.contactus_fragment -> {
                 val intent = Intent(this@SehaHomeActivity, ContactUsActivity::class.java)
-                intent.putExtra("key", 101)
                 startActivity(intent)
             }
             R.id.suggestions -> {
@@ -331,9 +325,6 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
-            Constants.isSyndicateMember = false
-            Constants.selectedSyndicateCode = ""
-            Constants.selectedSyndicatePosition = 0
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }

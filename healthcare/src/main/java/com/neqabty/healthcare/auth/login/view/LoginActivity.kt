@@ -11,7 +11,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityLoginBinding
-import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
+import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
@@ -47,28 +47,26 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     Status.SUCCESS -> {
                         dialog.dismiss()
                         if (resource.data!!.user.account.mobile.isNotEmpty()){
-                            sharedPreferences.isPhoneVerified = resource.data!!.user.account.verifiedAccount
-                            sharedPreferences.isSyndicateMember = resource.data!!.user.account.entity.type == "syndicate"
+                            sharedPreferences.isPhoneVerified = resource.data.user.account.verifiedAccount
+                            sharedPreferences.isSyndicateMember = resource.data.user.account.entity.type == "syndicate"
                             sharedPreferences.isAuthenticated = true
-                            sharedPreferences.token = resource.data!!.token
-                            sharedPreferences.email = resource.data!!.user.account.email
-                            sharedPreferences.code = resource.data!!.user.account.entity.code
-                            sharedPreferences.mainSyndicate = resource.data!!.user.account.entity.id
-                            sharedPreferences.image = resource.data!!.user.account.entity.image ?: ""
-                            sharedPreferences.syndicateName = resource.data!!.user.account.entity.name
+                            sharedPreferences.token = resource.data.token
+                            sharedPreferences.email = resource.data.user.account.email
+                            sharedPreferences.code = resource.data.user.account.entity.code
+                            sharedPreferences.mainSyndicate = resource.data.user.account.entity.id
+                            sharedPreferences.image = resource.data.user.account.entity.image ?: ""
+                            sharedPreferences.syndicateName = resource.data.user.account.entity.name
                             sharedPreferences.mobile = binding.etUsername.text.toString()
-                            sharedPreferences.name = resource.data!!.user.account.fullName ?: ""
-                            sharedPreferences.nationalId = resource.data!!.user.account.nationalId ?: ""
-                            sharedPreferences.membershipId = resource.data!!.user.membershipId
-                            sharedPreferences.userImage = "${resource.data!!.user.account.image}"
-                                if (resource.data!!.user.account.entity.type == "syndicate"){
-                                    val mainIntent = Intent(this@LoginActivity, MegaHomeActivity::class.java)
+                            sharedPreferences.name = resource.data.user.account.fullName ?: ""
+                            sharedPreferences.nationalId = resource.data.user.account.nationalId ?: ""
+                            sharedPreferences.membershipId = resource.data.user.membershipId
+                            sharedPreferences.userImage = "${resource.data.user.account.image}"
+                                if (resource.data.user.account.entity.type == "owner"){
+                                    val mainIntent = Intent(this@LoginActivity, SehaHomeActivity::class.java)
                                     startActivity(mainIntent)
                                     finish()
                                 }else{
-                                    val mainIntent = Intent(this@LoginActivity, com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity::class.java)
-                                    startActivity(mainIntent)
-                                    finish()
+                                    Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
                                 }
 
                         }else{

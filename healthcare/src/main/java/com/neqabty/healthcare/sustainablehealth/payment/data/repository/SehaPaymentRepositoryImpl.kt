@@ -1,7 +1,7 @@
 package com.neqabty.healthcare.sustainablehealth.payment.data.repository
 
 
-import com.neqabty.healthcare.mega.payment.data.repository.toPaymentMethodsEntity
+import com.neqabty.healthcare.sustainablehealth.receipt.data.repository.toPaymentMethodsEntity
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaMobilePaymentPayloadModel
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaPaymentModel

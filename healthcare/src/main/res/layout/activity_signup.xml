@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@color/white"
-    tools:context=".modules.signup.presentation.view.homescreen.SignupActivity">
+    tools:context=".auth.signup.presentation.view.SignupActivity">
 
 
     <include
@@ -126,112 +126,9 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/serial_number_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:background="@drawable/edit_text"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                >
-
-                <EditText
-                    android:id="@+id/serial_number"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/serial_number"
-                    android:inputType="number"
-                    android:padding="@dimen/_10sdp"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textColorHint="#748A9D"
-                    android:textSize="@dimen/_12ssp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <RadioGroup
-                android:id="@+id/check_member"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/syndicate_member"
-                    android:checked="true"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:id="@+id/syndicate_member"/>
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/neqabty_member"
-                    android:id="@+id/neqabty_member"/>
-
-            </RadioGroup>
-
-            <FrameLayout
-                android:id="@+id/spinner_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/edit_text"
-                android:padding="@dimen/_6sdp">
-
-                <Spinner
-                    android:id="@+id/sp_syndicates"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:popupBackground="@color/white" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|end"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
-            </FrameLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/membership_id_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_text"
-                android:layout_marginTop="@dimen/_10sdp"
-                >
-
-                <EditText
-                    android:id="@+id/membership_id"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/membership_id"
-                    android:padding="@dimen/_10sdp"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textColorHint="#748A9D"
-                    android:textSize="@dimen/_12ssp"
-                    android:inputType="number"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/full_name_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:background="@drawable/edit_text"
                 android:layout_marginTop="@dimen/_10sdp"
                 >
@@ -259,7 +156,6 @@
                 android:id="@+id/password_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 android:background="@drawable/edit_text"
                 android:layout_marginTop="@dimen/_10sdp"
                 >
