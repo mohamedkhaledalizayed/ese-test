@@ -100,7 +100,7 @@
                         app:layout_constraintTop_toTopOf="@id/switchNotifications" />
 
 
-                    <com.neqabty.healthcare.core.ui.CustomSwitch
+                    <com.neqabty.shealth.core.ui.CustomSwitch
                         android:id="@+id/switchNotifications"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -1,0 +1,14 @@
+package com.neqabty.shealth.auth.login.domain.entity
+
+
+
+data class AccountEntity(
+    val email: String,
+    val entity: Entity,
+    val fullName: String?,
+    val id: Int,
+    val image: String?,
+    val mobile: String,
+    val verifiedAccount: Boolean,
+    val nationalId: String?
+)

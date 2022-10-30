@@ -1,0 +1,142 @@
+package com.neqabty.shealth.sustainablehealth.search.presentation.view.search
+
+
+import android.app.AlertDialog
+import android.content.Intent
+import android.os.Bundle
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import android.widget.Toast
+import com.neqabty.shealth.core.data.Constants
+import com.neqabty.shealth.core.utils.Status
+import com.neqabty.shealth.databinding.ActivitySearchBinding
+import com.neqabty.shealth.sustainablehealth.offers.presentation.view.offers.OffersActivity
+import com.neqabty.shealth.sustainablehealth.search.domain.entity.packages.PackagesEntity
+import com.neqabty.shealth.sustainablehealth.search.presentation.view.filter.FiltersViewModel
+import com.neqabty.shealth.sustainablehealth.search.presentation.view.searchresult.SearchResultActivity
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.activity.viewModels
+import com.neqabty.shealth.core.ui.BaseActivity
+import com.neqabty.shealth.R
+import com.neqabty.shealth.auth.signup.presentation.view.SignupActivity
+import com.neqabty.shealth.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
+
+
+@AndroidEntryPoint
+class SearchActivity : BaseActivity<ActivitySearchBinding>() {
+
+
+    private val filtersViewModel: FiltersViewModel by viewModels()
+    private val mAdapter = PackagesAdapter()
+    override fun getViewBinding() = ActivitySearchBinding.inflate(layoutInflater)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+        setupToolbar(titleResId = R.string.seha)
+
+        binding.packagesRecycler.adapter = mAdapter
+        mAdapter.onItemClickListener = object :
+            PackagesAdapter.OnItemClickListener {
+            override fun setOnRegisterClickListener(item: PackagesEntity) {
+
+                if (item.serviceActionCode == null){
+                    Toast.makeText(this@SearchActivity, "حدث خطا", Toast.LENGTH_LONG).show()
+                    return
+                }
+                if (sharedPreferences.isAuthenticated){
+                    val intent = Intent(this@SearchActivity, SubscriptionActivity::class.java)
+                    intent.putExtra("name", item.name )
+                    intent.putExtra("price", item.price )
+                    intent.putExtra("serviceCode", item.serviceCode )
+                    intent.putExtra("maxFollowers", item.maxFollower )
+                    intent.putExtra("serviceActionCode", item.serviceActionCode )
+                    startActivity(intent)
+                }else{
+                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
+                }
+//                comingSoon("سوف يتم توفير هذه الخدمة قريبا.")
+            }
+        }
+
+        if (sharedPreferences.code.isNullOrEmpty()){
+            filtersViewModel.getPackages(Constants.NEQABTY_CODE)
+        }else{
+            filtersViewModel.getPackages(sharedPreferences.code)
+        }
+        filtersViewModel.packages.observe(this) {
+            it.let { resource ->
+
+                when (resource.status) {
+                    Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        mAdapter.submitList(resource.data?.toMutableList())
+                    }
+                    Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                    }
+                }
+
+            }
+        }
+
+        binding.offersContainer.setOnClickListener { startActivity(Intent(this, OffersActivity::class.java)) }
+
+        binding.search.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if(binding.search.text.toString().isNotEmpty()){
+                        startActivity(Intent(this@SearchActivity, SearchResultActivity::class.java)
+                            .putExtra("name", binding.search.text.toString()))
+                        return true
+                    }else{
+                        Toast.makeText(this@SearchActivity, "من فضلك ادخل كلمة البحث", Toast.LENGTH_LONG).show()
+                    }
+                }
+                return false
+            }
+        })
+    }
+
+    private fun askForLogin(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, "لا"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
+    private fun comingSoon(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("تنبيه")
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, "موافق"
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
+}

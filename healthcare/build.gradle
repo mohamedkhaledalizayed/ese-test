@@ -152,7 +152,6 @@ dependencies {
     //android ui
     implementation "androidx.recyclerview:recyclerview:$recyclerview"
     implementation "androidx.cardview:cardview:$cardview"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayout"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extension"
 
     //kotlin
