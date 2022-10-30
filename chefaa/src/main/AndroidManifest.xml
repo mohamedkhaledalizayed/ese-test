@@ -24,9 +24,9 @@
         <!-- <activity -->
         <!-- android:name=".modules.orders.presentation.view.orderstatusscreen.OrdersActivity" -->
         <!-- android:exported="false" /> -->
-        <!-- <activity -->
-        <!-- android:name=".modules.orders.presentation.view.placeprescriptionscreen.CheckOutActivity" -->
-        <!-- android:exported="false" /> -->
+         <activity
+         android:name=".modules.orders.presentation.placeprescriptionscreen.CheckOutActivity"
+         android:exported="false" />
         <activity
             android:name=".modules.CartActivity"
             android:exported="false" />

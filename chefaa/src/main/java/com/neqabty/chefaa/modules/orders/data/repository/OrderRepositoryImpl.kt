@@ -40,7 +40,7 @@ private fun PlaceOrderResponse.toPlaceOrderResult(): PlaceOrderResult {
 
 private fun OrderItemsEntity.toOrderItemModel(): OrderItemModel {
     return OrderItemModel(
-        type = type,
+        type = type.lowercase(),
         quantity = if (type == Constants.ITEMTYPES.PRODUCT.name) quantity else 1,
         image = if(type == Constants.ITEMTYPES.IMAGE.name) image else null,
         note = if(type == Constants.ITEMTYPES.NOTE.name) note else null,

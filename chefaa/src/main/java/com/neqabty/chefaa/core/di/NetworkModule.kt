@@ -1,6 +1,6 @@
 package com.neqabty.chefaa.core.di
 
-import com.neqabty.chefaa.core.data.Constants
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,10 +36,10 @@ class NetworkModule {
     fun provideOkHttpClient(
         @Named("chefaa") loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         val okHttpClient = OkHttpClient().newBuilder()
-        okHttpClient.callTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.readTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
+        okHttpClient.callTimeout(200, TimeUnit.SECONDS)
+        okHttpClient.connectTimeout(200, TimeUnit.SECONDS)
+        okHttpClient.readTimeout(200, TimeUnit.SECONDS)
+        okHttpClient.writeTimeout(200, TimeUnit.SECONDS)
             .addInterceptor(Interceptor { chain ->
 
                 val request = chain.request()
@@ -59,7 +59,7 @@ class NetworkModule {
     @Provides
     @Named("chefaa")
     fun provideConverterFactory(): Converter.Factory {
-        return GsonConverterFactory.create()
+        return GsonConverterFactory.create(GsonBuilder().serializeNulls().create())
     }
 
     @Provides

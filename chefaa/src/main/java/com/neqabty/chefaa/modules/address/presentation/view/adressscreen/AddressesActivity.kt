@@ -10,10 +10,9 @@ import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.databinding.CehfaaActivityAddressesBinding
 import com.neqabty.chefaa.core.ui.BaseActivity
-//import com.neqabty.chefaa.modules.orders.presentation.placeprescriptionscreen.CheckOutActivity
 import com.neqabty.chefaa.modules.SelectLocationActivity
 import com.neqabty.chefaa.modules.address.domain.entities.AddressEntity
-//import com.neqabty.chefaa.modules.orders.presentation.placeprescriptionscreen.CheckOutActivity
+import com.neqabty.chefaa.modules.orders.presentation.placeprescriptionscreen.CheckOutActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,10 +25,6 @@ class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        Constants.userNumber = intent.extras!!.getString("user_number", "")
-        Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
-        Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
 
         setupToolbar(titleResId = R.string.addresses)
 
@@ -62,7 +57,7 @@ class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>() {
             override fun setOnItemClickListener(addressItem: AddressEntity) {
                 Constants.selectedAddress = addressItem
 
-//                startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
+                startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
                 finish()
             }
         }

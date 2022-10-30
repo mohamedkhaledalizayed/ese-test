@@ -6,7 +6,7 @@ import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
 data class OrderItemsEntity(
     val type: String,
     val quantity: Int,
-    val image: String,
+    var image: String,
     val note: String,
     val productId: Int,
     val productEntity: ProductEntity? = null,

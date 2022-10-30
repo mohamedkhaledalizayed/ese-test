@@ -33,8 +33,9 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
                 updateView()
             }
         }
-        binding.photosRv.adapter = photoAdapter
-        binding.productRv.adapter = mAdapter
+
+        binding.cartLt.photosRv.adapter = photoAdapter
+        binding.cartLt.productRv.adapter = mAdapter
 
     }
 
@@ -42,32 +43,32 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
         ///// checkout btn and Empty view
         if (cart.size == 0){
             binding.clEmptyCart.visibility = View.VISIBLE
-            binding.checkout.visibility = View.GONE
+            binding.cartLt.checkout.visibility = View.GONE
         }else{
             binding.clEmptyCart.visibility = View.GONE
-            binding.checkout.visibility = View.VISIBLE
+            binding.cartLt.checkout.visibility = View.VISIBLE
         }
 
         /////Images recyclerView
         if (cart.imageList.isNotEmpty()) {
-            binding.photosRv.visibility = View.VISIBLE
+            binding.cartLt.photosRv.visibility = View.VISIBLE
             photoAdapter.submitList()
         } else
-            binding.photosRv.visibility = View.GONE
+            binding.cartLt.photosRv.visibility = View.GONE
 
         /////Products recyclerView
         if(cart.productList.isNotEmpty()) {
-            binding.productRv.visibility = View.VISIBLE
+            binding.cartLt.productRv.visibility = View.VISIBLE
             mAdapter.submitList()
         } else
-            binding.productRv.visibility = View.GONE
+            binding.cartLt.productRv.visibility = View.GONE
 
 
         if(cart.note != null){
-            binding.noteTv.visibility = View.VISIBLE
-            binding.noteTv.text = cart.note!!.note
+            binding.cartLt.noteTv.visibility = View.VISIBLE
+            binding.cartLt.noteTv.text = cart.note!!.note
         } else
-            binding.noteTv.visibility = View.GONE
+            binding.cartLt.noteTv.visibility = View.GONE
 
     }
 

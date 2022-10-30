@@ -7,7 +7,7 @@ data class OrderItemModel(
     val type: String,
     @SerializedName("quantity")
     val quantity: Int,
-    @SerializedName("iamge")
+    @SerializedName("image")
     val image: String?,
     @SerializedName("note")
     val note: String?,
