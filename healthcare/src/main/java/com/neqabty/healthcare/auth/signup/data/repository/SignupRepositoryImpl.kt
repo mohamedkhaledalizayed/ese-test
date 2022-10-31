@@ -2,12 +2,10 @@ package com.neqabty.healthcare.auth.signup.data.repository
 
 
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
-import com.neqabty.healthcare.auth.signup.data.model.SignupBody
 import com.neqabty.healthcare.auth.signup.data.model.neqabtymember.NeqabtyMemberModel
 import com.neqabty.healthcare.auth.signup.data.model.syndicatemember.UserModel
 import com.neqabty.healthcare.auth.signup.data.model.syndicates.EntityModel
 import com.neqabty.healthcare.auth.signup.data.source.SignupDS
-import com.neqabty.healthcare.auth.signup.domain.entity.SignupParams
 import com.neqabty.healthcare.auth.signup.domain.entity.UserEntity
 import com.neqabty.healthcare.auth.signup.domain.entity.syndicate.SyndicateListEntity
 import com.neqabty.healthcare.auth.signup.domain.repository.SignupRepository
@@ -53,13 +51,4 @@ fun NeqabtyMemberModel.toUserEntity(): UserEntity {
         entityName = entity.name,
         entityImage = entity.imageUrl,
         entityCode = entity.code)
-}
-
-private fun SignupParams.toSignupBody(): SignupBody {
-    return SignupBody(
-        entityCode = entityCode,
-        email = email,
-        membershipId = membershipId,
-        mobile = mobile,
-        nationalId = national_id)
 }

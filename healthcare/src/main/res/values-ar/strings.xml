@@ -1,4 +1,4 @@
-<resources translatable="false">
+<resources>
 
     <string name="register_now">سجل الأن</string>
     <string name="seha">نقابتى صحة مستدامة</string>
@@ -93,7 +93,7 @@
 
 
     <string name="comming">سوف يتم توفير هذه الخدمة قريبا.</string>
-    <string name="not_found">عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.</string>
+    <string name="not_found">عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.</string>
     <string name="log_out">هل تريد تسجيل خروج!</string>
     <string name="exit">هل تريد الخروج!</string>
     <string name="offers">الخصومات والعروض</string>
@@ -323,6 +323,7 @@
     <string name="neqabty_auth">نقابتى</string>
     <string name="enter_num">برجاء إدخال رقم الهاتف المحمول لتاكيد \n حسابك الخاص</string>
     <string name="confirm_message">لقد تم إنشاء حسابك بنجاح, مع العلم ان كلمة المرور الخاصة بك هى اخر 4 ارقام من الرقم القومى الخاص بك.</string>
+    <string name="confirm_message_serial">لقد تم إنشاء حسابك بنجاح, مع العلم ان كلمة المرور الخاصة بك هى اخر 4 ارقام من الرقم التسلسلى الخاص بك.</string>
     <string name="there_is_no_syndicates">لا يوجد نقابات</string>
     <string name="select_syndicates">اختر النقابة</string>
     <string name="enter_correct_phone">من فضلك ادخل رقم صحيح</string>
