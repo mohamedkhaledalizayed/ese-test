@@ -8,24 +8,20 @@ import android.view.Menu
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.*
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.core.utils.Status
-import com.neqabty.chefaa.databinding.ActivitySearchBinding
+import com.neqabty.chefaa.databinding.ActivityChefaaSearchBinding
 import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
-import com.vlonjatg.progressactivity.ProgressRelativeLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchActivity : BaseActivity<ActivitySearchBinding>() {
+class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
     private val productViewModel: ProductViewModel by viewModels()
     lateinit var mAdapter: SearchAdapter
-    override fun getViewBinding() = ActivitySearchBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivityChefaaSearchBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

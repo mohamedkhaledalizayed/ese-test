@@ -13,6 +13,7 @@
     <color name="red">#FB0000</color>
     <color name="gray">#CED2D6</color>
     <color name="gray_yodawy">#555657</color>
-    <color name="colorPrimary">#1d1ad2</color>
-    <color name="colorPrimaryDark">#08338b</color>
+    <color name="colorPrimary">#0770ba</color>
+    <color name="colorPrimaryDark">#005fa3</color>
+    <color name="colorPrimaryLight">#4B90C1</color>
 </resources>

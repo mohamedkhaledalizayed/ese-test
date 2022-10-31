@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
+import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
@@ -125,7 +126,11 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         }
 
         binding.homeContent.startNow.setOnClickListener {
-            startActivity(Intent(this, SearchActivity::class.java))
+            val intent = Intent(this@SehaHomeActivity, ChefaaHomeActivity::class.java)
+            intent.putExtra("user_number", sharedPreferences.membershipId)
+            intent.putExtra("mobile_number", sharedPreferences.name)
+            intent.putExtra("jwt", "")
+            startActivity(intent)
         }
 
         homeViewModel.getAboutList()

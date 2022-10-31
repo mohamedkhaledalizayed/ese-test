@@ -9,13 +9,24 @@ plugins {
 android {
     compileSdk 31
 
+    signingConfigs {
+        config {
+            keyAlias 'neqabty'
+            keyPassword "123@pass"
+            storeFile file('/D:\\Android\\workspace\\NeQabty\\keyStore.jks')
+            storePassword "123@pass"
+
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
     defaultConfig {
         applicationId "com.neqabty.healthcare"
         minSdk 21
         targetSdk 31
         versionCode 6
         versionName "3"
-
+        signingConfig signingConfigs.config
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -61,6 +72,10 @@ android {
     lint {
         baseline = file("lint-baseline.xml")
 
+    }
+
+    configurations {
+        all*.exclude module: 'androidsvg' // This removes all other versions of `support-v4` if gets duplicated from all the artifacts.
     }
 }
 ext {
@@ -115,6 +130,7 @@ dependencies {
 
     //hilt
     implementation "com.google.dagger:hilt-android:$hiltVersion"
+    implementation project(path: ':chefaa')
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
     // Coroutine Lifecycle Scopes
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
