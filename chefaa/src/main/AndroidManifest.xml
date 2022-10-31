@@ -18,12 +18,12 @@
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".modules.orders.presentation.view.placeorderscreen.ConfirmCheckoutActivity" -->
         <!-- android:exported="false" /> -->
-        <!-- <activity -->
-        <!-- android:name=".modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity" -->
-        <!-- android:exported="false" /> -->
-        <!-- <activity -->
-        <!-- android:name=".modules.orders.presentation.view.orderstatusscreen.OrdersActivity" -->
-        <!-- android:exported="false" /> -->
+         <activity
+         android:name=".modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity"
+         android:exported="false" />
+         <activity
+         android:name=".modules.orders.presentation.view.orderstatusscreen.OrdersActivity"
+         android:exported="false" />
          <activity
          android:name=".modules.orders.presentation.placeprescriptionscreen.CheckOutActivity"
          android:exported="false" />

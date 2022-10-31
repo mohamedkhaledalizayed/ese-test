@@ -1,10 +1,9 @@
 package com.neqabty.chefaa.modules.orders.data.repository
 
 import com.neqabty.chefaa.core.data.Constants
-import com.neqabty.chefaa.modules.orders.data.model.OrderItemModel
-import com.neqabty.chefaa.modules.orders.data.model.PlaceOrderBody
-import com.neqabty.chefaa.modules.orders.data.model.PlaceOrderResponse
+import com.neqabty.chefaa.modules.orders.data.model.*
 import com.neqabty.chefaa.modules.orders.data.source.OrderDS
+import com.neqabty.chefaa.modules.orders.domain.entities.OrderEntity
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.chefaa.modules.orders.domain.entities.PlaceOrderResult
 import com.neqabty.chefaa.modules.orders.domain.repository.OrderRepository
@@ -13,6 +12,24 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class OrderRepositoryImpl @Inject constructor(private val orderDS: OrderDS):OrderRepository {
+    override fun getOrders(
+        userNumber: String,
+        pageNumber: Int,
+        pageSize: Int
+    ): Flow<List<OrderEntity>> {
+        return flow {
+            emit(orderDS.getOrderList(OrderListRequestBody(userNumber)).toOrderModelResult())
+        }
+    }
+
+    override fun getOrderDetails(orderId: String): Flow<OrderEntity> {
+        TODO("Not yet implemented")
+    }
+
+    private fun OrderListResponse.toOrderModelResult(): List<OrderEntity> {
+        return orders.map { OrderEntity(id = it.id, addressId = it.addressId, deliveryNote = it.deliveryNote, creationDate = it.creationDate, status = it.status) }
+    }
+
     override fun placeOrder(
         items: List<OrderItemsEntity>,
         addressId: Int,
