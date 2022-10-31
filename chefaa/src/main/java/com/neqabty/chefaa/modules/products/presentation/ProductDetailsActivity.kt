@@ -106,7 +106,7 @@ fun MutableList<OrderItemsEntity>.addOrIncrement(productItem: ProductEntity): In
     if (index == -1) {
         cart.productList.add(
             OrderItemsEntity(
-                type = Constants.ITEMTYPES.PRODUCT.name,
+                type = Constants.ITEMTYPES.PRODUCT.typeName,
                 quantity = 1,
                 image = "",
                 note = "",

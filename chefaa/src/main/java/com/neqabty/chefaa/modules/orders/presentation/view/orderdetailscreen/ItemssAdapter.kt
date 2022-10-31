@@ -1,14 +1,5 @@
 package com.neqabty.chefaa.modules.orders.presentation.view.orderdetailscreen
 //
-//import android.annotation.SuppressLint
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import androidx.databinding.DataBindingUtil
-//import androidx.recyclerview.widget.RecyclerView
-//import com.neqabty.yodawy.R
-//import com.neqabty.yodawy.databinding.ProductLayoutItemBinding
-//import com.neqabty.yodawy.modules.orders.domain.entity.OrderItemEntity
 //
 //
 //class ItemssAdapter: RecyclerView.Adapter<ItemssAdapter.ViewHolder>() {

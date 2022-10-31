@@ -20,6 +20,7 @@ import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.databinding.ChefaaActivityHomeBinding
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.chefaa.modules.orders.presentation.orderbynote.OrderByNoteActivity
+import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
 import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
 import com.neqabty.chefaa.modules.products.presentation.SearchActivity
 //import com.neqabty.chefaa.modules.CartActivity
@@ -62,7 +63,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
     }
 
     fun orders(view: View) {
-//        startActivity(Intent(this, OrdersActivity::class.java))
+        startActivity(Intent(this, OrdersActivity::class.java))
     }
 
     fun uploadImage(view: View) {
@@ -93,7 +94,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
                     OrderItemsEntity(
                         image = uri.path!!,
                         quantity = 1,
-                        type = Constants.ITEMTYPES.IMAGE.name,
+                        type = Constants.ITEMTYPES.IMAGE.typeName,
                         note = "",
                         productId = -1,
                         productEntity = null,
