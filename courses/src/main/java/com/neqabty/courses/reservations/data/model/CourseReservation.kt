@@ -17,7 +17,7 @@ data class CourseReservation(
     @SerializedName("notes")
     val notes: String?,
     @SerializedName("offer")
-    val offer: Int,
+    val offer: Offer,
     @SerializedName("payment_status")
     val paymentStatus: String,
     @SerializedName("queue_number")

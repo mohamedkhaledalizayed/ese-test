@@ -25,7 +25,7 @@ private fun CourseReservation.toCourseReservationEntity(): CourseReservationEnti
         courseName = courseName,
         image = image,
         notes = notes,
-        offer = offer,
+        offer = offer.id,
         paymentStatus = paymentStatus,
         queueNumber = queueNumber,
         status = status,

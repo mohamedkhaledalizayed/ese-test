@@ -43,6 +43,7 @@ class ReservationsActivity : BaseActivity<ActivityReservationsBinding>() {
                     adapter.submitList(resource.data!!)
                 }
                 Status.ERROR->{
+                    Log.e("fghj", resource.message.toString())
                     binding.progressCircular.visibility = View.GONE
                 }
             }
