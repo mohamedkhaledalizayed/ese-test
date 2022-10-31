@@ -12,7 +12,7 @@ object Constants {
     var mobileNumber: String = ""
     var cart = Cart()
 
-    enum class ITEMTYPES(name: String) {
+    enum class ITEMTYPES(val typeName: String) {
         IMAGE("image"),
         NOTE("text"),
         PRODUCT("product")

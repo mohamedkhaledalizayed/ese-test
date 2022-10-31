@@ -15,7 +15,7 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>() {
         setContentView(binding.root)
         binding.saveBtn.setOnClickListener {
             cart.note = OrderItemsEntity(
-                type = Constants.ITEMTYPES.NOTE.name,
+                type = Constants.ITEMTYPES.NOTE.typeName,
                 quantity = 1,
                 image = "",
                 note = binding.inputEt.text.toString(),

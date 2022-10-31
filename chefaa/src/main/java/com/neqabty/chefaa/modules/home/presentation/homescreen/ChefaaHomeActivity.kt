@@ -93,7 +93,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
                     OrderItemsEntity(
                         image = uri.path!!,
                         quantity = 1,
-                        type = Constants.ITEMTYPES.IMAGE.name,
+                        type = Constants.ITEMTYPES.IMAGE.typeName,
                         note = "",
                         productId = -1,
                         productEntity = null,
