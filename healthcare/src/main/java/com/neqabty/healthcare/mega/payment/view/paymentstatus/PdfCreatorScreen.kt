@@ -79,15 +79,28 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         horizontalView.addView(pdfTextView)
 
         //Logo
-        val imageView = PDFImageView(applicationContext)
-        val imageLayoutParam = LinearLayout.LayoutParams(120, 90, 0F)
-        imageView.setImageScale(ImageView.ScaleType.CENTER_INSIDE)
-        Picasso.get().load(data.imageUrl ?: "").into(imageView.view)
-        imageLayoutParam.setMargins(0, 0, 10, 0)
-        imageView.setLayout(imageLayoutParam)
-        horizontalView.addView(imageView)
-        headerView.addView(horizontalView)
+        //other syndicates
+        val syndicateLogo = PDFImageView(applicationContext)
+        val syndicateLogoLayoutParam = LinearLayout.LayoutParams(120, 90, 0F)
+        Picasso.get().load(data.imageUrl ?: "").into(syndicateLogo.view)
+        syndicateLogoLayoutParam.setMargins(0, 0, 10, 0)
+        syndicateLogo.setLayout(syndicateLogoLayoutParam)
 
+        if (data.entityType != "owner"){
+            horizontalView.addView(syndicateLogo)
+        }
+
+        //neqabty
+        val neqabtyLogo = PDFImageView(applicationContext)
+        val imageLayoutParam = LinearLayout.LayoutParams(120, 90, 0F)
+        neqabtyLogo.setImageResource(R.drawable.logo)
+        imageLayoutParam.setMargins(0, 0, 10, 0)
+        neqabtyLogo.setLayout(imageLayoutParam)
+
+        if (data.serviceCategory == "Health"){
+            horizontalView.addView(neqabtyLogo)
+        }
+        headerView.addView(horizontalView)
         val lineSeparatorView1 = PDFLineSeparatorView(applicationContext).setBackgroundColor(Color.WHITE)
         headerView.addView(lineSeparatorView1)
 
@@ -262,37 +275,37 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
 
         //////syndicate
 
-        val horizontalSyndicate = PDFHorizontalView(applicationContext)
-
-        val syndicate = PDFTextView(applicationContext, 14f, true)
-        val syndicateContent = SpannableString("${data.entity}")
-        syndicateContent.setSpan(
-            ForegroundColorSpan(Color.DKGRAY),
-            0,
-            syndicateContent.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        syndicate.text = syndicateContent
-        syndicate.setLayout(
-            LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
-        ).setPadding(2, 5, 50, 4)
-        horizontalSyndicate.addView(syndicate)
-
-
-        val syndicateValue = PDFTextView(applicationContext, 14f, true)
-        val syndicateContentValue = SpannableString(" النقابة : ")
-        syndicateContentValue.setSpan(
-            ForegroundColorSpan(Color.DKGRAY),
-            0,
-            syndicateContentValue.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        syndicateValue.text = syndicateContentValue
-        syndicateValue.setLayout(
-            LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0F)
-        ).setPadding(2, 5, 20, 4)
-        horizontalSyndicate.addView(syndicateValue)
-        pdfBody.addView(horizontalSyndicate)
+//        val horizontalSyndicate = PDFHorizontalView(applicationContext)
+//
+//        val syndicate = PDFTextView(applicationContext, 14f, true)
+//        val syndicateContent = SpannableString("${data.entity}")
+//        syndicateContent.setSpan(
+//            ForegroundColorSpan(Color.DKGRAY),
+//            0,
+//            syndicateContent.length,
+//            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
+//        syndicate.text = syndicateContent
+//        syndicate.setLayout(
+//            LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
+//        ).setPadding(2, 5, 50, 4)
+//        horizontalSyndicate.addView(syndicate)
+//
+//
+//        val syndicateValue = PDFTextView(applicationContext, 14f, true)
+//        val syndicateContentValue = SpannableString(" النقابة : ")
+//        syndicateContentValue.setSpan(
+//            ForegroundColorSpan(Color.DKGRAY),
+//            0,
+//            syndicateContentValue.length,
+//            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//        )
+//        syndicateValue.text = syndicateContentValue
+//        syndicateValue.setLayout(
+//            LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0F)
+//        ).setPadding(2, 5, 20, 4)
+//        horizontalSyndicate.addView(syndicateValue)
+//        pdfBody.addView(horizontalSyndicate)
         ////////////////////
 
 

@@ -56,6 +56,13 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
             viewHolder.binding.paid.visibility = View.VISIBLE
         }
 
+
+        if (follower.packages.maxFollower == 0){
+            viewHolder.binding.addNewFollower.visibility = View.GONE
+        }else{
+            viewHolder.binding.addNewFollower.visibility = View.VISIBLE
+        }
+
         mAdapter.submitList(follower.packages.followers)
 
         viewHolder.binding.paid.setOnClickListener {

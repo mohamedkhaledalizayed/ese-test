@@ -7,6 +7,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class PaymentStatusEntity(
     val entity: String,
+    val entityType: String,
+    val serviceCategory: String,
     val entityPaymentStatus: Boolean?,
     val gatewayReferenceId: String?,
     val id: String,
