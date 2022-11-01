@@ -1,5 +1,5 @@
 <resources>
-    <string name="my_app_name" translatable="false">يداوي</string>
+    <string name="my_app_name" translatable="false">شفاء</string>
     <string name="add_new_address">إضافة عنوان</string>
     <string name="selected_address">العنوان</string>
     <string name="addresses">اختار عنوان</string>
@@ -26,7 +26,7 @@
     <string name="pravotin_100mg_sach_g_medication_name">PRAVOTIN (100MG SACH) G. medication name</string>
     <string name="_14_sachets">14 Sachets</string>
     <string name="egp_85_00">EGP 85.00</string>
-    <string name="delivery_within_60_minutes">خدمة توصيل ٦٠ دقيقة من يداوي</string>
+    <string name="delivery_within_60_minutes">خدمة توصيل ٦٠ دقيقة من شفاء</string>
     <string name="delivery_time_depends_on_availability">Delivery time depends on availability</string>
     <string name="_6_photos_added">6 photos added</string>
     <string name="prices_may_vary_across_pharmacies">Prices may vary across pharmacies</string>
@@ -51,7 +51,7 @@
     <string name="alert_cancel">إلغاء</string>
     <string name="alert_ok">موافق</string>
     <string name="cart_empty">عربة التسوق فارغة</string>
-    <string name="expoler_yodawy">اكتشف يداوى و ابدأ التسوق</string>
+    <string name="expoler_yodawy">اكتشف شفاء و ابدأ التسوق</string>
     <string name="cash">نقدى</string>
     <string name="order_number">رقم الطلب</string>
     <string name="order_date">تاريخ الطلب</string>

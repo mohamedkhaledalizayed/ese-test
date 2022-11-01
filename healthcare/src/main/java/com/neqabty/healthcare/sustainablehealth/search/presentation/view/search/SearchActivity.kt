@@ -18,6 +18,7 @@ import com.neqabty.healthcare.sustainablehealth.search.presentation.view.filter.
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.searchresult.SearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
@@ -100,6 +101,16 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 return false
             }
         })
+
+
+        binding.cvChefaa.setOnClickListener {
+            val intent = Intent(this, ChefaaHomeActivity::class.java)
+            intent.putExtra("user_number", sharedPreferences.mobile)
+            intent.putExtra("mobile_number", sharedPreferences.mobile)
+            intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
+            intent.putExtra("jwt", "")
+            startActivity(intent)
+        }
     }
 
     private fun askForLogin(message: String) {

@@ -9,6 +9,7 @@ object Constants {
     lateinit var selectedAddress: AddressEntity
     var userNumber: String = ""
     var mobileNumber: String = ""
+    var countryCode: String = ""
     var cart = Cart()
 
     enum class ITEMTYPES(val typeName: String) {

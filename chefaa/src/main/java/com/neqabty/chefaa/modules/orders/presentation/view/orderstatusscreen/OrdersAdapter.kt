@@ -38,7 +38,7 @@ class OrdersAdapter: RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
         viewHolder.binding.orderStatus.text = "حالة الطلب: ${item.status}"
-        viewHolder.binding.orderDate.text = "تاريخ الطلب: ${AppUtils().dateFormat(item.creationDate)}"
+        viewHolder.binding.orderDate.text = "تاريخ الطلب: ${item.creationDate}"
         viewHolder.binding.orderDetails.text = "رقم الطلب: ${item.id}"
         viewHolder.binding.total.text = "السعر: ${item.deliveryNote} جنيه"
 
