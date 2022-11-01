@@ -205,6 +205,8 @@ fun MobilePaymentPayload.toMobilePaymentPayloadEntity(): MobilePaymentPayloadEnt
 fun PaymentStatusModel.toPaymentStatusEntity(): PaymentStatusEntity {
     return PaymentStatusEntity(
         entity = account.entity.name,
+        entityType = account.entity.type,
+        serviceCategory = serviceAction.service.serviceCategory.name,
         entityPaymentStatus = entityPaymentStatus,
         gatewayReferenceId = gatewayReferenceId,
         id = id,

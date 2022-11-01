@@ -55,7 +55,6 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                             if (!resource.data?.mobile.isNullOrEmpty()){
                                 binding.phoneValue.text = "${resource.data?.mobile}"
                             }
-                            binding.syndicateValue.text = "${resource.data?.entity}"
                             binding.serviceNameValue.text = "${resource.data?.serviceAction}"
                             binding.receiptNumberValue.text = resource.data?.gatewayReferenceId ?: ""
                             binding.receiptDateValue.text = AppUtils().dateFormat(resource.data!!.createdAt)

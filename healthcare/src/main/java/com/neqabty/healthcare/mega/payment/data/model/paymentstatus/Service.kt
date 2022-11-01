@@ -18,7 +18,7 @@ data class Service(
     @SerializedName("price")
     val price: String,
     @SerializedName("service_category")
-    val serviceCategory: Any,
+    val serviceCategory: ServiceCategory,
     @SerializedName("type")
     val type: String
 )

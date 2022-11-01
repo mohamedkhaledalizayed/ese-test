@@ -273,6 +273,13 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                 Html.fromHtml(getString(R.string.menu_mobileNumber, sharedPreferences.mobile))
 
         } else {
+
+            if (sharedPreferences.isAuthenticated) {
+                val menu: Menu = binding.navView.menu
+
+                val logout: MenuItem = menu.findItem(R.id.logout)
+                logout.title = resources.getString(R.string.logout_title)
+            }
             binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tvMemberName).visibility =
                 View.GONE
             binding.navView.getHeaderView(0)
