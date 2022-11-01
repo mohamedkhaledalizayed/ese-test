@@ -7,12 +7,12 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class OrderDS @Inject constructor(private val ordersApi: OrdersApi) {
-    suspend fun getOrderList(orderListRequestBody: OrderListRequestBody): OrderListResponse {
-        return ordersApi.getOrdersList(orderListRequestBody = orderListRequestBody).responseData
+    suspend fun getOrderList(orderListRequestBody: OrderListRequestBody): List<OrderModel> {
+        return ordersApi.getOrdersList(orderListRequestBody = orderListRequestBody).responseData.dataModels
     }
 
-    suspend fun getOrder(orderRequestBody: OrderRequestBody): OrderModel {
-        return ordersApi.getOrder(orderRequestBody = orderRequestBody).responseData
+    suspend fun getOrder(orderRequestBody: OrderRequestBody): List<OrderItem> {
+        return ordersApi.getOrder(orderRequestBody = orderRequestBody).responseData.dataModels
     }
 
     suspend fun placeOrder(placeOrderBody: PlaceOrderBody): PlaceOrderResponse {

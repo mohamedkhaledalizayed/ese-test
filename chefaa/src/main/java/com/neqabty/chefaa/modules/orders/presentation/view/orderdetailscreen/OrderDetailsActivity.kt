@@ -3,6 +3,7 @@ package com.neqabty.chefaa.modules.orders.presentation.view.orderdetailscreen
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.FragmentTransaction
 import com.neqabty.chefaa.R
@@ -10,6 +11,7 @@ import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.core.utils.AppUtils
 import com.neqabty.chefaa.core.utils.Status
 import com.neqabty.chefaa.databinding.ActivityOrderDetailsBinding
+import com.neqabty.chefaa.modules.orders.domain.entities.OrderEntity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -28,14 +30,14 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.order_details)
 
-        val orderId = intent.getStringExtra("orderId")
+        val orderId = intent.getParcelableExtra<OrderEntity>("orderId")
 //        navigation = intent.getBooleanExtra("navigation", false)
         dialog = SpotsDialog.Builder()
             .setContext(this)
             .setMessage(getString(R.string.please_wait))
             .build()
         prescriptionsAdapter = PrescriptionsAdapter(this)
-        orderViewModel.getSpecificOrder("$orderId")
+        orderViewModel.getSpecificOrder(orderId?.id.toString())
 
         orderViewModel.order.observe(this){
             it?.let { resource ->
@@ -45,11 +47,12 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
                     }
                     Status.SUCCESS -> {
                         dialog.dismiss()
-                        binding.addressType.text = resource.data?.addressId
-                        binding.addressDetails.text = resource.data?.addressId
-                        binding.orderNumberValue.text = resource.data?.id
-                        binding.dateValue.text = AppUtils().dateFormat(resource.data?.creationDate!!)
-                        binding.totalPayment.text = "${resource.data?.deliveryNote} جنيه"
+                        Toast.makeText(this,resource.data?.size.toString(),Toast.LENGTH_SHORT).show()
+                        binding.addressType.text = orderId?.addressId.toString()
+                        binding.addressDetails.text = orderId?.deliveryNote.toString()
+                        binding.orderNumberValue.text = orderId?.id.toString()
+                        binding.dateValue.text = AppUtils().dateFormat(orderId?.createdAt!!)
+                        binding.totalPayment.text = "${orderId?.price}  جنيه "
 
 //                        when (resource.data.currentStatus) {
 //                            "New" -> {

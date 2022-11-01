@@ -4,13 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.core.utils.Status
 import com.neqabty.chefaa.databinding.ActivityOrdersBinding
+import com.neqabty.chefaa.modules.orders.domain.entities.OrderClientEntity
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderEntity
+import com.neqabty.chefaa.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -65,9 +66,9 @@ class OrdersActivity : BaseActivity<ActivityOrdersBinding>() {
         mAdapter.onItemClickListener = object :
             OrdersAdapter.OnItemClickListener {
             override fun setOnItemClickListener(order: OrderEntity) {
-//                val intent: Intent = Intent(this@OrdersActivity, OrderDetailsActivity::class.java)
-//                intent.putExtra("orderId", order.id)
-//                startActivity(intent)
+                val intent: Intent = Intent(this@OrdersActivity, OrderDetailsActivity::class.java)
+                intent.putExtra("orderId", order)
+                startActivity(intent)
             }
         }
 

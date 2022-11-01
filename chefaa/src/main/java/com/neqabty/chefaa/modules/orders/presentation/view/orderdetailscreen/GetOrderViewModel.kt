@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.chefaa.core.utils.AppUtils
 import com.neqabty.chefaa.core.utils.Resource
+import com.neqabty.chefaa.modules.orders.domain.entities.ItemEntity
+import com.neqabty.chefaa.modules.orders.domain.entities.OrderClientEntity
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderEntity
 import com.neqabty.chefaa.modules.orders.domain.usecases.GetSpecificOrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GetOrderViewModel @Inject constructor(private val getSpecificOrderUseCase: GetSpecificOrderUseCase) :
     ViewModel() {
-    val order = MutableLiveData<Resource<OrderEntity>>()
+    val order = MutableLiveData<Resource<List<ItemEntity>>>()
     val errorMessage = MutableStateFlow("")
     fun getSpecificOrder(orderId: String) {
         viewModelScope.launch(Dispatchers.IO) {

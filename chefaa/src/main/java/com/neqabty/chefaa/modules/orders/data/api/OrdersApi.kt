@@ -9,11 +9,10 @@ interface OrdersApi {
     @POST("get-orders")
     suspend fun getOrdersList(
         @Body orderListRequestBody: OrderListRequestBody
-    ): ChefaaResponse<OrderListResponse>
+    ): ChefaaResponse<OrdersWrapperModel<List<OrderModel>>>
 
     @POST("get-order-items")
-    suspend fun getOrder(
-        @Body orderRequestBody: OrderRequestBody): ChefaaResponse<OrderModel>
+    suspend fun getOrder(@Body orderRequestBody: OrderRequestBody): ChefaaResponse<OrdersWrapperModel<List<OrderItem>>>
 
     @POST("add-order")
     suspend fun placeOrder(@Body placeOrderBody: PlaceOrderBody): ChefaaResponse<PlaceOrderResponse>
