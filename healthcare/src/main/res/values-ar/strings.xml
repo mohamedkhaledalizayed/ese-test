@@ -341,5 +341,16 @@
     <string name="new_password">كلمة سر جديدة</string>
     <string name="change_password">تغيير</string>
     <string name="resend">إرسال الكود</string>
+    <string name="about_neqabty">نقابتي هو منصة تفاعلية تهدف الي تقديم خدمات الرعاية
+الصحية لنقابة المهندسين المصرية بطريقة مميكنة مدعمة
+بوسائل مختلفة للدفع الالكتروني لتسيهل الحصول علي
+الخدمات ومتابعة مدفوعاتهم باقل وقت ومجهود</string>
+    <string name="more_about_neqabty">استفاد الان بخدماتك النقابية</string>
+    <string name="syndicate_member_">هل أنت عضو نقابي!</string>
+    <string name="neqabty_member_">هل أنت عضو غير نقابي!</string>
+    <string name="about_seha_mos">صحة مستدامة هي شبكة طبية متخصصة متوفرة لدي العديد من الجهات العلاجية ذات التخصصات المختلفة والمنتشرة في جميع المحافظات.</string>
+    <string name="neqabty_hands">“ نقابتك بين ايديك “</string>
+    <string name="one_platform">منصة واحده لإدارة جميع خدماتك</string>
+    <string name="already_neqabty_member">اذا كنت عضو نقابة او غير عضو نقابة دلوقتي تقدر تستفاد بخدمات صحة مستدامة</string>
 
 </resources>

@@ -6,12 +6,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
+
     <queries>
         <package android:name="com.neqabty" />
     </queries>
+
     <application
         android:name=".core.application.HealthCareApplication"
         android:allowBackup="true"
@@ -23,16 +26,19 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
+            android:name=".commen.landing.LandingPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".sustainablehealth.mypackages.presentation.AddFollowerActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.payment.view.SehaPaymentActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity"
+            android:name=".commen.checkaccountstatus.view.CheckAccountActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.healthcare.commen.splash.view.SplashActivity"
+            android:name=".commen.splash.view.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,21 +83,20 @@
             android:name=".sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity"
+            android:name=".commen.syndicates.presentation.view.homescreen.SyndicateActivity"
             android:exported="false"
             android:theme="@style/Theme.NoActionBar" />
-
         <activity
-            android:name="com.neqabty.healthcare.commen.contactus.ContactUsActivity"
+            android:name=".commen.contactus.ContactUsActivity"
             android:exported="false" />
         <activity
             android:name=".mega.complains.view.ComplainsActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity"
+            android:name=".commen.profile.view.profile.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity"
+            android:name=".commen.profile.view.update.UpdateInfoActivity"
             android:exported="false" />
         <activity
             android:name=".mega.payment.view.paymentstatus.PaymentStatusActivity"
@@ -106,29 +111,25 @@
             android:name=".mega.home.view.MegaHomeActivity"
             android:exported="true" />
         <activity
-            android:name="com.neqabty.healthcare.commen.settings.SettingsActivity"
+            android:name=".commen.settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name="com.neqabty.healthcare.commen.aboutapp.AboutAppActivity"
+            android:name=".commen.aboutapp.AboutAppActivity"
             android:exported="false" />
         <activity
             android:name=".mega.payment.view.paymentstatus.PdfCreatorScreen"
             android:exported="false"
             android:label="تحميل اخطار الدفع"
             android:theme="@style/AppTheme.ActionBar" />
-
         <activity
             android:name=".news.view.newslist.NewsListActivity"
             android:exported="false" />
         <activity
             android:name=".news.view.newsdetails.NewsDetailsActivity"
             android:exported="false" />
-
         <activity
-            android:name="com.neqabty.healthcare.auth.login.view.LoginActivity"
-            android:exported="true">
-        </activity>
-
+            android:name=".auth.login.view.LoginActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".auth.otp.view.VerifyPhoneActivity"
             android:exported="false" />
