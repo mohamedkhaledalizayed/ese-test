@@ -12,8 +12,8 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivitySplashBinding
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
+import com.neqabty.healthcare.commen.landing.LandingPageActivity
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
-import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.healthcare.core.utils.DeviceUtils
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
@@ -76,7 +76,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                                     } else {
                                         val mainIntent = Intent(
                                             this@SplashActivity,
-                                            SyndicateActivity::class.java
+                                            LandingPageActivity::class.java
                                         )
                                         startActivity(mainIntent)
                                         finish()

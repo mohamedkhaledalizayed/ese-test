@@ -11,6 +11,7 @@ import com.google.gson.Gson
 
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
+import com.neqabty.healthcare.auth.signup.data.model.SignupBody
 import com.neqabty.healthcare.auth.signup.data.model.SignupTogareenBody
 import com.neqabty.healthcare.auth.signup.domain.entity.SignupParams
 import com.neqabty.healthcare.auth.signup.domain.entity.syndicate.SyndicateListEntity
@@ -119,7 +120,11 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                             sharedPreferences.code = resource.data.entity.code
                             sharedPreferences.syndicateName = resource.data.entity.name
                             sharedPreferences.image = resource.data.entity.imageUrl ?: ""
-                            confirmMessage(resources.getString(R.string.confirm_message))
+                            if (syndicateCode == TOGAREEN_CODE){
+                                confirmMessage(resources.getString(R.string.confirm_message_serial))
+                            }else{
+                                confirmMessage(resources.getString(R.string.confirm_message))
+                            }
                         }else{
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
                         }
@@ -272,11 +277,11 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 }
 
                 signupViewModel.signup(
-                    SignupParams(
+                    SignupBody(
                         entityCode = syndicateCode,
                         membershipId = binding.membershipId.text.toString(),
                         mobile = binding.phone.text.toString(),
-                        national_id = binding.nationalId.text.toString(),
+                        nationalId = binding.nationalId.text.toString(),
                         email = binding.email.text.toString()
                     )
                 )

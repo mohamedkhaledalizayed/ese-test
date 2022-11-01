@@ -12,7 +12,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.auth.login.view.LoginActivity
 import com.neqabty.healthcare.databinding.ActivityCheckAccountBinding
 import com.neqabty.healthcare.commen.checkaccountstatus.data.model.CheckPhoneBody
-import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
+import com.neqabty.healthcare.commen.landing.LandingPageActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -70,7 +70,7 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
                             finish()
                         }else{
                             sharedPreferences.mobile = binding.ccp.fullNumberWithPlus
-                            val intent = Intent(this, SyndicateActivity::class.java)
+                            val intent = Intent(this, LandingPageActivity::class.java)
                             startActivity(intent)
                             finish()
                         }

@@ -54,7 +54,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                     intent.putExtra("serviceActionCode", item.serviceActionCode )
                     startActivity(intent)
                 }else{
-                    askForLogin("عفوا هذا الرقم غير مسجل بالنقابة، برجاء تسجيل الدخول.")
+                    askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
                 }
 //                comingSoon("سوف يتم توفير هذه الخدمة قريبا.")
             }
