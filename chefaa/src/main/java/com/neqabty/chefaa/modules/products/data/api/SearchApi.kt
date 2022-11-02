@@ -8,5 +8,5 @@ import retrofit2.http.POST
 
 interface SearchApi {
     @POST("search-products")
-    suspend fun searchForProduct(@Body searchProductBody: SearchProductBody): ChefaaResponse<List<ProductItem>>
+    suspend fun searchForProduct(@Body searchProductBody: SearchProductBody): ChefaaResponse<List<ProductItem>?>
 }

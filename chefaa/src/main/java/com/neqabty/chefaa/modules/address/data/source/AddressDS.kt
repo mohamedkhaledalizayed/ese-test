@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class AddressDS @Inject constructor(private val addressApi: AddressApi) {
     suspend fun getAllUserAddress(userPhone: String): List<AddressModel> {
-        return addressApi.getAllUserAddress(GetUserAddressBody(userPhone)).responseData
+        return addressApi.getAllUserAddress(GetUserAddressBody(userPhone)).responseData!!
     }
 
     suspend fun addUserAddress(
@@ -23,11 +23,11 @@ class AddressDS @Inject constructor(private val addressApi: AddressApi) {
             AddUserAddressBody(
                 apartment, buildingNo, floor, landMark, lat, long, phone, streetName, title
             )
-        ).responseData
+        ).responseData!!
     }
 
     suspend fun updateUserAddress(apartment: Int = 0, buildingNo: Int = 0, floor: Int = 0, landMark: String = "", lat: String = "", long: String = "", phone: String = "",
                                   streetName: String = "", title: String = "",addressId:Int): Int {
-        return addressApi.updateUserAddress(UpdateUserAddressBody(addressId, apartment, buildingNo, floor, landMark, lat, long, phone, streetName, title)).responseData
+        return addressApi.updateUserAddress(UpdateUserAddressBody(addressId, apartment, buildingNo, floor, landMark, lat, long, phone, streetName, title)).responseData!!
     }
 }

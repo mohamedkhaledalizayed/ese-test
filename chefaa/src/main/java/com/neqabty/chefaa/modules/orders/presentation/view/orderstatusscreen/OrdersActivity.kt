@@ -44,7 +44,7 @@ class OrdersActivity : BaseActivity<ActivityOrdersBinding>() {
                     Status.SUCCESS -> {
                         if (resource.data!!.isEmpty()){
                             if (mAdapter.itemCount == 0){
-                                binding.progressActivity.showEmpty(R.drawable.ic_undraw_empty_xct9, "لا يوجد طلبات", "لم تقم باى طلب من قبل")
+                                binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "لا يوجد طلبات", "لم تقم باى طلب من قبل")
                             }else{
                                 binding.progressActivity.showContent()
                             }
@@ -54,7 +54,7 @@ class OrdersActivity : BaseActivity<ActivityOrdersBinding>() {
                         }
                     }
                     Status.ERROR -> {
-                        binding.progressActivity.showEmpty(R.drawable.ic_undraw_access_denied_6w73, "خطا", resource.message)
+                        binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "خطا", resource.message)
                     }
                 }
             }

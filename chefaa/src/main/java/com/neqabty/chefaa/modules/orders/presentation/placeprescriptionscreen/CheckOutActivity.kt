@@ -82,6 +82,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
                         val bundle = Bundle()
                         bundle.putString("user_number", Constants.userNumber)
                         bundle.putString("mobile_number", Constants.mobileNumber)
+                        bundle.putString("country_code", Constants.countryCode)
                         bundle.putString("jwt", Constants.jwt)
                         bundle.putString("orderId", resource.data)
                         bundle.putBoolean("navigation", true)

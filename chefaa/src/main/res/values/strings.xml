@@ -1,5 +1,6 @@
 <resources>
     <string name="my_app_name" translatable="false">شفاء</string>
+    <string name="chefaa" translatable="false">شفاء</string>
     <string name="add_new_address">إضافة عنوان</string>
     <string name="selected_address">العنوان</string>
     <string name="addresses">اختار عنوان</string>
@@ -20,13 +21,12 @@
     <string name="find_n_medications">ابحث عن دواء</string>
     <string name="orders_history">طلباتك</string>
     <string name="cart">عربة التسوق</string>
-    <string name="search">ابحث</string>
+    <string name="do_search">ابحث</string>
     <string name="low_stock">Low Stock</string>
     <string name="low_stock_alert">ربما يكون هذا المنتج متوفراً للتوصيل في وقت قريب</string>
     <string name="pravotin_100mg_sach_g_medication_name">PRAVOTIN (100MG SACH) G. medication name</string>
     <string name="_14_sachets">14 Sachets</string>
     <string name="egp_85_00">EGP 85.00</string>
-    <string name="delivery_within_60_minutes">خدمة توصيل ٦٠ دقيقة من شفاء</string>
     <string name="delivery_time_depends_on_availability">Delivery time depends on availability</string>
     <string name="_6_photos_added">6 photos added</string>
     <string name="prices_may_vary_across_pharmacies">Prices may vary across pharmacies</string>

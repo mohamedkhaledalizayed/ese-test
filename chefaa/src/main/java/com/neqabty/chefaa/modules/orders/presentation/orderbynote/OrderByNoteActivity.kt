@@ -13,6 +13,7 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupToolbar(R.string.order_by_note)
         binding.saveBtn.setOnClickListener {
             cart.note = OrderItemsEntity(
                 type = Constants.ITEMTYPES.NOTE.typeName,

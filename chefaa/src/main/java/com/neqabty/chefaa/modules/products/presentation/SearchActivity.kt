@@ -26,7 +26,7 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(titleResId = R.string.search)
+        setupToolbar(titleResId = R.string.do_search)
 
         mAdapter = SearchAdapter {
             invalidateOptionsMenu()

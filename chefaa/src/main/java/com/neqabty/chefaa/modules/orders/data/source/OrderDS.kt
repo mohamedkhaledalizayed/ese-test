@@ -8,14 +8,14 @@ import javax.inject.Inject
 
 class OrderDS @Inject constructor(private val ordersApi: OrdersApi) {
     suspend fun getOrderList(orderListRequestBody: OrderListRequestBody): List<OrderModel> {
-        return ordersApi.getOrdersList(orderListRequestBody = orderListRequestBody).responseData.dataModels
+        return ordersApi.getOrdersList(orderListRequestBody = orderListRequestBody).responseData!!.dataModels
     }
 
     suspend fun getOrder(orderRequestBody: OrderRequestBody): List<OrderItem> {
-        return ordersApi.getOrder(orderRequestBody = orderRequestBody).responseData.dataModels
+        return ordersApi.getOrder(orderRequestBody = orderRequestBody).responseData!!.dataModels
     }
 
     suspend fun placeOrder(placeOrderBody: PlaceOrderBody): PlaceOrderResponse {
-        return ordersApi.placeOrder(placeOrderBody).responseData
+        return ordersApi.placeOrder(placeOrderBody).responseData!!
     }
 }
