@@ -19,9 +19,9 @@ class AddAddressViewModel @Inject constructor(
     val data = MutableLiveData<AddressEntity>()
     val errorMessage = MutableStateFlow("")
     fun addAddress(
-        apartment: Int = 0,
-        buildingNo: Int = 0,
-        floor: Int = 0,
+        apartment: String = "",
+        buildingNo: String = "",
+        floor: String = "",
         landMark: String = "",
         lat: String = "",
         long: String = "",

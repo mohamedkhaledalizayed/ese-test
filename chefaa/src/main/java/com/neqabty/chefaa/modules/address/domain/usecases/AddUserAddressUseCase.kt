@@ -7,9 +7,9 @@ import javax.inject.Inject
 
 class AddUserAddressUseCase @Inject constructor(private val addressRepository: AddressRepository) {
     fun build(
-        apartment: Int = 0,
-        buildingNo: Int = 0,
-        floor: Int = 0,
+        apartment: String = "",
+        buildingNo: String = "",
+        floor: String = "",
         landMark: String = "",
         lat: String = "",
         long: String = "",

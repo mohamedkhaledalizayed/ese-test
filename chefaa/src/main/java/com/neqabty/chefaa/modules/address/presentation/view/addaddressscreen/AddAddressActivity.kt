@@ -96,9 +96,9 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMa
             phone = Constants.mobileNumber,
             title = binding.nickname.text.toString(),
             streetName= binding.street.text.toString(),
-            floor = binding.floor.text.toString().toInt(),
-            buildingNo = binding.building.text.toString().toInt(),
-            apartment = binding.apartment.text.toString().toInt(),
+            floor = binding.floor.text.toString(),
+            buildingNo = binding.building.text.toString(),
+            apartment = binding.apartment.text.toString(),
             lat = latitude.toString() ,
             long = longitude.toString(),
             landMark =binding.landmark.text.toString())

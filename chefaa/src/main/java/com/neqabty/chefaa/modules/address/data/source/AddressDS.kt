@@ -16,7 +16,7 @@ class AddressDS @Inject constructor(private val addressApi: AddressApi) {
     }
 
     suspend fun addUserAddress(
-        apartment: Int = 0, buildingNo: Int = 0, floor: Int = 0, landMark: String = "", lat: String = "", long: String = "", phone: String = "",
+        apartment: String = "", buildingNo: String = "", floor: String = "", landMark: String = "", lat: String = "", long: String = "", phone: String = "",
         streetName: String = "", title: String = ""
     ): AddressModel {
         return addressApi.addUserAddress(

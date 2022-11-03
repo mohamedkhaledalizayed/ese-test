@@ -17,9 +17,9 @@ class AddressRepositoryImpl @Inject constructor(private val addressDS: AddressDS
     }
 
     override fun addUserAddress(
-        apartment: Int,
-        buildingNo: Int,
-        floor: Int,
+        apartment: String,
+        buildingNo: String,
+        floor: String,
         landMark: String,
         lat: String,
         long: String,
