@@ -22,6 +22,7 @@ import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
 import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
+import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
 import dagger.hilt.android.AndroidEntryPoint
 import team.opay.business.cashier.sdk.api.*
 import team.opay.business.cashier.sdk.pay.PaymentTask
@@ -54,6 +55,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         setContentView(binding.root)
 
         setupToolbar(titleResId = R.string.payments)
+
+        if (sharedPreferences.code == TOGAREEN_CODE){
+            binding.tvDetails.visibility = View.GONE
+            binding.cardLayout.visibility = View.GONE
+        }
 
         serviceCode = intent.getStringExtra("code")!!
         serviceActionCode = intent.getStringExtra("service_action_code")!!

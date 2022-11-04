@@ -13,7 +13,7 @@ import javax.inject.Named
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class AdsModule {
+abstract class HomeModule {
     companion object {
         @Provides
         fun providesHomeApiService(

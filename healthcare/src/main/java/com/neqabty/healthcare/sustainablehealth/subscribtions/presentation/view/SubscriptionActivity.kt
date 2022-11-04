@@ -2,6 +2,7 @@ package com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view
 
 
 import android.Manifest
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -28,6 +29,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.util.*
 import androidx.activity.viewModels
+import com.github.dhaval2404.imagepicker.ImagePicker
+import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.*
 
@@ -37,10 +40,11 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private val mAdapter = FollowerAdapter()
     private var listFollower = mutableListOf<Followers>()
     private lateinit var relation: String
-    private var userImageUri: Uri? = null
-    private var nationalIdFrontUri: Uri? = null
-    private var nationalIdBackUri: Uri? = null
-    private var followerUri: Uri? = null
+    private var userImageUri: String? = null
+    private var nationalIdFrontUri: String? = null
+    private var nationalIdBackUri: String? = null
+    private var followerUri: String? = null
+    private var followerImageUri: Uri? = null
     private val relationsAdapter = RelationsAdapter()
     private var relationsList: List<RelationEntity>? = null
     private var relationTypeId  = 0
@@ -74,13 +78,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
         binding.etEmail.setText(sharedPreferences.email)
         binding.etEmail.isEnabled = false
-//        val intent = Intent(this, SehaPaymentActivity::class.java)
-//        intent.putExtra("name", name)
-//        intent.putExtra("price", price)
-//        intent.putExtra("serviceCode", serviceCode)
-//        intent.putExtra("serviceActionCode", serviceActionCode)
-//        startActivity(intent)
-//        finish()
+
         binding.spRelations.adapter = relationsAdapter
         if (maxFollowers == 0){
             binding.followersInfo.visibility = View.GONE
@@ -147,7 +145,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             }
         }
 
-
         subscriptionViewModel.providers.observe(this) {
 
             it.let { resource ->
@@ -195,7 +192,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
     fun addNewFollower(view: View) {
 
-        if (followerUri == null){
+        if (followerImageUri == null){
             Toast.makeText(this, "من فضلك اختر صورة.", Toast.LENGTH_LONG).show()
             return
         }
@@ -228,10 +225,10 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         val follower = Followers(
             name = binding.etFullName.text.toString(),
             relation = relation,
-            imageUri = followerUri!!,
+            imageUri = followerImageUri!!,
             national_id = binding.etNational.text.toString(),
             relation_type = relationTypeId,
-            image = getRealPath(followerUri!!)!!.toBase64()
+            image = followerUri!!
         )
 
         listFollower.add(follower)
@@ -239,6 +236,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         mAdapter.submitList(listFollower)
 
         followerUri = null
+        followerImageUri = null
         binding.etFullName.setText("")
         binding.etNational.setText("")
         binding.spRelations.setSelection(0)
@@ -279,37 +277,68 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     }
 
     private fun getImage(){
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_PICK
-        startActivityForResult(
-            Intent.createChooser(intent,
-                "Select Picture"), REQUEST_CODE)
+//        val intent = Intent()
+//        intent.type = "image/*"
+//        intent.action = Intent.ACTION_PICK
+//        startActivityForResult(
+//            Intent.createChooser(intent,
+//                "Select Picture"), REQUEST_CODE)
+
+        ImagePicker.with(this)
+            .galleryOnly()
+            .galleryMimeTypes(  //Exclude gif images
+                mimeTypes = arrayOf(
+                    "image/png",
+                    "image/jpg",
+                    "image/jpeg"
+                )
+            )
+            .crop()                    //Crop image(Optional), Check Customization for more option
+            .compress(1024)            //Final image size will be less than 1 MB(Optional)
+            .maxResultSize(
+                1080,
+                1080
+            )    //Final image resolution will be less than 1080 x 1080(Optional)
+            .start()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && data != null) {
 
-            when (REQUEST_CODE) {
-                1001 -> {
-                    userImageUri = data.data
-                    binding.addPersonalPhoto.setImageResource(R.drawable.success)
-                    binding.personalPhotoText.text = "تم إرفاق الصورة بنجاح."
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    val uri: Uri = data?.data!!
+
+
+                    when (REQUEST_CODE) {
+                        1001 -> {
+                            userImageUri = uri.path?.toBase64()
+                            binding.addPersonalPhoto.setImageResource(R.drawable.success)
+                            binding.personalPhotoText.text = "تم إرفاق الصورة بنجاح."
+                        }
+                        1002 -> {
+                            nationalIdFrontUri = uri.path?.toBase64()
+                            binding.addImage.setImageResource(R.drawable.success)
+                            binding.addImageText.text = "تم إرفاق الصورة بنجاح."
+                        }
+                        1003 -> {
+                            nationalIdBackUri = uri.path?.toBase64()
+                            binding.addImageBack.setImageResource(R.drawable.success)
+                            binding.addImageTextBack.text = "تم إرفاق الصورة بنجاح."
+                        }
+                        1004 -> {
+                            followerImageUri = uri
+                            followerUri = uri.path?.toBase64()
+                            binding.followerImage.setImageURI(uri)
+                        }
+                    }
                 }
-                1002 -> {
-                    nationalIdFrontUri = data.data
-                    binding.addImage.setImageResource(R.drawable.success)
-                    binding.addImageText.text = "تم إرفاق الصورة بنجاح."
+                ImagePicker.RESULT_ERROR -> {
+                    Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
                 }
-                1003 -> {
-                    nationalIdBackUri = data.data
-                    binding.addImageBack.setImageResource(R.drawable.success)
-                    binding.addImageTextBack.text = "تم إرفاق الصورة بنجاح."
-                }
-                1004 -> {
-                    followerUri = data.data
-                    binding.followerImage.setImageURI(followerUri)
+                else -> {
+                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -404,9 +433,9 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             entityCode = Constants.NEQABTY_CODE,
             serviceActionCode = "$serviceActionCode",
             referralNumber = binding.etReferralNumber.text.toString(),
-            personalImage = getRealPath(userImageUri!!)!!.toBase64(),
-            frontIdImage = getRealPath(nationalIdFrontUri!!)!!.toBase64(),
-            backIdImage = getRealPath(nationalIdBackUri!!)!!.toBase64(),
+            personalImage = userImageUri!!,
+            frontIdImage = nationalIdFrontUri!!,
+            backIdImage = nationalIdBackUri!!,
             followers = listFollower
         )
 

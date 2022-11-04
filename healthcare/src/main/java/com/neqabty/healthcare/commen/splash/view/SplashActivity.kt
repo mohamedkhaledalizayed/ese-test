@@ -12,7 +12,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivitySplashBinding
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
-import com.neqabty.healthcare.commen.landing.LandingPageActivity
+import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import com.neqabty.healthcare.core.utils.DeviceUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,11 +34,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-//        if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()) {
-//            showAlertDialogAndExitApp(getString(R.string.rooted))
-//        } else {
+        if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()) {
+            showAlertDialogAndExitApp(getString(R.string.rooted))
+        } else {
             splashViewModel.appConfig()
-//        }
+        }
 
         splashViewModel.appConfig.observe(this) {
 

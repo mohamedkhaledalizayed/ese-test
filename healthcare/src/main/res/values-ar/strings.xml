@@ -323,7 +323,7 @@
     <string name="neqabty_auth">نقابتى</string>
     <string name="enter_num">برجاء إدخال رقم الهاتف المحمول لتاكيد \n حسابك الخاص</string>
     <string name="confirm_message">لقد تم إنشاء حسابك بنجاح, مع العلم ان كلمة المرور الخاصة بك هى اخر 4 ارقام من الرقم القومى الخاص بك.</string>
-    <string name="confirm_message_serial">لقد تم إنشاء حسابك بنجاح, مع العلم ان كلمة المرور الخاصة بك هى اخر 4 ارقام من الرقم التسلسلى الخاص بك.</string>
+    <string name="confirm_message_serial">لقد تم إنشاء حسابك بنجاح, مع العلم ان كلمة المرور الخاصة بك هى اخر 4 ارقام من مسلسل الكمبيوتر الخاص بك.</string>
     <string name="there_is_no_syndicates">لا يوجد نقابات</string>
     <string name="select_syndicates">اختر النقابة</string>
     <string name="enter_correct_phone">من فضلك ادخل رقم صحيح</string>
@@ -341,16 +341,18 @@
     <string name="new_password">كلمة سر جديدة</string>
     <string name="change_password">تغيير</string>
     <string name="resend">إرسال الكود</string>
-    <string name="about_neqabty">نقابتي هو منصة تفاعلية تهدف الي تقديم خدمات الرعاية
-الصحية لنقابة المهندسين المصرية بطريقة مميكنة مدعمة
-بوسائل مختلفة للدفع الالكتروني لتسيهل الحصول علي
-الخدمات ومتابعة مدفوعاتهم باقل وقت ومجهود</string>
-    <string name="more_about_neqabty">استفاد الان بخدماتك النقابية</string>
+    <string name="about_neqabty">استفاد الان بجميع خدماتك النقابية من خلال الانضمام الي نقابتك</string>
+    <string name="more_about_neqabty">هل انت مهتم بالخدمات النقابية؟</string>
     <string name="syndicate_member_">هل أنت عضو نقابي!</string>
     <string name="neqabty_member_">هل أنت عضو غير نقابي!</string>
-    <string name="about_seha_mos">صحة مستدامة هي شبكة طبية متخصصة متوفرة لدي العديد من الجهات العلاجية ذات التخصصات المختلفة والمنتشرة في جميع المحافظات.</string>
+    <string name="about_seha_mos">تعرف علي المزيد عن خدمات باقات صحة مستدامة</string>
     <string name="neqabty_hands">“ نقابتك بين ايديك “</string>
     <string name="one_platform">منصة واحده لإدارة جميع خدماتك</string>
-    <string name="already_neqabty_member">اذا كنت عضو نقابة او غير عضو نقابة دلوقتي تقدر تستفاد بخدمات صحة مستدامة</string>
+    <string name="already_neqabty_member">هل انت مهتم بخدمات الرعاية الصحية؟</string>
+    <string name="more_services">المزيد من خدمات نقابتي</string>
+    <string name="more_service_seha">المزيد من خدمات صحة مستدامة</string>
+    <string name="medical_network">الشبكة الطبية</string>
+    <string name="health_care">الرعاية الصحية</string>
+    <string name="ph_online">صيدلية اونلاين</string>
 
 </resources>

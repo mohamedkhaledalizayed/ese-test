@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.sustainablehealth.search.presentation.view.search
+package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -42,16 +42,14 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         val item = items[position]
         viewHolder.binding.packageName.text = item.name
         viewHolder.binding.infoDetails.text = item.description
-        viewHolder.binding.packagePrice.text = "${item.price}"
+        viewHolder.binding.packagePrice.text = "${item.price.toInt()} جنية"
 
         var details = ""
         for (item: DetailEntity in item.details){
-            details = "$details ${item.title}: ${item.description}. \n"
+                details = "$details ${item.title}: ${item.description}. \n"
         }
 
-        val justify = "<html><body style='direction:rtl;text-align:justify;'>${details}</body></html>"
-        viewHolder.binding.detailsValue.loadDataWithBaseURL(null, justify, "text/html; charset=utf-8", "UTF-8", null)
-
+        viewHolder.binding.detailsValue.text = details
         viewHolder.binding.moreDetails.setOnClickListener {
             if (viewHolder.binding.packageDescription.isVisible){
                 viewHolder.binding.packageDescription.visibility = View.GONE
