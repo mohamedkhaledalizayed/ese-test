@@ -348,7 +348,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
     }
 
     override fun onBackPressed() {
-        if (sharedPreferences.isAuthenticated){
+        if (sharedPreferences.isAuthenticated && !sharedPreferences.isSyndicateMember){
             closeApp(getString(R.string.exit))
         }else{
             finish()

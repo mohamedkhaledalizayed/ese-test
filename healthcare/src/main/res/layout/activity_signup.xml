@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@color/white"
-    tools:context=".modules.signup.presentation.view.homescreen.SignupActivity">
+    tools:context=".auth.signup.presentation.view.SignupActivity">
 
 
     <include

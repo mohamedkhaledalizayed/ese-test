@@ -336,7 +336,7 @@
     <string name="phone_confirmed">تم تاكيد رقم الهاتف بنجاح.</string>
     <string name="enter_code">برجاء إدخال الكود الذى تم إرساله الى رقم الهاتف :</string>
     <string name="enter_code_">من فضلك ادخل الكود.</string>
-    <string name="serial_number">الرقم التسلسلى</string>
+    <string name="serial_number">مسلسل الكمبيوتر</string>
     <string name="old_password">كلمة السر الحالية</string>
     <string name="new_password">كلمة سر جديدة</string>
     <string name="change_password">تغيير</string>
