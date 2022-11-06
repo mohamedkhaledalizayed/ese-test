@@ -7,7 +7,7 @@ object Constants {
 
 
     //Seha
-    const val BASE_URL_DEV = "https://seha.neqabty.com/public/api/v1/"
+    const val BASE_URL_DEV = "http://3.131.229.146:7777/api/v1/"
     const val BASE_URL_PRO = "https://3.131.229.146:7777/seha.neqabty.com/public/api/v1/"
 
     //Syndicates

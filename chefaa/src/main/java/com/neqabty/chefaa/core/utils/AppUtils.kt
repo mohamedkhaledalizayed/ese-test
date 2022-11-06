@@ -39,8 +39,9 @@ class AppUtils {
                     throwable.message!!
                 }
             }
-        } else {
+        } else if (throwable is NullPointerException)
+            "لا توجد بيانات"
+        else
             throwable.message!!
-        }
     }
 }

@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.mega.home.domain.entity
+package com.neqabty.healthcare.commen.ads.domain.entity
 
 data class AdEntity(
     val createdAt: String = "",

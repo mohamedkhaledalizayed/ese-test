@@ -7,6 +7,7 @@
     android:background="@drawable/toolbar_bg"
     android:layout_height="wrap_content">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,11 +16,29 @@
         android:fitsSystemWindows="true"
         android:minHeight="?attr/actionBarSize"
         app:contentInsetEnd="0dp"
-        android:layout_marginBottom="@dimen/_20sdp"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_up_menu"
         app:titleTextColor="@color/white" />
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_9sdp"
+        android:inputType="text"
+        android:lines="1"
+        android:drawablePadding="@dimen/_10sdp"
+        android:imeOptions="actionSearch"
+        android:drawableStart="@drawable/ic_search"
+        android:hint="@string/search"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:background="@drawable/edit_text_bg"
+        />
+
+
 
 </LinearLayout>

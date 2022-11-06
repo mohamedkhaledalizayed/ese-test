@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
         tools:context=".modules.products.presentation.view.productscreen.SearchActivity">
 
         <include
@@ -21,8 +22,7 @@
             android:background="@drawable/search_bg"
             android:orientation="horizontal"
             android:weightSum="5"
-            app:layout_constraintBottom_toBottomOf="@id/layout_header"
-            app:layout_constraintTop_toTopOf="@id/layout_header">
+            app:layout_constraintTop_toBottomOf="@id/layout_header">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_search"

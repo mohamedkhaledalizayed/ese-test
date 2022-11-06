@@ -38,7 +38,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(titleResId = R.string.orders_history)
+        setupToolbar(titleResId = R.string.chefaa)
 
         Constants.userNumber = intent.extras!!.getString("user_number", "")
         Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")

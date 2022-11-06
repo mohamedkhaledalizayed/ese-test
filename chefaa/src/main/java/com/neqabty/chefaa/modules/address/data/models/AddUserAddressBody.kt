@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class AddUserAddressBody(
     @SerializedName("apartment")
-    val apartment: Int = 0,
+    val apartment: String = "",
     @SerializedName("building_no")
-    val buildingNo: Int = 0,
+    val buildingNo: String = "",
     @SerializedName("floor")
-    val floor: Int = 0,
+    val floor: String = "",
     @SerializedName("land_mark")
     val landMark: String = "",
     @SerializedName("lat")

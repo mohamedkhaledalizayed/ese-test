@@ -25,9 +25,9 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityMainBinding
 import com.neqabty.healthcare.commen.aboutapp.AboutAppActivity
+import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.mega.complains.view.ComplainsActivity
 import com.neqabty.healthcare.commen.contactus.ContactUsActivity
-import com.neqabty.healthcare.mega.home.domain.entity.AdEntity
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
@@ -35,7 +35,7 @@ import com.neqabty.healthcare.news.domain.entity.NewsEntity
 import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity
 import com.neqabty.healthcare.news.view.newslist.NewsListActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
-import com.neqabty.healthcare.sustainablehealth.search.presentation.view.search.SearchActivity
+import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
@@ -64,7 +64,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
         setContentView(binding.root)
 
         setupToolbar(title = "${sharedPreferences.syndicateName}")
-        toolbar = binding.contentActivity.toolbar.toolbar
+        toolbar = binding.toolbar
 
         loading = SpotsDialog.Builder()
             .setContext(this)
@@ -76,14 +76,14 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
         val carousel: ImageCarousel = findViewById(R.id.carousel)
         carousel.registerLifecycle(lifecycle)
 
-        binding.contentActivity.tvNewsAll.setOnClickListener {
+        binding.tvNewsAll.setOnClickListener {
             val intent = Intent(this@MegaHomeActivity, NewsListActivity::class.java)
             intent.putExtra("id", sharedPreferences.code)
             intent.putExtra("type", Constants.GENERAL_NEWS)
             startActivity(intent)
         }
 
-        binding.contentActivity.tvSyndicateNewsAll.setOnClickListener {
+        binding.tvSyndicateNewsAll.setOnClickListener {
             val intent = Intent(this@MegaHomeActivity, NewsListActivity::class.java)
             intent.putExtra("id", sharedPreferences.code)
             intent.putExtra("type", Constants.SYNDICATE_NEWS)
@@ -114,8 +114,8 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                     Status.SUCCESS -> {
                         loading.dismiss()
                         if (resource.data!!.isEmpty()){
-                            binding.contentActivity.allNewsContainer.visibility = View.GONE
-                            binding.contentActivity.newsRecycler.visibility = View.GONE
+                            binding.allNewsContainer.visibility = View.GONE
+                            binding.newsRecycler.visibility = View.GONE
                         }else{
                             mAdapter.submitList(resource.data)
                         }
@@ -129,7 +129,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
         }
 
-        binding.contentActivity.newsRecycler.adapter = mAdapter
+        binding.newsRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             NewsAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: NewsEntity) {
@@ -153,8 +153,8 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                     Status.SUCCESS -> {
                         loading.dismiss()
                         if (resource.data!!.isEmpty()){
-                            binding.contentActivity.syndicatesNewsContainer.visibility = View.GONE
-                            binding.contentActivity.syndicateNewsRecycler.visibility = View.GONE
+                            binding.syndicatesNewsContainer.visibility = View.GONE
+                            binding.syndicateNewsRecycler.visibility = View.GONE
                         }else{
                             syndicatesAdapter.submitList(resource.data)
                         }
@@ -167,7 +167,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
 
-        binding.contentActivity.syndicateNewsRecycler.adapter = syndicatesAdapter
+        binding.syndicateNewsRecycler.adapter = syndicatesAdapter
         syndicatesAdapter.onItemClickListener = object :
             NewsAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: NewsEntity) {
@@ -197,7 +197,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
         binding.navView.setNavigationItemSelectedListener(this)
 
-        binding.contentActivity.ivSubscription.setOnClickListener {
+        binding.ivSubscription.setOnClickListener {
             if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
                 val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
                 startActivity(intent)
@@ -206,11 +206,11 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
 
-        binding.contentActivity.healthcareImage.setOnClickListener {
+        binding.healthcareImage.setOnClickListener {
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
         }
 
-        binding.contentActivity.travelsImage.setOnClickListener {
+        binding.travelsImage.setOnClickListener {
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
         }
 
@@ -299,7 +299,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                 }
             }
             R.id.seha -> {
-                val intent = Intent(this@MegaHomeActivity, SearchActivity::class.java)
+                val intent = Intent(this@MegaHomeActivity, SehaHomeActivity::class.java)
                 startActivity(intent)
             }
             R.id.packages -> {
@@ -425,7 +425,11 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     override fun onBackPressed() {
-        closeApp(getString(R.string.close_app))
+        if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
+            closeApp(getString(R.string.exit))
+        }else{
+            finish()
+        }
     }
 
     private fun closeApp(message: String) {
@@ -438,7 +442,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
-            finish()
+            finishAffinity()
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)

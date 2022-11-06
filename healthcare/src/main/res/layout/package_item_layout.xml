@@ -28,6 +28,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:fontFamily="@font/dinnext_arabic_bold"
                 android:id="@+id/package_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -138,14 +139,13 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/black"/>
 
-            <WebView
+            <TextView
                 android:id="@+id/details_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/details"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textSize="@dimen/_11ssp"
-                android:justificationMode="inter_word"
                 android:textColor="@color/black"/>
 
             <Button

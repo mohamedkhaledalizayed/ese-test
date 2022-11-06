@@ -1,180 +1,357 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
-    android:background="#F0F5F7"
-    tools:context=".commen.landing.LandingPageActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".commen.landing.view.LandingPageActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/_10sdp"
-        >
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/syndicate_layout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="0dp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:cardCornerRadius="@dimen/_6sdp">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                android:id="@+id/carousel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_230sdp"
+                app:imageScaleType="center"
+                app:autoPlay="true"
+                app:showTopShadow="false"
+                app:autoPlayDelay="6000"
+                app:carouselType="BLOCK"
+                app:bottomShadowAlpha="0.2"
+                app:infiniteCarousel="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showIndicator="true"
+                app:showNavigationButtons="false" />
+
+            <RelativeLayout
+                android:id="@+id/user_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/change_phone_bg"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/carousel">
+
+                <TextView
+                    android:id="@+id/welcome"
+                    android:fontFamily="@font/dinnext_arabic_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="مرحبا بك."
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_below="@id/welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="الرقم المسجل في الدخول : "
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp" />
+
+                <ImageView
+                    android:id="@+id/change_phone_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/change_phone"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"/>
+
+
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/syndicate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/landing_bg"
-                android:orientation="vertical">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cv_chefaa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="@dimen/_6sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:cardElevation="0dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/shefa"
-                        android:scaleType="centerCrop"
-                        />
-
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/welcome_neqabty"
-                    android:textSize="@dimen/_16ssp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:textColor="@color/black"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/one_platform"
-                    android:textSize="@dimen/_14ssp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textAlignment="center"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/neqabty_hands"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_16ssp"
-                    android:textAlignment="center"
-                    />
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_6sdp"
+                app:cardElevation="@dimen/_2sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_info">
 
                 <LinearLayout
-                    android:id="@+id/ll_syndicate_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_10sdp"
-                    android:background="@drawable/ic_group_163028"
-                    android:layout_marginTop="@dimen/_10sdp">
+                    android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
+                        android:id="@+id/ll_syndicate_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/syndicate_member_"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_12ssp"
-                        android:textStyle="bold"
-                        />
+                        android:background="@drawable/ic_group_163028"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_10sdp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/more_about_neqabty"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_14ssp"
-                        />
+                        <TextView
+                            android:fontFamily="@font/dinnext_arabic_bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/more_about_neqabty"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16ssp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/about_neqabty"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10ssp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        />
+                        <TextView
+                            android:fontFamily="@font/dinnext_light"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/about_neqabty"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/syndicates_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            />
+
+                        <Button
+                            android:id="@+id/syndicate_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:backgroundTint="#1792dc"
+                            android:text="@string/more_services"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/neqabty_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/_6sdp"
-            app:cardElevation="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/syndicate_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="@dimen/_10sdp"
-            app:cardBackgroundColor="@color/transparent"
-            >
-
-            <LinearLayout
+            <androidx.cardview.widget.CardView
+                android:id="@+id/neqabty_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:orientation="vertical"
-                android:background="@drawable/ic_group_163028">
+                android:layout_margin="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_6sdp"
+                app:cardElevation="@dimen/_2sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/syndicate_layout">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/neqabty_member_"
-                    android:textSize="@dimen/_14ssp"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp">
+
+                    <TextView
+                        android:fontFamily="@font/dinnext_arabic_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/already_neqabty_member"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:fontFamily="@font/dinnext_light"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_seha_mos"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp">
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         android:padding="@dimen/_10sdp">
+
+                         <LinearLayout
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_marginStart="@dimen/_10sdp"
+                             android:orientation="vertical"
+                             android:padding="@dimen/_4sdp">
+
+                             <ImageView
+                                 android:layout_width="@dimen/_40sdp"
+                                 android:layout_height="@dimen/_40sdp"
+                                 android:adjustViewBounds="false"
+                                 android:src="@drawable/hospital"
+                                 android:scaleType="fitCenter" />
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_marginTop="@dimen/_10sdp"
+                                 android:text="@string/medical_network"
+                                 android:textStyle="bold"
+                                 android:textAlignment="center"
+                                 android:textSize="@dimen/_8ssp"
+                                 android:textColor="@color/black" />
+
+                         </LinearLayout>
+
+                         <LinearLayout
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:orientation="vertical"
+                             android:layout_marginStart="@dimen/_10sdp"
+                             android:layout_marginEnd="@dimen/_10sdp"
+                             android:padding="@dimen/_4sdp">
+
+                             <ImageView
+                                 android:layout_width="@dimen/_40sdp"
+                                 android:layout_height="@dimen/_40sdp"
+                                 android:adjustViewBounds="false"
+                                 android:cropToPadding="true"
+                                 android:src="@drawable/health"
+                                 android:scaleType="fitCenter" />
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_marginTop="@dimen/_10sdp"
+                                 android:text="@string/health_care"
+                                 android:textStyle="bold"
+                                 android:textAlignment="center"
+                                 android:textSize="@dimen/_8ssp"
+                                 android:textColor="@color/black" />
+
+                         </LinearLayout>
+
+                         <LinearLayout
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:orientation="vertical"
+                             android:padding="@dimen/_4sdp">
+
+                             <ImageView
+                                 android:layout_width="@dimen/_40sdp"
+                                 android:layout_height="@dimen/_40sdp"
+                                 android:adjustViewBounds="false"
+                                 android:cropToPadding="true"
+                                 android:src="@drawable/group_293"
+                                 android:scaleType="fitCenter" />
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_marginTop="@dimen/_10sdp"
+                                 android:text="@string/ph_online"
+                                 android:textStyle="bold"
+                                 android:textAlignment="center"
+                                 android:textSize="@dimen/_8ssp"
+                                 android:textColor="@color/black" />
+
+                         </LinearLayout>
+
+                     </LinearLayout>
+
+                    </HorizontalScrollView>
+
+                    <Button
+                        android:id="@+id/neqabty_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:backgroundTint="#1792dc"
+                        android:text="@string/more_service_seha"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:id="@+id/news_container"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/neqabty_layout"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/our_news"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/news_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/more_news"
                     android:textColor="@color/colorPrimary"
-                    android:textStyle="bold"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    />
+                    android:textSize="@dimen/_12ssp" />
+            </RelativeLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/already_neqabty_member"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_13ssp"
-                    />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/our_news_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/news_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about_seha_mos"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@color/black"
-                    />
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:minHeight="@dimen/_100sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/news_container"
+                app:layout_constraintBottom_toBottomOf="@id/our_news_recycler"
+                />
 
-            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
+    </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</LinearLayout>

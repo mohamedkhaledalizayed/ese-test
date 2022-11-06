@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen
+package com.neqabty.healthcare.commen.landing.view
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

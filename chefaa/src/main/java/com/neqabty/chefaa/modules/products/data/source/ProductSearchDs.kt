@@ -8,6 +8,6 @@ import javax.inject.Inject
 
 class ProductSearchDs @Inject constructor(private val searchApi: SearchApi) {
     suspend fun searchProduct(keyWord: String): List<ProductItem> {
-        return searchApi.searchForProduct(SearchProductBody(productName = keyWord)).responseData
+        return searchApi.searchForProduct(SearchProductBody(productName = keyWord)).responseData!!
     }
 }

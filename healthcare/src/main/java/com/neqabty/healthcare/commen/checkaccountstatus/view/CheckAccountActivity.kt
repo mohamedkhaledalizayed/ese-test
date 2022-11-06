@@ -12,7 +12,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.auth.login.view.LoginActivity
 import com.neqabty.healthcare.databinding.ActivityCheckAccountBinding
 import com.neqabty.healthcare.commen.checkaccountstatus.data.model.CheckPhoneBody
-import com.neqabty.healthcare.commen.landing.LandingPageActivity
+import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 

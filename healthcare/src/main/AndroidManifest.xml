@@ -26,7 +26,7 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
-            android:name=".commen.landing.LandingPageActivity"
+            android:name=".commen.landing.view.LandingPageActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.mypackages.presentation.AddFollowerActivity"
@@ -129,7 +129,7 @@
             android:exported="false" />
         <activity
             android:name=".auth.login.view.LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true"/>
         <activity
             android:name=".auth.otp.view.VerifyPhoneActivity"
             android:exported="false" />
@@ -147,7 +147,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.neqabty.healthcare.fileprovider"
+            android:authorities="com.neqabty.healthcare.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

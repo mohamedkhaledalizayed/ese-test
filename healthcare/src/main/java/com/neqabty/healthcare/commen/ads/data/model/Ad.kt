@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.mega.home.data.model.ads
+package com.neqabty.healthcare.commen.ads.data.model
 
 
 import androidx.annotation.Keep

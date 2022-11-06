@@ -22,6 +22,7 @@ import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
 import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
+import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
 import dagger.hilt.android.AndroidEntryPoint
 import team.opay.business.cashier.sdk.api.*
 import team.opay.business.cashier.sdk.pay.PaymentTask
@@ -54,6 +55,15 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         setContentView(binding.root)
 
         setupToolbar(titleResId = R.string.payments)
+
+        if (sharedPreferences.code == TOGAREEN_CODE){
+            binding.tvDetails.visibility = View.GONE
+            binding.cardLayout.visibility = View.GONE
+            binding.tvDeliveryMethod.visibility = View.GONE
+            binding.rgDeliveryMethods.visibility = View.GONE
+            binding.deliveryFees.visibility = View.GONE
+            binding.deliveryFeesValue.visibility = View.GONE
+        }
 
         serviceCode = intent.getStringExtra("code")!!
         serviceActionCode = intent.getStringExtra("service_action_code")!!
@@ -273,6 +283,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                 address = binding.address.text.toString()
             }
 
+            if (sharedPreferences.code == TOGAREEN_CODE){
+                address = "test"
+            }
+
             if (deliveryMethod == deliveryMethodHomeId && address.isEmpty()) {
                 Toast.makeText(this, resources.getString(R.string.enter_add), Toast.LENGTH_LONG)
                     .show()
@@ -293,18 +307,20 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             if (sharedPreferences.isPhoneVerified) {
                 binding.btnNext.isEnabled = false
                 if (deliveryMethod == deliveryMethodHomeId){
-                    paymentViewModel.getPaymentHomeInfo(
-                        PaymentHomeBody(
-                            PaymentHomeBodyObject(
-                                serviceCode = serviceCode,
-                                serviceActionCode = serviceActionCode,
-                                paymentMethod = paymentMethod,
-                                membershipId = sharedPreferences.membershipId.toInt(),
-                                address = address,
-                                deliveryMethod = deliveryMethodHomeId
-                            )
-                        )
-                    )
+                   if (sharedPreferences.code == TOGAREEN_CODE){
+                       paymentViewModel.getPaymentHomeInfo(
+                           PaymentHomeBody(
+                               PaymentHomeBodyObject(
+                                   serviceCode = serviceCode,
+                                   serviceActionCode = serviceActionCode,
+                                   paymentMethod = paymentMethod,
+                                   membershipId = sharedPreferences.membershipId.toInt(),
+                                   address = address,
+                                   deliveryMethod = deliveryMethodHomeId
+                               )
+                           )
+                       )
+                   }
                 }else{
                     paymentViewModel.getPaymentInfo(
                         PaymentBody(
@@ -372,8 +388,13 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
     private fun updateTotal() {
         binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
         binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
-        binding.totValue.text =
-            "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
+        if (sharedPreferences.code == TOGAREEN_CODE){
+            binding.totValue.text =
+                "${(totalAmount + paymentFees )}  ${resources.getString(R.string.egp)}"
+        }else{
+            binding.totValue.text =
+                "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
+        }
     }
 
     private fun showDialog(message: String) {

@@ -7,9 +7,9 @@ interface AddressRepository {
     fun getAllUserAddress(userPhone: String): Flow<List<AddressEntity>>
 
     fun addUserAddress(
-        apartment: Int = 0,
-        buildingNo: Int = 0,
-        floor: Int = 0,
+        apartment: String = "",
+        buildingNo: String = "",
+        floor: String = "",
         landMark: String = "",
         lat: String = "",
         long: String = "",

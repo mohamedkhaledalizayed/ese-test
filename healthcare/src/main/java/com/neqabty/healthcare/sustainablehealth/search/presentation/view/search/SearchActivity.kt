@@ -22,6 +22,7 @@ import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivit
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
+import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.PackagesAdapter
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
 
 
