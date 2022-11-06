@@ -5,15 +5,15 @@ import android.view.View
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.core.ui.BaseActivity
-import com.neqabty.chefaa.databinding.ActivityProductDetailsBinding
+import com.neqabty.chefaa.databinding.ChefaaActivityProductDetailsBinding
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class ProductDetailsActivity : BaseActivity<ActivityProductDetailsBinding>() {
+class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>() {
 
-    override fun getViewBinding() = ActivityProductDetailsBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ChefaaActivityProductDetailsBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

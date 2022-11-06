@@ -20,5 +20,6 @@ data class OrderEntity(
     val priceBeforeDiscount: Int = 0,
     val status: Int = 0,
     val updatedAt: String = "",
-    val userPlan: String = ""
+    val userPlan: String = "",
+    val items: List<ItemEntity>
 ) : Parcelable

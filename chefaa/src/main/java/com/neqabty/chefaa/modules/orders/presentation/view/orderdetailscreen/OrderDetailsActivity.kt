@@ -19,7 +19,7 @@ import dmax.dialog.SpotsDialog
 class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
 
     private val orderViewModel: GetOrderViewModel by viewModels()
-//    private val mAdapter = ItemssAdapter()
+    private val mAdapter = ItemsAdapter()
     private lateinit var prescriptionsAdapter: PrescriptionsAdapter
     private lateinit var dialog: AlertDialog
 //    private var navigation = false
@@ -37,88 +37,15 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
         prescriptionsAdapter = PrescriptionsAdapter(this)
-        orderViewModel.getSpecificOrder(orderId?.id.toString())
 
-        orderViewModel.order.observe(this){
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> {
-                        dialog.show()
-                    }
-                    Status.SUCCESS -> {
-                        dialog.dismiss()
-                        Toast.makeText(this,resource.data?.size.toString(),Toast.LENGTH_SHORT).show()
-                        binding.addressType.text = orderId?.addressId.toString()
-                        binding.addressDetails.text = orderId?.deliveryNote.toString()
-                        binding.orderNumberValue.text = orderId?.id.toString()
-                        binding.dateValue.text = AppUtils().dateFormat(orderId?.createdAt!!)
-                        binding.totalPayment.text = "${orderId?.price}  جنيه "
+        binding.orderStatusValue.text = orderId?.orderStatus?.titleAr
+        binding.orderNumberValue.text = orderId?.id.toString()
+        binding.dateValue.text = AppUtils().dateFormat(orderId?.createdAt!!)
+        binding.totalPayment.text = "${orderId?.price}  جنيه "
+        mAdapter.submitList(orderId?.items)
+        binding.productsRecycler.visibility = View.VISIBLE
+        binding.productsRecycler.adapter = mAdapter
 
-//                        when (resource.data.currentStatus) {
-//                            "New" -> {
-//                                binding.orderStatusValue.text = "لقد تم تنفيذ طلبك بنجاح"
-//                                binding.orderStatusValue.setTextColor(resources.getColor(R.color.black))
-//                            }
-//                            "Dispatched" -> {
-//                                binding.orderStatusValue.text = "لقد تم تسليم هذا الطلب"
-//                                binding.orderStatusValue.setTextColor(resources.getColor(R.color.green))
-//                            }
-//                            else -> {
-//                                binding.orderStatusValue.text = "تم الغاء هذا الطلب"
-//                                binding.orderStatusValue.setTextColor(resources.getColor(R.color.red))
-//                            }
-//                        }
-
-//                        if (resource.data.items.isNotEmpty()){
-//                            binding.productsRecycler.adapter = mAdapter
-//                            mAdapter.submitList(resource.data.items)
-//                        }else{
-                            binding.productsRecycler.visibility = View.GONE
-//                        }
-
-
-//                        if (resource.data.prescriptionImageEntities!!.isNotEmpty()){
-//                            prescriptionsImages.addAll(resource.data.prescriptionImageEntities)
-//                            binding.photosRecycler.adapter = prescriptionsAdapter
-//                            prescriptionsAdapter.submitList(resource.data.prescriptionImageEntities)
-//                        }else{
-//                            binding.photosRecycler.visibility = View.GONE
-//                        }
-                    }
-                    Status.ERROR -> {
-                        dialog.dismiss()
-                    }
-                }
-            }
-
-        }
-
-        prescriptionsAdapter.onItemClickListener = object :
-            PrescriptionsAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(position: Int) {
-                val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                val newFragment = SlideshowDialogFragment.newInstance(prescriptionsImages, position)
-                newFragment.show(ft, "slideshow")
-            }
-
-        }
 
     }
-
-//    override fun onBackPressed() {
-//        super.onBackPressed()
-//        if (navigation){
-//            val bundle = Bundle()
-//            bundle.putString("user_number", userNumber)
-//            bundle.putString("mobile_number", mobileNumber)
-//            bundle.putString("jwt", jwt)
-//            val intent = Intent(this, HomeActivity::class.java)
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//            intent.putExtras(bundle)
-//            startActivity(intent)
-//            finish()
-//        }else{
-//            finish()
-//        }
-//    }
 }

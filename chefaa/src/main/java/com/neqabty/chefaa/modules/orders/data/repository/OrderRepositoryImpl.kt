@@ -48,7 +48,8 @@ class OrderRepositoryImpl @Inject constructor(private val orderDS: OrderDS) : Or
             priceBeforeDiscount = priceBeforeDiscount ?: 0,
             status = status,
             updatedAt = updatedAt,
-            userPlan = userPlan
+            userPlan = userPlan,
+            items = items.map { it.toItemEntity() }
         )
     }
 
@@ -82,17 +83,19 @@ class OrderRepositoryImpl @Inject constructor(private val orderDS: OrderDS) : Or
 
 private fun OrderItem.toItemEntity(): ItemEntity {
     return ItemEntity(
-        addressId,
-        chefaaOrderNumber,
-        clientId,
-        createdAt,
-        id,
-        note ?: "",
-        orderId,
-        productId ?: "",
-        quantity ?: "",
-        type,
-        updatedAt
+        addressId = addressId,
+        chefaaOrderNumber = chefaaOrderNumber,
+        clientId = clientId,
+        createdAt = createdAt,
+        id = id,
+        note = note ?: "",
+        orderId = orderId,
+        productId = productId ?: "",
+        productImage = productImage ?: "",
+        type = type,
+        updatedAt = updatedAt,
+        quantity = quantity,
+        productName = productName ?: ""
     )
 }
 

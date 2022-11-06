@@ -35,5 +35,7 @@ data class OrderModel(
     @SerializedName("updated_at")
     val updatedAt: String = "",
     @SerializedName("user_plan")
-    val userPlan: String = ""
+    val userPlan: String = "",
+    @SerializedName("items")
+    val items: List<OrderItem> = listOf()
 )

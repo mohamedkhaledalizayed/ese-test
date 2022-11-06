@@ -19,9 +19,13 @@ data class OrderItem(
     @SerializedName("order_id")
     val orderId: Int = 0,
     @SerializedName("product_id")
-    val productId: String? = null,
+    val productId: String = "",
+    @SerializedName("product_image")
+    val productImage: String? = null,
+    @SerializedName("product_name")
+    val productName: String? = null,
     @SerializedName("quantity")
-    val quantity: String? = null,
+    val quantity: String = "",
     @SerializedName("type")
     val type: String = "",
     @SerializedName("updated_at")
