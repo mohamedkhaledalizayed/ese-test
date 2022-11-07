@@ -186,7 +186,5 @@ dependencies {
 
     // Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.6'
-    //Image Picker
-    implementation 'com.github.dhaval2404:imagepicker-support:v2.1'
 
 }

@@ -1,7 +1,7 @@
 package com.neqabty.healthcare.core.di
 
 import com.google.gson.GsonBuilder
-import com.neqabty.healthcare.core.data.Constants.BASE_URL_DEV
+import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +21,7 @@ class HealthCareModule {
     @Provides
     @Named("healthcare")
     fun providesBaseUrl(): String {
-        return BASE_URL_DEV
+        return BASE_URL_PRO
     }
 
     @Provides
@@ -47,7 +47,7 @@ class HealthCareModule {
         okHttpClient.connectTimeout(60, TimeUnit.SECONDS)
         okHttpClient.readTimeout(90, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(90, TimeUnit.SECONDS)
-        okHttpClient.certificatePinner(certificatePinner)
+//        okHttpClient.certificatePinner(certificatePinner)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.build()
         return okHttpClient.build()
