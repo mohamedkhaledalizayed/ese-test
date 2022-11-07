@@ -16,8 +16,7 @@
             android:id="@+id/view_dummy"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            app:layout_constraintBottom_toBottomOf="@id/layout_header"
-            app:layout_constraintTop_toTopOf="@id/layout_header" />
+            app:layout_constraintBottom_toBottomOf="@id/layout_header" />
 
 
         <LinearLayout

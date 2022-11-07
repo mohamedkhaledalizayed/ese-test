@@ -14,7 +14,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 
-class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
+class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
     private val items: MutableList<ItemEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
@@ -38,25 +38,26 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
-        if (position == itemCount - 1){
+        if (position == itemCount - 1) {
             viewHolder.binding.view.visibility = View.GONE
-        }else{
+        } else {
             viewHolder.binding.view.visibility = View.VISIBLE
         }
 
         viewHolder.binding.medicationTitle.text = item.productName
         viewHolder.binding.medicationQuantity.text = "العدد : ${item.quantity}"
-        Picasso.get()
-            .load(item.productImage)
-            .into(viewHolder.binding.medicationImage, object : Callback {
-                override fun onSuccess() {
-                    viewHolder.binding.imageProgress.hide()
-                }
+        if (item.productImage.isNotEmpty())
+            Picasso.get()
+                .load(item.productImage)
+                .into(viewHolder.binding.medicationImage, object : Callback {
+                    override fun onSuccess() {
+                        viewHolder.binding.imageProgress.hide()
+                    }
 
-                override fun onError(e: Exception?) {
-                    viewHolder.binding.imageProgress.hide()
-                }
-            })
+                    override fun onError(e: Exception?) {
+                        viewHolder.binding.imageProgress.hide()
+                    }
+                })
     }
 
     override fun getItemCount() = items.size
