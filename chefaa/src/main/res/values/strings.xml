@@ -63,4 +63,8 @@
     <string name="order_status">حالة الطلب</string>
     <string name="order_by_note">الطلب بالكتابة</string>
 
+    <string name="select">اكمل بإستخدام..</string>
+    <string name="gallery">المعرض</string>
+    <string name="camera">الكاميرا</string>
+    <string name="select_file">اختار صورة</string>
 </resources>

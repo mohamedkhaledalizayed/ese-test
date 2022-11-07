@@ -136,7 +136,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
     fun checkOut(view: View) {
         lifecycleScope.launch(Dispatchers.IO) {
             cart.imageList.map {
-                it.image = prepareFileBase64(it.imageUri!!)
+                it.image = Base64.encodeToString(File(it.imageUri!!.path).readBytes(), Base64.DEFAULT)
             }
             placeOrderViewModel.placePrescriptionImages(selectedAddress.id)
         }
