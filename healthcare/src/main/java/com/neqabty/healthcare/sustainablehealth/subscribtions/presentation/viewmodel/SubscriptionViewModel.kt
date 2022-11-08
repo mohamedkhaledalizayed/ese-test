@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.SubscribePostBodyRequest
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.UpdatePackageBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.subscribtions.SubscriptionEntity
+import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.updatepackage.UpdatePackageEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.usecases.AddSubscriptionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -45,6 +47,22 @@ class SubscriptionViewModel @Inject constructor(private val addSubscriptionUseCa
                 }
             }catch (e:Throwable){
                 providers.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            }
+
+        }
+    }
+
+    val packageStatus = MutableLiveData<Resource<UpdatePackageEntity>>()
+    fun updatePackage(updatePackageBody: UpdatePackageBody) {
+        viewModelScope.launch(Dispatchers.IO) {
+            packageStatus.postValue(Resource.loading(data = null))
+            try {
+
+                addSubscriptionUseCase.build(updatePackageBody).collect {
+                    packageStatus.postValue(Resource.success(data = it))
+                }
+            }catch (e:Throwable){
+                packageStatus.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
 
         }

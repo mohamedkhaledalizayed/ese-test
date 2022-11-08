@@ -29,6 +29,7 @@ import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
 import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.Followers
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.SubscribePostBodyRequest
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.UpdatePackageBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.viewmodel.SubscriptionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,11 +63,13 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private var serviceCode: String? = ""
     private var maxFollowers: Int = 0
     private var serviceActionCode: String? = ""
+    private var subscriptionMode = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.subscription)
 
+        subscriptionMode = intent.getBooleanExtra("subscriptionMode", false)
         binding.ccp.registerCarrierNumberEditText(binding.deliveryPhone)
         name = intent.getStringExtra("name")
         price = intent.getDoubleExtra("price", 0.0)
@@ -75,7 +78,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         serviceActionCode = intent.getStringExtra("serviceActionCode")
 
         binding.etName.setText(sharedPreferences.name)
-        binding.etName.isEnabled = false
         if (!sharedPreferences.nationalId.isNullOrEmpty()){
             binding.etNationalId.setText(sharedPreferences.nationalId)
         }
@@ -84,6 +86,12 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         binding.etEmail.isEnabled = false
 
         binding.spRelations.adapter = relationsAdapter
+
+        if (!subscriptionMode){
+            setupToolbar(title = "تعديل البيانات")
+            binding.followersInfo.visibility = View.GONE
+        }
+
         if (maxFollowers == 0){
             binding.followersInfo.visibility = View.GONE
         }
@@ -169,6 +177,34 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                             intent.putExtra("serviceCode", serviceCode)
                             intent.putExtra("serviceActionCode", serviceActionCode)
                             startActivity(intent)
+                            finish()
+                        }else{
+                            Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                        binding.screenContainer.visibility = View.VISIBLE
+                    }
+                }
+
+            }
+        }
+        
+        subscriptionViewModel.packageStatus.observe(this) {
+
+            it.let { resource ->
+
+                when (resource.status) {
+                    Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                        binding.screenContainer.visibility = View.GONE
+                    }
+                    Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        binding.screenContainer.visibility = View.VISIBLE
+                        if (resource.data!!.status){
+                            Toast.makeText(this, "تم تعديل البيانات بنجاح.", Toast.LENGTH_LONG).show()
                             finish()
                         }else{
                             Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
@@ -429,25 +465,47 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 //            return
 //        }
 
-        val sub = SubscribePostBodyRequest(
-            name = binding.etName.text.toString(),
-            email = binding.etEmail.text.toString(),
-            birthDate = binding.etBirthDate.text.toString(),
-            deliveryPhone = binding.ccp.fullNumberWithPlus,
-            address = binding.etAddress.text.toString(),
-            job = binding.etJob.text.toString(),
-            mobile = binding.etPhone.text.toString(),
-            nationalId = binding.etNationalId.text.toString(),
-            entityCode = Constants.NEQABTY_CODE,
-            serviceActionCode = "$serviceActionCode",
-            referralNumber = binding.etReferralNumber.text.toString(),
-            personalImage = userImageUri!!,
-            frontIdImage = nationalIdFrontUri!!,
-            backIdImage = nationalIdBackUri!!,
-            followers = listFollower
-        )
+        if (subscriptionMode){
 
-        subscriptionViewModel.addSubscription(sub)
+            val sub = SubscribePostBodyRequest(
+                name = binding.etName.text.toString(),
+                email = binding.etEmail.text.toString(),
+                birthDate = binding.etBirthDate.text.toString(),
+                deliveryPhone = binding.ccp.fullNumberWithPlus,
+                address = binding.etAddress.text.toString(),
+                job = binding.etJob.text.toString(),
+                mobile = binding.etPhone.text.toString(),
+                nationalId = binding.etNationalId.text.toString(),
+                entityCode = Constants.NEQABTY_CODE,
+                serviceActionCode = "$serviceActionCode",
+                referralNumber = binding.etReferralNumber.text.toString(),
+                personalImage = userImageUri!!,
+                frontIdImage = nationalIdFrontUri!!,
+                backIdImage = nationalIdBackUri!!,
+                followers = listFollower
+            )
+
+            subscriptionViewModel.addSubscription(sub)
+        }else{
+
+            val updatePackageBody = UpdatePackageBody(
+                name = binding.etName.text.toString(),
+                email = binding.etEmail.text.toString(),
+                birthDate = binding.etBirthDate.text.toString(),
+                deliveryPhone = binding.ccp.fullNumberWithPlus,
+                address = binding.etAddress.text.toString(),
+                job = binding.etJob.text.toString(),
+                mobile = binding.etPhone.text.toString(),
+                nationalId = binding.etNationalId.text.toString(),
+                userNumber = "VIP6727100",
+                personalImage = userImageUri!!,
+                frontIdImage = nationalIdFrontUri!!,
+                backIdImage = nationalIdBackUri!!,
+            )
+
+            subscriptionViewModel.updatePackage(updatePackageBody)
+
+        }
     }
 
     override fun onStart() {

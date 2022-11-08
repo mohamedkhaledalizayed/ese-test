@@ -118,6 +118,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                     intent.putExtra("serviceCode", item.serviceCode )
                     intent.putExtra("maxFollowers", item.maxFollower )
                     intent.putExtra("serviceActionCode", item.serviceActionCode )
+                    intent.putExtra("subscriptionMode", true )
                     startActivity(intent)
                 }else{
                     askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
