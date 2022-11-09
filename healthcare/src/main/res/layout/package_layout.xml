@@ -84,8 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:src="@drawable/ic_baseline_add_circle_outline_24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/follower_info" />
+                    />
 
                 <TextView
                     android:id="@+id/add_follower_text"
@@ -95,9 +94,19 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/add_new_member"
                     android:textColor="@color/colorPrimary"
-                    app:layout_constraintStart_toEndOf="@+id/add_follower"
-                    app:layout_constraintTop_toBottomOf="@+id/follower_info" />
+                    />
 
+
+                <TextView
+                    android:id="@+id/edit_package"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="تعديل البيانات"
+                    android:visibility="gone"
+                    android:textColor="@color/colorPrimary"
+                    />
 
             </LinearLayout>
 

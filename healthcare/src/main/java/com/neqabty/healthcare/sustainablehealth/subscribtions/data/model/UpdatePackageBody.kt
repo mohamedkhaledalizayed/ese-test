@@ -29,5 +29,5 @@ data class UpdatePackageBody(
     @SerializedName("personal_image")
     val personalImage: String,
     @SerializedName("user_number")
-    val userNumber: String
+    val userNumber: String?
 )

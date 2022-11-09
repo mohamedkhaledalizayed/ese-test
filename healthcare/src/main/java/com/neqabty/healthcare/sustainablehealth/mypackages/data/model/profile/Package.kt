@@ -37,6 +37,8 @@ data class Package(
     val recommended: Boolean,
     @SerializedName("short_description")
     val shortDescription: String,
+    @SerializedName("prepaid")
+    val prepaid: Boolean,
     @SerializedName("service_code")
     val serviceCode: String,
     @SerializedName("service_action_code")

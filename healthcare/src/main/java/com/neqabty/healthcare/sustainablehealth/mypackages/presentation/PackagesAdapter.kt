@@ -50,17 +50,26 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         val mAdapter = FollowerAdapter()
         viewHolder.binding.followersRecycler.adapter = mAdapter
 
-        if (follower.packages.paid){
+        if (follower.packages.paid || follower.packages.prepaid){
             viewHolder.binding.paid.visibility = View.GONE
         }else{
             viewHolder.binding.paid.visibility = View.VISIBLE
         }
 
 
-        if (follower.packages.maxFollower == 0){
-            viewHolder.binding.addNewFollower.visibility = View.GONE
+        if (follower.packages.prepaid){
+            viewHolder.binding.addFollower.visibility = View.VISIBLE
+            viewHolder.binding.addFollower.setImageResource(R.drawable.ic_baseline_edit_24)
+            viewHolder.binding.addFollowerText.visibility = View.GONE
+            viewHolder.binding.editPackage.visibility = View.VISIBLE
+        }else if (follower.packages.maxFollower == 0 && !follower.packages.prepaid){
+            viewHolder.binding.addFollower.visibility = View.GONE
+            viewHolder.binding.addFollowerText.visibility = View.GONE
+            viewHolder.binding.editPackage.visibility = View.GONE
         }else{
-            viewHolder.binding.addNewFollower.visibility = View.VISIBLE
+            viewHolder.binding.addFollower.setImageResource(R.drawable.ic_baseline_add_circle_outline_24)
+            viewHolder.binding.addFollowerText.visibility = View.VISIBLE
+            viewHolder.binding.editPackage.visibility = View.GONE
         }
 
         mAdapter.submitList(follower.packages.followers)
@@ -77,6 +86,10 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
             override fun setOnItemClickListener(subscriberId: String, followerId: Int) {
                 onItemClickListener?.setOnDeleteItemClickListener(subscriberId, followerId)
             }
+        }
+
+        viewHolder.binding.editPackage.setOnClickListener {
+            onItemClickListener?.setOnEditClickListener()
         }
 
         viewHolder.binding.addFollower.setOnClickListener {
@@ -126,6 +139,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
             fun setOnDeleteItemClickListener(subscriberId: String, followerId: Int)
             fun setOnAddItemClickListener(packageId: String, subscriberId: String, IsMaxFollower: Boolean)
             fun setOnPayClickListener(name: String, price: String, serviceCode: String, serviceActionCode: String)
+            fun setOnEditClickListener()
     }
 
     class ViewHolder(val binding: PackageLayoutBinding) :

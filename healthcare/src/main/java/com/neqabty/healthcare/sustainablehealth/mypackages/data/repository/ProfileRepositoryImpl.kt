@@ -69,6 +69,7 @@ private fun Data.toDataEntity(): DataEntity{
 private fun Client.toClientEntity(): ClientEntity{
     return ClientEntity(
         address = address,
+        userNumber = userNumber,
         email = email,
         id = id,
         job = job,
@@ -98,6 +99,7 @@ private fun Package.toPackageEntity(): PackageEntity{
         nameAr = nameAr,
         maxFollower = maxFollower,
         shortDescription = shortDescription,
+        prepaid = prepaid,
         serviceCode = serviceCode,
         serviceActionCode = serviceActionCode,
         expiryDate = expiryDate,

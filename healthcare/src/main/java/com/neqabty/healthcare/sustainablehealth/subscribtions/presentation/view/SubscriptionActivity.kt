@@ -63,6 +63,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private var serviceCode: String? = ""
     private var maxFollowers: Int = 0
     private var serviceActionCode: String? = ""
+    private var userNumber: String? = ""
     private var subscriptionMode = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +77,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         serviceCode = intent.getStringExtra("serviceCode")
         maxFollowers = intent.getIntExtra("maxFollowers", 0)
         serviceActionCode = intent.getStringExtra("serviceActionCode")
+        userNumber = intent.getStringExtra("userNumber")
 
         binding.etName.setText(sharedPreferences.name)
         if (!sharedPreferences.nationalId.isNullOrEmpty()){
@@ -497,7 +499,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                 job = binding.etJob.text.toString(),
                 mobile = binding.etPhone.text.toString(),
                 nationalId = binding.etNationalId.text.toString(),
-                userNumber = "VIP6727100",
+                userNumber = userNumber,
                 personalImage = userImageUri!!,
                 frontIdImage = nationalIdFrontUri!!,
                 backIdImage = nationalIdBackUri!!,

@@ -4,6 +4,7 @@ package com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.profil
 
 data class ClientEntity(
     val address: String,
+    val userNumber: String?,
     val email: String,
     val id: String,
     val job: String,
