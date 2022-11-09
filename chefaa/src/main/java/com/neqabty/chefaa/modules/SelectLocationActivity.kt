@@ -23,7 +23,8 @@ class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_location)
-
+        latitude = intent.getDoubleExtra("LAT",30.062768087142633)
+        longitude = intent.getDoubleExtra("LNG",31.245639547705647)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
     }
