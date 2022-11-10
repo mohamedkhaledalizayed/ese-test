@@ -60,7 +60,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        init()
+
         setContentView(binding.root)
 
         setupToolbar(title = "${sharedPreferences.syndicateName}")
@@ -242,6 +242,11 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
         }
         alertDialog.show()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        init()
     }
 
     @SuppressLint("CutPasteId")

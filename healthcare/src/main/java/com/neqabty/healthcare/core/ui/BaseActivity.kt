@@ -112,7 +112,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         if (!verifyAvailableNetwork()){
             showAlert(getString(R.string.internet_message), getString(R.string.internet_title)) { finish() }
         }
-        LocaleHelper.setLocale(this, sharedPreferences.language);
+        LocaleHelper.setLocale(this, "ar");
     }
 
 }

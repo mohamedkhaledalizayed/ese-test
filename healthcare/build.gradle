@@ -24,8 +24,8 @@ android {
         applicationId "com.neqabty.healthcare"
         minSdk 21
         targetSdk 31
-        versionCode 7
-        versionName "4"
+        versionCode 10
+        versionName "4.3"
         signingConfig signingConfigs.config
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -130,7 +130,7 @@ dependencies {
 
     //hilt
     implementation "com.google.dagger:hilt-android:$hiltVersion"
-    implementation project(path: ':chefaa')
+//    implementation project(path: ':chefaa')
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
     // Coroutine Lifecycle Scopes
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
