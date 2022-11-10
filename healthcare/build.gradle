@@ -13,7 +13,7 @@ android {
         config {
             keyAlias 'neqabty'
             keyPassword "123@pass"
-            storeFile file('/D:\\Android\\workspace\\NeQabty\\keyStore.jks')
+            storeFile file('/D:\\Work\\Mobile\\Neqabty Apps\\NeQabty\\keyStore.jks')
             storePassword "123@pass"
 
             v1SigningEnabled true
@@ -24,8 +24,8 @@ android {
         applicationId "com.neqabty.healthcare"
         minSdk 21
         targetSdk 31
-        versionCode 6
-        versionName "3"
+        versionCode 7
+        versionName "4"
         signingConfig signingConfigs.config
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

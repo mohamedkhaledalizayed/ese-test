@@ -1,7 +1,6 @@
 package com.neqabty.healthcare.core.di
 
 import com.google.gson.GsonBuilder
-import com.neqabty.healthcare.core.data.Constants.BASE_URL_DEV
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO
 import dagger.Module
 import dagger.Provides
@@ -22,7 +21,7 @@ class HealthCareModule {
     @Provides
     @Named("healthcare")
     fun providesBaseUrl(): String {
-        return BASE_URL_DEV
+        return BASE_URL_PRO
     }
 
     @Provides

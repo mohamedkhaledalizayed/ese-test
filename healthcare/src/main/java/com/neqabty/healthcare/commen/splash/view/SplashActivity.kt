@@ -49,7 +49,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                     }
                     Status.SUCCESS -> {
                         loading.dismiss()
-                        if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= 180) {
+                        if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= 190) {
                             Handler().postDelayed(Runnable {
                                 if (sharedPreferences.isAuthenticated) {
                                     if (sharedPreferences.isSyndicateMember) {

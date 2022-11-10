@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.core.di
 
+import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO_NEWS
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_STAGING_NEWS
 import dagger.Module
 import dagger.Provides
