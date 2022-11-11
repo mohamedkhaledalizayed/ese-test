@@ -13,5 +13,5 @@ interface RegisterApi {
         @Field("mobile") mobile: String,
         @Field("user_number") userId: String,
         @Field("country_code") countryCode: String
-    ): ChefaaResponse<String?>
+    ): ChefaaResponse<Unit>
 }

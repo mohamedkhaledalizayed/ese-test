@@ -66,12 +66,17 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
 
         dialog = SpotsDialog.Builder()
             .setContext(this)
+            .setCancelable(false)
             .setMessage(getString(R.string.please_wait))
             .build()
 
+        dialog.show()
         homeViewModel.userRegistered.observe(this) {
             if (it) {
                 dialog.dismiss()
+            }else{
+                Toast.makeText(this, "هذا الشخص غير مسجل لدينا", Toast.LENGTH_SHORT).show()
+                finish()
             }
         }
 

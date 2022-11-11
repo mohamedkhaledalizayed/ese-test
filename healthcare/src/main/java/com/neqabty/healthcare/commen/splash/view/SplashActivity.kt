@@ -34,11 +34,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()) {
-            showAlertDialogAndExitApp(getString(R.string.rooted))
-        } else {
+//        if (DeviceUtils().isDeviceRooted() || DeviceUtils().isProbablyAnEmulator()) {
+//            showAlertDialogAndExitApp(getString(R.string.rooted))
+//        } else {
             splashViewModel.appConfig()
-        }
+//        }
 
         splashViewModel.appConfig.observe(this) {
 

@@ -32,16 +32,16 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
-            testCoverageEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            minifyEnabled true
+//            shrinkResources true
+//            zipAlignEnabled true
+//            testCoverageEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             debuggable = true
-            jniDebuggable false
-            renderscriptDebuggable false
-            pseudoLocalesEnabled false
+//            jniDebuggable false
+//            renderscriptDebuggable false
+//            pseudoLocalesEnabled false
         }
         release {
             minifyEnabled true
@@ -130,7 +130,7 @@ dependencies {
 
     //hilt
     implementation "com.google.dagger:hilt-android:$hiltVersion"
-//    implementation project(path: ':chefaa')
+    implementation project(path: ':chefaa')
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
     // Coroutine Lifecycle Scopes
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"

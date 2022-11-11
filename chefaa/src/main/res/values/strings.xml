@@ -46,6 +46,7 @@
     <string name="nickname_">تصنيف العقار</string>
     <string name="location">من فضلك حدد موقعك</string>
     <string name="product_details">تفاصيل المنتج</string>
+    <string name="products">المنتجات</string>
     <string name="will_clear_cart">سيتم مسح محتويات عربة التسوق</string>
     <string name="alert_title">تنبيه</string>
     <string name="alert_cancel">إلغاء</string>

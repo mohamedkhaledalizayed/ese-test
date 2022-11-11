@@ -49,7 +49,8 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.place_order)
 
-
+        binding.cartLt.noteTv.isEnabled = false
+        binding.addressType.text = selectedAddress.title
         binding.addressDetails.text = "شارع ${selectedAddress.address}, مبنى رقم ${selectedAddress.buildingNo}, رقم الطابق ${selectedAddress.floorNo}, شقة رقم ${selectedAddress.apartmentNo}"
 
         dialog = SpotsDialog.Builder()
@@ -127,7 +128,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
 
         if(Constants.cart.note != null){
             binding.cartLt.noteTv.visibility = View.VISIBLE
-            binding.cartLt.noteTv.text = Constants.cart.note!!.note
+            binding.cartLt.noteTv.setText(Constants.cart.note!!.note)
         } else
             binding.cartLt.noteTv.visibility = View.GONE
 

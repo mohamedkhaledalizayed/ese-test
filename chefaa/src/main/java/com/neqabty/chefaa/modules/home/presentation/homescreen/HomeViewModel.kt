@@ -19,7 +19,7 @@ class HomeViewModel @Inject constructor(private val registerUseCase: RegisterUse
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 registerUseCase.build(phoneNumber,userId,countryCode).collect {
-                    userRegistered.postValue(true)
+                    userRegistered.postValue(it)
                 }
             }catch (e:Throwable){
                 Log.e("error Register",e.toString())

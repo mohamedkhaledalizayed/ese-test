@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/white">
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp">
+
         <TextView
+            android:id="@+id/tv_photos"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_90sdp"
-            android:id="@+id/noteTv"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/photosRv"
-            android:background="@color/gray"
-            android:layout_margin="@dimen/_8sdp"
-            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
             android:padding="@dimen/_12sdp"
-            android:scrollbars="vertical"
-            android:text="common_goosdece;frner;gkfnelgrkebghlejgrmberlgjhbrewglembwgelwgrhmb lweghbmnwlegmnbewlhgmbewgrl.mewbglwegrhmnwbegreo;gjne;gjneg ekj.gbneljkgrbenglejkrgbegrlkje.bgrmelgk.j,ebmgle_play_services_enable_button"
-            android:textSize="@dimen/_16sdp"/>
+            android:text="@string/order_via_n_prescription"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photosRv"
@@ -26,27 +28,67 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/noteTv"
+            app:layout_constraintTop_toBottomOf="@id/tv_photos"
             tools:listitem="@layout/photo_layout_item" />
+
+        <View
+            android:id="@+id/view0"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/_6sdp"
+            android:background="#E1E1E1"
+            app:layout_constraintTop_toBottomOf="@id/photosRv" />
+
+        <TextView
+            android:id="@+id/tv_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:padding="@dimen/_12sdp"
+            android:text="@string/order_by_note"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintTop_toBottomOf="@id/view0" />
+
+        <EditText
+            android:id="@+id/noteTv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:background="@drawable/edit_text_bg_chefaa"
+            android:padding="@dimen/_12sdp"
+            android:scrollbars="vertical"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintTop_toBottomOf="@id/tv_note" />
 
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="@dimen/_6sdp"
-            app:layout_constraintTop_toBottomOf="@id/photosRv"
-            app:layout_constraintBottom_toTopOf="@id/productRv"
-            android:background="#E1E1E1" />
+            android:background="#E1E1E1"
+            app:layout_constraintTop_toBottomOf="@id/noteTv" />
+
+        <TextView
+            android:id="@+id/tv_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:padding="@dimen/_12sdp"
+            android:text="@string/products"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintTop_toBottomOf="@id/view" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/productRv"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/checkout"
-            app:layout_constraintTop_toBottomOf="@id/view"
+            app:layout_constraintTop_toBottomOf="@id/tv_products"
             tools:itemCount="12"
             tools:listitem="@layout/cart_layout_item" />
 
@@ -54,12 +96,12 @@
             android:id="@+id/checkout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_36sdp"
-            android:layout_margin="@dimen/_10sdp"
-            android:layout_weight="0"
+            android:layout_margin="@dimen/_15sdp"
             android:background="@drawable/add_address_btn_bg"
             android:onClick="checkOut"
             android:text="@string/go_to_checkout"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/productRv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
