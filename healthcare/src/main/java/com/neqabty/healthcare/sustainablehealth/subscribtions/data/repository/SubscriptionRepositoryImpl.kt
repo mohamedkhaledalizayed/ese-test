@@ -4,11 +4,14 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.SubscribePostBodyRequest
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.UpdatePackageBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.relationstypes.Relation
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.subscription.SubscriptionModel
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.updatepackage.UpdatePackageModel
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.source.SubscriptionSource
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.subscribtions.SubscriptionEntity
+import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.updatepackage.UpdatePackageEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.repository.SubscriptionRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -32,10 +35,27 @@ class SubscriptionRepositoryImpl @Inject constructor(private val subscriptionSou
             )
         }
     }
+
+    override fun updatePackage(
+        updatePackageBody: UpdatePackageBody
+    ): Flow<UpdatePackageEntity> {
+        return flow {
+            emit(
+                subscriptionSource.updatePackage(updatePackageBody).toUpdatePackageEntity()
+            )
+        }
+    }
 }
 
 private fun SubscriptionModel.toSubscriptionEntity(): SubscriptionEntity{
     return SubscriptionEntity(
+        status = status,
+        message = message
+    )
+}
+
+private fun UpdatePackageModel.toUpdatePackageEntity(): UpdatePackageEntity{
+    return UpdatePackageEntity(
         status = status,
         message = message
     )

@@ -66,4 +66,8 @@
     <string name="chefaa_permission_message">نريد الذن باستخدام العنون لاضافة عنوان جديد</string>
     <string name="chefaa_permission_agree">موافق</string>
 
+    <string name="select">اكمل بإستخدام..</string>
+    <string name="gallery">المعرض</string>
+    <string name="camera">الكاميرا</string>
+    <string name="select_file">اختار صورة</string>
 </resources>

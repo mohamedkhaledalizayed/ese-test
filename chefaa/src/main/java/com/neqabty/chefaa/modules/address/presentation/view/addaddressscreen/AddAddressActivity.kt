@@ -20,6 +20,7 @@ import com.neqabty.chefaa.core.data.Constants.LONGITUDE
 import com.neqabty.chefaa.core.data.Constants.LATITUDE
 import com.neqabty.chefaa.databinding.CehfaaActivityAddAddressBinding
 import com.neqabty.chefaa.core.ui.BaseActivity
+import com.neqabty.chefaa.core.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -91,7 +92,7 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMa
             return
         }
 
-        dialog.show()
+
         addAddressViewModel.addAddress(
             phone = Constants.mobileNumber,
             title = binding.nickname.text.toString(),
@@ -102,9 +103,25 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMa
             lat = latitude.toString() ,
             long = longitude.toString(),
             landMark =binding.landmark.text.toString())
+
+
         addAddressViewModel.data.observe(this){
-            dialog.dismiss()
-            finish()
+            it.let { resource ->
+                when(resource.status){
+                    Status.LOADING->{
+                        dialog.show()
+                    }
+                    Status.SUCCESS->{
+                        Toast.makeText(this, "تم إضافة العنوان بنجاح.", Toast.LENGTH_LONG).show()
+                        dialog.dismiss()
+                        finish()
+                    }
+                    Status.ERROR->{
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                        dialog.dismiss()
+                    }
+                }
+            }
         }
 
     }

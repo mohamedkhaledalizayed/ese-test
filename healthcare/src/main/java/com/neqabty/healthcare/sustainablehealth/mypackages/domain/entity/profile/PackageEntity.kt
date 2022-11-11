@@ -9,6 +9,7 @@ data class PackageEntity(
     val id: String,
     val nameAr: String,
     val shortDescription: String,
+    val prepaid: Boolean,
     val serviceCode: String,
     val serviceActionCode: String?,
     val packagePrice: String,

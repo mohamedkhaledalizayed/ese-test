@@ -8,7 +8,7 @@ object Constants {
 
     //Seha
     const val BASE_URL_DEV = "http://3.131.229.146:7777/api/v1/"
-    const val BASE_URL_PRO = "https://3.131.229.146:7777/seha.neqabty.com/public/api/v1/"
+    const val BASE_URL_PRO = "https://seha.neqabty.com/public/api/v1/"
 
     //Syndicates
     const val BASE_URL_DEV_SYNDICATE = "https://neqabty.et3.co/api/"
@@ -26,8 +26,8 @@ object Constants {
     const val BASE_URL_PRO_OTP = "https://community.neqabty.com/"
 
     //Main
-    const val BASE_URL_Main = BASE_URL_STAGING_SYNDICATE
-    const val SANDBOX = true
+    const val BASE_URL_Main = BASE_URL_PRO_SYNDICATE
+    const val SANDBOX = false
 
     const val NEQABTY_CODE = "e00"
     const val ESE_CODE = "e03"

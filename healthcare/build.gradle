@@ -13,7 +13,7 @@ android {
         config {
             keyAlias 'neqabty'
             keyPassword "123@pass"
-            storeFile file('/D:\\Android\\workspace\\NeQabty\\keyStore.jks')
+            storeFile file('/D:\\Work\\Mobile\\Neqabty Apps\\NeQabty\\keyStore.jks')
             storePassword "123@pass"
 
             v1SigningEnabled true
@@ -24,8 +24,8 @@ android {
         applicationId "com.neqabty.healthcare"
         minSdk 21
         targetSdk 31
-        versionCode 6
-        versionName "3"
+        versionCode 10
+        versionName "4.3"
         signingConfig signingConfigs.config
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -130,7 +130,7 @@ dependencies {
 
     //hilt
     implementation "com.google.dagger:hilt-android:$hiltVersion"
-    implementation project(path: ':chefaa')
+//    implementation project(path: ':chefaa')
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
     // Coroutine Lifecycle Scopes
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
@@ -186,7 +186,5 @@ dependencies {
 
     // Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.6'
-    //Image Picker
-    implementation 'com.github.dhaval2404:imagepicker-support:v2.1'
 
 }

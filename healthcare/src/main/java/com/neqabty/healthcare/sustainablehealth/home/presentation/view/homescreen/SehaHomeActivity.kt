@@ -19,7 +19,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
-import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
@@ -51,7 +50,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
     private val homeViewModel: HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        init()
+
         setContentView(R.layout.activity_home)
 
         setContentView(binding.root)
@@ -118,6 +117,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                     intent.putExtra("serviceCode", item.serviceCode )
                     intent.putExtra("maxFollowers", item.maxFollower )
                     intent.putExtra("serviceActionCode", item.serviceActionCode )
+                    intent.putExtra("subscriptionMode", true )
                     startActivity(intent)
                 }else{
                     askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
@@ -165,14 +165,14 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         })
 
 
-        binding.cvChefaa.setOnClickListener {
-            val intent = Intent(this, ChefaaHomeActivity::class.java)
-            intent.putExtra("user_number", sharedPreferences.mobile)
-            intent.putExtra("mobile_number", sharedPreferences.mobile)
-            intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
-            intent.putExtra("jwt", "")
-            startActivity(intent)
-        }
+//        binding.cvChefaa.setOnClickListener {
+//            val intent = Intent(this, ChefaaHomeActivity::class.java)
+//            intent.putExtra("user_number", sharedPreferences.mobile)
+//            intent.putExtra("mobile_number", sharedPreferences.mobile)
+//            intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
+//            intent.putExtra("jwt", "")
+//            startActivity(intent)
+//        }
     }
 
     private fun init() {
@@ -191,6 +191,11 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             val logout: MenuItem = menu.findItem(R.id.logout)
             logout.title = resources.getString(R.string.logout_title)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        init()
     }
 
     private fun aboutDetails(title: String, content: String) {

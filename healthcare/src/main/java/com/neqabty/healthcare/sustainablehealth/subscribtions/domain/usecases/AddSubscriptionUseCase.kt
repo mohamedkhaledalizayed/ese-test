@@ -1,8 +1,10 @@
 package com.neqabty.healthcare.sustainablehealth.subscribtions.domain.usecases
 
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.SubscribePostBodyRequest
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.UpdatePackageBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.subscribtions.SubscriptionEntity
+import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.updatepackage.UpdatePackageEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.repository.SubscriptionRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -12,9 +14,11 @@ class AddSubscriptionUseCase @Inject constructor(private val subscriptionReposit
         return subscriptionRepository.getRelations()
     }
 
-    fun build(
-        subscribePostBodyRequest: SubscribePostBodyRequest
-    ): Flow<SubscriptionEntity> {
+    fun build(subscribePostBodyRequest: SubscribePostBodyRequest): Flow<SubscriptionEntity> {
         return subscriptionRepository.addSubscription(subscribePostBodyRequest)
+    }
+
+    fun build(updatePackageBody: UpdatePackageBody): Flow<UpdatePackageEntity> {
+        return subscriptionRepository.updatePackage(updatePackageBody)
     }
 }

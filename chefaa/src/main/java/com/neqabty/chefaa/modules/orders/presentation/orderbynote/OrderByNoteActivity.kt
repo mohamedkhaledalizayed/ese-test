@@ -19,7 +19,7 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>() {
                 type = Constants.ITEMTYPES.NOTE.typeName,
                 quantity = 1,
                 image = "",
-                note = binding.inputEt.text.toString(),
+                note = binding.noteTv.text.toString(),
                 productId = -1,
                 productEntity = null,
                 imageUri = null

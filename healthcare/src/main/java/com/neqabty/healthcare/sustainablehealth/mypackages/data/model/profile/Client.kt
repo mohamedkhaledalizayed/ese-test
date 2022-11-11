@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName
 data class Client(
     @SerializedName("address")
     val address: String,
+    @SerializedName("user_number")
+    val userNumber: String?,
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("email")

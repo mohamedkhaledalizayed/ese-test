@@ -26,30 +26,6 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
         setContentView(binding.root)
 
         setupToolbar(titleResId = R.string.settings_title)
-        if (sharedPreferences.language == "ar"){
-            binding.toggleGroup.check(R.id.btn_arabic)
-            binding.language.text = "اللغة"
-        }else{
-            binding.toggleGroup.check(R.id.btn_english)
-            binding.language.text = "Language"
-        }
-        binding.btnArabic.setOnClickListener {
-            sharedPreferences.language = "ar"
-            LocaleHelper.setLocale(this, "ar");
-            binding.toggleGroup.check(R.id.btn_arabic)
-            startActivity(Intent(this, SplashActivity::class.java))
-            finish()
-
-        }
-
-        binding.btnEnglish.setOnClickListener {
-            sharedPreferences.language = "en"
-            LocaleHelper.setLocale(this, "en");
-            binding.toggleGroup.check(R.id.btn_english)
-            startActivity(Intent(this, SplashActivity::class.java))
-            finish()
-
-        }
     }
 
     override fun onResume() {

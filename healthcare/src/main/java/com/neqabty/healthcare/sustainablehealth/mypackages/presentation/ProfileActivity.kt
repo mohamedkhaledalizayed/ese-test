@@ -14,11 +14,13 @@ import androidx.activity.viewModels
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
+import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
 
 @AndroidEntryPoint
 class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
 
 
+    private var userNumber: String? = ""
     private val mAdapter = PackagesAdapter()
     private val profileViewModel: ProfileViewModel by viewModels()
     override fun getViewBinding() = ActivityProfileBinding.inflate(layoutInflater)
@@ -43,7 +45,8 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                     binding.progressCircular.visibility = View.GONE
                     if (resource.data!!.status){
                         binding.layoutContainer.visibility = View.VISIBLE
-                        mAdapter.submitList(resource.data!!.data!!.subscribedPackages)
+                        mAdapter.submitList(resource.data.data!!.subscribedPackages)
+                        userNumber = resource.data.data.client.userNumber
 //                        binding.qrCode.loadSVG(resource.data!!.data.client.qrCode)
                     }else{
                         binding.noPackagesLayout.visibility = View.VISIBLE
@@ -51,7 +54,6 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                 }
                 Status.ERROR ->{
                     binding.progressCircular.visibility = View.GONE
-                    Log.e("tesr", resource.message.toString())
                 }
             }
 
@@ -79,6 +81,13 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                 intent.putExtra("price", price.toDouble())
                 intent.putExtra("serviceCode", serviceCode)
                 intent.putExtra("serviceActionCode", serviceActionCode)
+                startActivity(intent)
+            }
+
+            override fun setOnEditClickListener() {
+                val intent = Intent(this@ProfileActivity, SubscriptionActivity::class.java)
+                intent.putExtra("subscriptionMode", false )
+                intent.putExtra("userNumber", userNumber )
                 startActivity(intent)
             }
         }

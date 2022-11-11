@@ -2,16 +2,17 @@ package com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view
 
 
 import android.Manifest
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -21,16 +22,21 @@ import androidx.core.content.ContextCompat
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.core.utils.*
+import com.neqabty.healthcare.core.utils.LocaleHelper
+import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.healthcare.core.utils.isNationalIdValid
 import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
 import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.Followers
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.SubscribePostBodyRequest
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.UpdatePackageBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.viewmodel.SubscriptionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 
 
@@ -57,29 +63,37 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private var serviceCode: String? = ""
     private var maxFollowers: Int = 0
     private var serviceActionCode: String? = ""
+    private var userNumber: String? = ""
+    private var subscriptionMode = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.subscription)
 
+        subscriptionMode = intent.getBooleanExtra("subscriptionMode", false)
         binding.ccp.registerCarrierNumberEditText(binding.deliveryPhone)
         name = intent.getStringExtra("name")
         price = intent.getDoubleExtra("price", 0.0)
         serviceCode = intent.getStringExtra("serviceCode")
         maxFollowers = intent.getIntExtra("maxFollowers", 0)
         serviceActionCode = intent.getStringExtra("serviceActionCode")
+        userNumber = intent.getStringExtra("userNumber")
 
         binding.etName.setText(sharedPreferences.name)
-        binding.etName.isEnabled = false
         if (!sharedPreferences.nationalId.isNullOrEmpty()){
             binding.etNationalId.setText(sharedPreferences.nationalId)
-            binding.etNationalId.isEnabled = false
         }
 
         binding.etEmail.setText(sharedPreferences.email)
         binding.etEmail.isEnabled = false
 
         binding.spRelations.adapter = relationsAdapter
+
+        if (!subscriptionMode){
+            setupToolbar(title = "تعديل البيانات")
+            binding.followersInfo.visibility = View.GONE
+        }
+
         if (maxFollowers == 0){
             binding.followersInfo.visibility = View.GONE
         }
@@ -178,6 +192,34 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
             }
         }
+        
+        subscriptionViewModel.packageStatus.observe(this) {
+
+            it.let { resource ->
+
+                when (resource.status) {
+                    Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                        binding.screenContainer.visibility = View.GONE
+                    }
+                    Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        binding.screenContainer.visibility = View.VISIBLE
+                        if (resource.data!!.status){
+                            Toast.makeText(this, "تم تعديل البيانات بنجاح.", Toast.LENGTH_LONG).show()
+                            finish()
+                        }else{
+                            Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                        binding.screenContainer.visibility = View.VISIBLE
+                    }
+                }
+
+            }
+        }
     }
 
     fun addFollower(view: View) {
@@ -249,15 +291,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
     }
 
-    private fun String.toBase64(): String {
-        System.gc()
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        val bitmap = BitmapFactory.decodeFile(this)
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-        val imageBytes = byteArrayOutputStream.toByteArray()
-        return Base64.encodeToString(imageBytes, Base64.DEFAULT)
-    }
-
     @Suppress("DEPRECATED_IDENTITY_EQUALS")
     private fun checkPermissionsAndOpenFilePicker() {
         val permission = Manifest.permission.READ_EXTERNAL_STORAGE
@@ -277,148 +310,84 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     }
 
     private fun getImage(){
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_PICK
-        startActivityForResult(
-            Intent.createChooser(intent,
-                "Select Picture"), REQUEST_CODE)
-
-//        ImagePicker.with(this)
-//            .galleryOnly()
-//            .galleryMimeTypes(  //Exclude gif images
-//                mimeTypes = arrayOf(
-//                    "image/png",
-//                    "image/jpg",
-//                    "image/jpeg"
-//                )
-//            )
-//            .crop()                    //Crop image(Optional), Check Customization for more option
-//            .compress(1024)            //Final image size will be less than 1 MB(Optional)
-//            .maxResultSize(
-//                1080,
-//                1080
-//            )    //Final image resolution will be less than 1080 x 1080(Optional)
-//            .start()
+        val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(i, REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == RESULT_OK && data != null) {
-            val uri: Uri = data?.data!!
-            when (REQUEST_CODE) {
-                1001 -> {
-                    if (checkSize(getRealPath(uri))) {
-                        userImageUri = getRealPath(uri)?.toBase64()
-                        binding.addPersonalPhoto.setImageResource(R.drawable.success)
-                        binding.personalPhotoText.text = "تم إرفاق الصورة بنجاح."
-                    }else {
-                        Toast.makeText(this@SubscriptionActivity, "صورة كبيرة الحجم.", Toast.LENGTH_LONG).show()
-                    }
-                }
-                1002 -> {
-                    if (checkSize(getRealPath(uri))) {
-                        nationalIdFrontUri = getRealPath(uri)?.toBase64()
-                        binding.addImage.setImageResource(R.drawable.success)
-                        binding.addImageText.text = "تم إرفاق الصورة بنجاح."
-                    }else {
-                        Toast.makeText(this@SubscriptionActivity, "صورة كبيرة الحجم.", Toast.LENGTH_LONG).show()
-                    }
-                }
-                1003 -> {
-                    if (checkSize(getRealPath(uri))) {
-                        nationalIdBackUri = getRealPath(uri)?.toBase64()
-                        binding.addImageBack.setImageResource(R.drawable.success)
-                        binding.addImageTextBack.text = "تم إرفاق الصورة بنجاح."
-                    }else {
-                        Toast.makeText(this@SubscriptionActivity, "صورة كبيرة الحجم.", Toast.LENGTH_LONG).show()
-                    }
-                }
-                1004 -> {
-                    if (checkSize(getRealPath(uri))) {
-                        followerImageUri = uri
-                        followerUri = getRealPath(uri)?.toBase64()
-                        binding.followerImage.setImageURI(uri)
-                    }else {
-                        Toast.makeText(this@SubscriptionActivity, "صورة كبيرة الحجم.", Toast.LENGTH_LONG).show()
-                    }
-                }
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CODE){
+                onSelectFromGalleryResult(data!!)
             }
         }
-//            when (resultCode) {
-//                Activity.RESULT_OK -> {
-//                    val uri: Uri = data?.data!!
-//
-//
-//                    when (REQUEST_CODE) {
-//                        1001 -> {
-//                            userImageUri = uri.path?.toBase64()
-//                            binding.addPersonalPhoto.setImageResource(R.drawable.success)
-//                            binding.personalPhotoText.text = "تم إرفاق الصورة بنجاح."
-//                        }
-//                        1002 -> {
-//                            nationalIdFrontUri = uri.path?.toBase64()
-//                            binding.addImage.setImageResource(R.drawable.success)
-//                            binding.addImageText.text = "تم إرفاق الصورة بنجاح."
-//                        }
-//                        1003 -> {
-//                            nationalIdBackUri = uri.path?.toBase64()
-//                            binding.addImageBack.setImageResource(R.drawable.success)
-//                            binding.addImageTextBack.text = "تم إرفاق الصورة بنجاح."
-//                        }
-//                        1004 -> {
-//                            followerImageUri = uri
-//                            followerUri = uri.path?.toBase64()
-//                            binding.followerImage.setImageURI(uri)
-//                        }
-//                    }
-//                }
-//                ImagePicker.RESULT_ERROR -> {
-//                    Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-//                }
-//                else -> {
-//                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
     }
 
-    private fun checkSize(path: String?): Boolean{
+    private fun onSelectFromGalleryResult(data: Intent) {
+        if (data != null) {
+            try {
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(contentResolver, data.data)
 
-        return if (path != null){
-            val file = File(path)
-            val length = file.length()
-            Log.e("length", "${(length / 1024) / 1024}" )
-            (length / 1024) / 1024 < 1.5
-        }else{
-            false
+                if (bitmap.allocationByteCount / (1024 * 1024) > 25){
+                    Toast.makeText(this@SubscriptionActivity, "صورة كبيرة الحجم.", Toast.LENGTH_LONG).show()
+                    return
+                }
+                val photoUI = saveImage(bitmap)
+
+                val file = File(photoUI.path, photoUI.name)
+
+                val res = Base64.encodeToString(file.readBytes(), Base64.DEFAULT)
+                when (REQUEST_CODE) {
+                    1001 -> {
+                            userImageUri = res
+                            binding.addPersonalPhoto.setImageResource(R.drawable.success)
+                            binding.personalPhotoText.text = "تم إرفاق الصورة بنجاح."
+                    }
+                    1002 -> {
+                            nationalIdFrontUri = res
+                            binding.addImage.setImageResource(R.drawable.success)
+                            binding.addImageText.text = "تم إرفاق الصورة بنجاح."
+                    }
+                    1003 -> {
+                            nationalIdBackUri = res
+                            binding.addImageBack.setImageResource(R.drawable.success)
+                            binding.addImageTextBack.text = "تم إرفاق الصورة بنجاح."
+                    }
+                    1004 -> {
+                            followerImageUri = data.data!!
+                            followerUri = res
+                            binding.followerImage.setImageURI(data.data!!)
+                    }
+                }
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
+        }}
+
+    private fun saveImage(myBitmap: Bitmap): PhotoUI {
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 30, bytes)
+        val path: String = getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
+        val name = System.currentTimeMillis().toString() + ".jpg"
+        val directory = File(path)
+        if (!directory.exists())
+            directory.mkdirs()
+        try {
+            val f = File(directory, name)
+            f.createNewFile()
+            val fo = FileOutputStream(f)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(this, arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
+            fo.close()
+            return PhotoUI(path, name, Uri.parse(path + "/" + name))
+        } catch (e1: IOException) {
+            e1.printStackTrace()
         }
-
-//        var dataSize = 0
-//        var f: File? = null
-//        val scheme = uri.scheme
-//        println("Scheme type $scheme")
-//        if (scheme == ContentResolver.SCHEME_CONTENT) {
-//            try {
-//                val fileInputStream: InputStream = contentResolver.openInputStream(uri)!!
-//                dataSize = fileInputStream.available()
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
-//            println("File size in bytes ${dataSize/1024}")
-//
-//            return ((dataSize/1024)/1024) < 1.1
-//        } else if (scheme == ContentResolver.SCHEME_FILE) {
-//            val path: String = uri.path!!
-//            try {
-//                f = File(path)
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
-//            println("File size in bytes" + f?.length())
-//            return ((f?.length()!! /1024)/1024) < 1.1
-//        }
+        return PhotoUI(path, name,null)
     }
 
     fun changeUserPicture(view: View) {
@@ -498,39 +467,47 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 //            return
 //        }
 
-        val sub = SubscribePostBodyRequest(
-            name = binding.etName.text.toString(),
-            email = binding.etEmail.text.toString(),
-            birthDate = binding.etBirthDate.text.toString(),
-            deliveryPhone = binding.ccp.fullNumberWithPlus,
-            address = binding.etAddress.text.toString(),
-            job = binding.etJob.text.toString(),
-            mobile = binding.etPhone.text.toString(),
-            nationalId = binding.etNationalId.text.toString(),
-            entityCode = Constants.NEQABTY_CODE,
-            serviceActionCode = "$serviceActionCode",
-            referralNumber = binding.etReferralNumber.text.toString(),
-            personalImage = userImageUri!!,
-            frontIdImage = nationalIdFrontUri!!,
-            backIdImage = nationalIdBackUri!!,
-            followers = listFollower
-        )
+        if (subscriptionMode){
 
-        subscriptionViewModel.addSubscription(sub)
-    }
+            val sub = SubscribePostBodyRequest(
+                name = binding.etName.text.toString(),
+                email = binding.etEmail.text.toString(),
+                birthDate = binding.etBirthDate.text.toString(),
+                deliveryPhone = binding.ccp.fullNumberWithPlus,
+                address = binding.etAddress.text.toString(),
+                job = binding.etJob.text.toString(),
+                mobile = binding.etPhone.text.toString(),
+                nationalId = binding.etNationalId.text.toString(),
+                entityCode = Constants.NEQABTY_CODE,
+                serviceActionCode = "$serviceActionCode",
+                referralNumber = binding.etReferralNumber.text.toString(),
+                personalImage = userImageUri!!,
+                frontIdImage = nationalIdFrontUri!!,
+                backIdImage = nationalIdBackUri!!,
+                followers = listFollower
+            )
 
-    private fun getRealPath(uri: Uri): String?{
-        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = contentResolver.query(uri, filePathColumn, null, null, null)
-        if (cursor!!.moveToFirst()) {
-            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-            val yourRealPath = cursor.getString(columnIndex)
-            cursor.close()
+            subscriptionViewModel.addSubscription(sub)
+        }else{
 
-            Log.e("test", yourRealPath)
-            return yourRealPath
+            val updatePackageBody = UpdatePackageBody(
+                name = binding.etName.text.toString(),
+                email = binding.etEmail.text.toString(),
+                birthDate = binding.etBirthDate.text.toString(),
+                deliveryPhone = binding.ccp.fullNumberWithPlus,
+                address = binding.etAddress.text.toString(),
+                job = binding.etJob.text.toString(),
+                mobile = binding.etPhone.text.toString(),
+                nationalId = binding.etNationalId.text.toString(),
+                userNumber = userNumber,
+                personalImage = userImageUri!!,
+                frontIdImage = nationalIdFrontUri!!,
+                backIdImage = nationalIdBackUri!!,
+            )
+
+            subscriptionViewModel.updatePackage(updatePackageBody)
+
         }
-        return null
     }
 
     override fun onStart() {
@@ -539,3 +516,9 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     }
 
 }
+
+data class PhotoUI(
+    var path: String?,
+    var name: String?,
+    var uri: Uri?
+)

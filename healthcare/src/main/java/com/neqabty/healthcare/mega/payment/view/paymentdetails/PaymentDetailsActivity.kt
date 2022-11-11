@@ -307,7 +307,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
             if (sharedPreferences.isPhoneVerified) {
                 binding.btnNext.isEnabled = false
                 if (deliveryMethod == deliveryMethodHomeId){
-                   if (sharedPreferences.code == TOGAREEN_CODE){
                        paymentViewModel.getPaymentHomeInfo(
                            PaymentHomeBody(
                                PaymentHomeBodyObject(
@@ -320,7 +319,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                                )
                            )
                        )
-                   }
                 }else{
                     paymentViewModel.getPaymentInfo(
                         PaymentBody(

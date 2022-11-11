@@ -90,7 +90,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
 
     override fun onStart() {
         super.onStart()
-        LocaleHelper.setLocale(this, sharedPreferences.language)
+        LocaleHelper.setLocale(this, "ar")
     }
 
 }
