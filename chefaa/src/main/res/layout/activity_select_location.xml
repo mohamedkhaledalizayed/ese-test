@@ -21,12 +21,23 @@
         android:src="@drawable/pin"
         />
 
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/select"
+        android:background="@color/white"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:textColor="@color/black"
+        android:padding="@dimen/_10sdp"/>
+
     <Button
+        android:id="@+id/select"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_36sdp"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_20sdp"
         android:background="#4CAF50"
