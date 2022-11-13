@@ -92,6 +92,10 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
     }
 
     fun uploadImage(view: View) {
+        if (cart.imageList.size >= 5){
+            Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
+            return
+        }
         addPhoto()
     }
 
