@@ -25,6 +25,9 @@ class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private var latitude = 30.043963618425664
     private var longitude = 31.234388016164303
+    var district = ""
+    var city = ""
+    var gov = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_location)
@@ -56,15 +59,13 @@ class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun getCityName() {
         val geocoder = Geocoder(this, Locale.getDefault())
         val addresses: List<Address> = geocoder.getFromLocation(latitude, longitude, 1)
+        district = addresses[0].locality
+        city = addresses[0].subAdminArea
+        gov = addresses[0].adminArea
         val cityName = addresses[0].getAddressLine(0)
-        val city = addresses[0].locality
-        val adminArea = addresses[0].adminArea
-        val postalCode = addresses[0].postalCode
-        val countryName = addresses[0].countryName
 
-
-//        findViewById<TextView>(R.id.address).text = "${city ?: ""}, ${adminArea ?: ""}, ${countryName ?: ""}, ${postalCode ?: ""}"
-        findViewById<TextView>(R.id.address).text = "$cityName"
+        findViewById<TextView>(R.id.address).text = "${district ?: ""}, ${city ?: ""}, ${gov ?: ""}"
+//        findViewById<TextView>(R.id.address).text = "$cityName"
 
     }
 
@@ -72,6 +73,9 @@ class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         val intent = Intent(this, AddAddressActivity::class.java)
         intent.putExtra(LATITUDE, latitude)
         intent.putExtra(LONGITUDE, longitude)
+        intent.putExtra("district", district)
+        intent.putExtra("city", city)
+        intent.putExtra("gov", gov)
         startActivity(intent)
         finish()
     }

@@ -30,6 +30,9 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMa
 
     private var latitude = 0.0
     private var longitude = 0.0
+    var district = ""
+    var city = ""
+    var gov = ""
     private lateinit var dialog: AlertDialog
     override fun getViewBinding() = CehfaaActivityAddAddressBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +43,9 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMa
 
         latitude = intent.getDoubleExtra(LATITUDE, 0.0)
         longitude = intent.getDoubleExtra(LONGITUDE, 0.0)
+        district = intent.getStringExtra("district")!!
+        city = intent.getStringExtra("city")!!
+        gov = intent.getStringExtra("gov")!!
         dialog = SpotsDialog.Builder()
             .setContext(this)
             .setMessage(getString(R.string.please_wait))
@@ -47,6 +53,8 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMa
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
+
+        binding.street.setText("${district ?: ""}, ${city ?: ""}, ${gov ?: ""}")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
