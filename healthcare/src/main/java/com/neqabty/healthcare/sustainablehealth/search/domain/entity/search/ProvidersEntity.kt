@@ -1,7 +1,10 @@
 package com.neqabty.healthcare.sustainablehealth.search.domain.entity.search
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 
+@Parcelize
 data class ProvidersEntity(
     val address: String,
     val area: AreaEntity?,
@@ -14,4 +17,4 @@ data class ProvidersEntity(
     val phone: String,
     val profession: ProfessionEntity?,
     val serviceProviderType: ServiceProviderTypeEntity?
-)
+) : Parcelable

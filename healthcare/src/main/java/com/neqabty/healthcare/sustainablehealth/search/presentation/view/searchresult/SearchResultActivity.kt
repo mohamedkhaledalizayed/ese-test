@@ -47,7 +47,7 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
             ItemsAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: ProvidersEntity) {
                 val intent = Intent(this@SearchResultActivity, ProviderDetailsActivity::class.java)
-                intent.putExtra("name", item.name)
+                intent.putExtra("provider", item)
                 startActivity(intent)
             }
         }
