@@ -63,6 +63,9 @@
     <string name="please_wait">من فضلك انتظر</string>
     <string name="order_status">حالة الطلب</string>
     <string name="order_by_note">الطلب بالكتابة</string>
+    <string name="chefaa_permission">الاذن باستخدام العنون</string>
+    <string name="chefaa_permission_message">نريد الذن باستخدام العنون لاضافة عنوان جديد</string>
+    <string name="chefaa_permission_agree">موافق</string>
 
     <string name="select">اكمل بإستخدام..</string>
     <string name="gallery">المعرض</string>
