@@ -108,6 +108,9 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
 
     private fun search(){
         hideKeyboard()
+        mAdapter.clear()
+        mAdapter.submitList(listOf())
+        binding.recyclerView.adapter = mAdapter
         productViewModel.search(binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString())
     }
 

@@ -79,6 +79,12 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
             onItemClickListener?.setOnItemClickListener(item)
         }
 
+
+        viewHolder.binding.increaseDecrease.visibility = View.GONE
+        viewHolder.binding.addItem.visibility = View.VISIBLE
+        viewHolder.binding.viewDetails.visibility = View.GONE
+        viewHolder.binding.quantity.text = "1"
+
         //show saved items
         cart.productList.mapIndexed { ind, product ->
             if (product.productId == item.id) {

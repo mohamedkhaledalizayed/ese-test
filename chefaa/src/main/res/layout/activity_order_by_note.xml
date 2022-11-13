@@ -21,37 +21,36 @@
             android:id="@+id/pen_image"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:src="@drawable/pen"
-            android:padding="@dimen/_10sdp"
-            android:background="@drawable/pen_bg"
             android:layout_marginTop="@dimen/_20sdp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/pen_bg"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/pen"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/order_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
             android:text="اكتب طلبك"
-            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="@dimen/_12ssp"
-            app:layout_constraintTop_toBottomOf="@id/pen_image"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/_10sdp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pen_image" />
 
         <TextView
             android:id="@+id/order_text_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
             android:text="اكتب هنا اسم الدواء او المنتج الذى تريد طلبه من الصيدلية."
-            app:layout_constraintTop_toBottomOf="@id/order_text"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/_10sdp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_text" />
 
         <EditText
             android:id="@+id/noteTv"
@@ -60,11 +59,13 @@
             android:layout_margin="@dimen/_16sdp"
             android:background="@drawable/edit_text_bg_chefaa"
             android:hint="مثال علبة بنادول و بامبرز مقاس 2"
-            android:textAlignment="center"
             android:inputType="textMultiLine"
+            android:maxLength="300"
             android:padding="@dimen/_10sdp"
-            android:textSize="@dimen/_12ssp"
+            android:scrollbars="vertical"
+            android:textAlignment="center"
             android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/order_text_description" />

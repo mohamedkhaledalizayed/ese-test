@@ -16,10 +16,10 @@
             android:id="@+id/ll_photos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
             android:background="@drawable/rounded_white_bg"
             android:orientation="vertical"
             android:padding="@dimen/_10sdp"
-            android:layout_margin="@dimen/_10sdp"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -45,9 +45,10 @@
             android:id="@+id/cl_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_white_bg"            android:orientation="vertical"
-            android:padding="@dimen/_10sdp"
             android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/rounded_white_bg"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/ll_photos">
 
             <TextView
@@ -63,14 +64,17 @@
             <EditText
                 android:id="@+id/noteTv"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_90sdp"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/edit_text_bg_chefaa"
-                android:padding="@dimen/_12sdp"
+                android:hint="مثال علبة بنادول و بامبرز مقاس 2"
+                android:inputType="textMultiLine"
+                android:maxLength="300"
+                android:padding="@dimen/_10sdp"
                 android:scrollbars="vertical"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_12ssp"
                 app:layout_constraintTop_toBottomOf="@id/tv_note" />
 
             <carbon.widget.ImageView
@@ -90,10 +94,10 @@
             android:id="@+id/ll_products"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
             android:background="@drawable/rounded_white_bg"
             android:orientation="vertical"
             android:padding="@dimen/_10sdp"
-            android:layout_margin="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/cl_note">
 
             <TextView

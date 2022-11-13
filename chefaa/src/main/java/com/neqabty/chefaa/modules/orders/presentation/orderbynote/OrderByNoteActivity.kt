@@ -14,6 +14,8 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(R.string.order_by_note)
+
+        cart.note?.let { binding.noteTv.setText(it.note) }
         binding.saveBtn.setOnClickListener {
             if (binding.noteTv.text.toString().isNullOrBlank())
                 return@setOnClickListener
