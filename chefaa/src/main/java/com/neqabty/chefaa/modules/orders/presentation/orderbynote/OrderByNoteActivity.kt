@@ -15,6 +15,8 @@ class OrderByNoteActivity : BaseActivity<ActivityOrderByNoteBinding>() {
         setContentView(binding.root)
         setupToolbar(R.string.order_by_note)
         binding.saveBtn.setOnClickListener {
+            if (binding.noteTv.text.toString().isNullOrBlank())
+                return@setOnClickListener
             cart.note = OrderItemsEntity(
                 type = Constants.ITEMTYPES.NOTE.typeName,
                 quantity = 1,

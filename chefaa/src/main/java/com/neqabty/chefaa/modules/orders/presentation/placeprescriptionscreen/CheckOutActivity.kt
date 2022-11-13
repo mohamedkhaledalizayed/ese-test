@@ -14,6 +14,7 @@ import androidx.activity.viewModels
 import androidx.annotation.NonNull
 import androidx.lifecycle.lifecycleScope
 import com.neqabty.chefaa.R
+import com.neqabty.chefaa.core.data.Cart
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.core.data.Constants.selectedAddress
@@ -40,8 +41,8 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
     private val placeOrderViewModel: PlaceOrderViewModel by viewModels()
     var total: Float = 0.0f
     private lateinit var dialog: AlertDialog
-    private val mAdapter = CartAdapter()
-    private lateinit var photoAdapter: PhotosAdapter
+    private val mAdapter = CheckoutCartAdapter()
+    private lateinit var photoAdapter: CheckoutPhotosAdapter
 
     override fun getViewBinding() = CehfaaActivityCheckOutBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +50,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.place_order)
 
-        binding.cartLt.noteTv.isEnabled = false
         binding.addressType.text = selectedAddress.title
         binding.addressDetails.text = "شارع ${selectedAddress.address}, مبنى رقم ${selectedAddress.buildingNo}, رقم الطابق ${selectedAddress.floorNo}, شقة رقم ${selectedAddress.apartmentNo}"
 
@@ -59,16 +59,8 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
             .build()
 
 
-        photoAdapter = PhotosAdapter(this)
+        photoAdapter = CheckoutPhotosAdapter(this)
         updateView()
-
-        photoAdapter.onItemClickListener = object :
-            PhotosAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(id: Int) {
-                Constants.cart.imageList.removeAt(id)
-                updateView()
-            }
-        }
 
         binding.cartLt.photosRv.adapter = photoAdapter
         binding.cartLt.productRv.adapter = mAdapter
@@ -80,18 +72,9 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
                     }
                     Status.SUCCESS -> {
                         dialog.dismiss()
-                        val bundle = Bundle()
-                        bundle.putString("user_number", Constants.userNumber)
-                        bundle.putString("mobile_number", Constants.mobileNumber)
-                        bundle.putString("country_code", Constants.countryCode)
-                        bundle.putString("jwt", Constants.jwt)
-                        bundle.putString("orderId", resource.data)
-                        bundle.putBoolean("navigation", true)
-                        val intent = Intent(this, ChefaaHomeActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                        intent.putExtras(bundle)
-                        startActivity(intent)
-                        finish()
+                        Toast.makeText(this, getString(R.string.order_is_placed), Toast.LENGTH_LONG).show()
+                        cart = Cart()
+                        reLaunchHomeActivity(this)
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
@@ -101,9 +84,11 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
             }
         }
     }
+
+
     private fun updateView() {
         ///// checkout btn and Empty view
-        if (Constants.cart.size == 0){
+        if (cart.size == 0){
             binding.clEmptyCart.visibility = View.VISIBLE
             binding.cartLt.checkout.visibility = View.GONE
         }else{
@@ -112,26 +97,28 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
         }
 
         /////Images recyclerView
-        if (Constants.cart.imageList.isNotEmpty()) {
+        if (cart.imageList.isNotEmpty()) {
             binding.cartLt.photosRv.visibility = View.VISIBLE
             photoAdapter.submitList()
-        } else
-            binding.cartLt.photosRv.visibility = View.GONE
+        } else {
+            binding.cartLt.llPhotos.visibility = View.GONE
+        }
 
         /////Products recyclerView
-        if(Constants.cart.productList.isNotEmpty()) {
+        if(cart.productList.isNotEmpty()) {
             binding.cartLt.productRv.visibility = View.VISIBLE
             mAdapter.submitList()
-        } else
-            binding.cartLt.productRv.visibility = View.GONE
+        } else {
+            binding.cartLt.llProducts.visibility = View.GONE
+        }
 
 
-        if(Constants.cart.note != null){
+        if(cart.note != null){
             binding.cartLt.noteTv.visibility = View.VISIBLE
-            binding.cartLt.noteTv.setText(Constants.cart.note!!.note)
-        } else
-            binding.cartLt.noteTv.visibility = View.GONE
-
+            binding.cartLt.noteTv.setText(cart.note!!.note)
+        } else {
+            binding.cartLt.clNote.visibility = View.GONE
+        }
     }
 
     fun checkOut(view: View) {

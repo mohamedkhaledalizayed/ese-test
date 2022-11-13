@@ -1,4 +1,4 @@
-package com.neqabty.chefaa.modules
+package com.neqabty.chefaa.modules.orders.presentation.placeprescriptionscreen
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.databinding.CartLayoutItemBinding
+import com.neqabty.chefaa.databinding.CheckoutCartLayoutItemBinding
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 
-class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CheckoutCartAdapter : RecyclerView.Adapter<CheckoutCartAdapter.ViewHolder>() {
 
     private var layoutInflater: LayoutInflater? = null
 
@@ -25,8 +26,8 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
-        val binding: CartLayoutItemBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.cart_layout_item, parent, false)
+        val binding: CheckoutCartLayoutItemBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.checkout_cart_layout_item, parent, false)
 
         return ViewHolder(
             binding
@@ -43,7 +44,7 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
         viewHolder.binding.status.visibility = GONE
         viewHolder.binding.medicationTitle.text = cart.productList[position].productEntity?.titleEn
-        viewHolder.binding.quantity.text = "${cart.productList[position].quantity}"
+        viewHolder.binding.medicationQuantity.text = "العدد : ${cart.productList[position].quantity}"
         viewHolder.binding.medicationPrice.text =
             "${cart.productList[position].productEntity?.price?.times(cart.productList[position].quantity)}"
 
@@ -58,38 +59,6 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
                     viewHolder.binding.imageProgress.hide()
                 }
             })
-
-        //increase
-        viewHolder.binding.increase.setOnClickListener {
-            cart.productList[position] =
-                cart.productList[position].copy(quantity = cart.productList[position].quantity + 1)
-            viewHolder.binding.quantity.text = "${cart.productList[position].quantity}"
-            viewHolder.binding.medicationPrice.text = "${
-                cart.productList[position].productEntity?.price?.times(
-                    cart.productList[position].quantity
-                )
-            }"
-        }
-
-        //decrease
-        viewHolder.binding.decrease.setOnClickListener {
-            if (cart.productList[position].quantity > 1) {
-                cart.productList[position] =
-                    cart.productList[position].copy(quantity = cart.productList[position].quantity - 1)
-                viewHolder.binding.quantity.text = "${cart.productList[position].quantity}"
-                viewHolder.binding.medicationPrice.text = "${
-                    cart.productList[position].productEntity?.price?.times(
-                        cart.productList[position].quantity
-                    )
-                }"
-            } else {
-                //remove this item
-                cart.productList.removeAt(position)
-                submitList()
-                notifyItemRangeChanged(0,0)
-            }
-        }
-
     }
 
     override fun getItemCount() = cart.productList.size
@@ -99,6 +68,6 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     }
 
 
-    class ViewHolder(val binding: CartLayoutItemBinding) :
+    class ViewHolder(val binding: CheckoutCartLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

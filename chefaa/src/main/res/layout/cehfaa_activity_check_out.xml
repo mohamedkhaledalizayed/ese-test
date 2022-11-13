@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#F4F7F8">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_content"
@@ -16,16 +17,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F4F7F8"
+                android:background="@drawable/rounded_white_bg"
                 android:orientation="vertical"
                 android:padding="@dimen/_10sdp"
+                android:layout_margin="@dimen/_15sdp"
                 android:id="@+id/address_lt"
                 app:layout_constraintTop_toBottomOf="@id/layout_header">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_7sdp"
                     android:text="@string/address"
                     android:textColor="@color/color_black"
@@ -79,13 +80,14 @@
 
         <include
             android:id="@+id/cart_lt"
-            layout="@layout/cart_layout"
+            layout="@layout/checkout_cart_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/address_lt"
             app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="-204dp" />
+            tools:layout_editor_absoluteX="-209dp" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_empty_cart"
             android:layout_width="match_parent"

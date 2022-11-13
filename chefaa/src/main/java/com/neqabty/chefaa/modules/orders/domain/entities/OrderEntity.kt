@@ -1,7 +1,7 @@
 package com.neqabty.chefaa.modules.orders.domain.entities
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class OrderEntity(
@@ -10,14 +10,14 @@ data class OrderEntity(
     val clientId: String = "",
     val countryCode: String = "",
     val createdAt: String = "",
-    val deliveryFees: Int = 0,
+    val deliveryFees: Float = 0f,
     val deliveryNote: String = "",
     val id: Int = 0,
     val orderClient: OrderClientEntity = OrderClientEntity(),
     val orderStatus: OrderStatusEntity = OrderStatusEntity(),
     val phone: String = "",
-    val price: Int = 0,
-    val priceBeforeDiscount: Int = 0,
+    val price: Float = 0f,
+    val priceBeforeDiscount: Float = 0f,
     val status: Int = 0,
     val updatedAt: String = "",
     val userPlan: String = "",

@@ -72,10 +72,10 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
 
         dialog.show()
         homeViewModel.userRegistered.observe(this) {
-            if (it) {
+            if (it.status) {
                 dialog.dismiss()
             }else{
-                Toast.makeText(this, "هذا الشخص غير مسجل لدينا", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
                 finish()
             }
         }

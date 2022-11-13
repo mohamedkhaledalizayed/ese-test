@@ -16,6 +16,7 @@ import androidx.viewbinding.ViewBinding
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.modules.CartActivity
+import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 
 
 abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
@@ -58,6 +59,18 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
         return Constants.cart.getChildrenCounter().toString()
     }
 
+    protected fun reLaunchHomeActivity(context: Context){
+        val bundle = Bundle()
+        bundle.putString("user_number", Constants.userNumber)
+        bundle.putString("mobile_number", Constants.mobileNumber)
+        bundle.putString("country_code", Constants.countryCode)
+        bundle.putString("jwt", Constants.jwt)
+        val intent = Intent(context, ChefaaHomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtras(bundle)
+        startActivity(intent)
+        finish()
+    }
     //region Alerts//
     protected fun showClearCartConfirmationAlert(okCallback: () -> Unit = {}, cancelCallback: () -> Unit = {}) {
         val builder = AlertDialog.Builder(this)

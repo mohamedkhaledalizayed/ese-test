@@ -76,7 +76,6 @@
             android:layout_below="@+id/sachets"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_toEndOf="@+id/frameLayout"
-            android:text="@string/egp_85_00"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 

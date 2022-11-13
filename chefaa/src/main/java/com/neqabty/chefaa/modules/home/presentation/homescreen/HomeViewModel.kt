@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.neqabty.chefaa.modules.home.domain.entities.RegistrationEntity
 import com.neqabty.chefaa.modules.home.domain.usecase.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val registerUseCase: RegisterUseCase) : ViewModel() {
-    val userRegistered = MutableLiveData<Boolean>()
+    val userRegistered = MutableLiveData<RegistrationEntity>()
 
     fun registerUser(phoneNumber:String,userId:String,countryCode:String){
         viewModelScope.launch(Dispatchers.IO) {
@@ -23,7 +24,7 @@ class HomeViewModel @Inject constructor(private val registerUseCase: RegisterUse
                 }
             }catch (e:Throwable){
                 Log.e("error Register",e.toString())
-                userRegistered.postValue(false)
+                userRegistered.postValue(RegistrationEntity(false, ""))
             }
         }
     }

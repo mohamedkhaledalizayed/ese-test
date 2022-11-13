@@ -15,7 +15,7 @@ data class OrderModel(
     @SerializedName("created_at")
     val createdAt: String = "",
     @SerializedName("delivery_fees")
-    val deliveryFees: Int? = null,
+    val deliveryFees: Float? = null,
     @SerializedName("delivery_note")
     val deliveryNote: String = "",
     @SerializedName("id")
@@ -27,9 +27,9 @@ data class OrderModel(
     @SerializedName("phone")
     val phone: String = "",
     @SerializedName("price")
-    val price: Int? = null,
+    val price: Float? = null,
     @SerializedName("price_before_discount")
-    val priceBeforeDiscount: Int? = null,
+    val priceBeforeDiscount: Float? = null,
     @SerializedName("status")
     val status: Int = 0,
     @SerializedName("updated_at")
