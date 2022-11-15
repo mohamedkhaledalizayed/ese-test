@@ -445,7 +445,7 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             .setMerchantIcon(
                 ContextCompat.getDrawable(
                     requireContext(),
-                    R.drawable.payment_sdk_adcb_logo
+                    R.drawable.paytabs_logo
                 )
             )
             .setBillingData(billingData)
@@ -453,7 +453,7 @@ class InquiryDetailsFragment : BaseFragment(), CallbackPaymentInterface {
             .setTransactionType(PaymentSdkTransactionType.AUTH)
             .setTransactionClass(PaymentSdkTransactionClass.ECOM)
             .setShippingData(shippingData)
-            .setTokenise(PaymentSdkTokenise.USER_MANDATORY) //Check other tokenizing types in PaymentSdkTokenise
+            .setTokenise(PaymentSdkTokenise.NONE) //Check other tokenizing types in PaymentSdkTokenise
             .setCartId(paymentRequestUI.refId)
             .showBillingInfo(false)
             .showShippingInfo(false)
