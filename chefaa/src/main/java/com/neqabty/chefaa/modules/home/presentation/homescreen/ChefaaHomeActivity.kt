@@ -59,6 +59,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
         Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
         Constants.countryCode = intent.extras!!.getString("country_code", "")
         Constants.nationalID = intent.extras!!.getString("national_id", "")
+        Constants.name = intent.extras!!.getString("name", "")
         Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
 
         dialog = SpotsDialog.Builder()
@@ -77,7 +78,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             }
         }
 
-        homeViewModel.registerUser(Constants.mobileNumber, Constants.userNumber, Constants.countryCode, Constants.nationalID)
+        homeViewModel.registerUser(Constants.mobileNumber, Constants.userNumber, Constants.countryCode, Constants.nationalID, Constants.name)
     }
 
     fun findMedications(view: View) {

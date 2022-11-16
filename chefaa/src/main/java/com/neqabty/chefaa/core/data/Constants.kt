@@ -9,6 +9,7 @@ object Constants {
     var mobileNumber: String = ""
     var countryCode: String = ""
     var nationalID: String = ""
+    var name: String = ""
     var cart = Cart()
 
     enum class ITEMTYPES(val typeName: String) {

@@ -14,5 +14,6 @@ interface RegisterApi {
         @Field("user_number") userId: String,
         @Field("country_code") countryCode: String,
         @Field("national_id") nationalId: String,
+        @Field("name") name: String
     ): ChefaaResponse<Unit>
 }

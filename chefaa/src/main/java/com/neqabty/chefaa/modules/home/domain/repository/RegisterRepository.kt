@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface RegisterRepository {
-    fun registerUser(phoneNumber: String, userId: String, countryCode: String,nationalId:String): Flow<RegistrationEntity>
+    fun registerUser(phoneNumber: String, userId: String, countryCode: String,nationalId:String, name:String): Flow<RegistrationEntity>
 }

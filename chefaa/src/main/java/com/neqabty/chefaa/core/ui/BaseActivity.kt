@@ -65,6 +65,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
         bundle.putString("mobile_number", Constants.mobileNumber)
         bundle.putString("country_code", Constants.countryCode)
         bundle.putString("national_id", Constants.nationalID)
+        bundle.putString("name", Constants.name)
         bundle.putString("jwt", Constants.jwt)
         val intent = Intent(context, ChefaaHomeActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

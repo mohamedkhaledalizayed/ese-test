@@ -12,10 +12,11 @@ class RegisterRepositoryImpl @Inject constructor(private val registerDS: Registe
         phoneNumber: String,
         userId: String,
         countryCode: String,
-        nationalId:String
+        nationalId:String,
+        name:String
     ): Flow<RegistrationEntity> {
         return flow {
-            emit(registerDS.registerUser(phoneNumber, userId, countryCode, nationalId))
+            emit(registerDS.registerUser(phoneNumber, userId, countryCode, nationalId, name))
         }
     }
 }
