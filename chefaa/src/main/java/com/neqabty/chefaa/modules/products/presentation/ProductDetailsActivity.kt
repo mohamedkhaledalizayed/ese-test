@@ -21,7 +21,7 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
 
         val productItem = intent.extras?.getParcelable<ProductEntity>("product")!!
 
-        setupToolbar(title = productItem.titleEn)
+        setupToolbar(title = productItem.titleAr)
 
         // render add btn || + - btn
         if (cart.productList.find { it.productId == productItem.id } != null) {
@@ -64,8 +64,8 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
                 }
             })
 
-        binding.medicationTitle.text = productItem.titleEn
-        binding.medicationPrice.text = "EGP ${productItem.price.toString()}"
+        binding.medicationTitle.text = productItem.titleAr
+        binding.medicationPrice.text = "${productItem.price} جنيه"
 
     }
 

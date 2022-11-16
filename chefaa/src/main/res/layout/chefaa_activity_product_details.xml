@@ -37,6 +37,7 @@
                     android:id="@+id/medication_image"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_150sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:src="@drawable/pravotin" />
 
                 <androidx.core.widget.ContentLoadingProgressBar
@@ -51,43 +52,98 @@
 
             </FrameLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:background="#E1E1E1" />
-
             <TextView
+                android:fontFamily="@font/codec_pro_bold"
                 android:id="@+id/medication_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:ellipsize="end"
                 android:lines="1"
-                android:text="PRAVOTIN (100MG SACH) G. medication name"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:textSize="@dimen/_14ssp"
                 android:textColor="@color/color_black" />
 
             <TextView
+                android:fontFamily="@font/codec_pro_bold"
                 android:id="@+id/medication_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="@dimen/_20sdp"
+             android:layout_marginStart="@dimen/_10sdp"
+             android:orientation="horizontal">
+
+             <ImageView
+                 android:layout_width="@dimen/_10sdp"
+                 android:layout_height="@dimen/_10sdp"
+                 android:layout_gravity="center"
+                 android:src="@drawable/pharmacy"/>
+
+             <TextView
+                 android:fontFamily="@font/codec_pro_news"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="@dimen/_10sdp"
+                 android:layout_gravity="center"
+                 android:text="البائع : أقرب صيدلية"
+                 android:textSize="@dimen/_10ssp"
+                 android:textColor="@color/black"
+                 android:textStyle="bold" />
+
+         </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="#EEEEEE"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/clock"/>
+
+                <TextView
+                    android:fontFamily="@font/codec_pro_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_gravity="center"
+                    android:text="التوصيل خلال 1 - 2 ساعة"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
 
             <Button
                 android:id="@+id/add"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_36sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/add_address_btn_bg"
-                android:fontFamily="@font/droidkufi_bold"
-                android:padding="@dimen/_8sdp"
-
-                android:text="إضافة المنتج"
+                android:fontFamily="@font/codec_pro_bold"
+                android:text="@string/add_to_cart"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_10ssp" />
 
@@ -115,11 +171,12 @@
                     android:src="@drawable/minus" />
 
                 <TextView
+                    android:fontFamily="@font/codec_pro_bold"
                     android:id="@+id/quantity"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="6"
-                    android:background="@color/green"
+                    android:background="@color/colorPrimary"
                     android:gravity="center"
                     android:paddingStart="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_10sdp"

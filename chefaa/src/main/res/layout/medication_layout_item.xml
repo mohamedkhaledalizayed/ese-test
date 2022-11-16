@@ -172,7 +172,7 @@
             android:layout_toEndOf="@+id/frameLayout"
             android:background="@drawable/add_btn_bg"
             android:padding="@dimen/_4sdp"
-            android:text="أضف الى العربة"
+            android:text="@string/add_to_cart"
             android:textAlignment="center"
             android:textColor="@color/white" />
 
