@@ -171,6 +171,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             intent.putExtra("user_number", sharedPreferences.mobile)
             intent.putExtra("mobile_number", sharedPreferences.mobile)
             intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
+            intent.putExtra("national_id", sharedPreferences.nationalId)
             intent.putExtra("jwt", "")
             startActivity(intent)
         }

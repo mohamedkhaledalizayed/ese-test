@@ -16,10 +16,10 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val registerUseCase: RegisterUseCase) : ViewModel() {
     val userRegistered = MutableLiveData<RegistrationEntity>()
 
-    fun registerUser(phoneNumber:String,userId:String,countryCode:String){
+    fun registerUser(phoneNumber:String,userId:String,countryCode:String,nationalId:String){
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                registerUseCase.build(phoneNumber,userId,countryCode).collect {
+                registerUseCase.build(phoneNumber,userId,countryCode,nationalId).collect {
                     userRegistered.postValue(it)
                 }
             }catch (e:Throwable){

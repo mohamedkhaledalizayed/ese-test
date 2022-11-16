@@ -12,13 +12,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.Menu
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -31,7 +28,6 @@ import com.neqabty.chefaa.databinding.ChefaaActivityHomeBinding
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.chefaa.modules.orders.presentation.orderbynote.OrderByNoteActivity
 import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
-import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
 import com.neqabty.chefaa.modules.products.presentation.SearchActivity
 //import com.neqabty.chefaa.modules.CartActivity
 //import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
@@ -62,6 +58,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
         Constants.userNumber = intent.extras!!.getString("user_number", "")
         Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
         Constants.countryCode = intent.extras!!.getString("country_code", "")
+        Constants.nationalID = intent.extras!!.getString("national_id", "")
         Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
 
         dialog = SpotsDialog.Builder()
@@ -80,7 +77,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             }
         }
 
-        homeViewModel.registerUser(Constants.mobileNumber, Constants.userNumber, Constants.countryCode)
+        homeViewModel.registerUser(Constants.mobileNumber, Constants.userNumber, Constants.countryCode, Constants.nationalID)
     }
 
     fun findMedications(view: View) {

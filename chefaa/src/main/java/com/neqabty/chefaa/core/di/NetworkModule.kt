@@ -20,7 +20,7 @@ class NetworkModule {
     @Provides
     @Named("chefaa")
     fun providesBaseUrl(): String {
-        return "https://seha.neqabty.com/public/api/v1/chefaa/"
+        return "http://3.131.229.146:7777/api/v1/chefaa/"
     }
 
     @Provides

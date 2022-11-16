@@ -11,10 +11,11 @@ class RegisterRepositoryImpl @Inject constructor(private val registerDS: Registe
     override fun registerUser(
         phoneNumber: String,
         userId: String,
-        countryCode: String
+        countryCode: String,
+        nationalId:String
     ): Flow<RegistrationEntity> {
         return flow {
-            emit(registerDS.registerUser(phoneNumber, userId, countryCode))
+            emit(registerDS.registerUser(phoneNumber, userId, countryCode, nationalId))
         }
     }
 }

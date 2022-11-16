@@ -1,15 +1,14 @@
 package com.neqabty.chefaa.core.data
 
-import android.net.Uri
 import com.neqabty.chefaa.modules.address.domain.entities.AddressEntity
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
-import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
 
 object Constants {
     lateinit var selectedAddress: AddressEntity
     var userNumber: String = ""
     var mobileNumber: String = ""
     var countryCode: String = ""
+    var nationalID: String = ""
     var cart = Cart()
 
     enum class ITEMTYPES(val typeName: String) {
