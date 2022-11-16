@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
-        tools:context=".modules.products.presentation.view.productscreen.SearchActivity">
+        tools:context=".modules.products.presentation.SearchActivity">
 
         <include
             android:id="@+id/layout_header"

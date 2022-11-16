@@ -53,6 +53,7 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
             override fun setOnItemClickListener(id: Int) {
                 cart.imageList.removeAt(id)
                 updateView()
+                binding.cartLt.tvNumberImages.visibility = View.GONE
             }
         }
 
@@ -74,6 +75,7 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
 
         binding.cartLt.imageView.setOnClickListener{
             if (cart.imageList.size >= 5){
+                binding.cartLt.tvNumberImages.visibility = View.VISIBLE
                 Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
@@ -110,7 +112,7 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
         }
     }
 
-    fun grantCameraPermission() {
+    private fun grantCameraPermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CAMERA)
         } else {

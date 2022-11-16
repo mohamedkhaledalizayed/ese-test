@@ -116,6 +116,7 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
 
     override fun onResume() {
         super.onResume()
+        binding.etSearch.requestFocus()
         if (!binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString().isNullOrEmpty()){
             productViewModel.search(binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString())
         }

@@ -30,6 +30,7 @@
                 android:textSize="@dimen/_13sdp" />
 
             <HorizontalScrollView
+                android:id="@+id/horizontal_container"
                 android:layout_below="@+id/tv_photos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,6 +60,17 @@
                         tools:listitem="@layout/photo_layout_item" />
                 </LinearLayout>
             </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/tv_number_images"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/horizontal_container"
+                android:padding="@dimen/_9sdp"
+                android:visibility="gone"
+                android:text="* لقد وصلت للحد الاقصى لعدد الصور."
+                android:textColor="@color/red"
+                android:textSize="@dimen/_10sdp" />
 
 
         </RelativeLayout>
