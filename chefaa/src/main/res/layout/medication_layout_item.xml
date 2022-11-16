@@ -46,6 +46,7 @@
         </FrameLayout>
 
         <TextView
+            android:fontFamily="@font/codec_pro_news"
             android:id="@+id/medication_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,11 +54,10 @@
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_toEndOf="@+id/frameLayout"
             android:ellipsize="end"
-            android:lines="1"
             android:gravity="right"
-            android:textSize="@dimen/_11ssp"
-            android:text="PRAVOTIN (100MG SACH) G. medication name"
-            android:textColor="@color/color_black" />
+            android:lines="1"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/_11ssp" />
 
         <ImageView
             android:id="@+id/medication_status"
@@ -71,14 +71,15 @@
             android:src="@drawable/check_mark" />
 
         <TextView
+            android:fontFamily="@font/codec_pro_bold"
             android:id="@+id/medication_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/medication_title"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_toEndOf="@+id/medication_status"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            />
 
         <TextView
             android:id="@+id/delivery_time"
@@ -105,6 +106,7 @@
             android:background="@drawable/rounded_circle_bg">
 
             <TextView
+                android:fontFamily="@font/codec_pro_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_4sdp"
@@ -117,12 +119,13 @@
                 android:text="-"/>
 
             <TextView
+                android:fontFamily="@font/codec_pro_bold"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:id="@+id/quantity"
-                android:background="@color/green"
+                android:background="@color/colorPrimary"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 app:layout_constraintStart_toEndOf="@id/decrease"
@@ -135,6 +138,7 @@
                 android:text="1"/>
 
             <TextView
+                android:fontFamily="@font/codec_pro_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_4sdp"
@@ -171,10 +175,12 @@
             android:layout_marginTop="@dimen/_4sdp"
             android:layout_toEndOf="@+id/frameLayout"
             android:background="@drawable/add_btn_bg"
+            android:fontFamily="@font/codec_pro_bold"
             android:padding="@dimen/_4sdp"
             android:text="@string/add_to_cart"
             android:textAlignment="center"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp" />
 
         <View
             android:id="@+id/view"

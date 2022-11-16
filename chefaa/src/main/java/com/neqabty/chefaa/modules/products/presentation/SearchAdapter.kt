@@ -65,7 +65,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
             })
         viewHolder.binding.status.visibility = View.GONE
         viewHolder.binding.medicationTitle.text = item.titleAr
-        viewHolder.binding.medicationPrice.text = "EGP ${item.price.toString()}"
+        viewHolder.binding.medicationPrice.text = "${item.price.toString()} جنيه"
 
         viewHolder.binding.addItem.setOnClickListener {
                 viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
