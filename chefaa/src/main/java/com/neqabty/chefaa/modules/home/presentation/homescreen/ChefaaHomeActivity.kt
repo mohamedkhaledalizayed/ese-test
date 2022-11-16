@@ -79,6 +79,23 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
         }
 
         homeViewModel.registerUser(Constants.mobileNumber, Constants.userNumber, Constants.countryCode, Constants.nationalID, Constants.name)
+
+        binding.etSearch.setOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
+        }
+        binding.addPrescription.setOnClickListener {
+            if (cart.imageList.size >= 5){
+                Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            addPhoto()
+        }
+        binding.writeOrder.setOnClickListener {
+            startActivity(Intent(this,OrderByNoteActivity::class.java))
+        }
+        binding.orders.setOnClickListener {
+            startActivity(Intent(this,OrdersActivity::class.java))
+        }
     }
 
     fun findMedications(view: View) {
