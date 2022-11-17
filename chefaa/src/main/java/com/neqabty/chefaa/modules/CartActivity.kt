@@ -27,6 +27,7 @@ import com.neqabty.chefaa.databinding.ChefaaActivityCartBinding
 import com.neqabty.chefaa.modules.address.presentation.view.adressscreen.AddressesActivity
 import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
+import com.neqabty.chefaa.modules.orders.presentation.placeprescriptionscreen.CheckOutActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.*
 import java.text.SimpleDateFormat
@@ -90,8 +91,19 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
             galleryIntent()
         }
 
+        binding.cartLt.selectAddress.setOnClickListener {
+            startActivity(Intent(this, AddressesActivity::class.java))
+        }
 
+    }
 
+    override fun onResume() {
+        super.onResume()
+        if (Constants.selectedAddress != null){
+            binding.cartLt.selectAddress.text = Constants.selectedAddress?.address
+        }else{
+            binding.cartLt.selectAddress.text = "إختر عنوان"
+        }
     }
 
     private fun updatePrice() {
@@ -302,7 +314,12 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
                 imageUri = null
             )
         }
-        startActivity(Intent(this, AddressesActivity::class.java))
+
+        if (Constants.selectedAddress == null){
+            Toast.makeText(this, "من فضلك إختر عنوان.", Toast.LENGTH_LONG).show()
+        }else{
+            startActivity(Intent(this, CheckOutActivity::class.java))
+        }
     }
 
     override fun onBackPressed() {

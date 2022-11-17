@@ -1,5 +1,8 @@
 package com.neqabty.chefaa.modules.home.presentation.homescreen
 
+//import com.neqabty.chefaa.modules.CartActivity
+//import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
+//import com.neqabty.chefaa.modules.products.presentation.view.productscreen.SearchActivity
 import android.Manifest
 import android.app.Activity
 import android.content.Context
@@ -13,7 +16,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.Menu
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
@@ -22,16 +24,17 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.data.Constants.cart
+import com.neqabty.chefaa.core.data.Constants.mobileNumber
+import com.neqabty.chefaa.core.data.Constants.name
+import com.neqabty.chefaa.core.data.Constants.selectedAddress
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.core.utils.PhotoUI
 import com.neqabty.chefaa.databinding.ChefaaActivityHomeBinding
+import com.neqabty.chefaa.modules.address.presentation.view.adressscreen.AddressesActivity
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.chefaa.modules.orders.presentation.orderbynote.OrderByNoteActivity
 import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
 import com.neqabty.chefaa.modules.products.presentation.SearchActivity
-//import com.neqabty.chefaa.modules.CartActivity
-//import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
-//import com.neqabty.chefaa.modules.products.presentation.view.productscreen.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 import java.io.*
@@ -45,7 +48,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
     private val SELECT_FILE = 1
     private var photoFileName = ""
     lateinit var photoFileURI: Uri
-    
+    private var name = ""
     private val homeViewModel: HomeViewModel by viewModels()
     override fun getViewBinding() = ChefaaActivityHomeBinding.inflate(layoutInflater)
     private lateinit var dialog: android.app.AlertDialog
@@ -96,37 +99,37 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
         binding.orders.setOnClickListener {
             startActivity(Intent(this,OrdersActivity::class.java))
         }
-    }
 
-    fun findMedications(view: View) {
-        startActivity(Intent(this, SearchActivity::class.java))
-    }
-
-    fun orders(view: View) {
-        startActivity(Intent(this, OrdersActivity::class.java))
-    }
-
-    fun uploadImage(view: View) {
-        if (cart.imageList.size >= 5){
-            Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
-            return
+        name = if (Constants.name.isNullOrEmpty()){
+            mobileNumber
+        }else{
+            Constants.name
         }
-        addPhoto()
+
+        binding.selectAddress.setOnClickListener {
+            startActivity(Intent(this, AddressesActivity::class.java))
+        }
     }
 
-    fun orderByNote(view: View){
-        startActivity(Intent(this,OrderByNoteActivity::class.java))
+    override fun onResume() {
+        super.onResume()
+        checkTime()
+        if (selectedAddress != null){
+            binding.selectAddress.text = selectedAddress?.address
+        }else{
+            binding.selectAddress.text = "إختر عنوان"
+        }
     }
 
-    private fun selectImage() {
-        ImagePicker.with(this)
-            .crop()                    //Crop image(Optional), Check Customization for more option
-            .compress(1024)            //Final image size will be less than 1 MB(Optional)
-            .maxResultSize(
-                1080,
-                1080
-            )    //Final image resolution will be less than 1080 x 1080(Optional)
-            .start()
+    private fun checkTime(){
+        val c = Calendar.getInstance()
+        val timeOfDay = c[Calendar.HOUR_OF_DAY]
+
+        if (timeOfDay < 12) {
+            binding.hello.text = "صباح الخير, $name"
+        } else{
+            binding.hello.text = "مساء الخير, $name"
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

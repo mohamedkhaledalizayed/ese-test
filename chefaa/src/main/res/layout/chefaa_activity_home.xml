@@ -44,16 +44,18 @@
                     android:fontFamily="@font/codec_pro_news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="التوصيل إالى "
+                    android:text="التوصيل إلى "
                     android:textSize="@dimen/_12ssp"
                     android:textColor="@color/black"
                     android:layout_marginStart="@dimen/_10sdp"/>
 
                 <TextView
+                    android:id="@+id/select_address"
                     android:fontFamily="@font/codec_pro_news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="اكتوبر"
+                    android:text="إختر عنوان"
+                    android:lineSpacingExtra="@dimen/_5sdp"
                     android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
                     android:textSize="@dimen/_12ssp"
                     android:textColor="@color/colorPrimary"
@@ -67,10 +69,10 @@
                 android:layout_margin="@dimen/_10sdp"/>
 
             <TextView
+                android:id="@+id/hello"
                 android:fontFamily="@font/codec_pro_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="مساء الخير, محمد "
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
                 android:textColor="@color/black"

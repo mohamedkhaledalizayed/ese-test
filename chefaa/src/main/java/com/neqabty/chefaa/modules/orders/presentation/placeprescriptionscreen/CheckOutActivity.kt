@@ -50,8 +50,8 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.place_order)
 
-        binding.addressType.text = selectedAddress.title
-        binding.addressDetails.text = "شارع ${selectedAddress.address}, مبنى رقم ${selectedAddress.buildingNo}, رقم الطابق ${selectedAddress.floorNo}, شقة رقم ${selectedAddress.apartmentNo}"
+        binding.addressType.text = selectedAddress?.title
+        binding.addressDetails.text = "شارع ${selectedAddress?.address}, مبنى رقم ${selectedAddress?.buildingNo}, رقم الطابق ${selectedAddress?.floorNo}, شقة رقم ${selectedAddress?.apartmentNo}"
 
         dialog = SpotsDialog.Builder()
             .setContext(this)
@@ -126,7 +126,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
             cart.imageList.map {
                 it.image = Base64.encodeToString(File(it.imageUri!!.path).readBytes(), Base64.DEFAULT)
             }
-            placeOrderViewModel.placePrescriptionImages(selectedAddress.id)
+            placeOrderViewModel.placePrescriptionImages(selectedAddress?.id!!)
         }
     }
     @NonNull

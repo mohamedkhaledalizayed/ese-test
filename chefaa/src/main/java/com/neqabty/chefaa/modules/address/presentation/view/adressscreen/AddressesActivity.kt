@@ -77,7 +77,7 @@ class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>() {
             override fun setOnItemClickListener(addressItem: AddressEntity) {
                 Constants.selectedAddress = addressItem
 
-                startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
+//                startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
                 finish()
             }
         }

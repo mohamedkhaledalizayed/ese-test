@@ -4,7 +4,7 @@ import com.neqabty.chefaa.modules.address.domain.entities.AddressEntity
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 
 object Constants {
-    lateinit var selectedAddress: AddressEntity
+    var selectedAddress: AddressEntity? = null
     var userNumber: String = ""
     var mobileNumber: String = ""
     var countryCode: String = ""
