@@ -46,6 +46,7 @@
         </FrameLayout>
 
         <TextView
+            android:fontFamily="@font/codec_pro_news"
             android:id="@+id/medication_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,10 +55,13 @@
             android:layout_toEndOf="@+id/frameLayout"
             android:ellipsize="end"
             android:lines="1"
+            android:textSize="@dimen/_12ssp"
             android:text="@string/pravotin_100mg_sach_g_medication_name"
             android:textColor="@color/color_black" />
 
         <TextView
+            android:fontFamily="@font/codec_pro_bold"
+            android:textSize="@dimen/_10ssp"
             android:id="@+id/medication_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,6 +73,8 @@
 
 
         <TextView
+            android:fontFamily="@font/codec_pro_bold"
+            android:textSize="@dimen/_10ssp"
             android:id="@+id/medication_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

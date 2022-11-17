@@ -1,19 +1,12 @@
 package com.neqabty.chefaa.modules.address.presentation.view.addaddressscreen
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.data.Constants.LONGITUDE
@@ -25,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
 @AndroidEntryPoint
-class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMapReadyCallback {
+class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>() {
     private val addAddressViewModel: AddAddressViewModel by viewModels()
 
     private var latitude = 0.0
@@ -33,6 +26,7 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMa
     var district = ""
     var city = ""
     var gov = ""
+    private var buildingType = "المنزل"
     private lateinit var dialog: AlertDialog
     override fun getViewBinding() = CehfaaActivityAddAddressBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,10 +45,33 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMa
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment!!.getMapAsync(this)
-
         binding.street.setText("${district ?: ""}, ${city ?: ""}, ${gov ?: ""}")
+
+        binding.homeLayout.setOnClickListener {
+            buildingType = "المنزل"
+            binding.homeLayout.background = resources.getDrawable(R.drawable.medicine_bg)
+            binding.workLayout.background = resources.getDrawable(R.drawable.address_bg)
+
+            binding.homeIcon.setImageResource(R.drawable.home_white)
+            binding.workIcon.setImageResource(R.drawable.portfolio_black)
+
+
+            binding.home.setTextColor(Color.WHITE)
+            binding.work.setTextColor(Color.BLACK)
+        }
+
+        binding.workLayout.setOnClickListener {
+            buildingType = "العمل"
+            binding.homeLayout.background = resources.getDrawable(R.drawable.address_bg)
+            binding.workLayout.background = resources.getDrawable(R.drawable.medicine_bg)
+
+            binding.homeIcon.setImageResource(R.drawable.home_black)
+            binding.workIcon.setImageResource(R.drawable.portfolio_white)
+
+
+            binding.home.setTextColor(Color.BLACK)
+            binding.work.setTextColor(Color.WHITE)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -103,7 +120,7 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMa
 
         addAddressViewModel.addAddress(
             phone = Constants.mobileNumber,
-            title = binding.nickname.text.toString(),
+            title = buildingType,
             streetName= binding.street.text.toString(),
             floor = binding.floor.text.toString(),
             buildingNo = binding.building.text.toString(),
@@ -134,15 +151,4 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>(), OnMa
 
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        val sydney = LatLng(latitude, longitude)
-        googleMap.addMarker(MarkerOptions().position(sydney))
-        googleMap.uiSettings.isScrollGesturesEnabled = false
-        googleMap.uiSettings.setAllGesturesEnabled(false)
-
-        // For zooming automatically to the location of the marker
-        val cameraPosition =
-            CameraPosition.Builder().target(sydney).zoom(12f).build()
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-    }
 }

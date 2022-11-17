@@ -28,22 +28,84 @@
                 android:padding="@dimen/_10sdp"
                 tools:context=".modules.address.presentation.view.addaddressscreen.AddAddressActivity">
 
-                <FrameLayout
-                    android:id="@+id/frameLayout"
+                <TextView
+                    android:fontFamily="@font/codec_pro_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="@string/nickname_"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_140sdp"
-                    android:background="@drawable/view_btn_bg">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:weightSum="2">
 
-                    <fragment
-                        android:id="@+id/map"
-                        android:name="com.google.android.gms.maps.SupportMapFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                    <LinearLayout
+                        android:id="@+id/home_layout"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/medicine_bg"
+                        >
 
-                </FrameLayout>
+                        <ImageView
+                            android:id="@+id/home_icon"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/home_white" />
 
+                        <TextView
+                            android:id="@+id/home"
+                            android:fontFamily="@font/codec_pro_news"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_12ssp"
+                            android:lineSpacingExtra="@dimen/_8sdp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/work_layout"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/address_bg"
+                        >
+
+                        <ImageView
+                            android:id="@+id/work_icon"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/portfolio_black" />
+
+                        <TextView
+                            android:id="@+id/work"
+                            android:fontFamily="@font/codec_pro_news"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/work"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12ssp"
+                            android:lineSpacingExtra="@dimen/_8sdp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
 
                 <TextView
+                    android:fontFamily="@font/codec_pro_news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
@@ -52,6 +114,7 @@
                     android:textSize="@dimen/_12ssp" />
 
                 <EditText
+                    android:fontFamily="@font/codec_pro_news"
                     android:id="@+id/street"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -59,38 +122,19 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:hint="@string/add_street_name"
                     android:inputType="text"
-                    android:padding="@dimen/_8sdp"
-                    android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/gray_yodawy"
-                    android:textSize="@dimen/_10ssp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:text="@string/building"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/_12ssp" />
-
-                <EditText
-                    android:id="@+id/building"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:hint="@string/add_building_number"
-                    android:inputType="text"
-                    android:padding="@dimen/_8sdp"
-                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/edit_text_bg_chefaa"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_yodawy"
                     android:textSize="@dimen/_10ssp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:weightSum="3">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -99,23 +143,56 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:fontFamily="@font/codec_pro_news"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_10sdp"
+                            android:text="@string/building"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <EditText
+                            android:fontFamily="@font/codec_pro_news"
+                            android:id="@+id/building"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/add_building_number"
+                            android:inputType="text"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/edit_text_bg_chefaa"
+                            android:padding="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray_yodawy"
+                            android:textSize="@dimen/_10ssp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:fontFamily="@font/codec_pro_news"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="@string/floor"
                             android:textColor="@color/color_black"
                             android:textSize="@dimen/_12ssp" />
 
                         <EditText
+                            android:fontFamily="@font/codec_pro_news"
                             android:id="@+id/floor"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:background="@drawable/edit_text_bg_chefaa"
                             android:hint="@string/add_floor_number"
                             android:inputType="text"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/colorPrimary"
+                            android:padding="@dimen/_10sdp"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/gray_yodawy"
                             android:textSize="@dimen/_10ssp" />
 
@@ -128,23 +205,24 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:fontFamily="@font/codec_pro_news"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/_10sdp"
                             android:text="@string/apartment"
                             android:textColor="@color/color_black"
                             android:textSize="@dimen/_12ssp" />
 
                         <EditText
+                            android:fontFamily="@font/codec_pro_news"
                             android:id="@+id/apartment"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
                             android:hint="@string/add_apartment_number"
                             android:inputType="text"
-                            android:padding="@dimen/_8sdp"
-                            android:textColor="@color/colorPrimary"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/edit_text_bg_chefaa"
+                            android:padding="@dimen/_10sdp"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/gray_yodawy"
                             android:textSize="@dimen/_10ssp" />
 
@@ -152,7 +230,10 @@
 
                 </LinearLayout>
 
+
+
                 <TextView
+                    android:fontFamily="@font/codec_pro_news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
@@ -161,36 +242,17 @@
                     android:textSize="@dimen/_12ssp" />
 
                 <EditText
+                    android:fontFamily="@font/codec_pro_news"
                     android:id="@+id/landmark"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/edit_text_bg_chefaa"
                     android:hint="@string/add_bank_name_supermarket_hospital"
                     android:inputType="text"
-                    android:padding="@dimen/_8sdp"
-                    android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/gray_yodawy"
-                    android:textSize="@dimen/_10ssp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:text="@string/nickname_"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/_12ssp" />
-
-                <EditText
-                    android:id="@+id/nickname"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:hint="منزل, مكتب..."
-                    android:inputType="text"
-                    android:padding="@dimen/_8sdp"
-                    android:textColor="@color/colorPrimary"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/gray_yodawy"
                     android:textSize="@dimen/_10ssp" />
 
@@ -203,11 +265,11 @@
                     android:layout_marginTop="@dimen/_30sdp"
                     android:layout_marginEnd="@dimen/_10ssp"
                     android:background="@drawable/add_address_btn_bg"
-                    android:fontFamily="@font/droidkufi_bold"
+                    android:fontFamily="@font/codec_pro_news"
                     android:onClick="saveAddress"
                     android:text="@string/save_address"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textSize="@dimen/_12ssp" />
 
             </LinearLayout>
 

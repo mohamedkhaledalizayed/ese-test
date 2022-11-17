@@ -21,13 +21,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:fontFamily="@font/codec_pro_bold"
                 android:id="@+id/tv_photos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_9sdp"
                 android:text="@string/order_via_n_prescription"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:textSize="@dimen/_12sdp" />
 
             <HorizontalScrollView
                 android:id="@+id/horizontal_container"
@@ -68,7 +69,7 @@
                 android:layout_below="@id/horizontal_container"
                 android:padding="@dimen/_9sdp"
                 android:visibility="gone"
-                android:text="* لقد وصلت للحد الاقصى لعدد الصور."
+                android:text="@string/max_image"
                 android:textColor="@color/red"
                 android:textSize="@dimen/_10sdp" />
 
@@ -87,22 +88,24 @@
             app:layout_constraintTop_toBottomOf="@id/ll_photos">
 
             <TextView
+                android:fontFamily="@font/codec_pro_bold"
                 android:id="@+id/tv_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_9sdp"
                 android:text="@string/order_by_note"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_13sdp"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
+                android:fontFamily="@font/codec_pro_news"
                 android:id="@+id/noteTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/edit_text_bg_chefaa"
-                android:hint="مثال علبة بنادول و بامبرز مقاس 2"
+                android:hint="@string/note_des"
                 android:inputType="textMultiLine"
                 android:maxLength="1000"
                 android:padding="@dimen/_10sdp"
@@ -143,13 +146,13 @@
                     android:id="@+id/pharmacy_image"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:src="@drawable/hygieia"/>
+                    android:src="@drawable/hygieia" />
 
                 <TextView
                     android:id="@+id/pharmacy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="شحنة من : أقرب صيدلية"
+                    android:text="@string/from"
                     android:layout_toEndOf="@id/pharmacy_image"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:textColor="@color/black"
@@ -160,7 +163,7 @@
                     android:id="@+id/delivery"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="التوصيل فى خلال 1 - 2 ساعة"
+                    android:text="@string/time"
                     android:layout_toEndOf="@id/pharmacy_image"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:textColor="@color/red"
@@ -212,7 +215,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"
                     android:lineSpacingExtra="@dimen/_4sdp"
-                    android:text="توفر المنتجات و أسعارها و رسوم التوصيل قد يختلف باختلاف الصيدلية و سنتواصل معك فى حالة تغيير."
+                    android:text="@string/confirm_order_note"
                     />
 
             </LinearLayout>
@@ -226,7 +229,7 @@
                     android:id="@+id/sub_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="المجموع الفرعى"
+                    android:text="@string/sub_total"
                     android:layout_alignParentStart="true"
                     android:fontFamily="@font/codec_pro_news"
                     android:textSize="@dimen/_10ssp"
@@ -236,7 +239,6 @@
                     android:id="@+id/sub_total_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="54 جنيه"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/codec_pro_bold"
                     android:textSize="@dimen/_10ssp"
@@ -246,7 +248,7 @@
                     android:id="@+id/delivery_fees"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="رسوم التوصيل"
+                    android:text="@string/deli_fees"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_below="@+id/sub_total"
                     android:layout_alignParentStart="true"
@@ -258,8 +260,8 @@
                     android:id="@+id/delivery_fees_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="حتى 10 جنيه"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@string/to_10"
                     android:layout_below="@+id/sub_total_value"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/codec_pro_bold"
@@ -278,7 +280,7 @@
                     android:id="@+id/total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="إجمالى الشحنة"
+                    android:text="@string/total_order"
                     android:layout_below="@+id/view"
                     android:layout_alignParentStart="true"
                     android:fontFamily="@font/codec_pro_bold"
@@ -289,7 +291,6 @@
                     android:id="@+id/total_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10 جنيه"
                     android:layout_below="@+id/view"
                     android:layout_alignParentEnd="true"
                     android:fontFamily="@font/codec_pro_bold"
@@ -329,7 +330,7 @@
                     android:fontFamily="@font/codec_pro_news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="التوصيل إلى "
+                    android:text="@string/deliver"
                     android:textSize="@dimen/_12ssp"
                     android:textColor="@color/black"
                     />
@@ -339,7 +340,7 @@
                     android:fontFamily="@font/codec_pro_news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="إختر عنوان"
+                    android:text="@string/select_address"
                     android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
                     android:textSize="@dimen/_12ssp"
                     android:lineSpacingExtra="@dimen/_5sdp"
@@ -357,7 +358,7 @@
             android:layout_margin="@dimen/_15sdp"
             android:background="@drawable/add_address_btn_bg"
             android:onClick="checkOut"
-            android:text="@string/go_to_checkout"
+            android:text="@string/complete_shoping"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintTop_toBottomOf="@id/address_lt" />

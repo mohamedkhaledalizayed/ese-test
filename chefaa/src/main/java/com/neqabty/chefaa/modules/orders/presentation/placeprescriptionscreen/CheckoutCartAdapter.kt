@@ -43,10 +43,10 @@ class CheckoutCartAdapter : RecyclerView.Adapter<CheckoutCartAdapter.ViewHolder>
         }
 
         viewHolder.binding.status.visibility = GONE
-        viewHolder.binding.medicationTitle.text = cart.productList[position].productEntity?.titleEn
+        viewHolder.binding.medicationTitle.text = cart.productList[position].productEntity?.titleAr
         viewHolder.binding.medicationQuantity.text = "العدد : ${cart.productList[position].quantity}"
         viewHolder.binding.medicationPrice.text =
-            "${cart.productList[position].productEntity?.price?.times(cart.productList[position].quantity)}"
+            "${cart.productList[position].productEntity?.price?.times(cart.productList[position].quantity)} جنيه"
 
         Picasso.get()
             .load(cart.productList[position].productEntity?.image)

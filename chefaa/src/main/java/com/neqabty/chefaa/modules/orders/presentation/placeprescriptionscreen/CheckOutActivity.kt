@@ -1,8 +1,7 @@
 package com.neqabty.chefaa.modules.orders.presentation.placeprescriptionscreen
 
-import android.R.attr.path
+
 import android.app.AlertDialog
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -15,17 +14,12 @@ import androidx.annotation.NonNull
 import androidx.lifecycle.lifecycleScope
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Cart
-import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.core.data.Constants.selectedAddress
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.core.utils.FileUtils
 import com.neqabty.chefaa.core.utils.Status
 import com.neqabty.chefaa.databinding.CehfaaActivityCheckOutBinding
-import com.neqabty.chefaa.modules.CartAdapter
-import com.neqabty.chefaa.modules.PhotosAdapter
-import com.neqabty.chefaa.modules.address.presentation.view.adressscreen.AddressesActivity
-import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 import kotlinx.coroutines.Dispatchers
@@ -43,13 +37,14 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
     private lateinit var dialog: AlertDialog
     private val mAdapter = CheckoutCartAdapter()
     private lateinit var photoAdapter: CheckoutPhotosAdapter
-
+    private var totalPrice = 0.0
     override fun getViewBinding() = CehfaaActivityCheckOutBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.place_order)
 
+        updatePrice()
         binding.addressType.text = selectedAddress?.title
         binding.addressDetails.text = "شارع ${selectedAddress?.address}, مبنى رقم ${selectedAddress?.buildingNo}, رقم الطابق ${selectedAddress?.floorNo}, شقة رقم ${selectedAddress?.apartmentNo}"
 
@@ -83,6 +78,18 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
                 }
             }
         }
+
+        binding.cartLt.checkout.visibility = View.GONE
+    }
+
+    private fun updatePrice() {
+        totalPrice = 0.0
+        for (item in cart.productList){
+            totalPrice += item.productEntity?.price!!.times(item.quantity.toDouble())
+        }
+
+        binding.subTotalValue.text = "$totalPrice جنيه"
+        binding.totalValue.text = "$totalPrice جنيه"
     }
 
 
