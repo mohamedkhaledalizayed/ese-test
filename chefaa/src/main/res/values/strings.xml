@@ -51,7 +51,7 @@
     <string name="alert_cancel">إلغاء</string>
     <string name="alert_ok">موافق</string>
     <string name="cart_empty">عربة التسوق فارغة</string>
-    <string name="expoler_yodawy">اكتشف شفاء و ابدأ التسوق</string>
+    <string name="expoler_yodawy">يبدو أنك لم تضف أى عناصر إلى سلة التسوق الخاصة بك.</string>
     <string name="cash">نقدى</string>
     <string name="order_number">رقم الطلب</string>
     <string name="order_date">تاريخ الطلب</string>

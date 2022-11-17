@@ -5,8 +5,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_115sdp"
         android:paddingTop="@dimen/_10sdp"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
         >
 
         <FrameLayout
@@ -21,6 +19,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/unnamed" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,6 +45,7 @@
         </FrameLayout>
 
         <TextView
+            android:fontFamily="@font/codec_pro_news"
             android:id="@+id/medication_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,43 +54,36 @@
             android:layout_toEndOf="@+id/frameLayout"
             android:ellipsize="end"
             android:lines="1"
+            android:textSize="@dimen/_10ssp"
             android:text="@string/pravotin_100mg_sach_g_medication_name"
             android:textColor="@color/color_black" />
 
-
         <TextView
-            android:id="@+id/sachets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/medication_title"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:textSize="@dimen/_10ssp"
-            android:visibility="invisible"
-            android:layout_toEndOf="@+id/frameLayout"
-            android:text="@string/_14_sachets" />
-
-        <TextView
+            android:fontFamily="@font/codec_pro_bold"
             android:id="@+id/medication_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/sachets"
+            android:textSize="@dimen/_10ssp"
+            android:layout_below="@+id/medication_title"
             android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_toEndOf="@+id/frameLayout"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold" />
+            android:textColor="@color/black"
+            />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/increase_decrease"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_toEndOf="@+id/frameLayout"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_below="@+id/medication_price"
             android:background="@drawable/rounded_circle_bg">
 
             <TextView
+                android:fontFamily="@font/codec_pro_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_4sdp"
@@ -101,18 +94,20 @@
                 android:text="-"/>
 
             <TextView
+                android:id="@+id/quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:fontFamily="@font/codec_pro_bold"
+                android:gravity="center"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
-                android:id="@+id/quantity"
-                android:background="@color/green"
-                android:gravity="center"
-                android:textStyle="bold"
+                android:text="1"
                 android:textColor="@color/white"
-                android:text="1"/>
+                android:textStyle="bold" />
 
             <TextView
+                android:fontFamily="@font/codec_pro_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_4sdp"

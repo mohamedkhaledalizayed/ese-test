@@ -38,7 +38,7 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
     override fun getViewBinding() = ChefaaActivityCartBinding.inflate(layoutInflater)
     private val mAdapter = CartAdapter()
     private lateinit var photoAdapter: PhotosAdapter
-
+    private var totalPrice = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -47,6 +47,7 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
 
         photoAdapter = PhotosAdapter(this)
         updateView()
+        updatePrice()
 
         photoAdapter.onItemClickListener = object :
             PhotosAdapter.OnItemClickListener {
@@ -54,6 +55,13 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
                 cart.imageList.removeAt(id)
                 updateView()
                 binding.cartLt.tvNumberImages.visibility = View.GONE
+            }
+        }
+
+        mAdapter.onItemClickListener = object :
+            CartAdapter.OnItemClickListener {
+            override fun setOnItemClickListener() {
+                updatePrice()
             }
         }
 
@@ -85,6 +93,17 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
 
 
     }
+
+    private fun updatePrice() {
+        totalPrice = 0.0
+        for (item in cart.productList){
+            totalPrice += item.productEntity?.price!!.times(item.quantity.toDouble())
+        }
+
+        binding.cartLt.subTotalValue.text = "$totalPrice جنيه"
+        binding.cartLt.totalValue.text = "$totalPrice جنيه"
+    }
+
     private val SELECT_FILE = 1
 
     private fun galleryIntent() {

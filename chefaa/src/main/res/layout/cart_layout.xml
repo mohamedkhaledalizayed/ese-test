@@ -135,14 +135,47 @@
             android:padding="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/cl_note">
 
-            <TextView
-                android:id="@+id/tv_products"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_9sdp"
-                android:text="@string/products"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_13sdp" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/pharmacy_image"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:src="@drawable/hygieia"/>
+
+                <TextView
+                    android:id="@+id/pharmacy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="شحنة من : أقرب صيدلية"
+                    android:layout_toEndOf="@id/pharmacy_image"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/codec_pro_bold"
+                    android:textSize="@dimen/_10ssp"/>
+
+                <TextView
+                    android:id="@+id/delivery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="التوصيل فى خلال 1 - 2 ساعة"
+                    android:layout_toEndOf="@id/pharmacy_image"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textColor="@color/red"
+                    android:layout_below="@id/pharmacy"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/codec_pro_bold"
+                    android:textSize="@dimen/_10ssp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="#EEEEEE"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/productRv"
@@ -151,6 +184,120 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="12"
                 tools:listitem="@layout/cart_layout_item" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="#EEEEEE"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:background="@drawable/note_bg"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_error_outline_24"/>
+
+                <TextView
+                    android:fontFamily="@font/codec_pro_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    android:lineSpacingExtra="@dimen/_4sdp"
+                    android:text="توفر المنتجات و أسعارها و رسوم التوصيل قد يختلف باختلاف الصيدلية و سنتواصل معك فى حالة تغيير."
+                    />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp">
+
+                <TextView
+                    android:id="@+id/sub_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="المجموع الفرعى"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/codec_pro_news"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/sub_total_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="54 جنيه"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/codec_pro_bold"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/delivery_fees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="رسوم التوصيل"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_below="@+id/sub_total"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/codec_pro_news"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/delivery_fees_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="حتى 10 جنيه"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_below="@+id/sub_total_value"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/codec_pro_bold"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/delivery_fees"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="#EEEEEE"/>
+
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="إجمالى الشحنة"
+                    android:layout_below="@+id/view"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/codec_pro_bold"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/total_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10 جنيه"
+                    android:layout_below="@+id/view"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/codec_pro_bold"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/black"/>
+
+            </RelativeLayout>
+
         </LinearLayout>
 
         <Button

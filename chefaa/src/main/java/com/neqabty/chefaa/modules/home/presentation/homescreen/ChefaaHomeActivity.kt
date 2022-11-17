@@ -68,7 +68,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-//        dialog.show()
+        dialog.show()
         homeViewModel.userRegistered.observe(this) {
             if (it.status) {
                 dialog.dismiss()
@@ -78,7 +78,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             }
         }
 
-//        homeViewModel.registerUser(Constants.mobileNumber, Constants.userNumber, Constants.countryCode, Constants.nationalID, Constants.name)
+        homeViewModel.registerUser(Constants.mobileNumber, Constants.userNumber, Constants.countryCode, Constants.nationalID, Constants.name)
 
         binding.etSearch.setOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java))

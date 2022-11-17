@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso
 class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     private var layoutInflater: LayoutInflater? = null
+    var onItemClickListener: OnItemClickListener? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, i: Int): ViewHolder {
@@ -33,7 +34,7 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
         )
     }
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         if (position == itemCount - 1) {
             viewHolder.binding.view.visibility = View.GONE
@@ -42,10 +43,10 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
         }
 
         viewHolder.binding.status.visibility = GONE
-        viewHolder.binding.medicationTitle.text = cart.productList[position].productEntity?.titleEn
+        viewHolder.binding.medicationTitle.text = cart.productList[position].productEntity?.titleAr
         viewHolder.binding.quantity.text = "${cart.productList[position].quantity}"
         viewHolder.binding.medicationPrice.text =
-            "${cart.productList[position].productEntity?.price?.times(cart.productList[position].quantity)}"
+            "${cart.productList[position].productEntity?.price?.times(cart.productList[position].quantity)} جنيه"
 
         Picasso.get()
             .load(cart.productList[position].productEntity?.image)
@@ -68,7 +69,8 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
                 cart.productList[position].productEntity?.price?.times(
                     cart.productList[position].quantity
                 )
-            }"
+            } جنيه"
+            onItemClickListener?.setOnItemClickListener()
         }
 
         //decrease
@@ -81,13 +83,14 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
                     cart.productList[position].productEntity?.price?.times(
                         cart.productList[position].quantity
                     )
-                }"
+                } جنيه"
             } else {
                 //remove this item
                 cart.productList.removeAt(position)
                 submitList()
                 notifyItemRangeChanged(0,0)
             }
+            onItemClickListener?.setOnItemClickListener()
         }
 
     }
@@ -98,6 +101,9 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    interface OnItemClickListener {
+        fun setOnItemClickListener()
+    }
 
     class ViewHolder(val binding: CartLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root)
