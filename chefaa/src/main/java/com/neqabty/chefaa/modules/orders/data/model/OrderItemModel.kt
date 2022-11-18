@@ -11,6 +11,6 @@ data class OrderItemModel(
     val image: String?,
     @SerializedName("note")
     val note: String?,
-    @SerializedName("id")
+    @SerializedName("product_id")
     val productId: Int?
 )
