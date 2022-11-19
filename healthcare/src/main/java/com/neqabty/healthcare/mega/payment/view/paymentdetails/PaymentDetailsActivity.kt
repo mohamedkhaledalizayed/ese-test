@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
@@ -23,13 +24,18 @@ import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
 import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
 import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
+import com.payment.paymentsdk.PaymentSdkActivity
+import com.payment.paymentsdk.PaymentSdkConfigBuilder
+import com.payment.paymentsdk.integrationmodels.*
+import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
 import dagger.hilt.android.AndroidEntryPoint
 import team.opay.business.cashier.sdk.api.*
 import team.opay.business.cashier.sdk.pay.PaymentTask
 
 
 @AndroidEntryPoint
-class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
+class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
+    CallbackPaymentInterface {
 
     private val paymentViewModel: PaymentViewModel by viewModels()
     private var paymentMethod = "card"
@@ -243,7 +249,12 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data?.payment?.paymentMethod == "card") {
                             val paymentObject = resource.data as PaymentEntity
-                            oPayPayment(paymentObject, true)
+                            val configData = generatePaytabsConfigurationDetails(paymentObject)
+                            PaymentSdkActivity.startCardPayment(
+                                this,
+                                configData,
+                                callback = this
+                            )
                         } else {
                             showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
                         }
@@ -516,4 +527,77 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>() {
         super.onResume()
         binding.btnNext.isEnabled = true
     }
+
+    //region Paytabs///
+    private fun generatePaytabsConfigurationDetails(paymentEntity: PaymentEntity): PaymentSdkConfigurationDetails {
+        val profileId = "103411"
+        val serverKey = "SKJN6BDTKH-JG26L9WRDL-DNMN2ZZ9RN"
+        val clientKey = "C7KMVN-NV2B6T-MGBPVR-2G72KG"
+        val locale = PaymentSdkLanguageCode.EN /*Or PaymentSdkLanguageCode.AR*/
+        val currency = "EGP"
+        val merchantCountryCode = "EG"
+
+        val billingData = PaymentSdkBillingDetails(
+            "Giza",
+            "eg",
+            "customer@customer.com",
+            "",
+            sharedPreferences.mobile, "Egypt",
+            binding.address.text.toString(), "132"
+        )
+        val configData = PaymentSdkConfigBuilder(
+            profileId,
+            serverKey,
+            clientKey,
+            (totalAmount + paymentFees + deliveryFees).toDouble(),
+            currency
+        )
+            .setCartDescription(binding.tvService.text.toString())
+            .setLanguageCode(locale)
+            .setMerchantIcon(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.paytabs_logo
+                )
+            )
+            .setBillingData(billingData)
+            .setMerchantCountryCode(merchantCountryCode)
+            .setTransactionType(PaymentSdkTransactionType.SALE)
+            .setTransactionClass(PaymentSdkTransactionClass.ECOM)
+            .setTokenise(PaymentSdkTokenise.NONE) //Check other tokenizing types in PaymentSdkTokenise
+            .setCartId(paymentEntity.mobilePaymentPayload?.reference)
+            .showBillingInfo(false)
+            .showShippingInfo(false)
+            .forceShippingInfo(false)
+            .setScreenTitle(binding.tvService.text.toString())
+
+        return configData.build()
+    }
+
+    override fun onError(error: PaymentSdkError) {
+        showAlert(getString(R.string.payment_canceled)) {
+            finish()
+        }
+    }
+
+    override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
+        showAlert(
+            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
+                R.string.payment_successful
+            ) + paymentSdkTransactionDetails.paymentResult?.responseCode
+            else getString(R.string.payment_reference) + paymentSdkTransactionDetails.paymentResult?.responseCode
+        ) {
+            val intent = Intent(this, PaymentStatusActivity::class.java)
+            intent.putExtra("referenceCode", referenceCode)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onPaymentCancel() {
+        showAlert(getString(R.string.payment_canceled)) {
+            finish()
+        }
+    }
+    //endregion
 }
