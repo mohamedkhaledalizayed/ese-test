@@ -1,11 +1,11 @@
 package com.neqabty.healthcare.sustainablehealth.search.presentation.view.providerdetails
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.neqabty.chefaa.modules.orders.domain.entities.OrderEntity
-import com.neqabty.healthcare.databinding.ActivityProviderDetailsBinding
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.databinding.ActivityProviderDetailsBinding
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.search.ProvidersEntity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +25,11 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
         binding.itemName.text =  "${provider?.name}"
         binding.addressValue.text =  "${provider?.address}"
         binding.phoneValue.text =  "${provider?.phone}"
+        binding.phoneValue.setOnClickListener { provider?.phone?.let { it -> openPhonesFragment(it) } }
+        if(!provider?.notes.isNullOrBlank()) {
+            binding.notes.visibility = View.VISIBLE
+            binding.notesValue.text = provider?.notes
+        }
         binding.providerSp.text =  "${provider?.serviceProviderType?.providerTypeAr}"
         binding.reviewRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
@@ -42,5 +47,12 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
             dialog.show(fm, "")
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
         }
+    }
+
+    private fun openPhonesFragment(phones: String) {
+        val fm: FragmentManager = supportFragmentManager
+        val dialog = PhonesFragment.newInstance(phones)
+        dialog.show(fm, "")
+        dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Translucent)
     }
 }

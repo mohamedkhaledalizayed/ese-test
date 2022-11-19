@@ -23,6 +23,7 @@ fun ProvidersModel.toProvidersEntity(): ProvidersEntity{
         id = id,
         image = image,
         name = name,
+        notes = notes,
         phone = phone,
         profession = profession?.toProfessionEntity(),
         serviceProviderType = serviceProviderType?.toServiceTypeEntity()

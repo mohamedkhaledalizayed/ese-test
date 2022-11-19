@@ -160,6 +160,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_10ssp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selected_item" />
 
@@ -170,6 +171,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:scrollbars="none"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/recommended_text">
 
         <LinearLayout

@@ -15,6 +15,7 @@ data class ProvidersEntity(
     val image: String?,
     val name: String,
     val phone: String,
+    val notes: String,
     val profession: ProfessionEntity?,
     val serviceProviderType: ServiceProviderTypeEntity?
 ) : Parcelable
