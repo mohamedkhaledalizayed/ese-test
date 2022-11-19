@@ -47,7 +47,24 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             .build()
 
         if (isSyndicateMember){
-            binding.checkMember.visibility = View.GONE
+            signupViewModel.getSyndicateList()
+            binding.spinnerContainer.visibility = View.VISIBLE
+            binding.nationalIdContainer.visibility = View.VISIBLE
+            binding.serialNumberContainer.visibility = View.GONE
+            binding.membershipIdContainer.visibility = View.VISIBLE
+
+            binding.fullNameContainer.visibility = View.GONE
+            binding.passwordContainer.visibility = View.GONE
+        }else{
+            binding.spinnerContainer.visibility = View.GONE
+            binding.nationalIdContainer.visibility = View.GONE
+            binding.serialNumberContainer.visibility = View.GONE
+            binding.membershipIdContainer.visibility = View.GONE
+
+
+            binding.fullNameContainer.visibility = View.VISIBLE
+            binding.passwordContainer.visibility = View.VISIBLE
+
         }
 
         if (selectedSyndicateCode == TOGAREEN_CODE){
@@ -75,29 +92,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
 
         }
-
-        binding.syndicateMember.setOnCheckedChangeListener { compoundButton, b ->
-            if (b){
-                isSyndicateMember = true
-                binding.fullNameContainer.visibility = View.GONE
-                binding.passwordContainer.visibility = View.GONE
-
-                binding.spinnerContainer.visibility = View.VISIBLE
-                binding.membershipIdContainer.visibility = View.VISIBLE
-            }
-        }
-
-        binding.neqabtyMember.setOnCheckedChangeListener { compoundButton, b ->
-            if (b){
-                isSyndicateMember = false
-                binding.fullNameContainer.visibility = View.VISIBLE
-                binding.passwordContainer.visibility = View.VISIBLE
-
-                binding.spinnerContainer.visibility = View.GONE
-                binding.membershipIdContainer.visibility = View.GONE
-            }
-        }
-
 
         signupViewModel.user.observe(this){
 
@@ -172,7 +166,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
         }
 
-        signupViewModel.getSyndicateList()
         signupViewModel.syndicateList.observe(this){
 
             it?.let { resource ->
@@ -303,7 +296,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                     email = binding.email.text.toString(),
                     fullname = binding.fullName.text.toString(),
                     mobile = binding.phone.text.toString(),
-                    nationalId = binding.nationalId.text.toString(),
                     password = binding.password.text.toString()
                 )
             )

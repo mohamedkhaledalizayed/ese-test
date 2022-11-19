@@ -166,15 +166,23 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         })
 
 
+
+
         binding.cvChefaa.setOnClickListener {
-            val intent = Intent(this, ChefaaHomeActivity::class.java)
-            intent.putExtra("user_number", sharedPreferences.mobile)
-            intent.putExtra("mobile_number", sharedPreferences.mobile)
-            intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
-            intent.putExtra("national_id", sharedPreferences.nationalId)
-            intent.putExtra("name", sharedPreferences.name)
-            intent.putExtra("jwt", "")
-            startActivity(intent)
+
+            if (sharedPreferences.isAuthenticated){
+                val intent = Intent(this, ChefaaHomeActivity::class.java)
+                intent.putExtra("user_number", sharedPreferences.mobile)
+                intent.putExtra("mobile_number", sharedPreferences.mobile)
+                intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
+                intent.putExtra("national_id", sharedPreferences.nationalId)
+                intent.putExtra("name", sharedPreferences.name)
+                intent.putExtra("jwt", "")
+                startActivity(intent)
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
+
         }
     }
 
