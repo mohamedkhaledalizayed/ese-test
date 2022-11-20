@@ -138,47 +138,47 @@
             android:padding="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/cl_note">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <ImageView
-                    android:id="@+id/pharmacy_image"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:src="@drawable/hygieia" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/pharmacy_image"-->
+<!--                    android:layout_width="@dimen/_40sdp"-->
+<!--                    android:layout_height="@dimen/_40sdp"-->
+<!--                    android:src="@drawable/hygieia" />-->
 
-                <TextView
-                    android:id="@+id/pharmacy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/from"
-                    android:layout_toEndOf="@id/pharmacy_image"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/codec_pro_bold"
-                    android:textSize="@dimen/_10ssp"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/pharmacy"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/from"-->
+<!--                    android:layout_toEndOf="@id/pharmacy_image"-->
+<!--                    android:layout_marginStart="@dimen/_10sdp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:fontFamily="@font/codec_pro_bold"-->
+<!--                    android:textSize="@dimen/_10ssp"/>-->
 
-                <TextView
-                    android:id="@+id/delivery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/time"
-                    android:layout_toEndOf="@id/pharmacy_image"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="@color/red"
-                    android:layout_below="@id/pharmacy"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/codec_pro_bold"
-                    android:textSize="@dimen/_10ssp"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/delivery"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/time"-->
+<!--                    android:layout_toEndOf="@id/pharmacy_image"-->
+<!--                    android:layout_marginStart="@dimen/_10sdp"-->
+<!--                    android:textColor="@color/red"-->
+<!--                    android:layout_below="@id/pharmacy"-->
+<!--                    android:layout_marginTop="@dimen/_5sdp"-->
+<!--                    android:fontFamily="@font/codec_pro_bold"-->
+<!--                    android:textSize="@dimen/_10ssp"/>-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="@dimen/_10sdp"
-                android:background="#EEEEEE"/>
+<!--            <View-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="1dp"-->
+<!--                android:layout_margin="@dimen/_10sdp"-->
+<!--                android:background="#EEEEEE"/>-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/productRv"
@@ -220,84 +220,84 @@
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/_10sdp">-->
 
-                <TextView
-                    android:id="@+id/sub_total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sub_total"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/codec_pro_news"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@color/black"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/sub_total"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/sub_total"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:fontFamily="@font/codec_pro_news"-->
+<!--                    android:textSize="@dimen/_10ssp"-->
+<!--                    android:textColor="@color/black"/>-->
 
-                <TextView
-                    android:id="@+id/sub_total_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/codec_pro_bold"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@color/black"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/sub_total_value"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:fontFamily="@font/codec_pro_bold"-->
+<!--                    android:textSize="@dimen/_10ssp"-->
+<!--                    android:textColor="@color/black"/>-->
 
-                <TextView
-                    android:id="@+id/delivery_fees"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/deli_fees"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_below="@+id/sub_total"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/codec_pro_news"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@color/black"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/delivery_fees"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/deli_fees"-->
+<!--                    android:layout_marginTop="@dimen/_5sdp"-->
+<!--                    android:layout_below="@+id/sub_total"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:fontFamily="@font/codec_pro_news"-->
+<!--                    android:textSize="@dimen/_10ssp"-->
+<!--                    android:textColor="@color/black"/>-->
 
-                <TextView
-                    android:id="@+id/delivery_fees_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/to_10"
-                    android:layout_below="@+id/sub_total_value"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/codec_pro_bold"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@color/black"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/delivery_fees_value"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/_5sdp"-->
+<!--                    android:text="@string/to_10"-->
+<!--                    android:layout_below="@+id/sub_total_value"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:fontFamily="@font/codec_pro_bold"-->
+<!--                    android:textSize="@dimen/_10ssp"-->
+<!--                    android:textColor="@color/black"/>-->
 
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/delivery_fees"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:background="#EEEEEE"/>
+<!--                <View-->
+<!--                    android:id="@+id/view"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_below="@+id/delivery_fees"-->
+<!--                    android:layout_margin="@dimen/_10sdp"-->
+<!--                    android:background="#EEEEEE"/>-->
 
-                <TextView
-                    android:id="@+id/total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total_order"
-                    android:layout_below="@+id/view"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/codec_pro_bold"
-                    android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/black"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/total"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/total_order"-->
+<!--                    android:layout_below="@+id/view"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:fontFamily="@font/codec_pro_bold"-->
+<!--                    android:textSize="@dimen/_12ssp"-->
+<!--                    android:textColor="@color/black"/>-->
 
-                <TextView
-                    android:id="@+id/total_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/view"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/codec_pro_bold"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@color/black"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/total_value"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@+id/view"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:fontFamily="@font/codec_pro_bold"-->
+<!--                    android:textSize="@dimen/_10ssp"-->
+<!--                    android:textColor="@color/black"/>-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
         </LinearLayout>
 
@@ -310,6 +310,15 @@
             android:layout_margin="@dimen/_10sdp"
             android:id="@+id/address_lt"
             app:layout_constraintTop_toBottomOf="@id/ll_products">
+
+            <TextView
+                android:fontFamily="@font/codec_pro_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:text="@string/delivery_time_confirmation"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_8ssp" />
 
             <TextView
                 android:fontFamily="@font/codec_pro_bold"

@@ -92,7 +92,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@+id/cash_icon"
-                        android:text="@string/cash"
+                        android:text="@string/total_before_discount"
                         android:textColor="@color/color_black"
                         android:textSize="@dimen/_12ssp" />
 
@@ -104,7 +104,7 @@
                         android:background="#E1E1E1"/>
 
                     <TextView
-                        android:id="@+id/total_payment"
+                        android:id="@+id/total_payment_before_discount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -120,6 +120,62 @@
                         android:layout_height="@dimen/_15sdp"
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/total_payment"
+                        android:src="@drawable/cash" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/rounded_white_bg"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_7sdp">
+
+                    <ImageView
+                        android:id="@+id/cash_icon_after"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:src="@drawable/cash" />
+
+                    <TextView
+                        android:id="@+id/cash_after"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@+id/cash_icon_after"
+                        android:text="@string/total_after_discount"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <View
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:id="@+id/view_after"
+                        android:layout_centerHorizontal="true"
+                        android:background="#E1E1E1"/>
+
+                    <TextView
+                        android:id="@+id/total_payment_after_discount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_3sdp"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <ImageView
+                        android:id="@+id/payment_icon_after"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/total_payment_after"
                         android:src="@drawable/cash" />
 
                 </RelativeLayout>
@@ -204,7 +260,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:text="@string/for_free"
                         android:textSize="@dimen/_12ssp" />
 
                     <TextView

@@ -39,9 +39,12 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
         prescriptionsAdapter = PrescriptionsAdapter(this)
 
         binding.orderStatusValue.text = orderId?.orderStatus?.titleAr
-        binding.orderNumberValue.text = orderId?.id.toString()
+        binding.orderNumberValue.text = orderId?.orderStatus?.id.toString()
         binding.dateValue.text = AppUtils().dateFormat(orderId?.createdAt!!)
-        binding.totalPayment.text = "${orderId?.price}  جنيه "
+        binding.totalPaymentBeforeDiscount.text = "${orderId?.priceBeforeDiscount}  جنيه "
+        binding.totalPaymentAfterDiscount.text = "${orderId?.price}  جنيه "
+        binding.deliveryFees.text = "${orderId?.deliveryFees}  جنيه "
+        binding.totalValue.text = "${(orderId?.deliveryFees + orderId?.price)}  جنيه "
         mAdapter.submitList(orderId?.items)
         binding.productsRecycler.visibility = View.VISIBLE
         binding.productsRecycler.adapter = mAdapter

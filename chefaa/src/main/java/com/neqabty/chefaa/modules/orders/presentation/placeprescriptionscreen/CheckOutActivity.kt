@@ -88,8 +88,8 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
             totalPrice += item.productEntity?.price!!.times(item.quantity.toDouble())
         }
 
-        binding.subTotalValue.text = "$totalPrice جنيه"
-        binding.totalValue.text = "$totalPrice جنيه"
+//        binding.subTotalValue.text = "$totalPrice جنيه"
+//        binding.totalValue.text = "$totalPrice جنيه"
     }
 
 

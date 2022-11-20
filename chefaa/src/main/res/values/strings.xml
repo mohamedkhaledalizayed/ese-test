@@ -53,6 +53,8 @@
     <string name="cart_empty">عربة التسوق فارغة</string>
     <string name="expoler_yodawy">يبدو أنك لم تضف أى عناصر إلى سلة التسوق الخاصة بك.</string>
     <string name="cash">نقدى</string>
+    <string name="total_before_discount">الإجمالي قبل الخصم</string>
+    <string name="total_after_discount">الإجمالي بعد الخصم</string>
     <string name="order_number">رقم الطلب</string>
     <string name="order_date">تاريخ الطلب</string>
     <string name="address">العنوان</string>
@@ -83,6 +85,7 @@
     <string name="sub_total">المجموع الفرعى</string>
     <string name="confirm_order_note">توفر المنتجات و أسعارها و رسوم التوصيل قد يختلف باختلاف الصيدلية و سنتواصل معك فى حالة تغيير.</string>
     <string name="time">التوصيل فى خلال 1 - 2 ساعة</string>
+    <string name="delivery_time_confirmation">سيتم التواصل لتحديد ميعاد التوصيل</string>
     <string name="from">شحنة من : أقرب صيدلية</string>
     <string name="max_image">* لقد وصلت للحد الاقصى لعدد الصور.</string>
     <string name="work">العمل</string>

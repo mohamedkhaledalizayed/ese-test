@@ -112,8 +112,8 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
             totalPrice += item.productEntity?.price!!.times(item.quantity.toDouble())
         }
 
-        binding.cartLt.subTotalValue.text = "$totalPrice جنيه"
-        binding.cartLt.totalValue.text = "$totalPrice جنيه"
+//        binding.cartLt.subTotalValue.text = "$totalPrice جنيه"
+//        binding.cartLt.totalValue.text = "$totalPrice جنيه"
     }
 
     private val SELECT_FILE = 1
