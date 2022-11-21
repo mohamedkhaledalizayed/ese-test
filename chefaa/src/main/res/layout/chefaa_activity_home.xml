@@ -30,7 +30,7 @@
                 android:background="@drawable/edit_text_bg_chefaa"
                 android:drawableStart="@drawable/ic_search_black_24dp"
                 android:padding="@dimen/_10sdp"
-                android:text="  ما الذى تبحث عنه؟"
+                android:text="ابحث عن دواء"
                 android:textAlignment="viewStart"
                 android:textColorHint="@color/gray_yodawy"
                 android:textSize="@dimen/_12ssp" />

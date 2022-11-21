@@ -332,7 +332,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
             .setMerchantIcon(
                 ContextCompat.getDrawable(
                     this,
-                    R.drawable.logo
+                    R.drawable.paytabs_logo
                 )
             )
             .setBillingData(billingData)

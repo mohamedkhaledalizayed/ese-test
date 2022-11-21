@@ -163,7 +163,7 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation project(path: ':pdfcreator')
-    implementation 'com.paytabs:payment-sdk:6.2.12'
+    implementation 'com.paytabs:payment-sdk:6.3.2'
 
 
     //android ui
