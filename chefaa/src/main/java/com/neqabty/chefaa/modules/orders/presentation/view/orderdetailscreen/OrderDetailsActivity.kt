@@ -39,7 +39,7 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
         prescriptionsAdapter = PrescriptionsAdapter(this)
 
         binding.orderStatusValue.text = orderId?.orderStatus?.titleAr
-        binding.orderNumberValue.text = orderId?.orderStatus?.id.toString()
+        binding.orderNumberValue.text = orderId?.id.toString()
         binding.dateValue.text = AppUtils().dateFormat(orderId?.createdAt!!)
         binding.totalPaymentBeforeDiscount.text = "${orderId?.priceBeforeDiscount}  جنيه "
         binding.totalPaymentAfterDiscount.text = "${orderId?.price}  جنيه "
