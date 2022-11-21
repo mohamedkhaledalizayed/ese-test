@@ -1,6 +1,7 @@
 package com.neqabty.yodawy.core.utils
 
 import android.annotation.SuppressLint
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -27,6 +28,10 @@ class AppUtils {
     fun handleError(throwable: Throwable): String {
         return if (throwable is HttpException) {
             when (throwable.code()) {
+                406 -> {
+                    val errorObject = JSONObject(throwable.response()!!.errorBody()?.string())
+                    return errorObject.getString("status_message_ar")
+                }
                 400 -> {
                     "لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى"
                 }
