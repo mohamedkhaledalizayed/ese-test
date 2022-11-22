@@ -28,7 +28,7 @@ data class ProvidersModel(
     @SerializedName("name")
     val name: String,
     @SerializedName("notes")
-    val notes: String,
+    val notes: String?,
     @SerializedName("phone")
     val phone: String,
     @SerializedName("profession")

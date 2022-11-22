@@ -51,7 +51,7 @@
                 android:drawablePadding="@dimen/_10sdp"
                 android:imeOptions="actionSearch"
                 android:drawableStart="@drawable/ic_search"
-                android:hint="@string/search"
+                android:hint="@string/medical_search"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:layout_marginBottom="@dimen/_16sdp"
@@ -130,9 +130,9 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_200sdp"
                         android:src="@drawable/slider_1"
-                        android:scaleType="centerCrop"
+                        android:scaleType="fitXY"
                         />
 
                 </androidx.cardview.widget.CardView>

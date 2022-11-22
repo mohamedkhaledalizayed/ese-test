@@ -40,10 +40,19 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
         val item = items[position]
         viewHolder.binding.orderStatus.text = "حالة الطلب: ${item.orderStatus.titleAr}"
         viewHolder.binding.orderDate.text = "تاريخ الطلب: ${AppUtils().dateFormat(item.createdAt)}"
-        viewHolder.binding.orderDetails.text = "رقم الطلب: ${item.id}"
-        viewHolder.binding.deliveryFees.text = "مصاريف الشحن: ${item.deliveryFees} جنيه"
-        viewHolder.binding.total.text = "السعر: ${item.price} جنيه"
-
+        viewHolder.binding.orderDetails.text = "رقم الطلب: ${item.chefaaOrderNumber}"
+        if (item.deliveryFees == 0f) {
+            viewHolder.binding.deliveryFees.visibility = View.GONE
+        } else {
+            viewHolder.binding.deliveryFees.visibility = View.VISIBLE
+            viewHolder.binding.deliveryFees.text = "مصاريف الشحن: ${item.deliveryFees} جنيه"
+        }
+        if (item.price == 0f) {
+            viewHolder.binding.total.visibility = View.GONE
+        } else {
+            viewHolder.binding.total.visibility = View.VISIBLE
+            viewHolder.binding.total.text = "السعر: ${item.price} جنيه"
+        }
 
         if (position == itemCount - 1) {
             viewHolder.binding.view.visibility = View.GONE

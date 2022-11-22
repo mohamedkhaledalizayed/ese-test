@@ -75,18 +75,6 @@
 
         <TextView
             android:fontFamily="@font/codec_pro_news"
-            android:id="@+id/total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/delivery_fees"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_toEndOf="@+id/order_image"
-            android:text="Total: To be confirmed"
-            android:textSize="@dimen/_10ssp" />
-
-        <TextView
-            android:fontFamily="@font/codec_pro_news"
             android:id="@+id/delivery_fees"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,9 +82,19 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_3sdp"
             android:layout_toEndOf="@+id/order_image"
-            tools:text="Total: To be confirmed"
             android:textSize="@dimen/_10ssp"
             />
+
+        <TextView
+            android:fontFamily="@font/codec_pro_news"
+            android:id="@+id/total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/delivery_fees"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_toEndOf="@+id/order_image"
+            android:textSize="@dimen/_10ssp" />
 
         <View
             android:id="@+id/view"

@@ -67,6 +67,7 @@
     <string name="confirm_password">تاكيد كلمة السر</string>
     <string name="cash_back_service">خدمة الكاش باك</string>
     <string name="search">البحث</string>
+    <string name="medical_search">البحث في الشبكة الطبية..</string>
     <string name="add_review">اضف تقييم</string>
     <string name="profission">التخصص</string>
     <string name="provider_type">نوع مقدم الخدمة</string>
