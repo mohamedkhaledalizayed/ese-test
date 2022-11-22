@@ -86,6 +86,7 @@
     <string name="confirm_order_note">توفر المنتجات و أسعارها و رسوم التوصيل قد يختلف باختلاف الصيدلية و سنتواصل معك فى حالة تغيير.</string>
     <string name="time">التوصيل فى خلال 1 - 2 ساعة</string>
     <string name="delivery_time_confirmation">التوصيل خلال ٤٨ ساعة
+        \n
 مصاريف التوصيل في القاهرة و الجيزة ١٠ جنيهات و متغيرة لباقي المحافظات</string>
     <string name="from">شحنة من : أقرب صيدلية</string>
     <string name="max_image">* لقد وصلت للحد الاقصى لعدد الصور.</string>
