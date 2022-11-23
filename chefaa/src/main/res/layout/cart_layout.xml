@@ -318,6 +318,7 @@
                 android:layout_marginBottom="@dimen/_7sdp"
                 android:text="@string/delivery_time_confirmation"
                 android:textColor="@color/red"
+                android:lineSpacingExtra="@dimen/_4sdp"
                 android:textSize="@dimen/_8ssp" />
 
             <TextView
