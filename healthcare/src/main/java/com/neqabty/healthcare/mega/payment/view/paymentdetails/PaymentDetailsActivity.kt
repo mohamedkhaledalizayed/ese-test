@@ -249,12 +249,14 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data?.payment?.paymentMethod == "card") {
                             val paymentObject = resource.data as PaymentEntity
-                            val configData = generatePaytabsConfigurationDetails(paymentObject)
-                            PaymentSdkActivity.startCardPayment(
-                                this,
-                                configData,
-                                callback = this
-                            )
+                            oPayPayment(paymentObject, true)
+
+//                            val configData = generatePaytabsConfigurationDetails(paymentObject)
+//                            PaymentSdkActivity.startCardPayment(
+//                                this,
+//                                configData,
+//                                callback = this
+//                            )
                         } else {
                             showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
                         }

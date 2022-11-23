@@ -27,7 +27,7 @@ object Constants {
 
     //Main
     const val BASE_URL_Main = BASE_URL_STAGING_SYNDICATE
-    const val SANDBOX = false
+    const val SANDBOX = true
 
     const val NEQABTY_CODE = "e00"
     const val ESE_CODE = "e03"

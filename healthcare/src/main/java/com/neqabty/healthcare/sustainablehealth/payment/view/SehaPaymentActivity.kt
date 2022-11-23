@@ -20,9 +20,11 @@ import com.payment.paymentsdk.integrationmodels.*
 import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.google.gson.Gson
 import com.neqabty.healthcare.core.data.Constants.SANDBOX
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
+import com.neqabty.healthcare.core.utils.ErrorBody
 import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.Payment
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
@@ -89,12 +91,14 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data?.payment?.transaction?.paymentGatewayReferenceId.isNullOrEmpty()) {
                             val paymentObject = resource.data as SehaPaymentEntity
-                            val configData = generatePaytabsConfigurationDetails(paymentObject)
-                            PaymentSdkActivity.startCardPayment(
-                                this,
-                                configData,
-                                callback = this
-                            )
+                            oPayPayment(paymentObject, true)
+
+//                            val configData = generatePaytabsConfigurationDetails(paymentObject)
+//                            PaymentSdkActivity.startCardPayment(
+//                                this,
+//                                configData,
+//                                callback = this
+//                            )
                         } else {
                             showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
                         }
@@ -102,7 +106,9 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
                         binding.btnNext.isEnabled = true
                         binding.progressCircular.visibility = View.GONE
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                        val error = Gson().fromJson(resource.message.toString(), ErrorModel::class.java)
+
+                        Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
                     }
                 }
             }

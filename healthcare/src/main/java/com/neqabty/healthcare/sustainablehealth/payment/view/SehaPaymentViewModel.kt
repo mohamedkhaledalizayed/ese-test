@@ -6,29 +6,37 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
+import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaPaymentResponse
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaPaymentEntity
 import com.neqabty.healthcare.sustainablehealth.payment.domain.usecase.SehaPaymentUseCase
 import com.neqabty.mega.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.HttpException
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
 class SehaPaymentViewModel @Inject constructor(private val paymentUseCase: SehaPaymentUseCase) :
     ViewModel() {
 
-    val paymentInfo = MutableLiveData<Resource<SehaPaymentEntity>>()
+    val paymentInfo = MutableLiveData<Resource<SehaPaymentResponse>>()
     fun getPaymentInfo(paymentBody: SehaPaymentBody) {
         paymentInfo.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 paymentUseCase.build(paymentBody).collect {
-                    paymentInfo.postValue(Resource.success(data = it))
+                    if (it.isSuccessful){
+                        paymentInfo.postValue(Resource.success(data = it.body()!!))
+                    }else{
+                        val jObjError = JSONObject(it.errorBody()!!.string()).toString()
+                        paymentInfo.postValue(Resource.error(data = null, message = jObjError))
+                    }
                 }
             }catch (exception:Throwable){
-                paymentInfo.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+                paymentInfo.postValue(Resource.error(data = null, message = handleError(exception)))
             }
         }
     }

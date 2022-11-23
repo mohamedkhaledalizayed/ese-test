@@ -16,14 +16,15 @@ import com.neqabty.healthcare.sustainablehealth.payment.domain.repository.SehaPa
 import com.neqabty.mega.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import retrofit2.Response
 import javax.inject.Inject
 
 class SehaPaymentRepositoryImpl @Inject constructor(private val paymentDS: SehaPaymentDS) :
     SehaPaymentRepository {
 
-    override fun payment(paymentBody: SehaPaymentBody): Flow<SehaPaymentEntity> {
+    override fun payment(paymentBody: SehaPaymentBody): Flow<Response<SehaPaymentResponse>> {
         return flow {
-            emit(paymentDS.payment(paymentBody).toPaymentEntity())
+            emit(paymentDS.payment(paymentBody))
         }
     }
 
