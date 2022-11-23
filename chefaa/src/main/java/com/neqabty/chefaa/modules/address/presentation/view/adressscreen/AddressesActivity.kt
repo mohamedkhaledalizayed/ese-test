@@ -82,18 +82,20 @@ class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>() {
             }
         }
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        requestPermissionLauncher =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-                if (isGranted) {
-                    checkLocation()
-                } else {
-                    showDialogAndStayHere()
-                }
-            }
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+//        requestPermissionLauncher =
+//            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+//                if (isGranted) {
+//                    checkLocation()
+//                } else {
+//                    showDialogAndStayHere()
+//                }
+//            }
 
         binding.addAddress.setOnClickListener {
-            checkLocation()
+//            checkLocation()
+            val intent = Intent(this@AddressesActivity, SelectLocationActivity::class.java)
+            startActivity(intent)
         }
     }
 

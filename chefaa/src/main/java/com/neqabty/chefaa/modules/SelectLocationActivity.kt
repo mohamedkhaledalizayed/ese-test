@@ -25,9 +25,9 @@ class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private var latitude = 30.043963618425664
     private var longitude = 31.234388016164303
-    var district = ""
-    var city = ""
-    var gov = ""
+    private var district: String? = ""
+    private var city: String? = ""
+    private var gov: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_location)
@@ -73,9 +73,9 @@ class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         val intent = Intent(this, AddAddressActivity::class.java)
         intent.putExtra(LATITUDE, latitude)
         intent.putExtra(LONGITUDE, longitude)
-        intent.putExtra("district", district)
-        intent.putExtra("city", city)
-        intent.putExtra("gov", gov)
+        intent.putExtra("district", district ?: "")
+        intent.putExtra("city", city ?: "")
+        intent.putExtra("gov", gov ?: "")
         startActivity(intent)
         finish()
     }

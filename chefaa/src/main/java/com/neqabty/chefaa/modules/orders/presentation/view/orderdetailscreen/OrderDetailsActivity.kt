@@ -44,7 +44,7 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
         binding.totalPaymentBeforeDiscount.text = "${orderId?.priceBeforeDiscount}  جنيه "
         binding.totalPaymentAfterDiscount.text = "${orderId?.price}  جنيه "
         binding.deliveryFees.text = "${orderId?.deliveryFees}  جنيه "
-        binding.totalValue.text = "${(orderId?.deliveryFees + orderId?.price)}  جنيه "
+        binding.totalValue.text = "${(orderId?.price)}  جنيه "
         mAdapter.submitList(orderId?.items)
         binding.productsRecycler.visibility = View.VISIBLE
         binding.productsRecycler.adapter = mAdapter

@@ -145,7 +145,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
                 Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
             }
             else -> {
-                Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "لم يتم اختيار اى صورة.", Toast.LENGTH_SHORT).show()
             }
         }
     }

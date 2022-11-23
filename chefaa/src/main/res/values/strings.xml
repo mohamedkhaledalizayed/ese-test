@@ -39,7 +39,7 @@
     <string name="add">إضافة</string>
     <string name="delivery_fees">مصاريف التوصيل</string>
     <string name="for_free">مجاناً</string>
-    <string name="total">المبلغ الاجمالي</string>
+    <string name="total">الاجمالي شامل رسوم التوصيل</string>
     <string name="order_is_canceled">Order is Canceled</string>
     <string name="order_is_placed">لقد تم تأكيد طلبك بنجاح</string>
     <string name="nickname_">نوع العنوان</string>

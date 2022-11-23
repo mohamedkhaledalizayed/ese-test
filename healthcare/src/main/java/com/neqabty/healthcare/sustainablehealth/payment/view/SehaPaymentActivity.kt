@@ -28,6 +28,7 @@ import com.neqabty.healthcare.core.utils.ErrorBody
 import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.Payment
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
+import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaPaymentResponse
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaPaymentEntity
 import com.payment.paymentsdk.PaymentSdkActivity
 
@@ -90,7 +91,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data?.payment?.transaction?.paymentGatewayReferenceId.isNullOrEmpty()) {
-                            val paymentObject = resource.data as SehaPaymentEntity
+                            val paymentObject = resource.data as SehaPaymentResponse
                             oPayPayment(paymentObject, true)
 
 //                            val configData = generatePaytabsConfigurationDetails(paymentObject)
@@ -196,7 +197,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
     }
 
     var referenceCode = ""
-    private fun oPayPayment(paymentEntity: SehaPaymentEntity, isCredit: Boolean) {
+    private fun oPayPayment(paymentEntity: SehaPaymentResponse, isCredit: Boolean) {
         referenceCode = paymentEntity.mobilePaymentPayload!!.reference
         val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
         PaymentTask.sandBox = SANDBOX
