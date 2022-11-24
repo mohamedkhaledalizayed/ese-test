@@ -41,7 +41,6 @@ class OrderRepositoryImpl @Inject constructor(private val orderDS: OrderDS) : Or
             deliveryFees = deliveryFees ?: 0f,
             deliveryNote = deliveryNote,
             id = id,
-            orderClient = orderClient.toOrderClientEntity(),
             orderStatus = orderStatus.toOrderStatusEntity(),
             phone = phone,
             price = price ?: 0f,

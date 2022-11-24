@@ -20,8 +20,6 @@ data class OrderModel(
     val deliveryNote: String = "",
     @SerializedName("id")
     val id: Int = 0,
-    @SerializedName("order_client")
-    val orderClient: OrderClient = OrderClient(),
     @SerializedName("order_status")
     val orderStatus: OrderStatus = OrderStatus(),
     @SerializedName("phone")

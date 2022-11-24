@@ -13,7 +13,6 @@ data class OrderEntity(
     val deliveryFees: Float = 0f,
     val deliveryNote: String = "",
     val id: Int = 0,
-    val orderClient: OrderClientEntity = OrderClientEntity(),
     val orderStatus: OrderStatusEntity = OrderStatusEntity(),
     val phone: String = "",
     val price: Float = 0f,
