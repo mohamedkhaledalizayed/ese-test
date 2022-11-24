@@ -10,7 +10,7 @@ data class ClientEntity(
     val job: String,
     val mobile: String,
     val name: String,
-    val nationalId: String,
+    val nationalId: String?,
     val personalImage: String,
     val qrCode: String,
     val birthDate: String,

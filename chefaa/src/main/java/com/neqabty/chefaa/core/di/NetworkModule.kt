@@ -1,6 +1,7 @@
 package com.neqabty.chefaa.core.di
 
 import com.google.gson.GsonBuilder
+import com.neqabty.chefaa.core.data.Constants.BASE_URL_PRO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +21,7 @@ class NetworkModule {
     @Provides
     @Named("chefaa")
     fun providesBaseUrl(): String {
-        return "http://3.131.229.146:7777/api/v1/chefaa/"
+        return BASE_URL_PRO
     }
 
     @Provides

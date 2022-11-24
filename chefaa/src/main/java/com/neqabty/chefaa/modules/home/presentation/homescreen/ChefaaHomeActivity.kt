@@ -109,6 +109,28 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
         binding.selectAddress.setOnClickListener {
             startActivity(Intent(this, AddressesActivity::class.java))
         }
+
+        binding.phone1.setOnClickListener {
+            call("01271211192")
+        }
+
+        binding.phone2.setOnClickListener {
+            call("01224286395")
+        }
+
+        binding.phone3.setOnClickListener {
+            call("01278537485")
+        }
+    }
+
+    private fun call(phone: String){
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse("tel:$phone")
+        try {
+            startActivity(intent)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onResume() {

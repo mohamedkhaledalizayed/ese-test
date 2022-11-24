@@ -22,7 +22,7 @@ data class Client(
     @SerializedName("name")
     val name: String,
     @SerializedName("national_id")
-    val nationalId: String,
+    val nationalId: String?,
     @SerializedName("personal_image")
     val personalImage: String,
     @SerializedName("birth_date")
