@@ -257,6 +257,26 @@
 
             </LinearLayout>
 
+            <TextView
+                android:fontFamily="@font/codec_pro_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="للتواصل:"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12ssp"
+                android:layout_margin="@dimen/_10sdp"/>
+
+            <TextView
+                android:fontFamily="@font/codec_pro_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="012 71211192- 012242863 95- 01278537485"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginStart="@dimen/_10sdp"/>
+
 
         </LinearLayout>
 
