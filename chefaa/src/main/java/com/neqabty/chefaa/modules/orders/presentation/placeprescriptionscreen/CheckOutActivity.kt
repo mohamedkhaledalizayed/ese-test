@@ -38,6 +38,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
     private val mAdapter = CheckoutCartAdapter()
     private lateinit var photoAdapter: CheckoutPhotosAdapter
     private var totalPrice = 0.0
+    private var isRequested = false
     override fun getViewBinding() = CehfaaActivityCheckOutBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +52,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
         dialog = SpotsDialog.Builder()
             .setContext(this)
             .setMessage(getString(R.string.please_wait))
+            .setCancelable(false)
             .build()
 
 
@@ -69,11 +71,13 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
                         dialog.dismiss()
                         Toast.makeText(this, getString(R.string.order_is_placed), Toast.LENGTH_LONG).show()
                         cart = Cart()
+                        isRequested = false
                         reLaunchHomeActivity(this)
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                        isRequested = false
                     }
                 }
             }
@@ -129,11 +133,17 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>() {
     }
 
     fun checkOut(view: View) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            cart.imageList.map {
-                it.image = "data:image/png;base64," + Base64.encodeToString(File(it.imageUri!!.path).readBytes(), Base64.DEFAULT)
+        if (!isRequested) {
+            isRequested = true
+            lifecycleScope.launch(Dispatchers.IO) {
+                cart.imageList.map {
+                    it.image = "data:image/png;base64," + Base64.encodeToString(
+                        File(it.imageUri!!.path).readBytes(),
+                        Base64.DEFAULT
+                    )
+                }
+                placeOrderViewModel.placePrescriptionImages(selectedAddress?.id!!)
             }
-            placeOrderViewModel.placePrescriptionImages(selectedAddress?.id!!)
         }
     }
     @NonNull

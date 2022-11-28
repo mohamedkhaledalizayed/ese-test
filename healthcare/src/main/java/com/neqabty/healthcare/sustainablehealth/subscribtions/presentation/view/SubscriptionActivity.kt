@@ -330,7 +330,8 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                 val bitmap =
                     MediaStore.Images.Media.getBitmap(contentResolver, data.data)
 
-                if (bitmap.allocationByteCount / (1024 * 1024) > 25){
+                var bitmapSize = bitmap.allocationByteCount
+                if (bitmapSize / (1024 * 1024) > 85){
                     Toast.makeText(this@SubscriptionActivity, "صورة كبيرة الحجم.", Toast.LENGTH_LONG).show()
                     return
                 }

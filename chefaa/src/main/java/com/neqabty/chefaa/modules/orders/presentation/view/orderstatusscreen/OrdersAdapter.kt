@@ -61,7 +61,7 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
         }
 
         viewHolder.binding.layoutItem.setOnClickListener {
-            if (item.orderStatus.id != 1 && item.orderStatus.id != 4)
+            if (item.orderStatus.id != 1 && item.orderStatus.id != 5)
                 onItemClickListener?.setOnItemClickListener(item)
         }
     }

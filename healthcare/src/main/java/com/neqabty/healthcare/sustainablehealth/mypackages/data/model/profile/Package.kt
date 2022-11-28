@@ -43,7 +43,7 @@ data class Package(
     val serviceCode: String,
     @SerializedName("service_action_code")
     val serviceActionCode: String?,
-    @SerializedName("package_price")
+    @SerializedName("price")
     val packagePrice: String,
     @SerializedName("expiry_date")
     val expiryDate: String?,
