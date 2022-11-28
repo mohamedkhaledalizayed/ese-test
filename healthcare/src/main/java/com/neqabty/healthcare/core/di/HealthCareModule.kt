@@ -3,6 +3,7 @@ package com.neqabty.healthcare.core.di
 import com.google.gson.GsonBuilder
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_DEV
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO
+import com.neqabty.healthcare.core.data.Constants.interceptorLevel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,7 +30,7 @@ class HealthCareModule {
     @Named("healthcare")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        interceptor.level = interceptorLevel
         return interceptor
     }
 
@@ -48,7 +49,7 @@ class HealthCareModule {
         okHttpClient.connectTimeout(60, TimeUnit.SECONDS)
         okHttpClient.readTimeout(90, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(90, TimeUnit.SECONDS)
-//        okHttpClient.certificatePinner(certificatePinner)
+        okHttpClient.certificatePinner(certificatePinner)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.build()
         return okHttpClient.build()

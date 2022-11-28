@@ -29,7 +29,7 @@ class MegaModule {
     @Named("mega")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        interceptor.level = Constants.interceptorLevel
         return interceptor
     }
     private val interceptor = Interceptor {

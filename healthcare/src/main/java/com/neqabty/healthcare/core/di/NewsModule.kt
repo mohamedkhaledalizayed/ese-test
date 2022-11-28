@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.core.di
 
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO_NEWS
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_STAGING_NEWS
 import dagger.Module
@@ -29,7 +30,7 @@ class NewsModule {
     @Named("newsModule")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        interceptor.level = Constants.interceptorLevel
         return interceptor
     }
 

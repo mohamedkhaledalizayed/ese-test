@@ -1,33 +1,41 @@
 package com.neqabty.healthcare.core.data
 
 import com.neqabty.healthcare.BuildConfig
+import okhttp3.logging.HttpLoggingInterceptor
 
 
 object Constants {
 
 
+    //TODO move this to gradle
+    //Very Important Before Publishing
     //Seha
     const val BASE_URL_DEV = "http://3.131.229.146:7777/api/v1/"
     const val BASE_URL_PRO = "https://seha.neqabty.com/public/api/v1/"
 
     //Syndicates
-//    const val BASE_URL_DEV_SYNDICATE = "https://neqabty.et3.co/api/"
+    const val BASE_URL_DEV_SYNDICATE = "https://neqabty.et3.co/api/"
     private const val BASE_URL_STAGING_SYNDICATE = "https://staging-community.neqabty.com/api/"
     private const val BASE_URL_PRO_SYNDICATE = "https://community.neqabty.com/api/"
 
     //News
-//    const val BASE_URL_DEV_NEWS = "https://news.et3.co/api/"
+    const val BASE_URL_DEV_NEWS = "https://news.et3.co/api/"
     const val BASE_URL_STAGING_NEWS = "https://staging-news.neqabty.com/api/"
     const val BASE_URL_PRO_NEWS = "https://news.neqabty.com/api//"
 
     //OTP
-//    const val BASE_URL_DEV_OTP = "https://neqabty.et3.co/"
+    const val BASE_URL_DEV_OTP = "https://neqabty.et3.co/"
     const val BASE_URL_STAGING_OTP = "https://staging-community.neqabty.com/"
     const val BASE_URL_PRO_OTP = "https://community.neqabty.com/"
 
     //Main
     const val BASE_URL_Main = BASE_URL_PRO_SYNDICATE
+    // for payment true for testing false for production
     const val SANDBOX = false
+    //interceptor Level
+    val interceptorLevel = HttpLoggingInterceptor.Level.NONE
+
+    // End
 
     const val NEQABTY_CODE = "e00"
     const val ESE_CODE = "e03"

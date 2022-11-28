@@ -10,9 +10,9 @@
 
     <application
         android:name=".core.application.ChefaaApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="false">
         <activity
             android:name=".modules.orders.presentation.orderbynote.OrderByNoteActivity"
             android:exported="false" />

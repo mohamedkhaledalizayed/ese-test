@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.core.di
 
 
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO_OTP
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_STAGING_OTP
 import dagger.Module
@@ -30,7 +31,7 @@ class OTPModule {
     @Named("otp")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        interceptor.level = Constants.interceptorLevel
         return interceptor
     }
     private val interceptor = Interceptor {
