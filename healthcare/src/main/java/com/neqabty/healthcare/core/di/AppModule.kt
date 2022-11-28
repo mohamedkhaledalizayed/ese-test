@@ -1,8 +1,8 @@
 package com.neqabty.healthcare.core.di
 
 import android.app.Application
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
+import com.neqabty.healthcare.core.data.Constants.ENCRYPT_KEY
+import com.neqabty.healthcare.core.data.Constants.PREFS_FILE
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import dagger.Module
 import dagger.Provides
@@ -17,13 +17,13 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideSharedPreferences(application: Application): SharedPreferences {
-        return PreferenceManager.getDefaultSharedPreferences(application)
+    fun provideSharedPreferences(application: Application): com.securepreferences.SecurePreferences {
+        return com.securepreferences.SecurePreferences(application, ENCRYPT_KEY, PREFS_FILE)
     }
 
     @Singleton
     @Provides
-    fun providePreferencesHelper(sharedPref: SharedPreferences): PreferencesHelper {
+    fun providePreferencesHelper(sharedPref: com.securepreferences.SecurePreferences): PreferencesHelper {
         return PreferencesHelper(preferences = sharedPref)
     }
 

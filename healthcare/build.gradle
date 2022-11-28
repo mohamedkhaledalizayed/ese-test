@@ -187,5 +187,5 @@ dependencies {
 
     // Circle Indicator (To fix the xml preview "Missing classes" error)
     implementation 'me.relex:circleindicator:2.1.6'
-
+    implementation 'com.scottyab:secure-preferences-lib:0.1.7'
 }

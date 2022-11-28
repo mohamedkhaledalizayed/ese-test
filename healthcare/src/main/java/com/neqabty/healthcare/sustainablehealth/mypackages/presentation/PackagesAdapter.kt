@@ -78,7 +78,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
             if (follower.packages.serviceActionCode.isNullOrEmpty()){
                 return@setOnClickListener
             }
-            onItemClickListener?.setOnPayClickListener(follower.packages.nameAr, follower.packages.packagePrice, follower.packages.serviceCode, follower.packages.serviceActionCode)
+            onItemClickListener?.setOnPayClickListener(follower.packages.nameAr, follower.packages.packagePrice ?: "0", follower.packages.serviceCode, follower.packages.serviceActionCode)
         }
 
         mAdapter.onItemClickListener = object :

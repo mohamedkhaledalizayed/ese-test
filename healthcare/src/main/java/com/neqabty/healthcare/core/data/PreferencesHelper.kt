@@ -1,10 +1,9 @@
 package com.neqabty.healthcare.core.data
 
-import android.content.SharedPreferences
 import javax.inject.Inject
 
 class PreferencesHelper @Inject constructor(
-    private val preferences: SharedPreferences
+    private val preferences: com.securepreferences.SecurePreferences
 ) {
 
     init {

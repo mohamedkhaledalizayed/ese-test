@@ -33,7 +33,7 @@ object Constants {
     // for payment true for testing false for production
     const val SANDBOX = false
     //interceptor Level
-    val interceptorLevel = HttpLoggingInterceptor.Level.NONE
+    val interceptorLevel = HttpLoggingInterceptor.Level.BODY
 
     // End
 
@@ -43,7 +43,8 @@ object Constants {
     var isSyndicateMember = false
     var selectedSyndicateCode = ""
     var selectedSyndicatePosition = 0
-
+    const val ENCRYPT_KEY = "neqabty@seha$"
+    const val PREFS_FILE  = "neqabty_prefs"
     //Tour Guide
     const val TOUR_GUIDE_SYNDICATE_EMAIL = "gts@neqabty.com"
     const val TOUR_GUIDE_SYNDICATE_LAT = 0.0

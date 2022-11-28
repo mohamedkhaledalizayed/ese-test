@@ -44,7 +44,7 @@ data class Package(
     @SerializedName("service_action_code")
     val serviceActionCode: String?,
     @SerializedName("price")
-    val packagePrice: String,
+    val packagePrice: String?,
     @SerializedName("expiry_date")
     val expiryDate: String?,
     @SerializedName("max_follower")

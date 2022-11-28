@@ -12,7 +12,7 @@ data class PackageEntity(
     val prepaid: Boolean,
     val serviceCode: String,
     val serviceActionCode: String?,
-    val packagePrice: String,
+    val packagePrice: String?,
     val expiryDate: String?,
     val maxFollower: Int,
     val paid: Boolean,
