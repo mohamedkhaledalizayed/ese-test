@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -40,7 +41,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-//        LocaleHelper().setLocale(this, sharedPreferences.language)
+        binding.root.visibility = View.VISIBLE
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         invalidateOptionsMenu()
     }
@@ -113,6 +114,11 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
             showAlert(getString(R.string.internet_message), getString(R.string.internet_title)) { finish() }
         }
         LocaleHelper.setLocale(this, "ar");
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.root.visibility = View.GONE
     }
 
 }
