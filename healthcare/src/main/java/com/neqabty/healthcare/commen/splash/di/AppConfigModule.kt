@@ -17,7 +17,7 @@ abstract class AppConfigModule {
     companion object {
         @Provides
         fun providesAppConfigApiService(
-            @Named("mega")
+            @Named("mega_unauthorized")
             retrofit: Retrofit
         ) = retrofit.create(AppConfigApi::class.java)
     }

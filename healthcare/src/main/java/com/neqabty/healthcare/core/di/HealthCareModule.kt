@@ -40,11 +40,6 @@ class HealthCareModule {
     fun provideOkHttpClient(    @Named("healthcare")
                                 loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
 
-        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-            .add(
-                "seha.neqabty.com",
-                "sha256/2ZkyETsE1/HOHPaAzvyDe2caoMFT0Q3NMp78+nODjwE="
-            ).build()
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(60, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(60, TimeUnit.SECONDS)
@@ -53,6 +48,19 @@ class HealthCareModule {
 //        okHttpClient.certificatePinner(certificatePinner)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.build()
+        if (!BuildConfig.DEBUG) {
+            val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+                .add(
+                    "seha.neqabty.com",
+                    "sha256/C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M="
+                )
+                .add(
+                    "*.neqabty.com",
+                    "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8="
+                ).build()
+
+            okHttpClient.certificatePinner(certificatePinner)
+        }
         return okHttpClient.build()
     }
 

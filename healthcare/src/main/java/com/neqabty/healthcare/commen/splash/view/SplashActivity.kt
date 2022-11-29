@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
@@ -48,7 +49,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                     }
                     Status.SUCCESS -> {
                         loading.dismiss()
-                        if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= 210) {
+                        if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= BuildConfig.VERSION_CODE) {
                             Handler().postDelayed(Runnable {
                                 if (sharedPreferences.isAuthenticated) {
                                     if (sharedPreferences.isSyndicateMember) {

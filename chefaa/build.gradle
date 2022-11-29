@@ -10,7 +10,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        minSdk 21
+        minSdk 23
         targetSdk 31
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -41,7 +41,7 @@ ext {
     //Basic configurations
     kotlin_version = "1.5.31"
     compileSdkVersion = 30
-    minSdkVersion = 21
+    minSdkVersion = 23
     targetSdkVersion = 30
     corektxVersion = '1.7.0'
     //androidx

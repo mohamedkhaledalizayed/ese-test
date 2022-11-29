@@ -22,7 +22,7 @@ android {
     }
     defaultConfig {
         applicationId "com.neqabty.healthcare"
-        minSdk 21
+        minSdk 23
         targetSdk 31
         versionCode 11
         versionName "5"
@@ -82,7 +82,7 @@ ext {
     //Basic configurations
     kotlin_version = "1.5.31"
     compileSdkVersion = 30
-    minSdkVersion = 21
+    minSdkVersion = 23
     targetSdkVersion = 30
     corektxVersion = '1.6.0'
     //androidx

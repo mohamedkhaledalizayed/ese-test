@@ -53,18 +53,36 @@ class MegaModule {
         @Named("mega")
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
-
-        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-            .add(
-                "neqabty.com",
-                "sha256/nt7kxSg6amgrDYO0JQOM+d3Q+G0fgFtBdx76ppVzIS4="
-            ).build()
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(40, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
         okHttpClient.readTimeout(40, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.certificatePinner(certificatePinner)
+        okHttpClient.addInterceptor(loggingInterceptor)
+        okHttpClient.build()
+        okHttpClient.addInterceptor(interceptor)
+        if (!BuildConfig.DEBUG) {
+            val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+                .add(
+                    "community.neqabty.com",
+                    "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8="
+                ).build()
+
+            okHttpClient.certificatePinner(certificatePinner)
+        }
+        return okHttpClient.build()
+    }
+    @Provides
+    @Named("mega_unauthorized")
+    fun provideUnauthorizedOkHttpClient(
+        @Named("mega")
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
+        val okHttpClient = OkHttpClient().newBuilder()
+        okHttpClient.callTimeout(40, TimeUnit.SECONDS)
+        okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
+        okHttpClient.readTimeout(40, TimeUnit.SECONDS)
+        okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.build()
         okHttpClient.addInterceptor(interceptor)
@@ -81,6 +99,23 @@ class MegaModule {
     @Named("mega")
     fun provideRetrofitClient(
         @Named("mega")
+        okHttpClient: OkHttpClient,
+        @Named("mega")
+        baseUrl: String,
+        @Named("mega")
+        converterFactory: Converter.Factory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(okHttpClient)
+            .addConverterFactory(converterFactory)
+            .build()
+    }
+
+    @Provides
+    @Named("mega_unauthorized")
+    fun provideUnauthorizedRetrofitClient(
+        @Named("mega_unauthorized")
         okHttpClient: OkHttpClient,
         @Named("mega")
         baseUrl: String,

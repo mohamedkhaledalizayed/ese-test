@@ -55,21 +55,24 @@ class OTPModule {
         @Named("otp")
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
-
-        val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-            .add(
-                "neqabty.com",
-                "sha256/nt7kxSg6amgrDYO0JQOM+d3Q+G0fgFtBdx76ppVzIS4="
-            ).build()
         val okHttpClient = OkHttpClient().newBuilder()
         okHttpClient.callTimeout(40, TimeUnit.SECONDS)
         okHttpClient.connectTimeout(40, TimeUnit.SECONDS)
         okHttpClient.readTimeout(40, TimeUnit.SECONDS)
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
-        okHttpClient.certificatePinner(certificatePinner)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.build()
         okHttpClient.addInterceptor(interceptor)
+        if (!BuildConfig.DEBUG) {
+            val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+                .add(
+                    "community.neqabty.com",
+                    "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8="
+                ).build()
+
+            okHttpClient.certificatePinner(certificatePinner)
+        }
+
         return okHttpClient.build()
     }
 
