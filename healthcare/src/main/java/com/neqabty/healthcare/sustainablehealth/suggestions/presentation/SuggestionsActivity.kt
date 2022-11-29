@@ -119,6 +119,10 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
 
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
         }
+
+        binding.name.customSelectionActionModeCallback = actionMode
+        binding.phone.customSelectionActionModeCallback = actionMode
+        binding.content.customSelectionActionModeCallback = actionMode
     }
 
     private fun addComplaint() {

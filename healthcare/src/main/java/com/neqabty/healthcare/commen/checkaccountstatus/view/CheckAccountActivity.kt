@@ -31,7 +31,7 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
             .setContext(this)
             .setMessage(getString(R.string.please_wait))
             .build()
-
+        binding.phone.customSelectionActionModeCallback = actionMode
         binding.ccp.registerCarrierNumberEditText(binding.phone)
         binding.btnSend.setOnClickListener {
             if (binding.phone.text.isNullOrEmpty()){

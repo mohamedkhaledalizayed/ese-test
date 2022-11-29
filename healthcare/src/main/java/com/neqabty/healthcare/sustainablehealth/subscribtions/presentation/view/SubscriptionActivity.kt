@@ -13,6 +13,9 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
+import android.view.ActionMode
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -220,6 +223,10 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
             }
         }
+
+        binding.etNationalId.customSelectionActionModeCallback = actionMode
+        binding.deliveryPhone.customSelectionActionModeCallback = actionMode
+        binding.etEmail.customSelectionActionModeCallback = actionMode
     }
 
     fun addFollower(view: View) {

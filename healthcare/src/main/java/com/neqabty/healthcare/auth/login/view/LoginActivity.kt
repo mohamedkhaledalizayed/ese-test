@@ -83,6 +83,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             }
 
         }
+
+        binding.etUsername.customSelectionActionModeCallback = actionMode
+        binding.etPassword.customSelectionActionModeCallback = actionMode
     }
 
     fun showHidePassword(view: View) {

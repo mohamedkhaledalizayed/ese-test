@@ -64,6 +64,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/edit_text_bg"
                     android:hint="@string/user_name"
+                    android:longClickable="false"
                     android:inputType="text"
                     android:lines="1"
                     android:padding="@dimen/_9sdp" />
@@ -84,6 +85,7 @@
                         android:hint="@string/phone"
                         android:inputType="phone"
                         android:maxLength="11"
+                        android:longClickable="false"
                         android:padding="@dimen/_10sdp"
                         android:textAlignment="viewStart"
                         android:textColor="@color/black"
@@ -126,6 +128,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/edit_text_bg"
                     android:hint="@string/content"
+                    android:longClickable="false"
                     android:inputType="textMultiLine"
                     android:padding="@dimen/_9sdp" />
 

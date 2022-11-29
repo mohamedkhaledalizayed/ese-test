@@ -48,6 +48,7 @@
                 android:padding="@dimen/_9sdp"
                 android:inputType="text"
                 android:lines="1"
+                android:longClickable="false"
                 android:drawablePadding="@dimen/_10sdp"
                 android:imeOptions="actionSearch"
                 android:drawableStart="@drawable/ic_search"

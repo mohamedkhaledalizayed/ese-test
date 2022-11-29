@@ -166,7 +166,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         })
 
 
-
+        binding.search.customSelectionActionModeCallback = actionMode
 
         binding.cvChefaa.setOnClickListener {
 
