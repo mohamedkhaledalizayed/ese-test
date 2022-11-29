@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.core.di
 
 import com.google.gson.GsonBuilder
+import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_DEV
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO
 import com.neqabty.healthcare.core.data.Constants.interceptorLevel
@@ -30,7 +31,7 @@ class HealthCareModule {
     @Named("healthcare")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = interceptorLevel
+        interceptor.level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         return interceptor
     }
 

@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.core.di
 
 
+import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.core.data.Constants
 import dagger.Module
 import dagger.Provides
@@ -29,7 +30,7 @@ class MegaModule {
     @Named("mega")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = Constants.interceptorLevel
+        interceptor.level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         return interceptor
     }
     private val interceptor = Interceptor {

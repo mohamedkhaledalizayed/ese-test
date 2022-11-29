@@ -11,9 +11,9 @@ android {
 
     signingConfigs {
         config {
-            keyAlias 'neqabty'
+            keyAlias 'healthcare'
             keyPassword "123@pass"
-            storeFile file('/D:\\Work\\Mobile\\Neqabty Apps\\NeQabty\\keyStore.jks')
+            storeFile file('D:\\Android\\workspace\\NeQabty\\megakeystore.jks')
             storePassword "123@pass"
 
             v1SigningEnabled true
