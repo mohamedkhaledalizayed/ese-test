@@ -46,6 +46,14 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             .setMessage(resources.getString(R.string.please_wait))
             .build()
 
+        binding.phone.customSelectionActionModeCallback = actionMode
+        binding.email.customSelectionActionModeCallback = actionMode
+        binding.nationalId.customSelectionActionModeCallback = actionMode
+        binding.serialNumber.customSelectionActionModeCallback = actionMode
+        binding.membershipId.customSelectionActionModeCallback = actionMode
+        binding.fullName.customSelectionActionModeCallback = actionMode
+        binding.password.customSelectionActionModeCallback = actionMode
+
         if (isSyndicateMember){
             signupViewModel.getSyndicateList()
             binding.spinnerContainer.visibility = View.VISIBLE

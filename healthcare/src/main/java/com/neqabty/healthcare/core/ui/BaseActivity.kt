@@ -3,14 +3,15 @@ package com.neqabty.healthcare.core.ui
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.view.View
-import android.view.Window
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +21,6 @@ import androidx.viewbinding.ViewBinding
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.core.utils.LocaleHelper
-import dmax.dialog.SpotsDialog
 import javax.inject.Inject
 
 
@@ -145,8 +145,33 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        clearClipBoard()
         progressDialog!!.show()
         binding.root.visibility = View.GONE
+    }
+
+    private fun clearClipBoard(){
+        val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", " ")
+        clipboard.setPrimaryClip(clip)
+    }
+
+    val actionMode = object : ActionMode.Callback {
+        override fun onCreateActionMode(p0: ActionMode?, p1: Menu?): Boolean {
+            return false
+        }
+
+        override fun onPrepareActionMode(p0: ActionMode?, p1: Menu?): Boolean {
+            return false
+        }
+
+        override fun onActionItemClicked(p0: ActionMode?, p1: MenuItem?): Boolean {
+            return false
+        }
+
+        override fun onDestroyActionMode(p0: ActionMode?) {
+
+        }
     }
 
 }

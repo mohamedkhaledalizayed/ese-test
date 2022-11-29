@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.neqabty.signup.modules.verifyphonenumber.view.VerifyPhoneActivity">
+    tools:context=".commen.checkaccountstatus.view.CheckAccountActivity">
 
     <ImageView
         android:id="@+id/logo"
@@ -59,6 +59,7 @@
             android:textColorHint="#748A9D"
             android:textSize="@dimen/_12ssp"
             android:inputType="phone"
+            android:longClickable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ccp"
             app:layout_constraintHorizontal_bias="0.0"
