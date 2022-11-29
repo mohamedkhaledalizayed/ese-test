@@ -2,18 +2,25 @@ package com.neqabty.healthcare.core.ui
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.core.utils.LocaleHelper
+import dmax.dialog.SpotsDialog
 import javax.inject.Inject
 
 
@@ -23,13 +30,14 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     lateinit var sharedPreferences: PreferencesHelper
     lateinit var binding: B
     abstract fun getViewBinding(): B
-
+    private var progressDialog: Dialog? = null
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(LocaleHelper.onAttach(base));
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setAnimation()
         setTheme(getAppTheme())
         binding = getViewBinding()
         setSupportActionBar(binding.root.findViewById(R.id.toolbar))
@@ -37,10 +45,12 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
             ?.setNavigationOnClickListener { onBackPressed() }
         window.setBackgroundDrawableResource(R.color.white)
         binding.root.fitsSystemWindows = true
+
     }
 
     override fun onResume() {
         super.onResume()
+        progressDialog!!.dismiss()
         binding.root.visibility = View.VISIBLE
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         invalidateOptionsMenu()
@@ -116,8 +126,26 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         LocaleHelper.setLocale(this, "ar");
     }
 
+    private fun setAnimation(){
+         progressDialog = Dialog(this)
+        progressDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        progressDialog!!.setContentView(R.layout.custom_dialog_progress)
+
+/* Custom setting to change TextView text,Color and Text Size according to your Preference*/
+
+        val progressTv = progressDialog!!.findViewById(R.id.progress_tv) as TextView
+        progressTv.visibility = View.GONE
+        progressTv.text = resources.getString(R.string.loading)
+        progressTv.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryLight))
+        progressTv.textSize = 19F
+
+        progressDialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressDialog!!.setCancelable(false)
+    }
+
     override fun onPause() {
         super.onPause()
+        progressDialog!!.show()
         binding.root.visibility = View.GONE
     }
 

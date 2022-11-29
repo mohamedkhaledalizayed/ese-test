@@ -31,13 +31,19 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
         binding = getViewBinding()
         setSupportActionBar(binding.root.findViewById(R.id.toolbar))
         binding.root.findViewById<Toolbar>(R.id.toolbar)?.setNavigationOnClickListener{onBackPressed()}
-        window.setBackgroundDrawableResource(R.color.colorPrimaryDark)
+        window.setBackgroundDrawableResource(R.color.white)
         binding.root.fitsSystemWindows = true
     }
 
     override fun onResume() {
         super.onResume()
+        binding.root.visibility = View.VISIBLE
         invalidateOptionsMenu()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.root.visibility = View.GONE
     }
 
     protected fun hideKeyboard() {
