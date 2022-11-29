@@ -68,7 +68,6 @@ class NetworkModule {
 
             okHttpClient.certificatePinner(certificatePinner)
         }
-        okHttpClient.build()
         return okHttpClient.build()
     }
 

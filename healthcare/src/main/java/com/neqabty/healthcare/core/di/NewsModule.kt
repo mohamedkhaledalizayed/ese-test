@@ -47,7 +47,6 @@ class NewsModule {
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.addInterceptor(interceptor)
-        okHttpClient.build()
         if (!com.neqabty.chefaa.BuildConfig.DEBUG) {
             val certificatePinner : CertificatePinner = CertificatePinner.Builder()
                 .add(
