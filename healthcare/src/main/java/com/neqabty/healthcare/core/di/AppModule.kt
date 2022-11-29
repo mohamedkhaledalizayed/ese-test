@@ -37,7 +37,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun providePreferencesHelper(sharedPref: com.securepreferences.SecurePreferences): PreferencesHelper {
+    fun providePreferencesHelper(sharedPref: SharedPreferences): PreferencesHelper {
         return PreferencesHelper(preferences = sharedPref)
     }
 
