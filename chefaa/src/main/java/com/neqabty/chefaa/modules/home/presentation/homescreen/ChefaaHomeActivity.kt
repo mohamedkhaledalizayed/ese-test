@@ -264,6 +264,11 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
     private fun onSelectFromGalleryResult(data: Intent) {
         try {
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, data.data)
+            var bitmapSize = bitmap.allocationByteCount
+            if (bitmapSize / (1024 * 1024) > 95){
+                Toast.makeText(this, "صورة كبيرة الحجم.", Toast.LENGTH_LONG).show()
+                return
+            }
             val photoUI = saveImage(bitmap)
             addImageToCart(photoUI)
         } catch (e: IOException) {
@@ -284,7 +289,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
         addImageToCart(PhotoUI(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString(), photoFileName, photoFileURI))
     }
 
-    fun saveImage(myBitmap: Bitmap): PhotoUI {
+    private fun saveImage(myBitmap: Bitmap): PhotoUI {
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
         val path: String = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()

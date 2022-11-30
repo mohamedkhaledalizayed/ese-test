@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
+import android.util.Log
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
@@ -338,14 +339,13 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                     MediaStore.Images.Media.getBitmap(contentResolver, data.data)
 
                 var bitmapSize = bitmap.allocationByteCount
-                if (bitmapSize / (1024 * 1024) > 85){
+                if (bitmapSize / (1024 * 1024) > 95){
                     Toast.makeText(this@SubscriptionActivity, "صورة كبيرة الحجم.", Toast.LENGTH_LONG).show()
                     return
                 }
                 val photoUI = saveImage(bitmap)
 
                 val file = File(photoUI.path, photoUI.name)
-
                 val res = Base64.encodeToString(file.readBytes(), Base64.DEFAULT)
                 when (REQUEST_CODE) {
                     1001 -> {
@@ -378,7 +378,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
     private fun saveImage(myBitmap: Bitmap): PhotoUI {
         val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.PNG, 30, bytes)
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
         val path: String = getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
         val name = System.currentTimeMillis().toString() + ".jpg"
         val directory = File(path)
