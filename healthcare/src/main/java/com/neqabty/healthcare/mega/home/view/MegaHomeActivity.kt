@@ -228,6 +228,39 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                 }
             }
         }
+
+        //Start of logout
+        homeViewModel.logoutStatus.observe(this) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        loading.show()
+                    }
+                    Status.SUCCESS -> {
+                        loading.dismiss()
+                        sharedPreferences.mobile = ""
+                        sharedPreferences.isPhoneVerified = false
+                        sharedPreferences.isAuthenticated = false
+                        sharedPreferences.isSyndicateMember = false
+                        sharedPreferences.code = ""
+                        sharedPreferences.token = ""
+                        sharedPreferences.mainSyndicate = 0
+                        sharedPreferences.image = ""
+                        sharedPreferences.syndicateName = ""
+                        sharedPreferences.membershipId = ""
+                        drawer.close()
+                        val intent = Intent(this, CheckAccountActivity::class.java)
+                        startActivity(intent)
+                        finishAffinity()
+                    }
+                    Status.ERROR -> {
+                        loading.dismiss()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+        //End of logout
     }
 
     private fun showTicketNumber(data: String?) {
@@ -405,20 +438,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
-            sharedPreferences.mobile = ""
-            sharedPreferences.isPhoneVerified = false
-            sharedPreferences.isAuthenticated = false
-            sharedPreferences.isSyndicateMember = false
-            sharedPreferences.code = ""
-            sharedPreferences.token = ""
-            sharedPreferences.mainSyndicate = 0
-            sharedPreferences.image = ""
-            sharedPreferences.syndicateName = ""
-            sharedPreferences.membershipId = ""
-            drawer.close()
-            val intent = Intent(this, CheckAccountActivity::class.java)
-            startActivity(intent)
-            finishAffinity()
+            homeViewModel.logout()
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)

@@ -4,6 +4,7 @@ package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescre
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.neqabty.healthcare.auth.logout.domain.interactors.LogoutUseCase
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.ads.domain.interactors.AdsUseCase
 import com.neqabty.healthcare.core.utils.AppUtils
@@ -19,7 +20,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val getHomeUseCase: GetHomeUseCase) : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val getHomeUseCase: GetHomeUseCase,
+    private val logoutUseCase: LogoutUseCase
+) : ViewModel() {
+
     val aboutList = MutableLiveData<Resource<List<AboutEntity>>>()
     fun getAboutList() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -28,8 +33,32 @@ class HomeViewModel @Inject constructor(private val getHomeUseCase: GetHomeUseCa
                 getHomeUseCase.build().collect {
                     aboutList.postValue(Resource.success(data = it))
                 }
-            }catch (e:Throwable){
-                aboutList.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            } catch (e: Throwable) {
+                aboutList.postValue(
+                    Resource.error(
+                        data = null,
+                        message = AppUtils().handleError(e)
+                    )
+                )
+            }
+        }
+    }
+
+    val logoutStatus = MutableLiveData<Resource<String>>()
+    fun logout() {
+        viewModelScope.launch(Dispatchers.IO) {
+            logoutStatus.postValue(Resource.loading(data = null))
+            try {
+                logoutUseCase.build().collect {
+                    logoutStatus.postValue(Resource.success(data = it))
+                }
+            } catch (e: Throwable) {
+                logoutStatus.postValue(
+                    Resource.error(
+                        data = null,
+                        message = AppUtils().handleError(e)
+                    )
+                )
             }
         }
     }

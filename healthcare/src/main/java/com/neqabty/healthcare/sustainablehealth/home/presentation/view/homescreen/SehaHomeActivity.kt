@@ -38,10 +38,11 @@ import com.neqabty.healthcare.sustainablehealth.search.presentation.view.filter.
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
 import dagger.hilt.android.AndroidEntryPoint
+import dmax.dialog.SpotsDialog
 
 @AndroidEntryPoint
 class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavigationItemSelectedListener {
-
+    private lateinit var loading: AlertDialog
     private val aboutAdapter = AboutAdapter()
     private lateinit var toolbar: Toolbar
     private lateinit var drawer: DrawerLayout
@@ -53,7 +54,10 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_home)
-
+        loading = SpotsDialog.Builder()
+            .setContext(this)
+            .setMessage(getString(R.string.please_wait))
+            .build()
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.home_title)
         toolbar = binding.toolbar
@@ -184,6 +188,38 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             }
 
         }
+
+        //Start of logout
+        homeViewModel.logoutStatus.observe(this) {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        loading.show()
+                    }
+                    Status.SUCCESS -> {
+                        loading.dismiss()
+                        sharedPreferences.mobile = ""
+                        sharedPreferences.isPhoneVerified = false
+                        sharedPreferences.isAuthenticated = false
+                        sharedPreferences.isSyndicateMember = false
+                        sharedPreferences.code = ""
+                        sharedPreferences.token = ""
+                        sharedPreferences.mainSyndicate = 0
+                        sharedPreferences.image = ""
+                        sharedPreferences.syndicateName = ""
+                        drawer.close()
+                        val intent = Intent(this@SehaHomeActivity, CheckAccountActivity::class.java)
+                        startActivity(intent)
+                        finishAffinity()
+                    }
+                    Status.ERROR -> {
+                        loading.dismiss()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+        //End of logout
     }
 
     private fun init() {
@@ -300,19 +336,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
-            sharedPreferences.mobile = ""
-            sharedPreferences.isPhoneVerified = false
-            sharedPreferences.isAuthenticated = false
-            sharedPreferences.isSyndicateMember = false
-            sharedPreferences.code = ""
-            sharedPreferences.token = ""
-            sharedPreferences.mainSyndicate = 0
-            sharedPreferences.image = ""
-            sharedPreferences.syndicateName = ""
-            drawer.close()
-            val intent = Intent(this@SehaHomeActivity, CheckAccountActivity::class.java)
-            startActivity(intent)
-            finishAffinity()
+            homeViewModel.logout()
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)

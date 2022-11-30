@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.neqabty.healthcare.auth.logout.domain.interactors.LogoutUseCase
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.ads.domain.interactors.AdsUseCase
 import com.neqabty.healthcare.core.utils.AppUtils
@@ -22,7 +23,8 @@ class HomeViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase,
     private val homeUseCase: HomeUseCase,
     private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase,
-    private val adsUseCase: AdsUseCase
+    private val adsUseCase: AdsUseCase,
+    private val logoutUseCase: LogoutUseCase
 ) : ViewModel() {
 
     val allNews = MutableLiveData<Resource<List<NewsEntity>>>()
@@ -76,6 +78,25 @@ class HomeViewModel @Inject constructor(
                 }
             } catch (e: Throwable) {
                 complains.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            }
+        }
+    }
+
+    val logoutStatus = MutableLiveData<Resource<String>>()
+    fun logout() {
+        viewModelScope.launch(Dispatchers.IO) {
+            logoutStatus.postValue(Resource.loading(data = null))
+            try {
+                logoutUseCase.build().collect {
+                    logoutStatus.postValue(Resource.success(data = it))
+                }
+            } catch (e: Throwable) {
+                logoutStatus.postValue(
+                    Resource.error(
+                        data = null,
+                        message = AppUtils().handleError(e)
+                    )
+                )
             }
         }
     }
