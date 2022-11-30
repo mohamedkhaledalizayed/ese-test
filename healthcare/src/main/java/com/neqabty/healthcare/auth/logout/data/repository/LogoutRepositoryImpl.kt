@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class LogoutRepositoryImpl @Inject constructor(private val logoutDS: LogoutDS) : LogoutRepository {
 
-    override fun logout(): Flow<String> {
+    override fun logout(): Flow<Boolean> {
         return flow { emit(logoutDS.logout()) }
     }
 

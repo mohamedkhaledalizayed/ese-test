@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface LogoutRepository {
-    fun logout(): Flow<String>
+    fun logout(): Flow<Boolean>
 }

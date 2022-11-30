@@ -82,7 +82,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    val logoutStatus = MutableLiveData<Resource<String>>()
+    val logoutStatus = MutableLiveData<Resource<Boolean>>()
     fun logout() {
         viewModelScope.launch(Dispatchers.IO) {
             logoutStatus.postValue(Resource.loading(data = null))

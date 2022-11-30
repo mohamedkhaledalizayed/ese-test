@@ -24,7 +24,7 @@ android {
         applicationId "com.neqabty.healthcare"
         minSdk 23
         targetSdk 31
-        versionCode 12
+        versionCode 500
         versionName "5.2"
         signingConfig signingConfigs.config
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

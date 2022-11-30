@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class LogoutUseCase @Inject constructor(private val logoutRepository: LogoutRepository) {
 
-    fun build(): Flow<String> {
+    fun build(): Flow<Boolean> {
         return logoutRepository.logout()
     }
 

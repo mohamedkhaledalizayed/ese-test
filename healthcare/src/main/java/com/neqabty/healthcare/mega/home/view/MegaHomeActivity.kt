@@ -238,20 +238,25 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                     }
                     Status.SUCCESS -> {
                         loading.dismiss()
-                        sharedPreferences.mobile = ""
-                        sharedPreferences.isPhoneVerified = false
-                        sharedPreferences.isAuthenticated = false
-                        sharedPreferences.isSyndicateMember = false
-                        sharedPreferences.code = ""
-                        sharedPreferences.token = ""
-                        sharedPreferences.mainSyndicate = 0
-                        sharedPreferences.image = ""
-                        sharedPreferences.syndicateName = ""
-                        sharedPreferences.membershipId = ""
-                        drawer.close()
-                        val intent = Intent(this, CheckAccountActivity::class.java)
-                        startActivity(intent)
-                        finishAffinity()
+                        if (resource.data!!){
+                            sharedPreferences.mobile = ""
+                            sharedPreferences.isPhoneVerified = false
+                            sharedPreferences.isAuthenticated = false
+                            sharedPreferences.isSyndicateMember = false
+                            sharedPreferences.code = ""
+                            sharedPreferences.token = ""
+                            sharedPreferences.mainSyndicate = 0
+                            sharedPreferences.image = ""
+                            sharedPreferences.syndicateName = ""
+                            sharedPreferences.membershipId = ""
+                            drawer.close()
+                            val intent = Intent(this, CheckAccountActivity::class.java)
+                            startActivity(intent)
+                            finishAffinity()
+                        }
+                        else{
+                            Toast.makeText(this, "لقد حدث خطاء ما.", Toast.LENGTH_LONG).show()
+                        }
                     }
                     Status.ERROR -> {
                         loading.dismiss()
@@ -438,7 +443,21 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
-            homeViewModel.logout()
+//            homeViewModel.logout()
+            sharedPreferences.mobile = ""
+            sharedPreferences.isPhoneVerified = false
+            sharedPreferences.isAuthenticated = false
+            sharedPreferences.isSyndicateMember = false
+            sharedPreferences.code = ""
+            sharedPreferences.token = ""
+            sharedPreferences.mainSyndicate = 0
+            sharedPreferences.image = ""
+            sharedPreferences.syndicateName = ""
+            sharedPreferences.membershipId = ""
+            drawer.close()
+            val intent = Intent(this, CheckAccountActivity::class.java)
+            startActivity(intent)
+            finishAffinity()
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)

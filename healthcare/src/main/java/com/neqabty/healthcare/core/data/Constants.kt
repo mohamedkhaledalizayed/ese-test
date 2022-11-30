@@ -1,7 +1,6 @@
 package com.neqabty.healthcare.core.data
 
 import com.neqabty.healthcare.BuildConfig
-import okhttp3.logging.HttpLoggingInterceptor
 
 
 object Constants {
@@ -32,8 +31,6 @@ object Constants {
     const val BASE_URL_Main = BASE_URL_PRO_SYNDICATE
     // for payment true for testing false for production
     const val SANDBOX = false
-    //interceptor Level
-    val interceptorLevel = HttpLoggingInterceptor.Level.BODY
 
     // End
 

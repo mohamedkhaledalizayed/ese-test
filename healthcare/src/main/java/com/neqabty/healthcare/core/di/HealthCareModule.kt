@@ -4,7 +4,6 @@ import com.google.gson.GsonBuilder
 import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_DEV
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO
-import com.neqabty.healthcare.core.data.Constants.interceptorLevel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
