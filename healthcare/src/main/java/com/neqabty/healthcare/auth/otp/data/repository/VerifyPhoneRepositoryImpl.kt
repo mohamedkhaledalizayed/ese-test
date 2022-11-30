@@ -27,11 +27,6 @@ class VerifyPhoneRepositoryImpl @Inject constructor(private val sendOTPSource: S
         }
     }
 
-    override fun verifyRecaptcha(token: String): Flow<Boolean> {
-        return flow {
-            emit(sendOTPSource.verifyRecaptcha(token))
-        }
-    }
 }
 
 private fun OTPModel.toOTPEntity(): OTPEntity{

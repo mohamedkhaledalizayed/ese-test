@@ -62,21 +62,6 @@ class VerifyPhoneViewModel @Inject constructor(private val verifyPhoneUseCase: V
         }
     }
 
-    val recaptcha = MutableLiveData<Resource<Boolean>>()
-    fun verifyRecaptcha(token: String){
-        viewModelScope.launch(Dispatchers.IO){
-            recaptcha.postValue(Resource.loading(data = null))
-
-            try {
-                verifyPhoneUseCase.build(token).collect(){
-                    recaptcha.postValue(Resource.success(data = it))
-                }
-            }catch (e: Throwable){
-                recaptcha.postValue(Resource.error(data = null, message = handleError(e)))
-            }
-        }
-    }
-
     fun handleError(throwable: Throwable): String {
         return if (throwable is HttpException) {
             when (throwable.code()) {

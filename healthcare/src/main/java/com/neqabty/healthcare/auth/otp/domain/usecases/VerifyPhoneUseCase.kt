@@ -20,7 +20,4 @@ class VerifyPhoneUseCase @Inject constructor(private val verifyPhoneRepository: 
         return verifyPhoneRepository.checkOTP(checkOTPBody)
     }
 
-    fun build(token: String): Flow<Boolean>{
-        return verifyPhoneRepository.verifyRecaptcha(token)
-    }
 }

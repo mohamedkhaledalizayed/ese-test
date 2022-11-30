@@ -17,8 +17,4 @@ class SendOTPSource @Inject constructor(private val verifyPhoneApi: VerifyPhoneA
         return verifyPhoneApi.checkOTP(checkOTPBody).status
     }
 
-    suspend fun verifyRecaptcha(token: String): Boolean{
-        return verifyPhoneApi.verifyRecaptcha(token = token).success
-    }
-
 }
