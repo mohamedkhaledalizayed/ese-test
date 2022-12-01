@@ -18,9 +18,11 @@ import com.neqabty.healthcare.core.data.Constants.selectedSyndicatePosition
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.commen.eselanding.EseLandingActivity
 import com.neqabty.healthcare.databinding.ActivitySyndicateBinding
 import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
 import com.neqabty.healthcare.commen.syndicates.domain.entity.SyndicateEntity
+import com.neqabty.healthcare.sustainablehealth.search.presentation.model.filters.ItemUi
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.effet.RippleEffect
 import com.takusemba.spotlight.shape.RoundedRectangle
@@ -50,8 +52,8 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data!!.isNotEmpty()){
                             binding.gridView.adapter = mainAdapter
-                            mainAdapter.submitList(resource.data)
-//                            startSpotlight()
+                            mainAdapter.submitList(resource.data.toMutableList()
+                                .also { list -> list.add(0, SyndicateEntity("e03", image = "", name = "نقابة المهندسين")) })
                         }else{
                             Toast.makeText(this, getString(R.string.no_syndicates), Toast.LENGTH_LONG).show()
                         }
@@ -69,17 +71,8 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
             SyndicateAdapter.OnItemClickListener {
             override fun setOnItemClickListener(position: Int, item: SyndicateEntity) {
                 if (item.code == ESE_CODE){
-                    val launchIntent = packageManager.getLaunchIntentForPackage("com.neqabty")
-                    if (launchIntent == null){
-                        startActivity(
-                            Intent(
-                                Intent.ACTION_VIEW,
-                                Uri.parse("market://details?id=com.neqabty")
-                            )
-                        )
-                    }else{
-                        startActivity(launchIntent)
-                    }
+                    val intent = Intent(this@SyndicateActivity, EseLandingActivity::class.java)
+                    startActivity(intent)
                 }else{
                     if (item.code == NEQABTY_CODE){
                         isSyndicateMember = false

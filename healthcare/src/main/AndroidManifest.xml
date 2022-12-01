@@ -26,6 +26,9 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
+            android:name=".commen.eselanding.EseLandingActivity"
+            android:exported="false" />
+        <activity
             android:name=".commen.landing.view.LandingPageActivity"
             android:exported="false" />
         <activity
@@ -129,7 +132,7 @@
             android:exported="false" />
         <activity
             android:name=".auth.login.view.LoginActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".auth.otp.view.VerifyPhoneActivity"
             android:exported="false" />
@@ -144,8 +147,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/api_key" />
-
-
     </application>
 
 </manifest>

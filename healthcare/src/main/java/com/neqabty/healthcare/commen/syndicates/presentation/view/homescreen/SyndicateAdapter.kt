@@ -57,6 +57,8 @@ class SyndicateAdapter: BaseAdapter() {
         title.text = item.name
         if (item.image.isNotEmpty()){
             Picasso.get().load(item.image).into(image)
+        }else{
+            Picasso.get().load(R.drawable.eg).into(image)
         }
         return convertView
     }

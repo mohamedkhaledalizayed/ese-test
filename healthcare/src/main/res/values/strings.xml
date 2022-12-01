@@ -120,19 +120,10 @@
     <string name="attach_personal">إرفاق صورة شخصية</string>
 
 
-
-
-
     <string name="news">الأخبار</string>
     <string name="no_news">عفوا لا يوجد اخبار</string>
     <string name="error">حدث خطا</string>>
     <string name="source">الحدث : </string>>
-
-
-
-
-
-
 
 
     <string name="login">تسجيل الدخول</string>
@@ -141,21 +132,10 @@
     <string name="something_wrong">حدث خطاء</string>
 
 
-
-
-
-
-
-
-
     <string name="payments">المدفوعات</string>
     <string name="language">اللغة</string>
     <string name="delivery_fees">رسوم التوصيل</string>
     <string name="bank_fees">مصاريف تحصيل الكتروني</string>
-
-
-
-
 
 
     <string name="app_name">Neqabty</string>
@@ -305,15 +285,6 @@
     <string name="telephone">التليفون</string>
     <string name="our_location">موقعنا علي الخريطة</string>
     <string name="no_complains">لا يوجد اى شكاوى او مقترحات.</string>
-
-
-
-
-
-
-
-
-
 
 
     <string name="signup">تسجيل إشتراك</string>
