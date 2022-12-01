@@ -326,5 +326,8 @@
     <string name="medical_network">الشبكة الطبية</string>
     <string name="health_care">الرعاية الصحية</string>
     <string name="ph_online">صيدلية اونلاين</string>
+    <string name="seha_text">باقات صحة \nمستدامة</string>
+    <string name="ese_text">خدمات نقابة \nالمهندسين</string>
+    <string name="chefaa_text">خدمات العلاج \nالشهري</string>
 
 </resources>
