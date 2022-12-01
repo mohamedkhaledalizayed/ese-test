@@ -54,12 +54,8 @@ class EseLandingActivity : BaseActivity<ActivityEseLandingBinding>() {
         }
 
         binding.itemNeqabty.setOnClickListener {
-            if (sharedPreferences.isAuthenticated){
                 val intent = Intent(this, SehaHomeActivity::class.java)
                 startActivity(intent)
-            }else{
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
-            }
         }
     }
 
