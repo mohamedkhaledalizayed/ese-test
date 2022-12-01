@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
+import com.neqabty.healthcare.commen.syndicates.domain.entity.SyndicateEntity
 import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
@@ -69,7 +70,8 @@ class LandingPageActivity : BaseActivity<ActivityLandingPageBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data!!.isNotEmpty()){
                             binding.syndicatesRecycler.adapter = mainAdapter
-                            mainAdapter.submitList(resource.data)
+                            mainAdapter.submitList(resource.data.toMutableList()
+                                .also { list -> list.add(0, SyndicateEntity("e03", image = "", name = "نقابة المهندسين")) })
                         }else{
                             Toast.makeText(this, getString(R.string.no_syndicates), Toast.LENGTH_LONG).show()
                         }

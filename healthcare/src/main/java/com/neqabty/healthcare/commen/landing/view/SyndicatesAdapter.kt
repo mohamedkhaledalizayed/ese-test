@@ -39,6 +39,8 @@ class SyndicatesAdapter: RecyclerView.Adapter<SyndicatesAdapter.ViewHolder>() {
         viewHolder.binding.title.text = item.name
         if (item.image.isNotEmpty()){
             Picasso.get().load(item.image).into(viewHolder.binding.image)
+        }else{
+            Picasso.get().load(R.drawable.eg).into(viewHolder.binding.image)
         }
 
     }
