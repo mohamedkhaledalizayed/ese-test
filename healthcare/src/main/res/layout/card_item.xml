@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cardView"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_500sdp"
+        android:gravity="center_horizontal"
+        android:adjustViewBounds="true"
+        app:cardElevation="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_4sdp"
+        >
+
+        <LinearLayout
+            android:id="@+id/layout_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_8sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:fontFamily="@font/dinnext_arabic_bold"
+                android:id="@+id/package_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="الباقة الفضية"
+                android:layout_marginTop="@dimen/_minus2sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                 />
+
+            <ImageView
+                android:id="@+id/package_image"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:src="@drawable/image_58"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:fontFamily="@font/dinnext_light"
+                android:id="@+id/package_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="٤٠٠ جنية - للفرد"
+                android:layout_gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:fontFamily="@font/dinnext_arabic_bold"
+                android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gengeral_info"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/info_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_10ssp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:fontFamily="@font/dinnext_arabic_bold"
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/details_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:textSize="@dimen/_10ssp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.databinding.CardItemBinding
 import com.neqabty.healthcare.databinding.PackageItemLayoutBinding
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.DetailEntity
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.PackagesEntity
@@ -28,15 +29,14 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
-        val binding: PackageItemLayoutBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.package_item_layout, parent, false)
+        val binding: CardItemBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.card_item, parent, false)
 
         return ViewHolder(
             binding
         )
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         val item = items[position]
@@ -44,33 +44,36 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         viewHolder.binding.infoDetails.text = item.description
         viewHolder.binding.packagePrice.text = "${item.price.toInt()} جنية"
 
+        when (item.serviceCode) {
+            "P8152" -> {
+                viewHolder.binding.layoutContainer.setBackgroundResource(R.drawable.save_package)
+                viewHolder.binding.packageImage.setImageResource(R.drawable.image_57)
+            }
+            "P7356" -> {
+                viewHolder.binding.layoutContainer.setBackgroundResource(R.drawable.bro_package)
+                viewHolder.binding.packageImage.setImageResource(R.drawable.image_bro)
+            }
+            "P5906" -> {
+                viewHolder.binding.layoutContainer.setBackgroundResource(R.drawable.silver_package)
+                viewHolder.binding.packageImage.setImageResource(R.drawable.silver_image)
+            }
+            "P5421" -> {
+                viewHolder.binding.layoutContainer.setBackgroundResource(R.drawable.plat_package)
+                viewHolder.binding.packageImage.setImageResource(R.drawable.image_plat)
+            }
+            "P5280" -> {
+                viewHolder.binding.layoutContainer.setBackgroundResource(R.drawable.gold_package)
+                viewHolder.binding.packageImage.setImageResource(R.drawable.image_58)
+            }
+        }
         var details = ""
         for (item: DetailEntity in item.details){
-                details = "$details ${item.title}: ${item.description}. \n"
+                details = "$details ${item.title}: ${item.description.replace("\r", " ").replace("\n", "")}. \n"
         }
 
         viewHolder.binding.detailsValue.text = details
-        viewHolder.binding.moreDetails.setOnClickListener {
-            if (viewHolder.binding.packageDescription.isVisible){
-                viewHolder.binding.packageDescription.visibility = View.GONE
-                Picasso.get().load(R.drawable.ic_baseline_keyboard_arrow_down_24).placeholder(R.drawable.ic_baseline_keyboard_arrow_down_24).into(viewHolder.binding.moreIcon)
-            }else{
-                viewHolder.binding.packageDescription.visibility = View.VISIBLE
-                Picasso.get().load(R.drawable.ic_baseline_keyboard_arrow_up_24).placeholder(R.drawable.ic_baseline_keyboard_arrow_up_24).into(viewHolder.binding.moreIcon)
-            }
-        }
 
-        viewHolder.binding.moreIcon.setOnClickListener {
-            if (viewHolder.binding.packageDescription.isVisible){
-                viewHolder.binding.packageDescription.visibility = View.GONE
-                Picasso.get().load(R.drawable.ic_baseline_keyboard_arrow_down_24).placeholder(R.drawable.ic_baseline_keyboard_arrow_down_24).into(viewHolder.binding.moreIcon)
-            }else{
-                viewHolder.binding.packageDescription.visibility = View.VISIBLE
-                Picasso.get().load(R.drawable.ic_baseline_keyboard_arrow_up_24).placeholder(R.drawable.ic_baseline_keyboard_arrow_up_24).into(viewHolder.binding.moreIcon)
-            }
-        }
-
-        viewHolder.binding.btnSelect.setOnClickListener {
+        viewHolder.binding.cardView.setOnClickListener {
             onItemClickListener?.setOnRegisterClickListener(item)
         }
 
@@ -96,6 +99,6 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
             fun setOnRegisterClickListener(item: PackagesEntity)
     }
 
-    class ViewHolder(val binding: PackageItemLayoutBinding) :
+    class ViewHolder(val binding: CardItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

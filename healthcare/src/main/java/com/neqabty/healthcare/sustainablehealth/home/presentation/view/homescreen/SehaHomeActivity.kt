@@ -18,6 +18,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.core.data.Constants
@@ -39,6 +42,7 @@ import com.neqabty.healthcare.sustainablehealth.search.presentation.view.searchr
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
+import kotlin.math.abs
 
 @AndroidEntryPoint
 class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavigationItemSelectedListener {
@@ -50,6 +54,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
     private val mAdapter = PackagesAdapter()
     override fun getViewBinding() = ActivityHomeBinding.inflate(layoutInflater)
     private val homeViewModel: HomeViewModel by viewModels()
+    private lateinit var customLinearLayoutManager: CustomLinearLayoutManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -145,6 +150,8 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         mAdapter.submitList(resource.data?.toMutableList())
+                        val position = (abs(mAdapter.itemCount * 0.5)).toInt()
+                        centerAtPosition(position)
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
@@ -224,6 +231,26 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             }
         }
         //End of logout
+
+        customLinearLayoutManager = CustomLinearLayoutManager(this)
+        customLinearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        binding.packagesRecycler.layoutManager = customLinearLayoutManager
+
+        val snapHelper: SnapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(binding.packagesRecycler)
+
+        binding.packagesRecycler.addItemDecoration(OffsetItemDecoration())
+
+    }
+
+    fun centerAtPosition(position: Int) {
+        binding.packagesRecycler.post {
+            val cardWidth = CardShapeView.factorWidth * binding.packagesRecycler.width
+            val centerRecyclerViewPoint = binding.packagesRecycler.width * 0.5
+            val center = centerRecyclerViewPoint - (cardWidth * 0.5)
+            customLinearLayoutManager.scrollToPositionWithOffset(position, center.toInt())
+        }
+
     }
 
     private fun init() {
