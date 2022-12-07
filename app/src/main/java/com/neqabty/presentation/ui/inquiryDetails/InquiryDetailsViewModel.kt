@@ -3,20 +3,12 @@ package com.neqabty.presentation.ui.inquiryDetails
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.data.api.WebService
 import com.neqabty.data.api.requests.SyndicateRequest
-import com.neqabty.domain.usecases.EncryptData
-import com.neqabty.domain.usecases.PaymentInquiry
-import com.neqabty.domain.usecases.SendDecryptionKey
+import com.neqabty.domain.usecases.*
 import com.neqabty.presentation.common.BaseViewModel
 import com.neqabty.presentation.common.SingleLiveEvent
 import com.neqabty.presentation.di.DI
-import com.neqabty.presentation.entities.DecryptionUI
-import com.neqabty.presentation.entities.EncryptionUI
-import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
-import com.neqabty.presentation.entities.MemberUI
-import com.neqabty.presentation.mappers.DecryptionEntityUIMapper
-import com.neqabty.presentation.mappers.EncryptionEntityUIMapper
-import com.neqabty.presentation.mappers.MedicalRenewalPaymentEntityUIMapper
-import com.neqabty.presentation.mappers.MemberEntityUIMapper
+import com.neqabty.presentation.entities.*
+import com.neqabty.presentation.mappers.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -28,11 +20,14 @@ class InquiryDetailsViewModel @Inject constructor(
     private val sendDecryptionKey: SendDecryptionKey,
     private val encryptData: EncryptData,
     private val paymentInquiry: PaymentInquiry,
+    private val addRenewalRequest: AddRenewalRequest,
+    private val createFawryTransaction: CreateFawryTransaction,
     @Named(DI.authorized) private val api: WebService
 ) : BaseViewModel() {
 
+    private val paymentRequestEntityUIMapper = PaymentRequestEntityUIMapper()
     private val medicalRenewalPaymentEntityUIMapper = MedicalRenewalPaymentEntityUIMapper()
-    private val memberEntityUIMapper = MemberEntityUIMapper()
+    private val fawryTransactionEntityUIMapper = FawryTransactionEntityUIMapper()
     private val encryptionEntityUIMapper = EncryptionEntityUIMapper()
     private val decryptionEntityUIMapper = DecryptionEntityUIMapper()
 
@@ -94,6 +89,44 @@ class InquiryDetailsViewModel @Inject constructor(
         )
     }
 
+    fun addRenewalRequest(mobileNumber: String, number: String, name: String, serviceID: Int, paymentType: String, paymentGatewayId: Int, deliveryType: Int, address: String, mobile: String) {
+        viewState.value = viewState.value?.copy(isLoading = true)
+        addDisposable(addRenewalRequest.addRenewalRequest(mobileNumber, number, name, serviceID, paymentType, paymentGatewayId, deliveryType, address, mobile)
+            .map {
+                it.let {
+                    paymentRequestEntityUIMapper.mapFrom(it)
+                }
+            }.subscribe(
+                {
+                    onAddRequestReceived(it)
+                },
+                {
+                    viewState.value = viewState.value?.copy(isLoading = false)
+                    errorState.value = handleError(it)
+                }
+            )
+        )
+    }
+
+    fun createFawryTransaction(refID: String) {
+        viewState.value = viewState.value?.copy(isLoading = true)
+        addDisposable(createFawryTransaction.createFawryTransaction(refID)
+            .map {
+                it.let {
+                    fawryTransactionEntityUIMapper.mapFrom(it)
+                }
+            }.subscribe(
+                {
+                    onFawryCodeReceived(it)
+                },
+                {
+                    viewState.value = viewState.value?.copy(isLoading = false)
+                    errorState.value = handleError(it)
+                }
+            )
+        )
+    }
+
     private fun onEncryptionDataReceived(data: EncryptionUI) {
         val newViewState = viewState.value?.copy(
                 isLoading = false,
@@ -112,6 +145,20 @@ class InquiryDetailsViewModel @Inject constructor(
         val newViewState = viewState.value?.copy(
                 isLoading = false,
                 medicalRenewalPayment = medicalRenewalPayment)
+        viewState.value = newViewState
+    }
+
+    private fun onAddRequestReceived(paymentRequestUI: PaymentRequestUI) {
+        val newViewState = viewState.value?.copy(
+            isLoading = false,
+            paymentRequestUI = paymentRequestUI)
+        viewState.value = newViewState
+    }
+
+    private fun onFawryCodeReceived(fawryTransactionUI: FawryTransactionUI) {
+        val newViewState = viewState.value?.copy(
+            isLoading = false,
+            fawryTransactionUI = fawryTransactionUI)
         viewState.value = newViewState
     }
 

@@ -21,6 +21,7 @@ import com.neqabty.presentation.binding.FragmentDataBindingComponent
 import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
+import com.neqabty.presentation.entities.PaymentRequestUI
 import com.neqabty.presentation.ui.medicalRenewDetails.MedicalRenewPaymentItemsAdapter
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +46,7 @@ class InquiryDetailsFragment : BaseFragment() {
     @Inject
     lateinit var appExecutors: AppExecutors
     lateinit var medicalRenewalPayment: MedicalRenewalPaymentUI
+    lateinit var paymentRequestUI: PaymentRequestUI
 
     lateinit var mechanismTypeButton: RadioButton
 
@@ -169,7 +171,7 @@ class InquiryDetailsFragment : BaseFragment() {
                 return@setOnClickListener
             llSuperProgressbar.visibility = View.VISIBLE
 //            createPayment()
-            paymentInquiry()
+            if (rb_fawry.isChecked) addRenewalRequest() else paymentInquiry()
         }
     }
 
@@ -207,6 +209,19 @@ class InquiryDetailsFragment : BaseFragment() {
     private fun handleViewState(state: InquiryDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
+            state.fawryTransactionUI?.let{
+                showAlert(getString(R.string.payment_reference) + it.referenceNumber){
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+                return
+            }
+            state.paymentRequestUI?.let {
+                paymentRequestUI = it
+                if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_fawry)
+                    inquiryDetailsViewModel.createFawryTransaction(paymentRequestUI.refId)// cowPayPayment(false)
+            }
+
             state.medicalRenewalPayment?.let {
                 medicalRenewalPayment = it
                 if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
@@ -215,9 +230,7 @@ class InquiryDetailsFragment : BaseFragment() {
                     oPayPayment(Constants.PaymentOption.OpayPOS)
                 else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
                     oPayPayment(Constants.PaymentOption.MobileWallet)
-                else
-                    cowPayPayment(false)
-            }
+                }
         }
     }
 
@@ -380,6 +393,14 @@ class InquiryDetailsFragment : BaseFragment() {
         inquiryDetailsViewModel.paymentInquiry(sharedPref.mobile, params.number, params.serviceID, medicalRenewalPayment.requestID, medicalRenewalPayment.paymentItem?.amount.toString(), if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE, edAddress.text.toString(), edMobile.text.toString())
     }
 
+    fun addRenewalRequest(){
+        inquiryDetailsViewModel.addRenewalRequest(sharedPref.mobile, params.number, medicalRenewalPayment.paymentItem?.engName ?: "", params.serviceID.toInt(),
+            if (rb_card.isChecked) "card" else "pos",
+            if (rb_card.isChecked) 3 else if (rb_channel.isChecked) 2 else 4,
+            if (rb_syndicate.isChecked) Constants.DELIVERY_LOCATION_SYNDICATE else if (rb_home.isChecked) Constants.DELIVERY_LOCATION_HOME else Constants.DELIVERY_LOCATION_MAIN_SYNDICATE,
+            edAddress.text.toString(), edMobile.text.toString()
+        )
+    }
     //endregion
 
     fun navController() = findNavController()

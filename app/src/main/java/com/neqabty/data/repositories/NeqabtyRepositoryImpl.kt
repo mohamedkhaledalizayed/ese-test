@@ -72,6 +72,20 @@ class NeqabtyRepositoryImpl @Inject constructor(
         return remoteDataStore.inquireMedicalRenewalPayment(isInquire, mobileNumber, userNumber, locationType, address, mobile)
     }
 
+    override fun addMedicalRenewalRequestNew(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        return remoteDataStore.addMedicalRenewalRequestNew(mobileNumber, userNumber, userName, 3, paymentType, paymentGatewayId, locationType, address, mobile)
+    }
+
     override fun updateMedicalRenewalData(mobileNumber: String, medicalRenewalData: MedicalRenewalEntity): Observable<MedicalRenewalUpdateEntity> {
         return remoteDataStore.updateMedicalRenewalData(mobileNumber, medicalRenewalData)
     }
@@ -212,6 +226,24 @@ class NeqabtyRepositoryImpl @Inject constructor(
 
     override fun inquirePayment(isInquire: Boolean, mobileNumber: String, userNumber: String, serviceID: Int, requestID: String, amount: String, locationType: Int, address: String, mobile: String): Observable<MedicalRenewalPaymentEntity> {
         return remoteDataStore.inquirePayment(isInquire, mobileNumber, userNumber, serviceID, requestID, amount, locationType, address, mobile)
+    }
+
+    override fun addRenewalRequestNew(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        return remoteDataStore.addRenewalRequestNew(mobileNumber, userNumber, userName, serviceID, paymentType, paymentGatewayId, locationType, address, mobile)
+    }
+
+    override fun createFawryTransaction(refrenceId: String): Observable<FawryTransactionEntity> {
+        return remoteDataStore.createFawryTransaction(refrenceId)
     }
 
     override fun encrypt(userName: String, password: String, description: String): Observable<EncryptionEntity> {

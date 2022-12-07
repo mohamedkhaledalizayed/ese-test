@@ -482,6 +482,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    fun provideAddMedicalRenewalRequest(neqabtyRepository: NeqabtyRepository): AddMedicalRenewalRequest {
+        return AddMedicalRenewalRequest(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideUpdateMedicalRenewalData(neqabtyRepository: NeqabtyRepository): UpdateMedicalRenewalData {
         return UpdateMedicalRenewalData(ASyncTransformer(), neqabtyRepository)
     }
@@ -526,6 +532,18 @@ class AppModule {
     @Provides
     fun providePaymentInquiry(neqabtyRepository: NeqabtyRepository): PaymentInquiry {
         return PaymentInquiry(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAddRenewalRequest(neqabtyRepository: NeqabtyRepository): AddRenewalRequest {
+        return AddRenewalRequest(ASyncTransformer(), neqabtyRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCreateFawryTransaction(neqabtyRepository: NeqabtyRepository): CreateFawryTransaction {
+        return CreateFawryTransaction(ASyncTransformer(), neqabtyRepository)
     }
 
     @Singleton

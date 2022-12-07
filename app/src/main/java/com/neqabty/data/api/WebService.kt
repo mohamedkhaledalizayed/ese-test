@@ -173,6 +173,16 @@ interface WebService {
             @Query("server") server: String = ""
     ): Observable<MedicalRenewalPaymentData>
 
+    @POST("api/payment/renewal-request")
+    fun addRenewalRequestNew(
+        @Body addInquiryRequest: AddInquiryRequest
+    ): Observable<ApiResponse<PaymentRequestData>>
+
+    @POST("api/v1/transactions/fawry/create-transaction")
+    fun createFawryTransaction(
+        @Body fawryTransactionRequest: FawryTransactionRequest
+    ): Observable<ApiResponse<FawryTransactionData>>
+
     @POST("api/v1/encrypt")
     fun paymentEncryption(@Body encryptionRequest: EncryptionRequest): Observable<EncryptionData>
 
@@ -212,6 +222,11 @@ interface WebService {
 
     @POST("api/apiPaymentRequest/AddHealthCareRequest")
     fun getMedicalRenewPaymentData(@Query("mobile_number") mobileNumber: String, @Query("oldRefId") contactId: String, @Query("deliveryLocation") locationType: Int, @Query("deliveryAddress") address: String, @Query("deliveryPhone") mobile: String, @Query("server") server: String = ""): Observable<MedicalRenewalPaymentData>
+
+    @POST("api/payment/healthcare-request")
+    fun getMedicalRenewPaymentDataNew(
+        @Body addMedicalRenewalRequest: AddMedicalRenewalRequest
+    ): Observable<ApiResponse<PaymentRequestData>>
 
     @POST("api/ApiHealthCare/MedBeneficiaryFollowersUpdate")
     fun updateMedicalRenewPaymentData(@Query("mobile_number") mobileNumber: String, @Body medicalRenewalDataRequest: MedicalRenewalData, @Query("server") server: String = ""): Observable<MedicalRenewalUpdateData>
