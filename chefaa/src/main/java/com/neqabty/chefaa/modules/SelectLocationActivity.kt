@@ -6,31 +6,41 @@ import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants.LATITUDE
 import com.neqabty.chefaa.core.data.Constants.LONGITUDE
+import com.neqabty.chefaa.core.ui.BaseActivity
+import com.neqabty.chefaa.databinding.ActivitySelectLocationBinding
 import com.neqabty.chefaa.modules.address.presentation.view.addaddressscreen.AddAddressActivity
+import dagger.hilt.android.AndroidEntryPoint
+import java.text.DecimalFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 
-class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
+@AndroidEntryPoint
+class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>(), OnMapReadyCallback {
 
     private var latitude = 30.043963618425664
     private var longitude = 31.234388016164303
     private var district: String? = ""
     private var city: String? = ""
     private var gov: String? = ""
+    override fun getViewBinding() = ActivitySelectLocationBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_select_location)
+        setContentView(binding.root)
         latitude = intent.getDoubleExtra("LAT",30.043963618425664)
         longitude = intent.getDoubleExtra("LNG",31.234388016164303)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -40,23 +50,27 @@ class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
 
         val sydney = LatLng(latitude, longitude)
-        googleMap.setOnCameraIdleListener(GoogleMap.OnCameraIdleListener {
-            val midLatLng = googleMap.cameraPosition.target
-            Log.e(
-                "location",
-                midLatLng.latitude.toString() + " " + midLatLng.longitude
-            )
-            latitude = midLatLng.latitude
-            longitude = midLatLng.longitude
-
-            getCityName()
-        })
         // For zooming automatically to the location of the marker
         val cameraPosition = CameraPosition.Builder().target(sydney).zoom(12f).build()
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+        googleMap.setOnCameraIdleListener(GoogleMap.OnCameraIdleListener {
+            val midLatLng = googleMap.cameraPosition.target
+
+            if (latitude != 30.043963618425664){
+                getCityName()
+            }
+
+            latitude = midLatLng.latitude
+            longitude = midLatLng.longitude
+
+        })
     }
 
     private fun getCityName() {
+        if (!binding.select.isVisible){
+            binding.address.visibility = View.VISIBLE
+            binding.select.visibility = View.VISIBLE
+        }
         val geocoder = Geocoder(this, Locale.getDefault())
         val addresses: List<Address> = geocoder.getFromLocation(latitude, longitude, 1)
         district = addresses[0].locality
@@ -64,7 +78,7 @@ class SelectLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         gov = addresses[0].adminArea
         val cityName = addresses[0].getAddressLine(0)
 
-        findViewById<TextView>(R.id.address).text = "${district ?: ""}, ${city ?: ""}, ${gov ?: ""}"
+        binding.address.text = "${district ?: ""}, ${city ?: ""}, ${gov ?: ""}"
 //        findViewById<TextView>(R.id.address).text = "$cityName"
 
     }
