@@ -14,7 +14,7 @@
         android:theme="@style/Theme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".LanguagesActivity"
+            android:name=".modules.languages.LanguagesActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

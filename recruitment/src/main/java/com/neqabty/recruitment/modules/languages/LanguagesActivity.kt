@@ -1,8 +1,7 @@
 package com.neqabty.recruitment.modules.languages
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
-import com.neqabty.recruitment.R
 import com.neqabty.recruitment.core.ui.BaseActivity
 import com.neqabty.recruitment.databinding.ActivityLanguagesBinding
 
