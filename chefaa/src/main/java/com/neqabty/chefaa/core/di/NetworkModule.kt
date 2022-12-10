@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import com.neqabty.chefaa.BuildConfig
 import com.neqabty.chefaa.core.data.Constants.BASE_URL_DEV
 import com.neqabty.chefaa.core.data.Constants.BASE_URL_PRO
+import com.neqabty.chefaa.core.data.Constants.BASE_URL_STAGING
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +25,7 @@ class NetworkModule {
     @Provides
     @Named("chefaa")
     fun providesBaseUrl(): String {
-        return BASE_URL_DEV
+        return BASE_URL_STAGING
     }
 
     @Provides
@@ -56,19 +57,15 @@ class NetworkModule {
 
             })
         okHttpClient.addInterceptor(loggingInterceptor)
-//        if (!BuildConfig.DEBUG) {
-//            val certificatePinner : CertificatePinner = CertificatePinner.Builder()
-//            .add(
-//                "seha.neqabty.com",
-//                "sha256/C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M="
-//            )
-//            .add(
-//                "*.neqabty.com",
-//                "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8="
-//            ).build()
-//
-//            okHttpClient.certificatePinner(certificatePinner)
-//        }
+        if (BuildConfig.DEBUG) {
+            val certificatePinner : CertificatePinner = CertificatePinner.Builder()
+            .add(
+                "neqabty.et3.co",
+                "sha256/jQJTbIh0grw0/1TkHSumWb+Fs0Ggogr621gT3PvPKG0="
+            ).build()
+
+            okHttpClient.certificatePinner(certificatePinner)
+        }
         return okHttpClient.build()
     }
 
