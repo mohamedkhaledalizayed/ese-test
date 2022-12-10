@@ -11,5 +11,7 @@ class WorkActivity : BaseActivity<ActivityWorkBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        setupToolbar(title = "بيانات العمل")
     }
 }

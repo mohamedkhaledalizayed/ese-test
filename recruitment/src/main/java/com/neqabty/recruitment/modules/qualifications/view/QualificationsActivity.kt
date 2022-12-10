@@ -11,5 +11,6 @@ class QualificationsActivity : BaseActivity<ActivityQualificationsBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupToolbar(title = "المؤهلات الدراسية")
     }
 }

@@ -40,5 +40,8 @@ class ResumeActivity : BaseActivity<ActivityResumeBinding>() {
         binding.specialNeedsContainer.setOnClickListener {
             startActivity(Intent(this, SpecialNeedsActivity::class.java))
         }
+        binding.languages.setOnClickListener {
+            startActivity(Intent(this, SpecialNeedsActivity::class.java))
+        }
     }
 }
