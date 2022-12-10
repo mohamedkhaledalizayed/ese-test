@@ -443,21 +443,21 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
-//            homeViewModel.logout()
-            sharedPreferences.mobile = ""
-            sharedPreferences.isPhoneVerified = false
-            sharedPreferences.isAuthenticated = false
-            sharedPreferences.isSyndicateMember = false
-            sharedPreferences.code = ""
-            sharedPreferences.token = ""
-            sharedPreferences.mainSyndicate = 0
-            sharedPreferences.image = ""
-            sharedPreferences.syndicateName = ""
-            sharedPreferences.membershipId = ""
-            drawer.close()
-            val intent = Intent(this, CheckAccountActivity::class.java)
-            startActivity(intent)
-            finishAffinity()
+            homeViewModel.logout()
+//            sharedPreferences.mobile = ""
+//            sharedPreferences.isPhoneVerified = false
+//            sharedPreferences.isAuthenticated = false
+//            sharedPreferences.isSyndicateMember = false
+//            sharedPreferences.code = ""
+//            sharedPreferences.token = ""
+//            sharedPreferences.mainSyndicate = 0
+//            sharedPreferences.image = ""
+//            sharedPreferences.syndicateName = ""
+//            sharedPreferences.membershipId = ""
+//            drawer.close()
+//            val intent = Intent(this, CheckAccountActivity::class.java)
+//            startActivity(intent)
+//            finishAffinity()
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)

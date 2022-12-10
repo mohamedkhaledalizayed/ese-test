@@ -25,7 +25,7 @@ class OTPModule {
     @Provides
     @Named("otp")
     fun providesBaseUrl(): String {
-        return BASE_URL_PRO_OTP
+        return BASE_URL_STAGING_OTP
     }
 
     @Provides
@@ -65,7 +65,7 @@ class OTPModule {
         if (!BuildConfig.DEBUG) {
             val certificatePinner : CertificatePinner = CertificatePinner.Builder()
                 .add(
-                    "community.neqabty.com",
+                    "staging-community.neqabty.com",
                     "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8="
                 ).build()
 
