@@ -4,13 +4,13 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/cardView"
         android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_500sdp"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:adjustViewBounds="true"
         app:cardElevation="@dimen/_4sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_5sdp"
-        app:cardCornerRadius="@dimen/_4sdp"
+        app:cardCornerRadius="@dimen/_6sdp"
         >
 
         <LinearLayout
@@ -69,14 +69,14 @@
                 android:text="@string/gengeral_info"
                 android:textSize="@dimen/_12ssp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_8sdp"
                 android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/info_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
+                android:layout_margin="@dimen/_8sdp"
                 android:textSize="@dimen/_10ssp"
                 android:textColor="@color/black"/>
 
@@ -88,8 +88,8 @@
                 android:text="@string/details"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
                 android:textColor="@color/black"/>
 
             <TextView
@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:layout_margin="@dimen/_5sdp"
+                android:layout_margin="@dimen/_8sdp"
                 android:textSize="@dimen/_10ssp"
                 android:textColor="@color/black"/>
 

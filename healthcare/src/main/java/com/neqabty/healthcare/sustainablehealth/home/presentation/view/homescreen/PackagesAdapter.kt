@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen
 
 import android.annotation.SuppressLint
+import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,11 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         viewHolder.binding.packageName.text = item.name
         viewHolder.binding.infoDetails.text = item.description
         viewHolder.binding.packagePrice.text = "${item.price.toInt()} جنية"
+            .replace("1", "١").replace("2", "٢")
+        .replace("3", "٣").replace("4", "٤")
+        .replace("5", "٥").replace("6", "٦")
+        .replace("7", "٧").replace("8", "٨")
+        .replace("9", "٩").replace("0", "٠")
 
         when (item.serviceCode) {
             "P8152" -> {
