@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.neqabty.recruitment.core.ui.BaseActivity
 import com.neqabty.recruitment.databinding.ActivityResumeBinding
 import com.neqabty.recruitment.modules.address.view.AddressActivity
+import com.neqabty.recruitment.modules.courses.CoursesActivity
 import com.neqabty.recruitment.modules.languages.LanguagesActivity
 import com.neqabty.recruitment.modules.personalinfo.view.PersonalInfoActivity
 import com.neqabty.recruitment.modules.qualifications.view.QualificationsActivity
@@ -43,6 +44,9 @@ class ResumeActivity : BaseActivity<ActivityResumeBinding>() {
         }
         binding.languages.setOnClickListener {
             startActivity(Intent(this, LanguagesActivity::class.java))
+        }
+        binding.courses.setOnClickListener {
+            startActivity(Intent(this, CoursesActivity::class.java))
         }
     }
 }

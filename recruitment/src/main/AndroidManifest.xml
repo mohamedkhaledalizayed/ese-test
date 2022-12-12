@@ -14,6 +14,13 @@
         android:theme="@style/Theme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".modules.courses.CoursesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".modules.languages.LanguagesActivity"
             android:exported="false">
             <meta-data
