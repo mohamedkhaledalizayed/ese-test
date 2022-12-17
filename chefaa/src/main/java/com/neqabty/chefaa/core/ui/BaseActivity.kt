@@ -1,18 +1,29 @@
 package com.neqabty.chefaa.core.ui
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.location.LocationManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.modules.CartActivity
@@ -26,6 +37,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestPermissions()
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         binding = getViewBinding()
@@ -37,6 +49,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
 
     override fun onResume() {
         super.onResume()
+        checkGPS()
         binding.root.visibility = View.VISIBLE
         invalidateOptionsMenu()
     }
@@ -113,6 +126,73 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
             }
             false -> supportActionBar?.hide()
         }
+    }
+
+    private fun checkGPS(){
+         val manager = getSystemService( Context.LOCATION_SERVICE ) as LocationManager
+
+        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            buildAlertMessageNoGps();
+        }
+    }
+
+    private fun buildAlertMessageNoGps() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("يبدو أن GPS الخاص بك غير مفعل ، يرجى تفعيله.")
+            .setCancelable(false)
+            .setPositiveButton(
+                "تاكيد"
+            ) { _, id -> startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)) }
+        val alert = builder.create()
+        alert.show()
+    }
+
+    private fun requestPermissions() {
+        Dexter.withContext(this)
+            .withPermissions(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            .withListener(object : MultiplePermissionsListener{
+                override fun onPermissionsChecked(multiplePermissionsReport: MultiplePermissionsReport) {
+                    // this method is called when all permissions are granted
+                    if (multiplePermissionsReport.areAllPermissionsGranted()) {
+                        // do you work now
+                    }
+                    // check for permanent denial of any permission
+                    if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied) {
+                        // permission is denied permanently, we will show user a dialog message.
+                        showSettingsDialog()
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    list: List<PermissionRequest?>?,
+                    permissionToken: PermissionToken
+                ) {
+                    // this method is called when user grants some permission and denies some of them.
+                    permissionToken.continuePermissionRequest()
+                }
+            }).withErrorListener {
+                // we are displaying a toast message for error message.
+                Toast.makeText(applicationContext, "Error occurred! ", Toast.LENGTH_SHORT).show()
+            } // below line is use to run the permissions on same thread and to check the permissions
+            .onSameThread().check()
+    }
+
+    private fun showSettingsDialog() {
+        val builder = AlertDialog.Builder(this@BaseActivity)
+        builder.setTitle("بحاجة إلى أذونات")
+        builder.setCancelable(false)
+        builder.setMessage("يحتاج هذا التطبيق إلى إذن لاستخدام هذه الميزة. يمكنك منحهم في إعدادات التطبيق.")
+        builder.setPositiveButton("اذهب للاعدادات\n") { dialog: DialogInterface, which: Int ->
+            dialog.cancel()
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            val uri: Uri = Uri.fromParts("package", packageName, null)
+            intent.data = uri
+            startActivityForResult(intent, 101)
+        }
+        builder.show()
     }
     //endregion//
 }

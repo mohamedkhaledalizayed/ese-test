@@ -8,6 +8,8 @@ data class ChefaaResponse<T>(
     val responseData: T?,
     @SerializedName("message")
     val messageAr: String = "",
+    @SerializedName("status_code")
+    val statusCode: Int = 0,
     @SerializedName("status")
     val status: Boolean = false
 )

@@ -3,6 +3,7 @@
     package="com.neqabty.chefaa">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -14,6 +15,13 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="false">
         <activity
+            android:name=".modules.verifyuser.view.VerifyUserActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".modules.orders.presentation.orderbynote.OrderByNoteActivity"
             android:exported="false" />
         <activity
@@ -21,15 +29,15 @@
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".modules.orders.presentation.view.placeorderscreen.ConfirmCheckoutActivity" -->
         <!-- android:exported="false" /> -->
-         <activity
-         android:name=".modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity"
-         android:exported="false" />
-         <activity
-         android:name=".modules.orders.presentation.view.orderstatusscreen.OrdersActivity"
-         android:exported="false" />
-         <activity
-         android:name=".modules.orders.presentation.placeprescriptionscreen.CheckOutActivity"
-         android:exported="false" />
+        <activity
+            android:name=".modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.orders.presentation.view.orderstatusscreen.OrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.orders.presentation.placeprescriptionscreen.CheckOutActivity"
+            android:exported="false" />
         <activity
             android:name=".modules.CartActivity"
             android:exported="false" />
@@ -51,8 +59,8 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:exported="false"
             android:authorities="com.neqabty.healthcare.provider"
+            android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"

@@ -1,6 +1,7 @@
 package com.neqabty.chefaa.modules.orders.data.repository
 
 import com.neqabty.chefaa.core.data.Constants
+import com.neqabty.chefaa.modules.ChefaaResponse
 import com.neqabty.chefaa.modules.orders.data.model.*
 import com.neqabty.chefaa.modules.orders.data.source.OrderDS
 import com.neqabty.chefaa.modules.orders.domain.entities.*
@@ -56,11 +57,13 @@ class OrderRepositoryImpl @Inject constructor(private val orderDS: OrderDS) : Or
         items: List<OrderItemsEntity>,
         addressId: Int,
         phoneNumber: String,
-        deliveryNote: String
+        deliveryNote: String,
+        deviceInfo: String,
+        currentLocation: String
     ): Flow<PlaceOrderResult> {
         return flow {
             emit(
-                orderDS.placeOrder(getPlaceOrderBody(items, addressId, phoneNumber, deliveryNote))
+                orderDS.placeOrder(getPlaceOrderBody(items, addressId, phoneNumber, deliveryNote, deviceInfo, currentLocation))
                     .toPlaceOrderResult()
             )
         }
@@ -70,12 +73,16 @@ class OrderRepositoryImpl @Inject constructor(private val orderDS: OrderDS) : Or
         items: List<OrderItemsEntity>,
         addressId: Int,
         phoneNumber: String,
-        deliveryNote: String
+        deliveryNote: String,
+        deviceInfo: String,
+        currentLocation: String
     ): PlaceOrderBody {
         return PlaceOrderBody(
             addressId = addressId,
             phone = phoneNumber,
             deliverNote = deliveryNote,
+            deviceInfo = deviceInfo,
+            currentLocation = currentLocation,
             items = items.map { it.toOrderItemModel() })
     }
 }
@@ -106,19 +113,11 @@ private fun OrderStatus.toOrderStatusEntity(): OrderStatusEntity {
     return OrderStatusEntity(id, titleAr, titleEn ?: "")
 }
 
-private fun PlaceOrderResponse.toPlaceOrderResult(): PlaceOrderResult {
+private fun ChefaaResponse<PlaceOrderResponse>.toPlaceOrderResult(): PlaceOrderResult {
     return PlaceOrderResult(
-        addressId,
-        chefaaOrderNumber,
-        countryCode,
-        createdAt,
-        deliveryNote,
-        id,
-        phone,
-        updatedAt,
-        userId,
-        userNumber,
-        userPlan
+        status = this.status,
+        statusCode = statusCode,
+        message = this.messageAr
     )
 }
 

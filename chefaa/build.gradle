@@ -131,4 +131,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     //zoom
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    //Permissions
+    implementation 'com.karumi:dexter:6.2.3'
+
 }

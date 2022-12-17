@@ -1,5 +1,6 @@
 package com.neqabty.chefaa.modules.orders.data.source
 
+import com.neqabty.chefaa.modules.ChefaaResponse
 import com.neqabty.chefaa.modules.orders.data.api.OrdersApi
 import com.neqabty.chefaa.modules.orders.data.model.*
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +16,7 @@ class OrderDS @Inject constructor(private val ordersApi: OrdersApi) {
         return ordersApi.getOrder(orderRequestBody = orderRequestBody).responseData!!.dataModels
     }
 
-    suspend fun placeOrder(placeOrderBody: PlaceOrderBody): PlaceOrderResponse {
-        return ordersApi.placeOrder(placeOrderBody).responseData!!
+    suspend fun placeOrder(placeOrderBody: PlaceOrderBody): ChefaaResponse<PlaceOrderResponse> {
+        return ordersApi.placeOrder(placeOrderBody)
     }
 }

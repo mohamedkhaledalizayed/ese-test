@@ -9,6 +9,12 @@ data class PlaceOrderBody(
     val phone:String,
     @SerializedName("delivery_note")
     val deliverNote:String,
+    @SerializedName("platform")
+    val platform:String = "android",
+    @SerializedName("device_info")
+    val deviceInfo:String,
+    @SerializedName("current_location")
+    val currentLocation:String,
     @SerializedName("items")
     val items: List<OrderItemModel>
 )
