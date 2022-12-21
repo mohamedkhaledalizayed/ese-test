@@ -87,7 +87,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         aboutAdapter.onItemClickListener = object :
             AboutAdapter.OnItemClickListener {
             override fun setOnItemClickListener(title: String, content: String) {
-                aboutDetails(title, content)
+                aboutDetails(title, content,"")
             }
         }
 
@@ -132,6 +132,10 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                 }else{
                     askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
                 }
+            }
+
+            override fun setOnMoreClickListener(title: String, content: String, code: String) {
+                aboutDetails(title, content, code)
             }
         }
 
@@ -276,9 +280,9 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         init()
     }
 
-    private fun aboutDetails(title: String, content: String) {
+    private fun aboutDetails(title: String, content: String, code: String) {
         val fm: FragmentManager = supportFragmentManager
-        val dialog = AboutFragment.newInstance(title, content)
+        val dialog = AboutFragment.newInstance(title, content, code)
         dialog.show(fm, "")
         dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
 

@@ -60,6 +60,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 }
 //                comingSoon("سوف يتم توفير هذه الخدمة قريبا.")
             }
+
+            override fun setOnMoreClickListener(title: String, content: String, code: String) {
+                TODO("Not yet implemented")
+            }
         }
 
         if (sharedPreferences.code.isNullOrEmpty()){
