@@ -34,7 +34,11 @@ class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
 
                     }
                     Status.SUCCESS -> {
-                        Log.e("SUCCESS", resource.data!!.mobile)
+                        binding.name.setText(resource.data?.name)
+                        binding.phone.setText(resource.data?.phone)
+                        binding.birthdate.setText(resource.data?.dateOfBirth)
+                        binding.nationalId.setText(resource.data?.nationalId)
+                        binding.membershipId.setText(resource.data?.membershipId)
                     }
                     Status.ERROR -> {
                         Log.e("ERROR", resource.message.toString())

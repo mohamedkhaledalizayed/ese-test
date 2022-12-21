@@ -14,7 +14,7 @@ import javax.inject.Inject
 class PersonalInfoDS @Inject constructor(private val personalInfo: PersonalInfo) {
 
     suspend fun getEngineerData(): EngineerModel {
-        return personalInfo.getEngineerData("3608662")
+        return personalInfo.getEngineerData("3608662").engineer
     }
 
     suspend fun updateEngineerData(id: String, engineerBody: EngineerBody): EngineerModel {

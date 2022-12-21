@@ -1,6 +1,7 @@
 package com.neqabty.recruitment.modules.personalinfo.data.api
 
 import com.neqabty.recruitment.modules.personalinfo.data.model.EngineerBody
+import com.neqabty.recruitment.modules.personalinfo.data.model.EngineerResponse
 import com.neqabty.recruitment.modules.personalinfo.data.model.country.CountryModelList
 import com.neqabty.recruitment.modules.personalinfo.data.model.engineerdata.EngineerModel
 import com.neqabty.recruitment.modules.personalinfo.data.model.governement.GovernmentListModel
@@ -17,7 +18,7 @@ interface PersonalInfo {
     //Engineer
 
     @GET("engineer/engineers/{id}")
-    suspend fun getEngineerData(@Path("id") id: String): EngineerModel
+    suspend fun getEngineerData(@Path("id") id: String): EngineerResponse
 
     @PATCH("engineer/engineers/{id}")
     suspend fun updateEngineerData(@Path("id") id: String, @Body engineerBody: EngineerBody): EngineerModel
