@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modules.courses.CoursesActivity">
+    tools:context=".modules.skills.SkillsActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -35,7 +35,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="الدورات التدريبية للمهندس"
+                    android:text="مهارات المهندس"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"/>
 
@@ -53,7 +53,7 @@
                     android:padding="@dimen/_5sdp"
                     >
                     <Spinner
-                        android:id="@+id/sp_course"
+                        android:id="@+id/sp_skills"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#fff"
@@ -68,58 +68,13 @@
                         android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
                 </FrameLayout>
 
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_course_image"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/edit_text_bg"
-                    android:padding="@dimen/_9sdp">
+                    android:text="إضافة مهارة"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginTop="@dimen/_10sdp"/>
 
-                    <TextView
-                        android:id="@+id/course_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="شهادة اجتياز الدورة التدريبية"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/add_course_image"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:src="@drawable/ic_baseline_file_upload_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_date_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/edit_text_bg"
-                    android:padding="@dimen/_9sdp">
-
-                    <TextView
-                        android:id="@+id/date_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="تاريخ الحصول على الدورة"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/add_date_image"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:src="@drawable/ic_baseline_date_range_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
                     android:layout_width="match_parent"
@@ -138,7 +93,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/courses"/>
+                    android:id="@+id/skills"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
