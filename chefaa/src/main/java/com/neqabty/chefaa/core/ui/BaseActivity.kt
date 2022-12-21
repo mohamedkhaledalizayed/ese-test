@@ -37,7 +37,6 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestPermissions()
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         binding = getViewBinding()
@@ -49,7 +48,6 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
 
     override fun onResume() {
         super.onResume()
-        checkGPS()
         binding.root.visibility = View.VISIBLE
         invalidateOptionsMenu()
     }
@@ -128,15 +126,12 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
         }
     }
 
-    private fun checkGPS(){
+    fun checkGPS(): Boolean{
          val manager = getSystemService( Context.LOCATION_SERVICE ) as LocationManager
-
-        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
-            buildAlertMessageNoGps();
-        }
+        return manager.isProviderEnabled( LocationManager.GPS_PROVIDER )
     }
 
-    private fun buildAlertMessageNoGps() {
+    fun buildAlertMessageNoGps() {
         val builder = AlertDialog.Builder(this)
         builder.setMessage("يبدو أن GPS الخاص بك غير مفعل ، يرجى تفعيله.")
             .setCancelable(false)
@@ -147,7 +142,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
         alert.show()
     }
 
-    private fun requestPermissions() {
+    fun requestPermissions() {
         Dexter.withContext(this)
             .withPermissions(
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -192,7 +187,11 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
             intent.data = uri
             startActivityForResult(intent, 101)
         }
-        builder.show()
+        try {
+            builder.show()
+        }catch (e: Exception){
+
+        }
     }
     //endregion//
 }

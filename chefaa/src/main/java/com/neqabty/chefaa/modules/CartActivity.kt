@@ -137,9 +137,6 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
             ImagePicker.RESULT_ERROR -> {
                 Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
             }
-            else -> {
-                Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
-            }
         }
     }
 
@@ -323,6 +320,21 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
         if (Constants.selectedAddress == null){
             Toast.makeText(this, "من فضلك إختر عنوان.", Toast.LENGTH_LONG).show()
         }else{
+
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions()
+                return
+            }
+//            if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//
+//            }
+            if (!checkGPS()){
+                buildAlertMessageNoGps()
+                return
+            }
+
+
+
             startActivity(Intent(this, CheckOutActivity::class.java))
         }
     }
