@@ -15,14 +15,26 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
-
+    private val nationalityAdapter = CustomAdapter()
     private val personalInfoViewModel: PersonalInfoViewModel by viewModels()
+    private var editMode = false
     override fun getViewBinding() = ActivityPersonalInfoBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setupToolbar(title = "البيانات الشخصية")
+
+        saveChanges()
+
+        binding.editInfo.setOnClickListener {
+            editMode = !editMode
+            editChanges()
+        }
+        binding.saveBtn.setOnClickListener {
+            editMode = !editMode
+            saveChanges()
+        }
 
         personalInfoViewModel.getEngineerInfo("")
         personalInfoViewModel.engineer.observe(this){
@@ -31,25 +43,30 @@ class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
 
                 when(resource.status){
                     Status.LOADING -> {
-
+                        binding.progressCircular.visibility = View.VISIBLE
                     }
                     Status.SUCCESS -> {
-                        binding.name.setText(resource.data?.name)
+                        binding.progressCircular.visibility = View.GONE
+                        binding.container.visibility = View.VISIBLE
+
+                        binding.name.text = resource.data?.name
                         binding.phone.setText(resource.data?.phone)
-                        binding.birthdate.setText(resource.data?.dateOfBirth)
+                        binding.birthdate.text = resource.data?.dateOfBirth
                         binding.nationalId.setText(resource.data?.nationalId)
-                        binding.membershipId.setText(resource.data?.membershipId)
+                        binding.membershipId.text = resource.data?.membershipId
+                        binding.nationalityValue.text = resource.data?.nationality?.name
+                        binding.maritalValue.text = resource.data?.maritalStatus?.name
+                        binding.genderValue.text = resource.data?.gender
+
                     }
                     Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
                         Log.e("ERROR", resource.message.toString())
                     }
                 }
 
             }
         }
-
-
-
 
         personalInfoViewModel.getMaritalStatus()
         personalInfoViewModel.maritalStatus.observe(this){
@@ -83,9 +100,9 @@ class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
 
                     }
                     Status.SUCCESS -> {
-                        val mAdapter = CustomAdapter()
-                        binding.spNationality.adapter = mAdapter
-                        mAdapter.submitList(resource.data?.toMutableList())
+
+                        binding.spNationality.adapter = nationalityAdapter
+                        nationalityAdapter.submitList(resource.data?.toMutableList())
                     }
                     Status.ERROR -> {
                         Log.e("ERROR", resource.message.toString())
@@ -94,11 +111,44 @@ class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
 
             }
         }
+    }
+
+    private fun editChanges(){
+        binding.phone.isEnabled = true
+        binding.birthdate.isEnabled = true
+        binding.nationalId.isEnabled = true
 
 
+        binding.nationalityContainer.visibility = View.VISIBLE
+        binding.nationalityValue.visibility = View.GONE
+
+        binding.maritalContainer.visibility = View.VISIBLE
+        binding.maritalValue.visibility = View.GONE
+
+        binding.genderContainer.visibility = View.VISIBLE
+        binding.genderValue.visibility = View.GONE
+
+        binding.saveBtn.visibility = View.VISIBLE
+        binding.addDateImage.visibility = View.VISIBLE
+
+    }
+
+    private fun saveChanges(){
+        binding.phone.isEnabled = false
+        binding.birthdate.isEnabled = false
+        binding.nationalId.isEnabled = false
 
 
+        binding.nationalityContainer.visibility = View.GONE
+        binding.nationalityValue.visibility = View.VISIBLE
 
+        binding.maritalContainer.visibility = View.GONE
+        binding.maritalValue.visibility = View.VISIBLE
 
+        binding.genderContainer.visibility = View.GONE
+        binding.genderValue.visibility = View.VISIBLE
+
+        binding.addDateImage.visibility = View.GONE
+//        binding.editInfo.visibility = View.GONE
     }
 }
