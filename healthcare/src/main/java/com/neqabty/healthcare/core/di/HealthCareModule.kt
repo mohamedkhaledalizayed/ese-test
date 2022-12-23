@@ -51,7 +51,7 @@ class HealthCareModule {
             val certificatePinner : CertificatePinner = CertificatePinner.Builder()
                 .add(
                     "neqabty.et3.co",
-                    "sha256/jQJTbIh0grw0/1TkHSumWb+Fs0Ggogr621gT3PvPKG0="
+                    "sha256/zVr1dF0p4qdPAZrjWo5xzrADH3VrfjNuxd/MMJrVbEc="
                 ).build()
 
             okHttpClient.certificatePinner(certificatePinner)

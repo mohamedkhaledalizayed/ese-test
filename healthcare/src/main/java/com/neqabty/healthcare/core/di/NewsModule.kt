@@ -51,7 +51,7 @@ class NewsModule {
             val certificatePinner : CertificatePinner = CertificatePinner.Builder()
                 .add(
                     "staging-news.neqabty.com",
-                    "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8="
+                    "sha256/nrXT/b2RmJlsQHqiO7RRyu2tVMocAGci9GjSL5AcKDg="
                 ).build()
 
             okHttpClient.certificatePinner(certificatePinner)
