@@ -1,6 +1,8 @@
 package com.neqabty.healthcare.sustainablehealth.home.presentation.view.about
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +39,12 @@ class AboutFragment : DialogFragment() {
         binding = FragmentAboutBinding.inflate(layoutInflater)
 
         binding.title.text = title
-        binding.content.text = content
+        binding.content.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(content, Html.FROM_HTML_MODE_COMPACT)
+        } else {
+            Html.fromHtml(content)
+        }
+//        binding.content.text = content
 
         when (code) {
             "P8152" -> {

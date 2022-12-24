@@ -53,32 +53,25 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
 
         when (item.serviceCode) {
             "P8152" -> {
-//                viewHolder.binding.packageColor.setBackgroundResource(R.drawable.save_package)
                 viewHolder.binding.packageImage.setImageResource(R.drawable.image_57)
             }
             "P7356" -> {
-//                viewHolder.binding.packageColor.setBackgroundResource(R.drawable.bro_package)
                 viewHolder.binding.packageImage.setImageResource(R.drawable.image_bro)
             }
             "P5906" -> {
-//                viewHolder.binding.packageColor.setBackgroundResource(R.drawable.silver_package)
                 viewHolder.binding.packageImage.setImageResource(R.drawable.silver_image)
             }
             "P5421" -> {
-//                viewHolder.binding.packageColor.setBackgroundResource(R.drawable.plat_package)
                 viewHolder.binding.packageImage.setImageResource(R.drawable.image_plat)
             }
             "P5280" -> {
-//                viewHolder.binding.packageColor.setBackgroundResource(R.drawable.gold_package)
                 viewHolder.binding.packageImage.setImageResource(R.drawable.image_58)
             }
         }
         var details = ""
         for (item: DetailEntity in item.details){
-                details = "$details ${item.title} : ${item.description.replace("\r", " ").replace("\n", "")}. \n"
+                details = "$details <h4> ${item.title}.</h4> \n ${item.description.replace("\r", " ").replace("\n", "")}. \n"
         }
-
-//        viewHolder.binding.detailsValue.text = details
 
         viewHolder.binding.selectBtn.setOnClickListener {
             onItemClickListener?.setOnRegisterClickListener(item)
