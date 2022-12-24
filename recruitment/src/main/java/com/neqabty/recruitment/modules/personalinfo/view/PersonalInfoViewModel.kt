@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.recruitment.core.utils.AppUtils
 import com.neqabty.recruitment.core.utils.Resource
-import com.neqabty.recruitment.modules.personalinfo.domain.entity.engineerdata.EngineerEntity
+import com.neqabty.recruitment.modules.engineer.domain.entity.engineerdata.EngineerEntity
+import com.neqabty.recruitment.modules.engineer.domain.usecases.GetEngineer
 import com.neqabty.recruitment.modules.personalinfo.domain.entity.maritalstatus.MaritalStatusEntity
 import com.neqabty.recruitment.modules.personalinfo.domain.entity.nationalities.NationalityEntity
 import com.neqabty.recruitment.modules.personalinfo.domain.usecases.PersonalInfoUseCase
@@ -17,7 +18,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PersonalInfoViewModel @Inject constructor(private val personalInfoUseCase: PersonalInfoUseCase): ViewModel() {
+class PersonalInfoViewModel @Inject constructor(private val personalInfoUseCase: PersonalInfoUseCase,
+private val getEngineer: GetEngineer): ViewModel() {
 
     val engineer = MutableLiveData<Resource<EngineerEntity>>()
 
@@ -26,7 +28,7 @@ class PersonalInfoViewModel @Inject constructor(private val personalInfoUseCase:
             engineer.postValue(Resource.loading(data = null))
 
             try {
-                personalInfoUseCase.getEngineerData().collect(){
+                getEngineer.build().collect(){
                     engineer.postValue(Resource.success(data = it))
                 }
             }catch (t: Throwable){

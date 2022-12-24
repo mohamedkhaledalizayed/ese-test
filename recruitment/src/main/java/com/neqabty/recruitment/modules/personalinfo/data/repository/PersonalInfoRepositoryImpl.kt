@@ -1,11 +1,9 @@
 package com.neqabty.recruitment.modules.personalinfo.data.repository
 
 import com.neqabty.recruitment.modules.personalinfo.data.datasource.PersonalInfoDS
-import com.neqabty.recruitment.modules.personalinfo.data.model.EngineerBody
 import com.neqabty.recruitment.modules.personalinfo.data.model.country.CountryModel
-import com.neqabty.recruitment.modules.personalinfo.data.model.engineerdata.CityModel
-import com.neqabty.recruitment.modules.personalinfo.data.model.engineerdata.EngineerModel
-import com.neqabty.recruitment.modules.personalinfo.data.model.engineerdata.SkillModel
+import com.neqabty.recruitment.modules.engineer.data.model.engineerdata.CityModel
+import com.neqabty.recruitment.modules.engineer.data.model.engineerdata.SkillModel
 import com.neqabty.recruitment.modules.personalinfo.data.model.governement.GovernorateModel
 import com.neqabty.recruitment.modules.personalinfo.data.model.grades.GradeModel
 import com.neqabty.recruitment.modules.personalinfo.data.model.industries.IndustryModel
@@ -13,10 +11,8 @@ import com.neqabty.recruitment.modules.personalinfo.data.model.maritalstatus.Mar
 import com.neqabty.recruitment.modules.personalinfo.data.model.militarystatus.MilitaryStatusModel
 import com.neqabty.recruitment.modules.personalinfo.data.model.nationalities.NationalityModel
 import com.neqabty.recruitment.modules.personalinfo.data.model.universities.UniversityModel
-import com.neqabty.recruitment.modules.personalinfo.domain.entity.engineerdata.CityEntity
-import com.neqabty.recruitment.modules.personalinfo.domain.entity.engineerdata.EngineerEntity
+import com.neqabty.recruitment.modules.engineer.domain.entity.engineerdata.CityEntity
 import com.neqabty.recruitment.modules.personalinfo.domain.repository.PersonalInfoRepository
-import com.neqabty.recruitment.modules.personalinfo.domain.*
 import com.neqabty.recruitment.modules.personalinfo.domain.entity.country.CountryEntity
 import com.neqabty.recruitment.modules.personalinfo.domain.entity.governement.GovernmentEntity
 import com.neqabty.recruitment.modules.personalinfo.domain.entity.grades.GradeEntity
@@ -32,12 +28,6 @@ import javax.inject.Inject
 
 class PersonalInfoRepositoryImpl @Inject constructor(private val personalInfoDS: PersonalInfoDS):
     PersonalInfoRepository {
-
-    override fun getEngineerData(): Flow<EngineerEntity> {
-        return flow {
-            emit(personalInfoDS.getEngineerData().toEngineerEntity())
-        }
-    }
 
     override fun getMaritalStatus(): Flow<List<MaritalStatusEntity>> {
         return flow {
@@ -69,50 +59,10 @@ class PersonalInfoRepositoryImpl @Inject constructor(private val personalInfoDS:
         }
     }
 
-    override fun updateEngineerData(id: String, engineerBody: EngineerBody): Flow<EngineerEntity> {
-        return flow {
-            personalInfoDS.updateEngineerData(id, engineerBody)
-        }
-    }
-
 }
 
-private fun EngineerModel.toEngineerEntity(): EngineerEntity{
-    return EngineerEntity(
-        address = address,
-//        city = city.toCityEntity(),
-        courses = courses.map { it.toCourse() },
-        dateOfBirth = dateOfBirth,
-        department = department.toDepartment(),
-        educations = educations.map { it.toEducationEntity() },
-        email = email,
-        experiences = experiences.map { it.toExperienceEntity() },
-        gender = gender,
-        governorate = governorate.toGovernment(),
-        grade =grade,
-        graduationYear = graduationYear,
-        languages = languages.map { it.toLanguage() },
-        linkedInLink = linkedInLink,
-        maritalStatus =  maritalStatus.toMaritalStatus(),
-        membershipId = membershipId,
-        membershipIdFile = membershipIdFile,
-        militaryFile = militaryFile,
-        militaryStatus = militaryStatus.toMilitaryStatus(),
-        mobile = mobile,
-        name = name,
-        nationalId = nationalId,
-        nationalIdFile = nationalIdFile,
-        nationality = nationality.toNationality(),
-        phone = phone,
-        skills = skills.map { it.toSkills() },
-        university = university.toUniversity(),
-        workingStatus = workingStatus,
-        yearsOfExperience = yearsOfExperience,
-        zone = zone.toArea()
-    )
-}
 
-private fun CityModel.toCityEntity(): CityEntity{
+private fun CityModel.toCityEntity(): CityEntity {
     return CityEntity(
         id = id,
         name = name
