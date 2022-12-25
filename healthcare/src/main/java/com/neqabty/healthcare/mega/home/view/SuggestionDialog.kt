@@ -39,6 +39,11 @@ class SuggestionDialog : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.suggestions.playAnimation()
 
+        binding.comment.isLongClickable = true
+//        binding.comment.setTextIsSelectable(true)
+        binding.comment.isLongClickable = false
+//        binding.comment.setTextIsSelectable(false)
+
         if (phone!!.isNotEmpty()){
             binding.mobile.isEnabled = false
             binding.mobile.setText(phone)

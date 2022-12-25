@@ -57,7 +57,7 @@ class NetworkModule {
 
             })
         okHttpClient.addInterceptor(loggingInterceptor)
-        if (BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             val certificatePinner : CertificatePinner = CertificatePinner.Builder()
             .add(
                 "neqabty.et3.co",

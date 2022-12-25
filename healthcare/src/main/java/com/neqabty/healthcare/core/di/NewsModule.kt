@@ -47,7 +47,7 @@ class NewsModule {
         okHttpClient.writeTimeout(40, TimeUnit.SECONDS)
         okHttpClient.addInterceptor(loggingInterceptor)
         okHttpClient.addInterceptor(interceptor)
-        if (!com.neqabty.chefaa.BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             val certificatePinner : CertificatePinner = CertificatePinner.Builder()
                 .add(
                     "staging-news.neqabty.com",

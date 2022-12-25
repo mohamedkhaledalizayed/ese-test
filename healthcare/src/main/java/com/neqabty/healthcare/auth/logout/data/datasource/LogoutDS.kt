@@ -9,7 +9,7 @@ import javax.inject.Inject
 class LogoutDS @Inject constructor(private val logoutApi: LogoutApi, private val preferencesHelper: PreferencesHelper) {
 
     suspend fun logout(): Boolean {
-        return logoutApi.logout(preferencesHelper.token).success
+        return logoutApi.logout("Token ${preferencesHelper.token}").success
     }
 
 }

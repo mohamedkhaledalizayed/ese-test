@@ -14,26 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.NoActionBar" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/colorPrimaryLight</item>
-        <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="android:fontFamily">@font/cairo_regular</item>
-        <item name="android:forceDarkAllowed">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-    </style>
-
-
-    <style name="ToolbarTheme" parent="Theme.NoActionBar">
+    <style name="ToolbarTheme" parent="AppTheme">
         <item name="android:windowContentOverlay">@null</item>
         <item name="colorControlNormal">@color/white</item>
     </style>
@@ -47,23 +28,6 @@
         <item name="android:background">@drawable/bg_rounded</item>
     </style>
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
-
-    <style name="AppTheme.ActionBar" parent="Theme.MaterialComponents.Light">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/colorPrimaryLight</item>
-        <item name="colorSecondaryVariant">@color/colorPrimaryLight</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="android:forceDarkAllowed">false</item>
-        <item name="android:windowBackground">@color/white</item>
-    </style>
-
 
     <style name="AppTheme.NoActionBar.LargeText" parent="AppTheme.NoActionBar">
         <item name="textSizeLarge">@dimen/_15sdp</item>
@@ -95,8 +59,15 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/cairo_regular</item>
         <item name="android:forceDarkAllowed">false</item>
         <item name="android:windowBackground">@color/white</item>
+        <item name="editTextStyle">@style/AppTheme.DisabledCopyEditText</item>
+    </style>
+
+    <style name="AppTheme.DisabledCopyEditText" parent="@android:style/Widget.EditText">
+        <item name="android:longClickable">false</item>
+        <item name="android:textIsSelectable">false</item>
     </style>
 
 </resources>

@@ -47,7 +47,7 @@ class HealthCareModule {
         okHttpClient.writeTimeout(90, TimeUnit.SECONDS)
 //        okHttpClient.certificatePinner(certificatePinner)
         okHttpClient.addInterceptor(loggingInterceptor)
-        if (BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             val certificatePinner : CertificatePinner = CertificatePinner.Builder()
                 .add(
                     "neqabty.et3.co",

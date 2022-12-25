@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NoActionBar"
+        android:theme="@style/AppTheme"
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
@@ -88,7 +88,7 @@
         <activity
             android:name=".commen.syndicates.presentation.view.homescreen.SyndicateActivity"
             android:exported="false"
-            android:theme="@style/Theme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".commen.contactus.ContactUsActivity"
             android:exported="false" />
@@ -122,8 +122,7 @@
         <activity
             android:name=".mega.payment.view.paymentstatus.PdfCreatorScreen"
             android:exported="false"
-            android:label="تحميل اخطار الدفع"
-            android:theme="@style/AppTheme.ActionBar" />
+            android:label="تحميل اخطار الدفع" />
         <activity
             android:name=".news.view.newslist.NewsListActivity"
             android:exported="false" />
