@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.neqabty.recruitment.R
 import com.neqabty.recruitment.core.ui.BaseActivity
 import com.neqabty.recruitment.core.utils.Status
 import com.neqabty.recruitment.databinding.ActivityPersonalInfoBinding
+import com.neqabty.recruitment.modules.personalinfo.data.model.EngineerBody
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -149,6 +151,44 @@ class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
         binding.genderValue.visibility = View.VISIBLE
 
         binding.addDateImage.visibility = View.GONE
-//        binding.editInfo.visibility = View.GONE
+
+        if (binding.phone.text.toString().isNullOrEmpty()){
+            Toast.makeText(this, "من فضلك ادخل رقم الهاتف.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.spNationality.selectedItemPosition == 0){
+            Toast.makeText(this, "من فضلك اختر الجنسية.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.spMarital.selectedItemPosition == 0){
+            Toast.makeText(this, "من فضلك اختر الحالة الاجتماعية.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (binding.spGender.selectedItemPosition == 0){
+            Toast.makeText(this, "من فضلك اختر النوع.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        val body = EngineerBody(
+            address = "",
+            dateOfBirth = "",
+            email = "",
+            gender = "",
+            graduationYear = 0,
+            linkedInLink = "",
+            maritalStatus = 0,
+            nationalId = "",
+            phone = "",
+            workingStatus = ""
+        )
+
+        personalInfoViewModel.updateEngineerInfo("", body)
+
+
+
+
     }
 }
