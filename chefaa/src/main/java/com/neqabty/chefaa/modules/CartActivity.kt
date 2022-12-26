@@ -325,9 +325,7 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
                 requestPermissions()
                 return
             }
-//            if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//
-//            }
+
             if (!checkGPS()){
                 buildAlertMessageNoGps()
                 return
