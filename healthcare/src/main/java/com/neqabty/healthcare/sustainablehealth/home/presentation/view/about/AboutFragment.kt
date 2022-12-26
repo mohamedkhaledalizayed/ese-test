@@ -5,17 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.neqabty.healthcare.core.ui.BaseDialogFragment
 import com.neqabty.healthcare.databinding.FragmentAboutBinding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class AboutFragment : DialogFragment() {
+class AboutFragment : BaseDialogFragment<FragmentAboutBinding>() {
 
     // TODO: Rename and change types of parameters
     private var title: String? = null
     private var content: String? = null
-
+    override fun getViewBinding() = FragmentAboutBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -24,19 +25,13 @@ class AboutFragment : DialogFragment() {
         }
     }
 
-    private lateinit var binding: FragmentAboutBinding
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         // Inflate the layout for this fragment
-        binding = FragmentAboutBinding.inflate(layoutInflater)
-
         binding.title.text = title
         binding.content.text = content
 
         binding.close.setOnClickListener { dismiss() }
-        return binding.root
     }
 
     companion object {

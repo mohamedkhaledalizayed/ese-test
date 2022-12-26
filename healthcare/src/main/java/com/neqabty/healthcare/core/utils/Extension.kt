@@ -1,6 +1,8 @@
 package com.neqabty.healthcare.core.utils
 
 import android.graphics.drawable.PictureDrawable
+import android.view.*
+import android.widget.EditText
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.caverock.androidsvg.SVG
@@ -33,3 +35,34 @@ fun String.isNationalIdValid(): Boolean {
 var emailPattern: String = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
 
 fun String.isValidEmail() = Pattern.compile(emailPattern, Pattern.CASE_INSENSITIVE).matcher(this).matches()
+
+fun ViewGroup.forAllChildren(forOneChild: (v: View) -> Unit) {
+    forOneChild(this)
+    for (cx in 0 until childCount) {
+        val child = getChildAt(cx)
+        if (child is ViewGroup)
+            child.forAllChildren(forOneChild)
+        else
+            forOneChild(child)
+    }
+}
+
+fun EditText.disableCopying() {
+    customSelectionActionModeCallback = object : ActionMode.Callback {
+        override fun onCreateActionMode(p0: ActionMode?, p1: Menu?): Boolean {
+            return false
+        }
+
+        override fun onPrepareActionMode(p0: ActionMode?, p1: Menu?): Boolean {
+            return false
+        }
+
+        override fun onActionItemClicked(p0: ActionMode?, p1: MenuItem?): Boolean {
+            return false
+        }
+
+        override fun onDestroyActionMode(p0: ActionMode?) {
+
+        }
+    }
+}

@@ -1,12 +1,10 @@
 package com.neqabty.healthcare.mega.home.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.core.ui.BaseDialogFragment
 import com.neqabty.healthcare.core.utils.isValidEmail
 import com.neqabty.healthcare.databinding.SuggestionDialogBinding
 
@@ -14,11 +12,11 @@ import com.neqabty.healthcare.databinding.SuggestionDialogBinding
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class SuggestionDialog : DialogFragment() {
+class SuggestionDialog : BaseDialogFragment<SuggestionDialogBinding>() {
     private var phone: String? = ""
     private var email: String? = ""
 
-    private lateinit var binding: SuggestionDialogBinding
+    override fun getViewBinding() = SuggestionDialogBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -27,22 +25,9 @@ class SuggestionDialog : DialogFragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = SuggestionDialogBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.suggestions.playAnimation()
-
-        binding.comment.isLongClickable = true
-//        binding.comment.setTextIsSelectable(true)
-        binding.comment.isLongClickable = false
-//        binding.comment.setTextIsSelectable(false)
 
         if (phone!!.isNotEmpty()){
             binding.mobile.isEnabled = false

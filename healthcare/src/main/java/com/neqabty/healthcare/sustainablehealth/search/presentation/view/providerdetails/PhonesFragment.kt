@@ -3,17 +3,15 @@ package com.neqabty.healthcare.sustainablehealth.search.presentation.view.provid
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
+import com.neqabty.healthcare.core.ui.BaseDialogFragment
 import com.neqabty.healthcare.databinding.PhonesFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PhonesFragment : DialogFragment() {
+class PhonesFragment : BaseDialogFragment<PhonesFragmentBinding>() {
     lateinit var phoneNumbers: String
-    private lateinit var binding: PhonesFragmentBinding
+    override fun getViewBinding() = PhonesFragmentBinding.inflate(layoutInflater)
 
     companion object {
 
@@ -24,14 +22,6 @@ class PhonesFragment : DialogFragment() {
                     putString("phones", phones)
                 }
             }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = PhonesFragmentBinding.inflate(layoutInflater)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

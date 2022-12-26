@@ -13,6 +13,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -21,6 +22,8 @@ import androidx.viewbinding.ViewBinding
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.core.utils.LocaleHelper
+import com.neqabty.healthcare.core.utils.disableCopying
+import com.neqabty.healthcare.core.utils.forAllChildren
 import javax.inject.Inject
 
 
@@ -46,6 +49,11 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         window.setBackgroundDrawableResource(R.color.white)
         binding.root.fitsSystemWindows = true
 
+        (binding.root as ViewGroup).forAllChildren { v ->
+            when (v) {
+                is EditText -> v.disableCopying()
+            }
+        }
     }
 
     override fun onResume() {
