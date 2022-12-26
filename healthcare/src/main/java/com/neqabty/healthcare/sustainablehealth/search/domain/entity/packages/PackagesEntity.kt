@@ -4,6 +4,7 @@ package com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages
 
 data class PackagesEntity(
     val description: String,
+    val extension: String,
     val details: List<DetailEntity>,
     val followerMultiRelation: Boolean,
     val hasFollower: Boolean,

@@ -48,6 +48,7 @@ class SearchRepositoryImpl @Inject constructor(private val searchDS: SearchDS) :
 private fun PackageModel.toPackageEntity(): PackagesEntity{
     return PackagesEntity(
         description = description,
+        extension = extension,
         details = details.map { it.toDetailEntity() },
         followerMultiRelation = followerMultiRelation,
         hasFollower = hasFollower,

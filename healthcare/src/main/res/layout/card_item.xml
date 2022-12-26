@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cardView"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:adjustViewBounds="true"
+        app:cardElevation="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_6sdp"
+        >
+
+        <LinearLayout
+            android:id="@+id/layout_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/package_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/package_image"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:src="@drawable/image_58"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:fontFamily="@font/dinnext_arabic_bold"
+                    android:id="@+id/package_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="الباقة الفضية"
+                    android:layout_marginTop="@dimen/_minus2sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:fontFamily="@font/dinnext_arabic_bold"
+                android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gengeral_info"
+                android:textSize="@dimen/_12ssp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:fontFamily="@font/dinnext_arabic_bold"
+                android:id="@+id/package_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="٤٠٠ جنية - للفرد"
+                android:layout_gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                />
+
+            <TextView
+                android:id="@+id/select_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="إشترك"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                android:paddingHorizontal="@dimen/_20sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/login_btn_bg"
+                />
+
+            <TextView
+                android:id="@+id/more_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="المزيد من التفاصيل"
+                android:textAlignment="center"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/colorPrimary"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
