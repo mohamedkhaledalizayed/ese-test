@@ -44,22 +44,21 @@ class AboutFragment : DialogFragment() {
         } else {
             Html.fromHtml(content)
         }
-//        binding.content.text = content
 
         when (code) {
-            "P8152" -> {
+            "AMA" -> {
                 binding.image.setImageResource(R.drawable.image_57)
             }
-            "P7356" -> {
+            "PRZ" -> {
                 binding.image.setImageResource(R.drawable.image_bro)
             }
-            "P5906" -> {
+            "SLV" -> {
                 binding.image.setImageResource(R.drawable.silver_image)
             }
-            "P5421" -> {
+            "PLT" -> {
                 binding.image.setImageResource(R.drawable.image_plat)
             }
-            "P5280" -> {
+            "GLD" -> {
                 binding.image.setImageResource(R.drawable.image_58)
             }
         }

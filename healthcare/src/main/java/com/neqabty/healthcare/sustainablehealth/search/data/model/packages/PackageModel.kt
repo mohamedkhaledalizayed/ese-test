@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName
 data class PackageModel(
     @SerializedName("description")
     val description: String,
+    @SerializedName("extension")
+    val extension: String,
     @SerializedName("details")
     val details: List<DetailModel>,
     @SerializedName("follower_multi_relation")

@@ -51,20 +51,20 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         .replace("7", "٧").replace("8", "٨")
         .replace("9", "٩").replace("0", "٠")
 
-        when (item.serviceCode) {
-            "P8152" -> {
+        when (item.extension) {
+            "AMA" -> {
                 viewHolder.binding.packageImage.setImageResource(R.drawable.image_57)
             }
-            "P7356" -> {
+            "PRZ" -> {
                 viewHolder.binding.packageImage.setImageResource(R.drawable.image_bro)
             }
-            "P5906" -> {
+            "SLV" -> {
                 viewHolder.binding.packageImage.setImageResource(R.drawable.silver_image)
             }
-            "P5421" -> {
+            "PLT" -> {
                 viewHolder.binding.packageImage.setImageResource(R.drawable.image_plat)
             }
-            "P5280" -> {
+            "GLD" -> {
                 viewHolder.binding.packageImage.setImageResource(R.drawable.image_58)
             }
         }

@@ -4,6 +4,7 @@ package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescre
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
@@ -158,6 +159,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                         centerAtPosition(position)
                     }
                     Status.ERROR -> {
+                        Log.e("rtt", resource.message.toString())
                         binding.progressCircular.visibility = View.GONE
                     }
                 }
