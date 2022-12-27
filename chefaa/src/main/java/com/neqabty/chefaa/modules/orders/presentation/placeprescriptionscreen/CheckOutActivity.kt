@@ -190,8 +190,8 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                     )
                 }
                 placeOrderViewModel.placePrescriptionImages(selectedAddress?.id!!,  deviceName, currentLocation)
-                binding.cartLt.checkout.visibility = View.GONE
             }
+            binding.cartLt.checkout.visibility = View.GONE
         }
     }
 

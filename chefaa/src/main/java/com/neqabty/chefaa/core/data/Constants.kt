@@ -17,7 +17,8 @@ object Constants {
     var nationalID: String = ""
     var name: String = ""
     var cart = Cart()
-
+    var latitude = 30.043963618425664
+    var longitude = 31.234388016164303
     enum class ITEMTYPES(val typeName: String) {
         IMAGE("image"),
         NOTE("text"),
