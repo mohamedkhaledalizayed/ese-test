@@ -7,7 +7,9 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +17,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.viewbinding.ViewBinding
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
+import com.neqabty.chefaa.core.utils.disableCopying
+import com.neqabty.chefaa.core.utils.forAllChildren
 import com.neqabty.chefaa.modules.CartActivity
 import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 
@@ -33,6 +37,11 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
         binding.root.findViewById<Toolbar>(R.id.toolbar)?.setNavigationOnClickListener{onBackPressed()}
         window.setBackgroundDrawableResource(R.color.white)
         binding.root.fitsSystemWindows = true
+        (binding.root as ViewGroup).forAllChildren { v ->
+            when (v) {
+                is EditText -> v.disableCopying()
+            }
+        }
     }
 
     override fun onResume() {

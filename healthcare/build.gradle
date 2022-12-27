@@ -28,6 +28,11 @@ android {
         versionName "5.4"
         signingConfig signingConfigs.config
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
     }
 
     buildTypes {
@@ -56,6 +61,15 @@ android {
             pseudoLocalesEnabled false
         }
     }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+//    ndkVersion '21.4.7075529'
+
+    dependenciesInfo.includeInApk false
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -159,7 +173,7 @@ dependencies {
 
     implementation 'com.github.takusemba:spotlight:2.0.5'
     implementation 'com.hbb20:ccp:2.4.7'
-
+    implementation 'com.scottyab:rootbeer-lib:0.1.0'
 
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation project(path: ':pdfcreator')
@@ -190,3 +204,12 @@ dependencies {
     implementation 'com.scottyab:secure-preferences-lib:0.1.7'
     implementation 'com.github.yash786agg:AnimatedLoadingIndicator:v1.3'
 }
+task runNdkBuild(type: Exec) {
+    def ndkDir = android.ndkDirectory
+    executable = "$ndkDir/ndk-build.cmd"
+    args = ['NDK_PROJECT_PATH=build/intermediates/ndk',
+            'NDK_LIBS_OUT=src/main/jniLibs',
+            'APP_BUILD_SCRIPT=src/main/jni/Android.mk',
+            'NDK_APPLICATION_MK=src/main/jni/Application.mk']
+}
+preBuild.dependsOn runNdkBuild

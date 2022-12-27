@@ -23,6 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:zygotePreloadName="com.neqabty.healthcare.core.security.AppZygotePreload"
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
@@ -139,6 +140,17 @@
             android:name=".auth.signup.presentation.view.SignupActivity"
             android:exported="true" />
 
+        <service
+            android:name="com.neqabty.healthcare.core.security.IsolatedService"
+            android:exported="false"
+            android:isolatedProcess="true"
+            android:useAppZygote="true" />
+
+        <service
+            android:name="com.neqabty.healthcare.core.security.RemoteService"
+            android:exported="false"
+            android:isolatedProcess="true"
+            android:useAppZygote="true" />
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

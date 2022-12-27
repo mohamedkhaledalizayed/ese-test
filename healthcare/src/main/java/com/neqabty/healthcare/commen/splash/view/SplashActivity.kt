@@ -16,6 +16,7 @@ import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivit
 import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import com.neqabty.healthcare.core.utils.DeviceUtils
+import com.scottyab.rootbeer.RootBeer
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -35,7 +36,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        if (DeviceUtils().isDeviceRooted())
+        val rootBeer = RootBeer(this)
+        if (DeviceUtils().isDeviceRooted() || rootBeer.isRooted())
             showAlertDialogAndExitApp(getString(R.string.rooted))
         else
             splashViewModel.appConfig()
@@ -127,22 +129,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         }
         alertDialog.show()
 
-    }
-
-    private fun showAlertDialogAndExitApp(message: String) {
-
-        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(this).create()
-        alertDialog.setTitle(getString(R.string.alert))
-        alertDialog.setMessage(message)
-        alertDialog.setCancelable(false)
-        alertDialog.setButton(
-            androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL, getString(R.string.agree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-            finishAffinity()
-        }
-
-        alertDialog.show()
     }
 
 }

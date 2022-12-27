@@ -3,14 +3,14 @@ package com.neqabty.healthcare.core.ui
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
+import android.content.*
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.os.IBinder
+import android.os.RemoteException
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -19,8 +19,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
+import com.neqabty.healthcare.IIsolatedService
+import com.neqabty.healthcare.IRemoteService
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.PreferencesHelper
+import com.neqabty.healthcare.core.security.IsolatedService
+import com.neqabty.healthcare.core.security.RemoteService
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import com.neqabty.healthcare.core.utils.disableCopying
 import com.neqabty.healthcare.core.utils.forAllChildren
@@ -34,6 +38,10 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     lateinit var binding: B
     abstract fun getViewBinding(): B
     private var progressDialog: Dialog? = null
+
+    private lateinit var serviceBinder: IIsolatedService
+    private var bServiceBound: Boolean = false
+
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(LocaleHelper.onAttach(base));
     }
@@ -132,6 +140,18 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
             showAlert(getString(R.string.internet_message), getString(R.string.internet_title)) { finish() }
         }
         LocaleHelper.setLocale(this, "ar");
+
+
+//        val intent = Intent(applicationContext, IsolatedService::class.java)
+//        /*Binding to an isolated service */
+//        applicationContext.bindService(
+//            intent,
+//            mIsolatedServiceConnection,
+//            BIND_AUTO_CREATE
+//        )
+
+//        val intentt = Intent(applicationContext, RemoteService::class.java)
+//        bindService(intentt, connection, BIND_AUTO_CREATE)
     }
 
     private fun setAnimation(){
@@ -158,6 +178,26 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         binding.root.visibility = View.GONE
     }
 
+//    override fun onStop() {
+//        super.onStop()
+//        unbindService(connection)
+//    }
+    internal fun showAlertDialogAndExitApp(message: String) {
+
+        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(false)
+        alertDialog.setButton(
+            androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL, getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            finishAffinity()
+        }
+
+        alertDialog.show()
+    }
+
     private fun clearClipBoard(){
         val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("label", " ")
@@ -179,6 +219,34 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
         override fun onDestroyActionMode(p0: ActionMode?) {
 
+        }
+    }
+
+    private val mIsolatedServiceConnection: ServiceConnection = object : ServiceConnection {
+        override fun onServiceConnected(componentName: ComponentName, iBinder: IBinder) {
+            serviceBinder = IIsolatedService.Stub.asInterface(iBinder)
+            bServiceBound = true
+            showAlertDialogAndExitApp(getString(R.string.rooted))
+        }
+
+        override fun onServiceDisconnected(componentName: ComponentName) {
+            bServiceBound = false
+        }
+    }
+    private val connection: ServiceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName, binder: IBinder) {
+            val service = IRemoteService.Stub.asInterface(binder)
+            try {
+                if(service.haveSu() == 1 || service.haveMagicMount() >= 1 || service.haveMagiskHide() >= 1)
+                    showAlertDialogAndExitApp(getString(R.string.rooted))
+            } catch (e: RemoteException) {
+            }
+        }
+
+        override fun onServiceDisconnected(name: ComponentName) {
+        }
+
+        override fun onNullBinding(name: ComponentName) {
         }
     }
 
