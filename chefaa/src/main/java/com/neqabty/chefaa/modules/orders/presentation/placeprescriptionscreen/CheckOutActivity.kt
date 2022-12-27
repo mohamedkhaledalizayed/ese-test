@@ -119,7 +119,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
             }
         }
 
-        binding.cartLt.checkout.visibility = View.GONE
     }
 
     private fun getDeviceName(){
@@ -175,6 +174,11 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.cartLt.checkout.visibility = View.VISIBLE
+    }
+
     fun checkOut(view: View) {
         if (!isRequested) {
             isRequested = true
@@ -186,6 +190,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                     )
                 }
                 placeOrderViewModel.placePrescriptionImages(selectedAddress?.id!!,  deviceName, currentLocation)
+                binding.cartLt.checkout.visibility = View.GONE
             }
         }
     }
