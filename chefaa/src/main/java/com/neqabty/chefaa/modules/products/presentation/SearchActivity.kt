@@ -28,6 +28,7 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.do_search)
 
+        binding.etSearch.customSelectionActionModeCallback = actionMode
         mAdapter = SearchAdapter {
             invalidateOptionsMenu()
         }

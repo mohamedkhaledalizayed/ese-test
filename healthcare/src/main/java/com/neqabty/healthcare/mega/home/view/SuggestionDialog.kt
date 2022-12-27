@@ -1,9 +1,7 @@
 package com.neqabty.healthcare.mega.home.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.neqabty.healthcare.R
@@ -38,6 +36,10 @@ class SuggestionDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.suggestions.playAnimation()
+
+        binding.mobile.customSelectionActionModeCallback = actionMode
+        binding.email.customSelectionActionModeCallback = actionMode
+        binding.comment.customSelectionActionModeCallback = actionMode
 
         if (phone!!.isNotEmpty()){
             binding.mobile.isEnabled = false
@@ -93,5 +95,23 @@ class SuggestionDialog : DialogFragment() {
                     putString(ARG_PARAM2, email)
                 }
             }
+    }
+
+    private val actionMode = object : ActionMode.Callback {
+        override fun onCreateActionMode(p0: ActionMode?, p1: Menu?): Boolean {
+            return false
+        }
+
+        override fun onPrepareActionMode(p0: ActionMode?, p1: Menu?): Boolean {
+            return false
+        }
+
+        override fun onActionItemClicked(p0: ActionMode?, p1: MenuItem?): Boolean {
+            return false
+        }
+
+        override fun onDestroyActionMode(p0: ActionMode?) {
+
+        }
     }
 }

@@ -62,6 +62,8 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
         setupToolbar(titleResId = R.string.payments)
 
+        binding.address.customSelectionActionModeCallback = actionMode
+
         if (sharedPreferences.code == TOGAREEN_CODE){
             binding.tvDetails.visibility = View.GONE
             binding.cardLayout.visibility = View.GONE

@@ -10,6 +10,8 @@ import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.view.ActionMode
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -190,6 +192,24 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity(){
         try {
             builder.show()
         }catch (e: Exception){
+
+        }
+    }
+
+    val actionMode = object : ActionMode.Callback {
+        override fun onCreateActionMode(p0: ActionMode?, p1: Menu?): Boolean {
+            return false
+        }
+
+        override fun onPrepareActionMode(p0: ActionMode?, p1: Menu?): Boolean {
+            return false
+        }
+
+        override fun onActionItemClicked(p0: ActionMode?, p1: MenuItem?): Boolean {
+            return false
+        }
+
+        override fun onDestroyActionMode(p0: ActionMode?) {
 
         }
     }

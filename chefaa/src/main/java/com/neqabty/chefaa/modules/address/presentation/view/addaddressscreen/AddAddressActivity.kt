@@ -35,6 +35,13 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>() {
 
         setupToolbar(titleResId = R.string.add_new_address)
 
+        binding.street.customSelectionActionModeCallback = actionMode
+        binding.building.customSelectionActionModeCallback = actionMode
+        binding.floor.customSelectionActionModeCallback = actionMode
+        binding.apartment.customSelectionActionModeCallback = actionMode
+        binding.landmark.customSelectionActionModeCallback = actionMode
+
+
         latitude = intent.getDoubleExtra(LATITUDE, 0.0)
         longitude = intent.getDoubleExtra(LONGITUDE, 0.0)
         district = intent.getStringExtra("district")!!

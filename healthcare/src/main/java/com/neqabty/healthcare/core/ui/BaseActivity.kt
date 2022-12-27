@@ -145,7 +145,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        clearClipBoard()
+//        clearClipBoard()
         progressDialog!!.show()
         binding.root.visibility = View.GONE
     }

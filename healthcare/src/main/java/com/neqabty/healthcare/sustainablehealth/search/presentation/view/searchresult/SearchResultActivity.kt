@@ -121,7 +121,7 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
         binding.searchToolbar.closeBtn.setOnClickListener {
             binding.searchToolbar.search.setText("")
         }
-
+        binding.searchToolbar.search.customSelectionActionModeCallback = actionMode
         binding.searchToolbar.search.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
