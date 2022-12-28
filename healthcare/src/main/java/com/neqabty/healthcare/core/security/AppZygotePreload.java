@@ -12,6 +12,5 @@ public class AppZygotePreload implements ZygotePreload {
     @Override
     public void doPreload(@NonNull ApplicationInfo appInfo) {
         System.loadLibrary("native-lib");
-        System.loadLibrary("vvb2060");
     }
 }

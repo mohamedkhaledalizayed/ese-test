@@ -142,16 +142,16 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         LocaleHelper.setLocale(this, "ar");
 
 
-//        val intent = Intent(applicationContext, IsolatedService::class.java)
-//        /*Binding to an isolated service */
-//        applicationContext.bindService(
-//            intent,
-//            mIsolatedServiceConnection,
-//            BIND_AUTO_CREATE
-//        )
+        val intent = Intent(applicationContext, IsolatedService::class.java)
+        /*Binding to an isolated service */
+        applicationContext.bindService(
+            intent,
+            mIsolatedServiceConnection,
+            BIND_AUTO_CREATE
+        )
 
 //        val intentt = Intent(applicationContext, RemoteService::class.java)
-//        bindService(intentt, connection, BIND_AUTO_CREATE)
+//        applicationContext.bindService(intentt, connection, BIND_AUTO_CREATE)
     }
 
     private fun setAnimation(){
@@ -174,14 +174,14 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         clearClipBoard()
-        progressDialog!!.show()
+//        progressDialog!!.show()
         binding.root.visibility = View.GONE
     }
 
-//    override fun onStop() {
-//        super.onStop()
+    override fun onStop() {
+        super.onStop()
 //        unbindService(connection)
-//    }
+    }
     internal fun showAlertDialogAndExitApp(message: String) {
 
         val alertDialog = androidx.appcompat.app.AlertDialog.Builder(this).create()

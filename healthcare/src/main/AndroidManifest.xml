@@ -143,13 +143,11 @@
         <service
             android:name="com.neqabty.healthcare.core.security.IsolatedService"
             android:exported="false"
-            android:isolatedProcess="true"
             android:useAppZygote="true" />
 
         <service
             android:name="com.neqabty.healthcare.core.security.RemoteService"
             android:exported="false"
-            android:isolatedProcess="true"
             android:useAppZygote="true" />
         <uses-library
             android:name="org.apache.http.legacy"
