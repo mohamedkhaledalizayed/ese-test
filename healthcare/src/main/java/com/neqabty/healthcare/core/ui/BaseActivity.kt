@@ -225,8 +225,9 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     private val mIsolatedServiceConnection: ServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(componentName: ComponentName, iBinder: IBinder) {
             serviceBinder = IIsolatedService.Stub.asInterface(iBinder)
-            bServiceBound = true
-            showAlertDialogAndExitApp(getString(R.string.rooted))
+            bServiceBound = serviceBinder.isMagiskPresent
+            if(bServiceBound)
+                showAlertDialogAndExitApp(getString(R.string.rooted))
         }
 
         override fun onServiceDisconnected(componentName: ComponentName) {

@@ -43,7 +43,7 @@ static const char *suPaths[] = {
 
 
 JNIEXPORT jboolean
-Java_com_darvin_security_Native_isMagiskPresentNative(
+Java_com_neqabty_healthcare_core_security_Native_isMagiskPresentNative(
         JNIEnv *env,
         jobject this) {
     bool bRet = false;
