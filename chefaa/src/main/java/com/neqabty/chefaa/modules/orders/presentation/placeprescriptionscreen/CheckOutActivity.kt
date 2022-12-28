@@ -9,20 +9,16 @@ import android.graphics.BitmapFactory
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.location.LocationRequest
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Base64
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.NonNull
 import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Cart
 import com.neqabty.chefaa.core.data.Constants.cart
@@ -84,8 +80,8 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
         photoAdapter = CheckoutPhotosAdapter(this)
         updateView()
 
-        binding.cartLt.photosRv.adapter = photoAdapter
-        binding.cartLt.productRv.adapter = mAdapter
+        binding.photosRv.adapter = photoAdapter
+        binding.productRv.adapter = mAdapter
         placeOrderViewModel.placeImagesResult.observe(this){
             it?.let { resource ->
                 when (resource.status) {
@@ -103,6 +99,8 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                             }
                             406 -> {
                                 startActivity(Intent(this, VerifyUserActivity::class.java))
+                                Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
+                            }407 -> {
                                 Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
                             }
                             else -> {
@@ -143,40 +141,38 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
         ///// checkout btn and Empty view
         if (cart.size == 0){
             binding.clEmptyCart.visibility = View.VISIBLE
-            binding.cartLt.checkout.visibility = View.GONE
         }else{
             binding.clEmptyCart.visibility = View.GONE
-            binding.cartLt.checkout.visibility = View.VISIBLE
         }
 
         /////Images recyclerView
         if (cart.imageList.isNotEmpty()) {
-            binding.cartLt.photosRv.visibility = View.VISIBLE
+            binding.photosRv.visibility = View.VISIBLE
             photoAdapter.submitList()
         } else {
-            binding.cartLt.llPhotos.visibility = View.GONE
+            binding.llPhotos.visibility = View.GONE
         }
 
         /////Products recyclerView
         if(cart.productList.isNotEmpty()) {
-            binding.cartLt.productRv.visibility = View.VISIBLE
+            binding.productRv.visibility = View.VISIBLE
             mAdapter.submitList()
         } else {
-            binding.cartLt.llProducts.visibility = View.GONE
+            binding.llProducts.visibility = View.GONE
         }
 
 
         if(cart.note != null){
-            binding.cartLt.noteTv.visibility = View.VISIBLE
-            binding.cartLt.noteTv.setText(cart.note!!.note)
+            binding.noteTv.visibility = View.VISIBLE
+            binding.noteTv.setText(cart.note!!.note)
         } else {
-            binding.cartLt.clNote.visibility = View.GONE
+            binding.clNote.visibility = View.GONE
         }
     }
 
     override fun onResume() {
         super.onResume()
-        binding.cartLt.checkout.visibility = View.VISIBLE
+        binding.checkout.visibility = View.VISIBLE
     }
 
     fun checkOut(view: View) {
@@ -191,7 +187,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                 }
                 placeOrderViewModel.placePrescriptionImages(selectedAddress?.id!!,  deviceName, currentLocation)
             }
-            binding.cartLt.checkout.visibility = View.GONE
+            binding.checkout.visibility = View.GONE
         }
     }
 

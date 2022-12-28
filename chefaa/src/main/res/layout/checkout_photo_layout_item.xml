@@ -14,7 +14,6 @@
             android:layout_height="@dimen/_75sdp"
             android:id="@+id/image_view"
             android:layout_gravity="start|bottom"
-            tools:src="@drawable/slider_1"
             android:scaleType="centerCrop"
             />
     </FrameLayout>

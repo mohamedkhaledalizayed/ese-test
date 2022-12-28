@@ -44,8 +44,12 @@ class VerifyUserActivity : BaseActivity<ActivityVerifyUserBinding>() {
                     }
                     Status.SUCCESS ->{
                         loading.dismiss()
-                        Toast.makeText(this@VerifyUserActivity, "تم تاكيد رقم الهاتف بنجاح.", Toast.LENGTH_LONG).show()
-                        finish()
+                        if (resource.data!!){
+                            Toast.makeText(this@VerifyUserActivity, "تم تاكيد رقم الهاتف بنجاح.", Toast.LENGTH_LONG).show()
+                            finish()
+                        }else{
+                            Toast.makeText(this@VerifyUserActivity, "خطا, من فضلك ادخل الكود الصحيح.", Toast.LENGTH_LONG).show()
+                        }
                     }
                     Status.ERROR ->{
                         loading.dismiss()

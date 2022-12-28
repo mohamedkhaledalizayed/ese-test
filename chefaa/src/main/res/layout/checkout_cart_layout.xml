@@ -72,6 +72,7 @@
                 android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/edit_text_bg_chefaa"
                 android:enabled="false"
+                android:maxLength="255"
                 android:padding="@dimen/_10sdp"
                 android:scrollbars="vertical"
                 android:textAlignment="center"
@@ -124,4 +125,5 @@
             android:textSize="@dimen/_12ssp"
             app:layout_constraintTop_toBottomOf="@id/ll_products" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.core.widget.NestedScrollView>
