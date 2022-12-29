@@ -46,7 +46,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
     private val mAdapter = CheckoutCartAdapter()
     private lateinit var photoAdapter: CheckoutPhotosAdapter
     private var totalPrice = 0.0
-    private var isRequested = false
     private var deviceName = ""
     private var currentLocation = ""
 
@@ -76,7 +75,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
             .setCancelable(false)
             .build()
 
-
         photoAdapter = CheckoutPhotosAdapter(this)
         updateView()
 
@@ -94,7 +92,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                             200 -> {
                                 Toast.makeText(this, getString(R.string.order_is_placed), Toast.LENGTH_LONG).show()
                                 cart = Cart()
-                                isRequested = false
                                 reLaunchHomeActivity(this)
                             }
                             406 -> {
@@ -111,7 +108,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                     Status.ERROR -> {
                         dialog.dismiss()
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
-                        isRequested = false
+                        binding.checkout.visibility = View.VISIBLE
                     }
                 }
             }
@@ -161,7 +158,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
             binding.llProducts.visibility = View.GONE
         }
 
-
         if(cart.note != null){
             binding.noteTv.visibility = View.VISIBLE
             binding.noteTv.setText(cart.note!!.note)
@@ -176,8 +172,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
     }
 
     fun checkOut(view: View) {
-        if (!isRequested) {
-            isRequested = true
             lifecycleScope.launch(Dispatchers.IO) {
                 cart.imageList.map {
                     it.image = "data:image/png;base64," + Base64.encodeToString(
@@ -188,7 +182,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                 placeOrderViewModel.placePrescriptionImages(selectedAddress?.id!!,  deviceName, currentLocation)
             }
             binding.checkout.visibility = View.GONE
-        }
     }
 
     @NonNull
