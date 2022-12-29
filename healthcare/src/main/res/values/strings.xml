@@ -329,5 +329,7 @@
     <string name="seha_text">باقات صحة \nمستدامة</string>
     <string name="ese_text">خدمات نقابة \nالمهندسين</string>
     <string name="chefaa_text">خدمات العلاج \nالشهري</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
