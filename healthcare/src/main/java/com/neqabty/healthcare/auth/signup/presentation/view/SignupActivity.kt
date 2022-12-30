@@ -15,6 +15,7 @@ import com.neqabty.healthcare.auth.signup.data.model.SignupBody
 import com.neqabty.healthcare.auth.signup.data.model.SignupTogareenBody
 import com.neqabty.healthcare.auth.signup.domain.entity.SignupParams
 import com.neqabty.healthcare.auth.signup.domain.entity.syndicate.SyndicateListEntity
+import com.neqabty.healthcare.core.data.Constants.AGRI_CODE
 import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
 import com.neqabty.healthcare.core.data.Constants.isSyndicateMember
 import com.neqabty.healthcare.core.data.Constants.selectedSyndicateCode
@@ -80,6 +81,11 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             binding.serialNumberContainer.visibility = View.VISIBLE
         }
 
+        if (selectedSyndicateCode == AGRI_CODE){
+            binding.nationalIdContainer.visibility = View.GONE
+            binding.passwordContainer.visibility = View.VISIBLE
+        }
+
         binding.phone.setText(sharedPreferences.mobile)
         binding.phone.isEnabled = false
         binding.spSyndicates.adapter = mSyndicatesAdapter
@@ -90,7 +96,13 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                     if (syndicateCode == TOGAREEN_CODE){
                         binding.nationalIdContainer.visibility = View.GONE
                         binding.serialNumberContainer.visibility = View.VISIBLE
-                    }else{
+                    }
+                    else if (syndicateCode == AGRI_CODE){
+                        binding.nationalIdContainer.visibility = View.GONE
+                        binding.passwordContainer.visibility = View.VISIBLE
+                        binding.serialNumberContainer.visibility = View.GONE
+                    }
+                    else{
                         binding.nationalIdContainer.visibility = View.VISIBLE
                         binding.serialNumberContainer.visibility = View.GONE
                     }
@@ -189,7 +201,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                                 resource.data!!.toMutableList()
                                     .also { list -> list.add(0, SyndicateListEntity("",0,"", resources.getString(R.string.select_syndicates))) })
                             if (isSyndicateMember){
-                                binding.spSyndicates.setSelection(selectedSyndicatePosition)
+                                binding.spSyndicates.setSelection(selectedSyndicatePosition.minus(1))
                                 syndicateCode = selectedSyndicateCode
                             }else{
                                 isSyndicateMember = true
