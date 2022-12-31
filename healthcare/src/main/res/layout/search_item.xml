@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:lines="1"
-            android:maxLength="20"
+            android:maxLength="30"
             android:ellipsize="end"
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/_10sdp"

@@ -22,9 +22,16 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
         val provider = intent.getParcelableExtra<ProvidersEntity>("provider")
         setupToolbar(title = "${provider?.name}")
 
-        binding.itemName.text =  "${provider?.name}"
-        binding.addressValue.text =  "${provider?.address}"
-        binding.phoneValue.text =  "${provider?.phone}"
+        if (provider?.serviceProviderType?.id == 2){
+            binding.government.text = "سعر الكشف ${provider.price}"
+        }else{
+            binding.government.text = "نسبة الخصم ${provider?.price}"
+        }
+
+        binding.itemName.text = "${provider?.name}"
+        binding.addressValue.text = "${provider?.address}"
+        binding.phoneValue.text = "${provider?.phone}"
+        binding.mobileValue.text = "${provider?.mobile}"
         binding.phoneValue.setOnClickListener { provider?.phone?.let { it -> openPhonesFragment(it) } }
         if(!provider?.notes.isNullOrBlank()) {
             binding.notes.visibility = View.VISIBLE

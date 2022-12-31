@@ -16,6 +16,7 @@ import com.neqabty.healthcare.sustainablehealth.search.domain.entity.search.Prov
 fun ProvidersModel.toProvidersEntity(): ProvidersEntity{
     return ProvidersEntity(
         address = address,
+        price = price ?: "",
         area =  area?.toAreaEntity(),
         degree = degree?.toDegreeEntity(),
         email = email,
@@ -25,6 +26,7 @@ fun ProvidersModel.toProvidersEntity(): ProvidersEntity{
         name = name,
         notes = notes ?: "",
         phone = phone,
+        mobile = mobile ?: "",
         profession = profession?.toProfessionEntity(),
         serviceProviderType = serviceProviderType?.toServiceTypeEntity()
     )

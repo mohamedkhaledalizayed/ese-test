@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName
 data class ProvidersModel(
     @SerializedName("address")
     val address: String,
+    @SerializedName("price_details")
+    val price: String?,
     @SerializedName("area")
     val area: Area?,
     @SerializedName("area_id")
@@ -16,7 +18,7 @@ data class ProvidersModel(
     @SerializedName("degree_id")
     val degreeId: Int,
     @SerializedName("email")
-    val email: String,
+    val email: String?,
     @SerializedName("governorate")
     val governorate: Governorate,
     @SerializedName("governorate_id")
@@ -31,6 +33,8 @@ data class ProvidersModel(
     val notes: String?,
     @SerializedName("phone")
     val phone: String,
+    @SerializedName("mobile")
+    val mobile: String?,
     @SerializedName("profession")
     val profession: Profession?,
     @SerializedName("profession_id")
