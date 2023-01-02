@@ -11,6 +11,7 @@ import com.google.gson.Gson
 
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
+import com.neqabty.healthcare.auth.signup.data.model.SignUpAgriBody
 import com.neqabty.healthcare.auth.signup.data.model.SignupBody
 import com.neqabty.healthcare.auth.signup.data.model.SignupTogareenBody
 import com.neqabty.healthcare.auth.signup.domain.entity.SignupParams
@@ -145,9 +146,12 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
-                        val error = Gson().fromJson(resource.message.toString(), ErrorBody::class.java)
-
-                        Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
+                        try {
+                            val error = Gson().fromJson(resource.message.toString(), ErrorBody::class.java)
+                            Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
+                        }catch (e:Exception){
+                            Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
             }
@@ -269,35 +273,53 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 return
             }
 
-            if (syndicateCode == TOGAREEN_CODE){
-                if (binding.serialNumber.text.toString().isEmpty()){
-                    Toast.makeText(this, "Enter Serial Number.", Toast.LENGTH_LONG).show()
-                    return
-                }
-                signupViewModel.signup(
-                    SignupTogareenBody(
-                        entityCode = syndicateCode,
-                        membershipId = binding.membershipId.text.toString(),
-                        mobile = binding.phone.text.toString(),
-                        serialNumber = binding.serialNumber.text.toString(),
-                        email = binding.email.text.toString()
+            when (syndicateCode) {
+                TOGAREEN_CODE -> {
+                    if (binding.serialNumber.text.toString().isEmpty()){
+                        Toast.makeText(this, "Enter Serial Number.", Toast.LENGTH_LONG).show()
+                        return
+                    }
+                    signupViewModel.signup(
+                        SignupTogareenBody(
+                            entityCode = syndicateCode,
+                            membershipId = binding.membershipId.text.toString(),
+                            mobile = binding.phone.text.toString(),
+                            serialNumber = binding.serialNumber.text.toString(),
+                            email = binding.email.text.toString()
+                        )
                     )
-                )
-            }else{
-                if (binding.nationalId.text.toString().isEmpty() || !binding.nationalId.text.isDigitsOnly() || binding.nationalId.text.toString().length < 14){
-                    Toast.makeText(this, resources.getString(R.string.enter_national_id), Toast.LENGTH_LONG).show()
-                    return
                 }
+                AGRI_CODE -> {
+                    if (binding.password.text.toString().isEmpty()){
+                        Toast.makeText(this, resources.getString(R.string.enter_password), Toast.LENGTH_LONG).show()
+                        return
+                    }
+                    signupViewModel.signup(
+                        SignUpAgriBody(
+                            entityCode = syndicateCode,
+                            membershipId = binding.membershipId.text.toString(),
+                            mobile = binding.phone.text.toString(),
+                            password = binding.password.text.toString(),
+                            email = binding.email.text.toString()
+                        )
+                    )
+                }
+                else -> {
+                    if (binding.nationalId.text.toString().isEmpty() || !binding.nationalId.text.isDigitsOnly() || binding.nationalId.text.toString().length < 14){
+                        Toast.makeText(this, resources.getString(R.string.enter_national_id), Toast.LENGTH_LONG).show()
+                        return
+                    }
 
-                signupViewModel.signup(
-                    SignupBody(
-                        entityCode = syndicateCode,
-                        membershipId = binding.membershipId.text.toString(),
-                        mobile = binding.phone.text.toString(),
-                        nationalId = binding.nationalId.text.toString(),
-                        email = binding.email.text.toString()
+                    signupViewModel.signup(
+                        SignupBody(
+                            entityCode = syndicateCode,
+                            membershipId = binding.membershipId.text.toString(),
+                            mobile = binding.phone.text.toString(),
+                            nationalId = binding.nationalId.text.toString(),
+                            email = binding.email.text.toString()
+                        )
                     )
-                )
+                }
             }
         }else{
 
