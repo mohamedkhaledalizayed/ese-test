@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.auth.forgetpassword.view.ForgetPasswordActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityLoginBinding
@@ -34,6 +35,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             .setMessage(resources.getString(R.string.please_wait))
             .build()
 
+
+        binding.forgetPassword.setOnClickListener {
+            startActivity(Intent(this, ForgetPasswordActivity::class.java))
+        }
 
         binding.etUsername.setText(intent.getStringExtra("phone").toString())
         binding.etUsername.isEnabled = false
