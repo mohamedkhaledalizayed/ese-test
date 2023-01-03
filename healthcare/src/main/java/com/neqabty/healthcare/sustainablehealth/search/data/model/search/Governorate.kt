@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class Governorate(
     @SerializedName("governorate_ar")
-    val governorateAr: String,
+    val governorateAr: String?,
     @SerializedName("governorate_en")
     val governorateEn: String,
     @SerializedName("id")

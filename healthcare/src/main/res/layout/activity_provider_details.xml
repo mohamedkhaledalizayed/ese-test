@@ -37,7 +37,6 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:background="@drawable/search_bg">
 
                     <ImageView
@@ -53,11 +52,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:lines="1"
                         android:text=""
-                        android:ellipsize="end"
                         android:textColor="@color/black"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:textSize="@dimen/_10ssp"
                         app:layout_constraintStart_toEndOf="@+id/item_image"
                         app:layout_constraintTop_toTopOf="parent"
@@ -109,6 +106,62 @@
                     android:layout_marginEnd="@dimen/_10sdp"/>
 
                 <TextView
+                    android:id="@+id/profession"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_10ssp"
+                    android:text="التخصص"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toEndOf="@+id/location_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/provider_sp"
+                    android:layout_marginStart="@dimen/_10sdp"/>
+
+
+                <TextView
+                    android:id="@+id/profession_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_10ssp"
+                    android:text=""
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toEndOf="@+id/location_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/provider_sp"
+                    android:layout_marginStart="@dimen/_10sdp"/>
+
+                <TextView
+                    android:id="@+id/degree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_10ssp"
+                    android:text="الدرجة العلمية"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintStart_toEndOf="@+id/location_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/provider_sp"
+                    android:layout_marginStart="@dimen/_10sdp"/>
+
+
+                <TextView
+                    android:id="@+id/degree_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_10ssp"
+                    android:text=""
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toEndOf="@+id/location_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/provider_sp"
+                    android:layout_marginStart="@dimen/_10sdp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/background"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"/>
+
+                <TextView
                     android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -130,7 +183,8 @@
                     android:textColor="@color/black"
                     app:layout_constraintStart_toEndOf="@+id/location_icon"
                     app:layout_constraintTop_toBottomOf="@+id/provider_sp"
-                    android:layout_marginStart="@dimen/_10sdp"/>
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"/>
 
                 <TextView
                     android:id="@+id/phone"
@@ -179,6 +233,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/provider_sp"
                     android:layout_marginStart="@dimen/_10sdp"/>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/background"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"/>
 
                 <TextView
                     android:id="@+id/notes"
@@ -186,7 +247,6 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_10ssp"
                     android:text="ملاحظات"
-                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp"/>
 

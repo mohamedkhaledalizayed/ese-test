@@ -8,5 +8,5 @@ data class Profession(
     @SerializedName("id")
     val id: Int,
     @SerializedName("profession_name")
-    val professionName: String
+    val professionName: String?
 )

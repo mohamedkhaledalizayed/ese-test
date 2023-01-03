@@ -32,7 +32,7 @@ data class ProvidersModel(
     @SerializedName("notes")
     val notes: String?,
     @SerializedName("phone")
-    val phone: String,
+    val phone: String?,
     @SerializedName("mobile")
     val mobile: String?,
     @SerializedName("profession")

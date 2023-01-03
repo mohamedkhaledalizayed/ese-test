@@ -310,6 +310,10 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                     askForLogin(getString(R.string.not_found))
                 }
             }
+            R.id.medical_directory -> {
+                val intent = Intent(this@SehaHomeActivity, SearchResultActivity::class.java)
+                startActivity(intent)
+            }
             R.id.wallet -> {
                 if (sharedPreferences.isAuthenticated){
                     comingSoon(getString(R.string.comming))

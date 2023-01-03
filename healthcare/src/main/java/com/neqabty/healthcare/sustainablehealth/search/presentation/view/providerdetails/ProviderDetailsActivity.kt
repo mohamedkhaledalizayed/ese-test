@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.sustainablehealth.search.presentation.view.providerdetails
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.DialogFragment
@@ -14,6 +15,7 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
 
     private val mAdapter = ReviewsAdapter()
     override fun getViewBinding() = ActivityProviderDetailsBinding.inflate(layoutInflater)
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -22,21 +24,29 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
         val provider = intent.getParcelableExtra<ProvidersEntity>("provider")
         setupToolbar(title = "${provider?.name}")
 
-        if (provider?.serviceProviderType?.id == 2){
-            binding.government.text = "سعر الكشف ${provider.price}"
+        if (provider?.serviceProviderType?.providerTypeEn == "Doctors"){
+            binding.government.text = "سعر الكشف : ${provider.price}"
         }else{
-            binding.government.text = "نسبة الخصم ${provider?.price}"
+            binding.government.text = "نسبة الخصم : ${provider?.price}"
         }
 
         binding.itemName.text = "${provider?.name}"
-        binding.addressValue.text = "${provider?.address}"
+        binding.addressValue.text = "${provider?.governorate?.governorateAr}, ${provider?.area?.areaName}, ${provider?.address}"
         binding.phoneValue.text = "${provider?.phone}"
         binding.mobileValue.text = "${provider?.mobile}"
-        binding.phoneValue.setOnClickListener { provider?.phone?.let { it -> openPhonesFragment(it) } }
-        if(!provider?.notes.isNullOrBlank()) {
-            binding.notes.visibility = View.VISIBLE
-            binding.notesValue.text = provider?.notes
+        binding.professionValue.text = provider?.profession?.professionName ?: "غير محدد"
+        binding.degreeValue.text = provider?.degree?.degreeName ?: "غير محدد"
+        binding.phoneValue.setOnClickListener {
+            if (provider?.phone != "لا يوجد"){
+                openPhonesFragment(provider?.phone!!)
+            }
         }
+        binding.mobileValue.setOnClickListener {
+            if (provider?.mobile != "لا يوجد"){
+                openPhonesFragment(provider?.mobile!!)
+            }
+        }
+        binding.notesValue.text = provider?.notes
         binding.providerSp.text =  "${provider?.serviceProviderType?.providerTypeAr}"
         binding.reviewRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :

@@ -78,6 +78,21 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
                 if (filtersData != null && i != 0) {
                     serviceProviderType = filtersData?.providerTypes?.get(i - 1)
                     selectedProviders = i
+
+                    if (serviceProviderType?.id == 2){
+                        binding.spinnerDegreeContainer.visibility = View.VISIBLE
+                        binding.spinnerSpeContainer.visibility = View.VISIBLE
+                        binding.degree.visibility = View.VISIBLE
+                        binding.professions.visibility = View.VISIBLE
+                    }else{
+                        binding.spinnerDegreeContainer.visibility = View.GONE
+                        binding.spinnerSpeContainer.visibility = View.GONE
+                        binding.degree.visibility = View.GONE
+                        binding.professions.visibility = View.GONE
+
+                        profession = null
+                        degree = null
+                    }
                 }
             }
 

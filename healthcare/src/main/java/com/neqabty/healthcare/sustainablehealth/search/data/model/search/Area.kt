@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class Area(
     @SerializedName("area_name")
-    val areaName: String,
+    val areaName: String?,
     @SerializedName("governorate_id")
     val governorateId: Int,
     @SerializedName("id")

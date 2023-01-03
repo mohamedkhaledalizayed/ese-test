@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class Degree(
     @SerializedName("degree_name")
-    val degreeName: String,
+    val degreeName: String?,
     @SerializedName("id")
     val id: Int
 )
