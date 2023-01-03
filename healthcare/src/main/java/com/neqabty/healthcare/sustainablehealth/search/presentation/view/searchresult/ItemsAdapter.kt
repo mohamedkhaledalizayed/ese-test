@@ -50,7 +50,6 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
     override fun getItemCount() = items.size
 
     fun submitList(newItems: MutableList<ProvidersEntity>?) {
-        clear()
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()

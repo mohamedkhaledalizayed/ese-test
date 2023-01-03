@@ -19,6 +19,9 @@ import com.neqabty.healthcare.sustainablehealth.search.presentation.view.filter.
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.providerdetails.ProviderDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.core.ui.BaseActivity
 var selectedGovernorate = 0
 var selectedProfession = 0
@@ -35,12 +38,25 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
     private var degree = ""
     private val mAdapter = ItemsAdapter()
     private val searchViewModel: SearchViewModel by viewModels()
+
+    private var pageNumber = 1
+    private var isLoading = true
+    private var pastVisibleItem: Int = 0
+    var visibleItemsCount: Int = 0
+    var totalItemsCount: Int = 0
+    var previousTotal = 0
+    private var threshold = 4
+    lateinit var mLayoutManager: LinearLayoutManager
+
     override fun getViewBinding() = ActivitySearchResultBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(title = "البحث في الشبكة الصحية")
 
+        mLayoutManager = LinearLayoutManager(this)
+        binding.itemsRecycler.layoutManager = mLayoutManager
+        binding.itemsRecycler.itemAnimator = DefaultItemAnimator()
         name = intent.getStringExtra("name") ?: ""
         binding.searchToolbar.search.setText(name)
         binding.itemsRecycler.adapter = mAdapter
@@ -58,7 +74,7 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
 
-        searchViewModel.getProviders(SearchBody(governorateId, serviceProviderTypeId, name, professionId))
+        search()
         searchViewModel.providers.observe(this) {
 
             it.let { resource ->
@@ -73,7 +89,6 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
-                        Log.e("test", resource.message.toString())
                     }
                 }
 
@@ -145,10 +160,47 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
             }
 
         })
+
+        binding.itemsRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                visibleItemsCount = mLayoutManager.childCount
+                totalItemsCount = mLayoutManager.itemCount
+                pastVisibleItem = mLayoutManager.findFirstVisibleItemPosition()
+
+                if (dy > 0) {
+                    if (isLoading) {
+                        if (totalItemsCount > previousTotal) { // da el stopping condition, el condition da 3shan a turn on el isloading lma el items tzed m3na kda en fe data gt tany
+                            isLoading = false
+                            previousTotal = totalItemsCount
+                        }
+                    }
+
+                    if (!isLoading && (totalItemsCount - visibleItemsCount) <= (pastVisibleItem + threshold)) { // el data gt w el unseen items b2t <= el threshold
+                        pageNumber += 1
+                        isLoading = true
+                        pagination()
+                    }
+                }
+            }
+        })
+
     }
 
     private fun search() {
-        searchViewModel.getProviders(SearchBody(governorateId, serviceProviderTypeId, name, professionId))
+        mAdapter.clear()
+        pageNumber = 1
+        isLoading = true
+        pastVisibleItem = 0
+        visibleItemsCount = 0
+        totalItemsCount = 0
+        previousTotal = 0
+        searchViewModel.getProviders(SearchBody(governorateId, serviceProviderTypeId, name, professionId, pageNumber))
+    }
+
+    private fun pagination() {
+        searchViewModel.getProviders(SearchBody(governorateId, serviceProviderTypeId, name, professionId, pageNumber))
     }
 
     override fun onResume() {
