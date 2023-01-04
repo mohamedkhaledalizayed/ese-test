@@ -107,4 +107,8 @@ class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding>(), IF
             }
         }
     }
+
+    override fun onBackPressed() {
+        finish()
+    }
 }

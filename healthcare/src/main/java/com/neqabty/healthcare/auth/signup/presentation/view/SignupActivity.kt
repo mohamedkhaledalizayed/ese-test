@@ -133,9 +133,12 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                     }
                     Status.ERROR -> {
                         dialog.dismiss()
-                        val error = Gson().fromJson(resource.message.toString(), ErrorBody::class.java)
-
-                        Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
+                        try {
+                            val error = Gson().fromJson(resource.message.toString(), ErrorBody::class.java)
+                            Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
+                        }catch (e: Exception){
+                            Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
+                        }
                     }
                 }
             }
