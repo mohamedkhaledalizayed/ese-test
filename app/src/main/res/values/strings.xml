@@ -351,10 +351,11 @@
     <string name="delivery_info_title">بيانات التوصيل والاستلام</string>
     <string name="delivery_method">طريقة التوصيل</string>
     <string name="delivery_method_hint">التوصيل مقتصر علي المنازل لتلافي التجمعات وفقا لاجراءات التباعد الإجتماعي</string>
+    <string name="delivery_method_hint_for_others">لان عملية السداد خاصة بعضو اخر غير صاحب الحساب الاصلي، برجاء استلام كارنية العضوية من اقرب نقابة فرعية</string>
     <string name="delivery_mobile_title">رقم الموبايل</string>
     <string name="delivery_mobile_hint">رقم الهاتف الذي سيتم التواصل عليه عند الاستلام</string>
     <string name="home_delivery">توصيل للمنزل
-        (قيمة التوصيل :١٥ جنيه سيتم تحصيلها عند الاستلام)</string>
+        (قيمة التوصيل :١٨ جنيه سيتم تحصيلها عند الاستلام)</string>
     <string name="main_syndicate_delivery">إستلام من النقابة العامة
     (بدون مصاريف توصيل )</string>
     <string name="syndicate_delivery">إستلام من النقابة الفرعية

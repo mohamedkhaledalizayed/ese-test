@@ -100,6 +100,10 @@ class InquiryDetailsFragment : BaseFragment() {
         title = params.title
         binding.number = params.number
 
+        if (params.number != sharedPref.user) {
+            llDeliveryDetails.visibility = View.GONE
+            tvDeliveryMethodHint.text = getString(R.string.delivery_method_hint_for_others)
+        }
         calculateCommission(Constants.PaymentOption.OpayCredit)
         medicalRenewalPayment?.let {
             binding.medicalRenewalPayment = it
