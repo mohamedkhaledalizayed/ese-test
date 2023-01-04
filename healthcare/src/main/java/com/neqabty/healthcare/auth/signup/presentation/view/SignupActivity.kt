@@ -135,10 +135,16 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                             sharedPreferences.code = resource.data.entity.code
                             sharedPreferences.syndicateName = resource.data.entity.name
                             sharedPreferences.image = resource.data.entity.imageUrl ?: ""
-                            if (syndicateCode == TOGAREEN_CODE){
-                                confirmMessage(resources.getString(R.string.confirm_message_serial))
-                            }else{
-                                confirmMessage(resources.getString(R.string.confirm_message))
+                            when (syndicateCode) {
+                                TOGAREEN_CODE -> {
+                                    confirmMessage(resources.getString(R.string.confirm_message_serial))
+                                }
+                                AGRI_CODE -> {
+                                    confirmMessage(resources.getString(R.string.confirm_message_agri))
+                                }
+                                else -> {
+                                    confirmMessage(resources.getString(R.string.confirm_message))
+                                }
                             }
                         }else{
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
