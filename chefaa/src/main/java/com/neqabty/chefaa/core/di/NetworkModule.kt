@@ -24,7 +24,7 @@ class NetworkModule {
     @Provides
     @Named("chefaa")
     fun providesBaseUrl(): String {
-        return BASE_URL_DEV
+        return BASE_URL_PRO
     }
 
     @Provides
