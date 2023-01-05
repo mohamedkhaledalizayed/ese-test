@@ -235,7 +235,7 @@ class InquiryDetailsFragment : BaseFragment() {
             else -> ""
         }
         PaymentTask.sandBox = Constants.OPAY_MODE
-        val userInfo = UserInfo(medicalRenewalPayment.paymentItem?.amount.toString(), binding.number, sharedPref.mobile, medicalRenewalPayment.paymentItem?.engName)
+        val userInfo = UserInfo("", binding.number, sharedPref.mobile, medicalRenewalPayment.paymentItem?.engName)
         val payInput = PayInput(
             publickey = Constants.OPAY_PUBLIC_KEY,
             merchantId = Constants.OPAY_MERCHANT_ID,
