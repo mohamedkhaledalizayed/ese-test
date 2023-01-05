@@ -25,7 +25,7 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
         setupToolbar(title = "${provider?.name}")
 
         if (provider?.serviceProviderType?.providerTypeEn == "Doctors"){
-            binding.government.text = "سعر الكشف : ${provider.price}"
+            binding.government.text = "سعر الكشف : ${provider.price} جنيه"
         }else{
             binding.government.text = "نسبة الخصم : ${provider?.price}"
         }
@@ -34,8 +34,20 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
         binding.addressValue.text = "${provider?.governorate?.governorateAr}, ${provider?.area?.areaName}, ${provider?.address}"
         binding.phoneValue.text = "${provider?.phone}"
         binding.mobileValue.text = "${provider?.mobile}"
-        binding.professionValue.text = provider?.profession?.professionName ?: "غير محدد"
-        binding.degreeValue.text = provider?.degree?.degreeName ?: "غير محدد"
+
+        if (provider?.profession?.professionName.isNullOrEmpty()){
+            binding.profession.visibility = View.GONE
+            binding.professionValue.visibility = View.GONE
+        }else{
+            binding.professionValue.text = provider?.profession?.professionName
+        }
+
+        if (provider?.degree?.degreeName.isNullOrEmpty()){
+            binding.degree.visibility = View.GONE
+            binding.degreeValue.visibility = View.GONE
+        }else{
+            binding.degreeValue.text = provider?.degree?.degreeName
+        }
         binding.phoneValue.setOnClickListener {
             if (provider?.phone != "لا يوجد"){
                 openPhonesFragment(provider?.phone!!)
