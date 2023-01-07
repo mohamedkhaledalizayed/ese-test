@@ -77,7 +77,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
             onItemClickListener?.setOnRegisterClickListener(item)
         }
         viewHolder.binding.moreDetails.setOnClickListener {
-            onItemClickListener?.setOnMoreClickListener(item.name, details, item.serviceCode)
+            onItemClickListener?.setOnMoreClickListener(item.name, details, item.extension)
         }
 
     }

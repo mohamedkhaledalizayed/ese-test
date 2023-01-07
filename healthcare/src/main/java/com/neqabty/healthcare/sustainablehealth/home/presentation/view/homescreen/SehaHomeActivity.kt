@@ -1,10 +1,10 @@
 package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen
 
 
+
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
@@ -21,35 +21,40 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.SnapHelper
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
+import com.neqabty.healthcare.R
+import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
+import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
+import com.neqabty.healthcare.commen.contactus.ContactUsActivity
+import com.neqabty.healthcare.commen.settings.SettingsActivity
+import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.utils.Status
-import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
-import com.neqabty.healthcare.commen.contactus.ContactUsActivity
-import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
-import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity
-import com.neqabty.healthcare.sustainablehealth.suggestions.presentation.SuggestionsActivity
-import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.PackagesEntity
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.filter.FiltersViewModel
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
+import com.neqabty.healthcare.sustainablehealth.suggestions.presentation.SuggestionsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
+import me.relex.circleindicator.CircleIndicator
 import kotlin.math.abs
+
 
 @AndroidEntryPoint
 class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var loading: AlertDialog
     private val aboutAdapter = AboutAdapter()
     private lateinit var toolbar: Toolbar
+    lateinit var indicator: CircleIndicator
     private lateinit var drawer: DrawerLayout
     private val filtersViewModel: FiltersViewModel by viewModels()
     private val mAdapter = PackagesAdapter()
@@ -111,6 +116,8 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                 }
             }
         }
+        indicator = findViewById(R.id.indicator)
+
 
         binding.packagesRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
@@ -155,11 +162,11 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         mAdapter.submitList(resource.data?.toMutableList())
+                        indicator.createIndicators(mAdapter.itemCount, 0)
                         val position = (abs(mAdapter.itemCount * 0.5)).toInt()
                         centerAtPosition(position)
                     }
                     Status.ERROR -> {
-                        Log.e("rtt", resource.message.toString())
                         binding.progressCircular.visibility = View.GONE
                     }
                 }
@@ -247,16 +254,39 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
 
         binding.packagesRecycler.addItemDecoration(OffsetItemDecoration())
 
+        var currentPosition = -1
+        binding.packagesRecycler.addOnScrollListener(object : OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    var position: Int = getCurrentItem()
+
+                    if (currentPosition == 0){
+                        indicator.animatePageSelected(0)
+                    }else{
+                        indicator.animatePageSelected(position.plus(1))
+                    }
+
+                    currentPosition = position
+                }
+            }
+        })
+
     }
 
-    fun centerAtPosition(position: Int) {
+    private fun getCurrentItem(): Int {
+        return (binding.packagesRecycler.layoutManager as LinearLayoutManager)
+            .findFirstVisibleItemPosition()
+    }
+
+    private fun centerAtPosition(position: Int) {
         binding.packagesRecycler.post {
             val cardWidth = CardShapeView.factorWidth * binding.packagesRecycler.width
             val centerRecyclerViewPoint = binding.packagesRecycler.width * 0.5
             val center = centerRecyclerViewPoint - (cardWidth * 0.5)
             customLinearLayoutManager.scrollToPositionWithOffset(position, center.toInt())
         }
-
+        indicator.animatePageSelected(2)
     }
 
     private fun init() {

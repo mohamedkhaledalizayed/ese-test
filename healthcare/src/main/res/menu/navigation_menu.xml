@@ -26,7 +26,7 @@
         <item
             android:id="@+id/medical_directory"
             android:title="@string/medical_directory"
-            android:icon="@drawable/wallet"/>
+            android:icon="@drawable/medical_directory"/>
     </group>
 
     <group android:id="@+id/menu_wallet">
