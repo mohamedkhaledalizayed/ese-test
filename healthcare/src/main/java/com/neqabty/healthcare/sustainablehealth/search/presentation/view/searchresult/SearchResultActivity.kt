@@ -27,11 +27,13 @@ var selectedGovernorate = 0
 var selectedProfession = 0
 var selectedProviders = 0
 var selectedDegree = 0
+var selectedArea = 0
 
 @AndroidEntryPoint
 class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFilterListener {
 
     private var governorateId = ""
+    private var areaId = ""
     private var serviceProviderTypeId = ""
     private var name = ""
     private var professionId = ""
@@ -102,24 +104,34 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
             search()
         }
 
+        binding.areaClose.setOnClickListener {
+            binding.areaContainer.visibility = View.GONE
+            areaId = ""
+            selectedArea = 0
+            search()
+        }
+
         binding.professionClose.setOnClickListener {
             binding.professionContainer.visibility = View.GONE
             professionId = ""
             selectedProfession = 0
             search()
         }
+
         binding.typeClose.setOnClickListener {
             binding.typeContainer.visibility = View.GONE
             serviceProviderTypeId = ""
             selectedProviders = 0
             search()
         }
+
         binding.degreesClose.setOnClickListener {
             binding.degreesContainer.visibility = View.GONE
             degree = ""
             selectedDegree = 0
             search()
         }
+
         binding.searchToolbar.search.setOnEditorActionListener(object :
             TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
@@ -196,11 +208,11 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
         visibleItemsCount = 0
         totalItemsCount = 0
         previousTotal = 0
-        searchViewModel.getProviders(SearchBody(governorateId, serviceProviderTypeId, name, professionId, pageNumber))
+        searchViewModel.getProviders(SearchBody(governorateId, areaId, serviceProviderTypeId, name, professionId, pageNumber))
     }
 
     private fun pagination() {
-        searchViewModel.getProviders(SearchBody(governorateId, serviceProviderTypeId, name, professionId, pageNumber))
+        searchViewModel.getProviders(SearchBody(governorateId, areaId, serviceProviderTypeId, name, professionId, pageNumber))
     }
 
     override fun onResume() {
@@ -211,13 +223,21 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
         }
     }
 
-    override fun onFilterClicked(government: ItemUi?, profession: ItemUi?, providerType: ItemUi?, degrees: ItemUi?) {
+    override fun onFilterClicked(government: ItemUi?, profession: ItemUi?, providerType: ItemUi?, degrees: ItemUi?, area: ItemUi?) {
         government?.let {
             binding.governmentContainer.visibility = View.VISIBLE
             governorateId = it.id.toString()
             binding.government.text = it.name
         } ?: run {
             binding.governmentContainer.visibility = View.GONE
+        }
+
+        area?.let {
+            binding.areaContainer.visibility = View.VISIBLE
+            areaId = it.id.toString()
+            binding.area.text = it.name
+        } ?: run {
+            binding.areaContainer.visibility = View.GONE
         }
 
         profession?.let {

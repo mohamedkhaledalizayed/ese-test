@@ -54,6 +54,42 @@
                 android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
         </FrameLayout>
 
+        <TextView
+            android:id="@+id/area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/city"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+
+        <FrameLayout
+            android:id="@+id/spinner_area_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/edit_text_bg"
+            android:padding="@dimen/_8sdp"
+            >
+
+            <Spinner
+                android:id="@+id/sp_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:popupBackground="@color/splash_bg" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        </FrameLayout>
+
 
         <TextView
             android:layout_width="wrap_content"

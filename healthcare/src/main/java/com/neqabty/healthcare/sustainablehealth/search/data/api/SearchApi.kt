@@ -1,8 +1,10 @@
 package com.neqabty.healthcare.sustainablehealth.search.data.api
 
+import com.neqabty.healthcare.sustainablehealth.search.data.model.AreaBody
 import com.neqabty.healthcare.sustainablehealth.search.data.model.MedicalProvidersResponse
 import com.neqabty.healthcare.sustainablehealth.search.data.model.Response
 import com.neqabty.healthcare.sustainablehealth.search.data.model.SearchBody
+import com.neqabty.healthcare.sustainablehealth.search.data.model.area.AreaListModel
 import com.neqabty.healthcare.sustainablehealth.search.data.model.filter.FiltersListModel
 import com.neqabty.healthcare.sustainablehealth.search.data.model.packages.PackagesListModel
 import com.neqabty.healthcare.sustainablehealth.search.data.model.search.ProvidersResponse
@@ -21,6 +23,9 @@ interface SearchApi {
 
     @GET("medicalProviders/getLockups")
     suspend fun getFilters(): FiltersListModel
+
+    @POST("medicalProviders/getAreasByGov")
+    suspend fun getAreasByGov(@Body body: AreaBody): AreaListModel
 
     @GET("packages")
     suspend fun getPackages(@Query("entity_code") code: String): PackagesListModel

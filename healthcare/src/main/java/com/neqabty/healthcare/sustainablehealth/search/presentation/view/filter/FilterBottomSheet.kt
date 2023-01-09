@@ -3,6 +3,7 @@ package com.neqabty.healthcare.sustainablehealth.search.presentation.view.filter
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -25,13 +26,16 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
     private val professionAdapter = CustomAdapter()
     private val providerTypesAdapter = CustomAdapter()
     private val degreeAdapter = CustomAdapter()
+    private val areaAdapter = CustomAdapter()
 
     private var governorate: ItemUi? = null
     private var serviceProviderType: ItemUi? = null
     private var profession: ItemUi? = null
     private var degree: ItemUi? = null
+    private var area: ItemUi? = null
 
     private var filtersData: FiltersUi? = null
+    private var areasData: List<ItemUi>? = null
 
     @SuppressLint("RestrictedApi")
     override fun setupDialog(dialog: Dialog, style: Int) {
@@ -54,6 +58,12 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
                 if (filtersData != null && i != 0) {
                     governorate = filtersData?.governorates?.get(i - 1)
                     selectedGovernorate = i
+
+                    filtersViewModel.getAreas(governorate!!.id)
+                }else{
+                    governorate = null
+                    binding.area.visibility = View.GONE
+                    binding.spinnerAreaContainer.visibility = View.GONE
                 }
             }
 
@@ -93,6 +103,15 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
                         profession = null
                         degree = null
                     }
+                }else{
+                    binding.spinnerDegreeContainer.visibility = View.GONE
+                    binding.spinnerSpeContainer.visibility = View.GONE
+                    binding.degree.visibility = View.GONE
+                    binding.professions.visibility = View.GONE
+
+                    serviceProviderType = null
+                    profession = null
+                    degree = null
                 }
             }
 
@@ -105,11 +124,29 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
                 if (filtersData != null && i != 0) {
                     degree = filtersData?.degrees?.get(i - 1)
                     selectedDegree = i
+                }else{
+                    degree = null
                 }
             }
 
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
         }
+
+        binding.spArea.adapter = areaAdapter
+        binding.spArea.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                if (areasData != null && i != 0) {
+                    area = areasData?.get(i - 1)
+                    selectedArea = i
+                }else{
+                    area = null
+                }
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
+
+
         filtersViewModel.getFilters()
         filtersViewModel.filters.observe(this) {
             it.let { resource ->
@@ -151,9 +188,38 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
             }
         }
 
+
+        filtersViewModel.area.observe(this) {
+            it.let { resource ->
+
+                when (resource.status) {
+                    Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS -> {
+                        areasData = resource.data
+                        binding.progressCircular.visibility =
+                            View.GONE
+
+                        areaAdapter.submitList(
+                            resource.data!!.toMutableList()
+                                .also { list -> list.add(0, ItemUi(0, "اختر المدينة")) })
+
+                        binding.area.visibility = View.VISIBLE
+                        binding.spinnerAreaContainer.visibility = View.VISIBLE
+                        binding.spArea.setSelection(selectedArea)
+                    }
+                    Status.ERROR -> {
+                        binding.progressCircular.visibility = View.GONE
+                    }
+                }
+
+            }
+        }
+
         binding.filterBtn.setOnClickListener {
             val searchActivity = activity as SearchResultActivity
-            searchActivity.onFilterClicked(governorate, profession, serviceProviderType, degree)
+            searchActivity.onFilterClicked(governorate, profession, serviceProviderType, degree, area)
             dismiss()
         }
 

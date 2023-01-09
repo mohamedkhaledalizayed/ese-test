@@ -2,12 +2,14 @@ package com.neqabty.healthcare.sustainablehealth.search.data.repository
 
 
 import com.neqabty.healthcare.sustainablehealth.search.data.model.SearchBody
+import com.neqabty.healthcare.sustainablehealth.search.data.model.area.AreaModel
 import com.neqabty.healthcare.sustainablehealth.search.data.model.mappers.toFiltersEntity
 import com.neqabty.healthcare.sustainablehealth.search.data.model.mappers.toMedicalProviderEntity
 import com.neqabty.healthcare.sustainablehealth.search.data.model.packages.DetailModel
 import com.neqabty.healthcare.sustainablehealth.search.data.model.packages.PackageModel
 import com.neqabty.healthcare.sustainablehealth.search.data.source.SearchDS
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.MedicalProviderEntity
+import com.neqabty.healthcare.sustainablehealth.search.domain.entity.area.AreaListEntity
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.filter.FiltersEntity
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.DetailEntity
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.PackagesEntity
@@ -35,6 +37,12 @@ class SearchRepositoryImpl @Inject constructor(private val searchDS: SearchDS) :
     override fun getFilters(): Flow<FiltersEntity> {
         return flow {
             emit(searchDS.getFilters().toFiltersEntity())
+        }
+    }
+
+    override fun getArea(id: Int): Flow<List<AreaListEntity>> {
+        return flow {
+            emit(searchDS.getAreasByGov(id).map { it.toAreaListEntity() })
         }
     }
 
@@ -73,6 +81,13 @@ private fun DetailModel.toDetailEntity(): DetailEntity{
         description = description,
         id = id,
         title = title
+    )
+}
+
+private fun AreaModel.toAreaListEntity(): AreaListEntity{
+    return AreaListEntity(
+        areaName = areaName,
+        id = id
     )
 }
 
