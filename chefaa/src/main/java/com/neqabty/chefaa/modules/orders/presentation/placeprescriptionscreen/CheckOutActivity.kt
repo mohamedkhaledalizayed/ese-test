@@ -4,12 +4,9 @@ package com.neqabty.chefaa.modules.orders.presentation.placeprescriptionscreen
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -17,14 +14,12 @@ import android.util.Base64
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.annotation.NonNull
 import androidx.lifecycle.lifecycleScope
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Cart
 import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.core.data.Constants.selectedAddress
 import com.neqabty.chefaa.core.ui.BaseActivity
-import com.neqabty.chefaa.core.utils.FileUtils
 import com.neqabty.chefaa.core.utils.Status
 import com.neqabty.chefaa.databinding.CehfaaActivityCheckOutBinding
 import com.neqabty.chefaa.modules.verifyuser.view.VerifyUserActivity
@@ -32,10 +27,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileInputStream
-import java.io.FileNotFoundException
+
 
 
 @AndroidEntryPoint
@@ -182,24 +175,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                 placeOrderViewModel.placePrescriptionImages(selectedAddress?.id!!,  deviceName, currentLocation)
             }
             binding.checkout.visibility = View.GONE
-    }
-
-    @NonNull
-    private suspend fun prepareFileBase64(
-        fileUri: Uri
-    ): String {
-        val imagefile = FileUtils.getFile(this, fileUri)
-        var fis: FileInputStream? = null
-        try {
-            fis = FileInputStream(imagefile)
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        }
-        val bm: Bitmap = BitmapFactory.decodeStream(fis)
-        val baos = ByteArrayOutputStream()
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val b: ByteArray = baos.toByteArray()
-        return Base64.encodeToString(b, Base64.DEFAULT)
     }
 
     override fun onLocationChanged(location: Location) {

@@ -6,8 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.chefaa.core.utils.AppUtils
 import com.neqabty.chefaa.core.utils.Resource
 import com.neqabty.chefaa.modules.orders.domain.entities.ItemEntity
-import com.neqabty.chefaa.modules.orders.domain.entities.OrderClientEntity
-import com.neqabty.chefaa.modules.orders.domain.entities.OrderEntity
 import com.neqabty.chefaa.modules.orders.domain.usecases.GetSpecificOrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

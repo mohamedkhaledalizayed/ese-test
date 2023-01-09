@@ -9,7 +9,6 @@ import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
 import com.neqabty.chefaa.modules.products.domain.usecases.ProductSearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,7 +17,6 @@ import javax.inject.Inject
 class ProductViewModel @Inject constructor(private val searchProductUseCase: ProductSearchUseCase) :
     ViewModel() {
     val products = MutableLiveData<Resource<List<ProductEntity>>>()
-    val errorMessage = MutableStateFlow("")
     fun search(keyWord: String) {
         viewModelScope.launch(Dispatchers.IO) {
             products.postValue(Resource.loading(data = null))

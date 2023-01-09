@@ -1,7 +1,7 @@
 package com.neqabty.chefaa.modules.address.data.source
 
-import com.google.gson.annotations.SerializedName
-import com.neqabty.chefaa.modules.ChefaaResponse
+
+
 import com.neqabty.chefaa.modules.address.data.api.AddressApi
 import com.neqabty.chefaa.modules.address.data.models.AddUserAddressBody
 import com.neqabty.chefaa.modules.address.data.models.AddressModel

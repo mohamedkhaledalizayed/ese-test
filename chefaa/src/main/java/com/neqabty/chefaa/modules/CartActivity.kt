@@ -25,7 +25,6 @@ import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.core.utils.PhotoUI
 import com.neqabty.chefaa.databinding.ChefaaActivityCartBinding
 import com.neqabty.chefaa.modules.address.presentation.view.adressscreen.AddressesActivity
-import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.chefaa.modules.orders.presentation.placeprescriptionscreen.CheckOutActivity
 import dagger.hilt.android.AndroidEntryPoint

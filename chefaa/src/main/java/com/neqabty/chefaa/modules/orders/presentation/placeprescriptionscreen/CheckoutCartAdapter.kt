@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants.cart
-import com.neqabty.chefaa.databinding.CartLayoutItemBinding
 import com.neqabty.chefaa.databinding.CheckoutCartLayoutItemBinding
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso

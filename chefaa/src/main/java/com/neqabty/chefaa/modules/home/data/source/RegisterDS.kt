@@ -1,6 +1,6 @@
 package com.neqabty.chefaa.modules.home.data.source
 
-import com.neqabty.chefaa.modules.ChefaaResponse
+
 import com.neqabty.chefaa.modules.home.data.api.RegisterApi
 import com.neqabty.chefaa.modules.home.domain.entities.RegistrationEntity
 import javax.inject.Inject

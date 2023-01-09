@@ -6,11 +6,7 @@ import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -19,9 +15,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.neqabty.chefaa.R
-import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.data.Constants.LATITUDE
 import com.neqabty.chefaa.core.data.Constants.LONGITUDE
 import com.neqabty.chefaa.core.data.Constants.latitude
@@ -30,16 +24,13 @@ import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.databinding.ActivitySelectLocationBinding
 import com.neqabty.chefaa.modules.address.presentation.view.addaddressscreen.AddAddressActivity
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.DecimalFormat
 import java.util.*
-import kotlin.math.roundToInt
 
 
 @AndroidEntryPoint
 class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>(), OnMapReadyCallback {
 
-//    private var latitude = 30.043963618425664
-//    private var longitude = 31.234388016164303
+
     private var district: String? = ""
     private var city: String? = ""
     private var gov: String? = ""
@@ -97,7 +88,6 @@ class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>(), On
 //        val cityName = addresses[0].getAddressLine(0)
 
         binding.address.text = "${district ?: ""}, ${city ?: ""}, ${gov ?: ""}"
-//        findViewById<TextView>(R.id.address).text = "$cityName"
 
     }
 

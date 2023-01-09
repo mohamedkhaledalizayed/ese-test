@@ -95,7 +95,7 @@
                  android:layout_height="wrap_content"
                  android:layout_marginStart="@dimen/_10sdp"
                  android:layout_gravity="center"
-                 android:text="البائع : أقرب صيدلية"
+                 android:text="@string/seller"
                  android:textSize="@dimen/_10ssp"
                  android:textColor="@color/black"
                  android:textStyle="bold" />

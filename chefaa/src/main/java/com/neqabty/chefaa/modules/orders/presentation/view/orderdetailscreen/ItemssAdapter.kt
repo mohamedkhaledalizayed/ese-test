@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.chefaa.R
-import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.databinding.ProductLayoutItemBinding
 import com.neqabty.chefaa.modules.orders.domain.entities.ItemEntity
 import com.squareup.picasso.Callback
