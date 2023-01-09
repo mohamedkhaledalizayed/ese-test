@@ -23,6 +23,7 @@ import com.neqabty.presentation.common.BaseFragment
 import com.neqabty.presentation.common.Constants
 import com.neqabty.presentation.entities.MedicalRenewalPaymentUI
 import com.neqabty.presentation.entities.MedicalRenewalUI
+import com.neqabty.presentation.entities.PaymentRequestUI
 import com.neqabty.presentation.util.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.medical_renew_details_fragment.*
@@ -54,6 +55,7 @@ class MedicalRenewDetailsFragment : BaseFragment() {
     lateinit var address: String
     lateinit var mobile: String
     lateinit var medicalRenewalUI: MedicalRenewalUI
+    lateinit var paymentRequestUI: PaymentRequestUI
 
     var commission: Double = 0.0
     var newAmount: Double = 0.0
@@ -192,6 +194,19 @@ class MedicalRenewDetailsFragment : BaseFragment() {
     private fun handleViewState(state: MedicalRenewDetailsViewState) {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
+            state.fawryTransactionUI?.let{
+                showAlert(getString(R.string.payment_reference) + it.referenceNumber){
+                    navController().popBackStack()
+                    navController().navigate(R.id.homeFragment)
+                }
+                return
+            }
+            state.paymentRequestUI?.let {
+                paymentRequestUI = it
+                if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_fawry)
+                    medicalRenewDetailsViewModel.createFawryTransaction(paymentRequestUI.refId)// cowPayPayment(false)
+                return
+            }
             state.medicalRenewalPayment?.let {
                 medicalRenewalPaymentUI = it
                 if ((state.medicalRenewalPayment as MedicalRenewalPaymentUI).resultType == "-2")
@@ -220,7 +235,7 @@ class MedicalRenewDetailsFragment : BaseFragment() {
             else -> ""
         }
         PaymentTask.sandBox = Constants.OPAY_MODE
-        val userInfo = UserInfo("", sharedPref.user, sharedPref.mobile, sharedPref.name)
+        val userInfo = UserInfo(medicalRenewalPaymentUI.paymentItem?.amount.toString(), sharedPref.user, sharedPref.mobile, sharedPref.name)
         val payInput = PayInput(
             publickey = Constants.OPAY_PUBLIC_KEY,
             merchantId = Constants.OPAY_MERCHANT_ID,
@@ -331,8 +346,8 @@ class MedicalRenewDetailsFragment : BaseFragment() {
             else if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
                 oPayPayment(Constants.PaymentOption.MobileWallet)
             else
-                cowPayPayment(false)
-            dialog.dismiss()
+                addMedicalRequest()
+                dialog.dismiss()
         }
         builder?.setNegativeButton(getString(R.string.cancel_btn)) { dialog, which ->
             dialog.dismiss()
@@ -377,6 +392,14 @@ class MedicalRenewDetailsFragment : BaseFragment() {
                 }
             }
         }
+    }
+
+    fun addMedicalRequest(){
+        medicalRenewDetailsViewModel.addMedicalRenewalRequest(sharedPref.mobile, sharedPref.user, sharedPref.name, 1,
+            if (rb_card.isChecked) "card" else "pos",
+            if (rb_card.isChecked) 3 else if (rb_channel.isChecked) 2 else 4,
+            deliveryType, address, mobile
+        )
     }
 
     //endregion

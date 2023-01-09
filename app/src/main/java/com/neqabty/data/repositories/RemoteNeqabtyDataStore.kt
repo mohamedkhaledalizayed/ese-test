@@ -338,6 +338,36 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
 //        }
     }
 
+    private val paymentRequestDataEntityMapper = PaymentRequestDataEntityMapper()
+
+    override fun addMedicalRenewalRequestNew(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        return api.getMedicalRenewPaymentDataNew(
+            AddMedicalRenewalRequest(
+                userNumber,
+                userName,
+                mobileNumber,
+                locationType,
+                address,
+                mobile,
+                serviceID,
+                paymentType,
+                paymentGatewayId
+            )
+        ).flatMap { renewalPaymentInfo ->
+            Observable.just(paymentRequestDataEntityMapper.mapFrom(renewalPaymentInfo.data!!))
+        }
+    }
+
     private val medicalRenewalEntityDataMapper = MedicalRenewalEntityDataMapper()
     private val medicalRenewalUpdateDataEntityMapper = MedicalRenewalUpdateDataEntityMapper()
 
@@ -441,6 +471,42 @@ class RemoteNeqabtyDataStore @Inject constructor(@Named(DI.authorized) private v
             Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalData))
         } else api.addRenewalRequest(mobileNumber, userNumber, serviceID, requestID, amount, locationType, address, mobile).flatMap { renewalData ->
             Observable.just(medicalRenewalPaymentDataEntityMapper.mapFrom(renewalData))
+        }
+    }
+
+    override fun addRenewalRequestNew(
+        mobileNumber: String,
+        userNumber: String,
+        userName: String,
+        serviceID: Int,
+        paymentType: String,
+        paymentGatewayId: Int,
+        locationType: Int,
+        address: String,
+        mobile: String
+    ): Observable<PaymentRequestEntity> {
+        return api.addRenewalRequestNew(
+            AddInquiryRequest(
+                userNumber,
+                userName,
+                mobileNumber,
+                locationType,
+                address,
+                mobile,
+                serviceID,
+                paymentType,
+                paymentGatewayId
+            )
+        ).flatMap { renewalData ->
+            Observable.just(paymentRequestDataEntityMapper.mapFrom(renewalData.data!!))
+        }
+    }
+
+    private val fawryTransactionDataEntityMapper = FawryTransactionDataEntityMapper()
+
+    override fun createFawryTransaction(refrenceId: String): Observable<FawryTransactionEntity> {
+        return api.createFawryTransaction(FawryTransactionRequest(refrenceId)).flatMap { transactionData ->
+            Observable.just(fawryTransactionDataEntityMapper.mapFrom(transactionData.data!!))
         }
     }
 

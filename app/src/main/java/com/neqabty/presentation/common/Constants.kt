@@ -34,10 +34,10 @@ object Constants {
     var OPAY_PUBLIC_KEY = if (BuildConfig.DEBUG) "OPAYPUB16386946354660.48619730311207143" else "OPAYPUB16383585551500.36105494805860716"
     var COWPAY_MODE = if (BuildConfig.DEBUG) CowpayConstantKeys.SandBox else CowpayConstantKeys.Production
     var OPAY_MODE = BuildConfig.DEBUG
-    var CC_COMMISSION = .0288
-    var POS_COMMISSION = .0101
-    var FAWRY_COMMISSION = .0101
-    var MIN_COMMISSION = 6.0
+    var CC_COMMISSION = 0.0
+    var POS_COMMISSION = 0.0
+    var FAWRY_COMMISSION = 0.0
+    var MIN_COMMISSION = 0.0
     var CLAIMING = 1
     var TRIPS = 2
     var RECORDS = 3
