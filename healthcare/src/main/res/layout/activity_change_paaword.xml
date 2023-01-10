@@ -34,6 +34,15 @@
         android:textSize="@dimen/_10ssp"
         android:inputType="textPassword" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/password_conditions"
+        android:textSize="@dimen/_8ssp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:textColor="#434343"
+        />
+
     <EditText
         android:id="@+id/confirm_password"
         android:layout_width="match_parent"

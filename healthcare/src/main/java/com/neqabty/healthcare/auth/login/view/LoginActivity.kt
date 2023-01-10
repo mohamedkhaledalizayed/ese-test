@@ -37,7 +37,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
 
         binding.forgetPassword.setOnClickListener {
-            startActivity(Intent(this, ForgetPasswordActivity::class.java))
+            val intent = Intent(this, ForgetPasswordActivity::class.java)
+            intent.putExtra("phone", binding.etUsername.text.toString())
+            startActivity(intent)
         }
 
         binding.etUsername.setText(intent.getStringExtra("phone").toString())

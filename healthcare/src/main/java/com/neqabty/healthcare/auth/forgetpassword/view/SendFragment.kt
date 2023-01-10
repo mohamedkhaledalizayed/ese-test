@@ -10,10 +10,18 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.FragmentSendBinding
 
 
+private const val ARG_PARAM1 = "phone"
 
 class SendFragment : Fragment() {
-
+    private var phone: String? = null
     private lateinit var binding: FragmentSendBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            phone = it.getString(ARG_PARAM1)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +34,8 @@ class SendFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.ccp.registerCarrierNumberEditText(binding.phone)
+        binding.phone.isEnabled = false
+        binding.phone.setText(phone)
         binding.btnSend.setOnClickListener {
 
             if (binding.phone.text.toString().isNullOrEmpty()){
@@ -34,15 +43,22 @@ class SendFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (binding.ccp.isValidFullNumber) {
-                val activity = requireActivity() as ForgetPasswordActivity
-                activity.onSendClicked(binding.ccp.fullNumberWithPlus)
-            }else{
-                Toast.makeText(requireContext(), "الرقم الذى ادخلته غير صحيح.", Toast.LENGTH_LONG).show()
-            }
+            val activity = requireActivity() as ForgetPasswordActivity
+            activity.onSendClicked()
 
         }
 
+    }
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance(param1: String) =
+            SendFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                }
+            }
     }
 
 }

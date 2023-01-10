@@ -295,6 +295,7 @@
     <string name="full_name">الأسم بالكامل</string>
     <string name="neqabty_auth">نقابتى</string>
     <string name="enter_num">برجاء إدخال رقم الهاتف المحمول لتاكيد \n حسابك الخاص</string>
+    <string name="enter_num_code">برجاء تاكيد رقم الهاتف المحمول لتاكيد \n حسابك الخاص</string>
     <string name="confirm_message">لقد تم إنشاء حسابك بنجاح, مع العلم ان كلمة المرور الخاصة بك هى اخر 4 ارقام من الرقم القومى الخاص بك.</string>
     <string name="confirm_message_serial">لقد تم إنشاء حسابك بنجاح, مع العلم ان كلمة المرور الخاصة بك هى اخر 4 ارقام من مسلسل الكمبيوتر الخاص بك.</string>
     <string name="there_is_no_syndicates">لا يوجد نقابات</string>

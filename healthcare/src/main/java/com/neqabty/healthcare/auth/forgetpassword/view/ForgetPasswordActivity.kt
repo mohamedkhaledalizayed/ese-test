@@ -4,6 +4,7 @@ package com.neqabty.healthcare.auth.forgetpassword.view
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
@@ -29,12 +30,14 @@ class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding>(), IF
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        phoneNumber = intent.getStringExtra("phone").toString()
+        Log.e("phoneNumber", phoneNumber)
         loading = SpotsDialog.Builder()
             .setContext(this)
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        val fragment: Fragment = SendFragment()
+        val fragment: Fragment = SendFragment.newInstance(phoneNumber)
 
         val fm: FragmentManager = supportFragmentManager
         val transaction: FragmentTransaction = fm.beginTransaction()
@@ -75,8 +78,7 @@ class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding>(), IF
         transaction.commit()
     }
 
-    override fun onSendClicked(phone: String) {
-        phoneNumber = phone
+    override fun onSendClicked() {
         forgetPasswordViewModel.sendOTP(SendOTPBody(mobile = phoneNumber))
     }
 
