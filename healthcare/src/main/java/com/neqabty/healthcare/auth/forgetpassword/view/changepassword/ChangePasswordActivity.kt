@@ -2,6 +2,8 @@ package com.neqabty.healthcare.auth.forgetpassword.view.changepassword
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.chefaa.core.ui.BaseActivity
@@ -16,6 +18,8 @@ import dmax.dialog.SpotsDialog
 class ChangePasswordActivity : BaseActivity<ActivityChangePaawordBinding>() {
     private lateinit var loading: AlertDialog
     private var token = ""
+    private var isHidden = true
+    private var isHiddenConfirm = true
     private val changePasswordViewModel: ChangePasswordViewModel by viewModels()
     override fun getViewBinding() = ActivityChangePaawordBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,5 +97,33 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePaawordBinding>() {
             }
         }
 
+        binding.newPassword.customSelectionActionModeCallback = actionMode
+        binding.confirmPassword.customSelectionActionModeCallback = actionMode
+
     }
+
+    fun showHidePassword(view: View) {
+        if (isHidden) {
+            isHidden = false
+            binding.newPassword.transformationMethod = null
+            binding.showHide.setImageResource(R.drawable.ic_baseline_visibility_24)
+        } else {
+            isHidden = true
+            binding.newPassword.transformationMethod = PasswordTransformationMethod()
+            binding.showHide.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+        }
+    }
+
+    fun showHideConfirmPassword(view: View) {
+        if (isHiddenConfirm) {
+            isHiddenConfirm = false
+            binding.confirmPassword.transformationMethod = null
+            binding.showHidePassword.setImageResource(R.drawable.ic_baseline_visibility_24)
+        } else {
+            isHiddenConfirm = true
+            binding.confirmPassword.transformationMethod = PasswordTransformationMethod()
+            binding.showHidePassword.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+        }
+    }
+
 }

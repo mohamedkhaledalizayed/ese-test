@@ -12,27 +12,74 @@
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/password"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_height="@dimen/_150sdp"
         app:lottie_autoPlay="true"
         app:lottie_rawRes="@raw/forgot_password"
         app:lottie_speed="1"
         foo:lottie_loop="true"
         />
 
-    <EditText
-        android:id="@+id/new_password"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_bg"
-        android:hint="@string/new_password"
         android:layout_marginTop="@dimen/_30sdp"
-        android:padding="@dimen/_10sdp"
-        android:textAlignment="viewStart"
-        android:textColor="@color/black"
-        android:textColorHint="@color/dark_grey"
-        android:textStyle="bold"
-        android:textSize="@dimen/_10ssp"
-        android:inputType="textPassword" />
+        android:background="@drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/cl_username">
+
+        <ImageView
+            android:id="@+id/show_hide"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="8dp"
+            android:onClick="showHidePassword"
+            android:src="@drawable/ic_baseline_visibility_off_24"
+            app:layout_constraintBottom_toBottomOf="@id/new_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/new_password"
+            app:layout_constraintTop_toTopOf="@id/new_password" />
+
+        <EditText
+            android:id="@+id/new_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/new_password"
+            android:padding="@dimen/_10sdp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textColorHint="#7C7B7B"
+            android:textSize="@dimen/_10ssp"
+            android:inputType="textPassword"
+            android:longClickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/show_hide"
+            app:layout_constraintStart_toEndOf="@id/seperator22"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/seperator22"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:background="#748A9D"
+            app:layout_constraintBottom_toBottomOf="@id/user_iv22"
+            app:layout_constraintStart_toEndOf="@id/user_iv22"
+            app:layout_constraintTop_toTopOf="@id/user_iv22" />
+
+        <ImageView
+            android:id="@+id/user_iv22"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:src="@drawable/ic_lock"
+            app:layout_constraintBottom_toBottomOf="@id/new_password"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/new_password" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -43,20 +90,68 @@
         android:textColor="#434343"
         />
 
-    <EditText
-        android:id="@+id/confirm_password"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_confirm_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edit_text_bg"
-        android:hint="@string/confirm_password"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:padding="@dimen/_10sdp"
-        android:textAlignment="viewStart"
-        android:textColor="@color/black"
-        android:textColorHint="@color/dark_grey"
-        android:textStyle="bold"
-        android:textSize="@dimen/_10ssp"
-        android:inputType="textPassword" />
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/cl_username">
+
+        <ImageView
+            android:id="@+id/show_hide_password"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="8dp"
+            android:onClick="showHideConfirmPassword"
+            android:src="@drawable/ic_baseline_visibility_off_24"
+            app:layout_constraintBottom_toBottomOf="@id/confirm_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/confirm_password"
+            app:layout_constraintTop_toTopOf="@id/confirm_password" />
+
+        <EditText
+            android:id="@+id/confirm_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/new_password"
+            android:padding="@dimen/_10sdp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textColorHint="#7C7B7B"
+            android:textSize="@dimen/_10ssp"
+            android:inputType="textPassword"
+            android:longClickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/show_hide_password"
+            app:layout_constraintStart_toEndOf="@id/seperator_password"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <View
+            android:id="@+id/seperator_password"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:background="#748A9D"
+            app:layout_constraintBottom_toBottomOf="@id/user_iv_password"
+            app:layout_constraintStart_toEndOf="@id/user_iv_password"
+            app:layout_constraintTop_toTopOf="@id/user_iv_password" />
+
+        <ImageView
+            android:id="@+id/user_iv_password"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:src="@drawable/ic_lock"
+            app:layout_constraintBottom_toBottomOf="@id/confirm_password"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/confirm_password" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <Button
         android:id="@+id/change_password"
