@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.sustainablehealth.search.presentation.mappers
 
+import com.neqabty.healthcare.sustainablehealth.search.domain.entity.area.AreaListEntity
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.filter.*
 import com.neqabty.healthcare.sustainablehealth.search.presentation.model.filters.FiltersUi
 import com.neqabty.healthcare.sustainablehealth.search.presentation.model.filters.ItemUi
@@ -11,6 +12,13 @@ fun FiltersEntity.toFiltersUi(): FiltersUi{
         providerTypes = providerTypes.map { it.toProviderTypeUi() },
         degrees = degrees.map { it.toDegreeUi() }
 
+    )
+}
+
+fun AreaListEntity.toAreaListUi(): ItemUi{
+    return ItemUi(
+        id = id,
+        name = areaName
     )
 }
 
