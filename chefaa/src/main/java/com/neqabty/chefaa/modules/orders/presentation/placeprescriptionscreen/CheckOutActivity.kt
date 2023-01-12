@@ -172,6 +172,12 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
     }
 
     fun checkOut(view: View) {
+
+        if (!checkGPS()){
+            buildAlertMessageNoGps()
+            return
+        }
+
         deliveryNote = binding.noteContent.text.toString()
             lifecycleScope.launch(Dispatchers.IO) {
                 cart.imageList.map {
