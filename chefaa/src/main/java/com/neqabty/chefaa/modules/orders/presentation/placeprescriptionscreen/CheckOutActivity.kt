@@ -191,24 +191,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
             binding.checkout.visibility = View.GONE
     }
 
-    @NonNull
-    private suspend fun prepareFileBase64(
-        fileUri: Uri
-    ): String {
-        val imagefile = FileUtils.getFile(this, fileUri)
-        var fis: FileInputStream? = null
-        try {
-            fis = FileInputStream(imagefile)
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        }
-        val bm: Bitmap = BitmapFactory.decodeStream(fis)
-        val baos = ByteArrayOutputStream()
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val b: ByteArray = baos.toByteArray()
-        return Base64.encodeToString(b, Base64.DEFAULT)
-    }
-
     override fun onLocationChanged(location: Location) {
         currentLocation = "${location.latitude},${location.longitude}"
     }
