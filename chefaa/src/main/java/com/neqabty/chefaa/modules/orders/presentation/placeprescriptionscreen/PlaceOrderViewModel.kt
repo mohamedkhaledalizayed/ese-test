@@ -21,11 +21,11 @@ import javax.inject.Inject
 class PlaceOrderViewModel @Inject constructor(private val placeOrderUseCase: PlaceOrderUseCase) :
     ViewModel() {
     val placeImagesResult = MutableLiveData<Resource<PlaceOrderResult>>()
-    fun placePrescriptionImages(addressId:Int, deviceInfo:String, currentLocation:String) {
+    fun placePrescriptionImages(addressId:Int, deviceInfo:String, currentLocation:String, deliveryNote: String) {
         viewModelScope.launch(Dispatchers.IO) {
             placeImagesResult.postValue(Resource.loading(data = null))
             try {
-                placeOrderUseCase.build(cart.getOrderItems(),addressId, mobileNumber, deliveryNote = "", deviceInfo, currentLocation).collect {
+                placeOrderUseCase.build(cart.getOrderItems(),addressId, mobileNumber, deliveryNote = deliveryNote, deviceInfo, currentLocation).collect {
                     placeImagesResult.postValue(Resource.success(it))
                 }
             } catch (exception: Throwable) {

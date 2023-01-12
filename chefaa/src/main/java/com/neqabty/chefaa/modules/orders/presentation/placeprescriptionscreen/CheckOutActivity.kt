@@ -48,7 +48,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
     private var totalPrice = 0.0
     private var deviceName = ""
     private var currentLocation = ""
-
+    private var deliveryNote = ""
     private lateinit var locationManager: LocationManager
 
     override fun getViewBinding() = CehfaaActivityCheckOutBinding.inflate(layoutInflater)
@@ -172,6 +172,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
     }
 
     fun checkOut(view: View) {
+        deliveryNote = binding.noteContent.text.toString()
             lifecycleScope.launch(Dispatchers.IO) {
                 cart.imageList.map {
                     it.image = "data:image/png;base64," + Base64.encodeToString(
@@ -179,7 +180,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                         Base64.DEFAULT
                     )
                 }
-                placeOrderViewModel.placePrescriptionImages(selectedAddress?.id!!,  deviceName, currentLocation)
+                placeOrderViewModel.placePrescriptionImages(selectedAddress?.id!!,  deviceName, currentLocation, deliveryNote)
             }
             binding.checkout.visibility = View.GONE
     }
