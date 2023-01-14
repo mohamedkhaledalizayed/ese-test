@@ -60,8 +60,8 @@ class NetworkModule {
         if (!BuildConfig.DEBUG) {
             val certificatePinner : CertificatePinner = CertificatePinner.Builder()
             .add(
-                "neqabty.et3.co",
-                "sha256/zVr1dF0p4qdPAZrjWo5xzrADH3VrfjNuxd/MMJrVbEc="
+                "staging-community.neqabty.com",
+                "sha256/nrXT/b2RmJlsQHqiO7RRyu2tVMocAGci9GjSL5AcKDg="
             ).build()
 
             okHttpClient.certificatePinner(certificatePinner)
