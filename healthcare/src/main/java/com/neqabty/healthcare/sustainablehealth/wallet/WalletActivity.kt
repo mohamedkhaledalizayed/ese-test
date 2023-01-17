@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.sustainablehealth.wallet.presentation
+package com.neqabty.healthcare.sustainablehealth.wallet
 
 
 

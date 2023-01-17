@@ -91,7 +91,7 @@
             android:name=".sustainablehealth.search.presentation.view.search.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.wallet.presentation.WalletActivity"
+            android:name=".sustainablehealth.wallet.WalletActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.subscribtions.presentation.view.SubscriptionActivity"

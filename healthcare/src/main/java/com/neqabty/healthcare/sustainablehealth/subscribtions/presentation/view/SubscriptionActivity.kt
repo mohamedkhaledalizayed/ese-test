@@ -28,6 +28,7 @@ import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.healthcare.core.utils.isMobileValid
 import com.neqabty.healthcare.core.utils.isNationalIdValid
 import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
 import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
@@ -472,11 +473,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             Toast.makeText(this, "من فضلك ادخل الهاتف.", Toast.LENGTH_LONG).show()
             return
         }
-
-//        if (!binding.etReferralNumber.text.toString().isNullOrEmpty() && !binding.etReferralNumber.text.toString().isMobileValid()){
-//            Toast.makeText(this, "من فضلك ادخل رقم صحيح.", Toast.LENGTH_LONG).show()
-//            return
-//        }
 
         if (subscriptionMode){
 

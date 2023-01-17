@@ -12,15 +12,15 @@ interface ProfileApi {
 
     @FormUrlEncoded
     @POST("client/profile")
-    suspend fun getProfile(@Field("mobile") phone: String): ProfileModel
+    suspend fun getProfile(@Header("Authorization") token: String, @Field("mobile") phone: String): ProfileModel
 
     @GET("general-Lockups")
     suspend fun getRelations(): RelationsTypesModel
 
     @POST("vendor/subscribtions/follower-request")
-    suspend fun addFollower(@Body addFollowerBody: AddFollowerBody): AddFollowerModel
+    suspend fun addFollower(@Header("Authorization") token: String, @Body addFollowerBody: AddFollowerBody): AddFollowerModel
 
     @POST("vendor/subscribtions/follower-delete")
-    suspend fun deleteFollower(@Body deleteFollowerBody: DeleteFollowerBody): DeleteFollowerModel
+    suspend fun deleteFollower(@Header("Authorization") token: String, @Body deleteFollowerBody: DeleteFollowerBody): DeleteFollowerModel
 
 }

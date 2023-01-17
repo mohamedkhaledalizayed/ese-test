@@ -19,12 +19,12 @@ class SubscriptionSource @Inject constructor(private val subscriptionApi: Subscr
     suspend fun addSubscription(subscribePostBodyRequest: SubscribePostBodyRequest): SubscriptionModel {
 
         return subscriptionApi.addSubscription(
-            token = "Bearer ${sharedPreferences.token}",
+            token = "Token ${sharedPreferences.token}",
             subscribePostBodyRequest = subscribePostBodyRequest
         )
     }
 
     suspend fun updatePackage(updatePackageBody: UpdatePackageBody): UpdatePackageModel {
-        return subscriptionApi.updatePackage(updatePackageBody = updatePackageBody)
+        return subscriptionApi.updatePackage(token = "Token ${sharedPreferences.token}", updatePackageBody = updatePackageBody)
     }
 }

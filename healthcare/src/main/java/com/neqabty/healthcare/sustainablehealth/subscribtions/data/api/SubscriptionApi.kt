@@ -17,7 +17,7 @@ interface SubscriptionApi {
         @Body subscribePostBodyRequest: SubscribePostBodyRequest): SubscriptionModel
 
     @POST("vendor/subscribtions/request-update")
-    suspend fun updatePackage(@Body updatePackageBody: UpdatePackageBody): UpdatePackageModel
+    suspend fun updatePackage(@Header("Authorization") token: String, @Body updatePackageBody: UpdatePackageBody): UpdatePackageModel
 
     @GET("general-Lockups")
     suspend fun getRelations(): RelationsTypesModel
