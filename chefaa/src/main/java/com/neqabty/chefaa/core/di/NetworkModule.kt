@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import com.neqabty.chefaa.BuildConfig
 import com.neqabty.chefaa.core.data.Constants.BASE_URL_DEV
 import com.neqabty.chefaa.core.data.Constants.BASE_URL_PRO
+import com.neqabty.chefaa.core.data.Constants.BASE_URL_STAGING
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,7 +25,7 @@ class NetworkModule {
     @Provides
     @Named("chefaa")
     fun providesBaseUrl(): String {
-        return BASE_URL_DEV
+        return BASE_URL_STAGING
     }
 
     @Provides

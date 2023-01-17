@@ -228,7 +228,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
         binding.etName.customSelectionActionModeCallback = actionMode
         binding.etNationalId.customSelectionActionModeCallback = actionMode
-        binding.deliveryPhone.customSelectionActionModeCallback = actionMode
+//        binding.deliveryPhone.customSelectionActionModeCallback = actionMode
         binding.etEmail.customSelectionActionModeCallback = actionMode
         binding.etAddress.customSelectionActionModeCallback = actionMode
         binding.etJob.customSelectionActionModeCallback = actionMode
