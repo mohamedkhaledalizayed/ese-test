@@ -3,7 +3,7 @@
     <string name="chefaa" translatable="false">شفاء</string>
     <string name="add_new_address">أضف عنوان جديد</string>
     <string name="selected_address">العنوان</string>
-    <string name="addresses">اختار عنوان</string>
+    <string name="addresses">اختر عنوان</string>
     <string name="street">اسم الشارع</string>
     <string name="add_street_name">مثال: المعادى شارع 151</string>
     <string name="building">رقم المبنى</string>
