@@ -95,7 +95,6 @@ class LandingPageActivity : BaseActivity<ActivityLandingPageBinding>() {
 
         binding.changePhoneLayout.setOnClickListener {
             startActivity(Intent(this, CheckAccountActivity::class.java))
-            finish()
         }
 
         binding.ourNewsRecycler.adapter = mAdapter

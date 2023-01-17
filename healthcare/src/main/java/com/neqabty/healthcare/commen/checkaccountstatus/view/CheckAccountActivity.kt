@@ -38,10 +38,6 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
                 Toast.makeText(this, getString(R.string.enter_phone), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-//            if (!binding.phone.text.toString().isMobileValid()){
-//                Toast.makeText(this, getString(R.string.enter_corect_phone), Toast.LENGTH_LONG).show()
-//                return@setOnClickListener
-//            }
 
             if (binding.ccp.isValidFullNumber) {
                 checkAccountViewModel.checkAccount(CheckPhoneBody(mobile = binding.ccp.fullNumberWithPlus))
@@ -67,12 +63,12 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
                             val intent = Intent(this, LoginActivity::class.java)
                             intent.putExtra("phone", binding.ccp.fullNumberWithPlus)
                             startActivity(intent)
-                            finish()
+                            finishAffinity()
                         }else{
                             sharedPreferences.mobile = binding.ccp.fullNumberWithPlus
                             val intent = Intent(this, LandingPageActivity::class.java)
                             startActivity(intent)
-                            finish()
+                            finishAffinity()
                         }
                     }
                     Status.ERROR ->{
