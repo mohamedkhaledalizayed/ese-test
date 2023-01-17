@@ -94,7 +94,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                                 cart = Cart()
                                 reLaunchHomeActivity(this)
                             }
-                            205 -> {
+                            405 -> {
                                 startActivity(Intent(this, VerifyUserActivity::class.java))
                                 Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
                             }407 -> {
