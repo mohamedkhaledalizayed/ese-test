@@ -111,16 +111,9 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
         }
 
         binding.phone1.setOnClickListener {
-            call("01271211192")
+            call("0221294341")
         }
 
-        binding.phone2.setOnClickListener {
-            call("01224286395")
-        }
-
-        binding.phone3.setOnClickListener {
-            call("01278537485")
-        }
     }
 
     private fun call(phone: String){

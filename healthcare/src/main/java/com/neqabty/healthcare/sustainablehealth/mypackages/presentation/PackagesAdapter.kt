@@ -50,10 +50,14 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         val mAdapter = FollowerAdapter()
         viewHolder.binding.followersRecycler.adapter = mAdapter
 
-        if (follower.packages.paid || follower.packages.prepaid){
+        if (follower.packages.prepaid){
             viewHolder.binding.paid.visibility = View.GONE
+        }else if (follower.packages.paid){
+            viewHolder.binding.paid.setBackgroundResource(R.drawable.package_paid_bg)
+            viewHolder.binding.paid.text = "مدفوع"
         }else{
-            viewHolder.binding.paid.visibility = View.VISIBLE
+            viewHolder.binding.paid.setBackgroundResource(R.drawable.package_not_paid_bg)
+            viewHolder.binding.paid.text = "لم يتم الدفع"
         }
 
 
@@ -107,16 +111,6 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
                 onItemClickListener?.setOnAddItemClickListener(follower.packages.id, follower.packages.subscriberId, false)
             }
         }
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-    fun dateFormat(date: String): String{
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-        val newDate: Date = format.parse(date)
-        val arabicFormat = SimpleDateFormat("dd MMM yyy - hh:mm a", Locale("ar"))
-
-        return arabicFormat.format(newDate.time)
     }
 
     override fun getItemCount() = items.size

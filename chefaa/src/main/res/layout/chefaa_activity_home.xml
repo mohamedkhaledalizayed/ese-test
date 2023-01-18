@@ -277,33 +277,11 @@
                     android:fontFamily="@font/codec_pro_news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="01271211192 -"
+                    android:text="0221294341"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="@dimen/_12ssp"
                     android:layout_marginStart="@dimen/_10sdp"/>
-
-                <TextView
-                    android:id="@+id/phone_2"
-                    android:fontFamily="@font/codec_pro_news"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" 01224286395 - "
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12ssp"
-                    />
-
-                <TextView
-                    android:id="@+id/phone_3"
-                    android:fontFamily="@font/codec_pro_news"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="01278537485"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12ssp"
-                    />
 
             </LinearLayout>
 

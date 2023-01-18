@@ -77,6 +77,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
         subscriptionMode = intent.getBooleanExtra("subscriptionMode", false)
         binding.ccp.registerCarrierNumberEditText(binding.deliveryPhone)
+        binding.ccp2.registerCarrierNumberEditText(binding.etReferralNumber)
         name = intent.getStringExtra("name")
         price = intent.getDoubleExtra("price", 0.0)
         serviceCode = intent.getStringExtra("serviceCode")
@@ -487,7 +488,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                 nationalId = binding.etNationalId.text.toString(),
                 entityCode = Constants.NEQABTY_CODE,
                 serviceActionCode = "$serviceActionCode",
-                referralNumber = binding.etReferralNumber.text.toString(),
+                referralNumber = binding.ccp2.fullNumberWithPlus,
                 personalImage = userImageUri!!,
                 frontIdImage = nationalIdFrontUri!!,
                 backIdImage = nationalIdBackUri!!,

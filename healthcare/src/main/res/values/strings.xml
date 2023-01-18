@@ -71,7 +71,7 @@
     <string name="add_review">اضف تقييم</string>
     <string name="profission">التخصص</string>
     <string name="provider_type">نوع مقدم الخدمة</string>
-    <string name="invitation_code">كود الدعوة</string>
+    <string name="invitation_code">رقم صاحب دعوة الخصم</string>
     <string name="send">إرسال</string>
     <string name="content">محتوي الشكوي</string>
     <string name="change">تغيير</string>

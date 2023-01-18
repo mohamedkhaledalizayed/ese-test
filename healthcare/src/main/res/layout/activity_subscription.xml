@@ -680,13 +680,14 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/edit_text"
-                        app:layout_constraintTop_toBottomOf="@id/cl_phone">
+                        app:layout_constraintTop_toBottomOf="@id/cl_phone"
+                        android:background="@drawable/edit_text">
 
                         <EditText
                             android:id="@+id/et_referral_number"
@@ -694,18 +695,30 @@
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:hint="@string/invitation_code"
-                            android:inputType="phone"
                             android:padding="@dimen/_10sdp"
                             android:textAlignment="viewStart"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10ssp"
-                            android:textStyle="bold"
+                            android:textColor="#748A9D"
+                            android:longClickable="false"
+                            android:textColorHint="#748A9D"
+                            android:textSize="@dimen/_12ssp"
+                            android:inputType="phone"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ccp2"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.0" />
+
+                        <com.hbb20.CountryCodePicker
+                            android:id="@+id/ccp2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:ccp_autoDetectCountry="true"
+                            app:ccp_defaultLanguage="ARABIC"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:ccp_countryPreference="EG,SA,AE,KW,QA,BH"  />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
