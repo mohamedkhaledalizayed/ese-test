@@ -82,7 +82,10 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
             if (follower.packages.serviceActionCode.isNullOrEmpty()){
                 return@setOnClickListener
             }
-            onItemClickListener?.setOnPayClickListener(follower.packages.nameAr, follower.packages.packagePrice ?: "0", follower.packages.serviceCode, follower.packages.serviceActionCode)
+            if (follower.packages.paid){
+                return@setOnClickListener
+            }
+            onItemClickListener?.setOnPayClickListener(follower)
         }
 
         mAdapter.onItemClickListener = object :
@@ -132,7 +135,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
     interface OnItemClickListener {
             fun setOnDeleteItemClickListener(subscriberId: String, followerId: Int)
             fun setOnAddItemClickListener(packageId: String, subscriberId: String, IsMaxFollower: Boolean)
-            fun setOnPayClickListener(name: String, price: String, serviceCode: String, serviceActionCode: String)
+            fun setOnPayClickListener(item: SubscribedPackageEntity)
             fun setOnEditClickListener()
     }
 

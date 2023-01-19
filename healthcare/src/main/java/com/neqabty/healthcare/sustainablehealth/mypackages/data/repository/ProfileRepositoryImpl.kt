@@ -104,6 +104,8 @@ private fun Package.toPackageEntity(): PackageEntity{
         serviceActionCode = serviceActionCode,
         expiryDate = expiryDate,
         packagePrice = packagePrice,
+        vat = vat,
+        total = total,
         paid = paid,
         createdAt = createdAt
     )

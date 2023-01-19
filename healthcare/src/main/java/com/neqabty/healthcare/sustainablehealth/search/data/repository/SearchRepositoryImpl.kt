@@ -65,6 +65,8 @@ private fun PackageModel.toPackageEntity(): PackagesEntity{
         maxFollower = maxFollower,
         name = name,
         price = price,
+        vat = vat,
+        total = total,
         recommended = recommended,
         serviceActionCode = serviceActionCode,
         serviceCode = serviceCode,

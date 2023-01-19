@@ -37,6 +37,8 @@ import com.payment.paymentsdk.PaymentSdkActivity
 class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), CallbackPaymentInterface {
     private var paymentMethod = "card"
     private var totalAmount = 0
+    private var vat = 0
+    private var total = 0
     private var paymentFees = 10
     private var serviceCode = ""
     private var serviceActionCode = ""
@@ -49,11 +51,14 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
         setupToolbar(titleResId = R.string.payments_title)
 
         totalAmount = intent.getDoubleExtra("price", 0.0).toInt()
+        vat = intent.getDoubleExtra("vat", 0.0).toInt()
+        total = intent.getDoubleExtra("total", 0.0).toInt()
         serviceCode = intent.getStringExtra("serviceCode")!!
         serviceActionCode = intent.getStringExtra("serviceActionCode")!!
         binding.tvPackageName.text = "اسم الباقة : ${intent.getStringExtra("name")}"
         binding.tvPackagePrice.text = "سعر الباقة : $totalAmount جنيه"
-        binding.tvVat.text = "بعد ضريبة 14% : ${(0.14 * totalAmount).toInt() + totalAmount} جنيه"
+        binding.tvVat.text = " ضريبة القيمة المضافة : $vat جنيه"
+        binding.tvTotal.text = "سعر الباقة شامل ضريبة القيمة المضافة : $total جنيه"
         updateTotal()
         paymentViewModel.getPaymentMethods()
         paymentViewModel.paymentMethods.observe(this) { it ->
@@ -194,7 +199,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
     }
 
     private fun updateTotal(){
-        binding.tvAmount.text = "الاجمالى بعد الرسوم البنكية والاداريه : ${totalAmount + paymentFees}"
+        binding.tvAmount.text = "الاجمالى بعد الرسوم البنكية والاداريه : ${total + paymentFees} جنيه"
     }
 
     var referenceCode = ""

@@ -28,6 +28,10 @@ data class PackageModel(
     val neddedInfo: String?,
     @SerializedName("price")
     val price: Double,
+    @SerializedName("vat")
+    val vat: Double,
+    @SerializedName("total")
+    val total: Double,
     @SerializedName("recommended")
     val recommended: Boolean,
     @SerializedName("service_action_code")

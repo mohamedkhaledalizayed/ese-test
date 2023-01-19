@@ -335,5 +335,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="password_conditions">كلمة المرور يجب ان تحتوى على حروف و ارقام و رموز مثل # @ ...</string>
     <string name="city">المدينة</string>
+    <string name="vat">الأسعار غير شاملة ضريبة القيمة المضافة</string>
+    <string name="subscrie">إشترك</string>
+    <string name="more_det">المزيد من التفاصيل</string>
 
 </resources>

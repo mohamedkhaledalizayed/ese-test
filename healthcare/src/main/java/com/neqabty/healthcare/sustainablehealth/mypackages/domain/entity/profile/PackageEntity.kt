@@ -13,6 +13,8 @@ data class PackageEntity(
     val serviceCode: String,
     val serviceActionCode: String?,
     val packagePrice: String?,
+    val vat: String?,
+    val total: String?,
     val expiryDate: String?,
     val maxFollower: Int,
     val paid: Boolean,

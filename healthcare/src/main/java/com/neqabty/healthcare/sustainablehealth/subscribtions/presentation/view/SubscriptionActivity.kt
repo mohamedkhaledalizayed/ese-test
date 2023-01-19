@@ -65,6 +65,8 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private val subscriptionViewModel: SubscriptionViewModel by viewModels()
     private var name: String? = ""
     private var price: Double? = 0.0
+    private var vat: Double? = 0.0
+    private var total: Double? = 0.0
     private var serviceCode: String? = ""
     private var maxFollowers: Int = 0
     private var serviceActionCode: String? = ""
@@ -80,6 +82,8 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         binding.ccp2.registerCarrierNumberEditText(binding.etReferralNumber)
         name = intent.getStringExtra("name")
         price = intent.getDoubleExtra("price", 0.0)
+        vat = intent.getDoubleExtra("vat", 0.0)
+        total = intent.getDoubleExtra("total", 0.0)
         serviceCode = intent.getStringExtra("serviceCode")
         maxFollowers = intent.getIntExtra("maxFollowers", 0)
         serviceActionCode = intent.getStringExtra("serviceActionCode")
@@ -182,6 +186,8 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                             val intent = Intent(this, SehaPaymentActivity::class.java)
                             intent.putExtra("name", name)
                             intent.putExtra("price", price)
+                            intent.putExtra("vat", vat)
+                            intent.putExtra("total", total)
                             intent.putExtra("serviceCode", serviceCode)
                             intent.putExtra("serviceActionCode", serviceActionCode)
                             startActivity(intent)

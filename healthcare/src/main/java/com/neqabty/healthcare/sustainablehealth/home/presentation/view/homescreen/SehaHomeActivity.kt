@@ -132,6 +132,8 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                     val intent = Intent(this@SehaHomeActivity, SubscriptionActivity::class.java)
                     intent.putExtra("name", item.name )
                     intent.putExtra("price", item.price )
+                    intent.putExtra("vat", item.vat )
+                    intent.putExtra("total", item.total )
                     intent.putExtra("serviceCode", item.serviceCode )
                     intent.putExtra("maxFollowers", item.maxFollower )
                     intent.putExtra("serviceActionCode", item.serviceActionCode )

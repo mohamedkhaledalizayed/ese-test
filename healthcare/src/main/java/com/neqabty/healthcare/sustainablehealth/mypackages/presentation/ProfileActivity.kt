@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.profile.SubscribedPackageEntity
 import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
 
@@ -74,13 +75,15 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                 addFollower(packageId, subscriberId)
             }
 
-            override fun setOnPayClickListener(name: String, price: String, serviceCode: String, serviceActionCode: String) {
+            override fun setOnPayClickListener(item: SubscribedPackageEntity) {
                 val intent = Intent(this@ProfileActivity, SehaPaymentActivity::class.java)
-                Log.e("price", price)
-                intent.putExtra("name", name)
-                intent.putExtra("price", price.toDouble())
-                intent.putExtra("serviceCode", serviceCode)
-                intent.putExtra("serviceActionCode", serviceActionCode)
+                Log.e("price", item.packages.packagePrice ?: "0")
+                intent.putExtra("name", item.packages.nameAr)
+                intent.putExtra("price", item.packages.packagePrice?.toDouble())
+                intent.putExtra("vat", item.packages.vat?.toDouble())
+                intent.putExtra("total", item.packages.total?.toDouble())
+                intent.putExtra("serviceCode", item.packages.serviceCode)
+                intent.putExtra("serviceActionCode", item.packages.serviceActionCode)
                 startActivity(intent)
             }
 
