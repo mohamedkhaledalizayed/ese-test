@@ -52,7 +52,8 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
         serviceCode = intent.getStringExtra("serviceCode")!!
         serviceActionCode = intent.getStringExtra("serviceActionCode")!!
         binding.tvPackageName.text = "اسم الباقة : ${intent.getStringExtra("name")}"
-        binding.tvPackagePrice.text = "سعر الباقة : $totalAmount"
+        binding.tvPackagePrice.text = "سعر الباقة : $totalAmount جنيه"
+        binding.tvVat.text = "بعد ضريبة 14% : ${(0.14 * totalAmount).toInt() + totalAmount} جنيه"
         updateTotal()
         paymentViewModel.getPaymentMethods()
         paymentViewModel.paymentMethods.observe(this) { it ->

@@ -73,7 +73,7 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
                         }
                     }
                     Status.ERROR -> {
-                        binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "خطا", resource.message)
+                        binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "عفوا", resource.message)
                     }
                 }
             }
