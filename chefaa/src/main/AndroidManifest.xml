@@ -13,7 +13,7 @@
         android:name=".core.application.ChefaaApplication"
         android:allowBackup="false"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="false">
         <activity
             android:name=".modules.verifyuser.view.VerifyUserActivity"
             android:exported="false">
