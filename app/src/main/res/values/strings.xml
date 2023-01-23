@@ -411,6 +411,7 @@
         كود الدفع:</string>
     <string name="payment_reference_without_code">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك</string>
     <string name="payment_canceled">لقد تم الغاء عملية الدفع</string>
+    <string name="copy">نسخ</string>
     <string name="payment_successful">تمت عملية الدفع بنجاح \n
 رقم العملية </string>
     <string name="medical_card_delivery">\nسيتم تسليم الكروت في خلال 15 يوم من تاريخ الاشتراك</string>

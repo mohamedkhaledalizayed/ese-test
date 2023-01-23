@@ -121,6 +121,38 @@
                         android:textSize="?textSizeLarge" />
 
                     <TextView
+                        android:id="@+id/tvMobileNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/delivery_mobile_title"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="?textSizeMedium"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:id="@+id/tvMobileNumberHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:text="@string/delivery_mobile_hint"
+                        android:textColor="@color/text_dark"
+                        android:textSize="?textSizeMedium"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:id="@+id/tvDeliveryMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_vertical_small"
+                        android:text="@string/delivery_method"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="?textSizeMedium"
+                        android:visibility="gone" />
+
+                    <TextView
                         android:id="@+id/tvDeliveryMethodHint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -130,113 +162,74 @@
                         android:textSize="?textSizeSmall"
                         android:visibility="visible" />
 
-                    <LinearLayout
-                        android:id="@+id/llDeliveryDetails"
-                        android:layout_width="match_parent"
+                    <RadioGroup
+                        android:id="@+id/rgDeliveryMechanismType"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_marginTop="@dimen/margin_vertical_normal"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <TextView
-                            android:id="@+id/tvMobileNumber"
+                        <RadioButton
+                            android:id="@+id/rb_home"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:buttonTint="@color/dark_green"
+                            android:checked="true"
+                            android:text="@string/home_delivery"
+                            android:textSize="?textSizeMedium" />
+
+
+                        <com.neqabty.presentation.util.ClearableEditText
+                            android:id="@+id/edAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_vertical_normal"
-                            android:text="@string/delivery_mobile_title"
-                            android:textColor="@color/colorPrimary"
+                            android:enabled="true"
+                            android:hint="@string/address"
+                            android:inputType="text"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="?textSizeMedium" />
+
+                        <EditText
+                            android:id="@+id/edMobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_vertical_normal"
+                            android:hint="@string/delivery_mobile_title"
+                            android:inputType="number"
+                            android:maxLength="11"
+                            android:textDirection="anyRtl"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="?textSizeMedium"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvMobile" />
+
+                        <RadioButton
+                            android:id="@+id/rb_mainSyndicate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="@color/dark_green"
+                            android:checked="false"
+                            android:text="@string/main_syndicate_delivery"
                             android:textSize="?textSizeMedium"
                             android:visibility="gone" />
 
 
-                        <TextView
-                            android:id="@+id/tvMobileNumberHint"
+                        <RadioButton
+                            android:id="@+id/rb_syndicate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_vertical_normal"
-                            android:text="@string/delivery_mobile_hint"
-                            android:textColor="@color/text_dark"
+                            android:buttonTint="@color/dark_green"
+                            android:checked="false"
+                            android:text="@string/syndicate_delivery"
                             android:textSize="?textSizeMedium"
                             android:visibility="gone" />
-
-
-                        <TextView
-                            android:id="@+id/tvDeliveryMethod"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_vertical_small"
-                            android:text="@string/delivery_method"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="?textSizeMedium"
-                            android:visibility="gone" />
-
-                        <RadioGroup
-                            android:id="@+id/rgDeliveryMechanismType"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_vertical_normal"
-                            android:orientation="vertical"
-                            android:visibility="visible"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <RadioButton
-                                android:id="@+id/rb_home"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="20dp"
-                                android:buttonTint="@color/dark_green"
-                                android:checked="true"
-                                android:text="@string/home_delivery"
-                                android:textSize="?textSizeMedium" />
-
-
-                            <com.neqabty.presentation.util.ClearableEditText
-                                android:id="@+id/edAddress"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin_vertical_normal"
-                                android:enabled="true"
-                                android:hint="@string/address"
-                                android:inputType="text"
-                                android:textColor="@color/dark_grey"
-                                android:textSize="?textSizeMedium" />
-
-                            <EditText
-                                android:id="@+id/edMobile"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin_vertical_normal"
-                                android:hint="@string/delivery_mobile_title"
-                                android:inputType="number"
-                                android:maxLength="11"
-                                android:textDirection="anyRtl"
-                                android:textColor="@color/dark_grey"
-                                android:textSize="?textSizeMedium"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/tvMobile" />
-
-                            <RadioButton
-                                android:id="@+id/rb_mainSyndicate"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:buttonTint="@color/dark_green"
-                                android:checked="false"
-                                android:text="@string/main_syndicate_delivery"
-                                android:textSize="?textSizeMedium"
-                                android:visibility="gone" />
-
-
-                            <RadioButton
-                                android:id="@+id/rb_syndicate"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:buttonTint="@color/dark_green"
-                                android:checked="false"
-                                android:text="@string/syndicate_delivery"
-                                android:textSize="?textSizeMedium"
-                                android:visibility="gone" />
-                        </RadioGroup>
-                    </LinearLayout>
+                    </RadioGroup>
                 </LinearLayout>
 
                 <TextView

@@ -1,6 +1,9 @@
 package com.neqabty.presentation.ui.medicalRenewDetails
 
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -181,11 +184,13 @@ class MedicalRenewDetailsFragment : BaseFragment() {
                 var PaymentGatewayReferenceId =
                         data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
                 responseMSG?.let {
-                    showAlert(if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(R.string.payment_successful) + PaymentGatewayReferenceId + getString(R.string.medical_card_delivery)
-                    else getString(R.string.payment_reference) + PaymentGatewayReferenceId + getString(R.string.medical_card_delivery)) {
-                        navController().popBackStack()
-                        navController().navigate(R.id.homeFragment)
-                    }
+                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
+                        showAlert(getString(R.string.payment_successful) + PaymentGatewayReferenceId + getString(R.string.medical_card_delivery)){
+                            navController().popBackStack()
+                            navController().navigate(R.id.homeFragment)
+                        }
+                    else
+                        showCopyAlertDialog(PaymentGatewayReferenceId!!)
                 }
             }
         }
@@ -226,6 +231,26 @@ class MedicalRenewDetailsFragment : BaseFragment() {
     }
 
     //region
+    private fun showCopyAlertDialog(paymentGatewayReferenceId: String) {
+        val alertDialog = android.app.AlertDialog.Builder(activity).create()
+        alertDialog.setTitle(getString(R.string.alert_title))
+        alertDialog.setMessage(getString(R.string.payment_reference) + paymentGatewayReferenceId + getString(R.string.medical_card_delivery))
+        alertDialog.setCancelable(false)
+        alertDialog.setButton(
+            android.app.AlertDialog.BUTTON_POSITIVE, getString(R.string.copy)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            copyText(paymentGatewayReferenceId)
+        }
+        alertDialog.show()
+    }
+
+    private fun copyText(paymentGatewayReferenceId: String) {
+        val clipboard: ClipboardManager =
+            activity!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", paymentGatewayReferenceId)
+        clipboard.setPrimaryClip(clip)
+    }
 
     fun oPayPayment(paymentOption: Constants.PaymentOption) {
         val paymentType = when(paymentOption) {
@@ -369,15 +394,13 @@ class MedicalRenewDetailsFragment : BaseFragment() {
                     }
             }
             PaymentStatus.SUCCESS -> {
-                showAlert(
-                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
-                        R.string.payment_successful
-                    ) + response.orderNo
-                    else getString(R.string.payment_reference) + response.referenceCode
-                ) {
-                    navController().popBackStack()
-                    navController().navigate(R.id.homeFragment)
-                }
+                if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
+                    showAlert(getString(R.string.payment_successful) + response.orderNo + getString(R.string.medical_card_delivery)) {
+                        navController().popBackStack()
+                        navController().navigate(R.id.homeFragment)
+                    }
+                else
+                    showCopyAlertDialog(response.referenceCode!!)
             }
             PaymentStatus.FAIL -> {
                 showAlert(getString(R.string.payment_canceled)) {

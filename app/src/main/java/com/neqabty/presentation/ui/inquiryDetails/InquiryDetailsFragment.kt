@@ -1,6 +1,10 @@
 package com.neqabty.presentation.ui.inquiryDetails
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -102,10 +106,10 @@ class InquiryDetailsFragment : BaseFragment() {
         title = params.title
         binding.number = params.number
 
-        if (params.number != sharedPref.user) {
-            llDeliveryDetails.visibility = View.GONE
-            tvDeliveryMethodHint.text = getString(R.string.delivery_method_hint_for_others)
-        }
+//        if (params.number != sharedPref.user) {
+//            llDeliveryDetails.visibility = View.GONE
+//            tvDeliveryMethodHint.text = getString(R.string.delivery_method_hint_for_others)
+//        }
         calculateCommission(Constants.PaymentOption.OpayCredit)
         medicalRenewalPayment?.let {
             binding.medicalRenewalPayment = it
@@ -201,10 +205,13 @@ class InquiryDetailsFragment : BaseFragment() {
                 var PaymentGatewayReferenceId =
                         data.extras!!.getString(CowpayConstantKeys.PaymentGatewayReferenceId)
                 responseMSG?.let {
-                    showAlert(if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) getString(R.string.payment_successful) + PaymentGatewayReferenceId else getString(R.string.payment_reference) + PaymentGatewayReferenceId) {
-                        navController().popBackStack()
-                        navController().navigate(R.id.homeFragment)
-                    }
+                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card)
+                        showAlert(getString(R.string.payment_successful) + PaymentGatewayReferenceId){
+                            navController().popBackStack()
+                            navController().navigate(R.id.homeFragment)
+                        }
+                    else
+                        showCopyAlertDialog(PaymentGatewayReferenceId!!)
                 }
             }
         }
@@ -239,6 +246,26 @@ class InquiryDetailsFragment : BaseFragment() {
     }
 
     //region
+    private fun showCopyAlertDialog(paymentGatewayReferenceId: String) {
+        val alertDialog = AlertDialog.Builder(activity).create()
+        alertDialog.setTitle(getString(R.string.alert_title))
+        alertDialog.setMessage(getString(R.string.payment_reference) + paymentGatewayReferenceId)
+        alertDialog.setCancelable(false)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.copy)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            copyText(paymentGatewayReferenceId)
+        }
+        alertDialog.show()
+    }
+
+    private fun copyText(paymentGatewayReferenceId: String) {
+        val clipboard: ClipboardManager =
+            activity!!.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", paymentGatewayReferenceId)
+        clipboard.setPrimaryClip(clip)
+    }
 
     fun oPayPayment(paymentOption: Constants.PaymentOption) {
         val paymentType = when(paymentOption) {
@@ -255,7 +282,7 @@ class InquiryDetailsFragment : BaseFragment() {
             merchantName = Constants.OPAY_MERCHANT_NAME,
             reference = medicalRenewalPayment.paymentItem?.paymentRequestNumber!!,
             countryCode = "EG", // uppercase
-            payAmount = (newAmount * 100).toLong(),
+            payAmount = 5L,
             currency = "EGP", // uppercase
             productName = "annualSubscription",
             productDescription = "android",
@@ -310,7 +337,7 @@ class InquiryDetailsFragment : BaseFragment() {
         //order id
         intent.putExtra(CowpayConstantKeys.MerchantReferenceId, medicalRenewalPayment.paymentItem?.paymentRequestNumber)
         //order price780
-        intent.putExtra(CowpayConstantKeys.Amount, newAmount.toString())
+        intent.putExtra(CowpayConstantKeys.Amount, "5".toString())
         //user data
         intent.putExtra(CowpayConstantKeys.Description, medicalRenewalPayment.paymentItem?.amount.toString())
         intent.putExtra(CowpayConstantKeys.CustomerName, params.number)
@@ -359,15 +386,13 @@ class InquiryDetailsFragment : BaseFragment() {
                     }
             }
             PaymentStatus.SUCCESS -> {
-                showAlert(
-                    if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
-                        R.string.payment_successful
-                    ) + response.orderNo
-                    else getString(R.string.payment_reference) + response.referenceCode
-                ) {
-                    navController().popBackStack()
-                    navController().navigate(R.id.homeFragment)
-                }
+                if (rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet)
+                    showAlert(getString(R.string.payment_successful) + response.orderNo) {
+                        navController().popBackStack()
+                        navController().navigate(R.id.homeFragment)
+                    }
+                else
+                    showCopyAlertDialog(response.referenceCode!!)
             }
             PaymentStatus.FAIL -> {
                 showAlert(getString(R.string.payment_canceled)) {
