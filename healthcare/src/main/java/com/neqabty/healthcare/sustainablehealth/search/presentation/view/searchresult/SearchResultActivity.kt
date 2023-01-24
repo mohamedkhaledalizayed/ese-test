@@ -87,7 +87,11 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
                     }
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
+                        binding.noResult.visibility = View.GONE
                         mAdapter.submitList(resource.data?.toMutableList())
+                        if (resource.data?.size == 0){
+                            binding.noResult.visibility = View.VISIBLE
+                        }
                     }
                     Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE

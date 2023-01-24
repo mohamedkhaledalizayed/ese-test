@@ -241,6 +241,19 @@
         app:layout_constraintTop_toBottomOf="@+id/near_text"
         tools:listitem="@layout/search_item" />
 
+    <TextView
+        android:id="@+id/no_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/items_recycler"
+        app:layout_constraintBottom_toBottomOf="@id/items_recycler"
+        app:layout_constraintStart_toStartOf="@id/items_recycler"
+        app:layout_constraintEnd_toEndOf="@id/items_recycler"
+        android:text="@string/no_result"
+        android:visibility="gone"
+        android:textSize="@dimen/_16ssp"
+        android:textColor="@color/black" />
+
     <ProgressBar
         android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
