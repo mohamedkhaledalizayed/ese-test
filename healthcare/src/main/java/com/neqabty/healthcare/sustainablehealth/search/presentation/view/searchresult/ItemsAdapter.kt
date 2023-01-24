@@ -44,6 +44,20 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
         viewHolder.binding.itemName.text = item.name
         viewHolder.binding.government.text = "${item.governorate.governorateAr}, ${item.area?.areaName}"
 
+        when (item.serviceProviderType?.providerTypeEn) {
+            "Hospitals" -> {
+                viewHolder.binding.itemImage.setImageResource(R.drawable.hospital_icon)
+            }
+            "Doctors" -> {
+                viewHolder.binding.itemImage.setImageResource(R.drawable.doctor)
+            }
+            "Radiology Centers" -> {
+                viewHolder.binding.itemImage.setImageResource(R.drawable.x_ray)
+            }
+            "Biology" -> {
+                viewHolder.binding.itemImage.setImageResource(R.drawable.microscope)
+            }
+        }
         viewHolder.binding.itemLayout.setOnClickListener { onItemClickListener?.setOnItemClickListener(item) }
     }
 
