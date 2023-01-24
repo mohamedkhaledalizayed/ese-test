@@ -64,6 +64,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        init()
         setContentView(R.layout.activity_home)
         loading = SpotsDialog.Builder()
             .setContext(this)
@@ -307,11 +308,6 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             val logout: MenuItem = menu.findItem(R.id.logout)
             logout.title = resources.getString(R.string.logout_title)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        init()
     }
 
     private fun aboutDetails(title: String, content: String, code: String) {
