@@ -128,6 +128,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/edit_text_bg"
                     android:hint="@string/content"
+                    android:scrollbars="vertical"
                     android:longClickable="false"
                     android:inputType="textMultiLine"
                     android:padding="@dimen/_9sdp" />

@@ -73,7 +73,7 @@
     <string name="provider_type">نوع مقدم الخدمة</string>
     <string name="invitation_code">رقم صاحب دعوة الخصم</string>
     <string name="send">إرسال</string>
-    <string name="content">محتوي الشكوي</string>
+    <string name="content">محتوي الشكوي او المقترح</string>
     <string name="change">تغيير</string>
     <string name="degree">الدرجة العلمية</string>
     <string name="syndicates">النقابات</string>
