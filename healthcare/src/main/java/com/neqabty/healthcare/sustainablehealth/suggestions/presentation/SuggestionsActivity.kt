@@ -46,6 +46,7 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
 
 
 
+        binding.name.setText(sharedPreferences.name)
         binding.phone.setText(sharedPreferences.mobile)
         complaintsViewModel.getComplaintsCategories()
         complaintsViewModel.categories.observe(this){
