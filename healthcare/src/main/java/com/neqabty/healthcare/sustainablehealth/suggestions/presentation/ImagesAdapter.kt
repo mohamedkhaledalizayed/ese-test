@@ -41,7 +41,7 @@ class ImagesAdapter: RecyclerView.Adapter<ImagesAdapter.ViewHolder>() {
         if (position == itemCount - 1){
             viewHolder.binding.view.visibility = View.GONE
         }
-        viewHolder.binding.itemLayout.setOnClickListener { onItemClickListener?.setOnItemClickListener(item) }
+        viewHolder.binding.removeImage.setOnClickListener { onItemClickListener?.setOnRemoveImageListener(position) }
     }
 
     override fun getItemCount() = items.size
@@ -61,7 +61,7 @@ class ImagesAdapter: RecyclerView.Adapter<ImagesAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: ImageInfo)
+            fun setOnRemoveImageListener(position: Int)
     }
 
     class ViewHolder(val binding: ImageItemBinding) :

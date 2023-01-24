@@ -98,6 +98,18 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
             }
         }
 
+        mAdapter.onItemClickListener = object : ImagesAdapter.OnItemClickListener {
+
+            override fun setOnRemoveImageListener(position: Int) {
+                listImagesUri.removeAt(position)
+                mAdapter.submitList(listImagesUri)
+                if (listImagesUri.size == 0){
+                    binding.imagesRecycler.visibility = View.GONE
+                }
+            }
+
+        }
+
         binding.sendBtn.setOnClickListener {
             addComplaint()
         }
