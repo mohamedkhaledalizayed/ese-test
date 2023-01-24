@@ -196,7 +196,7 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
             if (REQUEST_CODE == requestCode){
                 imageUri = data.data
                 listImagesUri.add(ImageInfo(imageUri!!, imageUri?.getName()))
-                binding.addImageText.text = getString(R.string.add_image)
+                binding.addImageText.text = getString(R.string.attach_image)
                 binding.imagesRecycler.visibility = View.VISIBLE
                 binding.imagesRecycler.adapter = mAdapter
                 mAdapter.submitList(listImagesUri)
