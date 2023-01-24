@@ -22,59 +22,13 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
-                android:fontFamily="@font/codec_pro_news"
-                android:id="@+id/et_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:background="@drawable/edit_text_bg_chefaa"
-                android:drawableStart="@drawable/ic_search_black_24dp"
-                android:padding="@dimen/_10sdp"
-                android:text="ابحث عن دواء"
-                android:textAlignment="viewStart"
-                android:textColorHint="@color/gray_yodawy"
-                android:textSize="@dimen/_12ssp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:fontFamily="@font/codec_pro_news"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="التوصيل إلى "
-                    android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/black"
-                    android:layout_marginStart="@dimen/_10sdp"/>
-
-                <TextView
-                    android:id="@+id/select_address"
-                    android:fontFamily="@font/codec_pro_news"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="إختر عنوان"
-                    android:lineSpacingExtra="@dimen/_5sdp"
-                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
-                    android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginStart="@dimen/_5sdp"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"
-                android:layout_margin="@dimen/_10sdp"/>
-
-            <TextView
                 android:id="@+id/hello"
                 android:fontFamily="@font/codec_pro_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="@color/black"
                 android:layout_marginStart="@dimen/_10sdp"/>
 
@@ -82,7 +36,7 @@
                 android:fontFamily="@font/codec_pro_news"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="كيف يمكننا مساعدتك؟"
+                android:text="@string/how"
                 android:textSize="@dimen/_12ssp"
                 android:layout_marginStart="@dimen/_10sdp"/>
 
@@ -110,16 +64,63 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"
                     android:lineSpacingExtra="@dimen/_4sdp"
-                    android:text="جميع الأدوية يتم صرفها من صيدليات مرخصة من وزارة الصحة و بوجود وصفة طبية من طبيب مختص"
+                    android:text="@string/help_des"
                     />
 
             </LinearLayout>
 
             <TextView
+                android:fontFamily="@font/codec_pro_news"
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/edit_text_bg_chefaa"
+                android:drawableStart="@drawable/ic_search_black_24dp"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/search_med"
+                android:textAlignment="viewStart"
+                android:textColorHint="@color/gray_yodawy"
+                android:textSize="@dimen/_12ssp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:fontFamily="@font/codec_pro_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/deliver_to"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="@dimen/_10sdp"/>
+
+                <TextView
+                    android:id="@+id/select_address"
+                    android:fontFamily="@font/codec_pro_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_addre"
+                    android:lineSpacingExtra="@dimen/_5sdp"
+                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                android:layout_margin="@dimen/_10sdp"/>
+
+            <TextView
                 android:fontFamily="@font/codec_pro_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="سهلنا الطلب عليك"
+                android:text="@string/easy"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="@dimen/_12ssp"
@@ -147,7 +148,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:text="اضف \nالروشتة"
+                            android:text="@string/add_pre"
                             android:textStyle="bold"
                             android:layout_gravity="start"
                             android:layout_marginStart="@dimen/_10sdp"
@@ -181,7 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:text="اكتب \nطلبك"
+                        android:text="@string/write_ord"
                         android:textStyle="bold"
                         android:layout_gravity="start"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -235,7 +236,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:text="طلباتك \nالسابقة"
+                        android:text="@string/pre_orders"
                         android:textStyle="bold"
                         android:layout_gravity="start"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -261,7 +262,7 @@
                 android:fontFamily="@font/codec_pro_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="للتواصل:"
+                android:text="@string/for_delivery"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="@dimen/_12ssp"
@@ -277,7 +278,7 @@
                     android:fontFamily="@font/codec_pro_news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0221294341"
+                    android:text="@string/_0221294341"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="@dimen/_12ssp"

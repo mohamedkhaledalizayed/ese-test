@@ -95,4 +95,15 @@
     <string name="pay_method">نقدى عند الاستلام</string>
     <string name="pay">طريقة الدفع</string>
     <string name="to_10">حتى 10 جنيه</string>
+    <string name="search_med">ابحث عن دواء</string>
+    <string name="deliver_to">التوصيل إلى</string>
+    <string name="select_addre">إختر عنوان</string>
+    <string name="how">كيف يمكننا مساعدتك؟</string>
+    <string name="help_des">جميع الأدوية يتم صرفها من صيدليات مرخصة من وزارة الصحة و بوجود وصفة طبية من طبيب مختص</string>
+    <string name="easy">سهلنا الطلب عليك</string>
+    <string name="add_pre">اضف \nالروشتة</string>
+    <string name="write_ord">اكتب \nطلبك</string>
+    <string name="pre_orders">طلباتك \nالسابقة</string>
+    <string name="for_delivery">للتواصل:</string>
+    <string name="_0221294341">0221294341</string>
 </resources>

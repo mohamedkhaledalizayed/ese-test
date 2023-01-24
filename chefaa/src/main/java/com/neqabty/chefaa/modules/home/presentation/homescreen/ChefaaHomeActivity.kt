@@ -1,8 +1,7 @@
 package com.neqabty.chefaa.modules.home.presentation.homescreen
 
-//import com.neqabty.chefaa.modules.CartActivity
-//import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
-//import com.neqabty.chefaa.modules.products.presentation.view.productscreen.SearchActivity
+
+
 import android.Manifest
 import android.app.Activity
 import android.content.Context
@@ -25,7 +24,6 @@ import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.core.data.Constants.mobileNumber
-import com.neqabty.chefaa.core.data.Constants.name
 import com.neqabty.chefaa.core.data.Constants.selectedAddress
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.core.utils.PhotoUI
