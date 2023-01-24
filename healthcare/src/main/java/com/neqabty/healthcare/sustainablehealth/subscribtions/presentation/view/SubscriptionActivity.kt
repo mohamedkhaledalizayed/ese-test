@@ -133,9 +133,11 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             )
-
+            datePicker.datePicker.maxDate = System.currentTimeMillis()
             datePicker.show()
         }
+
+
         subscriptionViewModel.getRelations()
         subscriptionViewModel.relations.observe(this) {
             it.let { resource ->
