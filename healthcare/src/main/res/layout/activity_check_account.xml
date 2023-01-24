@@ -87,7 +87,7 @@
         android:layout_height="@dimen/_35sdp"
         android:layout_margin="@dimen/_16sdp"
         android:background="@drawable/select_btn_bg"
-        android:text="@string/send"
+        android:text="@string/confirm"
         android:textColor="@android:color/white"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
