@@ -63,6 +63,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
             binding.fullNameContainer.visibility = View.GONE
             binding.passwordContainer.visibility = View.GONE
+            binding.passwordConditions.visibility = View.GONE
         }else{
             binding.spinnerContainer.visibility = View.GONE
             binding.nationalIdContainer.visibility = View.GONE
@@ -72,6 +73,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
             binding.fullNameContainer.visibility = View.VISIBLE
             binding.passwordContainer.visibility = View.VISIBLE
+            binding.passwordConditions.visibility = View.VISIBLE
 
         }
 
