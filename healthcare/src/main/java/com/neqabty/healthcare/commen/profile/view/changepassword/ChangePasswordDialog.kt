@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.commen.profile.view.changepassword
 
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,9 @@ import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
 
 class ChangePasswordDialog : DialogFragment() {
 
+    private var isHiddenOld = true
+    private var isHiddenNew = true
+    private var isHiddenConfirm = true
     private lateinit var binding: FragmentChangePasswordDialogBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +59,46 @@ class ChangePasswordDialog : DialogFragment() {
             dismiss()
 
 
+        }
+
+        binding.showHideOld.setOnClickListener { showHidePasswordOld() }
+        binding.showHideNew.setOnClickListener { showHidePasswordNew() }
+        binding.showHideConfirm.setOnClickListener { showHideConfirmPassword() }
+    }
+
+    private fun showHidePasswordOld() {
+        if (isHiddenOld) {
+            isHiddenOld = false
+            binding.oldPassword.transformationMethod = null
+            binding.showHideOld.setImageResource(R.drawable.ic_baseline_visibility_24)
+        } else {
+            isHiddenOld = true
+            binding.oldPassword.transformationMethod = PasswordTransformationMethod()
+            binding.showHideOld.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+        }
+    }
+
+    private fun showHidePasswordNew() {
+        if (isHiddenNew) {
+            isHiddenNew = false
+            binding.newPassword.transformationMethod = null
+            binding.showHideNew.setImageResource(R.drawable.ic_baseline_visibility_24)
+        } else {
+            isHiddenNew = true
+            binding.newPassword.transformationMethod = PasswordTransformationMethod()
+            binding.showHideNew.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+        }
+    }
+
+    private fun showHideConfirmPassword() {
+        if (isHiddenConfirm) {
+            isHiddenConfirm = false
+            binding.confirmPassword.transformationMethod = null
+            binding.showHideConfirm.setImageResource(R.drawable.ic_baseline_visibility_24)
+        } else {
+            isHiddenConfirm = true
+            binding.confirmPassword.transformationMethod = PasswordTransformationMethod()
+            binding.showHideConfirm.setImageResource(R.drawable.ic_baseline_visibility_off_24)
         }
     }
 
