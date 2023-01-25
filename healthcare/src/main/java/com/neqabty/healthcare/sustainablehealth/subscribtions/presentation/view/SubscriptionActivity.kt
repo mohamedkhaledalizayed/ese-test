@@ -280,6 +280,11 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
+        if (binding.etNational.text.toString().length < 14){
+            Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
+            return
+        }
+
         if (binding.spRelations.selectedItemPosition == 0 || relationTypeId == 0){
             Toast.makeText(this, "من فضلك اختر درجة القرابة.", Toast.LENGTH_LONG).show()
             return
