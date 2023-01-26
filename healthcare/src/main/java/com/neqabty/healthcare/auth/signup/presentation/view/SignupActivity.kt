@@ -2,6 +2,7 @@ package com.neqabty.healthcare.auth.signup.presentation.view
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -34,6 +35,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     private val mSyndicatesAdapter = SyndicatesAdapter()
     private var syndicateListEntity: List<SyndicateListEntity>? = null
     private var syndicateCode = ""
+    private var isHidden = true
+    private var isHiddenConfirm = true
     override fun getViewBinding() = ActivitySignupBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +56,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         binding.membershipId.customSelectionActionModeCallback = actionMode
         binding.fullName.customSelectionActionModeCallback = actionMode
         binding.password.customSelectionActionModeCallback = actionMode
+        binding.confirmPassword.customSelectionActionModeCallback = actionMode
 
         if (isSyndicateMember){
             signupViewModel.getSyndicateList()
@@ -63,7 +67,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
             binding.fullNameContainer.visibility = View.GONE
             binding.passwordContainer.visibility = View.GONE
-            binding.passwordConditions.visibility = View.GONE
         }else{
             binding.spinnerContainer.visibility = View.GONE
             binding.nationalIdContainer.visibility = View.GONE
@@ -73,7 +76,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
             binding.fullNameContainer.visibility = View.VISIBLE
             binding.passwordContainer.visibility = View.VISIBLE
-            binding.passwordConditions.visibility = View.VISIBLE
 
         }
 
@@ -304,6 +306,11 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 return
             }
 
+            if (binding.password.text.toString() != binding.confirmPassword.text.toString()){
+                Toast.makeText(this, "كلمة السر غير متطابقة.", Toast.LENGTH_LONG).show()
+                return
+            }
+
             signupViewModel.signupNeqabtyMember(
                 NeqabtySignupBody(
                     email = binding.email.text.toString(),
@@ -314,6 +321,30 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             )
         }
 
+    }
+
+    fun showHidePassword(view: View) {
+        if (isHidden) {
+            isHidden = false
+            binding.password.transformationMethod = null
+            binding.showHide.setImageResource(R.drawable.ic_baseline_visibility_24)
+        } else {
+            isHidden = true
+            binding.password.transformationMethod = PasswordTransformationMethod()
+            binding.showHide.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+        }
+    }
+
+    fun showHideConfirmPassword(view: View) {
+        if (isHiddenConfirm) {
+            isHiddenConfirm = false
+            binding.confirmPassword.transformationMethod = null
+            binding.showHidePassword.setImageResource(R.drawable.ic_baseline_visibility_24)
+        } else {
+            isHiddenConfirm = true
+            binding.confirmPassword.transformationMethod = PasswordTransformationMethod()
+            binding.showHidePassword.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+        }
     }
 
 }

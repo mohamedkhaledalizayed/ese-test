@@ -116,7 +116,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:hint="@string/new_password"
+            android:hint="@string/confirm_password"
             android:padding="@dimen/_10sdp"
             android:textAlignment="viewStart"
             android:textColor="@color/black"
