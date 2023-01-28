@@ -1,0 +1,20 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+  <aapt:attr name="android:drawable">
+
+<vector
+    android:width="18.353dp"
+    android:height="17.335dp"
+    android:viewportWidth="18.353"
+    android:viewportHeight="17.335">
+  <path
+      android:pathData="M17.843,0L4.587,0a0.51,0.51 0,0 0,-0.51 0.51v15.3a2.524,2.524 0,0 1,-0.523 1.53h12.25a2.552,2.552 0,0 0,2.552 -2.555L18.356,0.51a0.51,0.51 0,0 0,-0.51 -0.51zM14.784,13.256L7.646,13.256a0.51,0.51 0,1 1,0 -1.02h7.138a0.51,0.51 0,1 1,0 1.02zM14.784,10.197L7.646,10.197a0.51,0.51 0,1 1,0 -1.02h7.138a0.51,0.51 0,1 1,0 1.02zM14.784,7.138L7.646,7.138a0.51,0.51 0,1 1,0 -1.02h7.138a0.51,0.51 0,1 1,0 1.02zM14.784,4.079L7.646,4.079a0.51,0.51 0,1 1,0 -1.02h7.138a0.51,0.51 0,1 1,0 1.02zM14.784,4.079"
+      android:fillColor="#bcc8d6"/>
+  <path
+      android:pathData="M2.549,2.04L0.51,2.04a0.51,0.51 0,0 0,-0.51 0.51v13.256a1.53,1.53 0,0 0,3.059 0L3.059,2.55a0.51,0.51 0,0 0,-0.51 -0.51zM2.549,2.04"
+      android:fillColor="#bcc8d6"/>
+</vector>
+
+  </aapt:attr>
+</animated-vector>
