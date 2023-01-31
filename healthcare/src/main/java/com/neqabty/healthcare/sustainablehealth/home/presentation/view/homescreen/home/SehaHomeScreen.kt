@@ -3,12 +3,16 @@ package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescre
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
+import com.neqabty.healthcare.commen.syndicates.domain.entity.SyndicateEntity
+import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySehaHomeScreenBinding
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint

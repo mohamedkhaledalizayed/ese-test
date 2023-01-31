@@ -28,13 +28,27 @@
         android:textColor="#7080ad"
         />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/syndicates_recycler"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:layout_marginTop="@dimen/_18sdp"
-        tools:listitem="@layout/syndicate"
-        />
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/syndicates_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:minHeight="@dimen/_200sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            tools:listitem="@layout/syndicate"
+            />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progress_circular"
+            android:layout_gravity="center"
+            />
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.commen.syndicates.domain.entity.SyndicateEntity
 import com.neqabty.healthcare.databinding.SyndicateBinding
 import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.AboutEntity
+import com.squareup.picasso.Picasso
 
 
 class SyndicatesAdapter: RecyclerView.Adapter<SyndicatesAdapter.ViewHolder>() {
 
-    private val items: MutableList<AboutEntity> = ArrayList()
+    private val items: MutableList<SyndicateEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -35,42 +37,20 @@ class SyndicatesAdapter: RecyclerView.Adapter<SyndicatesAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-        if ( position == 2 || position == 3){
-            viewHolder.binding.soon.visibility = View.VISIBLE
-        }else{
-            viewHolder.binding.soon.visibility = View.GONE
-        }
+        val item = items[position]
 
-        when (position) {
-            0 -> {
-                viewHolder.binding.image.setImageResource(R.drawable.logo_1)
-                viewHolder.binding.title.text = "نقابة المهندسيين"
-            }
-            1 -> {
-                viewHolder.binding.image.setImageResource(R.drawable.logo_2)
-                viewHolder.binding.title.text = "النقابة العامة\n" +
-                        " للمرشدين السياحين"
-            }
-            2 -> {
-                viewHolder.binding.image.setImageResource(R.drawable.logo_3)
-                viewHolder.binding.title.text = "نقابة المحاميين"
-            }
-            3 -> {
-                viewHolder.binding.image.setImageResource(R.drawable.logo_4)
-                viewHolder.binding.title.text = "نقابة التجاريين"
-            }
+        viewHolder.binding.title.text = item.name
+        if (item.image.isNotEmpty()){
+            Picasso.get().load(item.image).into(viewHolder.binding.image)
         }
-
-//        viewHolder.binding.aboutSeha.text = items[position].key
-//
 //        viewHolder.binding.itemLayout.setOnClickListener {
 //            onItemClickListener?.setOnItemClickListener(items[position].key, items[position].value)
 //        }
     }
 
-    override fun getItemCount() = 8
+    override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<AboutEntity>?) {
+    fun submitList(newItems: List<SyndicateEntity>?) {
         clear()
         newItems?.let {
             items.addAll(it)
