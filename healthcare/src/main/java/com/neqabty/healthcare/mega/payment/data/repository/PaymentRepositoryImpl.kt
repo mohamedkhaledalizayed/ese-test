@@ -10,7 +10,7 @@ import com.neqabty.healthcare.mega.payment.data.model.payment.MobilePaymentPaylo
 import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentModel
 import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentResponse
 import com.neqabty.healthcare.mega.payment.data.model.payment.Transaction
-import com.neqabty.healthcare.mega.payment.data.model.paymentmethods.PaymentMethodModel
+import com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods.PaymentMethodModel
 import com.neqabty.healthcare.mega.payment.data.model.paymentstatus.PaymentStatusModel
 import com.neqabty.healthcare.mega.payment.data.model.services.*
 import com.neqabty.healthcare.mega.payment.data.model.servicesaction.ServiceAction
@@ -71,12 +71,6 @@ class PaymentRepositoryImpl @Inject constructor(private val paymentDS: PaymentDS
         }
     }
 
-    override fun getPaymentMethods(): Flow<List<PaymentMethodEntity>> {
-        return flow {
-            emit(paymentDS.getPaymentMethods().map { it.toPaymentMethodsEntity() })
-        }
-    }
-
     override fun getBranches(): Flow<List<BranchesEntity>> {
         return flow {
             emit(paymentDS.getBranches().map { it.toBranchesEntity() })
@@ -108,7 +102,19 @@ fun ReceiptResponse.toReceiptDataEntity(): ReceiptDataEntity{
         receipt = receipt?.toReceiptEntity(),
         service = service.toServiceEntity(),
         deliveryMethodsEntity = deliveryMethods.map { it.toDeliveryMethodsEntity() },
+        gatewaysList = gatewaysData.map { it.toGatewaysEntity() },
         title = title
+    )
+}
+
+private fun GatewaysData.toGatewaysEntity(): GatewaysEntity{
+    return GatewaysEntity(
+        displayName = displayName,
+        endpointUrl = endpointUrl,
+        gateway = gateway,
+        id = id,
+        isActive = isActive,
+        name = name
     )
 }
 

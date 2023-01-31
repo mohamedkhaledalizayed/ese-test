@@ -10,7 +10,6 @@ import com.neqabty.healthcare.mega.payment.domain.entity.paymentstatus.PaymentSt
 import com.neqabty.healthcare.mega.payment.domain.entity.serviceactions.ServiceActionsEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.services.ServicesListEntity
 import com.neqabty.healthcare.mega.payment.domain.repository.PaymentRepository
-import com.neqabty.mega.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import javax.inject.Inject
@@ -34,10 +33,6 @@ class PaymentUseCase @Inject constructor(private val repository: PaymentReposito
 
     fun build(paymentHomeBody: PaymentHomeBody): Flow<PaymentEntity> {
         return repository.paymentHome(paymentHomeBody)
-    }
-
-    fun build(): Flow<List<PaymentMethodEntity>> {
-        return repository.getPaymentMethods()
     }
 
     fun build(referenceCode: String): Flow<PaymentStatusEntity> {

@@ -14,7 +14,6 @@ import com.neqabty.healthcare.mega.payment.domain.entity.paymentstatus.PaymentSt
 import com.neqabty.healthcare.mega.payment.domain.entity.serviceactions.ServiceActionsEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.services.ServicesListEntity
 import com.neqabty.healthcare.mega.payment.domain.interactors.PaymentUseCase
-import com.neqabty.mega.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -98,20 +97,6 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
                 }
             }catch (exception:Throwable){
                 paymentInfo.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
-            }
-        }
-    }
-
-    val paymentMethods = MutableLiveData<Resource<List<PaymentMethodEntity>>>()
-    fun getPaymentMethods() {
-        paymentMethods.postValue(Resource.loading(data = null))
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                paymentUseCase.build().collect {
-                    paymentMethods.postValue(Resource.success(data = it))
-                }
-            }catch (exception:Throwable){
-                paymentMethods.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
             }
         }
     }

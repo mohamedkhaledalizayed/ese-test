@@ -24,7 +24,6 @@ import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
 import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
 import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
-import com.payment.paymentsdk.PaymentSdkActivity
 import com.payment.paymentsdk.PaymentSdkConfigBuilder
 import com.payment.paymentsdk.integrationmodels.*
 import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
@@ -90,7 +89,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                             showDialog(getString(R.string.no_reciept))
                         }else{
                             binding.llContent.visibility = View.VISIBLE
-                            binding.tvService.text = resource.data!!.service.name
+                            binding.tvService.text = resource.data.service.name
                             binding.tvName.text =
                                 resources.getString(
                                     R.string.member_name,
@@ -102,35 +101,45 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                     sharedPreferences.membershipId
                                 )
 
-                            totalAmount = resource.data!!.receipt!!.details.totalPrice.toInt()
-                            deliveryMethodHomeId = resource.data!!.methodsObj.homeMethodId
-                            deliveryMethodBranchId = resource.data!!.methodsObj.branchMethodId
+                            totalAmount = resource.data.receipt.details.totalPrice.toInt()
+                            deliveryMethodHomeId = 1
+                            deliveryMethodBranchId = 2
 
-                            deliveryMethodHomePrice = resource.data!!.methodsObj.homeMethodPrice.toFloat().toInt()
-                            deliveryMethodBranchPrice = resource.data!!.methodsObj.branchMethodPrice.toFloat().toInt()
+                            deliveryMethodHomePrice = 1
+                            deliveryMethodBranchPrice = 2
 
 
-                            paymentFees = resource.data!!.receipt!!.cardFees.toInt()
+                            paymentFees = resource.data.receipt.cardFees.toInt()
                             deliveryMethod = deliveryMethodHomeId
                             deliveryFees = deliveryMethodHomePrice
                             updateTotal()
                             binding.lastFeeYearValue.text =
-                                resource.data!!.receipt?.details?.lastFeeYear.toString()
+                                resource.data.receipt.details.lastFeeYear.toString()
                             binding.currentFeeYearValue.text =
-                                resource.data!!.receipt?.details?.currentFeeYear.toString() +
+                                resource.data.receipt.details.currentFeeYear.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.cardPriceValue.text =
-                                resource.data!!.receipt?.details?.cardPrice.toString() +
+                                resource.data.receipt.details.cardPrice.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.lateSubscriptionsValue.text =
-                                resource.data!!.receipt?.details?.lateSubscriptions.toString() +
+                                resource.data.receipt.details.lateSubscriptions.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.delayFineValue.text =
-                                resource.data!!.receipt?.details?.delayFine.toString() +
+                                resource.data.receipt.details.delayFine.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.totalValue.text =
-                                resource.data!!.receipt?.details?.totalPrice.toString() +
+                                resource.data.receipt.details.totalPrice.toString() +
                                         "  " + resources.getString(R.string.egp)
+
+
+                            if (resource.data.gatewaysData.isNotEmpty()) {
+                                if (resource.data.gatewaysData.filter { it.name == "card" }[0].isActive)
+                                    binding.rbCard.visibility = View.VISIBLE
+                                if (resource.data.gatewaysData.filter { it.name == "code" }[0].isActive)
+                                    binding.rbChannel.visibility = View.VISIBLE
+                                if (resource.data.gatewaysData.filter { it.name == "wallet" }[0].isActive)
+                                    binding.rbWallet.visibility = View.VISIBLE
+                            }
                         }
 
                     }
@@ -153,30 +162,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                             }
 
                         }
-                    }
-                }
-            }
-
-        }
-
-        paymentViewModel.getPaymentMethods()
-        paymentViewModel.paymentMethods.observe(this) { it ->
-
-            it?.let { resource ->
-                when (resource.status) {
-                    com.neqabty.healthcare.core.utils.Status.LOADING -> {
-                        binding.progressCircular.visibility = View.VISIBLE
-                    }
-                    com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
-                        if (resource.data!!.isNotEmpty()) {
-                            if (resource.data!!.filter { it.name == "card" }[0].isActive)
-                                binding.rbCard.visibility = View.VISIBLE
-                            if (resource.data!!.filter { it.name == "code" }[0].isActive)
-                                binding.rbChannel.visibility = View.VISIBLE
-                        }
-                    }
-                    com.neqabty.healthcare.core.utils.Status.ERROR -> {
-                        binding.progressCircular.visibility = View.GONE
                     }
                 }
             }

@@ -5,7 +5,6 @@ import com.neqabty.healthcare.mega.payment.data.model.PaymentHomeBody
 import com.neqabty.healthcare.mega.payment.data.model.branches.BranchesListModel
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentResponse
-import com.neqabty.healthcare.mega.payment.data.model.paymentmethods.PaymentMethodsResponse
 import com.neqabty.healthcare.mega.payment.data.model.paymentstatus.PaymentStatusModel
 import com.neqabty.healthcare.mega.payment.data.model.services.ServicesListModel
 import com.neqabty.healthcare.mega.payment.data.model.servicesaction.ServiceActionsModel
@@ -21,7 +20,7 @@ interface PaymentApi {
     suspend fun getServiceActions(@Query("filter{service.code}") service: String,
                                   @Header("Authorization") token: String): ServiceActionsModel
 
-    @GET("payments/v2/inquiry/{id}/{code}/{number}")
+    @GET("payment/v2/inquiry/{id}/{code}/{number}")
     suspend fun getPaymentDetails(@Path("id") id: String,
                                   @Header("Authorization") token: String,
                                   @Path("code") code: String,
@@ -34,9 +33,6 @@ interface PaymentApi {
     @POST("payments")
     suspend fun paymentHome(@Body paymentHomeBody: PaymentHomeBody,
                         @Header("Authorization") token: String): PaymentResponse
-
-    @GET("payment_methods")
-    suspend fun getPaymentMethods(@Header("Authorization") token: String): PaymentMethodsResponse
 
     @GET("transactions/get/{transaction_id}")
     suspend fun getPaymentStatus(@Path("transaction_id") transaction_id: String): PaymentStatusModel

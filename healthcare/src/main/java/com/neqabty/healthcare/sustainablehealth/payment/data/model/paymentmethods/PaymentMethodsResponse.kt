@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.mega.payment.data.model.paymentmethods
+package com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods
 
 
 import androidx.annotation.Keep

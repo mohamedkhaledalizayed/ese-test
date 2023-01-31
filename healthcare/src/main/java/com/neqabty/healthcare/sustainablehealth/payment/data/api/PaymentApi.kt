@@ -1,6 +1,6 @@
 package com.neqabty.healthcare.sustainablehealth.payment.data.api
 
-import com.neqabty.healthcare.mega.payment.data.model.paymentmethods.PaymentMethodsResponse
+import com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods.PaymentMethodsResponse
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaPaymentResponse
 import retrofit2.Response

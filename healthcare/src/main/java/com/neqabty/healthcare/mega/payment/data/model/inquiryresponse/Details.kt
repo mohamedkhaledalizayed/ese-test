@@ -15,6 +15,8 @@ data class Details(
     val lastFeeYear: Int,
     @SerializedName("late_subscriptions")
     val lateSubscriptions: Double,
+    @SerializedName("family")
+    val family: String,
     @SerializedName("total_price")
     val totalPrice: Double
 )

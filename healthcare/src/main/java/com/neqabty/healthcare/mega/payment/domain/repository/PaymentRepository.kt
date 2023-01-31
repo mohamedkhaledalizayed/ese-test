@@ -8,7 +8,6 @@ import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.paymentstatus.PaymentStatusEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.serviceactions.ServiceActionsEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.services.ServicesListEntity
-import com.neqabty.mega.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
@@ -18,7 +17,6 @@ interface PaymentRepository {
     fun getPaymentDetails(id: String, code: String, number: String): Flow<Response<ReceiptResponse>>
     fun payment(paymentBody: PaymentBody): Flow<PaymentEntity>
     fun paymentHome(paymentHomeBody: PaymentHomeBody): Flow<PaymentEntity>
-    fun getPaymentMethods(): Flow<List<PaymentMethodEntity>>
     fun getPaymentStatus(referenceCode: String): Flow<PaymentStatusEntity>
     fun getBranches(): Flow<List<BranchesEntity>>
 }

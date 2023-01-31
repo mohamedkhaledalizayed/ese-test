@@ -8,6 +8,8 @@ data class DeliveryMethod(
     val createdAt: String,
     @SerializedName("id")
     val id: Int,
+    @SerializedName("method_id")
+    val methodId: Int,
     @SerializedName("method")
     val method: String,
     @SerializedName("price")
