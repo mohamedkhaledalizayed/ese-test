@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen
+package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.home
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.databinding.AboutItemBinding
-import com.neqabty.healthcare.databinding.PackageSehaItemBinding
+import com.neqabty.healthcare.databinding.AboutSehaItemBinding
 import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.AboutEntity
 
 
-class PackageSehaAdapter: RecyclerView.Adapter<PackageSehaAdapter.ViewHolder>() {
+class AboutSehaAdapter: RecyclerView.Adapter<AboutSehaAdapter.ViewHolder>() {
 
     private val items: MutableList<AboutEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
@@ -24,8 +23,8 @@ class PackageSehaAdapter: RecyclerView.Adapter<PackageSehaAdapter.ViewHolder>() 
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
-        val binding: PackageSehaItemBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.package_seha_item, parent, false)
+        val binding: AboutSehaItemBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.about_seha_item, parent, false)
 
         return ViewHolder(
             binding
@@ -34,29 +33,19 @@ class PackageSehaAdapter: RecyclerView.Adapter<PackageSehaAdapter.ViewHolder>() 
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val item = items[position]
 
-        when (position) {
-            0 -> {
-                viewHolder.binding.packageImage.setImageResource(R.drawable.golden)
-            }
-            1 -> {
-                viewHolder.binding.packageImage.setImageResource(R.drawable.silver)
-            }
-            2 -> {
-                viewHolder.binding.packageImage.setImageResource(R.drawable.bronze)
-            }
-        }
+        viewHolder.binding.aboutSeha.text = item.key
 
 
 //        viewHolder.binding.aboutSeha.text = items[position].key
-
 //
 //        viewHolder.binding.itemLayout.setOnClickListener {
 //            onItemClickListener?.setOnItemClickListener(items[position].key, items[position].value)
 //        }
     }
 
-    override fun getItemCount() = 8
+    override fun getItemCount() = items.size
 
     fun submitList(newItems: List<AboutEntity>?) {
         clear()
@@ -76,6 +65,6 @@ class PackageSehaAdapter: RecyclerView.Adapter<PackageSehaAdapter.ViewHolder>() 
             fun setOnItemClickListener(title: String, content: String)
     }
 
-    class ViewHolder(val binding: PackageSehaItemBinding) :
+    class ViewHolder(val binding: AboutSehaItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

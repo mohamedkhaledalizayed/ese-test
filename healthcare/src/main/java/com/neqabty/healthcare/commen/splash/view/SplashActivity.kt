@@ -13,10 +13,9 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivitySplashBinding
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
-import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import com.neqabty.healthcare.core.utils.DeviceUtils
-import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeScreen
+import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.home.SehaHomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 

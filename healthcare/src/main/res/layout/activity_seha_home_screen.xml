@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f9fc"
-    tools:context=".sustainablehealth.home.presentation.view.homescreen.SehaHomeScreen">
+    tools:context=".sustainablehealth.home.presentation.view.homescreen.home.SehaHomeScreen">
 
     <FrameLayout
         android:id="@+id/header_container"

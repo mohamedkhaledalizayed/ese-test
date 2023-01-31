@@ -26,7 +26,7 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
-            android:name=".sustainablehealth.home.presentation.view.homescreen.SehaHomeScreen"
+            android:name=".sustainablehealth.home.presentation.view.homescreen.home.SehaHomeScreen"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -93,9 +93,6 @@
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.search.presentation.view.searchresult.SearchResultActivity"
-            android:exported="false" />
-        <activity
-            android:name=".sustainablehealth.search.presentation.view.search.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.wallet.WalletActivity"

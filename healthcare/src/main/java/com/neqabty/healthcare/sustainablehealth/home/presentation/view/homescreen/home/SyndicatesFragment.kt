@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen
+package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

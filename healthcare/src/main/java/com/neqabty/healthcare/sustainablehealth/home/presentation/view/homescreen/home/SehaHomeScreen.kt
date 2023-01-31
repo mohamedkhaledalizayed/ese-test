@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen
+package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.home
 
 
 import android.content.res.ColorStateList
@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivitySehaHomeScreenBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class SehaHomeScreen : BaseActivity<ActivitySehaHomeScreenBinding>() {
 
     enum class MenuItems {

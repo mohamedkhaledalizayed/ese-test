@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen
+package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.home
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.databinding.AboutItemBinding
-import com.neqabty.healthcare.databinding.AboutSehaItemBinding
+import com.neqabty.healthcare.databinding.PackageSehaItemBinding
 import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.AboutEntity
+import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.packages.PackagesEntity
 
 
-class AboutSehaAdapter: RecyclerView.Adapter<AboutSehaAdapter.ViewHolder>() {
+class PackageSehaAdapter: RecyclerView.Adapter<PackageSehaAdapter.ViewHolder>() {
 
-    private val items: MutableList<AboutEntity> = ArrayList()
+    private val items: MutableList<PackagesEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -24,8 +24,8 @@ class AboutSehaAdapter: RecyclerView.Adapter<AboutSehaAdapter.ViewHolder>() {
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
-        val binding: AboutSehaItemBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.about_seha_item, parent, false)
+        val binding: PackageSehaItemBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.package_seha_item, parent, false)
 
         return ViewHolder(
             binding
@@ -34,16 +34,22 @@ class AboutSehaAdapter: RecyclerView.Adapter<AboutSehaAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-//        viewHolder.binding.aboutSeha.text = items[position].key
+
+        val item = items[position]
+
+        viewHolder.binding.packageName.text = item.name
+        viewHolder.binding.packagePrice.text = "${item.price} ج.م"
+
+
 //
 //        viewHolder.binding.itemLayout.setOnClickListener {
 //            onItemClickListener?.setOnItemClickListener(items[position].key, items[position].value)
 //        }
     }
 
-    override fun getItemCount() = 5
+    override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<AboutEntity>?) {
+    fun submitList(newItems: List<PackagesEntity>?) {
         clear()
         newItems?.let {
             items.addAll(it)
@@ -61,6 +67,6 @@ class AboutSehaAdapter: RecyclerView.Adapter<AboutSehaAdapter.ViewHolder>() {
             fun setOnItemClickListener(title: String, content: String)
     }
 
-    class ViewHolder(val binding: AboutSehaItemBinding) :
+    class ViewHolder(val binding: PackageSehaItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

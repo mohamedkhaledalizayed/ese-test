@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    tools:context=".sustainablehealth.home.presentation.view.homescreen.SehaFragment">
+    tools:context=".sustainablehealth.home.presentation.view.homescreen.home.SehaFragment">
 
 
     <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/droidkufi_regular"
-            android:text="اذا كان ليس لديك اشتراك رعاية صحية"
+            android:text="@string/seha_info1"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp" />
 
@@ -29,20 +29,34 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/droidkufi_regular"
-            android:text="فا نحن نقدم لكم خدمات صحة مستدامة"
+            android:text="@string/seha_info2"
             android:textColor="#7080ad"
             android:textSize="@dimen/_10ssp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/about_recycler"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:minHeight="@dimen/_60sdp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_height="wrap_content">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/about_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:minHeight="@dimen/_60sdp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <ProgressBar
+                android:id="@+id/progress_circular_about"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:minHeight="@dimen/_100sdp"
+                android:visibility="gone"
+                />
+
+        </FrameLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,7 +64,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/droidkufi_regular"
-            android:text="إختر ما بين الباقات صحة مستدامة"
+            android:text="@string/select_package1"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp" />
 
@@ -60,9 +74,13 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/droidkufi_regular"
-            android:text="اختر الباقة المناسبة لك"
+            android:text="@string/select_package2"
             android:textColor="#7080ad"
             android:textSize="@dimen/_10ssp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/packages_recycler"
@@ -71,6 +89,17 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_10sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/_100sdp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
+
+    </FrameLayout>
 
     </LinearLayout>
 

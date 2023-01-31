@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen
+package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.home
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.databinding.AboutItemBinding
 import com.neqabty.healthcare.databinding.SyndicateBinding
 import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.AboutEntity
 

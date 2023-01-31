@@ -6,7 +6,7 @@ import com.neqabty.healthcare.sustainablehealth.search.data.model.Response
 import com.neqabty.healthcare.sustainablehealth.search.data.model.SearchBody
 import com.neqabty.healthcare.sustainablehealth.search.data.model.area.AreaListModel
 import com.neqabty.healthcare.sustainablehealth.search.data.model.filter.FiltersListModel
-import com.neqabty.healthcare.sustainablehealth.search.data.model.packages.PackagesListModel
+import com.neqabty.healthcare.sustainablehealth.home.data.model.about.packages.PackagesListModel
 import com.neqabty.healthcare.sustainablehealth.search.data.model.search.ProvidersResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -26,8 +26,5 @@ interface SearchApi {
 
     @POST("medicalProviders/getAreasByGov")
     suspend fun getAreasByGov(@Body body: AreaBody): AreaListModel
-
-    @GET("packages")
-    suspend fun getPackages(@Query("entity_code") code: String): PackagesListModel
 
 }

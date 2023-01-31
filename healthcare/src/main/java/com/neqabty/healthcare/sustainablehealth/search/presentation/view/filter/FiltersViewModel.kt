@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
-import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.PackagesEntity
+import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.packages.PackagesEntity
 import com.neqabty.healthcare.sustainablehealth.search.domain.interactors.GetMedicalProviderstUseCase
 import com.neqabty.healthcare.sustainablehealth.search.presentation.mappers.toAreaListUi
 import com.neqabty.healthcare.sustainablehealth.search.presentation.model.filters.FiltersUi
@@ -49,17 +49,4 @@ class FiltersViewModel @Inject constructor(private val getMedicalProviderstUseCa
         }
     }
 
-    val packages = MutableLiveData<Resource<List<PackagesEntity>>>()
-    fun getPackages(code: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            packages.postValue(Resource.loading(data = null))
-            try {
-                getMedicalProviderstUseCase.getPackages(code).collect {
-                    packages.postValue(Resource.success(data = it))
-                }
-            }catch (e:Throwable){
-                packages.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
-            }
-        }
-    }
 }

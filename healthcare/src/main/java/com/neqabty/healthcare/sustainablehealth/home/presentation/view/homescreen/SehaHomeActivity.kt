@@ -38,7 +38,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity
-import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.PackagesEntity
+import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.packages.PackagesEntity
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.filter.FiltersViewModel
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
@@ -150,32 +150,32 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             }
         }
 
-        if (sharedPreferences.code.isNullOrEmpty()){
-            filtersViewModel.getPackages(Constants.NEQABTY_CODE)
-        }else{
-            filtersViewModel.getPackages(sharedPreferences.code)
-        }
-        filtersViewModel.packages.observe(this) {
-            it.let { resource ->
-
-                when (resource.status) {
-                    Status.LOADING -> {
-                        binding.progressCircular.visibility = View.VISIBLE
-                    }
-                    Status.SUCCESS -> {
-                        binding.progressCircular.visibility = View.GONE
-                        mAdapter.submitList(resource.data?.toMutableList())
-                        indicator.createIndicators(mAdapter.itemCount, 0)
-                        val position = (abs(mAdapter.itemCount * 0.5)).toInt()
-                        centerAtPosition(position)
-                    }
-                    Status.ERROR -> {
-                        binding.progressCircular.visibility = View.GONE
-                    }
-                }
-
-            }
-        }
+//        if (sharedPreferences.code.isNullOrEmpty()){
+//            filtersViewModel.getPackages(Constants.NEQABTY_CODE)
+//        }else{
+//            filtersViewModel.getPackages(sharedPreferences.code)
+//        }
+//        filtersViewModel.packages.observe(this) {
+//            it.let { resource ->
+//
+//                when (resource.status) {
+//                    Status.LOADING -> {
+//                        binding.progressCircular.visibility = View.VISIBLE
+//                    }
+//                    Status.SUCCESS -> {
+//                        binding.progressCircular.visibility = View.GONE
+//                        mAdapter.submitList(resource.data?.toMutableList())
+//                        indicator.createIndicators(mAdapter.itemCount, 0)
+//                        val position = (abs(mAdapter.itemCount * 0.5)).toInt()
+//                        centerAtPosition(position)
+//                    }
+//                    Status.ERROR -> {
+//                        binding.progressCircular.visibility = View.GONE
+//                    }
+//                }
+//
+//            }
+//        }
 
         binding.search.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {

@@ -5,14 +5,14 @@ import com.neqabty.healthcare.sustainablehealth.search.data.model.SearchBody
 import com.neqabty.healthcare.sustainablehealth.search.data.model.area.AreaModel
 import com.neqabty.healthcare.sustainablehealth.search.data.model.mappers.toFiltersEntity
 import com.neqabty.healthcare.sustainablehealth.search.data.model.mappers.toMedicalProviderEntity
-import com.neqabty.healthcare.sustainablehealth.search.data.model.packages.DetailModel
-import com.neqabty.healthcare.sustainablehealth.search.data.model.packages.PackageModel
+import com.neqabty.healthcare.sustainablehealth.home.data.model.about.packages.DetailModel
+import com.neqabty.healthcare.sustainablehealth.home.data.model.about.packages.PackageModel
 import com.neqabty.healthcare.sustainablehealth.search.data.source.SearchDS
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.MedicalProviderEntity
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.area.AreaListEntity
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.filter.FiltersEntity
-import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.DetailEntity
-import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.PackagesEntity
+import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.packages.DetailEntity
+import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.packages.PackagesEntity
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.search.ProvidersEntity
 import com.neqabty.healthcare.sustainablehealth.search.domain.mappers.toProvidersEntity
 import com.neqabty.healthcare.sustainablehealth.search.domain.repository.SearchRepository
@@ -46,14 +46,9 @@ class SearchRepositoryImpl @Inject constructor(private val searchDS: SearchDS) :
         }
     }
 
-    override fun getPackages(code: String): Flow<List<PackagesEntity>> {
-        return flow {
-            emit(searchDS.getPackages(code).map { it.toPackageEntity() })
-        }
-    }
 }
 
-private fun PackageModel.toPackageEntity(): PackagesEntity{
+private fun PackageModel.toPackageEntity(): PackagesEntity {
     return PackagesEntity(
         description = description,
         extension = extension,
@@ -77,7 +72,7 @@ private fun PackageModel.toPackageEntity(): PackagesEntity{
     )
 }
 
-private fun DetailModel.toDetailEntity(): DetailEntity{
+private fun DetailModel.toDetailEntity(): DetailEntity {
     return DetailEntity(
         cardId = cardId,
         description = description,

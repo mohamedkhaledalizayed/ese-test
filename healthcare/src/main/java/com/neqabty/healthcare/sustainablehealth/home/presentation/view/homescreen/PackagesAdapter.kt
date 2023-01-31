@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.CardItemBinding
 import com.neqabty.healthcare.databinding.PackageItemLayoutBinding
-import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.DetailEntity
-import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.PackagesEntity
+import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.packages.DetailEntity
+import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.packages.PackagesEntity
 import com.squareup.picasso.Picasso
 import kotlin.collections.ArrayList
 

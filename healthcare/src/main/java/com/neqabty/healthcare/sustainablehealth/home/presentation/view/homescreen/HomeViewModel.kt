@@ -14,6 +14,8 @@ import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.AboutEn
 import com.neqabty.healthcare.sustainablehealth.home.domain.interactors.GetHomeUseCase
 import com.neqabty.healthcare.news.domain.entity.NewsEntity
 import com.neqabty.healthcare.news.domain.interactors.GetNewsUseCase
+import com.neqabty.healthcare.sustainablehealth.home.domain.interactors.GetPackagesUseCase
+import com.neqabty.healthcare.sustainablehealth.home.domain.entity.about.packages.PackagesEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getHomeUseCase: GetHomeUseCase,
-    private val logoutUseCase: LogoutUseCase
+    private val logoutUseCase: LogoutUseCase,
+    private val getPackagesUseCase: GetPackagesUseCase
 ) : ViewModel() {
 
     val aboutList = MutableLiveData<Resource<List<AboutEntity>>>()
@@ -59,6 +62,20 @@ class HomeViewModel @Inject constructor(
                         message = AppUtils().handleError(e)
                     )
                 )
+            }
+        }
+    }
+
+    val packages = MutableLiveData<Resource<List<PackagesEntity>>>()
+    fun getPackages(code: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            packages.postValue(Resource.loading(data = null))
+            try {
+                getPackagesUseCase.build(code).collect {
+                    packages.postValue(Resource.success(data = it))
+                }
+            }catch (e:Throwable){
+                packages.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
         }
     }

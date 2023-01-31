@@ -346,5 +346,9 @@
     <string name="info_home">يمكنك إختيار النقابة الخاصة بك</string>
     <string name="more_main">والتعرف على المزيد من خدمات نقابتك</string>
     <string name="soon">قريبا</string>
+    <string name="seha_info2">فا نحن نقدم لكم خدمات صحة مستدامة</string>
+    <string name="seha_info1">اذا كان ليس لديك اشتراك رعاية صحية</string>
+    <string name="select_package1">إختر ما بين الباقات صحة مستدامة</string>
+    <string name="select_package2">اختر الباقة المناسبة لك</string>
 
 </resources>

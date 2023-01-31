@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".sustainablehealth.home.presentation.view.homescreen.SyndicatesFragment">
+    tools:context=".sustainablehealth.home.presentation.view.homescreen.home.SyndicatesFragment">
 
     <TextView
         android:fontFamily="@font/droidkufi_regular"

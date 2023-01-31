@@ -7,7 +7,7 @@ import com.neqabty.healthcare.sustainablehealth.search.data.model.SearchBody
 import com.neqabty.healthcare.sustainablehealth.search.data.model.area.AreaListModel
 import com.neqabty.healthcare.sustainablehealth.search.data.model.area.AreaModel
 import com.neqabty.healthcare.sustainablehealth.search.data.model.filter.FiltersModel
-import com.neqabty.healthcare.sustainablehealth.search.data.model.packages.PackageModel
+import com.neqabty.healthcare.sustainablehealth.home.data.model.about.packages.PackageModel
 import com.neqabty.healthcare.sustainablehealth.search.data.model.search.ProvidersModel
 import javax.inject.Inject
 
@@ -29,7 +29,4 @@ class SearchDS @Inject constructor(private val searchApi: SearchApi) {
         return searchApi.getAreasByGov(body = AreaBody(governorate_id = id)).data
     }
 
-    suspend fun getPackages(code: String): List<PackageModel> {
-        return searchApi.getPackages(code).data
-    }
 }
