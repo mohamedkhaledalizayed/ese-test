@@ -29,7 +29,8 @@ class HomeViewModel @Inject constructor(
     private val logoutUseCase: LogoutUseCase,
     private val getPackagesUseCase: GetPackagesUseCase,
     private val adsUseCase: AdsUseCase,
-    private val getSyndicateUseCase: GetSyndicateUseCase
+    private val getSyndicateUseCase: GetSyndicateUseCase,
+    private val getNewsUseCase: GetNewsUseCase
 ) : ViewModel() {
 
     val aboutList = MutableLiveData<Resource<List<AboutEntity>>>()
@@ -106,6 +107,20 @@ class HomeViewModel @Inject constructor(
                 }
             }catch (exception:Throwable){
                 syndicates.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+            }
+        }
+    }
+
+    val news = MutableLiveData<Resource<List<NewsEntity>>>()
+    fun getAllNews() {
+        news.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                getNewsUseCase.build().collect {
+                    news.postValue(Resource.success(data = it))
+                }
+            } catch (e: Throwable) {
+                news.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
         }
     }
