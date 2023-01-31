@@ -3,11 +3,16 @@ package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescre
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.databinding.ActivitySehaHomeScreenBinding
+import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 
 @AndroidEntryPoint
@@ -17,19 +22,38 @@ class SehaHomeScreen : BaseActivity<ActivitySehaHomeScreenBinding>() {
         SYNDICATE, SEHA, NEWS, MORE
     }
 
+    private val homeViewModel: HomeViewModel by viewModels()
+    val list = mutableListOf<CarouselItem>()
     override fun getViewBinding() = ActivitySehaHomeScreenBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         loadFragment(SyndicatesFragment())
-        binding.syndicatesContainer.setOnClickListener { fu(MenuItems.SYNDICATE) }
-        binding.sehaContainer.setOnClickListener { fu(MenuItems.SEHA) }
-        binding.newsContainer.setOnClickListener { fu(MenuItems.NEWS) }
-        binding.moreContainer.setOnClickListener { fu(MenuItems.MORE) }
+        binding.syndicatesContainer.setOnClickListener { changeFragment(MenuItems.SYNDICATE) }
+        binding.sehaContainer.setOnClickListener { changeFragment(MenuItems.SEHA) }
+        binding.newsContainer.setOnClickListener { changeFragment(MenuItems.NEWS) }
+        binding.moreContainer.setOnClickListener { changeFragment(MenuItems.MORE) }
+
+        //Start of Ads
+        homeViewModel.getAds()
+        homeViewModel.ads.observe(this) {
+            for (data: AdEntity in it) {
+                list.add(
+                    CarouselItem(
+                        imageUrl = data.image,
+                        caption = ""
+                    )
+                )
+            }
+
+            binding.carousel.setData(list)
+        }
+        //End of Ads
+
     }
 
-    private fun fu(menuItem: MenuItems){
+    private fun changeFragment(menuItem: MenuItems){
 
         when(menuItem){
             MenuItems.SYNDICATE ->{

@@ -25,7 +25,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getHomeUseCase: GetHomeUseCase,
     private val logoutUseCase: LogoutUseCase,
-    private val getPackagesUseCase: GetPackagesUseCase
+    private val getPackagesUseCase: GetPackagesUseCase,
+    private val adsUseCase: AdsUseCase
 ) : ViewModel() {
 
     val aboutList = MutableLiveData<Resource<List<AboutEntity>>>()
@@ -76,6 +77,18 @@ class HomeViewModel @Inject constructor(
                 }
             }catch (e:Throwable){
                 packages.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            }
+        }
+    }
+
+    val ads = MutableLiveData<List<AdEntity>>()
+    fun getAds() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                adsUseCase.build().collect {
+                    ads.postValue( it)
+                }
+            } catch (e: Throwable) {
             }
         }
     }

@@ -50,30 +50,23 @@
             android:background="@drawable/bg_white_rounded"
             android:orientation="vertical">
 
-            <ImageView
+            <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                android:id="@+id/carousel"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_110sdp"
-                android:src="@drawable/banner"
-                android:scaleType="centerCrop"
-                android:layout_margin="@dimen/_5sdp"/>
-
-<!--            <org.imaginativeworld.whynotimagecarousel.ImageCarousel-->
-<!--                android:id="@+id/carousel"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="@dimen/_110sdp"-->
-<!--                android:layout_margin="@dimen/_5sdp"-->
-<!--                app:autoPlay="true"-->
-<!--                app:autoPlayDelay="6000"-->
-<!--                app:bottomShadowAlpha="0.2"-->
-<!--                app:carouselType="BLOCK"-->
-<!--                app:imageScaleType="center"-->
-<!--                app:infiniteCarousel="true"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                app:showIndicator="true"-->
-<!--                app:showNavigationButtons="false"-->
-<!--                app:showTopShadow="false" />-->
+                android:layout_margin="@dimen/_5sdp"
+                app:autoPlay="true"
+                app:autoPlayDelay="6000"
+                app:bottomShadowAlpha="0.2"
+                app:carouselType="BLOCK"
+                app:imageScaleType="center"
+                app:infiniteCarousel="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showIndicator="true"
+                app:showNavigationButtons="false"
+                app:showTopShadow="false" />
 
         </LinearLayout>
 
