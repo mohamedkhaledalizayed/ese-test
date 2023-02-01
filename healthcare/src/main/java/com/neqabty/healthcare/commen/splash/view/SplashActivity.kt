@@ -55,7 +55,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                                     if (sharedPreferences.isSyndicateMember) {
                                         val mainIntent = Intent(
                                             this@SplashActivity,
-                                            com.neqabty.healthcare.mega.home.view.MegaHomeActivity::class.java
+                                            SehaHomeScreen::class.java
                                         )
                                         startActivity(mainIntent)
                                         finish()
@@ -76,7 +76,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                                     } else {
                                         val mainIntent = Intent(
                                             this@SplashActivity,
-                                            SehaHomeScreen::class.java
+                                            SehaHomeActivity::class.java
                                         )
                                         startActivity(mainIntent)
                                         finish()

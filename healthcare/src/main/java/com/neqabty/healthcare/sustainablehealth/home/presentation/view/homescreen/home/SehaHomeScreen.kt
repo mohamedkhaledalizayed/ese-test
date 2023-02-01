@@ -23,7 +23,7 @@ import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 class SehaHomeScreen : BaseActivity<ActivitySehaHomeScreenBinding>() {
 
     enum class MenuItems {
-        SYNDICATE, SEHA, NEWS, MORE
+        SYNDICATE, SEHA, PROFILE, NEWS, MORE
     }
 
     private val homeViewModel: HomeViewModel by viewModels()
@@ -36,6 +36,7 @@ class SehaHomeScreen : BaseActivity<ActivitySehaHomeScreenBinding>() {
         loadFragment(SyndicatesFragment())
         binding.syndicatesContainer.setOnClickListener { changeFragment(MenuItems.SYNDICATE) }
         binding.sehaContainer.setOnClickListener { changeFragment(MenuItems.SEHA) }
+        binding.profileIcon.setOnClickListener { changeFragment(MenuItems.PROFILE) }
         binding.newsContainer.setOnClickListener { changeFragment(MenuItems.NEWS) }
         binding.moreContainer.setOnClickListener { changeFragment(MenuItems.MORE) }
 
@@ -83,6 +84,18 @@ class SehaHomeScreen : BaseActivity<ActivitySehaHomeScreenBinding>() {
                 binding.moreImage.imageTintList = ColorStateList.valueOf(resources.getColor(R.color.unselected_tint))
 
                 binding.syndicate.setTextColor(resources.getColor(R.color.unselected_tint))
+                binding.news.setTextColor(resources.getColor(R.color.unselected_tint))
+                binding.more.setTextColor(resources.getColor(R.color.unselected_tint))
+            }
+            MenuItems.PROFILE ->{
+                loadFragment(ProfileFragment())
+                binding.syndicateImage.imageTintList = ColorStateList.valueOf(resources.getColor(R.color.unselected_tint))
+                binding.sehaImage.imageTintList = ColorStateList.valueOf(resources.getColor(R.color.unselected_tint))
+                binding.newsIame.imageTintList = ColorStateList.valueOf(resources.getColor(R.color.unselected_tint))
+                binding.moreImage.imageTintList = ColorStateList.valueOf(resources.getColor(R.color.unselected_tint))
+
+                binding.syndicate.setTextColor(resources.getColor(R.color.unselected_tint))
+                binding.seha.setTextColor(resources.getColor(R.color.unselected_tint))
                 binding.news.setTextColor(resources.getColor(R.color.unselected_tint))
                 binding.more.setTextColor(resources.getColor(R.color.unselected_tint))
             }
