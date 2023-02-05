@@ -41,16 +41,17 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     private var serviceCode = ""
     private var serviceActionCode = ""
     private var totalAmount = 0
-    private var deliveryFees = 0
+    private var deliveryFees = 0.0
     private var paymentFees = 0
     private val branchesAdapter = BranchesAdapter()
+    private var paymentGateway = 0
     private var deliveryMethod = 1
     private var deliveryMethodHomeId = 0
     private var deliveryMethodBranchId = 0
-    private var deliveryMethodHomePrice = 0
-    private var deliveryMethodBranchPrice = 0
+    private var deliveryMethodHomePrice = 0.0
+    private var deliveryMethodBranchPrice = 0.0
     private var address = ""
-    private var entityBranch = 1
+    private var entityBranch = ""
     private var branchesList: List<BranchesEntity>? = null
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
 
@@ -102,14 +103,17 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                 )
 
                             totalAmount = resource.data.receipt.details.totalPrice.toInt()
-                            deliveryMethodHomeId = 1
-                            deliveryMethodBranchId = 2
 
-                            deliveryMethodHomePrice = 1
-                            deliveryMethodBranchPrice = 2
+                            deliveryMethodHomeId = resource.data.deliveryMethods.filter { it.type == "Home" }[0].methodId
+                            deliveryMethodHomePrice = resource.data.deliveryMethods.filter { it.type == "Home" }[0].price
+
+                            deliveryMethodBranchId = resource.data.deliveryMethods.filter { it.type == "Branch" }[0].methodId
+                            deliveryMethodBranchPrice = resource.data.deliveryMethods.filter { it.type == "Branch" }[0].price
+
 
 
                             paymentFees = resource.data.receipt.cardFees.toInt()
+                            paymentGateway = resource.data.gatewaysData.filter { it.name == "card" }[0].id
                             deliveryMethod = deliveryMethodHomeId
                             deliveryFees = deliveryMethodHomePrice
                             updateTotal()
@@ -172,7 +176,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         binding.spBranches.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 if (branchesList != null && i != 0) {
-                    entityBranch = branchesList?.get(i - 1)!!.entity!!.id
+                    entityBranch = branchesList?.get(i - 1)!!.id
                 }
             }
 
@@ -194,6 +198,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                     list.add(
                                         0,
                                         BranchesEntity(
+                                            id = "",
                                             address = "",
                                             entity = null,
                                             city = resources.getString(R.string.select_branch)
@@ -234,18 +239,19 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                     }
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
-                        if (resource.data?.payment?.paymentMethod == "card") {
-                            val paymentObject = resource.data as PaymentEntity
-                            oPayPayment(paymentObject, true)
+                        when (resource.data?.payment?.paymentMethod) {
+                            "card" -> {
+                                val paymentObject = resource.data as PaymentEntity
+                                oPayPayment(paymentObject, true)
+                            }
+                            "wallet" -> {
 
-//                            val configData = generatePaytabsConfigurationDetails(paymentObject)
-//                            PaymentSdkActivity.startCardPayment(
-//                                this,
-//                                configData,
-//                                callback = this
-//                            )
-                        } else {
+                            }"code" -> {
                             showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
+                            }
+                            else -> {
+
+                            }
                         }
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
@@ -261,6 +267,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             if (b) {
                 paymentMethod = "card"
                 paymentFees = paymentViewModel.payment.value?.data?.receipt?.cardFees!!.toInt()
+                paymentGateway = paymentViewModel.payment.value?.data?.gatewaysData!!.filter { it.name == "card" }[0].id
                 binding.ivCard.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
                 updateTotal()
@@ -271,7 +278,19 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             if (b) {
                 paymentMethod = "code"
                 paymentFees = paymentViewModel.payment.value?.data?.receipt?.codeFees!!.toInt()
+                paymentGateway = paymentViewModel.payment.value?.data?.gatewaysData!!.filter { it.name == "code" }[0].id
                 binding.llChannels.visibility = View.VISIBLE
+                binding.ivCard.visibility = View.GONE
+                updateTotal()
+            }
+        }
+
+        binding.rbWallet.setOnCheckedChangeListener { compoundButton, b ->
+            if (b) {
+                paymentMethod = "wallet"
+                paymentFees = paymentViewModel.payment.value?.data?.receipt?.walletFees!!.toInt()
+                paymentGateway = paymentViewModel.payment.value?.data?.gatewaysData!!.filter { it.name == "wallet" }[0].id
+                binding.llChannels.visibility = View.GONE
                 binding.ivCard.visibility = View.GONE
                 updateTotal()
             }
@@ -301,38 +320,28 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
             if (deliveryMethod == deliveryMethodBranchId) {
                 address = ""
+                deliveryMethod = deliveryMethodBranchId
+            }else{
+                entityBranch = ""
+                deliveryMethod = deliveryMethodHomeId
             }
 
 
-            if (sharedPreferences.isPhoneVerified) {
+            if (!sharedPreferences.isPhoneVerified) {
                 binding.btnNext.isEnabled = false
-                if (deliveryMethod == deliveryMethodHomeId){
-                       paymentViewModel.getPaymentHomeInfo(
-                           PaymentHomeBody(
-                               PaymentHomeBodyObject(
-                                   serviceCode = serviceCode,
-                                   serviceActionCode = serviceActionCode,
-                                   paymentMethod = paymentMethod,
-                                   membershipId = sharedPreferences.membershipId.toInt(),
-                                   address = address,
-                                   deliveryMethod = deliveryMethodHomeId
-                               )
-                           )
-                       )
-                }else{
-                    paymentViewModel.getPaymentInfo(
-                        PaymentBody(
-                            PaymentBodyObject(
-                                serviceCode = serviceCode,
-                                serviceActionCode = serviceActionCode,
-                                paymentMethod = paymentMethod,
-                                membershipId = sharedPreferences.membershipId.toInt(),
-                                entityBranch = entityBranch,
-                                deliveryMethod = deliveryMethodBranchId
-                            )
-                        )
+
+                paymentViewModel.getPaymentInfo(
+                    PaymentBody(
+                        serviceCode = serviceCode,
+                        serviceActionCode = serviceActionCode,
+                        paymentMethod = paymentMethod,
+                        membershipId = sharedPreferences.membershipId.toInt(),
+                        address = address,
+                        branch = entityBranch,
+                        deliveryMethod = deliveryMethod,
+                        paymentGateway = paymentGateway
                     )
-                }
+                )
 
             } else {
                 verifyPhone()

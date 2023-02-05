@@ -174,7 +174,7 @@
         <![CDATA[<font color="#41941b"><u> اضغط هنا</u></font>]]>
     </string>
     <string name="payment_fawry">منافذ الدفع فوري</string>
-    <string name="payment_wallet">المخفظة الالكترونية</string>
+    <string name="payment_wallet">المحفظة الالكترونية</string>
     <string name="payment_meeza">ميزة</string>
     <string name="payment_reference">يمكنك الآن الدفع من اقرب منفذ دفع حتى يتم تأكيد تجديد الاشتراك \n
         كود الدفع:</string>

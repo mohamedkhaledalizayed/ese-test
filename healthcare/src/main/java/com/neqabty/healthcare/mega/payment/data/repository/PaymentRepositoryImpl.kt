@@ -2,7 +2,6 @@ package com.neqabty.healthcare.mega.payment.data.repository
 
 
 import com.neqabty.healthcare.mega.payment.data.model.PaymentBody
-import com.neqabty.healthcare.mega.payment.data.model.PaymentHomeBody
 import com.neqabty.healthcare.mega.payment.data.model.branches.EntityBranche
 import com.neqabty.healthcare.mega.payment.data.model.branches.EntityModel
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.*
@@ -65,12 +64,6 @@ class PaymentRepositoryImpl @Inject constructor(private val paymentDS: PaymentDS
         }
     }
 
-    override fun paymentHome(paymentHomeBody: PaymentHomeBody): Flow<PaymentEntity> {
-        return flow {
-            emit(paymentDS.payment(paymentHomeBody).toPaymentEntity())
-        }
-    }
-
     override fun getBranches(): Flow<List<BranchesEntity>> {
         return flow {
             emit(paymentDS.getBranches().map { it.toBranchesEntity() })
@@ -81,6 +74,7 @@ class PaymentRepositoryImpl @Inject constructor(private val paymentDS: PaymentDS
 
 private fun EntityBranche.toBranchesEntity():BranchesEntity{
     return BranchesEntity(
+        id = id,
         entity = entity.toEntity(),
         address = address,
         city = city

@@ -3,7 +3,6 @@ package com.neqabty.healthcare.mega.payment.data.source
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.mega.payment.data.api.PaymentApi
 import com.neqabty.healthcare.mega.payment.data.model.PaymentBody
-import com.neqabty.healthcare.mega.payment.data.model.PaymentHomeBody
 import com.neqabty.healthcare.mega.payment.data.model.branches.EntityBranche
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentResponse
@@ -29,10 +28,6 @@ class PaymentDS @Inject constructor(private val paymentApi: PaymentApi, private 
 
     suspend fun payment(paymentBody: PaymentBody): PaymentResponse {
         return paymentApi.payment(paymentBody, token =  "Token ${sharedPreferences.token}")
-    }
-
-    suspend fun payment(paymentHomeBody: PaymentHomeBody): PaymentResponse {
-        return paymentApi.paymentHome(paymentHomeBody, token =  "Token ${sharedPreferences.token}")
     }
 
     suspend fun getPaymentStatus(referenceCode: String): PaymentStatusModel {

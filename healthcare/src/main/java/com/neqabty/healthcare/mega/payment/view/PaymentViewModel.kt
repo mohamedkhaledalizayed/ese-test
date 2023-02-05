@@ -6,14 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.mega.payment.data.model.PaymentBody
-import com.neqabty.healthcare.mega.payment.data.model.PaymentHomeBody
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.healthcare.mega.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.paymentstatus.PaymentStatusEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.serviceactions.ServiceActionsEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.services.ServicesListEntity
-import com.neqabty.healthcare.mega.payment.domain.interactors.PaymentUseCase
+import com.neqabty.healthcare.mega.payment.domain.interactors.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +21,14 @@ import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
-class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUseCase) :
+class PaymentViewModel @Inject constructor(
+    private val servicesUseCase: GetServicesUseCase,
+    private val serviceActionsUseCase: GetServiceActionsUseCase,
+    private val paymentDetailsUseCase: GetPaymentDetailsUseCase,
+    private val paymentUseCase: PaymentUseCase,
+    private val paymentStatusUseCase: GetPaymentStatusUseCase,
+    private val branchesUseCase: GetBranchesUseCase
+) :
     ViewModel() {
 
     val services = MutableLiveData<Resource<List<ServicesListEntity>>>()
@@ -30,7 +36,7 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
         services.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                paymentUseCase.getServices().collect {
+                servicesUseCase.getServices().collect {
                     services.postValue(Resource.success(data = it))
                 }
             }catch (exception:Throwable){
@@ -44,7 +50,7 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
         serviceActions.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                paymentUseCase.getServiceActions(code).collect {
+                serviceActionsUseCase.getServiceActions(code).collect {
                     serviceActions.postValue(Resource.success(data = it))
                 }
             }catch (exception:Throwable){
@@ -58,7 +64,7 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
         payment.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                paymentUseCase.build(id, code, number).collect {
+                paymentDetailsUseCase.build(id, code, number).collect {
                     if (it.isSuccessful){
                         payment.postValue(Resource.success(data = it.body()!!))
                     }else{
@@ -75,6 +81,7 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
     }
 
     val paymentInfo = MutableLiveData<Resource<PaymentEntity>>()
+
     fun getPaymentInfo(paymentBody: PaymentBody) {
         paymentInfo.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
@@ -88,25 +95,12 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
         }
     }
 
-    fun getPaymentHomeInfo(paymentHomeBody: PaymentHomeBody) {
-        paymentInfo.postValue(Resource.loading(data = null))
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                paymentUseCase.build(paymentHomeBody).collect {
-                    paymentInfo.postValue(Resource.success(data = it))
-                }
-            }catch (exception:Throwable){
-                paymentInfo.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
-            }
-        }
-    }
-
     val paymentStatus = MutableLiveData<Resource<PaymentStatusEntity>>()
     fun getPaymentStatus(referenceCode: String) {
         paymentStatus.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                paymentUseCase.build(referenceCode).collect {
+                paymentStatusUseCase.build(referenceCode).collect {
                     paymentStatus.postValue(Resource.success(data = it))
                 }
             }catch (exception:Throwable){
@@ -115,17 +109,16 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
         }
     }
 
-
     val branches = MutableLiveData<Resource<List<BranchesEntity>>>()
     fun getBranches() {
         branches.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                paymentUseCase.getBranches().collect {
+                branchesUseCase.getBranches().collect {
                     branches.postValue(Resource.success(data = it))
                 }
             }catch (exception:Throwable){
-                branches.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+                branches.postValue(Resource.error(data = null, message = handleError(exception)))
             }
         }
     }
@@ -156,7 +149,7 @@ class PaymentViewModel @Inject constructor(private val paymentUseCase: PaymentUs
                 }
             }
         } else {
-            ""
+            throwable.message!!
         }
     }
 }
