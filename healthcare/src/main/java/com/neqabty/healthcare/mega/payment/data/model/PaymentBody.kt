@@ -23,6 +23,10 @@ class PaymentBody (
     @SerializedName("payment_gateway")
     val paymentGateway: Int,
     @SerializedName("membership_id")
-    val membershipId: Int = 0
+    val membershipId: Int = 0,
+    @SerializedName("callback_success_url")
+    val callbackSuccessUrl: String = "http://ex.com",
+    @SerializedName("callback_fail_url")
+    val callbackFailUrl: String = "http://ex2.com"
 )
 
