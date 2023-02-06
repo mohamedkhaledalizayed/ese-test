@@ -11,5 +11,7 @@ data class AddFollowerBody(
     @SerializedName("package_id")
     val packageId: String,
     @SerializedName("subscriber_id")
-    val subscriberId: String
+    val subscriberId: String,
+    @SerializedName("mobile")
+    val mobile: String
 )

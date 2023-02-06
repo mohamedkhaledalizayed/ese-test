@@ -131,7 +131,8 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
             AddFollowerBody(
             packageId = intent.getStringExtra("packageId")!!,
             subscriberId = intent.getStringExtra("subscriberId")!!,
-            followers = list
+            followers = list,
+            mobile = sharedPreferences.mobile
         )
         )
     }

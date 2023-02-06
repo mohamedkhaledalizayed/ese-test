@@ -22,8 +22,8 @@ class GetProfileUseCase @Inject constructor(private val profileRepository: Profi
         return profileRepository.addFollower(addFollowerBody)
     }
 
-    fun build(followerId: Int, subscriberId: String): Flow<Boolean>{
-        return profileRepository.deleteFollower(followerId, subscriberId)
+    fun build(followerId: Int, subscriberId: String, mobile: String): Flow<Boolean>{
+        return profileRepository.deleteFollower(followerId, subscriberId, mobile)
     }
 
 }

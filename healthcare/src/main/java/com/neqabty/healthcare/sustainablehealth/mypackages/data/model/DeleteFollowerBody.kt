@@ -9,5 +9,7 @@ data class DeleteFollowerBody(
     @SerializedName("follower_id")
     val followerId: Int,
     @SerializedName("subscriber_id")
-    val subscriberId: String
+    val subscriberId: String,
+    @SerializedName("mobile")
+    val mobile: String
 )

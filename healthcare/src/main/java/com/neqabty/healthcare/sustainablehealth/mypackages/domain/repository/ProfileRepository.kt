@@ -11,5 +11,5 @@ interface ProfileRepository {
     fun getProfile(phone: String): Flow<ProfileEntity>
     fun getRelations(): Flow<List<RelationEntityList>>
     fun addFollower(addFollowerBody: AddFollowerBody): Flow<AddFollowerEntity>
-    fun deleteFollower(followerId: Int, subscriberId: String): Flow<Boolean>
+    fun deleteFollower(followerId: Int, subscriberId: String, mobile: String): Flow<Boolean>
 }

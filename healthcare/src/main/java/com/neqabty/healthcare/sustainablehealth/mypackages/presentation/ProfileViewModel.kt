@@ -67,12 +67,12 @@ class ProfileViewModel @Inject constructor(private val getProfileUseCase: GetPro
 
     val followerStatus = MutableLiveData<Resource<Boolean>>()
 
-    fun deleteFollower(followerId: Int, subscriberId: String){
+    fun deleteFollower(followerId: Int, subscriberId: String, mobile: String){
         viewModelScope.launch(Dispatchers.IO){
             followerStatus.postValue(Resource.loading(data = null))
 
             try {
-                getProfileUseCase.build(followerId, subscriberId).collect {
+                getProfileUseCase.build(followerId, subscriberId, mobile).collect {
                     followerStatus.postValue(Resource.success(data = it))
                 }
             }catch (e: Throwable){

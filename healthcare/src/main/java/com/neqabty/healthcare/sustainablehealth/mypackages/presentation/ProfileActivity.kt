@@ -63,7 +63,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
         mAdapter.onItemClickListener = object :
             PackagesAdapter.OnItemClickListener {
             override fun setOnDeleteItemClickListener(subscriberId: String, followerId: Int) {
-                deleteFollower("هل تريد حذف هذا التابع !", followerId, subscriberId)
+                deleteFollower("هل تريد حذف هذا التابع !", followerId, subscriberId, sharedPreferences.mobile)
             }
 
             override fun setOnAddItemClickListener(packageId: String, subscriberId: String, isMaxFollower: Boolean) {
@@ -120,7 +120,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
 
     }
 
-    private fun deleteFollower(message: String, followerId: Int, subscriberId: String) {
+    private fun deleteFollower(message: String, followerId: Int, subscriberId: String, mobile: String) {
 
         val alertDialog = AlertDialog.Builder(this).create()
         alertDialog.setTitle(getString(R.string.alert))
@@ -129,7 +129,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
         alertDialog.setButton(
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
-            profileViewModel.deleteFollower(followerId, subscriberId)
+            profileViewModel.deleteFollower(followerId, subscriberId, mobile)
             dialog.dismiss()
         }
         alertDialog.setButton(
