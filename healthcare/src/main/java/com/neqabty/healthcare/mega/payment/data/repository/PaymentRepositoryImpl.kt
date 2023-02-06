@@ -5,10 +5,7 @@ import com.neqabty.healthcare.mega.payment.data.model.PaymentBody
 import com.neqabty.healthcare.mega.payment.data.model.branches.EntityBranche
 import com.neqabty.healthcare.mega.payment.data.model.branches.EntityModel
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.*
-import com.neqabty.healthcare.mega.payment.data.model.payment.MobilePaymentPayload
 import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentModel
-import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentResponse
-import com.neqabty.healthcare.mega.payment.data.model.payment.Transaction
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods.PaymentMethodModel
 import com.neqabty.healthcare.mega.payment.data.model.paymentstatus.PaymentStatusModel
 import com.neqabty.healthcare.mega.payment.data.model.services.*
@@ -17,10 +14,7 @@ import com.neqabty.healthcare.mega.payment.data.source.PaymentDS
 import com.neqabty.healthcare.mega.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.branches.Entity
 import com.neqabty.healthcare.mega.payment.domain.entity.inquiryresponse.*
-import com.neqabty.healthcare.mega.payment.domain.entity.payment.MobilePaymentPayloadEntity
-import com.neqabty.healthcare.mega.payment.domain.entity.payment.Payment
 import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
-import com.neqabty.healthcare.mega.payment.domain.entity.payment.TransactionEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.paymentstatus.PaymentStatusEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.serviceactions.ServiceActionsEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.services.*
@@ -130,22 +124,14 @@ fun Member.toMemberEntity(): MemberEntity{
 
 fun Receipt.toReceiptEntity(): ReceiptEntity{
     return ReceiptEntity(
-        cardFees = cardFees,
-        cardTotalPrice = cardTotalPrice,
-        codeFees = codeFees,
-        codeTotalPrice =codeTotalPrice,
-        details = details.toDetailsEntity()
-    )
-}
-
-fun Details.toDetailsEntity(): DetailsEntity {
-    return DetailsEntity(
-        cardPrice = cardPrice,
-        currentFeeYear = currentFeeYear,
-        delayFine = delayFine,
         lastFeeYear = lastFeeYear,
-        lateSubscriptions = lateSubscriptions,
-        totalPrice = totalPrice,
+        currentFeeYear = currentFeeYear,
+        cardPrice = cardPrice,
+        lateSubscriptions =lateSubscriptions,
+        delayFine = delayFine,
+        netAmount = netAmount,
+        fees = fees,
+        totalPrice = totalPrice
     )
 }
 
@@ -158,49 +144,29 @@ fun Service.toServiceEntity(): ServiceEntity {
     )
 }
 
-
-fun PaymentResponse.toPaymentEntity(): PaymentEntity{
+fun PaymentModel.toPaymentEntity(): PaymentEntity{
     return PaymentEntity(
-        mobilePaymentPayload = mobilePaymentPayload?.toMobilePaymentPayloadEntity(),
-        payment = payment.toPayment()
+        address,
+        cashierUrl,
+        deliveryFees,
+        deliveryMethod,
+        entityRefNum,
+        fees,
+        id,
+        membershipId,
+        paymentGateway,
+        paymentGatewayTransactionNum,
+        paymentMethod,
+        paymentSource,
+        refund,
+        service,
+        serviceAction,
+        status,
+        totalAmount,
+        transactionType
     )
 }
 
-fun PaymentModel.toPayment():Payment{
-    return Payment(
-        amount = amount,
-        id = id,
-        itemId = membershipId,
-        paymentMethod = paymentMethod,
-        paymentSource = paymentSource,
-        serviceCode = serviceCode,
-        transaction = transaction.toTransactionEntity()
-    )
-}
-
-fun Transaction.toTransactionEntity(): TransactionEntity{
-    return TransactionEntity(
-        paymentGatewayReferenceId = paymentGatewayReferenceId
-    )
-}
-
-fun MobilePaymentPayload.toMobilePaymentPayloadEntity(): MobilePaymentPayloadEntity {
-    return MobilePaymentPayloadEntity(
-        callbackUrl = callbackUrl,
-        countryCode = countryCode,
-        currency = currency,
-        expireAt = expireAt,
-        merchantId = merchantId,
-        merchantName = merchantName,
-        payAmount = payAmount,
-        paymentType = paymentType,
-        productDescription = productDescription,
-        productName = productName,
-        publickey = publickey,
-        reference = reference,
-        userClientIP = userClientIP
-    )
-}
 
 fun PaymentStatusModel.toPaymentStatusEntity(): PaymentStatusEntity {
     return PaymentStatusEntity(

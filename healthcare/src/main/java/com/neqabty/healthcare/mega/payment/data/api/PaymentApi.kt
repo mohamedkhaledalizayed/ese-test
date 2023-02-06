@@ -4,7 +4,7 @@ package com.neqabty.healthcare.mega.payment.data.api
 import com.neqabty.healthcare.mega.payment.data.model.PaymentBody
 import com.neqabty.healthcare.mega.payment.data.model.branches.BranchesListModel
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.ReceiptResponse
-import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentResponse
+import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentModel
 import com.neqabty.healthcare.mega.payment.data.model.paymentstatus.PaymentStatusModel
 import com.neqabty.healthcare.mega.payment.data.model.services.ServicesListModel
 import com.neqabty.healthcare.mega.payment.data.model.servicesaction.ServiceActionsModel
@@ -28,7 +28,7 @@ interface PaymentApi {
 
     @POST("payment/paymentV2/")
     suspend fun payment(@Body paymentBody: PaymentBody,
-                        @Header("Authorization") token: String): PaymentResponse
+                        @Header("Authorization") token: String): PaymentModel
 
     @GET("transactions/get/{transaction_id}")
     suspend fun getPaymentStatus(@Path("transaction_id") transaction_id: String): PaymentStatusModel

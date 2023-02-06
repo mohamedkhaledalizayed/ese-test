@@ -102,7 +102,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                     sharedPreferences.membershipId
                                 )
 
-                            totalAmount = resource.data.receipt.details.totalPrice.toInt()
+                            totalAmount = resource.data.receipt.totalPrice.toInt()
 
                             deliveryMethodHomeId = resource.data.deliveryMethods.filter { it.type == "Home" }[0].methodId
                             deliveryMethodHomePrice = resource.data.deliveryMethods.filter { it.type == "Home" }[0].price
@@ -112,27 +112,27 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
 
 
-                            paymentFees = resource.data.receipt.cardFees.toInt()
+                            paymentFees = resource.data.receipt.fees.toInt()
                             paymentGateway = resource.data.gatewaysData.filter { it.name == "card" }[0].id
                             deliveryMethod = deliveryMethodHomeId
                             deliveryFees = deliveryMethodHomePrice
                             updateTotal()
                             binding.lastFeeYearValue.text =
-                                resource.data.receipt.details.lastFeeYear.toString()
+                                resource.data.receipt.lastFeeYear.toString()
                             binding.currentFeeYearValue.text =
-                                resource.data.receipt.details.currentFeeYear.toString() +
+                                resource.data.receipt.currentFeeYear.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.cardPriceValue.text =
-                                resource.data.receipt.details.cardPrice.toString() +
+                                resource.data.receipt.cardPrice.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.lateSubscriptionsValue.text =
-                                resource.data.receipt.details.lateSubscriptions.toString() +
+                                resource.data.receipt.lateSubscriptions.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.delayFineValue.text =
-                                resource.data.receipt.details.delayFine.toString() +
+                                resource.data.receipt.delayFine.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.totalValue.text =
-                                resource.data.receipt.details.totalPrice.toString() +
+                                resource.data.receipt.totalPrice.toString() +
                                         "  " + resources.getString(R.string.egp)
 
 
@@ -239,20 +239,20 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                     }
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
-                        when (resource.data?.payment?.paymentMethod) {
-                            "card" -> {
-                                val paymentObject = resource.data as PaymentEntity
-                                oPayPayment(paymentObject, true)
-                            }
-                            "wallet" -> {
-
-                            }"code" -> {
-                            showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
-                            }
-                            else -> {
-
-                            }
-                        }
+//                        when (resource.data?.payment?.paymentMethod) {
+//                            "card" -> {
+//                                val paymentObject = resource.data as PaymentEntity
+//                                oPayPayment(paymentObject, true)
+//                            }
+//                            "wallet" -> {
+//
+//                            }"code" -> {
+//                            showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
+//                            }
+//                            else -> {
+//
+//                            }
+//                        }
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
                         binding.btnNext.isEnabled = true
@@ -266,7 +266,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 paymentMethod = "card"
-                paymentFees = paymentViewModel.payment.value?.data?.receipt?.cardFees!!.toInt()
                 paymentGateway = paymentViewModel.payment.value?.data?.gatewaysData!!.filter { it.name == "card" }[0].id
                 binding.ivCard.visibility = View.VISIBLE
                 binding.llChannels.visibility = View.GONE
@@ -277,7 +276,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 paymentMethod = "code"
-                paymentFees = paymentViewModel.payment.value?.data?.receipt?.codeFees!!.toInt()
                 paymentGateway = paymentViewModel.payment.value?.data?.gatewaysData!!.filter { it.name == "code" }[0].id
                 binding.llChannels.visibility = View.VISIBLE
                 binding.ivCard.visibility = View.GONE
@@ -288,7 +286,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         binding.rbWallet.setOnCheckedChangeListener { compoundButton, b ->
             if (b) {
                 paymentMethod = "wallet"
-                paymentFees = paymentViewModel.payment.value?.data?.receipt?.walletFees!!.toInt()
                 paymentGateway = paymentViewModel.payment.value?.data?.gatewaysData!!.filter { it.name == "wallet" }[0].id
                 binding.llChannels.visibility = View.GONE
                 binding.ivCard.visibility = View.GONE
@@ -456,37 +453,37 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     }
 
     private fun oPayPayment(paymentEntity: PaymentEntity, isCredit: Boolean) {
-        referenceCode = paymentEntity.mobilePaymentPayload!!.reference
-        val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
-        PaymentTask.sandBox = SANDBOX
-        val payInput = PayInput(
-            publickey = paymentEntity.mobilePaymentPayload.publickey,
-            merchantId = paymentEntity.mobilePaymentPayload.merchantId,
-            merchantName = paymentEntity.mobilePaymentPayload.merchantName,
-            reference = paymentEntity.mobilePaymentPayload.reference,
-            countryCode = paymentEntity.mobilePaymentPayload.countryCode, // uppercase
-            currency = paymentEntity.mobilePaymentPayload.currency, // uppercase
-            payAmount = (paymentEntity.mobilePaymentPayload.payAmount.toDouble() * 100).toLong(),
-            productName = binding.tvService.text.toString(),
-            productDescription = binding.tvService.text.toString(),
-            callbackUrl = paymentEntity.mobilePaymentPayload.callbackUrl,
-            userClientIP = "110.246.160.183",
-            expireAt = paymentEntity.mobilePaymentPayload.expireAt,
-            paymentType = paymentType // optional
-        )
+//        referenceCode = paymentEntity.mobilePaymentPayload!!.reference
+//        val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
+//        PaymentTask.sandBox = SANDBOX
+//        val payInput = PayInput(
+//            publickey = paymentEntity.mobilePaymentPayload.publickey,
+//            merchantId = paymentEntity.mobilePaymentPayload.merchantId,
+//            merchantName = paymentEntity.mobilePaymentPayload.merchantName,
+//            reference = paymentEntity.mobilePaymentPayload.reference,
+//            countryCode = paymentEntity.mobilePaymentPayload.countryCode, // uppercase
+//            currency = paymentEntity.mobilePaymentPayload.currency, // uppercase
+//            payAmount = (paymentEntity.mobilePaymentPayload.payAmount.toDouble() * 100).toLong(),
+//            productName = binding.tvService.text.toString(),
+//            productDescription = binding.tvService.text.toString(),
+//            callbackUrl = paymentEntity.mobilePaymentPayload.callbackUrl,
+//            userClientIP = "110.246.160.183",
+//            expireAt = paymentEntity.mobilePaymentPayload.expireAt,
+//            paymentType = paymentType // optional
+//        )
 
-        PaymentTask(this).createOrder(payInput, callback = { status, response ->
-            when (status) {
-                Status.ERROR -> {
-                    Toast.makeText(
-                        this, response.message,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                else -> {
-                }
-            }
-        })
+//        PaymentTask(this).createOrder(payInput, callback = { status, response ->
+//            when (status) {
+//                Status.ERROR -> {
+//                    Toast.makeText(
+//                        this, response.message,
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//                else -> {
+//                }
+//            }
+//        })
     }
 
     var referenceCode = ""
