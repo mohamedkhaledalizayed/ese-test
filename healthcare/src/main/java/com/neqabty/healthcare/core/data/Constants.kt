@@ -47,7 +47,7 @@ object Constants {
     const val TOUR_GUIDE_SYNDICATE_EMAIL = "gts@neqabty.com"
     const val TOUR_GUIDE_SYNDICATE_LAT = 0.0
     const val TOUR_GUIDE_SYNDICATE_LONG = 0.0
-    const val TOUR_GUIDE_SYNDICATE_PHONE = "25899882"
+    const val TOUR_GUIDE_SYNDICATE_PHONE = "25899882 -25890438 - 01144300335"
     const val TOUR_GUIDE_SYNDICATE_ADDRESS = ""
 
     //Neqabty

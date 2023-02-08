@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -52,14 +54,12 @@ class ContactUsActivity : BaseActivity<ActivityContactUsBinding>(), OnMapReadyCa
         mapFragment!!.getMapAsync(this)
 
         binding.call.setOnClickListener {
-            val intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:$phone")
-            try {
-                startActivity(intent)
-            } catch (e: java.lang.Exception) {
-                e.printStackTrace()
-            }
+            val fm: FragmentManager = supportFragmentManager
+            val dialog = NumbersDialog.newInstance(phone)
+            dialog.show(fm, "")
+            dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
         }
+
         binding.emailLayout.setOnClickListener {
             try {
                 val emailIntent = Intent(Intent.ACTION_SEND)

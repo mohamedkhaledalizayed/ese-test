@@ -85,7 +85,7 @@
                 android:id="@+id/phone_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25899882 -25890438 - 01144300335"
+                android:text="@string/tour_guid_numbers"
                 android:textColor="@color/black"
                 android:layout_below="@id/phone"
                 android:layout_toEndOf="@+id/call_icon"
