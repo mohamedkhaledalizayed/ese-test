@@ -70,38 +70,21 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
         mainAdapter.onItemClickListener = object :
             SyndicateAdapter.OnItemClickListener {
             override fun setOnItemClickListener(position: Int, item: SyndicateEntity) {
-                if (item.code == ESE_CODE){
+                if (item.code == ESE_CODE) {
                     val intent = Intent(this@SyndicateActivity, EseLandingActivity::class.java)
                     startActivity(intent)
-                }else{
-                    if (item.code == NEQABTY_CODE){
-                        isSyndicateMember = false
-                        selectedSyndicateCode = ""
-                        selectedSyndicatePosition = 0
+                } else {
+                    isSyndicateMember = true
+                    selectedSyndicateCode = item.code
+                    selectedSyndicatePosition = position + 1
 
-                        val intent = Intent(this@SyndicateActivity, com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity::class.java)
-                        intent.putExtra("id", item.id)
-                        sharedPreferences.mainSyndicate = item.id
-                        sharedPreferences.code = item.code
-                        sharedPreferences.image = item.image
-                        sharedPreferences.syndicateName = item.name
-                        startActivity(intent)
-                        finish()
-                    }else{
-                        isSyndicateMember = true
-                        selectedSyndicateCode = item.code
-                        selectedSyndicatePosition = position + 1
-
-                        val intent = Intent(this@SyndicateActivity, MegaHomeActivity::class.java)
-                        intent.putExtra("id", item.id)
-                        sharedPreferences.mainSyndicate = item.id
-                        sharedPreferences.code = item.code
-                        sharedPreferences.image = item.image
-                        sharedPreferences.syndicateName = item.name
-                        startActivity(intent)
-                        finish()
-                    }
-
+                    val intent = Intent(this@SyndicateActivity, MegaHomeActivity::class.java)
+                    intent.putExtra("id", item.id)
+                    sharedPreferences.mainSyndicate = item.id
+                    sharedPreferences.code = item.code
+                    sharedPreferences.image = item.image
+                    sharedPreferences.syndicateName = item.name
+                    startActivity(intent)
                 }
 
             }
