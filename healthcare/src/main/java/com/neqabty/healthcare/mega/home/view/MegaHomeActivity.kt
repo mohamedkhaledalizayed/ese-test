@@ -469,11 +469,18 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
     }
 
     override fun onBackPressed() {
+
+        if (drawer.isOpen){
+            drawer.closeDrawer(GravityCompat.START)
+            return
+        }
+
         if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
             closeApp(getString(R.string.exit))
         }else{
             finish()
         }
+
     }
 
     private fun closeApp(message: String) {
