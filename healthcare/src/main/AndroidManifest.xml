@@ -152,6 +152,7 @@
             android:exported="false" />
         <activity
             android:name=".auth.signup.presentation.view.SignupActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true" />
 
         <uses-library
