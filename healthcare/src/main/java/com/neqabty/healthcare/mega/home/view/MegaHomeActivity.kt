@@ -207,11 +207,11 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
         }
 
         binding.healthcareImage.setOnClickListener {
-            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_SHORT).show()
         }
 
         binding.travelsImage.setOnClickListener {
-            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_SHORT).show()
         }
 
         homeViewModel.complains.observe(this){
