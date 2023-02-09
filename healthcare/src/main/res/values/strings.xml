@@ -341,5 +341,6 @@
     <string name="no_result">لا يوجد نتائج.</string>
     <string name="digits">إأدجحخهعغفقثصضطكمنتالبيسشظزوةىلارؤءئ</string>
     <string name="tour_guid_numbers">25899882 -25890438 - 01144300335</string>
+    <string name="confirm_pass">تاكيد كلمة المرور</string>
 
 </resources>
