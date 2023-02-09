@@ -425,7 +425,6 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_marginEnd="@dimen/_5sdp"
-                            android:text="٠١١١٢٢٩٠١٨١"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/_12ssp" />
 
