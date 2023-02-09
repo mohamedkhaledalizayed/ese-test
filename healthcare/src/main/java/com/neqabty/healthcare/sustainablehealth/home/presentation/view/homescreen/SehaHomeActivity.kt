@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.SnapHelper
 import com.google.android.material.navigation.NavigationView
+import com.neqabty.chefaa.core.data.Cart
 import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
@@ -415,6 +416,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             sharedPreferences.mainSyndicate = 0
             sharedPreferences.image = ""
             sharedPreferences.syndicateName = ""
+            com.neqabty.chefaa.core.data.Constants.cart = Cart()
             drawer.close()
             val intent = Intent(this@SehaHomeActivity, CheckAccountActivity::class.java)
             startActivity(intent)

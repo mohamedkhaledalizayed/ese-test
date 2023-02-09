@@ -18,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
+import com.neqabty.chefaa.core.data.Cart
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
 import com.neqabty.healthcare.core.data.Constants
@@ -454,6 +455,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             sharedPreferences.image = ""
             sharedPreferences.syndicateName = ""
             sharedPreferences.membershipId = ""
+            com.neqabty.chefaa.core.data.Constants.cart = Cart()
             drawer.close()
             val intent = Intent(this, CheckAccountActivity::class.java)
             startActivity(intent)
