@@ -72,6 +72,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             .setMessage(getString(R.string.please_wait))
             .build()
 
+        init()
         toolbar.overflowIcon = getDrawable(R.drawable.ic_baseline_more_vert_24)
         drawer = binding.drawerLayout
         val carousel: ImageCarousel = findViewById(R.id.carousel)
@@ -281,11 +282,6 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
         }
         alertDialog.show()
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        init()
     }
 
     @SuppressLint("CutPasteId")
