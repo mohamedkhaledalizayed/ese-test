@@ -148,6 +148,7 @@
             android:exported="false" />
         <activity
             android:name=".auth.login.view.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true" />
         <activity
             android:name=".auth.otp.view.VerifyPhoneActivity"
