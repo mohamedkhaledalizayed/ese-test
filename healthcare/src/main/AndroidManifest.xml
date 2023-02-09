@@ -95,6 +95,7 @@
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.subscribtions.presentation.view.SubscriptionActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity"
