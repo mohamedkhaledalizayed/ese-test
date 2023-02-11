@@ -221,10 +221,7 @@ class InquiryDetailsFragment : BaseFragment() {
         llSuperProgressbar.visibility = if (state.isLoading) View.VISIBLE else View.GONE
         if (!state.isLoading) {
             state.fawryTransactionUI?.let{
-                showAlert(getString(R.string.payment_reference) + it.referenceNumber){
-                    navController().popBackStack()
-                    navController().navigate(R.id.homeFragment)
-                }
+                showCopyAlertDialog(it.referenceNumber)
                 return
             }
             state.paymentRequestUI?.let {
@@ -254,8 +251,9 @@ class InquiryDetailsFragment : BaseFragment() {
         alertDialog.setButton(
             AlertDialog.BUTTON_POSITIVE, getString(R.string.copy)
         ) { dialog, _ ->
-            dialog.dismiss()
             copyText(paymentGatewayReferenceId)
+            navController().popBackStack()
+            navController().navigate(R.id.homeFragment)
         }
         alertDialog.show()
     }
