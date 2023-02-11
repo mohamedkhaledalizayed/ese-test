@@ -39,10 +39,10 @@ class AboutSehaAdapter: RecyclerView.Adapter<AboutSehaAdapter.ViewHolder>() {
 
 
 //        viewHolder.binding.aboutSeha.text = items[position].key
-//
-//        viewHolder.binding.itemLayout.setOnClickListener {
-//            onItemClickListener?.setOnItemClickListener(items[position].key, items[position].value)
-//        }
+
+        viewHolder.binding.itemLayout.setOnClickListener {
+            onItemClickListener?.setOnItemClickListener(items[position].key, items[position].value)
+        }
     }
 
     override fun getItemCount() = items.size

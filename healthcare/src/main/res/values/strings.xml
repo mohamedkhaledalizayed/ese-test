@@ -346,11 +346,14 @@
     <string name="info_home">يمكنك إختيار النقابة الخاصة بك</string>
     <string name="more_main">والتعرف على المزيد من خدمات نقابتك</string>
     <string name="soon">قريبا</string>
-    <string name="seha_info2">فا نحن نقدم لكم خدمات صحة مستدامة</string>
-    <string name="seha_info1">اذا كان ليس لديك اشتراك رعاية صحية</string>
+    <string name="seha_info2">تعرف على الميزات المقدمة لك</string>
+    <string name="seha_info1">نقابتي صحة مستدامة</string>
     <string name="select_package1">إختر ما بين الباقات صحة مستدامة</string>
     <string name="select_package2">اختر الباقة المناسبة لك</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="healthcare_text">الرعاية الصحية</string>
+    <string name="hospital_text">الشبكة الطبية</string>
+    <string name="pharmacy_text">صيدلية اونلاين</string>
 
 </resources>

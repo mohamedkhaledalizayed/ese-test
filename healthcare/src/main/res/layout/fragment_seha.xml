@@ -64,6 +64,152 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/droidkufi_regular"
+            android:text="هل انت مهتم بخدمات الرعاية الصحية؟"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/droidkufi_regular"
+            android:text="فا نحن نقدم لكم خدمات صحة مستدامة"
+            android:textColor="#7080ad"
+            android:textSize="@dimen/_10ssp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/bg_white_rounded"
+                android:orientation="vertical"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="true"
+                    android:elevation="@dimen/_10sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/pharmacy"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:text="@string/pharmacy_text"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="@id/image"
+                    app:layout_constraintStart_toStartOf="@id/image"
+                    app:layout_constraintTop_toBottomOf="@id/image" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="@drawable/bg_white_rounded"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="true"
+                    android:elevation="@dimen/_10sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/hospital_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:text="@string/hospital_text"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="@id/image"
+                    app:layout_constraintStart_toStartOf="@id/image"
+                    app:layout_constraintTop_toBottomOf="@id/image" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:background="@drawable/bg_white_rounded"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="true"
+                    android:elevation="@dimen/_10sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/healthcare_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:text="@string/healthcare_text"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_8ssp"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="@id/image"
+                    app:layout_constraintStart_toStartOf="@id/image"
+                    app:layout_constraintTop_toBottomOf="@id/image" />
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/droidkufi_regular"
             android:text="@string/select_package1"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp" />

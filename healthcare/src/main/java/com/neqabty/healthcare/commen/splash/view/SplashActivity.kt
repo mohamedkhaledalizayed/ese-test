@@ -61,7 +61,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                                         finish()
                                     } else {
                                         val mainIntent =
-                                            Intent(this@SplashActivity, SehaHomeActivity::class.java)
+                                            Intent(this@SplashActivity, SehaHomeScreen::class.java)
                                         startActivity(mainIntent)
                                         finish()
                                     }
