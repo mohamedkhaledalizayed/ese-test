@@ -448,6 +448,11 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
+        if (binding.etNationalId.text.toString().length < 14){
+            Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
+            return
+        }
+
         if (binding.etEmail.text.toString().isNullOrEmpty()){
             Toast.makeText(this, "من فضلك ادخل البريد الالكترونى.", Toast.LENGTH_LONG).show()
             return
