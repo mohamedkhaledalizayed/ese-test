@@ -89,7 +89,7 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
                         binding.progressCircular.visibility = View.GONE
                         binding.noResult.visibility = View.GONE
                         mAdapter.submitList(resource.data?.toMutableList())
-                        if (resource.data?.size == 0){
+                        if (mAdapter.itemCount == 0 && resource.data?.size == 0){
                             binding.noResult.visibility = View.VISIBLE
                         }
                     }
