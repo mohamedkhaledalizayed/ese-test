@@ -45,6 +45,8 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
         if (position == (items.size - 1)){
             viewHolder.binding.view.visibility == View.GONE
         }
+
+        viewHolder.binding.deleteFollower.setOnClickListener { onItemClickListener?.setOnDeleteClickListener(position) }
     }
 
     override fun getItemCount() = items.size
@@ -64,7 +66,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: String)
+        fun setOnDeleteClickListener(position: Int)
     }
 
     class ViewHolder(val binding: FollowerItemBinding) :

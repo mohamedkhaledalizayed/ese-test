@@ -164,12 +164,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                 }
             }
         }
-        mAdapter.onItemClickListener = object :
-            FollowerAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(item: String) {
-
-            }
-        }
 
         subscriptionViewModel.providers.observe(this) {
 
@@ -303,6 +297,13 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         binding.followersRecycler.adapter = mAdapter
         mAdapter.submitList(listFollower)
 
+        mAdapter.onItemClickListener = object : FollowerAdapter.OnItemClickListener{
+            override fun setOnDeleteClickListener(position: Int) {
+                listFollower.removeAt(position)
+                mAdapter.submitList(listFollower)
+            }
+
+        }
         followerUri = null
         followerImageUri = null
         binding.etFullName.setText("")

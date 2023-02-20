@@ -5,13 +5,14 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/_10sdp">
+        >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/follower_image"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
             android:src="@drawable/user"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@+id/view"
             android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_10sdp"
@@ -28,7 +29,7 @@
             app:layout_constraintStart_toEndOf="@+id/follower_image"
             android:layout_marginStart="@dimen/_5sdp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/_5sdp"/>
+            android:layout_marginTop="@dimen/_15sdp"/>
 
         <TextView
             android:id="@+id/national_id"
@@ -50,13 +51,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="@dimen/_15sdp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             />
+
+        <ImageView
+            android:id="@+id/delete_follower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             android:background="@color/gray"
             app:layout_constraintBottom_toBottomOf="parent"
             />

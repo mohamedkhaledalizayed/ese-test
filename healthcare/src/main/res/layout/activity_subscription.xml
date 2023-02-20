@@ -449,14 +449,6 @@
                         android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@+id/followers_recycler">
 
-                        <View
-                            android:id="@+id/view"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_1sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:background="@color/gray"
-                            app:layout_constraintTop_toTopOf="parent" />
-
                         <FrameLayout
                             android:id="@+id/follower_picture"
                             android:layout_width="wrap_content"
@@ -465,7 +457,7 @@
                             android:onClick="addFollowerImage"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/view">
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/follower_image"
