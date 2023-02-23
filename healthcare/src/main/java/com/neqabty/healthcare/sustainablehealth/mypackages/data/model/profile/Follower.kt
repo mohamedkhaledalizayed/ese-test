@@ -12,7 +12,7 @@ data class Follower(
     @SerializedName("id")
     val id: Int,
     @SerializedName("image")
-    val image: String,
+    val image: String?,
     @SerializedName("national_id")
     val nationalId: String,
     @SerializedName("qr_code")

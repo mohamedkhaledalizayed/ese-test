@@ -24,7 +24,7 @@ data class Client(
     @SerializedName("national_id")
     val nationalId: String?,
     @SerializedName("personal_image")
-    val personalImage: String,
+    val personalImage: String?,
     @SerializedName("birth_date")
     val birthDate: String,
     @SerializedName("qr_code")

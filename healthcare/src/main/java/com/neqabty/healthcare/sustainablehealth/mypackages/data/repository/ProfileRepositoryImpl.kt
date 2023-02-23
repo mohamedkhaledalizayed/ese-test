@@ -76,7 +76,7 @@ private fun Client.toClientEntity(): ClientEntity{
         mobile = mobile,
         name = name,
         nationalId = nationalId,
-        personalImage = personalImage,
+        personalImage = personalImage ?: "",
         qrCode = qrCode,
         birthDate = birthDate,
         syndicateId = syndicateId
@@ -115,7 +115,7 @@ private fun Follower.toFollowerEntity(): FollowerEntity{
     return FollowerEntity(
         fullName = fullName,
         id = id,
-        image = image,
+        image = image ?: "",
         nationalId = nationalId,
         qrCode = qrCode,
         relation = relation.toRelationEntity(),
