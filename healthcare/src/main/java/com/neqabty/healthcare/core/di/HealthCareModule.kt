@@ -24,7 +24,7 @@ class HealthCareModule {
     @Provides
     @Named("healthcare")
     fun providesBaseUrl(): String {
-        return BASE_URL_PRO
+        return BASE_URL_STAGING
     }
 
     @Provides

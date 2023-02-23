@@ -69,14 +69,14 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                                     if (sharedPreferences.mobile.isEmpty()) {
                                         val mainIntent = Intent(
                                             this@SplashActivity,
-                                            CheckAccountActivity::class.java
+                                            SehaHomeScreen::class.java
                                         )
                                         startActivity(mainIntent)
                                         finish()
                                     } else {
                                         val mainIntent = Intent(
                                             this@SplashActivity,
-                                            SehaHomeActivity::class.java
+                                            SehaHomeScreen::class.java
                                         )
                                         startActivity(mainIntent)
                                         finish()
