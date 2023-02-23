@@ -4,6 +4,7 @@ import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.api.ProfileApi
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.AddFollowerBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.DeleteFollowerBody
+import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.PackagesBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.addfollower.AddFollowerModel
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.profile.ProfileModel
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.relationstypes.RelationModel
@@ -12,7 +13,7 @@ import javax.inject.Inject
 class ProfileDS @Inject constructor(private val profileApi: ProfileApi, private val sharedPreferences: PreferencesHelper) {
 
     suspend fun getProfile(phone: String): ProfileModel {
-        return profileApi.getProfile(token = "Token ${sharedPreferences.token}", phone)
+        return profileApi.getProfile(token = "Token ${sharedPreferences.token}", PackagesBody(mobile = phone))
     }
 
     suspend fun getRelations(): List<RelationModel>{

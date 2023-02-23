@@ -55,6 +55,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                 }
                 Status.ERROR ->{
                     binding.progressCircular.visibility = View.GONE
+                    Log.e("dfghjk", "${resource.message}")
                 }
             }
 
