@@ -196,7 +196,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                                 resource.data!!.toMutableList()
                                     .also { list -> list.add(0, SyndicateListEntity("",0,"", resources.getString(R.string.select_syndicates))) })
                             if (isSyndicateMember){
-                                binding.spSyndicates.setSelection(selectedSyndicatePosition)
+                                binding.spSyndicates.setSelection(selectedSyndicatePosition.minus(1))
                                 syndicateCode = selectedSyndicateCode
                             }else{
                                 isSyndicateMember = true
