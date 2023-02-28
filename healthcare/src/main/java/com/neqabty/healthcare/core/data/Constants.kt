@@ -37,7 +37,7 @@ object Constants {
 
     const val NEQABTY_CODE = "e00"
     const val ESE_CODE = "e03"
-    const val NATURAL_THERAPY_CODE = "e04"
+    const val NATURAL_THERAPY_CODE = "e02"
     const val TOGAREEN_CODE = "e06"
     var isSyndicateMember = false
     var selectedSyndicateCode = ""
