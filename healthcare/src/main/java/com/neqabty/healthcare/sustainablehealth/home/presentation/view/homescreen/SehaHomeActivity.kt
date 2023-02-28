@@ -29,6 +29,7 @@ import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivit
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
+import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.contactus.ContactUsActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
@@ -210,6 +211,34 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
 
+        }
+
+        binding.cvDoctor.setOnClickListener {
+            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctor")
+        }
+
+        binding.cvPharmacy.setOnClickListener {
+            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+        }
+
+        homeViewModel.clinidoUrl.observe(this){
+            when(it.status){
+                Status.LOADING ->{
+
+                }
+                Status.SUCCESS ->{
+                    if (it.data!!.status){
+                        val intent = Intent(this, ClinidoActivity::class.java)
+                        intent.putExtra("url", it.data.url)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+                Status.ERROR ->{
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                }
+            }
         }
 
         //Start of logout
