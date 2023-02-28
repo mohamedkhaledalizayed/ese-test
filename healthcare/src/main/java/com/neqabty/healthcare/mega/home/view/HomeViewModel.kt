@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.auth.logout.domain.interactors.LogoutUseCase
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.ads.domain.interactors.AdsUseCase
+import com.neqabty.healthcare.commen.clinido.domain.entity.ClinidoEntity
+import com.neqabty.healthcare.commen.clinido.domain.usecases.ClinidoUseCase
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.mega.home.domain.interactors.HomeUseCase
@@ -16,6 +18,7 @@ import com.neqabty.healthcare.news.domain.interactors.GetSyndicateNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,6 +27,7 @@ class HomeViewModel @Inject constructor(
     private val homeUseCase: HomeUseCase,
     private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase,
     private val adsUseCase: AdsUseCase,
+    private val clinidoUseCase: ClinidoUseCase,
     private val logoutUseCase: LogoutUseCase
 ) : ViewModel() {
 
@@ -98,6 +102,52 @@ class HomeViewModel @Inject constructor(
                     )
                 )
             }
+        }
+    }
+
+    val clinidoUrl = MutableLiveData<Resource<ClinidoEntity>>()
+    fun getUrl(phone: String, type: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            clinidoUrl.postValue(Resource.loading(data = null))
+            try {
+                clinidoUseCase.build(phone, type).collect {
+                    clinidoUrl.postValue(Resource.success(data = it))
+                }
+            } catch (e: Throwable) {
+                clinidoUrl.postValue(
+                    Resource.error(
+                        data = null,
+                        message = handleError(e)
+                    )
+                )
+            }
+        }
+    }
+
+    fun handleError(throwable: Throwable): String {
+        return if (throwable is HttpException) {
+            when (throwable.code()) {
+                400 -> {
+                    "لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى"
+                }
+                401 -> {
+                    "لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى"
+                }
+                403 -> {
+                    "لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى"
+                }
+                404 -> {
+                    "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
+                }
+                500 -> {
+                    "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
+                }
+                else -> {
+                    throwable.message!!
+                }
+            }
+        } else {
+            throwable.message!!
         }
     }
 }

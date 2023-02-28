@@ -35,6 +35,7 @@ import com.neqabty.healthcare.news.domain.entity.NewsEntity
 import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity
 import com.neqabty.healthcare.news.view.newslist.NewsListActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
+import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -206,12 +207,44 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
 
-        binding.healthcareImage.setOnClickListener {
+        binding.visitHomeImage.setOnClickListener {
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
         }
 
-        binding.travelsImage.setOnClickListener {
+        binding.medicineImage.setOnClickListener {
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
+        }
+
+        binding.pharmacyImage.setOnClickListener {
+            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+        }
+
+        binding.doctorImage.setOnClickListener {
+            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctor")
+        }
+
+        binding.conslImage.setOnClickListener {
+            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
+        }
+
+        homeViewModel.clinidoUrl.observe(this){
+            when(it.status){
+                Status.LOADING ->{
+
+                }
+                Status.SUCCESS ->{
+                    if (it.data!!.status){
+                        val intent = Intent(this, ClinidoActivity::class.java)
+                        intent.putExtra("url", it.data.url)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+                Status.ERROR ->{
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                }
+            }
         }
 
         homeViewModel.complains.observe(this){
