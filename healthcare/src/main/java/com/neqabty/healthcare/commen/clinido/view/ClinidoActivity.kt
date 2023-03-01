@@ -4,6 +4,7 @@ package com.neqabty.healthcare.commen.clinido.view
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -34,10 +35,16 @@ class ClinidoActivity : BaseActivity<ActivityClinidoBinding>() {
         binding.webView.loadUrl(url)
     }
 
-    private class HelloWebViewClient : WebViewClient() {
+    inner class HelloWebViewClient : WebViewClient() {
+
         override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
             view.loadUrl(url)
             return true
+        }
+
+        override fun onPageFinished(view: WebView?, url: String?) {
+            binding.progressCircular.visibility = View.GONE
+
         }
     }
 

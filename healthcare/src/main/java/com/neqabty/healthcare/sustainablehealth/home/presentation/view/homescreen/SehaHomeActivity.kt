@@ -214,19 +214,28 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         }
 
         binding.cvDoctor.setOnClickListener {
-            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctor")
+            if (sharedPreferences.isAuthenticated){
+                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctor")
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
         }
 
         binding.cvPharmacy.setOnClickListener {
-            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+            if (sharedPreferences.isAuthenticated){
+                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
         }
 
         homeViewModel.clinidoUrl.observe(this){
             when(it.status){
                 Status.LOADING ->{
-
+                    loading.show()
                 }
                 Status.SUCCESS ->{
+                    loading.dismiss()
                     if (it.data!!.status){
                         val intent = Intent(this, ClinidoActivity::class.java)
                         intent.putExtra("url", it.data.url)
@@ -236,6 +245,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                     }
                 }
                 Status.ERROR ->{
+                    loading.dismiss()
                     Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 }
             }
