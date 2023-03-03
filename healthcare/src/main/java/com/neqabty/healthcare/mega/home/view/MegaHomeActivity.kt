@@ -18,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
+import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
 import com.neqabty.healthcare.core.data.Constants
@@ -212,12 +213,23 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
         }
 
         binding.medicineImage.setOnClickListener {
-            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
+            if (sharedPreferences.isAuthenticated){
+                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
         }
 
         binding.pharmacyImage.setOnClickListener {
             if (sharedPreferences.isAuthenticated){
-                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+                val intent = Intent(this, ChefaaHomeActivity::class.java)
+                intent.putExtra("user_number", sharedPreferences.mobile)
+                intent.putExtra("mobile_number", sharedPreferences.mobile)
+                intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
+                intent.putExtra("national_id", sharedPreferences.nationalId)
+                intent.putExtra("name", sharedPreferences.name)
+                intent.putExtra("jwt", "")
+                startActivity(intent)
             }else{
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }

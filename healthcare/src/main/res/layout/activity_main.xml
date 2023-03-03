@@ -116,7 +116,8 @@
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:elevation="@dimen/_4sdp"
-                            app:cardCornerRadius="@dimen/_4sdp">
+                            app:cardCornerRadius="@dimen/_4sdp"
+                            android:visibility="gone">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -142,6 +143,46 @@
                                     android:textStyle="bold"
                                     android:textColor="@color/black"
                                     android:text="@string/visit_home"
+                                    android:textAlignment="center"
+                                    android:layout_marginBottom="@dimen/_5sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"/>
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="wrap_content"
+                            android:elevation="@dimen/_4sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_1sdp"
+                            app:cardCornerRadius="@dimen/_4sdp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                >
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_60sdp"
+                                    android:scaleType="center"
+                                    android:src="@drawable/medicine_image"
+                                    android:id="@+id/medicine_image"
+                                    />
+
+                                <TextView
+                                    android:fontFamily="@font/cairo_regular"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:textStyle="bold"
+                                    android:id="@+id/medicine_title"
+                                    android:textColor="@color/black"
+                                    android:text="@string/medicine"
                                     android:textAlignment="center"
                                     android:layout_marginBottom="@dimen/_5sdp"
                                     android:layout_marginTop="@dimen/_5sdp"/>
@@ -206,48 +247,11 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="wrap_content"
-                            android:elevation="@dimen/_4sdp"
-                            android:layout_marginBottom="@dimen/_1sdp"
-                            app:cardCornerRadius="@dimen/_4sdp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                >
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_60sdp"
-                                    android:scaleType="center"
-                                    android:src="@drawable/medicine_image"
-                                    android:id="@+id/medicine_image"
-                                    />
-
-                                <TextView
-                                    android:fontFamily="@font/cairo_regular"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:textStyle="bold"
-                                    android:id="@+id/medicine_title"
-                                    android:textColor="@color/black"
-                                    android:text="@string/medicine"
-                                    android:textAlignment="center"
-                                    android:layout_marginBottom="@dimen/_5sdp"
-                                    android:layout_marginTop="@dimen/_5sdp"/>
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="@dimen/_100sdp"
-                            android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:elevation="@dimen/_4sdp"
-                            app:cardCornerRadius="@dimen/_4sdp">
+                            app:cardCornerRadius="@dimen/_4sdp"
+                            android:visibility="gone">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
