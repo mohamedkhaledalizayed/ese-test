@@ -232,13 +232,13 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             updateTotal()
         }
 
-        binding.rbBranches.setOnClickListener {
-            deliveryMethod = deliveryMethodBranchId
-            binding.address.visibility = View.GONE
-            binding.spinnerContainer.visibility = View.VISIBLE
-            deliveryFees = deliveryMethodBranchPrice
-            updateTotal()
-        }
+//        binding.rbBranches.setOnClickListener {
+//            deliveryMethod = deliveryMethodBranchId
+//            binding.address.visibility = View.GONE
+//            binding.spinnerContainer.visibility = View.VISIBLE
+//            deliveryFees = deliveryMethodBranchPrice
+//            updateTotal()
+//        }
 
         paymentViewModel.paymentInfo.observe(this) {
 
@@ -328,9 +328,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                    serviceCode = serviceCode,
                                    serviceActionCode = serviceActionCode,
                                    paymentMethod = paymentMethod,
-                                   membershipId = sharedPreferences.membershipId.toInt(),
                                    address = address,
-                                   deliveryMethod = deliveryMethodHomeId
+                                   deliveryMethod = deliveryMethodHomeId,
+                                   deliveryMobile = binding.mobile.text.toString(),
+                                   deliveryNotes = binding.notes.text.toString()
                                )
                            )
                        )
