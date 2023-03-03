@@ -25,7 +25,7 @@ class PaymentDS @Inject constructor(private val paymentApi: PaymentApi, private 
     }
 
     suspend fun getPaymentDetails(id: String,code: String, number: String): Response<ReceiptResponse> {
-        return paymentApi.getPaymentDetails(id = id, code = code, number = "12345678", token =  "Token ${sharedPreferences.token}")
+        return paymentApi.getPaymentDetails(id = id, code = code, number = number, token =  "Token ${sharedPreferences.token}")
     }
 
     suspend fun payment(paymentBody: PaymentBody): PaymentResponse {

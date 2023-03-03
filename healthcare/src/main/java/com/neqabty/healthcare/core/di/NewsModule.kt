@@ -25,7 +25,7 @@ class NewsModule {
     @Provides
     @Named("newsModule")
     fun providesBaseUrl(): String {
-        return BASE_URL_STAGING_NEWS
+        return BASE_URL_PRO_NEWS
     }
 
     @Provides

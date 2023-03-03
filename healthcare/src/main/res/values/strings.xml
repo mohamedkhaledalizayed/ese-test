@@ -130,7 +130,7 @@
     <string name="login">تسجيل الدخول</string>
     <string name="password">كلمة المرور</string>
     <string name="enter_password">من فضلك ادخل كلمة المرور</string>
-    <string name="something_wrong">حدث خطاء</string>
+    <string name="something_wrong">عفوا، يوجد خطأ في البيانات</string>
 
 
     <string name="payments">المدفوعات</string>
