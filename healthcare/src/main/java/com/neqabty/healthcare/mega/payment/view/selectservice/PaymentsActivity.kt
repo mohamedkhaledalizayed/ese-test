@@ -14,6 +14,7 @@ import com.neqabty.healthcare.mega.payment.domain.entity.serviceactions.ServiceA
 import com.neqabty.healthcare.mega.payment.domain.entity.services.ServicesListEntity
 import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
 import com.neqabty.healthcare.mega.payment.view.paymentdetails.PaymentDetailsActivity
+import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,12 +32,17 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 //        val intent = Intent(this, PaymentStatusActivity::class.java)
-//        intent.putExtra("referenceCode", "b3d7a491-6b14-4bad-bf2b-b282fc547199")
+//        intent.putExtra("referenceCode", "ffb82ec9-07e6-4761-ab78-7714f9a646a3")
 //        startActivity(intent)
         setupToolbar(titleResId = R.string.payments)
 
-        binding.membershipId.setText(sharedPreferences.membershipId)
-        binding.membershipId.isEnabled = false
+        if (sharedPreferences.membershipId.isEmpty()){
+            binding.membershipIdContainer.visibility = View.GONE
+        }else{
+            binding.membershipId.setText(sharedPreferences.membershipId)
+            binding.membershipId.isEnabled = false
+        }
+
         paymentViewModel.getServices()
         paymentViewModel.services.observe(this) {
 

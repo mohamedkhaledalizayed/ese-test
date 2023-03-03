@@ -16,6 +16,7 @@ import com.neqabty.healthcare.auth.signup.data.model.SignupBody
 import com.neqabty.healthcare.auth.signup.data.model.SignupTogareenBody
 import com.neqabty.healthcare.auth.signup.domain.entity.SignupParams
 import com.neqabty.healthcare.auth.signup.domain.entity.syndicate.SyndicateListEntity
+import com.neqabty.healthcare.core.data.Constants.NATURAL_THERAPY_CODE
 import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
 import com.neqabty.healthcare.core.data.Constants.isSyndicateMember
 import com.neqabty.healthcare.core.data.Constants.selectedSyndicateCode
@@ -84,6 +85,10 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             binding.serialNumberContainer.visibility = View.VISIBLE
         }
 
+        if (selectedSyndicateCode == NATURAL_THERAPY_CODE){
+            binding.membershipIdContainer.visibility = View.GONE
+        }
+
         binding.phone.setText(sharedPreferences.mobile)
         binding.phone.isEnabled = false
         binding.spSyndicates.adapter = mSyndicatesAdapter
@@ -91,12 +96,19 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 if (syndicateListEntity != null && i != 0) {
                     syndicateCode = syndicateListEntity?.get(i - 1)!!.code
-                    if (syndicateCode == TOGAREEN_CODE){
-                        binding.nationalIdContainer.visibility = View.GONE
-                        binding.serialNumberContainer.visibility = View.VISIBLE
-                    }else{
-                        binding.nationalIdContainer.visibility = View.VISIBLE
-                        binding.serialNumberContainer.visibility = View.GONE
+                    when (syndicateCode) {
+                        TOGAREEN_CODE -> {
+                            binding.nationalIdContainer.visibility = View.GONE
+                            binding.serialNumberContainer.visibility = View.VISIBLE
+                        }
+                        NATURAL_THERAPY_CODE -> {
+                            binding.membershipIdContainer.visibility = View.GONE
+                        }
+                        else -> {
+                            binding.nationalIdContainer.visibility = View.VISIBLE
+                            binding.serialNumberContainer.visibility = View.GONE
+                            binding.membershipIdContainer.visibility = View.VISIBLE
+                        }
                     }
                 }
             }
@@ -196,7 +208,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                                 resource.data!!.toMutableList()
                                     .also { list -> list.add(0, SyndicateListEntity("",0,"", resources.getString(R.string.select_syndicates))) })
                             if (isSyndicateMember){
-                                binding.spSyndicates.setSelection(selectedSyndicatePosition)
+                                binding.spSyndicates.setSelection(selectedSyndicatePosition.minus(1))
                                 syndicateCode = selectedSyndicateCode
                             }else{
                                 isSyndicateMember = true
@@ -259,40 +271,55 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 return
             }
 
-            if (binding.membershipId.text.toString().isEmpty()){
-                Toast.makeText(this, resources.getString(R.string.enter_membership_id), Toast.LENGTH_LONG).show()
-                return
+            if (syndicateCode != NATURAL_THERAPY_CODE){
+                if (binding.membershipId.text.toString().isEmpty()){
+                    Toast.makeText(this, resources.getString(R.string.enter_membership_id), Toast.LENGTH_LONG).show()
+                    return
+                }
             }
 
-            if (syndicateCode == TOGAREEN_CODE){
-                if (binding.serialNumber.text.toString().isEmpty()){
-                    Toast.makeText(this, "Enter Serial Number.", Toast.LENGTH_LONG).show()
-                    return
-                }
-                signupViewModel.signup(
-                    SignupTogareenBody(
-                        entityCode = syndicateCode,
-                        membershipId = binding.membershipId.text.toString(),
-                        mobile = binding.phone.text.toString(),
-                        serialNumber = binding.serialNumber.text.toString(),
-                        email = binding.email.text.toString()
+            when (syndicateCode) {
+                TOGAREEN_CODE -> {
+                    if (binding.serialNumber.text.toString().isEmpty()){
+                        Toast.makeText(this, "Enter Serial Number.", Toast.LENGTH_LONG).show()
+                        return
+                    }
+                    signupViewModel.signup(
+                        SignupTogareenBody(
+                            entityCode = syndicateCode,
+                            membershipId = binding.membershipId.text.toString(),
+                            mobile = binding.phone.text.toString(),
+                            serialNumber = binding.serialNumber.text.toString(),
+                            email = binding.email.text.toString()
+                        )
                     )
-                )
-            }else{
-                if (binding.nationalId.text.toString().isEmpty() || !binding.nationalId.text.isDigitsOnly() || binding.nationalId.text.toString().length < 14){
-                    Toast.makeText(this, resources.getString(R.string.enter_national_id), Toast.LENGTH_LONG).show()
-                    return
                 }
+                NATURAL_THERAPY_CODE -> {
+                    signupViewModel.signup(
+                        SignupBody(
+                            entityCode = syndicateCode,
+                            nationalId = binding.nationalId.text.toString(),
+                            mobile = binding.phone.text.toString(),
+                            email = binding.email.text.toString()
+                        )
+                    )
+                }
+                else -> {
+                    if (binding.nationalId.text.toString().isEmpty() || !binding.nationalId.text.isDigitsOnly() || binding.nationalId.text.toString().length < 14){
+                        Toast.makeText(this, resources.getString(R.string.enter_national_id), Toast.LENGTH_LONG).show()
+                        return
+                    }
 
-                signupViewModel.signup(
-                    SignupBody(
-                        entityCode = syndicateCode,
-                        membershipId = binding.membershipId.text.toString(),
-                        mobile = binding.phone.text.toString(),
-                        nationalId = binding.nationalId.text.toString(),
-                        email = binding.email.text.toString()
+                    signupViewModel.signup(
+                        SignupBody(
+                            entityCode = syndicateCode,
+                            membershipId = binding.membershipId.text.toString(),
+                            mobile = binding.phone.text.toString(),
+                            nationalId = binding.nationalId.text.toString(),
+                            email = binding.email.text.toString()
+                        )
                     )
-                )
+                }
             }
         }else{
 

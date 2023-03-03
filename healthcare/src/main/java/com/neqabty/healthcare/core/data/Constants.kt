@@ -21,7 +21,7 @@ object Constants {
     //News
     const val BASE_URL_DEV_NEWS = "https://news.et3.co/api/"
     const val BASE_URL_STAGING_NEWS = "https://staging-news.neqabty.com/api/"
-    const val BASE_URL_PRO_NEWS = "https://news.neqabty.com/api//"
+    const val BASE_URL_PRO_NEWS = "https://news.neqabty.com/api/"
 
     //OTP
     const val BASE_URL_DEV_OTP = "https://neqabty.et3.co/"
@@ -29,14 +29,15 @@ object Constants {
     const val BASE_URL_PRO_OTP = "https://community.neqabty.com/"
 
     //Main
-    const val BASE_URL_Main = BASE_URL_STAGING_SYNDICATE
+    const val BASE_URL_Main = BASE_URL_PRO_SYNDICATE
     // for payment true for testing false for production
-    const val SANDBOX = true
+    const val SANDBOX = false
 
     // End
 
     const val NEQABTY_CODE = "e00"
     const val ESE_CODE = "e03"
+    const val NATURAL_THERAPY_CODE = "e02"
     const val TOGAREEN_CODE = "e06"
     var isSyndicateMember = false
     var selectedSyndicateCode = ""

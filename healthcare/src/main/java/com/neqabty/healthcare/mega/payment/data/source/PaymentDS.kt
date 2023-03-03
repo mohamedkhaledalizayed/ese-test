@@ -41,7 +41,7 @@ class PaymentDS @Inject constructor(private val paymentApi: PaymentApi, private 
     }
 
     suspend fun getPaymentStatus(referenceCode: String): PaymentStatusModel {
-        return paymentApi.getPaymentStatus(referenceCode)
+        return paymentApi.getPaymentStatus(token =  "Token ${sharedPreferences.token}", referenceCode)
     }
 
     suspend fun getBranches(): List<EntityBranche> {

@@ -39,7 +39,7 @@ interface PaymentApi {
     suspend fun getPaymentMethods(@Header("Authorization") token: String): PaymentMethodsResponse
 
     @GET("transactions/get/{transaction_id}")
-    suspend fun getPaymentStatus(@Path("transaction_id") transaction_id: String): PaymentStatusModel
+    suspend fun getPaymentStatus(@Header("Authorization") token: String, @Path("transaction_id") transaction_id: String): PaymentStatusModel
 
     @GET("entity_branches")
     suspend fun getBranches(@Query("special-format") platform: String = "android",

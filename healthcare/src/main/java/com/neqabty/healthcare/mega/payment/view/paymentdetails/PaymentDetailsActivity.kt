@@ -23,6 +23,7 @@ import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
 import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
+import com.neqabty.healthcare.core.data.Constants.NATURAL_THERAPY_CODE
 import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
 import com.payment.paymentsdk.PaymentSdkActivity
 import com.payment.paymentsdk.PaymentSdkConfigBuilder
@@ -73,9 +74,15 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             binding.deliveryFeesValue.visibility = View.GONE
         }
 
+
         serviceCode = intent.getStringExtra("code")!!
         serviceActionCode = intent.getStringExtra("service_action_code")!!
-        paymentViewModel.getPaymentDetails(serviceCode, serviceActionCode, sharedPreferences.membershipId)
+        if (sharedPreferences.code == NATURAL_THERAPY_CODE){
+            binding.rbBranches.visibility = View.GONE
+            paymentViewModel.getPaymentDetails(serviceCode, serviceActionCode, "12345678")
+        }else{
+            paymentViewModel.getPaymentDetails(serviceCode, serviceActionCode, sharedPreferences.membershipId)
+        }
         paymentViewModel.payment.observe(this) {
 
             it?.let { resource ->
@@ -99,7 +106,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                             binding.tvMemberNumber.text =
                                 resources.getString(
                                     R.string.member_id,
-                                    sharedPreferences.membershipId
+                                    "${resource.data.member.membershipId}"
                                 )
 
                             totalAmount = resource.data!!.receipt!!.details.totalPrice.toInt()
@@ -322,18 +329,36 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             if (sharedPreferences.isPhoneVerified) {
                 binding.btnNext.isEnabled = false
                 if (deliveryMethod == deliveryMethodHomeId){
-                       paymentViewModel.getPaymentHomeInfo(
-                           PaymentHomeBody(
-                               PaymentHomeBodyObject(
-                                   serviceCode = serviceCode,
-                                   serviceActionCode = serviceActionCode,
-                                   paymentMethod = paymentMethod,
-                                   membershipId = sharedPreferences.membershipId.toInt(),
-                                   address = address,
-                                   deliveryMethod = deliveryMethodHomeId
+                       if (sharedPreferences.code == NATURAL_THERAPY_CODE){
+                           paymentViewModel.getPaymentHomeInfo(
+                               PaymentHomeBody(
+                                   PaymentHomeBodyObject(
+                                       serviceCode = serviceCode,
+                                       serviceActionCode = serviceActionCode,
+                                       paymentMethod = paymentMethod,
+                                       address = address,
+                                       deliveryMethod = deliveryMethodHomeId,
+                                       deliveryMobile = binding.mobile.text.toString(),
+                                       deliveryNotes = binding.notes.text.toString()
+                                   )
                                )
                            )
-                       )
+                       }else{
+                           paymentViewModel.getPaymentHomeInfo(
+                               PaymentHomeBody(
+                                   PaymentHomeBodyObject(
+                                       serviceCode = serviceCode,
+                                       serviceActionCode = serviceActionCode,
+                                       paymentMethod = paymentMethod,
+                                       address = address,
+                                       membershipId = sharedPreferences.membershipId.toInt(),
+                                       deliveryMethod = deliveryMethodHomeId,
+                                       deliveryMobile = binding.mobile.text.toString(),
+                                       deliveryNotes = binding.notes.text.toString()
+                                   )
+                               )
+                           )
+                       }
                 }else{
                     paymentViewModel.getPaymentInfo(
                         PaymentBody(
@@ -343,7 +368,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                 paymentMethod = paymentMethod,
                                 membershipId = sharedPreferences.membershipId.toInt(),
                                 entityBranch = entityBranch,
-                                deliveryMethod = deliveryMethodBranchId
+                                deliveryMethod = deliveryMethodBranchId,
+                                deliveryMobile = binding.mobile.text.toString(),
+                                deliveryNotes = binding.notes.text.toString()
                             )
                         )
                     )
