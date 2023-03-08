@@ -523,52 +523,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         binding.btnNext.isEnabled = true
     }
 
-    //region Paytabs///
-    private fun generatePaytabsConfigurationDetails(paymentEntity: PaymentEntity): PaymentSdkConfigurationDetails {
-        val profileId = "103411"
-        val serverKey = "SKJN6BDTKH-JG26L9WRDL-DNMN2ZZ9RN"
-        val clientKey = "C7KMVN-NV2B6T-MGBPVR-2G72KG"
-        val locale = PaymentSdkLanguageCode.EN /*Or PaymentSdkLanguageCode.AR*/
-        val currency = "EGP"
-        val merchantCountryCode = "EG"
-
-        val billingData = PaymentSdkBillingDetails(
-            "Giza",
-            "eg",
-            "customer@customer.com",
-            "",
-            sharedPreferences.mobile, "Egypt",
-            binding.address.text.toString(), "132"
-        )
-        val configData = PaymentSdkConfigBuilder(
-            profileId,
-            serverKey,
-            clientKey,
-            (totalAmount + paymentFees + deliveryFees).toDouble(),
-            currency
-        )
-            .setCartDescription(binding.tvService.text.toString())
-            .setLanguageCode(locale)
-            .setMerchantIcon(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.paytabs_logo
-                )
-            )
-            .setBillingData(billingData)
-            .setMerchantCountryCode(merchantCountryCode)
-            .setTransactionType(PaymentSdkTransactionType.SALE)
-            .setTransactionClass(PaymentSdkTransactionClass.ECOM)
-            .setTokenise(PaymentSdkTokenise.NONE) //Check other tokenizing types in PaymentSdkTokenise
-            .setCartId(paymentEntity.mobilePaymentPayload?.reference)
-            .showBillingInfo(false)
-            .showShippingInfo(false)
-            .forceShippingInfo(false)
-            .setScreenTitle(binding.tvService.text.toString())
-
-        return configData.build()
-    }
-
     override fun onError(error: PaymentSdkError) {
         showAlert(getString(R.string.payment_canceled)) {
             finish()
