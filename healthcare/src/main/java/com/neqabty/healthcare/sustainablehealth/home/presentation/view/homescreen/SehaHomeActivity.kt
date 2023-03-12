@@ -61,6 +61,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
     private val mAdapter = PackagesAdapter()
     override fun getViewBinding() = ActivityHomeBinding.inflate(layoutInflater)
     private val homeViewModel: HomeViewModel by viewModels()
+    private var title = ""
     private lateinit var customLinearLayoutManager: CustomLinearLayoutManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -216,6 +217,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         binding.cvDoctor.setOnClickListener {
             if (sharedPreferences.isAuthenticated){
                 homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctor")
+                title = "حجز أطباء"
             }else{
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
@@ -224,6 +226,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         binding.cvPharmacy.setOnClickListener {
             if (sharedPreferences.isAuthenticated){
                 homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+                title = "العلاج الشهرى"
             }else{
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
@@ -239,6 +242,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                     if (it.data!!.status){
                         val intent = Intent(this, ClinidoActivity::class.java)
                         intent.putExtra("url", it.data.url)
+                        intent.putExtra("title", title)
                         startActivity(intent)
                     }else{
                         Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
