@@ -38,6 +38,13 @@ class ClinidoActivity : BaseActivity<ActivityClinidoBinding>() {
         setupToolbar(title = title)
         url = intent.getStringExtra("url")!!
 
+        binding.backBtn.setOnClickListener {
+            if (binding.webView.canGoBack()) {
+                binding.webView.goBack()
+            }else{
+                finish()
+            }
+        }
 
         binding.webView.loadUrl(url)
         initWebView()

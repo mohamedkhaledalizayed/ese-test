@@ -249,6 +249,7 @@
     <string name="ministry_license">تحديث صورة ترخيص الوزارة.</string>
 
     <string name="agree">موافق</string>
+    <string name="disagree">لا اوافق</string>
     <string name="rooted">هذا الجهاز غير أمن لا يمكنك إستخدام هذا التطبيق.</string>
     <string name="from_branches">استلام من نقابة فرعية</string>
     <string name="to_home">شحن منزلى</string>
@@ -338,7 +339,16 @@
     <string name="ese_text">خدمات نقابة \nالمهندسين</string>
     <string name="chefaa_text">خدمات العلاج \nالشهري</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="terms">
+
+        - خصم على الادوية المستوردة  12%\n
+        - خصم على الادوية المحلي   22%\n
+        - يجب ان لا يقل سعر الطلب عن 200 جنيه \n ويتم اضافة سعر التوصيل 15 جنية.\n
+        - التوصيل مجاني في حالة وصول الطلب \n الي 750 جنيه او اكثر.\n
+        - يتم توصيل الطلب داخل القاهره الكبري/n في خلال 48 ساعة.
+
+    </string>
+
     <string name="password_conditions">كلمة المرور يجب ان تحتوى على حروف و ارقام و رموز مثل # @ ...</string>
     <string name="city">المدينة</string>
     <string name="vat">الأسعار غير شاملة ضريبة القيمة المضافة</string>

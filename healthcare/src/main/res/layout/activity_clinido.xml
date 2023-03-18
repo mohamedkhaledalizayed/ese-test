@@ -10,6 +10,13 @@
         android:id="@+id/toolbar"
         layout="@layout/mega_toolbar" />
 
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:src="@drawable/payment_sdk_back_arrow"
+        android:tint="@color/black"/>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

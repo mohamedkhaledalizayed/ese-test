@@ -216,7 +216,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
 
         binding.cvDoctor.setOnClickListener {
             if (sharedPreferences.isAuthenticated){
-                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctor")
+                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors")
                 title = "حجز أطباء"
             }else{
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
@@ -225,8 +225,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
 
         binding.cvPharmacy.setOnClickListener {
             if (sharedPreferences.isAuthenticated){
-                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
-                title = "العلاج الشهرى"
+                openTermsDialog()
             }else{
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
@@ -358,6 +357,28 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         val dialog = AboutFragment.newInstance(title, content, code)
         dialog.show(fm, "")
         dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
+
+    }
+
+    private fun openTermsDialog() {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("الشروط والاحكام")
+        alertDialog.setMessage(resources.getString(R.string.terms))
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+            title = "العلاج الشهرى"
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, getString(R.string.disagree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
 
     }
 
