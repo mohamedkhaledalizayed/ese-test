@@ -55,6 +55,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
     private lateinit var toolbar: Toolbar
     private val homeViewModel: HomeViewModel by viewModels()
     private val mAdapter = NewsAdapter()
+    private var title = ""
     private val syndicatesAdapter = NewsAdapter()
     private val listAds = ArrayList<AdEntity>()
     private val list = mutableListOf<CarouselItem>()
@@ -214,7 +215,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
         binding.medicineImage.setOnClickListener {
             if (sharedPreferences.isAuthenticated){
-                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+                openTermsDialog()
             }else{
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
@@ -237,7 +238,8 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
         binding.doctorImage.setOnClickListener {
             if (sharedPreferences.isAuthenticated){
-                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctor")
+                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors")
+                title = "حجز أطباء"
             }else{
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
@@ -257,6 +259,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                     if (it.data!!.status){
                         val intent = Intent(this, ClinidoActivity::class.java)
                         intent.putExtra("url", it.data.url)
+                        intent.putExtra("title", title)
                         startActivity(intent)
                     }else{
                         Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
@@ -321,6 +324,28 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
         //End of logout
+    }
+
+    private fun openTermsDialog() {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("الشروط والاحكام")
+        alertDialog.setMessage(resources.getString(R.string.terms))
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+            title = "العلاج الشهرى"
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, getString(R.string.disagree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
     }
 
     private fun showTicketNumber(data: String?) {

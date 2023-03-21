@@ -51,13 +51,13 @@ class ClinidoActivity : BaseActivity<ActivityClinidoBinding>() {
 
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK && binding.webView.canGoBack()) {
-            binding.webView.goBack()
-            return true
-        }
-        return super.onKeyDown(keyCode, event)
-    }
+//    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+//        if (keyCode == KeyEvent.KEYCODE_BACK && binding.webView.canGoBack()) {
+//            binding.webView.goBack()
+//            return true
+//        }
+//        return super.onKeyDown(keyCode, event)
+//    }
 
     var STORAGE_PERMISSION_CODE = 123
     val FILECHOOSER_RESULTCODE = 1
@@ -147,13 +147,13 @@ class ClinidoActivity : BaseActivity<ActivityClinidoBinding>() {
         }
     }
 
-    override fun onBackPressed() {
-        if (binding.webView.canGoBack()) {
-            binding.webView.goBack()
-            return
-        }
-        super.onBackPressed()
-    }
+//    override fun onBackPressed() {
+//        if (binding.webView.canGoBack()) {
+//            binding.webView.goBack()
+//            return
+//        }
+//        super.onBackPressed()
+//    }
 
     private fun initWebView() {
         binding.webView.webChromeClient = MyWebChromeClient(this)
