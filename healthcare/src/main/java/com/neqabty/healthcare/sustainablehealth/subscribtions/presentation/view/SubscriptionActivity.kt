@@ -505,7 +505,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                 job = binding.etJob.text.toString(),
                 mobile = binding.etPhone.text.toString(),
                 nationalId = binding.etNationalId.text.toString(),
-                entityCode = Constants.NEQABTY_CODE,
+                entityCode = sharedPreferences.code,
                 serviceActionCode = "$serviceActionCode",
                 referralNumber = binding.ccp2.fullNumberWithPlus,
                 personalImage = userImageUri!!,
