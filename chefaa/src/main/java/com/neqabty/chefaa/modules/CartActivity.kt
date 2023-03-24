@@ -305,6 +305,10 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
 
     fun checkOut(view: View) {
         // save note to cart
+        if (totalPrice < 300.0){
+            Toast.makeText(this, "يجب الا تقل قيمة الطلب عن 300 جنيه.", Toast.LENGTH_LONG).show()
+            return
+        }
         if (!binding.cartLt.noteTv.text.toString().isNullOrBlank()) {
             cart.note = OrderItemsEntity(
                 type = Constants.ITEMTYPES.NOTE.typeName,

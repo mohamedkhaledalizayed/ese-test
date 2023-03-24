@@ -100,6 +100,7 @@
     <string name="select_addre">إختر عنوان</string>
     <string name="how">كيف يمكننا مساعدتك؟</string>
     <string name="help_des">جميع الأدوية يتم صرفها من صيدليات مرخصة من وزارة الصحة و بوجود وصفة طبية من طبيب مختص</string>
+    <string name="fees_des">الشروط و الاحكام :\n سيتم الشحن خلال 48 ساعة\n يجب الا تقل قيمة الطلب عن 300 جنيه.</string>
     <string name="easy">سهلنا الطلب عليك</string>
     <string name="add_pre">اضف \nالروشتة</string>
     <string name="write_ord">اكتب \nطلبك</string>
