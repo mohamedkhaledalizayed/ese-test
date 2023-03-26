@@ -30,6 +30,7 @@ import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivit
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
+import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.contactus.ContactUsActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
@@ -61,6 +62,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
     private val mAdapter = PackagesAdapter()
     override fun getViewBinding() = ActivityHomeBinding.inflate(layoutInflater)
     private val homeViewModel: HomeViewModel by viewModels()
+    private var title = ""
     private lateinit var customLinearLayoutManager: CustomLinearLayoutManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -213,6 +215,46 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
 
         }
 
+        binding.cvDoctor.setOnClickListener {
+            if (sharedPreferences.isAuthenticated){
+                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors")
+                title = "حجز أطباء"
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
+        }
+
+        binding.cvPharmacy.setOnClickListener {
+            if (sharedPreferences.isAuthenticated){
+                openTermsDialog()
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
+        }
+
+        homeViewModel.clinidoUrl.observe(this){
+            when(it.status){
+                Status.LOADING ->{
+                    loading.show()
+                }
+                Status.SUCCESS ->{
+                    loading.dismiss()
+                    if (it.data!!.status){
+                        val intent = Intent(this, ClinidoActivity::class.java)
+                        intent.putExtra("url", it.data.url)
+                        intent.putExtra("title", title)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+                Status.ERROR ->{
+                    loading.dismiss()
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
         //Start of logout
         homeViewModel.logoutStatus.observe(this) {
             it?.let { resource ->
@@ -316,6 +358,28 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         val dialog = AboutFragment.newInstance(title, content, code)
         dialog.show(fm, "")
         dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
+
+    }
+
+    private fun openTermsDialog() {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("الشروط والاحكام")
+        alertDialog.setMessage(resources.getString(R.string.terms))
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+            title = "العلاج الشهرى"
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, getString(R.string.disagree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
 
     }
 

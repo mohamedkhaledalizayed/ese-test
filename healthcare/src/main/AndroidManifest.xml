@@ -5,8 +5,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.webkit.PermissionRequest" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="true" />
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
@@ -23,18 +27,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar"
-        android:usesCleartextTraffic="true"
-        tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
+        android:usesCleartextTraffic="false"
+        tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic" >
+        <activity
+            android:name=".commen.clinido.view.ClinidoActivity"
+            android:exported="false" />
         <activity
             android:name=".auth.forgetpassword.view.changepassword.ChangePasswordActivity"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".auth.forgetpassword.view.ForgetPasswordActivity"
-            android:exported="false">
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -56,7 +63,7 @@
             android:exported="false" />
         <activity
             android:name=".commen.splash.view.SplashActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -95,7 +102,6 @@
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.subscribtions.presentation.view.SubscriptionActivity"
-            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity"
@@ -127,7 +133,6 @@
             android:exported="false" />
         <activity
             android:name=".mega.home.view.MegaHomeActivity"
-            android:windowSoftInputMode="adjustResize"
             android:exported="true" />
         <activity
             android:name=".commen.settings.SettingsActivity"
@@ -148,14 +153,12 @@
             android:exported="false" />
         <activity
             android:name=".auth.login.view.LoginActivity"
-            android:windowSoftInputMode="adjustResize"
             android:exported="true" />
         <activity
             android:name=".auth.otp.view.VerifyPhoneActivity"
             android:exported="false" />
         <activity
             android:name=".auth.signup.presentation.view.SignupActivity"
-            android:windowSoftInputMode="adjustResize"
             android:exported="true" />
 
         <uses-library
