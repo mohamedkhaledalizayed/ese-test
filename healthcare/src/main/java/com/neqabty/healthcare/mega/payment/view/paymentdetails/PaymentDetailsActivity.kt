@@ -8,23 +8,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
-import com.neqabty.healthcare.core.data.Constants.SANDBOX
+import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
+import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityPaymentDetailsBinding
 import com.neqabty.healthcare.mega.payment.data.model.*
+import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.GatewaysData
 import com.neqabty.healthcare.mega.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
-import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
-import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
-import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
-import com.payment.paymentsdk.PaymentSdkConfigBuilder
 import com.payment.paymentsdk.integrationmodels.*
 import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +36,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     CallbackPaymentInterface {
 
     private val paymentViewModel: PaymentViewModel by viewModels()
-    private var paymentMethod = "card"
+    private var paymentMethod = ""
     private var serviceCode = ""
     private var serviceActionCode = ""
     private var totalAmount = 0
@@ -89,6 +88,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                         if (resource.data?.receipt == null){
                             showDialog(getString(R.string.no_reciept))
                         }else{
+                            createRadioButton(resource.data.gatewaysData)
                             binding.llContent.visibility = View.VISIBLE
                             binding.tvService.text = resource.data.service.name
                             binding.tvName.text =
@@ -104,16 +104,13 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
                             totalAmount = resource.data.receipt.totalPrice.toInt()
 
-                            deliveryMethodHomeId = resource.data.deliveryMethods.filter { it.type == "Home" }[0].methodId
-                            deliveryMethodHomePrice = resource.data.deliveryMethods.filter { it.type == "Home" }[0].price
+                            deliveryMethodHomeId = resource.data.deliveryMethods.filter { it.methodId == 1 }[0].id
+                            deliveryMethodHomePrice = resource.data.deliveryMethods.filter { it.methodId == 1 }[0].price
 
-                            deliveryMethodBranchId = resource.data.deliveryMethods.filter { it.type == "Branch" }[0].methodId
-                            deliveryMethodBranchPrice = resource.data.deliveryMethods.filter { it.type == "Branch" }[0].price
-
-
+                            deliveryMethodBranchId = resource.data.deliveryMethods.filter { it.methodId == 2 }[0].id
+                            deliveryMethodBranchPrice = resource.data.deliveryMethods.filter { it.methodId == 2 }[0].price
 
                             paymentFees = resource.data.receipt.fees.toInt()
-                            paymentGateway = resource.data.gatewaysData.filter { it.name == "card" }[0].id
                             deliveryMethod = deliveryMethodHomeId
                             deliveryFees = deliveryMethodHomePrice
                             updateTotal()
@@ -135,15 +132,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                 resource.data.receipt.totalPrice.toString() +
                                         "  " + resources.getString(R.string.egp)
 
-
-                            if (resource.data.gatewaysData.isNotEmpty()) {
-                                if (resource.data.gatewaysData.filter { it.name == "card" }[0].isActive)
-                                    binding.rbCard.visibility = View.VISIBLE
-                                if (resource.data.gatewaysData.filter { it.name == "code" }[0].isActive)
-                                    binding.rbChannel.visibility = View.VISIBLE
-                                if (resource.data.gatewaysData.filter { it.name == "wallet" }[0].isActive)
-                                    binding.rbWallet.visibility = View.VISIBLE
-                            }
                         }
 
                     }
@@ -263,37 +251,12 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
         }
 
-        binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
-            if (b) {
-                paymentMethod = "card"
-                paymentGateway = paymentViewModel.payment.value?.data?.gatewaysData!!.filter { it.name == "card" }[0].id
-                binding.ivCard.visibility = View.VISIBLE
-                binding.llChannels.visibility = View.GONE
-                updateTotal()
-            }
-        }
-
-        binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
-            if (b) {
-                paymentMethod = "code"
-                paymentGateway = paymentViewModel.payment.value?.data?.gatewaysData!!.filter { it.name == "code" }[0].id
-                binding.llChannels.visibility = View.VISIBLE
-                binding.ivCard.visibility = View.GONE
-                updateTotal()
-            }
-        }
-
-        binding.rbWallet.setOnCheckedChangeListener { compoundButton, b ->
-            if (b) {
-                paymentMethod = "wallet"
-                paymentGateway = paymentViewModel.payment.value?.data?.gatewaysData!!.filter { it.name == "wallet" }[0].id
-                binding.llChannels.visibility = View.GONE
-                binding.ivCard.visibility = View.GONE
-                updateTotal()
-            }
-        }
-
         binding.btnNext.setOnClickListener {
+
+            if (paymentMethod.isEmpty()){
+                Toast.makeText(this, "من فضلك اختر طريقة الدفع.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
             if (deliveryMethod == deliveryMethodHomeId) {
                 address = binding.address.text.toString()
@@ -347,6 +310,26 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         }
     }
 
+    private fun createRadioButton(gatewaysData: List<GatewaysData>) {
+        val rg = RadioGroup(this)
+        rg.orientation = RadioGroup.VERTICAL
+        for (item in gatewaysData) {
+            var rb = RadioButton(this)
+            rb.text = item.displayName
+            rb.id = item.id
+            rb.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked){
+                    paymentMethod = item.name
+                    paymentGateway = item.id
+                    updateTotal()
+                }
+            }
+            rb.setPadding(20, 20, 20, 20)
+            rg.addView(rb)
+        }
+        binding.llMainLayout.addView(rg)
+    }
+
     private fun verifyPhone() {
 
         val alertDialog = AlertDialog.Builder(this).create()
@@ -394,7 +377,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
         if (sharedPreferences.code == TOGAREEN_CODE){
             binding.totValue.text =
-                "${(totalAmount + paymentFees )}  ${resources.getString(R.string.egp)}"
+                "${(totalAmount + paymentFees)}  ${resources.getString(R.string.egp)}"
         }else{
             binding.totValue.text =
                 "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
@@ -439,7 +422,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         val clip = ClipData.newPlainText("label", paymentGatewayReferenceId)
         clipboard.setPrimaryClip(clip)
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -493,21 +475,21 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             PaymentStatus.INITIAL -> {
             }
             PaymentStatus.PENDING -> {
-                if (response.eventName.equals("clickResultOKBtn") && binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-                    showAlert(getString(R.string.payment_reference_without_code)) {}
+//                if (response.eventName.equals("clickResultOKBtn") && binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
+//                    showAlert(getString(R.string.payment_reference_without_code)) {}
             }
             PaymentStatus.SUCCESS -> {
 
-                if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) {
-                    val intent = Intent(this, PaymentStatusActivity::class.java)
-                    intent.putExtra("referenceCode", referenceCode)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    showAlert(getString(R.string.payment_reference) + response.referenceCode) {
-                        finish()
-                    }
-                }
+//                if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) {
+//                    val intent = Intent(this, PaymentStatusActivity::class.java)
+//                    intent.putExtra("referenceCode", referenceCode)
+//                    startActivity(intent)
+//                    finish()
+//                } else {
+//                    showAlert(getString(R.string.payment_reference) + response.referenceCode) {
+//                        finish()
+//                    }
+//                }
             }
             PaymentStatus.FAIL -> {
                 showAlert(getString(R.string.payment_canceled)) {}
@@ -530,17 +512,17 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     }
 
     override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
-        showAlert(
-            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
-                R.string.payment_successful
-            ) + paymentSdkTransactionDetails.paymentResult?.responseCode
-            else getString(R.string.payment_reference) + paymentSdkTransactionDetails.paymentResult?.responseCode
-        ) {
-            val intent = Intent(this, PaymentStatusActivity::class.java)
-            intent.putExtra("referenceCode", referenceCode)
-            startActivity(intent)
-            finish()
-        }
+//        showAlert(
+//            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
+//                R.string.payment_successful
+//            ) + paymentSdkTransactionDetails.paymentResult?.responseCode
+//            else getString(R.string.payment_reference) + paymentSdkTransactionDetails.paymentResult?.responseCode
+//        ) {
+//            val intent = Intent(this, PaymentStatusActivity::class.java)
+//            intent.putExtra("referenceCode", referenceCode)
+//            startActivity(intent)
+//            finish()
+//        }
     }
 
     override fun onPaymentCancel() {
