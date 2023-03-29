@@ -20,8 +20,6 @@ class PaymentBody (
     val branch: String = "",
     @SerializedName("delivery_method")
     val deliveryMethod: Int,
-    @SerializedName("payment_gateway")
-    val paymentGateway: Int,
     @SerializedName("membership_id")
     val membershipId: Int = 0,
     @SerializedName("callback_success_url")

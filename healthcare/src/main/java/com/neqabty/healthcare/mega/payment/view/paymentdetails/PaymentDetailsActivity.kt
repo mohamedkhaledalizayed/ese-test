@@ -227,20 +227,20 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                     }
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
-//                        when (resource.data?.payment?.paymentMethod) {
-//                            "card" -> {
-//                                val paymentObject = resource.data as PaymentEntity
-//                                oPayPayment(paymentObject, true)
-//                            }
-//                            "wallet" -> {
-//
-//                            }"code" -> {
-//                            showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
-//                            }
-//                            else -> {
-//
-//                            }
-//                        }
+                        when (resource.data?.paymentMethod) {
+                            "card" -> {
+                                val paymentObject = resource.data
+                                oPayPayment(paymentObject, true)
+                            }
+                            "wallet" -> {
+
+                            }"code" -> {
+                            showAlertDialog(resource.data.paymentGatewayTransactionNum)
+                            }
+                            else -> {
+
+                            }
+                        }
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
                         binding.btnNext.isEnabled = true
@@ -298,9 +298,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                         membershipId = sharedPreferences.membershipId.toInt(),
                         address = address,
                         branch = entityBranch,
-                        deliveryMethod = deliveryMethod,
-                        paymentGateway = paymentGateway
-                    )
+                        deliveryMethod = deliveryMethod)
                 )
 
             } else {
