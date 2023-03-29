@@ -1,8 +1,17 @@
 package com.neqabty.healthcare.commen.clinido.data.model
 
+
+import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
+
+@Keep
 data class ClinidoModel(
+    @SerializedName("data")
     val `data`: Data?,
-    val message: String,
-    val status: Boolean,
-    val status_code: Int
+    @SerializedName("message")
+    val message: String?,
+    @SerializedName("status")
+    val status: Boolean?,
+    @SerializedName("status_code")
+    val status_code: Int?
 )

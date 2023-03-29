@@ -24,9 +24,9 @@ class ClinidoRepositoryImpl @Inject constructor(private val clinidoDS: ClinidoDS
 fun ClinidoModel.toClinidoEntity(): ClinidoEntity {
     return ClinidoEntity(
         url = data?.url ?: "",
-        message = message,
-        status = status,
-        status_code = status_code
+        message = message ?: "",
+        status = status ?: false,
+        status_code = status_code ?: 0
     )
 }
 
