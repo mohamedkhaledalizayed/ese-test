@@ -30,8 +30,8 @@ interface PaymentApi {
     suspend fun payment(@Body paymentBody: PaymentBody,
                         @Header("Authorization") token: String): PaymentModel
 
-    @GET("transactions/get/{transaction_id}")
-    suspend fun getPaymentStatus(@Path("transaction_id") transaction_id: String): PaymentStatusModel
+    @GET("payment/payment_invoice")
+    suspend fun getPaymentStatus(@Header("Authorization") token: String, @Query("transactionId") transaction_id: String): PaymentStatusModel
 
     @GET("entity_branches")
     suspend fun getBranches(@Query("special-format") platform: String = "android",

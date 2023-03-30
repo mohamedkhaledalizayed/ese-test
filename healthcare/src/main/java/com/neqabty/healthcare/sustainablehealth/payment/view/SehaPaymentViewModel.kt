@@ -7,15 +7,13 @@ import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaPaymentResponse
-import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaPaymentEntity
+import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import com.neqabty.healthcare.sustainablehealth.payment.domain.usecase.SehaPaymentUseCase
-import com.neqabty.mega.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import retrofit2.HttpException
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel

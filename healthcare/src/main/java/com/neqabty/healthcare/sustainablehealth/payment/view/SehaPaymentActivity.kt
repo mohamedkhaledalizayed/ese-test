@@ -5,37 +5,37 @@ import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
-import com.neqabty.healthcare.R
-import com.neqabty.healthcare.databinding.ActivitySehaPaymentBinding
-import dagger.hilt.android.AndroidEntryPoint
-import team.opay.business.cashier.sdk.api.PayInput
-import team.opay.business.cashier.sdk.pay.PaymentTask
-import team.opay.business.cashier.sdk.api.*
-import com.payment.paymentsdk.PaymentSdkConfigBuilder
-import com.payment.paymentsdk.integrationmodels.*
-import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
+import com.neqabty.healthcare.R
+import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.core.data.Constants.SANDBOX
 import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
-import com.neqabty.healthcare.core.utils.ErrorBody
+import com.neqabty.healthcare.databinding.ActivitySehaPaymentBinding
+import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.GatewaysData
 import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.Payment
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaPaymentResponse
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaPaymentEntity
-import com.payment.paymentsdk.PaymentSdkActivity
+import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentMethodEntity
+import com.payment.paymentsdk.PaymentSdkConfigBuilder
+import com.payment.paymentsdk.integrationmodels.*
+import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
+import dagger.hilt.android.AndroidEntryPoint
+import team.opay.business.cashier.sdk.api.*
+import team.opay.business.cashier.sdk.pay.PaymentTask
 
 
 @AndroidEntryPoint
 class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), CallbackPaymentInterface {
-    private var paymentMethod = "card"
+    private var paymentMethod = ""
     private var totalAmount = 0
     private var vat = 0
     private var total = 0
@@ -71,12 +71,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         binding.llContent.visibility = View.VISIBLE
-                        if (resource.data!!.isNotEmpty()) {
-                            if (resource.data!!.filter { it.name == "card" }[0].isActive)
-                                binding.rbCard.visibility = View.VISIBLE
-                            if (resource.data!!.filter { it.name == "code" }[0].isActive)
-                                binding.rbChannel.visibility = View.VISIBLE
-                        }
+                        createRadioButton(resource.data!!)
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
@@ -96,26 +91,27 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                     }
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
-                        if (resource.data?.payment?.transaction?.paymentGatewayReferenceId.isNullOrEmpty()) {
-                            val paymentObject = resource.data as SehaPaymentResponse
-                            oPayPayment(paymentObject, true)
+                        when (resource.data?.payment_method) {
+                            "Opay Card" -> {
+                                oPayPayment(resource.data)
+                            }
+                            "wallet" -> {
 
-//                            val configData = generatePaytabsConfigurationDetails(paymentObject)
-//                            PaymentSdkActivity.startCardPayment(
-//                                this,
-//                                configData,
-//                                callback = this
-//                            )
-                        } else {
-                            showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
+                            }
+                            "Opay Code" -> {
+                                showAlertDialog(resource.data.payment_gateway_transaction_num ?: "")
+                            }
+                            else -> {
+
+                            }
                         }
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
                         binding.btnNext.isEnabled = true
                         binding.progressCircular.visibility = View.GONE
-                        val error = Gson().fromJson(resource.message.toString(), ErrorModel::class.java)
-
-                        Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
+//                        val error = Gson().fromJson(resource.message.toString(), ErrorModel::class.java)
+//
+//                        Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -123,55 +119,59 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
         }
 
 
-        binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
-            if (b) {
-                paymentMethod = "card"
-                binding.ivCard.visibility = View.VISIBLE
-                binding.llChannels.visibility = View.GONE
-                binding.ivFawry.visibility = View.GONE
-            }
-        }
-        binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
-            if (b) {
-                paymentMethod = "code"
-                binding.llChannels.visibility = View.VISIBLE
-                binding.ivCard.visibility = View.GONE
-                binding.ivFawry.visibility = View.GONE
-            }
-        }
-        binding.rbFawry.setOnCheckedChangeListener { compoundButton, b ->
-            if (b) {
-                paymentMethod = "fawry"
-                binding.ivFawry.visibility = View.VISIBLE
-                binding.llChannels.visibility = View.GONE
-                binding.ivCard.visibility = View.GONE
-            }
-        }
-
-        binding.tvChannels.setOnClickListener {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://cashier.opaycheckout.com/map")
-                )
-            )
-        }
+//        binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
+//            if (b) {
+//                paymentMethod = "card"
+//                binding.ivCard.visibility = View.VISIBLE
+//                binding.llChannels.visibility = View.GONE
+//                binding.ivFawry.visibility = View.GONE
+//            }
+//        }
+//        binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
+//            if (b) {
+//                paymentMethod = "code"
+//                binding.llChannels.visibility = View.VISIBLE
+//                binding.ivCard.visibility = View.GONE
+//                binding.ivFawry.visibility = View.GONE
+//            }
+//        }
+//        binding.rbFawry.setOnCheckedChangeListener { compoundButton, b ->
+//            if (b) {
+//                paymentMethod = "fawry"
+//                binding.ivFawry.visibility = View.VISIBLE
+//                binding.llChannels.visibility = View.GONE
+//                binding.ivCard.visibility = View.GONE
+//            }
+//        }
+//
+//        binding.tvChannels.setOnClickListener {
+//            startActivity(
+//                Intent(
+//                    Intent.ACTION_VIEW,
+//                    Uri.parse("https://cashier.opaycheckout.com/map")
+//                )
+//            )
+//        }
 
         binding.btnNext.setOnClickListener {
 
-            if (sharedPreferences.isPhoneVerified) {
+            if (paymentMethod.isEmpty()){
+                Toast.makeText(this, "من فضلك اختر طريقة الدفع.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            if (!sharedPreferences.isPhoneVerified) {
 
                 binding.btnNext.isEnabled = false
                 paymentViewModel.getPaymentInfo(
                     SehaPaymentBody(
-                        Payment(
-                            serviceCode = serviceCode,
-                            serviceActionCode = serviceActionCode,
-                            mobile = sharedPreferences.mobile,
-                            paymentMethod = paymentMethod,
-                            paymentSource = "android",
-                            transactionType = "payment"
-                        )
+                        serviceCode = serviceCode,
+                        serviceActionCode = serviceActionCode,
+                        paymentMethod = paymentMethod,
+                        membershipId = sharedPreferences.membershipId.toInt(),
+                        address = "address",
+                        branch = "",
+                        deliveryMethod = 9
                     )
                 )
             }else{
@@ -179,6 +179,25 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
             }
 
         }
+    }
+
+    private fun createRadioButton(gatewaysData: List<PaymentMethodEntity>) {
+        val rg = RadioGroup(this)
+        rg.orientation = RadioGroup.VERTICAL
+        for (item in gatewaysData) {
+            var rb = RadioButton(this)
+            rb.text = item.displayName
+            rb.id = item.id
+            rb.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked){
+                    paymentMethod = item.name
+                    updateTotal()
+                }
+            }
+            rb.setPadding(20, 20, 20, 20)
+            rg.addView(rb)
+        }
+        binding.llMainLayout.addView(rg)
     }
 
     private fun verifyPhone() {
@@ -203,24 +222,23 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
     }
 
     var referenceCode = ""
-    private fun oPayPayment(paymentEntity: SehaPaymentResponse, isCredit: Boolean) {
-        referenceCode = paymentEntity.mobilePaymentPayload!!.reference
-        val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
+    private fun oPayPayment(paymentEntity: SehaPaymentResponse) {
+        referenceCode = paymentEntity.payment_gateway_transaction_num ?: ""
         PaymentTask.sandBox = SANDBOX
         val payInput = PayInput(
-            publickey = paymentEntity.mobilePaymentPayload.publickey,
-            merchantId = paymentEntity.mobilePaymentPayload.merchantId,
-            merchantName = paymentEntity.mobilePaymentPayload.merchantName,
-            reference = paymentEntity.mobilePaymentPayload.reference,
-            countryCode = paymentEntity.mobilePaymentPayload.countryCode, // uppercase
-            currency = paymentEntity.mobilePaymentPayload.currency, // uppercase
-            payAmount = (paymentEntity.mobilePaymentPayload.payAmount.toDouble() * 100).toLong(),
+            publickey = paymentEntity.public_key ?: "",
+            merchantId = paymentEntity.merchant_id ?: "",
+            merchantName = "Neqabty",
+            reference = paymentEntity.payment_gateway_transaction_num ?: "",
+            countryCode = "EG", // uppercase
+            currency = "EGP", // uppercase
+            payAmount = (paymentEntity.total_amount!!.toDouble() * 100).toLong(),
             productName = binding.tvPackageName.text.toString(),
             productDescription = binding.tvPackageName.text.toString(),
-            callbackUrl = paymentEntity.mobilePaymentPayload.callbackUrl,
+            callbackUrl = paymentEntity.callBackURL ?: "",
             userClientIP = "110.246.160.183",
-            expireAt = paymentEntity.mobilePaymentPayload.expireAt,
-            paymentType = paymentType // optional
+            expireAt = (paymentEntity.expireAt ?: "30").toInt(),
+            paymentType = "BankCard" // optional
         )
 
         PaymentTask(this).createOrder(payInput, callback = { status, response ->
@@ -268,20 +286,13 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
             PaymentStatus.INITIAL -> {
             }
             PaymentStatus.PENDING -> {
-                if (response.eventName.equals("clickResultOKBtn") && binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-                    showAlert(getString(R.string.payment_reference_without_code))
+
             }
             PaymentStatus.SUCCESS -> {
-
-                if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) {
-                    val intent = Intent(this, PaymentStatusActivity::class.java)
-                    intent.putExtra("referenceCode", referenceCode)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    showAlert(getString(R.string.payment_reference) + response.referenceCode)
-                }
-
+                val intent = Intent(this, PaymentStatusActivity::class.java)
+                intent.putExtra("referenceCode", referenceCode)
+                startActivity(intent)
+                finish()
             }
             PaymentStatus.FAIL -> {
                 showAlert(getString(R.string.payment_canceled))
@@ -315,53 +326,6 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
         clipboard.setPrimaryClip(clip)
     }
 
-    //region Paytabs///
-    private fun generatePaytabsConfigurationDetails(paymentEntity: SehaPaymentEntity): PaymentSdkConfigurationDetails {
-        val profileId = "103411"
-        val serverKey = "SKJN6BDTKH-JG26L9WRDL-DNMN2ZZ9RN"
-        val clientKey = "C7KMVN-NV2B6T-MGBPVR-2G72KG"
-        val locale = PaymentSdkLanguageCode.EN /*Or PaymentSdkLanguageCode.AR*/
-        val currency = "EGP"
-        val merchantCountryCode = "EG"
-
-        val billingData = PaymentSdkBillingDetails(
-            "Giza",
-            "eg",
-            "customer@customer.com",
-            "",
-            sharedPreferences.mobile, "Egypt",
-            binding.tvPackageName.text.toString(), "132"
-        )
-
-        val configData = PaymentSdkConfigBuilder(
-            profileId,
-            serverKey,
-            clientKey,
-            (totalAmount + paymentFees).toDouble(),
-            currency
-        )
-            .setCartDescription(binding.tvPackageName.text.toString())
-            .setLanguageCode(locale)
-            .setMerchantIcon(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.paytabs_logo
-                )
-            )
-            .setBillingData(billingData)
-            .setMerchantCountryCode(merchantCountryCode)
-            .setTransactionType(PaymentSdkTransactionType.SALE)
-            .setTransactionClass(PaymentSdkTransactionClass.ECOM)
-            .setTokenise(PaymentSdkTokenise.NONE) //Check other tokenizing types in PaymentSdkTokenise
-            .setCartId(paymentEntity.mobilePaymentPayload?.reference)
-            .showBillingInfo(false)
-            .showShippingInfo(false)
-            .forceShippingInfo(false)
-            .setScreenTitle(binding.tvPackageName.text.toString())
-
-        return configData.build()
-    }
-
     override fun onError(error: PaymentSdkError) {
         showAlert(getString(R.string.payment_canceled)) {
             finish()
@@ -369,17 +333,10 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
     }
 
     override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
-        showAlert(
-            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
-                R.string.payment_successful
-            ) + paymentSdkTransactionDetails.paymentResult?.responseCode
-            else getString(R.string.payment_reference) + paymentSdkTransactionDetails.paymentResult?.responseCode
-        ) {
             val intent = Intent(this, PaymentStatusActivity::class.java)
             intent.putExtra("referenceCode", referenceCode)
             startActivity(intent)
             finish()
-        }
     }
 
     override fun onPaymentCancel() {

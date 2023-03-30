@@ -6,8 +6,8 @@ import com.neqabty.healthcare.mega.payment.data.model.branches.EntityBranche
 import com.neqabty.healthcare.mega.payment.data.model.branches.EntityModel
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.*
 import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentModel
-import com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods.PaymentMethodModel
 import com.neqabty.healthcare.mega.payment.data.model.paymentstatus.PaymentStatusModel
+import com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods.PaymentMethodModel
 import com.neqabty.healthcare.mega.payment.data.model.services.*
 import com.neqabty.healthcare.mega.payment.data.model.servicesaction.ServiceAction
 import com.neqabty.healthcare.mega.payment.data.source.PaymentDS
@@ -19,7 +19,7 @@ import com.neqabty.healthcare.mega.payment.domain.entity.paymentstatus.PaymentSt
 import com.neqabty.healthcare.mega.payment.domain.entity.serviceactions.ServiceActionsEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.services.*
 import com.neqabty.healthcare.mega.payment.domain.repository.PaymentRepository
-import com.neqabty.mega.payment.domain.entity.paymentmethods.PaymentMethodEntity
+import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
@@ -146,45 +146,44 @@ fun Service.toServiceEntity(): ServiceEntity {
 
 fun PaymentModel.toPaymentEntity(): PaymentEntity{
     return PaymentEntity(
-        address,
-        cashierUrl,
-        deliveryFees,
-        deliveryMethod,
-        entityRefNum,
-        fees,
-        id,
-        membershipId,
-        paymentGateway,
-        paymentGatewayTransactionNum,
-        paymentMethod,
-        paymentSource,
-        refund,
-        service,
-        serviceAction,
-        status,
-        totalAmount,
-        transactionType
+        address = address ?: "",
+        cashierUrl = cashier_url ?: "",
+        deliveryFees = delivery_fees ?: "",
+        deliveryMethod = delivery_method ?: 0,
+        entityRefNum = entity_ref_num ?: "",
+        fees = fees ?: "",
+        id = id,
+        membershipId = membership_id ?: "",
+        paymentGateway = payment_gateway ?: 0,
+        paymentGatewayTransactionNum = payment_gateway_transaction_num ?: "",
+        paymentMethod = payment_method ?: "",
+        paymentSource = payment_source ?: "",
+        refund = refund,
+        service = service,
+        serviceAction = service_action,
+        status = status ?: "",
+        totalAmount = total_amount ?: "",
+        transactionType = transaction_type ?: "",
+        publicKey = public_key ?: "",
+        callBackURL = callBackURL ?: "",
+        expireAt = expireAt ?: "30",
+        merchantId = merchant_id ?: ""
     )
 }
 
 
 fun PaymentStatusModel.toPaymentStatusEntity(): PaymentStatusEntity {
     return PaymentStatusEntity(
-        entity = account.entity.name,
-        entityType = account.entity.type,
-        serviceCategory = serviceAction.service.serviceCategory.name,
-        entityPaymentStatus = entityPaymentStatus,
-        gatewayReferenceId = gatewayReferenceId,
-        id = id,
-        itemId = membershipId,
+        entity = entity ?: "",
+        gatewayReferenceId = gateway_reference_id,
+        itemId = membership_id ?: "",
         mobile = account.mobile,
-        netAmount = netAmount,
-        serviceAction = serviceAction.name,
-        totalAmount = totalAmount,
-        totalFees = totalFees,
-        imageUrl = account.entity.imageUrl,
-        member_name = account.fullname,
-        createdAt = createdAt
+        netAmount = net_amount,
+        serviceAction = service_action.name ?: "",
+        totalAmount = total_amount,
+        totalFees = total_fees,
+        member_name = account.fullname ?: "",
+        createdAt = created_at
     )
 }
 

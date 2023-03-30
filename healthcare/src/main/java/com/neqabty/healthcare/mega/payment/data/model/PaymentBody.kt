@@ -21,10 +21,5 @@ class PaymentBody (
     @SerializedName("delivery_method")
     val deliveryMethod: Int,
     @SerializedName("membership_id")
-    val membershipId: Int = 0,
-    @SerializedName("callback_success_url")
-    val callbackSuccessUrl: String = "http://ex.com",
-    @SerializedName("callback_fail_url")
-    val callbackFailUrl: String = "http://ex2.com"
+    val membershipId: Int = 0
 )
-

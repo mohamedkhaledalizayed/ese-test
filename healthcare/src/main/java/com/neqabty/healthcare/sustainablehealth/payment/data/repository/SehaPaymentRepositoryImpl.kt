@@ -12,8 +12,8 @@ import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaMobile
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaPayment
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaPaymentEntity
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaTransactionEntity
+import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import com.neqabty.healthcare.sustainablehealth.payment.domain.repository.SehaPaymentRepository
-import com.neqabty.mega.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
@@ -34,13 +34,6 @@ class SehaPaymentRepositoryImpl @Inject constructor(private val paymentDS: SehaP
         }
     }
 
-}
-
-fun SehaPaymentResponse.toPaymentEntity(): SehaPaymentEntity{
-    return SehaPaymentEntity(
-        mobilePaymentPayload = mobilePaymentPayload?.toMobilePaymentPayloadEntity(),
-        payment = payment.toPayment()
-    )
 }
 
 fun SehaPaymentModel.toPayment():SehaPayment{

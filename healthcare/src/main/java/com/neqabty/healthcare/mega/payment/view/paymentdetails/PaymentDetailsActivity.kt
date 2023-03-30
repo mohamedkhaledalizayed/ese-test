@@ -16,6 +16,7 @@ import com.google.gson.Gson
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
+import com.neqabty.healthcare.core.data.Constants.SANDBOX
 import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityPaymentDetailsBinding
@@ -24,6 +25,7 @@ import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.GatewaysDa
 import com.neqabty.healthcare.mega.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
+import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
 import com.payment.paymentsdk.integrationmodels.*
 import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
 import dagger.hilt.android.AndroidEntryPoint
@@ -228,14 +230,14 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         when (resource.data?.paymentMethod) {
-                            "card" -> {
-                                val paymentObject = resource.data
-                                oPayPayment(paymentObject, true)
+                            "Opay Card" -> {
+                                oPayPayment(resource.data)
                             }
                             "wallet" -> {
 
-                            }"code" -> {
-                            showAlertDialog(resource.data.paymentGatewayTransactionNum)
+                            }
+                            "Opay Code" -> {
+                                showAlertDialog(resource.data.paymentGatewayTransactionNum)
                             }
                             else -> {
 
@@ -318,7 +320,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             rb.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked){
                     paymentMethod = item.name
-                    paymentGateway = item.id
                     updateTotal()
                 }
             }
@@ -432,38 +433,37 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         }
     }
 
-    private fun oPayPayment(paymentEntity: PaymentEntity, isCredit: Boolean) {
-//        referenceCode = paymentEntity.mobilePaymentPayload!!.reference
-//        val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
-//        PaymentTask.sandBox = SANDBOX
-//        val payInput = PayInput(
-//            publickey = paymentEntity.mobilePaymentPayload.publickey,
-//            merchantId = paymentEntity.mobilePaymentPayload.merchantId,
-//            merchantName = paymentEntity.mobilePaymentPayload.merchantName,
-//            reference = paymentEntity.mobilePaymentPayload.reference,
-//            countryCode = paymentEntity.mobilePaymentPayload.countryCode, // uppercase
-//            currency = paymentEntity.mobilePaymentPayload.currency, // uppercase
-//            payAmount = (paymentEntity.mobilePaymentPayload.payAmount.toDouble() * 100).toLong(),
-//            productName = binding.tvService.text.toString(),
-//            productDescription = binding.tvService.text.toString(),
-//            callbackUrl = paymentEntity.mobilePaymentPayload.callbackUrl,
-//            userClientIP = "110.246.160.183",
-//            expireAt = paymentEntity.mobilePaymentPayload.expireAt,
-//            paymentType = paymentType // optional
-//        )
+    private fun oPayPayment(paymentEntity: PaymentEntity) {
+        referenceCode = paymentEntity.id
+        PaymentTask.sandBox = SANDBOX
+        val payInput = PayInput(
+            publickey = paymentEntity.publicKey,
+            merchantId = paymentEntity.merchantId,
+            merchantName = "Neqabty",
+            reference = paymentEntity.paymentGatewayTransactionNum,
+            countryCode = "EG", // uppercase
+            currency = "EGP", // uppercase
+            payAmount = (paymentEntity.totalAmount.toDouble() * 100).toLong(),
+            productName = binding.tvService.text.toString(),
+            productDescription = binding.tvService.text.toString(),
+            callbackUrl = paymentEntity.callBackURL,
+            userClientIP = "110.246.160.183",
+            expireAt = paymentEntity.expireAt.toInt(),
+            paymentType = "BankCard" // optional
+        )
 
-//        PaymentTask(this).createOrder(payInput, callback = { status, response ->
-//            when (status) {
-//                Status.ERROR -> {
-//                    Toast.makeText(
-//                        this, response.message,
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//                else -> {
-//                }
-//            }
-//        })
+        PaymentTask(this).createOrder(payInput, callback = { status, response ->
+            when (status) {
+                Status.ERROR -> {
+                    Toast.makeText(
+                        this, response.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                }
+            }
+        })
     }
 
     var referenceCode = ""
@@ -473,21 +473,13 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             PaymentStatus.INITIAL -> {
             }
             PaymentStatus.PENDING -> {
-//                if (response.eventName.equals("clickResultOKBtn") && binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-//                    showAlert(getString(R.string.payment_reference_without_code)) {}
+
             }
             PaymentStatus.SUCCESS -> {
-
-//                if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) {
-//                    val intent = Intent(this, PaymentStatusActivity::class.java)
-//                    intent.putExtra("referenceCode", referenceCode)
-//                    startActivity(intent)
-//                    finish()
-//                } else {
-//                    showAlert(getString(R.string.payment_reference) + response.referenceCode) {
-//                        finish()
-//                    }
-//                }
+                val intent = Intent(this, PaymentStatusActivity::class.java)
+                intent.putExtra("referenceCode", referenceCode)
+                startActivity(intent)
+                finish()
             }
             PaymentStatus.FAIL -> {
                 showAlert(getString(R.string.payment_canceled)) {}
@@ -510,17 +502,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     }
 
     override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
-//        showAlert(
-//            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
-//                R.string.payment_successful
-//            ) + paymentSdkTransactionDetails.paymentResult?.responseCode
-//            else getString(R.string.payment_reference) + paymentSdkTransactionDetails.paymentResult?.responseCode
-//        ) {
-//            val intent = Intent(this, PaymentStatusActivity::class.java)
-//            intent.putExtra("referenceCode", referenceCode)
-//            startActivity(intent)
-//            finish()
-//        }
+            val intent = Intent(this, PaymentStatusActivity::class.java)
+            intent.putExtra("referenceCode", referenceCode)
+            startActivity(intent)
+            finish()
     }
 
     override fun onPaymentCancel() {

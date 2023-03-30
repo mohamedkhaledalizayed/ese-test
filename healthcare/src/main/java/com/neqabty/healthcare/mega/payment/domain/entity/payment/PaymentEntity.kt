@@ -20,5 +20,9 @@ data class PaymentEntity(
     val serviceAction: String,
     val status: String,
     val totalAmount: String,
-    val transactionType: String
+    val transactionType: String,
+    val publicKey: String,
+    val callBackURL: String,
+    val expireAt: String,
+    val merchantId: String
     )
