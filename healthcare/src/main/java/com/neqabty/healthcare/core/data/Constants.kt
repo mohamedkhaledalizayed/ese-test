@@ -13,7 +13,7 @@ object Constants {
     const val BASE_URL_PRO = "https://seha.neqabty.com/public/api/v1/"
 
     //Syndicates
-    const val BASE_URL_DEV_SYNDICATE = "https://neqabty.et3.co/api/"
+    const val BASE_URL_DEV_SYNDICATE = "https://dev-community.neqabty.com/api/"
     private const val BASE_URL_STAGING_SYNDICATE = "https://staging-community.neqabty.com/api/"
     private const val BASE_URL_PRO_SYNDICATE = "https://community.neqabty.com/api/"
 
