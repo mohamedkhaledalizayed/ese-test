@@ -168,10 +168,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                         serviceCode = serviceCode,
                         serviceActionCode = serviceActionCode,
                         paymentMethod = paymentMethod,
-                        membershipId = sharedPreferences.membershipId.toInt(),
-                        address = "address",
-                        branch = "",
-                        deliveryMethod = 9
+                        mobile = "+201113595402"
                     )
                 )
             }else{

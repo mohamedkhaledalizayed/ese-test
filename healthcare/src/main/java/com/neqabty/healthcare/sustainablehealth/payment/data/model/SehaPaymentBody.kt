@@ -16,12 +16,6 @@ data class SehaPaymentBody(
     val paymentSource: String = "android",
     @SerializedName("transaction_type")
     val transactionType: String = "payment",
-    @SerializedName("address")
-    val address: String = "",
-    @SerializedName("branch")
-    val branch: String = "",
-    @SerializedName("delivery_method")
-    val deliveryMethod: Int,
-    @SerializedName("membership_id")
-    val membershipId: Int = 0
+    @SerializedName("mobile")
+    val mobile: String = ""
 )
