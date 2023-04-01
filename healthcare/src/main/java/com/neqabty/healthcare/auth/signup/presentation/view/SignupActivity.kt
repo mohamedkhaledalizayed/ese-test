@@ -12,11 +12,13 @@ import com.google.gson.Gson
 
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
+import com.neqabty.healthcare.auth.signup.data.model.SignUpAgriBody
 import com.neqabty.healthcare.auth.signup.data.model.SignupBody
 import com.neqabty.healthcare.auth.signup.data.model.SignupTogareenBody
 import com.neqabty.healthcare.auth.signup.domain.entity.SignupParams
 import com.neqabty.healthcare.auth.signup.domain.entity.syndicate.SyndicateListEntity
 import com.neqabty.healthcare.core.data.Constants.NATURAL_THERAPY_CODE
+import com.neqabty.healthcare.core.data.Constants.AGRI_CODE
 import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
 import com.neqabty.healthcare.core.data.Constants.isSyndicateMember
 import com.neqabty.healthcare.core.data.Constants.selectedSyndicateCode
@@ -85,10 +87,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             binding.serialNumberContainer.visibility = View.VISIBLE
         }
 
-        if (selectedSyndicateCode == NATURAL_THERAPY_CODE){
-            binding.membershipIdContainer.visibility = View.GONE
-        }
-
         binding.phone.setText(sharedPreferences.mobile)
         binding.phone.isEnabled = false
         binding.spSyndicates.adapter = mSyndicatesAdapter
@@ -103,6 +101,11 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                         }
                         NATURAL_THERAPY_CODE -> {
                             binding.membershipIdContainer.visibility = View.GONE
+                        }
+                        AGRI_CODE ->{
+                            binding.nationalIdContainer.visibility = View.GONE
+                            binding.passwordContainer.visibility = View.VISIBLE
+                            binding.serialNumberContainer.visibility = View.GONE
                         }
                         else -> {
                             binding.nationalIdContainer.visibility = View.VISIBLE
@@ -304,22 +307,36 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                         )
                     )
                 }
+                AGRI_CODE -> {
+                    if (binding.password.text.toString().isEmpty()){
+                        Toast.makeText(this, resources.getString(R.string.enter_password), Toast.LENGTH_LONG).show()
+                        return
+                    }
+                    signupViewModel.signup(
+                        SignUpAgriBody(
+                            entityCode = syndicateCode,
+                            membershipId = binding.membershipId.text.toString(),
+                            mobile = binding.phone.text.toString(),
+                            password = binding.password.text.toString(),
+                            email = binding.email.text.toString()
+                        )
+                    )
+                }
                 else -> {
                     if (binding.nationalId.text.toString().isEmpty() || !binding.nationalId.text.isDigitsOnly() || binding.nationalId.text.toString().length < 14){
                         Toast.makeText(this, resources.getString(R.string.enter_national_id), Toast.LENGTH_LONG).show()
                         return
                     }
 
-                    signupViewModel.signup(
-                        SignupBody(
-                            entityCode = syndicateCode,
-                            membershipId = binding.membershipId.text.toString(),
-                            mobile = binding.phone.text.toString(),
-                            nationalId = binding.nationalId.text.toString(),
-                            email = binding.email.text.toString()
-                        )
+                signupViewModel.signup(
+                    SignupBody(
+                        entityCode = syndicateCode,
+                        membershipId = binding.membershipId.text.toString(),
+                        mobile = binding.phone.text.toString(),
+                        nationalId = binding.nationalId.text.toString(),
+                        email = binding.email.text.toString()
                     )
-                }
+                )
             }
         }else{
 
@@ -348,30 +365,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             )
         }
 
-    }
-
-    fun showHidePassword(view: View) {
-        if (isHidden) {
-            isHidden = false
-            binding.password.transformationMethod = null
-            binding.showHide.setImageResource(R.drawable.ic_baseline_visibility_24)
-        } else {
-            isHidden = true
-            binding.password.transformationMethod = PasswordTransformationMethod()
-            binding.showHide.setImageResource(R.drawable.ic_baseline_visibility_off_24)
-        }
-    }
-
-    fun showHideConfirmPassword(view: View) {
-        if (isHiddenConfirm) {
-            isHiddenConfirm = false
-            binding.confirmPassword.transformationMethod = null
-            binding.showHidePassword.setImageResource(R.drawable.ic_baseline_visibility_24)
-        } else {
-            isHiddenConfirm = true
-            binding.confirmPassword.transformationMethod = PasswordTransformationMethod()
-            binding.showHidePassword.setImageResource(R.drawable.ic_baseline_visibility_off_24)
-        }
     }
 
 }
