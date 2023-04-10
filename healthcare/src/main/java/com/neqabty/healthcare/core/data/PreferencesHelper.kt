@@ -17,10 +17,12 @@ class PreferencesHelper @Inject constructor(
 
         const val DEVELOP_MODE = false
         private const val IS_NOTIFICATIONS_ENABLED = "data.source.prefs.IS_NOTIFICATIONS_ENABLED"
+        private const val IS_INTRO_SKIPPED = "data.source.prefs.IS_INTRO_SKIPPED"
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val NAME = "data.source.prefs.NAME"
         private const val TOKEN = "data.source.prefs.TOKEN"
         private const val MOBILE = "data.source.prefs.MOBILE"
+        private const val MOBILE_NO_CC = "data.source.prefs.MOBILE_NO_CC"
         private const val EMAIL = "data.source.prefs.EMAIL"
         private const val CODE = "data.source.prefs.CODE"
         private const val USER_IMAGE = "data.source.prefs.USER_IMAGE"
@@ -39,6 +41,10 @@ class PreferencesHelper @Inject constructor(
         get() = preferences.getBoolean(IS_NOTIFICATIONS_ENABLED, true)
         set(value) = preferences.edit().putBoolean(IS_NOTIFICATIONS_ENABLED, value).apply()
 
+    var isIntroSkipped
+        get() = preferences.getBoolean(IS_INTRO_SKIPPED, false)
+        set(value) = preferences.edit().putBoolean(IS_INTRO_SKIPPED, value).apply()
+
     var mainSyndicate
         get() = preferences.getInt(MAIN_SYNDICATE, -1)
         set(value) = preferences.edit().putInt(MAIN_SYNDICATE, value).apply()
@@ -50,6 +56,10 @@ class PreferencesHelper @Inject constructor(
     var mobile
         get() = preferences.getString(MOBILE, "")!!
         set(value) = preferences.edit().putString(MOBILE, value).apply()
+
+    var mobile_without_cc
+        get() = preferences.getString(MOBILE_NO_CC, "")!!
+        set(value) = preferences.edit().putString(MOBILE_NO_CC, value).apply()
 
     var email
         get() = preferences.getString(EMAIL, "")!!

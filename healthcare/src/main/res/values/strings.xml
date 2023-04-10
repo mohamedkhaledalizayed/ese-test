@@ -63,8 +63,8 @@
     <string name="add">أضف</string>
     <string name="add_new_member">إضافة فرد جديد</string>
     <string name="email">البريد الالكترونى</string>
-    <string name="password_">كلمة السر</string>
-    <string name="confirm_password">تاكيد كلمة السر</string>
+    <string name="password_">كلمة المرور</string>
+    <string name="confirm_password">تاكيد كلمة المرور</string>
     <string name="cash_back_service">خدمة الكاش باك</string>
     <string name="search">البحث</string>
     <string name="medical_search">البحث في الشبكة الطبية..</string>
@@ -103,7 +103,7 @@
     <string name="category">اختر الفئة</string>
     <string name="done_">لقد تم تسجيل طلبكم بنجاح رقم الشكوي / المقترح </string>
     <string name="no_more">لا يمكن إضافة اكثر من 3 صور.</string>
-    <string name="please_enter_name">من فضلك ادخل الاسم.</string>
+    <string name="please_enter_name">من فضلك ادخل الاسم</string>
     <string name="content_">من فضلك ادخل محتوي الشكوي.</string>
     <string name="select_category">من فضلك إختر الفئة.</string>
     <string name="add_image_">إضافة صورة أخرى.</string>
@@ -129,7 +129,6 @@
 
     <string name="login">تسجيل الدخول</string>
     <string name="password">كلمة المرور</string>
-    <string name="enter_password">من فضلك ادخل كلمة المرور</string>
     <string name="something_wrong">عفوا، يوجد خطأ في البيانات</string>
 
 
@@ -186,7 +185,6 @@
     <string name="ok_btn">تأكيد</string>
     <string name="cancel_btn">إلغاء</string>
     <string name="no_btn">لا</string>
-    <string name="membership_id">رقم العضوية</string>
     <string name="next">التالى</string>
     <string name="service">الخدمة</string>
     <string name="services">خدمات النقابة</string>
@@ -296,7 +294,6 @@
 
 
     <string name="signup">تسجيل إشتراك</string>
-    <string name="national_id">الرقم القومى</string>
     <string name="syndicate_member">عضو نقابة</string>
     <string name="neqabty_member">لست عضو نقابة</string>
     <string name="full_name">الأسم بالكامل</string>
@@ -312,11 +309,10 @@
     <string name="enter_message">من فضلك ادخل رسالتك</string>
     <string name="enter_correct_email">من فضلك ادخل البريد الالكترونى بشكل صحيح.</string>
     <string name="enter_national_id">من فضلك ادخل الرقم القومى بشكل صحيح.</string>
-    <string name="enter_membership_id">من فضلك ادخل رقم العضوية.</string>
-    <string name="enter_name">من فضلك ادخل الأسم.</string>
+    <string name="enter_name">من فضلك ادخل الأسم</string>
     <string name="phone_confirmed">تم تاكيد رقم الهاتف بنجاح.</string>
     <string name="enter_code">برجاء إدخال الكود الذى تم إرساله الى رقم الهاتف :</string>
-    <string name="enter_code_">من فضلك ادخل الكود.</string>
+    <string name="enter_code_">من فضلك ادخل الكود</string>
     <string name="serial_number">مسلسل الكمبيوتر</string>
     <string name="old_password">كلمة السر الحالية</string>
     <string name="new_password">كلمة سر جديدة</string>
@@ -359,4 +355,44 @@
     <string name="tour_guid_numbers">25899882 -25890438 - 01144300335</string>
     <string name="confirm_pass">تاكيد كلمة المرور</string>
 
+
+    <!--/////////////////////////////Intro/////////////////////////////////////////-->
+
+    <string name="skip">تخطي</string>
+    <string name="intro_one">تسهيل السداد الالكتروني لجميع الخدمات النقابية</string>
+    <string name="intro_two">خدمات الصيدلية اونلاين بخصومات تصل الي ٢٠٪</string>
+    <string name="intro_three">سدد خدماتك النقابية و الغير نقابية دلوقتي بالتقسيط</string>
+
+    <!--/////////////////////////////Signup/////////////////////////////////////////-->
+    <string name="signup_title">تسجيل حساب</string>
+    <string name="choose_sim">برجاء اختيار رقم الهاتف المطلوب لتسجيل الحساب</string>
+    <string name="sim">SIM</string>
+    <string name="sim_one">SIM 1</string>
+    <string name="sim_two">SIM 2</string>
+    <string name="enter_otp">برجاء ادخال كود التعريف  الذي تم ارساله علي الهاتف المسجل</string>
+    <string name="otp_resend">اذا لم تقم باستلام كود التعريف، اعد الارسال مرة اخري</string>
+    <string name="resend_otp">الارسال</string>
+    <string name="otp_sent">تم إرسال الكود</string>
+    <string name="wrong_otp">كود التفعيل غير صحيح</string>
+    <string name="are_you_syndicate_member">هل انت عضو نقابة؟</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="choose_another_syndicate">أختر نقابة اخري</string>
+    <string name="register_in">انشاء حساب في </string>
+    <string name="enter_password">برجاء ادخال كلمة المرور </string>
+    <string name="membership_id">رقم العضوية</string>
+    <string name="enter_membership_id">من فضلك ادخل رقم العضوية</string>
+    <string name="national_id">الرقم القومي</string>
+    <string name="enter_nat_id">من فضلك ادخل الرقم القومي</string>
+    <string name="password_rules">شروط كلمة المرور</string>
+    <string name="reset_password">اعادة ضبط الرقم السري</string>
+    <string name="complete_profile">استكمال بيانات الحساب</string>
+    <string name="enter_id_front">برجاء ادخال صورة البطاقة الامامية</string>
+    <string name="enter_id_back">برجاء ادخال صورة البطاقة من الخلف</string>
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+    <string name="ok">تأكيد</string>
 </resources>

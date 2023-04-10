@@ -12,5 +12,7 @@ data class NeqabtySignupBody(
     @SerializedName("mobile")
     val mobile: String,
     @SerializedName("password")
-    val password: String
+    val password: String,
+    @SerializedName("national_id")
+    val nationalId: String? = ""
 )

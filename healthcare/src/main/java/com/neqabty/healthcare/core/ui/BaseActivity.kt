@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.core.ui
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ClipData
@@ -19,8 +20,14 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
+import com.neqabty.healthcare.commen.onboarding.intro.view.IntroActivity
+import com.neqabty.healthcare.commen.onboarding.signup.view.SignupActivity
+import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.core.utils.LocaleHelper
+import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
+import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import javax.inject.Inject
 
 
@@ -30,7 +37,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     lateinit var sharedPreferences: PreferencesHelper
     lateinit var binding: B
     abstract fun getViewBinding(): B
-    private var progressDialog: Dialog? = null
+    var progressDialog: Dialog? = null
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(LocaleHelper.onAttach(base));
     }
@@ -40,12 +47,19 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         setAnimation()
         setTheme(getAppTheme())
         binding = getViewBinding()
-        setSupportActionBar(binding.root.findViewById(R.id.toolbar))
-        binding.root.findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(binding.root.findViewById(R.id.layout_toolbar))
+        binding.root.findViewById<Toolbar>(R.id.layout_toolbar)
             ?.setNavigationOnClickListener { onBackPressed() }
-        window.setBackgroundDrawableResource(R.color.white)
-        binding.root.fitsSystemWindows = true
 
+        progressDialog = Dialog(this)
+        window.setBackgroundDrawableResource(R.color.window_bg)
+//        binding.root.fitsSystemWindows = true
+        binding.root.setPadding(
+            resources.getDimension(R.dimen.margin_large).toInt(),
+            resources.getDimension(R.dimen.margin_large).toInt() * 2,
+            resources.getDimension(R.dimen.margin_large).toInt(),
+            resources.getDimension(R.dimen.margin_large).toInt()
+        )
     }
 
     override fun onResume() {
@@ -61,11 +75,11 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         imm.hideSoftInputFromWindow(window?.decorView?.rootView?.windowToken, 0)
     }
 
-    fun getAppTheme() :Int{
-        return when(sharedPreferences.fontSize) {
-            "small" -> R.style.AppTheme_NoActionBar_SmallText
-            "large" -> R.style.AppTheme_NoActionBar_LargeText
-            else -> R.style.AppTheme_NoActionBar
+    fun getAppTheme(): Int {
+        return when (sharedPreferences.fontSize) {
+            "small" -> R.style.MyAppTheme_NoActionBar_SmallText
+            "large" -> R.style.MyAppTheme_NoActionBar_LargeText
+            else -> R.style.MyAppTheme_NoActionBar
         }
     }
     //region Alerts//
@@ -112,22 +126,26 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     }
     //endregion
 
-    private fun verifyAvailableNetwork():Boolean{
-        val connectivityManager=getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo=connectivityManager.activeNetworkInfo
-        return  networkInfo!=null && networkInfo.isConnected
+    private fun verifyAvailableNetwork(): Boolean {
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
     }
 
     override fun onStart() {
         super.onStart()
-        if (!verifyAvailableNetwork()){
-            showAlert(getString(R.string.internet_message), getString(R.string.internet_title)) { finish() }
+        if (!verifyAvailableNetwork()) {
+            showAlert(
+                getString(R.string.internet_message),
+                getString(R.string.internet_title)
+            ) { finish() }
         }
         LocaleHelper.setLocale(this, "ar");
     }
 
-    private fun setAnimation(){
-         progressDialog = Dialog(this)
+    private fun setAnimation() {
+        progressDialog = Dialog(this)
         progressDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         progressDialog!!.setContentView(R.layout.custom_dialog_progress)
 
@@ -150,7 +168,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         binding.root.visibility = View.GONE
     }
 
-    private fun clearClipBoard(){
+    private fun clearClipBoard() {
         val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("label", " ")
         clipboard.setPrimaryClip(clip)
@@ -174,4 +192,39 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         }
     }
 
+    //region  router
+    protected fun getTheNextActivityFromSplash(): Class<Activity> {
+        if (!sharedPreferences.isIntroSkipped)
+            return IntroActivity::class.java as Class<Activity>
+
+        return getTheNextActivityFromIntro()
+    }
+
+    protected fun getTheNextActivityFromIntro(): Class<Activity> {
+        if (sharedPreferences.mobile.isEmpty())
+            return SignupActivity::class.java as Class<Activity>
+
+        return getTheNextActivityFromSignup()
+    }
+
+    fun getTheNextActivityFromSignup(): Class<Activity> {
+        if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember)
+            return MegaHomeActivity::class.java as Class<Activity> //TODO syndicate home
+
+        return MegaHomeActivity::class.java as Class<Activity> //TODO neqabty home
+    }
+    //endregion
+
+    //region progressDialog
+    fun showProgressDialog() {
+        if (progressDialog!!.isShowing)
+            return
+        progressDialog!!.show()
+    }
+
+    fun hideProgressDialog() {
+        if (progressDialog!!.isShowing)
+            progressDialog!!.hide()
+    }
+    //endregion
 }

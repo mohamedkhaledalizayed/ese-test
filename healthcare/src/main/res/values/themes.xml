@@ -99,4 +99,77 @@
         <item name="android:windowBackground">@color/white</item>
     </style>
 
+<!--/////////////////////////////////////////////////////////////NEW UI///////////////////////////////////////////////////////////////-->
+
+    <!-- Base application theme. -->
+    <style name="MyAppTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/cairo_regular</item>
+        <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
+        <item name="alertDialogTheme">@style/MyAlertDialogTheme</item>
+        <item name="colorSurface">@color/white</item>
+    </style>
+
+    <style name="MyAppTheme.NoActionBar" parent="MyAppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/window_bg</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="textSizeLarge">@dimen/text_size_large</item>
+        <item name="textSizeMedium">@dimen/text_size_medium</item>
+        <item name="textSizeSmall">@dimen/text_size_small</item>
+        <item name="marginLarge">@dimen/margin_large</item>
+        <item name="marginMedium">@dimen/margin_medium</item>
+        <item name="marginSmall">@dimen/margin_small</item>
+    </style>
+
+    <style name="MyAppTheme.NoActionBar.LargeText" parent="MyAppTheme.NoActionBar">
+        <item name="textSizeLarge">@dimen/_15sdp</item>
+        <item name="textSizeMedium">@dimen/_13sdp</item>
+        <item name="textSizeSmall">@dimen/_11sdp</item>
+
+        <item name="marginLarge">@dimen/_15sdp</item>
+        <item name="marginMedium">@dimen/_13sdp</item>
+        <item name="marginSmall">@dimen/_11sdp</item>
+    </style>
+
+    <style name="MyAppTheme.NoActionBar.SmallText" parent="MyAppTheme.NoActionBar">
+        <item name="textSizeLarge">@dimen/_11sdp</item>
+        <item name="textSizeMedium">@dimen/_9sdp</item>
+        <item name="textSizeSmall">@dimen/_7sdp</item>
+
+        <item name="marginLarge">@dimen/_11sdp</item>
+        <item name="marginMedium">@dimen/_9sdp</item>
+        <item name="marginSmall">@dimen/_7sdp</item>
+    </style>
+
+
+    <style name="MyAlertDialogTheme" parent="@android:style/Theme.Material.Light.Dialog.Alert">
+        <item name="android:textAppearanceSmall">@style/MyTextAppearance</item>
+        <item name="android:fontFamily">@font/cairo_regular</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="MyTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/cairo_regular</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="MyToolbarTitleTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/cairo_regular</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ActionButtonStyle" parent="Widget.AppCompat.ActionButton">
+        <item name="android:minWidth">1dip</item>
+        <item name="android:paddingStart">8dip</item>
+        <item name="android:paddingEnd">8dip</item>
+    </style>
 </resources>

@@ -3,4 +3,8 @@
     <attr name="textSizeLarge" format="reference" />
     <attr name="textSizeMedium" format="reference" />
     <attr name="textSizeSmall" format="reference" />
+
+    <attr name="marginLarge" format="reference" />
+    <attr name="marginMedium" format="reference" />
+    <attr name="marginSmall" format="reference" />
 </resources>

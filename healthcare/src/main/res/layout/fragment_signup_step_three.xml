@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_syndicate_member"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/are_you_syndicate_member"
+        android:textColor="@color/secondaryText"
+        android:textSize="?textSizeMedium"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/b_yes"
+        style="@style/Material.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:text="@string/yes"
+        android:textColor="@color/secondaryText"
+        android:textSize="?textSizeMedium"
+        app:layout_constraintEnd_toStartOf="@id/b_no"
+        app:layout_constraintHorizontal_weight=".5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_syndicate_member"
+        app:strokeColor="@color/gray" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/b_no"
+        style="@style/Material.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:text="@string/no"
+        android:textColor="@color/secondaryText"
+        android:textSize="?textSizeMedium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight=".5"
+        app:layout_constraintStart_toEndOf="@id/b_yes"
+        app:layout_constraintTop_toBottomOf="@id/tv_syndicate_member"
+        app:strokeColor="@color/gray" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_syndicates"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_large"
+        android:visibility="invisible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/sp_syndicates"
+        app:layout_constraintTop_toBottomOf="@id/b_yes" />
+
+    <Spinner
+        android:id="@+id/sp_syndicates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

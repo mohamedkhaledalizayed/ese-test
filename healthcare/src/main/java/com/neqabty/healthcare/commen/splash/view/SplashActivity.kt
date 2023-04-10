@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.commen.splash.view
 
 import android.app.AlertDialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivitySplashBinding
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
+import com.neqabty.healthcare.commen.onboarding.intro.view.IntroActivity
 import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import com.neqabty.healthcare.core.utils.DeviceUtils
@@ -23,7 +25,7 @@ import dmax.dialog.SpotsDialog
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     private lateinit var loading: AlertDialog
-    private val SPLASH_DISPLAY_LENGTH: Long = 2000L
+    private val SPLASH_DISPLAY_LENGTH: Long = 200L
     private val splashViewModel: SplashViewModel by viewModels()
     override fun getViewBinding() = ActivitySplashBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,39 +51,14 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                     }
                     Status.SUCCESS -> {
                         loading.dismiss()
-                        if (resource.data!!.apiConfigurations[0].androidVersion.toInt() <= BuildConfig.VERSION_CODE) {
-                            Handler().postDelayed(Runnable {
-                                if (sharedPreferences.isAuthenticated) {
-                                    if (sharedPreferences.isSyndicateMember) {
-                                        val mainIntent = Intent(
-                                            this@SplashActivity,
-                                            com.neqabty.healthcare.mega.home.view.MegaHomeActivity::class.java
-                                        )
-                                        startActivity(mainIntent)
-                                        finish()
-                                    } else {
-                                        val mainIntent =
-                                            Intent(this@SplashActivity, SehaHomeActivity::class.java)
-                                        startActivity(mainIntent)
-                                        finish()
-                                    }
-                                } else {
-                                    if (sharedPreferences.mobile.isEmpty()) {
-                                        val mainIntent = Intent(
-                                            this@SplashActivity,
-                                            CheckAccountActivity::class.java
-                                        )
-                                        startActivity(mainIntent)
-                                        finish()
-                                    } else {
-                                        val mainIntent = Intent(
-                                            this@SplashActivity,
-                                            LandingPageActivity::class.java
-                                        )
-                                        startActivity(mainIntent)
-                                        finish()
-                                    }
-                                }
+                        val apiConfigurations = resource.data?.apiConfigurations
+                        val androidVersion = apiConfigurations?.getOrNull(0)?.androidVersion?.toInt()
+
+                        if (androidVersion != null && androidVersion <= BuildConfig.VERSION_CODE) {
+                            Handler().postDelayed({
+                                val mainIntent = Intent(this, getTheNextActivityFromSplash())
+                                startActivity(mainIntent)
+                                finish()
                             }, SPLASH_DISPLAY_LENGTH)
                         } else {
                             showUpdateAppAlertDialog()
@@ -97,52 +74,39 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         }
     }
 
-
     private fun showUpdateAppAlertDialog() {
+        val appPackageName = packageName
+        val marketUrl = "market://details?id=$appPackageName"
+        val webUrl = "https://play.google.com/store/apps/details?id=$appPackageName"
 
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle(getString(R.string.alert))
-        alertDialog.setMessage(getString(R.string.new_update))
-        alertDialog.setCancelable(false)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, getString(R.string.ok_btn)
-        ) { dialog, _ ->
-            val appPackageName = this.packageName
-            try {
-                startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("market://details?id=$appPackageName")
-                    )
-                )
-            } catch (anfe: android.content.ActivityNotFoundException) {
-                startActivity(
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
-                    )
-                )
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle(R.string.alert)
+            .setMessage(R.string.new_update)
+            .setCancelable(false)
+            .setPositiveButton(R.string.ok_btn) { dialog, _ ->
+                try {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(marketUrl)))
+                } catch (e: ActivityNotFoundException) {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(webUrl)))
+                }
+                showUpdateAppAlertDialog()
             }
-            showUpdateAppAlertDialog()
-        }
-        alertDialog.show()
+            .create()
 
+        alertDialog.show()
     }
 
     private fun showAlertDialogAndExitApp(message: String) {
-
-        val alertDialog = androidx.appcompat.app.AlertDialog.Builder(this).create()
-        alertDialog.setTitle(getString(R.string.alert))
-        alertDialog.setMessage(message)
-        alertDialog.setCancelable(false)
-        alertDialog.setButton(
-            androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL, getString(R.string.agree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-            finishAffinity()
-        }
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle(R.string.alert)
+            .setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton(R.string.agree) { dialog, _ ->
+                dialog.dismiss()
+                finishAffinity()
+            }
+            .create()
 
         alertDialog.show()
     }
-
 }

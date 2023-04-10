@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="text_size_small">@dimen/_9sdp</dimen>
+    <dimen name="text_size_medium">@dimen/_11sdp</dimen>
+    <dimen name="text_size_large">@dimen/_13sdp</dimen>
+
+    <dimen name="margin_small">@dimen/_4sdp</dimen>
+    <dimen name="margin_medium">@dimen/_8sdp</dimen>
+    <dimen name="margin_large">@dimen/_16sdp</dimen>
+
+    <dimen name="elevation_level_small">@dimen/_5sdp</dimen>
+    <dimen name="elevation_level_medium">@dimen/_10sdp</dimen>
+    <dimen name="elevation_level_large">@dimen/_15sdp</dimen>
+
+    <dimen name="round_radius_small">@dimen/_5sdp</dimen>
+    <dimen name="round_radius_medium">@dimen/_10sdp</dimen>
+    <dimen name="round_radius_large">@dimen/_15sdp</dimen>
 </resources>

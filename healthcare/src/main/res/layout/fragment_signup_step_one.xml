@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_choose_sim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/choose_sim"
+        android:textColor="@color/secondaryText"
+        android:textSize="?textSizeMedium"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/tv_choose_sim">
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:longClickable="false"
+            android:padding="@dimen/_10sdp"
+            android:textAlignment="viewStart"
+            android:text="1555407132"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintEnd_toStartOf="@id/ccp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            app:ccp_autoDetectCountry="true"
+            app:ccp_countryPreference="EG,SA,AE,KW,QA,BH"
+            app:ccp_defaultLanguage="ARABIC"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_sim1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:background="@drawable/bg_rounded_accent"
+        android:padding="@dimen/margin_medium"
+        android:visibility="gone"
+        app:carbon_cornerRadius="@dimen/_5sdp"
+        app:layout_constraintEnd_toStartOf="@id/cl_sim2"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_choose_sim">
+
+        <TextView
+            android:id="@+id/tv_sim1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:text="@string/sim_one"
+            android:textColor="@android:color/white"
+            android:textSize="?textSizeLarge"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_number1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:textColor="@android:color/white"
+            android:textSize="?textSizeLarge"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_sim1"
+            tools:text="@string/sim_one" />
+
+        <ImageView
+            android:id="@+id/iv_sim1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:src="@drawable/ic_sim"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_number1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_sim2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:background="@drawable/bg_rounded_accent"
+        android:padding="@dimen/margin_medium"
+        android:visibility="gone"
+        app:carbon_cornerRadius="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cl_sim1"
+        app:layout_constraintTop_toBottomOf="@id/tv_choose_sim">
+
+        <TextView
+            android:id="@+id/tv_sim2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:text="@string/sim_two"
+            android:textColor="@android:color/white"
+            android:textSize="?textSizeLarge"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_number2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:textColor="@android:color/white"
+            android:textSize="?textSizeLarge"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_sim2"
+            tools:text="@string/sim_two" />
+
+        <ImageView
+            android:id="@+id/iv_sim2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:src="@drawable/ic_sim"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_number2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
