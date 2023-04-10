@@ -1,8 +1,10 @@
 package com.neqabty.healthcare.sustainablehealth.payment.data.repository
 
 
-import com.neqabty.healthcare.mega.payment.data.repository.toPaymentMethodsEntity
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
+import com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods.DeliveryMethod
+import com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods.PaymentMethodModel
+import com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods.PaymentMethodsResponse
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaMobilePaymentPayloadModel
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaPaymentModel
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaPaymentResponse
@@ -10,8 +12,9 @@ import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.S
 import com.neqabty.healthcare.sustainablehealth.payment.data.source.SehaPaymentDS
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaMobilePaymentPayloadEntity
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaPayment
-import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaPaymentEntity
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.SehaTransactionEntity
+import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.DeliveryEntity
+import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentEntity
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import com.neqabty.healthcare.sustainablehealth.payment.domain.repository.SehaPaymentRepository
 import kotlinx.coroutines.flow.Flow
@@ -28,12 +31,38 @@ class SehaPaymentRepositoryImpl @Inject constructor(private val paymentDS: SehaP
         }
     }
 
-    override fun getPaymentMethods(): Flow<List<PaymentMethodEntity>> {
+    override fun getPaymentMethods(code: String): Flow<PaymentEntity> {
         return flow {
-            emit(paymentDS.getPaymentMethods().map { it.toPaymentMethodsEntity() })
+            emit(paymentDS.getPaymentMethods(code).toPaymentEntity())
         }
     }
 
+}
+
+private fun PaymentMethodsResponse.toPaymentEntity(): PaymentEntity{
+    return PaymentEntity(
+        deliveryMethods = deliveryMethods.toDeliveryEntity(),
+        paymentMethods = paymentMethods.map { it.toPaymentMethodsEntity() }
+    )
+}
+
+private fun DeliveryMethod.toDeliveryEntity(): DeliveryEntity{
+    return DeliveryEntity(
+        type = type,
+        id = id,
+        method = method,
+        price = price
+    )
+}
+
+fun PaymentMethodModel.toPaymentMethodsEntity(): PaymentMethodEntity {
+    return PaymentMethodEntity(
+        displayName = displayName,
+        gateway = gateway,
+        id = id,
+        isActive = isActive,
+        name = name
+    )
 }
 
 fun SehaPaymentModel.toPayment():SehaPayment{

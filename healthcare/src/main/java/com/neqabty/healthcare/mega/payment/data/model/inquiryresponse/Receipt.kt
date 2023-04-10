@@ -19,6 +19,10 @@ data class Receipt(
     val netAmount: Double,
     @SerializedName("fees")
     val fees: Double,
+    @SerializedName("error")
+    val error: String?,
+    @SerializedName("status")
+    val status: Boolean?,
     @SerializedName("total_amount")
     val totalPrice: Double
 )

@@ -8,7 +8,7 @@ data class Package(
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("subscriber_id")
-    val subscriberId: String,
+    val subscriberId: String?,
     @SerializedName("deleted_at")
     val deletedAt: Any,
     @SerializedName("description_ar")
@@ -18,7 +18,7 @@ data class Package(
     @SerializedName("followers")
     val followers: List<Follower>,
     @SerializedName("hint")
-    val hint: String,
+    val hint: String?,
     @SerializedName("id")
     val id: String,
     @SerializedName("insurance_amount")
@@ -26,7 +26,7 @@ data class Package(
     @SerializedName("insurance_company_id")
     val insuranceCompanyId: Any,
     @SerializedName("name_ar")
-    val nameAr: String,
+    val nameAr: String?,
     @SerializedName("name_en")
     val nameEn: Any,
     @SerializedName("nedded_info")
@@ -36,11 +36,11 @@ data class Package(
     @SerializedName("recommended")
     val recommended: Boolean,
     @SerializedName("short_description")
-    val shortDescription: String,
+    val shortDescription: String?,
     @SerializedName("prepaid")
     val prepaid: Boolean,
     @SerializedName("service_code")
-    val serviceCode: String,
+    val serviceCode: String?,
     @SerializedName("service_action_code")
     val serviceActionCode: String?,
     @SerializedName("package_price")

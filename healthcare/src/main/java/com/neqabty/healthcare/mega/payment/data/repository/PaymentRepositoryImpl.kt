@@ -187,17 +187,6 @@ fun PaymentStatusModel.toPaymentStatusEntity(): PaymentStatusEntity {
     )
 }
 
-
-fun PaymentMethodModel.toPaymentMethodsEntity(): PaymentMethodEntity {
-    return PaymentMethodEntity(
-        displayName = displayName,
-        gateway = gateway,
-        id = id,
-        isActive = isActive,
-        name = name
-    )
-}
-
 fun ServiceModel.toServicesListEntity(): ServicesListEntity {
     return ServicesListEntity(
         code,

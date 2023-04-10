@@ -12,8 +12,8 @@ interface PaymentApi {
     suspend fun payment(@Body paymentBody: SehaPaymentBody,
                         @Header("Authorization") token: String): Response<SehaPaymentResponse>
 
-    @GET("payment_methods")
-    suspend fun getPaymentMethods(@Header("Authorization") token: String): PaymentMethodsResponse
+    @GET("payment/get_gateway_parameter")
+    suspend fun getPaymentMethods(@Header("Authorization") token: String, @Query("service_code") code: String): PaymentMethodsResponse
 
 
 }

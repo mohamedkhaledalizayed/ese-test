@@ -12,6 +12,10 @@ data class SehaPaymentBody(
     val serviceActionCode: String = "",
     @SerializedName("payment_method")
     val paymentMethod: String = "",
+    @SerializedName("delivery_method")
+    val deliveryMethod: Int = 0,
+    @SerializedName("address")
+    val address: String = "",
     @SerializedName("payment_source")
     val paymentSource: String = "android",
     @SerializedName("transaction_type")

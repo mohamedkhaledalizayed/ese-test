@@ -7,6 +7,7 @@ import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaPaymentResponse
+import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentEntity
 import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import com.neqabty.healthcare.sustainablehealth.payment.domain.usecase.SehaPaymentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,16 +40,16 @@ class SehaPaymentViewModel @Inject constructor(private val paymentUseCase: SehaP
         }
     }
 
-    val paymentMethods = MutableLiveData<Resource<List<PaymentMethodEntity>>>()
-    fun getPaymentMethods() {
+    val paymentMethods = MutableLiveData<Resource<PaymentEntity>>()
+    fun getPaymentMethods(code: String) {
         paymentMethods.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                paymentUseCase.build().collect {
+                paymentUseCase.build(code).collect {
                     paymentMethods.postValue(Resource.success(data = it))
                 }
             }catch (exception:Throwable){
-                paymentMethods.postValue(Resource.error(data = null, message = AppUtils().handleError(exception)))
+                paymentMethods.postValue(Resource.error(data = null, message = handleError(exception)))
             }
         }
     }

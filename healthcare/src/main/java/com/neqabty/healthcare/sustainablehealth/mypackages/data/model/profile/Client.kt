@@ -6,29 +6,29 @@ import com.google.gson.annotations.SerializedName
 @Keep
 data class Client(
     @SerializedName("address")
-    val address: String,
+    val address: String?,
     @SerializedName("user_number")
     val userNumber: String?,
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("email")
-    val email: String,
+    val email: String?,
     @SerializedName("id")
     val id: String,
     @SerializedName("job")
-    val job: String,
+    val job: String?,
     @SerializedName("mobile")
-    val mobile: String,
+    val mobile: String?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("national_id")
     val nationalId: String?,
     @SerializedName("personal_image")
-    val personalImage: String,
+    val personalImage: String?,
     @SerializedName("birth_date")
-    val birthDate: String,
+    val birthDate: String?,
     @SerializedName("qr_code")
-    val qrCode: String,
+    val qrCode: String?,
     @SerializedName("subscribed_package")
     val subscribedPackage: Boolean,
     @SerializedName("syndicate_id")

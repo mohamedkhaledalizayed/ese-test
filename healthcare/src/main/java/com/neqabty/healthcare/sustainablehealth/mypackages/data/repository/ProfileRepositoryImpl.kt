@@ -68,17 +68,17 @@ private fun Data.toDataEntity(): DataEntity{
 
 private fun Client.toClientEntity(): ClientEntity{
     return ClientEntity(
-        address = address,
+        address = address ?: "",
         userNumber = userNumber,
-        email = email,
+        email = email ?: "",
         id = id,
-        job = job,
-        mobile = mobile,
-        name = name,
+        job = job ?: "",
+        mobile = mobile ?: "",
+        name = name ?: "",
         nationalId = nationalId,
-        personalImage = personalImage,
-        qrCode = qrCode,
-        birthDate = birthDate,
+        personalImage = personalImage ?: "",
+        qrCode = qrCode ?: "",
+        birthDate = birthDate ?: "",
         syndicateId = syndicateId
     )
 }
@@ -92,15 +92,15 @@ private fun Subscribed.toSubscribedPackageEntity(): SubscribedPackageEntity{
 private fun Package.toPackageEntity(): PackageEntity{
     return PackageEntity(
         descriptionAr = descriptionAr,
-        subscriberId = subscriberId,
+        subscriberId = subscriberId ?: "",
         followers = followers.map { it.toFollowerEntity() },
-        hint = hint,
+        hint = hint ?: "",
         id = id,
-        nameAr = nameAr,
+        nameAr = nameAr ?: "",
         maxFollower = maxFollower,
-        shortDescription = shortDescription,
+        shortDescription = shortDescription ?: "",
         prepaid = prepaid,
-        serviceCode = serviceCode,
+        serviceCode = serviceCode ?: "",
         serviceActionCode = serviceActionCode,
         expiryDate = expiryDate,
         packagePrice = packagePrice,

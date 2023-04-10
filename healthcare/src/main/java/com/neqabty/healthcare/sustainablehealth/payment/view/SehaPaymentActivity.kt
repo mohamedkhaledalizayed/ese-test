@@ -6,6 +6,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -36,6 +37,8 @@ import team.opay.business.cashier.sdk.pay.PaymentTask
 @AndroidEntryPoint
 class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), CallbackPaymentInterface {
     private var paymentMethod = ""
+    private var deliveryMethod = 0
+    private var deliveryFees = 0.0
     private var totalAmount = 0
     private var vat = 0
     private var total = 0
@@ -60,7 +63,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
         binding.tvVat.text = " ضريبة القيمة المضافة : $vat جنيه"
         binding.tvTotal.text = "سعر الباقة شامل ضريبة القيمة المضافة : $total جنيه"
         updateTotal()
-        paymentViewModel.getPaymentMethods()
+        paymentViewModel.getPaymentMethods(serviceCode)
         paymentViewModel.paymentMethods.observe(this) { it ->
 
             it?.let { resource ->
@@ -71,11 +74,13 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         binding.llContent.visibility = View.VISIBLE
-                        createRadioButton(resource.data!!)
+                        createRadioButton(resource.data!!.paymentMethods)
+                        deliveryMethod = resource.data.deliveryMethods.id
+                        deliveryFees = resource.data.deliveryMethods.price
+                        updateTotal()
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -160,6 +165,12 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                 return@setOnClickListener
             }
 
+            if (binding.address.text.toString().isEmpty()) {
+                Toast.makeText(this, resources.getString(R.string.enter_add), Toast.LENGTH_LONG)
+                    .show()
+                return@setOnClickListener
+            }
+
             if (!sharedPreferences.isPhoneVerified) {
 
                 binding.btnNext.isEnabled = false
@@ -168,7 +179,9 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                         serviceCode = serviceCode,
                         serviceActionCode = serviceActionCode,
                         paymentMethod = paymentMethod,
-                        mobile = "+201113595402"
+                        mobile = sharedPreferences.mobile,
+                        deliveryMethod = deliveryMethod,
+                        address = binding.address.text.toString()
                     )
                 )
             }else{
@@ -215,7 +228,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
     }
 
     private fun updateTotal(){
-        binding.tvAmount.text = "الاجمالى بعد الرسوم البنكية والاداريه : ${total + paymentFees} جنيه"
+        binding.tvAmount.text = "الاجمالى بعد الرسوم البنكية والاداريه : ${total + paymentFees + deliveryFees} جنيه"
     }
 
     var referenceCode = ""

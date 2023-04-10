@@ -98,6 +98,16 @@
                     android:textSize="?textSizeLarge"
                     android:textStyle="bold" />
 
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:hint="@string/address"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edit_text"/>
+
                 <TextView
                     android:id="@+id/tvAmountAfterDelivery"
                     android:layout_width="match_parent"

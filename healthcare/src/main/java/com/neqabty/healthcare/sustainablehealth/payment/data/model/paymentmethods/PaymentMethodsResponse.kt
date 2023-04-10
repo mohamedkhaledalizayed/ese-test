@@ -3,8 +3,11 @@ package com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmetho
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+
 @Keep
 data class PaymentMethodsResponse(
-    @SerializedName("payment_methods")
+    @SerializedName("delivery_methods")
+    val deliveryMethods: DeliveryMethod,
+    @SerializedName("PaymentGateway")
     val paymentMethods: List<PaymentMethodModel> = listOf()
 )

@@ -45,7 +45,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     private var deliveryFees = 0.0
     private var paymentFees = 0
     private val branchesAdapter = BranchesAdapter()
-    private var paymentGateway = 0
     private var deliveryMethod = 1
     private var deliveryMethodHomeId = 0
     private var deliveryMethodBranchId = 0
@@ -89,6 +88,8 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
                         if (resource.data?.receipt == null){
                             showDialog(getString(R.string.no_reciept))
+                        }else if (!resource.data.receipt.status!!){
+                            Toast.makeText(this@PaymentDetailsActivity, "${resource.data.receipt.error}", Toast.LENGTH_LONG).show()
                         }else{
                             createRadioButton(resource.data.gatewaysData)
                             binding.llContent.visibility = View.VISIBLE
