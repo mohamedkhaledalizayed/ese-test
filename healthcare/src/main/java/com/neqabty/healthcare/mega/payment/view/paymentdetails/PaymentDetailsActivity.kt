@@ -16,6 +16,8 @@ import com.google.gson.Gson
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
+import com.neqabty.healthcare.core.data.Constants.AGRI_CODE
+import com.neqabty.healthcare.core.data.Constants.NATURAL_THERAPY_CODE
 import com.neqabty.healthcare.core.data.Constants.SANDBOX
 import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
 import com.neqabty.healthcare.core.ui.BaseActivity
