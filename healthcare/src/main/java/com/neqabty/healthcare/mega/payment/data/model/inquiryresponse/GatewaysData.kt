@@ -1,10 +1,11 @@
-package com.neqabty.healthcare.mega.payment.data.model.paymentstatus
+package com.neqabty.healthcare.mega.payment.data.model.inquiryresponse
 
 
-import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
+
 @Keep
-data class PaymentMethod(
+data class GatewaysData(
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("display_name")

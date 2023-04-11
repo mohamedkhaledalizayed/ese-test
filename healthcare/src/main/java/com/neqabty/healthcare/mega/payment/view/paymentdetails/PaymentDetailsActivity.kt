@@ -8,26 +8,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
+import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
 import com.neqabty.healthcare.core.data.Constants.SANDBOX
+import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityPaymentDetailsBinding
 import com.neqabty.healthcare.mega.payment.data.model.*
+import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.GatewaysData
 import com.neqabty.healthcare.mega.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
 import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
-import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
-import com.neqabty.healthcare.core.data.Constants.AGRI_CODE
-import com.neqabty.healthcare.core.data.Constants.NATURAL_THERAPY_CODE
-import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
-import com.payment.paymentsdk.PaymentSdkActivity
-import com.payment.paymentsdk.PaymentSdkConfigBuilder
 import com.payment.paymentsdk.integrationmodels.*
 import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,20 +38,20 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     CallbackPaymentInterface {
 
     private val paymentViewModel: PaymentViewModel by viewModels()
-    private var paymentMethod = "card"
+    private var paymentMethod = ""
     private var serviceCode = ""
     private var serviceActionCode = ""
     private var totalAmount = 0
-    private var deliveryFees = 0
+    private var deliveryFees = 0.0
     private var paymentFees = 0
     private val branchesAdapter = BranchesAdapter()
     private var deliveryMethod = 1
     private var deliveryMethodHomeId = 0
     private var deliveryMethodBranchId = 0
-    private var deliveryMethodHomePrice = 0
-    private var deliveryMethodBranchPrice = 0
+    private var deliveryMethodHomePrice = 0.0
+    private var deliveryMethodBranchPrice = 0.0
     private var address = ""
-    private var entityBranch = 1
+    private var entityBranch = ""
     private var branchesList: List<BranchesEntity>? = null
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
 
@@ -103,9 +101,12 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
                         if (resource.data?.receipt == null){
                             showDialog(getString(R.string.no_reciept))
+                        }else if (!resource.data.receipt.status!!){
+                            Toast.makeText(this@PaymentDetailsActivity, "${resource.data.receipt.error}", Toast.LENGTH_LONG).show()
                         }else{
+                            createRadioButton(resource.data.gatewaysData)
                             binding.llContent.visibility = View.VISIBLE
-                            binding.tvService.text = resource.data!!.service.name
+                            binding.tvService.text = resource.data.service.name
                             binding.tvName.text =
                                 resources.getString(
                                     R.string.member_name,
@@ -114,38 +115,39 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                             binding.tvMemberNumber.text =
                                 resources.getString(
                                     R.string.member_id,
-                                    "${resource.data.member.membershipId}"
+                                    sharedPreferences.membershipId
                                 )
 
-                            totalAmount = resource.data!!.receipt!!.details.totalPrice.toInt()
-                            deliveryMethodHomeId = resource.data!!.methodsObj.homeMethodId
-                            deliveryMethodBranchId = resource.data!!.methodsObj.branchMethodId
+                            totalAmount = resource.data.receipt.totalPrice.toInt()
 
-                            deliveryMethodHomePrice = resource.data!!.methodsObj.homeMethodPrice.toFloat().toInt()
-                            deliveryMethodBranchPrice = resource.data!!.methodsObj.branchMethodPrice.toFloat().toInt()
+                            deliveryMethodHomeId = resource.data.deliveryMethods.filter { it.methodId == 1 }[0].id
+                            deliveryMethodHomePrice = resource.data.deliveryMethods.filter { it.methodId == 1 }[0].price
 
+                            deliveryMethodBranchId = resource.data.deliveryMethods.filter { it.methodId == 2 }[0].id
+                            deliveryMethodBranchPrice = resource.data.deliveryMethods.filter { it.methodId == 2 }[0].price
 
-                            paymentFees = resource.data!!.receipt!!.cardFees.toInt()
+                            paymentFees = resource.data.receipt.fees.toInt()
                             deliveryMethod = deliveryMethodHomeId
                             deliveryFees = deliveryMethodHomePrice
                             updateTotal()
                             binding.lastFeeYearValue.text =
-                                resource.data!!.receipt?.details?.lastFeeYear.toString()
+                                resource.data.receipt.lastFeeYear.toString()
                             binding.currentFeeYearValue.text =
-                                resource.data!!.receipt?.details?.currentFeeYear.toString() +
+                                resource.data.receipt.currentFeeYear.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.cardPriceValue.text =
-                                resource.data!!.receipt?.details?.cardPrice.toString() +
+                                resource.data.receipt.cardPrice.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.lateSubscriptionsValue.text =
-                                resource.data!!.receipt?.details?.lateSubscriptions.toString() +
+                                resource.data.receipt.lateSubscriptions.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.delayFineValue.text =
-                                resource.data!!.receipt?.details?.delayFine.toString() +
+                                resource.data.receipt.delayFine.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.totalValue.text =
-                                resource.data!!.receipt?.details?.totalPrice.toString() +
+                                resource.data.receipt.totalPrice.toString() +
                                         "  " + resources.getString(R.string.egp)
+
                         }
 
                     }
@@ -174,35 +176,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
         }
 
-        paymentViewModel.getPaymentMethods()
-        paymentViewModel.paymentMethods.observe(this) { it ->
-
-            it?.let { resource ->
-                when (resource.status) {
-                    com.neqabty.healthcare.core.utils.Status.LOADING -> {
-                        binding.progressCircular.visibility = View.VISIBLE
-                    }
-                    com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
-                        if (resource.data!!.isNotEmpty()) {
-                            if (resource.data!!.filter { it.name == "card" }[0].isActive)
-                                binding.rbCard.visibility = View.VISIBLE
-                            if (resource.data!!.filter { it.name == "code" }[0].isActive)
-                                binding.rbChannel.visibility = View.VISIBLE
-                        }
-                    }
-                    com.neqabty.healthcare.core.utils.Status.ERROR -> {
-                        binding.progressCircular.visibility = View.GONE
-                    }
-                }
-            }
-
-        }
-
         binding.spBranches.adapter = branchesAdapter
         binding.spBranches.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
                 if (branchesList != null && i != 0) {
-                    entityBranch = branchesList?.get(i - 1)!!.entity!!.id
+                    entityBranch = branchesList?.get(i - 1)!!.id
                 }
             }
 
@@ -224,6 +202,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                     list.add(
                                         0,
                                         BranchesEntity(
+                                            id = "",
                                             address = "",
                                             entity = null,
                                             city = resources.getString(R.string.select_branch)
@@ -264,18 +243,19 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                     }
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
-                        if (resource.data?.payment?.paymentMethod == "card") {
-                            val paymentObject = resource.data as PaymentEntity
-                            oPayPayment(paymentObject, true)
+                        when (resource.data?.paymentMethod) {
+                            "Opay Card" -> {
+                                oPayPayment(resource.data)
+                            }
+                            "wallet" -> {
 
-//                            val configData = generatePaytabsConfigurationDetails(paymentObject)
-//                            PaymentSdkActivity.startCardPayment(
-//                                this,
-//                                configData,
-//                                callback = this
-//                            )
-                        } else {
-                            showAlertDialog(resource.data?.payment?.transaction?.paymentGatewayReferenceId!!)
+                            }
+                            "Opay Code" -> {
+                                showAlertDialog(resource.data.paymentGatewayTransactionNum)
+                            }
+                            else -> {
+
+                            }
                         }
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
@@ -287,27 +267,12 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
         }
 
-        binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
-            if (b) {
-                paymentMethod = "card"
-                paymentFees = paymentViewModel.payment.value?.data?.receipt?.cardFees!!.toInt()
-                binding.ivCard.visibility = View.VISIBLE
-                binding.llChannels.visibility = View.GONE
-                updateTotal()
-            }
-        }
-
-        binding.rbChannel.setOnCheckedChangeListener { compoundButton, b ->
-            if (b) {
-                paymentMethod = "code"
-                paymentFees = paymentViewModel.payment.value?.data?.receipt?.codeFees!!.toInt()
-                binding.llChannels.visibility = View.VISIBLE
-                binding.ivCard.visibility = View.GONE
-                updateTotal()
-            }
-        }
-
         binding.btnNext.setOnClickListener {
+
+            if (paymentMethod.isEmpty()){
+                Toast.makeText(this, "من فضلك اختر طريقة الدفع.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
             if (deliveryMethod == deliveryMethodHomeId) {
                 address = binding.address.text.toString()
@@ -331,64 +296,51 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
             if (deliveryMethod == deliveryMethodBranchId) {
                 address = ""
+                deliveryMethod = deliveryMethodBranchId
+            }else{
+                entityBranch = ""
+                deliveryMethod = deliveryMethodHomeId
             }
 
 
-            if (sharedPreferences.isPhoneVerified) {
+            if (!sharedPreferences.isPhoneVerified) {
                 binding.btnNext.isEnabled = false
-                if (deliveryMethod == deliveryMethodHomeId){
-                       if (sharedPreferences.code == NATURAL_THERAPY_CODE){
-                           paymentViewModel.getPaymentHomeInfo(
-                               PaymentHomeBody(
-                                   PaymentHomeBodyObject(
-                                       serviceCode = serviceCode,
-                                       serviceActionCode = serviceActionCode,
-                                       paymentMethod = paymentMethod,
-                                       address = address,
-                                       deliveryMethod = deliveryMethodHomeId,
-                                       deliveryMobile = binding.mobile.text.toString(),
-                                       deliveryNotes = binding.notes.text.toString()
-                                   )
-                               )
-                           )
-                       }else{
-                           paymentViewModel.getPaymentHomeInfo(
-                               PaymentHomeBody(
-                                   PaymentHomeBodyObject(
-                                       serviceCode = serviceCode,
-                                       serviceActionCode = serviceActionCode,
-                                       paymentMethod = paymentMethod,
-                                       address = address,
-                                       membershipId = sharedPreferences.membershipId.toInt(),
-                                       deliveryMethod = deliveryMethodHomeId,
-                                       deliveryMobile = binding.mobile.text.toString(),
-                                       deliveryNotes = binding.notes.text.toString()
-                                   )
-                               )
-                           )
-                       }
-                }else{
-                    paymentViewModel.getPaymentInfo(
-                        PaymentBody(
-                            PaymentBodyObject(
-                                serviceCode = serviceCode,
-                                serviceActionCode = serviceActionCode,
-                                paymentMethod = paymentMethod,
-                                membershipId = sharedPreferences.membershipId.toInt(),
-                                entityBranch = entityBranch,
-                                deliveryMethod = deliveryMethodBranchId,
-                                deliveryMobile = binding.mobile.text.toString(),
-                                deliveryNotes = binding.notes.text.toString()
-                            )
-                        )
-                    )
-                }
+
+                paymentViewModel.getPaymentInfo(
+                    PaymentBody(
+                        serviceCode = serviceCode,
+                        serviceActionCode = serviceActionCode,
+                        paymentMethod = paymentMethod,
+                        membershipId = sharedPreferences.membershipId.toInt(),
+                        address = address,
+                        branch = entityBranch,
+                        deliveryMethod = deliveryMethod)
+                )
 
             } else {
                 verifyPhone()
             }
 
         }
+    }
+
+    private fun createRadioButton(gatewaysData: List<GatewaysData>) {
+        val rg = RadioGroup(this)
+        rg.orientation = RadioGroup.VERTICAL
+        for (item in gatewaysData) {
+            var rb = RadioButton(this)
+            rb.text = item.displayName
+            rb.id = item.id
+            rb.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked){
+                    paymentMethod = item.name
+                    updateTotal()
+                }
+            }
+            rb.setPadding(20, 20, 20, 20)
+            rg.addView(rb)
+        }
+        binding.llMainLayout.addView(rg)
     }
 
     private fun verifyPhone() {
@@ -438,7 +390,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
         if (sharedPreferences.code == TOGAREEN_CODE){
             binding.totValue.text =
-                "${(totalAmount + paymentFees )}  ${resources.getString(R.string.egp)}"
+                "${(totalAmount + paymentFees)}  ${resources.getString(R.string.egp)}"
         }else{
             binding.totValue.text =
                 "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
@@ -484,7 +436,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         clipboard.setPrimaryClip(clip)
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PaymentTask.REQUEST_PAYMENT) {
@@ -496,24 +447,23 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         }
     }
 
-    private fun oPayPayment(paymentEntity: PaymentEntity, isCredit: Boolean) {
-        referenceCode = paymentEntity.mobilePaymentPayload!!.reference
-        val paymentType = if (isCredit) "BankCard" else "ReferenceCode"
+    private fun oPayPayment(paymentEntity: PaymentEntity) {
+        referenceCode = paymentEntity.id
         PaymentTask.sandBox = SANDBOX
         val payInput = PayInput(
-            publickey = paymentEntity.mobilePaymentPayload.publickey,
-            merchantId = paymentEntity.mobilePaymentPayload.merchantId,
-            merchantName = paymentEntity.mobilePaymentPayload.merchantName,
-            reference = paymentEntity.mobilePaymentPayload.reference,
-            countryCode = paymentEntity.mobilePaymentPayload.countryCode, // uppercase
-            currency = paymentEntity.mobilePaymentPayload.currency, // uppercase
-            payAmount = (paymentEntity.mobilePaymentPayload.payAmount.toDouble() * 100).toLong(),
+            publickey = paymentEntity.publicKey,
+            merchantId = paymentEntity.merchantId,
+            merchantName = "Neqabty",
+            reference = paymentEntity.paymentGatewayTransactionNum,
+            countryCode = "EG", // uppercase
+            currency = "EGP", // uppercase
+            payAmount = (paymentEntity.totalAmount.toDouble() * 100).toLong(),
             productName = binding.tvService.text.toString(),
             productDescription = binding.tvService.text.toString(),
-            callbackUrl = paymentEntity.mobilePaymentPayload.callbackUrl,
+            callbackUrl = paymentEntity.callBackURL,
             userClientIP = "110.246.160.183",
-            expireAt = paymentEntity.mobilePaymentPayload.expireAt,
-            paymentType = paymentType // optional
+            expireAt = paymentEntity.expireAt.toInt(),
+            paymentType = "BankCard" // optional
         )
 
         PaymentTask(this).createOrder(payInput, callback = { status, response ->
@@ -537,21 +487,13 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             PaymentStatus.INITIAL -> {
             }
             PaymentStatus.PENDING -> {
-                if (response.eventName.equals("clickResultOKBtn") && binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_channel)
-                    showAlert(getString(R.string.payment_reference_without_code)) {}
+
             }
             PaymentStatus.SUCCESS -> {
-
-                if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card) {
-                    val intent = Intent(this, PaymentStatusActivity::class.java)
-                    intent.putExtra("referenceCode", referenceCode)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    showAlert(getString(R.string.payment_reference) + response.referenceCode) {
-                        finish()
-                    }
-                }
+                val intent = Intent(this, PaymentStatusActivity::class.java)
+                intent.putExtra("referenceCode", referenceCode)
+                startActivity(intent)
+                finish()
             }
             PaymentStatus.FAIL -> {
                 showAlert(getString(R.string.payment_canceled)) {}
@@ -567,52 +509,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         binding.btnNext.isEnabled = true
     }
 
-    //region Paytabs///
-    private fun generatePaytabsConfigurationDetails(paymentEntity: PaymentEntity): PaymentSdkConfigurationDetails {
-        val profileId = "103411"
-        val serverKey = "SKJN6BDTKH-JG26L9WRDL-DNMN2ZZ9RN"
-        val clientKey = "C7KMVN-NV2B6T-MGBPVR-2G72KG"
-        val locale = PaymentSdkLanguageCode.EN /*Or PaymentSdkLanguageCode.AR*/
-        val currency = "EGP"
-        val merchantCountryCode = "EG"
-
-        val billingData = PaymentSdkBillingDetails(
-            "Giza",
-            "eg",
-            "customer@customer.com",
-            "",
-            sharedPreferences.mobile, "Egypt",
-            binding.address.text.toString(), "132"
-        )
-        val configData = PaymentSdkConfigBuilder(
-            profileId,
-            serverKey,
-            clientKey,
-            (totalAmount + paymentFees + deliveryFees).toDouble(),
-            currency
-        )
-            .setCartDescription(binding.tvService.text.toString())
-            .setLanguageCode(locale)
-            .setMerchantIcon(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.paytabs_logo
-                )
-            )
-            .setBillingData(billingData)
-            .setMerchantCountryCode(merchantCountryCode)
-            .setTransactionType(PaymentSdkTransactionType.SALE)
-            .setTransactionClass(PaymentSdkTransactionClass.ECOM)
-            .setTokenise(PaymentSdkTokenise.NONE) //Check other tokenizing types in PaymentSdkTokenise
-            .setCartId(paymentEntity.mobilePaymentPayload?.reference)
-            .showBillingInfo(false)
-            .showShippingInfo(false)
-            .forceShippingInfo(false)
-            .setScreenTitle(binding.tvService.text.toString())
-
-        return configData.build()
-    }
-
     override fun onError(error: PaymentSdkError) {
         showAlert(getString(R.string.payment_canceled)) {
             finish()
@@ -620,17 +516,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     }
 
     override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
-        showAlert(
-            if (binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_card || binding.rgPaymentMechanismType.checkedRadioButtonId == R.id.rb_mobileWallet) getString(
-                R.string.payment_successful
-            ) + paymentSdkTransactionDetails.paymentResult?.responseCode
-            else getString(R.string.payment_reference) + paymentSdkTransactionDetails.paymentResult?.responseCode
-        ) {
             val intent = Intent(this, PaymentStatusActivity::class.java)
             intent.putExtra("referenceCode", referenceCode)
             startActivity(intent)
             finish()
-        }
     }
 
     override fun onPaymentCancel() {

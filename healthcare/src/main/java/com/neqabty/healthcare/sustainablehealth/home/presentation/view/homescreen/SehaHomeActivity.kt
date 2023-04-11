@@ -40,6 +40,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.about.AboutFragment
 import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity
+import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.PackagesEntity
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.filter.FiltersViewModel
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.searchresult.SearchResultActivity

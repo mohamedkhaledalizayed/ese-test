@@ -1,4 +1,4 @@
-package com.neqabty.mega.payment.domain.entity.paymentmethods
+package com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods
 
 
 

@@ -248,66 +248,15 @@
                     android:textStyle="bold"
                     android:visibility="visible" />
 
-                <RadioGroup
-                    android:id="@+id/rgPaymentMechanismType"
+                <LinearLayout
+                    android:id="@+id/ll_main_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="vertical">
 
-                    <RadioButton
-                        android:id="@+id/rb_card"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:buttonTint="@color/dark_green"
-                        android:checked="true"
-                        android:text="@string/payment_card"
-                        android:textSize="?textSizeMedium"
-                        android:visibility="gone" />
-
-                    <ImageView
-                        android:id="@+id/ivCard"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/visa" />
-
-                    <RadioButton
-                        android:id="@+id/rb_channel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/dark_green"
-                        android:text="@string/payment_channel"
-                        android:textSize="?textSizeMedium"
-                        android:visibility="gone" />
-
-                    <LinearLayout
-                        android:id="@+id/llChannels"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/opay" />
-
-                        <TextView
-                            android:id="@+id/tvChannels"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@{Html.fromHtml(@string/payment_store_locator)}"
-                            android:textSize="?textSizeMedium" />
-                    </LinearLayout>
-
-                </RadioGroup>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tvDeliveryMethod"

@@ -4,6 +4,7 @@ package com.neqabty.healthcare.mega.payment.view.paymentstatus
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -43,7 +44,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.layoutContainer.visibility = View.VISIBLE
                         binding.progressCircular.visibility = View.GONE
-                        if (!resource.data?.id.isNullOrEmpty()){
+                        if (!resource.data?.gatewayReferenceId.isNullOrEmpty()){
                             binding.nameValue.text = resource.data?.member_name?: resource.data?.mobile
 
                             if (resource.data?.itemId != null){
@@ -72,6 +73,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
+                        Log.e("test", resource.message.toString())
                         if (resource.message == "404"){
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
                         }

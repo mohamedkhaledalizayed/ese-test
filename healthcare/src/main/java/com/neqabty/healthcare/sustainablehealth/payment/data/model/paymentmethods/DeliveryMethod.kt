@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.mega.payment.data.model.inquiryresponse
+package com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods
 
 
 import com.google.gson.annotations.SerializedName

@@ -1,9 +1,10 @@
 package com.neqabty.healthcare.sustainablehealth.payment.data.source
 
 import com.neqabty.healthcare.core.data.PreferencesHelper
-import com.neqabty.healthcare.mega.payment.data.model.paymentmethods.PaymentMethodModel
+import com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods.PaymentMethodModel
 import com.neqabty.healthcare.sustainablehealth.payment.data.api.PaymentApi
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.SehaPaymentBody
+import com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods.PaymentMethodsResponse
 import com.neqabty.healthcare.sustainablehealth.payment.data.model.sehapayment.SehaPaymentResponse
 import retrofit2.Response
 import javax.inject.Inject
@@ -14,8 +15,8 @@ class SehaPaymentDS @Inject constructor(private val paymentApi: PaymentApi, priv
         return paymentApi.payment(paymentBody, token =  "Token ${sharedPreferences.token}")
     }
 
-    suspend fun getPaymentMethods(): List<PaymentMethodModel> {
-        return paymentApi.getPaymentMethods("Token ${sharedPreferences.token}").paymentMethods
+    suspend fun getPaymentMethods(code: String): PaymentMethodsResponse {
+        return paymentApi.getPaymentMethods("Token ${sharedPreferences.token}", code = code)
     }
 
 }

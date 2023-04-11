@@ -27,8 +27,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoActionBar"
-        android:usesCleartextTraffic="false"
-        tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic" >
+        android:usesCleartextTraffic="true"
+        tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
             android:name=".commen.clinido.view.ClinidoActivity"
             android:exported="false" />

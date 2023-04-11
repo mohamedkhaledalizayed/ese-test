@@ -3,9 +3,12 @@ package com.neqabty.healthcare.mega.payment.domain.entity.inquiryresponse
 
 
 data class ReceiptEntity(
-    val cardFees: Double,
-    val cardTotalPrice: Double,
-    val codeFees: Double,
-    val codeTotalPrice: Double,
-    val details: DetailsEntity
+    val lastFeeYear: Int,
+    val currentFeeYear: Double,
+    val cardPrice: Double,
+    val lateSubscriptions: Double,
+    val delayFine: Double,
+    val netAmount: Double,
+    val fees: Double,
+    val totalPrice: Double
 )

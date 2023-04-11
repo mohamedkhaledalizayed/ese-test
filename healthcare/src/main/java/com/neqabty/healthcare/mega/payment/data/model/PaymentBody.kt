@@ -4,26 +4,22 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 @Keep
 class PaymentBody (
-    @SerializedName("payment")
-    val payment: PaymentBodyObject
-)
-
-@Keep
-class PaymentBodyObject(
-    @SerializedName("service_code")
+    @SerializedName("service")
     val serviceCode: String = "",
-    @SerializedName("service_action_code")
+    @SerializedName("service_action")
     val serviceActionCode: String = "",
     @SerializedName("payment_method")
     val paymentMethod: String = "",
     @SerializedName("payment_source")
     val paymentSource: String = "android",
+    @SerializedName("transaction_type")
+    val transactionType: String = "payment",
     @SerializedName("address")
     val address: String = "",
-    @SerializedName("entity_branch")
-    val entityBranch: Int = 1,
+    @SerializedName("branch")
+    val branch: String = "",
     @SerializedName("delivery_method")
-    val deliveryMethod: Int = 1,
+    val deliveryMethod: Int,
     @SerializedName("membership_id")
     val membershipId: Int = 0,
     @SerializedName("delivery_mobile")
