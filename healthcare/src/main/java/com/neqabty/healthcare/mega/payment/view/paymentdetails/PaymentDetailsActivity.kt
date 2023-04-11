@@ -74,6 +74,13 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             binding.deliveryFeesValue.visibility = View.GONE
         }
 
+        if (sharedPreferences.code == AGRI_CODE){
+            binding.tvDeliveryMethod.visibility = View.GONE
+            binding.rgDeliveryMethods.visibility = View.GONE
+            binding.deliveryFees.visibility = View.GONE
+            binding.deliveryFeesValue.visibility = View.GONE
+        }
+
 
         serviceCode = intent.getStringExtra("code")!!
         serviceActionCode = intent.getStringExtra("service_action_code")!!

@@ -39,6 +39,7 @@ object Constants {
     const val ESE_CODE = "e03"
     const val NATURAL_THERAPY_CODE = "e02"
     const val TOGAREEN_CODE = "e06"
+    const val AGRI_CODE = "e05"
     var isSyndicateMember = false
     var selectedSyndicateCode = ""
     var selectedSyndicatePosition = 0
