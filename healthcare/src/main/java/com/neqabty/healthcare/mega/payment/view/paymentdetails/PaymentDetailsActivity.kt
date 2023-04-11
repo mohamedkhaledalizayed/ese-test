@@ -66,15 +66,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
         binding.address.customSelectionActionModeCallback = actionMode
 
-        if (sharedPreferences.code == TOGAREEN_CODE){
-            binding.tvDetails.visibility = View.GONE
-            binding.cardLayout.visibility = View.GONE
-            binding.tvDeliveryMethod.visibility = View.GONE
-            binding.rgDeliveryMethods.visibility = View.GONE
-            binding.deliveryFees.visibility = View.GONE
-            binding.deliveryFeesValue.visibility = View.GONE
-        }
-
         if (sharedPreferences.code == AGRI_CODE){
             binding.tvDeliveryMethod.visibility = View.GONE
             binding.rgDeliveryMethods.visibility = View.GONE
@@ -278,10 +269,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
             if (deliveryMethod == deliveryMethodHomeId) {
                 address = binding.address.text.toString()
-            }
-
-            if (sharedPreferences.code == TOGAREEN_CODE){
-                address = "test"
             }
 
             if (deliveryMethod == deliveryMethodHomeId && address.isEmpty()) {
