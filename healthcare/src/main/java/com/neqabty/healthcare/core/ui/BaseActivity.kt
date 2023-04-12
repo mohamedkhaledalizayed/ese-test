@@ -20,14 +20,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
 import com.neqabty.healthcare.commen.onboarding.intro.view.IntroActivity
 import com.neqabty.healthcare.commen.onboarding.signup.view.SignupActivity
-import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.core.data.PreferencesHelper
+import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
+import com.neqabty.healthcare.core.home_syndicates.view.SyndicatesHomeActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
-import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import javax.inject.Inject
 
 
@@ -209,9 +208,9 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     fun getTheNextActivityFromSignup(): Class<Activity> {
         if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember)
-            return MegaHomeActivity::class.java as Class<Activity> //TODO syndicate home
+            return SyndicatesHomeActivity::class.java as Class<Activity> //TODO syndicate home
 
-        return MegaHomeActivity::class.java as Class<Activity> //TODO neqabty home
+        return GeneralHomeActivity::class.java as Class<Activity> //TODO neqabty home
     }
     //endregion
 

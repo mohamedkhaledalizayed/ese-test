@@ -62,4 +62,7 @@ object Constants {
 
     var GENERAL_NEWS = 1
     var SYNDICATE_NEWS = 2
+
+    var DOCTORS_RESERVATION_URL = ""
+    var MEDICINE_URL = ""
 }

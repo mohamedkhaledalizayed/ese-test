@@ -169,7 +169,7 @@ class UploadIdFrontActivity : BaseActivity<ActivityUploadIdFrontBinding>() {
         )
 
 
-        return MultipartBody.Part.createFormData(partName, file.name, requestFile);
+        return MultipartBody.Part.createFormData(partName, file.name, requestFile)
     }
 
     private fun navigate() {

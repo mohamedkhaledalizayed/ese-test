@@ -1,7 +1,6 @@
 <resources>
 
     <string name="register_now">سجل الأن</string>
-    <string name="seha">نقابتى صحة مستدامة</string>
     <string name="info">الاستفادة من الأسعار\n التعاقدية المخفضة</string>
     <string name="start_now">البدء الآن</string>
     <string name="about_seha">ما هي نقابتي صحة\nمستدامة</string>
@@ -193,9 +192,6 @@
     <string name="doctor">حجز اطباء</string>
     <string name="subscription_model">المدفوعات
 النقابية</string>
-    <string name="healthcare">الرعاية الصحية</string>
-    <string name="visit_home">زيارات منزلية</string>
-    <string name="consl">استشارات اونلاين</string>
     <string name="medicine">العلاج الشهري</string>
     <string name="mashat">المعاشات</string>
     <string name="all_trips">رحلاتنا</string>
@@ -207,7 +203,6 @@
     <string name="select_service">إختر الخدمة اولا</string>
     <string name="service_unavailable">سيتم تفعيل الخدمة قريباً</string>
     <string name="new_update">برجاء تحديث التطبيق للنسخة الأحدث حتي تتمكن من استخدام التطبيق.</string>
-    <string name="other_services">خدمات أخرى</string>
     <string name="neqabty_news">أخبار النقابة</string>
     <string name="last_fee_year">أخر إشتراك</string>
     <string name="current_fee_year">الأشتراك الحالى</string>
@@ -386,13 +381,28 @@
     <string name="enter_nat_id">من فضلك ادخل الرقم القومي</string>
     <string name="password_rules">شروط كلمة المرور</string>
     <string name="reset_password">اعادة ضبط الرقم السري</string>
+    <string name="go_to_home">الصفحة الرئسية</string>
     <string name="complete_profile">استكمال بيانات الحساب</string>
+    <string name="signin_done">تم تسجيل الدخول بنجاح</string>
     <string name="enter_id_front">برجاء ادخال صورة البطاقة الامامية</string>
     <string name="enter_id_back">برجاء ادخال صورة البطاقة من الخلف</string>
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
     <string name="ok">تأكيد</string>
+
+
+    <!--/////////////////////////////Home/////////////////////////////////////////-->
+    <string name="seha">نقابتى صحة مستدامة</string>
+    <string name="welcome_in">مرحبا %s في</string>
+    <string name="current_balance">Current Balance</string>
+    <string name="healthcare">الرعاية الصحية</string>
+    <string name="visit_home">زيارات منزلية</string>
+    <string name="consl">استشارات اونلاين</string>
+    <string name="packages">الباقات</string>
+    <string name="menu_more">القائمة</string>
+    <string name="home">الرئيسية</string>
+    <string name="other_services">الخدمات</string>
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
+<!--    <string name=""></string>-->
 </resources>

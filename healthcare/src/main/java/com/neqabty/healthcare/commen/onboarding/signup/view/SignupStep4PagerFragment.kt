@@ -200,7 +200,7 @@ class SignupStep4PagerFragment : Fragment() {
     private fun navigate() {
         val mainIntent = Intent(
             requireActivity(),
-            UploadIdFrontActivity::class.java
+            SigninDoneActivity::class.java
         )
         startActivity(mainIntent)
         requireActivity().finish()

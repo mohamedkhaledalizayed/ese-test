@@ -100,7 +100,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                     if (BuildConfig.DEBUG) {
                         val mainIntent = Intent(
                             this,
-                            UploadIdFrontActivity::class.java
+                            SigninDoneActivity::class.java
                         )
                         startActivity(mainIntent)
                         finish()

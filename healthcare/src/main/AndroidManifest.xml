@@ -80,10 +80,25 @@
             android:name=".commen.onboarding.signup.view.SignupActivity"
             android:exported="false" />
         <activity
+            android:name=".commen.onboarding.signup.view.SigninDoneActivity"
+            android:exported="false" />
+        <activity
             android:name=".commen.onboarding.uploadID.UploadIdFrontActivity"
             android:exported="false" />
         <activity
             android:name=".commen.onboarding.uploadID.UploadIdBackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".core.home_syndicates.view.SyndicatesHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".core.home_general.GeneralHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".core.syndicates.SyndicatesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".core.more.view.MoreActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.mypackages.presentation.ProfileActivity"

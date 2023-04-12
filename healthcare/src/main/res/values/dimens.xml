@@ -9,6 +9,7 @@
     <dimen name="margin_small">@dimen/_4sdp</dimen>
     <dimen name="margin_medium">@dimen/_8sdp</dimen>
     <dimen name="margin_large">@dimen/_16sdp</dimen>
+    <dimen name="margin_extra_large">@dimen/_22sdp</dimen>
 
     <dimen name="elevation_level_small">@dimen/_5sdp</dimen>
     <dimen name="elevation_level_medium">@dimen/_10sdp</dimen>

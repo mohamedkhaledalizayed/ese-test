@@ -249,7 +249,7 @@
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold"
-                    android:text="123@pass"
+                    android:text="password123"
                     app:layout_constraintEnd_toStartOf="@id/iv_password"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_password" />
@@ -292,7 +292,7 @@
                     android:background="@null"
                     android:hint="@string/confirm_password"
                     android:inputType="textPassword"
-                    android:text="123@pass"
+                    android:text="password123"
                     android:longClickable="false"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
