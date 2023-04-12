@@ -302,7 +302,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                         membershipId = sharedPreferences.membershipId.toInt(),
                         address = address,
                         branch = entityBranch,
-                        deliveryMethod = deliveryMethod)
+                        deliveryMethod = deliveryMethod,
+                        deliveryMobile = binding.mobile.text.toString(),
+                        deliveryNotes = binding.notes.text.toString()
+                    )
                 )
 
             } else {
