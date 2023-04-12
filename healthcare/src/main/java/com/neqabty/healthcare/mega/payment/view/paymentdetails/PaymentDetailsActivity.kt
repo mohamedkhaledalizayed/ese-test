@@ -294,19 +294,47 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             if (!sharedPreferences.isPhoneVerified) {
                 binding.btnNext.isEnabled = false
 
-                paymentViewModel.getPaymentInfo(
-                    PaymentBody(
-                        serviceCode = serviceCode,
-                        serviceActionCode = serviceActionCode,
-                        paymentMethod = paymentMethod,
-                        membershipId = sharedPreferences.membershipId.toInt(),
-                        address = address,
-                        branch = entityBranch,
-                        deliveryMethod = deliveryMethod,
-                        deliveryMobile = binding.mobile.text.toString(),
-                        deliveryNotes = binding.notes.text.toString()
+                if (deliveryMethod == deliveryMethodHomeId){
+                    if (sharedPreferences.code == NATURAL_THERAPY_CODE){
+                        paymentViewModel.getPaymentInfo(
+                            PaymentBody(
+                                serviceCode = serviceCode,
+                                serviceActionCode = serviceActionCode,
+                                paymentMethod = paymentMethod,
+                                address = address,
+                                deliveryMethod = deliveryMethodHomeId,
+                                deliveryMobile = binding.mobile.text.toString(),
+                                deliveryNotes = binding.notes.text.toString()
+                            )
+                        )
+                    }else{
+                        paymentViewModel.getPaymentInfo(
+                            PaymentBody(
+                                serviceCode = serviceCode,
+                                serviceActionCode = serviceActionCode,
+                                paymentMethod = paymentMethod,
+                                address = address,
+                                membershipId = sharedPreferences.membershipId.toInt(),
+                                deliveryMethod = deliveryMethodHomeId,
+                                deliveryMobile = binding.mobile.text.toString(),
+                                deliveryNotes = binding.notes.text.toString()
+                            )
+                        )
+                    }
+                }else{
+                    paymentViewModel.getPaymentInfo(
+                        PaymentBody(
+                            serviceCode = serviceCode,
+                            serviceActionCode = serviceActionCode,
+                            paymentMethod = paymentMethod,
+                            membershipId = sharedPreferences.membershipId.toInt(),
+                            branch = entityBranch,
+                            deliveryMethod = deliveryMethodBranchId,
+                            deliveryMobile = binding.mobile.text.toString(),
+                            deliveryNotes = binding.notes.text.toString()
+                        )
                     )
-                )
+                }
 
             } else {
                 verifyPhone()
