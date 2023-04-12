@@ -306,6 +306,7 @@
     <string name="confirm_message">لقد تم إنشاء حسابك بنجاح, مع العلم ان كلمة المرور الخاصة بك هى اخر 4 ارقام من الرقم القومى الخاص بك.</string>
     <string name="confirm_message_serial">لقد تم إنشاء حسابك بنجاح, مع العلم ان كلمة المرور الخاصة بك هى اخر 4 ارقام من مسلسل الكمبيوتر الخاص بك.</string>
     <string name="confirm_message_agri">لقد تم إنشاء حسابك بنجاح.</string>
+    <string name="password_not_matched">كلمة السر غير متطابقة.</string>
     <string name="there_is_no_syndicates">لا يوجد نقابات</string>
     <string name="select_syndicates">اختر النقابة</string>
     <string name="enter_correct_phone">من فضلك ادخل رقم صحيح</string>

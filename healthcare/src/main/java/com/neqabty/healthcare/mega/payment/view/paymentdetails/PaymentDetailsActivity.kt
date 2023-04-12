@@ -19,7 +19,6 @@ import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
 import com.neqabty.healthcare.core.data.Constants.AGRI_CODE
 import com.neqabty.healthcare.core.data.Constants.NATURAL_THERAPY_CODE
 import com.neqabty.healthcare.core.data.Constants.SANDBOX
-import com.neqabty.healthcare.core.data.Constants.TOGAREEN_CODE
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityPaymentDetailsBinding
 import com.neqabty.healthcare.mega.payment.data.model.*
@@ -377,13 +376,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     private fun updateTotal() {
         binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
         binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
-        if (sharedPreferences.code == TOGAREEN_CODE){
-            binding.totValue.text =
-                "${(totalAmount + paymentFees)}  ${resources.getString(R.string.egp)}"
-        }else{
-            binding.totValue.text =
-                "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
-        }
+        binding.totValue.text = "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
     }
 
     private fun showDialog(message: String) {

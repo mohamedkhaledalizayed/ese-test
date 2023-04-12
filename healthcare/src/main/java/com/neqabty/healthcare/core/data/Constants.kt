@@ -37,6 +37,7 @@ object Constants {
 
     const val NEQABTY_CODE = "e00"
     const val ESE_CODE = "e03"
+    const val MORSHEDIN_CODE = "e01"
     const val NATURAL_THERAPY_CODE = "e02"
     const val TOGAREEN_CODE = "e06"
     const val AGRI_CODE = "e05"
