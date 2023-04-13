@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ClinidoUseCase @Inject constructor(private val clinidoRepository: ClinidoRepository) {
-    fun build(phone: String, type: String): Flow<ClinidoEntity> {
-        return clinidoRepository.register(ClinidoBody(mobile = phone, type = type))
+    fun build(phone: String, type: String, name: String, entityCode: String): Flow<ClinidoEntity> {
+        return clinidoRepository.register(ClinidoBody(mobile = phone, type = type, name = name, entityCode = entityCode))
     }
 }

@@ -67,6 +67,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
         setContentView(binding.root)
 
+        init()
         setupToolbar(title = "${sharedPreferences.syndicateName}")
         toolbar = binding.toolbar
 
@@ -239,7 +240,11 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
         binding.doctorImage.setOnClickListener {
             if (sharedPreferences.isAuthenticated){
-                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors")
+                homeViewModel.getUrl(
+                    phone = sharedPreferences.mobile,
+                    type = "doctors",
+                    name = sharedPreferences.name,
+                    entityCode = sharedPreferences.code)
                 title = "حجز أطباء"
             }else{
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
@@ -337,7 +342,11 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
-            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+            homeViewModel.getUrl(
+                phone = sharedPreferences.mobile,
+                type = "pharmacy",
+                name = sharedPreferences.name,
+                entityCode = sharedPreferences.code)
             title = "العلاج الشهرى"
         }
         alertDialog.setButton(

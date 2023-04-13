@@ -8,5 +8,9 @@ data class ClinidoBody(
     @SerializedName("mobile")
     val mobile: String,
     @SerializedName("type")
-    val type: String
+    val type: String,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("entity_code")
+    val entityCode: String
 )
