@@ -19,7 +19,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.chefaa.core.data.Cart
+import com.neqabty.chefaa.core.data.Constants.mobileNumber
 import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
+import com.neqabty.chefaa.modules.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
@@ -217,13 +219,9 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
         }
 
         binding.medicineImage.setOnClickListener {
-            if (sharedPreferences.isAuthenticated){
-                if (sharedPreferences.isPhoneVerified){
-                    openTermsDialog()
-                }else{
-                    verifyPhone()
-                }
-            }else{
+            if (sharedPreferences.isAuthenticated) {
+                openTermsDialog()
+            } else {
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
         }
@@ -244,18 +242,15 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
         }
 
         binding.doctorImage.setOnClickListener {
-            if (sharedPreferences.isAuthenticated){
-                if (sharedPreferences.isPhoneVerified){
-                    homeViewModel.getUrl(
-                        phone = sharedPreferences.mobile,
-                        type = "doctors",
-                        name = sharedPreferences.name,
-                        entityCode = sharedPreferences.code)
-                    title = "حجز أطباء"
-                }else{
-                    verifyPhone()
-                }
-            }else{
+            if (sharedPreferences.isAuthenticated) {
+                homeViewModel.getUrl(
+                    phone = sharedPreferences.mobile,
+                    type = "doctors",
+                    name = sharedPreferences.name,
+                    entityCode = sharedPreferences.code
+                )
+                title = "حجز أطباء"
+            } else {
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
         }
@@ -276,6 +271,10 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                         intent.putExtra("url", it.data.url)
                         intent.putExtra("title", title)
                         startActivity(intent)
+                    }else if (it.data.status_code == 405) {
+                        mobileNumber = sharedPreferences.mobile
+                        startActivity(Intent(this, VerifyUserActivity::class.java))
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
                     }else{
                         Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
                     }
@@ -339,23 +338,6 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
         //End of logout
-    }
-
-    private fun verifyPhone() {
-
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle(getString(R.string.alert))
-        alertDialog.setMessage(resources.getString(R.string.confirm_phone))
-        alertDialog.setCancelable(true)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.agree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-            val intent = Intent(this, VerifyPhoneActivity::class.java)
-            startActivity(intent)
-        }
-        alertDialog.show()
-
     }
 
     private fun openTermsDialog() {
