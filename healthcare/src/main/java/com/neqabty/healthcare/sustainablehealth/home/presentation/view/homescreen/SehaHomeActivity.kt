@@ -28,6 +28,7 @@ import com.google.android.material.navigation.NavigationView
 import com.neqabty.chefaa.core.data.Cart
 import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
@@ -218,8 +219,16 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
 
         binding.cvDoctor.setOnClickListener {
             if (sharedPreferences.isAuthenticated){
-                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors")
-                title = "حجز أطباء"
+                if (sharedPreferences.isPhoneVerified){
+                    homeViewModel.getUrl(
+                        phone = sharedPreferences.mobile,
+                        type = "doctors",
+                        name = sharedPreferences.name,
+                        entityCode = sharedPreferences.code)
+                    title = "حجز أطباء"
+                }else{
+                    verifyPhone()
+                }
             }else{
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
@@ -227,7 +236,11 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
 
         binding.cvPharmacy.setOnClickListener {
             if (sharedPreferences.isAuthenticated){
-                openTermsDialog()
+                if (sharedPreferences.isPhoneVerified){
+                    openTermsDialog()
+                }else{
+                    verifyPhone()
+                }
             }else{
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
@@ -321,6 +334,23 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
 
     }
 
+    private fun verifyPhone() {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(resources.getString(R.string.confirm_phone))
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, resources.getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            val intent = Intent(this, VerifyPhoneActivity::class.java)
+            startActivity(intent)
+        }
+        alertDialog.show()
+
+    }
+
     private fun getCurrentItem(): Int {
         return (binding.packagesRecycler.layoutManager as LinearLayoutManager)
             .findFirstVisibleItemPosition()
@@ -372,7 +402,11 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
-            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+            homeViewModel.getUrl(
+                phone = sharedPreferences.mobile,
+                type = "pharmacy",
+                name = sharedPreferences.name,
+                entityCode = sharedPreferences.code)
             title = "العلاج الشهرى"
         }
         alertDialog.setButton(
