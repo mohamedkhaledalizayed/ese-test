@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <FrameLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginStart="@dimen/_6sdp"
+        >
+
+        <carbon.widget.ImageView
+            app:carbon_cornerRadius="5dp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:id="@+id/image_view"
+            android:layout_gravity="start|bottom"
+            android:scaleType="centerCrop"
+            />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/image_progress"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            android:indeterminate="true"
+            android:theme="@style/AppTheme.Progressbar"
+            />
+
+    </FrameLayout>
+</layout>

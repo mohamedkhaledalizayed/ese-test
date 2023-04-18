@@ -297,7 +297,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                 if (deliveryMethod == deliveryMethodHomeId){
                     if (sharedPreferences.code == NATURAL_THERAPY_CODE){
                         paymentViewModel.getPaymentInfo(
-                            PaymentBody(
+                            PaymentNaturalBody(
                                 serviceCode = serviceCode,
                                 serviceActionCode = serviceActionCode,
                                 paymentMethod = paymentMethod,

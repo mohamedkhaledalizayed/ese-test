@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class PaymentUseCase @Inject constructor(private val repository: PaymentRepository) {
 
-    fun build(paymentBody: PaymentBody): Flow<PaymentEntity> {
+    fun build(paymentBody: Any): Flow<PaymentEntity> {
         return repository.payment(paymentBody)
     }
 

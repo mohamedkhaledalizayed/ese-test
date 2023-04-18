@@ -18,13 +18,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
-import com.neqabty.chefaa.core.data.Cart
-import com.neqabty.chefaa.core.data.Constants.mobileNumber
-import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
-import com.neqabty.chefaa.modules.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
+import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
+import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
@@ -41,6 +38,9 @@ import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity
 import com.neqabty.healthcare.news.view.newslist.NewsListActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.core.data.Cart
+import com.neqabty.healthcare.core.data.Constants.cart
+import com.neqabty.healthcare.core.data.Constants.mobileNumber
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -547,7 +547,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             sharedPreferences.image = ""
             sharedPreferences.syndicateName = ""
             sharedPreferences.membershipId = ""
-            com.neqabty.chefaa.core.data.Constants.cart = Cart()
+            cart = Cart()
             drawer.close()
             val intent = Intent(this, CheckAccountActivity::class.java)
             startActivity(intent)

@@ -82,7 +82,7 @@ class PaymentViewModel @Inject constructor(
 
     val paymentInfo = MutableLiveData<Resource<PaymentEntity>>()
 
-    fun getPaymentInfo(paymentBody: PaymentBody) {
+    fun getPaymentInfo(paymentBody: Any) {
         paymentInfo.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {

@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.core.utils
 
 import android.annotation.SuppressLint
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,6 +32,10 @@ class AppUtils {
                 }
                 404 -> {
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
+                }
+                406 -> {
+                    val errorObject = JSONObject(throwable.response()!!.errorBody()?.string())
+                    errorObject.getString("message")
                 }
                 500 -> {
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"

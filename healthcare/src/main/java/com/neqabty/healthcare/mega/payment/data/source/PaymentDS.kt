@@ -26,7 +26,7 @@ class PaymentDS @Inject constructor(private val paymentApi: PaymentApi, private 
         return paymentApi.getPaymentDetails(id = id, code = code, number = number, token =  "Token ${sharedPreferences.token}")
     }
 
-    suspend fun payment(paymentBody: PaymentBody): PaymentModel {
+    suspend fun payment(paymentBody: Any): PaymentModel {
         return paymentApi.payment(paymentBody, token =  "Token ${sharedPreferences.token}")
     }
 

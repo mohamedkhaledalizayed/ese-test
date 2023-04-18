@@ -130,7 +130,6 @@ dependencies {
 
     //hilt
     implementation "com.google.dagger:hilt-android:$hiltVersion"
-    implementation project(path: ':chefaa')
     kapt "com.google.dagger:hilt-compiler:$hiltVersion"
     // Coroutine Lifecycle Scopes
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
@@ -192,4 +191,19 @@ dependencies {
 
     implementation 'me.relex:circleindicator:2.1.6'
 
+    //Permissions
+    implementation 'com.karumi:dexter:6.2.3'
+
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    //zoom
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    //Image Picker
+    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
+
+    //carbon
+    implementation 'tk.zielony:carbon:0.16.0.1'
+//View State
+    implementation 'com.github.vlonjatg:progress-activity:2.0.5'
 }

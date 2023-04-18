@@ -27,7 +27,7 @@ interface PaymentApi {
                                   @Path("number") number: String): Response<ReceiptResponse>
 
     @POST("payment/paymentV2/")
-    suspend fun payment(@Body paymentBody: PaymentBody,
+    suspend fun payment(@Body paymentBody: Any,
                         @Header("Authorization") token: String): PaymentModel
 
     @GET("payment/payment_invoice")

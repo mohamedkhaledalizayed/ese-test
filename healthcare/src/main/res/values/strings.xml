@@ -361,4 +361,116 @@
     <string name="tour_guid_numbers">25899882 -25890438 - 01144300335</string>
     <string name="confirm_pass">تاكيد كلمة المرور</string>
 
+
+
+
+
+    <string name="my_app_name" translatable="false">شفاء</string>
+    <string name="chefaa" translatable="false">شفاء</string>
+    <string name="add_new_address">أضف عنوان جديد</string>
+    <string name="selected_address">العنوان</string>
+    <string name="addresses">اختر عنوان</string>
+    <string name="street">اسم الشارع</string>
+    <string name="add_street_name">مثال: المعادى شارع 151</string>
+    <string name="building">رقم المبنى</string>
+    <string name="add_building_number">مثال: 7</string>
+    <string name="floor">رقم الدور</string>
+    <string name="add_floor_number">مثال: 10</string>
+    <string name="apartment">رقم الشقة</string>
+    <string name="add_apartment_number">مثال: 20</string>
+    <string name="nearest_landmark">علامة مميزة</string>
+    <string name="add_bank_name_supermarket_hospital">مثال: بجوار مترو, ماركت ...</string>
+    <string name="nickname">Nickname</string>
+    <string name="home_office_etc">Home, Office, etc.</string>
+    <string name="save_address">حفظ العنوان</string>
+    <string name="order_via_n_prescription">الطلب بالروشتة</string>
+    <string name="find_n_medications">ابحث عن دواء</string>
+    <string name="orders_history">طلباتك</string>
+    <string name="cart">عربة التسوق</string>
+    <string name="do_search">ابحث</string>
+    <string name="low_stock">Low Stock</string>
+    <string name="low_stock_alert">ربما يكون هذا المنتج متوفراً للتوصيل في وقت قريب</string>
+    <string name="pravotin_100mg_sach_g_medication_name">PRAVOTIN (100MG SACH) G. medication name</string>
+    <string name="_14_sachets">14 Sachets</string>
+    <string name="delivery_time_depends_on_availability">Delivery time depends on availability</string>
+    <string name="_6_photos_added">6 photos added</string>
+    <string name="prices_may_vary_across_pharmacies">Prices may vary across pharmacies</string>
+    <string name="go_to_checkout">تاكيد الطلب</string>
+    <string name="add_note">إضافة ملاحظات</string>
+    <string name="place_order">إضافة طلب</string>
+    <string name="delivery_time">وقت التوصيل</string>
+    <string name="payment">الدفع</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="to_be_confirmed">To be confirmed</string>
+<!--    <string name="add">إضافة</string>-->
+<!--    <string name="delivery_fees">مصاريف التوصيل</string>-->
+    <string name="for_free">مجاناً</string>
+    <string name="total">الاجمالي</string>
+    <string name="order_is_canceled">Order is Canceled</string>
+    <string name="order_is_placed">لقد تم تأكيد طلبك بنجاح</string>
+    <string name="nickname_">نوع العنوان</string>
+    <string name="location">من فضلك حدد موقعك</string>
+    <string name="product_details">تفاصيل المنتج</string>
+    <string name="products">المنتجات</string>
+    <string name="will_clear_cart">سيتم مسح محتويات عربة التسوق</string>
+<!--    <string name="alert_title">تنبيه</string>-->
+    <string name="alert_cancel">إلغاء</string>
+    <string name="alert_ok">موافق</string>
+    <string name="cart_empty">عربة التسوق فارغة</string>
+    <string name="expoler_yodawy">يبدو أنك لم تضف أى عناصر إلى سلة التسوق الخاصة بك.</string>
+    <string name="cash">نقدى</string>
+    <string name="total_before_discount">الإجمالي قبل الخصم</string>
+    <string name="total_after_discount">الإجمالي بعد الخصم</string>
+    <string name="order_number">رقم الطلب</string>
+    <string name="order_date">تاريخ الطلب</string>
+<!--    <string name="address">العنوان</string>-->
+    <string name="select_location">اختيار</string>
+    <string name="order_details">تفاصيل الطلب</string>
+<!--    <string name="please_wait">من فضلك انتظر</string>-->
+<!--    <string name="order_status">حالة الطلب</string>-->
+    <string name="order_by_note">الطلب بالكتابة</string>
+    <string name="chefaa_permission">الاذن باستخدام العنون</string>
+    <string name="chefaa_permission_message">نريد الذن باستخدام العنون لاضافة عنوان جديد</string>
+    <string name="chefaa_permission_agree">موافق</string>
+
+<!--    <string name="select">اكمل بإستخدام..</string>-->
+    <string name="gallery">المعرض</string>
+    <string name="camera">الكاميرا</string>
+    <string name="select_file">اختار صورة</string>
+    <string name="add_to_cart">أضف الى العربة</string>
+    <string name="complete_shoping">إتمام الشراء</string>
+    <string name="write_order">اكتب طلبك</string>
+    <string name="order_des">اكتب هنا اسم الدواء او المنتج الذى تريد طلبه من الصيدلية.</string>
+    <string name="note_des">مثال علبة بنادول و بامبرز مقاس 2</string>
+    <string name="add_note_order">أضافة</string>
+    <string name="select_address">إختر عنوان</string>
+    <string name="deliver">التوصيل إلى</string>
+    <string name="total_order">إجمالى الشحنة</string>
+    <string name="deli_fees">رسوم التوصيل</string>
+    <string name="sub_total">المجموع الفرعى</string>
+    <string name="confirm_order_note">توفر المنتجات و أسعارها و رسوم التوصيل قد يختلف باختلاف الصيدلية و سنتواصل معك فى حالة تغيير.</string>
+    <string name="time">التوصيل فى خلال 1 - 2 ساعة</string>
+    <string name="delivery_time_confirmation">التوصيل خلال ٤٨ ساعة
+        \n
+مصاريف التوصيل في القاهرة و الجيزة مجاناً حتى أخر العام و متغيرة لباقي المحافظات</string>
+    <string name="from">شحنة من : أقرب صيدلية</string>
+    <string name="max_image">* لقد وصلت للحد الاقصى لعدد الصور.</string>
+    <string name="work">العمل</string>
+    <string name="home">المنزل</string>
+    <string name="pay_method">نقدى عند الاستلام</string>
+    <string name="pay">طريقة الدفع</string>
+    <string name="to_10">حتى 10 جنيه</string>
+    <string name="search_med">ابحث عن دواء</string>
+    <string name="deliver_to">التوصيل إلى</string>
+    <string name="select_addre">إختر عنوان</string>
+    <string name="how">كيف يمكننا مساعدتك؟</string>
+    <string name="help_des">جميع الأدوية يتم صرفها من صيدليات مرخصة من وزارة الصحة و بوجود وصفة طبية من طبيب مختص</string>
+    <string name="fees_des">الشروط و الاحكام :\n سيتم الشحن خلال 48 ساعة\n يجب الا تقل قيمة الطلب عن 300 جنيه.</string>
+    <string name="easy">سهلنا الطلب عليك</string>
+    <string name="add_pre">اضف \nالروشتة</string>
+    <string name="write_ord">اكتب \nطلبك</string>
+    <string name="pre_orders">طلباتك \nالسابقة</string>
+    <string name="for_delivery">للتواصل:</string>
+    <string name="_0221294341">0221294341</string>
+
 </resources>

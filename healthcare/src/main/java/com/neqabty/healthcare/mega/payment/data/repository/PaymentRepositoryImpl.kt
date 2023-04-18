@@ -52,7 +52,7 @@ class PaymentRepositoryImpl @Inject constructor(private val paymentDS: PaymentDS
         }
     }
 
-    override fun payment(paymentBody: PaymentBody): Flow<PaymentEntity> {
+    override fun payment(paymentBody: Any): Flow<PaymentEntity> {
         return flow {
             emit(paymentDS.payment(paymentBody).toPaymentEntity())
         }

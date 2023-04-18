@@ -15,4 +15,3 @@
  */
 include ':pdfcreator'
 include ':healthcare'
-include ':chefaa'

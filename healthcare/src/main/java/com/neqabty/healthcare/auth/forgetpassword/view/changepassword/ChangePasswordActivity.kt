@@ -6,9 +6,9 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.forgetpassword.data.model.ChangePasswordBody
+import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityChangePaawordBinding
 import dagger.hilt.android.AndroidEntryPoint
