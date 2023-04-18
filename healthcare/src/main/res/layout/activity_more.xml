@@ -29,8 +29,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_5sdp"
-                app:layout_constraintTop_toBottomOf="@id/cv_settings"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_settings" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_medical_network"
@@ -66,8 +66,7 @@
                         android:gravity="center"
                         android:text="@string/medical_network"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -107,8 +106,7 @@
                         android:gravity="center"
                         android:text="@string/packages"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -148,8 +146,7 @@
                         android:gravity="center"
                         android:text="@string/visit_home"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -189,8 +186,7 @@
                         android:gravity="center"
                         android:text="@string/consl"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -229,8 +225,7 @@
                         android:gravity="center"
                         android:text="@string/doctor"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -270,8 +265,7 @@
                         android:gravity="center"
                         android:text="@string/medicine"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -310,8 +304,7 @@
                         android:gravity="center"
                         android:text="@string/profile"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -351,8 +344,7 @@
                         android:gravity="center"
                         android:text="@string/settings"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_medium"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_size_small" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -364,10 +356,10 @@
         android:id="@+id/bnv_syndicates_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded"
         android:elevation="0dp"
         app:elevation="0dp"
         app:labelVisibilityMode="labeled"
-        android:background="@drawable/bg_rounded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation_menu_syndicates_home" />
 

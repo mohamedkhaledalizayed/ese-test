@@ -24,7 +24,6 @@
         android:maxLength="12"
         android:lines="1"
         android:ellipsize="end"
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="@dimen/_10sdp"
         android:textSize="@dimen/_10ssp"

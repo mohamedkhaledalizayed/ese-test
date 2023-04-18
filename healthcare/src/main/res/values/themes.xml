@@ -26,7 +26,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:fontFamily">@font/cairo_regular</item>
+        <item name="android:fontFamily">@font/hanimation_regular</item>
         <item name="android:forceDarkAllowed">false</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -109,7 +109,7 @@
         <item name="android:forceDarkAllowed">false</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/cairo_regular</item>
+        <item name="android:fontFamily">@font/hanimation_regular</item>
         <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
         <item name="alertDialogTheme">@style/MyAlertDialogTheme</item>
         <item name="colorSurface">@color/white</item>
@@ -151,20 +151,19 @@
 
     <style name="MyAlertDialogTheme" parent="@android:style/Theme.Material.Light.Dialog.Alert">
         <item name="android:textAppearanceSmall">@style/MyTextAppearance</item>
-        <item name="android:fontFamily">@font/cairo_regular</item>
+        <item name="android:fontFamily">@font/hanimation_regular</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="MyTextAppearance" parent="TextAppearance.AppCompat">
-        <item name="android:fontFamily">@font/cairo_regular</item>
+        <item name="android:fontFamily">@font/hanimation_regular</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
     <style name="MyToolbarTitleTextAppearance" parent="TextAppearance.AppCompat">
-        <item name="android:fontFamily">@font/cairo_regular</item>
-        <item name="android:textSize">@dimen/text_size_large</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/hanimation_arabic_medium</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
     <style name="ActionButtonStyle" parent="Widget.AppCompat.ActionButton">

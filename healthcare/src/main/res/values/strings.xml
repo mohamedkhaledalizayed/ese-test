@@ -83,7 +83,7 @@
     <string name="setting">الإعدادات</string>
     <string name="logout">تغيير رقم الهاتف</string>
     <string name="search_result">نتائج البحث</string>
-    <string name="confirm">تاكيد</string>
+    <string name="confirm">تأكيد</string>
     <string name="soon_more_details">مزيد من التفاصيل</string>
     <string name="enter_corect_phone">من فضلك ادخل رقم الهاتف صحيح.</string>
     <string name="enter_phone">من فضلك ادخل رقم الهاتف</string>
@@ -400,7 +400,24 @@
     <string name="menu_more">القائمة</string>
     <string name="home">الرئيسية</string>
     <string name="other_services">الخدمات</string>
-<!--    <string name=""></string>-->
+    <string name="choose_package">أختر ما بين باقات صحة مستدامة</string>
+    <string name="terms_title">الشروط والأحكام</string>
+    <string name="contact_terms">قواعد عامة
+هو نظام مكافآت يمنحك نقاط عند إستخدامك لأي منتج/خدمة من المنتجات والخدمات التاليه:
+كونتكت تمويل السيارات
+كونتكت تمويل النقل
+كونتكت تسوق
+كونتكت تمويل التشطيب
+كونتكت وساطة تأمينية
+كونتكت تمويل عقاري
+كونتكت تأجير تمويلي (للمنشات الفردية فقط)
+أنت موافق على الاشتراك بالبرنامج طبقاً لهذه الشروط، والتي يجب قراءتها بالإضافة إلى قراءة شروط وأحكام التعاقد الخاصة بالشركة
+يتم تفعيل الإشتراك بصورة تلقائية ومجانية في البرنامج دون الحاجة لتقديم طلب إنضمام
+يحق للشركة إلغاء إشتراكك في البرنامج، وذلك إذا ما نمى إلى علمها:
+    </string>
+    <string name="back">رجوع</string>
+    <string name="accept">قبول</string>
+    <!--    <string name=""></string>-->
 <!--    <string name=""></string>-->
 <!--    <string name=""></string>-->
 <!--    <string name=""></string>-->

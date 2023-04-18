@@ -16,7 +16,8 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeGeneralSyndicateBinding
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
-import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity
+import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
+import com.neqabty.healthcare.core.packages.PackagesActivity
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.searchresult.SearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
@@ -85,7 +86,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
         }
 
         binding.ivSeha.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
+            val intent = Intent(this, PackagesActivity::class.java)
             startActivity(intent)
         }
 

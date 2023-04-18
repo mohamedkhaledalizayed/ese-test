@@ -18,9 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
         android:text="@string/enter_id_front"
+        android:fontFamily="@font/hanimation_arabic_medium"
         android:textColor="@color/secondaryText"
         android:textSize="?textSizeMedium"
-        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
 
     <ImageView
@@ -37,7 +37,6 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_medium"
         android:text="@string/skip"
         android:textColor="@color/colorPrimary"
         android:textSize="?textSizeMedium"

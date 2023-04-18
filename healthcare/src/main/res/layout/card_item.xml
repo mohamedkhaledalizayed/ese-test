@@ -34,7 +34,7 @@
                     android:layout_gravity="center"/>
 
                 <TextView
-                    android:fontFamily="@font/dinnext_arabic_bold"
+                    android:fontFamily="@font/hanimation_arabic_bold"
                     android:id="@+id/package_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             </LinearLayout>
 
             <TextView
-                android:fontFamily="@font/dinnext_arabic_bold"
+                android:fontFamily="@font/hanimation_arabic_bold"
                 android:id="@+id/info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 android:textColor="@color/black"/>
 
             <TextView
-                android:fontFamily="@font/dinnext_arabic_bold"
+                android:fontFamily="@font/hanimation_arabic_bold"
                 android:id="@+id/package_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 />
 
             <TextView
-                android:fontFamily="@font/dinnext_arabic_bold"
+                android:fontFamily="@font/hanimation_arabic_bold"
                 android:id="@+id/price_not_include"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

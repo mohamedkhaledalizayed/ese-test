@@ -13,7 +13,6 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
 import com.neqabty.healthcare.auth.signup.data.model.SignupBody
 import com.neqabty.healthcare.commen.onboarding.signup.data.SignupData
-import com.neqabty.healthcare.commen.onboarding.uploadID.UploadIdFrontActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.utils.ErrorBody
 import com.neqabty.healthcare.core.utils.Status

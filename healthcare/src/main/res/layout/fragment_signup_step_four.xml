@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
         android:text="@string/register_in"
+        android:fontFamily="@font/hanimation_arabic_medium"
         android:textColor="@color/secondaryText"
-        android:textSize="?textSizeSmall"
-        android:textStyle="bold"
+        android:textSize="?textSizeMedium"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
@@ -43,6 +43,7 @@
                     android:text="@string/user_name"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
+                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,7 +60,7 @@
                     android:text="Mona"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintEnd_toStartOf="@id/iv_name"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_name" />
@@ -90,6 +91,7 @@
                     android:text="@string/membership_id"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
+                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -105,7 +107,7 @@
                     android:longClickable="false"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintEnd_toStartOf="@id/iv_membership_number"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_membership_number" />
@@ -137,6 +139,7 @@
                     android:text="@string/national_id"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
+                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -154,7 +157,7 @@
                     android:longClickable="false"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintEnd_toStartOf="@id/iv_national_id"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_national_id" />
@@ -185,6 +188,7 @@
                     android:text="@string/email"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
+                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -201,7 +205,7 @@
                     android:text="monawhab@gmail.com"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintEnd_toStartOf="@id/iv_email"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_email" />
@@ -233,6 +237,7 @@
                     android:text="@string/password"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
+                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -248,7 +253,7 @@
                     android:longClickable="false"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/hanimation_regular"
                     android:text="password123"
                     app:layout_constraintEnd_toStartOf="@id/iv_password"
                     app:layout_constraintStart_toStartOf="parent"
@@ -280,6 +285,7 @@
                     android:text="@string/confirm_pass"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
+                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -296,7 +302,7 @@
                     android:longClickable="false"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintEnd_toStartOf="@id/iv_password_confirmation"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_password_confirmation" />
@@ -328,6 +334,7 @@
                 android:text="@string/password_rules"
                 android:textColor="@color/secondaryText"
                 android:textSize="?textSizeSmall"
+                android:fontFamily="@font/hanimation_regular"
                 app:layout_constraintStart_toEndOf="@id/iv_password_rules"
                 app:layout_constraintTop_toTopOf="@id/iv_password_rules" />
 
@@ -340,7 +347,7 @@
                 android:text="@string/reset_password"
                 android:textColor="@color/colorPrimary"
                 android:textSize="?textSizeSmall"
-                android:textStyle="bold"
+                android:fontFamily="@font/hanimation_arabic_bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/iv_password_rules" />

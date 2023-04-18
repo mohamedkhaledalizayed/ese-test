@@ -81,12 +81,18 @@
             android:exported="false" />
         <activity
             android:name=".commen.onboarding.signup.view.SigninDoneActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".commen.onboarding.contact.UploadIdFrontActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.uploadID.UploadIdFrontActivity"
-            android:exported="false" />
-        <activity
-            android:name=".commen.onboarding.uploadID.UploadIdBackActivity"
+            android:name=".commen.onboarding.contact.UploadIdBackActivity"
             android:exported="false" />
         <activity
             android:name=".core.home_syndicates.view.SyndicatesHomeActivity"
@@ -99,6 +105,9 @@
             android:exported="false" />
         <activity
             android:name=".core.more.view.MoreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".core.packages.PackagesActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.mypackages.presentation.ProfileActivity"

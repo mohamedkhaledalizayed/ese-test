@@ -3,9 +3,11 @@ package com.neqabty.healthcare.commen.onboarding.signup.view
 import android.content.Intent
 import android.os.Bundle
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.commen.onboarding.uploadID.UploadIdFrontActivity
+import com.neqabty.healthcare.commen.onboarding.contact.ContactTermsBottomSheet
+import com.neqabty.healthcare.commen.onboarding.contact.UploadIdFrontActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivitySigninDoneBinding
+import com.neqabty.healthcare.sustainablehealth.search.presentation.view.filter.FilterBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,12 +28,21 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
         }
 
         binding.bCompleteProfile.setOnClickListener {
-            val mainIntent = Intent(
-                this,
-                UploadIdFrontActivity::class.java
-            )
-            startActivity(mainIntent)
-            finish()
+            val bottomSheetFragment = ContactTermsBottomSheet()
+            bottomSheetFragment.onActionListener = object: ContactTermsBottomSheet.OnActionListener{
+                override fun onAcceptListener() {
+                    val mainIntent = Intent(
+                        this@SigninDoneActivity,
+                        UploadIdFrontActivity::class.java
+                    )
+                    startActivity(mainIntent)
+                    finish()
+                }
+
+                override fun onDismissListener() {
+                }
+            }
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
     }
 

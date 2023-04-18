@@ -14,7 +14,6 @@
         android:text="@string/enter_otp"
         android:textColor="@color/secondaryText"
         android:textSize="?textSizeMedium"
-        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
     <in.aabhasjindal.otptextview.OtpTextView
@@ -43,8 +42,7 @@
         android:gravity="center"
         android:text="@string/otp_resend"
         android:textColor="@color/secondaryText"
-        android:textSize="?textSizeMedium"
-        android:textStyle="bold"
+        android:textSize="?textSizeSmall"
         app:layout_constraintTop_toBottomOf="@id/otv_otp" />
 
     <TextView
@@ -55,7 +53,7 @@
         android:gravity="center"
         android:text="@string/resend_otp"
         android:textColor="@color/colorPrimary"
-        android:textSize="?textSizeMedium"
+        android:textSize="?textSizeSmall"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/tv_resend_title" />
 

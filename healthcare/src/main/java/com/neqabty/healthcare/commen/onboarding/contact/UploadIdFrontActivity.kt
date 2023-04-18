@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.commen.onboarding.uploadID
+package com.neqabty.healthcare.commen.onboarding.contact
 
 import android.Manifest
 import android.app.Activity
@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat

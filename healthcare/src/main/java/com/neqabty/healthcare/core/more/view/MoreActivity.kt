@@ -12,7 +12,7 @@ import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityMoreBinding
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
-import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity
+import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.searchresult.SearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
 

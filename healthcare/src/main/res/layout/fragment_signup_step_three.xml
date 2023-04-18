@@ -14,7 +14,6 @@
         android:text="@string/are_you_syndicate_member"
         android:textColor="@color/secondaryText"
         android:textSize="?textSizeMedium"
-        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
@@ -23,8 +22,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
+        android:fontFamily="@font/hanimation_arabic_semibold"
         android:text="@string/yes"
-        android:textColor="@color/secondaryText"
+        android:textColor="@color/black"
         android:textSize="?textSizeMedium"
         app:layout_constraintEnd_toStartOf="@id/b_no"
         app:layout_constraintHorizontal_weight=".5"
@@ -38,8 +38,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_large"
+        android:fontFamily="@font/hanimation_arabic_semibold"
         android:text="@string/no"
-        android:textColor="@color/secondaryText"
+        android:textColor="@color/black"
         android:textSize="?textSizeMedium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight=".5"

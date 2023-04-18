@@ -63,4 +63,10 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <!--Packages-->
+    <color name="package_safe">#662b2c</color>
+    <color name="package_bronze">#da807e</color>
+    <color name="package_silver">#c3cace</color>
+    <color name="package_platinum">#838383</color>
+    <color name="package_gold">#d6b05a</color>
 </resources>

@@ -1,11 +1,10 @@
-package com.neqabty.healthcare.commen.onboarding.uploadID
+package com.neqabty.healthcare.commen.onboarding.contact
 
 import android.content.Intent
 import android.os.Bundle
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityUploadIdBackBinding
-import com.neqabty.healthcare.databinding.ActivityUploadIdFrontBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

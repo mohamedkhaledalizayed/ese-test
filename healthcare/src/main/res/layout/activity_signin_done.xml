@@ -18,9 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
         android:text="@string/signin_done"
-        android:textColor="@color/primaryText"
+        android:fontFamily="@font/hanimation_arabic_medium"
+        android:textColor="@color/secondaryText"
         android:textSize="?textSizeMedium"
-        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
 
     <ImageView
@@ -37,7 +37,6 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_medium"
         android:text="@string/go_to_home"
         android:textColor="@color/colorPrimary"
         android:textSize="?textSizeMedium"

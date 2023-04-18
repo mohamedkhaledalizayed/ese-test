@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:fontFamily="@font/dinnext_arabic_bold"
+                android:fontFamily="@font/hanimation_arabic_bold"
                 android:id="@+id/package_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

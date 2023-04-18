@@ -11,7 +11,6 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.data.model.CheckOTPBody
 import com.neqabty.healthcare.auth.otp.data.model.SendOTPBody
 import com.neqabty.healthcare.commen.onboarding.signup.data.SignupData
-import com.neqabty.healthcare.commen.onboarding.uploadID.UploadIdFrontActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
@@ -98,6 +97,10 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                 2 -> {}
                 else -> {
                     if (BuildConfig.DEBUG) {
+                        if (SignupData.syndicateID != Constants.NEQABTY_CODE){
+                            sharedPreferences.isAuthenticated = true
+                            sharedPreferences.isSyndicateMember = true
+                        }
                         val mainIntent = Intent(
                             this,
                             SigninDoneActivity::class.java

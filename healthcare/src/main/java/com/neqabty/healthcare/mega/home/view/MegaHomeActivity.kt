@@ -423,7 +423,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
             R.id.packages -> {
                 if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
-                    val intent = Intent(this@MegaHomeActivity, com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity::class.java)
+                    val intent = Intent(this@MegaHomeActivity, ProfileActivity::class.java)
                     startActivity(intent)
                 }else{
                     askForLogin(resources.getString(R.string.not_found))

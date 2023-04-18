@@ -22,7 +22,8 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeSyndicateBinding
 import com.neqabty.healthcare.mega.home.view.HomeViewModel
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
-import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity
+import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
+import com.neqabty.healthcare.core.packages.PackagesActivity
 import com.neqabty.healthcare.sustainablehealth.search.presentation.view.searchresult.SearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
@@ -47,9 +48,9 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
     }
 
     private fun initializeViews() {
-        val decodedString: ByteArray = Base64.decode(sharedPreferences.image, Base64.DEFAULT)
-        val syndicateLogo = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-        binding.ivSyndicateLogo.setImageBitmap(syndicateLogo)
+//        val decodedString: ByteArray = Base64.decode(sharedPreferences.image, Base64.DEFAULT)
+//        val syndicateLogo = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+//        binding.ivSyndicateLogo.setImageBitmap(syndicateLogo)
 
         binding.tvWelcomeIn.text = getString(R.string.welcome_in, sharedPreferences.name)
         binding.tvSyndicateName.text = sharedPreferences.syndicateName
@@ -105,7 +106,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         }
 
         binding.ivSeha.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
+            val intent = Intent(this, PackagesActivity::class.java)
             startActivity(intent)
         }
 

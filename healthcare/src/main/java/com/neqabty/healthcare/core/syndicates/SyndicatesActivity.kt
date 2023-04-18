@@ -12,14 +12,14 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySyndicatesBinding
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
-import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity
+import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>() {
     private val syndicatesViewModel: SyndicatesViewModel by viewModels()
-    private val syndicatesAdapter = SyndicatesAdapter()
+    private val syndicatesAdapter = SyndicatesAdapter(hasCustomStyle = true)
     override fun getViewBinding() = ActivitySyndicatesBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +65,7 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>() {
                 R.id.navigation_more -> {
                     val intent = Intent(this, MoreActivity::class.java)
                     startActivity(intent)
+                    finish()
                     true
                 }
                 else -> false

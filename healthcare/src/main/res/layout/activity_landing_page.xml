@@ -48,7 +48,7 @@
 
                 <TextView
                     android:id="@+id/welcome"
-                    android:fontFamily="@font/dinnext_arabic_bold"
+                    android:fontFamily="@font/hanimation_arabic_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="مرحبا بك."
@@ -108,7 +108,7 @@
                         android:padding="@dimen/_10sdp">
 
                         <TextView
-                            android:fontFamily="@font/dinnext_arabic_bold"
+                            android:fontFamily="@font/hanimation_arabic_bold"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/more_about_neqabty"
@@ -118,7 +118,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:fontFamily="@font/dinnext_light"
+                            android:fontFamily="@font/hanimation_arabic_light"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
@@ -169,7 +169,7 @@
                     android:padding="@dimen/_10sdp">
 
                     <TextView
-                        android:fontFamily="@font/dinnext_arabic_bold"
+                        android:fontFamily="@font/hanimation_arabic_bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/already_neqabty_member"
@@ -179,7 +179,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:fontFamily="@font/dinnext_light"
+                        android:fontFamily="@font/hanimation_arabic_light"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/about_seha_mos"

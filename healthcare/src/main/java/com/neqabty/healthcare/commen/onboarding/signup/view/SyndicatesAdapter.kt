@@ -11,7 +11,8 @@ import com.neqabty.healthcare.databinding.SignUpSyndicateItemLayoutBinding
 import com.squareup.picasso.Picasso
 
 
-class SyndicatesAdapter : RecyclerView.Adapter<SyndicatesAdapter.ViewHolder>() {
+class SyndicatesAdapter(private val hasCustomStyle: Boolean = false) :
+    RecyclerView.Adapter<SyndicatesAdapter.ViewHolder>() {
 
     private val items: ArrayList<SyndicateEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
@@ -46,6 +47,10 @@ class SyndicatesAdapter : RecyclerView.Adapter<SyndicatesAdapter.ViewHolder>() {
             Picasso.get().load(item.image).into(viewHolder.binding.ivLogo)
         } else {
             Picasso.get().load(R.drawable.eg).into(viewHolder.binding.ivLogo)
+        }
+        if (!hasCustomStyle) {
+            viewHolder.binding.clContainer.elevation = 0F
+            viewHolder.binding.clContainer.background = null
         }
 
         viewHolder.binding.clContainer.setOnClickListener {

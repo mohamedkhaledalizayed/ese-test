@@ -49,7 +49,6 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
         })
 
         binding.tvSkip.setOnClickListener {
-            sharedPreferences.isIntroSkipped = true
             navigate()
         }
 
@@ -66,6 +65,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
 //region
 
     private fun navigate() {
+        sharedPreferences.isIntroSkipped = true
         val mainIntent = Intent(this, getTheNextActivityFromIntro())
         startActivity(mainIntent)
         finish()

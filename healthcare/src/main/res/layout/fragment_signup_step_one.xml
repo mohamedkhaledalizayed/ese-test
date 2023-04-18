@@ -14,7 +14,6 @@
         android:text="@string/choose_sim"
         android:textColor="@color/secondaryText"
         android:textSize="?textSizeMedium"
-        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
 
