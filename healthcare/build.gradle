@@ -198,5 +198,6 @@ dependencies {
     implementation 'com.github.yash786agg:AnimatedLoadingIndicator:v1.3'
 
     implementation 'me.relex:circleindicator:2.1.6'
-
+//carbon
+    implementation 'tk.zielony:carbon:0.16.0.1'
 }

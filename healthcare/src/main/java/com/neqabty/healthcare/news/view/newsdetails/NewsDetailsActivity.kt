@@ -23,9 +23,10 @@ class NewsDetailsActivity : BaseActivity<ActivityNewsDetailsBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar( titleResId = R.string.news)
         val newsId = intent.getIntExtra("id", -1)
 
+        binding.backBtn.setOnClickListener { finish() }
+        binding.headerId.setOnClickListener { finish() }
         newsDetailsViewModel.getNewsDetails(newsId)
         newsDetailsViewModel.newsDetails.observe(this){
 
@@ -37,11 +38,11 @@ class NewsDetailsActivity : BaseActivity<ActivityNewsDetailsBinding>() {
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data != null){
-                            Picasso.get().load(resource.data!!.image).into(binding.newsImage)
-                            binding.newsTitle.text = resource.data!!.headline
-                            binding.newsSource.text = "${getString(R.string.source)} ${resource.data!!.source}"
-                            binding.content.text = resource.data!!.content
-                            binding.newsDate.text = dateFormat(resource.data!!.createdAt.split(".")[0])
+                            Picasso.get().load(resource.data.image).into(binding.newsImage)
+                            binding.newsTitle.text = resource.data.headline
+                            binding.newsSource.text = "${getString(R.string.source)} ${resource.data.source}"
+                            binding.content.text = resource.data.content
+                            binding.newsDate.text = "  ${dateFormat(resource.data.createdAt.split(".")[0])}"
                         }else{
                             Toast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show()
                         }

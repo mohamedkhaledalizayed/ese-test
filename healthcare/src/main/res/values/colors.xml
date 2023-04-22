@@ -69,4 +69,5 @@
     <color name="package_silver">#c3cace</color>
     <color name="package_platinum">#838383</color>
     <color name="package_gold">#d6b05a</color>
+    <color name="background_color">#fbfbfc</color>
 </resources>

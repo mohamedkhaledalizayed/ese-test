@@ -27,6 +27,7 @@ import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
 import com.neqabty.healthcare.core.home_syndicates.view.SyndicatesHomeActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
+import com.neqabty.healthcare.news.view.newslist.NewsListActivity
 import javax.inject.Inject
 
 
@@ -44,21 +45,21 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setAnimation()
-        setTheme(getAppTheme())
+//        setTheme(getAppTheme())
         binding = getViewBinding()
-        setSupportActionBar(binding.root.findViewById(R.id.layout_toolbar))
-        binding.root.findViewById<Toolbar>(R.id.layout_toolbar)
-            ?.setNavigationOnClickListener { onBackPressed() }
-
-        progressDialog = Dialog(this)
-        window.setBackgroundDrawableResource(R.color.window_bg)
+//        setSupportActionBar(binding.root.findViewById(R.id.layout_toolbar))
+//        binding.root.findViewById<Toolbar>(R.id.layout_toolbar)
+//            ?.setNavigationOnClickListener { onBackPressed() }
+//
+//        progressDialog = Dialog(this)
+//        window.setBackgroundDrawableResource(R.color.window_bg)
 //        binding.root.fitsSystemWindows = false
-        binding.root.setPadding(
-            resources.getDimension(R.dimen.margin_large).toInt(),
-            resources.getDimension(R.dimen.margin_large).toInt() * 2,
-            resources.getDimension(R.dimen.margin_large).toInt(),
-            resources.getDimension(R.dimen.margin_large).toInt()
-        )
+//        binding.root.setPadding(
+//            resources.getDimension(R.dimen.margin_large).toInt(),
+//            resources.getDimension(R.dimen.margin_large).toInt() * 2,
+//            resources.getDimension(R.dimen.margin_large).toInt(),
+//            resources.getDimension(R.dimen.margin_large).toInt()
+//        )
     }
 
     override fun onResume() {
@@ -208,7 +209,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     fun getTheNextActivityFromSignup(): Class<Activity> {
         if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember)
-            return SyndicatesHomeActivity::class.java as Class<Activity> //TODO syndicate home
+            return NewsListActivity::class.java as Class<Activity> //TODO syndicate home
 
         return GeneralHomeActivity::class.java as Class<Activity> //TODO neqabty home
     }

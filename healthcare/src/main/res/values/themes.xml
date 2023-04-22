@@ -97,6 +97,7 @@
         <!-- Customize your theme here. -->
         <item name="android:forceDarkAllowed">false</item>
         <item name="android:windowBackground">@color/white</item>
+        <item name="android:fontFamily">@font/hanimation_regular</item>
     </style>
 
 <!--/////////////////////////////////////////////////////////////NEW UI///////////////////////////////////////////////////////////////-->

@@ -186,9 +186,11 @@
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".news.view.newslist.NewsListActivity"
+            android:theme="@style/AppTheme"
             android:exported="false" />
         <activity
             android:name=".news.view.newsdetails.NewsDetailsActivity"
+            android:theme="@style/AppTheme"
             android:exported="false" />
         <activity
             android:name=".auth.login.view.LoginActivity"

@@ -53,7 +53,8 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
             })
 
         viewHolder.binding.newsTitle.text = item.headline
-        viewHolder.binding.newsDate.text = dateFormat(item.createdAt.split(".")[0])
+        viewHolder.binding.newsContent.text = item.content
+        viewHolder.binding.newsDate.text = "  ${dateFormat(item.createdAt.split(".")[0])}"
 
         viewHolder.binding.itemLayout.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)
@@ -65,7 +66,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     fun dateFormat(date: String): String{
         val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
         val newDate: Date = format.parse(date)
-        val arabicFormat = SimpleDateFormat("dd MMM yyy - hh:mm a", Locale("ar"))
+        val arabicFormat = SimpleDateFormat("MMM dd yyy - hh:mm a", Locale("ar"))
 
         return arabicFormat.format(newDate.time)
     }
