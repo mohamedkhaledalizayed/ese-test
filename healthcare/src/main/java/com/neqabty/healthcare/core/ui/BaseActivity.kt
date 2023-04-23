@@ -28,6 +28,7 @@ import com.neqabty.healthcare.core.home_syndicates.view.SyndicatesHomeActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
 import com.neqabty.healthcare.news.view.newslist.NewsListActivity
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.selectnetwork.SelectNetworkActivity
 import javax.inject.Inject
 
 
@@ -209,7 +210,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     fun getTheNextActivityFromSignup(): Class<Activity> {
         if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember)
-            return NewsListActivity::class.java as Class<Activity> //TODO syndicate home
+            return SelectNetworkActivity::class.java as Class<Activity> //TODO syndicate home
 
         return GeneralHomeActivity::class.java as Class<Activity> //TODO neqabty home
     }

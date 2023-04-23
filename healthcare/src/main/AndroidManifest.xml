@@ -12,8 +12,13 @@
     <uses-permission android:name="android.webkit.PermissionRequest" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
-    <uses-feature android:name="android.hardware.camera.front" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="true" />
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
@@ -31,20 +36,24 @@
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme.NoActionBar"
         android:usesCleartextTraffic="false"
-        tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic" >
+        tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
+        <activity
+            android:name=".sustainablehealth.medicalnetwork.presentation.view.selectnetwork.SelectNetworkActivity"
+            android:theme="@style/AppTheme"
+            android:exported="false" />
         <activity
             android:name=".commen.clinido.view.ClinidoActivity"
             android:exported="false" />
         <activity
             android:name=".auth.forgetpassword.view.changepassword.ChangePasswordActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".auth.forgetpassword.view.ForgetPasswordActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -66,7 +75,7 @@
             android:exported="false" />
         <activity
             android:name=".commen.splash.view.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -81,7 +90,7 @@
             android:exported="false" />
         <activity
             android:name=".commen.onboarding.signup.view.SigninDoneActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -116,7 +125,7 @@
             android:name=".sustainablehealth.suggestions.presentation.SuggestionsActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.search.presentation.view.providerdetails.ProviderDetailsActivity"
+            android:name=".sustainablehealth.medicalnetwork.presentation.view.providerdetails.ProviderDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.offers.presentation.view.payment.PaymentActivity"
@@ -131,10 +140,10 @@
             android:name=".sustainablehealth.offers.presentation.view.offers.OffersActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.search.presentation.view.searchresult.SearchResultActivity"
+            android:name=".sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.search.presentation.view.search.SearchActivity"
+            android:name=".sustainablehealth.medicalnetwork.presentation.view.search.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.wallet.WalletActivity"
@@ -186,12 +195,12 @@
             android:theme="@style/AppTheme.ActionBar" />
         <activity
             android:name=".news.view.newslist.NewsListActivity"
-            android:theme="@style/AppTheme"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".news.view.newsdetails.NewsDetailsActivity"
-            android:theme="@style/AppTheme"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".auth.login.view.LoginActivity"
             android:exported="true" />

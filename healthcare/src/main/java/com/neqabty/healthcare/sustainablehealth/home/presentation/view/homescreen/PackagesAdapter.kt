@@ -1,19 +1,13 @@
 package com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen
 
-import android.annotation.SuppressLint
-import android.text.TextUtils.replace
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.CardItemBinding
-import com.neqabty.healthcare.databinding.PackageItemLayoutBinding
-import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.DetailEntity
-import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.PackagesEntity
-import com.squareup.picasso.Picasso
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.DetailEntity
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.PackagesEntity
 import kotlin.collections.ArrayList
 
 

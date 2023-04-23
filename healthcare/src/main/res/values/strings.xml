@@ -420,9 +420,10 @@
     <string name="news_details">تفاصيل الخبر</string>
     <string name="news_details_back_btn">رجوع</string>
     <string name="news_search">بحث</string>
+    <string name="medical_newtwork">الشبكة الطبية</string>
     <!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
+    <!--    <string name=""></string>-->
+    <!--    <string name=""></string>-->
+    <!--    <string name=""></string>-->
+    <!--    <string name=""></string>-->
 </resources>

@@ -2,7 +2,6 @@ package com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
@@ -11,7 +10,6 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.core.data.Constants.ESE_CODE
-import com.neqabty.healthcare.core.data.Constants.NEQABTY_CODE
 import com.neqabty.healthcare.core.data.Constants.isSyndicateMember
 import com.neqabty.healthcare.core.data.Constants.selectedSyndicateCode
 import com.neqabty.healthcare.core.data.Constants.selectedSyndicatePosition
@@ -22,7 +20,6 @@ import com.neqabty.healthcare.commen.eselanding.EseLandingActivity
 import com.neqabty.healthcare.databinding.ActivitySyndicateBinding
 import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
 import com.neqabty.healthcare.commen.syndicates.domain.entity.SyndicateEntity
-import com.neqabty.healthcare.sustainablehealth.search.presentation.model.filters.ItemUi
 import com.takusemba.spotlight.Spotlight
 import com.takusemba.spotlight.effet.RippleEffect
 import com.takusemba.spotlight.shape.RoundedRectangle

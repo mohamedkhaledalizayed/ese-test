@@ -2,13 +2,11 @@ package com.neqabty.healthcare.core.packages
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.commen.syndicates.domain.entity.SyndicateEntity
-import com.neqabty.healthcare.commen.syndicates.domain.interactors.GetSyndicateUseCase
 import com.neqabty.healthcare.core.ui.BaseViewModel
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
-import com.neqabty.healthcare.sustainablehealth.search.domain.entity.packages.PackagesEntity
-import com.neqabty.healthcare.sustainablehealth.search.domain.interactors.GetMedicalProviderstUseCase
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.PackagesEntity
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.interactors.GetMedicalProviderstUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

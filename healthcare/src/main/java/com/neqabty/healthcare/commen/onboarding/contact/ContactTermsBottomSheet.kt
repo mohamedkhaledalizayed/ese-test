@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.FragmentContactTermsBinding
-import com.neqabty.healthcare.databinding.FragmentFilterBottomSheetBinding
-import com.neqabty.healthcare.sustainablehealth.search.presentation.view.searchresult.*
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.*
 import dagger.hilt.android.AndroidEntryPoint
 
 

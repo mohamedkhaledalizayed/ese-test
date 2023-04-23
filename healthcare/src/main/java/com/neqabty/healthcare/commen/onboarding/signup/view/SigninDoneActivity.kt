@@ -7,7 +7,6 @@ import com.neqabty.healthcare.commen.onboarding.contact.ContactTermsBottomSheet
 import com.neqabty.healthcare.commen.onboarding.contact.UploadIdFrontActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivitySigninDoneBinding
-import com.neqabty.healthcare.sustainablehealth.search.presentation.view.filter.FilterBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

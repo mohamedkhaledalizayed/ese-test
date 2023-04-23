@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_color"
+    tools:context=".sustainablehealth.medicalnetwork.presentation.view.selectnetwork.SelectNetworkActivity">
+
+    <LinearLayout
+        android:id="@+id/header_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_toolbar_arrow"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#001e2f"
+            android:fontFamily="@font/hanimation_arabic_medium"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:textSize="@dimen/_14ssp"
+            android:text="@string/medical_newtwork"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_30sdp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/_10sdp"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/doctors_bg"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/doctors_icon"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:fontFamily="@font/hanimation_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="اطباء ومراكز علاج طبيعي"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:fontFamily="@font/hanimation_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1220 دكتور"
+                android:textSize="@dimen/_10ssp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/_10sdp"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@drawable/x_ray_bg"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/x_ray_icon"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:fontFamily="@font/hanimation_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="مراكز اشعه"
+                android:layout_weight="1"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:fontFamily="@font/hanimation_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1220 مركز"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:textSize="@dimen/_10ssp"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/_10sdp"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/lab_bg"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/lab_icon"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:fontFamily="@font/hanimation_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="معامل تحاليل"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:fontFamily="@font/hanimation_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1220 معمل"
+                android:textSize="@dimen/_10ssp"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/_10sdp"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@drawable/pharmacy_bg"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pharmacy_icon"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:fontFamily="@font/hanimation_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="صيدليات"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:fontFamily="@font/hanimation_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1220 صيدلية"
+                android:textSize="@dimen/_10ssp"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/back_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/news_details_back_btn"
+        android:padding="@dimen/_8sdp"
+        android:layout_margin="@dimen/_30sdp"
+        android:textColor="#5d81d4"
+        android:gravity="center"
+        android:background="@drawable/back_btn_bg"
+        android:textSize="@dimen/_12ssp"
+        android:fontFamily="@font/hanimation_regular"/>
+
+
+</LinearLayout>
