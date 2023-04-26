@@ -32,6 +32,7 @@ import com.neqabty.chefaa.modules.address.presentation.view.adressscreen.Address
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.chefaa.modules.orders.presentation.orderbynote.OrderByNoteActivity
 import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
+import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersAdapter
 import com.neqabty.chefaa.modules.products.presentation.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
@@ -47,6 +48,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
     private var photoFileName = ""
     lateinit var photoFileURI: Uri
     private var name = ""
+    private val mAdapter: OrdersAdapter = OrdersAdapter()
     private val homeViewModel: HomeViewModel by viewModels()
     override fun getViewBinding() = ChefaaActivityHomeBinding.inflate(layoutInflater)
     private lateinit var dialog: android.app.AlertDialog
@@ -69,19 +71,20 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        dialog.show()
-        homeViewModel.userRegistered.observe(this) {
-            if (it.status) {
-                dialog.dismiss()
-            }else{
-//                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
-                finish()
-            }
-        }
+        binding.ordersRecycler.adapter = mAdapter
+//        dialog.show()
+//        homeViewModel.userRegistered.observe(this) {
+//            if (it.status) {
+//                dialog.dismiss()
+//            }else{
+////                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+//                finish()
+//            }
+//        }
 
-        homeViewModel.registerUser(Constants.mobileNumber, Constants.userNumber, Constants.countryCode, Constants.nationalID, Constants.name)
+        homeViewModel.registerUser(mobileNumber, Constants.userNumber, Constants.countryCode, Constants.nationalID, Constants.name)
 
-        binding.etSearch.setOnClickListener {
+        binding.searchAboutMedicine.setOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java))
         }
         binding.addPrescription.setOnClickListener {
@@ -91,26 +94,26 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             }
             addPhoto()
         }
-        binding.writeOrder.setOnClickListener {
+        binding.writeOrderContainer.setOnClickListener {
             startActivity(Intent(this,OrderByNoteActivity::class.java))
         }
-        binding.orders.setOnClickListener {
-            startActivity(Intent(this,OrdersActivity::class.java))
-        }
-
-        name = if (Constants.name.isNullOrEmpty()){
-            mobileNumber
-        }else{
-            Constants.name
-        }
-
-        binding.selectAddress.setOnClickListener {
-            startActivity(Intent(this, AddressesActivity::class.java))
-        }
-
-        binding.phone1.setOnClickListener {
-            call("0221294341")
-        }
+//        binding.orders.setOnClickListener {
+//            startActivity(Intent(this,OrdersActivity::class.java))
+//        }
+//
+//        name = if (Constants.name.isNullOrEmpty()){
+//            mobileNumber
+//        }else{
+//            Constants.name
+//        }
+//
+//        binding.selectAddress.setOnClickListener {
+//            startActivity(Intent(this, AddressesActivity::class.java))
+//        }
+//
+//        binding.phone1.setOnClickListener {
+//            call("0221294341")
+//        }
 
     }
 
@@ -127,22 +130,22 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
     override fun onResume() {
         super.onResume()
         checkTime()
-        if (selectedAddress != null){
-            binding.selectAddress.text = selectedAddress?.address
-        }else{
-            binding.selectAddress.text = "إختر عنوان"
-        }
+//        if (selectedAddress != null){
+//            binding.selectAddress.text = selectedAddress?.address
+//        }else{
+//            binding.selectAddress.text = "إختر عنوان"
+//        }
     }
 
     private fun checkTime(){
         val c = Calendar.getInstance()
         val timeOfDay = c[Calendar.HOUR_OF_DAY]
 
-        if (timeOfDay < 12) {
-            binding.hello.text = "صباح الخير, $name"
-        } else{
-            binding.hello.text = "مساء الخير, $name"
-        }
+//        if (timeOfDay < 12) {
+//            binding.hello.text = "صباح الخير, $name"
+//        } else{
+//            binding.hello.text = "مساء الخير, $name"
+//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -200,7 +203,10 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
 //            }
 //        }
 //        pictureDialog.show()
-        galleryIntent()
+
+        val bottomSheetFragment = PickUpImageBottomSheet()
+        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+//        galleryIntent()
     }
 
     private fun galleryIntent() {

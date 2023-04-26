@@ -1,322 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".modules.home.presentation.homescreen.ChefaaHomeActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+<androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".modules.home.presentation.homescreen.ChefaaHomeActivity">
+        android:background="@color/background_color"
+        android:padding="@dimen/_5sdp">
 
-        <include
-            android:id="@+id/layout_header"
-            layout="@layout/layout_header" />
+        <RelativeLayout
+            android:id="@+id/header_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_toolbar_arrow"
+                android:layout_alignParentStart="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#001e2f"
+                android:layout_toEndOf="@id/back_btn"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/hanimation_arabic_medium"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:textSize="@dimen/_14ssp"
+                android:text="شفاء"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cart_icon"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/ll_holder"
+            android:id="@+id/chefaa_main_functions_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:background="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/layout_header"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <TextView
-                android:id="@+id/hello"
-                android:fontFamily="@font/codec_pro_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textColor="@color/black"
-                android:layout_marginStart="@dimen/_10sdp"/>
-
-            <TextView
-                android:fontFamily="@font/codec_pro_news"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/how"
-                android:textSize="@dimen/_12ssp"
-                android:layout_marginStart="@dimen/_10sdp"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/header_container"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:weightSum="3">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/search_about_medicine"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/note_bg"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/chefaa_icons_bg"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_20sdp"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_baseline_error_outline_24"/>
-
-                <TextView
-                    android:fontFamily="@font/codec_pro_news"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:lineSpacingExtra="@dimen/_4sdp"
-                    android:text="@string/help_des"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:src="@drawable/chefaa_search_icon"
                     />
 
-            </LinearLayout>
-
-            <TextView
-                android:fontFamily="@font/codec_pro_news"
-                android:id="@+id/et_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:background="@drawable/edit_text_bg_chefaa"
-                android:drawableStart="@drawable/ic_search_black_24dp"
-                android:padding="@dimen/_10sdp"
-                android:text="@string/search_med"
-                android:textAlignment="viewStart"
-                android:textColorHint="@color/gray_yodawy"
-                android:textSize="@dimen/_12ssp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
                 <TextView
-                    android:fontFamily="@font/codec_pro_news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/deliver_to"
-                    android:textSize="@dimen/_12ssp"
+                    android:text="ابحث عن دواء"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:textColor="@color/black"
-                    android:layout_marginStart="@dimen/_10sdp"/>
-
-                <TextView
-                    android:id="@+id/select_address"
-                    android:fontFamily="@font/codec_pro_news"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/select_addre"
-                    android:lineSpacingExtra="@dimen/_5sdp"
-                    android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
                     android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_marginStart="@dimen/_5sdp"/>
+                    android:fontFamily="@font/hanimation_regular"/>
+
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/add_prescription"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@drawable/note_bg"
-                android:orientation="horizontal">
+                android:background="@drawable/chefaa_icons_bg"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_20sdp"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_baseline_error_outline_24"/>
-
-                <TextView
-                    android:fontFamily="@font/codec_pro_news"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:lineSpacingExtra="@dimen/_4sdp"
-                    android:text="@string/fees_des"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:src="@drawable/chefaa_prescription_icon"
                     />
 
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"
-                android:layout_margin="@dimen/_10sdp"/>
-
-            <TextView
-                android:fontFamily="@font/codec_pro_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/easy"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="@dimen/_12ssp"
-                android:layout_margin="@dimen/_10sdp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:weightSum="2">
-
-                    <FrameLayout
-                        android:id="@+id/add_prescription"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:background="@drawable/medicine_bg"
-                        android:paddingBottom="@dimen/_minus30sdp">
-
-                        <TextView
-                            android:fontFamily="@font/codec_pro_news"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:text="@string/add_pre"
-                            android:textStyle="bold"
-                            android:layout_gravity="start"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginBottom="@dimen/_10sdp"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_12ssp"
-                            android:lineSpacingExtra="@dimen/_8sdp"/>
-
-                        <ImageView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_gravity="end|bottom"
-                            android:layout_marginBottom="@dimen/_minus10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:src="@drawable/medical_record" />
-
-                    </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/write_order"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/medicine_bg"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    >
-
-                    <TextView
-                        android:fontFamily="@font/codec_pro_news"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="@string/write_ord"
-                        android:textStyle="bold"
-                        android:layout_gravity="start"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12ssp"
-                        android:lineSpacingExtra="@dimen/_8sdp"/>
-
-                    <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_45sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_gravity="end|bottom"
-                        android:layout_marginBottom="@dimen/_minus10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:src="@drawable/add_note" />
-
-                </FrameLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:fontFamily="@font/codec_pro_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/orders_history"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="@dimen/_12ssp"
-                android:layout_margin="@dimen/_10sdp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:weightSum="2">
-
-                <FrameLayout
-                    android:id="@+id/orders"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:background="@drawable/medicine_bg"
-                    android:paddingBottom="@dimen/_minus30sdp">
-
-                    <TextView
-                        android:fontFamily="@font/codec_pro_news"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="@string/pre_orders"
-                        android:textStyle="bold"
-                        android:layout_gravity="start"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12ssp"
-                        android:lineSpacingExtra="@dimen/_8sdp"/>
-
-                    <ImageView
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_45sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_gravity="end|bottom"
-                        android:layout_marginBottom="@dimen/_minus10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:src="@drawable/orders" />
-
-                </FrameLayout>
-
-            </LinearLayout>
-
-            <TextView
-                android:fontFamily="@font/codec_pro_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/for_delivery"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="@dimen/_12ssp"
-                android:layout_margin="@dimen/_10sdp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
                 <TextView
-                    android:id="@+id/phone_1"
-                    android:fontFamily="@font/codec_pro_news"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/_0221294341"
+                    android:text="اضف الروشتة"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="@dimen/_12ssp"
-                    android:layout_marginStart="@dimen/_10sdp"/>
+                    android:fontFamily="@font/hanimation_regular"/>
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/write_order_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/chefaa_icons_bg"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_20sdp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:src="@drawable/chefaa_write_icon"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="اكتب طلبك"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/hanimation_regular"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/chefaa_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/chefaa_info_bg"
+            app:layout_constraintTop_toBottomOf="@id/chefaa_main_functions_container"
+            android:layout_margin="@dimen/_10sdp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/chefaa_info_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="التوصيل خلال ٤٨ ساعة مصاريف التوصيل ......"
+                android:fontFamily="@font/hanimation_regular"
+                android:textSize="@dimen/_10ssp"
+                android:textColor="#6a6a6a"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/chefaa_previous_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="الطلبات السابقة"
+            app:layout_constraintTop_toBottomOf="@id/chefaa_info_container"
+            android:fontFamily="@font/hanimation_arabic_medium"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="#282c41"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orders_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/background_color"
+            app:layout_constraintTop_toBottomOf="@id/chefaa_previous_order"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+
+</androidx.core.widget.NestedScrollView>

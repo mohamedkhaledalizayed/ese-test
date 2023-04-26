@@ -38,9 +38,12 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
-            android:name=".sustainablehealth.medicalnetwork.presentation.view.selectnetwork.SelectNetworkActivity"
-            android:theme="@style/AppTheme"
+            android:name=".commen.pharmacy.PharmacyActivity"
             android:exported="false" />
+        <activity
+            android:name=".sustainablehealth.medicalnetwork.presentation.view.selectnetwork.SelectNetworkActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".commen.clinido.view.ClinidoActivity"
             android:exported="false" />

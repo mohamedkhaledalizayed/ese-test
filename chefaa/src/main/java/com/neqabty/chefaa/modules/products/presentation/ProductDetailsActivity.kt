@@ -23,16 +23,6 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
 
         setupToolbar(title = productItem.titleAr)
 
-        // render add btn || + - btn
-        if (cart.productList.find { it.productId == productItem.id } != null) {
-            binding.increaseDecrease.visibility = View.VISIBLE
-            binding.add.visibility = View.GONE
-        } else {
-            binding.increaseDecrease.visibility = View.GONE
-            binding.add.visibility = View.VISIBLE
-        }
-
-
         binding.add.setOnClickListener {
             addBtnLogic(productItem)
         }
@@ -45,7 +35,6 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
         binding.decrease.setOnClickListener {
             val index = cart.productList.removeOrDecrement(productItem)
             if (index == -1) {
-                binding.increaseDecrease.visibility = View.GONE
                 binding.add.visibility = View.VISIBLE
             } else {
                 binding.quantity.text = "${cart.productList[index].quantity}"
@@ -75,8 +64,6 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
 
     private fun addToCart(productItem: ProductEntity) {
         cart.productList.addOrIncrement(productItem)
-        binding.increaseDecrease.visibility = View.VISIBLE
-        binding.add.visibility = View.GONE
     }
 
     private fun getIndexInProductsPair(productItem: ProductEntity): Int {
@@ -84,8 +71,6 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
         cart.productList.mapIndexed { ind, item ->
             if (item.productId == productItem.id) {
                 index = ind
-                binding.increaseDecrease.visibility = View.VISIBLE
-                binding.add.visibility = View.GONE
                 binding.quantity.text = "${item.quantity}"
             }
         }

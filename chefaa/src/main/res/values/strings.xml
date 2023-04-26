@@ -107,4 +107,6 @@
     <string name="pre_orders">طلباتك \nالسابقة</string>
     <string name="for_delivery">للتواصل:</string>
     <string name="_0221294341">0221294341</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

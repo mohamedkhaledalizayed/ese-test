@@ -32,6 +32,7 @@ import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.contactus.ContactUsActivity
+import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.healthcare.core.data.Constants
@@ -201,7 +202,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         binding.cvChefaa.setOnClickListener {
 
             if (sharedPreferences.isAuthenticated){
-                val intent = Intent(this, ChefaaHomeActivity::class.java)
+                val intent = Intent(this, PharmacyActivity::class.java)
                 intent.putExtra("user_number", sharedPreferences.mobile)
                 intent.putExtra("mobile_number", sharedPreferences.mobile)
                 intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
