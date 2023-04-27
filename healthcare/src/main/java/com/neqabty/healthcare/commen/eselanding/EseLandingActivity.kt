@@ -5,23 +5,36 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.viewModels
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
+import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
+import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityEseLandingBinding
+import com.neqabty.healthcare.mega.home.view.HomeViewModel
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import dagger.hilt.android.AndroidEntryPoint
+import dmax.dialog.SpotsDialog
 
 @AndroidEntryPoint
 class EseLandingActivity : BaseActivity<ActivityEseLandingBinding>() {
 
+    private lateinit var loading: AlertDialog
+    private val eseLandingViewModel: EseLandingViewModel by viewModels()
     override fun getViewBinding() = ActivityEseLandingBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        loading = SpotsDialog.Builder()
+            .setContext(this)
+            .setMessage(getString(R.string.please_wait))
+            .build()
 
         binding.ese.loop(true)
         binding.itemEse.setOnClickListener {
@@ -57,6 +70,69 @@ class EseLandingActivity : BaseActivity<ActivityEseLandingBinding>() {
                 val intent = Intent(this, SehaHomeActivity::class.java)
                 startActivity(intent)
         }
+
+        binding.itemClinido.setOnClickListener {
+            if (sharedPreferences.isAuthenticated) {
+                openTermsDialog()
+            } else {
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
+        }
+
+
+        eseLandingViewModel.clinidoUrl.observe(this){
+            when(it.status){
+                Status.LOADING ->{
+                    loading.show()
+                }
+                Status.SUCCESS ->{
+                    loading.dismiss()
+                    if (it.data!!.status){
+                        val intent = Intent(this, ClinidoActivity::class.java)
+                        intent.putExtra("url", it.data.url)
+                        intent.putExtra("title", title)
+                        startActivity(intent)
+                    }else if (it.data.status_code == 405) {
+                        Constants.mobileNumber = sharedPreferences.mobile
+                        startActivity(Intent(this, VerifyUserActivity::class.java))
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                    }else{
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+                Status.ERROR ->{
+                    loading.dismiss()
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+
+    private fun openTermsDialog() {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle("الشروط والاحكام")
+        alertDialog.setMessage(resources.getString(R.string.terms))
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            eseLandingViewModel.getUrl(
+                phone = sharedPreferences.mobile,
+                type = "pharmacy",
+                name = sharedPreferences.name,
+                entityCode = sharedPreferences.code)
+            title = "العلاج الشهرى"
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, getString(R.string.disagree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
     }
 
     private fun askForLogin(message: String) {

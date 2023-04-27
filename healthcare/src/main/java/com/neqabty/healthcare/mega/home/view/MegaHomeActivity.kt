@@ -63,6 +63,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
     private val syndicatesAdapter = NewsAdapter()
     private val listAds = ArrayList<AdEntity>()
     private val list = mutableListOf<CarouselItem>()
+    private var isGuest = false
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,8 +71,9 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
         setContentView(binding.root)
 
+        isGuest = intent.getBooleanExtra("isGuest", false)
         init()
-        setupToolbar(title = "${sharedPreferences.syndicateName}")
+        setupToolbar(title = "${if (isGuest) intent.getStringExtra("syndicateName") else sharedPreferences.syndicateName}")
         toolbar = binding.toolbar
 
         loading = SpotsDialog.Builder()
@@ -151,7 +153,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
 
         //Start of Syndicates News
-        homeViewModel.getSyndicateNews("${sharedPreferences.code}")
+        homeViewModel.getSyndicateNews(if (isGuest) intent.getStringExtra("code")!! else sharedPreferences.code)
         homeViewModel.syndicatesNews.observe(this) {
             it?.let { resource ->
                 when (resource.status) {
@@ -207,8 +209,12 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
         binding.ivSubscription.setOnClickListener {
             if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
-                val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
-                startActivity(intent)
+                if (!isGuest){
+                    val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(this@MegaHomeActivity, "هذه الخدمة متاحة لاعضاء النقابة فقط.", Toast.LENGTH_LONG).show()
+                }
             }else{
                 askForLogin(resources.getString(R.string.not_found))
             }
@@ -454,8 +460,12 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
             R.id.payment -> {
                 if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
-                    val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
-                    startActivity(intent)
+                    if (!isGuest){
+                        val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(this@MegaHomeActivity, "هذه الخدمة متاحة لاعضاء النقابة فقط.", Toast.LENGTH_LONG).show()
+                    }
                 }else{
                     askForLogin(resources.getString(R.string.not_found))
                 }
