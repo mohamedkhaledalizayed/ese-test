@@ -19,8 +19,8 @@ class SignupRepositoryImpl @Inject constructor(private val signupDS: SignupDS) :
         return flow { emit(signupDS.signup(signupParams)) }
     }
 
-    override fun signUpNeqabtyMember(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity> {
-        return flow { emit(signupDS.signUpNeqabtyMember(neqabtySignupBody).toUserEntity()) }
+    override fun signupMember(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity> {
+        return flow { emit(signupDS.signupMember(neqabtySignupBody).toUserEntity()) }
     }
 
     override fun getSyndicates(): Flow<List<SyndicateListEntity>> {

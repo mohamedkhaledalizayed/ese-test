@@ -11,6 +11,6 @@ import retrofit2.Response
 
 interface SignupRepository {
     fun signup(signupParams: Any): Flow<Response<UserModel>>
-    fun signUpNeqabtyMember(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity>
+    fun signupMember(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity>
     fun  getSyndicates():  Flow<List<SyndicateListEntity>>
 }

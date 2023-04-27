@@ -74,7 +74,12 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                     sharedPreferences.mobile = step1Binding.ccp.fullNumberWithPlus
                     sharedPreferences.mobile_without_cc = step1Binding.ccp.fullNumber
                         .substring(1, step1Binding.ccp.fullNumber.length)
-                    sendOTP()
+
+                    if (!BuildConfig.DEBUG) {
+                        sendOTP()
+                        movePagertoNext()
+                        return@setOnClickListener
+                    }
                     movePagertoNext()
                 }
                 1 -> {
@@ -109,9 +114,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                         finish()
                     }
                     if (SignupData.syndicateID == Constants.NEQABTY_CODE)
-                        (adapter.fragments[3] as SignupStep4PagerFragment).generalSignup()
-                    else
-                        (adapter.fragments[3] as SignupStep4PagerFragment).syndicateSignup()
+                        (adapter.fragments[3] as SignupStep4PagerFragment).signup()
                     return@setOnClickListener
                 }
             }

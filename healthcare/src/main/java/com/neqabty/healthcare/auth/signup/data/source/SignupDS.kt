@@ -16,8 +16,8 @@ class SignupDS @Inject constructor(private val signupApi: SignupApi) {
         return signupApi.syndicateMember(signupBody)
     }
 
-    suspend fun signUpNeqabtyMember(body: NeqabtySignupBody): NeqabtyMemberModel {
-        return signupApi.signUpNeqabtyMember(body)
+    suspend fun signupMember(body: NeqabtySignupBody): NeqabtyMemberModel {
+        return signupApi.signupMember(body)
     }
 
     suspend fun getSyndicates(): List<EntityModel> {

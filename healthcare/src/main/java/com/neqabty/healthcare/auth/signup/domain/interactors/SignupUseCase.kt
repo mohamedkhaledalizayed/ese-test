@@ -17,7 +17,7 @@ class SignupUseCase @Inject constructor(private val signupRepository: SignupRepo
     }
 
     fun build(neqabtySignupBody: NeqabtySignupBody): Flow<UserEntity> {
-        return signupRepository.signUpNeqabtyMember(neqabtySignupBody)
+        return signupRepository.signupMember(neqabtySignupBody)
     }
 
     fun build(): Flow<List<SyndicateListEntity>> {

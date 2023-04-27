@@ -62,26 +62,6 @@ class SignupViewModel @Inject constructor(
         }
     }
 
-    val syndicateMember = MutableLiveData<Resource<UserModel>>()
-
-    fun syndicateMemberSignup(data: Any) {
-        syndicateMember.postValue(Resource.loading(data = null))
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                signupUseCase.build(data).collect {
-                    if (it.isSuccessful){
-                        syndicateMember.postValue(Resource.success(data = it.body()!!))
-                    }else{
-                        val jObjError = JSONObject(it.errorBody()!!.string()).toString()
-                        syndicateMember.postValue(Resource.error(data = null, message = jObjError))
-                    }
-                }
-            } catch (e: Throwable) {
-                syndicateMember.postValue(Resource.error(data = null, message = handleError(e)))
-            }
-        }
-    }
-
     val generalUser = MutableLiveData<Resource<UserUIModel>>()
     fun generalUserSignup(data: NeqabtySignupBody) {
         generalUser.postValue(Resource.loading(data = null))

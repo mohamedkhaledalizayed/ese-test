@@ -7,12 +7,16 @@ import com.google.gson.annotations.SerializedName
 data class NeqabtySignupBody(
     @SerializedName("email")
     val email: String,
-    @SerializedName("fullname")
+    @SerializedName("full_name")
     val fullname: String,
     @SerializedName("mobile")
     val mobile: String,
     @SerializedName("password")
     val password: String,
     @SerializedName("national_id")
-    val nationalId: String? = ""
+    val nationalId: String? = "",
+    @SerializedName("entity_code")
+    val entityCode: String = "",
+    @SerializedName("membership_id")
+    val membershipId: String = "",
 )

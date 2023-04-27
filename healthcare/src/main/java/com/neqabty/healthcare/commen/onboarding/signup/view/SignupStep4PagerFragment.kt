@@ -52,6 +52,7 @@ class SignupStep4PagerFragment : Fragment() {
         if (SignupData.syndicateID == Constants.NEQABTY_CODE) {
             binding.clName.visibility = View.VISIBLE
             binding.clEmail.visibility = View.VISIBLE
+            binding.clNationalId.visibility = View.VISIBLE
             binding.clPassword.visibility = View.VISIBLE
             binding.clPasswordConfirmation.visibility = View.VISIBLE
             binding.ivPasswordRules.visibility = View.VISIBLE
@@ -100,73 +101,15 @@ class SignupStep4PagerFragment : Fragment() {
         binding.tvPasswordReset.visibility = View.GONE
     }
 
-    fun syndicateSignup() {
-        activity.signupViewModel.syndicateMemberSignup(
-            SignupBody(
-                entityCode = activity.sharedPreferences.code,
-                nationalId = binding.etNationalId.text.toString(),
-                mobile = activity.sharedPreferences.mobile,
-                email = binding.tvEmail.text.toString(),
-                membershipId = binding.etMembershipNumber.text.toString()
-            )
-        )
-
-        activity.signupViewModel.syndicateMember.observe(this) {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> {
-                        activity.showProgressDialog()
-                    }
-                    Status.SUCCESS -> {
-                        activity.hideProgressDialog()
-                        if (resource.data!!.mobile.isNotEmpty()) {
-                            activity.sharedPreferences.isSyndicateMember = true
-                            activity.sharedPreferences.isAuthenticated = true
-                            activity.sharedPreferences.token = resource.data.token.key
-                            activity.sharedPreferences.email = binding.etEmail.text.toString()
-                            activity.sharedPreferences.name = resource.data.fullname ?: ""
-                            activity.sharedPreferences.nationalId = resource.data.nationalId ?: ""
-                            activity.sharedPreferences.membershipId =
-                                binding.etMembershipNumber.text.toString()
-                            activity.sharedPreferences.code = resource.data.entity.code
-                            activity.sharedPreferences.syndicateName = resource.data.entity.name
-                            activity.sharedPreferences.image = resource.data.entity.imageUrl ?: ""
-
-                            navigate()
-                        } else {
-                            Toast.makeText(
-                                activity,
-                                resources.getString(R.string.something_wrong),
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }
-                    Status.ERROR -> {
-                        activity.hideProgressDialog()
-                        try {
-                            val error =
-                                Gson().fromJson(resource.message.toString(), ErrorBody::class.java)
-                            Toast.makeText(activity, error.error, Toast.LENGTH_LONG).show()
-                        } catch (e: Exception) {
-                            Toast.makeText(
-                                activity,
-                                resources.getString(R.string.something_wrong),
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    fun generalSignup() {
+    fun signup() {
         activity.signupViewModel.generalUserSignup(
             NeqabtySignupBody(
                 email = binding.etEmail.text.toString(),
                 fullname = binding.etName.text.toString(),
+                entityCode = if(SignupData.syndicateID == Constants.NEQABTY_CODE) "" else SignupData.syndicateID,
                 mobile = activity.sharedPreferences.mobile,
                 nationalId = binding.etNationalId.text.toString(),
+                membershipId = binding.etMembershipNumber.text.toString(),
                 password = binding.etPassword.text.toString()
             )
         )
@@ -188,6 +131,8 @@ class SignupStep4PagerFragment : Fragment() {
                             activity.sharedPreferences.email = binding.etEmail.text.toString()
                             activity.sharedPreferences.syndicateName = resource.data!!.entityName
                             activity.sharedPreferences.image = resource.data!!.entityImage ?: ""
+                            activity.sharedPreferences.code = SignupData.syndicateID
+                            activity.sharedPreferences.membershipId = resource.data!!.id.toString()
                             navigate()
                         } else {
                             Toast.makeText(

@@ -13,8 +13,8 @@ interface SignupApi {
     @POST("accounts/signup")
     suspend fun syndicateMember(@Body signupBody: Any): Response<UserModel>
 
-    @POST("accounts/general_signup")
-    suspend fun signUpNeqabtyMember(@Body neqabtySignupBody: NeqabtySignupBody): NeqabtyMemberModel
+    @POST("accounts/register")
+    suspend fun signupMember(@Body neqabtySignupBody: NeqabtySignupBody): NeqabtyMemberModel
 
     @GET("entities?special-format=android")
     suspend fun getSyndicates(@Query("filter{type.name}") type: String = "syndicate"): SyndicateListModel
