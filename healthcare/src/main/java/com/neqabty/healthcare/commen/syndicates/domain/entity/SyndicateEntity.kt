@@ -9,7 +9,13 @@ data class SyndicateEntity(
     val name: String = "",
     val registrationNotes: String = "",
     val requirements: List<RequirementEntity> = listOf(),
+    val entityValidations: List<EntityValidation> = listOf(),
     val services: List<ServiceEntity> = listOf(),
     val type: TypeEntity = TypeEntity(),
     val updatedAt: String = ""
+)
+
+data class EntityValidation(
+    val validationName: String,
+    val value: Boolean
 )

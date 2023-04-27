@@ -13,24 +13,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_enter_national_id_front"
+        android:id="@+id/tv_enter_national_id_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/enter_id_back"
         android:fontFamily="@font/hanimation_arabic_medium"
-        android:text="@string/enter_id_front"
         android:textColor="@color/secondaryText"
         android:textSize="?textSizeMedium"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
-
-    <ImageView
-        android:id="@+id/iv_front"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_nat_id_front"
-        app:layout_constraintTop_toBottomOf="@id/tv_enter_national_id_front" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/b_skip"
@@ -52,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"
-        android:text="@string/confirm"
+        android:text="@string/next"
         android:textColor="@android:color/white"
         android:textSize="?textSizeMedium"
         app:cornerRadius="@dimen/_5sdp"

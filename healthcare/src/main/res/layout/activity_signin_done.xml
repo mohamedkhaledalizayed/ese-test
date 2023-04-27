@@ -23,6 +23,77 @@
         android:textSize="?textSizeMedium"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
 
+    <TextView
+        android:id="@+id/tv_contact_benefits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/contact_benefits"
+        android:fontFamily="@font/hanimation_regular"
+        android:textColor="@color/secondaryText"
+        android:textSize="?textSizeMedium"
+        app:layout_constraintTop_toBottomOf="@id/tv_signin_done" />
+
+    <TextView
+        android:id="@+id/tv_enter_national_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/enter_nat_id"
+        android:fontFamily="@font/hanimation_regular"
+        android:textColor="@color/secondaryText"
+        android:textSize="?textSizeMedium"
+        app:layout_constraintTop_toBottomOf="@id/tv_contact_benefits" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_national_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:background="@drawable/rounded_white_bg"
+        android:padding="@dimen/margin_medium"
+        app:layout_constraintTop_toBottomOf="@id/tv_enter_national_id">
+
+        <TextView
+            android:id="@+id/tv_national_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/hanimation_regular"
+            android:text="@string/national_id"
+            android:textColor="@color/secondaryText"
+            android:textSize="?textSizeSmall"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_national_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:background="@null"
+            android:fontFamily="@font/hanimation_regular"
+            android:hint="@string/enter_nat_id"
+            android:inputType="number"
+            android:longClickable="false"
+            android:maxLength="14"
+            android:text="29202190102166"
+            android:textAlignment="viewStart"
+            android:textSize="@dimen/text_size_medium"
+            app:layout_constraintEnd_toStartOf="@id/iv_national_id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_national_id" />
+
+        <ImageView
+            android:id="@+id/iv_national_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_national_id"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
         android:id="@+id/iv_contact"
         android:layout_width="match_parent"
@@ -30,7 +101,7 @@
         android:layout_marginTop="@dimen/margin_large"
         android:scaleType="centerCrop"
         android:src="@drawable/img_contact"
-        app:layout_constraintTop_toBottomOf="@id/tv_signin_done" />
+        app:layout_constraintTop_toBottomOf="@id/cl_national_id" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/b_home"
@@ -41,17 +112,17 @@
         android:textColor="@color/colorPrimary"
         android:textSize="?textSizeMedium"
         app:cornerRadius="@dimen/_5sdp"
-        app:layout_constraintBottom_toTopOf="@id/b_complete_profile"
+        app:layout_constraintBottom_toTopOf="@id/b_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:strokeColor="@color/colorPrimary"
         app:strokeWidth="@dimen/_1sdp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/b_complete_profile"
+        android:id="@+id/b_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"
-        android:text="@string/complete_profile"
+        android:text="@string/next"
         android:textColor="@android:color/white"
         android:textSize="?textSizeMedium"
         app:cornerRadius="@dimen/_5sdp"

@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
-        android:text="@string/register_in"
         android:fontFamily="@font/hanimation_arabic_medium"
+        android:text="@string/register_in"
         android:textColor="@color/secondaryText"
         android:textSize="?textSizeMedium"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,16 +34,17 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/rounded_white_bg"
                 android:padding="@dimen/margin_medium"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_regular"
                     android:text="@string/user_name"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
-                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,13 +55,13 @@
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginEnd="@dimen/margin_medium"
                     android:background="@null"
+                    android:fontFamily="@font/hanimation_regular"
                     android:hint="@string/enter_name"
                     android:inputType="text"
                     android:longClickable="false"
                     android:text="Mona"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintEnd_toStartOf="@id/iv_name"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_name" />
@@ -82,16 +83,17 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/rounded_white_bg"
                 android:padding="@dimen/margin_medium"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/cl_name">
 
                 <TextView
                     android:id="@+id/tv_membership_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_regular"
                     android:text="@string/membership_id"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
-                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -102,12 +104,12 @@
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginEnd="@dimen/margin_medium"
                     android:background="@null"
+                    android:fontFamily="@font/hanimation_regular"
                     android:hint="@string/enter_membership_id"
                     android:inputType="number"
                     android:longClickable="false"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintEnd_toStartOf="@id/iv_membership_number"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_membership_number" />
@@ -130,16 +132,17 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/rounded_white_bg"
                 android:padding="@dimen/margin_medium"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/cl_membership_number">
 
                 <TextView
                     android:id="@+id/tv_national_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_regular"
                     android:text="@string/national_id"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
-                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -150,14 +153,14 @@
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginEnd="@dimen/margin_medium"
                     android:background="@null"
+                    android:fontFamily="@font/hanimation_regular"
                     android:hint="@string/enter_nat_id"
                     android:inputType="number"
-                    android:text="29202190102166"
-                    android:maxLength="14"
                     android:longClickable="false"
+                    android:maxLength="14"
+                    android:text="29202190102166"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintEnd_toStartOf="@id/iv_national_id"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_national_id" />
@@ -179,16 +182,17 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/rounded_white_bg"
                 android:padding="@dimen/margin_medium"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/cl_national_id">
 
                 <TextView
                     android:id="@+id/tv_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_regular"
                     android:text="@string/email"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
-                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -199,13 +203,13 @@
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginEnd="@dimen/margin_medium"
                     android:background="@null"
+                    android:fontFamily="@font/hanimation_regular"
                     android:hint="@string/enter_email"
                     android:inputType="textEmailAddress"
                     android:longClickable="false"
                     android:text="monawhab@gmail.com"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintEnd_toStartOf="@id/iv_email"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_email" />
@@ -228,16 +232,17 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/rounded_white_bg"
                 android:padding="@dimen/margin_medium"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/cl_email">
 
                 <TextView
                     android:id="@+id/tv_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_regular"
                     android:text="@string/password"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
-                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -248,13 +253,13 @@
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginEnd="@dimen/margin_medium"
                     android:background="@null"
+                    android:fontFamily="@font/hanimation_regular"
                     android:hint="@string/enter_password"
                     android:inputType="textPassword"
                     android:longClickable="false"
+                    android:text="password123"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:fontFamily="@font/hanimation_regular"
-                    android:text="password123"
                     app:layout_constraintEnd_toStartOf="@id/iv_password"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_password" />
@@ -276,16 +281,17 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/rounded_white_bg"
                 android:padding="@dimen/margin_medium"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/cl_password">
 
                 <TextView
                     android:id="@+id/tv_password_confirmation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_regular"
                     android:text="@string/confirm_pass"
                     android:textColor="@color/secondaryText"
                     android:textSize="?textSizeSmall"
-                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -296,13 +302,13 @@
                     android:layout_marginTop="@dimen/margin_medium"
                     android:layout_marginEnd="@dimen/margin_medium"
                     android:background="@null"
+                    android:fontFamily="@font/hanimation_regular"
                     android:hint="@string/confirm_password"
                     android:inputType="textPassword"
-                    android:text="password123"
                     android:longClickable="false"
+                    android:text="password123"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    android:fontFamily="@font/hanimation_regular"
                     app:layout_constraintEnd_toStartOf="@id/iv_password_confirmation"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_password_confirmation" />
@@ -323,6 +329,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:src="@drawable/ic_password_rules"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_password_confirmation" />
 
@@ -331,10 +338,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
+                android:fontFamily="@font/hanimation_regular"
                 android:text="@string/password_rules"
                 android:textColor="@color/secondaryText"
                 android:textSize="?textSizeSmall"
-                android:fontFamily="@font/hanimation_regular"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@id/iv_password_rules"
                 app:layout_constraintTop_toTopOf="@id/iv_password_rules" />
 
@@ -344,14 +352,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_large"
+                android:fontFamily="@font/hanimation_arabic_bold"
                 android:text="@string/reset_password"
                 android:textColor="@color/colorPrimary"
                 android:textSize="?textSizeSmall"
-                android:fontFamily="@font/hanimation_arabic_bold"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/iv_password_rules" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-        
+
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
