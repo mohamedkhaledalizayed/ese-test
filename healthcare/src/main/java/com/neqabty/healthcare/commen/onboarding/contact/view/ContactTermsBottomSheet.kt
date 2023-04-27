@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.commen.onboarding.contact
+package com.neqabty.healthcare.commen.onboarding.contact.view
 
 
 import android.annotation.SuppressLint

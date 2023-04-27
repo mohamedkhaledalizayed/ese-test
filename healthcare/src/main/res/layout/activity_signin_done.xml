@@ -77,7 +77,6 @@
             android:inputType="number"
             android:longClickable="false"
             android:maxLength="14"
-            android:text="29202190102166"
             android:textAlignment="viewStart"
             android:textSize="@dimen/text_size_medium"
             app:layout_constraintEnd_toStartOf="@id/iv_national_id"

@@ -79,11 +79,11 @@
         <activity
             android:name=".commen.splash.view.SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".commen.onboarding.intro.view.IntroActivity"
@@ -92,16 +92,22 @@
             android:name=".commen.onboarding.signup.view.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.signup.view.SigninDoneActivity"
-            android:exported="false"/>
+            android:name=".commen.onboarding.contact.view.SigninDoneActivity"
+            android:exported="true">
+                                    <intent-filter>
+                                        <action android:name="android.intent.action.MAIN" />
+
+                                        <category android:name="android.intent.category.LAUNCHER" />
+                                    </intent-filter>
+        </activity>
         <activity
-            android:name=".commen.onboarding.contact.UploadIdFrontActivity"
+            android:name=".commen.onboarding.contact.view.UploadIdFrontActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.contact.UploadIdBackActivity"
+            android:name=".commen.onboarding.contact.view.UploadIdBackActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.contact.ReviewYourDataActivity"
+            android:name=".commen.onboarding.contact.view.ReviewYourDataActivity"
             android:exported="true">
 <!--                        <intent-filter>-->
 <!--                            <action android:name="android.intent.action.MAIN" />-->
@@ -110,7 +116,7 @@
 <!--                        </intent-filter>-->
         </activity>
         <activity
-            android:name=".commen.onboarding.contact.ResidenceActivity"
+            android:name=".commen.onboarding.contact.view.ResidenceActivity"
             android:exported="false" />
         <activity
             android:name=".core.home_syndicates.view.SyndicatesHomeActivity"

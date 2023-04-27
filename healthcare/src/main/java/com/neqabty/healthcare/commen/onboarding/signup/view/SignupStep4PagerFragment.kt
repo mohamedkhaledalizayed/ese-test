@@ -8,13 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.gson.Gson
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
-import com.neqabty.healthcare.auth.signup.data.model.SignupBody
+import com.neqabty.healthcare.commen.onboarding.contact.view.SigninDoneActivity
 import com.neqabty.healthcare.commen.onboarding.signup.data.SignupData
 import com.neqabty.healthcare.core.data.Constants
-import com.neqabty.healthcare.core.utils.ErrorBody
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.FragmentSignupStepFourBinding
 

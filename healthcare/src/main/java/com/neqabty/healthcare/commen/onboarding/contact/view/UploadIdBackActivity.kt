@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.commen.onboarding.contact
+package com.neqabty.healthcare.commen.onboarding.contact.view
 
 import android.Manifest
 import android.app.Activity
@@ -11,14 +11,18 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
+import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.commen.onboarding.contact.data.source.OcrData
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.FileUtils
-import com.neqabty.healthcare.databinding.ActivityUploadIdFrontBinding
+import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.healthcare.databinding.ActivityUploadIdBackBinding
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.PhotoUI
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -30,12 +34,13 @@ import java.io.FileOutputStream
 import java.io.IOException
 
 @AndroidEntryPoint
-class UploadIdFrontActivity : BaseActivity<ActivityUploadIdFrontBinding>() {
+class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
 
     private var REQUEST_CODE = 1001
-    private var nationalIdFront: PhotoUI? = null
+    private var nationalIdBack: PhotoUI? = null
 
-    override fun getViewBinding() = ActivityUploadIdFrontBinding.inflate(layoutInflater)
+    val uploadIdBackViewModel: UploadIdBackViewModel by viewModels()
+    override fun getViewBinding() = ActivityUploadIdBackBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,24 +51,54 @@ class UploadIdFrontActivity : BaseActivity<ActivityUploadIdFrontBinding>() {
     }
 
     private fun initializeViews() {
-        binding.ivFront.setOnClickListener{
+        binding.ivBack.setOnClickListener{
             checkPermissionsAndOpenFilePicker()
         }
         binding.bNext.setOnClickListener {
-            if (nationalIdFront == null) {
-                Toast.makeText(this, getString(R.string.enter_id_front), Toast.LENGTH_LONG).show()
+            if (nationalIdBack == null) {
+                Toast.makeText(this, getString(R.string.enter_id_back), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
-            val mainIntent = Intent(
-                this,
-                UploadIdBackActivity::class.java
-            )
-            startActivity(mainIntent)
-            finish()
+
+            createOcr()
         }
 
         binding.bSkip.setOnClickListener {
             navigate()
+        }
+    }
+
+    private fun createOcr() {
+        val frontImg: MultipartBody.Part = prepareFilePart(OcrData.front?.name!! , OcrData.front?.uri!!)
+        val backImg: MultipartBody.Part = prepareFilePart(OcrData.back?.name!! , OcrData.back?.uri!!)
+        uploadIdBackViewModel.createOcr(frontImg, backImg, sharedPreferences.nationalId, sharedPreferences.mobile)
+
+        uploadIdBackViewModel.createOcrStatus.observe(this){
+
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        showProgressDialog()
+                    }
+                    Status.SUCCESS -> {
+                        hideProgressDialog()
+                        if (resource.data != null){
+                            //check later
+                            showAlert("submitted successfully, check later"){
+                                //TODO
+                                navigate()
+                            }
+
+                        }else{
+                            Toast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    Status.ERROR -> {
+                        hideProgressDialog()
+                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
     }
 
@@ -117,11 +152,11 @@ class UploadIdFrontActivity : BaseActivity<ActivityUploadIdFrontBinding>() {
                 val photoUI = saveImage(bitmap)
 
                 val file = File(photoUI.path, photoUI.name)
-                val res = Base64.encodeToString(file.readBytes(), Base64.DEFAULT)
+                OcrData.back = photoUI//Base64.encodeToString(file.readBytes(), Base64.DEFAULT)
                 when (REQUEST_CODE) {
                     1001 -> {
-                        nationalIdFront = photoUI
-                        binding.ivFront.setImageBitmap(bitmap)
+                        nationalIdBack = photoUI
+                        binding.ivBack.setImageBitmap(bitmap)
                     }
                 }
 
@@ -174,7 +209,7 @@ class UploadIdFrontActivity : BaseActivity<ActivityUploadIdFrontBinding>() {
     private fun navigate() {
         val mainIntent = Intent(
             this,
-            getTheNextActivityFromSignup()
+            ReviewYourDataActivity::class.java
         )
         startActivity(mainIntent)
         finish()
