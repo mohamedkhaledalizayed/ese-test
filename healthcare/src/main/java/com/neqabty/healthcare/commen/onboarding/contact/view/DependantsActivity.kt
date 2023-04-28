@@ -4,25 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.databinding.ActivityReviewYourDataBinding
+import com.neqabty.healthcare.databinding.ActivityDependantsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ReviewYourDataActivity : BaseActivity<ActivityReviewYourDataBinding>() {
-    override fun getViewBinding() = ActivityReviewYourDataBinding.inflate(layoutInflater)
+class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
+    override fun getViewBinding() = ActivityDependantsBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(R.string.review_your_data)
+        setupToolbar(R.string.dependants)
         initializeViews()
     }
 
     private fun initializeViews() {
-        binding.tvName.setText(sharedPreferences.name)
-        binding.tvNatId.setText(sharedPreferences.nationalId)
-
         binding.bNext.setOnClickListener {
             navigate()
         }
@@ -36,7 +33,7 @@ class ReviewYourDataActivity : BaseActivity<ActivityReviewYourDataBinding>() {
     private fun navigate() {
         val mainIntent = Intent(
             this,
-            ResidenceActivity::class.java
+            getTheNextActivityFromSignup()
         )
         startActivity(mainIntent)
         finish()

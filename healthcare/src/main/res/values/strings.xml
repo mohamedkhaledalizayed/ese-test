@@ -389,6 +389,12 @@
     <string name="review_your_data">راجع بياناتك الشخصية</string>
     <string name="ok">تأكيد</string>
     <string name="residence">محل الاقامة</string>
+    <string name="residence_status">ماهي حالة محل الاقامة</string>
+    <string name="residence_owned">مملوكة بالكامل</string>
+    <string name="residence_rent">إيجار</string>
+    <string name="residence_family">بيت عائلة</string>
+    <string name="dependants">الأفراد</string>
+    <string name="dependants_num">كم عدد الأفراد المسؤولة منك؟</string>
 
 
     <!--/////////////////////////////Home/////////////////////////////////////////-->

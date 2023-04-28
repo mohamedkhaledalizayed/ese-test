@@ -12,187 +12,172 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_view_info"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:background="@drawable/edit_text_bg"
-        android:padding="@dimen/margin_medium"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/b_skip"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
 
-        <TextView
-            android:id="@+id/tv_name_title"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/hanimation_arabic_medium"
-            android:text="@string/user_name"
-            android:textColor="@color/secondaryText"
-            android:textSize="?textSizeSmall"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/hanimation_arabic_medium"
-            android:text="@string/user_name"
-            android:textColor="@color/black"
-            android:textSize="?textSizeMedium"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_name_title" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_view_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/edit_text_bg"
+                android:padding="@dimen/margin_medium"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:id="@+id/view1"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:background="@color/gray"
-            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+                <TextView
+                    android:id="@+id/tv_name_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="@string/user_name"
+                    android:textColor="@color/secondaryText"
+                    android:textSize="?textSizeSmall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_nat_id_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:fontFamily="@font/hanimation_arabic_medium"
-            android:text="@string/national_id"
-            android:textColor="@color/secondaryText"
-            android:textSize="?textSizeSmall"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view1" />
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="@string/user_name"
+                    android:textColor="@color/black"
+                    android:textSize="?textSizeMedium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name_title" />
 
-        <TextView
-            android:id="@+id/tv_nat_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/hanimation_arabic_medium"
-            android:text="@string/national_id"
-            android:textColor="@color/black"
-            android:textSize="?textSizeMedium"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_nat_id_title" />
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_nat_id_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="@string/national_id"
+                    android:textColor="@color/secondaryText"
+                    android:textSize="?textSizeSmall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view1" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_marital_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large"
-        android:background="@drawable/edit_text_bg"
-        android:padding="@dimen/margin_medium"
-        app:layout_constraintTop_toBottomOf="@id/cl_view_info">
+                <TextView
+                    android:id="@+id/tv_nat_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="@string/national_id"
+                    android:textColor="@color/black"
+                    android:textSize="?textSizeMedium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nat_id_title" />
 
-        <TextView
-            android:id="@+id/tv_marital_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/hanimation_regular"
-            android:text="@string/marital_status"
-            android:textColor="@color/secondaryText"
-            android:textSize="?textSizeSmall"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Spinner
-            android:id="@+id/sp_marital_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:popupBackground="@color/splash_bg"
-            app:layout_constraintTop_toBottomOf="@id/tv_marital_status" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_marital_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:background="@drawable/edit_text_bg"
+                android:padding="@dimen/margin_medium"
+                app:layout_constraintTop_toBottomOf="@id/cl_view_info">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_spinner_arrow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_marital_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_regular"
+                    android:text="@string/marital_status"
+                    android:textColor="@color/secondaryText"
+                    android:textSize="?textSizeSmall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_gov"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:background="@drawable/edit_text_bg"
-        android:padding="@dimen/margin_medium"
-        app:layout_constraintTop_toBottomOf="@id/cl_marital_status">
+                <Spinner
+                    android:id="@+id/sp_marital_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:popupBackground="@color/splash_bg"
+                    app:layout_constraintTop_toBottomOf="@id/tv_marital_status" />
 
-        <TextView
-            android:id="@+id/tv_gov"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/hanimation_regular"
-            android:text="@string/government_"
-            android:textColor="@color/secondaryText"
-            android:textSize="?textSizeSmall"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_spinner_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Spinner
-            android:id="@+id/sp_gov"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:popupBackground="@color/splash_bg"
-            app:layout_constraintTop_toBottomOf="@id/tv_gov" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/rounded_white_bg"
+                android:padding="@dimen/margin_medium"
+                app:layout_constraintTop_toBottomOf="@id/cl_marital_status">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_spinner_arrow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_regular"
+                    android:text="@string/email"
+                    android:textColor="@color/secondaryText"
+                    android:textSize="?textSizeSmall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_area"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:background="@drawable/edit_text_bg"
-        android:padding="@dimen/margin_medium"
-        app:layout_constraintTop_toBottomOf="@id/cl_gov">
+                <EditText
+                    android:id="@+id/et_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:background="@null"
+                    android:fontFamily="@font/hanimation_regular"
+                    android:hint="@string/enter_email"
+                    android:inputType="textEmailAddress"
+                    android:longClickable="false"
+                    android:text="monawhab@gmail.com"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/text_size_medium"
+                    app:layout_constraintEnd_toStartOf="@id/iv_email"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_email" />
 
-        <TextView
-            android:id="@+id/tv_area"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/hanimation_regular"
-            android:text="@string/city_"
-            android:textColor="@color/secondaryText"
-            android:textSize="?textSizeSmall"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/iv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_email"
+                    android:tint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Spinner
-            android:id="@+id/sp_area"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            android:popupBackground="@color/splash_bg"
-            app:layout_constraintTop_toBottomOf="@id/tv_area" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_spinner_arrow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </ScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/b_skip"

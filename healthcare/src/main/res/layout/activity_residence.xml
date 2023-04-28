@@ -12,16 +12,180 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_enter_national_id_back"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:text="@string/enter_id_back"
-        android:fontFamily="@font/hanimation_arabic_medium"
-        android:textColor="@color/secondaryText"
-        android:textSize="?textSizeMedium"
-        app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/b_skip"
+        app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_holder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_gov"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/edit_text_bg"
+                android:padding="@dimen/margin_medium"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_gov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_regular"
+                    android:text="@string/government_"
+                    android:textColor="@color/secondaryText"
+                    android:textSize="?textSizeSmall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/sp_gov"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:popupBackground="@color/splash_bg"
+                    app:layout_constraintTop_toBottomOf="@id/tv_gov" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_spinner_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/edit_text_bg"
+                android:padding="@dimen/margin_medium"
+                app:layout_constraintTop_toBottomOf="@id/cl_gov">
+
+                <TextView
+                    android:id="@+id/tv_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_regular"
+                    android:text="@string/city_"
+                    android:textColor="@color/secondaryText"
+                    android:textSize="?textSizeSmall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/sp_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:popupBackground="@color/splash_bg"
+                    app:layout_constraintTop_toBottomOf="@id/tv_area" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_spinner_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_residence_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:fontFamily="@font/hanimation_regular"
+                android:text="@string/residence_status"
+                android:textColor="@color/secondaryText"
+                android:textSize="?textSizeMedium"
+                app:layout_constraintTop_toBottomOf="@id/cl_area" />
+
+            <RadioGroup
+                android:id="@+id/rgResidenceType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/tv_residence_status">
+
+                <LinearLayout
+                    android:id="@+id/ll_owned"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:background="@drawable/edit_text_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_medium">
+
+                    <RadioButton
+                        android:id="@+id/rb_owned"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_medium"
+                        android:buttonTint="@color/orange"
+                        android:checked="true"
+                        android:fontFamily="@font/hanimation_regular"
+                        android:text="@string/residence_owned"
+                        android:textSize="?textSizeMedium" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_rent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:background="@drawable/edit_text_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_medium">
+
+                    <RadioButton
+                        android:id="@+id/rb_rent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_medium"
+                        android:buttonTint="@color/orange"
+                        android:fontFamily="@font/hanimation_regular"
+                        android:text="@string/residence_rent"
+                        android:textSize="?textSizeMedium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_family"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:background="@drawable/edit_text_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_medium">
+
+                    <RadioButton
+                        android:id="@+id/rb_family"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_medium"
+                        android:buttonTint="@color/orange"
+                        android:fontFamily="@font/hanimation_regular"
+                        android:text="@string/residence_family"
+                        android:textSize="?textSizeMedium" />
+                </LinearLayout>
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/b_skip"
