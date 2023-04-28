@@ -5,17 +5,18 @@ import android.os.Bundle
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityDependantsBinding
+import com.neqabty.healthcare.databinding.ActivityReferenceNumberBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
-    override fun getViewBinding() = ActivityDependantsBinding.inflate(layoutInflater)
+class ReferenceNumberActivity : BaseActivity<ActivityReferenceNumberBinding>() {
+    override fun getViewBinding() = ActivityReferenceNumberBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(R.string.dependants)
+        setupToolbar(R.string.reference_number)
         initializeViews()
     }
 
@@ -33,7 +34,7 @@ class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
     private fun navigate() {
         val mainIntent = Intent(
             this,
-            ReferenceNumberActivity::class.java
+            EmploymentDetails1Activity::class.java
         )
         startActivity(mainIntent)
         finish()

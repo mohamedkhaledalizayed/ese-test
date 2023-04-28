@@ -8,14 +8,14 @@ import com.neqabty.healthcare.databinding.ActivityDependantsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
+class EmploymentDetails1Activity : BaseActivity<ActivityDependantsBinding>() {
     override fun getViewBinding() = ActivityDependantsBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(R.string.dependants)
+        setupToolbar(R.string.employment_details)
         initializeViews()
     }
 
@@ -33,7 +33,7 @@ class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
     private fun navigate() {
         val mainIntent = Intent(
             this,
-            ReferenceNumberActivity::class.java
+            EmploymentDetails2Activity::class.java
         )
         startActivity(mainIntent)
         finish()

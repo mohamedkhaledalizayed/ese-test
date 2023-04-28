@@ -395,6 +395,14 @@
     <string name="residence_family">بيت عائلة</string>
     <string name="dependants">الأفراد</string>
     <string name="dependants_num">كم عدد الأفراد المسؤولة منك؟</string>
+    <string name="reference_number">رقم آخر</string>
+    <string name="enter_reference_number">برجاء ادخال رقم اخر</string>
+    <string name="employment_details">تفاصيل الوظيفة</string>
+    <string name="employment_type">نوع الوظيفة</string>
+    <string name="employment_employee">موظف</string>
+    <string name="employment_private">عمل خاص</string>
+    <string name="employment_freelance">عمل حر</string>
+    <string name="employment_none">لايعمل</string>
 
 
     <!--/////////////////////////////Home/////////////////////////////////////////-->
