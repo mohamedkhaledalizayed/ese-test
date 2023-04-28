@@ -4,18 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.databinding.ActivityUploadIdBackBinding
+import com.neqabty.healthcare.databinding.ActivityResidenceBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
-    override fun getViewBinding() = ActivityUploadIdBackBinding.inflate(layoutInflater)
+class ResidenceActivity : BaseActivity<ActivityResidenceBinding>() {
+    override fun getViewBinding() = ActivityResidenceBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(R.string.complete_profile)
+        setupToolbar(R.string.residence)
         initializeViews()
     }
 
@@ -33,7 +33,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
     private fun navigate() {
         val mainIntent = Intent(
             this,
-            ReviewYourDataActivity::class.java
+            getTheNextActivityFromSignup()
         )
         startActivity(mainIntent)
         finish()

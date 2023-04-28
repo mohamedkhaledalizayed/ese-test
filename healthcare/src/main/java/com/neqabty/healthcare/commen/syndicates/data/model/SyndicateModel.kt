@@ -21,10 +21,19 @@ data class SyndicateModel(
     val registrationNotes: String? = "",
     @SerializedName("requirements")
     val requirements: List<Requirement> = listOf(),
+    @SerializedName("entity_validations")
+    val entityValidations: List<EntityValidation> = listOf(),
     @SerializedName("services")
     val services: List<Service> = listOf(),
     @SerializedName("type")
     val type: Type = Type(),
     @SerializedName("updated_at")
     val updatedAt: String = ""
+)
+
+data class EntityValidation(
+    @SerializedName("validation_name")
+    val validationName: String,
+    @SerializedName("value")
+    val value: Boolean
 )

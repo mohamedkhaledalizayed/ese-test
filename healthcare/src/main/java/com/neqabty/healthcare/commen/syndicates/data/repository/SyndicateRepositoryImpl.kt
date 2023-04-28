@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.commen.syndicates.data.repository
 
 import com.neqabty.healthcare.commen.syndicates.data.model.*
+import com.neqabty.healthcare.commen.syndicates.data.model.EntityValidation
 import com.neqabty.healthcare.commen.syndicates.data.source.SyndicateDS
 import com.neqabty.healthcare.commen.syndicates.domain.entity.*
 import com.neqabty.healthcare.commen.syndicates.domain.repository.SyndicateRepository
@@ -27,6 +28,7 @@ fun SyndicateModel.toSyndicateEntity(): SyndicateEntity {
         name,
         registrationNotes ?:"",
         requirements = requirements.map { it.toRequirementEntity() },
+        entityValidations = entityValidations.map { com.neqabty.healthcare.commen.syndicates.domain.entity.EntityValidation(it.validationName, it.value)},
         services = services.map { it.toServiceEntity() },
         type = type.toTypeEntity(),
         updatedAt

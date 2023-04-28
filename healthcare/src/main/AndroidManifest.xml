@@ -93,18 +93,24 @@
             android:exported="false" />
         <activity
             android:name=".commen.onboarding.signup.view.SigninDoneActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".commen.onboarding.contact.UploadIdFrontActivity"
             android:exported="false" />
         <activity
             android:name=".commen.onboarding.contact.UploadIdBackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".commen.onboarding.contact.ReviewYourDataActivity"
+            android:exported="true">
+<!--                        <intent-filter>-->
+<!--                            <action android:name="android.intent.action.MAIN" />-->
+
+<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                        </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".commen.onboarding.contact.ResidenceActivity"
             android:exported="false" />
         <activity
             android:name=".core.home_syndicates.view.SyndicatesHomeActivity"

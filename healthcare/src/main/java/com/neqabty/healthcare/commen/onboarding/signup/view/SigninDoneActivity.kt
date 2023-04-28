@@ -26,7 +26,7 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
             navigate()
         }
 
-        binding.bCompleteProfile.setOnClickListener {
+        binding.bNext.setOnClickListener {
             val bottomSheetFragment = ContactTermsBottomSheet()
             bottomSheetFragment.onActionListener = object: ContactTermsBottomSheet.OnActionListener{
                 override fun onAcceptListener() {

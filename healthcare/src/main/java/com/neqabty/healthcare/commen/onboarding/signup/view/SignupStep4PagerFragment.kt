@@ -45,25 +45,28 @@ class SignupStep4PagerFragment : Fragment() {
     }
 
     private fun initializeViews() {
+        setAllViewsInvisible()
         binding.tvRegisterIn.text =
             getString(R.string.register_in).plus(" ").plus(SignupData.syndicateName)
 
         if (SignupData.syndicateID == Constants.NEQABTY_CODE) {
-            binding.clMembershipNumber.visibility = View.GONE
             binding.clName.visibility = View.VISIBLE
+            binding.clEmail.visibility = View.VISIBLE
             binding.clPassword.visibility = View.VISIBLE
             binding.clPasswordConfirmation.visibility = View.VISIBLE
             binding.ivPasswordRules.visibility = View.VISIBLE
             binding.tvPasswordRules.visibility = View.VISIBLE
             binding.tvPasswordReset.visibility = View.VISIBLE
-        } else {
+        }
+        val entityValidationsList =
+            SignupData.syndicatesList.findLast { it.code == SignupData.syndicateID }?.entityValidations
+
+        if (entityValidationsList?.find { it.validationName == "has_membership_id" }?.value == true) {
             binding.clMembershipNumber.visibility = View.VISIBLE
-            binding.clName.visibility = View.GONE
-            binding.clPassword.visibility = View.GONE
-            binding.clPasswordConfirmation.visibility = View.GONE
-            binding.ivPasswordRules.visibility = View.GONE
-            binding.tvPasswordRules.visibility = View.GONE
-            binding.tvPasswordReset.visibility = View.GONE
+        }
+
+        if (entityValidationsList?.find { it.validationName == "has_national_id" }?.value == true) {
+            binding.clNationalId.visibility = View.VISIBLE
         }
 
         binding.tvPasswordRules.setOnClickListener {
@@ -76,13 +79,25 @@ class SignupStep4PagerFragment : Fragment() {
             binding.etPasswordConfirmation.setText("")
         }
 
-        binding.ivPassword.setOnClickListener{
+        binding.ivPassword.setOnClickListener {
             showHidePassword(it)
         }
 
-        binding.ivPasswordConfirmation.setOnClickListener{
+        binding.ivPasswordConfirmation.setOnClickListener {
             showHideConfirmPassword(it)
         }
+    }
+
+    private fun setAllViewsInvisible() {
+        binding.clName.visibility = View.GONE
+        binding.clMembershipNumber.visibility = View.GONE
+        binding.clNationalId.visibility = View.GONE
+        binding.clEmail.visibility = View.GONE
+        binding.clPassword.visibility = View.GONE
+        binding.clPasswordConfirmation.visibility = View.GONE
+        binding.ivPasswordRules.visibility = View.GONE
+        binding.tvPasswordRules.visibility = View.GONE
+        binding.tvPasswordReset.visibility = View.GONE
     }
 
     fun syndicateSignup() {
@@ -204,7 +219,6 @@ class SignupStep4PagerFragment : Fragment() {
         startActivity(mainIntent)
         requireActivity().finish()
     }
-
 
 
     fun showHidePassword(view: View) {
