@@ -29,6 +29,10 @@ class PickUpImageBottomSheet : BottomSheetDialogFragment() {
 
         binding.closeBtn.setOnClickListener { dialog.dismiss() }
 
+        val activity = requireActivity() as ChefaaHomeActivity
+        binding.cameraContainer.setOnClickListener { activity.onCameraSelected() }
+        binding.galleryContainer.setOnClickListener { activity.onGallerySelected() }
+
     }
 
     }
