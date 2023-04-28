@@ -4,12 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.databinding.ActivityDependantsBinding
+import com.neqabty.healthcare.databinding.ActivityEmploymentDetailsThreeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class EmploymentDetails3Activity : BaseActivity<ActivityDependantsBinding>() {
-    override fun getViewBinding() = ActivityDependantsBinding.inflate(layoutInflater)
+class EmploymentDetails3Activity : BaseActivity<ActivityEmploymentDetailsThreeBinding>() {
+    override fun getViewBinding() = ActivityEmploymentDetailsThreeBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

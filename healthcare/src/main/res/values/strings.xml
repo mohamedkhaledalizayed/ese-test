@@ -403,6 +403,11 @@
     <string name="employment_private">عمل خاص</string>
     <string name="employment_freelance">عمل حر</string>
     <string name="employment_none">لايعمل</string>
+    <string name="company_name">اسم الشركة</string>
+    <string name="company_field">المجال</string>
+    <string name="employment_title">المسمى الوظيفي</string>
+    <string name="company_years">عدد السنين</string>
+    <string name="company_salary">المرتب</string>
 
 
     <!--/////////////////////////////Home/////////////////////////////////////////-->
