@@ -1,6 +1,5 @@
 package com.neqabty.healthcare.mega.payment.domain.interactors
 
-import com.neqabty.healthcare.mega.payment.data.model.PaymentBody
 import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.healthcare.mega.payment.domain.repository.PaymentRepository
 import kotlinx.coroutines.flow.Flow

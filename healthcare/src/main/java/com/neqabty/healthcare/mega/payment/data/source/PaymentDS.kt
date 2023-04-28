@@ -2,7 +2,6 @@ package com.neqabty.healthcare.mega.payment.data.source
 
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.mega.payment.data.api.PaymentApi
-import com.neqabty.healthcare.mega.payment.data.model.PaymentBody
 import com.neqabty.healthcare.mega.payment.data.model.branches.EntityBranche
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.ReceiptResponse
 import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentModel

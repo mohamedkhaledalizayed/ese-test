@@ -1,13 +1,11 @@
 package com.neqabty.healthcare.mega.payment.data.repository
 
 
-import com.neqabty.healthcare.mega.payment.data.model.PaymentBody
 import com.neqabty.healthcare.mega.payment.data.model.branches.EntityBranche
 import com.neqabty.healthcare.mega.payment.data.model.branches.EntityModel
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.*
 import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentModel
 import com.neqabty.healthcare.mega.payment.data.model.paymentstatus.PaymentStatusModel
-import com.neqabty.healthcare.sustainablehealth.payment.data.model.paymentmethods.PaymentMethodModel
 import com.neqabty.healthcare.mega.payment.data.model.services.*
 import com.neqabty.healthcare.mega.payment.data.model.servicesaction.ServiceAction
 import com.neqabty.healthcare.mega.payment.data.source.PaymentDS
@@ -19,7 +17,6 @@ import com.neqabty.healthcare.mega.payment.domain.entity.paymentstatus.PaymentSt
 import com.neqabty.healthcare.mega.payment.domain.entity.serviceactions.ServiceActionsEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.services.*
 import com.neqabty.healthcare.mega.payment.domain.repository.PaymentRepository
-import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
@@ -131,7 +128,7 @@ fun Receipt.toReceiptEntity(): ReceiptEntity{
         delayFine = delayFine,
         netAmount = netAmount,
         fees = fees,
-        totalPrice = totalPrice
+        totalPrice = totalPrice ?: total_price
     )
 }
 

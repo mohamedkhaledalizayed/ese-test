@@ -3,7 +3,7 @@ package com.neqabty.healthcare.mega.payment.data.model
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 @Keep
-class PaymentBody (
+class PaymentMorshedinBody (
     @SerializedName("service")
     val serviceCode: String = "",
     @SerializedName("service_action")

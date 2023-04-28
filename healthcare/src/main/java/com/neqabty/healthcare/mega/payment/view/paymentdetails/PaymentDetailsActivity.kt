@@ -16,6 +16,7 @@ import com.google.gson.Gson
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.AGRI_CODE
 import com.neqabty.healthcare.core.data.Constants.NATURAL_THERAPY_CODE
 import com.neqabty.healthcare.core.data.Constants.SANDBOX
@@ -110,7 +111,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                     sharedPreferences.membershipId
                                 )
 
-                            totalAmount = resource.data.receipt.totalPrice.toInt()
+                            totalAmount = resource.data.receipt.totalPrice?.toInt() ?: resource.data.receipt.total_price.toInt()
 
                             deliveryMethodHomeId = resource.data.deliveryMethods.filter { it.methodId == 1 }[0].id
                             deliveryMethodHomePrice = resource.data.deliveryMethods.filter { it.methodId == 1 }[0].price
@@ -137,7 +138,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                 resource.data.receipt.delayFine.toString() +
                                         "  " + resources.getString(R.string.egp)
                             binding.totalValue.text =
-                                resource.data.receipt.totalPrice.toString() +
+                                resource.data.receipt.netAmount.toString() +
                                         "  " + resources.getString(R.string.egp)
 
                         }
@@ -270,13 +271,13 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                 address = binding.address.text.toString()
             }
 
-            if (deliveryMethod == deliveryMethodHomeId && address.isEmpty()) {
+            if (deliveryMethod == deliveryMethodHomeId && address.isEmpty() && sharedPreferences.code != AGRI_CODE) {
                 Toast.makeText(this, resources.getString(R.string.enter_add), Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
             }
 
-            if (deliveryMethod == deliveryMethodBranchId && binding.spBranches.selectedItemPosition == 0) {
+            if (deliveryMethod == deliveryMethodBranchId && binding.spBranches.selectedItemPosition == 0 && sharedPreferences.code != AGRI_CODE) {
                 Toast.makeText(this, resources.getString(R.string.select_branch), Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
@@ -295,35 +296,51 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                 binding.btnNext.isEnabled = false
 
                 if (deliveryMethod == deliveryMethodHomeId){
-                    if (sharedPreferences.code == NATURAL_THERAPY_CODE){
-                        paymentViewModel.getPaymentInfo(
-                            PaymentNaturalBody(
-                                serviceCode = serviceCode,
-                                serviceActionCode = serviceActionCode,
-                                paymentMethod = paymentMethod,
-                                address = address,
-                                deliveryMethod = deliveryMethodHomeId,
-                                deliveryMobile = binding.mobile.text.toString(),
-                                deliveryNotes = binding.notes.text.toString()
+                    when (sharedPreferences.code) {
+                        NATURAL_THERAPY_CODE -> {
+                            paymentViewModel.getPaymentInfo(
+                                PaymentNaturalBody(
+                                    serviceCode = serviceCode,
+                                    serviceActionCode = serviceActionCode,
+                                    paymentMethod = paymentMethod,
+                                    address = address,
+                                    deliveryMethod = deliveryMethodHomeId,
+                                    deliveryMobile = binding.mobile.text.toString(),
+                                    deliveryNotes = binding.notes.text.toString()
+                                )
                             )
-                        )
-                    }else{
-                        paymentViewModel.getPaymentInfo(
-                            PaymentBody(
-                                serviceCode = serviceCode,
-                                serviceActionCode = serviceActionCode,
-                                paymentMethod = paymentMethod,
-                                address = address,
-                                membershipId = sharedPreferences.membershipId.toInt(),
-                                deliveryMethod = deliveryMethodHomeId,
-                                deliveryMobile = binding.mobile.text.toString(),
-                                deliveryNotes = binding.notes.text.toString()
+                        }
+                        AGRI_CODE -> {
+                            paymentViewModel.getPaymentInfo(
+                                PaymentAgriBody(
+                                    serviceCode = serviceCode,
+                                    serviceActionCode = serviceActionCode,
+                                    paymentMethod = paymentMethod,
+                                    membershipId = sharedPreferences.membershipId.toInt(),
+                                    deliveryMethod = deliveryMethodBranchId,
+                                    deliveryMobile = binding.mobile.text.toString(),
+                                    deliveryNotes = binding.notes.text.toString()
+                                )
                             )
-                        )
+                        }
+                        else -> {
+                            paymentViewModel.getPaymentInfo(
+                                PaymentMorshedinBody(
+                                    serviceCode = serviceCode,
+                                    serviceActionCode = serviceActionCode,
+                                    paymentMethod = paymentMethod,
+                                    address = address,
+                                    membershipId = sharedPreferences.membershipId.toInt(),
+                                    deliveryMethod = deliveryMethodHomeId,
+                                    deliveryMobile = binding.mobile.text.toString(),
+                                    deliveryNotes = binding.notes.text.toString()
+                                )
+                            )
+                        }
                     }
                 }else{
                     paymentViewModel.getPaymentInfo(
-                        PaymentBody(
+                        PaymentMorshedinBody(
                             serviceCode = serviceCode,
                             serviceActionCode = serviceActionCode,
                             paymentMethod = paymentMethod,
@@ -405,9 +422,14 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     }
 
     private fun updateTotal() {
-        binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
-        binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
-        binding.totValue.text = "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
+        if (sharedPreferences.code == AGRI_CODE){
+            binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
+            binding.totValue.text = "$totalAmount  ${resources.getString(R.string.egp)}"
+        }else{
+            binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
+            binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
+            binding.totValue.text = "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
+        }
     }
 
     private fun showDialog(message: String) {
