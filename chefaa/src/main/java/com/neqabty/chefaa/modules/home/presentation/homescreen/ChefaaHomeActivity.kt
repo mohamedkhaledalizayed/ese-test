@@ -28,9 +28,12 @@ import com.neqabty.chefaa.core.data.Constants.selectedAddress
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.core.utils.PhotoUI
 import com.neqabty.chefaa.databinding.ChefaaActivityHomeBinding
+import com.neqabty.chefaa.modules.CartActivity
 import com.neqabty.chefaa.modules.address.presentation.view.adressscreen.AddressesActivity
+import com.neqabty.chefaa.modules.orders.domain.entities.OrderEntity
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.chefaa.modules.orders.presentation.orderbynote.OrderByNoteActivity
+import com.neqabty.chefaa.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
 import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersAdapter
 import com.neqabty.chefaa.modules.products.presentation.SearchActivity
@@ -41,13 +44,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
+class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSelection {
 
     private val REQUEST_CAMERA = 0
     private val SELECT_FILE = 1
     private var photoFileName = ""
     lateinit var photoFileURI: Uri
-    private var name = ""
+    private val  bottomSheetFragment: PickUpImageBottomSheet by lazy { PickUpImageBottomSheet() }
     private val mAdapter: OrdersAdapter = OrdersAdapter()
     private val homeViewModel: HomeViewModel by viewModels()
     override fun getViewBinding() = ChefaaActivityHomeBinding.inflate(layoutInflater)
@@ -72,6 +75,14 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             .build()
 
         binding.ordersRecycler.adapter = mAdapter
+        mAdapter.onItemClickListener = object :
+            OrdersAdapter.OnItemClickListener {
+            override fun setOnItemClickListener() {
+                val intent: Intent = Intent(this@ChefaaHomeActivity, OrderDetailsActivity::class.java)
+//                intent.putExtra("orderId", order)
+                startActivity(intent)
+            }
+        }
 //        dialog.show()
 //        homeViewModel.userRegistered.observe(this) {
 //            if (it.status) {
@@ -97,6 +108,12 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
         binding.writeOrderContainer.setOnClickListener {
             startActivity(Intent(this,OrderByNoteActivity::class.java))
         }
+
+        binding.cart.setOnClickListener {
+            startActivity(Intent(this@ChefaaHomeActivity, CartActivity::class.java))
+        }
+
+        binding.backBtn.setOnClickListener { finish() }
 //        binding.orders.setOnClickListener {
 //            startActivity(Intent(this,OrdersActivity::class.java))
 //        }
@@ -115,37 +132,6 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
 //            call("0221294341")
 //        }
 
-    }
-
-    private fun call(phone: String){
-        val intent = Intent(Intent.ACTION_DIAL)
-        intent.data = Uri.parse("tel:$phone")
-        try {
-            startActivity(intent)
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        checkTime()
-//        if (selectedAddress != null){
-//            binding.selectAddress.text = selectedAddress?.address
-//        }else{
-//            binding.selectAddress.text = "إختر عنوان"
-//        }
-    }
-
-    private fun checkTime(){
-        val c = Calendar.getInstance()
-        val timeOfDay = c[Calendar.HOUR_OF_DAY]
-
-//        if (timeOfDay < 12) {
-//            binding.hello.text = "صباح الخير, $name"
-//        } else{
-//            binding.hello.text = "مساء الخير, $name"
-//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -192,21 +178,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
     //region photos
 
     private fun addPhoto() {
-//        val pictureDialog = AlertDialog.Builder(this)
-//        pictureDialog.setTitle(getString(R.string.select))
-//        val pictureDialogItems = arrayOf(getString(R.string.gallery), getString(R.string.camera))
-//        pictureDialog.setItems(pictureDialogItems
-//        ) { dialog, which ->
-//            when (which) {
-//                0 -> galleryIntent()
-//                1 -> grantCameraPermission()
-//            }
-//        }
-//        pictureDialog.show()
-
-        val bottomSheetFragment = PickUpImageBottomSheet()
         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
-//        galleryIntent()
     }
 
     private fun galleryIntent() {
@@ -215,7 +187,6 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
         intent.action = Intent.ACTION_GET_CONTENT //
         startActivityForResult(Intent.createChooser(intent, getString(R.string.select_file)), SELECT_FILE)
     }
-
 
     fun grantCameraPermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -319,6 +290,16 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             ".jpg", /* suffix */
             storageDir /* directory */
         )
+    }
+
+    override fun onCameraSelected() {
+        grantCameraPermission()
+        bottomSheetFragment.dismiss()
+    }
+
+    override fun onGallerySelected() {
+        galleryIntent()
+        bottomSheetFragment.dismiss()
     }
 
     //endregion

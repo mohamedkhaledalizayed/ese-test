@@ -38,6 +38,9 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
+        viewHolder.binding.root.setOnClickListener {
+            onItemClickListener?.setOnItemClickListener()
+        }
     }
 
     override fun getItemCount() = 10
@@ -56,7 +59,7 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-        fun setOnItemClickListener(item: OrderEntity)
+        fun setOnItemClickListener()
     }
 
     class ViewHolder(val binding: OrderLayoutItemBinding) :
