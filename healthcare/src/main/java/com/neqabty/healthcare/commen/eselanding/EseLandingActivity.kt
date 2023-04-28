@@ -79,6 +79,19 @@ class EseLandingActivity : BaseActivity<ActivityEseLandingBinding>() {
             }
         }
 
+        binding.itemDoctor.setOnClickListener {
+            if (sharedPreferences.isAuthenticated) {
+                eseLandingViewModel.getUrl(
+                    phone = sharedPreferences.mobile,
+                    type = "doctors",
+                    name = sharedPreferences.name,
+                    entityCode = sharedPreferences.code
+                )
+                title = "حجز أطباء"
+            } else {
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
+        }
 
         eseLandingViewModel.clinidoUrl.observe(this){
             when(it.status){
