@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/rounded_white_bg"
+                android:background="@drawable/edit_text_bg"
                 android:padding="@dimen/margin_medium"
                 app:layout_constraintTop_toBottomOf="@id/tv_reference_number">
 
@@ -88,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/rounded_white_bg"
+                android:background="@drawable/edit_text_bg"
                 android:padding="@dimen/margin_medium"
                 app:layout_constraintTop_toBottomOf="@id/cl_name">
 

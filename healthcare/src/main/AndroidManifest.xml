@@ -79,11 +79,11 @@
         <activity
             android:name=".commen.splash.view.SplashActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".commen.onboarding.intro.view.IntroActivity"
@@ -112,13 +112,7 @@
             android:exported="false"/>
         <activity
             android:name=".commen.onboarding.contact.view.ReferenceNumberActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".commen.onboarding.contact.view.EmploymentDetails1Activity"
             android:exported="false"/>

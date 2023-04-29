@@ -12,95 +12,109 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_signin_done"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:text="@string/signin_done"
-        android:fontFamily="@font/hanimation_arabic_medium"
-        android:textColor="@color/secondaryText"
-        android:textSize="?textSizeMedium"
-        app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/b_home"
+        app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
 
-    <TextView
-        android:id="@+id/tv_contact_benefits"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:text="@string/contact_benefits"
-        android:fontFamily="@font/hanimation_regular"
-        android:textColor="@color/secondaryText"
-        android:textSize="?textSizeMedium"
-        app:layout_constraintTop_toBottomOf="@id/tv_signin_done" />
-
-    <TextView
-        android:id="@+id/tv_enter_national_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:text="@string/enter_nat_id"
-        android:fontFamily="@font/hanimation_regular"
-        android:textColor="@color/secondaryText"
-        android:textSize="?textSizeMedium"
-        app:layout_constraintTop_toBottomOf="@id/tv_contact_benefits" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_national_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:background="@drawable/rounded_white_bg"
-        android:padding="@dimen/margin_medium"
-        app:layout_constraintTop_toBottomOf="@id/tv_enter_national_id">
-
-        <TextView
-            android:id="@+id/tv_national_id"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_holder"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/hanimation_regular"
-            android:text="@string/national_id"
-            android:textColor="@color/secondaryText"
-            android:textSize="?textSizeSmall"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/et_national_id"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginEnd="@dimen/margin_medium"
-            android:background="@null"
-            android:fontFamily="@font/hanimation_regular"
-            android:hint="@string/enter_nat_id"
-            android:inputType="number"
-            android:longClickable="false"
-            android:maxLength="14"
-            android:textAlignment="viewStart"
-            android:textSize="@dimen/text_size_medium"
-            app:layout_constraintEnd_toStartOf="@id/iv_national_id"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_national_id" />
+            <TextView
+                android:id="@+id/tv_signin_done"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:fontFamily="@font/hanimation_arabic_medium"
+                android:text="@string/signin_done"
+                android:textColor="@color/secondaryText"
+                android:textSize="?textSizeMedium"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/iv_national_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_national_id"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_contact_benefits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:fontFamily="@font/hanimation_regular"
+                android:text="@string/contact_benefits"
+                android:textColor="@color/secondaryText"
+                android:textSize="?textSizeMedium"
+                app:layout_constraintTop_toBottomOf="@id/tv_signin_done" />
 
-    <ImageView
-        android:id="@+id/iv_contact"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_large"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_contact"
-        app:layout_constraintTop_toBottomOf="@id/cl_national_id" />
+            <TextView
+                android:id="@+id/tv_enter_national_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:fontFamily="@font/hanimation_regular"
+                android:text="@string/enter_nat_id"
+                android:textColor="@color/secondaryText"
+                android:textSize="?textSizeMedium"
+                app:layout_constraintTop_toBottomOf="@id/tv_contact_benefits" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_national_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/edit_text_bg"
+                android:padding="@dimen/margin_medium"
+                app:layout_constraintTop_toBottomOf="@id/tv_enter_national_id">
+
+                <TextView
+                    android:id="@+id/tv_national_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/hanimation_regular"
+                    android:text="@string/national_id"
+                    android:textColor="@color/secondaryText"
+                    android:textSize="?textSizeSmall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_national_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:background="@null"
+                    android:fontFamily="@font/hanimation_regular"
+                    android:hint="@string/enter_nat_id"
+                    android:inputType="number"
+                    android:longClickable="false"
+                    android:maxLength="14"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/text_size_medium"
+                    app:layout_constraintEnd_toStartOf="@id/iv_national_id"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_national_id" />
+
+                <ImageView
+                    android:id="@+id/iv_national_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_national_id"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/iv_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_contact"
+                app:layout_constraintTop_toBottomOf="@id/cl_national_id" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/b_home"

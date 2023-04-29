@@ -25,6 +25,8 @@ class ResidenceActivity : BaseActivity<ActivityResidenceBinding>() {
 
         setupToolbar(R.string.residence)
 
+        initializeViews()
+
 
         residenceViewModel.getLookups()
         residenceViewModel.govList.observe(this){
@@ -50,7 +52,7 @@ class ResidenceActivity : BaseActivity<ActivityResidenceBinding>() {
     }
 
     private fun initializeViews() {
-        initializeSpinners()
+//        initializeSpinners()
 
         binding.bNext.setOnClickListener {
             navigate()

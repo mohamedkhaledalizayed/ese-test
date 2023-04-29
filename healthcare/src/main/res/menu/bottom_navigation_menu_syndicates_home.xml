@@ -20,7 +20,7 @@
     <item
         android:id="@+id/navigation_payments"
         android:icon="@drawable/ic_menu_payments"
-        android:title="@string/payment" />
+        android:title="@string/payments" />
 
     <item
         android:id="@+id/navigation_more"

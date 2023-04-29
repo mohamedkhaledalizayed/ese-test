@@ -60,7 +60,8 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
                 return@setOnClickListener
             }
 
-            createOcr()
+//            createOcr()
+            navigate()
         }
 
         binding.bSkip.setOnClickListener {

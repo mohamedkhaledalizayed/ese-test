@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="@dimen/_5sdp"
-        android:background="@drawable/rounded_white_bg"
+        android:background="@drawable/edit_text_bg"
         android:layout_marginHorizontal="@dimen/margin_large"
         android:layout_marginVertical="@dimen/margin_medium"
         android:padding="@dimen/margin_medium">

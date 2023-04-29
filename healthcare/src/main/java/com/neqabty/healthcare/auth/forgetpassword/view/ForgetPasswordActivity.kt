@@ -10,11 +10,11 @@ import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.forgetpassword.data.model.CheckOTPBody
 import com.neqabty.healthcare.auth.forgetpassword.data.model.SendOTPBody
 import com.neqabty.healthcare.auth.forgetpassword.view.changepassword.ChangePasswordActivity
+import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityForgetPasswordBinding
 import dagger.hilt.android.AndroidEntryPoint

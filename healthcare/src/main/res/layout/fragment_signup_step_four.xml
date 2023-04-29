@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/rounded_white_bg"
+                android:background="@drawable/edit_text_bg"
                 android:padding="@dimen/margin_medium"
                 android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent">
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/rounded_white_bg"
+                android:background="@drawable/edit_text_bg"
                 android:padding="@dimen/margin_medium"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/cl_name">
@@ -130,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/rounded_white_bg"
+                android:background="@drawable/edit_text_bg"
                 android:padding="@dimen/margin_medium"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/cl_membership_number">
@@ -180,7 +180,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/rounded_white_bg"
+                android:background="@drawable/edit_text_bg"
                 android:padding="@dimen/margin_medium"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/cl_national_id">
@@ -230,7 +230,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/rounded_white_bg"
+                android:background="@drawable/edit_text_bg"
                 android:padding="@dimen/margin_medium"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/cl_email">
@@ -279,7 +279,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/rounded_white_bg"
+                android:background="@drawable/edit_text_bg"
                 android:padding="@dimen/margin_medium"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/cl_password">
