@@ -12,7 +12,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <me.relex.circleindicator.CircleIndicator
+    <me.relex.circleindicator.MyCircleIndicator
         android:id="@+id/ci_signup"
         android:layout_width="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_large"
         app:ci_drawable="@drawable/indicator_selected_accent"
+        app:ci_drawable_done="@drawable/indicator_selected_done"
         app:ci_drawable_unselected="@drawable/indicator_unselected"
         app:ci_height="@dimen/_7sdp"
         app:ci_animator="@animator/same_scale_with_alpha"
