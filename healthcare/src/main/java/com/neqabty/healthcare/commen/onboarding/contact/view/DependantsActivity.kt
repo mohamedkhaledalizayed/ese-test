@@ -26,19 +26,19 @@ class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
 
         binding.clDependentNum0.setOnClickListener{
             clearAllSelections()
-            selectDependatsNumber(binding.ivDependentNum0, binding.tvDependantsNum0)
+            selectDependantsNumber(binding.ivDependentNum0, binding.tvDependantsNum0)
         }
         binding.clDependentNum1.setOnClickListener{
             clearAllSelections()
-            selectDependatsNumber(binding.ivDependentNum1, binding.tvDependantsNum1)
+            selectDependantsNumber(binding.ivDependentNum1, binding.tvDependantsNum1)
         }
         binding.clDependentNum2.setOnClickListener{
             clearAllSelections()
-            selectDependatsNumber(binding.ivDependentNum2, binding.tvDependantsNum2)
+            selectDependantsNumber(binding.ivDependentNum2, binding.tvDependantsNum2)
         }
         binding.clDependentNum3.setOnClickListener{
             clearAllSelections()
-            selectDependatsNumber(binding.ivDependentNum3, binding.tvDependantsNum3)
+            selectDependantsNumber(binding.ivDependentNum3, binding.tvDependantsNum3)
         }
 
         binding.bNext.setOnClickListener {
@@ -51,9 +51,9 @@ class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
     }
 
     //region
-    private fun selectDependatsNumber(imageView: ImageView, textView: TextView){
+    private fun selectDependantsNumber(imageView: ImageView, textView: TextView) {
         imageView.setImageDrawable(resources.getDrawable(R.drawable.ellipse_selected))
-        textView.textSize = 30F
+        textView.textSize = 25F
     }
 
     private fun clearAllSelections() {
