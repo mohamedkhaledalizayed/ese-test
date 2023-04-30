@@ -17,18 +17,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.onboarding.intro.view.IntroActivity
 import com.neqabty.healthcare.commen.onboarding.signup.view.SignupActivity
 import com.neqabty.healthcare.core.data.PreferencesHelper
-import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
-import com.neqabty.healthcare.core.home_syndicates.view.SyndicatesHomeActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
-import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
-import com.neqabty.healthcare.news.view.newslist.NewsListActivity
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.selectnetwork.SelectNetworkActivity
 import javax.inject.Inject
 
 
@@ -52,7 +46,6 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         binding.root.findViewById<Toolbar>(R.id.layout_toolbar)
             ?.setNavigationOnClickListener { onBackPressed() }
 
-        progressDialog = Dialog(this)
         window.setBackgroundDrawableResource(R.color.window_bg)
 //        binding.root.fitsSystemWindows = false
         binding.root.setPadding(
@@ -65,7 +58,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        progressDialog!!.dismiss()
+//        progressDialog!!.dismiss()
         binding.root.visibility = View.VISIBLE
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         invalidateOptionsMenu()
@@ -150,14 +143,11 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         progressDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         progressDialog!!.setContentView(R.layout.custom_dialog_progress)
 
-/* Custom setting to change TextView text,Color and Text Size according to your Preference*/
-
-        val progressTv = progressDialog!!.findViewById(R.id.progress_tv) as TextView
-        progressTv.visibility = View.GONE
-        progressTv.text = resources.getString(R.string.loading)
-        progressTv.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryLight))
-        progressTv.textSize = 19F
-
+//        val progressTv = progressDialog!!.findViewById(R.id.progress_tv) as TextView
+//        progressTv.visibility = View.GONE
+//        progressTv.text = resources.getString(R.string.loading)
+//        progressTv.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryLight))
+//        progressTv.textSize = 19F
         progressDialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog!!.setCancelable(false)
     }
@@ -165,7 +155,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
 //        clearClipBoard()
-        progressDialog!!.show()
+//        progressDialog!!.show()
         binding.root.visibility = View.GONE
     }
 
