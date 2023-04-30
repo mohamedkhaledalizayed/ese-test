@@ -283,16 +283,14 @@ class MyBaseCircleIndicator extends LinearLayout {
         }
 
         View currentIndicator;
-        if (mLastPosition <= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
-            bindIndicatorBackground(currentIndicator, mIndicatorUnselectedBackgroundResId,
-                    mIndicatorTintUnselectedColor);
-            mAnimatorIn.setTarget(currentIndicator);
-            mAnimatorIn.start();
-        }
-
         if (mLastPosition >= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
             bindIndicatorBackground(currentIndicator, mIndicatorDoneBackgroundResId,
                     mIndicatorTintDoneColor);
+            mAnimatorIn.setTarget(currentIndicator);
+            mAnimatorIn.start();
+        }else if (mLastPosition <= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
+            bindIndicatorBackground(currentIndicator, mIndicatorUnselectedBackgroundResId,
+                    mIndicatorTintUnselectedColor);
             mAnimatorIn.setTarget(currentIndicator);
             mAnimatorIn.start();
         }
