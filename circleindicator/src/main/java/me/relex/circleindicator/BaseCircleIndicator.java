@@ -14,7 +14,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
@@ -22,7 +21,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.ViewCompat;
 
-class MyBaseCircleIndicator extends LinearLayout {
+class BaseCircleIndicator extends LinearLayout {
 
     private final static int DEFAULT_INDICATOR_WIDTH = 5;
 
@@ -31,11 +30,9 @@ class MyBaseCircleIndicator extends LinearLayout {
     protected int mIndicatorHeight = -1;
 
     protected int mIndicatorBackgroundResId;
-    protected int mIndicatorDoneBackgroundResId;
     protected int mIndicatorUnselectedBackgroundResId;
 
     protected ColorStateList mIndicatorTintColor;
-    protected ColorStateList mIndicatorTintDoneColor;
     protected ColorStateList mIndicatorTintUnselectedColor;
 
     protected Animator mAnimatorOut;
@@ -45,27 +42,26 @@ class MyBaseCircleIndicator extends LinearLayout {
 
     protected int mLastPosition = -1;
 
-    @Nullable
-    private IndicatorCreatedListener mIndicatorCreatedListener;
+    @Nullable private IndicatorCreatedListener mIndicatorCreatedListener;
 
-    public MyBaseCircleIndicator(Context context) {
+    public BaseCircleIndicator(Context context) {
         super(context);
         init(context, null);
     }
 
-    public MyBaseCircleIndicator(Context context, AttributeSet attrs) {
+    public BaseCircleIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public MyBaseCircleIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BaseCircleIndicator(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public MyBaseCircleIndicator(Context context, AttributeSet attrs, int defStyleAttr,
-                                 int defStyleRes) {
+    public BaseCircleIndicator(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
@@ -99,9 +95,6 @@ class MyBaseCircleIndicator extends LinearLayout {
         config.backgroundResId =
                 typedArray.getResourceId(R.styleable.BaseCircleIndicator_ci_drawable,
                         R.drawable.white_radius);
-        config.doneBackgroundId =
-                typedArray.getResourceId(R.styleable.BaseCircleIndicator_ci_drawable_done,
-                        config.backgroundResId);
         config.unselectedBackgroundId =
                 typedArray.getResourceId(R.styleable.BaseCircleIndicator_ci_drawable_unselected,
                         config.backgroundResId);
@@ -129,9 +122,6 @@ class MyBaseCircleIndicator extends LinearLayout {
 
         mIndicatorBackgroundResId =
                 (config.backgroundResId == 0) ? R.drawable.white_radius : config.backgroundResId;
-        mIndicatorDoneBackgroundResId =
-                (config.doneBackgroundId == 0) ? config.backgroundResId
-                        : config.doneBackgroundId;
         mIndicatorUnselectedBackgroundResId =
                 (config.unselectedBackgroundId == 0) ? config.backgroundResId
                         : config.unselectedBackgroundId;
@@ -141,27 +131,23 @@ class MyBaseCircleIndicator extends LinearLayout {
     }
 
     public void tintIndicator(@ColorInt int indicatorColor) {
-        tintIndicator(indicatorColor, indicatorColor, indicatorColor);
+        tintIndicator(indicatorColor, indicatorColor);
     }
 
     public void tintIndicator(@ColorInt int indicatorColor,
-                              @ColorInt int doneIndicatorColor,
-                              @ColorInt int unselectedIndicatorColor) {
+            @ColorInt int unselectedIndicatorColor) {
         mIndicatorTintColor = ColorStateList.valueOf(indicatorColor);
-        mIndicatorTintDoneColor = ColorStateList.valueOf(doneIndicatorColor);
         mIndicatorTintUnselectedColor = ColorStateList.valueOf(unselectedIndicatorColor);
         changeIndicatorBackground();
     }
 
     public void changeIndicatorResource(@DrawableRes int indicatorResId) {
-        changeIndicatorResource(indicatorResId, indicatorResId, indicatorResId);
+        changeIndicatorResource(indicatorResId, indicatorResId);
     }
 
     public void changeIndicatorResource(@DrawableRes int indicatorResId,
-                                        @DrawableRes int indicatorDoneResId,
-                                        @DrawableRes int indicatorUnselectedResId) {
+            @DrawableRes int indicatorUnselectedResId) {
         mIndicatorBackgroundResId = indicatorResId;
-        mIndicatorDoneBackgroundResId = indicatorDoneResId;
         mIndicatorUnselectedBackgroundResId = indicatorUnselectedResId;
         changeIndicatorBackground();
     }
@@ -170,7 +156,7 @@ class MyBaseCircleIndicator extends LinearLayout {
         /**
          * IndicatorCreatedListener
          *
-         * @param view     internal indicator view
+         * @param view internal indicator view
          * @param position position
          */
         void onIndicatorCreated(View view, int position);
@@ -228,13 +214,8 @@ class MyBaseCircleIndicator extends LinearLayout {
                 mImmediateAnimatorOut.setTarget(indicator);
                 mImmediateAnimatorOut.start();
                 mImmediateAnimatorOut.end();
-            } else if (currentPosition > i) {
-                bindIndicatorBackground(indicator, mIndicatorDoneBackgroundResId,
-                        mIndicatorTintDoneColor);
-                mImmediateAnimatorOut.setTarget(indicator);
-                mImmediateAnimatorOut.start();
-                mImmediateAnimatorOut.end();
             } else {
+
                 bindIndicatorBackground(indicator, mIndicatorUnselectedBackgroundResId,
                         mIndicatorTintUnselectedColor);
 
@@ -284,11 +265,6 @@ class MyBaseCircleIndicator extends LinearLayout {
 
         View currentIndicator;
         if (mLastPosition >= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
-            bindIndicatorBackground(currentIndicator, mIndicatorDoneBackgroundResId,
-                    mIndicatorTintDoneColor);
-            mAnimatorIn.setTarget(currentIndicator);
-            mAnimatorIn.start();
-        }else if (mLastPosition <= 0 && (currentIndicator = getChildAt(mLastPosition)) != null) {
             bindIndicatorBackground(currentIndicator, mIndicatorUnselectedBackgroundResId,
                     mIndicatorTintUnselectedColor);
             mAnimatorIn.setTarget(currentIndicator);
@@ -317,9 +293,6 @@ class MyBaseCircleIndicator extends LinearLayout {
             if (i == mLastPosition) {
                 bindIndicatorBackground(currentIndicator, mIndicatorBackgroundResId,
                         mIndicatorTintColor);
-            }else if (i < mLastPosition) {
-                bindIndicatorBackground(currentIndicator, mIndicatorDoneBackgroundResId,
-                        mIndicatorTintDoneColor);
             } else {
                 bindIndicatorBackground(currentIndicator, mIndicatorUnselectedBackgroundResId,
                         mIndicatorTintUnselectedColor);
@@ -328,7 +301,7 @@ class MyBaseCircleIndicator extends LinearLayout {
     }
 
     private void bindIndicatorBackground(View view, @DrawableRes int drawableRes,
-                                         @Nullable ColorStateList tintColor) {
+            @Nullable ColorStateList tintColor) {
         if (tintColor != null) {
             Drawable indicatorDrawable = DrawableCompat.wrap(
                     ContextCompat.getDrawable(getContext(), drawableRes).mutate());
@@ -340,8 +313,7 @@ class MyBaseCircleIndicator extends LinearLayout {
     }
 
     protected static class ReverseInterpolator implements Interpolator {
-        @Override
-        public float getInterpolation(float value) {
+        @Override public float getInterpolation(float value) {
             return Math.abs(1.0f - value);
         }
     }
