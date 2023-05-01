@@ -43,9 +43,9 @@ android {
 //            renderscriptDebuggable false
 //            pseudoLocalesEnabled false
 
-            ndk {
-                abiFilters "armeabi-v7a", "armeabi" // includes ARM SO files only, so no x86 SO file
-            }
+//            ndk {
+//                abiFilters "armeabi-v7a", "armeabi" // includes ARM SO files only, so no x86 SO file
+//            }
         }
         release {
             minifyEnabled true

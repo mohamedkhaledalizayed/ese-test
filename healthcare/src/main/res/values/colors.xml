@@ -31,6 +31,7 @@
 
 
     <color name="colorPrimary">#5d81d4</color>
+    <color name="colorPrimaryAlpha">#CC5D81D4</color>
     <color name="colorPrimaryDark">#5d81d4</color>
     <color name="colorPrimaryLight">#4B90C1</color>
     <color name="colorAccent">#fd883f</color>
