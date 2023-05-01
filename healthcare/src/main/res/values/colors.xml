@@ -35,6 +35,7 @@
     <color name="colorPrimaryDark">#5d81d4</color>
     <color name="colorPrimaryLight">#4B90C1</color>
     <color name="colorAccent">#fd883f</color>
+    <color name="otp_bg">#308B8C</color>
     <color name="primaryText">#001e2f</color>
     <color name="secondaryText">#6b6b6b</color>
     <color name="window_bg">#fbfbfc</color>
