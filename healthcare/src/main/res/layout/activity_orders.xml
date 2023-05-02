@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".modules.orders.presentation.view.orderstatusscreen.OrdersActivity">
+
+        <include
+            android:id="@+id/layout_header"
+            layout="@layout/layout_header" />
+
+        <com.vlonjatg.progressactivity.ProgressRelativeLayout
+            android:id="@+id/progressActivity"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:emptyBackgroundColor="#FFFFFF"
+            app:emptyImageHeight="@dimen/_200sdp"
+            app:emptyImageWidth="@dimen/_200sdp"
+            app:emptyTitleTextColor="@color/black"
+            app:emptyTitleTextSize="@dimen/_5ssp"
+            app:errorBackgroundColor="#FFFFFF"
+            app:errorButtonBackgroundColor="@color/colorPrimary"
+            app:errorButtonTextColor="#FFF"
+            app:errorImageHeight="@dimen/_200sdp"
+            app:errorImageWidth="@dimen/_200sdp"
+            app:errorTitleTextColor="@color/colorPrimary"
+            app:errorTitleTextSize="@dimen/_5ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:loadingBackgroundColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_header"
+            app:loadingProgressBarColor="@color/colorPrimary">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orders_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@color/white"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+             />
+
+        </com.vlonjatg.progressactivity.ProgressRelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -82,13 +82,13 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         //other syndicates
         val syndicateLogo = PDFImageView(applicationContext)
         val syndicateLogoLayoutParam = LinearLayout.LayoutParams(120, 90, 0F)
-        Picasso.get().load(data.imageUrl ?: "").into(syndicateLogo.view)
+//        Picasso.get().load(data.imageUrl ?: "").into(syndicateLogo.view)
         syndicateLogoLayoutParam.setMargins(0, 0, 10, 0)
         syndicateLogo.setLayout(syndicateLogoLayoutParam)
 
-        if (data.entityType != "owner"){
-            horizontalView.addView(syndicateLogo)
-        }
+//        if (data.entityType != "owner"){
+//            horizontalView.addView(syndicateLogo)
+//        }
 
         //neqabty
         val neqabtyLogo = PDFImageView(applicationContext)
@@ -97,9 +97,9 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
         imageLayoutParam.setMargins(0, 0, 10, 0)
         neqabtyLogo.setLayout(imageLayoutParam)
 
-        if (data.serviceCategory == "Health"){
-            horizontalView.addView(neqabtyLogo)
-        }
+//        if (data.serviceCategory == "Health"){
+//            horizontalView.addView(neqabtyLogo)
+//        }
         headerView.addView(horizontalView)
         val lineSeparatorView1 = PDFLineSeparatorView(applicationContext).setBackgroundColor(Color.WHITE)
         headerView.addView(lineSeparatorView1)

@@ -18,10 +18,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
-import com.neqabty.chefaa.core.data.Cart
-import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
+import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
+import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
@@ -38,6 +38,9 @@ import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity
 import com.neqabty.healthcare.news.view.newslist.NewsListActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.core.data.Cart
+import com.neqabty.healthcare.core.data.Constants.cart
+import com.neqabty.healthcare.core.data.Constants.mobileNumber
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,6 +63,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
     private val syndicatesAdapter = NewsAdapter()
     private val listAds = ArrayList<AdEntity>()
     private val list = mutableListOf<CarouselItem>()
+    private var isGuest = false
     override fun getViewBinding() = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +71,9 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
         setContentView(binding.root)
 
-        setupToolbar(title = "${sharedPreferences.syndicateName}")
+        isGuest = intent.getBooleanExtra("isGuest", false)
+        init()
+        setupToolbar(title = "${if (isGuest) intent.getStringExtra("syndicateName") else sharedPreferences.syndicateName}")
         toolbar = binding.toolbar
 
         loading = SpotsDialog.Builder()
@@ -147,7 +153,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
 
         //Start of Syndicates News
-        homeViewModel.getSyndicateNews("${sharedPreferences.code}")
+        homeViewModel.getSyndicateNews(if (isGuest) intent.getStringExtra("code")!! else sharedPreferences.code)
         homeViewModel.syndicatesNews.observe(this) {
             it?.let { resource ->
                 when (resource.status) {
@@ -203,8 +209,12 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
         binding.ivSubscription.setOnClickListener {
             if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
-                val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
-                startActivity(intent)
+                if (!isGuest){
+                    val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(this@MegaHomeActivity, "هذه الخدمة متاحة لاعضاء النقابة فقط.", Toast.LENGTH_LONG).show()
+                }
             }else{
                 askForLogin(resources.getString(R.string.not_found))
             }
@@ -215,9 +225,9 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
         }
 
         binding.medicineImage.setOnClickListener {
-            if (sharedPreferences.isAuthenticated){
+            if (sharedPreferences.isAuthenticated) {
                 openTermsDialog()
-            }else{
+            } else {
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
         }
@@ -238,10 +248,15 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
         }
 
         binding.doctorImage.setOnClickListener {
-            if (sharedPreferences.isAuthenticated){
-                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors")
+            if (sharedPreferences.isAuthenticated) {
+                homeViewModel.getUrl(
+                    phone = sharedPreferences.mobile,
+                    type = "doctors",
+                    name = sharedPreferences.name,
+                    entityCode = sharedPreferences.code
+                )
                 title = "حجز أطباء"
-            }else{
+            } else {
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
         }
@@ -262,6 +277,10 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                         intent.putExtra("url", it.data.url)
                         intent.putExtra("title", title)
                         startActivity(intent)
+                    }else if (it.data.status_code == 405) {
+                        mobileNumber = sharedPreferences.mobile
+                        startActivity(Intent(this, VerifyUserActivity::class.java))
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
                     }else{
                         Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
                     }
@@ -337,7 +356,11 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
-            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+            homeViewModel.getUrl(
+                phone = sharedPreferences.mobile,
+                type = "pharmacy",
+                name = sharedPreferences.name,
+                entityCode = sharedPreferences.code)
             title = "العلاج الشهرى"
         }
         alertDialog.setButton(
@@ -437,8 +460,12 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
             R.id.payment -> {
                 if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
-                    val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
-                    startActivity(intent)
+                    if (!isGuest){
+                        val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(this@MegaHomeActivity, "هذه الخدمة متاحة لاعضاء النقابة فقط.", Toast.LENGTH_LONG).show()
+                    }
                 }else{
                     askForLogin(resources.getString(R.string.not_found))
                 }
@@ -530,7 +557,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             sharedPreferences.image = ""
             sharedPreferences.syndicateName = ""
             sharedPreferences.membershipId = ""
-            com.neqabty.chefaa.core.data.Constants.cart = Cart()
+            cart = Cart()
             drawer.close()
             val intent = Intent(this, CheckAccountActivity::class.java)
             startActivity(intent)

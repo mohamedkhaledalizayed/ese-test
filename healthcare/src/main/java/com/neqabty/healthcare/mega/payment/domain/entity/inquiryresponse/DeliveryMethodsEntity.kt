@@ -11,7 +11,7 @@ data class DeliveryMethodsEntity(
     @SerializedName("method")
     val method: String,
     @SerializedName("price")
-    val price: String,
+    val price: Double,
     @SerializedName("updated_at")
     val updatedAt: String
 )

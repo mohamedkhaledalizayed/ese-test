@@ -102,6 +102,7 @@
                 android:id="@+id/national_id_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@drawable/edit_text"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
@@ -186,6 +187,7 @@
                 android:id="@+id/membership_id_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@drawable/edit_text"
                 android:layout_marginTop="@dimen/_10sdp"
                 >

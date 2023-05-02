@@ -25,17 +25,20 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.SnapHelper
 import com.google.android.material.navigation.NavigationView
-import com.neqabty.chefaa.core.data.Cart
-import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
+import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
+import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.contactus.ContactUsActivity
 import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
+import com.neqabty.healthcare.core.data.Cart
 import com.neqabty.healthcare.core.data.Constants
+import com.neqabty.healthcare.core.data.Constants.cart
+import com.neqabty.healthcare.core.data.Constants.mobileNumber
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
@@ -217,18 +220,23 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         }
 
         binding.cvDoctor.setOnClickListener {
-            if (sharedPreferences.isAuthenticated){
-                homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors")
+            if (sharedPreferences.isAuthenticated) {
+                homeViewModel.getUrl(
+                    phone = sharedPreferences.mobile,
+                    type = "doctors",
+                    name = sharedPreferences.name,
+                    entityCode = sharedPreferences.code
+                )
                 title = "حجز أطباء"
-            }else{
+            } else {
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
         }
 
         binding.cvPharmacy.setOnClickListener {
-            if (sharedPreferences.isAuthenticated){
+            if (sharedPreferences.isAuthenticated) {
                 openTermsDialog()
-            }else{
+            } else {
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
         }
@@ -245,6 +253,10 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                         intent.putExtra("url", it.data.url)
                         intent.putExtra("title", title)
                         startActivity(intent)
+                    }else if (it.data.status_code == 405) {
+                        mobileNumber = sharedPreferences.mobile
+                        startActivity(Intent(this, VerifyUserActivity::class.java))
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
                     }else{
                         Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
                     }
@@ -372,7 +384,11 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
             dialog.dismiss()
-            homeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+            homeViewModel.getUrl(
+                phone = sharedPreferences.mobile,
+                type = "pharmacy",
+                name = sharedPreferences.name,
+                entityCode = sharedPreferences.code)
             title = "العلاج الشهرى"
         }
         alertDialog.setButton(
@@ -481,7 +497,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             sharedPreferences.mainSyndicate = 0
             sharedPreferences.image = ""
             sharedPreferences.syndicateName = ""
-            com.neqabty.chefaa.core.data.Constants.cart = Cart()
+            cart = Cart()
             drawer.close()
             val intent = Intent(this@SehaHomeActivity, CheckAccountActivity::class.java)
             startActivity(intent)

@@ -135,6 +135,18 @@
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             />
 
+                        <ProgressBar
+                            android:id="@+id/progress_circular_items"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="@dimen/_100sdp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/syndicates_recycler"
+                            app:layout_constraintStart_toStartOf="@id/syndicates_recycler"
+                            app:layout_constraintTop_toTopOf="@+id/syndicates_recycler"
+                            app:layout_constraintBottom_toBottomOf="@id/syndicates_recycler"
+                            />
+
                         <Button
                             android:id="@+id/syndicate_btn"
                             android:layout_width="match_parent"

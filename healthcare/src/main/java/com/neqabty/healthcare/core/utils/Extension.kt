@@ -6,6 +6,11 @@ import com.bumptech.glide.Glide
 import com.caverock.androidsvg.SVG
 import java.util.regex.Pattern
 
+
+fun String.replaceText(): String{
+    return this.replace("\\", "/")
+}
+
 fun ImageView.loadSVG(svg: String) {
     val trimmedSVG = svg.replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\n", "").replace('\"', '"')
     val svg = SVG.getFromString(trimmedSVG)

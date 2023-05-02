@@ -18,7 +18,7 @@ import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.viewModels
-import com.neqabty.chefaa.modules.home.presentation.homescreen.ChefaaHomeActivity
+import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity

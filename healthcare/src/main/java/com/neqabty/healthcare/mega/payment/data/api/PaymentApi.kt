@@ -1,11 +1,9 @@
 package com.neqabty.healthcare.mega.payment.data.api
 
-import com.neqabty.healthcare.mega.payment.data.model.PaymentBody
-import com.neqabty.healthcare.mega.payment.data.model.PaymentHomeBody
+
 import com.neqabty.healthcare.mega.payment.data.model.branches.BranchesListModel
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.ReceiptResponse
-import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentResponse
-import com.neqabty.healthcare.mega.payment.data.model.paymentmethods.PaymentMethodsResponse
+import com.neqabty.healthcare.mega.payment.data.model.payment.PaymentModel
 import com.neqabty.healthcare.mega.payment.data.model.paymentstatus.PaymentStatusModel
 import com.neqabty.healthcare.mega.payment.data.model.services.ServicesListModel
 import com.neqabty.healthcare.mega.payment.data.model.servicesaction.ServiceActionsModel
@@ -21,25 +19,18 @@ interface PaymentApi {
     suspend fun getServiceActions(@Query("filter{service.code}") service: String,
                                   @Header("Authorization") token: String): ServiceActionsModel
 
-    @GET("payments/v2/inquiry/{id}/{code}/{number}")
+    @GET("payment/v2/inquiry/{id}/{code}/{number}")
     suspend fun getPaymentDetails(@Path("id") id: String,
                                   @Header("Authorization") token: String,
                                   @Path("code") code: String,
                                   @Path("number") number: String): Response<ReceiptResponse>
 
-    @POST("payments")
-    suspend fun payment(@Body paymentBody: PaymentBody,
-                        @Header("Authorization") token: String): PaymentResponse
+    @POST("payment/paymentV2/")
+    suspend fun payment(@Body paymentBody: Any,
+                        @Header("Authorization") token: String): PaymentModel
 
-    @POST("payments")
-    suspend fun paymentHome(@Body paymentHomeBody: PaymentHomeBody,
-                        @Header("Authorization") token: String): PaymentResponse
-
-    @GET("payment_methods")
-    suspend fun getPaymentMethods(@Header("Authorization") token: String): PaymentMethodsResponse
-
-    @GET("transactions/get/{transaction_id}")
-    suspend fun getPaymentStatus(@Header("Authorization") token: String, @Path("transaction_id") transaction_id: String): PaymentStatusModel
+    @GET("payment/payment_invoice")
+    suspend fun getPaymentStatus(@Header("Authorization") token: String, @Query("transactionId") transaction_id: String): PaymentStatusModel
 
     @GET("entity_branches")
     suspend fun getBranches(@Query("special-format") platform: String = "android",

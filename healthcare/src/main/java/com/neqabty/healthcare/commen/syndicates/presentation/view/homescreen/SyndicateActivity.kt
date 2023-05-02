@@ -76,11 +76,19 @@ class SyndicateActivity : BaseActivity<ActivitySyndicateBinding>() {
                     selectedSyndicatePosition = position + 1
 
                     val intent = Intent(this@SyndicateActivity, MegaHomeActivity::class.java)
-                    intent.putExtra("id", item.id)
-                    sharedPreferences.mainSyndicate = item.id
-                    sharedPreferences.code = item.code
-                    sharedPreferences.image = item.image
-                    sharedPreferences.syndicateName = item.name
+                    if (sharedPreferences.isAuthenticated && sharedPreferences.code == item.code){
+
+                    }else if (sharedPreferences.isAuthenticated && sharedPreferences.code != item.code){
+                        intent.putExtra("isGuest", true)
+                        intent.putExtra("code", item.code)
+                        intent.putExtra("image", item.image)
+                        intent.putExtra("syndicateName", item.name)
+                    }else{
+                        sharedPreferences.mainSyndicate = item.id
+                        sharedPreferences.code = item.code
+                        sharedPreferences.image = item.image
+                        sharedPreferences.syndicateName = item.name
+                    }
                     startActivity(intent)
                 }
 

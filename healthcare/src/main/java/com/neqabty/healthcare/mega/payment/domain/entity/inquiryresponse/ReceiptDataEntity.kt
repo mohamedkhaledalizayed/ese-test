@@ -6,5 +6,6 @@ data class ReceiptDataEntity(
     val receipt: ReceiptEntity?,
     val service: ServiceEntity,
     val deliveryMethodsEntity: List<DeliveryMethodsEntity>,
+    val gatewaysList: List<GatewaysEntity>,
     val title: String
 )
