@@ -48,10 +48,10 @@ class SyndicatesAdapter(private val hasCustomStyle: Boolean = false) :
         } else {
             Picasso.get().load(R.drawable.eg).into(viewHolder.binding.ivLogo)
         }
-        if (!hasCustomStyle) {
-            viewHolder.binding.clContainer.elevation = 0F
-            viewHolder.binding.clContainer.background = null
-        }
+//        if (!hasCustomStyle) {
+//            viewHolder.binding.clContainer.elevation = 0F
+//            viewHolder.binding.clContainer.background = null
+//        }
 
         viewHolder.binding.clContainer.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)

@@ -110,6 +110,9 @@
             android:exported="false"/>
         <activity
             android:name=".commen.onboarding.contact.view.DependantsActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".commen.onboarding.contact.view.ReferenceNumberActivity"
             android:exported="true">
 
 <!--                        <intent-filter>-->
@@ -118,9 +121,6 @@
 <!--                            <category android:name="android.intent.category.LAUNCHER" />-->
 <!--                        </intent-filter>-->
         </activity>
-        <activity
-            android:name=".commen.onboarding.contact.view.ReferenceNumberActivity"
-            android:exported="false"/>
         <activity
             android:name=".commen.onboarding.contact.view.EmploymentDetails1Activity"
             android:exported="false"/>
@@ -132,7 +132,7 @@
             android:exported="false"/>
         <activity
             android:name=".core.home_syndicates.view.SyndicatesHomeActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".core.home_general.GeneralHomeActivity"
             android:exported="false" />

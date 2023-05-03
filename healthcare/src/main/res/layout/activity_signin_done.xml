@@ -31,6 +31,7 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:fontFamily="@font/hanimation_arabic_medium"
                 android:text="@string/signin_done"
+                android:visibility="gone"
                 android:textColor="@color/secondaryText"
                 android:textSize="?textSizeMedium"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -109,7 +110,6 @@
                 android:id="@+id/iv_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_large"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_contact"
                 app:layout_constraintTop_toBottomOf="@id/cl_national_id" />

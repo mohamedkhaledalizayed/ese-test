@@ -112,6 +112,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/hanimation_regular</item>
         <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
+        <item name="android:radioButtonStyle">@style/MyRadioButtonStyle</item>
         <item name="alertDialogTheme">@style/MyAlertDialogTheme</item>
         <item name="colorSurface">@color/white</item>
     </style>
@@ -172,4 +173,9 @@
         <item name="android:paddingStart">8dip</item>
         <item name="android:paddingEnd">8dip</item>
     </style>
+
+    <style name="MyRadioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/custom_radio_button_bg</item>
+    </style>
+
 </resources>

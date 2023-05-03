@@ -22,6 +22,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.onboarding.intro.view.IntroActivity
 import com.neqabty.healthcare.commen.onboarding.signup.view.SignupActivity
 import com.neqabty.healthcare.core.data.PreferencesHelper
+import com.neqabty.healthcare.core.home_syndicates.view.SyndicatesHomeActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import javax.inject.Inject
 
@@ -203,7 +204,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 //        if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember)
 //            return SyndicatesHomeActivity::class.java as Class<Activity> //TODO syndicate home
 
-        return SignupActivity::class.java as Class<Activity> //TODO neqabty home
+        return SyndicatesHomeActivity::class.java as Class<Activity> //TODO neqabty home
     }
     //endregion
 
