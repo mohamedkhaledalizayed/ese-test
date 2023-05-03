@@ -11,7 +11,7 @@
         layout="@layout/layout_header" />
 
     <include android:id="@+id/cart_lt"
-        layout="@layout/cart_layout"
+        layout="@layout/chefaa_cart_layout"
         android:layout_height="0dp"
         android:layout_width="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

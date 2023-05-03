@@ -10,3 +10,4 @@ app/build
 build
 /app/debug/
 /app/release/
+/healthcare/lint-baseline.xml

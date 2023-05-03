@@ -7,6 +7,7 @@ import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.ads.domain.interactors.AdsUseCase
 import com.neqabty.healthcare.commen.clinido.domain.entity.ClinidoEntity
 import com.neqabty.healthcare.commen.clinido.domain.usecases.ClinidoUseCase
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseViewModel
 import com.neqabty.healthcare.core.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,7 +38,7 @@ class SyndicatesHomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             clinidoUrl.postValue(Resource.loading(data = null))
             try {
-                clinidoUseCase.build(phone, type).collect {
+                clinidoUseCase.build(phone, type, "", Constants.NEQABTY_CODE).collect {
                     clinidoUrl.postValue(Resource.success(data = it))
                 }
             } catch (e: Throwable) {

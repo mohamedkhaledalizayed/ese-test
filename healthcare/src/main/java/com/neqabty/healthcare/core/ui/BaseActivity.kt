@@ -195,6 +195,34 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         }
     }
 
+    protected fun updateCartOptionsMenu(cartMenuItem: MenuItem){
+        cartMenuItem.actionView.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
+        cartMenuItem.actionView.findViewById<TextView>(R.id.tv_count).visibility =
+            if (Constants.cart.size == 0 ) View.INVISIBLE else View.VISIBLE
+        cartMenuItem.actionView.findViewById<TextView>(R.id.tv_count).text =
+            getCartCounter()
+    }
+
+    private fun getCartCounter(): String{
+        return Constants.cart.getChildrenCounter().toString()
+    }
+
+    protected fun reLaunchHomeActivity(context: Context){
+        val bundle = Bundle()
+        bundle.putString("user_number", Constants.userNumber)
+        bundle.putString("mobile_number", Constants.mobileNumber)
+        bundle.putString("country_code", Constants.countryCode)
+        bundle.putString("national_id", Constants.nationalID)
+        bundle.putString("name", Constants.name)
+        bundle.putString("jwt", Constants.jwt)
+        val intent = Intent(context, ChefaaHomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtras(bundle)
+        startActivity(intent)
+        finish()
+    }
     //region  router
     protected fun getTheNextActivityFromSplash(): Class<Activity> {
         if (!sharedPreferences.isIntroSkipped)
@@ -230,4 +258,74 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
             progressDialog!!.hide()
     }
     //endregion
+
+
+
+    fun checkGPS(): Boolean{
+        val manager = getSystemService( Context.LOCATION_SERVICE ) as LocationManager
+        return manager.isProviderEnabled( LocationManager.GPS_PROVIDER )
+    }
+
+    fun buildAlertMessageNoGps() {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setMessage("يبدو أن GPS الخاص بك غير مفعل ، يرجى تفعيله.")
+            .setCancelable(false)
+            .setPositiveButton(
+                "تاكيد"
+            ) { _, id -> startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)) }
+        val alert = builder.create()
+        alert.show()
+    }
+
+    fun requestPermissions() {
+        Dexter.withContext(this)
+            .withPermissions(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(multiplePermissionsReport: MultiplePermissionsReport) {
+                    // this method is called when all permissions are granted
+                    if (multiplePermissionsReport.areAllPermissionsGranted()) {
+                        // do you work now
+                    }
+                    // check for permanent denial of any permission
+                    if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied) {
+                        // permission is denied permanently, we will show user a dialog message.
+                        showSettingsDialog()
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    list: List<PermissionRequest?>?,
+                    permissionToken: PermissionToken
+                ) {
+                    // this method is called when user grants some permission and denies some of them.
+                    permissionToken.continuePermissionRequest()
+                }
+            }).withErrorListener {
+                // we are displaying a toast message for error message.
+                Toast.makeText(applicationContext, "Error occurred! ", Toast.LENGTH_SHORT).show()
+            } // below line is use to run the permissions on same thread and to check the permissions
+            .onSameThread().check()
+    }
+
+    private fun showSettingsDialog() {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this@BaseActivity)
+        builder.setTitle("بحاجة إلى أذونات")
+        builder.setCancelable(false)
+        builder.setMessage("يحتاج هذا التطبيق إلى إذن لاستخدام هذه الميزة. يمكنك منحهم في إعدادات التطبيق.")
+        builder.setPositiveButton("اذهب للاعدادات\n") { dialog: DialogInterface, which: Int ->
+            dialog.cancel()
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            val uri: Uri = Uri.fromParts("package", packageName, null)
+            intent.data = uri
+            startActivityForResult(intent, 101)
+        }
+        try {
+            builder.show()
+        }catch (e: Exception){
+
+        }
+    }
 }
