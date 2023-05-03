@@ -14,6 +14,7 @@ import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.core.utils.Status
 import com.neqabty.chefaa.databinding.ActivityChefaaSearchBinding
+import com.neqabty.chefaa.modules.CartActivity
 import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +27,11 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(titleResId = R.string.do_search)
+
+        binding.backBtn.setOnClickListener { finish() }
+        binding.cart.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
 
         binding.etSearch.customSelectionActionModeCallback = actionMode
         mAdapter = SearchAdapter {

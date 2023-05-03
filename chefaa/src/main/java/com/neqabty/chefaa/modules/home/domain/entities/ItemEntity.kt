@@ -1,4 +1,4 @@
-package com.neqabty.chefaa.modules.orders.domain.entities
+package com.neqabty.chefaa.modules.home.domain.entities
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

@@ -1,11 +1,13 @@
 package com.neqabty.chefaa.modules.products.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.databinding.ChefaaActivityProductDetailsBinding
+import com.neqabty.chefaa.modules.CartActivity
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.chefaa.modules.products.domain.entities.ProductEntity
 import com.squareup.picasso.Callback
@@ -21,9 +23,12 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
 
         val productItem = intent.extras?.getParcelable<ProductEntity>("product")!!
 
-        setupToolbar(title = productItem.titleAr)
-
+        binding.backBtn.setOnClickListener { finish() }
+        binding.cart.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
         binding.add.setOnClickListener {
+            binding.increaseDecrease.visibility = View.VISIBLE
             addBtnLogic(productItem)
         }
         getIndexInProductsPair(productItem)
@@ -36,6 +41,7 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
             val index = cart.productList.removeOrDecrement(productItem)
             if (index == -1) {
                 binding.add.visibility = View.VISIBLE
+                binding.increaseDecrease.visibility = View.GONE
             } else {
                 binding.quantity.text = "${cart.productList[index].quantity}"
             }
@@ -72,6 +78,7 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
             if (item.productId == productItem.id) {
                 index = ind
                 binding.quantity.text = "${item.quantity}"
+                binding.increaseDecrease.visibility = View.VISIBLE
             }
         }
         return index

@@ -16,6 +16,7 @@ import com.neqabty.healthcare.databinding.ActivitySplashBinding
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.onboarding.intro.view.IntroActivity
 import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
+import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import com.neqabty.healthcare.core.utils.DeviceUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,7 +57,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
                         if (androidVersion != null && androidVersion <= BuildConfig.VERSION_CODE) {
                             Handler().postDelayed({
-                                val mainIntent = Intent(this, getTheNextActivityFromSplash())
+                                val mainIntent = Intent(this, CheckAccountActivity::class.java)
                                 startActivity(mainIntent)
                                 finish()
                             }, SPLASH_DISPLAY_LENGTH)

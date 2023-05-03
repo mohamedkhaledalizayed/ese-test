@@ -46,11 +46,6 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
-        if (position == itemCount - 1) {
-            viewHolder.binding.view.visibility = View.GONE
-        } else {
-            viewHolder.binding.view.visibility = View.VISIBLE
-        }
 
         Picasso.get()
             .load(item.image?.replaceText())
@@ -63,34 +58,28 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
                     viewHolder.binding.imageProgress.hide()
                 }
             })
-        viewHolder.binding.status.visibility = View.GONE
+
         viewHolder.binding.medicationTitle.text = item.titleAr
-        viewHolder.binding.medicationPrice.text = "${item.price.toString()} جنيه"
+        viewHolder.binding.medicationPrice.text = "${item.price} جنيه"
 
-        viewHolder.binding.addItem.setOnClickListener {
-                viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
-                viewHolder.binding.addItem.visibility = View.GONE
-                //TODO confirm to clear cart
-                cart.productList.addOrIncrement(item)
-                invalidateMenuCallback.invoke()
-        }
+//        viewHolder.binding.addItem.setOnClickListener {
+//                viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
+//                viewHolder.binding.addItem.visibility = View.GONE
+//                //TODO confirm to clear cart
+//                cart.productList.addOrIncrement(item)
+//                invalidateMenuCallback.invoke()
+//        }
 
-        viewHolder.binding.viewDetails.setOnClickListener {
-            onItemClickListener?.setOnItemClickListener(item)
-        }
-
-
-        viewHolder.binding.increaseDecrease.visibility = View.GONE
-        viewHolder.binding.addItem.visibility = View.VISIBLE
-        viewHolder.binding.viewDetails.visibility = View.GONE
-        viewHolder.binding.quantity.text = "1"
-
+        viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
+//        viewHolder.binding.addItem.visibility = View.GONE
+        viewHolder.binding.quantity.text = "0"
+        viewHolder.binding.decrease.isEnabled = false
         //show saved items
         cart.productList.mapIndexed { ind, product ->
             if (product.productId == item.id) {
                 viewHolder.binding.increaseDecrease.visibility = View.VISIBLE
-                viewHolder.binding.addItem.visibility = View.GONE
-                viewHolder.binding.viewDetails.visibility = View.GONE
+                viewHolder.binding.decrease.isEnabled = true
+//                viewHolder.binding.addItem.visibility = View.GONE
                 viewHolder.binding.quantity.text = "${cart.productList[ind].quantity}"
             }
         }
@@ -102,6 +91,16 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
         //increase
         viewHolder.binding.increase.setOnClickListener {
             val index = cart.productList.addOrIncrement(item)
+            if (index == -1){
+                viewHolder.binding.decrease.isEnabled = true
+                viewHolder.binding.quantity.text = "1"
+                return@setOnClickListener
+//                cart.productList.addOrIncrement(item)
+                invalidateMenuCallback.invoke()
+            }else{
+//                viewHolder.binding.quantity.text = "${cart.productList[index].quantity}"
+//                invalidateMenuCallback.invoke()
+            }
             viewHolder.binding.quantity.text = "${cart.productList[index].quantity}"
             invalidateMenuCallback.invoke()
         }
@@ -110,8 +109,9 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
         viewHolder.binding.decrease.setOnClickListener {
             val index = cart.productList.removeOrDecrement(item)
             if (index == -1) {
-                viewHolder.binding.increaseDecrease.visibility = View.GONE
-                viewHolder.binding.addItem.visibility = View.VISIBLE
+                viewHolder.binding.decrease.isEnabled = false
+                viewHolder.binding.quantity.text = "0"
+//                viewHolder.binding.addItem.visibility = View.VISIBLE
             } else {
                 viewHolder.binding.quantity.text = "${cart.productList[index].quantity}"
             }

@@ -1,8 +1,5 @@
 package com.neqabty.chefaa.modules.products.di
 
-import com.neqabty.chefaa.modules.home.data.api.RegisterApi
-import com.neqabty.chefaa.modules.home.data.repository.RegisterRepositoryImpl
-import com.neqabty.chefaa.modules.home.domain.repository.RegisterRepository
 import com.neqabty.chefaa.modules.products.data.api.SearchApi
 import com.neqabty.chefaa.modules.products.data.repository.SearchRepositoryImpl
 import com.neqabty.chefaa.modules.products.domain.repository.SearchRepository

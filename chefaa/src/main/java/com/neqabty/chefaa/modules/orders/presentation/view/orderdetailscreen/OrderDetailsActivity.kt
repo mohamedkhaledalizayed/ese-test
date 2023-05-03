@@ -2,16 +2,10 @@ package com.neqabty.chefaa.modules.orders.presentation.view.orderdetailscreen
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.FragmentTransaction
 import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.ui.BaseActivity
-import com.neqabty.chefaa.core.utils.AppUtils
-import com.neqabty.chefaa.core.utils.Status
 import com.neqabty.chefaa.databinding.ActivityOrderDetailsBinding
-import com.neqabty.chefaa.modules.orders.domain.entities.OrderEntity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 

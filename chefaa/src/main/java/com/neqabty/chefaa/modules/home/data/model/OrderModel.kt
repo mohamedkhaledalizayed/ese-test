@@ -1,4 +1,4 @@
-package com.neqabty.chefaa.modules.orders.data.model
+package com.neqabty.chefaa.modules.home.data.model
 
 
 import com.google.gson.annotations.SerializedName
