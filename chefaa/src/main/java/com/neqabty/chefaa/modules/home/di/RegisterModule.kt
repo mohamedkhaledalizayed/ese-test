@@ -1,8 +1,8 @@
 package com.neqabty.chefaa.modules.home.di
 
-import com.neqabty.chefaa.modules.home.data.api.RegisterApi
-import com.neqabty.chefaa.modules.home.data.repository.RegisterRepositoryImpl
-import com.neqabty.chefaa.modules.home.domain.repository.RegisterRepository
+import com.neqabty.chefaa.modules.home.data.api.HomeApi
+import com.neqabty.chefaa.modules.home.data.repository.HomeRepositoryImpl
+import com.neqabty.chefaa.modules.home.domain.repository.HomeRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -18,9 +18,9 @@ abstract class RegisterModule {
         @Provides
         fun providesRegisterApiService(
             @Named("chefaa") retrofit: Retrofit
-        ) = retrofit.create(RegisterApi::class.java)
+        ) = retrofit.create(HomeApi::class.java)
     }
     @Binds
-    internal abstract fun bindsRegisterRepository(registerRepositoryImpl: RegisterRepositoryImpl): RegisterRepository
+    internal abstract fun bindsRegisterRepository(homeRepositoryImpl: HomeRepositoryImpl): HomeRepository
 
 }

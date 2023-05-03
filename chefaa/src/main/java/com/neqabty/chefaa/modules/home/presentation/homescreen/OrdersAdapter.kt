@@ -1,16 +1,13 @@
-package com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen
+package com.neqabty.chefaa.modules.home.presentation.homescreen
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.chefaa.R
-import com.neqabty.chefaa.core.utils.AppUtils
 import com.neqabty.chefaa.databinding.OrderLayoutItemBinding
-import com.neqabty.chefaa.modules.orders.domain.entities.OrderClientEntity
-import com.neqabty.chefaa.modules.orders.domain.entities.OrderEntity
+import com.neqabty.chefaa.modules.home.domain.entities.OrderEntity
 import java.util.*
 
 
@@ -43,7 +40,7 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
         }
     }
 
-    override fun getItemCount() = 10
+    override fun getItemCount() = items.size
 
     fun submitList(newItems: List<OrderEntity>?) {
         newItems?.let {

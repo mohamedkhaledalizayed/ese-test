@@ -24,18 +24,15 @@ import com.neqabty.chefaa.R
 import com.neqabty.chefaa.core.data.Constants
 import com.neqabty.chefaa.core.data.Constants.cart
 import com.neqabty.chefaa.core.data.Constants.mobileNumber
-import com.neqabty.chefaa.core.data.Constants.selectedAddress
 import com.neqabty.chefaa.core.ui.BaseActivity
 import com.neqabty.chefaa.core.utils.PhotoUI
+import com.neqabty.chefaa.core.utils.Status
 import com.neqabty.chefaa.databinding.ChefaaActivityHomeBinding
 import com.neqabty.chefaa.modules.CartActivity
-import com.neqabty.chefaa.modules.address.presentation.view.adressscreen.AddressesActivity
-import com.neqabty.chefaa.modules.orders.domain.entities.OrderEntity
+import com.neqabty.chefaa.modules.home.presentation.HomeViewModel
 import com.neqabty.chefaa.modules.orders.domain.entities.OrderItemsEntity
 import com.neqabty.chefaa.modules.orders.presentation.orderbynote.OrderByNoteActivity
 import com.neqabty.chefaa.modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
-import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersActivity
-import com.neqabty.chefaa.modules.orders.presentation.view.orderstatusscreen.OrdersAdapter
 import com.neqabty.chefaa.modules.products.presentation.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
@@ -73,6 +70,32 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
             .setCancelable(false)
             .setMessage(getString(R.string.please_wait))
             .build()
+
+        homeViewModel.getOrders(mobileNumber, 10, 1)
+        homeViewModel.orders.observe(this){
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+//                        binding.progressActivity.showLoading()
+                    }
+                    Status.SUCCESS -> {
+                        if (resource.data!!.isEmpty()){
+                            if (mAdapter.itemCount == 0){
+//                                binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "لا يوجد طلبات", "لم تقم باى طلب من قبل")
+                            }else{
+//                                binding.progressActivity.showContent()
+                            }
+                        }else{
+//                            binding.progressActivity.showContent()
+                            mAdapter.submitList(resource.data)
+                        }
+                    }
+                    Status.ERROR -> {
+//                        binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "خطا", resource.message)
+                    }
+                }
+            }
+        }
 
         binding.ordersRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
