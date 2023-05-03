@@ -78,7 +78,7 @@
                android:id="@+id/arrow_icon"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:src="@drawable/baseline_arrow_forward_ios_24"
+               android:src="@drawable/curved_arrow_down_circle"
                android:layout_alignParentEnd="true"
                android:layout_marginStart="@dimen/_10sdp"
                android:layout_centerVertical="true"

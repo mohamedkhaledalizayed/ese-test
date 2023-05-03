@@ -38,12 +38,6 @@ class AddressAdapter: RecyclerView.Adapter<AddressAdapter.ViewHolder>() {
         viewHolder.binding.layoutItem.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)
         }
-
-        if (position == itemCount - 1){
-            viewHolder.binding.view.visibility = View.GONE
-        }else{
-            viewHolder.binding.view.visibility = View.VISIBLE
-        }
     }
 
     override fun getItemCount() = items.size

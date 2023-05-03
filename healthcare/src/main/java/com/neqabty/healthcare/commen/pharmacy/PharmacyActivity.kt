@@ -21,11 +21,13 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.circularProgress.setProgress(40.0, 100.0)
-
-        binding.backBtn.setOnClickListener {
+        binding.circularProgress.setProgress(60.0, 100.0)
+        binding.backBtnHeader.setOnClickListener { finish() }
+        binding.backBtn.setOnClickListener { finish() }
+        binding.clinido.setOnClickListener {  }
+        binding.chefaa.setOnClickListener {
 //            finish()
-            if (sharedPreferences.isAuthenticated){
+//            if (sharedPreferences.isAuthenticated){
                 val intent = Intent(this, ChefaaHomeActivity::class.java)
                 intent.putExtra("user_number", sharedPreferences.mobile)
                 intent.putExtra("mobile_number", sharedPreferences.mobile)
@@ -34,9 +36,9 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>() {
                 intent.putExtra("name", sharedPreferences.name)
                 intent.putExtra("jwt", "")
                 startActivity(intent)
-            }else{
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
-            }
+//            }else{
+//                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+//            }
 
         }
     }

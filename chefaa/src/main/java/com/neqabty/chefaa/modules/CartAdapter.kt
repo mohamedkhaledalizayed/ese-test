@@ -36,11 +36,6 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        if (position == itemCount - 1) {
-            viewHolder.binding.view.visibility = View.GONE
-        } else {
-            viewHolder.binding.view.visibility = View.VISIBLE
-        }
 
         viewHolder.binding.status.visibility = GONE
         viewHolder.binding.medicationTitle.text = cart.productList[position].productEntity?.titleAr

@@ -33,7 +33,7 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(titleResId = R.string.add_new_address)
+//        setupToolbar(titleResId = R.string.add_new_address)
 
         binding.street.customSelectionActionModeCallback = actionMode
         binding.building.customSelectionActionModeCallback = actionMode

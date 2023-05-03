@@ -43,6 +43,7 @@
                 android:textSize="@dimen/_14ssp" />
 
             <ImageView
+                android:id="@+id/cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -112,14 +113,15 @@
                 android:textSize="@dimen/_10ssp" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/increase_decrease"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_36sdp"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="1dp"
                 app:cardCornerRadius="@dimen/_5sdp">
 
                 <LinearLayout
-                    android:id="@+id/increase_decrease"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
