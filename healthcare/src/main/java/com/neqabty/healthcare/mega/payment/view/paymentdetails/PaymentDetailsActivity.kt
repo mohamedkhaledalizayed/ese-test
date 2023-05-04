@@ -428,7 +428,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         }else{
             binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
             binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
-            binding.totValue.text = "${(totalAmount + paymentFees + deliveryFees)}  ${resources.getString(R.string.egp)}"
+            binding.totValue.text = "${(totalAmount + deliveryFees)}  ${resources.getString(R.string.egp)}"
         }
     }
 
