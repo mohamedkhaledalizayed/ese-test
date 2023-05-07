@@ -26,6 +26,7 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupToolbar(title = "تسجيل حساب")
 
         loading = SpotsDialog.Builder()
             .setContext(this)
@@ -33,7 +34,7 @@ class CheckAccountActivity : BaseActivity<ActivityCheckAccountBinding>() {
             .build()
         binding.phone.customSelectionActionModeCallback = actionMode
         binding.ccp.registerCarrierNumberEditText(binding.phone)
-        binding.btnSend.setOnClickListener {
+        binding.sendBtn.setOnClickListener {
             if (binding.phone.text.isNullOrEmpty()){
                 Toast.makeText(this, getString(R.string.enter_phone), Toast.LENGTH_LONG).show()
                 return@setOnClickListener

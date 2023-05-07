@@ -56,7 +56,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
                         if (androidVersion != null && androidVersion <= BuildConfig.VERSION_CODE) {
                             Handler().postDelayed({
-                                val mainIntent = Intent(this, getTheNextActivityFromSplash())
+                                val mainIntent = Intent(this, CheckAccountActivity::class.java)
                                 startActivity(mainIntent)
                                 finish()
                             }, SPLASH_DISPLAY_LENGTH)

@@ -28,7 +28,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
-        setupToolbar(titleResId = R.string.login, showUp = false)
+        setupToolbar(title = "استكمال بيانات الحساب")
 
         dialog = SpotsDialog.Builder()
             .setContext(this)
@@ -93,21 +93,23 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         binding.etUsername.customSelectionActionModeCallback = actionMode
         binding.etPassword.customSelectionActionModeCallback = actionMode
+
+        binding.btnLogin.setOnClickListener { login() }
     }
 
     fun showHidePassword(view: View) {
         if (isHidden) {
             isHidden = false
             binding.etPassword.transformationMethod = null
-            binding.showHide.setImageResource(R.drawable.ic_baseline_visibility_24)
+            binding.showHide.setImageResource(R.drawable.lock_icon)
         } else {
             isHidden = true
             binding.etPassword.transformationMethod = PasswordTransformationMethod()
-            binding.showHide.setImageResource(R.drawable.ic_baseline_visibility_off_24)
+            binding.showHide.setImageResource(R.drawable.unlock_icon)
         }
     }
 
-    fun login(view: View) {
+    private fun login() {
         hideKeyboard()
         if (binding.etPassword.text.toString().isEmpty()){
             Toast.makeText(this, resources.getString(R.string.enter_password), Toast.LENGTH_LONG).show()
