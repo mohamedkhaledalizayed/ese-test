@@ -72,7 +72,7 @@
     <string name="provider_type">نوع مقدم الخدمة</string>
     <string name="invitation_code">رقم صاحب دعوة الخصم</string>
     <string name="send">إرسال</string>
-    <string name="content">محتوي الشكوي او المقترح</string>
+    <string name="content">اكتب رسالتك هنا</string>
     <string name="change">تغيير</string>
     <string name="degree">الدرجة العلمية</string>
     <string name="syndicates">النقابات</string>
@@ -146,7 +146,8 @@
     <string name="contactus_title">تواصل معنا</string>
     <string name="bvt">الشكاوي والمقترحات</string>
     <string name="complains">الشكاوي</string>
-    <string name="aboutapp_title">عن التطبيق</string>
+    <string name="aboutapp_title">عن نقابتي</string>
+    <string name="about_app_content">نقابتي هو منصة تفاعلية تهدف الي تقديم خدمات النقابة بطريقة مميكنة مدعمة بوسائل مختلفة للدفع الالكتروني لتسيهل الحصول علي الخدمات ومتابعة مدفوعاتهم باقل وقت ومجهود ،نقابتي صحة مستدامة هي شبكة طبية متخصصة متوفرة لدي العديد من الجهات العلاجية ذات التخصصات المختلفة والمنتشرة في جميع المحافظات.</string>
     <string name="help_title">مساعدة</string>
     <string name="notifications_settings">الإشعارات</string>
     <string name="font_size">حجم الخط</string>
@@ -353,7 +354,6 @@
     <string name="confirm_pass">تاكيد كلمة المرور</string>
 
 
-
     <!--/////////////////////////////Intro/////////////////////////////////////////-->
 
     <string name="skip">تخطي</string>
@@ -491,8 +491,8 @@
     <string name="payment">الدفع</string>
     <string name="subtotal">Subtotal</string>
     <string name="to_be_confirmed">To be confirmed</string>
-<!--    <string name="add">إضافة</string>-->
-<!--    <string name="delivery_fees">مصاريف التوصيل</string>-->
+    <!--    <string name="add">إضافة</string>-->
+    <!--    <string name="delivery_fees">مصاريف التوصيل</string>-->
     <string name="for_free">مجاناً</string>
     <string name="total">الاجمالي</string>
     <string name="order_is_canceled">Order is Canceled</string>
@@ -502,7 +502,7 @@
     <string name="product_details">تفاصيل المنتج</string>
     <string name="products">المنتجات</string>
     <string name="will_clear_cart">سيتم مسح محتويات عربة التسوق</string>
-<!--    <string name="alert_title">تنبيه</string>-->
+    <!--    <string name="alert_title">تنبيه</string>-->
     <string name="alert_cancel">إلغاء</string>
     <string name="alert_ok">موافق</string>
     <string name="cart_empty">عربة التسوق فارغة</string>
@@ -512,17 +512,17 @@
     <string name="total_after_discount">الإجمالي بعد الخصم</string>
     <string name="order_number">رقم الطلب</string>
     <string name="order_date">تاريخ الطلب</string>
-<!--    <string name="address">العنوان</string>-->
+    <!--    <string name="address">العنوان</string>-->
     <string name="select_location">اختيار</string>
     <string name="order_details">تفاصيل الطلب</string>
-<!--    <string name="please_wait">من فضلك انتظر</string>-->
-<!--    <string name="order_status">حالة الطلب</string>-->
+    <!--    <string name="please_wait">من فضلك انتظر</string>-->
+    <!--    <string name="order_status">حالة الطلب</string>-->
     <string name="order_by_note">الطلب بالكتابة</string>
     <string name="chefaa_permission">الاذن باستخدام العنون</string>
     <string name="chefaa_permission_message">نريد الذن باستخدام العنون لاضافة عنوان جديد</string>
     <string name="chefaa_permission_agree">موافق</string>
 
-<!--    <string name="select">اكمل بإستخدام..</string>-->
+    <!--    <string name="select">اكمل بإستخدام..</string>-->
     <string name="gallery">المعرض</string>
     <string name="camera">الكاميرا</string>
     <string name="select_file">اختار صورة</string>
@@ -560,5 +560,7 @@
     <string name="pre_orders">طلباتك \nالسابقة</string>
     <string name="for_delivery">للتواصل:</string>
     <string name="_0221294341">0221294341</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

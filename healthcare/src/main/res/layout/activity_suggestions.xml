@@ -4,186 +4,192 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/background_color"
     tools:context=".sustainablehealth.suggestions.presentation.SuggestionsActivity">
 
     <include
-        android:id="@+id/toolbar"
-        layout="@layout/healthcare_toolbar" />
+        android:id="@+id/layout_toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar">
 
         <LinearLayout
             android:id="@+id/container_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            android:background="@drawable/search_bg"
-            android:orientation="vertical"
-            android:visibility="visible"
-            android:padding="@dimen/_20sdp"
-            >
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_suggestions"
-                android:text="@string/search_in" />
+            android:layout_margin="@dimen/_16sdp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/status_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/done_"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:visibility="gone"
                 android:layout_marginTop="@dimen/_20sdp"
+                android:text="لأى مشاكل فنية أو تقنية اكتب شكواك هنا"
+                android:textAlignment="center"
+                android:textColor="#6B6B6B"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <LinearLayout
-                android:id="@+id/layout"
+            <EditText
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
-                android:orientation="vertical">
+                android:background="@drawable/chefaa_orders_bg"
+                android:drawableEnd="@drawable/phone_icon"
+                android:hint="@string/user_name"
+                android:inputType="text"
+                android:lines="1"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:longClickable="false"
+                android:padding="@dimen/_12sdp"
+                android:textColor="#4F4F4F"
+                android:textSize="@dimen/_12ssp" />
 
-                <EditText
-                    android:id="@+id/name"
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/chefaa_orders_bg"
+                android:drawableEnd="@drawable/message_icon"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:lines="1"
+                android:longClickable="false"
+                android:padding="@dimen/_12sdp"
+                android:textColor="#4F4F4F"
+                android:textSize="@dimen/_12ssp" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/chefaa_orders_bg"
+                android:drawableEnd="@drawable/phone_icon"
+                android:hint="@string/phone"
+                android:inputType="phone"
+                android:longClickable="false"
+                android:padding="@dimen/_12sdp"
+                android:textAlignment="viewStart"
+                android:textColor="#4F4F4F"
+                android:textSize="@dimen/_12ssp" />
+
+            <FrameLayout
+                android:id="@+id/spinner_government_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/chefaa_orders_bg"
+                android:padding="@dimen/_10sdp">
+
+                <Spinner
+                    android:id="@+id/sp_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/edit_text_bg"
-                    android:hint="@string/user_name"
-                    android:longClickable="false"
-                    android:inputType="text"
-                    android:lines="1"
-                    android:padding="@dimen/_9sdp" />
+                    android:background="#fff"
+                    android:popupBackground="@color/splash_bg" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_phone"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/edit_text_bg"
-                    app:layout_constraintTop_toBottomOf="@id/view2">
+                    android:layout_gravity="end|center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/curved_arrow_down_circle" />
+            </FrameLayout>
 
-                    <EditText
-                        android:id="@+id/phone"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="@string/phone"
-                        android:inputType="phone"
-                        android:longClickable="false"
-                        android:padding="@dimen/_10sdp"
-                        android:textAlignment="viewStart"
-                        android:textColor="@color/black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+            <EditText
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/chefaa_orders_bg"
+                android:hint="@string/content"
+                android:inputType="textMultiLine"
+                android:longClickable="false"
+                android:padding="@dimen/_9sdp"
+                android:scrollbars="vertical"
+                android:textAlignment="center"
+                android:textColor="#4F4F4F"
+                android:textSize="@dimen/_12ssp" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/chefaa_orders_bg"
+                android:padding="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@id/cl_national_id">
 
-                <FrameLayout
-                    android:id="@+id/spinner_government_container"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/add_image_text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/edit_text_bg"
-                    android:padding="@dimen/_8sdp">
-
-                    <Spinner
-                        android:id="@+id/sp_category"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#fff"
-                        android:popupBackground="@color/splash_bg" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end|center"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
-                </FrameLayout>
-
-                <EditText
-                    android:id="@+id/content"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_120sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/edit_text_bg"
-                    android:hint="@string/content"
-                    android:scrollbars="vertical"
-                    android:longClickable="false"
-                    android:inputType="textMultiLine"
-                    android:padding="@dimen/_9sdp" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/edit_text"
-                    android:padding="@dimen/_9sdp"
-                    app:layout_constraintTop_toBottomOf="@id/cl_national_id">
-
-                    <TextView
-                        android:id="@+id/add_image_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/attach_image"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/add_image"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:src="@drawable/ic_baseline_attach_file_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/images_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/followers_bg"
-                    android:visibility="gone"
-                    android:padding="@dimen/_10sdp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/near_text"
-                    tools:listitem="@layout/image_item" />
-
-                <Button
-                    android:id="@+id/send_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:background="@drawable/select_btn_bg"
-                    android:text="@string/send"
-                    android:textColor="@color/white"
+                    android:text="اضافة مرفقات"
+                    android:textColor="#4F4F4F"
                     android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/add_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/actions_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/images_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/followers_bg"
+                android:padding="@dimen/_10sdp"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/near_text"
+                tools:listitem="@layout/image_item" />
+
+            <TextView
+                android:id="@+id/back_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/back_btn_bg"
+                android:padding="@dimen/_10sdp"
+                android:text="رجوع"
+                android:textAlignment="center"
+                android:textColor="#5D81D4"
+                />
+
+            <TextView
+                android:id="@+id/send_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/select_btn_bg"
+                android:text="@string/send"
+                android:textAlignment="center"
+                android:padding="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                />
 
         </LinearLayout>
 

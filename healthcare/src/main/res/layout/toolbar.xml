@@ -9,6 +9,7 @@
     android:minHeight="?attr/actionBarSize"
     app:contentInsetEnd="0dp"
     app:contentInsetStart="0dp"
+    android:layout_marginStart="@dimen/_5sdp"
     app:contentInsetStartWithNavigation="0dp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"

@@ -51,12 +51,7 @@ class ChangePasswordDialog : DialogFragment() {
                 return@setOnClickListener
             }
 
-            val activity = activity as ProfileActivity
-            activity.onClick(
-                oldPassword = binding.oldPassword.text.toString(),
-                newPassword = binding.newPassword.text.toString()
-            )
-            dismiss()
+
 
 
         }

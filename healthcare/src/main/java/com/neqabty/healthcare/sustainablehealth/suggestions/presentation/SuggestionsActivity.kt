@@ -60,10 +60,9 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
                         binding.progressCircular.visibility = View.GONE
                         if (resource.data!!.isNotEmpty()){
                             binding.containerLayout.visibility = View.VISIBLE
-                            binding.layout.visibility = View.VISIBLE
                             categoriesList = resource.data
                             categoriesAdapter.submitList(
-                                resource.data!!.toMutableList()
+                                resource.data.toMutableList()
                                     .also { list -> list.add(0, CategoryEntity(0, getString(R.string.category), "")) })
                         }
                     }
@@ -85,7 +84,6 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         if (!resource.data!!.isNullOrEmpty()){
-                            binding.layout.visibility = View.GONE
                             binding.statusText.visibility = View.VISIBLE
                             binding.statusText.text = "${getString(R.string.done_)} ${resource.data}"
                         }

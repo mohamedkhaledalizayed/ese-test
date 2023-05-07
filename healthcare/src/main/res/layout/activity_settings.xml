@@ -1,127 +1,318 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".commen.settings.SettingsActivity">
+    android:id="@+id/cl_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/background_color">
 
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<LinearLayout
+    <TextView
+        android:id="@+id/general_settings"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:fontFamily="@font/hanimation_arabic_medium"
+        android:text="اعدادات عامة"
+        android:textColor="#37313C"
+        android:textSize="@dimen/text_size_medium"
+        app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/mega_toolbar" />
+    <LinearLayout
+        android:id="@+id/general_settings_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/general_settings"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/_10sdp"
+        android:padding="@dimen/_16sdp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/chefaa_orders_bg">
 
-        <ScrollView
-            android:id="@+id/svContent"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:padding="@dimen/_15sdp"
-            android:scrollbars="none">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/general_settings_id"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:src="@drawable/general_settings_icon"
+                android:layout_alignParentStart="true"/>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اللغة"
+                android:textColor="#252A31"
+                android:textSize="@dimen/_12ssp"
+                android:layout_toEndOf="@id/general_settings_id"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
 
-                    <TextView
-                        android:id="@+id/tvNotificationsTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:text="@string/notifications_settings"
-                        android:textColor="@color/black"
-                        android:textSize="?textSizeLarge"
-                        app:layout_constraintBottom_toBottomOf="@id/switchNotifications"
-                        app:layout_constraintEnd_toStartOf="@id/switchNotifications"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/switchNotifications" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/curved_arrow_down_circle"
+                android:layout_alignParentEnd="true"/>
 
+        </RelativeLayout>
 
-                    <com.neqabty.healthcare.core.ui.CustomSwitch
-                        android:id="@+id/switchNotifications"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="?textSizeLarge"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp">
 
-                    <View
-                        android:id="@+id/seperator"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:background="@color/gray"
-                        app:layout_constraintTop_toBottomOf="@id/switchNotifications" />
+            <ImageView
+                android:id="@+id/notification_icon_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/notification_icon"
+                android:layout_alignParentStart="true"/>
 
-                    <TextView
-                        android:id="@+id/tvFontSize"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:text="@string/font_size"
-                        android:textColor="@color/black"
-                        android:textSize="?textSizeLarge"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/seperator" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اشعارات"
+                android:textColor="#252A31"
+                android:textSize="@dimen/_12ssp"
+                android:layout_toEndOf="@id/notification_icon_id"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
 
-                    <SeekBar
-                        android:id="@+id/seekbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:max="3"
-                        android:min="1"
-                        android:progressTint="@color/colorPrimary"
-                        android:thumbTint="@color/colorPrimary"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvFontSize" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/curved_arrow_down_circle"
+                android:layout_alignParentEnd="true"/>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/seekbar">
+        </RelativeLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="start"
-                            android:text="@string/font_size_small"
-                            android:textColor="@color/black"
-                            android:textSize="?textSizeSmall" />
+        <RelativeLayout
+            android:id="@+id/about_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="@string/font_size_medium"
-                            android:textColor="@color/black"
-                            android:textSize="?textSizeMedium" />
+            <ImageView
+                android:id="@+id/about_neqabty_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/danger_circle"
+                android:layout_alignParentStart="true"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:text="@string/font_size_large"
-                            android:textColor="@color/black"
-                            android:textSize="?textSizeLarge" />
-                    </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="عن نقابتي"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="#252A31"
+                android:layout_toEndOf="@id/about_neqabty_id"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
 
-            </LinearLayout>
-        </ScrollView>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/curved_arrow_down_circle"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp">
+
+            <ImageView
+                android:id="@+id/rate_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/star_icon"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="قيم التطبيق"
+                android:textColor="#252A31"
+                android:textSize="@dimen/_12ssp"
+                android:layout_toEndOf="@id/rate_app"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/curved_arrow_down_circle"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp">
+
+            <ImageView
+                android:id="@+id/faq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/chat_icon"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="أسئلة شائعة"
+                android:textColor="#252A31"
+                android:textSize="@dimen/_12ssp"
+                android:layout_toEndOf="@id/faq"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/curved_arrow_down_circle"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
-</layout>
+
+    <TextView
+        android:id="@+id/security_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:fontFamily="@font/hanimation_arabic_medium"
+        android:text="اعدادات الحماية"
+        android:textColor="#37313C"
+        android:textSize="@dimen/text_size_medium"
+        app:layout_constraintTop_toBottomOf="@id/general_settings_container" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/security_settings"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/_10sdp"
+        android:padding="@dimen/_16sdp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/chefaa_orders_bg">
+
+        <RelativeLayout
+            android:id="@+id/change_password_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/change_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/password_icon"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تغير الرقم السري"
+                android:textColor="#252A31"
+                android:textSize="@dimen/_12ssp"
+                android:layout_toEndOf="@id/change_password"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/curved_arrow_down_circle"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp">
+
+            <ImageView
+                android:id="@+id/reset_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/password_icon"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اعدة ضبط الرقم السري"
+                android:textColor="#252A31"
+                android:textSize="@dimen/_12ssp"
+                android:layout_toEndOf="@id/reset_password"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/curved_arrow_down_circle"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp">
+
+            <ImageView
+                android:id="@+id/face_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/face_id_icon"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="face id استخدام"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="#252A31"
+                android:layout_toEndOf="@id/face_id"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/curved_arrow_down_circle"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/back_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="رجوع"
+        android:background="@drawable/back_btn_bg"
+        android:padding="@dimen/_10sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:textAlignment="center"
+        android:textColor="#5D81D4"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

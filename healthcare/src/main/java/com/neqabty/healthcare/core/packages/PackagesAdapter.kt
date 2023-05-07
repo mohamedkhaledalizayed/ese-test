@@ -39,15 +39,14 @@ class PackagesAdapter : RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         viewHolder.binding.tvPrice.text = "${item.price.toInt()} جنيه - للفرد"
         viewHolder.binding.tvDescription.text = item.description
 
-        val parentContext = viewHolder.binding.root.context
-        viewHolder.binding.cvPackage.setCardBackgroundColor(
+        viewHolder.binding.cvPackage.setBackgroundResource(
             when (item.extension) {
-                "AMA" -> parentContext.getColor(R.color.package_safe)
-                "PRZ" -> parentContext.getColor(R.color.package_bronze)
-                "SLV" -> parentContext.getColor(R.color.package_silver)
-                "PLT" -> parentContext.getColor(R.color.package_platinum)
-                "GLD" -> parentContext.getColor(R.color.package_gold)
-                else -> parentContext.getColor(R.color.white)
+                "AMA" -> R.drawable.ama_bg
+                "PRZ" -> R.drawable.prz_bg
+                "SLV" -> R.drawable.slv_bg
+                "PLT" -> R.drawable.plt_bg
+                "GLD" -> R.drawable.gold_bg
+                else -> R.drawable.prz_bg
             }
         )
 
