@@ -20,18 +20,18 @@ import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.neqabty.healthcare.chefaa.address.presentation.view.adressscreen.AddressesActivity
+import com.neqabty.healthcare.R
+import com.neqabty.healthcare.chefaa.CartActivity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
 import com.neqabty.healthcare.chefaa.orders.presentation.orderbynote.OrderByNoteActivity
-import com.neqabty.healthcare.chefaa.orders.presentation.view.orderstatusscreen.OrdersActivity
+import com.neqabty.healthcare.chefaa.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import com.neqabty.healthcare.chefaa.products.presentation.SearchActivity
-import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.cart
 import com.neqabty.healthcare.core.data.Constants.mobileNumber
-import com.neqabty.healthcare.core.data.Constants.selectedAddress
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.PhotoUI
+import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ChefaaActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
@@ -40,13 +40,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
+class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSelection {
 
     private val REQUEST_CAMERA = 0
     private val SELECT_FILE = 1
     private var photoFileName = ""
     lateinit var photoFileURI: Uri
-    private var name = ""
+    private val  bottomSheetFragment: PickUpImageBottomSheet by lazy { PickUpImageBottomSheet() }
+    private val mAdapter: OrdersAdapter = OrdersAdapter()
     private val homeViewModel: HomeViewModel by viewModels()
     override fun getViewBinding() = ChefaaActivityHomeBinding.inflate(layoutInflater)
     private lateinit var dialog: android.app.AlertDialog
@@ -69,19 +70,54 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        dialog.show()
-        homeViewModel.userRegistered.observe(this) {
-            if (it.status) {
-                dialog.dismiss()
-            }else{
-//                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
-                finish()
+        homeViewModel.getOrders(mobileNumber, 10, 1)
+        homeViewModel.orders.observe(this){
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+//                        binding.progressActivity.showLoading()
+                    }
+                    Status.SUCCESS -> {
+                        if (resource.data!!.isEmpty()){
+                            if (mAdapter.itemCount == 0){
+//                                binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "لا يوجد طلبات", "لم تقم باى طلب من قبل")
+                            }else{
+//                                binding.progressActivity.showContent()
+                            }
+                        }else{
+//                            binding.progressActivity.showContent()
+                            mAdapter.submitList(resource.data)
+                        }
+                    }
+                    Status.ERROR -> {
+//                        binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "خطا", resource.message)
+                    }
+                }
             }
         }
 
-        homeViewModel.registerUser(Constants.mobileNumber, Constants.userNumber, Constants.countryCode, Constants.nationalID, Constants.name)
+        binding.ordersRecycler.adapter = mAdapter
+        mAdapter.onItemClickListener = object :
+            OrdersAdapter.OnItemClickListener {
+            override fun setOnItemClickListener() {
+                val intent: Intent = Intent(this@ChefaaHomeActivity, OrderDetailsActivity::class.java)
+//                intent.putExtra("orderId", order)
+                startActivity(intent)
+            }
+        }
+//        dialog.show()
+//        homeViewModel.userRegistered.observe(this) {
+//            if (it.status) {
+//                dialog.dismiss()
+//            }else{
+////                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+//                finish()
+//            }
+//        }
 
-        binding.etSearch.setOnClickListener {
+        homeViewModel.registerUser(mobileNumber, Constants.userNumber, Constants.countryCode, Constants.nationalID, Constants.name)
+
+        binding.searchAboutMedicine.setOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java))
         }
         binding.addPrescription.setOnClickListener {
@@ -91,58 +127,33 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             }
             addPhoto()
         }
-        binding.writeOrder.setOnClickListener {
-            startActivity(Intent(this,OrderByNoteActivity::class.java))
-        }
-        binding.orders.setOnClickListener {
-            startActivity(Intent(this,OrdersActivity::class.java))
+        binding.writeOrderContainer.setOnClickListener {
+            startActivity(Intent(this, OrderByNoteActivity::class.java))
         }
 
-        name = if (Constants.name.isNullOrEmpty()){
-            mobileNumber
-        }else{
-            Constants.name
+        binding.cart.setOnClickListener {
+            startActivity(Intent(this@ChefaaHomeActivity, CartActivity::class.java))
         }
 
-        binding.selectAddress.setOnClickListener {
-            startActivity(Intent(this, AddressesActivity::class.java))
-        }
+        binding.backBtn.setOnClickListener { finish() }
+//        binding.orders.setOnClickListener {
+//            startActivity(Intent(this,OrdersActivity::class.java))
+//        }
+//
+//        name = if (Constants.name.isNullOrEmpty()){
+//            mobileNumber
+//        }else{
+//            Constants.name
+//        }
+//
+//        binding.selectAddress.setOnClickListener {
+//            startActivity(Intent(this, AddressesActivity::class.java))
+//        }
+//
+//        binding.phone1.setOnClickListener {
+//            call("0221294341")
+//        }
 
-        binding.phone1.setOnClickListener {
-            call("0221294341")
-        }
-
-    }
-
-    private fun call(phone: String){
-        val intent = Intent(Intent.ACTION_DIAL)
-        intent.data = Uri.parse("tel:$phone")
-        try {
-            startActivity(intent)
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        checkTime()
-        if (selectedAddress != null){
-            binding.selectAddress.text = selectedAddress?.address
-        }else{
-            binding.selectAddress.text = "إختر عنوان"
-        }
-    }
-
-    private fun checkTime(){
-        val c = Calendar.getInstance()
-        val timeOfDay = c[Calendar.HOUR_OF_DAY]
-
-        if (timeOfDay < 12) {
-            binding.hello.text = "صباح الخير, $name"
-        } else{
-            binding.hello.text = "مساء الخير, $name"
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -185,22 +196,11 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             )
         )
     }
-    
+
     //region photos
 
     private fun addPhoto() {
-//        val pictureDialog = AlertDialog.Builder(this)
-//        pictureDialog.setTitle(getString(R.string.select))
-//        val pictureDialogItems = arrayOf(getString(R.string.gallery), getString(R.string.camera))
-//        pictureDialog.setItems(pictureDialogItems
-//        ) { dialog, which ->
-//            when (which) {
-//                0 -> galleryIntent()
-//                1 -> grantCameraPermission()
-//            }
-//        }
-//        pictureDialog.show()
-        galleryIntent()
+        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
     }
 
     private fun galleryIntent() {
@@ -209,7 +209,6 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
         intent.action = Intent.ACTION_GET_CONTENT //
         startActivityForResult(Intent.createChooser(intent, getString(R.string.select_file)), SELECT_FILE)
     }
-
 
     fun grantCameraPermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -313,6 +312,16 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             ".jpg", /* suffix */
             storageDir /* directory */
         )
+    }
+
+    override fun onCameraSelected() {
+        grantCameraPermission()
+        bottomSheetFragment.dismiss()
+    }
+
+    override fun onGallerySelected() {
+        galleryIntent()
+        bottomSheetFragment.dismiss()
     }
 
     //endregion

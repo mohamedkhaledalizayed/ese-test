@@ -1,117 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".chefaa.products.presentation.SearchActivity">
+
+    <RelativeLayout
+        android:id="@+id/header_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        tools:context=".modules.products.presentation.SearchActivity">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <include
-            android:id="@+id/layout_header"
-            layout="@layout/layout_header" />
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/ic_toolbar_arrow" />
 
-        <LinearLayout
-            android:id="@+id/ll_holder"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_toEndOf="@id/back_btn"
+            android:fontFamily="@font/hanimation_arabic_medium"
+            android:text="شفاء"
+            android:textColor="#001e2f"
+            android:textSize="@dimen/_14ssp" />
+
+        <ImageView
+            android:id="@+id/cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/cart_icon" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:background="@drawable/search_bg"
+        android:orientation="horizontal"
+        android:padding="@dimen/_2sdp"
+        android:weightSum="5"
+        app:layout_constraintTop_toBottomOf="@id/header_container">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_weight="4.2"
+            android:background="@drawable/search_bg">
+
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@null"
+                android:hint="بحث..."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:padding="@dimen/_10sdp"
+                android:textAlignment="viewStart"
+                android:textColorHint="#A6BCD0"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.8">
+
+            <ImageView
+                android:id="@+id/search_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_9sdp"
+                android:src="@drawable/search" />
+
+            <ImageView
+                android:id="@+id/close_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_9sdp"
+                android:src="@drawable/clear_text_icon"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <com.vlonjatg.progressactivity.ProgressRelativeLayout
+        android:id="@+id/progressActivity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:emptyImageHeight="@dimen/_200sdp"
+        app:emptyImageWidth="@dimen/_200sdp"
+        app:emptyTitleTextColor="@color/black"
+        app:emptyTitleTextSize="@dimen/_5ssp"
+        app:errorButtonTextColor="#FFF"
+        app:errorImageHeight="@dimen/_200sdp"
+        app:errorImageWidth="@dimen/_200sdp"
+        app:errorTitleTextColor="@color/colorPrimary"
+        app:errorTitleTextSize="@dimen/_5ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_holder"
+        app:loadingProgressBarColor="@color/colorPrimary">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/search_bg"
-            android:orientation="horizontal"
-            android:weightSum="5"
-            app:layout_constraintTop_toBottomOf="@id/layout_header">
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_search"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_weight="4.2"
-                android:background="@drawable/search_bg">
+    </com.vlonjatg.progressactivity.ProgressRelativeLayout>
 
-
-                <EditText
-                    android:id="@+id/et_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@null"
-                    android:hint="بحث..."
-                    android:inputType="text"
-                    android:padding="@dimen/_7sdp"
-                    android:textAlignment="viewStart"
-                    android:textColorHint="#A6BCD0"
-                    android:textSize="@dimen/_10ssp"
-                    android:imeOptions="actionSearch"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.8"
-                >
-
-                <ImageView
-                    android:id="@+id/search_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_9sdp"
-                    android:src="@drawable/ic_search_black_24dp" />
-
-                <ImageView
-                    android:id="@+id/close_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_9sdp"
-                    android:visibility="gone"
-                    android:src="@drawable/ic_baseline_close_24" />
-
-            </FrameLayout>
-
-        </LinearLayout>
-
-        <com.vlonjatg.progressactivity.ProgressRelativeLayout
-            android:id="@+id/progressActivity"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:background="@color/white"
-            app:emptyBackgroundColor="#FFFFFF"
-            app:emptyImageHeight="@dimen/_200sdp"
-            app:emptyImageWidth="@dimen/_200sdp"
-            app:emptyTitleTextColor="@color/black"
-            app:emptyTitleTextSize="@dimen/_5ssp"
-            app:errorBackgroundColor="#FFFFFF"
-            app:errorButtonBackgroundColor="@color/colorPrimary"
-            app:errorButtonTextColor="#FFF"
-            app:errorImageHeight="@dimen/_200sdp"
-            app:errorImageWidth="@dimen/_200sdp"
-            app:errorTitleTextColor="@color/colorPrimary"
-            app:errorTitleTextSize="@dimen/_5ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_holder"
-            app:loadingBackgroundColor="#FFFFFF"
-            app:loadingProgressBarColor="@color/colorPrimary">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_5sdp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-        </com.vlonjatg.progressactivity.ProgressRelativeLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

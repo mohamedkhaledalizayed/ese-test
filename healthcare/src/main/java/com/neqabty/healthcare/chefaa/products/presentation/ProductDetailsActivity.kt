@@ -1,7 +1,9 @@
 package com.neqabty.healthcare.chefaa.products.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.neqabty.healthcare.chefaa.CartActivity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
 import com.neqabty.healthcare.chefaa.products.domain.entities.ProductEntity
 import com.neqabty.healthcare.core.data.Constants
@@ -23,19 +25,12 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
 
         val productItem = intent.extras?.getParcelable<ProductEntity>("product")!!
 
-        setupToolbar(title = productItem.titleAr)
-
-        // render add btn || + - btn
-        if (cart.productList.find { it.productId == productItem.id } != null) {
-            binding.increaseDecrease.visibility = View.VISIBLE
-            binding.add.visibility = View.GONE
-        } else {
-            binding.increaseDecrease.visibility = View.GONE
-            binding.add.visibility = View.VISIBLE
+        binding.backBtn.setOnClickListener { finish() }
+        binding.cart.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
         }
-
-
         binding.add.setOnClickListener {
+            binding.increaseDecrease.visibility = View.VISIBLE
             addBtnLogic(productItem)
         }
         getIndexInProductsPair(productItem)
@@ -47,8 +42,8 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
         binding.decrease.setOnClickListener {
             val index = cart.productList.removeOrDecrement(productItem)
             if (index == -1) {
-                binding.increaseDecrease.visibility = View.GONE
                 binding.add.visibility = View.VISIBLE
+                binding.increaseDecrease.visibility = View.GONE
             } else {
                 binding.quantity.text = "${cart.productList[index].quantity}"
             }
@@ -77,8 +72,6 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
 
     private fun addToCart(productItem: ProductEntity) {
         cart.productList.addOrIncrement(productItem)
-        binding.increaseDecrease.visibility = View.VISIBLE
-        binding.add.visibility = View.GONE
     }
 
     private fun getIndexInProductsPair(productItem: ProductEntity): Int {
@@ -86,9 +79,8 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
         cart.productList.mapIndexed { ind, item ->
             if (item.productId == productItem.id) {
                 index = ind
-                binding.increaseDecrease.visibility = View.VISIBLE
-                binding.add.visibility = View.GONE
                 binding.quantity.text = "${item.quantity}"
+                binding.increaseDecrease.visibility = View.VISIBLE
             }
         }
         return index

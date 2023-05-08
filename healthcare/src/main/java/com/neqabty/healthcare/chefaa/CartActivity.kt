@@ -12,15 +12,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
-import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.healthcare.chefaa.address.presentation.view.adressscreen.AddressesActivity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
-import com.neqabty.healthcare.chefaa.orders.presentation.placeprescriptionscreen.CheckOutActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.cart
@@ -37,73 +34,83 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
 
     override fun getViewBinding() = ChefaaActivityCartBinding.inflate(layoutInflater)
     private val mAdapter = CartAdapter()
+    private val mItemsAdapter = CartItemsAdapter()
     private lateinit var photoAdapter: PhotosAdapter
     private var totalPrice = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(titleResId = R.string.cart)
 
-        photoAdapter = PhotosAdapter(this)
-        updateView()
-        updatePrice()
+        binding.backBtn.setOnClickListener { finish() }
 
-        photoAdapter.onItemClickListener = object :
-            PhotosAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(id: Int) {
-                cart.imageList.removeAt(id)
-                updateView()
-                binding.cartLt.tvNumberImages.visibility = View.GONE
-            }
+        binding.continueBtn.setOnClickListener {
+            startActivity(Intent(this, AddressesActivity::class.java))
         }
+//        setupToolbar(titleResId = R.string.cart)
 
+//        photoAdapter = PhotosAdapter(this)
+//        updateView()
+//        updatePrice()
+
+//        photoAdapter.onItemClickListener = object :
+//            PhotosAdapter.OnItemClickListener {
+//            override fun setOnItemClickListener(id: Int) {
+//                cart.imageList.removeAt(id)
+//                updateView()
+//                binding.cartLt.tvNumberImages.visibility = View.GONE
+//            }
+//        }
+
+        binding.recyclerView.adapter = mAdapter
+        binding.itemsRecyclerView.adapter = mItemsAdapter
         mAdapter.onItemClickListener = object :
             CartAdapter.OnItemClickListener {
             override fun setOnItemClickListener() {
                 updatePrice()
             }
         }
+//        mAdapter.submitList()
+////
+//        binding.cartLt.photosRv.adapter = photoAdapter
+//        binding.cartLt.productRv.adapter = mAdapter
+//        (binding.cartLt.productRv.adapter as CartAdapter).registerAdapterDataObserver(object : AdapterDataObserver() {
+//            override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+//                super.onItemRangeChanged(positionStart, itemCount)
+//                if (itemCount == 0)
+//                    updateView()
+//            }
+//        })
+//
+//        binding.cartLt.deleteNote.setOnClickListener{
+//            cart.note = null
+//            binding.cartLt.noteTv.setText("")
+//            updateView()
+//        }
 
-        binding.cartLt.photosRv.adapter = photoAdapter
-        binding.cartLt.productRv.adapter = mAdapter
-        (binding.cartLt.productRv.adapter as CartAdapter).registerAdapterDataObserver(object : AdapterDataObserver() {
-            override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
-                super.onItemRangeChanged(positionStart, itemCount)
-                if (itemCount == 0)
-                    updateView()
-            }
-        })
-
-        binding.cartLt.deleteNote.setOnClickListener{
-            cart.note = null
-            binding.cartLt.noteTv.setText("")
-            updateView()
-        }
-
-        binding.cartLt.imageView.setOnClickListener{
-            if (cart.imageList.size >= 5){
-                binding.cartLt.tvNumberImages.visibility = View.VISIBLE
-                Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            galleryIntent()
-        }
-
-        binding.cartLt.selectAddress.setOnClickListener {
-            startActivity(Intent(this, AddressesActivity::class.java))
-        }
+//        binding.cartLt.imageView.setOnClickListener{
+//            if (cart.imageList.size >= 5){
+//                binding.cartLt.tvNumberImages.visibility = View.VISIBLE
+//                Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
+//                return@setOnClickListener
+//            }
+//            galleryIntent()
+//        }
+//
+//        binding.cartLt.selectAddress.setOnClickListener {
+//            startActivity(Intent(this, AddressesActivity::class.java))
+//        }
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (Constants.selectedAddress != null){
-            binding.cartLt.selectAddress.text = Constants.selectedAddress?.address
-        }else{
-            binding.cartLt.selectAddress.text = "إختر عنوان"
-        }
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        if (Constants.selectedAddress != null){
+//            binding.cartLt.selectAddress.text = Constants.selectedAddress?.address
+//        }else{
+//            binding.cartLt.selectAddress.text = "إختر عنوان"
+//        }
+//    }
 
     private fun updatePrice() {
         totalPrice = 0.0
@@ -204,7 +211,7 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
         val bos = BufferedOutputStream(
             FileOutputStream(
                 File(this.getExternalFilesDir(
-            Environment.DIRECTORY_PICTURES).toString(), photoFileName)
+                    Environment.DIRECTORY_PICTURES).toString(), photoFileName)
             )
         )
         bos.write(bytes.toByteArray())
@@ -266,82 +273,82 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
         )
     }
 
-    private fun updateView() {
-        ///// checkout btn and Empty view
-        if (cart.size == 0){
-            binding.clEmptyCart.visibility = View.VISIBLE
-            binding.cartLt.checkout.visibility = View.GONE
-        }else{
-            binding.clEmptyCart.visibility = View.GONE
-            binding.cartLt.checkout.visibility = View.VISIBLE
-        }
+//    private fun updateView() {
+//        ///// checkout btn and Empty view
+//        if (cart.size == 0){
+//            binding.clEmptyCart.visibility = View.VISIBLE
+//            binding.cartLt.checkout.visibility = View.GONE
+//        }else{
+//            binding.clEmptyCart.visibility = View.GONE
+//            binding.cartLt.checkout.visibility = View.VISIBLE
+//        }
+//
+//        /////Images recyclerView
+//        if (cart.imageList.isNotEmpty()) {
+//            binding.cartLt.photosRv.visibility = View.VISIBLE
+//            photoAdapter.submitList()
+//        } else {
+//            binding.cartLt.llPhotos.visibility = View.GONE
+//        }
+//
+//        /////Products recyclerView
+//        if(cart.productList.isNotEmpty()) {
+//            binding.cartLt.productRv.visibility = View.VISIBLE
+//            mAdapter.submitList()
+//        } else {
+//            binding.cartLt.llProducts.visibility = View.GONE
+//        }
+//
+//
+//        if(cart.note != null){
+//            binding.cartLt.noteTv.visibility = View.VISIBLE
+//            binding.cartLt.noteTv.setText(cart.note!!.note)
+//        } else {
+//            binding.cartLt.clNote.visibility = View.GONE
+//        }
+//
+//    }
 
-        /////Images recyclerView
-        if (cart.imageList.isNotEmpty()) {
-            binding.cartLt.photosRv.visibility = View.VISIBLE
-            photoAdapter.submitList()
-        } else {
-            binding.cartLt.llPhotos.visibility = View.GONE
-        }
+//    fun checkOut(view: View) {
+//        // save note to cart
+//        if (totalPrice < 300.0  && cart.imageList.isEmpty() && cart.note?.note.isNullOrEmpty()){
+//            Toast.makeText(this, "يجب الا تقل قيمة الطلب عن 300 جنيه.", Toast.LENGTH_LONG).show()
+//            return
+//        }
+//        if (!binding.cartLt.noteTv.text.toString().isNullOrBlank()) {
+//            cart.note = OrderItemsEntity(
+//                type = Constants.ITEMTYPES.NOTE.typeName,
+//                quantity = 1,
+//                image = "",
+//                note = binding.cartLt.noteTv.text.toString(),
+//                productId = -1,
+//                productEntity = null,
+//                imageUri = null
+//            )
+//        }
+//
+//        if (Constants.selectedAddress == null){
+//            Toast.makeText(this, "من فضلك إختر عنوان.", Toast.LENGTH_LONG).show()
+//        }else{
+//
+//            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                requestPermissions()
+//                return
+//            }
+//
+//            if (!checkGPS()){
+//                buildAlertMessageNoGps()
+//                return
+//            }
+//
+//
+//
+//            startActivity(Intent(this, CheckOutActivity::class.java))
+//        }
+//    }
 
-        /////Products recyclerView
-        if(cart.productList.isNotEmpty()) {
-            binding.cartLt.productRv.visibility = View.VISIBLE
-            mAdapter.submitList()
-        } else {
-            binding.cartLt.llProducts.visibility = View.GONE
-        }
-
-
-        if(cart.note != null){
-            binding.cartLt.noteTv.visibility = View.VISIBLE
-            binding.cartLt.noteTv.setText(cart.note!!.note)
-        } else {
-            binding.cartLt.clNote.visibility = View.GONE
-        }
-
-    }
-
-    fun checkOut(view: View) {
-        // save note to cart
-        if (totalPrice < 300.0  && cart.imageList.isEmpty() && cart.note?.note.isNullOrEmpty()){
-            Toast.makeText(this, "يجب الا تقل قيمة الطلب عن 300 جنيه.", Toast.LENGTH_LONG).show()
-            return
-        }
-        if (!binding.cartLt.noteTv.text.toString().isNullOrBlank()) {
-            cart.note = OrderItemsEntity(
-                type = Constants.ITEMTYPES.NOTE.typeName,
-                quantity = 1,
-                image = "",
-                note = binding.cartLt.noteTv.text.toString(),
-                productId = -1,
-                productEntity = null,
-                imageUri = null
-            )
-        }
-
-        if (Constants.selectedAddress == null){
-            Toast.makeText(this, "من فضلك إختر عنوان.", Toast.LENGTH_LONG).show()
-        }else{
-
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions()
-                return
-            }
-
-            if (!checkGPS()){
-                buildAlertMessageNoGps()
-                return
-            }
-
-
-
-            startActivity(Intent(this, CheckOutActivity::class.java))
-        }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        reLaunchHomeActivity(this)
-    }
+//    override fun onBackPressed() {
+//        super.onBackPressed()
+//        reLaunchHomeActivity(this)
+//    }
 }

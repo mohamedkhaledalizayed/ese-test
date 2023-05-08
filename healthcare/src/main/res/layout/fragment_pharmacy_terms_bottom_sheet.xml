@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_15sdp"
+    android:background="@color/white"
+    tools:context=".commen.pharmacy.PharmacyTermsBottomSheet">
+
+
+    <ImageView
+        android:id="@+id/close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_close_24"/>
+
+    <TextView
+        android:fontFamily="@font/hanimation_arabic_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="الشروط و الاحكام"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="#424347"
+        android:textSize="@dimen/_12ssp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/terms"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="#424347"
+        android:textSize="@dimen/_12ssp"/>
+
+    <TextView
+        android:id="@+id/back_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/back_btn_bg"
+        android:padding="@dimen/_10sdp"
+        android:text="رجوع"
+        android:textAlignment="center"
+        android:textColor="#5D81D4"
+        />
+
+    <TextView
+        android:id="@+id/agree_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/select_btn_bg"
+        android:text="قبول"
+        android:textAlignment="center"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        />
+
+</LinearLayout>

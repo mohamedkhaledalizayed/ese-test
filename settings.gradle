@@ -15,5 +15,4 @@
  */
 include ':pdfcreator'
 include ':healthcare'
-include ':chefaa'
 include ':circleindicator'

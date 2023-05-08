@@ -11,6 +11,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.chefaa.CartActivity
 import com.neqabty.healthcare.chefaa.SelectLocationActivity
 import com.neqabty.healthcare.chefaa.address.domain.entities.AddressEntity
 import com.neqabty.healthcare.core.data.Constants
@@ -34,6 +35,9 @@ class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>(), Locati
 
         setupToolbar(titleResId = R.string.addresses)
 
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         try{
@@ -80,7 +84,7 @@ class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>(), Locati
             }
         }
 
-        binding.addAddress.setOnClickListener {
+        binding.addAddressBtn.setOnClickListener {
 
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions()

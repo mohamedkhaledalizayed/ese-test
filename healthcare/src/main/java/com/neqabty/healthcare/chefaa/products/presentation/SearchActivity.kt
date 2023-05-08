@@ -14,6 +14,7 @@ import com.neqabty.healthcare.chefaa.products.domain.entities.ProductEntity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.chefaa.CartActivity
 import com.neqabty.healthcare.databinding.ActivityChefaaSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +32,10 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
         binding.etSearch.customSelectionActionModeCallback = actionMode
         mAdapter = SearchAdapter {
             invalidateOptionsMenu()
+        }
+
+        binding.backBtn.setOnClickListener {
+            finish()
         }
 
         binding.recyclerView.adapter = mAdapter
@@ -52,6 +57,10 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
 
         binding.searchBtn.setOnClickListener {
             search()
+        }
+
+        binding.cart.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
         }
 
         //observe

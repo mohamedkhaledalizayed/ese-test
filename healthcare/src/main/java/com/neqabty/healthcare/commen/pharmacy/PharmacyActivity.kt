@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
+import com.neqabty.healthcare.chefaa.home.presentation.homescreen.PickUpImageBottomSheet
 import com.neqabty.healthcare.commen.onboarding.signup.view.SignupActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
@@ -13,10 +14,10 @@ import com.neqabty.healthcare.databinding.ActivityPharmacyBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>() {
+class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelection {
 
     override fun getViewBinding() = ActivityPharmacyBinding.inflate(layoutInflater)
-
+    private val  bottomSheetFragment: PharmacyTermsBottomSheet by lazy { PharmacyTermsBottomSheet() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -26,20 +27,7 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>() {
         binding.backBtn.setOnClickListener { finish() }
         binding.clinido.setOnClickListener {  }
         binding.chefaa.setOnClickListener {
-//            finish()
-//            if (sharedPreferences.isAuthenticated){
-                val intent = Intent(this, ChefaaHomeActivity::class.java)
-                intent.putExtra("user_number", sharedPreferences.mobile)
-                intent.putExtra("mobile_number", sharedPreferences.mobile)
-                intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
-                intent.putExtra("national_id", sharedPreferences.nationalId)
-                intent.putExtra("name", sharedPreferences.name)
-                intent.putExtra("jwt", "")
-                startActivity(intent)
-//            }else{
-//                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
-//            }
-
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
     }
 
@@ -67,5 +55,20 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>() {
         }
         alertDialog.show()
 
+    }
+
+    override fun onAgreeClicked() {
+//        if (sharedPreferences.isAuthenticated){
+            val intent = Intent(this, ChefaaHomeActivity::class.java)
+            intent.putExtra("user_number", sharedPreferences.mobile)
+            intent.putExtra("mobile_number", sharedPreferences.mobile)
+            intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
+            intent.putExtra("national_id", sharedPreferences.nationalId)
+            intent.putExtra("name", sharedPreferences.name)
+            intent.putExtra("jwt", "")
+            startActivity(intent)
+//            }else{
+//                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+//            }
     }
 }
