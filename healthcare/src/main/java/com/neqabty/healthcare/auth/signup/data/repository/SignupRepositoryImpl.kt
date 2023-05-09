@@ -25,7 +25,7 @@ class SignupRepositoryImpl @Inject constructor(private val signupDS: SignupDS) :
 
     override fun getSyndicates(): Flow<List<SyndicateListEntity>> {
         return flow {
-            emit(signupDS.getSyndicates().filter { it.code != "e05" }.map { it.toSyndicateListEntity() })
+            emit(signupDS.getSyndicates().map { it.toSyndicateListEntity() })
         }
     }
 }
