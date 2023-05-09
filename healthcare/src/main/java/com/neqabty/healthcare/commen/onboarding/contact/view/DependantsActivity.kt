@@ -2,8 +2,8 @@ package com.neqabty.healthcare.commen.onboarding.contact.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.setPadding
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityDependantsBinding
@@ -24,21 +24,21 @@ class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
     private fun initializeViews() {
         clearAllSelections()
 
-        binding.clDependentNum0.setOnClickListener{
+        binding.tvDependantsNum0.setOnClickListener{
             clearAllSelections()
-            selectDependantsNumber(binding.ivDependentNum0, binding.tvDependantsNum0)
+            selectDependantsNumber(binding.tvDependantsNum0)
         }
-        binding.clDependentNum1.setOnClickListener{
+        binding.tvDependantsNum1.setOnClickListener{
             clearAllSelections()
-            selectDependantsNumber(binding.ivDependentNum1, binding.tvDependantsNum1)
+            selectDependantsNumber(binding.tvDependantsNum1)
         }
-        binding.clDependentNum2.setOnClickListener{
+        binding.tvDependantsNum2.setOnClickListener{
             clearAllSelections()
-            selectDependantsNumber(binding.ivDependentNum2, binding.tvDependantsNum2)
+            selectDependantsNumber(binding.tvDependantsNum2)
         }
-        binding.clDependentNum3.setOnClickListener{
+        binding.tvDependantsNum3.setOnClickListener{
             clearAllSelections()
-            selectDependantsNumber(binding.ivDependentNum3, binding.tvDependantsNum3)
+            selectDependantsNumber(binding.tvDependantsNum3)
         }
 
         binding.bNext.setOnClickListener {
@@ -51,20 +51,27 @@ class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
     }
 
     //region
-    private fun selectDependantsNumber(imageView: ImageView, textView: TextView) {
-        imageView.setImageDrawable(resources.getDrawable(R.drawable.ellipse_selected))
+    private fun selectDependantsNumber(textView: TextView) {
+        textView.setBackgroundResource(R.drawable.ellipse_selected)
+        textView.setTextColor(resources.getColor(R.color.white))
         textView.textSize = 25F
     }
 
     private fun clearAllSelections() {
-        binding.ivDependentNum0.setImageDrawable(resources.getDrawable(R.drawable.ellipse_unselected))
-        binding.ivDependentNum1.setImageDrawable(resources.getDrawable(R.drawable.ellipse_unselected))
-        binding.ivDependentNum2.setImageDrawable(resources.getDrawable(R.drawable.ellipse_unselected))
-        binding.ivDependentNum3.setImageDrawable(resources.getDrawable(R.drawable.ellipse_unselected))
-
+        binding.tvDependantsNum0.setBackgroundResource(R.drawable.ellipse_unselected)
+        binding.tvDependantsNum0.setTextColor(resources.getColor(R.color.unselected_color))
         binding.tvDependantsNum0.textSize = 10F
+
+        binding.tvDependantsNum1.setBackgroundResource(R.drawable.ellipse_unselected)
+        binding.tvDependantsNum1.setTextColor(resources.getColor(R.color.unselected_color))
         binding.tvDependantsNum1.textSize = 10F
+
+        binding.tvDependantsNum2.setBackgroundResource(R.drawable.ellipse_unselected)
+        binding.tvDependantsNum2.setTextColor(resources.getColor(R.color.unselected_color))
         binding.tvDependantsNum2.textSize = 10F
+
+        binding.tvDependantsNum3.setBackgroundResource(R.drawable.ellipse_unselected)
+        binding.tvDependantsNum3.setTextColor(resources.getColor(R.color.unselected_color))
         binding.tvDependantsNum3.textSize = 10F
     }
 

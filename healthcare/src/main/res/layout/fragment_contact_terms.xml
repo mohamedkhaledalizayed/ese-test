@@ -1,54 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/margin_large">
+    android:orientation="vertical"
+    android:padding="@dimen/_15sdp"
+    android:background="@color/white"
+    tools:context=".commen.onboarding.contact.view.ContactTermsBottomSheet">
+
+
+    <ImageView
+        android:id="@+id/close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_close_24"/>
 
     <TextView
-        android:id="@+id/tv_terms_title"
-        android:layout_width="match_parent"
+        android:fontFamily="@font/hanimation_arabic_medium"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/terms_title"
-        android:textColor="@color/primaryText"
-        android:textSize="@dimen/text_size_medium"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="#424347"
+        android:textSize="@dimen/_12ssp"/>
 
     <TextView
-        android:id="@+id/tv_terms"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        android:layout_margin="@dimen/margin_medium"
-        android:textColor="@color/primaryText"
-        android:isScrollContainer="true"
-        android:textSize="@dimen/text_size_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/contact_terms"
-        app:layout_constraintBottom_toTopOf="@id/b_back"
-        app:layout_constraintTop_toBottomOf="@id/tv_terms_title" />
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="#424347"
+        android:textSize="@dimen/_12ssp"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/b_back"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+    <TextView
+        android:id="@+id/back_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/back"
-        android:textColor="@color/colorPrimary"
-        android:textSize="?textSizeMedium"
-        app:cornerRadius="@dimen/_5sdp"
-        app:layout_constraintBottom_toTopOf="@id/b_accept"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:strokeColor="@color/colorPrimary"
-        app:strokeWidth="@dimen/_1sdp" />
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/back_btn_bg"
+        android:padding="@dimen/_10sdp"
+        android:text="رجوع"
+        android:textAlignment="center"
+        android:textColor="#5D81D4"
+        />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/b_accept"
+    <TextView
+        android:id="@+id/agree_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_medium"
-        android:text="@string/accept"
-        android:textColor="@android:color/white"
-        android:textSize="?textSizeMedium"
-        app:cornerRadius="@dimen/_5sdp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/select_btn_bg"
+        android:text="قبول"
+        android:textAlignment="center"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

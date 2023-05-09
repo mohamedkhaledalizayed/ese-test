@@ -20,8 +20,8 @@ class ReviewYourDataActivity : BaseActivity<ActivityReviewYourDataBinding>() {
     }
 
     private fun initializeViews() {
-        binding.tvName.setText(sharedPreferences.name)
-        binding.tvNatId.setText(sharedPreferences.nationalId)
+        binding.tvName.text = sharedPreferences.name
+        binding.tvNatId.text = sharedPreferences.nationalId
 
         binding.bNext.setOnClickListener {
             navigate()

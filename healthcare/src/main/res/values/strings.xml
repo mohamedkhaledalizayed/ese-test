@@ -217,7 +217,7 @@
     <string name="personal_info">البيانات الشخصية</string>
     <string name="name">الاسم :</string>
     <string name="membership_number">رقم العضوية :</string>
-    <string name="phone_number">رقم الهاتف :</string>
+    <string name="phone_number">رقم الهاتف </string>
     <string name="phone_number_">رقم الهاتف :</string>
     <string name="receipt_info">بيانات الفاتورة</string>
     <string name="syndicate">النقابة :</string>
@@ -397,7 +397,7 @@
     <string name="membership_id">رقم العضوية</string>
     <string name="enter_membership_id">من فضلك ادخل رقم العضوية</string>
     <string name="national_id">الرقم القومي</string>
-    <string name="enter_nat_id">من فضلك ادخل الرقم القومي</string>
+    <string name="enter_nat_id">رجاء ادخل رقمك القومي</string>
     <string name="password_rules">شروط كلمة المرور</string>
     <string name="reset_password">اعادة ضبط الرقم السري</string>
     <string name="go_to_home">الصفحة الرئسية</string>

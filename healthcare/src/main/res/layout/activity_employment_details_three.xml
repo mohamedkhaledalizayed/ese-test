@@ -15,159 +15,62 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="@dimen/_16sdp"
         app:layout_constraintBottom_toTopOf="@id/b_skip"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/cl_holder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/edit_text_bg"
-                android:padding="@dimen/margin_medium"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/hanimation_regular"
-                    android:text="@string/employment_title"
-                    android:textColor="@color/secondaryText"
-                    android:textSize="?textSizeSmall"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/et_title"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:background="@null"
-                    android:fontFamily="@font/hanimation_regular"
+                    android:background="@drawable/chefaa_orders_bg"
                     android:hint="@string/employment_title"
+                    android:padding="@dimen/_12sdp"
+                    android:drawableEnd="@drawable/ic_spinner_arrow"
                     android:inputType="text"
                     android:longClickable="false"
-                    android:text="Mona"
                     android:textAlignment="viewStart"
-                    android:textSize="@dimen/text_size_medium"
-                    app:layout_constraintEnd_toStartOf="@id/iv_title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_title" />
-
-                <ImageView
-                    android:id="@+id/iv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_name"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_years"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/edit_text_bg"
-                android:padding="@dimen/margin_medium"
-                app:layout_constraintTop_toBottomOf="@id/cl_title">
-
-                <TextView
-                    android:id="@+id/tv_years"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/hanimation_regular"
-                    android:text="@string/company_years"
-                    android:textColor="@color/secondaryText"
-                    android:textSize="?textSizeSmall"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="@dimen/_12ssp" />
 
                 <EditText
                     android:id="@+id/et_years"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:background="@null"
-                    android:fontFamily="@font/hanimation_regular"
+                    android:background="@drawable/chefaa_orders_bg"
                     android:hint="@string/company_years"
                     android:inputType="text"
+                    android:padding="@dimen/_12sdp"
+                    android:drawableEnd="@drawable/ic_spinner_arrow"
                     android:longClickable="false"
-                    android:text="Mona"
                     android:textAlignment="viewStart"
-                    android:textSize="@dimen/text_size_medium"
-                    app:layout_constraintEnd_toStartOf="@id/iv_years"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_years" />
-
-                <ImageView
-                    android:id="@+id/iv_years"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_name"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_salary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/edit_text_bg"
-                android:padding="@dimen/margin_medium"
-                app:layout_constraintTop_toBottomOf="@id/cl_years">
-
-                <TextView
-                    android:id="@+id/tv_salary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/hanimation_regular"
-                    android:text="@string/company_salary"
-                    android:textColor="@color/secondaryText"
-                    android:textSize="?textSizeSmall"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="@dimen/_12ssp" />
 
                 <EditText
                     android:id="@+id/et_salary"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:background="@null"
-                    android:fontFamily="@font/hanimation_regular"
+                    android:background="@drawable/chefaa_orders_bg"
                     android:hint="@string/company_salary"
+                    android:padding="@dimen/_12sdp"
                     android:inputType="text"
+                    android:drawableEnd="@drawable/ic_salary"
                     android:longClickable="false"
-                    android:text="Mona"
                     android:textAlignment="viewStart"
-                    android:textSize="@dimen/text_size_medium"
-                    app:layout_constraintEnd_toStartOf="@id/iv_salary"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_salary" />
+                    android:textSize="@dimen/_12ssp" />
 
-                <ImageView
-                    android:id="@+id/iv_salary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_salary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
 
     </ScrollView>
 
@@ -186,15 +89,18 @@
         app:strokeColor="@color/colorPrimary"
         app:strokeWidth="@dimen/_1sdp" />
 
-    <com.google.android.material.button.MaterialButton
+    <TextView
         android:id="@+id/b_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_margin="@dimen/_16sdp"
+        android:background="@drawable/select_btn_bg"
         android:text="@string/next"
-        android:textColor="@android:color/white"
-        android:textSize="?textSizeMedium"
-        app:cornerRadius="@dimen/_5sdp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:textAlignment="center"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

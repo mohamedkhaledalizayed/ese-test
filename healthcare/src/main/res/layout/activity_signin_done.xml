@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
 
     <include
         android:id="@+id/layout_toolbar"
@@ -15,6 +17,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:scrollbars="none"
+        android:layout_margin="@dimen/_16sdp"
         app:layout_constraintBottom_toTopOf="@id/b_home"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
 
@@ -40,71 +44,43 @@
                 android:id="@+id/tv_contact_benefits"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:fontFamily="@font/hanimation_regular"
                 android:text="@string/contact_benefits"
                 android:textColor="@color/secondaryText"
-                android:textSize="?textSizeMedium"
-                app:layout_constraintTop_toBottomOf="@id/tv_signin_done" />
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintTop_toBottomOf="@id/tv_signin_done"
+                />
 
             <TextView
                 android:id="@+id/tv_enter_national_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:fontFamily="@font/hanimation_regular"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:text="@string/enter_nat_id"
                 android:textColor="@color/secondaryText"
-                android:textSize="?textSizeMedium"
+                android:textSize="@dimen/_12ssp"
                 app:layout_constraintTop_toBottomOf="@id/tv_contact_benefits" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_national_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/edit_text_bg"
-                android:padding="@dimen/margin_medium"
-                app:layout_constraintTop_toBottomOf="@id/tv_enter_national_id">
-
-                <TextView
-                    android:id="@+id/tv_national_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/hanimation_regular"
-                    android:text="@string/national_id"
-                    android:textColor="@color/secondaryText"
-                    android:textSize="?textSizeSmall"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/et_national_id"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:background="@null"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/chefaa_orders_bg"
                     android:fontFamily="@font/hanimation_regular"
-                    android:hint="@string/enter_nat_id"
+                    android:hint="الرقم القومي"
                     android:inputType="number"
                     android:longClickable="false"
                     android:maxLength="14"
+                    android:padding="@dimen/_12sdp"
                     android:textAlignment="viewStart"
-                    android:textSize="@dimen/text_size_medium"
-                    app:layout_constraintEnd_toStartOf="@id/iv_national_id"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/black"
+                    android:drawableEnd="@drawable/national_id_icon"
+                    app:layout_constraintTop_toBottomOf="@id/tv_enter_national_id"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_national_id" />
+                    />
 
-                <ImageView
-                    android:id="@+id/iv_national_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_national_id"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/iv_contact"
@@ -112,33 +88,43 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_contact"
-                app:layout_constraintTop_toBottomOf="@id/cl_national_id" />
+                app:layout_constraintTop_toBottomOf="@id/et_national_id" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/b_home"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/go_to_home"
-        android:textColor="@color/colorPrimary"
-        android:textSize="?textSizeMedium"
-        app:cornerRadius="@dimen/_5sdp"
-        app:layout_constraintBottom_toTopOf="@id/b_next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:strokeColor="@color/colorPrimary"
-        app:strokeWidth="@dimen/_1sdp" />
 
-    <com.google.android.material.button.MaterialButton
+    <TextView
         android:id="@+id/b_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_medium"
         android:text="@string/next"
+        android:padding="@dimen/_10sdp"
+        android:textAlignment="center"
+        android:background="@drawable/select_btn_bg"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
         android:textColor="@android:color/white"
         android:textSize="?textSizeMedium"
-        app:cornerRadius="@dimen/_5sdp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/b_home"
+         />
+
+
+    <TextView
+        android:id="@+id/b_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/go_to_home"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_12ssp"
+        android:padding="@dimen/_10sdp"
+        android:textAlignment="center"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:background="@drawable/back_btn_bg"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

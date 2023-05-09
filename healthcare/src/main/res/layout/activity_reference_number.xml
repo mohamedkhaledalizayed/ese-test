@@ -15,6 +15,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="@dimen/_16sdp"
         app:layout_constraintBottom_toTopOf="@id/b_skip"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
 
@@ -35,101 +36,41 @@
                 android:textSize="?textSizeMedium"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/edit_text_bg"
-                android:padding="@dimen/margin_medium"
-                app:layout_constraintTop_toBottomOf="@id/tv_reference_number">
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/hanimation_regular"
-                    android:text="@string/user_name"
-                    android:textColor="@color/secondaryText"
-                    android:textSize="?textSizeSmall"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/et_name"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:background="@null"
+                    android:background="@drawable/chefaa_orders_bg"
                     android:fontFamily="@font/hanimation_regular"
                     android:hint="@string/enter_name"
+                    android:padding="@dimen/_12sdp"
                     android:inputType="text"
                     android:longClickable="false"
-                    android:text="Mona"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    app:layout_constraintEnd_toStartOf="@id/iv_name"
+                    android:drawableEnd="@drawable/ic_name"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_name" />
-
-                <ImageView
-                    android:id="@+id/iv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_name"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_mobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:background="@drawable/edit_text_bg"
-                android:padding="@dimen/margin_medium"
-                app:layout_constraintTop_toBottomOf="@id/cl_name">
-
-                <TextView
-                    android:id="@+id/tv_mobile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/hanimation_regular"
-                    android:text="@string/phone"
-                    android:textColor="@color/secondaryText"
-                    android:textSize="?textSizeSmall"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_reference_number" />
 
                 <EditText
                     android:id="@+id/et_mobile"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_medium"
-                    android:layout_marginEnd="@dimen/margin_medium"
-                    android:background="@null"
+                    android:background="@drawable/chefaa_orders_bg"
                     android:fontFamily="@font/hanimation_regular"
                     android:hint="@string/phone_number"
                     android:inputType="text"
+                    android:padding="@dimen/_12sdp"
                     android:longClickable="false"
-                    android:text="01111111111"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/text_size_medium"
-                    app:layout_constraintEnd_toStartOf="@id/iv_mobile"
+                    android:drawableEnd="@drawable/ic_phone"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_mobile" />
+                    app:layout_constraintTop_toBottomOf="@id/et_name" />
 
-                <ImageView
-                    android:id="@+id/iv_mobile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_phone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
@@ -149,15 +90,17 @@
         app:strokeColor="@color/colorPrimary"
         app:strokeWidth="@dimen/_1sdp" />
 
-    <com.google.android.material.button.MaterialButton
+    <TextView
         android:id="@+id/b_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_margin="@dimen/_16sdp"
+        android:background="@drawable/select_btn_bg"
+        android:padding="@dimen/_10sdp"
         android:text="@string/next"
-        android:textColor="@android:color/white"
-        android:textSize="?textSizeMedium"
-        app:cornerRadius="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
