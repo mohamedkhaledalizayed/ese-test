@@ -362,9 +362,6 @@
     <string name="confirm_pass">تاكيد كلمة المرور</string>
 
 
-
-
-
     <string name="my_app_name" translatable="false">شفاء</string>
     <string name="chefaa" translatable="false">شفاء</string>
     <string name="add_new_address">أضف عنوان جديد</string>
@@ -402,8 +399,8 @@
     <string name="payment">الدفع</string>
     <string name="subtotal">Subtotal</string>
     <string name="to_be_confirmed">To be confirmed</string>
-<!--    <string name="add">إضافة</string>-->
-<!--    <string name="delivery_fees">مصاريف التوصيل</string>-->
+    <!--    <string name="add">إضافة</string>-->
+    <!--    <string name="delivery_fees">مصاريف التوصيل</string>-->
     <string name="for_free">مجاناً</string>
     <string name="total">الاجمالي</string>
     <string name="order_is_canceled">Order is Canceled</string>
@@ -413,7 +410,7 @@
     <string name="product_details">تفاصيل المنتج</string>
     <string name="products">المنتجات</string>
     <string name="will_clear_cart">سيتم مسح محتويات عربة التسوق</string>
-<!--    <string name="alert_title">تنبيه</string>-->
+    <!--    <string name="alert_title">تنبيه</string>-->
     <string name="alert_cancel">إلغاء</string>
     <string name="alert_ok">موافق</string>
     <string name="cart_empty">عربة التسوق فارغة</string>
@@ -423,17 +420,17 @@
     <string name="total_after_discount">الإجمالي بعد الخصم</string>
     <string name="order_number">رقم الطلب</string>
     <string name="order_date">تاريخ الطلب</string>
-<!--    <string name="address">العنوان</string>-->
+    <!--    <string name="address">العنوان</string>-->
     <string name="select_location">اختيار</string>
     <string name="order_details">تفاصيل الطلب</string>
-<!--    <string name="please_wait">من فضلك انتظر</string>-->
-<!--    <string name="order_status">حالة الطلب</string>-->
+    <!--    <string name="please_wait">من فضلك انتظر</string>-->
+    <!--    <string name="order_status">حالة الطلب</string>-->
     <string name="order_by_note">الطلب بالكتابة</string>
     <string name="chefaa_permission">الاذن باستخدام العنون</string>
     <string name="chefaa_permission_message">نريد الذن باستخدام العنون لاضافة عنوان جديد</string>
     <string name="chefaa_permission_agree">موافق</string>
 
-<!--    <string name="select">اكمل بإستخدام..</string>-->
+    <!--    <string name="select">اكمل بإستخدام..</string>-->
     <string name="gallery">المعرض</string>
     <string name="camera">الكاميرا</string>
     <string name="select_file">اختار صورة</string>
