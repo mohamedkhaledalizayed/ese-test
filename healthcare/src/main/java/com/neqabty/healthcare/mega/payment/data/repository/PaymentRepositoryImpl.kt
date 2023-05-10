@@ -128,7 +128,7 @@ fun Receipt.toReceiptEntity(): ReceiptEntity{
         delayFine = delayFine,
         netAmount = netAmount,
         fees = fees,
-        totalPrice = totalPrice ?: total_price
+        totalPrice = 0.0
     )
 }
 
