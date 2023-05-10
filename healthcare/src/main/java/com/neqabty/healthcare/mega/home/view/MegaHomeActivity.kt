@@ -38,6 +38,7 @@ import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity
 import com.neqabty.healthcare.news.view.newslist.NewsListActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.core.data.Cart
 import com.neqabty.healthcare.core.data.Constants.cart
 import com.neqabty.healthcare.core.data.Constants.mobileNumber
@@ -224,27 +225,9 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
         }
 
-        binding.medicineImage.setOnClickListener {
-            if (sharedPreferences.isAuthenticated) {
-                openTermsDialog()
-            } else {
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
-            }
-        }
-
         binding.pharmacyImage.setOnClickListener {
-            if (sharedPreferences.isAuthenticated){
-                val intent = Intent(this, ChefaaHomeActivity::class.java)
-                intent.putExtra("user_number", sharedPreferences.mobile)
-                intent.putExtra("mobile_number", sharedPreferences.mobile)
-                intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
-                intent.putExtra("national_id", sharedPreferences.nationalId)
-                intent.putExtra("name", sharedPreferences.name)
-                intent.putExtra("jwt", "")
-                startActivity(intent)
-            }else{
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
-            }
+            val intent = Intent(this, PharmacyActivity::class.java)
+            startActivity(intent)
         }
 
         binding.doctorImage.setOnClickListener {
@@ -261,9 +244,6 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
 
-        binding.conslImage.setOnClickListener {
-            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
-        }
 
         homeViewModel.clinidoUrl.observe(this){
             when(it.status){
@@ -344,32 +324,6 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
         //End of logout
-    }
-
-    private fun openTermsDialog() {
-
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle("الشروط والاحكام")
-        alertDialog.setMessage(resources.getString(R.string.terms))
-        alertDialog.setCancelable(true)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-            homeViewModel.getUrl(
-                phone = sharedPreferences.mobile,
-                type = "pharmacy",
-                name = sharedPreferences.name,
-                entityCode = sharedPreferences.code)
-            title = "العلاج الشهرى"
-        }
-        alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, getString(R.string.disagree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-        }
-        alertDialog.show()
-
     }
 
     private fun showTicketNumber(data: String?) {

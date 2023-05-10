@@ -32,6 +32,7 @@ import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.contactus.ContactUsActivity
+import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.healthcare.core.data.Cart
@@ -201,23 +202,6 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
 
         binding.search.customSelectionActionModeCallback = actionMode
 
-        binding.cvChefaa.setOnClickListener {
-
-            if (sharedPreferences.isAuthenticated){
-                val intent = Intent(this, ChefaaHomeActivity::class.java)
-                intent.putExtra("user_number", sharedPreferences.mobile)
-                intent.putExtra("mobile_number", sharedPreferences.mobile)
-                intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
-                intent.putExtra("national_id", sharedPreferences.nationalId)
-                intent.putExtra("name", sharedPreferences.name)
-                intent.putExtra("jwt", "")
-                startActivity(intent)
-            }else{
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
-            }
-
-        }
-
         binding.cvDoctor.setOnClickListener {
             if (sharedPreferences.isAuthenticated) {
                 homeViewModel.getUrl(
@@ -233,11 +217,8 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         }
 
         binding.cvPharmacy.setOnClickListener {
-            if (sharedPreferences.isAuthenticated) {
-                openTermsDialog()
-            } else {
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
-            }
+            val intent = Intent(this, PharmacyActivity::class.java)
+            startActivity(intent)
         }
 
         homeViewModel.clinidoUrl.observe(this){
@@ -370,32 +351,6 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         val dialog = AboutFragment.newInstance(title, content, code)
         dialog.show(fm, "")
         dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
-
-    }
-
-    private fun openTermsDialog() {
-
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle("الشروط والاحكام")
-        alertDialog.setMessage(resources.getString(R.string.terms))
-        alertDialog.setCancelable(true)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-            homeViewModel.getUrl(
-                phone = sharedPreferences.mobile,
-                type = "pharmacy",
-                name = sharedPreferences.name,
-                entityCode = sharedPreferences.code)
-            title = "العلاج الشهرى"
-        }
-        alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, getString(R.string.disagree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-        }
-        alertDialog.show()
 
     }
 
