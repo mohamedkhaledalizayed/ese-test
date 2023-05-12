@@ -48,7 +48,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     private var deliveryFees = 0.0
     private var paymentFees = 0
     private val branchesAdapter = BranchesAdapter()
-    private var deliveryMethod = 1
+    private var deliveryMethod = 0
     private var deliveryMethodHomeId = 0
     private var deliveryMethodBranchId = 0
     private var deliveryMethodHomePrice = 0.0
@@ -267,6 +267,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                 return@setOnClickListener
             }
 
+            if (deliveryMethod == 0 && sharedPreferences.code != AGRI_CODE){
+                Toast.makeText(this, "من فضلك اختر طريقة التوصيل.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             if (deliveryMethod == deliveryMethodHomeId) {
                 address = binding.address.text.toString()
             }
@@ -282,15 +287,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                     .show()
                 return@setOnClickListener
             }
-
-            if (deliveryMethod == deliveryMethodBranchId) {
-                address = ""
-                deliveryMethod = deliveryMethodBranchId
-            } else {
-                entityBranch = ""
-                deliveryMethod = deliveryMethodHomeId
-            }
-
 
             if (sharedPreferences.isPhoneVerified) {
                 binding.btnNext.isEnabled = false
