@@ -19,17 +19,18 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val registerUseCase: RegisterUseCase,
                                         private val getOrdersUseCase: GetOrdersUseCase
 ) : ViewModel() {
-    val userRegistered = MutableLiveData<RegistrationEntity>()
+    val userRegistered = MutableLiveData<Resource<RegistrationEntity>>()
 
     fun registerUser(phoneNumber:String,userId:String,countryCode:String,nationalId:String,name:String){
         viewModelScope.launch(Dispatchers.IO) {
+            userRegistered.postValue(Resource.loading(data = null))
             try {
                 registerUseCase.build(phoneNumber,userId,countryCode,nationalId,name).collect {
-                    userRegistered.postValue(it)
+                    userRegistered.postValue(Resource.success(it))
                 }
             }catch (e:Throwable){
                 Log.e("error Register",e.toString())
-                userRegistered.postValue(RegistrationEntity(false, ""))
+                userRegistered.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
         }
     }

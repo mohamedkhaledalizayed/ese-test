@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -43,10 +42,19 @@
             android:id="@+id/cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/cart_icon" />
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:text="@string/about_medicine"
+        android:textColor="#6A6A6A"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@id/header_container" />
 
     <LinearLayout
         android:id="@+id/ll_holder"
@@ -57,7 +65,7 @@
         android:orientation="horizontal"
         android:padding="@dimen/_2sdp"
         android:weightSum="5"
-        app:layout_constraintTop_toBottomOf="@id/header_container">
+        app:layout_constraintTop_toBottomOf="@id/info">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_search"
@@ -114,34 +122,51 @@
 
     </LinearLayout>
 
-    <com.vlonjatg.progressactivity.ProgressRelativeLayout
-        android:id="@+id/progressActivity"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:orientation="vertical"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        app:emptyImageHeight="@dimen/_200sdp"
-        app:emptyImageWidth="@dimen/_200sdp"
-        app:emptyTitleTextColor="@color/black"
-        app:emptyTitleTextSize="@dimen/_5ssp"
-        app:errorButtonTextColor="#FFF"
-        app:errorImageHeight="@dimen/_200sdp"
-        app:errorImageWidth="@dimen/_200sdp"
-        app:errorTitleTextColor="@color/colorPrimary"
-        app:errorTitleTextSize="@dimen/_5ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@id/ll_holder"
-        app:loadingProgressBarColor="@color/colorPrimary">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
 
-    </com.vlonjatg.progressactivity.ProgressRelativeLayout>
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/search_shimmer_layout" />
+
+                <include layout="@layout/search_shimmer_layout" />
+
+                <include layout="@layout/search_shimmer_layout" />
+
+                <include layout="@layout/search_shimmer_layout" />
+
+                <include layout="@layout/search_shimmer_layout" />
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

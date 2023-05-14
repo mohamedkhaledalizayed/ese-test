@@ -1,6 +1,10 @@
 package com.neqabty.healthcare.core.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.core.content.ContextCompat.startActivity
 import org.json.JSONObject
 import retrofit2.HttpException
 import java.text.SimpleDateFormat
@@ -46,6 +50,16 @@ class AppUtils {
             }
         } else {
             "No Internet Connection"
+        }
+    }
+
+    fun call(context: Context, phoneNumber: String){
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse("tel:$phoneNumber")
+        try {
+            context.startActivity(intent)
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
         }
     }
 }

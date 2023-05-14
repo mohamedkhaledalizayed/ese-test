@@ -578,5 +578,7 @@
     <string name="_0221294341">0221294341</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_medicine">جميع الادوية يتم صرفها من صيدليات مرخصة من وزارة الصحة وبوجود وصفة طبيه من طبيب مختص</string>
+    <string name="house">المنزل</string>
 
 </resources>

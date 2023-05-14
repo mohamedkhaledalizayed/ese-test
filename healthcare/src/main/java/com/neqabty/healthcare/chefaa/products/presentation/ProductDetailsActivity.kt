@@ -3,7 +3,9 @@ package com.neqabty.healthcare.chefaa.products.presentation
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.neqabty.healthcare.chefaa.CartActivity
+import android.widget.EditText
+import com.neqabty.healthcare.R
+import com.neqabty.healthcare.chefaa.cart.CartActivity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
 import com.neqabty.healthcare.chefaa.products.domain.entities.ProductEntity
 import com.neqabty.healthcare.core.data.Constants
@@ -32,11 +34,13 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
         binding.add.setOnClickListener {
             binding.increaseDecrease.visibility = View.VISIBLE
             addBtnLogic(productItem)
+            handleCartIcon()
         }
         getIndexInProductsPair(productItem)
         binding.increase.setOnClickListener {
             val index = cart.productList.addOrIncrement(productItem)
             binding.quantity.text = "${cart.productList[index].quantity}"
+            handleCartIcon()
         }
 
         binding.decrease.setOnClickListener {
@@ -47,6 +51,7 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
             } else {
                 binding.quantity.text = "${cart.productList[index].quantity}"
             }
+            handleCartIcon()
         }
 
         Picasso.get()
@@ -84,6 +89,19 @@ class ProductDetailsActivity : BaseActivity<ChefaaActivityProductDetailsBinding>
             }
         }
         return index
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handleCartIcon()
+    }
+
+    private fun handleCartIcon(){
+        if (cart.size != 0){
+            binding.cart.setBackgroundResource(R.drawable.cart_icon)
+        }else{
+            binding.cart.setBackgroundResource(R.drawable.empty_cart)
+        }
     }
 
 }

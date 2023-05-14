@@ -1,8 +1,7 @@
-package com.neqabty.healthcare.chefaa
+package com.neqabty.healthcare.chefaa.cart
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -37,7 +36,6 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-        viewHolder.binding.status.visibility = GONE
         viewHolder.binding.medicationTitle.text = cart.productList[position].productEntity?.titleAr
         viewHolder.binding.quantity.text = "${cart.productList[position].quantity}"
         viewHolder.binding.medicationPrice.text =

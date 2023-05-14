@@ -30,11 +30,14 @@ class PharmacyTermsBottomSheet : BottomSheetDialogFragment() {
         bottomSheetDialog.setContentView(binding.root)
 
         binding.closeBtn.setOnClickListener { dialog.dismiss() }
-//
+
         val activity = requireActivity() as PharmacyActivity
-        binding.agreeBtn.setOnClickListener { activity.onAgreeClicked() }
+        binding.agreeBtn.setOnClickListener {
+            activity.onAgreeClicked()
+            dialog.dismiss()
+        }
         binding.backBtn.setOnClickListener { dialog.dismiss() }
-//
+
     }
 
 }

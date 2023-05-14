@@ -51,20 +51,71 @@
                 android:id="@+id/cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/cart_icon"
                 android:layout_alignParentEnd="true"
                 />
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="#6A6A6A"
+            android:text="@string/about_medicine"
+            app:layout_constraintTop_toBottomOf="@id/header_container"
+            android:layout_margin="@dimen/_10sdp"/>
+
+        <RelativeLayout
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/chefaa_icons_bg"
+            app:layout_constraintTop_toBottomOf="@id/info">
+
+            <ImageView
+                android:id="@+id/chefaa_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/chefaa_icon"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:id="@+id/contact_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="للتواصل"
+                android:layout_toEndOf="@id/chefaa_icon"
+                android:layout_marginStart="@dimen/_10sdp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0221294341"
+                android:layout_below="@id/contact_title"
+                android:layout_toEndOf="@id/chefaa_icon"
+                android:layout_marginStart="@dimen/_10sdp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/contact_us"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+
         <LinearLayout
             android:id="@+id/chefaa_main_functions_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/header_container"
+            app:layout_constraintTop_toBottomOf="@id/contact"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:weightSum="3">
 
             <LinearLayout
@@ -161,6 +212,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="@dimen/_10sdp"
+            android:visibility="gone"
             android:background="@drawable/chefaa_info_bg"
             app:layout_constraintTop_toBottomOf="@id/chefaa_main_functions_container"
             android:layout_margin="@dimen/_10sdp">
@@ -190,17 +242,45 @@
             app:layout_constraintTop_toBottomOf="@id/chefaa_info_container"
             android:fontFamily="@font/hanimation_arabic_medium"
             android:textSize="@dimen/_12ssp"
-            android:textColor="#282c41"/>
+            android:textColor="#6A6A6A"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/orders_recycler"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/background_color"
-            app:layout_constraintTop_toBottomOf="@id/chefaa_previous_order"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            />
+            android:minHeight="@dimen/_200sdp"
+            app:layout_constraintTop_toBottomOf="@id/chefaa_previous_order">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/orders_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/background_color"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                />
+
+            <ImageView
+                android:id="@+id/no_previous_orders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@drawable/no_previous_orders"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/no_previous_orders_text"
+                android:fontFamily="@font/hanimation_arabic_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="لا يوجد طلبات سابقة"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_gravity="center|bottom"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="#667085"/>
+
+
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

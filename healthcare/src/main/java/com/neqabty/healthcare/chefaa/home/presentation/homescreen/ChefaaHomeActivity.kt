@@ -15,21 +15,29 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.Menu
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.chefaa.CartActivity
+import com.neqabty.healthcare.chefaa.cart.CartActivity
+import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderEntity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
 import com.neqabty.healthcare.chefaa.orders.presentation.orderbynote.OrderByNoteActivity
 import com.neqabty.healthcare.chefaa.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import com.neqabty.healthcare.chefaa.products.presentation.SearchActivity
 import com.neqabty.healthcare.core.data.Constants
+import com.neqabty.healthcare.core.data.Constants.CHEFAA_SUPPORT_NUMBER
 import com.neqabty.healthcare.core.data.Constants.cart
+import com.neqabty.healthcare.core.data.Constants.countryCode
 import com.neqabty.healthcare.core.data.Constants.mobileNumber
+import com.neqabty.healthcare.core.data.Constants.name
+import com.neqabty.healthcare.core.data.Constants.nationalID
+import com.neqabty.healthcare.core.data.Constants.userNumber
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.PhotoUI
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ChefaaActivityHomeBinding
@@ -57,11 +65,11 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.chefaa)
 
-        Constants.userNumber = intent.extras!!.getString("user_number", "")
-        Constants.mobileNumber = intent.extras!!.getString("mobile_number", "")
-        Constants.countryCode = intent.extras!!.getString("country_code", "")
-        Constants.nationalID = intent.extras!!.getString("national_id", "")
-        Constants.name = intent.extras!!.getString("name", "")
+        userNumber = intent.extras!!.getString("user_number", "")
+        mobileNumber = intent.extras!!.getString("mobile_number", "")
+        countryCode = intent.extras!!.getString("country_code", "")
+        nationalID = intent.extras!!.getString("national_id", "")
+        name = intent.extras!!.getString("name", "")
         Constants.jwt = intent.extras!!.getString("jwt", Constants.jwt)
 
         dialog = SpotsDialog.Builder()
@@ -79,11 +87,13 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
                     }
                     Status.SUCCESS -> {
                         if (resource.data!!.isEmpty()){
-                            if (mAdapter.itemCount == 0){
+                            binding.noPreviousOrders.visibility = View.VISIBLE
+                            binding.noPreviousOrdersText.visibility = View.VISIBLE
+//                            if (mAdapter.itemCount == 0){
 //                                binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "لا يوجد طلبات", "لم تقم باى طلب من قبل")
-                            }else{
+//                            }else{
 //                                binding.progressActivity.showContent()
-                            }
+//                            }
                         }else{
 //                            binding.progressActivity.showContent()
                             mAdapter.submitList(resource.data)
@@ -99,27 +109,40 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
         binding.ordersRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             OrdersAdapter.OnItemClickListener {
-            override fun setOnItemClickListener() {
-                val intent: Intent = Intent(this@ChefaaHomeActivity, OrderDetailsActivity::class.java)
-//                intent.putExtra("orderId", order)
+            override fun setOnItemClickListener(orderEntity: OrderEntity) {
+                val intent = Intent(this@ChefaaHomeActivity, OrderDetailsActivity::class.java)
+                intent.putExtra("orderId", orderEntity)
                 startActivity(intent)
             }
-        }
-//        dialog.show()
-//        homeViewModel.userRegistered.observe(this) {
-//            if (it.status) {
-//                dialog.dismiss()
-//            }else{
-////                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
-//                finish()
-//            }
-//        }
 
-        homeViewModel.registerUser(mobileNumber, Constants.userNumber, Constants.countryCode, Constants.nationalID, Constants.name)
+            override fun setOnCallClickListener() {
+                AppUtils().call(this@ChefaaHomeActivity, CHEFAA_SUPPORT_NUMBER)
+            }
+        }
+
+        homeViewModel.registerUser(mobileNumber, userNumber, countryCode, nationalID, name)
+        homeViewModel.userRegistered.observe(this) {
+            when(it.status){
+                Status.LOADING ->{
+                    dialog.show()
+                }
+                Status.SUCCESS ->{
+                    dialog.hide()
+                    if (!it.data!!.status){
+                        Toast.makeText(this, "${it.message}", Toast.LENGTH_LONG).show()
+                        finish()
+                    }
+                }
+                Status.ERROR ->{
+                    dialog.hide()
+                }
+            }
+        }
 
         binding.searchAboutMedicine.setOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java))
         }
+
         binding.addPrescription.setOnClickListener {
             if (cart.imageList.size >= 5){
                 Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
@@ -127,6 +150,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
             }
             addPhoto()
         }
+
         binding.writeOrderContainer.setOnClickListener {
             startActivity(Intent(this, OrderByNoteActivity::class.java))
         }
@@ -136,24 +160,21 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
         }
 
         binding.backBtn.setOnClickListener { finish() }
-//        binding.orders.setOnClickListener {
-//            startActivity(Intent(this,OrdersActivity::class.java))
-//        }
-//
-//        name = if (Constants.name.isNullOrEmpty()){
-//            mobileNumber
-//        }else{
-//            Constants.name
-//        }
-//
-//        binding.selectAddress.setOnClickListener {
-//            startActivity(Intent(this, AddressesActivity::class.java))
-//        }
-//
-//        binding.phone1.setOnClickListener {
-//            call("0221294341")
-//        }
 
+        binding.contact.setOnClickListener {
+            AppUtils().call(this, CHEFAA_SUPPORT_NUMBER)
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (cart.size != 0){
+            binding.cart.setBackgroundResource(R.drawable.cart_icon)
+        }else{
+            binding.cart.setBackgroundResource(R.drawable.empty_cart)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -210,7 +231,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
         startActivityForResult(Intent.createChooser(intent, getString(R.string.select_file)), SELECT_FILE)
     }
 
-    fun grantCameraPermission() {
+    private fun grantCameraPermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CAMERA)
         } else {
@@ -219,6 +240,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CAMERA) {
             grantCameraPermission()
         }
@@ -303,7 +325,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
         return PhotoUI(path, name, null)
     }
 
-    fun createImageFile(context: Context): File {
+    private fun createImageFile(context: Context): File {
         // Create an image file name
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(Date())
         val storageDir: File = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
@@ -323,6 +345,4 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
         galleryIntent()
         bottomSheetFragment.dismiss()
     }
-
-    //endregion
 }

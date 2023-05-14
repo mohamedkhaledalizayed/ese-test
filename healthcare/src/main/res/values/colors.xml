@@ -51,7 +51,7 @@
     <color name="red">#f44336</color>
     <color name="green">#13cb73</color>
     <color name="gghh">#13cb73</color>
-
+    <color name="colorGrey">#dddddd</color>
     <color name="spotlightBackground">#BF575757</color>
 
     <color name="orange">#fdb32b</color>

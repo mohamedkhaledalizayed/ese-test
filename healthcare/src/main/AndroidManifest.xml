@@ -255,7 +255,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".chefaa.SelectLocationActivity"
+            android:name=".chefaa.address.presentation.view.selectlocation.SelectLocationActivity"
             android:exported="false" /> <!-- <activity -->
         <!-- android:name=".modules.orders.presentation.view.placeorderscreen.ConfirmCheckoutActivity" -->
         <!-- android:exported="false" /> -->
@@ -269,7 +269,7 @@
             android:name=".chefaa.orders.presentation.placeprescriptionscreen.CheckOutActivity"
             android:exported="false" />
         <activity
-            android:name=".chefaa.CartActivity"
+            android:name=".chefaa.cart.CartActivity"
             android:exported="false" />
         <activity
             android:name=".chefaa.products.presentation.ProductDetailsActivity"

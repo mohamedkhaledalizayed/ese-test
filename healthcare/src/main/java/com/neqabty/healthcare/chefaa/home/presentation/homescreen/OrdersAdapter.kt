@@ -2,6 +2,7 @@ package com.neqabty.healthcare.chefaa.home.presentation.homescreen
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -34,9 +35,33 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val order = items[position]
 
-        viewHolder.binding.root.setOnClickListener {
-            onItemClickListener?.setOnItemClickListener()
+        viewHolder.binding.orderStatus.text = order.orderStatus.titleAr
+        viewHolder.binding.orderNumber.text = order.chefaaOrderNumber
+        viewHolder.binding.orderDate.text = order.createdAt
+
+        when (order.status) {
+            1 -> {
+                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_new_bg)
+                viewHolder.binding.total.visibility = View.GONE
+                viewHolder.binding.arrowIcon.visibility = View.GONE
+
+                viewHolder.binding.root.setOnClickListener {
+                    onItemClickListener?.setOnCallClickListener()
+                }
+            }
+            2 -> {
+                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_bg)
+            }
+            else -> {
+                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_bg)
+
+
+                viewHolder.binding.root.setOnClickListener {
+                    onItemClickListener?.setOnItemClickListener(order)
+                }
+            }
         }
     }
 
@@ -56,7 +81,8 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-        fun setOnItemClickListener()
+        fun setOnItemClickListener(orderEntity: OrderEntity)
+        fun setOnCallClickListener()
     }
 
     class ViewHolder(val binding: OrderLayoutItemBinding) :

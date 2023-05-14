@@ -11,9 +11,9 @@ import android.location.LocationManager
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.chefaa.CartActivity
-import com.neqabty.healthcare.chefaa.SelectLocationActivity
+import com.neqabty.healthcare.chefaa.address.presentation.view.selectlocation.SelectLocationActivity
 import com.neqabty.healthcare.chefaa.address.domain.entities.AddressEntity
+import com.neqabty.healthcare.chefaa.orders.presentation.placeprescriptionscreen.CheckOutActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
@@ -32,8 +32,6 @@ class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>(), Locati
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        setupToolbar(titleResId = R.string.addresses)
 
         binding.backBtn.setOnClickListener {
             finish()
@@ -80,6 +78,7 @@ class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>(), Locati
             AddressAdapter.OnItemClickListener {
             override fun setOnItemClickListener(addressItem: AddressEntity) {
                 Constants.selectedAddress = addressItem
+                startActivity(Intent(this@AddressesActivity, CheckOutActivity::class.java))
                 finish()
             }
         }

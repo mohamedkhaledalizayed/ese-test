@@ -35,6 +35,7 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>() {
 
         setupToolbar(titleResId = R.string.add_new_address)
 
+        binding.headerContainer.setOnClickListener { finish() }
         binding.street.customSelectionActionModeCallback = actionMode
         binding.building.customSelectionActionModeCallback = actionMode
         binding.floor.customSelectionActionModeCallback = actionMode
@@ -74,7 +75,6 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>() {
 
             binding.homeIcon.setImageResource(R.drawable.home_black)
             binding.workIcon.setImageResource(R.drawable.portfolio_white)
-
 
             binding.home.setTextColor(Color.BLACK)
             binding.work.setTextColor(Color.WHITE)
@@ -124,7 +124,6 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>() {
             return
         }
 
-
         addAddressViewModel.addAddress(
             phone = Constants.mobileNumber,
             title = buildingType,
@@ -135,7 +134,6 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>() {
             lat = latitude.toString() ,
             long = longitude.toString(),
             landMark =binding.landmark.text.toString())
-
 
         addAddressViewModel.data.observe(this){
             it.let { resource ->

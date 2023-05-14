@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.chefaa
+package com.neqabty.healthcare.chefaa.address.presentation.view.selectlocation
 
 import android.Manifest
 import android.content.Intent

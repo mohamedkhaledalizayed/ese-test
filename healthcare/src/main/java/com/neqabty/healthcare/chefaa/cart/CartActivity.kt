@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.chefaa
+package com.neqabty.healthcare.chefaa.cart
 
 import android.Manifest
 import android.app.Activity
@@ -12,6 +12,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
@@ -67,6 +68,7 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
         mAdapter.onItemClickListener = object :
             CartAdapter.OnItemClickListener {
             override fun setOnItemClickListener() {
+                handleCart()
                 updatePrice()
             }
         }
@@ -103,14 +105,24 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
 
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        if (Constants.selectedAddress != null){
-//            binding.cartLt.selectAddress.text = Constants.selectedAddress?.address
-//        }else{
-//            binding.cartLt.selectAddress.text = "إختر عنوان"
-//        }
-//    }
+    override fun onResume() {
+        super.onResume()
+        handleCart()
+    }
+
+    private fun handleCart() {
+        if (cart.size == 0){
+            binding.recyclerView.visibility = View.GONE
+            binding.itemsDetails.visibility = View.GONE
+            binding.continueBtn.visibility = View.GONE
+            binding.cartEmpty.visibility = View.VISIBLE
+        }else{
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.itemsDetails.visibility = View.VISIBLE
+            binding.continueBtn.visibility = View.VISIBLE
+            binding.cartEmpty.visibility = View.GONE
+        }
+    }
 
     private fun updatePrice() {
         totalPrice = 0.0
@@ -155,6 +167,7 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CAMERA) {
             grantCameraPermission()
         }

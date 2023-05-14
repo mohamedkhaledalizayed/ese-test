@@ -22,43 +22,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@drawable/medicine_bg" />
+                android:src="@color/colorGrey" />
 
-            <androidx.core.widget.ContentLoadingProgressBar
-                android:id="@+id/image_progress"
-                style="?android:attr/progressBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="visible"
-                android:indeterminate="true"
-                android:theme="@style/AppTheme.Progressbar"
-                />
         </FrameLayout>
 
         <TextView
             android:id="@+id/medication_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_toEndOf="@+id/frameLayout"
             android:ellipsize="end"
             android:gravity="right"
             android:maxLines="1"
-            android:textColor="@color/color_black"
+            android:background="@color/colorGrey"
             android:textSize="@dimen/_12ssp" />
 
         <TextView
             android:id="@+id/medication_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_12sdp"
             android:layout_below="@+id/medication_title"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_toEndOf="@+id/frameLayout"
-            android:textColor="#8f959e"
+            android:background="@color/colorGrey"
             android:textSize="@dimen/_10ssp"
             />
 
@@ -70,16 +60,15 @@
             android:layout_toEndOf="@+id/frameLayout"
             android:layout_below="@+id/medication_price">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:padding="@dimen/_4sdp"
-                android:textStyle="bold"
                 android:id="@+id/decrease"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:src="@drawable/group_37368"/>
+                android:src="@color/colorGrey"/>
 
             <TextView
                 android:fontFamily="@font/montserrat_medium"
@@ -93,18 +82,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:gravity="center"
-                android:textColor="@color/black"
+                android:textColor="@color/colorGrey"
                 android:textSize="@dimen/_12ssp"
                 android:text="0"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:padding="@dimen/_4sdp"
                 android:id="@+id/increase"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/group_37367"/>
+                android:src="@color/colorGrey"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

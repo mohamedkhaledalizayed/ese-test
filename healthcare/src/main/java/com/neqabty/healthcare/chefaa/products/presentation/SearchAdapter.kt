@@ -89,6 +89,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
         //increase
         viewHolder.binding.increase.setOnClickListener {
             val index = cart.productList.addOrIncrement(item)
+            onItemClickListener?.setOnClickListener()
             if (index == -1){
                 viewHolder.binding.decrease.isEnabled = true
                 viewHolder.binding.quantity.text = "1"
@@ -106,6 +107,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
 //        //decrease
         viewHolder.binding.decrease.setOnClickListener {
             val index = cart.productList.removeOrDecrement(item)
+            onItemClickListener?.setOnClickListener()
             if (index == -1) {
                 viewHolder.binding.decrease.isEnabled = false
                 viewHolder.binding.quantity.text = "0"
@@ -134,6 +136,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
 
     interface OnItemClickListener {
         fun setOnItemClickListener(item: ProductEntity)
+        fun setOnClickListener()
     }
 
     class ViewHolder(val binding: MedicationLayoutItemBinding) :

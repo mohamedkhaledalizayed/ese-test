@@ -73,6 +73,7 @@ object Constants {
 
     var DOCTORS_RESERVATION_URL = ""
     var MEDICINE_URL = ""
+    var CHEFAA_SUPPORT_NUMBER = "0221294341"
     var selectedAddress: AddressEntity? = null
     var userNumber: String = ""
     var mobileNumber: String = ""

@@ -18,6 +18,7 @@ import com.neqabty.healthcare.commen.onboarding.intro.view.IntroActivity
 import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
 import com.neqabty.healthcare.commen.onboarding.contact.view.DependantsActivity
 import com.neqabty.healthcare.commen.onboarding.contact.view.SigninDoneActivity
+import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import com.neqabty.healthcare.core.utils.DeviceUtils
@@ -59,9 +60,15 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
                         if (androidVersion != null && androidVersion <= BuildConfig.VERSION_CODE) {
                             Handler().postDelayed({
-                                val mainIntent = Intent(this, SigninDoneActivity::class.java)
-                                startActivity(mainIntent)
-                                finish()
+                                if (sharedPreferences.isAuthenticated){
+                                    val mainIntent = Intent(this, PharmacyActivity::class.java)
+                                    startActivity(mainIntent)
+                                    finish()
+                                }else{
+                                    val mainIntent = Intent(this, CheckAccountActivity::class.java)
+                                    startActivity(mainIntent)
+                                    finish()
+                                }
                             }, SPLASH_DISPLAY_LENGTH)
                         } else {
                             showUpdateAppAlertDialog()

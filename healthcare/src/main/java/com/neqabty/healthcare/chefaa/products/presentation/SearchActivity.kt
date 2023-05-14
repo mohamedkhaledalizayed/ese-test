@@ -14,7 +14,8 @@ import com.neqabty.healthcare.chefaa.products.domain.entities.ProductEntity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.chefaa.CartActivity
+import com.neqabty.healthcare.chefaa.cart.CartActivity
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.databinding.ActivityChefaaSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,6 +47,10 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
                 intent.putExtra("product", item)
                 startActivity(intent)
             }
+
+            override fun setOnClickListener() {
+                handleCartIcon()
+            }
         }
 
         binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
@@ -69,20 +74,24 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
-                        binding.progressActivity.showLoading()
+                        binding.shimmerFrameLayout.visibility = View.VISIBLE
+                        binding.shimmerFrameLayout.startShimmerAnimation()
                     }
                     Status.SUCCESS -> {
+                        binding.shimmerFrameLayout.startShimmerAnimation()
+                        binding.shimmerFrameLayout.visibility = View.GONE
+                        binding.recyclerView.visibility = View.VISIBLE
                         if (resource.data!!.isEmpty()){
-                            binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "فارغ", "لا يوجد نتائج البحث")
+//                            binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "فارغ", "لا يوجد نتائج البحث")
                         }else{
-                            binding.progressActivity.showContent()
                             mAdapter.clear()
                             mAdapter.submitList(resource.data)
                             binding.recyclerView.scrollToPosition(0)
                         }
                     }
                     Status.ERROR -> {
-                        binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "عفوا", resource.message)
+                        binding.shimmerFrameLayout.stopShimmerAnimation()
+                        binding.shimmerFrameLayout.visibility = View.GONE
                     }
                 }
             }
@@ -129,6 +138,15 @@ class SearchActivity : BaseActivity<ActivityChefaaSearchBinding>() {
         binding.etSearch.requestFocus()
         if (!binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString().isNullOrEmpty()){
             productViewModel.search(binding.llHolder.findViewById<EditText>(R.id.et_search).text.toString())
+        }
+        handleCartIcon()
+    }
+
+    private fun handleCartIcon(){
+        if (Constants.cart.size != 0){
+            binding.cart.setBackgroundResource(R.drawable.cart_icon)
+        }else{
+            binding.cart.setBackgroundResource(R.drawable.empty_cart)
         }
     }
 
