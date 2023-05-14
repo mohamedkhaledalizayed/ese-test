@@ -35,15 +35,9 @@ class CheckoutCartAdapter : RecyclerView.Adapter<CheckoutCartAdapter.ViewHolder>
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        if (position == itemCount - 1) {
-            viewHolder.binding.view.visibility = View.GONE
-        } else {
-            viewHolder.binding.view.visibility = View.VISIBLE
-        }
 
-        viewHolder.binding.status.visibility = GONE
         viewHolder.binding.medicationTitle.text = cart.productList[position].productEntity?.titleAr
-        viewHolder.binding.medicationQuantity.text = "العدد : ${cart.productList[position].quantity}"
+//        viewHolder.binding.medicationQuantity.text = "العدد : ${cart.productList[position].quantity}"
         viewHolder.binding.medicationPrice.text =
             "${cart.productList[position].productEntity?.price?.times(cart.productList[position].quantity)} جنيه"
 

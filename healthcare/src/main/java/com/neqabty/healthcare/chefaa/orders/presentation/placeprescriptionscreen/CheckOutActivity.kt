@@ -35,6 +35,7 @@ import java.io.File
 
 @AndroidEntryPoint
 class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), LocationListener {
+
     private val placeOrderViewModel: PlaceOrderViewModel by viewModels()
     var total: Float = 0.0f
     private lateinit var dialog: AlertDialog
@@ -75,8 +76,8 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
 
         getDeviceName()
         updatePrice()
-        binding.addressType.text = selectedAddress?.title
-        binding.addressDetails.text = "شارع ${selectedAddress?.address}, مبنى رقم ${selectedAddress?.buildingNo}, رقم الطابق ${selectedAddress?.floorNo}, شقة رقم ${selectedAddress?.apartmentNo}"
+//        binding.addressType.text = selectedAddress?.title
+//        binding.addressDetails.text = "شارع ${selectedAddress?.address}, مبنى رقم ${selectedAddress?.buildingNo}, رقم الطابق ${selectedAddress?.floorNo}, شقة رقم ${selectedAddress?.apartmentNo}"
 
         dialog = SpotsDialog.Builder()
             .setContext(this)
@@ -87,8 +88,8 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
         photoAdapter = CheckoutPhotosAdapter(this)
         updateView()
 
-        binding.photosRv.adapter = photoAdapter
-        binding.productRv.adapter = mAdapter
+//        binding.photosRv.adapter = photoAdapter
+        binding.productRecyclerView.adapter = mAdapter
         placeOrderViewModel.placeImagesResult.observe(this){
             it?.let { resource ->
                 when (resource.status) {
@@ -117,7 +118,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                     Status.ERROR -> {
                         dialog.dismiss()
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
-                        binding.checkout.visibility = View.VISIBLE
+//                        binding.checkout.visibility = View.VISIBLE
                     }
                 }
             }
@@ -138,46 +139,46 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
             totalPrice += item.productEntity?.price!!.times(item.quantity.toDouble())
         }
 
-//        binding.subTotalValue.text = "$totalPrice جنيه"
+        binding.total.text = "$totalPrice جنيه"
 //        binding.totalValue.text = "$totalPrice جنيه"
     }
 
 
     private fun updateView() {
         ///// checkout btn and Empty view
-        if (cart.size == 0){
-            binding.clEmptyCart.visibility = View.VISIBLE
-        }else{
-            binding.clEmptyCart.visibility = View.GONE
-        }
-
-        /////Images recyclerView
-        if (cart.imageList.isNotEmpty()) {
-            binding.photosRv.visibility = View.VISIBLE
-            photoAdapter.submitList()
-        } else {
-            binding.llPhotos.visibility = View.GONE
-        }
-
-        /////Products recyclerView
-        if(cart.productList.isNotEmpty()) {
-            binding.productRv.visibility = View.VISIBLE
-            mAdapter.submitList()
-        } else {
-            binding.llProducts.visibility = View.GONE
-        }
-
-        if(cart.note != null){
-            binding.noteTv.visibility = View.VISIBLE
-            binding.noteTv.setText(cart.note!!.note)
-        } else {
-            binding.clNote.visibility = View.GONE
-        }
+//        if (cart.size == 0){
+//            binding.clEmptyCart.visibility = View.VISIBLE
+//        }else{
+//            binding.clEmptyCart.visibility = View.GONE
+//        }
+//
+//        /////Images recyclerView
+//        if (cart.imageList.isNotEmpty()) {
+//            binding.photosRv.visibility = View.VISIBLE
+//            photoAdapter.submitList()
+//        } else {
+//            binding.llPhotos.visibility = View.GONE
+//        }
+//
+//        /////Products recyclerView
+//        if(cart.productList.isNotEmpty()) {
+//            binding.productRv.visibility = View.VISIBLE
+//            mAdapter.submitList()
+//        } else {
+//            binding.llProducts.visibility = View.GONE
+//        }
+//
+//        if(cart.note != null){
+//            binding.noteTv.visibility = View.VISIBLE
+//            binding.noteTv.setText(cart.note!!.note)
+//        } else {
+//            binding.clNote.visibility = View.GONE
+//        }
     }
 
     override fun onResume() {
         super.onResume()
-        binding.checkout.visibility = View.VISIBLE
+        binding.completeBtn.visibility = View.VISIBLE
     }
 
     fun checkOut(view: View) {
@@ -197,7 +198,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                 }
                 placeOrderViewModel.placePrescriptionImages(selectedAddress?.id!!,  deviceName, currentLocation, deliveryNote)
             }
-            binding.checkout.visibility = View.GONE
+            binding.completeBtn.visibility = View.GONE
     }
 
     override fun onLocationChanged(location: Location) {
