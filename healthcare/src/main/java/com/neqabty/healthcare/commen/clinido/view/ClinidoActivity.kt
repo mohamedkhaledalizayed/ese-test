@@ -14,9 +14,12 @@ import android.view.KeyEvent
 import android.view.View
 import android.webkit.*
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityClinidoBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,19 +27,58 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ClinidoActivity : BaseActivity<ActivityClinidoBinding>() {
 
-
-
-    private var url = ""
     private var title = ""
+    private val clinidoViewModel: ClinidoViewModel by viewModels()
     override fun getViewBinding() = ActivityClinidoBinding.inflate(layoutInflater)
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         title = intent.getStringExtra("title")!!
-        setupToolbar(title = title)
-        url = intent.getStringExtra("url")!!
+
+        if (title == "doctors"){
+            binding.title.text = "حجز أطباء"
+            clinidoViewModel.getUrl(
+                phone = sharedPreferences.mobile,
+                type = "doctors",
+                name = sharedPreferences.name,
+                entityCode = sharedPreferences.code
+            )
+        }else{
+            binding.title.text = "العلاج الشهرى"
+            clinidoViewModel.getUrl(
+                phone = sharedPreferences.mobile,
+                type = "pharmacy",
+                name = sharedPreferences.name,
+                entityCode = sharedPreferences.code)
+        }
+
+        clinidoViewModel.clinidoUrl.observe(this) {
+            when (it.status) {
+                Status.LOADING -> {
+                    showProgressDialog()
+                }
+                Status.SUCCESS -> {
+                    hideProgressDialog()
+                    if (it.data!!.status) {
+                        binding.webView.loadUrl(it.data.url)
+                        initWebView()
+                    } else {
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                        finish()
+                    }
+                }
+                Status.ERROR -> {
+                    hideProgressDialog()
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                    finish()
+                }
+            }
+        }
+
+        binding.headerContainer.setOnClickListener {
+            finish()
+        }
 
         binding.backBtn.setOnClickListener {
             if (binding.webView.canGoBack()) {
@@ -45,10 +87,6 @@ class ClinidoActivity : BaseActivity<ActivityClinidoBinding>() {
                 finish()
             }
         }
-
-        binding.webView.loadUrl(url)
-        initWebView()
-
     }
 
 //    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

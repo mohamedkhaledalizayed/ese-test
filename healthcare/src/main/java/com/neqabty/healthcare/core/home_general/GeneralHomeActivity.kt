@@ -9,6 +9,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.more.view.MoreActivity
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
@@ -66,13 +67,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
         }
 
         binding.llPharmacy.setOnClickListener {
-            val intent = Intent(this, ChefaaHomeActivity::class.java)
-            intent.putExtra("user_number", sharedPreferences.mobile)
-            intent.putExtra("mobile_number", sharedPreferences.mobile)
-            intent.putExtra("country_code", sharedPreferences.mobile.substring(0, 2))
-            intent.putExtra("national_id", sharedPreferences.nationalId)
-            intent.putExtra("name", sharedPreferences.name)
-            intent.putExtra("jwt", "")
+            val intent = Intent(this, PharmacyActivity::class.java)
             startActivity(intent)
         }
 
@@ -100,32 +95,6 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
             startActivity(intent)
         }
 
-        generalHomeViewModel.clinidoUrl.observe(this) {
-            when (it.status) {
-                Status.LOADING -> {
-                    showProgressDialog()
-                }
-                Status.SUCCESS -> {
-                    hideProgressDialog()
-                    if (it.data!!.status) {
-                        val intent = Intent(this, ClinidoActivity::class.java)
-                        intent.putExtra("url", it.data.url)
-                        intent.putExtra("title", title)
-                        if (title == "doctors")
-                            Constants.DOCTORS_RESERVATION_URL = it.data.url
-                        else
-                            Constants.MEDICINE_URL = it.data.url
-                        startActivity(intent)
-                    } else {
-                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
-                    }
-                }
-                Status.ERROR -> {
-                    hideProgressDialog()
-                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                }
-            }
-        }
         binding.bnvSyndicatesHome.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_home -> {

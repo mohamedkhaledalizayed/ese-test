@@ -7,6 +7,7 @@ import android.os.Bundle
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.PickUpImageBottomSheet
+import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.onboarding.signup.view.SignupActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
@@ -25,12 +26,15 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelec
         binding.circularProgress.setProgress(60.0, 100.0)
         binding.backBtnHeader.setOnClickListener { finish() }
         binding.backBtn.setOnClickListener { finish() }
-        binding.clinido.setOnClickListener {  }
+        binding.clinido.setOnClickListener {
+            val intent = Intent(this, ClinidoActivity::class.java)
+            intent.putExtra("title", "pharmacy")
+            startActivity(intent)
+        }
         binding.chefaa.setOnClickListener {
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
     }
-
 
     private fun askForLogin(message: String) {
 
@@ -58,7 +62,7 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelec
     }
 
     override fun onAgreeClicked() {
-//        if (sharedPreferences.isAuthenticated){
+        if (sharedPreferences.isAuthenticated){
             val intent = Intent(this, ChefaaHomeActivity::class.java)
             intent.putExtra("user_number", sharedPreferences.mobile)
             intent.putExtra("mobile_number", sharedPreferences.mobile)
@@ -67,8 +71,8 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelec
             intent.putExtra("name", sharedPreferences.name)
             intent.putExtra("jwt", "")
             startActivity(intent)
-//            }else{
-//                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
-//            }
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
     }
 }
