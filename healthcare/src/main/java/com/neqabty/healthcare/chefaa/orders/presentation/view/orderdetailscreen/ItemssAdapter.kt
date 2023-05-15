@@ -37,14 +37,9 @@ class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
-        if (position == itemCount - 1) {
-            viewHolder.binding.view.visibility = View.GONE
-        } else {
-            viewHolder.binding.view.visibility = View.VISIBLE
-        }
 
         viewHolder.binding.medicationTitle.text = item.productName
-        viewHolder.binding.medicationQuantity.text = "العدد : ${item.quantity}"
+//        viewHolder.binding.medicationQuantity.text = "العدد : ${item.quantity}"
         if (item.productImage.isNotEmpty())
             Picasso.get()
                 .load(item.productImage)
@@ -63,7 +58,7 @@ class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
 
     fun submitList(newItems: List<ItemEntity>) {
         clear()
-        newItems?.let {
+        newItems.let {
             items.addAll(it)
             notifyDataSetChanged()
         }

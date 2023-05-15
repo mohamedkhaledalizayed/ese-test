@@ -42,8 +42,9 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
         viewHolder.binding.orderDate.text = order.createdAt
 
         when (order.status) {
-            1 -> {
+            1 -> {//New
                 viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_new_bg)
+                viewHolder.binding.callIcon.visibility = View.VISIBLE
                 viewHolder.binding.total.visibility = View.GONE
                 viewHolder.binding.arrowIcon.visibility = View.GONE
 
@@ -51,16 +52,48 @@ class OrdersAdapter : RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
                     onItemClickListener?.setOnCallClickListener()
                 }
             }
-            2 -> {
-                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_bg)
-            }
-            else -> {
-                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_bg)
+            2 -> {//Accepted
+                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_accepted_bg)
+                viewHolder.binding.callIcon.visibility = View.VISIBLE
+                viewHolder.binding.total.visibility = View.GONE
+                viewHolder.binding.arrowIcon.visibility = View.GONE
 
+                viewHolder.binding.root.setOnClickListener {
+                    onItemClickListener?.setOnCallClickListener()
+                }
+            }
+            3 -> {//In Progress
+                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_inprogress_bg)
+                viewHolder.binding.callIcon.visibility = View.VISIBLE
+                viewHolder.binding.total.visibility = View.GONE
+                viewHolder.binding.arrowIcon.visibility = View.VISIBLE
+
+                viewHolder.binding.root.setOnClickListener {
+                    onItemClickListener?.setOnCallClickListener()
+                }
+            }
+            4 -> {//Delivered
+                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_bg)
+                viewHolder.binding.callIcon.visibility = View.GONE
+                viewHolder.binding.total.visibility = View.VISIBLE
+                viewHolder.binding.arrowIcon.visibility = View.VISIBLE
 
                 viewHolder.binding.root.setOnClickListener {
                     onItemClickListener?.setOnItemClickListener(order)
                 }
+            }
+            5 -> {//Canceled
+                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_canceled_bg)
+                viewHolder.binding.callIcon.visibility = View.GONE
+                viewHolder.binding.total.visibility = View.GONE
+                viewHolder.binding.arrowIcon.visibility = View.VISIBLE
+
+                viewHolder.binding.root.setOnClickListener {
+                    onItemClickListener?.setOnItemClickListener(order)
+                }
+            }
+            else -> {
+                viewHolder.binding.orderStatus.setBackgroundResource(R.drawable.order_status_bg)
             }
         }
     }

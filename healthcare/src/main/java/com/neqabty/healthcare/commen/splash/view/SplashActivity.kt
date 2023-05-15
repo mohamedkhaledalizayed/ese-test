@@ -61,7 +61,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                         if (androidVersion != null && androidVersion <= BuildConfig.VERSION_CODE) {
                             Handler().postDelayed({
                                 if (sharedPreferences.isAuthenticated){
-                                    val mainIntent = Intent(this, PharmacyActivity::class.java)
+                                    val mainIntent = Intent(this, GeneralHomeActivity::class.java)
                                     startActivity(mainIntent)
                                     finish()
                                 }else{

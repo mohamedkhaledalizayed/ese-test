@@ -52,6 +52,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.headerContainer.setOnClickListener { finish() }
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         try{
             if (ActivityCompat.checkSelfPermission(
@@ -76,8 +77,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
 
         getDeviceName()
         updatePrice()
-//        binding.addressType.text = selectedAddress?.title
-//        binding.addressDetails.text = "شارع ${selectedAddress?.address}, مبنى رقم ${selectedAddress?.buildingNo}, رقم الطابق ${selectedAddress?.floorNo}, شقة رقم ${selectedAddress?.apartmentNo}"
+        binding.address.text = "${selectedAddress?.title}شارع  ${selectedAddress?.address}, مبنى رقم ${selectedAddress?.buildingNo}, رقم الطابق ${selectedAddress?.floorNo}, شقة رقم ${selectedAddress?.apartmentNo}"
 
         dialog = SpotsDialog.Builder()
             .setContext(this)
@@ -88,7 +88,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
         photoAdapter = CheckoutPhotosAdapter(this)
         updateView()
 
-//        binding.photosRv.adapter = photoAdapter
         binding.productRecyclerView.adapter = mAdapter
         placeOrderViewModel.placeImagesResult.observe(this){
             it?.let { resource ->
@@ -118,7 +117,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
                     Status.ERROR -> {
                         dialog.dismiss()
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
-//                        binding.checkout.visibility = View.VISIBLE
+                        binding.completeBtn.visibility = View.VISIBLE
                     }
                 }
             }
@@ -133,6 +132,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
 
         deviceName = "$brand, $name, $model"
     }
+
     private fun updatePrice() {
         totalPrice = 0.0
         for (item in cart.productList){
@@ -140,7 +140,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
         }
 
         binding.total.text = "$totalPrice جنيه"
-//        binding.totalValue.text = "$totalPrice جنيه"
     }
 
 

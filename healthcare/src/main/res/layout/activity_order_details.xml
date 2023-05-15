@@ -1,296 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:fillViewport="true"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/background_color">
 
-
-        <include
-            android:id="@+id/layout_header"
-            layout="@layout/layout_header" />
-
-        <androidx.core.widget.NestedScrollView
+        <RelativeLayout
+            android:id="@+id/header_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="#F4F7F8"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_header">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_toolbar_arrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_toEndOf="@id/back_btn"
+                android:fontFamily="@font/hanimation_arabic_medium"
+                android:text="الطلبات السابقة"
+                android:textColor="#001e2f"
+                android:textSize="@dimen/_14ssp" />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            app:layout_constraintTop_toBottomOf="@id/header_container"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <LinearLayout
+            android:id="@+id/items_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/chefaa_orders_bg"
+            app:layout_constraintTop_toBottomOf="@id/product_recycler_view"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            >
+
+            <TextView
+                android:fontFamily="@font/hanimation_arabic_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تفاصيل الدفع"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F4F7F8"
                 android:orientation="vertical"
                 android:padding="@dimen/_10sdp"
-                tools:context=".modules.orders.presentation.view.orderdetailscreen.OrderDetailsActivity">
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/total_bg">
 
                 <TextView
+                    android:id="@+id/total"
+                    android:fontFamily="@font/montserrat_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_7sdp"
-                    android:text="@string/order_status"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/_12ssp" />
+                    android:text="EGP 15,560.00"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp"
+                    />
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_white_bg"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_10sdp">
-
-                    <ImageView
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/note" />
-
-                    <TextView
-                        android:id="@+id/order_status_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
-
-                </LinearLayout>
-
-
-
-
-
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/rounded_white_bg"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_7sdp">
-
-                    <ImageView
-                        android:id="@+id/cash_icon"
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_3sdp"
-                        android:src="@drawable/cash" />
-
-                    <TextView
-                        android:id="@+id/cash"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_toEndOf="@+id/cash_icon"
-                        android:text="@string/total_before_discount"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
-
-                    <View
-                        android:layout_width="@dimen/_1sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:id="@+id/view"
-                        android:layout_centerHorizontal="true"
-                        android:background="#E1E1E1"/>
-
-                    <TextView
-                        android:id="@+id/total_payment_before_discount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_3sdp"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
-
-                    <ImageView
-                        android:id="@+id/payment_icon"
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/total_payment"
-                        android:src="@drawable/cash" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/rounded_white_bg"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_7sdp">
-
-                    <ImageView
-                        android:id="@+id/cash_icon_after"
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_3sdp"
-                        android:src="@drawable/cash" />
-
-                    <TextView
-                        android:id="@+id/cash_after"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_toEndOf="@+id/cash_icon_after"
-                        android:text="@string/total_after_discount"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
-
-                    <View
-                        android:layout_width="@dimen/_1sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:id="@+id/view_after"
-                        android:layout_centerHorizontal="true"
-                        android:background="#E1E1E1"/>
-
-                    <TextView
-                        android:id="@+id/total_payment_after_discount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_3sdp"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
-
-                    <ImageView
-                        android:id="@+id/payment_icon_after"
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/total_payment_after"
-                        android:src="@drawable/cash" />
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:background="@drawable/rounded_white_bg"
-                    android:padding="@dimen/_10sdp">
-
-                    <TextView
-                        android:id="@+id/order_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:text="@string/order_number"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp" />
-
-
-                    <TextView
-                        android:id="@+id/order_number_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:textSize="@dimen/_12ssp" />
-
-
-                    <TextView
-                        android:id="@+id/date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/order_number"
-                        android:layout_alignParentStart="true"
-                        android:textColor="@color/black"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:text="@string/order_date"
-                        android:textSize="@dimen/_12ssp" />
-
-
-                    <TextView
-                        android:id="@+id/date_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/order_number_value"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:textSize="@dimen/_12ssp" />
-
-                </RelativeLayout>
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/products_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:background="@drawable/rounded_white_bg"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_white_bg"
-                    android:padding="@dimen/_10sdp">
-
-                    <TextView
-                        android:id="@+id/delivery"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:text="@string/delivery_fees"
-                        android:textSize="@dimen/_12ssp" />
-
-
-                    <TextView
-                        android:id="@+id/delivery_fees"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:textSize="@dimen/_12ssp" />
-
-                    <TextView
-                        android:id="@+id/total"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/delivery"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:text="@string/total"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
-
-                    <TextView
-                        android:id="@+id/total_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/delivery_fees"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:text=""
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/_12ssp" />
-
-
-                </RelativeLayout>
-
+                    android:layout_gravity="center"
+                    android:text="الاجمالي"
+                    android:textColor="#6e7389"
+                    android:textSize="@dimen/_14ssp"
+                    />
 
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/address_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/items_details"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10sdp"
+            android:layout_margin="@dimen/_16sdp"
+            android:background="@drawable/chefaa_address_bg"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_location"/>
+
+            <TextView
+                android:id="@+id/address"
+                android:fontFamily="@font/hanimation_arabic_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/complete_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="@drawable/add_address_btn_bg"
+            android:text="تم"
+            android:layout_margin="@dimen/_16sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintTop_toBottomOf="@id/address_container"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/cart_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/no_previous_orders"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cart_empty"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/hanimation_arabic_medium"
+                android:textSize="@dimen/_12ssp"/>
+
+        </LinearLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
 
 
+</ScrollView>
