@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".core.packages.PackageDetailsActivity">
+
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_package"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
+        app:cardCornerRadius="@dimen/round_radius_medium"
+        android:background="@color/transparent"
+        android:layout_margin="@dimen/_10sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/prz_bg"
+            android:padding="@dimen/margin_medium">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:fontFamily="@font/hanimation_regular"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:text="باقة البرونزية"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:fontFamily="@font/hanimation_arabic_light"
+                android:textColor="@color/white"
+                android:text="300 جنية / للفرد"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:fontFamily="@font/hanimation_arabic_light"
+                android:textColor="@color/white"
+                android:text="20 الف جنية وثيقة حوادث شخصية لكل فرد من الاسرة (٣ افراد)"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintTop_toBottomOf="@id/tv_price" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/insurance"
+        android:fontFamily="@font/hanimation_arabic_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cv_package"
+        android:text="قيمة الوثائق التأمينة"
+        android:textSize="@dimen/_12ssp"
+        android:layout_margin="@dimen/_10sdp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/insurance_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/insurance"
+        android:text="وثيقة تأمين طبي بقيمة 25 ألف جنية علاج طبي طوارئ بقيمة 10 ألاف جنية وثيقة حوادث شخصية بقيمة 100 ألف جنية"
+        android:textSize="@dimen/_12ssp"
+        android:layout_margin="@dimen/_10sdp"
+        android:textColor="#CC000000"/>
+
+    <TextView
+        android:id="@+id/insurance_period"
+        android:fontFamily="@font/hanimation_arabic_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/insurance_value"
+        android:text="مدة التأمين"
+        android:textSize="@dimen/_12ssp"
+        android:layout_margin="@dimen/_10sdp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/insurance_period_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/insurance_period"
+        android:text="سنة من تاريخ الأصدار لكل وثيقه"
+        android:textSize="@dimen/_12ssp"
+        android:layout_margin="@dimen/_10sdp"
+        android:textColor="#CC000000"/>
+
+    <TextView
+        android:id="@+id/service"
+        android:fontFamily="@font/hanimation_arabic_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/insurance_period_value"
+        android:text="خدمات اضافية"
+        android:textSize="@dimen/_12ssp"
+        android:layout_margin="@dimen/_10sdp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/service_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/service"
+        android:text="كارت خصومات طبية و صيدلية اونلاين"
+        android:textSize="@dimen/_12ssp"
+        android:layout_margin="@dimen/_10sdp"
+        android:textColor="#CC000000"/>
+
+    <TextView
+        android:id="@+id/back_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/back_btn_bg"
+        app:layout_constraintBottom_toTopOf="@id/subscribe_btn"
+        android:padding="@dimen/_10sdp"
+        android:text="رجوع"
+        android:layout_margin="@dimen/_10sdp"
+        android:textAlignment="center"
+        android:textColor="#5D81D4"
+        />
+
+    <TextView
+        android:id="@+id/subscribe_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/select_btn_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="اشتراك"
+        android:layout_margin="@dimen/_10sdp"
+        android:textAlignment="center"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

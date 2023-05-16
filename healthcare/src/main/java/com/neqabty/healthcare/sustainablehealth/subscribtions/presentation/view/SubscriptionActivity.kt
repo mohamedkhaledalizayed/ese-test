@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.Constants
+import com.neqabty.healthcare.core.packages.UploadFrontNationalid
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import com.neqabty.healthcare.core.utils.Status
@@ -79,7 +80,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
         subscriptionMode = intent.getBooleanExtra("subscriptionMode", false)
         binding.ccp.registerCarrierNumberEditText(binding.deliveryPhone)
-        binding.ccp2.registerCarrierNumberEditText(binding.etReferralNumber)
+//        binding.ccp2.registerCarrierNumberEditText(binding.etReferralNumber)
         name = intent.getStringExtra("name")
         price = intent.getDoubleExtra("price", 0.0)
         vat = intent.getDoubleExtra("vat", 0.0)
@@ -97,37 +98,37 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         binding.etEmail.setText(sharedPreferences.email)
         binding.etEmail.isEnabled = false
 
-        binding.spRelations.adapter = relationsAdapter
+//        binding.spRelations.adapter = relationsAdapter
 
-        if (!subscriptionMode){
-            setupToolbar(title = "تعديل البيانات")
-            binding.followersInfo.visibility = View.GONE
-        }
+//        if (!subscriptionMode){
+//            setupToolbar(title = "تعديل البيانات")
+//            binding.followersInfo.visibility = View.GONE
+//        }
 
-        if (maxFollowers == 0){
-            binding.followersInfo.visibility = View.GONE
-        }
-        binding.spRelations.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
-                if (relationsList != null && i != 0) {
-                    relationTypeId = relationsList?.get(i - 1)!!.id
-                    relation = relationsList?.get(i - 1)!!.relation
-                }
-            }
-
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-        }
+//        if (maxFollowers == 0){
+//            binding.followersInfo.visibility = View.GONE
+//        }
+//        binding.spRelations.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+//                if (relationsList != null && i != 0) {
+//                    relationTypeId = relationsList?.get(i - 1)!!.id
+//                    relation = relationsList?.get(i - 1)!!.relation
+//                }
+//            }
+//
+//            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+//        }
 
         calendar = Calendar.getInstance()
-        binding.etPhone.setText(sharedPreferences.mobile)
-        binding.etPhone.isEnabled = false
-        binding.etBirthDate.isEnabled = false
+//        binding.etPhone.setText(sharedPreferences.mobile)
+//        binding.etPhone.isEnabled = false
+//        binding.etBirthDate.isEnabled = false
 
-        binding.selectDate.setOnClickListener {
+        binding.etBirthDate.setOnClickListener {
             datePicker = DatePickerDialog(
                 this@SubscriptionActivity,
                 { _, year, monthOfYear, dayOfMonth ->
-                    binding.etBirthDate.setText("$year-${monthOfYear + 1}-$dayOfMonth")
+                    binding.etBirthDate.text = "$year-${monthOfYear + 1}-$dayOfMonth"
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -135,6 +136,10 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             )
             datePicker.datePicker.maxDate = System.currentTimeMillis()
             datePicker.show()
+        }
+
+        binding.nextBtn.setOnClickListener {
+            startActivity(Intent(this, UploadFrontNationalid::class.java))
         }
 
 
@@ -165,69 +170,69 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             }
         }
 
-        subscriptionViewModel.providers.observe(this) {
-
-            it.let { resource ->
-
-                when (resource.status) {
-                    Status.LOADING -> {
-                        binding.progressCircular.visibility = View.VISIBLE
-                        binding.screenContainer.visibility = View.GONE
-                    }
-                    Status.SUCCESS -> {
-                        binding.progressCircular.visibility = View.GONE
-                        binding.screenContainer.visibility = View.VISIBLE
-                        if (resource.data!!.status){
-                            Toast.makeText(this, "تم الأشتراك بنجاح.", Toast.LENGTH_LONG).show()
-                            val intent = Intent(this, SehaPaymentActivity::class.java)
-                            intent.putExtra("name", name)
-                            intent.putExtra("price", price)
-                            intent.putExtra("vat", vat)
-                            intent.putExtra("total", total)
-                            intent.putExtra("serviceCode", serviceCode)
-                            intent.putExtra("serviceActionCode", serviceActionCode)
-                            startActivity(intent)
-                            finish()
-                        }else{
-                            Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
-                        }
-                    }
-                    Status.ERROR -> {
-                        binding.progressCircular.visibility = View.GONE
-                        binding.screenContainer.visibility = View.VISIBLE
-                    }
-                }
-
-            }
-        }
+//        subscriptionViewModel.providers.observe(this) {
+//
+//            it.let { resource ->
+//
+//                when (resource.status) {
+//                    Status.LOADING -> {
+//                        binding.progressCircular.visibility = View.VISIBLE
+//                        binding.screenContainer.visibility = View.GONE
+//                    }
+//                    Status.SUCCESS -> {
+//                        binding.progressCircular.visibility = View.GONE
+//                        binding.screenContainer.visibility = View.VISIBLE
+//                        if (resource.data!!.status){
+//                            Toast.makeText(this, "تم الأشتراك بنجاح.", Toast.LENGTH_LONG).show()
+//                            val intent = Intent(this, SehaPaymentActivity::class.java)
+//                            intent.putExtra("name", name)
+//                            intent.putExtra("price", price)
+//                            intent.putExtra("vat", vat)
+//                            intent.putExtra("total", total)
+//                            intent.putExtra("serviceCode", serviceCode)
+//                            intent.putExtra("serviceActionCode", serviceActionCode)
+//                            startActivity(intent)
+//                            finish()
+//                        }else{
+//                            Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
+//                        }
+//                    }
+//                    Status.ERROR -> {
+//                        binding.progressCircular.visibility = View.GONE
+//                        binding.screenContainer.visibility = View.VISIBLE
+//                    }
+//                }
+//
+//            }
+//        }
         
-        subscriptionViewModel.packageStatus.observe(this) {
-
-            it.let { resource ->
-
-                when (resource.status) {
-                    Status.LOADING -> {
-                        binding.progressCircular.visibility = View.VISIBLE
-                        binding.screenContainer.visibility = View.GONE
-                    }
-                    Status.SUCCESS -> {
-                        binding.progressCircular.visibility = View.GONE
-                        binding.screenContainer.visibility = View.VISIBLE
-                        if (resource.data!!.status){
-                            Toast.makeText(this, "تم تعديل البيانات بنجاح.", Toast.LENGTH_LONG).show()
-                            finish()
-                        }else{
-                            Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
-                        }
-                    }
-                    Status.ERROR -> {
-                        binding.progressCircular.visibility = View.GONE
-                        binding.screenContainer.visibility = View.VISIBLE
-                    }
-                }
-
-            }
-        }
+//        subscriptionViewModel.packageStatus.observe(this) {
+//
+//            it.let { resource ->
+//
+//                when (resource.status) {
+//                    Status.LOADING -> {
+//                        binding.progressCircular.visibility = View.VISIBLE
+//                        binding.screenContainer.visibility = View.GONE
+//                    }
+//                    Status.SUCCESS -> {
+//                        binding.progressCircular.visibility = View.GONE
+//                        binding.screenContainer.visibility = View.VISIBLE
+//                        if (resource.data!!.status){
+//                            Toast.makeText(this, "تم تعديل البيانات بنجاح.", Toast.LENGTH_LONG).show()
+//                            finish()
+//                        }else{
+//                            Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
+//                        }
+//                    }
+//                    Status.ERROR -> {
+//                        binding.progressCircular.visibility = View.GONE
+//                        binding.screenContainer.visibility = View.VISIBLE
+//                    }
+//                }
+//
+//            }
+//        }
 
         binding.etName.customSelectionActionModeCallback = actionMode
         binding.etNationalId.customSelectionActionModeCallback = actionMode
@@ -237,86 +242,6 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         binding.etJob.customSelectionActionModeCallback = actionMode
     }
 
-    fun addFollower(view: View) {
-        if (listFollower.size >= maxFollowers){
-            Toast.makeText(this, "لا يمكن إضافة أكثر من $maxFollowers تابعين ", Toast.LENGTH_LONG).show()
-            return
-        }
-        binding.addFollower.visibility = View.GONE
-        binding.addFollowerText.visibility = View.GONE
-        binding.followerInfo.visibility = View.VISIBLE
-    }
-
-    fun addNewFollower(view: View) {
-
-        if (followerImageUri == null){
-            Toast.makeText(this, "من فضلك اختر صورة.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (binding.etFullName.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الاسم.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (binding.etNational.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الرقم القومى.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (!binding.etNational.text.toString().isNationalIdValid()){
-            Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (binding.etNational.text.toString().length < 14){
-            Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (binding.etNational.text.toString().length < 14){
-            Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        if (binding.spRelations.selectedItemPosition == 0 || relationTypeId == 0){
-            Toast.makeText(this, "من فضلك اختر درجة القرابة.", Toast.LENGTH_LONG).show()
-            return
-        }
-
-        val follower = Followers(
-            name = binding.etFullName.text.toString(),
-            relation = relation,
-            imageUri = followerImageUri!!,
-            national_id = binding.etNational.text.toString(),
-            relation_type = relationTypeId,
-            image = followerUri!!
-        )
-
-        listFollower.add(follower)
-        binding.followersRecycler.adapter = mAdapter
-        mAdapter.submitList(listFollower)
-
-        mAdapter.onItemClickListener = object : FollowerAdapter.OnItemClickListener{
-            override fun setOnDeleteClickListener(position: Int) {
-                listFollower.removeAt(position)
-                mAdapter.submitList(listFollower)
-            }
-
-        }
-        followerUri = null
-        followerImageUri = null
-        binding.etFullName.setText("")
-        binding.etNational.setText("")
-        binding.spRelations.setSelection(0)
-        binding.followerImage.setImageResource(R.drawable.user)
-        binding.followerInfo.visibility = View.GONE
-        binding.addFollower.visibility = View.VISIBLE
-        binding.addFollowerText.visibility = View.VISIBLE
-        binding.followersRecycler.visibility = View.VISIBLE
-
-
-    }
 
     @Suppress("DEPRECATED_IDENTITY_EQUALS")
     private fun checkPermissionsAndOpenFilePicker() {
@@ -366,28 +291,28 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
                 val file = File(photoUI.path, photoUI.name)
                 val res = Base64.encodeToString(file.readBytes(), Base64.DEFAULT)
-                when (REQUEST_CODE) {
-                    1001 -> {
-                            userImageUri = res
-                            binding.addPersonalPhoto.setImageResource(R.drawable.success)
-                            binding.personalPhotoText.text = "تم إرفاق الصورة بنجاح."
-                    }
-                    1002 -> {
-                            nationalIdFrontUri = res
-                            binding.addImage.setImageResource(R.drawable.success)
-                            binding.addImageText.text = "تم إرفاق الصورة بنجاح."
-                    }
-                    1003 -> {
-                            nationalIdBackUri = res
-                            binding.addImageBack.setImageResource(R.drawable.success)
-                            binding.addImageTextBack.text = "تم إرفاق الصورة بنجاح."
-                    }
-                    1004 -> {
-                            followerImageUri = data.data!!
-                            followerUri = res
-                            binding.followerImage.setImageURI(data.data!!)
-                    }
-                }
+//                when (REQUEST_CODE) {
+//                    1001 -> {
+//                            userImageUri = res
+//                            binding.addPersonalPhoto.setImageResource(R.drawable.success)
+//                            binding.personalPhotoText.text = "تم إرفاق الصورة بنجاح."
+//                    }
+//                    1002 -> {
+//                            nationalIdFrontUri = res
+//                            binding.addImage.setImageResource(R.drawable.success)
+//                            binding.addImageText.text = "تم إرفاق الصورة بنجاح."
+//                    }
+//                    1003 -> {
+//                            nationalIdBackUri = res
+//                            binding.addImageBack.setImageResource(R.drawable.success)
+//                            binding.addImageTextBack.text = "تم إرفاق الصورة بنجاح."
+//                    }
+//                    1004 -> {
+//                            followerImageUri = data.data!!
+//                            followerUri = res
+//                            binding.followerImage.setImageURI(data.data!!)
+//                    }
+//                }
 
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -489,52 +414,52 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             return
         }
 
-        if (binding.etPhone.text.toString().isNullOrEmpty()){
-            Toast.makeText(this, "من فضلك ادخل الهاتف.", Toast.LENGTH_LONG).show()
-            return
-        }
+//        if (binding.etPhone.text.toString().isNullOrEmpty()){
+//            Toast.makeText(this, "من فضلك ادخل الهاتف.", Toast.LENGTH_LONG).show()
+//            return
+//        }
 
-        if (subscriptionMode){
-
-            val sub = SubscribePostBodyRequest(
-                name = binding.etName.text.toString(),
-                email = binding.etEmail.text.toString(),
-                birthDate = binding.etBirthDate.text.toString(),
-                deliveryPhone = binding.ccp.fullNumberWithPlus,
-                address = binding.etAddress.text.toString(),
-                job = binding.etJob.text.toString(),
-                mobile = binding.etPhone.text.toString(),
-                nationalId = binding.etNationalId.text.toString(),
-                entityCode = sharedPreferences.code,
-                serviceActionCode = "$serviceActionCode",
-                referralNumber = binding.ccp2.fullNumberWithPlus,
-                personalImage = userImageUri!!,
-                frontIdImage = nationalIdFrontUri!!,
-                backIdImage = nationalIdBackUri!!,
-                followers = listFollower
-            )
-
-            subscriptionViewModel.addSubscription(sub)
-        }else{
-
-            val updatePackageBody = UpdatePackageBody(
-                name = binding.etName.text.toString(),
-                email = binding.etEmail.text.toString(),
-                birthDate = binding.etBirthDate.text.toString(),
-                deliveryPhone = binding.ccp.fullNumberWithPlus,
-                address = binding.etAddress.text.toString(),
-                job = binding.etJob.text.toString(),
-                mobile = binding.etPhone.text.toString(),
-                nationalId = binding.etNationalId.text.toString(),
-                userNumber = userNumber,
-                personalImage = userImageUri!!,
-                frontIdImage = nationalIdFrontUri!!,
-                backIdImage = nationalIdBackUri!!,
-            )
-
-            subscriptionViewModel.updatePackage(updatePackageBody)
-
-        }
+//        if (subscriptionMode){
+//
+//            val sub = SubscribePostBodyRequest(
+//                name = binding.etName.text.toString(),
+//                email = binding.etEmail.text.toString(),
+//                birthDate = binding.etBirthDate.text.toString(),
+//                deliveryPhone = binding.ccp.fullNumberWithPlus,
+//                address = binding.etAddress.text.toString(),
+//                job = binding.etJob.text.toString(),
+//                mobile = sharedPreferences.mobile,
+//                nationalId = binding.etNationalId.text.toString(),
+//                entityCode = sharedPreferences.code,
+//                serviceActionCode = "$serviceActionCode",
+//                referralNumber = binding.ccp2.fullNumberWithPlus,
+//                personalImage = userImageUri!!,
+//                frontIdImage = nationalIdFrontUri!!,
+//                backIdImage = nationalIdBackUri!!,
+//                followers = listFollower
+//            )
+//
+//            subscriptionViewModel.addSubscription(sub)
+//        }else{
+//
+//            val updatePackageBody = UpdatePackageBody(
+//                name = binding.etName.text.toString(),
+//                email = binding.etEmail.text.toString(),
+//                birthDate = binding.etBirthDate.text.toString(),
+//                deliveryPhone = binding.ccp.fullNumberWithPlus,
+//                address = binding.etAddress.text.toString(),
+//                job = binding.etJob.text.toString(),
+//                mobile = sharedPreferences.mobile,
+//                nationalId = binding.etNationalId.text.toString(),
+//                userNumber = userNumber,
+//                personalImage = userImageUri!!,
+//                frontIdImage = nationalIdFrontUri!!,
+//                backIdImage = nationalIdBackUri!!,
+//            )
+//
+//            subscriptionViewModel.updatePackage(updatePackageBody)
+//
+//        }
     }
 
     override fun onStart() {

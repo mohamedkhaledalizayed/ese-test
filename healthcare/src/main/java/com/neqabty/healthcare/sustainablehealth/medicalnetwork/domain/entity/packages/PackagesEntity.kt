@@ -1,7 +1,10 @@
 package com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 
+@Parcelize
 data class PackagesEntity(
     val description: String,
     val extension: String,
@@ -22,4 +25,4 @@ data class PackagesEntity(
     val insuranceAmount: String?,
     val neddedInfo: String?,
     val targetGroups: String?
-)
+) : Parcelable

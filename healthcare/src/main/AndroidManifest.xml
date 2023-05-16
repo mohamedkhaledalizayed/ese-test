@@ -12,11 +12,16 @@
     <uses-permission android:name="android.webkit.PermissionRequest" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
-    <uses-feature android:name="android.hardware.camera.front" android:required="true" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -43,6 +48,15 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
+            android:name=".core.packages.UploadBackNationalid"
+            android:exported="false" />
+        <activity
+            android:name=".core.packages.UploadFrontNationalid"
+            android:exported="false" />
+        <activity
+            android:name=".core.packages.PackageDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".commen.pharmacy.PharmacyActivity"
             android:exported="false" />
         <activity
@@ -54,14 +68,14 @@
             android:exported="false" />
         <activity
             android:name=".auth.forgetpassword.view.changepassword.ChangePasswordActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".auth.forgetpassword.view.ForgetPasswordActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -98,8 +112,7 @@
             android:exported="false" />
         <activity
             android:name=".commen.onboarding.contact.view.SigninDoneActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".commen.onboarding.contact.view.UploadIdFrontActivity"
             android:exported="false" />
@@ -108,34 +121,36 @@
             android:exported="false" />
         <activity
             android:name=".commen.onboarding.contact.view.ReviewYourDataActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".commen.onboarding.contact.view.ResidenceActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".commen.onboarding.contact.view.DependantsActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".commen.onboarding.contact.view.ReferenceNumberActivity"
             android:exported="false">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".commen.onboarding.contact.view.EmploymentDetails1Activity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".commen.onboarding.contact.view.EmploymentDetails2Activity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".commen.onboarding.contact.view.EmploymentDetails3Activity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".core.home_syndicates.view.SyndicatesHomeActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".core.home_general.GeneralHomeActivity"
             android:exported="false" />

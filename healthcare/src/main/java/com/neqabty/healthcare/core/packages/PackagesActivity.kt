@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.core.packages
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
@@ -32,6 +33,9 @@ class PackagesActivity : BaseActivity<ActivityPackagesBinding>() {
         packagesAdapter.onItemClickListener = object :
             PackagesAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: PackagesEntity) {
+                val intent = Intent(this@PackagesActivity, PackageDetailsActivity::class.java)
+                intent.putExtra("package", item)
+                startActivity(intent)
             }
         }
     }
