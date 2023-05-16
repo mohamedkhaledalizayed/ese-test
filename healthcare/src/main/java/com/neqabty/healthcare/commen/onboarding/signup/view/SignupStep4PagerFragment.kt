@@ -38,8 +38,10 @@ class SignupStep4PagerFragment : Fragment() {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser)
+        if (isVisibleToUser) {
             initializeViews()
+            initializeObservers()
+        }
     }
 
     private fun initializeViews() {
@@ -66,6 +68,10 @@ class SignupStep4PagerFragment : Fragment() {
 
         if (entityValidationsList?.find { it.validationName == "has_national_id" }?.value == true) {
             binding.clNationalId.visibility = View.VISIBLE
+        }
+
+        if (entityValidationsList?.find { it.validationName == "has_email" }?.value == true) {
+            binding.clEmail.visibility = View.VISIBLE
         }
 
         binding.tvPasswordRules.setOnClickListener {
@@ -99,18 +105,7 @@ class SignupStep4PagerFragment : Fragment() {
         binding.tvPasswordReset.visibility = View.GONE
     }
 
-    fun signup() {
-        activity.signupViewModel.generalUserSignup(
-            NeqabtySignupBody(
-                email = binding.etEmail.text.toString(),
-                fullname = binding.etName.text.toString(),
-                entityCode = if(SignupData.syndicateID == Constants.NEQABTY_CODE) "" else SignupData.syndicateID,
-                mobile = activity.sharedPreferences.mobile,
-                nationalId = binding.etNationalId.text.toString(),
-                membershipId = binding.etMembershipNumber.text.toString(),
-                password = binding.etPassword.text.toString()
-            )
-        )
+    private fun initializeObservers() {
         activity.signupViewModel.generalUser.observe(this) {
             it?.let { resource ->
                 when (resource.status) {
@@ -144,14 +139,27 @@ class SignupStep4PagerFragment : Fragment() {
                         activity.hideProgressDialog()
                         Toast.makeText(
                             activity,
-                            resources.getString(R.string.something_wrong),
+                            resource.message ?: resources.getString(R.string.something_wrong),
                             Toast.LENGTH_LONG
                         ).show()
                     }
                 }
             }
-
         }
+    }
+
+    fun signup() {
+        activity.signupViewModel.generalUserSignup(
+            NeqabtySignupBody(
+                email = binding.etEmail.text.toString(),
+                fullname = binding.etName.text.toString(),
+                entityCode = if(SignupData.syndicateID == Constants.NEQABTY_CODE) "" else SignupData.syndicateID,
+                mobile = activity.sharedPreferences.mobile,
+                nationalId = binding.etNationalId.text.toString(),
+                membershipId = binding.etMembershipNumber.text.toString(),
+                password = binding.etPassword.text.toString()
+            )
+        )
     }
 
     private fun navigate() {

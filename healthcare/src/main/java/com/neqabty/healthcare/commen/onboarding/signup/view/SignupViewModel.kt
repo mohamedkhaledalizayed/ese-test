@@ -12,6 +12,8 @@ import com.neqabty.healthcare.auth.signup.data.model.syndicatemember.UserModel
 import com.neqabty.healthcare.auth.signup.domain.interactors.SignupUseCase
 import com.neqabty.healthcare.auth.signup.presentation.model.UserUIModel
 import com.neqabty.healthcare.auth.signup.presentation.model.mappers.toUserUIModel
+import com.neqabty.healthcare.commen.checkaccountstatus.data.model.CheckPhoneBody
+import com.neqabty.healthcare.commen.checkaccountstatus.domain.usecases.CheckAccountUseCase
 import com.neqabty.healthcare.commen.syndicates.domain.entity.SyndicateEntity
 import com.neqabty.healthcare.commen.syndicates.domain.interactors.GetSyndicateUseCase
 import com.neqabty.healthcare.core.ui.BaseViewModel
@@ -28,9 +30,25 @@ import javax.inject.Inject
 class SignupViewModel @Inject constructor(
     private val verifyPhoneUseCase: VerifyPhoneUseCase,
     private val getSyndicateUseCase: GetSyndicateUseCase,
+    private val checkAccountUseCase: CheckAccountUseCase,
     private val signupUseCase: SignupUseCase
 ) :
     BaseViewModel() {
+
+    val accountStatus = MutableLiveData<Resource<String>>()
+    fun checkAccount(checkPhoneBody: CheckPhoneBody){
+        viewModelScope.launch(Dispatchers.IO){
+            accountStatus.postValue(Resource.loading(data = null))
+
+            try {
+                checkAccountUseCase.build(checkPhoneBody).collect(){
+                    accountStatus.postValue(Resource.success(data = it))
+                }
+            }catch (e: Throwable){
+                accountStatus.postValue(Resource.error(data = null, message = handleError(e)))
+            }
+        }
+    }
 
     val otp = MutableLiveData<Resource<OTPEntity>>()
     fun sendOTP(sendOTPBody: SendOTPBody){

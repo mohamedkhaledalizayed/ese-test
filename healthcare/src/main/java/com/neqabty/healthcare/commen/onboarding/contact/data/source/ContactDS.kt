@@ -8,13 +8,13 @@ import javax.inject.Inject
 
 class ContactDS @Inject constructor(private val contactApi: ContactApi, private val preferencesHelper: PreferencesHelper) {
     suspend fun checkMember(nationalId: String): CheckMemberResponse {
-        return contactApi.checkMember(token = "token ${preferencesHelper.token}", CheckMemberRequest(nationalId))
+        return contactApi.checkMember(token = "token a1b2e1497425aa026d753e76b19db76bdd9a1f43", CheckMemberRequest(nationalId))
     }
 
     suspend fun createOCR(idFace: MultipartBody.Part?,
                           idBack: MultipartBody.Part?,
                           nationalId: String, mobile: String): CreateOCRResponse {
-        return contactApi.createOCR(token = "token ${preferencesHelper.token}", CreateOCRRequest(idFace, idBack, nationalId, mobile))
+        return contactApi.createOCR(token = "token a1b2e1497425aa026d753e76b19db76bdd9a1f43", nationalId, mobile, idFace, idBack)
     }
 
     suspend fun getLookups(): List<GovResponse>{
@@ -22,6 +22,6 @@ class ContactDS @Inject constructor(private val contactApi: ContactApi, private 
     }
 
     suspend fun submitClient(nationalId: String): SubmitClientResponse {
-        return contactApi.submitClient(token = "token ${preferencesHelper.token}", SubmitClientRequest(nationalId))
+        return contactApi.submitClient(token = "token a1b2e1497425aa026d753e76b19db76bdd9a1f43", SubmitClientRequest(nationalId))
     }
 }

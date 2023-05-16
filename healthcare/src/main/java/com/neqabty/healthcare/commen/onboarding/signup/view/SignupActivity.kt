@@ -8,8 +8,10 @@ import androidx.activity.viewModels
 import androidx.viewpager.widget.ViewPager
 import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.auth.login.view.LoginActivity
 import com.neqabty.healthcare.auth.otp.data.model.CheckOTPBody
 import com.neqabty.healthcare.auth.otp.data.model.SendOTPBody
+import com.neqabty.healthcare.commen.checkaccountstatus.data.model.CheckPhoneBody
 import com.neqabty.healthcare.commen.onboarding.contact.view.SigninDoneActivity
 import com.neqabty.healthcare.commen.onboarding.signup.data.SignupData
 import com.neqabty.healthcare.core.data.Constants
@@ -29,6 +31,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
 
         setupToolbar(R.string.signup_title)
         initializeViews()
+        initializeObservers()
         getSyndicates()
     }
 
@@ -76,15 +79,10 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                     sharedPreferences.mobile_without_cc = step1Binding.ccp.fullNumber
                         .substring(1, step1Binding.ccp.fullNumber.length)
 
-                    if (!BuildConfig.DEBUG) {
-                        sendOTP()
-                        movePagertoNext()
-                        return@setOnClickListener
-                    }
-                    movePagertoNext()
+                    checkAccountStatus()
                 }
                 1 -> {
-                    if (BuildConfig.DEBUG) {
+                    if (Constants.forTesting) {
                         movePagertoNext()
                         return@setOnClickListener
                     }
@@ -102,7 +100,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                 }
                 2 -> {}
                 else -> {
-                    if (BuildConfig.DEBUG) {
+                    if (Constants.forTesting) {
                         if (SignupData.syndicateID != Constants.NEQABTY_CODE){
                             sharedPreferences.isAuthenticated = true
                             sharedPreferences.isSyndicateMember = true
@@ -114,8 +112,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                         startActivity(mainIntent)
                         finish()
                     }
-                    if (SignupData.syndicateID == Constants.NEQABTY_CODE)
-                        (adapter.fragments[3] as SignupStep4PagerFragment).signup()
+                    (adapter.fragments[3] as SignupStep4PagerFragment).signup()
                     return@setOnClickListener
                 }
             }
@@ -130,6 +127,47 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
         binding.slvpSignup.setCurrentItem(binding.slvpSignup.currentItem + 1, true)
     }
 
+
+    private fun initializeObservers() {
+        observeOnAccountStatus()
+        observeOnSendOTP()
+        observeOnCheckOTP()
+        observeOnGetSyndicates()
+    }
+
+    fun checkAccountStatus() {
+        signupViewModel.checkAccount(CheckPhoneBody(mobile = sharedPreferences.mobile))
+    }
+
+    private fun observeOnAccountStatus() {
+        signupViewModel.accountStatus.observe(this){
+            it.let { resource ->
+                when(resource.status){
+                    Status.LOADING ->{
+                        showProgressDialog()
+                    }
+                    Status.SUCCESS ->{
+                        hideProgressDialog()
+                        if (resource.data == "Found"){
+                            val intent = Intent(this, LoginActivity::class.java)
+                            intent.putExtra("phone", sharedPreferences.mobile)
+                            startActivity(intent)
+                            finishAffinity()
+                        }else{
+                            if (!Constants.forTesting) {
+                                sendOTP()
+                            }
+                            movePagertoNext()
+                        }
+                    }
+                    Status.ERROR ->{
+                        hideProgressDialog()
+                    }
+                }
+            }
+        }
+    }
+
     //region
     private fun navigate() {
         val mainIntent = Intent(
@@ -142,6 +180,9 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
 
     fun sendOTP() {
         signupViewModel.sendOTP(SendOTPBody(phoneNumber = sharedPreferences.mobile_without_cc))
+    }
+
+    private fun observeOnSendOTP(){
         signupViewModel.otp.observe(this) {
             it.let { resource ->
                 when (resource.status) {
@@ -172,6 +213,9 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                 phoneNumber = sharedPreferences.mobile_without_cc
             )
         )
+    }
+
+    private fun observeOnCheckOTP(){
         signupViewModel.otpStatus.observe(this) {
             it.let { resource ->
                 when (resource.status) {
@@ -196,6 +240,9 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
 
     private fun getSyndicates() {
         signupViewModel.getSyndicates()
+    }
+
+    private fun observeOnGetSyndicates(){
         signupViewModel.syndicates.observe(this) {
 
             it?.let { resource ->

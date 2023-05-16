@@ -7,6 +7,7 @@ import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
 
 object Constants {
 
+    const val forTesting = true
 
     //TODO move this to gradle
     //Very Important Before Publishing
