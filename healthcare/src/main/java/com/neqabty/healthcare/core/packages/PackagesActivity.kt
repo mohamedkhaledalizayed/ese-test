@@ -2,6 +2,7 @@ package com.neqabty.healthcare.core.packages
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.Constants
@@ -24,7 +25,6 @@ class PackagesActivity : BaseActivity<ActivityPackagesBinding>() {
         setContentView(binding.root)
 
         setupToolbar(titleResId = R.string.packages)
-        showProgressDialog()
         getPackages()
     }
 
@@ -47,16 +47,19 @@ class PackagesActivity : BaseActivity<ActivityPackagesBinding>() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
-                        showProgressDialog()
+                        binding.shimmerFrameLayout.visibility = View.VISIBLE
+                        binding.shimmerFrameLayout.startShimmerAnimation()
                     }
                     Status.SUCCESS -> {
-                        hideProgressDialog()
+                        binding.shimmerFrameLayout.stopShimmerAnimation()
+                        binding.shimmerFrameLayout.visibility = View.GONE
+                        binding.rvPackages.visibility = View.VISIBLE
                         packagesAdapter.submitList(resource.data!!.toMutableList())
                         initializeViews()
                     }
                     Status.ERROR -> {
-                        hideProgressDialog()
-                        getPackages()
+                        binding.shimmerFrameLayout.stopShimmerAnimation()
+                        binding.shimmerFrameLayout.visibility = View.GONE
                     }
                 }
             }

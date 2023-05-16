@@ -6,7 +6,10 @@ import android.os.Bundle
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityUploadBackNationalidBinding
 import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class UploadBackNationalid : BaseActivity<ActivityUploadBackNationalidBinding>() {
     override fun getViewBinding() = ActivityUploadBackNationalidBinding.inflate(layoutInflater)
 
