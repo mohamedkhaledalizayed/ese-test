@@ -56,6 +56,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     private var address = ""
     private var entityBranch = ""
     private var branchesList: List<BranchesEntity>? = null
+    private var deliveryMethodsEnabled = false
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
 
     @SuppressLint("SetTextI18n")
@@ -66,14 +67,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         setupToolbar(titleResId = R.string.payments)
 
         binding.address.customSelectionActionModeCallback = actionMode
-
-//        if (sharedPreferences.code == AGRI_CODE){
-//            binding.tvDeliveryMethod.visibility = View.GONE
-//            binding.rgDeliveryMethods.visibility = View.GONE
-//            binding.deliveryFees.visibility = View.GONE
-//            binding.deliveryFeesValue.visibility = View.GONE
-//        }
-
 
         serviceCode = intent.getStringExtra("code")!!
         serviceActionCode = intent.getStringExtra("service_action_code")!!
@@ -87,6 +80,11 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                 sharedPreferences.membershipId
             )
         }
+
+        if (sharedPreferences.code == MORSHEDIN_CODE) {
+            binding.fees.visibility = View.GONE
+        }
+
         paymentViewModel.payment.observe(this) {
 
             it?.let { resource ->
@@ -113,7 +111,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                             binding.tvName.text =
                                 resources.getString(
                                     R.string.member_name,
-                                    resource.data!!.member.name ?: ""
+                                    resource.data.member.name ?: ""
                                 )
                             binding.tvMemberNumber.text =
                                 resources.getString(
@@ -267,7 +265,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                 return@setOnClickListener
             }
 
-            if (deliveryMethod == 0 && sharedPreferences.code != AGRI_CODE){
+            if (deliveryMethod == 0 && deliveryMethodsEnabled){
                 Toast.makeText(this, "من فضلك اختر طريقة التوصيل.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
@@ -276,7 +274,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                 address = binding.address.text.toString()
             }
 
-            if (deliveryMethod == deliveryMethodHomeId && address.isEmpty() && sharedPreferences.code != AGRI_CODE) {
+            if (deliveryMethod == deliveryMethodHomeId && address.isEmpty() && deliveryMethodsEnabled) {
                 Toast.makeText(this, resources.getString(R.string.enter_add), Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
@@ -299,7 +297,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                 serviceActionCode = serviceActionCode,
                                 paymentMethod = paymentMethod,
                                 address = address,
-                                deliveryMethod = deliveryMethodHomeId,
+                                deliveryMethod = if (deliveryMethodsEnabled) deliveryMethod else null,
                                 deliveryMobile = binding.mobile.text.toString(),
                                 deliveryNotes = binding.notes.text.toString()
                             )
@@ -311,6 +309,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                 serviceCode = serviceCode,
                                 serviceActionCode = serviceActionCode,
                                 paymentMethod = paymentMethod,
+                                deliveryMethod = if (deliveryMethodsEnabled) deliveryMethod else null,
                                 membershipId = sharedPreferences.membershipId.toInt(),
                                 deliveryMobile = binding.mobile.text.toString(),
                                 deliveryNotes = binding.notes.text.toString()
@@ -358,9 +357,13 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     private fun handleDeliveryMethods(deliveryMethods: List<DeliveryMethod>) {
 
         if (deliveryMethods.isEmpty()) {
+            binding.deliveryFees.visibility = View.GONE
+            binding.deliveryFeesValue.visibility = View.GONE
+            binding.fees.visibility = View.GONE
             return
         }
 
+        deliveryMethodsEnabled = true
         if (deliveryMethods.any { it.type == "Home" }) {
             setDeliveryViewsVisible()
             binding.rbHome.visibility = View.VISIBLE
@@ -448,16 +451,22 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
     }
 
+//    private fun updateTotal() {
+//        if (sharedPreferences.code == AGRI_CODE) {
+//            binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
+//            binding.totValue.text = "$totalAmount  ${resources.getString(R.string.egp)}"
+//        } else {
+//            binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
+//            binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
+//            binding.totValue.text =
+//                "${(totalAmount + deliveryFees)}  ${resources.getString(R.string.egp)}"
+//        }
+//    }
+
     private fun updateTotal() {
-        if (sharedPreferences.code == AGRI_CODE) {
-            binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
-            binding.totValue.text = "$totalAmount  ${resources.getString(R.string.egp)}"
-        } else {
-            binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
-            binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
-            binding.totValue.text =
-                "${(totalAmount + deliveryFees)}  ${resources.getString(R.string.egp)}"
-        }
+        binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
+        binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
+        binding.totValue.text = "$totalAmount  ${resources.getString(R.string.egp)}"
     }
 
     private fun showDialog(message: String) {

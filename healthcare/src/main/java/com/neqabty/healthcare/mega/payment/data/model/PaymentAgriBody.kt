@@ -16,6 +16,8 @@ class PaymentAgriBody (
     val transactionType: String = "payment",
     @SerializedName("membership_id")
     val membershipId: Int = 0,
+    @SerializedName("delivery_method")
+    val deliveryMethod: Int?,
     @SerializedName("delivery_mobile")
     val deliveryMobile: String = "",
     @SerializedName("delivery_notes")
