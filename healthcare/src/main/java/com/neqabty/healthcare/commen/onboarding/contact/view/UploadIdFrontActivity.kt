@@ -117,8 +117,7 @@ class UploadIdFrontActivity : BaseActivity<ActivityUploadIdFrontBinding>() {
                 }
                 val photoUI = saveImage(bitmap)
 
-                val file = File(photoUI.path, photoUI.name)
-                OcrData.front = photoUI //Base64.encodeToString(file.readBytes(), Base64.DEFAULT)
+                OcrData.front = PhotoUI("", "", data.data) //Base64.encodeToString(file.readBytes(), Base64.DEFAULT)
                 when (REQUEST_CODE) {
                     1001 -> {
                         nationalIdFront = photoUI

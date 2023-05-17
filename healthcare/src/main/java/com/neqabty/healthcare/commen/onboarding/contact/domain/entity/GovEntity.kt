@@ -7,9 +7,17 @@ import kotlinx.android.parcel.Parcelize
 data class GovEntity(
     val governorateAr: String,
     val areas: List<AreaEntity>
-): Parcelable
+): Parcelable{
+    override fun toString(): String {
+        return governorateAr
+    }
+}
 
 @Parcelize
 data class AreaEntity(
     val areaName: String
-): Parcelable
+): Parcelable{
+    override fun toString(): String {
+        return areaName
+    }
+}

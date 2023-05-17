@@ -8,9 +8,9 @@ import android.graphics.Bitmap
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Base64
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -48,10 +48,11 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
 
         setupToolbar(R.string.complete_profile)
         initializeViews()
+        initializeObservers()
     }
 
     private fun initializeViews() {
-        binding.ivBack.setOnClickListener{
+        binding.ivBack.setOnClickListener {
             checkPermissionsAndOpenFilePicker()
         }
         binding.bNext.setOnClickListener {
@@ -60,8 +61,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
                 return@setOnClickListener
             }
 
-//            createOcr()
-            navigate()
+            createOcr()
         }
 
         binding.bSkip.setOnClickListener {
@@ -69,13 +69,8 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
         }
     }
 
-    private fun createOcr() {
-        val frontImg: MultipartBody.Part = prepareFilePart(OcrData.front?.name!! , OcrData.front?.uri!!)
-        val backImg: MultipartBody.Part = prepareFilePart(OcrData.back?.name!! , OcrData.back?.uri!!)
-        uploadIdBackViewModel.createOcr(frontImg, backImg, sharedPreferences.nationalId, sharedPreferences.mobile)
-
-        uploadIdBackViewModel.createOcrStatus.observe(this){
-
+    private fun initializeObservers() {
+        uploadIdBackViewModel.createOcrStatus.observe(this) {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
@@ -83,20 +78,80 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
                     }
                     Status.SUCCESS -> {
                         hideProgressDialog()
-                        if (resource.data != null){
+                        if (resource.data != null) {
                             //check later
-                            showAlert("submitted successfully, check later"){
-                                //TODO
-                                navigate()
+                            showAlert("submitted successfully, check later") {
+                                showWaitingProgressbar()
                             }
 
-                        }else{
-                            Toast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG)
+                                .show()
                         }
                     }
                     Status.ERROR -> {
                         hideProgressDialog()
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun createOcr() {
+        val frontImg: MultipartBody.Part = prepareFilePart("id_face", OcrData.front?.uri!!)
+        val backImg: MultipartBody.Part = prepareFilePart("id_back", OcrData.back?.uri!!)
+        uploadIdBackViewModel.createOcr(
+            frontImg,
+            backImg,
+            sharedPreferences.nationalId,
+            sharedPreferences.mobile
+        )
+    }
+
+    private fun showWaitingProgressbar() {
+        binding.progressBar.visibility = View.VISIBLE
+        val totalProgress = 100
+        val durationInMillis = 60000L // 1 minute in milliseconds
+
+        val countDownTimer = object : CountDownTimer(durationInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val progress =
+                    ((durationInMillis - millisUntilFinished) * totalProgress / durationInMillis).toInt()
+                binding.progressBar.progress = progress
+            }
+
+            override fun onFinish() {
+                binding.progressBar.progress = totalProgress
+                binding.progressBar.visibility = View.GONE
+                checkOcrStatus()
+            }
+        }
+
+        countDownTimer.start()
+    }
+
+    private fun checkOcrStatus() {
+        uploadIdBackViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
+        uploadIdBackViewModel.checkMemberStatus.observe(this) {
+            it.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        showProgressDialog()
+                    }
+                    Status.SUCCESS -> {
+                        hideProgressDialog()
+                        if (resource.data != null) {
+                            if (resource.data.ocrStatus.equals("pending")) {
+                                showAlert(message = resource.data.message ?: "") { showWaitingProgressbar() }
+                            } else// OCR completed
+                                startActivity(Intent(this, ReviewYourDataActivity::class.java))
+                            finishAffinity()
+                        }
+                    }
+                    Status.ERROR -> {
+                        hideProgressDialog()
+                        showWaitingProgressbar()
                     }
                 }
             }
@@ -109,9 +164,14 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
     @Suppress("DEPRECATED_IDENTITY_EQUALS")
     private fun checkPermissionsAndOpenFilePicker() {
         val permission = Manifest.permission.READ_EXTERNAL_STORAGE
-        if (ContextCompat.checkSelfPermission(this, permission) !== PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                permission
+            ) !== PackageManager.PERMISSION_GRANTED
+        ) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
-                Toast.makeText(this, "Allow external storage reading", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Allow external storage reading", Toast.LENGTH_SHORT)
+                    .show()
             } else {
                 ActivityCompat.requestPermissions(
                     this,
@@ -124,7 +184,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
         }
     }
 
-    private fun getImage(){
+    private fun getImage() {
         val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(i, REQUEST_CODE)
     }
@@ -133,7 +193,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == REQUEST_CODE){
+            if (requestCode == REQUEST_CODE) {
                 onSelectFromGalleryResult(data!!)
             }
         }
@@ -146,14 +206,18 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
                     MediaStore.Images.Media.getBitmap(contentResolver, data.data)
 
                 var bitmapSize = bitmap.allocationByteCount
-                if (bitmapSize / (1024 * 1024) > 95){
+                if (bitmapSize / (1024 * 1024) > 95) {
                     Toast.makeText(this, "صورة كبيرة الحجم.", Toast.LENGTH_LONG).show()
                     return
                 }
                 val photoUI = saveImage(bitmap)
 
                 val file = File(photoUI.path, photoUI.name)
-                OcrData.back = photoUI//Base64.encodeToString(file.readBytes(), Base64.DEFAULT)
+                OcrData.back = PhotoUI(
+                    "",
+                    "",
+                    data.data
+                ) //Base64.encodeToString(file.readBytes(), Base64.DEFAULT)
                 when (REQUEST_CODE) {
                     1001 -> {
                         nationalIdBack = photoUI
@@ -165,7 +229,8 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
                 e.printStackTrace()
             }
 
-        }}
+        }
+    }
 
     private fun saveImage(myBitmap: Bitmap): PhotoUI {
         val bytes = ByteArrayOutputStream()
@@ -180,13 +245,18 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
             f.createNewFile()
             val fo = FileOutputStream(f)
             fo.write(bytes.toByteArray())
-            MediaScannerConnection.scanFile(this, arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
+            MediaScannerConnection.scanFile(
+                this,
+                arrayOf(f.getPath()),
+                arrayOf("image/jpeg"),
+                null
+            )
             fo.close()
             return PhotoUI(path, name, Uri.parse(path + "/" + name))
         } catch (e1: IOException) {
             e1.printStackTrace()
         }
-        return PhotoUI(path, name,null)
+        return PhotoUI(path, name, null)
     }
 
 

@@ -2,6 +2,7 @@ package com.neqabty.healthcare.core.ui
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import org.json.JSONObject
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -13,7 +14,7 @@ open class BaseViewModel @Inject constructor(): ViewModel() {
         return if (throwable is HttpException) {
             when (throwable.code()) {
                 400 -> {
-                    "يوجد حساب مسجل بهذه البيانات"
+                    JSONObject(throwable.response()?.errorBody()?.string()).getString("error")
                 }
                 401 -> {
                     "لقد تم تسجيل الدخول من قبل برجاء تسجيل الخروج واعادة المحاولة مرة اخرى"

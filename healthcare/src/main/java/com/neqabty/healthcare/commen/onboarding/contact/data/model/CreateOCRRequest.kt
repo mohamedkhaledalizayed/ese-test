@@ -7,10 +7,10 @@ import okhttp3.MultipartBody
 
 @Keep
 data class CreateOCRRequest(
-    @SerializedName("ir_face")
-    val idFace: MultipartBody.Part?,
-    @SerializedName("id_back")
-    val idBack: MultipartBody.Part?,
+//    @SerializedName("id_face")
+//    val idFace: MultipartBody.Part?,
+//    @SerializedName("id_back")
+//    val idBack: MultipartBody.Part?,
     @SerializedName("nationalId")
     val nationalId: String,
     @SerializedName("mobile")
