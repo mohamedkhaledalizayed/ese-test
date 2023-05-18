@@ -464,9 +464,15 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 //    }
 
     private fun updateTotal() {
+        if (sharedPreferences.code == MORSHEDIN_CODE) {
+            binding.totValue.text = "${(totalAmount + deliveryFees)}  ${resources.getString(R.string.egp)}"
+        }else{
+            binding.totValue.text = "$totalAmount  ${resources.getString(R.string.egp)}"
+        }
+
         binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
         binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
-        binding.totValue.text = "$totalAmount  ${resources.getString(R.string.egp)}"
+
     }
 
     private fun showDialog(message: String) {
