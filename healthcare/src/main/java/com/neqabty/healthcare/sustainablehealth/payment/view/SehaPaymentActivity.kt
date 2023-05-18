@@ -63,29 +63,29 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
 //        binding.tvVat.text = " ضريبة القيمة المضافة : $vat جنيه"
 //        binding.tvTotal.text = "سعر الباقة شامل ضريبة القيمة المضافة : $total جنيه"
 //        updateTotal()
-//        paymentViewModel.getPaymentMethods(serviceCode)
-//        paymentViewModel.paymentMethods.observe(this) { it ->
-//
-//            it?.let { resource ->
-//                when (resource.status) {
-//                    com.neqabty.healthcare.core.utils.Status.LOADING -> {
+        paymentViewModel.getPaymentMethods(serviceCode)
+        paymentViewModel.paymentMethods.observe(this) { it ->
+
+            it?.let { resource ->
+                when (resource.status) {
+                    com.neqabty.healthcare.core.utils.Status.LOADING -> {
 //                        binding.progressCircular.visibility = View.VISIBLE
-//                    }
-//                    com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
+                    }
+                    com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
 //                        binding.progressCircular.visibility = View.GONE
-//                        binding.llContent.visibility = View.VISIBLE
-//                        createRadioButton(resource.data!!.paymentMethods)
+                        binding.paymentMethodsContainer.visibility = View.VISIBLE
+                        createRadioButton(resource.data!!.paymentMethods)
 //                        deliveryMethod = resource.data.deliveryMethods.id
 //                        deliveryFees = resource.data.deliveryMethods.price
 //                        updateTotal()
-//                    }
-//                    com.neqabty.healthcare.core.utils.Status.ERROR -> {
+                    }
+                    com.neqabty.healthcare.core.utils.Status.ERROR -> {
 //                        binding.progressCircular.visibility = View.GONE
-//                    }
-//                }
-//            }
-//
-//        }
+                    }
+                }
+            }
+
+        }
 //
 //        paymentViewModel.paymentInfo.observe(this) {
 //
@@ -207,7 +207,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
             rb.setPadding(20, 20, 20, 20)
             rg.addView(rb)
         }
-        binding.llMainLayout.addView(rg)
+//        binding.llMainLayout.addView(rg)
     }
 
     private fun verifyPhone() {
@@ -353,6 +353,10 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
         showAlert(getString(R.string.payment_canceled)) {
             finish()
         }
+    }
+
+    override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
+
     }
     //endregion
 }

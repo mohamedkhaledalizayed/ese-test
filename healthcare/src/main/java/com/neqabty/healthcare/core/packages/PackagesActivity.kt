@@ -47,19 +47,16 @@ class PackagesActivity : BaseActivity<ActivityPackagesBinding>() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
-                        binding.shimmerFrameLayout.visibility = View.VISIBLE
-                        binding.shimmerFrameLayout.startShimmerAnimation()
+                        binding.progressCircular.visibility = View.VISIBLE
                     }
                     Status.SUCCESS -> {
-                        binding.shimmerFrameLayout.stopShimmerAnimation()
-                        binding.shimmerFrameLayout.visibility = View.GONE
+                        binding.progressCircular.visibility = View.GONE
                         binding.rvPackages.visibility = View.VISIBLE
                         packagesAdapter.submitList(resource.data!!.toMutableList())
                         initializeViews()
                     }
                     Status.ERROR -> {
-                        binding.shimmerFrameLayout.stopShimmerAnimation()
-                        binding.shimmerFrameLayout.visibility = View.GONE
+                        binding.progressCircular.visibility = View.GONE
                     }
                 }
             }

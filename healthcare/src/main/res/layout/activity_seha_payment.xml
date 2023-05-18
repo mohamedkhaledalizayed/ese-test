@@ -13,6 +13,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
+        android:id="@+id/payment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/total_bg"
@@ -25,6 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="سعر الباقة"
+            android:textColor="@color/black"
+            android:fontFamily="@font/hanimation_arabic_medium"
             android:layout_alignParentStart="true"/>
 
         <TextView
@@ -32,13 +35,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="EGP 00.00"
+            android:textColor="@color/black"
             android:layout_alignParentEnd="true"/>
 
         <TextView
             android:id="@+id/vat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="سعر الباقة"
+            android:text="ضريبة القيمة المضافة"
+            android:textColor="@color/black"
+            android:fontFamily="@font/hanimation_arabic_medium"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_below="@id/package_price"
             android:layout_alignParentStart="true"/>
@@ -48,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="EGP 00.00"
+            android:textColor="@color/black"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_below="@id/package_price_value"
             android:layout_alignParentEnd="true"/>
@@ -65,6 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="الاجمالي"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="#6E7389"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_below="@id/view"
             android:layout_alignParentStart="true"/>
@@ -74,11 +83,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="EGP15,560.00"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_below="@id/view"
             android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/payment_methods_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/payment_container"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="vertical">
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/b_next"
