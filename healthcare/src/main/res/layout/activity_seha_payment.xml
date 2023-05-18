@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/payment_container"
         android:gravity="center"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_margin="@dimen/_16sdp"
         android:orientation="vertical">
 
     </LinearLayout>

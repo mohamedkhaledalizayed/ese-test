@@ -8,6 +8,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
@@ -63,7 +65,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
 //        binding.tvVat.text = " ضريبة القيمة المضافة : $vat جنيه"
 //        binding.tvTotal.text = "سعر الباقة شامل ضريبة القيمة المضافة : $total جنيه"
 //        updateTotal()
-        paymentViewModel.getPaymentMethods(serviceCode)
+        paymentViewModel.getPaymentMethods("P4892")
         paymentViewModel.paymentMethods.observe(this) { it ->
 
             it?.let { resource ->
@@ -196,8 +198,18 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
         rg.orientation = RadioGroup.VERTICAL
         for (item in gatewaysData) {
             var rb = RadioButton(this)
+            rb.background = null
+            var iv = ImageView(this)
+
+            var ly = LinearLayout(this)
+            ly.background = resources.getDrawable(R.drawable.chefaa_orders_bg)
+            ly.orientation = LinearLayout.HORIZONTAL
             rb.text = item.displayName
             rb.id = item.id
+            iv.setImageResource(R.drawable.cancel)
+            iv.id = item.id * 5
+//            iv.layoutParams.width = 20
+//            iv.layoutParams.height = 20
             rb.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked){
                     paymentMethod = item.name
@@ -205,9 +217,12 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                 }
             }
             rb.setPadding(20, 20, 20, 20)
-            rg.addView(rb)
+            iv.setPadding(20, 0, 20, 20)
+            ly.addView(rb)
+            ly.addView(iv)
+            rg.addView(ly)
         }
-//        binding.llMainLayout.addView(rg)
+        binding.paymentMethodsContainer.addView(rg)
     }
 
     private fun verifyPhone() {
