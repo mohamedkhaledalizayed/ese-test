@@ -30,15 +30,13 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
 
         setupToolbar(titleResId = R.string.receipt)
 
-        Handler().postDelayed(Runnable {
-            paymentViewModel.getPaymentStatus(intent.getStringExtra("referenceCode")!!)
-        }, 9000)
-
+        getReceipt()
         paymentViewModel.paymentStatus.observe(this){
 
             it?.let { resource ->
                 when (resource.status) {
                     com.neqabty.healthcare.core.utils.Status.LOADING -> {
+                        binding.errorContainer.visibility = View.GONE
                         binding.progressCircular.visibility = View.VISIBLE
                     }
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
@@ -73,6 +71,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
                         binding.progressCircular.visibility = View.GONE
+                        binding.errorContainer.visibility = View.VISIBLE
                         Log.e("test", resource.message.toString())
                         if (resource.message == "404"){
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
@@ -88,6 +87,14 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
             pdfIntent.putExtra("data", paymentViewModel.paymentStatus.value?.data)
             startActivity(pdfIntent)
         }
+
+        binding.btnReload.setOnClickListener { getReceipt() }
+    }
+
+    private fun getReceipt() {
+        Handler().postDelayed(Runnable {
+            paymentViewModel.getPaymentStatus(intent.getStringExtra("referenceCode")!!)
+        }, 9000)
     }
 
     override fun onStart() {
