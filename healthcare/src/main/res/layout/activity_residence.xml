@@ -51,7 +51,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#fff"
-                    android:popupBackground="@color/splash_bg"
                     app:layout_constraintTop_toBottomOf="@id/tv_gov" />
 
                 <ImageView
@@ -90,7 +89,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#fff"
-                    android:popupBackground="@color/splash_bg"
                     app:layout_constraintTop_toBottomOf="@id/tv_area" />
 
                 <ImageView
@@ -116,7 +114,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cl_area" />
 
             <RadioGroup
-                android:id="@+id/rgResidenceType"
+                android:id="@+id/rgEmploymentType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

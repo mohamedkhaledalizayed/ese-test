@@ -3,6 +3,7 @@ package com.neqabty.healthcare.commen.onboarding.contact.view
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.setPadding
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
@@ -11,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
+    var dependantsNum = -1
     override fun getViewBinding() = ActivityDependantsBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,21 +29,30 @@ class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
         binding.tvDependantsNum0.setOnClickListener{
             clearAllSelections()
             selectDependantsNumber(binding.tvDependantsNum0)
+            dependantsNum = 0
         }
         binding.tvDependantsNum1.setOnClickListener{
             clearAllSelections()
             selectDependantsNumber(binding.tvDependantsNum1)
+            dependantsNum = 1
         }
         binding.tvDependantsNum2.setOnClickListener{
             clearAllSelections()
             selectDependantsNumber(binding.tvDependantsNum2)
+            dependantsNum = 2
         }
         binding.tvDependantsNum3.setOnClickListener{
             clearAllSelections()
             selectDependantsNumber(binding.tvDependantsNum3)
+            dependantsNum = 3
         }
 
         binding.bNext.setOnClickListener {
+            if(dependantsNum == -1){
+                Toast.makeText(this, getString(R.string.enter_dependants_number), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            SubmitClientData.entity.clientInfo.dependentsNum = dependantsNum.toString()
             navigate()
         }
 

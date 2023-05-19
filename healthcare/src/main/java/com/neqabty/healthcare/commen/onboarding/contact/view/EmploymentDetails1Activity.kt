@@ -21,6 +21,7 @@ class EmploymentDetails1Activity : BaseActivity<ActivityEmploymentDetailsOneBind
 
     private fun initializeViews() {
         binding.bNext.setOnClickListener {
+            SubmitClientData.entity.employmentDetails.employmentStatus = binding.rgEmploymentType.checkedRadioButtonId.toString()
             navigate()
         }
 

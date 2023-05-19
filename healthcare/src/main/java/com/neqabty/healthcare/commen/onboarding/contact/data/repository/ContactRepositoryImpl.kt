@@ -1,10 +1,7 @@
 package com.neqabty.healthcare.commen.onboarding.contact.data.repository
 
 
-import com.neqabty.healthcare.commen.onboarding.contact.data.model.CheckMemberResponse
-import com.neqabty.healthcare.commen.onboarding.contact.data.model.CreateOCRResponse
-import com.neqabty.healthcare.commen.onboarding.contact.data.model.GovResponse
-import com.neqabty.healthcare.commen.onboarding.contact.data.model.SubmitClientResponse
+import com.neqabty.healthcare.commen.onboarding.contact.data.model.*
 import com.neqabty.healthcare.commen.onboarding.contact.data.source.ContactDS
 import com.neqabty.healthcare.commen.onboarding.contact.domain.entity.*
 import com.neqabty.healthcare.commen.onboarding.contact.domain.repository.ContactRepository
@@ -38,9 +35,9 @@ class ContactRepositoryImpl @Inject constructor(private val contactDS: ContactDS
         }
     }
 
-    override fun submitClient(nationalId: String): Flow<SubmitClientEntity> {
+    override fun submitClient(submitClientRequest: SubmitClientRequest): Flow<SubmitClientEntity> {
         return flow {
-            emit(contactDS.submitClient(nationalId).toSubmitClientEntity())
+            emit(contactDS.submitClient(submitClientRequest).toSubmitClientEntity())
         }
     }
 }

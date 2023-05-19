@@ -307,7 +307,16 @@
     <string name="enter_message">من فضلك ادخل رسالتك</string>
     <string name="enter_correct_email">من فضلك ادخل البريد الالكترونى بشكل صحيح.</string>
     <string name="enter_national_id">من فضلك ادخل الرقم القومى بشكل صحيح.</string>
+    <string name="enter_marital_status">من فضلك اختر الحالة الإجتماعية.</string>
+    <string name="enter_dependants_number">من فضلك اختر الأفراد المسؤولة منك.</string>
+    <string name="enter_reference_name">من فضلك ادخل الأسم.</string>
     <string name="enter_name">من فضلك ادخل الأسم</string>
+    <string name="enter_company_name">من فضلك ادخل اسم الشركة</string>
+    <string name="enter_field">من فضلك ادخل المجال</string>
+    <string name="enter_address">من فضلك ادخل العنوان</string>
+    <string name="enter_title">من فضلك ادخل المسمى الوظيفي</string>
+    <string name="enter_years">من فضلك ادخل عدد السنين</string>
+    <string name="enter_salary">من فضلك ادخل المرتب</string>
     <string name="phone_confirmed">تم تاكيد رقم الهاتف بنجاح.</string>
     <string name="enter_code">برجاء إدخال الكود الذى تم إرساله الى رقم الهاتف :</string>
     <string name="enter_code_">من فضلك ادخل الكود</string>
@@ -580,5 +589,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="about_medicine">جميع الادوية يتم صرفها من صيدليات مرخصة من وزارة الصحة وبوجود وصفة طبيه من طبيب مختص</string>
     <string name="house">المنزل</string>
+    <string name="choose_marital_status">اختر حالتك الإجتماعية</string>
+    <string name="marital_status_single">اعزب</string>
+    <string name="marital_status_married">متزوج</string>
+    <string name="marital_status_divorced">مطلق</string>
+    <string name="marital_status_widow">ارمل</string>
 
 </resources>

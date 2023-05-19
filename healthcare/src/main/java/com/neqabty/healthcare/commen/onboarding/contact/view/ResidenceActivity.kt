@@ -52,6 +52,9 @@ class ResidenceActivity : BaseActivity<ActivityResidenceBinding>() {
         initializeSpinners()
 
         binding.bNext.setOnClickListener {
+            SubmitClientData.entity.clientInfo.homeGov = binding.spGov.selectedItem.toString()
+            SubmitClientData.entity.clientInfo.homeArea = binding.spArea.selectedItem.toString()
+            SubmitClientData.entity.clientInfo.residentStatus = binding.rgEmploymentType.checkedRadioButtonId.toString()
             navigate()
         }
 
