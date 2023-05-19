@@ -258,6 +258,14 @@
 
                 </LinearLayout>
 
+                <ImageView
+                    android:id="@+id/payment_logo"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp" />
+
                 <TextView
                     android:id="@+id/tvDeliveryMethod"
                     android:layout_width="wrap_content"
@@ -405,7 +413,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:text="@string/delivery_fees"
+                            android:text="تكلفة الشحن"
                             android:textColor="@color/black"
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
@@ -416,7 +424,7 @@
                             android:id="@+id/delivery_fees_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:textColor="@color/black"
                             android:textSize="?textSizeLarge"
@@ -424,17 +432,17 @@
                             app:layout_constraintStart_toEndOf="@+id/delivery_fees"
                             app:layout_constraintTop_toBottomOf="@id/payment_fees" />
 
-                    <TextView
-                        android:id="@+id/fees"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fees"
-                        android:textColor="@color/black"
-                        android:textSize="?textSizeLarge"
-                        android:textStyle="bold"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/delivery_fees"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/fees"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/fees"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="?textSizeLarge"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:layout_marginTop="@dimen/_5sdp"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/delivery_fees"/>-->
 
                     <View
                             android:id="@+id/view2"
@@ -444,7 +452,7 @@
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:background="@color/gray3"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/fees" />
+                            app:layout_constraintTop_toBottomOf="@id/delivery_fees_value" />
 
                         <TextView
                             android:id="@+id/tot"

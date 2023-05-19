@@ -23,7 +23,7 @@ class ChefaaNetworkModule {
     @Provides
     @Named("chefaa")
     fun providesBaseUrl(): String {
-        return Constants.BASE_URL_STAGING_CHEFAA
+        return Constants.BASE_URL_PRO_CHEFAA
     }
 
     @Provides

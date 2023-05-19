@@ -81,9 +81,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             )
         }
 
-        if (sharedPreferences.code == MORSHEDIN_CODE) {
-            binding.fees.visibility = View.GONE
-        }
+//        if (sharedPreferences.code == MORSHEDIN_CODE) {
+//            binding.fees.visibility = View.GONE
+//        }
 
         paymentViewModel.payment.observe(this) {
 
@@ -359,7 +359,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         if (deliveryMethods.isEmpty()) {
             binding.deliveryFees.visibility = View.GONE
             binding.deliveryFeesValue.visibility = View.GONE
-            binding.fees.visibility = View.GONE
+//            binding.fees.visibility = View.GONE
             return
         }
 
@@ -396,6 +396,19 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             rb.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
                     paymentMethod = item.name
+                    when (paymentMethod) {
+                        "Opay Card" -> {
+                            binding.paymentLogo.visibility = View.VISIBLE
+                            binding.paymentLogo.setImageResource(R.drawable.visa)
+                        }
+                        "Opay Code" -> {
+                            binding.paymentLogo.visibility = View.VISIBLE
+                            binding.paymentLogo.setImageResource(R.drawable.opay)
+                        }
+                        else -> {
+                            binding.paymentLogo.visibility = View.GONE
+                        }
+                    }
                     totalAmount = paymentViewModel.payment.value?.data?.receipt?.total_price!!
                         .filter { it.gateway == item.name }[0].price.toInt()
                     paymentFees = paymentViewModel.payment.value?.data?.receipt?.total_price!!
@@ -471,7 +484,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         }
 
         binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
-        binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)}"
+        binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)} يتم تحصيلها عند الاستلام"
 
     }
 

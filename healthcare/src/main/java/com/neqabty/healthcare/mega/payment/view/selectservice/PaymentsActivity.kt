@@ -129,6 +129,11 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
             return
         }
 
+        if (binding.spActions.selectedItemPosition == 0){
+            Toast.makeText(this, "من فضلك اختر نوع الخدمة", Toast.LENGTH_LONG).show()
+            return
+        }
+
         paymentDetails()
     }
 
