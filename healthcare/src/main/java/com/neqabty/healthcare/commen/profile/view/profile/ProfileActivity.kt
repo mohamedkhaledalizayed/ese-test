@@ -16,6 +16,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.profile.data.model.UpdatePasswordBody
 import com.neqabty.healthcare.commen.profile.view.changepassword.ChangePasswordDialog
 import com.neqabty.healthcare.commen.profile.view.model.PasswordError
+import com.neqabty.healthcare.commen.profile.view.personalinfo.PersonalInfoActivity
 import com.neqabty.healthcare.databinding.ActivityProfileMegaBinding
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
@@ -73,7 +74,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
         }
 
-        binding.profile.setOnClickListener {  }
+        binding.profile.setOnClickListener { startActivity(Intent(this, PersonalInfoActivity::class.java))  }
         binding.cards.setOnClickListener {  }
         binding.contact.setOnClickListener {  }
         binding.packages.setOnClickListener { startActivity(Intent(this, PackagesActivity::class.java)) }

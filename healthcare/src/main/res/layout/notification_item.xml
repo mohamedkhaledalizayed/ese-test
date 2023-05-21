@@ -3,27 +3,42 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/chefaa_orders_bg"
         android:padding="@dimen/_10sdp">
 
         <ImageView
             android:id="@+id/iv_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/add_icon_rounded"/>
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/notification_icon"/>
 
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" تم دفع اشتراك عضوية بقيمة EGP 500.00 "
             android:layout_toEndOf="@id/iv_icon"
-            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20 Jan 2013 08:45 AM"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="#7A7A9D"
+            android:fontFamily="@font/hanimation_arabic_light"
+            android:layout_toEndOf="@id/iv_icon"
+            android:layout_below="@+id/tv_name"
             android:layout_marginStart="@dimen/_10sdp"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/add_icon_rounded"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/curved_arrow_down_circle"/>
 
     </RelativeLayout>
 </layout>

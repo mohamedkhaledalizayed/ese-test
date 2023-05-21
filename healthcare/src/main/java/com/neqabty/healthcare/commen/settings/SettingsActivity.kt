@@ -11,6 +11,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.aboutapp.AboutAppActivity
+import com.neqabty.healthcare.commen.notification.NotificationsActivity
 import com.neqabty.healthcare.databinding.ActivitySettingsBinding
 import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
 import com.neqabty.healthcare.commen.splash.view.SplashActivity
@@ -30,7 +31,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
         binding.aboutContainer.setOnClickListener { startActivity(Intent(this, AboutAppActivity::class.java)) }
         binding.backBtn.setOnClickListener { finish() }
-
+        binding.notificationContainer.setOnClickListener { startActivity(Intent(this@SettingsActivity, NotificationsActivity::class.java)) }
         binding.changePasswordContainer.setOnClickListener { bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag) }
     }
 

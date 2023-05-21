@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    android:background="@color/background_color"
-    tools:context=".commen.pharmacy.PharmacyActivity">
+    android:background="@color/background_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -263,7 +262,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:src="@drawable/profile_icon"/>
+                android:src="@drawable/personal_info_icon"/>
 
             <TextView
                 android:layout_width="wrap_content"

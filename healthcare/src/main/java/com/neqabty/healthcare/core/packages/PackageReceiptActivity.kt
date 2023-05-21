@@ -9,6 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PackageReceiptActivity : BaseActivity<ActivityPackageRecieptBinding>() {
 
+    private var mAdapter: FollowersAdapter = FollowersAdapter()
     override fun getViewBinding() = ActivityPackageRecieptBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +17,8 @@ class PackageReceiptActivity : BaseActivity<ActivityPackageRecieptBinding>() {
         setContentView(binding.root)
 
         setupToolbar(title = "معاملة ناجحة")
+
+        binding.followersRecyclerView.adapter = mAdapter
 
     }
 }

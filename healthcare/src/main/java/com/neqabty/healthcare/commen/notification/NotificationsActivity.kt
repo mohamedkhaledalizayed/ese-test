@@ -14,6 +14,7 @@ class NotificationsActivity : BaseActivity<ActivityNotificationsBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setupToolbar(title = "الاشعارات")
 
         binding.notificationsRecycler.adapter = mAdapter
 
