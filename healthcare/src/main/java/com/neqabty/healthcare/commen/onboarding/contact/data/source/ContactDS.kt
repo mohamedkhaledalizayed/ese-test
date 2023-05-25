@@ -15,7 +15,7 @@ class ContactDS @Inject constructor(private val contactApi: ContactApi, private 
     suspend fun createOCR(idFace: MultipartBody.Part?,
                           idBack: MultipartBody.Part?,
                           nationalId: String, mobile: String): CreateOCRResponse {
-        return contactApi.createOCR(token = "token a1b2e1497425aa026d753e76b19db76bdd9a1f43", nationalId, mobile, idFace, idBack)
+        return contactApi.createOCR(token = "token a1b2e1497425aa026d753e76b19db76bdd9a1f43", nationalId.toLong(), mobile.toLong(), idFace, idBack)
     }
 
     suspend fun getLookups(): List<GovResponse>{

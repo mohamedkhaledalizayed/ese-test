@@ -12,11 +12,13 @@ import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.auth.login.view.LoginActivity
 import com.neqabty.healthcare.databinding.ActivitySplashBinding
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.onboarding.intro.view.IntroActivity
 import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
 import com.neqabty.healthcare.commen.onboarding.contact.view.DependantsActivity
+import com.neqabty.healthcare.commen.onboarding.contact.view.ResidenceActivity
 import com.neqabty.healthcare.commen.onboarding.contact.view.SigninDoneActivity
 import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
@@ -60,15 +62,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
                         if (androidVersion != null && androidVersion <= BuildConfig.VERSION_CODE) {
                             Handler().postDelayed({
-                                if (sharedPreferences.isAuthenticated){
-                                    val mainIntent = Intent(this, GeneralHomeActivity::class.java)
-                                    startActivity(mainIntent)
-                                    finish()
-                                }else{
-                                    val mainIntent = Intent(this, CheckAccountActivity::class.java)
-                                    startActivity(mainIntent)
-                                    finish()
-                                }
+                                val mainIntent = Intent(this, getTheNextActivityFromSplash())
+                                startActivity(mainIntent)
+                                finish()
                             }, SPLASH_DISPLAY_LENGTH)
                         } else {
                             showUpdateAppAlertDialog()

@@ -96,6 +96,31 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
                 }
             }
         }
+
+        uploadIdBackViewModel.checkMemberStatus.observe(this) {
+            it.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        showProgressDialog()
+                    }
+                    Status.SUCCESS -> {
+                        hideProgressDialog()
+                        if (resource.data != null) {
+                            if (resource.data.ocrStatus.equals("pending")) {
+                                showWaitingProgressbar()
+                            } else { // OCR completed
+                                startActivity(Intent(this, ReviewYourDataActivity::class.java))
+                                finishAffinity()
+                            }
+                        }
+                    }
+                    Status.ERROR -> {
+                        hideProgressDialog()
+                        showWaitingProgressbar()
+                    }
+                }
+            }
+        }
     }
 
     private fun createOcr() {
@@ -112,7 +137,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
     private fun showWaitingProgressbar() {
         binding.progressBar.visibility = View.VISIBLE
         val totalProgress = 100
-        val durationInMillis = 60000L // 1 minute in milliseconds
+        val durationInMillis = 6000L // 1 minute in milliseconds
 
         val countDownTimer = object : CountDownTimer(durationInMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -133,29 +158,6 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
 
     private fun checkOcrStatus() {
         uploadIdBackViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
-        uploadIdBackViewModel.checkMemberStatus.observe(this) {
-            it.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> {
-                        showProgressDialog()
-                    }
-                    Status.SUCCESS -> {
-                        hideProgressDialog()
-                        if (resource.data != null) {
-                            if (resource.data.ocrStatus.equals("pending")) {
-                                showAlert(message = resource.data.message ?: "") { showWaitingProgressbar() }
-                            } else// OCR completed
-                                startActivity(Intent(this, ReviewYourDataActivity::class.java))
-                            finishAffinity()
-                        }
-                    }
-                    Status.ERROR -> {
-                        hideProgressDialog()
-                        showWaitingProgressbar()
-                    }
-                }
-            }
-        }
     }
 
     //region

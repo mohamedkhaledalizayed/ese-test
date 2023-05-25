@@ -57,7 +57,7 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
     }
 
     private fun initializeViews() {
-        sharedPreferences.nationalId = "29002000000000"
+        sharedPreferences.nationalId = "29002000000406"
         if (sharedPreferences.nationalId.isNotEmpty()) {
             binding.etNationalId.setText(sharedPreferences.nationalId)
             binding.etNationalId.isEnabled = false
