@@ -48,6 +48,18 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
+            android:name=".commen.profile.view.personalinfo.PersonalInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".core.packages.AddFollowersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".commen.notification.NotificationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".core.packages.PackageReceiptActivity"
+            android:exported="false" />
+        <activity
             android:name=".core.packages.UploadBackNationalid"
             android:exported="false" />
         <activity

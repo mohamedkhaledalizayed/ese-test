@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".commen.profile.view.personalinfo.PersonalInfoActivity">
+
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chefaa_orders_bg"
+        android:drawableEnd="@drawable/profile_icon"
+        android:fontFamily="@font/hanimation_regular"
+        android:hint="@string/full_name"
+        android:inputType="text"
+        android:layout_margin="@dimen/_16sdp"
+        android:longClickable="false"
+        android:padding="@dimen/_12sdp"
+        android:textAlignment="viewStart"
+        android:textColor="@color/secondaryText"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@id/followers"/>
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chefaa_orders_bg"
+        android:drawableEnd="@drawable/ic_email"
+        android:fontFamily="@font/hanimation_regular"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:longClickable="false"
+        android:padding="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:textAlignment="viewStart"
+        android:textColor="@color/secondaryText"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:background="@drawable/chefaa_orders_bg"
+        android:drawableEnd="@drawable/ic_phone"
+        android:fontFamily="@font/hanimation_regular"
+        android:hint="@string/phone"
+        android:inputType="phone"
+        android:longClickable="false"
+        android:padding="@dimen/_12sdp"
+        android:textAlignment="viewStart"
+        android:textColor="@color/secondaryText"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_12sdp"
+        android:drawableEnd="@drawable/ic_spinner_arrow"
+        android:background="@drawable/chefaa_orders_bg"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:textColor="@color/black"
+        android:text="النقابة"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:drawableEnd="@drawable/national_id_icon"
+        android:background="@drawable/chefaa_orders_bg"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:textColor="@color/black"
+        android:text="@string/membership"/>
+
+    <EditText
+        android:id="@+id/et_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
+        android:background="@drawable/chefaa_orders_bg"
+        android:drawableEnd="@drawable/ic_location"
+        android:fontFamily="@font/hanimation_regular"
+        android:hint="@string/address"
+        android:inputType="text"
+        android:longClickable="false"
+        android:padding="@dimen/_12sdp"
+        android:textAlignment="viewStart"
+        android:textColor="@color/secondaryText"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</LinearLayout>

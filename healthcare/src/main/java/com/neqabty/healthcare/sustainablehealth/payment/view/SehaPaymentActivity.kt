@@ -19,6 +19,8 @@ import com.google.gson.Gson
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.core.data.Constants.SANDBOX
+import com.neqabty.healthcare.core.packages.PackageReceiptActivity
+import com.neqabty.healthcare.core.packages.PaymentMethodsAdapter
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivitySehaPaymentBinding
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.GatewaysData
@@ -48,6 +50,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
     private var serviceCode = ""
     private var serviceActionCode = ""
     private val paymentViewModel: SehaPaymentViewModel by viewModels()
+    private var mAdapter: PaymentMethodsAdapter = PaymentMethodsAdapter()
     override fun getViewBinding() = ActivitySehaPaymentBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +68,19 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
 //        binding.tvVat.text = " ضريبة القيمة المضافة : $vat جنيه"
 //        binding.tvTotal.text = "سعر الباقة شامل ضريبة القيمة المضافة : $total جنيه"
 //        updateTotal()
+
+        binding.bNext.setOnClickListener {
+            startActivity(Intent(this@SehaPaymentActivity, PackageReceiptActivity::class.java))
+        }
+        binding.paymentMethodRecycler.adapter = mAdapter
+        mAdapter.onItemClickListener = object : PaymentMethodsAdapter(),
+            PaymentMethodsAdapter.OnItemClickListener {
+            override fun setOnItemClickListener(item: PaymentMethodEntity) {
+                mAdapter.notifyDataSetChanged()
+            }
+
+        }
+
         paymentViewModel.getPaymentMethods("P4892")
         paymentViewModel.paymentMethods.observe(this) { it ->
 
@@ -74,9 +90,10 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
 //                        binding.progressCircular.visibility = View.VISIBLE
                     }
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
+                        mAdapter.submitList(it.data!!.paymentMethods)
 //                        binding.progressCircular.visibility = View.GONE
-                        binding.paymentMethodsContainer.visibility = View.VISIBLE
-                        createRadioButton(resource.data!!.paymentMethods)
+//                        binding.paymentMethodsContainer.visibility = View.VISIBLE
+//                        createRadioButton(resource.data!!.paymentMethods)
 //                        deliveryMethod = resource.data.deliveryMethods.id
 //                        deliveryFees = resource.data.deliveryMethods.price
 //                        updateTotal()
@@ -222,7 +239,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
             ly.addView(iv)
             rg.addView(ly)
         }
-        binding.paymentMethodsContainer.addView(rg)
+//        binding.paymentMethodsContainer.addView(rg)
     }
 
     private fun verifyPhone() {
