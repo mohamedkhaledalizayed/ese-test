@@ -38,8 +38,8 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
                                 if(resource.data.ocrStatus.equals("null"))
                                     showTermsDialog()
                                 else if(resource.data.ocrStatus.equals("pending"))
-                                    showAlert(message = resource.data.message?: ""){finish()}
-                                else// OCR completed
+//                                    showAlert(message = resource.data.message?: ""){finish()}
+//                                else// OCR completed
                                     startActivity(Intent(this, ReviewYourDataActivity::class.java))
 
                             }else

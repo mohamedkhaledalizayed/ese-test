@@ -33,6 +33,7 @@ import com.neqabty.healthcare.chefaa.cart.CartActivity
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.PreferencesHelper
+import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
 import com.neqabty.healthcare.core.home_syndicates.view.SyndicatesHomeActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import javax.inject.Inject
@@ -240,10 +241,10 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     }
 
     fun getTheNextActivityFromSignup(): Class<Activity> {
-//        if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember)
-//            return SyndicatesHomeActivity::class.java as Class<Activity> //TODO syndicate home
+        if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember)
+            return SyndicatesHomeActivity::class.java as Class<Activity> //TODO syndicate home
 
-        return SyndicatesHomeActivity::class.java as Class<Activity> //TODO neqabty home
+        return GeneralHomeActivity::class.java as Class<Activity> //TODO neqabty home
     }
     //endregion
 
