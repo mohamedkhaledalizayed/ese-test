@@ -23,8 +23,6 @@ data class Receipt(
     val error: String?,
     @SerializedName("status")
     val status: Boolean?,
-    @SerializedName("total_amount")
-    val totalPrice: Double?,
     @SerializedName("total_price")
-    val total_price: Double
+    val total_price: List<PriceItem>
 )

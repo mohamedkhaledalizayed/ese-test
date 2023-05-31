@@ -36,7 +36,7 @@ private fun ServiceProviderType.toServiceTypeEntity(): ServiceProviderTypeEntity
     return ServiceProviderTypeEntity(
         id = id,
         providerTypeAr = providerTypeAr,
-        providerTypeEn = providerTypeEn
+        providerTypeEn = providerTypeEn ?: ""
     )
 }
 

@@ -8,397 +8,378 @@
         android:layout_height="match_parent"
         tools:context=".paymentdetails.view.paymentstatus.PaymentStatusActivity">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="none">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layout_container"
-        android:visibility="gone"
-        >
-
-
-        <ImageView
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
-            android:id="@+id/status_image"
-            android:src="@drawable/success"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/_20sdp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/status_text"
-            android:text="@string/successful_payment"
-            android:textStyle="bold"
-            android:textSize="@dimen/_14ssp"
-            android:textColor="#25AE88"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/status_image"
-            android:layout_marginTop="@dimen/_10sdp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/status_details"
-            android:text="@string/successful_pay"
-            android:textStyle="bold"
-            android:textSize="@dimen/_13ssp"
-            android:textColor="@color/gray"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/status_text" />
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/receipt_layout"
-            android:padding="@dimen/_10sdp"
-            android:background="@drawable/receipt_bg"
-            android:layout_margin="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/status_details">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/receipt"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/_13ssp"
-                android:textColor="@color/black"
-                />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:background="@color/gray3"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/fees_value"/>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/personal_info"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:textSize="@dimen/_12ssp"
-                android:textColor="@color/black"
-                />
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/name"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/name_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:layout_marginStart="@dimen/_50sdp"
-                    app:layout_constraintStart_toEndOf="@+id/name"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/membership_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/membership_number"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/name"
-                    />
-
-                <TextView
-                    android:id="@+id/membership_number_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:layout_marginStart="@dimen/_18sdp"
-                    app:layout_constraintStart_toEndOf="@+id/membership_number"
-                    app:layout_constraintTop_toBottomOf="@id/name_value" />
-
-                <TextView
-                    android:id="@+id/phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/phone_number"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/membership_number"
-                    />
-
-                <TextView
-                    android:id="@+id/phone_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="140dp"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    app:layout_constraintStart_toEndOf="@id/phone"
-                    app:layout_constraintTop_toBottomOf="@id/membership_number_value"
-                    />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:background="@color/gray3"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/fees_value"/>
-
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/receipt_info"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:textSize="@dimen/_12ssp"
-                android:textColor="@color/black"
-                />
+                android:visibility="gone">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/service_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/service_name"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
+                <ImageView
+                    android:id="@+id/status_image"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:src="@drawable/success"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
-
-                <TextView
-                    android:id="@+id/service_name_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:textColor="@color/black"
-                    android:lines="1"
-                    android:textSize="?textSizeLarge"
-                    android:layout_marginStart="@dimen/_27sdp"
-                    app:layout_constraintStart_toEndOf="@+id/service_name"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/receipt_number"
+                    android:id="@+id/status_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/receipt_number"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/successful_payment"
+                    android:textColor="#25AE88"
+                    android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/service_name"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/status_image" />
 
                 <TextView
-                    android:id="@+id/receipt_number_value"
+                    android:id="@+id/status_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="140dp"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:layout_marginStart="@dimen/_26sdp"
-                    app:layout_constraintStart_toEndOf="@id/receipt_number"
-                    app:layout_constraintTop_toBottomOf="@id/service_name_value"
-                    />
-
-                <TextView
-                    android:id="@+id/receipt_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/receipt_date"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
+                    android:text="@string/successful_pay"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_13ssp"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/receipt_number"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/status_text" />
 
-                <TextView
-                    android:id="@+id/receipt_date_value"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/receipt_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="140dp"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:layout_marginStart="@dimen/_22sdp"
-                    app:layout_constraintStart_toEndOf="@id/receipt_date"
-                    app:layout_constraintTop_toBottomOf="@id/receipt_number_value"
-                    />
-
-                <TextView
-                    android:id="@+id/price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/net_amount"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/receipt_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/receipt_date"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/status_details">
 
-                <TextView
-                    android:id="@+id/price_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="140dp"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    app:layout_constraintStart_toEndOf="@id/price"
-                    app:layout_constraintTop_toBottomOf="@id/receipt_date_value"
-                    />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/receipt"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/fees"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="@string/total_fees"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/gray3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fees_value" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:text="@string/personal_info"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/name"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/name_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_50sdp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            app:layout_constraintStart_toEndOf="@+id/name"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/membership_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/membership_number"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/name" />
+
+                        <TextView
+                            android:id="@+id/membership_number_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            app:layout_constraintStart_toEndOf="@+id/membership_number"
+                            app:layout_constraintTop_toBottomOf="@id/name_value" />
+
+                        <TextView
+                            android:id="@+id/phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/phone_number"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/membership_number" />
+
+                        <TextView
+                            android:id="@+id/phone_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="140dp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@id/phone"
+                            app:layout_constraintTop_toBottomOf="@id/membership_number_value" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/gray3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/fees_value" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:text="@string/receipt_info"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/service_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/service_name"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/service_name_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_27sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:lines="1"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            app:layout_constraintStart_toEndOf="@+id/service_name"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/receipt_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/receipt_number"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/service_name" />
+
+                        <TextView
+                            android:id="@+id/receipt_number_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_26sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="140dp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            app:layout_constraintStart_toEndOf="@id/receipt_number"
+                            app:layout_constraintTop_toBottomOf="@id/service_name_value" />
+
+                        <TextView
+                            android:id="@+id/receipt_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/receipt_date"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/receipt_number" />
+
+                        <TextView
+                            android:id="@+id/receipt_date_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_22sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="140dp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            app:layout_constraintStart_toEndOf="@id/receipt_date"
+                            app:layout_constraintTop_toBottomOf="@id/receipt_number_value" />
+
+                        <TextView
+                            android:id="@+id/price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/net_amount"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/receipt_date" />
+
+                        <TextView
+                            android:id="@+id/price_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_16sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="140dp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            app:layout_constraintStart_toEndOf="@id/price"
+                            app:layout_constraintTop_toBottomOf="@id/receipt_date_value" />
+
+                        <TextView
+                            android:id="@+id/fees"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/total_fees"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/price" />
+
+                        <TextView
+                            android:id="@+id/fees_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_18sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="140dp"
+                            android:textColor="@color/black"
+                            android:textSize="?textSizeLarge"
+                            app:layout_constraintStart_toEndOf="@id/fees"
+                            app:layout_constraintTop_toBottomOf="@id/price_value" />
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_15sdp"
+                            android:background="@color/gray3"
+                            app:layout_constraintTop_toBottomOf="@id/fees_value" />
+
+                        <TextView
+                            android:id="@+id/total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/total_pric"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/view" />
+
+                        <TextView
+                            android:id="@+id/total_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_50sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="140dp"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="?textSizeLarge"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/total"
+                            app:layout_constraintTop_toBottomOf="@id/view" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_download"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/signup_btn_bg"
+                    android:text="@string/pdf"
+                    android:textColor="@android:color/white"
+                    android:textSize="?textSizeMedium"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/price"
-                    />
-
-                <TextView
-                    android:id="@+id/fees_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="140dp"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge"
-                    android:layout_marginStart="@dimen/_18sdp"
-                    app:layout_constraintStart_toEndOf="@id/fees"
-                    app:layout_constraintTop_toBottomOf="@id/price_value"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/receipt_layout" />
 
                 <View
-                    android:id="@+id/view"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/gray3"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_15sdp"
-                    app:layout_constraintTop_toBottomOf="@id/fees_value"/>
-
-                <TextView
-                    android:id="@+id/total"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="@string/total_pric"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/btn_download" />
 
-                <TextView
-                    android:id="@+id/total_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="140dp"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
-                    android:layout_marginStart="@dimen/_50sdp"
-                    app:layout_constraintStart_toEndOf="@id/total"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view"
-                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
-        <Button
-            android:id="@+id/btn_download"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_35sdp"
-            app:layout_constraintTop_toBottomOf="@id/receipt_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/pdf"
-            android:textColor="@android:color/white"
-            android:textSize="?textSizeMedium"
-            android:background="@drawable/signup_btn_bg"
-            android:layout_margin="@dimen/_10sdp"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/btn_download"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
         <ProgressBar
             android:id="@+id/progress_circular"
             android:layout_width="wrap_content"
@@ -406,7 +387,35 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/error_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/progress_circular"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="جاري تحميل الفاتورة."
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp" />
+
+            <Button
+                android:id="@+id/btn_reload"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/signup_btn_bg"
+                android:text="تحميل الفاتورة"
+                android:textColor="@android:color/white"
+                android:textSize="?textSizeMedium" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

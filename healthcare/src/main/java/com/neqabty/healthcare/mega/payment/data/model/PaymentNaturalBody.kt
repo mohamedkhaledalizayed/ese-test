@@ -21,7 +21,7 @@ class PaymentNaturalBody (
     @SerializedName("membership_id")
     val membershipId: String = "202022303",
     @SerializedName("delivery_method")
-    val deliveryMethod: Int,
+    val deliveryMethod: Int?,
     @SerializedName("delivery_mobile")
     val deliveryMobile: String = "",
     @SerializedName("delivery_notes")

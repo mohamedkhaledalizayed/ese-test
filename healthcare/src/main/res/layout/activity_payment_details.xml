@@ -258,6 +258,14 @@
 
                 </LinearLayout>
 
+                <ImageView
+                    android:id="@+id/payment_logo"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp" />
+
                 <TextView
                     android:id="@+id/tvDeliveryMethod"
                     android:layout_width="wrap_content"
@@ -267,7 +275,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="?textSizeLarge"
                     android:textStyle="bold"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <RadioGroup
                     android:id="@+id/rgDeliveryMethods"
@@ -281,8 +289,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:buttonTint="@color/dark_green"
-                        android:checked="true"
                         android:text="@string/to_home"
+                        android:visibility="gone"
                         android:textSize="?textSizeMedium"
                          />
 
@@ -294,6 +302,7 @@
                         android:hint="@string/address"
                         android:textSize="@dimen/_10ssp"
                         android:layout_margin="@dimen/_10sdp"
+                        android:visibility="gone"
                         android:background="@drawable/edit_text"/>
 
                     <RadioButton
@@ -304,6 +313,7 @@
                         android:buttonTint="@color/dark_green"
                         android:text="@string/from_branches"
                         android:textSize="?textSizeMedium"
+                        android:visibility="gone"
                          />
 
                     <FrameLayout
@@ -337,6 +347,7 @@
                 </RadioGroup>
 
                 <TextView
+                    android:id="@+id/delivery_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -344,7 +355,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="?textSizeLarge"
                     android:textStyle="bold"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <EditText
                     android:id="@+id/mobile"
@@ -354,6 +365,7 @@
                     android:hint="@string/phone"
                     android:textSize="@dimen/_10ssp"
                     android:layout_margin="@dimen/_10sdp"
+                    android:visibility="gone"
                     android:background="@drawable/edit_text"/>
 
                 <EditText
@@ -401,7 +413,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:text="@string/delivery_fees"
+                            android:text="تكلفة الشحن"
                             android:textColor="@color/black"
                             android:textSize="?textSizeLarge"
                             android:textStyle="bold"
@@ -412,7 +424,7 @@
                             android:id="@+id/delivery_fees_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:textColor="@color/black"
                             android:textSize="?textSizeLarge"
@@ -420,7 +432,19 @@
                             app:layout_constraintStart_toEndOf="@+id/delivery_fees"
                             app:layout_constraintTop_toBottomOf="@id/payment_fees" />
 
-                        <View
+<!--                    <TextView-->
+<!--                        android:id="@+id/fees"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/fees"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="?textSizeLarge"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:layout_marginTop="@dimen/_5sdp"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/delivery_fees"/>-->
+
+                    <View
                             android:id="@+id/view2"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -428,7 +452,7 @@
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:background="@color/gray3"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/delivery_fees" />
+                            app:layout_constraintTop_toBottomOf="@id/delivery_fees_value" />
 
                         <TextView
                             android:id="@+id/tot"

@@ -133,7 +133,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
         alertDialog.setButton(
             AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
         ) { dialog, _ ->
-            profileViewModel.deleteFollower(followerId, subscriberId)
+            profileViewModel.deleteFollower(followerId, sharedPreferences.mobile, subscriberId)
             dialog.dismiss()
         }
         alertDialog.setButton(

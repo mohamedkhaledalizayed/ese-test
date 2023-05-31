@@ -34,9 +34,9 @@ class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS
         }
     }
 
-    override fun deleteFollower(followerId: Int, subscriberId: String): Flow<Boolean> {
+    override fun deleteFollower(followerId: Int, mobile: String, subscriberId: String): Flow<Boolean> {
         return flow {
-            emit(profileDS.deleteFollower(DeleteFollowerBody(followerId, subscriberId)))
+            emit(profileDS.deleteFollower(DeleteFollowerBody(followerId, mobile, subscriberId)))
         }
     }
 

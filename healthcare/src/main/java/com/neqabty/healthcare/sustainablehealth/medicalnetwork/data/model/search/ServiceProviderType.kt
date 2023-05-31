@@ -10,5 +10,5 @@ data class ServiceProviderType(
     @SerializedName("provider_type_ar")
     val providerTypeAr: String,
     @SerializedName("provider_type_en")
-    val providerTypeEn: String
+    val providerTypeEn: String?
 )

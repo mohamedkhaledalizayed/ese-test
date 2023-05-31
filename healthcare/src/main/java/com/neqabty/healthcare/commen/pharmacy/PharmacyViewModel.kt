@@ -1,34 +1,38 @@
-package com.neqabty.healthcare.chefaa.products.presentation
+package com.neqabty.healthcare.commen.pharmacy
+
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.chefaa.products.domain.entities.ProductEntity
-import com.neqabty.healthcare.chefaa.products.domain.usecases.ProductSearchUseCase
-import com.neqabty.healthcare.core.utils.AppUtils
+import com.neqabty.healthcare.commen.clinido.domain.entity.ClinidoEntity
+import com.neqabty.healthcare.commen.clinido.domain.usecases.ClinidoUseCase
 import com.neqabty.healthcare.core.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductViewModel @Inject constructor(private val searchProductUseCase: ProductSearchUseCase) :
-    ViewModel() {
-    val products = MutableLiveData<Resource<List<ProductEntity>>>()
-    val errorMessage = MutableStateFlow("")
-    fun search(keyWord: String) {
+class PharmacyViewModel @Inject constructor(
+    private val clinidoUseCase: ClinidoUseCase
+) : ViewModel() {
+
+    val clinidoUrl = MutableLiveData<Resource<ClinidoEntity>>()
+    fun getUrl(phone: String, type: String, name: String, entityCode: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            products.postValue(Resource.loading(data = null))
+            clinidoUrl.postValue(Resource.loading(data = null))
             try {
-                searchProductUseCase.build(keyWord).collect {
-                    products.postValue(Resource.success(data = it))
+                clinidoUseCase.build(phone, type, name, entityCode).collect {
+                    clinidoUrl.postValue(Resource.success(data = it))
                 }
-            } catch (exception:Throwable){
-                products.postValue(Resource.error(data = null, message = handleError(exception)))
+            } catch (e: Throwable) {
+                clinidoUrl.postValue(
+                    Resource.error(
+                        data = null,
+                        message = handleError(e)
+                    )
+                )
             }
         }
     }
@@ -48,21 +52,15 @@ class ProductViewModel @Inject constructor(private val searchProductUseCase: Pro
                 404 -> {
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
                 }
-                406 -> {
-                    val errorObject = JSONObject(throwable.response()!!.errorBody()?.string())
-                    errorObject.getString("message")
-                }
                 500 -> {
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
                 }
                 else -> {
-                    "No Internet Connection"
+                    throwable.message!!
                 }
             }
         } else {
-           "لا توجد منتجات بهذا الاسم"
+            throwable.message!!
         }
     }
-
 }
-

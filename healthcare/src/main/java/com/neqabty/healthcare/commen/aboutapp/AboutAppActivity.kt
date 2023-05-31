@@ -1,6 +1,8 @@
 package com.neqabty.healthcare.commen.aboutapp
 
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
+import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityAboutAppBinding
@@ -8,6 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AboutAppActivity : BaseActivity<ActivityAboutAppBinding>() {
+    
+    private lateinit var toolbar: Toolbar
 
     override fun getViewBinding() = ActivityAboutAppBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,7 +19,18 @@ class AboutAppActivity : BaseActivity<ActivityAboutAppBinding>() {
 
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.aboutapp_title)
-        binding.backBtn.setOnClickListener { finish() }
 
     }
+
+
+    override fun onResume() {
+        super.onResume()
+        initializeViews()
+    }
+
+
+    private fun initializeViews() {
+        binding.tvVersion.text = getString(R.string.app_version, BuildConfig.VERSION_NAME)
+    }
+
 }

@@ -594,5 +594,6 @@
     <string name="marital_status_married">متزوج</string>
     <string name="marital_status_divorced">مطلق</string>
     <string name="marital_status_widow">ارمل</string>
+    <string name="fees">تكلفة الشحن يتم تحصيلها عند الاستلام</string>
 
 </resources>

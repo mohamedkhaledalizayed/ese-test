@@ -13,7 +13,7 @@ class SyndicateRepositoryImpl @Inject constructor(private val syndicateDS: Syndi
     SyndicateRepository {
     override fun getSyndicates(): Flow<List<SyndicateEntity>> {
         return flow {
-            emit(syndicateDS.getSyndicates().filter { it.code != "e05" }.map { it.toSyndicateEntity() })
+            emit(syndicateDS.getSyndicates().map { it.toSyndicateEntity() })
         }
     }
 }

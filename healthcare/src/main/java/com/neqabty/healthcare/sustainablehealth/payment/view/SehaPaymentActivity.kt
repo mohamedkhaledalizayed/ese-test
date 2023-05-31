@@ -8,8 +8,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
@@ -19,8 +17,6 @@ import com.google.gson.Gson
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.core.data.Constants.SANDBOX
-import com.neqabty.healthcare.core.packages.PackageReceiptActivity
-import com.neqabty.healthcare.core.packages.PaymentMethodsAdapter
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivitySehaPaymentBinding
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.GatewaysData
@@ -50,97 +46,82 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
     private var serviceCode = ""
     private var serviceActionCode = ""
     private val paymentViewModel: SehaPaymentViewModel by viewModels()
-    private var mAdapter: PaymentMethodsAdapter = PaymentMethodsAdapter()
     override fun getViewBinding() = ActivitySehaPaymentBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(title = "دفع الاشتراك")
+        setupToolbar(titleResId = R.string.payments_title)
 
-//        totalAmount = intent.getDoubleExtra("price", 0.0).toInt()
-//        vat = intent.getDoubleExtra("vat", 0.0).toInt()
-//        total = intent.getDoubleExtra("total", 0.0).toInt()
-//        serviceCode = intent.getStringExtra("serviceCode")!!
-//        serviceActionCode = intent.getStringExtra("serviceActionCode")!!
-//        binding.tvPackageName.text = "اسم الباقة : ${intent.getStringExtra("name")}"
-//        binding.tvPackagePrice.text = "سعر الباقة : $totalAmount جنيه"
-//        binding.tvVat.text = " ضريبة القيمة المضافة : $vat جنيه"
-//        binding.tvTotal.text = "سعر الباقة شامل ضريبة القيمة المضافة : $total جنيه"
-//        updateTotal()
-
-        binding.bNext.setOnClickListener {
-            startActivity(Intent(this@SehaPaymentActivity, PackageReceiptActivity::class.java))
-        }
-        binding.paymentMethodRecycler.adapter = mAdapter
-        mAdapter.onItemClickListener = object : PaymentMethodsAdapter(),
-            PaymentMethodsAdapter.OnItemClickListener {
-            override fun setOnItemClickListener(item: PaymentMethodEntity) {
-                mAdapter.notifyDataSetChanged()
-            }
-
-        }
-
-        paymentViewModel.getPaymentMethods("P4892")
+        totalAmount = intent.getDoubleExtra("price", 0.0).toInt()
+        vat = intent.getDoubleExtra("vat", 0.0).toInt()
+        total = intent.getDoubleExtra("total", 0.0).toInt()
+        serviceCode = intent.getStringExtra("serviceCode")!!
+        serviceActionCode = intent.getStringExtra("serviceActionCode")!!
+        binding.tvPackageName.text = "اسم الباقة : ${intent.getStringExtra("name")}"
+        binding.tvPackagePrice.text = "سعر الباقة : $totalAmount جنيه"
+        binding.tvVat.text = " ضريبة القيمة المضافة : $vat جنيه"
+        binding.tvTotal.text = "سعر الباقة شامل ضريبة القيمة المضافة : $total جنيه"
+        updateTotal()
+        paymentViewModel.getPaymentMethods(serviceCode)
         paymentViewModel.paymentMethods.observe(this) { it ->
 
             it?.let { resource ->
                 when (resource.status) {
                     com.neqabty.healthcare.core.utils.Status.LOADING -> {
-//                        binding.progressCircular.visibility = View.VISIBLE
+                        binding.progressCircular.visibility = View.VISIBLE
                     }
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
-                        mAdapter.submitList(it.data!!.paymentMethods)
-//                        binding.progressCircular.visibility = View.GONE
-//                        binding.paymentMethodsContainer.visibility = View.VISIBLE
-//                        createRadioButton(resource.data!!.paymentMethods)
-//                        deliveryMethod = resource.data.deliveryMethods.id
-//                        deliveryFees = resource.data.deliveryMethods.price
-//                        updateTotal()
+                        binding.progressCircular.visibility = View.GONE
+                        binding.llContent.visibility = View.VISIBLE
+                        createRadioButton(resource.data!!.paymentMethods)
+                        deliveryMethod = resource.data.deliveryMethods.id
+                        deliveryFees = resource.data.deliveryMethods.price
+                        updateTotal()
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
-//                        binding.progressCircular.visibility = View.GONE
+                        binding.progressCircular.visibility = View.GONE
                     }
                 }
             }
 
         }
+
+        paymentViewModel.paymentInfo.observe(this) {
+
+            it?.let { resource ->
+                when (resource.status) {
+                    com.neqabty.healthcare.core.utils.Status.LOADING -> {
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
+                        binding.progressCircular.visibility = View.GONE
+                        when (resource.data?.payment_method) {
+                            "Opay Card" -> {
+                                oPayPayment(resource.data)
+                            }
+                            "wallet" -> {
+
+                            }
+                            "Opay Code" -> {
+                                showAlertDialog(resource.data.payment_gateway_transaction_num ?: "")
+                            }
+                            else -> {
+
+                            }
+                        }
+                    }
+                    com.neqabty.healthcare.core.utils.Status.ERROR -> {
+                        binding.btnNext.isEnabled = true
+                        binding.progressCircular.visibility = View.GONE
+//                        val error = Gson().fromJson(resource.message.toString(), ErrorModel::class.java)
 //
-//        paymentViewModel.paymentInfo.observe(this) {
-//
-//            it?.let { resource ->
-//                when (resource.status) {
-//                    com.neqabty.healthcare.core.utils.Status.LOADING -> {
-//                        binding.progressCircular.visibility = View.VISIBLE
-//                    }
-//                    com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
-//                        binding.progressCircular.visibility = View.GONE
-//                        when (resource.data?.payment_method) {
-//                            "Opay Card" -> {
-//                                oPayPayment(resource.data)
-//                            }
-//                            "wallet" -> {
-//
-//                            }
-//                            "Opay Code" -> {
-//                                showAlertDialog(resource.data.payment_gateway_transaction_num ?: "")
-//                            }
-//                            else -> {
-//
-//                            }
-//                        }
-//                    }
-//                    com.neqabty.healthcare.core.utils.Status.ERROR -> {
-//                        binding.btnNext.isEnabled = true
-//                        binding.progressCircular.visibility = View.GONE
-////                        val error = Gson().fromJson(resource.message.toString(), ErrorModel::class.java)
-////
-////                        Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
-//                    }
-//                }
-//            }
-//
-//        }
+//                        Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+        }
 
 
 //        binding.rbCard.setOnCheckedChangeListener { compoundButton, b ->
@@ -177,37 +158,37 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
 //            )
 //        }
 
-//        binding.btnNext.setOnClickListener {
-//
-//            if (paymentMethod.isEmpty()){
-//                Toast.makeText(this, "من فضلك اختر طريقة الدفع.", Toast.LENGTH_LONG).show()
-//                return@setOnClickListener
-//            }
-//
-//            if (binding.address.text.toString().isEmpty()) {
-//                Toast.makeText(this, resources.getString(R.string.enter_add), Toast.LENGTH_LONG)
-//                    .show()
-//                return@setOnClickListener
-//            }
-//
-//            if (!sharedPreferences.isPhoneVerified) {
-//
-//                binding.btnNext.isEnabled = false
-//                paymentViewModel.getPaymentInfo(
-//                    SehaPaymentBody(
-//                        serviceCode = serviceCode,
-//                        serviceActionCode = serviceActionCode,
-//                        paymentMethod = paymentMethod,
-//                        mobile = sharedPreferences.mobile,
-//                        deliveryMethod = deliveryMethod,
-//                        address = binding.address.text.toString()
-//                    )
-//                )
-//            }else{
-//                verifyPhone()
-//            }
-//
-//        }
+        binding.btnNext.setOnClickListener {
+
+            if (paymentMethod.isEmpty()){
+                Toast.makeText(this, "من فضلك اختر طريقة الدفع.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            if (binding.address.text.toString().isEmpty()) {
+                Toast.makeText(this, resources.getString(R.string.enter_add), Toast.LENGTH_LONG)
+                    .show()
+                return@setOnClickListener
+            }
+
+            if (sharedPreferences.isPhoneVerified) {
+
+                binding.btnNext.isEnabled = false
+                paymentViewModel.getPaymentInfo(
+                    SehaPaymentBody(
+                        serviceCode = serviceCode,
+                        serviceActionCode = serviceActionCode,
+                        paymentMethod = paymentMethod,
+                        mobile = sharedPreferences.mobile,
+                        deliveryMethod = deliveryMethod,
+                        address = binding.address.text.toString()
+                    )
+                )
+            }else{
+                verifyPhone()
+            }
+
+        }
     }
 
     private fun createRadioButton(gatewaysData: List<PaymentMethodEntity>) {
@@ -215,31 +196,18 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
         rg.orientation = RadioGroup.VERTICAL
         for (item in gatewaysData) {
             var rb = RadioButton(this)
-            rb.background = null
-            var iv = ImageView(this)
-
-            var ly = LinearLayout(this)
-            ly.background = resources.getDrawable(R.drawable.chefaa_orders_bg)
-            ly.orientation = LinearLayout.HORIZONTAL
             rb.text = item.displayName
             rb.id = item.id
-            iv.setImageResource(R.drawable.cancel)
-            iv.id = item.id * 5
-//            iv.layoutParams.width = 20
-//            iv.layoutParams.height = 20
             rb.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked){
                     paymentMethod = item.name
-//                    updateTotal()
+                    updateTotal()
                 }
             }
             rb.setPadding(20, 20, 20, 20)
-            iv.setPadding(20, 0, 20, 20)
-            ly.addView(rb)
-            ly.addView(iv)
-            rg.addView(ly)
+            rg.addView(rb)
         }
-//        binding.paymentMethodsContainer.addView(rg)
+        binding.llMainLayout.addView(rg)
     }
 
     private fun verifyPhone() {
@@ -259,54 +227,54 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
 
     }
 
-//    private fun updateTotal(){
-//        binding.tvAmount.text = "الاجمالى بعد الرسوم البنكية والاداريه : ${total + paymentFees + deliveryFees} جنيه"
-//    }
+    private fun updateTotal(){
+        binding.tvAmount.text = "الاجمالى بعد الرسوم البنكية والاداريه : ${total + paymentFees + deliveryFees} جنيه"
+    }
 
-//    var referenceCode = ""
-//    private fun oPayPayment(paymentEntity: SehaPaymentResponse) {
-//        referenceCode = paymentEntity.payment_gateway_transaction_num ?: ""
-//        PaymentTask.sandBox = SANDBOX
-//        val payInput = PayInput(
-//            publickey = paymentEntity.public_key ?: "",
-//            merchantId = paymentEntity.merchant_id ?: "",
-//            merchantName = "Neqabty",
-//            reference = paymentEntity.payment_gateway_transaction_num ?: "",
-//            countryCode = "EG", // uppercase
-//            currency = "EGP", // uppercase
-//            payAmount = (paymentEntity.total_amount!!.toDouble() * 100).toLong(),
-//            productName = binding.tvPackageName.text.toString(),
-//            productDescription = binding.tvPackageName.text.toString(),
-//            callbackUrl = paymentEntity.callBackURL ?: "",
-//            userClientIP = "110.246.160.183",
-//            expireAt = (paymentEntity.expireAt ?: "30").toInt(),
-//            paymentType = "BankCard" // optional
-//        )
-//
-//        PaymentTask(this).createOrder(payInput, callback = { status, response ->
-//            when (status) {
-//                Status.ERROR -> {
-//                    Toast.makeText(
-//                        this, response.message,
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//                else -> {
-//                }
-//            }
-//        })
-//    }
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == PaymentTask.REQUEST_PAYMENT) {
-//            if (resultCode == PaymentTask.RESULT_PAYMENT) {
-//                val response =
-//                    data?.getSerializableExtra(PaymentTask.RESPONSE_DATA) as WebJsResponse?
-//                handlePaymentResponse(response)
-//            }
-//        }
-//    }
+    var referenceCode = ""
+    private fun oPayPayment(paymentEntity: SehaPaymentResponse) {
+        referenceCode = paymentEntity.payment_gateway_transaction_num ?: ""
+        PaymentTask.sandBox = SANDBOX
+        val payInput = PayInput(
+            publickey = paymentEntity.public_key ?: "",
+            merchantId = paymentEntity.merchant_id ?: "",
+            merchantName = "Neqabty",
+            reference = paymentEntity.payment_gateway_transaction_num ?: "",
+            countryCode = "EG", // uppercase
+            currency = "EGP", // uppercase
+            payAmount = (paymentEntity.total_amount!!.toDouble() * 100).toLong(),
+            productName = binding.tvPackageName.text.toString(),
+            productDescription = binding.tvPackageName.text.toString(),
+            callbackUrl = paymentEntity.callBackURL ?: "",
+            userClientIP = "110.246.160.183",
+            expireAt = (paymentEntity.expireAt ?: "30").toInt(),
+            paymentType = "BankCard" // optional
+        )
+
+        PaymentTask(this).createOrder(payInput, callback = { status, response ->
+            when (status) {
+                Status.ERROR -> {
+                    Toast.makeText(
+                        this, response.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else -> {
+                }
+            }
+        })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PaymentTask.REQUEST_PAYMENT) {
+            if (resultCode == PaymentTask.RESULT_PAYMENT) {
+                val response =
+                    data?.getSerializableExtra(PaymentTask.RESPONSE_DATA) as WebJsResponse?
+                handlePaymentResponse(response)
+            }
+        }
+    }
 
     private fun showAlert(
         message: String,
@@ -322,28 +290,28 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
         dialog.show()
     }
 
-//    private fun handlePaymentResponse(response: WebJsResponse?) {
-//        binding.btnNext.isEnabled = true
-//        when (response?.orderStatus) {
-//            PaymentStatus.INITIAL -> {
-//            }
-//            PaymentStatus.PENDING -> {
-//
-//            }
-//            PaymentStatus.SUCCESS -> {
-//                val intent = Intent(this, PaymentStatusActivity::class.java)
-//                intent.putExtra("referenceCode", referenceCode)
-//                startActivity(intent)
-//                finish()
-//            }
-//            PaymentStatus.FAIL -> {
-//                showAlert(getString(R.string.payment_canceled))
-//            }
-//            PaymentStatus.CLOSE -> {
-//                showAlert(getString(R.string.payment_canceled))
-//            }
-//        }
-//    }
+    private fun handlePaymentResponse(response: WebJsResponse?) {
+        binding.btnNext.isEnabled = true
+        when (response?.orderStatus) {
+            PaymentStatus.INITIAL -> {
+            }
+            PaymentStatus.PENDING -> {
+
+            }
+            PaymentStatus.SUCCESS -> {
+                val intent = Intent(this, PaymentStatusActivity::class.java)
+                intent.putExtra("referenceCode", referenceCode)
+                startActivity(intent)
+                finish()
+            }
+            PaymentStatus.FAIL -> {
+                showAlert(getString(R.string.payment_canceled))
+            }
+            PaymentStatus.CLOSE -> {
+                showAlert(getString(R.string.payment_canceled))
+            }
+        }
+    }
 
     private fun showAlertDialog(paymentGatewayReferenceId: String) {
 
@@ -374,21 +342,17 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
         }
     }
 
-//    override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
-//            val intent = Intent(this, PaymentStatusActivity::class.java)
-//            intent.putExtra("referenceCode", referenceCode)
-//            startActivity(intent)
-//            finish()
-//    }
+    override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
+            val intent = Intent(this, PaymentStatusActivity::class.java)
+            intent.putExtra("referenceCode", referenceCode)
+            startActivity(intent)
+            finish()
+    }
 
     override fun onPaymentCancel() {
         showAlert(getString(R.string.payment_canceled)) {
             finish()
         }
-    }
-
-    override fun onPaymentFinish(paymentSdkTransactionDetails: PaymentSdkTransactionDetails) {
-
     }
     //endregion
 }

@@ -4,245 +4,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
     tools:context=".commen.pharmacy.PharmacyActivity">
 
-    <FrameLayout
-        android:id="@+id/header_container"
-        app:layout_constraintTop_toTopOf="parent"
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_160sdp"
-            android:background="#5d81d4"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/back_btn_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_toolbar_arrow_main"
-                android:layout_alignParentStart="true"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:layout_toEndOf="@id/back_btn_header"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/hanimation_arabic_medium"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:textSize="@dimen/_14ssp"
-                android:text="الصيدلية"/>
-
-            <ImageView
-                android:id="@+id/cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/cart_main"
-                android:layout_alignParentEnd="true"
-                />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:gravity="center"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:weightSum="2">
-
-            <carbon.widget.ImageView
-                android:id="@+id/chefaa"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:src="@drawable/pharmacy_chefaa_icon"/>
-
-            <carbon.widget.ImageView
-                android:id="@+id/clinido"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:src="@drawable/pharmacy_clinido_icon"/>
-
-
-        </LinearLayout>
-
-    </FrameLayout>
-
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="خدمات الصيدلية أون لاين."
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textSize="@dimen/_12ssp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/header_container"
-        android:background="@drawable/chefaa_icons_bg"
-        android:padding="@dimen/_10sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/title">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp">
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_140sdp"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_4sdp"
+            app:cardElevation="@dimen/_1sdp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_chefaa"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:background="@drawable/rounded_bg">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/shopping_cart_simple"/>
+                    android:id="@+id/image_chefaa"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80sdp"
+                    android:src="@drawable/chefaa_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:fontFamily="@font/hanimation_regular"
+                    android:id="@+id/chefaa_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="خصم يصل الى 20%"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
                     android:textSize="@dimen/_10ssp"
-                    android:textColor="#bbbbbb"
-                    android:text="الهدف"/>
+                    android:textColor="@color/bt_light_gray"
+                    app:layout_constraintEnd_toEndOf="@id/image_chefaa"
+                    app:layout_constraintStart_toStartOf="@id/image_chefaa"
+                    app:layout_constraintTop_toBottomOf="@id/image_chefaa" />
 
-                <TextView
-                    android:fontFamily="@font/montserrat_medium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_18ssp"
-                    android:padding="0dp"
-                    android:layout_marginBottom="@dimen/_minus6sdp"
-                    android:layout_marginTop="@dimen/_minus6sdp"
-                    android:lineSpacingExtra="0dp"
-                    android:textColor="#0b0c11"
-                    android:text="5000"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:fontFamily="@font/hanimation_regular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="#bbbbbb"
-                    android:text="نقطة"/>
+        </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_140sdp"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_4sdp"
+            app:cardElevation="@dimen/_1sdp">
 
-            <antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
-                android:id="@+id/circular_progress"
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_150sdp"
-                app:direction="clockwise"
-                app:progressBackgroundStrokeWidth="@dimen/_10sdp"
-                app:progressStrokeWidth="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/header_container"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:progressColor="#fe8235"
-                app:progressBackgroundColor="#e8ebed"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_clinido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_10sdp"
                 android:layout_gravity="center"
-                app:textSize="0dp"
-                />
+                android:background="@drawable/rounded_bg">
 
-        </FrameLayout>
+                <ImageView
+                    android:id="@+id/image_clinido"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80sdp"
+                    android:src="@drawable/clinido_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp">
+                <TextView
+                    android:id="@+id/clinido_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="خصم يصل الى 22%"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="@color/bt_light_gray"
+                    app:layout_constraintEnd_toEndOf="@id/image_clinido"
+                    app:layout_constraintStart_toStartOf="@id/image_clinido"
+                    app:layout_constraintTop_toBottomOf="@id/image_clinido" />
 
-            <TextView
-                android:fontFamily="@font/hanimation_regular"
-                android:id="@+id/point"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="@dimen/_14sdp"
-                android:text="نقطة"
-                android:textSize="@dimen/_10ssp"
-                android:textColor="#bbbbbb"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:fontFamily="@font/montserrat_medium"
-                android:id="@+id/points_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@id/point"
-                android:text="3500"
-                android:layout_marginTop="@dimen/_minus5sdp"
-                android:textSize="@dimen/_18ssp"
-                android:textColor="#0b0c11"/>
+        </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:fontFamily="@font/hanimation_regular"
-                android:id="@+id/egp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="جنيه"
-                android:textSize="@dimen/_10ssp"
-                android:layout_marginEnd="@dimen/_17sdp"
-                android:textColor="#bbbbbb"/>
-
-            <TextView
-                android:fontFamily="@font/montserrat_medium"
-                android:id="@+id/points_value_egp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@id/point"
-                android:text="90.00"
-                android:layout_marginTop="@dimen/_minus5sdp"
-                android:textSize="@dimen/_18ssp"
-                android:textColor="#0b0c11"/>
-
-
-
-        </RelativeLayout>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/back_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/news_details_back_btn"
-        android:padding="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:textColor="#5d81d4"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="@dimen/_20sdp"
-        android:background="@drawable/back_btn_bg"
-        android:textSize="@dimen/_12ssp"
-        android:fontFamily="@font/hanimation_regular"/>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
