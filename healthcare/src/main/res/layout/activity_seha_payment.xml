@@ -1,134 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cl_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include
-        android:id="@+id/layout_toolbar"
-        layout="@layout/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <import type="android.text.Html" />
+    </data>
 
-    <RelativeLayout
-        android:id="@+id/payment_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/total_bg"
-        app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
-        android:layout_margin="@dimen/_16sdp"
-        android:padding="@dimen/_10sdp">
+        android:layout_height="match_parent"
+        tools:context=".sustainablehealth.payment.view.SehaPaymentActivity">
 
-        <TextView
-            android:id="@+id/package_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="سعر الباقة"
-            android:textSize="@dimen/_14ssp"
-            android:textColor="@color/black"
-            android:layout_alignParentStart="true"/>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/healthcare_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/package_price_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EGP 00.00"
-            android:textSize="@dimen/_14ssp"
-            android:fontFamily="@font/hanimation_arabic_light"
-            android:textColor="@color/black"
-            android:layout_alignParentEnd="true"/>
-
-        <TextView
-            android:id="@+id/vat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ضريبة القيمة المضافة"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_below="@id/package_price"
-            android:layout_alignParentStart="true"/>
-
-        <TextView
-            android:id="@+id/vat_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EGP 00.00"
-            android:textSize="@dimen/_14ssp"
-            android:fontFamily="@font/hanimation_arabic_light"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_below="@id/package_price_value"
-            android:layout_alignParentEnd="true"/>
-
-        <View
-            android:id="@+id/view"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/svContent"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_below="@id/vat_value"
-            android:background="@color/colorGrey"/>
+            android:layout_height="0dp"
+            android:background="@drawable/rounded_bg"
+            android:padding="@dimen/_15sdp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <TextView
-            android:id="@+id/total"
+            <LinearLayout
+                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvPackageName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textColor="@color/black"
+                    android:textSize="?textSizeLarge" />
+
+                <TextView
+                    android:id="@+id/tvPackagePrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/tv_vat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/tv_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/tvPaymentMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/payment_method"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeLarge"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:id="@+id/ll_main_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeLarge"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:hint="@string/address"
+                    android:textSize="@dimen/_10ssp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/edit_text"/>
+
+                <TextView
+                    android:id="@+id/tvAmountAfterDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/price_delivery"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="?textSizeLarge"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btn_next"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/next"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_12ssp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="الاجمالي"
-            android:textSize="@dimen/_14ssp"
-            android:textColor="#6E7389"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_below="@id/view"
-            android:layout_alignParentStart="true"/>
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <TextView
-            android:id="@+id/total_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EGP15,560.00"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_18ssp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_below="@id/view"
-            android:layout_alignParentEnd="true"/>
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/payment_methods"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="اختر طريقة الدفع"
-        android:textColor="#6B6B6B"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintTop_toBottomOf="@id/payment_container"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_10sdp"/>
-
-
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/payment_method_recycler"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:layout_constraintTop_toBottomOf="@id/payment_methods"
-       android:layout_marginStart="@dimen/_14sdp"
-       android:layout_marginEnd="@dimen/_14sdp"
-       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-       />
-
-    <TextView
-        android:id="@+id/b_next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_16sdp"
-        android:background="@drawable/select_btn_bg"
-        android:text="التالي"
-        android:textAlignment="center"
-        android:padding="@dimen/_10sdp"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

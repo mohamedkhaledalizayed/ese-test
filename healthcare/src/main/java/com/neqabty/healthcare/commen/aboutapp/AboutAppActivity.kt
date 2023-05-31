@@ -30,7 +30,7 @@ class AboutAppActivity : BaseActivity<ActivityAboutAppBinding>() {
 
 
     private fun initializeViews() {
-        binding.tvVersion.text = getString(R.string.app_version, BuildConfig.VERSION_NAME)
+//        binding.tvVersion.text = getString(R.string.app_version, BuildConfig.VERSION_NAME)
     }
 
 }

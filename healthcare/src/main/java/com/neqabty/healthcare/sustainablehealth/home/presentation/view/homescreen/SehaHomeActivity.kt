@@ -32,7 +32,6 @@ import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.contactus.ContactUsActivity
-import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.commen.syndicates.presentation.view.homescreen.SyndicateActivity
 import com.neqabty.healthcare.core.data.Cart
@@ -43,10 +42,10 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.about.AboutFragment
-import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.PackagesEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.filter.FiltersViewModel
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
+import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
 import com.neqabty.healthcare.sustainablehealth.suggestions.presentation.SuggestionsActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -205,7 +204,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
         binding.cvChefaa.setOnClickListener {
 
             if (sharedPreferences.isAuthenticated){
-                val intent = Intent(this, PharmacyActivity::class.java)
+                val intent = Intent(this, ChefaaHomeActivity::class.java)
                 intent.putExtra("user_number", sharedPreferences.mobile)
                 intent.putExtra("mobile_number", sharedPreferences.mobile)
                 intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
