@@ -81,9 +81,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             )
         }
 
-//        if (sharedPreferences.code == MORSHEDIN_CODE) {
-//            binding.fees.visibility = View.GONE
-//        }
+        if (sharedPreferences.code != MORSHEDIN_CODE) {
+            binding.tvDetails.visibility = View.GONE
+            binding.cardLayout.visibility = View.GONE
+        }
 
         paymentViewModel.payment.observe(this) {
 
@@ -136,6 +137,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                             binding.totalValue.text =
                                 resource.data.receipt.netAmount.toString() +
                                         "  " + resources.getString(R.string.egp)
+                            binding.totValue.text = "${resource.data.receipt.netAmount}  ${resources.getString(R.string.egp)}"
                         }
 
                     }

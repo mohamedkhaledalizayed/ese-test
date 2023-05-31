@@ -2,6 +2,7 @@ package com.neqabty.healthcare.commen.aboutapp
 
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
+import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityAboutAppBinding
@@ -29,7 +30,7 @@ class AboutAppActivity : BaseActivity<ActivityAboutAppBinding>() {
 
 
     private fun initializeViews() {
-        binding.tvVersion.text = getString(R.string.app_version, "1.0")
+        binding.tvVersion.text = getString(R.string.app_version, BuildConfig.VERSION_NAME)
     }
 
 }

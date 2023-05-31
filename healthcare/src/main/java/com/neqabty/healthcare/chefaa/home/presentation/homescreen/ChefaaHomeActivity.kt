@@ -74,7 +74,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>() {
             if (it.status) {
                 dialog.dismiss()
             }else{
-//                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
