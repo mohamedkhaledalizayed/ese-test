@@ -67,7 +67,10 @@ class EmploymentDetails3Activity : BaseActivity<ActivityEmploymentDetailsThreeBi
                     Status.SUCCESS -> {
                         hideProgressDialog()
                         if (resource.data != null) {
-                            showAlert(message = resource.data.message ?: "") { finish() }
+                            showAlert(message = resource.data.message ?: "") {
+                                navigate()
+                                finishAffinity()
+                            }
                         }
                     }
                     Status.ERROR -> {
