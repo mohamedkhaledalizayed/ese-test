@@ -38,6 +38,7 @@ import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity
 import com.neqabty.healthcare.news.view.newslist.NewsListActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.commen.invoices.view.InvoicesActivity
 import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.core.data.Cart
 import com.neqabty.healthcare.core.data.Constants.cart
@@ -415,7 +416,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             R.id.payment -> {
                 if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
                     if (!isGuest){
-                        val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
+                        val intent = Intent(this@MegaHomeActivity, InvoicesActivity::class.java)
                         startActivity(intent)
                     }else{
                         Toast.makeText(this@MegaHomeActivity, "هذه الخدمة متاحة لاعضاء النقابة فقط.", Toast.LENGTH_LONG).show()

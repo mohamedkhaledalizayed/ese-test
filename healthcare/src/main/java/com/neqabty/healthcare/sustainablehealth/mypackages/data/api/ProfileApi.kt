@@ -2,9 +2,11 @@ package com.neqabty.healthcare.sustainablehealth.mypackages.data.api
 
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.AddFollowerBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.DeleteFollowerBody
+import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.InsuranceBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.PackagesBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.addfollower.AddFollowerModel
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.deletefollower.DeleteFollowerModel
+import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.insurance.InsuranceModel
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.profile.ProfileModel
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.relationstypes.RelationsTypesModel
 import retrofit2.http.*
@@ -22,5 +24,8 @@ interface ProfileApi {
 
     @POST("vendor/subscribtions/follower-delete")
     suspend fun deleteFollower(@Header("Authorization") token: String, @Body deleteFollowerBody: DeleteFollowerBody): DeleteFollowerModel
+
+    @POST("client/insurance-docs")
+    suspend fun getInsurance(@Body insuranceBody: InsuranceBody): InsuranceModel
 
 }

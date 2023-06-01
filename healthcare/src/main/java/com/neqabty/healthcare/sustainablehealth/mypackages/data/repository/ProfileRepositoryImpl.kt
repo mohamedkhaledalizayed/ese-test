@@ -2,11 +2,14 @@ package com.neqabty.healthcare.sustainablehealth.mypackages.data.repository
 
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.AddFollowerBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.DeleteFollowerBody
+import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.InsuranceBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.addfollower.AddFollowerModel
+import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.insurance.InsuranceModel
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.profile.*
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.relationstypes.RelationModel
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.source.ProfileDS
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.addfollower.AddFollowerEntity
+import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.insurance.InsuranceEntity
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.profile.*
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.relations.RelationEntityList
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.repository.ProfileRepository
@@ -40,6 +43,21 @@ class ProfileRepositoryImpl @Inject constructor(private val profileDS: ProfileDS
         }
     }
 
+    override fun getInsurance(insuranceBody: InsuranceBody): Flow<InsuranceEntity> {
+        return flow {
+            emit(profileDS.getInsurance(insuranceBody).toInsuranceEntity())
+        }
+    }
+
+}
+
+private fun InsuranceModel.toInsuranceEntity(): InsuranceEntity{
+    return InsuranceEntity(
+        data = data,
+        message = message,
+        status = status,
+        statusCode = status_code
+    )
 }
 
 private fun AddFollowerModel.toAddFollowerEntity(): AddFollowerEntity{
