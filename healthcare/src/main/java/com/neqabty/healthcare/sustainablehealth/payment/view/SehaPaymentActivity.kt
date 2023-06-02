@@ -100,10 +100,10 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                             "Opay Card" -> {
                                 oPayPayment(resource.data)
                             }
-                            "wallet" -> {
-
-                            }
                             "Opay Code" -> {
+                                showAlertDialog(resource.data.payment_gateway_transaction_num ?: "")
+                            }
+                            "Fawry Code" -> {
                                 showAlertDialog(resource.data.payment_gateway_transaction_num ?: "")
                             }
                             else -> {
@@ -201,6 +201,23 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
             rb.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked){
                     paymentMethod = item.name
+                    when (paymentMethod) {
+                        "Opay Card" -> {
+                            binding.paymentLogo.visibility = View.VISIBLE
+                            binding.paymentLogo.setImageResource(R.drawable.visa)
+                        }
+                        "Opay Code" -> {
+                            binding.paymentLogo.visibility = View.VISIBLE
+                            binding.paymentLogo.setImageResource(R.drawable.opay)
+                        }
+                        "Fawry Code" -> {
+                            binding.paymentLogo.visibility = View.VISIBLE
+                            binding.paymentLogo.setImageResource(R.drawable.fawry)
+                        }
+                        else -> {
+                            binding.paymentLogo.visibility = View.GONE
+                        }
+                    }
                     updateTotal()
                 }
             }
