@@ -37,7 +37,9 @@ class InvoicesAdapter: RecyclerView.Adapter<InvoicesAdapter.ViewHolder>() {
 
         val item = items[position]
         viewHolder.binding.text.text = item.toString()
-
+        viewHolder.binding.root.setOnClickListener {
+            onItemClickListener?.setOnItemClickListener(item.gatewayReferenceId)
+        }
     }
 
     override fun getItemCount() = items.size
