@@ -245,6 +245,20 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
 
+        binding.homeVisitContainer.setOnClickListener {
+            if (sharedPreferences.isAuthenticated) {
+                homeViewModel.getUrl(
+                    phone = sharedPreferences.mobile,
+                    type = "homeVisit",
+                    name = sharedPreferences.name,
+                    entityCode = sharedPreferences.code
+                )
+                title = "زيارة منزلية"
+            } else {
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
+        }
+
 
         homeViewModel.clinidoUrl.observe(this){
             when(it.status){

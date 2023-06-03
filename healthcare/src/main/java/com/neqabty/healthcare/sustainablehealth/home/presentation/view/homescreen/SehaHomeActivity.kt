@@ -218,6 +218,20 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             }
         }
 
+        binding.homeVisitContainer.setOnClickListener {
+            if (sharedPreferences.isAuthenticated) {
+                homeViewModel.getUrl(
+                    phone = sharedPreferences.mobile,
+                    type = "homeVisit",
+                    name = sharedPreferences.name,
+                    entityCode = sharedPreferences.code
+                )
+                title = "زيارة منزلية"
+            } else {
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
+        }
+
         binding.cvPharmacy.setOnClickListener {
             val intent = Intent(this, PharmacyActivity::class.java)
             startActivity(intent)
