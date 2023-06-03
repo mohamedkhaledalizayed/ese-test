@@ -12,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class InvoicesActivity : BaseActivity<ActivityInvoicesBinding>() {
 
+    private val invoicesAdapter: InvoicesAdapter = InvoicesAdapter()
     private val viewModel: InvoicesViewModel by viewModels()
     override fun getViewBinding() = ActivityInvoicesBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,12 +22,14 @@ class InvoicesActivity : BaseActivity<ActivityInvoicesBinding>() {
         setupToolbar(titleResId = R.string.payments_title)
         viewModel.getAllInvoices()
 
+        binding.invoicesRecyclerView.adapter = invoicesAdapter
         viewModel.invoices.observe(this){
             when(it.status){
                 Status.LOADING ->{
 
                 }
                 Status.SUCCESS-> {
+                    invoicesAdapter.submitList(it.data?.toMutableList())
                     Log.e("test", it.data.toString())
                 }
                 Status.ERROR ->{

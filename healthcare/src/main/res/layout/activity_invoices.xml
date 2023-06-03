@@ -13,4 +13,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:id="@+id/invoices_recycler_view"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

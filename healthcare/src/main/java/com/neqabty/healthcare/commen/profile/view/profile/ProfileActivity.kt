@@ -18,8 +18,6 @@ import com.neqabty.healthcare.commen.profile.view.changepassword.ChangePasswordD
 import com.neqabty.healthcare.commen.profile.view.model.PasswordError
 import com.neqabty.healthcare.databinding.ActivityProfileMegaBinding
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
-import com.neqabty.healthcare.core.utils.ErrorBody
-import com.neqabty.healthcare.mega.home.view.SuggestionDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
