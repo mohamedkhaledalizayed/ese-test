@@ -5,7 +5,9 @@
     android:id="@+id/cl_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color">
+    android:background="@color/background_color"
+    android:paddingVertical="@dimen/margin_large"
+    android:paddingHorizontal="@dimen/margin_medium">
 
     <include
         android:id="@+id/layout_toolbar"
