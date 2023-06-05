@@ -32,6 +32,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.core.utils.isMobileValid
 import com.neqabty.healthcare.core.utils.isNationalIdValid
 import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.PackagesEntity
 import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.Followers
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.SubscribePostBodyRequest
@@ -77,18 +78,18 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.subscription)
-
-        subscriptionMode = intent.getBooleanExtra("subscriptionMode", false)
+        val packageDetails = intent.extras?.getParcelable<PackagesEntity>("package")!!
+//        subscriptionMode = intent.getBooleanExtra("subscriptionMode", false)
         binding.ccp.registerCarrierNumberEditText(binding.deliveryPhone)
-//        binding.ccp2.registerCarrierNumberEditText(binding.etReferralNumber)
-        name = intent.getStringExtra("name")
-        price = intent.getDoubleExtra("price", 0.0)
-        vat = intent.getDoubleExtra("vat", 0.0)
-        total = intent.getDoubleExtra("total", 0.0)
-        serviceCode = intent.getStringExtra("serviceCode")
-        maxFollowers = intent.getIntExtra("maxFollowers", 0)
-        serviceActionCode = intent.getStringExtra("serviceActionCode")
-        userNumber = intent.getStringExtra("userNumber")
+////        binding.ccp2.registerCarrierNumberEditText(binding.etReferralNumber)
+//        name = intent.getStringExtra("name")
+//        price = intent.getDoubleExtra("price", 0.0)
+//        vat = intent.getDoubleExtra("vat", 0.0)
+//        total = intent.getDoubleExtra("total", 0.0)
+//        serviceCode = intent.getStringExtra("serviceCode")
+//        maxFollowers = intent.getIntExtra("maxFollowers", 0)
+//        serviceActionCode = intent.getStringExtra("serviceActionCode")
+//        userNumber = intent.getStringExtra("userNumber")
 
         binding.etName.setText(sharedPreferences.name)
         if (!sharedPreferences.nationalId.isNullOrEmpty()){
@@ -139,7 +140,50 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         }
 
         binding.nextBtn.setOnClickListener {
-            startActivity(Intent(this, UploadFrontNationalid::class.java))
+
+            if (binding.etName.text.toString().isEmpty()){
+                Toast.makeText(this, "من فضلك ادخل الاسم.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            if (binding.etNationalId.text.toString().isEmpty()){
+                Toast.makeText(this, "من فضلك ادخل الرقم القومى", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            if (binding.etNationalId.text.toString().length < 14){
+                Toast.makeText(this, "من فضلك ادخل الرقم القومى بشكل صحيح.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            if (binding.etEmail.text.toString().isEmpty()){
+                Toast.makeText(this, "من فضلك ادخل البريد الالكترونى.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            if (binding.etBirthDate.text.toString().isEmpty()){
+                Toast.makeText(this, "من فضلك ادخل تاريخ الميلاد.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            if (!binding.ccp.isValidFullNumber) {
+                Toast.makeText(this, "رقم الهاتف غير صالح", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            if (binding.etAddress.text.toString().isEmpty()){
+                Toast.makeText(this, "من فضلك ادخل العنوان.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            if (binding.etJob.text.toString().isEmpty()){
+                Toast.makeText(this, "من فضلك ادخل الوظيفة.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            val intent = Intent(this, UploadFrontNationalid::class.java)
+            intent.putExtra("name", binding.etName.text.toString())
+            intent.putExtra("nationalId", binding.etNationalId.text.toString())
+            intent.putExtra("email", binding.etEmail.text.toString())
+            intent.putExtra("birthDate", binding.etBirthDate.text.toString())
+            intent.putExtra("deliveryPhone", binding.ccp.fullNumberWithPlus)
+            intent.putExtra("address", binding.etAddress.text.toString())
+            intent.putExtra("job", binding.etJob.text.toString())
+            intent.putExtra("package", packageDetails)
+            startActivity(intent)
         }
 
 

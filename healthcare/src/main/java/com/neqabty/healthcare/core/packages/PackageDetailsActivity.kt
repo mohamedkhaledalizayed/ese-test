@@ -41,14 +41,7 @@ class PackageDetailsActivity : BaseActivity<ActivityPackageDetailsBinding>() {
 
         binding.subscribeBtn.setOnClickListener {
             val intent = Intent(this, SubscriptionActivity::class.java)
-            intent.putExtra("name", packageDetails.name )
-            intent.putExtra("price", packageDetails.price )
-            intent.putExtra("vat", packageDetails.vat )
-            intent.putExtra("total", packageDetails.total )
-            intent.putExtra("serviceCode", packageDetails.serviceCode )
-            intent.putExtra("maxFollowers", packageDetails.maxFollower )
-            intent.putExtra("serviceActionCode", packageDetails.serviceActionCode )
-            intent.putExtra("subscriptionMode", true )
+            intent.putExtra("package", packageDetails)
             startActivity(intent)
         }
     }
