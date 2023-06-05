@@ -9,7 +9,7 @@ data class CheckMemberResponse(
     @SerializedName("authorized")
     val authorized: Boolean,
     @SerializedName("ocr_status")
-    val ocrStatus: Any?,
+    val ocrStatus: String?,
     @SerializedName("message")
     val message: String?
 )

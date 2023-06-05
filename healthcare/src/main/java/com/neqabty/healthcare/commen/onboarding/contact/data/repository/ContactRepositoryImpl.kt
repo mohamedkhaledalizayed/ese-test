@@ -44,7 +44,7 @@ class ContactRepositoryImpl @Inject constructor(private val contactDS: ContactDS
 
 private fun CheckMemberResponse.toMemberEntity(): CheckMemberEntity {
     return CheckMemberEntity(
-        authorized, if(ocrStatus == null) "null" else "pending", message
+        authorized, ocrStatus, message
     )
 }
 

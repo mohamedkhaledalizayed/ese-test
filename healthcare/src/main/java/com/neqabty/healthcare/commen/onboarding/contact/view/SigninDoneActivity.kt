@@ -2,6 +2,8 @@ package com.neqabty.healthcare.commen.onboarding.contact.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
@@ -35,11 +37,11 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
                         hideProgressDialog()
                         if (resource.data != null){
                             if(resource.data.authorized){
-                                if(resource.data.ocrStatus.equals("null"))
+                                if(resource.data.ocrStatus == null)
                                     showTermsDialog()
                                 else if(resource.data.ocrStatus.equals("pending"))
-//                                    showAlert(message = resource.data.message?: ""){finish()}
-//                                else// OCR completed
+                                    showWaitingProgressbar()
+                                else// OCR completed
                                     startActivity(Intent(this, ReviewYourDataActivity::class.java))
 
                             }else
@@ -57,7 +59,7 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
     }
 
     private fun initializeViews() {
-        sharedPreferences.nationalId = "29002000000406"
+        sharedPreferences.nationalId = "27501252801236"
         if (sharedPreferences.nationalId.isNotEmpty()) {
             binding.etNationalId.setText(sharedPreferences.nationalId)
             binding.etNationalId.isEnabled = false
@@ -70,6 +72,29 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
         binding.bNext.setOnClickListener {
             signinDoneViewModel.checkMemberStatus(nationalId = binding.etNationalId.text.toString())
         }
+    }
+
+
+    private fun showWaitingProgressbar() {
+        binding.progressBar.visibility = View.VISIBLE
+        val totalProgress = 100
+        val durationInMillis = 6000L // 1 minute in milliseconds
+
+        val countDownTimer = object : CountDownTimer(durationInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val progress =
+                    ((durationInMillis - millisUntilFinished) * totalProgress / durationInMillis).toInt()
+                binding.progressBar.progress = progress
+            }
+
+            override fun onFinish() {
+                binding.progressBar.progress = totalProgress
+                binding.progressBar.visibility = View.GONE
+                signinDoneViewModel.checkMemberStatus(nationalId = binding.etNationalId.text.toString())
+            }
+        }
+
+        countDownTimer.start()
     }
 
     private fun showTermsDialog() {
