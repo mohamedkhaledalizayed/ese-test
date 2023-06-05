@@ -38,7 +38,7 @@ class InvoicesAdapter: RecyclerView.Adapter<InvoicesAdapter.ViewHolder>() {
         val item = items[position]
         viewHolder.binding.text.text = item.toString()
         viewHolder.binding.root.setOnClickListener {
-            onItemClickListener?.setOnItemClickListener(item.gatewayReferenceId)
+            onItemClickListener?.setOnItemClickListener(item)
         }
     }
 
@@ -59,7 +59,7 @@ class InvoicesAdapter: RecyclerView.Adapter<InvoicesAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(item: String)
+            fun setOnItemClickListener(item: InvoicesEntity)
     }
 
     class ViewHolder(val binding: InvoiceItemLayoutBinding) :

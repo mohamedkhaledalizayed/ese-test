@@ -1,6 +1,10 @@
 package com.neqabty.healthcare.commen.invoices.domain.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+
+@Parcelize
 data class InvoicesEntity(
     val fullName: String,
     val mobile: String,
@@ -13,4 +17,4 @@ data class InvoicesEntity(
     val totalAmount: String,
     val totalFees: String,
     val serviceName: String
-)
+): Parcelable

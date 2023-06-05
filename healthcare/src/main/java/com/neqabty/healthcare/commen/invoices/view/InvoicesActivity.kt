@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.commen.invoices.domain.entity.InvoicesEntity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityInvoicesBinding
@@ -25,7 +26,7 @@ class InvoicesActivity : BaseActivity<ActivityInvoicesBinding>() {
         viewModel.getAllInvoices()
 
         invoicesAdapter.onItemClickListener = object : InvoicesAdapter.OnItemClickListener{
-            override fun setOnItemClickListener(item: String) {
+            override fun setOnItemClickListener(item: InvoicesEntity) {
                 val intent = Intent(this@InvoicesActivity, PaymentStatusActivity::class.java)
                 intent.putExtra("referenceCode", item)
                 startActivity(intent)

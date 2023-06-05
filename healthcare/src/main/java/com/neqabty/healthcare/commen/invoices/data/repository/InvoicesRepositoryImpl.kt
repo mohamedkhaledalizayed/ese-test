@@ -17,16 +17,16 @@ class InvoicesRepositoryImpl @Inject constructor(private val invoicesDataSource:
 
 private fun InvoicesModel.toInvoicesEntity(): InvoicesEntity{
     return InvoicesEntity(
-        entity = entity,
-        mobile = account.mobile,
-        fullName = account.fullname,
-        status = status,
-        membershipId = membership_id,
-        createdAt = created_at,
-        netAmount = net_amount,
-        serviceName = service_action.name,
-        totalAmount = total_amount,
-        totalFees = total_fees,
-        gatewayReferenceId = gateway_reference_id
+        entity = entity ?: "",
+        mobile = account.mobile ?: "",
+        fullName = account.fullname ?: "",
+        status = status ?: "",
+        membershipId = membership_id ?: "",
+        createdAt = created_at ?: "",
+        netAmount = net_amount ?: "",
+        serviceName = service_action.name ?: "",
+        totalAmount = total_amount ?: "",
+        totalFees = total_fees ?: "",
+        gatewayReferenceId = gateway_reference_id ?: ""
     )
 }

@@ -5,5 +5,5 @@ import androidx.annotation.Keep
 
 @Keep
 data class ServiceAction(
-    val name: String
+    val name: String?
 )
