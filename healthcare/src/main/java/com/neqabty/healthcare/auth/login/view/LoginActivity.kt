@@ -113,6 +113,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         }
 
         loginViewModel.login(binding.etUsername.text.toString(),
-            binding.etPassword.text.toString())
+            binding.etPassword.text.toString(), "tok")
     }
 }

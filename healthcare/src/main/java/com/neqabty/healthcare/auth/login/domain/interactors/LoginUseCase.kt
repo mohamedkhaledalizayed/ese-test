@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(private val authRepository: AuthRepository) {
-    fun build(mobile: String, password: String): Flow<UserEntity> {
-        return authRepository.login(mobile,password)
+    fun build(mobile: String, password: String, firebaseToken: String): Flow<UserEntity> {
+        return authRepository.login(mobile,password, firebaseToken)
     }
 }

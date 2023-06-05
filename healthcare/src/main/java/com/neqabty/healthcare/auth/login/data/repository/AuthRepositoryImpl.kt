@@ -15,8 +15,8 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(private val authDS: AuthDS) : AuthRepository {
-    override fun login(mobile: String, password: String): Flow<UserEntity> {
-        return flow { emit(authDS.login(mobile, password).toUserEntity()) }
+    override fun login(mobile: String, password: String, firebaseToken: String): Flow<UserEntity> {
+        return flow { emit(authDS.login(mobile, password, firebaseToken).toUserEntity()) }
     }
 }
 
