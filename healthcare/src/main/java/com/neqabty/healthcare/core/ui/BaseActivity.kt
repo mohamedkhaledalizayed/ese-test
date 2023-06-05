@@ -60,7 +60,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
             ?.setNavigationOnClickListener { onBackPressed() }
 
         window.setBackgroundDrawableResource(R.color.window_bg)
-//        binding.root.fitsSystemWindows = true
+        binding.root.fitsSystemWindows = true
 //        binding.root.fitsSystemWindows = false
 //        binding.root.setPadding(
 //            resources.getDimension(R.dimen.margin_large).toInt(),
