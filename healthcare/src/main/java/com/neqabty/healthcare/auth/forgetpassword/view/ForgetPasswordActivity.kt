@@ -66,6 +66,7 @@ class ForgetPasswordActivity : BaseActivity<ActivityForgetPasswordBinding>(), IF
             }
         }
 
+        setupToolbar(titleResId = R.string.reset_password)
     }
 
     private fun openFragment() {

@@ -28,13 +28,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
-        setupToolbar(title = "استكمال بيانات الحساب")
-
-        dialog = SpotsDialog.Builder()
-            .setContext(this)
-            .setMessage(resources.getString(R.string.please_wait))
-            .build()
-
+        setupToolbar(titleResId = R.string.login)
 
         binding.forgetPassword.setOnClickListener {
             val intent = Intent(this, ForgetPasswordActivity::class.java)
@@ -49,10 +43,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
-                        dialog.show()
+                        showProgressDialog()
                     }
                     Status.SUCCESS -> {
-                        dialog.dismiss()
+                        hideProgressDialog()
                         if (resource.data!!.user.account.mobile.isNotEmpty()){
                             sharedPreferences.isPhoneVerified = resource.data!!.user.account.verifiedAccount
                             sharedPreferences.isSyndicateMember = resource.data!!.user.account.entity.type == "syndicate"
@@ -68,22 +62,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             sharedPreferences.nationalId = resource.data!!.user.account.nationalId ?: ""
                             sharedPreferences.membershipId = resource.data!!.user.membershipId
                             sharedPreferences.userImage = "${resource.data!!.user.account.image}"
-                                if (resource.data!!.user.account.entity.type == "syndicate"){
-                                    val mainIntent = Intent(this@LoginActivity, MegaHomeActivity::class.java)
-                                    startActivity(mainIntent)
-                                    finish()
-                                }else{
-                                    val mainIntent = Intent(this@LoginActivity, com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity::class.java)
-                                    startActivity(mainIntent)
-                                    finish()
-                                }
+                            val mainIntent = Intent(this@LoginActivity, getTheNextActivityFromSignup())
+                            startActivity(mainIntent)
+                            finish()
 
                         }else{
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {
-                        dialog.dismiss()
+                        hideProgressDialog()
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
@@ -94,6 +82,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         binding.etUsername.customSelectionActionModeCallback = actionMode
         binding.etPassword.customSelectionActionModeCallback = actionMode
 
+        binding.skipBtn.setOnClickListener {
+            val mainIntent = Intent(
+                this,
+                getTheNextActivityFromSignup()
+            )
+            startActivity(mainIntent)
+            finish()
+        }
         binding.btnLogin.setOnClickListener { login() }
     }
 

@@ -5,43 +5,24 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.otp.view.CheckOTPFragment">
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
-        android:src="@drawable/logo"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_30sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/neqabty_auth"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+    tools:context=".auth.otp.view.CheckOTPFragment"
+    android:paddingVertical="@dimen/margin_large"
+    android:paddingHorizontal="@dimen/margin_medium">
 
     <TextView
         android:id="@+id/enter_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textAlignment="center"
+        android:fontFamily="@font/hanimation_arabic_medium"
+        android:text="@string/enter_code_"
         android:layout_margin="@dimen/_20sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/code"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
-        android:textAlignment="center"
         android:inputType="number"
         android:hint="ادخل الكود"
         android:layout_marginStart="@dimen/_20sdp"

@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.databinding.FragmentSignupStepOneBinding
 
 class SignupStep1PagerFragment : Fragment() {
@@ -38,6 +39,9 @@ class SignupStep1PagerFragment : Fragment() {
     }
 
     private fun initializeViews() {
+        if(Constants.forTesting) {
+            binding.ccp.setCountryForNameCode("EG")
+        }
         binding.ccp.registerCarrierNumberEditText(binding.etPhone)
     }
     // Handle the permission request result in onRequestPermissionsResult() callback

@@ -8,7 +8,9 @@
     android:layout_height="match_parent"
     android:background="#FFF"
     android:orientation="horizontal"
-    tools:context=".auth.login.view.LoginActivity">
+    tools:context=".auth.login.view.LoginActivity"
+    android:paddingVertical="@dimen/margin_large"
+    android:paddingHorizontal="@dimen/margin_medium">
 
         <include
             android:id="@+id/layout_toolbar"
@@ -137,7 +139,7 @@
 
 
             <TextView
-                android:id="@+id/back_btn"
+                android:id="@+id/skip_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
