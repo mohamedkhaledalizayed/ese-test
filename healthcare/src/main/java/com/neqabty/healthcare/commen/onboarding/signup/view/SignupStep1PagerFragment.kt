@@ -43,6 +43,10 @@ class SignupStep1PagerFragment : Fragment() {
             binding.ccp.setCountryForNameCode("EG")
         }
         binding.ccp.registerCarrierNumberEditText(binding.etPhone)
+        if((requireActivity() as SignupActivity).sharedPreferences.mobile.isNotBlank()) {
+            binding.etPhone.setText((requireActivity() as SignupActivity).sharedPreferences.mobile_without_cc)
+            binding.etPhone.isEnabled = false
+        }
     }
     // Handle the permission request result in onRequestPermissionsResult() callback
     override fun onRequestPermissionsResult(

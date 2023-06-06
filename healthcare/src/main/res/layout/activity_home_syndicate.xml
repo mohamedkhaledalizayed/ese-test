@@ -94,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/bg_contact_plain"
+                android:alpha=".7"
                 android:padding="@dimen/margin_medium"
                 app:layout_constraintTop_toBottomOf="@id/ic_banners">
 
@@ -151,6 +152,15 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_balance_title" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/iv_contact_subscribe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:src="@drawable/contact_subscribe"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/cl_contact_holder" />
 
             <ImageView
                 android:id="@+id/iv_contact_qr"

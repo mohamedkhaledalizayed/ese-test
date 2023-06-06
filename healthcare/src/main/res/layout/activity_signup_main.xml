@@ -4,8 +4,7 @@
     android:id="@+id/cl_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingVertical="@dimen/margin_large"
-    android:paddingHorizontal="@dimen/margin_medium">
+    android:padding="@dimen/margin_large">
 
     <include
         android:id="@+id/layout_toolbar"
@@ -26,7 +25,7 @@
         app:ci_drawable_unselected="@drawable/indicator_unselected"
         app:ci_height="@dimen/_7sdp"
         app:ci_animator="@animator/same_scale_with_alpha"
-        app:ci_width="@dimen/_60sdp"
+        app:ci_width="@dimen/_58sdp"
         app:ci_gravity="fill_horizontal"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
         app:piv_viewPager="@id/slvp_signup" />

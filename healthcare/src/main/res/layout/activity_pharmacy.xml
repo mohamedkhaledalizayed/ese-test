@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
-    tools:context=".commen.pharmacy.PharmacyActivity">
+    android:background="@color/background_color">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_160sdp"
+        android:background="#5d81d4"/>
 
     <FrameLayout
         android:id="@+id/header_container"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_160sdp"
-            android:background="#5d81d4"/>
+        android:layout_height="@dimen/_200sdp"
+        android:padding="@dimen/margin_large">
 
         <RelativeLayout
             android:layout_width="match_parent"

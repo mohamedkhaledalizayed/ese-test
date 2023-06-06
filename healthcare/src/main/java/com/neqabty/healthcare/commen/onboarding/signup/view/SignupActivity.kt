@@ -154,6 +154,9 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                             startActivity(intent)
                             finishAffinity()
                         }else{
+                            if(sharedPreferences.isPhoneVerified)
+                                movePagertoNext()
+
                             if (!Constants.forTesting) {
                                 sendOTP()
                             }

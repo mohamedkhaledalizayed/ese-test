@@ -69,7 +69,6 @@ class EmploymentDetails3Activity : BaseActivity<ActivityEmploymentDetailsThreeBi
                         if (resource.data != null) {
                             showAlert(message = resource.data.message ?: "") {
                                 navigate()
-                                finishAffinity()
                             }
                         }
                     }
@@ -89,7 +88,7 @@ class EmploymentDetails3Activity : BaseActivity<ActivityEmploymentDetailsThreeBi
             getTheNextActivityFromSignup()
         )
         startActivity(mainIntent)
-        finish()
+        finishAffinity()
     }
 // endregion
 }

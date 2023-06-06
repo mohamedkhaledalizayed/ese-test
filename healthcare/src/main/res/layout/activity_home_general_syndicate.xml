@@ -84,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:background="@drawable/bg_contact_plain"
+                android:alpha=".7"
                 android:padding="@dimen/margin_medium"
                 app:layout_constraintTop_toBottomOf="@id/ic_banners">
 
@@ -143,6 +144,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
+                android:id="@+id/iv_contact_subscribe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:src="@drawable/contact_subscribe"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/cl_contact_holder" />
+
+            <ImageView
                 android:id="@+id/iv_contact_qr"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -168,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:fontFamily="@font/hanimation_arabic_semibold"
-                android:text="@string/services"
+                android:text="@string/other_services"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_small"
                 app:layout_constraintTop_toBottomOf="@id/iv_contact_service_providers" />

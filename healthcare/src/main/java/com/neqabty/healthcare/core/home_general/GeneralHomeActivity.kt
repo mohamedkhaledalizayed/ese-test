@@ -3,6 +3,7 @@ package com.neqabty.healthcare.core.home_general
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
@@ -47,6 +48,24 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
             binding.tvName.text = sharedPreferences.name
         } else if (sharedPreferences.mobile.isNotBlank()) {
             binding.tvName.text = sharedPreferences.mobile
+        }
+
+        if (sharedPreferences.isContactSubscriber) {
+            binding.tvContactName.text = sharedPreferences.name
+            binding.tvBalance.visibility = View.VISIBLE
+            binding.ivContactQr.visibility = View.VISIBLE
+            binding.ivContactServiceProviders.visibility = View.VISIBLE
+            binding.ivContactSubscribe.visibility = View.GONE
+        } else {
+            binding.tvContactName.text = getString(R.string.contact_home_benefits)
+            binding.tvBalance.visibility = View.GONE
+            binding.ivContactQr.visibility = View.INVISIBLE
+            binding.ivContactServiceProviders.visibility = View.INVISIBLE
+            binding.ivContactSubscribe.visibility = View.VISIBLE
+        }
+
+        binding.ivContactSubscribe.setOnClickListener {
+            startActivity(Intent(this, getContactEntryPoint()))
         }
 
         binding.icBanners.registerLifecycle(lifecycle)

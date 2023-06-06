@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".auth.otp.view.SendOTPFragment"
-    android:paddingVertical="@dimen/margin_large"
-    android:paddingHorizontal="@dimen/margin_medium">
+    android:padding="@dimen/margin_medium">
 
     <TextView
         android:layout_width="match_parent"

@@ -31,6 +31,7 @@ import com.neqabty.healthcare.commen.onboarding.intro.view.IntroActivity
 import com.neqabty.healthcare.commen.onboarding.signup.view.SignupActivity
 import com.neqabty.healthcare.chefaa.cart.CartActivity
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
+import com.neqabty.healthcare.commen.onboarding.contact.view.SigninDoneActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
@@ -60,7 +61,6 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
             ?.setNavigationOnClickListener { onBackPressed() }
 
         window.setBackgroundDrawableResource(R.color.window_bg)
-        binding.root.fitsSystemWindows = true
 //        binding.root.fitsSystemWindows = false
 //        binding.root.setPadding(
 //            resources.getDimension(R.dimen.margin_large).toInt(),
@@ -246,7 +246,13 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
         return GeneralHomeActivity::class.java as Class<Activity> //TODO neqabty home
     }
-    //endregion
+
+    fun getContactEntryPoint(): Class<Activity> {
+        if(sharedPreferences.isAuthenticated)
+            return SigninDoneActivity::class.java as Class<Activity>
+        return SignupActivity::class.java as Class<Activity>
+    }
+    //endregion m
 
     //region progressDialog
     fun showProgressDialog() {

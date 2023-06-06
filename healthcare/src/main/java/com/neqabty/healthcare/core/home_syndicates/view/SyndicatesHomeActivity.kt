@@ -2,9 +2,14 @@ package com.neqabty.healthcare.core.home_syndicates.view
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64.DEFAULT
+import android.util.Base64.decode
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.google.android.gms.common.util.Base64Utils.decode
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
@@ -19,7 +24,9 @@ import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.core.packages.PackagesActivity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import de.hdodenhof.circleimageview.CircleImageView
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 import java.util.*
 
@@ -42,9 +49,26 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
     }
 
     private fun initializeViews() {
-//        val decodedString: ByteArray = Base64.decode(sharedPreferences.image, Base64.DEFAULT)
-//        val syndicateLogo = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-//        binding.ivSyndicateLogo.setImageBitmap(syndicateLogo)
+        if(!sharedPreferences.image.isNullOrBlank())
+            Picasso.get().load(sharedPreferences.image).placeholder(R.drawable.logo).into(binding.ivSyndicateLogo)
+
+        if (sharedPreferences.isContactSubscriber) {
+            binding.tvContactName.text = sharedPreferences.name
+            binding.tvBalance.visibility = View.VISIBLE
+            binding.ivContactQr.visibility = View.VISIBLE
+            binding.ivContactServiceProviders.visibility = View.VISIBLE
+            binding.ivContactSubscribe.visibility = View.GONE
+        } else {
+            binding.tvContactName.text = getString(R.string.contact_home_benefits)
+            binding.tvBalance.visibility = View.GONE
+            binding.ivContactQr.visibility = View.INVISIBLE
+            binding.ivContactServiceProviders.visibility = View.INVISIBLE
+            binding.ivContactSubscribe.visibility = View.VISIBLE
+        }
+
+        binding.ivContactSubscribe.setOnClickListener {
+            startActivity(Intent(this, getContactEntryPoint()))
+        }
 
         binding.tvWelcomeIn.text = getString(R.string.welcome_in, sharedPreferences.name)
         binding.tvSyndicateName.text = sharedPreferences.syndicateName

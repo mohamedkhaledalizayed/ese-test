@@ -35,6 +35,7 @@ class PreferencesHelper @Inject constructor(
         private const val IS_PHONE_VERIFIED = "data.source.prefs.IS_PHONE_VERIFIED"
         private const val IS_AUTHENTICATED = "data.source.prefs.IS_AUTHENTICATED"
         private const val IS_SYNDICATE_MEMBER = "data.source.prefs.IS_SYNDICATE_MEMBER"
+        private const val IS_CONTACT_SUBSCRIBER = "data.source.prefs.IS_CONTACT_SUBSCRIBER"
     }
 
     var isNotificationsEnabled
@@ -112,6 +113,10 @@ class PreferencesHelper @Inject constructor(
     var isAuthenticated
         get() = preferences.getBoolean(IS_AUTHENTICATED, false)
         set(value) = preferences.edit().putBoolean(IS_AUTHENTICATED, value).apply()
+
+    var isContactSubscriber
+        get() = preferences.getBoolean(IS_CONTACT_SUBSCRIBER, false)
+        set(value) = preferences.edit().putBoolean(IS_CONTACT_SUBSCRIBER, value).apply()
 
     fun clearAll(): Unit {
         return preferences.edit().clear().apply()
