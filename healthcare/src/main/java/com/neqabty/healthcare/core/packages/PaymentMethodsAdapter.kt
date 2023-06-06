@@ -53,6 +53,9 @@ open class PaymentMethodsAdapter : RecyclerView.Adapter<PaymentMethodsAdapter.Vi
             "Opay Card" -> {
                 viewHolder.binding.ivLogo.setImageResource(R.drawable.visa)
             }
+            "Fawry Code" -> {
+                viewHolder.binding.ivLogo.setImageResource(R.drawable.fawry_icon)
+            }
             else -> {
 
             }

@@ -17,6 +17,7 @@ import com.google.gson.Gson
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.core.data.Constants.SANDBOX
+import com.neqabty.healthcare.core.packages.PaymentMethodsAdapter
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivitySehaPaymentBinding
 import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.GatewaysData
@@ -45,24 +46,32 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
     private var paymentFees = 10
     private var serviceCode = ""
     private var serviceActionCode = ""
+    private var mAdapter = PaymentMethodsAdapter()
     private val paymentViewModel: SehaPaymentViewModel by viewModels()
     override fun getViewBinding() = ActivitySehaPaymentBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(titleResId = R.string.payments_title)
+        setupToolbar(title = "دفع الاشتراك")
 
         totalAmount = intent.getDoubleExtra("price", 0.0).toInt()
         vat = intent.getDoubleExtra("vat", 0.0).toInt()
         total = intent.getDoubleExtra("total", 0.0).toInt()
         serviceCode = intent.getStringExtra("serviceCode")!!
         serviceActionCode = intent.getStringExtra("serviceActionCode")!!
-        binding.tvPackageName.text = "اسم الباقة : ${intent.getStringExtra("name")}"
-        binding.tvPackagePrice.text = "سعر الباقة : $totalAmount جنيه"
-        binding.tvVat.text = " ضريبة القيمة المضافة : $vat جنيه"
-        binding.tvTotal.text = "سعر الباقة شامل ضريبة القيمة المضافة : $total جنيه"
-        updateTotal()
+        binding.tvPackagePriceValue.text = "$totalAmount جنيه"
+        binding.tvVatValue.text = "$vat جنيه"
+        binding.tvTotal.text = "$total جنيه"
+
+        binding.paymentMethods.adapter = mAdapter
+        mAdapter.onItemClickListener = object : PaymentMethodsAdapter.OnItemClickListener{
+            override fun setOnItemClickListener(item: PaymentMethodEntity) {
+                paymentMethod = item.name
+                mAdapter.notifyDataSetChanged()
+            }
+
+        }
         paymentViewModel.getPaymentMethods(serviceCode)
         paymentViewModel.paymentMethods.observe(this) { it ->
 
@@ -74,9 +83,10 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                     com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
                         binding.llContent.visibility = View.VISIBLE
-                        createRadioButton(resource.data!!.paymentMethods)
-                        deliveryMethod = resource.data.deliveryMethods.id
+//                        createRadioButton(resource.data!!.paymentMethods)
+                        deliveryMethod = resource.data!!.deliveryMethods.id
                         deliveryFees = resource.data.deliveryMethods.price
+                        mAdapter.submitList(resource.data.paymentMethods)
                         updateTotal()
                     }
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
@@ -100,10 +110,10 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                             "Opay Card" -> {
                                 oPayPayment(resource.data)
                             }
-                            "wallet" -> {
-
-                            }
                             "Opay Code" -> {
+                                showAlertDialog(resource.data.payment_gateway_transaction_num ?: "")
+                            }
+                            "Fawry Code" -> {
                                 showAlertDialog(resource.data.payment_gateway_transaction_num ?: "")
                             }
                             else -> {
@@ -114,9 +124,6 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                     com.neqabty.healthcare.core.utils.Status.ERROR -> {
                         binding.btnNext.isEnabled = true
                         binding.progressCircular.visibility = View.GONE
-//                        val error = Gson().fromJson(resource.message.toString(), ErrorModel::class.java)
-//
-//                        Toast.makeText(this, error.error, Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -171,7 +178,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                 return@setOnClickListener
             }
 
-            if (sharedPreferences.isPhoneVerified) {
+            if (!sharedPreferences.isPhoneVerified) {
 
                 binding.btnNext.isEnabled = false
                 paymentViewModel.getPaymentInfo(
@@ -189,25 +196,6 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
             }
 
         }
-    }
-
-    private fun createRadioButton(gatewaysData: List<PaymentMethodEntity>) {
-        val rg = RadioGroup(this)
-        rg.orientation = RadioGroup.VERTICAL
-        for (item in gatewaysData) {
-            var rb = RadioButton(this)
-            rb.text = item.displayName
-            rb.id = item.id
-            rb.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (isChecked){
-                    paymentMethod = item.name
-                    updateTotal()
-                }
-            }
-            rb.setPadding(20, 20, 20, 20)
-            rg.addView(rb)
-        }
-        binding.llMainLayout.addView(rg)
     }
 
     private fun verifyPhone() {
@@ -243,8 +231,8 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
             countryCode = "EG", // uppercase
             currency = "EGP", // uppercase
             payAmount = (paymentEntity.total_amount!!.toDouble() * 100).toLong(),
-            productName = binding.tvPackageName.text.toString(),
-            productDescription = binding.tvPackageName.text.toString(),
+            productName = "${intent.getStringExtra("name")}",
+            productDescription = "${intent.getStringExtra("name")}",
             callbackUrl = paymentEntity.callBackURL ?: "",
             userClientIP = "110.246.160.183",
             expireAt = (paymentEntity.expireAt ?: "30").toInt(),

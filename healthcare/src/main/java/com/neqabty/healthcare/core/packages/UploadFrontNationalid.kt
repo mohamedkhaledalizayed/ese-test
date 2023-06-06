@@ -23,6 +23,7 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityUploadFrontNationalidBinding
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.PackagesEntity
+import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.Followers
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.SubscribePostBodyRequest
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.PhotoUI
@@ -73,7 +74,7 @@ class UploadFrontNationalid : BaseActivity<ActivityUploadFrontNationalidBinding>
             payNow()
         }
 
-        subscriptionViewModel.packageStatus.observe(this) {
+        subscriptionViewModel.providers.observe(this) {
 
             it.let { resource ->
 
@@ -86,7 +87,15 @@ class UploadFrontNationalid : BaseActivity<ActivityUploadFrontNationalidBinding>
 //                        binding.progressCircular.visibility = View.GONE
 //                        binding.screenContainer.visibility = View.VISIBLE
                         if (resource.data!!.status){
-                            Toast.makeText(this, "تم تعديل البيانات بنجاح.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "تم الأشتراك بنجاح.", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this, SehaPaymentActivity::class.java)
+                            intent.putExtra("name", packageDetails.name)
+                            intent.putExtra("price", packageDetails.price)
+                            intent.putExtra("vat", packageDetails.vat)
+                            intent.putExtra("total", packageDetails.total)
+                            intent.putExtra("serviceCode", packageDetails.serviceCode)
+                            intent.putExtra("serviceActionCode", packageDetails.serviceActionCode)
+                            startActivity(intent)
                             finish()
                         }else{
                             Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
@@ -108,12 +117,12 @@ class UploadFrontNationalid : BaseActivity<ActivityUploadFrontNationalidBinding>
         val sub = SubscribePostBodyRequest(
                 name = intent.getStringExtra("name")!!,
                 email = intent.getStringExtra("email")!!,
-                birthDate = intent.getStringExtra("email")!!,
-                deliveryPhone = intent.getStringExtra("email")!!,
-                address = intent.getStringExtra("email")!!,
-                job = intent.getStringExtra("email")!!,
-                mobile = intent.getStringExtra("email")!!,
-                nationalId = intent.getStringExtra("email")!!,
+                birthDate = intent.getStringExtra("birthDate")!!,
+                deliveryPhone = intent.getStringExtra("deliveryPhone")!!,
+                address = intent.getStringExtra("address")!!,
+                job = intent.getStringExtra("job")!!,
+                mobile = sharedPreferences.mobile,
+                nationalId = intent.getStringExtra("nationalId")!!,
                 entityCode = sharedPreferences.code,
                 serviceActionCode = packageDetails.serviceActionCode!!,
                 referralNumber = "",

@@ -20,6 +20,7 @@ import com.neqabty.healthcare.commen.profile.view.personalinfo.PersonalInfoActiv
 import com.neqabty.healthcare.databinding.ActivityProfileMegaBinding
 import com.neqabty.healthcare.commen.profile.view.update.UpdateInfoActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
+import com.neqabty.healthcare.commen.splash.view.SplashActivity
 import com.neqabty.healthcare.core.packages.PackagesActivity
 import com.neqabty.healthcare.core.utils.ErrorBody
 import com.neqabty.healthcare.mega.home.view.SuggestionDialog
@@ -80,6 +81,10 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
         binding.packages.setOnClickListener { startActivity(Intent(this, PackagesActivity::class.java)) }
         binding.settings.setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
         binding.support.setOnClickListener { startActivity(Intent(this, SuggestionsActivity::class.java)) }
+        binding.logout.setOnClickListener {
+            sharedPreferences.clearAll()
+            startActivity(Intent(this, SplashActivity::class.java))
+        }
 
     }
 

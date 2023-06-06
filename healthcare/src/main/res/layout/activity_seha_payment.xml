@@ -13,8 +13,8 @@
         tools:context=".sustainablehealth.payment.view.SehaPaymentActivity">
 
         <include
-            android:id="@+id/toolbar"
-            layout="@layout/healthcare_toolbar"
+            android:id="@+id/layout_toolbar"
+            layout="@layout/toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -23,80 +23,121 @@
             android:id="@+id/svContent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/rounded_bg"
+            android:background="@color/background_color"
             android:padding="@dimen/_15sdp"
             android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
 
             <LinearLayout
                 android:id="@+id/llContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
-                <TextView
-                    android:id="@+id/tvPackageName"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:textColor="@color/black"
-                    android:textSize="?textSizeLarge" />
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/total_bg"
+                    >
 
-                <TextView
-                    android:id="@+id/tvPackagePrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
+                    <TextView
+                        android:id="@+id/tvPackagePrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:text="سعر الباقة"
+                        android:layout_alignParentStart="true"
+                        android:textSize="@dimen/_12ssp" />
 
-                <TextView
-                    android:id="@+id/tv_vat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
+                    <TextView
+                        android:id="@+id/tvPackagePriceValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp" />
 
-                <TextView
-                    android:id="@+id/tv_total"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
+                    <TextView
+                        android:id="@+id/tvVat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_below="@id/tvPackagePrice"
+                        android:textColor="@color/black"
+                        android:text="ضريبة القيمة المضافة"
+                        android:layout_alignParentStart="true"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <TextView
+                        android:id="@+id/tvVatValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@id/tvPackagePriceValue"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#d7dce4"
+                        android:layout_below="@id/tvVat"
+                        android:layout_margin="@dimen/_10sdp"/>
+
+                    <TextView
+                        android:fontFamily="@font/hanimation_arabic_semibold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="الاجمالي"
+                        android:layout_below="@id/view"
+                        android:textColor="#6e7389"
+                        android:textSize="@dimen/_12ssp"
+                        android:layout_alignParentStart="true"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EGP 15,560.00"
+                        android:layout_below="@id/view"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp"
+                        android:layout_alignParentEnd="true"
+                        />
+
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/tvPaymentMethod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:text="@string/payment_method"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold"
+                    android:text="اختر طريقة الدفع"
+                    android:textColor="#6e7389"
+                    android:textSize="@dimen/_12ssp"
                     android:visibility="visible" />
 
-                <LinearLayout
-                    android:id="@+id/ll_main_layout"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/payment_methods"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="vertical">
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
                 <TextView
                     android:id="@+id/tvAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    />
 
                 <EditText
                     android:id="@+id/address"
@@ -114,18 +155,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:text="@string/price_delivery"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="?textSizeLarge"
-                    android:textStyle="bold" />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    />
 
-                <Button
+                <TextView
                     android:id="@+id/btn_next"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_30sdp"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/select_btn_bg"
                     android:text="@string/next"
-                    android:textColor="@android:color/white"
+                    android:textAlignment="center"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp" />
 
             </LinearLayout>
@@ -139,7 +182,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_toolbar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
