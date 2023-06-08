@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.invoices.domain.entity.InvoicesEntity
+import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.databinding.InvoiceItemLayoutBinding
 import com.neqabty.healthcare.databinding.OfferItemBinding
 import com.neqabty.healthcare.sustainablehealth.offers.domain.entity.offers.OffersEntity
@@ -36,7 +37,8 @@ class InvoicesAdapter: RecyclerView.Adapter<InvoicesAdapter.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         val item = items[position]
-        viewHolder.binding.text.text = item.toString()
+        viewHolder.binding.paymentName.text = item.serviceName
+        viewHolder.binding.paymentDate.text = AppUtils().dateFormat(item.createdAt)
         viewHolder.binding.root.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)
         }

@@ -3,6 +3,7 @@ package com.neqabty.healthcare.commen.invoices.view
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.invoices.domain.entity.InvoicesEntity
@@ -28,7 +29,7 @@ class InvoicesActivity : BaseActivity<ActivityInvoicesBinding>() {
         invoicesAdapter.onItemClickListener = object : InvoicesAdapter.OnItemClickListener{
             override fun setOnItemClickListener(item: InvoicesEntity) {
                 val intent = Intent(this@InvoicesActivity, PaymentStatusActivity::class.java)
-                intent.putExtra("referenceCode", item)
+                intent.putExtra("data", item)
                 startActivity(intent)
             }
 
@@ -37,14 +38,14 @@ class InvoicesActivity : BaseActivity<ActivityInvoicesBinding>() {
         viewModel.invoices.observe(this){
             when(it.status){
                 Status.LOADING ->{
-
+                    binding.progressCircular.visibility = View.VISIBLE
                 }
                 Status.SUCCESS-> {
+                    binding.progressCircular.visibility = View.GONE
                     invoicesAdapter.submitList(it.data?.toMutableList())
-                    Log.e("test", it.data.toString())
                 }
                 Status.ERROR ->{
-
+                    binding.progressCircular.visibility = View.GONE
                 }
             }
         }

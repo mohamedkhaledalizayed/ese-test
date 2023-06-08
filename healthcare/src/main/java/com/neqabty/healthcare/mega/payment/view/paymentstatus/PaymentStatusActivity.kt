@@ -119,6 +119,9 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
 
     private fun getInvoice() {
         data = intent.getParcelableExtra("data")!!
+        binding.errorContainer.visibility = View.GONE
+        binding.progressCircular.visibility = View.GONE
+        binding.layoutContainer.visibility = View.VISIBLE
         binding.nameValue.text = data.fullName
 
         if (data.membershipId.isNotEmpty()){
