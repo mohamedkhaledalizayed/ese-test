@@ -246,7 +246,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="@dimen/_60sdp"
                                     android:scaleType="center"
-                                    android:src="@drawable/doctor"
+                                    android:src="@drawable/home_visit"
                                     android:id="@+id/homeVisit"
                                     />
 
