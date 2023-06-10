@@ -7,7 +7,7 @@ import com.neqabty.healthcare.auth.login.data.model.UserModel
 import javax.inject.Inject
 
 class AuthDS @Inject constructor(private val authApi: AuthApi) {
-    suspend fun login(mobile: String, password: String, firebaseToken: String): UserModel {
-        return authApi.login(LoginBody(mobile, password, firebaseToken))
+    suspend fun login(mobile: String, password: String, token: String, firebaseToken: String): UserModel {
+        return authApi.login(LoginBody(mobile, password, token, firebaseToken))
     }
 }

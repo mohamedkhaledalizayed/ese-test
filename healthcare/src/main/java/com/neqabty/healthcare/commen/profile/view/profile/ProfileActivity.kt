@@ -23,6 +23,7 @@ import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.commen.splash.view.SplashActivity
 import com.neqabty.healthcare.core.packages.PackagesActivity
 import com.neqabty.healthcare.core.utils.ErrorBody
+import com.neqabty.healthcare.core.utils.PushNotificationsWrapper
 import com.neqabty.healthcare.mega.home.view.SuggestionDialog
 import com.neqabty.healthcare.sustainablehealth.suggestions.presentation.SuggestionsActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -83,6 +84,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
         binding.support.setOnClickListener { startActivity(Intent(this, SuggestionsActivity::class.java)) }
         binding.logout.setOnClickListener {
             sharedPreferences.clearAll()
+            PushNotificationsWrapper().deleteToken(this)
             startActivity(Intent(this, SplashActivity::class.java))
         }
 

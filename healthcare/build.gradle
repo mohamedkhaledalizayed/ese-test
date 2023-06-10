@@ -5,6 +5,12 @@ plugins {
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
 }
+if (getGradle().getStartParameter().getTaskRequests().toString().contains("Hms")) {
+    apply plugin: 'com.huawei.agconnect'
+} else {
+    apply plugin: 'com.google.gms.google-services'
+    apply plugin: 'com.google.firebase.crashlytics'
+}
 
 android {
     compileSdk 32
@@ -63,12 +69,43 @@ android {
             }
         }
     }
+    flavorDimensions "mode", "services"
+
+    productFlavors {
+        tst {
+            dimension "mode"
+//            minSdkVersion 21
+//            resConfigs "en", "hdpi"
+//            buildConfigField "String", "URL", '"http://3.131.229.146:44392"'
+        }
+        prod {
+            dimension "mode"
+//            buildConfigField "String", "URL", '"front.neqabty.com"'
+        }
+
+        gms {
+            dimension "services"
+            buildConfigField "String", "SERVICE_USED", '"g"'
+            versionNameSuffix "-gms"
+        }
+        hms {
+            dimension "services"
+            buildConfigField "String", "SERVICE_USED", '"h"'
+            versionNameSuffix "-hms"
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    sourceSets {
+        androidTest.java.srcDirs += "src/test-common/java"
+        test.java.srcDirs += "src/test-common/java"
+        gms.java.srcDirs = ['src/main/java', 'src/gms/java']
+        hms.java.srcDirs = ['src/main/java', 'src/hms/java']
     }
     buildFeatures {
         viewBinding true
@@ -82,147 +119,154 @@ android {
     }
 
     configurations {
-        all*.exclude module: 'androidsvg' // This removes all other versions of `support-v4` if gets duplicated from all the artifacts.
+        all*.exclude module: 'androidsvg'
+        // This removes all other versions of `support-v4` if gets duplicated from all the artifacts.
     }
 }
-ext {
-    //Basic configurations
-    kotlin_version = "1.5.31"
-    compileSdkVersion = 30
-    minSdkVersion = 23
-    targetSdkVersion = 30
-    corektxVersion = '1.6.0'
-    //androidx
-    appcompat = '1.4.2'
-    constraintlayout='2.1.4'
-    recyclerview='1.2.1'
-    cardview='1.0.0'
-    material= '1.6.1'
-    swiperefreshlayout='1.1.0'
-    //Test
-    junitVersion = '4.13.2'
-    junitAndroidxVersion = '1.1.3'
-    espressoVersion = '3.4.0'
-    //lifecycle
-    lifecycle_version = '2.5.0'
-    lifecycle_extension='2.2.0'
-    //network
-    timber_version = '4.7.1'
-    //pref
-    preference = '1.2.0'
-    //nav_component
-    nav_version = '2.3.5'
-    hiltVersion = '2.38.1'
-    coroutinesVersion = '1.5.2'
-    retrofitVersion = '2.9.0'
-    okhttpVersion = '5.0.0-alpha.2'
-}
-dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    ext {
+        //Basic configurations
+        kotlin_version = "1.5.31"
+        compileSdkVersion = 30
+        minSdkVersion = 23
+        targetSdkVersion = 30
+        corektxVersion = '1.6.0'
+        //androidx
+        appcompat = '1.4.2'
+        constraintlayout = '2.1.4'
+        recyclerview = '1.2.1'
+        cardview = '1.0.0'
+        material = '1.6.1'
+        swiperefreshlayout = '1.1.0'
+        //Test
+        junitVersion = '4.13.2'
+        junitAndroidxVersion = '1.1.3'
+        espressoVersion = '3.4.0'
+        //lifecycle
+        lifecycle_version = '2.5.0'
+        lifecycle_extension = '2.2.0'
+        //network
+        timber_version = '4.7.1'
+        //pref
+        preference = '1.2.0'
+        //nav_component
+        nav_version = '2.3.5'
+        hiltVersion = '2.38.1'
+        coroutinesVersion = '1.5.2'
+        retrofitVersion = '2.9.0'
+        okhttpVersion = '5.0.0-alpha.2'
+    }
+    dependencies {
+        implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
 
-    //android ui
-    implementation "androidx.appcompat:appcompat:$appcompat"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
-    implementation "com.google.android.material:material:$material"
+        //android ui
+        implementation "androidx.appcompat:appcompat:$appcompat"
+        implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+        implementation "com.google.android.material:material:$material"
 
-    //kotlin
-    implementation "androidx.preference:preference-ktx:$preference"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+        //kotlin
+        implementation "androidx.preference:preference-ktx:$preference"
+        implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+        implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
-    //size
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
-    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+        //size
+        implementation 'com.intuit.sdp:sdp-android:1.0.6'
+        implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
-    //hilt
-    implementation "com.google.dagger:hilt-android:$hiltVersion"
-    kapt "com.google.dagger:hilt-compiler:$hiltVersion"
-    // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+        //hilt
+        implementation "com.google.dagger:hilt-android:$hiltVersion"
+        kapt "com.google.dagger:hilt-compiler:$hiltVersion"
+        // Coroutine Lifecycle Scopes
+        implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
-    // Activity KTX for viewModels()
-    implementation "androidx.activity:activity-ktx:1.5.0"
-    // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+        // Activity KTX for viewModels()
+        implementation "androidx.activity:activity-ktx:1.5.0"
+        // Retrofit
+        implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+        implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+        implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 
-    implementation 'de.hdodenhof:circleimageview:3.0.1'
-    implementation 'com.github.d-max:spots-dialog:1.1@aar'
-    //picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
+        implementation 'de.hdodenhof:circleimageview:3.0.1'
+        implementation 'com.github.d-max:spots-dialog:1.1@aar'
+        //picasso
+        implementation 'com.squareup.picasso:picasso:2.71828'
 
-    def lottieVersion = "4.2.2"
-    implementation "com.airbnb.android:lottie:$lottieVersion"
-    implementation 'me.zhanghai.android.materialratingbar:library:1.3.1'
-    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.6'
-    implementation(name: 'cashier-sdk-1.1.2', ext: 'aar')
+        def lottieVersion = "4.2.2"
+        implementation "com.airbnb.android:lottie:$lottieVersion"
+        implementation 'me.zhanghai.android.materialratingbar:library:1.3.1'
+        implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.0.6'
+        implementation(name: 'cashier-sdk-1.1.2', ext: 'aar')
 
-    implementation 'com.github.santalu:auto-viewpager:1.0.1'
-    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
-    implementation 'com.caverock:androidsvg-aar:1.4'
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
-    implementation 'com.google.android.material:material:1.8.0'
+        implementation 'com.github.santalu:auto-viewpager:1.0.1'
+        implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+        implementation 'com.caverock:androidsvg-aar:1.4'
+        implementation 'com.github.bumptech.glide:glide:4.13.2'
+        annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+        implementation 'com.google.android.material:material:1.8.0'
 
-    implementation 'com.github.takusemba:spotlight:2.0.5'
-    implementation 'com.hbb20:ccp:2.4.7'
-
-
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
-    implementation 'com.google.android.gms:play-services-auth:19.2.0'
-    implementation 'com.google.firebase:firebase-auth:20.0.1'
-    implementation 'com.google.firebase:firebase-messaging:20.0.1'
-    implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx' // kotlin
-
-    implementation project(path: ':pdfcreator')
-    implementation project(path: ':circleindicator')
-    implementation 'com.paytabs:payment-sdk:6.3.2'
+        implementation 'com.github.takusemba:spotlight:2.0.5'
+        implementation 'com.hbb20:ccp:2.4.7'
 
 
-    //android ui
-    implementation "androidx.recyclerview:recyclerview:$recyclerview"
-    implementation "androidx.cardview:cardview:$cardview"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayout"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extension"
+        implementation 'com.google.android.gms:play-services-maps:17.0.0'
+        implementation 'com.google.android.gms:play-services-auth:19.2.0'
+        gmsImplementation platform('com.google.firebase:firebase-bom:28.4.1')
 
-    //kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+        gmsImplementation 'com.google.firebase:firebase-auth'
+        gmsImplementation 'com.google.firebase:firebase-messaging'
+        gmsImplementation 'com.google.firebase:firebase-analytics'
+
+        hmsImplementation deps.hms.hms_push
+
+        implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx' // kotlin
+
+        implementation project(path: ':pdfcreator')
+        implementation project(path: ':circleindicator')
+        implementation 'com.paytabs:payment-sdk:6.3.2'
 
 
-    //test
-    testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$junitAndroidxVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+        //android ui
+        implementation "androidx.recyclerview:recyclerview:$recyclerview"
+        implementation "androidx.cardview:cardview:$cardview"
+        implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayout"
+        implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extension"
 
-    // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+        //kotlin
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    // Circle Indicator (To fix the xml preview "Missing classes" error)
-    implementation 'com.scottyab:secure-preferences-lib:0.1.7'
-    implementation 'com.github.yash786agg:AnimatedLoadingIndicator:v1.3'
+
+        //test
+        testImplementation "junit:junit:$junitVersion"
+        androidTestImplementation "androidx.test.ext:junit:$junitAndroidxVersion"
+        androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+
+        // Coroutines
+        implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+        implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+        // Circle Indicator (To fix the xml preview "Missing classes" error)
+        implementation 'com.scottyab:secure-preferences-lib:0.1.7'
+        implementation 'com.github.yash786agg:AnimatedLoadingIndicator:v1.3'
 //carbon
-    implementation 'tk.zielony:carbon:0.16.0.1'
-    implementation 'com.github.antonKozyriatskyi:CircularProgressIndicator:1.3.0'
+        implementation 'tk.zielony:carbon:0.16.0.1'
+        implementation 'com.github.antonKozyriatskyi:CircularProgressIndicator:1.3.0'
 
-    implementation 'me.relex:circleindicator:2.1.6'
+        implementation 'me.relex:circleindicator:2.1.6'
 
-    //Permissions
-    implementation 'com.karumi:dexter:6.2.3'
+        //Permissions
+        implementation 'com.karumi:dexter:6.2.3'
 
-    implementation 'com.google.android.gms:play-services-location:17.0.0'
-    implementation 'com.google.android.gms:play-services-maps:17.0.0'
-    //zoom
-    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+        implementation 'com.google.android.gms:play-services-location:17.0.0'
+        implementation 'com.google.android.gms:play-services-maps:17.0.0'
+        //zoom
+        implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
-    //Image Picker
-    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
+        //Image Picker
+        implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
 
-    //carbon
-    implementation 'tk.zielony:carbon:0.16.0.1'
+        //carbon
+        implementation 'tk.zielony:carbon:0.16.0.1'
 //View State
-    implementation 'com.github.vlonjatg:progress-activity:2.0.5'
-    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+        implementation 'com.github.vlonjatg:progress-activity:2.0.5'
+        implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
 }

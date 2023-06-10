@@ -411,7 +411,7 @@
     <string name="reset_password">اعادة ضبط الرقم السري</string>
     <string name="go_to_home">الصفحة الرئسية</string>
     <string name="complete_profile">استكمال بيانات الحساب</string>
-    <string name="signin_done">تم تسجيل الدخول بنجاح</string>
+    <string name="subscribe_in_contact">الاشتراك في خدمة التقسيط</string>
     <string name="enter_id_front">برجاء ادخال صورة البطاقة الامامية</string>
     <string name="enter_id_back">برجاء ادخال صورة البطاقة من الخلف</string>
     <string name="review_your_data">راجع بياناتك الشخصية</string>

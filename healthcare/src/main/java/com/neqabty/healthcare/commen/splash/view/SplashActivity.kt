@@ -14,16 +14,8 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.login.view.LoginActivity
 import com.neqabty.healthcare.databinding.ActivitySplashBinding
-import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
-import com.neqabty.healthcare.commen.onboarding.intro.view.IntroActivity
-import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
-import com.neqabty.healthcare.commen.onboarding.contact.view.DependantsActivity
-import com.neqabty.healthcare.commen.onboarding.contact.view.ResidenceActivity
-import com.neqabty.healthcare.commen.onboarding.contact.view.SigninDoneActivity
-import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
-import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
-import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity
 import com.neqabty.healthcare.core.utils.DeviceUtils
+import com.neqabty.healthcare.core.utils.PushNotificationsWrapper
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 
@@ -61,6 +53,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                         val androidVersion = apiConfigurations?.getOrNull(0)?.androidVersion?.toInt()
 
                         if (androidVersion != null && androidVersion <= BuildConfig.VERSION_CODE) {
+                            PushNotificationsWrapper().getToken(this)
                             Handler().postDelayed({
                                 val mainIntent = Intent(this, getTheNextActivityFromSplash())
                                 startActivity(mainIntent)

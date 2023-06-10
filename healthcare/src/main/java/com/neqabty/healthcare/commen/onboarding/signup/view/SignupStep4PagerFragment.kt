@@ -13,6 +13,7 @@ import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
 import com.neqabty.healthcare.commen.onboarding.contact.view.SigninDoneActivity
 import com.neqabty.healthcare.commen.onboarding.signup.data.SignupData
 import com.neqabty.healthcare.core.data.Constants
+import com.neqabty.healthcare.core.data.Constants.NEQABTY_CODE
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.FragmentSignupStepFourBinding
 
@@ -49,7 +50,7 @@ class SignupStep4PagerFragment : Fragment() {
         binding.tvRegisterIn.text =
             getString(R.string.register_in).plus(" ").plus(SignupData.syndicateName)
 
-        if (SignupData.syndicateID == Constants.NEQABTY_CODE) {
+        if (SignupData.syndicateID == NEQABTY_CODE) {
             binding.clName.visibility = View.VISIBLE
             binding.clEmail.visibility = View.VISIBLE
             binding.clNationalId.visibility = View.VISIBLE
@@ -116,7 +117,7 @@ class SignupStep4PagerFragment : Fragment() {
                         activity.hideProgressDialog()
                         if (resource.data!!.mobile.isNotEmpty()) {
                             activity.sharedPreferences.isAuthenticated = true
-                            activity.sharedPreferences.isSyndicateMember = false
+                            activity.sharedPreferences.isSyndicateMember = SignupData.syndicateID != NEQABTY_CODE
                             activity.sharedPreferences.token = resource.data!!.token
                             activity.sharedPreferences.name = resource.data!!.fullname ?: ""
                             activity.sharedPreferences.nationalId = resource.data!!.nationalId ?: ""
@@ -153,11 +154,12 @@ class SignupStep4PagerFragment : Fragment() {
             NeqabtySignupBody(
                 email = binding.etEmail.text.toString(),
                 fullname = binding.etName.text.toString(),
-                entityCode = if(SignupData.syndicateID == Constants.NEQABTY_CODE) "" else SignupData.syndicateID,
+                entityCode = if(SignupData.syndicateID == NEQABTY_CODE) "" else SignupData.syndicateID,
                 mobile = activity.sharedPreferences.mobile,
                 nationalId = binding.etNationalId.text.toString(),
                 membershipId = binding.etMembershipNumber.text.toString(),
-                password = binding.etPassword.text.toString()
+                password = binding.etPassword.text.toString(),
+                token = (requireActivity() as SignupActivity).sharedPreferences.firebaseToken
             )
         )
     }

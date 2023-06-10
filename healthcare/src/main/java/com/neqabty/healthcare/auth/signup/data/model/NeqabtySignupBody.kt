@@ -19,4 +19,6 @@ data class NeqabtySignupBody(
     val entityCode: String = "",
     @SerializedName("membership_id")
     val membershipId: String = "",
+    @SerializedName("token")
+    val token: String = ""
 )

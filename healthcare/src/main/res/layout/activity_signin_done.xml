@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:fontFamily="@font/hanimation_arabic_medium"
-                android:text="@string/signin_done"
+                android:text="@string/subscribe_in_contact"
                 android:visibility="gone"
                 android:textColor="@color/secondaryText"
                 android:textSize="?textSizeMedium"

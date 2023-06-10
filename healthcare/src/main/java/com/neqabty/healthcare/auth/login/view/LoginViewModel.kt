@@ -16,11 +16,11 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase) :
     ViewModel() {
     val user = MutableLiveData<Resource<UserEntity>>()
-    fun login(mobile: String, password: String, firebaseToken: String) {
+    fun login(mobile: String, password: String, token: String, firebaseToken: String) {
         user.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                loginUseCase.build(mobile, password, firebaseToken).collect {
+                loginUseCase.build(mobile, password, token, firebaseToken).collect {
                     user.postValue(Resource.success(data = it))
                 }
             } catch (e: Throwable) {

@@ -21,6 +21,7 @@ class PreferencesHelper @Inject constructor(
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val NAME = "data.source.prefs.NAME"
         private const val TOKEN = "data.source.prefs.TOKEN"
+        private const val FIREBASE_TOKEN = "data.source.prefs.FIREBASE_TOKEN"
         private const val MOBILE = "data.source.prefs.MOBILE"
         private const val MOBILE_NO_CC = "data.source.prefs.MOBILE_NO_CC"
         private const val EMAIL = "data.source.prefs.EMAIL"
@@ -53,6 +54,10 @@ class PreferencesHelper @Inject constructor(
     var token
         get() = preferences.getString(TOKEN, "")!!
         set(value) = preferences.edit().putString(TOKEN, value).apply()
+
+    var firebaseToken
+        get() = preferences.getString(FIREBASE_TOKEN, "")!!
+        set(value) = preferences.edit().putString(FIREBASE_TOKEN, value).apply()
 
     var mobile
         get() = preferences.getString(MOBILE, "")!!

@@ -1,13 +1,14 @@
 package com.neqabty.healthcare.core.data
 
 
+import androidx.lifecycle.MutableLiveData
 import com.neqabty.healthcare.chefaa.address.domain.entities.AddressEntity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
 
 
 object Constants {
 
-    const val forTesting = true
+    const val forTesting = false
 
     //TODO move this to gradle
     //Very Important Before Publishing
@@ -41,6 +42,8 @@ object Constants {
     // for payment true for testing false for production
     const val SANDBOX = true
     // End
+
+    var isFirebaseTokenUpdated: MutableLiveData<String> = MutableLiveData("")
 
     const val NEQABTY_CODE = "e00"
     const val ESE_CODE = "e03"

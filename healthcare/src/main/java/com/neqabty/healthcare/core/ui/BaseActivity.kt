@@ -20,6 +20,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -68,6 +69,19 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 //            resources.getDimension(R.dimen.margin_large).toInt(),
 //            resources.getDimension(R.dimen.margin_large).toInt()
 //        )
+
+
+        Constants.isFirebaseTokenUpdated.observe(this, Observer {
+            if (it.isNotBlank()){
+                if (!it.equals(sharedPreferences.firebaseToken)) // Token has been changed
+                {
+                    sharedPreferences.firebaseToken = it
+//                    if (sharedPreferences.user.isNotBlank()) { // verified
+//                        mainViewModel.login(sharedPref.mobile, sharedPref.user, it, sharedPref)
+//                    }
+                }
+            }
+        })
     }
 
     override fun onResume() {

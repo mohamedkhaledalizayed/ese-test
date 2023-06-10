@@ -364,7 +364,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                     email = binding.email.text.toString(),
                     fullname = binding.fullName.text.toString(),
                     mobile = binding.phone.text.toString(),
-                    password = binding.password.text.toString()
+                    password = binding.password.text.toString(),
+                    token = sharedPreferences.firebaseToken
                 )
             )
         }

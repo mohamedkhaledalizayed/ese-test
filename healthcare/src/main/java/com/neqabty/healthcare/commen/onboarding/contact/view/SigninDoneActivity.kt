@@ -21,7 +21,7 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(R.string.signin_done)
+        setupToolbar(R.string.subscribe_in_contact)
         observeOnCheckMemberStatus()
         initializeViews()
     }
