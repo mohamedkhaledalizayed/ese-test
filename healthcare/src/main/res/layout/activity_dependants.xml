@@ -129,6 +129,7 @@
         android:background="@drawable/back_btn_bg"
         android:padding="@dimen/_10sdp"
         android:text="@string/skip"
+        android:visibility="gone"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@dimen/_12ssp"

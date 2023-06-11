@@ -26,6 +26,8 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePaawordBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setupToolbar(titleResId = R.string.reset_password)
+
         token = intent.getStringExtra("token")!!
         loading = SpotsDialog.Builder()
             .setContext(this)

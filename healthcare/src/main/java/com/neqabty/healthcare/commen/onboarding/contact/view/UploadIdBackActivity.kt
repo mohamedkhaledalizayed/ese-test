@@ -80,7 +80,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
                         hideProgressDialog()
                         if (resource.data != null) {
                             //check later
-                            showAlert("submitted successfully, check later") {
+                            showAlert(getString(R.string.request_sent)) {
                                 showWaitingProgressbar()
                             }
 
@@ -109,8 +109,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
                             if (resource.data.ocrStatus.equals("pending")) {
                                 showWaitingProgressbar()
                             } else { // OCR completed
-                                startActivity(Intent(this, ReviewYourDataActivity::class.java))
-                                finishAffinity()
+                                navigate()
                             }
                         }
                     }
@@ -187,7 +186,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
     }
 
     private fun getImage() {
-        val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val i = Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(i, REQUEST_CODE)
     }
 
@@ -284,8 +283,9 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
             this,
             ReviewYourDataActivity::class.java
         )
+        mainIntent.putExtra("address" , uploadIdBackViewModel.checkMemberStatus.value?.data?.ocrs?.get(1)?.result?.extractedInfo?.governorate)
         startActivity(mainIntent)
-        finish()
+        finishAffinity()
     }
 // endregion
 }

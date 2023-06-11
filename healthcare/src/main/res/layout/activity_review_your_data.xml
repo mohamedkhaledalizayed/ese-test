@@ -52,6 +52,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/hanimation_arabic_medium"
                     android:text="@string/user_name"
+                    android:gravity="right"
                     android:layout_margin="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"/>
@@ -100,7 +101,7 @@
                     android:textSize="@dimen/_12ssp" />
 
                 <TextView
-                    android:id="@+id/address"
+                    android:id="@+id/tv_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/hanimation_arabic_medium"

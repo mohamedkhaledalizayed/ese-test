@@ -30,6 +30,7 @@ class ReviewYourDataActivity : BaseActivity<ActivityReviewYourDataBinding>() {
     private fun initializeViews() {
         binding.tvName.text = sharedPreferences.name
         binding.tvNatId.text = sharedPreferences.nationalId
+        binding.tvAddress.text = intent.extras?.getString("address")
 
         binding.spMaritalStatus.adapter = ArrayAdapter(this, R.layout.spinner_item, listOf(getString(R.string.choose_marital_status),
             getString(R.string.marital_status_single),
@@ -56,7 +57,7 @@ class ReviewYourDataActivity : BaseActivity<ActivityReviewYourDataBinding>() {
             SubmitClientData.entity.clientInfo.phone = sharedPreferences.mobile
             SubmitClientData.entity.nationalId = sharedPreferences.nationalId
             SubmitClientData.entity.userInputNationalId = sharedPreferences.nationalId
-            SubmitClientData.entity.clientInfo.homeAddress = binding.address.text.toString()
+            SubmitClientData.entity.clientInfo.homeAddress = binding.tvAddress.text.toString()
             SubmitClientData.entity.clientInfo.maritalStatus = sharedPreferences.nationalId
             SubmitClientData.entity.clientInfo.email = binding.spMaritalStatus.selectedItem.toString()
             navigate()

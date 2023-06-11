@@ -4,9 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:foo="http://schemas.android.com/tools"
-    android:gravity="center"
+    android:gravity="center|top"
     android:background="@color/white"
-    android:padding="@dimen/margin_medium"
+    android:padding="@dimen/margin_large"
     android:orientation="vertical">
 
     <include

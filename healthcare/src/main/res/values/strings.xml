@@ -414,6 +414,7 @@
     <string name="subscribe_in_contact">الاشتراك في خدمة التقسيط</string>
     <string name="enter_id_front">برجاء ادخال صورة البطاقة الامامية</string>
     <string name="enter_id_back">برجاء ادخال صورة البطاقة من الخلف</string>
+    <string name="request_sent">لقد تم ارسال الطلب بنجاح. من فضلك انتظر حتى تتم مراجعته.</string>
     <string name="review_your_data">راجع بياناتك الشخصية</string>
     <string name="ok">تأكيد</string>
     <string name="residence">محل الاقامة</string>
