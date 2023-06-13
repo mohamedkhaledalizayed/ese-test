@@ -721,6 +721,25 @@
 
             </androidx.cardview.widget.CardView>
 
+            <LinearLayout
+                android:id="@+id/terms_conditions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/account_info"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="الشروط و الاحكام"
+                    />
+
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btn_select"
                 android:layout_width="0dp"
@@ -737,7 +756,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/account_info" />
+                app:layout_constraintTop_toBottomOf="@id/terms_conditions" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

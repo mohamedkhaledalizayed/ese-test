@@ -14,9 +14,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
-import android.view.ActionMode
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -24,11 +21,9 @@ import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import com.neqabty.healthcare.core.utils.Status
-import com.neqabty.healthcare.core.utils.isMobileValid
 import com.neqabty.healthcare.core.utils.isNationalIdValid
 import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
 import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
@@ -37,6 +32,7 @@ import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.Subscri
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.UpdatePackageBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.viewmodel.SubscriptionViewModel
+import com.tejpratapsingh.pdfcreator.activity.PDFViewerActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -72,6 +68,8 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private var serviceActionCode: String? = ""
     private var userNumber: String? = ""
     private var subscriptionMode = true
+    private var pdf = "JVBERi0xLjcKCjEgMCBvYmogICUgZW50cnkgcG9pbnQKPDwKICAvVHlwZSAvQ2F0YWxvZwogIC9QYWdlcyAyIDAgUgo+PgplbmRvYmoKCjIgMCBvYmoKPDwKICAvVHlwZSAvUGFnZXMKICAvTWVkaWFCb3ggWyAwIDAgMjAwIDIwMCBdCiAgL0NvdW50IDEKICAvS2lkcyBbIDMgMCBSIF0KPj4KZW5kb2JqCgozIDAgb2JqCjw8CiAgL1R5cGUgL1BhZ2UKICAvUGFyZW50IDIgMCBSCiAgL1Jlc291cmNlcyA8PAogICAgL0ZvbnQgPDwKICAgICAgL0YxIDQgMCBSIAogICAgPj4KICA+PgogIC9Db250ZW50cyA1IDAgUgo+PgplbmRvYmoKCjQgMCBvYmoKPDwKICAvVHlwZSAvRm9udAogIC9TdWJ0eXBlIC9UeXBlMQogIC9CYXNlRm9udCAvVGltZXMtUm9tYW4KPj4KZW5kb2JqCgo1IDAgb2JqICAlIHBhZ2UgY29udGVudAo8PAogIC9MZW5ndGggNDQKPj4Kc3RyZWFtCkJUCjcwIDUwIFRECi9GMSAxMiBUZgooSGVsbG8sIHdvcmxkISkgVGoKRVQKZW5kc3RyZWFtCmVuZG9iagoKeHJlZgowIDYKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDEwIDAwMDAwIG4gCjAwMDAwMDAwNzkgMDAwMDAgbiAKMDAwMDAwMDE3MyAwMDAwMCBuIAowMDAwMDAwMzAxIDAwMDAwIG4gCjAwMDAwMDAzODAgMDAwMDAgbiAKdHJhaWxlcgo8PAogIC9TaXplIDYKICAvUm9vdCAxIDAgUgo+PgpzdGFydHhyZWYKNDkyCiUlRU9G"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -137,6 +135,27 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             datePicker.show()
         }
 
+        subscriptionViewModel.getTermsAndConditions(intent.getStringExtra("id") ?: "")
+        subscriptionViewModel.terms.observe(this) {
+            it.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+
+                    }
+                    Status.SUCCESS -> {
+                        if (resource.data!!.status){
+                            Log.e("rrr", "Test")
+                            pdf = resource.data.data[0].terms_document
+                        }else{
+                            Log.e("ytyr", "Wrong")
+                        }
+                    }
+                    Status.ERROR -> {
+                        Log.e("message", "${resource.message}")
+                    }
+                }
+            }
+        }
 
         subscriptionViewModel.getRelations()
         subscriptionViewModel.relations.observe(this) {
@@ -235,6 +254,8 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         binding.etEmail.customSelectionActionModeCallback = actionMode
         binding.etAddress.customSelectionActionModeCallback = actionMode
         binding.etJob.customSelectionActionModeCallback = actionMode
+
+        binding.terms.setOnClickListener { convertBase64ToPDF() }
     }
 
     fun addFollower(view: View) {
@@ -437,6 +458,25 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         checkPermissionsAndOpenFilePicker()
     }
 
+    private fun convertBase64ToPDF(){
+        val decodedBytes: ByteArray = Base64.decode(pdf, Base64.DEFAULT)
+
+        val filePath: File = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) , "termsandconditions" + ".pdf")
+        val pdfAsBytes: ByteArray = Base64.decode(pdf, 0)
+        val os: FileOutputStream = FileOutputStream(filePath, false)
+        os.write(pdfAsBytes)
+        os.flush()
+        os.close()
+
+        val pdfUri = Uri.fromFile(filePath)
+
+        val intentPdfViewer = Intent(this, PDFViewerActivity::class.java)
+        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri)
+
+        startActivity(intentPdfViewer)
+
+    }
+
     fun registerUser(view: View) {
 
         if (userImageUri == null){
@@ -491,6 +531,11 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
 
         if (binding.etPhone.text.toString().isNullOrEmpty()){
             Toast.makeText(this, "من فضلك ادخل الهاتف.", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (!binding.terms.isChecked){
+            Toast.makeText(this, "من فضلك إقرا الشروط و الاحكام.", Toast.LENGTH_LONG).show()
             return
         }
 

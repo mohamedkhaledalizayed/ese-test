@@ -140,6 +140,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                 }
                 if (sharedPreferences.isAuthenticated){
                     val intent = Intent(this@SehaHomeActivity, SubscriptionActivity::class.java)
+                    intent.putExtra("id", item.id )
                     intent.putExtra("name", item.name )
                     intent.putExtra("price", item.price )
                     intent.putExtra("vat", item.vat )
