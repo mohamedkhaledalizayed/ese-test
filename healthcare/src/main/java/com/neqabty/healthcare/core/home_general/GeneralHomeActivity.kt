@@ -40,6 +40,8 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
         setContentView(binding.root)
 
         setupToolbar(title = "", show = false)
+        observeOnCheckMemberStatus()
+        getContactMemberStatus()
         initializeViews()
     }
 
@@ -50,19 +52,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
             binding.tvName.text = sharedPreferences.mobile
         }
 
-        if (sharedPreferences.isContactSubscriber) {
-            binding.tvContactName.text = sharedPreferences.name
-            binding.tvBalance.visibility = View.VISIBLE
-            binding.ivContactQr.visibility = View.VISIBLE
-            binding.ivContactServiceProviders.visibility = View.VISIBLE
-            binding.ivContactSubscribe.visibility = View.GONE
-        } else {
-            binding.tvContactName.text = getString(R.string.contact_home_benefits)
-            binding.tvBalance.visibility = View.GONE
-            binding.ivContactQr.visibility = View.INVISIBLE
-            binding.ivContactServiceProviders.visibility = View.INVISIBLE
-            binding.ivContactSubscribe.visibility = View.VISIBLE
-        }
+        renderContactCard()
 
         binding.ivContactSubscribe.setOnClickListener {
             startActivity(Intent(this, getContactEntryPoint()))
@@ -135,6 +125,51 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
                     true
                 }
                 else -> false
+            }
+        }
+    }
+
+    private fun renderContactCard() {
+        if (sharedPreferences.isContactSubscriber) {
+            binding.tvContactName.text = sharedPreferences.name
+            binding.tvBalance.visibility = View.VISIBLE
+            binding.ivContactQr.visibility = View.VISIBLE
+            binding.ivContactServiceProviders.visibility = View.VISIBLE
+            binding.ivContactSubscribe.visibility = View.GONE
+        } else {
+            binding.tvContactName.text = getString(R.string.contact_home_benefits)
+            binding.tvBalance.visibility = View.GONE
+            binding.ivContactQr.visibility = View.INVISIBLE
+            binding.ivContactServiceProviders.visibility = View.INVISIBLE
+            binding.ivContactSubscribe.visibility = View.VISIBLE
+        }
+    }
+
+    private fun getContactMemberStatus() {
+        generalHomeViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
+    }
+
+    private fun observeOnCheckMemberStatus() {
+        generalHomeViewModel.checkMemberStatus.observe(this) {
+            it.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        showProgressDialog()
+                    }
+                    Status.SUCCESS -> {
+                        hideProgressDialog()
+                        if (resource.data != null){
+                            sharedPreferences.isContactSubscriber = true
+                            renderContactCard()
+                        } else {
+                            getContactMemberStatus()
+                        }
+                    }
+                    Status.ERROR -> {
+                        hideProgressDialog()
+                        getContactMemberStatus()
+                    }
+                }
             }
         }
     }

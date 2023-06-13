@@ -7,6 +7,8 @@ import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.ads.domain.interactors.AdsUseCase
 import com.neqabty.healthcare.commen.clinido.domain.entity.ClinidoEntity
 import com.neqabty.healthcare.commen.clinido.domain.usecases.ClinidoUseCase
+import com.neqabty.healthcare.commen.onboarding.contact.domain.entity.CheckMemberEntity
+import com.neqabty.healthcare.commen.onboarding.contact.domain.interactors.CheckMemberUseCase
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseViewModel
 import com.neqabty.healthcare.core.utils.Resource
@@ -18,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SyndicatesHomeViewModel @Inject constructor(
     private val adsUseCase: AdsUseCase,
+    private val checkMemberUseCase: CheckMemberUseCase,
     private val clinidoUseCase: ClinidoUseCase
 ) : BaseViewModel() {
     val ads = MutableLiveData<List<AdEntity>>()
@@ -29,6 +32,21 @@ class SyndicatesHomeViewModel @Inject constructor(
                 }
             } catch (e: Throwable) {
                 Log.e("", e.toString())
+            }
+        }
+    }
+
+    val checkMemberStatus = MutableLiveData<Resource<CheckMemberEntity>>()
+    fun checkMemberStatus(nationalId: String){
+        viewModelScope.launch(Dispatchers.IO){
+            checkMemberStatus.postValue(Resource.loading(data = null))
+
+            try {
+                checkMemberUseCase.build(nationalId).collect(){
+                    checkMemberStatus.postValue(Resource.success(data = it))
+                }
+            }catch (e: Throwable){
+                checkMemberStatus.postValue(Resource.error(data = null, message = handleError(e)))
             }
         }
     }
