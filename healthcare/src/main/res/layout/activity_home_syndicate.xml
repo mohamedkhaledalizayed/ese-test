@@ -9,10 +9,9 @@
     <ImageView
         android:id="@+id/iv_header_bg"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/_240sdp"
         android:src="@drawable/bg_home_header"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@id/tv_dummy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -85,6 +84,7 @@
                 android:layout_height="@dimen/_90sdp"
                 android:background="@color/window_bg"
                 app:carouselType="BLOCK"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent"
                 app:showNavigationButtons="false" />
 
@@ -182,13 +182,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_contact_qr"
                 app:layout_constraintTop_toBottomOf="@id/cl_contact_holder" />
-
-            <TextView
-                android:id="@+id/tv_dummy"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                app:layout_constraintTop_toTopOf="@id/iv_contact_service_providers"
-                app:layout_constraintBottom_toBottomOf="@id/iv_contact_service_providers"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
