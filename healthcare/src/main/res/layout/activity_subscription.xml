@@ -735,8 +735,14 @@
                     android:id="@+id/terms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="الشروط و الاحكام"
                     />
+
+                <TextView
+                    android:id="@+id/terms_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="الشروط و الاحكام"
+                    android:textSize="@dimen/_12ssp"/>
 
             </LinearLayout>
 

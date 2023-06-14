@@ -68,7 +68,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private var serviceActionCode: String? = ""
     private var userNumber: String? = ""
     private var subscriptionMode = true
-    private var pdf = "JVBERi0xLjcKCjEgMCBvYmogICUgZW50cnkgcG9pbnQKPDwKICAvVHlwZSAvQ2F0YWxvZwogIC9QYWdlcyAyIDAgUgo+PgplbmRvYmoKCjIgMCBvYmoKPDwKICAvVHlwZSAvUGFnZXMKICAvTWVkaWFCb3ggWyAwIDAgMjAwIDIwMCBdCiAgL0NvdW50IDEKICAvS2lkcyBbIDMgMCBSIF0KPj4KZW5kb2JqCgozIDAgb2JqCjw8CiAgL1R5cGUgL1BhZ2UKICAvUGFyZW50IDIgMCBSCiAgL1Jlc291cmNlcyA8PAogICAgL0ZvbnQgPDwKICAgICAgL0YxIDQgMCBSIAogICAgPj4KICA+PgogIC9Db250ZW50cyA1IDAgUgo+PgplbmRvYmoKCjQgMCBvYmoKPDwKICAvVHlwZSAvRm9udAogIC9TdWJ0eXBlIC9UeXBlMQogIC9CYXNlRm9udCAvVGltZXMtUm9tYW4KPj4KZW5kb2JqCgo1IDAgb2JqICAlIHBhZ2UgY29udGVudAo8PAogIC9MZW5ndGggNDQKPj4Kc3RyZWFtCkJUCjcwIDUwIFRECi9GMSAxMiBUZgooSGVsbG8sIHdvcmxkISkgVGoKRVQKZW5kc3RyZWFtCmVuZG9iagoKeHJlZgowIDYKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDEwIDAwMDAwIG4gCjAwMDAwMDAwNzkgMDAwMDAgbiAKMDAwMDAwMDE3MyAwMDAwMCBuIAowMDAwMDAwMzAxIDAwMDAwIG4gCjAwMDAwMDAzODAgMDAwMDAgbiAKdHJhaWxlcgo8PAogIC9TaXplIDYKICAvUm9vdCAxIDAgUgo+PgpzdGFydHhyZWYKNDkyCiUlRU9G"
+    private var pdf = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -144,10 +144,10 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                     }
                     Status.SUCCESS -> {
                         if (resource.data!!.status){
-                            Log.e("rrr", "Test")
                             pdf = resource.data.data[0].terms_document
                         }else{
-                            Log.e("ytyr", "Wrong")
+                            binding.termsConditions.visibility = View.GONE
+                            Toast.makeText(this@SubscriptionActivity, "حدث خطاء اثناء تحميل الشروط و الاحكام.", Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {
@@ -255,7 +255,13 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
         binding.etAddress.customSelectionActionModeCallback = actionMode
         binding.etJob.customSelectionActionModeCallback = actionMode
 
-        binding.terms.setOnClickListener { convertBase64ToPDF() }
+        binding.termsText.setOnClickListener {
+            if (pdf.isNotEmpty()){
+                convertBase64ToPDF()
+            }else{
+                Toast.makeText(this@SubscriptionActivity, "حدث خطاء اثناء تحميل الشروط و الاحكام.", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     fun addFollower(view: View) {
@@ -459,22 +465,17 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     }
 
     private fun convertBase64ToPDF(){
-        val decodedBytes: ByteArray = Base64.decode(pdf, Base64.DEFAULT)
-
-        val filePath: File = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) , "termsandconditions" + ".pdf")
+        val filePath = File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) , "termsandconditions" + ".pdf")
         val pdfAsBytes: ByteArray = Base64.decode(pdf, 0)
-        val os: FileOutputStream = FileOutputStream(filePath, false)
+        val os = FileOutputStream(filePath, false)
         os.write(pdfAsBytes)
         os.flush()
         os.close()
 
         val pdfUri = Uri.fromFile(filePath)
-
         val intentPdfViewer = Intent(this, PDFViewerActivity::class.java)
         intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri)
-
         startActivity(intentPdfViewer)
-
     }
 
     fun registerUser(view: View) {
