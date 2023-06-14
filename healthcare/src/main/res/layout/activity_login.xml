@@ -9,7 +9,8 @@
     android:background="#FFF"
     android:orientation="horizontal"
     tools:context=".auth.login.view.LoginActivity"
-        android:padding="@dimen/margin_large">
+    android:paddingHorizontal="@dimen/margin_large"
+    android:paddingBottom="@dimen/margin_large">
 
         <include
             android:id="@+id/layout_toolbar"

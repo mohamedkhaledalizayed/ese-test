@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/margin_large"
+    android:paddingBottom="@dimen/margin_large"
     tools:context=".sustainablehealth.mypackages.presentation.AddFollowerActivity">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/healthcare_toolbar" />
+        layout="@layout/toolbar" />
 
     <LinearLayout
         android:id="@+id/container"

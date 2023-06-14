@@ -5,11 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/margin_large"
+    android:paddingBottom="@dimen/margin_large"
     android:background="@color/background_color">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/healthcare_toolbar" />
+        layout="@layout/toolbar" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/layout_container"

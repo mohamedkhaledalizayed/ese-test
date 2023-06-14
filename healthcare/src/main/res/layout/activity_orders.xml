@@ -6,11 +6,13 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/margin_large"
+        android:paddingBottom="@dimen/margin_large"
         tools:context=".modules.orders.presentation.view.orderstatusscreen.OrdersActivity">
 
         <include
             android:id="@+id/layout_header"
-            layout="@layout/layout_header" />
+            layout="@layout/toolbar" />
 
         <com.vlonjatg.progressactivity.ProgressRelativeLayout
             android:id="@+id/progressActivity"

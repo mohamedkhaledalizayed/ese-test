@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:background="@color/colorPrimary"
     android:elevation="0dp"
-    android:fitsSystemWindows="true"
     android:minHeight="?attr/actionBarSize"
     app:contentInsetEnd="0dp"
     app:contentInsetStartWithNavigation="0dp"

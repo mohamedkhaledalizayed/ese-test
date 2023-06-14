@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    android:padding="@dimen/_5sdp"
+    android:paddingHorizontal="@dimen/margin_large"
+    android:paddingBottom="@dimen/margin_large"
     tools:context=".news.view.newslist.NewsListActivity">
 
     <LinearLayout

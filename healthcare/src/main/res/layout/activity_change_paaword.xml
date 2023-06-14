@@ -6,7 +6,8 @@
     xmlns:foo="http://schemas.android.com/tools"
     android:gravity="center|top"
     android:background="@color/white"
-    android:padding="@dimen/margin_large"
+    android:paddingHorizontal="@dimen/margin_large"
+    android:paddingBottom="@dimen/margin_large"
     android:orientation="vertical">
 
     <include

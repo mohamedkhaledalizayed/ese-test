@@ -7,11 +7,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".profile.view.update.UpdateInfoActivity"
+        android:paddingHorizontal="@dimen/margin_large"
+        android:paddingBottom="@dimen/margin_large"
         >
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/mega_toolbar" />
+            layout="@layout/toolbar" />
 
         <ScrollView
             android:layout_width="match_parent"

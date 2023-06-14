@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    android:paddingHorizontal="@dimen/margin_large"
+    android:paddingBottom="@dimen/margin_large"
     tools:context=".sustainablehealth.offers.presentation.view.payment.PaymentActivity">
 
-    <include layout="@layout/healthcare_toolbar"
+    <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>
 
     <FrameLayout

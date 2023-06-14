@@ -217,7 +217,6 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
                     }
                     Status.ERROR -> {
                         hideProgressDialog()
-                        getContactMemberStatus()
                     }
                 }
             }

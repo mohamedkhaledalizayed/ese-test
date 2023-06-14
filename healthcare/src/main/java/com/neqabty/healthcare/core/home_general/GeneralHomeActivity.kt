@@ -167,7 +167,6 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
                     }
                     Status.ERROR -> {
                         hideProgressDialog()
-                        getContactMemberStatus()
                     }
                 }
             }

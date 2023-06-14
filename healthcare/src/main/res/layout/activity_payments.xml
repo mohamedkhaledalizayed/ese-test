@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:paddingHorizontal="@dimen/margin_large"
+    android:paddingBottom="@dimen/margin_large"
     tools:context=".mega.payment.view.selectservice.PaymentsActivity">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/mega_toolbar" />
+        layout="@layout/toolbar" />
 
     <ImageView
         android:id="@+id/logo"

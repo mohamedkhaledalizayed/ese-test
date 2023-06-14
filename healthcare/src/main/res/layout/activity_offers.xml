@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    android:paddingHorizontal="@dimen/margin_large"
+    android:paddingBottom="@dimen/margin_large"
     tools:context=".sustainablehealth.offers.presentation.view.offers.OffersActivity">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/healthcare_toolbar" />
+        layout="@layout/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/offers_recycler"

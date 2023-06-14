@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv_header_bg"
-        android:layout_width="@dimen/_450sdp"
-        android:layout_height="@dimen/_600sdp"
-        android:layout_margin="@dimen/margin_large"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:src="@drawable/bg_home_header"
-        app:layout_constraintBottom_toTopOf="parent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@id/tv_dummy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +21,8 @@
         android:id="@+id/iv_syndicate_logo"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_60sdp"
-        android:layout_margin="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_toolbar_top_xx"
+        android:layout_marginHorizontal="@dimen/margin_large"
         android:src="@drawable/ic_syndicate_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -71,7 +71,7 @@
         android:layout_marginHorizontal="@dimen/margin_extra_large"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_small"
-        app:layout_constraintBottom_toTopOf="@id/iv_profile_nav"
+        app:layout_constraintBottom_toTopOf="@id/bnv_syndicates_home"
         app:layout_constraintTop_toBottomOf="@id/tv_syndicate_name">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -160,7 +160,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 android:scaleType="fitXY"
                 android:src="@drawable/contact_subscribe"
-                android:visibility="gone"
+                android:visibility="invisible"
                 app:layout_constraintTop_toBottomOf="@id/cl_contact_holder" />
 
             <ImageView
@@ -182,6 +182,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_contact_qr"
                 app:layout_constraintTop_toBottomOf="@id/cl_contact_holder" />
+
+            <TextView
+                android:id="@+id/tv_dummy"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toTopOf="@id/iv_contact_service_providers"
+                app:layout_constraintBottom_toBottomOf="@id/iv_contact_service_providers"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

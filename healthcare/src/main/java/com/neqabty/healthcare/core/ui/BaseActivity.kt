@@ -62,14 +62,6 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
             ?.setNavigationOnClickListener { onBackPressed() }
 
         window.setBackgroundDrawableResource(R.color.window_bg)
-//        binding.root.fitsSystemWindows = false
-//        binding.root.setPadding(
-//            resources.getDimension(R.dimen.margin_large).toInt(),
-//            resources.getDimension(R.dimen.margin_large).toInt() * 2,
-//            resources.getDimension(R.dimen.margin_large).toInt(),
-//            resources.getDimension(R.dimen.margin_large).toInt()
-//        )
-
 
         Constants.isFirebaseTokenUpdated.observe(this, Observer {
             if (it.isNotBlank()){
