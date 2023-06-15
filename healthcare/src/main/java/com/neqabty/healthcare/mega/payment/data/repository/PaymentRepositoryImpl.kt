@@ -164,6 +164,7 @@ fun PaymentModel.toPaymentEntity(): PaymentEntity{
         publicKey = public_key ?: "",
         callBackURL = callBackURL ?: "",
         expireAt = expireAt ?: "30",
+        reference = reference ?: "",
         merchantId = merchant_id ?: ""
     )
 }

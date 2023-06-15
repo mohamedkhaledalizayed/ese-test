@@ -24,5 +24,6 @@ data class PaymentEntity(
     val publicKey: String,
     val callBackURL: String,
     val expireAt: String,
+    val reference: String,
     val merchantId: String
     )

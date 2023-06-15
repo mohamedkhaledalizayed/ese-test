@@ -547,7 +547,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             publickey = paymentEntity.publicKey,
             merchantId = paymentEntity.merchantId,
             merchantName = "Neqabty",
-            reference = paymentEntity.paymentGatewayTransactionNum,
+            reference = paymentEntity.reference,
             countryCode = "EG", // uppercase
             currency = "EGP", // uppercase
             payAmount = (paymentEntity.totalAmount.toDouble() * 100).toLong(),

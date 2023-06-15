@@ -239,7 +239,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
             publickey = paymentEntity.public_key ?: "",
             merchantId = paymentEntity.merchant_id ?: "",
             merchantName = "Neqabty",
-            reference = paymentEntity.payment_gateway_transaction_num ?: "",
+            reference = paymentEntity.reference ?: "",
             countryCode = "EG", // uppercase
             currency = "EGP", // uppercase
             payAmount = (paymentEntity.total_amount!!.toDouble() * 100).toLong(),
