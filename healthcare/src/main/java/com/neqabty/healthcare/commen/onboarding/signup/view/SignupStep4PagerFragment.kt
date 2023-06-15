@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
@@ -15,6 +16,8 @@ import com.neqabty.healthcare.commen.onboarding.signup.data.SignupData
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.NEQABTY_CODE
 import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.healthcare.core.utils.isNationalIdValid
+import com.neqabty.healthcare.core.utils.isValidEmail
 import com.neqabty.healthcare.databinding.FragmentSignupStepFourBinding
 
 class SignupStep4PagerFragment : Fragment() {
@@ -150,6 +153,8 @@ class SignupStep4PagerFragment : Fragment() {
     }
 
     fun signup() {
+        if(!isValidData())
+            return
         activity.signupViewModel.generalUserSignup(
             NeqabtySignupBody(
                 email = binding.etEmail.text.toString(),
@@ -162,6 +167,34 @@ class SignupStep4PagerFragment : Fragment() {
                 token = (requireActivity() as SignupActivity).sharedPreferences.firebaseToken
             )
         )
+    }
+
+    private fun isValidData(): Boolean {
+        if(binding.clName.isVisible && binding.etName.text.toString().isNullOrEmpty()){
+            Toast.makeText(requireActivity(), getString(R.string.please_enter_name), Toast.LENGTH_LONG).show()
+            return false
+        }
+        if(binding.clMembershipNumber.isVisible && binding.etMembershipNumber.text.toString().isNullOrEmpty()){
+            Toast.makeText(requireActivity(), getString(R.string.enter_membership_id), Toast.LENGTH_LONG).show()
+            return false
+        }
+        if(binding.clNationalId.isVisible && !binding.etNationalId.text.toString().isNationalIdValid()){
+            Toast.makeText(requireActivity(), getString(R.string.enter_national_id), Toast.LENGTH_LONG).show()
+            return false
+        }
+        if(binding.clEmail.isVisible && !binding.etEmail.text.toString().isValidEmail()){
+            Toast.makeText(requireActivity(), getString(R.string.enter_correct_email), Toast.LENGTH_LONG).show()
+            return false
+        }
+        if(binding.clPassword.isVisible && (binding.etPassword.text.toString().isNullOrEmpty() || binding.etPasswordConfirmation.text.toString().isNullOrEmpty())){
+            Toast.makeText(requireActivity(), getString(R.string.enter_national_id), Toast.LENGTH_LONG).show()
+            return false
+        }
+        if(binding.clPassword.isVisible && !(binding.etPassword.text.toString().equals(binding.etPasswordConfirmation.text.toString()))){
+            Toast.makeText(requireActivity(), getString(R.string.password_not_matched), Toast.LENGTH_LONG).show()
+            return false
+        }
+        return true
     }
 
     private fun navigate() {

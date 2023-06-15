@@ -10,6 +10,7 @@ import android.widget.SeekBar
 import androidx.core.app.NotificationManagerCompat
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.auth.forgetpassword.view.changepassword.ChangePasswordActivity
 import com.neqabty.healthcare.commen.aboutapp.AboutAppActivity
 import com.neqabty.healthcare.commen.notification.NotificationsActivity
 import com.neqabty.healthcare.databinding.ActivitySettingsBinding
@@ -32,7 +33,12 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
         binding.aboutContainer.setOnClickListener { startActivity(Intent(this, AboutAppActivity::class.java)) }
         binding.backBtn.setOnClickListener { finish() }
         binding.notificationContainer.setOnClickListener { startActivity(Intent(this@SettingsActivity, NotificationsActivity::class.java)) }
-        binding.changePasswordContainer.setOnClickListener { bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag) }
+        binding.changePasswordContainer.setOnClickListener {
+            val intent = Intent(this, ChangePasswordActivity::class.java)
+            intent.putExtra("token", sharedPreferences.token)
+            startActivity(intent)
+        }
+    //        binding.changePasswordContainer.setOnClickListener { bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag) }
     }
 
 //    override fun onResume() {

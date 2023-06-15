@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:visibility="invisible">
 
     <ImageView
         android:id="@+id/iv_header_bg"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_240sdp"
+        android:layout_height="@dimen/_230sdp"
         android:src="@drawable/bg_home_header"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,10 +19,11 @@
 
     <ImageView
         android:id="@+id/iv_syndicate_logo"
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/margin_toolbar_top_xx"
         android:layout_marginHorizontal="@dimen/margin_large"
+        android:padding="@dimen/margin_small"
         android:src="@drawable/ic_syndicate_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -197,123 +199,19 @@
                     android:fontFamily="@font/hanimation_arabic_semibold"
                     android:text="@string/services"
                     android:textColor="@color/black"
+                    android:visibility="gone"
                     android:textSize="@dimen/text_size_small"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-                <HorizontalScrollView
-                    android:id="@+id/hsv_syndicate_services"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_syndicate_services"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_medium"
                     android:scrollbars="none"
-                    app:layout_constraintTop_toBottomOf="@id/tv_syndicate_services">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_small"
-                            android:elevation="@dimen/_4sdp"
-                            app:cardCornerRadius="@dimen/_4sdp">
-
-                            <LinearLayout
-                                android:id="@+id/ll_renew_subscription"
-                                android:layout_width="@dimen/_85sdp"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/iv_renew_subscription"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:scaleType="center"
-                                    android:src="@drawable/ic_services_subscription" />
-
-                                <TextView
-                                    android:id="@+id/tv_renew_subscription"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:text="@string/subscription"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/text_size_small" />
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_small"
-                            android:elevation="@dimen/_4sdp"
-                            app:cardCornerRadius="@dimen/_4sdp">
-
-                            <LinearLayout
-                                android:id="@+id/ll_visit_home"
-                                android:layout_width="@dimen/_85sdp"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/iv_visit_home"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:scaleType="center"
-                                    android:src="@drawable/ic_services_health_care" />
-
-                                <TextView
-                                    android:id="@+id/tv_visit_home"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:text="@string/visit_home"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/text_size_small" />
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_small"
-                            android:elevation="@dimen/_4sdp"
-                            app:cardCornerRadius="@dimen/_4sdp">
-
-                            <LinearLayout
-                                android:id="@+id/ll_medicine"
-                                android:layout_width="@dimen/_85sdp"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:id="@+id/iv_medicine"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:scaleType="center"
-                                    android:src="@drawable/ic_services_health_care" />
-
-                                <TextView
-                                    android:id="@+id/tv_medicine"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:text="@string/medicine"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/text_size_small" />
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-
-                </HorizontalScrollView>
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/tv_syndicate_services"/>
 
                 <TextView
                     android:id="@+id/tv_general_services"
@@ -324,7 +222,7 @@
                     android:text="@string/other_services"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_small"
-                    app:layout_constraintTop_toBottomOf="@id/hsv_syndicate_services" />
+                    app:layout_constraintTop_toBottomOf="@id/rv_syndicate_services" />
 
                 <HorizontalScrollView
                     android:id="@+id/hsv_general_services"

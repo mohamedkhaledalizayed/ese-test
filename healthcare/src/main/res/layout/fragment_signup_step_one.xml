@@ -36,7 +36,7 @@
             android:longClickable="false"
             android:padding="@dimen/_10sdp"
             android:textAlignment="viewStart"
-            android:text="1066865758"
+            tools:text="1066865758"
             android:textSize="@dimen/text_size_medium"
             app:layout_constraintEnd_toStartOf="@id/ccp"
             app:layout_constraintStart_toStartOf="parent"

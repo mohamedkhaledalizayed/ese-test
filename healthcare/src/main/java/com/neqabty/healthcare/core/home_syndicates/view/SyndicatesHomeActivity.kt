@@ -2,33 +2,30 @@ package com.neqabty.healthcare.core.home_syndicates.view
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Base64.DEFAULT
-import android.util.Base64.decode
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.google.android.gms.common.util.Base64Utils.decode
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.commen.notification.NotificationsActivity
+import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
+import com.neqabty.healthcare.commen.syndicateservices.domain.entity.SyndicateServiceEntity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.more.view.MoreActivity
+import com.neqabty.healthcare.core.packages.PackagesActivity
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeSyndicateBinding
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
-import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
-import com.neqabty.healthcare.core.packages.PackagesActivity
+import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import de.hdodenhof.circleimageview.CircleImageView
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
-import java.util.*
 
 
 @AndroidEntryPoint
@@ -37,6 +34,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
     private val listAds = ArrayList<AdEntity>()
     private var title = ""
     private val list = mutableListOf<CarouselItem>()
+    private val mAdapter = SyndicateServicesAdapter()
     override fun getViewBinding() = ActivityHomeSyndicateBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,12 +45,18 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         setupToolbar(title = "", show = false)
         observeOnCheckMemberStatus()
         getContactMemberStatus()
+        observeOnSyndicateServices()
+        getSyndicateServices()
         initializeViews()
     }
 
     private fun initializeViews() {
         if(!sharedPreferences.image.isNullOrBlank())
             Picasso.get().load(sharedPreferences.image).placeholder(R.drawable.logo).into(binding.ivSyndicateLogo)
+
+        binding.ivNotification.setOnClickListener {
+            startActivity(Intent(this, NotificationsActivity::class.java))
+        }
 
         renderContactCard()
 
@@ -65,7 +69,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
 
         binding.icBanners.registerLifecycle(lifecycle)
 
-        syndicatesHomeViewModel.getAds()
+//        syndicatesHomeViewModel.getAds()
         syndicatesHomeViewModel.ads.observe(this) {
             listAds.addAll(it)
             for (data: AdEntity in it) {
@@ -78,19 +82,6 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
             }
 
             binding.icBanners.setData(list)
-        }
-
-        binding.llRenewSubscription.setOnClickListener {
-            val intent = Intent(this, PaymentsActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.llVisitHome.setOnClickListener {
-            Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
-        }
-
-        binding.llMedicine.setOnClickListener {
-            openTermsDialog()
         }
 
         binding.llPharmacy.setOnClickListener {
@@ -106,7 +97,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
 
         binding.llDoctorsReservation.setOnClickListener {
             title = "doctors"
-            syndicatesHomeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors")
+            syndicatesHomeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors", name = sharedPreferences.name)
         }
 
         binding.llOnlineConsultation.setOnClickListener {
@@ -208,8 +199,9 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
                     }
                     Status.SUCCESS -> {
                         hideProgressDialog()
-                        if (resource.data != null){
-                            sharedPreferences.isContactSubscriber = true
+                        binding.root.visibility = View.VISIBLE
+                        if (resource.data != null) {
+                            sharedPreferences.isContactSubscriber = !resource.data.authorized
                             renderContactCard()
                         } else {
                             getContactMemberStatus()
@@ -221,6 +213,44 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
                 }
             }
         }
+    }
+
+    private fun getSyndicateServices() {
+        syndicatesHomeViewModel.getSyndicateServices(sharedPreferences.code, "")
+    }
+
+    private fun observeOnSyndicateServices() {
+        syndicatesHomeViewModel.syndicateServices.observe(this) {
+            it.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        showProgressDialog()
+                    }
+                    Status.SUCCESS -> {
+                        hideProgressDialog()
+                        if (resource.data != null) {
+                            binding.tvSyndicateServices.visibility = View.VISIBLE
+                            mAdapter.submitList(resource.data)
+                        } else {
+                            getContactMemberStatus()
+                        }
+                    }
+                    Status.ERROR -> {
+                        hideProgressDialog()
+                    }
+                }
+            }
+        }
+
+        mAdapter.onItemClickListener = object :
+            SyndicateServicesAdapter.OnItemClickListener {
+            override fun setOnItemClickListener(item: SyndicateServiceEntity) {
+                val intent = Intent(this@SyndicatesHomeActivity, NewsDetailsActivity::class.java)
+                intent.putExtra("id", item.code)
+                startActivity(intent)
+            }
+        }
+        binding.rvSyndicateServices.adapter = mAdapter
     }
 
     override fun onBackPressed() {
@@ -243,7 +273,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         ) { dialog, _ ->
             dialog.dismiss()
             title = "pharmacy"
-            syndicatesHomeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy")
+            syndicatesHomeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy", name = sharedPreferences.name)
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, getString(R.string.disagree)

@@ -9,6 +9,8 @@ import com.neqabty.healthcare.commen.clinido.domain.entity.ClinidoEntity
 import com.neqabty.healthcare.commen.clinido.domain.usecases.ClinidoUseCase
 import com.neqabty.healthcare.commen.onboarding.contact.domain.entity.CheckMemberEntity
 import com.neqabty.healthcare.commen.onboarding.contact.domain.interactors.CheckMemberUseCase
+import com.neqabty.healthcare.commen.syndicateservices.domain.entity.SyndicateServiceEntity
+import com.neqabty.healthcare.commen.syndicateservices.domain.interactors.SyndicatesServicesUseCase
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseViewModel
 import com.neqabty.healthcare.core.utils.Resource
@@ -20,6 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SyndicatesHomeViewModel @Inject constructor(
     private val adsUseCase: AdsUseCase,
+    private val syndicateServicesUseCase: SyndicatesServicesUseCase,
     private val checkMemberUseCase: CheckMemberUseCase,
     private val clinidoUseCase: ClinidoUseCase
 ) : BaseViewModel() {
@@ -32,6 +35,20 @@ class SyndicatesHomeViewModel @Inject constructor(
                 }
             } catch (e: Throwable) {
                 Log.e("", e.toString())
+            }
+        }
+    }
+
+    val syndicateServices = MutableLiveData<Resource<List<SyndicateServiceEntity>>>()
+    fun getSyndicateServices(entityCode: String, serviceCategory: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+//            syndicateServices.postValue(Resource.loading(data = null))
+            try {
+                syndicateServicesUseCase.build(entityCode, serviceCategory).collect {
+                    syndicateServices.postValue(Resource.success(data = it))
+                }
+            } catch (e: Throwable) {
+                syndicateServices.postValue(Resource.error(data = null, message = handleError(e)))
             }
         }
     }
@@ -52,11 +69,11 @@ class SyndicatesHomeViewModel @Inject constructor(
     }
 
     val clinidoUrl = MutableLiveData<Resource<ClinidoEntity>>()
-    fun getUrl(phone: String, type: String) {
+    fun getUrl(phone: String, type: String, name: String) {
         viewModelScope.launch(Dispatchers.IO) {
             clinidoUrl.postValue(Resource.loading(data = null))
             try {
-                clinidoUseCase.build(phone, type, "", Constants.NEQABTY_CODE).collect {
+                clinidoUseCase.build(phone, type, name, Constants.NEQABTY_CODE).collect {
                     clinidoUrl.postValue(Resource.success(data = it))
                 }
             } catch (e: Throwable) {

@@ -228,40 +228,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="تغير الرقم السري"
+                android:text="تغيير الرقم السري"
                 android:textColor="#252A31"
                 android:textSize="@dimen/_12ssp"
                 android:layout_toEndOf="@id/change_password"
-                android:layout_marginStart="@dimen/_10sdp"
-                />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/curved_arrow_down_circle"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp">
-
-            <ImageView
-                android:id="@+id/reset_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/password_icon"
-                android:layout_alignParentStart="true"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="اعدة ضبط الرقم السري"
-                android:textColor="#252A31"
-                android:textSize="@dimen/_12ssp"
-                android:layout_toEndOf="@id/reset_password"
                 android:layout_marginStart="@dimen/_10sdp"
                 />
 

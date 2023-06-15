@@ -7,23 +7,20 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
-import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.commen.notification.NotificationsActivity
 import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
-import com.neqabty.healthcare.core.data.Constants
+import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.core.more.view.MoreActivity
+import com.neqabty.healthcare.core.packages.PackagesActivity
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeGeneralSyndicateBinding
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
-import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
-import com.neqabty.healthcare.core.packages.PackagesActivity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
-import java.util.*
 
 
 @AndroidEntryPoint
@@ -52,6 +49,10 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
             binding.tvName.text = sharedPreferences.mobile
         }
 
+        binding.ivNotification.setOnClickListener {
+            startActivity(Intent(this, NotificationsActivity::class.java))
+        }
+
         renderContactCard()
 
         binding.ivContactSubscribe.setOnClickListener {
@@ -60,7 +61,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
 
         binding.icBanners.registerLifecycle(lifecycle)
 
-        generalHomeViewModel.getAds()
+//        generalHomeViewModel.getAds()
         generalHomeViewModel.ads.observe(this) {
             listAds.addAll(it)
             for (data: AdEntity in it) {
@@ -158,8 +159,9 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
                     }
                     Status.SUCCESS -> {
                         hideProgressDialog()
+                        binding.root.visibility = View.VISIBLE
                         if (resource.data != null){
-                            sharedPreferences.isContactSubscriber = true
+                            sharedPreferences.isContactSubscriber = !resource.data.authorized
                             renderContactCard()
                         } else {
                             getContactMemberStatus()
