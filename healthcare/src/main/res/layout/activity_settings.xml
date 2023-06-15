@@ -40,7 +40,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/general_settings_id"
@@ -70,8 +71,7 @@
         <RelativeLayout
             android:id="@+id/notification_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/notification_icon_id"
@@ -90,11 +90,14 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 />
 
-            <ImageView
+
+            <com.neqabty.healthcare.core.ui.CustomSwitch
+                android:id="@+id/switchNotifications"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/curved_arrow_down_circle"
-                android:layout_alignParentEnd="true"/>
+                android:text=""
+                android:textSize="?textSizeLarge"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 
@@ -132,7 +135,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp">
+            android:layout_marginTop="@dimen/_16sdp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/rate_app"
@@ -162,7 +166,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp">
+            android:layout_marginTop="@dimen/_16sdp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/faq"
@@ -246,7 +251,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp">
+            android:layout_marginTop="@dimen/_16sdp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/face_id"

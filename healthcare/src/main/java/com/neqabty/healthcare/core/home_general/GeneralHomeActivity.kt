@@ -13,6 +13,7 @@ import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.core.more.view.MoreActivity
 import com.neqabty.healthcare.core.packages.PackagesActivity
+import com.neqabty.healthcare.core.scanqrcode.ScanQrcodeScreen
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
@@ -29,6 +30,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
     private val listAds = ArrayList<AdEntity>()
     private var title = ""
     private val list = mutableListOf<CarouselItem>()
+    private val QR_CODE_REQUEST = 201
     override fun getViewBinding() = ActivityHomeGeneralSyndicateBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,6 +145,10 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
             binding.ivContactQr.visibility = View.INVISIBLE
             binding.ivContactServiceProviders.visibility = View.INVISIBLE
             binding.ivContactSubscribe.visibility = View.VISIBLE
+        }
+        binding.ivContactQr.setOnClickListener {
+            val intent = Intent(this, ScanQrcodeScreen::class.java)
+            startActivityForResult(intent, QR_CODE_REQUEST)
         }
     }
 

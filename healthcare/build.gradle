@@ -269,4 +269,6 @@ android {
 //View State
         implementation 'com.github.vlonjatg:progress-activity:2.0.5'
         implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
+        implementation 'com.google.android.gms:play-services-vision:20.1.3'
 }

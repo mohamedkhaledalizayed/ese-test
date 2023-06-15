@@ -283,7 +283,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
             this,
             ReviewYourDataActivity::class.java
         )
-        mainIntent.putExtra("address" , uploadIdBackViewModel.checkMemberStatus.value?.data?.ocrs?.get(1)?.result?.extractedInfo?.governorate)
+        mainIntent.putExtra("address", uploadIdBackViewModel.checkMemberStatus.value?.data?.ocrs?.get(1)?.result?.extractedInfo?.street + " "+uploadIdBackViewModel.checkMemberStatus.value?.data?.ocrs?.get(1)?.result?.extractedInfo?.governorate)
         startActivity(mainIntent)
         finishAffinity()
     }

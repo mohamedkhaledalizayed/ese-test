@@ -192,6 +192,9 @@
             android:name=".core.home_general.GeneralHomeActivity"
             android:exported="false" />
         <activity
+            android:name=".core.scanqrcode.ScanQrcodeScreen"
+            android:exported="false" />
+        <activity
             android:name=".core.syndicates.SyndicatesActivity"
             android:exported="false" />
         <activity

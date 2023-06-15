@@ -16,6 +16,7 @@ import com.neqabty.healthcare.commen.syndicateservices.domain.entity.SyndicateSe
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.more.view.MoreActivity
 import com.neqabty.healthcare.core.packages.PackagesActivity
+import com.neqabty.healthcare.core.scanqrcode.ScanQrcodeScreen
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
@@ -35,6 +36,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
     private var title = ""
     private val list = mutableListOf<CarouselItem>()
     private val mAdapter = SyndicateServicesAdapter()
+    private val QR_CODE_REQUEST = 201
     override fun getViewBinding() = ActivityHomeSyndicateBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -183,6 +185,10 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
             binding.ivContactQr.visibility = View.INVISIBLE
             binding.ivContactServiceProviders.visibility = View.INVISIBLE
             binding.ivContactSubscribe.visibility = View.VISIBLE
+        }
+        binding.ivContactQr.setOnClickListener {
+            val intent = Intent(this, ScanQrcodeScreen::class.java)
+            startActivityForResult(intent, QR_CODE_REQUEST)
         }
     }
 
