@@ -32,13 +32,34 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
         binding.aboutContainer.setOnClickListener { startActivity(Intent(this, AboutAppActivity::class.java)) }
         binding.backBtn.setOnClickListener { finish() }
-        binding.notificationContainer.setOnClickListener { startActivity(Intent(this@SettingsActivity, NotificationsActivity::class.java)) }
+//        binding.notificationContainer.setOnClickListener { startActivity(Intent(this@SettingsActivity, NotificationsActivity::class.java)) }
         binding.changePasswordContainer.setOnClickListener {
             val intent = Intent(this, ChangePasswordActivity::class.java)
             intent.putExtra("token", sharedPreferences.token)
             startActivity(intent)
         }
     //        binding.changePasswordContainer.setOnClickListener { bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag) }
+
+
+        sharedPreferences.isNotificationsEnabled = NotificationManagerCompat.from(this).areNotificationsEnabled()
+        binding.switchNotifications.isChecked = sharedPreferences.isNotificationsEnabled
+        binding.switchNotifications.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(p0: View?) {
+
+                val intent = Intent()
+                intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
+
+                // for Android 5-7
+                intent.putExtra("app_package", getPackageName())
+                intent.putExtra("app_uid", getApplicationInfo().uid)
+
+                // for Android 8 and above
+                intent.putExtra("android.provider.extra.APP_PACKAGE", getPackageName())
+
+                startActivityForResult(intent, 0)
+            }
+        })
+
     }
 
 //    override fun onResume() {
@@ -101,14 +122,14 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 //
 //    }
 //
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == 0) {
-//            val status = NotificationManagerCompat.from(this).areNotificationsEnabled()
-//            sharedPreferences.isNotificationsEnabled
-//            binding.switchNotifications.isChecked = status
-//        }
-//    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 0) {
+            val status = NotificationManagerCompat.from(this).areNotificationsEnabled()
+            sharedPreferences.isNotificationsEnabled
+            binding.switchNotifications.isChecked = status
+        }
+    }
 
     //region
     fun openNotificationsSettings() {
@@ -138,5 +159,6 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
         data = Uri.parse("package:" + packageName)
     }
 // endregion
+
 
 }
