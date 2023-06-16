@@ -6,13 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/margin_large"
     android:paddingBottom="@dimen/margin_large"
     tools:context=".commen.profile.view.personalinfo.PersonalInfoActivity">
 
     <include
         android:id="@+id/layout_toolbar"
         layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -72,6 +74,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/syndicate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_12sdp"
@@ -83,6 +86,7 @@
         android:text="النقابة"/>
 
     <TextView
+        android:id="@+id/membership_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_12sdp"

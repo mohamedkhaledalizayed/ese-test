@@ -178,7 +178,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
                 return@setOnClickListener
             }
 
-            if (!sharedPreferences.isPhoneVerified) {
+            if (sharedPreferences.isPhoneVerified) {
 
                 binding.btnNext.isEnabled = false
                 paymentViewModel.getPaymentInfo(

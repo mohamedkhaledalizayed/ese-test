@@ -41,18 +41,18 @@ class PackageDetailsActivity : BaseActivity<ActivityPackageDetailsBinding>() {
         binding.tvDescription.text = packageDetails.description
 
         binding.subscribeBtn.setOnClickListener {
-//            val intent = Intent(this, SubscriptionActivity::class.java)
-//            intent.putExtra("package", packageDetails)
-//            startActivity(intent)
-
-            val intent = Intent(this, SehaPaymentActivity::class.java)
-            intent.putExtra("name", packageDetails.name)
-            intent.putExtra("price", packageDetails.price)
-            intent.putExtra("vat", packageDetails.vat)
-            intent.putExtra("total", packageDetails.total)
-            intent.putExtra("serviceCode", packageDetails.serviceCode)
-            intent.putExtra("serviceActionCode", packageDetails.serviceActionCode)
+            val intent = Intent(this, SubscriptionActivity::class.java)
+            intent.putExtra("package", packageDetails)
             startActivity(intent)
+
+//            val intent = Intent(this, SehaPaymentActivity::class.java)
+//            intent.putExtra("name", packageDetails.name)
+//            intent.putExtra("price", packageDetails.price)
+//            intent.putExtra("vat", packageDetails.vat)
+//            intent.putExtra("total", packageDetails.total)
+//            intent.putExtra("serviceCode", packageDetails.serviceCode)
+//            intent.putExtra("serviceActionCode", packageDetails.serviceActionCode)
+//            startActivity(intent)
         }
     }
 }

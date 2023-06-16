@@ -3,10 +3,12 @@ package com.tejpratapsingh.pdfcreator.activity;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.print.PrintAttributes;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,7 +57,6 @@ public class PDFViewerActivity extends AppCompatActivity {
         }
 
         pdfFile = new File(pdfFileUri.getPath());
-
         if (!pdfFile.exists()) {
             new IllegalStateException("File Does Not Exist.").printStackTrace();
             finish();
@@ -71,6 +72,32 @@ public class PDFViewerActivity extends AppCompatActivity {
         viewPager.setAdapter(new PDFViewerPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT));
 
         viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+
+        findViewById(R.id.back_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             finish();
+            }
+        });
+
+        findViewById(R.id.download_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File fileToPrint = pdfFile;
+                if (!fileToPrint.exists()) {
+                    Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
+                } else {
+                    PrintAttributes.Builder printAttributeBuilder = new PrintAttributes.Builder();
+                    printAttributeBuilder.setMediaSize(PrintAttributes.MediaSize.ISO_A4);
+                    printAttributeBuilder.setMinMargins(PrintAttributes.Margins.NO_MARGINS);
+                    PDFUtil.printPdf(
+                            PDFViewerActivity.this,
+                            fileToPrint,
+                            printAttributeBuilder.build()
+                    );
+                }
+            }
+        });
     }
 
     public File getPdfFile() {

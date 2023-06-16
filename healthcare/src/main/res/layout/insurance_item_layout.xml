@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_14sdp"
+        android:background="@drawable/chefaa_orders_bg"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/insurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="وثيقة التامين"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/black"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/member_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الفرد الاول"
+            android:layout_below="@id/insurance"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="#BBBBBB"
+            android:layout_alignParentStart="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/download_icon"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+</layout>

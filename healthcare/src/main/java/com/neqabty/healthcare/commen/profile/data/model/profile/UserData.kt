@@ -9,7 +9,7 @@ data class UserData(
     @SerializedName("account")
     val account: Account,
     @SerializedName("address")
-    val address: Any,
+    val address: String?,
     @SerializedName("amount_due")
     val amountDue: String,
     @SerializedName("birth_date")
