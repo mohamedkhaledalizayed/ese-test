@@ -47,7 +47,6 @@
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             app:ccp_autoDetectCountry="true"
-            app:ccp_countryPreference="EG,SA,AE,KW,QA,BH"
             app:ccp_defaultLanguage="ARABIC"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

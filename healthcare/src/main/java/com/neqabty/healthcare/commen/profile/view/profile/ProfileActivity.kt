@@ -86,6 +86,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
             sharedPreferences.clearAll()
             PushNotificationsWrapper().deleteToken(this)
             startActivity(Intent(this, SplashActivity::class.java))
+            finishAffinity()
         }
 
     }

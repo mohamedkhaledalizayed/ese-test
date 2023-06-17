@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
+import com.neqabty.healthcare.core.utils.isNationalIdValid
 import com.neqabty.healthcare.databinding.ActivitySigninDoneBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -70,6 +71,11 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
         }
 
         binding.bNext.setOnClickListener {
+            if(!binding.etNationalId.text.toString().isNationalIdValid()){
+                Toast.makeText(this, getString(R.string.enter_national_id), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             signinDoneViewModel.checkMemberStatus(nationalId = binding.etNationalId.text.toString())
         }
     }

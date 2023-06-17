@@ -1,5 +1,7 @@
 package com.neqabty.healthcare.commen.aboutapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import com.neqabty.healthcare.BuildConfig
@@ -30,7 +32,20 @@ class AboutAppActivity : BaseActivity<ActivityAboutAppBinding>() {
 
 
     private fun initializeViews() {
-//        binding.tvVersion.text = getString(R.string.app_version, BuildConfig.VERSION_NAME)
+        binding.neqabtyUrl.setOnClickListener { openUrl("https://www.neqabty.com/") }
+        binding.instagramContainer.setOnClickListener { openUrl("https://instagram.com/neqabty.2030?igshid=NTc4MTIwNjQ2YQ==") }
+        binding.facebookContainer.setOnClickListener { openUrl("https://www.facebook.com/neqabty?mibextid=ZbWKwL") }
+//        binding.twitterContainer.setOnClickListener { openUrl("") }
+        binding.linkedinContainer.setOnClickListener { openUrl("https://www.linkedin.com/company/neqabty/") }
+    }
+
+    private fun openUrl(url: String) {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(url)
+            )
+        )
     }
 
 }

@@ -216,5 +216,27 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
 
         binding.bnvSyndicatesHome.selectedItemId = R.id.navigation_home
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            QR_CODE_REQUEST -> {
+                if (resultCode == RESULT_OK) {
+                    try {
+                        val data = data?.getStringExtra("data")
+                        val name = data!!.split("\n")[0].split(": ")[1]
+                        val address = data!!.split("\n")[1].split(": ")[1]
+                        val mobile = data!!.split("\n")[2].split(": ")[1]
+                        val email = data!!.split("\n")[3].split(": ")[1]
+
+//                        val body = CheckVisitBody(phoneNumber, membershipNumber)
+//                        visitationViewModel.getUserData(body)
+                    }catch (e: Exception){
+                        Toast.makeText(this, "Wrong Qr Code", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+    }
     //endregion
 }
