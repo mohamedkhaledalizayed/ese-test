@@ -97,6 +97,7 @@ private fun Package.toPackageEntity(): PackageEntity{
         hint = hint ?: "",
         id = id,
         nameAr = nameAr ?: "",
+        nameEn = nameEn ?: "",
         maxFollower = maxFollower,
         shortDescription = shortDescription ?: "",
         prepaid = prepaid,
@@ -107,6 +108,7 @@ private fun Package.toPackageEntity(): PackageEntity{
         vat = vat,
         total = total,
         paid = paid,
+        insuranceDocs = insuranceDocs,
         createdAt = createdAt
     )
 }

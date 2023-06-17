@@ -45,7 +45,7 @@ import com.neqabty.healthcare.sustainablehealth.home.presentation.view.about.Abo
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.PackagesEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.filter.FiltersViewModel
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
-import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.ProfileActivity
+import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.MyPackagesActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
 import com.neqabty.healthcare.sustainablehealth.suggestions.presentation.SuggestionsActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -413,7 +413,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             }
             R.id.packages -> {
                 if (sharedPreferences.isAuthenticated){
-                    val intent = Intent(this@SehaHomeActivity, ProfileActivity::class.java)
+                    val intent = Intent(this@SehaHomeActivity, MyPackagesActivity::class.java)
                     startActivity(intent)
                 }else{
                     askForLogin(getString(R.string.not_found))

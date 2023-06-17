@@ -8,6 +8,7 @@ data class PackageEntity(
     val hint: String,
     val id: String,
     val nameAr: String,
+    val nameEn: String,
     val shortDescription: String,
     val prepaid: Boolean,
     val serviceCode: String,
@@ -16,6 +17,7 @@ data class PackageEntity(
     val vat: String?,
     val total: String?,
     val expiryDate: String?,
+    val insuranceDocs: List<String>,
     val maxFollower: Int,
     val paid: Boolean,
     val createdAt: String

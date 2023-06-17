@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    android:paddingHorizontal="@dimen/margin_large"
     android:paddingBottom="@dimen/margin_large"
     tools:context=".core.packages.PackageDetailsActivity">
 
     <include
         android:id="@+id/layout_toolbar"
         layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -86,6 +86,7 @@ private fun UserData.toData(): Data{
         entity = entity.toEntity(),
         fullName = account.fullname,
         id = id,
+        address = address,
         image = account.image,
         mobile = account.mobile,
         membershipId = membershipId,
@@ -97,6 +98,7 @@ private fun EntityBody.toEntity(): Entity {
     return Entity(
         code = code,
         id = id,
+        type = type,
         name = name
     )
 }

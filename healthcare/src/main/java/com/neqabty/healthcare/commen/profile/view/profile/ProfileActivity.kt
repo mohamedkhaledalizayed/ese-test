@@ -14,6 +14,7 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.profile.data.model.UpdatePasswordBody
+import com.neqabty.healthcare.commen.profile.domain.entity.profile.ProfileEntity
 import com.neqabty.healthcare.commen.profile.view.changepassword.ChangePasswordDialog
 import com.neqabty.healthcare.commen.profile.view.model.PasswordError
 import com.neqabty.healthcare.commen.profile.view.personalinfo.PersonalInfoActivity
@@ -25,12 +26,14 @@ import com.neqabty.healthcare.core.packages.PackagesActivity
 import com.neqabty.healthcare.core.utils.ErrorBody
 import com.neqabty.healthcare.core.utils.PushNotificationsWrapper
 import com.neqabty.healthcare.mega.home.view.SuggestionDialog
+import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.MyPackagesActivity
 import com.neqabty.healthcare.sustainablehealth.suggestions.presentation.SuggestionsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
+    private lateinit var profileEntity: ProfileEntity
     private val profileViewModel: ProfileViewModel by viewModels()
     override fun getViewBinding() = ActivityProfileMegaBinding.inflate(layoutInflater)
     @SuppressLint("SetTextI18n")
@@ -52,6 +55,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                     }
                     Status.SUCCESS -> {
 
+                        profileEntity = resource.data!!
                         binding.userName.text = resource.data!!.data.fullName
                         binding.membershipIdValue.text = "${resource.data.data.membershipId}"
                         if (sharedPreferences.isSyndicateMember) {
@@ -76,10 +80,14 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
 
         }
 
-        binding.profile.setOnClickListener { startActivity(Intent(this, PersonalInfoActivity::class.java))  }
+        binding.profile.setOnClickListener {
+            val intent = Intent(this, PersonalInfoActivity::class.java)
+            intent.putExtra("data", profileEntity)
+            startActivity(intent)
+        }
         binding.cards.setOnClickListener {  }
         binding.contact.setOnClickListener {  }
-        binding.packages.setOnClickListener { startActivity(Intent(this, PackagesActivity::class.java)) }
+        binding.packages.setOnClickListener { startActivity(Intent(this, MyPackagesActivity::class.java)) }
         binding.settings.setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
         binding.support.setOnClickListener { startActivity(Intent(this, SuggestionsActivity::class.java)) }
         binding.logout.setOnClickListener {

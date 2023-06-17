@@ -23,12 +23,14 @@ data class Package(
     val id: String,
     @SerializedName("insurance_amount")
     val insuranceAmount: Any,
+    @SerializedName("insurance_docs")
+    val insuranceDocs: List<String>,
     @SerializedName("insurance_company_id")
     val insuranceCompanyId: Any,
     @SerializedName("name_ar")
     val nameAr: String?,
     @SerializedName("name_en")
-    val nameEn: Any,
+    val nameEn: String?,
     @SerializedName("nedded_info")
     val neddedInfo: Any,
     @SerializedName("paid")

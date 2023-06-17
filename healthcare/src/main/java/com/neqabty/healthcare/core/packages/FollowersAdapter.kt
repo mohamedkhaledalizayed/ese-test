@@ -37,7 +37,7 @@ class FollowersAdapter: RecyclerView.Adapter<FollowersAdapter.ViewHolder>() {
 
     }
 
-    override fun getItemCount() = 3
+    override fun getItemCount() = items.size
 
     fun submitList(newItems: List<FollowerEntity>) {
         clear()
