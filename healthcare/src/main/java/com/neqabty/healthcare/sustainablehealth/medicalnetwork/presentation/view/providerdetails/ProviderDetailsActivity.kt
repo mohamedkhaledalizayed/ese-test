@@ -79,7 +79,8 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
         }
 
-        binding.tvContact.setOnClickListener {
+        binding.bContact.visibility = if(provider?.hasQR == true) View.VISIBLE else View.GONE
+        binding.bContact.setOnClickListener {
             val intent = Intent(this@ProviderDetailsActivity, ContactInstallmentsActivity::class.java)
             intent.putExtra("provider", intent.getParcelableExtra<ProvidersEntity>("provider"))
             startActivity(intent)
