@@ -81,7 +81,7 @@ class ReviewYourDataActivity : BaseActivity<ActivityReviewYourDataBinding>() {
             ResidenceActivity::class.java
         )
         startActivity(mainIntent)
-        finish()
+        finishAffinity()
     }
 // endregion
 }

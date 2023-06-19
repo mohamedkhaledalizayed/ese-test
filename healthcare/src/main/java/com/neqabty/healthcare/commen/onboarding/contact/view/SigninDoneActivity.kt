@@ -46,7 +46,7 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
                                     startActivity(Intent(this, ReviewYourDataActivity::class.java))
 
                             }else
-                                showAlert(message = resource.data.message?: ""){finish()}
+                                showAlert(message = resource.data.message?: ""){finishAffinity()}
                         }else{
                             Toast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show()
                         }
@@ -112,7 +112,7 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
                     UploadIdFrontActivity::class.java
                 )
                 startActivity(mainIntent)
-                finish()
+                finishAffinity()
             }
 
             override fun onDismissListener() {
@@ -128,7 +128,7 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
             getTheNextActivityFromSignup()
         )
         startActivity(mainIntent)
-        finish()
+        finishAffinity()
     }
 // endregion
 }

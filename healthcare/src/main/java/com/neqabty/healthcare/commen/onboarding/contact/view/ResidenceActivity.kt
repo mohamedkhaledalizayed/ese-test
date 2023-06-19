@@ -102,7 +102,7 @@ class ResidenceActivity : BaseActivity<ActivityResidenceBinding>() {
             DependantsActivity::class.java
         )
         startActivity(mainIntent)
-        finish()
+        finishAffinity()
     }
 // endregion
 }

@@ -60,7 +60,7 @@ class UploadIdFrontActivity : BaseActivity<ActivityUploadIdFrontBinding>() {
                 UploadIdBackActivity::class.java
             )
             startActivity(mainIntent)
-            finish()
+            finishAffinity()
         }
 
         binding.bSkip.setOnClickListener {
@@ -91,6 +91,7 @@ class UploadIdFrontActivity : BaseActivity<ActivityUploadIdFrontBinding>() {
 
     private fun getImage(){
         val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        i.setType("image/*")
         startActivityForResult(i, REQUEST_CODE)
     }
 
@@ -177,7 +178,7 @@ class UploadIdFrontActivity : BaseActivity<ActivityUploadIdFrontBinding>() {
             getTheNextActivityFromSignup()
         )
         startActivity(mainIntent)
-        finish()
+        finishAffinity()
     }
 // endregion
 }

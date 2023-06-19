@@ -237,8 +237,6 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
                         if (resource.data != null) {
                             binding.tvSyndicateServices.visibility = View.VISIBLE
                             mAdapter.submitList(resource.data)
-                        } else {
-                            getContactMemberStatus()
                         }
                     }
                     Status.ERROR -> {
@@ -251,7 +249,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         mAdapter.onItemClickListener = object :
             SyndicateServicesAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: SyndicateServiceEntity) {
-                val intent = Intent(this@SyndicatesHomeActivity, NewsDetailsActivity::class.java)
+                val intent = Intent(this@SyndicatesHomeActivity, PaymentsActivity::class.java)
                 intent.putExtra("id", item.code)
                 startActivity(intent)
             }

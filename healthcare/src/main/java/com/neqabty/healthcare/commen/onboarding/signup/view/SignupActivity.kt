@@ -110,7 +110,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                             SigninDoneActivity::class.java
                         )
                         startActivity(mainIntent)
-                        finish()
+                        finishAffinity()
                     }
                     (adapter.fragments[3] as SignupStep4PagerFragment).signup()
                     return@setOnClickListener
@@ -178,7 +178,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
             getTheNextActivityFromSignup()
         )
         startActivity(mainIntent)
-        finish()
+        finishAffinity()
     }
 
     fun sendOTP() {

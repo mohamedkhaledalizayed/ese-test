@@ -187,6 +187,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
 
     private fun getImage() {
         val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        i.setType("image/*")
         startActivityForResult(i, REQUEST_CODE)
     }
 

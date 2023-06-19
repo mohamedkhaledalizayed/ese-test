@@ -64,7 +64,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             sharedPreferences.userImage = "${resource.data!!.user.account.image}"
                             val mainIntent = Intent(this@LoginActivity, getTheNextActivityFromSignup())
                             startActivity(mainIntent)
-                            finish()
+                            finishAffinity()
 
                         }else{
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
@@ -88,7 +88,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 getTheNextActivityFromSignup()
             )
             startActivity(mainIntent)
-            finish()
+            finishAffinity()
         }
         binding.btnLogin.setOnClickListener { login() }
     }

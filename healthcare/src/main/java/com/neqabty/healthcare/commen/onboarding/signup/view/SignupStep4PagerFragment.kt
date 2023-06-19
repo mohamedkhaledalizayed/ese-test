@@ -203,7 +203,7 @@ class SignupStep4PagerFragment : Fragment() {
             SigninDoneActivity::class.java
         )
         startActivity(mainIntent)
-        requireActivity().finish()
+        requireActivity().finishAffinity()
     }
 
 

@@ -68,7 +68,7 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
         sharedPreferences.isIntroSkipped = true
         val mainIntent = Intent(this, getTheNextActivityFromIntro())
         startActivity(mainIntent)
-        finish()
+        finishAffinity()
     }
 // endregion
 }

@@ -182,7 +182,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                             sharedPreferences.email = binding.email.text.toString()
                             sharedPreferences.syndicateName = resource.data.entityName
                             sharedPreferences.image = resource.data.entityImage ?: ""
-                            finish()
+                            finishAffinity()
                         } else {
                             Toast.makeText(this, resources.getString(R.string.something_wrong), Toast.LENGTH_LONG).show()
                         }

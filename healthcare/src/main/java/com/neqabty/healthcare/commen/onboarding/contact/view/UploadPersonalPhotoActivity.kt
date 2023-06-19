@@ -212,7 +212,7 @@ class UploadPersonalPhotoActivity : BaseActivity<ActivityUploadIdBackBinding>() 
             ReviewYourDataActivity::class.java
         )
         startActivity(mainIntent)
-        finish()
+        finishAffinity()
     }
 // endregion
 }
