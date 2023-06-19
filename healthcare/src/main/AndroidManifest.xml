@@ -197,6 +197,12 @@
             android:name=".core.scanqrcode.ScanQrcodeScreen"
             android:exported="false" />
         <activity
+            android:name=".commen.contact_providers.view.ContactProvidersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".commen.contact_installments.view.ContactInstallmentsActivity"
+            android:exported="false" />
+        <activity
             android:name=".core.syndicates.SyndicatesActivity"
             android:exported="false" />
         <activity

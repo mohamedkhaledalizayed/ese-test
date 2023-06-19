@@ -25,6 +25,7 @@ fun ProvidersModel.toProvidersEntity(): ProvidersEntity{
         image = image,
         name = name,
         notes = notes ?: "لا يوجد",
+        hasQR = hasQR == 1,
         phone = phone ?: "لا يوجد",
         mobile = mobile ?: "لا يوجد",
         profession = profession?.toProfessionEntity(),

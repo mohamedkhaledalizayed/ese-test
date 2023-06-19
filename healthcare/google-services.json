@@ -29,6 +29,13 @@
             {
               "client_id": "719339414670-3p7u3ko1mtoao1a2nka6fh1rtoc4qkov.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "719339414670-69gee17oerug8jadnvp8glgf05e5nsg3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.2030Builders.NeqabtyMega"
+              }
             }
           ]
         }

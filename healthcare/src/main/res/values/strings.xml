@@ -598,5 +598,6 @@
     <string name="marital_status_widow">ارمل</string>
     <string name="fees">تكلفة الشحن يتم تحصيلها عند الاستلام</string>
     <string name="scan_qr">مسح QR كود</string>
+    <string name="contact_providers">مقدمي الخدمة</string>
 
 </resources>

@@ -18,4 +18,7 @@ interface ContactApi {
     @POST("contact/submit_client")
     suspend fun submitClient(@Header("Authorization") token: String, @Body submitClientRequest: SubmitClientRequest): SubmitClientResponse
 
+    @POST("contact/get_instalment")
+    suspend fun getInstallments(@Header("Authorization") token: String, @Body installmentsRequest: InstallmentsRequest): InstallmentsResponse
+
 }

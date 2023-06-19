@@ -31,6 +31,8 @@ data class ProvidersModel(
     val name: String,
     @SerializedName("notes")
     val notes: String?,
+    @SerializedName("has_qrcode")
+    val hasQR: Int?,
     @SerializedName("phone")
     val phone: String?,
     @SerializedName("mobile")

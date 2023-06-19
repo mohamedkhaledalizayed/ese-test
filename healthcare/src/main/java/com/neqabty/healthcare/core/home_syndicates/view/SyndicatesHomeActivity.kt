@@ -10,6 +10,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.commen.contact_providers.view.ContactProvidersActivity
 import com.neqabty.healthcare.commen.notification.NotificationsActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.commen.syndicateservices.domain.entity.SyndicateServiceEntity
@@ -61,10 +62,6 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         }
 
         renderContactCard()
-
-        binding.ivContactSubscribe.setOnClickListener {
-            startActivity(Intent(this, getContactEntryPoint()))
-        }
 
         binding.tvWelcomeIn.text = getString(R.string.welcome_in, sharedPreferences.name)
         binding.tvSyndicateName.text = sharedPreferences.syndicateName
@@ -189,6 +186,12 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         binding.ivContactQr.setOnClickListener {
             val intent = Intent(this, ScanQrcodeScreen::class.java)
             startActivityForResult(intent, QR_CODE_REQUEST)
+        }
+        binding.ivContactServiceProviders.setOnClickListener {
+            startActivity(Intent(this, ContactProvidersActivity::class.java))
+        }
+        binding.ivContactSubscribe.setOnClickListener {
+            startActivity(Intent(this, getContactEntryPoint()))
         }
     }
 

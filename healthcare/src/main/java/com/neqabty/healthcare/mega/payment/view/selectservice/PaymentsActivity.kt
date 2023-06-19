@@ -56,6 +56,10 @@ class PaymentsActivity : BaseActivity<ActivityPaymentsBinding>() {
 
                         mServicesAdapter = ServicesAdapter(this, listOfServices.toMutableList())
                         binding.spServices.adapter = mServicesAdapter
+
+                        val item = mServicesAdapter.syndicatesList.find { it.code == intent.extras?.getString("id") }
+                        val position = mServicesAdapter.syndicatesList.indexOf(item)
+                        binding.spServices.setSelection(position)
                     }
                     Status.ERROR -> {
                         Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()

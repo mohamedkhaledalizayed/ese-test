@@ -61,7 +61,7 @@ class MyPushService : FirebaseMessagingService() {
 
         val pendingIntent = TaskStackBuilder.create(applicationContext)
                 .addNextIntent(intent)
-                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+                .getPendingIntent(0, PendingIntent.FLAG_MUTABLE)
 
         val channelId = "Notifications"
 

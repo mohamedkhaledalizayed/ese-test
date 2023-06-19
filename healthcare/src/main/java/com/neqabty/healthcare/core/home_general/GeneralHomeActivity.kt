@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
+import com.neqabty.healthcare.commen.contact_providers.view.ContactProvidersActivity
 import com.neqabty.healthcare.commen.notification.NotificationsActivity
 import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
@@ -56,10 +57,6 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
         }
 
         renderContactCard()
-
-        binding.ivContactSubscribe.setOnClickListener {
-            startActivity(Intent(this, getContactEntryPoint()))
-        }
 
         binding.icBanners.registerLifecycle(lifecycle)
 
@@ -149,6 +146,12 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
         binding.ivContactQr.setOnClickListener {
             val intent = Intent(this, ScanQrcodeScreen::class.java)
             startActivityForResult(intent, QR_CODE_REQUEST)
+        }
+        binding.ivContactServiceProviders.setOnClickListener {
+            startActivity(Intent(this, ContactProvidersActivity::class.java))
+        }
+        binding.ivContactSubscribe.setOnClickListener {
+            startActivity(Intent(this, getContactEntryPoint()))
         }
     }
 

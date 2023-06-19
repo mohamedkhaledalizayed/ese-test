@@ -25,4 +25,8 @@ class ContactDS @Inject constructor(private val contactApi: ContactApi, private 
     suspend fun submitClient(submitClientRequest: SubmitClientRequest): SubmitClientResponse {
         return contactApi.submitClient(token = "token ${preferencesHelper.token}", submitClientRequest)
     }
+
+    suspend fun getInstallments(nationalId: String, amount: String, tenor: String): InstallmentsResponse {
+        return contactApi.getInstallments(token = "token ${preferencesHelper.token}", InstallmentsRequest(nationalId, amount, tenor))
+    }
 }

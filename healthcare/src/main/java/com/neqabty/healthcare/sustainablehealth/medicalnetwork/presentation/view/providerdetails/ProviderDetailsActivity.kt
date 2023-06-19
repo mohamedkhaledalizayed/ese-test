@@ -1,10 +1,12 @@
 package com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.providerdetails
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.neqabty.healthcare.commen.contact_installments.view.ContactInstallmentsActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityProviderDetailsBinding
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.ProvidersEntity
@@ -75,6 +77,12 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
             val dialog = AddReviewDailog()
             dialog.show(fm, "")
             dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
+        }
+
+        binding.tvContact.setOnClickListener {
+            val intent = Intent(this@ProviderDetailsActivity, ContactInstallmentsActivity::class.java)
+            intent.putExtra("provider", intent.getParcelableExtra<ProvidersEntity>("provider"))
+            startActivity(intent)
         }
     }
 
