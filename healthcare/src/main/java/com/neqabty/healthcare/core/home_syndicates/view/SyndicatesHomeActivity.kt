@@ -3,6 +3,7 @@ package com.neqabty.healthcare.core.home_syndicates.view
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -24,10 +25,14 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeSyndicateBinding
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
 import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.GovernorateEntity
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.ProvidersEntity
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.providerdetails.ProviderDetailsActivity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import org.json.JSONObject
 
 
 @AndroidEntryPoint
@@ -191,7 +196,8 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
             startActivity(Intent(this, ContactProvidersActivity::class.java))
         }
         binding.ivContactSubscribe.setOnClickListener {
-            startActivity(Intent(this, getContactEntryPoint()))
+            val intent = Intent(this, ScanQrcodeScreen::class.java)
+            startActivityForResult(intent, QR_CODE_REQUEST)
         }
     }
 
@@ -312,6 +318,36 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            QR_CODE_REQUEST -> {
+                if (resultCode == RESULT_OK) {
+                    try {
+                        val data = data?.getStringExtra("data")
+                        val dataObject = JSONObject(data)
+
+                        val id = dataObject.getString("medical_provider_id")
+                        val name = dataObject.getString("name")
+                        val address = dataObject.getString("address")
+                        val mobile = dataObject.getString("mobile")
+                        val email = dataObject.getString("email")
+                        val branchCode = dataObject.getString("branch_code")
+                        val branchId = dataObject.getString("branch_id")
+
+                        Log.d("QR", data!!)
+
+                        val providersEntity = ProvidersEntity(address = address, email = email, id = id.toInt(), name = name, hasQR = true, mobile = mobile, area = null, degree = null , image = null, governorate = GovernorateEntity("", 0), notes = "", phone = mobile, price = null, profession = null, serviceProviderType = null)
+                        val intent = Intent(this@SyndicatesHomeActivity, ProviderDetailsActivity::class.java)
+                        intent.putExtra("provider", providersEntity)
+                        startActivity(intent)
+                    }catch (e: Exception){
+                        Toast.makeText(this, "Wrong Qr Code", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        }
+    }
     //region
     override fun onResume() {
         super.onResume()

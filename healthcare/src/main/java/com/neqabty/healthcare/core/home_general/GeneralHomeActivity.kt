@@ -3,6 +3,7 @@ package com.neqabty.healthcare.core.home_general
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -20,9 +21,13 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeGeneralSyndicateBinding
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.GovernorateEntity
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.ProvidersEntity
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.providerdetails.ProviderDetailsActivity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
+import org.json.JSONObject
 
 
 @AndroidEntryPoint
@@ -227,13 +232,22 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
                 if (resultCode == RESULT_OK) {
                     try {
                         val data = data?.getStringExtra("data")
-                        val name = data!!.split("\n")[0].split(": ")[1]
-                        val address = data!!.split("\n")[1].split(": ")[1]
-                        val mobile = data!!.split("\n")[2].split(": ")[1]
-                        val email = data!!.split("\n")[3].split(": ")[1]
+                        val dataObject = JSONObject(data)
 
-//                        val body = CheckVisitBody(phoneNumber, membershipNumber)
-//                        visitationViewModel.getUserData(body)
+                        val id = dataObject.getString("medical_provider_id")
+                        val name = dataObject.getString("name")
+                        val address = dataObject.getString("address")
+                        val mobile = dataObject.getString("mobile")
+                        val email = dataObject.getString("email")
+                        val branchCode = dataObject.getString("branch_code")
+                        val branchId = dataObject.getString("branch_id")
+
+                        Log.d("QR", data!!)
+
+                        val providersEntity = ProvidersEntity(address = address, email = email, id = id.toInt(), name = name, hasQR = true, mobile = mobile, area = null, degree = null , image = null, governorate = GovernorateEntity("", 0), notes = "", phone = mobile, price = null, profession = null, serviceProviderType = null)
+                        val intent = Intent(this@GeneralHomeActivity, ProviderDetailsActivity::class.java)
+                        intent.putExtra("provider", providersEntity)
+                        startActivity(intent)
                     }catch (e: Exception){
                         Toast.makeText(this, "Wrong Qr Code", Toast.LENGTH_LONG).show()
                     }
