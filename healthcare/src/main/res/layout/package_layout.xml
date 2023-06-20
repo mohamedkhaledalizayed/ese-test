@@ -58,7 +58,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            tools:itemCount="5"
+            tools:itemCount="3"
+            tools:listitem="@layout/follower_item_layout"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/package_name" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/insurance_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            tools:itemCount="2"
             tools:listitem="@layout/follower_item_layout"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"

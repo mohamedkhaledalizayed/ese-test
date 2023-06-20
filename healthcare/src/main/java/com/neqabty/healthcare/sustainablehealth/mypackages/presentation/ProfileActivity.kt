@@ -3,7 +3,10 @@ package com.neqabty.healthcare.sustainablehealth.mypackages.presentation
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -16,6 +19,9 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.profile.SubscribedPackageEntity
 import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
+import com.tejpratapsingh.pdfcreator.activity.PDFViewerActivity
+import java.io.File
+import java.io.FileOutputStream
 
 @AndroidEntryPoint
 class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
@@ -88,6 +94,10 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
                 startActivity(intent)
             }
 
+            override fun setOnDownloadClickListener(item: String) {
+                convertBase64ToPDF(item)
+            }
+
             override fun setOnEditClickListener() {
                 val intent = Intent(this@ProfileActivity, SubscriptionActivity::class.java)
                 intent.putExtra("subscriptionMode", false )
@@ -122,6 +132,20 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
             }
         }
 
+    }
+
+    private fun convertBase64ToPDF(stringBase64: String){
+        val filePath = File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) , "termsandconditions" + ".pdf")
+        val pdfAsBytes: ByteArray = Base64.decode(stringBase64, 0)
+        val os = FileOutputStream(filePath, false)
+        os.write(pdfAsBytes)
+        os.flush()
+        os.close()
+
+        val pdfUri = Uri.fromFile(filePath)
+        val intentPdfViewer = Intent(this, PDFViewerActivity::class.java)
+        intentPdfViewer.putExtra(PDFViewerActivity.PDF_FILE_URI, pdfUri)
+        startActivity(intentPdfViewer)
     }
 
     private fun deleteFollower(message: String, followerId: Int, subscriberId: String) {

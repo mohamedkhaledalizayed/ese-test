@@ -12,6 +12,7 @@ data class PackageEntity(
     val prepaid: Boolean,
     val serviceCode: String,
     val serviceActionCode: String?,
+    val insuranceDocs: List<String>,
     val packagePrice: String?,
     val vat: String?,
     val total: String?,

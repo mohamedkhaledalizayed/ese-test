@@ -117,6 +117,7 @@ private fun Package.toPackageEntity(): PackageEntity{
         nameAr = nameAr ?: "",
         maxFollower = maxFollower,
         shortDescription = shortDescription ?: "",
+        insuranceDocs = insuranceDocs,
         prepaid = prepaid,
         serviceCode = serviceCode ?: "",
         serviceActionCode = serviceActionCode,
