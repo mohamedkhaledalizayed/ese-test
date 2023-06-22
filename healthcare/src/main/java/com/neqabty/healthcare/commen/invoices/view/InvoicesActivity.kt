@@ -1,5 +1,8 @@
 package com.neqabty.healthcare.commen.invoices.view
 
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -28,9 +31,13 @@ class InvoicesActivity : BaseActivity<ActivityInvoicesBinding>() {
 
         invoicesAdapter.onItemClickListener = object : InvoicesAdapter.OnItemClickListener{
             override fun setOnItemClickListener(item: InvoicesEntity) {
-                val intent = Intent(this@InvoicesActivity, PaymentStatusActivity::class.java)
-                intent.putExtra("data", item)
-                startActivity(intent)
+                if (item.status == "PENDING"){
+                    showAlertDialog(item.gatewayReferenceId)
+                }else{
+                    val intent = Intent(this@InvoicesActivity, PaymentStatusActivity::class.java)
+                    intent.putExtra("data", item)
+                    startActivity(intent)
+                }
             }
 
         }
@@ -51,4 +58,28 @@ class InvoicesActivity : BaseActivity<ActivityInvoicesBinding>() {
         }
 
     }
+
+    private fun showAlertDialog(paymentGatewayReferenceId: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(getString(R.string.payment_reference) + " $paymentGatewayReferenceId")
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.copy_text)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            copyText(paymentGatewayReferenceId)
+        }
+        alertDialog.show()
+
+    }
+
+    private fun copyText(paymentGatewayReferenceId: String) {
+        val clipboard: ClipboardManager =
+            getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("label", paymentGatewayReferenceId)
+        clipboard.setPrimaryClip(clip)
+    }
+
 }
