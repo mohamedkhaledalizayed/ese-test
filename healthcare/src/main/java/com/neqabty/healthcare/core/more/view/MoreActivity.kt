@@ -4,21 +4,26 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.core.data.Constants
+import com.neqabty.healthcare.core.packages.PackagesActivity
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityMoreBinding
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
-import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class MoreActivity : BaseActivity<ActivityMoreBinding>() {
+    private val moreViewModel: MoreViewModel by viewModels()
     override fun getViewBinding() = ActivityMoreBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +32,7 @@ class MoreActivity : BaseActivity<ActivityMoreBinding>() {
         setContentView(binding.root)
 
         setupToolbar(titleResId = R.string.menu_more)
+        observeOnClinidoURL()
         initializeViews()
     }
 
@@ -39,7 +45,7 @@ class MoreActivity : BaseActivity<ActivityMoreBinding>() {
         }
 
         binding.cvPackages.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
+            val intent = Intent(this, PackagesActivity::class.java)
             startActivity(intent)
         }
 
@@ -52,10 +58,8 @@ class MoreActivity : BaseActivity<ActivityMoreBinding>() {
         }
 
         binding.cvDoctorsReservation.setOnClickListener {
-            val intent = Intent(this, ClinidoActivity::class.java)
-            intent.putExtra("url", Constants.DOCTORS_RESERVATION_URL)
-            intent.putExtra("title", "doctors")
-            startActivity(intent)
+            title = "doctors"
+            moreViewModel.getUrl(phone = sharedPreferences.mobile, name = sharedPreferences.name, type = "doctors")
         }
 
         binding.cvMedicine.setOnClickListener {
@@ -99,6 +103,35 @@ class MoreActivity : BaseActivity<ActivityMoreBinding>() {
                     true
                 }
                 else -> false
+            }
+        }
+    }
+
+    private fun observeOnClinidoURL() {
+        moreViewModel.clinidoUrl.observe(this){
+            when(it.status){
+                Status.LOADING ->{
+                    showProgressDialog()
+                }
+                Status.SUCCESS ->{
+                    hideProgressDialog()
+                    if (it.data!!.status){
+                        val intent = Intent(this, ClinidoActivity::class.java)
+                        intent.putExtra("url", it.data.url)
+                        intent.putExtra("title", title)
+                        startActivity(intent)
+                    }else if (it.data.status_code == 405) {
+                        Constants.mobileNumber = sharedPreferences.mobile
+                        startActivity(Intent(this, VerifyUserActivity::class.java))
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                    }else{
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+                Status.ERROR ->{
+                    hideProgressDialog()
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                }
             }
         }
     }

@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
+import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.contact_providers.view.ContactProvidersActivity
@@ -53,6 +54,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         setupToolbar(title = "", show = false)
         observeOnCheckMemberStatus()
         getContactMemberStatus()
+        observeOnClinidoURL()
         observeOnSyndicateServices()
         getSyndicateServices()
         initializeViews()
@@ -225,6 +227,35 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
                     Status.ERROR -> {
                         hideProgressDialog()
                     }
+                }
+            }
+        }
+    }
+
+    private fun observeOnClinidoURL() {
+        syndicatesHomeViewModel.clinidoUrl.observe(this){
+            when(it.status){
+                Status.LOADING ->{
+                    showProgressDialog()
+                }
+                Status.SUCCESS ->{
+                    hideProgressDialog()
+                    if (it.data!!.status){
+                        val intent = Intent(this, ClinidoActivity::class.java)
+                        intent.putExtra("url", it.data.url)
+                        intent.putExtra("title", title)
+                        startActivity(intent)
+                    }else if (it.data.status_code == 405) {
+                        Constants.mobileNumber = sharedPreferences.mobile
+                        startActivity(Intent(this, VerifyUserActivity::class.java))
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                    }else{
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+                Status.ERROR ->{
+                    hideProgressDialog()
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 }
             }
         }

@@ -37,7 +37,7 @@ class ClinidoActivity : BaseActivity<ActivityClinidoBinding>() {
         title = intent.getStringExtra("title")!!
 
         if (title == "doctors"){
-            binding.title.text = "حجز أطباء"
+            setupToolbar("حجز أطباء")
             clinidoViewModel.getUrl(
                 phone = sharedPreferences.mobile,
                 type = "doctors",
@@ -45,7 +45,7 @@ class ClinidoActivity : BaseActivity<ActivityClinidoBinding>() {
                 entityCode = sharedPreferences.code
             )
         }else{
-            binding.title.text = "العلاج الشهرى"
+            setupToolbar("العلاج الشهرى")
             clinidoViewModel.getUrl(
                 phone = sharedPreferences.mobile,
                 type = "pharmacy",
@@ -74,10 +74,6 @@ class ClinidoActivity : BaseActivity<ActivityClinidoBinding>() {
                     finish()
                 }
             }
-        }
-
-        binding.headerContainer.setOnClickListener {
-            finish()
         }
 
         binding.backBtn.setOnClickListener {

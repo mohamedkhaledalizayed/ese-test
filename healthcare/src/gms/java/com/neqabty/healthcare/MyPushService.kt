@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.neqabty.healthcare.commen.notification.NotificationsActivity
 import com.neqabty.healthcare.commen.splash.view.SplashActivity
 import com.neqabty.healthcare.core.data.Constants
 
@@ -45,7 +46,7 @@ class MyPushService : FirebaseMessagingService() {
     }
 
     private fun sendNotification(remoteMessage: RemoteMessage?) {
-        val intent = Intent(this, SplashActivity::class.java)
+        val intent = Intent(this, NotificationsActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.putExtra("notificationId", remoteMessage?.data?.get("request_id"))
         intent.putExtra("serviceId", remoteMessage!!.data?.get("service_id"))

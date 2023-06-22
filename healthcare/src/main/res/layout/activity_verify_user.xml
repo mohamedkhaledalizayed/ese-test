@@ -14,6 +14,13 @@
         android:layout_height="match_parent"
         tools:context=".auth.otp.view.CheckOTPFragment">
 
+        <include
+            android:id="@+id/layout_toolbar"
+            layout="@layout/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/logo"
             android:layout_width="@dimen/_70sdp"

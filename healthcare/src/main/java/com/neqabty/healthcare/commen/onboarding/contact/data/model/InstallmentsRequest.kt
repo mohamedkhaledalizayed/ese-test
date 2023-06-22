@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 data class InstallmentsRequest(
-    @SerializedName("national_id")
+    @SerializedName("nationalId")
     val nationalId: String,
     @SerializedName("amount")
     val amount: String,

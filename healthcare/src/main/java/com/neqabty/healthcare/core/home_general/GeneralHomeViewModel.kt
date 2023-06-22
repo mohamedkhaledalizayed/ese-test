@@ -52,11 +52,11 @@ class GeneralHomeViewModel @Inject constructor(
     }
 
     val clinidoUrl = MutableLiveData<Resource<ClinidoEntity>>()
-    fun getUrl(phone: String, type: String) {
+    fun getUrl(phone: String, name: String, type: String) {
         viewModelScope.launch(Dispatchers.IO) {
             clinidoUrl.postValue(Resource.loading(data = null))
             try {
-                clinidoUseCase.build(phone, type, "", Constants.NEQABTY_CODE).collect {
+                clinidoUseCase.build(phone, type, name, Constants.NEQABTY_CODE).collect {
                     clinidoUrl.postValue(Resource.success(data = it))
                 }
             } catch (e: Throwable) {

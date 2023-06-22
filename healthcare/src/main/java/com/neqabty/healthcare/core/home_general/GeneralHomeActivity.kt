@@ -8,11 +8,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
+import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.contact_providers.view.ContactProvidersActivity
 import com.neqabty.healthcare.commen.notification.NotificationsActivity
 import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.more.view.MoreActivity
 import com.neqabty.healthcare.core.packages.PackagesActivity
 import com.neqabty.healthcare.core.scanqrcode.ScanQrcodeScreen
@@ -47,6 +50,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
         setupToolbar(title = "", show = false)
         observeOnCheckMemberStatus()
         getContactMemberStatus()
+        observeOnClinidoURL()
         initializeViews()
     }
 
@@ -87,7 +91,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
 
         binding.llDoctorsReservation.setOnClickListener {
             title = "doctors"
-            generalHomeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors")
+            generalHomeViewModel.getUrl(phone = sharedPreferences.mobile, name = sharedPreferences.name, type = "doctors")
         }
 
         binding.llOnlineConsultation.setOnClickListener {
@@ -184,6 +188,35 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
                     Status.ERROR -> {
                         hideProgressDialog()
                     }
+                }
+            }
+        }
+    }
+
+    private fun observeOnClinidoURL() {
+        generalHomeViewModel.clinidoUrl.observe(this){
+            when(it.status){
+                Status.LOADING ->{
+                    showProgressDialog()
+                }
+                Status.SUCCESS ->{
+                    hideProgressDialog()
+                    if (it.data!!.status){
+                        val intent = Intent(this, ClinidoActivity::class.java)
+                        intent.putExtra("url", it.data.url)
+                        intent.putExtra("title", title)
+                        startActivity(intent)
+                    }else if (it.data.status_code == 405) {
+                        Constants.mobileNumber = sharedPreferences.mobile
+                        startActivity(Intent(this, VerifyUserActivity::class.java))
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                    }else{
+                        Toast.makeText(this, it.data.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+                Status.ERROR ->{
+                    hideProgressDialog()
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 }
             }
         }
