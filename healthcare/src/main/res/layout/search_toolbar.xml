@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/back_btn_black"
+        app:navigationIcon="@drawable/back_btn_white"
         app:titleTextColor="@color/white" />
 
     <ImageView
