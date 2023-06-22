@@ -7,10 +7,14 @@ import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.Subscri
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.UpdatePackageBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.relationstypes.Relation
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.subscription.SubscriptionModel
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.terms.DataModel
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.terms.TermsModel
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.updatepackage.UpdatePackageModel
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.source.SubscriptionSource
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.subscribtions.SubscriptionEntity
+import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.terms.TermsEntity
+import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.terms.TermsEntityList
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.updatepackage.UpdatePackageEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.repository.SubscriptionRepository
 import kotlinx.coroutines.flow.Flow
@@ -45,6 +49,32 @@ class SubscriptionRepositoryImpl @Inject constructor(private val subscriptionSou
             )
         }
     }
+
+    override fun getTermsAndConditions(id: String): Flow<TermsEntityList> {
+        return flow {
+            emit(subscriptionSource.getTermsAndConditions(id).toTermsEntityList())
+        }
+    }
+}
+
+private fun TermsModel.toTermsEntityList(): TermsEntityList{
+    return TermsEntityList(
+        data = data.map { it.toTermsEntity() },
+        message = message,
+        status = status,
+        status_code = status_code
+    )
+}
+
+private fun DataModel.toTermsEntity(): TermsEntity{
+    return TermsEntity(
+        created_at = created_at,
+        id = id,
+        notes = notes,
+        package_id = package_id,
+        terms_document = terms_document,
+        updated_at = updated_at
+    )
 }
 
 private fun SubscriptionModel.toSubscriptionEntity(): SubscriptionEntity{

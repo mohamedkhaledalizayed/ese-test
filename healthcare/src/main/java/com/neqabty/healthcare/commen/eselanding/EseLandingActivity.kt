@@ -101,6 +101,20 @@ class EseLandingActivity : BaseActivity<ActivityEseLandingBinding>() {
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
         }
+
+        binding.itemHomeVisit.setOnClickListener {
+            if (sharedPreferences.isAuthenticated) {
+                eseLandingViewModel.getUrl(
+                    phone = sharedPreferences.mobile,
+                    type = "homeVisit",
+                    name = sharedPreferences.name,
+                    entityCode = sharedPreferences.code
+                )
+                title = "زيارة منزلية"
+            } else {
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
+        }
     }
 
     private fun askForLogin(message: String) {

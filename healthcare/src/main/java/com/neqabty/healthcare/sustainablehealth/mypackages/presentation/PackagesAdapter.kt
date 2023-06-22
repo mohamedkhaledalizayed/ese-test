@@ -50,6 +50,9 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         val mAdapter = FollowerAdapter()
         viewHolder.binding.followersRecycler.adapter = mAdapter
 
+        val mInsuranceAdapter = InsuranceAdapter()
+        viewHolder.binding.insuranceRecycler.adapter = mInsuranceAdapter
+
         if (follower.packages.prepaid){
             viewHolder.binding.paid.visibility = View.GONE
         }else if (follower.packages.paid){
@@ -77,6 +80,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         }
 
         mAdapter.submitList(follower.packages.followers)
+        mInsuranceAdapter.submitList(follower.packages.insuranceDocs)
 
         viewHolder.binding.paid.setOnClickListener {
             if (follower.packages.serviceActionCode.isNullOrEmpty()){
@@ -92,6 +96,13 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
             FollowerAdapter.OnItemClickListener {
             override fun setOnItemClickListener(subscriberId: String, followerId: Int) {
                 onItemClickListener?.setOnDeleteItemClickListener(subscriberId, followerId)
+            }
+        }
+
+        mInsuranceAdapter.onItemClickListener = object :
+            InsuranceAdapter.OnItemClickListener {
+            override fun setOnItemClickListener(item: String) {
+                onItemClickListener?.setOnDownloadClickListener(item)
             }
         }
 
@@ -136,6 +147,7 @@ class PackagesAdapter: RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
             fun setOnDeleteItemClickListener(subscriberId: String, followerId: Int)
             fun setOnAddItemClickListener(packageId: String, subscriberId: String, IsMaxFollower: Boolean)
             fun setOnPayClickListener(item: SubscribedPackageEntity)
+            fun setOnDownloadClickListener(item: String)
             fun setOnEditClickListener()
     }
 

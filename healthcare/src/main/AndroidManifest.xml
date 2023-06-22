@@ -39,6 +39,12 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
+            android:name=".commen.complains.view.addcomplain.AddComplainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".commen.invoices.view.InvoicesActivity"
+            android:exported="false" />
+        <activity
             android:name=".commen.pharmacy.PharmacyActivity"
             android:exported="false" />
         <activity
@@ -126,7 +132,7 @@
             android:name=".commen.contactus.ContactUsActivity"
             android:exported="false" />
         <activity
-            android:name=".mega.complains.view.ComplainsActivity"
+            android:name=".commen.complains.view.getcomplains.ComplainsActivity"
             android:exported="false" />
         <activity
             android:name=".commen.profile.view.profile.ProfileActivity"

@@ -4,9 +4,11 @@ package com.neqabty.healthcare.sustainablehealth.subscribtions.data.source
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.api.SubscriptionApi
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.SubscribePostBodyRequest
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.TermsBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.UpdatePackageBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.relationstypes.Relation
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.subscription.SubscriptionModel
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.terms.TermsModel
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.updatepackage.UpdatePackageModel
 import javax.inject.Inject
 
@@ -26,5 +28,9 @@ class SubscriptionSource @Inject constructor(private val subscriptionApi: Subscr
 
     suspend fun updatePackage(updatePackageBody: UpdatePackageBody): UpdatePackageModel {
         return subscriptionApi.updatePackage(token = "Token ${sharedPreferences.token}", updatePackageBody = updatePackageBody)
+    }
+
+    suspend fun getTermsAndConditions(id: String): TermsModel {
+        return subscriptionApi.getTermsAndConditions(TermsBody(package_id = id))
     }
 }

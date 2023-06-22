@@ -240,10 +240,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                             "Opay Card" -> {
                                 oPayPayment(resource.data)
                             }
-                            "wallet" -> {
-
-                            }
                             "Opay Code" -> {
+                                showAlertDialog(resource.data.paymentGatewayTransactionNum)
+                            }
+                            "Fawry Code" -> {
                                 showAlertDialog(resource.data.paymentGatewayTransactionNum)
                             }
                             else -> {
@@ -406,6 +406,10 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                         "Opay Code" -> {
                             binding.paymentLogo.visibility = View.VISIBLE
                             binding.paymentLogo.setImageResource(R.drawable.opay)
+                        }
+                        "Fawry Code" -> {
+                            binding.paymentLogo.visibility = View.VISIBLE
+                            binding.paymentLogo.setImageResource(R.drawable.fawry)
                         }
                         else -> {
                             binding.paymentLogo.visibility = View.GONE

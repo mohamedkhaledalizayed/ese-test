@@ -9,15 +9,18 @@ import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.Subscri
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.UpdatePackageBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.relations.RelationEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.subscribtions.SubscriptionEntity
+import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.terms.TermsEntityList
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.entity.updatepackage.UpdatePackageEntity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.usecases.AddSubscriptionUseCase
+import com.neqabty.healthcare.sustainablehealth.subscribtions.domain.usecases.GetTermsAndConditionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SubscriptionViewModel @Inject constructor(private val addSubscriptionUseCase: AddSubscriptionUseCase) :
+class SubscriptionViewModel @Inject constructor(private val addSubscriptionUseCase: AddSubscriptionUseCase,
+private val getTermsAndConditionUseCase: GetTermsAndConditionUseCase) :
     ViewModel() {
 
     val relations = MutableLiveData<Resource<List<RelationEntity>>>()
@@ -30,6 +33,20 @@ class SubscriptionViewModel @Inject constructor(private val addSubscriptionUseCa
                 }
             }catch (e: Throwable){
                 relations.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            }
+        }
+    }
+
+    val terms = MutableLiveData<Resource<TermsEntityList>>()
+    fun getTermsAndConditions(id: String){
+        viewModelScope.launch(Dispatchers.IO){
+            terms.postValue(Resource.loading(data = null))
+            try {
+                getTermsAndConditionUseCase.build(id).collect {
+                    terms.postValue(Resource.success(data = it))
+                }
+            }catch (e: Throwable){
+                terms.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
         }
     }

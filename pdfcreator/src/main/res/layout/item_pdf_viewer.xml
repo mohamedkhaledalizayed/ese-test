@@ -9,7 +9,7 @@
         android:id="@+id/imageViewItemPdfViewer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey_800"
+        android:background="#fbfbfc"
         android:contentDescription="@string/pdf_page_as_image" />
 
     <LinearLayout

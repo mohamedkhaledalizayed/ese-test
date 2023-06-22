@@ -2,7 +2,9 @@ package com.neqabty.healthcare.sustainablehealth.mypackages.domain.repository
 
 
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.AddFollowerBody
+import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.InsuranceBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.addfollower.AddFollowerEntity
+import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.insurance.InsuranceEntity
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.profile.ProfileEntity
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.relations.RelationEntityList
 import kotlinx.coroutines.flow.Flow
@@ -12,4 +14,5 @@ interface ProfileRepository {
     fun getRelations(): Flow<List<RelationEntityList>>
     fun addFollower(addFollowerBody: AddFollowerBody): Flow<AddFollowerEntity>
     fun deleteFollower(followerId: Int, mobile: String, subscriberId: String): Flow<Boolean>
+    fun getInsurance(insuranceBody: InsuranceBody): Flow<InsuranceEntity>
 }

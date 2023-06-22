@@ -20,7 +20,6 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
-import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
@@ -28,7 +27,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityMainBinding
 import com.neqabty.healthcare.commen.aboutapp.AboutAppActivity
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
-import com.neqabty.healthcare.mega.complains.view.ComplainsActivity
+import com.neqabty.healthcare.commen.complains.view.getcomplains.ComplainsActivity
 import com.neqabty.healthcare.commen.contactus.ContactUsActivity
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
@@ -38,6 +37,8 @@ import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity
 import com.neqabty.healthcare.news.view.newslist.NewsListActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.commen.complains.view.addcomplain.AddComplainActivity
+import com.neqabty.healthcare.commen.invoices.view.InvoicesActivity
 import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.core.data.Cart
 import com.neqabty.healthcare.core.data.Constants.cart
@@ -54,7 +55,7 @@ import java.util.*
 
 @AndroidEntryPoint
 class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
-    NavigationView.OnNavigationItemSelectedListener, IOnSendClickListener {
+    NavigationView.OnNavigationItemSelectedListener {
     private lateinit var loading: AlertDialog
     private lateinit var drawer: DrawerLayout
     private lateinit var toolbar: Toolbar
@@ -244,6 +245,20 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
 
+        binding.homeVisitContainer.setOnClickListener {
+            if (sharedPreferences.isAuthenticated) {
+                homeViewModel.getUrl(
+                    phone = sharedPreferences.mobile,
+                    type = "homeVisit",
+                    name = sharedPreferences.name,
+                    entityCode = sharedPreferences.code
+                )
+                title = "زيارة منزلية"
+            } else {
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
+        }
+
 
         homeViewModel.clinidoUrl.observe(this){
             when(it.status){
@@ -268,21 +283,6 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                 Status.ERROR ->{
                     loading.dismiss()
                     Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-
-        homeViewModel.complains.observe(this){
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> {
-                    }
-                    Status.SUCCESS -> {
-                        showTicketNumber(resource.data)
-                    }
-                    Status.ERROR -> {
-                        Toast.makeText(this, resource.message, Toast.LENGTH_LONG).show()
-                    }
                 }
             }
         }
@@ -324,20 +324,6 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             }
         }
         //End of logout
-    }
-
-    private fun showTicketNumber(data: String?) {
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle(getString(R.string.alert))
-        alertDialog.setMessage("تم إرسال طلبك بنجاح رقم الشكوى/المقترح$data")
-        alertDialog.setCancelable(true)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-        }
-        alertDialog.show()
-
     }
 
     @SuppressLint("CutPasteId")
@@ -415,7 +401,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             R.id.payment -> {
                 if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
                     if (!isGuest){
-                        val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
+                        val intent = Intent(this@MegaHomeActivity, InvoicesActivity::class.java)
                         startActivity(intent)
                     }else{
                         Toast.makeText(this@MegaHomeActivity, "هذه الخدمة متاحة لاعضاء النقابة فقط.", Toast.LENGTH_LONG).show()
@@ -433,16 +419,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                 startActivity(intent)
             }
             R.id.suggestions -> {
-                val fm: FragmentManager = supportFragmentManager
-                if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
-                    val dialog = SuggestionDialog.newInstance(sharedPreferences.mobile, sharedPreferences.email)
-                    dialog.show(fm, "")
-                    dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
-                }else{
-                    val dialog = SuggestionDialog()
-                    dialog.show(fm, "")
-                    dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
-                }
+                startActivity(Intent(this, AddComplainActivity::class.java))
             }
 
             R.id.contactus_fragment -> {
@@ -453,6 +430,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
                     logout(getString(R.string.log_out))
                 }else{
                     sharedPreferences.mobile = ""
+                    sharedPreferences.email = ""
                     sharedPreferences.isPhoneVerified = false
                     sharedPreferences.isAuthenticated = false
                     sharedPreferences.isSyndicateMember = false
@@ -480,7 +458,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.suggestions){
-            if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember) {
+            if (sharedPreferences.isAuthenticated) {
                 val intent = Intent(this, ComplainsActivity::class.java)
                 startActivity(intent)
             }else{
@@ -502,6 +480,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             dialog.dismiss()
 //            homeViewModel.logout()
             sharedPreferences.mobile = ""
+            sharedPreferences.email = ""
             sharedPreferences.isPhoneVerified = false
             sharedPreferences.isAuthenticated = false
             sharedPreferences.isSyndicateMember = false
@@ -583,7 +562,4 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
 
     }
 
-    override fun onClick(mobile: String, email: String, message: String) {
-        homeViewModel.addComplain(mobile, email, message)
-    }
 }

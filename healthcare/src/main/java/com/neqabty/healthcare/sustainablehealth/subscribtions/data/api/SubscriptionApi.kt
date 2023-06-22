@@ -1,9 +1,11 @@
 package com.neqabty.healthcare.sustainablehealth.subscribtions.data.api
 
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.SubscribePostBodyRequest
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.TermsBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.UpdatePackageBody
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.relationstypes.RelationsTypesModel
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.subscription.SubscriptionModel
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.terms.TermsModel
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.updatepackage.UpdatePackageModel
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -21,5 +23,8 @@ interface SubscriptionApi {
 
     @GET("general-Lockups")
     suspend fun getRelations(): RelationsTypesModel
+
+    @POST("insurance-policy")
+    suspend fun getTermsAndConditions(@Body termsBody: TermsBody): TermsModel
 
 }

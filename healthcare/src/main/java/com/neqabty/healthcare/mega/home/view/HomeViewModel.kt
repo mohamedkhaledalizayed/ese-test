@@ -11,7 +11,6 @@ import com.neqabty.healthcare.commen.clinido.domain.entity.ClinidoEntity
 import com.neqabty.healthcare.commen.clinido.domain.usecases.ClinidoUseCase
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
-import com.neqabty.healthcare.mega.home.domain.interactors.HomeUseCase
 import com.neqabty.healthcare.news.domain.entity.NewsEntity
 import com.neqabty.healthcare.news.domain.interactors.GetNewsUseCase
 import com.neqabty.healthcare.news.domain.interactors.GetSyndicateNewsUseCase
@@ -24,7 +23,6 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase,
-    private val homeUseCase: HomeUseCase,
     private val getSyndicateNewsUseCase: GetSyndicateNewsUseCase,
     private val adsUseCase: AdsUseCase,
     private val clinidoUseCase: ClinidoUseCase,
@@ -68,20 +66,6 @@ class HomeViewModel @Inject constructor(
                 }
             } catch (e: Throwable) {
                 Log.e("", e.toString())
-            }
-        }
-    }
-
-    val complains = MutableLiveData<Resource<String>>()
-    fun addComplain(mobile: String, email: String, message: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            complains.postValue(Resource.loading(data = null))
-            try {
-                homeUseCase.addComplain(mobile, email, message).collect {
-                    complains.postValue(Resource.success(it))
-                }
-            } catch (e: Throwable) {
-                complains.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
             }
         }
     }

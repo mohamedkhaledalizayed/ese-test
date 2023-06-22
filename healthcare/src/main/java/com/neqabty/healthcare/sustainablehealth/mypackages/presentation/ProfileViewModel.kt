@@ -6,9 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.AddFollowerBody
+import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.InsuranceBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.addfollower.AddFollowerEntity
+import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.insurance.InsuranceEntity
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.profile.ProfileEntity
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.relations.RelationEntityList
+import com.neqabty.healthcare.sustainablehealth.mypackages.domain.usecases.GetInsuranceUseCase
 import com.neqabty.healthcare.sustainablehealth.mypackages.domain.usecases.GetProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +20,8 @@ import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val getProfileUseCase: GetProfileUseCase): ViewModel() {
+class ProfileViewModel @Inject constructor(private val getProfileUseCase: GetProfileUseCase,
+ private val getInsuranceUseCase: GetInsuranceUseCase): ViewModel() {
 
     val userData = MutableLiveData<Resource<ProfileEntity>>()
 
@@ -81,6 +85,19 @@ class ProfileViewModel @Inject constructor(private val getProfileUseCase: GetPro
         }
     }
 
+    val insurance = MutableLiveData<Resource<InsuranceEntity>>()
+    fun getInsurance(id: String){
+        insurance.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO){
+            try {
+                getInsuranceUseCase.build(InsuranceBody(subscriber_id = id)).collect(){
+                    insurance.postValue(Resource.success(data = it))
+                }
+            }catch (ee: Exception){
+                insurance.postValue(Resource.error(data = null, message = handleError(ee)))
+            }
+        }
+    }
 
     fun handleError(throwable: Throwable): String {
         return if (throwable is HttpException) {

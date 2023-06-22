@@ -31,6 +31,8 @@ import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActi
 import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.commen.checkaccountstatus.view.CheckAccountActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.commen.complains.view.addcomplain.AddComplainActivity
+import com.neqabty.healthcare.commen.complains.view.getcomplains.ComplainsActivity
 import com.neqabty.healthcare.commen.contactus.ContactUsActivity
 import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
@@ -138,6 +140,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                 }
                 if (sharedPreferences.isAuthenticated){
                     val intent = Intent(this@SehaHomeActivity, SubscriptionActivity::class.java)
+                    intent.putExtra("id", item.id )
                     intent.putExtra("name", item.name )
                     intent.putExtra("price", item.price )
                     intent.putExtra("vat", item.vat )
@@ -211,6 +214,20 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                     entityCode = sharedPreferences.code
                 )
                 title = "حجز أطباء"
+            } else {
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
+        }
+
+        binding.homeVisitContainer.setOnClickListener {
+            if (sharedPreferences.isAuthenticated) {
+                homeViewModel.getUrl(
+                    phone = sharedPreferences.mobile,
+                    type = "homeVisit",
+                    name = sharedPreferences.name,
+                    entityCode = sharedPreferences.code
+                )
+                title = "زيارة منزلية"
             } else {
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
@@ -313,6 +330,23 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.complain_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.suggestions){
+            if (sharedPreferences.isAuthenticated) {
+                val intent = Intent(this, ComplainsActivity::class.java)
+                startActivity(intent)
+            }else{
+                askForLogin(resources.getString(R.string.not_found))
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun getCurrentItem(): Int {
         return (binding.packagesRecycler.layoutManager as LinearLayoutManager)
             .findFirstVisibleItemPosition()
@@ -399,18 +433,14 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
                 startActivity(intent)
             }
             R.id.suggestions -> {
-                if (sharedPreferences.isAuthenticated){
-                    val intent = Intent(this@SehaHomeActivity, SuggestionsActivity::class.java)
-                    startActivity(intent)
-                }else{
-                    askForLogin(getString(R.string.not_found))
-                }
+                startActivity(Intent(this, AddComplainActivity::class.java))
             }
             R.id.logout -> {
                 if (sharedPreferences.isAuthenticated) {
                     logout(getString(R.string.log_out))
                 }else{
                     sharedPreferences.mobile = ""
+                    sharedPreferences.email = ""
                     sharedPreferences.isPhoneVerified = false
                     sharedPreferences.isAuthenticated = false
                     sharedPreferences.isSyndicateMember = false
@@ -443,6 +473,7 @@ class SehaHomeActivity : BaseActivity<ActivityHomeBinding>(), NavigationView.OnN
             dialog.dismiss()
 //            homeViewModel.logout()
             sharedPreferences.mobile = ""
+            sharedPreferences.email = ""
             sharedPreferences.isPhoneVerified = false
             sharedPreferences.isAuthenticated = false
             sharedPreferences.isSyndicateMember = false

@@ -10,9 +10,11 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.commen.invoices.domain.entity.InvoicesEntity
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import com.neqabty.healthcare.databinding.ActivityPaymentStatusBinding
+import com.neqabty.healthcare.mega.payment.domain.entity.paymentstatus.PaymentStatusEntity
 import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
 
+    private lateinit var data: InvoicesEntity
     private val paymentViewModel: PaymentViewModel by viewModels()
     override fun getViewBinding() = ActivityPaymentStatusBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +33,13 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
 
         setupToolbar(titleResId = R.string.receipt)
 
-        getReceipt()
+
+        if (intent.getStringExtra("referenceCode") != null){
+            getReceipt()
+        }else{
+            getInvoice()
+        }
+
         paymentViewModel.paymentStatus.observe(this){
 
             it?.let { resource ->
@@ -84,11 +93,52 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
 
         binding.btnDownload.setOnClickListener {
             var pdfIntent = Intent(this, PdfCreatorScreen::class.java)
-            pdfIntent.putExtra("data", paymentViewModel.paymentStatus.value?.data)
+            if (intent.getStringExtra("referenceCode") != null){
+                pdfIntent.putExtra("data", paymentViewModel.paymentStatus.value?.data)
+            }else{
+                pdfIntent.putExtra("data",
+                    PaymentStatusEntity(
+                        entity = data.entity,
+                        gatewayReferenceId = data.gatewayReferenceId,
+                        itemId = data.membershipId,
+                        mobile = data.mobile,
+                        netAmount = data.netAmount,
+                        serviceAction = data.serviceName,
+                        totalAmount = data.totalAmount,
+                        totalFees = data.totalFees,
+                        member_name = data.fullName,
+                        createdAt = data.createdAt
+                    )
+                    )
+            }
             startActivity(pdfIntent)
         }
 
         binding.btnReload.setOnClickListener { getReceipt() }
+    }
+
+    private fun getInvoice() {
+        data = intent.getParcelableExtra("data")!!
+        binding.errorContainer.visibility = View.GONE
+        binding.progressCircular.visibility = View.GONE
+        binding.layoutContainer.visibility = View.VISIBLE
+        binding.nameValue.text = data.fullName
+
+        if (data.membershipId.isNotEmpty()){
+            binding.membershipNumberValue.text = data.membershipId
+        }else{
+            binding.membershipNumber.visibility = View.GONE
+            binding.membershipNumberValue.visibility = View.GONE
+        }
+
+        binding.phoneValue.text = data.mobile
+
+        binding.serviceNameValue.text = data.serviceName
+        binding.receiptNumberValue.text = data.gatewayReferenceId
+        binding.receiptDateValue.text = AppUtils().dateFormat(data.createdAt)
+        binding.priceValue.text = "${data.netAmount}  ${getString(R.string.egp)} "
+        binding.feesValue.text = "${data.totalFees}   ${getString(R.string.egp)}"
+        binding.totalValue.text = "${data.totalAmount}   ${getString(R.string.egp)}"
     }
 
     private fun getReceipt() {
