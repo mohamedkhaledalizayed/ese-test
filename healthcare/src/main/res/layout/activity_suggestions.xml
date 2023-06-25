@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    android:paddingHorizontal="@dimen/margin_large"
     android:paddingBottom="@dimen/margin_large"
     tools:context=".sustainablehealth.suggestions.presentation.SuggestionsActivity">
 
     <include
         android:id="@+id/layout_toolbar"
         layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +33,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/status_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
@@ -52,6 +53,7 @@
                 android:hint="@string/user_name"
                 android:inputType="text"
                 android:lines="1"
+                android:textAlignment="viewStart"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:longClickable="false"
                 android:padding="@dimen/_12sdp"
@@ -169,18 +171,6 @@
                 tools:listitem="@layout/image_item" />
 
             <TextView
-                android:id="@+id/back_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/back_btn_bg"
-                android:padding="@dimen/_10sdp"
-                android:text="رجوع"
-                android:textAlignment="center"
-                android:textColor="#5D81D4"
-                />
-
-            <TextView
                 android:id="@+id/send_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -196,6 +186,20 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/status_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_20sdp"
+        android:textAlignment="center"
+        android:textColor="#6B6B6B"
+        android:visibility="gone"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progress_circular"

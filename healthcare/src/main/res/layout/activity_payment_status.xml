@@ -6,8 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/margin_large"
-        android:paddingBottom="@dimen/margin_large"
+        android:paddingVertical="@dimen/margin_large"
         tools:context=".paymentdetails.view.paymentstatus.PaymentStatusActivity">
 
         <ScrollView
@@ -40,7 +39,6 @@
                     android:text="@string/successful_payment"
                     android:textColor="#25AE88"
                     android:textSize="@dimen/_14ssp"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/status_image" />
@@ -52,7 +50,6 @@
                     android:text="@string/successful_pay"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/status_text" />
@@ -77,7 +74,7 @@
                         android:text="@string/receipt"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_13ssp"
-                        android:textStyle="bold" />
+                        />
 
                     <View
                         android:layout_width="match_parent"
@@ -96,7 +93,7 @@
                         android:text="@string/personal_info"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12ssp"
-                        android:textStyle="bold" />
+                        />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -109,8 +106,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/name"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -120,7 +116,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_50sdp"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toEndOf="@+id/name"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -131,8 +127,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:text="@string/membership_number"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/name" />
 
@@ -143,7 +138,7 @@
                             android:layout_marginStart="@dimen/_18sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toEndOf="@+id/membership_number"
                             app:layout_constraintTop_toBottomOf="@id/name_value" />
 
@@ -154,8 +149,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:text="@string/phone_number"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/membership_number" />
 
@@ -167,8 +161,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="140dp"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toEndOf="@id/phone"
                             app:layout_constraintTop_toBottomOf="@id/membership_number_value" />
 
@@ -192,7 +185,7 @@
                         android:text="@string/receipt_info"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12ssp"
-                        android:textStyle="bold" />
+                        />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -205,8 +198,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:text="@string/service_name"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -218,7 +210,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:lines="1"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toEndOf="@+id/service_name"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -229,8 +221,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:text="@string/receipt_number"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/service_name" />
 
@@ -242,7 +233,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="140dp"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toEndOf="@id/receipt_number"
                             app:layout_constraintTop_toBottomOf="@id/service_name_value" />
 
@@ -253,8 +244,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:text="@string/receipt_date"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/receipt_number" />
 
@@ -266,7 +256,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="140dp"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toEndOf="@id/receipt_date"
                             app:layout_constraintTop_toBottomOf="@id/receipt_number_value" />
 
@@ -277,8 +267,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:text="@string/net_amount"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/receipt_date" />
 
@@ -290,7 +279,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="140dp"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toEndOf="@id/price"
                             app:layout_constraintTop_toBottomOf="@id/receipt_date_value" />
 
@@ -301,8 +290,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:text="@string/total_fees"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/price" />
 
@@ -314,7 +302,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="140dp"
                             android:textColor="@color/black"
-                            android:textSize="?textSizeLarge"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toEndOf="@id/fees"
                             app:layout_constraintTop_toBottomOf="@id/price_value" />
 
@@ -334,8 +322,7 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:text="@string/total_pric"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="?textSizeLarge"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/view" />
 
@@ -347,8 +334,7 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginEnd="140dp"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="?textSizeLarge"
-                            android:textStyle="bold"
+                            android:textSize="@dimen/_12ssp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/total"
                             app:layout_constraintTop_toBottomOf="@id/view" />

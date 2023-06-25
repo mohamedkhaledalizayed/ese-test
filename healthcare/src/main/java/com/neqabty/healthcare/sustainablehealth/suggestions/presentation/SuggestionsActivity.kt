@@ -83,6 +83,7 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
                     }
                     Status.SUCCESS -> {
                         binding.progressCircular.visibility = View.GONE
+                        binding.containerLayout.visibility = View.GONE
                         if (!resource.data!!.isNullOrEmpty()){
                             binding.statusText.visibility = View.VISIBLE
                             binding.statusText.text = "${getString(R.string.done_)} ${resource.data}"

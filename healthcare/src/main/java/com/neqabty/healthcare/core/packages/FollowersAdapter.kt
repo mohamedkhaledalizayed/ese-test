@@ -34,7 +34,13 @@ class FollowersAdapter: RecyclerView.Adapter<FollowersAdapter.ViewHolder>() {
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val item = items[position]
 
+        viewHolder.binding.followerName.text = item.fullName
+        viewHolder.binding.nationalId.text = item.nationalId
+        viewHolder.binding.deleteFollower.setOnClickListener {
+            onItemClickListener?.setOnDeleteFollowerListener(item.subscriberId, item.id)
+        }
     }
 
     override fun getItemCount() = items.size
@@ -54,7 +60,7 @@ class FollowersAdapter: RecyclerView.Adapter<FollowersAdapter.ViewHolder>() {
     }
 
     interface OnItemClickListener {
-            fun setOnItemClickListener(subscriberId: String, followerId: Int)
+            fun setOnDeleteFollowerListener(subscriberId: String, followerId: Int)
     }
 
     class ViewHolder(val binding: FollowerLayoutBinding) :

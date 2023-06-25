@@ -232,6 +232,8 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
                 1004 -> {
                     followerUri = data.data
                     binding.followerImage.setImageURI(followerUri)
+                    binding.addIcon.visibility = View.GONE
+                    binding.addText.visibility = View.GONE
                 }
             }
         }

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingBottom="@dimen/margin_large"
     tools:context=".sustainablehealth.mypackages.presentation.SubscriptionDetailsActivity">
 
@@ -15,11 +14,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/layout_toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,6 +30,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/order_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/order_status_bg"
@@ -96,6 +99,7 @@
                 android:padding="@dimen/_10sdp">
 
                 <TextView
+                    android:id="@+id/package_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -114,12 +118,13 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_13sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
+                    android:visibility="gone"
                     android:src="@drawable/add_icon" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/add_icon"
+                    android:layout_below="@id/package_details"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:background="@drawable/total_bg"
                     android:orientation="vertical">
@@ -198,6 +203,7 @@
                 android:padding="@dimen/_10sdp">
 
                 <TextView
+                    android:id="@+id/followers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -209,19 +215,19 @@
 
 
                 <ImageView
-                    android:id="@+id/add_icon_"
+                    android:id="@+id/add_followers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_13sdp"
-                    android:src="@drawable/add_icon" />
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:src="@drawable/plus_circle" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/followers_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/add_icon_"
+                    android:layout_below="@id/followers"
                     android:layout_marginTop="10dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     />
@@ -251,7 +257,16 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

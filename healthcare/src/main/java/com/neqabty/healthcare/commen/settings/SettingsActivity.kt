@@ -8,6 +8,11 @@ import android.provider.Settings
 import android.view.View
 import android.widget.SeekBar
 import androidx.core.app.NotificationManagerCompat
+import com.google.android.play.core.review.ReviewException
+import com.google.android.play.core.review.ReviewInfo
+import com.google.android.play.core.review.ReviewManager
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.android.play.core.review.model.ReviewErrorCode
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.forgetpassword.view.changepassword.ChangePasswordActivity
@@ -21,7 +26,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
-    
+
+
+    lateinit var reviewInfo: ReviewInfo
     override fun getViewBinding() = ActivitySettingsBinding.inflate(layoutInflater)
     private val  bottomSheetFragment: ChangePasswordBottomSheet by lazy { ChangePasswordBottomSheet() }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,13 +40,21 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
         binding.aboutContainer.setOnClickListener { startActivity(Intent(this, AboutAppActivity::class.java)) }
         binding.backBtn.setOnClickListener { finish() }
 //        binding.notificationContainer.setOnClickListener { startActivity(Intent(this@SettingsActivity, NotificationsActivity::class.java)) }
-        binding.changePasswordContainer.setOnClickListener {
-            val intent = Intent(this, ChangePasswordActivity::class.java)
-            intent.putExtra("token", sharedPreferences.token)
-            startActivity(intent)
-        }
-    //        binding.changePasswordContainer.setOnClickListener { bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag) }
+//        binding.changePasswordContainer.setOnClickListener {
+//            val intent = Intent(this, ChangePasswordActivity::class.java)
+//            intent.putExtra("token", sharedPreferences.token)
+//            startActivity(intent)
+//        }
+            binding.changePasswordContainer.setOnClickListener { bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag) }
 
+        binding.rate.setOnClickListener {
+            val flow = manager.launchReviewFlow(this, reviewInfo)
+            flow.addOnCompleteListener { _ ->
+                // The flow has finished. The API does not indicate whether the user
+                // reviewed or not, or even whether the review dialog was shown. Thus, no
+                // matter the result, we continue our app flow.
+            }
+        }
 
         sharedPreferences.isNotificationsEnabled = NotificationManagerCompat.from(this).areNotificationsEnabled()
         binding.switchNotifications.isChecked = sharedPreferences.isNotificationsEnabled
@@ -159,6 +174,23 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
         data = Uri.parse("package:" + packageName)
     }
 // endregion
+
+    private lateinit var manager: ReviewManager
+    override fun onResume() {
+        super.onResume()
+        manager = ReviewManagerFactory.create(this)
+        val request = manager.requestReviewFlow()
+        request.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // We got the ReviewInfo object
+                reviewInfo = task.result
+
+            } else {
+                // There was some problem, log or handle the error code.
+                @ReviewErrorCode val reviewErrorCode = (task.getException() as ReviewException).errorCode
+            }
+        }
+    }
 
 
 }

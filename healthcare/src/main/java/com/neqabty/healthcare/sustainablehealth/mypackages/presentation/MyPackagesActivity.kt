@@ -34,6 +34,9 @@ class MyPackagesActivity : BaseActivity<ActivityProfileBinding>() {
         mAdapter.onItemClickListener = object : MyPackagesAdapter.OnItemClickListener{
             override fun setOnItemClickListener(item: PackageEntity) {
                 val intent = Intent(this@MyPackagesActivity, SubscriptionDetailsActivity::class.java)
+                intent.putExtra("maxFollower", item.maxFollower)
+                intent.putExtra("packageId", item.id)
+                intent.putExtra("subscriberId", item.subscriberId)
                 startActivity(intent)
             }
 

@@ -19,24 +19,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_packages"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_large"
-        android:fontFamily="@font/hanimation_arabic_medium"
-        android:text="@string/followers_info"
-        android:textColor="@color/secondaryText"
-        android:textSize="@dimen/text_size_medium"
-        app:layout_constraintTop_toBottomOf="@id/layout_toolbar" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_my_packages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_12sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/tv_packages"/>
+        app:layout_constraintTop_toBottomOf="@id/layout_toolbar"/>
 
     <ProgressBar
         android:id="@+id/progress_circular"

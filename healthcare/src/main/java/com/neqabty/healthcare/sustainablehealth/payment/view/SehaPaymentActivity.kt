@@ -221,13 +221,13 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
 
     var referenceCode = ""
     private fun oPayPayment(paymentEntity: SehaPaymentResponse) {
-        referenceCode = paymentEntity.payment_gateway_transaction_num ?: ""
+        referenceCode = paymentEntity.reference ?: ""
         PaymentTask.sandBox = SANDBOX
         val payInput = PayInput(
             publickey = paymentEntity.public_key ?: "",
             merchantId = paymentEntity.merchant_id ?: "",
             merchantName = "Neqabty",
-            reference = paymentEntity.payment_gateway_transaction_num ?: "",
+            reference = paymentEntity.reference ?: "",
             countryCode = "EG", // uppercase
             currency = "EGP", // uppercase
             payAmount = (paymentEntity.total_amount!!.toDouble() * 100).toLong(),

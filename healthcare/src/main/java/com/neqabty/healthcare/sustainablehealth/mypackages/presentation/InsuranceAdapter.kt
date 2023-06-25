@@ -39,16 +39,26 @@ class InsuranceAdapter: RecyclerView.Adapter<InsuranceAdapter.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
 
-//
-//        viewHolder.binding.followerName.text = follower.fullName
-//        viewHolder.binding.nationalId.text = follower.nationalId
-//        viewHolder.binding.relation.text = follower.relation.relation
-//        if (!follower.image.isNullOrEmpty()){
-//            val decodedString: ByteArray = Base64.decode(follower.image, Base64.DEFAULT)
-//            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-//            viewHolder.binding.followerImage.setImageBitmap(decodedByte)
-//        }
-//
+        when (position) {
+            0 -> {
+                viewHolder.binding.memberNumber.text = "الفرد الاول."
+            }
+            1 -> {
+                viewHolder.binding.memberNumber.text = "الفرد الثانى."
+            }
+            2 -> {
+                viewHolder.binding.memberNumber.text = "الفرد الثالث."
+            }
+            3 -> {
+                viewHolder.binding.memberNumber.text = "الفرد الرابع."
+            }
+            4 -> {
+                viewHolder.binding.memberNumber.text = "الفرد الخامس."
+            }
+            5 -> {
+                viewHolder.binding.memberNumber.text = "الفرد السادس."
+            }
+        }
         viewHolder.binding.root.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)
         }

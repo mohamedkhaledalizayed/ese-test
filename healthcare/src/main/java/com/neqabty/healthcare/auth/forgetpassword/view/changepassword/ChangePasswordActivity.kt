@@ -64,12 +64,12 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePaawordBinding>() {
                 return@setOnClickListener
             }
 
-            changePasswordViewModel.changePassword(
-                ChangePasswordBody(
-                    password = binding.newPassword.text.toString(),
-                    passwordConfirmation = binding.confirmPassword.text.toString()
-                ), "Token $token"
-            )
+//            changePasswordViewModel.changePassword(
+//                ChangePasswordBody(
+//                    password = binding.newPassword.text.toString(),
+//                    passwordConfirmation = binding.confirmPassword.text.toString()
+//                ), "Token $token"
+//            )
         }
 
         changePasswordViewModel.status.observe(this) {
