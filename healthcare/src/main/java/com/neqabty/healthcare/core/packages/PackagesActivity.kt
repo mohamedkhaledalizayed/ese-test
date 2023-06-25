@@ -63,6 +63,4 @@ class PackagesActivity : BaseActivity<ActivityPackagesBinding>() {
         }
     }
 
-    //region
-    //endregion
 }

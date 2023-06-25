@@ -19,6 +19,7 @@ import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.core.data.Constants.listOfFollowers
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityUploadFrontNationalidBinding
@@ -26,6 +27,7 @@ import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.pac
 import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.Followers
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.SubscribePostBodyRequest
+import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.FollowerAdapter
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.PhotoUI
 import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.viewmodel.SubscriptionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,19 +42,29 @@ class UploadFrontNationalid : BaseActivity<ActivityUploadFrontNationalidBinding>
     private var userImageUri: String? = null
     private var nationalIdFrontUri: String? = null
     private var nationalIdBackUri: String? = null
+    private var mAdapter = FollowerAdapter()
     private val subscriptionViewModel: SubscriptionViewModel by viewModels()
     override fun getViewBinding() = ActivityUploadFrontNationalidBinding.inflate(layoutInflater)
     private var REQUEST_CODE = 0
     private lateinit var packageDetails: PackagesEntity
-    private var listFollower = mutableListOf<Followers>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setupToolbar(title = "بيانات الحساب")
         packageDetails = intent.extras?.getParcelable<PackagesEntity>("package")!!
-        Log.e("test", "$packageDetails")
 
+
+        binding.followersRecycler.adapter = mAdapter
+
+        mAdapter.onItemClickListener = object : FollowerAdapter.OnItemClickListener{
+            override fun setOnDeleteClickListener(position: Int) {
+                listOfFollowers.removeAt(position)
+                mAdapter.submitList(listOfFollowers)
+                binding.addFollowerBtn.visibility = View.VISIBLE
+            }
+
+        }
         binding.ivFront.setOnClickListener {
             REQUEST_CODE = if (userImageUri != null){
                 1003
@@ -70,6 +82,10 @@ class UploadFrontNationalid : BaseActivity<ActivityUploadFrontNationalidBinding>
 //            startActivity(Intent(this, UploadBackNationalid::class.java))
         }
 
+        binding.addFollowerBtn.setOnClickListener {
+            startActivity(Intent(this, AddFollowersActivity::class.java))
+        }
+
         binding.bPayNow.setOnClickListener {
             payNow()
         }
@@ -80,10 +96,12 @@ class UploadFrontNationalid : BaseActivity<ActivityUploadFrontNationalidBinding>
 
                 when (resource.status) {
                     Status.LOADING -> {
+                        showProgressDialog()
 //                        binding.progressCircular.visibility = View.VISIBLE
 //                        binding.screenContainer.visibility = View.GONE
                     }
                     Status.SUCCESS -> {
+                        hideProgressDialog()
 //                        binding.progressCircular.visibility = View.GONE
 //                        binding.screenContainer.visibility = View.VISIBLE
                         if (resource.data!!.status){
@@ -96,12 +114,12 @@ class UploadFrontNationalid : BaseActivity<ActivityUploadFrontNationalidBinding>
                             intent.putExtra("serviceCode", packageDetails.serviceCode)
                             intent.putExtra("serviceActionCode", packageDetails.serviceActionCode)
                             startActivity(intent)
-                            finish()
                         }else{
                             Toast.makeText(this, resource.data.message, Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {
+                        hideProgressDialog()
 //                        binding.progressCircular.visibility = View.GONE
 //                        binding.screenContainer.visibility = View.VISIBLE
                     }
@@ -129,7 +147,7 @@ class UploadFrontNationalid : BaseActivity<ActivityUploadFrontNationalidBinding>
                 personalImage = userImageUri!!,
                 frontIdImage = nationalIdFrontUri!!,
                 backIdImage = nationalIdBackUri!!,
-                followers = listFollower
+                followers = listOfFollowers.toList()
             )
 
             subscriptionViewModel.addSubscription(sub)
@@ -151,6 +169,14 @@ class UploadFrontNationalid : BaseActivity<ActivityUploadFrontNationalidBinding>
             }
         } else {
             getImage()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mAdapter.submitList(listOfFollowers)
+        if (packageDetails.maxFollower == mAdapter.itemCount){
+            binding.addFollowerBtn.visibility = View.GONE
         }
     }
 

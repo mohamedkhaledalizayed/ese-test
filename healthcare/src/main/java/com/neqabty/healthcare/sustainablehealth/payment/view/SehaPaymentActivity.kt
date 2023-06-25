@@ -17,6 +17,7 @@ import com.google.gson.Gson
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.otp.view.VerifyPhoneActivity
 import com.neqabty.healthcare.core.data.Constants.SANDBOX
+import com.neqabty.healthcare.core.data.Constants.listOfFollowers
 import com.neqabty.healthcare.core.packages.PaymentMethodsAdapter
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivitySehaPaymentBinding
@@ -287,6 +288,7 @@ class SehaPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Callback
 
             }
             PaymentStatus.SUCCESS -> {
+                listOfFollowers.clear()
                 val intent = Intent(this, PaymentStatusActivity::class.java)
                 intent.putExtra("referenceCode", referenceCode)
                 startActivity(intent)

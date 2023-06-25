@@ -4,6 +4,8 @@ package com.neqabty.healthcare.core.data
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.healthcare.chefaa.address.domain.entities.AddressEntity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
+import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.Follower
+import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.Followers
 
 
 object Constants {
@@ -92,6 +94,8 @@ object Constants {
         NOTE("text"),
         PRODUCT("product")
     }
+
+    val listOfFollowers = ArrayList<Followers>()
 
     const val LATITUDE = "latitude"
     const val LONGITUDE = "longitude"

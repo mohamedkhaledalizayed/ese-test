@@ -40,8 +40,6 @@ data class SubscribePostBodyRequest(
 data class Followers(
     @SerializedName("name")
     val name: String = "",
-    val relation: String = "",
-    val imageUri: Uri,
     @SerializedName("national_id")
     val national_id: String = "",
     @SerializedName("relation_type")

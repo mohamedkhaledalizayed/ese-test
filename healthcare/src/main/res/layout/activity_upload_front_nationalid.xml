@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cl_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/margin_large"
-    android:paddingBottom="@dimen/margin_large">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/layout_toolbar"
@@ -28,13 +26,21 @@
     <ImageView
         android:id="@+id/iv_front"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_height="@dimen/_160sdp"
         android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_16sdp"
         android:src="@drawable/img_nat_id_front"
         app:layout_constraintTop_toBottomOf="@id/tv_enter_national_id_front" />
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/followers_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/iv_front"
+        app:layout_constraintBottom_toTopOf="@id/add_follower_btn"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     <TextView
         android:id="@+id/btn_back_id"
@@ -59,7 +65,7 @@
         app:layout_constraintBottom_toTopOf="@id/b_pay_now"
         android:padding="@dimen/_10sdp"
         android:visibility="gone"
-        android:text="ادخال بيانات المشتركين "
+        android:text="ادخال بيانات المشتركين"
         android:layout_margin="@dimen/_16sdp"
         android:textAlignment="center"
         android:textColor="#5D81D4"

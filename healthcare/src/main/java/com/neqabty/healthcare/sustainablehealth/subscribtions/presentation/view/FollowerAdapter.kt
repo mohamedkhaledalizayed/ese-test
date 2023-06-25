@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.FollowerItemBinding
+import com.neqabty.healthcare.databinding.FollowerLayoutBinding
 import com.neqabty.healthcare.sustainablehealth.subscribtions.data.model.Followers
 import kotlin.collections.ArrayList
 
@@ -25,8 +26,8 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
-        val binding: FollowerItemBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.follower_item, parent, false)
+        val binding: FollowerLayoutBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.follower_layout, parent, false)
 
         return ViewHolder(
             binding
@@ -39,12 +40,7 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
 
         viewHolder.binding.followerName.text = follower.name
         viewHolder.binding.nationalId.text = follower.national_id
-        viewHolder.binding.relation.text = follower.relation
-        viewHolder.binding.followerImage.setImageURI(follower.imageUri)
 
-        if (position == (items.size - 1)){
-            viewHolder.binding.view.visibility == View.GONE
-        }
 
         viewHolder.binding.deleteFollower.setOnClickListener { onItemClickListener?.setOnDeleteClickListener(position) }
     }
@@ -69,6 +65,6 @@ class FollowerAdapter: RecyclerView.Adapter<FollowerAdapter.ViewHolder>() {
         fun setOnDeleteClickListener(position: Int)
     }
 
-    class ViewHolder(val binding: FollowerItemBinding) :
+    class ViewHolder(val binding: FollowerLayoutBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

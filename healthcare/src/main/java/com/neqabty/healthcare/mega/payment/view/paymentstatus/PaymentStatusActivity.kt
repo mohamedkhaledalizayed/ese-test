@@ -10,10 +10,12 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import com.neqabty.healthcare.databinding.ActivityPaymentStatusBinding
 import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
+import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -100,6 +102,12 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
     override fun onStart() {
         super.onStart()
         LocaleHelper.setLocale(this, "ar")
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, GeneralHomeActivity::class.java)
+        startActivity(intent)
+        finishAffinity()
     }
 
 }
