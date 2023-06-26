@@ -39,39 +39,39 @@ class MoreActivity : BaseActivity<ActivityMoreBinding>() {
     private fun initializeViews() {
         binding.bnvSyndicatesHome.selectedItemId = R.id.navigation_more
 
-        binding.cvMedicalNetwork.setOnClickListener {
+        binding.llMedicalNetwork.setOnClickListener {
             val intent = Intent(this, SearchResultActivity::class.java)
             startActivity(intent)
         }
 
-        binding.cvPackages.setOnClickListener {
+        binding.llPackages.setOnClickListener {
             val intent = Intent(this, PackagesActivity::class.java)
             startActivity(intent)
         }
 
-        binding.cvHomeVisit.setOnClickListener {
+        binding.llHomeVisit.setOnClickListener {
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
         }
 
-        binding.cvOnlineConsultation.setOnClickListener {
+        binding.llOnlineConsultation.setOnClickListener {
             Toast.makeText(this, getString(R.string.service_unavailable), Toast.LENGTH_LONG).show()
         }
 
-        binding.cvDoctorsReservation.setOnClickListener {
+        binding.llDoctorsReservation.setOnClickListener {
             title = "doctors"
             moreViewModel.getUrl(phone = sharedPreferences.mobile, name = sharedPreferences.name, type = "doctors")
         }
 
-        binding.cvMedicine.setOnClickListener {
+        binding.llMedicine.setOnClickListener {
             openTermsDialog()
         }
 
-        binding.cvProfile.setOnClickListener {
+        binding.llProfile.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
 
-        binding.cvSettings.setOnClickListener {
+        binding.llSettings.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
