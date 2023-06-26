@@ -17,7 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_200sdp"
-        android:paddingHorizontal="@dimen/margin_large"
         android:paddingBottom="@dimen/margin_large"
         android:paddingTop="@dimen/margin_toolbar_top_xx">
 
@@ -27,8 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
+            android:paddingHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:orientation="horizontal">
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/margin_large"
     android:paddingBottom="@dimen/margin_large"
-    tools:context=".modules.verifyuser.view.VerifyUserActivity">
+    tools:context=".chefaa.verifyuser.view.VerifyUserActivity">
 
     <LinearLayout
         android:orientation="vertical"

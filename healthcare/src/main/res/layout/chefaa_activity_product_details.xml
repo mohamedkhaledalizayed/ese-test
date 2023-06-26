@@ -11,6 +11,7 @@
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_30sdp"
         android:background="@color/background_color">
 
         <RelativeLayout
