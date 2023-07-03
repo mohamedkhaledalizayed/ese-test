@@ -117,8 +117,10 @@
                         android:textColor="#E0E4EB"/>
 
                     <RelativeLayout
+                        android:id="@+id/syndicate_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:layout_marginTop="@dimen/_10sdp">
 
                         <TextView
@@ -165,6 +167,7 @@
                             android:textSize="@dimen/_10ssp"/>
 
                         <ImageView
+                            android:id="@+id/qr_code"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/qr_code"
@@ -172,6 +175,15 @@
                             android:layout_centerVertical="true"/>
 
                     </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/neqabty_qr_code"
+                        android:layout_width="@dimen/_110sdp"
+                        android:layout_height="@dimen/_110sdp"
+                        android:visibility="gone"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/qr_code"/>
 
                 </LinearLayout>
 
