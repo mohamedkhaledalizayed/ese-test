@@ -49,6 +49,9 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
+            android:name=".commen.invoices.view.InvoicesActivity"
+            android:exported="false" />
+        <activity
             android:name=".sustainablehealth.mypackages.presentation.SubscriptionDetailsActivity"
             android:exported="false" />
 
@@ -294,9 +297,9 @@
             android:exported="false" />
         <activity
             android:name=".auth.login.view.LoginActivity"
-            android:exported="true"
             android:configChanges="screenSize"
-            android:windowSoftInputMode="adjustPan"/>
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".auth.otp.view.VerifyPhoneActivity"
             android:exported="false" />

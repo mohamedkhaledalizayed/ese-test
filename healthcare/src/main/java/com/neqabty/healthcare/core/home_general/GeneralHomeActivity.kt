@@ -12,6 +12,7 @@ import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.contact_providers.view.ContactProvidersActivity
+import com.neqabty.healthcare.commen.invoices.view.InvoicesActivity
 import com.neqabty.healthcare.commen.notification.NotificationsActivity
 import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
@@ -124,7 +125,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
                     true
                 }
                 R.id.navigation_payments -> {
-                    val intent = Intent(this, PaymentsActivity::class.java)
+                    val intent = Intent(this, InvoicesActivity::class.java)
                     startActivity(intent)
                     true
                 }
