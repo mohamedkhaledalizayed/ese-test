@@ -32,6 +32,8 @@ data class UserData(
     val lastFeeYear: Int,
     @SerializedName("license_end_date")
     val licenseEndDate: String,
+    @SerializedName("qr_image")
+    val qrCodeImage: String?,
     @SerializedName("membership_id")
     val membershipId: Int,
     @SerializedName("name")

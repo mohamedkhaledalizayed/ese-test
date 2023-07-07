@@ -36,12 +36,12 @@ class MyPackagesAdapter : RecyclerView.Adapter<MyPackagesAdapter.ViewHolder>() {
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position].packages
-        viewHolder.binding.tvName.text = item.nameAr
+        viewHolder.binding.tvName.text = item.name
         viewHolder.binding.tvPrice.text = "${item.packagePrice?.toInt()} جنيه - للفرد"
         viewHolder.binding.tvDescription.text = item.descriptionAr
 
         viewHolder.binding.cvPackage.setBackgroundResource(
-            when (item.nameEn) {
+            when (item.extension) {
                 "AMA" -> R.drawable.ama_bg
                 "PRZ" -> R.drawable.prz_bg
                 "SLV" -> R.drawable.slv_bg

@@ -121,78 +121,21 @@
                     android:visibility="gone"
                     android:src="@drawable/add_icon" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/package_details"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:background="@drawable/total_bg"
-                    android:orientation="vertical">
-
                     <TextView
-                        android:id="@+id/insurance"
+                        android:id="@+id/details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_10sdp"
-                        android:fontFamily="@font/hanimation_arabic_medium"
-                        android:text="قيمة الوثائق التأمينة"
+                        android:fontFamily="@font/hanimation_regular"
                         android:textColor="@color/black"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_below="@id/package_details"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/total_bg"
                         android:textSize="@dimen/_12ssp"
-                        app:layout_constraintTop_toBottomOf="@id/cv_package" />
+                        />
 
-                    <TextView
-                        android:id="@+id/insurance_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:text="وثيقة تأمين طبي بقيمة 25 ألف جنية علاج طبي طوارئ بقيمة 10 ألاف جنية وثيقة حوادث شخصية بقيمة 100 ألف جنية"
-                        android:textColor="#CC000000"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintTop_toBottomOf="@id/insurance" />
 
-                    <TextView
-                        android:id="@+id/insurance_period"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:fontFamily="@font/hanimation_arabic_medium"
-                        android:text="مدة التأمين"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintTop_toBottomOf="@id/insurance_value" />
-
-                    <TextView
-                        android:id="@+id/insurance_period_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:text="سنة من تاريخ الأصدار لكل وثيقه"
-                        android:textColor="#CC000000"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintTop_toBottomOf="@id/insurance_period" />
-
-                    <TextView
-                        android:id="@+id/service"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:fontFamily="@font/hanimation_arabic_medium"
-                        android:text="خدمات اضافية"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintTop_toBottomOf="@id/insurance_period_value" />
-
-                    <TextView
-                        android:id="@+id/service_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:text="كارت خصومات طبية و صيدلية اونلاين"
-                        android:textColor="#CC000000"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintTop_toBottomOf="@id/service" />
-
-                </LinearLayout>
             </RelativeLayout>
 
             <RelativeLayout

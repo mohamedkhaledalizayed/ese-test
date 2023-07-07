@@ -1,14 +1,19 @@
 package com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.profile
 
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.DetailEntity
+
 
 data class PackageEntity(
     val descriptionAr: String,
     val subscriberId: String,
     val followers: List<FollowerEntity>,
+    val details: List<DetailEntity>,
     val hint: String,
     val id: String,
+    val name: String,
     val nameAr: String,
     val nameEn: String,
+    val extension: String,
     val shortDescription: String,
     val prepaid: Boolean,
     val serviceCode: String,

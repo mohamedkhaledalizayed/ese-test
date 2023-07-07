@@ -1,5 +1,7 @@
 package com.neqabty.healthcare.sustainablehealth.mypackages.data.repository
 
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.model.packages.DetailModel
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.DetailEntity
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.AddFollowerBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.DeleteFollowerBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.addfollower.AddFollowerModel
@@ -91,11 +93,14 @@ private fun Subscribed.toSubscribedPackageEntity(): SubscribedPackageEntity{
 
 private fun Package.toPackageEntity(): PackageEntity{
     return PackageEntity(
-        descriptionAr = descriptionAr,
+        descriptionAr = descriptionAr ?: "",
         subscriberId = subscriberId ?: "",
         followers = followers.map { it.toFollowerEntity() },
         hint = hint ?: "",
         id = id,
+        details = details.map { it.toDetailEntity() },
+        extension = extension ?: "",
+        name = name ?: "",
         nameAr = nameAr ?: "",
         nameEn = nameEn ?: "",
         maxFollower = maxFollower,
@@ -110,6 +115,16 @@ private fun Package.toPackageEntity(): PackageEntity{
         paid = paid,
         insuranceDocs = insuranceDocs,
         createdAt = createdAt
+    )
+}
+
+
+private fun DetailModel.toDetailEntity(): DetailEntity {
+    return DetailEntity(
+        cardId = cardId,
+        description = description,
+        id = id,
+        title = title
     )
 }
 

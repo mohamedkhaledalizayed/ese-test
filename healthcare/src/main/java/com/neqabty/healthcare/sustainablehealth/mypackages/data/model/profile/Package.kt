@@ -3,6 +3,8 @@ package com.neqabty.healthcare.sustainablehealth.mypackages.data.model.profile
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.model.packages.DetailModel
+
 @Keep
 data class Package(
     @SerializedName("created_at")
@@ -11,8 +13,12 @@ data class Package(
     val subscriberId: String?,
     @SerializedName("deleted_at")
     val deletedAt: Any,
+    @SerializedName("details")
+    val details: List<DetailModel>,
     @SerializedName("description_ar")
-    val descriptionAr: String,
+    val descriptionAr: String?,
+    @SerializedName("extension")
+    val extension: String?,
     @SerializedName("description_en")
     val descriptionEn: Any,
     @SerializedName("followers")
@@ -27,6 +33,8 @@ data class Package(
     val insuranceDocs: List<String>,
     @SerializedName("insurance_company_id")
     val insuranceCompanyId: Any,
+    @SerializedName("name")
+    val name: String?,
     @SerializedName("name_ar")
     val nameAr: String?,
     @SerializedName("name_en")

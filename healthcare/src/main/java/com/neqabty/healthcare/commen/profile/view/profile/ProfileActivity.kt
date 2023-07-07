@@ -16,6 +16,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityProfileMegaBinding
 import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.MyPackagesActivity
 import com.neqabty.healthcare.sustainablehealth.suggestions.presentation.SuggestionsActivity
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,8 +46,10 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                             binding.membershipIdValue.text = "${resource.data.data.membershipId}"
                             binding.contact.visibility = View.GONE
                             binding.syndicateContainer.visibility = View.VISIBLE
+                            Picasso.get().load(resource.data.data.qrImage).into(binding.qrCode)
                         } else {
                             binding.neqabtyQrCode.visibility = View.VISIBLE
+                            Picasso.get().load(resource.data.data.qrImage).into(binding.neqabtyQrCode)
                         }
                     }
                     Status.ERROR -> {

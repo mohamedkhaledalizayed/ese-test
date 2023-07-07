@@ -86,6 +86,7 @@ private fun UserData.toData(): Data{
         entity = entity.toEntity(),
         fullName = account.fullname,
         id = id,
+        qrImage = qrCodeImage ?: "",
         address = address,
         image = account.image,
         mobile = account.mobile,

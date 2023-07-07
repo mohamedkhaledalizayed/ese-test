@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color">
@@ -12,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_160sdp"
         android:background="#5d81d4"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,157 +20,132 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/margin_large"
-            android:paddingTop="@dimen/margin_toolbar_top">
+            android:paddingTop="@dimen/margin_toolbar_top"
+            android:paddingBottom="@dimen/margin_large">
 
             <RelativeLayout
                 android:id="@+id/header"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <RelativeLayout
                     android:id="@id/header_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="horizontal">
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
                         android:id="@+id/back_btn_header"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_toolbar_arrow_main"
                         android:layout_alignParentStart="true"
-                        />
+                        android:src="@drawable/ic_toolbar_arrow_main" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textColor="@color/white"
-                        android:layout_toEndOf="@id/back_btn_header"
                         android:layout_centerVertical="true"
-                        android:fontFamily="@font/hanimation_arabic_medium"
+                        android:layout_gravity="center"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:textSize="@dimen/_14ssp"
-                        android:text="الملف الشخصي"/>
+                        android:layout_toEndOf="@id/back_btn_header"
+                        android:fontFamily="@font/hanimation_arabic_medium"
+                        android:text="الملف الشخصي"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14ssp" />
 
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/header_container"
                     android:layout_gravity="bottom"
                     android:layout_margin="@dimen/_12sdp"
-                    android:padding="@dimen/_12sdp"
-                    android:layout_below="@id/header_container"
                     android:background="@drawable/rounded_white_shadow"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="@dimen/_12sdp">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/profile_image"
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_60sdp"
-                            android:src="@drawable/profile_icon_generic"
-                            android:layout_alignParentStart="true"/>
-
-                        <TextView
-                            android:fontFamily="@font/hanimation_arabic_medium"
-                            android:id="@+id/user_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="مريم محمد"
-                            android:textColor="#252a31"
-                            android:textSize="@dimen/_14ssp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_toEndOf="@id/profile_image"
-                            android:layout_marginStart="@dimen/_10sdp"/>
-
-                        <me.zhanghai.android.materialratingbar.MaterialRatingBar
-                            android:layout_width="@dimen/_80sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_below="@id/user_name"
-                            app:mrb_progressTint="#FED517"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:rating="5"
-                            android:layout_toEndOf="@id/profile_image"/>
-
-                    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/hanimation_arabic_medium"
+                        android:text="مريم محمد"
+                        android:textColor="#252a31"
+                        android:textSize="@dimen/_14ssp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="----------------------------------------------------------------------"
                         android:lines="1"
-                        android:textColor="#E0E4EB"/>
+                        android:text="----------------------------------------------------------------------"
+                        android:textColor="#E0E4EB" />
 
                     <RelativeLayout
                         android:id="@+id/syndicate_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:layout_marginTop="@dimen/_10sdp">
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/membership_id_value"
-                            android:fontFamily="@font/hanimation_arabic_medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="012345678"
                             android:layout_alignParentStart="true"
+                            android:fontFamily="@font/hanimation_arabic_medium"
+                            android:text="012345678"
                             android:textColor="#252a31"
-                            android:textSize="@dimen/_12ssp"/>
+                            android:textSize="@dimen/_12ssp" />
 
                         <TextView
                             android:id="@+id/membership_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="رقم العضوية"
                             android:layout_below="@id/membership_id_value"
                             android:layout_alignParentStart="true"
+                            android:text="رقم العضوية"
                             android:textColor="#bbbbbb"
-                            android:textSize="@dimen/_10ssp"/>
+                            android:textSize="@dimen/_10ssp" />
 
 
                         <TextView
                             android:id="@+id/renewal_date_value"
-                            android:fontFamily="@font/hanimation_arabic_medium"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="23/4/2031"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_below="@+id/membership_id"
                             android:layout_alignParentStart="true"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:fontFamily="@font/hanimation_arabic_medium"
+                            android:text="23/4/2031"
                             android:textColor="#252a31"
-                            android:textSize="@dimen/_12ssp"/>
+                            android:textSize="@dimen/_12ssp" />
 
                         <TextView
                             android:id="@+id/renewal_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="تاريخ التجديد"
                             android:layout_below="@id/renewal_date_value"
                             android:layout_alignParentStart="true"
+                            android:text="تاريخ التجديد"
                             android:textColor="#bbbbbb"
-                            android:textSize="@dimen/_10ssp"/>
+                            android:textSize="@dimen/_10ssp" />
 
                         <ImageView
                             android:id="@+id/qr_code"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/qr_code"
                             android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"/>
+                            android:layout_centerVertical="true" />
 
                     </RelativeLayout>
 
@@ -180,10 +153,9 @@
                         android:id="@+id/neqabty_qr_code"
                         android:layout_width="@dimen/_110sdp"
                         android:layout_height="@dimen/_110sdp"
-                        android:visibility="gone"
-                        android:layout_margin="@dimen/_10sdp"
                         android:layout_gravity="center"
-                        android:src="@drawable/qr_code"/>
+                        android:layout_margin="@dimen/_10sdp"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -194,50 +166,51 @@
                 android:id="@+id/refer_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_white_shadow"
-                app:layout_constraintTop_toBottomOf="@id/header"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
-                android:padding="@dimen/_12sdp">
+                android:background="@drawable/rounded_white_shadow"
+                android:padding="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header">
 
                 <ImageView
                     android:id="@+id/award_icon"
-                    android:layout_alignParentStart="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/award"/>
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/award" />
 
                 <TextView
                     android:id="@+id/points"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3500"
-                    android:layout_toEndOf="@id/award_icon"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/award_icon"
                     android:fontFamily="@font/montserrat_medium"
-                    android:textSize="@dimen/_14ssp"
-                    android:textColor="#0b0c11"/>
+                    android:text="3500"
+                    android:textColor="#0b0c11"
+                    android:textSize="@dimen/_14ssp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="نقطة = EGP 90.2"
-                    android:layout_toEndOf="@id/points"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:textColor="#bbbbbb"/>
+                    android:layout_toEndOf="@id/points"
+                    android:text="نقطة = EGP 90.2"
+                    android:textColor="#bbbbbb" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/award_icon"
-                    android:padding="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@drawable/chefaa_icons_bg">
+                    android:background="@drawable/chefaa_icons_bg"
+                    android:padding="@dimen/_10sdp">
 
                     <TextView
                         android:id="@+id/refer"
@@ -245,21 +218,21 @@
                         android:layout_height="wrap_content"
                         android:text="Refer &amp;Saving"
                         android:textColor="#0D163A"
-                        android:textSize="@dimen/_14ssp"/>
+                        android:textSize="@dimen/_14ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Refer and saving 10% "
                         android:layout_below="@id/refer"
-                        android:textSize="@dimen/_10ssp"/>
+                        android:text="Refer and saving 10% "
+                        android:textSize="@dimen/_10ssp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/refer_icon"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"/>
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/refer_icon" />
 
                 </RelativeLayout>
 
@@ -269,37 +242,37 @@
                 android:id="@+id/profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/refer_container"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="@dimen/_12sdp"
                 android:layout_margin="@dimen/_12sdp"
-                android:background="@drawable/rounded_white_shadow">
+                android:background="@drawable/rounded_white_shadow"
+                android:padding="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/refer_container">
 
                 <ImageView
                     android:id="@+id/profile_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/personal_info_icon"/>
+                    android:src="@drawable/personal_info_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="بيانات الشخصية"
-                    android:layout_toEndOf="@id/profile_id"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/profile_id"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="بيانات الشخصية"
                     android:textColor="#252A31"
-                    android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/hanimation_arabic_medium"/>
+                    android:textSize="@dimen/_12ssp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/curved_arrow_down_circle"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/curved_arrow_down_circle" />
 
             </RelativeLayout>
 
@@ -307,39 +280,39 @@
                 android:id="@+id/cards"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/profile"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:background="@drawable/rounded_white_shadow">
+                android:background="@drawable/rounded_white_shadow"
+                android:padding="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile">
 
                 <ImageView
                     android:id="@+id/cards_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/card_icon"/>
+                    android:src="@drawable/card_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="الكروت"
-                    android:layout_toEndOf="@id/cards_id"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/cards_id"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="الكروت"
                     android:textColor="#252A31"
-                    android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/hanimation_arabic_medium"/>
+                    android:textSize="@dimen/_12ssp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/curved_arrow_down_circle"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/curved_arrow_down_circle" />
 
             </RelativeLayout>
 
@@ -347,39 +320,39 @@
                 android:id="@+id/contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/cards"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:background="@drawable/rounded_white_shadow">
+                android:background="@drawable/rounded_white_shadow"
+                android:padding="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cards">
 
                 <ImageView
                     android:id="@+id/contact_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/card_icon"/>
+                    android:src="@drawable/card_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="كرت كونتكت"
-                    android:layout_toEndOf="@id/contact_id"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/contact_id"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="كرت كونتكت"
                     android:textColor="#252A31"
-                    android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/hanimation_arabic_medium"/>
+                    android:textSize="@dimen/_12ssp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/curved_arrow_down_circle"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/curved_arrow_down_circle" />
 
             </RelativeLayout>
 
@@ -387,39 +360,39 @@
                 android:id="@+id/packages"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/contact"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:background="@drawable/rounded_white_shadow">
+                android:background="@drawable/rounded_white_shadow"
+                android:padding="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/contact">
 
                 <ImageView
                     android:id="@+id/packages_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/packages_icon"/>
+                    android:src="@drawable/packages_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="الباقات"
-                    android:layout_toEndOf="@id/packages_id"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/packages_id"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="الباقات"
                     android:textColor="#252A31"
-                    android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/hanimation_arabic_medium"/>
+                    android:textSize="@dimen/_12ssp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/curved_arrow_down_circle"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/curved_arrow_down_circle" />
 
             </RelativeLayout>
 
@@ -427,40 +400,40 @@
                 android:id="@+id/settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/packages"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginBottom="@dimen/_12sdp"
-                android:background="@drawable/rounded_white_shadow">
+                android:background="@drawable/rounded_white_shadow"
+                android:padding="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/packages">
 
                 <ImageView
                     android:id="@+id/settings_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/settings_icon"/>
+                    android:src="@drawable/settings_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="الاعدادات"
-                    android:layout_toEndOf="@id/settings_id"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/settings_id"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="الاعدادات"
                     android:textColor="#252A31"
-                    android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/hanimation_arabic_medium"/>
+                    android:textSize="@dimen/_12ssp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/curved_arrow_down_circle"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/curved_arrow_down_circle" />
 
             </RelativeLayout>
 
@@ -468,40 +441,40 @@
                 android:id="@+id/support"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/settings"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginBottom="@dimen/_12sdp"
-                android:background="@drawable/rounded_white_shadow">
+                android:background="@drawable/rounded_white_shadow"
+                android:padding="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/settings">
 
                 <ImageView
                     android:id="@+id/support_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/support_icon"/>
+                    android:src="@drawable/support_icon" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="الدعم الفني"
-                    android:layout_toEndOf="@id/support_id"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/support_id"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="الدعم الفني"
                     android:textColor="#252A31"
-                    android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/hanimation_arabic_medium"/>
+                    android:textSize="@dimen/_12ssp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/curved_arrow_down_circle"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/curved_arrow_down_circle" />
 
             </RelativeLayout>
 
@@ -509,41 +482,41 @@
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/support"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginBottom="@dimen/_12sdp"
+                android:background="@drawable/rounded_white_shadow"
+                android:padding="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@drawable/rounded_white_shadow">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/support">
 
                 <ImageView
                     android:id="@+id/logout_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:src="@drawable/support_icon"/>
+                    android:src="@drawable/logout" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="تسجيل خروج"
-                    android:layout_toEndOf="@id/logout_id"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toEndOf="@id/logout_id"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="تسجيل خروج"
                     android:textColor="#252A31"
-                    android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/hanimation_arabic_medium"/>
+                    android:textSize="@dimen/_12ssp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/curved_arrow_down_circle"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/curved_arrow_down_circle" />
 
             </RelativeLayout>
 

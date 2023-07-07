@@ -3,6 +3,7 @@ package com.neqabty.healthcare.core.packages
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityPackageDetailsBinding
@@ -39,6 +40,11 @@ class PackageDetailsActivity : BaseActivity<ActivityPackageDetailsBinding>() {
         binding.tvName.text = packageDetails.name
         binding.tvPrice.text = "${packageDetails.price} جنيه - للفرد"
         binding.tvDescription.text = packageDetails.description
+        var details = ""
+        for (item in packageDetails.details){
+            details += "${item.title} : ${item.description}"
+        }
+        binding.details.text = Html.fromHtml(details)
 
         binding.subscribeBtn.setOnClickListener {
             val intent = Intent(this, SubscriptionActivity::class.java)

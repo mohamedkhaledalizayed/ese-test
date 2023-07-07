@@ -4,6 +4,7 @@ package com.neqabty.healthcare.sustainablehealth.mypackages.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityProfileBinding
@@ -61,6 +62,7 @@ class MyPackagesActivity : BaseActivity<ActivityProfileBinding>() {
                 }
                 Status.ERROR ->{
                     binding.progressCircular.visibility = View.GONE
+                    Log.e("ghj", resource.message.toString())
                 }
             }
 

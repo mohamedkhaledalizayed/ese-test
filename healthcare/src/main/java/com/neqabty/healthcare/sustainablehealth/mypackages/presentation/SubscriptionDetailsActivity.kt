@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.text.Html
 import android.util.Base64
 import android.view.View
 import android.widget.Toast
@@ -129,7 +130,7 @@ class SubscriptionDetailsActivity : BaseActivity<ActivitySubscriptionDetailsBind
 
     private fun handlePackageResources() {
         binding.clContainer.setBackgroundResource(
-            when (packageInfo.nameEn) {
+            when (packageInfo.extension) {
                 "AMA" -> R.drawable.ama_bg
                 "PRZ" -> R.drawable.prz_bg
                 "SLV" -> R.drawable.slv_bg
@@ -139,9 +140,15 @@ class SubscriptionDetailsActivity : BaseActivity<ActivitySubscriptionDetailsBind
             }
         )
 
-        binding.tvName.text = packageInfo.nameAr
+        binding.tvName.text = packageInfo.name
         binding.tvPrice.text = "${packageInfo.packagePrice?.toInt()} جنيه - للفرد"
         binding.tvDescription.text = packageInfo.descriptionAr
+
+        var details = ""
+        for (item in packageInfo.details){
+            details += "${item.title} : ${item.description}"
+        }
+        binding.details.text = Html.fromHtml(details)
     }
 
     private fun handlePayment() {
