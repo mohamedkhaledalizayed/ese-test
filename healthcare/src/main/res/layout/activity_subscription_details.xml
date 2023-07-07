@@ -103,11 +103,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="تفاصيل الباقة"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:text="تفاصيل الباقة" />
+                    android:textSize="@dimen/_12ssp" />
 
 
                 <ImageView
@@ -118,22 +118,21 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_13sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:visibility="gone"
-                    android:src="@drawable/add_icon" />
+                    android:src="@drawable/add_icon"
+                    android:visibility="gone" />
 
-                    <TextView
-                        android:id="@+id/details"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:fontFamily="@font/hanimation_regular"
-                        android:textColor="@color/black"
-                        android:padding="@dimen/_10sdp"
-                        android:layout_below="@id/package_details"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:background="@drawable/total_bg"
-                        android:textSize="@dimen/_12ssp"
-                        />
+                <TextView
+                    android:id="@+id/details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/package_details"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/total_bg"
+                    android:fontFamily="@font/hanimation_regular"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
 
 
             </RelativeLayout>
@@ -150,11 +149,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:textSize="@dimen/_12ssp"
-                    android:text="تفاصيل المشتركين" />
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="تفاصيل المشتركين"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
 
 
                 <ImageView
@@ -162,8 +161,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:src="@drawable/plus_circle" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -172,8 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/followers"
                     android:layout_marginTop="10dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             </RelativeLayout>
 
@@ -182,8 +180,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <TextView
                 android:id="@+id/add_follower_btn"
@@ -195,8 +192,7 @@
                 android:padding="@dimen/_10sdp"
                 android:text="تم"
                 android:textAlignment="center"
-                android:textColor="#5D81D4"
-                />
+                android:textColor="#5D81D4" />
 
         </LinearLayout>
 
