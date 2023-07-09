@@ -21,5 +21,9 @@ data class SehaPaymentBody(
     @SerializedName("transaction_type")
     val transactionType: String = "payment",
     @SerializedName("mobile")
-    val mobile: String = ""
+    val mobile: String = "",
+    @SerializedName("delivery_mobile")
+    val deliveryMobile: String = "",
+    @SerializedName("delivery_notes")
+    val deliveryNotes: String = ""
 )

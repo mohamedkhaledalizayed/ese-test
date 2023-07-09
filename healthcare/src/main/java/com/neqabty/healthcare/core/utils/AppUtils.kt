@@ -49,7 +49,7 @@ class AppUtils {
                 }
             }
         } else {
-            throwable.message!!
+            throwable.message ?: ""
         }
     }
 

@@ -64,14 +64,14 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(titleResId = R.string.payments)
+        setupToolbar(title = "دفع اشتراك")
 
-        binding.address.customSelectionActionModeCallback = actionMode
+//        binding.address.customSelectionActionModeCallback = actionMode
 
         serviceCode = intent.getStringExtra("code")!!
         serviceActionCode = intent.getStringExtra("service_action_code")!!
         if (sharedPreferences.code == NATURAL_THERAPY_CODE) {
-            binding.rbBranches.visibility = View.GONE
+//            binding.rbBranches.visibility = View.GONE
             paymentViewModel.getPaymentDetails(serviceCode, serviceActionCode, "12345678")
         } else {
             paymentViewModel.getPaymentDetails(
@@ -81,104 +81,104 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             )
         }
 
-        if (sharedPreferences.code != MORSHEDIN_CODE) {
-            binding.tvDetails.visibility = View.GONE
-            binding.cardLayout.visibility = View.GONE
-        }
+//        if (sharedPreferences.code != MORSHEDIN_CODE) {
+//            binding.tvDetails.visibility = View.GONE
+//            binding.cardLayout.visibility = View.GONE
+//        }
 
-        paymentViewModel.payment.observe(this) {
-
-            it?.let { resource ->
-                when (resource.status) {
-                    com.neqabty.healthcare.core.utils.Status.LOADING -> {
-                        binding.progressCircular.visibility = View.VISIBLE
-                    }
-                    com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
-                        binding.progressCircular.visibility = View.GONE
-
-                        if (resource.data?.receipt == null) {
-                            showDialog(getString(R.string.no_reciept))
-                        } else if (!resource.data.receipt.status!!) {
-                            Toast.makeText(
-                                this@PaymentDetailsActivity,
-                                "${resource.data.receipt.error}",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        } else {
-                            createRadioButton(resource.data.gatewaysData)
-                            handleDeliveryMethods(resource.data.deliveryMethods)
-                            binding.llContent.visibility = View.VISIBLE
-                            binding.tvService.text = resource.data.service.name
-                            binding.tvName.text =
-                                resources.getString(
-                                    R.string.member_name,
-                                    resource.data.member.name ?: ""
-                                )
-                            binding.tvMemberNumber.text =
-                                resources.getString(
-                                    R.string.member_id,
-                                    sharedPreferences.membershipId
-                                )
-
-                            binding.lastFeeYearValue.text =
-                                resource.data.receipt.lastFeeYear.toString()
-                            binding.currentFeeYearValue.text =
-                                resource.data.receipt.currentFeeYear.toString() +
-                                        "  " + resources.getString(R.string.egp)
-                            binding.cardPriceValue.text =
-                                resource.data.receipt.cardPrice.toString() +
-                                        "  " + resources.getString(R.string.egp)
-                            binding.lateSubscriptionsValue.text =
-                                resource.data.receipt.lateSubscriptions.toString() +
-                                        "  " + resources.getString(R.string.egp)
-                            binding.delayFineValue.text =
-                                resource.data.receipt.delayFine.toString() +
-                                        "  " + resources.getString(R.string.egp)
-                            binding.totalValue.text =
-                                resource.data.receipt.netAmount.toString() +
-                                        "  " + resources.getString(R.string.egp)
-                            binding.totValue.text = "${resource.data.receipt.netAmount}  ${resources.getString(R.string.egp)}"
-                        }
-
-                    }
-                    com.neqabty.healthcare.core.utils.Status.ERROR -> {
-                        binding.progressCircular.visibility = View.GONE
-                        if (resource.message.toString().split("#")[0].trim() == "3ak") {
-
-                            val error = Gson().fromJson(
-                                resource.message.toString().split("#")[1].trim(),
-                                ErrorBody::class.java
-                            )
-
-                            when (error.error_key) {
-                                4 -> {
-                                    showAlertDialogLicence(error.error)
-                                }
-                                7 -> {
-                                    showAlertDialogLicence(error.error)
-                                }
-                                else -> {
-                                    showDialog(error.error)
-                                }
-                            }
-
-                        }
-                    }
-                }
-            }
-
-        }
-
-        binding.spBranches.adapter = branchesAdapter
-        binding.spBranches.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
-                if (branchesList != null && i != 0) {
-                    entityBranch = branchesList?.get(i - 1)!!.id
-                }
-            }
-
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-        }
+//        paymentViewModel.payment.observe(this) {
+//
+//            it?.let { resource ->
+//                when (resource.status) {
+//                    com.neqabty.healthcare.core.utils.Status.LOADING -> {
+//                        binding.progressCircular.visibility = View.VISIBLE
+//                    }
+//                    com.neqabty.healthcare.core.utils.Status.SUCCESS -> {
+//                        binding.progressCircular.visibility = View.GONE
+//
+//                        if (resource.data?.receipt == null) {
+//                            showDialog(getString(R.string.no_reciept))
+//                        } else if (!resource.data.receipt.status!!) {
+//                            Toast.makeText(
+//                                this@PaymentDetailsActivity,
+//                                "${resource.data.receipt.error}",
+//                                Toast.LENGTH_LONG
+//                            ).show()
+//                        } else {
+//                            createRadioButton(resource.data.gatewaysData)
+//                            handleDeliveryMethods(resource.data.deliveryMethods)
+//                            binding.llContent.visibility = View.VISIBLE
+//                            binding.tvService.text = resource.data.service.name
+//                            binding.tvName.text =
+//                                resources.getString(
+//                                    R.string.member_name,
+//                                    resource.data.member.name ?: ""
+//                                )
+//                            binding.tvMemberNumber.text =
+//                                resources.getString(
+//                                    R.string.member_id,
+//                                    sharedPreferences.membershipId
+//                                )
+//
+//                            binding.lastFeeYearValue.text =
+//                                resource.data.receipt.lastFeeYear.toString()
+//                            binding.currentFeeYearValue.text =
+//                                resource.data.receipt.currentFeeYear.toString() +
+//                                        "  " + resources.getString(R.string.egp)
+//                            binding.cardPriceValue.text =
+//                                resource.data.receipt.cardPrice.toString() +
+//                                        "  " + resources.getString(R.string.egp)
+//                            binding.lateSubscriptionsValue.text =
+//                                resource.data.receipt.lateSubscriptions.toString() +
+//                                        "  " + resources.getString(R.string.egp)
+//                            binding.delayFineValue.text =
+//                                resource.data.receipt.delayFine.toString() +
+//                                        "  " + resources.getString(R.string.egp)
+//                            binding.totalValue.text =
+//                                resource.data.receipt.netAmount.toString() +
+//                                        "  " + resources.getString(R.string.egp)
+//                            binding.totValue.text = "${resource.data.receipt.netAmount}  ${resources.getString(R.string.egp)}"
+//                        }
+//
+//                    }
+//                    com.neqabty.healthcare.core.utils.Status.ERROR -> {
+//                        binding.progressCircular.visibility = View.GONE
+//                        if (resource.message.toString().split("#")[0].trim() == "3ak") {
+//
+//                            val error = Gson().fromJson(
+//                                resource.message.toString().split("#")[1].trim(),
+//                                ErrorBody::class.java
+//                            )
+//
+//                            when (error.error_key) {
+//                                4 -> {
+//                                    showAlertDialogLicence(error.error)
+//                                }
+//                                7 -> {
+//                                    showAlertDialogLicence(error.error)
+//                                }
+//                                else -> {
+//                                    showDialog(error.error)
+//                                }
+//                            }
+//
+//                        }
+//                    }
+//                }
+//            }
+//
+//        }
+//
+//        binding.spBranches.adapter = branchesAdapter
+//        binding.spBranches.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+//                if (branchesList != null && i != 0) {
+//                    entityBranch = branchesList?.get(i - 1)!!.id
+//                }
+//            }
+//
+//            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+//        }
 
         paymentViewModel.getBranches()
         paymentViewModel.branches.observe(this) {
@@ -210,22 +210,22 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             }
         }
 
-        binding.rbHome.setOnClickListener {
-            deliveryMethod = deliveryMethodHomeId
-            binding.spinnerContainer.visibility = View.GONE
-            binding.address.visibility = View.VISIBLE
-            binding.spBranches.setSelection(0)
-            deliveryFees = deliveryMethodHomePrice
-            updateTotal()
-        }
+//        binding.rbHome.setOnClickListener {
+//            deliveryMethod = deliveryMethodHomeId
+//            binding.spinnerContainer.visibility = View.GONE
+//            binding.address.visibility = View.VISIBLE
+//            binding.spBranches.setSelection(0)
+//            deliveryFees = deliveryMethodHomePrice
+//            updateTotal()
+//        }
 
-        binding.rbBranches.setOnClickListener {
-            deliveryMethod = deliveryMethodBranchId
-            binding.address.visibility = View.GONE
-            binding.spinnerContainer.visibility = View.VISIBLE
-            deliveryFees = deliveryMethodBranchPrice
-            updateTotal()
-        }
+//        binding.rbBranches.setOnClickListener {
+//            deliveryMethod = deliveryMethodBranchId
+//            binding.address.visibility = View.GONE
+//            binding.spinnerContainer.visibility = View.VISIBLE
+//            deliveryFees = deliveryMethodBranchPrice
+//            updateTotal()
+//        }
 
         paymentViewModel.paymentInfo.observe(this) {
 
@@ -272,9 +272,9 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                 return@setOnClickListener
             }
 
-            if (deliveryMethod == deliveryMethodHomeId) {
-                address = binding.address.text.toString()
-            }
+//            if (deliveryMethod == deliveryMethodHomeId) {
+//                address = binding.address.text.toString()
+//            }
 
             if (deliveryMethod == deliveryMethodHomeId && address.isEmpty() && deliveryMethodsEnabled) {
                 Toast.makeText(this, resources.getString(R.string.enter_add), Toast.LENGTH_LONG)
@@ -282,111 +282,111 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                 return@setOnClickListener
             }
 
-            if (deliveryMethod == deliveryMethodBranchId && binding.spBranches.selectedItemPosition == 0 && sharedPreferences.code != AGRI_CODE) {
-                Toast.makeText(this, resources.getString(R.string.select_branch), Toast.LENGTH_LONG)
-                    .show()
-                return@setOnClickListener
-            }
+//            if (deliveryMethod == deliveryMethodBranchId && binding.spBranches.selectedItemPosition == 0 && sharedPreferences.code != AGRI_CODE) {
+//                Toast.makeText(this, resources.getString(R.string.select_branch), Toast.LENGTH_LONG)
+//                    .show()
+//                return@setOnClickListener
+//            }
 
-            if (sharedPreferences.isPhoneVerified) {
-                binding.btnNext.isEnabled = false
-
-                when (sharedPreferences.code) {
-                    NATURAL_THERAPY_CODE -> {
-                        paymentViewModel.getPaymentInfo(
-                            PaymentNaturalBody(
-                                serviceCode = serviceCode,
-                                serviceActionCode = serviceActionCode,
-                                paymentMethod = paymentMethod,
-                                address = address,
-                                deliveryMethod = if (deliveryMethodsEnabled) deliveryMethod else null,
-                                deliveryMobile = binding.mobile.text.toString(),
-                                deliveryNotes = binding.notes.text.toString()
-                            )
-                        )
-                    }
-                    AGRI_CODE -> {
-                        paymentViewModel.getPaymentInfo(
-                            PaymentAgriBody(
-                                serviceCode = serviceCode,
-                                serviceActionCode = serviceActionCode,
-                                paymentMethod = paymentMethod,
-                                deliveryMethod = if (deliveryMethodsEnabled) deliveryMethod else null,
-                                membershipId = sharedPreferences.membershipId.toInt(),
-                                deliveryMobile = binding.mobile.text.toString(),
-                                deliveryNotes = binding.notes.text.toString()
-                            )
-                        )
-                    }
-                    MORSHEDIN_CODE -> {
-                        if (deliveryMethod == deliveryMethodHomeId) {
-                            paymentViewModel.getPaymentInfo(
-                                PaymentMorshedinBody(
-                                    serviceCode = serviceCode,
-                                    serviceActionCode = serviceActionCode,
-                                    paymentMethod = paymentMethod,
-                                    address = address,
-                                    membershipId = sharedPreferences.membershipId.toInt(),
-                                    deliveryMethod = deliveryMethodHomeId,
-                                    deliveryMobile = binding.mobile.text.toString(),
-                                    deliveryNotes = binding.notes.text.toString()
-                                )
-                            )
-                        } else {
-                            paymentViewModel.getPaymentInfo(
-                                PaymentMorshedinBody(
-                                    serviceCode = serviceCode,
-                                    serviceActionCode = serviceActionCode,
-                                    paymentMethod = paymentMethod,
-                                    membershipId = sharedPreferences.membershipId.toInt(),
-                                    branch = entityBranch,
-                                    deliveryMethod = deliveryMethodBranchId,
-                                    deliveryMobile = binding.mobile.text.toString(),
-                                    deliveryNotes = binding.notes.text.toString()
-                                )
-                            )
-                        }
-
-                    }
-                }
-
-            } else {
-                verifyPhone()
-            }
+//            if (sharedPreferences.isPhoneVerified) {
+//                binding.btnNext.isEnabled = false
+//
+//                when (sharedPreferences.code) {
+//                    NATURAL_THERAPY_CODE -> {
+//                        paymentViewModel.getPaymentInfo(
+//                            PaymentNaturalBody(
+//                                serviceCode = serviceCode,
+//                                serviceActionCode = serviceActionCode,
+//                                paymentMethod = paymentMethod,
+//                                address = address,
+//                                deliveryMethod = if (deliveryMethodsEnabled) deliveryMethod else null,
+//                                deliveryMobile = binding.mobile.text.toString(),
+//                                deliveryNotes = binding.notes.text.toString()
+//                            )
+//                        )
+//                    }
+//                    AGRI_CODE -> {
+//                        paymentViewModel.getPaymentInfo(
+//                            PaymentAgriBody(
+//                                serviceCode = serviceCode,
+//                                serviceActionCode = serviceActionCode,
+//                                paymentMethod = paymentMethod,
+//                                deliveryMethod = if (deliveryMethodsEnabled) deliveryMethod else null,
+//                                membershipId = sharedPreferences.membershipId.toInt(),
+//                                deliveryMobile = binding.mobile.text.toString(),
+//                                deliveryNotes = binding.notes.text.toString()
+//                            )
+//                        )
+//                    }
+//                    MORSHEDIN_CODE -> {
+//                        if (deliveryMethod == deliveryMethodHomeId) {
+//                            paymentViewModel.getPaymentInfo(
+//                                PaymentMorshedinBody(
+//                                    serviceCode = serviceCode,
+//                                    serviceActionCode = serviceActionCode,
+//                                    paymentMethod = paymentMethod,
+//                                    address = address,
+//                                    membershipId = sharedPreferences.membershipId.toInt(),
+//                                    deliveryMethod = deliveryMethodHomeId,
+//                                    deliveryMobile = binding.mobile.text.toString(),
+//                                    deliveryNotes = binding.notes.text.toString()
+//                                )
+//                            )
+//                        } else {
+//                            paymentViewModel.getPaymentInfo(
+//                                PaymentMorshedinBody(
+//                                    serviceCode = serviceCode,
+//                                    serviceActionCode = serviceActionCode,
+//                                    paymentMethod = paymentMethod,
+//                                    membershipId = sharedPreferences.membershipId.toInt(),
+//                                    branch = entityBranch,
+//                                    deliveryMethod = deliveryMethodBranchId,
+//                                    deliveryMobile = binding.mobile.text.toString(),
+//                                    deliveryNotes = binding.notes.text.toString()
+//                                )
+//                            )
+//                        }
+//
+//                    }
+//                }
+//
+//            } else {
+//                verifyPhone()
+//            }
         }
     }
 
     private fun handleDeliveryMethods(deliveryMethods: List<DeliveryMethod>) {
 
         if (deliveryMethods.isEmpty()) {
-            binding.deliveryFees.visibility = View.GONE
-            binding.deliveryFeesValue.visibility = View.GONE
+//            binding.deliveryFees.visibility = View.GONE
+//            binding.deliveryFeesValue.visibility = View.GONE
 //            binding.fees.visibility = View.GONE
             return
         }
 
         deliveryMethodsEnabled = true
         if (deliveryMethods.any { it.type == "Home" }) {
-            setDeliveryViewsVisible()
-            binding.rbHome.visibility = View.VISIBLE
+//            setDeliveryViewsVisible()
+//            binding.rbHome.visibility = View.VISIBLE
             deliveryMethodHomeId = deliveryMethods.filter { it.type == "Home" }[0].id
             deliveryMethodHomePrice = deliveryMethods.filter { it.type == "Home" }[0].price
         }
 
         if (deliveryMethods.any { it.type == "Branch" }) {
-            setDeliveryViewsVisible()
-            binding.rbBranches.visibility = View.VISIBLE
+//            setDeliveryViewsVisible()
+//            binding.rbBranches.visibility = View.VISIBLE
             deliveryMethodBranchId = deliveryMethods.filter { it.type == "Branch" }[0].id
             deliveryMethodBranchPrice = deliveryMethods.filter { it.type == "Branch" }[0].price
         }
 
     }
 
-    private fun setDeliveryViewsVisible() {
-        binding.tvDeliveryMethod.visibility = View.VISIBLE
-        binding.deliveryInfo.visibility = View.VISIBLE
-        binding.mobile.visibility = View.VISIBLE
-    }
+//    private fun setDeliveryViewsVisible() {
+//        binding.tvDeliveryMethod.visibility = View.VISIBLE
+//        binding.deliveryInfo.visibility = View.VISIBLE
+//        binding.mobile.visibility = View.VISIBLE
+//    }
 
     private fun createRadioButton(gatewaysData: List<GatewaysData>) {
         val rg = RadioGroup(this)
@@ -398,30 +398,30 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             rb.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
                     paymentMethod = item.name
-                    when (paymentMethod) {
-                        "Opay Card" -> {
-                            binding.paymentLogo.visibility = View.VISIBLE
-                            binding.paymentLogo.setImageResource(R.drawable.visa)
-                        }
-                        "Opay Code" -> {
-                            binding.paymentLogo.visibility = View.VISIBLE
-                            binding.paymentLogo.setImageResource(R.drawable.opay)
-                        }
-                        else -> {
-                            binding.paymentLogo.visibility = View.GONE
-                        }
-                    }
+//                    when (paymentMethod) {
+//                        "Opay Card" -> {
+//                            binding.paymentLogo.visibility = View.VISIBLE
+//                            binding.paymentLogo.setImageResource(R.drawable.visa)
+//                        }
+//                        "Opay Code" -> {
+//                            binding.paymentLogo.visibility = View.VISIBLE
+//                            binding.paymentLogo.setImageResource(R.drawable.opay)
+//                        }
+//                        else -> {
+//                            binding.paymentLogo.visibility = View.GONE
+//                        }
+//                    }
                     totalAmount = paymentViewModel.payment.value?.data?.receipt?.total_price!!
                         .filter { it.gateway == item.name }[0].price.toInt()
                     paymentFees = paymentViewModel.payment.value?.data?.receipt?.total_price!!
                         .filter { it.gateway == item.name }[0].fees.toInt()
-                    updateTotal()
+//                    updateTotal()
                 }
             }
             rb.setPadding(20, 20, 20, 20)
             rg.addView(rb)
         }
-        binding.llMainLayout.addView(rg)
+//        binding.llMainLayout.addView(rg)
     }
 
     private fun verifyPhone() {
@@ -477,18 +477,18 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 //                "${(totalAmount + deliveryFees)}  ${resources.getString(R.string.egp)}"
 //        }
 //    }
-
-    private fun updateTotal() {
-        if (sharedPreferences.code == MORSHEDIN_CODE) {
-            binding.totValue.text = "${(totalAmount + deliveryFees)}  ${resources.getString(R.string.egp)}"
-        }else{
-            binding.totValue.text = "$totalAmount  ${resources.getString(R.string.egp)}"
-        }
-
-        binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
-        binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)} يتم تحصيلها عند الاستلام"
-
-    }
+//
+//    private fun updateTotal() {
+//        if (sharedPreferences.code == MORSHEDIN_CODE) {
+//            binding.totValue.text = "${(totalAmount + deliveryFees)}  ${resources.getString(R.string.egp)}"
+//        }else{
+//            binding.totValue.text = "$totalAmount  ${resources.getString(R.string.egp)}"
+//        }
+//
+//        binding.paymentFeesValue.text = "$paymentFees  ${resources.getString(R.string.egp)}"
+//        binding.deliveryFeesValue.text = "$deliveryFees  ${resources.getString(R.string.egp)} يتم تحصيلها عند الاستلام"
+//
+//    }
 
     private fun showDialog(message: String) {
 

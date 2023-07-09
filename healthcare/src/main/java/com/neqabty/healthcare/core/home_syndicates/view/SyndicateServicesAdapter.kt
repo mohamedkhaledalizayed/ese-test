@@ -48,17 +48,17 @@ class SyndicateServicesAdapter: RecyclerView.Adapter<SyndicateServicesAdapter.Vi
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         val item = items[position]
-        Picasso.get()
-            .load(item.name)
-            .into(viewHolder.binding.ivIcon, object : Callback {
-                override fun onSuccess() {
-//                    viewHolder.binding.imageProgress.hide()
-                }
-
-                override fun onError(e: Exception?) {
-//                    viewHolder.binding.imageProgress.hide()
-                }
-            })
+//        Picasso.get()
+//            .load(item.name)
+//            .into(viewHolder.binding.ivIcon, object : Callback {
+//                override fun onSuccess() {
+////                    viewHolder.binding.imageProgress.hide()
+//                }
+//
+//                override fun onError(e: Exception?) {
+////                    viewHolder.binding.imageProgress.hide()
+//                }
+//            })
 
         viewHolder.binding.tvName.text = item.name
         viewHolder.binding.llHolder.setOnClickListener {

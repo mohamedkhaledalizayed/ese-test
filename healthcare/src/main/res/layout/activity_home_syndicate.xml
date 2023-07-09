@@ -22,7 +22,7 @@
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/margin_toolbar_top_xx"
-        android:layout_marginHorizontal="@dimen/margin_large"
+        android:layout_marginHorizontal="@dimen/_16sdp"
         android:padding="@dimen/margin_small"
         android:src="@drawable/ic_syndicate_logo"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +69,7 @@
         android:id="@+id/nsv_main"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/margin_extra_large"
+        android:layout_marginHorizontal="@dimen/_16sdp"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_small"
         app:layout_constraintBottom_toTopOf="@id/bnv_syndicates_home"
@@ -120,14 +120,14 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:fontFamily="@font/hanimation_regular"
                     android:id="@+id/tv_contact_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_medium"
                     android:text="مريم الفولي"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
+                    android:textSize="@dimen/_12ssp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_contact_logo" />
 
@@ -155,15 +155,40 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_balance_title" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
+            <RelativeLayout
                 android:id="@+id/iv_contact_subscribe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                android:scaleType="fitXY"
-                android:src="@drawable/contact_subscribe"
                 android:visibility="invisible"
-                app:layout_constraintTop_toBottomOf="@id/cl_contact_holder" />
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/rounded_white_bg"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/cl_contact_holder">
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ticket_discount"
+                    android:layout_alignParentStart="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="الاشتراك في خدمة التقسيط"
+                    android:layout_toEndOf="@id/icon"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:fontFamily="@font/hanimation_regular"
+                    android:textColor="@color/black"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/curved_arrow_down_circle"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/iv_contact_qr"
@@ -237,107 +262,93 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/ll_pharmacy"
+                            android:layout_width="@dimen/_85sdp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_small"
-                            android:elevation="@dimen/_4sdp"
-                            app:cardCornerRadius="@dimen/_4sdp">
+                            android:paddingVertical="@dimen/_10sdp"
+                            android:background="@drawable/chefaa_icons_bg"
+                            android:orientation="vertical"
+                            android:gravity="center">
 
-                            <LinearLayout
-                                android:id="@+id/ll_pharmacy"
-                                android:layout_width="@dimen/_85sdp"
+                            <ImageView
+                                android:id="@+id/iv_pharmacy"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:gravity="center">
+                                android:layout_margin="@dimen/margin_medium"
+                                android:scaleType="center"
+                                android:src="@drawable/ic_services_online_pharmacy" />
 
-                                <ImageView
-                                    android:id="@+id/iv_pharmacy"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:scaleType="center"
-                                    android:src="@drawable/ic_services_online_pharmacy" />
+                            <TextView
+                                android:id="@+id/tv_pharmacy"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_medium"
+                                android:text="@string/ph_online"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_small" />
 
-                                <TextView
-                                    android:id="@+id/tv_pharmacy"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:text="@string/ph_online"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/text_size_small" />
+                        </LinearLayout>
 
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/ll_doctors_reservation"
+                            android:layout_width="@dimen/_85sdp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_small"
-                            android:elevation="@dimen/_4sdp"
-                            app:cardCornerRadius="@dimen/_4sdp">
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:paddingVertical="@dimen/_10sdp"
+                            android:background="@drawable/chefaa_icons_bg"
 
-                            <LinearLayout
-                                android:id="@+id/ll_doctors_reservation"
-                                android:layout_width="@dimen/_85sdp"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/iv_doctors_reservation"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:gravity="center">
+                                android:layout_margin="@dimen/margin_medium"
+                                android:scaleType="center"
+                                android:src="@drawable/ic_services_reservation" />
 
-                                <ImageView
-                                    android:id="@+id/iv_doctors_reservation"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:scaleType="center"
-                                    android:src="@drawable/ic_services_reservation" />
+                            <TextView
+                                android:id="@+id/tv_doctors_reservation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_medium"
+                                android:text="@string/doctor"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_small" />
 
-                                <TextView
-                                    android:id="@+id/tv_doctors_reservation"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:text="@string/doctor"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/text_size_small" />
+                        </LinearLayout>
 
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/ll_online_consultation"
+                            android:layout_width="@dimen/_85sdp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_small"
-                            android:elevation="@dimen/_4sdp"
-                            app:cardCornerRadius="@dimen/_4sdp">
+                            android:paddingVertical="@dimen/_10sdp"
+                            android:background="@drawable/chefaa_icons_bg"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:orientation="vertical"
+                            android:gravity="center">
 
-                            <LinearLayout
-                                android:id="@+id/ll_online_consultation"
-                                android:layout_width="@dimen/_85sdp"
+                            <ImageView
+                                android:id="@+id/iv_online_consultation"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:gravity="center">
+                                android:layout_margin="@dimen/margin_medium"
+                                android:scaleType="center"
+                                android:src="@drawable/ic_services_online_consultation" />
 
-                                <ImageView
-                                    android:id="@+id/iv_online_consultation"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:scaleType="center"
-                                    android:src="@drawable/ic_services_online_consultation" />
+                            <TextView
+                                android:id="@+id/tv_online_consultation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_medium"
+                                android:text="@string/consl"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_small" />
 
-                                <TextView
-                                    android:id="@+id/tv_online_consultation"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="@dimen/margin_medium"
-                                    android:text="@string/consl"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/text_size_small" />
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
+                        </LinearLayout>
                     </LinearLayout>
 
                 </HorizontalScrollView>

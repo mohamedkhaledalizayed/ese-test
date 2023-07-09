@@ -1,45 +1,86 @@
 package com.neqabty.healthcare.mega.payment.view.selectservice
 
-import android.content.Context
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.TextView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.mega.payment.domain.entity.serviceactions.ServiceActionsEntity
+import kotlin.collections.ArrayList
+import android.content.Context
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.TextView
 
+class ServiceActionsAdapter(context: Context, courseModelArrayList: MutableList<ServiceActionsEntity?>) :
+    ArrayAdapter<ServiceActionsEntity?>(context, 0, courseModelArrayList) {
 
-class ServiceActionsAdapter(var context: Context, var syndicatesList: MutableList<ServiceActionsEntity>) :
-    BaseAdapter() {
-    private var inflter: LayoutInflater? =null
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
-    override fun getCount(): Int {
-        return syndicatesList.size
-    }
-
-    override fun getItem(i: Int): ServiceActionsEntity {
-        return syndicatesList[i]
-    }
-
-    override fun getItemId(i: Int): Long {
-        return 0
-    }
-
-    override fun getView(i: Int, view: View?, viewGroup: ViewGroup): View {
-
-        if (inflter == null){
-            inflter = LayoutInflater.from(context)
+        var listitemView = convertView
+        if (listitemView == null) {
+            // Layout Inflater inflates each item to be displayed in GridView.
+            listitemView = LayoutInflater.from(context).inflate(R.layout.service_action_layout, parent, false)
         }
-        var view: View = inflter!!.inflate(R.layout.spinner_item, null)
 
-        val names = view.findViewById<View>(R.id.textView) as TextView
-        names.text = syndicatesList[i].name
+        val item = getItem(position)
+        val serviceName = listitemView!!.findViewById<TextView>(R.id.service_name)
 
-        return view
-    }
-
-    init {
-
+        serviceName.text = item?.name
+        return listitemView
     }
 }
+
+//class ServiceActionsAdapter: RecyclerView.Adapter<ServiceActionsAdapter.ViewHolder>() {
+//
+//    private val items: MutableList<ServiceActionsEntity> = ArrayList()
+//    private var layoutInflater: LayoutInflater? = null
+//
+//    var onItemClickListener: OnItemClickListener? = null
+//
+//    override fun onCreateViewHolder(parent: ViewGroup, i: Int): ViewHolder {
+//
+//        if (layoutInflater == null) {
+//            layoutInflater = LayoutInflater.from(parent.context)
+//        }
+//
+//        val binding: ServiceActionLayoutBinding =
+//            DataBindingUtil.inflate(layoutInflater!!, R.layout.service_action_layout, parent, false)
+//
+//        return ViewHolder(
+//            binding
+//        )
+//    }
+//
+//    @SuppressLint("ResourceAsColor")
+//    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+//        val item = items[position]
+//
+//        viewHolder.binding.serviceName.text = item.name
+//        viewHolder.binding.root.setOnClickListener {
+//            onItemClickListener?.setOnDeleteFollowerListener(item)
+//        }
+//    }
+//
+//    override fun getItemCount() = items.size
+//
+//    fun submitList(newItems: List<ServiceActionsEntity>) {
+//        clear()
+//        newItems.let {
+//            items.addAll(it)
+//            notifyDataSetChanged()
+//        }
+//    }
+//
+//    @Suppress("unused")
+//    fun clear() {
+//        items.clear()
+//        notifyDataSetChanged()
+//    }
+//
+//    interface OnItemClickListener {
+//            fun setOnDeleteFollowerListener(service: ServiceActionsEntity)
+//    }
+//
+//    class ViewHolder(val binding: ServiceActionLayoutBinding) :
+//        RecyclerView.ViewHolder(binding.root)
+//}

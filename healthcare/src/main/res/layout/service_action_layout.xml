@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:id="@+id/ll_holder"
-        android:layout_width="@dimen/_85sdp"
-        android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/_10sdp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_pharmacy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/chefaa_icons_bg"
+        android:gravity="center"
         android:orientation="vertical"
-        android:gravity="center">
+        android:paddingVertical="@dimen/_10sdp">
 
         <ImageView
-            android:id="@+id/iv_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_medium"
             android:scaleType="center"
-            android:src="@drawable/ic_services_subscription" />
+            android:src="@drawable/ic_services_online_pharmacy" />
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/service_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_medium"
-            android:text="@string/subscription"
+            android:text="@string/ph_online"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small" />
 

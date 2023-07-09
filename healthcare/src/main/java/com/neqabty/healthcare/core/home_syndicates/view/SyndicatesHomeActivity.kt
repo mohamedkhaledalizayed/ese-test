@@ -13,6 +13,7 @@ import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.contact_providers.view.ContactProvidersActivity
+import com.neqabty.healthcare.commen.invoices.view.InvoicesActivity
 import com.neqabty.healthcare.commen.notification.NotificationsActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.commen.syndicateservices.domain.entity.SyndicateServiceEntity
@@ -162,7 +163,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
                     true
                 }
                 R.id.navigation_payments -> {
-                    val intent = Intent(this, PaymentsActivity::class.java)
+                    val intent = Intent(this, InvoicesActivity::class.java)
                     startActivity(intent)
                     true
                 }
@@ -291,6 +292,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
             override fun setOnItemClickListener(item: SyndicateServiceEntity) {
                 val intent = Intent(this@SyndicatesHomeActivity, PaymentsActivity::class.java)
                 intent.putExtra("id", item.code)
+                intent.putExtra("name", item.name)
                 startActivity(intent)
             }
         }
