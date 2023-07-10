@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.commen.packages.addfollowers.view
+package com.neqabty.healthcare.commen.mypackages.addfollower.view
 
 
 import android.Manifest
@@ -16,21 +16,19 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.neqabty.healthcare.commen.packages.subscription.data.model.Followers
-import com.neqabty.healthcare.core.data.Constants.listOfFollowers
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.core.utils.isNationalIdValid
-import com.neqabty.healthcare.databinding.ActivityAddFollowersBinding
+import com.neqabty.healthcare.R
+import com.neqabty.healthcare.databinding.ActivityAddFollowerBinding
+import com.neqabty.healthcare.commen.mypackages.addfollower.data.model.AddFollowerBody
+import com.neqabty.healthcare.commen.mypackages.addfollower.data.model.Follower
 import com.neqabty.healthcare.commen.relation.domain.entity.RelationEntityList
-import com.neqabty.healthcare.commen.mypackages.addfollower.view.RelationsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 
 @AndroidEntryPoint
-class AddFollowersActivity : BaseActivity<ActivityAddFollowersBinding>() {
-
-    override fun getViewBinding() = ActivityAddFollowersBinding.inflate(layoutInflater)
+class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
 
     private var REQUEST_CODE = 0
     private var followerUri: Uri? = null
@@ -38,11 +36,12 @@ class AddFollowersActivity : BaseActivity<ActivityAddFollowersBinding>() {
     private lateinit var relation: String
     private var relationsList: List<RelationEntityList>? = null
     private val relationsAdapter = RelationsAdapter()
-    private val profileViewModel: AddFollowerViewModel by viewModels()
+    private val addFollowerViewModel: AddFollowerViewModel by viewModels()
+    override fun getViewBinding() = ActivityAddFollowerBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(title = "تسجيل الاشتراك")
+        setupToolbar(titleResId = R.string.add_new_member)
 
         binding.spRelations.adapter = relationsAdapter
 
@@ -57,8 +56,8 @@ class AddFollowersActivity : BaseActivity<ActivityAddFollowersBinding>() {
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
         }
 
-        profileViewModel.getRelations()
-        profileViewModel.relations.observe(this) {
+        addFollowerViewModel.getRelations()
+        addFollowerViewModel.relations.observe(this) {
             it.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
@@ -86,21 +85,55 @@ class AddFollowersActivity : BaseActivity<ActivityAddFollowersBinding>() {
             }
         }
 
+        addFollowerViewModel.addFollower.observe(this){
+            it.let { resource ->
+
+                when(resource.status){
+                    Status.LOADING ->{
+                        binding.container.visibility = View.GONE
+                        binding.progressCircular.visibility = View.VISIBLE
+                    }
+                    Status.SUCCESS ->{
+                        binding.progressCircular.visibility = View.GONE
+                        binding.container.visibility = View.VISIBLE
+
+                        if (resource.data!!.status){
+                            Toast.makeText(this@AddFollowerActivity, "تم إضافة التابع بنجاح.", Toast.LENGTH_LONG).show()
+                            finish()
+                        }else{
+                            Toast.makeText(this@AddFollowerActivity, resource.data!!.message, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                    Status.ERROR ->{
+                        binding.progressCircular.visibility = View.GONE
+                        binding.container.visibility = View.VISIBLE
+                        Toast.makeText(this@AddFollowerActivity, resource.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+
+            }
+        }
+
     }
 
     private fun addFollower(){
 
-        val follower = Followers(
+        val follower = Follower(
             image = getRealPath(followerUri!!)!!.toBase64(),
             name = binding.etFullName.text.toString(),
-            national_id = binding.etNational.text.toString(),
-            relation_type = relationTypeId
+            nationalId = binding.etNational.text.toString(),
+            relationType = relationTypeId
         )
 
-
-        listOfFollowers.add(follower)
-        finish()
-
+        val list = mutableListOf<Follower>()
+        list.add(follower)
+        addFollowerViewModel.addFollower(
+            AddFollowerBody(
+            packageId = intent.getStringExtra("packageId")!!,
+            subscriberId = intent.getStringExtra("subscriberId")!!, mobile = sharedPreferences.mobile,
+            followers = list
+        )
+        )
     }
 
     fun addFollowerImage(view: View) {
@@ -108,6 +141,8 @@ class AddFollowersActivity : BaseActivity<ActivityAddFollowersBinding>() {
         checkPermissionsAndOpenFilePicker()
     }
     fun addNewFollower(view: View) {
+
+
         if (followerUri == null){
             Toast.makeText(this, "من فضلك اختر صورة.", Toast.LENGTH_LONG).show()
             return
@@ -203,6 +238,5 @@ class AddFollowersActivity : BaseActivity<ActivityAddFollowersBinding>() {
             }
         }
     }
-
 
 }

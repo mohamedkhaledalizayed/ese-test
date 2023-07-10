@@ -1,12 +1,13 @@
-package com.neqabty.healthcare.commen.packages.addfollowers.view
+package com.neqabty.healthcare.commen.mypackages.subscriptiondetails.view
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
-import com.neqabty.healthcare.commen.relation.domain.entity.RelationEntityList
-import com.neqabty.healthcare.commen.relation.domain.usecases.RelationUseCase
+import com.neqabty.healthcare.commen.mypackages.packages.domain.entity.ProfileEntity
+import com.neqabty.healthcare.commen.mypackages.packages.domain.usecases.GetMyPackagesUseCase
+import com.neqabty.healthcare.commen.mypackages.subscriptiondetails.domain.usecases.DeleteFollowerUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,21 +15,39 @@ import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
-class AddFollowerViewModel @Inject constructor(private val relationUseCase: RelationUseCase): ViewModel() {
+class SubscriptionDetailsViewModel @Inject constructor(private val deleteFollowerUseCase: DeleteFollowerUseCase,
+                                                       private val getMyPackagesUseCase: GetMyPackagesUseCase
+): ViewModel() {
 
-    val relations = MutableLiveData<Resource<List<RelationEntityList>>>()
-    fun getRelations(){
+    val myPackages = MutableLiveData<Resource<ProfileEntity>>()
+    fun getMyPackages(phone: String){
         viewModelScope.launch(Dispatchers.IO){
-            relations.postValue(Resource.loading(data = null))
+            myPackages.postValue(Resource.loading(data = null))
 
             try {
-                relationUseCase.build()
-                    .collect { relations.postValue(Resource.success(data = it)) }
+                getMyPackagesUseCase.build(phone)
+                    .collect { myPackages.postValue(Resource.success(data = it)) }
             }catch (e: Throwable){
-                relations.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+                myPackages.postValue(Resource.error(data = null, message = handleError(e)))
             }
         }
     }
+
+    val followerStatus = MutableLiveData<Resource<Boolean>>()
+    fun deleteFollower(followerId: Int, mobile: String, subscriberId: String){
+        viewModelScope.launch(Dispatchers.IO){
+            followerStatus.postValue(Resource.loading(data = null))
+
+            try {
+                deleteFollowerUseCase.build(followerId, mobile, subscriberId).collect {
+                    followerStatus.postValue(Resource.success(data = it))
+                }
+            }catch (e: Throwable){
+                followerStatus.postValue(Resource.error(data = null, message = AppUtils().handleError(e)))
+            }
+        }
+    }
+
 
     fun handleError(throwable: Throwable): String {
         return if (throwable is HttpException) {

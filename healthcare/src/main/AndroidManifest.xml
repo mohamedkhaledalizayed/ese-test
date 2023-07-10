@@ -52,7 +52,7 @@
             android:name=".commen.invoices.view.InvoicesActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.mypackages.presentation.SubscriptionDetailsActivity"
+            android:name=".commen.mypackages.subscriptiondetails.view.SubscriptionDetailsActivity"
             android:exported="false" />
 
         <meta-data
@@ -126,7 +126,7 @@
             android:name=".commen.landing.view.LandingPageActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.mypackages.presentation.AddFollowerActivity"
+            android:name=".commen.mypackages.addfollower.view.AddFollowerActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.payment.view.SehaPaymentActivity"
@@ -212,7 +212,7 @@
             android:name=".commen.packages.packageslist.view.PackagesActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.mypackages.presentation.MyPackagesActivity"
+            android:name=".commen.mypackages.packages.view.MyPackagesActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.suggestions.presentation.SuggestionsActivity"
