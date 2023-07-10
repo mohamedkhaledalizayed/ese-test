@@ -14,7 +14,7 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.PushNotificationsWrapper
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityProfileMegaBinding
-import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.MyPackagesActivity
+import com.neqabty.healthcare.commen.mypackages.packages.view.MyPackagesActivity
 import com.neqabty.healthcare.sustainablehealth.suggestions.presentation.SuggestionsActivity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint

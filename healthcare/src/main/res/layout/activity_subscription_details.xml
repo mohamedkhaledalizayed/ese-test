@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/margin_large"
-    tools:context=".sustainablehealth.mypackages.presentation.SubscriptionDetailsActivity">
+    tools:context=".commen.mypackages.subscriptiondetails.view.SubscriptionDetailsActivity">
 
     <include
         android:id="@+id/layout_toolbar"
