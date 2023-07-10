@@ -12,7 +12,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.core.packages.FollowersAdapter
+import com.neqabty.healthcare.commen.mypackages.FollowersAdapter
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySubscriptionDetailsBinding

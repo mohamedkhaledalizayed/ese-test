@@ -1,7 +1,7 @@
 package com.neqabty.healthcare.sustainablehealth.mypackages.data.repository
 
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.model.packages.DetailModel
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.DetailEntity
+import com.neqabty.healthcare.commen.packages.packageslist.data.model.DetailModel
+import com.neqabty.healthcare.commen.packages.packageslist.domain.entity.DetailEntity
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.AddFollowerBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.DeleteFollowerBody
 import com.neqabty.healthcare.sustainablehealth.mypackages.data.model.addfollower.AddFollowerModel

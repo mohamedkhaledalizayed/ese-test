@@ -11,7 +11,7 @@ import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.core.data.Constants
-import com.neqabty.healthcare.core.packages.PackagesActivity
+import com.neqabty.healthcare.commen.packages.packageslist.view.PackagesActivity
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status

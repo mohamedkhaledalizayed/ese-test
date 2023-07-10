@@ -1,6 +1,6 @@
 package com.neqabty.healthcare.sustainablehealth.mypackages.domain.entity.profile
 
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.DetailEntity
+import com.neqabty.healthcare.commen.packages.packageslist.domain.entity.DetailEntity
 
 
 data class PackageEntity(

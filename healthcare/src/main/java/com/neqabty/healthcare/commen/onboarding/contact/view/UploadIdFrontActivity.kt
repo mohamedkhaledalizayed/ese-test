@@ -19,8 +19,8 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.onboarding.contact.data.source.OcrData
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.FileUtils
+import com.neqabty.healthcare.core.utils.PhotoUI
 import com.neqabty.healthcare.databinding.ActivityUploadIdFrontBinding
-import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.PhotoUI
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody

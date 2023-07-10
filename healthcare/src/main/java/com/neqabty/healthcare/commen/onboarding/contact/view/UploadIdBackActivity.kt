@@ -19,11 +19,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.onboarding.contact.data.source.OcrData
+import com.neqabty.healthcare.commen.packages.subscription.view.PhotoUI
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.FileUtils
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityUploadIdBackBinding
-import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.PhotoUI
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -215,11 +215,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
                 val photoUI = saveImage(bitmap)
 
                 val file = File(photoUI.path, photoUI.name)
-                OcrData.back = PhotoUI(
-                    "",
-                    "",
-                    data.data
-                ) //Base64.encodeToString(file.readBytes(), Base64.DEFAULT)
+            //Base64.encodeToString(file.readBytes(), Base64.DEFAULT)
                 when (REQUEST_CODE) {
                     1001 -> {
                         nationalIdBack = photoUI

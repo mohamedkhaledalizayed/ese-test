@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:paddingBottom="@dimen/margin_large"
-    tools:context=".core.packages.PackageDetailsActivity">
+    tools:context=".commen.packages.packageslist.view.PackageDetailsActivity">
 
     <include
         android:id="@+id/layout_toolbar"

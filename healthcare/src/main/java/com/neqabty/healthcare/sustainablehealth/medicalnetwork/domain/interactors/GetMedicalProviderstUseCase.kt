@@ -3,7 +3,7 @@ package com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.interacto
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.model.SearchBody
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.MedicalProviderEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.area.AreaListEntity
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.PackagesEntity
+import com.neqabty.healthcare.commen.packages.packageslist.domain.entity.PackagesEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.ProvidersEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.repository.SearchRepository
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.mappers.toFiltersUi
@@ -29,7 +29,4 @@ class GetMedicalProviderstUseCase @Inject constructor(private val searchReposito
         return searchRepository.getArea(id)
     }
 
-    fun getPackages(code: String): Flow<List<PackagesEntity>> {
-        return searchRepository.getPackages(code)
-    }
 }

@@ -3,7 +3,7 @@ package com.neqabty.healthcare.sustainablehealth.mypackages.data.model.profile
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.model.packages.DetailModel
+import com.neqabty.healthcare.commen.packages.packageslist.data.model.DetailModel
 
 @Keep
 data class Package(

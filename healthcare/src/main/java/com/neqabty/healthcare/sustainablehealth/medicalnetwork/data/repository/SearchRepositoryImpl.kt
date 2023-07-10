@@ -5,14 +5,14 @@ import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.model.Search
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.model.area.AreaModel
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.model.mappers.toFiltersEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.model.mappers.toMedicalProviderEntity
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.model.packages.DetailModel
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.model.packages.PackageModel
+import com.neqabty.healthcare.commen.packages.packageslist.data.model.DetailModel
+import com.neqabty.healthcare.commen.packages.packageslist.data.model.PackageModel
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.data.source.SearchDS
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.MedicalProviderEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.area.AreaListEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.filter.FiltersEntity
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.DetailEntity
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.PackagesEntity
+import com.neqabty.healthcare.commen.packages.packageslist.domain.entity.DetailEntity
+import com.neqabty.healthcare.commen.packages.packageslist.domain.entity.PackagesEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.ProvidersEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.mappers.toProvidersEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.repository.SearchRepository
@@ -46,44 +46,6 @@ class SearchRepositoryImpl @Inject constructor(private val searchDS: SearchDS) :
         }
     }
 
-    override fun getPackages(code: String): Flow<List<PackagesEntity>> {
-        return flow {
-            emit(searchDS.getPackages(code).map { it.toPackageEntity() })
-        }
-    }
-}
-
-private fun PackageModel.toPackageEntity(): PackagesEntity{
-    return PackagesEntity(
-        description = description,
-        extension = extension,
-        details = details.map { it.toDetailEntity() },
-        followerMultiRelation = followerMultiRelation,
-        hasFollower = hasFollower,
-        hint = hint,
-        id = id,
-        maxFollower = maxFollower,
-        name = name,
-        price = price,
-        vat = vat,
-        total = total,
-        recommended = recommended,
-        serviceActionCode = serviceActionCode,
-        serviceCode = serviceCode,
-        shortDescription = shortDescription,
-        insuranceAmount = insuranceAmount,
-        neddedInfo = neddedInfo,
-        targetGroups = targetGroups
-    )
-}
-
-private fun DetailModel.toDetailEntity(): DetailEntity{
-    return DetailEntity(
-        cardId = cardId,
-        description = description,
-        id = id,
-        title = title
-    )
 }
 
 private fun AreaModel.toAreaListEntity(): AreaListEntity{

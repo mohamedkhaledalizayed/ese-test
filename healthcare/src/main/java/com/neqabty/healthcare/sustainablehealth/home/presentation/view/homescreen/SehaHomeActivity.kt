@@ -42,11 +42,11 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeBinding
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.about.AboutFragment
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.PackagesEntity
+import com.neqabty.healthcare.commen.packages.packageslist.domain.entity.PackagesEntity
+import com.neqabty.healthcare.commen.packages.subscription.view.SubscriptionActivity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.filter.FiltersViewModel
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.sustainablehealth.mypackages.presentation.MyPackagesActivity
-import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
 import com.neqabty.healthcare.sustainablehealth.suggestions.presentation.SuggestionsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog

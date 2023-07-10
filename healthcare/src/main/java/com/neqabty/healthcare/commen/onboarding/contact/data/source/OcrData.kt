@@ -1,6 +1,6 @@
 package com.neqabty.healthcare.commen.onboarding.contact.data.source
 
-import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.PhotoUI
+import com.neqabty.healthcare.core.utils.PhotoUI
 
 class OcrData {
     companion object {

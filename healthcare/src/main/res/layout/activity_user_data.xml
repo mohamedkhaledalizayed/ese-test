@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:paddingBottom="@dimen/margin_large"
+    tools:context=".commen.packages.subscription.view.UserDataActivity">
+
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/screen_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar">
+
+        <LinearLayout
+            android:id="@+id/package_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/chefaa_orders_bg"
+                android:drawableEnd="@drawable/profile_icon"
+                android:fontFamily="@font/hanimation_regular"
+                android:hint="@string/full_name"
+                android:inputType="text"
+                android:longClickable="false"
+                android:padding="@dimen/_12sdp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/secondaryText"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_national_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/chefaa_orders_bg"
+                android:drawableEnd="@drawable/national_id_icon"
+                android:fontFamily="@font/hanimation_regular"
+                android:hint="@string/national_id"
+                android:inputType="text"
+                android:longClickable="false"
+                android:padding="@dimen/_12sdp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/secondaryText"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/chefaa_orders_bg"
+                android:drawableEnd="@drawable/ic_email"
+                android:fontFamily="@font/hanimation_regular"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:longClickable="false"
+                android:padding="@dimen/_12sdp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/secondaryText"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/et_birth_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chefaa_orders_bg"
+                    android:hint="@string/birth_date"
+                    android:padding="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    android:drawableEnd="@drawable/calendar_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+            <LinearLayout
+                android:id="@+id/cl_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:weightSum="6"
+                app:layout_constraintTop_toBottomOf="@id/info"
+                >
+
+                <EditText
+                    android:id="@+id/delivery_phone"
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:layout_height="@dimen/_45sdp"
+                    android:background="@drawable/chefaa_orders_bg"
+                    android:hint="@string/delivery_phone"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textAlignment="viewStart"
+                    android:textColor="#748A9D"
+                    android:textColorHint="#748A9D"
+                    android:textSize="@dimen/_12ssp"
+                    android:inputType="phone"
+                    android:longClickable="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/ccp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/ccp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_weight="2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:ccp_autoDetectCountry="true"
+                    android:padding="@dimen/_5sdp"
+                    android:background="@drawable/chefaa_orders_bg"
+                    app:ccp_defaultLanguage="ARABIC"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:ccp_countryPreference="EG,SA,AE,KW,QA,BH"  />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/chefaa_orders_bg"
+                android:drawableEnd="@drawable/ic_location"
+                android:fontFamily="@font/hanimation_regular"
+                android:hint="@string/address"
+                android:inputType="text"
+                android:longClickable="false"
+                android:padding="@dimen/_12sdp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/secondaryText"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_job"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:background="@drawable/chefaa_orders_bg"
+                android:drawableEnd="@drawable/ic_company"
+                android:fontFamily="@font/hanimation_regular"
+                android:hint="@string/job"
+                android:inputType="text"
+                android:longClickable="false"
+                android:padding="@dimen/_12sdp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/secondaryText"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/select_btn_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="التالي"
+        android:layout_margin="@dimen/_10sdp"
+        android:textAlignment="center"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

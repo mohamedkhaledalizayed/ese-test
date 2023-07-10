@@ -13,7 +13,7 @@ import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySearchBinding
 import com.neqabty.healthcare.sustainablehealth.offers.presentation.view.offers.OffersActivity
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.packages.PackagesEntity
+import com.neqabty.healthcare.commen.packages.packageslist.domain.entity.PackagesEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.filter.FiltersViewModel
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,8 +22,8 @@ import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActi
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
+import com.neqabty.healthcare.commen.packages.subscription.view.SubscriptionActivity
 import com.neqabty.healthcare.sustainablehealth.home.presentation.view.homescreen.PackagesAdapter
-import com.neqabty.healthcare.sustainablehealth.subscribtions.presentation.view.SubscriptionActivity
 
 
 @AndroidEntryPoint

@@ -81,22 +81,19 @@
             android:name=".commen.profile.view.personalinfo.PersonalInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".core.packages.AddFollowersActivity"
+            android:name=".commen.packages.addfollowers.view.AddFollowersActivity"
             android:exported="false" />
         <activity
             android:name=".commen.notification.NotificationsActivity"
             android:exported="false" />
         <activity
-            android:name=".core.packages.PackageReceiptActivity"
+            android:name=".commen.packages.subscription.view.SubscriptionActivity"
             android:exported="false" />
         <activity
-            android:name=".core.packages.UploadBackNationalid"
+            android:name=".commen.packages.subscription.view.UserDataActivity"
             android:exported="false" />
         <activity
-            android:name=".core.packages.UploadFrontNationalid"
-            android:exported="false" />
-        <activity
-            android:name=".core.packages.PackageDetailsActivity"
+            android:name=".commen.packages.packageslist.view.PackageDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".commen.pharmacy.PharmacyActivity"
@@ -212,7 +209,7 @@
             android:name=".core.more.view.MoreActivity"
             android:exported="false" />
         <activity
-            android:name=".core.packages.PackagesActivity"
+            android:name=".commen.packages.packageslist.view.PackagesActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.mypackages.presentation.MyPackagesActivity"
@@ -245,7 +242,7 @@
             android:name=".sustainablehealth.wallet.WalletActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.subscribtions.presentation.view.SubscriptionActivity"
+            android:name=".commen.packages.subscription.view.SubscriptionActivity"
             android:exported="false" />
         <activity
             android:name=".sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity"
