@@ -23,7 +23,7 @@ import com.neqabty.healthcare.commen.packages.addfollowers.view.AddFollowersActi
 import com.neqabty.healthcare.core.data.Constants.listOfFollowers
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
-import com.neqabty.healthcare.databinding.ActivityUploadFrontNationalidBinding
+import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
 import com.neqabty.healthcare.commen.packages.packageslist.domain.entity.PackagesEntity
 import com.neqabty.healthcare.commen.packages.subscription.data.model.SubscribePostBodyRequest
 import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
@@ -35,13 +35,13 @@ import java.io.IOException
 
 
 @AndroidEntryPoint
-class SubscriptionActivity : BaseActivity<ActivityUploadFrontNationalidBinding>() {
+class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
     private var userImageUri: String? = null
     private var nationalIdFrontUri: String? = null
     private var nationalIdBackUri: String? = null
     private var mAdapter = FollowerAdapter()
     private val subscriptionViewModel: SubscriptionViewModel by viewModels()
-    override fun getViewBinding() = ActivityUploadFrontNationalidBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivitySubscriptionBinding.inflate(layoutInflater)
     private var REQUEST_CODE = 0
     private lateinit var packageDetails: PackagesEntity
     override fun onCreate(savedInstanceState: Bundle?) {
