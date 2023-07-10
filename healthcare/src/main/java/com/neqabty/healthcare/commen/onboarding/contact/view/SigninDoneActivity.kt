@@ -82,20 +82,21 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
 
 
     private fun showWaitingProgressbar() {
-        binding.progressBar.visibility = View.VISIBLE
+        binding.clProgress.visibility = View.VISIBLE
         val totalProgress = 100
-        val durationInMillis = 6000L // 1 minute in milliseconds
+        val durationInMillis = 30000L // 1 minute in milliseconds
 
         val countDownTimer = object : CountDownTimer(durationInMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val progress =
                     ((durationInMillis - millisUntilFinished) * totalProgress / durationInMillis).toInt()
                 binding.progressBar.progress = progress
+                binding.tvProgress.text = progress.toString() + "% completed"
             }
 
             override fun onFinish() {
                 binding.progressBar.progress = totalProgress
-                binding.progressBar.visibility = View.GONE
+                binding.clProgress.visibility = View.GONE
                 signinDoneViewModel.checkMemberStatus(nationalId = binding.etNationalId.text.toString())
             }
         }

@@ -11,4 +11,5 @@ interface ContactRepository {
     fun getLookups(): Flow<List<GovEntity>>
     fun submitClient(submitClientRequest: SubmitClientRequest): Flow<SubmitClientEntity>
     fun getInstallments(nationalId: String, amount: String, tenor: String): Flow<InstallmentsEntity>
+    fun submitInvoice(nationalId: String, amount: String, tenor: String): Flow<InvoiceEntity>
 }

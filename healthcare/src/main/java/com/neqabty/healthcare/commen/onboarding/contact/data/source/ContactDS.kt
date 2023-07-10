@@ -29,4 +29,8 @@ class ContactDS @Inject constructor(private val contactApi: ContactApi, private 
     suspend fun getInstallments(nationalId: String, amount: String, tenor: String): InstallmentsResponse {
         return contactApi.getInstallments(token = "token ${preferencesHelper.token}", InstallmentsRequest(nationalId, amount, tenor))
     }
+
+    suspend fun submitInvoice(nationalId: String, amount: String, tenor: String): InvoiceResponse {
+        return contactApi.submitInvoice(token = "token ${preferencesHelper.token}", InvoiceRequest(nationalId, amount, tenor))
+    }
 }

@@ -53,6 +53,16 @@ class ContactRepositoryImpl @Inject constructor(private val contactDS: ContactDS
             emit(contactDS.getInstallments(nationalId, amount, tenor).toInstallmentsEntity())
         }
     }
+
+    override fun submitInvoice(
+        nationalId: String,
+        amount: String,
+        tenor: String
+    ): Flow<InvoiceEntity> {
+        return flow {
+            emit(contactDS.submitInvoice(nationalId, amount, tenor).toInvoiceEntity())
+        }
+    }
 }
 
 private fun CheckMemberResponse.toMemberEntity(): CheckMemberEntity {
@@ -117,6 +127,12 @@ private fun SubmitClientResponse.toSubmitClientEntity(): SubmitClientEntity {
 
 private fun InstallmentsResponse.toInstallmentsEntity(): InstallmentsEntity {
     return InstallmentsEntity(
-        authorized, ocrStatus, message
+        tenor, maxTenor, instalmentValue
+    )
+}
+
+private fun InvoiceResponse.toInvoiceEntity(): InvoiceEntity {
+    return InvoiceEntity(
+        tenor, maxTenor, instalmentValue
     )
 }

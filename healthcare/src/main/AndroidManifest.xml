@@ -203,6 +203,9 @@
             android:name=".commen.contact_installments.view.ContactInstallmentsActivity"
             android:exported="false" />
         <activity
+            android:name=".commen.contact_invoice.view.ContactInvoiceActivity"
+            android:exported="false" />
+        <activity
             android:name=".core.syndicates.SyndicatesActivity"
             android:exported="false" />
         <activity

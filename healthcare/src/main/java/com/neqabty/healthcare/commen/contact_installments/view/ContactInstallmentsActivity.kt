@@ -1,36 +1,46 @@
 package com.neqabty.healthcare.commen.contact_installments.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.commen.contact_invoice.view.ContactInvoiceActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
-import com.neqabty.healthcare.databinding.ActivityContactProvidersBinding
+import com.neqabty.healthcare.databinding.ActivityContactInstallmentsBinding
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.ProvidersEntity
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.ItemsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ContactInstallmentsActivity : BaseActivity<ActivityContactProvidersBinding>() {
-    private val mAdapter = ItemsAdapter()
+class ContactInstallmentsActivity : BaseActivity<ActivityContactInstallmentsBinding>() {
     private val contactInstallmentsViewModel: ContactInstallmentsViewModel by viewModels()
 
-    override fun getViewBinding() = ActivityContactProvidersBinding.inflate(layoutInflater)
+    override fun getViewBinding() = ActivityContactInstallmentsBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setupToolbar(R.string.contact_providers)
+        setupToolbar(R.string.contact_installments)
 
         val provider = intent.getParcelableExtra<ProvidersEntity>("provider")
         observeOnInstallmentsStatus()
-        getInstallments()
+        initializeViews()
+    }
 
+    private fun initializeViews() {
+        binding.bCalculate.setOnClickListener {
+            if(binding.etAmount.text.toString().toDouble() < 500){
+                Toast.makeText(this, resources.getString(R.string.contact_minimum), Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            getInstallments()
+        }
     }
 
     private fun getInstallments() {
-        contactInstallmentsViewModel.getInstallments(sharedPreferences.nationalId, "10", "10")
+        contactInstallmentsViewModel.getInstallments(sharedPreferences.nationalId, binding.etAmount.text.toString(), "10")
     }
 
     private fun observeOnInstallmentsStatus() {
@@ -43,7 +53,12 @@ class ContactInstallmentsActivity : BaseActivity<ActivityContactProvidersBinding
                     Status.SUCCESS -> {
                         hideProgressDialog()
                         if (resource.data != null) {
-//                            mAdapter.submitList(resource.data?.toMutableList())
+                            val intent = Intent(this@ContactInstallmentsActivity, ContactInvoiceActivity::class.java)
+                            intent.putExtra("tenor", resource.data.tenor)
+                            intent.putExtra("maxTenor", resource.data.maxTenor)
+                            intent.putExtra("instalmentValue", resource.data.instalmentValue)
+                            intent.putExtra("amount", binding.etAmount.text.toString())
+                            startActivity(intent)
                         }
                     }
                     Status.ERROR -> {

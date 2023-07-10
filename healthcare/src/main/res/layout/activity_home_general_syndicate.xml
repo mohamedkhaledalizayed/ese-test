@@ -52,7 +52,8 @@
         android:layout_marginEnd="@dimen/_6sdp"
         android:src="@drawable/ic_notification"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_main"

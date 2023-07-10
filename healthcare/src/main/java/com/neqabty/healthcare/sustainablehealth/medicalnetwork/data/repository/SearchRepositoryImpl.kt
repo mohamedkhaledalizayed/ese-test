@@ -22,6 +22,12 @@ import javax.inject.Inject
 
 class SearchRepositoryImpl @Inject constructor(private val searchDS: SearchDS) :
     SearchRepository {
+    override fun getMedicalProviderDetails(id: String): Flow<ProvidersEntity> {
+        return flow {
+            emit(searchDS.getMedicalProviderDetails(id).toProvidersEntity())
+        }
+    }
+
     override fun getHealthCareProviders(): Flow<List<MedicalProviderEntity>> {
         return flow {
             emit(searchDS.getHealthCareProviders().map { it.toMedicalProviderEntity() })

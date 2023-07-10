@@ -10,6 +10,7 @@ import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.sea
 import kotlinx.coroutines.flow.Flow
 
 interface SearchRepository {
+    fun getMedicalProviderDetails(id: String): Flow<ProvidersEntity>
     fun getHealthCareProviders(): Flow<List<MedicalProviderEntity>>
     fun searchMedicalProviders(body: SearchBody): Flow<List<ProvidersEntity>>
     fun getFilters(): Flow<FiltersEntity>

@@ -13,6 +13,10 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class GetMedicalProviderstUseCase @Inject constructor(private val searchRepository: SearchRepository) {
+    fun build(id: String): Flow<ProvidersEntity> {
+        return searchRepository.getMedicalProviderDetails(id)
+    }
+
     fun build(): Flow<List<MedicalProviderEntity>> {
         return searchRepository.getHealthCareProviders()
     }

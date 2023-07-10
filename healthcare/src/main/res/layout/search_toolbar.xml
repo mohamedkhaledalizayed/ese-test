@@ -4,22 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/toolbar_bg"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="0dp"
-        android:minHeight="?attr/actionBarSize"
-        app:contentInsetEnd="0dp"
-        app:contentInsetStartWithNavigation="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_up_menu"
-        app:titleTextColor="@color/white" />
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/toolbar" />
 
     <ImageView
         android:id="@+id/filter"
@@ -27,7 +16,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar"
         android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_12sdp"
         android:layout_marginBottom="@dimen/_10sdp"
@@ -43,7 +32,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:background="@drawable/search_bg"
+        android:background="@drawable/edit_text_bg"
         android:orientation="horizontal"
         android:weightSum="5"
         app:layout_constraintTop_toTopOf="@+id/filter"
@@ -57,8 +46,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_weight="4.2"
-            android:background="@drawable/search_bg">
+            android:layout_weight="4.2">
 
 
             <EditText

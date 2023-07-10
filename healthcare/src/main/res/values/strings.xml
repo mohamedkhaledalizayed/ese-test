@@ -23,7 +23,7 @@
     <string name="back_home">رجوع للقائمة</string>
     <string name="total_">الاجمالي :</string>
     <string name="date_">التاريخ :</string>
-    <string name="search_in">ابحث في الشبكة الصحية</string>
+    <string name="search_in">ابحث في الشبكة الطبية</string>
     <string name="select_spe">اختر التخصص</string>
     <string name="covid">كوفيد -19</string>
     <string name="brain">مخ واعصاب</string>
@@ -472,7 +472,7 @@
     <string name="news_search">بحث</string>
     <string name="medical_newtwork">الشبكة الطبية</string>
     <string name="contact_benefits">اذا كنت تريد الاستفادة بخدمات كونتاكت سواء كنت عميل كونتاكت بالفعل او تريد الحصول على 5000 جنية لسداد خدماتك النقابية و الغير نقابية بالتقسيط</string>
-    <string name="contact_home_benefits">سجل واحصل على 5000 جنية كحد ائتماني \nلسدد خدماتك بالتقسيط</string>
+    <string name="contact_home_benefits">سجل واحصل على 5000 جنية كحد ائتماني \nلسداد خدماتك بالتقسيط</string>
     <string name="marital_status">الحالة الاجتماعية</string>
     <!--    <string name=""></string>-->
     <!--    <string name=""></string>-->
@@ -599,5 +599,11 @@
     <string name="fees">تكلفة الشحن يتم تحصيلها عند الاستلام</string>
     <string name="scan_qr">مسح QR كود</string>
     <string name="contact_providers">مقدمي الخدمة</string>
+    <string name="contact_installments">التقسيط</string>
+    <string name="contact_amount">المبلغ المراد تقسيطه</string>
+    <string name="contact_minimum">المبلغ المراد تقسيطه لا يقل عن 500 جنيه</string>
+    <string name="contact_calculate">احسب</string>
+    <string name="contact_monthly_installment">القسط الشهري</string>
+    <string name="contact_months">عدد الشهور</string>
 
 </resources>

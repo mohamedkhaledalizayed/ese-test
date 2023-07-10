@@ -12,6 +12,10 @@ import javax.inject.Inject
 
 class SearchDS @Inject constructor(private val searchApi: SearchApi) {
 
+    suspend fun getMedicalProviderDetails(id: String): ProvidersModel {
+        return searchApi.getMedicalProviderDetails(id).data
+    }
+
     suspend fun getHealthCareProviders(): List<MedicalProviderModel> {
         return searchApi.getMedicalProviders().data.data
     }

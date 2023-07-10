@@ -5,11 +5,11 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class InstallmentsResponse(
+data class InvoiceRequest(
+    @SerializedName("nationalId")
+    val nationalId: String,
+    @SerializedName("amount")
+    val amount: String,
     @SerializedName("tenor")
-    val tenor: String,
-    @SerializedName("max_tenor")
-    val maxTenor: String,
-    @SerializedName("instalment_value")
-    val instalmentValue: String
+    val tenor: String
 )

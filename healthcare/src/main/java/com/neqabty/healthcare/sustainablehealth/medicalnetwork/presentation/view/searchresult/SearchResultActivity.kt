@@ -21,6 +21,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 var selectedGovernorate = 0
 var selectedProfession = 0
@@ -53,7 +54,7 @@ class SearchResultActivity : BaseActivity<ActivitySearchResultBinding>(), IOnFil
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupToolbar(title = "البحث في الشبكة الصحية")
+        setupToolbar(titleResId = R.string.search_in)
 
         mLayoutManager = LinearLayoutManager(this)
         binding.itemsRecycler.layoutManager = mLayoutManager

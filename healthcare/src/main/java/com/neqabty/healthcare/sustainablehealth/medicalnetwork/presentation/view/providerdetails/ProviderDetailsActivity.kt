@@ -4,16 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.neqabty.healthcare.commen.contact_installments.view.ContactInstallmentsActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityProviderDetailsBinding
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.ProvidersEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
+    private val providerDetailsViewModel: ProviderDetailsViewModel by viewModels()
 
     private val mAdapter = ReviewsAdapter()
     override fun getViewBinding() = ActivityProviderDetailsBinding.inflate(layoutInflater)
@@ -25,7 +28,11 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
 
         val provider = intent.getParcelableExtra<ProvidersEntity>("provider")
         setupToolbar(title = "${provider?.name}")
+        observeMedicalProviderDetails()
+        providerDetailsViewModel.getProviderDetails(provider?.id.toString())
+    }
 
+    private fun initializeViews(provider: ProvidersEntity){
         if (provider?.serviceProviderType?.providerTypeEn == "Doctors"){
             binding.government.text = "سعر الكشف : ${provider.price} جنيه"
         }else{
@@ -35,7 +42,12 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
         binding.itemName.text = "${provider?.name}"
         binding.addressValue.text = "${provider?.governorate?.governorateAr}, ${provider?.area?.areaName}, ${provider?.address}"
         binding.phoneValue.text = "${provider?.phone}"
+        binding.phoneValue.text = "${provider?.phone}"
+        binding.phoneValue.visibility = if(provider?.phone.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.phone.visibility = if(provider?.phone.isNullOrEmpty()) View.GONE else View.VISIBLE
         binding.mobileValue.text = "${provider?.mobile}"
+        binding.mobileValue.visibility = if(provider?.mobile.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.mobile.visibility = if(provider?.mobile.isNullOrEmpty()) View.GONE else View.VISIBLE
 
         if (provider?.profession?.professionName.isNullOrEmpty()){
             binding.profession.visibility = View.GONE
@@ -92,5 +104,25 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
         val dialog = PhonesFragment.newInstance(phones)
         dialog.show(fm, "")
         dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Translucent)
+    }
+
+    private fun observeMedicalProviderDetails() {
+        providerDetailsViewModel.providerDetails.observe(this) {
+            it.let { resource ->
+                when (resource.status) {
+                    Status.LOADING -> {
+                        showProgressDialog()
+                    }
+                    Status.SUCCESS -> {
+                        hideProgressDialog()
+                        binding.providerDetails.visibility = View.VISIBLE
+                        initializeViews(resource.data!!)
+                    }
+                    Status.ERROR -> {
+                        hideProgressDialog()
+                    }
+                }
+            }
+        }
     }
 }

@@ -42,6 +42,7 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
         }
 
         viewHolder.binding.itemName.text = item.name
+        viewHolder.binding.tvProviderType.text = "${item.serviceProviderType?.providerTypeAr}"
         viewHolder.binding.government.text = "${item.governorate.governorateAr}, ${item.area?.areaName}"
 
         when (item.serviceProviderType?.providerTypeEn) {
