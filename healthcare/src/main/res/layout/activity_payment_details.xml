@@ -65,11 +65,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/payment_method"
-                android:textColor="@color/colorPrimary"
-                android:textSize="?textSizeLarge"
-                android:textStyle="bold"
+                android:text="طريقة الاستلام"
+                android:textColor="@color/primaryText"
+                android:textSize="@dimen/_12ssp"
                 android:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/delivery_methods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
 
             <Button
                 android:id="@+id/btn_next"

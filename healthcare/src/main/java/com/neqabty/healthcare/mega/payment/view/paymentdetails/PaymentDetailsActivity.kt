@@ -29,6 +29,7 @@ import com.neqabty.healthcare.mega.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.healthcare.mega.payment.view.PaymentViewModel
 import com.neqabty.healthcare.mega.payment.view.paymentstatus.PaymentStatusActivity
+import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import com.payment.paymentsdk.integrationmodels.*
 import com.payment.paymentsdk.sharedclasses.interfaces.CallbackPaymentInterface
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +58,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
     private var entityBranch = ""
     private var branchesList: List<BranchesEntity>? = null
     private var deliveryMethodsEnabled = false
+    private val mAdapter: DeliveryMethodsAdapter = DeliveryMethodsAdapter()
     override fun getViewBinding() = ActivityPaymentDetailsBinding.inflate(layoutInflater)
 
     @SuppressLint("SetTextI18n")
@@ -66,12 +68,15 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
 
         setupToolbar(title = "دفع اشتراك")
 
-//        binding.address.customSelectionActionModeCallback = actionMode
+        mAdapter.onItemClickListener = object : DeliveryMethodsAdapter.OnItemClickListener{
+            override fun setOnItemClickListener(item: PaymentMethodEntity) {
+                TODO("Not yet implemented")
+            }
+        }
 
         serviceCode = intent.getStringExtra("code")!!
         serviceActionCode = intent.getStringExtra("service_action_code")!!
         if (sharedPreferences.code == NATURAL_THERAPY_CODE) {
-//            binding.rbBranches.visibility = View.GONE
             paymentViewModel.getPaymentDetails(serviceCode, serviceActionCode, "12345678")
         } else {
             paymentViewModel.getPaymentDetails(
@@ -81,10 +86,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
             )
         }
 
-//        if (sharedPreferences.code != MORSHEDIN_CODE) {
-//            binding.tvDetails.visibility = View.GONE
-//            binding.cardLayout.visibility = View.GONE
-//        }
+
 
 //        paymentViewModel.payment.observe(this) {
 //
@@ -209,23 +211,6 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                 }
             }
         }
-
-//        binding.rbHome.setOnClickListener {
-//            deliveryMethod = deliveryMethodHomeId
-//            binding.spinnerContainer.visibility = View.GONE
-//            binding.address.visibility = View.VISIBLE
-//            binding.spBranches.setSelection(0)
-//            deliveryFees = deliveryMethodHomePrice
-//            updateTotal()
-//        }
-
-//        binding.rbBranches.setOnClickListener {
-//            deliveryMethod = deliveryMethodBranchId
-//            binding.address.visibility = View.GONE
-//            binding.spinnerContainer.visibility = View.VISIBLE
-//            deliveryFees = deliveryMethodBranchPrice
-//            updateTotal()
-//        }
 
         paymentViewModel.paymentInfo.observe(this) {
 
