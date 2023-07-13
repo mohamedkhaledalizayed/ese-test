@@ -12,7 +12,7 @@ data class Package(
     @SerializedName("deleted_at")
     val deletedAt: Any,
     @SerializedName("description_ar")
-    val descriptionAr: String,
+    val descriptionAr: String?,
     @SerializedName("description_en")
     val descriptionEn: Any,
     @SerializedName("followers")

@@ -109,7 +109,7 @@ private fun Subscribed.toSubscribedPackageEntity(): SubscribedPackageEntity{
 
 private fun Package.toPackageEntity(): PackageEntity{
     return PackageEntity(
-        descriptionAr = descriptionAr,
+        descriptionAr = descriptionAr ?: "",
         subscriberId = subscriberId ?: "",
         followers = followers.map { it.toFollowerEntity() },
         hint = hint ?: "",

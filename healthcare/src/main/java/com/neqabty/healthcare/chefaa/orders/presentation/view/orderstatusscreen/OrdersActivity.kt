@@ -41,15 +41,15 @@ class OrdersActivity : BaseActivity<ActivityOrdersBinding>() {
                         binding.progressActivity.showLoading()
                     }
                     Status.SUCCESS -> {
-                        if (resource.data!!.isEmpty()){
-                            if (mAdapter.itemCount == 0){
-                                binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "لا يوجد طلبات", "لم تقم باى طلب من قبل")
-                            }else{
+                        if (resource.data!!.status){
+                            if (resource.data.status_code == 200){
                                 binding.progressActivity.showContent()
+                                mAdapter.submitList(resource.data.data?.data)
+                            }else{
+                                binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "", resource.data.message)
                             }
                         }else{
-                            binding.progressActivity.showContent()
-                            mAdapter.submitList(resource.data)
+                            binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "لا يوجد طلبات", resource.data.message)
                         }
                     }
                     Status.ERROR -> {

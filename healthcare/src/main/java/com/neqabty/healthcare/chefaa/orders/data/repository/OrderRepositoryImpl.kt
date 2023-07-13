@@ -4,8 +4,12 @@ package com.neqabty.healthcare.chefaa.orders.data.repository
 
 import com.neqabty.healthcare.chefaa.ChefaaResponse
 import com.neqabty.healthcare.chefaa.orders.data.model.*
+import com.neqabty.healthcare.chefaa.orders.data.model.orders.ChefaaOrdersModel
+import com.neqabty.healthcare.chefaa.orders.data.model.orders.DataModel
 import com.neqabty.healthcare.chefaa.orders.data.source.OrderDS
 import com.neqabty.healthcare.chefaa.orders.domain.entities.*
+import com.neqabty.healthcare.chefaa.orders.domain.entities.orders.ChefaaOrdersEntity
+import com.neqabty.healthcare.chefaa.orders.domain.entities.orders.DataEntity
 import com.neqabty.healthcare.chefaa.orders.domain.repository.OrderRepository
 import com.neqabty.healthcare.core.data.Constants
 import kotlinx.coroutines.flow.Flow
@@ -17,11 +21,10 @@ class OrderRepositoryImpl @Inject constructor(private val orderDS: OrderDS) : Or
         userNumber: String,
         pageNumber: Int,
         pageSize: Int
-    ): Flow<List<OrderEntity>> {
+    ): Flow<ChefaaOrdersEntity> {
         return flow {
-            val orders = orderDS.getOrderList(OrderListRequestBody(userNumber))
             emit(
-                orders.map { it.toOrderEntity() }
+                orderDS.getOrderList(OrderListRequestBody(userNumber)).toChefaaOrdersEntity()
             )
         }
     }
@@ -87,6 +90,42 @@ class OrderRepositoryImpl @Inject constructor(private val orderDS: OrderDS) : Or
             currentLocation = currentLocation,
             items = items.map { it.toOrderItemModel() })
     }
+}
+
+private fun ChefaaOrdersModel.toChefaaOrdersEntity(): ChefaaOrdersEntity{
+    return ChefaaOrdersEntity(
+        message = message,
+        status = status,
+        status_code = status_code,
+        data = data?.toDataEntity()
+    )
+}
+
+private fun DataModel.toDataEntity(): DataEntity{
+    return DataEntity(
+        data = data.map { it.toOrderEntity() }
+    )
+}
+
+private fun OrderModel.toOrderEntity(): OrderEntity{
+    return OrderEntity(
+        addressId = addressId,
+        chefaaOrderNumber = chefaaOrderNumber,
+        clientId = clientId,
+        countryCode = countryCode,
+        createdAt = createdAt,
+        deliveryFees = deliveryFees ?: 0f,
+        phone = phone,
+        price = price ?: 0f,
+        priceBeforeDiscount = priceBeforeDiscount ?: 0f,
+        status = status,
+        id = id,
+        deliveryNote = deliveryNote,
+        orderStatus = orderStatus.toOrderStatusEntity(),
+        items = items.map { it.toItemEntity() },
+        updatedAt = updatedAt,
+        userPlan = userPlan
+    )
 }
 
 private fun OrderItem.toItemEntity(): ItemEntity {

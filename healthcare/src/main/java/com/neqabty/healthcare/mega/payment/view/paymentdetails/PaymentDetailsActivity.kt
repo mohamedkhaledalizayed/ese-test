@@ -104,6 +104,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(),
                                 "${resource.data.receipt.error}",
                                 Toast.LENGTH_LONG
                             ).show()
+                            finish()
                         } else {
                             createRadioButton(resource.data.gatewaysData)
                             handleDeliveryMethods(resource.data.deliveryMethods)
