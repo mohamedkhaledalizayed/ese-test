@@ -26,7 +26,7 @@ class SyndicateServicesRepositoryImpl @Inject constructor(private val syndicateS
 
 fun SyndicateService.toSyndicateServicesEntity(): SyndicateServiceEntity {
     return SyndicateServiceEntity(
-        name, code, ServiceCategory(serviceCategory.name), type, price, isActive, actions, Links(links.entity)
+        name, code, serviceCategory?.let { ServiceCategory(it.name) }, type, price, isActive, actions, Links(links.entity)
     )
 }
 

@@ -37,7 +37,7 @@
                     android:background="@drawable/chefaa_orders_bg"
                     android:hint="@string/employment_title"
                     android:padding="@dimen/_12sdp"
-                    android:drawableEnd="@drawable/ic_spinner_arrow"
+                    android:drawableEnd="@drawable/ic_job_title"
                     android:inputType="text"
                     android:longClickable="false"
                     android:textAlignment="viewStart"
@@ -52,7 +52,7 @@
                     android:hint="@string/company_years"
                     android:inputType="number"
                     android:padding="@dimen/_12sdp"
-                    android:drawableEnd="@drawable/ic_spinner_arrow"
+                    android:drawableEnd="@drawable/ic_years"
                     android:longClickable="false"
                     android:textAlignment="viewStart"
                     android:textSize="@dimen/_12ssp" />

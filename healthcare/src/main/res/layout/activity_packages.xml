@@ -33,7 +33,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_packages"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="@dimen/_12sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/tv_packages"

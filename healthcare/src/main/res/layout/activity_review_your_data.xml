@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center"
                     android:contentDescription="@null"
-                    android:src="@drawable/ic_spinner_arrow"
+                    android:src="@drawable/ic_marital_status"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

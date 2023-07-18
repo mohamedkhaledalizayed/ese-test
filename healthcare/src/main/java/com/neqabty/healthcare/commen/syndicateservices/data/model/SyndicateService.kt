@@ -11,7 +11,7 @@ data class SyndicateService(
     @SerializedName("code")
     val code: String,
     @SerializedName("service_category")
-    val serviceCategory: ServiceCategory,
+    val serviceCategory: ServiceCategory?,
     @SerializedName("type")
     val type: String,
     @SerializedName("price")

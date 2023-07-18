@@ -23,10 +23,10 @@ class NewsDetailsActivity : BaseActivity<ActivityNewsDetailsBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setupToolbar(titleResId = R.string.news_title)
         val newsId = intent.getIntExtra("id", -1)
 
         binding.backBtn.setOnClickListener { finish() }
-        binding.headerId.setOnClickListener { finish() }
         newsDetailsViewModel.getNewsDetails(newsId)
         newsDetailsViewModel.newsDetails.observe(this){
 

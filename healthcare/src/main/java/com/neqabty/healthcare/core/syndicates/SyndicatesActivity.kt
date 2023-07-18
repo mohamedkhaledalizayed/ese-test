@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.commen.invoices.view.InvoicesActivity
 import com.neqabty.healthcare.commen.onboarding.signup.data.SignupData
 import com.neqabty.healthcare.commen.onboarding.signup.view.SyndicatesAdapter
 import com.neqabty.healthcare.commen.syndicates.domain.entity.SyndicateEntity
@@ -57,7 +58,7 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>() {
                     true
                 }
                 R.id.navigation_payments -> {
-                    val intent = Intent(this, PaymentsActivity::class.java)
+                    val intent = Intent(this, InvoicesActivity::class.java)
                     startActivity(intent)
                     finish()
                     true

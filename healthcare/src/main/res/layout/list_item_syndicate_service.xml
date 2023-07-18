@@ -3,9 +3,10 @@
 
     <LinearLayout
         android:id="@+id/ll_holder"
-        android:layout_width="@dimen/_85sdp"
+        android:layout_width="@dimen/_95sdp"
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:background="@drawable/chefaa_icons_bg"
         android:orientation="vertical"
         android:gravity="center">

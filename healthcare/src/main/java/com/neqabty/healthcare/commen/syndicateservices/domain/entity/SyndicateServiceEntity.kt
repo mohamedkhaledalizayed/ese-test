@@ -4,7 +4,7 @@ package com.neqabty.healthcare.commen.syndicateservices.domain.entity
 data class SyndicateServiceEntity(
     val name: String,
     val code: String,
-    val serviceCategory: ServiceCategory,
+    val serviceCategory: ServiceCategory?,
     val type: String,
     val price: String,
     val isActive: Boolean,

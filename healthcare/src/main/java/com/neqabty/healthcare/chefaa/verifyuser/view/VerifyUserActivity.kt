@@ -23,6 +23,7 @@ class VerifyUserActivity : BaseActivity<ActivityVerifyUserBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setupToolbar(titleResId = R.string.verification)
         loading = SpotsDialog.Builder()
             .setContext(this)
             .setMessage(getString(R.string.please_wait))

@@ -29,13 +29,15 @@ class NewsListActivity : BaseActivity<ActivityNewsListBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setupToolbar(titleResId = R.string.news_title)
+
 
 //        if (intent.getStringExtra("id") == null || intent.getIntExtra("type", -1) == 1){
 //            setupToolbar( titleResId = R.string.general_news)
 //            homeViewModel.getAllNews()
 //        }else{
 //            setupToolbar( titleResId = R.string.news_title)
-            homeViewModel.getSyndicateNews("e01")
+            homeViewModel.getSyndicateNews(sharedPreferences.code)
 //        }
 
         binding.etSearch.requestFocus()

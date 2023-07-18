@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
+import com.neqabty.healthcare.commen.invoices.view.InvoicesActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.core.data.Constants
@@ -94,7 +95,7 @@ class MoreActivity : BaseActivity<ActivityMoreBinding>() {
                     true
                 }
                 R.id.navigation_payments -> {
-                    val intent = Intent(this, PaymentsActivity::class.java)
+                    val intent = Intent(this, InvoicesActivity::class.java)
                     startActivity(intent)
                     finish()
                     true

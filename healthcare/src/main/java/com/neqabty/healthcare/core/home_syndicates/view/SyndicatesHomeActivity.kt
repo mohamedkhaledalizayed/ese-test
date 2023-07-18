@@ -20,12 +20,14 @@ import com.neqabty.healthcare.commen.syndicateservices.domain.entity.SyndicateSe
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.more.view.MoreActivity
 import com.neqabty.healthcare.commen.packages.packageslist.view.PackagesActivity
+import com.neqabty.healthcare.commen.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.core.scanqrcode.ScanQrcodeScreen
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeSyndicateBinding
 import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
+import com.neqabty.healthcare.news.view.newslist.NewsListActivity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.GovernorateEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.ProvidersEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.providerdetails.ProviderDetailsActivity
@@ -91,13 +93,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         }
 
         binding.llPharmacy.setOnClickListener {
-            val intent = Intent(this, ChefaaHomeActivity::class.java)
-            intent.putExtra("user_number", sharedPreferences.mobile)
-            intent.putExtra("mobile_number", sharedPreferences.mobile)
-            intent.putExtra("country_code", sharedPreferences.mobile.substring(0, 2))
-            intent.putExtra("national_id", sharedPreferences.nationalId)
-            intent.putExtra("name", sharedPreferences.name)
-            intent.putExtra("jwt", "")
+            val intent = Intent(this, PharmacyActivity::class.java)
             startActivity(intent)
         }
 
@@ -198,8 +194,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
             startActivity(Intent(this, ContactProvidersActivity::class.java))
         }
         binding.ivContactSubscribe.setOnClickListener {
-            val intent = Intent(this, ScanQrcodeScreen::class.java)
-            startActivityForResult(intent, QR_CODE_REQUEST)
+            startActivity(Intent(this, getContactEntryPoint()))
         }
     }
 
@@ -289,10 +284,15 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         mAdapter.onItemClickListener = object :
             SyndicateServicesAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: SyndicateServiceEntity) {
-                val intent = Intent(this@SyndicatesHomeActivity, PaymentsActivity::class.java)
-                intent.putExtra("id", item.code)
-                intent.putExtra("name", item.name)
-                startActivity(intent)
+                if(item.serviceCategory?.name.equals("News")) {
+                    val intent = Intent(this@SyndicatesHomeActivity, NewsListActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    val intent = Intent(this@SyndicatesHomeActivity, PaymentsActivity::class.java)
+                    intent.putExtra("id", item.code)
+                    intent.putExtra("name", item.name)
+                    startActivity(intent)
+                }
             }
         }
         binding.rvSyndicateServices.adapter = mAdapter

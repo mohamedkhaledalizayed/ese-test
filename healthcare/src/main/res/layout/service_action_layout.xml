@@ -24,6 +24,7 @@
             android:layout_margin="@dimen/margin_medium"
             android:text="@string/ph_online"
             android:textColor="@color/black"
+            android:gravity="center_horizontal"
             android:textSize="@dimen/text_size_small" />
 
     </LinearLayout>

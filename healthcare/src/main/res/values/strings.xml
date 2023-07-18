@@ -605,5 +605,6 @@
     <string name="contact_calculate">احسب</string>
     <string name="contact_monthly_installment">القسط الشهري</string>
     <string name="contact_months">عدد الشهور</string>
+    <string name="verification">تأكيد رقم الموبايل</string>
 
 </resources>
