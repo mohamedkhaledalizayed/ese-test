@@ -28,7 +28,7 @@
                 android:layout_marginTop="@dimen/margin_medium"
                 android:layout_marginEnd="@dimen/margin_medium"
                 android:layout_marginBottom="@dimen/margin_medium"
-                android:src="@drawable/selected_icon" />
+                android:src="@drawable/unselected_icon" />
 
             <TextView
                 android:id="@+id/tv_name"
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
-                android:fontFamily="@font/hanimation_arabic_medium"
+                android:fontFamily="@font/hanimation_regular"
                 android:textColor="@color/secondaryText"
                 android:layout_below="@id/tv_name"
                 android:textSize="@dimen/_10ssp"

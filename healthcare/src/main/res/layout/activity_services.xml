@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/margin_large"
-    tools:context=".mega.payment.view.selectservice.PaymentsActivity">
+    tools:context=".mega.payment.view.selectservice.ServicesActivity">
 
     <include
         android:id="@+id/layout_toolbar"

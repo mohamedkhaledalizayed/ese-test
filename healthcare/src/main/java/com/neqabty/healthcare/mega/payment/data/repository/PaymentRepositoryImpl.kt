@@ -37,7 +37,7 @@ class PaymentRepositoryImpl @Inject constructor(private val paymentDS: PaymentDS
         }
     }
 
-    override fun getPaymentDetails(id: String, code: String, number: String): Flow<Response<ReceiptResponse>> {
+    override fun getPaymentDetails(id: String, code: String, number: String): Flow<Response<InquiryModel>> {
         return flow {
             emit(paymentDS.getPaymentDetails(id, code, number))
         }
@@ -81,65 +81,6 @@ private fun EntityModel.toEntity(): Entity{
 
     )
 }
-fun ReceiptResponse.toReceiptDataEntity(): ReceiptDataEntity{
-    return ReceiptDataEntity(
-        member = member.toMemberEntity(),
-        receipt = receipt?.toReceiptEntity(),
-        service = service.toServiceEntity(),
-        deliveryMethodsEntity = deliveryMethods.map { it.toDeliveryMethodsEntity() },
-        gatewaysList = gatewaysData.map { it.toGatewaysEntity() },
-        title = title
-    )
-}
-
-private fun GatewaysData.toGatewaysEntity(): GatewaysEntity{
-    return GatewaysEntity(
-        displayName = displayName,
-        endpointUrl = endpointUrl,
-        gateway = gateway,
-        id = id,
-        isActive = isActive,
-        name = name
-    )
-}
-
-private fun DeliveryMethod.toDeliveryMethodsEntity(): DeliveryMethodsEntity{
-    return DeliveryMethodsEntity(
-        createdAt = createdAt,
-        id = id,
-        method = method,
-        price = price,
-        updatedAt = updatedAt
-    )
-}
-
-fun Member.toMemberEntity(): MemberEntity{
-    return MemberEntity(
-        name = name
-    )
-}
-
-fun Receipt.toReceiptEntity(): ReceiptEntity{
-    return ReceiptEntity(
-        lastFeeYear = lastFeeYear,
-        currentFeeYear = currentFeeYear,
-        cardPrice = cardPrice,
-        lateSubscriptions =lateSubscriptions,
-        delayFine = delayFine,
-        netAmount = netAmount,
-        fees = fees,
-        totalPrice = 0.0
-    )
-}
-
-fun Service.toServiceEntity(): ServiceEntity {
-    return ServiceEntity(
-        code = code,
-        id = id,
-        isActive = isActive,
-        name = name
-    )
-}
 
 fun PaymentModel.toPaymentEntity(): PaymentEntity{
     return PaymentEntity(
@@ -150,6 +91,7 @@ fun PaymentModel.toPaymentEntity(): PaymentEntity{
         entityRefNum = entity_ref_num ?: "",
         fees = fees ?: "",
         id = id,
+        reference = reference ?: "",
         membershipId = membership_id ?: "",
         paymentGateway = payment_gateway ?: 0,
         paymentGatewayTransactionNum = payment_gateway_transaction_num ?: "",

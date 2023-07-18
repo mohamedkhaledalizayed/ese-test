@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.mega.payment.view.paymentdetails
+package com.neqabty.healthcare.mega.payment.view.paymentmethods
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,14 +6,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.databinding.DeliveryMethodItemBinding
-import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.DeliveryMethod
+import com.neqabty.healthcare.databinding.PaymentMethodItemBinding
+import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.GatewaysData
+import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import java.util.*
 
 
-open class DeliveryMethodsAdapter : RecyclerView.Adapter<DeliveryMethodsAdapter.ViewHolder>() {
+open class MegaPaymentMethodsAdapter : RecyclerView.Adapter<MegaPaymentMethodsAdapter.ViewHolder>() {
 
-    private val items: MutableList<DeliveryMethod> = ArrayList()
+    private val items: MutableList<GatewaysData> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -24,27 +25,40 @@ open class DeliveryMethodsAdapter : RecyclerView.Adapter<DeliveryMethodsAdapter.
             layoutInflater = LayoutInflater.from(parent.context)
         }
 
-        val binding: DeliveryMethodItemBinding =
-            DataBindingUtil.inflate(layoutInflater!!, R.layout.delivery_method_item, parent, false)
+        val binding: PaymentMethodItemBinding =
+            DataBindingUtil.inflate(layoutInflater!!, R.layout.payment_method_item, parent, false)
 
         return ViewHolder(
             binding
         )
     }
 
-    private var selectedPosition = -1
+    private var selectedPosition = 0
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
 
-        viewHolder.binding.tvName.text = item.method
-        viewHolder.binding.tvPrice.text = "تكلفة ال${item.method} ${item.price} جنيه"
+        viewHolder.binding.tvName.text = item.display_name
         if (selectedPosition == position){
             viewHolder.binding.ivSelected.setImageResource(R.drawable.selected_icon)
         }else{
             viewHolder.binding.ivSelected.setImageResource(R.drawable.unselected_icon)
         }
 
+        when (item.name) {
+            "Opay Code" -> {
+                viewHolder.binding.ivLogo.setImageResource(R.drawable.opay)
+            }
+            "Opay Card" -> {
+                viewHolder.binding.ivLogo.setImageResource(R.drawable.visa)
+            }
+            "Fawry Code" -> {
+                viewHolder.binding.ivLogo.setImageResource(R.drawable.fawry_icon)
+            }
+            else -> {
+
+            }
+        }
         viewHolder.binding.cvPayment.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)
             selectedPosition = position
@@ -53,7 +67,7 @@ open class DeliveryMethodsAdapter : RecyclerView.Adapter<DeliveryMethodsAdapter.
 
     override fun getItemCount() = items.size
 
-    fun submitList(newItems: List<DeliveryMethod>) {
+    fun submitList(newItems: List<GatewaysData>) {
         clear()
         newItems.let {
             items.addAll(it)
@@ -68,9 +82,9 @@ open class DeliveryMethodsAdapter : RecyclerView.Adapter<DeliveryMethodsAdapter.
     }
 
     interface OnItemClickListener {
-        fun setOnItemClickListener(item: DeliveryMethod)
+        fun setOnItemClickListener(item: GatewaysData)
     }
 
-    class ViewHolder(val binding: DeliveryMethodItemBinding) :
+    class ViewHolder(val binding: PaymentMethodItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

@@ -26,7 +26,7 @@ import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityHomeSyndicateBinding
-import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
+import com.neqabty.healthcare.mega.payment.view.selectservice.ServicesActivity
 import com.neqabty.healthcare.news.view.newslist.NewsListActivity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.GovernorateEntity
 import com.neqabty.healthcare.sustainablehealth.medicalnetwork.domain.entity.search.ProvidersEntity
@@ -284,14 +284,20 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         mAdapter.onItemClickListener = object :
             SyndicateServicesAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: SyndicateServiceEntity) {
-                if(item.serviceCategory?.name.equals("News")) {
-                    val intent = Intent(this@SyndicatesHomeActivity, NewsListActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    val intent = Intent(this@SyndicatesHomeActivity, PaymentsActivity::class.java)
-                    intent.putExtra("id", item.code)
-                    intent.putExtra("name", item.name)
-                    startActivity(intent)
+                when (item.serviceCategory?.name) {
+                    "Subscriptions" -> {
+                        val intent = Intent(this@SyndicatesHomeActivity, ServicesActivity::class.java)
+                        intent.putExtra("id", item.code)
+                        intent.putExtra("name", item.name)
+                        startActivity(intent)
+                    }
+                    "News" -> {
+                        val intent = Intent(this@SyndicatesHomeActivity, NewsListActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else -> {
+
+                    }
                 }
             }
         }

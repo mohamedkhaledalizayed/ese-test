@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
-import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.ReceiptResponse
+import com.neqabty.healthcare.mega.payment.data.model.inquiryresponse.InquiryModel
 import com.neqabty.healthcare.mega.payment.domain.entity.branches.BranchesEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.payment.PaymentEntity
 import com.neqabty.healthcare.mega.payment.domain.entity.paymentstatus.PaymentStatusEntity
@@ -58,7 +58,7 @@ class PaymentViewModel @Inject constructor(
         }
     }
 
-    val payment = MutableLiveData<Resource<ReceiptResponse>>()
+    val payment = MutableLiveData<Resource<InquiryModel>>()
     fun getPaymentDetails(id: String, code: String, number: String) {
         payment.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {

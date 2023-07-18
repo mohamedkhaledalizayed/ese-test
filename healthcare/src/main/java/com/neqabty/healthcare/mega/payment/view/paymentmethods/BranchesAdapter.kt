@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.mega.payment.view.paymentdetails
+package com.neqabty.healthcare.mega.payment.view.paymentmethods
 
 
 import android.view.LayoutInflater

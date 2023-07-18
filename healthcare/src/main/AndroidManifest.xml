@@ -49,6 +49,9 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
+            android:name=".mega.payment.view.paymentmethods.PaymentMethodsActivity"
+            android:exported="false" />
+        <activity
             android:name=".commen.invoices.view.InvoicesActivity"
             android:exported="false" />
         <activity
@@ -273,7 +276,7 @@
             android:name=".mega.payment.view.paymentdetails.PaymentDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".mega.payment.view.selectservice.PaymentsActivity"
+            android:name=".mega.payment.view.selectservice.ServicesActivity"
             android:exported="false" />
         <activity
             android:name=".mega.home.view.MegaHomeActivity"

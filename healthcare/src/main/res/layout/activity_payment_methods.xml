@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/margin_large"
+    tools:context=".mega.payment.view.paymentmethods.PaymentMethodsActivity">
+
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/mobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chefaa_orders_bg"
+        app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
+        android:padding="@dimen/_10sdp"
+        android:hint="@string/delivery_phone"
+        android:layout_margin="@dimen/_10sdp"/>
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chefaa_orders_bg"
+        app:layout_constraintTop_toBottomOf="@id/mobile"
+        android:padding="@dimen/_10sdp"
+        android:hint="@string/address"
+        android:layout_margin="@dimen/_10sdp"/>
+
+    <FrameLayout
+        android:id="@+id/spinner_branches_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/address"
+        android:background="@drawable/chefaa_orders_bg"
+        android:padding="@dimen/_10sdp">
+
+        <Spinner
+            android:id="@+id/sp_branches"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:background="#fff" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:contentDescription="@null"
+            android:src="@drawable/curved_arrow_down_circle" />
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/notes"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/chefaa_orders_bg"
+        android:hint="@string/content"
+        android:inputType="textMultiLine"
+        android:longClickable="false"
+        app:layout_constraintTop_toBottomOf="@id/spinner_branches_container"
+        android:padding="@dimen/_9sdp"
+        android:scrollbars="vertical"
+        android:textAlignment="center"
+        android:textColor="#4F4F4F"
+        android:textSize="@dimen/_12ssp" />
+
+    <TextView
+        android:id="@+id/tvPaymentMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="اختر طريقة الدفع"
+        android:textColor="#6e7389"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@id/notes"
+        android:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/payment_methods"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/tvPaymentMethod"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/select_btn_bg"
+        android:text="@string/next"
+        app:layout_constraintTop_toBottomOf="@id/payment_methods"
+        android:textColor="@android:color/white"
+        android:textSize="?textSizeLarge" />
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_toolbar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

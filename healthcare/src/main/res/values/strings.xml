@@ -129,6 +129,7 @@
     <string name="login">تسجيل الدخول</string>
     <string name="password">كلمة المرور</string>
     <string name="something_wrong">عفوا، يوجد خطأ في البيانات</string>
+    <string name="server_issue">عفوا، حدث خطاء اثناء الاتصال بالسيرقر.</string>
 
 
     <string name="payments">المدفوعات</string>

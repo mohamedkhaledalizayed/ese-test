@@ -12,7 +12,7 @@ import com.neqabty.healthcare.core.more.view.MoreActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySyndicatesBinding
-import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
+import com.neqabty.healthcare.mega.payment.view.selectservice.ServicesActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -7,13 +7,11 @@ import kotlinx.parcelize.Parcelize
 
 @Keep
 @Parcelize
-data class DeliveryMethod(
-    val created_at: String,
+data class GatewayParameter(
+    val entity: String,
+    val gateway: String,
     val id: Int,
-    val method: String,
-    val method_id: String?,
-    val price: String,
-    val service: Int,
-    val type: String,
-    val updated_at: String
+    val merchant_id: String,
+    val public_key: String,
+    val service_category: String
 ): Parcelable

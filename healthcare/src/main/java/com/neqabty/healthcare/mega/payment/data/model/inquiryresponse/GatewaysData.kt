@@ -1,25 +1,21 @@
 package com.neqabty.healthcare.mega.payment.data.model.inquiryresponse
 
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
 import androidx.annotation.Keep
+import kotlinx.parcelize.Parcelize
 
 @Keep
+@Parcelize
 data class GatewaysData(
-    @SerializedName("created_at")
-    val createdAt: String,
-    @SerializedName("display_name")
-    val displayName: String,
-    @SerializedName("endpoint_url")
-    val endpointUrl: String,
-    @SerializedName("gateway")
+    val created_at: String,
+    val display_name: String,
+    val endpoint_url: String,
     val gateway: String,
-    @SerializedName("id")
     val id: Int,
-    @SerializedName("is_active")
-    val isActive: Boolean,
-    @SerializedName("name")
+    val inquiry_url: String,
+    val is_active: Boolean,
     val name: String,
-    @SerializedName("updated_at")
-    val updatedAt: String
-)
+    val order: String?,
+    val updated_at: String
+): Parcelable

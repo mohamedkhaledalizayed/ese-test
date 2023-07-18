@@ -13,6 +13,7 @@ data class PaymentEntity(
     val membershipId: String,
     val paymentGateway: Int,
     val paymentGatewayTransactionNum: String,
+    val reference: String,
     val paymentMethod: String,
     val paymentSource: String,
     val refund: Boolean,

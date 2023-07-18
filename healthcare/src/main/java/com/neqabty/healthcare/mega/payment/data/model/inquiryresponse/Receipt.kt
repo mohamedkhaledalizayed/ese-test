@@ -1,28 +1,17 @@
 package com.neqabty.healthcare.mega.payment.data.model.inquiryresponse
 
 
+import android.os.Parcelable
 import androidx.annotation.Keep
-import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+
 @Keep
+@Parcelize
 data class Receipt(
-    @SerializedName("last_fee_year")
-    val lastFeeYear: Int,
-    @SerializedName("current_fee_year")
-    val currentFeeYear: Double,
-    @SerializedName("card_price")
-    val cardPrice: Double,
-    @SerializedName("late_subscriptions")
-    val lateSubscriptions: Double,
-    @SerializedName("delay_fine")
-    val delayFine: Double,
-    @SerializedName("net_amount")
-    val netAmount: Double,
-    @SerializedName("fees")
-    val fees: Double,
-    @SerializedName("error")
+    val inquiry_title: String,
+    val net_amount: Double,
+    val service_data: List<ServiceData>,
+    val status: Boolean,
     val error: String?,
-    @SerializedName("status")
-    val status: Boolean?,
-    @SerializedName("total_price")
-    val total_price: List<PriceItem>
-)
+    val total_price: List<TotalPrice>
+): Parcelable

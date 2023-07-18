@@ -20,7 +20,6 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.presentation.view.SignupActivity
-import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
 import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
@@ -30,7 +29,7 @@ import com.neqabty.healthcare.commen.aboutapp.AboutAppActivity
 import com.neqabty.healthcare.commen.ads.domain.entity.AdEntity
 import com.neqabty.healthcare.mega.complains.view.ComplainsActivity
 import com.neqabty.healthcare.commen.contactus.ContactUsActivity
-import com.neqabty.healthcare.mega.payment.view.selectservice.PaymentsActivity
+import com.neqabty.healthcare.mega.payment.view.selectservice.ServicesActivity
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.commen.settings.SettingsActivity
 import com.neqabty.healthcare.news.domain.entity.NewsEntity
@@ -211,7 +210,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
         binding.ivSubscription.setOnClickListener {
             if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
                 if (!isGuest){
-                    val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
+                    val intent = Intent(this@MegaHomeActivity, ServicesActivity::class.java)
                     startActivity(intent)
                 }else{
                     Toast.makeText(this@MegaHomeActivity, "هذه الخدمة متاحة لاعضاء النقابة فقط.", Toast.LENGTH_LONG).show()
@@ -415,7 +414,7 @@ class MegaHomeActivity : BaseActivity<ActivityMainBinding>(),
             R.id.payment -> {
                 if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember){
                     if (!isGuest){
-                        val intent = Intent(this@MegaHomeActivity, PaymentsActivity::class.java)
+                        val intent = Intent(this@MegaHomeActivity, ServicesActivity::class.java)
                         startActivity(intent)
                     }else{
                         Toast.makeText(this@MegaHomeActivity, "هذه الخدمة متاحة لاعضاء النقابة فقط.", Toast.LENGTH_LONG).show()
