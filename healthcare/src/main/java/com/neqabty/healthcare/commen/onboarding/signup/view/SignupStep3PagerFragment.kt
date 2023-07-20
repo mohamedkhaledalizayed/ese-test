@@ -9,16 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.commen.eselanding.EseLandingActivity
-import com.neqabty.healthcare.commen.landing.view.LandingPageActivity
-import com.neqabty.healthcare.commen.landing.view.OurNewsAdapter
+
 import com.neqabty.healthcare.commen.onboarding.signup.data.SignupData
 import com.neqabty.healthcare.commen.syndicates.domain.entity.SyndicateEntity
 import com.neqabty.healthcare.core.data.Constants.ESE_CODE
 import com.neqabty.healthcare.core.data.Constants.NATURAL_THERAPY_CODE
 import com.neqabty.healthcare.core.data.Constants.NEQABTY_CODE
 import com.neqabty.healthcare.databinding.FragmentSignupStepThreeBinding
-import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
 import com.neqabty.healthcare.news.domain.entity.NewsEntity
 import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity
 

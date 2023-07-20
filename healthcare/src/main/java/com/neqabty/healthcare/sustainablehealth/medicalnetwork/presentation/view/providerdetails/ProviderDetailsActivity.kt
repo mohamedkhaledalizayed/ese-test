@@ -84,13 +84,6 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
             }
         }
 
-        binding.addReviewBtn.setOnClickListener {
-            val fm: FragmentManager = supportFragmentManager
-            val dialog = AddReviewDailog()
-            dialog.show(fm, "")
-            dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
-        }
-
         binding.bContact.visibility = if(provider?.hasQR == true) View.VISIBLE else View.GONE
         binding.bContact.setOnClickListener {
             val intent = Intent(this@ProviderDetailsActivity, ContactInstallmentsActivity::class.java)

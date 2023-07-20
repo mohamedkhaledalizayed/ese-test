@@ -11,7 +11,6 @@ import androidx.fragment.app.DialogFragment
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.databinding.FragmentChangePasswordDialogBinding
-import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
 
 
 class ChangePasswordDialog : DialogFragment() {

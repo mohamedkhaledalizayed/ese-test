@@ -19,7 +19,6 @@ import com.neqabty.healthcare.auth.forgetpassword.view.changepassword.ChangePass
 import com.neqabty.healthcare.commen.aboutapp.AboutAppActivity
 import com.neqabty.healthcare.commen.notification.NotificationsActivity
 import com.neqabty.healthcare.databinding.ActivitySettingsBinding
-import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
 import com.neqabty.healthcare.commen.splash.view.SplashActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
 import dagger.hilt.android.AndroidEntryPoint

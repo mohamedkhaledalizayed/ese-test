@@ -12,10 +12,8 @@ import com.neqabty.healthcare.auth.forgetpassword.view.ForgetPasswordActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityLoginBinding
-import com.neqabty.healthcare.mega.home.view.MegaHomeActivity
 
 import dagger.hilt.android.AndroidEntryPoint
-import dmax.dialog.SpotsDialog
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {

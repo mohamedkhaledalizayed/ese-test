@@ -99,9 +99,6 @@
             android:name=".commen.packages.packageslist.view.PackageDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.pharmacy.PharmacyActivity"
-            android:exported="false" />
-        <activity
             android:name=".sustainablehealth.medicalnetwork.presentation.view.selectnetwork.SelectNetworkActivity"
             android:exported="false"
             android:theme="@style/AppTheme" />
@@ -123,19 +120,10 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".commen.eselanding.EseLandingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".commen.landing.view.LandingPageActivity"
-            android:exported="false" />
-        <activity
             android:name=".commen.mypackages.addfollower.view.AddFollowerActivity"
             android:exported="false" />
         <activity
             android:name=".commen.packages.payment.view.PackagesPaymentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".commen.checkaccountstatus.view.CheckAccountActivity"
             android:exported="false" />
         <activity
             android:name=".commen.splash.view.SplashActivity"
@@ -227,41 +215,10 @@
             android:name=".sustainablehealth.medicalnetwork.presentation.view.providerdetails.ProviderDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.offers.presentation.view.payment.PaymentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".sustainablehealth.offers.presentation.view.takeoffer.TakeOfferActivity"
-            android:exported="false" />
-        <activity
-            android:name=".sustainablehealth.offers.presentation.view.cashback.CashBackActivity"
-            android:exported="false" />
-        <activity
-            android:name=".sustainablehealth.offers.presentation.view.offers.OffersActivity"
-            android:exported="false" />
-        <activity
             android:name=".sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.medicalnetwork.presentation.view.search.SearchActivity"
-            android:exported="false" />
-        <activity
-            android:name=".sustainablehealth.wallet.WalletActivity"
-            android:exported="false" />
-        <activity
-            android:name=".commen.packages.subscription.view.SubscriptionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".commen.syndicates.presentation.view.homescreen.SyndicateActivity"
-            android:exported="false"
-            android:theme="@style/Theme.NoActionBar" />
-        <activity
             android:name=".commen.contactus.ContactUsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".mega.complains.view.ComplainsActivity"
             android:exported="false" />
         <activity
             android:name=".commen.profile.view.profile.ProfileActivity"
@@ -278,9 +235,6 @@
         <activity
             android:name=".mega.payment.view.selectservice.ServicesActivity"
             android:exported="false" />
-        <activity
-            android:name=".mega.home.view.MegaHomeActivity"
-            android:exported="true" />
         <activity
             android:name=".commen.settings.SettingsActivity"
             android:exported="false" />
