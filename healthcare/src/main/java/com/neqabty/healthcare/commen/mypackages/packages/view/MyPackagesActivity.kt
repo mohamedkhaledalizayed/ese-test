@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,7 +52,7 @@ class MyPackagesActivity : BaseActivity<ActivityProfileBinding>() {
                     if (resource.data!!.status){
                         mAdapter.submitList(resource.data.data!!.subscribedPackages)
                     }else{
-
+                        Toast.makeText(this@MyPackagesActivity, resource.data.message, Toast.LENGTH_LONG).show()
                     }
                 }
                 Status.ERROR ->{

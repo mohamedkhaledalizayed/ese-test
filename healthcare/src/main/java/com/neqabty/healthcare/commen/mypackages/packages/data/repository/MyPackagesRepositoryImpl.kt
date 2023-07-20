@@ -47,7 +47,7 @@ private fun Client.toClientEntity(): ClientEntity {
         job = job ?: "",
         mobile = mobile ?: "",
         name = name ?: "",
-        nationalId = nationalId,
+        nationalId = nationalId ?: "",
         personalImage = personalImage ?: "",
         qrCode = qrCode ?: "",
         birthDate = birthDate ?: "",

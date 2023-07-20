@@ -30,8 +30,8 @@ object Constants {
 
     //News
     const val BASE_URL_DEV_NEWS = "https://news.et3.co/api/"
-    const val BASE_URL_STAGING_NEWS = "https://staging-news.neqabty.com/api/"
-    const val BASE_URL_PRO_NEWS = "https://news.neqabty.com/api/"
+    const val BASE_URL_STAGING_NEWS = "https://staging-community.neqabty.com/api/"
+    const val BASE_URL_PRO_NEWS = "https://community.neqabty.com/api/"
 
     //OTP
     const val BASE_URL_DEV_OTP = "https://dev-community.neqabty.com/"

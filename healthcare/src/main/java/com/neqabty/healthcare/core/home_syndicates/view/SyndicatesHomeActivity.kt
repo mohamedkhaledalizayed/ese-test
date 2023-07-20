@@ -291,6 +291,12 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
                         intent.putExtra("name", item.name)
                         startActivity(intent)
                     }
+                    "Periodically" -> {
+                        val intent = Intent(this@SyndicatesHomeActivity, ServicesActivity::class.java)
+                        intent.putExtra("id", item.code)
+                        intent.putExtra("name", item.name)
+                        startActivity(intent)
+                    }
                     "News" -> {
                         val intent = Intent(this@SyndicatesHomeActivity, NewsListActivity::class.java)
                         startActivity(intent)
