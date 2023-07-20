@@ -7,7 +7,7 @@
     android:background="@color/background_color"
     android:paddingHorizontal="@dimen/margin_large"
     android:paddingBottom="@dimen/margin_large"
-    tools:context=".common.clinido.view.ClinidoActivity">
+    tools:context=".clinido.view.ClinidoActivity">
 
     <include
         android:id="@+id/layout_toolbar"

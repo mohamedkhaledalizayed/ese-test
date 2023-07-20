@@ -125,7 +125,7 @@ android {
 }
     ext {
         //Basic configurations
-        kotlin_version = "1.5.31"
+        kotlin_version = "1.6.0"
         compileSdkVersion = 30
         minSdkVersion = 23
         targetSdkVersion = 30
@@ -139,8 +139,8 @@ android {
         swiperefreshlayout = '1.1.0'
         //Test
         junitVersion = '4.13.2'
-        junitAndroidxVersion = '1.1.3'
-        espressoVersion = '3.4.0'
+        junitAndroidxVersion = '1.1.5'
+        espressoVersion = '3.5.1'
         //lifecycle
         lifecycle_version = '2.5.0'
         lifecycle_extension = '2.2.0'
@@ -200,7 +200,6 @@ android {
 
         implementation 'com.hbb20:ccp:2.7.0'
 
-        implementation 'com.google.android.gms:play-services-maps:17.0.0'
         gmsImplementation platform('com.google.firebase:firebase-bom:28.4.1')
 
         gmsImplementation 'com.google.firebase:firebase-auth'
@@ -244,8 +243,8 @@ android {
         //Permissions
         implementation 'com.karumi:dexter:6.2.3'
 
-        implementation 'com.google.android.gms:play-services-location:17.0.0'
-        implementation 'com.google.android.gms:play-services-maps:17.0.0'
+        implementation 'com.google.android.gms:play-services-location:21.0.1'
+        implementation 'com.google.android.gms:play-services-maps:18.1.0'
         //zoom
         implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
