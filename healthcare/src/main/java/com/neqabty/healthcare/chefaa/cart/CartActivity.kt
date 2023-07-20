@@ -17,9 +17,9 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.address.presentation.view.adressscreen.AddressesActivity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
-import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.cart
 import com.neqabty.healthcare.core.ui.BaseActivity

@@ -10,9 +10,9 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
-import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivityNewsListBinding
 import com.neqabty.healthcare.news.domain.entity.NewsEntity
 import com.neqabty.healthcare.news.view.newsdetails.NewsDetailsActivity

@@ -7,18 +7,17 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.verifyuser.view.VerifyUserActivity
-import com.neqabty.healthcare.commen.clinido.view.ClinidoActivity
-import com.neqabty.healthcare.commen.invoices.view.InvoicesActivity
-import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
-import com.neqabty.healthcare.commen.settings.SettingsActivity
+import com.neqabty.healthcare.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.core.data.Constants
-import com.neqabty.healthcare.commen.packages.packageslist.view.PackagesActivity
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityMoreBinding
-import com.neqabty.healthcare.mega.payment.view.selectservice.ServicesActivity
-import com.neqabty.healthcare.sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity
+import com.neqabty.healthcare.invoices.view.InvoicesActivity
+import com.neqabty.healthcare.medicalnetwork.presentation.view.searchresult.SearchResultActivity
+import com.neqabty.healthcare.packages.packageslist.view.PackagesActivity
+import com.neqabty.healthcare.profile.view.profile.ProfileActivity
+import com.neqabty.healthcare.settings.SettingsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 

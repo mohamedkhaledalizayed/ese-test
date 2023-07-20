@@ -4,16 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.commen.invoices.view.InvoicesActivity
-import com.neqabty.healthcare.commen.onboarding.signup.data.SignupData
-import com.neqabty.healthcare.commen.onboarding.signup.view.SyndicatesAdapter
-import com.neqabty.healthcare.commen.syndicates.domain.entity.SyndicateEntity
 import com.neqabty.healthcare.core.more.view.MoreActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySyndicatesBinding
-import com.neqabty.healthcare.mega.payment.view.selectservice.ServicesActivity
-import com.neqabty.healthcare.commen.profile.view.profile.ProfileActivity
+import com.neqabty.healthcare.invoices.view.InvoicesActivity
+import com.neqabty.healthcare.onboarding.signup.view.SyndicatesAdapter
+import com.neqabty.healthcare.profile.view.profile.ProfileActivity
+import com.neqabty.healthcare.syndicates.domain.entity.SyndicateEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".commen.mypackages.addfollower.view.AddFollowerActivity">
+    tools:context=".common.mypackages.addfollower.view.AddFollowerActivity">
 
     <include
         android:id="@+id/layout_toolbar"

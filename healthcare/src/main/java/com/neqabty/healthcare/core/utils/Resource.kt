@@ -1,8 +1,6 @@
 package com.neqabty.healthcare.core.utils
 
-import com.neqabty.healthcare.core.utils.Status.ERROR
-import com.neqabty.healthcare.core.utils.Status.LOADING
-import com.neqabty.healthcare.core.utils.Status.SUCCESS
+import com.neqabty.healthcare.core.utils.Status.*
 
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {

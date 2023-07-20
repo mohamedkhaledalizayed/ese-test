@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
         app:piv_viewPager="@id/slvp_signup" />
 
-    <com.neqabty.healthcare.commen.onboarding.signup.view.SwipeLockableViewPager
+    <com.neqabty.healthcare.onboarding.signup.view.SwipeLockableViewPager
         android:id="@+id/slvp_signup"
         android:layout_width="match_parent"
         android:layout_height="0dp"

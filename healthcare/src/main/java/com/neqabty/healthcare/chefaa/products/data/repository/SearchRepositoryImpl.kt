@@ -1,9 +1,9 @@
 package com.neqabty.healthcare.chefaa.products.data.repository
 
 import com.neqabty.healthcare.chefaa.products.data.models.ProductItem
+import com.neqabty.healthcare.chefaa.products.data.source.ProductSearchDs
 import com.neqabty.healthcare.chefaa.products.domain.entities.ProductEntity
 import com.neqabty.healthcare.chefaa.products.domain.repository.SearchRepository
-import com.neqabty.healthcare.chefaa.products.data.source.ProductSearchDs
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

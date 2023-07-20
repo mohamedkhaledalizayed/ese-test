@@ -3,7 +3,6 @@ package com.neqabty.healthcare.chefaa.products.presentation
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.cart.CartActivity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity

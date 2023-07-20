@@ -3,24 +3,13 @@ package com.neqabty.healthcare.core.home_syndicates.view
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.commen.syndicateservices.domain.entity.SyndicateServiceEntity
 import com.neqabty.healthcare.databinding.ListItemSyndicateServiceBinding
-import com.neqabty.healthcare.databinding.NewsItemBinding
-import com.neqabty.healthcare.news.domain.entity.NewsEntity
-import com.neqabty.healthcare.news.view.newslist.NewsAdapter
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
-import java.text.SimpleDateFormat
+import com.neqabty.healthcare.syndicateservices.domain.entity.SyndicateServiceEntity
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class SyndicateServicesAdapter: RecyclerView.Adapter<SyndicateServicesAdapter.ViewHolder>() {

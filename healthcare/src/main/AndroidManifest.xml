@@ -49,13 +49,13 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
-            android:name=".mega.payment.view.paymentmethods.PaymentMethodsActivity"
+            android:name=".payment.view.paymentmethods.PaymentMethodsActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.invoices.view.InvoicesActivity"
+            android:name=".invoices.view.InvoicesActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.mypackages.subscriptiondetails.view.SubscriptionDetailsActivity"
+            android:name=".mypackages.subscriptiondetails.view.SubscriptionDetailsActivity"
             android:exported="false" />
 
         <meta-data
@@ -78,35 +78,25 @@
         </service>
 
         <activity
-            android:name=".commen.pharmacy.PharmacyActivity"
+            android:name=".pharmacy.PharmacyActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.profile.view.personalinfo.PersonalInfoActivity"
+            android:name=".profile.view.personalinfo.PersonalInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.packages.addfollowers.view.AddFollowersActivity"
+            android:name=".packages.addfollowers.view.AddFollowersActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.notification.NotificationsActivity"
+            android:name=".notification.NotificationsActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.packages.subscription.view.SubscriptionActivity"
+            android:name=".packages.subscription.view.UserDataActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.packages.subscription.view.UserDataActivity"
+            android:name=".packages.packageslist.view.PackageDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.packages.packageslist.view.PackageDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".commen.pharmacy.PharmacyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".sustainablehealth.medicalnetwork.presentation.view.selectnetwork.SelectNetworkActivity"
-            android:exported="false"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".commen.clinido.view.ClinidoActivity"
+            android:name=".clinido.view.ClinidoActivity"
             android:exported="false" />
         <activity
             android:name=".auth.forgetpassword.view.changepassword.ChangePasswordActivity"
@@ -123,22 +113,13 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".commen.eselanding.EseLandingActivity"
+            android:name=".mypackages.addfollower.view.AddFollowerActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.landing.view.LandingPageActivity"
+            android:name=".packages.payment.view.PackagesPaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.mypackages.addfollower.view.AddFollowerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".commen.packages.payment.view.PackagesPaymentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".commen.checkaccountstatus.view.CheckAccountActivity"
-            android:exported="false" />
-        <activity
-            android:name=".commen.splash.view.SplashActivity"
+            android:name=".splash.view.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -147,31 +128,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".commen.onboarding.intro.view.IntroActivity"
+            android:name=".onboarding.intro.view.IntroActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.signup.view.SignupActivity"
+            android:name=".onboarding.signup.view.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.contact.view.SigninDoneActivity"
+            android:name=".onboarding.contact.view.SigninDoneActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.contact.view.UploadIdFrontActivity"
+            android:name=".onboarding.contact.view.UploadIdFrontActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.contact.view.UploadIdBackActivity"
+            android:name=".onboarding.contact.view.UploadIdBackActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.contact.view.ReviewYourDataActivity"
+            android:name=".onboarding.contact.view.ReviewYourDataActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.contact.view.ResidenceActivity"
+            android:name=".onboarding.contact.view.ResidenceActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.contact.view.DependantsActivity"
+            android:name=".onboarding.contact.view.DependantsActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.contact.view.ReferenceNumberActivity"
+            android:name=".onboarding.contact.view.ReferenceNumberActivity"
             android:exported="false">
 
             <!-- <intent-filter> -->
@@ -182,13 +163,13 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".commen.onboarding.contact.view.EmploymentDetails1Activity"
+            android:name=".onboarding.contact.view.EmploymentDetails1Activity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.contact.view.EmploymentDetails2Activity"
+            android:name=".onboarding.contact.view.EmploymentDetails2Activity"
             android:exported="false" />
         <activity
-            android:name=".commen.onboarding.contact.view.EmploymentDetails3Activity"
+            android:name=".onboarding.contact.view.EmploymentDetails3Activity"
             android:exported="false" />
         <activity
             android:name=".core.home_syndicates.view.SyndicatesHomeActivity"
@@ -200,13 +181,13 @@
             android:name=".core.scanqrcode.ScanQrcodeScreen"
             android:exported="false" />
         <activity
-            android:name=".commen.contact_providers.view.ContactProvidersActivity"
+            android:name=".contact.contact_providers.view.ContactProvidersActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.contact_installments.view.ContactInstallmentsActivity"
+            android:name=".contact.contact_installments.view.ContactInstallmentsActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.contact_invoice.view.ContactInvoiceActivity"
+            android:name=".contact.contact_invoice.view.ContactInvoiceActivity"
             android:exported="false" />
         <activity
             android:name=".core.syndicates.SyndicatesActivity"
@@ -215,80 +196,52 @@
             android:name=".core.more.view.MoreActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.packages.packageslist.view.PackagesActivity"
+            android:name=".packages.packageslist.view.PackagesActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.mypackages.packages.view.MyPackagesActivity"
+            android:name=".mypackages.packages.view.MyPackagesActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.suggestions.presentation.SuggestionsActivity"
+            android:name=".suggestions.presentation.SuggestionsActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.medicalnetwork.presentation.view.providerdetails.ProviderDetailsActivity"
+            android:name=".medicalnetwork.presentation.view.providerdetails.ProviderDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.offers.presentation.view.payment.PaymentActivity"
+            android:name=".medicalnetwork.presentation.view.searchresult.SearchResultActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.offers.presentation.view.takeoffer.TakeOfferActivity"
+            android:name=".packages.subscription.view.SubscriptionActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.offers.presentation.view.cashback.CashBackActivity"
+            android:name=".contactus.ContactUsActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.offers.presentation.view.offers.OffersActivity"
+            android:name=".complains.view.ComplainsActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.medicalnetwork.presentation.view.searchresult.SearchResultActivity"
+            android:name=".profile.view.profile.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.medicalnetwork.presentation.view.search.SearchActivity"
+            android:name=".profile.view.update.UpdateInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.wallet.WalletActivity"
+            android:name=".payment.view.paymentstatus.PaymentStatusActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.packages.subscription.view.SubscriptionActivity"
+            android:name=".payment.view.paymentdetails.PaymentDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.home.presentation.view.homescreen.SehaHomeActivity"
+            android:name=".payment.view.selectservice.ServicesActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.syndicates.presentation.view.homescreen.SyndicateActivity"
-            android:exported="false"
-            android:theme="@style/Theme.NoActionBar" />
-        <activity
-            android:name=".commen.contactus.ContactUsActivity"
+            android:name=".settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".mega.complains.view.ComplainsActivity"
+            android:name=".aboutapp.AboutAppActivity"
             android:exported="false" />
         <activity
-            android:name=".commen.profile.view.profile.ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".commen.profile.view.update.UpdateInfoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".mega.payment.view.paymentstatus.PaymentStatusActivity"
-            android:exported="false" />
-        <activity
-            android:name=".mega.payment.view.paymentdetails.PaymentDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".mega.payment.view.selectservice.ServicesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".mega.home.view.MegaHomeActivity"
-            android:exported="true" />
-        <activity
-            android:name=".commen.settings.SettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".commen.aboutapp.AboutAppActivity"
-            android:exported="false" />
-        <activity
-            android:name=".mega.payment.view.paymentstatus.PdfCreatorScreen"
+            android:name=".payment.view.paymentstatus.PdfCreatorScreen"
             android:exported="false"
             android:label="تحميل اخطار الدفع"
             android:theme="@style/AppTheme.ActionBar" />

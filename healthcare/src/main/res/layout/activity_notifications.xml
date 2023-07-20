@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/_5sdp"
-    tools:context=".commen.notification.NotificationsActivity">
+    tools:context=".common.notification.NotificationsActivity">
 
     <include
         android:id="@+id/layout_toolbar"

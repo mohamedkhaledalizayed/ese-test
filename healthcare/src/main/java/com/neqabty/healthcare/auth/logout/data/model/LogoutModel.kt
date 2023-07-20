@@ -1,8 +1,8 @@
 package com.neqabty.healthcare.auth.logout.data.model
 
 
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 @Keep
 data class LogoutModel(

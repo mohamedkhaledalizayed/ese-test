@@ -2,8 +2,8 @@ package com.neqabty.healthcare.core.more.view
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.commen.clinido.domain.entity.ClinidoEntity
-import com.neqabty.healthcare.commen.clinido.domain.usecases.ClinidoUseCase
+import com.neqabty.healthcare.clinido.domain.entity.ClinidoEntity
+import com.neqabty.healthcare.clinido.domain.usecases.ClinidoUseCase
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseViewModel
 import com.neqabty.healthcare.core.utils.Resource

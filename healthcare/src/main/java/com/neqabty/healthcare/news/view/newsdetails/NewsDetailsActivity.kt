@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
-import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ActivityNewsDetailsBinding
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,9 +1,9 @@
 package com.neqabty.healthcare.core.ui
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Build
-import android.graphics.Color
 import android.util.AttributeSet
 import android.widget.Switch
 

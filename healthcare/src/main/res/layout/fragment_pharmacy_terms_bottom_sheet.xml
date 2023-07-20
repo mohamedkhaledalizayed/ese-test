@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:padding="@dimen/_15sdp"
     android:background="@color/white"
-    tools:context=".commen.pharmacy.PharmacyTermsBottomSheet">
+    tools:context=".common.pharmacy.PharmacyTermsBottomSheet">
 
 
     <ImageView

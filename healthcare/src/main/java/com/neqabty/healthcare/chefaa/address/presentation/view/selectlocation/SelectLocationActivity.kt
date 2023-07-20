@@ -15,8 +15,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.neqabty.healthcare.chefaa.address.presentation.view.addaddressscreen.AddAddressActivity
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.chefaa.address.presentation.view.addaddressscreen.AddAddressActivity
 import com.neqabty.healthcare.core.data.Constants.LATITUDE
 import com.neqabty.healthcare.core.data.Constants.LONGITUDE
 import com.neqabty.healthcare.core.data.Constants.latitude
@@ -25,8 +25,6 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivitySelectLocationBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-
-
 
 
 @AndroidEntryPoint

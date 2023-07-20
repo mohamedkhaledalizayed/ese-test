@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingBottom="@dimen/margin_large"
-    tools:context=".commen.profile.view.personalinfo.PersonalInfoActivity">
+    tools:context=".common.profile.view.personalinfo.PersonalInfoActivity">
 
     <include
         android:id="@+id/layout_toolbar"

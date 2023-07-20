@@ -9,13 +9,13 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import androidx.activity.viewModels
-import androidx.lifecycle.*
-import com.neqabty.healthcare.chefaa.products.domain.entities.ProductEntity
-import com.neqabty.healthcare.core.ui.BaseActivity
-import com.neqabty.healthcare.core.utils.Status
+import androidx.lifecycle.observe
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.cart.CartActivity
+import com.neqabty.healthcare.chefaa.products.domain.entities.ProductEntity
 import com.neqabty.healthcare.core.data.Constants
+import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityChefaaSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 

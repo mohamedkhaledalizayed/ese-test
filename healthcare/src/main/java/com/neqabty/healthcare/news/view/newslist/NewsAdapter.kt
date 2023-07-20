@@ -12,7 +12,6 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {

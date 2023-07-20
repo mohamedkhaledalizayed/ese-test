@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderEntity
 import com.neqabty.healthcare.chefaa.orders.presentation.view.orderdetailscreen.OrderDetailsActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity

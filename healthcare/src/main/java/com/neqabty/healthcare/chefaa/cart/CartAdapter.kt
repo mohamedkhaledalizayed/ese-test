@@ -2,7 +2,6 @@ package com.neqabty.healthcare.chefaa.cart
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView

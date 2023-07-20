@@ -4,14 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.auth.forgetpassword.data.model.ChangePasswordBody
-import com.neqabty.healthcare.auth.forgetpassword.data.model.CheckOTPBody
-import com.neqabty.healthcare.auth.forgetpassword.data.model.SendOTPBody
 import com.neqabty.healthcare.auth.forgetpassword.domain.entity.ChangePasswordEntity
-import com.neqabty.healthcare.auth.forgetpassword.domain.entity.CheckOTPEntity
-import com.neqabty.healthcare.auth.forgetpassword.domain.entity.SendOTPEntity
 import com.neqabty.healthcare.auth.forgetpassword.domain.usecases.ChangePassword
-import com.neqabty.healthcare.auth.forgetpassword.domain.usecases.CheckOTP
-import com.neqabty.healthcare.auth.forgetpassword.domain.usecases.SendOTP
 import com.neqabty.healthcare.core.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

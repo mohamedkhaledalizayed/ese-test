@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.core.content.ContextCompat.startActivity
 import org.json.JSONObject
 import retrofit2.HttpException
 import java.text.SimpleDateFormat

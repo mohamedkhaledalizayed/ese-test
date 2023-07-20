@@ -11,8 +11,8 @@ import android.location.LocationManager
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.chefaa.address.presentation.view.selectlocation.SelectLocationActivity
 import com.neqabty.healthcare.chefaa.address.domain.entities.AddressEntity
+import com.neqabty.healthcare.chefaa.address.presentation.view.selectlocation.SelectLocationActivity
 import com.neqabty.healthcare.chefaa.orders.presentation.placeprescriptionscreen.CheckOutActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity

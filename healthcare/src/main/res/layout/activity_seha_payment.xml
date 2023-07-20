@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".commen.packages.payment.view.PackagesPaymentActivity">
+        tools:context=".common.packages.payment.view.PackagesPaymentActivity">
 
         <include
             android:id="@+id/layout_toolbar"

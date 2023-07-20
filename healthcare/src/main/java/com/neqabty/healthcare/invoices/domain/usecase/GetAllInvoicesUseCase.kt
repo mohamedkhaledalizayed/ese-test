@@ -1,0 +1,12 @@
+package com.neqabty.healthcare.invoices.domain.usecase
+
+import com.neqabty.healthcare.invoices.domain.entity.InvoicesEntity
+import com.neqabty.healthcare.invoices.domain.repository.InvoicesRepository
+import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+
+class GetAllInvoicesUseCase @Inject constructor(private val invoicesRepository: InvoicesRepository) {
+    fun build(): Flow<List<InvoicesEntity>>{
+        return invoicesRepository.getAllInvoices()
+    }
+}

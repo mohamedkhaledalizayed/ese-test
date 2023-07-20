@@ -4,7 +4,7 @@ package com.neqabty.healthcare.core.data
 import androidx.lifecycle.MutableLiveData
 import com.neqabty.healthcare.chefaa.address.domain.entities.AddressEntity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
-import com.neqabty.healthcare.commen.packages.subscription.data.model.Followers
+import com.neqabty.healthcare.packages.subscription.data.model.Followers
 
 
 object Constants {

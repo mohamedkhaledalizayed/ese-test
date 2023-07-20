@@ -3,13 +3,13 @@ package com.neqabty.healthcare.auth.signup.presentation.view
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
 import com.neqabty.healthcare.auth.signup.data.model.syndicatemember.UserModel
 import com.neqabty.healthcare.auth.signup.domain.entity.syndicate.SyndicateListEntity
 import com.neqabty.healthcare.auth.signup.domain.interactors.SignupUseCase
 import com.neqabty.healthcare.auth.signup.presentation.model.UserUIModel
 import com.neqabty.healthcare.auth.signup.presentation.model.mappers.toUserUIModel
+import com.neqabty.healthcare.core.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -2,7 +2,8 @@ package com.neqabty.healthcare.core.di
 
 import android.app.Application
 import android.content.SharedPreferences
-import com.neqabty.healthcare.core.data.Constants.ENCRYPT_KEY
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.neqabty.healthcare.core.data.Constants.PREFS_FILE
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import dagger.Module
@@ -10,8 +11,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKeys
 
 @Module
 @InstallIn(SingletonComponent::class)

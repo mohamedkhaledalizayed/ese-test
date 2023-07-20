@@ -14,6 +14,7 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
@@ -28,16 +29,16 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.commen.onboarding.intro.view.IntroActivity
-import com.neqabty.healthcare.commen.onboarding.signup.view.SignupActivity
 import com.neqabty.healthcare.chefaa.cart.CartActivity
 import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
-import com.neqabty.healthcare.commen.onboarding.contact.view.SigninDoneActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
 import com.neqabty.healthcare.core.home_syndicates.view.SyndicatesHomeActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
+import com.neqabty.healthcare.onboarding.contact.view.SigninDoneActivity
+import com.neqabty.healthcare.onboarding.intro.view.IntroActivity
+import com.neqabty.healthcare.onboarding.signup.view.SignupActivity
 import javax.inject.Inject
 
 
@@ -68,6 +69,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
                 if (!it.equals(sharedPreferences.firebaseToken)) // Token has been changed
                 {
                     sharedPreferences.firebaseToken = it
+                    Log.i("toooooken", it)
 //                    if (sharedPreferences.user.isNotBlank()) { // verified
 //                        mainViewModel.login(sharedPref.mobile, sharedPref.user, it, sharedPref)
 //                    }

@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.chefaa.products.domain.entities.ProductEntity
 import com.neqabty.healthcare.chefaa.products.domain.usecases.ProductSearchUseCase
-import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
