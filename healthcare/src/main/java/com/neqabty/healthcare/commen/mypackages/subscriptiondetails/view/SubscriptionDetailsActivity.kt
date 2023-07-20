@@ -17,7 +17,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySubscriptionDetailsBinding
 import com.neqabty.healthcare.commen.mypackages.packages.domain.entity.PackageEntity
 import com.neqabty.healthcare.commen.mypackages.addfollower.view.AddFollowerActivity
-import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
+import com.neqabty.healthcare.commen.packages.payment.view.PackagesPaymentActivity
 import com.tejpratapsingh.pdfcreator.activity.PDFViewerActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -153,7 +153,7 @@ class SubscriptionDetailsActivity : BaseActivity<ActivitySubscriptionDetailsBind
 
     private fun handlePayment() {
         binding.orderStatus.setOnClickListener {
-            val intent = Intent(this@SubscriptionDetailsActivity, SehaPaymentActivity::class.java)
+            val intent = Intent(this@SubscriptionDetailsActivity, PackagesPaymentActivity::class.java)
             intent.putExtra("name", packageInfo.nameAr)
             intent.putExtra("price", packageInfo.packagePrice?.toDouble())
             intent.putExtra("vat", packageInfo.vat?.toDouble())

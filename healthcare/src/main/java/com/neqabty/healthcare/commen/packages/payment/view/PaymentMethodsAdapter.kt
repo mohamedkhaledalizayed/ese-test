@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.PaymentMethodItemBinding
-import com.neqabty.healthcare.sustainablehealth.payment.domain.entity.paymentmethods.PaymentMethodEntity
+import com.neqabty.healthcare.commen.packages.payment.domain.entity.paymentmethods.PaymentMethodEntity
 import java.util.*
 
 

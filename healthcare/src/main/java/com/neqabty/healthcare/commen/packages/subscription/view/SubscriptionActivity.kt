@@ -26,7 +26,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySubscriptionBinding
 import com.neqabty.healthcare.commen.packages.packageslist.domain.entity.PackagesEntity
 import com.neqabty.healthcare.commen.packages.subscription.data.model.SubscribePostBodyRequest
-import com.neqabty.healthcare.sustainablehealth.payment.view.SehaPaymentActivity
+import com.neqabty.healthcare.commen.packages.payment.view.PackagesPaymentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -98,7 +98,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
                         hideProgressDialog()
                         if (resource.data!!.status){
                             Toast.makeText(this, "تم الأشتراك بنجاح.", Toast.LENGTH_LONG).show()
-                            val intent = Intent(this, SehaPaymentActivity::class.java)
+                            val intent = Intent(this, PackagesPaymentActivity::class.java)
                             intent.putExtra("name", packageDetails.name)
                             intent.putExtra("price", packageDetails.price)
                             intent.putExtra("vat", packageDetails.vat)

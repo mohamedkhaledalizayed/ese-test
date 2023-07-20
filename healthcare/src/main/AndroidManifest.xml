@@ -132,7 +132,7 @@
             android:name=".commen.mypackages.addfollower.view.AddFollowerActivity"
             android:exported="false" />
         <activity
-            android:name=".sustainablehealth.payment.view.SehaPaymentActivity"
+            android:name=".commen.packages.payment.view.PackagesPaymentActivity"
             android:exported="false" />
         <activity
             android:name=".commen.checkaccountstatus.view.CheckAccountActivity"
