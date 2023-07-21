@@ -112,12 +112,12 @@ fun PaymentModel.toPaymentEntity(): PaymentEntity{
 
 fun PaymentStatusModel.toPaymentStatusEntity(): PaymentStatusEntity {
     return PaymentStatusEntity(
-        entity = entity ?: "",
+        entity = entity,
         gatewayReferenceId = gateway_reference_id,
-        itemId = membership_id ?: "",
+        itemId = membership_id,
         mobile = account.mobile,
         netAmount = net_amount,
-        serviceAction = service_action.name ?: "",
+        serviceAction = service_action.name,
         totalAmount = total_amount,
         totalFees = total_fees,
         member_name = account.fullname ?: "",

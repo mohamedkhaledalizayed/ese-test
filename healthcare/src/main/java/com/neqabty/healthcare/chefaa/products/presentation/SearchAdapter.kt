@@ -46,7 +46,7 @@ class SearchAdapter(val invalidateMenuCallback: () -> Unit) :
         val item = items[position]
 
         Picasso.get()
-            .load(item.image?.replaceText())
+            .load(item.image.replaceText())
             .into(viewHolder.binding.medicationImage, object : Callback {
                 override fun onSuccess() {
                     viewHolder.binding.imageProgress.hide()

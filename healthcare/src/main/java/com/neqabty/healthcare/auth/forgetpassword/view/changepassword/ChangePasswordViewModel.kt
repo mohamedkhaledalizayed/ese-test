@@ -21,7 +21,7 @@ class ChangePasswordViewModel @Inject constructor(private val changePassword: Ch
         viewModelScope.launch(Dispatchers.IO){
             status.postValue(Resource.loading(data = null))
             try {
-                changePassword.build(body, token).collect(){
+                changePassword.build(body, token).collect {
                     status.postValue(Resource.success(data = it))
                 }
             }catch (e: Throwable){

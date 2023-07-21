@@ -40,7 +40,7 @@ class PhonesFragment : DialogFragment() {
             phoneNumbers = it.getString("phones").toString()
         }
 
-        val numbers = phoneNumbers?.split("-")
+        val numbers = phoneNumbers.split("-")
 
         val adapter = PhonesAdapter()
         adapter.onItemClickListener = object : PhonesAdapter.OnItemClickListener {
@@ -50,7 +50,7 @@ class PhonesFragment : DialogFragment() {
                 startActivity(intent)
             }
         }
-        adapter.submitList(numbers?.toMutableList())
+        adapter.submitList(numbers.toMutableList())
         binding.rvPhones.adapter = adapter
     }
 //region

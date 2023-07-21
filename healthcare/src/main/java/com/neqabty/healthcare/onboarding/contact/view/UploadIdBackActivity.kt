@@ -28,6 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -188,7 +189,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
 
     private fun getImage() {
         val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        i.setType("image/*")
+        i.type = "image/*"
         startActivityForResult(i, REQUEST_CODE)
     }
 
@@ -245,7 +246,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(
                 this,
-                arrayOf(f.getPath()),
+                arrayOf(f.path),
                 arrayOf("image/jpeg"),
                 null
             )
@@ -266,10 +267,8 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
     ): MultipartBody.Part { // use the FileUtils to get the actual file by uri
         val file = FileUtils.getFile(this, fileUri)
         // create RequestBody instance from file
-        val requestFile = RequestBody.create(
-            contentResolver.getType(fileUri).toString().toMediaTypeOrNull(),
-            file
-        )
+        val requestFile = file
+            .asRequestBody(contentResolver.getType(fileUri).toString().toMediaTypeOrNull())
 
 
         return MultipartBody.Part.createFormData(partName, file.name, requestFile)

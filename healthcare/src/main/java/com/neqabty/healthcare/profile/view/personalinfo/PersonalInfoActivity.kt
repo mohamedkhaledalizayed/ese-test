@@ -24,7 +24,7 @@ class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
         data.data.let {
             binding.etName.setText(it.fullName ?: "")
             binding.etEmail.setText(it.email ?: "")
-            binding.etPhone.setText(it.mobile ?: "")
+            binding.etPhone.setText(it.mobile)
             if (it.entity.type == "owner"){
                 binding.syndicate.text = "نقابتى"
                 binding.membershipId.visibility = View.GONE

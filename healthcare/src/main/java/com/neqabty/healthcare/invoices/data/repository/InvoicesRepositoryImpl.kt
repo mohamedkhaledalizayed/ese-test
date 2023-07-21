@@ -22,7 +22,7 @@ private fun InvoicesModel.toInvoicesEntity(): InvoicesEntity{
         fullName = account.fullname ?: "",
         status = status ?: "",
         membershipId = membership_id ?: "",
-        createdAt = created_at ?: "",
+        createdAt = created_at,
         netAmount = net_amount ?: "",
         serviceName = service_action.name ?: "",
         totalAmount = total_amount ?: "",

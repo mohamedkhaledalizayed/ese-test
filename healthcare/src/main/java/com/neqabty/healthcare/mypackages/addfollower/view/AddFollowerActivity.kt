@@ -69,7 +69,7 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
                         if (resource.data!!.isNotEmpty()) {
                             relationsList = resource.data
                             relationsAdapter.submitList(
-                                resource.data!!.toMutableList()
+                                resource.data.toMutableList()
                                     .also { list ->
                                         list.add(
                                             0,
@@ -101,7 +101,7 @@ class AddFollowerActivity : BaseActivity<ActivityAddFollowerBinding>() {
                             Toast.makeText(this@AddFollowerActivity, "تم إضافة التابع بنجاح.", Toast.LENGTH_LONG).show()
                             finish()
                         }else{
-                            Toast.makeText(this@AddFollowerActivity, resource.data!!.message, Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@AddFollowerActivity, resource.data.message, Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR ->{

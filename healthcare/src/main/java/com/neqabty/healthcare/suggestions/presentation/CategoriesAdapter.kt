@@ -10,7 +10,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.suggestions.domain.entity.CategoryEntity
 
 
-class CategoriesAdapter() : BaseAdapter() {
+class CategoriesAdapter : BaseAdapter() {
 
     private var listItems: MutableList<CategoryEntity> = ArrayList()
     var onItemClickListener: OnItemClickListener? = null

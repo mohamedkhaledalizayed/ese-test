@@ -46,20 +46,20 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     Status.SUCCESS -> {
                         hideProgressDialog()
                         if (resource.data!!.user.account.mobile.isNotEmpty()){
-                            sharedPreferences.isPhoneVerified = resource.data!!.user.account.verifiedAccount
-                            sharedPreferences.isSyndicateMember = resource.data!!.user.account.entity.type == "syndicate"
+                            sharedPreferences.isPhoneVerified = resource.data.user.account.verifiedAccount
+                            sharedPreferences.isSyndicateMember = resource.data.user.account.entity.type == "syndicate"
                             sharedPreferences.isAuthenticated = true
-                            sharedPreferences.token = resource.data!!.token
-                            sharedPreferences.email = resource.data!!.user.account.email
-                            sharedPreferences.code = resource.data!!.user.account.entity.code
-                            sharedPreferences.mainSyndicate = resource.data!!.user.account.entity.id
-                            sharedPreferences.image = resource.data!!.user.account.entity.image ?: ""
-                            sharedPreferences.syndicateName = resource.data!!.user.account.entity.name
+                            sharedPreferences.token = resource.data.token
+                            sharedPreferences.email = resource.data.user.account.email
+                            sharedPreferences.code = resource.data.user.account.entity.code
+                            sharedPreferences.mainSyndicate = resource.data.user.account.entity.id
+                            sharedPreferences.image = resource.data.user.account.entity.image ?: ""
+                            sharedPreferences.syndicateName = resource.data.user.account.entity.name
                             sharedPreferences.mobile = binding.etUsername.text.toString()
-                            sharedPreferences.name = resource.data!!.user.account.fullName ?: ""
-                            sharedPreferences.nationalId = resource.data!!.user.account.nationalId ?: ""
-                            sharedPreferences.membershipId = resource.data!!.user.membershipId
-                            sharedPreferences.userImage = "${resource.data!!.user.account.image}"
+                            sharedPreferences.name = resource.data.user.account.fullName ?: ""
+                            sharedPreferences.nationalId = resource.data.user.account.nationalId ?: ""
+                            sharedPreferences.membershipId = resource.data.user.membershipId
+                            sharedPreferences.userImage = "${resource.data.user.account.image}"
                             val mainIntent = Intent(this@LoginActivity, getTheNextActivityFromSignup())
                             startActivity(mainIntent)
                             finishAffinity()

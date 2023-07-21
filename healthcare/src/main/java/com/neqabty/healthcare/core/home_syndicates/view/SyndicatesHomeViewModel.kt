@@ -59,7 +59,7 @@ class SyndicatesHomeViewModel @Inject constructor(
             checkMemberStatus.postValue(Resource.loading(data = null))
 
             try {
-                checkMemberUseCase.build(nationalId).collect(){
+                checkMemberUseCase.build(nationalId).collect {
                     checkMemberStatus.postValue(Resource.success(data = it))
                 }
             }catch (e: Throwable){

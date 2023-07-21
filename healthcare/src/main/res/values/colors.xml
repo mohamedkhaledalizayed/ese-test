@@ -31,7 +31,6 @@
 
 
     <color name="colorPrimary">#5d81d4</color>
-    <color name="colorPrimaryAlpha">#CC5D81D4</color>
     <color name="colorPrimaryDark">#5d81d4</color>
     <color name="colorPrimaryLight">#4B90C1</color>
     <color name="colorAccent">#fd883f</color>
@@ -39,10 +38,7 @@
     <color name="primaryText">#001e2f</color>
     <color name="secondaryText">#6b6b6b</color>
     <color name="window_bg">#fbfbfc</color>
-    <color name="button_bg">#5d81d4</color>
     <color name="medical_group_bg">#eeeeee</color>
-    <color name="dark_green">#41941b</color>
-    <color name="dark_grey">#B6B3B3</color>
     <color name="splash_bg">#5d81d4</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
@@ -50,9 +46,7 @@
     <color name="background">#f0f5f7</color>
     <color name="red">#f44336</color>
     <color name="green">#13cb73</color>
-    <color name="gghh">#13cb73</color>
     <color name="colorGrey">#dddddd</color>
-    <color name="spotlightBackground">#BF575757</color>
 
     <color name="orange">#fdb32b</color>
 
@@ -66,16 +60,9 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <!--Packages-->
-    <color name="package_safe">#662b2c</color>
-    <color name="package_bronze">#da807e</color>
-    <color name="package_silver">#c3cace</color>
-    <color name="package_platinum">#838383</color>
-    <color name="package_gold">#d6b05a</color>
     <color name="background_color">#fbfbfc</color>
 
     <color name="color_black">#000000</color>
-    <color name="text_hint_color">#E8E8E8</color>
-    <color name="address_btn_bg">#A3A3A3</color>
     <color name="gray_yodawy">#555657</color>
     <color name="unselected_color">#777778</color>
 </resources>

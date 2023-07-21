@@ -236,7 +236,7 @@ class SubscriptionActivity : BaseActivity<ActivitySubscriptionBinding>() {
             f.createNewFile()
             val fo = FileOutputStream(f)
             fo.write(bytes.toByteArray())
-            MediaScannerConnection.scanFile(this, arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
+            MediaScannerConnection.scanFile(this, arrayOf(f.path), arrayOf("image/jpeg"), null)
             fo.close()
             return PhotoUI(path, name, Uri.parse(path + "/" + name))
         } catch (e1: IOException) {

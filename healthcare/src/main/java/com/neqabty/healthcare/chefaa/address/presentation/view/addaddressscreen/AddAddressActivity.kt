@@ -53,7 +53,7 @@ class AddAddressActivity : BaseActivity<CehfaaActivityAddAddressBinding>() {
             .setMessage(getString(R.string.please_wait))
             .build()
 
-        binding.street.setText("${district ?: ""}, ${city ?: ""}, ${gov ?: ""}")
+        binding.street.setText("${district}, ${city}, ${gov}")
 
         binding.homeLayout.setOnClickListener {
             buildingType = "المنزل"

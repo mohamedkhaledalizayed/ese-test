@@ -38,7 +38,7 @@ class SignupViewModel @Inject constructor(
             accountStatus.postValue(Resource.loading(data = null))
 
             try {
-                checkAccountUseCase.build(checkPhoneBody).collect(){
+                checkAccountUseCase.build(checkPhoneBody).collect {
                     accountStatus.postValue(Resource.success(data = it))
                 }
             }catch (e: Throwable){
@@ -53,7 +53,7 @@ class SignupViewModel @Inject constructor(
             otp.postValue(Resource.loading(data = null))
 
             try {
-                verifyPhoneUseCase.build(sendOTPBody).collect(){
+                verifyPhoneUseCase.build(sendOTPBody).collect {
                     otp.postValue(Resource.success(data = it))
                 }
             }catch (e: Throwable){
@@ -68,7 +68,7 @@ class SignupViewModel @Inject constructor(
             otpStatus.postValue(Resource.loading(data = null))
 
             try {
-                verifyPhoneUseCase.build(checkOTPBody).collect(){
+                verifyPhoneUseCase.build(checkOTPBody).collect {
                     otpStatus.postValue(Resource.success(data = it))
                 }
             }catch (e: Throwable){

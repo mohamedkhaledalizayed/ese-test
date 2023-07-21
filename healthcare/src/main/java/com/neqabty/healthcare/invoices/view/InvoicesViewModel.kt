@@ -19,7 +19,7 @@ class InvoicesViewModel @Inject constructor(private val getAllInvoicesUseCase: G
         invoices.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO){
             try {
-                getAllInvoicesUseCase.build().collect(){
+                getAllInvoicesUseCase.build().collect {
                     invoices.postValue(Resource.success(data = it))
                 }
             }catch (e: Exception){

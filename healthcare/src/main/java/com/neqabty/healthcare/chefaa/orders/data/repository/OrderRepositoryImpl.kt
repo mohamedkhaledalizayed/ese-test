@@ -98,7 +98,7 @@ private fun OrderItem.toItemEntity(): ItemEntity {
         id = id,
         note = note ?: "",
         orderId = orderId,
-        productId = productId ?: "",
+        productId = productId,
         productImage = productImage ?: "",
         type = type,
         updatedAt = updatedAt,

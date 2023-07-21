@@ -13,11 +13,5 @@
     <dimen name="margin_toolbar_top">@dimen/_26sdp</dimen>
     <dimen name="margin_toolbar_top_xx">@dimen/_40sdp</dimen>
 
-    <dimen name="elevation_level_small">@dimen/_5sdp</dimen>
-    <dimen name="elevation_level_medium">@dimen/_10sdp</dimen>
-    <dimen name="elevation_level_large">@dimen/_15sdp</dimen>
-
-    <dimen name="round_radius_small">@dimen/_5sdp</dimen>
     <dimen name="round_radius_medium">@dimen/_10sdp</dimen>
-    <dimen name="round_radius_large">@dimen/_15sdp</dimen>
 </resources>

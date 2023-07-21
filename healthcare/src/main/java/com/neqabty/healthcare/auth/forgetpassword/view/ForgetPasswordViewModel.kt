@@ -26,7 +26,7 @@ class ForgetPasswordViewModel @Inject constructor(private val sendOTP: SendOTP,
             otp.postValue(Resource.loading(data = null))
 
             try {
-                sendOTP.build(body).collect(){
+                sendOTP.build(body).collect {
                     otp.postValue(Resource.success(data = it))
                 }
             }catch (e: Throwable){
@@ -41,7 +41,7 @@ class ForgetPasswordViewModel @Inject constructor(private val sendOTP: SendOTP,
             otpStatus.postValue(Resource.loading(data = null))
 
             try {
-                checkOTP.build(body).collect(){
+                checkOTP.build(body).collect {
                     otpStatus.postValue(Resource.success(data = it))
                 }
             }catch (e: Throwable){

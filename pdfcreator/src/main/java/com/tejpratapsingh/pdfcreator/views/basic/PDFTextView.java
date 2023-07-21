@@ -30,7 +30,7 @@ public class PDFTextView extends PDFView implements Serializable {
         SMALL(TEXT_SIZE_SMALL);
 
         // declaring private variable for getting values
-        private float fontSize;
+        private final float fontSize;
 
         // getter method
         public float getFontSize() {

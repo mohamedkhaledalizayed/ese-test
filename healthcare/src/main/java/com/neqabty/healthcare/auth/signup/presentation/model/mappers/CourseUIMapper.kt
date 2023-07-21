@@ -7,7 +7,7 @@ import com.neqabty.healthcare.auth.signup.presentation.model.UserUIModel
 
 fun UserEntity.toUserUIModel(): UserUIModel {
     return UserUIModel(
-        email = email ?: "",
+        email = email,
         token = token,
         fullname = fullname,
         id = id,

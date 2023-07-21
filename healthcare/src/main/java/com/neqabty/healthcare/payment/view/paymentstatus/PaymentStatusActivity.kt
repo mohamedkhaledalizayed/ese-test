@@ -54,7 +54,7 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                             binding.nameValue.text = resource.data?.member_name?: resource.data?.mobile
 
                             if (resource.data?.itemId != null){
-                                binding.membershipNumberValue.text = "${resource.data?.itemId}"
+                                binding.membershipNumberValue.text = "${resource.data.itemId}"
                             }else{
                                 binding.membershipNumber.visibility = View.GONE
                                 binding.membershipNumberValue.visibility = View.GONE
@@ -65,9 +65,9 @@ class PaymentStatusActivity : BaseActivity<ActivityPaymentStatusBinding>() {
                             binding.serviceNameValue.text = "${resource.data?.serviceAction}"
                             binding.receiptNumberValue.text = resource.data?.gatewayReferenceId ?: ""
                             binding.receiptDateValue.text = AppUtils().dateFormat(resource.data!!.createdAt)
-                            binding.priceValue.text = "${resource.data?.netAmount}  ${getString(R.string.egp)} "
-                            binding.feesValue.text = "${resource.data?.totalFees}   ${getString(R.string.egp)}"
-                            binding.totalValue.text = "${resource.data?.totalAmount}   ${getString(R.string.egp)}"
+                            binding.priceValue.text = "${resource.data.netAmount}  ${getString(R.string.egp)} "
+                            binding.feesValue.text = "${resource.data.totalFees}   ${getString(R.string.egp)}"
+                            binding.totalValue.text = "${resource.data.totalAmount}   ${getString(R.string.egp)}"
 
                         }else{
                             binding.receiptLayout.visibility = View.GONE

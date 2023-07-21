@@ -165,13 +165,13 @@ class FilterBottomSheet : RoundedBottomSheetDialogFragment() {
                             resource.data?.governorates!!.toMutableList()
                                 .also { list -> list.add(0, ItemUi(0, "اختر المحافظة")) })
                         professionAdapter.submitList(
-                            resource.data!!.professions.toMutableList()
+                            resource.data.professions.toMutableList()
                                 .also { list -> list.add(0, ItemUi(0, "اختر التخصص")) })
                         providerTypesAdapter.submitList(
-                            resource.data!!.providerTypes.toMutableList()
+                            resource.data.providerTypes.toMutableList()
                                 .also { list -> list.add(0, ItemUi(0, "اختر نوع مقدم الخدمة")) })
                         degreeAdapter.submitList(
-                            resource.data!!.degrees.toMutableList()
+                            resource.data.degrees.toMutableList()
                                 .also { list -> list.add(0, ItemUi(0, "اختر الدرجة العلمية")) })
                         binding.spGovernment.setSelection(selectedGovernorate)
                         binding.spSpe.setSelection(selectedProfession)

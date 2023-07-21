@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toTopOf="@id/ci_intro"
         app:layout_constraintTop_toBottomOf="@id/tv_skip" />
 
-    <me.relex.circleindicator.CircleIndicator
+    <me.relex.mycircleindicator.CircleIndicator
         android:id="@+id/ci_intro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -10,7 +10,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.medicalnetwork.presentation.model.filters.ItemUi
 
 
-class CustomAdapter() : BaseAdapter() {
+class CustomAdapter : BaseAdapter() {
 
     private var listItems: MutableList<ItemUi> = ArrayList()
     var onItemClickListener: OnItemClickListener? = null

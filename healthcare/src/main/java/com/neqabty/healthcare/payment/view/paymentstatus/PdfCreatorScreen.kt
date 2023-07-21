@@ -120,7 +120,7 @@ class PdfCreatorScreen : PDFCreatorActivity()  {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         title.text = titleContent
-        title.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)).setPadding(20, 2, 20, 10);
+        title.setLayout(LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1F)).setPadding(20, 2, 20, 10)
         horizontalTitle.addView(title)
         pdfBody.addView(horizontalTitle)
 

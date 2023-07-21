@@ -70,7 +70,7 @@ class AddFollowersActivity : BaseActivity<ActivityAddFollowersBinding>() {
                         if (resource.data!!.isNotEmpty()) {
                             relationsList = resource.data
                             relationsAdapter.submitList(
-                                resource.data!!.toMutableList()
+                                resource.data.toMutableList()
                                     .also { list ->
                                         list.add(
                                             0,

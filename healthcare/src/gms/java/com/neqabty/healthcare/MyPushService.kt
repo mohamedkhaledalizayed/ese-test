@@ -21,7 +21,7 @@ class MyPushService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String) {
-        token?.let {
+        token.let {
             sendRegistrationToServer(token)
         }
     }
@@ -48,7 +48,7 @@ class MyPushService : FirebaseMessagingService() {
         val intent = Intent(this, NotificationsActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         intent.putExtra("notificationId", remoteMessage?.data?.get("request_id"))
-        intent.putExtra("serviceId", remoteMessage!!.data?.get("service_id"))
+        intent.putExtra("serviceId", remoteMessage!!.data.get("service_id"))
 
 //        var args = Bundle()
 //        args.putString("notificationId", remoteMessage!!.data?.get("request_id"))
@@ -67,8 +67,8 @@ class MyPushService : FirebaseMessagingService() {
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.logo)
-                .setContentTitle(remoteMessage?.data?.get("title"))
-                .setContentText(remoteMessage?.data?.get("body"))
+                .setContentTitle(remoteMessage.data.get("title"))
+                .setContentText(remoteMessage.data.get("body"))
                 .setAutoCancel(true)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 .setContentIntent(pendingIntent)

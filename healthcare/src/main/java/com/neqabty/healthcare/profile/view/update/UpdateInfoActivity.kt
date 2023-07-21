@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 
 
 @AndroidEntryPoint
@@ -169,13 +170,11 @@ class UpdateInfoActivity : BaseActivity<ActivityUpdateInfoBinding>() {
     ): MultipartBody.Part { // use the FileUtils to get the actual file by uri
         val file = FileUtils.getFile(this, fileUri)
         // create RequestBody instance from file
-        val requestFile = RequestBody.create(
-            contentResolver.getType(fileUri).toString().toMediaTypeOrNull(),
-            file
-        )
+        val requestFile = file
+            .asRequestBody(contentResolver.getType(fileUri).toString().toMediaTypeOrNull())
 
 
-        return MultipartBody.Part.createFormData(partName, file.name, requestFile);
+        return MultipartBody.Part.createFormData(partName, file.name, requestFile)
     }
 
     fun ministryLicenseOrder(view: View) {

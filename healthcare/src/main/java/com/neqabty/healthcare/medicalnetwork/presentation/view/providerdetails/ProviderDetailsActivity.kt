@@ -33,47 +33,47 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
     }
 
     private fun initializeViews(provider: ProvidersEntity){
-        if (provider?.serviceProviderType?.providerTypeEn == "Doctors"){
+        if (provider.serviceProviderType?.providerTypeEn == "Doctors"){
             binding.government.text = "سعر الكشف : ${provider.price} جنيه"
         }else{
-            binding.government.text = "نسبة الخصم : ${provider?.price}"
+            binding.government.text = "نسبة الخصم : ${provider.price}"
         }
 
-        binding.itemName.text = "${provider?.name}"
-        binding.addressValue.text = "${provider?.governorate?.governorateAr}, ${provider?.area?.areaName}, ${provider?.address}"
-        binding.phoneValue.text = "${provider?.phone}"
-        binding.phoneValue.text = "${provider?.phone}"
-        binding.phoneValue.visibility = if(provider?.phone.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.phone.visibility = if(provider?.phone.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.mobileValue.text = "${provider?.mobile}"
-        binding.mobileValue.visibility = if(provider?.mobile.isNullOrEmpty()) View.GONE else View.VISIBLE
-        binding.mobile.visibility = if(provider?.mobile.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.itemName.text = "${provider.name}"
+        binding.addressValue.text = "${provider.governorate.governorateAr}, ${provider.area?.areaName}, ${provider.address}"
+        binding.phoneValue.text = "${provider.phone}"
+        binding.phoneValue.text = "${provider.phone}"
+        binding.phoneValue.visibility = if(provider.phone.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.phone.visibility = if(provider.phone.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.mobileValue.text = "${provider.mobile}"
+        binding.mobileValue.visibility = if(provider.mobile.isNullOrEmpty()) View.GONE else View.VISIBLE
+        binding.mobile.visibility = if(provider.mobile.isNullOrEmpty()) View.GONE else View.VISIBLE
 
-        if (provider?.profession?.professionName.isNullOrEmpty()){
+        if (provider.profession?.professionName.isNullOrEmpty()){
             binding.profession.visibility = View.GONE
             binding.professionValue.visibility = View.GONE
         }else{
-            binding.professionValue.text = provider?.profession?.professionName
+            binding.professionValue.text = provider.profession?.professionName
         }
 
-        if (provider?.degree?.degreeName.isNullOrEmpty()){
+        if (provider.degree?.degreeName.isNullOrEmpty()){
             binding.degree.visibility = View.GONE
             binding.degreeValue.visibility = View.GONE
         }else{
-            binding.degreeValue.text = provider?.degree?.degreeName
+            binding.degreeValue.text = provider.degree?.degreeName
         }
         binding.phoneValue.setOnClickListener {
-            if (provider?.phone != "لا يوجد"){
-                openPhonesFragment(provider?.phone!!)
+            if (provider.phone != "لا يوجد"){
+                openPhonesFragment(provider.phone)
             }
         }
         binding.mobileValue.setOnClickListener {
-            if (provider?.mobile != "لا يوجد"){
-                openPhonesFragment(provider?.mobile!!)
+            if (provider.mobile != "لا يوجد"){
+                openPhonesFragment(provider.mobile!!)
             }
         }
-        binding.notesValue.text = provider?.notes
-        binding.providerSp.text =  "${provider?.serviceProviderType?.providerTypeAr}"
+        binding.notesValue.text = provider.notes
+        binding.providerSp.text =  "${provider.serviceProviderType?.providerTypeAr}"
         binding.reviewRecycler.adapter = mAdapter
         mAdapter.onItemClickListener = object :
             ReviewsAdapter.OnItemClickListener {
@@ -84,7 +84,7 @@ class ProviderDetailsActivity : BaseActivity<ActivityProviderDetailsBinding>() {
             }
         }
 
-        binding.bContact.visibility = if(provider?.hasQR == true) View.VISIBLE else View.GONE
+        binding.bContact.visibility = if(provider.hasQR == true) View.VISIBLE else View.GONE
         binding.bContact.setOnClickListener {
             val intent = Intent(this@ProviderDetailsActivity, ContactInstallmentsActivity::class.java)
             intent.putExtra("provider", intent.getParcelableExtra<ProvidersEntity>("provider"))

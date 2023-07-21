@@ -10,7 +10,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.relation.domain.entity.RelationEntityList
 
 
-class RelationsAdapter() : BaseAdapter() {
+class RelationsAdapter : BaseAdapter() {
 
     private var listItems: MutableList<RelationEntityList> = ArrayList()
     var onItemClickListener: OnItemClickListener? = null

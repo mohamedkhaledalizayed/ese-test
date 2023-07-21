@@ -305,7 +305,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 20, bytes)
         val path: String = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString()
-        val name = Calendar.getInstance().getTimeInMillis().toString() + ".jpg"
+        val name = Calendar.getInstance().timeInMillis.toString() + ".jpg"
         val directory = File(path)
         if (!directory.exists())
             directory.mkdirs()
@@ -315,7 +315,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
             f.createNewFile()
             val fo = FileOutputStream(f)
             fo.write(bytes.toByteArray())
-            MediaScannerConnection.scanFile(this, arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
+            MediaScannerConnection.scanFile(this, arrayOf(f.path), arrayOf("image/jpeg"), null)
             fo.close()
             return PhotoUI(path, name, Uri.parse(path + "/" + name))
         } catch (e1: IOException) {

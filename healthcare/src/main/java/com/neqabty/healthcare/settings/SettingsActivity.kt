@@ -59,11 +59,11 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
                 intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
 
                 // for Android 5-7
-                intent.putExtra("app_package", getPackageName())
-                intent.putExtra("app_uid", getApplicationInfo().uid)
+                intent.putExtra("app_package", packageName)
+                intent.putExtra("app_uid", applicationInfo.uid)
 
                 // for Android 8 and above
-                intent.putExtra("android.provider.extra.APP_PACKAGE", getPackageName())
+                intent.putExtra("android.provider.extra.APP_PACKAGE", packageName)
 
                 startActivityForResult(intent, 0)
             }
@@ -181,7 +181,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
             } else {
                 // There was some problem, log or handle the error code.
-                @ReviewErrorCode val reviewErrorCode = (task.getException() as ReviewException).errorCode
+                @ReviewErrorCode val reviewErrorCode = (task.exception as ReviewException).errorCode
             }
         }
     }

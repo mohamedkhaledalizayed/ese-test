@@ -105,7 +105,7 @@ class ContactProvidersActivity : BaseActivity<ActivityContactProvidersBinding>()
                     Status.SUCCESS -> {
                         hideProgressDialog()
                         if (resource.data != null) {
-                            mAdapter.submitList(resource.data?.toMutableList())
+                            mAdapter.submitList(resource.data.toMutableList())
                         }
                     }
                     Status.ERROR -> {

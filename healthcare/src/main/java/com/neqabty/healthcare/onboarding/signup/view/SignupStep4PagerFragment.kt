@@ -120,15 +120,15 @@ class SignupStep4PagerFragment : Fragment() {
                         if (resource.data!!.mobile.isNotEmpty()) {
                             activity.sharedPreferences.isAuthenticated = true
                             activity.sharedPreferences.isSyndicateMember = SignupData.syndicateID != NEQABTY_CODE
-                            activity.sharedPreferences.token = resource.data!!.token
-                            activity.sharedPreferences.name = resource.data!!.fullname ?: ""
-                            activity.sharedPreferences.nationalId = resource.data!!.nationalId ?: ""
-                            activity.sharedPreferences.code = resource.data!!.entityCode
+                            activity.sharedPreferences.token = resource.data.token
+                            activity.sharedPreferences.name = resource.data.fullname ?: ""
+                            activity.sharedPreferences.nationalId = resource.data.nationalId ?: ""
+                            activity.sharedPreferences.code = resource.data.entityCode
                             activity.sharedPreferences.email = binding.etEmail.text.toString()
-                            activity.sharedPreferences.syndicateName = resource.data!!.entityName
-                            activity.sharedPreferences.image = resource.data!!.entityImage ?: ""
+                            activity.sharedPreferences.syndicateName = resource.data.entityName
+                            activity.sharedPreferences.image = resource.data.entityImage ?: ""
                             activity.sharedPreferences.code = SignupData.syndicateID
-                            activity.sharedPreferences.membershipId = resource.data!!.id.toString()
+                            activity.sharedPreferences.membershipId = resource.data.id.toString()
                             navigate()
                         } else {
                             Toast.makeText(

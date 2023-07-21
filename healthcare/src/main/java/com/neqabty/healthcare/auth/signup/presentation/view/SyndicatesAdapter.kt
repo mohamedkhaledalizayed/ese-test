@@ -10,7 +10,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.domain.entity.syndicate.SyndicateListEntity
 
 
-class SyndicatesAdapter() : BaseAdapter() {
+class SyndicatesAdapter : BaseAdapter() {
 
     private var listItems: MutableList<SyndicateListEntity> = ArrayList()
     var onItemClickListener: OnItemClickListener? = null

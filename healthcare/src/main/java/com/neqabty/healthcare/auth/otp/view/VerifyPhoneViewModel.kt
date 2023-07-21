@@ -23,7 +23,7 @@ class VerifyPhoneViewModel @Inject constructor(private val verifyPhoneUseCase: V
             otp.postValue(Resource.loading(data = null))
 
             try {
-                verifyPhoneUseCase.build(sendOTPBody).collect(){
+                verifyPhoneUseCase.build(sendOTPBody).collect {
                     otp.postValue(Resource.success(data = it))
                 }
             }catch (e: Throwable){
@@ -53,7 +53,7 @@ class VerifyPhoneViewModel @Inject constructor(private val verifyPhoneUseCase: V
             otpStatus.postValue(Resource.loading(data = null))
 
             try {
-                verifyPhoneUseCase.build(checkOTPBody).collect(){
+                verifyPhoneUseCase.build(checkOTPBody).collect {
                     otpStatus.postValue(Resource.success(data = it))
                 }
             }catch (e: Throwable){

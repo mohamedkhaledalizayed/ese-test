@@ -6,7 +6,7 @@ import com.neqabty.healthcare.auth.signup.domain.entity.UserEntity
 
 fun UserModel.toUserEntity(): UserEntity {
     return UserEntity(
-        email = email ?: "",
+        email = email,
         token = token.key,
         fullname = fullname,
         id = id,

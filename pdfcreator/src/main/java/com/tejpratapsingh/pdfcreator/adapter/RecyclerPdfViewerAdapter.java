@@ -19,7 +19,7 @@ import java.util.Locale;
 public class RecyclerPdfViewerAdapter extends RecyclerView.Adapter<RecyclerPdfViewerAdapter.ViewHolderPdfPage> {
     private static final String TAG = "RecyclerPdfViewerAdapte";
 
-    private LinkedList<Bitmap> pdfPagesImage = new LinkedList<>();
+    private final LinkedList<Bitmap> pdfPagesImage = new LinkedList<>();
 
     public RecyclerPdfViewerAdapter(@NonNull LinkedList<Bitmap> pdfPagesImage) {
         this.pdfPagesImage.addAll(pdfPagesImage);

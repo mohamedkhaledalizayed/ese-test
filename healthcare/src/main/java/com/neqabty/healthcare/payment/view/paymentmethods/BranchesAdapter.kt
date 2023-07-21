@@ -10,7 +10,7 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.payment.domain.entity.branches.BranchesEntity
 
 
-class BranchesAdapter() : BaseAdapter() {
+class BranchesAdapter : BaseAdapter() {
 
     private var listItems: MutableList<BranchesEntity> = ArrayList()
     var onItemClickListener: OnItemClickListener? = null

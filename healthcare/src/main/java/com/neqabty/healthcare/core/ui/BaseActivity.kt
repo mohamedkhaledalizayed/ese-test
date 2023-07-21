@@ -50,7 +50,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     abstract fun getViewBinding(): B
     var progressDialog: Dialog? = null
     override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(LocaleHelper.onAttach(base));
+        super.attachBaseContext(LocaleHelper.onAttach(base))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -157,7 +157,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
                 getString(R.string.internet_title)
             ) { finish() }
         }
-        LocaleHelper.setLocale(this, "ar");
+        LocaleHelper.setLocale(this, "ar")
     }
 
     private fun setAnimation() {

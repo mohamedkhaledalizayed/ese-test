@@ -129,10 +129,10 @@ public class PDFUtil {
     private static class GeneratePDFAsync extends AsyncTask<Void, Void, File> {
 
         // mContentViews.
-        private List<View> mContentViews;
+        private final List<View> mContentViews;
 
         // mFilePath.
-        private String mFilePath;
+        private final String mFilePath;
 
         // mListener.
         private PDFUtilListener mListener = null;
@@ -291,7 +291,7 @@ public class PDFUtil {
      */
     private static class APINotSupportedException extends Exception {
         // mErrorMessage.
-        private String mErrorMessage;
+        private final String mErrorMessage;
 
         /**
          * Constructor.
@@ -322,7 +322,7 @@ public class PDFUtil {
      * @return list of bitmap of every page
      * @throws Exception
      */
-    public static LinkedList<Bitmap> pdfToBitmap(File pdfFile) throws Exception, IllegalStateException {
+    public static LinkedList<Bitmap> pdfToBitmap(File pdfFile) throws Exception {
         if (pdfFile == null || pdfFile.exists() == false) {
             throw new IllegalStateException("PDF File Does Not Exist");
         }

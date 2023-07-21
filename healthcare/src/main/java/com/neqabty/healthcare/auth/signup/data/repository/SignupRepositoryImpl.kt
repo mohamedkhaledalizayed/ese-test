@@ -41,7 +41,7 @@ private fun EntityModel.toSyndicateListEntity(): SyndicateListEntity{
 
 fun NeqabtyMemberModel.toUserEntity(): UserEntity {
     return return UserEntity(
-        email = email ?: "",
+        email = email,
         token = token.key,
         fullname = fullname,
         id = id,

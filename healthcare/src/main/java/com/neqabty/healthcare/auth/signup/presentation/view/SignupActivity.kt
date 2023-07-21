@@ -128,7 +128,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                             sharedPreferences.mobile = binding.phone.text.toString()
                             sharedPreferences.token = resource.data.token.key
                             sharedPreferences.email = binding.email.text.toString()
-                            sharedPreferences.name = resource.data.fullname ?: ""
+                            sharedPreferences.name = resource.data.fullname
                             sharedPreferences.nationalId = resource.data.nationalId ?: ""
                             sharedPreferences.membershipId = binding.membershipId.text.toString()
                             sharedPreferences.code = resource.data.entity.code

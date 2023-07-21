@@ -37,7 +37,7 @@ public class FileManager {
     public enum IMAGE_QUALITY implements Serializable {
         HIGH(1024), MID(512), LOW(256);
 
-        private int size;
+        private final int size;
 
         IMAGE_QUALITY(int size) {
             this.size = size;
@@ -75,7 +75,7 @@ public class FileManager {
      * @return saved file
      * @throws IOException
      */
-    public File saveFileToPrivateStorageFromInputStream(Context context, InputStream inputStream, String fileName, boolean overWriteIfExist, boolean createThumbnail) throws Exception, IOException {
+    public File saveFileToPrivateStorageFromInputStream(Context context, InputStream inputStream, String fileName, boolean overWriteIfExist, boolean createThumbnail) throws Exception {
         // Create file directory if not exist
         makeDirectoryInPrivateStorage(context, fileName.substring(0, fileName.indexOf("/")));
         // Start referencing a new file
