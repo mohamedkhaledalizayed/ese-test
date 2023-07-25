@@ -66,7 +66,7 @@ class MyPushService : HmsMessageService() {
                 .setContentText(payload.get("body").toString())
                 .setAutoCancel(true)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .setContentIntent(pendingIntent)
+//                .setContentIntent(pendingIntent)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 

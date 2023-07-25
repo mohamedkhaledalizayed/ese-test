@@ -2,6 +2,7 @@ package com.neqabty.healthcare.onboarding.contact.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.RadioButton
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.databinding.ActivityEmploymentDetailsOneBinding
@@ -21,7 +22,7 @@ class EmploymentDetails1Activity : BaseActivity<ActivityEmploymentDetailsOneBind
 
     private fun initializeViews() {
         binding.bNext.setOnClickListener {
-            SubmitClientData.entity.employmentDetails.employmentStatus = binding.rgEmploymentType.checkedRadioButtonId.toString()
+            SubmitClientData.entity.employmentDetails.employmentStatus = findViewById<RadioButton>(binding.rgEmploymentType.checkedRadioButtonId).text.toString()
             navigate()
         }
 

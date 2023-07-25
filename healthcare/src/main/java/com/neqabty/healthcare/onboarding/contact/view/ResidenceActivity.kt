@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
@@ -54,7 +55,7 @@ class ResidenceActivity : BaseActivity<ActivityResidenceBinding>() {
         binding.bNext.setOnClickListener {
             SubmitClientData.entity.clientInfo.homeGov = binding.spGov.selectedItem.toString()
             SubmitClientData.entity.clientInfo.homeArea = binding.spArea.selectedItem.toString()
-            SubmitClientData.entity.clientInfo.residentStatus = binding.rgEmploymentType.checkedRadioButtonId.toString()
+            SubmitClientData.entity.clientInfo.residentStatus = findViewById<RadioButton>(binding.rgEmploymentType.checkedRadioButtonId).text.toString()
             navigate()
         }
 

@@ -54,8 +54,8 @@ class ReviewYourDataActivity : BaseActivity<ActivityReviewYourDataBinding>() {
             SubmitClientData.entity.nationalId = sharedPreferences.nationalId
             SubmitClientData.entity.userInputNationalId = sharedPreferences.nationalId
             SubmitClientData.entity.clientInfo.homeAddress = binding.tvAddress.text.toString()
-            SubmitClientData.entity.clientInfo.maritalStatus = sharedPreferences.nationalId
-            SubmitClientData.entity.clientInfo.email = binding.spMaritalStatus.selectedItem.toString()
+            SubmitClientData.entity.clientInfo.maritalStatus = binding.spMaritalStatus.selectedItem as String
+            SubmitClientData.entity.clientInfo.email = binding.etEmail.text.toString()
             navigate()
         }
 
@@ -65,8 +65,10 @@ class ReviewYourDataActivity : BaseActivity<ActivityReviewYourDataBinding>() {
 
         if(Constants.forTesting){
             binding.tvName.text = "name"
-            binding.spMaritalStatus.setSelection(1)
+            binding.spMaritalStatus.setSelection(2)
             binding.etEmail.setText("mona@gmail.com")
+            binding.tvAddress.text = "intent.extras?.getString(address)"
+
         }
     }
 
