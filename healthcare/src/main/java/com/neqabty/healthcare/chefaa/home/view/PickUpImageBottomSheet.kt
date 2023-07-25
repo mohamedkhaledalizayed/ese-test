@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.chefaa.home.presentation.homescreen
+package com.neqabty.healthcare.chefaa.home.view
 
 import android.annotation.SuppressLint
 import android.app.Dialog

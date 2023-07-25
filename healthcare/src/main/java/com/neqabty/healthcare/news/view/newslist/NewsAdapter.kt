@@ -53,7 +53,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
         viewHolder.binding.newsTitle.text = item.headline
         viewHolder.binding.newsContent.text = item.content
-        viewHolder.binding.newsDate.text = "  ${dateFormat(item.createdAt.split(".")[0])}"
+//        viewHolder.binding.newsDate.text = "  ${dateFormat(item.createdAt.split(".")[0])}"
 
         viewHolder.binding.itemLayout.setOnClickListener {
             onItemClickListener?.setOnItemClickListener(item)

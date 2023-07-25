@@ -1,21 +1,20 @@
-package com.neqabty.healthcare.chefaa.orders.presentation.view.orderdetailscreen
+package com.neqabty.healthcare.chefaa.orders.presentation.orderbynote
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.core.utils.replaceText
+import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.databinding.PrescriptionLayoutItemBinding
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
+import java.util.*
 
 
-class PrescriptionsAdapter (private val context: Context) : RecyclerView.Adapter<PrescriptionsAdapter.ViewHolder>() {
+class PrescriptionsAdapter : RecyclerView.Adapter<PrescriptionsAdapter.ViewHolder>() {
 
-    private val items: MutableList<String> = ArrayList()
+    private val items: MutableList<OrderItemsEntity> = ArrayList()
     private var layoutInflater: LayoutInflater? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -36,26 +35,13 @@ class PrescriptionsAdapter (private val context: Context) : RecyclerView.Adapter
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-//        Picasso.get()
-//            .load(items[position].replaceText())
-//            .into(viewHolder.binding.imageView, object : Callback {
-//                override fun onSuccess() {
-//                    viewHolder.binding.imageProgress.hide()
-//                }
-//
-//                override fun onError(e: Exception?) {
-//                    viewHolder.binding.imageProgress.hide()
-//                }
-//            })
-//
-//
-//        viewHolder.binding.imageView.setOnClickListener { onItemClickListener?.setOnItemClickListener(position) }
+        val order = items[position]
+        viewHolder.binding.delete.setOnClickListener { onItemClickListener?.setOnDeleteClickListener(position) }
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = Constants.cart.imageList.size
 
-    fun submitList(newItems: List<String>?) {
-        clear()
+    fun submitList(newItems: List<OrderItemsEntity>?) {
         newItems?.let {
             items.addAll(it)
             notifyDataSetChanged()
@@ -69,7 +55,7 @@ class PrescriptionsAdapter (private val context: Context) : RecyclerView.Adapter
     }
 
     interface OnItemClickListener {
-        fun setOnItemClickListener(itemId: Int)
+        fun setOnDeleteClickListener(position: Int)
     }
 
     class ViewHolder(val binding: PrescriptionLayoutItemBinding) :

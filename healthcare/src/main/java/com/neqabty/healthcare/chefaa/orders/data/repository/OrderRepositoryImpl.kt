@@ -107,10 +107,6 @@ private fun OrderItem.toItemEntity(): ItemEntity {
     )
 }
 
-private fun OrderClient.toOrderClientEntity(): OrderClientEntity {
-    return OrderClientEntity(id, name)
-}
-
 private fun OrderStatus.toOrderStatusEntity(): OrderStatusEntity {
     return OrderStatusEntity(id, titleAr, titleEn ?: "")
 }

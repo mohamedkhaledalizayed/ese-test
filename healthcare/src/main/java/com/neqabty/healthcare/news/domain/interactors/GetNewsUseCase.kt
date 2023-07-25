@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetNewsUseCase @Inject constructor(private val newsRepository: NewsRepository) {
-    fun build(): Flow<List<NewsEntity>> {
-        return newsRepository.getNews()
+    fun build(code: String): Flow<List<NewsEntity>> {
+        return newsRepository.getNews(code)
     }
 }

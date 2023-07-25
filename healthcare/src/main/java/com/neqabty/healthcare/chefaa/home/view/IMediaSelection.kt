@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.chefaa.home.presentation.homescreen
+package com.neqabty.healthcare.chefaa.home.view
 
 interface IMediaSelection {
     fun onCameraSelected()

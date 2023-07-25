@@ -1,4 +1,4 @@
-package com.neqabty.healthcare.chefaa.home.presentation.homescreen
+package com.neqabty.healthcare.chefaa.home.view
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

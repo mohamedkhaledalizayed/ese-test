@@ -30,7 +30,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.cart.CartActivity
-import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
+import com.neqabty.healthcare.chefaa.home.view.ChefaaHomeActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.core.home_general.GeneralHomeActivity

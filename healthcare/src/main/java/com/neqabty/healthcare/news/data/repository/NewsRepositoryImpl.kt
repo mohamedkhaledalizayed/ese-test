@@ -1,7 +1,8 @@
 package com.neqabty.healthcare.news.data.repository
 
 
-import com.neqabty.healthcare.news.data.model.News
+import com.neqabty.healthcare.news.data.model.NewsItem
+import com.neqabty.healthcare.news.data.model.NewsModel
 import com.neqabty.healthcare.news.data.source.NewsDS
 import com.neqabty.healthcare.news.domain.entity.NewsEntity
 import com.neqabty.healthcare.news.domain.repository.NewsRepository
@@ -10,15 +11,9 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(private val newsDS: NewsDS) : NewsRepository {
-    override fun getNews(): Flow<List<NewsEntity>> {
+    override fun getNews(code: String): Flow<List<NewsEntity>> {
         return flow {
-            emit(newsDS.getNews().map { it.toNewsEntity() })
-        }
-    }
-
-    override fun getSyndicateNews(syndicateId: String): Flow<List<NewsEntity>> {
-        return flow {
-            emit(newsDS.getSyndicateNews(syndicateId).map { it.toNewsEntity() })
+            emit(newsDS.getNews(code).map { it.toNewsEntity() })
         }
     }
 
@@ -29,8 +24,18 @@ class NewsRepositoryImpl @Inject constructor(private val newsDS: NewsDS) : NewsR
     }
 }
 
-private fun News.toNewsEntity(): NewsEntity {
+private fun NewsItem.toNewsEntity(): NewsEntity {
     return NewsEntity(
-        author.id, author.entityCode, content, createdAt, headline, id, image, source, type, updatedAt, url
+        authorId = author.id,
+        authorCode = author.code,
+        content = content,
+        createdAt = "",
+        headline = headline,
+        id = id,
+        image = image,
+        source = source ?: "",
+        type = type ?: "",
+        updatedAt = "",
+        url = url ?: ""
     )
 }

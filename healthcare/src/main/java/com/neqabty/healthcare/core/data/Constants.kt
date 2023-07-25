@@ -111,19 +111,14 @@ data class Cart(
 ) {
     val size: Int
         get() {
-            val x = productList.size + imageList.size
-            if (note != null)
-                return x + 1
-            return x
+            return productList.size
         }
 
     fun getChildrenCounter(): Int {
-        var count = imageList.size
+        var count = 0
         this.productList.forEach {
             count += it.quantity
         }
-        if (note != null)
-            return count + 1
         return count
     }
 

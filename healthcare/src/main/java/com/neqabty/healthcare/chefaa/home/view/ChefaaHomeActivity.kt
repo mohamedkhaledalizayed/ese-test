@@ -1,9 +1,10 @@
-package com.neqabty.healthcare.chefaa.home.presentation.homescreen
+package com.neqabty.healthcare.chefaa.home.view
 
 
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -83,24 +84,17 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
             it?.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
-//                        binding.progressActivity.showLoading()
                     }
                     Status.SUCCESS -> {
                         if (resource.data!!.isEmpty()){
                             binding.noPreviousOrders.visibility = View.VISIBLE
                             binding.noPreviousOrdersText.visibility = View.VISIBLE
-//                            if (mAdapter.itemCount == 0){
-//                                binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "لا يوجد طلبات", "لم تقم باى طلب من قبل")
-//                            }else{
-//                                binding.progressActivity.showContent()
-//                            }
                         }else{
-//                            binding.progressActivity.showContent()
                             mAdapter.submitList(resource.data)
                         }
                     }
                     Status.ERROR -> {
-//                        binding.progressActivity.showEmpty(R.drawable.ic_no_data_found, "خطا", resource.message)
+                        Toast.makeText(this@ChefaaHomeActivity, resource.message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -144,6 +138,10 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
         }
 
         binding.addPrescription.setOnClickListener {
+            if (cart.productList.isNotEmpty()){
+                showWarning("فى حالة اضافة روشتة سوف يتم حذف المنتجات من عربة التسوق.")
+                return@setOnClickListener
+            }
             if (cart.imageList.size >= 5){
                 Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
@@ -165,6 +163,23 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
             AppUtils().call(this, CHEFAA_SUPPORT_NUMBER)
         }
 
+    }
+
+    private fun showWarning(message: String, title: String = getString(R.string.alert_title)) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(title)
+        builder.setCancelable(false)
+        builder.setMessage(message)
+        builder.setPositiveButton(getString(R.string.ok_btn)) { dialog, _ ->
+           cart.productList.clear()
+            Toast.makeText(this, "تم حذف جميع المنتجات من عربة التسوق بنجاخ.", Toast.LENGTH_LONG).show()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton(getString(R.string.no_btn)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     override fun onResume() {

@@ -308,7 +308,7 @@
             android:name=".chefaa.address.presentation.view.adressscreen.AddressesActivity"
             android:exported="false" />
         <activity
-            android:name=".chefaa.home.presentation.homescreen.ChefaaHomeActivity"
+            android:name=".chefaa.home.view.ChefaaHomeActivity"
             android:exported="false" />
         <activity
             android:name=".chefaa.orders.presentation.orderbynote.OrderByNoteActivity"

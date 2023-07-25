@@ -5,7 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import com.neqabty.healthcare.R
-import com.neqabty.healthcare.chefaa.home.presentation.homescreen.ChefaaHomeActivity
+import com.neqabty.healthcare.chefaa.home.view.ChefaaHomeActivity
 import com.neqabty.healthcare.clinido.view.ClinidoActivity
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity

@@ -36,19 +36,15 @@ class AppUtils {
                 404 -> {
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
                 }
-                406 -> {
-                    val errorObject = JSONObject(throwable.response()!!.errorBody()?.string())
-                    errorObject.getString("message")
-                }
                 500 -> {
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
                 }
                 else -> {
-                    "No Internet Connection"
+                    "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
                 }
             }
         } else {
-            throwable.message ?: ""
+            "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
         }
     }
 

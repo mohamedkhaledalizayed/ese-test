@@ -31,14 +31,7 @@ class NewsListActivity : BaseActivity<ActivityNewsListBinding>() {
 
         setupToolbar(titleResId = R.string.news_title)
 
-
-//        if (intent.getStringExtra("id") == null || intent.getIntExtra("type", -1) == 1){
-//            setupToolbar( titleResId = R.string.general_news)
-//            homeViewModel.getAllNews()
-//        }else{
-//            setupToolbar( titleResId = R.string.news_title)
-            homeViewModel.getSyndicateNews(sharedPreferences.code)
-//        }
+        homeViewModel.getAllNews(sharedPreferences.code)
 
         binding.etSearch.requestFocus()
         imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
