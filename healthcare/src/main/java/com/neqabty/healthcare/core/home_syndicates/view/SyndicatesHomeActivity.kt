@@ -172,7 +172,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
     }
 
     private fun renderContactCard() {
-        if (sharedPreferences.isContactSubscriber) {
+        if (sharedPreferences.isContactActiveSubscriber) {
             binding.tvContactName.text = sharedPreferences.name
             binding.tvBalance.visibility = View.VISIBLE
             binding.ivContactQr.visibility = View.VISIBLE
@@ -193,7 +193,8 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
             startActivity(Intent(this, ContactProvidersActivity::class.java))
         }
         binding.ivContactSubscribe.setOnClickListener {
-            startActivity(Intent(this, getContactEntryPoint()))
+            sharedPreferences.isSkippedToHome = false
+            startActivity(Intent(this, getTheNextActivityFromIntro()))
         }
     }
 
@@ -212,7 +213,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
                         hideProgressDialog()
                         binding.root.visibility = View.VISIBLE
                         if (resource.data != null) {
-                            sharedPreferences.isContactSubscriber = !resource.data.authorized
+                            sharedPreferences.isContactActiveSubscriber = !resource.data.authorized
                             renderContactCard()
                         } else {
                             getContactMemberStatus()
@@ -310,11 +311,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
     }
 
     override fun onBackPressed() {
-        if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember) {
-            closeApp(getString(R.string.exit))
-        } else {
-            finish()
-        }
+        closeApp()
     }
 
 
@@ -333,27 +330,6 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         }
         alertDialog.setButton(
             AlertDialog.BUTTON_NEGATIVE, getString(R.string.disagree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-        }
-        alertDialog.show()
-
-    }
-
-    private fun closeApp(message: String) {
-
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle(getString(R.string.alert))
-        alertDialog.setMessage(message)
-        alertDialog.setCancelable(true)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-            finishAffinity()
-        }
-        alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)
         ) { dialog, _ ->
             dialog.dismiss()
         }

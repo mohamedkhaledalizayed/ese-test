@@ -35,21 +35,6 @@
         android:src="@drawable/img_nat_id_back"
         app:layout_constraintTop_toBottomOf="@id/tv_enter_national_id_back" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/b_skip"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/skip"
-        android:textColor="@color/colorPrimary"
-        android:textSize="?textSizeMedium"
-        android:visibility="gone"
-        app:cornerRadius="@dimen/_5sdp"
-        app:layout_constraintBottom_toTopOf="@id/b_next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:strokeColor="@color/colorPrimary"
-        app:strokeWidth="@dimen/_1sdp" />
-
     <TextView
         android:id="@+id/b_next"
         android:layout_width="match_parent"

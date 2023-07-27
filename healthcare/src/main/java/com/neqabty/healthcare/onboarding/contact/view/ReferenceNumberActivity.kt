@@ -54,7 +54,6 @@ class ReferenceNumberActivity : BaseActivity<ActivityReferenceNumberBinding>() {
             EmploymentDetails1Activity::class.java
         )
         startActivity(mainIntent)
-        finishAffinity()
     }
 // endregion
 }

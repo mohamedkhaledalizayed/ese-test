@@ -56,7 +56,7 @@ class ReviewYourDataActivity : BaseActivity<ActivityReviewYourDataBinding>() {
             SubmitClientData.entity.clientInfo.homeAddress = binding.tvAddress.text.toString()
             SubmitClientData.entity.clientInfo.maritalStatus = binding.spMaritalStatus.selectedItem as String
             SubmitClientData.entity.clientInfo.email = binding.etEmail.text.toString()
-            navigate()
+            startActivity(Intent(this, ResidenceActivity::class.java))
         }
 
         binding.bSkip.setOnClickListener {
@@ -76,10 +76,14 @@ class ReviewYourDataActivity : BaseActivity<ActivityReviewYourDataBinding>() {
     private fun navigate() {
         val mainIntent = Intent(
             this,
-            ResidenceActivity::class.java
+            getHomeActivity()
         )
         startActivity(mainIntent)
         finishAffinity()
+    }
+
+    override fun onBackPressed() {
+        closeApp()
     }
 // endregion
 }

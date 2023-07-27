@@ -68,6 +68,7 @@ class EmploymentDetails3Activity : BaseActivity<ActivityEmploymentDetailsThreeBi
                         hideProgressDialog()
                         if (resource.data != null && resource.data.success) {
                             showAlert(getString(R.string.client_submitted)) {
+                                sharedPreferences.isContactActiveSubscriber = true
                                 navigate()
                             }
                         }
@@ -85,7 +86,7 @@ class EmploymentDetails3Activity : BaseActivity<ActivityEmploymentDetailsThreeBi
     private fun navigate() {
         val mainIntent = Intent(
             this,
-            getTheNextActivityFromSignup()
+            getHomeActivity()
         )
         startActivity(mainIntent)
         finishAffinity()

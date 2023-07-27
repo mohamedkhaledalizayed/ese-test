@@ -15,7 +15,7 @@ import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySignupMainBinding
-import com.neqabty.healthcare.onboarding.contact.view.SigninDoneActivity
+import com.neqabty.healthcare.onboarding.contact.view.ContactCheckMemberActivity
 import com.neqabty.healthcare.onboarding.signup.data.SignupData
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -106,7 +106,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                         }
                         val mainIntent = Intent(
                             this,
-                            SigninDoneActivity::class.java
+                            ContactCheckMemberActivity::class.java
                         )
                         startActivity(mainIntent)
                         finishAffinity()
@@ -119,6 +119,11 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
 
         binding.bSkip.setOnClickListener {
             navigate()
+        }
+
+        if(sharedPreferences.isPhoneVerified){
+            movePagertoNext()
+            movePagertoNext()
         }
     }
 
@@ -160,7 +165,6 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                                 sendOTP()
                             }
                             movePagertoNext()
-                            movePagertoNext()
                         }
                     }
                     Status.ERROR ->{
@@ -175,7 +179,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
     private fun navigate() {
         val mainIntent = Intent(
             this,
-            getTheNextActivityFromSignup()
+            getHomeActivity()
         )
         startActivity(mainIntent)
         finishAffinity()
@@ -267,8 +271,8 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
     }
 
     override fun onBackPressed() {
-        if (binding.slvpSignup.currentItem == 0)
-            super.onBackPressed()
+        if (binding.slvpSignup.currentItem == 0 || binding.slvpSignup.currentItem == 2)
+            closeApp()
         else
             binding.slvpSignup.setCurrentItem(binding.slvpSignup.currentItem - 1, true)
     }

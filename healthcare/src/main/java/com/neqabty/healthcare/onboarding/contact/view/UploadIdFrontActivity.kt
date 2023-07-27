@@ -60,11 +60,6 @@ class UploadIdFrontActivity : BaseActivity<ActivityUploadIdFrontBinding>() {
                 UploadIdBackActivity::class.java
             )
             startActivity(mainIntent)
-            finishAffinity()
-        }
-
-        binding.bSkip.setOnClickListener {
-            navigate()
         }
     }
 
@@ -168,15 +163,6 @@ class UploadIdFrontActivity : BaseActivity<ActivityUploadIdFrontBinding>() {
 
 
         return MultipartBody.Part.createFormData(partName, file.name, requestFile)
-    }
-
-    private fun navigate() {
-        val mainIntent = Intent(
-            this,
-            getTheNextActivityFromSignup()
-        )
-        startActivity(mainIntent)
-        finishAffinity()
     }
 // endregion
 }

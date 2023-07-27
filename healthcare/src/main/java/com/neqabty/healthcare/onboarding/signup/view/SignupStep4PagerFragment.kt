@@ -16,7 +16,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.core.utils.isNationalIdValid
 import com.neqabty.healthcare.core.utils.isValidEmail
 import com.neqabty.healthcare.databinding.FragmentSignupStepFourBinding
-import com.neqabty.healthcare.onboarding.contact.view.SigninDoneActivity
+import com.neqabty.healthcare.onboarding.contact.view.ContactCheckMemberActivity
 import com.neqabty.healthcare.onboarding.signup.data.SignupData
 
 class SignupStep4PagerFragment : Fragment() {
@@ -199,7 +199,7 @@ class SignupStep4PagerFragment : Fragment() {
     private fun navigate() {
         val mainIntent = Intent(
             requireActivity(),
-            SigninDoneActivity::class.java
+            ContactCheckMemberActivity::class.java
         )
         startActivity(mainIntent)
         requireActivity().finishAffinity()

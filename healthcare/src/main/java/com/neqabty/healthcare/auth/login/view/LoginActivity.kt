@@ -60,7 +60,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                             sharedPreferences.nationalId = resource.data.user.account.nationalId ?: ""
                             sharedPreferences.membershipId = resource.data.user.membershipId
                             sharedPreferences.userImage = "${resource.data.user.account.image}"
-                            val mainIntent = Intent(this@LoginActivity, getTheNextActivityFromSignup())
+                            val mainIntent = Intent(this@LoginActivity, getHomeActivity())
                             startActivity(mainIntent)
                             finishAffinity()
 
@@ -83,7 +83,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         binding.skipBtn.setOnClickListener {
             val mainIntent = Intent(
                 this,
-                getTheNextActivityFromSignup()
+                getHomeActivity()
             )
             startActivity(mainIntent)
             finishAffinity()
@@ -112,5 +112,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
         loginViewModel.login(binding.etUsername.text.toString(),
             binding.etPassword.text.toString(), sharedPreferences.token, sharedPreferences.firebaseToken)
+    }
+
+    override fun onBackPressed() {
+        closeApp()
     }
 }

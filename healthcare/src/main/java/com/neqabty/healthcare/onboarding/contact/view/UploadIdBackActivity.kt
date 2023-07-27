@@ -64,10 +64,6 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
 
             createOcr()
         }
-
-        binding.bSkip.setOnClickListener {
-            navigate()
-        }
     }
 
     private fun initializeObservers() {
@@ -110,6 +106,7 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
                             if (resource.data.ocrStatus.equals("pending")) {
                                 showWaitingProgressbar()
                             } else { // OCR completed
+                                sharedPreferences.isContactSubscriber = true
                                 navigate()
                             }
                         }

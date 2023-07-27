@@ -18,6 +18,12 @@ class PreferencesHelper @Inject constructor(
         const val DEVELOP_MODE = false
         private const val IS_NOTIFICATIONS_ENABLED = "data.source.prefs.IS_NOTIFICATIONS_ENABLED"
         private const val IS_INTRO_SKIPPED = "data.source.prefs.IS_INTRO_SKIPPED"
+        private const val IS_SKIPPED_TO_HOME = "data.source.prefs.IS_SKIPPED_TO_HOME"
+        private const val IS_PHONE_VERIFIED = "data.source.prefs.IS_PHONE_VERIFIED"
+        private const val IS_AUTHENTICATED = "data.source.prefs.IS_AUTHENTICATED"
+        private const val IS_SYNDICATE_MEMBER = "data.source.prefs.IS_SYNDICATE_MEMBER"
+        private const val IS_CONTACT_SUBSCRIBER = "data.source.prefs.IS_CONTACT_SUBSCRIBER"
+        private const val IS_CONTACT_ACTIVE_SUBSCRIBER = "data.source.prefs.IS_CONTACT_ACTIVE_SUBSCRIBER"
         private const val MAIN_SYNDICATE = "data.source.prefs.MAIN_SYNDICATE"
         private const val NAME = "data.source.prefs.NAME"
         private const val TOKEN = "data.source.prefs.TOKEN"
@@ -33,10 +39,6 @@ class PreferencesHelper @Inject constructor(
         private const val NATIONAL_ID = "data.source.prefs.NATIONAL_ID"
         private const val MEMBERSHIP_ID = "data.source.prefs.MEMBERSHIP_ID"
         private const val LANGUAGE = "data.source.prefs.LANGUAGE"
-        private const val IS_PHONE_VERIFIED = "data.source.prefs.IS_PHONE_VERIFIED"
-        private const val IS_AUTHENTICATED = "data.source.prefs.IS_AUTHENTICATED"
-        private const val IS_SYNDICATE_MEMBER = "data.source.prefs.IS_SYNDICATE_MEMBER"
-        private const val IS_CONTACT_SUBSCRIBER = "data.source.prefs.IS_CONTACT_SUBSCRIBER"
     }
 
     var isNotificationsEnabled
@@ -46,6 +48,30 @@ class PreferencesHelper @Inject constructor(
     var isIntroSkipped
         get() = preferences.getBoolean(IS_INTRO_SKIPPED, false)
         set(value) = preferences.edit().putBoolean(IS_INTRO_SKIPPED, value).apply()
+
+    var isSkippedToHome
+        get() = preferences.getBoolean(IS_SKIPPED_TO_HOME, false)
+        set(value) = preferences.edit().putBoolean(IS_SKIPPED_TO_HOME, value).apply()
+
+    var isPhoneVerified
+        get() = preferences.getBoolean(IS_PHONE_VERIFIED, false)
+        set(value) = preferences.edit().putBoolean(IS_PHONE_VERIFIED, value).apply()
+
+    var isSyndicateMember
+        get() = preferences.getBoolean(IS_SYNDICATE_MEMBER, false)
+        set(value) = preferences.edit().putBoolean(IS_SYNDICATE_MEMBER, value).apply()
+
+    var isAuthenticated
+        get() = preferences.getBoolean(IS_AUTHENTICATED, false)
+        set(value) = preferences.edit().putBoolean(IS_AUTHENTICATED, value).apply()
+
+    var isContactSubscriber
+        get() = preferences.getBoolean(IS_CONTACT_SUBSCRIBER, false)
+        set(value) = preferences.edit().putBoolean(IS_CONTACT_SUBSCRIBER, value).apply()
+
+    var isContactActiveSubscriber
+        get() = preferences.getBoolean(IS_CONTACT_ACTIVE_SUBSCRIBER, false)
+        set(value) = preferences.edit().putBoolean(IS_CONTACT_ACTIVE_SUBSCRIBER, value).apply()
 
     var mainSyndicate
         get() = preferences.getInt(MAIN_SYNDICATE, -1)
@@ -106,22 +132,6 @@ class PreferencesHelper @Inject constructor(
     var fontSize
         get() = preferences.getString(FONT_SIZE, "medium")
         set(value) = preferences.edit().putString(FONT_SIZE, value).apply()
-
-    var isPhoneVerified
-        get() = preferences.getBoolean(IS_PHONE_VERIFIED, false)
-        set(value) = preferences.edit().putBoolean(IS_PHONE_VERIFIED, value).apply()
-
-    var isSyndicateMember
-        get() = preferences.getBoolean(IS_SYNDICATE_MEMBER, false)
-        set(value) = preferences.edit().putBoolean(IS_SYNDICATE_MEMBER, value).apply()
-
-    var isAuthenticated
-        get() = preferences.getBoolean(IS_AUTHENTICATED, false)
-        set(value) = preferences.edit().putBoolean(IS_AUTHENTICATED, value).apply()
-
-    var isContactSubscriber
-        get() = preferences.getBoolean(IS_CONTACT_SUBSCRIBER, false)
-        set(value) = preferences.edit().putBoolean(IS_CONTACT_SUBSCRIBER, value).apply()
 
     fun clearAll(): Unit {
         return preferences.edit().clear().apply()

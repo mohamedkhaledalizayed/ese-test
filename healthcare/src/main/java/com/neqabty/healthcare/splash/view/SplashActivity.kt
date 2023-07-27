@@ -56,7 +56,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                             Handler().postDelayed({
                                 val mainIntent = Intent(this, getTheNextActivityFromSplash())
                                 startActivity(mainIntent)
-                                finish()
+                                finishAffinity()
                             }, SPLASH_DISPLAY_LENGTH)
                         } else {
                             showUpdateAppAlertDialog()

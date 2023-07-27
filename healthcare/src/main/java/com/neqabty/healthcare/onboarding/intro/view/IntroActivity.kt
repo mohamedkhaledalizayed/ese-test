@@ -70,5 +70,9 @@ class IntroActivity : BaseActivity<ActivityIntroBinding>() {
         startActivity(mainIntent)
         finishAffinity()
     }
+
+    override fun onBackPressed() {
+        closeApp()
+    }
 // endregion
 }

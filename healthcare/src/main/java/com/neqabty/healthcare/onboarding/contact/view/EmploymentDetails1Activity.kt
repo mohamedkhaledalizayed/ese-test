@@ -38,7 +38,6 @@ class EmploymentDetails1Activity : BaseActivity<ActivityEmploymentDetailsOneBind
             EmploymentDetails2Activity::class.java
         )
         startActivity(mainIntent)
-        finishAffinity()
     }
 // endregion
 }

@@ -39,24 +39,24 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/hanimation_arabic_medium"
-                    android:text="@string/user_name"
-                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="@string/user_name"
                     android:textColor="#4D000000"
-                    android:textSize="@dimen/_12ssp"/>
+                    android:textSize="@dimen/_12ssp" />
 
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/hanimation_arabic_medium"
-                    android:text="@string/user_name"
-                    android:gravity="right"
                     android:layout_margin="@dimen/_10sdp"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:gravity="right"
+                    android:text="@string/user_name"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"/>
+                    android:textSize="@dimen/_12ssp" />
 
                 <View
                     android:layout_width="match_parent"
@@ -71,26 +71,24 @@
                     android:fontFamily="@font/hanimation_arabic_medium"
                     android:text="@string/national_id"
                     android:textColor="#4D000000"
-                    android:textSize="?textSizeSmall"
-               />
+                    android:textSize="?textSizeSmall" />
 
                 <TextView
                     android:id="@+id/tv_nat_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/hanimation_arabic_medium"
-                    android:text="12345678912345"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="12345678912345"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    />
+                    android:textSize="@dimen/_12ssp" />
 
-    <View
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#6ECBCBD4"/>
+                    android:background="#6ECBCBD4" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -105,11 +103,11 @@
                     android:id="@+id/tv_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/hanimation_arabic_medium"
-                    android:text="15ش ال................."
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
+                    android:fontFamily="@font/hanimation_arabic_medium"
+                    android:text="15ش ال................."
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp" />
 
@@ -153,22 +151,22 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <EditText
-                    android:id="@+id/et_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:background="@drawable/rounded_white_shadow"
-                    android:fontFamily="@font/hanimation_regular"
-                    android:hint="@string/email"
-                    android:padding="@dimen/_18sdp"
-                    android:inputType="textEmailAddress"
-                    android:longClickable="false"
-                    android:drawableEnd="@drawable/ic_email"
-                    android:textAlignment="viewStart"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cl_marital_status" />
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:background="@drawable/rounded_white_shadow"
+                android:drawableEnd="@drawable/ic_email"
+                android:fontFamily="@font/hanimation_regular"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:longClickable="false"
+                android:padding="@dimen/_18sdp"
+                android:textAlignment="viewStart"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_marital_status" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -179,10 +177,12 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/margin_medium"
         android:text="@string/skip"
         android:textColor="@color/colorPrimary"
         android:textSize="?textSizeMedium"
-        android:visibility="gone"
         app:cornerRadius="@dimen/_5sdp"
         app:layout_constraintBottom_toTopOf="@id/b_next"
         app:layout_constraintEnd_toEndOf="parent"
@@ -193,14 +193,15 @@
         android:id="@+id/b_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_16sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
         android:background="@drawable/select_btn_bg"
+        android:padding="@dimen/_10sdp"
         android:text="@string/next"
         android:textAlignment="center"
-        android:padding="@dimen/_10sdp"
         android:textColor="@color/white"
         android:textSize="@dimen/_12ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

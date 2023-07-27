@@ -134,7 +134,7 @@
             android:name=".onboarding.signup.view.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".onboarding.contact.view.SigninDoneActivity"
+            android:name=".onboarding.contact.view.ContactCheckMemberActivity"
             android:exported="false" />
         <activity
             android:name=".onboarding.contact.view.UploadIdFrontActivity"
@@ -217,9 +217,6 @@
             android:name=".contactus.ContactUsActivity"
             android:exported="false" />
         <activity
-            android:name=".complains.view.ComplainsActivity"
-            android:exported="false" />
-        <activity
             android:name=".profile.view.profile.ProfileActivity"
             android:exported="false" />
         <activity
@@ -259,9 +256,6 @@
         <activity
             android:name=".auth.otp.view.VerifyPhoneActivity"
             android:exported="false" />
-        <activity
-            android:name=".auth.signup.presentation.view.SignupActivity"
-            android:exported="true" />
 
         <uses-library
             android:name="org.apache.http.legacy"

@@ -36,7 +36,7 @@ import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
 import com.neqabty.healthcare.core.home_syndicates.view.SyndicatesHomeActivity
 import com.neqabty.healthcare.core.utils.LocaleHelper
-import com.neqabty.healthcare.onboarding.contact.view.SigninDoneActivity
+import com.neqabty.healthcare.onboarding.contact.view.ContactCheckMemberActivity
 import com.neqabty.healthcare.onboarding.intro.view.IntroActivity
 import com.neqabty.healthcare.onboarding.signup.view.SignupActivity
 import javax.inject.Inject
@@ -233,7 +233,7 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-    //region  router
+    //region  onboarding router
     protected fun getTheNextActivityFromSplash(): Class<Activity> {
         if (!sharedPreferences.isIntroSkipped)
             return IntroActivity::class.java as Class<Activity>
@@ -242,23 +242,24 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
     }
 
     protected fun getTheNextActivityFromIntro(): Class<Activity> {
-        if (sharedPreferences.mobile.isEmpty())
-            return SignupActivity::class.java as Class<Activity>
+        if (sharedPreferences.isSkippedToHome || sharedPreferences.isContactActiveSubscriber)
+            return getHomeActivity()
 
-        return getTheNextActivityFromSignup()
+        if(sharedPreferences.isContactSubscriber) //did the OCR, go to contact check member
+            return ContactCheckMemberActivity::class.java as Class<Activity>
+
+        if(sharedPreferences.isAuthenticated)
+            return ContactCheckMemberActivity::class.java as Class<Activity>
+
+        return SignupActivity::class.java as Class<Activity>
     }
 
-    fun getTheNextActivityFromSignup(): Class<Activity> {
+    fun getHomeActivity(): Class<Activity> {
+        sharedPreferences.isSkippedToHome = true
         if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember)
             return SyndicatesHomeActivity::class.java as Class<Activity> //TODO syndicate home
 
         return GeneralHomeActivity::class.java as Class<Activity> //TODO neqabty home
-    }
-
-    fun getContactEntryPoint(): Class<Activity> {
-        if(sharedPreferences.isAuthenticated)
-            return SigninDoneActivity::class.java as Class<Activity>
-        return SignupActivity::class.java as Class<Activity>
     }
     //endregion m
 
@@ -344,4 +345,26 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
 
         }
     }
+
+    protected fun closeApp(message: String? = getString(R.string.exit)) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            finishAffinity()
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
 }

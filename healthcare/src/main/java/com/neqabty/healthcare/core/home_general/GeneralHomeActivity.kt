@@ -1,6 +1,5 @@
 package com.neqabty.healthcare.core.home_general
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -139,7 +138,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
     }
 
     private fun renderContactCard() {
-        if (sharedPreferences.isContactSubscriber) {
+        if (sharedPreferences.isContactActiveSubscriber) {
             binding.tvContactName.text = sharedPreferences.name
             binding.tvBalance.visibility = View.VISIBLE
             binding.ivContactQr.visibility = View.VISIBLE
@@ -160,7 +159,8 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
             startActivity(Intent(this, ContactProvidersActivity::class.java))
         }
         binding.ivContactSubscribe.setOnClickListener {
-            startActivity(Intent(this, getContactEntryPoint()))
+            sharedPreferences.isSkippedToHome = false
+            startActivity(Intent(this, getTheNextActivityFromIntro()))
         }
     }
 
@@ -179,7 +179,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
                         hideProgressDialog()
                         binding.root.visibility = View.VISIBLE
                         if (resource.data != null){
-                            sharedPreferences.isContactSubscriber = !resource.data.authorized
+                            sharedPreferences.isContactActiveSubscriber = !resource.data.authorized
                             renderContactCard()
                         } else {
                             getContactMemberStatus()
@@ -223,32 +223,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
     }
 
     override fun onBackPressed() {
-        if (sharedPreferences.isAuthenticated && sharedPreferences.isSyndicateMember) {
-            closeApp(getString(R.string.exit))
-        } else {
-            finish()
-        }
-    }
-
-    private fun closeApp(message: String) {
-
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle(getString(R.string.alert))
-        alertDialog.setMessage(message)
-        alertDialog.setCancelable(true)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-            finishAffinity()
-        }
-        alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)
-        ) { dialog, _ ->
-            dialog.dismiss()
-        }
-        alertDialog.show()
-
+        closeApp()
     }
 
     //region

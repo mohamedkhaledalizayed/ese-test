@@ -10,13 +10,13 @@ import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.core.utils.isNationalIdValid
-import com.neqabty.healthcare.databinding.ActivitySigninDoneBinding
+import com.neqabty.healthcare.databinding.ActivityContactCheckMemberBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
-    override fun getViewBinding() = ActivitySigninDoneBinding.inflate(layoutInflater)
-    val signinDoneViewModel: SigninDoneViewModel by viewModels()
+class ContactCheckMemberActivity : BaseActivity<ActivityContactCheckMemberBinding>() {
+    override fun getViewBinding() = ActivityContactCheckMemberBinding.inflate(layoutInflater)
+    val contactCheckMemberViewModel: ContactCheckMemberViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
     }
 
     private fun observeOnCheckMemberStatus() {
-        signinDoneViewModel.checkMemberStatus.observe(this) {
+        contactCheckMemberViewModel.checkMemberStatus.observe(this) {
             it.let { resource ->
                 when (resource.status) {
                     Status.LOADING -> {
@@ -42,8 +42,14 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
                                     showTermsDialog()
                                 else if(resource.data.ocrStatus.equals("pending"))
                                     showWaitingProgressbar()
-                                else// OCR completed
-                                    startActivity(Intent(this, ReviewYourDataActivity::class.java))
+                                else{// OCR completed
+                                    val mainIntent = Intent(
+                                        this,
+                                        ReviewYourDataActivity::class.java
+                                    )
+                                    mainIntent.putExtra("address", resource.data.ocrs?.get(1)?.result?.extractedInfo?.street + " "+ resource.data.ocrs?.get(1)?.result?.extractedInfo?.governorate)
+                                    startActivity(mainIntent)
+                                }
 
                             }else
                                 showAlert(message = resource.data.message?: ""){finishAffinity()}
@@ -76,7 +82,7 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
                 return@setOnClickListener
             }
 
-            signinDoneViewModel.checkMemberStatus(nationalId = binding.etNationalId.text.toString())
+            contactCheckMemberViewModel.checkMemberStatus(nationalId = binding.etNationalId.text.toString())
         }
     }
 
@@ -97,7 +103,7 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
             override fun onFinish() {
                 binding.progressBar.progress = totalProgress
                 binding.clProgress.visibility = View.GONE
-                signinDoneViewModel.checkMemberStatus(nationalId = binding.etNationalId.text.toString())
+                contactCheckMemberViewModel.checkMemberStatus(nationalId = binding.etNationalId.text.toString())
             }
         }
 
@@ -109,11 +115,10 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
         bottomSheetFragment.onActionListener = object: ContactTermsBottomSheet.OnActionListener {
             override fun onAcceptListener() {
                 val mainIntent = Intent(
-                    this@SigninDoneActivity,
+                    this@ContactCheckMemberActivity,
                     UploadIdFrontActivity::class.java
                 )
                 startActivity(mainIntent)
-                finishAffinity()
             }
 
             override fun onDismissListener() {
@@ -126,10 +131,14 @@ class SigninDoneActivity : BaseActivity<ActivitySigninDoneBinding>() {
     private fun navigate() {
         val mainIntent = Intent(
             this,
-            getTheNextActivityFromSignup()
+            getHomeActivity()
         )
         startActivity(mainIntent)
         finishAffinity()
+    }
+
+    override fun onBackPressed() {
+        closeApp()
     }
 // endregion
 }

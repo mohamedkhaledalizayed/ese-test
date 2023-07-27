@@ -91,7 +91,6 @@ class DependantsActivity : BaseActivity<ActivityDependantsBinding>() {
             ReferenceNumberActivity::class.java
         )
         startActivity(mainIntent)
-        finishAffinity()
     }
 // endregion
 }
