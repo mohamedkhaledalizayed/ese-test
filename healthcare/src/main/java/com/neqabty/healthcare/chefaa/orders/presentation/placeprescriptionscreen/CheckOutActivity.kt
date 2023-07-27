@@ -123,6 +123,10 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
             }
         }
 
+        binding.completeBtn.setOnClickListener {
+            checkOut()
+        }
+
     }
 
     private fun getDeviceName(){
@@ -141,7 +145,6 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
 
         binding.total.text = "$totalPrice جنيه"
     }
-
 
     private fun updateView() {
         ///// checkout btn and Empty view
@@ -180,7 +183,7 @@ class CheckOutActivity : BaseActivity<CehfaaActivityCheckOutBinding>(), Location
         binding.completeBtn.visibility = View.VISIBLE
     }
 
-    fun checkOut(view: View) {
+    private fun checkOut() {
 
         if (!checkGPS()){
             buildAlertMessageNoGps()

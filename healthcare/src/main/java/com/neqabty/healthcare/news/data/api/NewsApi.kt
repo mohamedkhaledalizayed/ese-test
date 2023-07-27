@@ -6,7 +6,7 @@ import retrofit2.http.Query
 
 interface NewsApi {
     @GET("news")
-    suspend fun getNews(@Query("filter{author.entity_code}") syndicateId: String): NewsModel
+    suspend fun getNews(@Query("filter{author.code}") syndicateId: String): NewsModel
 
     @GET("news")
     suspend fun getNewsDetails(@Query("filter{id}") newsId: Int): NewsModel
