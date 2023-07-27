@@ -66,8 +66,8 @@ class EmploymentDetails3Activity : BaseActivity<ActivityEmploymentDetailsThreeBi
                     }
                     Status.SUCCESS -> {
                         hideProgressDialog()
-                        if (resource.data != null) {
-                            showAlert(message = resource.data.message ?: "") {
+                        if (resource.data != null && resource.data.success) {
+                            showAlert(getString(R.string.client_submitted)) {
                                 navigate()
                             }
                         }

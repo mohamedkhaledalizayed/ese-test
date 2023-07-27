@@ -161,6 +161,7 @@
     <string name="enter_years">من فضلك ادخل عدد السنين</string>
     <string name="enter_salary">من فضلك ادخل المرتب</string>
     <string name="phone_confirmed">تم تاكيد رقم الهاتف بنجاح.</string>
+    <string name="client_submitted">تم الاشتراك في كونتكت بنجاح.</string>
     <string name="enter_code">برجاء إدخال الكود الذى تم إرساله الى رقم الهاتف :</string>
     <string name="enter_code_">من فضلك ادخل الكود</string>
     <string name="serial_number">مسلسل الكمبيوتر</string>

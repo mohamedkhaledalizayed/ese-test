@@ -121,7 +121,7 @@ private fun GovResponse.toGovEntity(): GovEntity {
 
 private fun SubmitClientResponse.toSubmitClientEntity(): SubmitClientEntity {
     return SubmitClientEntity(
-        message.message.message.ar
+        success
     )
 }
 

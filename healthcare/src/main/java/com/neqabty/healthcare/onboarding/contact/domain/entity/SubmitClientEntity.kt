@@ -5,5 +5,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class SubmitClientEntity(
-    val message: String?
+    val success: Boolean
 ): Parcelable
