@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="@dimen/_15sdp"
     android:background="@color/white"
-    tools:context=".pharmacy.PharmacyTermsBottomSheet">
+    tools:context=".core.syndicates.SyndicateServiceBottomSheet">
 
 
     <ImageView
@@ -16,21 +17,60 @@
         android:src="@drawable/ic_baseline_close_24"/>
 
     <TextView
+        android:id="@+id/syndicate_name"
         android:fontFamily="@font/hanimation_arabic_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="الشروط و الاحكام"
+        android:text="اسم النقابة"
         android:layout_marginTop="@dimen/_10sdp"
         android:textColor="#424347"
         android:textSize="@dimen/_12ssp"/>
 
     <TextView
+        android:fontFamily="@font/hanimation_arabic_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/terms"
+        android:text="خدمات النقابة"
         android:layout_marginTop="@dimen/_10sdp"
         android:textColor="#424347"
         android:textSize="@dimen/_12ssp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_syndicate_services"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:scrollbars="none"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
+
+    <LinearLayout
+        android:id="@+id/chefaa_info_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/chefaa_info_bg"
+        app:layout_constraintTop_toBottomOf="@id/chefaa_main_functions_container"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/chefaa_info_icon"/>
+
+        <TextView
+            android:id="@+id/disclaimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/hanimation_regular"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="#6a6a6a"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/back_btn"
@@ -45,13 +85,13 @@
         />
 
     <TextView
-        android:id="@+id/agree_btn"
+        android:id="@+id/signup_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_20sdp"
         android:background="@drawable/select_btn_bg"
-        android:text="قبول"
+        android:text="التسجيل برقم اخر"
         android:textAlignment="center"
         android:padding="@dimen/_10sdp"
         android:textColor="@color/white"

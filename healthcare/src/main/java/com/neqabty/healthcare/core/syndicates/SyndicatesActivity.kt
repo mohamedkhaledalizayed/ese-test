@@ -11,6 +11,7 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySyndicatesBinding
 import com.neqabty.healthcare.invoices.view.InvoicesActivity
 import com.neqabty.healthcare.onboarding.signup.view.SyndicatesAdapter
+import com.neqabty.healthcare.pharmacy.PharmacyTermsBottomSheet
 import com.neqabty.healthcare.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.syndicates.domain.entity.SyndicateEntity
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>() {
     private val syndicatesViewModel: SyndicatesViewModel by viewModels()
     private val syndicatesAdapter = SyndicatesAdapter(hasCustomStyle = true)
+    private lateinit var  bottomSheetFragment: SyndicateServiceBottomSheet
     override fun getViewBinding() = ActivitySyndicatesBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +41,8 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>() {
         syndicatesAdapter.onItemClickListener = object :
             SyndicatesAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: SyndicateEntity) {
-                startActivity(Intent(this@SyndicatesActivity, SyndicatesHomeActivity::class.java))
+                bottomSheetFragment = SyndicateServiceBottomSheet.newInstance(item)
+                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
             }
         }
 
