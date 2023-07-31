@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.core.home_syndicates.view.SyndicatesHomeActivity
 import com.neqabty.healthcare.core.more.view.MoreActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
@@ -38,6 +39,7 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>() {
         syndicatesAdapter.onItemClickListener = object :
             SyndicatesAdapter.OnItemClickListener {
             override fun setOnItemClickListener(item: SyndicateEntity) {
+                startActivity(Intent(this@SyndicatesActivity, SyndicatesHomeActivity::class.java))
             }
         }
 

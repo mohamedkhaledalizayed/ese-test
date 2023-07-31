@@ -314,29 +314,6 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         closeApp()
     }
 
-
-    private fun openTermsDialog() {
-
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle("الشروط والاحكام")
-        alertDialog.setMessage(resources.getString(R.string.terms))
-        alertDialog.setCancelable(true)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-            title = "pharmacy"
-            syndicatesHomeViewModel.getUrl(phone = sharedPreferences.mobile, type = "pharmacy", name = sharedPreferences.name)
-        }
-        alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, getString(R.string.disagree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-        }
-        alertDialog.show()
-
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {

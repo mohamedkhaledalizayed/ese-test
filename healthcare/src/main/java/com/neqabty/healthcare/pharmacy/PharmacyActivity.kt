@@ -16,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelection {
 
+    private var clickedItem = ""
     override fun getViewBinding() = ActivityPharmacyBinding.inflate(layoutInflater)
     private val  bottomSheetFragment: PharmacyTermsBottomSheet by lazy { PharmacyTermsBottomSheet() }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,11 +27,11 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelec
         binding.backBtnHeader.setOnClickListener { finish() }
         binding.backBtn.setOnClickListener { finish() }
         binding.clinido.setOnClickListener {
-            val intent = Intent(this, ClinidoActivity::class.java)
-            intent.putExtra("title", "pharmacy")
-            startActivity(intent)
+            clickedItem = "clinido"
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
         binding.chefaa.setOnClickListener {
+            clickedItem = "chefaa"
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
     }
@@ -61,17 +62,23 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelec
     }
 
     override fun onAgreeClicked() {
-        if (sharedPreferences.isAuthenticated){
-            val intent = Intent(this, ChefaaHomeActivity::class.java)
-            intent.putExtra("user_number", sharedPreferences.mobile)
-            intent.putExtra("mobile_number", sharedPreferences.mobile)
-            intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
-            intent.putExtra("national_id", sharedPreferences.nationalId)
-            intent.putExtra("name", sharedPreferences.name)
-            intent.putExtra("jwt", "")
+        if (clickedItem == "clinido"){
+            val intent = Intent(this, ClinidoActivity::class.java)
+            intent.putExtra("title", "pharmacy")
             startActivity(intent)
+        }else{
+            if (sharedPreferences.isAuthenticated){
+                val intent = Intent(this, ChefaaHomeActivity::class.java)
+                intent.putExtra("user_number", sharedPreferences.mobile)
+                intent.putExtra("mobile_number", sharedPreferences.mobile)
+                intent.putExtra("country_code", sharedPreferences.mobile.substring(0,2))
+                intent.putExtra("national_id", sharedPreferences.nationalId)
+                intent.putExtra("name", sharedPreferences.name)
+                intent.putExtra("jwt", "")
+                startActivity(intent)
             }else{
                 askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
             }
+        }
     }
 }

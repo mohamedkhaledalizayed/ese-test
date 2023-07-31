@@ -336,5 +336,8 @@
     <string name="contact_monthly_installment">القسط الشهري</string>
     <string name="contact_months">عدد الشهور</string>
     <string name="verification">تأكيد رقم الموبايل</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout">هل تريد الخروج!</string>
 
 </resources>

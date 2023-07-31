@@ -21,6 +21,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
 import com.karumi.dexter.Dexter
@@ -31,6 +33,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.cart.CartActivity
 import com.neqabty.healthcare.chefaa.home.view.ChefaaHomeActivity
+import com.neqabty.healthcare.contactus.NumbersDialog
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.PreferencesHelper
 import com.neqabty.healthcare.core.home_general.GeneralHomeActivity
@@ -346,25 +349,11 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         }
     }
 
-    protected fun closeApp(message: String? = getString(R.string.exit)) {
-
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle(getString(R.string.alert))
-        alertDialog.setMessage(message)
-        alertDialog.setCancelable(true)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-            finishAffinity()
-        }
-        alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)
-        ) { dialog, _ ->
-            dialog.dismiss()
-        }
-        alertDialog.show()
-
+    protected fun closeApp() {
+        val fm: FragmentManager = supportFragmentManager
+        val dialog = ExitDialog()
+        dialog.show(fm, "")
+        dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
     }
 
 }
