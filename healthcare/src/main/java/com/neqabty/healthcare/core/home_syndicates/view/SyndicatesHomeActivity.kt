@@ -92,13 +92,21 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         }
 
         binding.llPharmacy.setOnClickListener {
-            val intent = Intent(this, PharmacyActivity::class.java)
-            startActivity(intent)
+            if (sharedPreferences.isAuthenticated){
+                val intent = Intent(this, PharmacyActivity::class.java)
+                startActivity(intent)
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
         }
 
         binding.llDoctorsReservation.setOnClickListener {
-            title = "doctors"
-            syndicatesHomeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors", name = sharedPreferences.name)
+            if (sharedPreferences.isAuthenticated){
+                title = "doctors"
+                syndicatesHomeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors", name = sharedPreferences.name)
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
         }
 
         binding.llOnlineConsultation.setOnClickListener {

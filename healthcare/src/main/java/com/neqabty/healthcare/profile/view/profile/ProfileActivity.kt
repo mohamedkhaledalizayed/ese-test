@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.PushNotificationsWrapper
@@ -63,14 +64,22 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
         binding.headerContainer.setOnClickListener { finish() }
 
         binding.profile.setOnClickListener {
-            val intent = Intent(this, PersonalInfoActivity::class.java)
-            intent.putExtra("data", profileEntity)
-            startActivity(intent)
+            if (sharedPreferences.isAuthenticated){
+                val intent = Intent(this, PersonalInfoActivity::class.java)
+                intent.putExtra("data", profileEntity)
+                startActivity(intent)
+            }else{
+                Toast.makeText(this, "برجاء تسجيل الدخول اولا.", Toast.LENGTH_LONG).show()
+            }
         }
         binding.cards.setOnClickListener { }
         binding.contact.setOnClickListener { }
         binding.packages.setOnClickListener {
-            startActivity(Intent(this, MyPackagesActivity::class.java))
+            if (sharedPreferences.isAuthenticated){
+                startActivity(Intent(this, MyPackagesActivity::class.java))
+            }else{
+                Toast.makeText(this, "برجاء تسجيل الدخول اولا.", Toast.LENGTH_LONG).show()
+            }
         }
         binding.settings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))

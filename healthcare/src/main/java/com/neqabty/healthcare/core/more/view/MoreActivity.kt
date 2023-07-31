@@ -58,8 +58,12 @@ class MoreActivity : BaseActivity<ActivityMoreBinding>() {
         }
 
         binding.llDoctorsReservation.setOnClickListener {
-            title = "doctors"
-            moreViewModel.getUrl(phone = sharedPreferences.mobile, name = sharedPreferences.name, type = "doctors")
+            if (sharedPreferences.isAuthenticated){
+                title = "doctors"
+                moreViewModel.getUrl(phone = sharedPreferences.mobile, name = sharedPreferences.name, type = "doctors")
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
         }
 
         binding.llMedicine.setOnClickListener {

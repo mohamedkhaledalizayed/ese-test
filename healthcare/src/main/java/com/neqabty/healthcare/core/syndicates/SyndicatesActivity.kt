@@ -13,12 +13,13 @@ import com.neqabty.healthcare.invoices.view.InvoicesActivity
 import com.neqabty.healthcare.onboarding.signup.view.SyndicatesAdapter
 import com.neqabty.healthcare.pharmacy.PharmacyTermsBottomSheet
 import com.neqabty.healthcare.profile.view.profile.ProfileActivity
+import com.neqabty.healthcare.splash.view.SplashActivity
 import com.neqabty.healthcare.syndicates.domain.entity.SyndicateEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>() {
+class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>(), ISignUp {
     private val syndicatesViewModel: SyndicatesViewModel by viewModels()
     private val syndicatesAdapter = SyndicatesAdapter(hasCustomStyle = true)
     private lateinit var  bottomSheetFragment: SyndicateServiceBottomSheet
@@ -105,6 +106,17 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>() {
         super.onResume()
 
         binding.bnvSyndicatesHome.selectedItemId = R.id.navigation_syndicates
+    }
+
+    override fun onSignUpClicked() {
+        if (sharedPreferences.isSyndicateMember){
+            sharedPreferences.clearAll()
+            startActivity(Intent(this, SplashActivity::class.java))
+            finishAffinity()
+        }else{
+            startActivity(Intent(this, getTheNextActivityFromIntro()::class.java))
+            finishAffinity()
+        }
     }
     //endregion
 }

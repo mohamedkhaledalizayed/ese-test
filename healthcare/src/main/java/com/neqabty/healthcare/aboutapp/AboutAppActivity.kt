@@ -21,6 +21,7 @@ class AboutAppActivity : BaseActivity<ActivityAboutAppBinding>() {
         setContentView(binding.root)
         setupToolbar(titleResId = R.string.aboutapp_title)
 
+        binding.backBtn.setOnClickListener { finish() }
     }
 
 

@@ -89,6 +89,31 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         invalidateOptionsMenu()
     }
 
+    fun askForLogin(message: String) {
+
+        val alertDialog = AlertDialog.Builder(this).create()
+        alertDialog.setTitle(getString(R.string.alert))
+        alertDialog.setMessage(message)
+        alertDialog.setCancelable(true)
+        alertDialog.setButton(
+            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
+        ) { dialog, _ ->
+            dialog.dismiss()
+            Constants.isSyndicateMember = false
+            Constants.selectedSyndicateCode = ""
+            Constants.selectedSyndicatePosition = 0
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
+        alertDialog.setButton(
+            AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)
+        ) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
     protected fun hideKeyboard() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(window?.decorView?.rootView?.windowToken, 0)

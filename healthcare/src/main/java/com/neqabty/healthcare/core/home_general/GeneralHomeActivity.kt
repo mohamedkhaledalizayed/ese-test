@@ -84,13 +84,21 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
         }
 
         binding.llPharmacy.setOnClickListener {
-            val intent = Intent(this, PharmacyActivity::class.java)
-            startActivity(intent)
+            if (sharedPreferences.isAuthenticated){
+                val intent = Intent(this, PharmacyActivity::class.java)
+                startActivity(intent)
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
         }
 
         binding.llDoctorsReservation.setOnClickListener {
-            title = "doctors"
-            generalHomeViewModel.getUrl(phone = sharedPreferences.mobile, name = sharedPreferences.name, type = "doctors")
+            if (sharedPreferences.isAuthenticated){
+                title = "doctors"
+                generalHomeViewModel.getUrl(phone = sharedPreferences.mobile, name = sharedPreferences.name, type = "doctors")
+            }else{
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
         }
 
         binding.llOnlineConsultation.setOnClickListener {

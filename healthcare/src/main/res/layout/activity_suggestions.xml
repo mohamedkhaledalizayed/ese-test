@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:paddingBottom="@dimen/margin_large"
-    tools:context=".sustainablehealth.suggestions.presentation.SuggestionsActivity">
+    tools:context=".suggestions.presentation.SuggestionsActivity">
 
     <include
         android:id="@+id/layout_toolbar"
@@ -199,6 +199,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/back_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="رجوع"
+        android:visibility="gone"
+        android:background="@drawable/back_btn_bg"
+        android:padding="@dimen/_10sdp"
+        android:layout_margin="@dimen/_12sdp"
+        android:textAlignment="center"
+        android:textColor="#5D81D4"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ProgressBar
         android:id="@+id/progress_circular"
