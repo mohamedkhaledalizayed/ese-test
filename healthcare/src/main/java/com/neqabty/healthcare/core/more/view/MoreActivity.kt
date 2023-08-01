@@ -16,6 +16,7 @@ import com.neqabty.healthcare.databinding.ActivityMoreBinding
 import com.neqabty.healthcare.invoices.view.InvoicesActivity
 import com.neqabty.healthcare.medicalnetwork.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.packages.packageslist.view.PackagesActivity
+import com.neqabty.healthcare.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.profile.view.profile.ProfileActivity
 import com.neqabty.healthcare.settings.SettingsActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,7 +68,12 @@ class MoreActivity : BaseActivity<ActivityMoreBinding>() {
         }
 
         binding.llMedicine.setOnClickListener {
-            openTermsDialog()
+            if (sharedPreferences.isAuthenticated) {
+                val intent = Intent(this, PharmacyActivity::class.java)
+                startActivity(intent)
+            } else {
+                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+            }
         }
 
         binding.llProfile.setOnClickListener {

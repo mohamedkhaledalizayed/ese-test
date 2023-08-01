@@ -6,6 +6,7 @@ import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.ui.BaseActivity
@@ -49,7 +50,11 @@ class InvoicesActivity : BaseActivity<ActivityInvoicesBinding>() {
                 }
                 Status.SUCCESS-> {
                     binding.progressCircular.visibility = View.GONE
-                    invoicesAdapter.submitList(it.data?.toMutableList())
+                    if (it.data!!.isEmpty()){
+                        Toast.makeText(this, "لا توجد مدفوعات لهذا الحساب", Toast.LENGTH_LONG).show()
+                    }else{
+                        invoicesAdapter.submitList(it.data?.toMutableList())
+                    }
                 }
                 Status.ERROR ->{
                     binding.progressCircular.visibility = View.GONE

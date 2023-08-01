@@ -1,6 +1,7 @@
 package com.neqabty.healthcare.onboarding.signup.view
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,17 @@ class SignupStep2PagerFragment : Fragment() {
     }
 
     private fun initializeViews() {
-        binding.tvResend.setOnClickListener { (requireActivity() as SignupActivity).sendOTP() }
+        val timer = object: CountDownTimer(90000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                binding.resendText.text = "إمكانية طلب كود التحقق مرة اخرى بعد : ${ millisUntilFinished / 1000} ثانية."
+            }
+
+            override fun onFinish() {
+                binding.btnResend.isEnabled = true
+            }
+        }
+        timer.start()
+
+        binding.btnResend.setOnClickListener { (requireActivity() as SignupActivity).sendOTP() }
     }
 }
