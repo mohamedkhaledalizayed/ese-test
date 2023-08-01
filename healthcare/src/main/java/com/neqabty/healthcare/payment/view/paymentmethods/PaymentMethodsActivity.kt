@@ -141,10 +141,10 @@ class PaymentMethodsActivity : BaseActivity<ActivityPaymentMethodsBinding>(), Ca
                             "Opay Card" -> {
                                 oPayPayment(resource.data)
                             }
-                            "wallet" -> {
-
-                            }
                             "Opay Code" -> {
+                                showAlertDialog(resource.data.paymentGatewayTransactionNum)
+                            }
+                            "Fawry Code" -> {
                                 showAlertDialog(resource.data.paymentGatewayTransactionNum)
                             }
                             else -> {
