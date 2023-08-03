@@ -28,6 +28,7 @@ object Constants {
     private const val BASE_URL_STAGING_SYNDICATE = "https://staging-community.neqabty.com/api/"
     private const val BASE_URL_PRO_SYNDICATE = "https://community.neqabty.com/api/"
 
+    const val BASE_URL_RETIREMENT = "http://edupen.neqabty.com/api/"
     //News
     const val BASE_URL_DEV_NEWS = "https://news.et3.co/api/"
     const val BASE_URL_STAGING_NEWS = "https://staging-community.neqabty.com/api/"

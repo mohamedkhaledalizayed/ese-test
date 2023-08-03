@@ -49,6 +49,9 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
+            android:name=".retirement.view.RetirementActivity"
+            android:exported="false" />
+        <activity
             android:name=".payment.view.paymentmethods.PaymentMethodsActivity"
             android:exported="false" />
         <activity

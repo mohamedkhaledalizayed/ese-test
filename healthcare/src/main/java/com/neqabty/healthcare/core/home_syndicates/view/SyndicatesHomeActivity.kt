@@ -30,6 +30,7 @@ import com.neqabty.healthcare.packages.packageslist.view.PackagesActivity
 import com.neqabty.healthcare.payment.view.selectservice.ServicesActivity
 import com.neqabty.healthcare.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.profile.view.profile.ProfileActivity
+import com.neqabty.healthcare.retirement.view.RetirementActivity
 import com.neqabty.healthcare.syndicateservices.domain.entity.SyndicateServiceEntity
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -307,6 +308,10 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
                     }
                     "News" -> {
                         val intent = Intent(this@SyndicatesHomeActivity, NewsListActivity::class.java)
+                        startActivity(intent)
+                    }
+                    "inquiry" -> {
+                        val intent = Intent(this@SyndicatesHomeActivity, RetirementActivity::class.java)
                         startActivity(intent)
                     }
                     else -> {
