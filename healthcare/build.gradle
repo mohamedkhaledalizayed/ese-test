@@ -31,7 +31,7 @@ android {
         minSdk 24
         targetSdk 31
         versionCode 530
-        versionName "7.1"
+        versionName "7.2"
         signingConfig signingConfigs.config
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

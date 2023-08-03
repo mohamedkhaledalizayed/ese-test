@@ -33,6 +33,11 @@ class PersonalInfoActivity : BaseActivity<ActivityPersonalInfoBinding>() {
                 binding.membershipId.text = "${it.membershipId}"
             }
 
+            if(it.membershipId == 0)
+                binding.membershipId.visibility = View.GONE
+
+            if(it.address.isNullOrBlank())
+                binding.etAddress.visibility = View.GONE
             binding.etAddress.setText(it.address ?: "")
         }
 

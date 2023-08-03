@@ -37,9 +37,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@id/header_id"
+        app:layout_constraintBottom_toTopOf="@id/iv_profile_nav"
         android:id="@+id/invoices_recycler_view"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
@@ -53,5 +54,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnv_syndicates_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded"
+        android:elevation="0dp"
+        app:elevation="0dp"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_navigation_menu_syndicates_home" />
+
+    <ImageView
+        android:id="@+id/iv_profile_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:elevation="0dp"
+        android:src="@drawable/ic_bottom_profile"
+        app:layout_constraintBottom_toTopOf="@id/bnv_syndicates_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bnv_syndicates_home" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.auth.signup.data.model.NeqabtySignupBody
+import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.data.Constants.NEQABTY_CODE
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.core.utils.isNationalIdValid
@@ -48,6 +49,13 @@ class SignupStep4PagerFragment : Fragment() {
     }
 
     private fun initializeViews() {
+        if (Constants.forTesting) {
+            binding.etName.setText("mona")
+            binding.etNationalId.setText("292021901023")
+            binding.etEmail.setText("monawhab@gmail.com")
+            binding.etPassword.setText("bhlej89@")
+            binding.etPasswordConfirmation.setText("bhlej89@")
+        }
         setAllViewsInvisible()
         binding.tvRegisterIn.text =
             getString(R.string.register_in).plus(" ").plus(SignupData.syndicateName)

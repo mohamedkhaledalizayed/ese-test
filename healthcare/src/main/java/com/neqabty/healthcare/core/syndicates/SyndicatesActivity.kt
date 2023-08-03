@@ -50,6 +50,7 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>(), ISignUp {
         binding.ivProfileNav.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.bnvSyndicatesHome.setOnItemSelectedListener { menuItem ->

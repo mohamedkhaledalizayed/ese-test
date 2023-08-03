@@ -9,11 +9,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
+import com.neqabty.healthcare.core.more.view.MoreActivity
+import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityInvoicesBinding
 import com.neqabty.healthcare.invoices.domain.entity.InvoicesEntity
 import com.neqabty.healthcare.payment.view.paymentstatus.PaymentStatusActivity
+import com.neqabty.healthcare.profile.view.profile.ProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +33,39 @@ class InvoicesActivity : BaseActivity<ActivityInvoicesBinding>() {
         viewModel.getAllInvoices()
 
         binding.headerId.setOnClickListener { finish() }
+
+        binding.bnvSyndicatesHome.selectedItemId = R.id.navigation_payments
+        binding.bnvSyndicatesHome.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.navigation_home -> {
+                    finish()
+                    true
+                }
+                R.id.navigation_syndicates -> {
+                    val intent = Intent(this, SyndicatesActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                R.id.navigation_payments -> {
+                    true
+                }
+                R.id.navigation_more -> {
+                    val intent = Intent(this, MoreActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        binding.ivProfileNav.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         invoicesAdapter.onItemClickListener = object : InvoicesAdapter.OnItemClickListener{
             override fun setOnItemClickListener(item: InvoicesEntity) {
                 if (item.status == "PENDING"){

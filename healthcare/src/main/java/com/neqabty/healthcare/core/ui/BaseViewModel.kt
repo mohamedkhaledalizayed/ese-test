@@ -25,6 +25,9 @@ open class BaseViewModel @Inject constructor(): ViewModel() {
                 404 -> {
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
                 }
+                406 -> {
+                    JSONObject(throwable.response()?.errorBody()?.string()).getString("error")
+                }
                 500 -> {
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
                 }

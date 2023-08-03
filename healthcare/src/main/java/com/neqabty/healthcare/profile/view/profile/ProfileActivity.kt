@@ -7,10 +7,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.neqabty.healthcare.R
+import com.neqabty.healthcare.core.more.view.MoreActivity
+import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.PushNotificationsWrapper
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityProfileMegaBinding
+import com.neqabty.healthcare.invoices.view.InvoicesActivity
 import com.neqabty.healthcare.mypackages.packages.view.MyPackagesActivity
 import com.neqabty.healthcare.profile.domain.entity.profile.ProfileEntity
 import com.neqabty.healthcare.profile.view.personalinfo.PersonalInfoActivity
@@ -31,6 +35,34 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        binding.bnvSyndicatesHome.menu.setGroupCheckable(0, false, true)
+        binding.bnvSyndicatesHome.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.navigation_home -> {
+                    finish()
+                    true
+                }
+                R.id.navigation_syndicates -> {
+                    val intent = Intent(this, SyndicatesActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                R.id.navigation_payments -> {
+                    val intent = Intent(this, InvoicesActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                R.id.navigation_more -> {
+                    val intent = Intent(this, MoreActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                else -> false
+            }
+        }
 
         profileViewModel.user.observe(this) {
 
