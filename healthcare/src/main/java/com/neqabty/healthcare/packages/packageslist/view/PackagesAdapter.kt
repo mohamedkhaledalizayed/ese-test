@@ -36,7 +36,7 @@ class PackagesAdapter : RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = items[position]
         viewHolder.binding.tvName.text = item.name
-        viewHolder.binding.tvPrice.text = "${item.price.toInt()} جنيه - للفرد"
+        viewHolder.binding.tvPrice.text = "${item.price.toInt()}"
         viewHolder.binding.tvDescription.text = item.description
 
 //        viewHolder.binding.cvPackage.setBackgroundResource(

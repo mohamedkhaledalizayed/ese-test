@@ -26,18 +26,18 @@ class PackageDetailsActivity : BaseActivity<ActivityPackageDetailsBinding>() {
 
         binding.backBtn.setOnClickListener { finish() }
 
-        binding.clContainer.setBackgroundResource(
-            when (packageDetails.extension) {
-                "AMA" -> R.drawable.ama_bg
-                "PRZ" -> R.drawable.prz_bg
-                "SLV" -> R.drawable.slv_bg
-                "PLT" -> R.drawable.plt_bg
-                "GLD" -> R.drawable.gold_bg
-                else -> R.drawable.prz_bg
-            }
-        )
+//        binding.clContainer.setBackgroundResource(
+//            when (packageDetails.extension) {
+//                "AMA" -> R.drawable.ama_bg
+//                "PRZ" -> R.drawable.prz_bg
+//                "SLV" -> R.drawable.slv_bg
+//                "PLT" -> R.drawable.plt_bg
+//                "GLD" -> R.drawable.gold_bg
+//                else -> R.drawable.prz_bg
+//            }
+//        )
         binding.tvName.text = packageDetails.name
-        binding.tvPrice.text = "${packageDetails.price} جنيه - للفرد"
+        binding.tvPrice.text = "${packageDetails.price}"
         binding.tvDescription.text = packageDetails.description
         var details = ""
         for (item in packageDetails.details){

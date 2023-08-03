@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:paddingBottom="@dimen/margin_large"
-    tools:context=".common.packages.packageslist.view.PackageDetailsActivity">
+    tools:context=".packages.packageslist.view.PackageDetailsActivity">
 
     <include
         android:id="@+id/layout_toolbar"
@@ -22,16 +22,15 @@
         android:id="@+id/cv_package"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
         app:cardCornerRadius="@dimen/round_radius_medium"
         android:background="@color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
         android:layout_margin="@dimen/_10sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/prz_bg"
             android:padding="@dimen/margin_medium">
 
             <TextView
@@ -40,20 +39,32 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_medium"
                 android:fontFamily="@font/hanimation_regular"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp"
-                android:text="باقة البرونزية"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_medium"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_price"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:fontFamily="@font/hanimation_arabic_medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_22ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_medium"
                 android:fontFamily="@font/hanimation_arabic_light"
-                android:textColor="@color/white"
-                android:text="300 جنية / للفرد"
-                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintVertical_bias="@id/tv_price"
+                android:text="جنية / للفرد"
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintStart_toEndOf="@id/tv_price"
                 app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
             <TextView
@@ -62,10 +73,17 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_medium"
                 android:fontFamily="@font/hanimation_arabic_light"
-                android:textColor="@color/white"
-                android:text="20 الف جنية وثيقة حوادث شخصية لكل فرد من الاسرة (٣ افراد)"
-                android:textSize="@dimen/_10ssp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small"
                 app:layout_constraintTop_toBottomOf="@id/tv_price" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/curved_arrow_down_circle"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
