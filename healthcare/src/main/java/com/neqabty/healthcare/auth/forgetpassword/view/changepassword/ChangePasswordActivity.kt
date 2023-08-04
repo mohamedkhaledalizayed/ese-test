@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
@@ -25,8 +26,6 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePaawordBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        setupToolbar(titleResId = R.string.reset_password)
 
         token = intent.getStringExtra("token")!!
         loading = SpotsDialog.Builder()

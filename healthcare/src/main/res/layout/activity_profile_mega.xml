@@ -386,7 +386,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_toEndOf="@id/packages_id"
                     android:fontFamily="@font/hanimation_arabic_medium"
-                    android:text="الباقات"
+                    android:text="باقاتي"
                     android:textColor="#252A31"
                     android:textSize="@dimen/_12ssp" />
 
