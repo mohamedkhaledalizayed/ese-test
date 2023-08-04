@@ -15,6 +15,7 @@ import com.neqabty.healthcare.contact.contact_providers.view.ContactProvidersAct
 import com.neqabty.healthcare.core.data.Constants
 import com.neqabty.healthcare.core.more.view.MoreActivity
 import com.neqabty.healthcare.core.scanqrcode.ScanQrcodeScreen
+import com.neqabty.healthcare.core.syndicates.SyndicateServiceBottomSheet
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
 import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
@@ -39,7 +40,7 @@ import org.json.JSONObject
 
 
 @AndroidEntryPoint
-class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
+class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRetirement {
     private val syndicatesHomeViewModel: SyndicatesHomeViewModel by viewModels()
     private val listAds = ArrayList<AdEntity>()
     private var title = ""
@@ -311,8 +312,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
                         startActivity(intent)
                     }
                     "inquiry" -> {
-                        val intent = Intent(this@SyndicatesHomeActivity, RetirementActivity::class.java)
-                        startActivity(intent)
+                        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                     }
                     else -> {
 
@@ -323,6 +323,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         binding.rvSyndicateServices.adapter = mAdapter
     }
 
+    private val  bottomSheetFragment: RetirementBottomSheet by lazy { RetirementBottomSheet() }
     override fun onBackPressed() {
         closeApp()
     }
@@ -362,6 +363,11 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>() {
         super.onResume()
 
         binding.bnvSyndicatesHome.selectedItemId = R.id.navigation_home
+    }
+
+    override fun onNextClicked(memberShipId: String, nationalId: String) {
+        val intent = Intent(this@SyndicatesHomeActivity, RetirementActivity::class.java)
+        startActivity(intent)
     }
     //endregion
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:paddingBottom="@dimen/margin_large"
-    tools:context=".common.packages.subscription.view.UserDataActivity">
+    tools:context=".packages.subscription.view.UserDataActivity">
 
     <include
         android:id="@+id/layout_toolbar"
