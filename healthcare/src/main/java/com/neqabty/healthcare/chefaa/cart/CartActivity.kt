@@ -17,7 +17,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.neqabty.healthcare.R
 import com.neqabty.healthcare.chefaa.address.presentation.view.adressscreen.AddressesActivity
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderItemsEntity
 import com.neqabty.healthcare.core.data.Constants
@@ -42,26 +41,11 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
         binding.backBtn.setOnClickListener { finish() }
 
         binding.continueBtn.setOnClickListener {
             startActivity(Intent(this, AddressesActivity::class.java))
         }
-//        setupToolbar(titleResId = R.string.cart)
-
-//        photoAdapter = PhotosAdapter(this)
-//        updateView()
-//        updatePrice()
-
-//        photoAdapter.onItemClickListener = object :
-//            PhotosAdapter.OnItemClickListener {
-//            override fun setOnItemClickListener(id: Int) {
-//                cart.imageList.removeAt(id)
-//                updateView()
-//                binding.cartLt.tvNumberImages.visibility = View.GONE
-//            }
-//        }
 
         binding.recyclerView.adapter = mAdapter
         binding.itemsRecyclerView.adapter = mItemsAdapter
@@ -72,37 +56,6 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
                 updatePrice()
             }
         }
-//        mAdapter.submitList()
-////
-//        binding.cartLt.photosRv.adapter = photoAdapter
-//        binding.cartLt.productRv.adapter = mAdapter
-//        (binding.cartLt.productRv.adapter as CartAdapter).registerAdapterDataObserver(object : AdapterDataObserver() {
-//            override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
-//                super.onItemRangeChanged(positionStart, itemCount)
-//                if (itemCount == 0)
-//                    updateView()
-//            }
-//        })
-//
-//        binding.cartLt.deleteNote.setOnClickListener{
-//            cart.note = null
-//            binding.cartLt.noteTv.setText("")
-//            updateView()
-//        }
-
-//        binding.cartLt.imageView.setOnClickListener{
-//            if (cart.imageList.size >= 5){
-//                binding.cartLt.tvNumberImages.visibility = View.VISIBLE
-//                Toast.makeText(this, "لا يمكن اضافة اكثر من خمس صور", Toast.LENGTH_LONG).show()
-//                return@setOnClickListener
-//            }
-//            galleryIntent()
-//        }
-//
-//        binding.cartLt.selectAddress.setOnClickListener {
-//            startActivity(Intent(this, AddressesActivity::class.java))
-//        }
-
     }
 
     override fun onResume() {
@@ -130,18 +83,11 @@ class CartActivity : BaseActivity<ChefaaActivityCartBinding>() {
             totalPrice += item.productEntity?.price!!.times(item.quantity.toDouble())
         }
 
-//        binding.cartLt.subTotalValue.text = "$totalPrice جنيه"
-//        binding.cartLt.totalValue.text = "$totalPrice جنيه"
+        binding.total.text = "$totalPrice جنيه"
     }
 
     private val SELECT_FILE = 1
 
-    private fun galleryIntent() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT //
-        startActivityForResult(Intent.createChooser(intent, getString(R.string.select_file)), SELECT_FILE)
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
