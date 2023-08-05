@@ -255,8 +255,9 @@
         <activity
             android:name=".auth.login.view.LoginActivity"
             android:configChanges="screenSize"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            />
         <activity
             android:name=".auth.otp.view.VerifyPhoneActivity"
             android:exported="false" />
