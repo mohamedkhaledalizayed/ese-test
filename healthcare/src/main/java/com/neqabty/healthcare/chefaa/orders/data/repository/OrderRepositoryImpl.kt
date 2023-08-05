@@ -3,6 +3,10 @@ package com.neqabty.healthcare.chefaa.orders.data.repository
 
 
 import com.neqabty.healthcare.chefaa.ChefaaResponse
+import com.neqabty.healthcare.chefaa.home.data.model.DataModel
+import com.neqabty.healthcare.chefaa.home.data.model.OrdersListModel
+import com.neqabty.healthcare.chefaa.home.domain.entities.orders.DataEntity
+import com.neqabty.healthcare.chefaa.home.domain.entities.orders.OrdersListEntity
 import com.neqabty.healthcare.chefaa.orders.data.model.*
 import com.neqabty.healthcare.chefaa.orders.data.source.OrderDS
 import com.neqabty.healthcare.chefaa.orders.domain.entities.*
@@ -17,11 +21,11 @@ class OrderRepositoryImpl @Inject constructor(private val orderDS: OrderDS) : Or
         userNumber: String,
         pageNumber: Int,
         pageSize: Int
-    ): Flow<List<OrderEntity>> {
+    ): Flow<OrdersListEntity> {
         return flow {
             val orders = orderDS.getOrderList(OrderListRequestBody(userNumber))
             emit(
-                orders.map { it.toOrderEntity() }
+                orders.toOrdersListEntity()
             )
         }
     }
@@ -34,23 +38,46 @@ class OrderRepositoryImpl @Inject constructor(private val orderDS: OrderDS) : Or
         }
     }
 
-    private fun OrderModel.toOrderEntity(): OrderEntity {
+    private fun OrdersListModel.toOrdersListEntity(): OrdersListEntity{
+        return OrdersListEntity(
+            message = message,
+            status = status,
+            status_code = status_code,
+            data = data?.toDataEntity()
+        )
+    }
+
+    private fun DataModel.toDataEntity(): DataEntity{
+        return DataEntity(
+            current_page = current_page,
+            data = data.map { it.toOrderEntity() },
+            first_page_url = first_page_url,
+            from = from,
+            next_page_url = next_page_url,
+            path = path,
+            per_page = per_page,
+            prev_page_url = prev_page_url,
+            to = to
+        )
+    }
+
+    private fun com.neqabty.healthcare.chefaa.home.data.model.OrderModel.toOrderEntity(): OrderEntity {
         return OrderEntity(
-            addressId = addressId,
-            chefaaOrderNumber = chefaaOrderNumber,
-            clientId = clientId,
-            countryCode = countryCode,
-            createdAt = createdAt,
-            deliveryFees = deliveryFees ?: 0f,
-            deliveryNote = deliveryNote,
+            addressId = address_id,
+            chefaaOrderNumber = chefaa_order_number,
+            clientId = client_id,
+            countryCode = country_code,
+            createdAt = created_at,
+            deliveryFees = delivery_fees ?: 0f,
+            deliveryNote = delivery_note,
             id = id,
-            orderStatus = orderStatus.toOrderStatusEntity(),
+            orderStatus = order_status.toOrderStatusEntity(),
             phone = phone,
             price = price ?: 0f,
-            priceBeforeDiscount = priceBeforeDiscount ?: 0f,
+            priceBeforeDiscount = price_before_discount ?: 0f,
             status = status,
-            updatedAt = updatedAt,
-            userPlan = userPlan,
+            updatedAt = updated_at,
+            userPlan = user_plan,
             items = items.map { it.toItemEntity() }
         )
     }
@@ -107,8 +134,26 @@ private fun OrderItem.toItemEntity(): ItemEntity {
     )
 }
 
-private fun OrderStatus.toOrderStatusEntity(): OrderStatusEntity {
-    return OrderStatusEntity(id, titleAr, titleEn ?: "")
+private fun com.neqabty.healthcare.chefaa.home.data.model.Item.toItemEntity(): ItemEntity {
+    return ItemEntity(
+        addressId = address_id,
+        chefaaOrderNumber = chefaa_order_number,
+        clientId = client_id,
+        createdAt = created_at,
+        id = id,
+        note = note ?: "",
+        orderId = order_id,
+        productId = product_id,
+        productImage = product_image ?: "",
+        type = type,
+        updatedAt = updated_at,
+        quantity = quantity,
+        productName = product_name ?: ""
+    )
+}
+
+private fun com.neqabty.healthcare.chefaa.home.data.model.OrderStatus.toOrderStatusEntity(): OrderStatusEntity {
+    return OrderStatusEntity(id, title_ar, title_en)
 }
 
 private fun ChefaaResponse<PlaceOrderResponse>.toPlaceOrderResult(): PlaceOrderResult {

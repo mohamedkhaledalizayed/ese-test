@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.chefaa.home.domain.entities.RegistrationEntity
+import com.neqabty.healthcare.chefaa.home.domain.entities.orders.OrdersListEntity
 import com.neqabty.healthcare.chefaa.home.domain.usecase.RegisterUseCase
 import com.neqabty.healthcare.chefaa.orders.domain.entities.OrderEntity
 import com.neqabty.healthcare.chefaa.orders.domain.usecases.GetOrdersUseCase
@@ -35,7 +36,7 @@ class HomeViewModel @Inject constructor(private val registerUseCase: RegisterUse
         }
     }
 
-    val orders = MutableLiveData<Resource<List<OrderEntity>>>()
+    val orders = MutableLiveData<Resource<OrdersListEntity>>()
     fun getOrders(mobileNumber:String,pageSize:Int,pageNumber:Int) {
         viewModelScope.launch(Dispatchers.IO) {
             orders.postValue(Resource.loading(data = null))

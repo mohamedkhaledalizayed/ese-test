@@ -25,7 +25,7 @@ class OrdersViewModel @Inject constructor(private val getOrdersUseCase: GetOrder
             orders.postValue(Resource.loading(data = null))
             try {
                 getOrdersUseCase.build(mobileNumber, pageSize, pageNumber).collect {
-                    orders.postValue(Resource.success(data = it))
+//                    orders.postValue(Resource.success(data = it))
                 }
             } catch (exception:Throwable){
                 Log.e("Ordersssss",exception.toString())

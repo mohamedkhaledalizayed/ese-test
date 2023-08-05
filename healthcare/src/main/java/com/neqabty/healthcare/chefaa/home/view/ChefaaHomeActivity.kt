@@ -86,11 +86,12 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
                     Status.LOADING -> {
                     }
                     Status.SUCCESS -> {
-                        if (resource.data!!.isEmpty()){
+                        if (resource.data!!.status){
+                            mAdapter.submitList(resource.data.data?.data)
+                        }else{
                             binding.noPreviousOrders.visibility = View.VISIBLE
                             binding.noPreviousOrdersText.visibility = View.VISIBLE
-                        }else{
-                            mAdapter.submitList(resource.data)
+                            Toast.makeText(this@ChefaaHomeActivity, resource.data.message, Toast.LENGTH_LONG).show()
                         }
                     }
                     Status.ERROR -> {
