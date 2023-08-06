@@ -59,7 +59,7 @@ class ChefaaHomeActivity : BaseActivity<ChefaaActivityHomeBinding>(), IMediaSele
     private val mAdapter: OrdersAdapter = OrdersAdapter()
     private val homeViewModel: HomeViewModel by viewModels()
     override fun getViewBinding() = ChefaaActivityHomeBinding.inflate(layoutInflater)
-    private lateinit var dialog: android.app.AlertDialog
+    private lateinit var dialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

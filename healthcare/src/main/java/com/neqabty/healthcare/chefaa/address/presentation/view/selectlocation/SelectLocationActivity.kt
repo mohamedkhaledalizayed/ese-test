@@ -30,8 +30,6 @@ import java.util.*
 @AndroidEntryPoint
 class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>(), OnMapReadyCallback {
 
-//    private var latitude = 30.043963618425664
-//    private var longitude = 31.234388016164303
     private var district: String? = ""
     private var city: String? = ""
     private var gov: String? = ""
@@ -86,10 +84,8 @@ class SelectLocationActivity : BaseActivity<ActivitySelectLocationBinding>(), On
         }catch (e: Exception){
 
         }
-//        val cityName = addresses[0].getAddressLine(0)
 
         binding.address.text = "${district ?: ""}, ${city ?: ""}, ${gov ?: ""}"
-//        findViewById<TextView>(R.id.address).text = "$cityName"
 
     }
 

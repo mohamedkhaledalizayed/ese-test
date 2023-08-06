@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 class AddressRepositoryImpl @Inject constructor(private val addressDS: AddressDS) :
     AddressRepository {
+
     override fun getAllUserAddress(userPhone: String): Flow<List<AddressEntity>> {
         return flow {
             emit(addressDS.getAllUserAddress(userPhone).map { it.toAddressEntity() })
@@ -44,35 +45,6 @@ class AddressRepositoryImpl @Inject constructor(private val addressDS: AddressDS
         }
     }
 
-    override fun updateUserAddress(
-        apartment: Int,
-        buildingNo: Int,
-        floor: Int,
-        landMark: String,
-        lat: String,
-        long: String,
-        phone: String,
-        streetName: String,
-        title: String,
-        addressId: Int
-    ): Flow<Int> {
-        return flow {
-            emit(
-                addressDS.updateUserAddress(
-                    apartment,
-                    buildingNo,
-                    floor,
-                    landMark,
-                    lat,
-                    long,
-                    phone,
-                    streetName,
-                    title,
-                    addressId
-                )
-            )
-        }
-    }
 }
 
 fun AddressModel.toAddressEntity(): AddressEntity {

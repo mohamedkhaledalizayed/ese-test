@@ -18,16 +18,4 @@ interface AddressRepository {
         title: String = ""
     ): Flow<AddressEntity>
 
-    fun updateUserAddress(
-        apartment: Int = 0,
-        buildingNo: Int = 0,
-        floor: Int = 0,
-        landMark: String = "",
-        lat: String = "",
-        long: String = "",
-        phone: String = "",
-        streetName: String = "",
-        title: String = "",
-        addressId: Int
-    ): Flow<Int>
 }

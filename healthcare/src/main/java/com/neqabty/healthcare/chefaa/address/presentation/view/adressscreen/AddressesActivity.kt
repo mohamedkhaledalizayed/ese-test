@@ -103,7 +103,7 @@ class AddressesActivity : BaseActivity<CehfaaActivityAddressesBinding>(), Locati
 
     override fun onResume() {
         super.onResume()
-        addressViewModel.getUser(Constants.userNumber, Constants.mobileNumber)
+        addressViewModel.getUser(Constants.mobileNumber)
     }
 
     override fun onLocationChanged(location: Location) {

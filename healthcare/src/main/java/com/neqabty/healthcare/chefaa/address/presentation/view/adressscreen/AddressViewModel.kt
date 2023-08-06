@@ -9,16 +9,15 @@ import com.neqabty.healthcare.core.utils.AppUtils
 import com.neqabty.healthcare.core.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddressViewModel @Inject constructor(private val getAllUserAddressUseCase: GetAllUserAddressUseCase) :
     ViewModel() {
+
     val user = MutableLiveData<Resource<List<AddressEntity>>>()
-    val errorMessage = MutableStateFlow("")
-    fun getUser(userNumber: String, mobileNumber: String) {
+    fun getUser(mobileNumber: String) {
         viewModelScope.launch(Dispatchers.IO) {
             user.postValue(Resource.loading(data = null))
             try {
@@ -32,5 +31,5 @@ class AddressViewModel @Inject constructor(private val getAllUserAddressUseCase:
             }
         }
     }
-}
 
+}
