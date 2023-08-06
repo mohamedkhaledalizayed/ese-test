@@ -10,10 +10,14 @@ data class CheckMemberResponse(
     val authorized: Boolean,
     @SerializedName("ocr_status")
     val ocrStatus: String?,
+    @SerializedName("status")
+    val status: Int,
     @SerializedName("message")
     val message: String?,
     @SerializedName("ocrs")
-    val ocrs: List<Ocr>
+    val ocrs: List<Ocr>,
+    @SerializedName("client_data")
+    val clientInfo: ClientInfoResponse?
 )
 
 data class Ocr(
@@ -77,4 +81,17 @@ data class ExtractedInfo(
     val serial_number: String?,
     @SerializedName("serial_validation")
     val serial_validation: String?
+)
+
+data class ClientInfoResponse(
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("limit")
+    val limit: Double,
+    @SerializedName("available_balance")
+    val availableBalance: Double,
+    @SerializedName("next_due_date")
+    val nextDueDate: String,
+    @SerializedName("next_due_amount")
+    val nextDueAmount: Double
 )

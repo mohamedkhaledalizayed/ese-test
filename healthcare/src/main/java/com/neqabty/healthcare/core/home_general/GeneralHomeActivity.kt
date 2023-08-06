@@ -24,6 +24,7 @@ import com.neqabty.healthcare.medicalnetwork.domain.entity.search.ProvidersEntit
 import com.neqabty.healthcare.medicalnetwork.presentation.view.providerdetails.ProviderDetailsActivity
 import com.neqabty.healthcare.medicalnetwork.presentation.view.searchresult.SearchResultActivity
 import com.neqabty.healthcare.notification.NotificationsActivity
+import com.neqabty.healthcare.onboarding.contact.domain.entity.ClientInfo
 import com.neqabty.healthcare.packages.packageslist.view.PackagesActivity
 import com.neqabty.healthcare.pharmacy.PharmacyActivity
 import com.neqabty.healthcare.profile.view.profile.ProfileActivity
@@ -64,7 +65,12 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
             startActivity(Intent(this, NotificationsActivity::class.java))
         }
 
-        renderContactCard()
+//        renderContactCard(null)
+
+        binding.ivContactSubscribe.setOnClickListener {
+            sharedPreferences.isSkippedToHome = false
+            startActivity(Intent(this, getTheNextActivityFromIntro()))
+        }
 
         binding.icBanners.registerLifecycle(lifecycle)
 
@@ -145,19 +151,28 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
         }
     }
 
-    private fun renderContactCard() {
+    private fun renderContactCard(clientInfo: ClientInfo?) {
         if (sharedPreferences.isContactActiveSubscriber) {
-            binding.tvContactName.text = sharedPreferences.name
+            binding.tvContactName.text = clientInfo?.name
             binding.tvBalance.visibility = View.VISIBLE
-            binding.ivContactQr.visibility = View.VISIBLE
-            binding.ivContactServiceProviders.visibility = View.VISIBLE
-            binding.ivContactSubscribe.visibility = View.GONE
-        } else {
-            binding.tvContactName.text = getString(R.string.contact_home_benefits)
-            binding.tvBalance.visibility = View.GONE
+            binding.tvBalance.text = clientInfo?.availableBalance.toString() + " EGP"
+            binding.ivContactQr.visibility = View.INVISIBLE
+            binding.ivContactServiceProviders.visibility = View.INVISIBLE
+            binding.ivContactSubscribe.visibility = View.INVISIBLE
+        } else if (sharedPreferences.isContactSubscriber){
+            binding.tvContactName.text = sharedPreferences.name
+            binding.tvBalance.visibility = View.INVISIBLE
             binding.ivContactQr.visibility = View.INVISIBLE
             binding.ivContactServiceProviders.visibility = View.INVISIBLE
             binding.ivContactSubscribe.visibility = View.VISIBLE
+            binding.tvContactSubscribe.text = getString(R.string.activate_contact_subscription)
+        } else {
+            binding.tvContactName.text = getString(R.string.contact_home_benefits)
+            binding.tvBalance.visibility = View.INVISIBLE
+            binding.ivContactQr.visibility = View.INVISIBLE
+            binding.ivContactServiceProviders.visibility = View.INVISIBLE
+            binding.ivContactSubscribe.visibility = View.VISIBLE
+            binding.tvContactSubscribe.text = getString(R.string.subscribe_in_contact)
         }
         binding.ivContactQr.setOnClickListener {
             val intent = Intent(this, ScanQrcodeScreen::class.java)
@@ -167,6 +182,10 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
             startActivity(Intent(this, ContactProvidersActivity::class.java))
         }
         binding.ivContactSubscribe.setOnClickListener {
+            if(sharedPreferences.isContactSubscriber){
+                showAlert( getString(R.string.activate_contact_steps)){}
+                return@setOnClickListener
+            }
             sharedPreferences.isSkippedToHome = false
             startActivity(Intent(this, getTheNextActivityFromIntro()))
         }
@@ -187,8 +206,13 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
                         hideProgressDialog()
                         binding.root.visibility = View.VISIBLE
                         if (resource.data != null){
-                            sharedPreferences.isContactActiveSubscriber = !resource.data.authorized
-                            renderContactCard()
+                            if(resource.data.status == 1 || resource.data.status == 4) {
+                                sharedPreferences.isContactActiveSubscriber = true
+                                sharedPreferences.isContactSubscriber = false
+                            } else if(resource.data.status == 2)
+                                sharedPreferences.isContactSubscriber = true
+
+                            renderContactCard(resource.data.clientInfo)
                         } else {
                             getContactMemberStatus()
                         }

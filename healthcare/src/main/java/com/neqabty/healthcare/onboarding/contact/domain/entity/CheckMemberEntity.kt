@@ -7,8 +7,10 @@ import kotlinx.android.parcel.Parcelize
 data class CheckMemberEntity(
     val authorized: Boolean,
     val ocrStatus: String?,
+    val status: Int,
     val message: String?,
-    val ocrs: List<Ocr>
+    val ocrs: List<Ocr>,
+    val clientInfo: ClientInfo?
 ): Parcelable
 
 @Parcelize
@@ -48,4 +50,13 @@ data class ExtractedInfo(
     val governorate: String,
     val serial_number: String,
     val serial_validation: String
+): Parcelable
+
+@Parcelize
+data class ClientInfo(
+    val name: String,
+    val limit: Double,
+    val availableBalance: Double,
+    val nextDueDate: String,
+    val nextDueAmount: Double
 ): Parcelable

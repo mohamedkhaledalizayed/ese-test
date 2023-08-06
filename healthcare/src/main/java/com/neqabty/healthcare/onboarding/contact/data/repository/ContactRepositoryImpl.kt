@@ -4,6 +4,7 @@ package com.neqabty.healthcare.onboarding.contact.data.repository
 import com.neqabty.healthcare.onboarding.contact.data.model.*
 import com.neqabty.healthcare.onboarding.contact.data.source.ContactDS
 import com.neqabty.healthcare.onboarding.contact.domain.entity.*
+import com.neqabty.healthcare.onboarding.contact.domain.entity.ClientInfo
 import com.neqabty.healthcare.onboarding.contact.domain.entity.ExtractedInfo
 import com.neqabty.healthcare.onboarding.contact.domain.entity.Ocr
 import com.neqabty.healthcare.onboarding.contact.domain.entity.Result
@@ -103,7 +104,8 @@ private fun CheckMemberResponse.toMemberEntity(): CheckMemberEntity {
     }
 
     return CheckMemberEntity(
-        authorized, ocrStatus, message, ocrsList
+        authorized, ocrStatus, status, message, ocrsList,
+        clientInfo?.let { ClientInfo(it.name, it.limit, it.availableBalance, it.nextDueDate, it.nextDueAmount) }
     )
 }
 

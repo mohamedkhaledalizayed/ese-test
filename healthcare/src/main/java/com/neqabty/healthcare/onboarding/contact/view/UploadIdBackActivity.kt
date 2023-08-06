@@ -103,11 +103,15 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
                     Status.SUCCESS -> {
                         hideProgressDialog()
                         if (resource.data != null) {
-                            if (resource.data.ocrStatus.equals("pending")) {
-                                showWaitingProgressbar()
-                            } else { // OCR completed
-                                sharedPreferences.isContactSubscriber = true
-                                navigate()
+                            when(resource.data.status){
+                                5 -> {// has ocr
+                                    navigate()
+                                }
+                                else -> { // 1,2,4 has account
+                                    Toast.makeText(this@UploadIdBackActivity, resource.data.message, Toast.LENGTH_LONG).show()
+                                    startActivity(Intent(this@UploadIdBackActivity, getHomeActivity()))
+                                    finishAffinity()
+                                }
                             }
                         }
                     }
@@ -140,18 +144,27 @@ class UploadIdBackActivity : BaseActivity<ActivityUploadIdBackBinding>() {
             override fun onTick(millisUntilFinished: Long) {
                 val progress =
                     ((durationInMillis - millisUntilFinished) * totalProgress / durationInMillis).toInt()
-                binding.progressBar.progress = progress
-                binding.tvProgress.text = progress.toString() + "% completed"
+                if(progress % 4 == 0) runTextviewAnimation(progress)
             }
 
             override fun onFinish() {
-                binding.progressBar.progress = totalProgress
                 binding.clProgress.visibility = View.GONE
                 checkOcrStatus()
             }
         }
 
         countDownTimer.start()
+    }
+
+    private fun runTextviewAnimation(progress: Int) {
+        binding.tvProgress.text = when ((progress / 4 % 4)) {
+            1 -> getString(R.string.contact_loading_two)
+            2 -> getString(R.string.contact_loading_three)
+            3 -> getString(R.string.contact_loading_four)
+            else -> {
+                getString(R.string.contact_loading_one)
+            }
+        }
     }
 
     private fun checkOcrStatus() {

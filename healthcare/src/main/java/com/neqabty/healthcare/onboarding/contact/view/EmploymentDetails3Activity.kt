@@ -68,7 +68,7 @@ class EmploymentDetails3Activity : BaseActivity<ActivityEmploymentDetailsThreeBi
                         hideProgressDialog()
                         if (resource.data != null && resource.data.success) {
                             showAlert(getString(R.string.client_submitted)) {
-                                sharedPreferences.isContactActiveSubscriber = true
+                                sharedPreferences.isContactSubscriber = true
                                 navigate()
                             }
                         }

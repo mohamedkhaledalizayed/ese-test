@@ -37,12 +37,11 @@ class ContactCheckMemberActivity : BaseActivity<ActivityContactCheckMemberBindin
                     Status.SUCCESS -> {
                         hideProgressDialog()
                         if (resource.data != null){
-                            if(resource.data.authorized){
-                                if(resource.data.ocrStatus == null)
+                            when(resource.data.status){
+                                3 -> {//the user didn’t have a contact account with this national id and he will register
                                     showTermsDialog()
-                                else if(resource.data.ocrStatus.equals("pending"))
-                                    showWaitingProgressbar()
-                                else{// OCR completed
+                                }
+                                5 -> {// has ocr
                                     val mainIntent = Intent(
                                         this,
                                         ReviewYourDataActivity::class.java
@@ -50,9 +49,12 @@ class ContactCheckMemberActivity : BaseActivity<ActivityContactCheckMemberBindin
                                     mainIntent.putExtra("address", resource.data.ocrs?.get(1)?.result?.extractedInfo?.street + " "+ resource.data.ocrs?.get(1)?.result?.extractedInfo?.governorate)
                                     startActivity(mainIntent)
                                 }
-
-                            }else
-                                showAlert(message = resource.data.message?: ""){finishAffinity()}
+                                else -> { // 1,2,4 has account
+                                    Toast.makeText(this@ContactCheckMemberActivity, resource.data.message, Toast.LENGTH_LONG).show()
+                                    startActivity(Intent(this@ContactCheckMemberActivity, getHomeActivity()))
+                                    finishAffinity()
+                                }
+                            }
                         }else{
                             Toast.makeText(this, getString(R.string.error), Toast.LENGTH_LONG).show()
                         }
@@ -96,18 +98,27 @@ class ContactCheckMemberActivity : BaseActivity<ActivityContactCheckMemberBindin
             override fun onTick(millisUntilFinished: Long) {
                 val progress =
                     ((durationInMillis - millisUntilFinished) * totalProgress / durationInMillis).toInt()
-                binding.progressBar.progress = progress
-                binding.tvProgress.text = progress.toString() + "% completed"
+                if(progress % 4 == 0) runTextviewAnimation(progress)
             }
 
             override fun onFinish() {
-                binding.progressBar.progress = totalProgress
                 binding.clProgress.visibility = View.GONE
                 contactCheckMemberViewModel.checkMemberStatus(nationalId = binding.etNationalId.text.toString())
             }
         }
 
         countDownTimer.start()
+    }
+
+    private fun runTextviewAnimation(progress: Int) {
+        binding.tvProgress.text = when ((progress / 4 % 4)) {
+            1 -> getString(R.string.contact_loading_two)
+            2 -> getString(R.string.contact_loading_three)
+            3 -> getString(R.string.contact_loading_four)
+            else -> {
+                getString(R.string.contact_loading_one)
+            }
+        }
     }
 
     private fun showTermsDialog() {

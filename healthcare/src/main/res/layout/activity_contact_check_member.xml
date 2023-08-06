@@ -85,7 +85,7 @@
             <ImageView
                 android:id="@+id/iv_contact"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_200sdp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/img_contact"
                 app:layout_constraintTop_toBottomOf="@id/et_national_id" />
@@ -131,25 +131,30 @@
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
         android:paddingHorizontal="@dimen/_20sdp"
-        android:paddingVertical="@dimen/_40sdp"
+        android:paddingVertical="@dimen/_20sdp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="100"
-            android:progress="0"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:lottie_autoPlay="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_rawRes="@raw/animation_loader"
+            app:lottie_loop="true" />
+        <!-- app:lottie_rawRes="@raw/animated_bell" -->
 
         <TextView
             android:id="@+id/tv_progress"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_normal"
+            android:gravity="center"
+            android:lines="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/progressBar" />

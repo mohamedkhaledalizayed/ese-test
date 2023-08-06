@@ -220,6 +220,12 @@
     <string name="go_to_home">الصفحة الرئيسية</string>
     <string name="complete_profile">استكمال بيانات الحساب</string>
     <string name="subscribe_in_contact">الاشتراك في خدمة التقسيط</string>
+    <string name="activate_contact_subscription">تفعيل الاشتراك</string>
+    <string name="activate_contact_steps">فعل رصيدك من خلال خطوات بسيطة\n
+1- زيارة اقرب فرع لكونتاكت او قم بالاتصال بنا لترتيب زيارة منزلية\n
+2- امضاء العقد\n
+3- سنقوم بالاتصال بك لارسال كود لتفعيل الخدمة علي رقم الموبايل الخاص بك
+    </string>
     <string name="enter_id_front">برجاء ادخال صورة البطاقة الامامية</string>
     <string name="enter_id_back">برجاء ادخال صورة البطاقة من الخلف</string>
     <string name="request_sent">لقد تم ارسال الطلب بنجاح. من فضلك انتظر حتى تتم مراجعته.</string>
@@ -339,5 +345,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="logout">هل تريد الخروج!</string>
+
+    <string name="contact_loading_one">انت عارف انك مع كونتاكت تقدر تاخد رصيد لحظي يوصل ل ٥٠ الف جنية</string>
+    <string name="contact_loading_two">انتظر قليلا .. لسه الوقت ما انتهاش</string>
+    <string name="contact_loading_three">مع رصيدك من خدمة كونتاكت تقدر تقسط كل مدفوعاتك النقابية</string>
+    <string name="contact_loading_four">كمل تسجيل واخد رصيد لحظي تقدر تدفع بيه اي معامله علي تطبيق نقابتي</string>
 
 </resources>
