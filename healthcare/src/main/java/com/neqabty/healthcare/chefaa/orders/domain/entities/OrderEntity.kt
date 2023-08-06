@@ -15,7 +15,7 @@ data class OrderEntity(
     val id: Int = 0,
     val orderStatus: OrderStatusEntity = OrderStatusEntity(),
     val phone: String = "",
-    val price: Float = 0f,
+    val price: Float? = 0f,
     val priceBeforeDiscount: Float = 0f,
     val status: Int = 0,
     val updatedAt: String = "",

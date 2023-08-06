@@ -93,7 +93,7 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="EGP 15,560.00"
+                    android:text="EGP 0.00"
                     android:layout_gravity="center"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16ssp"

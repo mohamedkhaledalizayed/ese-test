@@ -21,14 +21,15 @@ class OrderDetailsActivity : BaseActivity<ActivityOrderDetailsBinding>() {
         setContentView(binding.root)
 
         binding.headerContainer.setOnClickListener { finish() }
-        val orderId = intent.getParcelableExtra<OrderEntity>("orderId")
+        val order = intent.getParcelableExtra<OrderEntity>("orderId")
         dialog = SpotsDialog.Builder()
             .setContext(this)
             .setMessage(getString(R.string.please_wait))
             .build()
         prescriptionsAdapter = PrescriptionsAdapter(this)
         binding.productRecyclerView.adapter = mAdapter
-        mAdapter.submitList(orderId?.items!!)
+        mAdapter.submitList(order?.items!!)
+        binding.total.text = "${order.price ?: 0.00}"
         binding.completeBtn.setOnClickListener { finish() }
 
 
