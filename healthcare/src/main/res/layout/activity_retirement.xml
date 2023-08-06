@@ -1,9 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".retirement.view.RetirementActivity">
+    android:background="@color/background_color">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#5d81d4"/>
+
+    <FrameLayout
+        android:id="@+id/header_container"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_220sdp"
+        android:paddingBottom="@dimen/margin_large"
+        android:paddingTop="@dimen/margin_toolbar_top_xx">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingHorizontal="@dimen/_10sdp">
+
+            <ImageView
+                android:id="@+id/back_btn_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_toolbar_arrow_main"
+                android:layout_alignParentStart="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:layout_toEndOf="@id/back_btn_header"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/hanimation_arabic_medium"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:textSize="@dimen/_14ssp"
+                android:text="المعاشات"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_110sdp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/bg_white_rounded"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total balance"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/hanimation_arabic_medium"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_18ssp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/hanimation_arabic_medium"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/header_container"
+        android:background="@drawable/chefaa_icons_bg"
+        android:padding="@dimen/_10sdp"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/shopping_cart_simple"/>
+
+                <TextView
+                    android:fontFamily="@font/hanimation_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="#bbbbbb"
+                    android:text="الهدف"/>
+
+                <TextView
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_18ssp"
+                    android:padding="0dp"
+                    android:layout_marginBottom="@dimen/_minus6sdp"
+                    android:layout_marginTop="@dimen/_minus6sdp"
+                    android:lineSpacingExtra="0dp"
+                    android:textColor="#0b0c11"
+                    android:text="5000"/>
+
+                <TextView
+                    android:fontFamily="@font/hanimation_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_10ssp"
+                    android:textColor="#bbbbbb"
+                    android:text="نقطة"/>
+
+            </LinearLayout>
+
+            <antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
+                android:id="@+id/circular_progress"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                app:direction="clockwise"
+                app:progressBackgroundStrokeWidth="@dimen/_10sdp"
+                app:progressStrokeWidth="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/header_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:progressColor="#fe8235"
+                app:progressBackgroundColor="#e8ebed"
+                android:layout_gravity="center"
+                app:textSize="0dp"
+                />
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp">
+
+            <TextView
+                android:fontFamily="@font/hanimation_regular"
+                android:id="@+id/point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/_14sdp"
+                android:text="نقطة"
+                android:textSize="@dimen/_10ssp"
+                android:textColor="#bbbbbb"/>
+
+            <TextView
+                android:fontFamily="@font/montserrat_medium"
+                android:id="@+id/points_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/point"
+                android:text="3500"
+                android:layout_marginTop="@dimen/_minus5sdp"
+                android:textSize="@dimen/_18ssp"
+                android:textColor="#0b0c11"/>
+
+            <TextView
+                android:fontFamily="@font/hanimation_regular"
+                android:id="@+id/egp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="جنيه"
+                android:textSize="@dimen/_10ssp"
+                android:layout_marginEnd="@dimen/_17sdp"
+                android:textColor="#bbbbbb"/>
+
+            <TextView
+                android:fontFamily="@font/montserrat_medium"
+                android:id="@+id/points_value_egp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/point"
+                android:text="90.00"
+                android:layout_marginTop="@dimen/_minus5sdp"
+                android:textSize="@dimen/_18ssp"
+                android:textColor="#0b0c11"/>
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/back_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/news_details_back_btn"
+        android:padding="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textColor="#5d81d4"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/_20sdp"
+        android:background="@drawable/back_btn_bg"
+        android:textSize="@dimen/_12ssp"
+        android:fontFamily="@font/hanimation_regular"/>
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

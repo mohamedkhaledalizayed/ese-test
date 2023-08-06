@@ -4,6 +4,7 @@ package com.neqabty.healthcare.retirement.data.repository
 
 import com.neqabty.healthcare.retirement.data.datasource.RetirementDS
 import com.neqabty.healthcare.retirement.data.model.pension.PensionModel
+import com.neqabty.healthcare.retirement.data.model.validation.ValidationModel
 import com.neqabty.healthcare.retirement.domain.repository.RetirementRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,7 +15,7 @@ import javax.inject.Inject
 class RetirementRepositoryImpl @Inject constructor(private val retirementDS: RetirementDS) :
     RetirementRepository {
 
-    override fun checkValidation(userNumber: String, nationalId: String): Flow<Response<Boolean>> {
+    override fun checkValidation(userNumber: String, nationalId: String): Flow<Response<ValidationModel>> {
         return flow {
             emit(retirementDS.checkValidation(userNumber, nationalId))
         }

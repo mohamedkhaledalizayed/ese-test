@@ -391,6 +391,8 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
 
     override fun onNextClicked(memberShipId: String, nationalId: String) {
         val intent = Intent(this@SyndicatesHomeActivity, RetirementActivity::class.java)
+        intent.putExtra("userNumber", memberShipId)
+        intent.putExtra("nationalId", nationalId)
         startActivity(intent)
     }
     //endregion

@@ -46,7 +46,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme.NoActionBar"
-        android:usesCleartextTraffic="false"
+        android:usesCleartextTraffic="true"
         tools:replace="android:name,android:supportsRtl,android:theme,android:allowBackup,android:label,android:usesCleartextTraffic">
         <activity
             android:name=".retirement.view.RetirementActivity"
@@ -284,9 +284,6 @@
         <!-- android:exported="false" /> -->
         <activity
             android:name=".chefaa.orders.presentation.view.orderdetailscreen.OrderDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".chefaa.orders.presentation.view.orderstatusscreen.OrdersActivity"
             android:exported="false" />
         <activity
             android:name=".chefaa.orders.presentation.placeprescriptionscreen.CheckOutActivity"

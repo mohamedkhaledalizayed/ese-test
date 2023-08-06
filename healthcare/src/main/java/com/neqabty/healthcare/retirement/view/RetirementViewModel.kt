@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.retirement.data.model.pension.PensionModel
+import com.neqabty.healthcare.retirement.data.model.validation.ValidationModel
 import com.neqabty.healthcare.retirement.domain.usecases.CheckValidationUseCase
 import com.neqabty.healthcare.retirement.domain.usecases.GetPensionInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +22,7 @@ class RetirementViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    val userStatus = MutableLiveData<Resource<Boolean>>()
+    val userStatus = MutableLiveData<Resource<ValidationModel>>()
     fun checkValidation(userNumber: String, nationalId: String) {
         userStatus.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {
@@ -81,11 +82,11 @@ class RetirementViewModel @Inject constructor(
                     "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
                 }
                 else -> {
-                    throwable.message!!
+                    "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
                 }
             }
         } else {
-            throwable.message!!
+            "نأسف، لقد حدث خطأ.. برجاء المحاولة في وقت لاحق"
         }
     }
 }
