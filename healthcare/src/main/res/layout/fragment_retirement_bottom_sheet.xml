@@ -61,7 +61,7 @@
         android:background="@drawable/chefaa_orders_bg"
         android:drawableEnd="@drawable/national_id_icon"
         android:fontFamily="@font/hanimation_regular"
-        android:hint="@string/membership"
+        android:hint="رقم العضوية / الرقم الستيني"
         android:inputType="number"
         android:longClickable="false"
         android:padding="@dimen/_12sdp"
