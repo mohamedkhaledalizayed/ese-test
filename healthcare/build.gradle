@@ -44,14 +44,17 @@ android {
 //            testCoverageEnabled false
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-            debuggable = true
-//            jniDebuggable false
-//            renderscriptDebuggable false
-//            pseudoLocalesEnabled false
 
-//            ndk {
-//                abiFilters "armeabi-v7a", "armeabi" // includes ARM SO files only, so no x86 SO file
-//            }
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            testCoverageEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            debuggable = false
+            jniDebuggable false
+            renderscriptDebuggable false
+            pseudoLocalesEnabled false
         }
         release {
             minifyEnabled true

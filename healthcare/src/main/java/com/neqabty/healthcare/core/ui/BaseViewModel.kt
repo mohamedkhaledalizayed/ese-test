@@ -36,7 +36,7 @@ open class BaseViewModel @Inject constructor(): ViewModel() {
                 }
             }
         } else {
-            throwable.message!!
+            throwable.message?: ""
         }
     }
 
