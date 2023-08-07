@@ -173,7 +173,7 @@ class PackagesPaymentActivity : BaseActivity<ActivitySehaPaymentBinding>(), Call
                 return@setOnClickListener
             }
 
-            if (!sharedPreferences.isPhoneVerified) {
+            if (sharedPreferences.isPhoneVerified) {
 
                 binding.btnNext.isEnabled = false
                 paymentViewModel.getPaymentInfo(
