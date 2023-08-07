@@ -37,6 +37,7 @@ class InvoicesAdapter: RecyclerView.Adapter<InvoicesAdapter.ViewHolder>() {
         viewHolder.binding.paymentName.text = item.serviceName
         viewHolder.binding.paymentDate.text = AppUtils().dateFormat(item.createdAt)
         viewHolder.binding.total.text = "${item.totalAmount} جنيه"
+        viewHolder.binding.fees.text = "مصاريف ادارية وبنكية ${item.totalFees} جنيه"
 
         if (item.status == "SUCCESS"){
             viewHolder.binding.paymentStatus.text = "مكتملة"
