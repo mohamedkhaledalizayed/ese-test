@@ -1,8 +1,10 @@
 package com.neqabty.healthcare.chefaa.orders.data.model
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class OrderModel(
     @SerializedName("address_id")
     val addressId: Int = 0,

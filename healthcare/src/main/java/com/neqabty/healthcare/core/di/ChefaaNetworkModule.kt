@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.core.di
 
+import android.util.Log
 import com.google.gson.GsonBuilder
 import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.core.data.Constants
@@ -29,9 +30,16 @@ class ChefaaNetworkModule {
     @Provides
     @Named("chefaa")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-        return interceptor
+        val logging = HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger{
+            override fun log(message: String) {
+//                Timber.tag("OkHttp").d(message)
+                if(BuildConfig.DEBUG)
+                    Log.d("OkHttp" ,message)
+                else{}
+            }
+        })
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        return logging
     }
 
     @Provides

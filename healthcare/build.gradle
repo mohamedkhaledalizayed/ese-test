@@ -19,7 +19,7 @@ android {
         config {
             keyAlias 'healthcare'
             keyPassword "123@pass"
-            storeFile file('D:\\Work\\Mobile\\Neqabty Apps\\Mega Key Store\\megakeystore.jks')
+            storeFile file('D:\\Android\\workspace\\NeQabtyMaster\\megakeystore.jks')
             storePassword "123@pass"
 
             v1SigningEnabled true
@@ -31,7 +31,7 @@ android {
         minSdk 24
         targetSdk 31
         versionCode 530
-        versionName "7.2"
+        versionName "7.3"
         signingConfig signingConfigs.config
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

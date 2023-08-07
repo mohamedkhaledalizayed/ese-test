@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.core.di
 
+import android.util.Log
 import com.google.gson.GsonBuilder
 import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_STAGING
@@ -28,9 +29,16 @@ class HealthCareModule {
     @Provides
     @Named("healthcare")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-        return interceptor
+        val logging = HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger{
+            override fun log(message: String) {
+//                Timber.tag("OkHttp").d(message)
+                if(BuildConfig.DEBUG)
+                Log.d("OkHttp" ,message)
+                else{}
+            }
+        })
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        return logging
     }
 
     @Provides

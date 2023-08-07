@@ -47,35 +47,35 @@ class SignupViewModel @Inject constructor(
         }
     }
 
-    val otp = MutableLiveData<Resource<OTPEntity>>()
-    fun sendOTP(sendOTPBody: SendOTPBody){
-        viewModelScope.launch(Dispatchers.IO){
-            otp.postValue(Resource.loading(data = null))
+//    val otp = MutableLiveData<Resource<OTPEntity>>()
+//    fun sendOTP(sendOTPBody: SendOTPBody){
+//        viewModelScope.launch(Dispatchers.IO){
+//            otp.postValue(Resource.loading(data = null))
+//
+//            try {
+//                verifyPhoneUseCase.build(sendOTPBody).collect {
+//                    otp.postValue(Resource.success(data = it))
+//                }
+//            }catch (e: Throwable){
+//                otp.postValue(Resource.error(data = null, message = handleError(e)))
+//            }
+//        }
+//    }
 
-            try {
-                verifyPhoneUseCase.build(sendOTPBody).collect {
-                    otp.postValue(Resource.success(data = it))
-                }
-            }catch (e: Throwable){
-                otp.postValue(Resource.error(data = null, message = handleError(e)))
-            }
-        }
-    }
-
-    val otpStatus = MutableLiveData<Resource<Boolean>>()
-    fun checkOTP(checkOTPBody: CheckOTPBody){
-        viewModelScope.launch(Dispatchers.IO){
-            otpStatus.postValue(Resource.loading(data = null))
-
-            try {
-                verifyPhoneUseCase.build(checkOTPBody).collect {
-                    otpStatus.postValue(Resource.success(data = it))
-                }
-            }catch (e: Throwable){
-                otpStatus.postValue(Resource.error(data = null, message = handleError(e)))
-            }
-        }
-    }
+//    val otpStatus = MutableLiveData<Resource<Boolean>>()
+//    fun checkOTP(checkOTPBody: CheckOTPBody){
+//        viewModelScope.launch(Dispatchers.IO){
+//            otpStatus.postValue(Resource.loading(data = null))
+//
+//            try {
+//                verifyPhoneUseCase.build(checkOTPBody).collect {
+//                    otpStatus.postValue(Resource.success(data = it))
+//                }
+//            }catch (e: Throwable){
+//                otpStatus.postValue(Resource.error(data = null, message = handleError(e)))
+//            }
+//        }
+//    }
 
     val generalUser = MutableLiveData<Resource<UserUIModel>>()
     fun generalUserSignup(data: NeqabtySignupBody) {

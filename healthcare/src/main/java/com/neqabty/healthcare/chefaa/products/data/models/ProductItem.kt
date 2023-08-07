@@ -1,8 +1,10 @@
 package com.neqabty.healthcare.chefaa.products.data.models
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class ProductItem(
     @SerializedName("id")
     val id: Int = 0,

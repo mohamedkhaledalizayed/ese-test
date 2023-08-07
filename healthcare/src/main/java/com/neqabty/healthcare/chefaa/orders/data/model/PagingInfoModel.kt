@@ -1,8 +1,10 @@
 package com.neqabty.healthcare.chefaa.orders.data.model
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class PagingInfoModel(
     @SerializedName("current_page")
     val pageNumber: Int,

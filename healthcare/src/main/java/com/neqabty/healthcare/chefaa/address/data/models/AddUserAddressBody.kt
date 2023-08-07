@@ -1,8 +1,10 @@
 package com.neqabty.healthcare.chefaa.address.data.models
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class AddUserAddressBody(
     @SerializedName("apartment")
     val apartment: String = "",

@@ -20,6 +20,7 @@ data class CheckMemberResponse(
     val clientInfo: ClientInfoResponse?
 )
 
+@Keep
 data class Ocr(
     @SerializedName("id")
     val id: String,
@@ -37,6 +38,7 @@ data class Ocr(
     val account: Int
 )
 
+@Keep
 data class Result(
     @SerializedName("extractedInfo")
     val extractedInfo: ExtractedInfo,
@@ -44,6 +46,7 @@ data class Result(
     val completed: Boolean
 )
 
+@Keep
 data class ExtractedInfo(
     @SerializedName("gender")
     val gender: String?,
@@ -83,6 +86,7 @@ data class ExtractedInfo(
     val serial_validation: String?
 )
 
+@Keep
 data class ClientInfoResponse(
     @SerializedName("name")
     val name: String,

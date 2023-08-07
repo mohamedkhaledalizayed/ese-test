@@ -39,6 +39,6 @@ class SignupStep2PagerFragment : Fragment() {
         }
         timer.start()
 
-        binding.btnResend.setOnClickListener { (requireActivity() as SignupActivity).sendOTP() }
+//        binding.btnResend.setOnClickListener { (requireActivity() as SignupActivity).sendOTP() }
     }
 }

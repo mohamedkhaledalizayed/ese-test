@@ -1,8 +1,10 @@
 package com.neqabty.healthcare.chefaa
 
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class ChefaaResponse<T>(
     @SerializedName("data")
     val responseData: T?,

@@ -37,7 +37,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
     private fun initializeViews() {
         val adapter = SignupFragmentPagerAdapter(supportFragmentManager)
         adapter.addFragment(SignupStep1PagerFragment())
-        adapter.addFragment(SignupStep2PagerFragment())
+//        adapter.addFragment(SignupStep2PagerFragment())
         adapter.addFragment(SignupStep3PagerFragment())
         adapter.addFragment(SignupStep4PagerFragment())
 
@@ -55,7 +55,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
             }
 
             override fun onPageSelected(position: Int) {
-                if (position == 2)
+                if (position == 1)
                     binding.bNext.visibility = View.GONE
                 else
                     binding.bNext.visibility = View.VISIBLE
@@ -80,24 +80,24 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
 
                     checkAccountStatus()
                 }
-                1 -> {
-                    if (Constants.forTesting) {
-                        movePagertoNext()
-                        return@setOnClickListener
-                    }
-                    val step2Binding = (adapter.fragments[1] as SignupStep2PagerFragment).binding
-                    if (step2Binding.otvOtp.otp?.length != 5) {
-                        step2Binding.otvOtp.showError()
-                        Toast.makeText(
-                            this@SignupActivity,
-                            getString(R.string.enter_code_),
-                            Toast.LENGTH_LONG
-                        ).show()
-                        return@setOnClickListener
-                    }
-                    checkOTP(step2Binding.otvOtp.otp!!)
-                }
-                2 -> {}
+//                1 -> {
+//                    if (Constants.forTesting) {
+//                        movePagertoNext()
+//                        return@setOnClickListener
+//                    }
+//                    val step2Binding = (adapter.fragments[1] as SignupStep2PagerFragment).binding
+//                    if (step2Binding.otvOtp.otp?.length != 5) {
+//                        step2Binding.otvOtp.showError()
+//                        Toast.makeText(
+//                            this@SignupActivity,
+//                            getString(R.string.enter_code_),
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                        return@setOnClickListener
+//                    }
+//                    checkOTP(step2Binding.otvOtp.otp!!)
+//                }
+                1 -> {}
                 else -> {
                     if (Constants.forTesting) {
                         if (SignupData.syndicateID != Constants.NEQABTY_CODE){
@@ -111,7 +111,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                         startActivity(mainIntent)
                         finishAffinity()
                     }
-                    (adapter.fragments[3] as SignupStep4PagerFragment).signup()
+                    (adapter.fragments[2] as SignupStep4PagerFragment).signup()
                     return@setOnClickListener
                 }
             }
@@ -121,10 +121,10 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
             navigate()
         }
 
-        if(sharedPreferences.isPhoneVerified){
-            movePagertoNext()
-            movePagertoNext()
-        }
+//        if(sharedPreferences.isPhoneVerified){
+//            movePagertoNext()
+//            movePagertoNext()
+//        }
     }
 
     private fun movePagertoNext() {
@@ -134,8 +134,8 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
 
     private fun initializeObservers() {
         observeOnAccountStatus()
-        observeOnSendOTP()
-        observeOnCheckOTP()
+//        observeOnSendOTP()
+//        observeOnCheckOTP()
         observeOnGetSyndicates()
     }
 
@@ -158,12 +158,12 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                             startActivity(intent)
                             finishAffinity()
                         }else{
-                            if(sharedPreferences.isPhoneVerified)
-                                movePagertoNext()
-
-                            if (!Constants.forTesting) {
-                                sendOTP()
-                            }
+//                            if(sharedPreferences.isPhoneVerified)
+//                                movePagertoNext()
+//
+//                            if (!Constants.forTesting) {
+//                                sendOTP()
+//                            }
                             movePagertoNext()
                         }
                     }
@@ -185,65 +185,65 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
         finishAffinity()
     }
 
-    fun sendOTP() {
-        signupViewModel.sendOTP(SendOTPBody(phoneNumber = sharedPreferences.mobile_without_cc))
-    }
+//    fun sendOTP() {
+//        signupViewModel.sendOTP(SendOTPBody(phoneNumber = sharedPreferences.mobile_without_cc))
+//    }
 
-    private fun observeOnSendOTP(){
-        signupViewModel.otp.observe(this) {
-            it.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> {
-                        showProgressDialog()
-                    }
-                    Status.SUCCESS -> {
-                        hideProgressDialog()
+//    private fun observeOnSendOTP(){
+//        signupViewModel.otp.observe(this) {
+//            it.let { resource ->
+//                when (resource.status) {
+//                    Status.LOADING -> {
+//                        showProgressDialog()
+//                    }
+//                    Status.SUCCESS -> {
+//                        hideProgressDialog()
+//
+//                        Toast.makeText(
+//                            this@SignupActivity,
+//                            getString(R.string.otp_sent),
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                    }
+//                    Status.ERROR -> {
+//                        hideProgressDialog()
+//                    }
+//                }
+//            }
+//        }
+//    }
 
-                        Toast.makeText(
-                            this@SignupActivity,
-                            getString(R.string.otp_sent),
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                    Status.ERROR -> {
-                        hideProgressDialog()
-                    }
-                }
-            }
-        }
-    }
+//    private fun checkOTP(otp: String) {
+//        signupViewModel.checkOTP(
+//            CheckOTPBody(
+//                otp = otp.toInt(),
+//                phoneNumber = sharedPreferences.mobile_without_cc
+//            )
+//        )
+//    }
 
-    private fun checkOTP(otp: String) {
-        signupViewModel.checkOTP(
-            CheckOTPBody(
-                otp = otp.toInt(),
-                phoneNumber = sharedPreferences.mobile_without_cc
-            )
-        )
-    }
-
-    private fun observeOnCheckOTP(){
-        signupViewModel.otpStatus.observe(this) {
-            it.let { resource ->
-                when (resource.status) {
-                    Status.LOADING -> {
-                        showProgressDialog()
-                    }
-                    Status.SUCCESS -> {
-                        hideProgressDialog()
-                        if (resource.data!!) {
-                            sharedPreferences.isPhoneVerified = true
-                            movePagertoNext()
-                        }
-                    }
-                    Status.ERROR -> {
-                        hideProgressDialog()
-                        Toast.makeText(this, getString(R.string.wrong_otp), Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
-        }
-    }
+//    private fun observeOnCheckOTP(){
+//        signupViewModel.otpStatus.observe(this) {
+//            it.let { resource ->
+//                when (resource.status) {
+//                    Status.LOADING -> {
+//                        showProgressDialog()
+//                    }
+//                    Status.SUCCESS -> {
+//                        hideProgressDialog()
+//                        if (resource.data!!) {
+//                            sharedPreferences.isPhoneVerified = true
+//                            movePagertoNext()
+//                        }
+//                    }
+//                    Status.ERROR -> {
+//                        hideProgressDialog()
+//                        Toast.makeText(this, getString(R.string.wrong_otp), Toast.LENGTH_LONG).show()
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     private fun getSyndicates() {
         signupViewModel.getSyndicates()
@@ -271,7 +271,7 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
     }
 
     override fun onBackPressed() {
-        if (binding.slvpSignup.currentItem == 0 || binding.slvpSignup.currentItem == 2)
+        if (binding.slvpSignup.currentItem == 0)
             closeApp()
         else
             binding.slvpSignup.setCurrentItem(binding.slvpSignup.currentItem - 1, true)

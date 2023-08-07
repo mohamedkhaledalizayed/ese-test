@@ -1,5 +1,6 @@
 package com.neqabty.healthcare.core.di
 
+import android.util.Log
 import com.neqabty.healthcare.BuildConfig
 import com.neqabty.healthcare.core.data.Constants
 import dagger.Module
@@ -27,9 +28,16 @@ class RetirementModule {
     @Provides
     @Named("retirement")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-        return interceptor
+        val logging = HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger{
+            override fun log(message: String) {
+//                Timber.tag("OkHttp").d(message)
+                if(BuildConfig.DEBUG)
+                Log.d("OkHttp" ,message)
+                else{}
+            }
+        })
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        return logging
     }
 
     private val interceptor = Interceptor {
