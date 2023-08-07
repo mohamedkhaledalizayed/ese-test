@@ -172,7 +172,7 @@ class PaymentMethodsActivity : BaseActivity<ActivityPaymentMethodsBinding>(), Ca
                 return@setOnClickListener
             }
 
-            if (!sharedPreferences.isPhoneVerified) {
+            if (sharedPreferences.isPhoneVerified) {
                 binding.btnNext.isEnabled = false
 
                 when (sharedPreferences.code) {

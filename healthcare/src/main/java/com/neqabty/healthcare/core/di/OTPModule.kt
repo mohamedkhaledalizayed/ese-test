@@ -3,6 +3,7 @@ package com.neqabty.healthcare.core.di
 
 import android.util.Log
 import com.neqabty.healthcare.BuildConfig
+import com.neqabty.healthcare.core.data.Constants.BASE_URL_PRO_OTP
 import com.neqabty.healthcare.core.data.Constants.BASE_URL_STAGING_OTP
 import dagger.Module
 import dagger.Provides
@@ -24,20 +25,18 @@ class OTPModule {
     @Provides
     @Named("otp")
     fun providesBaseUrl(): String {
-        return BASE_URL_STAGING_OTP
+        return BASE_URL_PRO_OTP
     }
 
     @Provides
     @Named("otp")
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        val logging = HttpLoggingInterceptor(object: HttpLoggingInterceptor.Logger{
-            override fun log(message: String) {
-//                Timber.tag("OkHttp").d(message)
-                if(BuildConfig.DEBUG)
-                Log.d("OkHttp" ,message)
-                else{}
+        val logging = HttpLoggingInterceptor { message -> //                Timber.tag("OkHttp").d(message)
+            if (BuildConfig.DEBUG)
+                Log.d("OkHttp", message)
+            else {
             }
-        })
+        }
         logging.level = HttpLoggingInterceptor.Level.BODY
         return logging
     }

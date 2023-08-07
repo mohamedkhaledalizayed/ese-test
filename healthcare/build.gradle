@@ -44,17 +44,17 @@ android {
 //            testCoverageEnabled false
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
-            testCoverageEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
-            debuggable = false
-            jniDebuggable false
-            renderscriptDebuggable false
-            pseudoLocalesEnabled false
+            debuggable = true
+//            minifyEnabled true
+//            shrinkResources true
+//            zipAlignEnabled true
+//            testCoverageEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//
+//            debuggable = false
+//            jniDebuggable false
+//            renderscriptDebuggable false
+//            pseudoLocalesEnabled false
         }
         release {
             minifyEnabled true

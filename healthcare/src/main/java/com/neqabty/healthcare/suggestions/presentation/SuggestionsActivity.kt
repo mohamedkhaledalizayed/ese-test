@@ -133,6 +133,8 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
         }
 
+        binding.whatsBtn.setOnClickListener { openUrl("https://wa.me/201153015041") }
+
         binding.name.customSelectionActionModeCallback = actionMode
         binding.phone.customSelectionActionModeCallback = actionMode
         binding.content.customSelectionActionModeCallback = actionMode
@@ -173,6 +175,15 @@ class SuggestionsActivity : BaseActivity<ActivitySuggestionsBinding>() {
         )
 
         complaintsViewModel.addComplaint(complaintBody)
+    }
+
+    private fun openUrl(url: String) {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(url)
+            )
+        )
     }
 
     @Suppress("DEPRECATED_IDENTITY_EQUALS")
