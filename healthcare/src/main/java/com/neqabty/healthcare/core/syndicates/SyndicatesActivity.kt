@@ -10,6 +10,7 @@ import com.neqabty.healthcare.core.ui.BaseActivity
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivitySyndicatesBinding
 import com.neqabty.healthcare.invoices.view.InvoicesActivity
+import com.neqabty.healthcare.onboarding.signup.view.SignupActivity
 import com.neqabty.healthcare.onboarding.signup.view.SyndicatesAdapter
 import com.neqabty.healthcare.pharmacy.PharmacyTermsBottomSheet
 import com.neqabty.healthcare.profile.view.profile.ProfileActivity
@@ -115,7 +116,8 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>(), ISignUp {
             startActivity(Intent(this, SplashActivity::class.java))
             finishAffinity()
         }else{
-            startActivity(Intent(this, getTheNextActivityFromIntro()::class.java))
+            sharedPreferences.isSkippedToHome = false
+            startActivity(Intent(this, SignupActivity::class.java))
             finishAffinity()
         }
     }
