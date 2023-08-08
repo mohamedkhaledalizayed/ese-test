@@ -16,4 +16,7 @@ interface RetirementApi {
     @GET("members/bank/{id}")
     suspend fun getPensionInfo(@Path("id") id: String): Response<PensionModel>
 
+    @GET("inheritors/visa/{id}")
+    suspend fun getInheritor(@Path("id") id: String): Response<String>
+
 }

@@ -19,4 +19,8 @@ class RetirementDS @Inject constructor(private val retirementApi: RetirementApi)
         return retirementApi.getPensionInfo(id)
     }
 
+    suspend fun getInheritor(id: String): Response<String> {
+        return retirementApi.getInheritor(id)
+    }
+
 }

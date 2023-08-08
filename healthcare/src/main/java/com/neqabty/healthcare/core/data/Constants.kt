@@ -56,6 +56,8 @@ object Constants {
     const val AGRICULTURE_CODE = "e05"
     const val TOGAREEN_CODE = "e06"
     const val AGRI_CODE = "e05"
+    const val VISA = "visa"
+    const val BANK = "bank"
     var isSyndicateMember = false
     var selectedSyndicateCode = ""
     var selectedSyndicatePosition = 0

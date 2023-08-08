@@ -49,6 +49,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
     private val mAdapter = SyndicateServicesAdapter()
     private val QR_CODE_REQUEST = 201
     override fun getViewBinding() = ActivityHomeSyndicateBinding.inflate(layoutInflater)
+    private val  bottomSheetFragment: RetirementBottomSheet by lazy { RetirementBottomSheet() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -335,7 +336,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
                         val intent = Intent(this@SyndicatesHomeActivity, NewsListActivity::class.java)
                         startActivity(intent)
                     }
-                    "inquiry" -> {
+                    "Inquiry" -> {
                         bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
                     }
                     else -> {
@@ -347,7 +348,6 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
         binding.rvSyndicateServices.adapter = mAdapter
     }
 
-    private val  bottomSheetFragment: RetirementBottomSheet by lazy { RetirementBottomSheet() }
     override fun onBackPressed() {
         closeApp()
     }
@@ -382,18 +382,17 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
             }
         }
     }
-    //region
+
     override fun onResume() {
         super.onResume()
-
         binding.bnvSyndicatesHome.selectedItemId = R.id.navigation_home
     }
 
-    override fun onNextClicked(memberShipId: String, nationalId: String) {
+    override fun onNextClicked(memberShipId: String, nationalId: String, service: String) {
         val intent = Intent(this@SyndicatesHomeActivity, RetirementActivity::class.java)
         intent.putExtra("userNumber", memberShipId)
         intent.putExtra("nationalId", nationalId)
+        intent.putExtra("service", service)
         startActivity(intent)
     }
-    //endregion
 }

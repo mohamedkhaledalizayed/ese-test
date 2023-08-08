@@ -7,6 +7,7 @@ import com.neqabty.healthcare.core.utils.Resource
 import com.neqabty.healthcare.retirement.data.model.pension.PensionModel
 import com.neqabty.healthcare.retirement.data.model.validation.ValidationModel
 import com.neqabty.healthcare.retirement.domain.usecases.CheckValidationUseCase
+import com.neqabty.healthcare.retirement.domain.usecases.GetInheritorUseCase
 import com.neqabty.healthcare.retirement.domain.usecases.GetPensionInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RetirementViewModel @Inject constructor(
     private val checkValidationUseCase: CheckValidationUseCase,
-    private val getPensionInfoUseCase: GetPensionInfoUseCase
+    private val getPensionInfoUseCase: GetPensionInfoUseCase,
+    private val getInheritorUseCase: GetInheritorUseCase
 ) :
     ViewModel() {
 
@@ -56,6 +58,25 @@ class RetirementViewModel @Inject constructor(
                 }
             }catch (exception: Throwable){
                 pensionInfo.postValue(Resource.error(data = null, message = handleError(exception)))
+            }
+        }
+    }
+
+    val inheritorInfo = MutableLiveData<Resource<String>>()
+    fun getInheritor(id: String) {
+        pensionInfo.postValue(Resource.loading(data = null))
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                getInheritorUseCase.build(id).collect {
+                    if (it.isSuccessful){
+                        inheritorInfo.postValue(Resource.success(data = it.body()!!))
+                    }else{
+                        val jObjError = JSONObject(it.errorBody()!!.string()).toString()
+                        inheritorInfo.postValue(Resource.error(data = null, message = "3ak # $jObjError"))
+                    }
+                }
+            }catch (exception: Throwable){
+                inheritorInfo.postValue(Resource.error(data = null, message = handleError(exception)))
             }
         }
     }

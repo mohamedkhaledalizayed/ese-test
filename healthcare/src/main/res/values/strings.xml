@@ -351,4 +351,9 @@
     <string name="contact_loading_three">مع رصيدك من خدمة كونتاكت تقدر تقسط كل مدفوعاتك النقابية</string>
     <string name="contact_loading_four">كمل تسجيل واخد رصيد لحظي تقدر تدفع بيه اي معامله علي تطبيق نقابتي</string>
 
+    <array name="retirement_services">
+        <item>إختر الخدمة</item>
+        <item>Visa</item>
+        <item>Bank</item>
+    </array>
 </resources>

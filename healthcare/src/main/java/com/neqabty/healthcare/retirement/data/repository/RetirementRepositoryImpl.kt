@@ -27,4 +27,10 @@ class RetirementRepositoryImpl @Inject constructor(private val retirementDS: Ret
         }
     }
 
+    override fun getInheritor(id: String): Flow<Response<String>> {
+        return flow {
+            emit(retirementDS.getInheritor(id))
+        }
+    }
+
 }

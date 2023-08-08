@@ -10,4 +10,5 @@ import retrofit2.Response
 interface RetirementRepository {
     fun checkValidation(userNumber: String, nationalId: String): Flow<Response<ValidationModel>>
     fun getPensionInfo(id: String): Flow<Response<PensionModel>>
+    fun getInheritor(id: String): Flow<Response<String>>
 }

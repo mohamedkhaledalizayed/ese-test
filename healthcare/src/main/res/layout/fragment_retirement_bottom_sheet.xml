@@ -89,6 +89,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <FrameLayout
+        android:id="@+id/spinner_services_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/chefaa_orders_bg"
+        android:padding="@dimen/_10sdp">
+
+        <Spinner
+            android:id="@+id/sp_services"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/retirement_services"
+            android:background="#fff" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center"
+            android:contentDescription="@null"
+            android:src="@drawable/curved_arrow_down_circle" />
+    </FrameLayout>
+
     <TextView
         android:id="@+id/back_btn"
         android:layout_width="match_parent"
