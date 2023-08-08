@@ -30,7 +30,7 @@ android {
         applicationId "com.neqabty.healthcare"
         minSdk 24
         targetSdk 31
-        versionCode 535
+        versionCode 536
         versionName "8.0"
         signingConfig signingConfigs.config
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -51,8 +51,6 @@ android {
 //            pseudoLocalesEnabled false
         }
         release {
-            minifyEnabled true
-            shrinkResources true
             zipAlignEnabled true
             testCoverageEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

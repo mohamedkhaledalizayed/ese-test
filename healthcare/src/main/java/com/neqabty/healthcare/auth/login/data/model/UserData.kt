@@ -21,7 +21,7 @@ data class UserData(
     @SerializedName("employer")
     val employer: Any,
     @SerializedName("entity")
-    val entity: EntityModel,
+    val entityModel: EntityModel,
     @SerializedName("entity_branch")
     val entityBranch: Any,
     @SerializedName("graduation_year")
