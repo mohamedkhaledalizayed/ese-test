@@ -152,6 +152,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/rounded_white_bg"
                 android:padding="@dimen/_10sdp"
+                android:elevation="5dp"
                 app:layout_constraintTop_toBottomOf="@id/cl_contact_holder">
 
                 <ImageView
@@ -187,6 +188,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 android:src="@drawable/ic_contact_qr"
                 android:visibility="invisible"
+                android:elevation="5dp"
                 app:layout_constraintEnd_toStartOf="@id/iv_contact_service_providers"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_contact_holder" />
@@ -198,6 +200,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 android:src="@drawable/ic_contact_service_providers"
                 android:visibility="invisible"
+                android:elevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_contact_qr"
                 app:layout_constraintTop_toBottomOf="@id/cl_contact_holder" />
@@ -329,7 +332,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:fontFamily="@font/hanimation_arabic_semibold"
-                    android:text="@string/seha"
+                    android:text="@string/wlcare_packages"
                     android:textColor="@color/black"
                     android:textSize="?textSizeSmall"
                     app:layout_constraintTop_toBottomOf="@id/hsv_general_services" />

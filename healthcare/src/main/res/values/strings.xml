@@ -254,6 +254,7 @@
 
     <!--/////////////////////////////Home/////////////////////////////////////////-->
     <string name="seha">نقابتى صحة مستدامة</string>
+    <string name="wlcare_packages">باقات WLCare</string>
     <string name="welcome_in">مرحبا %s في</string>
     <string name="current_balance">Current Balance</string>
     <string name="visit_home">زيارات منزلية</string>
@@ -279,8 +280,8 @@
     </string>
     <string name="news_details_back_btn">رجوع</string>
     <string name="news_search">بحث</string>
-    <string name="contact_benefits">اذا كنت تريد الاستفادة بخدمات كونتاكت سواء كنت عميل كونتاكت بالفعل او تريد الحصول على 5000 جنية لسداد خدماتك النقابية و الغير نقابية بالتقسيط</string>
-    <string name="contact_home_benefits">سجل واحصل على 5000 جنية كحد ائتماني \nلسداد خدماتك بالتقسيط</string>
+    <string name="contact_benefits">اذا كنت تريد الاستفادة بخدمات كونتاكت سجل الآن واحصل على رصيد لحظي يصل إلى 50000 جنية لسداد خدماتك النقابية و الغير نقابية بالتقسيط</string>
+    <string name="contact_home_benefits">سجل واحصل على رصيد لحظي يصل إلى 50000 جنية كحد ائتماني \nلسداد خدماتك بالتقسيط</string>
     <string name="marital_status">الحالة الاجتماعية</string>
     <!--    <string name=""></string>-->
     <!--    <string name=""></string>-->
