@@ -354,7 +354,7 @@
 
     <array name="retirement_services">
         <item>إختر الخدمة</item>
-        <item>Visa</item>
-        <item>Bank</item>
+        <item>إستعلام عن بطاقة الفيزا</item>
+        <item>استعلام عن الرصيد</item>
     </array>
 </resources>

@@ -75,6 +75,7 @@ class PaymentDetailsActivity : BaseActivity<ActivityPaymentDetailsBinding>(){
                             showDialog(getString(R.string.no_reciept))
                         } else if (!resource.data.receipt.status) {
                             Toast.makeText(this@PaymentDetailsActivity, "${resource.data.receipt.error}", Toast.LENGTH_LONG).show()
+                            finish()
                         } else {
                             binding.llContent.visibility = View.VISIBLE
                             binding.tvService.text = resource.data.receipt.inquiry_title

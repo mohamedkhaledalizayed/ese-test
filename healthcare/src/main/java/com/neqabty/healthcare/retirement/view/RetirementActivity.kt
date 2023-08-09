@@ -45,7 +45,7 @@ class RetirementActivity : BaseActivity<ActivityRetirementBinding>() {
                         }
                     }else{
                         Toast.makeText(this@RetirementActivity, "هذا الحساب ليس لديه اي بيانات لدي النقابة", Toast.LENGTH_LONG).show()
-//                        finish()
+                        finish()
                     }
                 }
                 Status.ERROR ->{
@@ -62,7 +62,10 @@ class RetirementActivity : BaseActivity<ActivityRetirementBinding>() {
                 }
                 Status.SUCCESS ->{
                     hideProgressDialog()
-
+                    binding.total.text = "${it.data?.exchanges?.last()?.mony} جنيه"
+                    binding.totalAmount.text = "${it.data?.exchanges?.last()?.mony} جنيه"
+                    binding.date.text = "${it.data?.exchanges?.last()?.sendbankdate}"
+                    binding.name.text = it.data?.name
                 }
                 Status.ERROR ->{
                     hideProgressDialog()

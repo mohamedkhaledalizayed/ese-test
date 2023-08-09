@@ -206,6 +206,7 @@
             android:exported="false" />
         <activity
             android:name=".suggestions.presentation.SuggestionsActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".medicalnetwork.presentation.view.providerdetails.ProviderDetailsActivity"

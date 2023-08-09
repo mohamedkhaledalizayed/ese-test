@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:paddingBottom="@dimen/margin_large"
+    android:fitsSystemWindows="true"
     tools:context=".suggestions.presentation.SuggestionsActivity">
 
     <include

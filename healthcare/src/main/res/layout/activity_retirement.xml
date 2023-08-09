@@ -100,9 +100,9 @@
             android:textSize="@dimen/_12ssp"/>
 
         <TextView
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="دينا جمال عبد الناصر احمد ..."
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/hanimation_arabic_medium"
@@ -122,9 +122,9 @@
             android:textSize="@dimen/_12ssp"/>
 
         <TextView
+            android:id="@+id/total_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="300000"
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/hanimation_arabic_medium"
@@ -144,9 +144,9 @@
             android:textSize="@dimen/_12ssp"/>
 
         <TextView
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10/Mar/2034"
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/hanimation_arabic_medium"
