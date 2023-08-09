@@ -135,7 +135,8 @@
             android:exported="false" />
         <activity
             android:name=".onboarding.signup.view.SignupActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".onboarding.contact.view.ContactCheckMemberActivity"
             android:exported="false" />

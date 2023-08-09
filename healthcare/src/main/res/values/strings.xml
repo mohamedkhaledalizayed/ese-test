@@ -188,7 +188,7 @@
 
     </string>
 
-    <string name="password_conditions">كلمة المرور يجب ان تحتوى على حروف و ارقام و رموز مثل # @ ...</string>
+    <string name="password_conditions">كلمة المرور يجب ألا تقل عن 8 حروف وتحتوى على حروف و ارقام و رموز مثل # @ ...</string>
     <string name="city">المدينة</string>
     <string name="no_result">لا يوجد نتائج.</string>
     <string name="tour_guid_numbers">25899882 -25890438 - 01144300335</string>

@@ -13,6 +13,8 @@ import com.neqabty.healthcare.databinding.FragmentChangePasswordBottomSheetBindi
 import com.neqabty.healthcare.profile.data.model.UpdatePasswordBody
 import com.neqabty.healthcare.profile.view.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 @AndroidEntryPoint
@@ -50,6 +52,11 @@ class ChangePasswordBottomSheet : BottomSheetDialogFragment() {
 
             if (binding.newPassword.text.toString() != binding.confirmPassword.text.toString()) {
                 Toast.makeText(requireContext(), "كلمة السر غير متطابقة.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidPassword(binding.newPassword.text.toString().trim())) {
+                Toast.makeText(requireActivity(), getString(R.string.password_conditions), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -107,6 +114,17 @@ class ChangePasswordBottomSheet : BottomSheetDialogFragment() {
         override fun onDestroyActionMode(p0: ActionMode?) {
 
         }
+    }
+
+    private fun isValidPassword(password: String?): Boolean {
+        if (password?.length!! < 8)
+            return false
+        val pattern: Pattern
+        val matcher: Matcher
+        val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$"
+        pattern = Pattern.compile(PASSWORD_PATTERN)
+        matcher = pattern.matcher(password)
+        return matcher.matches()
     }
 
 }

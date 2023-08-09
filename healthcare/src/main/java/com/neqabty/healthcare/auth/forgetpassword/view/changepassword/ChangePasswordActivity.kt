@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import android.view.View
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.neqabty.healthcare.R
@@ -14,6 +13,8 @@ import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityChangePaawordBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class ChangePasswordActivity : BaseActivity<ActivityChangePaawordBinding>() {
@@ -60,6 +61,11 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePaawordBinding>() {
                     "كلمة السر غير متطابقة.",
                     Toast.LENGTH_LONG
                 ).show()
+                return@setOnClickListener
+            }
+
+            if (!isValidPassword(binding.newPassword.text.toString().trim())) {
+                Toast.makeText(this@ChangePasswordActivity, getString(R.string.password_conditions), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -127,4 +133,14 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePaawordBinding>() {
         }
     }
 
+    fun isValidPassword(password: String?): Boolean {
+        if (password?.length!! < 8)
+            return false
+        val pattern: Pattern
+        val matcher: Matcher
+        val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$"
+        pattern = Pattern.compile(PASSWORD_PATTERN)
+        matcher = pattern.matcher(password)
+        return matcher.matches()
+    }
 }

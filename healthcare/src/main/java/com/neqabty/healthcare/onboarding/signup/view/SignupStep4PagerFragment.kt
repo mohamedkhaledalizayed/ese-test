@@ -19,6 +19,8 @@ import com.neqabty.healthcare.core.utils.isValidEmail
 import com.neqabty.healthcare.databinding.FragmentSignupStepFourBinding
 import com.neqabty.healthcare.onboarding.contact.view.ContactCheckMemberActivity
 import com.neqabty.healthcare.onboarding.signup.data.SignupData
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class SignupStep4PagerFragment : Fragment() {
 
@@ -201,6 +203,10 @@ class SignupStep4PagerFragment : Fragment() {
             Toast.makeText(requireActivity(), getString(R.string.password_not_matched), Toast.LENGTH_LONG).show()
             return false
         }
+        if (binding.clPassword.isVisible && !isValidPassword(binding.etPassword.text.toString().trim())) {
+            Toast.makeText(requireActivity(), getString(R.string.password_conditions), Toast.LENGTH_SHORT).show()
+            return false
+        }
         return true
     }
 
@@ -234,5 +240,16 @@ class SignupStep4PagerFragment : Fragment() {
             binding.ivPasswordConfirmation.setImageResource(R.drawable.ic_password)
         }
         isPasswordHiddenConfirm = !isPasswordHiddenConfirm
+    }
+
+    fun isValidPassword(password: String?): Boolean {
+        if (password?.length!! < 8)
+            return false
+        val pattern: Pattern
+        val matcher: Matcher
+        val PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$"
+        pattern = Pattern.compile(PASSWORD_PATTERN)
+        matcher = pattern.matcher(password)
+        return matcher.matches()
     }
 }
