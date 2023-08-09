@@ -49,7 +49,8 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
 
         setupToolbar(title = "", show = false)
         observeOnCheckMemberStatus()
-        getContactMemberStatus()
+        if(sharedPreferences.isAuthenticated)
+            getContactMemberStatus()
         observeOnClinidoURL()
         initializeViews()
     }

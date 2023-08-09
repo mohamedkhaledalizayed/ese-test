@@ -58,7 +58,8 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
 
         setupToolbar(title = "", show = false)
         observeOnCheckMemberStatus()
-        getContactMemberStatus()
+        if(sharedPreferences.isAuthenticated)
+            getContactMemberStatus()
         observeOnClinidoURL()
         observeOnSyndicateServices()
         getSyndicateServices()
