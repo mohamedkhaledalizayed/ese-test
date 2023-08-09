@@ -14,7 +14,7 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelec
 
     private var clickedItem = ""
     override fun getViewBinding() = ActivityPharmacyBinding.inflate(layoutInflater)
-    private val bottomSheetFragment: PharmacyTermsBottomSheet by lazy { PharmacyTermsBottomSheet() }
+    private lateinit var bottomSheetFragment: PharmacyTermsBottomSheet
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -24,10 +24,12 @@ class PharmacyActivity : BaseActivity<ActivityPharmacyBinding>(), IPharmacySelec
         binding.backBtn.setOnClickListener { finish() }
         binding.clinido.setOnClickListener {
             clickedItem = "clinido"
+            bottomSheetFragment = PharmacyTermsBottomSheet.newInstance(clickedItem)
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
         binding.chefaa.setOnClickListener {
             clickedItem = "chefaa"
+            bottomSheetFragment = PharmacyTermsBottomSheet.newInstance(clickedItem)
             bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
         }
     }

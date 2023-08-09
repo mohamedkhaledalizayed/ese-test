@@ -95,6 +95,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/cv_package"
         android:textSize="@dimen/_12ssp"
+        android:paddingTop="@dimen/_10sdp"
         android:layout_margin="@dimen/_10sdp"
         android:textColor="@color/black"/>
 
