@@ -282,7 +282,11 @@
     <string name="news_search">بحث</string>
     <string name="contact_benefits">اذا كنت تريد الاستفادة بخدمات كونتاكت سجل الآن واحصل على رصيد لحظي يصل إلى 50000 جنية لسداد خدماتك النقابية و الغير نقابية بالتقسيط</string>
     <string name="contact_home_benefits">سجل واحصل على رصيد لحظي يصل إلى 50000 جنية كحد ائتماني لسداد خدماتك بالتقسيط</string>
+    <string name="contact_failure">تعذر الوصول لرصيدك في الوقت الحالي</string>
     <string name="marital_status">الحالة الاجتماعية</string>
+    <string name="retry">حاول مرة أخرى</string>
+    <string name="contact_show_balance">عرض الرصيد</string>
+    <string name="contact_already_member">انت عميل سابق لدى كونتاكت لمعرفة الرصيد المتاح برجاء الرجوع لكونتاكت</string>
     <!--    <string name=""></string>-->
     <!--    <string name=""></string>-->
     <!--    <string name=""></string>-->

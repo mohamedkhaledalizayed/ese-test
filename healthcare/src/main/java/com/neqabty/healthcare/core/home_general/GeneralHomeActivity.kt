@@ -152,10 +152,24 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
     }
 
     private fun renderContactCard(clientInfo: ClientInfo?) {
+        binding.tvRetry.visibility = View.GONE
         if (sharedPreferences.isContactActiveSubscriber) {
             binding.tvContactName.text = clientInfo?.name
-            binding.tvBalance.visibility = View.VISIBLE
-            binding.tvBalance.text = clientInfo?.availableBalance.toString() + " EGP"
+            if(clientInfo?.availableBalance.toString().isNullOrBlank()){
+                binding.tvBalance.visibility = View.INVISIBLE
+                binding.tvRetry.visibility = View.VISIBLE
+                binding.tvRetry.text = getString(R.string.contact_show_balance)
+                binding.tvRetry.setOnClickListener {
+                    Toast.makeText(
+                        this@GeneralHomeActivity,
+                        getString(R.string.contact_already_member),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            } else {
+                binding.tvBalance.visibility = View.VISIBLE
+                binding.tvBalance.text = clientInfo?.availableBalance.toString() + " EGP"
+            }
             binding.ivContactQr.visibility = View.INVISIBLE
             binding.ivContactServiceProviders.visibility = View.INVISIBLE
             binding.ivContactSubscribe.visibility = View.INVISIBLE
@@ -191,6 +205,15 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
         }
     }
 
+    private fun renderContactError() {
+        binding.tvContactName.text = getString(R.string.contact_failure)
+        binding.tvBalance.visibility = View.INVISIBLE
+        binding.ivContactSubscribe.visibility = View.INVISIBLE
+        binding.tvRetry.visibility = View.VISIBLE
+        binding.tvRetry.text = getString(R.string.retry)
+        binding.tvRetry.setOnClickListener { getContactMemberStatus() }
+    }
+
     private fun getContactMemberStatus() {
         generalHomeViewModel.checkMemberStatus(nationalId = sharedPreferences.nationalId)
     }
@@ -214,11 +237,12 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
 
                             renderContactCard(resource.data.clientInfo)
                         } else {
-                            getContactMemberStatus()
+                            renderContactError()
                         }
                     }
                     Status.ERROR -> {
                         hideProgressDialog()
+                        renderContactError()
                     }
                 }
             }
