@@ -135,6 +135,37 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/policy_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <ImageView
+                android:id="@+id/iv_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/general_settings_icon"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="سياسة الخصوصية"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="#252A31"
+                android:layout_toEndOf="@id/iv_policy"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/curved_arrow_down_circle"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/rate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
