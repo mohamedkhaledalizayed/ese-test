@@ -35,6 +35,9 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        if (!sharedPreferences.isAuthenticated){
+            binding.qrCodeContainer.visibility = View.GONE
+        }
         binding.bnvSyndicatesHome.menu.setGroupCheckable(0, false, true)
         binding.bnvSyndicatesHome.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -86,6 +89,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                         }
                     }
                     Status.ERROR -> {
+                        binding.qrCodeContainer.visibility = View.GONE
                         hideProgressDialog()
                     }
                 }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.databinding.ListItemSyndicateServiceBinding
 import com.neqabty.healthcare.syndicateservices.domain.entity.SyndicateServiceEntity
+import com.squareup.picasso.Picasso
 import java.util.*
 
 
@@ -37,17 +38,10 @@ class SyndicateServicesAdapter: RecyclerView.Adapter<SyndicateServicesAdapter.Vi
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
         val item = items[position]
-//        Picasso.get()
-//            .load(item.name)
-//            .into(viewHolder.binding.ivIcon, object : Callback {
-//                override fun onSuccess() {
-////                    viewHolder.binding.imageProgress.hide()
-//                }
-//
-//                override fun onError(e: Exception?) {
-////                    viewHolder.binding.imageProgress.hide()
-//                }
-//            })
+
+        if (item.icon.isNotEmpty()){
+            Picasso.get().load(item.icon).into(viewHolder.binding.ivIcon)
+        }
 
         viewHolder.binding.tvName.text = item.name
         viewHolder.binding.llHolder.setOnClickListener {

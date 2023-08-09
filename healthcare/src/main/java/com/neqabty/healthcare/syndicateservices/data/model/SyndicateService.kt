@@ -10,6 +10,8 @@ data class SyndicateService(
     val name: String,
     @SerializedName("code")
     val code: String,
+    @SerializedName("icon")
+    val icon: String?,
     @SerializedName("service_category")
     val serviceCategory: ServiceCategory?,
     @SerializedName("type")
