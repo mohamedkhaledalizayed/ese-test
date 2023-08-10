@@ -3,6 +3,7 @@ package com.neqabty.healthcare.retirement.data.repository
 
 
 import com.neqabty.healthcare.retirement.data.datasource.RetirementDS
+import com.neqabty.healthcare.retirement.data.model.inheritor.InheritorModel
 import com.neqabty.healthcare.retirement.data.model.pension.PensionModel
 import com.neqabty.healthcare.retirement.data.model.validation.ValidationModel
 import com.neqabty.healthcare.retirement.domain.repository.RetirementRepository
@@ -27,7 +28,7 @@ class RetirementRepositoryImpl @Inject constructor(private val retirementDS: Ret
         }
     }
 
-    override fun getInheritor(id: String): Flow<Response<String>> {
+    override fun getInheritor(id: String): Flow<Response<InheritorModel>> {
         return flow {
             emit(retirementDS.getInheritor(id))
         }

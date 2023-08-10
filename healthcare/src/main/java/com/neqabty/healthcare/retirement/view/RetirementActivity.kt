@@ -2,6 +2,7 @@ package com.neqabty.healthcare.retirement.view
 
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.gson.Gson
@@ -62,6 +63,8 @@ class RetirementActivity : BaseActivity<ActivityRetirementBinding>() {
                 }
                 Status.SUCCESS ->{
                     hideProgressDialog()
+                    binding.balanceContainer.visibility = View.VISIBLE
+                    binding.penionContainer.visibility = View.VISIBLE
                     binding.total.text = "${it.data?.exchanges?.last()?.mony} جنيه"
                     binding.totalAmount.text = "${it.data?.exchanges?.last()?.mony} جنيه"
                     binding.date.text = "${it.data?.exchanges?.last()?.sendbankdate}"
@@ -89,7 +92,11 @@ class RetirementActivity : BaseActivity<ActivityRetirementBinding>() {
                 }
                 Status.SUCCESS ->{
                     hideProgressDialog()
-
+                    binding.inheritorContainer.visibility = View.VISIBLE
+                    binding.inheritorName.text = it.data?.name
+                    binding.visa.text = it.data?.visa
+                    binding.activated.text = if (it.data!!.activate) "مفعل" else "غير مفعل"
+                    binding.activationDate.text = it.data.ActivateDate
                 }
                 Status.ERROR ->{
                     hideProgressDialog()

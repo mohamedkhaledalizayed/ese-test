@@ -3,6 +3,7 @@ package com.neqabty.healthcare.retirement.data.datasource
 
 
 import com.neqabty.healthcare.retirement.data.api.RetirementApi
+import com.neqabty.healthcare.retirement.data.model.inheritor.InheritorModel
 import com.neqabty.healthcare.retirement.data.model.pension.PensionModel
 import com.neqabty.healthcare.retirement.data.model.validation.ValidationModel
 import retrofit2.Response
@@ -19,7 +20,7 @@ class RetirementDS @Inject constructor(private val retirementApi: RetirementApi)
         return retirementApi.getPensionInfo(id)
     }
 
-    suspend fun getInheritor(id: String): Response<String> {
+    suspend fun getInheritor(id: String): Response<InheritorModel> {
         return retirementApi.getInheritor(id)
     }
 

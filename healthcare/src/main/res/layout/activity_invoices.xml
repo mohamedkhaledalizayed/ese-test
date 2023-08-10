@@ -54,6 +54,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/empty_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/no_previous_orders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/no_previous_orders"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/no_previous_orders_text"
+            android:fontFamily="@font/hanimation_arabic_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="لا توجد مدفوعات لهذا الحساب"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_gravity="center|bottom"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="#667085"/>
+
+    </LinearLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_syndicates_home"
         android:layout_width="match_parent"

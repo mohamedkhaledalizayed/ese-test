@@ -33,7 +33,7 @@ class ServicesAdapter : RecyclerView.Adapter<ServicesAdapter.ViewHolder>() {
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val item = mList[position]
         viewHolder.binding.serviceName.text = "${item.key_label}"
-        viewHolder.binding.servicePrice.text = "${item.key_value} جنيه"
+        viewHolder.binding.servicePrice.text = "${item.key_value}"
 
     }
 

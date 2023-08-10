@@ -87,9 +87,9 @@ class InvoicesActivity : BaseActivity<ActivityInvoicesBinding>() {
                 Status.SUCCESS-> {
                     binding.progressCircular.visibility = View.GONE
                     if (it.data!!.isEmpty()){
-                        Toast.makeText(this, "لا توجد مدفوعات لهذا الحساب", Toast.LENGTH_LONG).show()
+                        binding.emptyContainer.visibility = View.VISIBLE
                     }else{
-                        invoicesAdapter.submitList(it.data?.toMutableList())
+                        invoicesAdapter.submitList(it.data.toMutableList())
                     }
                 }
                 Status.ERROR ->{

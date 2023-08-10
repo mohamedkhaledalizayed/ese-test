@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neqabty.healthcare.core.utils.Resource
+import com.neqabty.healthcare.retirement.data.model.inheritor.InheritorModel
 import com.neqabty.healthcare.retirement.data.model.pension.PensionModel
 import com.neqabty.healthcare.retirement.data.model.validation.ValidationModel
 import com.neqabty.healthcare.retirement.domain.usecases.CheckValidationUseCase
@@ -62,7 +63,7 @@ class RetirementViewModel @Inject constructor(
         }
     }
 
-    val inheritorInfo = MutableLiveData<Resource<String>>()
+    val inheritorInfo = MutableLiveData<Resource<InheritorModel>>()
     fun getInheritor(id: String) {
         pensionInfo.postValue(Resource.loading(data = null))
         viewModelScope.launch(Dispatchers.IO) {

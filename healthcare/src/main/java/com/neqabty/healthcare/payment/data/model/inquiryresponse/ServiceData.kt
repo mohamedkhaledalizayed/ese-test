@@ -10,5 +10,5 @@ import kotlinx.parcelize.Parcelize
 data class ServiceData(
     val key: String,
     val key_label: String,
-    val key_value: Double
+    val key_value: String
 ): Parcelable

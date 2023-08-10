@@ -54,7 +54,7 @@ class SyndicateServiceBottomSheet : BottomSheetDialogFragment() {
         bottomSheetDialog.setContentView(binding.root)
 
         if (sharedPreferences.isSyndicateMember) {
-            binding.disclaimer.text = "هذا الرقم مشترك بالفعل فى نقابة ${syndicateName}"
+            binding.disclaimer.text = "هذا الرقم مشترك بالفعل فى نقابة ${sharedPreferences.syndicateName}"
         } else {
             binding.signupBtn.text = "الاشتراك في النقابة"
             binding.infoContainer.visibility = View.GONE

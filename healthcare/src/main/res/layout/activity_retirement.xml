@@ -51,10 +51,12 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/balance_container"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_110sdp"
             android:layout_gravity="bottom"
             android:gravity="center"
+            android:visibility="gone"
             android:orientation="vertical"
             android:background="@drawable/bg_white_rounded"
             android:layout_marginStart="@dimen/_20sdp"
@@ -88,6 +90,7 @@
         app:layout_constraintTop_toBottomOf="@id/header_container"
         android:background="@drawable/chefaa_icons_bg"
         android:padding="@dimen/_10sdp"
+        android:visibility="gone"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -145,6 +148,101 @@
 
         <TextView
             android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/hanimation_arabic_medium"
+            android:textSize="@dimen/_12ssp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/inheritor_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/penion_container"
+        android:background="@drawable/chefaa_icons_bg"
+        android:padding="@dimen/_10sdp"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_name"
+            android:textSize="@dimen/_12ssp"/>
+
+        <TextView
+            android:id="@+id/inheritor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/hanimation_arabic_medium"
+            android:textSize="@dimen/_12ssp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGrey"
+            android:layout_marginTop="@dimen/_10sdp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="رقم الكارت"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12ssp"/>
+
+        <TextView
+            android:id="@+id/visa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/hanimation_arabic_medium"
+            android:textSize="@dimen/_12ssp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGrey"
+            android:layout_marginTop="@dimen/_10sdp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="حالة الكارت"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12ssp"/>
+
+        <TextView
+            android:id="@+id/activated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/hanimation_arabic_medium"
+            android:textSize="@dimen/_12ssp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGrey"
+            android:layout_marginTop="@dimen/_10sdp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="تاريخ التفعيل"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_12ssp"/>
+
+        <TextView
+            android:id="@+id/activation_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"

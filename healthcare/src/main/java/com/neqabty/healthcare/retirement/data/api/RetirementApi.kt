@@ -2,6 +2,7 @@ package com.neqabty.healthcare.retirement.data.api
 
 
 
+import com.neqabty.healthcare.retirement.data.model.inheritor.InheritorModel
 import com.neqabty.healthcare.retirement.data.model.pension.PensionModel
 import com.neqabty.healthcare.retirement.data.model.validation.ValidationModel
 import retrofit2.http.*
@@ -16,7 +17,7 @@ interface RetirementApi {
     @GET("members/bank/{id}")
     suspend fun getPensionInfo(@Path("id") id: String): Response<PensionModel>
 
-    @GET("inheritors/visa/{id}")
-    suspend fun getInheritor(@Path("id") id: String): Response<String>
+    @GET("members/visa/{id}")
+    suspend fun getInheritor(@Path("id") id: String): Response<InheritorModel>
 
 }
