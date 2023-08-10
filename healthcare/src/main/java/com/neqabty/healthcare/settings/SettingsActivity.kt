@@ -49,7 +49,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
                 // matter the result, we continue our app flow.
             }
         }
-        binding.policyContainer.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://neqabty.flycricket.io/privacy.html"))) }
+        binding.policyContainer.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://neqabty.com/privacy-policy"))) }
 
         sharedPreferences.isNotificationsEnabled = NotificationManagerCompat.from(this).areNotificationsEnabled()
         binding.switchNotifications.isChecked = sharedPreferences.isNotificationsEnabled
