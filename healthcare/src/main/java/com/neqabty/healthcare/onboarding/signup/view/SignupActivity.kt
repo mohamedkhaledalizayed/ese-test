@@ -152,6 +152,11 @@ class SignupActivity : BaseActivity<ActivitySignupMainBinding>() {
                     }
                     Status.SUCCESS ->{
                         hideProgressDialog()
+                        if(intent.getBooleanExtra("isSyndicate",false)){
+                            movePagertoNext()
+                            return@observe
+                        }
+
                         if (resource.data == "Found"){
                             val intent = Intent(this, LoginActivity::class.java)
                             intent.putExtra("phone", sharedPreferences.mobile)

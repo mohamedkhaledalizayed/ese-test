@@ -117,7 +117,9 @@ class SyndicatesActivity : BaseActivity<ActivitySyndicatesBinding>(), ISignUp {
             finishAffinity()
         }else{
             sharedPreferences.isSkippedToHome = false
-            startActivity(Intent(this, SignupActivity::class.java))
+            val intent = Intent(this, SignupActivity::class.java)
+            intent.putExtra("isSyndicate", true)
+            startActivity(intent)
             finishAffinity()
         }
     }

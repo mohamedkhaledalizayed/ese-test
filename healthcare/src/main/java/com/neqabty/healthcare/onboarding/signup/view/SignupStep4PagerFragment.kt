@@ -81,10 +81,16 @@ class SignupStep4PagerFragment : Fragment() {
 
         if (entityValidationsList?.find { it.validationName == "has_national_id" }?.value == true) {
             binding.clNationalId.visibility = View.VISIBLE
+            binding.etNationalId.setText(activity.sharedPreferences.nationalId)
+            if(activity.sharedPreferences.nationalId.isNotEmpty())
+                binding.etNationalId.isEnabled = false
         }
 
         if (entityValidationsList?.find { it.validationName == "has_email" }?.value == true) {
             binding.clEmail.visibility = View.VISIBLE
+            binding.etEmail.setText(activity.sharedPreferences.email)
+            if(activity.sharedPreferences.email.isNotEmpty())
+                binding.etEmail.isEnabled = false
         }
 
         binding.tvPasswordRules.setOnClickListener {
