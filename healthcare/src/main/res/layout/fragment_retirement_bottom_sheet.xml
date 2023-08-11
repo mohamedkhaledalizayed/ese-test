@@ -65,6 +65,7 @@
         android:inputType="number"
         android:longClickable="false"
         android:padding="@dimen/_12sdp"
+        android:digits="0123456789"
         android:textAlignment="viewStart"
         android:textColor="@color/secondaryText"
         android:textSize="@dimen/_12ssp"

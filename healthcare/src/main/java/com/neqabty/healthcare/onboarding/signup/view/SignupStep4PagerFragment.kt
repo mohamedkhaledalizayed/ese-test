@@ -62,7 +62,7 @@ class SignupStep4PagerFragment : Fragment() {
         binding.tvRegisterIn.text =
             getString(R.string.register_in).plus(" ").plus(SignupData.syndicateName)
 
-        if (SignupData.syndicateID == NEQABTY_CODE) {
+        if (SignupData.syndicateID == NEQABTY_CODE || SignupData.syndicateID == "e07") {
             binding.clName.visibility = View.VISIBLE
             binding.clEmail.visibility = View.VISIBLE
             binding.clNationalId.visibility = View.VISIBLE
@@ -81,16 +81,10 @@ class SignupStep4PagerFragment : Fragment() {
 
         if (entityValidationsList?.find { it.validationName == "has_national_id" }?.value == true) {
             binding.clNationalId.visibility = View.VISIBLE
-            binding.etNationalId.setText(activity.sharedPreferences.nationalId)
-            if(activity.sharedPreferences.nationalId.isNotEmpty())
-                binding.etNationalId.isEnabled = false
         }
 
         if (entityValidationsList?.find { it.validationName == "has_email" }?.value == true) {
             binding.clEmail.visibility = View.VISIBLE
-            binding.etEmail.setText(activity.sharedPreferences.email)
-            if(activity.sharedPreferences.email.isNotEmpty())
-                binding.etEmail.isEnabled = false
         }
 
         binding.tvPasswordRules.setOnClickListener {
@@ -110,6 +104,26 @@ class SignupStep4PagerFragment : Fragment() {
         binding.ivPasswordConfirmation.setOnClickListener {
             showHideConfirmPassword(it)
         }
+
+        binding.etName.setText(activity.sharedPreferences.name)
+//        if(activity.sharedPreferences.name.isNotEmpty())
+//            binding.etName.isEnabled = false
+
+        binding.etNationalId.setText(activity.sharedPreferences.nationalId)
+//        if(activity.sharedPreferences.nationalId.isNotEmpty())
+//            binding.etNationalId.isEnabled = false
+
+        binding.etEmail.setText(activity.sharedPreferences.email)
+//        if(activity.sharedPreferences.email.isNotEmpty())
+//            binding.etEmail.isEnabled = false
+
+//        if(activity.intent.getBooleanExtra("isSyndicate",false)){
+//            binding.clPassword.visibility = View.GONE
+//            binding.clPasswordConfirmation.visibility = View.GONE
+//            binding.tvPasswordReset.visibility = View.GONE
+//            binding.ivPasswordRules.visibility = View.GONE
+//            binding.tvPasswordRules.visibility = View.GONE
+//        }
     }
 
     private fun setAllViewsInvisible() {
@@ -202,7 +216,7 @@ class SignupStep4PagerFragment : Fragment() {
             return false
         }
         if(binding.clPassword.isVisible && (binding.etPassword.text.toString().isNullOrEmpty() || binding.etPasswordConfirmation.text.toString().isNullOrEmpty())){
-            Toast.makeText(requireActivity(), getString(R.string.enter_national_id), Toast.LENGTH_LONG).show()
+            Toast.makeText(requireActivity(), getString(R.string.password_conditions), Toast.LENGTH_LONG).show()
             return false
         }
         if(binding.clPassword.isVisible && !(binding.etPassword.text.toString().equals(binding.etPasswordConfirmation.text.toString()))){
