@@ -14,7 +14,7 @@ interface SignupApi {
     suspend fun syndicateMember(@Body signupBody: Any): Response<UserModel>
 
     @POST("accounts/register")
-    suspend fun signupMember(@Body neqabtySignupBody: NeqabtySignupBody): NeqabtyMemberModel
+    suspend fun signupMember(@Header("Authorization") token: String,@Body neqabtySignupBody: NeqabtySignupBody): NeqabtyMemberModel
 
     @GET("entities?special-format=android")
     suspend fun getSyndicates(@Query("filter{type.name}") type: String = "syndicate"): SyndicateListModel

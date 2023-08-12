@@ -106,24 +106,24 @@ class SignupStep4PagerFragment : Fragment() {
         }
 
         binding.etName.setText(activity.sharedPreferences.name)
-//        if(activity.sharedPreferences.name.isNotEmpty())
-//            binding.etName.isEnabled = false
+        if(activity.sharedPreferences.name.isNotEmpty())
+            binding.etName.isEnabled = false
 
         binding.etNationalId.setText(activity.sharedPreferences.nationalId)
-//        if(activity.sharedPreferences.nationalId.isNotEmpty())
-//            binding.etNationalId.isEnabled = false
+        if(activity.sharedPreferences.nationalId.isNotEmpty())
+            binding.etNationalId.isEnabled = false
 
         binding.etEmail.setText(activity.sharedPreferences.email)
-//        if(activity.sharedPreferences.email.isNotEmpty())
-//            binding.etEmail.isEnabled = false
+        if(activity.sharedPreferences.email.isNotEmpty())
+            binding.etEmail.isEnabled = false
 
-//        if(activity.intent.getBooleanExtra("isSyndicate",false)){
-//            binding.clPassword.visibility = View.GONE
-//            binding.clPasswordConfirmation.visibility = View.GONE
-//            binding.tvPasswordReset.visibility = View.GONE
-//            binding.ivPasswordRules.visibility = View.GONE
-//            binding.tvPasswordRules.visibility = View.GONE
-//        }
+        if(activity.intent.getBooleanExtra("isSyndicate",false)){
+            binding.clPassword.visibility = View.GONE
+            binding.clPasswordConfirmation.visibility = View.GONE
+            binding.tvPasswordReset.visibility = View.GONE
+            binding.ivPasswordRules.visibility = View.GONE
+            binding.tvPasswordRules.visibility = View.GONE
+        }
     }
 
     private fun setAllViewsInvisible() {
@@ -214,6 +214,9 @@ class SignupStep4PagerFragment : Fragment() {
         if(binding.clEmail.isVisible && !binding.etEmail.text.toString().isValidEmail()){
             Toast.makeText(requireActivity(), getString(R.string.enter_correct_email), Toast.LENGTH_LONG).show()
             return false
+        }
+        if(activity.intent.getBooleanExtra("isSyndicate",false)) {
+            return true
         }
         if(binding.clPassword.isVisible && (binding.etPassword.text.toString().isNullOrEmpty() || binding.etPasswordConfirmation.text.toString().isNullOrEmpty())){
             Toast.makeText(requireActivity(), getString(R.string.password_conditions), Toast.LENGTH_LONG).show()
