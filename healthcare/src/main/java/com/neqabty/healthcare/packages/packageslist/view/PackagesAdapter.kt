@@ -39,17 +39,6 @@ class PackagesAdapter : RecyclerView.Adapter<PackagesAdapter.ViewHolder>() {
         viewHolder.binding.tvPrice.text = "${item.price.toInt()}"
         viewHolder.binding.tvDescription.text = item.description
 
-//        viewHolder.binding.cvPackage.setBackgroundResource(
-//            when (item.extension) {
-//                "AMA" -> R.drawable.ama_bg
-//                "PRZ" -> R.drawable.prz_bg
-//                "SLV" -> R.drawable.slv_bg
-//                "PLT" -> R.drawable.plt_bg
-//                "GLD" -> R.drawable.gold_bg
-//                else -> R.drawable.prz_bg
-//            }
-//        )
-
         viewHolder.binding.cvPackage.setOnClickListener { onItemClickListener?.setOnItemClickListener(item) }
     }
 
