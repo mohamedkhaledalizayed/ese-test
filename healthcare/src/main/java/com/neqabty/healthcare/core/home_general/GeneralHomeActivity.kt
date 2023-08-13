@@ -95,7 +95,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
                 val intent = Intent(this, PharmacyActivity::class.java)
                 startActivity(intent)
             }else{
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+                askForLogin()
             }
         }
 
@@ -104,7 +104,7 @@ class GeneralHomeActivity : BaseActivity<ActivityHomeGeneralSyndicateBinding>() 
                 title = "doctors"
                 generalHomeViewModel.getUrl(phone = sharedPreferences.mobile, name = sharedPreferences.name, type = "doctors")
             }else{
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+                askForLogin()
             }
         }
 

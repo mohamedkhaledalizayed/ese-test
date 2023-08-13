@@ -106,7 +106,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
                 val intent = Intent(this, PharmacyActivity::class.java)
                 startActivity(intent)
             }else{
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+                askForLogin()
             }
         }
 
@@ -115,7 +115,7 @@ class SyndicatesHomeActivity : BaseActivity<ActivityHomeSyndicateBinding>(), IRe
                 title = "doctors"
                 syndicatesHomeViewModel.getUrl(phone = sharedPreferences.mobile, type = "doctors", name = sharedPreferences.name)
             }else{
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+                askForLogin()
             }
         }
 

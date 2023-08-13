@@ -89,30 +89,37 @@ abstract class BaseActivity<B : ViewBinding> : AppCompatActivity() {
         invalidateOptionsMenu()
     }
 
-    fun askForLogin(message: String) {
-
-        val alertDialog = AlertDialog.Builder(this).create()
-        alertDialog.setTitle(getString(R.string.alert))
-        alertDialog.setMessage(message)
-        alertDialog.setCancelable(true)
-        alertDialog.setButton(
-            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
-        ) { dialog, _ ->
-            dialog.dismiss()
-            Constants.isSyndicateMember = false
-            Constants.selectedSyndicateCode = ""
-            Constants.selectedSyndicatePosition = 0
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
-        }
-        alertDialog.setButton(
-            AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)
-        ) { dialog, _ ->
-            dialog.dismiss()
-        }
-        alertDialog.show()
-
+    fun askForLogin() {
+        val fm: FragmentManager = supportFragmentManager
+        val dialog = AuthDialog()
+        dialog.show(fm, "")
+        dialog.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth)
     }
+
+//    fun askForLogin(message: String) {
+//
+//        val alertDialog = AlertDialog.Builder(this).create()
+//        alertDialog.setTitle(getString(R.string.alert))
+//        alertDialog.setMessage(message)
+//        alertDialog.setCancelable(true)
+//        alertDialog.setButton(
+//            AlertDialog.BUTTON_POSITIVE, getString(R.string.agree)
+//        ) { dialog, _ ->
+//            dialog.dismiss()
+//            Constants.isSyndicateMember = false
+//            Constants.selectedSyndicateCode = ""
+//            Constants.selectedSyndicatePosition = 0
+//            val intent = Intent(this, SignupActivity::class.java)
+//            startActivity(intent)
+//        }
+//        alertDialog.setButton(
+//            AlertDialog.BUTTON_NEGATIVE, getString(R.string.no_btn)
+//        ) { dialog, _ ->
+//            dialog.dismiss()
+//        }
+//        alertDialog.show()
+//
+//    }
 
     protected fun hideKeyboard() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager

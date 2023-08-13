@@ -7,15 +7,20 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.neqabty.healthcare.R
 import com.neqabty.healthcare.core.more.view.MoreActivity
 import com.neqabty.healthcare.core.syndicates.SyndicatesActivity
+import com.neqabty.healthcare.core.ui.AuthDialog
 import com.neqabty.healthcare.core.ui.BaseActivity
+import com.neqabty.healthcare.core.ui.ExitDialog
 import com.neqabty.healthcare.core.utils.PushNotificationsWrapper
 import com.neqabty.healthcare.core.utils.Status
 import com.neqabty.healthcare.databinding.ActivityProfileMegaBinding
 import com.neqabty.healthcare.invoices.view.InvoicesActivity
 import com.neqabty.healthcare.mypackages.packages.view.MyPackagesActivity
+import com.neqabty.healthcare.onboarding.signup.view.SignupActivity
 import com.neqabty.healthcare.profile.domain.entity.profile.ProfileEntity
 import com.neqabty.healthcare.profile.view.personalinfo.PersonalInfoActivity
 import com.neqabty.healthcare.settings.SettingsActivity
@@ -105,7 +110,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
                 intent.putExtra("data", profileEntity)
                 startActivity(intent)
             }else{
-                Toast.makeText(this, "برجاء تسجيل الدخول اولا.", Toast.LENGTH_LONG).show()
+                askForLogin()
             }
         }
         binding.cards.setOnClickListener { }
@@ -114,7 +119,7 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
             if (sharedPreferences.isAuthenticated){
                 startActivity(Intent(this, MyPackagesActivity::class.java))
             }else{
-                Toast.makeText(this, "برجاء تسجيل الدخول اولا.", Toast.LENGTH_LONG).show()
+                askForLogin()
             }
         }
         binding.settings.setOnClickListener {
@@ -124,16 +129,26 @@ class ProfileActivity : BaseActivity<ActivityProfileMegaBinding>() {
             startActivity(Intent(this, SuggestionsActivity::class.java))
         }
         binding.logout.setOnClickListener {
-            sharedPreferences.clearAll()
-            PushNotificationsWrapper().deleteToken(this)
-            startActivity(Intent(this, SplashActivity::class.java))
-            finishAffinity()
+            if (sharedPreferences.isAuthenticated){
+                sharedPreferences.clearAll()
+                PushNotificationsWrapper().deleteToken(this)
+                startActivity(Intent(this, SplashActivity::class.java))
+                finishAffinity()
+            }else{
+                sharedPreferences.clearAll()
+                startActivity(Intent(this, SignupActivity::class.java))
+                finishAffinity()
+            }
+
         }
 
     }
 
     override fun onResume() {
         super.onResume()
+        if (!sharedPreferences.isAuthenticated){
+            binding.logoutText.text = "تسجيل دخول"
+        }
         profileViewModel.getUserProfile("Token ${sharedPreferences.token}")
     }
 

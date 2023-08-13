@@ -63,7 +63,7 @@ class MoreActivity : BaseActivity<ActivityMoreBinding>() {
                 title = "doctors"
                 moreViewModel.getUrl(phone = sharedPreferences.mobile, name = sharedPreferences.name, type = "doctors")
             }else{
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+                askForLogin()
             }
         }
 
@@ -72,7 +72,7 @@ class MoreActivity : BaseActivity<ActivityMoreBinding>() {
                 val intent = Intent(this, PharmacyActivity::class.java)
                 startActivity(intent)
             } else {
-                askForLogin("عفوا هذا الرقم غير مسجل من قبل، برجاء تسجيل الدخول.")
+                askForLogin()
             }
         }
 
