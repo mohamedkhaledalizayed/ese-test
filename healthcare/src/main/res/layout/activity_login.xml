@@ -146,6 +146,7 @@
                 android:background="@drawable/back_btn_bg"
                 android:padding="@dimen/_10sdp"
                 android:text="تخطي"
+                android:visibility="invisible"
                 app:layout_constraintTop_toBottomOf="@id/forget_password"
                 android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginEnd="@dimen/_16sdp"
